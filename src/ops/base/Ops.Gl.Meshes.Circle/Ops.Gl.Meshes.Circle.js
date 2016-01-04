@@ -1,4 +1,3 @@
-Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
