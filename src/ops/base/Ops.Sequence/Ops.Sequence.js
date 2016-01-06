@@ -1,18 +1,25 @@
-Op.apply(this, arguments);
-var self=this;
-
 this.name='sequence';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 
-this.triggers=[];
+var exes=[];
+var triggers=[];
+
+var triggerAll=function()
+{
+    for(var i=0;i<triggers.length;i++) triggers[i].trigger();
+};
+
+exe.onTriggered=triggerAll;
+
 
 for(var i=0;i<10;i++)
 {
-    this.triggers.push( this.addOutPort(new Port(this,"trigger "+i,OP_PORT_TYPE_FUNCTION)) );
+    triggers.push( this.addOutPort(new Port(this,"trigger "+i,OP_PORT_TYPE_FUNCTION)) );
+    
+    if(i<9)
+    {
+        var newExe=this.addInPort(new Port(this,"exe "+i,OP_PORT_TYPE_FUNCTION));
+        newExe.onTriggered=triggerAll;
+        exes.push( newExe );
+    }
 }
-
-this.exe.onTriggered=function()
-{
-    for(var i=0;i<self.triggers.length;i++)
-        self.triggers[i].trigger();
-};

@@ -18,16 +18,20 @@
     };
 
 
-    var currentPickingColor=-1;
 
     this.doRender=function()
     {
-        
+
+        cgl.frameStore.pickingpassNum+=4;
+        var currentPickingColor=cgl.frameStore.pickingpassNum;
+
+
+
         if(cgl.frameStore.pickingpass)
         {
             self.isPicked.set(false);
-            cgl.frameStore.pickingpassNum+=15;
-            currentPickingColor=cgl.frameStore.pickingpassNum;
+            
+            
             pickColorUniformR.setValue(currentPickingColor/255);
             cgl.setShader(shader);
             self.trigger.trigger();
