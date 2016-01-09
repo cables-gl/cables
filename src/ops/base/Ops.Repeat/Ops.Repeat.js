@@ -1,21 +1,19 @@
-Op.apply(this, arguments);
-var self=this;
 
 this.name='Repeat';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var num=this.addInPort(new Port(this,"num"));
 
-this.num=this.addInPort(new Port(this,"num"));
-this.num.val=5;
+num.set(5);
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.idx=this.addOutPort(new Port(this,"index"));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var idx=this.addOutPort(new Port(this,"index"));
 
-this.exe.onTriggered=function()
+exe.onTriggered=function()
 {
-    for(var i=self.num.get()-1;i>-1;i--)
+    for(var i=num.get()-1;i>-1;i--)
     {
-        self.idx.set(i);
-        self.trigger.trigger();
+        idx.set(i);
+        trigger.trigger();
     }
 };
 

@@ -41,11 +41,12 @@ this.doRender=function()
         cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
     
         cgl.frameStore.pickedColor=pixelRGB[0];
-    
+        cgl.frameStore.pickingpassNum=0;
         self.trigger.trigger();
     
         if(self.showPass.get())
         {
+            cgl.frameStore.pickingpassNum=0;
             cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
             renderPickingPass();
         }
