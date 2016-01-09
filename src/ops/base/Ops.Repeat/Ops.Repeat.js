@@ -18,3 +18,4 @@ this.exe.onTriggered=function()
         self.trigger.trigger();
     }
 };
+

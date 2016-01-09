@@ -29,7 +29,7 @@ var preRenderAnimFrame=function(time)
     self.finished.trigger();
     // cgl.gl.flush();
 
-    Ops.Gl.Renderer.renderStart(cgl,identTranslate);
+    cgl.renderStart(cgl,identTranslate);
 
     cgl.gl.clearColor(0,0,0,1);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
@@ -37,7 +37,7 @@ var preRenderAnimFrame=function(time)
     self.loading.trigger();
     // console.log('pre anim');
     
-    Ops.Gl.Renderer.renderEnd(cgl);
+    cgl.renderEnd(cgl);
     preRenderDone=preRenderInc;
 };
 
