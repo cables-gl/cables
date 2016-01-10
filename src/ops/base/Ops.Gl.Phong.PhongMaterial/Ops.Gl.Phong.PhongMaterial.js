@@ -5,7 +5,18 @@ var cgl=this.patch.cgl;
 // http://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
 
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION) );
+var gammeCorrect=this.addInPort(new Port(this,"gamma correction",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+
+gammeCorrect.set(true);
+var updateGammeCorrect=function()
+{
+    if(gammeCorrect.get()) shader.define("DO_GAMME_CORRECT");
+        else shader.removeDefine("DO_GAMME_CORRECT");
+    
+};
+gammeCorrect.onValueChanged=updateGammeCorrect;
+
 
 var srcVert=''
     .endl()+'attribute vec3 vPosition;'
@@ -71,8 +82,6 @@ var srcVert=''
     .endl()+'} light;'
     .endl()+'uniform Light lights[8];'
 
-
-
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 surfaceColor = vec4(r,g,b,a);'
@@ -87,17 +96,11 @@ var srcVert=''
     .endl()+'      #endif'
     .endl()+'   #endif'
 
-
     .endl()+'   vec3 theColor=vec3(0.0,0.0,0.0);'
     .endl()+'   for(int l=0;l<NUM_LIGHTS;l++)'
     .endl()+'   {'
-    
-    
     .endl()+'       vec3 lightColor = lights[l].color;'
     .endl()+'       vec3 lightPosition = vec3(lights[l].pos.x,lights[l].pos.y,lights[l].pos.z);'
-    
-
-
     .endl()+'       vec3 normal = normalize(normalm * vec4(norm,1.0)).xyz;'
     
     //calculate the location of this fragment (pixel) in world coordinates
@@ -116,22 +119,26 @@ var srcVert=''
     // 3. The texture and texture coord: texture(tex, fragTexCoord)'
     // .endl()+'   vec4 surfaceColor = texture(tex, fragTexCoord);'
     // .endl()+'       return lightColor*brightness;'
-    
-    
+
     .endl()+'       theColor+=(lightColor*brightness);'
     .endl()+'   }'
     
-    .endl()+'   vec4 finalColor = vec4( theColor * surfaceColor.rgb, surfaceColor.a);'
+    .endl()+'   vec3 finalColor = theColor * surfaceColor.rgb;'
 
-    .endl()+'   gl_FragColor = finalColor;'
+    .endl()+'   #ifdef DO_GAMME_CORRECT'
+    .endl()+'       vec3 linearColor = finalColor;'
+    .endl()+'       vec3 gamma = vec3(1.0/2.2);'
+    .endl()+'       finalColor = pow(linearColor, gamma);'
+    .endl()+'   #endif'
+
+    .endl()+'   gl_FragColor = vec4(finalColor, surfaceColor.a);'
     .endl()+'}';
     
-
 
 var shader=new CGL.Shader(cgl,'MinimalMaterial');
 shader.setSource(srcVert,srcFrag);
 
-// {
+{
     // diffuse color
     
     var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
@@ -166,15 +173,13 @@ shader.setSource(srcVert,srcFrag);
     g.set(Math.random());
     b.set(Math.random());
     a.set(1.0);
-// }
+}
 {
     // diffuse texture
     
     var diffuseTexture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var diffuseTextureUniform=null;
     shader.bindTextures=bindTextures;
-
-
 
     diffuseTexture.onValueChanged=function()
     {
@@ -215,52 +220,45 @@ shader.setSource(srcVert,srcFrag);
 {
     //lights
     
-}
-var lightPos=[];
-var lightColor=[];
-
-var numLights=-1;
-
-var updateLights=function()
-{
-    if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
+    var lights=[];
+    var numLights=-1;
+    
+    var updateLights=function()
     {
-        var count=0;
-        var i=0;
-
-        for(i in cgl.frameStore.phong.lights)
+        if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
         {
-            count++;
-        }
-
-        if(count!=numLights)
-        {
-            count=0;
-            lightPos.length=0;
-            lightColor.length=0;
+            var count=0;
+            var i=0;
+    
             for(i in cgl.frameStore.phong.lights)
             {
-                lightPos[count]=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
-                lightColor[count]=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
                 count++;
             }
-            numLights=count;
-            shader.define('NUM_LIGHTS',''+numLights);
-        }
+    
+            if(count!=numLights)
+            {
+                count=0;
+                lights.length=0;
+                for(i in cgl.frameStore.phong.lights)
+                {
+                    lights[count]={};
+                    lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+                    lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
+                    count++;
+                }
+                numLights=count;
+                shader.define('NUM_LIGHTS',''+numLights);
+            }
 
-
-        count=0;
-        for(i in cgl.frameStore.phong.lights)
-        {
-            lightPos[count].setValue(cgl.frameStore.phong.lights[i].pos);
-            lightColor[count].setValue(cgl.frameStore.phong.lights[i].color);
-            count++;
+            count=0;
+            for(i in cgl.frameStore.phong.lights)
+            {
+                lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
+                lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
+                count++;
+            }
         }
-        
-        // console.log(cgl.frameStore.phong.lights);
     }
-    
-    
 }
 
 var bindTextures=function()
@@ -276,7 +274,7 @@ var bindTextures=function()
     //     cgl.gl.activeTexture(cgl.gl.TEXTURE1);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureOpacity.val.tex);
     // }
-};
+}
 
 var doRender=function()
 {
@@ -289,6 +287,7 @@ var doRender=function()
 
 shader.bindTextures=bindTextures;
 shader.define('NUM_LIGHTS','0');
+updateGammeCorrect();
 this.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
