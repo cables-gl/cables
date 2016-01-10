@@ -1,0 +1,247 @@
+this.name="PhongMaterial";
+var cgl=this.patch.cgl;
+
+// adapted from:
+// http://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
+
+var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION) );
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+
+var srcVert=''
+    .endl()+'attribute vec3 vPosition;'
+    .endl()+'uniform mat4 projMatrix;'
+    .endl()+'uniform mat4 mvMatrix;'
+    .endl()+'attribute vec3 attrVertNormal;'
+    .endl()+'attribute vec3 normaM;'
+    .endl()+'attribute vec2 attrTexCoord;'
+
+    .endl()+'varying vec3 norm;'
+    .endl()+'varying vec3 vert;'
+    .endl()+'varying mat4 modelm;'
+    .endl()+'varying mat4 normalm;'
+    .endl()+'uniform mat4 normalMatrix;'
+
+    .endl()+'#ifdef HAS_TEXTURES'
+    .endl()+'   varying vec2 texCoord;'
+    .endl()+'#endif'
+
+    .endl()+'void main()'
+    .endl()+'{'
+    .endl()+'   norm=attrVertNormal;'
+    .endl()+'   vert=vPosition;'
+    .endl()+'   modelm=mvMatrix;'
+    .endl()+'   normalm=normalMatrix;'
+    
+    .endl()+'   #ifdef HAS_TEXTURES'
+    .endl()+'       texCoord=attrTexCoord;'
+    .endl()+'   #endif'
+
+    .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+    .endl()+'}';
+
+    var srcFrag=''
+    .endl()+'precision mediump float;'
+    .endl()+'varying vec3 norm;'
+    .endl()+'varying vec3 vert;'
+    .endl()+'varying mat4 modelm;'
+    .endl()+'varying mat4 normalm;'
+
+    .endl()+'uniform float r;'
+    .endl()+'uniform float g;'
+    .endl()+'uniform float b;'
+    .endl()+'uniform float a;'
+
+    .endl()+'uniform float diffuseRepeatX;'
+    .endl()+'uniform float diffuseRepeatY;'
+
+    .endl()+'#ifdef HAS_TEXTURES'
+    .endl()+'   varying vec2 texCoord;'
+    .endl()+'   #ifdef HAS_TEXTURE_DIFFUSE'
+    .endl()+'       uniform sampler2D tex;'
+    .endl()+'   #endif'
+    .endl()+'   #ifdef HAS_TEXTURE_OPACITY'
+    .endl()+'       uniform sampler2D texOpacity;'
+    .endl()+'   #endif'
+    .endl()+'#endif'
+
+    .endl()+'uniform struct Light'
+    .endl()+'{'
+    .endl()+'   vec3 pos;'
+    .endl()+'   vec3 color;'
+    .endl()+'} light;'
+    .endl()+'uniform Light lights[1];'
+
+    .endl()+'void main()'
+    .endl()+'{'
+    
+    .endl()+'   vec3 lightColor = lights[0].color;'
+    .endl()+'   vec3 lightPosition = vec3(lights[0].pos.x,lights[0].pos.y,lights[0].pos.z);'
+    
+    .endl()+'   vec4 surfaceColor = vec4(r,g,b,a);'
+    .endl()+'   #ifdef HAS_TEXTURES'
+    .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
+    .endl()+'          surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(1.0-texCoord.y)*diffuseRepeatY));'
+    .endl()+'           #ifdef COLORIZE_TEXTURE'
+    .endl()+'               surfaceColor.r*=r;'
+    .endl()+'               surfaceColor.g*=g;'
+    .endl()+'               surfaceColor.b*=b;'
+    .endl()+'           #endif'
+    .endl()+'      #endif'
+    .endl()+'   #endif'
+
+
+    .endl()+'   vec3 normal = normalize(normalm * vec4(norm,1.0)).xyz;'
+    
+    //calculate the location of this fragment (pixel) in world coordinates
+    .endl()+'   vec3 fragPosition = vec3(modelm * vec4(vert, 1.0)).xyz;'
+    
+    //calculate the vector from this pixels surface to the light source
+    .endl()+'   vec3 surfaceToLight = lightPosition - fragPosition;'
+
+    //calculate the cosine of the angle of incidence'
+    .endl()+'   float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
+    .endl()+'   brightness = clamp(brightness, 0.0, 1.0);'
+
+    //calculate final color of the pixel, based on:'
+    // 1. The angle of incidence: brightness'
+    // 2. The color/intensities of the light: light.intensities'
+    // 3. The texture and texture coord: texture(tex, fragTexCoord)'
+    // .endl()+'   vec4 surfaceColor = texture(tex, fragTexCoord);'
+    .endl()+'   vec4 finalColor = vec4(brightness * lightColor * surfaceColor.rgb, surfaceColor.a);'
+
+    .endl()+'   gl_FragColor = finalColor;'
+    .endl()+'}';
+    
+
+
+var shader=new CGL.Shader(cgl,'MinimalMaterial');
+shader.setSource(srcVert,srcFrag);
+
+{
+    // diffuse color
+    
+    var r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    r.onValueChanged=function()
+    {
+        if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
+        else r.uniform.setValue(r.get());
+    };
+    
+    var g=this.addInPort(new Port(this,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    g.onValueChanged=function()
+    {
+        if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
+        else g.uniform.setValue(g.get());
+    };
+    
+    var b=this.addInPort(new Port(this,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    b.onValueChanged=function()
+    {
+        if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
+        else b.uniform.setValue(b.get());
+    };
+    
+    var a=this.addInPort(new Port(this,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    a.onValueChanged=function()
+    {
+        if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
+        else a.uniform.setValue(a.get());
+    };
+    
+    r.set(Math.random());
+    g.set(Math.random());
+    b.set(Math.random());
+    a.set(1.0);
+}
+{
+    // diffuse texture
+    
+    var diffuseTexture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var diffuseTextureUniform=null;
+    shader.bindTextures=bindTextures;
+
+
+
+    diffuseTexture.onValueChanged=function()
+    {
+        if(diffuseTexture.get())
+        {
+            if(diffuseTextureUniform!==null)return;
+            shader.removeUniform('tex');
+            shader.define('HAS_TEXTURE_DIFFUSE');
+            diffuseTextureUniform=new CGL.Uniform(shader,'t','tex',0);
+        }
+        else
+        {
+            shader.removeUniform('tex');
+            shader.removeDefine('HAS_TEXTURE_DIFFUSE');
+            diffuseTextureUniform=null;
+        }
+    };
+
+    var diffuseRepeatX=this.addInPort(new Port(this,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
+    var diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
+    diffuseRepeatX.set(1);
+    diffuseRepeatY.set(1);
+    
+    diffuseRepeatX.onValueChanged=function()
+    {
+        diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
+    };
+    
+    diffuseRepeatY.onValueChanged=function()
+    {
+        diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
+    };
+    
+    var diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX.get());
+    var diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY.get());
+}
+
+{
+    //lights
+    var lightPos=new CGL.Uniform(shader,'3f','lights[0].pos',[0,11,0]);
+    var lightColor=new CGL.Uniform(shader,'3f','lights[0].color',[1,1,1]);
+}
+
+var updateLights=function()
+{
+    if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
+    {
+        lightPos.setValue(cgl.frameStore.phong.lights[0].pos);
+        lightColor.setValue(cgl.frameStore.phong.lights[0].color);
+    }
+    
+    
+}
+
+var bindTextures=function()
+{
+    if(diffuseTexture.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
+    }
+
+    // if(self.textureOpacity.get())
+    // {
+    //     cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureOpacity.val.tex);
+    // }
+};
+
+var doRender=function()
+{
+    cgl.setShader(shader);
+    updateLights();
+    shader.bindTextures();
+    trigger.trigger();
+    cgl.setPreviousShader();
+};
+
+shader.bindTextures=bindTextures;
+this.onLoaded=shader.compile;
+
+render.onTriggered=doRender;
+
+doRender();

@@ -17,7 +17,6 @@ this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 
 
-
 var pixelRGB = new Uint8Array(4);
 
 function renderPickingPass()
@@ -50,6 +49,7 @@ this.doRender=function()
             cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
             renderPickingPass();
         }
+        
     }
     else
     {

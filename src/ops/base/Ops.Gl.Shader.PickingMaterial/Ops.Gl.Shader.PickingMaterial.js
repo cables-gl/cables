@@ -17,15 +17,27 @@
             shader.removeDefine('BILLBOARD');
     };
 
+    var cursor=this.addInPort(new Port(this,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
+    cursor.set('pointer');
+
+
+	
+
+
+
+    // var doSetCursor=this.addInPort(new Port(this,"change cursor",OP_PORT_TYPE_VALUE,{display:'bool'}));
+    // doSetCursor.set(true);
+    // doSetCursor.onValueChanged=function()
+    // {
+    //     cgl.canvas.style.cursor='auto';
+    // };
+
 
 
     this.doRender=function()
     {
-
         cgl.frameStore.pickingpassNum+=4;
         var currentPickingColor=cgl.frameStore.pickingpassNum;
-
-
 
         if(cgl.frameStore.pickingpass)
         {
@@ -41,7 +53,14 @@
         {
             if(cgl.frameStore.pickedColor==currentPickingColor)
             {
-                // console.log('picked !',cgl.frameStore.pickedColor,currentPickingColor);
+                if(cursor.get().length>0 && cgl.canvas.style.cursor!=cursor.get())
+                {
+                    cgl.canvas.style.cursor=cursor.get();
+                }
+            }
+            else
+            {
+
             }
             self.isPicked.set( cgl.frameStore.pickedColor==currentPickingColor );
 
