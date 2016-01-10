@@ -69,14 +69,12 @@ var srcVert=''
     .endl()+'   vec3 pos;'
     .endl()+'   vec3 color;'
     .endl()+'} light;'
-    .endl()+'uniform Light lights[1];'
+    .endl()+'uniform Light lights[8];'
+
+
 
     .endl()+'void main()'
     .endl()+'{'
-    
-    .endl()+'   vec3 lightColor = lights[0].color;'
-    .endl()+'   vec3 lightPosition = vec3(lights[0].pos.x,lights[0].pos.y,lights[0].pos.z);'
-    
     .endl()+'   vec4 surfaceColor = vec4(r,g,b,a);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
@@ -90,24 +88,40 @@ var srcVert=''
     .endl()+'   #endif'
 
 
-    .endl()+'   vec3 normal = normalize(normalm * vec4(norm,1.0)).xyz;'
+    .endl()+'   vec3 theColor=vec3(0.0,0.0,0.0);'
+    .endl()+'   for(int l=0;l<NUM_LIGHTS;l++)'
+    .endl()+'   {'
+    
+    
+    .endl()+'       vec3 lightColor = lights[l].color;'
+    .endl()+'       vec3 lightPosition = vec3(lights[l].pos.x,lights[l].pos.y,lights[l].pos.z);'
+    
+
+
+    .endl()+'       vec3 normal = normalize(normalm * vec4(norm,1.0)).xyz;'
     
     //calculate the location of this fragment (pixel) in world coordinates
-    .endl()+'   vec3 fragPosition = vec3(modelm * vec4(vert, 1.0)).xyz;'
+    .endl()+'       vec3 fragPosition = vec3(modelm * vec4(vert, 1.0)).xyz;'
     
     //calculate the vector from this pixels surface to the light source
-    .endl()+'   vec3 surfaceToLight = lightPosition - fragPosition;'
+    .endl()+'       vec3 surfaceToLight = lightPosition - fragPosition;'
 
     //calculate the cosine of the angle of incidence'
-    .endl()+'   float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
-    .endl()+'   brightness = clamp(brightness, 0.0, 1.0);'
+    .endl()+'       float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
+    .endl()+'       brightness = clamp(brightness, 0.0, 1.0);'
 
     //calculate final color of the pixel, based on:'
     // 1. The angle of incidence: brightness'
     // 2. The color/intensities of the light: light.intensities'
     // 3. The texture and texture coord: texture(tex, fragTexCoord)'
     // .endl()+'   vec4 surfaceColor = texture(tex, fragTexCoord);'
-    .endl()+'   vec4 finalColor = vec4(brightness * lightColor * surfaceColor.rgb, surfaceColor.a);'
+    // .endl()+'       return lightColor*brightness;'
+    
+    
+    .endl()+'       theColor+=(lightColor*brightness);'
+    .endl()+'   }'
+    
+    .endl()+'   vec4 finalColor = vec4( theColor * surfaceColor.rgb, surfaceColor.a);'
 
     .endl()+'   gl_FragColor = finalColor;'
     .endl()+'}';
@@ -117,31 +131,31 @@ var srcVert=''
 var shader=new CGL.Shader(cgl,'MinimalMaterial');
 shader.setSource(srcVert,srcFrag);
 
-{
+// {
     // diffuse color
     
-    var r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     r.onValueChanged=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
     
-    var g=this.addInPort(new Port(this,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
     g.onValueChanged=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
     
-    var b=this.addInPort(new Port(this,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.onValueChanged=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
     };
     
-    var a=this.addInPort(new Port(this,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
     a.onValueChanged=function()
     {
         if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
@@ -152,7 +166,7 @@ shader.setSource(srcVert,srcFrag);
     g.set(Math.random());
     b.set(Math.random());
     a.set(1.0);
-}
+// }
 {
     // diffuse texture
     
@@ -200,16 +214,50 @@ shader.setSource(srcVert,srcFrag);
 
 {
     //lights
-    var lightPos=new CGL.Uniform(shader,'3f','lights[0].pos',[0,11,0]);
-    var lightColor=new CGL.Uniform(shader,'3f','lights[0].color',[1,1,1]);
+    
 }
+var lightPos=[];
+var lightColor=[];
+
+var numLights=-1;
 
 var updateLights=function()
 {
     if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
     {
-        lightPos.setValue(cgl.frameStore.phong.lights[0].pos);
-        lightColor.setValue(cgl.frameStore.phong.lights[0].color);
+        var count=0;
+        var i=0;
+
+        for(i in cgl.frameStore.phong.lights)
+        {
+            count++;
+        }
+
+        if(count!=numLights)
+        {
+            count=0;
+            lightPos.length=0;
+            lightColor.length=0;
+            for(i in cgl.frameStore.phong.lights)
+            {
+                lightPos[count]=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+                lightColor[count]=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
+                count++;
+            }
+            numLights=count;
+            shader.define('NUM_LIGHTS',''+numLights);
+        }
+
+
+        count=0;
+        for(i in cgl.frameStore.phong.lights)
+        {
+            lightPos[count].setValue(cgl.frameStore.phong.lights[i].pos);
+            lightColor[count].setValue(cgl.frameStore.phong.lights[i].color);
+            count++;
+        }
+        
+        // console.log(cgl.frameStore.phong.lights);
     }
     
     
@@ -240,6 +288,7 @@ var doRender=function()
 };
 
 shader.bindTextures=bindTextures;
+shader.define('NUM_LIGHTS','0');
 this.onLoaded=shader.compile;
 
 render.onTriggered=doRender;

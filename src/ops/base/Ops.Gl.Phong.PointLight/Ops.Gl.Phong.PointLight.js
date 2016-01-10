@@ -17,18 +17,20 @@ r.set(1);
 g.set(1);
 b.set(1);
 
+var id=generateUUID();
+
 exe.onTriggered=function()
 {
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights=[];
-    cgl.frameStore.phong.lights[0]={};
-    cgl.frameStore.phong.lights[0].pos=[
+    cgl.frameStore.phong.lights[id]={};
+    cgl.frameStore.phong.lights[id].pos=[
         x.get(),
         y.get(),
         z.get(),
     ];
 
-    cgl.frameStore.phong.lights[0].color=[
+    cgl.frameStore.phong.lights[id].color=[
         r.get(),
         g.get(),
         b.get(),
