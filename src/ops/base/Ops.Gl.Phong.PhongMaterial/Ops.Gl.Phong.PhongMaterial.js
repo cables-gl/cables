@@ -77,6 +77,7 @@ var srcVert=''
 
     .endl()+'uniform struct Light'
     .endl()+'{'
+    .endl()+'   float attenuation;'
     .endl()+'   vec3 pos;'
     .endl()+'   vec3 color;'
     .endl()+'} light;'
@@ -107,11 +108,16 @@ var srcVert=''
     .endl()+'       vec3 fragPosition = vec3(modelm * vec4(vert, 1.0)).xyz;'
     
     //calculate the vector from this pixels surface to the light source
-    .endl()+'       vec3 surfaceToLight = lightPosition - fragPosition;'
+    .endl()+'       vec3 surfaceToLight = lightPosition-fragPosition;'
 
     //calculate the cosine of the angle of incidence'
     .endl()+'       float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
     .endl()+'       brightness = clamp(brightness, 0.0, 1.0);'
+
+    // attenuation 
+    .endl()+'float distanceToLight = length(surfaceToLight);'
+    .endl()+'float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
+    .endl()+'brightness *= attenuation;'
 
     //calculate final color of the pixel, based on:'
     // 1. The angle of incidence: brightness'
@@ -119,6 +125,7 @@ var srcVert=''
     // 3. The texture and texture coord: texture(tex, fragTexCoord)'
     // .endl()+'   vec4 surfaceColor = texture(tex, fragTexCoord);'
     // .endl()+'       return lightColor*brightness;'
+
 
     .endl()+'       theColor+=(lightColor*brightness);'
     .endl()+'   }'
@@ -244,6 +251,8 @@ shader.setSource(srcVert,srcFrag);
                     lights[count]={};
                     lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
                     lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
+                    lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
+                    
                     count++;
                 }
                 numLights=count;
@@ -255,6 +264,8 @@ shader.setSource(srcVert,srcFrag);
             {
                 lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
                 lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
+                lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
+                
                 count++;
             }
         }

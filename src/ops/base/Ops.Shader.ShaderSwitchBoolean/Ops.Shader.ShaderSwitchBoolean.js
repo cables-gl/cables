@@ -8,6 +8,9 @@
     var shader2=this.addInPort(new Port(this,"shader false",OP_PORT_TYPE_OBJECT));
     var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
     var shaderOut=this.addOutPort(new Port(this,"shaderOut",OP_PORT_TYPE_OBJECT));
+    shaderOut.ignoreValueSerialize=true;
+    shader.ignoreValueSerialize=true;
+    shader2.ignoreValueSerialize=true;
 
     var doRender=function()
     {
@@ -21,7 +24,6 @@
                 trigger.trigger();
                 cgl.setPreviousShader();
             }
-            
         }
         else
         {

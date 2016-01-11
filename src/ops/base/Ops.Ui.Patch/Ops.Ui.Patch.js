@@ -144,7 +144,11 @@ function createPatchInputPort(dynPort,name)
 {
     var patchInputOP=getSubPatchInputOp();
 
-    patchInputOP.uiAttribs.translate={x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y-100};
+    if(self.uiAttribs && self.uiAttribs.translate)
+    {
+        patchInputOP.uiAttribs.translate={x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y-100};        
+    }
+
 
     var pOut=patchInputOP.getPortByName('out_'+name);
 
