@@ -1,6 +1,6 @@
 Op.apply(this, arguments);
 var self=this;
-var cgl=self.patch.cgl;
+var cgl=this.patch.cgl;
 cgl.frameStore.SplinePoints=[];
 
 this.name='Spline';

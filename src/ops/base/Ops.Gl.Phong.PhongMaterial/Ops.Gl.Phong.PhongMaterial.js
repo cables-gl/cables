@@ -19,6 +19,7 @@ gammeCorrect.onValueChanged=updateGammeCorrect;
 
 
 var srcVert=''
+    .endl()+'precision mediump float;'
     .endl()+'attribute vec3 vPosition;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
@@ -50,7 +51,7 @@ var srcVert=''
     .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'}';
 
-    var srcFrag=''
+var srcFrag=''
     .endl()+'precision mediump float;'
     .endl()+'varying vec3 norm;'
     .endl()+'varying vec3 vert;'
@@ -80,6 +81,8 @@ var srcVert=''
     .endl()+'   float attenuation;'
     .endl()+'   vec3 pos;'
     .endl()+'   vec3 color;'
+    .endl()+'   float intensity;'
+    
     .endl()+'} light;'
     .endl()+'uniform Light lights[8];'
 
@@ -115,9 +118,9 @@ var srcVert=''
     .endl()+'       brightness = clamp(brightness, 0.0, 1.0);'
 
     // attenuation 
-    .endl()+'float distanceToLight = length(surfaceToLight);'
-    .endl()+'float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
-    .endl()+'brightness *= attenuation;'
+    .endl()+'       float distanceToLight = length(surfaceToLight);'
+    .endl()+'       float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
+    .endl()+'       brightness *= attenuation;'
 
     //calculate final color of the pixel, based on:'
     // 1. The angle of incidence: brightness'
@@ -125,6 +128,9 @@ var srcVert=''
     // 3. The texture and texture coord: texture(tex, fragTexCoord)'
     // .endl()+'   vec4 surfaceColor = texture(tex, fragTexCoord);'
     // .endl()+'       return lightColor*brightness;'
+
+// .endl()+'vec3 specularComponent = specularCoefficient * vec3(1.0,1.0,1.0) * 1.0;'
+
 
 
     .endl()+'       theColor+=(lightColor*brightness);'
@@ -142,7 +148,7 @@ var srcVert=''
     .endl()+'}';
     
 
-var shader=new CGL.Shader(cgl,'MinimalMaterial');
+var shader=new CGL.Shader(cgl,'PhongMaterial');
 shader.setSource(srcVert,srcFrag);
 
 {
