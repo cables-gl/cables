@@ -1,10 +1,10 @@
-Op.apply(this, arguments);
 this.name="BoundingWire";
 var cgl=this.patch.cgl;
 
 var buffer = cgl.gl.createBuffer();
 
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 function doRender()
 {
@@ -14,13 +14,16 @@ function doRender()
     cgl.pushMvMatrix();
 
     shader.bind();
-    cgl.gl.vertexAttribPointer(cgl.getShader().getAttrVertexPos(),buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
-    cgl.gl.enableVertexAttribArray(cgl.getShader().getAttrVertexPos());
+    cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
+
+    cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(),buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
+    cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
 
     cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
     cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
 
     cgl.popMvMatrix();
+    trigger.trigger();
 }
 
 function bufferData()
@@ -28,7 +31,7 @@ function bufferData()
     var points=[];
     var segments=4;
     var i=0,degInRad=0;
-    var radius=1.0;
+    var radius=0.05;
 
     for (i=0; i <= Math.round(segments); i++)
     {

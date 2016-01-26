@@ -39,11 +39,30 @@ var updatePos=function()
 {
 }
 
+this.onDelete=function()
+{
+    // for(var i in cgl.frameStore.phong.lights)
+    // {
+    //     if(cgl.frameStore.phong.lights[i].id==id)
+    //     {
+    //         cgl.frameStore.phong.lights.splice(i,1);
+    //         break;
+    //     }
+    // }
+    // cgl.frameStore.phong.lights[id]={};
+    // cgl.frameStore.phong.lights.length=0;
+    // cgl.frameStore.phong.lights=[];
+
+    console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
+
+}
+
 var updateAll=function()
 {
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights=[];
     cgl.frameStore.phong.lights[id]={};
+    cgl.frameStore.phong.lights[id].id=id;
 
     updatePos();
     updateColor();

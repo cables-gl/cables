@@ -24,25 +24,25 @@ var srcVert=''
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
     .endl()+'attribute vec3 attrVertNormal;'
-    .endl()+'attribute vec3 normaM;'
+    // .endl()+'attribute vec3 normaM;'
     .endl()+'attribute vec2 attrTexCoord;'
 
-    .endl()+'varying vec3 norm;'
-    .endl()+'varying vec3 vert;'
-    .endl()+'varying mat4 modelm;'
-    .endl()+'varying mat4 normalm;'
+    .endl()+'varying mediump vec3 norm;'
+    .endl()+'varying mediump vec3 vert;'
+    // .endl()+'varying mediump mat4 modelm;'
+    // .endl()+'varying mediump mat4 normalm;'
     .endl()+'uniform mat4 normalMatrix;'
 
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'   varying vec2 texCoord;'
+    .endl()+'   varying mediump vec2 texCoord;'
     .endl()+'#endif'
 
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   norm=attrVertNormal;'
     .endl()+'   vert=vPosition;'
-    .endl()+'   modelm=mvMatrix;'
-    .endl()+'   normalm=normalMatrix;'
+    // .endl()+'   modelm=mvMatrix;'
+    // .endl()+'   normalm=normalMatrix;'
     
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'       texCoord=attrTexCoord;'
@@ -53,10 +53,12 @@ var srcVert=''
 
 var srcFrag=''
     .endl()+'precision mediump float;'
-    .endl()+'varying vec3 norm;'
-    .endl()+'varying vec3 vert;'
-    .endl()+'varying mat4 modelm;'
-    .endl()+'varying mat4 normalm;'
+    .endl()+'varying mediump vec3 norm;'
+    .endl()+'varying mediump vec3 vert;'
+    .endl()+'uniform mat4 normalMatrix;'
+    .endl()+'uniform mat4 mvMatrix;'
+    // .endl()+'varying mediump mat4 modelm;'
+    // .endl()+'varying mediump mat4 normalm;'
 
     .endl()+'uniform float r;'
     .endl()+'uniform float g;'
@@ -67,7 +69,7 @@ var srcFrag=''
     .endl()+'uniform float diffuseRepeatY;'
 
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'   varying vec2 texCoord;'
+    .endl()+'   varying mediump vec2 texCoord;'
     .endl()+'   #ifdef HAS_TEXTURE_DIFFUSE'
     .endl()+'       uniform sampler2D tex;'
     .endl()+'   #endif'
@@ -84,7 +86,7 @@ var srcFrag=''
     .endl()+'   float intensity;'
     
     .endl()+'} light;'
-    .endl()+'uniform Light lights[8];'
+    .endl()+'uniform Light lights[2];'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -101,14 +103,14 @@ var srcFrag=''
     .endl()+'   #endif'
 
     .endl()+'   vec3 theColor=vec3(0.0,0.0,0.0);'
-    .endl()+'   for(int l=0;l<NUM_LIGHTS;l++)'
+    .endl()+'   for(int l=0;l<2;l++)'
     .endl()+'   {'
     .endl()+'       vec3 lightColor = lights[l].color;'
     .endl()+'       vec3 lightPosition = vec3(lights[l].pos.x,lights[l].pos.y,lights[l].pos.z);'
-    .endl()+'       vec3 normal = normalize(normalm * vec4(norm,1.0)).xyz;'
+    .endl()+'       vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;'
     
     //calculate the location of this fragment (pixel) in world coordinates
-    .endl()+'       vec3 fragPosition = vec3(modelm * vec4(vert, 1.0)).xyz;'
+    .endl()+'       vec3 fragPosition = vec3(mvMatrix * vec4(vert, 1.0)).xyz;'
     
     //calculate the vector from this pixels surface to the light source
     .endl()+'       vec3 surfaceToLight = lightPosition-fragPosition;'
@@ -143,6 +145,7 @@ var srcFrag=''
     .endl()+'       vec3 gamma = vec3(1.0/2.2);'
     .endl()+'       finalColor = pow(linearColor, gamma);'
     .endl()+'   #endif'
+    // .endl()+'   finalColor.r=1.0;'
 
     .endl()+'   gl_FragColor = vec4(finalColor, surfaceColor.a);'
     .endl()+'}';
@@ -258,11 +261,12 @@ shader.setSource(srcVert,srcFrag);
                     lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
                     lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
                     lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
-                    
+
                     count++;
                 }
                 numLights=count;
                 shader.define('NUM_LIGHTS',''+numLights);
+                
             }
 
             count=0;
