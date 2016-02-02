@@ -1,35 +1,32 @@
-Op.apply(this, arguments);
-var self=this;
-
 this.name='map value range';
-this.result=this.addOutPort(new Port(this,"result"));
-this.v=this.addInPort(new Port(this,"value"));
-this.old_min=this.addInPort(new Port(this,"old min"));
-this.old_max=this.addInPort(new Port(this,"old max"));
-this.new_min=this.addInPort(new Port(this,"new min"));
-this.new_max=this.addInPort(new Port(this,"new max"));
-
-this.exec= function()
+var result=this.addOutPort(new Port(this,"result"));
+var v=this.addInPort(new Port(this,"value"));
+var old_min=this.addInPort(new Port(this,"old min"));
+var old_max=this.addInPort(new Port(this,"old max"));
+var new_min=this.addInPort(new Port(this,"new min"));
+var new_max=this.addInPort(new Port(this,"new max"));
+var self=this;
+var exec= function()
 {
     self.updateAnims();
 
-    if(self.v.val>self.old_max.val)
+    if(v.val>old_max.get())
     {
-        self.result.val=self.new_max.val;
+        result.set(new_max.get());
         return;
     }
     else
-    if(self.v.val<self.old_min.val)
+    if(v.get()<old_min.get())
     {
-        self.result.val=self.new_min.val;
+        result.set(new_min.get());
         return;
     }
 
-    var nMin=parseFloat(self.new_min.val);
-    var nMax=parseFloat(self.new_max.val);
-    var oMin=parseFloat(self.old_min.val);
-    var oMax=parseFloat(self.old_max.val);
-    var x=parseFloat(self.v.val);
+    var nMin=parseFloat(new_min.val);
+    var nMax=parseFloat(new_max.val);
+    var oMin=parseFloat(old_min.val);
+    var oMax=parseFloat(old_max.val);
+    var x=parseFloat(v.val);
 
     var reverseInput = false;
     var oldMin = Math.min( oMin, oMax );
@@ -46,22 +43,22 @@ this.exec= function()
     if(reverseInput) portion = (oldMax-x)*(newMax-newMin)/(oldMax-oldMin);
         else portion = (x-oldMin)*(newMax-newMin)/(oldMax-oldMin);
     
-    if(reverseOutput) self.result.val = newMax - portion;
-        else self.result.val = portion + newMin;
+    if(reverseOutput) result.set(newMax - portion);
+        else result.set(portion + newMin);
 
 };
 
-this.v.val=0;
-this.old_min.val=-1;
-this.old_max.val=1;
-this.new_min.val=0;
-this.new_max.val=1;
+v.val=0;
+old_min.val=-1;
+old_max.val=1;
+new_min.val=0;
+new_max.val=1;
 
 
-this.v.onValueChanged=this.exec;
-this.old_min.onValueChanged=this.exec;
-this.old_max.onValueChanged=this.exec;
-this.new_min.onValueChanged=this.exec;
-this.new_max.onValueChanged=this.exec;
+v.onValueChanged=exec;
+old_min.onValueChanged=exec;
+old_max.onValueChanged=exec;
+new_min.onValueChanged=exec;
+new_max.onValueChanged=exec;
 
-this.exec();
+exec();

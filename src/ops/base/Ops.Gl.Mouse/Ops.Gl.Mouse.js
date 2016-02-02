@@ -86,7 +86,7 @@ var onMouseUp = function(e)
     self.mouseClick.set(false);
 };
 
-cgl.canvas.onmouseclick = function(e)
+var onmouseclick = function(e)
 {
     self.mouseClick.set(true);
 };
@@ -169,6 +169,7 @@ var onmousemove = function(e)
     
 };
 
+cgl.canvas.addEventListener('click', onmouseclick);
 cgl.canvas.addEventListener('mousemove', onmousemove);
 cgl.canvas.addEventListener('mouseleave', onMouseLeave);
 cgl.canvas.addEventListener('mousedown', onMouseDown);

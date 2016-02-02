@@ -17,6 +17,13 @@
     this.randomsRot=[];
     this.randomsFloats=[];
 
+    var scaleX=this.addInPort(new Port(this,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var scaleY=this.addInPort(new Port(this,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var scaleZ=this.addInPort(new Port(this,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    scaleX.set(1);
+    scaleY.set(1);
+    scaleZ.set(1);
+    
     var transVec=vec3.create();
 
     this.exe.onTriggered=function()
@@ -52,9 +59,9 @@
         {
             self.randomsFloats.push(Math.seededRandom());
             self.randoms.push(vec3.fromValues(
-                (Math.seededRandom()-0.5)*self.size.get(),
-                (Math.seededRandom()-0.5)*self.size.get(),
-                (Math.seededRandom()-0.5)*self.size.get()
+                scaleX.get()*(Math.seededRandom()-0.5)*self.size.get(),
+                scaleY.get()*(Math.seededRandom()-0.5)*self.size.get(),
+                scaleZ.get()*(Math.seededRandom()-0.5)*self.size.get()
                 ));
             self.randomsRot.push(vec3.fromValues(
                 Math.seededRandom()*360*CGL.DEG2RAD,
@@ -69,5 +76,8 @@
     this.seed.onValueChanged=reset;
     this.num.onValueChanged=reset;
     this.size.onValueChanged=reset;
+    scaleX.onValueChanged=reset;
+    scaleZ.onValueChanged=reset;
+    scaleY.onValueChanged=reset;
 
     this.num.set(100);
