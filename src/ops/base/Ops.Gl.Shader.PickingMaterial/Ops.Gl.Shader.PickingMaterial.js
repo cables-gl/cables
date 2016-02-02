@@ -24,14 +24,14 @@ cursor.set('pointer');
 
 this.doRender=function()
 {
-    cgl.frameStore.pickingpassNum+=4;
+    cgl.frameStore.pickingpassNum+=1;
     var currentPickingColor=cgl.frameStore.pickingpassNum;
 
     if(cgl.frameStore.pickingpass)
     {
         self.isPicked.set(false);
-        
-        
+
+
         pickColorUniformR.setValue(currentPickingColor/255);
         cgl.setShader(shader);
         self.trigger.trigger();
@@ -59,19 +59,19 @@ this.doRender=function()
 
 var srcVert=''
     .endl()+'attribute vec3 vPosition;'
-    .endl()+'attribute vec2 attrTexCoord;'
-    .endl()+'attribute vec3 attrVertNormal;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'varying vec3 norm;'
+    // .endl()+'attribute vec2 attrTexCoord;'
+    // .endl()+'attribute vec3 attrVertNormal;'
+    // .endl()+'varying vec2 texCoord;'
+    // .endl()+'varying vec3 norm;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
     // .endl()+'uniform mat4 normalMatrix;'
-    
+
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   texCoord=attrTexCoord;'
-    .endl()+'   norm=attrVertNormal;'
-    
+    // .endl()+'   texCoord=attrTexCoord;'
+    // .endl()+'   norm=attrVertNormal;'
+
     .endl()+'   #ifdef BILLBOARD'
 
     .endl()+'   vec3 position=vPosition;'
@@ -103,7 +103,7 @@ var srcFrag=''
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
-var shader=new CGL.Shader(cgl);
+var shader=new CGL.Shader(cgl,"PickingMaterial");
 shader.offScreenPass=true;
 this.onLoaded=shader.compile;
 

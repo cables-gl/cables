@@ -11,29 +11,30 @@ var lengt=this.addInPort(new Port(this,"length",OP_PORT_TYPE_VALUE));
 
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var geom=null;
 var mesh=null;
-width.set(1);
-height.set(1);
-lengt.set(1);
+width.set(1.0);
+height.set(1.0);
+lengt.set(1.0);
 center.set(true);
 
 render.onTriggered=function()
 {
-    if(mesh!==null) mesh.render(cgl.getShader());
+    if(mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
-var geom=null;
+
 function buildMesh()
 {
     if(!geom)geom=new CGL.Geometry();
 
-    var w=width.get();
-    var nw=-1*width.get();
-    var h=height.get();
-    var nh=-1*height.get();
-    var l=lengt.get();
-    var nl=-1*lengt.get();
+    var w=parseFloat(width.get());
+    var nw=-1*parseFloat(width.get());
+    var h=parseFloat(height.get());
+    var nh=-1*parseFloat(height.get());
+    var l=parseFloat(lengt.get());
+    var nl=-1*parseFloat(lengt.get());
 
     if(!center.get())
     {
@@ -48,70 +49,70 @@ function buildMesh()
     }
 
     geom.vertices = [
-    // Front face
-    nw, nh,  l,
-    w, nh,  l,
-    w,  h,  l,
-    nw,  h,  l,
-    // Back face
-    nw, nh, nl,
-    nw,  h, nl,
-    w,  h, nl,
-    w, nh, nl,
-    // Top face
-    nw,  h, nl,
-    nw,  h,  l,
-    w,  h,  l,
-    w,  h, nl,
-    // Bottom face
-    nw, nh, nl,
-    w, nh, nl,
-    w, nh,  l,
-    nw, nh,  l,
-    // Right face
-    w, nh, nl,
-    w,  h, nl,
-    w,  h,  l,
-    w, nh,  l,
-    // Left face
-    nw, nh, nl,
-    nw, nh,  l,
-    nw,  h,  l,
-    nw,  h, nl
-    ];
+        // Front face
+        nw, nh,  l,
+        w, nh,  l,
+        w,  h,  l,
+        nw,  h,  l,
+        // Back face
+        nw, nh, nl,
+        nw,  h, nl,
+        w,  h, nl,
+        w, nh, nl,
+        // Top face
+        nw,  h, nl,
+        nw,  h,  l,
+        w,  h,  l,
+        w,  h, nl,
+        // Bottom face
+        nw, nh, nl,
+        w, nh, nl,
+        w, nh,  l,
+        nw, nh,  l,
+        // Right face
+        w, nh, nl,
+        w,  h, nl,
+        w,  h,  l,
+        w, nh,  l,
+        // Left face
+        nw, nh, nl,
+        nw, nh,  l,
+        nw,  h,  l,
+        nw,  h, nl
+        ];
 
-geom.texCoords = [
-      // Front face
-      0.0, 0.0,
-      1.0, 0.0,
-      1.0, 1.0,
-      0.0, 1.0,
-      // Back face
-      1.0, 0.0,
-      1.0, 1.0,
-      0.0, 1.0,
-      0.0, 0.0,
-      // Top face
-      0.0, 1.0,
-      0.0, 0.0,
-      1.0, 0.0,
-      1.0, 1.0,
-      // Bottom face
-      1.0, 1.0,
-      0.0, 1.0,
-      0.0, 0.0,
-      1.0, 0.0,
-      // Right face
-      1.0, 0.0,
-      1.0, 1.0,
-      0.0, 1.0,
-      0.0, 0.0,
-      // Left face
-      0.0, 0.0,
-      1.0, 0.0,
-      1.0, 1.0,
-      0.0, 1.0,
-    ];
+    geom.texCoords = [
+          // Front face
+          0.0, 0.0,
+          1.0, 0.0,
+          1.0, 1.0,
+          0.0, 1.0,
+          // Back face
+          1.0, 0.0,
+          1.0, 1.0,
+          0.0, 1.0,
+          0.0, 0.0,
+          // Top face
+          0.0, 1.0,
+          0.0, 0.0,
+          1.0, 0.0,
+          1.0, 1.0,
+          // Bottom face
+          1.0, 1.0,
+          0.0, 1.0,
+          0.0, 0.0,
+          1.0, 0.0,
+          // Right face
+          1.0, 0.0,
+          1.0, 1.0,
+          0.0, 1.0,
+          0.0, 0.0,
+          // Left face
+          0.0, 0.0,
+          1.0, 0.0,
+          1.0, 1.0,
+          0.0, 1.0,
+        ];
 
     geom.vertexNormals = [
         // Front face

@@ -175,3 +175,14 @@ cgl.canvas.addEventListener('mouseleave', onMouseLeave);
 cgl.canvas.addEventListener('mousedown', onMouseDown);
 cgl.canvas.addEventListener('mouseup', onMouseUp);
 cgl.canvas.addEventListener('mouseenter', onMouseEnter);
+
+this.onDelete=function()
+{
+    console.log("remove mouse op...");
+    cgl.canvas.removeEventListener('click', onmouseclick);
+    cgl.canvas.removeEventListener('mousemove', onmousemove);
+    cgl.canvas.removeEventListener('mouseleave', onMouseLeave);
+    cgl.canvas.removeEventListener('mousedown', onMouseDown);
+    cgl.canvas.removeEventListener('mouseup', onMouseUp);
+    cgl.canvas.removeEventListener('mouseenter', onMouseEnter);
+};

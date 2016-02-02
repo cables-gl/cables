@@ -23,7 +23,7 @@ function renderPickingPass()
 {
     cgl.frameStore.renderOffscreen=true;
     cgl.frameStore.pickingpass=true;
-    cgl.frameStore.pickingpassNum=0;
+    cgl.frameStore.pickingpassNum=2;
     self.trigger.trigger();
     cgl.frameStore.pickingpass=false;
     cgl.frameStore.renderOffscreen=false;
@@ -33,19 +33,20 @@ this.doRender=function()
 {
     if(self.enabled.get())
     {
-    
         renderPickingPass();
+        cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
     
         cgl.gl.readPixels(self.x.get(), cgl.canvas.height-self.y.get(), 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
         cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
     
         cgl.frameStore.pickedColor=pixelRGB[0];
-        cgl.frameStore.pickingpassNum=0;
+        // console.log(cgl.frameStore.pickedColor);
+        cgl.frameStore.pickingpassNum=2;
         self.trigger.trigger();
     
         if(self.showPass.get())
         {
-            cgl.frameStore.pickingpassNum=0;
+            cgl.frameStore.pickingpassNum=2;
             cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
             renderPickingPass();
         }
