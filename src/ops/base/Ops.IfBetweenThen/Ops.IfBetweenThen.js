@@ -13,6 +13,7 @@ this.min.val=0;
 this.max=this.addInPort(new Port(this,"max"));
 this.max.val=1;
 
+
 this.triggerThen=this.addOutPort(new Port(this,"then",OP_PORT_TYPE_FUNCTION));
 this.triggerElse=this.addOutPort(new Port(this,"else",OP_PORT_TYPE_FUNCTION));
 

@@ -1,17 +1,13 @@
-    var self=this;
-    Op.apply(this, arguments);
 
-    this.name='ArrayGetValue';
-    this.array=this.addInPort(new Port(this, "array",OP_PORT_TYPE_ARRAY));
-    this.index=this.addInPort(new Port(this, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
-    this.value=this.addOutPort(new Port(this, "value",OP_PORT_TYPE_VALUE));
-    var arr=[];
+this.name='ArrayGetValue';
+var array=this.addInPort(new Port(this, "array",OP_PORT_TYPE_ARRAY));
+var index=this.addInPort(new Port(this, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
+var value=this.addOutPort(new Port(this, "value",OP_PORT_TYPE_VALUE));
 
-    function update()
-    {
-        self.value.set( self.array.val[self.index.get()] );
-        // console.log('self.array.val',self.array.val[self.index.val]);
-    }
+function update()
+{
+    value.set( array.val[index.get()]);
+}
 
-    this.index.onValueChanged=update;
-    this.array.onValueChanged=update;
+index.onValueChanged=update;
+array.onValueChanged=update;
