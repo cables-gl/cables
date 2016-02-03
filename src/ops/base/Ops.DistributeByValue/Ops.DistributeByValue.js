@@ -18,7 +18,7 @@ var numTriggers=10;
 
 var trigger=function()
 {
-    var s=parseFloat(max.get())/parseFloat(numOut.get());
+    var s=parseFloat(parseFloat(max.get()))/parseFloat(numOut.get());
     var index=Math.floor(parseFloat(number.get())/s);
     
     num.set(index);

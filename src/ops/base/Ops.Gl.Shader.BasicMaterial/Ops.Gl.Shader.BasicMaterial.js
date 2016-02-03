@@ -29,10 +29,12 @@ this.doRender=function()
     shader.bindTextures();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
+
     self.trigger.trigger();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     cgl.setPreviousShader();
+
 };
 
 var srcVert=''

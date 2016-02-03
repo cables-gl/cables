@@ -6,6 +6,7 @@
         console.log(' no cgl!');
     }
 
+
     var cgl=this.patch.cgl;
     // if(cgl.aborted)return 0;
 
@@ -45,7 +46,6 @@
         }
 
         cgl.renderStart(cgl,identTranslate);
-
         trigger.trigger();
 
         if(CGL.Texture.previewTexture)
