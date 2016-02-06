@@ -64,7 +64,7 @@ var doRender=function()
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec3 norm;'
+    // .endl()+'varying vec3 norm;'
     .endl()+'varying vec2 texCoord;'
     .endl()+'uniform vec4 colA;'
     .endl()+'uniform vec4 colB;'

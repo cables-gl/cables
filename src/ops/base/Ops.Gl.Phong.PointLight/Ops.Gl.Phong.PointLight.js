@@ -92,7 +92,7 @@ exe.onTriggered=function()
 r.set(1);
 g.set(1);
 b.set(1);
-attenuation.set(1);
+attenuation.set(0);
 
 r.onValueChanged=updateColor;
 g.onValueChanged=updateColor;
