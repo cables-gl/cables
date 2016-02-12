@@ -31,7 +31,7 @@ function bufferData()
     var points=[];
     var segments=4;
     var i=0,degInRad=0;
-    var radius=0.05;
+    var radius=13.05;
 
     for (i=0; i <= Math.round(segments); i++)
     {

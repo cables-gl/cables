@@ -16,11 +16,11 @@ var enableDepth=this.addInPort(new Port(this,"enable depth testing",OP_PORT_TYPE
 enableDepth.set(false);
 
 var w=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE,{ display:'range' }));
+w.onValueChanged=function(){ uniformWidth.setValue(w.get()); };
 
-w.onValueChanged=function()
-{
-    uniformWidth.setValue(w.get());
-};
+var opacity=this.addInPort(new Port(this,"opacity",OP_PORT_TYPE_VALUE,{ display:'range' }));
+opacity.set(1.0);
+opacity.onValueChanged=function(){ uniformOpacity.setValue(opacity.get()); };
 
 
 if(!cgl.gl.getExtension('OES_standard_derivatives') ) console.error('no oes standart dericatives');
@@ -44,6 +44,7 @@ var srcVert=''
     .endl()+'precision highp float;'
     .endl()+'varying vec3 baycentric;'
     .endl()+'uniform float width;'
+    .endl()+'uniform float opacity;'
 
     
     .endl()+'float edgeFactor(){'
@@ -56,7 +57,7 @@ var srcVert=''
     .endl()+'void main()'
     .endl()+'{'
 
-    .endl()+'   gl_FragColor = vec4(1.0, 1.0, 1.0, (1.0-edgeFactor())*0.95);'
+    .endl()+'   gl_FragColor = vec4(1.0, 1.0, 1.0, opacity*(1.0-edgeFactor())*0.95);'
 
     .endl()+'}';
     
@@ -73,6 +74,7 @@ var doRender=function()
 
 var shader=new CGL.Shader(cgl,'Wireframe Material');
 var uniformWidth=new CGL.Uniform(shader,'f','width',w.get());
+var uniformOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 shader.setSource(srcVert,srcFrag);
 this.onLoaded=shader.compile;
 

@@ -21,9 +21,27 @@ function render()
 
 this.exe.onTriggered=render;
 
+function dataHasAnimation(data,name)
+{
+    if(!data.hasOwnProperty('animations')) return false;
+    
+    for(var iChannels in data.animations[0].channels)
+    {
+        if(data.animations[0].channels[iChannels].name==name)
+        {
+            console.log('anim found for '+name);
+            // console.log( data.animations.channels[iChannels] );
+            return true;
+        }
+        
+    }
+    return false;
+
+}
+
 var maxx=-3;
 var row=0;
-function addChild(x,y,parentOp,parentPort,ch)
+function addChild(data,x,y,parentOp,parentPort,ch)
 {
     if(ch.hasOwnProperty('transformation'))
     {
@@ -40,12 +58,14 @@ function addChild(x,y,parentOp,parentPort,ch)
 
         if(ch.name)
         {
-            transOp.uiAttribs.title=transOp.name=ch.name;
+            transOp.uiAttribs.title=transOp.name=ch.name+' transform';
         }
 
         if(ch.children)console.log('ch ',ch.name,ch.children.length);
 
         self.patch.link(parentOp,parentPort,transOp,'render');
+
+        dataHasAnimation(data,ch.name);
 
         var i=0;
         if(ch.hasOwnProperty('meshes'))
@@ -55,14 +75,36 @@ function addChild(x,y,parentOp,parentPort,ch)
                 console.log('   meshes...'+i);
                 var index=ch.meshes[i];
 
-                var meshOp=self.patch.addOp('Ops.Json3d.Mesh',{translate:{x:posx,y:posy+50}});
+                var posyAdd=0;
+    
+                var prevOp=transOp;
+                if(data.meshes[index].materialindex)
+                {
+                    var matIndex=data.meshes[index].materialindex;
+                    var jsonMat=data.materials[matIndex];
+                    for(var j in jsonMat.properties)
+                    {
+                        if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
+                        {
+                            posyAdd+=50;
+                            var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{translate:{x:posx,y:posy+posyAdd}});
+                            matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
+                            matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
+                            matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
+                            matOp.uiAttribs.title=matOp.name=transOp.name+' Material';
+                    
+                            self.patch.link(prevOp,'trigger',matOp,'render');
+                            prevOp=matOp;
+                        }
+                    }
+                }
+
+                posyAdd+=50;
+                var meshOp=self.patch.addOp('Ops.Json3d.Mesh',{translate:{x:posx,y:posy+posyAdd}});
                 meshOp.index.val=index;
-
-
                 meshOp.uiAttribs.title=meshOp.name=transOp.name+' Mesh';
-                // scene.meshes[index].name=meshOp.name;
 
-                self.patch.link(transOp,'trigger',meshOp,'render');
+                self.patch.link(prevOp,'trigger',meshOp,'render');
             }
         }
 
@@ -74,7 +116,7 @@ function addChild(x,y,parentOp,parentPort,ch)
                 console.log('   child...');
                 var xx=maxx;
                 if(ch.children.length>1)xx++;
-                addChild(xx,y,transOp,'trigger',ch.children[i]);
+                addChild(data,xx,y,transOp,'trigger',ch.children[i]);
             }
         }
     }
@@ -101,6 +143,10 @@ var reload=function()
             var data=JSON.parse(_data);
             scene.setValue(data);
 
+            if(data.hasOwnProperty('animations'))
+            {
+                console.log("has "+data.animations.length+" animations!"+data.animations[0].name+" - "+data.animations[0].duration);
+            }
 
             if(!self.trigger.isLinked())
             {
@@ -109,7 +155,7 @@ var reload=function()
 
                 for(var i=0;i<data.rootnode.children.length;i++)
                 {
-                    addChild(maxx-2,3,root,'trigger 0',data.rootnode.children[i]);
+                    addChild(data,maxx-2,3,root,'trigger 0',data.rootnode.children[i]);
                 }
             }
 
