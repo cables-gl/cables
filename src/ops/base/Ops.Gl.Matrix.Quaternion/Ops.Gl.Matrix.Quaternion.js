@@ -1,6 +1,6 @@
 
 var cgl=this.patch.cgl;
-
+var patch=this.patch;
 this.name='quaternion';
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -14,15 +14,59 @@ y.set(0.0);
 z.set(0.0);
 w.set(0.0);
 
-var q=quat.create();
+var q1=quat.create();
+var q2=quat.create();
 var qMat=mat4.create();
 
 render.onTriggered=function()
 {
-    quat.set(q, x.get(),y.get(),z.get(),w.get());
+    if(x.isAnimated())
+    {
+        var time=patch.timer.getTime();
+
+        var i1=x.anim.getKeyIndex(time);
+        var i2=parseInt(x.anim.getKeyIndex(time))+1;
+        if(i2>=x.anim.keys.length)i2=x.anim.keys.length-1;
+        
+        if(i1==i2)
+        {
+            quat.set(q1,
+                x.anim.keys[i1].value,
+                y.anim.keys[i1].value,
+                z.anim.keys[i1].value,
+                w.anim.keys[i1].value
+            );
+        }
+        else
+        {
+            var key1Time=x.anim.keys[i1].time;
+            var key2Time=x.anim.keys[i2].time;
+            var perc=(time-key1Time)/(key2Time-key1Time);
+
+            quat.set(q1,
+                x.anim.keys[i1].value,
+                y.anim.keys[i1].value,
+                z.anim.keys[i1].value,
+                w.anim.keys[i1].value
+            );
+            
+            quat.set(q2, 
+                x.anim.getNextKey(time).value,
+                y.anim.getNextKey(time).value,
+                z.anim.getNextKey(time).value,
+                w.anim.getNextKey(time).value
+            );
+    
+            quat.slerp(q1, q1, q2, perc);
+        }
+    }
+    else
+    {
+        quat.set(q1, x.get(),y.get(),z.get(),w.get());
+    }
     cgl.pushMvMatrix();
 
-    mat4.fromQuat(qMat, q);
+    mat4.fromQuat(qMat, q1);
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
 
     trigger.trigger();

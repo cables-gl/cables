@@ -106,14 +106,36 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                                 
                                 for(var k in an.positionkeys)
                                 {
-                                    console.log('time:',an.positionkeys[k][0])
-                                    console.log('val:',an.positionkeys[k][1])
-                                    
                                     anTransOp.getPort('posX').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
                                     anTransOp.getPort('posY').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
                                     anTransOp.getPort('posZ').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
                                 }
                             }
+                            if(an.rotationkeys && an.rotationkeys.length>0)
+                            {
+                                posyAdd+=50;
+                                var anRotOp=self.patch.addOp('Ops.Gl.Matrix.Quaternion',{translate:{x:posx,y:posy+posyAdd}});
+                                anRotOp.uiAttribs.title=anRotOp.name=ch.name+' quat rot anim';
+                                self.patch.link(prevOp,'trigger',anRotOp,'render');
+                                prevOp=anRotOp;
+                
+                                anRotOp.getPort('x').setAnimated(true);
+                                anRotOp.getPort('y').setAnimated(true);
+                                anRotOp.getPort('z').setAnimated(true);
+                                anRotOp.getPort('w').setAnimated(true);
+                                
+                                for(var k in an.rotationkeys)
+                                {
+                                    console.log('time:',an.rotationkeys[k][0]);
+                                    console.log('val:',an.rotationkeys[k][1]);
+                                    
+                                    anRotOp.getPort('w').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
+                                    anRotOp.getPort('x').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][1] );
+                                    anRotOp.getPort('z').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][2] );
+                                    anRotOp.getPort('y').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][3] );
+                                }
+                            }
+
                         }
                     }
                 }        
