@@ -13,7 +13,7 @@ this.render.onTriggered=function()
 {
     cgl.pushMvMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,self.matrix.get());
-    p.render(cgl);
+    // p.render(cgl);
     self.trigger.trigger();
     cgl.popMvMatrix();
 };

@@ -9,19 +9,28 @@ cgl.frameStore.currentScene=null;
 
 this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 this.filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+
+// var saveChilds=this.addInPort(new Port(this,"save childs",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+// saveChilds.onValueChanged=function()
+// {
+// trigger.ignoreValueSerialize=!saveChilds.get();
+// }
+// saveChilds.set(true);
+
+
 
 function render()
 {
     var oldScene=cgl.frameStore.currentScene;
     cgl.frameStore.currentScene=scene;
-    self.trigger.trigger();
+    trigger.trigger();
     cgl.frameStore.currentScene=oldScene;
 }
 
 this.exe.onTriggered=render;
 
-function dataHasAnimation(data,name)
+function dataGetAnimation(data,name)
 {
     if(!data.hasOwnProperty('animations')) return false;
     
@@ -31,7 +40,7 @@ function dataHasAnimation(data,name)
         {
             console.log('anim found for '+name);
             // console.log( data.animations.channels[iChannels] );
-            return true;
+            return data.animations[0].channels[iChannels];
         }
         
     }
@@ -65,44 +74,81 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
         self.patch.link(parentOp,parentPort,transOp,'render');
 
-        dataHasAnimation(data,ch.name);
 
         var i=0;
         if(ch.hasOwnProperty('meshes'))
         {
             for(i=0;i<ch.meshes.length;i++)
             {
-                console.log('   meshes...'+i);
                 var index=ch.meshes[i];
-
                 var posyAdd=0;
-    
                 var prevOp=transOp;
-                if(data.meshes[index].materialindex)
+                
                 {
-                    var matIndex=data.meshes[index].materialindex;
-                    var jsonMat=data.materials[matIndex];
-                    for(var j in jsonMat.properties)
-                    {
-                        if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
-                        {
-                            posyAdd+=50;
-                            var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{translate:{x:posx,y:posy+posyAdd}});
-                            matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
-                            matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
-                            matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
-                            matOp.uiAttribs.title=matOp.name=transOp.name+' Material';
+                    // animation
                     
-                            self.patch.link(prevOp,'trigger',matOp,'render');
-                            prevOp=matOp;
+                    if(data.hasOwnProperty('animations'))
+                    {
+                        var an=dataGetAnimation(data,ch.name);
+                        if(an)
+                        {
+                            if(an.positionkeys && an.positionkeys.length>0)
+                            {
+                                posyAdd+=50;
+                                var anTransOp=self.patch.addOp('Ops.Gl.Matrix.Transform.v2',{translate:{x:posx,y:posy+posyAdd}});
+                                anTransOp.uiAttribs.title=anTransOp.name=ch.name+' trans anim';
+                                self.patch.link(prevOp,'trigger',anTransOp,'render');
+                                prevOp=anTransOp;
+                
+                                anTransOp.getPort('posX').setAnimated(true);
+                                anTransOp.getPort('posY').setAnimated(true);
+                                anTransOp.getPort('posZ').setAnimated(true);
+                                
+                                for(var k in an.positionkeys)
+                                {
+                                    console.log('time:',an.positionkeys[k][0])
+                                    console.log('val:',an.positionkeys[k][1])
+                                    
+                                    anTransOp.getPort('posX').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
+                                    anTransOp.getPort('posY').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
+                                    anTransOp.getPort('posZ').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
+                                }
+                            }
                         }
                     }
+                }        
+                
+                {
+                    // material
+                    if(data.meshes[index].hasOwnProperty('materialindex') &&
+                        data.hasOwnProperty('materials'))
+                    {
+                        var matIndex=data.meshes[index].materialindex;
+                        var jsonMat=data.materials[matIndex];
+                        for(var j in jsonMat.properties)
+                        {
+                            if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
+                            {
+                                posyAdd+=50;
+                                var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{translate:{x:posx,y:posy+posyAdd}});
+                                matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
+                                matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
+                                matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
+                                matOp.uiAttribs.title=matOp.name=ch.name+' Material';
+                        
+                                self.patch.link(prevOp,'trigger',matOp,'render');
+                                prevOp=matOp;
+                            }
+                        }
+                    }
+                    
                 }
 
+                // mesh
                 posyAdd+=50;
                 var meshOp=self.patch.addOp('Ops.Json3d.Mesh',{translate:{x:posx,y:posy+posyAdd}});
                 meshOp.index.val=index;
-                meshOp.uiAttribs.title=meshOp.name=transOp.name+' Mesh';
+                meshOp.uiAttribs.title=meshOp.name=ch.name+' Mesh';
 
                 self.patch.link(prevOp,'trigger',meshOp,'render');
             }
@@ -148,14 +194,16 @@ var reload=function()
                 console.log("has "+data.animations.length+" animations!"+data.animations[0].name+" - "+data.animations[0].duration);
             }
 
-            if(!self.trigger.isLinked())
+            if(!trigger.isLinked())
             {
                 var root=self.patch.addOp('Ops.Sequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
                 self.patch.link(self,'trigger',root,'exe');
 
                 for(var i=0;i<data.rootnode.children.length;i++)
                 {
-                    addChild(data,maxx-2,3,root,'trigger 0',data.rootnode.children[i]);
+                    var ntrigger=i;
+                    if(ntrigger>9)ntrigger=9;
+                    addChild(data,maxx-2,3,root,'trigger '+ntrigger,data.rootnode.children[i]);
                 }
             }
 
