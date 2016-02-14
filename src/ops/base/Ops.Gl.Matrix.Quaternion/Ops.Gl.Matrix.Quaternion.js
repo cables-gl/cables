@@ -16,6 +16,7 @@ w.set(0.0);
 
 var q1=quat.create();
 var q2=quat.create();
+var q=quat.create();
 var qMat=mat4.create();
 
 render.onTriggered=function()
@@ -28,9 +29,11 @@ render.onTriggered=function()
         var i2=parseInt(x.anim.getKeyIndex(time))+1;
         if(i2>=x.anim.keys.length)i2=x.anim.keys.length-1;
         
+        // console.log(i1,i2);
+        
         if(i1==i2)
         {
-            quat.set(q1,
+            quat.set(q,
                 x.anim.keys[i1].value,
                 y.anim.keys[i1].value,
                 z.anim.keys[i1].value,
@@ -51,22 +54,27 @@ render.onTriggered=function()
             );
             
             quat.set(q2, 
-                x.anim.getNextKey(time).value,
-                y.anim.getNextKey(time).value,
-                z.anim.getNextKey(time).value,
-                w.anim.getNextKey(time).value
+                x.anim.keys[i2].value,
+                y.anim.keys[i2].value,
+                z.anim.keys[i2].value,
+                w.anim.keys[i2].value
             );
     
-            quat.slerp(q1, q1, q2, perc);
+// quat.normalize(q1,q1);
+// quat.normalize(q2,q2);
+
+            quat.slerp(q, q1, q2, perc);
+            // console.log(perc);
+            
         }
     }
     else
     {
-        quat.set(q1, x.get(),y.get(),z.get(),w.get());
+        quat.set(q, x.get(),y.get(),z.get(),w.get());
     }
     cgl.pushMvMatrix();
 
-    mat4.fromQuat(qMat, q1);
+    mat4.fromQuat(qMat, q);
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
 
     trigger.trigger();

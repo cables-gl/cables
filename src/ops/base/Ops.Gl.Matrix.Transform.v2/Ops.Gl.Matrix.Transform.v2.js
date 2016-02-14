@@ -26,8 +26,11 @@
     var scaleChanged=true;
     var rotChanged=true;
 
+var self=this;
+
     render.onTriggered=function()
     {
+        self.updateAnims();
         var updateMatrix=false;
         if(translationChanged)
         {
