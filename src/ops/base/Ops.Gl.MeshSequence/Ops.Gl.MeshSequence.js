@@ -1,52 +1,47 @@
-CABLES.Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
 this.name='Mesh Sequence';
 
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION ));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-
-
-var index=this.addInPort(new Port(this,"index",OP_PORT_TYPE_VALUE));
+var frame=this.addInPort(new Port(this,"frame",OP_PORT_TYPE_VALUE ));
+frame.set(0);
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var mesh=null;
-var currentIndex=-1;
+var data=null;
+var geom=null;
 
 function doRender()
 {
     if(mesh!==null) mesh.render(cgl.getShader());
-
     trigger.trigger();
 }
 
-var data=null;
-
 function updateGeom(step)
 {
-    currentIndex=step;
+    // todo: in mesh: just update the needed data.
+
     var jsonMesh=data.meshes[step];
     geom.vertices=jsonMesh.vertices;
     geom.vertexNormals=jsonMesh.normals;
     geom.tangents=jsonMesh.tangents;
     geom.biTangents=jsonMesh.bitangents;
-     if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
-    geom.verticesIndices=[];
-
-    geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 }
 
-index.onValueChanged=function()
+function updateFrame()
 {
-    var n=Math.floor(index.get());
-    if(n<0)n=0;
-    if(n>=data.meshes.length)n=data.meshes.length-1;
-    updateGeom(n);
-    mesh.setGeom(geom);
-};
-
-var geom=null;
+    if(mesh)
+    {
+        var n=Math.floor(frame.get());
+    
+        if(n<0)n=0;
+        if(n>=data.meshes.length)n=n%(data.meshes.length);
+        updateGeom(n);
+        mesh.setGeom(geom);
+    }
+}
 
 function reload()
 {
@@ -64,35 +59,29 @@ function reload()
                 self.patch.loading.finished(loadingId);
                 return;
             }
+
             data=JSON.parse(_data);
 
-
             geom=new CGL.Geometry();
-
-    
-    
-            updateGeom(5);
-    
-            var nfo='';
-            nfo += geom.verticesIndices.length+' faces <br/>';
-            nfo += geom.vertices.length+' vertices <br/>';
-            nfo += geom.texCoords.length+' texturecoords <br/>';
-            nfo += geom.vertexNormals.length+' normals <br/>';
-            self.uiAttr({info:nfo});
-    
-            mesh=new CGL.Mesh(cgl,geom);
-
-
-            console.log('data.meshes',data.meshes.length);
+            updateGeom( 0 );
             
-            self.uiAttribs.info='num meshes: '+data.meshes.length;
+            
+            var jsonMesh=data.meshes[0];
+            if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
+            geom.verticesIndices=[];
+            geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 
+            mesh=new CGL.Mesh(cgl,geom);
+            if(frame.get()!==0)updateGeom( Math.floor(frame.get()) );
+
+            self.uiAttribs.info='num frames: '+data.meshes.length;
             self.patch.loading.finished(loadingId);
 
         });
-
 }
 
 
-filename.onValueChanged=reload;
+frame.onValueChange(updateFrame);
+filename.onValueChange(reload);
 render.onTriggered=doRender;
+
