@@ -16,6 +16,9 @@ this.radius.set(1);
 
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+
+
 var mesh=null;
 var geom=null;
 
@@ -179,6 +182,7 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
     geom.verticesIndices[idx  ] = nVert-1;                  /* repeat first slice's idx for closing off shape */
     geom.verticesIndices[idx+1] = offset;
 
+    geomOut.set(geom);
 
     mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
 }

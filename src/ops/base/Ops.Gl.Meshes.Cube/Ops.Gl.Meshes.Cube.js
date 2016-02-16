@@ -169,6 +169,7 @@ function buildMesh()
 width.onValueChanged=buildMesh;
 height.onValueChanged=buildMesh;
 lengt.onValueChanged=buildMesh;
+center.onValueChanged=buildMesh;
 buildMesh();
 
 
