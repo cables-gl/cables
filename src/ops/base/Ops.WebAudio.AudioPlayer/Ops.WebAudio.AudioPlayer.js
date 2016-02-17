@@ -1,4 +1,6 @@
     var self = this;
+var cgl=this.patch.cgl;
+
     Op.apply(this, arguments);
     this.name='AudioPlayer';
 
@@ -101,7 +103,8 @@
         // if(self.file.val==loadingFilename)return;
         loadingFilename=self.file.val;
 
-        var loadingId=cgl.loading.start('audioplayer',self.file.get());
+        var loadingId=cgl.patch.loading.start('audioplayer',self.file.get());
+    // var loadingId=cgl.patch.loading.start('texture',url);
 
         if(window.gui)
         {
@@ -110,7 +113,7 @@
 
             var canplaythrough=function()
             {
-                cgl.loading.finished(loadingId);
+                cgl.patch.loading.finished(loadingId);
                 self.audio.removeEventListener('canplaythrough',canplaythrough, false);
             };
 
@@ -142,7 +145,7 @@
                     self.audioOut.val = self.filter;
 
                     // CGL.decrementLoadingAssets();
-                    cgl.loading.finished(loadingId);
+                    cgl.patch.loading.finished(loadingId);
                 } );
 
             };
