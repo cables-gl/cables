@@ -11,6 +11,24 @@ this.extrude=this.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 
 this.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(self.extrude.val); };
 
+var meth=this.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
+    values:['mul xyz','add z','sub z']}));
+var updateMethod=function()
+{
+    if(shader)
+    {
+    shader.removeDefine('DISPLACE_METH_MULXYZ');
+    shader.removeDefine('DISPLACE_METH_ADDZ');
+
+    if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
+    if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
+    console.log('hallo',meth.get());
+        
+    }
+};
+meth.onValueChange(updateMethod);
+meth.set('mul xyz');
+
 var shader=null;
 var uniExtrude,uniTexture;
 
@@ -20,28 +38,18 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, texCoord ).b+1.0;'
-    // .endl()+'pos.y+={{mod}}_texVal * {{mod}}_extrude;'
-    .endl()+'pos.xyz*={{mod}}_texVal * {{mod}}_extrude;'
+    .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, texCoord ).b;'
 
-    // .endl()+'norm=normalize(norm+normalize(pos.xyz));'
-
-
-    // .endl()+'vec3 tangent;'
-    // .endl()+'vec3 binormal;'
-    // .endl()+'vec3 c1 = cross(norm, vec3(0.0, 0.0, 1.0));'
-    // .endl()+'vec3 c2 = cross(norm, vec3(0.0, 1.0, 0.0));'
-    // .endl()+'if(length(c1)>length(c2)) tangent = c1;'
-    // .endl()+'    else tangent = c2;'
-    // .endl()+'tangent = normalize(tangent);'
-    // .endl()+'binormal = cross(norm, tangent);'
-    // .endl()+'binormal = normalize(binormal);'
-    // .endl()+'vec3 normpos = normalize(pos.xyz);'
-
-    // .endl()+'norm=normalize(tangent*normpos.x + binormal*normpos.y + norm*normpos.z);'
+    .endl()+'#ifdef DISPLACE_METH_MULXYZ'
+    .endl()+'   {{mod}}_texVal+=1.0;'
+    .endl()+'   pos.xyz*={{mod}}_texVal * {{mod}}_extrude;'
+    .endl()+'#endif'
+    
+    .endl()+'#ifdef DISPLACE_METH_ADDZ'
+    .endl()+'       pos.z += ( {{mod}}_texVal * {{mod}}_extrude);'
+    .endl()+'#endif'
 
 
-    // .endl()+'norm.y+={{mod}}_texVal * {{mod}}_extrude;'
     .endl();
 
 
@@ -74,8 +82,6 @@ this.render.onTriggered=function()
 
         shader=cgl.getShader();
 
-
-
         module=shader.addModule(
             {
                 name:'MODULE_VERTEX_POSITION',
@@ -83,6 +89,8 @@ this.render.onTriggered=function()
                 srcBodyVert:srcBodyVert
             });
 
+        updateMethod();
+        
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
         uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',self.extrude.val);
 

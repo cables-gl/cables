@@ -266,14 +266,14 @@ diffuseRepeatY.set(1);
 diffuseRepeatX.onValueChanged=function()
 {
     diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
-    if(diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
+    if(diffuseRepeatY.get()!=1.0 || diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
         else shader.removeDefine('TEXTURE_REPEAT');
 };
 
 diffuseRepeatY.onValueChanged=function()
 {
     diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
-    if(diffuseRepeatY.get()!=1.0) shader.define('TEXTURE_REPEAT');
+    if(diffuseRepeatY.get()!=1.0 || diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
         else shader.removeDefine('TEXTURE_REPEAT');
 };
 
