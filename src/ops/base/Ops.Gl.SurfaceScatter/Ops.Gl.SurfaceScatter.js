@@ -38,6 +38,8 @@ geometry.onValueChanged=initRandom;
 num.onValueChanged=initRandom;
 
 
+// http://gamedev.stackexchange.com/questions/22204/from-normal-to-rotation-matrix
+
 this.render.onTriggered=function()
 {
     if(geometry.get())
