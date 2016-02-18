@@ -8,12 +8,23 @@
 
     var reload=function()
     {
-        ajaxRequest(self.patch.getFilePath(self.filename.val),function(data)
+
+    CABLES.ajax(
+        self.patch.getFilePath(self.filename.val),
+        function(err,_data,xhr)
         {
+            var data=JSON.parse(_data);
             self.result.val=data;
             console.log('data',data);
 
         });
+        
+        // ajaxRequest(self.patch.getFilePath(self.filename.val),function(data)
+        // {
+        //     self.result.val=data;
+        //     console.log('data',data);
+
+        // });
     };
 
     this.filename.onValueChanged=reload;

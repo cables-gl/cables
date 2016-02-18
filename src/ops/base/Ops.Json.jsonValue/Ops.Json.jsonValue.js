@@ -4,7 +4,7 @@
     this.name='jsonValue';
 
     this.data=this.addInPort(new Port(this,"data",OP_PORT_TYPE_OBJECT ));
-    this.key=this.addInPort(new Port(this,"key"));
+    this.key=this.addInPort(new Port(this,"key",OP_PORT_TYPE_OBJECT,{display:'string'}));
     this.result=this.addOutPort(new Port(this,"result"));
 
     this.data.onValueChanged=function()
