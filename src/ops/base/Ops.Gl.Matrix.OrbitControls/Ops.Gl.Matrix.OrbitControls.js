@@ -1,4 +1,4 @@
-this.name="orbital camera";
+this.name="orbital controls";
 var cgl=this.patch.cgl;
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -6,18 +6,23 @@ var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var eye=vec3.create();
 var vUp=vec3.create();
 var vCenter=vec3.create();
+var transMatrix=mat4.create();
+
+var mouseDown=false;
+var radius=5;
+var lastMouseX=0,lastMouseY=0;
+var percX=0,percY=0;
+
+
 vec3.set(vCenter, 0,0,0);
 vec3.set(vUp, 0,1,0);
 
-
-var transMatrix=mat4.create();
 
 render.onTriggered=function()
 {
     cgl.pushMvMatrix();
 
     mat4.lookAt(transMatrix, eye, vCenter, vUp);
-
     mat4.rotate(transMatrix, transMatrix, percX, vUp);
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
@@ -25,8 +30,6 @@ render.onTriggered=function()
     cgl.popMvMatrix();
 };
 
-var mouseDown=false;
-var radius=5;
 
 function circlePos(perc)
 {
@@ -40,8 +43,6 @@ function circlePos(perc)
     return vec;
 }
 
-var lastMouseX=0,lastMouseY=0;
-var percX=0,percY=0;
 var onmousemove = function(e)
 {
     if(!mouseDown) return;
@@ -62,10 +63,8 @@ var onmousemove = function(e)
         if(percY>0.5)percY=0.5;
         if(percY<-0.5)percY=-0.5;
         eye=circlePos(percY);
-        
     }
-    
-    
+
     lastMouseX=x;
     lastMouseY=y;
 };
@@ -74,14 +73,12 @@ function onMouseDown(e)
 {
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
-
     mouseDown=true;
 }
 function onMouseUp()
 {
     mouseDown=false;
 }
-
 
 cgl.canvas.addEventListener('mousemove', onmousemove);
 cgl.canvas.addEventListener('mousedown', onMouseDown);
@@ -99,3 +96,5 @@ this.onDelete=function()
     cgl.canvas.removeEventListener('mouseenter', onMouseUp);
 
 };
+
+eye=circlePos(0);
