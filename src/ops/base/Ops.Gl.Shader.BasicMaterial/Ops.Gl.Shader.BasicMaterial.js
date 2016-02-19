@@ -63,8 +63,14 @@ var srcVert=''
     .endl()+'        #endif'
     .endl()+'   #endif'
     // .endl()+'   norm=attrVertNormal;'
+    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
 
     .endl()+'{{MODULE_VERTEX_POSITION}}'
+
+
+
+
+
 
     .endl()+'#ifdef BILLBOARD'
     .endl()+'   vec3 position=vPosition;'
@@ -80,10 +86,10 @@ var srcVert=''
     .endl()+"           mvMatrix[2][1]) ), 1.0);"
     .endl()+'#endif '
 
-    .endl()+"gl_PointSize=12.0;"
 
     .endl()+"#ifndef BILLBOARD"
-    .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+    .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
+    // .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'#endif '
     .endl()+'}';
 
@@ -121,7 +127,14 @@ var srcFrag=''
     .endl()+'   vec4 col=vec4(r,g,b,a);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
-    .endl()+'           col=texture2D(tex,vec2(texCoords.x*1.0,(1.0-texCoords.y)*1.0));'
+
+    .endl()+'           #ifdef TEXTURED_POINTS'
+    .endl()+'               col=texture2D(tex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));'    .endl()+'      #endif'
+    .endl()+'           #ifndef TEXTURED_POINTS'
+    .endl()+'               col=texture2D(tex,vec2(texCoord.x,(1.0-texCoord.y)));'
+    .endl()+'           #endif'
+
+    // .endl()+'           col=texture2D(tex,vec2(texCoords.x*1.0,(1.0-texCoords.y)*1.0));'
     .endl()+'           #ifdef COLORIZE_TEXTURE'
     .endl()+'               col.r*=r;'
     .endl()+'               col.g*=g;'
@@ -281,6 +294,17 @@ var diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRep
 var diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY.get());
 
 var preMultipliedAlpha=this.addInPort(new Port(this,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+
+{
+    var texturedPoints=this.addInPort(new Port(this,"textured points",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    texturedPoints.onValueChanged=function()
+    {
+        if(texturedPoints.get()) shader.define('TEXTURED_POINTS');
+            else shader.removeDefine('TEXTURED_POINTS');
+
+    };
+    
+}
 
 
 this.doRender();

@@ -1,9 +1,9 @@
 
 this.name='multiply';
 
-var result=this.addOutPort(new Port(this,"result"));
 var number1=this.addInPort(new Port(this,"number1"));
 var number2=this.addInPort(new Port(this,"number2"));
+var result=this.addOutPort(new Port(this,"result"));
 
 var update= function()
 {

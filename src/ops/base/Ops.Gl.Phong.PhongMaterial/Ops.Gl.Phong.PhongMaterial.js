@@ -20,11 +20,14 @@ gammeCorrect.onValueChanged=updateGammeCorrect;
 
 var srcVert=''
     .endl()+'precision mediump float;'
+    .endl()+'{{MODULES_HEAD}}'
+
     .endl()+'attribute vec3 vPosition;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
     .endl()+'attribute vec3 attrVertNormal;'
     // .endl()+'attribute vec3 normaM;'
+
     .endl()+'attribute vec2 attrTexCoord;'
 
     .endl()+'varying mediump vec3 norm;'
@@ -48,8 +51,24 @@ var srcVert=''
     .endl()+'       texCoord=attrTexCoord;'
     .endl()+'   #endif'
 
-    .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+
+
+
+    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
+
+    .endl()+'    {{MODULE_VERTEX_POSITION}}'
+
+
+
+
+
+    .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
+
+
+
+    // .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'}';
+
 
 var srcFrag=''
     .endl()+'precision mediump float;'
@@ -93,7 +112,13 @@ var srcFrag=''
     .endl()+'   vec4 surfaceColor = vec4(r,g,b,a);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
-    .endl()+'          surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(1.0-texCoord.y)*diffuseRepeatY));'
+    
+    .endl()+'           #ifdef TEXTURED_POINTS'
+    .endl()+'               surfaceColor=texture2D(tex,vec2(gl_PointCoord.x*diffuseRepeatX,(1.0-gl_PointCoord.y)*diffuseRepeatY));'    .endl()+'      #endif'
+    .endl()+'           #ifndef TEXTURED_POINTS'
+    .endl()+'               surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(1.0-texCoord.y)*diffuseRepeatY));'
+    .endl()+'           #endif'
+    .endl()+'           surfaceColor.a*=a;'
     .endl()+'           #ifdef COLORIZE_TEXTURE'
     .endl()+'               surfaceColor.r*=r;'
     .endl()+'               surfaceColor.g*=g;'
@@ -152,6 +177,8 @@ var srcFrag=''
 
 
 var shader=new CGL.Shader(cgl,'PhongMaterial');
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
 shader.setSource(srcVert,srcFrag);
 
 {
@@ -190,6 +217,21 @@ shader.setSource(srcVert,srcFrag);
     b.set(Math.random());
     a.set(1.0);
 }
+
+
+
+{
+    var colorizeTex=this.addInPort(new Port(this,"colorize texture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    colorizeTex.onValueChanged=function()
+    {
+        if(colorizeTex.get()) shader.define('COLORIZE_TEXTURE');
+            else shader.removeDefine('COLORIZE_TEXTURE');
+
+    };
+    
+}
+
+
 {
     // diffuse texture
 
@@ -232,6 +274,18 @@ shader.setSource(srcVert,srcFrag);
     var diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX.get());
     var diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY.get());
 }
+
+{
+    var texturedPoints=this.addInPort(new Port(this,"textured points",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    texturedPoints.onValueChanged=function()
+    {
+        if(texturedPoints.get()) shader.define('TEXTURED_POINTS');
+            else shader.removeDefine('TEXTURED_POINTS');
+
+    };
+    
+}
+
 
 {
     //lights
