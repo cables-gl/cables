@@ -50,7 +50,7 @@ var onmousemove = function(e)
     var x = event.clientX;
     var y = event.clientY;
     
-    if(e.which==3)
+    if(e.which==3 || e.which==2)
     {
         radius+=(y-lastMouseY)*0.06;
         if(radius<0.5)radius=0.06;
@@ -67,10 +67,13 @@ var onmousemove = function(e)
 
     lastMouseX=x;
     lastMouseY=y;
+    
+
 };
 
 function onMouseDown(e)
 {
+    cgl.canvas.style.cursor='none';
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
     mouseDown=true;
@@ -79,13 +82,21 @@ function onMouseDown(e)
 function onMouseUp()
 {
     mouseDown=false;
+    cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
 }
+
+function onMouseEnter(e)
+{
+    cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
+}
+                
+
 
 cgl.canvas.addEventListener('mousemove', onmousemove);
 cgl.canvas.addEventListener('mousedown', onMouseDown);
 cgl.canvas.addEventListener('mouseup', onMouseUp);
 cgl.canvas.addEventListener('mouseleave', onMouseUp);
-cgl.canvas.addEventListener('mouseenter', onMouseUp);
+cgl.canvas.addEventListener('mouseenter', onMouseEnter);
 cgl.canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
 
 this.onDelete=function()
