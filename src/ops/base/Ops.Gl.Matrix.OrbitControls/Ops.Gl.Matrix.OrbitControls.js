@@ -58,8 +58,8 @@ var onmousemove = function(e)
     }
     else
     {
-        percX+=(x-lastMouseX)*0.006;
-        percY+=(y-lastMouseY)*0.006;
+        percX+=(x-lastMouseX)*0.0025;
+        percY+=(y-lastMouseY)*0.0025;
         if(percY>0.5)percY=0.5;
         if(percY<-0.5)percY=-0.5;
         eye=circlePos(percY);
@@ -75,6 +75,7 @@ function onMouseDown(e)
     lastMouseY = event.clientY;
     mouseDown=true;
 }
+
 function onMouseUp()
 {
     mouseDown=false;
@@ -85,6 +86,7 @@ cgl.canvas.addEventListener('mousedown', onMouseDown);
 cgl.canvas.addEventListener('mouseup', onMouseUp);
 cgl.canvas.addEventListener('mouseleave', onMouseUp);
 cgl.canvas.addEventListener('mouseenter', onMouseUp);
+cgl.canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
 
 this.onDelete=function()
 {
@@ -94,7 +96,9 @@ this.onDelete=function()
     cgl.canvas.removeEventListener('mouseup', onMouseUp);
     cgl.canvas.removeEventListener('mouseleave', onMouseUp);
     cgl.canvas.removeEventListener('mouseenter', onMouseUp);
-
 };
 
 eye=circlePos(0);
+
+
+
