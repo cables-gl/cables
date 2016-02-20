@@ -12,6 +12,8 @@ this.fxaa_span=this.addInPort(new Port(this,"span",OP_PORT_TYPE_VALUE,{display:'
 this.fxaa_reduceMin=this.addInPort(new Port(this,"reduceMin",OP_PORT_TYPE_VALUE));
 this.fxaa_reduceMul=this.addInPort(new Port(this,"reduceMul",OP_PORT_TYPE_VALUE));
 
+var useVPSize=this.addInPort(new Port(this,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+
 this.texWidth=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
 this.texHeight=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
 
@@ -123,12 +125,27 @@ var uHeight=new CGL.Uniform(shader,'f','height',0);
 
 function changeRes()
 {
-    uWidth.setValue(self.texWidth.val);
-    uHeight.setValue(self.texHeight.val);
+    if(useVPSize.get())
+    {
+        var w=cgl.getViewPort()[2];
+        var h=cgl.getViewPort()[3];
+        uWidth.setValue(w);
+        uHeight.setValue(h);
+        self.texWidth.set(w);
+        self.texHeight.set(h);
+
+    }
+    else
+    {
+        uWidth.setValue(self.texWidth.val);
+        uHeight.setValue(self.texHeight.val);
+    }
 }
 
 this.texWidth.onValueChanged=changeRes;
 this.texHeight.onValueChanged=changeRes;
+useVPSize.onValueChanged=changeRes;
+this.onResize=changeRes;
 
 this.fxaa_span.val=8;
 this.texWidth.val=1920;
