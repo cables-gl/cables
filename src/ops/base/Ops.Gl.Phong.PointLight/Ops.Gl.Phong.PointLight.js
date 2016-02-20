@@ -8,13 +8,13 @@ var attachment=this.addOutPort(new Port(this,"attachment",OP_PORT_TYPE_FUNCTION)
 
 var attenuation=this.addInPort(new Port(this,"attenuation",OP_PORT_TYPE_VALUE));
 
-var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
-var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-var z=this.addInPort(new Port(this,"z",OP_PORT_TYPE_VALUE));
-
 var r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=this.addInPort(new Port(this,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=this.addInPort(new Port(this,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+
+var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
+var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
+var z=this.addInPort(new Port(this,"z",OP_PORT_TYPE_VALUE));
 
 var id=generateUUID();
 var lights=[];
@@ -92,7 +92,7 @@ exe.onTriggered=function()
 r.set(1);
 g.set(1);
 b.set(1);
-attenuation.set(1);
+attenuation.set(0);
 
 r.onValueChanged=updateColor;
 g.onValueChanged=updateColor;

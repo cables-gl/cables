@@ -4,7 +4,9 @@ this.name='scale';
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var scale=this.addInPort(new Port(this,"scale"));
+var scaleX=this.addInPort(new Port(this,"x"));
+var scaleY=this.addInPort(new Port(this,"y"));
+var scaleZ=this.addInPort(new Port(this,"z"));
 
 var vScale=vec3.create();
 var transMatrix = mat4.create();
@@ -20,12 +22,17 @@ render.onTriggered=function()
 
 var scaleChanged=function()
 {
-    doScale=false;
-    vec3.set(vScale, scale.get(),scale.get(),scale.get());
+    vec3.set(vScale, scaleX.get(),scaleY.get(),scaleZ.get());
     mat4.identity(transMatrix);
     mat4.scale(transMatrix,transMatrix, vScale);
 };
 
-scale.onValueChange(scaleChanged);
-scale.set(1.0);
+scaleX.set(1.0);
+scaleY.set(1.0);
+scaleZ.set(1.0);
+
+scaleX.onValueChange(scaleChanged);
+scaleY.onValueChange(scaleChanged);
+scaleZ.onValueChange(scaleChanged);
+
 scaleChanged();

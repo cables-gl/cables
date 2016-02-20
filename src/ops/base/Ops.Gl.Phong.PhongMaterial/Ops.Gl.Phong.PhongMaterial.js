@@ -13,18 +13,21 @@ var updateGammeCorrect=function()
 {
     if(gammeCorrect.get()) shader.define("DO_GAMME_CORRECT");
         else shader.removeDefine("DO_GAMME_CORRECT");
-    
+
 };
 gammeCorrect.onValueChanged=updateGammeCorrect;
 
 
 var srcVert=''
     .endl()+'precision mediump float;'
+    .endl()+'{{MODULES_HEAD}}'
+
     .endl()+'attribute vec3 vPosition;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
     .endl()+'attribute vec3 attrVertNormal;'
     // .endl()+'attribute vec3 normaM;'
+
     .endl()+'attribute vec2 attrTexCoord;'
 
     .endl()+'varying mediump vec3 norm;'
@@ -43,13 +46,29 @@ var srcVert=''
     .endl()+'   vert=vPosition;'
     // .endl()+'   modelm=mvMatrix;'
     // .endl()+'   normalm=normalMatrix;'
-    
+
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'       texCoord=attrTexCoord;'
     .endl()+'   #endif'
 
-    .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+
+
+
+    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
+
+    .endl()+'    {{MODULE_VERTEX_POSITION}}'
+
+
+
+
+
+    .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
+
+
+
+    // .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'}';
+
 
 var srcFrag=''
     .endl()+'precision mediump float;'
@@ -84,7 +103,7 @@ var srcFrag=''
     .endl()+'   vec3 pos;'
     .endl()+'   vec3 color;'
     .endl()+'   float intensity;'
-    
+
     .endl()+'} light;'
     .endl()+'uniform Light lights[2];'
 
@@ -93,7 +112,13 @@ var srcFrag=''
     .endl()+'   vec4 surfaceColor = vec4(r,g,b,a);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
-    .endl()+'          surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(1.0-texCoord.y)*diffuseRepeatY));'
+    
+    .endl()+'           #ifdef TEXTURED_POINTS'
+    .endl()+'               surfaceColor=texture2D(tex,vec2(gl_PointCoord.x*diffuseRepeatX,(1.0-gl_PointCoord.y)*diffuseRepeatY));'    .endl()+'      #endif'
+    .endl()+'           #ifndef TEXTURED_POINTS'
+    .endl()+'               surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(1.0-texCoord.y)*diffuseRepeatY));'
+    .endl()+'           #endif'
+    .endl()+'           surfaceColor.a*=a;'
     .endl()+'           #ifdef COLORIZE_TEXTURE'
     .endl()+'               surfaceColor.r*=r;'
     .endl()+'               surfaceColor.g*=g;'
@@ -108,10 +133,10 @@ var srcFrag=''
     .endl()+'       vec3 lightColor = lights[l].color;'
     .endl()+'       vec3 lightPosition = vec3(lights[l].pos.x,lights[l].pos.y,lights[l].pos.z);'
     .endl()+'       vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;'
-    
+
     //calculate the location of this fragment (pixel) in world coordinates
     .endl()+'       vec3 fragPosition = vec3(mvMatrix * vec4(vert, 1.0)).xyz;'
-    
+
     //calculate the vector from this pixels surface to the light source
     .endl()+'       vec3 surfaceToLight = lightPosition-fragPosition;'
 
@@ -119,7 +144,7 @@ var srcFrag=''
     .endl()+'       float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
     .endl()+'       brightness = clamp(brightness, 0.0, 1.0);'
 
-    // attenuation 
+    // attenuation
     .endl()+'       float distanceToLight = length(surfaceToLight);'
     .endl()+'       float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
     .endl()+'       brightness *= attenuation;'
@@ -137,7 +162,7 @@ var srcFrag=''
 
     .endl()+'       theColor+=(lightColor*brightness);'
     .endl()+'   }'
-    
+
     .endl()+'   vec3 finalColor = theColor * surfaceColor.rgb;'
 
     .endl()+'   #ifdef DO_GAMME_CORRECT'
@@ -149,50 +174,67 @@ var srcFrag=''
 
     .endl()+'   gl_FragColor = vec4(finalColor, surfaceColor.a);'
     .endl()+'}';
-    
+
 
 var shader=new CGL.Shader(cgl,'PhongMaterial');
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
 shader.setSource(srcVert,srcFrag);
 
 {
     // diffuse color
-    
+
     var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     r.onValueChanged=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
-    
+
     var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
     g.onValueChanged=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
-    
+
     var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.onValueChanged=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
     };
-    
+
     var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
     a.onValueChanged=function()
     {
         if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
         else a.uniform.setValue(a.get());
     };
-    
+
     r.set(Math.random());
     g.set(Math.random());
     b.set(Math.random());
     a.set(1.0);
 }
+
+
+
+{
+    var colorizeTex=this.addInPort(new Port(this,"colorize texture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    colorizeTex.onValueChanged=function()
+    {
+        if(colorizeTex.get()) shader.define('COLORIZE_TEXTURE');
+            else shader.removeDefine('COLORIZE_TEXTURE');
+
+    };
+    
+}
+
+
 {
     // diffuse texture
-    
+
     var diffuseTexture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var diffuseTextureUniform=null;
     shader.bindTextures=bindTextures;
@@ -218,67 +260,101 @@ shader.setSource(srcVert,srcFrag);
     var diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
     diffuseRepeatX.set(1);
     diffuseRepeatY.set(1);
-    
+
     diffuseRepeatX.onValueChanged=function()
     {
         diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
     };
-    
+
     diffuseRepeatY.onValueChanged=function()
     {
         diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
     };
-    
+
     var diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX.get());
     var diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY.get());
 }
 
 {
-    //lights
+    var texturedPoints=this.addInPort(new Port(this,"textured points",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    texturedPoints.onValueChanged=function()
+    {
+        if(texturedPoints.get()) shader.define('TEXTURED_POINTS');
+            else shader.removeDefine('TEXTURED_POINTS');
+
+    };
     
+}
+
+
+{
+    //lights
+
     var lights=[];
     var numLights=-1;
-    
+
     var updateLights=function()
     {
-        if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
+
+        var count=0;
+        var i=0;
+        var num=1;
+        if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
         {
-            var count=0;
-            var i=0;
-    
+            num=1;
+        }
+        else
+        {
             for(i in cgl.frameStore.phong.lights)
             {
+                num++;
+            }
+        }
+
+
+        if(num!=numLights)
+        {
+            count=0;
+            lights.length=0;
+            for(i=0;i<num;i++)
+            {
+                lights[count]={};
+                lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+                lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
+                lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
+
                 count++;
             }
-    
-            if(count!=numLights)
-            {
-                count=0;
-                lights.length=0;
-                for(i in cgl.frameStore.phong.lights)
-                {
-                    lights[count]={};
-                    lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
-                    lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
-                    lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
 
-                    count++;
-                }
-                numLights=count;
-                shader.define('NUM_LIGHTS',''+numLights);
-                
-            }
+            console.log("numLights",numLights);
 
+            numLights=count;
+            shader.define('NUM_LIGHTS',''+numLights);
+
+        }
+
+        if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+        {
+            numLights=1;
+            lights[0].pos.setValue([0,0,111]);
+            lights[0].color.setValue([1,1,1]);
+            lights[0].attenuation.setValue(0);
+
+        }
+        else
+        {
             count=0;
             for(i in cgl.frameStore.phong.lights)
             {
                 lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
                 lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
                 lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
-                
+
                 count++;
             }
+
         }
+
     }
 }
 

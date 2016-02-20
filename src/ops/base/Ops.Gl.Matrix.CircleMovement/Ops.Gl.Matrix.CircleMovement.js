@@ -10,6 +10,8 @@
     this.mulX=this.addInPort(new Port(this,"mulX"));
     this.mulY=this.addInPort(new Port(this,"mulY"));
     this.percent=this.addInPort(new Port(this,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
+    
+    var offset=this.addInPort(new Port(this,"offset"));
 
     this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
     this.index=this.addOutPort(new Port(this,"index"));
@@ -27,8 +29,8 @@ var startTime=Date.now()/1000;
 
         var time=Date.now()/1000-startTime+Math.round(self.segments.get())*0.1*self.percent.get();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, [
-            animX.getValue(time)*self.mulX.get(),
-            animY.getValue(time)*self.mulY.get(),
+            animX.getValue(time+offset.get())*self.mulX.get(),
+            animY.getValue(time+offset.get())*self.mulY.get(),
             0] );
         self.trigger.trigger();
         

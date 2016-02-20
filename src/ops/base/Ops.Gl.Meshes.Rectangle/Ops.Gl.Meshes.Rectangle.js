@@ -1,67 +1,123 @@
-    Op.apply(this, arguments);
-    var self=this;
-    var cgl=this.patch.cgl;
+var cgl=this.patch.cgl;
 
-    this.name='rectangle';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-    this.width=this.addInPort(new Port(this,"width"));
-    this.height=this.addInPort(new Port(this,"height"));
+this.name='rectangle';
+var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var width=this.addInPort(new Port(this,"width"));
+var height=this.addInPort(new Port(this,"height"));
+
+var pivotX=this.addInPort(new Port(this,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
+var pivotY=this.addInPort(new Port(this,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+
+var nColumns=this.addInPort(new Port(this,"num columns"));
+var nRows=this.addInPort(new Port(this,"num rows"));
+
+pivotX.set('center');
+pivotY.set('center');
+
+width.set(1.0);
+height.set(1.0);
+
+nRows.set(1);
+nColumns.set(1);
+
+var geom=new CGL.Geometry();
+var mesh=null;
+
+render.onTriggered=function()
+{
+    mesh.render(cgl.getShader());
+    trigger.trigger();
+};
+
+function rebuild()
+{
+    var x=0;
+    var y=0;
+    if(pivotX.get()=='center') x=0;
+    if(pivotX.get()=='right') x=-width.get()/2;
+    if(pivotX.get()=='left') x=+width.get()/2;
+
+    if(pivotY.get()=='center') y=0;
+    if(pivotY.get()=='top') y=-height.get()/2;
+    if(pivotY.get()=='bottom') y=+height.get()/2;
+
+    var verts=[];
+    var tc=[];
+    var indices=[];
+
+    var numRows=parseInt(nRows.get(),10);
+    var numColumns=parseInt(nColumns.get(),10);
     
-    this.pivotX=this.addInPort(new Port(this,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-    this.pivotX.val='center';
+    var stepColumn=width.get()/numColumns;
+    var stepRow=height.get()/numRows;
+    
+    var c,r;
 
-    this.pivotY=this.addInPort(new Port(this,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
-    this.pivotY.val='center';
-
-    this.width.val=1.0;
-    this.height.val=1.0;
-
-    this.render.onTriggered=function()
+    for(r=0;r<=numRows;r++)
     {
-        self.mesh.render(cgl.getShader());
-        self.trigger.trigger();
-    };
+        for(c=0;c<=numColumns;c++)
+        {
+            verts.push( c*stepColumn    - width.get()/2+x );
+            verts.push( r*stepRow       - height.get()/2+y );
+            verts.push( 0.0 );
 
-    var geom=new CGL.Geometry();
-    this.mesh=null;
-
-    function rebuild()
-    {
-        var x=0;
-        var y=0;
-        if(self.pivotX.get()=='center') x=0;
-        if(self.pivotX.get()=='right') x=-self.width.get()/2;
-        if(self.pivotX.get()=='left') x=+self.width.get()/2;
-
-        if(self.pivotY.get()=='center') y=0;
-        if(self.pivotY.get()=='top') y=-self.height.get()/2;
-        if(self.pivotY.get()=='bottom') y=+self.height.get()/2;
-
-        geom.vertices = [
-             self.width.get()/2+x,  self.height.get()/2+y,  0.0,
-            -self.width.get()/2+x,  self.height.get()/2+y,  0.0,
-             self.width.get()/2+x, -self.height.get()/2+y,  0.0,
-            -self.width.get()/2+x, -self.height.get()/2+y,  0.0
-        ];
-
-        geom.texCoords = [
-             1.0, 0.0,
-             0.0, 0.0,
-             1.0, 1.0,
-             0.0, 1.0
-        ];
-
-        geom.verticesIndices = [
-            0, 1, 2,
-            2, 1, 3
-        ];
-        if(!self.mesh) self.mesh=new CGL.Mesh(cgl,geom);
-        self.mesh.setGeom(geom);
+            tc.push( c/numColumns );
+            tc.push( 1.0-r/numRows );
+        }
     }
-    rebuild();
 
-    this.pivotX.onValueChanged=rebuild;
-    this.pivotY.onValueChanged=rebuild;
-    this.width.onValueChanged=rebuild;
-    this.height.onValueChanged=rebuild;
+    for(c=0;c<numColumns;c++)
+    {
+        for(r=0;r<numRows;r++)
+        {
+            var ind = c+(numColumns+1)*r;
+            var v1=ind;
+            var v2=ind+1;
+            var v3=ind+numColumns+1;
+            var v4=ind+1+numColumns+1;
+
+            indices.push(v1);
+            indices.push(v2);
+            indices.push(v3);
+
+            indices.push(v2);
+            indices.push(v3);
+            indices.push(v4);
+            // console.log(f3);
+        }
+    }
+
+    geom.vertices=verts;
+    geom.texCoords=tc;
+    geom.verticesIndices=indices;
+    // geom.vertices = [
+    //      width.get()/2+x,  height.get()/2+y,  0.0,
+    //     -width.get()/2+x,  height.get()/2+y,  0.0,
+    //      width.get()/2+x, -height.get()/2+y,  0.0,
+    //     -width.get()/2+x, -height.get()/2+y,  0.0
+    // ];
+
+    // geom.texCoords = [
+    //      1.0, 0.0,
+    //      0.0, 0.0,
+    //      1.0, 1.0,
+    //      0.0, 1.0
+    // ];
+
+    // geom.verticesIndices = [
+    //     0, 1, 2,
+    //     2, 1, 3
+    // ];
+
+    if(!mesh) mesh=new CGL.Mesh(cgl,geom);
+    mesh.setGeom(geom);
+}
+rebuild();
+
+pivotX.onValueChanged=rebuild;
+pivotY.onValueChanged=rebuild;
+width.onValueChanged=rebuild;
+height.onValueChanged=rebuild;
+nRows.onValueChanged=rebuild;
+nColumns.onValueChanged=rebuild;

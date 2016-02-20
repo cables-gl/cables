@@ -1,4 +1,3 @@
-CABLES.Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 
@@ -43,21 +42,35 @@ var srcVert=''
     .endl()+'attribute vec2 attrTexCoord;'
     // .endl()+'attribute vec3 attrVertNormal;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'    varying vec2 texCoord;'
+    .endl()+'    #ifdef TEXTURE_REPEAT'
+    .endl()+'        uniform float diffuseRepeatX;'
+    .endl()+'        uniform float diffuseRepeatY;'
+    .endl()+'    #endif'
     .endl()+'#endif'
     // .endl()+'varying vec3 norm;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
     // .endl()+'uniform mat4 normalMatrix;'
-
+    
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'       texCoord=attrTexCoord;'
+    .endl()+'    #ifdef HAS_TEXTURES'
+    .endl()+'        texCoord=attrTexCoord;'
+    .endl()+'        #ifdef TEXTURE_REPEAT'
+    .endl()+'            texCoord.s*=diffuseRepeatX;'
+    .endl()+'            texCoord.t*=diffuseRepeatY;'
+    .endl()+'        #endif'
     .endl()+'   #endif'
     // .endl()+'   norm=attrVertNormal;'
+    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
 
     .endl()+'{{MODULE_VERTEX_POSITION}}'
+
+
+
+
+
 
     .endl()+'#ifdef BILLBOARD'
     .endl()+'   vec3 position=vPosition;'
@@ -73,10 +86,10 @@ var srcVert=''
     .endl()+"           mvMatrix[2][1]) ), 1.0);"
     .endl()+'#endif '
 
-    .endl()+"gl_PointSize=12.0;"
 
     .endl()+"#ifndef BILLBOARD"
-    .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+    .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
+    // .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'#endif '
     .endl()+'}';
 
@@ -84,11 +97,10 @@ var srcFrag=''
 
     .endl()+'precision highp float;'
 
-    .endl()+'uniform float diffuseRepeatX;'
-    .endl()+'uniform float diffuseRepeatY;'
 
     .endl()+'{{MODULES_HEAD}}'
     .endl()+'#ifdef HAS_TEXTURES'
+
     .endl()+'   varying vec2 texCoord;'
     .endl()+'   #ifdef HAS_TEXTURE_DIFFUSE'
     .endl()+'       uniform sampler2D tex;'
@@ -115,7 +127,14 @@ var srcFrag=''
     .endl()+'   vec4 col=vec4(r,g,b,a);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
-    .endl()+'          col=texture2D(tex,vec2(texCoords.x*1.0,(1.0-texCoords.y)*1.0));'
+
+    .endl()+'           #ifdef TEXTURED_POINTS'
+    .endl()+'               col=texture2D(tex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));'    .endl()+'      #endif'
+    .endl()+'           #ifndef TEXTURED_POINTS'
+    .endl()+'               col=texture2D(tex,vec2(texCoord.x,(1.0-texCoord.y)));'
+    .endl()+'           #endif'
+
+    // .endl()+'           col=texture2D(tex,vec2(texCoords.x*1.0,(1.0-texCoords.y)*1.0));'
     .endl()+'           #ifdef COLORIZE_TEXTURE'
     .endl()+'               col.r*=r;'
     .endl()+'               col.g*=g;'
@@ -260,17 +279,32 @@ diffuseRepeatY.set(1);
 diffuseRepeatX.onValueChanged=function()
 {
     diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
+    if(diffuseRepeatY.get()!=1.0 || diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
+        else shader.removeDefine('TEXTURE_REPEAT');
 };
 
 diffuseRepeatY.onValueChanged=function()
 {
     diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
+    if(diffuseRepeatY.get()!=1.0 || diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
+        else shader.removeDefine('TEXTURE_REPEAT');
 };
 
 var diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX.get());
 var diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY.get());
 
 var preMultipliedAlpha=this.addInPort(new Port(this,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+
+{
+    var texturedPoints=this.addInPort(new Port(this,"textured points",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    texturedPoints.onValueChanged=function()
+    {
+        if(texturedPoints.get()) shader.define('TEXTURED_POINTS');
+            else shader.removeDefine('TEXTURED_POINTS');
+
+    };
+    
+}
 
 
 this.doRender();

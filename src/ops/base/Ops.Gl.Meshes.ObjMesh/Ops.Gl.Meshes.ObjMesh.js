@@ -21,11 +21,11 @@
 
     var reloadObj=function()
     {
-      var loadingId=cgl.loading.start('obj mesh',self.filename.get());
+      var loadingId=cgl.patch.loading.start('obj mesh',self.filename.get());
 
       if(self.filename.val===0)
       {
-        cgl.loading.finished(loadingId);
+        cgl.patch.loading.finished(loadingId);
         return;
       }
 
@@ -61,7 +61,7 @@
           self.mesh=new CGL.Mesh(cgl,r);
 
 
-          cgl.loading.finished(loadingId);
+          cgl.patch.loading.finished(loadingId);
 
       });
 

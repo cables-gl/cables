@@ -1,19 +1,18 @@
-Op.apply(this, arguments);
-var self=this;
 
 this.name='multiply';
-this.result=this.addOutPort(new Port(this,"result"));
-this.number1=this.addInPort(new Port(this,"number1"));
-this.number2=this.addInPort(new Port(this,"number2"));
 
-this.exec= function()
+var number1=this.addInPort(new Port(this,"number1"));
+var number2=this.addInPort(new Port(this,"number2"));
+var result=this.addOutPort(new Port(this,"result"));
+
+var update= function()
 {
-    self.updateAnims();
-    self.result.set(self.number1.get()*self.number2.get() );
+    this.updateAnims();
+    result.set( number1.get()*number2.get()*1 );
 };
 
-this.number1.onValueChanged=this.exec;
-this.number2.onValueChanged=this.exec;
+number1.onValueChange(update);
+number2.onValueChange(update);
 
-this.number1.set(1);
-this.number2.set(2);
+number1.set(1);
+number2.set(2);
