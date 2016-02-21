@@ -54,16 +54,16 @@ var srcFrag=''
     .endl()+'           LOG2);'
     
     
-    .endl()+'#ifdef FOG_IGNORE_INFINITY'
-    .endl()+'   if(z<0.001)'
-    .endl()+'   {'
-    .endl()+'   col=vec4(0.0,0.0,0.0,1.0);'
-    .endl()+'   }else'
-    .endl()+'#endif'
-    
-    .endl()+'   {'
-    .endl()+'       col=mix(colImg,vec4(r,g,b,1.0),fogFactor);'
-    .endl()+'   }'
+    .endl()+'       #ifdef FOG_IGNORE_INFINITY'
+    .endl()+'           if(z<0.001)'
+    .endl()+'           {'
+    .endl()+'               col=vec4(0.0,0.0,0.0,1.0);'
+    .endl()+'           }'
+    .endl()+'           else'
+    .endl()+'       #endif'
+    .endl()+'       {'
+    .endl()+'           col=mix(colImg,vec4(r,g,b,1.0),fogFactor);'
+    .endl()+'       }'
     .endl()+'   #endif'
 
     .endl()+'   gl_FragColor = col;'
@@ -75,7 +75,6 @@ var textureUniform=new CGL.Uniform(shader,'t','image',0);
 
 var uniFarplane=new CGL.Uniform(shader,'f','f',1.0);
 var uniNearplane=new CGL.Uniform(shader,'f','n',1.0);
-var uniDensity=new CGL.Uniform(shader,'f','density',1.0);
 
 this.farPlane.onValueChanged=function()
 {
@@ -89,6 +88,7 @@ this.nearPlane.onValueChanged=function()
 };
 self.nearPlane.val=0.1;
 
+var uniDensity=new CGL.Uniform(shader,'f','density',1.0);
 this.density.onValueChanged=function()
 {
     uniDensity.setValue(self.density.get());
@@ -96,40 +96,32 @@ this.density.onValueChanged=function()
 self.density.val=5.0;
 
 {
-    // diffuse color
+    // fog color
 
-    var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var r=this.addInPort(new Port(this,"fog r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     r.onValueChanged=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
 
-    var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var g=this.addInPort(new Port(this,"fog g",OP_PORT_TYPE_VALUE,{ display:'range' }));
     g.onValueChanged=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
 
-    var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=this.addInPort(new Port(this,"fog b",OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.onValueChanged=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
     };
 
-    var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    a.onValueChanged=function()
-    {
-        if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
-        else a.uniform.setValue(a.get());
-    };
-
     r.set(Math.random());
     g.set(Math.random());
     b.set(Math.random());
-    a.set(1.0);
 }
 
 
