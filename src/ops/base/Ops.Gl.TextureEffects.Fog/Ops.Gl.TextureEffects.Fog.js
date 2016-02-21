@@ -12,6 +12,14 @@ this.density=this.addInPort(new Port(this,"density",OP_PORT_TYPE_VALUE));
 this.image=this.addInPort(new Port(this,"depth texture",OP_PORT_TYPE_TEXTURE));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var ignoreInf=this.addInPort(new Port(this,"ignore infinity",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+ignoreInf.set(false);
+ignoreInf.onValueChanged=function()
+{
+    if(ignoreInf.get()) shader.define('FOG_IGNORE_INFINITY');
+        else shader.removeDefine('FOG_IGNORE_INFINITY');
+};
+
 var shader=new CGL.Shader(cgl);
 this.onLoaded=shader.compile;
 
@@ -39,14 +47,23 @@ var srcFrag=''
     .endl()+'       float z=1.0-col.r;'
     .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
 
-// .endl()+'float density =-3.81;'
-    .endl()+'float fogFactor = exp2( -density * '
-    .endl()+'density *'
-    .endl()+'z *'
-    .endl()+'z *'
-    .endl()+'LOG2);'
+    .endl()+'       float fogFactor = exp2( -density * '
+    .endl()+'           density *'
+    .endl()+'           z *'
+    .endl()+'           z *'
+    .endl()+'           LOG2);'
+    
+    
+    .endl()+'#ifdef FOG_IGNORE_INFINITY'
+    .endl()+'   if(z<0.001)'
+    .endl()+'   {'
+    .endl()+'   col=vec4(0.0,0.0,0.0,1.0);'
+    .endl()+'   }else'
+    .endl()+'#endif'
+    
+    .endl()+'   {'
     .endl()+'       col=mix(colImg,vec4(r,g,b,1.0),fogFactor);'
-
+    .endl()+'   }'
     .endl()+'   #endif'
 
     .endl()+'   gl_FragColor = col;'
@@ -77,7 +94,6 @@ this.density.onValueChanged=function()
     uniDensity.setValue(self.density.get());
 };
 self.density.val=5.0;
-
 
 {
     // diffuse color
