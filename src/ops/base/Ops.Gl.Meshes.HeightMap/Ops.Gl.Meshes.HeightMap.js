@@ -51,8 +51,8 @@ var reload=function()
         var vertStepX=meshWidth/width;
         var vertStepY=meshHeight/height;
 
-        var numRows=100;
-        var numColumns=100;
+        var numRows=60;
+        var numColumns=60;
         var rowStepX=width/numColumns;
         var rowStepY=height/numRows;
         var heightMul=0.001;

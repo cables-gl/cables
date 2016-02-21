@@ -60,14 +60,19 @@ var srcVert=''
     .endl()+'}'
     .endl()+'void main()'
     .endl()+'{'
+    .endl()+'vec4 col;'
+    
     .endl()+'   #ifdef WIREFRAME_FILL'
     .endl()+'       float v=opacity*(1.0-edgeFactor())*0.95;'
-    .endl()+'       gl_FragColor = vec4(v,v,v,opacity);'
+    .endl()+'       col = vec4(v*r,v*g,v*b,opacity);'
     .endl()+'#endif'
     .endl()+''
     .endl()+'#ifndef WIREFRAME_FILL'
-    .endl()+'       gl_FragColor = vec4(1.0, 1.0, 1.0, opacity*(1.0-edgeFactor())*0.95);'
+    .endl()+'       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
     .endl()+'#endif'
+    
+    .endl()+'gl_FragColor =col;'
+    
     .endl()+'}';
 
 var doRender=function()
@@ -86,6 +91,45 @@ var uniformOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 shader.setSource(srcVert,srcFrag);
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.wireframe=true;
+
+
+{
+    // diffuse color
+
+    var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    r.onValueChanged=function()
+    {
+        if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
+        else r.uniform.setValue(r.get());
+    };
+
+    var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    g.onValueChanged=function()
+    {
+        if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
+        else g.uniform.setValue(g.get());
+    };
+
+    var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    b.onValueChanged=function()
+    {
+        if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
+        else b.uniform.setValue(b.get());
+    };
+
+    var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    a.onValueChanged=function()
+    {
+        if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
+        else a.uniform.setValue(a.get());
+    };
+
+    r.set(Math.random());
+    g.set(Math.random());
+    b.set(Math.random());
+    a.set(1.0);
+}
+
 
 this.onLoaded=shader.compile;
 
