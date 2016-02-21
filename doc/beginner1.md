@@ -27,21 +27,21 @@ to draw a circle, we need two operators:
 - to create a new operator and connect automatically it to another op you can pull the blue output port on the left side with your mouse.
 - just drag it out of the operator and release your mouse button.
 
-![](/doc/create_op_pull.gif)
+![](/imgdoc/create_op_pull.gif)
 
 - the "select operator dialog" is showing again
 - enter ```circle```, now the entry ```ops.gl.meshes.circle``` should be selected, press ```[enter]``` to create it
 - now it should look like this:
 
-![](/doc/beginner1result.png)
+![](/imgdoc/beginner1result.png)
 
 ### 3. parameters
 
 - the renderer canvas (on the right side should show a circle now)
-- the parameter panel shows all parameters to tweak the circle. 
+- the parameter panel shows all parameters to tweak the circle.
 - play around with the parameters, for example drag the slider "innerradius"
 
-![](/doc/beginner1circle.png)
+![](/imgdoc/beginner1circle.png)
 
 
 

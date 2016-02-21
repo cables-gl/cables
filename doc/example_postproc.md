@@ -5,8 +5,8 @@ be sure to read both examples first:
 - [rendering to textures](/doc/example_r2t)
 - [composing images](/doc/example_imgcomp)
 
-![](/doc/example_postproc.jpg)
-![](/doc/example_postproc2.png)
+![](/imgdoc/example_postproc.jpg)
+![](/imgdoc/example_postproc2.png)
 
 ## step 1
 
@@ -14,7 +14,7 @@ be sure to read both examples first:
 
 resulting texture: (grey lines are transparent)
 
-![](/doc/example_postproc3.jpg)
+![](/imgdoc/example_postproc3.jpg)
 
 ## step 2
 
@@ -22,7 +22,7 @@ resulting texture: (grey lines are transparent)
 
 resulting texture:
 
-![](/doc/example_postproc4.jpg)
+![](/imgdoc/example_postproc4.jpg)
 
 ## step 3
 
@@ -35,7 +35,7 @@ resulting texture:
 
 resulting texture:
 
-![](/doc/example_postproc.jpg)
+![](/imgdoc/example_postproc.jpg)
 
 ## step 4
 

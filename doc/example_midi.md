@@ -1,7 +1,7 @@
 
 ## midi input
 
-![](/doc/example_midi.png)
+![](/imgdoc/example_midi.png)
 
 - op ```Ops.Devices.MidiInput``` listens to any midi input events
 
