@@ -25,9 +25,19 @@ function updateGeom(step)
 
     var jsonMesh=data.meshes[step];
     geom.vertices=jsonMesh.vertices;
-    geom.vertexNormals=jsonMesh.normals;
-    geom.tangents=jsonMesh.tangents;
-    geom.biTangents=jsonMesh.bitangents;
+    
+    geom.texCoords=[];
+    for(var i=0;i<geom.vertices/3;i++)
+    {
+        geom.texCoords.push(0);
+        geom.texCoords.push(0);
+    }
+    
+    if(geom.verticesIndices && geom.verticesIndices.length>0)
+    geom.calcNormals();
+    // geom.vertexNormals=jsonMesh.normals;
+    // geom.tangents=jsonMesh.tangents;
+    // geom.biTangents=jsonMesh.bitangents;
 }
 
 function updateFrame()
