@@ -51,15 +51,17 @@ this.calcTangents.onValueChanged=function()
         else shader.removeDefine('CALC_TANGENT');
 };
 
-this.projectCoords=this.addInPort(new Port(this,"projectCoords",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','xy','yz']}));
+this.projectCoords=this.addInPort(new Port(this,"projectCoords",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','xy','yz','xz']}));
 this.projectCoords.val='no';
 this.projectCoords.onValueChanged=function()
 {
     shader.removeDefine('DO_PROJECT_COORDS_XY');
     shader.removeDefine('DO_PROJECT_COORDS_YZ');
+    shader.removeDefine('DO_PROJECT_COORDS_XZ');
 
     if(self.projectCoords.val=='xy') shader.define('DO_PROJECT_COORDS_XY');
     if(self.projectCoords.val=='yz') shader.define('DO_PROJECT_COORDS_YZ');
+    if(self.projectCoords.val=='xz') shader.define('DO_PROJECT_COORDS_XZ');
 };
 
 this.normalRepeatX=this.addInPort(new Port(this,"normalRepeatX",OP_PORT_TYPE_VALUE));
@@ -277,6 +279,10 @@ var srcVert=''
 
     .endl()+'   #ifdef DO_PROJECT_COORDS_YZ'
     .endl()+'       texCoord=(projMatrix * mvMatrix*pos).yz*0.1;'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef DO_PROJECT_COORDS_XZ'
+    .endl()+'       texCoord=(projMatrix * mvMatrix*pos).xz*0.1;'
     .endl()+'   #endif'
 
     .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'

@@ -9,6 +9,14 @@ this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 this.extrude=this.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 
+var invert=this.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool'}));
+invert.onValueChange(function()
+{
+    if(invert.get()) shader.define('HEIGHTMAP_INVERT');
+        else shader.removeDefine('HEIGHTMAP_INVERT');
+    
+});
+
 this.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(self.extrude.val); };
 
 var meth=this.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
@@ -39,6 +47,10 @@ var srcHeadVert=''
 
 var srcBodyVert=''
     .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, texCoord ).b;'
+
+.endl()+'#ifdef HEIGHTMAP_INVERT'
+.endl()+'{{mod}}_texVal=1.0-{{mod}}_texVal;'
+.endl()+'#endif'
 
     .endl()+'#ifdef DISPLACE_METH_MULXYZ'
     .endl()+'   {{mod}}_texVal+=1.0;'

@@ -5,8 +5,7 @@ var cgl=this.patch.cgl;
 this.name='fog';
 
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
-this.nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
+
 this.density=this.addInPort(new Port(this,"density",OP_PORT_TYPE_VALUE));
 
 this.image=this.addInPort(new Port(this,"depth texture",OP_PORT_TYPE_TEXTURE));
@@ -30,8 +29,8 @@ var srcFrag=''
     .endl()+'  uniform sampler2D depthTex;'
     .endl()+'  uniform sampler2D image;'
     .endl()+'#endif'
-    .endl()+'uniform float n;'
-    .endl()+'uniform float f;'
+    // .endl()+'uniform float n;'
+    // .endl()+'uniform float f;'
     .endl()+'uniform float r;'
     .endl()+'uniform float g;'
     .endl()+'uniform float b;'
@@ -45,7 +44,8 @@ var srcFrag=''
     .endl()+'       col=texture2D(depthTex,texCoord);'
     
     .endl()+'       float z=1.0-col.r;'
-    .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
+    
+    // .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
 
     .endl()+'       float fogFactor = exp2( -density * '
     .endl()+'           density *'
@@ -53,6 +53,8 @@ var srcFrag=''
     .endl()+'           z *'
     .endl()+'           LOG2);'
     
+    // .endl()+'       fogFactor=smoothstep(0.8,1.0,fogFactor);'
+    // .endl()+'       fogFactor*=2.0;'
     
     .endl()+'       #ifdef FOG_IGNORE_INFINITY'
     .endl()+'           if(z<0.001)'
@@ -73,20 +75,20 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','depthTex',1);
 var textureUniform=new CGL.Uniform(shader,'t','image',0);
 
-var uniFarplane=new CGL.Uniform(shader,'f','f',1.0);
-var uniNearplane=new CGL.Uniform(shader,'f','n',1.0);
+// var uniFarplane=new CGL.Uniform(shader,'f','f',1.0);
+// var uniNearplane=new CGL.Uniform(shader,'f','n',1.0);
 
-this.farPlane.onValueChanged=function()
-{
-    uniFarplane.setValue(self.farPlane.get());
-};
-self.farPlane.val=100.0;
+// this.farPlane.onValueChanged=function()
+// {
+//     uniFarplane.setValue(self.farPlane.get());
+// };
+// self.farPlane.val=100.0;
 
-this.nearPlane.onValueChanged=function()
-{
-    uniNearplane.setValue(self.nearPlane.get());
-};
-self.nearPlane.val=0.1;
+// this.nearPlane.onValueChanged=function()
+// {
+//     uniNearplane.setValue(self.nearPlane.get());
+// };
+// self.nearPlane.val=0.1;
 
 var uniDensity=new CGL.Uniform(shader,'f','density',1.0);
 this.density.onValueChanged=function()

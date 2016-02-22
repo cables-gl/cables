@@ -29,3 +29,6 @@
 ---
 
 - [markdown example](/doc/md)
+
+
+![](/imgdoc/bla.svg)
