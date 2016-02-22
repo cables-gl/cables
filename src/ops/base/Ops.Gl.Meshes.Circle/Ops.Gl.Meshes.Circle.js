@@ -42,6 +42,7 @@ function calc()
     var oldPosXIn=0,oldPosYIn=0;
     var oldPosXTexCoordIn=0,oldPosYTexCoordIn=0;
 
+    var posxTexCoordIn=0,posyTexCoordIn=0;
     var posxTexCoord=0,posyTexCoord=0;
     var posx=0,posy=0;
 
@@ -53,8 +54,24 @@ function calc()
           posx=Math.cos(degInRad)*self.radius.get();
           posy=Math.sin(degInRad)*self.radius.get();
 
-          posxTexCoord=(Math.cos(degInRad)+1.0)/2;
-          posyTexCoord=(Math.sin(degInRad)+1.0)/2;
+
+            if(mapping.get()=='flat')
+            {
+                posxTexCoord=(Math.cos(degInRad)+1.0)/2;
+                posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
+                posxTexCoordIn=0.5;
+                posyTexCoordIn=0.5;
+            }
+            else if(mapping.get()=='round')
+            {
+                posxTexCoord=1.0-i/self.segments.get();
+                posyTexCoord=0;
+                posxTexCoordIn=posxTexCoord;
+                posyTexCoordIn=1;
+            }
+
+        //   posxTexCoord=(Math.cos(degInRad)+1.0)/2;
+        //   posyTexCoord=(Math.sin(degInRad)+1.0)/2;
 
           geom.addFace(
                       [posx,posy,0],
@@ -62,7 +79,7 @@ function calc()
                       [0,0,0]
                       );
 
-          geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,0.5,0.5);
+          geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
 
           oldPosXTexCoord=posxTexCoord;
           oldPosYTexCoord=posyTexCoord;
@@ -85,11 +102,21 @@ function calc()
           var posxIn=Math.cos(degInRad)*self.innerRadius.get()*self.radius.get();
           var posyIn=Math.sin(degInRad)*self.innerRadius.get()*self.radius.get();
 
-          posxTexCoord=(Math.cos(degInRad)+1.0)/2;
-          posyTexCoord=(Math.sin(degInRad)+1.0)/2;
-
-          var posxTexCoordIn=(Math.cos(degInRad)+1.0)/2*self.innerRadius.get();
-          var posyTexCoordIn=(Math.sin(degInRad)+1.0)/2*self.innerRadius.get();
+        
+        if(mapping.get()=='flat')
+        {
+            posxTexCoord=(Math.cos(degInRad)+1.0)/2;
+            posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
+            posxTexCoordIn=((posxTexCoord-0.5)*self.innerRadius.get())+0.5;
+            posyTexCoordIn=((posyTexCoord-0.5)*self.innerRadius.get())+0.5;
+        }
+        else if(mapping.get()=='round')
+        {
+            posxTexCoord=1.0-i/self.segments.get();
+            posyTexCoord=0;
+            posxTexCoordIn=posxTexCoord;
+            posyTexCoordIn=1;
+        }
 
           if(self.steps.get()===0.0 ||
             (count%parseInt(self.steps.get(),10)===0 && !self.invertSteps.get()) ||
@@ -128,6 +155,10 @@ function calc()
 
     mesh.setGeom(geom);
 }
+
+var mapping=this.addInPort(new Port(this,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
+mapping.val='flat';
+mapping.onValueChange(calc);
 
 this.segments.onValueChanged=calc;
 this.radius.onValueChanged=calc;

@@ -3,6 +3,7 @@ var cgl=this.patch.cgl;
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var outRadius=this.addOutPort(new Port(this,"radius",OP_PORT_TYPE_VALUE));
 
 var minDist=this.addInPort(new Port(this,"min distance",OP_PORT_TYPE_VALUE));
 minDist.set(0.05);
@@ -15,6 +16,8 @@ var vOffset=vec3.create();
 
 var mouseDown=false;
 var radius=5;
+outRadius.set(radius);
+
 var lastMouseX=0,lastMouseY=0;
 var percX=0,percY=0;
 
@@ -29,8 +32,8 @@ render.onTriggered=function()
 {
     cgl.pushMvMatrix();
 
-vec3.add(tempEye, eye, vOffset);
-vec3.add(tempCenter, vCenter, vOffset);
+    vec3.add(tempEye, eye, vOffset);
+    vec3.add(tempCenter, vCenter, vOffset);
 
     mat4.lookAt(transMatrix, tempEye, tempCenter, vUp);
     mat4.rotate(transMatrix, transMatrix, percX, vUp);
@@ -44,6 +47,9 @@ vec3.add(tempCenter, vCenter, vOffset);
 function circlePos(perc)
 {
     if(radius<minDist.get())radius=minDist.get();
+    
+    outRadius.set(radius);
+    
     var i=0,degInRad=0;
     var vec=vec3.create();
     degInRad = 360*perc/2*CGL.DEG2RAD;
@@ -63,21 +69,21 @@ var onmousemove = function(e)
     
     if(e.which==3)
     {
-        vOffset[2]+=(x-lastMouseX)*0.025;
-        vOffset[1]+=(y-lastMouseY)*0.025;
+        vOffset[2]+=(x-lastMouseX)*0.01;
+        vOffset[1]+=(y-lastMouseY)*0.01;
         eye=circlePos(percY);
     }
     else
     if(e.which==2)
     {
-        radius+=(y-lastMouseY)*0.06;
+        radius+=(y-lastMouseY)*0.05;
 
         eye=circlePos(percY);
     }
     else
     {
-        percX+=(x-lastMouseX)*0.0025;
-        percY+=(y-lastMouseY)*0.0025;
+        percX+=(x-lastMouseX)*0.002;
+        percY+=(y-lastMouseY)*0.002;
         if(percY>0.5)percY=0.5;
         if(percY<-0.5)percY=-0.5;
         eye=circlePos(percY);
@@ -120,7 +126,7 @@ var onMouseWheel=function(e)
       } else return w/120;             // IE/Safari/Chrome TODO: /3 for Chrome OS X
     };
 
-    var delta=parseFloat( wheelDistance(e))*-0.05;
+    var delta=parseFloat( wheelDistance(e))*-0.06;
     radius+=(parseFloat(delta))*1.2;
 
     eye=circlePos(percY);
