@@ -9,6 +9,7 @@ this.useVPSize=this.addInPort(new Port(this,"use viewport size",OP_PORT_TYPE_VAL
 
 this.width=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
 this.height=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
+var tfilter=this.addInPort(new Port(this,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.texOut=this.addOutPort(new Port(this,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
@@ -18,7 +19,6 @@ var effect=new CGL.TextureEffect(cgl);
 cgl.currentTextureEffect=effect;
 this.tex=new CGL.Texture(cgl);
 this.tex.filter=CGL.Texture.FILTER_MIPMAP;
-
 
 var w=8,h=8;
 
@@ -43,6 +43,11 @@ function updateResolution()
         effect.setSourceTexture(self.tex);
         self.texOut.val=effect.getCurrentSourceTexture();
     }
+
+    if(!self.texOut.get().isPowerOfTwo()) self.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
+        else self.uiAttr({warning:''});
+
+
 }
 
 this.onResize=updateResolution;
@@ -106,6 +111,21 @@ this.texOut.onPreviewChanged=function()
     if(self.texOut.showPreview) self.render.onTriggered=self.texOut.val.preview;
     else self.render.onTriggered=render;
 };
+
+
+var onFilterChange=function()
+{
+    if(tfilter.get()=='nearest') self.tex.filter=CGL.Texture.FILTER_NEAREST;
+    if(tfilter.get()=='linear')  self.tex.filter=CGL.Texture.FILTER_LINEAR;
+    if(tfilter.get()=='mipmap')  self.tex.filter=CGL.Texture.FILTER_MIPMAP;
+    effect.setSourceTexture(self.tex);
+
+    // this.tex.setSize(this.tex.width,this.tex.height);
+    
+};
+
+tfilter.set('linear');
+tfilter.onValueChange(onFilterChange);
 
 
 this.width.val=640;

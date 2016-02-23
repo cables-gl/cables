@@ -11,6 +11,9 @@
     this.width=this.addInPort(new Port(this,"texture width"));
     this.height=this.addInPort(new Port(this,"texture height"));
 
+    var tfilter=this.addInPort(new Port(this,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+
+
     this.tex=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
     this.texDepth=this.addOutPort(new Port(this,"textureDepth",OP_PORT_TYPE_TEXTURE));
 
@@ -19,6 +22,15 @@
 
     self.tex.set( fb.getTextureColor() );
     self.texDepth.set ( fb.getTextureDepth() );
+
+    tfilter.set('linear');
+    
+    var onFilterChange=function()
+    {
+        if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
+        else if(tfilter.get()=='linear')  fb.setFilter(CGL.Texture.FILTER_LINEAR);
+        else if(tfilter.get()=='mipmap')  fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+    };
 
 
     function resize()
@@ -157,5 +169,8 @@
             self.width.onValueChanged=resize;
             self.height.onValueChanged=resize;
         }
-resize();
+        resize();
     };
+
+
+tfilter.onValueChange(onFilterChange);
