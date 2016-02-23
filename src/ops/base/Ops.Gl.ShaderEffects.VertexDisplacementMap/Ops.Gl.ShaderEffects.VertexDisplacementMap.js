@@ -14,7 +14,6 @@ invert.onValueChange(function()
 {
     if(invert.get()) shader.define('HEIGHTMAP_INVERT');
         else shader.removeDefine('HEIGHTMAP_INVERT');
-    
 });
 
 this.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(self.extrude.val); };
@@ -25,15 +24,15 @@ var updateMethod=function()
 {
     if(shader)
     {
-    shader.removeDefine('DISPLACE_METH_MULXYZ');
-    shader.removeDefine('DISPLACE_METH_ADDZ');
-
-    if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
-    if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
-    console.log('hallo',meth.get());
-        
+        shader.removeDefine('DISPLACE_METH_MULXYZ');
+        shader.removeDefine('DISPLACE_METH_ADDZ');
+    
+        if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
+        if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
+        console.log('hallo',meth.get());
     }
 };
+
 meth.onValueChange(updateMethod);
 meth.set('mul xyz');
 
@@ -48,9 +47,9 @@ var srcHeadVert=''
 var srcBodyVert=''
     .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, texCoord ).b;'
 
-.endl()+'#ifdef HEIGHTMAP_INVERT'
-.endl()+'{{mod}}_texVal=1.0-{{mod}}_texVal;'
-.endl()+'#endif'
+    .endl()+'#ifdef HEIGHTMAP_INVERT'
+    .endl()+'{{mod}}_texVal=1.0-{{mod}}_texVal;'
+    .endl()+'#endif'
 
     .endl()+'#ifdef DISPLACE_METH_MULXYZ'
     .endl()+'   {{mod}}_texVal+=1.0;'
@@ -60,10 +59,7 @@ var srcBodyVert=''
     .endl()+'#ifdef DISPLACE_METH_ADDZ'
     .endl()+'       pos.z += ( {{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
-
-
     .endl();
-
 
 var srcHeadFrag=''
     .endl()+'uniform sampler2D {{mod}}_texture;'
@@ -91,7 +87,9 @@ this.render.onTriggered=function()
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
-
+        
+        console.log('re init shader module vertexdisplacement')
+        
         shader=cgl.getShader();
 
         module=shader.addModule(
