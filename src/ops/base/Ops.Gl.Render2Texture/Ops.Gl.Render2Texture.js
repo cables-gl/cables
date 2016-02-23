@@ -6,7 +6,6 @@
     this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
     this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-
     this.useVPSize=this.addInPort(new Port(this,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
     this.width=this.addInPort(new Port(this,"texture width"));
@@ -80,19 +79,6 @@
     }
 
 
-    this.useVPSize.onValueChanged=function()
-    {
-        if(self.useVPSize.val)
-        {
-            self.width.onValueChanged=null;
-            self.height.onValueChanged=null;
-        }
-        else
-        {
-            self.width.onValueChanged=resize;
-            self.height.onValueChanged=resize;
-        }
-    };
 
     this.width.set(512);
     this.height.set(512);
@@ -158,3 +144,18 @@
     };
 
     self.render.onTriggered=render;
+
+    this.useVPSize.onValueChanged=function()
+    {
+        if(self.useVPSize.val)
+        {
+            self.width.onValueChanged=null;
+            self.height.onValueChanged=null;
+        }
+        else
+        {
+            self.width.onValueChanged=resize;
+            self.height.onValueChanged=resize;
+        }
+resize();
+    };

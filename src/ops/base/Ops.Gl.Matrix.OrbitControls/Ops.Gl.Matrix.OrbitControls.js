@@ -8,6 +8,11 @@ var outRadius=this.addOutPort(new Port(this,"radius",OP_PORT_TYPE_VALUE));
 var minDist=this.addInPort(new Port(this,"min distance",OP_PORT_TYPE_VALUE));
 minDist.set(0.05);
 
+var initialAxis=this.addInPort(new Port(this,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
+initialAxis.set(0.5);
+var initialX=this.addInPort(new Port(this,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
+initialX.set(0.0);
+
 var eye=vec3.create();
 var vUp=vec3.create();
 var vCenter=vec3.create();
@@ -113,6 +118,18 @@ function onMouseEnter(e)
 {
     cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
 }
+
+initialX.onValueChange(function()
+{
+    percX=(initialX.get()*Math.PI*2);
+    
+});
+
+initialAxis.onValueChange(function()
+{
+    percY=(initialAxis.get()-0.5);
+    eye=circlePos( percY );
+});
 
 var onMouseWheel=function(e)
 {
