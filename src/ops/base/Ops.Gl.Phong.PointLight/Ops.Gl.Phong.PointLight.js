@@ -63,6 +63,7 @@ var updateAll=function()
     if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights=[];
     cgl.frameStore.phong.lights[id]={};
     cgl.frameStore.phong.lights[id].id=id;
+    cgl.frameStore.phong.lights[id].type=0;
 
     updatePos();
     updateColor();

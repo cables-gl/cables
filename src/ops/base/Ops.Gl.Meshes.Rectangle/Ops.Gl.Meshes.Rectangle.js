@@ -12,6 +12,8 @@ var pivotY=this.addInPort(new Port(this,"pivot y",OP_PORT_TYPE_VALUE,{display:'d
 var nColumns=this.addInPort(new Port(this,"num columns"));
 var nRows=this.addInPort(new Port(this,"num rows"));
 
+var axis=this.addInPort(new Port(this,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+axis.set('xy');
 pivotX.set('center');
 pivotY.set('center');
 
@@ -59,8 +61,9 @@ function rebuild()
         for(c=0;c<=numColumns;c++)
         {
             verts.push( c*stepColumn    - width.get()/2+x );
+            if(axis.get()=='xz') verts.push( 0.0 );
             verts.push( r*stepRow       - height.get()/2+y );
-            verts.push( 0.0 );
+            if(axis.get()=='xy') verts.push( 0.0 );
 
             tc.push( c/numColumns );
             tc.push( 1.0-r/numRows );
@@ -78,8 +81,8 @@ function rebuild()
             var v4=ind+1+numColumns+1;
 
             indices.push(v1);
-            indices.push(v2);
             indices.push(v3);
+            indices.push(v2);
 
             indices.push(v2);
             indices.push(v3);
@@ -115,6 +118,7 @@ function rebuild()
 }
 rebuild();
 
+axis.onValueChanged=rebuild;
 pivotX.onValueChanged=rebuild;
 pivotY.onValueChanged=rebuild;
 width.onValueChanged=rebuild;

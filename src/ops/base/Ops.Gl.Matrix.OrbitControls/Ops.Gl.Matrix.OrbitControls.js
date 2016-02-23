@@ -4,13 +4,12 @@ var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var outRadius=this.addOutPort(new Port(this,"radius",OP_PORT_TYPE_VALUE));
-
 var minDist=this.addInPort(new Port(this,"min distance",OP_PORT_TYPE_VALUE));
-minDist.set(0.05);
-
 var initialAxis=this.addInPort(new Port(this,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
-initialAxis.set(0.5);
 var initialX=this.addInPort(new Port(this,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
+
+minDist.set(0.05);
+initialAxis.set(0.5);
 initialX.set(0.0);
 
 var eye=vec3.create();
@@ -25,7 +24,6 @@ outRadius.set(radius);
 
 var lastMouseX=0,lastMouseY=0;
 var percX=0,percY=0;
-
 
 vec3.set(vCenter, 0,0,0);
 vec3.set(vUp, 0,1,0);
@@ -168,6 +166,7 @@ this.onDelete=function()
     cgl.canvas.removeEventListener('mouseleave', onMouseUp);
     cgl.canvas.removeEventListener('mouseenter', onMouseUp);
     cgl.canvas.removeEventListener('wheel', onMouseWheel);
+    cgl.canvas.style.cursor='auto';
 };
 
 eye=circlePos(0);
