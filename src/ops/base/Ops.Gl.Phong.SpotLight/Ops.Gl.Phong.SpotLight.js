@@ -8,6 +8,8 @@ var attachment=this.addOutPort(new Port(this,"attachment",OP_PORT_TYPE_FUNCTION)
 
 var attenuation=this.addInPort(new Port(this,"attenuation",OP_PORT_TYPE_VALUE));
 
+var cone=this.addInPort(new Port(this,"cone",OP_PORT_TYPE_VALUE,{ display:'range' }));
+cone.set(0.85);
 var r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=this.addInPort(new Port(this,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=this.addInPort(new Port(this,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -30,6 +32,7 @@ var posVec=vec3.create();
 var updateColor=function()
 {
     cgl.frameStore.phong.lights[id].color=[ r.get(), g.get(), b.get() ];
+    cgl.frameStore.phong.lights[id].cone=cone.get();
 };
 
 var mpos=vec3.create();
@@ -56,6 +59,7 @@ var updateAll=function()
     cgl.frameStore.phong.lights[id].pos=mpos;
     cgl.frameStore.phong.lights[id].target=tpos;
     cgl.frameStore.phong.lights[id].type=1;
+    cgl.frameStore.phong.lights[id].cone=cone.get();
 
     updateColor();
     updateAttenuation();
@@ -100,6 +104,7 @@ attenuation.set(0);
 r.onValueChanged=updateColor;
 g.onValueChanged=updateColor;
 b.onValueChanged=updateColor;
+cone.onValueChanged=updateColor;
 
 attenuation.onValueChanged=updateAttenuation;
 

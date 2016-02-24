@@ -92,6 +92,7 @@ var srcFrag=''
     .endl()+'   vec3 target;'
     .endl()+'   vec3 color;'
     .endl()+'   float intensity;'
+    .endl()+'   float cone;'
 
     .endl()+'} light;'
     .endl()+'uniform Light lights[3];'
@@ -146,11 +147,8 @@ var srcFrag=''
     .endl()+'       {'
     .endl()+'           vec3 coneDirection = normalize( (lights[l].target-lights[l].pos) );'
     .endl()+'           float spotEffect = dot(normalize(coneDirection), normalize(-surfaceToLight));'
-
-    // .endl()+'           vec3 rayDirection = -surfaceToLight;'
-    // .endl()+'           float lightToSurfaceAngle = degrees(acos(dot(rayDirection, coneDirection)));'
-    // .endl()+'           surfaceColor.g=spotEffect;'
-    .endl()+'           if( spotEffect <0.8)'
+    .endl()+'           float lightToSurfaceAngle = degrees(acos(dot(surfaceToLight, coneDirection)));'
+    .endl()+'           if( spotEffect <lights[l].cone)'
     .endl()+'           {'
     .endl()+'               attenuation=0.0;'
     .endl()+'           }'
@@ -336,6 +334,7 @@ shader.setSource(srcVert,srcFrag);
                 lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
                 lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
                 lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
+                lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
 
 
                 count++;
@@ -356,6 +355,7 @@ shader.setSource(srcVert,srcFrag);
             lights[0].color.setValue([1,1,1]);
             lights[0].attenuation.setValue(0);
             lights[0].type.setValue(0);
+            lights[0].cone.setValue(0.8);
 
         }
         else
@@ -367,13 +367,15 @@ shader.setSource(srcVert,srcFrag);
             {
                 // console.log(cgl.frameStore.phong.lights[i]);
                 lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
-                if(cgl.frameStore.phong.lights[i].target)lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
+                if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
                 lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
                 lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
                 lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
+                if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
 
                 count++;
             }
+            cgl.frameStore.phong.lights.length=0;
 
         }
 
