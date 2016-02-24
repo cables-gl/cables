@@ -50,22 +50,9 @@ var srcVert=''
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'       texCoord=attrTexCoord;'
     .endl()+'   #endif'
-
-
-
-
     .endl()+'    vec4 pos = vec4( vPosition, 1. );'
-
     .endl()+'    {{MODULE_VERTEX_POSITION}}'
-
-
-
-
-
     .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
-
-
-
     // .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'}';
 
@@ -99,13 +86,15 @@ var srcFrag=''
 
     .endl()+'uniform struct Light'
     .endl()+'{'
+    .endl()+'   float type;'
     .endl()+'   float attenuation;'
     .endl()+'   vec3 pos;'
+    .endl()+'   vec3 target;'
     .endl()+'   vec3 color;'
     .endl()+'   float intensity;'
 
     .endl()+'} light;'
-    .endl()+'uniform Light lights[2];'
+    .endl()+'uniform Light lights[3];'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -128,17 +117,17 @@ var srcFrag=''
     .endl()+'   #endif'
 
     .endl()+'   vec3 theColor=vec3(0.0,0.0,0.0);'
-    .endl()+'   for(int l=0;l<2;l++)'
+    .endl()+'   for(int l=0;l<3;l++)'
     .endl()+'   {'
     .endl()+'       vec3 lightColor = lights[l].color;'
-    .endl()+'       vec3 lightPosition = vec3(lights[l].pos.x,lights[l].pos.y,lights[l].pos.z);'
-    .endl()+'       vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;'
 
     //calculate the location of this fragment (pixel) in world coordinates
     .endl()+'       vec3 fragPosition = vec3(mvMatrix * vec4(vert, 1.0)).xyz;'
 
     //calculate the vector from this pixels surface to the light source
-    .endl()+'       vec3 surfaceToLight = lightPosition-fragPosition;'
+    .endl()+'       vec3 surfaceToLight = lights[l].pos-fragPosition;'
+
+    .endl()+'       vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;'
 
     //calculate the cosine of the angle of incidence'
     .endl()+'       float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
@@ -147,6 +136,27 @@ var srcFrag=''
     // attenuation
     .endl()+'       float distanceToLight = length(surfaceToLight);'
     .endl()+'       float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
+    
+    // .endl()+'       attenuation = 1.0;'
+    
+    
+    
+    // SPOT LIGHT
+    .endl()+'       if(lights[l].type!=0.0)'
+    .endl()+'       {'
+    .endl()+'           vec3 coneDirection = normalize( (lights[l].target-lights[l].pos) );'
+    .endl()+'           float spotEffect = dot(normalize(coneDirection), normalize(-surfaceToLight));'
+
+    // .endl()+'           vec3 rayDirection = -surfaceToLight;'
+    // .endl()+'           float lightToSurfaceAngle = degrees(acos(dot(rayDirection, coneDirection)));'
+    // .endl()+'           surfaceColor.g=spotEffect;'
+    .endl()+'           if( spotEffect <0.8)'
+    .endl()+'           {'
+    .endl()+'               attenuation=0.0;'
+    .endl()+'           }'
+    .endl()+'       }'
+
+
     .endl()+'       brightness *= attenuation;'
 
     //calculate final color of the pixel, based on:'
@@ -159,9 +169,11 @@ var srcFrag=''
 // .endl()+'vec3 specularComponent = specularCoefficient * vec3(1.0,1.0,1.0) * 1.0;'
 
 
-
     .endl()+'       theColor+=(lightColor*brightness);'
+    // .endl()+'       if(length(lights[l].target)>0.0)theColor=vec3(1.0,0.0,0.0);'
+
     .endl()+'   }'
+
 
     .endl()+'   vec3 finalColor = theColor * surfaceColor.rgb;'
 
@@ -320,8 +332,11 @@ shader.setSource(srcVert,srcFrag);
             {
                 lights[count]={};
                 lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+                lights[count].target=new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
                 lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
                 lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
+                lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
+
 
                 count++;
             }
@@ -336,19 +351,26 @@ shader.setSource(srcVert,srcFrag);
         if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
         {
             numLights=1;
-            lights[0].pos.setValue([0,0,111]);
+            lights[0].pos.setValue([1,2,0]);
+            lights[0].target.setValue([0,0,0]);
             lights[0].color.setValue([1,1,1]);
             lights[0].attenuation.setValue(0);
+            lights[0].type.setValue(0);
 
         }
         else
         {
             count=0;
+            // console.log(cgl.frameStore.phong.lights);
+            
             for(i in cgl.frameStore.phong.lights)
             {
+                // console.log(cgl.frameStore.phong.lights[i]);
                 lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
+                if(cgl.frameStore.phong.lights[i].target)lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
                 lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
                 lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
+                lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
 
                 count++;
             }
