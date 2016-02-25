@@ -27,6 +27,11 @@
 - -
 - [Settings](#project-settings)
 
+### Edit
+
+- [Undo](#undo)
+- [Redo](#redo) **Context-sensitive**
+
 ### Op / Operator
 
 - [New](#new-op)
@@ -75,6 +80,12 @@
 - Editor settings
 - Color schemes
 - Editor Animations [on, off]
+
+### Undo
+
+### Redo
+
+- Only possible after an undo
 
 ### New Op
 
