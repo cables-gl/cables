@@ -9,7 +9,7 @@
 
 ### Project
 
-`New` – Creates a new blank project (Should check for changes in current document)  
+- `New` – Creates a new blank project (Should check for changes in current document)  
 - -
 - `Open` – Opens a project from the user’s projects  
 - (`Open Recent` – Shows the last x projects  
