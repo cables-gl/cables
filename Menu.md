@@ -6,6 +6,7 @@
 - *Items in `[]` brackets should only be visible to admins*
 - *Items in `{}` are context sensitive and only appear under certain cirumstances*      
 - *`-` is a separator between the menu items*  
+- Menu items with a shortcut should display the shortcut next to the name, also the app should check which OS the user is on and display the right shortcut, e.g. `⌘ + s` on Mac next to `Save`
 
 ### Project
 
@@ -18,6 +19,8 @@
 - `Save`  
 - `Save As` – Saves the project under a different name (all project data probably needs to be copied here)  
 - [`Save To Local Storage`]  
+- -
+- `Settings` – opens a popup-window, settings: `visibility [public, private, hidden]`
 
 ### Op / Operator
 
