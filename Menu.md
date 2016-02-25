@@ -10,7 +10,7 @@
 
 ### Cables 
 
-- [Settings](#settings) –
+- [Settings](#settings)
 
 ### Project
 
