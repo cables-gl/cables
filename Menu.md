@@ -5,16 +5,16 @@
 - *Items in `()` brackets might not be needed.*  
 - *Items in `[]` brackets should only be visible to admins*
 - *Items in `{}` are context sensitive and only appear under certain cirumstances*      
-- *`---` is a separator between the menu items*  
+- *`-` is a separator between the menu items*  
 
 ### Project
 
 `New` – Creates a new blank project (Should check for changes in current document)  
-- ---
+- -
 - `Open` – Opens a project from the user’s projects  
 - (`Open Recent` – Shows the last x projects  
 - [`Open From Local Storage`]  
-- ---
+- -
 - `Save`  
 - `Save As` – Saves the project under a different name (all project data probably needs to be copied here)  
 - [`Save To Local Storage`]  
