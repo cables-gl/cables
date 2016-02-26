@@ -46,7 +46,7 @@ function onMIDISuccess(midiAccess)
         listInputs(input);
     }
     // listen for connect/disconnect message
-    midi.onstatechange = onStateChange;
+    // midi.onstatechange = onStateChange;
 }
 
 function onMIDIMessage(event)
@@ -73,7 +73,7 @@ function onMIDIMessage(event)
     //         break;
     // }
 
-    // console.log('cmd', cmd,'channel', channel,'type', type, 'note',note,'velocity',velocity);
+    console.log('cmd', cmd,'channel', channel,'type', type, 'note',note,'velocity',velocity);
 
     self.note.set(note);
     self.noteValue.set(velocity);

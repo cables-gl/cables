@@ -48,9 +48,17 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 blendRGBA=vec4(0.0,0.0,0.0,1.0);'
     .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'       blendRGBA=texture2D(image,texCoord);'
-
-
+    .endl()+'       vec2 tc=texCoord;'
+    .endl()+''
+    .endl()+'       #ifdef TEX_FLIP_X'
+    .endl()+'           tc.x=1.0-tc.x;'
+    .endl()+'       #endif'
+    .endl()+'       #ifdef TEX_FLIP_Y'
+    .endl()+'           tc.y=1.0-tc.y;'
+    .endl()+'       #endif'
+    .endl()+''
+    .endl()+'       blendRGBA=texture2D(image,tc);'
+    .endl()+''
     .endl()+'vec3 blend=blendRGBA.rgb;'
     .endl()+'vec4 baseRGBA=texture2D(tex,texCoord);'
     .endl()+'vec3 base=baseRGBA.rgb;'
@@ -205,6 +213,24 @@ this.alphaSrc.onValueChanged=function()
 };
 
 this.alphaSrc.val="alpha channel";
+
+
+
+var flipX=this.addInPort(new Port(this,"flip x",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var flipY=this.addInPort(new Port(this,"flip y",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+
+flipX.onValueChanged=function()
+{
+    if(flipX.get()) shader.define('TEX_FLIP_X');
+        else shader.removeDefine('TEX_FLIP_X');
+};
+
+flipY.onValueChanged=function()
+{
+    if(flipY.get()) shader.define('TEX_FLIP_Y');
+        else shader.removeDefine('TEX_FLIP_Y');
+};
+
 
 this.blendMode.onValueChanged=function()
 {
