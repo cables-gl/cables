@@ -1,25 +1,45 @@
-Op.apply(this, arguments);
+var cgl=this.patch.cgl;
 var self=this;
-var cgl=self.patch.cgl;
 this.name='MidiValue';
-this.exec=this.addInPort(new Port(this,"exec",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var exec=this.addInPort(new Port(this,"exec",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.note=this.addInPort(new Port(this,"note"));
-this.note.set(8);
+var note=this.addInPort(new Port(this,"note"));
+note.set(1);
 
-this.value=this.addOutPort(new Port(this,"value"));
-this.value.set(0);
+var learn=this.addInPort(new Port(this,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-this.exec.onTriggered=function()
+var value=this.addOutPort(new Port(this,"value"));
+value.set(0);
+
+var learning=false;
+
+exec.onTriggered=function()
 {
     if(!cgl.frameStore.midi) return;
-
-    if(cgl.frameStore.midi[self.note.get()])
+    
+    if(learning && cgl.frameStore.lastMidiNote!=-1)
     {
-        self.value.set(cgl.frameStore.midi[self.note.get()].v);
+        note.set(cgl.frameStore.lastMidiNote);
+        learning=false;
+        
+        if(CABLES.UI)
+        {
+            self.uiAttr({info:'bound to note: ' + note.get()});
+            gui.patch().showOpParams(self);
+        }
     }
-    self.trigger.trigger();
 
+    if(cgl.frameStore.midi[note.get()])
+    {
+        value.set(cgl.frameStore.midi[note.get()].v);
+        cgl.frameStore.midi[note.get()]=null;
+        trigger.trigger();
+    }
 };
 
+learn.onTriggered=function()
+{
+    learning=true;
+    cgl.frameStore.lastMidiNote=-1;
+};

@@ -11,12 +11,12 @@ var self=this;
 var cgl=self.patch.cgl;
 this.name='midiInput';
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+// this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.normalize.set(true);
 
-this.note=this.addOutPort(new Port(this,"note"));
-this.noteValue=this.addOutPort(new Port(this,"note value"));
+// this.note=this.addInPort(new Port(this,"note"));
+// this.noteValue=this.addOutPort(new Port(this,"note value"));
 
 var midi;
 
@@ -26,8 +26,9 @@ if (navigator.requestMIDIAccess)
 }
 else
 {
-    alert("No MIDI support in your browser.");
+    self.uiAttr({warning:"No MIDI support in your browser."});
 }
+
 function onMIDIFailure()
 {
     console.log("no midi...");
@@ -46,7 +47,7 @@ function onMIDISuccess(midiAccess)
         listInputs(input);
     }
     // listen for connect/disconnect message
-    midi.onstatechange = onStateChange;
+    // midi.onstatechange = onStateChange;
 }
 
 function onMIDIMessage(event)
@@ -75,20 +76,23 @@ function onMIDIMessage(event)
 
     // console.log('cmd', cmd,'channel', channel,'type', type, 'note',note,'velocity',velocity);
 
-    self.note.set(note);
-    self.noteValue.set(velocity);
+    // self.note.set(note);
+    // self.noteValue.set(velocity);
     cgl.frameStore.midi=cgl.frameStore.midi || [];
     var v=velocity;
     if(self.normalize.get())v/=127;
     cgl.frameStore.midi[note]={v:v,n:note};
+    cgl.frameStore.lastMidiNote=note;
 
-    self.trigger.trigger();
+    // self.trigger.trigger();
 }
 
 
-function listInputs(inputs) {
+function listInputs(inputs)
+{
     var input = inputs.value;
-    console.log("Input port : [ type:'" + input.type + "' id: '" + input.id +
-        "' manufacturer: '" + input.manufacturer + "' name: '" + input.name +
-        "' version: '" + input.version + "']");
+    var str="Midi Device: <br/> type: " + input.type + " <br/>id: " + input.id +
+        " <br/>manufacturer: " + input.manufacturer + " <br/>name: " + input.name +
+        " <br/>version: " + input.version ;
+    self.uiAttr({info:str});
 }
