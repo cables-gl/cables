@@ -11,6 +11,10 @@ var duration=this.addInPort(new Port(this,"duration"));
 
 var anim=new CABLES.TL.Anim();
 
+var easing=this.addInPort(new Port(this,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
+easing.set('linear');
+
+
 function getRandom()
 {
     var minVal = parseFloat( min.get() );
@@ -20,6 +24,11 @@ function getRandom()
 
 function init(v)
 {
+    if(easing.get()=='linear') anim.defaultEasing=CABLES.TL.EASING_LINEAR;
+    if(easing.get()=='smoothstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
+    if(easing.get()=='smootherstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
+    
+    
     anim.clear();
     if(v===undefined) v=getRandom();
     anim.setValue(Date.now()/1000.0, v);
@@ -32,7 +41,6 @@ exe.onTriggered=function()
     var v=anim.getValue(t);
     if(anim.hasEnded(t))
     {
-        console.log('new anim',duration.get());
         anim.clear();
         init(v);
     }
@@ -47,3 +55,4 @@ init();
 min.onValueChange(init);
 max.onValueChange(init);
 duration.onValueChange(init);
+easing.onValueChange(init);

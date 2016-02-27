@@ -9,7 +9,7 @@
     this.offX=this.addOutPort(new Port(this,"offset x",OP_PORT_TYPE_VALUE));
     this.offY=this.addOutPort(new Port(this,"offset y",OP_PORT_TYPE_VALUE));
 
-    this.ratio=this.addInPort(new Port(this,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1.25,1.3333333333,1.777777777778,2.33333333333333]} ));
+    this.ratio=this.addInPort(new Port(this,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1.25,1.3333333333,1.777777777778,2.33333333333333,3]} ));
     this.ratio.val=1.777777777778;
 
     var x=0,y=0,w=1000,h=1000;
