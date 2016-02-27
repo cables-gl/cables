@@ -92,6 +92,7 @@ var onMouseUp = function(e)
 var onClickRight= function(e)
 {
     self.mouseClickRight.trigger();
+    e.preventDefault();
 };
 
 var onmouseclick = function(e)
