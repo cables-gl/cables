@@ -52,7 +52,7 @@
 
     this.render.onTriggered=function()
     {
-        cgl.gl.enable(cgl.gl.SCISSOR_TEST);
+        // cgl.gl.enable(cgl.gl.SCISSOR_TEST);
 
         resize();
 
@@ -63,6 +63,6 @@
 
 
         self.trigger.trigger();
-        cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+        // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
 
     };

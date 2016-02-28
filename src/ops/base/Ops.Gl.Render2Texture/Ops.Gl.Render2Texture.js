@@ -33,63 +33,6 @@
     };
 
 
-    function resize()
-    {
-        // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-        // cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
-        //
-        if(self.useVPSize.val)
-        {
-            self.width.set( cgl.getViewPort()[2] );
-            self.height.set( cgl.getViewPort()[3] );
-        }
-
-        fb.setSize( self.width.get(),self.height.get() );
-        //
-        // texture.setSize(self.width.get(),self.height.get());
-        // textureDepth.setSize(self.width.get(),self.height.get());
-        //
-        // // if(depthBuffer)cgl.gl.deleteRenderbuffer(depthBuffer);
-        //
-        // cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, self.width.get(),self.height.get());
-        //
-        // cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, texture.tex, 0);
-        // cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
-        //
-        // cgl.gl.framebufferTexture2D(
-        //     cgl.gl.FRAMEBUFFER,
-        //     cgl.gl.DEPTH_ATTACHMENT,
-        //     cgl.gl.TEXTURE_2D,
-        //     textureDepth.tex,
-        //     0 );
-        //
-        // if (!cgl.gl.isFramebuffer(frameBuf)) {
-        //     throw("Invalid framebuffer");
-        // }
-        // var status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
-        // switch (status) {
-        //     case cgl.gl.FRAMEBUFFER_COMPLETE:
-        //         break;
-        //     case cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-        //         throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
-        //     case cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-        //         throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
-        //     case cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-        //         throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
-        //     case cgl.gl.FRAMEBUFFER_UNSUPPORTED:
-        //         throw("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
-        //     default:
-        //         throw("Incomplete framebuffer: " + status);
-        // }
-        //
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-        // cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
-        // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
-
-        // console.log('resize r2t',self.width.get(),self.height.get());
-
-    }
-
 
 
     this.width.set(512);
@@ -98,13 +41,25 @@
 
     var oldViewport;
 
-    this.onResize=resize;
-
 
     function render()
     {
         // cgl.pushMvMatrix();
-        cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+        
+        
+        if(self.useVPSize.val)
+        {
+            self.width.set( cgl.getViewPort()[2] );
+            self.height.set( cgl.getViewPort()[3] );
+        }
+
+        if(fb.getWidth()!=self.width.get() || fb.getHeight()!=self.height.get() )
+        {
+            console.log('r2t resize', self.width.get(),self.height.get() );    
+            fb.setSize( self.width.get(),self.height.get() );
+        }
+
+        // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
         //
         // if(self.useVPSize.get())
         // {
@@ -140,7 +95,7 @@
         fb.renderEnd(cgl);
 
         cgl.resetViewPort();
-        cgl.gl.enable(cgl.gl.SCISSOR_TEST);
+        // cgl.gl.enable(cgl.gl.SCISSOR_TEST);
     }
 
     function preview()
@@ -157,20 +112,20 @@
 
     self.render.onTriggered=render;
 
-    this.useVPSize.onValueChanged=function()
-    {
-        if(self.useVPSize.val)
-        {
-            self.width.onValueChanged=null;
-            self.height.onValueChanged=null;
-        }
-        else
-        {
-            self.width.onValueChanged=resize;
-            self.height.onValueChanged=resize;
-        }
-        resize();
-    };
+    // this.useVPSize.onValueChanged=function()
+    // {
+    //     if(self.useVPSize.val)
+    //     {
+    //         self.width.onValueChanged=null;
+    //         self.height.onValueChanged=null;
+    //     }
+    //     else
+    //     {
+    //         self.width.onValueChanged=resize;
+    //         self.height.onValueChanged=resize;
+    //     }
+    //     resize();
+    // };
 
 
 tfilter.onValueChange(onFilterChange);

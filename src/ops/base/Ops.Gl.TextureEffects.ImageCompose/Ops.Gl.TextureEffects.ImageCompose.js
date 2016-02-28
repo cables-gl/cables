@@ -18,7 +18,7 @@ var effect=new CGL.TextureEffect(cgl);
 
 cgl.currentTextureEffect=effect;
 this.tex=new CGL.Texture(cgl);
-this.tex.filter=CGL.Texture.FILTER_MIPMAP;
+this.tex.filter=CGL.Texture.FILTER_LINEAR;
 
 var w=8,h=8;
 
@@ -76,7 +76,7 @@ function resize()
 
 var render=function()
 {
-    cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+    // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
 
     // cgl.gl.disable(cgl.gl.BLEND);
     // cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
@@ -101,7 +101,7 @@ var render=function()
     self.trigger.trigger();
     self.texOut.val=effect.getCurrentSourceTexture();
 
-    cgl.gl.enable(cgl.gl.SCISSOR_TEST);
+    // cgl.gl.enable(cgl.gl.SCISSOR_TEST);
 
 };
 
