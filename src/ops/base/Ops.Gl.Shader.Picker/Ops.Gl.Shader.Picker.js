@@ -43,14 +43,18 @@ var doRender=function()
     {
         {
             var minimizeFB=8;
-            var vpW=cgl.getViewPort()[2]/minimizeFB;
-            var vpH=cgl.getViewPort()[3]/minimizeFB;
+            cgl.resetViewPort();
+            // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+            // var vpW=cgl.getViewPort()[2]/minimizeFB;
+            // var vpH=cgl.getViewPort()[3]/minimizeFB;
+            var vpW=cgl.canvas.width/minimizeFB;
+            var vpH=cgl.canvas.height/minimizeFB;
             if(vpW!=fb.getWidth() || vpH!=fb.getHeight() )
             {
                 fb.setSize( vpW,vpH );
             }
             
-            // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+            
             cgl.pushMvMatrix();
             fb.renderStart();
             cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);

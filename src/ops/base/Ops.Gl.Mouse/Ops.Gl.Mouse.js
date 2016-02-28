@@ -6,13 +6,16 @@ this.name='mouse';
 this.mouseX=this.addOutPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
 this.mouseY=this.addOutPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
 this.mouseDown=this.addOutPort(new Port(this,"button down",OP_PORT_TYPE_VALUE));
-this.mouseClick=this.addOutPort(new Port(this,"click",OP_PORT_TYPE_VALUE));
+this.mouseClick=this.addOutPort(new Port(this,"click",OP_PORT_TYPE_FUNCTION));
+this.mouseClickRight=this.addOutPort(new Port(this,"click right",OP_PORT_TYPE_FUNCTION));
 this.mouseOver=this.addOutPort(new Port(this,"mouseOver",OP_PORT_TYPE_VALUE));
 this.relative=this.addInPort(new Port(this,"relative",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 this.smooth=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.smoothSpeed=this.addInPort(new Port(this,"smoothSpeed",OP_PORT_TYPE_VALUE));
+
+
 
 this.multiply=this.addInPort(new Port(this,"multiply",OP_PORT_TYPE_VALUE));
 this.flipY=this.addInPort(new Port(this,"flip y",OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -86,9 +89,15 @@ var onMouseUp = function(e)
     self.mouseClick.set(false);
 };
 
+var onClickRight= function(e)
+{
+    self.mouseClickRight.trigger();
+    e.preventDefault();
+};
+
 var onmouseclick = function(e)
 {
-    self.mouseClick.set(true);
+    self.mouseClick.trigger();
 };
 
 
@@ -175,6 +184,8 @@ cgl.canvas.addEventListener('mouseleave', onMouseLeave);
 cgl.canvas.addEventListener('mousedown', onMouseDown);
 cgl.canvas.addEventListener('mouseup', onMouseUp);
 cgl.canvas.addEventListener('mouseenter', onMouseEnter);
+cgl.canvas.addEventListener('contextmenu', onClickRight);
+
 
 this.onDelete=function()
 {
@@ -185,4 +196,5 @@ this.onDelete=function()
     cgl.canvas.removeEventListener('mousedown', onMouseDown);
     cgl.canvas.removeEventListener('mouseup', onMouseUp);
     cgl.canvas.removeEventListener('mouseenter', onMouseEnter);
+    cgl.canvas.removeEventListener('contextmenu', onClickRight);
 };
