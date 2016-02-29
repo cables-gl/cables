@@ -5,7 +5,7 @@ var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION) );
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var srcVert=''
-    .endl()+'attribute float attrVertNumber;'
+    .endl()+'attribute float attrVertIndex;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
     .endl()+'attribute vec3 vPosition;'
@@ -13,17 +13,19 @@ var srcVert=''
 
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   num=attrVertNumber;'
+    .endl()+'   num=attrVertIndex;'
     .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'}';
 
-    var srcFrag=''
+var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'varying float num;'
     .endl()+'uniform float numVertices;'
     
     .endl()+'void main()'
     .endl()+'{'
+    
+
     .endl()+'   gl_FragColor = vec4(num/numVertices,num/numVertices,num/numVertices,1.0);'
     .endl()+'}';
     

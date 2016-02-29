@@ -2,7 +2,7 @@ var patch=this.patch;
 var cgl=this.patch.cgl;
 Op.apply(this, arguments);
 
-this.name='metroBusInterpolator';
+this.name='metroBusLines';
 var self=this;
 
 var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
@@ -20,11 +20,15 @@ var outR=this.addOutPort(new Port(this,"r",OP_PORT_TYPE_VALUE));
 var outG=this.addOutPort(new Port(this,"g",OP_PORT_TYPE_VALUE));
 var outB=this.addOutPort(new Port(this,"b",OP_PORT_TYPE_VALUE));
 
+var outIndex=this.addOutPort(new Port(this,"index",OP_PORT_TYPE_VALUE));
+
 
 var data=null;
 var anims=[];
 
 // var speed=0.08;
+
+
 
 var reload=function()
 {
@@ -56,6 +60,7 @@ console.log('create anims...');
                         colg:Math.random()*1.5,
                         colb:Math.random()*1.5
                     };
+                    
                     
                     count=0;
 
@@ -109,6 +114,8 @@ exe.onTriggered=function()
         
         var t = (time.get()*speed.get())% (0.1 * anims[i].posX.keys.length);
 
+                    outIndex.set(i);
+
         cgl.pushMvMatrix();
         vec3.set(tempVec,
             anims[i].posX.getValue(t),
@@ -127,29 +134,6 @@ exe.onTriggered=function()
     
 
     }
-
-    // if(data)
-    // {
-    //     for(var i in data)
-    //     {
-    //         count=0;
-
-    //         var j=Math.round(index)%data[i].items.length;
-    //         {
-    //             cgl.pushMvMatrix();
-    //             vec3.set(tempVec,
-    //                 data[i].items[j].latitude-34,
-    //                 0,
-    //                 data[i].items[j].longitude+118);
-
-    //             mat4.translate(cgl.mvMatrix,cgl.mvMatrix, tempVec);
-    //             trigger.trigger();
-    //             cgl.popMvMatrix();
-    //             count++;
-    //         }
-    //     }
-    // }
-    // index+=0.1;
 
 
 };

@@ -19,16 +19,18 @@ invert.onValueChange(function()
 this.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(self.extrude.val); };
 
 var meth=this.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
-    values:['mul xyz','add z','sub z']}));
+    values:['mul xyz','add z','add y','sub z']}));
 var updateMethod=function()
 {
     if(shader)
     {
         shader.removeDefine('DISPLACE_METH_MULXYZ');
         shader.removeDefine('DISPLACE_METH_ADDZ');
+        shader.removeDefine('DISPLACE_METH_ADDY');
     
         if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
         if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
+        if(meth.get()=='add y') shader.define('DISPLACE_METH_ADDY');
         console.log('hallo',meth.get());
     }
 };
@@ -58,6 +60,10 @@ var srcBodyVert=''
     
     .endl()+'#ifdef DISPLACE_METH_ADDZ'
     .endl()+'       pos.z += ( {{mod}}_texVal * {{mod}}_extrude);'
+    .endl()+'#endif'
+    
+    .endl()+'#ifdef DISPLACE_METH_ADDY'
+    .endl()+'       pos.y += ( {{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
     .endl();
 

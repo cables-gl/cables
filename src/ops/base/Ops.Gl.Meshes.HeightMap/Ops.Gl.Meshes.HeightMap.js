@@ -14,8 +14,10 @@ var mHeight=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
 var nRows=this.addInPort(new Port(this,"rows",OP_PORT_TYPE_VALUE));
 var nColumns=this.addInPort(new Port(this,"columns",OP_PORT_TYPE_VALUE));
 
-
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+
+var sliceTex=this.addInPort(new Port(this,"texCoords slice",OP_PORT_TYPE_VALUE,{display:'bool'}));
+
 
 mHeight.set(3.0);
 mWidth.set(3.0);
@@ -67,9 +69,12 @@ var rebuildGeom=function()
 
     var stepRow=meshWidth/numRows;
     var stepColumn=meshHeight/numColumns;
-
+    
+    var cycleTex=0;
+var oldh=0;
     for(r=0;r<=numRows;r++)
     {
+        
         for(c=0;c<=numColumns;c++)
         {
             var h = ctx.getImageData(c*rowStepY, r*rowStepX, 1, 1).data[1]*heightMul;
@@ -78,8 +83,32 @@ var rebuildGeom=function()
             verts.push( r*stepRow       - meshHeight/2 );
             verts.push( h );
 
-            tc.push( c/numColumns );
-            tc.push( 1.0-r/numRows );
+            if(sliceTex.get())
+            {
+                
+                if(h!=oldh)
+                {
+                    if(c%2==0) tc.push( 0.5 );
+                    else tc.push( 1 );
+
+                    tc.push( 1.0-r/numRows );
+                }
+                else
+                {
+                    tc.push( 1 );
+                    tc.push( 0 );
+                    
+                }
+                oldh=h;
+                
+
+            }
+            else
+            {
+                tc.push( c/numColumns );
+                tc.push( 1.0-r/numRows );
+                
+            }
         }
     }
 
