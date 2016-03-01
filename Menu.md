@@ -17,7 +17,7 @@
 
 - [Settings](#settings)
 
-### Project
+### Patch
 
 - [New](#new-project)
 - -
@@ -29,6 +29,8 @@
 - [Save](#save-project)  
 - [Save As](#save-project-as)  
 - [Save To Local Storage](#save-project-to-local-storage)  **Admin-only**
+- -
+- [Search](#search-project)
 - -
 - [Settings](#project-settings)
 
@@ -74,6 +76,11 @@
 - Saves the project under a different name (all project data probably needs to be copied here)
 
 ### Save Project To Local Storage
+
+### Search Project
+
+- Search for an operator in the visual view
+- Highlight the hits visually?
 
 ### Project Settings 
 
