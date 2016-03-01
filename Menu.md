@@ -49,7 +49,10 @@
 
 ### Edit
 
-- [Undo](#undo)
+- Copy **Context-sensitive**
+- Paste **Context-sensitive**
+- -
+- [Undo](#undo) **Context-sensitive**
 - [Redo](#redo) **Context-sensitive**
 
 ### Op / Operator
