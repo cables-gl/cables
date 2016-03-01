@@ -37,6 +37,16 @@
 - -
 - [Settings](#project-settings)
 
+## Other Menus
+
+### Profile
+
+*Revelaed by clicking on the Gravatar-icon / username*  
+
+- Profile
+- Settings
+- Logout
+
 ### Edit
 
 - [Undo](#undo)
