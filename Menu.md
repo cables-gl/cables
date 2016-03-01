@@ -24,7 +24,10 @@
 - [Open](#open-project)
 - ([Open Recent](#open-recent-project))
 - [Open From Local Storage](#open-project-from-local-storage) **Admin-only**
-- [Examples](#examples)
+- -
+- [Browse Examples](#examples) ![open-in-new-window-icom](http://i.stack.imgur.com/IadAX.png)
+- [Browse Own Patches](#examples) ![open-in-new-window-icom](http://i.stack.imgur.com/IadAX.png)
+- [Browse Community Patches](#examples) ![open-in-new-window-icom](http://i.stack.imgur.com/IadAX.png)
 - -
 - [Save](#save-project)  
 - [Save As](#save-project-as)  
