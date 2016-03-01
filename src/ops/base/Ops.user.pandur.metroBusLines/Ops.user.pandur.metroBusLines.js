@@ -54,7 +54,7 @@ var reload=function()
                         var time=count*0.1;
 
                         verts.push( data[i].items[j].latitude-34 );
-                        verts.push( 0 );
+                        verts.push( Math.sin( (data[i].items[j].longitude+data[i].items[j].latitude)*32.0 )*0.001 );
                         verts.push( data[i].items[j].longitude+118 );
 
                         tc.push(0);
@@ -100,7 +100,6 @@ var index=0;
 exe.onTriggered=function()
 {
     var count=0;
-    console.log(meshes.length);
 
     for(var i in meshes)
     {

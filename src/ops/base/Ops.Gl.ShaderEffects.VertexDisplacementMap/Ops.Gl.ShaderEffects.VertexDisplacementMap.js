@@ -31,7 +31,6 @@ var updateMethod=function()
         if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
         if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
         if(meth.get()=='add y') shader.define('DISPLACE_METH_ADDY');
-        console.log('hallo',meth.get());
     }
 };
 
@@ -72,7 +71,8 @@ var srcHeadFrag=''
     .endl();
 
 var srcBodyFrag=''
-    .endl()+'col=texture2D( {{mod}}_texture, texCoord );'
+    .endl()+'float colHeight=texture2D( {{mod}}_texture, texCoord ).r;'
+    .endl()+'if(colHeight==0.0)col.a=0.0;'
     .endl();
 
 var module=null;
@@ -110,14 +110,14 @@ this.render.onTriggered=function()
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
         uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',self.extrude.val);
 
-        // module=shader.addModule(
-        //     {
-        //         name:'MODULE_COLOR',
-        //         srcHeadFrag:srcHeadFrag,
-        //         srcBodyFrag:srcBodyFrag
-        //     });
+        module=shader.addModule(
+            {
+                name:'MODULE_COLOR',
+                srcHeadFrag:srcHeadFrag,
+                srcBodyFrag:srcBodyFrag
+            });
 
-        // uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
+        uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
 
     }
 

@@ -29,7 +29,7 @@ this.render.onTriggered=function()
 
         shader=cgl.getShader();
         oldPrim=shader.glPrimitive;
-        shader.glPrimitive=1;
+        shader.glPrimitive=cgl.gl.LINE_STRIP;
         
         var srcHeadVert=''
             .endl()+'uniform float {{mod}}_size;'
