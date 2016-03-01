@@ -1,5 +1,10 @@
 *How to structure the menu? Which items are needed?*  
 
+## new stuff:
+- «New Project»-button cannot be clicked. / is not a button. show projectname somewhere else
+- upload button/dropzone ???
+
+
 ## Menu Structure
 
 - *Items in `()` brackets might not be needed.*  
@@ -7,7 +12,6 @@
 - ***Context-sensitive*** – only appears under certain cirumstances*      
 - *`-` is a separator between the menu items*  
 - Menu items with a shortcut should display the shortcut next to the name, also the app should check which OS the user is on and display the right shortcut, e.g. `⌘ + s` on Mac next to `Save`
-- «New Project»-button cannot be clicked. / is not a button. show projectname somewhere else
 
 ### Cables 
 
