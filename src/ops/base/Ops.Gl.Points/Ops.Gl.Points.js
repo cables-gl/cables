@@ -28,9 +28,7 @@ this.render.onTriggered=function()
         }
 
         shader=cgl.getShader();
-        oldPrim=shader.glPrimitive;
-        shader.glPrimitive=cgl.gl.POINTS;
-        
+
         var srcHeadVert=''
             .endl()+'uniform float {{mod}}_size;'
             .endl();
@@ -43,15 +41,15 @@ this.render.onTriggered=function()
             });
 
         uniPointSize=new CGL.Uniform(shader,'f',module.prefix+'_size',pointSize.get());
-
     }
 
-    // cgl.points=true;
+    shader=cgl.getShader();
+    oldPrim=shader.glPrimitive;
+    shader.glPrimitive=cgl.gl.POINTS;
+
     self.trigger.trigger();
     
-    shader.glPrimitive=0;
-    // cgl.points=false;
-
+    shader.glPrimitive=oldPrim;
 };
 
 

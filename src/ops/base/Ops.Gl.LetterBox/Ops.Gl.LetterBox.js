@@ -55,7 +55,7 @@
     
     this.onDelete=function()
     {
-        cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+        // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
         cgl.resetViewPort();
     }
 

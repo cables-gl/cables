@@ -28,9 +28,7 @@ this.render.onTriggered=function()
         }
 
         shader=cgl.getShader();
-        oldPrim=shader.glPrimitive;
-        shader.glPrimitive=cgl.gl.LINE_STRIP;
-        
+
         var srcHeadVert=''
             .endl()+'uniform float {{mod}}_size;'
             .endl();
@@ -46,11 +44,15 @@ this.render.onTriggered=function()
 
     }
 
+    shader=cgl.getShader();
+    oldPrim=shader.glPrimitive;
+    shader.glPrimitive=cgl.gl.LINE_STRIP;
+
     // cgl.points=true;
     self.trigger.trigger();
     cgl.gl.lineWidth(pointSize.get());
 
-    shader.glPrimitive=2;
+    shader.glPrimitive=oldPrim;
     // cgl.points=false;
 
 };
