@@ -22,6 +22,9 @@ var outB=this.addOutPort(new Port(this,"b",OP_PORT_TYPE_VALUE));
 
 var outIndex=this.addOutPort(new Port(this,"index",OP_PORT_TYPE_VALUE));
 
+var axis=this.addInPort(new Port(this,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xz","xy"]} ));
+axis.set('xz');
+
 
 var data=null;
 var anims=[];
@@ -105,6 +108,9 @@ exe.onTriggered=function()
 {
     var count=0;
 
+var xaxis=0;
+if(axis.get()=='xy')xaxis=1;
+
     for(var i in anims)
     {
         if(i==0)
@@ -114,14 +120,21 @@ exe.onTriggered=function()
         
         var t = (time.get()*speed.get())% (0.1 * anims[i].posX.keys.length);
 
-                    outIndex.set(i);
+        outIndex.set(i);
 
         cgl.pushMvMatrix();
-        vec3.set(tempVec,
-            anims[i].posX.getValue(t),
-            0,
-            anims[i].posZ.getValue(t)
-            );
+        if(xaxis===0)
+            vec3.set(tempVec,
+                anims[i].posX.getValue(t),
+                0,
+                anims[i].posZ.getValue(t)
+                );
+        if(xaxis==1)
+            vec3.set(tempVec,
+                anims[i].posX.getValue(t),
+                anims[i].posZ.getValue(t),
+                0
+                );
 
         outR.set(anims[i].colr);
         outG.set(anims[i].colg);

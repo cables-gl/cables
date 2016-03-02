@@ -108,7 +108,12 @@ var render=function()
 
 this.texOut.onPreviewChanged=function()
 {
-    if(self.texOut.showPreview) self.render.onTriggered=self.texOut.val.preview;
+    if(self.texOut.showPreview) self.render.onTriggered=function()
+        {
+            render();
+            self.tex.preview();
+        };
+
     else self.render.onTriggered=render;
 };
 
