@@ -64,6 +64,8 @@
 
 - [About](#about)
 - [Reference](#reference)
+- Tutorials
+- Keyboard Shortcuts
 
 ## Menu Items
 
