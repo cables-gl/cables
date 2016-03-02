@@ -70,6 +70,8 @@ var srcVert=''
     .endl()+'#ifndef WIREFRAME_FILL'
     .endl()+'       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
     .endl()+'#endif'
+    // .endl()+'col.xyz=baycentric;'
+    
     
     .endl()+'gl_FragColor =col;'
     

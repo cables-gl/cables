@@ -11,6 +11,9 @@ var lengt=this.addInPort(new Port(this,"length",OP_PORT_TYPE_VALUE));
 
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+
+
 var geom=null;
 var mesh=null;
 width.set(1.0);
@@ -163,6 +166,7 @@ function buildMesh()
     ];
 
     mesh=new CGL.Mesh(cgl,geom);
+    geomOut.set(geom);
 
 }
 
