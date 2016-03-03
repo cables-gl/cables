@@ -33,6 +33,8 @@
 - [Save As](#save-project-as)  
 - [Save To Local Storage](#save-project-to-local-storage)  **Admin-only**
 - -
+- Clear
+- -
 - [Search](#search-project)
 - -
 - [Settings](#project-settings)
