@@ -4,8 +4,8 @@ Op.apply(this, arguments);
 this.name='Websocket';
 this.url=this.addInPort(new Port(this,"url",OP_PORT_TYPE_VALUE,{type:'string'}));
 this.result=this.addOutPort(new Port(this,"result", OP_PORT_TYPE_OBJECT));
-// this.connected=this.addOutPort(new Port(this,"connected"));
-// this.connected.set(false);
+var outConnected=this.addOutPort(new Port(this,"connected"));
+outConnected.set(false);
 
 var connected=false;
 
@@ -64,12 +64,14 @@ function connect()
     {
         console.log("ws error");
         connected=false;
+        outConnected.set(false);
     };
 
     connection.onclose = function (message)
     {
         // console.log("ws close");
         connected=false;
+        outConnected.set(false);
     };
 
     connection.onopen = function (message)
@@ -77,6 +79,7 @@ function connect()
         console.log("ws connected !!!!");
         connected=true;
         connectedTo=self.url.val;
+        outConnected.set(true);
     };
 
     connection.onmessage = function (message)
