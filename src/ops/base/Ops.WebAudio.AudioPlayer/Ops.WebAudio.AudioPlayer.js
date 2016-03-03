@@ -146,6 +146,15 @@ var cgl=this.patch.cgl;
 
                     // CGL.decrementLoadingAssets();
                     cgl.patch.loading.finished(loadingId);
+                                
+                    if(!window.gui)
+                    {
+                        self.media.start(0);
+                        playing=true;
+                    }
+
+                    
+                    
                 } );
 
             };
