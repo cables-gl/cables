@@ -1,5 +1,10 @@
 *How to structure the menu? Which items are needed?*  
 
+## new stuff:
+- «New Project»-button cannot be clicked. / is not a button. show projectname somewhere else
+- upload button/dropzone ???
+
+
 ## Menu Structure
 
 - *Items in `()` brackets might not be needed.*  
@@ -12,24 +17,45 @@
 
 - [Settings](#settings)
 
-### Project
+### Patch
 
 - [New](#new-project)
 - -
 - [Open](#open-project)
 - ([Open Recent](#open-recent-project))
 - [Open From Local Storage](#open-project-from-local-storage) **Admin-only**
-- [Examples](#examples)
+- -
+- [Browse Examples](#examples) ![open-in-new-window-icom](http://i.stack.imgur.com/IadAX.png)
+- [Browse Own Patches](#examples) ![open-in-new-window-icom](http://i.stack.imgur.com/IadAX.png)
+- [Browse Community Patches](#examples) ![open-in-new-window-icom](http://i.stack.imgur.com/IadAX.png)
 - -
 - [Save](#save-project)  
 - [Save As](#save-project-as)  
 - [Save To Local Storage](#save-project-to-local-storage)  **Admin-only**
 - -
+- Clear
+- Delete
+- -
+- [Search](#search-project)
+- -
 - [Settings](#project-settings)
+
+## Other Menus
+
+### Profile
+
+*Revelaed by clicking on the Gravatar-icon / username*  
+
+- Profile
+- Settings
+- Logout
 
 ### Edit
 
-- [Undo](#undo)
+- Copy **Context-sensitive**
+- Paste **Context-sensitive**
+- -
+- [Undo](#undo) **Context-sensitive**
 - [Redo](#redo) **Context-sensitive**
 
 ### Op / Operator
@@ -41,6 +67,8 @@
 
 - [About](#about)
 - [Reference](#reference)
+- Tutorials
+- Keyboard Shortcuts
 
 ## Menu Items
 
@@ -69,6 +97,11 @@
 - Saves the project under a different name (all project data probably needs to be copied here)
 
 ### Save Project To Local Storage
+
+### Search Project
+
+- Search for an operator in the visual view
+- Highlight the hits visually?
 
 ### Project Settings 
 

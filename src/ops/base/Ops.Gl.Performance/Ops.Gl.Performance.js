@@ -5,15 +5,18 @@ var cgl=self.patch.cgl;
 // if(cgl.aborted)return false;
 
 this.name='Performance';
-this.textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 
 this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
+
+this.textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
+var outFPS=this.addOutPort(new Port(this,"fps",OP_PORT_TYPE_VALUE));
+
 
 this.enabled=this.addInPort(new Port(this,"enabled",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.enabled.set(true);
 
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 
 var canvas = document.createElement('canvas');
 canvas.id     = "performance_"+self.patch.config.glCanvasId;
@@ -67,8 +70,8 @@ function refresh()
 {
     if(!self.enabled.get())
     {
-            self.trigger.trigger();
-return;
+        self.trigger.trigger();
+        return;
     }
     ll=performance.now();
 
@@ -86,6 +89,7 @@ return;
     {
         fps=frames;
         frames=0;
+        outFPS.set(fps);
 
         text=self.patch.config.glCanvasId+' fps: '+fps;
         fpsStartTime=Date.now();
@@ -144,8 +148,11 @@ return;
 
     ctx.restore();
 
-    if(self.textureOut.get()) self.textureOut.get().initTexture(cgl,fontImage);
-        else self.textureOut.set( new CGL.Texture.fromImage(cgl,fontImage) );
+    if(self.textureOut.isLinked())
+    {
+        if(self.textureOut.get()) self.textureOut.get().initTexture(cgl,fontImage);
+            else self.textureOut.set( new CGL.Texture.fromImage(cgl,fontImage) );
+    }
 
     lastTime=performance.now();
     selfTime=performance.now()-ll;

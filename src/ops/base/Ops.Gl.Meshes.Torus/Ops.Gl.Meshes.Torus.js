@@ -15,6 +15,8 @@ this.outerRadius.set(1);
 
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+
 var mesh=null;
 var geom=null;
 
@@ -118,6 +120,7 @@ function generateTorus(iradius,oradius,nRings,nSides)
         geom.verticesIndices[idx+1] = i + ioff;
         idx +=2;
     }
+    geomOut.set(geom);
 
     mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
 

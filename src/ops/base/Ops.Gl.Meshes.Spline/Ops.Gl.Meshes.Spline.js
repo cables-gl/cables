@@ -34,6 +34,8 @@ function easeSmootherStep(perc)
 
 this.render.onTriggered=function()
 {
+    cgl.frameStore.SplinePoints.length=0;
+
     var shader=cgl.getShader();
     self.trigger.trigger();
     if(!shader)return;

@@ -1,3 +1,4 @@
+//https://www.shadertoy.com/view/XdlGz8 ??
 CABLES.Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
@@ -19,17 +20,18 @@ invert.onValueChange(function()
 this.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(self.extrude.val); };
 
 var meth=this.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
-    values:['mul xyz','add z','sub z']}));
+    values:['mul xyz','add z','add y','sub z']}));
 var updateMethod=function()
 {
     if(shader)
     {
         shader.removeDefine('DISPLACE_METH_MULXYZ');
         shader.removeDefine('DISPLACE_METH_ADDZ');
+        shader.removeDefine('DISPLACE_METH_ADDY');
     
         if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
         if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
-        console.log('hallo',meth.get());
+        if(meth.get()=='add y') shader.define('DISPLACE_METH_ADDY');
     }
 };
 
@@ -59,6 +61,10 @@ var srcBodyVert=''
     .endl()+'#ifdef DISPLACE_METH_ADDZ'
     .endl()+'       pos.z += ( {{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
+    
+    .endl()+'#ifdef DISPLACE_METH_ADDY'
+    .endl()+'       pos.y += ( {{mod}}_texVal * {{mod}}_extrude);'
+    .endl()+'#endif'
     .endl();
 
 var srcHeadFrag=''
@@ -66,7 +72,8 @@ var srcHeadFrag=''
     .endl();
 
 var srcBodyFrag=''
-    .endl()+'col=texture2D( {{mod}}_texture, texCoord );'
+    .endl()+'float colHeight=texture2D( {{mod}}_texture, texCoord ).r;'
+    .endl()+'if(colHeight==0.0)col.a=0.0;'
     .endl();
 
 var module=null;
@@ -104,14 +111,14 @@ this.render.onTriggered=function()
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
         uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',self.extrude.val);
 
-        // module=shader.addModule(
-        //     {
-        //         name:'MODULE_COLOR',
-        //         srcHeadFrag:srcHeadFrag,
-        //         srcBodyFrag:srcBodyFrag
-        //     });
+        module=shader.addModule(
+            {
+                name:'MODULE_COLOR',
+                srcHeadFrag:srcHeadFrag,
+                srcBodyFrag:srcBodyFrag
+            });
 
-        // uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
+        uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
 
     }
 

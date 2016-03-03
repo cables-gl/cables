@@ -9,8 +9,11 @@
     this.offX=this.addOutPort(new Port(this,"offset x",OP_PORT_TYPE_VALUE));
     this.offY=this.addOutPort(new Port(this,"offset y",OP_PORT_TYPE_VALUE));
 
-    this.ratio=this.addInPort(new Port(this,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1.25,1.3333333333,1.777777777778,2.33333333333333]} ));
+    this.ratio=this.addInPort(new Port(this,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1.25,1.3333333333,1.777777777778,2.33333333333333,3]} ));
     this.ratio.val=1.777777777778;
+
+    var blackBars=this.addInPort(new Port(this,"black bars",OP_PORT_TYPE_VALUE,{display:'bool'}));
+    blackBars.set(true);
 
     var x=0,y=0,w=1000,h=1000;
 
@@ -49,10 +52,20 @@
             }
         }
     }
+    
+    this.onDelete=function()
+    {
+        // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+        cgl.resetViewPort();
+    }
 
     this.render.onTriggered=function()
     {
-        cgl.gl.enable(cgl.gl.SCISSOR_TEST);
+        if(blackBars.get())
+        {
+            cgl.gl.clearColor(0,0,0,1);
+            cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        }
 
         resize();
 
@@ -63,6 +76,5 @@
 
 
         self.trigger.trigger();
-        cgl.gl.disable(cgl.gl.SCISSOR_TEST);
 
     };

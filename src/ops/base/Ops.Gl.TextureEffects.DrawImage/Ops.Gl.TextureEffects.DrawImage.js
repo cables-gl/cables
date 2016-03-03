@@ -38,8 +38,14 @@ var srcFrag=''
     .endl()+'  uniform sampler2D image;'
     .endl()+'#endif'
 
+    // .endl()+'#ifdef TEX_TRANSFORM'
+    .endl()+'   uniform float posX;'
+    .endl()+'   uniform float posY;'
+    .endl()+'   uniform float scale;'
+    // .endl()+'#endif'
+
     .endl()+'#ifdef HAS_TEXTUREALPHA'
-    .endl()+'  uniform sampler2D imageAlpha;'
+    .endl()+'   uniform sampler2D imageAlpha;'
     .endl()+'#endif'
 
     .endl()+'uniform float amount;'
@@ -48,9 +54,25 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 blendRGBA=vec4(0.0,0.0,0.0,1.0);'
     .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'       blendRGBA=texture2D(image,texCoord);'
-
-
+    .endl()+'       vec2 tc=texCoord;'
+    .endl()+''
+    .endl()+'       #ifdef TEX_FLIP_X'
+    .endl()+'           tc.x=1.0-tc.x;'
+    .endl()+'       #endif'
+    .endl()+'       #ifdef TEX_FLIP_Y'
+    .endl()+'           tc.y=1.0-tc.y;'
+    .endl()+'       #endif'
+    .endl()+''
+    .endl()+'       #ifdef TEX_TRANSFORM'
+    .endl()+'           tc.x /= scale;'
+    .endl()+'           tc.y /= scale;'
+    .endl()+'           tc.x += posX;'
+    .endl()+'           tc.y += posY;'
+    .endl()+'       #endif'
+    .endl()+''
+    .endl()+''
+    .endl()+'       blendRGBA=texture2D(image,tc);'
+    .endl()+''
     .endl()+'vec3 blend=blendRGBA.rgb;'
     .endl()+'vec4 baseRGBA=texture2D(tex,texCoord);'
     .endl()+'vec3 base=baseRGBA.rgb;'
@@ -205,6 +227,64 @@ this.alphaSrc.onValueChanged=function()
 };
 
 this.alphaSrc.val="alpha channel";
+
+
+{
+    //
+    // texture flip
+    //
+    var flipX=this.addInPort(new Port(this,"flip x",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipY=this.addInPort(new Port(this,"flip y",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    
+    flipX.onValueChanged=function()
+    {
+        if(flipX.get()) shader.define('TEX_FLIP_X');
+            else shader.removeDefine('TEX_FLIP_X');
+    };
+    
+    flipY.onValueChanged=function()
+    {
+        if(flipY.get()) shader.define('TEX_FLIP_Y');
+            else shader.removeDefine('TEX_FLIP_Y');
+    };
+}
+
+{
+    //
+    // texture transform
+    //
+    var scale=this.addInPort(new Port(this,"scale",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var posX=this.addInPort(new Port(this,"pos x",OP_PORT_TYPE_VALUE,{  }));
+    var posY=this.addInPort(new Port(this,"pos y",OP_PORT_TYPE_VALUE,{  }));
+
+    scale.set(1.0);
+
+    var uniScale=new CGL.Uniform(shader,'f','scale',scale.get());
+    var uniPosX=new CGL.Uniform(shader,'f','posX',posX.get());
+    var uniPosY=new CGL.Uniform(shader,'f','posY',posY.get());
+
+    function updateTransform()
+    {
+        // console.log('tex trans!!');
+        if(scale.get()!=1.0 || posX.get()!=0.0 || posY.get()!=0.0 )
+        {
+            shader.define('TEX_TRANSFORM');
+            uniScale.setValue( parseFloat(scale.get()) );
+            uniPosX.setValue( posX.get() );
+            uniPosY.setValue( posY.get() );
+        }
+        else
+        {
+            shader.removeDefine('TEX_TRANSFORM');   
+        }
+    }
+    
+    scale.onValueChange(updateTransform);
+    posX.onValueChange(updateTransform);
+    posY.onValueChange(updateTransform);
+
+}
+
 
 this.blendMode.onValueChanged=function()
 {

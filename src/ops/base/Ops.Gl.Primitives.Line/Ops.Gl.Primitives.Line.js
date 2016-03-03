@@ -1,7 +1,7 @@
 var self=this;
 var cgl=self.patch.cgl;
 
-this.name='Points';
+this.name='Lines';
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -37,19 +37,24 @@ this.render.onTriggered=function()
             {
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
-                srcBodyVert:'gl_PointSize = {{mod}}_size;'
+                // srcBodyVert:'gl_LineWidth = {{mod}}_size;'
             });
 
         uniPointSize=new CGL.Uniform(shader,'f',module.prefix+'_size',pointSize.get());
+
     }
 
     shader=cgl.getShader();
     oldPrim=shader.glPrimitive;
-    shader.glPrimitive=cgl.gl.POINTS;
+    shader.glPrimitive=cgl.gl.LINE_STRIP;
 
+    // cgl.points=true;
     self.trigger.trigger();
-    
+    cgl.gl.lineWidth(pointSize.get());
+
     shader.glPrimitive=oldPrim;
+    // cgl.points=false;
+
 };
 
 

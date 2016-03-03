@@ -39,8 +39,9 @@ var reload=function(nocache)
         {
             if(err)
             {
+                console.log('error loading image');
                 setTempTexture();
-                self.uiAttr({warning:'could not load texture'});
+                self.uiAttr({'error':'could not load texture'});
                 return;
             }
             textureOut.val=tex;

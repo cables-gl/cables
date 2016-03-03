@@ -14,7 +14,7 @@
 
         Math.randomSeed=seed.get();
 
-        arr.length=numValues.get();
+        arr.length=parseInt(numValues.get()) || 100;
         for(var i=0;i<arr.length;i++)
         {
             arr[i]=Math.seededRandom();//Math.random();
