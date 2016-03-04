@@ -1,22 +1,25 @@
-    var self=this;
-    Op.apply(this, arguments);
+this.name='Clamp';
+var val=this.addInPort(new Port(this,"val"));
+var min=this.addInPort(new Port(this,"min"));
+var max=this.addInPort(new Port(this,"max"));
+var ignore=this.addInPort(new Port(this,"ignore outside values",OP_PORT_TYPE_VALUE,{'display':'bool'}));
+var result=this.addOutPort(new Port(this,"result"));
 
-    this.name='Clamp';
-    this.val=this.addInPort(new Port(this,"val"));
-    this.min=this.addInPort(new Port(this,"min"));
-    this.max=this.addInPort(new Port(this,"max"));
-    this.result=this.addOutPort(new Port(this,"result"));
-
-    function clamp()
+function clamp()
+{
+    if(ignore.get())
     {
-        self.result.val= Math.min(Math.max(self.val.val, self.min.val), self.max.val);
+        if(val.get()>max.get()) return;
+        if(val.get()<min.get()) return;
     }
+    result.set( Math.min(Math.max(val.get(), min.get()), max.get()));
+}
 
-    this.min.val=0;
-    this.max.val=1;
+min.val=0;
+max.val=1;
 
-    this.val.onValueChanged=clamp;
-    this.min.onValueChanged=clamp;
-    this.max.onValueChanged=clamp;
+val.onValueChanged=clamp;
+min.onValueChanged=clamp;
+max.onValueChanged=clamp;
 
-    this.val.val=0.5;
+val.val=0.5;

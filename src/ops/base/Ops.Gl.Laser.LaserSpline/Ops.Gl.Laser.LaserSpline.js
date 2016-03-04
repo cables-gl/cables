@@ -27,7 +27,14 @@ var h=this.addInPort(new Port(this,"h",OP_PORT_TYPE_VALUE));
 var coordmul=this.addInPort(new Port(this,"mul",OP_PORT_TYPE_VALUE));
 var coordClamp=this.addInPort(new Port(this,"clamp",OP_PORT_TYPE_VALUE));
 
+var colorMul=this.addInPort(new Port(this,"color intensity",OP_PORT_TYPE_VALUE));
+colorMul.set(1.0);
 var buffer = cgl.gl.createBuffer();
+
+
+var hue=this.addInPort(new Port(this,"hue",OP_PORT_TYPE_VALUE));
+colorMul.set(1.0);
+
 
 function easeSmoothStep(perc)
 {
@@ -152,12 +159,13 @@ this.render.onTriggered=function()
             var x=Math.round(   vv[0]*coordmul.get()/2);
             var y=Math.round(-1*vv[1]*coordmul.get());
 
+
             if(cgl.frameStore.laserPoints[i].num<0)
             {
                 if(ni==Math.abs(cgl.frameStore.laserPoints[i].num)-1)
                 {
-                    cgl.frameStore.laserPoints[i].colR=150;
-                    cgl.frameStore.laserPoints[i].colG=150;
+                    cgl.frameStore.laserPoints[i].colR=150*colorMul.get();
+                    cgl.frameStore.laserPoints[i].colG=150*colorMul.get();
                     cgl.frameStore.laserPoints[i].colB=0;
                 }
                 else
@@ -211,15 +219,20 @@ this.render.onTriggered=function()
             laserObj[ind*stride+2] = 0;
 
 
+// if(cgl.frameStore.laserPoints[i].colR)cgl.frameStore.laserPoints[i].colR*=colorMul.get();
+// if(cgl.frameStore.laserPoints[i].colG)cgl.frameStore.laserPoints[i].colG*=colorMul.get();
+// if(cgl.frameStore.laserPoints[i].colB)cgl.frameStore.laserPoints[i].colB*=colorMul.get();
+
+
             if(!clamped)
             {
-                laserObj[ind*stride+3] = parseInt((cgl.frameStore.laserPoints[i].colR || lastR)*90,10);
-                laserObj[ind*stride+4] = parseInt((cgl.frameStore.laserPoints[i].colG || lastG)*90,10);
-                laserObj[ind*stride+5] = parseInt((cgl.frameStore.laserPoints[i].colB || lastB)*90,10);
+                laserObj[ind*stride+3] = parseInt((cgl.frameStore.laserPoints[i].colR || lastR)*255*colorMul.get(),10);
+                laserObj[ind*stride+4] = parseInt((cgl.frameStore.laserPoints[i].colG || lastG)*255*colorMul.get(),10);
+                laserObj[ind*stride+5] = parseInt((cgl.frameStore.laserPoints[i].colB || lastB)*255*colorMul.get(),10);
             }
             else
             {
-                cgl.frameStore.laserPoints[i].colR=cgl.frameStore.laserPoints[i].colG=cgl.frameStore.laserPoints[i].colB=0;                
+                cgl.frameStore.laserPoints[i].colR=cgl.frameStore.laserPoints[i].colG=cgl.frameStore.laserPoints[i].colB=0;               
 
                 // laserObj[ind*stride+3] = 0;
                 // laserObj[ind*stride+4] = 0;

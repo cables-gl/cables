@@ -16,7 +16,7 @@ this.currentKeyTime=this.addOutPort(new Port(this,"currentKeyTime",OP_PORT_TYPE_
 
 var triggers=[];
 
-for(var i=0;i<30;i++)
+for(var i=0;i<32;i++)
 {
     triggers.push( this.addOutPort(new Port(this,"trigger "+i,OP_PORT_TYPE_FUNCTION)) );
 }

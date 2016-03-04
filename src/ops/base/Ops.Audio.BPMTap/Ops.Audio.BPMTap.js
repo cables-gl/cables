@@ -67,7 +67,7 @@ exe.onTriggered=function()
 
 function tapPressed()
 {
-    console.log("tab")
+    // console.log("tab")
     avg=0;
 
     if(Date.now()-lastTap>1000)

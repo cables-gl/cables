@@ -15,7 +15,7 @@ this.name='midiInput';
 this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.normalize.set(true);
 
-// this.note=this.addInPort(new Port(this,"note"));
+var outNote=this.addOutPort(new Port(this,"note"));
 // this.noteValue=this.addOutPort(new Port(this,"note value"));
 
 var midi;
@@ -34,18 +34,37 @@ function onMIDIFailure()
     console.log("no midi...");
 }
 
+
+var outputId=0;
 // midi functions
 function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
     var inputs = midi.inputs.values();
+    var outputs = midi.outputs.values();
     // loop through all inputs
-    for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
+    for (var input = inputs.next(); input && !input.done; input = inputs.next())
+    {
         // listen for midi messages
         input.value.onmidimessage = onMIDIMessage;
         // this just lists our inputs in the console
         listInputs(input);
     }
+    
+    
+    for (var output = outputs.next(); output && !output.done; output = outputs.next())
+    {
+        console.log(output);
+        if(outputId===0) outputId=output.value.id;
+        // console.log(output);
+        // listInputs(output);
+    }
+
+    // output = outputs.next();
+
+
+
+
     // listen for connect/disconnect message
     // midi.onstatechange = onStateChange;
 }
@@ -74,10 +93,13 @@ function onMIDIMessage(event)
     //         break;
     // }
 
-    // console.log('cmd', cmd,'channel', channel,'type', type, 'note',note,'velocity',velocity);
+    // var noteOnMessage = [0x90, note, 127];    // note on, middle C, full velocity
+    // var output = midi.outputs.get(outputId);
+    // output.send( noteOnMessage );  //omitting the timestamp means send immediately.
 
-    // self.note.set(note);
-    // self.noteValue.set(velocity);
+
+    outNote.set(note);
+
     cgl.frameStore.midi=cgl.frameStore.midi || [];
     var v=velocity;
     if(self.normalize.get())v/=127;
@@ -94,5 +116,5 @@ function listInputs(inputs)
     var str="Midi Device: <br/> type: " + input.type + " <br/>id: " + input.id +
         " <br/>manufacturer: " + input.manufacturer + " <br/>name: " + input.name +
         " <br/>version: " + input.version ;
-    self.uiAttr({info:str});
+    self.uiAttr({'info':str});
 }
