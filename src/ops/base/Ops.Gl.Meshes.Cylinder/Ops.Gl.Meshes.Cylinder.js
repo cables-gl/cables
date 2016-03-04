@@ -17,6 +17,8 @@ this.height.set(2);
 
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+
 var mesh=null;
 var geom=null;
 
@@ -184,6 +186,7 @@ function generateCylinder(radf,height,stacks,slices)
 
 
 
+    geomOut.set(geom);
 
 
     mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);

@@ -27,38 +27,60 @@ exe.onTriggered=function()
 
 function checkConnection()
 {
-    
-    if(!connected)
-    {
-        console.log('retry');    
 
+// 0 - connection not yet established
+// 1 - conncetion established
+// 2 - in closing handshake
+// 3 - connection closed or could not open
+
+connection.readyState
+
+    if(connection.readyState!=1)
+    {
+        console.log('retry');
+        connected=false;
         connect();
+    }
+    else
+    {
+        connected=true;
     }
     timeout=setTimeout(checkConnection,1000);
 }
 
-function connect()
-{
-    if(connected===true && connectedTo==self.url.val) return;
-    if(connected===true)
-    {
-        console.log('closing connection...');
-        connection.close();
-    }
 
-    window.WebSocket = window.WebSocket || window.MozWebSocket;
- 
-     if (!window.WebSocket) console.error('Sorry, but your browser doesn\'t support WebSockets.');
+function reconnect()
+{
 
     try
     {
-        if(connection!=null)connection.close();
+        if(connection!=null)
+        {
+            console.log('i close the connection...');
+            connection.close();
+        }
         connection = new WebSocket(self.url.val);
     }
     catch (e)
     {
         console.log('could not connect to',self.url.val);
     }
+
+}
+function connect()
+{
+    if(connected===true && connectedTo==self.url.val) return;
+    if(connected===true)
+    {
+        // console.log('closing connection...');
+        // connection.close();
+    }
+
+    window.WebSocket = window.WebSocket || window.MozWebSocket;
+    
+    if(connection==null)reconnect();
+ 
+     if (!window.WebSocket) console.error('Sorry, but your browser doesn\'t support WebSockets.');
     
     connection.onerror = function (message)
     {
@@ -69,7 +91,7 @@ function connect()
 
     connection.onclose = function (message)
     {
-        // console.log("ws close");
+        console.log("ws close");
         connected=false;
         outConnected.set(false);
     };
@@ -101,7 +123,7 @@ function connect()
     
 }
 
-this.url.onValueChanged=connect;
+this.url.onValueChanged=reconnect;
 timeout=setTimeout(checkConnection,1000);
 
 this.url.val='ws://192.168.1.174:8080/laz0r';

@@ -4,24 +4,25 @@ var cgl=self.patch.cgl;
 
 this.name='laserpoint';
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+
+var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE,{ }));
+var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE,{ }));
+var z=this.addInPort(new Port(this,"z",OP_PORT_TYPE_VALUE,{ }));
+
+
 var doSetColor=this.addInPort(new Port(this,"set color",OP_PORT_TYPE_VALUE,{'display':'bool'}));
+doSetColor.set(true);
+
 var numPoints=this.addInPort(new Port(this,"num points",OP_PORT_TYPE_VALUE));
+
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 numPoints.set(1);
 {
     // diffuse color
 
     var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    // r.onValueChanged=function()
-    // {
-    //     if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
-    //     else r.uniform.setValue(r.get());
-    // };
-
     var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-
     var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-
     var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
     r.set(Math.random());
@@ -34,7 +35,7 @@ this.render.onTriggered=function()
 {
     if(!cgl.frameStore.SplinePoints)return;
     var pos=[0,0,0];
-    vec3.transformMat4(pos, [0,0,0], cgl.mvMatrix);
+    vec3.transformMat4(pos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
 
     var obj={x:pos[0],y:pos[1],z:pos[2],num:numPoints.get()};
 
@@ -46,8 +47,6 @@ this.render.onTriggered=function()
     }
 
     cgl.frameStore.laserPoints.push(obj);
-    // cgl.frameStore.SplinePoints.push(pos[1]);
-    // cgl.frameStore.SplinePoints.push(pos[2]);
 
     self.trigger.trigger();
 };

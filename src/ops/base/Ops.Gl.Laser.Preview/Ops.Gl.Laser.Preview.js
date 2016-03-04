@@ -13,35 +13,38 @@ var verts=[];
 var indices=[];
 var vertsColors=[];
 
+var counter=0;
+
 function render()
 {
     if(!laserArray.get())return;
     geom.clear();
 
-    verts.length=laserArray.get().length/5*3;
-    vertsColors.length=laserArray.get().length/5*4;
+    var stride=6;
+
+    verts.length=laserArray.get().length/stride*3;
+    vertsColors.length=laserArray.get().length/stride*4;
     indices.length=verts.length;
-    // console.log(laserObj.get().length);
-    // console.log(laserObj.get()[6] );
 
     var lastR=255;
     var lastG=255;
     var lastB=255;
 
+    // counter+=100;
+    // if(counter>laserArray.get().length)counter=0;
 
-    for(var i=0;i<laserArray.get().length;i+=5)
+    for(var i=0;i<laserArray.get().length;i+=stride)
     {
-        verts[i/5*3+0]=laserArray.get()[i+0];
-        verts[i/5*3+1]=laserArray.get()[i+1];
-        verts[i/5*3+2]=0;
+        verts[i/stride*3+0]=laserArray.get()[i+0];
+        verts[i/stride*3+1]=laserArray.get()[i+1];
+        verts[i/stride*3+2]=laserArray.get()[i+2];
         
-        vertsColors[i/5*4+0]=(laserArray.get()[i+2])/255;
-        vertsColors[i/5*4+1]=(laserArray.get()[i+3])/255;
-        vertsColors[i/5*4+2]=(laserArray.get()[i+4])/255;
-        vertsColors[i/5*4+3]=1;
+        vertsColors[i/stride*4+0]=(laserArray.get()[i+3])/90;
+        vertsColors[i/stride*4+1]=(laserArray.get()[i+4])/90;
+        vertsColors[i/stride*4+2]=(laserArray.get()[i+5])/90;
+        vertsColors[i/stride*4+3]=1;
 
-        indices[i/5]=i/5;
-    
+        indices[i/stride]=i/stride;
 
         if(i==10)
         {
@@ -58,26 +61,14 @@ function render()
         cgl.popMvMatrix();
     }
 
-    // for(var i=0;i<indices.length;i++)indices[i]=i;
-    // for(var i i)
-    // verts.push( c*stepColumn    - meshWidth/2 );
-    // verts.push( r*stepRow       - meshHeight/2 );
-    // verts.push( h );
     geom.vertices=verts;
     geom.vertexColors=vertsColors;
-    
-    // geom.texCoords=tc;
     geom.verticesIndices=indices;
-    // geom.calcNormals();
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom,cgl.gl.LINE_STRIP);
     mesh.setGeom(geom);
-    
-    // mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
 
     if(mesh) mesh.render(cgl.getShader());
-    // trigger.trigger();
-    
 
 }
 
