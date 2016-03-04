@@ -54,4 +54,4 @@ Triggers on the offbeats – *1 **and** two **and** …*
 
 ### bpm
 
-The calculated `bpm`-value, based on you taps.
+The calculated `bpm`-value, based on your taps.
