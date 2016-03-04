@@ -51,6 +51,8 @@
                 );
         }
     }
+    
+
 
     this.segments.onValueChanged=calc;
     this.radius.onValueChanged=calc;

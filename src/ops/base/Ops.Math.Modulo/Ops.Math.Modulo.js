@@ -13,14 +13,20 @@ function exec()
 {
     self.updateAnims();
 
+    var n2=parseFloat(number2.get());
+    var n1=parseFloat(number1.get());
+    
+    if(n2===0)n2=0.001;
+    if(n1===0)n1=0.001;
+
     if(doPingPong)
     {
-        result.set(number1.get() % number2.get()*2);
-        if(result.get()>number2.get()) result.set( number2.get() * 2.0-result.get() );
+        result.set(n1 % n2*2);
+        if(result.get()>n2) result.set( n2 * 2.0-result.get() );
         return;
     }
 
-    result.set(number1.get() % number2.get() );
+    result.set(n1 % n2 );
 }
 
 number1.onValueChange(exec);
