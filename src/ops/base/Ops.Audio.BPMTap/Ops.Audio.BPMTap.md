@@ -50,8 +50,8 @@ Triggers on the fourth beat – *_, _, _, 4*.
 
 ### offbeat
 
-Triggers on the offbeats – *1 **and** two **and** …*
+Triggers on the offbeats – *one **and** two **and** …*
 
 ### bpm
 
-The calculated `bpm`-value, based on you taps.
+The calculated `bpm`-value, based on your taps.
