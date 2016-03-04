@@ -4,9 +4,9 @@ var cgl=this.patch.cgl;
 
 this.name='BrightnessContrast';
 
+this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.amount=this.addInPort(new Port(this,"contrast",OP_PORT_TYPE_VALUE,{ display:'range' }));
 this.amountBright=this.addInPort(new Port(this,"brightness",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);

@@ -1,14 +1,15 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-
 this.name='ToggleBool';
 
-this.bool=this.addInPort(new Port(this,"boolean"));
-this.bool.val=false;
-this.boolOut=this.addOutPort(new Port(this,"result"));
-this.boolOut.val=true;
+var trigger=this.addInPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var outBool=this.addOutPort(new Port(this,"result",OP_PORT_TYPE_VALUE));
 
-this.bool.onValueChanged=function()
+var theBool=false;
+
+trigger.onTriggered=function()
 {
-    this.boolOut=!this.bool.val;
+    console.log('togglebool!');
+    theBool=!theBool;
+    outBool.set(theBool);
 };
+
+outBool.set(theBool);

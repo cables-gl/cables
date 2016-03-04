@@ -44,6 +44,7 @@ var reload=function(nocache)
                 self.uiAttr({'error':'could not load texture'});
                 return;
             }
+            self.uiAttr({'error':null});
             textureOut.val=tex;
             width.set(tex.width);
             height.set(tex.height);

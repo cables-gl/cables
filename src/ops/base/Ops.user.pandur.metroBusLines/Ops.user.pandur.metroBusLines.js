@@ -83,11 +83,11 @@ var reload=function()
                 }
 
                 // console.log('anims OK...',anims.length);
-
+                self.uiAttr({'error':null});
             }
             catch(e)
             {
-                self.uiAttr({'warning':'error loading json'});
+                self.uiAttr({'error':'error loading json'});
             }
         });
 
