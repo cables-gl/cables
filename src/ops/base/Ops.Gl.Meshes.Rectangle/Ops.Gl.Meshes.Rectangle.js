@@ -13,6 +13,11 @@ var nColumns=this.addInPort(new Port(this,"num columns"));
 var nRows=this.addInPort(new Port(this,"num rows"));
 
 var axis=this.addInPort(new Port(this,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+
+
+var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+
+
 axis.set('xy');
 pivotX.set('center');
 pivotY.set('center');
@@ -115,6 +120,8 @@ function rebuild()
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
+    geomOut.set(geom);
+
 }
 rebuild();
 

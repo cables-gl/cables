@@ -24,6 +24,9 @@ var fov=this.addInPort(new Port(this,"fov",OP_PORT_TYPE_VALUE));
 var w=this.addInPort(new Port(this,"w",OP_PORT_TYPE_VALUE));
 var h=this.addInPort(new Port(this,"h",OP_PORT_TYPE_VALUE));
 
+var coordmul=this.addInPort(new Port(this,"mul",OP_PORT_TYPE_VALUE));
+var coordClamp=this.addInPort(new Port(this,"clamp",OP_PORT_TYPE_VALUE));
+
 var buffer = cgl.gl.createBuffer();
 
 function easeSmoothStep(perc)
@@ -41,6 +44,7 @@ function easeSmootherStep(perc)
 }
 
 var laserObj=[];
+var stride=6;
 
 this.render.onTriggered=function()
 {
@@ -76,6 +80,37 @@ this.render.onTriggered=function()
         vec3.set(v,x,y);
         return v;
     }
+    
+
+        
+    
+    // var subd=5;
+    // if(subd>0)
+    // {
+    //     var points=[];
+    //     for(var i=0;i<cgl.frameStore.SplinePoints.length-3;i+=3)
+    //     {
+    //         for(var j=0;j<subd;j++)
+    //         {
+    //             for(var k=0;k<3;k++)
+    //             {
+    //                 points.push(
+    //                     cgl.frameStore.SplinePoints[i+k]+
+    //                         ( 
+    //                             cgl.frameStore.SplinePoints[i+k+3] - 
+    //                             cgl.frameStore.SplinePoints[i+k] ) *
+    //                             j/subd
+    //                         );
+    //             }
+    //         }
+    //     }
+
+
+    //     cgl.frameStore.SplinePoints=points;
+    // }
+
+    
+    
 
     var lastR=255;
     var lastG=255;
@@ -84,11 +119,14 @@ this.render.onTriggered=function()
     var numPoints=0;
     for(var i=0;i<cgl.frameStore.laserPoints.length;i++)
     {
-        numPoints+=parseInt(cgl.frameStore.laserPoints[i].num,10);
+        numPoints+=parseInt(Math.abs(cgl.frameStore.laserPoints[i].num),10);
     }
-    laserObj.length=numPoints*5;
+    laserObj.length=numPoints*stride;
 
     var ind=0;
+    
+    var lastX=0;
+    var lastY=0;
     for(var i=0;i<cgl.frameStore.laserPoints.length;i++)
     {
         var vec=[0,0,0];
@@ -107,15 +145,90 @@ this.render.onTriggered=function()
         
         var vv=project(point,w.get(),h.get(),fov.get(),0.01);//viewWidth, viewHeight, fov, viewDistance)
 
+    
 
-        for(var ni=0;ni<cgl.frameStore.laserPoints[i].num;ni++)
+        for(var ni=0;ni<Math.abs(cgl.frameStore.laserPoints[i].num);ni++)
         {
-            laserObj[ind*5+0] = -1*vv[0];
-            laserObj[ind*5+1] = -1*vv[1];
-            laserObj[ind*5+2] = (cgl.frameStore.laserPoints[i].colR || lastR)*255;
-            laserObj[ind*5+3] = (cgl.frameStore.laserPoints[i].colG || lastG)*255;
-            laserObj[ind*5+4] = (cgl.frameStore.laserPoints[i].colB || lastB)*255;
+            var x=Math.round(   vv[0]*coordmul.get()/2);
+            var y=Math.round(-1*vv[1]*coordmul.get());
+
+            if(cgl.frameStore.laserPoints[i].num<0)
+            {
+                if(ni==Math.abs(cgl.frameStore.laserPoints[i].num)-1)
+                {
+                    cgl.frameStore.laserPoints[i].colR=150;
+                    cgl.frameStore.laserPoints[i].colG=150;
+                    cgl.frameStore.laserPoints[i].colB=0;
+                }
+                else
+                {
+                    cgl.frameStore.laserPoints[i].colR=0;
+                    cgl.frameStore.laserPoints[i].colG=0;
+                    cgl.frameStore.laserPoints[i].colB=0;
+
+                }
+            }
+            else
+            if(ni==cgl.frameStore.laserPoints[i].num-1)
+            {
+                lastX=x;
+                lastY=y;
+            }
+            else
+            {
+                var perc=ni/cgl.frameStore.laserPoints[i].num;
+                x=lastX+(x-lastX)*perc;
+                y=lastY+(y-lastY)*perc;
+            }
+
+
+
+            var clamped=false;
+            if(x>coordClamp.get()) 
+            {
+
+                clamped=true;
+                x=coordClamp.get();
+            }
+            if(y>coordClamp.get())
+            {
+                clamped=true;
+                y=coordClamp.get();
+            }
+            if(x<0-coordClamp.get()) 
+            {
+                clamped=true;
+                x=0-coordClamp.get();
+            }
+            if(y<0-coordClamp.get())
+            {
+                clamped=true;
+                y=0-coordClamp.get();
+            }
+
+            laserObj[ind*stride+0] = x;
+            laserObj[ind*stride+1] = y;
+            laserObj[ind*stride+2] = 0;
+
+
+            if(!clamped)
+            {
+                laserObj[ind*stride+3] = parseInt((cgl.frameStore.laserPoints[i].colR || lastR)*90,10);
+                laserObj[ind*stride+4] = parseInt((cgl.frameStore.laserPoints[i].colG || lastG)*90,10);
+                laserObj[ind*stride+5] = parseInt((cgl.frameStore.laserPoints[i].colB || lastB)*90,10);
+            }
+            else
+            {
+                cgl.frameStore.laserPoints[i].colR=cgl.frameStore.laserPoints[i].colG=cgl.frameStore.laserPoints[i].colB=0;                
+
+                // laserObj[ind*stride+3] = 0;
+                // laserObj[ind*stride+4] = 0;
+                // laserObj[ind*stride+5] = 0;
+
+            }
             ind++;
+            
+            // console.log(laserObj[ind*stride+0]);
         }
 
         if(cgl.frameStore.laserPoints[i].colR) lastR=cgl.frameStore.laserPoints[i].colR;
@@ -124,7 +237,6 @@ this.render.onTriggered=function()
     }
 
     outNumPoints.set(ind);
-
     cgl.popMvMatrix();
     cgl.frameStore.laserPoints.length=0;
     outObj.set(laserObj);
