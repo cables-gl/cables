@@ -1,4 +1,6 @@
 //https://www.shadertoy.com/view/XdlGz8 ??
+//http://stackoverflow.com/questions/17528878/compute-normals-from-displacement-map-in-three-js-r-58
+
 CABLES.Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
