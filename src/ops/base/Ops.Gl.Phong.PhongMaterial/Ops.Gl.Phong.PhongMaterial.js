@@ -7,6 +7,10 @@ var cgl=this.patch.cgl;
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION) );
 var gammeCorrect=this.addInPort(new Port(this,"gamma correction",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
+shaderOut.ignoreValueSerialize=true;
+
+
 
 gammeCorrect.set(true);
 var updateGammeCorrect=function()
@@ -188,6 +192,8 @@ var srcFrag=''
 
 var shader=new CGL.Shader(cgl,'PhongMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
+shaderOut.set(shader);
 
 shader.setSource(srcVert,srcFrag);
 

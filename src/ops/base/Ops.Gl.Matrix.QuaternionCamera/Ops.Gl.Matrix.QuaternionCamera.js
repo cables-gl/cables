@@ -19,10 +19,13 @@ var fov=this.addInPort(new Port(this,"fov"));
 var clipNear=this.addInPort(new Port(this,"clip near"));
 var clipFar=this.addInPort(new Port(this,"clip far"));
 
-
 var lax=this.addInPort(new Port(this,"lookat x"));
 var lay=this.addInPort(new Port(this,"lookat y"));
+
 var laz=this.addInPort(new Port(this,"lookat z"));
+
+
+var matrix=this.addInPort(new Port(this,"matrix")); //OP_PORT_TYPE_ARRAY
 
 
 qx.set(0.0);
@@ -54,9 +57,9 @@ render.onTriggered=function()
     }
 
     vec3.set(vPos,
-        -posX.get(),
-        -posY.get(),
-        -posZ.get()
+        -1*posX.get(),
+        -1*posY.get(),
+        -1*posZ.get()
         );
 
     vec3.set(vCenter, 0,1,0 );
@@ -85,16 +88,16 @@ render.onTriggered=function()
 
     // mat4.perspective(
     //     cgl.pMatrix,
-    //     45*0.0174533, 
-    //     3, 
+    //     45*0.0174533,
+    //     3,
     //     clipNear.get(),
     //     clipFar.get()
     //     );
 
     // mat4.perspective(
     //     cgl.pMatrix,
-    //     fov.get(), 
-    //     3, 
+    //     fov.get(),
+    //     3,
     //     clipNear.get(),
     //     clipFar.get()
     //     );
@@ -107,24 +110,26 @@ render.onTriggered=function()
     // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
     // mat4.rotate(qMat, qMat, ta.get()*CGL.DEG2RAD, [ tx.get() , ty.get() , tz.get() ]);
 
-    mat4.rotateX(cgl.mvMatrix,cgl.mvMatrix, 180*CGL.DEG2RAD);
-    mat4.rotateY(cgl.mvMatrix,cgl.mvMatrix, 90*CGL.DEG2RAD);
+    // mat4.rotateX(cgl.mvMatrix,cgl.mvMatrix, 180*CGL.DEG2RAD);
+    // mat4.rotateY(cgl.mvMatrix,cgl.mvMatrix, 90*CGL.DEG2RAD);
 
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,qMat);
-    mat4.translate(cgl.mvMatrix,cgl.mvMatrix,vPos);
+    if(matrix.get())
+    {
+        // console.log('ja matrix');
+    }
+
+    mat4.multiply(
+        cgl.mvMatrix,
+        cgl.mvMatrix,
+        matrix.get()
+        );
+
+    // cgl.mvMatrix=matrix.get();
+    // mat4.translate(cgl.mvMatrix,cgl.mvMatrix,vPos);
+    // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,qMat);
 
     trigger.trigger();
 
     cgl.popMvMatrix();
 
 };
-
-
-
-
-
-
-
-
-
-

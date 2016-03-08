@@ -13,10 +13,14 @@ var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var defaultEasing=CABLES.TL.EASING_LINEAR;
 
+var skipFrames=1;
+var frameNum=0;
+
 function render()
 {
     var oldScene=cgl.frameStore.currentScene;
     cgl.frameStore.currentScene=scene;
+    cgl.frameStore.currentScene.materials=[];
     trigger.trigger();
     cgl.frameStore.currentScene=oldScene;
 }
@@ -27,10 +31,53 @@ var setPortAnimated=function(p, doLerp)
 {
     p.setAnimated(true);
     if(doLerp)p.anim.defaultEasing=defaultEasing;
-
 };
 
-var loadCameras=function(data)
+function loadMaterials(data,root)
+{
+    var posyAdd=self.uiAttribs.translate.y+200;
+
+    if(data.materials)
+    {
+        for(var i in data.materials)
+        {
+            var jsonMat=data.materials[i];
+
+            var matName='';
+            for(var j in jsonMat.properties)
+            {
+                if(jsonMat.properties[j].key=='?mat.name')
+                {
+                    matName=jsonMat.properties[j].value;
+                }
+            }
+
+            for(var j in jsonMat.properties)
+            {
+                if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
+                {
+                    posyAdd+=100;
+                    var setMatOp=self.patch.addOp('Ops.Json3d.SetMaterial',{translate:{x:self.uiAttribs.translate.x+300,y:posyAdd+50}});
+                    setMatOp.getPort('name').set(matName);
+                    self.patch.link(root,'trigger 0',setMatOp,'exe');
+
+                    var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{translate:{x:self.uiAttribs.translate.x+350,y:posyAdd}});
+                    matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
+                    matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
+                    matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
+                    matOp.uiAttribs.title=matOp.name=' Material';
+
+                    self.patch.link(setMatOp,'material',matOp,'shader');
+                    
+
+                    prevOp=matOp;
+                }
+            }
+        }
+    }
+}
+
+var loadCameras=function(data,seq)
 {
     var i=0;
     var camOp=null;
@@ -43,11 +90,12 @@ var loadCameras=function(data)
             if(root.children[i].name==_cam.name)
             {
                 cam.eye=root.children[i];
+                cam.transformation=root.children[i].transformation;
 
                 // guess camera target (...)
-                for(var j=i;j<root.children.length;j++)
+                for(var j=0;j<root.children.length;j++)
                 {
-                    if(root.children[j].name.indexOf('arget')>0)
+                    if(root.children[j].name == root.children[i].name+'_Target')
                     {
                         cam.target=root.children[i];
                         root.children.splice(j,1);
@@ -60,35 +108,42 @@ var loadCameras=function(data)
         return cam;
     }
 
+
+    var camSeq=self.patch.addOp('Ops.TimedSequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
+    self.patch.link(camSeq,'exe',self,'trigger');
+
     if(data.hasOwnProperty('cameras'))
     {
         console.log("camera....");
-        i=0; // for(i in data.cameras)
+
+        var camCount=0;
+        for(i in data.cameras)
         {
             var cam=getCamera(data.rootnode,data.cameras[i]);
-            console.log(cam);
+            // console.log(cam);
 
             if(cam)
             {
-                
                 if(!cam.target)
                 {
-                    camOp=self.patch.addOp('Ops.Gl.Matrix.QuaternionCamera',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
+                    var camOp=self.patch.addOp('Ops.Gl.Matrix.QuaternionCamera',{translate:{x:self.uiAttribs.translate.x+camCount*200,y:self.uiAttribs.translate.y+100}});
                     camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
-                    self.patch.link(camOp,'render',self,'trigger');
-    
+
                     var an=dataGetAnimation(data,cam.cam.name);
-                    
-                    // console.log(cam.cam);
+                    self.patch.link(camSeq,'trigger '+camCount,camOp,'render');
+                    self.patch.link(camOp,'trigger',seq,'exe '+camCount);
+                    camCount++;
 
                     camOp.getPort('fov').set(cam.cam.horizontalfov);
                     camOp.getPort('clip near').set(cam.cam.clipplanenear);
-                    camOp.getPort('clip far').set(cam.cam.clipplanefar);
-                    
+                    camOp.getPort('clip far' ).set(cam.cam.clipplanefar);
+
                     camOp.getPort('lookat x').set(cam.cam.lookat[0]);
                     camOp.getPort('lookat y').set(cam.cam.lookat[1]);
                     camOp.getPort('lookat z').set(cam.cam.lookat[2]);
-                    
+
+                    camOp.getPort('matrix').set(cam.transformation);
+
                     if(an)
                     {
                         if(an.positionkeys)
@@ -96,68 +151,101 @@ var loadCameras=function(data)
                             setPortAnimated(camOp.getPort('posX'),false);
                             setPortAnimated(camOp.getPort('posY'),false);
                             setPortAnimated(camOp.getPort('posZ'),false);
-                            
+
+                            frameNum=skipFrames;
                             for(var k in an.positionkeys)
                             {
-                                camOp.getPort('posX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
-                                camOp.getPort('posY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
-                                camOp.getPort('posZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
+                                if(frameNum%skipFrames===0)
+                                {
+                                    camOp.getPort('posX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
+                                    camOp.getPort('posY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
+                                    camOp.getPort('posZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
+                                }
+                                frameNum++;
                             }
                         }
-    
+
                         if(an.rotationkeys)
                         {
                             setPortAnimated(camOp.getPort('quat x'),false);
                             setPortAnimated(camOp.getPort('quat y'),false);
                             setPortAnimated(camOp.getPort('quat z'),false);
                             setPortAnimated(camOp.getPort('quat w'),false);
-                            
+
+                            frameNum=skipFrames;
                             for(var k in an.rotationkeys)
                             {
-                                camOp.getPort('quat x').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][0] );
-                                camOp.getPort('quat y').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][1] );
-                                camOp.getPort('quat z').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][2] );
-                                camOp.getPort('quat w').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][3] );
+                                if(frameNum%skipFrames==0)
+                                {
+                                    camOp.getPort('quat x').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][0] );
+                                    camOp.getPort('quat y').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][1] );
+                                    camOp.getPort('quat z').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][2] );
+                                    camOp.getPort('quat w').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][3] );
+                                }
+                                frameNum++;
                             }
                         }
                     }
-
                 }
                 else
                 {
-
-                    camOp=self.patch.addOp('Ops.Gl.Matrix.',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
+                    var camOp=self.patch.addOp('Ops.Gl.Matrix.LookatCamera',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
                     camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
-                    self.patch.link(camOp,'render',self,'trigger');
-    
+                    // self.patch.link(camOp,'render',self,'trigger');
+
+                    self.patch.link(camSeq,'trigger '+camCount,camOp,'render');
+                    self.patch.link(camOp,'trigger',seq,'exe '+camCount);
+                    camCount++;
+
                     camOp.getPort('eyeX').set(900);
                     camOp.getPort('eyeY').set(900);
                     camOp.getPort('eyeZ').set(-240);
-    
+
                     var an=dataGetAnimation(data,cam.cam.name);
                     if(an)
                     {
                         setPortAnimated(camOp.getPort('eyeX'),false);
                         setPortAnimated(camOp.getPort('eyeY'),false);
                         setPortAnimated(camOp.getPort('eyeZ'),false);
-    
+
+                        frameNum=skipFrames;
                         for(var k in an.positionkeys)
                         {
-                            camOp.getPort('eyeX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
-                            camOp.getPort('eyeY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
-                            camOp.getPort('eyeZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
+                            if(frameNum%skipFrames==0)
+                            {
+                                camOp.getPort('eyeX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
+                                camOp.getPort('eyeY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
+                                camOp.getPort('eyeZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
+                            }
+                            frameNum++;
                         }
                     }
 
+                    var an=dataGetAnimation(data,cam.cam.name+'_Target');
+                    if(an)
+                    {
+                        setPortAnimated(camOp.getPort('centerX'),false);
+                        setPortAnimated(camOp.getPort('centerY'),false);
+                        setPortAnimated(camOp.getPort('centerZ'),false);
 
+                        frameNum=skipFrames;
+                        for(var k in an.positionkeys)
+                        {
+                            if(frameNum%skipFrames==0)
+                            {
+                                camOp.getPort('centerX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
+                                camOp.getPort('centerY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
+                                camOp.getPort('centerZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
+                            }
+                            frameNum++;
+                        }
+                    }
                 }
-                
-
             }
         }
     }
 
-    return camOp || self;
+    return null;
 };
 
 
@@ -193,9 +281,6 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
         var prevOp=null;
         var posyAdd=0;
-
-        var skipFrames=10;
-        var frameNum=0;
 
         {
             // animation
@@ -251,10 +336,10 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                         {
                             if(frameNum%skipFrames==0)
                             {
-                                anRotOp.getPort('w').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
                                 anRotOp.getPort('x').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][1] );
                                 anRotOp.getPort('y').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][2] );
                                 anRotOp.getPort('z').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][3] );
+                                anRotOp.getPort('w').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
                             }
                             frameNum++;
                         }
@@ -285,24 +370,20 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
                 {
                     // material
-                    if(data.meshes[index].hasOwnProperty('materialindex') &&
-                        data.hasOwnProperty('materials'))
+                    if(data.meshes[index].hasOwnProperty('materialindex') && data.hasOwnProperty('materials'))
                     {
                         var matIndex=data.meshes[index].materialindex;
                         var jsonMat=data.materials[matIndex];
+
+                        var matOp=self.patch.addOp('Ops.Json3d.Material',{translate:{x:posx,y:posy+posyAdd}});
+                        self.patch.link(prevOp,'trigger',matOp,'exe');
+                        prevOp=matOp;
+
                         for(var j in jsonMat.properties)
                         {
-                            if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
+                            if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='?mat.name')
                             {
-                                posyAdd+=50;
-                                var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{translate:{x:posx,y:posy+posyAdd}});
-                                matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
-                                matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
-                                matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
-                                matOp.uiAttribs.title=matOp.name=ch.name+' Material';
-
-                                self.patch.link(prevOp,'trigger',matOp,'render');
-                                prevOp=matOp;
+                                matOp.getPort('name').set( jsonMat.properties[j].value );
                             }
                         }
                     }
@@ -327,7 +408,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
             y++;
             for(i=0;i<ch.children.length;i++)
             {
-                console.log('   child...');
+                console.log('   child...'+i+'/'+ch.children.length);
                 var xx=maxx;
                 if(ch.children.length>1)xx++;
                 addChild(data,xx,y,prevOp,'trigger',ch.children[i]);
@@ -361,17 +442,19 @@ var reload=function()
 
             if(!trigger.isLinked())
             {
-                var camOp=loadCameras(data);
+                var root=self.patch.addOp('Ops.Sequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+150}});
+                var camOp=loadCameras(data,root);
 
-                var root=self.patch.addOp('Ops.Sequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+100}});
-                self.patch.link(camOp||self,'trigger',root,'exe');
+                self.patch.link(camOp,'trigger',root,'exe');
+
+                loadMaterials(data,root);
 
 
                 for(var i=0;i<data.rootnode.children.length;i++)
                 {
                     if(data.rootnode.children[i])
                     {
-                        var ntrigger=i;
+                        var ntrigger=i+1;
                         if(ntrigger>9)ntrigger=9;
                         addChild(data,maxx-2,3,root,'trigger '+ntrigger,data.rootnode.children[i]);
 
