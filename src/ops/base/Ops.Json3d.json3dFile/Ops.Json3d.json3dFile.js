@@ -27,14 +27,14 @@ var setPortAnimated=function(p, doLerp)
 {
     p.setAnimated(true);
     if(doLerp)p.anim.defaultEasing=defaultEasing;
-    
+
 };
 
 var loadCameras=function(data)
 {
     var i=0;
     var camOp=null;
-    
+
     function getCamera(root,_cam)
     {
         var cam={"cam":_cam};
@@ -50,8 +50,6 @@ var loadCameras=function(data)
                     if(root.children[j].name.indexOf('arget')>0)
                     {
                         cam.target=root.children[i];
-                        
-                        
                         root.children.splice(j,1);
                         root.children.splice(i,1);
                         return cam;
@@ -64,6 +62,7 @@ var loadCameras=function(data)
 
     if(data.hasOwnProperty('cameras'))
     {
+        console.log("camera....");
         i=0; // for(i in data.cameras)
         {
             var cam=getCamera(data.rootnode,data.cameras[i]);
@@ -71,32 +70,93 @@ var loadCameras=function(data)
 
             if(cam)
             {
-                camOp=self.patch.addOp('Ops.Gl.Matrix.LookatCamera',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
-                camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
-                self.patch.link(camOp,'render',self,'trigger');
-
-                camOp.getPort('eyeX').set(900);
-                camOp.getPort('eyeY').set(900);
-                camOp.getPort('eyeZ').set(-240);
-
-                var an=dataGetAnimation(data,cam.cam.name);
-                if(an)
+                
+                if(!cam.target)
                 {
-                    setPortAnimated(camOp.getPort('eyeX'),false);
-                    setPortAnimated(camOp.getPort('eyeY'),false);
-                    setPortAnimated(camOp.getPort('eyeZ'),false);
+                    camOp=self.patch.addOp('Ops.Gl.Matrix.QuaternionCamera',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
+                    camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
+                    self.patch.link(camOp,'render',self,'trigger');
+    
+                    var an=dataGetAnimation(data,cam.cam.name);
+                    
+                    // console.log(cam.cam);
 
-                    for(var k in an.positionkeys)
+                    camOp.getPort('fov').set(cam.cam.horizontalfov);
+                    camOp.getPort('clip near').set(cam.cam.clipplanenear);
+                    camOp.getPort('clip far').set(cam.cam.clipplanefar);
+                    
+                    camOp.getPort('lookat x').set(cam.cam.lookat[0]);
+                    camOp.getPort('lookat y').set(cam.cam.lookat[1]);
+                    camOp.getPort('lookat z').set(cam.cam.lookat[2]);
+                    
+                    if(an)
                     {
-                        camOp.getPort('eyeX').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
-                        camOp.getPort('eyeY').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
-                        camOp.getPort('eyeZ').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
+                        if(an.positionkeys)
+                        {
+                            setPortAnimated(camOp.getPort('posX'),false);
+                            setPortAnimated(camOp.getPort('posY'),false);
+                            setPortAnimated(camOp.getPort('posZ'),false);
+                            
+                            for(var k in an.positionkeys)
+                            {
+                                camOp.getPort('posX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
+                                camOp.getPort('posY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
+                                camOp.getPort('posZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
+                            }
+                        }
+    
+                        if(an.rotationkeys)
+                        {
+                            setPortAnimated(camOp.getPort('quat x'),false);
+                            setPortAnimated(camOp.getPort('quat y'),false);
+                            setPortAnimated(camOp.getPort('quat z'),false);
+                            setPortAnimated(camOp.getPort('quat w'),false);
+                            
+                            for(var k in an.rotationkeys)
+                            {
+                                camOp.getPort('quat x').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][0] );
+                                camOp.getPort('quat y').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][1] );
+                                camOp.getPort('quat z').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][2] );
+                                camOp.getPort('quat w').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][3] );
+                            }
+                        }
                     }
+
                 }
+                else
+                {
+
+                    camOp=self.patch.addOp('Ops.Gl.Matrix.',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
+                    camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
+                    self.patch.link(camOp,'render',self,'trigger');
+    
+                    camOp.getPort('eyeX').set(900);
+                    camOp.getPort('eyeY').set(900);
+                    camOp.getPort('eyeZ').set(-240);
+    
+                    var an=dataGetAnimation(data,cam.cam.name);
+                    if(an)
+                    {
+                        setPortAnimated(camOp.getPort('eyeX'),false);
+                        setPortAnimated(camOp.getPort('eyeY'),false);
+                        setPortAnimated(camOp.getPort('eyeZ'),false);
+    
+                        for(var k in an.positionkeys)
+                        {
+                            camOp.getPort('eyeX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
+                            camOp.getPort('eyeY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
+                            camOp.getPort('eyeZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
+                        }
+                    }
+
+
+                }
+                
+
             }
         }
     }
-    
+
     return camOp || self;
 };
 
@@ -106,7 +166,7 @@ var loadCameras=function(data)
 function dataGetAnimation(data,name)
 {
     if(!data.hasOwnProperty('animations')) return false;
-    
+
     for(var iChannels in data.animations[0].channels)
     {
         if(data.animations[0].channels[iChannels].name==name)
@@ -134,9 +194,12 @@ function addChild(data,x,y,parentOp,parentPort,ch)
         var prevOp=null;
         var posyAdd=0;
 
+        var skipFrames=10;
+        var frameNum=0;
+
         {
             // animation
-            
+
             if(data.hasOwnProperty('animations'))
             {
                 var an=dataGetAnimation(data,ch.name);
@@ -148,19 +211,24 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                         var anTransOp=self.patch.addOp('Ops.Gl.Matrix.Transform.v2',{translate:{x:posx,y:posy+posyAdd}});
                         anTransOp.uiAttribs.title=anTransOp.name=ch.name+' trans anim';
                         self.patch.link(prevOp,'trigger',anTransOp,'render');
-                        
+
                         if(!prevOp)self.patch.link(parentOp,parentPort,anTransOp,'render');
                         prevOp=anTransOp;
-        
+
                         setPortAnimated(anTransOp.getPort('posX'),true);
                         setPortAnimated(anTransOp.getPort('posY'),true);
                         setPortAnimated(anTransOp.getPort('posZ'),true);
 
+                        frameNum=skipFrames;
                         for(var k in an.positionkeys)
                         {
-                            anTransOp.getPort('posX').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
-                            anTransOp.getPort('posY').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
-                            anTransOp.getPort('posZ').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
+                            if(frameNum%skipFrames==0)
+                            {
+                                anTransOp.getPort('posX').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
+                                anTransOp.getPort('posY').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
+                                anTransOp.getPort('posZ').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
+                            }
+                            frameNum++;
                         }
                     }
                     if(an.rotationkeys && an.rotationkeys.length>0)
@@ -172,24 +240,29 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
                         if(!prevOp)self.patch.link(parentOp,parentPort,anRotOp,'render');
                         prevOp=anRotOp;
-        
+
                         anRotOp.getPort('x').setAnimated(true);
                         anRotOp.getPort('y').setAnimated(true);
                         anRotOp.getPort('z').setAnimated(true);
                         anRotOp.getPort('w').setAnimated(true);
-                        
+
+                        frameNum=skipFrames;
                         for(var k in an.rotationkeys)
                         {
-                            anRotOp.getPort('w').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
-                            anRotOp.getPort('x').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][1] );
-                            anRotOp.getPort('y').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][2] );
-                            anRotOp.getPort('z').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][3] );
+                            if(frameNum%skipFrames==0)
+                            {
+                                anRotOp.getPort('w').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
+                                anRotOp.getPort('x').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][1] );
+                                anRotOp.getPort('y').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][2] );
+                                anRotOp.getPort('z').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][3] );
+                            }
+                            frameNum++;
                         }
                     }
                 }
             }
-        } 
-        
+        }
+
         if(!prevOp)
         {
             var transOp=self.patch.addOp('Ops.Gl.Matrix.MatrixMul',{translate:{x:posx,y:posy}});
@@ -197,7 +270,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
             mat4.transpose(mat,mat);
             transOp.matrix.val=ch.transformation;
             prevOp=transOp;
-    
+
             self.patch.link(parentOp,parentPort,prevOp,'render');
             if(ch.name) transOp.uiAttribs.title=transOp.name=ch.name+' transform';
         }
@@ -227,7 +300,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                                 matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
                                 matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
                                 matOp.uiAttribs.title=matOp.name=ch.name+' Material';
-                        
+
                                 self.patch.link(prevOp,'trigger',matOp,'render');
                                 prevOp=matOp;
                             }
@@ -246,7 +319,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
         }
         else
         {
-            
+
         }
 
         if(ch.hasOwnProperty('children'))
@@ -301,7 +374,7 @@ var reload=function()
                         var ntrigger=i;
                         if(ntrigger>9)ntrigger=9;
                         addChild(data,maxx-2,3,root,'trigger '+ntrigger,data.rootnode.children[i]);
-                        
+
                     }
                 }
             }

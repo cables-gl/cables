@@ -1,39 +1,43 @@
-this.name="Ops.Gl.Matrix.LissajousTransform";
+this.name="lissajous transform";
 
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
 var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-var pointStep=this.addInPort(new Port(this,"skip",OP_PORT_TYPE_VALUE));
+var z=this.addInPort(new Port(this,"z",OP_PORT_TYPE_VALUE));
+var pointSkip=this.addInPort(new Port(this,"skip",OP_PORT_TYPE_VALUE));
+var numPoints=this.addInPort(new Port(this,"num points",OP_PORT_TYPE_VALUE));
 
 var mulX=this.addInPort(new Port(this,"mul x",OP_PORT_TYPE_VALUE));
 var mulY=this.addInPort(new Port(this,"mul y",OP_PORT_TYPE_VALUE));
 var mulZ=this.addInPort(new Port(this,"mul z",OP_PORT_TYPE_VALUE));
 
+x.set(2);
+y.set(4);
+z.set(8);
+
 mulX.set(1);
 mulY.set(1);
 mulZ.set(1);
-pointStep.set(2);
+pointSkip.set(40);
+numPoints.set(3200);
 
 var cgl=this.patch.cgl;
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var vec=vec3.create();
 
 function doRender()
 {
-    var vec=vec3.create();
-    var step=parseFloat(pointStep.get()) || 1;
+    var step=parseFloat(pointSkip.get()) || 1;
     if(step<1)step=1;
     
-    for(var i = 0; i < 800; i+=step)
+    for(var i = 0; i < numPoints.get(); i+=step)
     {
-        var xPct = (i * x.get()) * 0.001;
-        var yPct = (i * y.get()) * 0.001;
-
-        var ix = mulX.get() * Math.sin(xPct);
-        var iy = mulY.get() * Math.cos(yPct);
-        var iz = mulZ.get() * Math.sin(i*0.5);
-        
-
-        vec3.set(vec,ix,iy,iz);
+        vec3.set(
+            vec,
+            mulX.get() * Math.sin( (i * x.get()) * 0.001 ),
+            mulY.get() * Math.cos( (i * y.get()) * 0.001 ),
+            mulZ.get() * Math.sin( (i * z.get()) * 0.001 )
+            );
 
         cgl.pushMvMatrix();
 
@@ -45,4 +49,3 @@ function doRender()
 }
 
 render.onTriggered=doRender;
-

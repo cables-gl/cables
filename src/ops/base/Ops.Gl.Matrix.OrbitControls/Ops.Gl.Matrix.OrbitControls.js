@@ -8,6 +8,10 @@ var minDist=this.addInPort(new Port(this,"min distance",OP_PORT_TYPE_VALUE));
 var initialAxis=this.addInPort(new Port(this,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
 var initialX=this.addInPort(new Port(this,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
 
+
+var mul=this.addInPort(new Port(this,"mul",OP_PORT_TYPE_VALUE));
+mul.set(1);
+
 minDist.set(0.05);
 initialAxis.set(0.5);
 initialX.set(0.0);
@@ -49,16 +53,16 @@ render.onTriggered=function()
 
 function circlePos(perc)
 {
-    if(radius<minDist.get())radius=minDist.get();
+    if(radius<minDist.get()*mul.get())radius=minDist.get()*mul.get();
     
-    outRadius.set(radius);
+    outRadius.set(radius*mul.get());
     
     var i=0,degInRad=0;
     var vec=vec3.create();
     degInRad = 360*perc/2*CGL.DEG2RAD;
     vec3.set(vec,
-        Math.cos(degInRad)*radius,
-        Math.sin(degInRad)*radius,
+        Math.cos(degInRad)*radius*mul.get(),
+        Math.sin(degInRad)*radius*mul.get(),
         0);
     return vec;
 }
@@ -72,8 +76,8 @@ var onmousemove = function(e)
     
     if(e.which==3)
     {
-        vOffset[2]+=(x-lastMouseX)*0.01;
-        vOffset[1]+=(y-lastMouseY)*0.01;
+        vOffset[2]+=(x-lastMouseX)*0.01*mul.get();
+        vOffset[1]+=(y-lastMouseY)*0.01*mul.get();
         eye=circlePos(percY);
     }
     else

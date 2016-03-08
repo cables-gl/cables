@@ -73,7 +73,7 @@ var doUpdateMatrix=function()
 function updateTranslation()
 {
     doTranslate=false;
-    if(posX.get()!==0.0 || posY.get()!==0.0 || posZ.get()!==0.0)doTranslate=true;
+    if(posX.get()!==0.0 || posY.get()!==0.0 || posZ.get()!==0.0) doTranslate=true;
     vec3.set(vPos, posX.get(),posY.get(),posZ.get());
     translationChanged=false;
 }
