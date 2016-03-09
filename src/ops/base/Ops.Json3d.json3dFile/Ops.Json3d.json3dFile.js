@@ -91,6 +91,7 @@ var loadCameras=function(data,seq)
                 cam.eye=root.children[i];
                 cam.transformation=root.children[i].transformation;
             
+                
                 mat4.transpose(cam.transformation,cam.transformation);
 
                 // guess camera target (...)
@@ -355,7 +356,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
             // test if children are all same mesh...
             
             var cloneTransforms=[];
-            if(ch.children.length>1)
+            if(ch.children.length>1 && ch.children[0].meshes && ch.children[0].meshes.length>0)
             {
                 for(i=0;i<ch.children.length;i++)
                 {
@@ -372,21 +373,30 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     
                     if(sameMesh)
                     {
-                        mat4.transpose(ch.children[i].transformation,ch.children[i].transformation);
+                        if(!ch.children[i].transposed)
+                        {
+                            mat4.transpose(ch.children[i].transformation,ch.children[i].transformation);
+                            ch.children[i].transposed=true;
+                        }
                         cloneTransforms.push(ch.children[i].transformation);
                     }
                 }
             } else sameMesh=false;
         } else sameMesh=false;
 
-        if(!prevOp)
+        if(!prevOp )
         {
             var transOp=self.patch.addOp('Ops.Gl.Matrix.MatrixMul',{translate:{x:posx,y:posy}});
-            var mat=ch.transformation;
-            mat4.transpose(mat,mat);
+            
+            if(!ch.transposed)
+            {
+                ch.transposed=true;
+                mat4.transpose(ch.transformation,ch.transformation);
+                
+            }
             transOp.getPort('matrix').set(ch.transformation);
             prevOp=transOp;
-
+            
             self.patch.link(parentOp,parentPort,prevOp,'render');
             if(ch.name) transOp.uiAttribs.title=transOp.name=ch.name+' transform';
         }
@@ -407,10 +417,10 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 {
                     len=ch.children[0].meshes.length;
                     useChildrenMeshes=true;
-                    
                 }
             }
-                
+            
+            console.log('useChildrenMeshes ',useChildrenMeshes);
             
             for(i=0;i<len;i++)
             {
