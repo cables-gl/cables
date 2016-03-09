@@ -1,21 +1,16 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
+var cgl=this.patch.cgl;
+
 this.name='matrix';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var matrix=this.addInPort(new Port(this,"matrix"),OP_PORT_TYPE_ARRAY);
 
-this.matrix=this.addInPort(new Port(this,"matrix"),OP_PORT_TYPE_ARRAY);
-
-var p=new CGL.WirePoint(cgl,20);
-
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     cgl.pushMvMatrix();
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,self.matrix.get());
-    // p.render(cgl);
-    self.trigger.trigger();
+    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,matrix.get());
+    trigger.trigger();
     cgl.popMvMatrix();
 };
 
-this.matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );
+matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );

@@ -125,8 +125,8 @@ render.onTriggered=function()
         );
 
     // cgl.mvMatrix=matrix.get();
-    // mat4.translate(cgl.mvMatrix,cgl.mvMatrix,vPos);
-    // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,qMat);
+    mat4.translate(cgl.mvMatrix,cgl.mvMatrix,vPos);
+    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,qMat);
 
     trigger.trigger();
 

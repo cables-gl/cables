@@ -68,7 +68,6 @@ function loadMaterials(data,root)
                     matOp.uiAttribs.title=matOp.name=' Material';
 
                     self.patch.link(setMatOp,'material',matOp,'shader');
-                    
 
                     prevOp=matOp;
                 }
@@ -91,6 +90,8 @@ var loadCameras=function(data,seq)
             {
                 cam.eye=root.children[i];
                 cam.transformation=root.children[i].transformation;
+            
+                mat4.transpose(cam.transformation,cam.transformation);
 
                 // guess camera target (...)
                 for(var j=0;j<root.children.length;j++)
@@ -348,12 +349,42 @@ function addChild(data,x,y,parentOp,parentPort,ch)
             }
         }
 
+        var sameMesh=true;
+        if(ch.hasOwnProperty('children'))
+        {
+            // test if children are all same mesh...
+            
+            var cloneTransforms=[];
+            if(ch.children.length>1)
+            {
+                for(i=0;i<ch.children.length;i++)
+                {
+                    if(i>0 && ch.children[i].meshes)
+                    {
+                        if(ch.children[0].meshes && ch.children[i].meshes && ch.children[i].meshes.length==ch.children[0].meshes.length)
+                        {
+                            if(ch.children[i].meshes[0]==ch.children[0].meshes[0])
+                            {
+                                
+                            } else sameMesh=false;
+                        } else sameMesh=false;
+                    } else sameMesh=false;
+                    
+                    if(sameMesh)
+                    {
+                        mat4.transpose(ch.children[i].transformation,ch.children[i].transformation);
+                        cloneTransforms.push(ch.children[i].transformation);
+                    }
+                }
+            } else sameMesh=false;
+        } else sameMesh=false;
+
         if(!prevOp)
         {
             var transOp=self.patch.addOp('Ops.Gl.Matrix.MatrixMul',{translate:{x:posx,y:posy}});
             var mat=ch.transformation;
             mat4.transpose(mat,mat);
-            transOp.matrix.val=ch.transformation;
+            transOp.getPort('matrix').set(ch.transformation);
             prevOp=transOp;
 
             self.patch.link(parentOp,parentPort,prevOp,'render');
@@ -362,57 +393,95 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
 
         var i=0;
-        if(ch.hasOwnProperty('meshes'))
+        if(ch.hasOwnProperty('meshes') || sameMesh )
         {
-            for(i=0;i<ch.meshes.length;i++)
+            var useChildrenMeshes=false;
+            var len=0;
+            if(ch.meshes)
             {
-                var index=ch.meshes[i];
-
+                len=ch.meshes.length;
+            }
+            else
+            {
+                if(ch.children[0].meshes)
                 {
-                    // material
-                    if(data.meshes[index].hasOwnProperty('materialindex') && data.hasOwnProperty('materials'))
-                    {
-                        var matIndex=data.meshes[index].materialindex;
-                        var jsonMat=data.materials[matIndex];
-
-                        var matOp=self.patch.addOp('Ops.Json3d.Material',{translate:{x:posx,y:posy+posyAdd}});
-                        self.patch.link(prevOp,'trigger',matOp,'exe');
-                        prevOp=matOp;
-
-                        for(var j in jsonMat.properties)
-                        {
-                            if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='?mat.name')
-                            {
-                                matOp.getPort('name').set( jsonMat.properties[j].value );
-                            }
-                        }
-                    }
+                    len=ch.children[0].meshes.length;
+                    useChildrenMeshes=true;
+                    
                 }
+            }
+                
+            
+            for(i=0;i<len;i++)
+            {
+                var index=-1;
+                
+                if(!useChildrenMeshes) index=ch.meshes[i];
+                    else index=ch.children[0].meshes[0];
 
-                // mesh
-                posyAdd+=50;
-                var meshOp=self.patch.addOp('Ops.Json3d.Mesh',{translate:{x:posx,y:posy+posyAdd}});
-                meshOp.index.val=index;
-                meshOp.uiAttribs.title=meshOp.name=ch.name+' Mesh';
+                // material
+                if(data.meshes[index].hasOwnProperty('materialindex') && data.hasOwnProperty('materials'))
+                {
+                    var matIndex=data.meshes[index].materialindex;
+                    var jsonMat=data.materials[matIndex];
 
-                self.patch.link(prevOp,'trigger',meshOp,'render');
+                    var matOp=self.patch.addOp('Ops.Json3d.Material',{translate:{x:posx,y:posy+posyAdd}});
+                    self.patch.link(prevOp,'trigger',matOp,'exe');
+                    prevOp=matOp;
+
+                    for(var j in jsonMat.properties)
+                        if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='?mat.name')
+                            matOp.getPort('name').set( jsonMat.properties[j].value );
+                }
+                
+                if(!sameMesh)
+                {
+                    // mesh
+                    posyAdd+=50;
+                    var meshOp=self.patch.addOp('Ops.Json3d.Mesh',{translate:{x:posx,y:posy+posyAdd}});
+                    meshOp.index.val=index;
+                    meshOp.uiAttribs.title=meshOp.name=ch.name+' Mesh';
+    
+                    self.patch.link(prevOp,'trigger',meshOp,'render');
+                }
             }
         }
-        else
-        {
 
-        }
 
         if(ch.hasOwnProperty('children'))
         {
-            y++;
-            for(i=0;i<ch.children.length;i++)
+            console.log(ch.name+' children are clones: ',sameMesh);
+
+            if(sameMesh)
             {
-                console.log('   child...'+i+'/'+ch.children.length);
-                var xx=maxx;
-                if(ch.children.length>1)xx++;
-                addChild(data,xx,y,prevOp,'trigger',ch.children[i]);
+                posyAdd+=50;
+
+                var clonedOp=self.patch.addOp('Ops.Json3d.ClonedMesh',{translate:{x:posx,y:posy+posyAdd}});
+                clonedOp.getPort('transformations').set(cloneTransforms);
+                self.patch.link(prevOp,'trigger',clonedOp,'render');
+                // self.patch.link(parentOp,parentPort,prevOp,'render');
+
+                posyAdd+=50;
+
+                var meshOp=self.patch.addOp('Ops.Json3d.Mesh',{translate:{x:posx,y:posy+posyAdd}});
+                meshOp.index.val=ch.children[0].meshes[0];
+                meshOp.uiAttribs.title=meshOp.name='clone '+ch.name+' Mesh';
+
+                self.patch.link(clonedOp,'trigger',meshOp,'render');
             }
+
+            if(!sameMesh)
+            {
+                y++;
+                for(i=0;i<ch.children.length;i++)
+                {
+                    console.log('   child...'+i+'/'+ch.children.length);
+                    var xx=maxx;
+                    if(ch.children.length>1)xx++;
+                    addChild(data,xx,y,prevOp,'trigger',ch.children[i]);
+                }
+            }
+        
         }
     }
 }
