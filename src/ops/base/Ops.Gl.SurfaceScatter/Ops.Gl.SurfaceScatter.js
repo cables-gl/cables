@@ -10,8 +10,10 @@ geometry.ignoreValueSerialize=true;
 var num=this.addInPort(new Port(this,"num",OP_PORT_TYPE_VALUE));
 num.set(20);
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.index=this.addOutPort(new Port(this,"index",OP_PORT_TYPE_VALUE));
+
+var seed=this.addInPort(new Port(this,"random seed",OP_PORT_TYPE_VALUE));
 
 
 var objects=[];
@@ -21,18 +23,25 @@ var vec=vec3.create();
 
 function initRandom()
 {
-        objects.length=0;
+    objects.length=0;
 
     if(!geometry.get())
     {
+        self.uiAttr({'error':'no geometry'});
         return;
     }
+    else
+    {
+        self.uiAttr({'error':null});
+    }
+    
+    Math.randomSeed=seed.get();
+
     for(var i=0;i<num.get();i++)
     {
         var obj={};
         var geom=geometry.get();
-        
-        var faceIndex=Math.floor(geom.verticesIndices.length/3*Math.random())*3;
+        var faceIndex=Math.floor(geom.verticesIndices.length/3*Math.seededRandom())*3;
         
         obj.pos=vec3.create();
         obj.norm=vec3.create();
@@ -49,10 +58,9 @@ function initRandom()
             geom.vertexNormals[geom.verticesIndices[faceIndex+0]*3+2]
             );
 
-
         obj.q=quat.create();
 
-        // works for sphere...        
+        // works for sphere...
         // var vm2=vec3.create();
         // vec3.set(vm2,0,0,1);
         // var posNorm=vec3.create();
@@ -66,43 +74,37 @@ function initRandom()
 
         obj.qMat=mat4.create();
         mat4.fromQuat(obj.qMat, obj.q);
-    
-
 
         objects.push(obj);
+        // console.log('.',obj.pos);
 
     }
 }
 
 geometry.onValueChanged=initRandom;
 num.onValueChanged=initRandom;
-
+seed.onValueChanged=initRandom;
 
 this.render.onTriggered=function()
 {
     if(geometry.get())
     {
-
-        // for(var i=0;i<geometry.val.vertices.length;i+=3)
+        
+        // console.log(objects.length);
+        
+        
         for(var j=0;j<objects.length;j++)
         {
-            // var i=indices[j];
-            
-
-
             cgl.pushMvMatrix();
             mat4.translate(cgl.mvMatrix,cgl.mvMatrix, objects[j].pos);
 
-mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, objects[j].qMat);
-
-            self.trigger.trigger();
-            cgl.popMvMatrix();
+            mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, objects[j].qMat);
 
             self.index.set(j);
-            // cgl.pushMvMatrix();
-            // mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
-            self.trigger.trigger();
-            // cgl.popMvMatrix();
+            trigger.trigger();
+            cgl.popMvMatrix();
+
+            // self.trigger.trigger();
         }
     }
 };

@@ -21,9 +21,7 @@ var clipFar=this.addInPort(new Port(this,"clip far"));
 
 var lax=this.addInPort(new Port(this,"lookat x"));
 var lay=this.addInPort(new Port(this,"lookat y"));
-
 var laz=this.addInPort(new Port(this,"lookat z"));
-
 
 var matrix=this.addInPort(new Port(this,"matrix")); //OP_PORT_TYPE_ARRAY
 
@@ -110,7 +108,7 @@ render.onTriggered=function()
     // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
     // mat4.rotate(qMat, qMat, ta.get()*CGL.DEG2RAD, [ tx.get() , ty.get() , tz.get() ]);
 
-    // mat4.rotateX(cgl.mvMatrix,cgl.mvMatrix, 180*CGL.DEG2RAD);
+    mat4.rotateX(cgl.mvMatrix,cgl.mvMatrix, 180*CGL.DEG2RAD);
     // mat4.rotateY(cgl.mvMatrix,cgl.mvMatrix, 90*CGL.DEG2RAD);
 
     if(matrix.get())
@@ -125,8 +123,34 @@ render.onTriggered=function()
         );
 
     // cgl.mvMatrix=matrix.get();
+    // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,matrix.get());
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix,vPos);
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,qMat);
+    // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,qMat);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     trigger.trigger();
 

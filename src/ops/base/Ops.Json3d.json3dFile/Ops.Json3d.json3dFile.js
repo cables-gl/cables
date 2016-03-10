@@ -100,8 +100,8 @@ var loadCameras=function(data,seq)
                     if(root.children[j].name == root.children[i].name+'_Target')
                     {
                         cam.target=root.children[i];
-                        root.children.splice(j,1);
-                        root.children.splice(i,1);
+                        // root.children.splice(j,1);
+                        // root.children.splice(i,1);
                         return cam;
                     }
                 }
@@ -257,12 +257,16 @@ function dataGetAnimation(data,name)
 {
     if(!data.hasOwnProperty('animations')) return false;
 
-    for(var iChannels in data.animations[0].channels)
+    for(var iAnims in data.animations)
     {
-        if(data.animations[0].channels[iChannels].name==name)
+        for(var iChannels in data.animations[iAnims].channels)
         {
-            return data.animations[0].channels[iChannels];
+            if(data.animations[iAnims].channels[iChannels].name==name)
+            {
+                return data.animations[iAnims].channels[iChannels];
+            }
         }
+        
     }
     return false;
 }
