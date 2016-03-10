@@ -5,8 +5,6 @@ var cgl=this.patch.cgl;
 this.name='json3d Mesh';
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION ));
 this.index=this.addInPort(new Port(this,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
-// var meshname=this.addInPort(new Port(this,"mesh name",OP_PORT_TYPE_VALUE,{type:'string'} ));
-// meshname.set('');
 
 this.index.val=-1;
 this.centerPivot=this.addInPort(new Port(this,"center pivot",OP_PORT_TYPE_VALUE,{display:'bool'} ));
@@ -132,7 +130,7 @@ function reload()
         }
 
         var geom=new CGL.Geometry();
-        geom.calcNormals=true;
+        // geom.calcNormals=true;
         geom.vertices=verts;
         geom.vertexNormals=jsonMesh.normals;
         geom.tangents=jsonMesh.tangents;
@@ -150,27 +148,32 @@ function reload()
         nfo += geom.vertices.length+' vertices <br/>';
         nfo += geom.texCoords.length+' texturecoords <br/>';
         nfo += geom.vertexNormals.length+' normals <br/>';
+        
+        // console.log(geom.verticesIndices);
+        
         self.uiAttr({info:nfo});
 
         self.geometryOut.val=geom;
         mesh=new CGL.Mesh(cgl,geom);
-        // mesh.render(cgl.getShader());
     }
-    else
-    {
-        // console.log('no meshes found');
-        // console.log(cgl.frameStore.currentScene);
-    }
+
 }
 
-// meshname.onValueChanged=function()
-// {
-//
-// };
 
 this.render.onTriggered=render;
 this.centerPivot.onValueChanged=function()
 {
     mesh=null;
 };
+
 this.index.onValueChanged=reload;
+
+
+
+
+
+
+
+
+
+

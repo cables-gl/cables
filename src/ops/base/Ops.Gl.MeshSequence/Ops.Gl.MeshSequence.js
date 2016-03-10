@@ -89,11 +89,6 @@ function updateGeom(step)
     var next=step+1;
     if(next>data.meshes.length-1) next=0;
 
-    // console.log('next',step,next);
-    // geom.morphTargets[0]=data.meshes[next].vertices;//JSON.parse(JSON.stringify( self.geometry1.val.vertices ));
-    // geom.morphTargets[1]=data.meshes[next].normals;//JSON.parse(JSON.stringify( self.geometry1.val.vertices ));
-    // for(i=0;i<geom.morphTargets.length;i++) addAttribute('attrMorphTarget',geom.morphTargets[i],3);
-
     if(geom.verticesIndices && geom.verticesIndices.length>0)
     {
         geom.calcNormals(calcVertexNormals.get());
@@ -130,8 +125,6 @@ function updateFrame()
             mesh.setGeom(geom);
             mesh.addAttribute('attrMorphTargetA',nextGeom.vertices,3);
             mesh.addAttribute('attrMorphTargetB',nextGeom.vertexNormals, 3);
-
-
         }
     }
 }
@@ -181,4 +174,3 @@ function reload()
 frame.onValueChange(updateFrame);
 filename.onValueChange(reload);
 render.onTriggered=doRender;
-
