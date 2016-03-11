@@ -21,32 +21,27 @@ cgl.frameStore.midi.notes=cgl.frameStore.midi.notes || [];
 
 
 var midi;
+var outputId=0;
+
+function onMIDIFailure()
+{
+    self.uiAttr({warning:"No MIDI support in your browser."});
+}
 
 if (navigator.requestMIDIAccess)
 {
     navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
 }
-else
-{
-    self.uiAttr({warning:"No MIDI support in your browser."});
-}
+else onMIDIFailure();
 
-function onMIDIFailure()
-{
-    console.log("no midi...");
-}
-
-var outputId=0;
 
 function getDeviceString(input)
 {
     return ""+input.value.type+": "+input.value.name+"("+input.value.version+") "+ 
             // "<br/>by: " + (input.value.manufacturer || 'unknown')+
             "<br/><br/>";
-
 }
 
-// midi functions
 function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
@@ -54,38 +49,23 @@ function onMIDISuccess(midiAccess)
     var outputs = midi.outputs.values();
     var str='';
     self.uiAttr({'info':'no midi devices found'});
-    // loop through all inputs
+
     for (var input = inputs.next(); input && !input.done; input = inputs.next())
     {
-        // listen for midi messages
         input.value.onmidimessage = onMIDIMessage;
-        // this just lists our inputs in the console
         str+=getDeviceString(input);
-
-        // listInputs(input);
     }
 
     for (var output = outputs.next(); output && !output.done; output = outputs.next())
     {
         console.log(output);
         if(outputId===0) outputId=output.value.id;
-        cgl.frameStore.midi.out=midi.outputs.get(outputId);;
+        cgl.frameStore.midi.out=midi.outputs.get(outputId);
 
         str+=getDeviceString(output);
-
-        // console.log(output);
-        // listInputs(output);
     }
 
     self.uiAttr({'info':str});
-
-    // output = outputs.next();
-
-
-
-
-    // listen for connect/disconnect message
-    // midi.onstatechange = onStateChange;
 }
 
 function onMIDIMessage(event)
