@@ -11,12 +11,14 @@ var self=this;
 var cgl=self.patch.cgl;
 this.name='midiInput';
 
-// this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.normalize.set(true);
 
 var outNote=this.addOutPort(new Port(this,"note"));
-// this.noteValue=this.addOutPort(new Port(this,"note value"));
+
+cgl.frameStore.midi=cgl.frameStore.midi || {};
+cgl.frameStore.midi.notes=cgl.frameStore.midi.notes || [];
+
 
 var midi;
 
@@ -34,31 +36,48 @@ function onMIDIFailure()
     console.log("no midi...");
 }
 
-
 var outputId=0;
+
+function getDeviceString(input)
+{
+    return ""+input.value.type+": "+input.value.name+"("+input.value.version+") "+ 
+            // "<br/>by: " + (input.value.manufacturer || 'unknown')+
+            "<br/><br/>";
+
+}
+
 // midi functions
 function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
     var inputs = midi.inputs.values();
     var outputs = midi.outputs.values();
+    var str='';
+    self.uiAttr({'info':'no midi devices found'});
     // loop through all inputs
     for (var input = inputs.next(); input && !input.done; input = inputs.next())
     {
         // listen for midi messages
         input.value.onmidimessage = onMIDIMessage;
         // this just lists our inputs in the console
-        listInputs(input);
+        str+=getDeviceString(input);
+
+        // listInputs(input);
     }
-    
-    
+
     for (var output = outputs.next(); output && !output.done; output = outputs.next())
     {
         console.log(output);
         if(outputId===0) outputId=output.value.id;
+        cgl.frameStore.midi.out=midi.outputs.get(outputId);;
+
+        str+=getDeviceString(output);
+
         // console.log(output);
         // listInputs(output);
     }
+
+    self.uiAttr({'info':str});
 
     // output = outputs.next();
 
@@ -94,27 +113,12 @@ function onMIDIMessage(event)
     // }
 
     // var noteOnMessage = [0x90, note, 127];    // note on, middle C, full velocity
-    // var output = midi.outputs.get(outputId);
-    // output.send( noteOnMessage );  //omitting the timestamp means send immediately.
-
 
     outNote.set(note);
 
-    cgl.frameStore.midi=cgl.frameStore.midi || [];
     var v=velocity;
     if(self.normalize.get())v/=127;
-    cgl.frameStore.midi[note]={v:v,n:note};
+    cgl.frameStore.midi.notes[note]={v:v,n:note};
     cgl.frameStore.lastMidiNote=note;
 
-    // self.trigger.trigger();
-}
-
-
-function listInputs(inputs)
-{
-    var input = inputs.value;
-    var str="Midi Device: <br/> type: " + input.type + " <br/>id: " + input.id +
-        " <br/>manufacturer: " + input.manufacturer + " <br/>name: " + input.name +
-        " <br/>version: " + input.version ;
-    self.uiAttr({'info':str});
 }

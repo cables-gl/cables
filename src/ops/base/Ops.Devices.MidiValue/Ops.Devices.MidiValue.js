@@ -14,6 +14,25 @@ value.set(0);
 
 var learning=false;
 
+function setMidiValue()
+{
+    if(cgl.frameStore.midi && cgl.frameStore.midi.out)
+    {
+        var noteOnMessage = [0xB0, note.get(), parseInt(value.get()*127,10)];
+        cgl.frameStore.midi.out.send( noteOnMessage );
+        return true;
+    }
+    return false;
+}
+
+
+function initMidiValue()
+{
+    if(!setMidiValue()) setTimeout(initMidiValue,300);
+}
+
+this.onLoaded=initMidiValue;
+
 exec.onTriggered=function()
 {
     if(!cgl.frameStore.midi) return;
@@ -30,13 +49,11 @@ exec.onTriggered=function()
         }
     }
 
-    if(cgl.frameStore.midi[note.get()])
+    if(cgl.frameStore.midi.notes[note.get()])
     {
-        value.set(cgl.frameStore.midi[note.get()].v);
-        cgl.frameStore.midi[note.get()]=null;
+        value.set(cgl.frameStore.midi.notes[note.get()].v);
+        cgl.frameStore.midi.notes[note.get()]=null;
         trigger.trigger();
-        
-
     }
 };
 
