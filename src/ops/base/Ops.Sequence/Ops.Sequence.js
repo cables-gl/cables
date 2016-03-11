@@ -11,12 +11,13 @@ var triggerAll=function()
 
 exe.onTriggered=triggerAll;
 
+var num=16;
 
-for(var i=0;i<10;i++)
+for(var i=0;i<num;i++)
 {
     triggers.push( this.addOutPort(new Port(this,"trigger "+i,OP_PORT_TYPE_FUNCTION)) );
     
-    if(i<9)
+    if(i<num-1)
     {
         var newExe=this.addInPort(new Port(this,"exe "+i,OP_PORT_TYPE_FUNCTION));
         newExe.onTriggered=triggerAll;

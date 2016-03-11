@@ -55,7 +55,11 @@ this.onLoaded=function()
 var lastUiValue=-1;
 this.exe.onTriggered=function(_time)
 {
+    
     var spl=0;
+    
+    var outIndex=Math.round(self.current.val-0.5);
+    
     if(window.gui)
     {
 
@@ -110,7 +114,7 @@ this.exe.onTriggered=function(_time)
         }
     }
 
-    var outIndex=Math.round(self.current.val-0.5);
+    
     if(outIndex>=0 && outIndex<triggers.length)
     {
         triggers[outIndex].trigger();

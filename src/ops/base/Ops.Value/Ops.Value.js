@@ -14,7 +14,8 @@ function frame(time)
 
 var exec=function()
 {
-    if(result.get()!=v.get()) result.set(v.get());
+    var va=v.get();
+    if(result.get()!=va) result.set(va);
 };
 
 exe.onTriggered=exec;
