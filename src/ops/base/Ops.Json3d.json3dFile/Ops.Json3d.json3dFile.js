@@ -369,9 +369,9 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                             if(ch.children[i].meshes[0]==ch.children[0].meshes[0])
                             {
                                 
-                            } else sameMesh=false;
-                        } else sameMesh=false;
-                    } else sameMesh=false;
+                            } else { sameMesh=false; }
+                        } else { sameMesh=false; }
+                    } //else { console.log(3); sameMesh=false; }
                     
                     if(sameMesh)
                     {
@@ -383,8 +383,8 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                         cloneTransforms.push(ch.children[i].transformation);
                     }
                 }
-            } else sameMesh=false;
-        } else sameMesh=false;
+            } else { sameMesh=false; }
+        } else { sameMesh=false; }
 
         if(!prevOp )
         {
