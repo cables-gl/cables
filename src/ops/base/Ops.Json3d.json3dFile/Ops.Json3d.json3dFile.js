@@ -90,8 +90,6 @@ var loadCameras=function(data,seq)
             {
                 cam.eye=root.children[i];
                 cam.transformation=root.children[i].transformation;
-            
-                
                 mat4.transpose(cam.transformation,cam.transformation);
 
                 // guess camera target (...)
@@ -100,8 +98,8 @@ var loadCameras=function(data,seq)
                     if(root.children[j].name == root.children[i].name+'_Target')
                     {
                         cam.target=root.children[i];
-                        // root.children.splice(j,1);
-                        // root.children.splice(i,1);
+                        root.children.splice(j,1);
+                        root.children.splice(i,1);
                         return cam;
                     }
                 }
@@ -191,7 +189,7 @@ var loadCameras=function(data,seq)
                 }
                 else
                 {
-                    var camOp=self.patch.addOp('Ops.Gl.Matrix.LookatCamera',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
+                    var camOp=self.patch.addOp('Ops.Gl.Matrix.LookatCamera',{translate:{x:self.uiAttribs.translate.x+camCount*150,y:self.uiAttribs.translate.y+100}});
                     camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
                     // self.patch.link(camOp,'render',self,'trigger');
 
@@ -506,49 +504,56 @@ var reload=function()
 {
     if(!self.filename.get())return;
 
-    // console.log('load ajax'+self.patch.getFilePath(self.filename.val));
-    var loadingId=self.patch.loading.start('json3dFile',self.filename.get());
-
-    CABLES.ajax(
-        self.patch.getFilePath(self.filename.val),
-        function(err,_data,xhr)
-        {
-            if(err)
+    function doLoad()
+    {
+        CABLES.ajax(
+            self.patch.getFilePath(self.filename.val),
+            function(err,_data,xhr)
             {
-                console.log('ajax error:',err);
-                self.patch.loading.finished(loadingId);
-                return;
-            }
-            var data=JSON.parse(_data);
-            scene.setValue(data);
-
-
-            if(!trigger.isLinked())
-            {
-                var root=self.patch.addOp('Ops.Sequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+150}});
-                var camOp=loadCameras(data,root);
-
-                self.patch.link(camOp,'trigger',root,'exe');
-
-                loadMaterials(data,root);
-
-
-                for(var i=0;i<data.rootnode.children.length;i++)
+                if(err)
                 {
-                    if(data.rootnode.children[i])
+                    console.log('ajax error:',err);
+                    self.patch.loading.finished(loadingId);
+                    return;
+                }
+                var data=JSON.parse(_data);
+                scene.setValue(data);
+    
+    
+                if(!trigger.isLinked())
+                {
+                    var root=self.patch.addOp('Ops.Sequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+150}});
+                    var camOp=loadCameras(data,root);
+    
+                    self.patch.link(camOp,'trigger',root,'exe');
+    
+                    loadMaterials(data,root);
+    
+    
+                    for(var i=0;i<data.rootnode.children.length;i++)
                     {
-                        var ntrigger=i+1;
-                        if(ntrigger>9)ntrigger=9;
-                        addChild(data,maxx-2,3,root,'trigger '+ntrigger,data.rootnode.children[i]);
-
+                        if(data.rootnode.children[i])
+                        {
+                            var ntrigger=i+1;
+                            if(ntrigger>9)ntrigger=9;
+                            addChild(data,maxx-2,3,root,'trigger '+ntrigger,data.rootnode.children[i]);
+    
+                        }
                     }
                 }
-            }
+    
+                render();
+                self.patch.loading.finished(loadingId);
+                if(CABLES.UI) gui.jobs().finish('loading3d'+loadingId);
+    
+            });
+    }
 
-            render();
-            self.patch.loading.finished(loadingId);
+    var loadingId=self.patch.loading.start('json3dFile',self.filename.get());
+    if(CABLES.UI) gui.jobs().start({id:'loading3d'+loadingId,title:'loading 3d data'},doLoad);
+        else doLoad();
 
-        });
+
 
 };
 
