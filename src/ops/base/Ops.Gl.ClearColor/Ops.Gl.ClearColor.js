@@ -1,4 +1,3 @@
-Op.apply(this, arguments);
 var cgl=this.patch.cgl;
 
 this.name='ClearColor';
