@@ -1,7 +1,7 @@
 var self=this;
 Op.apply(this, arguments);
 
-this.name='Websocket';
+this.name='laser socket';
 this.url=this.addInPort(new Port(this,"url",OP_PORT_TYPE_VALUE,{type:'string'}));
 this.result=this.addOutPort(new Port(this,"result", OP_PORT_TYPE_OBJECT));
 var outConnected=this.addOutPort(new Port(this,"connected"));
@@ -33,7 +33,7 @@ function checkConnection()
 // 2 - in closing handshake
 // 3 - connection closed or could not open
 
-connection.readyState
+// connection.readyState
 
     if(connection.readyState!=1)
     {
