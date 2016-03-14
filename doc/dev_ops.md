@@ -5,7 +5,6 @@
 ## basic setup
 
 ```
-Op.apply(this, arguments);
 this.name='my very special op';
 ```
 
