@@ -17,6 +17,19 @@
 
 - [Settings](#settings)
 
+### Editor
+
+- Save Tab
+- 
+- Search [`cmd + f`]
+- Replace [`cmd + r`]
+-
+- Close Tab
+- Close All Tabs
+- -
+- Auto-Format [`cmd + f`]
+
+
 ### Patch
 
 - [New](#new-project)
