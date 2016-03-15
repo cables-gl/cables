@@ -1,35 +1,28 @@
 
-# composing images
+# Image Compositions
 
-in this example we compose a new image/texture out of three individual images
+In this example we compose a new image / texture out of three individual images.
 
+## Basic Setup
 
-## basic setup
+![](img/example_imgcomp_a.png)
 
-![](/imgdoc/example_imgcomp_a.png)
+- `Image compose` creates a new texture, children of `Image Compose` apply 2D effects onto the texture
+- `DrawImage` applies an image
+- This example does not change the image at all, it is just a basic setup
 
-- image compose creates a new texture. childs of image compose apply 2d effects onto the texture.
-- ```drawimage``` applies an image
-- this example does not change the image at all. it is just a basic setup
+## Apply An Effect
 
-## apply an effect
+- To blur the image we add `Blur` to the end of the image composition chain
+- The image is now blurred, you can change the `Blur` parameters, or animate them
 
-- to blur the image we add ```blur``` to the end of the image compose chain.
-- the image is now blured. you can change the blur parameters, or animate them
+![](img/example_imgcomp_b.png)
 
-![](/imgdoc/example_imgcomp_b.png)
+## Add an Alpha Mask
 
-## draw the first image again with a alpha mask
+![](img/example_imgcomp_c.png)
 
-![](/imgdoc/example_imgcomp_c.png)
+- `DrawImage` has a a slot called `imageAlpha`
+- Using `alphaSrc` you can select what defines the alpha / opacity value, in this case the luminance of our alpha image:
 
-
-- ```drawimage``` has a a slot called ```imageAlpha```
-- using ```alphaSrc```, you can select what defines the alpha/opacity value, in this case the luminance of our alpha image:
-
-![](/imgdoc/example_imgcomp3.jpg)
-
-----
-
-
-[render to texture example](/ui/#/project/5645f59a9a013fa25927562a)
+![](img/example_imgcomp3.jpg)
