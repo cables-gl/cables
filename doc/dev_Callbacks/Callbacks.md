@@ -1,0 +1,71 @@
+# Callbacks
+
+In order to get informed on port-value-changes, function-triggers (also see [Ports](../dev_Ports/Ports.md)) or general op-events there are a number of callbacks your op can implement.
+
+## Port Callbacks
+
+### onValueChange
+
+Can be implemented for `OP_PORT_TYPE_VALUE`, `OP_PORT_TYPE_ARRAY`, `OP_PORT_TYPE_OBJECT`.  
+
+Every time a connected op calls the `myOutPort.set(...)` method, the in-port-callback `onValueChange` is called.
+
+```
+myPort.onValueChange( function() {
+    this.log('value of myPort changed to:' + myPort.get());
+});
+```
+
+### onTrigger
+
+Can be implemented for `OP_PORT_TYPE_FUNCTION`.  
+
+Every time a connected op calls `myOutPort.trigger()` the connected in-ports’ `onTrigger` callback is called.
+
+If your op needs to update its values continuously it should have an input port of type `OP_PORT_TYPE_FUNCTION`, which you can then connect to the [op: Renderer](../../src/ops/base/Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op e.g..
+
+```
+var exe = this.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION ) );
+
+exe.onTriggered( function() {
+	// do something
+});
+```
+
+
+### onLinkChange
+
+Gets called whenever a port is connected / disconnected.
+
+```
+myPort.onLinkChange( function() {
+	if( myPort.isLinked() ) {
+		// port connected  
+	} else {
+		// port disconnected
+	}
+});
+```
+
+## General Op Callbacks
+
+### onDelete
+
+If your op needs to clean up after itself when it is deleted from the patch you can implement `onDelete`:
+
+```
+this.onDelete( function() {
+	// do some manual cleanup here
+});
+```
+
+### onAnimFrame
+
+**TODO**
+
+### TODO – Are there more?
+
+
+
+
+ 
