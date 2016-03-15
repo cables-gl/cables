@@ -4,13 +4,11 @@ var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 var arrayIn=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
 var time=this.addInPort(new Port(this,"time",OP_PORT_TYPE_VALUE));
 
-
 var duration=this.addInPort(new Port(this,"duration",OP_PORT_TYPE_VALUE));
 duration.set(0.1);
 
 var offset=this.addInPort(new Port(this,"offset",OP_PORT_TYPE_VALUE));
 offset.set(0.0);
-
 
 var lookAhead=this.addInPort(new Port(this,"look ahead",OP_PORT_TYPE_VALUE));
 lookAhead.set(3.0);
@@ -18,8 +16,6 @@ lookAhead.set(3.0);
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var triggerLookat=this.addOutPort(new Port(this,"transform lookat",OP_PORT_TYPE_FUNCTION));
 var idx=this.addOutPort(new Port(this,"index"));
-
-
 
 var vec=vec3.create();
 var vecn=vec3.create();
@@ -41,13 +37,11 @@ function setup()
     var arr=arrayIn.get();
     timeStep=duration.get();
 
-    // timeStep=animLength/arr.length;
     for(var i=0;i<arr.length;i+=3)
     {
         animX.setValue(i*timeStep,arr[i+0]);
         animY.setValue(i*timeStep,arr[i+1]);
         animZ.setValue(i*timeStep,arr[i+2]);
-        
         animLength=i*timeStep;
     }    
 }
@@ -76,7 +70,6 @@ function render()
         animZ.getValue(nt)
     );
 
-    
     if(triggerLookat.isLinked())
     {
         cgl.pushMvMatrix();
@@ -85,9 +78,6 @@ function render()
         cgl.popMvMatrix();
     }
 
-
-    // console.log(q);
-    // console.log(vec);
     cgl.pushMvMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
 
@@ -103,7 +93,6 @@ function render()
     trigger.trigger();
     cgl.popMvMatrix();
 
-    // lastVec=vec3.clone(vec);
 }
 
 exe.onTriggered=render;

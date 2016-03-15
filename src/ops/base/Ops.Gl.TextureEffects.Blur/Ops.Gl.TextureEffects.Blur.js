@@ -53,6 +53,9 @@ var uniDirY=new CGL.Uniform(shader,'f','dirY',0);
 var uniWidth=new CGL.Uniform(shader,'f','width',0);
 var uniHeight=new CGL.Uniform(shader,'f','height',0);
 
+this.dir=this.addInPort(new Port(this,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['noth','vertical','hotizontal']}));
+
+
 this.render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
