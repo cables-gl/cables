@@ -4,7 +4,15 @@ var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 var arrayIn=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
 var time=this.addInPort(new Port(this,"time",OP_PORT_TYPE_VALUE));
 
+
+var duration=this.addInPort(new Port(this,"duration",OP_PORT_TYPE_VALUE));
+duration.set(0.1);
+
+var lookAhead=this.addInPort(new Port(this,"look ahead",OP_PORT_TYPE_VALUE));
+lookAhead.set(3.0);
+
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var triggerLookat=this.addOutPort(new Port(this,"transform lookat",OP_PORT_TYPE_FUNCTION));
 var idx=this.addOutPort(new Port(this,"index"));
 
 
@@ -20,10 +28,14 @@ var animY=new CABLES.TL.Anim();
 var animZ=new CABLES.TL.Anim();
 
 var animLength=0;
-var timeStep=0.04;
+var timeStep=0.1;
 function setup()
 {
+    animX.clear();
+    animY.clear();
+    animZ.clear();
     var arr=arrayIn.get();
+    timeStep=duration.get();
 
     // timeStep=animLength/arr.length;
     for(var i=0;i<arr.length;i+=3)
@@ -37,6 +49,7 @@ function setup()
 }
 
 arrayIn.onValueChange(setup);
+duration.onValueChange(setup);
 
 var q=quat.create();
 var qMat=mat4.create();
@@ -46,7 +59,7 @@ function render()
     if(!arrayIn.get())return;
 
     var t = time.get()%animLength;
-    var nt = (time.get()+timeStep*3.03)%animLength;
+    var nt = (time.get()+timeStep*lookAhead.get())%animLength;
     
     vec3.set(vec, 
         animX.getValue(t),
@@ -58,6 +71,16 @@ function render()
         animY.getValue(nt),
         animZ.getValue(nt)
     );
+
+    
+    if(triggerLookat.isLinked())
+    {
+        cgl.pushMvMatrix();
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vecn);
+        triggerLookat.trigger();
+        cgl.popMvMatrix();
+    }
+
 
     // console.log(q);
     // console.log(vec);
