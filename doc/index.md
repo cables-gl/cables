@@ -1,34 +1,27 @@
 
-## docs
+## Docs
 
+### How To Use Cables
 
-- [tips](/doc/tips)
-- [keyboard shortcuts](/doc/keys)
-- [videos](/doc/videos)
+- [Keyboard Shortcuts](Keys/Keys.md)
+- [Videos](Videos/Videos.md)
 
-## beginner guide
+### Beginner Tutorials
 
-- 1 [draw a circle](/doc/beginner1)
-- 2 [transformations](/doc/beginner2)
-- 3 [add color](/doc/beginner3)
-- 4 [more circles](/doc/beginner3)
+1. [Circle](Beginner1_Circle/Beginner1_Circle.md)
+2. [Transformations](Beginner2_Transformations/Beginner2_Transformations.md)
+3. [Color](Beginner3_Color/Beginner3_Color.md)
+4. [More_Transformations](Beginner4_More_Transformations/Beginner4_More_Transformations.md)
 
-[//]: # "- [## examples"
+### Intermediate Tutorials
 
-[//]: # "- [midi input](/doc/example_midi)"
-[//]: # "- [- [drawing lines](/doc/example_lines)"
-[//]: # "- [- [rendering to textures](/doc/example_r2t)"
-[//]: # "- [- [composing images](/doc/example_imgcomp)"
-[//]: # "- [- [post processing](/doc/example_postproc)"
+- [Image Compositions](Image Compositions/Image_Composition.md)
+- [Post-Processing 3D Scenes](Post-Processing_3D_Scenes/Post-Processing_3D_Scenes.md)
 
-## developing
+### Developing Ops
 
-- [embedding](/doc/dev_embed)
-- [writing operators](/doc/dev_ops)
+- [Hello Op](dev_Hello_Op/Hello_Op.md)
+- [Developing Ops](dev_Ops/Dev_Ops.md)
+- [Creating Ports](dev_Creating_Ports/Creating_Ports.md)
+- [Callbacks](dev_Callbacks/Callbacks.md)
 
----
-
-- [markdown example](/doc/md)
-
-
-![](/imgdoc/bla.svg)
