@@ -1,47 +1,41 @@
 
-# postprocessing 3d scenes
+# Post-Processing 3D Scenes
 
-be sure to read both examples first:
-- [rendering to textures](/doc/example_r2t)
-- [composing images](/doc/example_imgcomp)
+You can find the finished patch here: [postprocessing](https://cables.undev.de/p/5645f59a9a013fa25927562a).
 
-![](/imgdoc/example_postproc.jpg)
-![](/imgdoc/example_postproc2.png)
+![](img/example_postproc.jpg)
+![](img/example_postproc2.png)
 
-## step 1
+## Step 1
 
-- render a scene to a texture
+- Render a scene to a texture
 
-resulting texture: (grey lines are transparent)
+Resulting texture: (grey lines are transparent)
 
-![](/imgdoc/example_postproc3.jpg)
+![](img/example_postproc3.jpg)
 
-## step 2
+## Step 2
 
-- blur the resulting texture using imagecompose into a new one.
+- Blur the resulting texture using `image compose` into a new one
 
-resulting texture:
+Resulting texture:  
 
-![](/imgdoc/example_postproc4.jpg)
+![](img/example_postproc4.jpg)
 
-## step 3
+## Step 3
 
-- compose a new image:
-    - set a background color
-    - draw the image from step 1
-    - draw the blured image from step 2 using blendmode "add"
-    - apply effects like noise and chromatic abbreviation
+- Compose a new image:
+    - Set a background color
+    - Draw the image from step 1
+    - Draw the blurred image from step 2 using `blendmode`: `add`
+    - Apply effects like `Noise` and `ChromaticAbbreviation`
 
 
-resulting texture:
+Resulting texture:  
 
-![](/imgdoc/example_postproc.jpg)
+![](img/example_postproc.jpg)
 
-## step 4
+## Step 4
 
-- draw the compose image to the screen
+- Draw the compose image to the screen
 
-
-----
-
-[example project](/ui/#/project/5645f59a9a013fa25927562a)
