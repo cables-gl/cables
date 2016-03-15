@@ -19,20 +19,20 @@ var animX=new CABLES.TL.Anim();
 var animY=new CABLES.TL.Anim();
 var animZ=new CABLES.TL.Anim();
 
-var animLength=10;
-var timeStep=1;
+var animLength=0;
+var timeStep=0.04;
 function setup()
 {
     var arr=arrayIn.get();
 
-    timeStep=animLength/arr.length;
+    // timeStep=animLength/arr.length;
     for(var i=0;i<arr.length;i+=3)
     {
         animX.setValue(i*timeStep,arr[i+0]);
         animY.setValue(i*timeStep,arr[i+1]);
         animZ.setValue(i*timeStep,arr[i+2]);
         
-        console.log(i*timeStep,animLength);
+        animLength=i*timeStep;
     }    
 }
 
@@ -46,7 +46,7 @@ function render()
     if(!arrayIn.get())return;
 
     var t = time.get()%animLength;
-    var nt = (time.get()+timeStep*0.5)%animLength;
+    var nt = (time.get()+timeStep*3.03)%animLength;
     
     vec3.set(vec, 
         animX.getValue(t),
@@ -64,10 +64,10 @@ function render()
     cgl.pushMvMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
 
-vec3.set(vec,vecn[0]-vec[0],vecn[1]-vec[1],vecn[2]-vec[2]+1);
-
+    vec3.set(vec,vecn[0]-vec[0],vecn[1]-vec[1],vecn[2]-vec[2]);
     vec3.normalize(vec,vec);
-    vec3.normalize(vecn,vecn);
+    vec3.set(vecn,0,0,1);
+
     quat.rotationTo(q,vecn,vec);
     mat4.fromQuat(qMat, q);
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);

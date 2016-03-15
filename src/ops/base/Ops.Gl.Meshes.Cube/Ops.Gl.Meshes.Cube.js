@@ -12,6 +12,7 @@ var lengt=this.addInPort(new Port(this,"length",OP_PORT_TYPE_VALUE));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+geomOut.ignoreValueSerialize=true;
 
 
 var geom=null;

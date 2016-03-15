@@ -136,7 +136,6 @@ function reload()
 
                 geoms.push(geom);
             }
-            
 
             mesh=new CGL.Mesh(cgl,geoms[0]);
             mesh.addAttribute('attrMorphTargetA',geoms[0].vertices,3);

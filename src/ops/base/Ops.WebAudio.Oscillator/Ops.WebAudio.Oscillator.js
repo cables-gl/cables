@@ -27,3 +27,5 @@ frequency.onValueChange(updateFrequency);
 
 var audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
 audioOut.set( oscillator );
+
+frequency.set(200);
