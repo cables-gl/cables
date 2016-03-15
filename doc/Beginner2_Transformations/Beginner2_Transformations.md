@@ -1,33 +1,21 @@
+# Beginner 2: Transformations
 
+This is part 2 of the beginner tutorial series. Before you proceed you should have completed [Part 1: Circle](../Beginner1_Circle/Beginner1_Circle.md).
 
+To transform an object in 3D space we need a transformation operator.  
+To insert an operator between two existing ops you can press the circle in the middle of the cable to link them. If the circle is not showing up, you have to select one of the ops first.
 
+![](img/beginner_circle_trans1.png)
 
-## beginner tutorial - part 2
+When you click the circle the `Select Op`-dialog shows up. Now enter `transform` and select `Ops.Gl.Matrix.Transform` and press enter.  
+The new op should appear between the two existing once:  
 
-[back to part 1](/doc/beginner1)
+![](img/beginner_circle_trans2.png)
 
+Play around with the parameters of the transform op. You can now change the position, scaling and rotation of the circle:  
 
-### transforming an object
+![](img/beginner_circle_transform.png)
 
-to transform an object in 3d space we need a transformation operator
+## Part 3
 
-to insert an operator between two exisiting ops you can press the circle on the link between them. if the circle is not showing you have to select one of the ops.
-
-![](/imgdoc/beginner_circle_trans1.png)
-
-after clicking the "select op" dialog will show up. now enter "transform" and select "ops.gl.matrix.transform" and press enter.
-
-the new op should appear between the two existing onces:
-
-![](/imgdoc/beginner_circle_trans2.png)
-
-play around with the parameters of the transform op.
-you can now change the position,scaling and rotation of the circle:
-
-
-![](/imgdoc/beginner_circle_transform.png)
-
-
-## part 3
-
-[continue to part 3](/doc/beginner3)
+Continue to [Part 3](../Beginner3_Color/Beginner3_Color.md) of the tutorial-series to learn how to use colors.

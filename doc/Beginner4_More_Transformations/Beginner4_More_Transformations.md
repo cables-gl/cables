@@ -1,33 +1,32 @@
 
-## more transformations
+# More Transformations
 
-[back to part 3](/doc/beginner3)
-
-
-to reuse the circle and draw multiple of them you can use ops.repeat
-
-- add it like this:
-
-![](/imgdoc/beginner_repeat1.png)
-
-now you still see one circle, but ```num``` parameter of repeat op has value '5'...
-the 5 circles are currently drawn at the exact same position.
-to change this, we need the ```transform``` op again:
-
-- connect the new transform ```x``` port to the outgoing ```index``` port of repeat
-- now there will be 5 circles
-- you maybe have to insert a new transform op __before__ the repeat and adjust the position of them to see them all ( use x/y/z transforms to center them)
-
-it should look like this now:
-
-![](/imgdoc/beginner_repeat2.png)
-
-- you can add another repeat to make a 2d array of circles like this:
-
-![](/imgdoc/beginner_repeat3.png)
+[Back to part 3](../Beginner3_Color/Beginner3_Color.md)
 
 
-- with some more practice and adjustment it is possible to create a 3d cube of cubes like this:
-- this example uses only two new ops: ```matCapMaterial``` and ```cube```
+To reuse the circle and draw multiple of them you can use `Ops.Repeat`
 
-![](/doc/beginner_repeat4.png)
+Add it like this:  
+
+![](img/beginner_repeat1.png)
+
+Now you still see one circle, but the `num`-parameter of `Repeat`-op has value `5`. The 5 circles are currently drawn at the exact same position. To change this, we need the `Transform`-op again:  
+
+- Connect the new transform `x` port to the outgoing `index`-port of `Repeat`
+- Now there will be 5 circles
+- You may have to insert a new `Transform`-op __before__ the `Repeat`-op and adjust the position of them to see them all (use x/y/z transforms to center them)
+
+It should look like this now:  
+
+![](img/beginner_repeat2.png)
+
+You can add another `Repeat`-op to make a 2D array of circles like this:  
+
+![](img/beginner_repeat3.png)
+
+With some more practice and adjustment it is possible to create a 3D cube of cubes. This example uses only two new ops: `matCapMaterial` and `cube`:
+
+![](img/beginner_repeat4.png)
+
+
+That’s it. You have finished the beginner tutorial series. Now you should have a look at the existing [examples](https://cables.undev.de/examples) and [public projects](https://cables.undev.de/projects) to learn more…

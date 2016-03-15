@@ -1,33 +1,28 @@
+# Beginner 3: Color
 
+[Back to Part 2](../Beginner2_Transformations/Beginner2_Transformations.md)
 
+## Adding Color
 
+To change color and texture of things you can use materials.  
 
-## beginner tutorial - part 3
+`Basicmaterial` is the most basic one.  
 
-[back to part 2](/doc/beginner2)
+![](img/beginner_color.png)
 
-### adding color
+## Using Images As Texture
 
-to change color and texturing of things you can use materials.
+*Tip: To upload an image to cables, you can either upload it via the upload-button of an op which has a file-input or drag’n’drop an image onto the cables window*
 
-```basicmaterial``` is the most basic one
+![](img/beginner_upload.png)
 
-![](/imgdoc/beginner_color.png)
+- Create an `Ops.Gl.Texture`-op and connect it to your material (to the first green texture port)
+- The new texture op has a `file` input. click the file icon next to it to select an image.
 
-### using images as texture
+It should look like this now:  
 
-- upload an image to cables. you just have to drag'n drop an image to upload it
+![](img/beginner_textured.png)
 
-![](/imgdoc/beginner_upload.png)
+## Part 4
 
-- create a ```ops.gl.texture``` op and connect it to your material (to first green texture slot)
-- the parameter opanel of the new texture op has a ```file``` input. click the file icon next to it to select an image.
-
-it should look like this now:
-
-![](/imgdoc/beginner_textured.png)
-
-
-## part 4
-
-[continue to part 4](/doc/beginner4)
+Continue to [Part 4](../Beginner4_More_Transformations/Beginner4_More_Transformations.md) to learn more on transformations
