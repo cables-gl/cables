@@ -1,24 +1,21 @@
+# Embedding Patches
 
+*cables*-Patches can be exported as a zip-file and embedded into any website. The size of the exported patches are relatively small as only the ops which you use in your patch are packed into the zip-file. 
 
+- In your project settings click `Export Static Archive`
+- A *.zip*-archive containing all your project data is created
+- The archive contains an `index.html`-file – put this on a web-server and load it, your project should be shown. You can open your browser’s developer tools to check if there are any errors.
 
+## Parameters
 
-## embedding
+- `glCanvasId` (string): The element ID of your canvas object
+- `prefixAssetPath` (string): Path where to find the assets folder
+- `onError` (function): Function to be called if a critical error occurs (e.g. browser has no WebGL / Web Audio)
+- `silent` (bool): Enable / disable all logging to console.
 
-- in your project settings click ```export static archive```
-- a .zip archive is created, containing all your project data 
-- the archive contains an index.html. put this on a webserver and load it, your project should be shown.
+## Embedding Multiple Projects On A Page
 
-## parameters
-
-- ```glCanvasId``` (string) the element id of your canvas object
-- ```prefixAssetPath``` (string) path where to fins the assets folder
-- ```onError``` (function) function to be called if a critical error occurs (e.g. browser has no webgl/webaudio)
-- ```silent``` (bool) enable/disable all logging to console.
-
-
-## embedding multiple projects on one page
-
-this example shows two projects on one page. the projects are loaded one after another.
+This example shows two projects on one page. The projects are loaded one after another.
 
 ```
 function loadScene1()
@@ -71,6 +68,4 @@ document.addEventListener("DOMContentLoaded", function(event)
     // start loading scene 1
     loadScene1();
 });
-
-
 ```
