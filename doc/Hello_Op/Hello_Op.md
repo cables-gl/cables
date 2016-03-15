@@ -1,6 +1,6 @@
 # Hello Op
 
-Let’s write our first op, which has a function-input, a function-output and a value input.
+Let’s write our first op, which has a value input and output.
 
 Create a new patch by clicking on `Patch` —> `New`. Now we need to create a new operator – click on `Op` —> `New Op` and enter the name `HelloOp`.
 
