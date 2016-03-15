@@ -71,6 +71,16 @@ this.onLoaded( function() {
 });
 ```
 
+### onResize
+
+Whenever the canvas is resized `onResize`gets called.
+
+```
+this.onResize( function() {
+	// adapt to the new size
+});
+```
+
 
 
  
