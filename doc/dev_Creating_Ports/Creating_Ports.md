@@ -100,8 +100,8 @@ inPort.onValueChange( function() {
 
 ##### Display: Editor
 
-![Editor Button](img/Editor.png)
 ![Editor Edit View](img/Editor2.png)
+![Editor Button](img/Editor.png)
 
 ```
 var text = this.addInPort( new Port( this, "text", OP_PORT_TYPE_VALUE, { display: 'editor' } ) );
