@@ -8,6 +8,10 @@ var time=this.addInPort(new Port(this,"time",OP_PORT_TYPE_VALUE));
 var duration=this.addInPort(new Port(this,"duration",OP_PORT_TYPE_VALUE));
 duration.set(0.1);
 
+var offset=this.addInPort(new Port(this,"offset",OP_PORT_TYPE_VALUE));
+offset.set(0.0);
+
+
 var lookAhead=this.addInPort(new Port(this,"look ahead",OP_PORT_TYPE_VALUE));
 lookAhead.set(3.0);
 
@@ -58,8 +62,8 @@ function render()
 {
     if(!arrayIn.get())return;
 
-    var t = time.get()%animLength;
-    var nt = (time.get()+timeStep*lookAhead.get())%animLength;
+    var t = (time.get() +parseFloat(offset.get()) )%animLength;
+    var nt = (time.get()+timeStep*lookAhead.get()+parseFloat(offset.get()))%animLength;
     
     vec3.set(vec, 
         animX.getValue(t),
