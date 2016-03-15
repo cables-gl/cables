@@ -1,50 +1,38 @@
 
+# Tutorial: Drawing A Circle
 
+First, we need a project to work with, so press the «New Project»-button.
 
+To draw a circle, we need two operators:  
 
-## beginner tutorial - part 1
+1. The WebGL-renderer
+2. A circle-op
 
-first, we need a project to work with, so press the "new Project" button, or select a project from your dashboard.
+### 1.Aadd the WebGL-op
 
+- To create an operator press `[esc]` – the `Select Operator`-dialog shows up
+- Now enter `render`
+- The first entry in the list should be `Ops.Gl.Renderer`
+- Press `[enter]` to create the operator
 
-### drawing a circle
+### 2. Add The Circle Operator
 
-to draw a circle, we need two operators:
+- To create a new operator and automatically connect it to another op you can pull the blue output port on the left side with your mouse (drag it out of the operator and release your mouse button).
 
-1. the webgl renderer
-2. a circle
+![](img/create_op_pull.gif)
 
-### 1. add the webgl operator
+- The `Select Operator`-dialog is showing again
+- Enter `circle`, now the entry `Ops.Gl.Meshes.Circle` should be selected
+- Press `[enter]` to create it
 
-- to create the first operator you press ```[esc]```
-- the "select operator dialog" is showing
-- now enter ```render```
-- the first entry in the list should be "ops.gl.renderer"
-- press ```[enter]``` to create the operator
+Now it should look like this:  
 
-### 2. add the circle operator
+![](img/beginner1result.png)
 
-- to create a new operator and connect automatically it to another op you can pull the blue output port on the left side with your mouse.
-- just drag it out of the operator and release your mouse button.
+### 3. Parameters
 
-![](/imgdoc/create_op_pull.gif)
+- The renderer canvas (on the right side) should show a circle now
+- The parameter panel shows all parameters to tweak the circle
+- Play around with the parameters, for example drag the slider `innerradius`
 
-- the "select operator dialog" is showing again
-- enter ```circle```, now the entry ```ops.gl.meshes.circle``` should be selected, press ```[enter]``` to create it
-- now it should look like this:
-
-![](/imgdoc/beginner1result.png)
-
-### 3. parameters
-
-- the renderer canvas (on the right side should show a circle now)
-- the parameter panel shows all parameters to tweak the circle.
-- play around with the parameters, for example drag the slider "innerradius"
-
-![](/imgdoc/beginner1circle.png)
-
-
-
-## part 2
-
-[continue to part 2](/doc/beginner2)
+![](img/beginner1circle.png)
