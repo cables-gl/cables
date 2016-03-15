@@ -80,7 +80,7 @@ Displays a slider in the range `[min..max]` along with a text input field. The v
 
 ```
 var inPort = this.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 10 } ));
-´´´
+```
 
 ##### Display: Bool
 
@@ -136,6 +136,7 @@ E.g. `[1, 2, 3]`, `[[1, 2], [3, 4]]`, `[{"one": 2}, {"three": 4}]`
 ```
 OP_PORT_TYPE_OBJECT
 ```
+
 An object can contain basically anything, e.g.:
 
 ```
