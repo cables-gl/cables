@@ -108,8 +108,8 @@ exe.onTriggered=function()
 {
     var count=0;
 
-var xaxis=0;
-if(axis.get()=='xy')xaxis=1;
+    var xaxis=0;
+    if(axis.get()=='xy')xaxis=1;
 
     for(var i in anims)
     {

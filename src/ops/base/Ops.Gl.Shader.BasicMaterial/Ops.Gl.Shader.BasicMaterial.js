@@ -159,7 +159,7 @@ this.shaderOut.val=shader;
 this.onLoaded=shader.compile;
 shader.setSource(srcVert,srcFrag);
 
-this.r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+this.r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
 this.r.onValueChanged=function()
 {
     if(!self.r.uniform) self.r.uniform=new CGL.Uniform(shader,'f','r',self.r.get());

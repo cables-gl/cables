@@ -54,7 +54,7 @@ var inPort = this.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
 inPort.onValueChange( function() {
     this.log('in port changed to:' + inPort.get());
 });
-
+```
 
 Text-input-field which can be used to enter numbers, booleans and strings.
 

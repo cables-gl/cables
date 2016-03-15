@@ -16,6 +16,7 @@ var axis=this.addInPort(new Port(this,"axis",OP_PORT_TYPE_VALUE,{display:'dropdo
 
 
 var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+geomOut.ignoreValueSerialize=true;
 
 
 axis.set('xy');

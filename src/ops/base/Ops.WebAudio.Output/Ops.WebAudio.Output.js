@@ -8,17 +8,46 @@ if(!window.audioContext)
 this.name='audioOutput';
 var audioIn=this.addInPort(new Port(this,"audio in",OP_PORT_TYPE_OBJECT));
 
-this.oldAudioIn=null;
+
+
+
+var oldAudioIn=null;
+
+audioIn.onLinkChanged = function()
+{
+    console.log('onlink is linked: ',audioIn.isLinked());
+    
+    console.log('onlink is linked: ',audioIn.get());
+    
+    // if(!audioIn.isLinked() && oldAudioIn)
+    // {
+    //     oldAudioIn.disconnect(audioContext.destination);
+    // }
+    // else
+    // {
+    //     audioIn.val.connect(audioContext.destination);
+    //     oldAudioIn=audioIn.val;
+    // }
+};
+
+
+
+
+
 
 audioIn.onValueChanged = function()
 {
 
-    console.log(audioIn.val);
+    console.log('val: ',audioIn.get() );
+    console.log('is linked: ',audioIn.isLinked());
+        
     if (!audioIn.get())
     {
         if (oldAudioIn !== null)
         {
-            oldAudioIn.disconnect(audioContext.destination);
+            try{
+                oldAudioIn.disconnect(audioContext.destination); // TODO, we don't know whichport to disconnect....
+            } catch(e) { console.log(e); }
         }
     }
     else
