@@ -2,6 +2,8 @@
 
 In order to get informed on port-value-changes, function-triggers (also see [Ports](../dev_Ports/Ports.md)) or general op-events there are a number of callbacks your op can implement.
 
+*Tip: It’s always a good idea to inspect the code of existing ops by selecting an op and then pressing `view code` in the op-settings on the right.*  
+
 ## Port Callbacks
 
 ### onValueChange
@@ -59,12 +61,15 @@ this.onDelete( function() {
 });
 ```
 
-### onAnimFrame
+### onLoaded
 
-**TODO**
+Gets called when the whole patch is loaded / all ops are linked etc. You mostly don’t need this, as op-specific init-code can just be put in your op-code without a callback.
 
-### TODO – Are there more?
-
+```
+this.onLoaded( function() {
+	// do something
+});
+```
 
 
 
