@@ -11,6 +11,8 @@ There are different types of ports your op can use:
 
 ### Function Ports
 
+**TODO: Implement onTrigger Callback**
+
 ```
 OP_PORT_TYPE_FUNCTION
 ```
@@ -55,8 +57,6 @@ var outPort = this.addOutPort( new Port( this, "out port", OP_PORT_TYPE_VALUE ) 
 
 - Use `outPort.set(x);` / `inPort.set(x);` to change the value of a port
 - Use `inPort.get();` to get the current value of a port
-
-**TODO: Implement onTrigger Callback**
 
 #### Parameters
 
