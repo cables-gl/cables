@@ -1,7 +1,5 @@
 # Ports (for Developers)
 
-This documentation is intended for developers, if you just want to use the existing ops and learn about ports, check out the [doc: Ports](#) documentation.  
-
 ## Port Types
 
 There are different types of ports your op can use:  
