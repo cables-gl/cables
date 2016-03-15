@@ -21,10 +21,12 @@ Function ports are being used to trigger another op. If you do a visual-patch th
 Function ports can also be used to trigger under certain conditions – the [Op: Mouse](#)-op e.g. triggers on the `click`-port once a user clicked in the preview pane.
 
 ```
-var exe = this.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION) );
+var exec = this.addInPort( new Port( this, "exec", OP_PORT_TYPE_FUNCTION ));
+var next = this.addOutPort( new Port( this, "next", OP_PORT_TYPE_FUNCTION ));
 
-exe.onTrigger( function(){
-	this.log( "Exe triggered" );
+exec.onTrigger( function(){
+	// ...
+	next.trigger(); // trigger connected ops
 });
 ```
 
@@ -38,9 +40,13 @@ Value ports can hold a single value, a number (e.g. -1, 2.45), a bool (true, fal
 
 ```
 var inPort = this.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
+var outPort = this.addOutPort( new Port( this, "out port", OP_PORT_TYPE_VALUE ) );
 ```
 
-**TODO: Implement onTriggered Callback**
+- Use `outPort.set(x);` / `inPort.set(x);` to change the value of a port
+- Use `inPort.get();` to get the current value of a port
+
+**TODO: Implement onTrigger Callback**
 
 #### Parameters
 
