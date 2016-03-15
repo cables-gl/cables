@@ -1,95 +1,35 @@
+# Developing Ops
 
-
-# developing ops
-
-## basic setup
+## Basic Setup
 
 ```
-this.name='my very special op';
+this.name = 'my very special op';
 ```
 
-## adding ports
+## Adding Ports
 
-use ```addOutPort``` and ```addInPort``` to add new Ports to your op
+See [Creating Ports](../dev_Creating_Ports/dev_Creating_Ports.md)
 
-
-- example:
-
-```
-var onoff=this.addOutPort(new Port(this,"on or off",OP_PORT_TYPE_VALUE,{display:'bool'}));
-```
-
-### port types
-
-- ```OP_PORT_TYPE_FUNCTION``` (blue) function port
-- ```OP_PORT_TYPE_VALUE``` (orange) value port
-- ```OP_PORT_TYPE_ARRAY``` (purple) array port
-- ```OP_PORT_TYPE_TEXTURE``` (green) texture port
-- ```OP_PORT_TYPE_OBJECT``` (green) object port
-
-### display parameter
-
-- ```display``` how to display in ui, possible params: ```bool``` , ```editor```
-
-### logging
-
-- use ```this.log('hello world');```. do NOT use console.log. ever. this.log is not shown if the patch is embeded and the silent parameter is set.
-
-
-### value ports
-
-- use ```port.set(x);``` to change the value of a port
-- use ```port.get();``` to get the current value of a port
-
-### value port events
+## Logging
 
 ```
-var name=this.addInPort(new Port(this,"your name",OP_PORT_TYPE_VALUE));
-
-name.onValueChange(function()
-{
-    this.log('name was changed to:' + name.get());
-});
+`this.log( 'hello world' );`.   
 ```
 
+Do **not** use `console.log()`!   
+`this.log()` is not shown if the patch is embedded and the silent parameter is set, also you get a reference to the op which is producing the log-message.
 
-### function ports executing and calling
+## UI Attributes
 
-when function ports will be executed ```onTriggered``` will be called.
+These attributes are visible in the op parameter panel and can be used for debugging purposes.
 
-you can trigger an output function port by calling ```trigger()```
+- `warning`: Shows a warning message in op parameter panel
+- `info`: Shows an information message in op parameter panel
 
-```
-var exec=this.addInPort(new Port(this,"exec",OP_PORT_TYPE_FUNCTION));
-var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
-
-exec.onTriggered=function()
-{
-    // ...
-    next.trigger();
-}
-```
-
-
-----
-
-
-## ui attributes
-
-these attributes are only shown when you are in the cables ui.
-
-you should always check if the user is in the ui or it is running embedded on a website
-
-
-- ```warning``` shows a warning in op parameter panel
-- ```info``` show information in op parameter panel
-
-
-- example:
+You should always check if the user is in the cables development environment or if it is running embedded on a website.  
 
 ```
-if(CABLES.UI)
-{
-    this.uiAttr({warning:'this is a warning...'});
+if(CABLES.UI) {
+    this.uiAttr( { warning: 'this is a warning...' } );
 }
 ```
