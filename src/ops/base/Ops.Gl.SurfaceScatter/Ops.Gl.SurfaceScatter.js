@@ -60,14 +60,6 @@ function initRandom()
 
         obj.q=quat.create();
 
-        // works for sphere...
-        // var vm2=vec3.create();
-        // vec3.set(vm2,0,0,1);
-        // var posNorm=vec3.create();
-        // vec3.normalize(posNorm,obj.pos);
-        // quat.rotationTo(obj.q,vm2,obj.pos);
-
-        // works for everything?
         var vm2=vec3.create();
         vec3.set(vm2,0,0,1);
         quat.rotationTo(obj.q,vm2,obj.norm);

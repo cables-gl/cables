@@ -18,7 +18,6 @@ function render()
     for(var i=0;i<arr.length;i+=3)
     {
         vec3.set(vec, arr[i],arr[i+1],arr[i+2]);
-        // console.log(vec);
         cgl.pushMvMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
         trigger.trigger();
