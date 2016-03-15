@@ -8,7 +8,7 @@ this.name = 'my very special op';
 
 ## Adding Ports
 
-See [Creating Ports](../dev_Creating_Ports/dev_Creating_Ports.md)
+See [Creating Ports](../dev_Creating_Ports/Creating_Ports.md)
 
 ## Logging
 

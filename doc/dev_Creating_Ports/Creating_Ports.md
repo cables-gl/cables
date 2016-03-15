@@ -1,7 +1,5 @@
 # Ports (for Developers)
 
-This documentation is intended for developers, if you just want to use the existing ops and learn about ports, check out the [doc: Ports](#) documentation.  
-
 ## Port Types
 
 There are different types of ports your op can use:  
@@ -12,6 +10,8 @@ There are different types of ports your op can use:
 - `OP_PORT_TYPE_OBJECT` – (green) object port
 
 ### Function Ports
+
+**TODO: Implement onTrigger Callback**
 
 ```
 OP_PORT_TYPE_FUNCTION
@@ -30,6 +30,18 @@ exec.onTrigger( function(){
 });
 ```
 
+#### Parameters
+
+##### Display: Button
+
+![Button](img/Button.png)  
+
+By adding `{ "display": "button" }` to a port-definition a button-UI element will be added to the op settings pane to manually trigger the port.
+
+```
+var tap = this.addInPort( new Port( this, "tap", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+```
+
 ### Value Ports
 
 ```
@@ -45,8 +57,6 @@ var outPort = this.addOutPort( new Port( this, "out port", OP_PORT_TYPE_VALUE ) 
 
 - Use `outPort.set(x);` / `inPort.set(x);` to change the value of a port
 - Use `inPort.get();` to get the current value of a port
-
-**TODO: Implement onTrigger Callback**
 
 #### Parameters
 
@@ -66,17 +76,25 @@ Text-input-field which can be used to enter numbers, booleans and strings.
 
 ##### Display: Range
 
-##### Display: Bool
-
-##### Display: Button
-
-![Button](img/Button.png)  
+Displays a slider in the range `[min..max]` along with a text input field. The value of the input field can be out of range, so if your op cannot handle these values you need to manually check and reset the port by calling `inPort.set(...)`.
 
 ```
-var tap = this.addInPort( new Port( this, "tap", OP_PORT_TYPE_FUNCTION, {"display": "button"} ) );
+var inPort = this.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 10 } ));
+´´´
 
-tap.onTriggered(function(){
-	this.log( "tab pressed" );
+##### Display: Bool
+
+![](img/Checkbox.png)
+
+```
+var inPort = this.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+
+inPort.onValueChange( function() {
+	if( inPort.get() === true ){
+		this.log( 'Checkbox checked' );	
+	} else {
+		this.log( 'Checkbox unchecked' );	
+	}
 });
 ```
 
