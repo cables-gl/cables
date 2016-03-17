@@ -59,13 +59,14 @@ function loadMaterials(data,root)
                     posyAdd+=100;
                     var setMatOp=self.patch.addOp('Ops.Json3d.SetMaterial',{translate:{x:self.uiAttribs.translate.x+300,y:posyAdd+50}});
                     setMatOp.getPort('name').set(matName);
+                    setMatOp.name='Set Material '+matName;
                     self.patch.link(root,'trigger 0',setMatOp,'exe');
 
                     var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{translate:{x:self.uiAttribs.translate.x+350,y:posyAdd}});
                     matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
                     matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
                     matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
-                    matOp.uiAttribs.title=matOp.name=' Material';
+                    matOp.uiAttribs.title=matOp.name='Material '+matName;
 
                     self.patch.link(setMatOp,'material',matOp,'shader');
 
@@ -109,11 +110,13 @@ var loadCameras=function(data,seq)
     }
 
 
-    var camSeq=self.patch.addOp('Ops.TimedSequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
-    self.patch.link(camSeq,'exe',self,'trigger');
-
+    var camSeq=null;
+    
     if(data.hasOwnProperty('cameras'))
     {
+        camSeq=self.patch.addOp('Ops.TimedSequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+50}});
+        self.patch.link(camSeq,'exe',self,'trigger');
+
         console.log("camera....");
 
         var camCount=0;
@@ -525,7 +528,9 @@ var reload=function()
                     var root=self.patch.addOp('Ops.Sequence',{translate:{x:self.uiAttribs.translate.x,y:self.uiAttribs.translate.y+150}});
                     var camOp=loadCameras(data,root);
     
-                    self.patch.link(camOp,'trigger',root,'exe');
+                    if(camOp) self.patch.link(camOp,'trigger',root,'exe');
+                        else self.patch.link(self,'trigger',root,'exe');
+
     
                     loadMaterials(data,root);
     
