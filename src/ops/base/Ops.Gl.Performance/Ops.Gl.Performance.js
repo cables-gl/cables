@@ -23,6 +23,7 @@ canvas.id     = "performance_"+self.patch.config.glCanvasId;
 canvas.width  = 512;
 canvas.height = 128;
 canvas.style.display   = "block";
+canvas.style['z-index']   = "99999";
 var body = document.getElementsByTagName("body")[0];
 body.appendChild(canvas);
 
@@ -113,9 +114,10 @@ function refresh()
 
         text2='frame: '+Math.round(avgMs*100)/100+' ms';
         
-        text3='child ops: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) uniforms/s: '+CGL.profileUniformCount;
+        text3='child ops: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) uniforms/s: '+CGL.profileUniformCount+' / '+CGL.profileShaderGetUniform;
         if(selfTime>=1.25) text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         CGL.profileUniformCount=0;
+        CGL.profileShaderGetUniform=0;
 
     }
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -136,7 +138,7 @@ function refresh()
         ctx.fillRect(k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
     }
     
-    ctx.fillStyle="#bbbbbb";
+    ctx.fillStyle="#ffff00";
     ctx.fillText(text, 10, 20);
     ctx.fillText(text2, 10, 35);
     ctx.fillText(text3, 10, 50);
