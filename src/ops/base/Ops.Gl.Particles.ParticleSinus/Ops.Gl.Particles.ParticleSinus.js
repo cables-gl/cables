@@ -52,15 +52,6 @@ render.onTriggered=function()
             });
         uniTime=new CGL.Uniform(shader,'f','time',10);
 
-        // updateMethod();
-        
-
-        // module=shader.addModule(
-        //     {
-        //         name:'MODULE_COLOR',
-        //         srcHeadFrag:srcHeadFrag,
-        //         srcBodyFrag:srcBodyFrag
-        //     });
     }
     if(uniTime) uniTime.setValue( (Date.now()-startTime )/1000 );
 
