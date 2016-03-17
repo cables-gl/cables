@@ -9,7 +9,7 @@ var shader=null;
 var srcHeadVert=''
     .endl()+'uniform float numVertices;'
     .endl()+'uniform float time;'
-    .endl()+'float size=300.0;'
+    .endl()+'float size=1000.0;'
     .endl()+'attribute float attrVertIndex;'
     .endl();
 
