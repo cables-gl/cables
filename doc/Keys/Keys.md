@@ -1,7 +1,8 @@
 # Global Keys
 
-- `[esc]`: Add operator / show `Op select`-dialog
+- `[esc]`: Add operator / show *Op select*-dialog
 - `[esc]`: Close `Op Select` / close dialogs
+- `[mod] + [esc]`: *Quick open project* dialog
 - `[mod] + n`: New patch
 - `[mod] + s`: Save patch / save current editor file
 - `[mod] + [shift] + s`: Save as new patch

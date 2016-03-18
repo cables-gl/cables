@@ -1,0 +1,159 @@
+this.name="Particle Simulation";
+var cgl=this.patch.cgl;
+
+var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var width=this.addInPort(new Port(this,"texture width"));
+var height=this.addInPort(new Port(this,"texture height"));
+
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var tex=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
+
+var texture=new CGL.Texture(cgl,{isFloatingPointTexture:true});
+texture.setSize(1024,1024);
+   
+var shaderSim=new CGL.Shader(cgl);
+this.onLoaded=shaderSim.compile;
+
+var srcGetPos=''
+    .endl()+'vec2 getPos(float index,float num)'
+    .endl()+'{'
+    .endl()+'   float size=1024.0;'
+    .endl()+'   float tx = mod(attrVertIndex,size)/size;'
+    .endl()+'   float ty = float( int((attrVertIndex/size)) )/size;'
+    .endl()+'   return vec2(tx,ty);'
+    .endl()+'}';
+
+
+
+// simulation...
+
+var srcFrag=''
+    .endl()+'precision highp float;'
+    .endl()+'uniform sampler2D tex;'
+    .endl()+'uniform float time;'
+    .endl()+'   varying vec2 texCoord;'
+
+    .endl()+'float random(vec2 co)'
+    .endl()+'{'
+    .endl()+'   return fract(sin(dot(co.xy ,vec2(time+12.9898,78.233))) * 43758.5453);'
+    .endl()+'}'
+
+    .endl()+'void main()'
+    .endl()+'{'
+    .endl()+'   vec4 old = texture2D( tex, texCoord );'
+
+    .endl()+'   float c =random((0.2323)*gl_FragCoord.xy)*3.0;'
+    .endl()+'   float c1=random((2.3455)*gl_FragCoord.xy)*3.0;'
+    .endl()+'   float c2=random((1.7623)*gl_FragCoord.xy)*3.0;'
+
+    .endl()+'   if(time==0.0)'
+    .endl()+'   {'
+    
+    .endl()+'   }else{'
+
+    .endl()+'       c =old.r+0.01;'//(random((0.2323)*gl_FragCoord.xy)-0.5)*0.1;'
+    // .endl()+'   c1=old.g+0.1;'
+    // .endl()+'   c2=old.b+0.1;'
+    .endl()+'   }'
+    
+    .endl()+'   if(c>5.0)c=random((0.2323)*gl_FragCoord.xy)*0.5;'
+    
+    .endl()+'   gl_FragColor = vec4(c,c1,c2,1.0);'
+    .endl()+'}';
+
+// positioning,..
+
+var srcPosHeadVert=''
+    .endl()+'uniform float numVertices;'
+    .endl()+'uniform float time;'
+    
+    .endl()+'attribute float attrVertIndex;'
+    .endl()+'uniform sampler2D texPositions;'
+    .endl()+srcGetPos
+    .endl();
+
+var srcPosBodyVert=''
+
+    .endl()+'vec2 pixelPos=getPos(attrVertIndex,numVertices);'
+    .endl()+'pos.x = texture2D( texPositions, pixelPos ).r;'
+    .endl()+'pos.y = texture2D( texPositions, pixelPos ).g;'
+    .endl()+'pos.z = texture2D( texPositions, pixelPos ).b;'
+    .endl();
+
+
+shaderSim.setSource(shaderSim.getDefaultVertexShader(),srcFrag);
+tex.set(texture);
+new CGL.Uniform(shaderSim,'t','tex',0);
+var uniTime=new CGL.Uniform(shaderSim,'f','time',0);
+var startTime=Date.now()/1000;
+
+var effect=new CGL.TextureEffect(cgl,{fp:true});
+var shaderPos=null;
+function removeModule()
+{
+    if(shaderPos && module)
+    {
+        shaderPos.removeModule(module);
+        shaderPos=null;
+    }
+}
+
+effect.setSourceTexture(texture);
+var firstTime=true;
+
+function doRender()
+{
+    if(!firstTime)
+    {
+        uniTime.setValue(Date.now()/1000-startTime);
+    }
+    firstTime=false;
+    
+    var t=effect.getCurrentSourceTexture().tex;
+    cgl.setShader(shaderSim);
+    effect.bind();
+
+    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, t);
+// console.log(effect.getCurrentSourceTexture().tex);
+    // var t=effect.getCurrentSourceTexture().tex;
+
+    effect.finish();
+    cgl.setPreviousShader();
+
+    cgl.resetViewPort();
+
+// .........    
+    
+    if(cgl.getShader()!=shaderPos)
+    {
+        if(shaderPos) removeModule();
+        
+        console.log('re init shader module particlepos');
+
+        shaderPos=cgl.getShader();
+        new CGL.Uniform(shaderPos,'t','tex',0);
+
+        module=shaderPos.addModule(
+        {
+            name:'MODULE_VERTEX_POSITION',
+            srcHeadVert:srcPosHeadVert,
+            srcBodyVert:srcPosBodyVert
+        });
+
+    }
+
+    // cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
+    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, t);
+
+    trigger.trigger();
+
+}
+
+
+render.onTriggered=doRender;
+
+

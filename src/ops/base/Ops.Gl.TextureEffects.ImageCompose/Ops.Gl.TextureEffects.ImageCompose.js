@@ -98,7 +98,7 @@ var render=function()
 
         // cgl.currentTextureEffect.finish();
 
-    self.trigger.trigger();
+
     self.texOut.val=effect.getCurrentSourceTexture();
 
     // cgl.gl.enable(cgl.gl.SCISSOR_TEST);

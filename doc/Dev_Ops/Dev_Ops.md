@@ -23,13 +23,12 @@ Do **not** use `console.log()`!
 
 These attributes are visible in the op parameter panel and can be used for debugging purposes.
 
-- `warning`: Shows a warning message in op parameter panel
 - `info`: Shows an information message in op parameter panel
-
-You should always check if the user is in the cables development environment or if it is running embedded on a website.  
+- `warning`: Shows a warning message in op parameter panel
+- `error`: Shows an error message in op parameter panel and colors the op red
 
 ```
-if(CABLES.UI) {
-    this.uiAttr( { warning: 'this is a warning...' } );
-}
+this.uiAttr( { 'info': 'Something happened, not too serious but still...' } );
+this.uiAttr( { 'warning': 'Something happened, not too serious but still...' } );
+this.uiAttr( { 'error': 'Big problem here, this is serious!' } );
 ```

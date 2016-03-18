@@ -53,8 +53,15 @@ var uniDirY=new CGL.Uniform(shader,'f','dirY',0);
 var uniWidth=new CGL.Uniform(shader,'f','width',0);
 var uniHeight=new CGL.Uniform(shader,'f','height',0);
 
-this.dir=this.addInPort(new Port(this,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['noth','vertical','hotizontal']}));
-
+var direction=this.addInPort(new Port(this,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+var dir=0;
+direction.set('both');
+direction.onValueChange(function()
+{
+    if(direction.get()=='both')dir=0;
+    if(direction.get()=='horizontal')dir=1;
+    if(direction.get()=='vertical')dir=2;
+});
 
 this.render.onTriggered=function()
 {
@@ -67,26 +74,32 @@ this.render.onTriggered=function()
     for(var i =0;i<self.iterations.val;i++)
     {
         // first pass
-
-        cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-
-        uniDirX.setValue(0.0);
-        uniDirY.setValue(1.0);
-
-        cgl.currentTextureEffect.finish();
+        if(dir==0 || dir==2)
+        {
+            
+            cgl.currentTextureEffect.bind();
+            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
+            uniDirX.setValue(0.0);
+            uniDirY.setValue(1.0);
+    
+            cgl.currentTextureEffect.finish();
+        }
 
         // second pass
+        if(dir==0 || dir==1)
+        {
 
-        cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-
-        uniDirX.setValue(1.0);
-        uniDirY.setValue(0.0);
-
-        cgl.currentTextureEffect.finish();
+            cgl.currentTextureEffect.bind();
+            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
+            uniDirX.setValue(1.0);
+            uniDirY.setValue(0.0);
+    
+            cgl.currentTextureEffect.finish();
+        }
     }
 
     cgl.setPreviousShader();

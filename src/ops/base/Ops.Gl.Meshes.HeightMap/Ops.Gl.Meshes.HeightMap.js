@@ -71,7 +71,8 @@ var rebuildGeom=function()
     var stepColumn=meshHeight/numColumns;
     
     var cycleTex=0;
-var oldh=0;
+    var oldh=0;
+
     for(r=0;r<=numRows;r++)
     {
         
@@ -85,7 +86,6 @@ var oldh=0;
 
             if(sliceTex.get())
             {
-                
                 if(h!=oldh)
                 {
                     if(c%2==0) tc.push( 0.5 );
@@ -100,14 +100,11 @@ var oldh=0;
                     
                 }
                 oldh=h;
-                
-
             }
             else
             {
                 tc.push( c/numColumns );
                 tc.push( 1.0-r/numRows );
-                
             }
         }
     }
@@ -143,12 +140,10 @@ var oldh=0;
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
-    
-}
+};
 
 var reload=function()
 {
-    
     image.crossOrigin = '';
 
     image.onabort=image.onerror=function(e)
@@ -161,7 +156,6 @@ var reload=function()
         rebuildGeom();
     };
     image.src = filename.get();
-
 };
 
 extrude.onValueChange(rebuildGeom);
