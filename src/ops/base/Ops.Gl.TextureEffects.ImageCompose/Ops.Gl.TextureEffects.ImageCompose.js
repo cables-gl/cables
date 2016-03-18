@@ -97,6 +97,7 @@ var render=function()
         // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
         // cgl.currentTextureEffect.finish();
+    self.trigger.trigger();
 
 
     self.texOut.val=effect.getCurrentSourceTexture();

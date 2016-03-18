@@ -32,7 +32,7 @@ var srcFrag=''
     
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   vec4 col=texture2D(tex,vec2(texCoord.x,(1.0-texCoord.y)))/30.0;'
+    .endl()+'   vec4 col=texture2D(tex,vec2(texCoord.x,(1.0-texCoord.y)))/2.0;'
     .endl()+'   col.a=1.0;'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
