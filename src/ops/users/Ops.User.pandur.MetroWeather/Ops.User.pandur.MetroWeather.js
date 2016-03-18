@@ -1,3 +1,7 @@
+
+//http://truth-and-beauty.net/projects/ukko
+
+
 this.name="Weather";
 var cgl=this.patch.cgl;
 
