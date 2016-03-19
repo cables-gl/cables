@@ -56,8 +56,8 @@ var srcFrag=''
 
     .endl()+'float d;float ao=1.0;    float depth = readDepth(texCoord);'
 
-    .endl()+'float w=1.0/640.0;'
-    .endl()+'float h=1.0/360.0;'
+    .endl()+'float w=1.0/1280.0;'
+    .endl()+'float h=1.0/720.0;'
 
     .endl()+'float pw;'
     .endl()+'float ph;'
