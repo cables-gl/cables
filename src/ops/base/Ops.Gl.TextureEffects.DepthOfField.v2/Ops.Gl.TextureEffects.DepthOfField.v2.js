@@ -15,70 +15,94 @@ var tex4=this.addInPort(new Port(this,"tex 3",OP_PORT_TYPE_TEXTURE));
 this.farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
 this.nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
 
-this.showIntensity=this.addInPort(new Port(this,"showIntensity",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var distNear=this.addInPort(new Port(this,"distance near",OP_PORT_TYPE_VALUE,{'display':'range'}));
+var distFar=this.addInPort(new Port(this,"distance far",OP_PORT_TYPE_VALUE,{'display':'range'}));
+
+var showDistances=this.addInPort(new Port(this,"showDistances",OP_PORT_TYPE_VALUE,{display:'bool'}));
+showDistances.set(false);
 
 var shader=new CGL.Shader(cgl);
 this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision mediump float;'
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  varying vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex1;'
-    .endl()+'  uniform sampler2D tex2;'
-    .endl()+'  uniform sampler2D tex3;'
-    .endl()+'  uniform sampler2D tex4;'
+    .endl()+'varying vec2 texCoord;'
+    .endl()+'uniform sampler2D tex1;'
+    .endl()+'uniform sampler2D tex2;'
+    .endl()+'uniform sampler2D tex3;'
+    .endl()+'uniform sampler2D tex4;'
+
+    .endl()+'uniform sampler2D depthTex;'
+    .endl()+'uniform float f;'
+    .endl()+'uniform float n;'
     
-    .endl()+'  uniform sampler2D depthTex;'
-
-
-    .endl()+'  uniform float f;'
-    .endl()+'  uniform float n;'
-
-    .endl()+'#endif'
-
+    .endl()+'uniform float distNear;'
+    .endl()+'uniform float distFar;'
+    
 
     .endl()+'float getDepth(vec2 tc)'
     .endl()+'{'
-    .endl()+'       float z=texture2D(depthTex,tc).r;'
-    .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
-    // .endl()+'       if(c>=0.99)c=0.0;'
-    .endl()+'       return c;'
+    .endl()+'    float z=texture2D(depthTex,tc).r;'
+    .endl()+'    float c=(2.0*n)/(f+n-z*(f-n));'
+    .endl()+'    return c;'
     .endl()+'}'
-
 
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
-    // .endl()+'   #ifdef HAS_TEXTURES'
-    // .endl()+'   float dirY=0.0;'
-    // .endl()+'   if(dirX==0.0)dirY=1.0;'
-
+    .endl()+'   col=texture2D(tex1, texCoord);'
     .endl()+'   float d=getDepth(texCoord);'
     
-    .endl()+'   if(d<0.7)col=texture2D(tex1, texCoord);'
-    .endl()+'   else if(d<0.8) col=texture2D(tex2, texCoord);'
-    .endl()+'   else if(d<0.9) col=texture2D(tex3, texCoord);'
-    .endl()+'   else col=texture2D(tex4, texCoord);'
+    // .endl()+'   if(d<0.05) col=texture2D(tex4, texCoord);'
+    // .endl()+'   else if(d<0.1) col=texture2D(tex2, texCoord);'
+    // .endl()+'   else if(d<0.7)col=texture2D(tex1, texCoord);'
+    // .endl()+'   else if(d<0.8) col=texture2D(tex2, texCoord);'
+    // .endl()+'   else if(d<0.9) col=texture2D(tex3, texCoord);'
+    // .endl()+'   else col=texture2D(tex4, texCoord);'
+    
+    // .endl()+'   if(d>distFar) col=texture2D(tex4, texCoord);'
+    .endl()+'   if(d>=distFar)'
+    .endl()+'   {'
+    .endl()+'       float df=distFar;'
+    
+    .endl()+'       float step=(1.0-df)/6.0;'
+    .endl()+'       float blend=step/2.0;'
+    .endl()+'       vec4 newCol;;'
+
+    .endl()+'       if(d>=df && d<df+step)'
+    .endl()+'       {'
+    .endl()+'           newCol=texture2D(tex2, texCoord);'
+    .endl()+'           #ifdef SHOWAREAS'.endl()+'newCol.r+=1.0;'.endl()+'#endif'
+    .endl()+'       }'
+    .endl()+'       else'
+    .endl()+'       {'
+    .endl()+'           df+=step;'
+    .endl()+'           if(d>=df && d<df+step*1.2  )'
+    .endl()+'           {'
+    .endl()+'               col=texture2D(tex2, texCoord);'
+    .endl()+'               newCol=texture2D(tex3, texCoord);'
+    .endl()+'               #ifdef SHOWAREAS'.endl()+'newCol.g+=1.0;'.endl()+'#endif'
+    .endl()+'           }'
+    .endl()+'           else'
+    .endl()+'           {'
+    .endl()+'               df+=step*1.2;'
+    .endl()+'               if(d>=df)'
+    .endl()+'               {'
+    .endl()+'                   col=texture2D(tex3, texCoord);'
+    .endl()+'                   newCol=texture2D(tex4, texCoord);'
+    .endl()+'                   #ifdef SHOWAREAS'.endl()+'newCol.b+=1.0;'.endl()+'#endif'
+    .endl()+'               }'
+    .endl()+'           }'
+    .endl()+'       }'
+
+    .endl()+'       blend=1.0-min(1.0,(d-df)/blend);'
+    .endl()+'       col=col*blend+( (1.0-blend)*newCol);'
+    .endl()+'   }'
+
+    
     
     .endl()+'   col.a=1.0;'
     
-
-
-
-
-    // .endl()+'   float d=getDepth(texCoord);'
-    // // .endl()+'   float ds=d+getDepth(texCoord*1.1)+getDepth(texCoord*0.9);'
-
-    // // .endl()+'       if(ds>0.0)'
-    // .endl()+'           col=blur9(tex,texCoord,vec2(width,height),vec2(dirX,dirY));'
-    // .endl()+'       col=mix(baseCol,col,d );'
-
-    // .endl()+'       #ifdef SHOW_INTENSITY'
-    // .endl()+'       col=vec4(d,d,d,1.0);'
-    // .endl()+'       #endif'
-
-    // .endl()+'   #endif'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
@@ -93,6 +117,9 @@ var textureUniform4=new CGL.Uniform(shader,'t','tex4',4);
 var uniFarplane=new CGL.Uniform(shader,'f','f',self.farPlane.get());
 var uniNearplane=new CGL.Uniform(shader,'f','n',self.nearPlane.get());
 
+var uniDistNear=new CGL.Uniform(shader,'f','distNear',distNear.get());
+var uniDistFar=new CGL.Uniform(shader,'f','distFar',distFar.get());
+
 
 this.farPlane.onValueChanged=function()
 {
@@ -105,6 +132,20 @@ this.nearPlane.onValueChanged=function()
     uniNearplane.setValue(self.nearPlane.val);
 };
 self.nearPlane.val=0.01;
+
+showDistances.onValueChange(
+    function()
+    {
+        if(showDistances.get()) shader.define('SHOWAREAS');
+            else shader.removeDefine('SHOWAREAS');
+    });
+
+distNear.onValueChange(function(){ uniDistNear.setValue(distNear.get()); });
+distFar.onValueChange(function(){ uniDistFar.setValue(distFar.get()); });
+distNear.set(0.2);
+distFar.set(0.5);
+
+
 
 this.render.onTriggered=function()
 {
