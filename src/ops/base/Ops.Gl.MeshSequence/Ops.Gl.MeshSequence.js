@@ -123,7 +123,7 @@ function reload()
                 geom.verticesIndices=[];
                 geom.verticesIndices=[].concat.apply([], data.meshes[0].faces);
                 geom.vertices=data.meshes[i].vertices;
-                geom.texCoords=data.meshes[i].texturecoords || [];
+                geom.texCoords=data.meshes[0].texturecoords;
 
                 if(calcVertexNormals.get())
                 {

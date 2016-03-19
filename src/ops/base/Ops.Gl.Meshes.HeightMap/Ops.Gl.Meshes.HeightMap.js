@@ -97,7 +97,6 @@ var rebuildGeom=function()
                 {
                     tc.push( 1 );
                     tc.push( 0 );
-                    
                 }
                 oldh=h;
             }
@@ -136,7 +135,7 @@ var rebuildGeom=function()
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;
-    geom.calcNormals();
+    geom.calcNormals(false);
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
