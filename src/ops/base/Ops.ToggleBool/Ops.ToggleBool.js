@@ -7,7 +7,6 @@ var theBool=false;
 
 trigger.onTriggered=function()
 {
-    console.log('togglebool!');
     theBool=!theBool;
     outBool.set(theBool);
 };

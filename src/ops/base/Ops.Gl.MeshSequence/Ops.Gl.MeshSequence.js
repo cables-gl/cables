@@ -45,7 +45,7 @@ function removeModule()
 function doRender()
 {
     var fade=frame.get()%1;
-    if(cgl.getShader()!=shader)
+    if(cgl.getShader() && cgl.getShader()!=shader)
     {
         if(shader) removeModule();
 
