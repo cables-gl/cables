@@ -123,7 +123,7 @@ function reload()
                 geom.verticesIndices=[];
                 geom.verticesIndices=[].concat.apply([], data.meshes[0].faces);
                 geom.vertices=data.meshes[i].vertices;
-                geom.verticesTyped=new Float32Array( data.meshes[i].vertices );
+                
                 geom.texCoords=data.meshes[0].texturecoords;
 
                 if(calcVertexNormals.get())
@@ -135,6 +135,8 @@ function reload()
                     geom.unIndex();
                     geom.calcNormals(false);
                 }
+                
+                geom.verticesTyped=new Float32Array( geom.vertices );
 
                 geoms.push(geom);
             }
