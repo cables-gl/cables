@@ -81,10 +81,10 @@ function updateFrame()
 
         if(n!=lastFrame)
         {
-            mesh.updateAttribute('attrMorphTargetA',geoms[n+1].vertices);
+            mesh.updateAttribute('attrMorphTargetA',geoms[n+1].verticesTyped);
             // mesh.updateAttribute('attrMorphTargetAN',geoms[n].vertexNormals);
             
-            mesh.updateAttribute('attrMorphTargetB',geoms[n].vertices);
+            mesh.updateAttribute('attrMorphTargetB',geoms[n].verticesTyped);
             // mesh.updateAttribute('attrMorphTargetB',geoms[n].vertexNormals);
 
             lastFrame=n;
@@ -123,6 +123,7 @@ function reload()
                 geom.verticesIndices=[];
                 geom.verticesIndices=[].concat.apply([], data.meshes[0].faces);
                 geom.vertices=data.meshes[i].vertices;
+                geom.verticesTyped=new Float32Array( data.meshes[i].vertices );
                 geom.texCoords=data.meshes[0].texturecoords;
 
                 if(calcVertexNormals.get())
