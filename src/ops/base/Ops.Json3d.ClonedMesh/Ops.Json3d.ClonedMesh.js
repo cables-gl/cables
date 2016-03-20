@@ -11,8 +11,26 @@ var transformations=this.addInPort(new Port(this,"transformations",OP_PORT_TYPE_
 var mesh=null;
 var shader=null;
 
+var srcHeadVert=''
+    .endl()+'uniform float do_instancing;'
+    .endl()+'#ifdef INSTANCING'
+    .endl()+'   attribute mat4 instMat;'
+    .endl()+'#endif'
+    
+    .endl();
+
+var srcBodyVert=''
+
+    .endl()+'#ifdef INSTANCING'
+    .endl()+'   if( do_instancing==1.0 ) '
+    .endl()+'       pos=instMat*pos;'
+    .endl()+'#endif'
+    .endl();
+
+
 function prepare()
 {
+
     // if(trigger.isLinked()) trigger.trigger();
     if(geom.get())
     {
@@ -29,16 +47,48 @@ function prepare()
     }
 }
 
+var uniDoInstancing=null;
 render.onTriggered=function()
 {
+
     if(mesh)
     {
-        if(shader!=cgl.getShader())
+
+        if(cgl.getShader() && cgl.getShader()!=shader)
         {
+            if(shader && module)
+            {
+                shader.removeModule(module);
+                shader=null;
+            }
+    
             shader=cgl.getShader();
-            shader.define('INSTANCING');    
+            
+            if(!shader.hasDefine('INSTANCING'))
+            {
+                module=shader.addModule(
+                    {
+                        name: 'MODULE_VERTEX_POSITION',
+                        srcHeadVert: srcHeadVert,
+                        srcBodyVert: srcBodyVert
+                    });
+        
+                shader.define('INSTANCING');    
+                uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',1);
+                
+            }
+            else
+            {
+                uniDoInstancing=shader.getUniform('do_instancing')
+            }
         }
+
+        uniDoInstancing.setValue(1);
+        
         mesh.render(shader);
+        
+        uniDoInstancing.setValue(0);
+        
     }
     else
     {

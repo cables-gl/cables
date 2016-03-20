@@ -41,10 +41,7 @@ var srcVert=''
     .endl()+'attribute vec3 vPosition;'
     .endl()+'attribute vec2 attrTexCoord;'
 
-    .endl()+'#ifdef INSTANCING'
-    .endl()+'   attribute mat4 instMat;'
-    .endl()+'#endif'
-    
+
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'    varying vec2 texCoord;'
     .endl()+'    #ifdef TEXTURE_REPEAT'
@@ -83,10 +80,6 @@ var srcVert=''
     .endl()+"           mvMatrix[1][1], "
     .endl()+"           mvMatrix[2][1]) ), 1.0);"
     .endl()+'#endif '
-
-    .endl()+'#ifdef INSTANCING'
-    .endl()+'   pos=instMat*pos;'
-    .endl()+'#endif'
 
     .endl()+"#ifndef BILLBOARD"
     .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'

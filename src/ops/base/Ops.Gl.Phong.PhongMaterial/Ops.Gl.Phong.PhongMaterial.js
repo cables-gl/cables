@@ -25,11 +25,7 @@ gammeCorrect.onValueChanged=updateGammeCorrect;
 var srcVert=''
     .endl()+'precision mediump float;'
     .endl()+'{{MODULES_HEAD}}'
-    
-    .endl()+'#ifdef INSTANCING'
-    .endl()+'   attribute mat4 instMat;'
-    .endl()+'#endif'
-    
+
     .endl()+'attribute vec3 vPosition;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
@@ -60,10 +56,7 @@ var srcVert=''
     .endl()+'   #endif'
     .endl()+'    vec4 pos = vec4( vPosition, 1. );'
     .endl()+'    {{MODULE_VERTEX_POSITION}}'
-    
-    .endl()+'#ifdef INSTANCING'
-    .endl()+'   pos=instMat*pos;'
-    .endl()+'#endif'
+
 
     .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
     // .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'

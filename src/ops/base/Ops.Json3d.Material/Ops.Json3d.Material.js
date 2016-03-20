@@ -15,6 +15,9 @@ exe.onTriggered=function()
     {
         var mat=cgl.frameStore.currentScene.materials[matName.get()];
 
+
+
+
         if(mat)
         {
             cgl.setShader(mat);
