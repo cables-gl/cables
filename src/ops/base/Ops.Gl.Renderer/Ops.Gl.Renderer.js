@@ -54,4 +54,9 @@ this.onAnimFrame=function(time)
         CGL.Texture.texturePreviewer.render(CGL.Texture.previewTexture);
     }
     cgl.renderEnd(cgl);
+    
+    if(cgl.frameStore.phong)
+    {
+        cgl.frameStore.phong.lights.length=0;
+    }
 };

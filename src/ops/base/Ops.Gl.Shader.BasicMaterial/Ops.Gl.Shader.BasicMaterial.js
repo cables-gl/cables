@@ -40,7 +40,11 @@ var srcVert=''
     .endl()+'{{MODULES_HEAD}}'
     .endl()+'attribute vec3 vPosition;'
     .endl()+'attribute vec2 attrTexCoord;'
-    // .endl()+'attribute vec3 attrVertNormal;'
+
+    .endl()+'#ifdef INSTANCING'
+    .endl()+'   attribute mat4 instMat;'
+    .endl()+'#endif'
+    
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'    varying vec2 texCoord;'
     .endl()+'    #ifdef TEXTURE_REPEAT'
@@ -48,11 +52,10 @@ var srcVert=''
     .endl()+'        uniform float diffuseRepeatY;'
     .endl()+'    #endif'
     .endl()+'#endif'
-    // .endl()+'varying vec3 norm;'
+
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
-    // .endl()+'uniform mat4 normalMatrix;'
-    
+
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'    #ifdef HAS_TEXTURES'
@@ -62,15 +65,10 @@ var srcVert=''
     .endl()+'            texCoord.t*=diffuseRepeatY;'
     .endl()+'        #endif'
     .endl()+'   #endif'
-    // .endl()+'   norm=attrVertNormal;'
+
     .endl()+'    vec4 pos = vec4( vPosition, 1. );'
 
     .endl()+'{{MODULE_VERTEX_POSITION}}'
-
-
-
-
-
 
     .endl()+'#ifdef BILLBOARD'
     .endl()+'   vec3 position=vPosition;'
@@ -86,10 +84,12 @@ var srcVert=''
     .endl()+"           mvMatrix[2][1]) ), 1.0);"
     .endl()+'#endif '
 
+    .endl()+'#ifdef INSTANCING'
+    .endl()+'   pos=instMat*pos;'
+    .endl()+'#endif'
 
     .endl()+"#ifndef BILLBOARD"
     .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
-    // .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'#endif '
     .endl()+'}';
 

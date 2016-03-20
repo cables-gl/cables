@@ -15,15 +15,20 @@ this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.geometryOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT ));
 this.geometryOut.ignoreValueSerialize=true;
 
+var draw=this.addInPort(new Port(this,"draw",OP_PORT_TYPE_VALUE,{display:'bool'}));
+draw.set(true);
+
 var mesh=null;
 var currentIndex=-1;
 
 function render()
 {
     if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=self.index.val) reload();
-    if(mesh!==null) mesh.render(cgl.getShader());
-
-    self.trigger.trigger();
+    if(draw.get())
+    {
+        if(mesh!==null) mesh.render(cgl.getShader());
+        self.trigger.trigger();
+    }
 }
 
 function reload()

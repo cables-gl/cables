@@ -281,7 +281,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
         maxx=Math.max(x,maxx)+1;
 
         var posx=self.uiAttribs.translate.x+x*130;
-        if(ch.children && ch.children.length>1) posx=posx+(ch.children.length+1)*130/2;// center
+        // if(ch.children && ch.children.length>1) posx=posx+(ch.children.length+1)*130/2;// center
         var posy=self.uiAttribs.translate.y+y*50;
 
         // if(ch.children)console.log('ch ',ch.name,ch.children.length);
@@ -481,8 +481,10 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 var meshOp=self.patch.addOp('Ops.Json3d.Mesh',{translate:{x:posx,y:posy+posyAdd}});
                 meshOp.index.val=ch.children[0].meshes[0];
                 meshOp.uiAttribs.title=meshOp.name='clone '+ch.name+' Mesh';
+                meshOp.getPort('draw').set(false);
 
-                self.patch.link(clonedOp,'trigger',meshOp,'render');
+                self.patch.link(prevOp,'trigger',meshOp,'render');
+                self.patch.link(clonedOp,'geom',meshOp,'geometry');
             }
 
             if(!sameMesh)

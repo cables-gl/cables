@@ -25,7 +25,11 @@ gammeCorrect.onValueChanged=updateGammeCorrect;
 var srcVert=''
     .endl()+'precision mediump float;'
     .endl()+'{{MODULES_HEAD}}'
-
+    
+    .endl()+'#ifdef INSTANCING'
+    .endl()+'   attribute mat4 instMat;'
+    .endl()+'#endif'
+    
     .endl()+'attribute vec3 vPosition;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
@@ -56,6 +60,11 @@ var srcVert=''
     .endl()+'   #endif'
     .endl()+'    vec4 pos = vec4( vPosition, 1. );'
     .endl()+'    {{MODULE_VERTEX_POSITION}}'
+    
+    .endl()+'#ifdef INSTANCING'
+    .endl()+'   pos=instMat*pos;'
+    .endl()+'#endif'
+
     .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
     // .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'}';
@@ -314,10 +323,10 @@ shader.setSource(srcVert,srcFrag);
 
         var count=0;
         var i=0;
-        var num=1;
+        var num=0;
         if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
         {
-            num=1;
+            num=0;
         }
         else
         {
@@ -327,9 +336,12 @@ shader.setSource(srcVert,srcFrag);
             }
         }
 
+// console.log('lights...',numLights,num);
 
         if(num!=numLights)
         {
+            console.log("rebuild lights...");
+            
             count=0;
             lights.length=0;
             for(i=0;i<num;i++)
@@ -346,7 +358,7 @@ shader.setSource(srcVert,srcFrag);
                 count++;
             }
 
-            console.log("numLights",numLights);
+            // console.log("numLights",numLights);
 
             numLights=count;
             shader.define('NUM_LIGHTS',''+numLights);
@@ -355,13 +367,13 @@ shader.setSource(srcVert,srcFrag);
 
         if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
         {
-            numLights=1;
-            lights[0].pos.setValue([1,2,0]);
-            lights[0].target.setValue([0,0,0]);
-            lights[0].color.setValue([1,1,1]);
-            lights[0].attenuation.setValue(0);
-            lights[0].type.setValue(0);
-            lights[0].cone.setValue(0.8);
+            // numLights=1;
+            // lights[0].pos.setValue([1,2,0]);
+            // lights[0].target.setValue([0,0,0]);
+            // lights[0].color.setValue([1,1,1]);
+            // lights[0].attenuation.setValue(0);
+            // lights[0].type.setValue(0);
+            // lights[0].cone.setValue(0.8);
 
         }
         else

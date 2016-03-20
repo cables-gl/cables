@@ -41,20 +41,24 @@ var updatePos=function()
 
 this.onDelete=function()
 {
-    // for(var i in cgl.frameStore.phong.lights)
-    // {
-    //     if(cgl.frameStore.phong.lights[i].id==id)
-    //     {
-    //         cgl.frameStore.phong.lights.splice(i,1);
-    //         break;
-    //     }
-    // }
+    
+    console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
+    
+    for(var i=0;i<cgl.frameStore.phong.lights.length;i++)
+    {
+        if(cgl.frameStore.phong.lights[i].id==id)
+        {
+            console.log('delete light...');
+            cgl.frameStore.phong.lights.splice(i,1);
+            break;
+        }
+    }
+    
     // cgl.frameStore.phong.lights[id]={};
     // cgl.frameStore.phong.lights.length=0;
     // cgl.frameStore.phong.lights=[];
 
     console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
-
 }
 
 var updateAll=function()
@@ -72,6 +76,7 @@ var updateAll=function()
 
 exe.onTriggered=function()
 {
+    // console.log('setlight');
     vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
     cgl.frameStore.phong.lights[id].pos=mpos;
 
@@ -85,7 +90,6 @@ exe.onTriggered=function()
         attachment.trigger();
         cgl.popMvMatrix();
     }
-
 
     trigger.trigger();
 };
