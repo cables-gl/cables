@@ -50,10 +50,8 @@ function prepare()
 var uniDoInstancing=null;
 render.onTriggered=function()
 {
-
     if(mesh)
     {
-
         if(cgl.getShader() && cgl.getShader()!=shader)
         {
             if(shader && module)
@@ -74,8 +72,7 @@ render.onTriggered=function()
                     });
         
                 shader.define('INSTANCING');    
-                uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',1);
-                
+                uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
             }
             else
             {

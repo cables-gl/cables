@@ -37,17 +37,17 @@ var tempCenter=vec3.create();
 
 render.onTriggered=function()
 {
-    cgl.pushMvMatrix();
+    cgl.pushViewMatrix();
 
     vec3.add(tempEye, eye, vOffset);
     vec3.add(tempCenter, vCenter, vOffset);
 
     mat4.lookAt(transMatrix, tempEye, tempCenter, vUp);
     mat4.rotate(transMatrix, transMatrix, percX, vUp);
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
+    mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
 
     trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popViewMatrix();
 };
 
 

@@ -12,7 +12,7 @@ shaderOut.ignoreValueSerialize=true;
 
 
 
-gammeCorrect.set(true);
+gammeCorrect.set(false);
 var updateGammeCorrect=function()
 {
     if(gammeCorrect.get()) shader.define("DO_GAMME_CORRECT");
@@ -28,7 +28,8 @@ var srcVert=''
 
     .endl()+'attribute vec3 vPosition;'
     .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 mvMatrix;'
+    .endl()+'uniform mat4 modelMatrix;'
+    .endl()+'uniform mat4 viewMatrix;'
     .endl()+'attribute vec3 attrVertNormal;'
     // .endl()+'attribute vec3 normaM;'
 
@@ -36,6 +37,7 @@ var srcVert=''
 
     .endl()+'varying mediump vec3 norm;'
     .endl()+'varying mediump vec3 vert;'
+    .endl()+'varying mat4 mvMatrix;'
     // .endl()+'varying mediump mat4 modelm;'
     // .endl()+'varying mediump mat4 normalm;'
     .endl()+'uniform mat4 normalMatrix;'
@@ -55,6 +57,7 @@ var srcVert=''
     .endl()+'       texCoord=attrTexCoord;'
     .endl()+'   #endif'
     .endl()+'    vec4 pos = vec4( vPosition, 1. );'
+    .endl()+'    mvMatrix=viewMatrix * modelMatrix;'
     .endl()+'    {{MODULE_VERTEX_POSITION}}'
 
 
@@ -69,7 +72,9 @@ var srcFrag=''
     .endl()+'varying mediump vec3 norm;'
     .endl()+'varying mediump vec3 vert;'
     .endl()+'uniform mat4 normalMatrix;'
-    .endl()+'uniform mat4 mvMatrix;'
+    .endl()+'varying mat4 mvMatrix;'
+    .endl()+'uniform mat4 modelMatrix;'
+
     // .endl()+'varying mediump mat4 modelm;'
     // .endl()+'varying mediump mat4 normalm;'
 
