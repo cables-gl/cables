@@ -65,6 +65,7 @@ var srcVert=''
 
 var srcFrag=''
     .endl()+'precision mediump float;'
+    .endl()+'{{MODULES_HEAD}}'
     .endl()+'varying mediump vec3 norm;'
     .endl()+'varying mediump vec3 vert;'
     .endl()+'uniform mat4 normalMatrix;'
@@ -79,6 +80,7 @@ var srcFrag=''
 
     .endl()+'uniform float diffuseRepeatX;'
     .endl()+'uniform float diffuseRepeatY;'
+
 
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'   varying mediump vec2 texCoord;'
@@ -187,8 +189,12 @@ var srcFrag=''
     .endl()+'       finalColor = pow(linearColor, gamma);'
     .endl()+'   #endif'
     // .endl()+'   finalColor.r=1.0;'
-
-    .endl()+'   gl_FragColor = vec4(finalColor, surfaceColor.a);'
+    
+    .endl()+'   vec4 col=vec4(finalColor, surfaceColor.a);'
+    
+    .endl()+'{{MODULE_COLOR}}'
+    
+    .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
 

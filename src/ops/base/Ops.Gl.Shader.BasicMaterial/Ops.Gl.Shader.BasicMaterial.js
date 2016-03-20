@@ -92,8 +92,8 @@ var srcFrag=''
 
 
     .endl()+'{{MODULES_HEAD}}'
-    .endl()+'#ifdef HAS_TEXTURES'
 
+    .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'   varying vec2 texCoord;'
     .endl()+'   #ifdef HAS_TEXTURE_DIFFUSE'
     .endl()+'       uniform sampler2D tex;'
