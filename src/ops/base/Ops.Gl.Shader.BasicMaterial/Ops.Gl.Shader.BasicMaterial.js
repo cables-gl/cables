@@ -51,7 +51,8 @@ var srcVert=''
     .endl()+'#endif'
 
     .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 mvMatrix;'
+    .endl()+'uniform mat4 modelMatrix;'
+    .endl()+'uniform mat4 viewMatrix;'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -69,6 +70,7 @@ var srcVert=''
 
     .endl()+'#ifdef BILLBOARD'
     .endl()+'   vec3 position=vPosition;'
+    .endl()+'   mat4 mvMatrix=viewMatrix*modelMatrix;'
 
     .endl()+"   gl_Position = projMatrix * mvMatrix * vec4(( "
     .endl()+"       position.x * vec3("
@@ -82,7 +84,7 @@ var srcVert=''
     .endl()+'#endif '
 
     .endl()+"#ifndef BILLBOARD"
-    .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
+    .endl()+'    gl_Position = projMatrix * viewMatrix * modelMatrix * pos;'
     .endl()+'#endif '
     .endl()+'}';
 

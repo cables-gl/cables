@@ -17,7 +17,16 @@ geom.vertices = [
      1.0, -1.0,  0.0
 ];
 
+geom.vertexNormals = [
+     0.0,  1.0,  0.0,
+     0.0,  1.0,  0.0,
+     0.0,  1.0,  0.0
+];
+
 geom.verticesIndices = [
     0, 1, 2
 ];
+
+
+
 var mesh=new CGL.Mesh(cgl,geom);

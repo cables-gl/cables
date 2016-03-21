@@ -18,18 +18,16 @@ render.onTriggered=function()
 
 function create()
 {
-    var geom=new CGL.Geometry();
-    geom.verticesIndices=[];
-    
+    var i=0;
     var verts=[];
     var n=num.get()*3;
+
+    var geom=new CGL.Geometry();
+    geom.verticesIndices=[];
+
     verts.length=n;
-    for(var i=0;i<n;i++)
-    {
-        verts[i]=0;
-    }
-    
-    for(var i=0;i<verts.length/3;i++) geom.verticesIndices.push(i);
+    for(i=0;i<n;i++) verts[i]=0;
+    for(i=0;i<verts.length/3;i++) geom.verticesIndices.push(i);
     
     geom.vertices=verts;
     

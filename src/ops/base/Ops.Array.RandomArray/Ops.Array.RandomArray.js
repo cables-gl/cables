@@ -4,7 +4,7 @@ var numValues=this.addInPort(new Port(this, "numValues",OP_PORT_TYPE_VALUE));
 var seed=this.addInPort(new Port(this,"random seed"));
 var min=this.addInPort(new Port(this,"Min"));
 var max=this.addInPort(new Port(this,"Max"));
-min.set(1);
+min.set(0);
 max.set(1);
 var values=this.addOutPort(new Port(this, "values",OP_PORT_TYPE_ARRAY));
 var arr=[];

@@ -136,7 +136,7 @@ var srcFrag=''
     .endl()+'       vec3 lightColor = lights[l].color;'
 
     //calculate the location of this fragment (pixel) in world coordinates
-    .endl()+'       vec3 fragPosition = vec3(mvMatrix * vec4(vert, 1.0)).xyz;'
+    .endl()+'       vec3 fragPosition = vec3(modelMatrix * vec4(vert, 1.0)).xyz;'
 
     //calculate the vector from this pixels surface to the light source
     .endl()+'       vec3 surfaceToLight = lights[l].pos-fragPosition;'

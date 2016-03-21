@@ -17,7 +17,9 @@ var width=this.addOutPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
 var height=this.addOutPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
 
 var identTranslate=vec3.create();
-vec3.set(identTranslate, 0,0,-2);
+vec3.set(identTranslate, 0,0,0);
+var identTranslateView=vec3.create();
+vec3.set(identTranslateView, 0,0,-2);
 
 this.onDelete=function()
 {
@@ -45,7 +47,7 @@ this.onAnimFrame=function(time)
         height.set(cgl.canvasHeight);
     }
 
-    cgl.renderStart(cgl,identTranslate);
+    cgl.renderStart(cgl,identTranslate,identTranslateView);
     trigger.trigger();
 
     if(CGL.Texture.previewTexture)

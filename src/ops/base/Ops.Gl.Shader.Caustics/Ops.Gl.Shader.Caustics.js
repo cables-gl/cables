@@ -86,9 +86,10 @@ function doRender()
 
 
 var srcCausticsHead=''
-// .endl()+'// NOTE:'
-// .endl()+'// This shader is based on the original work by Daniel Sanchez-Crespo'
-// .endl()+'// of the Universitat Pompeu Fabra, Barcelona, Spain.'
+// NOTE:'
+// http://http.developer.nvidia.com/GPUGems/gpugems_ch02.html
+// This shader is based on the original work by Daniel Sanchez-Crespo'
+// of the Universitat Pompeu Fabra, Barcelona, Spain.'
 .endl()+'uniform sampler2D lightMap;'
 .endl()+'uniform float {{mod}}_time;'
 .endl()+''

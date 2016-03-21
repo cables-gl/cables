@@ -28,18 +28,19 @@ this.render.onTriggered=function()
 
 function updateMesh()
 {
-    var rings=Math.round(self.rings.get());
-    var sides=Math.round(self.sides.get());
+    var rings=Math.round(parseFloat(self.rings.get()));
+    var sides=Math.round(parseFloat(self.sides.get()));
     if(rings<2)rings=2;
     if(sides<2)sides=2;
-    var r=self.innerRadius.get();
-    var r2=self.outerRadius.get();
+    var r=parseFloat(self.innerRadius.get());
+    var r2=parseFloat(self.outerRadius.get());
     generateTorus(r,r2, rings, sides);
 }
 
 this.rings.onValueChanged=updateMesh;
 this.sides.onValueChanged=updateMesh;
 this.innerRadius.onValueChanged=updateMesh;
+this.outerRadius.onValueChanged=updateMesh;
 
 updateMesh();
 
