@@ -13,7 +13,7 @@ See [Creating Ports](../dev_Creating_Ports/Creating_Ports.md)
 ## Logging
 
 ```
-`this.log( 'hello world' );`.   
+this.log( 'hello world' );.   
 ```
 
 Do **not** use `console.log()`!   
