@@ -1,4 +1,8 @@
-# Global Keys
+# Keyboard Shortcuts
+
+*`[mod]` is your operating system’s primary modifier key, on Mac OS X this is `[cmd]`, on Windows `[ctlr]`.*
+
+## Global Keys
 
 - `[esc]`: Add operator / show *Op select*-dialog
 - `[esc]`: Close `Op Select` / close dialogs
@@ -13,6 +17,8 @@
 
 ## Patch
 
+- `[mod] + c`: Copy selected op
+- `[mod] + v`: Paste selected op
 - `[del]`: Delete selected ops
 - `a`: Align selected ops vertically
 - `[shift] + a`: Align selected ops horizontally
@@ -23,7 +29,7 @@
 
 ---
 
-### Timeline
+## Timeline
 
 - `h`: Scale timeline to show all keys 
 - `j/k`: Jump to previous / next key 
