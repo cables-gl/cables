@@ -28,4 +28,8 @@ If you want to only trigger when a key has been pressed while the canvas has the
 
 #### on press
 
-Triggers every time the learned key is pressed.
+Triggers every time the learned key is pressed down (and also triggers while it is hold down).
+
+#### on release 
+
+Triggers every time the learned key is released (once).

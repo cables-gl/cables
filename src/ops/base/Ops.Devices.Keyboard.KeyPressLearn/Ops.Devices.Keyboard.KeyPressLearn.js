@@ -4,13 +4,14 @@ var op = this;
 var cgl=this.patch.cgl;
 
 var onPress=this.addOutPort(new Port(this,"on press",OP_PORT_TYPE_FUNCTION));
+var onRelease=this.addOutPort(new Port(this,"on release",OP_PORT_TYPE_FUNCTION));
 var learn = this.addInPort( new Port( this, "learn", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
-var learnedKeyCode = this.addInPort( new Port( this, "learned key code", OP_PORT_TYPE_VALUE));
+var learnedKeyCode = this.addInPort( new Port( this, "key code", OP_PORT_TYPE_VALUE));
 var canvasOnly=this.addInPort(new Port(this,"canvas only",OP_PORT_TYPE_VALUE, {"display": "bool"}));
 
 var learning = false;
 
-function onKeyPress(e) {
+function onKeyDown(e) {
     if(learning){
         learnedKeyCode.set(e.keyCode);
         if(CABLES.UI){
@@ -22,16 +23,25 @@ function onKeyPress(e) {
         addListener();
     } else {
         if(e.keyCode == learnedKeyCode.get()) {
-            op.log("Learned key pressed, key code: " + e.keyCode);
+            op.log("Key pressed, key code: " + e.keyCode);
             onPress.trigger();
         }
     }
 }
 
+function onKeyUp(e) {
+    if(e.keyCode == learnedKeyCode.get()) {
+        op.log("Key released, key code: " + e.keyCode);
+        onRelease.trigger();
+    }
+}
+
 this.onDelete=function() {
-    console.log("remove keypress op...");
-    cgl.canvas.removeEventListener('keypress', onKeyPress, false);
-    document.removeEventListener("keypress", onKeyPress, false);
+    console.log("Remove keypress op...");
+    cgl.canvas.removeEventListener('keyup', onKeyUp, false);
+    cgl.canvas.removeEventListener('keydown', onKeyDown, false);
+    document.removeEventListener("keyup", onKeyUp, false);
+    document.removeEventListener("keydown", onKeyDown, false);
 };
 
 learn.onTriggered = function(){
@@ -55,16 +65,20 @@ function addListener() {
 }
 
 function removeListeners() {
-    document.removeEventListener("keypress", onKeyPress, false);
-    cgl.canvas.removeEventListener('keypress', onKeyPress, false);
+    document.removeEventListener("keydown", onKeyDown, false);
+    document.removeEventListener("keyup", onKeyUp, false);
+    cgl.canvas.removeEventListener('keydown', onKeyDown, false);
+    cgl.canvas.removeEventListener('keyup', onKeyUp, false);
 }
 
 function addCanvasListener() {
-    cgl.canvas.addEventListener("keypress", onKeyPress, false );
+    cgl.canvas.addEventListener("keydown", onKeyDown, false );
+    cgl.canvas.addEventListener("keyup", onKeyUp, false );
 }
 
 function addDocumentListener() {
-    document.addEventListener("keypress", onKeyPress, false);
+    document.addEventListener("keydown", onKeyDown, false);
+    document.addEventListener("keyup", onKeyUp, false);
 }
 
 canvasOnly.onValueChange(function(){
