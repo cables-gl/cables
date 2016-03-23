@@ -1,6 +1,6 @@
 # Keyboard Shortcuts
 
-*`[mod]` is your operating system’s primary modifier key, on Mac OS X this is `[cmd]`, on Windows `ctlr`.*
+*`[mod]` is your operating system’s primary modifier key, on Mac OS X this is `[cmd]`, on Windows `[ctlr]`.*
 
 ## Global Keys
 
