@@ -39,7 +39,7 @@
 
     this.render.onTriggered=function()
     {
-        cgl.pushMvMatrix();
+        cgl.pushViewMatrix();
 
         vec3.set(vUp, self.vecUpX.get(),self.vecUpY.get(),self.vecUpZ.get());
         vec3.set(vEye, self.eyeX.get(),self.eyeY.get(),self.eyeZ.get());
@@ -47,9 +47,9 @@
 
         mat4.lookAt(transMatrix, vEye, vCenter, vUp);
         
-        mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
+        mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
 
 
         self.trigger.trigger();
-        cgl.popMvMatrix();
+        cgl.popViewMatrix();
     };

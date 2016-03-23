@@ -15,8 +15,10 @@ var tex4=this.addInPort(new Port(this,"tex 3",OP_PORT_TYPE_TEXTURE));
 this.farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
 this.nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
 
-var distNear=this.addInPort(new Port(this,"distance near",OP_PORT_TYPE_VALUE,{'display':'range'}));
+// var distNear=this.addInPort(new Port(this,"distance near",OP_PORT_TYPE_VALUE,{'display':'range'}));
 var distFar=this.addInPort(new Port(this,"distance far",OP_PORT_TYPE_VALUE,{'display':'range'}));
+
+var stepWidth=this.addInPort(new Port(this,"step width",OP_PORT_TYPE_VALUE,{}));
 
 var showDistances=this.addInPort(new Port(this,"showDistances",OP_PORT_TYPE_VALUE,{display:'bool'}));
 showDistances.set(false);
@@ -35,6 +37,8 @@ var srcFrag=''
     .endl()+'uniform sampler2D depthTex;'
     .endl()+'uniform float f;'
     .endl()+'uniform float n;'
+    
+    .endl()+'uniform float stepWidth;'
     
     .endl()+'uniform float distNear;'
     .endl()+'uniform float distFar;'
@@ -65,7 +69,7 @@ var srcFrag=''
     .endl()+'   {'
     .endl()+'       float df=distFar;'
     
-    .endl()+'       float step=(1.0-df)/6.0;'
+    .endl()+'       float step=(1.0-df)/stepWidth;'
     .endl()+'       float blend=step/2.0;'
     .endl()+'       vec4 newCol;;'
 
@@ -117,8 +121,9 @@ var textureUniform4=new CGL.Uniform(shader,'t','tex4',4);
 var uniFarplane=new CGL.Uniform(shader,'f','f',self.farPlane.get());
 var uniNearplane=new CGL.Uniform(shader,'f','n',self.nearPlane.get());
 
-var uniDistNear=new CGL.Uniform(shader,'f','distNear',distNear.get());
+// var uniDistNear=new CGL.Uniform(shader,'f','distNear',distNear.get());
 var uniDistFar=new CGL.Uniform(shader,'f','distFar',distFar.get());
+var uniStepWidth=new CGL.Uniform(shader,'f','stepWidth',stepWidth.get());
 
 
 this.farPlane.onValueChanged=function()
@@ -140,11 +145,12 @@ showDistances.onValueChange(
             else shader.removeDefine('SHOWAREAS');
     });
 
-distNear.onValueChange(function(){ uniDistNear.setValue(distNear.get()); });
+// distNear.onValueChange(function(){ uniDistNear.setValue(distNear.get()); });
 distFar.onValueChange(function(){ uniDistFar.setValue(distFar.get()); });
-distNear.set(0.2);
+stepWidth.onValueChange(function(){ uniStepWidth.setValue(stepWidth.get()); });
+// distNear.set(0.2);
 distFar.set(0.5);
-
+stepWidth.set(10);
 
 
 this.render.onTriggered=function()
