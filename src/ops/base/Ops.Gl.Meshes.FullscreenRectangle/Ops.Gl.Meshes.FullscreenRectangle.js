@@ -23,12 +23,16 @@ this.render.onTriggered=function()
     cgl.pushMvMatrix();
     mat4.identity(cgl.mvMatrix);
 
+    cgl.pushViewMatrix();
+    mat4.identity(cgl.vMatrix);
+
     self.mesh.render(cgl.getShader());
 
     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
 
     cgl.popPMatrix();
     cgl.popMvMatrix();
+    cgl.popViewMatrix();
 
     self.trigger.trigger();
 };

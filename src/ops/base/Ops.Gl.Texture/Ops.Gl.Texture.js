@@ -25,8 +25,6 @@ var setTempTexture=function()
     textureOut.set(CGL.Texture.getTemporaryTexture(cgl,64,cgl_filter,cgl_wrap));
 };
 
-
-
 var reload=function(nocache)
 {
     var url=self.patch.getFilePath(filename.get());

@@ -15,15 +15,25 @@ var uniCausticsTime=null;
 render.onTriggered=doRender;
 
 
+var pOpacity=this.addInPort(new Port(this,"opacity",OP_PORT_TYPE_VALUE,{display:'range'}));
+
 var pAmplitude=this.addInPort(new Port(this,"amplitude",OP_PORT_TYPE_VALUE));
 var pFrequency=this.addInPort(new Port(this,"frequency",OP_PORT_TYPE_VALUE));
 var pRepeat=this.addInPort(new Port(this,"repeat",OP_PORT_TYPE_VALUE));
 pRepeat.set(1.0);
+pOpacity.set(1.0);
 
 var uniAmplitude=null;
 var uniFrequency=null;
 var uniRepeat=null;
+var uniOpacity=null;
 
+pOpacity.onValueChange(function(){
+    if(uniOpacity)
+    {
+        uniOpacity.setValue(parseFloat(pOpacity.get()));
+    }
+});
 
 pRepeat.onValueChange(function(){
     if(uniRepeat)
@@ -73,6 +83,7 @@ function doRender()
         uniFrequency=new CGL.Uniform(shader,'f',mod.prefix+'_frequency',pFrequency.get());
         uniAmplitude=new CGL.Uniform(shader,'f',mod.prefix+'_amplitude',pAmplitude.get());
         uniRepeat=new CGL.Uniform(shader,'f',mod.prefix+'_repeat',pRepeat.get());
+        uniOpacity=new CGL.Uniform(shader,'f',mod.prefix+'_opacity',pOpacity.get());
     }
     
     cgl.gl.activeTexture(cgl.gl.TEXTURE4);
@@ -96,6 +107,7 @@ var srcCausticsHead=''
 .endl()+'uniform float {{mod}}_frequency;'
 .endl()+'uniform float {{mod}}_amplitude;'
 .endl()+'uniform float {{mod}}_repeat;'
+.endl()+'uniform float {{mod}}_opacity;'
 
 // .endl()+'#define VTXSIZE 0.0004   // Amplitude'
 // .endl()+'#define WAVESIZE 13.0  // Frequency'
@@ -185,7 +197,8 @@ var srcCausticsColor=''
 
 // .endl()+'// OUTPUT'
 
+.endl()+'   float saturation = 0.25+vec3(dot(vec3(0.2126,0.7152,0.0722), col.rgb)).r;'
 
-.endl()+'col.rgb += vec3(texture2D(lightMap, intercept.xy*{{mod}}_repeat ));'
+.endl()+'col.rgb += {{mod}}_opacity*saturation*vec3(texture2D(lightMap, intercept.xy*{{mod}}_repeat ));'
 // .endl()+'col.r = 1.0;'
 // .endl()+'col.rgb += vec3(texture2D(lightMap, vec2(0.5,0.5)));'

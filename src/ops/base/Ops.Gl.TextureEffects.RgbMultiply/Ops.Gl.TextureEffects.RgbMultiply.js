@@ -4,6 +4,7 @@ var cgl=this.patch.cgl;
 
 this.name='RgbMultiply';
 
+this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.r=this.addInPort(new Port(this,"r"));
 this.g=this.addInPort(new Port(this,"g"));
 this.b=this.addInPort(new Port(this,"b"));
@@ -11,7 +12,6 @@ this.r.val=1.0;
 this.g.val=1.0;
 this.b.val=1.0;
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);

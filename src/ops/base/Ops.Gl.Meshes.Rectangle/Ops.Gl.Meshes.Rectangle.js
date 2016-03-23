@@ -14,10 +14,8 @@ var nRows=this.addInPort(new Port(this,"num rows"));
 
 var axis=this.addInPort(new Port(this,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
 
-
 var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
-
 
 axis.set('xy');
 pivotX.set('center');
@@ -100,24 +98,6 @@ function rebuild()
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;
-    // geom.vertices = [
-    //      width.get()/2+x,  height.get()/2+y,  0.0,
-    //     -width.get()/2+x,  height.get()/2+y,  0.0,
-    //      width.get()/2+x, -height.get()/2+y,  0.0,
-    //     -width.get()/2+x, -height.get()/2+y,  0.0
-    // ];
-
-    // geom.texCoords = [
-    //      1.0, 0.0,
-    //      0.0, 0.0,
-    //      1.0, 1.0,
-    //      0.0, 1.0
-    // ];
-
-    // geom.verticesIndices = [
-    //     0, 1, 2,
-    //     2, 1, 3
-    // ];
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
