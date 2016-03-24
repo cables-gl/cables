@@ -2,6 +2,7 @@ this.name='Repeat 2d';
 var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 var numx=this.addInPort(new Port(this,"num x"));
 var numy=this.addInPort(new Port(this,"num y"));
+var mul=this.addInPort(new Port(this,"mul"));
 
 numx.set(5);
 numy.set(5);
@@ -12,12 +13,13 @@ var idxy=this.addOutPort(new Port(this,"y"));
 
 exe.onTriggered=function()
 {
+    var m=mul.get();
     for(var y=numy.get()-1;y>-1;y--)
     {
-        idxy.set(y);
+        idxy.set(y*m);
         for(var x=numx.get()-1;x>-1;x--)
         {
-            idxx.set(x);
+            idxx.set(x*m);
             trigger.trigger();
         }
     }

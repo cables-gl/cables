@@ -22,6 +22,7 @@ var exec= function()
         return;
     }
 
+
     var nMin=parseFloat(new_min.val);
     var nMax=parseFloat(new_max.val);
     var oMin=parseFloat(old_min.val);
