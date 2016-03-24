@@ -115,7 +115,7 @@ var srcFrag=''
     .endl()+'   vec4 surfaceColor = vec4(r,g,b,a);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
-    
+
     .endl()+'           #ifdef TEXTURED_POINTS'
     .endl()+'               surfaceColor=texture2D(tex,vec2(gl_PointCoord.x*diffuseRepeatX,(1.0-gl_PointCoord.y)*diffuseRepeatY));'    .endl()+'      #endif'
     .endl()+'           #ifndef TEXTURED_POINTS'
@@ -150,11 +150,11 @@ var srcFrag=''
     // attenuation
     .endl()+'       float distanceToLight = length(surfaceToLight);'
     .endl()+'       float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
-    
+
     // .endl()+'       attenuation = 1.0;'
-    
-    
-    
+
+
+
     // SPOT LIGHT
     .endl()+'       if(lights[l].type!=0.0)'
     .endl()+'       {'
@@ -194,11 +194,11 @@ var srcFrag=''
     .endl()+'       finalColor = pow(linearColor, gamma);'
     .endl()+'   #endif'
     // .endl()+'   finalColor.r=1.0;'
-    
+
     .endl()+'   vec4 col=vec4(finalColor, surfaceColor.a);'
-    
+
     .endl()+'{{MODULE_COLOR}}'
-    
+
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
@@ -257,7 +257,7 @@ shader.setSource(srcVert,srcFrag);
             else shader.removeDefine('COLORIZE_TEXTURE');
 
     };
-    
+
 }
 
 
@@ -312,7 +312,7 @@ shader.setSource(srcVert,srcFrag);
             else shader.removeDefine('TEXTURED_POINTS');
 
     };
-    
+
 }
 
 
@@ -384,6 +384,8 @@ shader.setSource(srcVert,srcFrag);
             count=0;
             // console.log(cgl.frameStore.phong.lights);
             if(shader)
+
+            for(i in cgl.frameStore.phong.lights)
             {
                 for(i in cgl.frameStore.phong.lights)
                 {

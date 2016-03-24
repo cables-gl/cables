@@ -19,10 +19,12 @@ var srcHeadVert=''
     .endl()+'attribute vec3 attrMorphTargetA;'
     .endl()+'attribute vec3 attrMorphTargetB;'
     .endl()+'uniform float {{mod}}_fade;'
+    .endl()+'uniform float {{mod}}_doMorph;'
     .endl();
 
 var srcBodyVert=''
     // .endl()+'   pos =vec4(vPosition,1.0);'
+    .endl()+' if({{mod}}_doMorph==1.0)'
     .endl()+'   pos = vec4( attrMorphTargetA * {{mod}}_fade + attrMorphTargetB * (1.0 - {{mod}}_fade ), 1. );'
     // .endl()+'   pos = vec4( attrMorphTargetA * {{mod}}_fade + vPosition * (1.0 - {{mod}}_fade ), 1. );'
     // .endl()+'   norm = (attrMorphTargetB * {{mod}}_fade + norm * (1.0 - {{mod}}_fade ) );'
@@ -61,10 +63,17 @@ function doRender()
         uniFade=new CGL.Uniform(shader,'f',module.prefix+'_fade',fade);
     }
 
-    uniFade.setValue(fade);
-
-    if(mesh!==null) mesh.render(cgl.getShader());
-    trigger.trigger();
+    if(uniDoMorph)
+    {
+        uniFade.setValue(fade);
+        uniDoMorph.setValue(1.0);
+        if(mesh!==null) mesh.render(cgl.getShader());
+        uniDoMorph.setValue(0);
+        trigger.trigger();
+        
+    }
+    
+    
 }
 
 
@@ -91,6 +100,8 @@ function updateFrame()
         }
     }
 }
+
+var uniDoMorph=null;
 
 function reload()
 {
@@ -144,8 +155,10 @@ function reload()
             mesh=new CGL.Mesh(cgl,geoms[0]);
             mesh.addAttribute('attrMorphTargetA',geoms[0].vertices,3);
             mesh.addAttribute('attrMorphTargetB',geoms[0].vertexNormals, 3);
-            
+            uniDoMorph=new CGL.Uniform(shader,'f',module.prefix+'_doMorph',0);
+
             self.uiAttribs.info='num frames: '+data.meshes.length;
+
             self.patch.loading.finished(loadingId);
 
         });
