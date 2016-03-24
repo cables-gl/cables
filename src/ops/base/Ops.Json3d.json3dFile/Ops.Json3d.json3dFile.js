@@ -507,8 +507,6 @@ function addChild(data,x,y,parentOp,parentPort,ch)
     }
 }
 
-
-
 var reload=function()
 {
     if(!self.filename.get())return;
