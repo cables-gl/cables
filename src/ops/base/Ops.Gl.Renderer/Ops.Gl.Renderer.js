@@ -47,6 +47,8 @@ this.onAnimFrame=function(time)
         height.set(cgl.canvasHeight);
     }
 
+    
+
     cgl.renderStart(cgl,identTranslate,identTranslateView);
     trigger.trigger();
 

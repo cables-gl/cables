@@ -357,11 +357,9 @@ shader.setSource(srcVert,srcFrag);
                     lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
                     lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
                     lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
-    
-    
+
                     count++;
                 }
-
 
                 numLights=count;
                 shader.define('NUM_LIGHTS',''+numLights);
@@ -384,9 +382,6 @@ shader.setSource(srcVert,srcFrag);
             count=0;
             // console.log(cgl.frameStore.phong.lights);
             if(shader)
-
-            for(i in cgl.frameStore.phong.lights)
-            {
                 for(i in cgl.frameStore.phong.lights)
                 {
                     // console.log(cgl.frameStore.phong.lights[i]);
@@ -398,9 +393,9 @@ shader.setSource(srcVert,srcFrag);
                     if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
     
                     count++;
+    
+                    
                 }
-                
-            }
             cgl.frameStore.phong.lights.length=0;
 
         }
