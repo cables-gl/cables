@@ -70,10 +70,8 @@ function doRender()
         if(mesh!==null) mesh.render(cgl.getShader());
         uniDoMorph.setValue(0);
         trigger.trigger();
-        
     }
-    
-    
+
 }
 
 
