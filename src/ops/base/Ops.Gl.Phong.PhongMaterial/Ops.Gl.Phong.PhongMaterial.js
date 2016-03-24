@@ -108,7 +108,7 @@ var srcFrag=''
     .endl()+'   float cone;'
 
     .endl()+'} light;'
-    .endl()+'uniform Light lights[3];'
+    .endl()+'uniform Light lights[NUM_LIGHTS];'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -131,7 +131,7 @@ var srcFrag=''
     .endl()+'   #endif'
 
     .endl()+'   vec3 theColor=vec3(0.0,0.0,0.0);'
-    .endl()+'   for(int l=0;l<3;l++)'
+    .endl()+'   for(int l=0;l<NUM_LIGHTS;l++)'
     .endl()+'   {'
     .endl()+'       vec3 lightColor = lights[l].color;'
 
@@ -362,7 +362,7 @@ shader.setSource(srcVert,srcFrag);
                 }
 
                 numLights=count;
-                shader.define('NUM_LIGHTS',''+numLights);
+                shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
             }
         }
 
@@ -432,7 +432,7 @@ var doRender=function()
 };
 
 shader.bindTextures=bindTextures;
-shader.define('NUM_LIGHTS','0');
+shader.define('NUM_LIGHTS','1');
 updateGammeCorrect();
 this.onLoaded=shader.compile;
 

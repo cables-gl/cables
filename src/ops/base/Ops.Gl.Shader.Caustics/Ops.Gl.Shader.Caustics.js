@@ -195,6 +195,7 @@ var srcCausticsColor=''
 .endl()+'vec2 dxdy = vec2(wave(tvert.x, tvert.y, {{mod}}_time));'
 .endl()+'vec3 intercept = line_plane_intercept( tvert.xzy, vec3(dxdy, 1.0) , vec3(0, 0,1), -0.8);'
 
+.endl()+'intercept.x+={{mod}}_time*1.0;'
 // .endl()+'// OUTPUT'
 
 .endl()+'   float saturation = 0.25+vec3(dot(vec3(0.2126,0.7152,0.0722), col.rgb)).r;'
