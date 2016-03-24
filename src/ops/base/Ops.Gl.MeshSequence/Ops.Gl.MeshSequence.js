@@ -61,6 +61,7 @@ function doRender()
             });
 
         uniFade=new CGL.Uniform(shader,'f',module.prefix+'_fade',fade);
+        uniDoMorph=new CGL.Uniform(shader,'f',module.prefix+'_doMorph',0);
     }
 
     if(uniDoMorph)
@@ -155,7 +156,7 @@ function reload()
             mesh=new CGL.Mesh(cgl,geoms[0]);
             mesh.addAttribute('attrMorphTargetA',geoms[0].vertices,3);
             mesh.addAttribute('attrMorphTargetB',geoms[0].vertexNormals, 3);
-            uniDoMorph=new CGL.Uniform(shader,'f',module.prefix+'_doMorph',0);
+            
 
             self.uiAttribs.info='num frames: '+data.meshes.length;
 
