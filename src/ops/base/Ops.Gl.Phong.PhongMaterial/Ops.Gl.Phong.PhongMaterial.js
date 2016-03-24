@@ -344,29 +344,28 @@ shader.setSource(srcVert,srcFrag);
 
         if(num!=numLights)
         {
-            console.log("rebuild lights...");
-            
-            count=0;
-            lights.length=0;
-            for(i=0;i<num;i++)
+            if(shader)
             {
-                lights[count]={};
-                lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
-                lights[count].target=new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
-                lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
-                lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
-                lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
-                lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
+                count=0;
+                lights.length=0;
+                for(i=0;i<num;i++)
+                {
+                    lights[count]={};
+                    lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+                    lights[count].target=new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
+                    lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
+                    lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
+                    lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
+                    lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
+    
+    
+                    count++;
+                }
 
 
-                count++;
+                numLights=count;
+                shader.define('NUM_LIGHTS',''+numLights);
             }
-
-            // console.log("numLights",numLights);
-
-            numLights=count;
-            shader.define('NUM_LIGHTS',''+numLights);
-
         }
 
         if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
@@ -384,24 +383,30 @@ shader.setSource(srcVert,srcFrag);
         {
             count=0;
             // console.log(cgl.frameStore.phong.lights);
-            
-            for(i in cgl.frameStore.phong.lights)
+            if(shader)
             {
-                // console.log(cgl.frameStore.phong.lights[i]);
-                lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
-                if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
-                lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
-                lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
-                lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
-                if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
-
-                count++;
+                for(i in cgl.frameStore.phong.lights)
+                {
+                    // console.log(cgl.frameStore.phong.lights[i]);
+                    lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
+                    if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
+                    lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
+                    lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
+                    lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
+                    if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
+    
+                    count++;
+                }
+                
             }
             cgl.frameStore.phong.lights.length=0;
 
         }
 
     }
+    
+    console.log("light ok...");
+
 }
 
 var bindTextures=function()
@@ -421,6 +426,7 @@ var bindTextures=function()
 
 var doRender=function()
 {
+    if(!shader)return;
     cgl.setShader(shader);
     updateLights();
     shader.bindTextures();
