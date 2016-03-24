@@ -250,9 +250,6 @@ var loadCameras=function(data,seq)
     return null;
 };
 
-
-
-
 function dataGetAnimation(data,name)
 {
     if(!data.hasOwnProperty('animations')) return false;
@@ -266,7 +263,6 @@ function dataGetAnimation(data,name)
                 return data.animations[iAnims].channels[iChannels];
             }
         }
-        
     }
     return false;
 }
@@ -299,56 +295,65 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     if(an.positionkeys && an.positionkeys.length>0)
                     {
                         posyAdd+=50;
-                        var anTransOp=self.patch.addOp('Ops.Gl.Matrix.Transform.v2',{translate:{x:posx,y:posy+posyAdd}});
+                        var anTransOp=self.patch.addOp('Ops.Json3d.TranslateChannel',{translate:{x:posx,y:posy+posyAdd}});
                         anTransOp.uiAttribs.title=anTransOp.name=ch.name+' trans anim';
+                        anTransOp.getPort('channel').set( ch.name );
                         self.patch.link(prevOp,'trigger',anTransOp,'render');
 
                         if(!prevOp)self.patch.link(parentOp,parentPort,anTransOp,'render');
                         prevOp=anTransOp;
 
-                        setPortAnimated(anTransOp.getPort('posX'),true);
-                        setPortAnimated(anTransOp.getPort('posY'),true);
-                        setPortAnimated(anTransOp.getPort('posZ'),true);
+                        // setPortAnimated(anTransOp.getPort('posX'),true);
+                        // setPortAnimated(anTransOp.getPort('posY'),true);
+                        // setPortAnimated(anTransOp.getPort('posZ'),true);
 
-                        frameNum=skipFrames;
-                        for(var k in an.positionkeys)
-                        {
-                            if(frameNum%skipFrames==0)
-                            {
-                                anTransOp.getPort('posX').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
-                                anTransOp.getPort('posY').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
-                                anTransOp.getPort('posZ').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
-                            }
-                            frameNum++;
-                        }
+                        // frameNum=skipFrames;
+                        // for(var k in an.positionkeys)
+                        // {
+                        //     if(frameNum%skipFrames==0)
+                        //     {
+                        //         anTransOp.getPort('posX').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
+                        //         anTransOp.getPort('posY').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
+                        //         anTransOp.getPort('posZ').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
+                        //     }
+                        //     frameNum++;
+                        // }
                     }
                     if(an.rotationkeys && an.rotationkeys.length>0)
                     {
+                        // posyAdd+=50;
+                        // var anRotOp=self.patch.addOp('Ops.Gl.Matrix.Quaternion',{translate:{x:posx,y:posy+posyAdd}});
+                        // anRotOp.uiAttribs.title=anRotOp.name=ch.name+' quat rot anim';
+                        // self.patch.link(prevOp,'trigger',anRotOp,'render');
+
+                        // if(!prevOp)self.patch.link(parentOp,parentPort,anRotOp,'render');
+                        // prevOp=anRotOp;
+
+                        // anRotOp.getPort('x').setAnimated(true);
+                        // anRotOp.getPort('y').setAnimated(true);
+                        // anRotOp.getPort('z').setAnimated(true);
+                        // anRotOp.getPort('w').setAnimated(true);
+
+                        // frameNum=skipFrames;
+                        // for(var k in an.rotationkeys)
+                        // {
+                        //     if(frameNum%skipFrames==0)
+                        //     {
+                        //         anRotOp.getPort('x').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][1] );
+                        //         anRotOp.getPort('y').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][2] );
+                        //         anRotOp.getPort('z').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][3] );
+                        //         anRotOp.getPort('w').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
+                        //     }
+                        //     frameNum++;
+                        // }
                         posyAdd+=50;
-                        var anRotOp=self.patch.addOp('Ops.Gl.Matrix.Quaternion',{translate:{x:posx,y:posy+posyAdd}});
+                        var anRotOp=self.patch.addOp('Ops.Json3d.QuaternionChannel',{translate:{x:posx,y:posy+posyAdd}});
                         anRotOp.uiAttribs.title=anRotOp.name=ch.name+' quat rot anim';
+                        anRotOp.getPort('channel').set( ch.name );
                         self.patch.link(prevOp,'trigger',anRotOp,'render');
 
                         if(!prevOp)self.patch.link(parentOp,parentPort,anRotOp,'render');
                         prevOp=anRotOp;
-
-                        anRotOp.getPort('x').setAnimated(true);
-                        anRotOp.getPort('y').setAnimated(true);
-                        anRotOp.getPort('z').setAnimated(true);
-                        anRotOp.getPort('w').setAnimated(true);
-
-                        frameNum=skipFrames;
-                        for(var k in an.rotationkeys)
-                        {
-                            if(frameNum%skipFrames==0)
-                            {
-                                anRotOp.getPort('x').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][1] );
-                                anRotOp.getPort('y').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][2] );
-                                anRotOp.getPort('z').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][3] );
-                                anRotOp.getPort('w').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
-                            }
-                            frameNum++;
-                        }
                     }
                 }
             }
