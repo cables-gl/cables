@@ -18,11 +18,11 @@ CABLES.ajax(
         {
             var data=JSON.parse(_data);
             result.set(data);
-            self.uiAttr({'warning':''});
+            self.uiAttr({'error':''});
         }
         catch(e)
         {
-            self.uiAttr({'warning':'error loading json'});
+            self.uiAttr({'error':'error loading json'});
         }
     });
     
