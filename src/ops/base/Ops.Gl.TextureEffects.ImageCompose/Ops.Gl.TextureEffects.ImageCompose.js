@@ -43,9 +43,9 @@ function updateResolution()
         effect.setSourceTexture(self.tex);
         self.texOut.val=effect.getCurrentSourceTexture();
     }
-
-    if(!self.texOut.get().isPowerOfTwo()) self.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
-        else self.uiAttr({warning:''});
+    if(self.texOut.get())
+        if(!self.texOut.get().isPowerOfTwo()) self.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
+            else self.uiAttr({warning:''});
 
 
 }
@@ -127,7 +127,7 @@ var onFilterChange=function()
     effect.setSourceTexture(self.tex);
 
     // this.tex.setSize(this.tex.width,this.tex.height);
-    
+
 };
 
 tfilter.set('linear');

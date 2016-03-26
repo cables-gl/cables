@@ -14,12 +14,15 @@ var defaultEasing=CABLES.TL.EASING_LINEAR;
 
 var skipFrames=1;
 var frameNum=0;
+var cloneTransformStore=[];
 
 function render()
 {
     var oldScene=cgl.frameStore.currentScene;
     cgl.frameStore.currentScene=scene;
-    cgl.frameStore.currentScene.materials=[];
+    if(cgl.frameStore.currentScene.materials)cgl.frameStore.currentScene.materials.length=0;// cgl.frameStore.currentScene.materials=[];
+    
+    cgl.frameStore.cloneTransforms=cloneTransformStore;
     trigger.trigger();
     cgl.frameStore.currentScene=oldScene;
 }
@@ -476,7 +479,13 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 posyAdd+=50;
 
                 var clonedOp=self.patch.addOp('Ops.Json3d.ClonedMesh',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
+                
                 clonedOp.getPort('transformations').set(cloneTransforms);
+                
+                
+                cloneTransformStore.push(cloneTransforms);
+                console.log(cloneTransformStore.length+' cloneTransformStore !!!');
+                
                 self.patch.link(prevOp,'trigger',clonedOp,'render');
                 // self.patch.link(parentOp,parentPort,prevOp,'render');
 
@@ -519,9 +528,16 @@ var reload=function()
             {
                 if(err)
                 {
-                    console.log('ajax error:',err);
+                    if(CABLES.UI)self.uiAttr({'error':'could not load file...'});
+
+                    console.err('ajax error:',err);
                     self.patch.loading.finished(loadingId);
                     return;
+                }
+                else
+                {
+                    if(CABLES.UI)self.uiAttr({'error':null});
+
                 }
                 var data=JSON.parse(_data);
                 scene.setValue(data);

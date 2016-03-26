@@ -59,8 +59,8 @@ this.onAnimFrame=function(time)
     }
     cgl.renderEnd(cgl);
     
-    if(cgl.frameStore.phong)
-    {
-        cgl.frameStore.phong.lights.length=0;
-    }
+    if(!cgl.frameStore.phong)cgl.frameStore.phong={}
+    cgl.frameStore.phong.lights={};
+
+    
 };

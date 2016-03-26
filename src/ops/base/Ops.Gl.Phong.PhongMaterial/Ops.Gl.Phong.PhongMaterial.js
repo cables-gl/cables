@@ -9,7 +9,7 @@ var gammeCorrect=this.addInPort(new Port(this,"gamma correction",OP_PORT_TYPE_VA
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
 shaderOut.ignoreValueSerialize=true;
-
+var MAX_LIGHTS=16;
 
 
 gammeCorrect.set(false);
@@ -108,7 +108,7 @@ var srcFrag=''
     .endl()+'   float cone;'
 
     .endl()+'} light;'
-    .endl()+'uniform Light lights[NUM_LIGHTS];'
+    .endl()+'uniform Light lights['+MAX_LIGHTS+'];'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -199,6 +199,8 @@ var srcFrag=''
 
     .endl()+'{{MODULE_COLOR}}'
 
+
+// .endl()+'   col.rgb=lights[0].color.rgb;'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
@@ -207,6 +209,22 @@ var shader=new CGL.Shader(cgl,'PhongMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
 shaderOut.set(shader);
+var lights=[];
+
+for(i=0;i<MAX_LIGHTS;i++)
+{
+    var count=i;
+    lights[count]={};
+    lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+    lights[count].target=new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
+    lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
+    lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
+    lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
+    lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
+}
+
+
+
 
 shader.setSource(srcVert,srcFrag);
 
@@ -319,7 +337,7 @@ shader.setSource(srcVert,srcFrag);
 {
     //lights
 
-    var lights=[];
+    
     var numLights=-1;
 
     var updateLights=function()
@@ -339,32 +357,46 @@ shader.setSource(srcVert,srcFrag);
                 num++;
             }
         }
-
-// console.log('lights...',numLights,num);
-
         if(num!=numLights)
         {
-            if(shader)
-            {
-                count=0;
-                lights.length=0;
-                for(i=0;i<num;i++)
-                {
-                    lights[count]={};
-                    lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
-                    lights[count].target=new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
-                    lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
-                    lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
-                    lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
-                    lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
-
-                    count++;
-                }
-
-                numLights=count;
-                shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
-            }
+            numLights=num;
+            shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
         }
+            
+
+        // console.log('lights...',numLights,num);
+
+//         if(num!=numLights)
+//         {
+            
+//             if(shader)
+//             {
+                
+//                 console.log('reset lights...');
+                
+//                 count=0;
+//                 // lights.length=0;
+
+//                 // for(i=0;i<16;i++)
+//                 // {
+                    
+//                 //     new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+//                 //     new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
+//                 //     new CGL.Uniform(shader,'3f','lights['+count+'].color',[0,0,0]);
+//                 //     new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0);
+//                 //     new CGL.Uniform(shader,'f','lights['+count+'].type',0);
+//                 //     new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
+
+//                 //     count++;
+//                 // }
+//                 // count=0;
+
+
+
+//                 numLights=count;
+//                 shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
+//             }
+//         }
 
         if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
         {
@@ -384,6 +416,7 @@ shader.setSource(srcVert,srcFrag);
             if(shader)
                 for(i in cgl.frameStore.phong.lights)
                 {
+                    // console.log(cgl.frameStore.phong.lights[i].pos);
                     // console.log(cgl.frameStore.phong.lights[i]);
                     lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
                     if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
@@ -396,7 +429,7 @@ shader.setSource(srcVert,srcFrag);
     
                     
                 }
-            cgl.frameStore.phong.lights.length=0;
+            // cgl.frameStore.phong.lights.length=0;
 
         }
 

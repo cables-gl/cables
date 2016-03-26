@@ -31,7 +31,7 @@
         .endl()+'       float z=col.r;'
         .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
 
-        .endl()+'       col=vec4(z,z,z,1.0);'
+        .endl()+'       col=vec4(c,c,c,1.0);'
 
         // .endl()+'       if(c>=0.999)col.a=0.0;'
         // .endl()+'           else col.a=1.0;'

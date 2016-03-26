@@ -38,33 +38,35 @@ var updateAttenuation=function()
 var updatePos=function()
 {
 }
-
+var deleting=false;
 this.onDelete=function()
 {
+    deleting=true;
     
-    console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
-    
-    for(var i=0;i<cgl.frameStore.phong.lights.length;i++)
-    {
-        if(cgl.frameStore.phong.lights[i].id==id)
-        {
-            console.log('delete light...');
-            cgl.frameStore.phong.lights.splice(i,1);
-            break;
-        }
-    }
+    // console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
+
+    // cgl.frameStore.phong.lights.splice(id,1);
+
+    // for(var i=0;i<cgl.frameStore.phong.lights.length;i++)
+    // {
+    //     if(cgl.frameStore.phong.lights[i].id==id)
+    //     {
+    //         console.log('delete light...');
+    //         break;
+    //     }
+    // }
     
     // cgl.frameStore.phong.lights[id]={};
     // cgl.frameStore.phong.lights.length=0;
     // cgl.frameStore.phong.lights=[];
 
-    console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
+    // console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
 }
 
 var updateAll=function()
 {
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
-    if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights=[];
+    if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights={};
     cgl.frameStore.phong.lights[id]={};
     cgl.frameStore.phong.lights[id].id=id;
     cgl.frameStore.phong.lights[id].type=0;
@@ -76,8 +78,11 @@ var updateAll=function()
 
 exe.onTriggered=function()
 {
-    // console.log('setlight');
+    updateAll();
+    
+    if(deleting)console.log('deleting');
     vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
+    cgl.frameStore.phong.lights[id]=cgl.frameStore.phong.lights[id]||{};
     cgl.frameStore.phong.lights[id].pos=mpos;
 
     if(attachment.isLinked())
@@ -99,12 +104,12 @@ g.set(1);
 b.set(1);
 attenuation.set(0);
 
-r.onValueChanged=updateColor;
-g.onValueChanged=updateColor;
-b.onValueChanged=updateColor;
-x.onValueChanged=updatePos;
-y.onValueChanged=updatePos;
-z.onValueChanged=updatePos;
+r.onValueChanged=updateAll;
+g.onValueChanged=updateAll;
+b.onValueChanged=updateAll;
+x.onValueChanged=updateAll;
+y.onValueChanged=updateAll;
+z.onValueChanged=updateAll;
 attenuation.onValueChanged=updateAttenuation;
 
 updateAll();

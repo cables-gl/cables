@@ -15,7 +15,7 @@ var uniCausticsTime=null;
 render.onTriggered=doRender;
 
 
-var pOpacity=this.addInPort(new Port(this,"opacity",OP_PORT_TYPE_VALUE,{display:'range'}));
+var pOpacity=this.addInPort(new Port(this,"opacity",OP_PORT_TYPE_VALUE));
 
 var pAmplitude=this.addInPort(new Port(this,"amplitude",OP_PORT_TYPE_VALUE));
 var pFrequency=this.addInPort(new Port(this,"frequency",OP_PORT_TYPE_VALUE));

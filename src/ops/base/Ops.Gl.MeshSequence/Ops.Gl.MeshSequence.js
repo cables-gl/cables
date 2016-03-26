@@ -117,10 +117,12 @@ function reload()
         {
             if(err)
             {
+                if(CABLES.UI)self.uiAttr({"error":"file not found"});
                 console.log('ajax error:',err);
                 self.patch.loading.finished(loadingId);
                 return;
             }
+            else if(CABLES.UI)self.uiAttr({"error":null});
 
             var data=JSON.parse(_data);
 
