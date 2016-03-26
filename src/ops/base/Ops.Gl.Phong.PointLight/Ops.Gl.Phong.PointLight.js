@@ -16,6 +16,9 @@ var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
 var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
 var z=this.addInPort(new Port(this,"z",OP_PORT_TYPE_VALUE));
 
+var mul=this.addInPort(new Port(this,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
+mul.set(1);
+
 var id=generateUUID();
 var lights=[];
 
@@ -84,6 +87,7 @@ exe.onTriggered=function()
     vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
     cgl.frameStore.phong.lights[id]=cgl.frameStore.phong.lights[id]||{};
     cgl.frameStore.phong.lights[id].pos=mpos;
+    cgl.frameStore.phong.lights[id].mul=mul.get();
 
     if(attachment.isLinked())
     {

@@ -82,6 +82,7 @@ var srcFrag=''
     .endl()+'uniform float g;'
     .endl()+'uniform float b;'
     .endl()+'uniform float a;'
+    .endl()+'uniform float mul;'
 
     .endl()+'uniform float diffuseRepeatX;'
     .endl()+'uniform float diffuseRepeatY;'
@@ -106,6 +107,7 @@ var srcFrag=''
     .endl()+'   vec3 color;'
     .endl()+'   float intensity;'
     .endl()+'   float cone;'
+    .endl()+'   float mul;'
 
     .endl()+'} light;'
     .endl()+'uniform Light lights['+MAX_LIGHTS+'];'
@@ -133,42 +135,44 @@ var srcFrag=''
     .endl()+'   vec3 theColor=vec3(0.0,0.0,0.0);'
     .endl()+'   for(int l=0;l<NUM_LIGHTS;l++)'
     .endl()+'   {'
-    .endl()+'       vec3 lightColor = lights[l].color;'
+    .endl()+'       if(lights[l].mul>0.0)'
+    .endl()+'       {'
+    
+    .endl()+'           vec3 lightColor = lights[l].color;'
 
     //calculate the location of this fragment (pixel) in world coordinates
-    .endl()+'       vec3 fragPosition = vec3(modelMatrix * vec4(vert, 1.0)).xyz;'
+    .endl()+'           vec3 fragPosition = vec3(modelMatrix * vec4(vert, 1.0)).xyz;'
 
     //calculate the vector from this pixels surface to the light source
-    .endl()+'       vec3 surfaceToLight = lights[l].pos-fragPosition;'
+    .endl()+'           vec3 surfaceToLight = lights[l].pos-fragPosition;'
 
-    .endl()+'       vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;'
+    .endl()+'           vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;'
 
     //calculate the cosine of the angle of incidence'
-    .endl()+'       float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
-    .endl()+'       brightness = clamp(brightness, 0.0, 1.0);'
+    .endl()+'           float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
+    .endl()+'           brightness = clamp(brightness, 0.0, 1.0);'
 
     // attenuation
-    .endl()+'       float distanceToLight = length(surfaceToLight);'
-    .endl()+'       float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
+    .endl()+'           float distanceToLight = length(surfaceToLight);'
+    .endl()+'           float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
 
     // .endl()+'       attenuation = 1.0;'
 
 
 
     // SPOT LIGHT
-    .endl()+'       if(lights[l].type!=0.0)'
-    .endl()+'       {'
-    .endl()+'           vec3 coneDirection = normalize( (lights[l].target-lights[l].pos) );'
-    .endl()+'           float spotEffect = dot(normalize(coneDirection), normalize(-surfaceToLight));'
-    .endl()+'           float lightToSurfaceAngle = degrees(acos(dot(surfaceToLight, coneDirection)));'
-    .endl()+'           if( spotEffect <lights[l].cone)'
+    .endl()+'           if(lights[l].type!=0.0)'
     .endl()+'           {'
-    .endl()+'               attenuation=0.0;'
+    .endl()+'               vec3 coneDirection = normalize( (lights[l].target-lights[l].pos) );'
+    .endl()+'               float spotEffect = dot(normalize(coneDirection), normalize(-surfaceToLight));'
+    .endl()+'               float lightToSurfaceAngle = degrees(acos(dot(surfaceToLight, coneDirection)));'
+    .endl()+'               if( spotEffect <lights[l].cone)'
+    .endl()+'               {'
+    .endl()+'                   attenuation=0.0;'
+    .endl()+'               }'
     .endl()+'           }'
-    .endl()+'       }'
 
-
-    .endl()+'       brightness *= attenuation;'
+    .endl()+'       brightness *= attenuation*lights[l].mul;'
 
     //calculate final color of the pixel, based on:'
     // 1. The angle of incidence: brightness'
@@ -183,6 +187,7 @@ var srcFrag=''
     .endl()+'       theColor+=(lightColor*brightness);'
     // .endl()+'       if(length(lights[l].target)>0.0)theColor=vec3(1.0,0.0,0.0);'
 
+    .endl()+'       }'
     .endl()+'   }'
 
 
@@ -221,6 +226,7 @@ for(i=0;i<MAX_LIGHTS;i++)
     lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
     lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
     lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
+    lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
 }
 
 
@@ -424,6 +430,7 @@ shader.setSource(srcVert,srcFrag);
                     lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
                     lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
                     if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
+                    lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);
     
                     count++;
     
