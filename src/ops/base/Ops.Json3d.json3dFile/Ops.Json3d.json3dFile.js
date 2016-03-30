@@ -539,7 +539,19 @@ var reload=function()
                     if(CABLES.UI)self.uiAttr({'error':null});
 
                 }
-                var data=JSON.parse(_data);
+
+                var data=null;
+
+                try
+                {
+                    data=JSON.parse(_data);;
+                }
+                catch(ex)
+                {
+                    if(CABLES.UI)self.uiAttr({'error':'could not load file...'});
+                    return;
+
+                }
                 scene.setValue(data);
 
 

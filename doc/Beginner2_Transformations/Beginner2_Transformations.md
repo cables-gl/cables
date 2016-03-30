@@ -1,6 +1,6 @@
 # Beginner 2: Transformations
 
-This is part 2 of the beginner tutorial series. Before you proceed you should have completed [Part 1: Circle](../Beginner1_Circle/Beginner1_Circle.md).
+This is part 2 of the beginner tutorial series. Before you proceed you should have completed [Part 1: Circle](../beginner1_circle/beginner1_circle.md).
 
 To transform an object in 3D space we need a transformation operator.  
 To insert an operator between two existing ops you can press the circle in the middle of the cable to link them. If the circle is not showing up, you have to select one of the ops first.
@@ -18,4 +18,4 @@ Play around with the parameters of the transform op. You can now change the posi
 
 ## Part 3
 
-Continue to [Part 3](../Beginner3_Color/Beginner3_Color.md) of the tutorial-series to learn how to use colors.
+Continue to [Part 3](../beginner3_color/beginner3_color.md) of the tutorial-series to learn how to use colors.
