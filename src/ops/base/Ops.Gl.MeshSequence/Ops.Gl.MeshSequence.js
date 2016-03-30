@@ -129,7 +129,20 @@ function reload()
             }
             else if(CABLES.UI)self.uiAttr({"error":null});
 
-            var data=JSON.parse(_data);
+            var data=null;
+            
+            try
+            {
+                data=JSON.parse(_data);
+                
+            }
+            catch(e)
+            {
+                if(CABLES.UI)self.uiAttr({"error":"could not load file..."});
+                console.log("meshsequence could not load file..."+filename.get());
+                return;
+            }
+
 
             geoms.length=0;
 
