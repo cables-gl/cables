@@ -94,6 +94,10 @@ function refresh()
 
         text=self.patch.config.glCanvasId+' fps: '+fps;
         fpsStartTime=Date.now();
+        if(CGL.profileShaderCompiles>0)text+=' shader compile!';
+        if(CGL.profileShaderGetUniform>0)text+=' shader get uniforms!';
+
+
 
         var count=0;
         for(var i=queue.length;i>queue.length-queue.length/3;i--)
@@ -114,10 +118,11 @@ function refresh()
 
         text2='frame: '+Math.round(avgMs*100)/100+' ms';
         
-        text3='child ops: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) uniforms/s: '+CGL.profileUniformCount+' / '+CGL.profileShaderGetUniform;
+        text3='child ops: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) uni/s: '+CGL.profileUniformCount+' / '+CGL.profileShaderGetUniform ;
         if(selfTime>=1.25) text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         CGL.profileUniformCount=0;
         CGL.profileShaderGetUniform=0;
+        CGL.profileShaderCompiles=0;
 
     }
     ctx.clearRect(0,0,canvas.width,canvas.height);
