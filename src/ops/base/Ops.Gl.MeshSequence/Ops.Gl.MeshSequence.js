@@ -18,14 +18,21 @@ var mesh=null;
 var srcHeadVert=''
     .endl()+'attribute vec3 attrMorphTargetA;'
     .endl()+'attribute vec3 attrMorphTargetB;'
+    // .endl()+'attribute vec3 attrMorphTargetAN;'
+    // .endl()+'attribute vec3 attrMorphTargetBN;'
     .endl()+'uniform float {{mod}}_fade;'
+    .endl()+'uniform float {{mod}}_doMorph;'
     .endl();
 
 var srcBodyVert=''
     // .endl()+'   pos =vec4(vPosition,1.0);'
+    .endl()+' if({{mod}}_doMorph==1.0){'
     .endl()+'   pos = vec4( attrMorphTargetA * {{mod}}_fade + attrMorphTargetB * (1.0 - {{mod}}_fade ), 1. );'
     // .endl()+'   pos = vec4( attrMorphTargetA * {{mod}}_fade + vPosition * (1.0 - {{mod}}_fade ), 1. );'
-    // .endl()+'   norm = (attrMorphTargetB * {{mod}}_fade + norm * (1.0 - {{mod}}_fade ) );'
+    // .endl()+'   norm = (attrMorphTargetBN * {{mod}}_fade + norm * (1.0 - {{mod}}_fade ) );'
+    // .endl()+'   norm = vec3(attrMorphTargetAN * {{mod}}_fade + attrMorphTargetBN * (1.0 - {{mod}}_fade ) );'
+    // .endl()+'   norm = attrMorphTargetAN;'
+    .endl()+' }'
     .endl();
 
 var uniFade=null;
@@ -59,12 +66,18 @@ function doRender()
             });
 
         uniFade=new CGL.Uniform(shader,'f',module.prefix+'_fade',fade);
+        uniDoMorph=new CGL.Uniform(shader,'f',module.prefix+'_doMorph',0);
     }
 
-    uniFade.setValue(fade);
+    if(uniDoMorph)
+    {
+        uniFade.setValue(fade);
+        uniDoMorph.setValue(1.0);
+        if(mesh!==null) mesh.render(cgl.getShader());
+        uniDoMorph.setValue(0);
+        trigger.trigger();
+    }
 
-    if(mesh!==null) mesh.render(cgl.getShader());
-    trigger.trigger();
 }
 
 
@@ -82,15 +95,17 @@ function updateFrame()
         if(n!=lastFrame)
         {
             mesh.updateAttribute('attrMorphTargetA',geoms[n+1].verticesTyped);
-            // mesh.updateAttribute('attrMorphTargetAN',geoms[n].vertexNormals);
+            // mesh.updateAttribute('attrMorphTargetAN',geoms[n+1].vertexNormals);
             
             mesh.updateAttribute('attrMorphTargetB',geoms[n].verticesTyped);
-            // mesh.updateAttribute('attrMorphTargetB',geoms[n].vertexNormals);
+            // mesh.updateAttribute('attrMorphTargetBN',geoms[n].vertexNormals);
 
             lastFrame=n;
         }
     }
 }
+
+var uniDoMorph=null;
 
 function reload()
 {
@@ -107,10 +122,12 @@ function reload()
         {
             if(err)
             {
+                if(CABLES.UI)self.uiAttr({"error":"file not found"});
                 console.log('ajax error:',err);
                 self.patch.loading.finished(loadingId);
                 return;
             }
+            else if(CABLES.UI)self.uiAttr({"error":null});
 
             var data=JSON.parse(_data);
 
@@ -143,9 +160,11 @@ function reload()
 
             mesh=new CGL.Mesh(cgl,geoms[0]);
             mesh.addAttribute('attrMorphTargetA',geoms[0].vertices,3);
-            mesh.addAttribute('attrMorphTargetB',geoms[0].vertexNormals, 3);
+            mesh.addAttribute('attrMorphTargetB',geoms[0].vertices, 3);
             
+
             self.uiAttribs.info='num frames: '+data.meshes.length;
+
             self.patch.loading.finished(loadingId);
 
         });

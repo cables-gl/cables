@@ -15,7 +15,7 @@ var uniCausticsTime=null;
 render.onTriggered=doRender;
 
 
-var pOpacity=this.addInPort(new Port(this,"opacity",OP_PORT_TYPE_VALUE,{display:'range'}));
+var pOpacity=this.addInPort(new Port(this,"opacity",OP_PORT_TYPE_VALUE));
 
 var pAmplitude=this.addInPort(new Port(this,"amplitude",OP_PORT_TYPE_VALUE));
 var pFrequency=this.addInPort(new Port(this,"frequency",OP_PORT_TYPE_VALUE));
@@ -195,6 +195,7 @@ var srcCausticsColor=''
 .endl()+'vec2 dxdy = vec2(wave(tvert.x, tvert.y, {{mod}}_time));'
 .endl()+'vec3 intercept = line_plane_intercept( tvert.xzy, vec3(dxdy, 1.0) , vec3(0, 0,1), -0.8);'
 
+.endl()+'intercept.x+={{mod}}_time*1.0;'
 // .endl()+'// OUTPUT'
 
 .endl()+'   float saturation = 0.25+vec3(dot(vec3(0.2126,0.7152,0.0722), col.rgb)).r;'

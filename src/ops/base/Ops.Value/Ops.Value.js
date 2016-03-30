@@ -8,7 +8,7 @@ var result=this.addOutPort(new Port(this,"result"));
 
 function frame(time)
 {
-    self.updateAnims();
+    // self.updateAnims();
     self.exec();
 }
 

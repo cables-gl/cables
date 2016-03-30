@@ -32,7 +32,7 @@ var srcFrag=''
     .endl()+'       col.rgb = ((col.rgb - 0.5) * max(amount*2.0, 0.0))+0.5;'
 
     .endl()+'       // apply brightness'
-    .endl()+'       col.rgb += amountbright;'
+    .endl()+'       col.rgb *= amountbright*2.0;'
 
     .endl()+'   #endif'
     .endl()+'   gl_FragColor = col;'
@@ -41,7 +41,7 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var amountUniform=new CGL.Uniform(shader,'f','amount',0.4);
-var amountBrightUniform=new CGL.Uniform(shader,'f','amountbright',0.0);
+var amountBrightUniform=new CGL.Uniform(shader,'f','amountbright',0.5);
 
 this.amount.onValueChanged=function()
 {
@@ -55,7 +55,7 @@ this.amountBright.onValueChanged=function()
 };
 
 
-this.amountBright.val=0;
+this.amountBright.val=0.5;
 this.amount.val=0.5;
 
 this.render.onTriggered=function()

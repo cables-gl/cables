@@ -98,6 +98,19 @@ this.render.onTriggered=function()
     if(!cgl.currentTextureEffect)return;
     cgl.setShader(shader);
 
+
+if(cgl.getViewPort()[2]!=self.texWidth.get() || cgl.getViewPort()[3]!=self.texHeight.get())
+{
+    changeRes();
+}
+        // var w=;
+        // var h=;
+        // uWidth.setValue(w);
+        // uHeight.setValue(h);
+        // .set(w);
+        // self.texHeight.set(h);
+
+
     cgl.currentTextureEffect.bind();
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
@@ -133,7 +146,7 @@ function changeRes()
         uHeight.setValue(h);
         self.texWidth.set(w);
         self.texHeight.set(h);
-
+console.log('fxaaa',w,h);
     }
     else
     {

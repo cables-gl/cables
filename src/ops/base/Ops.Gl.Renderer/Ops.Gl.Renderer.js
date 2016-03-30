@@ -47,6 +47,8 @@ this.onAnimFrame=function(time)
         height.set(cgl.canvasHeight);
     }
 
+    
+
     cgl.renderStart(cgl,identTranslate,identTranslateView);
     trigger.trigger();
 
@@ -57,8 +59,8 @@ this.onAnimFrame=function(time)
     }
     cgl.renderEnd(cgl);
     
-    if(cgl.frameStore.phong)
-    {
-        cgl.frameStore.phong.lights.length=0;
-    }
+    if(!cgl.frameStore.phong)cgl.frameStore.phong={}
+    // cgl.frameStore.phong.lights={};
+
+    
 };

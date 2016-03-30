@@ -34,11 +34,11 @@ this.onDelete=function()
 
 function seek()
 {
-    if(!window.gui && CGL.getLoadingStatus()>=1.0)
-    {
-        console.log('seek canceled',CGL.getLoadingStatus());
-        return;
-    }
+    // if(!window.gui && CGL.getLoadingStatus()>=1.0)
+    // {
+    //     console.log('seek canceled',CGL.getLoadingStatus());
+    //     return;
+    // }
 
     if(window.gui)
     {
@@ -68,7 +68,7 @@ function seek()
         {
             console.log('play!');
                         
-            self.media.start(t);
+            // self.media.start(t);
             playing=true;
         }
     }

@@ -41,7 +41,7 @@ var srcVert=''
     .endl()+'attribute vec3 vPosition;'
     .endl()+'attribute vec2 attrTexCoord;'
 
-
+.endl()+'    varying vec3 norm;'
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'    varying vec2 texCoord;'
     .endl()+'    #ifdef TEXTURE_REPEAT'

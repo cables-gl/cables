@@ -1,58 +1,36 @@
-var self=this;
-Op.apply(this, arguments);
+this.name='audioOutput';
+var op=this;
 
 if(!window.audioContext) 
     if('webkitAudioContext' in window) audioContext = new webkitAudioContext();
         else audioContext = new AudioContext();
 
-this.name='audioOutput';
 var audioIn=this.addInPort(new Port(this,"audio in",OP_PORT_TYPE_OBJECT));
-
-
-
 
 var oldAudioIn=null;
 
-audioIn.onLinkChanged = function()
-{
-    console.log('onlink is linked: ',audioIn.isLinked());
+audioIn.onLinkChanged = function() {
+    console.log('[audioIn] is linked: ', audioIn.isLinked());
     
-    console.log('onlink is linked: ',audioIn.get());
-    
-    // if(!audioIn.isLinked() && oldAudioIn)
-    // {
-    //     oldAudioIn.disconnect(audioContext.destination);
-    // }
-    // else
-    // {
-    //     audioIn.val.connect(audioContext.destination);
-    //     oldAudioIn=audioIn.val;
-    // }
+    console.log('[audio in]: ', audioIn.get());
 };
 
-
-
-
-
-
-audioIn.onValueChanged = function()
-{
-
+audioIn.onValueChanged = function() {
     console.log('val: ',audioIn.get() );
     console.log('is linked: ',audioIn.isLinked());
         
-    if (!audioIn.get())
-    {
-        if (oldAudioIn !== null)
-        {
+    if (!audioIn.get()) {
+        op.log("audioIn.get() is null");
+        if (oldAudioIn !== null) {
+            op.log("oldAudioIn !== null");
             try{
-                oldAudioIn.disconnect(audioContext.destination); // TODO, we don't know whichport to disconnect....
+                op.log("disconnecting: oldAudioIn.disconnect(audioContext.destination); ");
+                oldAudioIn.disconnect(audioContext.destination);
             } catch(e) { console.log(e); }
         }
     }
-    else
-    {
-        audioIn.val.connect(audioContext.destination);
+    else {
+        audioIn.get().connect(audioContext.destination);
     }
-    oldAudioIn=audioIn.val;
+    oldAudioIn = audioIn.get();
 };

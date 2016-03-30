@@ -9,7 +9,7 @@ var gammeCorrect=this.addInPort(new Port(this,"gamma correction",OP_PORT_TYPE_VA
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
 shaderOut.ignoreValueSerialize=true;
-
+var MAX_LIGHTS=16;
 
 
 gammeCorrect.set(false);
@@ -82,6 +82,7 @@ var srcFrag=''
     .endl()+'uniform float g;'
     .endl()+'uniform float b;'
     .endl()+'uniform float a;'
+    .endl()+'uniform float mul;'
 
     .endl()+'uniform float diffuseRepeatX;'
     .endl()+'uniform float diffuseRepeatY;'
@@ -106,16 +107,17 @@ var srcFrag=''
     .endl()+'   vec3 color;'
     .endl()+'   float intensity;'
     .endl()+'   float cone;'
+    .endl()+'   float mul;'
 
     .endl()+'} light;'
-    .endl()+'uniform Light lights[3];'
+    .endl()+'uniform Light lights['+MAX_LIGHTS+'];'
 
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 surfaceColor = vec4(r,g,b,a);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
-    
+
     .endl()+'           #ifdef TEXTURED_POINTS'
     .endl()+'               surfaceColor=texture2D(tex,vec2(gl_PointCoord.x*diffuseRepeatX,(1.0-gl_PointCoord.y)*diffuseRepeatY));'    .endl()+'      #endif'
     .endl()+'           #ifndef TEXTURED_POINTS'
@@ -131,44 +133,46 @@ var srcFrag=''
     .endl()+'   #endif'
 
     .endl()+'   vec3 theColor=vec3(0.0,0.0,0.0);'
-    .endl()+'   for(int l=0;l<3;l++)'
+    .endl()+'   for(int l=0;l<NUM_LIGHTS;l++)'
     .endl()+'   {'
-    .endl()+'       vec3 lightColor = lights[l].color;'
+    .endl()+'       if(lights[l].mul>0.0)'
+    .endl()+'       {'
+    
+    .endl()+'           vec3 lightColor = lights[l].color;'
 
     //calculate the location of this fragment (pixel) in world coordinates
-    .endl()+'       vec3 fragPosition = vec3(modelMatrix * vec4(vert, 1.0)).xyz;'
+    .endl()+'           vec3 fragPosition = vec3(modelMatrix * vec4(vert, 1.0)).xyz;'
 
     //calculate the vector from this pixels surface to the light source
-    .endl()+'       vec3 surfaceToLight = lights[l].pos-fragPosition;'
+    .endl()+'           vec3 surfaceToLight = lights[l].pos-fragPosition;'
 
-    .endl()+'       vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;'
+    .endl()+'           vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;'
 
     //calculate the cosine of the angle of incidence'
-    .endl()+'       float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
-    .endl()+'       brightness = clamp(brightness, 0.0, 1.0);'
+    .endl()+'           float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));'
+    .endl()+'           brightness = clamp(brightness, 0.0, 1.0);'
 
     // attenuation
-    .endl()+'       float distanceToLight = length(surfaceToLight);'
-    .endl()+'       float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
-    
+    .endl()+'           float distanceToLight = length(surfaceToLight);'
+    .endl()+'           float attenuation = 1.0 / (1.0 + lights[l].attenuation * distanceToLight * distanceToLight);'
+
     // .endl()+'       attenuation = 1.0;'
-    
-    
-    
+
+
+
     // SPOT LIGHT
-    .endl()+'       if(lights[l].type!=0.0)'
-    .endl()+'       {'
-    .endl()+'           vec3 coneDirection = normalize( (lights[l].target-lights[l].pos) );'
-    .endl()+'           float spotEffect = dot(normalize(coneDirection), normalize(-surfaceToLight));'
-    .endl()+'           float lightToSurfaceAngle = degrees(acos(dot(surfaceToLight, coneDirection)));'
-    .endl()+'           if( spotEffect <lights[l].cone)'
+    .endl()+'           if(lights[l].type!=0.0)'
     .endl()+'           {'
-    .endl()+'               attenuation=0.0;'
+    .endl()+'               vec3 coneDirection = normalize( (lights[l].target-lights[l].pos) );'
+    .endl()+'               float spotEffect = dot(normalize(coneDirection), normalize(-surfaceToLight));'
+    .endl()+'               float lightToSurfaceAngle = degrees(acos(dot(surfaceToLight, coneDirection)));'
+    .endl()+'               if( spotEffect <lights[l].cone)'
+    .endl()+'               {'
+    .endl()+'                   attenuation=0.0;'
+    .endl()+'               }'
     .endl()+'           }'
-    .endl()+'       }'
 
-
-    .endl()+'       brightness *= attenuation;'
+    .endl()+'       brightness *= attenuation*lights[l].mul;'
 
     //calculate final color of the pixel, based on:'
     // 1. The angle of incidence: brightness'
@@ -183,6 +187,7 @@ var srcFrag=''
     .endl()+'       theColor+=(lightColor*brightness);'
     // .endl()+'       if(length(lights[l].target)>0.0)theColor=vec3(1.0,0.0,0.0);'
 
+    .endl()+'       }'
     .endl()+'   }'
 
 
@@ -194,11 +199,13 @@ var srcFrag=''
     .endl()+'       finalColor = pow(linearColor, gamma);'
     .endl()+'   #endif'
     // .endl()+'   finalColor.r=1.0;'
-    
+
     .endl()+'   vec4 col=vec4(finalColor, surfaceColor.a);'
-    
+
     .endl()+'{{MODULE_COLOR}}'
-    
+
+
+// .endl()+'   col.rgb=lights[0].color.rgb;'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
@@ -207,6 +214,23 @@ var shader=new CGL.Shader(cgl,'PhongMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
 shaderOut.set(shader);
+var lights=[];
+
+for(i=0;i<MAX_LIGHTS;i++)
+{
+    var count=i;
+    lights[count]={};
+    lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+    lights[count].target=new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
+    lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
+    lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
+    lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
+    lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
+    lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
+}
+
+
+
 
 shader.setSource(srcVert,srcFrag);
 
@@ -257,7 +281,7 @@ shader.setSource(srcVert,srcFrag);
             else shader.removeDefine('COLORIZE_TEXTURE');
 
     };
-    
+
 }
 
 
@@ -312,14 +336,14 @@ shader.setSource(srcVert,srcFrag);
             else shader.removeDefine('TEXTURED_POINTS');
 
     };
-    
+
 }
 
 
 {
     //lights
 
-    var lights=[];
+    
     var numLights=-1;
 
     var updateLights=function()
@@ -339,35 +363,46 @@ shader.setSource(srcVert,srcFrag);
                 num++;
             }
         }
-
-// console.log('lights...',numLights,num);
-
         if(num!=numLights)
         {
-            console.log("rebuild lights...");
-            
-            count=0;
-            lights.length=0;
-            for(i=0;i<num;i++)
-            {
-                lights[count]={};
-                lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
-                lights[count].target=new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
-                lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
-                lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
-                lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
-                lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
-
-
-                count++;
-            }
-
-            // console.log("numLights",numLights);
-
-            numLights=count;
-            shader.define('NUM_LIGHTS',''+numLights);
-
+            numLights=num;
+            shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
         }
+            
+
+        // console.log('lights...',numLights,num);
+
+//         if(num!=numLights)
+//         {
+            
+//             if(shader)
+//             {
+                
+//                 console.log('reset lights...');
+                
+//                 count=0;
+//                 // lights.length=0;
+
+//                 // for(i=0;i<16;i++)
+//                 // {
+                    
+//                 //     new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
+//                 //     new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
+//                 //     new CGL.Uniform(shader,'3f','lights['+count+'].color',[0,0,0]);
+//                 //     new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0);
+//                 //     new CGL.Uniform(shader,'f','lights['+count+'].type',0);
+//                 //     new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
+
+//                 //     count++;
+//                 // }
+//                 // count=0;
+
+
+
+//                 numLights=count;
+//                 shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
+//             }
+//         }
 
         if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
         {
@@ -384,24 +419,31 @@ shader.setSource(srcVert,srcFrag);
         {
             count=0;
             // console.log(cgl.frameStore.phong.lights);
-            
-            for(i in cgl.frameStore.phong.lights)
-            {
-                // console.log(cgl.frameStore.phong.lights[i]);
-                lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
-                if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
-                lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
-                lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
-                lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
-                if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
-
-                count++;
-            }
-            cgl.frameStore.phong.lights.length=0;
+            if(shader)
+                for(i in cgl.frameStore.phong.lights)
+                {
+                    lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
+                    // if(cgl.frameStore.phong.lights[i].changed)
+                    {
+                        cgl.frameStore.phong.lights[i].changed=false;
+                        if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
+                        lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
+                        lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
+                        lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
+                        if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
+                        lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);
+                    }
+    
+                    count++;
+                }
+            // cgl.frameStore.phong.lights.length=0;
 
         }
 
     }
+    
+    console.log("light ok...");
+
 }
 
 var bindTextures=function()
@@ -421,6 +463,7 @@ var bindTextures=function()
 
 var doRender=function()
 {
+    if(!shader)return;
     cgl.setShader(shader);
     updateLights();
     shader.bindTextures();
@@ -429,7 +472,7 @@ var doRender=function()
 };
 
 shader.bindTextures=bindTextures;
-shader.define('NUM_LIGHTS','0');
+shader.define('NUM_LIGHTS','1');
 updateGammeCorrect();
 this.onLoaded=shader.compile;
 
