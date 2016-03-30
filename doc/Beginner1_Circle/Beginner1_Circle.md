@@ -39,4 +39,4 @@ Now it should look like this:
 
 ## Part 2
 
-Continue to [Part 2](../Beginner2_Transformations/Beginner2_Transformations.md) of the tutorial-series to learn how to use transformations.
+Continue to [Part 2](../beginner2_transformations/beginner2_transformations.md) of the tutorial-series to learn how to use transformations.

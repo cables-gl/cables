@@ -1,6 +1,6 @@
 # Beginner 3: Color
 
-[Back to Part 2](../Beginner2_Transformations/Beginner2_Transformations.md)
+[Back to Part 2](../beginner2_transformations/beginner2_transformations.md)
 
 ## Adding Color
 
@@ -25,4 +25,4 @@ It should look like this now:
 
 ## Part 4
 
-Continue to [Part 4](../Beginner4_More_Transformations/Beginner4_More_Transformations.md) to learn more on transformations
+Continue to [Part 4](../beginner4_more_transformations/beginner4_more_transformations.md) to learn more on transformations

@@ -1,7 +1,7 @@
 
 # More Transformations
 
-[Back to part 3](../Beginner3_Color/Beginner3_Color.md)
+[Back to part 3](../beginner3_color/beginner3_color.md)
 
 
 To reuse the circle and draw multiple of them you can use `Ops.Repeat`
