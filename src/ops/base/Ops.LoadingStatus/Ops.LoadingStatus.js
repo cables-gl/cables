@@ -25,7 +25,7 @@ vec3.set(identTranslate, 0,0,-2);
 
 var preRenderAnimFrame=function(time)
 {
-    self.patch.timer.setTime(preRenderTime);
+    // self.patch.timer.setTime(preRenderTime);
     self.finished.trigger();
     // cgl.gl.flush();
 
@@ -47,7 +47,7 @@ var loadingIdPrerender='';
 
 function checkPreRender()
 {
-    // console.log(' checkprerender ',preRenderTimes.length,preRenderInc,preRenderDone);
+    console.log(' checkprerender ',preRenderTimes.length,preRenderInc,preRenderDone);
 
     if(preRenderTimes.length>0)
     {
@@ -91,6 +91,7 @@ this.exe.onTriggered= function()
         {
             var loadingId=self.patch.loading.start('loadingstatus');
             // CGL.incrementLoadingAssets();
+            console.log('firsttime');
             // console.log('finished loading complete...', CGL.getLoadingStatus());
             self.patch.timer.setTime(0);
             self.patch.timer.play();
@@ -120,13 +121,26 @@ this.exe.onTriggered= function()
 
             // cgl.canvasWidth=cgl.canvas.clientWidth;
             // cgl.canvasHeight=cgl.canvas.clientHeight;
+
+// console.log('not finished loading...');
     
-            if(self.preRenderTimeFrames.isAnimated())
-            {
-                for(i=0;i<self.preRenderTimeFrames.anim.keys.length;i++)
-                    preRenderTimes.push( self.preRenderTimeFrames.anim.keys[i].time );
-            }
-            preRenderTimes.push(0);
+            // if(self.preRenderTimeFrames.isAnimated())
+            // {
+            //     for(i=0;i<self.preRenderTimeFrames.anim.keys.length;i++)
+            //         preRenderTimes.push( self.preRenderTimeFrames.anim.keys[i].time );
+            // }
+            // preRenderTimes.push(1);
+            
+            console.log('pre rendering....');
+            
+            // preRenderAnimFrame(0);
+            // preRenderAnimFrame(0);
+            // preRenderAnimFrame(0);
+            // preRenderAnimFrame(0);
+            // preRenderAnimFrame(0);
+            
+            console.log('pre render ok???');
+            // preRenderAnimFrame(1);
 
             checkPreRender();
         }

@@ -34,6 +34,7 @@ var srcFrag=''
     .endl()+'uniform float r;'
     .endl()+'uniform float g;'
     .endl()+'uniform float b;'
+    .endl()+'uniform float a;'
     .endl()+'uniform float density;'
     .endl()+'const float LOG2 = 1.442695;'
     .endl()+'void main()'
@@ -47,7 +48,7 @@ var srcFrag=''
     
     // .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
 
-    .endl()+'       float fogFactor = exp2( -density * '
+    .endl()+'       float fogFactor = a*exp2( -density * '
     .endl()+'           density *'
     .endl()+'           z *'
     .endl()+'           z *'
@@ -121,9 +122,17 @@ self.density.val=5.0;
         else b.uniform.setValue(b.get());
     };
 
+    var a=this.addInPort(new Port(this,"fog a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    a.onValueChanged=function()
+    {
+        if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
+        else a.uniform.setValue(a.get());
+    };
+
     r.set(Math.random());
     g.set(Math.random());
     b.set(Math.random());
+    a.set(1.0);
 }
 
 

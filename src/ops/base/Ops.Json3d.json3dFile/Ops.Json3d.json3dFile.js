@@ -530,7 +530,7 @@ var reload=function()
                 {
                     if(CABLES.UI)self.uiAttr({'error':'could not load file...'});
 
-                    console.err('ajax error:',err);
+                    console.error('ajax error:',err);
                     self.patch.loading.finished(loadingId);
                     return;
                 }

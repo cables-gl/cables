@@ -422,19 +422,19 @@ shader.setSource(srcVert,srcFrag);
             if(shader)
                 for(i in cgl.frameStore.phong.lights)
                 {
-                    // console.log(cgl.frameStore.phong.lights[i].pos);
-                    // console.log(cgl.frameStore.phong.lights[i]);
                     lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
-                    if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
-                    lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
-                    lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
-                    lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
-                    if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
-                    lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);
+                    // if(cgl.frameStore.phong.lights[i].changed)
+                    {
+                        cgl.frameStore.phong.lights[i].changed=false;
+                        if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
+                        lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
+                        lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
+                        lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
+                        if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
+                        lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);
+                    }
     
                     count++;
-    
-                    
                 }
             // cgl.frameStore.phong.lights.length=0;
 

@@ -29,6 +29,7 @@ var mpos=vec3.create();
 var updateColor=function()
 {
     cgl.frameStore.phong.lights[id].color=[ r.get(), g.get(), b.get() ];
+    cgl.frameStore.phong.lights[id].changed=true;
 }
 
 
@@ -36,34 +37,11 @@ var updateColor=function()
 var updateAttenuation=function()
 {
     cgl.frameStore.phong.lights[id].attenuation=attenuation.get();
+    cgl.frameStore.phong.lights[id].changed=true;
 }
 
 var updatePos=function()
 {
-}
-var deleting=false;
-this.onDelete=function()
-{
-    deleting=true;
-    
-    // console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
-
-    // cgl.frameStore.phong.lights.splice(id,1);
-
-    // for(var i=0;i<cgl.frameStore.phong.lights.length;i++)
-    // {
-    //     if(cgl.frameStore.phong.lights[i].id==id)
-    //     {
-    //         console.log('delete light...');
-    //         break;
-    //     }
-    // }
-    
-    // cgl.frameStore.phong.lights[id]={};
-    // cgl.frameStore.phong.lights.length=0;
-    // cgl.frameStore.phong.lights=[];
-
-    // console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
 }
 
 var updateAll=function()
@@ -73,6 +51,7 @@ var updateAll=function()
     cgl.frameStore.phong.lights[id]={};
     cgl.frameStore.phong.lights[id].id=id;
     cgl.frameStore.phong.lights[id].type=0;
+    cgl.frameStore.phong.lights[id].changed=true;
 
     updatePos();
     updateColor();
@@ -81,9 +60,8 @@ var updateAll=function()
 
 exe.onTriggered=function()
 {
-    updateAll();
+    // updateAll();
     
-    if(deleting)console.log('deleting');
     vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
     cgl.frameStore.phong.lights[id]=cgl.frameStore.phong.lights[id]||{};
     cgl.frameStore.phong.lights[id].pos=mpos;
