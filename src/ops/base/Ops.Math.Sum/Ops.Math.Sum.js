@@ -1,20 +1,17 @@
-    Op.apply(this, arguments);
-    var self=this;
 
-    this.name='sum';
-    this.result=this.addOutPort(new Port(this,"result"));
-    this.number1=this.addInPort(new Port(this,"number1"));
-    this.number2=this.addInPort(new Port(this,"number2"));
+this.name='sum';
+var result=this.addOutPort(new Port(this,"result"));
+var number1=this.addInPort(new Port(this,"number1"));
+var number2=this.addInPort(new Port(this,"number2"));
 
-    this.exec= function()
-    {
-        // self.updateAnims();
-        var v=parseFloat(self.number1.get())+parseFloat(self.number2.get());
-        if(!isNaN(v)) self.result.set( v );
-    };
+function exec()
+{
+    var v=parseFloat(number1.get())+parseFloat(number2.get());
+    if(!isNaN(v)) result.set( v );
+}
 
-    this.number1.onValueChanged=this.exec;
-    this.number2.onValueChanged=this.exec;
+number1.onValueChanged=exec;
+number2.onValueChanged=exec;
 
-    this.number1.set(1);
-    this.number2.set(1);
+number1.set(1);
+number2.set(1);
