@@ -54,7 +54,7 @@ function prepare()
     if(geom.get())
     {
         reset();
-        console.log('prepare instances!!');
+        // console.log('prepare instances!!');
         var num=transformations.length;
         var arrs = [].concat.apply([], transformations);
         var matrices = new Float32Array(arrs);
@@ -63,7 +63,7 @@ function prepare()
         mesh.numInstances=num;
         mesh.addAttribute('instMat',matrices,16);
 
-        console.log(num+' instances !',arrs.length);
+        // console.log(num+' instances !',arrs.length);
     }
 
 }
@@ -163,7 +163,7 @@ function reset()
 
     }
 
-    console.log( transformations);
+    // console.log( transformations);
 }
 
 size.set(40);
