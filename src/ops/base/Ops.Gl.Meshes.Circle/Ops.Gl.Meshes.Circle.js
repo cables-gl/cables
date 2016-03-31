@@ -13,6 +13,8 @@ this.steps=this.addInPort(new Port(this,"steps",OP_PORT_TYPE_VALUE,{type:"int"})
 this.steps.val=0.0;
 this.invertSteps=this.addInPort(new Port(this,"invertSteps",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 this.invertSteps.val=false;
+var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+geomOut.ignoreValueSerialize=true;
 
 
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -152,7 +154,8 @@ function calc()
           oldPosYIn=posyIn;
         }
     }
-
+    geomOut.set(null);
+    geomOut.set(geom);
     mesh.setGeom(geom);
 }
 

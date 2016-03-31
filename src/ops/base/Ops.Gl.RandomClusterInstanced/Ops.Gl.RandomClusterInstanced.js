@@ -129,9 +129,9 @@ function reset()
     {
         randomsFloats.push(Math.seededRandom());
         randoms.push(vec3.fromValues(
-            scaleX.get()*(Math.seededRandom()-0.5)*size.get(),
-            scaleY.get()*(Math.seededRandom()-0.5)*size.get(),
-            scaleZ.get()*(Math.seededRandom()-0.5)*size.get()
+            scaleX.get()*((Math.seededRandom()-0.5)*size.get()),
+            scaleY.get()*((Math.seededRandom()-0.5)*size.get()),
+            scaleZ.get()*((Math.seededRandom()-0.5)*size.get())
             ));
         randomsRot.push(vec3.fromValues(
             Math.seededRandom()*360*CGL.DEG2RAD,
@@ -162,12 +162,8 @@ function reset()
         transformations.push( Array.prototype.slice.call(m) );
 
     }
-    
-    
-    
+
     console.log( transformations);
-
-
 }
 
 size.set(40);
@@ -178,5 +174,6 @@ size.onValueChange(prepare);
 scaleX.onValueChange(prepare);
 scaleZ.onValueChange(prepare);
 scaleY.onValueChange(prepare);
+geom.onValueChange(prepare);
 
 num.set(100);
