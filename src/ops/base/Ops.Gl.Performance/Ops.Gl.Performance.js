@@ -39,7 +39,7 @@ var ctx = fontImage.getContext('2d');
 
 var text='';
 
-ctx.font = "13px arial";
+ctx.font = "12px monospace";
 ctx.fillStyle = 'white';
 
 var frames=0;
@@ -94,6 +94,10 @@ function refresh()
 
         text=self.patch.config.glCanvasId+' fps: '+fps;
         fpsStartTime=Date.now();
+        if(CGL.profileShaderCompiles>0)text+=' shader compile!';
+        if(CGL.profileShaderGetUniform>0)text+=' shader get uniforms!';
+
+
 
         var count=0;
         for(var i=queue.length;i>queue.length-queue.length/3;i--)
@@ -112,12 +116,13 @@ function refresh()
         avgMs/=count;
         avgMsChilds/=count;
 
-        text2='frame: '+Math.round(avgMs*100)/100+' ms';
-        
-        text3='child ops: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) uniforms/s: '+CGL.profileUniformCount+' / '+CGL.profileShaderGetUniform;
+        text2='frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
+        text3='uni/s: '+CGL.profileUniformCount;
+
         if(selfTime>=1.25) text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         CGL.profileUniformCount=0;
         CGL.profileShaderGetUniform=0;
+        CGL.profileShaderCompiles=0;
 
     }
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -126,19 +131,19 @@ function refresh()
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
 
-    ctx.fillStyle="#aaaaaa";
+    ctx.fillStyle="#555555";
     for(var k=0;k<512;k++)
     {
         ctx.fillRect(k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
     }
 
-    ctx.fillStyle="#ffffff";
+    ctx.fillStyle="#aaaaaa";
     for(k=0;k<512;k++)
     {
         ctx.fillRect(k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
     }
     
-    ctx.fillStyle="#ffff00";
+    ctx.fillStyle="#cccccc";
     ctx.fillText(text, 10, 20);
     ctx.fillText(text2, 10, 35);
     ctx.fillText(text3, 10, 50);

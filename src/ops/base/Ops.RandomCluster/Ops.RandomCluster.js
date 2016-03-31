@@ -25,6 +25,7 @@ scaleY.set(1);
 scaleZ.set(1);
 
 var transVec=vec3.create();
+var mat=mat4.create();
 
 function doRender()
 {
@@ -37,6 +38,8 @@ function doRender()
         mat4.rotateX(cgl.mvMatrix,cgl.mvMatrix, randomsRot[i][0]);
         mat4.rotateY(cgl.mvMatrix,cgl.mvMatrix, randomsRot[i][1]);
         mat4.rotateZ(cgl.mvMatrix,cgl.mvMatrix, randomsRot[i][2]);
+        // mat4.fromRotationTranslation(mat, randomsRot[i], randoms[i]);
+        // mat4.multiply(cgl.mvMatrix, cgl.mvMatrix, mat);
 
         idx.set(i);
         rnd.set(randomsFloats[i]);
@@ -65,6 +68,13 @@ function reset()
             scaleY.get()*(Math.seededRandom()-0.5)*size.get(),
             scaleZ.get()*(Math.seededRandom()-0.5)*size.get()
             ));
+
+        // var q=quat.create();            
+        // quat.rotateX(q, q, Math.seededRandom()*360*CGL.DEG2RAD);
+        // quat.rotateY(q, q, Math.seededRandom()*360*CGL.DEG2RAD);
+        // quat.rotateZ(q, q, Math.seededRandom()*360*CGL.DEG2RAD);
+    
+        // randomsRot.push(q);
         randomsRot.push(vec3.fromValues(
             Math.seededRandom()*360*CGL.DEG2RAD,
             Math.seededRandom()*360*CGL.DEG2RAD,
