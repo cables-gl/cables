@@ -13,11 +13,11 @@ this.steps=this.addInPort(new Port(this,"steps",OP_PORT_TYPE_VALUE,{type:"int"})
 this.steps.val=0.0;
 this.invertSteps=this.addInPort(new Port(this,"invertSteps",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 this.invertSteps.val=false;
+
+this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
-
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 this.render.onTriggered=function()
 {
