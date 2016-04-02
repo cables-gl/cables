@@ -43,6 +43,49 @@ function findFilesInDir(startPath,filter) {
 }
 
 /**
+ * Checks if an array contrains an element
+ */
+function arrayContains(arr, element) {
+    return (arr.indexOf(element) > -1);
+}
+
+var opCategories = [];
+
+/**
+ * Checks if there is already an op-category in SUMMARY.md, if not creates one
+ */
+function createOpCategory(category, indents) {
+  if(!arrayContains(opCategories, category)) {
+      console.log("Creating op category: " + category);
+      var text = "";
+      for (var i=0; i<indents; i++) {
+        text += "\t";
+      }
+      text += "* [" + category + "](" + "chapter_readmes" + "/" + category.toLowerCase() + "/Readme.md" + ")\n"; // e.g. "* [WebAudio](chapter_readmes/webaudio/Readme.md)"
+      fs.appendFileSync('SUMMARY.md', text);
+      opCategories.push(category);
+  }
+}
+
+/**
+ * Creates a new array without the "v2" / "V2" part of an ops name.
+ * @param opArr {Array}: The single parts of an ops name, e.g. ["Ops", "WebAudio", "Bang", "v2"]
+ * @return {Array}: New Array with the op-name-components, e.g. ["Ops", "WebAudio", "Bang"]
+ */
+function stripVersionPartFromOp(opArr) {
+  var newArr = [];
+  for(var i=0; i<opArr.length; i++) {
+    // strip the "v2" part
+    if(i==opArr.length-2) {
+      newArr.push(opArr[i]);
+      return newArr;
+    } else {
+      newArr.push(opArr[i]);
+    }
+  }
+}
+
+/**
  * Adds a link-entry of the op to the file "SUMMARY.md".
  * Note: Will not work on Windows because of different path separator.
  * @param {String} filename: Complete path, e.g. "/Users/me/gitbook/SomeFile.md"
@@ -52,8 +95,40 @@ function createOpEntry(filename) {
   var mdFilename = filename.substring(lastSlash+1); // e.g. "SomeFile.md""
   var lastDot = mdFilename.lastIndexOf(".");
   var suffix = mdFilename.substring(0, lastDot); // e.g. "SomeFile"
+  var parts = suffix.split('.');
+  // if op has a version number (e.g. "v2" / "V2", strip it)
+  if(/^[vV]{1}\d{1,2}$/.test(parts[parts.length-1])) { // matches "v2" / "V2"
+    parts = stripVersionPartFromOp(parts);
+    console.log("New Parts: " + parts);
+  }
   fsSync.copy(filename, OPS_TMP_DIR + "/" + suffix + "/" + mdFilename);
-  var text = "\t* [" + suffix + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n"; // e.g. "* [Ops.And](ops_base/Ops.And/Ops.And.md)"
+  switch(parts.length) {
+    case 0: // no name
+    case 1: // e.g. "Ops"
+      console.log("Op " + filename + " has a bad name! Ignoring");
+      break;
+      return;
+    case 2: // e.g. "Ops.And", no namespace
+      var text = "\t* [" + parts[1] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
+      break;
+    case 3: // e.g. "Ops.Audio.Bang"
+      createOpCategory(parts[1], 1);
+      var text = "\t\t* [" + parts[2] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
+      break;
+    case 4: // e.g. "Ops.Devices.Keyboard.KeyPressLearn"
+      createOpCategory(parts[1], 1);
+      createOpCategory(parts[2], 2);
+      var text = "\t\t\t* [" + parts[3] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
+      break;
+    case 5:  // e.g. "Ops.Devices.Special.Keyboard.KeyPressLearn"
+      createOpCategory(parts[1], 1);
+      createOpCategory(parts[2], 2);
+      createOpCategory(parts[3], 3);
+      var text = "\t\t\t\t* [" + parts[4] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
+      break;
+    default:
+      return;
+  }
   fs.appendFileSync('SUMMARY.md', text);
 }
 
