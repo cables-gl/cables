@@ -99,7 +99,6 @@ function createOpEntry(filename) {
   // if op has a version number (e.g. "v2" / "V2", strip it)
   if(/^[vV]{1}\d{1,2}$/.test(parts[parts.length-1])) { // matches "v2" / "V2"
     parts = stripVersionPartFromOp(parts);
-    console.log("New Parts: " + parts);
   }
   fsSync.copy(filename, OPS_TMP_DIR + "/" + suffix + "/" + mdFilename);
   switch(parts.length) {
