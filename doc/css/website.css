@@ -1,3 +1,8 @@
 .chapter b {
   display: none;
 }
+
+.book .book-summary ul.summary li a{
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
