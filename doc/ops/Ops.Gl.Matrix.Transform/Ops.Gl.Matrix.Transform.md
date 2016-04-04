@@ -1,12 +1,12 @@
-# ClearColor
+# Transform
 
-*Ops.Gl.ClearColor*  
+*Ops.Gl.Matrix.Transform*  
 
-Sets the background color of the canvas.
+Can be used to move or rotate objects. All elements which are drawn afterwards will be affected by this.
 
 ## Input
 
-### R [Value]
+### Render
 
 Red color value, between `0.0` and `1.0`
 
