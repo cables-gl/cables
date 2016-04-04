@@ -62,7 +62,7 @@ var srcVert=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'vec4 col;'
-    
+
     .endl()+'   #ifdef WIREFRAME_FILL'
     .endl()+'       float v=opacity*(1.0-edgeFactor())*0.95;'
     .endl()+'       col = vec4(v*r,v*g,v*b,opacity);'
@@ -72,10 +72,10 @@ var srcVert=''
     .endl()+'       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
     .endl()+'#endif'
     // .endl()+'col.xyz=baycentric;'
-    
-    
+
+
     .endl()+'gl_FragColor =col;'
-    
+
     .endl()+'}';
 
 var doRender=function()
@@ -120,17 +120,9 @@ shader.wireframe=true;
         else b.uniform.setValue(b.get());
     };
 
-    var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    a.onValueChanged=function()
-    {
-        if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
-        else a.uniform.setValue(a.get());
-    };
-
     r.set(Math.random());
     g.set(Math.random());
     b.set(Math.random());
-    a.set(1.0);
 }
 
 
