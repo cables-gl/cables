@@ -74,28 +74,32 @@ Use the following structure:
 
 Some general infos about the op – what is it for? What would you use it for? Maybe also post a link to an example project here. You should make clear in a few sentences what matters.
 
-## Ports
+## Input
 
-### Input
-
-## In Port 1 [Function]
+### In Port 1 [Function]
 
 This is the description of an input port named `In Port 1`, just tell a bit what it is for, maybe some links to external references.
 If the port only works in a specific range, e.g. `[0, 10]` let other users now.
 
-## In Port 2 [Value]
+### In Port 2 [Value]
 
 ...
 
-### Output
+## Output
 
 ### In Port 2 [Value]
 
 This is the description of an output port named `Out Port 1`.
+
+## Example
+
+- [Some Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
+- [Another Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
 ```
 
 The optional namespace in the op-name can be used to bundle ops together, e.g. for a library – `Ops.Users.Username.MyLib.MyOp`.  `Username` should be written exactly as your registered *cables*-username, so e.g. `johanna`. No need to capitalize it.
-Don’t forget to name the port type, e.g. `In Port 2 [Value]` or `In Port 2 [Function]`. Also It is important that the headlines for the port descriptions match the ones in your code 100%, so we can extract this information and present e.g. when hovering over a port.
+Don’t forget to name the port type, e.g. `In Port 2 [Value]` or `In Port 2 [Function]`. Also It is important that the headlines for the port descriptions match the ones in your code 100%, so we can extract this information and present e.g. when hovering over a port.  
+Every op should have a minimal example on how to use it. Just link to public patches / examples which use your new op.
 
 ### Pull Requests / Public Ops
 
