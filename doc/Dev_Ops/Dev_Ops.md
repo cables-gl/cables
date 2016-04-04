@@ -56,7 +56,9 @@ UpperCamelCase, e.g. `KeyPressLearn` (`Ops.Devices.Keyboard.KeyPressLearn`). If 
 #### Port Names
 
 Use capitals with spaces for the user-visible names in the op-settings, e.g. `Inner Radius`.  
-Feel free to use whatever you prefer in code, most common is lowerCamelCase, e.g. `innerRadius`.
+Feel free to use whatever you prefer in code, most common is lowerCamelCase, e.g. `innerRadius`.  
+If your op has one main-port which is needed to trigger it, call it `Execute`, if your op has an output-port to trigger other ops call it `Trigger`
+
 
 ```javascript
 var innerRadius = this.addInPort( new Port( this, "Inner Radius", OP_PORT_TYPE_VALUE ));
