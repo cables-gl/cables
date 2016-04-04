@@ -17,3 +17,16 @@
 - Run `npm run start` to generate op-docu
 - Check `http://localhost:4000`
 - When everything looks good, build static files with `gitbook build`
+
+## Editing the index-file (SUMMARY.md)
+
+- `SUMMARY.md` will be partly generated (op-documentations will be added by a script), if you want to make changes to `SUMMARY.md`, you need to edit `SUMMARY_base.md`
+
+## book.json
+
+This is the config-file for the gitbook-documentation, where e.g. plugins are loaded.  
+Make sure to have a newline on the end!
+
+## Exporting PDF / Epub
+
+>You must have the Calibre eBook reader/manager installed AND the command-line tools installed. To install the Calibre command-line tools from the Mac version, from the menu select: calibre - Preferences - Miscellaneous - Install command line tools
