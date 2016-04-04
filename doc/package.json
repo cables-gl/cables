@@ -10,6 +10,7 @@
   "author": "Tim Pulver",
   "license": "ISC",
   "dependencies": {
-    "fs-sync": "^1.0.2"
+    "fs-sync": "^1.0.2",
+    "gitbook-plugin-ga": "^1.0.1"
   }
 }
