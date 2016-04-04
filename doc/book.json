@@ -1,0 +1,11 @@
+{ 
+	"styles": {
+		"website": "css/website.css"
+    },
+	"plugins": ["ga"],
+	"pluginsConfig": {
+        "ga": {
+            "token": "UA-72727305-3"
+        }
+    }
+}
