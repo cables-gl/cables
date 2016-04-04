@@ -2,7 +2,7 @@
 
 ## Basic Setup
 
-```
+```javascript
 this.name = 'my very special op';
 ```
 
@@ -12,7 +12,7 @@ See [Creating Ports](../dev_Creating_Ports/Creating_Ports.md)
 
 ## Logging
 
-```
+```javascript
 this.log( 'hello world' );.   
 ```
 
@@ -25,7 +25,7 @@ Do **not** use `console.log()`!
 
 If you want to update an UI-element (e.g. when manually setting a value port) you need to call `showOpParams`:
 
-```
+```javascript
 myPort.set(12345);
 if(CABLES.UI){
 	gui.patch().showOpParams(op);
@@ -41,7 +41,7 @@ These attributes are visible in the op parameter panel and can be used for debug
 - `warning`: Shows a warning message in op parameter panel
 - `error`: Shows an error message in op parameter panel and colors the op red
 
-```
+```javascript
 this.uiAttr( { 'info': 'Something happened, not too serious but still...' } );
 this.uiAttr( { 'warning': 'Something happened, not too serious but still...' } );
 this.uiAttr( { 'error': 'Big problem here, this is serious!' } );
@@ -51,14 +51,14 @@ this.uiAttr( { 'error': 'Big problem here, this is serious!' } );
 
 #### Op Names
 
-UpperCamelCase, e.g. `KeyPressLearn` (`Ops.Devices.Keyboard.KeyPressLearn`)
+UpperCamelCase, e.g. `KeyPressLearn` (`Ops.Devices.Keyboard.KeyPressLearn`). If your op has an abbreviation in it with multiple big letters in a row (e.g. `MIDI`), write only the first letter in capitals, e.g. `Ops.WebAudio.MidiLearn`.
 
 #### Port Names
 
 Use capitals with spaces for the user-visible names in the op-settings, e.g. `Inner Radius`.  
 Feel free to use whatever you prefer in code, most common is lowerCamelCase, e.g. `innerRadius`.
 
-```
+```javascript
 var innerRadius = this.addInPort( new Port( this, "Inner Radius", OP_PORT_TYPE_VALUE ));
 ```
 
@@ -67,10 +67,10 @@ var innerRadius = this.addInPort( new Port( this, "Inner Radius", OP_PORT_TYPE_V
 The op documentation should be written in [markdown](https://daringfireball.net/projects/markdown/) language.
 Use the following structure:
 
-```
+```markdown
 # MyOb
 
-*Ops.users.yourname.[OPTIONAL_NAMESPACE].MyOp*  
+*Ops.Users.Username.[OPTIONAL_NAMESPACE].MyOp*  
 
 Some general infos about the op – what is it for? What would you use it for? Maybe also post a link to an example project here. You should make clear in a few sentences what matters.
 
@@ -78,34 +78,34 @@ Some general infos about the op – what is it for? What would you use it for? M
 
 ### Input
 
-## in port 1 [Function]
+## In Port 1 [Function]
 
-This is the description of an input port named `in port 1`, just tell a bit what it is for, maybe some links to external references.
+This is the description of an input port named `In Port 1`, just tell a bit what it is for, maybe some links to external references.
 If the port only works in a specific range, e.g. `[0, 10]` let other users now.
 
-## in port 2 [Value]
+## In Port 2 [Value]
 
 ...
 
 ### Output
 
-### in port 2 [Value]
+### In Port 2 [Value]
 
-This is the description of an output port named `out port 1`.
+This is the description of an output port named `Out Port 1`.
 ```
 
-The optional namespace in the op-name can be used to bundle ops together, e.g. for a library – `Ops.users.yourname.MyLib.MyOp`.  
-Don’t forget to name the port type, e.g. `in port 2 [Value]` or `in port 2 [Function]`
+The optional namespace in the op-name can be used to bundle ops together, e.g. for a library – `Ops.Users.Username.MyLib.MyOp`.  `Username` should be written exactly as your registered *cables*-username, so e.g. `johanna`. No need to capitalize it.
+Don’t forget to name the port type, e.g. `In Port 2 [Value]` or `In Port 2 [Function]`. Also It is important that the headlines for the port descriptions match the ones in your code 100%, so we can extract this information and present e.g. when hovering over a port.
 
 ### Pull Requests / Public Ops
 
-If you think one of your ops should be part of the *cables*-core, feel free to make a pull request via Github. Your op should be tested and working of course. Put your newly created op into a folder with the op-name, e.g. `Ops.users.yourname.MyLib.MyOp` and put it into the `src/ops/base`-folder. Every op must have a description (see above). The folder structure should look like this:
+If you think one of your ops should be part of the *cables*-core, feel free to make a pull request via Github. Your op should be tested and working of course. Put your newly created op into a folder with the op-name, e.g. `Ops.Users.Username.MyLib.MyOp` and put it into the `src/ops/base`-folder. Every op must have a description (see above). The folder structure should look like this:
 
-```
+```javascript
 src/ ops/base/
     ...
     Ops.MyLib.MyOp/
-        Ops.users.yourname.MyLib.MyOp.js
-        Ops.users.yourname.MyLib.MyOp.md
+        Ops.Users.Username.MyLib.MyOp.js
+        Ops.Users.Username.MyLib.MyOp.md
 ```
 We don’t want to bloat the cables-core, so some ops are better off in the public ops directory (you can make an op public from within *cables*.

@@ -6,25 +6,27 @@ Create a new patch by clicking on `Patch` —> `New`. Now we need to create a ne
 
 The editor will show the following code:  
 
-`this.name="Ops.user.yourname.HelloOp";`
+```javascript
+this.name="Ops.user.yourname.HelloOp";
+```
 
 `HelloOp` is the short-name of your op and `Ops.user.yourname.HelloOp` the unique name. If you make an op public,it can be found under the long name.
 
 Now add the following code:    
 
-```
+```javascript
 var myInPort = this.addInPort( new Port( this, "My In Port", OP_PORT_TYPE_VALUE ) );
 ```
 
 We have now defined a new port called `myInPort` with the visible text label `My In Port`, which can be used to enter a value in op-settings or act as input from another op. In this example we will just forward the input value to an out-port. So let’s define it:
 
-```
+```javascript
 var myOutPort = this.addOutPort( new Port( this, "My Out Port", OP_PORT_TYPE_VALUE ) );
 ```
 
 If we now want to forward the value from our port `myInPort` to `myOutPort` we need to implement the function `onValueChange` which gets called every time there is a new value on the `myInPort` port. Add the following lines:
 
-```
+```javascript
 myInPort.onValueChange( function() {
     this.log('My In Port changed to:' + myInPort.get());
     myOutPort.set( myInPort.get() );
@@ -36,7 +38,7 @@ The next line writes the value to our output port. `myInPort.get()` returns the 
  
 Your op-code should look like this now:  
 
-```
+```javascript
 this.name="Ops.user.yourname.HelloOp";
 
 var myInPort = this.addInPort( new Port( this, "My In Port", OP_PORT_TYPE_VALUE ) );
@@ -58,13 +60,13 @@ If you change the `In Value` you will see the `Out Value` change as well. Now le
 
 Change this:  
 
-```
+```javascript
 myOutPort.set( myInPort.get() );
 ```
 
 to:  
 
-```
+```javascript
 myOutPort.set( 2 * myInPort.get() );
 ```
 

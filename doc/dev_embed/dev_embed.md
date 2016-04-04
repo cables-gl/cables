@@ -17,7 +17,7 @@
 
 This example shows two projects on one page. The projects are loaded one after another.
 
-```
+```javascript
 function loadScene1()
 {
     var scene=new Scene(
