@@ -1,6 +1,5 @@
 # Summary
 
-
 * [Tutorials](chapter_readmes/tutorials/Readme.md)
 	* [How to use cables](chapter_readmes/how_to_use_cables/Readme.md)
 		* [Keyboard Shortcuts](keys/keys.md)
@@ -15,9 +14,11 @@
 	* [Intermediate](chapter_readmes/intermediate/Readme.md)
 		* [Image Compositions](image_composition/image_composition.md)
 		* [Post-processing 3D scenes](post-processing_3d_scenes/post-processing_3d_scenes.md)
-	* [Export / Embedding Patches]()
+
+	* [Export / Embedding](chapter_readmes/export/Readme.md)
 		* [Embedding](dev_embed/dev_embed.md)
-	* [Writing Ops]()
+
+	* [Writing Ops](chapter_readmes/writing_ops/Readme.md)
 		* [Hello Op](dev_hello_op/dev_hello_op.md)
 		* [Op Development](dev_ops/dev_ops.md)
 		* [Ports](dev_creating_ports/dev_creating_ports.md)
