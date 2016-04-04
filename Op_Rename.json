@@ -1,0 +1,22 @@
+{
+  "Ops.Gl.ClearColor": {
+    "ports": [
+      {
+        "from": "r",
+        "to": "Red"
+      },
+      {
+        "from": "g",
+        "to": "Green"
+      },
+      {
+        "from": "b",
+        "to": "Blue"
+      },
+      {
+        "from": "a",
+        "to": "Alpha"
+      }      
+    ]
+  }
+}
