@@ -1,6 +1,5 @@
 # Summary
 
-
 * [Tutorials](chapter_readmes/tutorials/Readme.md)
 	* [How to use cables](chapter_readmes/how_to_use_cables/Readme.md)
 		* [Keyboard Shortcuts](keys/keys.md)
@@ -15,9 +14,11 @@
 	* [Intermediate](chapter_readmes/intermediate/Readme.md)
 		* [Image Compositions](image_composition/image_composition.md)
 		* [Post-processing 3D scenes](post-processing_3d_scenes/post-processing_3d_scenes.md)
-	* [Export / Embedding Patches]()
+
+	* [Export / Embedding](chapter_readmes/export/Readme.md)
 		* [Embedding](dev_embed/dev_embed.md)
-	* [Writing Ops]()
+
+	* [Writing Ops](chapter_readmes/writing_ops/Readme.md)
 		* [Hello Op](dev_hello_op/dev_hello_op.md)
 		* [Op Development](dev_ops/dev_ops.md)
 		* [Ports](dev_creating_ports/dev_creating_ports.md)
@@ -30,8 +31,11 @@
 	* [Devices](chapter_readmes/devices/Readme.md)
 		* [Keyboard](chapter_readmes/keyboard/Readme.md)
 			* [KeyPressLearn](ops/Ops.Devices.Keyboard.KeyPressLearn/Ops.Devices.Keyboard.KeyPressLearn.md)
+	* [Gl](chapter_readmes/gl/Readme.md)
+		* [ClearColor](ops/Ops.Gl.ClearColor/Ops.Gl.ClearColor.md)
+		* [Renderer](ops/Ops.Gl.Renderer/Ops.Gl.Renderer.md)
 	* [Math](chapter_readmes/math/Readme.md)
-		* [Random](ops/Ops.Math.Random.v2/Ops.Math.Random.v2.md)
+		* [Random](ops/Ops.Math.Random/Ops.Math.Random.md)
 	* [WebAudio](chapter_readmes/webaudio/Readme.md)
 		* [Convolver](ops/Ops.WebAudio.Convolver/Ops.WebAudio.Convolver.md)
 		* [DynamicsCompressor](ops/Ops.WebAudio.DynamicsCompressor/Ops.WebAudio.DynamicsCompressor.md)
