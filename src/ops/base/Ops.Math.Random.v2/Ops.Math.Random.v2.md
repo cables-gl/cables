@@ -1,10 +1,10 @@
-# Ops.Math.Random.v2
+# Ops.Math.Random
 
 ## In Ports
 
 ### exe
 
-Connect e.g. to `trigger` port of `renderer` to continuously send out values.
+Connect e.g. to `trigger` port of [Renderer](../Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op to continuously send out values.
 
 ### min
 
