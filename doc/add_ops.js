@@ -11,6 +11,10 @@ var path = require("path");
 
 var OP_DIR = "ops_base"; // a symlink to the ops/base directory should be in the same folder as the script
 var OPS_TMP_DIR = "ops";
+var CATEGORY_DESCRIPTION_FOLDER = "chapter_readmes"
+
+var versionRegEx = new RegExp(/^[vV]{1}\d{1,2}$/); // e.g. "v2" / "V2"
+var opWithVersionRegEx = new RegExp(/.\.[vV]{1}\d{1,2}$/);
 
 /**
  * Find all files recursively in specific folder with specific extension, e.g:
@@ -43,6 +47,27 @@ function findFilesInDir(startPath,filter) {
 }
 
 /**
+ * Returns true if the op name (e.g. "Ops.Math.Random.V2") contains
+ * a version at the end ("V2")
+ */
+function isVersionedOp(op) {
+  return opWithVersionRegEx.test(op);
+}
+
+/**
+ * Returns an op-name without version-number at the end
+ * (e.g. "Ops.Math.Random.V2" -> "Ops.Math.Random")
+ */
+function getUnversionedOpName(op) {
+  if( isVersionedOp(op) ) {
+    var iDot = op.lastIndexOf(".");
+    var strippedOpName = op.substring(0, iDot);
+    return strippedOpName;
+  }
+  return op;
+}
+
+/**
  * Checks if an array contrains an element
  */
 function arrayContains(arr, element) {
@@ -64,6 +89,15 @@ function createOpCategory(category, indents) {
       text += "* [" + category + "](" + "chapter_readmes" + "/" + category.toLowerCase() + "/Readme.md" + ")\n"; // e.g. "* [WebAudio](chapter_readmes/webaudio/Readme.md)"
       fs.appendFileSync('SUMMARY.md', text);
       opCategories.push(category);
+      // create category markdown file
+      var folder = CATEGORY_DESCRIPTION_FOLDER + "/" + category.toLowerCase().replace(' ', '_');
+      var filename =  "Readme.md";
+      var relFilename = folder + "/" + filename;
+      var defaultReadmeText = "#" + category + "\n\nTODO";
+      if(!fs.existsSync(relFilename)) {
+          if( !fs.existsSync(folder) ) { fs.mkdirSync(folder); }
+          fs.writeFileSync(folder + "/" + filename, defaultReadmeText);
+      }
   }
 }
 
@@ -73,6 +107,7 @@ function createOpCategory(category, indents) {
  * @return {Array}: New Array with the op-name-components, e.g. ["Ops", "WebAudio", "Bang"]
  */
 function stripVersionPartFromOp(opArr) {
+  if( !versionRegEx.test(opArr) ) { return opArr; } // nothing to do here
   var newArr = [];
   for(var i=0; i<opArr.length; i++) {
     // strip the "v2" part
@@ -97,8 +132,15 @@ function createOpEntry(filename) {
   var suffix = mdFilename.substring(0, lastDot); // e.g. "SomeFile"
   var parts = suffix.split('.');
   // if op has a version number (e.g. "v2" / "V2", strip it)
-  if(/^[vV]{1}\d{1,2}$/.test(parts[parts.length-1])) { // matches "v2" / "V2"
-    parts = stripVersionPartFromOp(parts);
+  //if(versionRegEx.test(parts[parts.length-1])) { // matches "v2" / "V2"
+  if( opWithVersionRegEx.test(suffix) ) {
+    console.log("Op With Version: " + suffix);
+    suffix = getUnversionedOpName(suffix);
+    console.log("New suffix: " + suffix);
+    parts = suffix.split('.');
+    mdFilename = suffix + ".md";
+    console.log("New filename: " + mdFilename);
+    console.log("New parts: " + parts);
   }
   fsSync.copy(filename, OPS_TMP_DIR + "/" + suffix + "/" + mdFilename);
   switch(parts.length) {
