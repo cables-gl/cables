@@ -6,6 +6,10 @@ In order to get informed on port-value-changes, function-triggers (also see [Por
 
 ## Port Callbacks
 
+### onInit
+
+There is no explicit callback for initialization, all code in your op is automatically executed.
+
 ### onValueChange
 
 Can be implemented for `OP_PORT_TYPE_VALUE`, `OP_PORT_TYPE_ARRAY`, `OP_PORT_TYPE_OBJECT`.  

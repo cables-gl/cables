@@ -19,22 +19,6 @@ this.log( 'hello world' );.
 Do **not** use `console.log()`!   
 `this.log()` is not shown if the patch is embedded and the silent parameter is set, also you get a reference to the op which is producing the log-message.
 
-## Callbacks
-
-### Init
-
-There is no explicit callback for initialization, all code in your op is automatically executed.
-
-### onDelete
-
-Once the op has been deleted, `onDelete` is called. Here you can clean up after yourself if you need to.
-
-```
-this.onDelete(function(){
-	// clean up...
-});
-```
-
 ## GUI
 
 ### Updating value-port UI-elements 
@@ -62,6 +46,22 @@ this.uiAttr( { 'info': 'Something happened, not too serious but still...' } );
 this.uiAttr( { 'warning': 'Something happened, not too serious but still...' } );
 this.uiAttr( { 'error': 'Big problem here, this is serious!' } );
 ```
+
+### Naming Conventions
+
+#### Op Names
+
+UpperCamelCase, e.g. `KeyPressLearn` (`Ops.Devices.Keyboard.KeyPressLearn`)
+
+#### Port Names
+
+Use capitals with spaces for the user-visible names in the op-settings, e.g. `Inner Radius`.  
+Feel free to use whatever you prefer in code, most common is lowerCamelCase, e.g. `innerRadius`.
+
+```
+var innerRadius = this.addInPort( new Port( this, "Inner Radius", OP_PORT_TYPE_VALUE ));
+```
+
 ### Op Documentation
 
 The op documentation should be written in [markdown](https://daringfireball.net/projects/markdown/) language.
