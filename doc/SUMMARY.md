@@ -15,6 +15,13 @@
 	* [Intermediate](chapter_readmes/intermediate/Readme.md)
 		* [Image Compositions](image_composition/image_composition.md)
 		* [Post-processing 3D scenes](post-processing_3d_scenes/post-processing_3d_scenes.md)
+	* [Export / Embedding Patches]()
+		* [Embedding](dev_embed/dev_embed.md)
+	* [Writing Ops]()
+		* [Hello Op](dev_hello_op/dev_hello_op.md)
+		* [Op Development](dev_ops/dev_ops.md)
+		* [Ports](dev_creating_ports/dev_creating_ports.md)
+		* [Callbacks](dev_callbacks/dev_callbacks.md)
 
 * [Ops](chapter_readmes/ops/Readme.md)
 	* [Audio](chapter_readmes/audio/Readme.md)
