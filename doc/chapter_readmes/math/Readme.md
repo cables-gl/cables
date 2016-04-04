@@ -1,3 +1,3 @@
 #Math
 
-TODO
+Math ops, used for calculations.
