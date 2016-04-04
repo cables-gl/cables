@@ -18,5 +18,33 @@
         "to": "Alpha"
       }      
     ]
+  },
+  "Ops.Gl.Meshes.Cone": {
+    "ports": [
+      {
+        "from": "slices",
+        "to": "Segments"
+      }      
+    ]
+  },
+  "Ops.Gl.Shader.WireframeMaterial": {
+    "ports": [
+      {
+        "from": "diffuse r",
+        "to": "Red"
+      },
+      {
+        "from": "diffuse g",
+        "to": "Green"
+      },
+      {
+        "from": "diffuse b",
+        "to": "Blue"
+      },
+      {
+        "from": "diffuse a",
+        "to": "Alpha"
+      }      
+    ]
   }
 }
