@@ -31,7 +31,7 @@ Every time a connected op calls `myOutPort.trigger()` the connected in-ports’ 
 If your op needs to update its values continuously it should have an input port of type `OP_PORT_TYPE_FUNCTION`, which you can then connect to the [op: Renderer](../../src/ops/base/Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op e.g..
 
 ```javascript
-var exe = this.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION ) );
+var exe = op.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION ) );
 
 exe.onTriggered( function() {
 	// do something
@@ -70,7 +70,7 @@ this.onDelete( function() {
 Gets called when the whole patch is loaded / all ops are linked etc. You mostly don’t need this, as op-specific init-code can just be put in your op-code without a callback.
 
 ```javascript
-this.onLoaded( function() {
+op.onLoaded( function() {
 	// do something
 });
 ```
@@ -80,7 +80,7 @@ this.onLoaded( function() {
 Whenever the canvas is resized `onResize`gets called.
 
 ```javascript
-this.onResize( function() {
+op.onResize( function() {
 	// adapt to the new size
 });
 ```

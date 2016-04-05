@@ -39,7 +39,7 @@ exec.onTrigger( function(){
 By adding `{ "display": "button" }` to a port-definition a button-UI element will be added to the op settings pane to manually trigger the port.
 
 ```javascript
-var tap = this.addInPort( new Port( this, "tap", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var tap = op.addInPort( new Port( this, "tap", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 ```
 
 ### Value Ports
@@ -51,12 +51,14 @@ OP_PORT_TYPE_VALUE
 Value ports can hold a single value, a number (e.g. -1, 2.45), a bool (true, false), a string ("foo bar"), a string with multiple lines or a certain value from a dropdown-input. 
 
 ```javascript
-var inPort = this.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
-var outPort = this.addOutPort( new Port( this, "out port", OP_PORT_TYPE_VALUE ) );
+var inPort = op.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
+var outPort = op.addOutPort( new Port( this, "out port", OP_PORT_TYPE_VALUE ) );
 ```
 
 - Use `outPort.set(x);` / `inPort.set(x);` to change the value of a port
 - Use `inPort.get();` to get the current value of a port
+
+To set the default value of a port to e.g. `5` use `inPort.set(5)`.
 
 #### Parameters
 
@@ -65,10 +67,10 @@ var outPort = this.addOutPort( new Port( this, "out port", OP_PORT_TYPE_VALUE ) 
 **TODO: Implement default, right now, just remove display if you want the default UI-element `**  
 
 ```javascript
-var inPort = this.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
+var inPort = op.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
 
 inPort.onValueChange( function() {
-    this.log('in port changed to:' + inPort.get());
+    op.log('in port changed to:' + inPort.get());
 });
 ```
 
@@ -79,18 +81,18 @@ Text-input-field which can be used to enter numbers, booleans and strings.
 Used for images, audio files and so on.
 
 ```javascript
-var filename = this.addInPort( new Port( this, "file", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'image'  } ));
+var filename = op.addInPort( new Port( this, "file", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'image'  } ));
 ```
 
 The `filter` is a file filter for the assets-browser, in the example above only images will be shown. You can currently use `image` and `audio`.  
-`type: 'string'` means the port accepts a `url` as input, so you can load assets from another server without uploading them. Please note that there can be problems loading files from external servers, you should make sure that you catch any errors and inform the user by calling `this.uiAttr( { 'error': 'Could not load file!' } );`. This will color the op red and shows an error message in the op-settings.
+`type: 'string'` means the port accepts a `url` as input, so you can load assets from another server without uploading them. Please note that there can be problems loading files from external servers, you should make sure that you catch any errors and inform the user by calling `op.uiAttr( { 'error': 'Could not load file!' } );`. This will color the op red and shows an error message in the op-settings.
 
 ##### Display: Range
 
 Displays a slider in the range `[min..max]` along with a text input field. The value of the input field can be out of range, so if your op cannot handle these values you need to manually check and reset the port by calling `inPort.set(...)`.
 
 ```javascript
-var inPort = this.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 10 } ));
+var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 10 } ));
 ```
 
 ##### Display: Bool
@@ -98,13 +100,13 @@ var inPort = this.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { 'di
 ![](img/Checkbox.png)
 
 ```javascript
-var inPort = this.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 
 inPort.onValueChange( function() {
 	if( inPort.get() === true ){
-		this.log( 'Checkbox checked' );	
+		op.log( 'Checkbox checked' );	
 	} else {
-		this.log( 'Checkbox unchecked' );	
+		op.log( 'Checkbox unchecked' );	
 	}
 });
 ```
@@ -115,10 +117,10 @@ inPort.onValueChange( function() {
 ![Editor Button](img/Editor.png)
 
 ```javascript
-var text = this.addInPort( new Port( this, "text", OP_PORT_TYPE_VALUE, { display: 'editor' } ) );
+var text = op.addInPort( new Port( this, "text", OP_PORT_TYPE_VALUE, { display: 'editor' } ) );
 
 text.onValueChange( function() {
-    this.log('text changed to:' + text.get());
+    op.log('text changed to:' + text.get());
 });
 ```
 
