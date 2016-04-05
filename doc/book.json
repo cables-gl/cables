@@ -1,8 +1,11 @@
 { 
+	"title": "cables Documentation",
 	"styles": {
 		"website": "css/website.css"
     },
-	"plugins": ["ga"],
+	"plugins": [
+	  "ga"
+	],
 	"pluginsConfig": {
         "ga": {
             "token": "UA-72727305-3"
