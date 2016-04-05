@@ -142,7 +142,16 @@ function createOpEntry(filename) {
     console.log("New filename: " + mdFilename);
     console.log("New parts: " + parts);
   }
+  // Copy Markdown file
   fsSync.copy(filename, OPS_TMP_DIR + "/" + suffix + "/" + mdFilename);
+  // Copy img-folder with images
+  var lastSeparator = filename.lastIndexOf("/");
+  var imgDir = filename.substring(0, lastSeparator) + "/" + "img";
+  console.log("Image dir: " + imgDir);
+  if(fs.existsSync(imgDir)) {
+    fsSync.copy(imgDir, OPS_TMP_DIR + "/" + suffix + "/" + "img");
+  }
+  // Create markdown-entry based on the namespace (number of tabs)
   switch(parts.length) {
     case 0: // no name
     case 1: // e.g. "Ops"
