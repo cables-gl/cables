@@ -6,3 +6,11 @@
   padding-top: 4px;
   padding-bottom: 4px;
 }
+
+.book .book-header h1 a, .book .book-header h1 a:hover {
+  transition: none;
+}
+
+.book .book-header h1 {
+  opacity: 1;
+}
