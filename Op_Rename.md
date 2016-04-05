@@ -10,3 +10,28 @@ Also see [Developing Ops](doc/dev_ops/dev_ops.md) (Chapter Naming Conventions) f
 
 - Capitalize, e.g. `render` —> `Render`, most of the ops are lowercase right now, so this is needed for all ops.
 **All changes to individual ops should be done first**, because `Op_Rename.json` lists the old names (e.g. `r` —> `Red`).
+
+## Op_Rename.json
+
+Some ops need a rename:
+
+```javascript
+{
+    "op_name": "Ops.Gl.MouseWheel",
+    "op_name_new": "Ops.Devices.Mouse.MouseWheel"
+  }
+```
+
+Some ops need a port rename:
+
+```javascript
+{
+    "op_name": "Ops.Gl.Meshes.Cone",
+    "ports": [
+      {
+        "from": "slices",
+        "to": "Segments"
+      }
+    ]
+  }
+``` 

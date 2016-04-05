@@ -1,5 +1,6 @@
-{
-  "Ops.Gl.ClearColor": {
+[
+  {
+    "op_name": "Ops.Gl.ClearColor",
     "ports": [
       {
         "from": "r",
@@ -16,18 +17,20 @@
       {
         "from": "a",
         "to": "Alpha"
-      }      
+      }
     ]
   },
-  "Ops.Gl.Meshes.Cone": {
+  {
+    "op_name": "Ops.Gl.Meshes.Cone",
     "ports": [
       {
         "from": "slices",
         "to": "Segments"
-      }      
+      }
     ]
   },
-  "Ops.Gl.Shader.WireframeMaterial": {
+  {
+    "op_name": "Ops.Gl.Shader.WireframeMaterial",
     "ports": [
       {
         "from": "diffuse r",
@@ -44,7 +47,19 @@
       {
         "from": "diffuse a",
         "to": "Alpha"
-      }      
+      }
     ]
+  },
+  {
+    "op_name": "Ops.Gl.Mouse",
+    "op_name_new": "Ops.Devices.Mouse.Mouse"
+  },
+  {
+    "op_name": "Ops.Gl.MouseRelative",
+    "op_name_new": "Ops.Devices.Mouse.MouseRelative"
+  },
+  {
+    "op_name": "Ops.Gl.MouseWheel",
+    "op_name_new": "Ops.Devices.Mouse.MouseWheel"
   }
-}
+]
