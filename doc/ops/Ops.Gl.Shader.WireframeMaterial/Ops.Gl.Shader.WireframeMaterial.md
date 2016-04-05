@@ -2,11 +2,13 @@
 
 *Ops.Gl.Shader.WireframeMaterial*  
 
+Renders wireframes
+
+![Sphere Wireframe Image](img/sphere_wireframe.png)
+
 ## Input
 
 ### Render [Function]
-
-Renders a circle to the canvas.
 
 ### Fill [Value]
 
@@ -40,4 +42,5 @@ Every time `WireframeMaterial` is triggered, it will also trigger all connected 
 
 ## Example
 
-[Cone Example](https://cables.gl/ui/#/project/5702a134df94c65f116d27ed)
+- [Cone Example](https://cables.gl/ui/#/project/5702a134df94c65f116d27ed)
+- [Sphere Rotation Example](https://cables.gl/ui/#/project/5702a838df94c65f116d27ef)

@@ -38,4 +38,6 @@ Every time `Circle` is triggered, it will also trigger all connected ops.
 
 ## Example
 
-[Circle Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
+- [Circle Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
+- [Circle Example 2](https://cables.gl/ui/#/project/56f2ae421c53758d5cf03cf7)
+- [Circle with Mouse Interaction](https://cables.gl/ui/#/project/57038bd4caa091505d4d6d8f)
