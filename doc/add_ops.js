@@ -9,7 +9,7 @@ var path = require("path");
  * TODO: Create categories for e.g. "WebAudio".
  */
 
-var OP_DIR = "ops_base"; // a symlink to the ops/base directory should be in the same folder as the script
+var OP_DIR = "../src/ops/base"; // a symlink to the ops/base directory should be in the same folder as the script
 var OPS_TMP_DIR = "ops";
 var CATEGORY_DESCRIPTION_FOLDER = "chapter_readmes"
 
