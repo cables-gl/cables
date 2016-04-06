@@ -52,9 +52,6 @@ var loadingIdPrerender='';
 
 this.onLoaded=function()
 {
-    console.log('loaded !!!!',preRenderTimeFrames.isAnimated());
-    console.log('loaded !!!!',preRenderTimeFrames.anim.keys.length);
-    
     if(preRenderTimeFrames.isAnimated())
         for(i=0;i<preRenderTimeFrames.anim.keys.length;i++)
             preRenderTimes.push( preRenderTimeFrames.anim.keys[i].time );
