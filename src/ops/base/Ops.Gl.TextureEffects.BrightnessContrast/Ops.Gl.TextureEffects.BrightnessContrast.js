@@ -45,7 +45,7 @@ var amountBrightUniform=new CGL.Uniform(shader,'f','amountbright',0.5);
 
 this.amount.onValueChanged=function()
 {
-    console.log('amount changed! '+self.amount.val);
+    // console.log('amount changed! '+self.amount.val);
     amountUniform.setValue(self.amount.val);
 };
 

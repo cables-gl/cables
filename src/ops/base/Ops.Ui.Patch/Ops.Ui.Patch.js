@@ -64,7 +64,7 @@ this.getPort=function(name)
         }
     }
 
-    console.log('create new dyn port...??',name);
+    // console.log('create new dyn port...??',name);
 
 
     var p=getNewDynamicPort(name);

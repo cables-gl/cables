@@ -146,7 +146,7 @@ function changeRes()
         uHeight.setValue(h);
         self.texWidth.set(w);
         self.texHeight.set(h);
-console.log('fxaaa',w,h);
+        // console.log('fxaaa',w,h);
     }
     else
     {

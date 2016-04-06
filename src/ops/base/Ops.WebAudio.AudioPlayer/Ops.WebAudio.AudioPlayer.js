@@ -56,19 +56,20 @@ function seek()
         var t=self.patch.timer.getTime();
         if(!isFinite(t))
         {
-            console.log('not finite time...',t);
-            t=0.0;
+            return;
+            // console.log('not finite time...',t);
+            // t=0.0;
         }
 
         playing=false;
 
-        console.log('seek.....',self.patch.timer.isPlaying());
+        // console.log('seek.....',self.patch.timer.isPlaying());
 
         if(self.patch.timer.isPlaying() )
         {
             console.log('play!');
                         
-            // self.media.start(t);
+            self.media.start(t);
             playing=true;
         }
     }
@@ -129,11 +130,11 @@ this.file.onValueChanged = function()
 
                 patch.loading.finished(loadingId);
 
-                if(!window.gui)
-                {
-                    self.media.start(0);
-                    playing=true;
-                }
+                // if(!window.gui)
+                // {
+                //     self.media.start(0);
+                //     playing=true;
+                // }
             } );
 
         };

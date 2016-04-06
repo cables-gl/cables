@@ -43,7 +43,7 @@ function prepare()
         mesh.numInstances=num;
         mesh.addAttribute('instMat',matrices,16);
 
-        console.log(num+' instances !');
+        // console.log(num+' instances !');
     }
 }
 
