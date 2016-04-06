@@ -6,13 +6,17 @@ In order to get informed on port-value-changes, function-triggers (also see [Por
 
 ## Port Callbacks
 
+### onInit
+
+There is no explicit callback for initialization, all code in your op is automatically executed.
+
 ### onValueChange
 
 Can be implemented for `OP_PORT_TYPE_VALUE`, `OP_PORT_TYPE_ARRAY`, `OP_PORT_TYPE_OBJECT`.  
 
 Every time a connected op calls the `myOutPort.set(...)` method, the in-port-callback `onValueChange` is called.
 
-```
+```javascript
 myPort.onValueChange( function() {
     this.log('value of myPort changed to:' + myPort.get());
 });
@@ -26,8 +30,8 @@ Every time a connected op calls `myOutPort.trigger()` the connected in-ports’ 
 
 If your op needs to update its values continuously it should have an input port of type `OP_PORT_TYPE_FUNCTION`, which you can then connect to the [op: Renderer](../../src/ops/base/Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op e.g..
 
-```
-var exe = this.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION ) );
+```javascript
+var exe = op.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION ) );
 
 exe.onTriggered( function() {
 	// do something
@@ -39,7 +43,7 @@ exe.onTriggered( function() {
 
 Gets called whenever a port is connected / disconnected.
 
-```
+```javascript
 myPort.onLinkChange( function() {
 	if( myPort.isLinked() ) {
 		// port connected  
@@ -55,7 +59,7 @@ myPort.onLinkChange( function() {
 
 If your op needs to clean up after itself when it is deleted from the patch you can implement `onDelete`:
 
-```
+```javascript
 this.onDelete( function() {
 	// do some manual cleanup here
 });
@@ -65,8 +69,8 @@ this.onDelete( function() {
 
 Gets called when the whole patch is loaded / all ops are linked etc. You mostly don’t need this, as op-specific init-code can just be put in your op-code without a callback.
 
-```
-this.onLoaded( function() {
+```javascript
+op.onLoaded( function() {
 	// do something
 });
 ```
@@ -75,8 +79,8 @@ this.onLoaded( function() {
 
 Whenever the canvas is resized `onResize`gets called.
 
-```
-this.onResize( function() {
+```javascript
+op.onResize( function() {
 	// adapt to the new size
 });
 ```

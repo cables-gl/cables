@@ -17,6 +17,7 @@
 
 ## Patch
 
+- `[space] + mouse drag`: Move visible area
 - `[mod] + c`: Copy selected op
 - `[mod] + v`: Paste selected op
 - `[del]`: Delete selected ops
