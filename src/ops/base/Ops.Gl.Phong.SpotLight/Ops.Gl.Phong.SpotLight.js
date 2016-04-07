@@ -8,6 +8,9 @@ var attachment=this.addOutPort(new Port(this,"attachment",OP_PORT_TYPE_FUNCTION)
 
 var attenuation=this.addInPort(new Port(this,"attenuation",OP_PORT_TYPE_VALUE));
 
+var mul=this.addInPort(new Port(this,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
+mul.set(1);
+
 var cone=this.addInPort(new Port(this,"cone",OP_PORT_TYPE_VALUE,{ display:'range' }));
 cone.set(0.85);
 var r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
@@ -22,11 +25,24 @@ var tx=this.addInPort(new Port(this,"target x",OP_PORT_TYPE_VALUE));
 var ty=this.addInPort(new Port(this,"target y",OP_PORT_TYPE_VALUE));
 var tz=this.addInPort(new Port(this,"target z",OP_PORT_TYPE_VALUE));
 
+var tex=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texDepth=this.addOutPort(new Port(this,"textureDepth",OP_PORT_TYPE_TEXTURE));
+
+
+
 
 var id=generateUUID();
 var lights=[];
 
+var vUp=vec3.create();
+vec3.set(vUp,0,1,0);
+
 var posVec=vec3.create();
+
+var fb=new CGL.Framebuffer(cgl);
+fb.setSize(512,512);
+tex.set( fb.getTextureColor() );
+texDepth.set ( fb.getTextureDepth() );
 
 
 var updateColor=function()
@@ -65,33 +81,73 @@ var updateAll=function()
     updateAttenuation();
 };
 
+vecEye=vec3.create();
+vecTarget=vec3.create();
+
+function updateTarget()
+{
+    vec3.set(vecTarget,tx.get(),ty.get(),tz.get());
+}
+
+function updateEye()
+{
+    vec3.set(vecEye,x.get(),y.get(),z.get());
+}
+
+var depthMVP=mat4.create();
+var biasM=[
+    0.5, 0.0, 0.0, 0.0,
+    0.0, 0.5, 0.0, 0.0,
+    0.0, 0.0, 0.5, 0.0,
+    0.5, 0.5, 0.5, 1.0
+    ];
+
+function renderShadowMap()
+{
+    fb.renderStart(cgl);
+
+    cgl.pushViewMatrix();
+
+    mat4.lookAt(cgl.vMatrix, vecEye, vecTarget, vUp);
+    
+    mat4.multiply( depthMVP,cgl.vMatrix,cgl.pMatrix );
+    // mat4.multiply( depthMVP,depthMVP, );
+    mat4.multiply( depthMVP,depthMVP,biasM );
+
+    trigger.trigger();
+    
+    cgl.popViewMatrix();
+    fb.renderEnd(cgl);
+}
+
 exe.onTriggered=function()
 {
-    vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
+    cgl.frameStore.phong.lights[id].shadowPass=1;
+    renderShadowMap();
+    cgl.frameStore.phong.lights[id].shadowPass=0;
+
+    vec3.transformMat4(mpos, vecEye, cgl.mvMatrix);
     cgl.frameStore.phong.lights[id].pos=mpos;
-    vec3.transformMat4(tpos, [tx.get(),ty.get(),tz.get()], cgl.mvMatrix);
+    cgl.frameStore.phong.lights[id].type=1;
+    vec3.transformMat4(tpos, vecTarget, cgl.mvMatrix);
     cgl.frameStore.phong.lights[id].target=tpos;
+    cgl.frameStore.phong.lights[id].mul=mul.get();
+    cgl.frameStore.phong.lights[id].depthMVP=depthMVP;
+    cgl.frameStore.phong.lights[id].depthTex=fb.getTextureDepth().tex;
+    
 
     if(attachment.isLinked())
     {
         cgl.pushMvMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, 
-            [x.get(), 
-            y.get(), 
-            z.get()]);
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vecEye);
         attachment.trigger();
         cgl.popMvMatrix();
 
         cgl.pushMvMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, 
-            [tx.get(), 
-            ty.get(), 
-            tz.get()]);
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,vecTarget);
         attachment.trigger();
         cgl.popMvMatrix();
-
     }
-
 
     trigger.trigger();
 };
@@ -100,6 +156,14 @@ r.set(1);
 g.set(1);
 b.set(1);
 attenuation.set(0);
+
+x.onValueChanged=updateEye;
+y.onValueChanged=updateEye;
+z.onValueChanged=updateEye;
+
+tx.onValueChanged=updateTarget;
+ty.onValueChanged=updateTarget;
+tz.onValueChanged=updateTarget;
 
 r.onValueChanged=updateColor;
 g.onValueChanged=updateColor;

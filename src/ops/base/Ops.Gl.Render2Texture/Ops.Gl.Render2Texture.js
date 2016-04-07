@@ -23,8 +23,8 @@ tfilter.set('linear');
 var onFilterChange=function()
 {
     if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
-    else if(tfilter.get()=='linear')  fb.setFilter(CGL.Texture.FILTER_LINEAR);
-    else if(tfilter.get()=='mipmap')  fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+    else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
+    else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 };
 
 function doRender()

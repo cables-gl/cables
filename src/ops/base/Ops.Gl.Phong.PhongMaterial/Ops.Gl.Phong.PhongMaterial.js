@@ -83,6 +83,8 @@ var srcFrag=''
     .endl()+'uniform float b;'
     .endl()+'uniform float a;'
     .endl()+'uniform float mul;'
+    
+    .endl()+'uniform float shadowPass;'
 
     .endl()+'uniform float diffuseRepeatX;'
     .endl()+'uniform float diffuseRepeatY;'
@@ -97,6 +99,8 @@ var srcFrag=''
     .endl()+'       uniform sampler2D texOpacity;'
     .endl()+'   #endif'
     .endl()+'#endif'
+    
+    .endl()+'uniform sampler2D depthTex;'
 
     .endl()+'uniform struct Light'
     .endl()+'{'
@@ -107,9 +111,10 @@ var srcFrag=''
     .endl()+'   vec3 color;'
     .endl()+'   float intensity;'
     .endl()+'   float cone;'
+    .endl()+'   mat4 depthMVP;'
     .endl()+'   float mul;'
-
     .endl()+'} light;'
+
     .endl()+'uniform Light lights['+MAX_LIGHTS+'];'
 
     .endl()+'void main()'
@@ -133,6 +138,8 @@ var srcFrag=''
     .endl()+'   #endif'
 
     .endl()+'   vec3 theColor=vec3(0.0,0.0,0.0);'
+
+    .endl()+'   if(shadowPass==0.0)'
     .endl()+'   for(int l=0;l<NUM_LIGHTS;l++)'
     .endl()+'   {'
     .endl()+'       if(lights[l].mul>0.0)'
@@ -163,13 +170,27 @@ var srcFrag=''
     // SPOT LIGHT
     .endl()+'           if(lights[l].type!=0.0)'
     .endl()+'           {'
+    .endl()+'               attenuation=1.0;'
     .endl()+'               vec3 coneDirection = normalize( (lights[l].target-lights[l].pos) );'
     .endl()+'               float spotEffect = dot(normalize(coneDirection), normalize(-surfaceToLight));'
     .endl()+'               float lightToSurfaceAngle = degrees(acos(dot(surfaceToLight, coneDirection)));'
+    
+    
+    .endl()+'           vec4 shadowCoord = lights[l].depthMVP * vec4(vert,1.0);'
+    .endl()+'           float s=texture2D( depthTex, shadowCoord.xy  ).z;'
+    
+    // .endl()+'   theColor.r=s;'
+    // .endl()+'   if(s<shadowCoord.z)brightness=0.0;'
+    .endl()+'   float f=100.0;'
+    .endl()+'   float n=0.1;'
+    .endl()+'   float c=(2.0*n)/(f+n-s*(f-n));'
+    .endl()+'   attenuation=c;'
+    
     .endl()+'               if( spotEffect <lights[l].cone)'
     .endl()+'               {'
     .endl()+'                   attenuation=0.0;'
     .endl()+'               }'
+    
     .endl()+'           }'
 
     .endl()+'       brightness *= attenuation*lights[l].mul;'
@@ -180,9 +201,7 @@ var srcFrag=''
     // 3. The texture and texture coord: texture(tex, fragTexCoord)'
     // .endl()+'   vec4 surfaceColor = texture(tex, fragTexCoord);'
     // .endl()+'       return lightColor*brightness;'
-
-// .endl()+'vec3 specularComponent = specularCoefficient * vec3(1.0,1.0,1.0) * 1.0;'
-
+    // .endl()+'vec3 specularComponent = specularCoefficient * vec3(1.0,1.0,1.0) * 1.0;'
 
     .endl()+'       theColor+=(lightColor*brightness);'
     // .endl()+'       if(length(lights[l].target)>0.0)theColor=vec3(1.0,0.0,0.0);'
@@ -216,6 +235,9 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shaderOut.set(shader);
 var lights=[];
 
+depthTex=new CGL.Uniform(shader,'t','depthTex',1);
+var uniShadowPass=new CGL.Uniform(shader,'f','shadowPass',0);
+
 for(i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
@@ -227,6 +249,9 @@ for(i=0;i<MAX_LIGHTS;i++)
     lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
     lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
     lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
+    lights[count].depthMVP=new CGL.Uniform(shader,'m4','lights['+count+'].depthMVP',mat4.create());
+    
+    
 }
 
 
@@ -431,15 +456,17 @@ shader.setSource(srcVert,srcFrag);
                         lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
                         lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
                         if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
+                        if(cgl.frameStore.phong.lights[i].depthMVP) lights[count].depthMVP.setValue(cgl.frameStore.phong.lights[i].depthMVP);
+                        if(cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex=cgl.frameStore.phong.lights[i].depthTex;
+
                         lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);
                     }
     
                     count++;
                 }
+            // console.log(count,'lights');
             // cgl.frameStore.phong.lights.length=0;
-
         }
-
     }
     
     console.log("light ok...");
@@ -452,6 +479,23 @@ var bindTextures=function()
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
+    }
+
+
+    uniShadowPass.setValue(0);
+    if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
+        for(i in cgl.frameStore.phong.lights)
+        {
+            if(cgl.frameStore.phong.lights[i].shadowPass==1.0)uniShadowPass.setValue(1);
+        }
+
+    for(var i in lights)
+    {
+        if(lights[i].type.getValue()==1.0)
+        {
+            cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lights[i].texDepthTex);
+        }
     }
 
     // if(self.textureOpacity.get())
