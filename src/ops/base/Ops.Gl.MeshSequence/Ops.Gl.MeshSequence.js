@@ -14,10 +14,14 @@ calcVertexNormals.set(true);
 
 var geoms=[];
 var mesh=null;
+window.meshsequencecounter=window.meshsequencecounter||1;
+window.meshsequencecounter++;
+var prfx=String.fromCharCode(97 + window.meshsequencecounter);
+
 
 var srcHeadVert=''
-    .endl()+'attribute vec3 attrMorphTargetA;'
-    .endl()+'attribute vec3 attrMorphTargetB;'
+    .endl()+'attribute vec3 '+prfx+'_attrMorphTargetA;'
+    .endl()+'attribute vec3 '+prfx+'_attrMorphTargetB;'
     // .endl()+'attribute vec3 attrMorphTargetAN;'
     // .endl()+'attribute vec3 attrMorphTargetBN;'
     .endl()+'uniform float {{mod}}_fade;'
@@ -27,7 +31,7 @@ var srcHeadVert=''
 var srcBodyVert=''
     // .endl()+'   pos =vec4(vPosition,1.0);'
     .endl()+' if({{mod}}_doMorph==1.0){'
-    .endl()+'   pos = vec4( attrMorphTargetA * {{mod}}_fade + attrMorphTargetB * (1.0 - {{mod}}_fade ), 1. );'
+    .endl()+'   pos = vec4( '+prfx+'_attrMorphTargetA * {{mod}}_fade + '+prfx+'_attrMorphTargetB * (1.0 - {{mod}}_fade ), 1. );'
     // .endl()+'   pos = vec4( attrMorphTargetA * {{mod}}_fade + vPosition * (1.0 - {{mod}}_fade ), 1. );'
     // .endl()+'   norm = (attrMorphTargetBN * {{mod}}_fade + norm * (1.0 - {{mod}}_fade ) );'
     // .endl()+'   norm = vec3(attrMorphTargetAN * {{mod}}_fade + attrMorphTargetBN * (1.0 - {{mod}}_fade ) );'
@@ -92,12 +96,12 @@ function updateFrame()
         if(n+1>geoms.length-1) n=0;
 
 
-        if(n!=lastFrame)
+        if(n!=lastFrame && module)
         {
-            mesh.updateAttribute('attrMorphTargetA',geoms[n+1].verticesTyped);
+            mesh.updateAttribute(prfx+'_attrMorphTargetA',geoms[n+1].verticesTyped);
             // mesh.updateAttribute('attrMorphTargetAN',geoms[n+1].vertexNormals);
             
-            mesh.updateAttribute('attrMorphTargetB',geoms[n].verticesTyped);
+            mesh.updateAttribute(prfx+'_attrMorphTargetB',geoms[n].verticesTyped);
             // mesh.updateAttribute('attrMorphTargetBN',geoms[n].vertexNormals);
 
             lastFrame=n;
@@ -172,8 +176,9 @@ function reload()
             }
 
             mesh=new CGL.Mesh(cgl,geoms[0]);
-            mesh.addAttribute('attrMorphTargetA',geoms[0].vertices,3);
-            mesh.addAttribute('attrMorphTargetB',geoms[0].vertices, 3);
+            
+            mesh.addAttribute(prfx+'_attrMorphTargetA',geoms[0].vertices,3);
+            mesh.addAttribute(prfx+'_attrMorphTargetB',geoms[0].vertices, 3);
             
 
             self.uiAttribs.info='num frames: '+data.meshes.length;
