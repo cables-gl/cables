@@ -7,46 +7,66 @@ var points=this.addInPort(new Port(this,"points",OP_PORT_TYPE_ARRAY));
 
 points.ignoreValueSerialize=true;
 
-var mesh=null;
+var meshes=[];
 
+var cycle=0;
 render.onTriggered=function()
 {
-    if(mesh)mesh.render(cgl.getShader());
+    for(var i=0;i<meshes.length;i++)
+        meshes[i].render(cgl.getShader());
     
     trigger.trigger();
 };
 
+function createMesh(arr,start,end)
+{
+    var geom=new CGL.Geometry();
+    geom.verticesIndices=[];
+
+    var i=0;
+    var verts=[];
+    verts.length=(end-start)*3;
+    var vertColors=[];
+    vertColors.length=(end-start)*4;
+    geom.verticesIndices.length=end-start;
+    
+    for(i=start;i<end;i++)
+    {
+        var ind=i-start;
+        verts[ind*3+0]=arr[i][0];
+        verts[ind*3+1]=arr[i][1];
+        verts[ind*3+2]=arr[i][2];
+        
+        vertColors[ind*4+0]=arr[i][3]/255;
+        vertColors[ind*4+1]=arr[i][4]/255;
+        vertColors[ind*4+2]=arr[i][5]/255;
+        vertColors[ind*4+3]=1;
+    }
+
+    for(i=0;i<verts.length/3;i++) geom.verticesIndices[i]=i;
+
+    geom.vertices=verts;
+    geom.vertexColors=vertColors;
+    console.log('geom.verticesIndices',geom.verticesIndices.length);
+
+    var mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+    
+    return mesh;
+}
+
 
 function create()
 {
+    meshes.length=0;
     var arr=points.get();
+    var meshMax=2000;
     if(arr)
     {
-        var geom=new CGL.Geometry();
-        geom.verticesIndices=[];
-
-        console.log('points ',arr.length);
-        var i=0;
-        var verts=[];
-        verts.length=arr.length*3;
-        geom.verticesIndices.length=arr.length;
-        
-        for(i=0;i<arr.length;i++)
+        var count=0;
+        for(var i=0;i<arr.length;i+=meshMax)
         {
-            verts[i*3+0]=arr[i][0];
-            verts[i*3+1]=arr[i][1];
-            verts[i*3+2]=arr[i][2];
+            meshes.push(createMesh(arr,i,Math.min(arr.length,i+meshMax)));
         }
-
-        for(i=0;i<verts.length/3;i++) geom.verticesIndices[i]=i;
-        
-        geom.vertices=verts;
-        
-        // console.log(verts.length);
-    
-        if(!mesh)mesh =new CGL.Mesh(cgl,geom);
-            else mesh.setGeom(geom);
-
     }
     
     
