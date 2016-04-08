@@ -30,7 +30,7 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'   if(texCoord.x>{{mod}}_x && texCoord.x<{{mod}}_x+{{mod}}_width && texCoord.y>{{mod}}_y && texCoord.y<{{mod}}_y+{{mod}}_width)pos.xyz*={{mod}}_extrude;'
+    .endl()+'   if(texCoord.x>{{mod}}_x && texCoord.x<{{mod}}_x+{{mod}}_width && texCoord.y>{{mod}}_y && texCoord.y<{{mod}}_y+{{mod}}_width) texCoord.xyz*={{mod}}_extrude;'
     .endl();
 
 var module=null;

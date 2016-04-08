@@ -79,6 +79,8 @@ exe.onTriggered=function()
     }
 
     trigger.trigger();
+    
+    // cgl.frameStore.phong.lights[id]=null;
 };
 
 r.set(1);
