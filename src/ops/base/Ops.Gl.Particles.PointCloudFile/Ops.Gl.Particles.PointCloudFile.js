@@ -24,10 +24,13 @@ function createMesh(arr,start,end)
     geom.verticesIndices=[];
 
     var i=0;
+    var texCoords=[];
     var verts=[];
     verts.length=(end-start)*3;
+    
     var vertColors=[];
     vertColors.length=(end-start)*4;
+    texCoords.length=(end-start)*2;
     geom.verticesIndices.length=end-start;
     
     for(i=start;i<end;i++)
@@ -41,12 +44,16 @@ function createMesh(arr,start,end)
         vertColors[ind*4+1]=arr[i][4]/255;
         vertColors[ind*4+2]=arr[i][5]/255;
         vertColors[ind*4+3]=1;
+        
+        texCoords[ind*2+0]=arr[i][1]%10/10;
+        texCoords[ind*2+1]=arr[i][0]%10/10;
     }
 
     for(i=0;i<verts.length/3;i++) geom.verticesIndices[i]=i;
 
     geom.vertices=verts;
     geom.vertexColors=vertColors;
+    geom.texCoords=texCoords;
     console.log('geom.verticesIndices',geom.verticesIndices.length);
 
     var mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
