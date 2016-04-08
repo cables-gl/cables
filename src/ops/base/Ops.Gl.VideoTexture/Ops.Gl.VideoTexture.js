@@ -16,7 +16,7 @@ textureOut.set(tex);
 function updateTexture()
 {
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);
-    cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, true);
+    // cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, true);
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     // cgl.gl.texParameteri(cgl.gl.TEXTURE_2D, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.LINEAR);
     // cgl.gl.texParameteri(cgl.gl.TEXTURE_2D, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_NEAREST);

@@ -45,8 +45,8 @@ function createMesh(arr,start,end)
         vertColors[ind*4+2]=arr[i][5]/255;
         vertColors[ind*4+3]=1;
         
-        texCoords[ind*2+0]=arr[i][1]%10/10;
-        texCoords[ind*2+1]=arr[i][0]%10/10;
+        texCoords[ind*2+0]=5/(arr[i][1]%5);
+        texCoords[ind*2+1]=5/(arr[i][2]%5);
     }
 
     for(i=0;i<verts.length/3;i++) geom.verticesIndices[i]=i;
