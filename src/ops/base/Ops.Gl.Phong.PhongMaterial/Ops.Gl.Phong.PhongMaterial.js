@@ -481,7 +481,6 @@ var bindTextures=function()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
 
-
     uniShadowPass.setValue(0);
     if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
         for(i in cgl.frameStore.phong.lights)
@@ -497,6 +496,9 @@ var bindTextures=function()
             cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lights[i].texDepthTex);
         }
     }
+
+            cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
     // if(self.textureOpacity.get())
     // {
