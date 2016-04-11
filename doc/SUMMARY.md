@@ -39,6 +39,7 @@
 			* [Circle](ops/Ops.Gl.Meshes.Circle/Ops.Gl.Meshes.Circle.md)
 			* [Cone](ops/Ops.Gl.Meshes.Cone/Ops.Gl.Meshes.Cone.md)
 			* [Sphere](ops/Ops.Gl.Meshes.Sphere/Ops.Gl.Meshes.Sphere.md)
+			* [Triangle](ops/Ops.Gl.Meshes.Triangle/Ops.Gl.Meshes.Triangle.md)
 		* [Renderer](ops/Ops.Gl.Renderer/Ops.Gl.Renderer.md)
 		* [Shader](chapter_readmes/shader/Readme.md)
 			* [WireframeMaterial](ops/Ops.Gl.Shader.WireframeMaterial/Ops.Gl.Shader.WireframeMaterial.md)
