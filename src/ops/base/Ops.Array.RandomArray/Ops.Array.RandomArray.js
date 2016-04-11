@@ -30,5 +30,5 @@ function init()
     {
         arr[i]=Math.seededRandom()* ( max.get() - min.get() ) + parseFloat(min.get()) ;
     }
-    values.val=arr;
+    values.set(arr);
 }

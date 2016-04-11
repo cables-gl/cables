@@ -6,7 +6,7 @@ var value=this.addOutPort(new Port(this, "value",OP_PORT_TYPE_VALUE));
 
 function update()
 {
-    value.set( array.val[index.get()]);
+    if(array.get()) value.set( array.get()[index.get()]);
 }
 
 index.onValueChanged=update;

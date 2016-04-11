@@ -6,11 +6,11 @@ const exec = require('child_process').exec;
  */
 
 const child = exec('node add_ops.js',
-  (error, stdout, stderr) => {
-    console.log(`stdout: ${stdout}`);
-    if(stderr.toString() !== "" ) { console.log(`stderr: ${stderr}`); }
+  function(error, stdout, stderr) {
+    console.log('stdout:',stdout);
+    if(stderr.toString() !== "" ) { console.log('stderr:', stderr); }
     if (error !== null) {
-      throw new Error( `${error}` );
+      throw new Error( error );
     }
     // success
     else {
@@ -21,11 +21,11 @@ const child = exec('node add_ops.js',
 
 function generateGitbook(){
   const child = exec('gitbook build',
-    (error, stdout, stderr) => {
-      console.log(`stdout: ${stdout}`);
-      if(stderr.toString() !== "" ) { console.log(`stderr: ${stderr}`); }
+    function(error, stdout, stderr)  {
+      console.log('stdout:', stdout);
+      if(stderr.toString() !== "" ) { console.log('stderr:', stderr); }
       if (error !== null) {
-        throw new Error( `${error}` );
+        throw new Error( error );
       }
       // success
       else {
