@@ -6,6 +6,7 @@ var min=this.addInPort(new Port(this,"Min"));
 var max=this.addInPort(new Port(this,"Max"));
 
 var values=this.addOutPort(new Port(this, "values",OP_PORT_TYPE_ARRAY));
+values.ignoreValueSerialize=true;
 
 var arr=[];
 

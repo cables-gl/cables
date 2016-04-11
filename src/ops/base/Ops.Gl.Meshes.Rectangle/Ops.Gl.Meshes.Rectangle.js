@@ -101,6 +101,7 @@ function rebuild()
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
+    geomOut.set(null);
     geomOut.set(geom);
 
 }

@@ -61,7 +61,7 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'float {{mod}}_v=sin( (pos.x)*3.0 + {{mod}}_time * {{mod}}_frequency + {{mod}}_phase ) * {{mod}}_amount;'
+    .endl()+'float {{mod}}_v=sin( (pos.x*pos.z)*3.0 + {{mod}}_time * {{mod}}_frequency + {{mod}}_phase ) * {{mod}}_amount;'
 
     .endl()+'#ifdef {{mod}}_TO_AXIS_X'
     .endl()+'   pos.x+={{mod}}_v;'
@@ -75,7 +75,6 @@ var srcBodyVert=''
     .endl()+'   pos.z+={{mod}}_v;'
     .endl()+'#endif'
 
-    // .endl()+'norm=normalize(norm);'
     .endl();
 
 

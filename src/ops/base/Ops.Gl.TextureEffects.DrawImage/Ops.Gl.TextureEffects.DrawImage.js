@@ -268,7 +268,7 @@ this.alphaSrc.val="alpha channel";
         // console.log('tex trans!!');
         if(scale.get()!=1.0 || posX.get()!=0.0 || posY.get()!=0.0 )
         {
-            shader.define('TEX_TRANSFORM');
+            if(!shader.hasDefine('TEX_TRANSFORM'))shader.define('TEX_TRANSFORM');
             uniScale.setValue( parseFloat(scale.get()) );
             uniPosX.setValue( posX.get() );
             uniPosY.setValue( posY.get() );

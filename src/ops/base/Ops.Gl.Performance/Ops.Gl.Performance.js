@@ -93,6 +93,8 @@ function refresh()
         outFPS.set(fps);
 
         text=self.patch.config.glCanvasId+' fps: '+fps;
+        text+=' '+cgl.canvas.clientWidth+' x '+cgl.canvas.clientHeight;
+        
         fpsStartTime=Date.now();
         if(CGL.profileShaderCompiles>0)text+=' shader compile!';
         if(CGL.profileShaderGetUniform>0)text+=' shader get uniforms!';

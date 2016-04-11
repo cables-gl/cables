@@ -15,8 +15,9 @@ this.extrude=this.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 var invert=this.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool'}));
 invert.onValueChange(function()
 {
-    if(invert.get()) shader.define('HEIGHTMAP_INVERT');
-        else shader.removeDefine('HEIGHTMAP_INVERT');
+    if(shader)
+        if(invert.get()) shader.define('HEIGHTMAP_INVERT');
+            else shader.removeDefine('HEIGHTMAP_INVERT');
 });
 
 this.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(self.extrude.val); };
@@ -110,6 +111,9 @@ this.render.onTriggered=function()
 
         updateMethod();
         
+        if(invert.get()) shader.define('HEIGHTMAP_INVERT');
+            else shader.removeDefine('HEIGHTMAP_INVERT');
+
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
         uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',self.extrude.val);
 

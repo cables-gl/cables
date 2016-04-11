@@ -1,14 +1,14 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
+
+var rframes=0;
+var rframeStart=0;
 
 if(!this.patch.cgl)
 {
     console.log(' no cgl!');
 }
 
-
+var patch=this.patch;
 var cgl=this.patch.cgl;
-// if(cgl.aborted)return 0;
 
 this.name='renderer';
 
@@ -26,7 +26,7 @@ this.onDelete=function()
     cgl.gl.clearColor(0,0,0,0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
-    self.patch.removeOnAnimFrame(self);
+    op.patch.removeOnAnimFrame(op);
 };
 
 this.onAnimFrame=function(time)
@@ -35,7 +35,7 @@ this.onAnimFrame=function(time)
 
     if(cgl.canvasWidth==-1)
     {
-        cgl.setCanvas(self.patch.config.glCanvasId);
+        cgl.setCanvas(op.patch.config.glCanvasId);
         return;
     }
 
@@ -47,6 +47,13 @@ this.onAnimFrame=function(time)
         height.set(cgl.canvasHeight);
     }
 
+    if(Date.now()-rframeStart>1000)
+    {
+        CGL.fpsReport=CGL.fpsReport||[];
+        if(patch.loading.getProgress()>=1.0 && rframeStart!==0)CGL.fpsReport.push(rframes);
+        rframes=0;
+        rframeStart=Date.now();
+    }
     
 
     cgl.renderStart(cgl,identTranslate,identTranslateView);
@@ -61,6 +68,7 @@ this.onAnimFrame=function(time)
     
     if(!cgl.frameStore.phong)cgl.frameStore.phong={}
     // cgl.frameStore.phong.lights={};
+    rframes++;
 
     
 };
