@@ -128,12 +128,63 @@
     ]
   },
   {
-    "op_name": "Ops.Audio.BPMTap",
-    "op_name_new": "Ops.Audio.BpmTap"
+    "op_name": "Ops.Math.Compare.Greater",
+    "ports": [
+      {
+        "from": "number1",
+        "to": "Value"
+      },
+      {
+        "from": "number2",
+        "to": "Reference Value"
+      }
+    ]
   },
   {
+    "op_name": "Ops.Math.Divide",
+    "ports": [
+      {
+        "from": "number1",
+        "to": "Dividend"
+      },
+      {
+        "from": "number2",
+        "to": "Divisor"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.TriggerCounter",
+    "ports": [
+      {
+        "from": "exe",
+        "to": "Execute"
+      },
+      {
+        "from": "timesTriggered",
+        "to": "Times Triggered"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.String.concat",
+    "op_name_new": "Ops.String.Concat"
+  },
+  {
+    "op_name": "Ops.ToggleBool",
+    "op_name_new": "Ops.Bool.Toggle"
+  },
+  {
+    "op_name": "Ops.Or",
+    "op_name_new": "Ops.Bool.Or"
+  },
+    {
     "op_name": "Ops.And",
-    "op_name_new": "Ops.Math.And"
+    "op_name_new": "Ops.Bool.And"
+  },
+  {
+    "op_name": "Ops.Audio.BPMTap",
+    "op_name_new": "Ops.Audio.BpmTap"
   },
   {
     "op_name": "Ops.Gl.Mouse",
