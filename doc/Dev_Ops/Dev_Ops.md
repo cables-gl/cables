@@ -101,7 +101,7 @@ This is the description of an output port named `Out Port 1`.
 
 ...
 
-## Example
+## Examples
 
 - [Some Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
 - [Another Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
