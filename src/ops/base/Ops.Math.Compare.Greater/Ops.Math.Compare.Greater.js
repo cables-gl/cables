@@ -1,16 +1,12 @@
-Op.apply(this, arguments);
-var self=this;
-
 this.name='Greater';
-this.result=this.addOutPort(new Port(this,"result"));
-this.number1=this.addInPort(new Port(this,"number1"));
-this.number2=this.addInPort(new Port(this,"number2"));
+var result=this.addOutPort(new Port(this,"result"));
+var number1=this.addInPort(new Port(this,"number1"));
+var number2=this.addInPort(new Port(this,"number2"));
 
-this.exec= function()
+function exec()
 {
-    self.updateAnims();
-    self.result.val=self.number1.val>self.number2.val ;
-};
+    result.val=number1.get()>number2.get();
+}
 
-this.number1.onValueChanged=this.exec;
-this.number2.onValueChanged=this.exec;
+number1.onValueChanged=exec;
+number2.onValueChanged=exec;
