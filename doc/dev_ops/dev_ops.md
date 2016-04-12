@@ -57,7 +57,7 @@ UpperCamelCase, e.g. `KeyPressLearn` (`Ops.Devices.Keyboard.KeyPressLearn`). If 
 
 #### Port Names
 
-Use capitals with spaces for the user-visible names in the op-settings, e.g. `Inner Radius`.  
+Use capitals with spaces for the user-visible names in the op-settings, e.g. `Inner Radius`. You can use all capital letters for port names like `BPM` or `MIDI`. 
 Feel free to use whatever you prefer in code, most common is lowerCamelCase, e.g. `innerRadius`.  
 If your op has one main-port which is needed to trigger it, call it `Execute`, if your op has an output-port to trigger other ops call it `Trigger`.
 
@@ -101,7 +101,7 @@ This is the description of an output port named `Out Port 1`.
 
 ...
 
-## Example
+## Examples
 
 - [Some Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
 - [Another Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
@@ -110,6 +110,7 @@ This is the description of an output port named `Out Port 1`.
 The optional namespace in the op-name can be used to bundle ops together, e.g. for a library – `Ops.Users.Username.MyLib.MyOp`.  `Username` should be written exactly as your registered *cables*-username, so e.g. `johanna`. No need to capitalize it.
 Don’t forget to name the port type, e.g. `In Port 2 [Value]` or `In Port 2 [Function]`. Also It is important that the headlines for the port descriptions match the ones in your code 100%, so we can extract this information and present e.g. when hovering over a port.  
 Also please note that behind the value definition (e.g. `*Type: Value*`) two spaces are needed to create a newline (this is default markdown behavior).
+If you want to reference another op in your documentation use links like this: `[Name](../Full.Op.Name/Full.Op.Name.md)`, e.g. `[WireframeMaterial](../Ops.Gl.Shader.WireframeMaterial/Ops.Gl.Shader.WireframeMaterial.md)`.
 
 ```javascript
 var innerRadius = op.addInPort( new Port( this, "Inner Radius", OP_PORT_TYPE_VALUE ));
