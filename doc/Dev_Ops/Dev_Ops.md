@@ -72,7 +72,7 @@ The op documentation should be written in [markdown](https://daringfireball.net/
 Use the following structure:
 
 ```markdown
-# MyOb
+# MyOp
 
 *Ops.Users.Username.[OPTIONAL_NAMESPACE].MyOp*  
 
@@ -80,20 +80,26 @@ Some general infos about the op – what is it for? What would you use it for? Y
 
 ## Input
 
-### In Port 1 [Function]
+### In Port 1
 
+*Type: Function*  
 This is the description of an input port named `In Port 1`, just tell a bit what it is for, maybe some links to external references.
 If the port only works in a specific range, e.g. `[0, 10]` let other users now.
 
-### In Port 2 [Value]
+### In Port 2
 
 ...
 
 ## Output
 
-### In Port 2 [Value]
+### Out Port 1
 
+*Type: Value*  
 This is the description of an output port named `Out Port 1`.
+
+### Out Port 2
+
+...
 
 ## Example
 
@@ -103,6 +109,7 @@ This is the description of an output port named `Out Port 1`.
 
 The optional namespace in the op-name can be used to bundle ops together, e.g. for a library – `Ops.Users.Username.MyLib.MyOp`.  `Username` should be written exactly as your registered *cables*-username, so e.g. `johanna`. No need to capitalize it.
 Don’t forget to name the port type, e.g. `In Port 2 [Value]` or `In Port 2 [Function]`. Also It is important that the headlines for the port descriptions match the ones in your code 100%, so we can extract this information and present e.g. when hovering over a port.  
+Also please note that behind the value definition (e.g. `*Type: Value*`) two spaces are needed to create a newline (this is default markdown behavior).
 
 ```javascript
 var innerRadius = op.addInPort( new Port( this, "Inner Radius", OP_PORT_TYPE_VALUE ));

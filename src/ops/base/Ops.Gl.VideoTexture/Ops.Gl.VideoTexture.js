@@ -7,7 +7,7 @@ var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'f
 var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
 var videoElement=document.createElement('video');
-var intervalID;
+var intervalID=null;
 
 var tex=new CGL.Texture(cgl);
 tex.setSize(1280,720);
@@ -30,7 +30,7 @@ function startVideo()
   videoElement.play();
   videoElement.muted = true;
   videoElement.loop = true;
-  intervalID = setInterval(updateTexture, 15);
+  if(!intervalID)intervalID = setInterval(updateTexture, 15);
 
 }
 

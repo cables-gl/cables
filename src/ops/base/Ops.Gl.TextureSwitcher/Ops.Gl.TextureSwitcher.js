@@ -16,7 +16,7 @@ function updateTexture()
     if(index>texturePorts.length-1)index=0;
     if(index<0)index=0;
     self.textureOut.set(texturePorts[index].get());
-    console.log('texswitch',index);
+    // console.log('texswitch',index);
 }
 
 for(var i=0;i<5;i++)
