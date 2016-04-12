@@ -18,7 +18,6 @@ var self=this;
 
 render.onTriggered=function()
 {
-        self.updateAnims();
     vec3.set(vec, x.get(),y.get(),z.get());
     cgl.pushMvMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);

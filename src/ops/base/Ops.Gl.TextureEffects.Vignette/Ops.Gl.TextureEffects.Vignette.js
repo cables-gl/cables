@@ -4,10 +4,11 @@ var cgl=this.patch.cgl;
 
 this.name='Vignette';
 
-this.lensRadius1=this.addInPort(new Port(this,"lensRadius1"));
-this.lensRadius2=this.addInPort(new Port(this,"lensRadius2"));
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+
+this.lensRadius1=this.addInPort(new Port(this,"lensRadius1"));
+this.lensRadius2=this.addInPort(new Port(this,"lensRadius2"));
 
 var shader=new CGL.Shader(cgl);
 this.onLoaded=shader.compile;

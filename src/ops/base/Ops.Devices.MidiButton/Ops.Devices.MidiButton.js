@@ -37,9 +37,15 @@ exec.onTriggered=function()
         if(v===0)
         {
             outPressed.set(false);
+            var noteOnMessage = [0x90, note.get(), 0];
+            cgl.frameStore.midi.out.send( noteOnMessage );
         }
         if(v==1)
         {
+    
+            var noteOnMessage = [0x90, note.get(), 120];
+            cgl.frameStore.midi.out.send( noteOnMessage );
+
             outPressed.set(true);
             // console.log('button trigger!@');
             trigger.trigger();
