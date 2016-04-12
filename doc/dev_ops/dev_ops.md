@@ -3,9 +3,8 @@
 ## Basic Setup
 
 ```javascript
-op.name = 'my very special op';
+op.name = 'MyVerySpecialOp';
 ```
-
 `op` is a pre-defined object which bundles all the functions you need to interfere with the cables world.
 
 ## Adding Ports

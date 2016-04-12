@@ -7,7 +7,7 @@ Create a new patch by clicking on `Patch` —> `New`. Now we need to create a ne
 The editor will show the following code:  
 
 ```javascript
-this.name="Ops.user.yourname.HelloOp";
+op.name="HelloOp";
 ```
 
 `HelloOp` is the short-name of your op and `Ops.user.yourname.HelloOp` the unique name. If you make an op public,it can be found under the long name.
