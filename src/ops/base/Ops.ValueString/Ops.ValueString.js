@@ -1,12 +1,6 @@
-Op.apply(this, arguments);
-var self=this;
-
 this.name='String';
-var v=this.addInPort(new Port(this,"value",OP_PORT_TYPE_VALUE,{display:'string'}));
-
+var v=this.addInPort(new Port(this,"value",OP_PORT_TYPE_VALUE,{type:'string'}));
 var result=this.addOutPort(new Port(this,"result"));
-
-
 
 v.onValueChanged=function()
 {
