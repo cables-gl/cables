@@ -2,7 +2,7 @@
 
 *Ops.Gl.Meshes.Cube*  
 
-Draws a cube to the canvas. Please note that without doing a rotation using a `[Transform](../Ops.Gl.Matrix.Transform/Ops.Gl.Matrix.Transform.md)`-op you will only see a rectangle.
+Draws a cube to the canvas. Please note that without doing a rotation using a [Transform](../Ops.Gl.Matrix.Transform/Ops.Gl.Matrix.Transform.md)-op you will only see a rectangle.
 
 ## Input
 
