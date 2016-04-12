@@ -1,15 +1,17 @@
 # Ops.ToggleBool
 
-Toggles a bool value, everytime the input trigger is triggered
+Outputs a bool value which changes state every time `Trigger` is executed, this will result in an output like `true` -> `false` -> `true` -> `false` …  
 
-## In Ports
+## Input
 
-### trigger
+### Trigger
 
-when triggered the output value will be toggled from `true` to `false`
+*Type: Function*  
+When triggered the output value will be toggled from `true` to `false` and the other way around.
 
-## Out Ports
+## Output
 
-### result
+### Result
 
-boolean value
+*Type: Value [true, false]*  
+

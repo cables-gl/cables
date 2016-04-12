@@ -51,6 +51,142 @@
     ]
   },
   {
+    "op_name": "Ops.Audio.Bang",
+    "ports": [
+      {
+        "from": "exe",
+        "to": "Execute"
+      },
+      {
+        "from": "startValue",
+        "to": "Start Value"
+      },
+      {
+        "from": "endValue",
+        "to": "End Value"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Audio.BPMTap",
+    "ports": [
+      {
+        "from": "nudgeLeft",
+        "to": "Nudge Left"
+      },
+      {
+        "from": "nudgeRight",
+        "to": "Nudge Right"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Gl.Matrix.Transform",
+    "ports": [
+      {
+        "from": "posX",
+        "to": "Position X"
+      },
+      {
+        "from": "posY",
+        "to": "Position Y"
+      },
+      {
+        "from": "posZ",
+        "to": "Position Z"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Math.Clamp",
+    "ports": [
+      {
+        "from": "val",
+        "to": "Value"
+      },
+      {
+        "from": "min",
+        "to": "Minimum"
+      },
+      {
+        "from": "max",
+        "to": "Maximum"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Math.Compare.Between",
+    "ports": [
+      {
+        "from": "number1",
+        "to": "Range 1"
+      },
+      {
+        "from": "number2",
+        "to": "Range 2"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Math.Compare.Greater",
+    "ports": [
+      {
+        "from": "number1",
+        "to": "Value"
+      },
+      {
+        "from": "number2",
+        "to": "Reference Value"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Math.Divide",
+    "ports": [
+      {
+        "from": "number1",
+        "to": "Dividend"
+      },
+      {
+        "from": "number2",
+        "to": "Divisor"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.TriggerCounter",
+    "ports": [
+      {
+        "from": "exe",
+        "to": "Execute"
+      },
+      {
+        "from": "timesTriggered",
+        "to": "Times Triggered"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.String.concat",
+    "op_name_new": "Ops.String.Concat"
+  },
+  {
+    "op_name": "Ops.ToggleBool",
+    "op_name_new": "Ops.Bool.Toggle"
+  },
+  {
+    "op_name": "Ops.Or",
+    "op_name_new": "Ops.Bool.Or"
+  },
+    {
+    "op_name": "Ops.And",
+    "op_name_new": "Ops.Bool.And"
+  },
+  {
+    "op_name": "Ops.Audio.BPMTap",
+    "op_name_new": "Ops.Audio.BpmTap"
+  },
+  {
     "op_name": "Ops.Gl.Mouse",
     "op_name_new": "Ops.Devices.Mouse.Mouse"
   },

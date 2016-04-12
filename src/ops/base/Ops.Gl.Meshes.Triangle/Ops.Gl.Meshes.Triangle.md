@@ -8,25 +8,32 @@ Draws a triangle to the canvas.
 
 ## Input
 
-### Render [Function]
+### Render
 
+*Type: Function*  
 Renders a circle to the canvas.
 
-### Width [Value]
+### Width
 
+*Type: Value*  
 Width of the triangle
 
-### Height [Value]
+### Height
 
+*Type: Value*  
 Width of the triangle
 
 ## Output
 
-### Trigger [Function]
+### Trigger
 
+*Type: Function*  
 Every time `Circle` is triggered, it will also trigger all connected ops.
 
-### Geometry [Texture]
+### Geometry
+
+*Type: Object*  
+For advanced use cases you can output the geometry data (vertices, normals) to use in another op, see [Transform To Geometry Vertices Example](https://cables.gl/ui/#/project/570cd04d3b97df5829deae10) (uses a [Sphere](../Ops.Gl.Meshes.Sphere/Ops.Gl.Meshes.Sphere.md) instead).  
 
 **TODO**
 

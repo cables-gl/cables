@@ -8,36 +8,45 @@ Renders wireframes
 
 ## Input
 
-### Render [Function]
+### Render
 
-### Fill [Value]
+*Type: Function*  
 
+### Fill
+
+*Type: Value [true, false]*   
 If set, background will be drawn (currently the color cannot be chosen).
 
-### Width [Value]
+### Width
 
+*Type: Value*  
 Line thickness
 
-### Opacity [Value]
+### Opacity
 
+*Type: Value [0..1]*  
 Opacity, used for stroke and fill. `0` = invisible, `1` = fully visible
 
-### Red [Value]
+### Red
 
+*Type: Value [0..1]*  
 Red value of the stroke color
 
-### Green [Value]
+### Green
 
+*Type: Value [0..1]*  
 Green value of the stroke color
 
-### Blue [Value]
+### Blue
 
+*Type: Value [0..1]*  
 Blue value of the stroke color
 
 ## Output
 
-### Trigger [Function]
+### Trigger
 
+*Type: Function*  
 Every time `WireframeMaterial` is triggered, it will also trigger all connected ops.
 
 ## Example

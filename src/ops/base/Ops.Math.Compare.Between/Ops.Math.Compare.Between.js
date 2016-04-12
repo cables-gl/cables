@@ -23,3 +23,4 @@ this.exec= function()
 this.number1.onValueChanged=this.exec;
 this.number2.onValueChanged=this.exec;
 this.number.onValueChanged=this.exec;
+this.exec();
