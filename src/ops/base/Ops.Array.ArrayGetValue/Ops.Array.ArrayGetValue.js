@@ -8,11 +8,7 @@ array.ignoreValueSerialize=true;
 
 function update()
 {
-<<<<<<< HEAD
-    if(array.get())value.set( array.get()[index.get()]);
-=======
     if(array.get()) value.set( array.get()[index.get()]);
->>>>>>> 014d2002198940b0cb600b0c4e69467b6511247b
 }
 
 index.onValueChanged=update;
