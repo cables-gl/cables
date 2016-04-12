@@ -35,3 +35,8 @@ Some ops need a port rename:
     ]
   }
 ``` 
+
+## General Renames (for all ops)
+
+- All mentions of port-type: `texture` need to be renamed to `Object`
+- All ports with name `exe` need to be renamed to `Execute`

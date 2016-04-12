@@ -51,6 +51,57 @@
     ]
   },
   {
+    "op_name": "Ops.Audio.Bang",
+    "ports": [
+      {
+        "from": "exe",
+        "to": "Execute"
+      },
+      {
+        "from": "startValue",
+        "to": "Start Value"
+      },
+      {
+        "from": "endValue",
+        "to": "End Value"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Audio.BPMTap",
+    "ports": [
+      {
+        "from": "nudgeLeft",
+        "to": "Nudge Left"
+      },
+      {
+        "from": "nudgeRight",
+        "to": "Nudge Right"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Gl.Matrix.Transform",
+    "ports": [
+      {
+        "from": "posX",
+        "to": "Position X"
+      },
+      {
+        "from": "posY",
+        "to": "Position Y"
+      },
+      {
+        "from": "posZ",
+        "to": "Position Z"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Audio.BPMTap",
+    "op_name_new": "Ops.Audio.BpmTap"
+  },
+  {
     "op_name": "Ops.Gl.Mouse",
     "op_name_new": "Ops.Devices.Mouse.Mouse"
   },
