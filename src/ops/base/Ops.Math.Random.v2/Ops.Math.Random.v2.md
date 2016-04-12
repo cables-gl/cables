@@ -1,22 +1,30 @@
-# Ops.Math.Random
+# Random
 
-## In Ports
+*Ops.Math.Random*
 
-### exe
+Generates random values between a minimum and a maximum value.  
 
+## Input
+
+### Execute
+
+*Type: Trigger*  
 Connect e.g. to `trigger` port of [Renderer](../Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op to continuously send out values.
 
-### min
+### Min
 
+*Type: Value*  
 Minimum value
 
-### max
+### Max
 
+*Type: Value*  
 Maximum value
 
-## Out Ports
+## Output
 
-### result
+### Result
 
-Random value between `min` and `max`.
+*Type: Value*  
+Random value between `Min` and `Max`.
 
