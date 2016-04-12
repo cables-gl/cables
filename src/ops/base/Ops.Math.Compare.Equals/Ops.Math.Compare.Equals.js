@@ -1,7 +1,5 @@
-Op.apply(this, arguments);
-var self=this;
+op.name='Equals';
 
-this.name='Equals';
 this.result=this.addOutPort(new Port(this,"result"));
 this.number1=this.addInPort(new Port(this,"number1"));
 this.number2=this.addInPort(new Port(this,"number2"));
