@@ -98,8 +98,42 @@
     ]
   },
   {
+    "op_name": "Ops.Math.Clamp",
+    "ports": [
+      {
+        "from": "val",
+        "to": "Value"
+      },
+      {
+        "from": "min",
+        "to": "Minimum"
+      },
+      {
+        "from": "max",
+        "to": "Maximum"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Math.Compare.Between",
+    "ports": [
+      {
+        "from": "number1",
+        "to": "Range 1"
+      },
+      {
+        "from": "number2",
+        "to": "Range 2"
+      }
+    ]
+  },
+  {
     "op_name": "Ops.Audio.BPMTap",
     "op_name_new": "Ops.Audio.BpmTap"
+  },
+  {
+    "op_name": "Ops.And",
+    "op_name_new": "Ops.Math.And"
   },
   {
     "op_name": "Ops.Gl.Mouse",
