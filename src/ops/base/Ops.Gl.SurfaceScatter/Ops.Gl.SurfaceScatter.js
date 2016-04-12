@@ -1,6 +1,4 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 
 this.name='SurfaceScatter';
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
@@ -27,12 +25,12 @@ function initRandom()
 
     if(!geometry.get())
     {
-        self.uiAttr({'error':'no geometry'});
+        op.uiAttr({'error':'no geometry'});
         return;
     }
     else
     {
-        self.uiAttr({'error':null});
+        op.uiAttr({'error':null});
     }
     
     Math.randomSeed=seed.get();
@@ -92,11 +90,9 @@ this.render.onTriggered=function()
 
             mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, objects[j].qMat);
 
-            self.index.set(j);
+            op.index.set(j);
             trigger.trigger();
             cgl.popMvMatrix();
-
-            // self.trigger.trigger();
         }
     }
 };

@@ -1,4 +1,3 @@
-Op.apply(this, arguments);
 var cgl=this.patch.cgl;
 var patch=this.patch;
 
@@ -43,7 +42,7 @@ var data = "data:image/svg+xml," +
            '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:40px">' +
              '<em>I</em> like ' + 
              '<span style="color:white; text-shadow:0 0 2px blue;">' +
-             'cheese</span>' +
+             'cables</span>' +
            '</div>' +
            '</foreignObject>' +
            '</svg>';

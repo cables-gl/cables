@@ -1,16 +1,13 @@
-var self=this;
-var cgl=this.patch.cgl;
+op.name='Pixelate';
 
-this.name='Pixelate';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var amountX=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{  }));
+var amountY=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE,{  }));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-
-var amountX=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE,{  }));
-var amountY=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE,{  }));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'

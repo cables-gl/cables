@@ -1,35 +1,32 @@
-var self=this;
-var cgl=this.patch.cgl;
+op.name='Circle';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-this.name='Circle';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var segments=op.addInPort(new Port(op,"segments"));
+var radius=op.addInPort(new Port(op,"radius"));
+var innerRadius=op.addInPort(new Port(op,"innerRadius",OP_PORT_TYPE_VALUE,{display:"range"}));
+var percent=op.addInPort(new Port(op,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-this.segments=this.addInPort(new Port(this,"segments"));
-this.radius=this.addInPort(new Port(this,"radius"));
-this.innerRadius=this.addInPort(new Port(this,"innerRadius",OP_PORT_TYPE_VALUE,{display:"range"}));
-this.percent=this.addInPort(new Port(this,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
+var steps=op.addInPort(new Port(op,"steps",OP_PORT_TYPE_VALUE,{type:"int"}));
+steps.set(0.0);
+var invertSteps=op.addInPort(new Port(op,"invertSteps",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+invertSteps.set(false);
 
-this.steps=this.addInPort(new Port(this,"steps",OP_PORT_TYPE_VALUE,{type:"int"}));
-this.steps.val=0.0;
-this.invertSteps=this.addInPort(new Port(this,"invertSteps",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-this.invertSteps.val=false;
-
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
+var cgl=op.patch.cgl;
 
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     mesh.render(cgl.getShader());
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
-this.segments.val=40;
-this.radius.val=1;
-this.innerRadius.val=0;
-this.percent.val=1;
-
+segments.set(40);
+radius.set(1);
+innerRadius.set(0);
+percent.set(1);
 
 var geom=new CGL.Geometry();
 var mesh=new CGL.Mesh(cgl,geom);
@@ -48,13 +45,13 @@ function calc()
     var posxTexCoord=0,posyTexCoord=0;
     var posx=0,posy=0;
 
-    if(self.innerRadius.get()<=0)
+    if(innerRadius.get()<=0)
     {
-      for (i=0; i <= Math.round(self.segments.get())*self.percent.get(); i++)
+      for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
       {
-          degInRad = (360/Math.round(self.segments.get()))*i*CGL.DEG2RAD;
-          posx=Math.cos(degInRad)*self.radius.get();
-          posy=Math.sin(degInRad)*self.radius.get();
+          degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+          posx=Math.cos(degInRad)*radius.get();
+          posy=Math.sin(degInRad)*radius.get();
 
 
             if(mapping.get()=='flat')
@@ -66,7 +63,7 @@ function calc()
             }
             else if(mapping.get()=='round')
             {
-                posxTexCoord=1.0-i/self.segments.get();
+                posxTexCoord=1.0-i/segments.get();
                 posyTexCoord=0;
                 posxTexCoordIn=posxTexCoord;
                 posyTexCoordIn=1;
@@ -93,36 +90,36 @@ function calc()
     else
     {
       var count=0;
-      for (i=0; i <= Math.round(self.segments.get())*self.percent.get(); i++)
+      for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
       {
           count++;
 
-          degInRad = (360/Math.round(self.segments.get()))*i*CGL.DEG2RAD;
-          posx=Math.cos(degInRad)*self.radius.get();
-          posy=Math.sin(degInRad)*self.radius.get();
+          degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+          posx=Math.cos(degInRad)*radius.get();
+          posy=Math.sin(degInRad)*radius.get();
 
-          var posxIn=Math.cos(degInRad)*self.innerRadius.get()*self.radius.get();
-          var posyIn=Math.sin(degInRad)*self.innerRadius.get()*self.radius.get();
+          var posxIn=Math.cos(degInRad)*innerRadius.get()*radius.get();
+          var posyIn=Math.sin(degInRad)*innerRadius.get()*radius.get();
 
         
         if(mapping.get()=='flat')
         {
             posxTexCoord=(Math.cos(degInRad)+1.0)/2;
             posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
-            posxTexCoordIn=((posxTexCoord-0.5)*self.innerRadius.get())+0.5;
-            posyTexCoordIn=((posyTexCoord-0.5)*self.innerRadius.get())+0.5;
+            posxTexCoordIn=((posxTexCoord-0.5)*innerRadius.get())+0.5;
+            posyTexCoordIn=((posyTexCoord-0.5)*innerRadius.get())+0.5;
         }
         else if(mapping.get()=='round')
         {
-            posxTexCoord=1.0-i/self.segments.get();
+            posxTexCoord=1.0-i/segments.get();
             posyTexCoord=0;
             posxTexCoordIn=posxTexCoord;
             posyTexCoordIn=1;
         }
 
-          if(self.steps.get()===0.0 ||
-            (count%parseInt(self.steps.get(),10)===0 && !self.invertSteps.get()) ||
-            (count%parseInt(self.steps.get(),10)!==0 && self.invertSteps.get())
+          if(steps.get()===0.0 ||
+            (count%parseInt(steps.get(),10)===0 && !invertSteps.get()) ||
+            (count%parseInt(steps.get(),10)!==0 && invertSteps.get())
             )
           {
               geom.addFace(
@@ -159,14 +156,14 @@ function calc()
     mesh.setGeom(geom);
 }
 
-var mapping=this.addInPort(new Port(this,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
+var mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
 mapping.val='flat';
 mapping.onValueChange(calc);
 
-this.segments.onValueChanged=calc;
-this.radius.onValueChanged=calc;
-this.innerRadius.onValueChanged=calc;
-this.percent.onValueChanged=calc;
-this.steps.onValueChanged=calc;
-this.invertSteps.onValueChanged=calc;
+segments.onValueChanged=calc;
+radius.onValueChanged=calc;
+innerRadius.onValueChanged=calc;
+percent.onValueChanged=calc;
+steps.onValueChanged=calc;
+invertSteps.onValueChanged=calc;
 calc();

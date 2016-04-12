@@ -2,26 +2,26 @@
 var rframes=0;
 var rframeStart=0;
 
-if(!this.patch.cgl)
+if(!op.patch.cgl)
 {
     console.log(' no cgl!');
 }
 
-var patch=this.patch;
-var cgl=this.patch.cgl;
+var patch=op.patch;
+var cgl=op.patch.cgl;
 
-this.name='renderer';
+op.name='renderer';
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var width=this.addOutPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-var height=this.addOutPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
 var identTranslate=vec3.create();
 vec3.set(identTranslate, 0,0,0);
 var identTranslateView=vec3.create();
 vec3.set(identTranslateView, 0,0,-2);
 
-this.onDelete=function()
+op.onDelete=function()
 {
     cgl.gl.clearColor(0,0,0,0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
@@ -29,7 +29,7 @@ this.onDelete=function()
     op.patch.removeOnAnimFrame(op);
 };
 
-this.onAnimFrame=function(time)
+op.onAnimFrame=function(time)
 {
     if(cgl.aborted || cgl.canvas.clientWidth===0 || cgl.canvas.clientHeight===0)return;
 
@@ -54,7 +54,6 @@ this.onAnimFrame=function(time)
         rframes=0;
         rframeStart=Date.now();
     }
-    
 
     cgl.renderStart(cgl,identTranslate,identTranslateView);
     trigger.trigger();
@@ -67,8 +66,5 @@ this.onAnimFrame=function(time)
     cgl.renderEnd(cgl);
     
     if(!cgl.frameStore.phong)cgl.frameStore.phong={}
-    // cgl.frameStore.phong.lights={};
     rframes++;
-
-    
 };

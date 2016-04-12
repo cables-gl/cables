@@ -1,17 +1,17 @@
-var cgl=this.patch.cgl;
+op.name='Triangle';
 
-this.name='Triangle';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var sizeW=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-var sizeH=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var sizeW=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var sizeH=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
 sizeW.set(1);
 sizeH.set(1);
 
-var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
+var cgl=op.patch.cgl;
 var mesh=null;
 
 render.onTriggered=function()

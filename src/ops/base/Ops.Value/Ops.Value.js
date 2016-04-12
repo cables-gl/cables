@@ -1,15 +1,12 @@
-var self=this;
+op.name='Value';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var v=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
 
-this.name='Value';
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var v=this.addInPort(new Port(this,"value",OP_PORT_TYPE_VALUE));
-
-var result=this.addOutPort(new Port(this,"result"));
+var result=op.addOutPort(new Port(op,"result"));
 
 function frame(time)
 {
-    // self.updateAnims();
-    self.exec();
+    op.exec();
 }
 
 var exec=function()
