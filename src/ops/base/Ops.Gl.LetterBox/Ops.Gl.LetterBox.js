@@ -1,16 +1,13 @@
 var cgl=op.patch.cgl;
 
-this.name='letterbox';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='letterbox';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-// this.offX=this.addOutPort(new Port(this,"offset x",OP_PORT_TYPE_VALUE));
-// this.offY=this.addOutPort(new Port(this,"offset y",OP_PORT_TYPE_VALUE));
-
-var ratio=this.addInPort(new Port(this,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1.25,1.3333333333,1.777777777778,2.33333333333333,3]} ));
+var ratio=op.addInPort(new Port(op,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1.25,1.3333333333,1.777777777778,2.33333333333333,3]} ));
 ratio.set(1.777777777778);
 
-var blackBars=this.addInPort(new Port(this,"black bars",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var blackBars=op.addInPort(new Port(op,"black bars",OP_PORT_TYPE_VALUE,{display:'bool'}));
 blackBars.set(true);
 
 var x=0,y=0,w=1000,h=1000;
@@ -48,7 +45,7 @@ function resize()
     }
 }
 
-this.onDelete=function()
+op.onDelete=function()
 {
     // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
     cgl.resetViewPort();

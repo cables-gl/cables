@@ -1,15 +1,14 @@
-this.name='map value range';
-var result=this.addOutPort(new Port(this,"result"));
-var v=this.addInPort(new Port(this,"value"));
-var old_min=this.addInPort(new Port(this,"old min"));
-var old_max=this.addInPort(new Port(this,"old max"));
-var new_min=this.addInPort(new Port(this,"new min"));
-var new_max=this.addInPort(new Port(this,"new max"));
-var self=this;
-var exec= function()
-{
-    self.updateAnims();
+op.name='map value range';
+var result=op.addOutPort(new Port(op,"result"));
+var v=op.addInPort(new Port(op,"value"));
+var old_min=op.addInPort(new Port(op,"old min"));
+var old_max=op.addInPort(new Port(op,"old max"));
+var new_min=op.addInPort(new Port(op,"new min"));
+var new_max=op.addInPort(new Port(op,"new max"));
 
+
+function exec()
+{
     if(v.val>old_max.get())
     {
         result.set(new_max.get());
@@ -47,7 +46,7 @@ var exec= function()
     if(reverseOutput) result.set(newMax - portion);
         else result.set(portion + newMin);
 
-};
+}
 
 v.val=0;
 old_min.val=-1;

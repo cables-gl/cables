@@ -1,22 +1,20 @@
-CABLES.Op.apply(this, arguments);
-this.name='texture';
-var self=this;
-var cgl=this.patch.cgl;
+op.name='texture';
 
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
-var tfilter=this.addInPort(new Port(this,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
-var wrap=this.addInPort(new Port(this,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
+var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
-var width=this.addOutPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-var height=this.addOutPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
 
-var flip=this.addInPort(new Port(this,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var unpackAlpha=this.addInPort(new Port(this,"unpackPreMultipliedAlpha",OP_PORT_TYPE_VALUE,{display:'bool'}));
 flip.set(false);
 unpackAlpha.set(true);
 
+var cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
 
@@ -27,7 +25,7 @@ var setTempTexture=function()
 
 var reload=function(nocache)
 {
-    var url=self.patch.getFilePath(filename.get());
+    var url=op.patch.getFilePath(filename.get());
     if(nocache)url+='?rnd='+generateUUID();
 
     if(  (filename.get() && filename.get().length>1 ))
@@ -39,16 +37,16 @@ var reload=function(nocache)
             {
                 console.log('error loading image');
                 setTempTexture();
-                self.uiAttr({'error':'could not load texture'});
+                op.uiAttr({'error':'could not load texture'});
                 return;
             }
-            self.uiAttr({'error':null});
+            op.uiAttr({'error':null});
             textureOut.val=tex;
             width.set(tex.width);
             height.set(tex.height);
 
-            if(!tex.isPowerOfTwo()) self.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
-                else self.uiAttr({warning:''});
+            if(!tex.isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
+                else op.uiAttr({warning:''});
 
         },{
             wrap:wrap.get(),
@@ -87,7 +85,7 @@ textureOut.onPreviewChanged=function()
     if(textureOut.showPreview) CGL.Texture.previewTexture=textureOut.get();
 };
 
-this.onFileUploaded=function(fn)
+op.onFileUploaded=function(fn)
 {
     if(filename.get() && filename.get().endsWith(fn))
     {

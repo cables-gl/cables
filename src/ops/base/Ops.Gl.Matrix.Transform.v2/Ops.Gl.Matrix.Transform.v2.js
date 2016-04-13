@@ -1,20 +1,19 @@
+op.name='Transform';
 
-this.name='transform';
-var cgl=this.patch.cgl;
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var posX=op.addInPort(new Port(op,"posX"));
+var posY=op.addInPort(new Port(op,"posY"));
+var posZ=op.addInPort(new Port(op,"posZ"));
 
-var posX=this.addInPort(new Port(this,"posX"));
-var posY=this.addInPort(new Port(this,"posY"));
-var posZ=this.addInPort(new Port(this,"posZ"));
+var scale=op.addInPort(new Port(op,"scale"));
 
-var scale=this.addInPort(new Port(this,"scale"));
+var rotX=op.addInPort(new Port(op,"rotX"));
+var rotY=op.addInPort(new Port(op,"rotY"));
+var rotZ=op.addInPort(new Port(op,"rotZ"));
 
-var rotX=this.addInPort(new Port(this,"rotX"));
-var rotY=this.addInPort(new Port(this,"rotY"));
-var rotZ=this.addInPort(new Port(this,"rotZ"));
-
+var cgl=op.patch.cgl;
 var vPos=vec3.create();
 var vScale=vec3.create();
 var transMatrix = mat4.create();
@@ -27,11 +26,10 @@ var translationChanged=true;
 var scaleChanged=true;
 var rotChanged=true;
 
-var self=this;
 
 render.onTriggered=function()
 {
-    self.updateAnims();
+
     var updateMatrix=false;
     if(translationChanged)
     {

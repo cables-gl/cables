@@ -1,14 +1,14 @@
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 
-this.name='Blur';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='Blur';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE));
+var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE));
 amount.set(10);
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -64,7 +64,7 @@ var uniHeight=new CGL.Uniform(shader,'f','height',0);
 var uniAmount=new CGL.Uniform(shader,'f','amount',amount.get());
 amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
 
-var direction=this.addInPort(new Port(this,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+var direction=op.addInPort(new Port(op,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
 var dir=0;
 direction.set('both');
 direction.onValueChange(function()

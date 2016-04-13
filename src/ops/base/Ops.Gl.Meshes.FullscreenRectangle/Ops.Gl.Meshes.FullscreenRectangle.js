@@ -1,16 +1,15 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='fullscreen rectangle';
 
-this.name='fullscreen rectangle';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.mesh=null;
+var cgl=op.patch.cgl;
+var mesh=null;
 var geom=new CGL.Geometry();
 var x=0,y=0,z=0,w=0;
+op.onResize=rebuild;
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(
       cgl.getViewPort()[2]!=w ||
@@ -26,7 +25,7 @@ this.render.onTriggered=function()
     cgl.pushViewMatrix();
     mat4.identity(cgl.vMatrix);
 
-    self.mesh.render(cgl.getShader());
+    mesh.render(cgl.getShader());
 
     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
 
@@ -34,10 +33,9 @@ this.render.onTriggered=function()
     cgl.popMvMatrix();
     cgl.popViewMatrix();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
-this.onResize=this.rebuild;
 
 function rebuild()
 {
@@ -68,6 +66,6 @@ function rebuild()
         3, 1, 2
     ];
 
-    if(!self.mesh) self.mesh=new CGL.Mesh(cgl,geom);
-    else self.mesh.setGeom(geom);
+    if(!mesh) mesh=new CGL.Mesh(cgl,geom);
+        else mesh.setGeom(geom);
 }

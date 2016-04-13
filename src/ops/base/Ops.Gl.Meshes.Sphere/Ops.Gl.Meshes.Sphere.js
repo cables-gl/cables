@@ -1,47 +1,43 @@
 // ported from freeglut fg_geometry.c
 
-Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='Sphere';
 
-this.name='Sphere';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var stacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
+var slices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
+var radius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
-this.stacks=this.addInPort(new Port(this,"stacks",OP_PORT_TYPE_VALUE));
-this.stacks.set(16);
-this.slices=this.addInPort(new Port(this,"slices",OP_PORT_TYPE_VALUE));
-this.slices.set(16);
-this.radius=this.addInPort(new Port(this,"radius",OP_PORT_TYPE_VALUE));
-this.radius.set(1);
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+stacks.set(16);
+slices.set(16);
+radius.set(1);
 geomOut.ignoreValueSerialize=true;
 
-
+var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 
-this.render.onTriggered=function()
+slices.onValueChanged=updateMesh;
+stacks.onValueChanged=updateMesh;
+radius.onValueChanged=updateMesh;
+
+render.onTriggered=function()
 {
     if(mesh!==null) mesh.render(cgl.getShader());
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
 function updateMesh()
 {
-    var slices=Math.round(self.slices.get());
-    var stacks=Math.round(self.stacks.get());
-    if(slices<1)slices=1;
-    if(stacks<1)stacks=1;
-    var r=self.radius.get();
-    generateSphere(r, slices, stacks);
+    var nslices=Math.round(slices.get());
+    var nstacks=Math.round(stacks.get());
+    if(nslices<1)nslices=1;
+    if(nstacks<1)nstacks=1;
+    var r=radius.get();
+    generateSphere(r, nslices, nstacks);
 }
-
-this.slices.onValueChanged=updateMesh;
-this.stacks.onValueChanged=updateMesh;
-this.radius.onValueChanged=updateMesh;
 
 updateMesh();
 

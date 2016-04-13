@@ -1,20 +1,19 @@
-var cgl=this.patch.cgl;
+op.name='Cube';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-this.name='Cube';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-
-var center=this.addInPort(new Port(this,"center",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var width=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-var height=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
-var lengt=this.addInPort(new Port(this,"length",OP_PORT_TYPE_VALUE));
+var center=op.addInPort(new Port(op,"center",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var lengt=op.addInPort(new Port(op,"length",OP_PORT_TYPE_VALUE));
 
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
 
+var cgl=op.patch.cgl;
 var geom=null;
 var mesh=null;
 width.set(1.0);

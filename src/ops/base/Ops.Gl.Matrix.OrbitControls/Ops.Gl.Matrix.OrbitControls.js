@@ -16,6 +16,7 @@ minDist.set(0.05);
 initialAxis.set(0.5);
 initialX.set(0.0);
 
+
 var eye=vec3.create();
 var vUp=vec3.create();
 var vCenter=vec3.create();
