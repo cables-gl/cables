@@ -1,47 +1,47 @@
-var self=this;
-var cgl=this.patch.cgl;
+op.name='Torus';
 
-this.name='Torus';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var sides=op.addInPort(new Port(op,"sides",OP_PORT_TYPE_VALUE));
+var rings=op.addInPort(new Port(op,"rings",OP_PORT_TYPE_VALUE));
+var innerRadius=op.addInPort(new Port(op,"innerRadius",OP_PORT_TYPE_VALUE));
+var outerRadius=op.addInPort(new Port(op,"outerRadius",OP_PORT_TYPE_VALUE));
 
-this.sides=this.addInPort(new Port(this,"sides",OP_PORT_TYPE_VALUE));
-this.sides.set(32);
-this.rings=this.addInPort(new Port(this,"rings",OP_PORT_TYPE_VALUE));
-this.rings.set(32);
-this.innerRadius=this.addInPort(new Port(this,"innerRadius",OP_PORT_TYPE_VALUE));
-this.innerRadius.set(0.5);
-this.outerRadius=this.addInPort(new Port(this,"outerRadius",OP_PORT_TYPE_VALUE));
-this.outerRadius.set(1);
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+sides.set(32);
+rings.set(32);
+innerRadius.set(0.5);
+outerRadius.set(1);
 
-var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
+var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 
-this.render.onTriggered=function()
+rings.onValueChanged=updateMesh;
+sides.onValueChanged=updateMesh;
+innerRadius.onValueChanged=updateMesh;
+outerRadius.onValueChanged=updateMesh;
+
+render.onTriggered=function()
 {
     if(mesh!==null) mesh.render(cgl.getShader());
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
 function updateMesh()
 {
-    var rings=Math.round(parseFloat(self.rings.get()));
-    var sides=Math.round(parseFloat(self.sides.get()));
-    if(rings<2)rings=2;
-    if(sides<2)sides=2;
-    var r=parseFloat(self.innerRadius.get());
-    var r2=parseFloat(self.outerRadius.get());
-    generateTorus(r,r2, rings, sides);
+    var nrings=Math.round(parseFloat(rings.get()));
+    var nsides=Math.round(parseFloat(sides.get()));
+    if(nrings<2)nrings=2;
+    if(nsides<2)nsides=2;
+    var r=parseFloat(innerRadius.get());
+    var r2=parseFloat(outerRadius.get());
+    generateTorus(r,r2, nrings, nsides);
 }
 
-this.rings.onValueChanged=updateMesh;
-this.sides.onValueChanged=updateMesh;
-this.innerRadius.onValueChanged=updateMesh;
-this.outerRadius.onValueChanged=updateMesh;
 
 updateMesh();
 

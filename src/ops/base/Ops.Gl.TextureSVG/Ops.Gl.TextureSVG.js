@@ -1,16 +1,14 @@
-var cgl=this.patch.cgl;
-var patch=this.patch;
+op.name='SVG Texture';
 
-this.name='SVG Texture';
-
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-var texWidth=this.addInPort(new Port(this,"texture width"));
-var texHeight=this.addInPort(new Port(this,"texture height"));
-var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+var texWidth=op.addInPort(new Port(op,"texture width"));
+var texHeight=op.addInPort(new Port(op,"texture height"));
+var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
 
 texWidth.set(1024);
 texHeight.set(1024);
 
+var cgl=op.patch.cgl;
 var canvas=null;
 var ctx=null;
 
@@ -49,13 +47,10 @@ var data = "data:image/svg+xml," +
 
 function reload()
 {
-    console.log('loading file');
     CABLES.ajax(
-        patch.getFilePath(filename.get()),
+        op.patch.getFilePath(filename.get()),
         function(err,_data,xhr)
         {
-            console.log('loading file finished...');
-            console.log(_data);
             data="data:image/svg+xml,"+_data;
             update();
         }
@@ -73,9 +68,7 @@ function update()
     
     img.onload = function()
     {
-        console.log('finished loading img...')
         ctx.clearRect(0,0,canvas.width,canvas.height);
-
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height );
         textureOut.val=new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP);
     }
@@ -83,7 +76,7 @@ function update()
     img.src = data;    
 }
 
-this.onFileUploaded=function(fn)
+op.onFileUploaded=function(fn)
 {
     if(filename.get() && filename.get().endsWith(fn))
     {

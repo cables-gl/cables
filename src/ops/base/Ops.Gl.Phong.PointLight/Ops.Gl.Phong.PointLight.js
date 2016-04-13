@@ -1,22 +1,22 @@
-this.name='PointLight';
-var cgl=this.patch.cgl;
+op.name='PointLight';
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var attachment=this.addOutPort(new Port(this,"attachment",OP_PORT_TYPE_FUNCTION));
+var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
+var attenuation=op.addInPort(new Port(op,"attenuation",OP_PORT_TYPE_VALUE));
 
-var attenuation=this.addInPort(new Port(this,"attenuation",OP_PORT_TYPE_VALUE));
+var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=this.addInPort(new Port(this,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=this.addInPort(new Port(this,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
+var z=op.addInPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
 
-var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
-var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-var z=this.addInPort(new Port(this,"z",OP_PORT_TYPE_VALUE));
+var mul=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var mul=this.addInPort(new Port(this,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
+var cgl=op.patch.cgl;
 mul.set(1);
 
 var id=generateUUID();
@@ -25,26 +25,23 @@ var lights=[];
 var posVec=vec3.create();
 var mpos=vec3.create();
 
-
-var updateColor=function()
+function updateColor()
 {
     cgl.frameStore.phong.lights[id].color=[ r.get(), g.get(), b.get() ];
     cgl.frameStore.phong.lights[id].changed=true;
 }
 
-
-
-var updateAttenuation=function()
+function updateAttenuation()
 {
     cgl.frameStore.phong.lights[id].attenuation=attenuation.get();
     cgl.frameStore.phong.lights[id].changed=true;
 }
 
-var updatePos=function()
+function updatePos()
 {
 }
 
-var updateAll=function()
+function updateAll()
 {
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights={};

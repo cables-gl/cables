@@ -1,49 +1,46 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+// adapted from the FreeGLUT project
 
-this.name='Cone';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+op.name='Cone';
 
-this.slices=this.addInPort(new Port(this,"slices",OP_PORT_TYPE_VALUE));
-this.slices.set(32);
-this.stacks=this.addInPort(new Port(this,"stacks",OP_PORT_TYPE_VALUE));
-this.stacks.set(5);
-this.radius=this.addInPort(new Port(this,"radius",OP_PORT_TYPE_VALUE));
-this.radius.set(1);
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var slices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
+var stacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
+var radius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
-this.height=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
-this.height.set(2);
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var geomOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
+slices.set(32);
+stacks.set(5);
+radius.set(1);
+height.set(2);
 geomOut.ignoreValueSerialize=true;
 
-
+var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(mesh!==null) mesh.render(cgl.getShader());
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
 function updateMesh()
 {
-    var stacks=Math.round(self.stacks.get());
-    var slices=Math.round(self.slices.get());
-    if(stacks<2)stacks=2;
-    if(slices<2)slices=2;
-    var r=self.radius.get();
-    generateCone(r,self.height.get(), stacks, slices);
+    var nstacks=Math.round(stacks.get());
+    var nslices=Math.round(slices.get());
+    if(nstacks<2)nstacks=2;
+    if(nslices<2)nslices=2;
+    var r=radius.get();
+    generateCone(r,height.get(), nstacks, nslices);
 }
 
-this.stacks.onValueChanged=updateMesh;
-this.slices.onValueChanged=updateMesh;
-this.radius.onValueChanged=updateMesh;
-this.height.onValueChanged=updateMesh;
+stacks.onValueChanged=updateMesh;
+slices.onValueChanged=updateMesh;
+radius.onValueChanged=updateMesh;
+height.onValueChanged=updateMesh;
 
 updateMesh();
 
@@ -136,11 +133,6 @@ function generateCone(base,height,stacks,slices)
         r -= rStep;
     }
 
-
-
-
-
-
     /* top stack */
     for (j=0, idx=0;  j<slices;  j++, idx+=2)
     {
@@ -165,12 +157,8 @@ function generateCone(base,height,stacks,slices)
         geom.verticesIndices[idx+1] = offset+slices;
     }
 
-
-
-
     mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
     geomOut.set(geom);
-
 }
 
 
