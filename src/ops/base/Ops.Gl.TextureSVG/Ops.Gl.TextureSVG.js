@@ -23,11 +23,11 @@ function createCanvas()
 
 function reSize()
 {
-    if(!textureOut.val) textureOut.val=new CGL.Texture(cgl);
+    if(!textureOut.get()) textureOut.set(new CGL.Texture(cgl));
 
     ctx = canvas.getContext('2d');
 
-    textureOut.val.setSize(texWidth.get(),texHeight.get());
+    textureOut.get().setSize(texWidth.get(),texHeight.get());
     ctx.canvas.width=canvas.width=texWidth.get();
     ctx.canvas.height=canvas.height=texHeight.get();
 
@@ -63,14 +63,14 @@ function update()
 
     img.onerror = function()
     {
-        console.log('svg error');
+        op.uiAttr( { 'error': 'Could not load SVG file!' } );
     }
     
     img.onload = function()
     {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height );
-        textureOut.val=new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP);
+        textureOut.set(new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP));
     }
     
     img.src = data;    
