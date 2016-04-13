@@ -10,7 +10,6 @@ If you want to use the same value on multiple places this op is handy – you ca
 
 
 
-
 ## Output
 
 ### Result
