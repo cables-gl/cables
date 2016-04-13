@@ -6,7 +6,6 @@ var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 var lengt=op.addInPort(new Port(op,"length",OP_PORT_TYPE_VALUE));
 
-
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
