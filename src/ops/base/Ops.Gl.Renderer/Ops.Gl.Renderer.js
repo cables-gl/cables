@@ -2,10 +2,7 @@
 var rframes=0;
 var rframeStart=0;
 
-if(!op.patch.cgl)
-{
-    console.log(' no cgl!');
-}
+if(!op.patch.cgl) op.uiAttr( { 'error': 'No webgl cgl context' } );
 
 var patch=op.patch;
 var cgl=op.patch.cgl;

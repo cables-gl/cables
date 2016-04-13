@@ -90,7 +90,6 @@ function rebuild()
             indices.push(v2);
             indices.push(v3);
             indices.push(v4);
-            // console.log(f3);
         }
     }
 

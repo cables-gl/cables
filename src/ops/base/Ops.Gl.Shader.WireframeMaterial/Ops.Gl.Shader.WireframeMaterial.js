@@ -23,7 +23,7 @@ var opacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE,{ display:'ran
 opacity.set(1.0);
 opacity.onValueChanged=function(){ uniformOpacity.setValue(opacity.get()); };
 
-if(!cgl.gl.getExtension('OES_standard_derivatives') ) console.error('no oes standart dericatives');
+if(!cgl.gl.getExtension('OES_standard_derivatives') ) op.uiAttr( { 'error': 'no oes standart dericatives' } );
 
 var srcVert=''
     .endl()+'{{MODULES_HEAD}}'

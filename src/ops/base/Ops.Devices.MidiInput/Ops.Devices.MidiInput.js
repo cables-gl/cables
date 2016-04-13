@@ -6,26 +6,24 @@
 // todo: show warning when no midi support
 // todo: show (select?) midi devices
 
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
-this.name='midiInput';
+op.name='midiInput';
 
-this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.normalize.set(true);
+var normalize=op.addInPort(new Port(op,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var outNote=op.addOutPort(new Port(op,"note"));
 
-var outNote=this.addOutPort(new Port(this,"note"));
+normalize.set(true);
+
+var cgl=op.patch.cgl;
+var midi;
+var outputId=0;
 
 cgl.frameStore.midi=cgl.frameStore.midi || {};
 cgl.frameStore.midi.notes=cgl.frameStore.midi.notes || [];
 
 
-var midi;
-var outputId=0;
-
 function onMIDIFailure()
 {
-    self.uiAttr({warning:"No MIDI support in your browser."});
+    op.uiAttr({warning:"No MIDI support in your browser."});
 }
 
 if (navigator.requestMIDIAccess)
@@ -48,7 +46,7 @@ function onMIDISuccess(midiAccess)
     var inputs = midi.inputs.values();
     var outputs = midi.outputs.values();
     var str='';
-    self.uiAttr({'info':'no midi devices found'});
+    op.uiAttr({'info':'no midi devices found'});
 
     for (var input = inputs.next(); input && !input.done; input = inputs.next())
     {
@@ -58,14 +56,13 @@ function onMIDISuccess(midiAccess)
 
     for (var output = outputs.next(); output && !output.done; output = outputs.next())
     {
-        console.log(output);
         if(outputId===0) outputId=output.value.id;
         cgl.frameStore.midi.out=midi.outputs.get(outputId);
 
         str+=getDeviceString(output);
     }
 
-    self.uiAttr({'info':str});
+    op.uiAttr({'info':str});
 }
 
 function onMIDIMessage(event)
@@ -97,7 +94,7 @@ function onMIDIMessage(event)
     outNote.set(note);
 
     var v=velocity;
-    if(self.normalize.get())v/=127;
+    if(normalize.get())v/=127;
     cgl.frameStore.midi.notes[note]={v:v,n:note};
     cgl.frameStore.lastMidiNote=note;
 

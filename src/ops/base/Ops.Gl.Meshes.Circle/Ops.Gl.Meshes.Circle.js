@@ -157,7 +157,7 @@ function calc()
 }
 
 var mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
-mapping.val='flat';
+mapping.set('flat');
 mapping.onValueChange(calc);
 
 segments.onValueChanged=calc;

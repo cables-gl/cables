@@ -1,11 +1,10 @@
-var cgl=this.patch.cgl;
+op.name='scale';
 
-this.name='scale';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var scale=op.addInPort(new Port(op,"scale"));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var scale=this.addInPort(new Port(this,"scale"));
-
+var cgl=op.patch.cgl;
 var vScale=vec3.create();
 var transMatrix = mat4.create();
 mat4.identity(transMatrix);

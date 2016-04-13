@@ -82,35 +82,32 @@ render.onTriggered=function()
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
-    // for(var i =0;i<amount.val;i++)
+    // first pass
+    if(dir===0 || dir==2)
     {
-        // first pass
-        if(dir===0 || dir==2)
-        {
-            
-            cgl.currentTextureEffect.bind();
-            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
-            uniDirX.setValue(0.0);
-            uniDirY.setValue(1.0);
-    
-            cgl.currentTextureEffect.finish();
-        }
+        
+        cgl.currentTextureEffect.bind();
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
-        // second pass
-        if(dir===0 || dir==1)
-        {
+        uniDirX.setValue(0.0);
+        uniDirY.setValue(1.0);
 
-            cgl.currentTextureEffect.bind();
-            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
-            uniDirX.setValue(1.0);
-            uniDirY.setValue(0.0);
-    
-            cgl.currentTextureEffect.finish();
-        }
+        cgl.currentTextureEffect.finish();
+    }
+
+    // second pass
+    if(dir===0 || dir==1)
+    {
+
+        cgl.currentTextureEffect.bind();
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
+        uniDirX.setValue(1.0);
+        uniDirY.setValue(0.0);
+
+        cgl.currentTextureEffect.finish();
     }
 
     cgl.setPreviousShader();

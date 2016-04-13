@@ -30,18 +30,16 @@ var reload=function(nocache)
 
     if(  (filename.get() && filename.get().length>1 ))
     {
-        // console.log("load texture ",filename.get());
         var tex=CGL.Texture.load(cgl,url,function(err)
         {
             if(err)
             {
-                console.log('error loading image');
                 setTempTexture();
                 op.uiAttr({'error':'could not load texture'});
                 return;
             }
             op.uiAttr({'error':null});
-            textureOut.val=tex;
+            textureOut.set(tex);
             width.set(tex.width);
             height.set(tex.height);
 
@@ -89,7 +87,6 @@ op.onFileUploaded=function(fn)
 {
     if(filename.get() && filename.get().endsWith(fn))
     {
-        console.log('found!');
         reload(true);
     }
 };
