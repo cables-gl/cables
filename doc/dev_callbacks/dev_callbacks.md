@@ -60,7 +60,7 @@ myPort.onLinkChange( function() {
 If your op needs to clean up after itself when it is deleted from the patch you can implement `onDelete`:
 
 ```javascript
-this.onDelete( function() {
+op.onDelete( function() {
 	// do some manual cleanup here
 });
 ```
