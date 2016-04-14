@@ -64,7 +64,7 @@ function refresh()
 
     if(text.get())
     {
-        var txt=text.get().replace(/<br\/>/g, '\n');
+        var txt=(text.get()+'').replace(/<br\/>/g, '\n');
 
         var strings = txt.split("\n");
         var posy=0,i=0;

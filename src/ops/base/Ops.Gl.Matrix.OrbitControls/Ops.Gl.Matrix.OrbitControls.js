@@ -1,22 +1,20 @@
-this.name="orbital controls";
-var cgl=this.patch.cgl;
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name="OrbitControls";
 
-var outRadius=this.addOutPort(new Port(this,"radius",OP_PORT_TYPE_VALUE));
-var minDist=this.addInPort(new Port(this,"min distance",OP_PORT_TYPE_VALUE));
-var initialAxis=this.addInPort(new Port(this,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
-var initialX=this.addInPort(new Port(this,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
+var minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
+var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
+var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
+var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
 
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var mul=this.addInPort(new Port(this,"mul",OP_PORT_TYPE_VALUE));
 mul.set(1);
-
 minDist.set(0.05);
 initialAxis.set(0.5);
 initialX.set(0.0);
 
-
+var cgl=op.patch.cgl;
 var eye=vec3.create();
 var vUp=vec3.create();
 var vCenter=vec3.create();
@@ -162,9 +160,8 @@ cgl.canvas.addEventListener('mouseenter', onMouseEnter);
 cgl.canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
 cgl.canvas.addEventListener('wheel', onMouseWheel);
 
-this.onDelete=function()
+op.onDelete=function()
 {
-    console.log("remove arcball op...");
     cgl.canvas.removeEventListener('mousemove', onmousemove);
     cgl.canvas.removeEventListener('mousedown', onMouseDown);
     cgl.canvas.removeEventListener('mouseup', onMouseUp);

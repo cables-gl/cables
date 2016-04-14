@@ -42,6 +42,7 @@
 		* [CanvasSize](ops/Ops.Gl.CanvasSize/Ops.Gl.CanvasSize.md)
 		* [ClearColor](ops/Ops.Gl.ClearColor/Ops.Gl.ClearColor.md)
 		* [ClearDepth](ops/Ops.Gl.ClearDepth/Ops.Gl.ClearDepth.md)
+		* [ColorPick](ops/Ops.Gl.ColorPick/Ops.Gl.ColorPick.md)
 		* [FaceCulling](ops/Ops.Gl.FaceCulling/Ops.Gl.FaceCulling.md)
 		* [LetterBox](ops/Ops.Gl.LetterBox/Ops.Gl.LetterBox.md)
 		* [Matrix](chapter_readmes/matrix/Readme.md)

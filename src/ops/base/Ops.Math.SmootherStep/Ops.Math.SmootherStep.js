@@ -1,24 +1,24 @@
-var self=this;
-Op.apply(this, arguments);
+op.name='SmootherStep';
 
-this.name='SmootherStep';
-this.val=this.addInPort(new Port(this,"val"));
-this.min=this.addInPort(new Port(this,"min"));
-this.max=this.addInPort(new Port(this,"max"));
-this.result=this.addOutPort(new Port(this,"result"));
+var result=op.addOutPort(new Port(op,"result"));
+var val=op.addInPort(new Port(op,"val"));
+var min=op.addInPort(new Port(op,"min"));
+var max=op.addInPort(new Port(op,"max"));
 
-function smootherstep ()
+min.set(0);
+max.set(1);
+val.set(0);
+
+val.onValueChanged=exec;
+max.onValueChanged=exec;
+min.onValueChanged=exec;
+
+exec();
+
+function exec()
 {
-    var x = Math.max(0, Math.min(1, (self.val.val-self.min.val)/(self.max.val-self.min.val)));
-    self.result.val= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
-    // return linear(self.val.val,this,key2);
+    var x = Math.max(0, Math.min(1, (val.get()-min.get())/(max.get()-min.get())));
+    result.set( x*x*x*(x*(x*6 - 15) + 10)); // smootherstep
 }
 
-this.min.val=0;
-this.max.val=1;
 
-this.val.onValueChanged=smootherstep;
-this.min.onValueChanged=smootherstep;
-this.max.onValueChanged=smootherstep;
-
-this.val.val=0.5;
