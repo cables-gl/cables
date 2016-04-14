@@ -249,7 +249,7 @@ for(i=0;i<MAX_LIGHTS;i++)
     lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
     lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
     lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
-    lights[count].depthMVP=new CGL.Uniform(shader,'m4','lights['+count+'].depthMVP',mat4.create());
+    // lights[count].depthMVP=new CGL.Uniform(shader,'m4','lights['+count+'].depthMVP',mat4.create());
     
     
 }

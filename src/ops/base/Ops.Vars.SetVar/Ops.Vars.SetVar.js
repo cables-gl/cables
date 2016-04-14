@@ -5,7 +5,6 @@ var varname=op.addInPort(new Port(op,"name",OP_PORT_TYPE_VALUE,{type:'string'}))
 
 function exec()
 {
-    console.log('set var...'+v.get());
     op.patch.vars[varname.get()]=v.get();
 }
 
