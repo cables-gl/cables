@@ -1,21 +1,19 @@
-Op.apply(this, arguments);
-var self=this;
 
-this.name='ArrayIterator';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.arr=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
+op.name='ArrayIterator';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var arr=op.addInPort(new Port(op,"array",OP_PORT_TYPE_ARRAY));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.idx=this.addOutPort(new Port(this,"index"));
-this.val=this.addOutPort(new Port(this,"value"));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var idx=op.addOutPort(new Port(op,"index"));
+var val=op.addOutPort(new Port(op,"value"));
 
-this.exe.onTriggered=function()
+exe.onTriggered=function()
 {
-    if(!self.arr.val)return;
-    for(var i in self.arr.val)
+    if(!arr.val)return;
+    for(var i in arr.val)
     {
-        self.idx.val=i;
-        self.val.val=self.arr.val[i];
-        self.trigger.trigger();
+        idx.set(i);
+        val.set(arr.val[i]);
+        trigger.trigger();
     }
 };

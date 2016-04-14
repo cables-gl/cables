@@ -1,29 +1,29 @@
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 
-this.name='BulgePinch';
+op.name='BulgePinch';
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
-var radius=this.addInPort(new Port(this,"Radius",OP_PORT_TYPE_VALUE,{  }));
+var radius=op.addInPort(new Port(op,"Radius",OP_PORT_TYPE_VALUE,{  }));
 radius.set(0.5);
 var uniRadius=new CGL.Uniform(shader,'f','radius',radius.get());
 radius.onValueChanged=function() { uniRadius.setValue(radius.get()); };
 
-var strength=this.addInPort(new Port(this,"Strength",OP_PORT_TYPE_VALUE,{  }));
+var strength=op.addInPort(new Port(op,"Strength",OP_PORT_TYPE_VALUE,{  }));
 strength.set(1);
 var uniStrength=new CGL.Uniform(shader,'f','strength',strength.get());
 strength.onValueChanged=function() { uniStrength.setValue(strength.get()); };
 
-var centerX=this.addInPort(new Port(this,"Center X",OP_PORT_TYPE_VALUE,{  }));
+var centerX=op.addInPort(new Port(op,"Center X",OP_PORT_TYPE_VALUE,{  }));
 centerX.set(0.5);
 var uniCenterX=new CGL.Uniform(shader,'f','centerX',centerX.get());
 centerX.onValueChanged=function() { uniCenterX.setValue(centerX.get()); };
 
-var centerY=this.addInPort(new Port(this,"Center Y",OP_PORT_TYPE_VALUE,{  }));
+var centerY=op.addInPort(new Port(op,"Center Y",OP_PORT_TYPE_VALUE,{  }));
 centerY.set(0.5);
 var uniCenterY=new CGL.Uniform(shader,'f','centerY',centerY.get());
 centerY.onValueChanged=function() { uniCenterY.setValue(centerY.get()); };

@@ -1,15 +1,13 @@
-Op.apply(this, arguments);
+op.name='SetVar';
 
-this.name='set var';
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var v=op.addInPort(new Port(op,"val",OP_PORT_TYPE_VALUE,{}));
+var varname=op.addInPort(new Port(op,"name",OP_PORT_TYPE_VALUE,{type:'string'}));
 
-var val=this.addInPort(new Port(this,"val"));
-var varname=this.addInPort(new Port(this,"name",OP_PORT_TYPE_VALUE,{type:'string'}));
-
-var patch=this.patch;
-function updateVar()
+function exec()
 {
-    patch.vars[varname.get()]=val.get();
+    console.log('set var...'+v.get());
+    op.patch.vars[varname.get()]=v.get();
 }
 
-exe.onTriggered=updateVar;
+varname.onValueChanged=exec;
+v.onValueChanged=exec;

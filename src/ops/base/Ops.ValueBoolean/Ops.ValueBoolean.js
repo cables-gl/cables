@@ -1,17 +1,11 @@
-Op.apply(this, arguments);
-var self=this;
+op.name='Boolean';
 
-this.name='bool';
-// this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.v=this.addInPort(new Port(this,"value",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var v=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var result=op.addOutPort(new Port(op,"result"));
 
-this.result=this.addOutPort(new Port(this,"result"));
-
-
-this.exec=function()
+exec=function()
 {
-    if(self.result.get()!=self.v.get()) self.result.set(self.v.get());
+    if(result.get()!=v.get()) result.set(v.get());
 };
 
-// this.exe.onTriggered=this.exec;
-this.v.onValueChanged=this.exec;
+v.onValueChanged=exec;

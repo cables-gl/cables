@@ -1,19 +1,15 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
+op.name='And';
 
-this.name='And';
+var bool0=op.addInPort(new Port(op,"bool 1",OP_PORT_TYPE_VALUE));
+var bool1=op.addInPort(new Port(op,"bool 2",OP_PORT_TYPE_VALUE));
 
-this.bool0=this.addInPort(new Port(this,"bool 1",OP_PORT_TYPE_VALUE));
-this.bool1=this.addInPort(new Port(this,"bool 2",OP_PORT_TYPE_VALUE));
-
-this.result=this.addOutPort(new Port(this,"result",OP_PORT_TYPE_VALUE));
+var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_VALUE));
 
 function exec()
 {
-    self.result.set( self.bool1.get() && self.bool0.get() );
+    result.set( bool1.get() && bool0.get() );
 }
 
-this.bool0.onValueChanged=exec;
-this.bool1.onValueChanged=exec;
+bool0.onValueChanged=exec;
+bool1.onValueChanged=exec;
 

@@ -16,8 +16,8 @@ function frame(time)
 
 this.exec=function()
 {
-    if(self.resultX.get()!=self.x.get()) self.resultX.sewt(self.x.get());
-    if(self.resultY.get()!=self.y.get()) self.resultY.sewt(self.y.get());
+    if(self.resultX.get()!=self.x.get()) self.resultX.set(self.x.get());
+    if(self.resultY.get()!=self.y.get()) self.resultY.set(self.y.get());
 };
 
 this.exe.onTriggered=this.exec;
