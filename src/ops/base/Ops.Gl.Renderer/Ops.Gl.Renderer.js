@@ -64,4 +64,8 @@ op.onAnimFrame=function(time)
     
     if(!cgl.frameStore.phong)cgl.frameStore.phong={}
     rframes++;
+    
+CGL.MESH.lastMesh=null;
+CGL.MESH.lastShader=null;
+
 };

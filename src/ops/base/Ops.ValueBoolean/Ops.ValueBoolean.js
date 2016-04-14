@@ -9,3 +9,4 @@ exec=function()
 };
 
 v.onValueChanged=exec;
+v.set(false);

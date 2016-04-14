@@ -37,6 +37,10 @@ render.onTriggered=function()
 
 function rebuild()
 {
+    console.log(typeof width.get());
+    console.log(typeof height.get());
+    console.log(width.get());
+    console.log(height.get());
     var x=0;
     var y=0;
     if(pivotX.get()=='center') x=0;
