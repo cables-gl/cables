@@ -5,8 +5,6 @@ var string2=op.addInPort(new Port(op,"string2",OP_PORT_TYPE_VALUE,{type:'string'
 
 var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_VALUE,{type:'string'}));
 
-result.ignoreValueSerialize=true;
-
 
 function exec()
 {
@@ -16,5 +14,5 @@ function exec()
 string1.onValueChanged=exec;
 string2.onValueChanged=exec;
 
-string1.val='wurst';
-string2.val='tuete';
+string1.set('ABC');
+string2.set('XYZ');
