@@ -1,11 +1,11 @@
-this.name='Greater';
-var result=this.addOutPort(new Port(this,"result"));
-var number1=this.addInPort(new Port(this,"number1"));
-var number2=this.addInPort(new Port(this,"number2"));
+op.name='Greater';
+var result=op.addOutPort(new Port(op,"result"));
+var number1=op.addInPort(new Port(op,"number1"));
+var number2=op.addInPort(new Port(op,"number2"));
 
 function exec()
 {
-    result.val=number1.get()>number2.get();
+    result.set(number1.get()>number2.get());
 }
 
 number1.onValueChanged=exec;

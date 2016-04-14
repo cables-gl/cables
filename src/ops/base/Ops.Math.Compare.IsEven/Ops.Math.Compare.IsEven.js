@@ -1,7 +1,7 @@
 op.name = "IsEven";
 
-var number = this.addInPort(new Port(this, "number1"));
-var result = this.addOutPort(new Port(this, "result"));
+var number = op.addInPort(new Port(op, "number1"));
+var result = op.addOutPort(new Port(op, "result"));
 
 var exec= function() {
     result.set(!( number.get() & 1 ));

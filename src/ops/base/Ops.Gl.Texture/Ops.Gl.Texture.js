@@ -3,12 +3,14 @@ op.name='texture';
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
-var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+
+
 
 
 flip.set(false);
