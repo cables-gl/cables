@@ -7,5 +7,7 @@ var result=this.addOutPort(new Port(this,"result"));
 
 number.onValueChanged=function()
 {
-    result.set(Math.exp( number.get() ));
+    var r=Math.exp( number.get() );
+    if(isNaN(r))r=0;
+    result.set(r);
 };

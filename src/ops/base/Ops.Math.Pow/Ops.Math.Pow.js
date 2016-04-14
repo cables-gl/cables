@@ -9,5 +9,7 @@ exponent.set(2);
 
 number.onValueChanged=function()
 {
-    result.set(Math.pow( number.get(), exponent.get() ));
+    var r=Math.pow( number.get(), exponent.get() );
+    if(isNaN(r))r=0;
+    result.set(r);
 };
