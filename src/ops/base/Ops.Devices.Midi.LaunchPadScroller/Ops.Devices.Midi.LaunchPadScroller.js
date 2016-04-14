@@ -15,7 +15,6 @@ var img=[
 ];
 
 var width=img.length/8;
-console.log("width",width);
 
 function setPixel(x,y,val)
 {

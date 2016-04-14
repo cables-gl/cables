@@ -63,6 +63,7 @@ exe.onTriggered=function()
     cgl.frameStore.phong.lights[id]=cgl.frameStore.phong.lights[id]||{};
     cgl.frameStore.phong.lights[id].pos=mpos;
     cgl.frameStore.phong.lights[id].mul=mul.get();
+    cgl.frameStore.phong.lights[id].type=0;
 
     if(attachment.isLinked())
     {

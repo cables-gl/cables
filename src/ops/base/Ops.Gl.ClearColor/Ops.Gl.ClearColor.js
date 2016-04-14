@@ -18,6 +18,5 @@ render.onTriggered=function()
 {
     cgl.gl.clearColor(r.get(),g.get(),b.get(),a.get());
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-    
     trigger.trigger();
 };

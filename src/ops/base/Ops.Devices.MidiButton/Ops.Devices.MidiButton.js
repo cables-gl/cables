@@ -33,7 +33,6 @@ exec.onTriggered=function()
     if(cgl.frameStore.midi.notes[note.get()])
     {
         var v=cgl.frameStore.midi.notes[note.get()].v;
-        console.log("v",v);
         if(v===0)
         {
             outPressed.set(false);
