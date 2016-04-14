@@ -456,7 +456,7 @@ shader.setSource(srcVert,srcFrag);
                         lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
                         lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
                         if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
-                        if(cgl.frameStore.phong.lights[i].depthMVP) lights[count].depthMVP.setValue(cgl.frameStore.phong.lights[i].depthMVP);
+                        // if(cgl.frameStore.phong.lights[i].depthMVP) lights[count].depthMVP.setValue(cgl.frameStore.phong.lights[i].depthMVP);
                         if(cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex=cgl.frameStore.phong.lights[i].depthTex;
 
                         lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);

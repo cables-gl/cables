@@ -1,9 +1,9 @@
 op.name='Pow';
 
-var number=this.addInPort(new Port(this,"number"));
-var exponent=this.addInPort(new Port(this,"exponent"));
+var number=op.addInPort(new Port(op,"number"));
+var exponent=op.addInPort(new Port(op,"exponent"));
 
-var result=this.addOutPort(new Port(this,"result"));
+var result=op.addOutPort(new Port(op,"result"));
 
 exponent.set(2);
 

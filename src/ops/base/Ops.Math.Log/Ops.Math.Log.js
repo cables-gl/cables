@@ -1,8 +1,8 @@
 op.name='Log';
 
-var number=this.addInPort(new Port(this,"number"));
+var number=op.addInPort(new Port(op,"number"));
 
-var result=this.addOutPort(new Port(this,"result"));
+var result=op.addOutPort(new Port(op,"result"));
 
 
 number.onValueChanged=function()

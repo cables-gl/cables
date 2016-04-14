@@ -9,6 +9,10 @@ var w=0,h=0;
 
 exe.onTriggered=function()
 {
-    if(cgl.canvasHeight!=h) h=height.set(cgl.canvasHeight);
-    if(cgl.canvasWidth!=w) w=width.set(cgl.canvasWidth);
+    height.set(cgl.canvasHeight);
+    width.set(cgl.canvasWidth);
+    
+    console.log(cgl.canvasWidth,cgl.canvasHeight);
+    // h=cgl.canvasHeight;
+    // w=cgl.canvasWidth;
 };
