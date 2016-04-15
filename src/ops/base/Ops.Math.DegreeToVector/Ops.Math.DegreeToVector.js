@@ -1,11 +1,11 @@
-this.name="Degree To Vector";
+op.name="Degree To Vector";
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
+var deg=op.addInPort(new Port(op,"degree"));
+var x=op.addOutPort(new Port(op,"x"));
+var y=op.addOutPort(new Port(op,"y"));
 
-var deg=this.addInPort(new Port(this,"degree"));
-var x=this.addOutPort(new Port(this,"x"));
-var y=this.addOutPort(new Port(this,"y"));
 deg.set(-1);
 
 function update()

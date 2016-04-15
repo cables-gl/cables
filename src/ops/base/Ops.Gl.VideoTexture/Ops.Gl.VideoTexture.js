@@ -1,11 +1,10 @@
-this.name='VideoTexture';
-var self=this;
-var cgl=this.patch.cgl;
+op.name='VideoTexture';
 
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 
-var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
+var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
 var intervalID=null;
 
@@ -22,7 +21,6 @@ function updateTexture()
     // cgl.gl.texParameteri(cgl.gl.TEXTURE_2D, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_NEAREST);
     // cgl.gl.generateMipmap(cgl.gl.TEXTURE_2D);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-
 }
 
 function startVideo()
@@ -37,15 +35,7 @@ function startVideo()
 function reload(nocache)
 {
     videoElement.setAttribute('src',filename.get());
-    console.log('video loaded...');
-
-    // <video id="video" src="Firefox.ogv" autoplay muted>
-    //   Your browser doesn't appear to support the <code>&lt;video&gt;</code> element.
-    // </video>
     videoElement.addEventListener("canplaythrough", startVideo, true);
-
-
-    
 }
 
 filename.onValueChange(reload);

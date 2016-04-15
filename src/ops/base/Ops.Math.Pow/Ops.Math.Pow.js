@@ -1,15 +1,15 @@
 op.name='Pow';
 
-var number=op.addInPort(new Port(op,"number"));
-var exponent=op.addInPort(new Port(op,"exponent"));
+var base=op.addInPort(new Port(op,"Base"));
+var exponent=op.addInPort(new Port(op,"Exponent"));
 
-var result=op.addOutPort(new Port(op,"result"));
+var result=op.addOutPort(new Port(op,"Result"));
 
 exponent.set(2);
 
-number.onValueChanged=function()
+base.onValueChanged=function()
 {
-    var r=Math.pow( number.get(), exponent.get() );
+    var r=Math.pow( base.get(), exponent.get() );
     if(isNaN(r))r=0;
     result.set(r);
 };

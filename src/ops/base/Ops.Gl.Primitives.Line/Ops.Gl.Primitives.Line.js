@@ -1,11 +1,12 @@
-var self=this;
-var cgl=self.patch.cgl;
+op.name='Lines';
 
-this.name='Lines';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var pointSize=this.addInPort(new Port(this,"pointSize"));
+var pointSize=op.addInPort(new Port(op,"pointSize"));
+
+var cgl=op.patch.cgl;
+
 pointSize.set(2);
 var shader=null;
 var module=null;
@@ -16,7 +17,7 @@ pointSize.onValueChanged=function()
     if(uniPointSize)uniPointSize.setValue(pointSize.get());
 };
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     var oldPrim=0;
     if(cgl.getShader()!=shader)
@@ -49,7 +50,7 @@ this.render.onTriggered=function()
     shader.glPrimitive=cgl.gl.LINE_STRIP;
 
     // cgl.points=true;
-    self.trigger.trigger();
+    trigger.trigger();
     cgl.gl.lineWidth(pointSize.get());
 
     shader.glPrimitive=oldPrim;
@@ -62,7 +63,7 @@ this.render.onTriggered=function()
 function updateResolution()
 {
 }
-this.onResize=updateResolution;
+op.onResize=updateResolution;
 
 
 pointSize.set(2);
