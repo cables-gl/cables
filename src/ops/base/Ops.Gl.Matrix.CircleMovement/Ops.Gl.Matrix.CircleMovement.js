@@ -1,65 +1,63 @@
-    Op.apply(this, arguments);
-    var self=this;
-    var cgl=this.patch.cgl;
 
-    this.name='Circle Movement';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+this.name='Circle Movement';
+var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 
-    this.segments=this.addInPort(new Port(this,"segments"));
-    this.radius=this.addInPort(new Port(this,"radius"));
-    this.mulX=this.addInPort(new Port(this,"mulX"));
-    this.mulY=this.addInPort(new Port(this,"mulY"));
-    this.percent=this.addInPort(new Port(this,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
-    
-    var offset=this.addInPort(new Port(this,"offset"));
+var segments=this.addInPort(new Port(this,"segments"));
+var radius=this.addInPort(new Port(this,"radius"));
+var mulX=this.addInPort(new Port(this,"mulX"));
+var mulY=this.addInPort(new Port(this,"mulY"));
+var percent=this.addInPort(new Port(this,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-    this.index=this.addOutPort(new Port(this,"index"));
+var offset=this.addInPort(new Port(this,"offset"));
 
-    var animX=new CABLES.TL.Anim();
-    var animY=new CABLES.TL.Anim();
-    animX.loop=true;
-    animY.loop=true;
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var index=this.addOutPort(new Port(this,"index"));
 
 var startTime=Date.now()/1000;
+var cgl=op.patch.cgl;
+var animX=new CABLES.TL.Anim();
+var animY=new CABLES.TL.Anim();
+var pos=[];
+animX.loop=true;
+animY.loop=true;
 
-    this.render.onTriggered=function()
+segments.set(40);
+radius.set(1);
+mulX.set(1);
+mulY.set(1);
+
+segments.onValueChanged=calc;
+radius.onValueChanged=calc;
+
+calc();
+
+render.onTriggered=function()
+{
+    cgl.pushMvMatrix();
+
+    var time=Date.now()/1000-startTime+Math.round(segments.get())*0.1*percent.get();
+    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, [
+        animX.getValue(time+offset.get())*mulX.get(),
+        animY.getValue(time+offset.get())*mulY.get(),
+        0] );
+
+    trigger.trigger();
+
+    cgl.popMvMatrix();
+};
+
+function calc()
+{
+    pos.length=0;
+    var i=0,degInRad=0;
+    animX.clear();
+    animY.clear();
+
+    for (i=0; i <= Math.round(segments.get()); i++)
     {
-        cgl.pushMvMatrix();
-
-        var time=Date.now()/1000-startTime+Math.round(self.segments.get())*0.1*self.percent.get();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, [
-            animX.getValue(time+offset.get())*self.mulX.get(),
-            animY.getValue(time+offset.get())*self.mulY.get(),
-            0] );
-        self.trigger.trigger();
-        
-        cgl.popMvMatrix();
-
-    };
-
-    this.segments.val=40;
-    this.radius.val=1;
-    this.mulX.val=1;
-    this.mulY.val=1;
-
-    this.pos=[];
-
-    function calc()
-    {
-        self.pos.length=0;
-        var i=0,degInRad=0;
-        animX.clear();
-        animY.clear();
-
-        for (i=0; i <= Math.round(self.segments.get()); i++)
-        {
-            degInRad = (360/Math.round(self.segments.get()))*i*CGL.DEG2RAD;
-            animX.setValue(i*0.1,Math.cos(degInRad)*self.radius.get());
-            animY.setValue(i*0.1,Math.sin(degInRad)*self.radius.get());
-        }
+        degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+        animX.setValue(i*0.1,Math.cos(degInRad)*radius.get());
+        animY.setValue(i*0.1,Math.sin(degInRad)*radius.get());
     }
+}
 
-    this.segments.onValueChanged=calc;
-    this.radius.onValueChanged=calc;
-    calc();

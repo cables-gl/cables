@@ -1,13 +1,13 @@
 op.name="OrbitControls";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 var minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
 var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
 var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
 var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
 mul.set(1);
 minDist.set(0.05);
@@ -97,8 +97,6 @@ var onmousemove = function(e)
 
     lastMouseX=x;
     lastMouseY=y;
-    
-
 };
 
 function onMouseDown(e)
