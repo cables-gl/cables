@@ -1,17 +1,17 @@
 
-this.name='Circle Movement';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+op.name='Circle Movement';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-var segments=this.addInPort(new Port(this,"segments"));
-var radius=this.addInPort(new Port(this,"radius"));
-var mulX=this.addInPort(new Port(this,"mulX"));
-var mulY=this.addInPort(new Port(this,"mulY"));
-var percent=this.addInPort(new Port(this,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
+var segments=op.addInPort(new Port(op,"segments"));
+var radius=op.addInPort(new Port(op,"radius"));
+var mulX=op.addInPort(new Port(op,"mulX"));
+var mulY=op.addInPort(new Port(op,"mulY"));
+var percent=op.addInPort(new Port(op,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var offset=this.addInPort(new Port(this,"offset"));
+var offset=op.addInPort(new Port(op,"offset"));
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var index=this.addOutPort(new Port(this,"index"));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var index=op.addOutPort(new Port(op,"index"));
 
 var startTime=Date.now()/1000;
 var cgl=op.patch.cgl;
