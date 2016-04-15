@@ -1,12 +1,13 @@
+op.name='if true then';
 
-this.name='if true then';
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
-var boolean=this.addInPort(new Port(this,"boolean"));
+var boolean=op.addInPort(new Port(op,"boolean"));
+
+var triggerThen=op.addOutPort(new Port(op,"then",OP_PORT_TYPE_FUNCTION));
+var triggerElse=op.addOutPort(new Port(op,"else",OP_PORT_TYPE_FUNCTION));
+
 boolean.set(false);
-
-var triggerThen=this.addOutPort(new Port(this,"then",OP_PORT_TYPE_FUNCTION));
-var triggerElse=this.addOutPort(new Port(this,"else",OP_PORT_TYPE_FUNCTION));
 
 function execBool()
 {

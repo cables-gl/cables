@@ -1,29 +1,31 @@
-var self=this;
-var cgl=self.patch.cgl;
+op.name='Points';
 
-this.name='Points';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var pointSize=op.addInPort(new Port(op,"pointSize"));
 
-var pointSize=this.addInPort(new Port(this,"pointSize"));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+
 pointSize.set(2);
+
 var shader=null;
-var module=null;
+var mod=null;
 var uniPointSize=null;
+
+var cgl=op.patch.cgl;
 
 pointSize.onValueChanged=function()
 {
     if(uniPointSize)uniPointSize.setValue(pointSize.get());
 };
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     var oldPrim=0;
     if(cgl.getShader()!=shader)
     {
-        if(shader && module)
+        if(shader && mod)
         {
-            shader.removeModule(module);
+            shader.removemod(mod);
             shader=null;
         }
 
@@ -33,21 +35,21 @@ this.render.onTriggered=function()
             .endl()+'uniform float {{mod}}_size;'
             .endl();
 
-        module=shader.addModule(
+        mod=shader.addModule(
             {
-                name:'MODULE_VERTEX_POSITION',
+                name:'mod_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
                 srcBodyVert:'gl_PointSize = {{mod}}_size;'
             });
 
-        uniPointSize=new CGL.Uniform(shader,'f',module.prefix+'_size',pointSize.get());
+        uniPointSize=new CGL.Uniform(shader,'f',mod.prefix+'_size',pointSize.get());
     }
 
     shader=cgl.getShader();
     oldPrim=shader.glPrimitive;
     shader.glPrimitive=cgl.gl.POINTS;
 
-    self.trigger.trigger();
+    trigger.trigger();
     
     shader.glPrimitive=oldPrim;
 };
@@ -57,7 +59,7 @@ this.render.onTriggered=function()
 function updateResolution()
 {
 }
-this.onResize=updateResolution;
+op.onResize=updateResolution;
 
 
 pointSize.set(2);

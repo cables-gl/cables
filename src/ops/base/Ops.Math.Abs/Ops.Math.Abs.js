@@ -1,10 +1,8 @@
-Op.apply(this, arguments);
-var self=this;
-this.name='abs';
-this.number=this.addInPort(new Port(this,"number"));
-this.result=this.addOutPort(new Port(this,"result"));
+op.name='abs';
+var number=op.addInPort(new Port(op,"number"));
+var result=op.addOutPort(new Port(op,"result"));
 
-this.number.onValueChanged=function()
+number.onValueChanged=function()
 {
-    self.result.val=Math.abs(self.number.val);
+    result.set( Math.abs(number.get()) );
 };

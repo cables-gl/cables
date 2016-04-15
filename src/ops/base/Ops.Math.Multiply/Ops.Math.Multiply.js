@@ -9,18 +9,8 @@ function update()
     var n1=parseFloat(number1.get());
     var n2=parseFloat(number2.get());
 
-    if(isNaN(n2) || isNaN(n1))
-    {
-        console.log('isnan');
-        console.log(typeof(n1));
-        console.log(typeof(n2));
-        console.log(n1,n2);
-    }
-
-
     if(isNaN(n1))n1=0;
     if(isNaN(n2))n2=0;
-    
 
     result.set( n1*n2 );
 }
