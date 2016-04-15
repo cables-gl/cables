@@ -10,7 +10,7 @@ num.set(5);
 
 exe.onTriggered=function()
 {
-    for(var i=num.get()-1;i>-1;i--)
+    for(var i=Math.round(num.get())-1;i>-1;i--)
     {
         idx.set(i);
         trigger.trigger();

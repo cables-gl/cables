@@ -8,6 +8,8 @@ this.result=this.addOutPort(new Port(this,"result"));
 var min=this.addInPort(new Port(this,"min"));
 var max=this.addInPort(new Port(this,"max"));
 
+
+
 this.exe.onTriggered=function()
 {
     var minVal = parseFloat( min.get() );
