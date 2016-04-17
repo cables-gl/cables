@@ -1,7 +1,7 @@
-this.name='String';
-var v=this.addInPort(new Port(this,"value",OP_PORT_TYPE_VALUE,{type:'string'}));
+op.name='String';
 
-var result=this.addOutPort(new Port(this,"result"));
+var v=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE,{type:'string'}));
+var result=op.addOutPort(new Port(op,"result"));
 
 v.onValueChanged=function()
 {

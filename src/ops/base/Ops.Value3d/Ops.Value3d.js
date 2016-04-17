@@ -1,30 +1,27 @@
-var self=this;
+op.name='Value3d';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var x=op.addInPort(new Port(op,"value x",OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new Port(op,"value y",OP_PORT_TYPE_VALUE));
+var z=op.addInPort(new Port(op,"value z",OP_PORT_TYPE_VALUE));
 
-this.name='Value3d';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.x=this.addInPort(new Port(this,"value x",OP_PORT_TYPE_VALUE));
-this.y=this.addInPort(new Port(this,"value y",OP_PORT_TYPE_VALUE));
-this.z=this.addInPort(new Port(this,"value z",OP_PORT_TYPE_VALUE));
-
-this.resultX=this.addOutPort(new Port(this,"result x"));
-this.resultY=this.addOutPort(new Port(this,"result y"));
-this.resultZ=this.addOutPort(new Port(this,"result z"));
+var resultX=op.addOutPort(new Port(op,"result x"));
+var resultY=op.addOutPort(new Port(op,"result y"));
+var resultZ=op.addOutPort(new Port(op,"result z"));
 
 function frame(time)
 {
-    self.updateAnims();
-    self.exec();
+    exec();
 }
 
-this.exec=function()
+exec=function()
 {
-    if(self.resultX.get()!=self.x.get()) self.resultX.set(self.x.get());
-    if(self.resultY.get()!=self.y.get()) self.resultY.set(self.y.get());
-    if(self.resultZ.get()!=self.z.get()) self.resultZ.set(self.z.get());
+    if(resultX.get()!=x.get()) resultX.set(x.get());
+    if(resultY.get()!=y.get()) resultY.set(y.get());
+    if(resultZ.get()!=z.get()) resultZ.set(z.get());
 };
 
-this.exe.onTriggered=this.exec;
+exe.onTriggered=exec;
 
-this.x.onValueChanged=this.exec;
-this.y.onValueChanged=this.exec;
-this.z.onValueChanged=this.exec;
+x.onValueChanged=exec;
+y.onValueChanged=exec;
+z.onValueChanged=exec;

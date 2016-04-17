@@ -1,21 +1,18 @@
-var self=this;
-var cgl=this.patch.cgl;
+op.name='image compose';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 
-this.name='image compose';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
-var useVPSize=this.addInPort(new Port(this,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+op.onResize=updateResolution;
 
-var width=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-var height=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
-var tfilter=this.addInPort(new Port(this,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
-
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var texOut=this.addOutPort(new Port(this,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
-
+var cgl=op.patch.cgl;
 var effect=new CGL.TextureEffect(cgl);
-
-cgl.currentTextureEffect=effect;
+// cgl.currentTextureEffect=effect;
 var tex=new CGL.Texture(cgl);
 tex.filter=CGL.Texture.FILTER_LINEAR;
 
@@ -36,8 +33,8 @@ function updateResolution()
 
     if((w!=tex.width || h!= tex.height) && (w!==0 && h!==0))
     {
-        height.val=h;
-        width.val=w;
+        height.set(h);
+        width.set(w);
         tex.setSize(w,h);
 
         effect.setSourceTexture(tex);
@@ -45,12 +42,11 @@ function updateResolution()
     }
 
     if(texOut.get())
-        if(!texOut.get().isPowerOfTwo()) self.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
-            else self.uiAttr({warning:''});
+        if(!texOut.get().isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
+            else op.uiAttr({warning:''});
 
 }
 
-this.onResize=updateResolution;
 
 useVPSize.onValueChanged=function()
 {
@@ -73,7 +69,7 @@ var doRender=function()
     cgl.currentTextureEffect=effect;
     effect.startEffect();
     trigger.trigger();
-    texOut.val=effect.getCurrentSourceTexture();
+    texOut.set(effect.getCurrentSourceTexture());
 };
 
 texOut.onPreviewChanged=function()

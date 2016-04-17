@@ -1,17 +1,14 @@
-var self=this;
-Op.apply(this, arguments);
+op.name='random anim';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var result=op.addOutPort(new Port(op,"result"));
 
-this.name='random anim';
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var result=this.addOutPort(new Port(this,"result"));
-
-var min=this.addInPort(new Port(this,"min"));
-var max=this.addInPort(new Port(this,"max"));
-var duration=this.addInPort(new Port(this,"duration"));
+var min=op.addInPort(new Port(op,"min"));
+var max=op.addInPort(new Port(op,"max"));
+var duration=op.addInPort(new Port(op,"duration"));
 
 var anim=new CABLES.TL.Anim();
 
-var easing=this.addInPort(new Port(this,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
+var easing=op.addInPort(new Port(op,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
 easing.set('linear');
 
 
