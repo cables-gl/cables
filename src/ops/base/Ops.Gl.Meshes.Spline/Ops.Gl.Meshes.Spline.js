@@ -3,6 +3,7 @@ op.name='Spline';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var thickness=op.addInPort(new Port(op,"thickness",OP_PORT_TYPE_VALUE));
 var subDivs=op.addInPort(new Port(op,"subDivs",OP_PORT_TYPE_VALUE));
+var bezier=op.addInPort(new Port(op,"Bezier",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var centerpoint=op.addInPort(new Port(op,"centerpoint",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -15,19 +16,6 @@ var cgl=op.patch.cgl;
 var buffer = cgl.gl.createBuffer();
 cgl.frameStore.SplinePoints=[];
 
-function easeSmoothStep(perc)
-{
-    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
-    perc= x*x*(3 - 2*x); // smoothstep
-    return perc;
-}
-
-function easeSmootherStep(perc)
-{
-    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
-    perc= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
-    return perc;
-}
 
 render.onTriggered=function()
 {
@@ -65,6 +53,13 @@ render.onTriggered=function()
     cgl.frameStore.SplinePoints.length=0;
 };
 
+function ip(x0,x1,x2,t)//Bezier 
+{
+    var r =(x0 * (1-t) * (1-t) + 2 * x1 * (1 - t)* t + x2 * t * t);
+    // console.log(r);
+    return r;
+}
+    
 function bufferData()
 {
     var subd=subDivs.get();
@@ -89,30 +84,56 @@ function bufferData()
         cgl.frameStore.SplinePoints=points;
     }
 
-    // if(subd>0)
-    // {
-        // var points=[];
-    //     for(var i=0;i<cgl.frameStore.SplinePoints.length-3;i+=3)
-    //     {
-    //         for(var j=0;j<subd;j++)
-    //         {
-    //             for(var k=0;k<3;k++)
-    //             {
-    //                 points.push(
-    //                     cgl.frameStore.SplinePoints[i+k]+
-    //                         ( cgl.frameStore.SplinePoints[i+k+3] - cgl.frameStore.SplinePoints[i+k] ) *
-    //                         easeSmootherStep(j/subd)
-    //                         );
-    //             }
+    if(subd>0 && !bezier.get())
+    {
+        var points=[];
+        for(var i=0;i<cgl.frameStore.SplinePoints.length-3;i+=3)
+        {
+            for(var j=0;j<subd;j++)
+            {
+                for(var k=0;k<3;k++)
+                {
+                    points.push(
+                        cgl.frameStore.SplinePoints[i+k]+
+                            ( cgl.frameStore.SplinePoints[i+k+3] - cgl.frameStore.SplinePoints[i+k] ) *
+                            j/subd
+                            );
+                }
+            }
+        }
+    }
+    else
+    if(subd>0 && bezier.get())
+    {
+        var points=[];
+
+        for(var i=3;i<cgl.frameStore.SplinePoints.length-6;i+=3)
+        {
+            for(var j=0;j<subd;j++)
+            {
+                for(var k=0;k<3;k++)
+                {
+                    var p=ip(
+                            (cgl.frameStore.SplinePoints[i+k-3]+cgl.frameStore.SplinePoints[i+k])/2,
+                            cgl.frameStore.SplinePoints[i+k+0],
+                            (cgl.frameStore.SplinePoints[i+k+3]+cgl.frameStore.SplinePoints[i+k+0])/2,
+                            j/subd
+                            )
+
+                            ;
+                            
+                    points.push(p);
+
+                }
 
 
-    //         }
-    //     }
+            }
+        }
 
 
 
-    //     cgl.frameStore.SplinePoints=points;
-    // }
+        cgl.frameStore.SplinePoints=points;
+    }
 
     if(thickness.get()<1)thickness.set(1);
 

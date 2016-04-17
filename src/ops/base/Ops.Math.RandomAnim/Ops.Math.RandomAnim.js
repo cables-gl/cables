@@ -24,8 +24,7 @@ function init(v)
     if(easing.get()=='linear') anim.defaultEasing=CABLES.TL.EASING_LINEAR;
     if(easing.get()=='smoothstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
     if(easing.get()=='smootherstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
-    
-    
+
     anim.clear();
     if(v===undefined) v=getRandom();
     anim.setValue(Date.now()/1000.0, v);
