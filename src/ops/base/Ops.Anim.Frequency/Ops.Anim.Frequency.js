@@ -1,18 +1,17 @@
-CABLES.Op.apply(this, arguments);
+op.name='Frequency';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var frequency=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.name='Frequency';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.frequency=this.addInPort(new Port(this,"frequency",OP_PORT_TYPE_VALUE));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var self=this;
 var startTime=0;
+exe.onTriggered=exec;
 
-this.exe.onTriggered=function()
+function exec()
 {
-    if(Date.now()-startTime>self.frequency.val)
+    if(Date.now()-startTime>frequency.get())
     {
         startTime=Date.now();
-        self.trigger.trigger();
+        trigger.trigger();
     }
-};
+}
+

@@ -45,6 +45,8 @@ var data = "data:image/svg+xml," +
            '</foreignObject>' +
            '</svg>';
 
+
+
 function reload()
 {
     CABLES.ajax(
@@ -72,6 +74,7 @@ function update()
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height );
         textureOut.set(new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP));
     }
+    
     
     img.src = data;    
 }

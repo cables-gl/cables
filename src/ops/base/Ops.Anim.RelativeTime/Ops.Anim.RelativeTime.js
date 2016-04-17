@@ -1,15 +1,12 @@
-    Op.apply(this, arguments);
+op.name='RelativeTime';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var result=op.addOutPort(new Port(op,"result"));
+var startTime=Date.now()/1000.0;
 
-    this.name='RelativeTime';
-    this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-    this.result=this.addOutPort(new Port(this,"result"));
+function exec()
+{
+    result.set( Date.now()/1000.0-startTime);
+}
 
-    var self=this;
-    var startTime=Date.now()/1000.0;
-
-    this.exe.onTriggered=function()
-    {
-        self.result.val=Date.now()/1000.0-startTime;
-    };
-
-    this.exe.onTriggered();
+exe.onTriggered=exec;
+exec();

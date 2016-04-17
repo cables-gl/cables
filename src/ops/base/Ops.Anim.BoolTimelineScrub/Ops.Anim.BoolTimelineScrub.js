@@ -1,37 +1,30 @@
-this.name="Bool TimeLine Scrub";
+op.name="Bool TimeLine Scrub";
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var state = this.addInPort(new Port(this,"state",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var v=this.addInPort(new Port(this,"anim value",OP_PORT_TYPE_VALUE));
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var state = op.addInPort(new Port(op,"state",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var v=op.addInPort(new Port(op,"anim value",OP_PORT_TYPE_VALUE));
 
-var result=this.addOutPort(new Port(this,"result"));
-var outTime=this.addOutPort(new Port(this,"time",OP_PORT_TYPE_VALUE));
-var self=this;
+var result=op.addOutPort(new Port(op,"result"));
+var outTime=op.addOutPort(new Port(op,"time",OP_PORT_TYPE_VALUE));
 
 var animTime=new CABLES.TL.Anim();
 
 var lastState=false;
+
 var toggle=function()
 {
-
     if(state.get()!=lastState && v.anim)
     {
-        lastState=state.get();
-        animTime.clear();
-        var t=Date.now()/1000;
-        
         var l=v.anim.getLength();
-        
-        if(state.get())
-        {
-            animTime.setValue(t,0);
-            animTime.setValue(t+l,l);
-        }
-        else
-        {
-            animTime.setValue(t,l);
-            animTime.setValue(t+l,0);
-        }
+        var t=Date.now()/1000;
+        lastState=state.get();
+        var valueNow=animTime.getValue(t);
+        animTime.clear();
+
+        animTime.setValue(t,valueNow);
+
+        if(state.get()) animTime.setValue(t+l,l);
+            else animTime.setValue(t+l,0);
     }
 }
 
@@ -46,12 +39,12 @@ var exec=function()
     {
         if(!v.isAnimated())
         {
-            self.uiAttr({'error':'anim value should be animated'});
+            op.uiAttr({'error':'anim value should be animated'});
             return;
         }
         else
         {
-            self.uiAttr({'error':null});
+            op.uiAttr({'error':null});
         }
     }
     

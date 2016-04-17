@@ -1,15 +1,15 @@
-this.name="lissajous transform";
+op.name="lissajous transform";
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
-var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-var z=this.addInPort(new Port(this,"z",OP_PORT_TYPE_VALUE));
-var pointSkip=this.addInPort(new Port(this,"skip",OP_PORT_TYPE_VALUE));
-var numPoints=this.addInPort(new Port(this,"num points",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
+var z=op.addInPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
+var pointSkip=op.addInPort(new Port(op,"skip",OP_PORT_TYPE_VALUE));
+var numPoints=op.addInPort(new Port(op,"num points",OP_PORT_TYPE_VALUE));
 
-var mulX=this.addInPort(new Port(this,"mul x",OP_PORT_TYPE_VALUE));
-var mulY=this.addInPort(new Port(this,"mul y",OP_PORT_TYPE_VALUE));
-var mulZ=this.addInPort(new Port(this,"mul z",OP_PORT_TYPE_VALUE));
+var mulX=op.addInPort(new Port(op,"mul x",OP_PORT_TYPE_VALUE));
+var mulY=op.addInPort(new Port(op,"mul y",OP_PORT_TYPE_VALUE));
+var mulZ=op.addInPort(new Port(op,"mul z",OP_PORT_TYPE_VALUE));
 
 x.set(2);
 y.set(4);
@@ -21,8 +21,8 @@ mulZ.set(1);
 pointSkip.set(40);
 numPoints.set(3200);
 
-var cgl=this.patch.cgl;
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var cgl=op.patch.cgl;
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var vec=vec3.create();
 
 function doRender()

@@ -11,8 +11,4 @@ exe.onTriggered=function()
 {
     height.set(cgl.canvasHeight);
     width.set(cgl.canvasWidth);
-    
-    console.log(cgl.canvasWidth,cgl.canvasHeight);
-    // h=cgl.canvasHeight;
-    // w=cgl.canvasWidth;
 };

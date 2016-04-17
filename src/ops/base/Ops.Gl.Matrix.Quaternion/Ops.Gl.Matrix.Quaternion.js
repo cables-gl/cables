@@ -1,11 +1,11 @@
-this.name='quaternion';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='quaternion';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var x=this.addInPort(new Port(this,"x"));
-var y=this.addInPort(new Port(this,"y"));
-var z=this.addInPort(new Port(this,"z"));
-var w=this.addInPort(new Port(this,"w"));
+var x=op.addInPort(new Port(op,"x"));
+var y=op.addInPort(new Port(op,"y"));
+var z=op.addInPort(new Port(op,"z"));
+var w=op.addInPort(new Port(op,"w"));
 
 x.set(0.0);
 y.set(0.0);
@@ -20,9 +20,7 @@ render.onTriggered=function()
     if(x.isAnimated())
     {
         var time=op.patch.timer.getTime();
-
         CABLES.TL.Anim.slerpQuaternion(time,q,x.anim,y.anim,z.anim,w.anim);
-
     }
     else
     {

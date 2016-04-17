@@ -5,7 +5,7 @@ var amountX=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE,{  }));
 var amountY=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE,{  }));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
