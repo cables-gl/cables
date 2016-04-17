@@ -68,6 +68,7 @@ function rebuild()
 
     var verts=[];
     var tc=[];
+    var norms=[];
     var indices=[];
 
     var numRows=Math.round(nRows.get());
@@ -89,8 +90,14 @@ function rebuild()
 
             tc.push( c/numColumns );
             tc.push( 1.0-r/numRows );
+            
+            norms.push(0);
+            norms.push(0);
+            norms.push(1);
+
         }
     }
+    
 
     for(c=0;c<numColumns;c++)
     {
@@ -115,11 +122,10 @@ function rebuild()
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;
+    geom.vertexNormals=norms;
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);
-        
-        console.log(geom);
 
     geomOut.set(null);
     geomOut.set(geom);

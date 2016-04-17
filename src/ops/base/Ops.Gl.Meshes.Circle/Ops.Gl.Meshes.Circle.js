@@ -79,6 +79,7 @@ function calc()
                       );
 
           geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
+          geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
 
           oldPosXTexCoord=posxTexCoord;
           oldPosYTexCoord=posyTexCoord;
@@ -89,68 +90,73 @@ function calc()
     }
     else
     {
-      var count=0;
-      for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
-      {
-          count++;
-
-          degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
-          posx=Math.cos(degInRad)*radius.get();
-          posy=Math.sin(degInRad)*radius.get();
-
-          var posxIn=Math.cos(degInRad)*innerRadius.get()*radius.get();
-          var posyIn=Math.sin(degInRad)*innerRadius.get()*radius.get();
-
-        
-        if(mapping.get()=='flat')
+        var count=0;
+        for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
         {
-            posxTexCoord=(Math.cos(degInRad)+1.0)/2;
-            posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
-            posxTexCoordIn=((posxTexCoord-0.5)*innerRadius.get())+0.5;
-            posyTexCoordIn=((posyTexCoord-0.5)*innerRadius.get())+0.5;
-        }
-        else if(mapping.get()=='round')
-        {
-            posxTexCoord=1.0-i/segments.get();
-            posyTexCoord=0;
-            posxTexCoordIn=posxTexCoord;
-            posyTexCoordIn=1;
-        }
+            count++;
+            
+            degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+            posx=Math.cos(degInRad)*radius.get();
+            posy=Math.sin(degInRad)*radius.get();
+            
+            var posxIn=Math.cos(degInRad)*innerRadius.get()*radius.get();
+            var posyIn=Math.sin(degInRad)*innerRadius.get()*radius.get();
+            
+    
+            if(mapping.get()=='flat')
+            {
+                posxTexCoord=(Math.cos(degInRad)+1.0)/2;
+                posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
+                posxTexCoordIn=((posxTexCoord-0.5)*innerRadius.get())+0.5;
+                posyTexCoordIn=((posyTexCoord-0.5)*innerRadius.get())+0.5;
+            }
+            else if(mapping.get()=='round')
+            {
+                posxTexCoord=1.0-i/segments.get();
+                posyTexCoord=0;
+                posxTexCoordIn=posxTexCoord;
+                posyTexCoordIn=1;
+            }
+            
 
-          if(steps.get()===0.0 ||
-            (count%parseInt(steps.get(),10)===0 && !invertSteps.get()) ||
-            (count%parseInt(steps.get(),10)!==0 && invertSteps.get())
-            )
-          {
-              geom.addFace(
+            if(steps.get()===0.0 ||
+                (count%parseInt(steps.get(),10)===0 && !invertSteps.get()) ||
+                (count%parseInt(steps.get(),10)!==0 && invertSteps.get()) )
+            {
+                geom.addFace(
                           [posx,posy,0],
                           [oldPosX,oldPosY,0],
                           [posxIn,posyIn,0]
                           );
 
-              geom.addFace(
+                geom.addFace(
                           [posxIn,posyIn,0],
                           [oldPosX,oldPosY,0],
                           [oldPosXIn,oldPosYIn,0]
                           );
 
-              geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
-              geom.texCoords.push(posxTexCoordIn,posyTexCoordIn,oldPosXTexCoord,oldPosYTexCoord,oldPosXTexCoordIn,oldPosYTexCoordIn);
-          }
+                geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
 
-          oldPosXTexCoordIn=posxTexCoordIn;
-          oldPosYTexCoordIn=posyTexCoordIn;
-
-          oldPosXTexCoord=posxTexCoord;
-          oldPosYTexCoord=posyTexCoord;
-
-          oldPosX=posx;
-          oldPosY=posy;
-
-          oldPosXIn=posxIn;
-          oldPosYIn=posyIn;
+                //   geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
+            }
+          
+            geom.vertexNormals=[];
+            for(var j=0;j<geom.vertices.length;j++)geom.vertexNormals.push(0,0,1);
+            
+            oldPosXTexCoordIn=posxTexCoordIn;
+            oldPosYTexCoordIn=posyTexCoordIn;
+            
+            oldPosXTexCoord=posxTexCoord;
+            oldPosYTexCoord=posyTexCoord;
+            
+            oldPosX=posx;
+            oldPosY=posy;
+            
+            oldPosXIn=posxIn;
+            oldPosYIn=posyIn;
         }
     }
+
     geomOut.set(null);
     geomOut.set(geom);
     mesh.setGeom(geom);

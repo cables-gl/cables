@@ -31,14 +31,15 @@ function create()
     ];
 
     geom.vertexNormals = [
-         0.0,  1.0,  0.0,
-         0.0,  1.0,  0.0,
-         0.0,  1.0,  0.0
+         0.0,  0.0,  1.0,
+         0.0,  0.0,  1.0,
+         0.0,  0.0,  1.0
     ];
     
     geom.verticesIndices = [
         0, 1, 2
     ];
+
 
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);

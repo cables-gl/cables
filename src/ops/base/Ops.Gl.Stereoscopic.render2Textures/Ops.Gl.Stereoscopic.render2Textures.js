@@ -25,7 +25,7 @@ tex1.set( fb[1].getTextureColor() );
 render.onTriggered=function()
 {
 
-cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+// cgl.gl.disable(cgl.gl.SCISSOR_TEST);
 
     fb[0].renderStart();
     cgl.pushMvMatrix();
@@ -45,7 +45,7 @@ cgl.resetViewPort();
 
 cgl.resetViewPort();
 
-cgl.gl.enable(cgl.gl.SCISSOR_TEST);
+// cgl.gl.enable(cgl.gl.SCISSOR_TEST);
 
 
 }
