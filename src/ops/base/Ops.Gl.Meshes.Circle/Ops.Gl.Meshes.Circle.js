@@ -136,13 +136,12 @@ function calc()
                           );
 
                 geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
+                geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
 
-                //   geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
+                geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
+                geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
             }
-          
-            geom.vertexNormals=[];
-            for(var j=0;j<geom.vertices.length;j++)geom.vertexNormals.push(0,0,1);
-            
+
             oldPosXTexCoordIn=posxTexCoordIn;
             oldPosYTexCoordIn=posyTexCoordIn;
             
