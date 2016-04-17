@@ -1,4 +1,3 @@
-var cgl=op.patch.cgl;
 
 op.name='TextureText';
 var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
@@ -12,6 +11,7 @@ var lineDistance=op.addInPort(new Port(op,"line distance"));
 var border=op.addInPort(new Port(op,"border"));
 
 var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
+var cgl=op.patch.cgl;
 
 border.set(0);
 texWidth.set(512);
@@ -59,8 +59,6 @@ function refresh()
             );
         ctx.stroke();
     }
-    
-
 
     if(text.get())
     {

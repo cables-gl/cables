@@ -51,8 +51,14 @@ op.onAnimFrame=function(time)
         rframes=0;
         rframeStart=Date.now();
     }
+    CGL.MESH.lastShader=null;
+    CGL.MESH.lastMesh=null;
+
 
     cgl.renderStart(cgl,identTranslate,identTranslateView);
+
+
+
     trigger.trigger();
 
     if(CGL.Texture.previewTexture)

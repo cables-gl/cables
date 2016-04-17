@@ -1,16 +1,20 @@
-    var self=this;
-    Op.apply(this, arguments);
 
-    this.name='jsonValue';
+op.name='jsonValue';
 
-    this.data=this.addInPort(new Port(this,"data",OP_PORT_TYPE_OBJECT ));
-    this.key=this.addInPort(new Port(this,"key",OP_PORT_TYPE_OBJECT,{display:'string'}));
-    this.result=this.addOutPort(new Port(this,"result"));
+var data=op.addInPort(new Port(op,"data",OP_PORT_TYPE_OBJECT ));
+var key=op.addInPort(new Port(op,"key",OP_PORT_TYPE_VALUE,{type:'string'}));
+var result=op.addOutPort(new Port(op,"result"));
 
-    this.data.onValueChanged=function()
+result.ignoreValueSerialize=true;
+data.ignoreValueSerialize=true;
+
+
+data.onValueChanged=exec;
+
+function exec()
+{
+    if(data.get() && data.get().hasOwnProperty(key.get()))
     {
-        if(self.data.val && self.data.val.hasOwnProperty(self.key.val))
-        {
-            self.result.val=self.data.val[self.key.val];
-        }
-    };
+        result.set( data.get()[key.get()] );
+    }
+}

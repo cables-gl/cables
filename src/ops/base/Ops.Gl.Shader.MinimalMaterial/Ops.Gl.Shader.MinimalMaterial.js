@@ -21,7 +21,6 @@ var srcVert=''
 
 var srcFrag=''
     .endl()+'{{MODULE_BEGIN_FRAG}}'
-
     .endl()+'precision highp float;'
     .endl()+'void main()'
     .endl()+'{'
@@ -29,7 +28,7 @@ var srcFrag=''
     .endl()+'   {{MODULE_COLOR}}'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
-    
+
 var doRender=function()
 {
     cgl.setShader(shader);
