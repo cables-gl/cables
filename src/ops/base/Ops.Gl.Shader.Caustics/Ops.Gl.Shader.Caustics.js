@@ -1,25 +1,25 @@
-this.name="Ops.Gl.Shader.Caustics";
+op.name="Ops.Gl.Shader.Caustics";
 
-var cgl=this.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var lightmap=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var lightmap=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var lightmapUniform=null;
 
 
+var cgl=op.patch.cgl;
 var mod=null;
 var shader=null;
 var uniCausticsTime=null;
 render.onTriggered=doRender;
 
 
-var pOpacity=this.addInPort(new Port(this,"opacity",OP_PORT_TYPE_VALUE));
+var pOpacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE));
 
-var pAmplitude=this.addInPort(new Port(this,"amplitude",OP_PORT_TYPE_VALUE));
-var pFrequency=this.addInPort(new Port(this,"frequency",OP_PORT_TYPE_VALUE));
-var pRepeat=this.addInPort(new Port(this,"repeat",OP_PORT_TYPE_VALUE));
+var pAmplitude=op.addInPort(new Port(op,"amplitude",OP_PORT_TYPE_VALUE));
+var pFrequency=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
+var pRepeat=op.addInPort(new Port(op,"repeat",OP_PORT_TYPE_VALUE));
 pRepeat.set(1.0);
 pOpacity.set(1.0);
 
@@ -29,31 +29,19 @@ var uniRepeat=null;
 var uniOpacity=null;
 
 pOpacity.onValueChange(function(){
-    if(uniOpacity)
-    {
-        uniOpacity.setValue(parseFloat(pOpacity.get()));
-    }
+    if(uniOpacity) uniOpacity.setValue(parseFloat(pOpacity.get()));
 });
 
 pRepeat.onValueChange(function(){
-    if(uniRepeat)
-    {
-        uniRepeat.setValue(parseFloat(pRepeat.get()));
-    }
+    if(uniRepeat) uniRepeat.setValue(parseFloat(pRepeat.get()));
 });
 
 pAmplitude.onValueChange(function(){
-    if(uniAmplitude)
-    {
-        uniAmplitude.setValue(parseFloat(pAmplitude.get()));
-    }
+    if(uniAmplitude) uniAmplitude.setValue(parseFloat(pAmplitude.get()));
 });
 
 pFrequency.onValueChange(function(){
-    if(uniFrequency)
-    {
-        uniFrequency.setValue(parseFloat(pFrequency.get()));
-    }
+    if(uniFrequency) uniFrequency.setValue(parseFloat(pFrequency.get()));
 });
 
 
@@ -99,7 +87,7 @@ function doRender()
 var srcCausticsHead=''
 // NOTE:'
 // http://http.developer.nvidia.com/GPUGems/gpugems_ch02.html
-// This shader is based on the original work by Daniel Sanchez-Crespo'
+// op shader is based on the original work by Daniel Sanchez-Crespo'
 // of the Universitat Pompeu Fabra, Barcelona, Spain.'
 .endl()+'uniform sampler2D lightMap;'
 .endl()+'uniform float {{mod}}_time;'
@@ -141,7 +129,7 @@ var srcCausticsHead=''
 .endl()+'  return 2.0 * {{mod}}_amplitude *z;'
 .endl()+'}'
 .endl()+''
-// .endl()+'// This is a derivative of the above wave function.'
+// .endl()+'// op is a derivative of the above wave function.'
 // .endl()+'// It returns the d(wave)/dx and d(wave)/dy partial derivatives.'
 .endl()+''
 .endl()+'vec2 gradwave(float x, float y, float timer)'
