@@ -38,22 +38,28 @@ var data = "data:image/svg+xml," +
             '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
            '<foreignObject width="100%" height="100%">' +
            '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:40px">' +
-             '<em>I</em> like ' + 
-             '<span style="color:white; text-shadow:0 0 2px blue;">' +
-             'cables</span>' +
+            //  '<em>I</em> like ' + 
+            //  '<span style="color:white; text-shadow:0 0 2px blue;">' +
+            //  'cables</span>' +
            '</div>' +
            '</foreignObject>' +
            '</svg>';
 
 
 
+    
+
+    
+
 function reload()
 {
+    var loadingId=op.patch.loading.start('svg file',filename.get());
     CABLES.ajax(
         op.patch.getFilePath(filename.get()),
         function(err,_data,xhr)
         {
             data="data:image/svg+xml,"+_data;
+            op.patch.loading.finished(loadingId);
             update();
         }
     );
@@ -62,14 +68,17 @@ function reload()
 function update()
 {
     var img = new Image();
+    var loadingId=op.patch.loading.start('svg2texture',filename.get());
 
     img.onerror = function()
     {
+        op.patch.loading.finished(loadingId);
         op.uiAttr( { 'error': 'Could not load SVG file!' } );
     }
     
     img.onload = function()
     {
+        op.patch.loading.finished(loadingId);
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height );
         textureOut.set(new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP));
