@@ -19,6 +19,28 @@ var getNewDynamicPort=function(name)
     return p;
 };
 
+op.getPort=function(name)
+{
+    for(var ipi in op.portsIn)
+        if(op.portsIn[ipi].getName()==name)
+            return op.portsIn[ipi];
+
+    for(var ipo in op.portsOut)
+        if(op.portsOut[ipo].getName()==name)
+            return op.portsOut[ipo];
+
+    var p=getNewDynamicPort(name);
+
+    var realName=name;
+    if(name.startsWith('out_'))
+    {
+        realName=name.substr(3);
+        createPatchOutputPort(p,realName);
+    }
+
+    return p;
+};
+
 function createPatchOutputPort(dynPort,name)
 {
     // var patchInputOP=getSubPatchInputOp();
@@ -79,7 +101,7 @@ op.shouldLink=function(p1,p2)
     }
 
     dynPort.type=otherPort.type;
-    dynPort.name='in_'+otherPort.getName();
+    dynPort.name='out_'+otherPort.getName();
 
     createPatchOutputPort(dynPort,otherPort.getName());
 

@@ -24,40 +24,24 @@ var getNewDynamicPort=function(name)
     return p;
 };
 
-
 var hasPort=function(name)
 {
     for(var ipi in op.portsIn)
-    {
         if(op.portsIn[ipi].getName()==name)
-        {
             return op.portsIn[ipi];
-        }
-    }
+
     return null;
 };
-
 
 op.getPort=function(name)
 {
     for(var ipi in op.portsIn)
-    {
         if(op.portsIn[ipi].getName()==name)
-        {
             return op.portsIn[ipi];
-        }
-    }
 
     for(var ipo in op.portsOut)
-    {
         if(op.portsOut[ipo].getName()==name)
-        {
             return op.portsOut[ipo];
-        }
-    }
-
-    // console.log('create new dyn port...??',name);
-
 
     var p=getNewDynamicPort(name);
 
@@ -76,18 +60,13 @@ var getSubPatchInputOp=function()
     var patchInputOP=op.patch.getSubPatchOp(op.patchId.val,'Ops.Ui.PatchInput');
     var patchOutputOP=op.patch.getSubPatchOp(op.patchId.val,'Ops.Ui.PatchOutput');
 
-
     if(!patchOutputOP)
     {
         op.patch.addOp('Ops.Ui.PatchOutput',{'subPatch':op.patchId.val} );
 
         patchOutputOP=op.patch.getSubPatchOp(op.patchId.val,'Ops.Ui.PatchOutput');
 
-        if(!patchOutputOP)
-        {
-            console.warn('no patchinput2!');
-        }
-        
+        if(!patchOutputOP) console.warn('no patchinput2!');
     }
 
     if(!patchInputOP)
@@ -96,10 +75,7 @@ var getSubPatchInputOp=function()
 
         patchInputOP=op.patch.getSubPatchOp(op.patchId.val,'Ops.Ui.PatchInput');
 
-        if(!patchInputOP)
-        {
-            console.warn('no patchinput2!');
-        }
+        if(!patchInputOP) console.warn('no patchinput2!');
     }
 
     return patchInputOP;
@@ -215,7 +191,7 @@ op.shouldLink=function(p1,p2)
     if(!op.hasDynamicPort())getNewDynamicPort('dyn');
 
     return true;
-};
+}
 
 op.patchId.onValueChanged=function()
 {
