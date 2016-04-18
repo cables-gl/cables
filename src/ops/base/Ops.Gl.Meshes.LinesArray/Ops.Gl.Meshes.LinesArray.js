@@ -1,18 +1,17 @@
-var cgl=this.patch.cgl;
 
-this.name='LineArray';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var width=this.addInPort(new Port(this,"width"));
-var height=this.addInPort(new Port(this,"height"));
+op.name='LineArray';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var width=op.addInPort(new Port(op,"width"));
+var height=op.addInPort(new Port(op,"height"));
+var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
+var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var nColumns=op.addInPort(new Port(op,"num columns"));
+var nRows=op.addInPort(new Port(op,"num rows"));
+var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
 
-var pivotX=this.addInPort(new Port(this,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=this.addInPort(new Port(this,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var nColumns=this.addInPort(new Port(this,"num columns"));
-var nRows=this.addInPort(new Port(this,"num rows"));
-
-var axis=this.addInPort(new Port(this,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var cgl=op.patch.cgl;
 axis.set('xy');
 pivotX.set('center');
 pivotY.set('center');
@@ -24,6 +23,15 @@ nRows.set(1);
 nColumns.set(1);
 
 var meshes=[];
+
+axis.onValueChanged=rebuild;
+pivotX.onValueChanged=rebuild;
+pivotY.onValueChanged=rebuild;
+width.onValueChanged=rebuild;
+height.onValueChanged=rebuild;
+nRows.onValueChanged=rebuild;
+nColumns.onValueChanged=rebuild;
+rebuild();
 
 render.onTriggered=function()
 {
@@ -38,6 +46,7 @@ render.onTriggered=function()
     
     trigger.trigger();
 };
+
 
 function rebuild()
 {
@@ -89,16 +98,4 @@ function rebuild()
         mesh.setGeom(geom);
         meshes.push(mesh);
     }
-
-
 }
-rebuild();
-
-axis.onValueChanged=rebuild;
-pivotX.onValueChanged=rebuild;
-pivotY.onValueChanged=rebuild;
-width.onValueChanged=rebuild;
-height.onValueChanged=rebuild;
-nRows.onValueChanged=rebuild;
-nColumns.onValueChanged=rebuild;
-

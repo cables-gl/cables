@@ -46,10 +46,6 @@ render.onTriggered=function()
 
 function rebuild()
 {
-    // console.log();
-    // console.log(typeof height.get());
-    // console.log(width.get());
-    // console.log(height.get());
     var w=width.get();
     var h=height.get();
     var x=0;

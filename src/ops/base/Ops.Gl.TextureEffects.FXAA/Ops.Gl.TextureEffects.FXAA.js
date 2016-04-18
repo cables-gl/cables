@@ -1,26 +1,23 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
-
 // shader from: https://github.com/mattdesl/glsl-fxaa
 
-this.name='FXAA';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='FXAA';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.fxaa_span=this.addInPort(new Port(this,"span",OP_PORT_TYPE_VALUE,{display:'dropdown',values:[0,2,4,8,16,32,64]}));
-this.fxaa_reduceMin=this.addInPort(new Port(this,"reduceMin",OP_PORT_TYPE_VALUE));
-this.fxaa_reduceMul=this.addInPort(new Port(this,"reduceMul",OP_PORT_TYPE_VALUE));
+var fxaa_span=op.addInPort(new Port(op,"span",OP_PORT_TYPE_VALUE,{display:'dropdown',values:[0,2,4,8,16,32,64]}));
+var fxaa_reduceMin=op.addInPort(new Port(op,"reduceMin",OP_PORT_TYPE_VALUE));
+var fxaa_reduceMul=op.addInPort(new Port(op,"reduceMul",OP_PORT_TYPE_VALUE));
 
-var useVPSize=this.addInPort(new Port(this,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-this.texWidth=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-this.texHeight=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
+var texWidth=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var texHeight=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
-var srcFrag=''
+op.onLoaded=shader.compile;
 
+var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'  varying vec2 texCoord;'
@@ -93,23 +90,15 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
     cgl.setShader(shader);
 
-
-if(cgl.getViewPort()[2]!=self.texWidth.get() || cgl.getViewPort()[3]!=self.texHeight.get())
-{
-    changeRes();
-}
-        // var w=;
-        // var h=;
-        // uWidth.setValue(w);
-        // uHeight.setValue(h);
-        // .set(w);
-        // self.texHeight.set(h);
-
+    if(cgl.getViewPort()[2]!=texWidth.get() || cgl.getViewPort()[3]!=texHeight.get())
+    {
+        changeRes();
+    }
 
     cgl.currentTextureEffect.bind();
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
@@ -119,18 +108,17 @@ if(cgl.getViewPort()[2]!=self.texWidth.get() || cgl.getViewPort()[3]!=self.texHe
 
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
 
 var uniformSpan=new CGL.Uniform(shader,'f','FXAA_SPAN_MAX',0);
-
 var uniformMul=new CGL.Uniform(shader,'f','FXAA_REDUCE_MUL',0);
 var uniformMin=new CGL.Uniform(shader,'f','FXAA_REDUCE_MIN',0);
 
-this.fxaa_span.onValueChanged=function()
+fxaa_span.onValueChanged=function()
 {
-    uniformSpan.setValue(parseInt(self.fxaa_span.val,10));
+    uniformSpan.setValue(parseInt(fxaa_span.get(),10));
 };
 
 var uWidth=new CGL.Uniform(shader,'f','width',0);
@@ -144,35 +132,34 @@ function changeRes()
         var h=cgl.getViewPort()[3];
         uWidth.setValue(w);
         uHeight.setValue(h);
-        self.texWidth.set(w);
-        self.texHeight.set(h);
-        // console.log('fxaaa',w,h);
+        texWidth.set(w);
+        texHeight.set(h);
     }
     else
     {
-        uWidth.setValue(self.texWidth.val);
-        uHeight.setValue(self.texHeight.val);
+        uWidth.setValue(texWidth.get());
+        uHeight.setValue(texHeight.get());
     }
 }
 
-this.texWidth.onValueChanged=changeRes;
-this.texHeight.onValueChanged=changeRes;
+texWidth.onValueChanged=changeRes;
+texHeight.onValueChanged=changeRes;
 useVPSize.onValueChanged=changeRes;
-this.onResize=changeRes;
+op.onResize=changeRes;
 
-this.fxaa_span.val=8;
-this.texWidth.val=1920;
-this.texHeight.val=1080;
+fxaa_span.set(8);
+texWidth.set(1920);
+texHeight.set(1080);
 
-this.fxaa_reduceMul.onValueChanged=function()
+fxaa_reduceMul.onValueChanged=function()
 {
-    uniformMul.setValue(1.0/self.fxaa_reduceMul.val);
+    uniformMul.setValue(1.0/fxaa_reduceMul.get());
 };
 
-this.fxaa_reduceMin.onValueChanged=function()
+fxaa_reduceMin.onValueChanged=function()
 {
-    uniformMin.setValue(1.0/self.fxaa_reduceMin.val);
+    uniformMin.setValue(1.0/fxaa_reduceMin.get());
 };
 
-this.fxaa_reduceMul.val=8;
-this.fxaa_reduceMin.val=128;
+fxaa_reduceMul.set(8);
+fxaa_reduceMin.set(128);

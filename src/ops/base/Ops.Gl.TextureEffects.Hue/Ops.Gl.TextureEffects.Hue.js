@@ -1,18 +1,14 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='Hue';
 
-this.name='Hue';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var hue=op.addInPort(new Port(op,"hue",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.hue=this.addInPort(new Port(this,"hue",OP_PORT_TYPE_VALUE,{display:'range'}));
-this.hue.val=1.0;
-
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
+hue.set(1.0);
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -59,12 +55,9 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniformHue=new CGL.Uniform(shader,'f','hue',1.0);
 
-this.hue.onValueChanged=function()
-{
-    uniformHue.setValue(self.hue.val);
-};
+hue.onValueChanged=function(){ uniformHue.setValue(hue.get()); };
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -77,5 +70,5 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };
