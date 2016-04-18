@@ -1,15 +1,12 @@
-    var self=this;
-    CABLES.Op.apply(this, arguments);
+op.name='Comment';
+var title=op.addInPort(new Port(op,"title",OP_PORT_TYPE_VALUE,{type:'string'}));
+var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string'}));
 
-    this.name='Comment';
-    var title=this.addInPort(new Port(this,"title",OP_PORT_TYPE_VALUE,{type:'string'}));
-    var text=this.addInPort(new Port(this,"text",OP_PORT_TYPE_VALUE,{type:'string'}));
+title.set('comment');
+text.set('');
 
-    title.set('comment');
-    text.set('');
-
-    title.onValueChange(function()
-    {
-        this.name=title.get();
-        this.uiAttr('title',this.name);
-    });
+title.onValueChange(function()
+{
+    op.name=title.get();
+    op.uiAttr('title',op.name);
+});

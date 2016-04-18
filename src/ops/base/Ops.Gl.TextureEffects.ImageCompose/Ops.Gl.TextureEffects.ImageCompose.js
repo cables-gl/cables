@@ -12,7 +12,7 @@ op.onResize=updateResolution;
 
 var cgl=op.patch.cgl;
 var effect=new CGL.TextureEffect(cgl);
-// cgl.currentTextureEffect=effect;
+cgl.currentTextureEffect=effect;
 var tex=new CGL.Texture(cgl);
 tex.filter=CGL.Texture.FILTER_LINEAR;
 

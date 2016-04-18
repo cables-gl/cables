@@ -1,13 +1,8 @@
-Op.apply(this, arguments);
-var cgl=this.patch.cgl;
+op.name='Cursor';
 
-this.name='Cursor';
-
-//var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-
-var cursor=this.addInPort(new Port(this,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
-
+var cursor=op.addInPort(new Port(op,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 var oldCursor='';
+var cgl=op.patch.cgl;
 
 var update=function()
 {
@@ -15,6 +10,3 @@ var update=function()
 };
 
 cursor.onValueChange(update);
-//render.onTriggered=update;
-
-

@@ -1,24 +1,22 @@
-Op.apply(this, arguments);
-var self=this;
+op.name='CallsPerSecond';
 
-this.name='CallsPerSecond';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.cps=this.addOutPort(new Port(this,"cps",OP_PORT_TYPE_VALUE));
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var cps=op.addOutPort(new Port(op,"cps",OP_PORT_TYPE_VALUE));
 
-this.timeStart=0;
-this.cpsCount=0;
+var timeStart=0;
+var cpsCount=0;
 
-this.exe.onTriggered=function()
+exe.onTriggered=function()
 {
-    if(self.timeStart===0)self.timeStart=Date.now();
+    if(timeStart===0)timeStart=Date.now();
     var now = Date.now();
 
-    if(now-self.timeStart>1000)
+    if(now-timeStart>1000)
     {
-        self.timeStart=Date.now();
-        self.cps.set(self.cpsCount);
-        self.cpsCount=0;
+        timeStart=Date.now();
+        cps.set(cpsCount);
+        cpsCount=0;
     }
 
-    self.cpsCount++;
+    cpsCount++;
 };

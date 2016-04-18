@@ -1,19 +1,14 @@
+op.name='stereoscopic';
 
-CABLES.Op.apply(this, arguments);
-this.name='stereoscopic';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var eyeDist=op.addInPort(new Port(op,"eyeDist"));
 
-var cgl=this.patch.cgl;
-
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-
-var eyeDist=this.addInPort(new Port(this,"eyeDist"));
-
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var tex0=this.addOutPort(new Port(this,"texture left",OP_PORT_TYPE_TEXTURE,{preview:true}));
-var tex1=this.addOutPort(new Port(this,"texture right",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var tex0=op.addOutPort(new Port(op,"texture left",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var tex1=op.addOutPort(new Port(op,"texture right",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
 
-// if(doTranslate)mat4.translate(transMatrix,transMatrix, vPos);
+var cgl=op.patch.cgl;
 var w=1024;
 var h=1025;
 
@@ -24,9 +19,6 @@ tex1.set( fb[1].getTextureColor() );
 
 render.onTriggered=function()
 {
-
-// cgl.gl.disable(cgl.gl.SCISSOR_TEST);
-
     fb[0].renderStart();
     cgl.pushMvMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, [-eyeDist.get()*0.5,0,0,1]);
@@ -34,7 +26,7 @@ render.onTriggered=function()
     cgl.popMvMatrix();
     fb[0].renderEnd();
 
-cgl.resetViewPort();
+    cgl.resetViewPort();
 
     fb[1].renderStart();
     cgl.pushMvMatrix();
@@ -43,9 +35,5 @@ cgl.resetViewPort();
     cgl.popMvMatrix();
     fb[1].renderEnd();
 
-cgl.resetViewPort();
-
-// cgl.gl.enable(cgl.gl.SCISSOR_TEST);
-
-
+    cgl.resetViewPort();
 }

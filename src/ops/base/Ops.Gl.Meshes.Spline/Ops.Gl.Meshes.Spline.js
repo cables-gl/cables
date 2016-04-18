@@ -56,7 +56,6 @@ render.onTriggered=function()
 function ip(x0,x1,x2,t)//Bezier 
 {
     var r =(x0 * (1-t) * (1-t) + 2 * x1 * (1 - t)* t + x2 * t * t);
-    // console.log(r);
     return r;
 }
     

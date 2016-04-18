@@ -1,20 +1,19 @@
-Op.apply(this, arguments);
-var self=this;
 
-this.name='subtract';
-this.result=this.addOutPort(new Port(this,"result"));
-this.number1=this.addInPort(new Port(this,"number1"));
-this.number2=this.addInPort(new Port(this,"number2"));
+op.name='subtract';
+var number1=op.addInPort(new Port(op,"number1"));
+var number2=op.addInPort(new Port(op,"number2"));
+var result=op.addOutPort(new Port(op,"result"));
+
+number1.onValueChanged=exec;
+number2.onValueChanged=exec;
+
+number1.set(1);
+number2.set(1);
+
 
 function exec()
 {
-    self.updateAnims();
-    var v=parseFloat(self.number1.get())-parseFloat(self.number2.get());
-    if(!isNaN(v)) self.result.set( v );
+    var v=number1.get()-number2.get();
+    if(!isNaN(v)) result.set( v );
 }
 
-this.number1.onValueChanged=exec;
-this.number2.onValueChanged=exec;
-
-this.number1.set(1);
-this.number2.set(1);

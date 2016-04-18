@@ -14,10 +14,10 @@ exec();
 
 function exec()
 {
-    result.set( 
+    result.set(
         amplitude.get() * 
         Math.sin( 
             (Date.now()/1000.0 * mul.get()) 
             + phase.get() ));
-};
+}
 

@@ -1,10 +1,9 @@
 
-this.name='ArrayGetValue';
-var array=this.addInPort(new Port(this, "array",OP_PORT_TYPE_ARRAY));
-var index=this.addInPort(new Port(this, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
-var value=this.addOutPort(new Port(this, "value",OP_PORT_TYPE_VALUE));
+op.name='ArrayGetValue';
+var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
+var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
+var value=op.addOutPort(new Port(op, "value",OP_PORT_TYPE_VALUE));
 array.ignoreValueSerialize=true;
-
 
 function update()
 {
