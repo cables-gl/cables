@@ -144,15 +144,18 @@ var rebuildGeom=function()
 var reload=function()
 {
     image.crossOrigin = '';
+    var loadingId=op.patch.loading.start('heightmapImage',filename.get());
 
     image.onabort=image.onerror=function(e)
     {
+        op.patch.loading.finished(loadingId);
         console.log('error loading image...');
     };
 
     image.onload=function(e)
     {
         rebuildGeom();
+        op.patch.loading.finished(loadingId);
     };
     image.src = filename.get();
 };
