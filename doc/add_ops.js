@@ -126,6 +126,7 @@ function stripVersionPartFromOp(opArr) {
  * @param {String} filename: Complete path, e.g. "/Users/me/gitbook/SomeFile.md"
  */
 function createOpEntry(filename) {
+  if(filename.indexOf("Deprecated") > -1) return;
   var lastSlash = filename.lastIndexOf("/");
   var mdFilename = filename.substring(lastSlash+1); // e.g. "SomeFile.md""
   var lastDot = mdFilename.lastIndexOf(".");
