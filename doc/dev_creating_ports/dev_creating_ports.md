@@ -111,6 +111,16 @@ inPort.onValueChange( function() {
 });
 ```
 
+##### Display: String
+
+```javascript
+var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { display: 'string' } ) );
+
+inPort.onValueChange( function() {
+	op.log( "Port changed to: " + inPort.get() === "foo bar" );
+});
+```
+
 ##### Display: Editor
 
 ![Editor Edit View](img/Editor2.png)
