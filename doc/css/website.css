@@ -14,3 +14,7 @@
 .book .book-header h1 {
   opacity: 1;
 }
+
+.chapter a[href ^= './chapter'] {
+  font-weight: bold;
+}
