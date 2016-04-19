@@ -1,19 +1,18 @@
-var cgl=this.patch.cgl;
+op.name='DepthTexture';
 
-this.name='DepthTexture';
-
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var image=this.addInPort(new Port(this,"image",OP_PORT_TYPE_TEXTURE));
-var farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
-var nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
+var farPlane=op.addInPort(new Port(op,"farplane",OP_PORT_TYPE_VALUE));
+var nearPlane=op.addInPort(new Port(op,"nearplane",OP_PORT_TYPE_VALUE));
 
 farPlane.set(100.0);
 nearPlane.set(0.1);
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var cgl=op.patch.cgl;
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -34,8 +33,6 @@ var srcFrag=''
 
     .endl()+'       col=vec4(c,c,c,1.0);'
 
-    // .endl()+'       if(c>=0.999)col.a=0.0;'
-    // .endl()+'           else col.a=1.0;'
     .endl()+'   #endif'
 
     .endl()+'   gl_FragColor = col;'

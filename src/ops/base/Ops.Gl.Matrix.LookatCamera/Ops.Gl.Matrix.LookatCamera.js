@@ -1,55 +1,53 @@
-    Op.apply(this, arguments);
-    var self=this;
-    var cgl=self.patch.cgl;
 
-    this.name='LookatCamera';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='LookatCamera';
 
-    this.centerX=this.addInPort(new Port(this,"centerX"));
-    this.centerY=this.addInPort(new Port(this,"centerY"));
-    this.centerZ=this.addInPort(new Port(this,"centerZ"));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-    this.eyeX=this.addInPort(new Port(this,"eyeX"));
-    this.eyeY=this.addInPort(new Port(this,"eyeY"));
-    this.eyeZ=this.addInPort(new Port(this,"eyeZ"));
+var centerX=op.addInPort(new Port(op,"centerX"));
+var centerY=op.addInPort(new Port(op,"centerY"));
+var centerZ=op.addInPort(new Port(op,"centerZ"));
 
-    this.vecUpX=this.addInPort(new Port(this,"upX"));
-    this.vecUpY=this.addInPort(new Port(this,"upY"));
-    this.vecUpZ=this.addInPort(new Port(this,"upZ"));
+var eyeX=op.addInPort(new Port(op,"eyeX"));
+var eyeY=op.addInPort(new Port(op,"eyeY"));
+var eyeZ=op.addInPort(new Port(op,"eyeZ"));
 
-    this.centerX.set(0);
-    this.centerY.set(0);
-    this.centerZ.set(0);
+var vecUpX=op.addInPort(new Port(op,"upX"));
+var vecUpY=op.addInPort(new Port(op,"upY"));
+var vecUpZ=op.addInPort(new Port(op,"upZ"));
 
-    this.eyeX.set(5);
-    this.eyeY.set(5);
-    this.eyeZ.set(5);
+centerX.set(0);
+centerY.set(0);
+centerZ.set(0);
 
-    this.vecUpX.set(0);
-    this.vecUpY.set(1);
-    this.vecUpZ.set(0);
+eyeX.set(5);
+eyeY.set(5);
+eyeZ.set(5);
+
+vecUpX.set(0);
+vecUpY.set(1);
+vecUpZ.set(0);
+
+var cgl=op.patch.cgl;
+var vUp=vec3.create();
+var vEye=vec3.create();
+var vCenter=vec3.create();
+var transMatrix = mat4.create();
+mat4.identity(transMatrix);
+
+
+render.onTriggered=function()
+{
+    cgl.pushViewMatrix();
+
+    vec3.set(vUp, vecUpX.get(),vecUpY.get(),vecUpZ.get());
+    vec3.set(vEye, eyeX.get(),eyeY.get(),eyeZ.get());
+    vec3.set(vCenter, centerX.get(),centerY.get(),centerZ.get());
+
+    mat4.lookAt(transMatrix, vEye, vCenter, vUp);
     
-    var vUp=vec3.create();
-    var vEye=vec3.create();
-    var vCenter=vec3.create();
-    var transMatrix = mat4.create();
-    mat4.identity(transMatrix);
+    mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
 
-
-    this.render.onTriggered=function()
-    {
-        cgl.pushViewMatrix();
-
-        vec3.set(vUp, self.vecUpX.get(),self.vecUpY.get(),self.vecUpZ.get());
-        vec3.set(vEye, self.eyeX.get(),self.eyeY.get(),self.eyeZ.get());
-        vec3.set(vCenter, self.centerX.get(),self.centerY.get(),self.centerZ.get());
-
-        mat4.lookAt(transMatrix, vEye, vCenter, vUp);
-        
-        mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
-
-
-        self.trigger.trigger();
-        cgl.popViewMatrix();
-    };
+    trigger.trigger();
+    cgl.popViewMatrix();
+};

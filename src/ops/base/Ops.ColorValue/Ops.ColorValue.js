@@ -1,26 +1,24 @@
-var self=this;
-this.name='ColorValue';
+op.name='ColorValue';
 
-this.g=this.addInPort(new Port(this,"ignore",OP_PORT_TYPE_FUNCTION,{display:'readonly'}));
-this.r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-this.g=this.addInPort(new Port(this,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.b=this.addInPort(new Port(this,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.a=this.addInPort(new Port(this,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-this.outR=this.addOutPort(new Port(this,"outr",OP_PORT_TYPE_VALUE));
-this.outG=this.addOutPort(new Port(this,"outg",OP_PORT_TYPE_VALUE));
-this.outB=this.addOutPort(new Port(this,"outb",OP_PORT_TYPE_VALUE));
-this.outA=this.addOutPort(new Port(this,"outa",OP_PORT_TYPE_VALUE));
+var outR=op.addOutPort(new Port(op,"outr",OP_PORT_TYPE_VALUE));
+var outG=op.addOutPort(new Port(op,"outg",OP_PORT_TYPE_VALUE));
+var outB=op.addOutPort(new Port(op,"outb",OP_PORT_TYPE_VALUE));
+var outA=op.addOutPort(new Port(op,"outa",OP_PORT_TYPE_VALUE));
 
-var exec=function()
+r.onValueChanged=exec;
+g.onValueChanged=exec;
+b.onValueChanged=exec;
+a.onValueChanged=exec;
+
+function exec()
 {
-    self.outR.val=self.r.val;
-    self.outG.val=self.g.val;
-    self.outB.val=self.b.val;
-    self.outA.val=self.a.val;
-};
-
-this.r.onValueChanged=exec;
-this.g.onValueChanged=exec;
-this.b.onValueChanged=exec;
-this.a.onValueChanged=exec;
+    outR.set(r.get());
+    outG.set(g.get());
+    outB.set(b.get());
+    outA.set(a.get());
+}

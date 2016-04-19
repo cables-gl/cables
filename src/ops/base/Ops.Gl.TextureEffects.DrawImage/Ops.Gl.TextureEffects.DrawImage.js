@@ -1,34 +1,33 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='DrawImage';
 
-this.name='DrawImage';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
-
-this.image=this.addInPort(new Port(this,"image",OP_PORT_TYPE_TEXTURE,{preview:true }));
-this.blendMode=this.addInPort(new Port(this,"blendMode",OP_PORT_TYPE_VALUE,{ display:'dropdown',values:[
+var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE,{preview:true }));
+var blendMode=op.addInPort(new Port(op,"blendMode",OP_PORT_TYPE_VALUE,{ display:'dropdown',values:[
     'normal','lighten','darken','multiply','average','add','substract','difference','negation','exclusion','overlay','screen',
     'color dodge',
     'color burn',
     'softlight',
     'hardlight'
     ] }));
-self.blendMode.val='normal';
-this.imageAlpha=this.addInPort(new Port(this,"imageAlpha",OP_PORT_TYPE_TEXTURE,{preview:true }));
-this.alphaSrc=this.addInPort(new Port(this,"alphaSrc",OP_PORT_TYPE_VALUE,{ display:'dropdown',values:[
+var imageAlpha=op.addInPort(new Port(op,"imageAlpha",OP_PORT_TYPE_TEXTURE,{preview:true }));
+var alphaSrc=op.addInPort(new Port(op,"alphaSrc",OP_PORT_TYPE_VALUE,{ display:'dropdown',values:[
     'alpha channel','luminance'
     ] }));
-this.removeAlphaSrc=this.addInPort(new Port(this,"removeAlphaSrc",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var removeAlphaSrc=op.addInPort(new Port(op,"removeAlphaSrc",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-this.invAlphaChannel=this.addInPort(new Port(this,"invert alpha channel",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var invAlphaChannel=op.addInPort(new Port(op,"invert alpha channel",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
+blendMode.set('normal');
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
+
+amount.set(1.0);
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -204,37 +203,37 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
 var textureAlpha=new CGL.Uniform(shader,'t','imageAlpha',2);
 
-this.invAlphaChannel.onValueChanged=function()
+invAlphaChannel.onValueChanged=function()
 {
-    if(self.invAlphaChannel.val) shader.define('INVERT_ALPHA');
+    if(invAlphaChannel.get()) shader.define('INVERT_ALPHA');
         else shader.removeDefine('INVERT_ALPHA');
     shader.compile();
 };
 
-this.removeAlphaSrc.onValueChanged=function()
+removeAlphaSrc.onValueChanged=function()
 {
-    if(self.removeAlphaSrc.val) shader.define('REMOVE_ALPHA_SRC');
+    if(removeAlphaSrc.get()) shader.define('REMOVE_ALPHA_SRC');
         else shader.removeDefine('REMOVE_ALPHA_SRC');
     shader.compile();
 };
-this.removeAlphaSrc.set(true);
+removeAlphaSrc.set(true);
 
-this.alphaSrc.onValueChanged=function()
+alphaSrc.onValueChanged=function()
 {
-    if(self.alphaSrc.val=='luminance') shader.define('ALPHA_FROM_LUMINANCE');
+    if(alphaSrc.get()=='luminance') shader.define('ALPHA_FROM_LUMINANCE');
         else shader.removeDefine('ALPHA_FROM_LUMINANCE');
     shader.compile();
 };
 
-this.alphaSrc.val="alpha channel";
+alphaSrc.set("alpha channel");
 
 
 {
     //
     // texture flip
     //
-    var flipX=this.addInPort(new Port(this,"flip x",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-    var flipY=this.addInPort(new Port(this,"flip y",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipX=op.addInPort(new Port(op,"flip x",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipY=op.addInPort(new Port(op,"flip y",OP_PORT_TYPE_VALUE,{ display:'bool' }));
     
     flipX.onValueChanged=function()
     {
@@ -253,9 +252,9 @@ this.alphaSrc.val="alpha channel";
     //
     // texture transform
     //
-    var scale=this.addInPort(new Port(this,"scale",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var posX=this.addInPort(new Port(this,"pos x",OP_PORT_TYPE_VALUE,{  }));
-    var posY=this.addInPort(new Port(this,"pos y",OP_PORT_TYPE_VALUE,{  }));
+    var scale=op.addInPort(new Port(op,"scale",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var posX=op.addInPort(new Port(op,"pos x",OP_PORT_TYPE_VALUE,{  }));
+    var posY=op.addInPort(new Port(op,"pos y",OP_PORT_TYPE_VALUE,{  }));
 
     scale.set(1.0);
 
@@ -265,7 +264,6 @@ this.alphaSrc.val="alpha channel";
 
     function updateTransform()
     {
-        // console.log('tex trans!!');
         if(scale.get()!=1.0 || posX.get()!=0.0 || posY.get()!=0.0 )
         {
             if(!shader.hasDefine('TEX_TRANSFORM'))shader.define('TEX_TRANSFORM');
@@ -286,79 +284,79 @@ this.alphaSrc.val="alpha channel";
 }
 
 
-this.blendMode.onValueChanged=function()
+blendMode.onValueChanged=function()
 {
-    if(self.blendMode.val=='normal') shader.define('BM_NORMAL');
+    if(blendMode.get()=='normal') shader.define('BM_NORMAL');
         else shader.removeDefine('BM_NORMAL');
 
-    if(self.blendMode.val=='multiply') shader.define('BM_MULTIPLY');
+    if(blendMode.get()=='multiply') shader.define('BM_MULTIPLY');
         else shader.removeDefine('BM_MULTIPLY');
 
-    if(self.blendMode.val=='average') shader.define('BM_AVERAGE');
+    if(blendMode.get()=='average') shader.define('BM_AVERAGE');
         else shader.removeDefine('BM_AVERAGE');
 
-    if(self.blendMode.val=='add') shader.define('BM_ADD');
+    if(blendMode.get()=='add') shader.define('BM_ADD');
         else shader.removeDefine('BM_ADD');
 
-    if(self.blendMode.val=='substract') shader.define('BM_SUBSTRACT');
+    if(blendMode.get()=='substract') shader.define('BM_SUBSTRACT');
         else shader.removeDefine('BM_SUBSTRACT');
 
-    if(self.blendMode.val=='difference') shader.define('BM_DIFFERENCE');
+    if(blendMode.get()=='difference') shader.define('BM_DIFFERENCE');
         else shader.removeDefine('BM_DIFFERENCE');
 
-    if(self.blendMode.val=='negation') shader.define('BM_NEGATION');
+    if(blendMode.get()=='negation') shader.define('BM_NEGATION');
         else shader.removeDefine('BM_NEGATION');
 
-    if(self.blendMode.val=='exclusion') shader.define('BM_EXCLUSION');
+    if(blendMode.get()=='exclusion') shader.define('BM_EXCLUSION');
         else shader.removeDefine('BM_EXCLUSION');
 
-    if(self.blendMode.val=='lighten') shader.define('BM_LIGHTEN');
+    if(blendMode.get()=='lighten') shader.define('BM_LIGHTEN');
         else shader.removeDefine('BM_LIGHTEN');
 
-    if(self.blendMode.val=='darken') shader.define('BM_DARKEN');
+    if(blendMode.get()=='darken') shader.define('BM_DARKEN');
         else shader.removeDefine('BM_DARKEN');
 
-    if(self.blendMode.val=='overlay') shader.define('BM_OVERLAY');
+    if(blendMode.get()=='overlay') shader.define('BM_OVERLAY');
         else shader.removeDefine('BM_OVERLAY');
 
-    if(self.blendMode.val=='screen') shader.define('BM_SCREEN');
+    if(blendMode.get()=='screen') shader.define('BM_SCREEN');
         else shader.removeDefine('BM_SCREEN');
 
-    if(self.blendMode.val=='softlight') shader.define('BM_SOFTLIGHT');
+    if(blendMode.get()=='softlight') shader.define('BM_SOFTLIGHT');
         else shader.removeDefine('BM_SOFTLIGHT');
 
-    if(self.blendMode.val=='hardlight') shader.define('BM_HARDLIGHT');
+    if(blendMode.get()=='hardlight') shader.define('BM_HARDLIGHT');
         else shader.removeDefine('BM_HARDLIGHT');
 
-    if(self.blendMode.val=='color dodge') shader.define('BM_COLORDODGE');
+    if(blendMode.get()=='color dodge') shader.define('BM_COLORDODGE');
         else shader.removeDefine('BM_COLORDODGE');
 
-    if(self.blendMode.val=='color burn') shader.define('BM_COLORBURN');
+    if(blendMode.get()=='color burn') shader.define('BM_COLORBURN');
         else shader.removeDefine('BM_COLORBURN');
 
     shader.compile();
 };
 
-var amountUniform=new CGL.Uniform(shader,'f','amount',1.0);
+var amountUniform=new CGL.Uniform(shader,'f','amount',amount.get());
 
-this.amount.onValueChanged=function()
+amount.onValueChanged=function()
 {
-    amountUniform.setValue(self.amount.val);
+    amountUniform.setValue(amount.get());
 };
-self.amount.val=1.0;
 
-this.imageAlpha.onValueChanged=function()
+
+imageAlpha.onValueChanged=function()
 {
-    if(self.imageAlpha.val && self.imageAlpha.val.tex) shader.define('HAS_TEXTUREALPHA');
+    if(imageAlpha.get() && imageAlpha.get().tex) shader.define('HAS_TEXTUREALPHA');
         else shader.removeDefine('HAS_TEXTUREALPHA');
     shader.compile();
 };
 
-function render()
+function doRender()
 {
     if(!cgl.currentTextureEffect)return;
 
-    if(self.image.val && self.image.val.tex)
+    if(image.get() && image.get().tex)
     {
 
         cgl.setShader(shader);
@@ -368,44 +366,44 @@ function render()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 
-        if(self.imageAlpha.val && self.imageAlpha.val.tex)
+        if(imageAlpha.get() && imageAlpha.get().tex)
         {
             cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.imageAlpha.val.tex );
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, imageAlpha.get().tex );
         }
 
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
     }
 
-    self.trigger.trigger();
+    trigger.trigger();
 }
 
 function preview()
 {
-    render();
-    self.image.val.preview();
+    doRender();
+    image.get().preview();
 }
 
 function previewAlpha()
 {
-    render();
-    self.imageAlpha.val.preview();
+    doRender();
+    imageAlpha.get().preview();
 }
 
-this.image.onPreviewChanged=function()
+image.onPreviewChanged=function()
 {
-    if(self.image.showPreview) self.render.onTriggered=preview;
-    else self.render.onTriggered=render;
+    if(image.showPreview) render.onTriggered=preview;
+        else render.onTriggered=doRender;
 };
 
-this.imageAlpha.onPreviewChanged=function()
+imageAlpha.onPreviewChanged=function()
 {
-    if(self.imageAlpha.showPreview) self.render.onTriggered=previewAlpha;
-    else self.render.onTriggered=render;
+    if(imageAlpha.showPreview) render.onTriggered=previewAlpha;
+        else render.onTriggered=doRender;
 };
 
-this.render.onTriggered=render;
+render.onTriggered=doRender;
 

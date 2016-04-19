@@ -1,18 +1,18 @@
-Op.apply(this, arguments);
-var self=this;
+op.name='Concat';
 
-this.name='concat';
-this.result=this.addOutPort(new Port(this,"result"));
-this.string1=this.addInPort(new Port(this,"string1",OP_PORT_TYPE_VALUE,{type:'string'}));
-this.string2=this.addInPort(new Port(this,"string2",OP_PORT_TYPE_VALUE,{type:'string'}));
+var string1=op.addInPort(new Port(op,"string1",OP_PORT_TYPE_VALUE,{type:'string'}));
+var string2=op.addInPort(new Port(op,"string2",OP_PORT_TYPE_VALUE,{type:'string'}));
 
-this.exec= function()
+var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_VALUE,{type:'string'}));
+
+
+function exec()
 {
-    self.result.val=self.string1.val+self.string2.val;
-};
+    result.set( String(string1.get())+String(string2.get()));
+}
 
-this.string1.onValueChanged=this.exec;
-this.string2.onValueChanged=this.exec;
+string1.onValueChanged=exec;
+string2.onValueChanged=exec;
 
-this.string1.val='wurst';
-this.string2.val='tuete';
+string1.set('ABC');
+string2.set('XYZ');

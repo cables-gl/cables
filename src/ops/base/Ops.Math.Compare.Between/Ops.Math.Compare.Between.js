@@ -1,26 +1,24 @@
-Op.apply(this, arguments);
-var self=this;
+op.name='Between';
 
-this.name='Between';
-this.result=this.addOutPort(new Port(this,"result"));
-this.number=this.addInPort(new Port(this,"value"));
-this.number1=this.addInPort(new Port(this,"number1"));
-this.number2=this.addInPort(new Port(this,"number2"));
-this.number.val=2.0;
-this.number1.val=1.0;
-this.number2.val=3.0;
+var result=op.addOutPort(new Port(op,"result"));
+var number=op.addInPort(new Port(op,"value"));
+var number1=op.addInPort(new Port(op,"number1"));
+var number2=op.addInPort(new Port(op,"number2"));
 
-this.exec= function()
+number.set(2.0);
+number1.set(1.0);
+number2.set(3.0);
+
+exec= function()
 {
-    self.updateAnims();
-    self.result.val=
+    result.set
         (
-            self.number.val>Math.min(self.number1.val,self.number2.val) &&
-            self.number.val<Math.max(self.number1.val,self.number2.val)
+            number.get() > Math.min(number1.get() , number2.get() )  &&
+            number.get() < Math.max(number1.get() , number2.get() ) 
         );
 };
 
-this.number1.onValueChanged=this.exec;
-this.number2.onValueChanged=this.exec;
-this.number.onValueChanged=this.exec;
-this.exec();
+number1.onValueChanged=exec;
+number2.onValueChanged=exec;
+number.onValueChanged=exec;
+exec();

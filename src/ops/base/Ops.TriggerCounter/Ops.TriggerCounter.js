@@ -1,23 +1,20 @@
-Op.apply(this, arguments);
-var self=this;
+op.name='TriggerCounter';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var reset=op.addInPort(new Port(op,"reset",OP_PORT_TYPE_FUNCTION));
 
-this.name='TriggerCounter';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.reset=this.addInPort(new Port(this,"reset",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var num=op.addOutPort(new Port(op,"timesTriggered",OP_PORT_TYPE_VALUE));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.num=this.addOutPort(new Port(this,"timesTriggered",OP_PORT_TYPE_VALUE));
+var n=0;
 
-var num=0;
-
-this.exe.onTriggered= function()
+exe.onTriggered= function()
 {
-    num++;
-    self.num.set(num);
-    self.trigger.trigger();
+    n++;
+    num.set(n);
+    trigger.trigger();
 };
-this.reset.onTriggered= function()
+reset.onTriggered= function()
 {
-    num=0;
-    self.num.set(num);
+    n=0;
+    num.set(n);
 };

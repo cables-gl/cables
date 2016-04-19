@@ -23,11 +23,11 @@ function createCanvas()
 
 function reSize()
 {
-    if(!textureOut.val) textureOut.val=new CGL.Texture(cgl);
+    if(!textureOut.get()) textureOut.set(new CGL.Texture(cgl));
 
     ctx = canvas.getContext('2d');
 
-    textureOut.val.setSize(texWidth.get(),texHeight.get());
+    textureOut.get().setSize(texWidth.get(),texHeight.get());
     ctx.canvas.width=canvas.width=texWidth.get();
     ctx.canvas.height=canvas.height=texHeight.get();
 
@@ -38,20 +38,28 @@ var data = "data:image/svg+xml," +
             '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
            '<foreignObject width="100%" height="100%">' +
            '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:40px">' +
-             '<em>I</em> like ' + 
-             '<span style="color:white; text-shadow:0 0 2px blue;">' +
-             'cables</span>' +
+            //  '<em>I</em> like ' + 
+            //  '<span style="color:white; text-shadow:0 0 2px blue;">' +
+            //  'cables</span>' +
            '</div>' +
            '</foreignObject>' +
            '</svg>';
 
+
+
+    
+
+    
+
 function reload()
 {
+    var loadingId=op.patch.loading.start('svg file',filename.get());
     CABLES.ajax(
         op.patch.getFilePath(filename.get()),
         function(err,_data,xhr)
         {
             data="data:image/svg+xml,"+_data;
+            op.patch.loading.finished(loadingId);
             update();
         }
     );
@@ -60,18 +68,22 @@ function reload()
 function update()
 {
     var img = new Image();
+    var loadingId=op.patch.loading.start('svg2texture',filename.get());
 
     img.onerror = function()
     {
-        console.log('svg error');
+        op.patch.loading.finished(loadingId);
+        op.uiAttr( { 'error': 'Could not load SVG file!' } );
     }
     
     img.onload = function()
     {
+        op.patch.loading.finished(loadingId);
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height );
-        textureOut.val=new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP);
+        textureOut.set(new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP));
     }
+    
     
     img.src = data;    
 }

@@ -1,35 +1,32 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='TransformToGeometryVertices';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var geometry=op.addInPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
-this.name='TransformToGeometryVertices';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.geometry=this.addInPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT));
-this.geometry.ignoreValueSerialize=true;
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var x=op.addOutPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
+var y=op.addOutPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
+var z=op.addOutPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
+var index=op.addOutPort(new Port(op,"index",OP_PORT_TYPE_VALUE));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.x=this.addOutPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
-this.y=this.addOutPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-this.z=this.addOutPort(new Port(this,"z",OP_PORT_TYPE_VALUE));
-this.index=this.addOutPort(new Port(this,"index",OP_PORT_TYPE_VALUE));
+geometry.ignoreValueSerialize=true;
 
-
+var cgl=op.patch.cgl;
 var vec=[0,0,0];
-this.render.onTriggered=function()
-{
-    if(self.geometry.val)
-    {
 
-        for(var i=0;i<self.geometry.val.vertices.length;i+=3)
+render.onTriggered=function()
+{
+    if(geometry.get())
+    {
+        for(var i=0;i<geometry.get().vertices.length;i+=3)
         {
-            vec3.set(vec, self.geometry.val.vertices[i+0],self.geometry.val.vertices[i+1],self.geometry.val.vertices[i+2]);
-            self.x.val=self.geometry.val.vertices[i+0];
-            self.y.val=self.geometry.val.vertices[i+1];
-            self.z.val=self.geometry.val.vertices[i+2];
-            self.index.val=i;
+            vec3.set(vec, geometry.get().vertices[i+0],geometry.get().vertices[i+1],geometry.get().vertices[i+2]);
+            x.set(geometry.get().vertices[i+0]);
+            y.set(geometry.get().vertices[i+1]);
+            z.set(geometry.get().vertices[i+2]);
+            index.set(i);
             cgl.pushMvMatrix();
             mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
-            self.trigger.trigger();
+            trigger.trigger();
             cgl.popMvMatrix();
         }
     }

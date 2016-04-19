@@ -1,15 +1,13 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
 
-this.name='Desaturate';
+op.name='Desaturate';
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -38,14 +36,14 @@ var srcFrag=''
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var amountUniform=new CGL.Uniform(shader,'f','amount',1.0);
+var amountUniform=new CGL.Uniform(shader,'f','amount',amount.get());
 
-this.amount.onValueChanged=function()
+amount.onValueChanged=function()
 {
-    amountUniform.setValue(self.amount.val);
+    amountUniform.setValue(amount.get());
 };
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -58,5 +56,5 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };

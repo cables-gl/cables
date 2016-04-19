@@ -1,18 +1,15 @@
-    var self=this;
-    CABLES.Op.apply(this, arguments);
+this.name='PatchInput';
 
-    this.name='PatchInput';
-
-    this.getPatchOp=function()
+op.getPatchOp=function()
+{
+    for(var i in op.patch.ops)
     {
-        for(var i in self.patch.ops)
+        if(op.patch.ops[i].patchId)
         {
-            if(self.patch.ops[i].patchId)
+            if(op.patch.ops[i].patchId.val==op.uiAttribs.subPatch)
             {
-                if(self.patch.ops[i].patchId.val==self.uiAttribs.subPatch)
-                {
-                    return self.patch.ops[i];
-                }
+                return op.patch.ops[i];
             }
         }
-    };
+    }
+};

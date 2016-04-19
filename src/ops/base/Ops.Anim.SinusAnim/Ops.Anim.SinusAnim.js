@@ -1,19 +1,23 @@
-this.name='SinusAnim';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.result=this.addOutPort(new Port(this,"result"));
+op.name='SinusAnim';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var result=op.addOutPort(new Port(op,"result"));
 
-this.phase=this.addInPort(new Port(this,"phase",OP_PORT_TYPE_VALUE));
-this.mul=this.addInPort(new Port(this,"frequency",OP_PORT_TYPE_VALUE));
-this.amplitude=this.addInPort(new Port(this,"amplitude",OP_PORT_TYPE_VALUE));
+var phase=op.addInPort(new Port(op,"phase",OP_PORT_TYPE_VALUE));
+var mul=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
+var amplitude=op.addInPort(new Port(op,"amplitude",OP_PORT_TYPE_VALUE));
 
-var self=this;
+mul.set(1.0);
+amplitude.set(1.0);
+phase.set(1);
+exe.onTriggered=exec;
+exec();
 
-this.exe.onTriggered=function()
+function exec()
 {
-    self.result.val = self.amplitude.val*Math.sin( ( Date.now()/1000.0 * self.mul.val ) + parseFloat(self.phase.val) );
-};
+    result.set(
+        amplitude.get() * 
+        Math.sin( 
+            (Date.now()/1000.0 * mul.get()) 
+            + phase.get() ));
+}
 
-this.mul.val=1.0;
-this.amplitude.val=1.0;
-this.phase.val=1;
-this.exe.onTriggered();

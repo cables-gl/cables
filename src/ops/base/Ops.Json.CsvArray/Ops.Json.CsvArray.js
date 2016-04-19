@@ -1,18 +1,16 @@
+op.name='csv json array';
 
-var patch=this.patch;
-this.name='csv json array';
-
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var result=this.addOutPort(new Port(this,"result",OP_PORT_TYPE_ARRAY));
-var len=this.addOutPort(new Port(this,"num items",OP_PORT_TYPE_VALUE));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_ARRAY));
+var len=op.addOutPort(new Port(op,"num items",OP_PORT_TYPE_VALUE));
 
 var reload=function()
 {
     CABLES.ajax(
-        patch.getFilePath(filename.val),
+        op.patch.getFilePath(filename.val),
         function(err,_data,xhr)
         {
-            var data=JSON.parse(_data)
+            var data=JSON.parse(_data);
             result.set(data);
             len.set(data.length);
 

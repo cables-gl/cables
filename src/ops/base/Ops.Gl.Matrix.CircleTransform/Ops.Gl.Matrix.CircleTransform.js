@@ -1,60 +1,59 @@
-    Op.apply(this, arguments);
-    var self=this;
-    var cgl=this.patch.cgl;
 
-    this.name='CircleTransform';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+op.name='CircleTransform';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-    this.segments=this.addInPort(new Port(this,"segments"));
-    this.radius=this.addInPort(new Port(this,"radius"));
-    this.percent=this.addInPort(new Port(this,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
+var segments=op.addInPort(new Port(op,"segments"));
+var radius=op.addInPort(new Port(op,"radius"));
+var percent=op.addInPort(new Port(op,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-    this.index=this.addOutPort(new Port(this,"index"));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var index=op.addOutPort(new Port(op,"index"));
 
-    this.render.onTriggered=function()
+var cgl=op.patch.cgl;
+
+segments.set(40);
+radius.set(1);
+percent.set(1);
+
+var pos=[];
+segments.onValueChanged=calc;
+radius.onValueChanged=calc;
+percent.onValueChanged=calc;
+calc();
+
+render.onTriggered=function()
+{
+    for(var i=0;i<pos.length;i++)
     {
-        for(var i=0;i<self.pos.length;i++)
-        {
-            cgl.pushMvMatrix();
+        cgl.pushMvMatrix();
 
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix, self.pos[i] );
-            self.trigger.trigger();
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos[i] );
+        trigger.trigger();
 
-            self.index.val=i;
+        index.set(i);
 
-            cgl.popMvMatrix();
-        }
-    };
-
-    this.segments.val=40;
-    this.radius.val=1;
-    this.percent.val=1;
-
-    this.pos=[];
-
-    function calc()
-    {
-        self.pos.length=0;
-
-        var i=0,degInRad=0;
-
-        for (i=0; i <= Math.round(self.segments.get())*self.percent.get(); i++)
-        {
-            degInRad = (360/Math.round(self.segments.get()))*i*CGL.DEG2RAD;
-            self.pos.push(
-                [
-                Math.cos(degInRad)*self.radius.get(),
-                Math.sin(degInRad)*self.radius.get(),
-                0
-                ]
-                );
-        }
+        cgl.popMvMatrix();
     }
-    
+};
 
 
-    this.segments.onValueChanged=calc;
-    this.radius.onValueChanged=calc;
-    this.percent.onValueChanged=calc;
-    calc();
+
+function calc()
+{
+    pos.length=0;
+
+    var i=0,degInRad=0;
+
+    for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
+    {
+        degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+        pos.push(
+            [
+            Math.cos(degInRad)*radius.get(),
+            Math.sin(degInRad)*radius.get(),
+            0
+            ]
+            );
+    }
+}
+

@@ -1,15 +1,20 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
 
-this.name='Noise';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE,{display:'range'}));
+op.name='Noise';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
+
+var amountUniform=new CGL.Uniform(shader,'f','amount',1.0);
+var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
+
+amount.onValueChanged=function(){amountUniform.setValue(amount.get());};
+
+amount.set(0.3);
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -40,12 +45,11 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
-    // console.log(self.patch.timer.getTime());
-    timeUniform.setValue(self.patch.timer.getTime());
+    timeUniform.setValue(op.patch.timer.getTime());
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
@@ -56,15 +60,6 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
-var amountUniform=new CGL.Uniform(shader,'f','amount',1.0);
-var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
-
-this.amount.onValueChanged=function()
-{
-    amountUniform.setValue(self.amount.val);
-};
-
-this.amount.val=0.3;

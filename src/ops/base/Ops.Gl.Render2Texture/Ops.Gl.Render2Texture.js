@@ -1,15 +1,15 @@
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 
-this.name='render to texture';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var useVPSize=this.addInPort(new Port(this,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var width=this.addInPort(new Port(this,"texture width"));
-var height=this.addInPort(new Port(this,"texture height"));
-var tfilter=this.addInPort(new Port(this,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+op.name='render to texture';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var width=op.addInPort(new Port(op,"texture width"));
+var height=op.addInPort(new Port(op,"texture height"));
+var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var tex=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
-var texDepth=this.addOutPort(new Port(this,"textureDepth",OP_PORT_TYPE_TEXTURE));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var tex=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texDepth=op.addOutPort(new Port(op,"textureDepth",OP_PORT_TYPE_TEXTURE));
 
 var fb=new CGL.Framebuffer(cgl);
 

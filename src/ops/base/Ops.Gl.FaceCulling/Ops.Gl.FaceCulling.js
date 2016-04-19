@@ -6,17 +6,17 @@ op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 op.enable=op.addInPort(new Port(op,"enable",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-op.enable.val=true;
+op.enable.set(true);
 
 op.facing=op.addInPort(new Port(op,"facing",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['back','front','both']} ));
-op.facing.val='back';
+op.facing.set('back');
 
 var whichFace=cgl.gl.BACK;
 op.render.onTriggered=function()
 {
     cgl.gl.cullFace(whichFace);
 
-    if(op.enable.val) cgl.gl.enable(cgl.gl.CULL_FACE);
+    if(op.enable.get()) cgl.gl.enable(cgl.gl.CULL_FACE);
     else cgl.gl.disable(cgl.gl.CULL_FACE);
 
     op.trigger.trigger();

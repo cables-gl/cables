@@ -1,5 +1,5 @@
-this.name='sequence';
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+op.name='sequence';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
 var exes=[];
 var triggers=[];
@@ -15,11 +15,11 @@ var num=16;
 
 for(var i=0;i<num;i++)
 {
-    triggers.push( this.addOutPort(new Port(this,"trigger "+i,OP_PORT_TYPE_FUNCTION)) );
+    triggers.push( op.addOutPort(new Port(op,"trigger "+i,OP_PORT_TYPE_FUNCTION)) );
     
     if(i<num-1)
     {
-        var newExe=this.addInPort(new Port(this,"exe "+i,OP_PORT_TYPE_FUNCTION));
+        var newExe=op.addInPort(new Port(op,"exe "+i,OP_PORT_TYPE_FUNCTION));
         newExe.onTriggered=triggerAll;
         exes.push( newExe );
     }

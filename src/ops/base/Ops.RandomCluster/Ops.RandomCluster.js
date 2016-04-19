@@ -1,25 +1,25 @@
 // todo: move to ops.gl
 
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
+op.name='random cluster';
 
-this.name='random cluster';
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var num=this.addInPort(new Port(this,"num"));
-var size=this.addInPort(new Port(this,"size"));
-var seed=this.addInPort(new Port(this,"random seed"));
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var num=op.addInPort(new Port(op,"num"));
+var size=op.addInPort(new Port(op,"size"));
+var seed=op.addInPort(new Port(op,"random seed"));
+var scaleX=op.addInPort(new Port(op,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleY=op.addInPort(new Port(op,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleZ=op.addInPort(new Port(op,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
-var idx=this.addOutPort(new Port(this,"index")) ;
-var rnd=this.addOutPort(new Port(this,"rnd")) ;
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
+var idx=op.addOutPort(new Port(op,"index")) ;
+var rnd=op.addOutPort(new Port(op,"rnd")) ;
+
+
+var cgl=op.patch.cgl;
 var randoms=[];
 var randomsRot=[];
 var randomsFloats=[];
 
-var scaleX=this.addInPort(new Port(this,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleY=this.addInPort(new Port(this,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleZ=this.addInPort(new Port(this,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
 scaleX.set(1);
 scaleY.set(1);
 scaleZ.set(1);

@@ -1,15 +1,15 @@
-CABLES.Op.apply(this, arguments);
-this.name='SideBySide 3d Material';
+op.name='SideBySide 3d Material';
 
-var cgl=this.patch.cgl;
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var texture0=this.addInPort(new Port(this,"texture left",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texture0=op.addInPort(new Port(op,"texture left",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texture0Uniform=null;
 
-var texture1=this.addInPort(new Port(this,"texture right",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texture1=op.addInPort(new Port(op,"texture right",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texture1Uniform=null;
+
+var cgl=op.patch.cgl;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -49,7 +49,7 @@ var srcFrag=''
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 texture0.onValueChanged=texture1.onValueChanged=function()

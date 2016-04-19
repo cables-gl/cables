@@ -1,11 +1,12 @@
-var self=this;
-var cgl=self.patch.cgl;
 
 this.name='BasicMaterial';
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION) );
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
 this.shaderOut.ignoreValueSerialize=true;
+
+var self=this;
+var cgl=op.patch.cgl;
 
 this.bindTextures=function()
 {

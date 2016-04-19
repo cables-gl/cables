@@ -3,12 +3,14 @@ op.name='texture';
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
-var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+
+
 
 
 flip.set(false);
@@ -30,18 +32,16 @@ var reload=function(nocache)
 
     if(  (filename.get() && filename.get().length>1 ))
     {
-        // console.log("load texture ",filename.get());
         var tex=CGL.Texture.load(cgl,url,function(err)
         {
             if(err)
             {
-                console.log('error loading image');
                 setTempTexture();
                 op.uiAttr({'error':'could not load texture'});
                 return;
             }
             op.uiAttr({'error':null});
-            textureOut.val=tex;
+            textureOut.set(tex);
             width.set(tex.width);
             height.set(tex.height);
 
@@ -89,7 +89,6 @@ op.onFileUploaded=function(fn)
 {
     if(filename.get() && filename.get().endsWith(fn))
     {
-        console.log('found!');
         reload(true);
     }
 };

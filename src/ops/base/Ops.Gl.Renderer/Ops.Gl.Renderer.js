@@ -2,10 +2,7 @@
 var rframes=0;
 var rframeStart=0;
 
-if(!op.patch.cgl)
-{
-    console.log(' no cgl!');
-}
+if(!op.patch.cgl) op.uiAttr( { 'error': 'No webgl cgl context' } );
 
 var patch=op.patch;
 var cgl=op.patch.cgl;
@@ -54,8 +51,14 @@ op.onAnimFrame=function(time)
         rframes=0;
         rframeStart=Date.now();
     }
+    CGL.MESH.lastShader=null;
+    CGL.MESH.lastMesh=null;
+
 
     cgl.renderStart(cgl,identTranslate,identTranslateView);
+
+
+
     trigger.trigger();
 
     if(CGL.Texture.previewTexture)
@@ -67,4 +70,6 @@ op.onAnimFrame=function(time)
     
     if(!cgl.frameStore.phong)cgl.frameStore.phong={}
     rframes++;
+    
+
 };

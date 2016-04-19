@@ -1,17 +1,15 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='Color';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.name='Color';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-this.g=this.addInPort(new Port(this,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.b=this.addInPort(new Port(this,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.a=this.addInPort(new Port(this,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -39,32 +37,16 @@ var uniformB=new CGL.Uniform(shader,'f','b',1.0);
 var uniformA=new CGL.Uniform(shader,'f','a',1.0);
 
 
-this.r.onValueChanged=function()
-{
-    uniformR.setValue(self.r.val);
-};
+r.onValueChanged=function(){uniformR.setValue(r.get());};
+g.onValueChanged=function(){uniformG.setValue(g.get());};
+b.onValueChanged=function(){uniformB.setValue(b.get());};
+a.onValueChanged=function(){uniformA.setValue(a.get());};
+r.set(1.0);
+g.set(1.0);
+b.set(1.0);
+a.set(1.0);
 
-this.g.onValueChanged=function()
-{
-    uniformG.setValue(self.g.val);
-};
-
-this.b.onValueChanged=function()
-{
-    uniformB.setValue(self.b.val);
-};
-
-this.a.onValueChanged=function()
-{
-    uniformA.setValue(self.a.val);
-};
-
-this.r.val=1.0;
-this.g.val=1.0;
-this.b.val=1.0;
-this.a.val=1.0;
-
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -77,5 +59,5 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };

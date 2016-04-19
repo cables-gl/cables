@@ -1,12 +1,12 @@
-this.name="Distance2d";
+op.name="Distance2d";
 
-var x1=this.addInPort(new Port(this,"x1"));
-var y1=this.addInPort(new Port(this,"y1"));
+var x1=op.addInPort(new Port(op,"x1"));
+var y1=op.addInPort(new Port(op,"y1"));
 
-var x2=this.addInPort(new Port(this,"x2"));
-var y2=this.addInPort(new Port(this,"y2"));
+var x2=op.addInPort(new Port(op,"x2"));
+var y2=op.addInPort(new Port(op,"y2"));
 
-var dist=this.addOutPort(new Port(this,"distance"));
+var dist=op.addOutPort(new Port(op,"distance"));
 
 function calc()
 {

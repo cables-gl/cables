@@ -1,6 +1,6 @@
-this.name='Round';
-var result=this.addOutPort(new Port(this,"result"));
-var number1=this.addInPort(new Port(this,"number"));
+op.name='Round';
+var result=op.addOutPort(new Port(op,"result"));
+var number1=op.addInPort(new Port(op,"number"));
 
 function exec()
 {

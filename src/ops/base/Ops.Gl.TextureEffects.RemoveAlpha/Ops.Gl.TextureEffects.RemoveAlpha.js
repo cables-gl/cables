@@ -1,12 +1,9 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
-
 this.name='RemoveAlpha';
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 this.onLoaded=shader.compile;
 
@@ -31,7 +28,7 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -44,5 +41,5 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };

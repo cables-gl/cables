@@ -33,12 +33,12 @@ render.onTriggered=function()
 
 function updateMesh()
 {
-    var nrings=Math.round(parseFloat(rings.get()));
-    var nsides=Math.round(parseFloat(sides.get()));
+    var nrings=Math.round(rings.get());
+    var nsides=Math.round(sides.get());
     if(nrings<2)nrings=2;
     if(nsides<2)nsides=2;
-    var r=parseFloat(innerRadius.get());
-    var r2=parseFloat(outerRadius.get());
+    var r=innerRadius.get();
+    var r2=outerRadius.get();
     generateTorus(r,r2, nrings, nsides);
 }
 
@@ -95,13 +95,18 @@ function generateTorus(iradius,oradius,nRings,nSides)
         for( i=0; i<nSides; i++ )
         {
             var offset = 3 * ( j * nSides + i ) ;
+            var offset2 = 2 * ( j * nSides + i ) ;
 
-            geom.vertices[offset  ] = table1.cost[j] * ( oradius + table2.cost[i] * iradius ) ;
-            geom.vertices[offset+1] = table1.sint[j] * ( oradius + table2.cost[i] * iradius ) ;
-            geom.vertices[offset+2] = table2.sint[i] * iradius  ;
-            geom.vertexNormals[offset  ] = table1.cost[j] * table2.cost[i] ;
-            geom.vertexNormals[offset+1] = table1.sint[j] * table2.cost[i] ;
-            geom.vertexNormals[offset+2] = table2.sint[i] ;
+            geom.vertices[offset  ] = table1.cost[j] * ( oradius + table2.cost[i] * iradius );
+            geom.vertices[offset+1] = table1.sint[j] * ( oradius + table2.cost[i] * iradius );
+            geom.vertices[offset+2] = table2.sint[i] * iradius;
+            geom.vertexNormals[offset  ] = table1.cost[j] * table2.cost[i];
+            geom.vertexNormals[offset+1] = table1.sint[j] * table2.cost[i];
+            geom.vertexNormals[offset+2] = table2.sint[i];
+            
+            geom.texCoords[offset2] = 0;
+            geom.texCoords[offset2+1] = 0;
+
         }
     }
 
@@ -122,8 +127,10 @@ function generateTorus(iradius,oradius,nRings,nSides)
         geom.verticesIndices[idx+1] = i + ioff;
         idx +=2;
     }
+    
     geomOut.set(geom);
 
-    mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
+    if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
+        else mesh.setGeom(geom);
 
 }

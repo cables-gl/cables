@@ -1,24 +1,17 @@
-Op.apply(this, arguments);
-this.name="HeightMap";
+op.name="HeightMap";
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+var extrude=op.addInPort(new Port(op,"extrude",OP_PORT_TYPE_VALUE));
+var mWidth=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var mHeight=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var nRows=op.addInPort(new Port(op,"rows",OP_PORT_TYPE_VALUE));
+var nColumns=op.addInPort(new Port(op,"columns",OP_PORT_TYPE_VALUE));
+var sliceTex=op.addInPort(new Port(op,"texCoords slice",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var extrude=this.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 extrude.set(1);
-
-var mWidth=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-var mHeight=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
-
-var nRows=this.addInPort(new Port(this,"rows",OP_PORT_TYPE_VALUE));
-var nColumns=this.addInPort(new Port(this,"columns",OP_PORT_TYPE_VALUE));
-
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var sliceTex=this.addInPort(new Port(this,"texCoords slice",OP_PORT_TYPE_VALUE,{display:'bool'}));
-
-
 mHeight.set(3.0);
 mWidth.set(3.0);
 nRows.set(20);
@@ -26,7 +19,7 @@ nColumns.set(20);
 
 var geom=new CGL.Geometry();
 var mesh=null;
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 var image = new Image();
 
 render.onTriggered=function()
@@ -35,8 +28,15 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
+extrude.onValueChanged=rebuildGeom;
+mHeight.onValueChanged=rebuildGeom;
+mWidth.onValueChanged=rebuildGeom;
+nRows.onValueChanged=rebuildGeom;
+nColumns.onValueChanged=rebuildGeom;
 
-var rebuildGeom=function()
+filename.onValueChanged=reload;
+
+function rebuildGeom()
 {
     geom.clear();
 
@@ -46,7 +46,6 @@ var rebuildGeom=function()
 
     var width=image.width;
     var height=image.height;
-    console.log('img ',width,height);
     var canvas = document.createElement('canvas');
     var ctx=canvas.getContext('2d');
     canvas.width=width;
@@ -128,10 +127,6 @@ var rebuildGeom=function()
         }
     }
 
-    console.log('count',count);
-    console.log('indices',indices.length);
-    console.log('verts',verts.length/3);
-    
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;
@@ -139,29 +134,24 @@ var rebuildGeom=function()
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
-};
+}
 
-var reload=function()
+function reload()
 {
     image.crossOrigin = '';
+    var loadingId=op.patch.loading.start('heightmapImage',filename.get());
 
     image.onabort=image.onerror=function(e)
     {
-        console.log('error loading image...');
+        op.patch.loading.finished(loadingId);
+        op.log('error loading heightmap image...');
     };
 
     image.onload=function(e)
     {
         rebuildGeom();
+        op.patch.loading.finished(loadingId);
     };
     image.src = filename.get();
-};
-
-extrude.onValueChange(rebuildGeom);
-mHeight.onValueChange(rebuildGeom);
-mWidth.onValueChange(rebuildGeom);
-nRows.onValueChange(rebuildGeom);
-nColumns.onValueChange(rebuildGeom);
-
-filename.onValueChange(reload);
+}
 

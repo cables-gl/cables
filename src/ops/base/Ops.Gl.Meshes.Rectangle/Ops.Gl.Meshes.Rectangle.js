@@ -1,4 +1,4 @@
-op.name='rectangle';
+op.name='Rectangle';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var width=op.addInPort(new Port(op,"width"));
@@ -29,6 +29,15 @@ nColumns.set(1);
 var geom=new CGL.Geometry();
 var mesh=null;
 
+axis.onValueChanged=rebuild;
+pivotX.onValueChanged=rebuild;
+pivotY.onValueChanged=rebuild;
+width.onValueChanged=rebuild;
+height.onValueChanged=rebuild;
+nRows.onValueChanged=rebuild;
+nColumns.onValueChanged=rebuild;
+rebuild();
+
 render.onTriggered=function()
 {
     mesh.render(cgl.getShader());
@@ -37,25 +46,32 @@ render.onTriggered=function()
 
 function rebuild()
 {
+    var w=width.get();
+    var h=height.get();
     var x=0;
     var y=0;
+    
+    if(typeof w=='string')w=parseFloat(w);
+    if(typeof h=='string')h=parseFloat(h);
+    
     if(pivotX.get()=='center') x=0;
-    if(pivotX.get()=='right') x=-width.get()/2;
-    if(pivotX.get()=='left') x=+width.get()/2;
+    if(pivotX.get()=='right') x=-w/2;
+    if(pivotX.get()=='left') x=+w/2;
 
     if(pivotY.get()=='center') y=0;
-    if(pivotY.get()=='top') y=-height.get()/2;
-    if(pivotY.get()=='bottom') y=+height.get()/2;
+    if(pivotY.get()=='top') y=-h/2;
+    if(pivotY.get()=='bottom') y=+h/2;
 
     var verts=[];
     var tc=[];
+    var norms=[];
     var indices=[];
 
-    var numRows=parseInt(nRows.get(),10);
-    var numColumns=parseInt(nColumns.get(),10);
+    var numRows=Math.round(nRows.get());
+    var numColumns=Math.round(nColumns.get());
     
-    var stepColumn=width.get()/numColumns;
-    var stepRow=height.get()/numRows;
+    var stepColumn=w/numColumns;
+    var stepRow=h/numRows;
     
     var c,r;
 
@@ -63,15 +79,21 @@ function rebuild()
     {
         for(c=0;c<=numColumns;c++)
         {
-            verts.push( c*stepColumn    - width.get()/2+x );
+            verts.push( c*stepColumn - width.get()/2+x );
             if(axis.get()=='xz') verts.push( 0.0 );
-            verts.push( r*stepRow       - height.get()/2+y );
+            verts.push( r*stepRow - height.get()/2+y );
             if(axis.get()=='xy') verts.push( 0.0 );
 
             tc.push( c/numColumns );
             tc.push( 1.0-r/numRows );
+            
+            norms.push(0);
+            norms.push(0);
+            norms.push(1);
+
         }
     }
+    
 
     for(c=0;c<numColumns;c++)
     {
@@ -90,26 +112,18 @@ function rebuild()
             indices.push(v2);
             indices.push(v3);
             indices.push(v4);
-            // console.log(f3);
         }
     }
 
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;
+    geom.vertexNormals=norms;
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
-    mesh.setGeom(geom);
+        else mesh.setGeom(geom);
+
     geomOut.set(null);
     geomOut.set(geom);
 
 }
-rebuild();
-
-axis.onValueChanged=rebuild;
-pivotX.onValueChanged=rebuild;
-pivotY.onValueChanged=rebuild;
-width.onValueChanged=rebuild;
-height.onValueChanged=rebuild;
-nRows.onValueChanged=rebuild;
-nColumns.onValueChanged=rebuild;

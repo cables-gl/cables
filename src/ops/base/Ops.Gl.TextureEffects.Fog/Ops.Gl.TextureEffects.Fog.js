@@ -1,17 +1,12 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
 
-this.name='fog';
+op.name='fog';
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var density=op.addInPort(new Port(op,"density",OP_PORT_TYPE_VALUE));
+var image=op.addInPort(new Port(op,"depth texture",OP_PORT_TYPE_TEXTURE));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.density=this.addInPort(new Port(this,"density",OP_PORT_TYPE_VALUE));
-
-this.image=this.addInPort(new Port(this,"depth texture",OP_PORT_TYPE_TEXTURE));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var ignoreInf=this.addInPort(new Port(this,"ignore infinity",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var ignoreInf=op.addInPort(new Port(op,"ignore infinity",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 ignoreInf.set(false);
 ignoreInf.onValueChanged=function()
 {
@@ -19,8 +14,9 @@ ignoreInf.onValueChanged=function()
         else shader.removeDefine('FOG_IGNORE_INFINITY');
 };
 
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -76,53 +72,38 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','depthTex',1);
 var textureUniform=new CGL.Uniform(shader,'t','image',0);
 
-// var uniFarplane=new CGL.Uniform(shader,'f','f',1.0);
-// var uniNearplane=new CGL.Uniform(shader,'f','n',1.0);
-
-// this.farPlane.onValueChanged=function()
-// {
-//     uniFarplane.setValue(self.farPlane.get());
-// };
-// self.farPlane.val=100.0;
-
-// this.nearPlane.onValueChanged=function()
-// {
-//     uniNearplane.setValue(self.nearPlane.get());
-// };
-// self.nearPlane.val=0.1;
-
 var uniDensity=new CGL.Uniform(shader,'f','density',1.0);
-this.density.onValueChanged=function()
+density.onValueChanged=function()
 {
-    uniDensity.setValue(self.density.get());
+    uniDensity.setValue(density.get());
 };
-self.density.val=5.0;
+density.set(5.0);
 
 {
     // fog color
 
-    var r=this.addInPort(new Port(this,"fog r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var r=op.addInPort(new Port(op,"fog r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     r.onValueChanged=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
 
-    var g=this.addInPort(new Port(this,"fog g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var g=op.addInPort(new Port(op,"fog g",OP_PORT_TYPE_VALUE,{ display:'range' }));
     g.onValueChanged=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
 
-    var b=this.addInPort(new Port(this,"fog b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=op.addInPort(new Port(op,"fog b",OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.onValueChanged=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
     };
 
-    var a=this.addInPort(new Port(this,"fog a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var a=op.addInPort(new Port(op,"fog a",OP_PORT_TYPE_VALUE,{ display:'range' }));
     a.onValueChanged=function()
     {
         if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
@@ -136,11 +117,11 @@ self.density.val=5.0;
 }
 
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
-    if(self.image.val && self.image.val.tex)
+    if(image.get() && image.get().tex)
     {
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
@@ -149,11 +130,11 @@ this.render.onTriggered=function()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
     }
 
-    self.trigger.trigger();
+    trigger.trigger();
 };

@@ -1,43 +1,28 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='Spline';
+
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var thickness=op.addInPort(new Port(op,"thickness",OP_PORT_TYPE_VALUE));
+var subDivs=op.addInPort(new Port(op,"subDivs",OP_PORT_TYPE_VALUE));
+var bezier=op.addInPort(new Port(op,"Bezier",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var centerpoint=op.addInPort(new Port(op,"centerpoint",OP_PORT_TYPE_VALUE,{display:'bool'}));
+
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var triggerPoints=op.addOutPort(new Port(op,"triggerPoints",OP_PORT_TYPE_FUNCTION));
+
+centerpoint.set(false);
+thickness.set(1.0);
+
+var cgl=op.patch.cgl;
+var buffer = cgl.gl.createBuffer();
 cgl.frameStore.SplinePoints=[];
 
-this.name='Spline';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 
-this.thickness=this.addInPort(new Port(this,"thickness",OP_PORT_TYPE_VALUE));
-this.thickness.val=1.0;
-
-this.subDivs=this.addInPort(new Port(this,"subDivs",OP_PORT_TYPE_VALUE));
-this.centerpoint=this.addInPort(new Port(this,"centerpoint",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.centerpoint.val=false;
-
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.triggerPoints=this.addOutPort(new Port(this,"triggerPoints",OP_PORT_TYPE_FUNCTION));
-
-var buffer = cgl.gl.createBuffer();
-
-function easeSmoothStep(perc)
-{
-    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
-    perc= x*x*(3 - 2*x); // smoothstep
-    return perc;
-}
-
-function easeSmootherStep(perc)
-{
-    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
-    perc= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
-    return perc;
-}
-
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     cgl.frameStore.SplinePoints.length=0;
 
     var shader=cgl.getShader();
-    self.trigger.trigger();
+    trigger.trigger();
     if(!shader)return;
     bufferData();
 
@@ -50,7 +35,7 @@ this.render.onTriggered=function()
     cgl.gl.enableVertexAttribArray(cgl.getShader().getAttrVertexPos());
 
     cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
-    if(self.centerpoint.val)cgl.gl.drawArrays(cgl.gl.LINES, 0, buffer.numItems);
+    if(centerpoint.get())cgl.gl.drawArrays(cgl.gl.LINES, 0, buffer.numItems);
       else cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
 
     for(var i=0;i<cgl.frameStore.SplinePoints.length;i+=3)
@@ -59,7 +44,7 @@ this.render.onTriggered=function()
         vec3.set(vec, cgl.frameStore.SplinePoints[i+0], cgl.frameStore.SplinePoints[i+1], cgl.frameStore.SplinePoints[i+2]);
         cgl.pushMvMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
-        self.triggerPoints.trigger();
+        triggerPoints.trigger();
         cgl.popMvMatrix();
     }
 
@@ -68,11 +53,17 @@ this.render.onTriggered=function()
     cgl.frameStore.SplinePoints.length=0;
 };
 
+function ip(x0,x1,x2,t)//Bezier 
+{
+    var r =(x0 * (1-t) * (1-t) + 2 * x1 * (1 - t)* t + x2 * t * t);
+    return r;
+}
+    
 function bufferData()
 {
-    var subd=self.subDivs.val;
+    var subd=subDivs.get();
 
-    if(self.centerpoint.val)
+    if(centerpoint.get())
     {
         var points=[];
 
@@ -92,37 +83,60 @@ function bufferData()
         cgl.frameStore.SplinePoints=points;
     }
 
-    // if(subd>0)
-    // {
-        // var points=[];
-    //     for(var i=0;i<cgl.frameStore.SplinePoints.length-3;i+=3)
-    //     {
-    //         for(var j=0;j<subd;j++)
-    //         {
-    //             for(var k=0;k<3;k++)
-    //             {
-    //                 points.push(
-    //                     cgl.frameStore.SplinePoints[i+k]+
-    //                         ( cgl.frameStore.SplinePoints[i+k+3] - cgl.frameStore.SplinePoints[i+k] ) *
-    //                         easeSmootherStep(j/subd)
-    //                         );
-    //             }
+    if(subd>0 && !bezier.get())
+    {
+        var points=[];
+        for(var i=0;i<cgl.frameStore.SplinePoints.length-3;i+=3)
+        {
+            for(var j=0;j<subd;j++)
+            {
+                for(var k=0;k<3;k++)
+                {
+                    points.push(
+                        cgl.frameStore.SplinePoints[i+k]+
+                            ( cgl.frameStore.SplinePoints[i+k+3] - cgl.frameStore.SplinePoints[i+k] ) *
+                            j/subd
+                            );
+                }
+            }
+        }
+    }
+    else
+    if(subd>0 && bezier.get())
+    {
+        var points=[];
 
-    //             // console.log('easeSmootherStep(j/subd)',easeSmootherStep(j/subd));
-                        
-    //         }
-    //     }
+        for(var i=3;i<cgl.frameStore.SplinePoints.length-6;i+=3)
+        {
+            for(var j=0;j<subd;j++)
+            {
+                for(var k=0;k<3;k++)
+                {
+                    var p=ip(
+                            (cgl.frameStore.SplinePoints[i+k-3]+cgl.frameStore.SplinePoints[i+k])/2,
+                            cgl.frameStore.SplinePoints[i+k+0],
+                            (cgl.frameStore.SplinePoints[i+k+3]+cgl.frameStore.SplinePoints[i+k+0])/2,
+                            j/subd
+                            )
 
-    // // console.log('cgl.frameStore.SplinePoints',cgl.frameStore.SplinePoints.length);
-    // // console.log('points',points.length);
-    
+                            ;
+                            
+                    points.push(p);
 
-    //     cgl.frameStore.SplinePoints=points;
-    // }
+                }
 
-    if(self.thickness.get()<1)self.thickness.set(1);
 
-    cgl.gl.lineWidth(self.thickness.val);
+            }
+        }
+
+
+
+        cgl.frameStore.SplinePoints=points;
+    }
+
+    if(thickness.get()<1)thickness.set(1);
+
+    cgl.gl.lineWidth(thickness.get());
     cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
     cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(cgl.frameStore.SplinePoints), cgl.gl.STATIC_DRAW);
     buffer.itemSize = 3;

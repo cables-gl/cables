@@ -1,15 +1,12 @@
-var cgl=this.patch.cgl;
+op.name='border';
 
-this.name='border';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
-
-
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -31,7 +28,7 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 {
-    var width=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
+    var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
     width.set(0.1);
 
     var uniWidth=new CGL.Uniform(shader,'f','width',width.get());
@@ -45,21 +42,21 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 {
     // diffuse color
 
-    var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var r=op.addInPort(new Port(op,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     r.onValueChanged=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
             else r.uniform.setValue(r.get());
     };
 
-    var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var g=op.addInPort(new Port(op,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
     g.onValueChanged=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
             else g.uniform.setValue(g.get());
     };
 
-    var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=op.addInPort(new Port(op,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.onValueChanged=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());

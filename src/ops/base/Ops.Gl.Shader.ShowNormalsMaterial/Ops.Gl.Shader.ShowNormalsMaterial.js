@@ -1,34 +1,32 @@
-    Op.apply(this, arguments);
-    var self=this;
-    var cgl=self.patch.cgl;
 
-    this.name='ShowNormalsMaterial';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='ShowNormalsMaterial';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-    this.doRender=function()
-    {
-        cgl.setShader(shader);
-        self.trigger.trigger();
-        cgl.setPreviousShader();
-    };
+var cgl=op.patch.cgl;
 
-    var srcFrag=''
-        .endl()+'precision highp float;'
-        .endl()+'varying vec3 norm;'
-        .endl()+''
-        .endl()+'void main()'
-        .endl()+'{'
-        .endl()+'   vec4 col=vec4(norm.x,norm.y,norm.z,1.0);'
-        .endl()+'   gl_FragColor = col;'
-        .endl()+'}';
+function doRender()
+{
+    cgl.setShader(shader);
+    trigger.trigger();
+    cgl.setPreviousShader();
+}
 
-
-    var shader=new CGL.Shader(cgl);
-    this.onLoaded=shader.compile;
+var srcFrag=''
+    .endl()+'precision highp float;'
+    .endl()+'varying vec3 norm;'
+    .endl()+''
+    .endl()+'void main()'
+    .endl()+'{'
+    .endl()+'   vec4 col=vec4(norm.x,norm.y,norm.z,1.0);'
+    .endl()+'   gl_FragColor = col;'
+    .endl()+'}';
 
 
-    shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+var shader=new CGL.Shader(cgl);
+op.onLoaded=shader.compile;
 
-    this.render.onTriggered=this.doRender;
-    this.doRender();
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+
+render.onTriggered=doRender;
+doRender();

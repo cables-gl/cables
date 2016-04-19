@@ -1,10 +1,10 @@
-var patch=this.patch;
+op.name='jsonFile';
 
-this.name='jsonFile';
-var self=this;
-filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var result=this.addOutPort(new Port(this,"result",OP_PORT_TYPE_OBJECT));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_OBJECT));
+
 result.ignoreValueSerialize=true;
+var patch=op.patch;
 
 var loadingId=0;
 var reload=function()

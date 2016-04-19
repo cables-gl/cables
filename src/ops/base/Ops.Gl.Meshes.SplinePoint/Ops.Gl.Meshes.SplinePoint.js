@@ -1,12 +1,11 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
+op.name='SplinePoint';
 
-this.name='SplinePoint';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.render.onTriggered=function()
+var cgl=op.patch.cgl;
+
+render.onTriggered=function()
 {
     if(!cgl.frameStore.SplinePoints)return;
     var pos=[0,0,0];
@@ -16,5 +15,5 @@ this.render.onTriggered=function()
     cgl.frameStore.SplinePoints.push(pos[1]);
     cgl.frameStore.SplinePoints.push(pos[2]);
 
-    self.trigger.trigger();
+    trigger.trigger();
 };

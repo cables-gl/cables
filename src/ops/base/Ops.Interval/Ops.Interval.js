@@ -1,23 +1,22 @@
-Op.apply(this, arguments);
+op.name='Interval';
 
-this.name='Interval';
-this.timeOutId=-1;
-this.interval=this.addInPort(new Port(this,"interval"));
-this.interval.val=1000;
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var interval=op.addInPort(new Port(op,"interval"));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.exec=function()
+interval.set(1000);
+var timeOutId=-1;
+
+exec=function()
 {
-    if(this.timeOutId!=-1)return;
-    var self=this;
+    if(timeOutId!=-1)return;
 
-    this.timeOutId=setTimeout(function()
+    timeOutId=setTimeout(function()
     {
-        self.timeOutId=-1;
-        self.trigger.trigger();
-        self.exec();
+        timeOutId=-1;
+        trigger.trigger();
+        exec();
     },
-    this.interval.val );
+    interval.get() );
 };
 
-this.exec();
+exec();

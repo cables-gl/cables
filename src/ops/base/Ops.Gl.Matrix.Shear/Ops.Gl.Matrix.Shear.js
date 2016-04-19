@@ -1,39 +1,34 @@
-    Op.apply(this, arguments);
-    var self=this;
-    var cgl=self.patch.cgl;
-    this.name='Shear';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='Shear';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-    this.shearX=this.addInPort(new Port(this,"shearX"));
-    this.shearY=this.addInPort(new Port(this,"shearY"));
+var shearX=op.addInPort(new Port(op,"shearX"));
+var shearY=op.addInPort(new Port(op,"shearY"));
 
-    var shearMatrix = mat4.create();
+var cgl=op.patch.cgl;
+var shearMatrix = mat4.create();
 
-    function update()
-    {
-        mat4.identity(shearMatrix);
-        shearMatrix[1]=Math.tan(self.shearX.get());
-        shearMatrix[4]=Math.tan(self.shearY.get());
-    }
+shearY.onValueChanged=update;
+shearX.onValueChanged=update;
+shearX.set(0.0);
+shearY.set(0.0);
 
-    this.shearY.onValueChanged=update;
-    this.shearX.onValueChanged=update;
 
-    // 1, shearY, 0, 0, 
-    //   shearX, 1, 0, 0,
-    //   0, 0, 1, 0,
-    //   0, 0, 0, 1 };
+function update()
+{
+    mat4.identity(shearMatrix);
+    shearMatrix[1]=Math.tan(shearX.get());
+    shearMatrix[4]=Math.tan(shearY.get());
+}
 
-    this.render.onTriggered=function()
-    {
-        cgl.pushMvMatrix();
 
-        mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,shearMatrix);
-        self.trigger.trigger();
+render.onTriggered=function()
+{
+    cgl.pushMvMatrix();
 
-        cgl.popMvMatrix();
-    };
+    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,shearMatrix);
+    trigger.trigger();
 
-    self.shearX.set(0.0);
-    self.shearY.set(0.0);
+    cgl.popMvMatrix();
+};
+
