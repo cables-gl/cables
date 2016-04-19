@@ -1,6 +1,6 @@
 # Concat
 
-*Ops.String.concat*  
+*Ops.String.Concat*  
 
 Joins two strings together, e.g. `"foo"` + `"bar"` = `"foobar"`
 
