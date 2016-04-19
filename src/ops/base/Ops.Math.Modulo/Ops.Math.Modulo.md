@@ -19,7 +19,7 @@ The result of a division, e.g. if you divide `5` by `2`, the rest is `1`, this i
 ### Ping Pong
 
 *Type: Value [true, false]*  
-This is a handy little helper. If you e.g. use `Modulo` with the time ([RelativeTime](../ops/Ops.Anim.RelativeTime/Ops.Anim.RelativeTime.md)) this can be used to prevent *jumps*, the output will then alternate between smaller and bigger values instead of going up, then to zero and back up again.
+This is a handy little helper. If you e.g. use `Modulo` with the time ([RelativeTime](../Ops.Anim.RelativeTime/Ops.Anim.RelativeTime.md)) this can be used to prevent *jumps*, the output will then alternate between smaller and bigger values instead of going up, then to zero and back up again.
 
 ## Output
 
