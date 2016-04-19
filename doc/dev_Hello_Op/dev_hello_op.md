@@ -33,7 +33,7 @@ myInPort.onValueChange( function() {
 });
 ```
 
-Once the value of `myInPort` changed, all code in the function `myInPort.onValueChange` will be executed. The first line is `this.log('My In Port changed to:' + myInPort.get());` which just prints the value of `myInPort` to the browser’s developer console. Check out the [Developer Console Tutorial](developer_console_tutorial.md) for some tips on how to use it.
+Once the value of `myInPort` changed, all code in the function `myInPort.onValueChange` will be executed. The first line is `this.log('My In Port changed to:' + myInPort.get());` which just prints the value of `myInPort` to the browser’s developer console.   
 The next line writes the value to our output port. `myInPort.get()` returns the value of our in port and `myOutPort.set(...)` sets the value of our out port. 
  
 Your op-code should look like this now:  
@@ -72,6 +72,6 @@ myOutPort.set( 2 * myInPort.get() );
 
 ![Op Settings (multiply by 2)](img/op-settings-mul.png)
 
-The ports we used here are both *value ports*, which means they can act as input and output port for a number. For the other kinds of ports check out [Ports Documentation](Ports.md).
+The ports we used here are both *value ports*, which means they can act as input and output port for a number. For the other kinds of ports check out [Ports Documentation](../dev_creating_ports/dev_creating_ports.md).
 
 
