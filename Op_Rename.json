@@ -165,37 +165,6 @@
         "to": "Times Triggered"
       }
     ]
-  },
-  {
-    "op_name": "Ops.String.concat",
-    "op_name_new": "Ops.String.Concat"
-  },
-  {
-    "op_name": "Ops.ToggleBool",
-    "op_name_new": "Ops.Bool.Toggle"
-  },
-  {
-    "op_name": "Ops.Or",
-    "op_name_new": "Ops.Bool.Or"
-  },
-    {
-    "op_name": "Ops.And",
-    "op_name_new": "Ops.Bool.And"
-  },
-  {
-    "op_name": "Ops.Audio.BPMTap",
-    "op_name_new": "Ops.Audio.BpmTap"
-  },
-  {
-    "op_name": "Ops.Gl.Mouse",
-    "op_name_new": "Ops.Devices.Mouse.Mouse"
-  },
-  {
-    "op_name": "Ops.Gl.MouseRelative",
-    "op_name_new": "Ops.Devices.Mouse.MouseRelative"
-  },
-  {
-    "op_name": "Ops.Gl.MouseWheel",
-    "op_name_new": "Ops.Devices.Mouse.MouseWheel"
   }
+
 ]
