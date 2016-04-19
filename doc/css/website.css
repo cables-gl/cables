@@ -15,6 +15,6 @@
   opacity: 1;
 }
 
-.chapter a[href ^= './chapter'] {
+li.chapter > a[href*="chapter"] {
   font-weight: bold;
 }
