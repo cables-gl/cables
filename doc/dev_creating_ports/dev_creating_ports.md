@@ -34,7 +34,7 @@ exec.onTrigger( function(){
 
 ##### Display: Button
 
-![Button](img/Button.png)  
+![Button](img/button.png)  
 
 By adding `{ "display": "button" }` to a port-definition a button-UI element will be added to the op settings pane to manually trigger the port.
 
@@ -97,7 +97,7 @@ var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { 'disp
 
 ##### Display: Bool
 
-![](img/Checkbox.png)
+![](img/checkbox.png)
 
 ```javascript
 var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
@@ -123,8 +123,8 @@ inPort.onValueChange( function() {
 
 ##### Display: Editor
 
-![Editor Edit View](img/Editor2.png)
-![Editor Button](img/Editor.png)
+![Editor Edit View](img/editor2.png)
+![Editor Button](img/editor.png)
 
 ```javascript
 var text = op.addInPort( new Port( this, "text", OP_PORT_TYPE_VALUE, { display: 'editor' } ) );

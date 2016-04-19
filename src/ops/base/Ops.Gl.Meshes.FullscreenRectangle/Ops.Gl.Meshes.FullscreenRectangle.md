@@ -2,7 +2,7 @@
 
 *Ops.Gl.Meshes.FullscreenRectangle*
 
-Draws a rectangle using the full WebGL canvas size. This is useful for e.g. drawing a scene, that was rendered to a texture and post processed using [ImageCompose](../Ops.Gl.TextureEffects.ImageCompose/Ops.Gl.TextureEffects.ImageCompose.md).
+Draws a rectangle using the full WebGL canvas size. This is useful for e.g. drawing a scene, that was rendered to a texture and post processed using [ImageCompose](../ops/Ops.Gl.TextureEffects.ImageCompose/Ops.Gl.TextureEffects.ImageCompose.md).
 
 ## Input
 

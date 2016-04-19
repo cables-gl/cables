@@ -52,9 +52,9 @@ myInPort.onValueChange( function() {
 
 Now click on the op to access the input element for `myInPort`.
 
-![Op SVG](img/Hello-Op.png)
+![Op SVG](img/hello-op.png)
 
-![Op Settings](img/Op-Settings.png)
+![Op Settings](img/op-settings.png)
 
 If you change the `In Value` you will see the `Out Value` change as well. Now let’s add some logic, every time the input value changes we want the output value to be two times the input value, all we have to do is to add a `2*`.
 
@@ -70,7 +70,7 @@ to:
 myOutPort.set( 2 * myInPort.get() );
 ```
 
-![Op Settings (multiply by 2)](img/Op-Settings-Mul.png)
+![Op Settings (multiply by 2)](img/op-settings-mul.png)
 
 The ports we used here are both *value ports*, which means they can act as input and output port for a number. For the other kinds of ports check out [Ports Documentation](Ports.md).
 
