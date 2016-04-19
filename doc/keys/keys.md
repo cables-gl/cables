@@ -28,6 +28,14 @@
 - `[mod] + a`: Select all ops
 - `[mod] + z`: Undo (Currently not working everywhere)
 
+## Editor
+
+*cables* uses the editor [Ace](https://ace.c9.io) which has a good support for various keyboard shortcut, check [their docs](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts) for a full reference.
+
+- `[mod + f]`: Find
+- `[ctrl] + h` (Windows / Linux) / `⌘ + ⌥ + f`: Replace
+
+
 ---
 
 ## Timeline
