@@ -120,15 +120,18 @@ void main()
             vec3 diffuse = diffuseCoefficient * surfaceColor.rgb * lightColor * lightIntensity;
 
             // specular.....
-            vec3 materialSpecularColor = vec3(1.0,1.0,1.0);
+            vec3 specular=vec3(0.0,0.0,0.0);
+            #ifdef DO_RENDER_SPECULAR
+                vec3 materialSpecularColor = vec3(1.0,1.0,1.0);
 
-            float specularCoefficient = 0.0;
-            if(diffuseCoefficient >= 0.0)
-                specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), shininess);
-            vec3 specular =(specularCoefficient * materialSpecularColor * lightIntensity);
-            // vec3 specularIntensity=vec3(1.0,1.0,1.0);
-            #ifdef HAS_TEXTURE_SPEC
-                specular*=1.0-texture2D( texSpec, texCoord ).rgb;
+                float specularCoefficient = 0.0;
+                if(diffuseCoefficient > 0.0)
+                    specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), shininess);
+                specular =(specularCoefficient * materialSpecularColor * lightIntensity);
+
+                #ifdef HAS_TEXTURE_SPEC
+                    specular*=1.0-texture2D( texSpec, texCoord ).rgb;
+                #endif
             #endif
 
             // attenuation

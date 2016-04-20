@@ -49,6 +49,15 @@ for(i=0;i<MAX_LIGHTS;i++)
 
 var shininess=this.addInPort(new Port(this,"Shininess",OP_PORT_TYPE_VALUE,{ "display":"range"}));
 
+
+var shiny=this.addInPort(new Port(this,"Shiny",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+shiny.onValueChanged=function()
+{
+    if(shiny.get()) shader.define('DO_RENDER_SPECULAR');
+        else shader.removeDefine('DO_RENDER_SPECULAR');
+};
+
+
 shininess.onValueChanged=function()
 {
     var shi=200-(shininess.get()*199);
@@ -58,6 +67,8 @@ shininess.onValueChanged=function()
 };
 
 shininess.set(0.001);
+
+
 
 {
     // diffuse color
