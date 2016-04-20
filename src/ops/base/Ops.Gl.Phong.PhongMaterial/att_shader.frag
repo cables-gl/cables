@@ -69,7 +69,7 @@ void main()
                 surfaceColor=texture2D(tex,vec2(gl_PointCoord.x*diffuseRepeatX,(1.0-gl_PointCoord.y)*diffuseRepeatY));
             #endif
             #ifndef TEXTURED_POINTS
-                surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(1.0-texCoord.y)*diffuseRepeatY));
+                surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(texCoord.y)*diffuseRepeatY));
             #endif
             surfaceColor.a*=a;
             #ifdef COLORIZE_TEXTURE
