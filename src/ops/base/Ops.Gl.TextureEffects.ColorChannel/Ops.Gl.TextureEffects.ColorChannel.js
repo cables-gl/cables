@@ -1,14 +1,11 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='ColorChannel';
 
-this.name='ColorChannel';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -52,7 +49,7 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -65,38 +62,38 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
-this.channelR=this.addInPort(new Port(this,"channelR",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-this.channelR.onValueChanged=function()
+var channelR=op.addInPort(new Port(op,"channelR",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+channelR.onValueChanged=function()
 {
-    if(self.channelR.val) shader.define('CHANNEL_R');
+    if(channelR.get()) shader.define('CHANNEL_R');
         else shader.removeDefine('CHANNEL_R');
 };
-this.channelR.val=true;
+channelR.set(true);
 
-this.channelG=this.addInPort(new Port(this,"channelG",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-this.channelG.val=false;
-this.channelG.onValueChanged=function()
+var channelG=op.addInPort(new Port(op,"channelG",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+channelG.set(false);
+channelG.onValueChanged=function()
 {
-    if(self.channelG.val)shader.define('CHANNEL_G');
+    if(channelG.get())shader.define('CHANNEL_G');
         else shader.removeDefine('CHANNEL_G');
 };
 
 
-this.channelB=this.addInPort(new Port(this,"channelB",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-this.channelB.val=false;
-this.channelB.onValueChanged=function()
+var channelB=op.addInPort(new Port(op,"channelB",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+channelB.set(false);
+channelB.onValueChanged=function()
 {
-    if(self.channelB.val) shader.define('CHANNEL_B');
+    if(channelB.get()) shader.define('CHANNEL_B');
         else shader.removeDefine('CHANNEL_B');
 };
 
-this.mono=this.addInPort(new Port(this,"mono",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-this.mono.val=false;
-this.mono.onValueChanged=function()
+var mono=op.addInPort(new Port(op,"mono",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+mono.set(false);
+mono.onValueChanged=function()
 {
-    if(self.mono.val) shader.define('MONO');
+    if(mono.get()) shader.define('MONO');
         else shader.removeDefine('MONO');
 };

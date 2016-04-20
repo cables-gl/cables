@@ -1,6 +1,6 @@
 # Callbacks
 
-In order to get informed on port-value-changes, function-triggers (also see [Ports](../dev_Ports/Ports.md)) or general op-events there are a number of callbacks your op can implement.
+In order to get informed on port-value-changes, function-triggers (also see [Ports](../dev_creating_ports/dev_creating_ports.md)) or general op-events there are a number of callbacks your op can implement.
 
 *Tip: It’s always a good idea to inspect the code of existing ops by selecting an op and then pressing `view code` in the op-settings on the right.*  
 
@@ -28,7 +28,7 @@ Can be implemented for `OP_PORT_TYPE_FUNCTION`.
 
 Every time a connected op calls `myOutPort.trigger()` the connected in-ports’ `onTrigger` callback is called.
 
-If your op needs to update its values continuously it should have an input port of type `OP_PORT_TYPE_FUNCTION`, which you can then connect to the [op: Renderer](../../src/ops/base/Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op e.g..
+If your op needs to update its values continuously it should have an input port of type `OP_PORT_TYPE_FUNCTION`, which you can then connect to the [Renderer](../ops/Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op e.g..
 
 ```javascript
 var exe = op.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION ) );

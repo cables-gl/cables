@@ -14,3 +14,12 @@
 .book .book-header h1 {
   opacity: 1;
 }
+
+.book.color-theme-2 .book-summary ul.summary li a, .book.color-theme-2 .book-summary ul.summary li span {
+  font-weight: 400;
+}
+
+li.chapter > a[href*="chapter"], .book.color-theme-2 .book-summary ul.summary li a[href*="chapter"] {
+  color: #f1f1f1;
+  font-weight: 600;
+}

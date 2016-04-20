@@ -1,6 +1,6 @@
 # ArrayIterator
 
-*Ops.ArrayIterator*
+*Ops.Array.ArrayIterator*
 
 Iterates/loops over an array and outputs every value of it
 

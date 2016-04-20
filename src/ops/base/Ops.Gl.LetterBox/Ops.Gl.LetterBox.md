@@ -21,11 +21,7 @@ Aspect ratio
 
 ## Trigger
 
-### Out Port 2
-
-*Type: Function*
-
-This is the description of an input port named `Out Port 1`, just tell a bit what it is for, maybe some links to external references.
+*Type: Function*  
 
 ## Example
 

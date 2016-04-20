@@ -37,3 +37,11 @@ Make sure to have a newline on the end!
 ## Exporting PDF / Epub
 
 >You must have the Calibre eBook reader/manager installed AND the command-line tools installed. To install the Calibre command-line tools from the Mac version, from the menu select: calibre - Preferences - Miscellaneous - Install command line tools
+
+## Checking for broken links
+
+- Install [broken-link-checker](https://github.com/stevenvachon/broken-link-checker):
+	- `npm install broken-link-checker -g`
+- Check with `blc https://docs.cables.gl -ro`
+	- Error 401: Not logged in
+	- Mozilla Web Audio Error: Can be ignored
