@@ -47,13 +47,17 @@ for(i=0;i<MAX_LIGHTS;i++)
 }
 
 
-var shininess=this.addInPort(new Port(this,"Shininess",OP_PORT_TYPE_VALUE,{ }));
+var shininess=this.addInPort(new Port(this,"Shininess",OP_PORT_TYPE_VALUE,{ "display":"range"}));
+
 shininess.onValueChanged=function()
 {
-    if(!shininess.uniform) shininess.uniform=new CGL.Uniform(shader,'f','shininess',shininess.get());
-        else shininess.uniform.setValue(shininess.get());
+    var shi=200-(shininess.get()*199);
+    // var shi=(shininess.get());
+    if(!shininess.uniform) shininess.uniform=new CGL.Uniform(shader,'f','shininess',shi);
+        else shininess.uniform.setValue(shi);
 };
 
+shininess.set(0.001);
 
 {
     // diffuse color

@@ -85,12 +85,14 @@ void main()
         if(lightIntensity>0.0)
         {
             vec3 lightColor = lights[l].color;
-            vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;
+
+            #ifndef HAS_TEXTURE_NORMAL
+                vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;
+            #endif
 
             #ifdef HAS_TEXTURE_NORMAL
                 // #define CALC_TANGENT
                 vec3 tnorm= texture2D( texNormal, texCoord ).xyz*2.0-1.0;
-
                 vec3 tangent,binormal;
                 float normalScale=2.5;
                 // #ifdef CALC_TANGENT
@@ -101,8 +103,9 @@ void main()
                     binormal = normalize(binormal);
                 // #endif
 
-                tnorm=normalize(tangent*tnorm.x + binormal*tnorm.y + norm*tnorm.z);
-                normal = normalize( mat3(normalMatrix) * (norm+tnorm*normalScale) );
+                tnorm = normalize(tangent*tnorm.x + binormal*tnorm.y + norm*tnorm.z);
+                vec3 normal = normalize( mat3(normalMatrix) * (norm+tnorm*normalScale) );
+
             #endif
 
 
@@ -113,7 +116,7 @@ void main()
             vec3 ambient=vec3(0.0,0.0,0.0);
 
             //calculate the cosine of the angle of incidence
-            float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
+            float diffuseCoefficient = max(0.0, dot(surfaceToLight,normal));
             vec3 diffuse = diffuseCoefficient * surfaceColor.rgb * lightColor * lightIntensity;
 
             // specular.....
