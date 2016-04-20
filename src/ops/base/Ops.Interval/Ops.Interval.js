@@ -6,7 +6,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 interval.set(1000);
 var timeOutId=-1;
 
-exec=function()
+function exec()
 {
     if(timeOutId!=-1)return;
 
@@ -17,6 +17,8 @@ exec=function()
         exec();
     },
     interval.get() );
-};
+}
+
+interval.onValueChanged=exec;
 
 exec();
