@@ -13,6 +13,7 @@ varying mediump vec3 vert;
 varying mat4 mvMatrix;
 uniform mat4 normalMatrix;
 
+
 #ifdef HAS_TEXTURES
     varying mediump vec2 texCoord;
 #endif
@@ -25,6 +26,7 @@ void main()
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
     #endif
+
 
     vec4 pos = vec4( vPosition, 1. );
     mvMatrix=viewMatrix * modelMatrix;

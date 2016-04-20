@@ -170,6 +170,28 @@ shininess.onValueChanged=function()
     };
 
 
+    var normalTexture=this.addInPort(new Port(this,"Normal Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var normalTextureUniform=null;
+
+    normalTexture.onValueChanged=function()
+    {
+        if(normalTexture.get())
+        {
+            if(normalTextureUniform!==null)return;
+            shader.removeUniform('texNormal');
+            shader.define('HAS_TEXTURE_NORMAL');
+            normalTextureUniform=new CGL.Uniform(shader,'t','texNormal',3);
+        }
+        else
+        {
+            shader.removeUniform('texNormal');
+            shader.removeDefine('HAS_TEXTURE_NORMAL');
+            normalTextureUniform=null;
+        }
+    };
+
+
+
     var diffuseRepeatX=this.addInPort(new Port(this,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
     var diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
     diffuseRepeatX.set(1);
@@ -329,6 +351,12 @@ var bindTextures=function()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, specTexture.get().tex);
     }
 
+    if(normalTexture.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE3);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, normalTexture.get().tex);
+    }
+
     uniShadowPass.setValue(0);
     if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
         for(i in cgl.frameStore.phong.lights)
@@ -355,18 +383,9 @@ var bindTextures=function()
     // }
 }
 
-var eyePos=vec3.create();
-var uniEyePos=new CGL.Uniform(shader,'3f','eyePos',[100,100,100]);
-
 var doRender=function()
 {
     if(!shader)return;
-    
-    vec3.transformMat4(eyePos, [0.000001,0.000001,0.000001], cgl.vMatrix);
-    // eyePos=[Math.random()*100,Math.random()*100,Math.random()*100];
-    uniEyePos.setValue(eyePos);
-    // uniEyePos.needsUpdate=true;
-    console.log(eyePos);
     
     cgl.setShader(shader);
     updateLights();
