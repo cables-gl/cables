@@ -81,7 +81,7 @@ void main()
     if(shadowPass==0.0)
     for(int l=0;l<NUM_LIGHTS;l++)
     {
-        float lightIntensity=lights[l].mul;
+        float lightIntensity=lights[l].mul*2.5;
         if(lightIntensity>0.0)
         {
             vec3 lightColor = lights[l].color;
