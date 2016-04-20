@@ -36,13 +36,17 @@ var srcHeadVert=''
     .endl()+'uniform float do_instancing;'
     .endl()+'#ifdef INSTANCING'
     .endl()+'   attribute mat4 instMat;'
+    .endl()+'   varying mat4 instModelMat;'
     .endl()+'#endif'
     .endl();
 
 var srcBodyVert=''
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   if( do_instancing==1.0 ) '
-    .endl()+'       pos=instMat*pos;'
+    .endl()+'   if( do_instancing==1.0 )'
+    .endl()+'   {'
+    .endl()+'       instModelMat=instMat;'
+    .endl()+'       mvMatrix=viewMatrix * instModelMat;;'
+    .endl()+'   }'
     .endl()+'#endif'
     .endl();
 

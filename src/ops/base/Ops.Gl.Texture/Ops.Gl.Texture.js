@@ -13,7 +13,7 @@ var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
 
 
-flip.set(false);
+flip.set(true);
 unpackAlpha.set(true);
 
 var cgl=op.patch.cgl;
