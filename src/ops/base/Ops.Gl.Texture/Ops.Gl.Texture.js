@@ -105,5 +105,5 @@ unpackAlpha.onValueChange(function()
     
     
     
-tfilter.set('mipmap');
+tfilter.set('linear');
 wrap.set('repeat');

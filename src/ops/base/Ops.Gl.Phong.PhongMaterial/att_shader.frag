@@ -81,7 +81,7 @@ void main()
     if(shadowPass==0.0)
     for(int l=0;l<NUM_LIGHTS;l++)
     {
-        float lightIntensity=lights[l].mul*1.2;
+        float lightIntensity=lights[l].mul;
         if(lightIntensity>0.0)
         {
             vec3 lightColor = lights[l].color;
@@ -123,9 +123,9 @@ void main()
             if(diffuseCoefficient >= 0.0)
                 specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), shininess);
             vec3 specular =(specularCoefficient * materialSpecularColor * lightIntensity);
-            vec3 specularIntensity=vec3(1.0,1.0,1.0);
+            // vec3 specularIntensity=vec3(1.0,1.0,1.0);
             #ifdef HAS_TEXTURE_SPEC
-                specularIntensity=1.0-texture2D( texSpec, texCoord ).rgb;
+                specular*=1.0-texture2D( texSpec, texCoord ).rgb;
             #endif
 
             // attenuation
@@ -155,20 +155,17 @@ void main()
                 if( spotEffect < lights[l].cone) attenuation=0.0;
             }
 
-            theColor += ambient + attenuation*(diffuse+(specular*specularIntensity) );
-
-       }
-   }
-
-    vec3 finalColor = theColor * surfaceColor.rgb;
+            theColor += ambient + attenuation*(diffuse+(specular) );
+        }
+    }
 
     #ifdef DO_GAMME_CORRECT
-        vec3 linearColor = finalColor;
+        vec3 linearColor = theColor;
         vec3 gamma = vec3(1.0/2.2);
-        finalColor = pow(linearColor, gamma);
+        theColor = pow(linearColor, gamma);
     #endif
 
-    vec4 col=vec4(finalColor, surfaceColor.a);
+    vec4 col=vec4(theColor, surfaceColor.a);
 
     #ifdef HAS_TEXTURE_AO
        col.rgb*=texture2D( texAo, texCoord ).rgb;
