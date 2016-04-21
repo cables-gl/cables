@@ -34,126 +34,14 @@ this.doRender=function()
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     cgl.setPreviousShader();
-
 };
-
-var srcVert=''
-    .endl()+'{{MODULES_HEAD}}'
-    .endl()+'attribute vec3 vPosition;'
-    .endl()+'attribute vec2 attrTexCoord;'
-
-.endl()+'    varying vec3 norm;'
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'    varying vec2 texCoord;'
-    .endl()+'    #ifdef TEXTURE_REPEAT'
-    .endl()+'        uniform float diffuseRepeatX;'
-    .endl()+'        uniform float diffuseRepeatY;'
-    .endl()+'    #endif'
-    .endl()+'#endif'
-
-    .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 modelMatrix;'
-    .endl()+'uniform mat4 viewMatrix;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'    #ifdef HAS_TEXTURES'
-    .endl()+'        texCoord=attrTexCoord;'
-    .endl()+'        #ifdef TEXTURE_REPEAT'
-    .endl()+'            texCoord.s*=diffuseRepeatX;'
-    .endl()+'            texCoord.t*=diffuseRepeatY;'
-    .endl()+'        #endif'
-    .endl()+'   #endif'
-
-    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
-
-    .endl()+'{{MODULE_VERTEX_POSITION}}'
-
-    .endl()+'#ifdef BILLBOARD'
-    .endl()+'   vec3 position=vPosition;'
-    .endl()+'   mat4 mvMatrix=viewMatrix*modelMatrix;'
-
-    .endl()+"   gl_Position = projMatrix * mvMatrix * vec4(( "
-    .endl()+"       position.x * vec3("
-    .endl()+"           mvMatrix[0][0],"
-    .endl()+"           mvMatrix[1][0], "
-    .endl()+"           mvMatrix[2][0] ) +"
-    .endl()+"       position.y * vec3("
-    .endl()+"           mvMatrix[0][1],"
-    .endl()+"           mvMatrix[1][1], "
-    .endl()+"           mvMatrix[2][1]) ), 1.0);"
-    .endl()+'#endif '
-
-    .endl()+"#ifndef BILLBOARD"
-    .endl()+'    gl_Position = projMatrix * viewMatrix * modelMatrix * pos;'
-    .endl()+'#endif '
-    .endl()+'}';
-
-var srcFrag=''
-
-    .endl()+'precision highp float;'
-
-
-    .endl()+'{{MODULES_HEAD}}'
-
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'   varying vec2 texCoord;'
-    .endl()+'   #ifdef HAS_TEXTURE_DIFFUSE'
-    .endl()+'       uniform sampler2D tex;'
-    .endl()+'   #endif'
-    .endl()+'   #ifdef HAS_TEXTURE_OPACITY'
-    .endl()+'       uniform sampler2D texOpacity;'
-    .endl()+'   #endif'
-    .endl()+'#endif'
-    .endl()+'uniform float r;'
-    .endl()+'uniform float g;'
-    .endl()+'uniform float b;'
-    .endl()+'uniform float a;'
-    .endl()+''
-    .endl()+'void main()'
-    .endl()+'{'
-
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'   vec2 texCoords=texCoord;'
-    .endl()+'#endif'
-
-    .endl()+'{{MODULE_BEGIN_FRAG}}'
-
-
-    .endl()+'   vec4 col=vec4(r,g,b,a);'
-    .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'      #ifdef HAS_TEXTURE_DIFFUSE'
-
-    .endl()+'           #ifdef TEXTURED_POINTS'
-    .endl()+'               col=texture2D(tex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));'    .endl()+'      #endif'
-    .endl()+'           #ifndef TEXTURED_POINTS'
-    .endl()+'               col=texture2D(tex,vec2(texCoord.x,(1.0-texCoord.y)));'
-    .endl()+'           #endif'
-
-    // .endl()+'           col=texture2D(tex,vec2(texCoords.x*1.0,(1.0-texCoords.y)*1.0));'
-    .endl()+'           #ifdef COLORIZE_TEXTURE'
-    .endl()+'               col.r*=r;'
-    .endl()+'               col.g*=g;'
-    .endl()+'               col.b*=b;'
-    .endl()+'           #endif'
-    .endl()+'      #endif'
-    .endl()+'      #ifdef HAS_TEXTURE_OPACITY'
-    .endl()+'          col.a*=texture2D(texOpacity,texCoords).g;'
-    .endl()+'       #endif'
-    .endl()+'       col.a*=a;'
-    .endl()+'   #endif'
-    .endl()+'{{MODULE_COLOR}}'
-
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-
 
 var shader=new CGL.Shader(cgl,'BasicMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=this.bindTextures;
 this.shaderOut.val=shader;
 this.onLoaded=shader.compile;
-shader.setSource(srcVert,srcFrag);
+shader.setSource(attachments.shader_vert,attachments.shader_frag);
 
 this.r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
 this.r.onValueChanged=function()
@@ -297,10 +185,7 @@ var preMultipliedAlpha=this.addInPort(new Port(this,"preMultiplied alpha",OP_POR
     {
         if(texturedPoints.get()) shader.define('TEXTURED_POINTS');
             else shader.removeDefine('TEXTURED_POINTS');
-
     };
-    
 }
-
 
 this.doRender();

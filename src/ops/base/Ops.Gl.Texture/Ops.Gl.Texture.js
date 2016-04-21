@@ -13,24 +13,33 @@ var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
 
 
-flip.set(false);
+flip.set(true);
 unpackAlpha.set(true);
 
 var cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
+var opInstanced=false;
 
 var setTempTexture=function()
 {
     textureOut.set(CGL.Texture.getTemporaryTexture(cgl,64,cgl_filter,cgl_wrap));
 };
 
+this.onLoaded=function()
+{
+    opInstanced=true;
+    reload();
+};
+
+
 var reload=function(nocache)
 {
+    if(!opInstanced)return;
     var url=op.patch.getFilePath(filename.get());
     if(nocache)url+='?rnd='+generateUUID();
 
-    if(  (filename.get() && filename.get().length>1 ))
+    if((filename.get() && filename.get().length>1))
     {
         var tex=CGL.Texture.load(cgl,url,function(err)
         {
@@ -93,17 +102,17 @@ op.onFileUploaded=function(fn)
     }
 };
 
-flip.onValueChange(function(){reload(true);});
+flip.onValueChange(function(){reload();});
 filename.onValueChange(reload);
 
 tfilter.onValueChange(onFilterChange);
 wrap.onValueChange(onWrapChange);
 unpackAlpha.onValueChange(function()
-    {
-        reload(true);
-    });
+{
+    reload();
+});
+
     
     
-    
-tfilter.set('mipmap');
+tfilter.set('linear');
 wrap.set('repeat');
