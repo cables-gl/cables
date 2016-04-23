@@ -1,9 +1,8 @@
-Op.apply(this, arguments);
-var cgl=this.patch.cgl;
-this.name='WebVR';
+var cgl=op.patch.cgl;
+op.name='WebVR';
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var vrInputs=[];
 var vrHMD=null;
@@ -11,6 +10,8 @@ var orientMatrix=mat4.create();
 var identMatrix=mat4.create();
 var quaternion=[0,0,0,0];
 var firstQuat=null;
+
+
 
 render.onTriggered=function()
 {
@@ -23,18 +24,22 @@ render.onTriggered=function()
 		    vrInputs[i].resetSensor();
 		    firstQuat=quat.create();
 		}
-		quaternion[0]=state.orientation.x;
-		quaternion[1]=-state.orientation.y;
-		quaternion[2]=state.orientation.z;
-		quaternion[3]=state.orientation.w;
+		if(state.orientation)
+		{
+    		quaternion[0]=state.orientation.x;
+    		quaternion[1]=-state.orientation.y;
+    		quaternion[2]=state.orientation.z;
+    		quaternion[3]=state.orientation.w;
+		}
 		
     	mat4.fromQuat(orientMatrix, quaternion);
     	
-        cgl.pushMvMatrix();
-        mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,orientMatrix);
+        // cgl.pushViewMatrix();
+        // mat4.multiply(cgl.vMatrix,cgl.vMatrix,orientMatrix);
+        // cgl.vMatrix=poseToMatrix(state);
     
         trigger.trigger();
-        cgl.popMvMatrix();
+        cgl.popViewMatrix();
     }
 };
 
@@ -60,7 +65,6 @@ function requestVrFullscreen()
 if(navigator.getVRDevices)
 {
     console.log('loading devices...');
-    var self=this;
     navigator.getVRDevices().then(function(devices)
     {
         console.log('hallo devices...');
@@ -81,15 +85,13 @@ if(navigator.getVRDevices)
 		}
 
 		info+=vrInputs.length+' input devices <br/>';
-        self.uiAttr({info:info});
+        op.uiAttr({info:info});
 
-    document.getElementById("glcanvas").ondblclick = requestVrFullscreen;
-
-
+        document.getElementById("glcanvas").ondblclick = requestVrFullscreen;
 
     });
 }
 else
 {
-    this.uiAttr({warning:'browser has no webvr api'});
+    op.uiAttr({warning:'browser has no webvr api'});
 }

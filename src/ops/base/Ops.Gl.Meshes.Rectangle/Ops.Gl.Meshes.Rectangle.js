@@ -89,7 +89,7 @@ function rebuild()
             
             norms.push(0);
             norms.push(0);
-            norms.push(1);
+            norms.push(-1);
 
         }
     }
