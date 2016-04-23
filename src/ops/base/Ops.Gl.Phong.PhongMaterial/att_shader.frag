@@ -6,12 +6,17 @@ uniform mat4 normalMatrix;
 varying mat4 mvMatrix;
 uniform mat4 modelMatrix;
 
+#ifdef INSTANCING
+varying mat4 instModelMat;
+#endif
+
 uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
 uniform float mul;
 uniform float shininess;
+uniform float normalTexIntensity;
 
 uniform float shadowPass;
 uniform vec3 camPos;
@@ -64,7 +69,7 @@ void main()
                 surfaceColor=texture2D(tex,vec2(gl_PointCoord.x*diffuseRepeatX,(1.0-gl_PointCoord.y)*diffuseRepeatY));
             #endif
             #ifndef TEXTURED_POINTS
-                surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(1.0-texCoord.y)*diffuseRepeatY));
+                surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(texCoord.y)*diffuseRepeatY));
             #endif
             surfaceColor.a*=a;
             #ifdef COLORIZE_TEXTURE
@@ -94,7 +99,7 @@ void main()
                 // #define CALC_TANGENT
                 vec3 tnorm= texture2D( texNormal, texCoord ).xyz*2.0-1.0;
                 vec3 tangent,binormal;
-                float normalScale=2.5;
+                // float normalScale=normalTexIntensity24.5;
                 // #ifdef CALC_TANGENT
                     vec3 c1 = cross(norm, vec3(0.0, 0.0, 1.0));
                     tangent = c1;
@@ -104,12 +109,17 @@ void main()
                 // #endif
 
                 tnorm = normalize(tangent*tnorm.x + binormal*tnorm.y + norm*tnorm.z);
-                vec3 normal = normalize( mat3(normalMatrix) * (norm+tnorm*normalScale) );
+                vec3 normal = normalize( mat3(normalMatrix) * (norm+tnorm*(normalTexIntensity*30.0)) );
 
             #endif
 
-
+            #ifdef INSTANCING
+            vec3 fragPosition = vec3(instModelMat * vec4(vert, 1.0)); //calculate the location of this fragment (pixel) in world coordinates
+            #endif
+            #ifndef INSTANCING
             vec3 fragPosition = vec3(modelMatrix * vec4(vert, 1.0)); //calculate the location of this fragment (pixel) in world coordinates
+            #endif
+
             vec3 surfaceToLight = normalize(lights[l].pos-fragPosition);
             vec3 surfaceToCamera = normalize(camPos-fragPosition);
             // vec3 normal = normalize(transpose(inverse(mat3(model))) * fragNormal);

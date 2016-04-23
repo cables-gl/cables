@@ -47,7 +47,6 @@ for(i=0;i<MAX_LIGHTS;i++)
 }
 
 
-var shininess=this.addInPort(new Port(this,"Shininess",OP_PORT_TYPE_VALUE,{ "display":"range"}));
 
 
 var shiny=this.addInPort(new Port(this,"Shiny",OP_PORT_TYPE_VALUE,{ display:'bool' }));
@@ -58,6 +57,7 @@ shiny.onValueChanged=function()
 };
 
 
+var shininess=this.addInPort(new Port(this,"Shininess",OP_PORT_TYPE_VALUE,{ "display":"range"}));
 shininess.onValueChanged=function()
 {
     var shi=200-(shininess.get()*199);
@@ -67,6 +67,17 @@ shininess.onValueChanged=function()
 };
 
 shininess.set(0.001);
+
+
+var normIntensity=this.addInPort(new Port(this,"Normal Texture Intensity",OP_PORT_TYPE_VALUE,{ "display":"range"}));
+normIntensity.onValueChanged=function()
+{
+    if(!normIntensity.uniform) normIntensity.uniform=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensity.get());
+        else normIntensity.uniform.setValue(normIntensity.get());
+};
+
+normIntensity.set(1);
+
 
 
 
