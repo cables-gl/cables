@@ -165,6 +165,42 @@
         "to": "Times Triggered"
       }
     ]
+  },
+{
+    "op_name": "Ops.Gl.ClearColor",
+    "ports": [
+      {
+        "from": "r",
+        "to": "Red"
+      },
+      {
+        "from": "g",
+        "to": "Green"
+      },
+      {
+        "from": "b",
+        "to": "Blue"
+      },
+      {
+        "from": "a",
+        "to": "Alpha"
+      },
+      {
+        "from": "outr",
+        "to": "Red Out"
+      },
+      {
+        "from": "outg",
+        "to": "Green Out"
+      },
+      {
+        "from": "outb",
+        "to": "Blue Out"
+      },
+      {
+        "from": "outa",
+        "to": "Alpha Out"
+      }
+    ]
   }
-
 ]
