@@ -202,5 +202,39 @@
         "to": "Alpha Out"
       }
     ]
+  },
+  {
+    "op_name": "Ops.Log",
+    "op_name_new": "Ops.Util.Log"
+  },
+  {
+    "op_name": "Ops.Ui.Patch",
+    "op_name_new": "Ops.Ui.SubPatch"
+  },
+  {
+    "op_name": "Ops.Ui.PatchInput",
+    "op_name_new": "Ops.Ui.SubPatchInput"
+  },
+    {
+    "op_name": "Ops.Ui.PatchOutput",
+    "op_name_new": "Ops.Ui.SubPatchOutput"
+  },
+  {
+    "op_name": "Ops.Vars.GetVar",
+    "ports": [
+      {
+        "from": "val",
+        "to": "Value"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Vars.GetVarArray",
+    "ports": [
+      {
+        "from": "val",
+        "to": "Value"
+      }
+    ]
   }
 ]
