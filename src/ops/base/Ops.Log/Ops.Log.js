@@ -1,8 +1,9 @@
 op.name='logger';
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var valueInput=op.addInPort(new Port(op,"value input"));
+var exe=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
+var functionInput=op.addInPort(new Port(op,"Function Input",OP_PORT_TYPE_FUNCTION));
+var valueInput=op.addInPort(new Port(op,"Value Input"));
 valueInput.set('');
-var arrayInput=op.addInPort(new Port(op,"array input", OP_PORT_TYPE_ARRAY));
+var arrayInput=op.addInPort(new Port(op,"Array Input", OP_PORT_TYPE_ARRAY));
 arrayInput.set('');
 
 function arraysEqual(arr1, arr2) {
@@ -12,7 +13,7 @@ function arraysEqual(arr1, arr2) {
             return false;
         }
     }
-    return true; 
+    return true;
 }
 
 var oldArr = [];
@@ -23,7 +24,7 @@ var printValue = function(){
         if(valueInput.links && valueInput.links.length > 0) {
             op.log("[" + valueInput.links[0].portOut.parent.name + ": " + valueInput.links[0].portOut.name + "] " + valueInput.get());
         } else {
-            op.log("[value] " + valueInput.get());
+            op.log("[Value] " + valueInput.get());
         }
     }
 }
@@ -34,11 +35,11 @@ var printArray = function(){
             if(arrayInput.links && arrayInput.links.length > 0) {
                 op.log("[" + arrayInput.links[0].portOut.parent.name + ": " + arrayInput.links[0].portOut.name + "] " + arrayInput.get());
             } else {
-                op.log("[array] " + arrayInput.get());
+                op.log("[Array] " + arrayInput.get());
             }
-            //oldArr =  arrayInput.get().slice();    
+            //oldArr =  arrayInput.get().slice();
         } else {
-            op.log("[array]" + "No array!");    
+            op.log("[Array]" + "No array!");
         }
     }
 };
@@ -48,14 +49,22 @@ var printObject = function(){
         if(objectInput.links && objectInput.links.length > 0) {
             op.log("[" + objectInput.links[0].portOut.parent.name + ": " + objectInput.links[0].portOut.name + "] " + JSON.stringify(objectInput.get()));
         } else {
-            op.log("[array] " + JSON.stringify(objectInput.get()));
+            op.log("[Array] " + JSON.stringify(objectInput.get()));
         }
     }
 }
 
 exe.onTriggered = function(){
-    printValue();    
-    printArray();    
+    printValue();
+    printArray();
+};
+
+functionInput.onTriggered = function(){
+    if(functionInput.links && functionInput.links.length > 0) {
+            op.log("[" + functionInput.links[0].portOut.parent.name + ": " + functionInput.links[0].portOut.name + "] Triggered");
+        } else {
+            op.log("[Function] Triggered");
+        }
 };
 
 valueInput.onValueChanged = printValue;
