@@ -97,7 +97,7 @@ void main()
 
             #ifdef HAS_TEXTURE_NORMAL
                 // #define CALC_TANGENT
-                vec3 tnorm= texture2D( texNormal, texCoord ).xyz*2.0-1.0;
+                vec3 tnorm= texture2D( texNormal,vec2(texCoord.x*diffuseRepeatX,(texCoord.y)*diffuseRepeatY)  ).xyz*2.0-1.0;
                 vec3 tangent,binormal;
                 // float normalScale=normalTexIntensity24.5;
                 // #ifdef CALC_TANGENT

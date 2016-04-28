@@ -2,17 +2,13 @@ var self=this;
 Op.apply(this, arguments);
 this.name="Ops.user.tim.WhiteNoise";
 
-var exec=this.addInPort(new Port(this,"exec",OP_PORT_TYPE_FUNCTION));
+var gain=this.addInPort(new Port(this,"Gain",OP_PORT_TYPE_VALUE));
 
-var gain=this.addInPort(new Port(this,"gain",OP_PORT_TYPE_VALUE));
-
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var audioOut=this.addOutPort(new Port(this,"Audio Out",OP_PORT_TYPE_OBJECT));
 
 var audioContext, gainNode;
 
-exec.onTriggered=function()
-{
-    if(!audioContext) {
+if(!audioContext) {
         try {
             // Fix up for prefixing
             window.AudioContext = window.AudioContext||window.webkitAudioContext;
@@ -36,10 +32,9 @@ exec.onTriggered=function()
         whiteNoise.loop = true;
         whiteNoise.start(0);
         
-        whiteNoise.connect(audioContext.destination);
+        whiteNoise.connect(gainNode);
+        audioOut.set(gainNode);
     }
-    trigger.trigger();
-}
 
 gain.onValueChange(function()
 {

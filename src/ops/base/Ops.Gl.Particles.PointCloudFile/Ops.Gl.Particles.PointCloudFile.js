@@ -58,6 +58,8 @@ function createMesh(arr,start,end)
 
     var mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
     
+    console.log("mesh generated");
+    
     return mesh;
 }
 
