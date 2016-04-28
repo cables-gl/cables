@@ -1,15 +1,15 @@
-# RelativeTime
+# ParseArray
 
-*Ops.Anim.RelativeTime*
+*Ops.Array.ParseArray*
 
-Returns the time the patch is running in seconds, e.g. `22.567` = 22 seconds and 567 milliseconds.
+Let’s you enter multiple values as an array in the editor. The result can then be used by e.g. [ArrayGetValue](../Ops.Array.ArrayGetValue/Ops.Array.ArrayGetValue.md).
 
 ## Input
 
-### Execute
+### Text
 
-*Type: Function*
-Triggers the *RelativeTime*-op
+*Type: Value*
+The array-data you want to use, e.g. `100,200,300`
 
 ## Output
 

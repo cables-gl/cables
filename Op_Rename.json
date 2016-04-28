@@ -165,6 +165,76 @@
         "to": "Times Triggered"
       }
     ]
+  },
+{
+    "op_name": "Ops.Gl.ClearColor",
+    "ports": [
+      {
+        "from": "r",
+        "to": "Red"
+      },
+      {
+        "from": "g",
+        "to": "Green"
+      },
+      {
+        "from": "b",
+        "to": "Blue"
+      },
+      {
+        "from": "a",
+        "to": "Alpha"
+      },
+      {
+        "from": "outr",
+        "to": "Red Out"
+      },
+      {
+        "from": "outg",
+        "to": "Green Out"
+      },
+      {
+        "from": "outb",
+        "to": "Blue Out"
+      },
+      {
+        "from": "outa",
+        "to": "Alpha Out"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Log",
+    "op_name_new": "Ops.Util.Log"
+  },
+  {
+    "op_name": "Ops.Ui.Patch",
+    "op_name_new": "Ops.Ui.SubPatch"
+  },
+  {
+    "op_name": "Ops.Ui.PatchInput",
+    "op_name_new": "Ops.Ui.SubPatchInput"
+  },
+    {
+    "op_name": "Ops.Ui.PatchOutput",
+    "op_name_new": "Ops.Ui.SubPatchOutput"
+  },
+  {
+    "op_name": "Ops.Vars.GetVar",
+    "ports": [
+      {
+        "from": "val",
+        "to": "Value"
+      }
+    ]
+  },
+  {
+    "op_name": "Ops.Vars.GetVarArray",
+    "ports": [
+      {
+        "from": "val",
+        "to": "Value"
+      }
+    ]
   }
-
 ]
