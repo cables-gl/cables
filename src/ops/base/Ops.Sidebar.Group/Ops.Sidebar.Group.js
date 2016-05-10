@@ -1,15 +1,15 @@
 op.name="Group";
 
 var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
+var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+
 var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_OBJECT));
 var childs=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
 
-var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
-
-var opened=true;
 text.set('Group');
 
 var textContent = document.createTextNode(text.get()); 
+var opened=true;
 var element=null;
 var initialized=false;
 
@@ -18,13 +18,11 @@ childs.onLinkChanged=updateSidebar;
 next.onLinkChanged=updateSidebar;
 link.onLinkChanged=updateSidebar;
 link.onValueChanged=updateParams;
-var elementCheckBox=null;
 
 text.onValueChanged=function()
 {
     textContent.nodeValue=text.get();
 };
-
 
 function updateText()
 {
@@ -35,7 +33,7 @@ function init(params)
 {
     initialized=true;
     element = document.createElement('div');
-element.style.color="#fff";
+    element.style.color="#eee";
 
     element.appendChild(textContent);
 
@@ -60,7 +58,7 @@ function updateSidebar()
 {
     if(!link.isLinked()) remove();        
     var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-    if(sidebar)sidebar.childsChanged();
+    if(sidebar) sidebar.childsChanged();
 }
 
 function updateParams()
@@ -68,13 +66,15 @@ function updateParams()
     var params=link.get();
 
     if(!initialized) init(params);
-    // updatePos(params);
+
     var sidebar=op.findParent('Ops.Sidebar.Sidebar');
+
     if(sidebar) sidebar.setupDiv(element,params);
 
-    params.pos++;
+    if(params.hide) remove();
+        else params.pos++;
 
-    params.hide=!opened;
+    if(!params.hide) params.hide=!opened;
     params.level++;
     childs.set(params);
     params.level--;

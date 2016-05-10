@@ -27,8 +27,6 @@ text.onValueChanged=function()
 
 function updateText()
 {
-    op.name='toggle '+text.get();
-
     if(value.get()) elementCheckBox.style.color="#bbb";
         else elementCheckBox.style.color="#444";
 
@@ -81,7 +79,7 @@ function updateParams()
 {
     var params=link.get();
 
-    if(params.hide) remove();    
+    if(params.hide) remove(); 
     else
     {
         if(!initialized) init(params);
