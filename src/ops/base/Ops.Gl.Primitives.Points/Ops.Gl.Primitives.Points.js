@@ -25,7 +25,7 @@ render.onTriggered=function()
     {
         if(shader && mod)
         {
-            shader.removemod(mod);
+            shader.removeModule(mod);
             shader=null;
         }
 

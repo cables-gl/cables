@@ -390,17 +390,17 @@ var bindTextures=function()
             if(cgl.frameStore.phong.lights[i].shadowPass==1.0)uniShadowPass.setValue(1);
         }
 
-    for(var i in lights)
-    {
-        if(lights[i].type.getValue()==1.0)
-        {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE5);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lights[i].texDepthTex);
-        }
-    }
+    // for(var i in lights)
+    // {
+        // if(lights[i].type.getValue()==1.0)
+        // {
+            // cgl.gl.activeTexture(cgl.gl.TEXTURE5);
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lights[i].texDepthTex);
+        // }
+    // }
 
-            cgl.gl.activeTexture(cgl.gl.TEXTURE5);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+            // cgl.gl.activeTexture(cgl.gl.TEXTURE5);
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
     // if(self.textureOpacity.get())
     // {

@@ -43,7 +43,7 @@ uniform float diffuseRepeatY;
     #endif
 #endif
 
-uniform sampler2D depthTex;
+//uniform sampler2D depthTex;
 
 uniform struct Light
 {
@@ -160,8 +160,8 @@ void main()
 
                 // shadows...
                 vec4 shadowCoord = lights[l].depthMVP * vec4(vert,1.0);
-                float s=texture2D( depthTex, shadowCoord.xy  ).z;
-
+                //float s=texture2D( depthTex, shadowCoord.xy  ).z;
+	float s=1.0;
 
                 float f=100.0;
                 float n=0.1;
