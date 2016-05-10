@@ -25,13 +25,6 @@ text.onValueChanged=function()
     textContent.nodeValue=text.get();
 };
 
-function updatePos(params)
-{
-    if(!element) return;
-    element.style['margin-top']=(params.pos*params.height+params.pos)+"px";
-    element.style.width=(params.width)+"px";
-}
-
 function updateText()
 {
     op.name='toggle '+text.get();
@@ -47,13 +40,6 @@ function init(params)
 {
     initialized=true;
     element = document.createElement('div');
-    element.style.padding=params.padding+'px';
-    element.style.position="absolute";
-    element.style.overflow="hidden";
-    element.style.cursor="pointer";
-    element.style["z-index"]="99999";
-    element.style["background-color"]="#222";
-    element.style["border-bottom"]="1px solid #444";
 
     var size=(params.height-params.padding*2);
     elementCheckBox = document.createElement('div');
@@ -95,9 +81,15 @@ function updateParams()
 {
     var params=link.get();
 
-    if(!initialized) init(params);
-    updatePos(params);
-
-    params.pos++;    
+    if(params.hide) remove();    
+    else
+    {
+        if(!initialized) init(params);
+        var sidebar=op.findParent('Ops.Sidebar.Sidebar');
+        if(sidebar) sidebar.setupDiv(element,params);
+    
+        params.pos++;    
+    }
     child.set(params);
+
 }
