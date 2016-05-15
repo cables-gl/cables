@@ -1,64 +1,55 @@
-var cgl=this.patch.cgl;
-var self=this;
-this.name='MidiValue';
-var exec=this.addInPort(new Port(this,"exec",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='MidiValue';
+var eventIn=op.addInPort(new Port(this,"Event Input",OP_PORT_TYPE_OBJECT));
 
-var note=this.addInPort(new Port(this,"note"));
-note.set(1);
+var note=op.addInPort(new Port(this,"note"));
+var learn=op.addInPort(new Port(this,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var learn=this.addInPort(new Port(this,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var eventOut=op.addOutPort(new Port(this,"Event Output",OP_PORT_TYPE_OBJECT));
+var value=op.addOutPort(new Port(this,"value"));
 
-var value=this.addOutPort(new Port(this,"value"));
+note.set(60);
 value.set(0);
 
 var learning=false;
+learn.onTriggered=function(){ learning=true; };
+op.onLoaded=initMidiValue;
+
+var lastEvent=null;
 
 function setMidiValue()
 {
-    if(cgl.frameStore.midi && cgl.frameStore.midi.out)
+    if(lastEvent && lastEvent.output)
     {
         var noteOnMessage = [0xB0, note.get(), parseInt(value.get()*127,10)];
-        cgl.frameStore.midi.out.send( noteOnMessage );
+        lastEvent.output.send( noteOnMessage );
         return true;
     }
     return false;
 }
-
 
 function initMidiValue()
 {
     if(!setMidiValue()) setTimeout(initMidiValue,300);
 }
 
-this.onLoaded=initMidiValue;
-
-exec.onTriggered=function()
+eventIn.onValueChanged=function()
 {
-    if(!cgl.frameStore.midi) return;
-    
-    if(learning && cgl.frameStore.lastMidiNote!=-1)
+    var event=eventIn.get();
+    if(learning)
     {
-        note.set(cgl.frameStore.lastMidiNote);
+        note.set(event.note);
         learning=false;
         
         if(CABLES.UI)
         {
-            self.uiAttr({info:'bound to note: ' + note.get()});
-            gui.patch().showOpParams(self);
+            op.uiAttr({info:'bound to note: ' + note.get()});
+            gui.patch().showOpParams(op);
         }
     }
 
-    if(cgl.frameStore.midi.notes[note.get()])
-    {
-        value.set(cgl.frameStore.midi.notes[note.get()].v);
-        cgl.frameStore.midi.notes[note.get()]=null;
-        trigger.trigger();
-    }
+    if(event.note==note.get()) value.set(event.velocity);
+    
+    eventOut.set(event);
+    lastEvent=event;
 };
 
-learn.onTriggered=function()
-{
-    learning=true;
-    cgl.frameStore.lastMidiNote=-1;
-};

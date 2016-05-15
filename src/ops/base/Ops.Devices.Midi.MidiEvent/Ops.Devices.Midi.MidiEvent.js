@@ -1,0 +1,24 @@
+op.name='MidiEvent';
+var eventIn=op.addInPort(new Port(this,"Event Input",OP_PORT_TYPE_OBJECT));
+
+var eventOut=op.addOutPort(new Port(this,"Event Output",OP_PORT_TYPE_OBJECT));
+
+var outDevice=op.addOutPort(new Port(this,"Device",OP_PORT_TYPE_VALUE));
+var outNote=op.addOutPort(new Port(this,"Note",OP_PORT_TYPE_VALUE));
+var outVelocity=op.addOutPort(new Port(this,"Velocity",OP_PORT_TYPE_VALUE));
+var outChannel=op.addOutPort(new Port(this,"Channel",OP_PORT_TYPE_VALUE));
+
+
+eventIn.onValueChanged=function()
+{
+    var event=eventIn.get();
+
+    outDevice.set(event.deviceName);
+    outNote.set(event.note);
+    outChannel.set(event.channel);
+    outVelocity.set(event.velocity);
+
+    
+    eventOut.set(event);
+};
+

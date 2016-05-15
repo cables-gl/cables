@@ -1,78 +1,87 @@
-//
-// midi api 
-//
+
 // http://www.keithmcmillen.com/blog/making-music-in-the-browser-web-midi-api/
-//
-// todo: show warning when no midi support
-// todo: show (select?) midi devices
 
 op.name='midiInput';
 
 var normalize=op.addInPort(new Port(op,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var outNote=op.addOutPort(new Port(op,"note"));
+var deviceSelect=op.addInPort(new Port(op,"device",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["none"]} ));
+
+var outEvent=op.addOutPort(new Port(op,"Event",OP_PORT_TYPE_OBJECT));
 
 normalize.set(true);
 
-var cgl=op.patch.cgl;
-var midi;
-var outputId=0;
+var midi=null;
+var outputDevice=null;
+var inputDevice=null;
 
-cgl.frameStore.midi=cgl.frameStore.midi || {};
-cgl.frameStore.midi.notes=cgl.frameStore.midi.notes || [];
+deviceSelect.onValueChanged=setDevice;
 
+if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
+    else onMIDIFailure();
+
+function setDevice()
+{
+    if(!midi || !midi.inputs)return;
+    var name=deviceSelect.get();
+    
+    op.name="Midi "+name;
+    
+    var inputs = midi.inputs.values();
+    var outputs = midi.outputs.values();
+
+    for (var input = inputs.next(); input && !input.done; input = inputs.next())
+    {
+        if(input.value.name==name)
+            input.value.onmidimessage = onMIDIMessage;
+        else
+            if(input.value.onmidimessage == onMIDIMessage)
+                input.value.onmidimessage=null;
+    }
+
+    for (var output = outputs.next(); output && !output.done; output = outputs.next())
+        if(output.value.name==name)
+            outputDevice=midi.outputs.get(output.value.id);
+}
 
 function onMIDIFailure()
 {
     op.uiAttr({warning:"No MIDI support in your browser."});
 }
 
-if (navigator.requestMIDIAccess)
-{
-    navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
-}
-else onMIDIFailure();
-
-
-function getDeviceString(input)
-{
-    return ""+input.value.type+": "+input.value.name+"("+input.value.version+") "+ 
-            // "<br/>by: " + (input.value.manufacturer || 'unknown')+
-            "<br/><br/>";
-}
-
 function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
     var inputs = midi.inputs.values();
-    var outputs = midi.outputs.values();
-    var str='';
     op.uiAttr({'info':'no midi devices found'});
 
+    var deviceNames=[];
+    
     for (var input = inputs.next(); input && !input.done; input = inputs.next())
-    {
-        input.value.onmidimessage = onMIDIMessage;
-        str+=getDeviceString(input);
-    }
+        deviceNames.push(input.value.name);
 
-    for (var output = outputs.next(); output && !output.done; output = outputs.next())
-    {
-        if(outputId===0) outputId=output.value.id;
-        cgl.frameStore.midi.out=midi.outputs.get(outputId);
+    deviceSelect.uiAttribs.values=deviceNames;
 
-        str+=getDeviceString(output);
-    }
-
-    op.uiAttr({'info':str});
+    gui.patch().showOpParams(op);
+    setDevice();
 }
 
-function onMIDIMessage(event)
+function onMIDIMessage(_event)
 {
-    var data = event.data;
-    var cmd = data[0] >> 4;
-    var channel = data[0] & 0xf;
-    var type = data[0] & 0xf0; // channel agnostic message type. Thanks, Phil Burk.
-    var note = data[1];
-    var velocity = data[2];
+    var data = _event.data;
+    var event=
+        {
+            "deviceName":deviceSelect.get(),
+            "output":outputDevice,
+            "inputId":0,
+            "cmd":data[0] >> 4,
+            "channel":data[0] & 0xf,
+            "type":data[0] & 0xf0,
+            "note":data[1],
+            "velocity": data[2]
+        };
+
+    if(normalize.get())event.velocity/=127;
+
     // with pressure and tilt off
     // note off: 128, cmd: 8 
     // note on: 144, cmd: 9
@@ -80,22 +89,5 @@ function onMIDIMessage(event)
     // pressure: 176, cmd 11: 
     // bend: 224, cmd: 14
 
-    // switch (type) {
-    //     case 144: // noteOn message 
-    //          noteOn(note, velocity);
-    //          break;
-    //     case 128: // noteOff message 
-    //         noteOff(note, velocity);
-    //         break;
-    // }
-
-    // var noteOnMessage = [0x90, note, 127];    // note on, middle C, full velocity
-
-    outNote.set(note);
-
-    var v=velocity;
-    if(normalize.get())v/=127;
-    cgl.frameStore.midi.notes[note]={v:v,n:note};
-    cgl.frameStore.lastMidiNote=note;
-
+    outEvent.set(event);
 }

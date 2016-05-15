@@ -1,59 +1,47 @@
-var cgl=this.patch.cgl;
-var self=this;
 
-this.name='Midi Push Button';
-var exec=this.addInPort(new Port(this,"exec",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='Midi Push Button';
+var eventIn=op.addInPort(new Port(op,"Event Input",OP_PORT_TYPE_OBJECT));
+var note=op.addInPort(new Port(op,"note"));
+var learn=op.addInPort(new Port(op,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var note=this.addInPort(new Port(this,"note"));
+var eventOut=op.addOutPort(new Port(op,"Event Output",OP_PORT_TYPE_OBJECT));
+var outPressed=op.addOutPort(new Port(op,"pressed"));
+
 note.set(1);
-
-var learn=this.addInPort(new Port(this,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
-var outPressed=this.addOutPort(new Port(this,"pressed"));
-
 var learning=false;
 var lastValue=-1;
+learn.onTriggered=function(){learning=true;};
 
-exec.onTriggered=function()
+eventIn.onValueChanged=function()
 {
-    if(!cgl.frameStore.midi) return;
+    var event=eventIn.get();    
     
-    if(learning && cgl.frameStore.lastMidiNote!=-1)
+    if(learning)
     {
-        note.set(cgl.frameStore.lastMidiNote);
+        note.set(event.note);
         learning=false;
         
         if(CABLES.UI)
         {
-            self.uiAttr({info:'bound to note: ' + note.get()});
-            gui.patch().showOpParams(self);
+            op.uiAttr({info:'bound to note: ' + note.get()});
+            gui.patch().showOpParams(op);
         }
     }
 
-    if(cgl.frameStore.midi.notes[note.get()])
+    if(note.get()==event.note)
     {
-        var v=cgl.frameStore.midi.notes[note.get()].v;
+        var v=event.velocity;
         if(v===0)
         {
+            event.output.send( [0x90, note.get(), 0] );
             outPressed.set(false);
-            var noteOnMessage = [0x90, note.get(), 0];
-            cgl.frameStore.midi.out.send( noteOnMessage );
         }
         if(v==1)
         {
-    
-            var noteOnMessage = [0x90, note.get(), 120];
-            cgl.frameStore.midi.out.send( noteOnMessage );
-
+            event.output.send( [0x90, note.get(), 120] );
             outPressed.set(true);
-            // console.log('button trigger!@');
-            trigger.trigger();
         }
     }
+    eventOut.set(event);
 };
 
-learn.onTriggered=function()
-{
-    learning=true;
-    cgl.frameStore.lastMidiNote=-1;
-};
