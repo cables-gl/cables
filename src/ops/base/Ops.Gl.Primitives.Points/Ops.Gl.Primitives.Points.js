@@ -13,10 +13,12 @@ var uniPointSize=null;
 
 var cgl=op.patch.cgl;
 
-pointSize.onValueChanged=function()
+pointSize.onValueChanged=setPointSize;
+
+function setPointSize()
 {
-    if(uniPointSize)uniPointSize.setValue(pointSize.get());
-};
+    if(uniPointSize) uniPointSize.setValue(pointSize.get());
+}
 
 render.onTriggered=function()
 {
@@ -37,7 +39,7 @@ render.onTriggered=function()
 
         mod=shader.addModule(
             {
-                name:'mod_VERTEX_POSITION',
+                name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
                 srcBodyVert:'gl_PointSize = {{mod}}_size;'
             });

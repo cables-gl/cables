@@ -6,8 +6,6 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var cgl=op.patch.cgl;
 
 
-
-
 var doRender=function()
 {
     cgl.setShader(shader);
