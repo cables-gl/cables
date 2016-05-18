@@ -13,6 +13,8 @@ CGL.Uniform=function(_shader,_type,_name,_value)
     var type=_type;
     var value=0.00001;
     var shader=_shader;
+    var port=null;
+
 
     this.needsUpdate=true;
 
@@ -220,7 +222,22 @@ CGL.Uniform=function(_shader,_type,_name,_value)
         this.updateValue=this.updateValueM4;
     }
 
-    this.setValue(_value);
+    function updateFromPort()
+    {
+        self.setValue(port.get());
+    }
+
+    if(typeof _value=="object")
+    {
+        port=_value;
+        value=port.get();
+        port.onValueChanged=updateFromPort;
+    }
+    else
+    {
+        value=_value;
+    }
+    this.setValue(value);
     self.needsUpdate=true;
 };
 

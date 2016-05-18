@@ -1,0 +1,117 @@
+
+op.name='PointMaterial';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
+
+var pointSize=op.addInPort(new Port(op,"PointSize",OP_PORT_TYPE_VALUE));
+
+var makeRound=op.addInPort(new Port(op,"Round",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+
+makeRound.set(true);
+
+var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
+var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var cgl=op.patch.cgl;
+
+var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+
+var shader=new CGL.Shader(cgl,'PointMaterial');
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
+pointSize.set(3);
+var uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize);
+
+
+shaderOut.val=shader;
+onLoaded=shader.compile;
+shader.setSource(attachments.shader_vert,attachments.shader_frag);
+shader.glPrimitive=cgl.gl.POINTS;
+
+
+shaderOut.ignoreValueSerialize=true;
+
+bindTextures=function()
+{
+    if(texture.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.val.tex);
+    }
+};
+
+doRender=function()
+{
+    cgl.setShader(shader);
+    bindTextures();
+    if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
+
+    trigger.trigger();
+    if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
+
+    cgl.setPreviousShader();
+};
+
+
+r.set(Math.random());
+g.set(Math.random());
+b.set(Math.random());
+a.set(1.0);
+
+r.uniform=new CGL.Uniform(shader,'f','r',r);
+g.uniform=new CGL.Uniform(shader,'f','g',g);
+b.uniform=new CGL.Uniform(shader,'f','b',b);
+a.uniform=new CGL.Uniform(shader,'f','a',a);
+
+render.onTriggered=doRender;
+var texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var textureUniform=null;
+
+texture.onPreviewChanged=function()
+{
+    if(texture.showPreview) render.onTriggered=texture.val.preview;
+    else render.onTriggered=doRender;
+
+    console.log('show preview!');
+};
+
+
+makeRound.onValueChanged=function()
+{
+    if(makeRound.get()) shader.define('MAKE_ROUND');
+        else shader.removeDefine('MAKE_ROUND');
+}
+
+
+texture.onValueChanged=function()
+{
+    if(texture.get())
+    {
+        if(textureUniform!==null)return;
+        shader.removeUniform('tex');
+        shader.define('HAS_TEXTURE_DIFFUSE');
+        textureUniform=new CGL.Uniform(shader,'t','tex',0);
+    }
+    else
+    {
+        shader.removeUniform('tex');
+        shader.removeDefine('HAS_TEXTURE_DIFFUSE');
+        textureUniform=null;
+    }
+};
+
+
+var colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+colorizeTexture.val=false;
+colorizeTexture.onValueChanged=function()
+{
+    if(colorizeTexture.val) shader.define('COLORIZE_TEXTURE');
+        else shader.removeDefine('COLORIZE_TEXTURE');
+};
+
+
+
+
+doRender();
