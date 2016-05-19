@@ -63,6 +63,7 @@ var reload=function(nocache)
             unpackAlpha:unpackAlpha.get(),
             filter:cgl_filter
         });
+        textureOut.set(null);
         textureOut.set(tex);
     }
     else
