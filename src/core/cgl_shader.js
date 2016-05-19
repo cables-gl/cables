@@ -227,8 +227,10 @@ CGL.Uniform=function(_shader,_type,_name,_value)
         self.setValue(port.get());
     }
 
-    if(typeof _value=="object")
+    if(typeof _value=="object" && _value instanceof CABLES.Port)
     {
+
+
         port=_value;
         value=port.get();
         port.onValueChanged=updateFromPort;

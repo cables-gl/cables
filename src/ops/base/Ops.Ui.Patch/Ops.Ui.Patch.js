@@ -5,8 +5,6 @@ op.name='Patch';
 op.patchId=op.addInPort(new Port(op,"patchId",OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 
 
-
-
 var getNewDynamicPort=function(name)
 {
 
