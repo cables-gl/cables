@@ -31,12 +31,7 @@ void main()
    #ifdef HAS_TEXTURES
       #ifdef HAS_TEXTURE_DIFFUSE
 
-           #ifdef TEXTURED_POINTS
-               col=texture2D(tex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));
-           #endif
-           #ifndef TEXTURED_POINTS
-               col=texture2D(tex,vec2(texCoord.x,(1.0-texCoord.y)));
-           #endif
+           col=texture2D(tex,vec2(texCoord.x,(1.0-texCoord.y)));
 
 //         col=texture2D(tex,vec2(texCoords.x*1.0,(1.0-texCoords.y)*1.0));
            #ifdef COLORIZE_TEXTURE
