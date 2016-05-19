@@ -36,7 +36,7 @@ rebuild();
 render.onTriggered=function()
 {
     var shader=cgl.getShader();
-    oldPrim=shader.glPrimitive;
+    var oldPrim=shader.glPrimitive;
     shader.glPrimitive=cgl.gl.LINE_STRIP;
 
     for(var i=0;i<meshes.length;i++)
