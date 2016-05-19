@@ -15,6 +15,7 @@ var outPoints=op.addOutPort(new Port(op,"Points",OP_PORT_TYPE_ARRAY));
 renderLines.set(true);
 centerpoint.set(false);
 thickness.set(1.0);
+outPoints.ignoreValueSerialize=true;
 
 var points=[];
 var mesh=null;

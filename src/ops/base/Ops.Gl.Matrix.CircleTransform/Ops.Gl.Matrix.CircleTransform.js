@@ -43,10 +43,12 @@ function calc()
     pos.length=0;
 
     var i=0,degInRad=0;
+    var segs=segments.get();
+    if(segs<1)segs=1;
 
-    for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
+    for (i=0; i <= Math.round(segs)*percent.get(); i++)
     {
-        degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+        degInRad = (360/Math.round(segs))*i*CGL.DEG2RAD;
         pos.push(
             [
             Math.cos(degInRad)*radius.get(),
