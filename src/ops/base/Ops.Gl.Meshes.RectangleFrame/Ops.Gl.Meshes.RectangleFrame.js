@@ -1,104 +1,196 @@
-op.name='RectangleFrame';
+op.name="PointClusterBoundings";
 
-var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
-var width=op.addInPort(new Port(op,"Width",OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"Height",OP_PORT_TYPE_VALUE));
-var thickness=op.addInPort(new Port(op,"Thickness",OP_PORT_TYPE_VALUE));
-var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var exe=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
+var arr=op.addInPort(new Port(op,"Array",OP_PORT_TYPE_ARRAY));
 
 var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
-var geomOut=op.addOutPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
+var outx=op.addOutPort(new Port(op,"X",OP_PORT_TYPE_VALUE));
+var outy=op.addOutPort(new Port(op,"Y",OP_PORT_TYPE_VALUE));
+var outw=op.addOutPort(new Port(op,"Width",OP_PORT_TYPE_VALUE));
+var outh=op.addOutPort(new Port(op,"Height",OP_PORT_TYPE_VALUE));
+var outCol=op.addOutPort(new Port(op,"col",OP_PORT_TYPE_VALUE));
 
+arr.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
-var mesh=null;
-var geom=new CGL.Geometry();
+var rects=[];
 
-width.set(1);
-height.set(1);
-thickness.set(-0.1);
-pivotX.set('center');
-pivotY.set('center');
+var grid=[];
+var gridMaxX=[];
+var gridMaxY=[];
+var gridMinX=[];
+var gridMinY=[];
 
-geomOut.ignoreValueSerialize=true;
+var gridWidth=20;
+var gridHeight=20;
 
-width.onValueChange(create);
-pivotX.onValueChange(create);
-pivotY.onValueChange(create);
-height.onValueChange(create);
-thickness.onValueChange(create);
+var NUMBER_MAX= 999999;
+var NUMBER_MIN=-999999;
 
-create();
-
-render.onTriggered=function()
+function gridIndex(x,y)
 {
-    mesh.render(cgl.getShader());
-    trigger.trigger();
-};
-
-
-function create()
-{
-    var w=width.get();
-    var h=height.get();
-    var x=-w/2;
-    var y=-h/2;
-    var th=thickness.get();//*Math.min(height.get(),width.get())*-0.5;
- 
-    if(pivotX.get()=='right') x=-w;
-    if(pivotX.get()=='left') x=0;
-
-    if(pivotY.get()=='top') y=-w;
-    if(pivotY.get()=='bottom') y=0;
-
-    geom.vertices = [
-        x,y,0,
-        x+w,y,0,
-        x+w,y+h,0,
-        x,y+h,0,
-
-        x-th, y-th,0,
-        x+w+th,y-th,0,
-        x+w+th,y+h+th,0,
-        x-th,y+h+th,0,
-    ];
-
-    if(geom.vertexNormals.length===0)
-        geom.vertexNormals = [
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-        ];
-        
-    if(geom.verticesIndices.length===0)
-        geom.verticesIndices = [
-            0, 1, 4,
-            1, 5, 4,
-            1, 2, 5,
-            5, 2, 6,
-            7, 6, 3,
-            6, 2, 3,
-            0, 4, 3,
-            4, 7, 3,
-        ];
-
-    if(geom.texCoords.length==0)
-        for(var i=0;i<geom.vertices.length;i+=3)
-        {
-            geom.texCoords.push(geom.vertices[i+0]/width.get()-0.5);
-            geom.texCoords.push(geom.vertices[i+1]/height.get()-0.5);
-        }
-
-    if(!mesh) mesh=new CGL.Mesh(cgl,geom);
-        else mesh.setGeom(geom);
-    geomOut.set(null);
-    geomOut.set(geom);
+    if(x>gridWidth-1)x=gridWidth-1;
+    if(y>gridHeight-1)y=gridHeight-1;
+    if(x<0)x=0;
+    if(y<0)y=0;
+    return x+(y*gridWidth);
 }
 
+function findCluster(x,y,bounds)
+{
+    var index=gridIndex(x,y);
+    if(grid[index]>0)
+    {
+        bounds.minX = Math.min( bounds.minX, gridMinX[ index ] );
+        bounds.maxX = Math.max( bounds.maxX, gridMaxX[ index ] );
+        bounds.minY = Math.min( bounds.minY, gridMinY[ index ] );
+        bounds.maxY = Math.max( bounds.maxY, gridMaxY[ index ] );
+
+        grid[ index ]=0;
+
+        if( grid[ gridIndex(x+1,y) ] > 0) bounds=findCluster(x+1,y,bounds);
+        if( grid[ gridIndex(x-1,y) ] > 0) bounds=findCluster(x-1,y,bounds);
+
+        if( grid[ gridIndex(x+1,y+1) ] > 0) bounds=findCluster(x+1,y+1,bounds);
+        if( grid[ gridIndex(x-1,y+1) ] > 0) bounds=findCluster(x-1,y+1,bounds);
+        if( grid[ gridIndex(x+0,y+1) ] > 0) bounds=findCluster(x+0,y+1,bounds);
+    
+        if( grid[ gridIndex(x+1,y-1) ] > 0) bounds=findCluster(x+1,y-1,bounds);
+        if( grid[ gridIndex(x-1,y-1) ] > 0) bounds=findCluster(x-1,y-1,bounds);
+        if( grid[ gridIndex(x+0,y-1) ] > 0) bounds=findCluster(x+0,y-1,bounds);
+    }
+    
+    return bounds;
+}
+
+
+exe.onTriggered=function()
+{
+    if(!arr.get())return;
+
+    var ar=arr.get();
+
+    for(i=0;i<ar.length;i+=3)
+    {
+        ar[i+0]+=100;
+        ar[i+1]+=100;
+    }
+
+    var maxX =NUMBER_MIN;
+    var minX =NUMBER_MAX;
+    var maxY =NUMBER_MIN;
+    var minY =NUMBER_MAX;
+    
+    rects.length=0;
+    var i=0;
+    var j=0;
+
+    grid.length=gridWidth*gridHeight;
+    gridMaxX.length=(gridWidth+1)*(gridHeight+1);
+    gridMinX.length=(gridWidth+1)*(gridHeight+1);
+    gridMaxY.length=(gridWidth+1)*(gridHeight+1);
+    gridMinY.length=(gridWidth+1)*(gridHeight+1);
+
+    for(i=0;i<gridWidth*gridHeight;i++)
+    {
+        grid[i]=0;
+        gridMaxX[i]=NUMBER_MIN;
+        gridMinX[i]=NUMBER_MAX;
+        gridMaxY[i]=NUMBER_MIN;
+        gridMinY[i]=NUMBER_MAX;
+    }
+
+    // find max/min etc...
+
+    for(i=0;i<ar.length;i+=3)
+    {
+        maxX=Math.max(maxX,ar[i+0]);
+        minX=Math.min(minX,ar[i+0]);
+        maxY=Math.max(maxY,ar[i+1]);
+        minY=Math.min(minY,ar[i+1]);
+    }
+    
+    var w=Math.abs(maxX-minX);
+    var h=Math.abs(maxY-minY);
+
+    // put points into low res grid system
+
+    var stepX=w/(gridWidth);
+    var stepY=h/(gridHeight);
+
+    for(i=0;i<ar.length;i+=3)
+    {
+        var xx=Math.floor((ar[i+0]-minX)/stepX);
+        var yy=Math.floor((ar[i+1]-minY)/stepY);
+        var gridIndex=xx+(yy*gridWidth);
+        grid[gridIndex]++;
+
+        // update min/max for that grid...
+        gridMaxX[gridIndex]=Math.max( gridMaxX[gridIndex], ar[i+0]);
+        gridMinX[gridIndex]=Math.min( gridMinX[gridIndex], ar[i+0]);
+        gridMaxY[gridIndex]=Math.max( gridMaxY[gridIndex], ar[i+1]);
+        gridMinY[gridIndex]=Math.min( gridMinY[gridIndex], ar[i+1]);
+    }    
+    
+
+
+    // setup boundingboxed of grids
+
+    // outCol.set(0);
+    // for(i=0;i<gridWidth;i++)
+    // {
+    //     for(j=0;j<gridHeight;j++)
+    //     {
+    //         if(grid[i+j*gridWidth]>0)
+    //         {
+    //             outx.set(minX+i*stepX-100);
+    //             outy.set(minY+j*stepY-100);
+    //             outw.set(stepX);
+    //             outh.set(stepY);
+    //             trigger.trigger();
+    //         }
+    //     }
+    // }
+
+    outCol.set(1);
+    
+
+
+    for(i=1;i<gridWidth-1;i++)
+        for(j=1;j<gridHeight-1;j++)
+        {
+            var bounds=findCluster(i,j,{minX:NUMBER_MAX,minY:NUMBER_MAX,maxX:NUMBER_MIN,maxY:NUMBER_MIN});
+            if(
+                bounds.minX!=NUMBER_MAX && 
+                bounds.minY!=NUMBER_MAX &&
+                bounds.maxY!=NUMBER_MIN &&
+                bounds.maxX!=NUMBER_MIN 
+            )
+            {
+                // console.log(bounds.minX,bounds.maxX);
+    
+                rects.push(
+                    {
+                        x:bounds.minX-100,
+                        y:bounds.minY-100,
+                        w:Math.abs(bounds.maxX-bounds.minX),
+                        h:Math.abs(bounds.maxY-bounds.minY)
+
+                    });
+            }
+        }
+
+    // render all rects...
+
+        // console.log(rects.length);
+
+    for(i=0;i<rects.length;i++)
+    {
+        outx.set(rects[i].x);
+        outy.set(rects[i].y);
+        outw.set(rects[i].w);
+        outh.set(rects[i].h);
+        trigger.trigger();
+    }
+    
+    
+};
