@@ -21,22 +21,27 @@
         var gamePads=navigator.getGamepads();
         var count=0;
 
-        for(var gp in gamePads)
+        for(var gp=0;gp< gamePads.length;gp++)
         {
-            if(gamePads[gp].axes)
+            if(gamePads[gp])
             {
-                self.axis1.val=gamePads[gp].axes[0];
-                self.axis2.val=gamePads[gp].axes[1];
-                self.axis3.val=gamePads[gp].axes[2];
-                self.axis4.val=gamePads[gp].axes[3];
 
-                self.button0.val=gamePads[gp].buttons[0].pressed;
-                self.button0.val=gamePads[gp].buttons[1].pressed;
-                self.button2.val=gamePads[gp].buttons[2].pressed;
-                self.button3.val=gamePads[gp].buttons[3].pressed;
-                self.button4.val=gamePads[gp].buttons[4].pressed;
-
+                if(gamePads[gp].axes)
+                {
+                    self.axis1.val=gamePads[gp].axes[0];
+                    self.axis2.val=gamePads[gp].axes[1];
+                    self.axis3.val=gamePads[gp].axes[2];
+                    self.axis4.val=gamePads[gp].axes[3];
+    
+                    self.button0.val=gamePads[gp].buttons[0].pressed;
+                    self.button0.val=gamePads[gp].buttons[1].pressed;
+                    self.button2.val=gamePads[gp].buttons[2].pressed;
+                    if(gamePads[gp].buttons[3]) self.button3.val=gamePads[gp].buttons[3].pressed;
+                    if(gamePads[gp].buttons[4]) self.button4.val=gamePads[gp].buttons[4].pressed;
+    
+                }
                 count++;
+                
             }
         }
 
