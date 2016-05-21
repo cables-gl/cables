@@ -57,7 +57,7 @@ function ajaxRequest(url, callback)
 CABLES=CABLES || {};
 
 
-CABLES.DateNow=performance.now || Date.now;
+CABLES.DateNow=performance.now || Date.now; // todo: still used??
 
 CABLES.ajaxSync=function(url,cb,method,post,contenttype)
 {

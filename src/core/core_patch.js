@@ -495,7 +495,25 @@ CABLES.Patch = function(cfg)
         if(this.onLoadEnd)this.onLoadEnd();
     };
 
+
+
+    this.profiler=null;
+    this.profile=function(enable)
+    {
+        this.profiler=new CABLES.Profiler();
+        for(var i in this.ops)
+        {
+            this.ops[i].profile(enable);
+        }
+
+    };
+
+
+
+
     this.exec();
+
+
 
 };
 

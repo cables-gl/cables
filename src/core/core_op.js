@@ -247,6 +247,13 @@ CABLES.Op = function()
         }
     };
 
+    this.profile=function(enable)
+    {
+        for(var ipi in this.portsIn)
+        {
+            this.portsIn[ipi]._onTriggered=this.portsIn[ipi]._onTriggeredProfiling;
+        }
+    };
 
     this.findParent=function(objName)
     {

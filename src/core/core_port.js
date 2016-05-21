@@ -91,6 +91,16 @@ CABLES.Port=function(parent,name,type,uiAttribs)
         if(parent.enabled && self.onTriggered) self.onTriggered();
     };
 
+    this._onTriggeredProfiling=function()
+    {
+        parent.updateAnims();
+        parent.patch.profiler.add("port",this);
+
+        // console.log('trigger ',self.name);
+        if(parent.enabled && self.onTriggered) self.onTriggered();
+        parent.patch.profiler.add("port",null);
+    };
+
     this.onValueChange=function(cb)
     {
         // onValueChanged=cb;
