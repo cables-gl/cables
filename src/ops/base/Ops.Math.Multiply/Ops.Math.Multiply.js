@@ -6,8 +6,8 @@ var result=op.addOutPort(new Port(op,"result"));
 
 function update()
 {
-    var n1=parseFloat(number1.get());
-    var n2=parseFloat(number2.get());
+    var n1=number1.get();
+    var n2=number2.get();
 
     if(isNaN(n1))n1=0;
     if(isNaN(n2))n2=0;

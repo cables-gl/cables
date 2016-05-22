@@ -6,7 +6,7 @@ var number2=op.addInPort(new Port(op,"number2"));
 
 function exec()
 {
-    var v=parseFloat(number1.get())+parseFloat(number2.get());
+    var v=number1.get()+number2.get();
     if(!isNaN(v)) result.set( v );
 }
 

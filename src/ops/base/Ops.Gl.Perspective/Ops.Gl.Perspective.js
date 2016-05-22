@@ -32,9 +32,9 @@ function changed()
 {
     cgl.frameStore.perspective=
     {
-        fovy:parseFloat(fovY.get()),
-        zFar:parseFloat(zFar.get()),
-        zNear:parseFloat(zNear.get()),
+        fovy:fovY.get(),
+        zFar:zFar.get(),
+        zNear:zNear.get(),
     };
 }
 

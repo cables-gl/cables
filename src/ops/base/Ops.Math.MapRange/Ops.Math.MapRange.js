@@ -22,11 +22,11 @@ function exec()
     }
 
 
-    var nMin=parseFloat(new_min.get());
-    var nMax=parseFloat(new_max.get());
-    var oMin=parseFloat(old_min.get());
-    var oMax=parseFloat(old_max.get());
-    var x=parseFloat(v.get());
+    var nMin=new_min.get();
+    var nMax=new_max.get();
+    var oMin=old_min.get();
+    var oMax=old_max.get();
+    var x=v.get();
 
     var reverseInput = false;
     var oldMin = Math.min( oMin, oMax );
