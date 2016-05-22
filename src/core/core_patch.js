@@ -191,7 +191,7 @@ CABLES.Patch = function(cfg)
                     var opToDelete=this.ops[i];
                     opToDelete.removeLinks();
                     this.onDelete(opToDelete);
-                    opToDelete.id=generateUUID();
+                    // opToDelete.id=generateUUID();
                     this.ops.splice( i, 1 );
 
                     if(opToDelete.onDelete)opToDelete.onDelete();
@@ -336,6 +336,7 @@ CABLES.Patch = function(cfg)
             if(self.ops[i].objName==objName)
             {
                 var oldOp=self.ops[i];
+                oldOp.deleted=true;
                 var op=this.addOp(objName,oldOp.uiAttribs);
                 var j,k;
                 for(j in oldOp.portsIn)
