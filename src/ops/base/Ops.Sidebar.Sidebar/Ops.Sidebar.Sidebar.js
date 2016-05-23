@@ -6,7 +6,7 @@ var childs=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
 var element = document.createElement('div');
 element.style["background-color"]="#000";
 
-var canvas = document.getElementById("cablescanvas"); 
+var canvas = document.getElementById("cablescanvascontainer"); 
 canvas.appendChild(element);
 
 op.childsChanged=function()

@@ -52,10 +52,7 @@ function create()
     if(pivotY.get()=='top') y=-w;
     if(pivotY.get()=='bottom') y=0;
 
-    if(geom.vertices.length!=8*3)
-    {
-        geom.vertices.length=8*3;
-    }
+    if(geom.vertices.length!=8*3) geom.vertices.length=8*3;
 
     var c=0;
     geom.vertices[c++]=x;
@@ -115,7 +112,7 @@ function create()
             4, 7, 3,
         ];
 
-    if(geom.texCoords.length==0)
+    if(geom.texCoords.length===0)
         for(var i=0;i<geom.vertices.length;i+=3)
         {
             geom.texCoords.push(geom.vertices[i+0]/width.get()-0.5);
@@ -124,7 +121,7 @@ function create()
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);
-    geomOut.set(null);
+
     geomOut.set(geom);
 }
 
