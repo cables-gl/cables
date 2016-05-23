@@ -2,6 +2,7 @@ var CGL=CGL || {};
 
 // ---------------------------------------------------------------------------
 
+CGL.profileShaderBinds=0;
 CGL.profileUniformCount=0;
 CGL.profileShaderCompiles=0;
 
@@ -488,12 +489,11 @@ CGL.Shader=function(_cgl,_name)
     this.bind=function()
     {
         var i=0;
-
         CGL.MESH.lastShader=this;
 
+        CGL.profileShaderBinds++;
 
         if(!program || needsRecompile) self.compile();
-
 
         if(!projMatrixUniform)
         {
@@ -526,11 +526,9 @@ CGL.Shader=function(_cgl,_name)
             cgl.gl.uniformMatrix4fv(vMatrixUniform, false, cgl.vMatrix);
             cgl.gl.uniformMatrix4fv(mMatrixUniform, false, cgl.mvMatrix);
 
-var m=mat4.create();
-mat4.invert(m,cgl.vMatrix);
-cgl.gl.uniform3f(camPosUniform, m[12],m[13],m[14]);
-// console.log(m[12],m[13],m[14]);
-
+            var m=mat4.create();
+            mat4.invert(m,cgl.vMatrix);
+            cgl.gl.uniform3f(camPosUniform, m[12],m[13],m[14]);
         }
         else
         {

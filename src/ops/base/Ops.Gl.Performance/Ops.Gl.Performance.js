@@ -84,7 +84,7 @@ function refresh()
     queueChilds.shift();
 
     frames++;
-    
+
     if(fpsStartTime===0)fpsStartTime=Date.now();
     if(Date.now()-fpsStartTime>=1000)
     {
@@ -94,7 +94,7 @@ function refresh()
 
         text=self.patch.config.glCanvasId+' fps: '+fps;
         text+=' '+cgl.canvas.clientWidth+' x '+cgl.canvas.clientHeight;
-        
+
         fpsStartTime=Date.now();
         if(CGL.profileShaderCompiles>0)text+=' shader compile!';
         if(CGL.profileShaderGetUniform>0)text+=' shader get uniforms!';
@@ -119,12 +119,13 @@ function refresh()
         avgMsChilds/=count;
 
         text2='frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
-        text3='uni/s: '+CGL.profileUniformCount;
+        text3='shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+' uniforms: '+Math.ceil(CGL.profileUniformCount/fps);
 
         if(selfTime>=1.25) text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         CGL.profileUniformCount=0;
         CGL.profileShaderGetUniform=0;
         CGL.profileShaderCompiles=0;
+        CGL.profileShaderBinds=0;
 
     }
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -144,7 +145,7 @@ function refresh()
     {
         ctx.fillRect(k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
     }
-    
+
     ctx.fillStyle="#cccccc";
     ctx.fillText(text, 10, 20);
     ctx.fillText(text2, 10, 35);
@@ -165,7 +166,7 @@ function refresh()
 
     lastTime=performance.now();
     selfTime=performance.now()-ll;
-    
+
     var startTimeChilds=performance.now();
 
     self.trigger.trigger();
@@ -183,7 +184,7 @@ function refresh()
         }
         countFrames=0;
     }
-    
+
 }
 
 this.onDelete=function()
