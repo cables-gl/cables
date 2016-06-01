@@ -8,13 +8,10 @@ var nudgeRight=this.addInPort(new Port(this,"nudgeRight",OP_PORT_TYPE_FUNCTION,{
 var sync=this.addInPort(new Port(this,"sync",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
 
 var beat=this.addOutPort(new Port(this,"beat",OP_PORT_TYPE_FUNCTION));
-var beat1=this.addOutPort(new Port(this,"beat1",OP_PORT_TYPE_FUNCTION));
-var beat2=this.addOutPort(new Port(this,"beat2",OP_PORT_TYPE_FUNCTION));
-var beat3=this.addOutPort(new Port(this,"beat3",OP_PORT_TYPE_FUNCTION));
-var beat4=this.addOutPort(new Port(this,"beat4",OP_PORT_TYPE_FUNCTION));
 var offbeat=this.addOutPort(new Port(this,"offbeat",OP_PORT_TYPE_FUNCTION));
 
 var bpm=this.addOutPort(new Port(this,"bpm",OP_PORT_TYPE_VALUE,{display:'editor'}));
+var outStates=this.addOutPort(new Port(this,"States",OP_PORT_TYPE_ARRAY));
 
 
 var lastTap=0;
@@ -33,27 +30,18 @@ var doResetInterval = false;
 var avgBpm = 0;
 var NUDGE_VALUE = 0.5; // to add / substract from avg bpm
 var beatCounter = 1; // [1, 2, 3, 4]
-
+var states=[0,0,0,0];
 exe.onTriggered=function()
 {
     if(doFlash)
     {
         beat.trigger();
-        switch(beatCounter)
-        {
-            case 1:
-                beat1.trigger();
-                break;
-            case 2:
-                beat2.trigger();
-                break;
-            case 3:
-                beat3.trigger();
-                break;
-            case 4:
-                beat4.trigger();
-                break;
-        }
+        
+        for(var i=0;i<4;i++)states[i]=0;
+        states[beatCounter-1]=1;
+        outStates.set(null);
+        outStates.set(states);
+
         beatCounter++;
         if(beatCounter > 4) beatCounter = 1;
     }

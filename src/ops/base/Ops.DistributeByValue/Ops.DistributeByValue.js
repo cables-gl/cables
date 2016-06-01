@@ -2,8 +2,8 @@ op.name='distribute by value';
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var number=op.addInPort(new Port(op,"number"));
 var max=op.addInPort(new Port(op,"max"));
-var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
 var numOut=op.addInPort(new Port(op,"num outputs"));
+var num=op.addOutPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
 
 number.set(0);
 max.set(1);

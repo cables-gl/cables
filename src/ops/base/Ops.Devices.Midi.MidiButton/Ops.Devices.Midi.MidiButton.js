@@ -7,6 +7,9 @@ var learn=op.addInPort(new Port(op,"learn",OP_PORT_TYPE_FUNCTION,{display:'butto
 var eventOut=op.addOutPort(new Port(op,"Event Output",OP_PORT_TYPE_OBJECT));
 var outPressed=op.addOutPort(new Port(op,"pressed"));
 
+var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
+
+
 note.set(1);
 var learning=false;
 var lastValue=-1;
@@ -15,11 +18,12 @@ learn.onTriggered=function(){learning=true;};
 eventIn.onValueChanged=function()
 {
     var event=eventIn.get();    
-    
     if(learning)
     {
         note.set(event.note);
         learning=false;
+        
+        console.log('bound '+event.note);
         
         if(CABLES.UI)
         {
@@ -40,7 +44,9 @@ eventIn.onValueChanged=function()
         {
             event.output.send( [0x90, note.get(), 120] );
             outPressed.set(true);
+            trigger.trigger();
         }
+        
     }
     eventOut.set(event);
 };

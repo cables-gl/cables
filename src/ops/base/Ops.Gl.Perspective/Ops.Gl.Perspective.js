@@ -9,9 +9,9 @@ var zFar=op.addInPort(new Port(op,"frustum far",OP_PORT_TYPE_VALUE ));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
-zNear.set(0.1);
+zNear.set(1);
 fovY.set(45);
-zFar.set(2000.0);
+zFar.set(500.0);
 
 fovY.onValueChanged=changed;
 zFar.onValueChanged=changed;

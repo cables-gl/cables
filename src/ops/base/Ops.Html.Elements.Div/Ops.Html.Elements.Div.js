@@ -23,6 +23,7 @@ var bgA=op.addInPort(new Port(op,"Background Opacity",OP_PORT_TYPE_VALUE,{ displ
 
 
 
+
 r.set(1);
 g.set(1);
 b.set(1);
@@ -32,6 +33,9 @@ bgR.set(0.5);
 bgG.set(0.5);
 bgB.set(0.5);
 bgA.set(1);
+
+var ignoreMouse=op.addInPort(new Port(op,"Ignore Mouse",OP_PORT_TYPE_VALUE,{display:'bool'}));
+ignoreMouse.set(false);
 
 var autoSize=op.addInPort(new Port(op,"Auto width/height",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var width=op.addInPort(new Port(op,"Width",OP_PORT_TYPE_VALUE));
@@ -73,6 +77,7 @@ a.onValueChanged=updateColor;
 fontSize.onValueChanged=updateFont;
 borderRadius.onValueChanged=updateBorder;
 cursor.onValueChanged=updateCursor;
+ignoreMouse.onValueChanged=updateIgnoreMouse;
 init();
 
 function updateClientSize()
@@ -135,6 +140,11 @@ function updateCursor()
     element.style.cursor=cursor.get();
 }
 
+function updateIgnoreMouse()
+{
+    if(ignoreMouse.get()) element.style['pointer-events']="none";
+        else element.style['pointer-events']="default";
+};
 
 text.onValueChanged=function()
 {
@@ -154,7 +164,7 @@ function init()
     // element.style["background-color"]="#f00";
     element.appendChild(textContent);
 
-    var canvas = document.getElementById("cablescanvas"); 
+    var canvas = document.getElementById("cablescanvas") || document.body; 
     canvas.appendChild(element);
 
     updateSize();
@@ -165,6 +175,7 @@ function init()
     updateFont();
     updateClientSize();
     updateCursor();
+    updateIgnoreMouse();
     
     element.onclick=function()
     {

@@ -35,7 +35,8 @@ function checkConnection()
 
 // connection.readyState
 
-    if(connection.readyState!=1)
+
+    if(!connection || connection.readyState!=1)
     {
         console.log('retry');
         connected=false;
@@ -78,7 +79,11 @@ function connect()
 
     window.WebSocket = window.WebSocket || window.MozWebSocket;
     
-    if(connection==null)reconnect();
+    if(!connection)
+    {
+        reconnect();
+        return;
+    }
  
      if (!window.WebSocket) console.error('Sorry, but your browser doesn\'t support WebSockets.');
     
