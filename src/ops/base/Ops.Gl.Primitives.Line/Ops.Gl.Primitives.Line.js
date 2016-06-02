@@ -1,16 +1,15 @@
 op.name='Lines';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
 var pointSize=op.addInPort(new Port(op,"pointSize"));
-
 var mode=op.addInPort(new Port(op,"Draw Mode",OP_PORT_TYPE_VALUE ,{
     display:'dropdown',values:['Line Strip','Line Loop','Lines']} ));
 
-var cgl=op.patch.cgl;
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 pointSize.set(2);
+
+var cgl=op.patch.cgl;
 var shader=null;
 var mod=null;
 var uniPointSize=null;
@@ -22,7 +21,6 @@ mode.onValueChanged=function()
         else if(mode.get()=='Lines')drawMode=cgl.gl.LINES;
         else drawMode=cgl.gl.LINE_STRIP;
 };
-
 
 pointSize.onValueChanged=function()
 {
