@@ -72,9 +72,6 @@ this.render.onTriggered=function()
 
     if(mesh) mesh.render(cgl.getShader());
 
-    var projMat=mat4.create();
-    mat4.perspective(projMat,30, 1, 0.1,2000);
-
     function project(vec,viewWidth, viewHeight, fov, viewDistance)
     {
         var v=vec3.create();
@@ -82,7 +79,7 @@ this.render.onTriggered=function()
         factor = fov / (viewDistance + vec[2]);
         x = vec[0] * factor + viewWidth / 2;
         y = vec[1] * factor + viewHeight / 2;
-        vec3.set(v,x,y);
+        vec3.set(v,x,y,0);
         return v;
     }
     
@@ -129,8 +126,8 @@ this.render.onTriggered=function()
 
         for(var ni=0;ni<Math.abs(cgl.frameStore.laserPoints[i].num);ni++)
         {
-            var x=Math.round(vv[0]*coordmul.get());
-            var y=Math.round(vv[1]*coordmul.get());
+            var x=Math.round(-1*vv[0]*coordmul.get());
+            var y=Math.round(-1*vv[1]*coordmul.get());
 
             var clamped=false;
             if(x>coordClamp.get()) 

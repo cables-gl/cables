@@ -47,13 +47,15 @@ function incrementState(){
         states[i]=0;
     }
     states[beatCounter-1] = 1;
+
+    
 }
 
 function tapPressed() {
     // start new tap session
     if(Date.now() - lastTap > 1000) {
         taps.length=0;
-        beatCounter = 1;
+        beatCounter = 0;
     }
     else {
         taps.push(Date.now() - lastTap);
