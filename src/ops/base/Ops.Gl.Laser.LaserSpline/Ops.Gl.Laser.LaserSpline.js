@@ -237,6 +237,7 @@ this.render.onTriggered=function()
     outNumPoints.set(ind);
     cgl.popMvMatrix();
     cgl.frameStore.laserPoints.length=0;
+    outObj.set(null);
     outObj.set(laserObj);
 };
 

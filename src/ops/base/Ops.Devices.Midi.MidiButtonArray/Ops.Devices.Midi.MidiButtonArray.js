@@ -8,6 +8,8 @@ var learn=op.addInPort(new Port(op,"Learn Start",OP_PORT_TYPE_FUNCTION,{display:
 var noteEnd=op.addInPort(new Port(op,"Note End"));
 var learnEnd=op.addInPort(new Port(op,"Learn End",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
+
+
 var eventOut=op.addOutPort(new Port(op,"Event Output",OP_PORT_TYPE_OBJECT));
 
 var lastIndex=op.addOutPort(new Port(op,"Last Index"));

@@ -4,7 +4,7 @@ var eventIn=op.addInPort(new Port(op,"Event Input",OP_PORT_TYPE_OBJECT));
 
 var beatArray=op.addInPort(new Port(op,"Beat Array",OP_PORT_TYPE_ARRAY));
 
-var sceneIndex=op.addInPort(new Port(op,"Scene Note"));
+var sceneNote=op.addInPort(new Port(op,"Scene Note"));
 var effectNote=op.addInPort(new Port(op,"Effect Note"));
 
 
@@ -46,20 +46,46 @@ var useBeat4=false;
 var out=null;
 
 
-
-sceneIndex.onValueChanged=function()
+function convertLaunchPad(which)
 {
-    if(useBeat1) beatScenes[0]=sceneIndex.get();
-    else if(useBeat2) beatScenes[1]=sceneIndex.get();
-    else if(useBeat3) beatScenes[2]=sceneIndex.get();
-    else if(useBeat4) beatScenes[3]=sceneIndex.get();
+    var ret=0;
+    if(which<8) ret=event.note;
+    else if(which<24) ret=event.note-8;
+    else if(which<40) ret=event.note-16;
+    else if(which<56) ret=event.note-24;
+    else if(which<72) ret=event.note-32;
+    else if(which<88) ret=event.note-40;
+    else if(which<104) ret=event.note-48;
+    else if(which<120) ret=event.note-56;
+
+}
+
+
+sceneNote.onValueChanged=function()
+{
+    var ignore=false;
+    if(sceneNote.get()==8) ignore=true;
+    if(sceneNote.get()==24) ignore=true;
+    if(sceneNote.get()==40) ignore=true;
+    if(sceneNote.get()==56) ignore=true;
+    if(sceneNote.get()==72) ignore=true;
+    if(sceneNote.get()==88) ignore=true;
+    if(sceneNote.get()==104) ignore=true;
+    if(sceneNote.get()==120) ignore=true;
+    
+    if(ignore)return;
+
+    if(useBeat1) beatScenes[0]=sceneNote.get();
+    else if(useBeat2) beatScenes[1]=sceneNote.get();
+    else if(useBeat3) beatScenes[2]=sceneNote.get();
+    else if(useBeat4) beatScenes[3]=sceneNote.get();
     else
     {
-        beatScenes[0]=sceneIndex.get();
-        beatScenes[1]=sceneIndex.get();
-        beatScenes[2]=sceneIndex.get();
-        beatScenes[3]=sceneIndex.get();
-        console.log('set all to ',sceneIndex.get());
+        beatScenes[0]=sceneNote.get();
+        beatScenes[1]=sceneNote.get();
+        beatScenes[2]=sceneNote.get();
+        beatScenes[3]=sceneNote.get();
+        console.log('set all to ',sceneNote.get());
         
     }
 };
