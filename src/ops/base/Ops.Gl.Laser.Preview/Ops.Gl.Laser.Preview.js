@@ -22,8 +22,9 @@ function render()
 
     var stride=6;
 
-    verts.length=laserArray.get().length/stride*3;
-    vertsColors.length=laserArray.get().length/stride*4;
+var n=(laserArray.get().length )/stride*3;
+    verts.length=n;
+    vertsColors.length=(laserArray.get().length)/stride*4;
     indices.length=verts.length;
 
     var lastR=255;
@@ -35,16 +36,17 @@ function render()
 
     for(var i=0;i<laserArray.get().length;i+=stride)
     {
-        verts[i/stride*3+0]=laserArray.get()[i+0];
-        verts[i/stride*3+1]=laserArray.get()[i+1];
-        verts[i/stride*3+2]=laserArray.get()[i+2];
+        var ind=(i)/stride;
+        verts[ind*3+0]=laserArray.get()[i+0];
+        verts[ind*3+1]=laserArray.get()[i+1];
+        verts[ind*3+2]=laserArray.get()[i+2];
         
-        vertsColors[i/stride*4+0]=(laserArray.get()[i+3])/90;
-        vertsColors[i/stride*4+1]=(laserArray.get()[i+4])/90;
-        vertsColors[i/stride*4+2]=(laserArray.get()[i+5])/90;
-        vertsColors[i/stride*4+3]=1;
+        vertsColors[ind*4+0]=(laserArray.get()[i+3])/250;
+        vertsColors[ind*4+1]=(laserArray.get()[i+4])/250;
+        vertsColors[ind*4+2]=(laserArray.get()[i+5])/250;
+        vertsColors[ind*4+3]=1;
 
-        indices[i/stride]=i/stride;
+        indices[ind]=ind;
 
         if(i==10)
         {

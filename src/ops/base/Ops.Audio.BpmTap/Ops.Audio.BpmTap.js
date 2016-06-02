@@ -13,6 +13,7 @@ var offbeat=this.addOutPort(new Port(this,"offbeat",OP_PORT_TYPE_FUNCTION));
 var bpm=this.addOutPort(new Port(this,"bpm",OP_PORT_TYPE_VALUE,{display:'editor'}));
 var outStates=this.addOutPort(new Port(this,"States",OP_PORT_TYPE_ARRAY));
 
+var whichBeat=this.addOutPort(new Port(this,"Which Beat",OP_PORT_TYPE_FUNCTION));
 
 var lastTap=0;
 var avg = 0;
@@ -37,6 +38,7 @@ exe.onTriggered=function()
     {
         beat.trigger();
         
+        whichBeat.set(beatCounter-1);
         for(var i=0;i<4;i++)states[i]=0;
         states[beatCounter-1]=1;
         outStates.set(null);

@@ -3,6 +3,9 @@ Op.apply(this, arguments);
 
 this.name='laser socket';
 this.url=this.addInPort(new Port(this,"url",OP_PORT_TYPE_VALUE,{type:'string'}));
+
+var speed=this.addInPort(new Port(this,"speed",OP_PORT_TYPE_VALUE));
+speed.set(5000);
 this.result=this.addOutPort(new Port(this,"result", OP_PORT_TYPE_OBJECT));
 var outConnected=this.addOutPort(new Port(this,"connected"));
 outConnected.set(false);
@@ -15,38 +18,49 @@ var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 var connection=null;
 var timeout=null;
 var connectedTo='';
-
+var arr=[];
 exe.onTriggered=function()
 {
-    if(connected)
+    var theArr=laserArray.get();
+    if(connected && theArr && theArr.length>0)
     {
-        connection.send(laserArray.get()); 
+        
+        // console.log('theArr.length',theArr.length);
+        arr.length=theArr.length+1;
+        arr[0]=speed.get();
+        for(var i=0;i<theArr.length;i++)
+        {
+            arr[i+1]=theArr[i];
+        }
+        connection.send(arr);
+        // console.log(theArr);
+        // console.log('array ',arr);
     }
 };
 
 
 function checkConnection()
 {
-
-// 0 - connection not yet established
-// 1 - conncetion established
-// 2 - in closing handshake
-// 3 - connection closed or could not open
-
-// connection.readyState
+    // 0 - connection not yet established
+    // 1 - conncetion established
+    // 2 - in closing handshake
+    // 3 - connection closed or could not open
+    
+    // connection.readyState
 
 
     if(!connection || connection.readyState!=1)
     {
         console.log('retry');
         connected=false;
+        connection=null;
         connect();
     }
     else
     {
         connected=true;
     }
-    timeout=setTimeout(checkConnection,1000);
+    timeout=setTimeout(checkConnection,5000);
 }
 
 
@@ -57,36 +71,31 @@ function reconnect()
     {
         if(connection!=null)
         {
-            console.log('i close the connection...');
+            console.log('closing the connection...');
             connection.close();
         }
-        connection = new WebSocket(self.url.val);
+        console.log('connecting to ',self.url.get());
+        connection = new WebSocket(self.url.get());
     }
     catch (e)
     {
-        console.log('could not connect to',self.url.val);
+        console.log('could not connect to',self.url.get());
     }
 
 }
 function connect()
 {
-    if(connected===true && connectedTo==self.url.val) return;
-    if(connected===true)
-    {
-        // console.log('closing connection...');
-        // connection.close();
-    }
+    if(connected===true && connectedTo==self.url.get()) return;
 
     window.WebSocket = window.WebSocket || window.MozWebSocket;
     
     if(!connection)
     {
         reconnect();
-        return;
     }
- 
-     if (!window.WebSocket) console.error('Sorry, but your browser doesn\'t support WebSockets.');
-    
+
+    if (!window.WebSocket) console.error('Sorry, but your browser doesn\'t support WebSockets.');
+
     connection.onerror = function (message)
     {
         console.log("ws error");
@@ -128,7 +137,7 @@ function connect()
     
 }
 
+this.url.val='ws://192.168.1.174:9000/';
 this.url.onValueChanged=reconnect;
 timeout=setTimeout(checkConnection,1000);
 
-this.url.val='ws://192.168.1.174:8080/laz0r';

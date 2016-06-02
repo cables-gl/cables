@@ -36,6 +36,11 @@ var hue=this.addInPort(new Port(this,"hue",OP_PORT_TYPE_VALUE));
 colorMul.set(1.0);
 
 
+var showR=this.addInPort(new Port(this,"show r",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var showG=this.addInPort(new Port(this,"show g",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var showB=this.addInPort(new Port(this,"show b",OP_PORT_TYPE_VALUE,{display:'bool'}));
+
+
 function easeSmoothStep(perc)
 {
     var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
@@ -65,14 +70,7 @@ this.render.onTriggered=function()
     cgl.pushMvMatrix();
     mat4.identity(cgl.mvMatrix);
 
-    
-    shader.bind();
-    cgl.gl.vertexAttribPointer(cgl.getShader().getAttrVertexPos(),buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
-    cgl.gl.enableVertexAttribArray(cgl.getShader().getAttrVertexPos());
-
-    cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
-    if(self.centerpoint.val)cgl.gl.drawArrays(cgl.gl.LINES, 0, buffer.numItems);
-        else cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
+    if(mesh) mesh.render(cgl.getShader());
 
     var projMat=mat4.create();
     mat4.perspective(projMat,30, 1, 0.1,2000);
@@ -89,39 +87,16 @@ this.render.onTriggered=function()
     }
     
 
-        
-    
-    // var subd=5;
-    // if(subd>0)
-    // {
-    //     var points=[];
-    //     for(var i=0;i<cgl.frameStore.SplinePoints.length-3;i+=3)
-    //     {
-    //         for(var j=0;j<subd;j++)
-    //         {
-    //             for(var k=0;k<3;k++)
-    //             {
-    //                 points.push(
-    //                     cgl.frameStore.SplinePoints[i+k]+
-    //                         ( 
-    //                             cgl.frameStore.SplinePoints[i+k+3] - 
-    //                             cgl.frameStore.SplinePoints[i+k] ) *
-    //                             j/subd
-    //                         );
-    //             }
-    //         }
-    //     }
 
-
-    //     cgl.frameStore.SplinePoints=points;
-    // }
-
-    
+    var minX=9999999;
+    var maxX=-9999999;
+    var minY=9999999;
+    var maxY=-9999999;
     
 
-    var lastR=255;
-    var lastG=255;
-    var lastB=255;
+    var lastR=0;
+    var lastG=0;
+    var lastB=0;
 
     var numPoints=0;
     for(var i=0;i<cgl.frameStore.laserPoints.length;i++)
@@ -131,14 +106,14 @@ this.render.onTriggered=function()
     laserObj.length=numPoints*stride;
 
     var ind=0;
-    
     var lastX=0;
     var lastY=0;
+    var addBlack=false;
+
     for(var i=0;i<cgl.frameStore.laserPoints.length;i++)
     {
         var vec=[0,0,0];
         vec3.set(vec, cgl.frameStore.laserPoints[i].x, cgl.frameStore.laserPoints[i].y, cgl.frameStore.laserPoints[i].z);
-        // cgl.popMvMatrix();
         
         cgl.pushMvMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
@@ -152,49 +127,14 @@ this.render.onTriggered=function()
         
         var vv=project(point,w.get(),h.get(),fov.get(),0.01);//viewWidth, viewHeight, fov, viewDistance)
 
-    
-
         for(var ni=0;ni<Math.abs(cgl.frameStore.laserPoints[i].num);ni++)
         {
-            var x=Math.round(   vv[0]*coordmul.get()/2);
-            var y=Math.round(-1*vv[1]*coordmul.get());
-
-
-            if(cgl.frameStore.laserPoints[i].num<0)
-            {
-                if(ni==Math.abs(cgl.frameStore.laserPoints[i].num)-1)
-                {
-                    cgl.frameStore.laserPoints[i].colR=150*colorMul.get();
-                    cgl.frameStore.laserPoints[i].colG=150*colorMul.get();
-                    cgl.frameStore.laserPoints[i].colB=0;
-                }
-                else
-                {
-                    cgl.frameStore.laserPoints[i].colR=0;
-                    cgl.frameStore.laserPoints[i].colG=0;
-                    cgl.frameStore.laserPoints[i].colB=0;
-
-                }
-            }
-            else
-            if(ni==cgl.frameStore.laserPoints[i].num-1)
-            {
-                lastX=x;
-                lastY=y;
-            }
-            else
-            {
-                var perc=ni/cgl.frameStore.laserPoints[i].num;
-                x=lastX+(x-lastX)*perc;
-                y=lastY+(y-lastY)*perc;
-            }
-
-
+            var x=Math.round(vv[0]*coordmul.get());
+            var y=Math.round(vv[1]*coordmul.get());
 
             var clamped=false;
             if(x>coordClamp.get()) 
             {
-
                 clamped=true;
                 x=coordClamp.get();
             }
@@ -213,41 +153,89 @@ this.render.onTriggered=function()
                 clamped=true;
                 y=0-coordClamp.get();
             }
+    
+            if(addBlack)
+            {
+                
+                for(var nn=0;nn<2;nn++)
+                {
+                    laserObj[ind*stride+0] = x;
+                    laserObj[ind*stride+1] = y;
+                    laserObj[ind*stride+2] = 0;
+                    laserObj[ind*stride+3] = 0;
+                    laserObj[ind*stride+4] = 0;
+                    laserObj[ind*stride+5] = 0;
+                    ind++;
+                }
+    
+                addBlack=false;
+            }
+
+            minX=Math.min(x,minX);
+            maxX=Math.max(x,maxX);
+            
+            minY=Math.min(y,minY);
+            maxY=Math.max(y,maxY);
 
             laserObj[ind*stride+0] = x;
             laserObj[ind*stride+1] = y;
             laserObj[ind*stride+2] = 0;
 
-
-// if(cgl.frameStore.laserPoints[i].colR)cgl.frameStore.laserPoints[i].colR*=colorMul.get();
-// if(cgl.frameStore.laserPoints[i].colG)cgl.frameStore.laserPoints[i].colG*=colorMul.get();
-// if(cgl.frameStore.laserPoints[i].colB)cgl.frameStore.laserPoints[i].colB*=colorMul.get();
-
-
-            if(!clamped)
+            if(cgl.frameStore.laserPoints[i].hasOwnProperty('colR'))
             {
-                laserObj[ind*stride+3] = parseInt((cgl.frameStore.laserPoints[i].colR || lastR)*255*colorMul.get(),10);
-                laserObj[ind*stride+4] = parseInt((cgl.frameStore.laserPoints[i].colG || lastG)*255*colorMul.get(),10);
-                laserObj[ind*stride+5] = parseInt((cgl.frameStore.laserPoints[i].colB || lastB)*255*colorMul.get(),10);
+                cgl.frameStore.laserPoints[i].colR*=colorMul.get();
+                lastR=cgl.frameStore.laserPoints[i].colR;
             }
-            else
-            {
-                cgl.frameStore.laserPoints[i].colR=cgl.frameStore.laserPoints[i].colG=cgl.frameStore.laserPoints[i].colB=0;               
-
-                // laserObj[ind*stride+3] = 0;
-                // laserObj[ind*stride+4] = 0;
-                // laserObj[ind*stride+5] = 0;
-
-            }
-            ind++;
+            else cgl.frameStore.laserPoints[i].colR=lastR;
             
-            // console.log(laserObj[ind*stride+0]);
-        }
+            if(cgl.frameStore.laserPoints[i].hasOwnProperty('colG'))
+            {
+                cgl.frameStore.laserPoints[i].colG*=colorMul.get();
+                lastG=cgl.frameStore.laserPoints[i].colG;
+            }
+            else cgl.frameStore.laserPoints[i].colG=lastG;
+            
+            if(cgl.frameStore.laserPoints[i].hasOwnProperty('colB'))
+            {
+                cgl.frameStore.laserPoints[i].colB*=colorMul.get();
+                lastB=cgl.frameStore.laserPoints[i].colB;
+            }
+            else cgl.frameStore.laserPoints[i].colB=lastB;
 
-        if(cgl.frameStore.laserPoints[i].colR) lastR=cgl.frameStore.laserPoints[i].colR;
-        if(cgl.frameStore.laserPoints[i].colG) lastG=cgl.frameStore.laserPoints[i].colG;
-        if(cgl.frameStore.laserPoints[i].colB) lastB=cgl.frameStore.laserPoints[i].colB;
+
+            laserObj[ind*stride+3] = cgl.frameStore.laserPoints[i].colR*255;//parseInt((cgl.frameStore.laserPoints[i].colR || lastR)*255*colorMul.get(),10);
+            laserObj[ind*stride+4] = cgl.frameStore.laserPoints[i].colG*255;//parseInt((cgl.frameStore.laserPoints[i].colG || lastG)*255*colorMul.get(),10);
+            laserObj[ind*stride+5] = cgl.frameStore.laserPoints[i].colB*255;//parseInt((cgl.frameStore.laserPoints[i].colB || lastB)*255*colorMul.get(),10);
+
+            
+            if(!showR.get()) laserObj[ind*stride+3]=0;
+            if(!showG.get()) laserObj[ind*stride+4]=0;
+            if(!showB.get()) laserObj[ind*stride+5]=0;
+
+            ind++;
+
+        }
+        if(cgl.frameStore.laserPoints[i].hasOwnProperty('black')) addBlack=true;
+
+        lastX=x;
+        lastY=y;
     }
+
+    laserObj.push(lastX);
+    laserObj.push(lastY);
+    laserObj.push(0);
+    laserObj.push(0);
+    laserObj.push(0);
+    laserObj.push(0);
+
+    laserObj.push(lastX);
+    laserObj.push(lastY);
+    laserObj.push(0);
+    laserObj.push(0);
+    laserObj.push(0);
+    laserObj.push(0);
+
+    // console.log('minmax',minX,maxX,minY,maxY);
 
     outNumPoints.set(ind);
     cgl.popMvMatrix();
@@ -255,37 +243,84 @@ this.render.onTriggered=function()
     outObj.set(laserObj);
 };
 
+
+var mesh=null;
+var geom=new CGL.Geometry();
+
 function bufferData()
 {
     if(!cgl.frameStore.laserPoints)cgl.frameStore.laserPoints=[];
-    var points=[];
+    var verts=[];
+    var indices=[];
+    var vertsColors=[];
 
+    var colR=0;
+    var colG=0;
+    var colB=0;
+    var addBlack=false;
+    var index=0;
     for(var i=0;i<cgl.frameStore.laserPoints.length;i++)
     {
-        //center point...
-        if(self.centerpoint.get())
-        {
-            points.push( cgl.frameStore.laserPoints[0].x );
-            points.push( cgl.frameStore.laserPoints[0].y );
-            points.push( cgl.frameStore.laserPoints[0].z );
-        }
 
         //other point
-        points.push( cgl.frameStore.laserPoints[i].x );
-        points.push( cgl.frameStore.laserPoints[i].y );
-        points.push( cgl.frameStore.laserPoints[i].z );
+        verts.push( cgl.frameStore.laserPoints[i].x );
+        verts.push( cgl.frameStore.laserPoints[i].y );
+        verts.push( cgl.frameStore.laserPoints[i].z );
+
+        if(cgl.frameStore.laserPoints[i].hasOwnProperty('colR'))
+            colR=cgl.frameStore.laserPoints[i].colR;
+        
+        if(cgl.frameStore.laserPoints[i].hasOwnProperty('colG'))
+            colG=cgl.frameStore.laserPoints[i].colG;
+        
+        if(cgl.frameStore.laserPoints[i].hasOwnProperty('colB'))
+            colB=cgl.frameStore.laserPoints[i].colB;
+        
+        if(addBlack)
+        {
+            addBlack=false;
+
+            vertsColors.push(0);
+            vertsColors.push(0);
+            vertsColors.push(0);
+            vertsColors.push(1);
+
+            verts.push( cgl.frameStore.laserPoints[i].x );
+            verts.push( cgl.frameStore.laserPoints[i].y );
+            verts.push( cgl.frameStore.laserPoints[i].z );
+
+            
+            indices[index]=index;
+            index++;
+        }
+        
+        
+        vertsColors.push(colR);
+        vertsColors.push(colG);
+        vertsColors.push(colB);
+        vertsColors.push(1);
+        
+        if(cgl.frameStore.laserPoints[i].hasOwnProperty('black'))
+        {
+            addBlack=true;
+        }
+
+    
+        indices[index]=index;
+        index++;
     }
 
-    cgl.frameStore.SplinePoints=points;
+    cgl.frameStore.SplinePoints=verts;
 
+    
 
-    if(self.thickness.get()<1)self.thickness.set(1);
+    geom.vertices=verts;
+    geom.vertexColors=vertsColors;
+    geom.verticesIndices=indices;
 
-    cgl.gl.lineWidth(self.thickness.val);
-    cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
-    cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(cgl.frameStore.SplinePoints), cgl.gl.STATIC_DRAW);
-    buffer.itemSize = 3;
-    buffer.numItems = cgl.frameStore.SplinePoints.length/buffer.itemSize;
+    if(!mesh) mesh=new CGL.Mesh(cgl,geom,cgl.gl.LINE_STRIP);
+    mesh.setGeom(geom);
+
 }
 
 bufferData();

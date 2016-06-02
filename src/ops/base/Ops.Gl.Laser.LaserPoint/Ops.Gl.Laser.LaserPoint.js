@@ -31,11 +31,18 @@ numPoints.set(1);
 }
 
 
+var vec=vec3.create();
 this.render.onTriggered=function()
 {
     if(!cgl.frameStore.SplinePoints)return;
+    
+    vec3.set(vec, x.get(),y.get(),z.get());
+    cgl.pushMvMatrix();
+    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+
+
     var pos=[0,0,0];
-    vec3.transformMat4(pos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
+    vec3.transformMat4(pos, pos, cgl.mvMatrix);
 
     var obj={x:pos[0],y:pos[1],z:pos[2],num:numPoints.get()};
 
@@ -49,4 +56,8 @@ this.render.onTriggered=function()
     cgl.frameStore.laserPoints.push(obj);
 
     self.trigger.trigger();
+
+    cgl.popMvMatrix();
+
+    
 };
