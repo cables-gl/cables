@@ -5,12 +5,24 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var pointSize=op.addInPort(new Port(op,"pointSize"));
 
+var mode=op.addInPort(new Port(op,"Draw Mode",OP_PORT_TYPE_VALUE ,{
+    display:'dropdown',values:['Line Strip','Line Loop','Lines']} ));
+
 var cgl=op.patch.cgl;
 
 pointSize.set(2);
 var shader=null;
-var module=null;
+var mod=null;
 var uniPointSize=null;
+var drawMode=cgl.gl.LINE_STRIP;
+
+mode.onValueChanged=function()
+{
+    if(mode.get()=='Line Loop')drawMode=cgl.gl.LINE_LOOP;
+        else if(mode.get()=='Lines')drawMode=cgl.gl.LINES;
+        else drawMode=cgl.gl.LINE_STRIP;
+};
+
 
 pointSize.onValueChanged=function()
 {
@@ -22,9 +34,9 @@ render.onTriggered=function()
     var oldPrim=0;
     if(cgl.getShader()!=shader)
     {
-        if(shader && module)
+        if(shader && mod)
         {
-            shader.removeModule(module);
+            shader.removeModule(mod);
             shader=null;
         }
 
@@ -34,28 +46,24 @@ render.onTriggered=function()
             .endl()+'uniform float {{mod}}_size;'
             .endl();
 
-        module=shader.addModule(
+        mod=shader.addModule(
             {
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
-                // srcBodyVert:'gl_LineWidth = {{mod}}_size;'
             });
 
-        uniPointSize=new CGL.Uniform(shader,'f',module.prefix+'_size',pointSize.get());
+        uniPointSize=new CGL.Uniform(shader,'f',mod.prefix+'_size',pointSize.get());
 
     }
 
     shader=cgl.getShader();
     oldPrim=shader.glPrimitive;
-    shader.glPrimitive=cgl.gl.LINE_STRIP;
+    shader.glPrimitive=drawMode;
 
-    // cgl.points=true;
     trigger.trigger();
     cgl.gl.lineWidth(pointSize.get());
 
     shader.glPrimitive=oldPrim;
-    // cgl.points=false;
-
 };
 
 
