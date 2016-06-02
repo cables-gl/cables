@@ -6,6 +6,7 @@ var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
 
 var pointSize=op.addInPort(new Port(op,"PointSize",OP_PORT_TYPE_VALUE));
 var makeRound=op.addInPort(new Port(op,"Round",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var doScale=op.addInPort(new Port(op,"Scale by Distance",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
 var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -13,6 +14,7 @@ var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 makeRound.set(true);
+doScale.set(false);
 pointSize.set(3);
 
 var cgl=op.patch.cgl;
@@ -73,11 +75,17 @@ texture.onPreviewChanged=function()
     console.log('show preview!');
 };
 
+doScale.onValueChanged=function()
+{
+    if(doScale.get()) shader.define('SCALE_BY_DISTANCE');
+        else shader.removeDefine('SCALE_BY_DISTANCE');
+};
+
 makeRound.onValueChanged=function()
 {
     if(makeRound.get()) shader.define('MAKE_ROUND');
         else shader.removeDefine('MAKE_ROUND');
-}
+};
 
 texture.onValueChanged=function()
 {

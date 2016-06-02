@@ -12,19 +12,26 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 
 uniform float pointSize;
+uniform vec3 camPos;
 
 void main()
 {
 
-    gl_PointSize = pointSize;
+    #ifndef SCALE_BY_DISTANCE
+        gl_PointSize = pointSize;
+    #endif
+    #ifdef SCALE_BY_DISTANCE
+        float cameraDist = distance(vPosition, camPos);
+        gl_PointSize = pointSize / cameraDist;
+    #endif
 
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
-   #endif
+    #endif
 
-   vec4 pos = vec4( vPosition, 1. );
+    vec4 pos = vec4( vPosition, 1. );
 
-   {{MODULE_VERTEX_POSITION}}
+    {{MODULE_VERTEX_POSITION}}
 
     gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
 
