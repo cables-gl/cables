@@ -12,6 +12,7 @@ var meshes=[];
 var cycle=0;
 render.onTriggered=function()
 {
+    if(meshes.length==0)create();
     for(var i=0;i<meshes.length;i++)
         meshes[i].render(cgl.getShader());
     
@@ -20,6 +21,7 @@ render.onTriggered=function()
 
 function createMesh(arr,start,end)
 {
+
     var geom=new CGL.Geometry();
     geom.verticesIndices=[];
 
@@ -28,6 +30,7 @@ function createMesh(arr,start,end)
     var verts=[];
     // verts.length=(end-start)*3*2;
     
+
     // texCoords.length=(end-start)*2*2;
     geom.verticesIndices.length=end-start;
     
@@ -36,13 +39,18 @@ function createMesh(arr,start,end)
     {
         if(arr[i-1][2]==arr[i][2])
         {
-            verts.push(arr[i-1][0]);
-            verts.push(arr[i-1][1]);
-            verts.push(0);
+            if(i==start+10)console.log(arr[i]);
+            
+            var coord=window.METROPOLIS.latLonCoord(  arr[i-1][0], arr[i-1][1] );
+            var coord2=window.METROPOLIS.latLonCoord( arr[i][0],   arr[i][1] );
+
+            verts.push(coord.lat);
+            verts.push(coord.lon);
+            verts.push(coord.z);
     
-            verts.push(arr[i][0]);
-            verts.push(arr[i][1]);
-            verts.push(0);
+            verts.push(coord2.lat);
+            verts.push(coord2.lon);
+            verts.push(coord2.z);
             
             texCoords.push(0);
             texCoords.push(0);
@@ -74,11 +82,11 @@ function createMesh(arr,start,end)
     geom.vertices=verts;
     // geom.vertexColors=vertColors;
     geom.texCoords=texCoords;
-    console.log('geom.verticesIndices',geom.verticesIndices.length);
+    // console.log('geom.verticesIndices',geom.verticesIndices.length);
 
     var mesh =new CGL.Mesh(cgl,geom);
     
-    console.log("mesh generated");
+    // console.log("mesh generated");
     
     return mesh;
 }
@@ -86,9 +94,13 @@ function createMesh(arr,start,end)
 
 function create()
 {
+    if(!window.METROPOLIS || !window.METROPOLIS.elevationLoaded)return;
+
+    console.log('build streetlines,...');
+    
     meshes.length=0;
     var arr=points.get();
-    var meshMax=2000;
+    var meshMax=1000;
     if(arr)
     {
         var count=0;

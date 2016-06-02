@@ -1,164 +1,105 @@
 this.name="Ops.Audio.BPMTap";
 
 var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-
 var tap=this.addInPort(new Port(this,"tap",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var sync=this.addInPort(new Port(this,"sync",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
 var nudgeLeft=this.addInPort(new Port(this,"nudgeLeft",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
 var nudgeRight=this.addInPort(new Port(this,"nudgeRight",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
-var sync=this.addInPort(new Port(this,"sync",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
 
 var beat=this.addOutPort(new Port(this,"beat",OP_PORT_TYPE_FUNCTION));
-var offbeat=this.addOutPort(new Port(this,"offbeat",OP_PORT_TYPE_FUNCTION));
-
-var bpm=this.addOutPort(new Port(this,"bpm",OP_PORT_TYPE_VALUE,{display:'editor'}));
+var bpm=this.addOutPort(new Port(this,"Bpm",OP_PORT_TYPE_VALUE,{display:'editor'}));
 var outStates=this.addOutPort(new Port(this,"States",OP_PORT_TYPE_ARRAY));
 
-var whichBeat=this.addOutPort(new Port(this,"Which Beat",OP_PORT_TYPE_FUNCTION));
-
-var lastTap=0;
-var avg = 0;
-var taps=[];
-var delay=0;
-
-var doFlash=false;
-var doOffbeatFlash = false;
-
-var pressTimeout=null;
-var flashInterval=null;
-var offbeatFlashInterval=null;
-var offbeatIntervalDelay=null;
-var doResetInterval = false;
-var avgBpm = 0;
+var DEFAULT_BPM = 127;
+var DEFAULT_MILLIS = bpmToMillis(DEFAULT_BPM);
 var NUDGE_VALUE = 0.5; // to add / substract from avg bpm
+
+var lastFlash = -1;
+var lastTap = -1;
+
+var taps=[];
+
+var avgBpm = DEFAULT_BPM;
+var avgMillis = getAvgMillis();
+
 var beatCounter = 1; // [1, 2, 3, 4]
-var states=[0,0,0,0];
-exe.onTriggered=function()
-{
-    if(doFlash)
-    {
+var states=[1,0,0,0];
+
+exe.onTriggered=function() {
+    if(Date.now() > lastFlash + avgMillis){
         beat.trigger();
-        
-        whichBeat.set(beatCounter-1);
-        for(var i=0;i<4;i++)states[i]=0;
-        states[beatCounter-1]=1;
+        incrementState();
         outStates.set(null);
         outStates.set(states);
-
-        beatCounter++;
-        if(beatCounter > 4) beatCounter = 1;
+        
+        bpm.set(millisToBpm(avgMillis)); 
+        lastFlash = Date.now();
+        //console.log("Date.now: " + Date.now());
     }
-    if(doOffbeatFlash)
-    {
-        offbeat.trigger();
-    }
-    doFlash=false;
-    doOffbeatFlash = false;
 }
 
-function tapPressed()
-{
-    // console.log("tab")
-    avg=0;
+function incrementState(){
+    beatCounter++;
+    if(beatCounter > 4){
+        beatCounter = 1;
+    }
+    for(var i=0;i<4;i++){
+        states[i]=0;
+    }
+    states[beatCounter-1] = 1;
+}
 
-    if(Date.now()-lastTap>1000)
-    {
+function tapPressed() {
+    // start new tap session
+    if(Date.now() - lastTap > 1000) {
         taps.length=0;
-        avg=0;
-        beatCounter = 2;
-    }
-    else
-    {
-        taps.push( Date.now()-lastTap );
-        doFlash=true;
-    }
-
-    lastTap=Date.now();
-
-    if(taps.length>2)
-    {
-        avg = getAvg();
-        avgBpm = Number(60*1000/avg).toFixed(2);
-        bpm.set(avgBpm);
-
-        clearTimeout(pressTimeout);
-        pressTimeout=setTimeout(function()
-        {
-            beatCounter = 1;
-            resetInterval();
-        },avg*4);
-    }
-
-}
-
-// should be called "on beat"
-function resetInterval()
-{
-    clearInterval(flashInterval);
-    clearInterval(pressTimeout);
-    clearInterval(offbeatFlashInterval);
-    clearInterval(offbeatIntervalDelay);
-
-    flashInterval=setInterval(function(){
-        doFlash=true;
-        if(doResetInterval === true)
-        {
-            resetInterval();
-        }
-    },avg);
-
-    // set offbeat interval in half a beat
-    offbeatIntervalDelay = setInterval(function(){
-        offbeatFlashInterval=setInterval(function(){
-            doOffbeatFlash=true;
-            clearInterval(offbeatIntervalDelay);
-        },avg);
-    }, avg/2);
-
-    doResetInterval = false;
-
-    //setInterval(flashInterval);
-
-    clearInterval(pressTimeout);
-
-    avgBpm = Number(60*1000/avg).toFixed(2);
-    bpm.set(avgBpm);
-}
-
-function getAvg()
-{
-    if(taps.length>2)
-    {
-        var avg = taps[1];
-        for(var i=0;i<taps.length;i++)
-        {
-            avg=(taps[i]+avg)/2;
-        }
-        return avg;
+        beatCounter = 1;
     }
     else {
-        return 0;
+        taps.push(Date.now() - lastTap);
+    }
+    lastTap = Date.now();
+    avgMillis = getAvgMillis();
+}
+
+function millisToBpm(millis){
+    return Number(60*1000/millis).toFixed(2);    
+}
+
+function bpmToMillis(bpm){
+    return 60*1000/bpm;    
+}
+
+function getAvgMillis() {
+    if(taps.length >= 1) {
+        var sum = 0.0;
+        for(var i=0; i<taps.length; i++) {
+            sum += taps[i];
+        }
+        return sum/taps.length;
+    }
+    else {
+        return DEFAULT_MILLIS;
     }
 }
 
-function nudgeLeftPressed()
-{
-    avg += NUDGE_VALUE;
-    doResetInterval = true; // reset interval on beat
+function syncPressed(){
+    // on next execute everything will be reset to first beat
+    lastFlash = -1;
+    beatCounter = 0;
 }
 
-function nudgeRightPressed()
-{
-    avg -= NUDGE_VALUE;
-    doResetInterval = true; // reset interval on beat
+function nudgeLeftPressed() {
+    avgBpm += NUDGE_VALUE;
+    avgMillis = bpmToMillis(avgBpm);
 }
 
-function syncPressed()
-{
-    beatCounter = 2;
-    resetInterval(); // reset interval instantly
+function nudgeRightPressed() {
+    avgBpm -= NUDGE_VALUE;
+    avgMillis = bpmToMillis(avgBpm);
 }
 
 tap.onTriggered = tapPressed;
+sync.onTriggered = syncPressed;
 nudgeLeft.onTriggered = nudgeLeftPressed;
 nudgeRight.onTriggered = nudgeRightPressed;
-sync.onTriggered = syncPressed;

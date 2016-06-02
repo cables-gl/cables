@@ -52,6 +52,7 @@ render.onTriggered=function()
         element.style.height="auto";
         element.style.color="#fff";
         element.style.width="auto";
+        // element.style.border="1px solid red";
         element.style['text-shadow']="0px 0px 9px rgba(0, 0, 0, 1)";
 
 
@@ -68,8 +69,8 @@ render.onTriggered=function()
     
     ele.style.opacity=1;
 
-    ele.style['margin-left']=(x-ele.clientWidth/2)+"px";
-    ele.style['margin-top']=(y-ele.clientHeight/2)+"px";
+    ele.style['margin-left']=(x-(ele.clientWidth/2))+"px";
+    ele.style['margin-top']=(y-(ele.clientHeight/2))+"px";
 
 
 

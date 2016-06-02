@@ -62,11 +62,11 @@ function createMesh(arr,start,end)
     geom.vertices=verts;
     geom.vertexColors=vertColors;
     geom.texCoords=texCoords;
-    console.log('geom.verticesIndices',geom.verticesIndices.length);
+    // console.log('geom.verticesIndices',geom.verticesIndices.length);
 
     var mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
     
-    console.log("mesh generated");
+    // console.log("mesh generated");
     
     return mesh;
 }

@@ -45,10 +45,6 @@ function rebuildGeom()
     var indices=[];
 
     var count=0;
-    
-    // var vertStepX=meshWidth/width;
-    // var vertStepY=meshHeight/height;
-console.log('build geom');
     var numRows=parseFloat(nRows.get());
     var numColumns=parseFloat(nColumns.get());
 
