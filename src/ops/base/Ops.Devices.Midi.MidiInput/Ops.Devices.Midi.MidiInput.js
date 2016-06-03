@@ -6,8 +6,11 @@ op.name='midiInput';
 var normalize=op.addInPort(new Port(op,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var deviceSelect=op.addInPort(new Port(op,"device",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["none"]} ));
 
+var resetLights=op.addInPort(new Port(op,"Reset Lights",OP_PORT_TYPE_VALUE,{display:'bool'} ));
+
 var outEvent=op.addOutPort(new Port(op,"Event",OP_PORT_TYPE_OBJECT));
 
+resetLights.set(false);
 normalize.set(true);
 
 var midi=null;
@@ -18,6 +21,23 @@ deviceSelect.onValueChanged=setDevice;
 
 if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
     else onMIDIFailure();
+
+
+resetLights.onValueChanged=doResetLights;
+function doResetLights()
+{
+    if(outputDevice && resetLights.get())
+    {
+        
+        for(var i=0;i<128;i++)
+        {
+            outputDevice.send( [0x90, i, 0] );
+            outputDevice.send( [0xb0, i, 0] );
+            
+        }
+
+    }
+}
 
 function setDevice()
 {
@@ -41,6 +61,8 @@ function setDevice()
     for (var output = outputs.next(); output && !output.done; output = outputs.next())
         if(output.value.name==name)
             outputDevice=midi.outputs.get(output.value.id);
+            
+    doResetLights();
 }
 
 function onMIDIFailure()

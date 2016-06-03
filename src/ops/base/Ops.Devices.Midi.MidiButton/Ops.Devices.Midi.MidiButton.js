@@ -9,6 +9,7 @@ var outPressed=op.addOutPort(new Port(op,"pressed"));
 
 var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
 
+var lights=op.addInPort(new Port(op,"Light",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 note.set(1);
 var learning=false;
@@ -37,12 +38,12 @@ eventIn.onValueChanged=function()
         var v=event.velocity;
         if(v===0)
         {
-            event.output.send( [0x90, note.get(), 0] );
+            if(lights.get())event.output.send( [0x90, note.get(), 0] );
             outPressed.set(false);
         }
         if(v==1)
         {
-            event.output.send( [0x90, note.get(), 120] );
+            if(lights.get())event.output.send( [0x90, note.get(), 120] );
             outPressed.set(true);
             trigger.trigger();
         }

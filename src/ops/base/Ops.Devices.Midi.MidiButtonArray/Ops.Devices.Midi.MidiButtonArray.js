@@ -8,6 +8,7 @@ var learn=op.addInPort(new Port(op,"Learn Start",OP_PORT_TYPE_FUNCTION,{display:
 var noteEnd=op.addInPort(new Port(op,"Note End"));
 var learnEnd=op.addInPort(new Port(op,"Learn End",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
+var lights=op.addInPort(new Port(op,"Light",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 
 var eventOut=op.addOutPort(new Port(op,"Event Output",OP_PORT_TYPE_OBJECT));
@@ -38,10 +39,15 @@ function setButtonState(i,v)
     buttons[i]=v;
     values.set(buttons);
     lastIndex.set(i);
-    var noteOnMessage = [0x90, note.get()+i, 0];
-    if(v>0) noteOnMessage = [0x90, note.get()+i, 120];
+    if(lights.get())
+    {
+        var noteOnMessage = [0x90, note.get()+i, 0];
+        if(v>0) noteOnMessage = [0x90, note.get()+i, 120];
+        
+        if(lastEvent && lastEvent.output) lastEvent.output.send( noteOnMessage );
+    }
 
-    if(lastEvent && lastEvent.output) lastEvent.output.send( noteOnMessage );
+    
 }
 
 function initArray()

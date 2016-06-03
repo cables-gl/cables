@@ -42,7 +42,7 @@ beat.onTriggered = function(){
     var t=Date.now()/1000;
     var v=anim.getValue(t);
     init();
-}
+};
 
 var redoAnimtion = true;
 

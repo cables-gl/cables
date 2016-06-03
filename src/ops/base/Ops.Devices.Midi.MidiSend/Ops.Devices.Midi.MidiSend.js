@@ -23,7 +23,7 @@ function setValue()
         var cmd=0x90;
         if(isControllCMd.get())cmd=0xb0;
 
-        if(value.get()) event.output.send( [cmd, note.get(), 127] );
+        if(value.get()) event.output.send( [cmd, note.get(), 120] );
             else event.output.send( [cmd, note.get(), 0] );
     }
 }
