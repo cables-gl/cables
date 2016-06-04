@@ -83,7 +83,7 @@ function onMIDISuccess(midiAccess)
 
     deviceSelect.uiAttribs.values=deviceNames;
 
-    gui.patch().showOpParams(op);
+    if(CABLES.UI)gui.patch().showOpParams(op);
     setDevice();
 }
 

@@ -4,6 +4,7 @@ var array=op.addInPort(new Port(op,"Points Array",OP_PORT_TYPE_ARRAY));
 var outArray=op.addOutPort(new Port(op,"Points",OP_PORT_TYPE_ARRAY));
 
 var hueIn=op.addInPort(new Port(op,"Hue",OP_PORT_TYPE_VALUE));
+var beatCount=op.addInPort(new Port(op,"beatCount",OP_PORT_TYPE_VALUE));
 
 var bangIn=op.addInPort(new Port(op,"Beat Bang",OP_PORT_TYPE_VALUE));
 
@@ -62,22 +63,21 @@ array.onValueChanged=function()
         arr[i+1]=arr[i+1]+r2;
     }
 
-    // shake alltogether
+    // screen shake
     if(effects[e]===1)
     {
-        var r=rnd1*800;
-        var r2=rnd2*800;
+        var r=rnd1*600;
+        var r2=rnd2*250;
         arr[i+0]=arr[i+0]+r;
         arr[i+1]=arr[i+1]+r2;
     }
 
-    // waber waber    
+    // waber waber
     if(effects[e]===2)
     {
         arr[i+0]+=Math.sin(arr[i+0]*0.01)*arr[i+1]*0.1;
         arr[i+1]+=Math.sin(arr[i+1]*0.01)*arr[i+0]*0.1;
     }
-
 
 
 
@@ -160,17 +160,6 @@ array.onValueChanged=function()
 
 
 
-    // random colors everywhere
-    if(effects[e]===7)
-    {
-        if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
-        {
-            arr[i+3]=(i*23478*slowCount+3)%255;
-            arr[i+4]=(i*23423*slowCount+4234)%255;
-            arr[i+5]=(i*34344*slowCount+5567)%255;
-        }
-    }
-
     // scale axis...
     if(effects[e]===8)
     {
@@ -193,23 +182,15 @@ array.onValueChanged=function()
         {
             arr[i+0]-=dist*2;
         }
-        if(frameCount==2)
-        {
-            arr[i+0]+=dist;
-        }
-        if(frameCount==3) 
+        if(frameCount==2) 
         {
             arr[i+0]-=dist*2;
         }
-        if(frameCount==4) 
-        {
-            arr[i+0]-=dist;
-        }
-        if(frameCount==5) 
+        if(frameCount==3) 
         {
             arr[i+0]-=dist*3;
         }
-        if(frameCount>=6) 
+        if(frameCount>=4) 
         {
             arr[i+0]+=dist*3;
             
@@ -238,20 +219,41 @@ array.onValueChanged=function()
         }
     }
     
+    // random colors everywhere
+    if(effects[e]===7)
+    {
+        
+        if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
+        {
+            var rgb=changeHue(arr[i+3],arr[i+4],arr[i+5],Math.random()*100-50);
+arr[i+3]=rgb[0];
+arr[i+4]=rgb[1];
+arr[i+5]=rgb[2];
+            // arr[i+3]=(i*23478*slowCount+3)%255;
+            // arr[i+4]=(i*23423*slowCount+4234)%255;
+            // arr[i+5]=(i*34344*slowCount+5567)%255;
+        }
+    }
+
+
     // strobo
     if(effects[e]===18)
     {
         if(count%2>0)
         {
-            arr[i+3]=255;
-            arr[i+4]=255;
-            arr[i+5]=255;
-    
-            if(count%5===0)
+            if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
             {
-                arr[i+3]=110;
+
+                arr[i+3]=255;
                 arr[i+4]=255;
-                arr[i+5]=150;
+                arr[i+5]=255;
+        
+                if(count%5===0)
+                {
+                    arr[i+3]=110;
+                    arr[i+4]=255;
+                    arr[i+5]=150;
+                }
             }
         }
         else
@@ -261,8 +263,16 @@ array.onValueChanged=function()
             arr[i+5]=0;
         }
     }
-
     
+    // smooth verlauf schnell
+    if(effects[e]===11)
+    {
+        var rgb=changeHue(arr[i+3],arr[i+4],arr[i+5],( (count*10+i)%200-100 ));
+        arr[i+3]=rgb[0];
+        arr[i+4]=rgb[1];
+        arr[i+5]=rgb[2];
+    }
+
     // smooth verlauf 
     if(effects[e]===19)
     {
@@ -320,7 +330,7 @@ for(var i=0;i<arr.length;i+=6)
 
         
         
-        // beat flash white
+        // beat flash 
         if(effects[e]===17)
         {
             if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
@@ -351,11 +361,38 @@ for(var i=0;i<arr.length;i+=6)
     
 }
 
-    
+
+
+        if(effects)
+        {
+            for(var e=0;e<effects.length;e++)
+            {
+                if(effects[e]===12)
+                {
+                    var dist=(maxX-minX);
+                    var i=0;
+                    
+                    var pos=(count*131+beatCount.get()*3)%dist;
+                    // pos*=1110;
+                    while(i<arr.length)
+                    {
+                        
+                        if(arr[i+0]>minX+pos && arr[i+0]<minX+pos+dist*0.2)
+                        {
+                            arr.splice(i,6);
+                        }
+                        else
+                            i+=6;
+                    }
+                    
+                }
+
+            }
+        }
+
         
         outArray.set(null);
         outArray.set(arr);
-        
     }
     
     

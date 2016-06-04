@@ -2,6 +2,9 @@ op.name="HolonVj";
 
 var eventIn=op.addInPort(new Port(op,"Event Input",OP_PORT_TYPE_OBJECT));
 
+
+var exec=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
+
 var beatArray=op.addInPort(new Port(op,"Beat Array",OP_PORT_TYPE_ARRAY));
 
 var noteBeat1=op.addInPort(new Port(op,"Note Beat 1"));
@@ -16,6 +19,23 @@ var learnBeat3=op.addInPort(new Port(op,"Learn Beat 3",OP_PORT_TYPE_FUNCTION,{di
 var noteBeat4=op.addInPort(new Port(op,"Note Beat 4"));
 var learnBeat4=op.addInPort(new Port(op,"Learn Beat 4",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
+
+
+var noteBeat21=op.addInPort(new Port(op,"Note Beat 2 1"));
+var learnBeat21=op.addInPort(new Port(op,"Learn Beat 2 1",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+
+var noteBeat22=op.addInPort(new Port(op,"Note Beat 2 2"));
+var learnBeat22=op.addInPort(new Port(op,"Learn Beat 2 2",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+
+var noteBeat23=op.addInPort(new Port(op,"Note Beat 2 3"));
+var learnBeat23=op.addInPort(new Port(op,"Learn Beat 2 3",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+
+var noteBeat24=op.addInPort(new Port(op,"Note Beat 2 4"));
+var learnBeat24=op.addInPort(new Port(op,"Learn Beat 2 4",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+
+
+
+
 var eventOut=op.addOutPort(new Port(op,"Event Output",OP_PORT_TYPE_OBJECT));
 var outScene=op.addOutPort(new Port(op,"Current Scene"));
 
@@ -26,6 +46,11 @@ var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
 
 
 var resetEffects=op.addInPort(new Port(op,"Reset Effects",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+
+var resetSecondScene=op.addInPort(new Port(op,"Reset Second Scene",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+
+
+
 
 var noteEffectsStart=op.addInPort(new Port(op,"Note Effects Start"));
 var learnEffectsStart=op.addInPort(new Port(op,"Learn Effects Start",OP_PORT_TYPE_FUNCTION,{display:'button'}));
@@ -40,6 +65,9 @@ var learnScenesStart=op.addInPort(new Port(op,"Learn Scenes Start",OP_PORT_TYPE_
 var noteScenesEnd=op.addInPort(new Port(op,"Note Scenes End"));
 var learnScenesEnd=op.addInPort(new Port(op,"Learn Scenes End",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
+var notePreview=op.addInPort(new Port(op,"Note Preview"));
+var learnPreview=op.addInPort(new Port(op,"Learn Preview",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+
 
 outEffects.set(null);
 noteBeat1.set(1);
@@ -48,6 +76,13 @@ var learningBeat1=false;
 var learningBeat2=false;
 var learningBeat3=false;
 var learningBeat4=false;
+
+var learningBeat21=false;
+var learningBeat22=false;
+var learningBeat23=false;
+var learningBeat24=false;
+
+var learningPreview=false;
 
 var learningEffectStart=false;
 var learningEffectEnd=false;
@@ -60,6 +95,13 @@ learnBeat2.onTriggered=function(){learningBeat2=true;};
 learnBeat3.onTriggered=function(){learningBeat3=true;};
 learnBeat4.onTriggered=function(){learningBeat4=true;};
 
+learnBeat21.onTriggered=function(){learningBeat21=true;};
+learnBeat22.onTriggered=function(){learningBeat22=true;};
+learnBeat23.onTriggered=function(){learningBeat23=true;};
+learnBeat24.onTriggered=function(){learningBeat24=true;};
+
+learnPreview.onTriggered=function(){learningPreview=true;};
+
 learnEffectsStart.onTriggered=function(){learningEffectStart=true;};
 learnEffectsEnd.onTriggered=function(){learningEffectEnd=true;};
 
@@ -69,13 +111,40 @@ learnScenesEnd.onTriggered=function(){learningScenesEnd=true;};
 
 var beatScenes=[0,0,0,0];
 var beatNotes=[0,0,0,0];
+var beatScenes2=[0,0,0,0];
+var beatNotes2=[0,0,0,0];
 
 var useBeat1=false;
 var useBeat2=false;
 var useBeat3=false;
 var useBeat4=false;
+var useBeat21=false;
+var useBeat22=false;
+var useBeat23=false;
+var useBeat24=false;
 var out=null;
 var effects=[[],[],[],[]];
+
+
+var currentScene=0;
+var currentScene2=-1;
+
+var toggleFrame=false;
+
+exec.onTriggered=function()
+{
+    toggleFrame=!toggleFrame;
+    
+    if(currentScene2==0)
+    {
+        outScene.set(currentScene);
+        return;
+    }
+    
+    if(toggleFrame) outScene.set(currentScene);
+        else outScene.set(currentScene2);
+    
+};
 
 function convertToLaunchPad(which)
 {
@@ -114,6 +183,19 @@ function isSpecialButton(note)
     return ignore;
 }
 
+
+resetSecondScene.onTriggered=function()
+{
+    beatNotes2[0]=0;
+    beatNotes2[1]=0;
+    beatNotes2[2]=0;
+    beatNotes2[3]=0;
+    beatScenes2[0]=0;
+    beatScenes2[1]=0;
+    beatScenes2[2]=0;
+    beatScenes2[3]=0;
+}
+
 resetEffects.onTriggered=function()
 {
     effects=[[],[],[],[]];
@@ -149,11 +231,9 @@ function setEffectBeat(beat,effectNum,val)
                 effects[beat].splice(i,1);
             }
         }
-
     }
     else
     {
-        
         var found=false;
         for(var i=0;i<effects[beat].length;i++)
         {
@@ -166,10 +246,7 @@ function setEffectBeat(beat,effectNum,val)
 
         if(!found)effects[beat].push(effectNum);        
     }
-
-
 }
-
 
 function setEffect(note)
 {
@@ -201,34 +278,62 @@ function setEffect(note)
         setEffectBeat(2,effectNum,onOff);
         setEffectBeat(3,effectNum,onOff);
     }
-    
 }
 
 
 function setScene(note)
 {
-    
     if(isSpecialButton(note))return;
+    
+    var arr
 
     if(useBeat1) 
     {
         beatScenes[0]=convertLaunchPad(note);
-        beatNotes[0]=note;
+        if(beatNotes[0]==note) beatNotes[0]=0;
+            else beatNotes[0]=note;
     }
     else if(useBeat2) 
     {
         beatScenes[1]=convertLaunchPad(note);
-        beatNotes[1]=note;
+        if(beatNotes[1]==note) beatNotes[2]=0
+            else beatNotes[1]=note;
     }
     else if(useBeat3) 
     {
         beatScenes[2]=convertLaunchPad(note);
-        beatNotes[2]=note;
+        if(beatNotes[2]==note) beatNotes[2]=0
+            else beatNotes[2]=note;
     }
     else if(useBeat4) 
     {
         beatScenes[3]=convertLaunchPad(note);
-        beatNotes[3]=note;
+        if(beatNotes[3]==note) beatNotes[3]=0
+            else beatNotes[3]=note;
+    }
+    else if(useBeat21) 
+    {
+        beatScenes2[0]=convertLaunchPad(note);
+        if(beatNotes2[0]==note) beatNotes2[0]=0
+            else beatNotes2[0]=note;
+    }
+    else if(useBeat22) 
+    {
+        beatScenes2[1]=convertLaunchPad(note);
+        if(beatNotes2[1]==note) beatNotes2[1]=0
+            else beatNotes2[1]=note;
+    }
+    else if(useBeat23) 
+    {
+        beatScenes2[2]=convertLaunchPad(note);
+        if(beatNotes2[2]==note) beatNotes2[2]=0
+            else beatNotes2[2]=note;
+    }
+    else if(useBeat24) 
+    {
+        beatScenes2[3]=convertLaunchPad(note);
+        if(beatNotes2[3]==note) beatNotes2[3]=0
+            else beatNotes2[3]=note;
     }
     else
     {
@@ -240,8 +345,6 @@ function setScene(note)
         beatScenes[1]=convertLaunchPad(note);
         beatScenes[2]=convertLaunchPad(note);
         beatScenes[3]=convertLaunchPad(note);
-        // console.log('set all to ',note);
-        
     }
 };
 
@@ -252,6 +355,7 @@ var lightStates=[];
 
 function setPixel(note,val)
 {
+    if(isSpecialButton(note))return;
     if(note>lightStates.length-1)
     {
         lightStates.length=note+100;
@@ -300,17 +404,30 @@ beatArray.onValueChanged=function()
         {
             setPixel(beatNotes[i],1);
             clearLights[beatNotes[i]]=0;
+
+            if(beatNotes2[i]!=0)
+            {
+                setPixel(beatNotes2[i],1);
+                clearLights[beatNotes2[i]]=0;
+            }
         }
 
         for(var i=0;i<4;i++)
         {
-            
             if(beats[i]==1)
             {
                 currentBeat=i;
                 setPixel(beatNotes[i],3);
                 clearLights[beatNotes[i]]=0;
                 outScene.set(beatScenes[i]);
+                currentScene=beatScenes[i];
+                
+                if(beatScenes2[i]!=0)
+                {
+                    clearLights[beatNotes2[i]]=0;
+                    setPixel(beatNotes2[i],2);
+                }
+                currentScene2=beatScenes2[i];
             }
 
             for(var j in effects[i])
@@ -347,7 +464,17 @@ eventIn.onValueChanged=function()
     if(out)
     {
         out.send( [0x90, 8, 120] );
+        out.send( [0x90, 120, 120] );
+        out.send( [0x90, 40, 120] );
     }
+
+    if(learningPreview)
+    {
+        notePreview.set(event.note);
+        learningPreview=false;
+        if(CABLES.UI) gui.patch().showOpParams(op);
+    }
+
 
     if(learningEffectStart)
     {
@@ -403,10 +530,41 @@ eventIn.onValueChanged=function()
         if(CABLES.UI) gui.patch().showOpParams(op);
     }
 
+
+    if(learningBeat21)
+    {
+        noteBeat21.set(event.note);
+        learningBeat21=false;
+        if(CABLES.UI) gui.patch().showOpParams(op);
+    }
+
+    if(learningBeat22)
+    {
+        noteBeat22.set(event.note);
+        learningBeat22=false;
+        if(CABLES.UI) gui.patch().showOpParams(op);
+    }
+
+    if(learningBeat23)
+    {
+        noteBeat23.set(event.note);
+        learningBeat23=false;
+        if(CABLES.UI) gui.patch().showOpParams(op);
+    }
+
+    if(learningBeat24)
+    {
+        noteBeat24.set(event.note);
+        learningBeat24=false;
+        if(CABLES.UI) gui.patch().showOpParams(op);
+    }
+
+
+
+
     if(noteBeat1.get()==event.note)
     {
         var v=event.velocity;
-    
         if(v==1) useBeat1=true;
         else useBeat1=false;
     }
@@ -414,7 +572,6 @@ eventIn.onValueChanged=function()
     if(noteBeat2.get()==event.note)
     {
         var v=event.velocity;
-    
         if(v==1) useBeat2=true;
         else useBeat2=false;
     }
@@ -422,7 +579,6 @@ eventIn.onValueChanged=function()
     if(noteBeat3.get()==event.note)
     {
         var v=event.velocity;
-    
         if(v==1) useBeat3=true;
         else useBeat3=false;
     }
@@ -430,9 +586,37 @@ eventIn.onValueChanged=function()
     if(noteBeat4.get()==event.note)
     {
         var v=event.velocity;
-    
         if(v==1) useBeat4=true;
         else useBeat4=false;
+    }
+    
+    
+    if(noteBeat21.get()==event.note)
+    {
+        var v=event.velocity;
+        if(v==1) useBeat21=true;
+        else useBeat21=false;
+    }
+
+    if(noteBeat22.get()==event.note)
+    {
+        var v=event.velocity;
+        if(v==1) useBeat22=true;
+        else useBeat22=false;
+    }
+
+    if(noteBeat23.get()==event.note)
+    {
+        var v=event.velocity;
+        if(v==1) useBeat23=true;
+        else useBeat23=false;
+    }
+
+    if(noteBeat24.get()==event.note)
+    {
+        var v=event.velocity;
+        if(v==1) useBeat24=true;
+        else useBeat24=false;
     }
 
     if(event.note>=noteEffectsStart.get() && event.note<=noteEffectsEnd.get())
