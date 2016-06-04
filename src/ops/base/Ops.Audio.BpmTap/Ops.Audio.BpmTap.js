@@ -10,6 +10,8 @@ var beat=this.addOutPort(new Port(this,"beat",OP_PORT_TYPE_FUNCTION));
 var bpm=this.addOutPort(new Port(this,"Bpm",OP_PORT_TYPE_VALUE,{display:'editor'}));
 var outStates=this.addOutPort(new Port(this,"States",OP_PORT_TYPE_ARRAY));
 
+var beatNum=this.addOutPort(new Port(this,"Beat Index",OP_PORT_TYPE_VALUE));
+
 var DEFAULT_BPM = 127;
 var DEFAULT_MILLIS = bpmToMillis(DEFAULT_BPM);
 var NUDGE_VALUE = 0.5; // to add / substract from avg bpm
@@ -48,6 +50,7 @@ function incrementState(){
     }
     states[beatCounter-1] = 1;
 
+beatNum.set(beatCounter-1);
     
 }
 

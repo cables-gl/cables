@@ -150,6 +150,7 @@ this.render.onTriggered=function()
                 clamped=true;
                 y=0-coordClamp.get();
             }
+            
     
             if(addBlack)
             {
@@ -208,6 +209,13 @@ this.render.onTriggered=function()
             if(!showR.get()) laserObj[ind*stride+3]=0;
             if(!showG.get()) laserObj[ind*stride+4]=0;
             if(!showB.get()) laserObj[ind*stride+5]=0;
+
+            if(clamped)
+            {
+                laserObj[ind*stride+3] = 0;
+                laserObj[ind*stride+4] = 0;
+                laserObj[ind*stride+5] = 0;
+            }
 
             ind++;
 

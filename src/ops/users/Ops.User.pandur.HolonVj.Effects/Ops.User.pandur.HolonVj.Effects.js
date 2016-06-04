@@ -3,41 +3,31 @@ var effectsIn=op.addInPort(new Port(op,"Effects",OP_PORT_TYPE_ARRAY));
 var array=op.addInPort(new Port(op,"Points Array",OP_PORT_TYPE_ARRAY));
 var outArray=op.addOutPort(new Port(op,"Points",OP_PORT_TYPE_ARRAY));
 
+var hueIn=op.addInPort(new Port(op,"Hue",OP_PORT_TYPE_VALUE));
+
 var bangIn=op.addInPort(new Port(op,"Beat Bang",OP_PORT_TYPE_VALUE));
 
+var frameCount=0;
 var count=0;
 var slowCount=0;
 var startTime=Date.now();
 
-setInterval(function()
-{
-    count++;    
-},50);
-
-
-setInterval(function()
-{
-    slowCount++;    
-},200);
-
+setInterval(function() { count++; },50);
+setInterval(function() { slowCount++; },200);
 
 array.onValueChanged=function()
 {
-    
-    
     var effects=effectsIn.get();
     
-    effects=[];
-    effects[0]=11;
+    // effects=[];
+    // effects[0]=-1;
     var bang=bangIn.get();
     var rnd1=Math.random()-0.5;
     var rnd2=Math.random()-0.5;
 
-    
-
-
     if(array.get() )
     {
+        frameCount++;
         var arr = array.get().slice(0);    
         if(count>arr.length/6)count=0;
 
@@ -63,35 +53,36 @@ array.onValueChanged=function()
 
 
 
-    
-    // ALL WHITE
+    // shake every point
     if(effects[e]===0)
     {
-        if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
-        {
-            arr[i+3]=255;
-            arr[i+4]=255;
-            arr[i+5]=255;
-        }
+        var r1=Math.random()*800-400;
+        var r2=Math.random()*800-400;
+        arr[i+0]=arr[i+0]+r1;
+        arr[i+1]=arr[i+1]+r2;
     }
 
-    // random colors everywhere
+    // shake alltogether
     if(effects[e]===1)
     {
-        if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
-        {
-            
-            
-            arr[i+3]=(i*23478*slowCount+3)%255;//parseInt(Math.random()*115);
-            arr[i+4]=(i*23423*slowCount+4234)%255;
-            arr[i+5]=(i*34344*slowCount+5567)%255;
-            // arr[i+4]=parseInt(Math.random()*115);
-            // arr[i+5]=parseInt(Math.random()*125);
-        }
+        var r=rnd1*800;
+        var r2=rnd2*800;
+        arr[i+0]=arr[i+0]+r;
+        arr[i+1]=arr[i+1]+r2;
     }
 
-    // white line in mesh
+    // waber waber    
     if(effects[e]===2)
+    {
+        arr[i+0]+=Math.sin(arr[i+0]*0.01)*arr[i+1]*0.1;
+        arr[i+1]+=Math.sin(arr[i+1]*0.01)*arr[i+0]*0.1;
+    }
+
+
+
+
+    // white line in mesh
+    if(effects[e]===3)
     {
         if(i/6>count && i/6<count+10)
         {
@@ -111,7 +102,7 @@ array.onValueChanged=function()
     }
     
     // white line / mesh removed
-    if(effects[e]===3)
+    if(effects[e]===4)
     {
         if(i/6>count && i/6<count+20)
         {
@@ -132,56 +123,10 @@ array.onValueChanged=function()
         }
     }
 
-    // beat flash white
-    if(effects[e]===4)
-    {
-        if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
-        {
-            arr[i+3]*=bang;
-            arr[i+4]*=bang;
-            arr[i+5]*=bang;
-        }
-    }
 
-    // shake every point
-    if(effects[e]===5)
-    {
-        var r1=Math.random()*800-400;
-        var r2=Math.random()*800-400;
-        arr[i+0]=arr[i+0]+r1;
-        arr[i+1]=arr[i+1]+r2;
-    }
 
-    // shake alltogether
-    if(effects[e]===6)
-    {
-        var r=rnd1*800;
-        var r2=rnd2*800;
-        arr[i+0]=arr[i+0]+r;
-        arr[i+1]=arr[i+1]+r2;
-    }
-
-    // waber waber    
-    if(effects[e]===7)
-    {
-        arr[i+0]+=Math.sin(arr[i+0]*0.01)*arr[i+1]*0.1;
-        arr[i+1]+=Math.sin(arr[i+1]*0.01)*arr[i+0]*0.1;
-    }
-
-    // scale axis...
-    if(effects[e]===8)
-    {
-        arr[i+0]*=bang;
-    }
-    if(effects[e]===9)
-    {
-        arr[i+1]*=bang;
-    }
-    
-    
-    
     // wandernde loecher
-    if(effects[e]===10)
+    if(effects[e]===5)
     {
         for(var j=0;j<10;j++)
         {
@@ -196,13 +141,10 @@ array.onValueChanged=function()
         }
     }
 
-
-
-
     // random loecher
-    if(effects[e]===11)
+    if(effects[e]===6)
     {
-        if((i+count)%40>20)
+        if((i+count)%10>5)
         {
             if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
             {
@@ -217,19 +159,123 @@ array.onValueChanged=function()
     }
 
 
-    // smooth hue 
-    if(effects[e]===12)
+
+    // random colors everywhere
+    if(effects[e]===7)
     {
-        var rgb=changeHue(arr[i+3],arr[i+4],arr[i+5],((Date.now()-startTime)/1000*15)%360);
-        arr[i+3]=rgb[0];
-        arr[i+4]=rgb[1];
-        arr[i+5]=rgb[2];
+        if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
+        {
+            arr[i+3]=(i*23478*slowCount+3)%255;
+            arr[i+4]=(i*23423*slowCount+4234)%255;
+            arr[i+5]=(i*34344*slowCount+5567)%255;
+        }
     }
 
+    // scale axis...
+    if(effects[e]===8)
+    {
+        arr[i+0]*=bang;
+    }
+    if(effects[e]===9)
+    {
+        arr[i+1]*=bang;
+    }
+
+
+
+
+    // dopplereffekt
+    if(effects[e]===10)
+    {
+        var dist=800;
+
+        if(frameCount==1) 
+        {
+            arr[i+0]-=dist*2;
+        }
+        if(frameCount==2)
+        {
+            arr[i+0]+=dist;
+        }
+        if(frameCount==3) 
+        {
+            arr[i+0]-=dist*2;
+        }
+        if(frameCount==4) 
+        {
+            arr[i+0]-=dist;
+        }
+        if(frameCount==5) 
+        {
+            arr[i+0]-=dist*3;
+        }
+        if(frameCount>=6) 
+        {
+            arr[i+0]+=dist*3;
+            
+            frameCount=0;
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    // ALL WHITE
+    if(effects[e]===16)
+    {
+        if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
+        {
+            arr[i+3]=255;
+            arr[i+4]=255;
+            arr[i+5]=255;
+        }
+    }
+    
+    // strobo
+    if(effects[e]===18)
+    {
+        if(count%2>0)
+        {
+            arr[i+3]=255;
+            arr[i+4]=255;
+            arr[i+5]=255;
+    
+            if(count%5===0)
+            {
+                arr[i+3]=110;
+                arr[i+4]=255;
+                arr[i+5]=150;
+            }
+        }
+        else
+        {
+            arr[i+3]=0;
+            arr[i+4]=0;
+            arr[i+5]=0;
+        }
+    }
+
+    
     // smooth verlauf 
-    if(effects[e]===13)
+    if(effects[e]===19)
     {
-        var rgb=changeHue(arr[i+3],arr[i+4],arr[i+5],(count*10+i)%360);
+        var rgb=changeHue(arr[i+3],arr[i+4],arr[i+5],( (count+i)%200-100 ));
+        arr[i+3]=rgb[0];
+        arr[i+4]=rgb[1];
+        arr[i+5]=rgb[2];
+    }
+    
+    // smooth hue 
+    if(effects[e]===20)
+    {
+        var rgb=changeHue(arr[i+3],arr[i+4],arr[i+5],((Date.now()-startTime)/1000*55)%360);
         arr[i+3]=rgb[0];
         arr[i+4]=rgb[1];
         arr[i+5]=rgb[2];
@@ -238,6 +284,17 @@ array.onValueChanged=function()
 
 
 
+
+
+
+
+
+
+
+
+
+
+    
 
 
 
@@ -247,6 +304,53 @@ array.onValueChanged=function()
             }
 
         }
+        
+
+for(var i=0;i<arr.length;i+=6)
+{
+    var rgb=changeHue(arr[i+3],arr[i+4],arr[i+5],hueIn.get()*360);
+    arr[i+3]=rgb[0];
+    arr[i+4]=rgb[1];
+    arr[i+5]=rgb[2];
+
+
+    if(effects)for(var e=0;e<effects.length;e++)
+    {
+
+
+        
+        
+        // beat flash white
+        if(effects[e]===17)
+        {
+            if(arr[i+3]>0 || arr[i+4]>0 || arr[i+5]>0)
+            {
+                arr[i+3]*=bang;
+                arr[i+4]*=bang;
+                arr[i+5]*=bang;
+            }
+        }
+
+
+
+        // RGB switches...
+        if(effects[e]===21)
+        {
+            arr[i+3]=0;
+        }
+        if(effects[e]===22)
+        {
+            arr[i+4]=0;
+        }
+        if(effects[e]===23)
+        {
+            arr[i+5]=0;
+        }
+        
+    }
+    
+}
+
     
         
         outArray.set(null);
