@@ -134,8 +134,8 @@ var toggleFrame=false;
 exec.onTriggered=function()
 {
     toggleFrame=!toggleFrame;
-    
-    if(currentScene2==0)
+
+    if(currentScene2<=0)
     {
         outScene.set(currentScene);
         return;
@@ -290,50 +290,82 @@ function setScene(note)
     if(useBeat1) 
     {
         beatScenes[0]=convertLaunchPad(note);
-        if(beatNotes[0]==note) beatNotes[0]=0;
-            else beatNotes[0]=note;
+        if(beatNotes[0]==note)
+        {
+            beatNotes[0]=0;
+            beatScenes[0]=0;
+        }
+        else beatNotes[0]=note;
     }
     else if(useBeat2) 
     {
         beatScenes[1]=convertLaunchPad(note);
-        if(beatNotes[1]==note) beatNotes[2]=0
-            else beatNotes[1]=note;
+        if(beatNotes[1]==note) 
+        {
+            beatNotes[1]=0;
+            beatScenes[1]=0;
+        }
+        else beatNotes[1]=note;
     }
     else if(useBeat3) 
     {
         beatScenes[2]=convertLaunchPad(note);
-        if(beatNotes[2]==note) beatNotes[2]=0
-            else beatNotes[2]=note;
+        if(beatNotes[2]==note)
+        {
+            beatNotes[2]=0;
+            beatScenes[2]=0;
+        }
+        else beatNotes[2]=note;
     }
     else if(useBeat4) 
     {
         beatScenes[3]=convertLaunchPad(note);
-        if(beatNotes[3]==note) beatNotes[3]=0
-            else beatNotes[3]=note;
+        if(beatNotes[3]==note)
+        {
+            beatScenes[3]=0;
+            beatNotes[3]=0;
+        }
+        else beatNotes[3]=note;
     }
     else if(useBeat21) 
     {
         beatScenes2[0]=convertLaunchPad(note);
-        if(beatNotes2[0]==note) beatNotes2[0]=0
-            else beatNotes2[0]=note;
+        if(beatNotes2[0]==note) 
+        {
+            beatNotes2[0]=0;
+            beatScenes2[0]=0;
+        }
+        else beatNotes2[0]=note;
     }
     else if(useBeat22) 
     {
         beatScenes2[1]=convertLaunchPad(note);
-        if(beatNotes2[1]==note) beatNotes2[1]=0
-            else beatNotes2[1]=note;
+        if(beatNotes2[1]==note) 
+        {
+            beatNotes2[1]=0;
+            beatScenes2[1]=0;
+        }
+        else beatNotes2[1]=note;
     }
     else if(useBeat23) 
     {
         beatScenes2[2]=convertLaunchPad(note);
-        if(beatNotes2[2]==note) beatNotes2[2]=0
-            else beatNotes2[2]=note;
+        if(beatNotes2[2]==note) 
+        {
+            beatNotes2[2]=0;
+            beatScenes2[2]=0;
+        }
+        else beatNotes2[2]=note;
     }
     else if(useBeat24) 
     {
         beatScenes2[3]=convertLaunchPad(note);
-        if(beatNotes2[3]==note) beatNotes2[3]=0
-            else beatNotes2[3]=note;
+        if(beatNotes2[3]==note) 
+        {
+            beatNotes2[3]=0;
+            beatScenes2[3]=0;
+        }
+        else beatNotes2[3]=note;
     }
     else
     {

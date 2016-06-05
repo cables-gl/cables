@@ -163,11 +163,11 @@ array.onValueChanged=function()
     // scale axis...
     if(effects[e]===8)
     {
-        arr[i+0]*=bang;
+        arr[i+0]*=(bang+0.1);
     }
     if(effects[e]===9)
     {
-        arr[i+1]*=bang;
+        arr[i+1]*=(bang+0.1);
     }
 
 
