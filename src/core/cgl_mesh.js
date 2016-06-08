@@ -542,6 +542,25 @@ CGL.Geometry=function()
         this.vertexNormals.length=0;
     };
 
+    this.setPointVertices=function(verts)
+    {
+        if(verts.length%3!==0)
+        {
+            console.err('CGL MESH : SetPointVertices: Array must be multiple of three.');
+            return;
+        }
+        this.vertices=verts;
+        this.texCoords.length=verts.length/3*2;
+        this.verticesIndices.length=verts.length/3;
+
+        for(i=0;i<verts.length/3;i++)
+        {
+            this.verticesIndices[i]=i;
+            this.texCoords[i*2]=0;
+            this.texCoords[i*2+1]=0;
+        }
+    };
+
     this.addFace=function(a,b,c)
     {
         var face=[-1,-1,-1];
