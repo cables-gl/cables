@@ -61,3 +61,19 @@ To **connect a cable to another port** press and drag with the right mouse butto
 
 
 <iframe src="//giphy.com/embed/3o6gDWnaz1opw3S5d6" width="480" height="324" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+
+
+To bring some ordern into your patch you can **align ops** by making a selection with your mouse and pressing `a` to horizontally align or `shift + a` to vertically align.   
+
+
+
+<iframe src="//giphy.com/embed/l41Ys6dpyR5LfgaiI" width="480" height="559" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+
+
+To **unlink an op** hold it with the left mouse button and shake it.  
+
+
+
+<iframe src="//giphy.com/embed/RGNPLCLnDU3uw" width="480" height="408" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
