@@ -50,7 +50,7 @@ To **access an op’s documentation** first select the op, then scroll down in t
 
 
 
-To **delete a cable** just press the right mouse button on one of the connected ports.
+To **delete a cable** just press the `right mouse button` on one of the connected ports.
 
 
 
@@ -60,7 +60,7 @@ To **delete a cable** just press the right mouse button on one of the connected 
 
 
 
-To **connect a cable to another port** press and drag with the right mouse button.
+To **connect a cable to another port** press and drag with the `right mouse button`.
 
 
 
@@ -70,7 +70,7 @@ To **connect a cable to another port** press and drag with the right mouse butto
 
 
 
-**Ops can be duplicated** by making a selection with your left mouse button, pressing `cmd + c` to copy, followed by `cmd + v` to paste.  
+**Ops can be duplicated** by making a selection with your `left mouse button`, pressing `cmd + c` to copy, followed by `cmd + v` to paste.  
 
 
 
@@ -80,7 +80,7 @@ To **connect a cable to another port** press and drag with the right mouse butto
 
 
 
-To bring some ordern into your patch you can **align ops** by making a selection with your mouse and pressing `a` to horizontally align or `shift + a` to vertically align.   
+To bring some ordern into your patch you can **align ops** by making a selection with your `left mouse button` and pressing `a` to horizontally align or `shift + a` to vertically align.   
 
 
 
@@ -90,7 +90,7 @@ To bring some ordern into your patch you can **align ops** by making a selection
 
 
 
-To **unlink an op** hold it with the left mouse button and shake it.  
+To **unlink an op** hold it with the `left mouse button` and shake it.  
 
 
 
