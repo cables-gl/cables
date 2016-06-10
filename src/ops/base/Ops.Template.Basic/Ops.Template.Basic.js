@@ -6,6 +6,7 @@ var execute = op.addInPort( new Port(this, "Execute", OP_PORT_TYPE_FUNCTION) );
 var number1 = op.addInPort( new Port(op, "Number 1", OP_PORT_TYPE_VALUE) );
 var number2 = op.addInPort( new Port(op, "Number 2", OP_PORT_TYPE_VALUE) );
 // Output ports
+var next = op.addOutPort( new Port(this, "Next", OP_PORT_TYPE_FUNCTION) );
 var result = op.addOutPort( new Port(op, "Result", OP_PORT_TYPE_VALUE) );
 
 // Define callback functions when the value of the input ports changed
@@ -29,4 +30,6 @@ function update() {
     var a = number1.get() * number2.get(); // do something here
     // Write result to output port
     result.set(a);
+    // Trigger the next op, which is connected to this one
+    next.trigger();
 }
