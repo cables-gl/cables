@@ -16,19 +16,15 @@ When you press `Enter` the selected op will be added to the editor.
 
 To **add another op and connect it** to the one we just added you can now drag out a cable from one of the ports.  
 
-<iframe src="//giphy.com/embed/xT8qB0Qwvw4zKUBTEs" width="480" height="428" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-
-<br />
-
-
-
-To **add an op in between two ops** just press the circle in the middle of the cable (one of the existing ops must be highlighted for this).  
-
 <iframe src="//giphy.com/embed/l46CCKKHJCVp3qelO" width="480" height="392" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 <br />
 
+To **add an op in between two ops** just press the circle in the middle of the cable (one of the existing ops must be highlighted for this).  
 
+<iframe src="//giphy.com/embed/xT8qB0Qwvw4zKUBTEs" width="480" height="428" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<br />
 
 To **change one of the op-parameters** first select the op by clicking on it, the you will the the op-settings in the pane on the right. To change one of the number value inputs click and drag up or down.
 
