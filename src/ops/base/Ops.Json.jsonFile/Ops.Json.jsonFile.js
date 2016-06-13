@@ -9,7 +9,7 @@ var patch=op.patch;
 var loadingId=0;
 var reload=function()
 {
-    loadingId=patch.loading.start('json3dFile',''+filename.get());
+    loadingId=patch.loading.start('jsonFile',''+filename.get());
 
     CABLES.ajax(
         patch.getFilePath(filename.get()),
