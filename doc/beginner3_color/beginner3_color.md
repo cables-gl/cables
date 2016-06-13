@@ -16,8 +16,8 @@ To change color and texture of things you can use materials.
 
 ![](img/beginner_upload.png)
 
-- Create an `Ops.Gl.Texture`-op and connect it to your material (to the first green texture port)
-- The new texture op has a `file` input. click the file icon next to it to select an image.
+- Create an `Ops.Gl.Texture`-op and connect it to your material (to the first purple texture port)
+- The new texture op has a `file` input. Click the file icon next to it and select the uploaded image.
 
 It should look like this now:  
 

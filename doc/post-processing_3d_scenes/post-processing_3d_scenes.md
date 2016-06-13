@@ -1,7 +1,7 @@
 
 # Post-Processing 3D Scenes
 
-You can find the finished patch here: [postprocessing](https://cables.undev.de/p/5645f59a9a013fa25927562a).
+You can find the finished patch here: [postprocessing](https://cables.gl/p/5645f59a9a013fa25927562a).
 
 ![](img/example_postproc.jpg)
 ![](img/example_postproc2.png)
@@ -25,10 +25,10 @@ Resulting texture:
 ## Step 3
 
 - Compose a new image:
-    - Set a background color
-    - Draw the image from step 1
-    - Draw the blurred image from step 2 using `blendmode`: `add`
-    - Apply effects like `Noise` and `ChromaticAbbreviation`
+  - Set a background color
+  - Draw the image from step 1
+  - Draw the blurred image from step 2 using `blendmode`: `add`
+  - Apply effects like `Noise` and `ChromaticAbbreviation`
 
 
 Resulting texture:  
