@@ -401,10 +401,11 @@ CABLES.Patch = function(cfg)
         return false;
     };
 
-    this.deSerialize=function(obj)
+    this.deSerialize=function(obj,genIds)
     {
         var loadingId=this.loading.start('core','deserialize');
         if(this.onLoadStart)this.onLoadStart();
+
 
         if (typeof obj === "string") obj=JSON.parse(obj);
         var self=this;
@@ -432,6 +433,7 @@ CABLES.Patch = function(cfg)
             var op=this.addOp(obj.ops[iop].objName,obj.ops[iop].uiAttribs);
             if(!op)continue;
             op.id=obj.ops[iop].id;
+            if(genIds) op.id=generateUUID();
 
             for(var ipi in obj.ops[iop].portsIn)
             {
@@ -484,12 +486,11 @@ CABLES.Patch = function(cfg)
         }
 
         // console.log('create uuids ');
-
-        for(var i in this.ops)
-        {
-            if(this.ops[i].onLoaded)this.ops[i].onLoaded();
-            this.ops[i].id=generateUUID();
-        }
+        // for(var i in this.ops)
+        // {
+        //     if(this.ops[i].onLoaded)this.ops[i].onLoaded();
+        //     this.ops[i].id=generateUUID();
+        // }
 
         this.loading.finished(loadingId);
 
