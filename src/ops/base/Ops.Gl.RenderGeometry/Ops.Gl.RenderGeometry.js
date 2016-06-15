@@ -19,6 +19,6 @@ render.onTriggered=function()
 
 geometry.onValueChanged=function()
 {
-    mesh=new CGL.Mesh(op.patch.cgl,geometry.get());
+    if(geometry.get()) mesh=new CGL.Mesh(op.patch.cgl,geometry.get());
 };
 

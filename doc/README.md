@@ -30,9 +30,10 @@
 This is the config-file for the gitbook-documentation, where e.g. plugins are loaded.  
 Make sure to have a newline on the end!
 
-## Images 
+## GIFs / Screencaptures
 
 - Gifs can be recorded e.g. with the free tool `GifGrabber`
+- Keyboard Shortcuts can be shown with [keycastr](https://github.com/keycastr/keycastr)
 
 ## Exporting PDF / Epub
 
