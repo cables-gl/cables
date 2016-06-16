@@ -485,12 +485,11 @@ CABLES.Patch = function(cfg)
             }
         }
 
-        // console.log('create uuids ');
-        // for(var i in this.ops)
-        // {
-        //     if(this.ops[i].onLoaded)this.ops[i].onLoaded();
-        //     this.ops[i].id=generateUUID();
-        // }
+        for(var i in this.ops)
+        {
+            if(this.ops[i].onLoaded)this.ops[i].onLoaded();
+            // this.ops[i].id=generateUUID();
+        }
 
         this.loading.finished(loadingId);
 
