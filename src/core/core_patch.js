@@ -305,6 +305,7 @@ CABLES.Patch = function(cfg)
         var arr=[];
         for(var i in this.ops)
         {
+            console.log(this.ops[i].name);
             if(this.ops[i].name==name)arr.push(this.ops[i]);
         }
         return arr;
