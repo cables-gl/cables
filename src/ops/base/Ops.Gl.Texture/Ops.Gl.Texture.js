@@ -28,6 +28,7 @@ var setTempTexture=function()
 
 this.onLoaded=function()
 {
+    console.log('onloaded texture!!!');
     opInstanced=true;
     reload();
 };
@@ -65,6 +66,7 @@ var reload=function(nocache)
         });
         textureOut.set(null);
         textureOut.set(tex);
+        console.log(tex);
     }
     else
     {
