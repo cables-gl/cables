@@ -9,16 +9,23 @@ var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
 
 var cgl=op.patch.cgl;
 var appKey="Nt8KwM";
-shaderId.set('ldtGDr');
+shaderId.set('lsGSDG');
 shaderOut.ignoreValueSerialize=true;
 shaderId.onValueChanged=setId;
+var uniTime=null;
+var startTime=Date.now();
 setId();
 
 render.onTriggered=function()
 {
-    cgl.setShader(shader);
-    trigger.trigger();
-    cgl.setPreviousShader();
+    if(shader && uniTime)
+    {
+        uniTime.setValue( (Date.now()-startTime)/1000);
+        cgl.setShader(shader);
+        trigger.trigger();
+        cgl.setPreviousShader();
+
+    }
 };
 
 var shader=null;
@@ -55,7 +62,7 @@ function setId()
                 .endl()+'precision highp float;'
                 .endl()+'varying vec2 texCoord;'
                 
-                .endl()+'float iGlobalTime=1.0;'
+                .endl()+'uniform float iGlobalTime;'
                 .endl()+'vec2 iResolution=vec2(111.0,111.0);'
                 .endl();
                 code+=data.Shader.renderpass[0].code;
@@ -69,7 +76,7 @@ function setId()
                 .endl();
 
                 shader=new CGL.Shader(cgl,'ShaderToyMaterial');
-
+                uniTime=new CGL.Uniform(shader,'f','iGlobalTime',0);
                 shader.setSource(vertCode,code);
                 shader.compile();
                 shaderOut.set(shader);
