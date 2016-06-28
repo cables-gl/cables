@@ -36,7 +36,6 @@ play.onValueChanged=function()
 {
     if(play.get()) videoElement.play();
         else  videoElement.pause();
-
 };
 
 speed.onValueChanged=function()
