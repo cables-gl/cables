@@ -1,5 +1,7 @@
 op.name='VideoTexture';
 
+// webcam op: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 
 var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
@@ -28,7 +30,7 @@ function startVideo()
   videoElement.play();
   videoElement.muted = true;
   videoElement.loop = true;
-  if(!intervalID)intervalID = setInterval(updateTexture, 15);
+  if(!intervalID)intervalID = setInterval(updateTexture, 30);
 
 }
 

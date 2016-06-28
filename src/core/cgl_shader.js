@@ -609,7 +609,11 @@ CGL.Shader=function(_cgl,_name)
 
             htmlWarning=infoLog+'<br/>'+htmlWarning+'<br/><br/>';
 
-            CABLES.UI.MODAL.showError('shader error '+name,htmlWarning);
+            if(CABLES.UI) CABLES.UI.MODAL.showError('shader error '+name,htmlWarning);
+            else
+            {
+                console.log('shader error '+name,htmlWarning);
+            }
 
             htmlWarning+='</div>';
 

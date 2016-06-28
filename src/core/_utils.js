@@ -56,7 +56,6 @@ function ajaxRequest(url, callback)
 
 CABLES=CABLES || {};
 
-
 CABLES.DateNow=performance.now || Date.now; // todo: still used??
 
 CABLES.ajaxSync=function(url,cb,method,post,contenttype)
@@ -74,6 +73,7 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
     var requestTimeout,xhr;
     try{ xhr = new XMLHttpRequest(); }catch(e){}
 
+
     // requestTimeout = setTimeout(function() {xhr.abort(); cb(new Error("tinyxhr: aborted by a timeout"), "",xhr); }, 30000);
     xhr.onreadystatechange = function()
     {
@@ -84,6 +84,18 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
         cb(false, xhr.responseText,xhr);
 
     };
+
+    xhr.addEventListener("progress", function(ev)
+    {
+        console.log('progress',ev.loaded/1024);
+        if (ev.lengthComputable)
+        {
+            var percentComplete = ev.loaded / ev.total;
+            console.log(url,percentComplete);
+        }
+    });
+
+
     xhr.open(method?method.toUpperCase():"GET", url, asynch);
 
     if(!post) xhr.send();

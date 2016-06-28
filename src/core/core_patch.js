@@ -116,22 +116,18 @@ CABLES.Patch = function(cfg)
                 else if(parts.length==9) op=new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this,objName);
                 else if(parts.length==10)op=new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this,objName);
                 else console.log('parts.length',parts.length);
-
             }
         }
         catch(e)
         {
-            // if(CABLES.UI)
-            // {
-            //     CABLES.UI.MODAL.showException(e,op);
-            // }
-
             console.error('!instancing error '+objName,e);
+
             if(CABLES.UI)
             {
-                // gui.serverOps.showOpInstancingError(objName,e);
                 CABLES.UI.MODAL.showException(e,op);
             }
+            else if(CABLES.api) CABLES.api.sendErrorReport(e);
+
             return;
         }
         if(op)
