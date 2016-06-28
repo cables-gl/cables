@@ -1,7 +1,11 @@
 op.name="MetroFunctions";
 
 var points=this.addInPort(new Port(this,"elevationPoints",OP_PORT_TYPE_ARRAY));
+
 points.ignoreValueSerialize=true;
+
+var pointsLowres=this.addInPort(new Port(this,"points lowres",OP_PORT_TYPE_ARRAY));
+pointsLowres.ignoreValueSerialize=true;
 
 window.METROPOLIS=window.METROPOLIS||{};
 
@@ -15,93 +19,158 @@ window.METROPOLIS.elevationLoaded=false;
 window.METROPOLIS.centerLat=(window.METROPOLIS.maxLat-window.METROPOLIS.minLat)/2;
 window.METROPOLIS.centerLon=(window.METROPOLIS.maxLon-window.METROPOLIS.minLon)/2;
 
-var maxLat=-9999;
-var maxLon=-9999;
-var minLat=9999;
-var minLon=9999;
 
-var stepLat;
-var stepLon;
-
-var elevations=[];
-
-var mapResLat=29;
-var mapResLon=48; // make this bigger to find optimum index size...
-
-points.onValueChanged=function()
+var heightMapData=function(p,mapResLat,mapResLon)
 {
+    var data=
+        {
+            maxLat:-9999,
+            maxLon:-9999,
+            minLat:9999,
+            minLon:9999,
+            stepLat:0,
+            stepLon:0,
+            mapResLon:mapResLon,
+            mapResLat:mapResLat,
+            elevations:[]
+        };
 
-    var p=points.get();
     if(p && p.length>0)
     {
-        console.log(p);
-        
         for(var i in p)
         {
-            maxLat=Math.max(maxLat,p[i][0]);
-            minLat=Math.min(minLat,p[i][0]);
-        
-            maxLon=Math.max(maxLon,p[i][1]);
-            minLon=Math.min(minLon,p[i][1]);
+            data.maxLat=Math.max(data.maxLat,p[i][0]);
+            data.minLat=Math.min(data.minLat,p[i][0]);
+
+            data.maxLon=Math.max(data.maxLon,p[i][1]);
+            data.minLon=Math.min(data.minLon,p[i][1]);
         }
-        
-        console.log(maxLat,minLat);
-    
-        stepLat=(maxLat-minLat)/mapResLat;
-        stepLon=(maxLon-minLon)/mapResLon;
-        stepLon=Math.abs(stepLon);
-        console.log("stepLon",stepLon);
-    
-    
-        elevations.length=mapResLon*mapResLat;
-    
+
+        data.stepLat=(data.maxLat-data.minLat)/mapResLat;
+        data.stepLon=(data.maxLon-data.minLon)/mapResLon;
+        data.stepLon=Math.abs(data.stepLon);
+        // console.log("stepLon",data.stepLon);
+
+        data.elevations.length=mapResLon*mapResLat;
+
         var count=0;
         var countLon=0;
         var lastIndex=0;
         var lastIndexLon=0;
-    
+
         for(var i in p)
         {
-            var vl=p[i][0]-minLat;
-            var vlo=p[i][1]-minLon;
-            var index=Math.round(vl/stepLat);
-            var indexLon=Math.round(vlo/stepLon);
-            
-            if(index!=lastIndex)count++;
+            var vl=p[i][0]-data.minLat;
+            var vlo=p[i][1]-data.minLon;
+            var index=Math.round(vl/data.stepLat);
+            var indexLon=Math.round(vlo/data.stepLon);
+
+            if(index!=lastIndex) count++;
             lastIndex=index;
-    
-            // console.log(indexLon);
-    
-            elevations[index+mapResLon*indexLon]=p[i][2];
-            
+
+            data.elevations[index+mapResLon*indexLon]=p[i][2];
         }
+
         console.log('num indizes lat: ',count);
         console.log('num indizes lon: ',p.length/count);
-        
-        window.METROPOLIS.elevationLoaded=true;
-
     }
-
+    
+    return data;
 };
 
 
+var loadedLowres=false;
+var loadedHires=false;
+var hires=null;
+var lowres=null;
+points.onValueChanged=function()
+{
+    if(points.get())
+    {
+        hires=new heightMapData(points.get(),29,39);
+        setTimeout(function()
+        {
+            loadedHires=true;
+            window.METROPOLIS.elevationLoaded=(loadedLowres && loadedHires);
+            
+            console.log('elevationloaded: ', window.METROPOLIS.elevationLoaded,loadedLowres,loadedHires );
+        },100);
+    }
+};
+
+pointsLowres.onValueChanged=function()
+{
+    if(pointsLowres.get())
+    {
+        lowres=new heightMapData(pointsLowres.get(),16,10);
+        window.METROPOLIS.lowres=lowres;
+        setTimeout(function()
+        {
+            loadedLowres=true;
+            window.METROPOLIS.elevationLoaded=(loadedLowres && loadedHires);
+            console.log('window.METROPOLIS.lowres');
+            console.log(window.METROPOLIS.lowres);
+            console.log('elevationloaded: ', window.METROPOLIS.elevationLoaded,loadedLowres,loadedHires );
+        },100);
+    }
+};
 
 
-
+window.test=[];
+var foundnan=false;
 window.METROPOLIS.latLonCoord=function(lat,lon)
 {
+    var minlat=window.METROPOLIS.minLat;
+    var minlon=window.METROPOLIS.minLon;
     var z=0;
-    var ilat=Math.round((lat-minLat)/stepLat);
-    var ilon=Math.round((lon-minLon)/stepLon);
-    
-    var index=ilat+ilon*mapResLon;
-    if(index<elevations.length)
-        z=elevations[index]*0.3;
+    if(!hires)
+    {
+        console.log('coord request but no coords loaded');
+        var err = new Error();
+        console.log(err.stack);
+    }
+    else
+    {
+        if(lat>hires.minLat && lat<hires.maxLat && lon>hires.minLon && lon<hires.maxLon)
+        {
+            var ilat=Math.round((lat-hires.minLat)/hires.stepLat);
+            var ilon=Math.round((lon-hires.minLon)/hires.stepLon);
 
-    
+            var index=ilat+ilon*hires.mapResLon;
+            if(index<hires.elevations.length)
+            {
+                z=hires.elevations[index]*0.3;
+            }
+        }
+        else 
+        if(lat>lowres.minLat && lat<lowres.maxLat && lon>lowres.minLon && lon<lowres.maxLon )
+        {
+            var ilat=Math.round((lat-lowres.minLat)/lowres.stepLat);
+            var ilon=Math.round((lon-lowres.minLon)/lowres.stepLon);
+            
+            var index=ilat+ilon*lowres.mapResLon;
+            if(index<lowres.elevations.length)
+            {
+                z=lowres.elevations[index]*0.3;
+                // console.log('found lowres point',z);
+                window.test.push(index);
+            }
+        }
+    }
+
+    if(isNaN(z))
+    {
+        if(!foundnan)
+        {
+            console.error("NAN!!!!!!!!!!!!");
+            foundnan=true;
+        }
+        z=0;
+    }
+
     return {
-        "lat":lat-window.METROPOLIS.minLat - window.METROPOLIS.centerLat,
-        "lon":lon-window.METROPOLIS.minLon - window.METROPOLIS.centerLon,
+        "lat":lat-minlat - window.METROPOLIS.centerLat,
+        "lon":lon-minlon - window.METROPOLIS.centerLon,
         "z":z,
     };
 };
