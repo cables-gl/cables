@@ -26,8 +26,10 @@
     this.refresh.onTriggered = function()
     {
         var array =  new Uint8Array(self.analyser.frequencyBinCount);
+        if(!array)return;
         self.analyser.getByteFrequencyData(array);
         
+        if(!fftDataArray)return;
         var values = 0;
         var average;
 

@@ -180,12 +180,12 @@ this.textureSpec.onValueChanged=changeSpec;
 this.textureSpecMatCap.onValueChanged=changeSpec;
 
 
-this.bindTextures=function()
+function bindTextures()
 {
     if(self.texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.texture.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.texture.get().tex);
     }
 
     if(self.textureDiffuse.get())
@@ -216,9 +216,9 @@ this.bindTextures=function()
 
 this.doRender=function()
 {
+    bindTextures();
     cgl.setShader(shader);
-    self.bindTextures();
-
+    
 
     self.trigger.trigger();
     cgl.setPreviousShader();
