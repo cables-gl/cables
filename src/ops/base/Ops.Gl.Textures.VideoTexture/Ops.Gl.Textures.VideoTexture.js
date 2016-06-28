@@ -7,13 +7,14 @@ var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{ display:'bool' } )
 var muted=op.addInPort(new Port(op,"mute",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var speed=op.addInPort(new Port(op,"speed",OP_PORT_TYPE_VALUE ));
 var fps=op.addInPort(new Port(op,"fps",OP_PORT_TYPE_VALUE ));
+var time=op.addInPort(new Port(op,"set time",OP_PORT_TYPE_VALUE ));
 
 
 
 var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var outDuration=op.addOutPort(new Port(op,"duration",OP_PORT_TYPE_VALUE));
 var outProgress=op.addOutPort(new Port(op,"progress",OP_PORT_TYPE_VALUE));
-var outTime=op.addOutPort(new Port(op,"time",OP_PORT_TYPE_VALUE));
+var outTime=op.addOutPort(new Port(op,"CurrentTime",OP_PORT_TYPE_VALUE));
 
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
@@ -25,6 +26,11 @@ var tex=new CGL.Texture(cgl);
 tex.setSize(32,33);
 textureOut.set(tex);
 var timeout=null;
+
+time.onValueChanged=function()
+{
+    videoElement.currentTime=time.get();    
+};
 
 fps.onValueChanged=function()
 {
