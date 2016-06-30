@@ -37,20 +37,31 @@ nColumns.onValueChanged=rebuildGeom;
 
 function rebuildGeom()
 {
-    if(!window.METROPOLIS || !window.METROPOLIS.elevationLoaded)return;
+    if(!window.METROPOLIS || !window.METROPOLIS.elevationLoaded)
+    {
+        console.log('wait for elevation...');
+        return;
+    }
+    console.log('calc elevation heightmap... ',window.METROPOLIS.elevationLoaded);
     var geom=new CGL.Geometry();
-    
+
     var verts=[];
     var tc=[];
     var indices=[];
 
+    var minLat=window.METROPOLIS.minLat-3;
+    var minLon=window.METROPOLIS.minLon-3;
+    var maxLat=window.METROPOLIS.maxLat+3;
+    var maxLon=window.METROPOLIS.maxLon+3;
+
     var count=0;
     var numRows=parseFloat(nRows.get());
     var numColumns=parseFloat(nColumns.get());
-
-    var geoWidth=Math.abs(window.METROPOLIS.maxLat-window.METROPOLIS.minLat);
-    var geoHeight=Math.abs(window.METROPOLIS.maxLon-window.METROPOLIS.minLon);
+    var geoWidth=Math.abs(maxLat-minLat);
+    var geoHeight=Math.abs(maxLon-minLon);
     
+    // console.log(window.METROPOLIS.lowres);
+
     var stepLat=geoWidth/numColumns;
     var stepLon=geoHeight/numRows;
 
@@ -61,17 +72,16 @@ function rebuildGeom()
     {
         for(c=0;c<=numColumns;c++)
         {
-            var lat=window.METROPOLIS.minLat+c*stepLat;
-            var lon=window.METROPOLIS.minLon+r*stepLon;
-            
-            var coord=window.METROPOLIS.latLonCoord(lat,lon);
+            var lat=minLat+c*stepLat;
+            var lon=minLon+r*stepLon;
 
+            var coord=window.METROPOLIS.latLonCoord(lat,lon);
+// console.log('coord',coord);
             verts.push(coord.lat);
             verts.push(coord.lon);
             verts.push(coord.z);
         }
     }
-
 
     for(c=0;c<numColumns;c++)
     {

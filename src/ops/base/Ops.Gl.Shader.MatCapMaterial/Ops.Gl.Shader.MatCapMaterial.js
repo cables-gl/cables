@@ -214,6 +214,8 @@ function bindTextures()
 };
 
 
+
+
 this.doRender=function()
 {
     bindTextures();
@@ -428,7 +430,7 @@ var shader=new CGL.Shader(cgl,'MatCapMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
 
-shader.bindTextures=this.bindTextures;
+shader.bindTextures=bindTextures;
 this.shaderOut.val=shader;
 this.onLoaded=shader.compile;
 shader.setSource(srcVert,srcFrag);

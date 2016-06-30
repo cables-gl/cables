@@ -90,6 +90,7 @@ var reload=function()
             catch(e)
             {
                 self.uiAttr({'error':'error loading json'});
+                console.log(e.stack);
             }
         });
 

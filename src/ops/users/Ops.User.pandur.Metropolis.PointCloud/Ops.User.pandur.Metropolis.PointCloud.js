@@ -15,6 +15,10 @@ var meshes=[];
 var cycle=0;
 render.onTriggered=function()
 {
+    if(meshes.lenggth==0)
+    {
+        create();
+    }
     for(var i=0;i<meshes.length;i++)
         meshes[i].render(cgl.getShader());
     
@@ -41,7 +45,6 @@ function createMesh(arr,start,end)
         var ind=i-start;
         var coord=window.METROPOLIS.latLonCoord(arr[i][0],arr[i][1]);
         
-
         verts[ind*3+0]=coord.lat;
         verts[ind*3+1]=coord.lon;
 
@@ -74,6 +77,12 @@ function createMesh(arr,start,end)
 
 function create()
 {
+    if(!window.METROPOLIS || !window.METROPOLIS.elevationLoaded)
+    {
+        console.log('wait for elevation...');
+        return;
+    }
+    
     meshes.length=0;
     var arr=points.get();
     var meshMax=20000;
