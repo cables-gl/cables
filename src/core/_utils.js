@@ -87,12 +87,12 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
 
     xhr.addEventListener("progress", function(ev)
     {
-        console.log('progress',ev.loaded/1024);
-        if (ev.lengthComputable)
-        {
-            var percentComplete = ev.loaded / ev.total;
-            console.log(url,percentComplete);
-        }
+        // console.log('progress',ev.loaded/1024);
+        // if (ev.lengthComputable)
+        // {
+        //     var percentComplete = ev.loaded / ev.total;
+        //     console.log(url,percentComplete);
+        // }
     });
 
 
