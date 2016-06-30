@@ -13,7 +13,7 @@ var videoElement=document.createElement('video');
 var intervalID=null;
 
 var tex=new CGL.Texture(cgl);
-tex.setSize(1280,720);
+tex.setSize(9,9);
 textureOut.set(tex);
 
 fps.onValueChanged=function()
@@ -22,7 +22,6 @@ fps.onValueChanged=function()
     clearTimeout(timeout);
     timeout=setTimeout(updateTexture, 1000/fps.get());
 };
-
 
 function updateTexture()
 {
@@ -37,7 +36,7 @@ function updateTexture()
 
 function startWebcam()
 {
-    var constraints = { audio: false, video: { width: 32, height: 32 } };
+    var constraints = { audio: false, video: true };
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     navigator.getUserMedia(constraints,
         function(stream)
