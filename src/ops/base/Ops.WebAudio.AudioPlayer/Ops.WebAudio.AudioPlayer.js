@@ -9,12 +9,11 @@ var synchronizedPlayer=this.addInPort(new Port(this,"Synchronized Player",OP_POR
 this.volume.val=1.0;
 this.audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
 
-if(!window.audioContext)
-    if('webkitAudioContext' in window) audioContext = new webkitAudioContext();
-        else audioContext = new AudioContext();
+if(!window.audioContext) {
+    audioContext = new AudioContext();
+}
 
-if(!window.audioContext)
-{
+if(!window.audioContext) {
     if(this.patch.config.onError) this.patch.config.onError('sorry, could not initialize WebAudio. Please check if your Browser supports WebAudio');
 }
 

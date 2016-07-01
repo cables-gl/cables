@@ -3,9 +3,9 @@ op.name='VideoTexture';
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 var play=op.addInPort(new Port(op,"play",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
-var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var muted=op.addInPort(new Port(op,"mute",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var speed=op.addInPort(new Port(op,"speed",OP_PORT_TYPE_VALUE ));
+var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var fps=op.addInPort(new Port(op,"fps",OP_PORT_TYPE_VALUE ));
 var time=op.addInPort(new Port(op,"set time",OP_PORT_TYPE_VALUE ));
 
@@ -36,6 +36,7 @@ fps.onValueChanged=function()
 {
     if(fps.get()<0.1)fps.set(1);
     clearTimeout(timeout);
+    timeout=setTimeout(updateTexture, 1000/fps.get());
 };
 
 play.onValueChanged=function()

@@ -22,26 +22,26 @@ font.set('Arial');
 align.set('center');
 valign.set('center');
 
-var canvas = document.createElement('canvas');
-canvas.id = "hiddenCanvas";
-canvas.style.display = "none";
+var fontImage = document.createElement('canvas');
+fontImage.id = "hiddenCanvas";
+fontImage.style.display = "none";
 var body = document.getElementsByTagName("body")[0];
-body.appendChild(canvas);
+body.appendChild(fontImage);
 
-var fontImage = document.getElementById('hiddenCanvas');
+// var fontImage = document.getElementById('hiddenCanvas');
 var ctx = fontImage.getContext('2d');
 
 function reSize()
 {
     textureOut.get().setSize(texWidth.get(),texHeight.get());
-    ctx.canvas.width=canvas.width=texWidth.get();
-    ctx.canvas.height=canvas.height=texHeight.get();
+    ctx.canvas.width=fontImage.width=texWidth.get();
+    ctx.canvas.height=fontImage.height=texHeight.get();
     refresh();
 }
 
 function refresh()
 {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0,0,fontImage.width,fontImage.height);
     ctx.fillStyle = 'white';
     ctx.font = fontSize.get()+'px "'+font.get()+'"';
     ctx.textAlign = align.get();

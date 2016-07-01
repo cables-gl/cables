@@ -4,10 +4,14 @@ var cgl=this.patch.cgl;
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var points=this.addInPort(new Port(this,"points",OP_PORT_TYPE_ARRAY));
+var doCenter=this.addInPort(new Port(this,"center",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 points.ignoreValueSerialize=true;
 
 var meshes=[];
+
+doCenter.onValueChanged=create;
+
 
 var cycle=0;
 render.onTriggered=function()
@@ -66,13 +70,40 @@ function createMesh(arr,start,end)
 
 function create()
 {
-    meshes.length=0;
+    
+    
     var arr=points.get();
+    if(!arr)return;
+    meshes.length=0;
     var meshMax=2000;
+    var i=0;
+    
+    if(doCenter.get())
+    {
+        var avgX=0;
+        var avgY=0;
+        var avgZ=0;
+        
+        for(i=0;i<arr.length;i++)
+        {
+            avgX=(avgX+arr[i][0])/2;
+            avgY=(avgY+arr[i][1])/2;
+            avgZ=(avgZ+arr[i][2])/2;
+        }
+
+        for(i=0;i<arr.length;i++)
+        {
+            arr[i][0]-=avgX;
+            arr[i][1]-=avgY;
+            arr[i][2]-=avgZ;
+        }
+        
+    }
+    
     if(arr)
     {
         var count=0;
-        for(var i=0;i<arr.length;i+=meshMax)
+        for(i=0;i<arr.length;i+=meshMax)
         {
             meshes.push(createMesh(arr,i,Math.min(arr.length,i+meshMax)));
         }

@@ -1,5 +1,5 @@
 
-this.name="Ops.user.tim.WebAudio.Gain";
+this.name="Gain";
 
 var audioIn=this.addInPort(new Port(this,"audio in",OP_PORT_TYPE_OBJECT));
 var gain=this.addInPort(new Port(this,"gain",OP_PORT_TYPE_VALUE));
