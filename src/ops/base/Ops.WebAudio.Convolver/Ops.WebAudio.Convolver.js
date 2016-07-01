@@ -1,4 +1,4 @@
-this.name="Ops.WebAudio.Convolver";
+this.name="Convolver";
 var op = this;
 
 if(!window.audioContext){ audioContext = new AudioContext(); }

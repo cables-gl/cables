@@ -49,10 +49,10 @@ function rebuildGeom()
     var tc=[];
     var indices=[];
 
-    var minLat=window.METROPOLIS.minLat-3;
-    var minLon=window.METROPOLIS.minLon-3;
-    var maxLat=window.METROPOLIS.maxLat+3;
-    var maxLon=window.METROPOLIS.maxLon+3;
+    var minLat=window.METROPOLIS.minLat;
+    var minLon=window.METROPOLIS.minLon;
+    var maxLat=window.METROPOLIS.maxLat;
+    var maxLon=window.METROPOLIS.maxLon;
 
     var count=0;
     var numRows=parseFloat(nRows.get());
