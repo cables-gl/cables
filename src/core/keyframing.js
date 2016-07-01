@@ -314,6 +314,7 @@ CABLES.TL.Anim=function(cfg)
     this.loop=false;
     this.defaultEasing=CABLES.TL.EASING_LINEAR;
     var needsSort=false;
+    this.onLooped=null;
 
     this.hasEnded=function(time)
     {
@@ -423,6 +424,7 @@ CABLES.TL.Anim=function(cfg)
 
         if(this.loop && time>this.keys[this.keys.length-1].time)
         {
+            if(this.onLooped)this.onLooped();
             time=(time-this.keys[0].time)%(this.keys[this.keys.length-1].time-this.keys[0].time);
             time+=this.keys[0].time;
         }

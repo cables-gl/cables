@@ -15,6 +15,7 @@ var intervalID=null;
 var tex=new CGL.Texture(cgl);
 tex.setSize(9,9);
 textureOut.set(tex);
+var timeout=null;
 
 fps.onValueChanged=function()
 {

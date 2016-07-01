@@ -12,6 +12,8 @@ this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 this.extrude=this.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 
+var flip=this.addInPort(new Port(this,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
+
 var invert=this.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool'}));
 invert.onValueChange(function()
 {
@@ -24,10 +26,15 @@ this.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(self.e
 
 var meth=this.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
     values:['mul xyz','add z','add y','sub z']}));
+    
+
 var updateMethod=function()
 {
     if(shader)
     {
+        if(flip.get()) shader.define('FLIPY');
+            else shader.removeDefine('FLIPY');
+            
         shader.removeDefine('DISPLACE_METH_MULXYZ');
         shader.removeDefine('DISPLACE_METH_ADDZ');
         shader.removeDefine('DISPLACE_METH_ADDY');
@@ -38,6 +45,7 @@ var updateMethod=function()
     }
 };
 
+flip.onValueChange(updateMethod);
 meth.onValueChange(updateMethod);
 meth.set('mul xyz');
 
@@ -50,7 +58,16 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, texCoord ).b;'
+
+
+
+    .endl()+'vec2 tc=texCoord;'
+    .endl()+'#ifdef FLIPY'
+    .endl()+'    tc.y=1.0-tc.y;'
+    .endl()+'#endif'
+
+
+    .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, tc ).b;'
 
     .endl()+'#ifdef HEIGHTMAP_INVERT'
     .endl()+'{{mod}}_texVal=1.0-{{mod}}_texVal;'
