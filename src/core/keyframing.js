@@ -424,13 +424,17 @@ CABLES.TL.Anim=function(cfg)
 
         if(this.loop && time>this.keys[this.keys.length-1].time)
         {
-            if(this.onLooped)this.onLooped();
+
             time=(time-this.keys[0].time)%(this.keys[this.keys.length-1].time-this.keys[0].time);
             time+=this.keys[0].time;
         }
 
         var index=this.getKeyIndex(time);
-        if(index>=this.keys.length-1)return this.keys[this.keys.length-1].value;
+        if(index>=this.keys.length-1)
+        {
+            if(this.onLooped)this.onLooped();
+            return this.keys[this.keys.length-1].value;
+        }
         var index2=parseInt(index,10)+1;
         var key1=this.keys[index];
         var key2=this.keys[index2];
