@@ -83,16 +83,12 @@ function refresh()
                 ctx.font = fontSize+'px "'+font.get()+'"';
                 maxWidth=0;
                 maxHeight=strings.length*fontSize*1.1;
-                
-
                 for(i=0;i<strings.length;i++)
                 {
                     maxWidth=Math.max(maxWidth,ctx.measureText(strings[i]).width);
                 }
-
             }
             while(maxWidth>ctx.canvas.width || maxHeight>ctx.canvas.height);
-            console.log(count,maxHeight);
         }
 
         if(valign.get()=='center') 
@@ -110,6 +106,8 @@ function refresh()
             if(align.get()=='right') ctx.fillText(strings[i], ctx.canvas.width, posy);
             posy+=fontSize+parseFloat(lineDistance.get());
         }
+        
+        
     }
 
     ctx.restore();
