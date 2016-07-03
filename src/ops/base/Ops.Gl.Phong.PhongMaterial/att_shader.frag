@@ -92,7 +92,7 @@ void main()
             vec3 lightColor = lights[l].color;
 
             #ifndef HAS_TEXTURE_NORMAL
-                vec3 normal = normalize(normalMatrix * vec4(norm,1.0)).xyz;
+                vec3 normal = normalize(mat3(normalMatrix) * norm);
             #endif
 
             #ifdef HAS_TEXTURE_NORMAL
@@ -161,7 +161,7 @@ void main()
                 // shadows...
                 vec4 shadowCoord = lights[l].depthMVP * vec4(vert,1.0);
                 //float s=texture2D( depthTex, shadowCoord.xy  ).z;
-	float s=1.0;
+                float s=1.0;
 
                 float f=100.0;
                 float n=0.1;
