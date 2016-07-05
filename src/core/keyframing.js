@@ -426,7 +426,7 @@ CABLES.TL.Anim=function(cfg)
         {
             time=(time-this.keys[0].time)%(this.keys[this.keys.length-1].time-this.keys[0].time);
             time+=this.keys[0].time;
-            if(this.onLooped)this.onLooped();
+            // if(this.onLooped)this.onLooped();
         }
 
         var index=this.getKeyIndex(time);
