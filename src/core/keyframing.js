@@ -309,6 +309,7 @@ CABLES.TL.Key=function(obj)
 CABLES.TL.Anim=function(cfg)
 {
     this.keys=[];
+    var timesLooped=0;
     this.onChange=null;
     this.stayInTimeline=false;
     this.loop=false;
@@ -424,6 +425,12 @@ CABLES.TL.Anim=function(cfg)
 
         if(this.loop && time>this.keys[this.keys.length-1].time)
         {
+            var currentLoop=time/this.keys[this.keys.length-1].time;
+            if(currentLoop>timesLooped)
+            {
+                timesLooped++;
+                if(this.onLooped)this.onLooped();
+            }
             time=(time-this.keys[0].time)%(this.keys[this.keys.length-1].time-this.keys[0].time);
             time+=this.keys[0].time;
             // if(this.onLooped)this.onLooped();
@@ -432,7 +439,7 @@ CABLES.TL.Anim=function(cfg)
         var index=this.getKeyIndex(time);
         if(index>=this.keys.length-1)
         {
-            if(this.onLooped)this.onLooped();
+
             return this.keys[this.keys.length-1].value;
         }
         var index2=parseInt(index,10)+1;
