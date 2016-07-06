@@ -10,16 +10,23 @@ var anim=new CABLES.TL.Anim();
 anim.setValue(1, 1);
 anim.setValue(2, 2);
 anim.loop=true;
+anim.onLooped=function()
+{
+    trigger.trigger();
+};
 
 delay.set(0);
 delay.onValueChanged=setAnim;
 interval.onValueChanged=setAnim;
 interval.set(1);
 
+
 window.performance = (window.performance || {
     offset: Date.now(),
     now: function now(){ return Date.now() - this.offset; }
 });
+
+var startTime=performance.now();
 
 function setAnim()
 {
@@ -32,11 +39,10 @@ function setAnim()
 
 exe.onTriggered=function()
 {
-    percent.set( anim.getValue( performance.now()/1000 ) );
+    var now=(performance.now()-startTime)/1000;
+    var perc=anim.getValue(now);
+
+    percent.set( perc );
     
-    anim.onLooped=function()
-    {
-        trigger.trigger();
-    };
 
 };

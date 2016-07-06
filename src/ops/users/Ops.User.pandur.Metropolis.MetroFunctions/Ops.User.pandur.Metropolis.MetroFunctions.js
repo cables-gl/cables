@@ -2,19 +2,51 @@ op.name="MetroFunctions";
 
 var points=this.addInPort(new Port(this,"elevationPoints",OP_PORT_TYPE_ARRAY));
 var pointsLowres=this.addInPort(new Port(this,"points lowres",OP_PORT_TYPE_ARRAY));
+var outBigBoundsLat=this.addOutPort(new Port(this,"boundsLat",OP_PORT_TYPE_VALUE));
+var outBigBoundsLon=this.addOutPort(new Port(this,"boundsLon",OP_PORT_TYPE_VALUE));
+var outBigBoundsLatEnd=this.addOutPort(new Port(this,"boundsLat End",OP_PORT_TYPE_VALUE));
+var outBigBoundsLonEnd=this.addOutPort(new Port(this,"boundsLon End",OP_PORT_TYPE_VALUE));
+var outBigBoundsWidth=this.addOutPort(new Port(this,"boundsLon width",OP_PORT_TYPE_VALUE));
+var outBigBoundsHeight=this.addOutPort(new Port(this,"boundsLon height",OP_PORT_TYPE_VALUE));
 
 pointsLowres.ignoreValueSerialize=true;
 points.ignoreValueSerialize=true;
 
 window.METROPOLIS=window.METROPOLIS||{};
-window.METROPOLIS.maxLat=34.475449999999974;
-window.METROPOLIS.maxLon=-117.17766399999971;
-window.METROPOLIS.minLat=33.31545;
-window.METROPOLIS.minLon=-119.017664;
+window.METROPOLIS.maxLat=47.8068588915575;
+window.METROPOLIS.maxLon=-133.091054051991;
+window.METROPOLIS.minLat=29.3426216844294;
+window.METROPOLIS.minLon=-98.3337189965568;
 window.METROPOLIS.elevationLoaded=false;
+
+
+
+var coord={};//window.METROPOLIS.latLonCoord(lat.get(),lon.get());
+
+// var latSize2=Math.abs(Math.abs(window.METROPOLIS.maxLat)-Math.abs(window.METROPOLIS.minLat))/2;
+// var lonSize2=Math.abs((Math.abs(window.METROPOLIS.maxLon)-Math.abs(window.METROPOLIS.minLon)))/2;
+
+
+var latSize=( Math.abs(window.METROPOLIS.maxLat)-Math.abs(window.METROPOLIS.minLat));
+var lonSize=Math.abs(Math.abs(window.METROPOLIS.maxLon)-Math.abs(window.METROPOLIS.minLon));
+
+coord.lat=0;
+coord.lon=0;
 
 window.METROPOLIS.centerLat=(window.METROPOLIS.maxLat-window.METROPOLIS.minLat)/2;
 window.METROPOLIS.centerLon=(window.METROPOLIS.maxLon-window.METROPOLIS.minLon)/2;
+
+
+outBigBoundsLon.set( -137.012813589663);
+outBigBoundsLat.set( 42.5405387074109);
+
+outBigBoundsLonEnd.set( -102.591308916431);
+outBigBoundsLatEnd.set( 30.5184651206115);
+
+outBigBoundsWidth.set(Math.abs(outBigBoundsLatEnd.get()-outBigBoundsLat.get()));
+outBigBoundsHeight.set(Math.abs(outBigBoundsLonEnd.get()-outBigBoundsLon.get()));
+
+
 
 var heightMapData=function(p,mapResLat,mapResLon, flip)
 {
@@ -126,9 +158,7 @@ pointsLowres.onValueChanged=function()
         //         // sortele[x+(20-y)*20]=lowres.elevations[x+y*20];
         //     }
         // }
-// lowres.elevations=sortele;
-
-
+        // lowres.elevations=sortele;
 
         window.METROPOLIS.lowres=lowres;
         setTimeout(function()
@@ -145,6 +175,7 @@ pointsLowres.onValueChanged=function()
 
 window.test=[];
 var foundnan=false;
+
 window.METROPOLIS.latLonCoord=function(lat,lon)
 {
     var minlat=window.METROPOLIS.minLat;
@@ -195,11 +226,19 @@ window.METROPOLIS.latLonCoord=function(lat,lon)
         z=-1;
     }
 
-    return {
-        "lat":lat-minlat - window.METROPOLIS.centerLat,
-        "lon":lon-minlon - window.METROPOLIS.centerLon,
-        "z":z,
-    };
+    z=0;
+
+    coord.lon=(lon-window.METROPOLIS.minLon)+lonSize/2;
+    // coord.lon=(lon-window.METROPOLIS.minLon)+lonSize/2-lonSize;
+    coord.lat=(window.METROPOLIS.minLat-lat)+latSize/2;
+    coord.z=z;
+    
+    coord.lat/=10;
+    coord.lon/=10;
+// console.log(coord);
+
+
+    return coord;
 };
 console.log('metro functions!');
 

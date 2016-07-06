@@ -1,20 +1,18 @@
-//https://www.shadertoy.com/view/XdlGz8 ??
-//http://stackoverflow.com/questions/17528878/compute-normals-from-displacement-map-in-three-js-r-58
+var cgl=op.patch.cgl;
 
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
+op.name='VertexNoise';
+op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.name='VertexDisplacementMap';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 
-this.texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
-this.extrude=this.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
+op.extrude=op.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 
-var flip=this.addInPort(new Port(this,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var flip=op.addInPort(new Port(this,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var invert=this.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var removeZero=op.addInPort(new Port(this,"Ignore Zero Values",OP_PORT_TYPE_VALUE,{display:'bool'}));
+
+var invert=op.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool'}));
 invert.onValueChange(function()
 {
     if(shader)
@@ -22,11 +20,20 @@ invert.onValueChange(function()
             else shader.removeDefine('HEIGHTMAP_INVERT');
 });
 
-this.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(self.extrude.val); };
+op.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(op.extrude.val); };
 
-var meth=this.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
+var meth=op.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
     values:['mul xyz','add z','add y','sub z']}));
     
+
+removeZero.onValueChanged=updateRemoveZero;
+
+function updateRemoveZero()
+{
+    if(shader)
+        if(removeZero.get()) shader.define('DISPLACE_METH_ADDZ');
+            else shader.removeDefine('DISPLACE_METH_ADDZ');
+}
 
 var updateMethod=function()
 {
@@ -42,11 +49,13 @@ var updateMethod=function()
         if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
         if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
         if(meth.get()=='add y') shader.define('DISPLACE_METH_ADDY');
+        
+        updateRemoveZero();
     }
 };
 
-flip.onValueChange(updateMethod);
-meth.onValueChange(updateMethod);
+flip.onValueChanged=updateMethod;
+meth.onValueChanged=updateMethod;
 meth.set('mul xyz');
 
 var shader=null;
@@ -93,7 +102,13 @@ var srcHeadFrag=''
 
 var srcBodyFrag=''
     .endl()+'float colHeight=texture2D( {{mod}}_texture, texCoord ).r;'
-    .endl()+'if(colHeight==0.0)col.a=0.0;'
+    .endl()+'col*=texture2D( {{mod}}_texture, texCoord ).r*0.7;'
+    .endl()+'col+=0.3;'
+    // .endl()+'   if(colHeight==0.0) col.a=0.0;'
+    // .endl()+'#ifdef DISPLACE_REMOVE_ZERO'
+    // .endl()+'   if(colHeight==0.0) col.a=0.0;'
+    // .endl()+'if(colHeight==0.0)col.a=0.0;'
+    // .endl()+'#endif'
     .endl();
 
 var module=null;
@@ -107,9 +122,9 @@ function removeModule()
     }
 }
 
-this.render.onLinkChanged=removeModule;
+op.render.onLinkChanged=removeModule;
 
-this.render.onTriggered=function()
+op.render.onTriggered=function()
 {
     if(cgl.getShader()!=shader)
     {
@@ -132,7 +147,7 @@ this.render.onTriggered=function()
             else shader.removeDefine('HEIGHTMAP_INVERT');
 
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
-        uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',self.extrude.val);
+        uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',op.extrude.val);
 
         module=shader.addModule(
             {
@@ -145,11 +160,11 @@ this.render.onTriggered=function()
 
     }
 
-    if(self.texture.val)
+    if(texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE4);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.texture.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
     }
 
-    self.trigger.trigger();
+    op.trigger.trigger();
 };

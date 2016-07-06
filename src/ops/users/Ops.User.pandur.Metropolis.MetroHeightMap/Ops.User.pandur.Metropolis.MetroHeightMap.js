@@ -39,7 +39,7 @@ function rebuildGeom()
 {
     if(!window.METROPOLIS || !window.METROPOLIS.elevationLoaded)
     {
-        console.log('wait for elevation...');
+        // console.log('wait for elevation...');
         return;
     }
     console.log('calc elevation heightmap... ',window.METROPOLIS.elevationLoaded);

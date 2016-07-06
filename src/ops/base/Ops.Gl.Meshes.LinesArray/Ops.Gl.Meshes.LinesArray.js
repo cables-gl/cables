@@ -19,8 +19,8 @@ pivotY.set('center');
 width.set(1.0);
 height.set(1.0);
 
-nRows.set(1);
-nColumns.set(1);
+nRows.set(10);
+nColumns.set(10);
 
 var meshes=[];
 
@@ -37,7 +37,7 @@ render.onTriggered=function()
 {
     var shader=cgl.getShader();
     var oldPrim=shader.glPrimitive;
-    shader.glPrimitive=cgl.gl.LINE_STRIP;
+    // shader.glPrimitive=;
 
     for(var i=0;i<meshes.length;i++)
         meshes[i].render(shader);
@@ -52,6 +52,7 @@ function rebuild()
 {
     var x=0;
     var y=0;
+
     if(pivotX.get()=='center') x=0;
     if(pivotX.get()=='right') x=-width.get()/2;
     if(pivotX.get()=='left') x=+width.get()/2;
@@ -60,23 +61,22 @@ function rebuild()
     if(pivotY.get()=='top') y=-height.get()/2;
     if(pivotY.get()=='bottom') y=+height.get()/2;
 
-
     var numRows=parseInt(nRows.get(),10);
     var numColumns=parseInt(nColumns.get(),10);
     
     var stepColumn=width.get()/numColumns;
     var stepRow=height.get()/numRows;
-    
+
     var c,r;
     meshes.length=0;
 
-    for(r=0;r<=numRows;r++)
+    for(r=numRows;r>=0;r--)
     {
         var verts=[];
         var tc=[];
         var indices=[];
 
-        for(c=0;c<=numColumns;c++)
+        for(c=numColumns;c>=0;c--)
         {
             verts.push( c*stepColumn    - width.get()/2+x );
             if(axis.get()=='xz') verts.push( 0.0 );
@@ -94,7 +94,7 @@ function rebuild()
         geom.texCoords=tc;
         geom.verticesIndices=indices;
     
-        var mesh=new CGL.Mesh(cgl,geom);
+        var mesh=new CGL.Mesh(cgl,geom,cgl.gl.LINE_STRIP);
         mesh.setGeom(geom);
         meshes.push(mesh);
     }
