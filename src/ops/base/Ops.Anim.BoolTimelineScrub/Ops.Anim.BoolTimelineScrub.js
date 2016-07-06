@@ -6,6 +6,7 @@ var v=op.addInPort(new Port(op,"anim value",OP_PORT_TYPE_VALUE));
 
 var result=op.addOutPort(new Port(op,"result"));
 var outTime=op.addOutPort(new Port(op,"time",OP_PORT_TYPE_VALUE));
+var outPerc=op.addOutPort(new Port(op,"Percentage",OP_PORT_TYPE_VALUE));
 
 var animTime=new CABLES.TL.Anim();
 
@@ -26,7 +27,7 @@ var toggle=function()
         if(state.get()) animTime.setValue(t+l,l);
             else animTime.setValue(t+l,0);
     }
-}
+};
 
 
 
@@ -51,6 +52,15 @@ var exec=function()
     var t=Date.now()/1000;
     va=v.anim.getValue(animTime.getValue(t));
 
+    if(animTime.keys.length>=1)
+    {
+        var perc=(t-animTime.keys[0].time)/(animTime.keys[1].time-animTime.keys[0].time);
+        if(perc>1)perc=1;
+        if(!state.get())perc=1-perc;
+        outPerc.set( perc );
+    }
+
+    
     if(result.get()!=va) result.set(va);
 
 };
