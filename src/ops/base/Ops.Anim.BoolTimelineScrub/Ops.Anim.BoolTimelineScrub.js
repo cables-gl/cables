@@ -10,12 +10,14 @@ var outPerc=op.addOutPort(new Port(op,"Percentage",OP_PORT_TYPE_VALUE));
 
 var animTime=new CABLES.TL.Anim();
 
-var lastState=false;
+var lastState=true;
+var firstState=true;
 
 var toggle=function()
 {
-    if(state.get()!=lastState && v.anim)
+    if( ( state.get()!=lastState && v.anim ))
     {
+
         var l=v.anim.getLength();
         var t=Date.now()/1000;
         lastState=state.get();

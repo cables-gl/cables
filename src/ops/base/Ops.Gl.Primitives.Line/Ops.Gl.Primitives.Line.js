@@ -55,14 +55,17 @@ render.onTriggered=function()
     // }
 
     shader=cgl.getShader();
-    oldPrim=shader.glPrimitive;
+    if(shader)
+    {
+        oldPrim=shader.glPrimitive;
+        
+        shader.glPrimitive=drawMode;
     
-    shader.glPrimitive=drawMode;
-
-    trigger.trigger();
-    cgl.gl.lineWidth(pointSize.get());
-
-    shader.glPrimitive=oldPrim;
+        cgl.gl.lineWidth(pointSize.get());
+        trigger.trigger();
+    
+        shader.glPrimitive=oldPrim;
+    }
 };
 
 function updateResolution()
