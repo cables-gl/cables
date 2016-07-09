@@ -1,6 +1,6 @@
 var cgl=op.patch.cgl;
 
-op.name='VertexNoise';
+op.name='VertexDisplacement';
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -13,6 +13,11 @@ var flip=op.addInPort(new Port(this,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}))
 var removeZero=op.addInPort(new Port(this,"Ignore Zero Values",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 var invert=op.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool'}));
+
+var offsetX=op.addInPort(new Port(this,"offset X",OP_PORT_TYPE_VALUE));
+var offsetY=op.addInPort(new Port(this,"offset Y",OP_PORT_TYPE_VALUE));
+
+
 invert.onValueChange(function()
 {
     if(shader)
@@ -64,6 +69,9 @@ var uniExtrude,uniTexture;
 var srcHeadVert=''
     .endl()+'uniform float {{mod}}_extrude;'
     .endl()+'uniform sampler2D {{mod}}_texture;'
+    .endl()+'uniform float {{mod}}_offsetX;'
+    .endl()+'uniform float {{mod}}_offsetY;'
+
     .endl();
 
 var srcBodyVert=''
@@ -71,12 +79,13 @@ var srcBodyVert=''
 
 
     .endl()+'vec2 tc=texCoord;'
+    
     .endl()+'#ifdef FLIPY'
     .endl()+'    tc.y=1.0-tc.y;'
     .endl()+'#endif'
 
 
-    .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, tc ).b;'
+    .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, vec2(tc.x+{{mod}}_offsetX,tc.y+{{mod}}_offsetY) ).b;'
 
     .endl()+'#ifdef HEIGHTMAP_INVERT'
     .endl()+'{{mod}}_texVal=1.0-{{mod}}_texVal;'
@@ -148,6 +157,8 @@ op.render.onTriggered=function()
 
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
         uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',op.extrude.val);
+        uniOffsetX=new CGL.Uniform(shader,'f',module.prefix+'_offsetX',offsetX);
+        uniOffsetY=new CGL.Uniform(shader,'f',module.prefix+'_offsetY',offsetY);
 
         module=shader.addModule(
             {

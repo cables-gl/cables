@@ -2,27 +2,55 @@ op.name="MouseDrag";
 
 var canvas=op.patch.cgl.canvas;
 
-var outY=op.addOutPort(new Port(op,"y"));
+var mul=op.addInPort(new Port(op,"mul"));
+
 var outX=op.addOutPort(new Port(op,"x"));
+var outY=op.addOutPort(new Port(op,"y"));
+
+outY.ignoreValueSerialize=true;
+outX.ignoreValueSerialize=true;
 
 var pressed=false;
 
 var lastY=-1;
 var lastX=-1;
 
+outX.set(0);
+outY.set(0);
+
 function onmouseclick()
 {
     
 }
 
+function fix()
+{
+    if(outX.get()===undefined)outX.set(0);
+    if(outY.get()===undefined)outY.set(0);
+
+}
+
+outX.onValueChanged=fix;
+outY.onValueChanged=fix;
+
 function onmousemove(e)
 {
+    
+    if(outX.get()===undefined)outX.set(0);
+    if(outY.get()===undefined)outY.set(0);
+    
     if(pressed)
     {
         if(lastX!=-1)
         {
-            outY.set(outY.get()+e.clientY-lastY);
-            outX.set(outX.get()+e.clientX-lastX);
+            var x=(outX.get()+(e.clientX-lastX)*parseFloat(mul.get()));
+            var y=(outY.get()+(e.clientY-lastY)*parseFloat(mul.get()));
+
+            if(!isNaN(x))outX.set(x||0);
+                else outX.set(0);
+                
+            if(!isNaN(y))outY.set(y||0);
+                else outY.set(0);
         }
 
         lastY=e.clientY;

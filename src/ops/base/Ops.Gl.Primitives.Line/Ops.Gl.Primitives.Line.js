@@ -17,6 +17,7 @@ var drawMode=cgl.gl.LINE_STRIP;
 
 mode.onValueChanged=function()
 {
+    drawMode=cgl.gl.LINES;
     if(mode.get()=='Line Loop')drawMode=cgl.gl.LINE_LOOP;
         else if(mode.get()=='Lines')drawMode=cgl.gl.LINES;
         else drawMode=cgl.gl.LINE_STRIP;

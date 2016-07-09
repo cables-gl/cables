@@ -137,6 +137,7 @@ op.doBillboard.onValueChanged=function()
         shader.removeDefine('BILLBOARD');
 };
 
+
 var diffuseRepeatX=op.addInPort(new Port(op,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
 var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
 diffuseRepeatX.set(1);
