@@ -7,13 +7,22 @@ var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
+var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['X','Y']}));
+var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
+var offset=op.addInPort(new Port(op,"offset",OP_PORT_TYPE_VALUE,{display:'range'}));
+var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
+width.set(0.5);
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'  varying vec2 texCoord;'
     .endl()+'  uniform sampler2D tex;'
     .endl()+'#endif'
+    .endl()+'uniform float axis;'
+    .endl()+'uniform float width;'
+    .endl()+'uniform float flip;'
+    .endl()+'uniform float offset;'
     .endl()+''
     .endl()+''
     .endl()+'void main()'
@@ -21,18 +30,38 @@ var srcFrag=''
     .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+''
-    .endl()+'       float x=(texCoord.x)*0.5;'
-    .endl()+'       if(texCoord.x>0.5)x=0.5-x;'
+
+    .endl()+'       float x=(texCoord.x);'
+    .endl()+'       if(texCoord.x>0.5)x=1.0-texCoord.x;'
     
+    .endl()+'       x*=width*2.0;'
+    .endl()+'       if(flip==1.0)x=1.0-x;'
+    .endl()+'       x*=1.0-offset;'
     
     .endl()+'           col=texture2D(tex,vec2(x,texCoord.y) );'
-    // .endl()+'       col.rgb=desaturate(col.rgb,amount);'
+
     .endl()+'   #endif'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+var uniAxis=new CGL.Uniform(shader,'f','axis',0);
+var uniWidth=new CGL.Uniform(shader,'f','width',width);
+var uniOffset=new CGL.Uniform(shader,'f','offset',offset);
+var uniFlip=new CGL.Uniform(shader,'f','flip',0);
+
+flip.onValueChanged=function()
+{
+    if(flip.get())uniFlip.setValue(1);
+    else uniFlip.setValue(0);
+};
+
+axis.onValueChanged=function()
+{
+    if(axis.get()=='X')uniAxis.setValue(0);
+    if(axis.get()=='Y')uniAxis.setValue(1);
+};
 
 render.onTriggered=function()
 {
