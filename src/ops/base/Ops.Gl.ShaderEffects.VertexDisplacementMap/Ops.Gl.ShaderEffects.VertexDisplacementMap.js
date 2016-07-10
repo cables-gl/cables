@@ -111,8 +111,13 @@ var srcHeadFrag=''
 
 var srcBodyFrag=''
     .endl()+'float colHeight=texture2D( {{mod}}_texture, texCoord ).r;'
-    .endl()+'col*=texture2D( {{mod}}_texture, texCoord ).r*0.7;'
-    .endl()+'col+=0.3;'
+    .endl()+'col*=texture2D( {{mod}}_texture, texCoord ).r*1.0;'
+    .endl()+'col+=0.0;'
+
+    // .endl()+'col*=texture2D( {{mod}}_texture, texCoord ).r*0.7;'
+    // .endl()+'col+=0.3;'
+
+
     // .endl()+'   if(colHeight==0.0) col.a=0.0;'
     // .endl()+'#ifdef DISPLACE_REMOVE_ZERO'
     // .endl()+'   if(colHeight==0.0) col.a=0.0;'
