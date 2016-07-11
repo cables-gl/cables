@@ -5,6 +5,7 @@ var minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
 var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
 var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
 var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
+var addRadius=op.addInPort(new Port(op,"Add Radius",OP_PORT_TYPE_VALUE));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
@@ -52,7 +53,7 @@ render.onTriggered=function()
 
 function circlePos(perc)
 {
-    if(radius<minDist.get()*mul.get())radius=minDist.get()*mul.get();
+    if(radius < minDist.get() * mul.get()) radius = minDist.get() * mul.get();
     
     outRadius.set(radius*mul.get());
     
@@ -60,11 +61,16 @@ function circlePos(perc)
     var vec=vec3.create();
     degInRad = 360*perc/2*CGL.DEG2RAD;
     vec3.set(vec,
-        Math.cos(degInRad)*radius*mul.get(),
-        Math.sin(degInRad)*radius*mul.get(),
+        Math.cos(degInRad)*(radius + addRadius.get())*mul.get(),
+        Math.sin(degInRad)*(radius + addRadius.get())*mul.get(),
         0);
     return vec;
 }
+
+addRadius.onValueChanged=function()
+{
+    eye=circlePos(percY);
+};
 
 var onmousemove = function(e)
 {
@@ -78,10 +84,10 @@ var onmousemove = function(e)
         vOffset[2]+=(x-lastMouseX)*0.001*mul.get()*radius;
         vOffset[1]+=(y-lastMouseY)*0.001*mul.get()*radius;
         
-        if(vOffset[2]>20)vOffset[2]=20;
-        if(vOffset[2]<-20)vOffset[2]=-20;
-        if(vOffset[1]>12)vOffset[1]=12;
-        if(vOffset[1]<-12)vOffset[1]=-12;
+        // if(vOffset[2]>20)vOffset[2]=20;
+        // if(vOffset[2]<-20)vOffset[2]=-20;
+        // if(vOffset[1]>12)vOffset[1]=12;
+        // if(vOffset[1]<-12)vOffset[1]=-12;
         
         eye=circlePos(percY);
     }
@@ -149,7 +155,7 @@ var onMouseWheel=function(e)
     };
 
     var delta=parseFloat( wheelDistance(e))*-0.06;
-    radius+=(parseFloat(delta))*1.2;
+    radius+=(parseFloat(delta))*1.2 ;
 
     if(radius>33)radius=33.0;
 

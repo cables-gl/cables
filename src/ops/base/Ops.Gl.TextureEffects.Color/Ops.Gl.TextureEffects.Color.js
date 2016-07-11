@@ -7,7 +7,7 @@ var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+var shader=new CGL.Shader(cgl,'textureeffect color');
 
 op.onLoaded=shader.compile;
 
@@ -22,7 +22,6 @@ var srcFrag=''
     .endl()+'uniform float b;'
     .endl()+'uniform float a;'
     .endl()+''
-    .endl()+''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=vec4(r,g,b,a);'
@@ -31,20 +30,15 @@ var srcFrag=''
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var uniformR=new CGL.Uniform(shader,'f','r',1.0);
-var uniformG=new CGL.Uniform(shader,'f','g',1.0);
-var uniformB=new CGL.Uniform(shader,'f','b',1.0);
-var uniformA=new CGL.Uniform(shader,'f','a',1.0);
-
-
-r.onValueChanged=function(){uniformR.setValue(r.get());};
-g.onValueChanged=function(){uniformG.setValue(g.get());};
-b.onValueChanged=function(){uniformB.setValue(b.get());};
-a.onValueChanged=function(){uniformA.setValue(a.get());};
 r.set(1.0);
 g.set(1.0);
 b.set(1.0);
 a.set(1.0);
+
+var uniformR=new CGL.Uniform(shader,'f','r',r);
+var uniformG=new CGL.Uniform(shader,'f','g',g);
+var uniformB=new CGL.Uniform(shader,'f','b',b);
+var uniformA=new CGL.Uniform(shader,'f','a',a);
 
 render.onTriggered=function()
 {

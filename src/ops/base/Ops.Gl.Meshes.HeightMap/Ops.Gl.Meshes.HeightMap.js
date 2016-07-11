@@ -8,8 +8,13 @@ var mHeight=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 var nRows=op.addInPort(new Port(op,"rows",OP_PORT_TYPE_VALUE));
 var nColumns=op.addInPort(new Port(op,"columns",OP_PORT_TYPE_VALUE));
 var sliceTex=op.addInPort(new Port(op,"texCoords slice",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var flat=op.addInPort(new Port(op,"flat",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+
+var outGeom=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+outGeom.ignoreValueSerialize=true;
+
 
 extrude.set(1);
 mHeight.set(3.0);
@@ -33,6 +38,7 @@ mHeight.onValueChanged=rebuildGeom;
 mWidth.onValueChanged=rebuildGeom;
 nRows.onValueChanged=rebuildGeom;
 nColumns.onValueChanged=rebuildGeom;
+flat.onValueChanged=rebuildGeom;
 
 filename.onValueChanged=reload;
 
@@ -72,15 +78,17 @@ function rebuildGeom()
     var cycleTex=0;
     var oldh=0;
 
+
+
     for(r=0;r<=numRows;r++)
     {
-        
         for(c=0;c<=numColumns;c++)
         {
-            var h = ctx.getImageData(c*rowStepY, r*rowStepX, 1, 1).data[1]*heightMul;
-
-            verts.push( c*stepColumn    - meshWidth/2 );
-            verts.push( r*stepRow       - meshHeight/2 );
+            var h = ctx.getImageData(Math.round(c*rowStepX), Math.round(r*rowStepY), 1, 1).data[1]*heightMul;
+            // verts.push( c*stepColumn    - meshWidth/2 );
+            // verts.push( r*stepRow       - meshHeight/2 );
+            verts.push( c*stepColumn );
+            verts.push( r*stepRow );
             verts.push( h );
 
             if(sliceTex.get())
@@ -130,10 +138,12 @@ function rebuildGeom()
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;
-    geom.calcNormals(false);
-
+    if(flat.get())geom.unIndex();
+    geom.calculateNormals({"forceZUp":true});
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
+    outGeom.set(null);
+    outGeom.set(geom);
 }
 
 function reload()

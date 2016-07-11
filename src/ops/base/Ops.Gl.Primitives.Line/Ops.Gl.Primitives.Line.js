@@ -17,6 +17,7 @@ var drawMode=cgl.gl.LINE_STRIP;
 
 mode.onValueChanged=function()
 {
+    drawMode=cgl.gl.LINES;
     if(mode.get()=='Line Loop')drawMode=cgl.gl.LINE_LOOP;
         else if(mode.get()=='Lines')drawMode=cgl.gl.LINES;
         else drawMode=cgl.gl.LINE_STRIP;
@@ -30,46 +31,47 @@ pointSize.onValueChanged=function()
 render.onTriggered=function()
 {
     var oldPrim=0;
-    if(cgl.getShader()!=shader)
-    {
-        if(shader && mod)
-        {
-            shader.removeModule(mod);
-            shader=null;
-        }
+    // if(cgl.getShader()!=shader)
+    // {
+    //     if(shader && mod)
+    //     {
+    //         shader.removeModule(mod);
+    //         shader=null;
+    //     }
 
-        shader=cgl.getShader();
+    //     shader=cgl.getShader();
 
-        var srcHeadVert=''
-            .endl()+'uniform float {{mod}}_size;'
-            .endl();
+    //     var srcHeadVert=''
+    //         .endl()+'uniform float {{mod}}_size;'
+    //         .endl();
 
-        mod=shader.addModule(
-            {
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-            });
+    //     mod=shader.addModule(
+    //         {
+    //             name:'MODULE_VERTEX_POSITION',
+    //             srcHeadVert:srcHeadVert,
+    //         });
 
-        uniPointSize=new CGL.Uniform(shader,'f',mod.prefix+'_size',pointSize.get());
+    //     uniPointSize=new CGL.Uniform(shader,'f',mod.prefix+'_size',pointSize.get());
 
-    }
+    // }
 
     shader=cgl.getShader();
-    oldPrim=shader.glPrimitive;
-    shader.glPrimitive=drawMode;
-
-    trigger.trigger();
-    cgl.gl.lineWidth(pointSize.get());
-
-    shader.glPrimitive=oldPrim;
+    if(shader)
+    {
+        oldPrim=shader.glPrimitive;
+        
+        shader.glPrimitive=drawMode;
+    
+        cgl.gl.lineWidth(pointSize.get());
+        trigger.trigger();
+    
+        shader.glPrimitive=oldPrim;
+    }
 };
-
-
 
 function updateResolution()
 {
 }
+
 op.onResize=updateResolution;
-
-
 pointSize.set(2);

@@ -12,9 +12,11 @@ var meshes=[];
 var cycle=0;
 render.onTriggered=function()
 {
-    if(meshes.length==0)create();
+    if(meshes.length===0)create();
     for(var i=0;i<meshes.length;i++)
+    {
         meshes[i].render(cgl.getShader());
+    }
     
     trigger.trigger();
 };
@@ -39,7 +41,7 @@ function createMesh(arr,start,end)
     {
         if(arr[i-1][2]==arr[i][2])
         {
-            if(i==start+10)console.log(arr[i]);
+            // if(i==start+10)console.log(arr[i]);
             
             var coord=window.METROPOLIS.latLonCoord(  arr[i-1][0], arr[i-1][1] );
             var coord2=window.METROPOLIS.latLonCoord( arr[i][0],   arr[i][1] );
@@ -84,7 +86,7 @@ function createMesh(arr,start,end)
     geom.texCoords=texCoords;
     // console.log('geom.verticesIndices',geom.verticesIndices.length);
 
-    var mesh =new CGL.Mesh(cgl,geom);
+    var mesh =new CGL.Mesh(cgl,geom,cgl.gl.LINES);
     
     // console.log("mesh generated");
     

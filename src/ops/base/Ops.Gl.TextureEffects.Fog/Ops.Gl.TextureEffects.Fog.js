@@ -31,6 +31,8 @@ var srcFrag=''
     .endl()+'uniform float g;'
     .endl()+'uniform float b;'
     .endl()+'uniform float a;'
+    .endl()+'uniform float start;'
+
     .endl()+'uniform float density;'
     .endl()+'const float LOG2 = 1.442695;'
     .endl()+'void main()'
@@ -41,6 +43,10 @@ var srcFrag=''
     .endl()+'       col=texture2D(depthTex,texCoord);'
     
     .endl()+'       float z=1.0-col.r;'
+    
+    .endl()+'       z=smoothstep(start,1.0,z);'
+    
+    
     
     // .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
 
@@ -116,6 +122,14 @@ density.set(5.0);
     a.set(1.0);
 }
 
+
+var start=op.addInPort(new Port(op,"start",OP_PORT_TYPE_VALUE,{ display:'range' }));
+start.onValueChanged=function()
+{
+    if(!start.uniform) start.uniform=new CGL.Uniform(shader,'f','start',start.get());
+    else start.uniform.setValue(start.get());
+};
+start.set(0);
 
 render.onTriggered=function()
 {
