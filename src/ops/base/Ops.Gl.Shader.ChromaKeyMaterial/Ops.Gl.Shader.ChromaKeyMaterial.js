@@ -2,24 +2,25 @@ op.name="ChromaKeyMaterial";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
 
+
 op.texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 op.textureUniform=null;
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
-
+var startTime=Date.now()/1000;
 
 var doRender=function()
 {
     // op.bindTextures();
     if(shader)
     {
+        if(uniTime)uniTime.setValue(Date.now()/1000-startTime);
         cgl.setShader(shader);
         shader.bindTextures();
         trigger.trigger();
         cgl.setPreviousShader();
-        
     }
 };
 
@@ -51,6 +52,8 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'uniform float g;'
 .endl()+'uniform float b;'
 .endl()+'uniform float weightMul;'
+.endl()+'uniform float white;'
+.endl()+'uniform float time;'
 
 .endl()+'varying mediump vec2 texCoord;'
 
@@ -91,6 +94,10 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'	return 1. - clamp(3. * dist - 1.5, 0., 1.);'
 .endl()+'}'
 
+.endl()+'float random(vec2 co)'
+.endl()+'{'
+.endl()+'   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * (43758.5453));'
+.endl()+'}'
 
 
 .endl()+''
@@ -107,6 +114,9 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 // .endl()+'	col.r = incrustation;'
 // .endl()+'	col.g = incrustation;'
 // .endl()+'	col.b = incrustation;'
+
+.endl()+'	col+= white;'
+.endl()+'	if(white>0.0) col.rgb+=(random(texCoord*time)-0.5)*0.3;'
 .endl()+'	col.a = 1.0-incrustation;'
 
 .endl()+'  gl_FragColor = col;'
@@ -128,7 +138,8 @@ shader.bindTextures=function()
 
 render.onTriggered=doRender;
 
-doRender();
+
+var uniTime=new CGL.Uniform(shader,'f','time',0);
 
 
 op.texture.onValueChanged=function()
@@ -154,6 +165,8 @@ w.uniform=new CGL.Uniform(shader,'f','weightMul',w);
 
 
 
+
+
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
 r.set(0.467);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
@@ -164,5 +177,11 @@ g.uniform=new CGL.Uniform(shader,'f','g',g);
 
 var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 b.set(0.098);
-r.uniform=new CGL.Uniform(shader,'f','b',b);
+b.uniform=new CGL.Uniform(shader,'f','b',b);
 
+var white=op.addInPort(new Port(op,"white",OP_PORT_TYPE_VALUE,{ display:'range' }));
+white.set(0.0);
+white.uniform=new CGL.Uniform(shader,'f','white',white);
+
+
+doRender();

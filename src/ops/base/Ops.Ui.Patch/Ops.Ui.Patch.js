@@ -76,6 +76,11 @@ var getSubPatchInputOp=function()
         if(!patchInputOP) console.warn('no patchinput2!');
     }
 
+    if(op.uiAttribs && op.uiAttribs.translate)
+    {
+        patchInputOP.uiAttribs.translate={x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y-100};        
+    }
+
     return patchInputOP;
 };
 
@@ -123,12 +128,6 @@ op.routeLink=function(link)
 function createPatchInputPort(dynPort,name)
 {
     var patchInputOP=getSubPatchInputOp();
-
-    if(op.uiAttribs && op.uiAttribs.translate)
-    {
-        patchInputOP.uiAttribs.translate={x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y-100};        
-    }
-
 
     var pOut=patchInputOP.getPortByName('out_'+name);
 

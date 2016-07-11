@@ -60,6 +60,7 @@ CGL.State=function()
     this.canvasHeight=-1;
 
     this.doScreenshot=false;
+    this.doScreenshotClearAlpha=false;
     this.screenShotDataURL=null;
 
 
@@ -109,12 +110,13 @@ CGL.State=function()
         if(this.doScreenshot)
         {
             // clear alpha channel
-            this.gl.clearColor(1, 1, 1, 1);
-            this.gl.colorMask(false, false, false, true);
-            this.gl.clear(this.gl.COLOR_BUFFER_BIT);
-            this.gl.colorMask(true, true, true, true);
-
-            console.log('do screenshot');
+            if(this.doScreenshotClearAlpha)
+            {
+                this.gl.clearColor(1, 1, 1, 1);
+                this.gl.colorMask(false, false, false, true);
+                this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+                this.gl.colorMask(true, true, true, true);
+            }
 
             this.doScreenshot=false;
             this.screenShotDataURL = document.getElementById("glcanvas").toDataURL('image/png');

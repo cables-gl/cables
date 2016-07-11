@@ -16,6 +16,9 @@ var outDuration=op.addOutPort(new Port(op,"duration",OP_PORT_TYPE_VALUE));
 var outProgress=op.addOutPort(new Port(op,"progress",OP_PORT_TYPE_VALUE));
 var outTime=op.addOutPort(new Port(op,"CurrentTime",OP_PORT_TYPE_VALUE));
 
+var loading=op.addOutPort(new Port(op,"Loading",OP_PORT_TYPE_VALUE));
+
+
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
 var intervalID=null;
@@ -75,10 +78,14 @@ function updateTexture()
         clearTimeout(timeout);
         timeout=setTimeout(updateTexture, 1000/fps.get());
     }
+    
+    if(videoElement.readyState==4) loading.set(false);
+        else loading.set(false);
 }
 
 function startVideo()
 {
+    console.log('start...');
     videoElement.play();
     videoElement.controls = false;
     videoElement.muted = muted.get();
@@ -97,13 +104,23 @@ function loadedMetaData()
     console.log('buffered ',videoElement.buffered);
 }
 
-function reload()
+function loadVideo()
 {
+    clearTimeout(timeout);
+    loading.set(true);
     videoElement.preload = 'auto';
     videoElement.setAttribute('src',filename.get());
     videoElement.addEventListener("canplaythrough", startVideo, true);
-
     videoElement.addEventListener('loadedmetadata', loadedMetaData );
+}
+
+function reload()
+{
+    if(!filename.get())return;
+
+    loadVideo();
+
+
 
 }
 
