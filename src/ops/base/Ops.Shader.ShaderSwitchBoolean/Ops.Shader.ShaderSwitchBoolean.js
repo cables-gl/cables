@@ -3,7 +3,7 @@
 
     this.name='ShaderSwitchBoolean';
     var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    var value=this.addInPort(new Port(this,"value",OP_PORT_TYPE_VALUE));
+    var value=this.addInPort(new Port(this,"value",OP_PORT_TYPE_VALUE,{display:'bool'}));
     var shader=this.addInPort(new Port(this,"shader true",OP_PORT_TYPE_OBJECT));
     var shader2=this.addInPort(new Port(this,"shader false",OP_PORT_TYPE_OBJECT));
     var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));

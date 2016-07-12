@@ -15,6 +15,7 @@ this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{disp
 this.smooth=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.smoothSpeed=this.addInPort(new Port(this,"smoothSpeed",OP_PORT_TYPE_VALUE));
 
+var outButton=this.addOutPort(new Port(this,"button",OP_PORT_TYPE_VALUE));
 
 
 this.multiply=this.addInPort(new Port(this,"multiply",OP_PORT_TYPE_VALUE));
@@ -80,11 +81,13 @@ var onMouseEnter = function(e)
 
 var onMouseDown = function(e)
 {
+    outButton.set(e.which);
     self.mouseDown.set(true);
 };
 
 var onMouseUp = function(e)
 {
+    outButton.set(0);
     self.mouseDown.set(false);
     self.mouseClick.set(false);
 };

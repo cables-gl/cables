@@ -1,8 +1,10 @@
     var self=this;
     Op.apply(this, arguments);
 
+    window.AudioContext = window.AudioContext||window.webkitAudioContext;
+
     if(!window.audioContext) {
-         audioContext = new AudioContext();
+        window.audioContext = new AudioContext();
     }
 
     this.name='Audio Analyser';
@@ -25,7 +27,10 @@
 
     this.refresh.onTriggered = function()
     {
+        // console.log(self.analyser.frequencyBinCount);
         var array =  new Uint8Array(self.analyser.frequencyBinCount);
+        
+        // array.length/=Math.round(audioContext.sampleRate/44100;
         if(!array)return;
         self.analyser.getByteFrequencyData(array);
         
@@ -39,6 +44,7 @@
         }
  
         average = values / array.length;
+        
         self.avgVolume.val=average;
 
         self.analyser.getByteFrequencyData(fftDataArray);
@@ -47,7 +53,7 @@
 
     this.audioIn.onValueChanged = function()
     {
-        console.log(self.audioIn.val);
+        // console.log(self.audioIn.val);
         if (self.audioIn.val === null) {
             if (self.oldAudioIn !== null) {
                 self.oldAudioIn.disconnect(self.analyser);

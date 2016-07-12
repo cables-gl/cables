@@ -6,6 +6,8 @@ var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{di
 var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
 var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
 
+var restricted=op.addInPort(new Port(op,"restricted",OP_PORT_TYPE_VALUE,{display:'bool'}));
+restricted.set(true);
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
@@ -90,8 +92,18 @@ var onmousemove = function(e)
     {
         percX+=(x-lastMouseX)*0.002;
         percY+=(y-lastMouseY)*0.002;
-        if(percY>0.5)percY=0.5;
-        if(percY<-0.5)percY=-0.5;
+        
+        if(restricted.get())
+        {
+            if(percY>0.5)percY=0.5;
+            if(percY<-0.5)percY=-0.5;
+        }
+        else
+        {
+            // perxY=percY+1;
+            // perxY=percY%2;
+            // perxY=percY-1;
+        }
         eye=circlePos(percY);
     }
 

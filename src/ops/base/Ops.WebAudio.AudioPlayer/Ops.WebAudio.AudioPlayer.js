@@ -8,9 +8,16 @@ this.volume=this.addInPort(new Port(this,"volume",OP_PORT_TYPE_VALUE,{ display:'
 var synchronizedPlayer=this.addInPort(new Port(this,"Synchronized Player",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 this.volume.val=1.0;
 this.audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
+var outPlaying=this.addOutPort(new Port(this, "playing",OP_PORT_TYPE_VALUE));
+var outEnded=this.addOutPort(new Port(this, "ended",OP_PORT_TYPE_FUNCTION));
+
+outPlaying.ignoreValueSerialize=true;
+outEnded.ignoreValueSerialize=true;
+
+window.AudioContext = window.AudioContext||window.webkitAudioContext;
 
 if(!window.audioContext) {
-    audioContext = new AudioContext();
+    window.audioContext = new AudioContext();
 }
 
 if(!window.audioContext) {
@@ -21,6 +28,7 @@ this.filter = audioContext.createGain();
 self.audio=null;
 var buffer=null;
 var playing=false;
+outPlaying.set(false);
 
 this.volume.onValueChanged = function()
 {
@@ -68,7 +76,8 @@ function seek()
         if(self.patch.timer.isPlaying() )
         {
             console.log('play!');
-                        
+            outPlaying.set(true);
+
             self.media.start(t);
             playing=true;
         }
@@ -84,6 +93,7 @@ function playPause()
         else self.audio.pause();
 }
 
+var firstTime=true;
 var loadingFilename='';
 this.file.onValueChanged = function()
 {
@@ -93,20 +103,40 @@ this.file.onValueChanged = function()
 
     if(!synchronizedPlayer.get())
     {
+        if(self.audio)
+        {
+            self.audio.pause();
+            outPlaying.set(false);
+        }
         self.audio = new Audio();
+
         self.audio.crossOrigin = "anonymous";
         self.audio.src = self.file.val;
+        self.audio.crossOrigin = "anonymous";
 
         var canplaythrough=function()
         {
+            self.audio.play();
+            console.log('audio',self.audio);
+            outPlaying.set(true);
             patch.loading.finished(loadingId);
             self.audio.removeEventListener('canplaythrough',canplaythrough, false);
         };
 
         self.audio.addEventListener('canplaythrough',canplaythrough, false);
+        
+        self.audio.addEventListener('ended',function()
+        {
+            console.log('audio player ended...');
+            outPlaying.set(false);
+            outEnded.trigger();
+        }, false);
+        
+
         self.media = audioContext.createMediaElementSource(self.audio);
         self.media.connect(self.filter);
         self.audioOut.val = self.filter;
+
     }
     else
     {
