@@ -17,13 +17,13 @@ function onKeyDown(e) {
         if(CABLES.UI){
             gui.patch().showOpParams(op);
         }
-        op.log("Learned key code: " + learnedKeyCode.get());
+        // op.log("Learned key code: " + learnedKeyCode.get());
         learning = false;
         removeListeners();
         addListener();
     } else {
         if(e.keyCode == learnedKeyCode.get()) {
-            op.log("Key pressed, key code: " + e.keyCode);
+            // op.log("Key pressed, key code: " + e.keyCode);
             onPress.trigger();
         }
     }
@@ -31,13 +31,13 @@ function onKeyDown(e) {
 
 function onKeyUp(e) {
     if(e.keyCode == learnedKeyCode.get()) {
-        op.log("Key released, key code: " + e.keyCode);
+        // op.log("Key released, key code: " + e.keyCode);
         onRelease.trigger();
     }
 }
 
 this.onDelete=function() {
-    console.log("Remove keypress op...");
+    // console.log("Remove keypress op...");
     cgl.canvas.removeEventListener('keyup', onKeyUp, false);
     cgl.canvas.removeEventListener('keydown', onKeyDown, false);
     document.removeEventListener("keyup", onKeyUp, false);
@@ -45,7 +45,7 @@ this.onDelete=function() {
 };
 
 learn.onTriggered = function(){
-    op.log("Listening for key...");
+    // op.log("Listening for key...");
     learning = true;
     addDocumentListener();
 

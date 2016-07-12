@@ -9,20 +9,26 @@ var artworkUrl=op.addOutPort(new Port(op,"Artwork URL",OP_PORT_TYPE_VALUE));
 var title=op.addOutPort(new Port(op,"Title",OP_PORT_TYPE_VALUE));
 var result=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_OBJECT));
 
+soundCloudUrl.ignoreValueSerialize=true;
+streamUrl.ignoreValueSerialize=true;
+artworkUrl.ignoreValueSerialize=true;
+streamUrl.ignoreValueSerialize=true;
+title.ignoreValueSerialize=true;
 soundCloudUrl.onValueChanged=resolve;
 
 function resolve()
 {
-    CABLES.ajax(
-        'https://api.soundcloud.com/resolve.json?url='+soundCloudUrl.get()+'&client_id='+clientId,
-        function(err,_data,xhr)
-        {
-            var data=JSON.parse(_data);
-            streamUrl.set(data.stream_url+"?client_id="+clientId);
-            artworkUrl.set(data.artwork_url);
-            title.set(data.title);
-            console.log('stream url:'+data.stream_url);
-            console.log(data);
-        });
+    if(soundCloudUrl.get())
+        CABLES.ajax(
+            'https://api.soundcloud.com/resolve.json?url='+soundCloudUrl.get()+'&client_id='+clientId,
+            function(err,_data,xhr)
+            {
+                var data=JSON.parse(_data);
+                streamUrl.set(data.stream_url+"?client_id="+clientId);
+                artworkUrl.set(data.artwork_url);
+                title.set(data.title);
+                console.log('stream url:'+data.stream_url);
+                console.log(data);
+            });
 
 }

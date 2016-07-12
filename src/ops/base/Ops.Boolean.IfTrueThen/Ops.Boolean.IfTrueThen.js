@@ -2,7 +2,7 @@ op.name='if true then';
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
-var boolean=op.addInPort(new Port(op,"boolean"));
+var boolean=op.addInPort(new Port(op,"boolean",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 var triggerThen=op.addOutPort(new Port(op,"then",OP_PORT_TYPE_FUNCTION));
 var triggerElse=op.addOutPort(new Port(op,"else",OP_PORT_TYPE_FUNCTION));

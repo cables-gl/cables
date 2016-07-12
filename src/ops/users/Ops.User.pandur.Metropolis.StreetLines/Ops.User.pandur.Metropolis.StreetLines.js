@@ -1,5 +1,5 @@
 this.name="StreetLines";
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -23,7 +23,6 @@ render.onTriggered=function()
 
 function createMesh(arr,start,end)
 {
-
     var geom=new CGL.Geometry();
     geom.verticesIndices=[];
 
@@ -34,7 +33,6 @@ function createMesh(arr,start,end)
     
 
     // texCoords.length=(end-start)*2*2;
-    geom.verticesIndices.length=end-start;
     
     var lastZ=0;
     for(i=start+1;i<end;i++)
@@ -42,9 +40,11 @@ function createMesh(arr,start,end)
         if(arr[i-1][2]==arr[i][2])
         {
             // if(i==start+10)console.log(arr[i]);
-            
+
             var coord=window.METROPOLIS.latLonCoord(  arr[i-1][0], arr[i-1][1] );
             var coord2=window.METROPOLIS.latLonCoord( arr[i][0],   arr[i][1] );
+
+
 
             verts.push(coord.lat);
             verts.push(coord.lon);
@@ -54,37 +54,20 @@ function createMesh(arr,start,end)
             verts.push(coord2.lon);
             verts.push(coord2.z);
             
-            texCoords.push(0);
-            texCoords.push(0);
-            texCoords.push(0);
-            texCoords.push(0);
         }
         lastZ=arr[i][2];
-
-        // var ind=(i*2)-1-start*2;
-        // verts[ind*3+0]=arr[i][0];
-        // verts[ind*3+1]=arr[i][1];
-        // verts[ind*3+2]=0;
-        
-        // texCoords[ind*2+0]=0;
-        // texCoords[ind*2+1]=0;
-
-        // ind=(i*2)-start*2;
-        // verts[ind*3+0]=arr[i][0];
-        // verts[ind*3+1]=arr[i][1];
-        // verts[ind*3+2]=0;
-        
-        // texCoords[ind*2+0]=0;
-        // texCoords[ind*2+1]=0;
-
     }
 
-    for(i=0;i<verts.length/3;i++) geom.verticesIndices[i]=i;
-
-    geom.vertices=verts;
+    // geom.verticesIndices.length=verts.length/3;
+    // for(i=0;i<verts.length/3;i++) geom.verticesIndices[i]=i;
+    // geom.vertices=verts;
     // geom.vertexColors=vertColors;
-    geom.texCoords=texCoords;
+    // geom.texCoords=texCoords;
     // console.log('geom.verticesIndices',geom.verticesIndices.length);
+    // for(var i=0;i<20;i++) console.log(verts[i]);
+
+    geom.setPointVertices(verts);
+    // console.log(verts.length/3);
 
     var mesh =new CGL.Mesh(cgl,geom,cgl.gl.LINES);
     
@@ -102,7 +85,7 @@ function create()
     
     meshes.length=0;
     var arr=points.get();
-    var meshMax=1000;
+    var meshMax=2000;
     if(arr)
     {
         var count=0;
@@ -111,6 +94,8 @@ function create()
             meshes.push(createMesh(arr,i,Math.min(arr.length,i+meshMax)));
         }
     }
+    
+    console.log('build streetlines,...',meshes.length);
     
     
 }

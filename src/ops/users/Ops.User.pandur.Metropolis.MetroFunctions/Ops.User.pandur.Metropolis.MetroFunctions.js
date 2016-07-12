@@ -21,8 +21,6 @@ window.METROPOLIS.elevationLoaded=false;
 
 
 
-var coord={};//window.METROPOLIS.latLonCoord(lat.get(),lon.get());
-
 // var latSize2=Math.abs(Math.abs(window.METROPOLIS.maxLat)-Math.abs(window.METROPOLIS.minLat))/2;
 // var lonSize2=Math.abs((Math.abs(window.METROPOLIS.maxLon)-Math.abs(window.METROPOLIS.minLon)))/2;
 
@@ -30,8 +28,6 @@ var coord={};//window.METROPOLIS.latLonCoord(lat.get(),lon.get());
 var latSize=( Math.abs(window.METROPOLIS.maxLat)-Math.abs(window.METROPOLIS.minLat));
 var lonSize=Math.abs(Math.abs(window.METROPOLIS.maxLon)-Math.abs(window.METROPOLIS.minLon));
 
-coord.lat=0;
-coord.lon=0;
 
 window.METROPOLIS.centerLat=(window.METROPOLIS.maxLat-window.METROPOLIS.minLat)/2;
 window.METROPOLIS.centerLon=(window.METROPOLIS.maxLon-window.METROPOLIS.minLon)/2;
@@ -178,6 +174,11 @@ var foundnan=false;
 
 window.METROPOLIS.latLonCoord=function(lat,lon)
 {
+
+var coord={};//window.METROPOLIS.latLonCoord(lat.get(),lon.get());
+
+coord.lat=0;
+coord.lon=0;
     var minlat=window.METROPOLIS.minLat;
     var minlon=window.METROPOLIS.minLon;
     var z=-1;
