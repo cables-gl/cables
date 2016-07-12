@@ -139,7 +139,7 @@ CGL.getWheelSpeed=function(event)
     var normalized;
     if (event.wheelDelta)
     {
-        normalized = (event.wheelDelta % 120 - 0) == -0 ? event.wheelDelta / 120 : event.wheelDelta / 12;
+        normalized = (event.wheelDelta % 120 - 0) == -0 ? event.wheelDelta / 120 : event.wheelDelta / 30;
     }
     else
     {
