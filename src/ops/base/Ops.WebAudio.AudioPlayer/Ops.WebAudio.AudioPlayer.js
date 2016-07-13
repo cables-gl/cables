@@ -32,7 +32,7 @@ outPlaying.set(false);
 
 this.volume.onValueChanged = function()
 {
-    self.filter.gain.value=self.volume.val;
+    self.filter.gain.value=self.volume.get() || 0;
 };
 
 this.onDelete=function()
@@ -97,7 +97,8 @@ var firstTime=true;
 var loadingFilename='';
 this.file.onValueChanged = function()
 {
-    loadingFilename=self.file.val;
+    if(!self.file.get())return;
+    loadingFilename=self.file.get();
     var loadingId=patch.loading.start('audioplayer',self.file.get());
 
 
@@ -110,6 +111,8 @@ this.file.onValueChanged = function()
         }
         self.audio = new Audio();
 
+console.log('load audio',self.file.val);
+
         self.audio.crossOrigin = "anonymous";
         self.audio.src = self.file.val;
         self.audio.crossOrigin = "anonymous";
@@ -117,7 +120,6 @@ this.file.onValueChanged = function()
         var canplaythrough=function()
         {
             self.audio.play();
-            console.log('audio',self.audio);
             outPlaying.set(true);
             patch.loading.finished(loadingId);
             self.audio.removeEventListener('canplaythrough',canplaythrough, false);

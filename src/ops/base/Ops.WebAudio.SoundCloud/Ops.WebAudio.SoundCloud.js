@@ -9,7 +9,7 @@ var artworkUrl=op.addOutPort(new Port(op,"Artwork URL",OP_PORT_TYPE_VALUE));
 var title=op.addOutPort(new Port(op,"Title",OP_PORT_TYPE_VALUE));
 var result=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_OBJECT));
 
-soundCloudUrl.ignoreValueSerialize=true;
+// soundCloudUrl.ignoreValueSerialize=true;
 streamUrl.ignoreValueSerialize=true;
 artworkUrl.ignoreValueSerialize=true;
 streamUrl.ignoreValueSerialize=true;
@@ -18,6 +18,9 @@ soundCloudUrl.onValueChanged=resolve;
 
 function resolve()
 {
+    
+    console.log(1234,soundCloudUrl.get());
+    
     if(soundCloudUrl.get())
         CABLES.ajax(
             'https://api.soundcloud.com/resolve.json?url='+soundCloudUrl.get()+'&client_id='+clientId,

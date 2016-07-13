@@ -18,11 +18,13 @@ var buffer=new Uint8Array();
 refresh.onTriggered=function()
 {
     var arr=fftArr.get();
+    if(!arr)return;
     var width=arr.length;
+    if(!width)return;
+    
     
     if(data.length===0)
     {
-        console.log('init data array ',arr.length);
         data.length=width*4;
         buffer=new Uint8Array(width*height*4);
     }

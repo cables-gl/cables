@@ -103,7 +103,7 @@ this.exe.onTriggered= function()
         
         if(firstTime)
         {
-            console.log('finished loading and prerendering...')
+            console.log('finished loading and prerendering...');
             self.patch.timer.setTime(0);
             self.patch.timer.play();
 

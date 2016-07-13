@@ -2,7 +2,16 @@ op.name="LineFont";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var string=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+
+var letterSpacing=op.addInPort(new Port(op,"Letter Spacing",OP_PORT_TYPE_VALUE));
+var lineWidth=op.addInPort(new Port(op,"Line Width",OP_PORT_TYPE_VALUE));
+var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
+
+
+letterSpacing.set(1);
+lineWidth.set(2);
 string.set("cables");
+var stringWidth=0;
 var meshes=[];
 var vec=vec3.create();
 var cgl=op.patch.cgl;
@@ -396,60 +405,103 @@ function translateX(w)
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
 }
 
-function renderChar(charIndex)
+var alignMode=0;
+align.onValueChanged=function()
 {
+    if(align.get()=="left")alignMode=0;
+    if(align.get()=="center")alignMode=1;
+    if(align.get()=="right")alignMode=2;
+};
+
+var oldPrim=0;
+function renderChar(charIndex,simulate)
+{
+    shader=cgl.getShader();
+    if(!shader)return;
+    oldPrim=shader.glPrimitive;
+
+    shader.glPrimitive=cgl.gl.LINE_STRIP;
+
     if(charIndex>=characters.length)charIndex=0;
-    for(var m=0;m<characters[charIndex].m.length;m++)
+    
+    if(!simulate)
     {
-        characters[charIndex].m[m].render(op.patch.cgl.getShader());        
+        for(var m=0;m<characters[charIndex].m.length;m++)
+        {
+            characters[charIndex].m[m].render(op.patch.cgl.getShader());
+        }
+        translateX(characters[charIndex].w*letterSpacing.get());
     }
-    translateX(characters[charIndex].w);
+    else
+    {
+        stringWidth+=characters[charIndex].w*letterSpacing.get();
+    }
+    shader.glPrimitive=oldPrim;
 }
+
 
 render.onTriggered=function()
 {
+    stringWidth=0;
+    if(!string.get())return;
     var spaceWidth=0.3;
     vec3.set(vec, 0.3,0,0);
     cgl.pushMvMatrix();
 
     var startCharacters=97;
     var startNumbers=48;
+    
+    var str=string.get()+'';
 
+    cgl.gl.lineWidth(lineWidth.get());
 
-    for(var i=0;i<string.get().length;i++)
+    for(var sim=0;sim<2;sim++)
     {
-        var w=0;
-        var charIndex=string.get().toLowerCase().charCodeAt(i);
+        var simulate=sim===0;
+        
+        if(!simulate) 
+        {
+            if(alignMode==1) translateX(-stringWidth/2+0.04*letterSpacing.get());
+            if(alignMode==2) translateX(-stringWidth+0.08*letterSpacing.get());
+        }
 
-        if(charIndex==38) renderChar(36); // &
-        else if(charIndex==39) renderChar(37); // '
-        else if(charIndex==34) renderChar(37); // '
-        else if(charIndex==59) renderChar(38); // ;
-        else if(charIndex==58) renderChar(39); // :
-        else if(charIndex==95) renderChar(40); // _
-        else if(charIndex==43) renderChar(41); // +
-        else if(charIndex==45) renderChar(42); // -
-        else if(charIndex==47) renderChar(43); // /
-        else if(charIndex==46) renderChar(44); // .
-        else if(charIndex==44) renderChar(45); // ,
-        else if(charIndex==41) renderChar(46); // )
-        else if(charIndex==40) renderChar(47); // ()
-        else if(charIndex==63) renderChar(48); // ?
-        else if(charIndex==33) renderChar(49); // !
-        else
-        if(charIndex>=startNumbers && charIndex<=startNumbers+10)
+        
+        for(var i=0;i<str.length;i++)
         {
-            renderChar(charIndex-startNumbers+26);
-        }
-        else
-        if(charIndex>=startCharacters && charIndex-startCharacters<characters.length)
-        {
-            renderChar(charIndex-startCharacters);
-        }
-        else
-        if(charIndex==32)
-        {
-            translateX(spaceWidth);
+            var w=0;
+            var charIndex=str.toLowerCase().charCodeAt(i);
+    
+            if(charIndex==38) renderChar(36); // &
+            else if(charIndex==39) renderChar(37); // '
+            else if(charIndex==34) renderChar(37); // '
+            else if(charIndex==59) renderChar(38); // ;
+            else if(charIndex==58) renderChar(39); // :
+            else if(charIndex==95) renderChar(40); // _
+            else if(charIndex==43) renderChar(41); // +
+            else if(charIndex==45) renderChar(42); // -
+            else if(charIndex==47) renderChar(43); // /
+            else if(charIndex==46) renderChar(44); // .
+            else if(charIndex==44) renderChar(45); // ,
+            else if(charIndex==41) renderChar(46); // )
+            else if(charIndex==40) renderChar(47); // ()
+            else if(charIndex==63) renderChar(48); // ?
+            else if(charIndex==33) renderChar(49); // !
+            else
+            if(charIndex>=startNumbers && charIndex<=startNumbers+10)
+            {
+                renderChar(charIndex-startNumbers+26,simulate);
+            }
+            else
+            if(charIndex>=startCharacters && charIndex-startCharacters<characters.length)
+            {
+                renderChar(charIndex-startCharacters,simulate);
+            }
+            else
+            if(charIndex==32)
+            {
+                translateX(spaceWidth);
+                stringWidth+=spaceWidth;
+            }
         }
     }
 
@@ -515,7 +567,7 @@ avgXY=[ (avg1[0]+avg2[0])/2, (avg1[1]+avg2[1])/2 ];
 
 for(var i=0;i<characters.length;i++)
 {
-    characters[i].w=width(i)*0.01;
+    characters[i].w=width(i)*(0.002);
     characters[i].m=[];
     for(var l=0;l<characters[i].l.length;l++)
     {
@@ -525,8 +577,8 @@ for(var i=0;i<characters.length;i++)
 
         for(var j=0;j<characters[i].l[l].length;j+=2)
         {
-            vertices.push( (characters[i].l[l][j]-min(i))*0.01 );
-            vertices.push( (characters[i].l[l][j+1]-avgXY[1])*-0.01 );
+            vertices.push( (characters[i].l[l][j]-min(i))*0.005 );
+            vertices.push( (characters[i].l[l][j+1]-avgXY[1])*-0.005 );
             vertices.push( 0 );
             
             indices.push(count);

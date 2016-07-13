@@ -111,8 +111,9 @@ var srcHeadFrag=''
 
 var srcBodyFrag=''
     .endl()+'float colHeight=texture2D( {{mod}}_texture, texCoord ).r;'
-    .endl()+'col*=texture2D( {{mod}}_texture, texCoord ).r*1.0;'
-    .endl()+'col+=0.0;'
+    .endl()+'col.rgb*=texture2D( {{mod}}_texture, texCoord ).r*0.4;'
+    
+    // .endl()+'col+=0.0;'
 
     // .endl()+'col*=texture2D( {{mod}}_texture, texCoord ).r*0.7;'
     // .endl()+'col+=0.3;'

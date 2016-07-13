@@ -2,6 +2,7 @@ op.name="OrbitControls";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
+var maxDist=op.addInPort(new Port(op,"max distance",OP_PORT_TYPE_VALUE));
 var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
 var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
 var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
@@ -13,6 +14,7 @@ var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
 mul.set(1);
 minDist.set(0.05);
+maxDist.set(99999);
 initialAxis.set(0.5);
 initialX.set(0.0);
 
@@ -55,6 +57,7 @@ render.onTriggered=function()
 function circlePos(perc)
 {
     if(radius<minDist.get()*mul.get())radius=minDist.get()*mul.get();
+    if(radius>maxDist.get()*mul.get())radius=maxDist.get()*mul.get();
     
     outRadius.set(radius*mul.get());
     
@@ -68,21 +71,21 @@ function circlePos(perc)
     return vec;
 }
 
-var onmousemove = function(e)
+var onmousemove = function(event)
 {
     if(!mouseDown) return;
 
     var x = event.clientX;
     var y = event.clientY;
     
-    if(e.which==3)
+    if(event.which==3)
     {
         vOffset[2]+=(x-lastMouseX)*0.01*mul.get();
         vOffset[1]+=(y-lastMouseY)*0.01*mul.get();
         eye=circlePos(percY);
     }
     else
-    if(e.which==2)
+    if(event.which==2)
     {
         radius+=(y-lastMouseY)*0.05;
 
@@ -111,7 +114,7 @@ var onmousemove = function(e)
     lastMouseY=y;
 };
 
-function onMouseDown(e)
+function onMouseDown(event)
 {
     cgl.canvas.style.cursor='none';
     lastMouseX = event.clientX;
@@ -142,23 +145,14 @@ initialAxis.onValueChange(function()
     eye=circlePos( percY );
 });
 
-var onMouseWheel=function(e)
+var onMouseWheel=function(event)
 {
-    var wheelDistance = function(evt)
-    {
-      if (!evt) evt = event;
-      var w=evt.wheelDelta, d=evt.detail;
-      if (d){
-        if (w) return w/d/40*d>0?1:-1; // Opera
-        else return -d/3;              // Firefox;         TODO: do not /3 for OS X
-      } else return w/120;             // IE/Safari/Chrome TODO: /3 for Chrome OS X
-    };
 
-    var delta=parseFloat( wheelDistance(e))*-0.06;
+    var delta=CGL.getWheelSpeed(event)*-0.06;
     radius+=(parseFloat(delta))*1.2;
 
     eye=circlePos(percY);
-    e.preventDefault();
+    event.preventDefault();
 };
 
 

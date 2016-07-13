@@ -13,8 +13,15 @@ data.onValueChanged=exec;
 
 function exec()
 {
+    console.log('data../..',data.get());
+    
+    
     if(data.get() && data.get().hasOwnProperty(key.get()))
     {
         result.set( data.get()[key.get()] );
+    }
+    else
+    {
+        result.set( null);
     }
 }
