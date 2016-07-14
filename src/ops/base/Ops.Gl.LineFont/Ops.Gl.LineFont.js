@@ -465,7 +465,6 @@ render.onTriggered=function()
             if(alignMode==2) translateX(-stringWidth+0.08*letterSpacing.get());
         }
 
-        
         for(var i=0;i<str.length;i++)
         {
             var w=0;

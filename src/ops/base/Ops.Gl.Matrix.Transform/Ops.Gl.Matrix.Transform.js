@@ -26,7 +26,6 @@ var translationChanged=true;
 var scaleChanged=true;
 var rotChanged=true;
 
-
 render.onTriggered=function()
 {
 
