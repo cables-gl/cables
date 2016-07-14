@@ -120,7 +120,7 @@ CABLES.Patch = function(cfg)
         }
         catch(e)
         {
-            console.error('!instancing error '+objName,e);
+            console.error('!instancing error '+objName);
 
             if(CABLES.UI)
             {
