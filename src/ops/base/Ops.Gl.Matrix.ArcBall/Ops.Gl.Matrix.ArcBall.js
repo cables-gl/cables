@@ -35,8 +35,6 @@ render.onTriggered=function()
     var r=radius;
     vec3.set(vScale, r,r,r);
     
-    console.log(r,radius);
-
     mat4.scale(cgl.vMatrix,cgl.vMatrix, vScale);
 
     trigger.trigger();
