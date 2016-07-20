@@ -17,13 +17,26 @@ var invert=op.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool
 var offsetX=op.addInPort(new Port(this,"offset X",OP_PORT_TYPE_VALUE));
 var offsetY=op.addInPort(new Port(this,"offset Y",OP_PORT_TYPE_VALUE));
 
+var colorize=op.addInPort(new Port(this,"colorize",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var colorizeAdd=op.addInPort(new Port(this,"colorize add",OP_PORT_TYPE_VALUE,{display:'range'}));
+colorize.set(false);
 
-invert.onValueChange(function()
+function updateColorize()
+{
+    if(shader)
+        if(colorize.get()) shader.define('HEIGHTMAP_COLORIZE');
+            else shader.removeDefine('HEIGHTMAP_COLORIZE');
+}
+
+function updateInvert()
 {
     if(shader)
         if(invert.get()) shader.define('HEIGHTMAP_INVERT');
             else shader.removeDefine('HEIGHTMAP_INVERT');
-});
+}
+
+colorize.onValueChanged=updateColorize;
+invert.onValueChanged=updateInvert;
 
 op.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(op.extrude.val); };
 
@@ -36,8 +49,8 @@ removeZero.onValueChanged=updateRemoveZero;
 function updateRemoveZero()
 {
     if(shader)
-        if(removeZero.get()) shader.define('DISPLACE_METH_ADDZ');
-            else shader.removeDefine('DISPLACE_METH_ADDZ');
+        if(removeZero.get()) shader.define('DISPLACE_REMOVE_ZERO');
+            else shader.removeDefine('DISPLACE_REMOVE_ZERO');
 }
 
 var updateMethod=function()
@@ -46,11 +59,11 @@ var updateMethod=function()
     {
         if(flip.get()) shader.define('FLIPY');
             else shader.removeDefine('FLIPY');
-            
+
         shader.removeDefine('DISPLACE_METH_MULXYZ');
         shader.removeDefine('DISPLACE_METH_ADDZ');
         shader.removeDefine('DISPLACE_METH_ADDY');
-    
+
         if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
         if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
         if(meth.get()=='add y') shader.define('DISPLACE_METH_ADDY');
@@ -72,10 +85,11 @@ var srcHeadVert=''
     .endl()+'uniform float {{mod}}_offsetX;'
     .endl()+'uniform float {{mod}}_offsetY;'
 
+    .endl()+'varying float displHeightMapColor;'
+
     .endl();
 
 var srcBodyVert=''
-
 
 
     .endl()+'vec2 tc=texCoord;'
@@ -97,33 +111,40 @@ var srcBodyVert=''
     .endl()+'#endif'
     
     .endl()+'#ifdef DISPLACE_METH_ADDZ'
-    .endl()+'       pos.z += ( {{mod}}_texVal * {{mod}}_extrude);'
+    .endl()+'   pos.z+=({{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
     
     .endl()+'#ifdef DISPLACE_METH_ADDY'
-    .endl()+'       pos.y += ( {{mod}}_texVal * {{mod}}_extrude);'
+    .endl()+'   pos.y+=({{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
+
+    .endl()+'displHeightMapColor={{mod}}_texVal;'
+
+
     .endl();
 
 var srcHeadFrag=''
-    .endl()+'uniform sampler2D {{mod}}_texture;'
+    // .endl()+'uniform sampler2D {{mod}}_texture;'
+    .endl()+'uniform float {{mod}}_colorizeAdd;'
+    .endl()+'varying float displHeightMapColor;'
     .endl();
 
 var srcBodyFrag=''
-    .endl()+'float colHeight=texture2D( {{mod}}_texture, texCoord ).r;'
-
-    .endl()+'col.rgb*=texture2D( {{mod}}_texture, texCoord ).r*0.4;'
-    .endl()+'col+=0.0;'
+    
+    .endl()+'#ifdef HEIGHTMAP_COLORIZE'
+    .endl()+'   col.rgb*=displHeightMapColor*(1.0-{{mod}}_colorizeAdd);'
+    .endl()+'   col+={{mod}}_colorizeAdd;'
+    .endl()+'#endif'
 
     // .endl()+'col*=texture2D( {{mod}}_texture, texCoord ).r*0.7;'
     // .endl()+'col+=0.3;'
 
 
     // .endl()+'   if(colHeight==0.0) col.a=0.0;'
-    // .endl()+'#ifdef DISPLACE_REMOVE_ZERO'
+    .endl()+'#ifdef DISPLACE_REMOVE_ZERO'
     // .endl()+'   if(colHeight==0.0) col.a=0.0;'
-    // .endl()+'if(colHeight==0.0)col.a=0.0;'
-    // .endl()+'#endif'
+    .endl()+'if(displHeightMapColor==0.0)discard;'
+    .endl()+'#endif'
     .endl();
 
 var module=null;
@@ -137,6 +158,13 @@ function removeModule()
     }
 }
 
+
+var uniTexture=null;
+var uniExtrude=null;
+var uniOffsetX=null;
+var uniOffsetY=null;
+var uniColorizeAdd=null;
+
 op.render.onLinkChanged=removeModule;
 
 op.render.onTriggered=function()
@@ -145,9 +173,11 @@ op.render.onTriggered=function()
     {
         if(shader) removeModule();
         
-        console.log('re init shader module vertexdisplacement')
-        
+        console.log('re init shader module vertexdisplacement');
+
         shader=cgl.getShader();
+
+        console.log('--------------------- 1');
 
         module=shader.addModule(
             {
@@ -156,24 +186,31 @@ op.render.onTriggered=function()
                 srcBodyVert:srcBodyVert
             });
 
-        updateMethod();
+        console.log('--------------------- 2');
         
-        if(invert.get()) shader.define('HEIGHTMAP_INVERT');
-            else shader.removeDefine('HEIGHTMAP_INVERT');
+
+
 
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
         uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',op.extrude.val);
         uniOffsetX=new CGL.Uniform(shader,'f',module.prefix+'_offsetX',offsetX);
         uniOffsetY=new CGL.Uniform(shader,'f',module.prefix+'_offsetY',offsetY);
 
+
         module=shader.addModule(
             {
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
                 srcBodyFrag:srcBodyFrag
-            });
 
+            });
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
+        uniColorizeAdd=new CGL.Uniform(shader,'f',module.prefix+'_colorizeAdd',colorizeAdd);
+
+
+        updateMethod();
+        updateInvert();
+        updateColorize();
 
     }
 
