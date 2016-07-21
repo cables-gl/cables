@@ -62,13 +62,13 @@ render.onTriggered=doRender;
 op.texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 op.textureUniform=null;
 
-op.texture.onPreviewChanged=function()
-{
-    if(op.texture.showPreview) op.render.onTriggered=op.texture.val.preview;
-    else op.render.onTriggered=op.doRender;
-
-    console.log('show preview!');
-};
+// op.texture.onPreviewChanged=function()
+// {
+//     if(op.texture.showPreview) op.render.onTriggered=op.texture.val.preview;
+//     else op.render.onTriggered=op.doRender;
+//
+//     console.log('show preview!');
+// };
 
 
 op.texture.onValueChanged=function()
@@ -161,4 +161,3 @@ var diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRep
 var diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY.get());
 
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-

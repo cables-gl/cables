@@ -19,7 +19,7 @@ CABLES.Port=function(parent,name,type,uiAttribs)
     var animated=false;
     var oldAnimVal=-5711;
     this.onLink=null;
-    this.showPreview=false;
+    // this.showPreview=false;
     var uiActiveState=true;
     this.ignoreValueSerialize=false;
     this.onLinkChanged=null;
@@ -27,16 +27,16 @@ CABLES.Port=function(parent,name,type,uiAttribs)
     var lastAnimFrame=-1;
 
 
-    this.doShowPreview=function(onOff)
-    {
-        if(onOff!=self.showPreview)
-        {
-            self.showPreview=onOff;
-            self.onPreviewChanged();
-        }
-    };
+    // this.doShowPreview=function(onOff)
+    // {
+    //     if(onOff!=self.showPreview)
+    //     {
+    //         self.showPreview=onOff;
+    //         self.onPreviewChanged();
+    //     }
+    // };
 
-    this.onPreviewChanged=function(){};
+    // this.onPreviewChanged=function(){};
     this.shouldLink=function(){return true;};
 
 

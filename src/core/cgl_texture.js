@@ -196,10 +196,10 @@ CGL.Texture=function(cgl,options)
 
     this.setSize(8,8);
 
-    this.preview=function()
-    {
-        CGL.Texture.previewTexture=self;
-    };
+    // this.preview=function()
+    // {
+    //     CGL.Texture.previewTexture=self;
+    // };
 
 };
 
@@ -289,83 +289,83 @@ CGL.Texture.WRAP_CLAMP_TO_EDGE=2;
 
 // ---------------------------------------------------------------------------
 
-CGL.Texture.previewTexture=null;
-CGL.Texture.texturePreviewer=null;
-CGL.Texture.texturePreview=function(cgl)
-{
-    var size=2;
-    var geom=new CGL.Geometry();
-
-    geom.vertices = [
-         size/2,  size/2,  0.0,
-        -size/2,  size/2,  0.0,
-         size/2, -size/2,  0.0,
-        -size/2, -size/2,  0.0
-    ];
-
-    geom.texCoords = [
-         1.0, 1.0,
-         0.0, 1.0,
-         1.0, 0.0,
-         0.0, 0.0
-    ];
-
-    geom.verticesIndices = [
-        0, 1, 2,
-        3, 1, 2
-    ];
-
-    var mesh=new CGL.Mesh(cgl,geom);
-
-    var srcFrag=''
-        .endl()+'precision highp float;'
-        .endl()+'varying vec2 texCoord;'
-        .endl()+'uniform sampler2D tex;'
-        .endl()+'uniform float time;'
-
-        .endl()+''
-        .endl()+'void main()'
-        .endl()+'{'
-
-        .endl()+'   vec4 col;'
-
-        .endl()+'bool isEven = mod(time+texCoord.y+texCoord.x,0.2)>0.1;'
-        .endl()+'vec4 col1 = vec4(0.2,0.2,0.2,1.0);'
-        .endl()+'vec4 col2 = vec4(0.5,0.5,0.5,1.0);'
-        .endl()+'col = (isEven)? col1:col2;'
-
-        .endl()+'vec4 colTex = texture2D(tex,texCoord);;'
-        .endl()+'col = mix(col,colTex,colTex.a);'
-
-        .endl()+'   gl_FragColor = col;'
-        .endl()+'}';
-
-
-    var shader=new CGL.Shader(cgl,"texturepreview");
-    shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-
-    var timeUni=new CGL.Uniform(shader,'f','time',0);
-    var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-    var startTime=Date.now()/1000.0;
-
-    this.render=function(tex)
-    {
-        // console.log('previewing ',tex.width,tex.height);
-        cgl.gl.clearColor(0,0,0,0);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
-        timeUni.setValue( (Date.now()/1000.0-startTime)*0.1 );
-
-        cgl.setShader(shader);
-
-        if(tex)
-        {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);
-        }
-
-        mesh.render(cgl.getShader());
-        cgl.setPreviousShader();
-    };
-
-};
+// CGL.Texture.previewTexture=null;
+// CGL.Texture.texturePreviewer=null;
+// CGL.Texture.texturePreview=function(cgl)
+// {
+//     var size=2;
+//     var geom=new CGL.Geometry();
+//
+//     geom.vertices = [
+//          size/2,  size/2,  0.0,
+//         -size/2,  size/2,  0.0,
+//          size/2, -size/2,  0.0,
+//         -size/2, -size/2,  0.0
+//     ];
+//
+//     geom.texCoords = [
+//          1.0, 1.0,
+//          0.0, 1.0,
+//          1.0, 0.0,
+//          0.0, 0.0
+//     ];
+//
+//     geom.verticesIndices = [
+//         0, 1, 2,
+//         3, 1, 2
+//     ];
+//
+//     var mesh=new CGL.Mesh(cgl,geom);
+//
+//     var srcFrag=''
+//         .endl()+'precision highp float;'
+//         .endl()+'varying vec2 texCoord;'
+//         .endl()+'uniform sampler2D tex;'
+//         .endl()+'uniform float time;'
+//
+//         .endl()+''
+//         .endl()+'void main()'
+//         .endl()+'{'
+//
+//         .endl()+'   vec4 col;'
+//
+//         .endl()+'bool isEven = mod(time+texCoord.y+texCoord.x,0.2)>0.1;'
+//         .endl()+'vec4 col1 = vec4(0.2,0.2,0.2,1.0);'
+//         .endl()+'vec4 col2 = vec4(0.5,0.5,0.5,1.0);'
+//         .endl()+'col = (isEven)? col1:col2;'
+//
+//         .endl()+'vec4 colTex = texture2D(tex,texCoord);;'
+//         .endl()+'col = mix(col,colTex,colTex.a);'
+//
+//         .endl()+'   gl_FragColor = col;'
+//         .endl()+'}';
+//
+//
+//     var shader=new CGL.Shader(cgl,"texturepreview");
+//     shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+//
+//     var timeUni=new CGL.Uniform(shader,'f','time',0);
+//     var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+//     var startTime=Date.now()/1000.0;
+//
+//     this.render=function(tex)
+//     {
+//         // console.log('previewing ',tex.width,tex.height);
+//         cgl.gl.clearColor(0,0,0,0);
+//         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+//
+//         timeUni.setValue( (Date.now()/1000.0-startTime)*0.1 );
+//
+//         cgl.setShader(shader);
+//
+//         if(tex)
+//         {
+//             cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+//             cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);
+//         }
+//
+//         mesh.render(cgl.getShader());
+//         cgl.setPreviousShader();
+//     };
+//
+// };
