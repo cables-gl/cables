@@ -6,7 +6,9 @@ var inSize=op.addInPort(new Port(op,"size",OP_PORT_TYPE_VALUE,{display:'range'})
 var inFadeOut=op.addInPort(new Port(op,"fade Out",OP_PORT_TYPE_VALUE,{display:'range'}));
 
 var warnOverflow=op.addInPort(new Port(op,"warn overflow",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var fallOff=op.addInPort(new Port(op,"fallOff",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Linear','SmoothStep']}));
 
+warnOverflow.set(true);
 
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
 var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -32,23 +34,20 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 texCol=texture2D(tex,texCoord);'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    
     .endl()+'   float dist = distance(vec2(0.5,0.5),texCoord);'
-    
-    
+
     .endl()+'   float sz=size*0.5;'
     .endl()+'   float fade=fadeOut+0.002;'
     .endl()+'   col.a=0.0;'
 
-    .endl()+'   col.r=r;'
-    .endl()+'   col.g=g;'
-    .endl()+'   col.b=b;'
+    .endl()+'   if(dist<sz) col.a=1.0;'
 
-    .endl()+'   if(dist<sz)'
-    .endl()+'   {'
-    .endl()+'       col.a=1.0;'
-    .endl()+'   }'
-    .endl()+'   if(dist>sz && dist<sz+fade)col.a=1.0-((dist-sz)/(fade));'
+    .endl()+'   #ifdef FALLOFF_SMOOTHSTEP'
+    .endl()+'       if(dist>sz && dist<sz+fade)col.a=1.0-(smoothstep(0.0,1.0,(dist-sz)/(fade)) );'
+    .endl()+'   #endif'
+    .endl()+'   #ifndef FALLOFF_SMOOTHSTEP'
+    .endl()+'       if(dist>sz && dist<sz+fade)col.a=1.0-((dist-sz)/(fade));'
+    .endl()+'   #endif'
     
     .endl()+'   col.a*=a;'
     
@@ -56,11 +55,10 @@ var srcFrag=''
     .endl()+'   gl_FragColor.a=col.a;'
 
     .endl()+'   #ifdef WARN_OVERFLOW'
-    .endl()+'       float width=0.02;'
+    .endl()+'       float width=0.01;'
     .endl()+'       if( texCoord.x>1.0-width || texCoord.y>1.0-width || texCoord.y<width || texCoord.x<width )'
     .endl()+'           if(col.a>0.0)gl_FragColor = vec4(1.0,0.0,0.0, 1.0);'
     .endl()+'   #endif'
-
 
     .endl()+'}';
 
@@ -86,14 +84,27 @@ var uniformG=new CGL.Uniform(shader,'f','g',g);
 var uniformB=new CGL.Uniform(shader,'f','b',b);
 var uniformA=new CGL.Uniform(shader,'f','a',a);
 
+function setFallOf()
+{
+    shader.removeDefine('FALLOFF_LINEAR');
+    shader.removeDefine('FALLOFF_SMOOTHSTEP');
+    
+    if(fallOff.get()=='Linear') shader.define('FALLOFF_LINEAR');
+    if(fallOff.get()=='SmoothStep') shader.define('FALLOFF_SMOOTHSTEP');
+    shader.compile();
+}
 
-warnOverflow.onValueChanged=function()
+fallOff.onValueChanged=setFallOf;
+
+function setWarnOverflow()
 {
     if(warnOverflow.get()) shader.define('WARN_OVERFLOW');
         else shader.removeDefine('WARN_OVERFLOW');
     shader.compile();
 
-};
+}
+
+warnOverflow.onValueChanged=setWarnOverflow;
 
 
 render.onTriggered=function()
@@ -111,3 +122,6 @@ render.onTriggered=function()
 
     trigger.trigger();
 };
+
+setFallOf();
+setWarnOverflow();
