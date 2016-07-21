@@ -5,6 +5,8 @@ var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
 var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
 var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['X','Y','Diagonal','Diagonal Flip']}));
 
+var offset=op.addInPort(new Port(op,"offset",OP_PORT_TYPE_VALUE));
+
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
 var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -20,6 +22,7 @@ var srcFrag=''
     .endl()+'uniform float num;'
     .endl()+'uniform float width;'
     .endl()+'uniform float axis;'
+    .endl()+'uniform float offset;'
 
     .endl()+'uniform float r;'
     .endl()+'uniform float g;'
@@ -36,6 +39,8 @@ var srcFrag=''
     .endl()+'   if(axis==1.0) v=texCoord.x;'
     .endl()+'   if(axis==2.0) v=texCoord.x+texCoord.y;'
     .endl()+'   if(axis==3.0) v=texCoord.x-texCoord.y;'
+    .endl()+'   v+=offset;'
+    
 
     .endl()+'   float m=mod(v,1.0/num);'
     .endl()+'   float rm=width*2.0*1.0/num/2.0;'
@@ -63,6 +68,7 @@ op.onLoaded=shader.compile;
 var numUniform=new CGL.Uniform(shader,'f','num',num);
 var uniWidth=new CGL.Uniform(shader,'f','width',width);
 var uniAxis=new CGL.Uniform(shader,'f','axis',0);
+var uniOffset=new CGL.Uniform(shader,'f','offset',offset);
 
 r.set(1.0);
 g.set(1.0);
