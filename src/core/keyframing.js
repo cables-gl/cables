@@ -417,6 +417,7 @@ CABLES.TL.Anim=function(cfg)
 
     this.isFinished=function(time)
     {
+        if(this.keys.length<=0)return true;
         return time>this.keys[this.keys.length-1].time;
     };
 
