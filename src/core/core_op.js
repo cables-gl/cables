@@ -278,8 +278,6 @@ CABLES.Op = function()
 
 
 
-
-
 };
 
 var Op=CABLES.Op; // deprecated!
