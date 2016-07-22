@@ -83,7 +83,7 @@ function reset()
     }
 }
 
-size.set(40);
+size.set(20);
 seed.set(1);
 seed.onValueChange(reset);
 num.onValueChange(reset);
@@ -92,4 +92,4 @@ scaleX.onValueChange(reset);
 scaleZ.onValueChange(reset);
 scaleY.onValueChange(reset);
 
-num.set(100);
+num.set(1000);
