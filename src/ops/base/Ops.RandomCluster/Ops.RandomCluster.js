@@ -92,4 +92,4 @@ scaleX.onValueChange(reset);
 scaleZ.onValueChange(reset);
 scaleY.onValueChange(reset);
 
-num.set(1000);
+num.set(100);

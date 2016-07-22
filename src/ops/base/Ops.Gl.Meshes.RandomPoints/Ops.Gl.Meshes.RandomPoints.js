@@ -28,7 +28,10 @@ function reset()
 {
     geom=new CGL.Geometry();
     var verts=[];
+    var vertColors=[];
     verts.length=Math.round(num.get())*3;
+    vertColors.length=Math.round(num.get())*3;
+    
     Math.randomSeed=seed.get();
 
     for(var i=0;i<num.get();i++)
@@ -36,8 +39,13 @@ function reset()
         verts[i*3+0]=scaleX.get()*(Math.seededRandom()-0.5)*size.get();
         verts[i*3+1]=scaleY.get()*(Math.seededRandom()-0.5)*size.get();
         verts[i*3+2]=scaleZ.get()*(Math.seededRandom()-0.5)*size.get();
+        
+        verts[i*3+0]=Math.seededRandom();
+        verts[i*3+1]=Math.seededRandom();
+        verts[i*3+2]=Math.seededRandom();
     }
     geom.setPointVertices(verts);
+    geom.vertColors=vertColors;
 
     mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 }
