@@ -5,10 +5,6 @@ attribute vec2 attrTexCoord;
 varying vec3 norm;
 #ifdef HAS_TEXTURES
     varying vec2 texCoord;
-    #ifdef TEXTURE_REPEAT
-        uniform float diffuseRepeatX;
-        uniform float diffuseRepeatY;
-    #endif
 #endif
 
 uniform mat4 projMatrix;
@@ -19,10 +15,6 @@ void main()
 {
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
-        #ifdef TEXTURE_REPEAT
-            texCoord.s*=diffuseRepeatX;
-            texCoord.t*=diffuseRepeatY;
-        #endif
    #endif
 
    vec4 pos = vec4( vPosition, 1. );

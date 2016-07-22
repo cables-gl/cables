@@ -1,6 +1,5 @@
 precision highp float;
 
-
 {{MODULES_HEAD}}
 
 #ifdef HAS_TEXTURES
@@ -25,13 +24,10 @@ void main()
 
 {{MODULE_BEGIN_FRAG}}
 
-
    vec4 col=vec4(1.0,1.0,1.0,a);
    #ifdef HAS_TEXTURES
       #ifdef HAS_TEXTURE_DIFFUSE
-
            col=texture2D(tex,vec2(posX,posY));
-
       #endif
       #ifdef HAS_TEXTURE_OPACITY
           col.a*=texture2D(texOpacity,texCoords).g;
