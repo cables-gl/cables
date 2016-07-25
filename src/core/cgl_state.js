@@ -24,6 +24,25 @@ CGL.State=function()
     var currentShader=simpleShader;
     var aborted=false;
 
+    var cbResize=[];
+
+    this.addEventListener=function(event,cb)
+    {
+        if(event=='resize') cbResize.push(cb);
+    };
+
+    this.removeEventListener=function(event,cb)
+    {
+        if(event=='resize')
+        {
+            for(var i in cbResize) if(cbResize[i]==cb)
+            {
+                cbResize.splice(i,1);
+                return;
+            }
+        }
+    };
+
     this.setCanvas=function(id)
     {
         this.canvas=document.getElementById(id);
@@ -44,7 +63,6 @@ CGL.State=function()
         }
         else
         {
-
             var ext = this.gl.getExtension("ANGLE_instanced_arrays");
             if(!ext)
             {
@@ -58,11 +76,11 @@ CGL.State=function()
 
     this.canvasWidth=-1;
     this.canvasHeight=-1;
-
+    var oldCanvasWidth=-1;
+    var oldCanvasHeight=-1;
     this.doScreenshot=false;
     this.doScreenshotClearAlpha=false;
     this.screenShotDataURL=null;
-
 
     this.getViewPort=function()
     {
@@ -121,6 +139,15 @@ CGL.State=function()
             this.doScreenshot=false;
             this.screenShotDataURL = document.getElementById("glcanvas").toDataURL('image/png');
         }
+
+        if(oldCanvasWidth!=self.canvasWidth || oldCanvasHeight!=self.canvasHeight)
+        {
+            for(var i=0;i<cbResize.length;i++) cbResize[i]();
+
+            oldCanvasWidth=self.canvasWidth;
+            oldCanvasHeight=self.canvasHeight;
+        }
+
     };
 
     // shader stack
@@ -213,8 +240,6 @@ CGL.State=function()
 
     this.renderStart=function(cgl,identTranslate,identTranslateView)
     {
-
-
         if(!identTranslate)identTranslate=ident;
         if(!identTranslateView)identTranslateView=identView;
         cgl.gl.enable(cgl.gl.DEPTH_TEST);
