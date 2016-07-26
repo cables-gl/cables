@@ -114,14 +114,6 @@ op.textureOpacity.onValueChanged=function()
     }
 };
 
-op.colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-op.colorizeTexture.val=false;
-op.colorizeTexture.onValueChanged=function()
-{
-    if(op.colorizeTexture.val) shader.define('COLORIZE_TEXTURE');
-        else shader.removeDefine('COLORIZE_TEXTURE');
-};
-
 
 op.doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 op.doBillboard.val=false;
@@ -134,26 +126,5 @@ op.doBillboard.onValueChanged=function()
 };
 
 
-var diffuseRepeatX=op.addInPort(new Port(op,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
-var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
-diffuseRepeatX.set(1);
-diffuseRepeatY.set(1);
-
-diffuseRepeatX.onValueChanged=function()
-{
-    diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
-    if(diffuseRepeatY.get()!=1.0 || diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
-        else shader.removeDefine('TEXTURE_REPEAT');
-};
-
-diffuseRepeatY.onValueChanged=function()
-{
-    diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
-    if(diffuseRepeatY.get()!=1.0 || diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
-        else shader.removeDefine('TEXTURE_REPEAT');
-};
-
-var diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX.get());
-var diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY.get());
 
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
