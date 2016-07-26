@@ -53,13 +53,13 @@ CABLES.Port=function(parent,name,type,uiAttribs)
 
                 if(onValueChanged)
                 {
-                    onValueChanged();
+                    onValueChanged(this,this.value);
                 }
                 else
                 if(this.onValueChanged)
                 {
                     // deprecated!
-                    this.onValueChanged();
+                    this.onValueChanged(this,this.value);
                 }
             }
         }
