@@ -31,6 +31,10 @@ CABLES.TL.Key=function(obj)
     this.bezValue=0;
     this.bezTimeIn=-0.5;
     this.bezValueIn=0;
+
+    this.cb=null;
+    this.cbTriggered=false;
+
     var bezierAnim=null;
     var updateBezier=false;
     var self=this;
@@ -63,6 +67,12 @@ CABLES.TL.Key=function(obj)
         if(obj)
         {
             if(obj.e) this.setEasing(obj.e);
+            if(obj.cb)
+            {
+                this.cb=obj.cb;
+                this.cbTriggered=false;
+
+            }
 
             if(obj.b)
             {
@@ -337,7 +347,6 @@ CABLES.TL.Anim=function(cfg)
 
     this.sortKeys=function()
     {
-
         this.keys.sort(function(a, b)
         {
             return parseFloat(a.time) - parseFloat(b.time);
@@ -361,7 +370,8 @@ CABLES.TL.Anim=function(cfg)
         }
         return index;
     };
-    this.setValue=function(time,value)
+
+    this.setValue=function(time,value,cb)
     {
         var found=false;
         for(var i in this.keys)
@@ -370,6 +380,7 @@ CABLES.TL.Anim=function(cfg)
             {
                 found=this.keys[i];
                 this.keys[i].setValue(value);
+                this.keys[i].cb=cb;
                 break;
             }
         }
@@ -378,7 +389,7 @@ CABLES.TL.Anim=function(cfg)
         {
             // console.log('not found');
 
-            this.keys.push(new CABLES.TL.Key({time:time,value:value,e:this.defaultEasing})) ;
+            this.keys.push(new CABLES.TL.Key({time:time,value:value,e:this.defaultEasing,cb:cb})) ;
         }
 
         if(this.onChange)this.onChange();
@@ -399,7 +410,6 @@ CABLES.TL.Anim=function(cfg)
 
         return obj;
     };
-
 
     this.getKey=function(time)
     {
@@ -448,6 +458,12 @@ CABLES.TL.Anim=function(cfg)
         var index2=parseInt(index,10)+1;
         var key1=this.keys[index];
         var key2=this.keys[index2];
+
+        if(key1.cb && !key1.cbTriggered)
+        {
+            key1.cb();
+            key1.cbTriggered=true;
+        }
 
         if(!key2)return -1;
 
