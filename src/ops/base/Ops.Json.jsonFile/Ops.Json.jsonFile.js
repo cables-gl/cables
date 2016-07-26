@@ -9,6 +9,7 @@ var patch=op.patch;
 var loadingId=0;
 var reload=function()
 {
+    if(!filename.get())return;
     loadingId=patch.loading.start('jsonFile',''+filename.get());
 
     CABLES.ajax(
@@ -18,6 +19,7 @@ var reload=function()
             try
             {
                 var data=JSON.parse(_data);
+                if(result.get())result.set(null);
                 result.set(data);
                 op.uiAttr({'error':''});
                 patch.loading.finished(loadingId);

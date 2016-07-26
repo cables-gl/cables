@@ -12,10 +12,18 @@ inLength.set(10);
 var val=0;
 value.set(0);
 
+// value.onValueChanged=function()
+// {
+//     console.log('valuechanged ',value.get());
+//     if(!value.get())val=0
+// };
+
 reset.onTriggered=function()
 {
+    value.set(null);
     val=0;
     value.set(val);
+    console.log('increment reset');
 };
 
 decrement.onTriggered=function()

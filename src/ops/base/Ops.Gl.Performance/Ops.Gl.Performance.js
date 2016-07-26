@@ -135,15 +135,16 @@ function refresh()
 
 
     ctx.fillStyle="#555555";
-    for(var k=0;k<512;k++)
+    var k=0;
+    for(k=512;k>=0;k--)
     {
-        ctx.fillRect(k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
+        ctx.fillRect(512-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
     }
 
     ctx.fillStyle="#aaaaaa";
-    for(k=0;k<512;k++)
+    for(k=512;k>=0;k--)
     {
-        ctx.fillRect(k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
+        ctx.fillRect(512-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
     }
 
     ctx.fillStyle="#cccccc";
