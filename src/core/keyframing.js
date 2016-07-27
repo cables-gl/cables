@@ -39,6 +39,12 @@ CABLES.TL.Key=function(obj)
     var updateBezier=false;
     var self=this;
 
+    this.trigger=function()
+    {
+        this.cb();
+        this.cbTriggered=true;
+    };
+
     this.setBezierControlOut=function(t,v)
     {
         this.bezTime=t;
@@ -395,8 +401,6 @@ CABLES.TL.Anim=function(cfg)
 
         if(!found)
         {
-            // console.log('not found');
-
             this.keys.push(new CABLES.TL.Key({time:time,value:value,e:this.defaultEasing,cb:cb})) ;
         }
 
@@ -439,6 +443,7 @@ CABLES.TL.Anim=function(cfg)
         return time>this.keys[this.keys.length-1].time;
     };
 
+
     this.getValue=function(time)
     {
         if(this.keys.length===0)return 0;
@@ -446,32 +451,33 @@ CABLES.TL.Anim=function(cfg)
 
         if(time<this.keys[0].time)return this.keys[0].value;
 
-        if(this.loop && time>this.keys[this.keys.length-1].time)
+        var lastKeyIndex=this.keys.length-1;
+        if(this.loop && time>this.keys[lastKeyIndex].time)
         {
-            var currentLoop=time/this.keys[this.keys.length-1].time;
+
+            var currentLoop=time/this.keys[lastKeyIndex].time;
             if(currentLoop>timesLooped)
             {
                 timesLooped++;
                 if(this.onLooped)this.onLooped();
             }
-            time=(time-this.keys[0].time)%(this.keys[this.keys.length-1].time-this.keys[0].time);
+            time=(time-this.keys[0].time)%(this.keys[lastKeyIndex].time-this.keys[0].time);
             time+=this.keys[0].time;
         }
 
         var index=this.getKeyIndex(time);
-        if(index>=this.keys.length-1)
+        if(index>=lastKeyIndex)
         {
-            return this.keys[this.keys.length-1].value;
+            if(this.keys[lastKeyIndex].cb && !this.keys[lastKeyIndex].cbTriggered)
+                this.keys[lastKeyIndex].trigger();
+
+            return this.keys[lastKeyIndex].value;
         }
         var index2=parseInt(index,10)+1;
         var key1=this.keys[index];
         var key2=this.keys[index2];
 
-        if(key1.cb && !key1.cbTriggered)
-        {
-            key1.cb();
-            key1.cbTriggered=true;
-        }
+        if(key1.cb && !key1.cbTriggered)key1.trigger();
 
         if(!key2)return -1;
 

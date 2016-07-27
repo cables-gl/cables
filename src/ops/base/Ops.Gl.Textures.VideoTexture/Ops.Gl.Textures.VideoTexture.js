@@ -106,6 +106,7 @@ function loadedMetaData()
 
 function loadVideo()
 {
+    console.log('start loading...',filename.get());
     clearTimeout(timeout);
     loading.set(true);
     videoElement.preload = 'auto';
