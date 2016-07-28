@@ -21,6 +21,16 @@ var cgl_filter=0;
 var cgl_wrap=0;
 var opInstanced=false;
 
+
+flip.onValueChange(function(){reload();});
+filename.onValueChange(reload);
+
+tfilter.onValueChange(onFilterChange);
+wrap.onValueChange(onWrapChange);
+unpackAlpha.onValueChange(function(){ reload(); });
+
+
+
 var setTempTexture=function()
 {
     textureOut.set(CGL.Texture.getTemporaryTexture(cgl,64,cgl_filter,cgl_wrap));
@@ -33,36 +43,43 @@ this.onLoaded=function()
 };
 
 
-var reload=function(nocache)
+function reload(nocache)
 {
     if(!opInstanced)return;
     var url=op.patch.getFilePath(filename.get());
-    if(nocache)url+='?rnd='+generateUUID();
+    if(nocache)url+='?rnd='+CABLES.generateUUID();
+
+    console.log('startloading ',filename.get());
+
 
     if((filename.get() && filename.get().length>1))
     {
-        var tex=CGL.Texture.load(cgl,url,function(err)
-        {
-            if(err)
+        var tex=CGL.Texture.load(cgl,url,
+            function(err)
             {
-                setTempTexture();
-                op.uiAttr({'error':'could not load texture'});
-                return;
-            }
-            op.uiAttr({'error':null});
-            textureOut.set(tex);
-            width.set(tex.width);
-            height.set(tex.height);
+                                    console.log('tex loaded!!');
 
-            if(!tex.isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
-                else op.uiAttr({warning:''});
-
-        },{
-            wrap:wrap.get(),
-            flip:flip.get(),
-            unpackAlpha:unpackAlpha.get(),
-            filter:cgl_filter
-        });
+                if(err)
+                {
+                    setTempTexture();
+                    op.uiAttr({'error':'could not load texture'});
+                    return;
+                }
+                op.uiAttr({'error':null});
+                textureOut.set(tex);
+                width.set(tex.width);
+                height.set(tex.height);
+    
+                if(!tex.isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
+                    else op.uiAttr({warning:''});
+                    
+    
+            },{
+                wrap:wrap.get(),
+                flip:flip.get(),
+                unpackAlpha:unpackAlpha.get(),
+                filter:cgl_filter
+            });
         textureOut.set(null);
         textureOut.set(tex);
 
@@ -71,25 +88,25 @@ var reload=function(nocache)
     {
         setTempTexture();
     }
-};
+}
 
-var onFilterChange=function()
+function onFilterChange()
 {
     if(tfilter.get()=='nearest') cgl_filter=CGL.Texture.FILTER_NEAREST;
     if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
     if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
 
     reload();
-};
+}
 
-var onWrapChange=function()
+function onWrapChange()
 {
     if(wrap.get()=='repeat') cgl_wrap=CGL.Texture.WRAP_REPEAT;
     if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
     if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
     reload();
-};
+}
 
 textureOut.onPreviewChanged=function()
 {
@@ -104,17 +121,8 @@ op.onFileUploaded=function(fn)
     }
 };
 
-flip.onValueChange(function(){reload();});
-filename.onValueChange(reload);
 
-tfilter.onValueChange(onFilterChange);
-wrap.onValueChange(onWrapChange);
-unpackAlpha.onValueChange(function()
-{
-    reload();
-});
 
-    
-    
+
 tfilter.set('linear');
 wrap.set('repeat');

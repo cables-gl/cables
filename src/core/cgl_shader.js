@@ -691,7 +691,7 @@ CGL.Shader=function(_cgl,_name)
     this.addModule=function(mod)
     {
 
-        mod.id=generateUUID();
+        mod.id=CABLES.generateUUID();
         mod.numId=moduleNumId;
         mod.prefix='mod'+moduleNumId;
 

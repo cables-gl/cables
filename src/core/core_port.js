@@ -7,7 +7,7 @@ CABLES.Port=function(parent,name,type,uiAttribs)
 {
     var self=this;
     this.direction=PORT_DIR_IN;
-    this.id=generateUUID();
+    this.id=CABLES.generateUUID();
     this.parent=parent;
     this.links=[];
     this.value=0.0;

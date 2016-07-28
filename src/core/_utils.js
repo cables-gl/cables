@@ -1,4 +1,6 @@
-function generateUUID()
+CABLES=CABLES || {};
+
+CABLES.generateUUID=function()
 {
     var d = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
@@ -8,7 +10,9 @@ function generateUUID()
         return (c=='x' ? r : (r&0x3|0x8)).toString(16);
     });
     return uuid;
-}
+};
+
+// generateUUID=CABLES.generateUUID;
 
 // ----------------------------------------------------------------
 
@@ -54,7 +58,7 @@ function ajaxRequest(url, callback)
 
 // ----------------------------------------------------------------
 
-CABLES=CABLES || {};
+
 
 CABLES.DateNow=performance.now || Date.now; // todo: still used??
 

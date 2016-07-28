@@ -19,7 +19,7 @@ var mul=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}
 var cgl=op.patch.cgl;
 mul.set(1);
 
-var id=generateUUID();
+var id=CABLES.generateUUID();
 var lights=[];
 
 var posVec=vec3.create();
@@ -58,7 +58,7 @@ function updateAll()
 exe.onTriggered=function()
 {
     // updateAll();
-    
+
     vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
     cgl.frameStore.phong.lights[id]=cgl.frameStore.phong.lights[id]||{};
     cgl.frameStore.phong.lights[id].pos=mpos;
@@ -68,16 +68,16 @@ exe.onTriggered=function()
     if(attachment.isLinked())
     {
         cgl.pushMvMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, 
-            [x.get(), 
-            y.get(), 
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,
+            [x.get(),
+            y.get(),
             z.get()]);
         attachment.trigger();
         cgl.popMvMatrix();
     }
 
     trigger.trigger();
-    
+
     // cgl.frameStore.phong.lights[id]=null;
 };
 

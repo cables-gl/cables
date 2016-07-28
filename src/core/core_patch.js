@@ -430,7 +430,7 @@ CABLES.Patch = function(cfg)
             var op=this.addOp(obj.ops[iop].objName,obj.ops[iop].uiAttribs);
             if(!op)continue;
             op.id=obj.ops[iop].id;
-            if(genIds) op.id=generateUUID();
+            if(genIds) op.id=CABLES.generateUUID();
 
             for(var ipi in obj.ops[iop].portsIn)
             {

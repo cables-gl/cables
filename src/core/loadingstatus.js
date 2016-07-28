@@ -57,7 +57,7 @@ CABLES.LoadingStatus=function()
 
     this.start=function(type,name)
     {
-        var id=generateUUID();
+        var id=CABLES.generateUUID();
         loadingAssets[id]=({id:id,type:type,name:name,finished:false});
         // console.log('LOAD: '+loadingAssets[id].type+': '+loadingAssets[id].finished+': '+loadingAssets[id].name );
 

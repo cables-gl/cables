@@ -31,7 +31,7 @@ var texDepth=this.addOutPort(new Port(this,"textureDepth",OP_PORT_TYPE_TEXTURE))
 
 
 
-var id=generateUUID();
+var id=CABLES.generateUUID();
 var lights=[];
 
 var vUp=vec3.create();
@@ -109,13 +109,13 @@ function renderShadowMap()
     cgl.pushViewMatrix();
 
     mat4.lookAt(cgl.vMatrix, vecEye, vecTarget, vUp);
-    
+
     mat4.multiply( depthMVP,cgl.vMatrix,cgl.pMatrix );
     // mat4.multiply( depthMVP,depthMVP, );
     mat4.multiply( depthMVP,depthMVP,biasM );
 
     trigger.trigger();
-    
+
     cgl.popViewMatrix();
     fb.renderEnd(cgl);
 }
@@ -134,7 +134,7 @@ exe.onTriggered=function()
     cgl.frameStore.phong.lights[id].mul=mul.get();
     cgl.frameStore.phong.lights[id].depthMVP=depthMVP;
     cgl.frameStore.phong.lights[id].depthTex=fb.getTextureDepth().tex;
-    
+
 
     if(attachment.isLinked())
     {

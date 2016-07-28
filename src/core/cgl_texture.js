@@ -235,6 +235,8 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
 
     };
     texture.image.src = url;
+
+            
     return texture;
 };
 
