@@ -57,7 +57,7 @@ function reload(nocache)
         var tex=CGL.Texture.load(cgl,url,
             function(err)
             {
-                                    console.log('tex loaded!!');
+                console.log('tex loaded!!');
 
                 if(err)
                 {
@@ -72,8 +72,7 @@ function reload(nocache)
     
                 if(!tex.isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
                     else op.uiAttr({warning:''});
-                    
-    
+
             },{
                 wrap:wrap.get(),
                 flip:flip.get(),
