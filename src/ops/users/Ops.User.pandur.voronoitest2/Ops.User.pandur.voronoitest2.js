@@ -5,7 +5,7 @@ var meshes=[];
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
 var voronoi = new Voronoi();
-var bbox = {xl: -140, xr: 140, yt: -100, yb: 100}; // xl is x-left, xr is x-right, yt is y-top, and yb is y-bottom
+var bbox = {xl: -140, xr: 140, yt: -80, yb: 80}; // xl is x-left, xr is x-right, yt is y-top, and yb is y-bottom
 var sites=[];
 for(var i=0;i<34;i++)
 {
