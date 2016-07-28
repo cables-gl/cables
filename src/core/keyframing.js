@@ -443,7 +443,6 @@ CABLES.TL.Anim=function(cfg)
         return time>this.keys[this.keys.length-1].time;
     };
 
-
     this.getValue=function(time)
     {
         if(this.keys.length===0)return 0;
@@ -454,7 +453,6 @@ CABLES.TL.Anim=function(cfg)
         var lastKeyIndex=this.keys.length-1;
         if(this.loop && time>this.keys[lastKeyIndex].time)
         {
-
             var currentLoop=time/this.keys[lastKeyIndex].time;
             if(currentLoop>timesLooped)
             {
