@@ -236,7 +236,7 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
     };
     texture.image.src = url;
 
-            
+
     return texture;
 };
 
@@ -270,11 +270,12 @@ CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
     return temptex;
 };
 
-CGL.Texture.fromImage=function(cgl,img,filter)
+CGL.Texture.fromImage=function(cgl,img,filter,wrap)
 {
     var texture=new CGL.Texture(cgl);
     texture.flip=false;
     if(filter)texture.filter=filter;
+    if(wrap)texture.wrap=wrap;
     texture.image = img;
     texture.initTexture(img);
     return texture;

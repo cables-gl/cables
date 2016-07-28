@@ -33,6 +33,11 @@ var cgl=op.patch.cgl;
 
 
 
+function ip(x0,x1,x2,t)//Bezier 
+{
+    var r =(x0 * (1-t) * (1-t) + 2 * x1 * (1 - t)* t + x2 * t * t);
+    return r;
+}
 
 
 function updateGeom()
@@ -61,62 +66,87 @@ function updateGeom()
         mX/=(diagram.cells[i].halfedges.length*2);
         mY/=(diagram.cells[i].halfedges.length*2);
         
-        for(var j=0;j<diagram.cells[i].halfedges.length;j++)
+        
+        
+        
+        var points=[];
+        for(var j=diagram.cells[i].halfedges.length-1;j>=0;j--)
         {
             var edge=diagram.cells[i].halfedges[j].edge;
-            
-            vertices.push( (mX+(edge.va.x-mX )*0.9)/100 );
-            vertices.push( (mY+(edge.va.y-mY )*0.9)/100 );
-            vertices.push( 0 );
-    
-            vertices.push( (mX+(edge.vb.x-mX )*0.9)/100 );
-            vertices.push( (mY+(edge.vb.y-mY )*0.9)/100 );
-            vertices.push( 0 );
+            var smaller=0.8;
 
-            vertices.push( (mX )/100 );
-            vertices.push( (mY )/100  );
-            vertices.push( 0 );
-        }        
+            // points.push( (mX+(edge.va.x-mX )*smaller)/100 );
+            // points.push( (mY+(edge.va.y-mY )*smaller)/100 );
+            // points.push( 0 );
+
+// if(j==0)
+{
+            points.push( (mX+(edge.vb.x-mX )*smaller)/100 );
+            points.push( (mY+(edge.vb.y-mY )*smaller)/100 );
+            points.push( 0 );
+    
+}
+
+    
+        }
+        
+        // points.push(points[3]);
+        // points.push(points[4]);
+        // points.push(points[5]);
+
+        points.push(0);
+        points.push(0);
+        points.push(0);
+
+
+        
+        var subd=35;
+        
+        // for(i=3;i<cgl.frameStore.SplinePoints.length-6;i+=3)
+        for(var m=3;m<points.length-6;m+=3)
+        {
+            for(j=0;j<subd;j++)
+            {
+                for(k=0;k<3;k++)
+                {
+                    var p=ip(
+                        (points[m+k-3]+points[m+k])/2,
+                        points[m+k+0],
+                        (points[m+k+3]+points[m+k+0])/2,
+                        j/subd
+                        );
+
+
+                    vertices.push(p);
+                }
+            }
+        }
+
+
+        // for(var j=0;j<diagram.cells[i].halfedges.length;j++)
+        // {
+        //     var edge=diagram.cells[i].halfedges[j].edge;
+        //     var smaller=0.9;
+
+        //     vertices.push( (mX+(edge.va.x-mX )*smaller)/100 );
+        //     vertices.push( (mY+(edge.va.y-mY )*smaller)/100 );
+        //     vertices.push( 0 );
+    
+        //     vertices.push( (mX+(edge.vb.x-mX )*smaller)/100 );
+        //     vertices.push( (mY+(edge.vb.y-mY )*smaller)/100 );
+        //     vertices.push( 0 );
+
+        //     vertices.push( (mX )/100 );
+        //     vertices.push( (mY )/100  );
+        //     vertices.push( 0 );
+        // }        
     }
     
     // op.log('voro verts:'+vertices.length);
     
     geom.setPointVertices(vertices);
-meshes[0]=new CGL.Mesh(op.patch.cgl,geom);
-    
-    // diagram = voronoi.compute(sites, bbox);
+    meshes[0]=new CGL.Mesh(op.patch.cgl,geom);
 
-    // if(meshes.length!=diagram.edges.length)
-    // {
-    //     console.log('resize mesh array!!!');
-    //     meshes.length=diagram.edges.length;
-    // }
-    
-    // for(var i=0;i<diagram.edges.length;i++)
-    // {
-    //     var edge=diagram.edges[i];
-        
-    //     if(edge.rSite && edge.lSite && (edge.lSite.voronoiId==11 || edge.rSite.voronoiId==11))
-    //     {
-    //         var geom;
-    //         if(meshes[i] && meshes[i].geom)geom=meshes[i].geom;
-    //         else geom=new CGL.Geometry();
-    //         var vertices=geom.vertices;
-    //         vertices.length=diagram.edges.length*2*3;
-
-    //         vertices[i*2*3+0]=(edge.va.x )/100;
-    //         vertices[i*2*3+1]=(edge.va.y )/100 ;
-    //         vertices[i*2*3+2]=0;
-    
-    //         vertices[i*2*3+3]=(edge.vb.x )/100 ;
-    //         vertices[i*2*3+4]=(edge.vb.y )/100 ;
-    //         vertices[i*2*3+5]=0;
-    
-    //         geom.setPointVertices(vertices);
-    //         if(!meshes[i])meshes[i]=new CGL.Mesh(op.patch.cgl,geom);
-    //             else meshes[i].setGeom(geom);
-    //         }
-    // }
 }
 
 
@@ -127,21 +157,22 @@ updateGeom();
 render.onTriggered=function()
 {
     sites[5].x=Math.sin(Date.now()*0.001)*40+0;
-    sites[10].x=Math.sin(Date.now()*0.001)*40+0;
+    sites[10].x=-1*Math.sin(Date.now()*0.001)*40+0;
+    sites[30].x=Math.sin(Date.now()*0.001)*40+0;
+    sites[30].x=Math.sin(Date.now()*0.001)*40+0;
+    sites[30].x=-1*Math.sin(Date.now()*0.001)*40+0;
+    
     sites[15].y=Math.sin(Date.now()*0.001)*40+0;
-    sites[20].y=Math.sin(Date.now()*0.001)*40+0;
+    sites[20].y=-1*Math.sin(Date.now()*0.001)*40+0;
     sites[22].y=Math.sin(Date.now()*0.001)*40+0;
-    sites[25].y=Math.sin(Date.now()*0.001)*40+0;
+    sites[25].y=-1*Math.sin(Date.now()*0.001)*40+0;
+    voronoi.recycle(diagram);
     updateGeom();
-
     
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
 
-    // shader.glPrimitive=cgl.gl.LINES;
-
-// var i=1;
     for(var i in meshes)
     {
         meshes[i].render(op.patch.cgl.getShader());
