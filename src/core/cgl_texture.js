@@ -22,6 +22,8 @@ CGL.Texture=function(cgl,options)
         if(options.isDepthTexture) textureType='depth';
         if(options.isFloatingPointTexture) textureType='floatingpoint';
         if(options.filter) this.filter=options.filter;
+        if(options.wrap) this.wrap=options.wrap;
+        this.flip=options.flip;
     }
 
     this.isPowerOfTwo=function()
