@@ -29,7 +29,7 @@ tfilter.onValueChange(onFilterChange);
 wrap.onValueChange(onWrapChange);
 unpackAlpha.onValueChange(function(){ reload(); });
 
-
+var timedLoader=0;
 
 var setTempTexture=function()
 {
@@ -42,8 +42,19 @@ var setTempTexture=function()
 //     reload();
 // };
 
-
 function reload(nocache)
+{
+    
+    clearTimeout(timedLoader);
+    timedLoader=setTimeout(function()
+    {
+        realReload(nocache);
+    },30);
+    
+}
+
+
+function realReload(nocache)
 {
     
     // if(!opInstanced)return;
