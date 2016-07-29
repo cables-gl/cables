@@ -19,7 +19,7 @@ unpackAlpha.set(true);
 var cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
-var opInstanced=false;
+// var opInstanced=false;
 
 
 flip.onValueChange(function(){reload();});
@@ -36,16 +36,17 @@ var setTempTexture=function()
     textureOut.set(CGL.Texture.getTemporaryTexture(cgl,64,cgl_filter,cgl_wrap));
 };
 
-this.onLoaded=function()
-{
-    opInstanced=true;
-    reload();
-};
+// this.onLoaded=function()
+// {
+//     opInstanced=true;
+//     reload();
+// };
 
 
 function reload(nocache)
 {
-    if(!opInstanced)return;
+    
+    // if(!opInstanced)return;
     var url=op.patch.getFilePath(filename.get());
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 

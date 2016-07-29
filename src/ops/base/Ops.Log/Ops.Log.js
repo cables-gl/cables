@@ -19,9 +19,14 @@ function arraysEqual(arr1, arr2) {
 var oldArr = [];
 var oldObj = {};
 
-var printValue = function(){
-    if(valueInput.get()) {
-        if(valueInput.links && valueInput.links.length > 0) {
+function printValue()
+{
+    console.log('changed... ',valueInput.get());
+
+    if(valueInput.get())
+    {
+        if(valueInput.links && valueInput.links.length > 0)
+        {
             op.log("[" + valueInput.links[0].portOut.parent.name + ": " + valueInput.links[0].portOut.name + "] " + valueInput.get());
         } else {
             op.log("[Value] " + valueInput.get());
