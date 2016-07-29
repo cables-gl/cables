@@ -301,7 +301,6 @@ CABLES.Patch = function(cfg)
         var arr=[];
         for(var i in this.ops)
         {
-            console.log(this.ops[i].name);
             if(this.ops[i].name==name)arr.push(this.ops[i]);
         }
         return arr;
@@ -459,8 +458,8 @@ CABLES.Patch = function(cfg)
             for(var ipo in obj.ops[iop].portsOut)
             {
                 var port2=op.getPort(obj.ops[iop].portsOut[ipo].name);
-
-                if(port2&& port2.type!=OP_PORT_TYPE_TEXTURE)port2.val=obj.ops[iop].portsOut[ipo].value;
+                if(port2&& port2.type!=OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value') )
+                    port2.set(obj.ops[iop].portsOut[ipo].value);
             }
         }
         // console.log('create links...');

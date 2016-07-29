@@ -86,7 +86,7 @@ CGL.Texture=function(cgl,options)
             }
             else
             {
-                console.log('unknown texture filter!');
+                console.log('unknown texture filter!',self.filter);
             }
         }
     }

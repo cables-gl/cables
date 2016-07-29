@@ -14,8 +14,14 @@ CABLES.Link = function(scene)
 
     this.setValue=function()
     {
-        if(this.portIn.get()!=this.portOut.get())
-            this.portIn.set(this.portOut.get());
+        var v=this.portOut.get();
+        // if(v!=v)return;
+
+        if(
+            v==v &&  // NaN is the only JavaScript value that is treated as unequal to itself
+            this.portIn.get()!=v
+        )
+            this.portIn.set(v);
     };
 
     this.getOtherPort=function(p)

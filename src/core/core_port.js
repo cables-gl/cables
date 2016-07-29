@@ -287,7 +287,10 @@ CABLES.Port=function(parent,name,type,uiAttribs)
         var obj={};
         obj.name=this.getName();
 
-        if(!this.ignoreValueSerialize) obj.value=this.value;
+        if(!this.ignoreValueSerialize && this.links.length===0)
+        {
+            obj.value=this.value;
+        }
 
         if(animated) obj.animated=true;
         if(this.anim) obj.anim=this.anim.getSerialized();
