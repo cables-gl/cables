@@ -86,7 +86,7 @@ function realReload(nocache)
                     else op.uiAttr({warning:''});
 
             },{
-                wrap:wrap.get(),
+                wrap:cgl_wrap,
                 flip:flip.get(),
                 unpackAlpha:unpackAlpha.get(),
                 filter:cgl_filter
