@@ -100,46 +100,46 @@ function updateGeom()
 
 
         
-        var subd=35;
+        // var subd=35;
         
-        // for(i=3;i<cgl.frameStore.SplinePoints.length-6;i+=3)
-        for(var m=3;m<points.length-6;m+=3)
-        {
-            for(j=0;j<subd;j++)
-            {
-                for(k=0;k<3;k++)
-                {
-                    var p=ip(
-                        (points[m+k-3]+points[m+k])/2,
-                        points[m+k+0],
-                        (points[m+k+3]+points[m+k+0])/2,
-                        j/subd
-                        );
-
-
-                    vertices.push(p);
-                }
-            }
-        }
-
-
-        // for(var j=0;j<diagram.cells[i].halfedges.length;j++)
+        // // for(i=3;i<cgl.frameStore.SplinePoints.length-6;i+=3)
+        // for(var m=3;m<points.length-6;m+=3)
         // {
-        //     var edge=diagram.cells[i].halfedges[j].edge;
-        //     var smaller=0.9;
+        //     for(j=0;j<subd;j++)
+        //     {
+        //         for(k=0;k<3;k++)
+        //         {
+        //             var p=ip(
+        //                 (points[m+k-3]+points[m+k])/2,
+        //                 points[m+k+0],
+        //                 (points[m+k+3]+points[m+k+0])/2,
+        //                 j/subd
+        //                 );
 
-        //     vertices.push( (mX+(edge.va.x-mX )*smaller)/100 );
-        //     vertices.push( (mY+(edge.va.y-mY )*smaller)/100 );
-        //     vertices.push( 0 );
+
+        //             vertices.push(p);
+        //         }
+        //     }
+        // }
+
+
+        for(var j=0;j<diagram.cells[i].halfedges.length;j++)
+        {
+            var edge=diagram.cells[i].halfedges[j].edge;
+            var smaller=0.9;
+
+            vertices.push( (mX+(edge.va.x-mX )*smaller)/100 );
+            vertices.push( (mY+(edge.va.y-mY )*smaller)/100 );
+            vertices.push( 0 );
     
-        //     vertices.push( (mX+(edge.vb.x-mX )*smaller)/100 );
-        //     vertices.push( (mY+(edge.vb.y-mY )*smaller)/100 );
-        //     vertices.push( 0 );
+            vertices.push( (mX+(edge.vb.x-mX )*smaller)/100 );
+            vertices.push( (mY+(edge.vb.y-mY )*smaller)/100 );
+            vertices.push( 0 );
 
-        //     vertices.push( (mX )/100 );
-        //     vertices.push( (mY )/100  );
-        //     vertices.push( 0 );
-        // }        
+            vertices.push( (mX )/100 );
+            vertices.push( (mY )/100  );
+            vertices.push( 0 );
+        }        
     }
     
     // op.log('voro verts:'+vertices.length);
