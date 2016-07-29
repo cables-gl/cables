@@ -270,6 +270,17 @@ CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
     return temptex;
 };
 
+CGL.Texture.createFromImage=function(cgl,img,options)
+{
+    var texture=new CGL.Texture(cgl,options);
+    texture.flip=false;
+    texture.image = img;
+    texture.initTexture(img);
+    return texture;
+};
+
+
+// deprecated!
 CGL.Texture.fromImage=function(cgl,img,filter,wrap)
 {
     var texture=new CGL.Texture(cgl);
