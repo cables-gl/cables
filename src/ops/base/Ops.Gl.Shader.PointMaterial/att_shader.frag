@@ -15,16 +15,27 @@ uniform float a;
 
 void main()
 {
-    #ifdef HAS_TEXTURES
-       vec2 texCoords=texCoord;
-    #endif
+
 
     {{MODULE_BEGIN_FRAG}}
 
     vec4 col=vec4(r,g,b,a);
+
+
     #ifdef HAS_TEXTURES
+
+
         #ifdef HAS_TEXTURE_DIFFUSE
-            col=texture2D(tex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));
+
+            #ifdef LOOKUP_TEXTURE
+                col=texture2D(tex,texCoord);
+            #endif
+            #ifndef LOOKUP_TEXTURE
+                col=texture2D(tex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));
+            #endif
+
+
+
 
             #ifdef COLORIZE_TEXTURE
                col.r*=r;
