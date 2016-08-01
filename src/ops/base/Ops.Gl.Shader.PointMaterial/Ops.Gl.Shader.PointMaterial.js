@@ -113,3 +113,11 @@ colorizeTexture.onValueChanged=function()
         else shader.removeDefine('COLORIZE_TEXTURE');
 };
 
+var textureLookup=op.addInPort(new Port(op,"texture Lookup",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+textureLookup.val=false;
+textureLookup.onValueChanged=function()
+{
+    if(textureLookup.val) shader.define('LOOKUP_TEXTURE');
+        else shader.removeDefine('LOOKUP_TEXTURE');
+};
+

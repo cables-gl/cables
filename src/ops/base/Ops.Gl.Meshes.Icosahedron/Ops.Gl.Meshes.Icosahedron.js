@@ -13,7 +13,6 @@ geomOut.ignoreValueSerialize=true;
 smooth.onValueChanged=generate;
 
 var mesh=null;
-var geom=null;
 var cgl=op.patch.cgl;
 smooth.set(false);
 
@@ -25,7 +24,7 @@ render.onTriggered=function()
 
 function generate()
 {
-    var t = (1.0 + Math.sqrt(5.0)) / 2.0;
+    var t = Math.sqrt(5.0) / 2;
     
     var verts=[];
     verts.push(-1,  t,  0);
