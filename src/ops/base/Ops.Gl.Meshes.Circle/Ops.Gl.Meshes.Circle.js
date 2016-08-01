@@ -17,10 +17,23 @@ geomOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
 
 
+var drawSpline=op.addInPort(new Port(op,"Spline",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+drawSpline.set(false);
+
+
+var oldPrim=0;
+var shader=null;
 render.onTriggered=function()
 {
-    mesh.render(cgl.getShader());
+    shader=cgl.getShader();
+    oldPrim=shader.glPrimitive;
+    
+    if(drawSpline.get()) shader.glPrimitive=cgl.gl.LINE_STRIP;
+
+    mesh.render(shader);
     trigger.trigger();
+
+    shader.glPrimitive=oldPrim;
 };
 
 segments.set(40);
@@ -45,14 +58,40 @@ function calc()
     var posxTexCoord=0,posyTexCoord=0;
     var posx=0,posy=0;
 
+    var verts=[];
+
+    if(drawSpline.get())
+    {
+        var lastX=0;
+        var lastY=0;
+        for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
+        {
+            degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+            posx=Math.cos(degInRad)*radius.get();
+            posy=Math.sin(degInRad)*radius.get();
+            if(i>0)
+            {
+                verts.push(lastX);
+                verts.push(lastY);
+                verts.push(0);
+            }
+            verts.push(posx);
+            verts.push(posy);
+            verts.push(0);
+            
+            lastX=posx;
+            lastY=posy;
+        }
+        geom.setPointVertices(verts);
+    }
+    else
     if(innerRadius.get()<=0)
     {
-      for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
-      {
-          degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
-          posx=Math.cos(degInRad)*radius.get();
-          posy=Math.sin(degInRad)*radius.get();
-
+        for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
+        {
+            degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+            posx=Math.cos(degInRad)*radius.get();
+            posy=Math.sin(degInRad)*radius.get();
 
             if(mapping.get()=='flat')
             {
@@ -72,20 +111,20 @@ function calc()
         //   posxTexCoord=(Math.cos(degInRad)+1.0)/2;
         //   posyTexCoord=(Math.sin(degInRad)+1.0)/2;
 
-          geom.addFace(
+            geom.addFace(
                       [posx,posy,0],
                       [oldPosX,oldPosY,0],
                       [0,0,0]
                       );
 
-          geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
-          geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
-
-          oldPosXTexCoord=posxTexCoord;
-          oldPosYTexCoord=posyTexCoord;
-
-          oldPosX=posx;
-          oldPosY=posy;
+            geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
+            geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
+            
+            oldPosXTexCoord=posxTexCoord;
+            oldPosYTexCoord=posyTexCoord;
+            
+            oldPosX=posx;
+            oldPosY=posy;
       }
     }
     else
@@ -171,4 +210,5 @@ innerRadius.onValueChanged=calc;
 percent.onValueChanged=calc;
 steps.onValueChanged=calc;
 invertSteps.onValueChanged=calc;
+drawSpline.onValueChanged=calc;
 calc();
