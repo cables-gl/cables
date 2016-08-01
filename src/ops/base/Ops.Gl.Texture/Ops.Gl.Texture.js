@@ -10,17 +10,12 @@ var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview
 var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
-
-
-
 flip.set(true);
 unpackAlpha.set(true);
 
 var cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
-// var opInstanced=false;
-
 
 flip.onValueChange(function(){reload();});
 filename.onValueChange(reload);
@@ -36,23 +31,14 @@ var setTempTexture=function()
     textureOut.set(CGL.Texture.getTemporaryTexture(cgl,64,cgl_filter,cgl_wrap));
 };
 
-// this.onLoaded=function()
-// {
-//     opInstanced=true;
-//     reload();
-// };
-
 function reload(nocache)
 {
-    
     clearTimeout(timedLoader);
     timedLoader=setTimeout(function()
     {
         realReload(nocache);
     },30);
-    
 }
-
 
 function realReload(nocache)
 {
@@ -62,7 +48,6 @@ function realReload(nocache)
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 
     console.log('startloading ',filename.get());
-
 
     if((filename.get() && filename.get().length>1))
     {
