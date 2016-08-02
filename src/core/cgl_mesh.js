@@ -14,7 +14,7 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
     this.numInstances=0;
     // var glPrimitive=_triangleMode || cgl.gl.TRIANGLES;
     var ext = cgl.gl.getExtension("ANGLE_instanced_arrays");
-
+    this.addVertexNumbers=false;
 
     function setAttribute(name,array,itemSize,cb)
     {
@@ -66,6 +66,8 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
         return attributes;
     };
 
+
+
     this.setGeom=function(geom)
     {
         CGL.MESH.lastShader=null;
@@ -99,14 +101,18 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
 
 
         // make this optional!
-        var verticesNumbers=[];
-        verticesNumbers.length=geom.vertices.length/3;
-        for(i=0;i<geom.vertices.length/3;i++)verticesNumbers[i]=i;
-        setAttribute('attrVertIndex',verticesNumbers,1,function(attr,geom,shader)
-            {
-                if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);
-                shader.uniformNumVertices.setValue(geom.vertices.length/3);
-            });
+        if(this.addVertexNumbers)
+        {
+            var verticesNumbers=[];
+            verticesNumbers.length=geom.vertices.length/3;
+            for(i=0;i<geom.vertices.length/3;i++)verticesNumbers[i]=i;
+            setAttribute('attrVertIndex',verticesNumbers,1,function(attr,geom,shader)
+                {
+                    if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);
+                    shader.uniformNumVertices.setValue(geom.vertices.length/3);
+                });
+
+        }
 
         // for(i=0;i<geom.morphTargets.length;i++) addAttribute('attrMorphTargetA',geom.morphTargets[i],3);
     };
@@ -546,7 +552,7 @@ CGL.Geometry=function()
     {
         if(verts.length%3!==0)
         {
-            console.err('CGL MESH : SetPointVertices: Array must be multiple of three.');
+            console.error('CGL MESH : SetPointVertices: Array must be multiple of three.');
             return;
         }
         this.vertices=verts;
