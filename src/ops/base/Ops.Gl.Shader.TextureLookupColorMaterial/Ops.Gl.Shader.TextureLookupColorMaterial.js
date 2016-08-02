@@ -50,7 +50,7 @@ var posX=op.addInPort(new Port(op,"pos X",OP_PORT_TYPE_VALUE,{ display:'range'})
 posX.uniform=new CGL.Uniform(shader,'f','posX',posX);
 posX.set(1.0);
 
-var posY=op.addInPort(new Port(op,"pos X",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var posY=op.addInPort(new Port(op,"pos Y",OP_PORT_TYPE_VALUE,{ display:'range'}));
 posY.uniform=new CGL.Uniform(shader,'f','posY',posY);
 posY.set(1.0);
 

@@ -14,7 +14,7 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
     this.numInstances=0;
     // var glPrimitive=_triangleMode || cgl.gl.TRIANGLES;
     var ext = cgl.gl.getExtension("ANGLE_instanced_arrays");
-
+this.addVertexNumbers=false;
 
     function setAttribute(name,array,itemSize,cb)
     {
@@ -101,15 +101,17 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
 
 
         // make this optional!
-        var verticesNumbers=[];
+	if(this.addVertexNumbers)
+	{
+       	var verticesNumbers=[];
         verticesNumbers.length=geom.vertices.length/3;
         for(i=0;i<geom.vertices.length/3;i++)verticesNumbers[i]=i;
         setAttribute('attrVertIndex',verticesNumbers,1,function(attr,geom,shader)
             {
                 if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);
                 shader.uniformNumVertices.setValue(geom.vertices.length/3);
-            });
-
+	    });
+	}
         // for(i=0;i<geom.morphTargets.length;i++) addAttribute('attrMorphTargetA',geom.morphTargets[i],3);
     };
 
