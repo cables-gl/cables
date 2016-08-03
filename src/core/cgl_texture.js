@@ -177,8 +177,8 @@ CGL.Texture=function(cgl,options)
     this.initTexture=function(img,filter)
     {
         cgl.gl.pixelStorei(cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
-        self.width=img.width;
-        self.height=img.height;
+        if(img.width)self.width=img.width;
+        if(img.height)self.height=img.height;
         if(filter)this.filter=filter;
 
         cgl.gl.bindTexture(texType, self.tex);
@@ -277,6 +277,9 @@ CGL.Texture.createFromImage=function(cgl,img,options)
     var texture=new CGL.Texture(cgl,options);
     texture.flip=false;
     texture.image = img;
+    texture.width=img.width;
+    texture.height=img.height;
+    // console.log('IIIMMMGGG',img,img.width,img.height);
     texture.initTexture(img);
     return texture;
 };

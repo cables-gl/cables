@@ -26,6 +26,7 @@ var shader=null;
 render.onTriggered=function()
 {
     shader=cgl.getShader();
+    if(!shader)return;
     oldPrim=shader.glPrimitive;
     
     if(drawSpline.get()) shader.glPrimitive=cgl.gl.LINE_STRIP;
