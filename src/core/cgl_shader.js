@@ -87,6 +87,11 @@ CGL.Uniform=function(_shader,_type,_name,_value)
         value=v;
     };
 
+    this.getLoc=function()
+    {
+        return loc;
+    };
+
 
 
 
