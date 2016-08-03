@@ -47,6 +47,7 @@ refresh.onTriggered=function()
     if(!arr)return;
     var width=arr.length;
 
+
     ctx.beginPath();
     
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -89,22 +90,9 @@ refresh.onTriggered=function()
     
     ctx.fillStyle="#000";
     ctx.fillText(arr.length+' ...', 10, height-10);
-    
 
-    if(texOut.get()) texOut.get().initTexture(cgl,canvImage);
-        else texOut.set( new CGL.Texture.fromImage(cgl,canvImage) );
-    
+    if(texOut.get()) texOut.get().initTexture(canvImage);
+        else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage) );
+
 };
 
-
-texOut.onPreviewChanged=function()
-{
-    if(texOut.showPreview)
-        render.onTriggered=function()
-        {
-            // doRender();
-            texOut.get().preview();
-        };
-    else 
-        render.onTriggered=doRender;
-};
