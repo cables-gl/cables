@@ -26,6 +26,8 @@ var ctx = canvImage.getContext('2d');
 var buff=[];
 var maxValue=-999999;
 var minValue=999999;
+var colors=[];
+var lastTime=Date.now();
 
 value.onLinkChanged=reset;
 index.onLinkChanged=reset;
@@ -47,8 +49,6 @@ function reset()
     maxValue=-999999;
     minValue=999999;
 }
-var colors=[];
-var lastTime=Date.now();
 
 function addValue(val)
 {
@@ -59,17 +59,14 @@ function addValue(val)
     if(!buff[currentIndex])
     {
         buff[currentIndex]=[];
-        
         Math.randomSeed=5711+2*currentIndex;
         colors[currentIndex] = 'rgba('+Math.round(Math.seededRandom()*255)+','+Math.round(Math.seededRandom()*255)+','+Math.round(Math.seededRandom()*255)+',1)';
-
-        
     }
     
     var buf=buff[currentIndex];
     buf.push(val);
     
-    if(Date.now()-lastTime>30)updateGraph();
+    if(Date.now()-lastTime>20)updateGraph();
 }
 
 function updateGraph()
@@ -88,22 +85,16 @@ function updateGraph()
     
     for(var b=0;b<buff.length;b++)
     {
-        
         buf=buff[b];
         if(!buf)continue;
 
-        
         ctx.lineWidth = 2;
     
         var h=Math.max(Math.abs(maxValue),Math.abs(minValue));
         var heightmul=canvas.height/h;
         var start=Math.max(0,buf.length-canvas.width);
-    
 
-    
-    
-    ctx.beginPath();    
-        console.log(colors[b]);
+        ctx.beginPath();    
         ctx.strokeStyle=colors[b];
 
         ctx.moveTo(0,getPos(buf[start]));
@@ -115,13 +106,9 @@ function updateGraph()
                 getPos(buf[i]));
     
         }
-    ctx.stroke();
-    
+        ctx.stroke();
     }
-    
-    
 
-    
     ctx.font = "22px monospace";
 
     ctx.fillStyle="#f00";
