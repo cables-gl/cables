@@ -15,8 +15,6 @@
     this.avgVolume=this.addOutPort(new Port(this, "average volume",OP_PORT_TYPE_VALUE));
     this.fftOut=this.addOutPort(new Port(this, "fft",OP_PORT_TYPE_ARRAY));
 
-
-
     this.oldAudioIn=null;
 
     this.analyser = audioContext.createAnalyser();
@@ -24,6 +22,32 @@
     this.analyser.fftSize = 256;
     var fftBufferLength=0;
     var fftDataArray =null;
+
+// inMaxDecibel.onValueChanged=updateDecibel;
+// inMinDecibel.onValueChanged=updateDecibel;
+
+// function updateDecibel()
+// {
+    
+//     var min=inMinDecibel.get();
+//     var max=inMaxDecibel.get();
+    
+//     if(min>=max)min=max-1;
+//     if(max<=min)max=min+1;
+    
+//     if(min<-171)min=-171;
+//     if(max<=-110)max=-109;
+    
+//     self.analyser.minDecibels = min;
+//     self.analyser.maxDecibels = max;
+    
+    
+    
+//     console.log('set decibel ',min,max);
+// }
+    
+        
+
 
     this.refresh.onTriggered = function()
     {
@@ -33,6 +57,9 @@
         // array.length/=Math.round(audioContext.sampleRate/44100;
         if(!array)return;
         self.analyser.getByteFrequencyData(array);
+    self.analyser.minDecibels = -110;
+    self.analyser.maxDecibels = -10;
+
         
         if(!fftDataArray)return;
         var values = 0;
