@@ -66,6 +66,8 @@ this.addVertexNumbers=false;
         return attributes;
     };
 
+
+
     this.setGeom=function(geom)
     {
         CGL.MESH.lastShader=null;
@@ -94,22 +96,20 @@ this.addVertexNumbers=false;
         if(geom.texCoords && geom.texCoords.length>0) setAttribute('attrTexCoord',geom.texCoords,2);
         if(geom.hasOwnProperty('tangents') && geom.tangents && geom.tangents.length>0) setAttribute('attrTangent',geom.tangents,3);
         if(geom.hasOwnProperty('biTangents') && geom.biTangents && geom.biTangents.length>0) setAttribute('attrBiTangent',geom.biTangents,3);
-
         if(geom.vertexColors.length>0) setAttribute('attrVertColor',geom.vertexColors,4);
 
-
         // make this optional!
-	if(this.addVertexNumbers)
-	{
-       	var verticesNumbers=[];
-        verticesNumbers.length=geom.vertices.length/3;
-        for(i=0;i<geom.vertices.length/3;i++)verticesNumbers[i]=i;
-        setAttribute('attrVertIndex',verticesNumbers,1,function(attr,geom,shader)
-            {
-                if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);
-                shader.uniformNumVertices.setValue(geom.vertices.length/3);
-	    });
-	}
+    	if(this.addVertexNumbers)
+    	{
+           	var verticesNumbers=[];
+            verticesNumbers.length=geom.vertices.length/3;
+            for(i=0;i<geom.vertices.length/3;i++)verticesNumbers[i]=i;
+            setAttribute('attrVertIndex',verticesNumbers,1,function(attr,geom,shader)
+                {
+                    if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);
+                    shader.uniformNumVertices.setValue(geom.vertices.length/3);
+    	    });
+    	}
         // for(i=0;i<geom.morphTargets.length;i++) addAttribute('attrMorphTargetA',geom.morphTargets[i],3);
     };
 
@@ -514,8 +514,7 @@ CGL.Geometry=function()
 
         // console.log('this.vertices',this.vertices.length);
         // console.log('this.vertexNormals',this.vertexNormals.length);
-
-            // console.log('calc vertexnormals');
+        // console.log('calc vertexnormals');
 
         for(i=0;i<this.verticesIndices.length;i+=3) // faces
         {
@@ -548,7 +547,7 @@ CGL.Geometry=function()
     {
         if(verts.length%3!==0)
         {
-            console.err('CGL MESH : SetPointVertices: Array must be multiple of three.');
+            console.error('CGL MESH : SetPointVertices: Array must be multiple of three.');
             return;
         }
         this.vertices=verts;

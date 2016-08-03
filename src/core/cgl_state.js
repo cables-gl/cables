@@ -66,7 +66,7 @@ CGL.State=function()
             var ext = this.gl.getExtension("ANGLE_instanced_arrays");
             if(!ext)
             {
-                console.err('no instanced arrays extension');
+                console.error('no instanced arrays extension');
             }
 
             this.canvasWidth=this.canvas.clientWidth;
