@@ -49,7 +49,7 @@ refresh.onTriggered=function()
 
     ctx.beginPath();
     
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    // ctx.clearRect(0,0,canvas.width,canvas.height);
 
     ctx.strokeStyle="#f00";
     ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -97,14 +97,3 @@ refresh.onTriggered=function()
 };
 
 
-texOut.onPreviewChanged=function()
-{
-    if(texOut.showPreview)
-        render.onTriggered=function()
-        {
-            // doRender();
-            texOut.get().preview();
-        };
-    else 
-        render.onTriggered=doRender;
-};

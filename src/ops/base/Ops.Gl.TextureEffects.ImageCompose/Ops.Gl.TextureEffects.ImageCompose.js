@@ -72,17 +72,17 @@ var doRender=function()
     texOut.set(effect.getCurrentSourceTexture());
 };
 
-texOut.onPreviewChanged=function()
-{
-    if(texOut.showPreview)
-        render.onTriggered=function()
-        {
-            doRender();
-            tex.preview();
-        };
-    else 
-        render.onTriggered=doRender;
-};
+// texOut.onPreviewChanged=function()
+// {
+//     if(texOut.showPreview)
+//         render.onTriggered=function()
+//         {
+//             doRender();
+//             tex.preview();
+//         };
+//     else 
+//         render.onTriggered=doRender;
+// };
 
 
 function onFilterChange()
