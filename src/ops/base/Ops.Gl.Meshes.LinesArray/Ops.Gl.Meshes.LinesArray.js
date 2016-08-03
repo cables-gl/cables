@@ -81,16 +81,21 @@ function rebuild()
         tc.length=0;
         indices.length=0;
         count=0;
+        lvx=null;
     }
 
     for(r=numRows;r>=0;r--)
     {
         var lvx=null,lvy=null,lvz=null;
+        var ltx=null,lxy=null;
 
         for(c=numColumns;c>=0;c--)
         {
             vx = c * stepColumn - width.get()  / 2 + x;
             vy = r * stepRow    - height.get() / 2 + y;
+            
+            var tx = c/numColumns;
+            var ty = 1.0-r/numRows;
             vz=0.0;
 
             if(axis.get()=='xz') 
@@ -110,11 +115,11 @@ function rebuild()
                 verts.push( vy );
                 verts.push( vz );
     
-                tc.push( c/numColumns );
-                tc.push( 1.0-r/numRows );
+                tc.push( ltx );
+                tc.push( lty );
 
-                tc.push( c/numColumns );
-                tc.push( 1.0-r/numRows );
+                tc.push( tx );
+                tc.push( ty );
     
                 indices.push(count);
                 count++;
@@ -126,6 +131,9 @@ function rebuild()
             {
                 addMesh();
             }
+
+            ltx=tx;
+            lty=ty;
 
             lvx=vx;
             lvy=vy;
