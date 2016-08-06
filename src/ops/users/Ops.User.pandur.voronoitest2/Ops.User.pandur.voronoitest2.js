@@ -1,4 +1,5 @@
 op.name="voronoitest2";
+var v=op.addInPort(new Port(op,"parameter",OP_PORT_TYPE_VALUE,{display:"string"}));
 
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
@@ -46,6 +47,8 @@ var checksums=[];
     
     points2.length=1000;
     points.length=1000;
+    var vertices=[];
+    var texCoords=[];
 
 
 var firsttime=true;
@@ -56,8 +59,6 @@ function updateGeom()
     // meshes.length=1;
 
     // var geom=new CGL.Geometry();
-    var vertices=[];
-    var texCoords=[];
     var countMeshUpdates=0;
 
 // console.log(sites[0].voronoiId );
