@@ -41,6 +41,7 @@ var srcFrag=''
     .endl()+'   uniform float posX;'
     .endl()+'   uniform float posY;'
     .endl()+'   uniform float scale;'
+    .endl()+'   uniform float rotate;'
     // .endl()+'#endif'
 
     .endl()+'#ifdef HAS_TEXTUREALPHA'
@@ -62,12 +63,36 @@ var srcFrag=''
     .endl()+'           tc.y=1.0-tc.y;'
     .endl()+'       #endif'
     .endl()+''
-    .endl()+'       #ifdef TEX_TRANSFORM'
-    .endl()+'           tc.x /= scale;'
-    .endl()+'           tc.y /= scale;'
-    .endl()+'           tc.x += posX;'
-    .endl()+'           tc.y += posY;'
-    .endl()+'       #endif'
+
+
+
+
+.endl()+'       #ifdef TEX_TRANSFORM'
+.endl()+'    vec3 coordinates=vec3(tc.x,tc.y,1.0);'
+// .endl()+'         coordinates.x = gl_FragCoord.x / resolution.x;'
+// .endl()+'         coordinates.y = gl_FragCoord.y / resolution.y;'
+// .endl()+'         coordinates.z = 1.0;'
+
+.endl()+'    float angle = radians( rotate );'
+
+.endl()+'    vec2 scale= vec2(scale,scale);'
+.endl()+'    vec2 translate= vec2(posX,posY);'
+
+// .endl()+'    transform;'
+.endl()+'    mat3 transform = mat3(   scale.x * cos( angle ), scale.x * sin( angle ), 0.0,'
+.endl()+'                           - scale.y * sin( angle ), scale.y * cos( angle ), 0.0,'
+.endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y + 0.5, 1.0);'
+
+.endl()+'    tc=(transform * coordinates ).xy;'
+.endl()+'       #endif'
+    // gl_FragColor = texture2D( texture, (  transform * coordinates ).xy );
+
+    // .endl()+'       #ifdef TEX_TRANSFORM'
+    // .endl()+'           tc.x /= scale;'
+    // .endl()+'           tc.y /= scale;'
+    // .endl()+'           tc.x += posX;'
+    // .endl()+'           tc.y += posY;'
+    // .endl()+'       #endif'
     .endl()+''
     .endl()+''
     .endl()+'       blendRGBA=texture2D(image,tc);'
@@ -253,23 +278,26 @@ alphaSrc.set("alpha channel");
     // texture transform
     //
     var scale=op.addInPort(new Port(op,"scale",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var posX=op.addInPort(new Port(op,"pos x",OP_PORT_TYPE_VALUE,{  }));
-    var posY=op.addInPort(new Port(op,"pos y",OP_PORT_TYPE_VALUE,{  }));
+    var posX=op.addInPort(new Port(op,"pos x",OP_PORT_TYPE_VALUE, {}));
+    var posY=op.addInPort(new Port(op,"pos y",OP_PORT_TYPE_VALUE, {}));
+    var rotate=op.addInPort(new Port(op,"rotate",OP_PORT_TYPE_VALUE, {}));
 
     scale.set(1.0);
 
     var uniScale=new CGL.Uniform(shader,'f','scale',scale.get());
     var uniPosX=new CGL.Uniform(shader,'f','posX',posX.get());
     var uniPosY=new CGL.Uniform(shader,'f','posY',posY.get());
+    var uniRotate=new CGL.Uniform(shader,'f','rotate',rotate.get());
 
     function updateTransform()
     {
-        if(scale.get()!=1.0 || posX.get()!=0.0 || posY.get()!=0.0 )
+        if(scale.get()!=1.0 || posX.get()!=0.0 || posY.get()!=0.0 || rotate.get()!=0.0 )
         {
-            if(!shader.hasDefine('TEX_TRANSFORM'))shader.define('TEX_TRANSFORM');
+            if(!shader.hasDefine('TEX_TRANSFORM')) shader.define('TEX_TRANSFORM');
             uniScale.setValue( parseFloat(scale.get()) );
             uniPosX.setValue( posX.get() );
             uniPosY.setValue( posY.get() );
+            uniRotate.setValue( rotate.get() );
         }
         else
         {
@@ -280,6 +308,7 @@ alphaSrc.set("alpha channel");
     scale.onValueChange(updateTransform);
     posX.onValueChange(updateTransform);
     posY.onValueChange(updateTransform);
+    rotate.onValueChange(updateTransform);
 
 }
 
