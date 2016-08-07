@@ -35,12 +35,16 @@ inReset.onTriggered=reset;
 
 value.onValueChanged=function()
 {
-    addValue(value.get());
+    addValue(value.get(),Math.round(index.get()));
 };
 
 trigger.onTriggered=function()
 {
-    addValue(value.get());
+    for(var i=0;i<buff.length;i++)
+    {
+        if(buff[i]) addValue(buff[i][ buff[i].length-1 ],i);
+    }
+    updateGraph();
 };
 
 function reset()
@@ -50,12 +54,12 @@ function reset()
     minValue=999999;
 }
 
-function addValue(val)
+function addValue(val,currentIndex)
 {
     maxValue=Math.max(maxValue,parseFloat(val));
     minValue=Math.min(minValue,parseFloat(val));
     
-    var currentIndex=Math.round(index.get());
+    
     if(!buff[currentIndex])
     {
         buff[currentIndex]=[];
@@ -66,7 +70,7 @@ function addValue(val)
     var buf=buff[currentIndex];
     buf.push(val);
     
-    if(Date.now()-lastTime>20)updateGraph();
+    if(!trigger.isLinked())if(Date.now()-lastTime>30)updateGraph();
 }
 
 function updateGraph()
@@ -111,7 +115,7 @@ function updateGraph()
 
     ctx.font = "22px monospace";
 
-    ctx.fillStyle="#f00";
+    ctx.fillStyle="#fff";
     ctx.fillText('max:'+(Math.round(maxValue*100)/100), 10, canvas.height-10);
     ctx.fillText('min:'+(Math.round(minValue*100)/100), 10, canvas.height-30);
 

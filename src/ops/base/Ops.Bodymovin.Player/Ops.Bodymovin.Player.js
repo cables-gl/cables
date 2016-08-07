@@ -71,6 +71,7 @@ exe.onTriggered=function()
         };
 
         textureOut.set(new CGL.Texture.createFromImage(cgl,canvasImage,texOpts));
+        createTexture=false;
 
     }
     else 
@@ -81,17 +82,26 @@ exe.onTriggered=function()
 };
 
 
+op.onDelete=function()
+{
+    console.log('delete bodymovin...');
+    anim.stop();
+    anim=null;
+};
+
 function reloadForce()
 {
+    createTexture=true;
     reload(true);
 }
+
+var canvasId="bodymovin_"+op.patch.config.glCanvasId+CABLES.generateUUID();
 
 function reload(force)
 {
     if(anim)
     {
         anim.stop();
-        // anim.destroy();
     }
 
     if(!canvasImage || force)
@@ -102,7 +112,7 @@ function reload(force)
             canvas.remove();
         }
         canvas = document.createElement('canvas');
-        canvas.id     = "bodymovin_"+op.patch.config.glCanvasId+Date.now();
+        canvas.id     = canvasId;
 
         canvas.width  = width.get();
         canvas.height = height.get();
@@ -134,4 +144,4 @@ function reload(force)
     anim = bodymovin.loadAnimation(animData);
     anim.play();
 
-};
+}
