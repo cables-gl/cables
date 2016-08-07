@@ -3,7 +3,7 @@ var result=op.addOutPort(new Port(op,"result"));
 var number1=op.addInPort(new Port(op,"number"));
 var decPlaces=op.addInPort(new Port(op,"Decimal Places"));
 
-decPlaces.set(2);
+decPlaces.set(0);
 
 function exec()
 {
