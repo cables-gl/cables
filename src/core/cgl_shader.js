@@ -92,9 +92,6 @@ CGL.Uniform=function(_shader,_type,_name,_value)
         return loc;
     };
 
-
-
-
     var oldValue=null;
 
     this.updateValue3F=function()
