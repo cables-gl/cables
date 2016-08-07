@@ -12,24 +12,35 @@ var cgl=op.patch.cgl;
 var canvas=null;
 var ctx=null;
 
-function createCanvas()
+function removeCanvas()
 {
-    canvas = document.createElement('canvas');
-    ctx = canvas.getContext('2d');
-    canvas.style.display = "none";
-    var body = document.getElementsByTagName("body")[0];
-    body.appendChild(canvas);
+    if(!canvas)return;
+    canvas.remove();
+    canvas=null;
 }
 
-function reSize()
+function createCanvas()
 {
-    if(!textureOut.get()) textureOut.set(new CGL.Texture(cgl));
-
+    if(canvas)removeCanvas();
+    canvas = document.createElement('canvas');
     ctx = canvas.getContext('2d');
 
     textureOut.get().setSize(texWidth.get(),texHeight.get());
     ctx.canvas.width=canvas.width=texWidth.get();
     ctx.canvas.height=canvas.height=texHeight.get();
+
+    canvas.style.display = "none";
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(canvas);
+}
+
+
+textureOut.set(new CGL.Texture(cgl));
+
+
+function reSize()
+{
+
 
     update();
 }
@@ -67,6 +78,8 @@ function reload()
 
 function update()
 {
+    
+    
     var img = new Image();
     var loadingId=op.patch.loading.start('svg2texture',filename.get());
 
@@ -74,18 +87,22 @@ function update()
     {
         op.patch.loading.finished(loadingId);
         op.uiAttr( { 'error': 'Could not load SVG file!' } );
-    }
+    };
     
     img.onload = function()
     {
+        createCanvas();
         op.patch.loading.finished(loadingId);
+        canvas.width=texWidth.get();
+        canvas.height=texHeight.get();
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height );
         textureOut.set(new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP));
-    }
+        removeCanvas();
+    };
+
+    img.src = data;
     
-    
-    img.src = data;    
 }
 
 op.onFileUploaded=function(fn)

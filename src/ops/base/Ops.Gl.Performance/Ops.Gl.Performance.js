@@ -178,11 +178,11 @@ function refresh()
     if(countFrames==30)
     {
         hasErrors=false;
-        var error = cgl.gl.getError();
-        if (error != cgl.gl.NO_ERROR)
-        {
-            hasErrors=true;
-        }
+        // var error = cgl.gl.getError();
+        // if (error != cgl.gl.NO_ERROR)
+        // {
+        //     hasErrors=true;
+        // }
         countFrames=0;
     }
 

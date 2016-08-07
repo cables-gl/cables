@@ -10,18 +10,27 @@ var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var width=op.addInPort(new Port(op,"texture width"));
 var height=op.addInPort(new Port(op,"texture height"));
 
+var bmScale=op.addInPort(new Port(op,"scale",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['fit','nofit']}));
+
+var rewind=this.addInPort(new Port(this,"rewind",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var speed=op.addInPort(new Port(op,"speed"));
 
 var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+
+bmScale.set('fit');
 
 tfilter.set('linear');
 tfilter.onValueChanged=onFilterChange;
 filename.onValueChanged=reload;
 
+bmScale.onValueChanged=reloadForce;
 width.onValueChanged=reloadForce;
 height.onValueChanged=reloadForce;
 
 var canvasImage=null;
 var cgl=op.patch.cgl;
+
+speed.set(1);
 
 var anim=null;
 var ctx=null;
@@ -31,6 +40,17 @@ var cgl_wrap=CGL.Texture.WRAP_REPEAT;
 width.set(1280);
 height.set(720);
 var createTexture=false;
+
+
+rewind.onTriggered=function()
+{
+    anim.goToAndPlay(0, true);  
+};
+
+speed.onValueChanged=function()
+{
+    if(anim) anim.setSpeed(speed.get());
+};
 
 flip.onValueChanged=function()
 {
@@ -60,7 +80,6 @@ exe.onTriggered=function()
 {
     if(!canvasImage || !canvas)return;
 
-
     if(!textureOut.get() || createTexture)
     {
         var texOpts=
@@ -72,7 +91,6 @@ exe.onTriggered=function()
 
         textureOut.set(new CGL.Texture.createFromImage(cgl,canvasImage,texOpts));
         createTexture=false;
-
     }
     else 
     {
@@ -138,10 +156,11 @@ function reload(force)
         {
             context: ctx,
             clearCanvas: true,
-            scaleMode:'fit'
+            scaleMode:bmScale.get()
         }
     };
     anim = bodymovin.loadAnimation(animData);
+    anim.setSpeed(speed.get());
     anim.play();
 
 }
