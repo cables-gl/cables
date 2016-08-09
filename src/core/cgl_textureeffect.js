@@ -23,7 +23,7 @@ CGL.TextureEffect=function(cgl,options)
         0, 1, 2,
         3, 1, 2
     ];
-    
+
 
     var mesh=new CGL.Mesh(cgl,geom);
 
@@ -95,6 +95,9 @@ CGL.TextureEffect=function(cgl,options)
         cgl.pushMvMatrix();
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+        cgl.gl.clearColor(0,0,0,0);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+
         cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, self.getCurrentTargetTexture().tex, 0);
 
         cgl.pushPMatrix();
@@ -110,8 +113,6 @@ CGL.TextureEffect=function(cgl,options)
         cgl.pushMvMatrix();
         mat4.identity(cgl.mvMatrix);
 
-        cgl.gl.clearColor(0,0,0,0);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
     };
 
     this.finish=function()

@@ -1,6 +1,9 @@
 var CGL=CGL || {};
 
 
+CGL.frameBufferStack=[];
+CGL.frameBufferStack.push(null);
+
 CGL.Framebuffer=function(_cgl,w,h)
 {
     var cgl=_cgl;
@@ -41,6 +44,7 @@ this.setSize=function(w,h)
 {
     width=w;
     height=h;
+
 
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
     cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
@@ -89,6 +93,9 @@ this.renderStart=function()
 {
     cgl.pushMvMatrix();
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+    CGL.frameBufferStack.push(frameBuf);
+
+// console.log('framebuff START ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
 
     cgl.pushPMatrix();
     cgl.gl.viewport(0, 0, width,height );
@@ -102,7 +109,9 @@ this.renderEnd=function()
 {
     cgl.popPMatrix();
 
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
+    CGL.frameBufferStack.pop();
+// console.log('framebuff END ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
+    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
 
     cgl.popMvMatrix();
     cgl.resetViewPort();

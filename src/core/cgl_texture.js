@@ -94,6 +94,10 @@ CGL.Texture=function(cgl,options)
 
     this.setSize=function(w,h)
     {
+
+        if(self.width==w && self.height==h)return;
+
+
         self.width=w;
         self.height=h;
 
