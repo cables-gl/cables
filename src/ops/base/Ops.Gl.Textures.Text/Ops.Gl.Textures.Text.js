@@ -25,7 +25,7 @@ align.set('center');
 valign.set('center');
 
 var fontImage = document.createElement('canvas');
-fontImage.id = "hiddenCanvas";
+fontImage.id = "texturetext_"+CABLES.generateUUID();
 fontImage.style.display = "none";
 var body = document.getElementsByTagName("body")[0];
 body.appendChild(fontImage);

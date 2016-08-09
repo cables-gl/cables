@@ -12,7 +12,7 @@ var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview
 var cgl=op.patch.cgl;
 
 var canvas = document.createElement('canvas');
-canvas.id     = "fft_"+Math.random();
+canvas.id     = "graph_"+Math.random();
 canvas.width  = 512;
 canvas.height = 512;
 canvas.style.display   = "none";

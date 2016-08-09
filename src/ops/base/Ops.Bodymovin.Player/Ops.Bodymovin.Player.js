@@ -6,6 +6,7 @@ var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file'
 var play=op.addInPort(new Port(op,"play",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 
 
+
 var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -95,32 +96,35 @@ function onFilterChange()
 
 
 
-
+var lastFrame=-2;
 exe.onTriggered=function()
 {
     if(!canvasImage || !canvas)return;
 
-    if(frame.get()!=-1.0)
+    if(lastFrame!=frame.get()) 
     {
-        anim.goToAndStop(frame.get(),true);
-    }
-
-
-    if(!textureOut.get() || createTexture)
-    {
-        var texOpts=
+        lastFrame=frame.get();
+        if(frame.get()!=-1.0)
         {
-            wrap:cgl_wrap,
-            filter:cgl_filter,
-            flip:flip.get()
-        };
+            anim.goToAndStop(frame.get(),true);
+        }
 
-        textureOut.set(new CGL.Texture.createFromImage(cgl,canvasImage,texOpts));
-        createTexture=false;
-    }
-    else 
-    {
-        textureOut.get().initTexture(canvasImage);
+        if(!textureOut.get() || createTexture)
+        {
+            var texOpts=
+            {
+                wrap:cgl_wrap,
+                filter:cgl_filter,
+                flip:flip.get()
+            };
+    
+            textureOut.set(new CGL.Texture.createFromImage(cgl,canvasImage,texOpts));
+            createTexture=false;
+        }
+        else 
+        {
+            textureOut.get().initTexture(canvasImage);
+        }
     }
 
 };
@@ -176,7 +180,7 @@ function reload(force)
 
     var animData= {
         animType: 'canvas',
-        loop: true,
+        loop: false,
         prerender: true,
         autoplay: true,
         path: filename.get(),

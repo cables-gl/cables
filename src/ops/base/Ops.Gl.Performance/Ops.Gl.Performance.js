@@ -121,7 +121,7 @@ function refresh()
         text2='frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         text3='shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+' uniforms: '+Math.ceil(CGL.profileUniformCount/fps);
 
-        if(selfTime>=1.25) text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
+text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         CGL.profileUniformCount=0;
         CGL.profileShaderGetUniform=0;
         CGL.profileShaderCompiles=0;
