@@ -52,6 +52,9 @@ function setAnim()
 }
 
 bool.onValueChanged=setAnim;
+valueFalse.onValueChanged=setAnim;
+valueTrue.onValueChanged=setAnim;
+duration.onValueChanged=setAnim;
 
 
 exe.onTriggered=function()

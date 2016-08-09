@@ -295,6 +295,19 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 var an=dataGetAnimation(data,ch.name);
                 if(an)
                 {
+
+                    if(an.scalingkeys && an.scalingkeys.length>0)
+                    {
+                        posyAdd+=50;
+                        var anScaleOp=self.patch.addOp('Ops.Json3d.ScaleChannel',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
+                        anScaleOp.uiAttribs.title=anScaleOp.name=ch.name+' scale anim';
+                        anScaleOp.getPort('channel').set( ch.name );
+                        self.patch.link(prevOp,'trigger',anScaleOp,'render');
+
+                        if(!prevOp)self.patch.link(parentOp,parentPort,anScaleOp,'render');
+                        prevOp=anScaleOp;
+                    }
+
                     if(an.positionkeys && an.positionkeys.length>0)
                     {
                         posyAdd+=50;

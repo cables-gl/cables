@@ -1,4 +1,5 @@
-this.name='translate anim channel';
+op.name="ScaleChannel";
+
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -33,14 +34,14 @@ function readAnim()
         animY=new CABLES.TL.Anim();
         animZ=new CABLES.TL.Anim();
 
-        for(var k in an.positionkeys)
+        for(var k in an.scalingkeys)
         {
-            animX.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
-            animY.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
-            animZ.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
+            animX.setValue( an.scalingkeys[k][0],an.scalingkeys[k][1][0] );
+            animY.setValue( an.scalingkeys[k][0],an.scalingkeys[k][1][1] );
+            animZ.setValue( an.scalingkeys[k][0],an.scalingkeys[k][1][2] );
         }
         
-        console.log('trans keys ',animX.keys.length);
+        console.log('scale keys ',animX.keys.length);
     }
 }
 
@@ -56,7 +57,7 @@ render.onTriggered=function()
     if(animX)
     {
         var time=op.patch.timer.getTime();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[animX.getValue(time),animY.getValue(time),animZ.getValue(time)]);
+        mat4.scale(cgl.mvMatrix,cgl.mvMatrix,[animX.getValue(time),animY.getValue(time),animZ.getValue(time)]);
     }
     else readAnim();
 

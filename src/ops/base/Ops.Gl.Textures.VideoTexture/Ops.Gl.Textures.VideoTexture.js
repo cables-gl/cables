@@ -8,6 +8,7 @@ var speed=op.addInPort(new Port(op,"speed",OP_PORT_TYPE_VALUE ));
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var fps=op.addInPort(new Port(op,"fps",OP_PORT_TYPE_VALUE ));
 var time=op.addInPort(new Port(op,"set time",OP_PORT_TYPE_VALUE ));
+var rewind=op.addInPort(new Port(op,"rewind",OP_PORT_TYPE_FUNCTION,{display:'button'} ));
 
 
 
@@ -30,9 +31,15 @@ tex.setSize(32,33);
 textureOut.set(tex);
 var timeout=null;
 
+rewind.onTriggered=function()
+{
+    videoElement.currentTime=0;
+};
+
 time.onValueChanged=function()
 {
-    videoElement.currentTime=time.get();    
+    videoElement.currentTime=time.get() || 0;
+    updateTexture();
 };
 
 fps.onValueChanged=function()
@@ -44,8 +51,12 @@ fps.onValueChanged=function()
 
 play.onValueChanged=function()
 {
-    if(play.get()) videoElement.play();
-        else  videoElement.pause();
+    if(play.get()) 
+    {
+        videoElement.play();
+        updateTexture();
+    }
+    else videoElement.pause();
 };
 
 speed.onValueChanged=function()
@@ -85,7 +96,6 @@ function updateTexture()
 
 function startVideo()
 {
-    console.log('start...');
     videoElement.play();
     videoElement.controls = false;
     videoElement.muted = muted.get();
@@ -118,11 +128,7 @@ function loadVideo()
 function reload()
 {
     if(!filename.get())return;
-
     loadVideo();
-
-
-
 }
 
 filename.onValueChange(reload);
