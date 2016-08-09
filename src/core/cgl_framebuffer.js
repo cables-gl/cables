@@ -93,7 +93,7 @@ this.renderStart=function()
 {
     cgl.pushMvMatrix();
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-    CGL.frameBufferStack.push(frameBuf);
+    // CGL.frameBufferStack.push(frameBuf);
 
 // console.log('framebuff START ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
 
@@ -109,9 +109,9 @@ this.renderEnd=function()
 {
     cgl.popPMatrix();
 
-    CGL.frameBufferStack.pop();
-// console.log('framebuff END ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
+    // CGL.frameBufferStack.pop();
+    // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
+    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
 
     cgl.popMvMatrix();
     cgl.resetViewPort();
