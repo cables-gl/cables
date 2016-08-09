@@ -29,6 +29,46 @@ op.onLoaded=shader.compile;
 
 amount.set(1.0);
 
+var srcVert=''
+        .endl()+'attribute vec3 vPosition;'
+        .endl()+'attribute vec2 attrTexCoord;'
+        .endl()+'attribute vec3 attrVertNormal;'
+        .endl()+'varying vec2 texCoord;'
+        .endl()+'varying vec3 norm;'
+        .endl()+'uniform mat4 projMatrix;'
+        .endl()+'uniform mat4 mvMatrix;'
+
+
+        .endl()+'uniform float posX;'
+        .endl()+'uniform float posY;'
+        .endl()+'uniform float scale;'
+        .endl()+'uniform float rotate;'
+        
+        .endl()+'varying mat3 transform;'
+
+        .endl()+'void main()'
+        .endl()+'{'
+        .endl()+'   texCoord=attrTexCoord;'
+        .endl()+'   norm=attrVertNormal;'
+
+.endl()+'       #ifdef TEX_TRANSFORM'
+.endl()+'    vec3 coordinates=vec3(attrTexCoord.x, attrTexCoord.y,1.0);'
+.endl()+'    float angle = radians( rotate );'
+.endl()+'    vec2 scale= vec2(scale,scale);'
+.endl()+'    vec2 translate= vec2(posX,posY);'
+
+// .endl()+'    transform;'
+.endl()+'    transform = mat3(   scale.x * cos( angle ), scale.x * sin( angle ), 0.0,'
+.endl()+'                           - scale.y * sin( angle ), scale.y * cos( angle ), 0.0,'
+.endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y + 0.5, 1.0);'
+
+.endl()+'       #endif'
+
+        .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+        .endl()+'}';
+
+
+
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
@@ -36,13 +76,10 @@ var srcFrag=''
     .endl()+'  uniform sampler2D tex;'
     .endl()+'  uniform sampler2D image;'
     .endl()+'#endif'
+    
+    .endl()+'varying mat3 transform;'
 
-    // .endl()+'#ifdef TEX_TRANSFORM'
-    .endl()+'   uniform float posX;'
-    .endl()+'   uniform float posY;'
-    .endl()+'   uniform float scale;'
     .endl()+'   uniform float rotate;'
-    // .endl()+'#endif'
 
     .endl()+'#ifdef HAS_TEXTUREALPHA'
     .endl()+'   uniform sampler2D imageAlpha;'
@@ -65,34 +102,11 @@ var srcFrag=''
     .endl()+''
 
 
-
-
 .endl()+'       #ifdef TEX_TRANSFORM'
-.endl()+'    vec3 coordinates=vec3(tc.x,tc.y,1.0);'
-// .endl()+'         coordinates.x = gl_FragCoord.x / resolution.x;'
-// .endl()+'         coordinates.y = gl_FragCoord.y / resolution.y;'
-// .endl()+'         coordinates.z = 1.0;'
-
-.endl()+'    float angle = radians( rotate );'
-
-.endl()+'    vec2 scale= vec2(scale,scale);'
-.endl()+'    vec2 translate= vec2(posX,posY);'
-
-// .endl()+'    transform;'
-.endl()+'    mat3 transform = mat3(   scale.x * cos( angle ), scale.x * sin( angle ), 0.0,'
-.endl()+'                           - scale.y * sin( angle ), scale.y * cos( angle ), 0.0,'
-.endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y + 0.5, 1.0);'
-
+.endl()+'    vec3 coordinates=vec3(tc.x, tc.y,1.0);'
 .endl()+'    tc=(transform * coordinates ).xy;'
 .endl()+'       #endif'
-    // gl_FragColor = texture2D( texture, (  transform * coordinates ).xy );
 
-    // .endl()+'       #ifdef TEX_TRANSFORM'
-    // .endl()+'           tc.x /= scale;'
-    // .endl()+'           tc.y /= scale;'
-    // .endl()+'           tc.x += posX;'
-    // .endl()+'           tc.y += posY;'
-    // .endl()+'       #endif'
     .endl()+''
     .endl()+''
     .endl()+'       blendRGBA=texture2D(image,tc);'
@@ -223,7 +237,7 @@ var srcFrag=''
     .endl()+'   gl_FragColor = blendRGBA;'
     .endl()+'}';
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(srcVert,srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
 var textureAlpha=new CGL.Uniform(shader,'t','imageAlpha',2);
