@@ -68,9 +68,7 @@ CGL.TextureEffect=function(cgl,options)
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
-
     };
-
 
     this.getCurrentTargetTexture=function()
     {
@@ -95,6 +93,7 @@ CGL.TextureEffect=function(cgl,options)
         cgl.pushMvMatrix();
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+        cgl.pushFrameBuffer(frameBuf);
 
         cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, self.getCurrentTargetTexture().tex, 0);
 
@@ -130,7 +129,8 @@ CGL.TextureEffect=function(cgl,options)
         cgl.popMvMatrix();
         cgl.popViewMatrix();
 
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer());
+
 
         cgl.popPMatrix();
         // cgl.gl.viewport(0, 0, cgl.canvasWidth,cgl.canvasHeight);

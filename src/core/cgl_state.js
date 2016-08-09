@@ -8,6 +8,7 @@ CGL.State=function()
     var vMatrixStack=[];
     var pMatrixStack=[];
     var shaderStack=[];
+    var frameBufferStack=[null];
     var viewPort=[0,0,0,0];
 
     this.temporaryTexture=null;
@@ -183,6 +184,19 @@ CGL.State=function()
         currentShader = shaderStack[shaderStack.length-1];
     };
 
+
+
+    this.pushFrameBuffer=function(fb)
+    {
+        frameBufferStack.push(fb);
+    };
+
+    this.popFrameBuffer=function()
+    {
+        if(frameBufferStack.length==1)return null;
+        frameBufferStack.pop();
+        return frameBufferStack[frameBufferStack.length-1];
+    };
 
     // view matrix stack
 

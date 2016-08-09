@@ -1,8 +1,6 @@
 var CGL=CGL || {};
 
 
-CGL.frameBufferStack=[];
-CGL.frameBufferStack.push(null);
 
 CGL.Framebuffer=function(_cgl,w,h)
 {
@@ -86,14 +84,14 @@ this.setSize=function(w,h)
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
-
 };
 
 this.renderStart=function()
 {
     cgl.pushMvMatrix();
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-    CGL.frameBufferStack.push(frameBuf);
+    // CGL.frameBufferStack.push(frameBuf);
+    cgl.pushFrameBuffer(frameBuf);
 
 // console.log('framebuff START ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
 
@@ -109,8 +107,7 @@ this.renderEnd=function()
 {
     cgl.popPMatrix();
 
-    CGL.frameBufferStack.pop();
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
+    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer() );
     // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
 
     cgl.popMvMatrix();

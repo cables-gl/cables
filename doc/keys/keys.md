@@ -40,9 +40,9 @@
 
 ## Timeline
 
-- `h`: Scale timeline to show all keys 
-- `j/k`: Jump to previous / next key 
+- `h`: Scale timeline to show all keys
+- `j/k`: Jump to previous / next key
 - `left` / `right` move scrubber 1 frame left / right
 - `[mod] + a`: Select all keys
-- `[mod] + z`: Undo (Currently not working everywhere) 
-
+- `[mod] + z`: Undo (Currently not working everywhere)
+- `m`: Move selected key
