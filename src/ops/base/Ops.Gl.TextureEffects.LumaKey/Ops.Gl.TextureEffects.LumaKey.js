@@ -23,7 +23,7 @@ var srcFrag=''
     .endl()+'   vec4 col = texture2D(texture, texCoord );'
 
     .endl()+'   float gray = dot(vec3(0.2126,0.7152,0.0722), col.rgb );'
-    .endl()+'   if(gray < threshhold) col.r=col.g=col.b=0.0;'
+    .endl()+'   if(gray < threshhold) col.r=col.g=col.b=col.a=0.0;'
     // .endl()+'   col.r=threshhold;'
     // .endl()+'   col.g=threshhold;'
 
