@@ -78,7 +78,7 @@ function refresh()
             do
             {
                 count++;
-                if(count>100)break;
+                if(count>300)break;
                 fontSize-=10;
                 ctx.font = fontSize+'px "'+font.get()+'"';
                 maxWidth=0;
