@@ -184,8 +184,6 @@ CGL.State=function()
         currentShader = shaderStack[shaderStack.length-1];
     };
 
-
-
     this.pushFrameBuffer=function(fb)
     {
         frameBufferStack.push(fb);

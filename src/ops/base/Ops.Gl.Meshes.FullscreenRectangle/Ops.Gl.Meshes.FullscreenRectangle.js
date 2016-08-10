@@ -1,6 +1,9 @@
 op.name='fullscreen rectangle';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+
+var centerInCanvas=op.addInPort(new Port(op,"Center in Canvas",OP_PORT_TYPE_VALUE,{display:'bool'}));
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
@@ -8,6 +11,9 @@ var mesh=null;
 var geom=new CGL.Geometry();
 var x=0,y=0,z=0,w=0;
 op.onResize=rebuild;
+
+
+centerInCanvas.onValueChanged=rebuild;
 
 render.onTriggered=function()
 {
@@ -25,6 +31,21 @@ render.onTriggered=function()
     cgl.pushViewMatrix();
     mat4.identity(cgl.vMatrix);
 
+
+
+    if(centerInCanvas.get())
+    {
+        var x=0;
+        var y=0;
+        if(w<cgl.canvasWidth) x=(cgl.canvasWidth-w)/2;
+        if(h<cgl.canvasHeight) y=(cgl.canvasHeight-h)/2;
+    
+        cgl.setViewPort(x,y,w,h);
+    }
+
+        
+
+
     mesh.render(cgl.getShader());
 
     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
@@ -41,12 +62,15 @@ function rebuild()
 {
     var currentViewPort=cgl.getViewPort().slice();
 
-    x=currentViewPort[0];
-    y=currentViewPort[1];
+    var xx=0,xy=0;
+
+    // x=currentViewPort[0];
+    // y=currentViewPort[1];
     w=currentViewPort[2];
     h=currentViewPort[3];
 
-    var xx=0,xy=0;
+
+
     geom.vertices = [
          xx+w, xy+h,  0.0,
          xx,   xy+h,  0.0,

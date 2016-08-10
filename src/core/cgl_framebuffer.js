@@ -31,90 +31,88 @@ CGL.Framebuffer=function(_cgl,w,h)
         return textureDepth;
     };
 
+    this.setFilter=function(f)
+    {
+        texture.filter=f;
+        texture.setSize(width,height);
+    };
 
-this.setFilter=function(f)
-{
-    texture.filter=f;
-    texture.setSize(width,height);
-};
+    this.setSize=function(w,h)
+    {
+        width=w;
+        height=h;
 
-this.setSize=function(w,h)
-{
-    width=w;
-    height=h;
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+        cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
 
+        texture.setSize(width,height);
+        textureDepth.setSize(width,height);
 
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-    cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
+        cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, width,height);
 
-    texture.setSize(width,height);
-    textureDepth.setSize(width,height);
+        cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, texture.tex, 0);
+        cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
 
-    cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, width,height);
+        cgl.gl.framebufferTexture2D(
+            cgl.gl.FRAMEBUFFER,
+            cgl.gl.DEPTH_ATTACHMENT,
+            cgl.gl.TEXTURE_2D,
+            textureDepth.tex,
+            0 );
 
-    cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, texture.tex, 0);
-    cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
+        if (!cgl.gl.isFramebuffer(frameBuf)) {
+            throw("Invalid framebuffer");
+        }
+        var status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
+        switch (status) {
+            case cgl.gl.FRAMEBUFFER_COMPLETE:
+                break;
+            case cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+                throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
+            case cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
+                throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+            case cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
+                throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+            case cgl.gl.FRAMEBUFFER_UNSUPPORTED:
+                throw("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+            default:
+                throw("Incomplete framebuffer: " + status);
+        }
 
-    cgl.gl.framebufferTexture2D(
-        cgl.gl.FRAMEBUFFER,
-        cgl.gl.DEPTH_ATTACHMENT,
-        cgl.gl.TEXTURE_2D,
-        textureDepth.tex,
-        0 );
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+        cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
+    };
 
-    if (!cgl.gl.isFramebuffer(frameBuf)) {
-        throw("Invalid framebuffer");
-    }
-    var status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
-    switch (status) {
-        case cgl.gl.FRAMEBUFFER_COMPLETE:
-            break;
-        case cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-            throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
-        case cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-            throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
-        case cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-            throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
-        case cgl.gl.FRAMEBUFFER_UNSUPPORTED:
-            throw("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
-        default:
-            throw("Incomplete framebuffer: " + status);
-    }
+    this.renderStart=function()
+    {
+        cgl.pushMvMatrix();
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+        // CGL.frameBufferStack.push(frameBuf);
+        cgl.pushFrameBuffer(frameBuf);
 
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-    cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
-};
+    // console.log('framebuff START ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
 
-this.renderStart=function()
-{
-    cgl.pushMvMatrix();
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-    // CGL.frameBufferStack.push(frameBuf);
-    cgl.pushFrameBuffer(frameBuf);
+        cgl.pushPMatrix();
+        cgl.gl.viewport(0, 0, width,height );
 
-// console.log('framebuff START ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
+        cgl.gl.clearColor(0,0,0,0);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
-    cgl.pushPMatrix();
-    cgl.gl.viewport(0, 0, width,height );
+    };
 
-    cgl.gl.clearColor(0,0,0,0);
-    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    this.renderEnd=function()
+    {
+        cgl.popPMatrix();
 
-};
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer() );
+        // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
 
-this.renderEnd=function()
-{
-    cgl.popPMatrix();
+        cgl.popMvMatrix();
+        cgl.resetViewPort();
 
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer() );
-    // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
+    };
 
-    cgl.popMvMatrix();
-    cgl.resetViewPort();
-
-};
-
-this.setSize(width,height);
+    this.setSize(width,height);
 
 };

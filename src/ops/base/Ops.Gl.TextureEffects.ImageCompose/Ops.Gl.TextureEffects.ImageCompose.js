@@ -63,13 +63,25 @@ useVPSize.onValueChanged=function()
     updateResolution();
 };
 
+var prevViewPort=[0,0,0,0];
+
 var doRender=function()
 {
+    var vp=cgl.getViewPort();
+    prevViewPort[0]=vp[0];
+    prevViewPort[1]=vp[1];
+    prevViewPort[2]=vp[2];
+    prevViewPort[3]=vp[3];
+    
     updateResolution();
     cgl.currentTextureEffect=effect;
     effect.startEffect();
     trigger.trigger();
     texOut.set(effect.getCurrentSourceTexture());
+    
+    cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
+    
+
 };
 
 // texOut.onPreviewChanged=function()
