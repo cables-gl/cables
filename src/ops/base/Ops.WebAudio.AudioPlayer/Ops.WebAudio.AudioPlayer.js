@@ -41,14 +41,15 @@ play.onValueChanged=function()
 {
     if(play.get())
     {
+        playing=true;
         self.audio.play();
-        playing
     }
     else
     {
         playing=false;
         self.audio.pause();
     }
+    outPlaying.set(playing);
 };
 
 this.volume.onValueChanged = function()
@@ -152,6 +153,7 @@ console.log('load audio',self.file.val);
         {
             console.log('audio player ended...');
             outPlaying.set(false);
+            playing=false;
             outEnded.trigger();
         }, false);
         
