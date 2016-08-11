@@ -26,7 +26,7 @@ CABLES.LoadingStatus=function()
             if(!loadingAssets[i].finished)
             {
                 countFinished++;
-                console.log(loadingAssets[i].type+': '+loadingAssets[i].finished+': '+loadingAssets[i].name );
+                // console.log(loadingAssets[i].type+': '+loadingAssets[i].finished+': '+loadingAssets[i].name );
             }
         }
 
