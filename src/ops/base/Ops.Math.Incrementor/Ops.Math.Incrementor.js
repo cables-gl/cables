@@ -17,14 +17,15 @@ value.set(0);
 //     console.log('valuechanged ',value.get());
 //     if(!value.get())val=0
 // };
-
-reset.onTriggered=function()
+inLength.onTriggered=reset;
+reset.onTriggered=doReset;
+function doReset()
 {
     value.set(null);
     val=0;
     value.set(val);
     console.log('increment reset');
-};
+}
 
 decrement.onTriggered=function()
 {

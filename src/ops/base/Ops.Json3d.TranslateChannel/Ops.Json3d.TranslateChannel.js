@@ -39,8 +39,6 @@ function readAnim()
             animY.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
             animZ.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
         }
-        
-        console.log('trans keys ',animX.keys.length);
     }
 }
 

@@ -41,7 +41,6 @@ function readAnim()
             animZ.setValue( an.scalingkeys[k][0],an.scalingkeys[k][1][2] );
         }
         
-        console.log('scale keys ',animX.keys.length);
     }
 }
 

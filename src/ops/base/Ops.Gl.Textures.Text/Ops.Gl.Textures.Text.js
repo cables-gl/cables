@@ -43,9 +43,12 @@ function reSize()
 function refresh()
 {
     ctx.clearRect(0,0,fontImage.width,fontImage.height);
+    // ctx.fillStyle = 'rgba(255,255,255,0)';
+    // ctx.fillRect(0,0,fontImage.width,fontImage.height);
+    
     ctx.fillStyle = 'white';
     var fontSize=parseFloat(inFontSize.get());
-    ctx.font = fontSize+'px "'+font.get()+'"';
+    ctx.font = fontSize+'px "'+font.get()+'","Arial"';
     ctx.textAlign = align.get();
 
     if(border.get()>0)
@@ -106,8 +109,6 @@ function refresh()
             if(align.get()=='right') ctx.fillText(strings[i], ctx.canvas.width, posy);
             posy+=fontSize+parseFloat(lineDistance.get());
         }
-        
-        
     }
 
     ctx.restore();
@@ -116,6 +117,8 @@ function refresh()
 
     if(textureOut.get()) textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
         else textureOut.set(new CGL.Texture.fromImage(cgl,fontImage,CGL.Texture.FILTER_MIPMAP));
+        
+    textureOut.get().unpackAlpha=false;
 }
 
 align.onValueChanged=refresh;
