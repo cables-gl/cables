@@ -214,7 +214,7 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
     var loadingId=cgl.patch.loading.start('texture',url);
     var texture=new CGL.Texture(cgl);
 
-    if(CABLES.UI) gui.jobs().start({id:'loadtexture'+loadingId,title:'loading texture'});
+    if(CABLES.UI) gui.jobs().start({id:'loadtexture'+loadingId,title:'loading texture ('+url+')'});
 
     texture.image = new Image();
     texture.image.crossOrigin = '';

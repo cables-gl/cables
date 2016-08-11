@@ -7,7 +7,7 @@ CGL.Framebuffer=function(_cgl,w,h)
     var cgl=_cgl;
 
     var depthTextureExt = cgl.gl.getExtension('WEBGL_depth_texture') || cgl.gl.getExtension( "WEBKIT_WEBGL_depth_texture" ) || cgl.gl.getExtension( "MOZ_WEBGL_depth_texture" );
-    if(!depthTextureExt) console.error('depth buffer ext problem');
+    if(!depthTextureExt) throw new Error("no depth texture support");
 
     var width = w || 512;
     var height = h || 512;
@@ -64,19 +64,26 @@ CGL.Framebuffer=function(_cgl,w,h)
             throw("Invalid framebuffer");
         }
         var status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
-        switch (status) {
+        switch (status)
+        {
             case cgl.gl.FRAMEBUFFER_COMPLETE:
                 break;
             case cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-                throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
+                console.log('FRAMEBUFFER_INCOMPLETE_ATTACHMENT...',width,height,texture.tex,depthBuffer);
+                throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
             case cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-                throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+                console.log('FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT');
+                throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
             case cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-                throw("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+                console.log('FRAMEBUFFER_INCOMPLETE_DIMENSIONS');
+                throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
             case cgl.gl.FRAMEBUFFER_UNSUPPORTED:
-                throw("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+                console.log('FRAMEBUFFER_UNSUPPORTED');
+                throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
             default:
-                throw("Incomplete framebuffer: " + status);
+                console.log('incomplete framebuffer',status);
+                throw new Error("Incomplete framebuffer: " + status);
+                // throw("Incomplete framebuffer: " + status);
         }
 
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
