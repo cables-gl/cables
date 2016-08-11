@@ -26,13 +26,11 @@ CABLES.LoadingStatus=function()
             if(!loadingAssets[i].finished)
             {
                 countFinished++;
-                // console.log(loadingAssets[i].type+': '+loadingAssets[i].finished+': '+loadingAssets[i].name );
+                console.log(loadingAssets[i].type+': '+loadingAssets[i].finished+': '+loadingAssets[i].name );
             }
-            // if(countFinished===0) console.log('all loaded');
         }
 
         percent=(count-countFinished)/count;
-        // console.log(countFinished+'/'+count,'perc:',percent);
 
         if(CGL.onLoadingAssetsFinished)
         {
