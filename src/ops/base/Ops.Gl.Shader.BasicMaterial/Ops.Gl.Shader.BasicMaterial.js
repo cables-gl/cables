@@ -144,6 +144,7 @@ var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE)
 diffuseRepeatX.set(1);
 diffuseRepeatY.set(1);
 
+
 diffuseRepeatX.onValueChanged=function()
 {
     diffuseRepeatXUniform.setValue(diffuseRepeatX.get());

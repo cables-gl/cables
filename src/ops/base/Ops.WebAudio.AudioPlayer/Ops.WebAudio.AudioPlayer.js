@@ -6,7 +6,6 @@ this.name='AudioPlayer';
 this.file=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',filter:'mp3' }));
 
 var play=op.addInPort(new Port(this,"play",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var rewind=op.addInPort(new Port(this,"Rewind",OP_PORT_TYPE_FUNCTION,{ display:'button' }));
 var autoPlay=op.addInPort(new Port(this,"Autoplay",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 this.volume=this.addInPort(new Port(this,"volume",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -52,13 +51,6 @@ play.onValueChanged=function()
     }
     outPlaying.set(playing);
 };
-
-rewind.onTriggered=function()
-{
-    self.audio.currentTime=0;
-
-};
-
 
 this.volume.onValueChanged = function()
 {
@@ -202,12 +194,10 @@ console.log('load audio',self.file.val);
             } );
 
         };
-    
-        self.patch.timer.onPlayPause(seek);
-        self.patch.timer.onTimeChange(seek);
 
         request.send();
     }
 
+    self.patch.timer.onPlayPause(seek);
+    self.patch.timer.onTimeChange(seek);
 };
-

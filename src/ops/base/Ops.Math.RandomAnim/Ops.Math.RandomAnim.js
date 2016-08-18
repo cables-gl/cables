@@ -8,7 +8,7 @@ var duration=op.addInPort(new Port(op,"duration"));
 
 var anim=new CABLES.TL.Anim();
 
-var easing=op.addInPort(new Port(op,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
+var easing=op.addInPort(new Port(op,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep","absolute"]} ));
 easing.set('linear');
 
 
@@ -24,6 +24,7 @@ function init(v)
     if(easing.get()=='linear') anim.defaultEasing=CABLES.TL.EASING_LINEAR;
     if(easing.get()=='smoothstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
     if(easing.get()=='smootherstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
+    if(easing.get()=='absolute') anim.defaultEasing=CABLES.TL.EASING_ABSOLUTE;
 
     anim.clear();
     if(v===undefined) v=getRandom();

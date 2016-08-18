@@ -6,10 +6,13 @@ var inFocus=op.addInPort(new Port(op,"focus",OP_PORT_TYPE_FUNCTION,{display:'but
 var inBlur=op.addInPort(new Port(op,"blur",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 var cursorPos=op.addOutPort(new Port(op,"cursorPos",OP_PORT_TYPE_VALUE));
 var focussed=op.addOutPort(new Port(op,"focussed",OP_PORT_TYPE_VALUE));
+var escapeButton=op.addOutPort(new Port(op,"escape pressed",OP_PORT_TYPE_FUNCTION));
+
 
 visible.set(true);
 
 var element = document.createElement('textarea');
+element.id="thetextarea";
 element.style.position="absolute";
 element.style.top="0px";
 element.style.width="300px";
@@ -20,7 +23,7 @@ element.style.border="none";
 element.style.padding=0;
 element.style['z-index']="999999";
 
-var canvas = document.getElementById("cablescanvas") || document.body; 
+var canvas = document.body; 
 canvas.appendChild(element);
 
 element.addEventListener("input", update);
@@ -42,13 +45,25 @@ visible.onValueChanged=function()
 
 element.onfocus=function()
 {
+    element.focus();
     focussed.set(true);
 };
 
 element.onblur=function()
 {
     focussed.set(false);
+    canvas.focus();
 };
+
+element.onkeyup = function(e)
+{
+    if (e.keyCode == 27)
+    {
+        focussed.set(false);
+        escapeButton.trigger();
+    }
+};
+
 
 inFocus.onTriggered=function()
 {

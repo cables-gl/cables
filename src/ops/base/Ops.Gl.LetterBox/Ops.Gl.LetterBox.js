@@ -4,7 +4,8 @@ op.name='letterbox';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var ratio=op.addInPort(new Port(op,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1,1.25,1.3333333333,1.777777777778,2.33333333333333,3,4]} ));
+
+var ratio=op.addInPort(new Port(op,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1,1.25,1.3333333333,1.777777777778,1.88,2.33333333333333,3,4]} ));
 ratio.set(1.777777777778);
 
 var blackBars=op.addInPort(new Port(op,"black bars",OP_PORT_TYPE_VALUE,{display:'bool'}));

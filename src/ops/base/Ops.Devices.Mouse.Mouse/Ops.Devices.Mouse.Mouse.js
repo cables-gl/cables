@@ -15,7 +15,13 @@ this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{disp
 this.smooth=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.smoothSpeed=this.addInPort(new Port(this,"smoothSpeed",OP_PORT_TYPE_VALUE));
 
+
+var area=op.addInPort(new Port(op,"Area",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
+
+area.set("Canvas");
 var outButton=this.addOutPort(new Port(this,"button",OP_PORT_TYPE_VALUE));
+
+
 
 
 this.multiply=this.addInPort(new Port(this,"multiply",OP_PORT_TYPE_VALUE));
@@ -24,6 +30,7 @@ this.multiply.set(1.0);
 
 this.smoothSpeed.set(20);
 var speed=this.smoothSpeed.get();
+var listenerElement=null;
 
 var smoothTimer;
 
@@ -57,6 +64,15 @@ lineY=mouseY;
 
 this.mouseX.set(mouseX);
 this.mouseY.set(mouseY);
+
+
+var relLastX=0;
+var relLastY=0;
+var offsetX=0;
+var offsetY=0;
+addListeners();
+
+area.onValueChanged=addListeners;
 
 function updateSmooth()
 {
@@ -98,7 +114,7 @@ var onClickRight= function(e)
     e.preventDefault();
 };
 
-var onmouseclick = function(e)
+function onmouseclick(e)
 {
     console.log('click');
     self.mouseClick.trigger();
@@ -111,25 +127,26 @@ function onMouseLeave(e)
     relLastY=0;
 
     speed=100;
-    if(self.smooth.get())
+    
+    if(area.get()=='Canvas')
     {
-        mouseX=cgl.canvas.width/2;
-        mouseY=cgl.canvas.height/2;
+        // leave anim
+        if(self.smooth.get())
+        {
+            mouseX=cgl.canvas.width/2;
+            mouseY=cgl.canvas.height/2;
+        }
+        
     }
     self.mouseOver.set(false);
     self.mouseDown.set(false);
 }
 
-var relLastX=0;
-var relLastY=0;
-var offsetX=0;
-var offsetY=0;
-
 this.relative.onValueChanged=function()
 {
     offsetX=0;
     offsetY=0;
-}
+};
 
 var onmousemove = function(e)
 {
@@ -139,19 +156,27 @@ var onmousemove = function(e)
     
     if(!self.relative.get())
     {
-        offsetX=e.offsetX;
-        offsetY=e.offsetY;
+        if(area.get()=="Canvas")
+        {
+            offsetX=e.offsetX;
+            offsetY=e.offsetY;
+        }
+        else
+        {
+            offsetX=e.clientX;
+            offsetY=e.clientY;
+        }
 
         if(self.smooth.get())
         {
             mouseX=offsetX;
             
-            if(self.flipY.get()) mouseY=cgl.canvas.height-offsetY;
+            if(self.flipY.get()) mouseY=listenerElement.clientHeight-offsetY;
                 else mouseY=offsetY;
         }
         else
         {
-            if(self.flipY.get()) setValue(offsetX,cgl.canvas.height-offsetY);
+            if(self.flipY.get()) setValue(offsetX,listenerElement.clientHeight-offsetY);
                 else setValue(offsetX,offsetY);
         }
 
@@ -182,23 +207,42 @@ var onmousemove = function(e)
     
 };
 
-cgl.canvas.addEventListener('click', onmouseclick);
-cgl.canvas.addEventListener('mousemove', onmousemove);
-cgl.canvas.addEventListener('mouseleave', onMouseLeave);
-cgl.canvas.addEventListener('mousedown', onMouseDown);
-cgl.canvas.addEventListener('mouseup', onMouseUp);
-cgl.canvas.addEventListener('mouseenter', onMouseEnter);
-cgl.canvas.addEventListener('contextmenu', onClickRight);
+
+function removeLiseteners()
+{
+    
+    listenerElement.removeEventListener('click', onmouseclick);
+    listenerElement.removeEventListener('mousemove', onmousemove);
+    listenerElement.removeEventListener('mouseleave', onMouseLeave);
+    listenerElement.removeEventListener('mousedown', onMouseDown);
+    listenerElement.removeEventListener('mouseup', onMouseUp);
+    listenerElement.removeEventListener('mouseenter', onMouseEnter);
+    listenerElement.removeEventListener('contextmenu', onClickRight);
+    listenerElement=null;
+}
+
+function addListeners()
+{
+    if(listenerElement)removeLiseteners();
+    
+    listenerElement=cgl.canvas;
+    if(area.get()=='Document') listenerElement=document.body;
+    
+    listenerElement.addEventListener('click', onmouseclick);
+    listenerElement.addEventListener('mousemove', onmousemove);
+    listenerElement.addEventListener('mouseleave', onMouseLeave);
+    listenerElement.addEventListener('mousedown', onMouseDown);
+    listenerElement.addEventListener('mouseup', onMouseUp);
+    listenerElement.addEventListener('mouseenter', onMouseEnter);
+    listenerElement.addEventListener('contextmenu', onClickRight);
+}
 
 
 this.onDelete=function()
 {
     console.log("remove mouse op...");
-    cgl.canvas.removeEventListener('click', onmouseclick);
-    cgl.canvas.removeEventListener('mousemove', onmousemove);
-    cgl.canvas.removeEventListener('mouseleave', onMouseLeave);
-    cgl.canvas.removeEventListener('mousedown', onMouseDown);
-    cgl.canvas.removeEventListener('mouseup', onMouseUp);
-    cgl.canvas.removeEventListener('mouseenter', onMouseEnter);
-    cgl.canvas.removeEventListener('contextmenu', onClickRight);
+    removeLiseteners();
 };
+
+
+addListeners();

@@ -105,24 +105,31 @@ function startVideo()
 
 function loadedMetaData()
 {
-    console.log('loaded metadata...');
     outDuration.set(videoElement.duration);
-    console.log('length ',videoElement.buffered.length);
-    console.log('duration ',videoElement.duration);
-    console.log('bytesTotal ',videoElement.bytesTotal);
-    console.log('bufferedBytes ',videoElement.bufferedBytes);
-    console.log('buffered ',videoElement.buffered);
+    // console.log('loaded metadata...');
+    // console.log('length ',videoElement.buffered.length);
+    // console.log('duration ',videoElement.duration);
+    // console.log('bytesTotal ',videoElement.bytesTotal);
+    // console.log('bufferedBytes ',videoElement.bufferedBytes);
+    // console.log('buffered ',videoElement.buffered);
 }
+
+
+var addedListeners=false;
 
 function loadVideo()
 {
-    console.log('start loading...',filename.get());
+    // console.log('start loading...',filename.get());
     clearTimeout(timeout);
     loading.set(true);
     videoElement.preload = 'auto';
     videoElement.setAttribute('src',filename.get());
-    videoElement.addEventListener("canplaythrough", startVideo, true);
-    videoElement.addEventListener('loadedmetadata', loadedMetaData );
+    if(!addedListeners)
+    {
+        addedListeners=true;
+        videoElement.addEventListener("canplaythrough", startVideo, true);
+        videoElement.addEventListener('loadedmetadata', loadedMetaData );
+    }
 }
 
 function reload()

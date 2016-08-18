@@ -38,8 +38,6 @@ var preRenderAnimFrame=function(t)
     console.log('pre render',preRenderTimes.length);
     
     cgl.renderEnd(cgl);
-    
-
 
     // preRenderDone=preRenderInc;
     preRenderTimes.splice(0,1);

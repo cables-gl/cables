@@ -10,6 +10,9 @@ var loadingId=0;
 var reload=function()
 {
     if(!filename.get())return;
+    
+    patch.loading.finished(loadingId);
+    
     loadingId=patch.loading.start('jsonFile',''+filename.get());
 
     CABLES.ajax(

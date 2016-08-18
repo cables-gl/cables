@@ -9,9 +9,14 @@ var learn = this.addInPort( new Port( this, "learn", OP_PORT_TYPE_FUNCTION, { "d
 var learnedKeyCode = this.addInPort( new Port( this, "key code", OP_PORT_TYPE_VALUE));
 var canvasOnly=this.addInPort(new Port(this,"canvas only",OP_PORT_TYPE_VALUE, {"display": "bool"}));
 
+var modKey=op.addInPort(new Port(op,"Mod Key",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['none','alt']} ));
+
 var learning = false;
 
-function onKeyDown(e) {
+function onKeyDown(e) 
+{
+    
+    // console.log(e);
     if(learning){
         learnedKeyCode.set(e.keyCode);
         if(CABLES.UI){
@@ -22,9 +27,21 @@ function onKeyDown(e) {
         removeListeners();
         addListener();
     } else {
-        if(e.keyCode == learnedKeyCode.get()) {
-            // op.log("Key pressed, key code: " + e.keyCode);
+        if(e.keyCode == learnedKeyCode.get()){
+            
+            if(modKey.get()=='alt' )
+            {
+                if(e.altKey==true)
+                {
+                    onPress.trigger();
+                }
+            }
+            else 
             onPress.trigger();
+            
+            
+            // op.log("Key pressed, key code: " + e.keyCode);
+            
         }
     }
 }

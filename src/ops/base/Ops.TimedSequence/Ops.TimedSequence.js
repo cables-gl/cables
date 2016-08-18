@@ -53,9 +53,12 @@ this.onLoaded=function()
 };
 
 var lastUiValue=-1;
-this.exe.onTriggered=function(_time)
+
+this.exe.onTriggered=doTrigger;
+// this.current.onValueChanged=doTrigger;
+
+function doTrigger(_time)
 {
-    
     var spl=0;
     
     var outIndex=Math.round(self.current.val-0.5);
