@@ -14,6 +14,7 @@ function updateIndex()
 }
 function update()
 {
+    if(!array.get())return;
     array.get()[index.get()]=value.get();
     values.set(array.get());
 }

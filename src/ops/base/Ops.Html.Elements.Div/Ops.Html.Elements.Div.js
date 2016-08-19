@@ -1,6 +1,7 @@
 op.name="Div";
 
 var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+var id=op.addInPort(new Port(op,"Id",OP_PORT_TYPE_VALUE,{type:'string'}));
 
 var posLeft=op.addInPort(new Port(op,"Left",OP_PORT_TYPE_VALUE));
 var posTop=op.addInPort(new Port(op,"Top",OP_PORT_TYPE_VALUE));
@@ -150,6 +151,11 @@ text.onValueChanged=function()
 {
     textContent.nodeValue=text.get();
     updateClientSize();
+};
+
+id.onValueChanged=function()
+{
+    element.id=id.get();
 };
 
 

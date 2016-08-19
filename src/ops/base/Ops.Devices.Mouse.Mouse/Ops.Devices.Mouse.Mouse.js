@@ -116,9 +116,9 @@ var onClickRight= function(e)
 
 function onmouseclick(e)
 {
-    console.log('click');
+    // console.log('click');
     self.mouseClick.trigger();
-};
+}
 
 
 function onMouseLeave(e)
