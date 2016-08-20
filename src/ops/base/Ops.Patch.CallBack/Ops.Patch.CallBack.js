@@ -1,26 +1,22 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
+op.name='callback';
+var exe=op.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var callbackname=op.addInPort(new Port(this,"callback name",OP_PORT_TYPE_VALUE,{type:'string'}));
+var val0=op.addInPort(new Port(this,"value 1",OP_PORT_TYPE_VALUE,{type:'string'}));
+var val1=op.addInPort(new Port(this,"value 2",OP_PORT_TYPE_VALUE,{type:'string'}));
+var val2=op.addInPort(new Port(this,"value 3",OP_PORT_TYPE_VALUE,{type:'string'}));
 
-this.name='callback';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.callbackname=this.addInPort(new Port(this,"callback name",OP_PORT_TYPE_VALUE,{type:'string'}));
-this.val0=this.addInPort(new Port(this,"value 1",OP_PORT_TYPE_VALUE,{type:'string'}));
-this.val1=this.addInPort(new Port(this,"value 2",OP_PORT_TYPE_VALUE,{type:'string'}));
-this.val2=this.addInPort(new Port(this,"value 3",OP_PORT_TYPE_VALUE,{type:'string'}));
+var values=[0,0,0];
 
-var values=[0,0,0]
+val0.onValueChanged=function(){ values[0]=val0.get(); };
+val1.onValueChanged=function(){ values[1]=val1.get(); };
+val2.onValueChanged=function(){ values[2]=val2.get(); };
 
-this.val0.onValueChanged=function(){ values[0]=self.val0.get(); }
-this.val1.onValueChanged=function(){ values[1]=self.val1.get(); }
-this.val2.onValueChanged=function(){ values[2]=self.val2.get(); }
-
-this.exe.onTriggered=function()
+exe.onTriggered=function()
 {
-    if(self.patch.config.hasOwnProperty(self.callbackname.get()))
+    if(op.patch.config.hasOwnProperty(callbackname.get()))
     {
         // console.log('has callback!',self.callbackname.get());
-        self.patch.config[self.callbackname.get()](values);
+        op.patch.config[callbackname.get()](values);
     }
     else
     {

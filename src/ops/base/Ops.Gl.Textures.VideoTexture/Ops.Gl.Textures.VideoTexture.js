@@ -123,7 +123,8 @@ function loadVideo()
     clearTimeout(timeout);
     loading.set(true);
     videoElement.preload = 'auto';
-    videoElement.setAttribute('src',filename.get());
+    var url=op.patch.getFilePath(filename.get());
+    videoElement.setAttribute('src',url);
     if(!addedListeners)
     {
         addedListeners=true;

@@ -47,14 +47,14 @@ function realReload(nocache)
     var url=op.patch.getFilePath(filename.get());
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 
-    console.log('startloading ',filename.get());
+    // console.log('startloading ',filename.get());
 
     if((filename.get() && filename.get().length>1))
     {
         var tex=CGL.Texture.load(cgl,url,
             function(err)
             {
-                console.log('tex loaded!!');
+                // console.log('tex loaded!!');
 
                 if(err)
                 {

@@ -3,6 +3,9 @@ op.name="Div";
 var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
 var id=op.addInPort(new Port(op,"Id",OP_PORT_TYPE_VALUE,{type:'string'}));
 
+var visible=op.addInPort(new Port(op,"Visible",OP_PORT_TYPE_VALUE,{display:"bool"}));
+visible.set(true);
+
 var posLeft=op.addInPort(new Port(op,"Left",OP_PORT_TYPE_VALUE));
 var posTop=op.addInPort(new Port(op,"Top",OP_PORT_TYPE_VALUE));
 
@@ -80,6 +83,12 @@ borderRadius.onValueChanged=updateBorder;
 cursor.onValueChanged=updateCursor;
 ignoreMouse.onValueChanged=updateIgnoreMouse;
 init();
+
+visible.onValueChanged=function()
+{
+    if(visible.get()) element.style.display="block";
+    else element.style.display="none";
+};
 
 function updateClientSize()
 {

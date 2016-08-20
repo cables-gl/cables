@@ -30,7 +30,7 @@ function parse()
     var r=text.get().split(separator.get());
     len.set(r.length);
     
-    console.log("parse array",text.get(),r.length,len.get());
+    // console.log("parse array",text.get(),r.length,len.get());
     
     arr.set(r);
 }
