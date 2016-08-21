@@ -21,7 +21,7 @@ var oldObj = {};
 
 function printValue()
 {
-    console.log('changed... ',valueInput.get());
+    // console.log('changed... ',valueInput.get());
 
     if(valueInput.get())
     {

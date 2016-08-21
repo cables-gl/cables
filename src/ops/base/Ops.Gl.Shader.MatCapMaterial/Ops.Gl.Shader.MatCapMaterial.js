@@ -383,7 +383,7 @@ var srcFrag=''
     .endl()+'           pow(r.y, 2.0)+'
     .endl()+'           pow(r.z + 1.0, 2.0)'
     .endl()+'       );'
-    .endl()+'       vn = r.xy / m + 0.5;'
+    .endl()+'       vn = (r.xy / m + 0.5);'
 
     .endl()+'       vn.t=clamp(vn.t, 0.0, 1.0);'
     .endl()+'       vn.s=clamp(vn.s, 0.0, 1.0);'

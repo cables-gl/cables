@@ -10,7 +10,7 @@ var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview
 var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
-flip.set(true);
+flip.set(false);
 unpackAlpha.set(true);
 
 var cgl=op.patch.cgl;
@@ -111,9 +111,12 @@ textureOut.onPreviewChanged=function()
 
 op.onFileUploaded=function(fn)
 {
+    console.log('reload texture',fn);
+    
     if(filename.get() && filename.get().endsWith(fn))
     {
         reload(true);
+        console.log('reload texture');
     }
 };
 
