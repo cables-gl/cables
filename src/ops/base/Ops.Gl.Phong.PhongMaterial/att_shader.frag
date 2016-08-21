@@ -10,8 +10,8 @@ uniform mat4 modelMatrix;
 varying mat4 instModelMat;
 #endif
 
-varying vec3 vTangent;
-varying vec3 vBiTangent;
+// varying vec3 vTangent;
+// varying vec3 vBiTangent;
 
 
 uniform float r;

@@ -8,8 +8,8 @@ uniform mat4 viewMatrix;
 attribute vec3 attrVertNormal;
 attribute vec2 attrTexCoord;
 
-attribute vec3 attrTangent;
-attribute vec3 attrBiTangent;
+// attribute vec3 attrTangent;
+// attribute vec3 attrBiTangent;
 varying vec3 vTangent;
 varying vec3 vBiTangent;
 
@@ -28,8 +28,8 @@ void main()
     norm=attrVertNormal;
     vert=vPosition;
 
-    vTangent=attrTangent;
-    vBiTangent=attrBiTangent;
+    // vTangent=attrTangent;
+    // vBiTangent=attrBiTangent;
 
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
