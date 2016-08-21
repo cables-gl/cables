@@ -28,7 +28,7 @@ var timedLoader=0;
 
 var setTempTexture=function()
 {
-    textureOut.set(CGL.Texture.getTemporaryTexture(cgl,64,cgl_filter,cgl_wrap));
+    CGL.Texture.getTempTexture(cgl);
 };
 
 function reload(nocache)
@@ -51,6 +51,7 @@ function realReload(nocache)
 
     if((filename.get() && filename.get().length>1))
     {
+        
         var tex=CGL.Texture.load(cgl,url,
             function(err)
             {
@@ -70,15 +71,21 @@ function realReload(nocache)
                 if(!tex.isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
                     else op.uiAttr({warning:''});
 
+                textureOut.set(null);
+                textureOut.set(tex);
+
             },{
                 wrap:cgl_wrap,
                 flip:flip.get(),
                 unpackAlpha:unpackAlpha.get(),
                 filter:cgl_filter
             });
-        textureOut.set(null);
-        textureOut.set(tex);
 
+            if(!textureOut.get())
+            {
+                textureOut.set(null);
+                textureOut.set(tex);
+            }
     }
     else
     {
@@ -104,16 +111,18 @@ function onWrapChange()
     reload();
 }
 
-textureOut.onPreviewChanged=function()
-{
-    if(textureOut.showPreview) CGL.Texture.previewTexture=textureOut.get();
-};
+// textureOut.onPreviewChanged=function()
+// {
+//     if(textureOut.showPreview) CGL.Texture.previewTexture=textureOut.get();
+// };
 
 op.onFileUploaded=function(fn)
 {
     if(filename.get() && filename.get().indexOf(fn)>-1)
     {
-        console.log('!!!!!!!!!!!!reload',fn,filename.get());    
+        textureOut.set(null);
+        textureOut.set(CGL.Texture.getTempTexture(cgl));
+
         realReload(true);
     }
 };

@@ -36,8 +36,8 @@ function reset()
     
     Math.randomSeed=seed.get();
 
-console.log(size.get());
-var sizeMul=size.get();
+    var sizeMul=size.get();
+
     for(var i=0;i<num.get();i++)
     {
         verts[i*3+0]=scaleX.get()*(Math.seededRandom()-0.5)*sizeMul;
@@ -52,7 +52,6 @@ var sizeMul=size.get();
         texCoords[i*2+1]=Math.seededRandom();
     }
     
-    console.log(verts);
     geom.setPointVertices(verts);
     geom.vertColors=vertColors;
     geom.texCoords=texCoords;

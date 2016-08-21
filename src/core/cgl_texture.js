@@ -38,9 +38,6 @@ CGL.Texture=function(cgl,options)
 
     function setFilter()
     {
-
-
-
         if(!_isPowerOfTwo(self.width) || !_isPowerOfTwo(self.height) )
         {
             cgl.gl.texParameteri(texType, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.NEAREST);
@@ -244,6 +241,13 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
 
 
     return texture;
+};
+
+CGL.tempTexture=null;
+CGL.Texture.getTempTexture=function(cgl)
+{
+    if(!CGL.tempTexture) CGL.tempTexture=CGL.Texture.getTemporaryTexture(cgl,256,CGL.Texture.FILTER_LINEAR,CGL.Texture.REPEAT);
+    return CGL.tempTexture;
 };
 
 CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
