@@ -94,7 +94,11 @@ this.addVertexNumbers=false;
 
         if(geom.vertexNormals.length>0) setAttribute('attrVertNormal',geom.vertexNormals,3);
         if(geom.texCoords && geom.texCoords.length>0) setAttribute('attrTexCoord',geom.texCoords,2);
-        if(geom.hasOwnProperty('tangents') && geom.tangents && geom.tangents.length>0) setAttribute('attrTangent',geom.tangents,3);
+        if(geom.hasOwnProperty('tangents') && geom.tangents && geom.tangents.length>0)
+        {
+            setAttribute('attrTangent',geom.tangents,3);
+            console.log('has tangents!!!');
+        }
         if(geom.hasOwnProperty('biTangents') && geom.biTangents && geom.biTangents.length>0) setAttribute('attrBiTangent',geom.biTangents,3);
         if(geom.vertexColors.length>0) setAttribute('attrVertColor',geom.vertexColors,4);
 

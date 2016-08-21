@@ -437,10 +437,16 @@ CABLES.TL.Anim=function(cfg)
         return this.keys[index];
     };
 
+
     this.isFinished=function(time)
     {
         if(this.keys.length<=0)return true;
         return time>this.keys[this.keys.length-1].time;
+    };
+    this.isStarted=function(time)
+    {
+        if(this.keys.length<=0)return false;
+        return time>=this.keys[0].time;
     };
 
 

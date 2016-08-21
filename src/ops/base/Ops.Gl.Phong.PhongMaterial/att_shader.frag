@@ -10,6 +10,10 @@ uniform mat4 modelMatrix;
 varying mat4 instModelMat;
 #endif
 
+varying vec3 vTangent;
+varying vec3 vBiTangent;
+
+
 uniform float r;
 uniform float g;
 uniform float b;
@@ -99,6 +103,12 @@ void main()
                 // #define CALC_TANGENT
                 vec3 tnorm= texture2D( texNormal,vec2(texCoord.x*diffuseRepeatX,(texCoord.y)*diffuseRepeatY)  ).xyz*2.0-1.0;
                 vec3 tangent,binormal;
+
+
+                // #ifndef CALC_TANGENT
+                // tangent=vTangent;
+                // binormal=vBiTangent;
+                // #endif
                 // float normalScale=normalTexIntensity24.5;
                 // #ifdef CALC_TANGENT
                     vec3 c1 = cross(norm, vec3(0.0, 0.0, 1.0));
@@ -106,9 +116,13 @@ void main()
                     tangent = normalize(tangent);
                     binormal = cross(norm, tangent);
                     binormal = normalize(binormal);
+                    // tangent = c1;
+                    // tangent = normalize(vec3(modelMatrix*vec4(tangent,1.0)));
+                    // binormal = cross(norm, tangent);
+                    // binormal = normalize(vec3(modelMatrix*vec4(binormal,1.0)));
                 // #endif
 
-                tnorm = normalize(tangent*tnorm.x + binormal*tnorm.y + norm*tnorm.z);
+                tnorm = (tangent*tnorm.x + binormal*tnorm.y + norm*tnorm.z);
                 vec3 normal = normalize( mat3(normalMatrix) * (norm+tnorm*(normalTexIntensity*30.0)) );
 
             #endif
@@ -188,6 +202,6 @@ void main()
     #endif
 
     {{MODULE_COLOR}}
-
+// col.rgb=normalize(vBiTangent);
     gl_FragColor = col;
 }
