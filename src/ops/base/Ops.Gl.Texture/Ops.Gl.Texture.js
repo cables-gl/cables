@@ -111,9 +111,10 @@ textureOut.onPreviewChanged=function()
 
 op.onFileUploaded=function(fn)
 {
-    if(filename.get() && filename.get().endsWith(fn))
+    if(filename.get() && filename.get().indexOf(fn)>-1)
     {
-        reload(true);
+        console.log('!!!!!!!!!!!!reload',fn,filename.get());    
+        realReload(true);
     }
 };
 
