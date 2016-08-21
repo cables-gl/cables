@@ -1,8 +1,9 @@
 op.name="TextureArray";
 
 var outArr=op.addOutPort(new Port(op,"Array",OP_PORT_TYPE_ARRAY));
+var outCount=op.addOutPort(new Port(op,"Count",OP_PORT_TYPE_VALUE));
 
-var num=8;
+var num=15;
 var texturePorts=[];
 
 var arr=[];
@@ -24,9 +25,11 @@ function rebuild()
         }
     }
     
+    outArr.set(null);
     outArr.set(arr);
-    console.log(arr);
-    console.log('rebuild');
+    outCount.set(count);
+    // console.log(arr);
+    // console.log('rebuild');
 }
 
 
@@ -34,6 +37,6 @@ for(var i=0;i<num;i++)
 {
     var p=op.addInPort(new Port(op,"Texture "+(i),OP_PORT_TYPE_OBJECT)) ;
     p.onLinkChanged=rebuild;
+    p.onValueChanged=rebuild;
     texturePorts.push(p);
-    
 }

@@ -138,28 +138,58 @@ op.doBillboard.onValueChanged=function()
         shader.removeDefine('BILLBOARD');
 };
 
+var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+
+
 
 var diffuseRepeatX=op.addInPort(new Port(op,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
 var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
 diffuseRepeatX.set(1);
 diffuseRepeatY.set(1);
 
+diffuseRepeatX.onValueChanged=updateTexRepeat;
+diffuseRepeatY.onValueChanged=updateTexRepeat;
 
-diffuseRepeatX.onValueChanged=function()
+
+var diffuseOffsetX=op.addInPort(new Port(op,"Tex Offset X",OP_PORT_TYPE_VALUE));
+var diffuseOffsetY=op.addInPort(new Port(op,"Tex Offset Y",OP_PORT_TYPE_VALUE));
+diffuseOffsetX.set(0);
+diffuseOffsetY.set(0);
+
+diffuseOffsetY.onValueChanged=updateTexRepeat;
+diffuseOffsetX.onValueChanged=updateTexRepeat;
+
+var diffuseRepeatXUniform=null;
+var diffuseRepeatYUniform=null;
+var diffuseOffsetXUniform=null;
+var diffuseOffsetYUniform=null;
+
+
+function updateTexRepeat()
 {
-    diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
-    if(diffuseRepeatY.get()!=1.0 || diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
+    if(diffuseRepeatY.get()!=1 || 
+        diffuseRepeatX.get()!=1 || 
+        diffuseOffsetY.get()!=0 || 
+        diffuseOffsetX.get()!=0)  
+        {
+            shader.define('TEXTURE_REPEAT');
+
+            if(!diffuseRepeatXUniform)
+            {
+                diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX);
+                diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY);
+                diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
+                diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
+            }
+        }
         else shader.removeDefine('TEXTURE_REPEAT');
 };
 
-diffuseRepeatY.onValueChanged=function()
-{
-    diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
-    if(diffuseRepeatY.get()!=1.0 || diffuseRepeatX.get()!=1.0) shader.define('TEXTURE_REPEAT');
-        else shader.removeDefine('TEXTURE_REPEAT');
-};
 
-var diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX.get());
-var diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY.get());
 
-var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+
+
+
+
+
+

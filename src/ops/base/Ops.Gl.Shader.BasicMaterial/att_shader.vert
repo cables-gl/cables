@@ -8,6 +8,9 @@ varying vec3 norm;
     #ifdef TEXTURE_REPEAT
         uniform float diffuseRepeatX;
         uniform float diffuseRepeatY;
+        uniform float texOffsetX;
+        uniform float texOffsetY;
+
     #endif
 #endif
 
@@ -20,8 +23,8 @@ void main()
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
         #ifdef TEXTURE_REPEAT
-            texCoord.s*=diffuseRepeatX;
-            texCoord.t*=diffuseRepeatY;
+            texCoord.s=texCoord.s*diffuseRepeatX+texOffsetX;
+            texCoord.t=texCoord.t*diffuseRepeatY+texOffsetY;
         #endif
    #endif
 
