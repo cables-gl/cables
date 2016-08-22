@@ -42,7 +42,7 @@ function reload(nocache)
 
 function realReload(nocache)
 {
-    
+
     // if(!opInstanced)return;
     var url=op.patch.getFilePath(filename.get());
     if(nocache)url+='?rnd='+CABLES.generateUUID();
@@ -51,7 +51,7 @@ function realReload(nocache)
 
     if((filename.get() && filename.get().length>1))
     {
-        
+
         var tex=CGL.Texture.load(cgl,url,
             function(err)
             {
@@ -60,14 +60,14 @@ function realReload(nocache)
                 if(err)
                 {
                     setTempTexture();
-                    op.uiAttr({'error':'could not load texture'});
+                    op.uiAttr({'error':'could not load texture '+filename.get()});
                     return;
                 }
-                op.uiAttr({'error':null});
+                else op.uiAttr({'error':null});
                 textureOut.set(tex);
                 width.set(tex.width);
                 height.set(tex.height);
-    
+
                 if(!tex.isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
                     else op.uiAttr({warning:''});
 
