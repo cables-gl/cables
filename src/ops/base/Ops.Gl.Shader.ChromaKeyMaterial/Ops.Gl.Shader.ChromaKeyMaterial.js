@@ -106,31 +106,7 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'  vec4 col=vec4(1.0,1.0,0.0,1.0);'
 .endl()+'  {{MODULE_COLOR}}'
 .endl()+'  col=texture2D(tex,texCoord);'
-// // .endl()+'  col+=texture2D(tex,texCoord*0.99);'
-// // .endl()+'  col+=texture2D(tex,texCoord*1.01);'
-// // .endl()+'  col/=3.0;'
 
-// // .endl()+'  if(col.g>0.25 && (col.r+col.g+col.b)<2.0)col.a=0.0;'
-// // .endl()+'  if(col.g>0.25 && (col.r+col.g+col.b)/3.0<0.5)col.a=0.0;'
-
-// .endl()+'	float incrustation = chromaKey(col);'
-// // .endl()+'	col = mix(col, vec4(0.0,0.0,0.0,0.0), incrustation);'
-// // .endl()+'	col.r = incrustation;'
-// // .endl()+'	col.g = incrustation;'
-// // .endl()+'	col.b = incrustation;'
-
-// .endl()+'	col+= white;'
-// .endl()+'	if(white>0.0) col.rgb+=(random(texCoord*time)-0.5)*0.3;'
-
-// .endl()+'	if(col.g>0.5 && col.r<0.5 && col.b<0.5)col.a = 1.0-incrustation;'
-// // .endl()+'  col.g*=0.7;'
-
-// // .endl()+'	col.rgb = vec3(1.0-incrustation);'
-// // .endl()+'	col.a = 1.0-incrustation;'
-
-// .endl()+'	if(incrustation<0.1)col.a = 1.0;'
-// .endl()+'	else if(incrustation<0.6)col.a = (1.0-incrustation)*0.5;'
-// .endl()+'	else col.a = 0.0;'
 
 .endl()+'float maxrb = max( col.r, col.b );'
 .endl()+'float perc = min(1.0,(col.g*weightMul-maxrb)*7.0);'

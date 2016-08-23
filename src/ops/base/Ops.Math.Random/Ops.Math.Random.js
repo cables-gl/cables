@@ -9,11 +9,15 @@ this.minusPlusOne=this.addInPort(new Port(this,"0 to x / -x to x ",OP_PORT_TYPE_
 
 this.max=this.addInPort(new Port(this,"max"));
 
-this.exe.onTriggered=function()
+function calcRandom()
 {
     if(self.minusPlusOne.val) self.result.val=(Math.random()*self.max.val)*2-self.max.val/2;
         else self.result.val=Math.random()*self.max.val;
-};
+}
+
+this.exe.onTriggered=calcRandom;
+this.max.onValueChanged=calcRandom;
+
 
 this.exe.onTriggered();
 this.max.val=1.0;

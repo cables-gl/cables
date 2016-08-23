@@ -4,7 +4,6 @@ var patch=this.patch;
 this.name='AudioPlayer';
 
 this.file=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',filter:'mp3' }));
-
 var play=op.addInPort(new Port(this,"play",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var autoPlay=op.addInPort(new Port(this,"Autoplay",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
@@ -14,6 +13,9 @@ this.volume.val=1.0;
 this.audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
 var outPlaying=this.addOutPort(new Port(this, "playing",OP_PORT_TYPE_VALUE));
 var outEnded=this.addOutPort(new Port(this, "ended",OP_PORT_TYPE_FUNCTION));
+
+
+var doLoop=op.addInPort(new Port(this,"Loop",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 autoPlay.set(true);
 
@@ -60,6 +62,12 @@ this.volume.onValueChanged = function()
 this.onDelete=function()
 {
     if(self.audio) self.audio.pause();
+};
+
+
+doLoop.onValueChanged=function()
+{
+    self.audio.loop=doLoop.get();
 };
 
 function seek()
@@ -137,6 +145,7 @@ console.log('load audio',self.file.val);
 
         self.audio.crossOrigin = "anonymous";
         self.audio.src = self.file.val;
+        self.audio.loop = doLoop.get();
         self.audio.crossOrigin = "anonymous";
 
         var canplaythrough=function()

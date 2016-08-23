@@ -9,6 +9,7 @@ var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",OP_PORT_TYPE
 var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var loading=op.addOutPort(new Port(op,"loading",OP_PORT_TYPE_VALUE));
 
 flip.set(false);
 unpackAlpha.set(true);
@@ -51,6 +52,7 @@ function realReload(nocache)
 
     if((filename.get() && filename.get().length>1))
     {
+        loading.set(true);
 
         var tex=CGL.Texture.load(cgl,url,
             function(err)
@@ -86,6 +88,7 @@ function realReload(nocache)
                 textureOut.set(null);
                 textureOut.set(tex);
             }
+            loading.set(false);
     }
     else
     {
