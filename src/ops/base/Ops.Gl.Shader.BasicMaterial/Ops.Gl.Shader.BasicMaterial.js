@@ -183,7 +183,7 @@ function updateTexRepeat()
             }
         }
         else shader.removeDefine('TEXTURE_REPEAT');
-};
+}
 
 
 

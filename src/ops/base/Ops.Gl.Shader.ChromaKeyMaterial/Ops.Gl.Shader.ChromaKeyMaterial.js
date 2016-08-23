@@ -34,13 +34,26 @@ var shader_vert='{{MODULES_HEAD}}'
 .endl()+'attribute vec2 attrTexCoord;'
 .endl()+'varying mediump vec2 texCoord;'
 
+.endl()+'#ifdef TEXTURE_REPEAT'
+.endl()+'   uniform float diffuseRepeatX;'
+.endl()+'   uniform float diffuseRepeatY;'
+.endl()+'   uniform float texOffsetX;'
+.endl()+'   uniform float texOffsetY;'
+.endl()+'#endif'
+
 
 .endl()+'void main()'
 .endl()+'{'
-.endl()+'  texCoord=vec2(attrTexCoord.x,1.0-attrTexCoord.y);'
-.endl()+'  vec4 pos=vec4(vPosition,  1.0);'
-.endl()+'  {{MODULE_VERTEX_POSITION}}'
-.endl()+'  gl_Position = projMatrix * mvMatrix * pos;'
+.endl()+'   texCoord=vec2(attrTexCoord.x,1.0-attrTexCoord.y);'
+
+.endl()+'   #ifdef TEXTURE_REPEAT'
+.endl()+'       texCoord.s=texCoord.s*diffuseRepeatX+texOffsetX;'
+.endl()+'       texCoord.t=texCoord.t*diffuseRepeatY+texOffsetY;'
+.endl()+'   #endif'
+
+.endl()+'   vec4 pos=vec4(vPosition,  1.0);'
+.endl()+'   {{MODULE_VERTEX_POSITION}}'
+.endl()+'   gl_Position = projMatrix * mvMatrix * pos;'
 .endl()+'}'
 .endl()+'';
 
@@ -99,25 +112,23 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * (43758.5453));'
 .endl()+'}'
 
-
-.endl()+''
 .endl()+'void main()'
 .endl()+'{'
-.endl()+'  vec4 col=vec4(1.0,1.0,0.0,1.0);'
-.endl()+'  {{MODULE_COLOR}}'
-.endl()+'  col=texture2D(tex,texCoord);'
+.endl()+'   vec4 col=vec4(1.0,1.0,0.0,1.0);'
+.endl()+'   {{MODULE_COLOR}}'
+.endl()+'   col=texture2D(tex,texCoord);'
 
 
-.endl()+'float maxrb = max( col.r, col.b );'
-.endl()+'float perc = min(1.0,(col.g*weightMul-maxrb)*7.0);'
+.endl()+'   float maxrb = max( col.r, col.b );'
+.endl()+'   float perc = min(1.0,(col.g*weightMul-maxrb)*7.0);'
 
-.endl()+'float len=length(col);'
-.endl()+'col.g=min(maxrb*0.9,col.g);'
-.endl()+'col=normalize(col)*len;'
+.endl()+'   float len=length(col);'
+.endl()+'   col.g=min(maxrb*0.9,col.g);'
+.endl()+'   col=normalize(col)*len;'
 
-.endl()+'col.a=1.0-perc;'
+.endl()+'   col.a=1.0-perc;'
 
-.endl()+'  gl_FragColor = col;'
+.endl()+'   gl_FragColor = col;'
 .endl()+'}'
 .endl()+'';
 
@@ -161,10 +172,6 @@ var w=op.addInPort(new Port(op,"weightMul",OP_PORT_TYPE_VALUE,{ display:'range'}
 w.set(0.6);
 w.uniform=new CGL.Uniform(shader,'f','weightMul',w);
 
-
-
-
-
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
 r.set(0.467);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
@@ -180,6 +187,54 @@ b.uniform=new CGL.Uniform(shader,'f','b',b);
 var white=op.addInPort(new Port(op,"white",OP_PORT_TYPE_VALUE,{ display:'range' }));
 white.set(0.0);
 white.uniform=new CGL.Uniform(shader,'f','white',white);
+
+
+
+
+
+var diffuseRepeatX=op.addInPort(new Port(op,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
+var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
+diffuseRepeatX.set(1);
+diffuseRepeatY.set(1);
+
+diffuseRepeatX.onValueChanged=updateTexRepeat;
+diffuseRepeatY.onValueChanged=updateTexRepeat;
+
+
+var diffuseOffsetX=op.addInPort(new Port(op,"Tex Offset X",OP_PORT_TYPE_VALUE));
+var diffuseOffsetY=op.addInPort(new Port(op,"Tex Offset Y",OP_PORT_TYPE_VALUE));
+diffuseOffsetX.set(0);
+diffuseOffsetY.set(0);
+
+diffuseOffsetY.onValueChanged=updateTexRepeat;
+diffuseOffsetX.onValueChanged=updateTexRepeat;
+
+var diffuseRepeatXUniform=null;
+var diffuseRepeatYUniform=null;
+var diffuseOffsetXUniform=null;
+var diffuseOffsetYUniform=null;
+
+
+function updateTexRepeat()
+{
+    if(diffuseRepeatY.get()!=1 || 
+        diffuseRepeatX.get()!=1 || 
+        diffuseOffsetY.get()!==0 || 
+        diffuseOffsetX.get()!==0)  
+        {
+            shader.define('TEXTURE_REPEAT');
+
+            if(!diffuseRepeatXUniform)
+            {
+                diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX);
+                diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY);
+                diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
+                diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
+            }
+        }
+        else shader.removeDefine('TEXTURE_REPEAT');
+}
+
 
 
 doRender();
