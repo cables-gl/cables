@@ -3,7 +3,17 @@ op.name='SVG Texture';
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 var texWidth=op.addInPort(new Port(op,"texture width"));
 var texHeight=op.addInPort(new Port(op,"texture height"));
+
+
+var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
+var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+
+
 var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
+
+tfilter.onValueChanged=onFilterChange;
+wrap.onValueChanged=onWrapChange;
+
 
 texWidth.set(1024);
 texHeight.set(1024);
@@ -25,7 +35,7 @@ function createCanvas()
     canvas = document.createElement('canvas');
     ctx = canvas.getContext('2d');
 
-    textureOut.get().setSize(texWidth.get(),texHeight.get());
+    // textureOut.get().setSize(texWidth.get(),texHeight.get());
     ctx.canvas.width=canvas.width=texWidth.get();
     ctx.canvas.height=canvas.height=texHeight.get();
 
@@ -59,8 +69,27 @@ var data = "data:image/svg+xml," +
 
 
     
+var cgl_filter=CGL.Texture.FILTER_LINEAR;
+var cgl_wrap=CGL.Texture.WRAP_REPEAT;
 
-    
+function onFilterChange()
+{
+    if(tfilter.get()=='nearest') cgl_filter=CGL.Texture.FILTER_NEAREST;
+    if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
+    if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
+
+    reload();
+}
+
+function onWrapChange()
+{
+    if(wrap.get()=='repeat') cgl_wrap=CGL.Texture.WRAP_REPEAT;
+    if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+    reload();
+}
+
 
 function reload()
 {
@@ -97,7 +126,11 @@ function update()
         canvas.height=texHeight.get();
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height );
-        textureOut.set(new CGL.Texture.fromImage(cgl,canvas,CGL.Texture.FILTER_MIPMAP));
+        textureOut.set(new CGL.Texture.createFromImage(cgl,canvas,
+        {
+            wrap:cgl_wrap,
+            filter:cgl_filter
+        }));
         removeCanvas();
     };
 
