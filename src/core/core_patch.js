@@ -7,6 +7,7 @@ CABLES.Patch = function(cfg)
     this.settings={};
     this.timer=new CABLES.Timer();
     this.animFrameOps=[];
+    var volumeListeners=[];
     this.gui=false;
     this.silent=false;
     var paused=false;
@@ -27,6 +28,8 @@ CABLES.Patch = function(cfg)
         onFirstFrameRendered:null
     };
     if(!this.config.prefixAssetPath)this.config.prefixAssetPath='';
+    if(!this.config.masterVolume)this.config.masterVolume=1.0;
+
 
     this.vars={};
 
@@ -48,6 +51,17 @@ CABLES.Patch = function(cfg)
         paused=false;
         this.exec();
     };
+
+    this.setVolume=function(v)
+    {
+        this.config.masterVolume=v;
+        for(var i=0;i<volumeListeners.length;i++)
+        {
+            volumeListeners[i].onMasterVolumeChanged(v);
+        }
+
+    };
+
 
     this.getFilePath=function(filename)
     {
@@ -138,6 +152,7 @@ CABLES.Patch = function(cfg)
             if(op.onCreate)op.onCreate();
 
             if(op.hasOwnProperty('onAnimFrame')) this.animFrameOps.push(op);
+            if(op.hasOwnProperty('onMasterVolumeChanged')) volumeListeners.push(op);
 
             this.ops.push(op);
 
