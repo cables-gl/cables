@@ -41,6 +41,11 @@ CABLES.Patch = function(cfg)
     if(this.cgl.aborted) this.aborted=true;
     if(this.cgl.silent) this.silent=true;
 
+    this.isPlaying=function()
+    {
+        return !paused;
+    };
+
     this.pause=function()
     {
         paused=true;
