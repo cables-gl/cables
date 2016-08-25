@@ -151,7 +151,7 @@ void main()
                 float specularCoefficient = 0.0;
                 if(diffuseCoefficient > 0.0)
                     specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), shininess);
-                specular =(specularCoefficient * materialSpecularColor * lightIntensity);
+                specular =(specularCoefficient * materialSpecularColor * lightIntensity*0.2);
 
                 #ifdef HAS_TEXTURE_SPEC
                     specular*=1.0-texture2D( texSpec, texCoord ).rgb;

@@ -128,7 +128,8 @@ var loadingFilename='';
 this.file.onValueChanged = function()
 {
     if(!self.file.get())return;
-    loadingFilename=self.file.get();
+    loadingFilename=op.patch.getFilePath(self.file.get());
+    
     var loadingId=patch.loading.start('audioplayer',self.file.get());
 
 
@@ -141,10 +142,10 @@ this.file.onValueChanged = function()
         }
         self.audio = new Audio();
 
-console.log('load audio',self.file.val);
+// console.log('load audio',self.file.val);
 
         self.audio.crossOrigin = "anonymous";
-        self.audio.src = self.file.val;
+        self.audio.src = op.patch.getFilePath(self.file.get());
         self.audio.loop = doLoop.get();
         self.audio.crossOrigin = "anonymous";
 
@@ -160,7 +161,7 @@ console.log('load audio',self.file.val);
         
         self.audio.addEventListener('ended',function()
         {
-            console.log('audio player ended...');
+            // console.log('audio player ended...');
             outPlaying.set(false);
             playing=false;
             outEnded.trigger();
@@ -178,7 +179,7 @@ console.log('load audio',self.file.val);
 
         var request = new XMLHttpRequest();
 
-        request.open( 'GET', self.file.val, true );
+        request.open( 'GET', op.patch.getFilePath(self.file.get()), true );
         request.responseType = 'arraybuffer';
 
         request.onload = function()
@@ -188,7 +189,7 @@ console.log('load audio',self.file.val);
             audioContext.decodeAudioData( audioData, function(res)
             {
                 buffer=res;
-                console.log('sound load complete');
+                // console.log('sound load complete');
                 self.media.buffer = res;
                 self.media.connect(self.filter);
                 self.audioOut.val = self.filter;

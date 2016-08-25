@@ -3,6 +3,9 @@ op.name='VideoTexture';
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 var play=op.addInPort(new Port(op,"play",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+
+
+var volume=op.addInPort(new Port(op,"Volume",OP_PORT_TYPE_VALUE,{ display:'range' } ));
 var muted=op.addInPort(new Port(op,"mute",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var speed=op.addInPort(new Port(op,"speed",OP_PORT_TYPE_VALUE ));
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
@@ -25,6 +28,7 @@ var videoElement=document.createElement('video');
 var intervalID=null;
 fps.set(25);
 speed.set(1);
+volume.set(1);
 
 var tex=new CGL.Texture(cgl);
 tex.setSize(32,33);
@@ -102,6 +106,11 @@ function startVideo()
     videoElement.loop = loop.get();
     updateTexture();
 }
+
+volume.onValueChanged=function()
+{
+    videoElement.volume=volume.get() || 0;
+};
 
 function loadedMetaData()
 {
