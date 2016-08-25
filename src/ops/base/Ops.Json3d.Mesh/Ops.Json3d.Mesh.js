@@ -1,33 +1,32 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
 
-this.name='json3d Mesh';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION ));
-this.index=this.addInPort(new Port(this,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
+op.name='json3d Mesh';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION ));
+var index=op.addInPort(new Port(op,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
+var centerPivot=op.addInPort(new Port(op,"center pivot",OP_PORT_TYPE_VALUE,{display:'bool'} ));
+var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_FUNCTION));
 
-this.index.val=-1;
-this.centerPivot=this.addInPort(new Port(this,"center pivot",OP_PORT_TYPE_VALUE,{display:'bool'} ));
-this.centerPivot.val=false;
+var geometryOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT ));
+var draw=op.addInPort(new Port(op,"draw",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
-this.geometryOut=this.addOutPort(new Port(this,"geometry",OP_PORT_TYPE_OBJECT ));
-this.geometryOut.ignoreValueSerialize=true;
-
-var draw=this.addInPort(new Port(this,"draw",OP_PORT_TYPE_VALUE,{display:'bool'}));
+index.set(-1);
+geometryOut.ignoreValueSerialize=true;
+centerPivot.set(false);
 draw.set(true);
 
+var cgl=op.patch.cgl;
 var mesh=null;
 var currentIndex=-1;
 
-function render()
+index.onValueChanged=reload;
+render.onTriggered=doRender;
+
+function doRender()
 {
-    if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=self.index.val) reload();
+    if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=index.get()) reload();
     if(draw.get())
     {
         if(mesh!==null) mesh.render(cgl.getShader());
-        self.trigger.trigger();
+        next.trigger();
     }
 }
 
@@ -35,54 +34,44 @@ function reload()
 {
     if(!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.getValue())return;
     var meshes=cgl.frameStore.currentScene.getValue().meshes;
-    // console.log('---',meshes.length);
-    // for(var i in meshes)
-    // {
-    //     console.log(meshes[i].name);
-    // }
 
-    // ---------
-
-    if(cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() && self.index.get()>=0)
+    if(cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() && index.get()>=0)
     {
-        // console.log(' has '+cgl.frameStore.currentScene.getValue().meshes.length+' meshes ');
-        // console.log('reload');
-
-        self.uiAttr({warning:''});
-        self.uiAttr({info:''});
+        op.uiAttr({warning:''});
+        op.uiAttr({info:''});
 
         var jsonMesh=null;
 
-        currentIndex=self.index.val;
+        currentIndex=index.get();
 
-        if(isNumeric(self.index.val))
+        if(isNumeric(index.get()))
         {
-            if(self.index.val<0 || self.index.val>=cgl.frameStore.currentScene.getValue().meshes.length)
+            if(index.get()<0 || index.get()>=cgl.frameStore.currentScene.getValue().meshes.length)
             {
-                self.uiAttr({warning:'mesh not found - index out of range '});
+                op.uiAttr({warning:'mesh not found - index out of range '});
                 return;
             }
 
-            jsonMesh=cgl.frameStore.currentScene.getValue().meshes[parseInt(self.index.val,10) ];
+            jsonMesh=cgl.frameStore.currentScene.getValue().meshes[parseInt(index.get(),10) ];
         }
-        else
-        {
-            var scene=cgl.frameStore.currentScene.getValue();
-        }
+        // else
+        // {
+        //     var scene=cgl.frameStore.currentScene.getValue();
+        // }
 
         if(!jsonMesh)
         {
             mesh=null;
-            self.uiAttr({warning:'mesh not found'});
+            op.uiAttr({warning:'mesh not found'});
             return;
         }
-        self.uiAttribs.warning='';
+        op.uiAttribs.warning='';
 
         var i=0;
 
         var verts=JSON.parse(JSON.stringify(jsonMesh.vertices));
 
-        if(self.centerPivot.val)
+        if(centerPivot.get())
         {
             var max=[-998999999,-998999999,-998999999];
             var min=[998999999,998999999,998999999];
@@ -135,7 +124,6 @@ function reload()
         }
 
         var geom=new CGL.Geometry();
-        // geom.calcNormals=true;
         geom.vertices=verts;
         geom.vertexNormals=jsonMesh.normals;
         geom.tangents=jsonMesh.tangents;
@@ -143,9 +131,6 @@ function reload()
 
         if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
         geom.verticesIndices=[];
-
-        // for(i=0;i<jsonMesh.faces.length;i++)
-        // geom.verticesIndices=geom.verticesIndices.concat(jsonMesh.faces[i]);
         geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 
         var nfo='';
@@ -154,31 +139,18 @@ function reload()
         nfo += geom.texCoords.length+' texturecoords <br/>';
         nfo += geom.vertexNormals.length+' normals <br/>';
         
-        // console.log(geom.verticesIndices);
-        
-        self.uiAttr({info:nfo});
+        op.uiAttr({info:nfo});
 
-        self.geometryOut.val=geom;
+        geometryOut.set(geom);
         mesh=new CGL.Mesh(cgl,geom);
     }
 
 }
 
 
-this.render.onTriggered=render;
-this.centerPivot.onValueChanged=function()
+
+centerPivot.onValueChanged=function()
 {
     mesh=null;
 };
-
-this.index.onValueChanged=reload;
-
-
-
-
-
-
-
-
-
 
