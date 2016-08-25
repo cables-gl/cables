@@ -7,9 +7,9 @@ this.file=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file
 var play=op.addInPort(new Port(this,"play",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var autoPlay=op.addInPort(new Port(this,"Autoplay",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-this.volume=this.addInPort(new Port(this,"volume",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var volume=this.addInPort(new Port(this,"volume",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var synchronizedPlayer=this.addInPort(new Port(this,"Synchronized Player",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-this.volume.val=1.0;
+
 this.audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
 var outPlaying=this.addOutPort(new Port(this, "playing",OP_PORT_TYPE_VALUE));
 var outEnded=this.addOutPort(new Port(this, "ended",OP_PORT_TYPE_FUNCTION));
@@ -18,6 +18,7 @@ var outEnded=this.addOutPort(new Port(this, "ended",OP_PORT_TYPE_FUNCTION));
 var doLoop=op.addInPort(new Port(this,"Loop",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 autoPlay.set(true);
+volume.set(1.0);
 
 outPlaying.ignoreValueSerialize=true;
 outEnded.ignoreValueSerialize=true;
@@ -54,10 +55,7 @@ play.onValueChanged=function()
     outPlaying.set(playing);
 };
 
-this.volume.onValueChanged = function()
-{
-    self.filter.gain.value=self.volume.get() || 0;
-};
+
 
 this.onDelete=function()
 {
@@ -122,6 +120,14 @@ function playPause()
     if(self.patch.timer.isPlaying()) self.audio.play();
         else self.audio.pause();
 }
+
+function updateVolume()
+{
+    self.filter.gain.value=(volume.get() || 0)*op.patch.config.masterVolume;
+}
+
+volume.onValueChanged=updateVolume;
+op.onMasterVolumeChanged=updateVolume;
 
 var firstTime=true;
 var loadingFilename='';

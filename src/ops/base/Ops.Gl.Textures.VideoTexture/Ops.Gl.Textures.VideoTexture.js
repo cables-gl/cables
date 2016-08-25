@@ -107,10 +107,14 @@ function startVideo()
     updateTexture();
 }
 
-volume.onValueChanged=function()
+function updateVolume()
 {
-    videoElement.volume=volume.get() || 0;
-};
+    videoElement.volume=(volume.get() || 0)*op.patch.config.masterVolume;
+}
+
+volume.onValueChanged=updateVolume;
+op.onMasterVolumeChanged=updateVolume;
+
 
 function loadedMetaData()
 {
