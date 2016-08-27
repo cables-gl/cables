@@ -541,9 +541,6 @@ CGL.Shader=function(_cgl,_name)
         needsRecompile=false;
     };
 
-
-
-
     this.bind=function()
     {
         var i=0;
