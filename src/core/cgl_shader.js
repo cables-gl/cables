@@ -412,6 +412,61 @@ CGL.Shader=function(_cgl,_name)
         return false;
     };
 
+    function printStats()
+    {
+        var activeUniforms = cgl.gl.getProgramParameter(program, cgl.gl.ACTIVE_UNIFORMS);
+        var activeAttributes = cgl.gl.getProgramParameter(program, cgl.gl.ACTIVE_ATTRIBUTES);
+
+        var enums = {
+            0x8B50: 'FLOAT_VEC2',
+            0x8B51: 'FLOAT_VEC3',
+            0x8B52: 'FLOAT_VEC4',
+            0x8B53: 'INT_VEC2',
+            0x8B54: 'INT_VEC3',
+            0x8B55: 'INT_VEC4',
+            0x8B56: 'BOOL',
+            0x8B57: 'BOOL_VEC2',
+            0x8B58: 'BOOL_VEC3',
+            0x8B59: 'BOOL_VEC4',
+            0x8B5A: 'FLOAT_MAT2',
+            0x8B5B: 'FLOAT_MAT3',
+            0x8B5C: 'FLOAT_MAT4',
+            0x8B5E: 'SAMPLER_2D',
+            0x8B60: 'SAMPLER_CUBE',
+            0x1400: 'BYTE',
+            0x1401: 'UNSIGNED_BYTE',
+            0x1402: 'SHORT',
+            0x1403: 'UNSIGNED_SHORT',
+            0x1404: 'INT',
+            0x1405: 'UNSIGNED_INT',
+            0x1406: 'FLOAT'
+        };
+        var i=0;
+        var result={
+            uniformCount:0,
+            attributeCount:0
+        };
+        for (i=0; i < activeUniforms; i++)
+        {
+            var uniform = cgl.gl.getActiveUniform(program, i);
+            uniform.typeName = enums[uniform.type];
+            // result.uniforms.push(uniform);
+            result.uniformCount += uniform.size;
+        }
+
+        // Loop through active attributes
+        for (i=0; i < activeAttributes; i++)
+        {
+            var attribute = cgl.gl.getActiveAttrib(program, i);
+            attribute.typeName = enums[attribute.type];
+            // result.attributes.push(attribute);
+            result.attributeCount += attribute.size;
+        }
+
+        console.log(result);
+
+    }
+
     this.compile=function()
     {
         CGL.profileShaderCompiles++;
@@ -482,6 +537,7 @@ CGL.Shader=function(_cgl,_name)
                 uniforms[i].resetLoc();
         }
 
+        // printStats();
         needsRecompile=false;
     };
 

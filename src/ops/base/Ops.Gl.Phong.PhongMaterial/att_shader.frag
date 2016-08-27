@@ -62,7 +62,7 @@ uniform struct Light
     float mul;
 } light;
 
-uniform Light lights[16];
+uniform Light lights[4];
 
 void main()
 {
