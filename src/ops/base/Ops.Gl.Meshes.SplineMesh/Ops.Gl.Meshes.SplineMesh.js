@@ -38,11 +38,11 @@ function rebuild()
     norms.length=0;
 
     if(points.length===0)
-    for(var i=0;i<4;i++)
+    for(var i=0;i<7;i++)
     {
         points.push(Math.random()*2-1);
         points.push(Math.random()*2-1);
-        points.push(0);
+        points.push(Math.random()*2-1);
     }
 
     var count=0;
@@ -50,16 +50,20 @@ function rebuild()
     var lastPA=null;
     var lastPB=null;
     
-    rectPoints.length=points.length/3*18;
+    rectPoints.length=points.length/3*18+18;
     
     var vecRot=vec3.create();
+    var lastC=null;
+    var lastD=null;
+
+    var vecA=vec3.create();
+    var vecB=vec3.create();
+    var vecC=vec3.create();
+    var vecD=vec3.create();
+    var index=0;
 
     for(var p=0;p<points.length;p+=3)
     {
-        var vecA=vec3.create();
-        var vecB=vec3.create();
-        var vecC=vec3.create();
-        var vecD=vec3.create();
 
         var vStart=vec3.create();
         var vEnd=vec3.create();
@@ -81,43 +85,109 @@ function rebuild()
 
         var m=thickness.get()/2;
 
-        var index=p/3*18;
 
 
-        rectPoints[index+0 ]=points[p+0]+vecRot[0]*m;
-        rectPoints[index+1 ]=points[p+1]+vecRot[1]*m;
-        rectPoints[index+2 ]=points[p+2]+vecRot[2]*m;
         
-        rectPoints[index+3 ]=points[p+0]+vecRot[0]*-m;
-        rectPoints[index+4 ]=points[p+1]+vecRot[1]*-m;
-        rectPoints[index+5 ]=points[p+2]+vecRot[2]*-m;
+        vec3.set(vecA,
+            points[p+0]+vecRot[0]*m,
+            points[p+1]+vecRot[1]*m,
+            points[p+2]+vecRot[2]*m);
+        
+        vec3.set(vecB,
+            points[p+0]+vecRot[0]*-m,
+            points[p+1]+vecRot[1]*-m,
+            points[p+2]+vecRot[2]*-m);
 
-        rectPoints[index+6 ]=points[p+3]+vecRot[0]*m;
-        rectPoints[index+7 ]=points[p+4]+vecRot[1]*m;
-        rectPoints[index+8 ]=points[p+5]+vecRot[2]*m;
+        vec3.set(vecC,
+            points[p+3]+vecRot[0]*m,
+            points[p+4]+vecRot[1]*m,
+            points[p+5]+vecRot[2]*m);
 
-        rectPoints[index+9 ]=points[p+3]+vecRot[0]*-m;
-        rectPoints[index+10]=points[p+4]+vecRot[1]*-m;
-        rectPoints[index+11]=points[p+5]+vecRot[2]*-m;
+        vec3.set(vecD,
+            points[p+3]+vecRot[0]*-m,
+            points[p+4]+vecRot[1]*-m,
+            points[p+5]+vecRot[2]*-m);
+
+        // a
+        rectPoints[index++ ]=vecA[0];
+        rectPoints[index++ ]=vecA[1];
+        rectPoints[index++ ]=vecA[2];
+
+        // b
+        rectPoints[index++ ]=vecB[0];
+        rectPoints[index++ ]=vecB[1];
+        rectPoints[index++ ]=vecB[2];
+
+        // c
+        rectPoints[index++ ]=vecC[0];
+        rectPoints[index++ ]=vecC[1];
+        rectPoints[index++ ]=vecC[2];
+
+        // d
+        rectPoints[index++ ]=vecD[0];
+        rectPoints[index++]=vecD[1];
+        rectPoints[index++]=vecD[2];
+
+        // c
+        rectPoints[index++ ]=vecC[0];
+        rectPoints[index++ ]=vecC[1];
+        rectPoints[index++ ]=vecC[2];
+
+        // b
+        rectPoints[index++]=vecB[0];
+        rectPoints[index++]=vecB[1];
+        rectPoints[index++]=vecB[2];
+        
+        if(lastC)
+        {
+            
+        rectPoints[index++]=vecA[0];
+        rectPoints[index++]=vecA[1];
+        rectPoints[index++]=vecA[2];
+            
+        rectPoints[index++]=vecB[0];
+        rectPoints[index++]=vecB[1];
+        rectPoints[index++]=vecB[2];
+            
+        rectPoints[index++]=lastC[0];
+        rectPoints[index++]=lastC[1];
+        rectPoints[index++]=lastC[2];
+        
 
 
-        rectPoints[index+12 ]=points[p+0]+vecRot[0]*-m;
-        rectPoints[index+13]=points[p+1]+vecRot[1]*-m;
-        rectPoints[index+14 ]=points[p+2]+vecRot[2]*-m;
+        rectPoints[index++]=lastD[0];
+        rectPoints[index++]=lastD[1];
+        rectPoints[index++]=lastD[2];
+        
+        rectPoints[index++]=vecA[0];
+        rectPoints[index++]=vecA[1];
+        rectPoints[index++]=vecA[2];
+            
+        rectPoints[index++]=vecB[0];
+        rectPoints[index++]=vecB[1];
+        rectPoints[index++]=vecB[2];
+            
 
-        rectPoints[index+15 ]=points[p+3]+vecRot[0]*m;
-        rectPoints[index+16 ]=points[p+4]+vecRot[1]*m;
-        rectPoints[index+17 ]=points[p+5]+vecRot[2]*m;
+            
+        }
+        else
+        {
+            lastC=vec3.create();
+            lastD=vec3.create();
+        }
+        
+        lastC[0]=vecC[0];
+        lastC[1]=vecC[1];
+        lastC[2]=vecC[2];
 
-
-
-
-
-
+        lastD[0]=vecD[0];
+        lastD[1]=vecD[1];
+        lastD[2]=vecD[2];
 
 
     }
-
+    
+    verts=rectPoints;
     
     console.log(rectPoints);
     for(var i=0;i<rectPoints.length;i++)
@@ -126,7 +196,6 @@ function rebuild()
         tc.push(0);
     }
     
-    verts=rectPoints;
     
     count=0;
     for(var i=0;i<rectPoints.length;i+=3)
@@ -138,7 +207,8 @@ function rebuild()
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;
-    geom.vertexNormals=norms;
+    
+    geom.calculateNormals({forceZUp:false});
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);

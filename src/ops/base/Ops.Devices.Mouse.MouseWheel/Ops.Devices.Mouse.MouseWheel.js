@@ -61,7 +61,7 @@ var onMouseWheel=function(e)
     var delta=parseFloat( wheelDistance(e))*-0.05;
 
     self.delta.set(delta);
-    v+=parseFloat(delta);
+    v-=parseFloat(delta);
 
 // console.log('v',v);
     
