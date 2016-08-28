@@ -30,6 +30,10 @@ function rebuild()
 {
 
     var geom=CGL.Geometry.LinesToGeom();
+    var geom2=CGL.Geometry.LinesToGeom();
+    
+    geom.merge(geom2);
+    
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);
 
