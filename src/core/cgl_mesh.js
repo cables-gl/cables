@@ -14,7 +14,7 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
     this.numInstances=0;
     // var glPrimitive=_triangleMode || cgl.gl.TRIANGLES;
     var ext = cgl.gl.getExtension("ANGLE_instanced_arrays");
-this.addVertexNumbers=false;
+    this.addVertexNumbers=false;
 
     function setAttribute(name,array,itemSize,cb)
     {
@@ -608,93 +608,6 @@ CGL.Geometry=function()
     };
 };
 
-// parseOBJ = function(buff)
-// {
-//
-//     _readline = function(a, off)  // Uint8Array, offset
-//     {
-//         var s = "";
-//         while(a[off] != 10) s += String.fromCharCode(a[off++]);
-//         return s;
-//     };
-//
-//     var geom = new CGL.Geometry();
-//     geom.groups = {};
-//
-//     geom.vertexNormals = [];
-//     geom.vertexNormalIndices = [];
-//
-//     var cg = {from: 0, to:0};   // current group
-//     var off = 0;
-//     var a = new Uint8Array(buff);
-//     var x=0,y=0,z=0;
-//     while(off < a.length)
-//     {
-//         var line = _readline(a, off);
-//         off += line.length + 1;
-//         line = line.replace(/ +(?= )/g,'');
-//         line = line.replace(/(^\s+|\s+$)/g, '');
-//         var cds = line.split(" ");
-//         if(cds[0] == "g")
-//         {
-//             cg.to = geom.verticesIndices.length;
-//             if(!geom.groups[cds[1]]) geom.groups[cds[1]] = {from:geom.verticesIndices.length, to:0};
-//             cg = geom.groups[cds[1]];
-//         }
-//         if(cds[0] == "v")
-//         {
-//             x = parseFloat(cds[1]);
-//             y = parseFloat(cds[2]);
-//             z = parseFloat(cds[3]);
-//             geom.vertices.push(x,y,z);
-//         }
-//         if(cds[0] == "vt")
-//         {
-//             x = parseFloat(cds[1]);
-//             y = 1-parseFloat(cds[2]);
-//             geom.texCoords.push(x,y);
-//         }
-//         if(cds[0] == "vn")
-//         {
-//             x = parseFloat(cds[1]);
-//             y = parseFloat(cds[2]);
-//             z = parseFloat(cds[3]);
-//             geom.vertexNormals.push(x,y,z);
-//         }
-//         if(cds[0] == "f")
-//         {
-//             var v0a = cds[1].split("/"), v1a = cds[2].split("/"), v2a = cds[3].split("/");
-//             var vi0 = parseInt(v0a[0])-1, vi1 = parseInt(v1a[0])-1, vi2 = parseInt(v2a[0])-1;
-//             var ui0 = parseInt(v0a[1])-1, ui1 = parseInt(v1a[1])-1, ui2 = parseInt(v2a[1])-1;
-//             var ni0 = parseInt(v0a[2])-1, ni1 = parseInt(v1a[2])-1, ni2 = parseInt(v2a[2])-1;
-//
-//             var vlen = geom.vertices.length/3, ulen = geom.texCoords.length/2, nlen = geom.vertexNormals.length/3;
-//             if(vi0<0) vi0 = vlen + vi0+1; if(vi1<0) vi1 = vlen + vi1+1; if(vi2<0) vi2 = vlen + vi2+1;
-//             if(ui0<0) ui0 = ulen + ui0+1; if(ui1<0) ui1 = ulen + ui1+1; if(ui2<0) ui2 = ulen + ui2+1;
-//             if(ni0<0) ni0 = nlen + ni0+1; if(ni1<0) ni1 = nlen + ni1+1; if(ni2<0) ni2 = nlen + ni2+1;
-//
-//             geom.verticesIndices.push(vi0, vi1, vi2);  //cg.verticesIndices.push(vi0, vi1, vi2)
-//             geom.texCoordsIndices  .push(ui0, ui1, ui2);  //cg.texCoordsIndices  .push(ui0, ui1, ui2);
-//             geom.vertexNormalIndices.push(ni0, ni1, ni2);  //cg.vertexNormalIndices.push(ni0, ni1, ni2);
-//             if(cds.length == 5)
-//             {
-//                 var v3a = cds[4].split("/");
-//                 var vi3 = parseInt(v3a[0])-1, ui3 = parseInt(v3a[1])-1, ni3 = parseInt(v3a[2])-1;
-//                 if(vi3<0) vi3 = vlen + vi3+1;
-//                 if(ui3<0) ui3 = ulen + ui3+1;
-//                 if(ni3<0) ni3 = nlen + ni3+1;
-//                 geom.verticesIndices.push(vi0, vi2, vi3);  //cg.verticesIndices.push(vi0, vi2, vi3);
-//                 geom.texCoordsIndices  .push(ui0, ui2, ui3);  //cg.texCoordsIndices  .push(ui0, ui2, ui3);
-//                 geom.vertexNormalIndices.push(ni0, ni2, ni3);  //cg.vertexNormalIndices.push(ni0, ni2, ni3);
-//             }
-//         }
-//     }
-//     cg.to = geom.verticesIndices.length;
-//
-//     return geom;
-// };
-//
-
 CGL.WirePoint=function(cgl,size)
 {
     var buffer = cgl.gl.createBuffer();
@@ -756,5 +669,190 @@ CGL.WirePoint=function(cgl,size)
     };
 
     bufferData();
+
+};
+
+
+
+CGL.Geometry.LinesToGeom=function(points,options)
+{
+    var verts=[];
+    var tc=[];
+    var indices=[];
+    var norms=[];
+    var i=0;
+
+    options=options||{};
+    options.thickness=options.thickness||0.1;
+
+    points=points||[];
+
+    if(points.length===0)
+    {
+        for(i=0;i<7;i++)
+        {
+            points.push(Math.random()*2-1);
+            points.push(Math.random()*2-1);
+            points.push(Math.random()*2-1);
+        }
+    }
+
+    var rectPoints=[];
+    var count=0;
+    var lastPA=null;
+    var lastPB=null;
+
+    rectPoints.length=points.length/3*18+18;
+
+    var vecRot=vec3.create();
+    var lastC=null;
+    var lastD=null;
+
+    var vecA=vec3.create();
+    var vecB=vec3.create();
+    var vecC=vec3.create();
+    var vecD=vec3.create();
+    var index=0;
+
+    for(var p=0;p<points.length;p+=3)
+    {
+        var vStart=vec3.create();
+        var vEnd=vec3.create();
+        var q=quat.create();
+
+        vec3.set(vStart,points[p+0],points[p+1],points[p+2]);
+        vec3.set(vEnd  ,points[p+3]-points[p+0],
+        points[p+4]-points[p+1],
+        points[p+5]-points[p+2]);
+
+        vec3.normalize(vEnd,vEnd);
+        quat.rotationTo(q,[1,0,0],vEnd);
+
+        vec3.set(vecRot, 1,0,0);
+
+        quat.rotateZ(q, q, Math.PI/2);
+
+        vec3.transformQuat(vecRot,vecRot,q);
+
+        var m=options.thickness/2;
+
+        vec3.set(vecA,
+            points[p+0]+vecRot[0]*m,
+            points[p+1]+vecRot[1]*m,
+            points[p+2]+vecRot[2]*m);
+
+        vec3.set(vecB,
+            points[p+0]+vecRot[0]*-m,
+            points[p+1]+vecRot[1]*-m,
+            points[p+2]+vecRot[2]*-m);
+
+        vec3.set(vecC,
+            points[p+3]+vecRot[0]*m,
+            points[p+4]+vecRot[1]*m,
+            points[p+5]+vecRot[2]*m);
+
+        vec3.set(vecD,
+            points[p+3]+vecRot[0]*-m,
+            points[p+4]+vecRot[1]*-m,
+            points[p+5]+vecRot[2]*-m);
+
+        // a
+        rectPoints[index++ ]=vecA[0];
+        rectPoints[index++ ]=vecA[1];
+        rectPoints[index++ ]=vecA[2];
+
+        // b
+        rectPoints[index++ ]=vecB[0];
+        rectPoints[index++ ]=vecB[1];
+        rectPoints[index++ ]=vecB[2];
+
+        // c
+        rectPoints[index++ ]=vecC[0];
+        rectPoints[index++ ]=vecC[1];
+        rectPoints[index++ ]=vecC[2];
+
+        // d
+        rectPoints[index++ ]=vecD[0];
+        rectPoints[index++]=vecD[1];
+        rectPoints[index++]=vecD[2];
+
+        // c
+        rectPoints[index++ ]=vecC[0];
+        rectPoints[index++ ]=vecC[1];
+        rectPoints[index++ ]=vecC[2];
+
+        // b
+        rectPoints[index++]=vecB[0];
+        rectPoints[index++]=vecB[1];
+        rectPoints[index++]=vecB[2];
+
+        if(lastC)
+        {
+            rectPoints[index++]=vecA[0];
+            rectPoints[index++]=vecA[1];
+            rectPoints[index++]=vecA[2];
+
+            rectPoints[index++]=vecB[0];
+            rectPoints[index++]=vecB[1];
+            rectPoints[index++]=vecB[2];
+
+            rectPoints[index++]=lastC[0];
+            rectPoints[index++]=lastC[1];
+            rectPoints[index++]=lastC[2];
+
+
+            rectPoints[index++]=lastD[0];
+            rectPoints[index++]=lastD[1];
+            rectPoints[index++]=lastD[2];
+
+            rectPoints[index++]=vecA[0];
+            rectPoints[index++]=vecA[1];
+            rectPoints[index++]=vecA[2];
+
+            rectPoints[index++]=vecB[0];
+            rectPoints[index++]=vecB[1];
+            rectPoints[index++]=vecB[2];
+        }
+        else
+        {
+            lastC=vec3.create();
+            lastD=vec3.create();
+        }
+
+        lastC[0]=vecC[0];
+        lastC[1]=vecC[1];
+        lastC[2]=vecC[2];
+
+        lastD[0]=vecD[0];
+        lastD[1]=vecD[1];
+        lastD[2]=vecD[2];
+    }
+
+    verts=rectPoints;
+
+    // console.log(rectPoints);
+    for(i=0;i<rectPoints.length;i++)
+    {
+        tc.push(0);
+        tc.push(0);
+    }
+
+    count=0;
+    for(i=0;i<rectPoints.length;i+=3)
+    {
+        indices.push(count);
+        count++;
+    }
+
+    var geom=new CGL.Geometry();
+    geom.vertices=verts;
+    geom.texCoords=tc;
+    geom.verticesIndices=indices;
+    geom.calculateNormals({forceZUp:false});
+
+    // if(!mesh) mesh=new CGL.Mesh(cgl,geom);
+    //     else mesh.setGeom(geom);
+
+    return geom;
 
 };
