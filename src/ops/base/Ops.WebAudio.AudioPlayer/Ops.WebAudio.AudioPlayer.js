@@ -212,8 +212,10 @@ this.file.onValueChanged = function()
         };
 
         request.send();
+
+        self.patch.timer.onPlayPause(seek);
+        self.patch.timer.onTimeChange(seek);
+
     }
 
-    self.patch.timer.onPlayPause(seek);
-    self.patch.timer.onTimeChange(seek);
 };

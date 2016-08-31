@@ -12,18 +12,21 @@ this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 this.frequency=this.addInPort(new Port(this,"frequency",OP_PORT_TYPE_VALUE));
 var uniFrequency=null;
 this.frequency.val=1.0;
-this.frequency.onValueChanged=function(){ if(uniFrequency)uniFrequency.setValue(self.frequency.val); };
+// this.frequency.onValueChanged=function(){ if(uniFrequency)uniFrequency.setValue(self.frequency.val); };
 
 this.amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE));
 var uniAmount=null;
 this.amount.val=1.0;
-this.amount.onValueChanged=function(){ if(uniAmount)uniAmount.setValue(self.amount.val); };
+// this.amount.onValueChanged=function(){ if(uniAmount)uniAmount.setValue(self.amount.val); };
 
 
 this.phase=this.addInPort(new Port(this,"phase",OP_PORT_TYPE_VALUE));
 var uniPhase=null;
 this.phase.val=1.0;
-this.phase.onValueChanged=function(){ if(uniAmount)uniAmount.setValue(self.phase.val); };
+
+var mul=this.addInPort(new Port(this,"mul",OP_PORT_TYPE_VALUE));
+var uniMul=null;
+mul.set(3.0);
 
 
 this.toAxisX=this.addInPort(new Port(this,"axisX",OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -58,10 +61,11 @@ var srcHeadVert=''
     .endl()+'uniform float {{mod}}_frequency;'
     .endl()+'uniform float {{mod}}_amount;'
     .endl()+'uniform float {{mod}}_phase;'
+    .endl()+'uniform float {{mod}}_mul;'
     .endl();
 
 var srcBodyVert=''
-    .endl()+'float {{mod}}_v=sin( (pos.x*pos.z)*3.0 + {{mod}}_time * {{mod}}_frequency + {{mod}}_phase ) * {{mod}}_amount;'
+    .endl()+'float {{mod}}_v=sin( (pos.x*pos.z)*{{mod}}_mul + {{mod}}_time * {{mod}}_frequency + {{mod}}_phase ) * {{mod}}_amount;'
 
     .endl()+'#ifdef {{mod}}_TO_AXIS_X'
     .endl()+'   pos.x+={{mod}}_v;'
@@ -106,9 +110,10 @@ this.render.onTriggered=function()
             });
 
         uniTime=new CGL.Uniform(shader,'f',module.prefix+'_time',0);
-        uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'_frequency',self.frequency.val);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_amount',self.amount.val);
-        uniPhase=new CGL.Uniform(shader,'f',module.prefix+'_phase',self.phase.val);
+        uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'_frequency',self.frequency);
+        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_amount',self.amount);
+        uniPhase=new CGL.Uniform(shader,'f',module.prefix+'_phase',self.phase);
+        uniMul=new CGL.Uniform(shader,'f',module.prefix+'_mul',mul);
         setDefines();
     }
 
