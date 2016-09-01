@@ -38,8 +38,15 @@ function setValue(x,y)
 {
     if(self.normalize.get())
     {
-        self.mouseX.set( (x/cgl.canvas.width*2.0-1.0)*self.multiply.get() );
-        self.mouseY.set( (y/cgl.canvas.height*2.0-1.0)*self.multiply.get() );
+        var w=cgl.canvas.width;
+        var h=cgl.canvas.height;
+        if(listenerElement==document.body)
+        {
+            w=listenerElement.clientWidth;
+            h=listenerElement.clientHeight;
+        }
+        self.mouseX.set( (x/w*2.0-1.0)*self.multiply.get() );
+        self.mouseY.set( (y/h*2.0-1.0)*self.multiply.get() );
     }
     else
     {

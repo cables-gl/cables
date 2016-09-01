@@ -83,12 +83,12 @@ function realReload(nocache)
                 filter:cgl_filter
             });
 
-            if(!textureOut.get() && nocache)
-            {
-                textureOut.set(null);
-                textureOut.set(tex);
-            }
-            loading.set(false);
+            textureOut.set(null);
+            textureOut.set(tex);
+        if(!textureOut.get() && nocache)
+        {
+        }
+        loading.set(false);
     }
     else
     {
