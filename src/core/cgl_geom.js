@@ -345,6 +345,55 @@ CGL.Geometry.prototype.calcBaycentric=function()
 };
 
 
+CGL.Geometry.prototype.center=function()
+{
+    var maxX=-999999;
+    var maxY=-999999;
+    var maxZ=-999999;
+    var minX=999999;
+    var minY=999999;
+    var minZ=999999;
+    var i=0;
+
+    for(i=0;i<this.vertices.length;i+=3)
+    {
+        if(this.vertices[i+0]==this.vertices[i+0])
+        {
+
+            maxX=Math.max(maxX,this.vertices[i+0]);
+            maxY=Math.max(maxY,this.vertices[i+1]);
+            maxZ=Math.max(maxZ,this.vertices[i+2]);
+
+            minX=Math.min(minX,this.vertices[i+0]);
+            minY=Math.min(minY,this.vertices[i+1]);
+            minZ=Math.min(minZ,this.vertices[i+2]);
+        }
+    }
+
+    console.log(this.vertices[i+0]);
+    console.log(maxX,maxY,maxZ);
+
+    var offX=maxX-minX;
+    var offY=maxY-minY;
+    var offZ=maxZ-minZ;
+
+    for(i=0;i<this.vertices.length;i+=3)
+    {
+        if(this.vertices[i+0]==this.vertices[i+0])
+        {
+            this.vertices[i+0]+=offX/2;
+            this.vertices[i+1]+=offY/2;
+            this.vertices[i+2]+=offZ/2;
+        }
+    }
+
+
+console.log('feddich');
+
+
+};
+
+
 
 
 

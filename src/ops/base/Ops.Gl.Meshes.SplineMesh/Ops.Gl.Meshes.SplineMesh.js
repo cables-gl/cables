@@ -29,10 +29,18 @@ test.onValueChanged=rebuild;
 function rebuild()
 {
 
-    var geom=CGL.Geometry.LinesToGeom();
-    var geom2=CGL.Geometry.LinesToGeom();
+    var points=[];
+    for(i=0;i<7;i++)
+    {
+        points.push(Math.random()*2-2);
+        points.push(Math.random()*2-2);
+        points.push(0);
+    }
     
-    geom.merge(geom2);
+    var geom=CGL.Geometry.LinesToGeom(points);
+    geom.center();
+    // var geom2=CGL.Geometry.LinesToGeom();
+        // geom.merge(geom2);
     
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);
