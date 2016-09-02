@@ -369,18 +369,25 @@ CGL.Geometry.prototype.center=function()
             minZ=Math.min(minZ,this.vertices[i+2]);
         }
     }
+    // Math.abs(Math.abs(max[0])-Math.abs(min[0])),
 
-    var offX=Math.abs(minX+maxX)/2;
-    var offY=Math.abs(minY+maxY)/2;
-    var offZ=Math.abs(minZ+maxZ)/2;
+
+
+    var offX=(maxX-minX)/2;
+    var offY=(maxY-minY)/2;
+    var offZ=(maxZ-minZ)/2;
+
+    console.log(maxX,maxY,maxZ);
+    console.log(minX,minY,minZ);
+    console.log(offX);
 
     for(i=0;i<this.vertices.length;i+=3)
     {
         if(this.vertices[i+0]==this.vertices[i+0])
         {
-            this.vertices[i+0]-=offX;
-            this.vertices[i+1]-=offY;
-            this.vertices[i+2]-=offZ;
+            this.vertices[i+0]-=(minX+offX);
+            this.vertices[i+1]-=(minY+offY);
+            this.vertices[i+2]-=(minZ+offZ);
         }
     }
 

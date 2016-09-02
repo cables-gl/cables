@@ -31,8 +31,8 @@ function rebuild()
     var points=[];
     for(i=0;i<7;i++)
     {
-        points.push(Math.random()*2);
-        points.push(Math.random()*2);
+        points.push(Math.random()*2-3);
+        points.push(Math.random()*2+3);
         points.push(0);
     }
     
