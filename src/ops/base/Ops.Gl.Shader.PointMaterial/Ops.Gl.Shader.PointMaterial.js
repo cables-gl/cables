@@ -29,7 +29,7 @@ shaderOut.set(shader);
 onLoaded=shader.compile;
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
 shader.glPrimitive=cgl.gl.POINTS;
-
+shader.bindTextures=bindTextures;
 shaderOut.ignoreValueSerialize=true;
 
 r.set(Math.random());
@@ -46,14 +46,14 @@ render.onTriggered=doRender;
 var texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var textureUniform=null;
 
-bindTextures=function()
+function bindTextures()
 {
     if(texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.val.tex);
     }
-};
+}
 
 function doRender()
 {
