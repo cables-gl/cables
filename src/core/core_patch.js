@@ -345,12 +345,14 @@ CABLES.Patch = function(cfg)
 
     };
 
-    this.reloadOp=function(objName)
+    this.reloadOp=function(objName,cb)
     {
+        var count=0;
         for(var i in self.ops)
         {
             if(self.ops[i].objName==objName)
             {
+                count++;
                 var oldOp=self.ops[i];
                 oldOp.deleted=true;
                 var op=this.addOp(objName,oldOp.uiAttribs);
@@ -401,6 +403,7 @@ CABLES.Patch = function(cfg)
                 self.deleteOp(oldOp.id);
             }
         }
+        cb(count);
 
     };
 

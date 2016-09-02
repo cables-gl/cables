@@ -370,25 +370,20 @@ CGL.Geometry.prototype.center=function()
         }
     }
 
-    console.log(this.vertices[i+0]);
-    console.log(maxX,maxY,maxZ);
-
-    var offX=maxX-minX;
-    var offY=maxY-minY;
-    var offZ=maxZ-minZ;
+    var offX=Math.abs(minX+maxX)/2;
+    var offY=Math.abs(minY+maxY)/2;
+    var offZ=Math.abs(minZ+maxZ)/2;
 
     for(i=0;i<this.vertices.length;i+=3)
     {
         if(this.vertices[i+0]==this.vertices[i+0])
         {
-            this.vertices[i+0]+=offX/2;
-            this.vertices[i+1]+=offY/2;
-            this.vertices[i+2]+=offZ/2;
+            this.vertices[i+0]-=offX;
+            this.vertices[i+1]-=offY;
+            this.vertices[i+2]-=offZ;
         }
     }
 
-
-console.log('feddich');
 
 
 };
