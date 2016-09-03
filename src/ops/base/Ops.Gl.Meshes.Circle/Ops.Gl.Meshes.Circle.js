@@ -1,24 +1,23 @@
 op.name='Circle';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inFunction("render");
+var segments=op.inValue('segments',40);
+var radius=op.inValue('radius',1);
+var innerRadius=op.inValueSlider('innerRadius',0);
+var percent=op.inValueSlider('percent');
+var steps=op.inValue('steps',0);
+var invertSteps=op.inValueBool('invertSteps',false);
 
-var segments=op.addInPort(new Port(op,"segments"));
-var radius=op.addInPort(new Port(op,"radius"));
-var innerRadius=op.addInPort(new Port(op,"innerRadius",OP_PORT_TYPE_VALUE,{display:"range"}));
-var percent=op.addInPort(new Port(op,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
-
-var steps=op.addInPort(new Port(op,"steps",OP_PORT_TYPE_VALUE,{type:"int"}));
-steps.set(0.0);
-var invertSteps=op.addInPort(new Port(op,"invertSteps",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-invertSteps.set(false);
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outFunction('trigger');
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+
 geomOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
 
-
 var drawSpline=op.addInPort(new Port(op,"Spline",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 drawSpline.set(false);
+
+var hund=op.inValueBool('');
+
 
 
 var oldPrim=0;
@@ -37,9 +36,6 @@ render.onTriggered=function()
     shader.glPrimitive=oldPrim;
 };
 
-segments.set(40);
-radius.set(1);
-innerRadius.set(0);
 percent.set(1);
 
 var geom=new CGL.Geometry();
@@ -205,11 +201,11 @@ var mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'drop
 mapping.set('flat');
 mapping.onValueChange(calc);
 
-segments.onValueChanged=calc;
-radius.onValueChanged=calc;
-innerRadius.onValueChanged=calc;
-percent.onValueChanged=calc;
-steps.onValueChanged=calc;
-invertSteps.onValueChanged=calc;
-drawSpline.onValueChanged=calc;
+segments.onChange=calc;
+radius.onChange=calc;
+innerRadius.onChange=calc;
+percent.onChange=calc;
+steps.onChange=calc;
+invertSteps.onChange=calc;
+drawSpline.onChange=calc;
 calc();

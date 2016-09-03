@@ -1,17 +1,15 @@
 op.name='Cube';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-var center=op.addInPort(new Port(op,"center",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-var lengt=op.addInPort(new Port(op,"length",OP_PORT_TYPE_VALUE));
+var render=op.inFunction('render');
+var width=op.inValue('width');
+var height=op.inValue('height');
+var lengt=op.inValue('length');
+var center=op.inValueBool('center');
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outFunction('trigger');
+var geomOut=op.outObject("geometry");
 
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
-  
-  
 
 var cgl=op.patch.cgl;
 var geom=null;
