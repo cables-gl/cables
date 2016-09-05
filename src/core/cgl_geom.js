@@ -373,26 +373,24 @@ CGL.Geometry.prototype.center=function()
 
 
 
-    var offX=(maxX-minX)/2;
-    var offY=(maxY-minY)/2;
-    var offZ=(maxZ-minZ)/2;
-
-    console.log(maxX,maxY,maxZ);
-    console.log(minX,minY,minZ);
-    console.log(offX);
+    var offset=
+        [
+            minX+(maxX-minX)/2,
+            minY+(maxY-minY)/2,
+            minZ+(maxZ-minZ)/2
+        ];
 
     for(i=0;i<this.vertices.length;i+=3)
     {
         if(this.vertices[i+0]==this.vertices[i+0])
         {
-            this.vertices[i+0]-=(minX+offX);
-            this.vertices[i+1]-=(minY+offY);
-            this.vertices[i+2]-=(minZ+offZ);
+            this.vertices[i+0]-=offset[0];
+            this.vertices[i+1]-=offset[1];
+            this.vertices[i+2]-=offset[2];
         }
     }
 
-
-
+    return offset;
 };
 
 

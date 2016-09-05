@@ -9,6 +9,7 @@ var seed=op.addInPort(new Port(op,"random seed"));
 var scaleX=op.addInPort(new Port(op,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var scaleY=op.addInPort(new Port(op,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var scaleZ=op.addInPort(new Port(op,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var round=op.inValueBool('round',false);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 var idx=op.addOutPort(new Port(op,"index")) ;
@@ -52,6 +53,16 @@ function doRender()
 
 exe.onTriggered=doRender;
 
+function getRandomPos()
+{
+    return vec3.fromValues(
+        scaleX.get()*(Math.seededRandom()-0.5)*size.get(),
+        scaleY.get()*(Math.seededRandom()-0.5)*size.get(),
+        scaleZ.get()*(Math.seededRandom()-0.5)*size.get()
+        );
+}
+
+
 function reset()
 {
     randoms.length=0;
@@ -59,22 +70,21 @@ function reset()
     randomsFloats.length=0;
 
     Math.randomSeed=seed.get();
+    
+    var makeRound=round.get();
 
     for(var i=0;i<num.get();i++)
     {
         randomsFloats.push(Math.seededRandom());
-        randoms.push(vec3.fromValues(
-            scaleX.get()*(Math.seededRandom()-0.5)*size.get(),
-            scaleY.get()*(Math.seededRandom()-0.5)*size.get(),
-            scaleZ.get()*(Math.seededRandom()-0.5)*size.get()
-            ));
 
-        // var q=quat.create();            
-        // quat.rotateX(q, q, Math.seededRandom()*360*CGL.DEG2RAD);
-        // quat.rotateY(q, q, Math.seededRandom()*360*CGL.DEG2RAD);
-        // quat.rotateZ(q, q, Math.seededRandom()*360*CGL.DEG2RAD);
-    
-        // randomsRot.push(q);
+        var v=getRandomPos();
+        
+        if(makeRound)
+            while(vec3.len(v)>size.get()/2)
+                v=getRandomPos();
+
+        randoms.push(v);
+
         randomsRot.push(vec3.fromValues(
             Math.seededRandom()*360*CGL.DEG2RAD,
             Math.seededRandom()*360*CGL.DEG2RAD,
@@ -91,5 +101,6 @@ size.onValueChange(reset);
 scaleX.onValueChange(reset);
 scaleZ.onValueChange(reset);
 scaleY.onValueChange(reset);
+round.onChange=reset;
 
 num.set(100);
