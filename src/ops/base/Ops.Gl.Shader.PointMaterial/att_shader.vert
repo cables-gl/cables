@@ -16,6 +16,7 @@ uniform vec3 camPos;
 
 uniform float canvasWidth;
 uniform float canvasHeight;
+uniform float camDistMul;
 
 void main()
 {
@@ -26,7 +27,7 @@ void main()
     #endif
     #ifdef SCALE_BY_DISTANCE
         float cameraDist = distance(vPosition, camPos);
-        gl_PointSize = pointSize / cameraDist * psMul;
+        gl_PointSize = pointSize / (cameraDist*camDistMul) * psMul;
     #endif
 
 
