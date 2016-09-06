@@ -19,7 +19,7 @@ uniform float canvasHeight;
 
 void main()
 {
-    float psMul=sqrt(canvasWidth*canvasHeight)*0.01;
+    float psMul=sqrt(canvasWidth*canvasHeight)*0.001;
 
     #ifndef SCALE_BY_DISTANCE
         gl_PointSize = pointSize * psMul;
