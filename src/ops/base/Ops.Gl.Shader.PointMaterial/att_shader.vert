@@ -20,13 +20,13 @@ uniform float camDistMul;
 
 void main()
 {
-    float psMul=sqrt(canvasWidth*canvasHeight)*0.001;
+    float psMul=sqrt(canvasWidth*canvasHeight)*0.001+0.00000000001;
 
     #ifndef SCALE_BY_DISTANCE
         gl_PointSize = pointSize * psMul;
     #endif
     #ifdef SCALE_BY_DISTANCE
-        float cameraDist = distance(vPosition, camPos);
+        float cameraDist = distance(vPosition, camPos)+0.0001;
         gl_PointSize = pow(pointSize / cameraDist,camDistMul) * psMul;
     #endif
 
