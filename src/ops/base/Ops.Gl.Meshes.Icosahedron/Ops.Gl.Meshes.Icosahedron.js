@@ -3,7 +3,7 @@ op.name="Icosahedron";
 // from: http://blog.andreaskahler.com/search/label/3D
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var smooth=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var smooth=op.addInPort(new Port(op,"smooth",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));

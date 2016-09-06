@@ -51,7 +51,7 @@ function bindTextures()
     if(texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
     }
 }
 
@@ -69,7 +69,7 @@ function doRender()
 
 texture.onPreviewChanged=function()
 {
-    if(texture.showPreview) render.onTriggered=texture.val.preview;
+    if(texture.showPreview) render.onTriggered=texture.get().preview;
         else render.onTriggered=doRender;
 
     console.log('show preview!');
@@ -106,18 +106,18 @@ texture.onValueChanged=function()
 
 
 var colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-colorizeTexture.val=false;
+colorizeTexture.set(false);
 colorizeTexture.onValueChanged=function()
 {
-    if(colorizeTexture.val) shader.define('COLORIZE_TEXTURE');
+    if(colorizeTexture.get()) shader.define('COLORIZE_TEXTURE');
         else shader.removeDefine('COLORIZE_TEXTURE');
 };
 
 var textureLookup=op.addInPort(new Port(op,"texture Lookup",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-textureLookup.val=false;
+textureLookup.set(false);
 textureLookup.onValueChanged=function()
 {
-    if(textureLookup.val) shader.define('LOOKUP_TEXTURE');
+    if(textureLookup.get()) shader.define('LOOKUP_TEXTURE');
         else shader.removeDefine('LOOKUP_TEXTURE');
 };
 

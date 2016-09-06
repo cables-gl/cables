@@ -1,16 +1,18 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 
-this.name='BrightnessContrast';
+op.name='BrightnessContrast';
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.amount=this.addInPort(new Port(this,"contrast",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.amountBright=this.addInPort(new Port(this,"brightness",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inFunction("render");
+var amount=op.inValueSlider('contrast');
+var amountBright=op.inValueSlider('brightness');
+
+var trigger=op.outFunction('trigger');
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
+
+amountBright.set(0.5);
+amount.set(0.5);
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -40,25 +42,11 @@ var srcFrag=''
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var amountUniform=new CGL.Uniform(shader,'f','amount',0.4);
-var amountBrightUniform=new CGL.Uniform(shader,'f','amountbright',0.5);
-
-this.amount.onValueChanged=function()
-{
-    // console.log('amount changed! '+self.amount.val);
-    amountUniform.setValue(self.amount.val);
-};
-
-this.amountBright.onValueChanged=function()
-{
-    amountBrightUniform.setValue(self.amountBright.val);
-};
+var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+var amountBrightUniform=new CGL.Uniform(shader,'f','amountbright',amountBright);
 
 
-this.amountBright.val=0.5;
-this.amount.val=0.5;
-
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -71,5 +59,5 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };

@@ -143,7 +143,7 @@ function rebuild()
     
     addMesh();
 
-    console.log(meshes.length,' meshes');
+    // console.log(meshes.length,' meshes');
 
 
 }
