@@ -32,14 +32,18 @@ void main()
 
     {{MODULE_VERTEX_POSITION}}
 
-    gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
+    vec4 model=modelMatrix * pos;
 
     #ifndef SCALE_BY_DISTANCE
         gl_PointSize = pointSize * psMul;
     #endif
     #ifdef SCALE_BY_DISTANCE
-        float cameraDist = distance(gl_Position.xyz, camPos)+0.0001;
+        float cameraDist = distance(model.xyz, camPos);
         gl_PointSize = (pointSize / cameraDist) * psMul;
     #endif
+
+
+    gl_Position = projMatrix * viewMatrix * model;
+
 
 }
