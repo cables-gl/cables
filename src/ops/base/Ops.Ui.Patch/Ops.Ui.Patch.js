@@ -55,23 +55,23 @@ op.getPort=function(name)
 
 var getSubPatchInputOp=function()
 {
-    var patchInputOP=op.patch.getSubPatchOp(op.patchId.val,'Ops.Ui.PatchInput');
-    var patchOutputOP=op.patch.getSubPatchOp(op.patchId.val,'Ops.Ui.PatchOutput');
+    var patchInputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchInput');
+    var patchOutputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchOutput');
 
     if(!patchOutputOP)
     {
-        op.patch.addOp('Ops.Ui.PatchOutput',{'subPatch':op.patchId.val} );
+        op.patch.addOp('Ops.Ui.PatchOutput',{'subPatch':op.patchId.get()} );
 
-        patchOutputOP=op.patch.getSubPatchOp(op.patchId.val,'Ops.Ui.PatchOutput');
+        patchOutputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchOutput');
 
         if(!patchOutputOP) console.warn('no patchinput2!');
     }
 
     if(!patchInputOP)
     {
-        op.patch.addOp('Ops.Ui.PatchInput',{'subPatch':op.patchId.val} );
+        op.patch.addOp('Ops.Ui.PatchInput',{'subPatch':op.patchId.get()} );
 
-        patchInputOP=op.patch.getSubPatchOp(op.patchId.val,'Ops.Ui.PatchInput');
+        patchInputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchInput');
 
         if(!patchInputOP) console.warn('no patchinput2!');
     }
@@ -152,7 +152,7 @@ function createPatchInputPort(dynPort,name)
     {
         dynPort.onValueChanged=function()
         {
-            pOut.val=dynPort.val;
+            pOut.set(dynPort.get());
         };
         dynPort.onValueChanged();
     }
@@ -192,10 +192,10 @@ op.shouldLink=function(p1,p2)
 
 op.patchId.onValueChanged=function()
 {
-    Ops.Ui.Patch.maxPatchId=Math.max(Ops.Ui.Patch.maxPatchId,op.patchId.val);
+    Ops.Ui.Patch.maxPatchId=Math.max(Ops.Ui.Patch.maxPatchId,op.patchId.get());
 };
 
-op.patchId.val=Ops.Ui.Patch.maxPatchId+1;
+op.patchId.set(Ops.Ui.Patch.maxPatchId+1);
 
 op.onCreate=function()
 {
@@ -209,7 +209,7 @@ op.onDelete=function()
 {
     for (var i = op.patch.ops.length-1; i >=0 ; i--)
     {
-        if(op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch==op.patchId.val)
+        if(op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch==op.patchId.get())
         {
             console.log(op.patch.ops[i].objName);
 

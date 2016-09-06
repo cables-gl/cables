@@ -30,10 +30,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.onValueChanged=null;
     this.onTriggered=null;
 
+var warnedDeprecated=false;
 
     this.__defineGetter__("val", function()
     {
-        console.log('deprecated .val used',self.parent.name);
+        if(!warnedDeprecated) console.log('deprecated .val used',self.parent.name);
+        warnedDeprecated=true;
         // throw "deprecated val";
         return this.get();
 
@@ -41,7 +43,8 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.__defineSetter__("val", function(v)
     {
         this.setValue(v);
-        console.log('deprecated .val used',self.parent.name);
+        if(!warnedDeprecated)console.log('deprecated .val used',self.parent.name);
+        warnedDeprecated=true;
         // throw "deprecated val";
     });
 

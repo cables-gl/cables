@@ -6,7 +6,7 @@ op.getPatchOp=function()
     {
         if(op.patch.ops[i].patchId)
         {
-            if(op.patch.ops[i].patchId.val==op.uiAttribs.subPatch)
+            if(op.patch.ops[i].patchId.get()==op.uiAttribs.subPatch)
             {
                 return op.patch.ops[i];
             }
