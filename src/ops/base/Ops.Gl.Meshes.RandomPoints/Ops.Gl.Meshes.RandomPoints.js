@@ -62,11 +62,11 @@ function reset()
 
 size.set(40);
 seed.set(0);
-seed.onValueChange(reset);
-num.onValueChange(reset);
-size.onValueChange(reset);
-scaleX.onValueChange(reset);
-scaleZ.onValueChange(reset);
-scaleY.onValueChange(reset);
+seed.onChange=reset;
+num.onChange=reset;
+size.onChange=reset;
+scaleX.onChange=reset;
+scaleZ.onChange=reset;
+scaleY.onChange=reset;
 
 num.set(1000);

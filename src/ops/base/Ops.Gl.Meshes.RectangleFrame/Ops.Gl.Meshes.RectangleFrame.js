@@ -23,11 +23,11 @@ pivotY.set('center');
 
 geomOut.ignoreValueSerialize=true;
 
-width.onValueChange(create);
-pivotX.onValueChange(create);
-pivotY.onValueChange(create);
-height.onValueChange(create);
-thickness.onValueChange(create);
+width.onChange=create;
+pivotX.onChange=create;
+pivotY.onChange=create;
+height.onChange=create;
+thickness.onChange=create;
 
 create();
 

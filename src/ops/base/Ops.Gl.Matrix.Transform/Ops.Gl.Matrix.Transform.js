@@ -99,15 +99,15 @@ var rotChanged=function()
 };
 
 
-rotX.onValueChange(rotChanged);
-rotY.onValueChange(rotChanged);
-rotZ.onValueChange(rotChanged);
+rotX.onChange=rotChanged;
+rotY.onChange=rotChanged;
+rotZ.onChange=rotChanged;
 
-scale.onValueChange(scaleChanged);
+scale.onChange=scaleChanged;
 
-posX.onValueChange(translateChanged);
-posY.onValueChange(translateChanged);
-posZ.onValueChange(translateChanged);
+posX.onChange=translateChanged;
+posY.onChange=translateChanged;
+posZ.onChange=translateChanged;
 
 rotX.set(0.0);
 rotY.set(0.0);

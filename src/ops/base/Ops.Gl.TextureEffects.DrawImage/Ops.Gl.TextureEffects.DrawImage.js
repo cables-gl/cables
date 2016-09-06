@@ -319,10 +319,10 @@ alphaSrc.set("alpha channel");
         }
     }
     
-    scale.onValueChange(updateTransform);
-    posX.onValueChange(updateTransform);
-    posY.onValueChange(updateTransform);
-    rotate.onValueChange(updateTransform);
+    scale.onChange=updateTransform;
+    posX.onChange=updateTransform;
+    posY.onChange=updateTransform;
+    rotate.onChange=updateTransform;
 
 }
 

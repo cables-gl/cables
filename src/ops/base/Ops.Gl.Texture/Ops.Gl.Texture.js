@@ -18,12 +18,12 @@ var cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
 
-flip.onValueChange(function(){reload();});
-filename.onValueChange(reload);
+flip.onChange=function(){reload();};
+filename.onChange=reload;
 
-tfilter.onValueChange(onFilterChange);
-wrap.onValueChange(onWrapChange);
-unpackAlpha.onValueChange(function(){ reload(); });
+tfilter.onChange=onFilterChange;
+wrap.onChange=onWrapChange;
+unpackAlpha.onChange=function(){ reload(); };
 
 var timedLoader=0;
 

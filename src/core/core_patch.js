@@ -462,7 +462,7 @@ CABLES.Patch = function(cfg)
                 if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
                 if(port && (port.uiAttribs.display=='bool' || port.uiAttribs.type=='bool') && !isNaN(objPort.value) ) objPort.value=true===objPort.value;
 
-                if(port && port.type!=OP_PORT_TYPE_TEXTURE)port.val=objPort.value;
+                if(port && port.type!=OP_PORT_TYPE_TEXTURE)port.set(objPort.value);
                 if(objPort.animated)port.setAnimated(objPort.animated);
                 if(objPort.anim)
                 {

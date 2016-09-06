@@ -49,7 +49,7 @@ max.set(1.0);
 duration.set(0.5);
 init();
 
-min.onValueChange(init);
-max.onValueChange(init);
-duration.onValueChange(init);
-easing.onValueChange(init);
+min.onChange=init;
+max.onChange=init;
+duration.onChange=init;
+easing.onChange=init;

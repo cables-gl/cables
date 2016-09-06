@@ -12,13 +12,13 @@ op.bindTextures=function()
     if(op.texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.get().tex);
     }
 
     if(op.textureOpacity.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.get().tex);
     }
 };
 
@@ -65,7 +65,7 @@ op.textureUniform=null;
 
 // op.texture.onPreviewChanged=function()
 // {
-//     if(op.texture.showPreview) op.render.onTriggered=op.texture.val.preview;
+//     if(op.texture.showPreview) op.render.onTriggered=op.texture.get().preview;
 //     else op.render.onTriggered=op.doRender;
 //
 //     console.log('show preview!');
@@ -94,7 +94,7 @@ op.textureOpacityUniform=null;
 
 op.textureOpacity.onPreviewChanged=function()
 {
-    if(op.textureOpacity.showPreview) render.onTriggered=op.textureOpacity.val.preview;
+    if(op.textureOpacity.showPreview) render.onTriggered=op.textureOpacity.get().preview;
     else render.onTriggered=doRender;
 
     console.log('show preview!');
@@ -120,19 +120,19 @@ op.textureOpacity.onValueChanged=function()
 };
 
 op.colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-op.colorizeTexture.val=false;
+op.colorizeTexture.set(false);
 op.colorizeTexture.onValueChanged=function()
 {
-    if(op.colorizeTexture.val) shader.define('COLORIZE_TEXTURE');
+    if(op.colorizeTexture.get()) shader.define('COLORIZE_TEXTURE');
         else shader.removeDefine('COLORIZE_TEXTURE');
 };
 
 
 op.doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-op.doBillboard.val=false;
+op.doBillboard.set(false);
 op.doBillboard.onValueChanged=function()
 {
-    if(op.doBillboard.val)
+    if(op.doBillboard.get())
         shader.define('BILLBOARD');
     else
         shader.removeDefine('BILLBOARD');

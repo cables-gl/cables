@@ -95,12 +95,12 @@ function reset()
 
 size.set(20);
 seed.set(1);
-seed.onValueChange(reset);
-num.onValueChange(reset);
-size.onValueChange(reset);
-scaleX.onValueChange(reset);
-scaleZ.onValueChange(reset);
-scaleY.onValueChange(reset);
+seed.onChange=reset;
+num.onChange=reset;
+size.onChange=reset;
+scaleX.onChange=reset;
+scaleZ.onChange=reset;
+scaleY.onChange=reset;
 round.onChange=reset;
 
 num.set(100);

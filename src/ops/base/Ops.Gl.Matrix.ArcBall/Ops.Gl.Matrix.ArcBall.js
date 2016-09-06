@@ -2,7 +2,6 @@ op.name="ArcBall";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-
 var mulRotate=op.addInPort(new Port(op,"Mul Rotate",OP_PORT_TYPE_VALUE));
 var mulScale=op.addInPort(new Port(op,"Mul Scale",OP_PORT_TYPE_VALUE));
 
@@ -82,7 +81,6 @@ function onmousemove(event)
 
 function onMouseDown(event)
 {
-    
     startX = event.offsetX;
     startY = event.offsetY;
 

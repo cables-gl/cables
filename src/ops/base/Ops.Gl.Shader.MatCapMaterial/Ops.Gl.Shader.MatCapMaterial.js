@@ -1,4 +1,3 @@
-CABLES.Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 
@@ -18,7 +17,7 @@ this.textureNormal=this.addInPort(new Port(this,"normal",OP_PORT_TYPE_TEXTURE,{p
 this.textureNormalUniform=null;
 
 this.normalScale=this.addInPort(new Port(this,"normalScale",OP_PORT_TYPE_VALUE,{display:'range'}));
-this.normalScale.val=0.4;
+this.normalScale.set(0.4);
 this.normalScaleUniform=null;
 
 this.textureSpec=this.addInPort(new Port(this,"specular",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
@@ -30,75 +29,75 @@ this.textureSpecMatCapUniform=null;
 
 this.diffuseRepeatX=this.addInPort(new Port(this,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
 this.diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
-this.diffuseRepeatX.val=1.0;
-this.diffuseRepeatY.val=1.0;
+this.diffuseRepeatX.set(1.0);
+this.diffuseRepeatY.set(1.0);
 
 this.diffuseRepeatX.onValueChanged=function()
 {
-    self.diffuseRepeatXUniform.setValue(self.diffuseRepeatX.val);
+    self.diffuseRepeatXUniform.setValue(self.diffuseRepeatX.get());
 };
 
 this.diffuseRepeatY.onValueChanged=function()
 {
-    self.diffuseRepeatYUniform.setValue(self.diffuseRepeatY.val);
+    self.diffuseRepeatYUniform.setValue(self.diffuseRepeatY.get());
 };
 
 
 this.calcTangents=this.addInPort(new Port(this,"calc normal tangents",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.calcTangents.onValueChanged=function()
 {
-    if(self.calcTangents.val) shader.define('CALC_TANGENT');
+    if(self.calcTangents.get()) shader.define('CALC_TANGENT');
         else shader.removeDefine('CALC_TANGENT');
 };
 
 this.projectCoords=this.addInPort(new Port(this,"projectCoords",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','xy','yz','xz']}));
-this.projectCoords.val='no';
+this.projectCoords.set('no');
 this.projectCoords.onValueChanged=function()
 {
     shader.removeDefine('DO_PROJECT_COORDS_XY');
     shader.removeDefine('DO_PROJECT_COORDS_YZ');
     shader.removeDefine('DO_PROJECT_COORDS_XZ');
 
-    if(self.projectCoords.val=='xy') shader.define('DO_PROJECT_COORDS_XY');
-    if(self.projectCoords.val=='yz') shader.define('DO_PROJECT_COORDS_YZ');
-    if(self.projectCoords.val=='xz') shader.define('DO_PROJECT_COORDS_XZ');
+    if(self.projectCoords.get()=='xy') shader.define('DO_PROJECT_COORDS_XY');
+    if(self.projectCoords.get()=='yz') shader.define('DO_PROJECT_COORDS_YZ');
+    if(self.projectCoords.get()=='xz') shader.define('DO_PROJECT_COORDS_XZ');
 };
 
 this.normalRepeatX=this.addInPort(new Port(this,"normalRepeatX",OP_PORT_TYPE_VALUE));
 this.normalRepeatY=this.addInPort(new Port(this,"normalRepeatY",OP_PORT_TYPE_VALUE));
-this.normalRepeatX.val=1.0;
-this.normalRepeatY.val=1.0;
+this.normalRepeatX.set(1.0);
+this.normalRepeatY.set(1.0);
 
 this.normalRepeatX.onValueChanged=function()
 {
-    self.normalRepeatXUniform.setValue(self.normalRepeatX.val);
+    self.normalRepeatXUniform.setValue(self.normalRepeatX.get());
 };
 
 this.normalRepeatY.onValueChanged=function()
 {
-    self.normalRepeatYUniform.setValue(self.normalRepeatY.val);
+    self.normalRepeatYUniform.setValue(self.normalRepeatY.get());
 };
 
 this.normalScale.onValueChanged=function()
 {
-    self.normalScaleUniform.setValue(self.normalScale.val*2.0);
+    self.normalScaleUniform.setValue(self.normalScale.get()*2.0);
 };
 
 this.texture.onPreviewChanged=function()
 {
-    if(self.texture.showPreview) self.render.onTriggered=self.texture.val.preview;
+    if(self.texture.showPreview) self.render.onTriggered=self.texture.get().preview;
         else self.render.onTriggered=self.doRender;
 };
 
 this.textureDiffuse.onPreviewChanged=function()
 {
-    if(self.textureDiffuse.showPreview) self.render.onTriggered=self.textureDiffuse.val.preview;
+    if(self.textureDiffuse.showPreview) self.render.onTriggered=self.textureDiffuse.get().preview;
         else self.render.onTriggered=self.doRender;
 };
 
 this.textureNormal.onPreviewChanged=function()
 {
-    if(self.textureNormal.showPreview) self.render.onTriggered=self.textureNormal.val.preview;
+    if(self.textureNormal.showPreview) self.render.onTriggered=self.textureNormal.get().preview;
         else self.render.onTriggered=self.doRender;
 };
 
@@ -119,7 +118,7 @@ this.texture.onValueChanged=function()
 
 this.textureDiffuse.onValueChanged=function()
 {
-    if(self.textureDiffuse.val)
+    if(self.textureDiffuse.get())
     {
         if(self.textureDiffuseUniform!==null)return;
         shader.define('HAS_DIFFUSE_TEXTURE');
@@ -138,7 +137,7 @@ this.textureDiffuse.onValueChanged=function()
 
 this.textureNormal.onValueChanged=function()
 {
-    if(self.textureNormal.val)
+    if(self.textureNormal.get())
     {
         if(self.textureNormalUniform!==null)return;
         shader.define('HAS_NORMAL_TEXTURE');
@@ -156,7 +155,7 @@ this.textureNormal.onValueChanged=function()
 
 function changeSpec()
 {
-    if(self.textureSpec.val && self.textureSpecMatCap.val)
+    if(self.textureSpec.get() && self.textureSpecMatCap.get())
     {
         if(self.textureSpecUniform!==null)return;
         shader.define('USE_SPECULAR_TEXTURE');
@@ -191,24 +190,24 @@ function bindTextures()
     if(self.textureDiffuse.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureDiffuse.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureDiffuse.get().tex);
     }
 
     if(self.textureNormal.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureNormal.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureNormal.get().tex);
     }
 
     if(self.textureSpec.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE3);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpec.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpec.get().tex);
     }
     if(self.textureSpecMatCap.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE4);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpecMatCap.val.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpecMatCap.get().tex);
     }
 
 };
@@ -431,15 +430,15 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 
 
 shader.bindTextures=bindTextures;
-this.shaderOut.val=shader;
+this.shaderOut.set(shader);
 this.onLoaded=shader.compile;
 shader.setSource(srcVert,srcFrag);
-this.normalScaleUniform=new CGL.Uniform(shader,'f','normalScale',self.normalScale.val);
-this.normalRepeatXUniform=new CGL.Uniform(shader,'f','normalRepeatX',self.normalRepeatX.val);
-this.normalRepeatYUniform=new CGL.Uniform(shader,'f','normalRepeatY',self.normalRepeatY.val);
+this.normalScaleUniform=new CGL.Uniform(shader,'f','normalScale',self.normalScale.get());
+this.normalRepeatXUniform=new CGL.Uniform(shader,'f','normalRepeatX',self.normalRepeatX.get());
+this.normalRepeatYUniform=new CGL.Uniform(shader,'f','normalRepeatY',self.normalRepeatY.get());
 
-this.diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',self.diffuseRepeatX.val);
-this.diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',self.diffuseRepeatY.val);
+this.diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',self.diffuseRepeatX.get());
+this.diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',self.diffuseRepeatY.get());
 
 this.render.onTriggered=this.doRender;
 this.calcTangents.set(true);

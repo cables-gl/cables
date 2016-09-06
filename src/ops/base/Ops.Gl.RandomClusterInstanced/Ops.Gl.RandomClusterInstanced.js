@@ -172,12 +172,12 @@ function reset()
 
 size.set(40);
 seed.set(1);
-seed.onValueChange(prepare);
-num.onValueChange(prepare);
-size.onValueChange(prepare);
-scaleX.onValueChange(prepare);
-scaleZ.onValueChange(prepare);
-scaleY.onValueChange(prepare);
-geom.onValueChange(prepare);
+seed.onChange=prepare;
+num.onChange=prepare;
+size.onChange=prepare;
+scaleX.onChange=prepare;
+scaleZ.onChange=prepare;
+scaleY.onChange=prepare;
+geom.onChange=prepare;
 
 num.set(100);
