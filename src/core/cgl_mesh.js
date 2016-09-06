@@ -66,7 +66,7 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
         return attributes;
     };
 
-    this.updateVertices=function()
+    this.updateVertices=function(geom)
     {
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, bufVertices);
         cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), cgl.gl.STATIC_DRAW);
