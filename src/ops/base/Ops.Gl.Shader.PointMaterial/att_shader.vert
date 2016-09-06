@@ -22,13 +22,6 @@ void main()
 {
     float psMul=sqrt(canvasWidth*canvasHeight)*0.001+0.00000000001;
 
-    #ifndef SCALE_BY_DISTANCE
-        gl_PointSize = pointSize * psMul;
-    #endif
-    #ifdef SCALE_BY_DISTANCE
-        float cameraDist = distance(vPosition, camPos)+0.0001;
-        gl_PointSize = (pointSize / cameraDist) * psMul;
-    #endif
 
 
     #ifdef HAS_TEXTURES
@@ -40,5 +33,13 @@ void main()
     {{MODULE_VERTEX_POSITION}}
 
     gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
+
+    #ifndef SCALE_BY_DISTANCE
+        gl_PointSize = pointSize * psMul;
+    #endif
+    #ifdef SCALE_BY_DISTANCE
+        float cameraDist = distance(gl_Position.xyz, camPos)+0.0001;
+        gl_PointSize = (pointSize / cameraDist) * psMul;
+    #endif
 
 }
