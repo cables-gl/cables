@@ -84,7 +84,7 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
 
         attributes.length=0;
 
-        updateVertices(geom);
+        this.updateVertices(geom);
 
         if(geom.verticesIndices.length>0)
         {
