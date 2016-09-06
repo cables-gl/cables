@@ -1,25 +1,24 @@
-var self=this;
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 
-this.name='random cluster instanced';
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var geom=this.addInPort(new Port(this,"geom",OP_PORT_TYPE_OBJECT));
+op.name='random cluster instanced';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var geom=op.addInPort(new Port(op,"geom",OP_PORT_TYPE_OBJECT));
 geom.ignoreValueSerialize=true;
 
-var num=this.addInPort(new Port(this,"num"));
-var size=this.addInPort(new Port(this,"size"));
-var seed=this.addInPort(new Port(this,"random seed"));
+var num=op.addInPort(new Port(op,"num"));
+var size=op.addInPort(new Port(op,"size"));
+var seed=op.addInPort(new Port(op,"random seed"));
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
-var idx=this.addOutPort(new Port(this,"index")) ;
-var rnd=this.addOutPort(new Port(this,"rnd")) ;
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
+var idx=op.addOutPort(new Port(op,"index")) ;
+var rnd=op.addOutPort(new Port(op,"rnd")) ;
 var randoms=[];
 var randomsRot=[];
 var randomsFloats=[];
 
-var scaleX=this.addInPort(new Port(this,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleY=this.addInPort(new Port(this,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleZ=this.addInPort(new Port(this,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleX=op.addInPort(new Port(op,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleY=op.addInPort(new Port(op,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleZ=op.addInPort(new Port(op,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
 scaleX.set(1);
 scaleY.set(1);
 scaleZ.set(1);
@@ -58,7 +57,7 @@ function prepare()
     if(geom.get())
     {
         reset();
-        // console.log('prepare instances!!');
+
         var num=transformations.length;
         var arrs = [].concat.apply([], transformations);
         var matrices = new Float32Array(arrs);
@@ -67,7 +66,6 @@ function prepare()
         mesh.numInstances=num;
         mesh.addAttribute('instMat',matrices,16);
 
-        // console.log(num+' instances !',arrs.length);
     }
 
 }
@@ -167,7 +165,6 @@ function reset()
 
     }
 
-    // console.log( transformations);
 }
 
 size.set(40);

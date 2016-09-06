@@ -1,18 +1,16 @@
-CABLES.Op.apply(this, arguments);
 
-this.name='TimeDiff';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.result=this.addOutPort(new Port(this,"result"));
+op.name='TimeDiff';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var result=op.addOutPort(new Port(op,"result"));
 
-var self=this;
 var lastTime=Date.now();
 
-this.exe.onTriggered=function()
+exe.onTriggered=function()
 {
-    self.result.val=(Date.now()-lastTime);
+    result.set( (Date.now()-lastTime) );
     lastTime=Date.now();
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
-this.exe.onTriggered();
+exe.onTriggered();

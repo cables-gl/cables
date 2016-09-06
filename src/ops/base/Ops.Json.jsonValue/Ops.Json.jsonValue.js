@@ -8,14 +8,10 @@ var result=op.addOutPort(new Port(op,"result"));
 result.ignoreValueSerialize=true;
 data.ignoreValueSerialize=true;
 
-
 data.onValueChanged=exec;
 
 function exec()
 {
-    console.log('data../..',data.get());
-    
-    
     if(data.get() && data.get().hasOwnProperty(key.get()))
     {
         result.set( data.get()[key.get()] );

@@ -1,22 +1,17 @@
 op.name="Increment";
 
-var inLength=this.addInPort(new Port(this,"Length",OP_PORT_TYPE_VALUE));
-var reset=this.addInPort(new Port(this,"Reset",OP_PORT_TYPE_FUNCTION));
-var increment=this.addInPort(new Port(this,"Increment",OP_PORT_TYPE_FUNCTION));
-var decrement=this.addInPort(new Port(this,"Decrement",OP_PORT_TYPE_FUNCTION));
+var inLength=op.addInPort(new Port(op,"Length",OP_PORT_TYPE_VALUE));
+var reset=op.addInPort(new Port(op,"Reset",OP_PORT_TYPE_FUNCTION));
+var increment=op.addInPort(new Port(op,"Increment",OP_PORT_TYPE_FUNCTION));
+var decrement=op.addInPort(new Port(op,"Decrement",OP_PORT_TYPE_FUNCTION));
 
-var value=this.addOutPort(new Port(this,"Value",OP_PORT_TYPE_VALUE));
+var value=op.addOutPort(new Port(op,"Value",OP_PORT_TYPE_VALUE));
 
 value.ignoreValueSerialize=true;
 inLength.set(10);
 var val=0;
 value.set(0);
 
-// value.onValueChanged=function()
-// {
-//     console.log('valuechanged ',value.get());
-//     if(!value.get())val=0
-// };
 inLength.onTriggered=reset;
 reset.onTriggered=doReset;
 function doReset()
@@ -24,7 +19,6 @@ function doReset()
     value.set(null);
     val=0;
     value.set(val);
-    console.log('increment reset');
 }
 
 decrement.onTriggered=function()

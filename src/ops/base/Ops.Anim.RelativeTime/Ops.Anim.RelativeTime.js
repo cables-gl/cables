@@ -3,15 +3,11 @@ var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var result=op.addOutPort(new Port(op,"result"));
 
 
-// result.ignoreValueSerialize=true;
-
-
-
-
+var offset=Date.now();
 window.performance = (window.performance || {
-    offset: Date.now(),
+    
     now: function now(){
-        return Date.now() - this.offset;
+        return Date.now() - offset;
     }
 });
 
