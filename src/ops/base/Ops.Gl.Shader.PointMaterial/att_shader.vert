@@ -27,7 +27,7 @@ void main()
     #endif
     #ifdef SCALE_BY_DISTANCE
         float cameraDist = distance(vPosition, camPos);
-        gl_PointSize = pointSize / (cameraDist*cameraDist*cameraDist) * psMul;
+        gl_PointSize = pow(pointSize / cameraDist,camDistMul) * psMul;
     #endif
 
 
