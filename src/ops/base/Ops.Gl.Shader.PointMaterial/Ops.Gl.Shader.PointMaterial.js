@@ -42,6 +42,9 @@ g.uniform=new CGL.Uniform(shader,'f','g',g);
 b.uniform=new CGL.Uniform(shader,'f','b',b);
 a.uniform=new CGL.Uniform(shader,'f','a',a);
 
+var uniWidth=new CGL.Uniform(shader,'f','canvasWidth',cgl.canvasWidth);
+var uniHeight=new CGL.Uniform(shader,'f','canvasHeight',cgl.canvasHeight);
+
 render.onTriggered=doRender;
 var texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var textureUniform=null;
@@ -57,6 +60,10 @@ function bindTextures()
 
 function doRender()
 {
+    uniWidth.setValue(cgl.canvasWidth);
+    uniHeight.setValue(cgl.canvasHeight);
+    
+    
     cgl.setShader(shader);
     bindTextures();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);

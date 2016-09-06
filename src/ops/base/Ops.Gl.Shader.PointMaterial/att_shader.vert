@@ -14,16 +14,21 @@ uniform mat4 viewMatrix;
 uniform float pointSize;
 uniform vec3 camPos;
 
+uniform float canvasWidth;
+uniform float canvasHeight;
+
 void main()
 {
+    float psMul=sqrt(canvasWidth*canvasHeight)*0.01;
 
     #ifndef SCALE_BY_DISTANCE
-        gl_PointSize = pointSize;
+        gl_PointSize = pointSize * psMul;
     #endif
     #ifdef SCALE_BY_DISTANCE
         float cameraDist = distance(vPosition, camPos);
-        gl_PointSize = pointSize / cameraDist;
+        gl_PointSize = pointSize / cameraDist * psMul;
     #endif
+
 
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
