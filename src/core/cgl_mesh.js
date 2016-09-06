@@ -66,7 +66,13 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
         return attributes;
     };
 
-
+    this.updateVertices=function()
+    {
+        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, bufVertices);
+        cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), cgl.gl.STATIC_DRAW);
+        bufVertices.itemSize = 3;
+        bufVertices.numItems = geom.vertices.length/3;
+    };
 
     this.setGeom=function(geom)
     {
@@ -78,10 +84,7 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
 
         attributes.length=0;
 
-        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, bufVertices);
-        cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), cgl.gl.STATIC_DRAW);
-        bufVertices.itemSize = 3;
-        bufVertices.numItems = geom.vertices.length/3;
+        updateVertices();
 
         if(geom.verticesIndices.length>0)
         {
