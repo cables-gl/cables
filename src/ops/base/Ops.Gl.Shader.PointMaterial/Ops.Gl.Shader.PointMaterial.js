@@ -14,8 +14,6 @@ var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 
-var camDistMul=op.inValue('Cam Dist Mul',1);
-
 
 
 makeRound.set(true);
@@ -29,7 +27,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shader.define('MAKE_ROUND');
 
 var uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize);
-var uniCamDistMul=new CGL.Uniform(shader,'f','camDistMul',camDistMul);
+
 
 shaderOut.set(shader);
 onLoaded=shader.compile;
