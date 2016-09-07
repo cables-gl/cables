@@ -188,7 +188,11 @@ CABLES.Port.prototype.removeLink=function(link)
     for(var i in this.links)
         if(this.links[i]==link)this.links.splice( i, 1 );
 
-    if(this.direction==PORT_DIR_IN) this.setValue(this._valueBeforeLink);
+    if(this.direction==PORT_DIR_IN)
+    {
+        if(this.type==OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
+            else this.setValue(this._valueBeforeLink);
+    }
 
     if(this.onLinkChanged)this.onLinkChanged();
 };

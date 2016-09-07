@@ -72,8 +72,11 @@ function updateShader()
                 uniformTextures.push(newInputTex);
             }
         }
-
     }
+    
+    if(CABLES.UI) gui.patch().showOpParams(op);
+
+
 }
 
 
