@@ -106,7 +106,7 @@ CABLES.Patch = function(cfg)
     {
         if(CABLES.UI)
         {
-            gui.opDocs.loadOpLibs(objName,function()
+            gui.serverOps.loadOpLibs(objName,function()
             {
                 self.doAddOp(objName,uiAttribs,next);
             });
@@ -508,7 +508,7 @@ CABLES.Patch = function(cfg)
                         if(port2&& port2.type!=OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value') )
                             port2.set(obj.ops[iop].portsOut[ipo].value);
                     }
-                    
+
                 }
 
             });
