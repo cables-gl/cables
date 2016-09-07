@@ -100,7 +100,7 @@ CABLES.Op = function()
     this.inFunction=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
     this.inValue=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
     this.inValueBool=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{display:'bool'})); if(v!==undefined)p.set(v); return p; };
-    this.inObject=function(name,v){ var p=_self.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); return p; };
+    this.inObject=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); return p; };
     this.inValueSlider=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{display:'range'})); if(v!==undefined)p.set(v); return p; };
 
     this.outFunction=function(name,v){ var p=_self.addOutPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
