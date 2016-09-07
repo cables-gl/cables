@@ -100,8 +100,23 @@ CABLES.Patch = function(cfg)
         return opObj;
     };
 
+
     this.addOp=function(objName,uiAttribs)
     {
+        if(CABLES.UI)
+        {
+            gui.opDocs.loadOpLibs(objName,function()
+            {
+                self._addOp(objName,uiAttribs);
+            });
+        }
+        else this._addOp(objName,uiAttribs);
+    };
+
+    this._addOp=function(objName,uiAttribs)
+    {
+
+
         if(!objName || objName.indexOf('.') == -1)
         {
             CABLES.UI.MODAL.showError('could not create op','op unknown');
