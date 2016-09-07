@@ -100,20 +100,23 @@ CABLES.Patch = function(cfg)
         return opObj;
     };
 
+    // this.addOp=this.doAddOp;
 
-    this.addOp=function(objName,uiAttribs)
+    this.addOp=function(objName,uiAttribs,next)
     {
         if(CABLES.UI)
         {
             gui.opDocs.loadOpLibs(objName,function()
             {
-                self._addOp(objName,uiAttribs);
+                self.doAddOp(objName,uiAttribs,next);
             });
         }
-        else this._addOp(objName,uiAttribs);
+        else
+            this.doAddOp(objName,uiAttribs,next);
     };
 
-    this._addOp=function(objName,uiAttribs)
+
+    this.doAddOp=function(objName,uiAttribs,next)
     {
 
 
@@ -179,8 +182,9 @@ CABLES.Patch = function(cfg)
             if(this.onAdd)this.onAdd(op);
         }
 
-        return op;
+        if(next) next(op);
     };
+
 
     this.removeOnAnimFrame=function(op)
     {
@@ -370,50 +374,53 @@ CABLES.Patch = function(cfg)
                 count++;
                 var oldOp=self.ops[i];
                 oldOp.deleted=true;
-                var op=this.addOp(objName,oldOp.uiAttribs);
-                var j,k;
-                for(j in oldOp.portsIn)
+                this.addOp(objName,oldOp.uiAttribs,function(op)
                 {
-                    if(oldOp.portsIn[j].links.length===0)
+                    var j,k,l;
+                    for(j in oldOp.portsIn)
                     {
-                        op.getPort(oldOp.portsIn[j].name).set(oldOp.portsIn[j].get() );
+                        if(oldOp.portsIn[j].links.length===0)
+                        {
+                            op.getPort(oldOp.portsIn[j].name).set(oldOp.portsIn[j].get() );
+                        }
+                        else
+                        while(oldOp.portsIn[j].links.length)
+                        {
+                            var oldName=oldOp.portsIn[j].links[0].portIn.name;
+                            var oldOutName=oldOp.portsIn[j].links[0].portOut.name;
+                            var oldOutOp=oldOp.portsIn[j].links[0].portOut.parent;
+                            oldOp.portsIn[j].links[0].remove();
+
+                            l=self.link(
+                                op,
+                                oldName,
+                                oldOutOp,
+                                oldOutName
+                                );
+                            l.setValue();
+                        }
                     }
-                    else
-                    while(oldOp.portsIn[j].links.length)
+
+                    for(j in oldOp.portsOut)
                     {
-                        var oldName=oldOp.portsIn[j].links[0].portIn.name;
-                        var oldOutName=oldOp.portsIn[j].links[0].portOut.name;
-                        var oldOutOp=oldOp.portsIn[j].links[0].portOut.parent;
-                        oldOp.portsIn[j].links[0].remove();
+                        while(oldOp.portsOut[j].links.length)
+                        {
+                            var oldNewName=oldOp.portsOut[j].links[0].portOut.name;
+                            var oldInName=oldOp.portsOut[j].links[0].portIn.name;
+                            var oldInOp=oldOp.portsOut[j].links[0].portIn.parent;
+                            oldOp.portsOut[j].links[0].remove();
 
-                        var l=self.link(
-                            op,
-                            oldName,
-                            oldOutOp,
-                            oldOutName
-                            );
-                        l.setValue();
+                            l=self.link(
+                                op,
+                                oldNewName,
+                                oldInOp,
+                                oldInName
+                                );
+                            l.setValue();
+                        }
                     }
-                }
 
-                for(j in oldOp.portsOut)
-                {
-                    while(oldOp.portsOut[j].links.length)
-                    {
-                        var oldNewName=oldOp.portsOut[j].links[0].portOut.name;
-                        var oldInName=oldOp.portsOut[j].links[0].portIn.name;
-                        var oldInOp=oldOp.portsOut[j].links[0].portIn.parent;
-                        oldOp.portsOut[j].links[0].remove();
-
-                        var l=self.link(
-                            op,
-                            oldNewName,
-                            oldInOp,
-                            oldInName
-                            );
-                        l.setValue();
-                    }
-                }
+                });
 
                 self.deleteOp(oldOp.id);
             }
@@ -464,41 +471,47 @@ CABLES.Patch = function(cfg)
         // add ops...
         for(var iop in obj.ops)
         {
-            var op=this.addOp(obj.ops[iop].objName,obj.ops[iop].uiAttribs);
-            if(!op)continue;
-            op.id=obj.ops[iop].id;
-            if(genIds) op.id=CABLES.generateUUID();
-
-            for(var ipi in obj.ops[iop].portsIn)
+            this.addOp(obj.ops[iop].objName,obj.ops[iop].uiAttribs,function(op)
             {
-                var objPort=obj.ops[iop].portsIn[ipi];
-                var port=op.getPort(objPort.name);
-
-                if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
-                if(port && (port.uiAttribs.display=='bool' || port.uiAttribs.type=='bool') && !isNaN(objPort.value) ) objPort.value=true===objPort.value;
-
-                if(port && port.type!=OP_PORT_TYPE_TEXTURE)port.set(objPort.value);
-                if(objPort.animated)port.setAnimated(objPort.animated);
-                if(objPort.anim)
+                if(op)
                 {
-                    if(!port.anim) port.anim=new CABLES.TL.Anim();
+                    op.id=obj.ops[iop].id;
+                    if(genIds) op.id=CABLES.generateUUID();
 
-                    if(objPort.anim.loop) port.anim.loop=objPort.anim.loop;
-
-                    for(var ani in objPort.anim.keys)
+                    for(var ipi in obj.ops[iop].portsIn)
                     {
-                        // var o={t:objPort.anim.keys[ani].t,value:objPort.anim.keys[ani].v};
-                        port.anim.keys.push(new CABLES.TL.Key(objPort.anim.keys[ani]) );
-                    }
-                }
-            }
+                        var objPort=obj.ops[iop].portsIn[ipi];
+                        var port=op.getPort(objPort.name);
 
-            for(var ipo in obj.ops[iop].portsOut)
-            {
-                var port2=op.getPort(obj.ops[iop].portsOut[ipo].name);
-                if(port2&& port2.type!=OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value') )
-                    port2.set(obj.ops[iop].portsOut[ipo].value);
-            }
+                        if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
+                        if(port && (port.uiAttribs.display=='bool' || port.uiAttribs.type=='bool') && !isNaN(objPort.value) ) objPort.value=true===objPort.value;
+
+                        if(port && port.type!=OP_PORT_TYPE_TEXTURE)port.set(objPort.value);
+                        if(objPort.animated)port.setAnimated(objPort.animated);
+                        if(objPort.anim)
+                        {
+                            if(!port.anim) port.anim=new CABLES.TL.Anim();
+
+                            if(objPort.anim.loop) port.anim.loop=objPort.anim.loop;
+
+                            for(var ani in objPort.anim.keys)
+                            {
+                                // var o={t:objPort.anim.keys[ani].t,value:objPort.anim.keys[ani].v};
+                                port.anim.keys.push(new CABLES.TL.Key(objPort.anim.keys[ani]) );
+                            }
+                        }
+                    }
+
+                    for(var ipo in obj.ops[iop].portsOut)
+                    {
+                        var port2=op.getPort(obj.ops[iop].portsOut[ipo].name);
+                        if(port2&& port2.type!=OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value') )
+                            port2.set(obj.ops[iop].portsOut[ipo].value);
+                    }
+                    
+                }
+
+            });
         }
         // console.log('create links...');
 

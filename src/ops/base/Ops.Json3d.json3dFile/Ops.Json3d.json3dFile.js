@@ -21,7 +21,7 @@ function render()
     var oldScene=cgl.frameStore.currentScene;
     cgl.frameStore.currentScene=scene;
     if(cgl.frameStore.currentScene.materials)cgl.frameStore.currentScene.materials.length=0;// cgl.frameStore.currentScene.materials=[];
-    
+
     cgl.frameStore.cloneTransforms=cloneTransformStore;
     trigger.trigger();
     cgl.frameStore.currentScene=oldScene;
@@ -495,13 +495,13 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 posyAdd+=50;
 
                 var clonedOp=self.patch.addOp('Ops.Json3d.ClonedMesh',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
-                
+
                 clonedOp.getPort('transformations').set(cloneTransforms);
-                
-                
+
+
                 cloneTransformStore.push(cloneTransforms);
                 console.log(cloneTransformStore.length+' cloneTransformStore !!!');
-                
+
                 self.patch.link(prevOp,'trigger',clonedOp,'render');
                 // self.patch.link(parentOp,parentPort,prevOp,'render');
 
