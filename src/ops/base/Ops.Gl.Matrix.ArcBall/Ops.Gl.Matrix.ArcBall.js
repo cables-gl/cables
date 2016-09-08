@@ -8,6 +8,8 @@ var mulScale=op.addInPort(new Port(op,"Mul Scale",OP_PORT_TYPE_VALUE));
 var minScale=op.addInPort(new Port(op,"Min Scale",OP_PORT_TYPE_VALUE));
 var maxScale=op.addInPort(new Port(op,"Max Scale",OP_PORT_TYPE_VALUE));
 
+var useWheel=op.inValueBool('Use Mouse Wheel',false);
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 mulRotate.set(1);
@@ -101,9 +103,12 @@ function onMouseEnter(event)
 
 var onMouseWheel=function(event)
 {
-    var delta=CGL.getWheelSpeed(event)*0.001;
-    radius+=(parseFloat(delta)*mulScale.get());
-    event.preventDefault();
+    if(useWheel.get())
+    {
+        var delta=CGL.getWheelSpeed(event)*0.001;
+        radius+=(parseFloat(delta)*mulScale.get());
+        event.preventDefault();
+    }
 };
 
 cgl.canvas.addEventListener('mousemove', onmousemove);
