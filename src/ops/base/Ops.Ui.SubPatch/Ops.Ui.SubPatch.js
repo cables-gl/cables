@@ -2,7 +2,6 @@ op.name="SubPatch";
 
 var dyn=op.addInPort(new Port(op,"create port",OP_PORT_TYPE_DYNAMIC));
 
-
 var dataStr=op.addInPort(new Port(op,"dataStr",OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 op.patchId=op.addInPort(new Port(op,"patchId",OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 
@@ -28,7 +27,8 @@ dataStr.onChange=function()
             portsIn.push(newPort);
             
         }
-    }catch(e)
+    }
+    catch(e)
     {
         op.log('cannot load subpatch data...');
         console.log(e);
@@ -60,10 +60,7 @@ dyn.onLinkChanged=function(port)
                 op,
                 newPort.name
                 );
-            
-            // var link=new CABLES.Link(op.patch);
-            // link.link(otherPort,newPort);
-            
+
             data.ports.push({"name":newPort.name,"type":newPort.type});
             saveData();
             

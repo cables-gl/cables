@@ -30,12 +30,13 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.onValueChanged=null;
     this.onTriggered=null;
     this.onUiActiveStateChange=null;
-    this.onAnimToggle=function(){};
-    this._onAnimToggle=function(){this.onAnimToggle();};
 
     this._warnedDeprecated=false;
 };
 {
+
+    CABLES.Port.prototype.onAnimToggle=function(){};
+    CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
 
     CABLES.Port.prototype.__defineGetter__("val", function()
     {

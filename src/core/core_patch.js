@@ -2,21 +2,21 @@ var CABLES=CABLES || {};
 
 CABLES.Patch = function(cfg)
 {
-    var self=this;
     this.ops=[];
     this.settings={};
     this.timer=new CABLES.Timer();
     this.animFrameOps=[];
-    var volumeListeners=[];
     this.gui=false;
     this.silent=false;
-    var paused=false;
-    var frameNum=0;
-
+    this.profiler=null;
     this.onLoadStart=null;
     this.onLoadEnd=null;
     this.aborted=false;
     this.loading=new CABLES.LoadingStatus();
+
+    this._volumeListeners=[];
+    this._paused=false;
+    this._frameNum=0;
 
     this.config = cfg ||
     {
@@ -30,7 +30,6 @@ CABLES.Patch = function(cfg)
     if(!this.config.prefixAssetPath)this.config.prefixAssetPath='';
     if(!this.config.masterVolume)this.config.masterVolume=1.0;
 
-
     this.vars={};
 
     this.cgl=new CGL.State();
@@ -41,39 +40,42 @@ CABLES.Patch = function(cfg)
     if(this.cgl.aborted) this.aborted=true;
     if(this.cgl.silent) this.silent=true;
 
-    this.isPlaying=function()
+    this.exec();
+};
+
+    CABLES.Patch.prototype.isPlaying=function()
     {
-        return !paused;
+        return !this._paused;
     };
 
-    this.pause=function()
+    CABLES.Patch.prototype.pause=function()
     {
-        paused=true;
+        this._paused=true;
     };
 
-    this.resume=function()
+    CABLES.Patch.prototype.resume=function()
     {
-        paused=false;
+        this._paused=false;
         this.exec();
     };
 
-    this.setVolume=function(v)
+    CABLES.Patch.prototype.setVolume=function(v)
     {
         this.config.masterVolume=v;
-        for(var i=0;i<volumeListeners.length;i++)
+        for(var i=0;i<this._volumeListeners.length;i++)
         {
-            volumeListeners[i].onMasterVolumeChanged(v);
+            this._volumeListeners[i].onMasterVolumeChanged(v);
         }
     };
 
-    this.getFilePath=function(filename)
+    CABLES.Patch.prototype.getFilePath=function(filename)
     {
         return this.config.prefixAssetPath+filename;
     };
 
-    this.clear=function()
+    CABLES.Patch.prototype.clear=function()
     {
-        self.animFrameOps.length=0;
+        this.animFrameOps.length=0;
         this.timer=new CABLES.Timer();
         while(this.ops.length>0)
         {
@@ -82,7 +84,7 @@ CABLES.Patch = function(cfg)
     };
 
 
-    this.getOpClass=function(objName)
+    CABLES.Patch.prototype.getOpClass=function(objName)
     {
         var parts=objName.split('.');
         var opObj=null;
@@ -98,12 +100,11 @@ CABLES.Patch = function(cfg)
         return opObj;
     };
 
-    // this.addOp=this.doAddOp;
-
-    this.addOp=function(objName,uiAttribs,next)
+    CABLES.Patch.prototype.addOp=function(objName,uiAttribs,next)
     {
         if(CABLES.UI)
         {
+            var self=this;
             gui.serverOps.loadOpLibs(objName,function()
             {
                 self.doAddOp(objName,uiAttribs,next);
@@ -114,10 +115,8 @@ CABLES.Patch = function(cfg)
     };
 
 
-    this.doAddOp=function(objName,uiAttribs,next)
+    CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
     {
-
-
         if(!objName || objName.indexOf('.') == -1)
         {
             CABLES.UI.MODAL.showError('could not create op','op unknown');
@@ -173,7 +172,7 @@ CABLES.Patch = function(cfg)
             if(op.onCreate)op.onCreate();
 
             if(op.hasOwnProperty('onAnimFrame')) this.animFrameOps.push(op);
-            if(op.hasOwnProperty('onMasterVolumeChanged')) volumeListeners.push(op);
+            if(op.hasOwnProperty('onMasterVolumeChanged')) this._volumeListeners.push(op);
 
             this.ops.push(op);
 
@@ -184,7 +183,7 @@ CABLES.Patch = function(cfg)
     };
 
 
-    this.removeOnAnimFrame=function(op)
+    CABLES.Patch.prototype.removeOnAnimFrame=function(op)
     {
 
         for(var i=0;i<this.animFrameOps.length;i++)
@@ -193,9 +192,7 @@ CABLES.Patch = function(cfg)
         }
     };
 
-
-
-    this.deleteOp=function(opid,tryRelink)
+    CABLES.Patch.prototype.deleteOp=function(opid,tryRelink)
     {
         for(var i in this.ops)
         {
@@ -231,7 +228,7 @@ CABLES.Patch = function(cfg)
 
                     if(reLinkP1!==null && reLinkP2!==null)
                     {
-                        self.link(
+                        this.link(
                             reLinkP1.parent,
                             reLinkP1.getName(),
                             reLinkP2.parent,
@@ -243,34 +240,34 @@ CABLES.Patch = function(cfg)
         }
     };
 
-    this.getFrameNum=function()
+    CABLES.Patch.prototype.getFrameNum=function()
     {
-        return frameNum;
+        return this.frameNum;
     };
 
-    this.exec=function(e)
+    CABLES.Patch.prototype.exec=function(e)
     {
-        if(paused)return;
+        if(this._paused)return;
 
-        requestAnimationFrame(self.exec);
+        requestAnimationFrame(this.exec.bind(this));
 
-        self.timer.update();
+        this.timer.update();
 
-        var time=self.timer.getTime();
+        var time=this.timer.getTime();
 
-        // for(var i in self.animFrameOps)
-        for (var i = 0; i < self.animFrameOps.length; ++i)
+        // for(var i in this.animFrameOps)
+        for (var i = 0; i < this.animFrameOps.length; ++i)
         {
-            if(self.animFrameOps[i].onAnimFrame) self.animFrameOps[i].onAnimFrame(time);
+            if(this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
         }
-        frameNum++;
-        if(frameNum==1)
+        this._frameNum++;
+        if(this._frameNum==1)
         {
-            if(self.config.onFirstFrameRendered)self.config.onFirstFrameRendered();
+            if(this.config.onFirstFrameRendered)this.config.onFirstFrameRendered();
         }
     };
 
-    this.link=function(op1,port1Name,op2,port2Name)
+    CABLES.Patch.prototype.link=function(op1,port1Name,op2,port2Name)
     {
         if(!op1 || !op2)return;
         var port1=op1.getPort(port1Name);
@@ -305,11 +302,11 @@ CABLES.Patch = function(cfg)
 
     };
 
-    this.onAdd=function(op){};
-    this.onDelete=function(op){};
-    this.onLink=function(p1,p2){};
-    this.onUnLink=function(p1,p2){};
-    this.serialize=function(asObj)
+    CABLES.Patch.prototype.onAdd=function(op){};
+    CABLES.Patch.prototype.onDelete=function(op){};
+    CABLES.Patch.prototype.onLink=function(p1,p2){};
+    CABLES.Patch.prototype.onUnLink=function(p1,p2){};
+    CABLES.Patch.prototype.serialize=function(asObj)
     {
         var obj={};
 
@@ -325,7 +322,7 @@ CABLES.Patch = function(cfg)
         return JSON.stringify(obj);
     };
 
-    this.getOpById=function(opid)
+    CABLES.Patch.prototype.getOpById=function(opid)
     {
         for(var i in this.ops)
         {
@@ -333,7 +330,7 @@ CABLES.Patch = function(cfg)
         }
     };
 
-    this.getOpsByName=function(name)
+    CABLES.Patch.prototype.getOpsByName=function(name)
     {
         var arr=[];
         for(var i in this.ops)
@@ -343,7 +340,7 @@ CABLES.Patch = function(cfg)
         return arr;
     };
 
-    this.loadLib=function(which)
+    CABLES.Patch.prototype.loadLib=function(which)
     {
 
         CABLES.ajaxSync('/ui/libs/'+which+'.js',
@@ -362,16 +359,17 @@ CABLES.Patch = function(cfg)
 
     };
 
-    this.reloadOp=function(objName,cb)
+    CABLES.Patch.prototype.reloadOp=function(objName,cb)
     {
         var count=0;
-        for(var i in self.ops)
+        for(var i in this.ops)
         {
-            if(self.ops[i].objName==objName)
+            if(this.ops[i].objName==objName)
             {
                 count++;
-                var oldOp=self.ops[i];
+                var oldOp=this.ops[i];
                 oldOp.deleted=true;
+                var self=this;
                 this.addOp(objName,oldOp.uiAttribs,function(op)
                 {
                     var j,k,l;
@@ -420,27 +418,27 @@ CABLES.Patch = function(cfg)
 
                 });
 
-                self.deleteOp(oldOp.id);
+                this.deleteOp(oldOp.id);
             }
         }
         cb(count);
 
     };
 
-    this.getSubPatchOp=function(patchId,objName)
+    CABLES.Patch.prototype.getSubPatchOp=function(patchId,objName)
     {
-        for(var i in self.ops)
+        for(var i in this.ops)
         {
-            if(self.ops[i].uiAttribs && self.ops[i].uiAttribs.subPatch==patchId && self.ops[i].objName==objName)
+            if(this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch==patchId && this.ops[i].objName==objName)
             {
-                return self.ops[i];
+                return this.ops[i];
             }
         }
 
         return false;
     };
 
-    this.deSerialize=function(obj,genIds)
+    CABLES.Patch.prototype.deSerialize=function(obj,genIds)
     {
         var loadingId=this.loading.start('core','deserialize');
         if(this.onLoadStart)this.onLoadStart();
@@ -506,13 +504,10 @@ CABLES.Patch = function(cfg)
                         if(port2&& port2.type!=OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value') )
                             port2.set(obj.ops[iop].portsOut[ipo].value);
                     }
-
                 }
 
             });
         }
-        // console.log('create links...');
-
 
         // create links...
         for(iop in obj.ops)
@@ -541,10 +536,7 @@ CABLES.Patch = function(cfg)
         if(this.onLoadEnd)this.onLoadEnd();
     };
 
-
-
-    this.profiler=null;
-    this.profile=function(enable)
+    CABLES.Patch.prototype.profile=function(enable)
     {
         this.profiler=new CABLES.Profiler();
         for(var i in this.ops)
@@ -553,14 +545,5 @@ CABLES.Patch = function(cfg)
         }
 
     };
-
-
-
-
-    this.exec();
-
-
-
-};
 
 var Scene=CABLES.Patch;
