@@ -1,9 +1,6 @@
 
-
-
 CABLES.Timer=function()
 {
-    var self=this;
     var timeStart=Date.now();
     var timeOffset=0;
 
@@ -47,8 +44,8 @@ CABLES.Timer=function()
 
     this.togglePlay=function()
     {
-        if(paused) self.play();
-            else self.pause();
+        if(paused) this.play();
+            else this.pause();
     };
 
     this.setTime=function(t)
@@ -123,4 +120,4 @@ CABLES.Timer=function()
             cbTimeChange.push(cb);
     };
 
-}
+};
