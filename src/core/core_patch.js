@@ -64,9 +64,7 @@ CABLES.Patch = function(cfg)
         {
             volumeListeners[i].onMasterVolumeChanged(v);
         }
-
     };
-
 
     this.getFilePath=function(filename)
     {
