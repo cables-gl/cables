@@ -23,7 +23,7 @@ CABLES.Link = function(scene)
             v==v &&  // NaN is the only JavaScript value that is treated as unequal to itself
             this.portIn.get()!=v
         )
-            this.portIn.set(v);
+        this.portIn.set(v);
     };
 
     CABLES.Link.prototype.getOtherPort=function(p)
