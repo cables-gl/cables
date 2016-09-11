@@ -280,6 +280,14 @@ CABLES.Op = function()
         return null;
     };
 
+
 }
+
+
+CABLES.Op.isSubpatchOp=function(name)
+{
+    return (name=='Ops.Ui.Patch' || name=='Ops.Ui.SubPatch');
+};
+
 
 var Op=CABLES.Op; // deprecated!
