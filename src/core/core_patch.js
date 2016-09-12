@@ -168,6 +168,8 @@ CABLES.Patch = function(cfg)
         {
             op.objName=objName;
             op.patch=this;
+
+
             op.uiAttr(uiAttribs);
             if(op.onCreate)op.onCreate();
 

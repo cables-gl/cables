@@ -560,7 +560,7 @@ var reload=function()
 
                 try
                 {
-                    data=JSON.parse(_data);;
+                    data=JSON.parse(_data);
                 }
                 catch(ex)
                 {

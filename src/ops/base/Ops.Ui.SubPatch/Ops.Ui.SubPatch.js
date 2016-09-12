@@ -8,8 +8,9 @@ op.patchId=op.addInPort(new Port(op,"patchId",OP_PORT_TYPE_VALUE,{ display:'read
 
 var data={"ports":[],"portsOut":[]};
 
-if(!Ops.Ui.Patch.maxPatchId)Ops.Ui.Patch.maxPatchId=0;
-op.patchId.set(Ops.Ui.Patch.maxPatchId+1);
+Ops.Ui.Patch.maxPatchId=(Ops.Ui.Patch.maxPatchId||0)+1;
+op.patchId.set(Ops.Ui.Patch.maxPatchId);
+
 getSubPatchInputOp();
 getSubPatchOutputOp();
 
@@ -147,6 +148,7 @@ op.dynOut.onLinkChanged=function()
     }
 };
 
+
 function getSubPatchOutputOp()
 {
     var patchOutputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchOutput');
@@ -170,9 +172,9 @@ function getSubPatchInputOp()
     {
         op.patch.addOp('Ops.Ui.PatchInput',{'subPatch':op.patchId.get()} );
         patchInputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchInput');
-
         if(!patchInputOP) console.warn('no patchinput2!');
     }
+
 
     return patchInputOP;
 }
@@ -199,18 +201,15 @@ op.addSubLink=function(p,p2)
             );
         
     }
-    
-    
+
     var bounds=gui.patch().getSubPatchBounds(op.patchId.get());
-    
-    console.log(bounds);
-    
+
     getSubPatchInputOp().uiAttr(
         {
             "translate":
             {
                 "x":bounds.minx,
-                "y":bounds.miny-50
+                "y":bounds.miny-100
             }
         });
         
