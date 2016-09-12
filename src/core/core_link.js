@@ -19,6 +19,7 @@ CABLES.Link = function(scene)
         if(!this.portOut)
         {
             console.log('NO this.portOut !',this);
+            this.remove();
             return;
         }
         var v=this.portOut.get();
