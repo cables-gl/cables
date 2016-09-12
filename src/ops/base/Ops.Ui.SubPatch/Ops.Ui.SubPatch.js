@@ -22,6 +22,7 @@ dataStr.onChange=function()
     if(!dataStr.get())return;
     try
     {
+        console.log('parse subpatch data');
         data=JSON.parse(dataStr.get());
         setupPorts();
     }
@@ -229,10 +230,27 @@ op.addSubLink=function(p,p2)
                 "y":bounds.maxy+100
             }
         });
-
+    saveData();
 };
 
 
+
+op.onDelete=function()
+{
+    for (var i = op.patch.ops.length-1; i >=0 ; i--)
+    {
+        if(op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch==op.patchId.get())
+        {
+            console.log(op.patch.ops[i].objName);
+
+            op.patch.deleteOp(op.patch.ops[i].id);
+
+        }
+    }
+    
+
+
+};
 
 
 
