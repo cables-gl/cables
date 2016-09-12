@@ -54,10 +54,6 @@ function reload()
 
             jsonMesh=cgl.frameStore.currentScene.getValue().meshes[parseInt(index.get(),10) ];
         }
-        // else
-        // {
-        //     var scene=cgl.frameStore.currentScene.getValue();
-        // }
 
         if(!jsonMesh)
         {
@@ -71,63 +67,15 @@ function reload()
 
         var verts=JSON.parse(JSON.stringify(jsonMesh.vertices));
 
-        if(centerPivot.get())
-        {
-            var max=[-998999999,-998999999,-998999999];
-            var min=[998999999,998999999,998999999];
-
-            for(i=0;i<verts.length;i+=3)
-            {
-                max[0]=Math.max( max[0] , verts[i+0] );
-                max[1]=Math.max( max[1] , verts[i+1] );
-                max[2]=Math.max( max[2] , verts[i+2] );
-
-                min[0]=Math.min( min[0] , verts[i+0] );
-                min[1]=Math.min( min[1] , verts[i+1] );
-                min[2]=Math.min( min[2] , verts[i+2] );
-            }
-
-            console.log('max',max);
-            console.log('min',min);
-
-            var off=[
-                Math.abs(Math.abs(max[0])-Math.abs(min[0])),
-                Math.abs(Math.abs(max[1])-Math.abs(min[1])),
-                Math.abs(Math.abs(max[2])-Math.abs(min[2]))
-            ];
-
-            console.log('off',off);
-
-            for(i=0;i<verts.length;i+=3)
-            {
-                verts[i+0]+=(off[0] );
-                verts[i+1]+=(off[1] );
-                verts[i+2]+=(off[2] );
-            }
-
-            max=[-998999999,-998999999,-998999999];
-            min=[998999999,998999999,998999999];
-
-            for(i=0;i<verts.length;i+=3)
-            {
-                max[0]=Math.max( max[0] , verts[i+0] );
-                max[1]=Math.max( max[1] , verts[i+1] );
-                max[2]=Math.max( max[2] , verts[i+2] );
-
-                min[0]=Math.min( min[0] , verts[i+0] );
-                min[1]=Math.min( min[1] , verts[i+1] );
-                min[2]=Math.min( min[2] , verts[i+2] );
-            }
-
-            console.log('after max',max);
-            console.log('after min',min);
-        }
 
         var geom=new CGL.Geometry();
         geom.vertices=verts;
         geom.vertexNormals=jsonMesh.normals;
         geom.tangents=jsonMesh.tangents;
         geom.biTangents=jsonMesh.bitangents;
+        
+        if(centerPivot.get())geom.center();
+
 
         if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
         geom.verticesIndices=[];
