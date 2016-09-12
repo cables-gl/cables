@@ -16,6 +16,11 @@ CABLES.Link = function(scene)
 
     CABLES.Link.prototype.setValue=function()
     {
+        if(!this.portOut)
+        {
+            console.log('NO this.portOut !',this);
+            return;
+        }
         var v=this.portOut.get();
         // if(v!=v)return;
 

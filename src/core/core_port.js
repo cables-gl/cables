@@ -221,7 +221,8 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         {
             for (var i = 0; i < this.links.length; ++i)
             {
-                this.links[i].portIn._onTriggered();
+                if(this.links[i].portIn)
+                    this.links[i].portIn._onTriggered();
             }
         }
         catch(ex)
