@@ -6,13 +6,15 @@ CABLES.Link = function(scene)
     this.portIn=null;
     this.portOut=null;
     this.scene=scene;
+};
 
-    this.setValue=function(v)
+{
+    CABLES.Link.prototype.setValue=function(v)
     {
         this.portIn.set(v);
     };
 
-    this.setValue=function()
+    CABLES.Link.prototype.setValue=function()
     {
         var v=this.portOut.get();
         // if(v!=v)return;
@@ -21,16 +23,16 @@ CABLES.Link = function(scene)
             v==v &&  // NaN is the only JavaScript value that is treated as unequal to itself
             this.portIn.get()!=v
         )
-            this.portIn.set(v);
+        this.portIn.set(v);
     };
 
-    this.getOtherPort=function(p)
+    CABLES.Link.prototype.getOtherPort=function(p)
     {
         if(p==this.portIn)return this.portOut;
         return this.portIn;
     };
 
-    this.remove=function()
+    CABLES.Link.prototype.remove=function()
     {
         this.portIn.removeLink(this);
         this.portOut.removeLink(this);
@@ -40,7 +42,7 @@ CABLES.Link = function(scene)
         this.scene=null;
     };
 
-    this.link=function(p1,p2)
+    CABLES.Link.prototype.link=function(p1,p2)
     {
         if(!CABLES.Link.canLink(p1,p2))
         {
@@ -58,15 +60,16 @@ CABLES.Link = function(scene)
             this.portOut=p1;
         }
 
+        this.setValue();
+
         p1.addLink(this);
         p2.addLink(this);
+
         if(p1.onLink) p1.onLink(this);
         if(p2.onLink) p2.onLink(this);
-        // this.portIn.set(this.portOut.get());
-        this.setValue();
     };
 
-    this.getSerialized=function()
+    CABLES.Link.prototype.getSerialized=function()
     {
         var obj={};
 
@@ -77,7 +80,9 @@ CABLES.Link = function(scene)
 
         return obj;
     };
-};
+}
+
+// --------------------------------------------
 
 CABLES.Link.canLinkText=function(p1,p2)
 {

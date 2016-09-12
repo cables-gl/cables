@@ -1,5 +1,5 @@
 op.name='Rectangle';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inFunction("render");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var width=op.addInPort(new Port(op,"width"));
 var height=op.addInPort(new Port(op,"height"));

@@ -25,9 +25,9 @@ CABLES.Op = function()
     this.onLoaded=null;
     this.onDelete=null;
     this.onUiAttrChange=null;
-    var _self=this;
-
-    this.uiAttr=function(newAttribs)
+};
+{
+    CABLES.Op.prototype.uiAttr=function(newAttribs)
     {
         if(newAttribs && newAttribs.error)
         {
@@ -42,12 +42,12 @@ CABLES.Op = function()
         if(this.onUiAttrChange) this.onUiAttrChange();
     };
 
-    this.getName=function()
+    CABLES.Op.prototype.getName=function()
     {
         return this.name;
     };
 
-    this.addOutPort=function(p)
+    CABLES.Op.prototype.addOutPort=function(p)
     {
         p.direction=PORT_DIR_OUT;
         p.parent=this;
@@ -56,7 +56,7 @@ CABLES.Op = function()
         return p;
     };
 
-    this.hasPort=function(name)
+    CABLES.Op.prototype.hasPort=function(name)
     {
         for(var i in this.portsIn)
         {
@@ -68,8 +68,7 @@ CABLES.Op = function()
         return false;
     };
 
-
-    this.hasDynamicPort=function()
+    CABLES.Op.prototype.hasDynamicPort=function()
     {
         var i=0;
         for(i in this.portsIn)
@@ -86,9 +85,7 @@ CABLES.Op = function()
         return false;
     };
 
-
-
-    this.addInPort=function(p)
+    CABLES.Op.prototype.addInPort=function(p)
     {
         p.direction=PORT_DIR_IN;
         p.parent=this;
@@ -97,17 +94,17 @@ CABLES.Op = function()
         return p;
     };
 
-    this.inFunction=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
-    this.inValue=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
-    this.inValueBool=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{display:'bool'})); if(v!==undefined)p.set(v); return p; };
-    this.inObject=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); return p; };
-    this.inValueSlider=function(name,v){ var p=_self.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{display:'range'})); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inFunction=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inValue=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inValueBool=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{display:'bool'})); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inObject=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inValueSlider=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{display:'range'})); if(v!==undefined)p.set(v); return p; };
 
-    this.outFunction=function(name,v){ var p=_self.addOutPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
-    this.outValue=function(name,v){ var p=_self.addOutPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
-    this.outObject=function(name,v){ var p=_self.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outFunction=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outValue=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outObject=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); return p; };
 
-    this.printInfo=function()
+    CABLES.Op.prototype.printInfo=function()
     {
         for(var i=0;i<this.portsIn.length;i++)
              console.log('in: '+this.portsIn[i].getName());
@@ -116,7 +113,7 @@ CABLES.Op = function()
              console.log('out: '+this.portsOut[ipo].getName());
     };
 
-    this.markChilds=function()
+    CABLES.Op.prototype.markChilds=function()
     {
         this.marked=true;
         for(var ipo in this.portsOut)
@@ -129,7 +126,7 @@ CABLES.Op = function()
         }
     };
 
-    this.deleteChilds=function()
+    CABLES.Op.prototype.deleteChilds=function()
     {
         var opsToDelete=[];
         for(var ipo in this.portsOut)
@@ -151,7 +148,7 @@ CABLES.Op = function()
         }
     };
 
-    this.removeLinks=function()
+    CABLES.Op.prototype.removeLinks=function()
     {
         for(var i=0;i<this.portsIn.length;i++)
             this.portsIn[i].removeLinks();
@@ -160,8 +157,7 @@ CABLES.Op = function()
             this.portsOut[ipo].removeLinks();
     };
 
-
-    this.findFittingPort=function(otherPort)
+    CABLES.Op.prototype.findFittingPort=function(otherPort)
     {
         for(var ipo in this.portsOut)
             if(CABLES.Link.canLink(otherPort,this.portsOut[ipo]))return this.portsOut[ipo];
@@ -170,7 +166,7 @@ CABLES.Op = function()
             if(CABLES.Link.canLink(otherPort,this.portsIn[ipi]))return this.portsIn[ipi];
     };
 
-    this.getSerialized=function()
+    CABLES.Op.prototype.getSerialized=function()
     {
         var op={};
         op.name=this.getName();
@@ -193,13 +189,13 @@ CABLES.Op = function()
         return op;
     };
 
-    this.getFistOutPortByType=function(type)
+    CABLES.Op.prototype.getFistOutPortByType=function(type)
     {
         for(var ipo in this.portsOut)
             if(this.portsOut[ipo].type==type)return this.portsOut[ipo];
     };
 
-    this.getPortByName=function(name)
+    CABLES.Op.prototype.getPortByName=function(name)
     {
         for(var ipi in this.portsIn)
             if(this.portsIn[ipi].getName()==name)return this.portsIn[ipi];
@@ -208,25 +204,23 @@ CABLES.Op = function()
             if(this.portsOut[ipo].getName()==name)return this.portsOut[ipo];
     };
 
-    this.getPort=function(name)
+    CABLES.Op.prototype.getPort=function(name)
     {
         return this.getPortByName(name);
     };
 
-    this.updateAnims=function()
+    CABLES.Op.prototype.updateAnims=function()
     {
         for(var i=0;i<this.portsIn.length;i++)
-        {
             this.portsIn[i].updateAnim();
-        }
     };
 
-    this.log=function(txt)
+    CABLES.Op.prototype.log=function(txt)
     {
         if(!this.patch.silent) console.log('['+(this.getName())+'] '+txt);
     };
 
-    this.unLinkShake=function()
+    CABLES.Op.prototype.unLinkShake=function()
     {
         var reLinkP1=null;
         var reLinkP2=null;
@@ -259,15 +253,13 @@ CABLES.Op = function()
         }
     };
 
-    this.profile=function(enable)
+    CABLES.Op.prototype.profile=function(enable)
     {
         for(var ipi in this.portsIn)
-        {
             this.portsIn[ipi]._onTriggered=this.portsIn[ipi]._onTriggeredProfiling;
-        }
     };
 
-    this.findParent=function(objName)
+    CABLES.Op.prototype.findParent=function(objName)
     {
 
         for(var ipi in this.portsIn)
@@ -289,7 +281,13 @@ CABLES.Op = function()
     };
 
 
+}
 
+
+CABLES.Op.isSubpatchOp=function(name)
+{
+    return (name=='Ops.Ui.Patch' || name=='Ops.Ui.SubPatch');
 };
+
 
 var Op=CABLES.Op; // deprecated!
