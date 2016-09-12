@@ -43,14 +43,16 @@ function addPortListener(newPort,newPortInPatch)
     {
         newPort.onTriggered=function()
         {
-            newPortInPatch.trigger();
+            if(newPortInPatch.isLinked())
+                newPortInPatch.trigger();
         };
     }
     else
     {
         newPort.onChange=function()
         {
-            newPortInPatch.set(newPort.get());
+            if(newPortInPatch.isLinked())
+                newPortInPatch.set(newPort.get());
         };
     }
 }
@@ -59,8 +61,9 @@ function setupPorts()
 {
     var ports=data.ports;
     var portsOut=data.portsOut;
+    var i=0;
 
-    for(var i=0;i<ports.length;i++)
+    for(i=0;i<ports.length;i++)
     {
         if(!op.getPortByName(ports[i].name))
         {
@@ -73,7 +76,7 @@ function setupPorts()
         dataLoaded=true;
     }
 
-    for(var i=0;i<portsOut.length;i++)
+    for(i=0;i<portsOut.length;i++)
     {
         if(!op.getPortByName(portsOut[i].name))
         {
@@ -182,6 +185,10 @@ function getSubPatchInputOp()
 op.addSubLink=function(p,p2)
 {
     var num=data.ports.length;
+    
+    
+    console.log('sublink! ',p.getName(), (num-1)+" "+p2.parent.name+" "+p2.name);
+    
     if(p.direction==PORT_DIR_IN)
     {
         gui.scene().link(
@@ -199,7 +206,6 @@ op.addSubLink=function(p,p2)
             getSubPatchOutputOp(),
             "out"+(num)+" "+p2.parent.name+" "+p2.name
             );
-        
     }
 
     var bounds=gui.patch().getSubPatchBounds(op.patchId.get());
