@@ -86,7 +86,7 @@ function setupPorts()
             var patchOutputOp=getSubPatchOutputOp();
             var newPortOutPatch=patchOutputOp.addInPort(new Port(patchOutputOp,portsOut[i].name,portsOut[i].type));
 
-            addPortListener(newPortOutPatch,newPort);
+            addPortListener(newPortOutPatch,newPortOut);
         }
         dataLoaded=true;
     }
@@ -100,12 +100,14 @@ op.dyn.onLinkChanged=function()
     if(op.dyn.isLinked())
     {
         op.log('op.dyn link');
-        setTimeout(function()
-        {
-            if(op.dyn.links[0])
-            {
+        // setTimeout(function()
+        // {
+            // if(op.dyn.links[0])
+            // {
                 var otherPort=op.dyn.links[0].getOtherPort(op.dyn);
                 op.dyn.removeLinks();
+                otherPort.removeLinks();
+                
                 var newName="in"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
 
                 data.ports.push({"name":newName,"type":otherPort.type});
@@ -121,14 +123,20 @@ op.dyn.onLinkChanged=function()
 
                 dataLoaded=true;
                 saveData();
+                // op.dyn.removeLinks();
 
-            }
+            // }
 
-        },100);
+        // },100);
     }
     else
     {
         op.log('dyn unlinked...');
+        setTimeout(function()
+        {
+        gui.patch().removeDeadLinks();
+            
+        },100);
     }
 };
 
@@ -137,8 +145,8 @@ op.dynOut.onLinkChanged=function()
     if(op.dynOut.isLinked())
     {
         op.log('dyn out link');
-        setTimeout(function()
-        {
+        // setTimeout(function()
+        // {
             var otherPort=op.dynOut.links[0].getOtherPort(op.dynOut);
             op.dynOut.removeLinks();
             var newName="out"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
@@ -156,8 +164,9 @@ op.dynOut.onLinkChanged=function()
 
             dataLoaded=true;
             saveData();
+            // op.dyn.removeLinks();
 
-        },100);
+        // },100);
     }
     else
     {
