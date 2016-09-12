@@ -518,11 +518,12 @@ CABLES.Patch = function(cfg)
             {
                 for(var ili in obj.ops[iop].portsIn[ipi2].links)
                 {
-                    addLink(
-                        obj.ops[iop].portsIn[ipi2].links[ili].objIn,
-                        obj.ops[iop].portsIn[ipi2].links[ili].objOut,
-                        obj.ops[iop].portsIn[ipi2].links[ili].portIn,
-                        obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+                    if(obj.ops[iop].portsIn[ipi2].links[ili])
+                        addLink(
+                            obj.ops[iop].portsIn[ipi2].links[ili].objIn,
+                            obj.ops[iop].portsIn[ipi2].links[ili].objOut,
+                            obj.ops[iop].portsIn[ipi2].links[ili].portIn,
+                            obj.ops[iop].portsIn[ipi2].links[ili].portOut);
                 }
             }
         }

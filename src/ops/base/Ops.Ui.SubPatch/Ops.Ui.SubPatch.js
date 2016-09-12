@@ -96,7 +96,7 @@ op.dyn.onLinkChanged=function()
     {
         var otherPort=op.dyn.links[0].getOtherPort(op.dyn);
         op.dyn.removeLinks();
-        // otherPort.removeLinks();
+        otherPort.removeLinkTo(op.dyn);
         
         var newName="in"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
 
@@ -118,6 +118,7 @@ op.dyn.onLinkChanged=function()
     {
         setTimeout(function()
         {
+            op.dyn.removeLinks();
             gui.patch().removeDeadLinks();
         },100);
     }
@@ -129,6 +130,7 @@ op.dynOut.onLinkChanged=function()
     {
         var otherPort=op.dynOut.links[0].getOtherPort(op.dynOut);
         op.dynOut.removeLinks();
+        otherPort.removeLinkTo(op.dynOut);
         var newName="out"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
 
         data.portsOut.push({"name":newName,"type":otherPort.type});
