@@ -59,20 +59,23 @@ function loadMaterials(data,root)
                 if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
                 {
                     posyAdd+=100;
-                    var setMatOp=self.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch,"translate":{x:self.uiAttribs.translate.x+300,y:posyAdd+50}});
-                    setMatOp.getPort('name').set(matName);
-                    setMatOp.name='Set Material '+matName;
-                    self.patch.link(root,'trigger 0',setMatOp,'exe');
+                    self.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch,"translate":{x:self.uiAttribs.translate.x+300,y:posyAdd+50}},function(setMatOp)
+                    {
+                        setMatOp.getPort('name').set(matName);
+                        setMatOp.name='Set Material '+matName;
+                        self.patch.link(root,'trigger 0',setMatOp,'exe');
+    
+                        var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{"subPatch":op.uiAttribs.subPatch,"translate":{x:self.uiAttribs.translate.x+350,y:posyAdd}});
+                        matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
+                        matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
+                        matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
+                        matOp.uiAttribs.title=matOp.name='Material '+matName;
+    
+                        self.patch.link(setMatOp,'material',matOp,'shader');
+    
+                        prevOp=matOp;
 
-                    var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{"subPatch":op.uiAttribs.subPatch,"translate":{x:self.uiAttribs.translate.x+350,y:posyAdd}});
-                    matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
-                    matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
-                    matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
-                    matOp.uiAttribs.title=matOp.name='Material '+matName;
-
-                    self.patch.link(setMatOp,'material',matOp,'shader');
-
-                    prevOp=matOp;
+                    });
                 }
             }
         }

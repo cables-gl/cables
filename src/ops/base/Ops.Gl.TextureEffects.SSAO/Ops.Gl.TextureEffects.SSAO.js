@@ -81,8 +81,10 @@ var srcFrag=''
 
     .endl()+'       d = readDepth( vec2(texCoord.s+pw*w,texCoord.t+ph*h));'
 
-    .endl()+'       ao += compareDepths(depth,d)*fade;'
-    .endl()+'       s += 1.0*fade*1.0;'
+    // .endl()+'       if(d<0.999){'
+    .endl()+'           ao += compareDepths(depth,d)*fade;'
+    .endl()+'           s += 1.0*fade*1.0;'
+    // .endl()+'       }'
     .endl()+'   }'
     .endl()+'}'
 

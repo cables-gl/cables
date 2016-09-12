@@ -91,7 +91,7 @@ setTimeout(function()
 this.exe.onTriggered= function()
 {
     result.set(patch.loading.getProgress());
-    self.numAssets.val=CGL.numMaxLoadingAssets;
+    self.numAssets.set(CGL.numMaxLoadingAssets||0);
 
     // if(patch.loading.getProgress()!=1.0 ) console.log( patch.loading.getProgress() );
 
