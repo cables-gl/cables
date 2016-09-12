@@ -17,7 +17,6 @@ var dataLoaded=false;
 dataStr.onChange=function()
 {
     if(dataLoaded)return;
-    op.log('load data....'+dataStr.get());
 
     if(!dataStr.get())return;
     try
@@ -35,7 +34,6 @@ dataStr.onChange=function()
 function saveData()
 {
     dataStr.set(JSON.stringify(data));
-    console.log("save",data);
 }
 
 function addPortListener(newPort,newPortInPatch)
@@ -63,8 +61,6 @@ function setupPorts()
 
     for(var i=0;i<ports.length;i++)
     {
-        op.log('add subpatch port');
-
         if(!op.getPortByName(ports[i].name))
         {
             var newPort=op.addInPort(new Port(op,ports[i].name,ports[i].type));
@@ -78,8 +74,6 @@ function setupPorts()
 
     for(var i=0;i<portsOut.length;i++)
     {
-        op.log('add subpatch port OUT');
-
         if(!op.getPortByName(portsOut[i].name))
         {
             var newPortOut=op.addOutPort(new Port(op,portsOut[i].name,portsOut[i].type));
@@ -92,50 +86,35 @@ function setupPorts()
     }
 }
 
-
-
-
 op.dyn.onLinkChanged=function()
 {
     if(op.dyn.isLinked())
     {
-        op.log('op.dyn link');
-        // setTimeout(function()
-        // {
-            // if(op.dyn.links[0])
-            // {
-                var otherPort=op.dyn.links[0].getOtherPort(op.dyn);
-                op.dyn.removeLinks();
-                otherPort.removeLinks();
-                
-                var newName="in"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
+        var otherPort=op.dyn.links[0].getOtherPort(op.dyn);
+        op.dyn.removeLinks();
+        otherPort.removeLinks();
+        
+        var newName="in"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
 
-                data.ports.push({"name":newName,"type":otherPort.type});
+        data.ports.push({"name":newName,"type":otherPort.type});
 
-                setupPorts();
+        setupPorts();
 
-                gui.scene().link(
-                    otherPort.parent,
-                    otherPort.getName(),
-                    op,
-                    newName
-                    );
+        gui.scene().link(
+            otherPort.parent,
+            otherPort.getName(),
+            op,
+            newName
+            );
 
-                dataLoaded=true;
-                saveData();
-                // op.dyn.removeLinks();
-
-            // }
-
-        // },100);
+        dataLoaded=true;
+        saveData();
     }
     else
     {
-        op.log('dyn unlinked...');
         setTimeout(function()
         {
-        gui.patch().removeDeadLinks();
-            
+            gui.patch().removeDeadLinks();
         },100);
     }
 };
@@ -144,29 +123,23 @@ op.dynOut.onLinkChanged=function()
 {
     if(op.dynOut.isLinked())
     {
-        op.log('dyn out link');
-        // setTimeout(function()
-        // {
-            var otherPort=op.dynOut.links[0].getOtherPort(op.dynOut);
-            op.dynOut.removeLinks();
-            var newName="out"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
+        var otherPort=op.dynOut.links[0].getOtherPort(op.dynOut);
+        op.dynOut.removeLinks();
+        var newName="out"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
 
-            data.portsOut.push({"name":newName,"type":otherPort.type});
+        data.portsOut.push({"name":newName,"type":otherPort.type});
 
-            setupPorts();
+        setupPorts();
 
-            gui.scene().link(
-                otherPort.parent,
-                otherPort.getName(),
-                op,
-                newName
-                );
+        gui.scene().link(
+            otherPort.parent,
+            otherPort.getName(),
+            op,
+            newName
+            );
 
-            dataLoaded=true;
-            saveData();
-            // op.dyn.removeLinks();
-
-        // },100);
+        dataLoaded=true;
+        saveData();
     }
     else
     {
@@ -185,7 +158,6 @@ function getSubPatchOutputOp()
 
         if(!patchOutputOP) console.warn('no patchinput2!');
     }
-    op.log('patchOutputOP',patchOutputOP);
     return patchOutputOP;
 
 }
@@ -207,40 +179,51 @@ function getSubPatchInputOp()
 
 op.addSubLink=function(p,p2)
 {
-    
-    
-    setTimeout(function()
+    var num=data.ports.length;
+    if(p.direction==PORT_DIR_IN)
     {
-var num=data.ports.length;
-        if(p.direction==PORT_DIR_IN)
-        {
-            gui.scene().link(
-                p.parent,
-                p.getName(),
-                getSubPatchInputOp(),
-                "in"+(num-1)+" "+p2.parent.name+" "+p2.name
-                );
-        }
-        else
-        {
-            op.log('OUTUTUTUTUTUT');
-            gui.scene().link(
-                p.parent,
-                p.getName(),
-                getSubPatchOutputOp(),
-                "out"+(num)+" "+p2.parent.name+" "+p2.name
-                );
-            
-        }
+        gui.scene().link(
+            p.parent,
+            p.getName(),
+            getSubPatchInputOp(),
+            "in"+(num-1)+" "+p2.parent.name+" "+p2.name
+            );
+    }
+    else
+    {
+        gui.scene().link(
+            p.parent,
+            p.getName(),
+            getSubPatchOutputOp(),
+            "out"+(num)+" "+p2.parent.name+" "+p2.name
+            );
         
-
-// console.log('YO',p.direction);
-
-        
-    },100);
-
+    }
     
-}
+    
+    var bounds=gui.patch().getSubPatchBounds(op.patchId.get());
+    
+    console.log(bounds);
+    
+    getSubPatchInputOp().uiAttr(
+        {
+            "translate":
+            {
+                "x":bounds.minx,
+                "y":bounds.miny-50
+            }
+        });
+        
+    getSubPatchOutputOp().uiAttr(
+        {
+            "translate":
+            {
+                "x":bounds.minx,
+                "y":bounds.maxy+100
+            }
+        });
+
+};
 
 
 
