@@ -132,9 +132,9 @@ op.dyn.onLinkChanged=function()
         setTimeout(function()
         {
             op.dyn.removeLinks();
-            gui.patch().removeDeadLinks();
         },100);
     }
+    gui.patch().removeDeadLinks();
 };
 
 op.dynOut.onLinkChanged=function()
@@ -162,11 +162,15 @@ op.dynOut.onLinkChanged=function()
     }
     else
     {
-        op.dyn.removeLinks();
-        gui.patch().removeDeadLinks();
+        setTimeout(function()
+        {
+        op.dynOut.removeLinks();
+        },100);
+
 
         op.log('dynOut unlinked...');
     }
+    gui.patch().removeDeadLinks();
 };
 
 
