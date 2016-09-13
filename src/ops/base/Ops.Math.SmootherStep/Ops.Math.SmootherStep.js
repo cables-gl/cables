@@ -18,7 +18,7 @@ exec();
 function exec()
 {
     var x = Math.max(0, Math.min(1, (val.get()-min.get())/(max.get()-min.get())));
-    result.set( x*x*x*(x*(x*6 - 15) + 10)); // smootherstep
+    result.set( x*x*x*(x*(x*6 - 15) + 10) * (max.get()-min.get()) ) ; // smootherstep
 }
 
 

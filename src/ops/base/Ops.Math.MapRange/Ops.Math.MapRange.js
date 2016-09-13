@@ -6,6 +6,18 @@ var old_max=op.addInPort(new Port(op,"old max"));
 var new_min=op.addInPort(new Port(op,"new min"));
 var new_max=op.addInPort(new Port(op,"new max"));
 
+var easing=op.inValueSelect("Easing",["Linear","Smoothstep","Smootherstep"],"Linear");
+
+
+var ease=0;
+var r=0;
+
+easing.onChange=function()
+{
+    if(easing.get()=="Smoothstep") ease=1;
+    else if(easing.get()=="Smootherstep") ease=2;
+    else ease=0;
+};
 
 function exec()
 {
@@ -43,8 +55,31 @@ function exec()
     if(reverseInput) portion = (oldMax-x)*(newMax-newMin)/(oldMax-oldMin);
         else portion = (x-oldMin)*(newMax-newMin)/(oldMax-oldMin);
     
-    if(reverseOutput) result.set(newMax - portion);
-        else result.set(portion + newMin);
+    
+    
+    if(reverseOutput) r=newMax - portion;
+        else r=portion + newMin;
+
+    
+    if(ease===0)
+    {
+        result.set(r);
+    }
+    else
+    if(ease==1)
+    {
+        x = Math.max(0, Math.min(1, (r-nMin)/(nMax-nMin)));
+        result.set( nMin+x*x*(3 - 2*x)* (nMax-nMin) ); // smoothstep
+    }
+    else
+    if(ease==2)
+    {
+        x = Math.max(0, Math.min(1, (r-nMin)/(nMax-nMin)));
+        result.set( nMin+x*x*x*(x*(x*6 - 15) + 10) * (nMax-nMin) ) ; // smootherstep
+
+    }
+
+    
 
 }
 
