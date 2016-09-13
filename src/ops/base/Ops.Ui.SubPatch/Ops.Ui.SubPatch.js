@@ -44,7 +44,7 @@ function addPortListener(newPort,newPortInPatch)
     console.log('newPort',newPort.name);
     
     
-    // if(newPort.direction==PORT_DIR_IN)
+    if(newPort.direction==PORT_DIR_IN)
     {
         if(newPort.type==OP_PORT_TYPE_FUNCTION)
         {
