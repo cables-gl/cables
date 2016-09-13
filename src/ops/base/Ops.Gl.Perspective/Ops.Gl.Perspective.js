@@ -20,8 +20,13 @@ changed();
 
 render.onTriggered=function()
 {
-    mat4.perspective(cgl.pMatrix,cgl.frameStore.perspective.fovy*0.0174533, cgl.getViewPort()[2]/cgl.getViewPort()[3], cgl.frameStore.perspective.zNear, cgl.frameStore.perspective.zFar);
     cgl.pushPMatrix();
+    mat4.perspective(
+        cgl.pMatrix,
+        fovY.get()*0.0174533, 
+        cgl.getViewPort()[2]/cgl.getViewPort()[3], 
+        zNear.get(), 
+        zFar.get());
 
     trigger.trigger();
 
