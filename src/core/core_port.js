@@ -157,7 +157,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             obj.links=[];
             for(var i in this.links)
             {
-                obj.links.push( this.links[i].getSerialized() );
+                console.log(this.links[i]);
+                if( this.links[i].portIn && this.links[i].portOut)
+                    obj.links.push( this.links[i].getSerialized() );
             }
         }
         return obj;
