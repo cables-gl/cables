@@ -40,21 +40,29 @@ function saveData()
 
 function addPortListener(newPort,newPortInPatch)
 {
-    if(newPort.type==OP_PORT_TYPE_FUNCTION)
+    
+    console.log('newPort',newPort.name);
+    
+    
+    // if(newPort.direction==PORT_DIR_IN)
     {
-        newPort.onTriggered=function()
+        if(newPort.type==OP_PORT_TYPE_FUNCTION)
         {
-            if(newPortInPatch.isLinked())
-                newPortInPatch.trigger();
-        };
-    }
-    else
-    {
-        newPort.onChange=function()
+            newPort.onTriggered=function()
+            {
+                if(newPortInPatch.isLinked())
+                    newPortInPatch.trigger();
+            };
+        }
+        else
         {
-            if(newPortInPatch.isLinked())
-                newPortInPatch.set(newPort.get());
-        };
+
+            newPort.onChange=function()
+            {
+                if(newPortInPatch.isLinked())
+                    newPortInPatch.set(newPort.get());
+            };
+        }
     }
 }
 
@@ -105,12 +113,16 @@ op.dyn.onLinkChanged=function()
 
         setupPorts();
 
-        gui.scene().link(
+        var l=gui.scene().link(
             otherPort.parent,
             otherPort.getName(),
             op,
             newName
             );
+            
+        console.log('-----+===== ',otherPort.getName(),otherPort.get() );
+        // l._setValue();
+        // l.setValue(otherPort.get());
 
         dataLoaded=true;
         saveData();
@@ -150,6 +162,9 @@ op.dynOut.onLinkChanged=function()
     }
     else
     {
+        op.dyn.removeLinks();
+        gui.patch().removeDeadLinks();
+
         op.log('dynOut unlinked...');
     }
 };
@@ -189,21 +204,27 @@ op.addSubLink=function(p,p2)
 {
     var num=data.ports.length;
     
-    
     console.log('sublink! ',p.getName(), (num-1)+" "+p2.parent.name+" "+p2.name);
-    
+
+
     if(p.direction==PORT_DIR_IN)
     {
-        gui.scene().link(
+        var l=gui.scene().link(
             p.parent,
             p.getName(),
             getSubPatchInputOp(),
             "in"+(num-1)+" "+p2.parent.name+" "+p2.name
             );
+
+console.log('- ----=====EEE ',p.getName(),p.get() );
+console.log('- ----=====EEE ',l.getOtherPort(p).getName() ,l.getOtherPort(p).get() );
+// l.setValue(null);
+// l.setValue(null);
+
     }
     else
     {
-        gui.scene().link(
+        var l=gui.scene().link(
             p.parent,
             p.getName(),
             getSubPatchOutputOp(),
@@ -244,7 +265,6 @@ op.onDelete=function()
             console.log(op.patch.ops[i].objName);
 
             op.patch.deleteOp(op.patch.ops[i].id);
-
         }
     }
     

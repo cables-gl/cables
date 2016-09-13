@@ -11,10 +11,11 @@ CABLES.Link = function(scene)
 {
     CABLES.Link.prototype.setValue=function(v)
     {
-        this.portIn.set(v);
+        if(v===undefined) this._setValue();
+            else this.portIn.set(v);
     };
 
-    CABLES.Link.prototype.setValue=function()
+    CABLES.Link.prototype._setValue=function()
     {
         if(!this.portOut)
         {
