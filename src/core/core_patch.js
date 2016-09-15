@@ -248,7 +248,7 @@ CABLES.Patch = function(cfg)
         return this.frameNum;
     };
 
-    var frameNext=Date.now();
+    var frameNext=0;
     var frameInterval=0;
 
     CABLES.Patch.prototype.exec=function(e)
@@ -256,7 +256,7 @@ CABLES.Patch = function(cfg)
         if(this._paused)return;
 
         frameInterval = 1000/this.config.fpsLimit;
-        var now = Date.now();
+        var now = CABLES.milliSeconds();
         var frameDelta = now - frameNext;
 
         requestAnimationFrame(this.exec.bind(this));
