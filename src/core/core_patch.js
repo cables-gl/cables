@@ -25,7 +25,8 @@ CABLES.Patch = function(cfg)
         silent:false,
         onError:null,
         onFinishedLoading:null,
-        onFirstFrameRendered:null
+        onFirstFrameRendered:null,
+        fpsLimit:0
     };
     if(!this.config.prefixAssetPath)this.config.prefixAssetPath='';
     if(!this.config.masterVolume)this.config.masterVolume=1.0;
@@ -247,25 +248,37 @@ CABLES.Patch = function(cfg)
         return this.frameNum;
     };
 
+    var frameNext=Date.now();
+    var frameInterval=0;
+
     CABLES.Patch.prototype.exec=function(e)
     {
         if(this._paused)return;
 
+        frameInterval = 1000/this.config.fpsLimit;
+        var now = Date.now();
+        var frameDelta = now - frameNext;
+
         requestAnimationFrame(this.exec.bind(this));
 
-        this.timer.update();
-
-        var time=this.timer.getTime();
-
-        // for(var i in this.animFrameOps)
-        for (var i = 0; i < this.animFrameOps.length; ++i)
+        if (this.config.fpsLimit===0 || frameDelta > frameInterval)
         {
-            if(this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
-        }
-        this._frameNum++;
-        if(this._frameNum==1)
-        {
-            if(this.config.onFirstFrameRendered)this.config.onFirstFrameRendered();
+            this.timer.update();
+
+            var time=this.timer.getTime();
+
+            for (var i = 0; i < this.animFrameOps.length; ++i)
+            {
+                if(this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
+            }
+            this._frameNum++;
+            if(this._frameNum==1)
+            {
+                if(this.config.onFirstFrameRendered)this.config.onFirstFrameRendered();
+            }
+
+            frameNext = now - (frameDelta % frameInterval);
+
         }
     };
 

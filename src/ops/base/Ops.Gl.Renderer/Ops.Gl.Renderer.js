@@ -12,11 +12,18 @@ op.name='renderer';
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var fpsLimit=op.inValue("FPS Limit",0);
 
 var identTranslate=vec3.create();
 vec3.set(identTranslate, 0,0,0);
 var identTranslateView=vec3.create();
 vec3.set(identTranslateView, 0,0,-2);
+
+fpsLimit.onChange=function()
+{
+    op.patch.config.fpsLimit=fpsLimit.get();
+};
+
 
 op.onDelete=function()
 {

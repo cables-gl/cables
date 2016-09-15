@@ -344,40 +344,45 @@ CGL.Geometry.prototype.calcBaycentric=function()
     }
 };
 
-
-CGL.Geometry.prototype.center=function()
+CGL.Geometry.prototype.getBounds=function()
 {
-    var maxX=-999999;
-    var maxY=-999999;
-    var maxZ=-999999;
-    var minX=999999;
-    var minY=999999;
-    var minZ=999999;
+    var bounds={
+        maxX:-Number.MAX_VALUE,
+        maxY:-Number.MAX_VALUE,
+        maxZ:-Number.MAX_VALUE,
+        minX:Number.MAX_VALUE,
+        minY:Number.MAX_VALUE,
+        minZ:Number.MAX_VALUE
+    };
     var i=0;
 
     for(i=0;i<this.vertices.length;i+=3)
     {
         if(this.vertices[i+0]==this.vertices[i+0])
         {
+            bounds.maxX=Math.max(bounds.maxX,this.vertices[i+0]);
+            bounds.maxY=Math.max(bounds.maxY,this.vertices[i+1]);
+            bounds.maxZ=Math.max(bounds.maxZ,this.vertices[i+2]);
 
-            maxX=Math.max(maxX,this.vertices[i+0]);
-            maxY=Math.max(maxY,this.vertices[i+1]);
-            maxZ=Math.max(maxZ,this.vertices[i+2]);
-
-            minX=Math.min(minX,this.vertices[i+0]);
-            minY=Math.min(minY,this.vertices[i+1]);
-            minZ=Math.min(minZ,this.vertices[i+2]);
+            bounds.minX=Math.min(bounds.minX,this.vertices[i+0]);
+            bounds.minY=Math.min(bounds.minY,this.vertices[i+1]);
+            bounds.minZ=Math.min(bounds.minZ,this.vertices[i+2]);
         }
     }
-    // Math.abs(Math.abs(max[0])-Math.abs(min[0])),
 
+    return bounds;
+};
 
+CGL.Geometry.prototype.center=function()
+{
+
+    var bounds=this.getBounds();
 
     var offset=
         [
-            minX+(maxX-minX)/2,
-            minY+(maxY-minY)/2,
-            minZ+(maxZ-minZ)/2
+            bounds.minX+(bounds.maxX-bounds.minX)/2,
+            bounds.minY+(bounds.maxY-bounds.minY)/2,
+            bounds.minZ+(bounds.maxZ-bounds.minZ)/2
         ];
 
     for(i=0;i<this.vertices.length;i+=3)
@@ -393,6 +398,22 @@ CGL.Geometry.prototype.center=function()
     return offset;
 };
 
+CGL.Geometry.prototype.mapTexCoords2d=function()
+{
+    var bounds=this.getBounds();
+
+    var num=this.vertices.length/3;
+    this.texCoords.length=num*2;
+
+    for(var i=0;i<num;i++)
+    {
+        var vertX=this.vertices[i*3+0];
+        var vertY=this.vertices[i*3+1];
+        this.texCoords[i*2+0]=vertX/(bounds.maxX-bounds.minX)/2+0.5;
+        this.texCoords[i*2+1]=1.0-vertY/(bounds.maxY-bounds.minY)/2+0.5;
+    }
+
+};
 
 
 
