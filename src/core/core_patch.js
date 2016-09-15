@@ -250,6 +250,7 @@ CABLES.Patch = function(cfg)
 
     var frameNext=0;
     var frameInterval=0;
+    var lastFrameTime=0;
 
     CABLES.Patch.prototype.exec=function(e)
     {
@@ -259,7 +260,23 @@ CABLES.Patch = function(cfg)
         var now = CABLES.milliSeconds();
         var frameDelta = now - frameNext;
 
-        requestAnimationFrame(this.exec.bind(this));
+        if(now-lastFrameTime>90 && lastFrameTime!==0)
+        {
+            lastFrameTime=0;
+            setTimeout(this.exec.bind(this),3000);
+            if(CABLES.UI)
+            {
+                console.log('delayed...');
+                CABLES.UI.notify('renderer delayed...');
+            }
+            return;
+
+        }
+        else
+        {
+            requestAnimationFrame(this.exec.bind(this));
+        }
+
 
         if (this.config.fpsLimit===0 || frameDelta > frameInterval)
         {
@@ -278,7 +295,7 @@ CABLES.Patch = function(cfg)
             }
 
             frameNext = now - (frameDelta % frameInterval);
-
+            lastFrameTime=CABLES.milliSeconds();
         }
     };
 

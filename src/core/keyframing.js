@@ -501,6 +501,13 @@ CABLES.TL.Anim.prototype.addKey=function(k)
 
 CABLES.TL.Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
 {
+
+    if(!CABLES.TL.Anim.slerpQuaternion.q1)
+    {
+        CABLES.TL.Anim.slerpQuaternion.q1=quat.create();
+        CABLES.TL.Anim.slerpQuaternion.q2=quat.create();
+    }
+
     var i1=animx.getKeyIndex(time);
     var i2=parseInt(animx.getKeyIndex(time))+1;
     if(i2>=animx.keys.length)i2=animx.keys.length-1;
@@ -538,6 +545,3 @@ CABLES.TL.Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
     }
     return q;
 };
-
-CABLES.TL.Anim.slerpQuaternion.q1=quat.create();
-CABLES.TL.Anim.slerpQuaternion.q2=quat.create();
