@@ -6,6 +6,10 @@ var mul=op.addInPort(new Port(op,"mul"));
 
 var outX=op.addOutPort(new Port(op,"x"));
 var outY=op.addOutPort(new Port(op,"y"));
+var cgl=op.patch.cgl;
+var flipY=op.inValueBool("Flip Y");
+
+var doReset=op.inFunction("Reset");
 
 outY.ignoreValueSerialize=true;
 outX.ignoreValueSerialize=true;
@@ -18,20 +22,32 @@ var lastX=-1;
 outX.set(0);
 outY.set(0);
 
+
+doReset.onTriggered=function()
+{
+    lastY=-1;
+    lastX=-1;
+
+    outX.set(0);
+    outY.set(0);
+    
+    // console.log('reset!');
+};
+
 function onmouseclick()
 {
     
 }
 
-function fix()
-{
-    if(outX.get()===undefined)outX.set(0);
-    if(outY.get()===undefined)outY.set(0);
+// function fix()
+// {
+//     if(outX.get()===undefined)outX.set(0);
+//     if(outY.get()===undefined)outY.set(0);
 
-}
+// }
 
-outX.onValueChanged=fix;
-outY.onValueChanged=fix;
+// outX.onValueChanged=fix;
+// outY.onValueChanged=fix;
 
 function onmousemove(e)
 {
@@ -39,21 +55,29 @@ function onmousemove(e)
     if(outX.get()===undefined)outX.set(0);
     if(outY.get()===undefined)outY.set(0);
     
+    var clientY=e.clientY;
+    if(flipY.get()) clientY=cgl.canvas.clientHeight-clientY;
+
+
     if(pressed)
     {
         if(lastX!=-1)
         {
-            var x=(outX.get()+(e.clientX-lastX)*parseFloat(mul.get()));
-            var y=(outY.get()+(e.clientY-lastY)*parseFloat(mul.get()));
+            
+
+            var x=(outX.get()+(e.clientX-lastX)*mul.get());
+            var y=(outY.get()+(clientY-lastY)*mul.get());
 
             if(!isNaN(x))outX.set(x||0);
                 else outX.set(0);
-                
+
+            
+
             if(!isNaN(y))outY.set(y||0);
                 else outY.set(0);
         }
 
-        lastY=e.clientY;
+        lastY=clientY;
         lastX=e.clientX;
     }
 }

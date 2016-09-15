@@ -6,6 +6,7 @@ var centerInCanvas=op.addInPort(new Port(op,"Center in Canvas",OP_PORT_TYPE_VALU
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var flipY=op.inValueBool("Flip Y");
 var cgl=op.patch.cgl;
 var mesh=null;
 var geom=new CGL.Geometry();
@@ -14,6 +15,7 @@ op.onResize=rebuild;
 
 
 centerInCanvas.onValueChanged=rebuild;
+flipY.onValueChanged=rebuild;
 
 render.onTriggered=function()
 {
@@ -78,6 +80,15 @@ function rebuild()
          xx,   xy,    0.0
     ];
 
+if(flipY.get())
+    geom.texCoords = [
+         1.0, 0.0,
+         0.0, 0.0,
+         1.0, 1.0,
+         0.0, 1.0
+    ];
+
+else
     geom.texCoords = [
          1.0, 1.0,
          0.0, 1.0,

@@ -8,6 +8,7 @@ thickness.set(0.1);
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
+
 var meshes=[];
 var cgl=op.patch.cgl;
 
@@ -21,6 +22,7 @@ render.onTriggered=function()
 
 svgFile.onValueChanged=parse;
 thickness.onValueChanged=parse;
+doCenter=parse;
 
 function parse()
 {

@@ -35,6 +35,8 @@ function doRender()
         height.set( cgl.getViewPort()[3] );
     }
 
+
+
     if(fb.getWidth()!=width.get() || fb.getHeight()!=height.get() )
     {
         fb.setSize( width.get(),height.get() );
