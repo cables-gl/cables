@@ -272,6 +272,7 @@ CABLES.Patch = function(cfg)
                 setTimeout(this.exec.bind(this),1200);
 
                 CABLES.UI.notify('renderer delayed...');
+                lastFrameTime=CABLES.milliSeconds();
                 return;
             }
         }
