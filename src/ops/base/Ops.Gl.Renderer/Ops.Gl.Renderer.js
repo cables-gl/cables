@@ -21,7 +21,7 @@ vec3.set(identTranslateView, 0,0,-2);
 
 fpsLimit.onChange=function()
 {
-    op.patch.config.fpsLimit=fpsLimit.get();
+    op.patch.config.fpsLimit=fpsLimit.get()||0;
 };
 
 

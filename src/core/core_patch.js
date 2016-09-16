@@ -256,10 +256,13 @@ CABLES.Patch = function(cfg)
     {
         if(this._paused)return;
 
-        frameInterval = 1000/this.config.fpsLimit;
+        this.config.fpsLimit=this.config.fpsLimit||0;
+        if(this.config.fpsLimit)
+        {
+            frameInterval = 1000/this.config.fpsLimit;
+        }
         var now = CABLES.milliSeconds();
         var frameDelta = now - frameNext;
-
 
         if(CABLES.UI)
         {
@@ -270,12 +273,15 @@ CABLES.Patch = function(cfg)
 
                 CABLES.UI.notify('renderer delayed...');
                 return;
-
             }
             else
             {
                 requestAnimationFrame(this.exec.bind(this));
             }
+        }
+        else
+        {
+            requestAnimationFrame(this.exec.bind(this));
         }
 
 
