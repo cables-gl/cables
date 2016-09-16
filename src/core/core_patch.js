@@ -260,21 +260,22 @@ CABLES.Patch = function(cfg)
         var now = CABLES.milliSeconds();
         var frameDelta = now - frameNext;
 
-        if(now-lastFrameTime>90 && lastFrameTime!==0)
-        {
-            lastFrameTime=0;
-            setTimeout(this.exec.bind(this),3000);
-            if(CABLES.UI)
-            {
-                console.log('delayed...');
-                CABLES.UI.notify('renderer delayed...');
-            }
-            return;
 
-        }
-        else
+        if(CABLES.UI)
         {
-            requestAnimationFrame(this.exec.bind(this));
+            if(now-lastFrameTime>90 && lastFrameTime!==0)
+            {
+                lastFrameTime=0;
+                setTimeout(this.exec.bind(this),3000);
+
+                CABLES.UI.notify('renderer delayed...');
+                return;
+
+            }
+            else
+            {
+                requestAnimationFrame(this.exec.bind(this));
+            }
         }
 
 
