@@ -261,29 +261,27 @@ CABLES.Patch = function(cfg)
         {
             frameInterval = 1000/this.config.fpsLimit;
         }
+
         var now = CABLES.milliSeconds();
         var frameDelta = now - frameNext;
 
-        if(CABLES.UI && !wasdelayed)
+        if(CABLES.UI)
         {
-            if(now-lastFrameTime>90 && lastFrameTime!==0)
+            if(now-lastFrameTime>90 && lastFrameTime!==0  && !wasdelayed)
             {
                 lastFrameTime=0;
                 setTimeout(this.exec.bind(this),1200);
 
-                CABLES.UI.notify('renderer delayed...');
+                $('#delayed').show();
+                // CABLES.UI.notify('renderer delayed...');
                 wasdelayed=true;
                 return;
             }
-            wasdelayed=false;
         }
 
-
-
-        if (this.config.fpsLimit===0 || frameDelta > frameInterval)
+        if(this.config.fpsLimit===0 || frameDelta > frameInterval || wasdelayed)
         {
             this.timer.update();
-            requestAnimationFrame(this.exec.bind(this));
 
             var time=this.timer.getTime();
 
@@ -297,9 +295,19 @@ CABLES.Patch = function(cfg)
                 if(this.config.onFirstFrameRendered)this.config.onFirstFrameRendered();
             }
 
-            frameNext = now - (frameDelta % frameInterval);
+            if(frameInterval)
+                frameNext = now - (frameDelta % frameInterval);
+
             lastFrameTime=CABLES.milliSeconds();
         }
+
+        if(wasdelayed)
+        {
+            $('#delayed').hide();
+            wasdelayed=false;
+        }
+        requestAnimationFrame(this.exec.bind(this));
+
     };
 
     CABLES.Patch.prototype.link=function(op1,port1Name,op2,port2Name)
