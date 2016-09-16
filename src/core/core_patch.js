@@ -274,20 +274,14 @@ CABLES.Patch = function(cfg)
                 CABLES.UI.notify('renderer delayed...');
                 return;
             }
-            else
-            {
-                requestAnimationFrame(this.exec.bind(this));
-            }
         }
-        else
-        {
-            requestAnimationFrame(this.exec.bind(this));
-        }
+
 
 
         if (this.config.fpsLimit===0 || frameDelta > frameInterval)
         {
             this.timer.update();
+            requestAnimationFrame(this.exec.bind(this));
 
             var time=this.timer.getTime();
 
