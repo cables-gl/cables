@@ -269,7 +269,7 @@ CABLES.Patch = function(cfg)
             if(now-lastFrameTime>90 && lastFrameTime!==0)
             {
                 lastFrameTime=0;
-                setTimeout(this.exec.bind(this),3000);
+                setTimeout(this.exec.bind(this),1200);
 
                 CABLES.UI.notify('renderer delayed...');
                 return;
