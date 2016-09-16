@@ -6,6 +6,9 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var triggerGamePad=op.addOutPort(new Port(op,"Controller Matrix",OP_PORT_TYPE_FUNCTION));
 var numGamepads=op.addOutPort(new Port(op,"Num Controller",OP_PORT_TYPE_VALUE));
+var outPose=op.addOutPort(new Port(op,"Pose",OP_PORT_TYPE_OBJECT));
+var eyeLeft=op.addOutPort(new Port(op,"Eye Info Left",OP_PORT_TYPE_OBJECT));
+var eyeRight=op.addOutPort(new Port(op,"Eye Info Right",OP_PORT_TYPE_OBJECT));
 
 
 var vrDisplay=null;
@@ -20,24 +23,45 @@ var firstQuat=null;
 
 var gp1Matrix=mat4.create();
 var qMat=mat4.create();
-var poseMat=mat4.create();
+var frameData = null;
+
+
+var hasDisplay=op.outValue('hasDisplay');
+var hasPose=op.outValue('hasPose');
+var hasOrientation=op.outValue('hasorientation');
+var isPresenting=op.outValue('is presenting');
+
+
 
 render.onTriggered=function()
 {
 
-
     var pose=null;
     if(vrDisplay)
     {
+        isPresenting.set(vrDisplay.isPresenting);
+        hasDisplay.set(true);
         pose=vrDisplay.getPose();
-            
-        cgl.pushViewMatrix();
-            
-        mat4.fromRotationTranslation(poseMat, pose.orientation, pose.position);
-        mat4.multiply(cgl.vMatrix,cgl.vMatrix,poseMat);
         
+        if(pose) hasPose.set(true);
+            else hasPose.set(false);
+        //vrDisplay.getFrameData(frameData);
+        // outFrameData.set(frameData);
+        eyeLeft.set(vrDisplay.getEyeParameters("left"));
+        eyeRight.set(vrDisplay.getEyeParameters("right"));
+
+
+        if(pose.orientation)
+        {
+            hasOrientation.set(true);
+            outPose.set(pose);
+            //mat4.multiply(cgl.vMatrix,cgl.vMatrix,poseMat);
+        }else hasOrientation.set(false);
         trigger.trigger();
-        cgl.popViewMatrix();
+    }
+    else
+    {
+        hasDisplay.set(true);
     }
 
     var gamePads=navigator.getGamepads();

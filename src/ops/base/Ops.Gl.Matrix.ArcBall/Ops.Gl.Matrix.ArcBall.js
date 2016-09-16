@@ -10,6 +10,8 @@ var maxScale=op.addInPort(new Port(op,"Max Scale",OP_PORT_TYPE_VALUE));
 
 var useWheel=op.inValueBool('Use Mouse Wheel',false);
 
+var inRadius=op.inValue("Radius");
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 mulRotate.set(1);
@@ -24,13 +26,23 @@ var radius=1.0;
 
 var finalRotMatrix = mat4.create();
 
+inRadius.onChange=function()
+{
+    radius=inRadius.get();
+    console.log(radius);
+};
+
 render.onTriggered=function()
 {
     cgl.pushViewMatrix();
     cgl.pushModelMatrix();
 
-    if(radius<minScale.get())radius=minScale.get();
-    if(radius>maxScale.get())radius=maxScale.get();
+    if(inRadius.get()===0)
+    {
+        if(radius<minScale.get())radius=minScale.get();
+        if(radius>maxScale.get())radius=maxScale.get();
+        
+    }
 
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,finalRotMatrix);
     var r=radius;
@@ -56,9 +68,12 @@ function onmousemove(event)
         // vOffset[1]+=(y-lastMouseY)*0.01*mulTrans.get();
     }
 
-    if(event.which==2)
+    if(inRadius.get()===0)
     {
-        radius-=(y-lastMouseY)*0.001*mulScale.get();
+        if(event.which==2)
+        {
+            radius-=(y-lastMouseY)*0.001*mulScale.get();
+        }
     }
 
     if(event.which==1)
@@ -108,6 +123,7 @@ var onMouseWheel=function(event)
         var delta=CGL.getWheelSpeed(event)*0.001;
         radius+=(parseFloat(delta)*mulScale.get());
         event.preventDefault();
+        console.log( radius );
     }
 };
 
