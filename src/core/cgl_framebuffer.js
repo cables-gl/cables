@@ -47,6 +47,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         width=w;
         height=h;
 
+        CGL.profileFrameBuffercreate++;
+
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
 

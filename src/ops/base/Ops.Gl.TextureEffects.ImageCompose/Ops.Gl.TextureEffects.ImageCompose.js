@@ -25,7 +25,7 @@ function initEffect()
 {
     if(effect)effect.delete();
     if(tex)tex.delete();
-    
+
     effect=new CGL.TextureEffect(cgl,{isFloatingPointTexture:fpTexture.get()});
 
     tex=new CGL.Texture(cgl,
@@ -50,7 +50,7 @@ fpTexture.onChange=function()
 function updateResolution()
 {
     if(!effect)initEffect();
-    
+
     if(useVPSize.get())
     {
         w=cgl.getViewPort()[2];
@@ -67,8 +67,6 @@ function updateResolution()
         height.set(h);
         width.set(w);
         tex.setSize(w,h);
-        
-        console.log('resize texture effect',w,h,tex.width,tex.height);
 
         effect.setSourceTexture(tex);
         texOut.set(effect.getCurrentSourceTexture());
@@ -108,16 +106,16 @@ var doRender=function()
     prevViewPort[1]=vp[1];
     prevViewPort[2]=vp[2];
     prevViewPort[3]=vp[3];
-    
+
     updateResolution();
-    
+
     cgl.currentTextureEffect=effect;
     effect.setSourceTexture(tex);
 
     effect.startEffect();
     trigger.trigger();
     texOut.set(effect.getCurrentSourceTexture());
-    
+
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 
 };
@@ -130,7 +128,7 @@ var doRender=function()
 //             doRender();
 //             tex.preview();
 //         };
-//     else 
+//     else
 //         render.onTriggered=doRender;
 // };
 
@@ -143,7 +141,7 @@ function onFilterChange()
     if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
     if(newFilter!=tex.filter)tex.width=0;
     tex.filter=newFilter;
-    
+
 
     effect.setSourceTexture(tex);
     updateResolution();

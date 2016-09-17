@@ -3,7 +3,7 @@ op.name="ToneMap";
 var render=op.inFunction("Render");
 var trigger=op.outFunction("Trigger");
 var method=op.inValueSelect("Method",["Linear","Reinhard","Hejl Dawson","Uncharted"],"Linear");
-var exposure=op.inValue("Exposure");
+var exposure=op.inValue("Exposure",3);
 var cgl=op.patch.cgl;
 
 var shader=new CGL.Shader(cgl);
@@ -11,8 +11,6 @@ op.onLoaded=shader.compile;
 
 method.onChange=function()
 {
-        
-
     if(method.get()=="Hejl Dawson") shader.define('METHOD_HEJLDAWSON');
         else shader.removeDefine('METHOD_HEJLDAWSON');
 
@@ -38,7 +36,6 @@ var srcFrag=''
     .endl()+'   void main()'
     .endl()+'   {'
     .endl()+'      vec3 col = texture2D(texture, texCoord ).rgb*exposure;'
-    .endl()+'     '
     .endl()+'     gl_FragColor = vec4( pow(col,vec3(1.0/2.2)) ,1.0);'
     .endl()+'   }'
     .endl()+'#endif'
@@ -47,9 +44,7 @@ var srcFrag=''
     .endl()+'   void main()'
     .endl()+'   {'
     .endl()+'      vec3 col = texture2D(texture, texCoord ).rgb*exposure;'
-    .endl()+'     '
     .endl()+'      col = col/(1.0+col);'
-
     .endl()+'     gl_FragColor = vec4( pow(col,vec3(1.0/2.2)) ,1.0);'
     .endl()+'   }'
     .endl()+'#endif'
@@ -59,14 +54,10 @@ var srcFrag=''
     .endl()+'   void main()'
     .endl()+'   {'
     .endl()+'      vec3 col = texture2D(texture, texCoord ).rgb*exposure;'
-    .endl()+'     '
     .endl()+'     vec3 x=max(vec3(0),col-0.004);'
-    
     .endl()+'     gl_FragColor = vec4( (x*(6.2*x+.5))/(x*(6.2*x+1.7)+0.06) ,1.0);'
     .endl()+'   }'
     .endl()+'#endif'
-
-
 
     .endl()+'#ifdef METHOD_UNCHARTED'
     .endl()+'   float A = 0.15;'
@@ -93,7 +84,6 @@ var srcFrag=''
     .endl()+'     vec3 color = curr*whiteScale;'
     
     .endl()+'     vec3 retColor = pow(color,vec3(1.0/2.2));'
-    .endl()+'     '
     .endl()+'     gl_FragColor = vec4(retColor,1.0);'
     .endl()+'   }'
     .endl()+'#endif';

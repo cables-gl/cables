@@ -101,6 +101,7 @@ CGL.Texture=function(cgl,options)
         // console.log('self.width',self.width,self.height);
 
         cgl.gl.bindTexture(texType, self.tex);
+        CGL.profileTextureResize++;
         // console.log('resize',w,h,self.filter);
 
         var uarr=null;
@@ -130,7 +131,7 @@ CGL.Texture=function(cgl,options)
             {
                 console.log('no floating point texture extension!');
             }else {
-                console.log('yay fp tex');
+                // console.log('yay fp tex');
             }
             cgl.gl.texImage2D(texType, 0, cgl.gl.RGBA, w,h, 0, cgl.gl.RGBA, cgl.gl.FLOAT, null);
         }

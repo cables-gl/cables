@@ -61,6 +61,7 @@ var avgMs=0;
 var avgMsChilds=0;
 var text2='';
 var text3='';
+var warn='';
 
 var ll=0;
 var selfTime=0;
@@ -94,10 +95,16 @@ function refresh()
 
         text=self.patch.config.glCanvasId+' fps: '+fps;
         text+=' '+cgl.canvas.clientWidth+' x '+cgl.canvas.clientHeight;
+        
+        
 
         fpsStartTime=Date.now();
-        if(CGL.profileShaderCompiles>0)text+=' shader compile!';
-        if(CGL.profileShaderGetUniform>0)text+=' shader get uniforms!';
+        warn='';
+        if(CGL.profileShaderCompiles>0)warn+='Shader compile! ';
+        if(CGL.profileShaderGetUniform>0)warn+='Shader get uni loc! ';
+        if(CGL.profileTextureResize>0)warn+='Texture resize! ';
+        if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
+        
 
 
 
@@ -120,12 +127,15 @@ function refresh()
 
         text2='frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         text3='shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+' uniforms: '+Math.ceil(CGL.profileUniformCount/fps);
+        text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
+        
 
-text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         CGL.profileUniformCount=0;
         CGL.profileShaderGetUniform=0;
         CGL.profileShaderCompiles=0;
         CGL.profileShaderBinds=0;
+        CGL.profileTextureResize=0;
+        CGL.profileFrameBuffercreate=0;
 
     }
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -151,6 +161,9 @@ text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
     ctx.fillText(text, 10, 20);
     ctx.fillText(text2, 10, 35);
     ctx.fillText(text3, 10, 50);
+    ctx.fillStyle="#ff4400";
+    if(warn!=='')ctx.fillText('WARNING: '+warn, 10, 65);
+
     if(hasErrors)
     {
         ctx.fillStyle="#ff8844";
