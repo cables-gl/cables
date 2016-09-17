@@ -24,7 +24,6 @@ method.onChange=function()
         else shader.removeDefine('METHOD_LINEAR');
 };
 
-
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'varying vec2 texCoord;'
@@ -49,8 +48,7 @@ var srcFrag=''
     .endl()+'      gl_FragColor = vec4( pow(col.rgb,vec3(1.0/2.2)) ,col.a);'
     .endl()+'   }'
     .endl()+'#endif'
-    
-    
+
     .endl()+'#ifdef METHOD_HEJLDAWSON'
     .endl()+'   void main()'
     .endl()+'   {'
@@ -113,5 +111,4 @@ render.onTriggered=function()
     cgl.setPreviousShader();
     trigger.trigger();
 };
-
 

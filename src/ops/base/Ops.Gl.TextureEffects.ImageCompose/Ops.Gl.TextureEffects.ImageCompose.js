@@ -4,15 +4,12 @@ var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ 
 var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+var bgAlpha=op.inValueSlider("Background Alpha",0);
+var fpTexture=op.inValueBool("HDR");
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
-var bgAlpha=op.inValueSlider("Background Alpha",0);
-
-var fpTexture=op.inValueBool("HDR");
-
-op.onResize=updateResolution;
 
 var cgl=op.patch.cgl;
 var effect=null;
