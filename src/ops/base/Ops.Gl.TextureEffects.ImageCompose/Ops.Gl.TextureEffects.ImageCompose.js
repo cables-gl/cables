@@ -8,6 +8,8 @@ var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropd
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
+var bgAlpha=op.inValueSlider("Background Alpha",0);
+
 var fpTexture=op.inValueBool("HDR");
 
 op.onResize=updateResolution;
@@ -20,6 +22,19 @@ var tex=null;
 var w=8,h=8;
 var prevViewPort=[0,0,0,0];
 var reInitEffect=true;
+
+var bgFrag=''
+    .endl()+'precision highp float;'
+    .endl()+'uniform float a;'
+    .endl()+'void main()'
+    .endl()+'{'
+    .endl()+'   gl_FragColor = vec4(0.0,0.0,0.0,a);'
+    .endl()+'}';
+var bgShader=new CGL.Shader(cgl,'imgcompose bg');
+bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);
+var uniBgAlpha=new CGL.Uniform(bgShader,'f','a',bgAlpha);
+
+
 
 function initEffect()
 {
@@ -113,6 +128,17 @@ var doRender=function()
     effect.setSourceTexture(tex);
 
     effect.startEffect();
+
+    // render background color...
+    cgl.setShader(bgShader);
+    cgl.currentTextureEffect.bind();
+    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.currentTextureEffect.finish();
+    cgl.setPreviousShader();
+
+
+
     trigger.trigger();
     texOut.set(effect.getCurrentSourceTexture());
 
@@ -120,17 +146,6 @@ var doRender=function()
 
 };
 
-// texOut.onPreviewChanged=function()
-// {
-//     if(texOut.showPreview)
-//         render.onTriggered=function()
-//         {
-//             doRender();
-//             tex.preview();
-//         };
-//     else
-//         render.onTriggered=doRender;
-// };
 
 
 function onFilterChange()
@@ -141,7 +156,6 @@ function onFilterChange()
     if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
     if(newFilter!=tex.filter)tex.width=0;
     tex.filter=newFilter;
-
 
     effect.setSourceTexture(tex);
     updateResolution();

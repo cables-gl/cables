@@ -225,7 +225,7 @@ var srcFrag=''
     // .endl()+'vec4 finalColor=vec4(colNew*amount*blendRGBA.a,blendRGBA.a);'
     // .endl()+'finalColor+=vec4(base*(1.0-amount)*baseRGBA.a,baseRGBA.a);'//, base ,1.0-blendRGBA.a*amount);'
     .endl()+'blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);'
-    .endl()+'blendRGBA.a=baseRGBA.a+blendRGBA.a;'
+    // .endl()+'blendRGBA.a=baseRGBA.a+blendRGBA.a;'
 
 
     // .endl()+'blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);'

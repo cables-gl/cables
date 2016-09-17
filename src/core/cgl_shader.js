@@ -341,6 +341,8 @@ CGL.Shader=function(_cgl,_name)
         needsRecompile=true;
     };
 
+    // TODO: make static!
+
     this.getDefaultVertexShader=function()
     {
         return ''
