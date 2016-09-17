@@ -5,6 +5,7 @@ CGL.TextureEffect=function(cgl,options)
     var self=this;
     var geom=new CGL.Geometry();
 
+    // TODO: make mesh static...
     geom.vertices = [
          1.0,  1.0,  0.0,
         -1.0,  1.0,  0.0,
@@ -29,13 +30,25 @@ CGL.TextureEffect=function(cgl,options)
 
     var textureSource = null;
 
-    var opts={};
+    var opts=options ||
+        {
+            isFloatingPointTexture:false,
+            filter:CGL.Texture.FILTER_LINEAR
+        };
     if(options && options.fp)opts.isFloatingPointTexture=true;
     var textureTarget = new CGL.Texture(cgl,opts);
     var frameBuf      = cgl.gl.createFramebuffer();
     var renderbuffer  = cgl.gl.createRenderbuffer();
 
     var switched=false;
+
+    this.delete=function()
+    {
+        if(textureTarget)textureTarget.delete();
+        if(textureSource)textureSource.delete();
+        cgl.gl.deleteRenderbuffer(renderbuffer);
+        cgl.gl.deleteFramebuffer(frameBuf);
+    };
 
     this.startEffect=function()
     {
@@ -44,10 +57,11 @@ CGL.TextureEffect=function(cgl,options)
 
     this.setSourceTexture=function(tex)
     {
+        // if(textureSource==tex)return;
+
         if(tex===null)
         {
-            textureSource=new CGL.Texture(cgl);
-            textureSource.filter=CGL.Texture.FILTER_LINEAR;
+            textureSource=new CGL.Texture(cgl,opts);
             textureSource.setSize(16,16);
         }
         else

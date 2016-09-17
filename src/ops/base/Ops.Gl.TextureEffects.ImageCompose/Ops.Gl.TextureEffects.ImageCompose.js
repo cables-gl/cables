@@ -8,18 +8,49 @@ var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropd
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
+var fpTexture=op.inValueBool("HDR");
+
 op.onResize=updateResolution;
 
 var cgl=op.patch.cgl;
-var effect=new CGL.TextureEffect(cgl);
-cgl.currentTextureEffect=effect;
-var tex=new CGL.Texture(cgl);
-tex.filter=CGL.Texture.FILTER_LINEAR;
+var effect=null;
+
+var tex=null;
 
 var w=8,h=8;
+var prevViewPort=[0,0,0,0];
+var reInitEffect=true;
+
+function initEffect()
+{
+    if(effect)effect.delete();
+    if(tex)tex.delete();
+    
+    effect=new CGL.TextureEffect(cgl,{isFloatingPointTexture:fpTexture.get()});
+
+    tex=new CGL.Texture(cgl,
+        {
+            isFloatingPointTexture:fpTexture.get(),
+            filter:CGL.Texture.FILTER_LINEAR
+        });
+
+    effect.setSourceTexture(tex);
+    texOut.set(effect.getCurrentSourceTexture());
+
+    reInitEffect=false;
+
+}
+
+fpTexture.onChange=function()
+{
+    reInitEffect=true;
+};
+
 
 function updateResolution()
 {
+    if(!effect)initEffect();
+    
     if(useVPSize.get())
     {
         w=cgl.getViewPort()[2];
@@ -27,8 +58,8 @@ function updateResolution()
     }
     else
     {
-        w=parseInt(width.get(),10);
-        h=parseInt(height.get(),10);
+        w=(width.get());
+        h=(height.get());
     }
 
     if((w!=tex.width || h!= tex.height) && (w!==0 && h!==0))
@@ -36,6 +67,8 @@ function updateResolution()
         height.set(h);
         width.set(w);
         tex.setSize(w,h);
+        
+        console.log('resize texture effect',w,h,tex.width,tex.height);
 
         effect.setSourceTexture(tex);
         texOut.set(effect.getCurrentSourceTexture());
@@ -63,10 +96,13 @@ useVPSize.onValueChanged=function()
     updateResolution();
 };
 
-var prevViewPort=[0,0,0,0];
 
 var doRender=function()
 {
+    if(!effect || reInitEffect)
+    {
+        initEffect();
+    }
     var vp=cgl.getViewPort();
     prevViewPort[0]=vp[0];
     prevViewPort[1]=vp[1];
@@ -74,13 +110,15 @@ var doRender=function()
     prevViewPort[3]=vp[3];
     
     updateResolution();
+    
     cgl.currentTextureEffect=effect;
+    effect.setSourceTexture(tex);
+
     effect.startEffect();
     trigger.trigger();
     texOut.set(effect.getCurrentSourceTexture());
     
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
-    
 
 };
 
@@ -105,6 +143,8 @@ function onFilterChange()
     if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
     if(newFilter!=tex.filter)tex.width=0;
     tex.filter=newFilter;
+    
+
     effect.setSourceTexture(tex);
     updateResolution();
 }
