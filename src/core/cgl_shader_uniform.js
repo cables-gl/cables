@@ -1,237 +1,223 @@
-CGL.Uniform=function(_shader,_type,_name,_value)
+CGL.Uniform=function(__shader,__type,__name,_value)
 {
-    var self=this;
-    var loc=-1;
-    var name=_name;
-    var type=_type;
-    var value=0.00001;
-    var shader=_shader;
-    var port=null;
-
-
+    this._loc=-1;
+    this._type=__type;
+    this._name=__name;
+    this._shader=__shader;
+    this._value=0.00001;
+    this._oldValue=null;
+    this._port=null;
+    this._shader.addUniform(this);
     this.needsUpdate=true;
 
-    shader.addUniform(this);
-
-    this.getType=function() {return type;};
-    this.getName=function() {return name;};
-    this.getValue=function() {return value;};
-    this.resetLoc=function() { loc=-1;self.needsUpdate=true; };
-
-    this.updateValueF=function()
+    if(__type=='f')
     {
-        if(loc==-1) loc=shader.getCgl().gl.getUniformLocation(shader.getProgram(), name);
-        else self.needsUpdate=false;
-        shader.getCgl().gl.uniform1f(loc, value);
-        CGL.profileUniformCount++;
-    };
-
-    this.bindTextures=function()
-    {
-
-    };
-
-    this.setValueF=function(v)
-    {
-        if(v!=value)
-        {
-            self.needsUpdate=true;
-            value=v;
-            // self.updateValueF();
-        }
-    };
-
-
-    this.updateValue4F=function()
-    {
-        if(loc==-1)
-        {
-            loc=shader.getCgl().gl.getUniformLocation(shader.getProgram(), name);
-            CGL.profileShaderGetUniform++;
-        }
-        shader.getCgl().gl.uniform4f(loc, value[0],value[1],value[2],value[3]);
-        CGL.profileUniformCount++;
-        // self.needsUpdate=false;
-    };
-
-    this.setValue4F=function(v)
-    {
-        self.needsUpdate=true;
-        value=v;
-    };
-
-    this.updateValueM4=function()
-    {
-        // console.log(name);
-        if(loc==-1)
-        {
-            loc=shader.getCgl().gl.getUniformLocation(shader.getProgram(), name);
-            CGL.profileShaderGetUniform++;
-        }
-        shader.getCgl().gl.uniformMatrix4fv(loc,false,value);
-        CGL.profileUniformCount++;
-
-    };
-
-    this.setValueM4=function(v)
-    {
-        self.needsUpdate=true;
-        value=v;
-    };
-
-    this.getLoc=function()
-    {
-        return loc;
-    };
-
-    var oldValue=null;
-
-    this.updateValue3F=function()
-    {
-        if(!value)
-        {
-            // console.log('name',name);
-            return;
-        }
-        if(loc==-1)
-        {
-            loc=shader.getCgl().gl.getUniformLocation(shader.getProgram(), name);
-            CGL.profileShaderGetUniform++;
-        }
-
-        shader.getCgl().gl.uniform3f(loc, value[0],value[1],value[2]);
-        self.needsUpdate=false;
-        CGL.profileUniformCount++;
-    };
-
-    this.setValue3F=function(v)
-    {
-        if(!v)return;
-        if(!oldValue)
-        {
-            oldValue=[v[0]-1,1,2];
-            self.needsUpdate=true;
-        }
-        else
-        if( v[0]!=oldValue[0] || v[1]!=oldValue[1] || v[2]!=oldValue[2])
-        {
-            oldValue[0]=v[0];
-            oldValue[1]=v[1];
-            oldValue[2]=v[2];
-            self.needsUpdate=true;
-        }
-
-        value=v;
-    };
-
-    this.updateValue2F=function()
-    {
-        if(!value)
-        {
-            // console.log('name',name);
-            return;
-        }
-        if(loc==-1)
-        {
-            loc=shader.getCgl().gl.getUniformLocation(shader.getProgram(), name);
-            CGL.profileShaderGetUniform++;
-        }
-
-        shader.getCgl().gl.uniform2f(loc, value[0],value[1]);
-        self.needsUpdate=false;
-        CGL.profileUniformCount++;
-    };
-
-    this.setValue2F=function(v)
-    {
-        if(!v)return;
-        if(!oldValue)
-        {
-            oldValue=[v[0]-1,1];
-            self.needsUpdate=true;
-        }
-        else
-        if( v[0]!=oldValue[0] || v[1]!=oldValue[1])
-        {
-            oldValue[0]=v[0];
-            oldValue[1]=v[1];
-            self.needsUpdate=true;
-        }
-
-        value=v;
-    };
-
-
-    this.updateValueT=function()
-    {
-        if(loc==-1)
-        {
-            loc=shader.getCgl().gl.getUniformLocation(shader.getProgram(), name);
-            CGL.profileShaderGetUniform++;
-            if(loc==-1) console.log('texture loc unknown!!');
-        }
-        CGL.profileUniformCount++;
-        shader.getCgl().gl.uniform1i(loc, value);
-        self.needsUpdate=false;
-    };
-
-    this.setValueT=function(v)
-    {
-        self.needsUpdate=true;
-        value=v;
-    };
-
-    if(type=='f')
-    {
-        this.setValue=this.setValueF;
-        this.updateValue=this.updateValueF;
+        this.setValue=this.setValueF.bind(this);
+        this.updateValue=this.updateValueF.bind(this);
     }
 
-    if(type=='4f')
+    if(__type=='4f')
     {
-        this.setValue=this.setValue4F;
-        this.updateValue=this.updateValue4F;
+        this.setValue=this.setValue4F.bind(this);
+        this.updateValue=this.updateValue4F.bind(this);
     }
 
-    if(type=='3f')
+    if(__type=='3f')
     {
-        this.setValue=this.setValue3F;
-        this.updateValue=this.updateValue3F;
+        this.setValue=this.setValue3F.bind(this);
+        this.updateValue=this.updateValue3F.bind(this);
     }
 
-    if(type=='2f')
+    if(__type=='2f')
     {
-        this.setValue=this.setValue2F;
-        this.updateValue=this.updateValue2F;
+        this.setValue=this.setValue2F.bind(this);
+        this.updateValue=this.updateValue2F.bind(this);
     }
 
-    if(type=='t')
+    if(__type=='t')
     {
-        this.setValue=this.setValueT;
-        this.updateValue=this.updateValueT;
+        this.setValue=this.setValueT.bind(this);
+        this.updateValue=this.updateValueT.bind(this);
     }
 
-    if(type=='m4')
+    if(__type=='m4')
     {
-        this.setValue=this.setValueM4;
-        this.updateValue=this.updateValueM4;
-    }
-
-    function updateFromPort()
-    {
-        self.setValue(port.get());
+        this.setValue=this.setValueM4.bind(this);
+        this.updateValue=this.updateValueM4.bind(this);
     }
 
     if(typeof _value=="object" && _value instanceof CABLES.Port)
     {
-        port=_value;
-        value=port.get();
-        port.onValueChanged=updateFromPort;
+        this._port=_value;
+        this._value=this._port.get();
+        this._port.onValueChanged=this.updateFromPort.bind(this);
     }
     else
-    {
-        value=_value;
-    }
-    this.setValue(value);
-    self.needsUpdate=true;
+        this._value=_value;
+
+    this.setValue(this._value);
+    this.needsUpdate=true;
+
 };
+{
+    CGL.Uniform.prototype.getType=function() {return this._type;};
+    CGL.Uniform.prototype.getName=function() {return this._name;};
+    CGL.Uniform.prototype.getValue=function() {return this._value;};
+    CGL.Uniform.prototype.resetLoc=function() { this._loc=-1;this.needsUpdate=true; };
+
+    CGL.Uniform.prototype.bindTextures=function()
+    {
+    };
+
+    CGL.Uniform.prototype.getLoc=function()
+    {
+        return this._loc;
+    };
+
+    CGL.Uniform.prototype.updateFromPort=function()
+    {
+        this.setValue(this._port.get());
+    };
+
+    CGL.Uniform.prototype.updateValueF=function()
+    {
+        if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        else this.needsUpdate=false;
+        this._shader.getCgl().gl.uniform1f(this._loc, this._value);
+        CGL.profileUniformCount++;
+    };
+
+    CGL.Uniform.prototype.setValueF=function(v)
+    {
+        if(v!=this._value)
+        {
+            this.needsUpdate=true;
+            this._value=v;
+        }
+    };
+
+    CGL.Uniform.prototype.updateValue3F=function()
+    {
+        if(!this._value)
+        {
+            return;
+        }
+        if(this._loc==-1)
+        {
+            this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+            CGL.profileShaderGetUniform++;
+        }
+
+        this._shader.getCgl().gl.uniform3f(this._loc, this._value[0],this._value[1],this._value[2]);
+        this.needsUpdate=false;
+        CGL.profileUniformCount++;
+    };
+
+    CGL.Uniform.prototype.setValue3F=function(v)
+    {
+        if(!v)return;
+        if(!this._oldValue)
+        {
+            this._oldValue=[v[0]-1,1,2];
+            this.needsUpdate=true;
+        }
+        else
+        if( v[0]!=this._oldValue[0] || v[1]!=this._oldValue[1] || v[2]!=this._oldValue[2])
+        {
+            this._oldValue[0]=v[0];
+            this._oldValue[1]=v[1];
+            this._oldValue[2]=v[2];
+            this.needsUpdate=true;
+        }
+
+        this._value=v;
+    };
+
+    CGL.Uniform.prototype.updateValue2F=function()
+    {
+        if(!this._value) return;
+
+        if(this._loc==-1)
+        {
+            this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+            CGL.profileShaderGetUniform++;
+        }
+
+        this._shader.getCgl().gl.uniform2f(this._loc, this._value[0],this._value[1]);
+        this.needsUpdate=false;
+        CGL.profileUniformCount++;
+    };
+
+    CGL.Uniform.prototype.setValue2F=function(v)
+    {
+        if(!v)return;
+        if(!this._oldValue)
+        {
+            this._oldValue=[v[0]-1,1];
+            this.needsUpdate=true;
+        }
+        else
+        if( v[0]!=this._oldValue[0] || v[1]!=this._oldValue[1])
+        {
+            this._oldValue[0]=v[0];
+            this._oldValue[1]=v[1];
+            this.needsUpdate=true;
+        }
+
+        this._value=v;
+    };
+
+    CGL.Uniform.prototype.updateValueT=function()
+    {
+        if(this._loc==-1)
+        {
+            this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+            CGL.profileShaderGetUniform++;
+            if(this._loc==-1) console.log('texture this._loc unknown!!');
+        }
+        CGL.profileUniformCount++;
+        this._shader.getCgl().gl.uniform1i(this._loc, this._value);
+        this.needsUpdate=false;
+    };
+
+    CGL.Uniform.prototype.setValueT=function(v)
+    {
+        this.needsUpdate=true;
+        this._value=v;
+    };
+
+    CGL.Uniform.prototype.updateValue4F=function()
+    {
+        if(this._loc==-1)
+        {
+            this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+            CGL.profileShaderGetUniform++;
+        }
+        this._shader.getCgl().gl.uniform4f(this._loc, this._value[0],this._value[1],this._value[2],this._value[3]);
+        CGL.profileUniformCount++;
+    };
+
+    CGL.Uniform.prototype.setValue4F=function(v)
+    {
+        this.needsUpdate=true;
+        this._value=v;
+    };
+
+    CGL.Uniform.prototype.updateValueM4=function()
+    {
+        if(this._loc==-1)
+        {
+            this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+            CGL.profileShaderGetUniform++;
+        }
+        this._shader.getCgl().gl.uniformMatrix4fv(this._loc,false,this._value);
+        CGL.profileUniformCount++;
+    };
+
+    CGL.Uniform.prototype.setValueM4=function(v)
+    {
+        this.needsUpdate=true;
+        this._value=v;
+    };
+
+}

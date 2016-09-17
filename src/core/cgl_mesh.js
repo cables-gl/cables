@@ -172,8 +172,6 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
                 {
                     cgl.gl.vertexAttribPointer(attributes[i].loc,attributes[i].itemSize, cgl.gl.FLOAT, false, attributes[i].itemSize*4, 0);
                 }
-
-
             }
         }
 
@@ -182,12 +180,8 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
 
     this.unBind=function(shader)
     {
-        // cgl.gl.enableVertexAttribArray(null);
-
         cgl.lastMesh=null;
         cgl.lastMeshShader=null;
-
-        // cgl.gl.disableVertexAttribArray(shader.getAttrVertexPos());
 
         for(i=0;i<attributes.length;i++)
         {
@@ -203,8 +197,6 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
                 cgl.gl.disableVertexAttribArray(attributes[i].loc+3);
             }
         }
-
-        // cgl.gl.bindBuffer(cgl.gl.ELEMENT_ARRAY_BUFFER, null);
     };
 
     this.meshChanged=function()

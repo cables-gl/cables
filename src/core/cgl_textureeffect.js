@@ -126,7 +126,6 @@ CGL.TextureEffect=function(cgl,options)
 
         cgl.pushMvMatrix();
         mat4.identity(cgl.mvMatrix);
-
     };
 
     this.finish=function()

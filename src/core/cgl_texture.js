@@ -250,7 +250,6 @@ CGL.Texture.createFromImage=function(cgl,img,options)
     return texture;
 };
 
-
 // deprecated!
 CGL.Texture.fromImage=function(cgl,img,filter,wrap)
 {

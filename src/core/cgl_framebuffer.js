@@ -1,7 +1,5 @@
 var CGL=CGL || {};
 
-
-
 CGL.Framebuffer=function(_cgl,w,h,options)
 {
     var cgl=_cgl;
@@ -102,44 +100,31 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     {
         cgl.pushMvMatrix();
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-        // CGL.frameBufferStack.push(frameBuf);
         cgl.pushFrameBuffer(frameBuf);
-
-    // console.log('framebuff START ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
 
         cgl.pushPMatrix();
         cgl.gl.viewport(0, 0, width,height );
 
         cgl.gl.clearColor(0,0,0,0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
     };
 
     this.renderEnd=function()
     {
         cgl.popPMatrix();
-
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer() );
-        // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
 
         cgl.popMvMatrix();
         cgl.resetViewPort();
-
     };
 
     this.delete=function()
     {
-
         texture.delete();
         textureDepth.delete();
-        // cgl.gl.deleteTexture(texture);
-        // cgl.gl.deleteTexture(textureDepth);
         cgl.gl.deleteRenderbuffer(depthBuffer);
         cgl.gl.deleteFramebuffer(frameBuf);
-
     };
 
     this.setSize(width,height);
-
-
 };
