@@ -535,10 +535,15 @@ CGL.Geometry.LinesToGeom=function(points,options)
         var vEnd=vec3.create();
         var q=quat.create();
 
-        vec3.set(vStart,points[p+0],points[p+1],points[p+2]);
-        vec3.set(vEnd  ,points[p+3]-points[p+0],
-        points[p+4]-points[p+1],
-        points[p+5]-points[p+2]);
+        vec3.set(vStart,
+            points[p+0],
+            points[p+1],
+            points[p+2]);
+
+        vec3.set(vEnd,
+            points[p+3]-points[p+0],
+            points[p+4]-points[p+1],
+            points[p+5]-points[p+2]);
 
         vec3.normalize(vEnd,vEnd);
         quat.rotationTo(q,[1,0,0],vEnd);

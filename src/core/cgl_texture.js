@@ -197,6 +197,11 @@ CGL.Texture=function(cgl,options)
         cgl.gl.bindTexture(texType, null);
     };
 
+    this.delete=function()
+    {
+        cgl.gl.deleteTexture(this.tex);
+    };
+
     this.setSize(8,8);
 
     // this.preview=function()

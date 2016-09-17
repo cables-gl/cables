@@ -2,7 +2,7 @@ var CGL=CGL || {};
 
 
 
-CGL.Framebuffer=function(_cgl,w,h)
+CGL.Framebuffer=function(_cgl,w,h,options)
 {
     var cgl=_cgl;
 
@@ -12,7 +12,12 @@ CGL.Framebuffer=function(_cgl,w,h)
     var width = w || 512;
     var height = h || 512;
 
-    var texture=new CGL.Texture(cgl,{filter:CGL.Texture.FILTER_LINEAR});
+    options=options ||
+        {
+            isFloatingPointTexture:false
+        };
+
+    var texture=new CGL.Texture(cgl,{isFloatingPointTexture:options.isFloatingPointTexture,filter:CGL.Texture.FILTER_LINEAR});
     var textureDepth=new CGL.Texture(cgl,{isDepthTexture:true});
 
     var frameBuf = cgl.gl.createFramebuffer();
@@ -120,6 +125,19 @@ CGL.Framebuffer=function(_cgl,w,h)
 
     };
 
+    this.delete=function()
+    {
+
+        texture.delete();
+        textureDepth.delete();
+        // cgl.gl.deleteTexture(texture);
+        // cgl.gl.deleteTexture(textureDepth);
+        cgl.gl.deleteRenderbuffer(depthBuffer);
+        cgl.gl.deleteFramebuffer(frameBuf);
+
+    };
+
     this.setSize(width,height);
+
 
 };
