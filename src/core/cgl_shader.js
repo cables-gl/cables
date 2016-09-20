@@ -107,7 +107,6 @@ CGL.Shader=function(_cgl,_name)
     {
         return ''
         // .endl()+'{{MODULES_HEAD}}'
-
         .endl()+'attribute vec3 vPosition;'
         .endl()+'attribute vec2 attrTexCoord;'
         .endl()+'attribute vec3 attrVertNormal;'

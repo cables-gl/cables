@@ -128,6 +128,7 @@ function generateTorus(iradius,oradius,nRings,nSides)
         idx +=2;
     }
     
+    geom.calcNormals({smooth:true});
     geomOut.set(geom);
 
     if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
