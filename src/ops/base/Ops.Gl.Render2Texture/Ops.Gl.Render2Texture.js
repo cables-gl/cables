@@ -11,14 +11,24 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var tex=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texDepth=op.addOutPort(new Port(op,"textureDepth",OP_PORT_TYPE_TEXTURE));
 
-var fb=new CGL.Framebuffer(cgl);
+var fpTexture=op.inValueBool("HDR");
+
+
+var fb=null;//new CGL.Framebuffer(cgl,512,512);
 
 width.set(512);
 height.set(512);
 useVPSize.set(true);
-tex.set( fb.getTextureColor() );
-texDepth.set ( fb.getTextureDepth() );
 tfilter.set('linear');
+
+
+var reInitFb=true;
+
+fpTexture.onChange=function()
+{
+    reInitFb=true;
+};
+
 
 var onFilterChange=function()
 {
@@ -29,6 +39,16 @@ var onFilterChange=function()
 
 function doRender()
 {
+    
+    if(!fb || reInitFb)
+    {
+        if(fb) fb.delete();
+        fb=new CGL.Framebuffer(cgl,512,512,{isFloatingPointTexture:fpTexture.get()});
+        tex.set( fb.getTextureColor() );
+        texDepth.set ( fb.getTextureDepth() );
+        reInitFb=false;
+    }
+    
     if(useVPSize.val)
     {
         width.set( cgl.getViewPort()[2] );

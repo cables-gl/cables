@@ -33,20 +33,15 @@ render.onTriggered=function()
     cgl.pushViewMatrix();
     mat4.identity(cgl.vMatrix);
 
-
-
     if(centerInCanvas.get())
     {
         var x=0;
         var y=0;
         if(w<cgl.canvasWidth) x=(cgl.canvasWidth-w)/2;
         if(h<cgl.canvasHeight) y=(cgl.canvasHeight-h)/2;
-    
+
         cgl.setViewPort(x,y,w,h);
     }
-
-        
-
 
     mesh.render(cgl.getShader());
 

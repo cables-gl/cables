@@ -98,10 +98,10 @@ CGL.State=function()
     };
     this.setViewPort=function(x,y,w,h)
     {
-        viewPort[0]=parseInt(x,10);
-        viewPort[1]=parseInt(y,10);
-        viewPort[2]=parseInt(w,10);
-        viewPort[3]=parseInt(h,10);
+        viewPort[0]=Math.round(x);
+        viewPort[1]=Math.round(y);
+        viewPort[2]=Math.round(w);
+        viewPort[3]=Math.round(h);
         this.gl.viewport(
             viewPort[0],
             viewPort[1],
@@ -259,6 +259,7 @@ CGL.State=function()
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
         cgl.setViewPort(0,0,cgl.canvas.clientWidth,cgl.canvas.clientHeight);
+
         mat4.perspective(cgl.pMatrix,45, cgl.canvasWidth/cgl.canvasHeight, 0.1, 1000.0);
 
         cgl.pushPMatrix();

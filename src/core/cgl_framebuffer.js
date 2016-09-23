@@ -1,8 +1,6 @@
 var CGL=CGL || {};
 
-
-
-CGL.Framebuffer=function(_cgl,w,h)
+CGL.Framebuffer=function(_cgl,w,h,options)
 {
     var cgl=_cgl;
 
@@ -12,7 +10,12 @@ CGL.Framebuffer=function(_cgl,w,h)
     var width = w || 512;
     var height = h || 512;
 
-    var texture=new CGL.Texture(cgl,{filter:CGL.Texture.FILTER_LINEAR});
+    options=options ||
+        {
+            isFloatingPointTexture:false
+        };
+
+    var texture=new CGL.Texture(cgl,{isFloatingPointTexture:options.isFloatingPointTexture,filter:CGL.Texture.FILTER_LINEAR});
     var textureDepth=new CGL.Texture(cgl,{isDepthTexture:true});
 
     var frameBuf = cgl.gl.createFramebuffer();
@@ -41,6 +44,8 @@ CGL.Framebuffer=function(_cgl,w,h)
     {
         width=w;
         height=h;
+
+        CGL.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
@@ -95,31 +100,31 @@ CGL.Framebuffer=function(_cgl,w,h)
     {
         cgl.pushMvMatrix();
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-        // CGL.frameBufferStack.push(frameBuf);
         cgl.pushFrameBuffer(frameBuf);
-
-    // console.log('framebuff START ',CGL.frameBufferStack[CGL.frameBufferStack.length-1]);
 
         cgl.pushPMatrix();
         cgl.gl.viewport(0, 0, width,height );
 
         cgl.gl.clearColor(0,0,0,0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
     };
 
     this.renderEnd=function()
     {
         cgl.popPMatrix();
-
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer() );
-        // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
 
         cgl.popMvMatrix();
         cgl.resetViewPort();
+    };
 
+    this.delete=function()
+    {
+        texture.delete();
+        textureDepth.delete();
+        cgl.gl.deleteRenderbuffer(depthBuffer);
+        cgl.gl.deleteFramebuffer(frameBuf);
     };
 
     this.setSize(width,height);
-
 };
