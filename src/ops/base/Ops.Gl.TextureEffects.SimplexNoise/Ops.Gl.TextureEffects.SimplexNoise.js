@@ -186,8 +186,9 @@ var srcFrag=''
     .endl()+'void main()'
     .endl()+'{'
     
-    .endl()+'   vec2 p=vec2(texCoord.x+x-0.5,texCoord.y+y-0.5);'
+    .endl()+'   vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);'
     .endl()+'   p=p*scale;'
+
     .endl()+'   p=vec2(p.x+0.5-x,p.y+0.5-y);'
     
     .endl()+'   float v=SimplexPerlin3D(vec3(p.x,p.y,time))*0.5+0.5;'

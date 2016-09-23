@@ -155,6 +155,7 @@ normIntensity.set(1);
 
     var aoTexture=this.addInPort(new Port(this,"AO Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var aoTextureUniform=null;
+    aoTexture.ignoreValueSerialize=true;
     shader.bindTextures=bindTextures;
 
     aoTexture.onValueChanged=function()
