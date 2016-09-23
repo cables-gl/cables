@@ -22,7 +22,7 @@ var updateGammeCorrect=function()
 gammeCorrect.onValueChanged=updateGammeCorrect;
 
 var shader=new CGL.Shader(cgl,'PhongMaterial');
-shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_NORMAL','MODULE_BEGIN_FRAG']);
 var srcFrag=attachments.shader_frag;
 shader.setSource(attachments.shader_vert,srcFrag);
 shaderOut.set(shader);

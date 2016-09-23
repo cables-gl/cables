@@ -31,10 +31,17 @@ CGL.Shader=function(_cgl,_name)
     this.glPrimitive=null;
     this.offScreenPass=false;
     this.wireframe=false;
+    this._extensions=[];
 
     this.getCgl=function()
     {
         return cgl;
+    };
+
+    this.enableExtension=function(name)
+    {
+        needsRecompile=true;
+        this._extensions.push(name);
     };
 
     this.define=function(name,value)
@@ -231,6 +238,15 @@ CGL.Shader=function(_cgl,_name)
     this.compile=function()
     {
         CGL.profileShaderCompiles++;
+
+        var extensionString='';
+        if(this._extensions)
+        for(i=0;i<this._extensions.length;i++)
+        {
+            extensionString+='#extension GL_OES_standard_derivatives : enable'.endl();
+        }
+
+
         var definesStr='';
         var i=0;
         for(i=0;i<defines.length;i++)
@@ -247,8 +263,8 @@ CGL.Shader=function(_cgl,_name)
         // console.log('shader compile...');
         // console.log('has textures: '+self.hasTextureUniforms() );
 
-        var vs=definesStr+self.srcVert;
-        var fs=definesStr+self.srcFrag;
+        var vs=extensionString+definesStr+self.srcVert;
+        var fs=extensionString+definesStr+self.srcFrag;
 
 
         var srcHeadVert='';

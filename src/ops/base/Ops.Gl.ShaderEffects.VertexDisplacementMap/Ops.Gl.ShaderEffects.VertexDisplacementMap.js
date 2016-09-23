@@ -87,10 +87,12 @@ var srcHeadVert=''
     .endl()+'uniform sampler2D {{mod}}_texture;'
     .endl()+'uniform float {{mod}}_offsetX;'
     .endl()+'uniform float {{mod}}_offsetY;'
+    .endl()+'uniform vec3 camPos;'
 
     .endl()+'varying float displHeightMapColor;'
 
-    .endl()+'varying vec3 vViewPosition;'
+    // .endl()+'varying vec3 vViewPosition;'
+
 
     .endl();
 
@@ -126,7 +128,7 @@ var srcBodyVert=''
     .endl()+'displHeightMapColor={{mod}}_texVal;'
     
     
-    .endl()+'vViewPosition=(-mvMatrix*pos).xyz;'
+    // .endl()+'vViewPosition=(-mvMatrix*pos).xyz;'
     
 
 
@@ -134,13 +136,14 @@ var srcBodyVert=''
 
 var srcHeadFrag=''
     // .endl()+'uniform sampler2D {{mod}}_texture;'
-    .endl()+'#extension GL_OES_standard_derivatives : enable'
     .endl()+'uniform float {{mod}}_colorizeAdd;'
     .endl()+'varying float displHeightMapColor;'
+    .endl()+'uniform sampler2D {{mod}}_texture;'
 
-    .endl()+'varying vec3 vViewPosition;'
+    // .endl()+'vec3 fragPos;'
     
-    			
+    	    .endl()+'varying vec3 vViewPosition;'
+		
 
     .endl();
 
@@ -160,13 +163,18 @@ var srcBodyFrag=''
     // .endl()+'   if(colHeight==0.0) col.a=0.0;'
     .endl()+'if(displHeightMapColor==0.0)discard;'
     .endl()+'#endif'
-    
-    .endl()+'col.rgb = normal+normalize(cross(dFdx(vViewPosition), dFdy(vViewPosition))); '
-    
-    				
 
+// .endl()+'col.rgb=vViewPosition.xyz;'
 
     .endl();
+
+var srcNormal=''
+
+    // .endl()+'fragPos=-vec3(mvMatrix * vec4(vert, 1.0));'
+    // .endl()+'normal = normalize(cross(dFdx(vViewPosition), dFdy(vViewPosition))); '
+;    
+    				
+
 
 var module=null;
 
@@ -200,6 +208,8 @@ op.render.onTriggered=function()
 
         console.log('--------------------- 1');
 
+        shader.enableExtension('GL_OES_standard_derivatives');
+
         module=shader.addModule(
             {
                 name:'MODULE_VERTEX_POSITION',
@@ -217,6 +227,14 @@ op.render.onTriggered=function()
         uniOffsetX=new CGL.Uniform(shader,'f',module.prefix+'_offsetX',offsetX);
         uniOffsetY=new CGL.Uniform(shader,'f',module.prefix+'_offsetY',offsetY);
 
+
+
+
+        // module=shader.addModule(
+        //     {
+        //         name:'MODULE_NORMAL',
+        //         srcBodyFrag:srcNormal
+        //     });
 
         module=shader.addModule(
             {

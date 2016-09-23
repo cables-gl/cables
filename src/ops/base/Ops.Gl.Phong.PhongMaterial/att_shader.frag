@@ -127,6 +127,8 @@ void main()
 
             #endif
 
+            {{MODULE_NORMAL}}
+
             #ifdef INSTANCING
             vec3 fragPosition = vec3(instModelMat * vec4(vert, 1.0)); //calculate the location of this fragment (pixel) in world coordinates
             #endif

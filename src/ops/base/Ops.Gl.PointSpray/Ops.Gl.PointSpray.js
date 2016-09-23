@@ -64,11 +64,11 @@ var simSrc=''
     .endl()+' float rndOffset=(4.0 * random(texCoord));'
     
 
-    .endl()+'   float x=mod(time*speed + rndOffset , pLifeTime);'
+    .endl()+'   float x=-1.0*mod(time*speed + rndOffset , pLifeTime);'
     .endl()+'   float y=random(texCoord*3.32123)*sizeY-sizeY/2.0+sinY*random(texCoord*2.223)*sizeY*sin(time+16.0*random(texCoord*1.12123));'
     .endl()+'   float z=random(texCoord*1.111)*sizeZ-sizeZ/2.0+sinZ*random(texCoord*1.453)*sizeZ*sin(time+16.0*random(texCoord*1.4523));'
 
-    .endl()+'   gl_FragColor = vec4(x,y,z,x/lifeTime);'
+    .endl()+'   gl_FragColor = vec4(x,y,z,x/lifeTime*0.7);'
     .endl()+'}';
 
 var simShader=new CGL.Shader(cgl);
