@@ -3,6 +3,7 @@ op.name='LineArray';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var width=op.addInPort(new Port(op,"width"));
 var height=op.addInPort(new Port(op,"height"));
+var doLog=op.inValueBool("Logarithmic",false);
 var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
 var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
 var nColumns=op.addInPort(new Port(op,"num columns"));
@@ -23,13 +24,17 @@ nColumns.set(10);
 
 var meshes=[];
 
-axis.onValueChanged=rebuild;
-pivotX.onValueChanged=rebuild;
-pivotY.onValueChanged=rebuild;
-width.onValueChanged=rebuild;
-height.onValueChanged=rebuild;
-nRows.onValueChanged=rebuild;
-nColumns.onValueChanged=rebuild;
+axis.onValueChanged=rebuildDelayed;
+pivotX.onValueChanged=rebuildDelayed;
+pivotY.onValueChanged=rebuildDelayed;
+width.onValueChanged=rebuildDelayed;
+height.onValueChanged=rebuildDelayed;
+nRows.onValueChanged=rebuildDelayed;
+nColumns.onValueChanged=rebuildDelayed;
+doLog.onValueChanged=rebuildDelayed;
+
+
+
 rebuild();
 
 render.onTriggered=function()
@@ -37,6 +42,13 @@ render.onTriggered=function()
     for(var i=0;i<meshes.length;i++) meshes[i].render(cgl.getShader());
     trigger.trigger();
 };
+
+var delayRebuild=0;
+function rebuildDelayed()
+{
+    clearTimeout(delayRebuild);
+    delayRebuild=setTimeout(rebuild,60);
+}
 
 function rebuild()
 {
@@ -84,18 +96,30 @@ function rebuild()
         lvx=null;
     }
 
+    var min=Math.log(1/numRows);
+    var max=Math.log(1);
+    // console.log(min,max);
+
     for(r=numRows;r>=0;r--)
     {
+        // console.log(r/numRows);
         var lvx=null,lvy=null,lvz=null;
         var ltx=null,lxy=null;
+        var log=0;
+        var doLoga=doLog.get();
 
         for(c=numColumns;c>=0;c--)
         {
             vx = c * stepColumn - width.get()  / 2 + x;
-            vy = r * stepRow    - height.get() / 2 + y;
+            if(doLoga)
+                vy=(Math.log((r/numRows) )/min)*height.get() - height.get() /2+y;
+            else
+                vy = r * stepRow    - height.get() / 2 + y;
             
             var tx = c/numColumns;
             var ty = 1.0-r/numRows;
+            if(doLoga) ty = (Math.log((r/numRows) )/min);
+            
             vz=0.0;
 
             if(axis.get()=='xz') 

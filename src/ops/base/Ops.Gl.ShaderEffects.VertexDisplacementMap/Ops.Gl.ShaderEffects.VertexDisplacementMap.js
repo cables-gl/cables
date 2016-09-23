@@ -21,6 +21,9 @@ var colorize=op.addInPort(new Port(this,"colorize",OP_PORT_TYPE_VALUE,{display:'
 var colorizeAdd=op.addInPort(new Port(this,"colorize add",OP_PORT_TYPE_VALUE,{display:'range'}));
 colorize.set(false);
 
+
+cgl.gl.getExtension('OES_standard_derivatives');
+
 function updateColorize()
 {
     if(shader)
@@ -87,6 +90,8 @@ var srcHeadVert=''
 
     .endl()+'varying float displHeightMapColor;'
 
+    .endl()+'varying vec3 vViewPosition;'
+
     .endl();
 
 var srcBodyVert=''
@@ -119,14 +124,24 @@ var srcBodyVert=''
     .endl()+'#endif'
 
     .endl()+'displHeightMapColor={{mod}}_texVal;'
+    
+    
+    .endl()+'vViewPosition=(-mvMatrix*pos).xyz;'
+    
 
 
     .endl();
 
 var srcHeadFrag=''
     // .endl()+'uniform sampler2D {{mod}}_texture;'
+    .endl()+'#extension GL_OES_standard_derivatives : enable'
     .endl()+'uniform float {{mod}}_colorizeAdd;'
     .endl()+'varying float displHeightMapColor;'
+
+    .endl()+'varying vec3 vViewPosition;'
+    
+    			
+
     .endl();
 
 var srcBodyFrag=''
@@ -145,6 +160,12 @@ var srcBodyFrag=''
     // .endl()+'   if(colHeight==0.0) col.a=0.0;'
     .endl()+'if(displHeightMapColor==0.0)discard;'
     .endl()+'#endif'
+    
+    .endl()+'col.rgb = normal+normalize(cross(dFdx(vViewPosition), dFdy(vViewPosition))); '
+    
+    				
+
+
     .endl();
 
 var module=null;
