@@ -105,6 +105,7 @@ CABLES.Op = function()
     CABLES.Op.prototype.outFunction=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
     CABLES.Op.prototype.outValue=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
     CABLES.Op.prototype.outObject=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
+    CABLES.Op.prototype.outTexture=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
 
     CABLES.Op.prototype.printInfo=function()
     {

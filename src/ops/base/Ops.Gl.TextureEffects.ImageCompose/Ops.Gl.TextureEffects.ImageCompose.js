@@ -9,7 +9,7 @@ var fpTexture=op.inValueBool("HDR");
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 // var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
-var texOut=op.outObject("texture_out");
+var texOut=op.outTexture("texture_out");
 
 var cgl=op.patch.cgl;
 var effect=null;
