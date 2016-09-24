@@ -42,8 +42,12 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
     this.setSize=function(w,h)
     {
+        if(w<2)w=2;
+        if(h<2)h=2;
+
         width=w;
         height=h;
+
 
         CGL.profileFrameBuffercreate++;
 
