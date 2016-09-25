@@ -3,7 +3,8 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+// var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var bgAlpha=op.inValueSlider("Background Alpha",0);
 var fpTexture=op.inValueBool("HDR");
 
@@ -44,7 +45,8 @@ function initEffect()
     tex=new CGL.Texture(cgl,
         {
             isFloatingPointTexture:fpTexture.get(),
-            filter:CGL.Texture.FILTER_LINEAR
+            filter:CGL.Texture.FILTER_LINEAR,
+            
         });
 
     effect.setSourceTexture(tex);

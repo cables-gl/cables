@@ -156,3 +156,171 @@ CGL.TextureEffect=function(cgl,options)
     };
 
 };
+
+
+
+CGL.TextureEffect.getBlendCode=function()
+{
+    return ''
+    .endl()+'#define Blend(base, blend, funcf)       vec3(funcf(base.r, blend.r), funcf(base.g, blend.g), funcf(base.b, blend.b))'
+
+    .endl()+'vec3 _blend(vec3 base,vec3 blend)'
+    .endl()+'{'
+    .endl()+'   vec3 colNew=blend;'
+    // .endl()+'   #ifdef BM_NORMAL'
+    // .endl()+'   colNew=blend;'
+    // .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_MULTIPLY'
+    .endl()+'   colNew=base*blend;'
+    .endl()+'   #endif'
+
+
+    .endl()+'   #ifdef BM_AVERAGE'
+    .endl()+'   colNew=((base + blend) / 2.0);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_ADD'
+    .endl()+'   colNew=min(base + blend, vec3(1.0));'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_SUBSTRACT'
+    .endl()+'   colNew=max(base + blend - vec3(1.0), vec3(0.0));'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_DIFFERENCE'
+    .endl()+'   colNew=abs(base - blend);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_NEGATION'
+    .endl()+'   colNew=(vec3(1.0) - abs(vec3(1.0) - base - blend));'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_EXCLUSION'
+    .endl()+'   colNew=(base + blend - 2.0 * base * blend);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_LIGHTEN'
+    .endl()+'   colNew=max(blend, base);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_DARKEN'
+    .endl()+'   colNew=min(blend, base);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_OVERLAY'
+    .endl()+'      #define BlendOverlayf(base, blend)  (base < 0.5 ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend)))'
+    // .endl()+'       #define BlendOverlay(base, blend)       Blend(base, blend, BlendOverlayf)'
+    .endl()+'      colNew=Blend(base, blend, BlendOverlayf);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_SCREEN'
+    .endl()+'      #define BlendScreenf(base, blend)       (1.0 - ((1.0 - base) * (1.0 - blend)))'
+    // .endl()+'       #define BlendScreen(base, blend)        Blend(base, blend, BlendScreenf)'
+    .endl()+'      colNew=Blend(base, blend, BlendScreenf);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_SOFTLIGHT'
+    .endl()+'      #define BlendSoftLightf(base, blend)    ((blend < 0.5) ? (2.0 * base * blend + base * base * (1.0 - 2.0 * blend)) : (sqrt(base) * (2.0 * blend - 1.0) + 2.0 * base * (1.0 - blend)))'
+    // .endl()+'       #define BlendSoftLight(base, blend)     Blend(base, blend, BlendSoftLightf)'
+    .endl()+'      colNew=Blend(base, blend, BlendSoftLightf);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_HARDLIGHT'
+    .endl()+'      #define BlendOverlayf(base, blend)  (base < 0.5 ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend)))'
+    // .endl()+'       #define BlendOverlay(base, blend)       Blend(base, blend, BlendOverlayf)'
+    .endl()+'      colNew=Blend(blend, base, BlendOverlayf);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_COLORDODGE'
+    .endl()+'      #define BlendColorDodgef(base, blend)   ((blend == 1.0) ? blend : min(base / (1.0 - blend), 1.0))'
+    .endl()+'      colNew=Blend(base, blend, BlendColorDodgef);'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef BM_COLORBURN'
+    .endl()+'      #define BlendColorBurnf(base, blend)    ((blend == 0.0) ? blend : max((1.0 - ((1.0 - base) / blend)), 0.0))'
+    .endl()+'      colNew=Blend(base, blend, BlendColorBurnf);'
+    .endl()+'   #endif'
+
+    .endl()+'   return colNew;'
+
+    .endl()+'}';
+};
+
+
+CGL.TextureEffect.onChangeBlendSelect=function(shader,blendName)
+{
+    if(blendName=='normal') shader.define('BM_NORMAL');
+        else shader.removeDefine('BM_NORMAL');
+
+    if(blendName=='multiply') shader.define('BM_MULTIPLY');
+        else shader.removeDefine('BM_MULTIPLY');
+
+    if(blendName=='average') shader.define('BM_AVERAGE');
+        else shader.removeDefine('BM_AVERAGE');
+
+    if(blendName=='add') shader.define('BM_ADD');
+        else shader.removeDefine('BM_ADD');
+
+    if(blendName=='substract') shader.define('BM_SUBSTRACT');
+        else shader.removeDefine('BM_SUBSTRACT');
+
+    if(blendName=='difference') shader.define('BM_DIFFERENCE');
+        else shader.removeDefine('BM_DIFFERENCE');
+
+    if(blendName=='negation') shader.define('BM_NEGATION');
+        else shader.removeDefine('BM_NEGATION');
+
+    if(blendName=='exclusion') shader.define('BM_EXCLUSION');
+        else shader.removeDefine('BM_EXCLUSION');
+
+    if(blendName=='lighten') shader.define('BM_LIGHTEN');
+        else shader.removeDefine('BM_LIGHTEN');
+
+    if(blendName=='darken') shader.define('BM_DARKEN');
+        else shader.removeDefine('BM_DARKEN');
+
+    if(blendName=='overlay') shader.define('BM_OVERLAY');
+        else shader.removeDefine('BM_OVERLAY');
+
+    if(blendName=='screen') shader.define('BM_SCREEN');
+        else shader.removeDefine('BM_SCREEN');
+
+    if(blendName=='softlight') shader.define('BM_SOFTLIGHT');
+        else shader.removeDefine('BM_SOFTLIGHT');
+
+    if(blendName=='hardlight') shader.define('BM_HARDLIGHT');
+        else shader.removeDefine('BM_HARDLIGHT');
+
+    if(blendName=='color dodge') shader.define('BM_COLORDODGE');
+        else shader.removeDefine('BM_COLORDODGE');
+
+    if(blendName=='color burn') shader.define('BM_COLORBURN');
+        else shader.removeDefine('BM_COLORBURN');
+
+};
+
+CGL.TextureEffect.AddBlendSelect=function(op,name)
+{
+    var p=op.inValueSelect(name,
+        [
+            'normal',
+            'lighten',
+            'darken',
+            'multiply',
+            'average',
+            'add',
+            'substract',
+            'difference',
+            'negation',
+            'exclusion',
+            'overlay',
+            'screen',
+            'color dodge',
+            'color burn',
+            'softlight',
+            'hardlight'
+        ]);
+
+    return p;
+};

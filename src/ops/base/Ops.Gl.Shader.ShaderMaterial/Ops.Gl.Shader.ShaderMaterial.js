@@ -15,8 +15,8 @@ vertexShader.set(shader.getDefaultVertexShader());
 updateShader();
 op.onLoaded=shader.compile;
 
-fragmentShader.onValueChanged=updateShader;
-fragmentShader.onValueChanged=updateShader;
+fragmentShader.onChange=updateShader;
+vertexShader.onChange=updateShader;
 
 render.onTriggered=doRender;
 
@@ -47,6 +47,7 @@ function hasUniformInput(name)
 
 function updateShader()
 {
+    op.log('shader update!');
     shader.setSource(vertexShader.get(),fragmentShader.get());
     shader.compile();
 

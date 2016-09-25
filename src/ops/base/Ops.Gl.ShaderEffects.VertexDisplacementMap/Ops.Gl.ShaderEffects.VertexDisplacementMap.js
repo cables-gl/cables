@@ -6,7 +6,8 @@ op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 
-op.extrude=op.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
+// op.extrude=op.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
+var extrude=op.inValue("extrude",0.1);//addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 
 var flip=op.addInPort(new Port(this,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
@@ -41,7 +42,7 @@ function updateInvert()
 colorize.onValueChanged=updateColorize;
 invert.onValueChanged=updateInvert;
 
-op.extrude.onValueChanged=function(){ if(uniExtrude)uniExtrude.setValue(op.extrude.val); };
+// extrude.onChange=function(){ if(uniExtrude)uniExtrude.setValue(extrude.get()); };
 
 var meth=op.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
     values:['mul xyz','add z','add y','sub z']}));
@@ -87,7 +88,6 @@ var srcHeadVert=''
     .endl()+'uniform sampler2D {{mod}}_texture;'
     .endl()+'uniform float {{mod}}_offsetX;'
     .endl()+'uniform float {{mod}}_offsetY;'
-    .endl()+'uniform vec3 camPos;'
 
     .endl()+'varying float displHeightMapColor;'
 
@@ -223,7 +223,7 @@ op.render.onTriggered=function()
 
 
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
-        uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',op.extrude.val);
+        uniExtrude=new CGL.Uniform(shader,'f',module.prefix+'_extrude',extrude);
         uniOffsetX=new CGL.Uniform(shader,'f',module.prefix+'_offsetX',offsetX);
         uniOffsetY=new CGL.Uniform(shader,'f',module.prefix+'_offsetY',offsetY);
 

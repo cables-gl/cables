@@ -4,17 +4,10 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE,{preview:true }));
-var blendMode=op.addInPort(new Port(op,"blendMode",OP_PORT_TYPE_VALUE,{ display:'dropdown',values:[
-    'normal','lighten','darken','multiply','average','add','substract','difference','negation','exclusion','overlay','screen',
-    'color dodge',
-    'color burn',
-    'softlight',
-    'hardlight'
-    ] }));
+var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
+
 var imageAlpha=op.addInPort(new Port(op,"imageAlpha",OP_PORT_TYPE_TEXTURE,{preview:true }));
-var alphaSrc=op.addInPort(new Port(op,"alphaSrc",OP_PORT_TYPE_VALUE,{ display:'dropdown',values:[
-    'alpha channel','luminance'
-    ] }));
+var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
 var removeAlphaSrc=op.addInPort(new Port(op,"removeAlphaSrc",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 var invAlphaChannel=op.addInPort(new Port(op,"invert alpha channel",OP_PORT_TYPE_VALUE,{ display:'bool' }));
@@ -43,8 +36,10 @@ var srcVert=''
         .endl()+'uniform float posY;'
         .endl()+'uniform float scale;'
         .endl()+'uniform float rotate;'
-        
+
         .endl()+'varying mat3 transform;'
+
+
 
         .endl()+'void main()'
         .endl()+'{'
@@ -60,7 +55,7 @@ var srcVert=''
 // .endl()+'    transform;'
 .endl()+'    transform = mat3(   scale.x * cos( angle ), scale.x * sin( angle ), 0.0,'
 .endl()+'                           - scale.y * sin( angle ), scale.y * cos( angle ), 0.0,'
-.endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y + 0.5, 1.0);'
+.endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x*2.0 + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y*2.0 + 0.5, 1.0);'
 
 .endl()+'       #endif'
 
@@ -76,10 +71,11 @@ var srcFrag=''
     .endl()+'  uniform sampler2D tex;'
     .endl()+'  uniform sampler2D image;'
     .endl()+'#endif'
-    
-    .endl()+'varying mat3 transform;'
 
-    .endl()+'   uniform float rotate;'
+    .endl()+'varying mat3 transform;'
+    .endl()+'uniform float rotate;'
+
+    +CGL.TextureEffect.getBlendCode()
 
     .endl()+'#ifdef HAS_TEXTUREALPHA'
     .endl()+'   uniform sampler2D imageAlpha;'
@@ -92,110 +88,27 @@ var srcFrag=''
     .endl()+'   vec4 blendRGBA=vec4(0.0,0.0,0.0,1.0);'
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'       vec2 tc=texCoord;'
-    .endl()+''
+
     .endl()+'       #ifdef TEX_FLIP_X'
     .endl()+'           tc.x=1.0-tc.x;'
     .endl()+'       #endif'
     .endl()+'       #ifdef TEX_FLIP_Y'
     .endl()+'           tc.y=1.0-tc.y;'
     .endl()+'       #endif'
-    .endl()+''
 
+    .endl()+'       #ifdef TEX_TRANSFORM'
+    .endl()+'           vec3 coordinates=vec3(tc.x, tc.y,1.0);'
+    .endl()+'           tc=(transform * coordinates ).xy;'
+    .endl()+'       #endif'
 
-.endl()+'       #ifdef TEX_TRANSFORM'
-.endl()+'    vec3 coordinates=vec3(tc.x, tc.y,1.0);'
-.endl()+'    tc=(transform * coordinates ).xy;'
-.endl()+'       #endif'
-
-    .endl()+''
-    .endl()+''
     .endl()+'       blendRGBA=texture2D(image,tc);'
-    .endl()+''
-    .endl()+'vec3 blend=blendRGBA.rgb;'
-    .endl()+'vec4 baseRGBA=texture2D(tex,texCoord);'
-    .endl()+'vec3 base=baseRGBA.rgb;'
 
-    .endl()+'vec3 colNew=blend;'
-    .endl()+'#define Blend(base, blend, funcf)       vec3(funcf(base.r, blend.r), funcf(base.g, blend.g), funcf(base.b, blend.b))'
+    .endl()+'       vec3 blend=blendRGBA.rgb;'
+    .endl()+'       vec4 baseRGBA=texture2D(tex,texCoord);'
+    .endl()+'       vec3 base=baseRGBA.rgb;'
 
-
-    .endl()+'#ifdef BM_NORMAL'
-    .endl()+'colNew=blend;'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_MULTIPLY'
-    .endl()+'colNew=base*blend;'
-    .endl()+'#endif'
-
-
-    .endl()+'#ifdef BM_AVERAGE'
-    .endl()+'colNew=((base + blend) / 2.0);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_ADD'
-    .endl()+'colNew=min(base + blend, vec3(1.0));'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_SUBSTRACT'
-    .endl()+'colNew=max(base + blend - vec3(1.0), vec3(0.0));'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_DIFFERENCE'
-    .endl()+'colNew=abs(base - blend);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_NEGATION'
-    .endl()+'colNew=(vec3(1.0) - abs(vec3(1.0) - base - blend));'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_EXCLUSION'
-    .endl()+'colNew=(base + blend - 2.0 * base * blend);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_LIGHTEN'
-    .endl()+'colNew=max(blend, base);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_DARKEN'
-    .endl()+'colNew=min(blend, base);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_OVERLAY'
-    .endl()+'   #define BlendOverlayf(base, blend)  (base < 0.5 ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend)))'
-    // .endl()+'   #define BlendOverlay(base, blend)       Blend(base, blend, BlendOverlayf)'
-    .endl()+'   colNew=Blend(base, blend, BlendOverlayf);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_SCREEN'
-    .endl()+'   #define BlendScreenf(base, blend)       (1.0 - ((1.0 - base) * (1.0 - blend)))'
-    // .endl()+'   #define BlendScreen(base, blend)        Blend(base, blend, BlendScreenf)'
-    .endl()+'   colNew=Blend(base, blend, BlendScreenf);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_SOFTLIGHT'
-    .endl()+'   #define BlendSoftLightf(base, blend)    ((blend < 0.5) ? (2.0 * base * blend + base * base * (1.0 - 2.0 * blend)) : (sqrt(base) * (2.0 * blend - 1.0) + 2.0 * base * (1.0 - blend)))'
-    // .endl()+'   #define BlendSoftLight(base, blend)     Blend(base, blend, BlendSoftLightf)'
-    .endl()+'   colNew=Blend(base, blend, BlendSoftLightf);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_HARDLIGHT'
-    .endl()+'   #define BlendOverlayf(base, blend)  (base < 0.5 ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend)))'
-    // .endl()+'   #define BlendOverlay(base, blend)       Blend(base, blend, BlendOverlayf)'
-    .endl()+'   colNew=Blend(blend, base, BlendOverlayf);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_COLORDODGE'
-    .endl()+'   #define BlendColorDodgef(base, blend)   ((blend == 1.0) ? blend : min(base / (1.0 - blend), 1.0))'
-    .endl()+'   colNew=Blend(base, blend, BlendColorDodgef);'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef BM_COLORBURN'
-    .endl()+'   #define BlendColorBurnf(base, blend)    ((blend == 0.0) ? blend : max((1.0 - ((1.0 - base) / blend)), 0.0))'
-    .endl()+'   colNew=Blend(base, blend, BlendColorBurnf);'
-    .endl()+'#endif'
-
-
-
+    .endl()+'       vec3 colNew=blend;'
+    .endl()+'       colNew=_blend(base,blend);'
 
     .endl()+'#ifdef REMOVE_ALPHA_SRC'
     .endl()+'   blendRGBA.a=1.0;'
@@ -221,15 +134,7 @@ var srcFrag=''
 
     .endl()+'#endif'
 
-
-    // .endl()+'vec4 finalColor=vec4(colNew*amount*blendRGBA.a,blendRGBA.a);'
-    // .endl()+'finalColor+=vec4(base*(1.0-amount)*baseRGBA.a,baseRGBA.a);'//, base ,1.0-blendRGBA.a*amount);'
     .endl()+'blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);'
-    // .endl()+'blendRGBA.a=baseRGBA.a+blendRGBA.a;'
-
-
-    // .endl()+'blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);'
-    // .endl()+'blendRGBA.a=alpha;'
 
     .endl()+'#endif'
 
@@ -273,13 +178,13 @@ alphaSrc.set("alpha channel");
     //
     var flipX=op.addInPort(new Port(op,"flip x",OP_PORT_TYPE_VALUE,{ display:'bool' }));
     var flipY=op.addInPort(new Port(op,"flip y",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-    
+
     flipX.onValueChanged=function()
     {
         if(flipX.get()) shader.define('TEX_FLIP_X');
             else shader.removeDefine('TEX_FLIP_X');
     };
-    
+
     flipY.onValueChanged=function()
     {
         if(flipY.get()) shader.define('TEX_FLIP_Y');
@@ -315,69 +220,19 @@ alphaSrc.set("alpha channel");
         }
         else
         {
-            shader.removeDefine('TEX_TRANSFORM');   
+            shader.removeDefine('TEX_TRANSFORM');
         }
     }
-    
+
     scale.onChange=updateTransform;
     posX.onChange=updateTransform;
     posY.onChange=updateTransform;
     rotate.onChange=updateTransform;
-
 }
-
 
 blendMode.onValueChanged=function()
 {
-    if(blendMode.get()=='normal') shader.define('BM_NORMAL');
-        else shader.removeDefine('BM_NORMAL');
-
-    if(blendMode.get()=='multiply') shader.define('BM_MULTIPLY');
-        else shader.removeDefine('BM_MULTIPLY');
-
-    if(blendMode.get()=='average') shader.define('BM_AVERAGE');
-        else shader.removeDefine('BM_AVERAGE');
-
-    if(blendMode.get()=='add') shader.define('BM_ADD');
-        else shader.removeDefine('BM_ADD');
-
-    if(blendMode.get()=='substract') shader.define('BM_SUBSTRACT');
-        else shader.removeDefine('BM_SUBSTRACT');
-
-    if(blendMode.get()=='difference') shader.define('BM_DIFFERENCE');
-        else shader.removeDefine('BM_DIFFERENCE');
-
-    if(blendMode.get()=='negation') shader.define('BM_NEGATION');
-        else shader.removeDefine('BM_NEGATION');
-
-    if(blendMode.get()=='exclusion') shader.define('BM_EXCLUSION');
-        else shader.removeDefine('BM_EXCLUSION');
-
-    if(blendMode.get()=='lighten') shader.define('BM_LIGHTEN');
-        else shader.removeDefine('BM_LIGHTEN');
-
-    if(blendMode.get()=='darken') shader.define('BM_DARKEN');
-        else shader.removeDefine('BM_DARKEN');
-
-    if(blendMode.get()=='overlay') shader.define('BM_OVERLAY');
-        else shader.removeDefine('BM_OVERLAY');
-
-    if(blendMode.get()=='screen') shader.define('BM_SCREEN');
-        else shader.removeDefine('BM_SCREEN');
-
-    if(blendMode.get()=='softlight') shader.define('BM_SOFTLIGHT');
-        else shader.removeDefine('BM_SOFTLIGHT');
-
-    if(blendMode.get()=='hardlight') shader.define('BM_HARDLIGHT');
-        else shader.removeDefine('BM_HARDLIGHT');
-
-    if(blendMode.get()=='color dodge') shader.define('BM_COLORDODGE');
-        else shader.removeDefine('BM_COLORDODGE');
-
-    if(blendMode.get()=='color burn') shader.define('BM_COLORBURN');
-        else shader.removeDefine('BM_COLORBURN');
-
-    shader.compile();
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount.get());
@@ -401,7 +256,6 @@ function doRender()
 
     if(image.get() && image.get().tex)
     {
-
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
@@ -449,4 +303,3 @@ imageAlpha.onPreviewChanged=function()
 };
 
 render.onTriggered=doRender;
-
