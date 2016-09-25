@@ -2,4 +2,4 @@
 
 *Ops.Gl.TextureEffects.ImageCompose*  
 
-// TODO
+Compose Images and effects as layers to generate new Images.
