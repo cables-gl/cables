@@ -1,4 +1,4 @@
-op.name="FFTAreaAverage";
+top.name="FFTAreaAverage";
 
 var fftArr=this.addInPort(new Port(this, "FFT Array",OP_PORT_TYPE_ARRAY));
 var refresh=this.addInPort(new Port(this,"refresh",OP_PORT_TYPE_FUNCTION));
@@ -7,7 +7,8 @@ var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE,{display:'range'}));
 var w=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
 var h=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
+// var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texOut=op.outTexture("texture_out");
 var value=op.addOutPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
 
 w.set(0.2);
@@ -71,7 +72,6 @@ refresh.onTriggered=function()
     ctx.rect(areaX,areaY,areaW,areaH);
     ctx.stroke();
     
-
     var val=0;
     var count=0;
     for(var xc=areaX;xc<areaX+areaW;xc++)
@@ -92,7 +92,7 @@ refresh.onTriggered=function()
     ctx.fillText(arr.length+' ...', 10, height-10);
 
     if(texOut.get()) texOut.get().initTexture(canvImage);
-        else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage) );
+        else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage,256,256) );
 
 };
 
