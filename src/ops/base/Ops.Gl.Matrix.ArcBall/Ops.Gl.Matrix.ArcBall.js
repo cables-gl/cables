@@ -8,7 +8,7 @@ var mulScale=op.addInPort(new Port(op,"Mul Scale",OP_PORT_TYPE_VALUE));
 var minScale=op.addInPort(new Port(op,"Min Scale",OP_PORT_TYPE_VALUE));
 var maxScale=op.addInPort(new Port(op,"Max Scale",OP_PORT_TYPE_VALUE));
 
-var useWheel=op.inValueBool('Use Mouse Wheel',false);
+var useWheel=op.inValueBool('Use Mouse Wheel',true);
 
 var inRadius=op.inValue("Radius");
 
