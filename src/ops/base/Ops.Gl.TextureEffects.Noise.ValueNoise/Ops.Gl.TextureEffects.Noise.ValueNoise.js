@@ -2,12 +2,12 @@ op.name="ValueNoise";
 
 var cgl=op.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var x=op.inValue("X",0);
 var y=op.inValue("Y",0);
 var z=op.inValue("Z",0);
 var scale=op.inValue("Scale",4);
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
 
