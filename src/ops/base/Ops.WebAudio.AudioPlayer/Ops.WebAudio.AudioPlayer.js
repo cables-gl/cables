@@ -177,7 +177,6 @@ this.file.onValueChanged = function()
         self.media = audioContext.createMediaElementSource(self.audio);
         self.media.connect(self.filter);
         self.audioOut.val = self.filter;
-
     }
     else
     {
