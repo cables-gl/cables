@@ -12,6 +12,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 // var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texOut=op.outTexture("texture_out");
 
+texOut.set(null);
 var cgl=op.patch.cgl;
 var effect=null;
 
@@ -49,7 +50,8 @@ function initEffect()
         });
 
     effect.setSourceTexture(tex);
-    texOut.set(effect.getCurrentSourceTexture());
+    texOut.set(null);
+    // texOut.set(effect.getCurrentSourceTexture());
 
     reInitEffect=false;
 
@@ -83,12 +85,12 @@ function updateResolution()
         tex.setSize(w,h);
 
         effect.setSourceTexture(tex);
-        texOut.set(effect.getCurrentSourceTexture());
+        // texOut.set(effect.getCurrentSourceTexture());
     }
 
     if(texOut.get())
         if(!texOut.get().isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
-            else op.uiAttr({warning:''});
+            else op.uiAttr({warning:''}); //todo only when needed...
 
 }
 
