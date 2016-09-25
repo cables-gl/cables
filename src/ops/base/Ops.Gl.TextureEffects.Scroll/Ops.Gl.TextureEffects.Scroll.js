@@ -6,8 +6,11 @@ this.name='Scroll';
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.amountX=this.addInPort(new Port(this,"amountX",OP_PORT_TYPE_VALUE));
-this.amountY=this.addInPort(new Port(this,"amountY",OP_PORT_TYPE_VALUE));
+var amountX=this.addInPort(new Port(this,"amountX",OP_PORT_TYPE_VALUE));
+var amountY=this.addInPort(new Port(this,"amountY",OP_PORT_TYPE_VALUE));
+
+amountY.set(0.0);
+amountX.set(0.0);
 
 var shader=new CGL.Shader(cgl);
 this.onLoaded=shader.compile;
@@ -51,19 +54,17 @@ this.render.onTriggered=function()
     self.trigger.trigger();
 };
 
-var amountXUniform=new CGL.Uniform(shader,'f','amountX',1.0);
+var amountXUniform=new CGL.Uniform(shader,'f','amountX',amountX);
+var amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY);
 
-this.amountX.onValueChanged=function()
-{
-    amountXUniform.setValue(self.amountX.val);
-};
+// this.amountX.onValueChanged=function()
+// {
+//     amountXUniform.setValue(self.amountX.val);
+// };
 
-var amountYUniform=new CGL.Uniform(shader,'f','amountY',1.0);
 
-this.amountY.onValueChanged=function()
-{
-    amountYUniform.setValue(self.amountY.val);
-};
+// this.amountY.onValueChanged=function()
+// {
+//     amountYUniform.setValue(self.amountY.val);
+// };
 
-this.amountY.val=0.0;
-this.amountX.val=0.0;

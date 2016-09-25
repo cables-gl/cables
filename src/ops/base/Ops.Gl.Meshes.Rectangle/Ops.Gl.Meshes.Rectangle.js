@@ -118,6 +118,7 @@ function rebuild()
     geom.texCoords=tc;
     geom.verticesIndices=indices;
     geom.vertexNormals=norms;
+    geom.calculateNormals({"forceZUp":true});
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);

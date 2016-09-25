@@ -1,11 +1,5 @@
 op.name='Audio Analyser';
 
-window.AudioContext = window.AudioContext||window.webkitAudioContext;
-
-if(!window.audioContext) {
-    window.audioContext = new AudioContext();
-}
-
 var audioIn=op.addInPort(new Port(op,"audio in",OP_PORT_TYPE_OBJECT));
 var refresh=op.addInPort(new Port(op,"refresh",OP_PORT_TYPE_FUNCTION));
 
@@ -15,6 +9,9 @@ var fftOut=op.addOutPort(new Port(op, "fft",OP_PORT_TYPE_ARRAY));
 
 var oldAudioIn=null;
 var next=op.outFunction("Next");
+
+window.AudioContext = window.AudioContext||window.webkitAudioContext;
+if(!window.audioContext) window.audioContext = new AudioContext();
 
 var analyser = audioContext.createAnalyser();
 analyser.smoothingTimeConstant = 0.3;
@@ -26,7 +23,7 @@ audioOut.set( analyser );
 
 refresh.onTriggered = function()
 {
-    var array =  new Uint8Array(analyser.frequencyBinCount);
+    var array = new Uint8Array(analyser.frequencyBinCount);
     
     if(!array)return;
     analyser.getByteFrequencyData(array);
@@ -49,6 +46,8 @@ refresh.onTriggered = function()
     analyser.getByteFrequencyData(fftDataArray);
     fftOut.set(fftDataArray);
     
+    
+    
     next.trigger();
 };
 
@@ -56,10 +55,7 @@ audioIn.onChange = function()
 {
     if (!audioIn.get())
     {
-        if(oldAudioIn)
-        {
-            oldAudioIn.disconnect(analyser);
-        }
+        if(oldAudioIn) oldAudioIn.disconnect(analyser);
     }
     else 
     {

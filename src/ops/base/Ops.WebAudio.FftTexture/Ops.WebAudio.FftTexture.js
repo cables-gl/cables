@@ -16,7 +16,7 @@ var tex=new CGL.Texture(cgl,
 var data=[];
 
 var line=0;
-var height=256;
+
 
 var buffer=new Uint8Array();
 
@@ -25,18 +25,24 @@ refresh.onTriggered=function()
     var arr=fftArr.get();
     if(!arr)return;
     var width=arr.length;
+    var height=width;
     if(!width)return;
+    
 
-    if(data.length===0)
+    if(data.length===0 || data.length!=width*4)
     {
+        // console.log(width*height*4);
+        
         data.length=width*4;
         buffer=new Uint8Array(width*height*4);
     }
-    if(line>=height-1)
+    line++;
+    if(line>=height)
     {
         line=0;
     }
-    line++;
+    
+    
 
     position.set(line/height);
     
@@ -49,6 +55,14 @@ refresh.onTriggered=function()
     }
 
     buffer.set(data,line*width*4);
+
+// console.log(        width,height);
+
+    if(tex.width!=width || tex.height!=height)
+    {
+        tex.setSize(width,height);
+        console.log('fft texture size',width,height);
+    }
     
     tex.initFromData(
         buffer,

@@ -44,7 +44,8 @@ function initEffect()
     tex=new CGL.Texture(cgl,
         {
             isFloatingPointTexture:fpTexture.get(),
-            filter:CGL.Texture.FILTER_LINEAR
+            filter:CGL.Texture.FILTER_LINEAR,
+            
         });
 
     effect.setSourceTexture(tex);
