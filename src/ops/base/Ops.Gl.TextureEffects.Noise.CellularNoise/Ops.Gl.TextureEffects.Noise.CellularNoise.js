@@ -1,15 +1,15 @@
-op.name="PerlinNoise";
+op.name="CellularNoise";
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var x=op.inValue("X",0);
 var y=op.inValue("Y",0);
 var z=op.inValue("Z",0);
 var scale=op.inValue("Scale",22);
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-shader.setSource(shader.getDefaultVertexShader(),attachments.perlinnoise3d_frag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.cellularnoise3d_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 var uniZ=new CGL.Uniform(shader,'f','z',z);

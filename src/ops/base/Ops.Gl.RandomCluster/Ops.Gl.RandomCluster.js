@@ -1,5 +1,3 @@
-// todo: move to ops.gl
-
 op.name='random cluster';
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
@@ -14,7 +12,6 @@ var round=op.inValueBool('round',false);
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 var idx=op.addOutPort(new Port(op,"index")) ;
 var rnd=op.addOutPort(new Port(op,"rnd")) ;
-
 
 var cgl=op.patch.cgl;
 var randoms=[];

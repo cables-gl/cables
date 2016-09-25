@@ -1,19 +1,16 @@
-var self=this;
-var cgl=this.patch.cgl;
-
-// use this: https://www.shadertoy.com/view/XsX3zB
-
 this.name='SimplexNoise';
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-var smoothness=this.addInPort(new Port(this,"smoothness",OP_PORT_TYPE_VALUE,{  }));
-var scale=this.addInPort(new Port(this,"scale",OP_PORT_TYPE_VALUE,{  }));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var smoothness=op.addInPort(new Port(op,"smoothness",OP_PORT_TYPE_VALUE,{  }));
+var scale=op.addInPort(new Port(op,"scale",OP_PORT_TYPE_VALUE,{  }));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE,{  }));
-var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE,{  }));
-var time=this.addInPort(new Port(this,"time",OP_PORT_TYPE_VALUE,{  }));
+var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE,{  }));
+var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE,{  }));
+var time=op.addInPort(new Port(op,"time",OP_PORT_TYPE_VALUE,{  }));
+
+var cgl=op.patch.cgl;
 
 time.set(0.314);
 smoothness.set(1.0);
@@ -22,7 +19,6 @@ x.set(0);
 y.set(0);
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
