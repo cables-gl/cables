@@ -1,25 +1,24 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
 
-this.name='ViewPortSize';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+op.name='ViewPortSize';
+var exe=op.inFunction("exe");
+var trigger=op.outFunction("trigger");
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var x=op.addOutPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
+var y=op.addOutPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
+var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
+var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
-this.x=this.addOutPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
-this.y=this.addOutPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-
-this.width=this.addOutPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-this.height=this.addOutPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
-
+var cgl=op.patch.cgl;
 var w=0,h=0,x=0,y=0;
 
-this.exe.onTriggered=function()
+exe.onTriggered=function()
 {
-    if(cgl.getViewPort()[0]!=x) w=self.x.val=cgl.getViewPort()[0];
-    if(cgl.getViewPort()[1]!=y) h=self.y.val=cgl.getViewPort()[1];
-    if(cgl.getViewPort()[2]!=h) h=self.width.val=cgl.getViewPort()[2];
-    if(cgl.getViewPort()[3]!=w) w=self.height.val=cgl.getViewPort()[3];
-    self.trigger.trigger();
+    var vp=cgl.getViewPort();
+    
+    if(vp[0]!=x) w=x.set(vp[0]);
+    if(vp[1]!=y) h=y.set(vp[1]);
+    if(vp[2]!=h) h=width.set(vp[2]);
+    if(vp[3]!=w) w=height.set(vp[3]);
+    
+    trigger.trigger();
 };
