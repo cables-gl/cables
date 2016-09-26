@@ -16,7 +16,7 @@ var tex=new CGL.Texture(cgl,
 var data=[];
 
 var line=0;
-var height=512;
+var height=256;
 
 var buffer=new Uint8Array();
 
