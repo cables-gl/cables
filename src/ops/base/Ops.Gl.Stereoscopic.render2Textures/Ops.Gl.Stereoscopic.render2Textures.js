@@ -18,7 +18,6 @@ var fb=[new CGL.Framebuffer(cgl,w,h),new CGL.Framebuffer(cgl,w,h)];
 tex0.set( fb[0].getTextureColor() );
 tex1.set( fb[1].getTextureColor() );
 
-        //   mat4.perspectiveFromFieldOfView(projectionMat, eye.fieldOfView, 0.1, 1024.0);
 
 
 
