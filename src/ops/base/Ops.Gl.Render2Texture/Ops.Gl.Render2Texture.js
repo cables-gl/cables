@@ -11,8 +11,8 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 // var tex=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 // var texDepth=op.addOutPort(new Port(op,"textureDepth",OP_PORT_TYPE_TEXTURE));
 
-var tex=op.outObject("texture");
-var texDepth=op.outObject("textureDepth");
+var tex=op.outTexture("texture");
+var texDepth=op.outTexture("textureDepth");
 
 var fpTexture=op.inValueBool("HDR");
 
@@ -35,9 +35,7 @@ fpTexture.onChange=function()
 
 var onFilterChange=function()
 {
-    if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
-    else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
-    else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+    reInitFb=true;
 };
 
 function doRender()
@@ -47,6 +45,10 @@ function doRender()
     {
         if(fb) fb.delete();
         fb=new CGL.Framebuffer(cgl,512,512,{isFloatingPointTexture:fpTexture.get()});
+        if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
+            else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
+            else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+
         tex.set( fb.getTextureColor() );
         texDepth.set ( fb.getTextureDepth() );
         reInitFb=false;

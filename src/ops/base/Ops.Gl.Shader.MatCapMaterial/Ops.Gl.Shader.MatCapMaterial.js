@@ -17,7 +17,7 @@ this.textureNormal=this.addInPort(new Port(this,"normal",OP_PORT_TYPE_TEXTURE,{p
 this.textureNormalUniform=null;
 
 this.normalScale=this.addInPort(new Port(this,"normalScale",OP_PORT_TYPE_VALUE,{display:'range'}));
-this.normalScale.set(0.4);
+this.normalScale.set(1.0);
 this.normalScaleUniform=null;
 
 this.textureSpec=this.addInPort(new Port(this,"specular",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
