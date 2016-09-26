@@ -11,7 +11,8 @@ var font=op.addInPort(new Port(op,"font",OP_PORT_TYPE_VALUE,{type:'string'}));
 var lineDistance=op.addInPort(new Port(op,"line distance"));
 var border=op.addInPort(new Port(op,"border"));
 
-var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
+// var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
+var textureOut=op.outTexture("texture");
 var outRatio=op.addOutPort(new Port(op,"Ratio",OP_PORT_TYPE_VALUE));
 var cgl=op.patch.cgl;
 

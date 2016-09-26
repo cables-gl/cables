@@ -1,4 +1,4 @@
-op.name="FFTAreaAverage";
+top.name="FFTAreaAverage";
 
 var fftArr=this.addInPort(new Port(this, "FFT Array",OP_PORT_TYPE_ARRAY));
 var refresh=this.addInPort(new Port(this,"refresh",OP_PORT_TYPE_FUNCTION));
@@ -72,7 +72,6 @@ refresh.onTriggered=function()
     ctx.rect(areaX,areaY,areaW,areaH);
     ctx.stroke();
     
-
     var val=0;
     var count=0;
     for(var xc=areaX;xc<areaX+areaW;xc++)
@@ -93,7 +92,7 @@ refresh.onTriggered=function()
     ctx.fillText(arr.length+' ...', 10, height-10);
 
     if(texOut.get()) texOut.get().initTexture(canvImage);
-        else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage) );
+        else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage,256,256) );
 
 };
 
