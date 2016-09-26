@@ -7,7 +7,8 @@ var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE,{display:'range'}));
 var w=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
 var h=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
+// var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texOut=op.outTexture("texture_out");
 var value=op.addOutPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
 
 w.set(0.2);

@@ -32,7 +32,7 @@ var srcFrag=''
     .endl()+''
 
     .endl()+'       float x=(texCoord.x);'
-    .endl()+'       if(texCoord.x>0.5)x=1.0-texCoord.x;'
+    .endl()+'       if(texCoord.x>=0.5)x=1.0-texCoord.x;'
     
     .endl()+'       x*=width*2.0;'
     .endl()+'       if(flip==1.0)x=1.0-x;'

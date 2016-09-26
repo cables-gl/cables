@@ -1,14 +1,14 @@
 op.name='Audio Analyser';
 
-var audioIn=op.addInPort(new Port(op,"audio in",OP_PORT_TYPE_OBJECT));
 var refresh=op.addInPort(new Port(op,"refresh",OP_PORT_TYPE_FUNCTION));
+var audioIn=op.addInPort(new Port(op,"audio in",OP_PORT_TYPE_OBJECT));
 
+var next=op.outFunction("Next");
 var audioOut=op.addOutPort(new Port(op, "audio out",OP_PORT_TYPE_OBJECT));
 var avgVolume=op.addOutPort(new Port(op, "average volume",OP_PORT_TYPE_VALUE));
 var fftOut=op.addOutPort(new Port(op, "fft",OP_PORT_TYPE_ARRAY));
 
 var oldAudioIn=null;
-var next=op.outFunction("Next");
 
 window.AudioContext = window.AudioContext||window.webkitAudioContext;
 if(!window.audioContext) window.audioContext = new AudioContext();
@@ -41,7 +41,7 @@ refresh.onTriggered = function()
 
     average = values / array.length;
     
-    avgVolume.set(average);
+    avgVolume.set(average/128);
 
     analyser.getByteFrequencyData(fftDataArray);
     fftOut.set(fftDataArray);

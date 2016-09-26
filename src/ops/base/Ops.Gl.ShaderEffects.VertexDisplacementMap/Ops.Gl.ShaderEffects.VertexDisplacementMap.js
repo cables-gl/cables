@@ -7,7 +7,7 @@ op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 
 // op.extrude=op.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
-var extrude=op.inValue("extrude",0.1);//addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
+var extrude=op.inValue("extrude",0.5);//addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 
 var flip=op.addInPort(new Port(this,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 

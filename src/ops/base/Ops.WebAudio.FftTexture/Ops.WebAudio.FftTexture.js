@@ -1,7 +1,7 @@
 op.name="FftTexture";
 
-var fftArr=this.addInPort(new Port(this, "FFT Array",OP_PORT_TYPE_ARRAY));
 var refresh=this.addInPort(new Port(this,"refresh",OP_PORT_TYPE_FUNCTION));
+var fftArr=this.addInPort(new Port(this, "FFT Array",OP_PORT_TYPE_ARRAY));
 
 var texOut=op.outTexture("texture_out");
 
@@ -16,7 +16,7 @@ var tex=new CGL.Texture(cgl,
 var data=[];
 
 var line=0;
-
+var height=512;
 
 var buffer=new Uint8Array();
 
@@ -25,7 +25,7 @@ refresh.onTriggered=function()
     var arr=fftArr.get();
     if(!arr)return;
     var width=arr.length;
-    var height=width;
+    // var height=width;
     if(!width)return;
     
 
