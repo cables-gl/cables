@@ -85,7 +85,7 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
     var x,y,z;
 
     var geom=new CGL.Geometry();
-    var nVert = slices*(stacks-1);
+    var nVert = slices*(stacks-1)+2;
 
     /* precompute values on unit circle */
     var table1=circleTable(-slices,false);
