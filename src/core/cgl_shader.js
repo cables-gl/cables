@@ -372,7 +372,10 @@ CGL.Shader=function(_cgl,_name)
         if(normalMatrixUniform)
         {
             var normalMatrix = mat4.create();
-            mat4.invert(normalMatrix,cgl.mvMatrix);
+
+            mat4.mul(normalMatrix,cgl.vMatrix,cgl.mvMatrix);
+
+            mat4.invert(normalMatrix,normalMatrix);
             mat4.transpose(normalMatrix, normalMatrix);
 
             cgl.gl.uniformMatrix4fv(normalMatrixUniform, false, normalMatrix);

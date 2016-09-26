@@ -287,7 +287,7 @@ var srcVert=''
     .endl()+'       texCoord=(projMatrix * mvMatrix*pos).xz*0.1;'
     .endl()+'   #endif'
 
-    .endl()+'    gl_Position = projMatrix * mvMatrix * pos;'
+    .endl()+'   gl_Position = projMatrix * mvMatrix * pos;'
 
     .endl()+'}';
 
