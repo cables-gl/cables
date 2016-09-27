@@ -69,12 +69,11 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
     this.width=w;
     this.height=h;
 
-this._setFilter();
+    this._setFilter();
+
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
-
-
 
     if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP)
     {
@@ -91,12 +90,15 @@ CGL.Texture.prototype.initTexture=function(img,filter)
     if(img.height)this.height=img.height;
     if(filter)this.filter=filter;
 
+this._setFilter();
+
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, this.image);
 
     this._setFilter();
+
 
     if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP)
         this._cgl.gl.generateMipmap(this.texTarget);
@@ -111,7 +113,23 @@ CGL.Texture.prototype.delete=function()
 
 CGL.Texture.prototype.isPowerOfTwo=function()
 {
-    return CGL.Texture.isPowerOfTwo(this.width) && CGL.Texture.isPowerOfTwo(this.width);
+    return CGL.Texture.isPowerOfTwo(this.width) && CGL.Texture.isPowerOfTwo(this.height);
+};
+
+CGL.Texture.prototype.printInfo=function()
+{
+    console.log("power of two:",this.isPowerOfTwo() );
+    console.log("size:",this.width,this.height );
+
+
+    if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE) console.log("wrap: CLAMP_TO_EDGE");
+    if(this.wrap==CGL.Texture.WRAP_REPEAT) console.log("wrap: WRAP_REPEAT");
+    if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT) console.log("wrap: WRAP_MIRRORED_REPEAT");
+
+    if(this.filter==CGL.Texture.FILTER_NEAREST) console.log("wrap: CLAMP_TO_EDGE");
+    if(this.filter==CGL.Texture.FILTER_LINEAR) console.log("wrap: WRAP_REPEAT");
+    if(this.filter==CGL.Texture.FILTER_MIPMAP) console.log("wrap: WRAP_MIRRORED_REPEAT");
+
 };
 
 CGL.Texture.prototype._setFilter=function()
@@ -123,6 +141,9 @@ CGL.Texture.prototype._setFilter=function()
 
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.CLAMP_TO_EDGE);
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.CLAMP_TO_EDGE);
+
+        this.filter=this._cgl.gl.NEAREST;
+        this.wrap=this._cgl.gl.CLAMP_TO_EDGE;
     }
     else
     {
