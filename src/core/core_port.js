@@ -40,7 +40,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.__defineGetter__("val", function()
     {
-        if(!this._warnedDeprecated) console.log('deprecated .val used',self.parent.name);
+        // if(!this._warnedDeprecated) console.log('deprecated .val get used',this.parent.name);
         this._warnedDeprecated=true;
         return this.get();
     });
@@ -48,7 +48,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.__defineSetter__("val", function(v)
     {
         this.setValue(v);
-        if(!this._warnedDeprecated)console.log('deprecated .val used',self.parent.name);
+        // if(!this._warnedDeprecated)console.log('deprecated .val set used',this.parent.name);
         this._warnedDeprecated=true;
     });
 
