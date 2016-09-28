@@ -12,3 +12,4 @@ function exec()
 }
 
 number1.onValueChanged=exec;
+decPlaces.onValueChanged=exec;

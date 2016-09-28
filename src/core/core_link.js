@@ -26,11 +26,9 @@ CABLES.Link = function(scene)
         var v=this.portOut.get();
         // if(v!=v)return;
 
-        if(
-            v==v &&  // NaN is the only JavaScript value that is treated as unequal to itself
-            this.portIn.get()!=v
-        )
-        this.portIn.set(v);
+        if( v==v &&  // NaN is the only JavaScript value that is treated as unequal to itself
+            this.portIn.get()!=v )
+                this.portIn.set(v);
     };
 
     CABLES.Link.prototype.getOtherPort=function(p)
@@ -44,6 +42,7 @@ CABLES.Link = function(scene)
         if(this.portIn)this.portIn.removeLink(this);
         if(this.portOut)this.portOut.removeLink(this);
         if(this.scene)this.scene.onUnLink(this.portIn,this.portOut);
+
         this.portIn=null;
         this.portOut=null;
         this.scene=null;
@@ -56,6 +55,7 @@ CABLES.Link = function(scene)
             console.log('cannot link ports!');
             return false;
         }
+
         if(p1.direction==PORT_DIR_IN)
         {
             this.portIn=p1;

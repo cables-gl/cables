@@ -30,7 +30,8 @@ var timedLoader=0;
 
 var setTempTexture=function()
 {
-    CGL.Texture.getTempTexture(cgl);
+    var t=CGL.Texture.getTempTexture(cgl);
+    textureOut.set(t);
 };
 
 function reload(nocache)
@@ -86,8 +87,9 @@ function realReload(nocache)
                 filter:cgl_filter
             });
 
-            textureOut.set(null);
-            textureOut.set(tex);
+        textureOut.set(null);
+        textureOut.set(tex);
+
         if(!textureOut.get() && nocache)
         {
         }

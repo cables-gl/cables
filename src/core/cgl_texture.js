@@ -90,7 +90,7 @@ CGL.Texture.prototype.initTexture=function(img,filter)
     if(img.height)this.height=img.height;
     if(filter)this.filter=filter;
 
-this._setFilter();
+// this._setFilter();
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
