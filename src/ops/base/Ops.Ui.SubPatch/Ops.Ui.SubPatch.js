@@ -40,10 +40,7 @@ function saveData()
 
 function addPortListener(newPort,newPortInPatch)
 {
-    
     console.log('newPort',newPort.name);
-    
-    
     if(newPort.direction==PORT_DIR_IN)
     {
         if(newPort.type==OP_PORT_TYPE_FUNCTION)
@@ -80,9 +77,9 @@ function setupPorts()
             var patchInputOp=getSubPatchInputOp();
             var newPortInPatch=patchInputOp.addOutPort(new Port(patchInputOp,ports[i].name,ports[i].type));
 
+            newPort.ignoreValueSerialize=true;
             addPortListener(newPort,newPortInPatch);
         }
-        dataLoaded=true;
     }
 
     for(i=0;i<portsOut.length;i++)
@@ -93,10 +90,14 @@ function setupPorts()
             var patchOutputOp=getSubPatchOutputOp();
             var newPortOutPatch=patchOutputOp.addInPort(new Port(patchOutputOp,portsOut[i].name,portsOut[i].type));
 
+            newPortOut.ignoreValueSerialize=true;
+
             addPortListener(newPortOutPatch,newPortOut);
         }
-        dataLoaded=true;
     }
+    
+    dataLoaded=true;
+    
 }
 
 op.dyn.onLinkChanged=function()
@@ -166,8 +167,8 @@ op.dynOut.onLinkChanged=function()
     {
         setTimeout(function()
         {
-        op.dynOut.removeLinks();
-        gui.patch().removeDeadLinks();
+            op.dynOut.removeLinks();
+            gui.patch().removeDeadLinks();
         },100);
 
 
