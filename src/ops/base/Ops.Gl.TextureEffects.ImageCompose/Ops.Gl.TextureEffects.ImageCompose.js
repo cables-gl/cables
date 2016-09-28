@@ -82,7 +82,9 @@ function updateResolution()
     {
         height.set(h);
         width.set(w);
+        tex.filter=CGL.Texture.FILTER_LINEAR;
         tex.setSize(w,h);
+        
 
         effect.setSourceTexture(tex);
         // texOut.set(effect.getCurrentSourceTexture());
@@ -151,11 +153,11 @@ var doRender=function()
 
 function onFilterChange()
 {
-    var newFilter=tex.filter;
-    if(tfilter.get()=='nearest') newFilter=CGL.Texture.FILTER_NEAREST;
-    if(tfilter.get()=='linear')  newFilter=CGL.Texture.FILTER_LINEAR;
-    if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
-    if(newFilter!=tex.filter)tex.width=0;
+    var newFilter=CGL.Texture.FILTER_LINEAR;
+    // if(tfilter.get()=='nearest') newFilter=CGL.Texture.FILTER_NEAREST;
+    // if(tfilter.get()=='linear')  newFilter=CGL.Texture.FILTER_LINEAR;
+    // if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
+    // if(newFilter!=tex.filter)tex.width=0;
     tex.filter=newFilter;
 
     effect.setSourceTexture(tex);

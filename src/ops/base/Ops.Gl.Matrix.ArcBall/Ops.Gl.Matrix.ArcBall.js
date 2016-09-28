@@ -29,7 +29,6 @@ var finalRotMatrix = mat4.create();
 inRadius.onChange=function()
 {
     radius=inRadius.get();
-    console.log(radius);
 };
 
 render.onTriggered=function()
