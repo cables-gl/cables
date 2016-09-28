@@ -97,6 +97,7 @@ CABLES.Op = function()
     CABLES.Op.prototype.inFunction=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
     CABLES.Op.prototype.inValue=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
     CABLES.Op.prototype.inValueBool=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{display:'bool'})); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inValueString=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":'string'})); if(v!==undefined)p.set(v); return p; };
     CABLES.Op.prototype.inValueSelect=function(name,values,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined)p.set(v); return p; };
 
     CABLES.Op.prototype.inObject=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); return p; };
