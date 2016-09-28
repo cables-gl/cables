@@ -16,6 +16,7 @@ var textureOut=op.outTexture("texture");
 var outRatio=op.addOutPort(new Port(op,"Ratio",OP_PORT_TYPE_VALUE));
 var cgl=op.patch.cgl;
 
+
 border.set(0);
 texWidth.set(512);
 texHeight.set(512);
@@ -66,7 +67,7 @@ function refresh()
         ctx.stroke();
     }
 
-    if(text.get())
+    // if(text.get())
     {
         var txt=(text.get()+'').replace(/<br\/>/g, '\n');
         var strings = txt.split("\n");

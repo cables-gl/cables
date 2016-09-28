@@ -40,10 +40,8 @@ function saveData()
 
 function addPortListener(newPort,newPortInPatch)
 {
-    
     console.log('newPort',newPort.name);
-    
-    
+
     if(newPort.direction==PORT_DIR_IN)
     {
         if(newPort.type==OP_PORT_TYPE_FUNCTION)
@@ -56,11 +54,9 @@ function addPortListener(newPort,newPortInPatch)
         }
         else
         {
-
             newPort.onChange=function()
             {
-                if(newPortInPatch.isLinked())
-                    newPortInPatch.set(newPort.get());
+                newPortInPatch.set(newPort.get());
             };
         }
     }
@@ -129,7 +125,6 @@ op.dyn.onLinkChanged=function()
     }
     else
     {
-
         setTimeout(function()
         {
             op.dyn.removeLinks();
@@ -166,8 +161,8 @@ op.dynOut.onLinkChanged=function()
     {
         setTimeout(function()
         {
-        op.dynOut.removeLinks();
-        gui.patch().removeDeadLinks();
+            op.dynOut.removeLinks();
+            gui.patch().removeDeadLinks();
         },100);
 
 
@@ -223,11 +218,8 @@ op.addSubLink=function(p,p2)
             "in"+(num-1)+" "+p2.parent.name+" "+p2.name
             );
 
-console.log('- ----=====EEE ',p.getName(),p.get() );
-console.log('- ----=====EEE ',l.getOtherPort(p).getName() ,l.getOtherPort(p).get() );
-// l.setValue(null);
-// l.setValue(null);
-
+        // console.log('- ----=====EEE ',p.getName(),p.get() );
+        // console.log('- ----=====EEE ',l.getOtherPort(p).getName() ,l.getOtherPort(p).get() );
     }
     else
     {
@@ -270,7 +262,6 @@ op.onDelete=function()
         if(op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch==op.patchId.get())
         {
             console.log(op.patch.ops[i].objName);
-
             op.patch.deleteOp(op.patch.ops[i].id);
         }
     }

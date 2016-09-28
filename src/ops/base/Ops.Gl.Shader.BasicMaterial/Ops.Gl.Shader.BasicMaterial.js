@@ -1,5 +1,5 @@
-
 op.name='BasicMaterial';
+
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
@@ -27,8 +27,7 @@ function doRender()
     cgl.setShader(shader);
     shader.bindTextures();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
-    else cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
-
+        else cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     trigger.trigger();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
@@ -132,10 +131,8 @@ op.doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display
 op.doBillboard.set(false);
 op.doBillboard.onValueChanged=function()
 {
-    if(op.doBillboard.get())
-        shader.define('BILLBOARD');
-    else
-        shader.removeDefine('BILLBOARD');
+    if(op.doBillboard.get()) shader.define('BILLBOARD');
+        else shader.removeDefine('BILLBOARD');
 };
 
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
