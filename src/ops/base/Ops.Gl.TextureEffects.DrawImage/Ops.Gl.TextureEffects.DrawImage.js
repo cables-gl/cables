@@ -17,7 +17,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 blendMode.set('normal');
 var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+var shader=new CGL.Shader(cgl,'drawimage');
 op.onLoaded=shader.compile;
 
 amount.set(1.0);
@@ -220,7 +220,8 @@ alphaSrc.set("alpha channel");
         }
         else
         {
-            shader.removeDefine('TEX_TRANSFORM');
+            
+            // shader.removeDefine('TEX_TRANSFORM');
         }
     }
 
@@ -241,7 +242,6 @@ amount.onValueChanged=function()
 {
     amountUniform.setValue(amount.get());
 };
-
 
 imageAlpha.onValueChanged=function()
 {

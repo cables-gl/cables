@@ -46,6 +46,7 @@ CGL.Shader=function(_cgl,_name)
 
     this.define=function(name,value)
     {
+        // console.log('add define',name);
         if(!value)value='';
         // for(var i in defines)
         for(var i=0;i<defines.length;i++)
@@ -71,6 +72,7 @@ CGL.Shader=function(_cgl,_name)
 
     this.removeDefine=function(name,value)
     {
+        // console.log('remove define',name);
         for(var i=0;i<defines.length;i++)
         {
             if(defines[i][0]==name)
@@ -266,6 +268,8 @@ CGL.Shader=function(_cgl,_name)
         var vs=extensionString+definesStr+self.srcVert;
         var fs=extensionString+definesStr+self.srcFrag;
 
+        // console.log(name);
+        // console.log(fs);
 
         var srcHeadVert='';
         var srcHeadFrag='';
@@ -408,6 +412,7 @@ CGL.Shader=function(_cgl,_name)
         var shader = _shader || cgl.gl.createShader(type);
         cgl.gl.shaderSource(shader, str);
         cgl.gl.compileShader(shader);
+
 
 
         if (!cgl.gl.getShaderParameter(shader, cgl.gl.COMPILE_STATUS))
