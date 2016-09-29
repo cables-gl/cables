@@ -32,7 +32,8 @@ var srcFrag=''
     .endl()+'    c += size/2.0 * vec2(sin(time/3.0), cos(time/2.0));'
     .endl()+'    v += sin(sqrt(c.x*c.x+c.y*c.y+1.0)+time);'
     .endl()+'    v = v/2.0;'
-    .endl()+'    vec3 col = vec3(cos(PI*v*mul*0.5), sin(PI*v*mul), cos(PI*v*mul));'
+    .endl()+'    vec3 col = vec3(sin(PI*v*mul/4.0), sin(PI*v*mul), cos(PI*v*mul));'
+    
     .endl()+'    gl_FragColor = vec4(col*.5 + .5, 1);'
     .endl()+'}';
 
