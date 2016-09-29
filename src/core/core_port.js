@@ -5,7 +5,7 @@ var CABLES=CABLES || {};
 
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
-    var self=this;
+    // var self=this;
     this.direction=PORT_DIR_IN;
     this.id=CABLES.generateUUID();
     this.parent=__parent;
@@ -17,6 +17,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.anim=null;
     var oldAnimVal=-5711;
     this.onLink=null;
+    this.defaultValue=null;
 
     this._uiActiveState=true;
     this.ignoreValueSerialize=false;
@@ -54,6 +55,8 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.get=function()
     {
+
+
         if(this._animated && this._lastAnimFrame!=this.parent.patch.getFrameNum())
         {
             this._lastAnimFrame=this.parent.patch.getFrameNum();
@@ -80,7 +83,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             {
                 if(this._animated)
                 {
-                    self.anim.setValue(this.parent.patch.timer.getTime(),v);
+                    this.anim.setValue(this.parent.patch.timer.getTime(),v);
                 }
                 else
                 {
@@ -117,7 +120,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     {
         if(this._animated)
         {
-            this.value=this.get();//self.anim.getValue(parent.patch.timer.getTime());
+            this.value=this.get();//this.anim.getValue(parent.patch.timer.getTime());
 
             if(oldAnimVal!=this.value)
             {
@@ -193,7 +196,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.addLink=function(l)
     {
-        this._valueBeforeLink=self.value;
+        this._valueBeforeLink=this.value;
         this.links.push(l);
         if(this.onLinkChanged)this.onLinkChanged();
     };
@@ -254,7 +257,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this._animated!=a)
         {
             this._animated=a;
-            if(this._animated && !self.anim)self.anim=new CABLES.TL.Anim();
+            if(this._animated && !this.anim)this.anim=new CABLES.TL.Anim();
             this._onAnimToggle();
         }
     };
@@ -262,8 +265,8 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.toggleAnim=function(val)
     {
         this._animated=!this._animated;
-        if(this._animated && !self.anim)self.anim=new CABLES.TL.Anim();
-        self.setAnimated(this._animated);
+        if(this._animated && !this.anim)this.anim=new CABLES.TL.Anim();
+        this.setAnimated(this._animated);
         this._onAnimToggle();
     };
     CABLES.Port.prototype.getType=function(){ return this.type; };
