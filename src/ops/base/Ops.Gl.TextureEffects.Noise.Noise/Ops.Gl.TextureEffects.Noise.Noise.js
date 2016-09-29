@@ -1,7 +1,6 @@
 op.name="Noise";
 
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
-// var amount=op.addInPort(new Port(op,"Amount",OP_PORT_TYPE_VALUE,{display:'range'}));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",0.25);
@@ -36,16 +35,13 @@ var srcFrag=''
 
     .endl()+'void main()'
     .endl()+'{'
-    
     .endl()+'   float r=random((time+0.232323)*texCoord.xy);'
     .endl()+'   vec4 rnd=vec4( r,r,r,1.0 );'
     .endl()+'   vec4 base=texture2D(tex,texCoord);'
     
     .endl()+'   vec4 col=vec4( _blend(base.rgb,rnd.rgb) ,1.0);'
-
     .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
 
-    // .endl()+'   col.rgb=mix(col.rgb,vec3(c),amount);'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
@@ -57,7 +53,6 @@ blendMode.onValueChanged=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
-
 
 render.onTriggered=function()
 {
