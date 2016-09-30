@@ -14,6 +14,11 @@ op.bindTextures=function()
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.get().tex);
     }
+    else
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+    }
 
     if(op.textureOpacity.get())
     {
@@ -24,6 +29,9 @@ op.bindTextures=function()
 
 function doRender()
 {
+    if(!op.texture.get())console.log('has not texture!');
+
+
     cgl.setShader(shader);
     shader.bindTextures();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);

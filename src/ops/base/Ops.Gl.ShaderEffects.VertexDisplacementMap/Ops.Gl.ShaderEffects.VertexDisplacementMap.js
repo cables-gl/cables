@@ -13,7 +13,7 @@ var flip=op.inValueBool("flip",false);
 var removeZero=op.addInPort(new Port(this,"Ignore Zero Values",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 var invert=op.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool'}));
-invert.set(true);
+invert.set(false);
 var offsetX=op.addInPort(new Port(this,"offset X",OP_PORT_TYPE_VALUE));
 var offsetY=op.addInPort(new Port(this,"offset Y",OP_PORT_TYPE_VALUE));
 
