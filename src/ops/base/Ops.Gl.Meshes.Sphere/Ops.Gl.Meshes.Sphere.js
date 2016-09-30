@@ -58,7 +58,7 @@ function circleTable(n,halfCircle)
     sint[0] = 0.0;
     cost[0] = 1.0;
 
-    for (i=1; i<size; i++)
+    for (i=0; i<size; i++)
     {
         sint[i] = Math.sin(angle*i);
         cost[i] = Math.cos(angle*i);
@@ -112,7 +112,7 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
     /* each stack */
     for( i=1; i<stacks; i++ )
     {
-        for( j=0; j<slices; j++, idx+=3 )
+        for( j=0; j<=slices; j++, idx+=3 )
         {
             x = table1.cost[j]*table2.sint[i];
             y = table1.sint[j]*table2.sint[i];
@@ -126,7 +126,7 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
             geom.vertexNormals[idx+1] = y;
             geom.vertexNormals[idx+2] = z;
 
-            geom.texCoords[idx/3*2  ] = (j)/(slices-1);
+            geom.texCoords[idx/3*2  ] = (j)/(slices);
             geom.texCoords[idx/3*2+1] = (i-1)/(stacks-2);
             
             // console.log(geom.texCoords[idx/3*2+1  ]);
@@ -148,7 +148,7 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
 
     var offset=0;
 
-    for (j=0, idx=0;  j<slices;  j++, idx+=2)
+    for (j=0, idx=0;  j<=slices;  j++, idx+=2)
     {
         geom.verticesIndices[idx  ] = j+1;              /* 0 is top vertex, 1 is first for first stack */
         geom.verticesIndices[idx+1] = 0;
@@ -162,7 +162,7 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
     for (i=0; i<stacks-2; i++, idx+=2)
     {
         offset = 1+i*slices;                    /* triangle_strip indices start at 1 (0 is top vertex), and we advance one stack down as we go along */
-        for (j=0; j<slices; j++, idx+=2)
+        for (j=0; j<=slices; j++, idx+=2)
         {
             geom.verticesIndices[idx  ] = offset+j+slices;
             geom.verticesIndices[idx+1] = offset+j;
