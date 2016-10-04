@@ -2,7 +2,7 @@ op.name='ClearColor';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var r=op.inValueSlider("r",0.3);
+var r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=op.inValueSlider("g",0.3);
 var b=op.inValueSlider("b",0.3);
 var a=op.inValueSlider("a",1);

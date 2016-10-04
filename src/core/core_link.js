@@ -39,9 +39,17 @@ CABLES.Link = function(scene)
 
     CABLES.Link.prototype.remove=function()
     {
+
+
         if(this.portIn)this.portIn.removeLink(this);
         if(this.portOut)this.portOut.removeLink(this);
         if(this.scene)this.scene.onUnLink(this.portIn,this.portOut);
+
+
+        if(this.portIn.type==OP_PORT_TYPE_OBJECT)
+        {
+            this.portIn.set(null);
+        }
 
         this.portIn=null;
         this.portOut=null;

@@ -1,14 +1,15 @@
 op.name='Rectangle';
 var render=op.inFunction("render");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var width=op.addInPort(new Port(op,"width"));
-var height=op.addInPort(new Port(op,"height"));
+
+var width=op.inValue("width",1);
+var height=op.inValue("height",1);
 
 var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
 var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
 
-var nColumns=op.addInPort(new Port(op,"num columns"));
-var nRows=op.addInPort(new Port(op,"num rows"));
+var nColumns=op.inValue("num columns",1);
+var nRows=op.inValue("num rows",1);
 
 var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
 
@@ -19,12 +20,6 @@ var cgl=op.patch.cgl;
 axis.set('xy');
 pivotX.set('center');
 pivotY.set('center');
-
-width.set(1.0);
-height.set(1.0);
-
-nRows.set(1);
-nColumns.set(1);
 
 var geom=new CGL.Geometry();
 var mesh=null;
@@ -69,10 +64,10 @@ function rebuild()
 
     var numRows=Math.round(nRows.get());
     var numColumns=Math.round(nColumns.get());
-    
+
     var stepColumn=w/numColumns;
     var stepRow=h/numRows;
-    
+
     var c,r;
 
     for(r=0;r<=numRows;r++)
@@ -86,14 +81,13 @@ function rebuild()
 
             tc.push( c/numColumns );
             tc.push( 1.0-r/numRows );
-            
+
             norms.push(0);
             norms.push(0);
             norms.push(-1);
         }
     }
     
-
     for(c=0;c<numColumns;c++)
     {
         for(r=0;r<numRows;r++)

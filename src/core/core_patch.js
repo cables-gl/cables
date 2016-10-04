@@ -245,7 +245,7 @@ CABLES.Patch = function(cfg)
 
     CABLES.Patch.prototype.getFrameNum=function()
     {
-        return this.frameNum;
+        return this._frameNum;
     };
 
     var frameNext=0;

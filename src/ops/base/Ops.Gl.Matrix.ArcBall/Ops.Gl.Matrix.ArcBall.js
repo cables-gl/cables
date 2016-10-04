@@ -122,7 +122,7 @@ var onMouseWheel=function(event)
         var delta=CGL.getWheelSpeed(event)*0.001;
         radius+=(parseFloat(delta)*mulScale.get());
         event.preventDefault();
-        console.log( radius );
+        // console.log( radius );
     }
 };
 

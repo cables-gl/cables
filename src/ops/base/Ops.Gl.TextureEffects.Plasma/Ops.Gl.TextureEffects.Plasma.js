@@ -1,0 +1,88 @@
+op.name="Plasma";
+
+
+
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+var amount=op.inValueSlider("Amount",1);
+
+var x=op.inValue("Width",20);
+var y=op.inValue("Height",20);
+var mul=op.inValue("Mul",1);
+var time=op.inValue("Time",1);
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+
+
+
+
+var srcFrag=''
+    .endl()+'precision mediump float;'
+    .endl()+'#define PI 3.1415926535897932384626433832795'
+     
+    .endl()+'uniform float time;'
+    .endl()+'uniform float w;'
+    .endl()+'uniform float h;'
+    .endl()+'uniform float mul;'
+    .endl()+'uniform float amount;'
+    .endl()+'uniform sampler2D tex;'
+
+    .endl()+'varying vec2 texCoord;'
+
+    +CGL.TextureEffect.getBlendCode()
+
+    .endl()+'void main() {'
+    .endl()+'   vec2 size=vec2(w,h);'
+    .endl()+'    float v = 0.0;'
+    .endl()+'    vec2 c = texCoord * size - size/2.0;'
+    .endl()+'    v += sin((c.x+time));'
+    .endl()+'    v += sin((c.y+time)/2.0);'
+    .endl()+'    v += sin((c.x+c.y+time)/2.0);'
+    .endl()+'    c += size/2.0 * vec2(sin(time/3.0), cos(time/2.0));'
+    .endl()+'    v += sin(sqrt(c.x*c.x+c.y*c.y+1.0)+time);'
+    .endl()+'    v = v/2.0;'
+    .endl()+'    vec3 newColor = vec3(sin(PI*v*mul/4.0), sin(PI*v*mul), cos(PI*v*mul))*.5 + .5;'
+
+    .endl()+'   vec4 base=texture2D(tex,texCoord);'
+    
+    .endl()+'   vec4 col=vec4( _blend(base.rgb,newColor) ,1.0);'
+
+    .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
+
+    .endl()+'    gl_FragColor = col;'
+    .endl()+'}';
+
+var cgl=op.patch.cgl;
+var shader=new CGL.Shader(cgl);
+
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+
+var uniX=new CGL.Uniform(shader,'f','w',x);
+var uniY=new CGL.Uniform(shader,'f','h',y);
+var uniTime=new CGL.Uniform(shader,'f','time',time);
+var uniMul=new CGL.Uniform(shader,'f','mul',mul);
+
+var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+
+
+render.onTriggered=function()
+{
+    if(!cgl.currentTextureEffect)return;
+
+    cgl.setShader(shader);
+    cgl.currentTextureEffect.bind();
+
+    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
+    cgl.currentTextureEffect.finish();
+    cgl.setPreviousShader();
+
+    trigger.trigger();
+};
+
+blendMode.onValueChanged=function()
+{
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};

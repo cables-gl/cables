@@ -25,7 +25,6 @@ var srcFrag=''
     .endl()+'       #ifdef MONO'
     .endl()+'           col.g=col.b=col.r;'
     .endl()+'       #endif'
-
     .endl()+'   #endif'
 
     .endl()+'   #ifdef CHANNEL_G'
@@ -65,6 +64,7 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
+
 var channelR=op.addInPort(new Port(op,"channelR",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 channelR.onValueChanged=function()
 {
@@ -97,3 +97,4 @@ mono.onValueChanged=function()
     if(mono.get()) shader.define('MONO');
         else shader.removeDefine('MONO');
 };
+

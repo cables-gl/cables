@@ -3,6 +3,8 @@ op.name="FftTexture";
 var refresh=this.addInPort(new Port(this,"refresh",OP_PORT_TYPE_FUNCTION));
 var fftArr=this.addInPort(new Port(this, "FFT Array",OP_PORT_TYPE_ARRAY));
 
+// var inHeight=op.inValueSelect("Height",[128,256,512,1024,2048],128);
+
 var texOut=op.outTexture("texture_out");
 
 var position=op.addOutPort(new Port(op,"position",OP_PORT_TYPE_VALUE));
@@ -11,14 +13,21 @@ var cgl=op.patch.cgl;
 var tex=new CGL.Texture(cgl,
     {
         "wrap":CGL.Texture.CLAMP_TO_EDGE
-        
     });
+
 var data=[];
 
 var line=0;
 var height=256;
 
 var buffer=new Uint8Array();
+
+// inHeight.onChange=function()
+// {
+//     height=parseInt(inHeight.get(),10);
+//     data.length=0;
+//     line=0;
+// };
 
 refresh.onTriggered=function()
 {

@@ -3,7 +3,8 @@ op.name='Desaturate';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
+
+var amount=op.inValueSlider("amount",1);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -16,7 +17,6 @@ var srcFrag=''
     .endl()+'  uniform sampler2D tex;'
     .endl()+'#endif'
     .endl()+'uniform float amount;'
-    .endl()+''
     .endl()+''
     .endl()+'vec3 desaturate(vec3 color, float amount)'
     .endl()+'{'
