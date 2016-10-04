@@ -21,7 +21,8 @@ var pixelRGB = new Uint8Array(4);
 var fb=new CGL.Framebuffer(cgl);
 
 
-var tex=this.addOutPort(new Port(this,"pick texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+// var tex=this.addOutPort(new Port(this,"pick texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var tex=op.outTexture("pick texture");
 tex.set( fb.getTextureColor() );
  
 function renderPickingPass()
