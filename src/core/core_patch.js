@@ -5,6 +5,7 @@ CABLES.Patch = function(cfg)
     this.ops=[];
     this.settings={};
     this.timer=new CABLES.Timer();
+    this.freeTimer=new CABLES.Timer();
     this.animFrameOps=[];
     this.gui=false;
     this.silent=false;

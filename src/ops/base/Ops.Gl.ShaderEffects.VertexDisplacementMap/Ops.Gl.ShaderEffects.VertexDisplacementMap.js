@@ -8,7 +8,7 @@ var texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 
 var extrude=op.inValue("extrude",0.5);//addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
 
-var flip=op.inValueBool("flip",false);
+var flip=op.inValueBool("flip",true);
 
 var removeZero=op.addInPort(new Port(this,"Ignore Zero Values",OP_PORT_TYPE_VALUE,{display:'bool'}));
 

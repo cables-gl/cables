@@ -1,123 +1,121 @@
 
 CABLES.Timer=function()
 {
-    var timeStart=Date.now();
-    var timeOffset=0;
+    this._timeStart=Date.now();
+    this._timeOffset=0;
 
-    var currentTime=0;
-    var lastTime=0;
-    var paused=true;
-    var delay=0;
-    var eventsPaused=false;
+    this._currentTime=0;
+    this._lastTime=0;
+    this._paused=true;
+    this._delay=0;
+    this._eventsPaused=false;
     this.overwriteTime=-1;
 
-    function getTime()
+    this.cbPlayPause=[];
+    this.cbTimeChange=[];
+};
+
+CABLES.Timer.prototype._getTime=function()
+{
+    this._lastTime=(Date.now()-this._timeStart)/1000;
+    return this._lastTime+this._timeOffset;
+};
+
+CABLES.Timer.prototype._eventPlayPause=function()
+{
+    if(this._eventsPaused)return;
+    for(var i in this._cbPlayPause) this._cbPlayPause[i]();
+};
+
+CABLES.Timer.prototype._eventTimeChange=function()
+{
+    if(this._eventsPaused)return;
+    for(var i in this._cbTimeChange) this._cbTimeChange[i]();
+};
+
+CABLES.Timer.prototype.setDelay=function(d)
+{
+    this._delay=d;
+    this._eventTimeChange();
+};
+
+CABLES.Timer.prototype.isPlaying=function()
+{
+    return !this._paused;
+};
+
+CABLES.Timer.prototype.update=function()
+{
+    if(this._paused) return;
+    this._currentTime=this._getTime();
+
+    return this._currentTime;
+};
+
+CABLES.Timer.prototype.getTime=function()
+{
+    if(this.overwriteTime>=0)return this.overwriteTime-this._delay;
+    return this._currentTime-this._delay;
+};
+
+CABLES.Timer.prototype.togglePlay=function()
+{
+    if(this._paused) this.play();
+        else this.pause();
+};
+
+CABLES.Timer.prototype.setTime=function(t)
+{
+    if(t<0)t=0;
+    this._timeStart=Date.now();
+    this._timeOffset=t;
+    this._currentTime=t;
+    this._eventTimeChange();
+};
+
+CABLES.Timer.prototype.setOffset=function(val)
+{
+    if(this._currentTime+val<0)
     {
-        lastTime=(Date.now()-timeStart)/1000;
-        return lastTime+timeOffset;
+        this._timeStart=Date.now();
+        this._timeOffset=0;
+        this._currentTime=0;
     }
-
-    this.setDelay=function(d)
+    else
     {
-        delay=d;
-        eventTimeChange();
-    };
-
-    this.isPlaying=function()
-    {
-        return !paused;
-    };
-
-    this.update=function()
-    {
-        if(paused) return;
-        currentTime=getTime();
-
-        return currentTime;
-    };
-
-    this.getTime=function()
-    {
-        if(this.overwriteTime>=0)return this.overwriteTime-delay;
-        return currentTime-delay;
-    };
-
-    this.togglePlay=function()
-    {
-        if(paused) this.play();
-            else this.pause();
-    };
-
-    this.setTime=function(t)
-    {
-        if(t<0)t=0;
-        timeStart=Date.now();
-        timeOffset=t;
-        currentTime=t;
-        eventTimeChange();
-    };
-
-    this.setOffset=function(val)
-    {
-        if(currentTime+val<0)
-        {
-            timeStart=Date.now();
-            timeOffset=0;
-            currentTime=0;
-        }
-        else
-        {
-            timeOffset+=val;
-            currentTime=lastTime+timeOffset;
-        }
-        eventTimeChange();
-    };
-
-    this.play=function()
-    {
-        timeStart=Date.now();
-        paused=false;
-        eventPlayPause();
-    };
-
-    this.pause=function()
-    {
-        timeOffset=currentTime;
-        paused=true;
-        eventPlayPause();
-    };
-
-    // ----------------
-
-    var cbPlayPause=[];
-    var cbTimeChange=[];
-    function eventPlayPause()
-    {
-        if(eventsPaused)return;
-        for(var i in cbPlayPause) cbPlayPause[i]();
+        this._timeOffset+=val;
+        this._currentTime=this._lastTime+this._timeOffset;
     }
+    this._eventTimeChange();
+};
 
-    function eventTimeChange()
-    {
-        if(eventsPaused)return;
-        for(var i in cbTimeChange) cbTimeChange[i]();
-    }
+CABLES.Timer.prototype.play=function()
+{
+    this._timeStart=Date.now();
+    this._paused=false;
+    this._eventPlayPause();
+};
 
-    this.pauseEvents=function(onoff)
-    {
-        eventsPaused=onoff;
-    };
+CABLES.Timer.prototype.pause=function()
+{
+    this._timeOffset=this._currentTime;
+    this._paused=true;
+    this._eventPlayPause();
+};
 
-    this.onPlayPause=function(cb)
-    {
-        if(cb && typeof cb == "function")
-            cbPlayPause.push(cb);
-    };
+CABLES.Timer.prototype.pauseEvents=function(onoff)
+{
+    this._eventsPaused=onoff;
+};
 
-    this.onTimeChange=function(cb)
-    {
-        if(cb && typeof cb == "function")
-            cbTimeChange.push(cb);
-    };
+CABLES.Timer.prototype.onPlayPause=function(cb)
+{
+    if(cb && typeof cb == "function")
+        this._cbPlayPause.push(cb);
+};
 
+CABLES.Timer.prototype.onTimeChange=function(cb)
+{
+    if(cb && typeof cb == "function")
+        this._cbTimeChange.push(cb);
 };
