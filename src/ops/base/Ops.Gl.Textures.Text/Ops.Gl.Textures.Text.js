@@ -10,12 +10,15 @@ var valign=op.addInPort(new Port(op,"vertical align",OP_PORT_TYPE_VALUE,{display
 var font=op.addInPort(new Port(op,"font",OP_PORT_TYPE_VALUE,{type:'string'}));
 var lineDistance=op.addInPort(new Port(op,"line distance"));
 var border=op.addInPort(new Port(op,"border"));
+var doRefresh=op.inFunction("Refresh");
 
 // var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");
 var outRatio=op.addOutPort(new Port(op,"Ratio",OP_PORT_TYPE_VALUE));
 var cgl=op.patch.cgl;
 
+
+doRefresh.onTriggered=refresh;
 
 border.set(0);
 texWidth.set(512);

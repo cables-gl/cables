@@ -11,6 +11,7 @@ var preRenderTimeFrames=this.addInPort(new Port(this,"preRenderTimes",OP_PORT_TY
 this.preRenderStatus.val=0;
 this.numAssets=this.addOutPort(new Port(this,"numAssets",OP_PORT_TYPE_VALUE));
 this.loading=this.addOutPort(new Port(this,"loading",OP_PORT_TYPE_FUNCTION));
+var loadingFinished=this.addOutPort(new Port(this,"loading finished",OP_PORT_TYPE_FUNCTION));
 
 var finishedAll=false;
 
@@ -102,6 +103,7 @@ this.exe.onTriggered= function()
         if(firstTime)
         {
             console.log('finished loading and prerendering...');
+            loadingFinished.trigger();
             self.patch.timer.setTime(0);
             self.patch.timer.play();
 

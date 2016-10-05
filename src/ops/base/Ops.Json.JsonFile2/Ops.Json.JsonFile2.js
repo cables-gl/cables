@@ -7,8 +7,9 @@ var isLoading=op.outValue("Is Loading",false);
 outData.ignoreValueSerialize=true;
 var patch=op.patch;
 
+filename.onValueChanged=reload;
 var loadingId=0;
-var reload=function()
+function reload()
 {
     if(!filename.get())return;
     
@@ -40,4 +41,3 @@ var reload=function()
     
 };
 
-filename.onValueChanged=reload;

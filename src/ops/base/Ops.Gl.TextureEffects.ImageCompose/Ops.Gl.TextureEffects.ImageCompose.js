@@ -5,7 +5,7 @@ var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 // var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
-var bgAlpha=op.inValueSlider("Background Alpha",0);
+var bgAlpha=op.inValueSlider("Background Alpha",1);
 var fpTexture=op.inValueBool("HDR");
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
