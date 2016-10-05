@@ -58,18 +58,6 @@ function ajaxRequest(url, callback)
 
 // ----------------------------------------------------------------
 
-window.performance = (window.performance || {
-    offset: Date.now(),
-    now: function now(){
-        return Date.now() - this.offset;
-    }
-});
-CABLES.milliSeconds=function()
-{
-    return window.performance.now();
-};
-
-// ----------------------------------------------------------------
 
 CABLES.ajaxSync=function(url,cb,method,post,contenttype)
 {

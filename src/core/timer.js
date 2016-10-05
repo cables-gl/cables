@@ -1,7 +1,21 @@
+window.performance = (window.performance ||
+    {
+        offset: Date.now(),
+        now: function now()
+        {
+            return Date.now() - this.offset;
+        }
+    });
+
+// ----------------------------
+
+CABLES.milliSeconds=function() { return window.performance.now(); };
+
+// ----------------------------
 
 CABLES.Timer=function()
 {
-    this._timeStart=Date.now();
+    this._timeStart=CABLES.milliSeconds();
     this._timeOffset=0;
 
     this._currentTime=0;
@@ -17,7 +31,7 @@ CABLES.Timer=function()
 
 CABLES.Timer.prototype._getTime=function()
 {
-    this._lastTime=(Date.now()-this._timeStart)/1000;
+    this._lastTime=(CABLES.milliSeconds()-this._timeStart)/1000;
     return this._lastTime+this._timeOffset;
 };
 
@@ -52,7 +66,7 @@ CABLES.Timer.prototype.update=function()
     return this._currentTime;
 };
 
-CABLES.Timer.prototype.getTime=function()
+CABLES.Timer.prototype.get=CABLES.Timer.prototype.getTime=function()
 {
     if(this.overwriteTime>=0)return this.overwriteTime-this._delay;
     return this._currentTime-this._delay;
@@ -67,7 +81,7 @@ CABLES.Timer.prototype.togglePlay=function()
 CABLES.Timer.prototype.setTime=function(t)
 {
     if(t<0)t=0;
-    this._timeStart=Date.now();
+    this._timeStart=CABLES.milliSeconds();
     this._timeOffset=t;
     this._currentTime=t;
     this._eventTimeChange();
@@ -77,7 +91,7 @@ CABLES.Timer.prototype.setOffset=function(val)
 {
     if(this._currentTime+val<0)
     {
-        this._timeStart=Date.now();
+        this._timeStart=CABLES.milliSeconds();
         this._timeOffset=0;
         this._currentTime=0;
     }

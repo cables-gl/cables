@@ -14,10 +14,6 @@ exec();
 
 function exec()
 {
-    result.set(
-        amplitude.get() * 
-        Math.sin( 
-            (Date.now()/1000.0 * mul.get()) 
-            + phase.get() ));
+    result.set( amplitude.get() * Math.sin( (op.patch.freeTimer.get()*mul.get()) + phase.get() ));
 }
 

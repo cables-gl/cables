@@ -1,15 +1,23 @@
 op.name='random anim';
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var result=op.addOutPort(new Port(op,"result"));
 
-var min=op.addInPort(new Port(op,"min"));
-var max=op.addInPort(new Port(op,"max"));
-var duration=op.addInPort(new Port(op,"duration"));
+var exe=op.inFunction("exe");
+var min=op.inValue("min",0);
+var max=op.inValue("max",1);
+var duration=op.inValue("duration",0.5);
+
+var result=op.outValue("result");
 
 var anim=new CABLES.TL.Anim();
 
 var easing=op.addInPort(new Port(op,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep","absolute"]} ));
 easing.set('linear');
+
+init();
+
+min.onChange=init;
+max.onChange=init;
+duration.onChange=init;
+easing.onChange=init;
 
 
 function getRandom()
@@ -28,13 +36,13 @@ function init(v)
 
     anim.clear();
     if(v===undefined) v=getRandom();
-    anim.setValue(Date.now()/1000.0, v);
-    anim.setValue(parseFloat(duration.get())+Date.now()/1000.0, getRandom());
+    anim.setValue(op.patch.freeTimer.get(), v);
+    anim.setValue(parseFloat(duration.get())+op.patch.freeTimer.get(), getRandom());
 }
 
 exe.onTriggered=function()
 {
-    var t=Date.now()/1000;
+    var t=op.patch.freeTimer.get();
     var v=anim.getValue(t);
     if(anim.hasEnded(t))
     {
@@ -44,12 +52,3 @@ exe.onTriggered=function()
     result.set(v);
 };
 
-min.set(0.0);
-max.set(1.0);
-duration.set(0.5);
-init();
-
-min.onChange=init;
-max.onChange=init;
-duration.onChange=init;
-easing.onChange=init;
