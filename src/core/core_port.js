@@ -205,7 +205,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     {
         for(var i in this.links)
             if(this.links[i].portIn==p2 || this.links[i].portOut==p2)
+            {
                 this.links[i].remove();
+                if(this.onLinkChanged)this.onLinkChanged();
+            }
     };
 
     CABLES.Port.prototype.isLinkedTo=function(p2)
