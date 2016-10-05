@@ -73,7 +73,12 @@ CABLES.Patch.prototype.setVolume=function(v)
 
 CABLES.Patch.prototype.getFilePath=function(filename)
 {
+
+    console.log(this.config.prefixAssetPath+filename);
+
     if(filename.indexOf('https:')===0 || filename.indexOf('http:')===0 ) return filename;
+
+
     return this.config.prefixAssetPath+filename;
 };
 
