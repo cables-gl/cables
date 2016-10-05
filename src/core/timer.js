@@ -105,7 +105,7 @@ CABLES.Timer.prototype.setOffset=function(val)
 
 CABLES.Timer.prototype.play=function()
 {
-    this._timeStart=Date.now();
+    this._timeStart=CABLES.milliSeconds();
     this._paused=false;
     this._eventPlayPause();
 };
