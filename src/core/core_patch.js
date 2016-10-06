@@ -131,7 +131,7 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
         CABLES.UI.MODAL.showError('could not create op','op unknown');
         return;
     }
-
+console.log(1234);
     var parts=objName.split('.');
     var op=null;
 
@@ -167,17 +167,17 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
 
         if(CABLES.UI)
         {
-            CABLES.UI.MODAL.showException(e,op);
+            CABLES.UI.MODAL.showOpException(e,objName);
         }
         else if(CABLES.api) CABLES.api.sendErrorReport(e);
 
-        return;
+        // return;
     }
     if(op)
     {
         op.objName=objName;
         op.patch=this;
-
+// console.log('instancedd');
 
         op.uiAttr(uiAttribs);
         if(op.onCreate)op.onCreate();
