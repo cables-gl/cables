@@ -1,18 +1,17 @@
 
+op.name='MainLoop';
+
+var fpsLimit=op.inValue("FPS Limit",0);
+var trigger=op.outFunction("trigger");
+var width=op.inValue("width");
+var height=op.outValue("height");
+
+var cgl=op.patch.cgl;
+
 var rframes=0;
 var rframeStart=0;
 
 if(!op.patch.cgl) op.uiAttr( { 'error': 'No webgl cgl context' } );
-
-var patch=op.patch;
-var cgl=op.patch.cgl;
-
-op.name='MainLoop';
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-var fpsLimit=op.inValue("FPS Limit",0);
 
 var identTranslate=vec3.create();
 vec3.set(identTranslate, 0,0,0);
@@ -53,17 +52,14 @@ op.onAnimFrame=function(time)
     if(Date.now()-rframeStart>1000)
     {
         CGL.fpsReport=CGL.fpsReport||[];
-        if(patch.loading.getProgress()>=1.0 && rframeStart!==0)CGL.fpsReport.push(rframes);
+        if(op.patch.loading.getProgress()>=1.0 && rframeStart!==0)CGL.fpsReport.push(rframes);
         rframes=0;
         rframeStart=Date.now();
     }
     CGL.MESH.lastShader=null;
     CGL.MESH.lastMesh=null;
 
-
     cgl.renderStart(cgl,identTranslate,identTranslateView);
-
-
 
     trigger.trigger();
 
@@ -74,8 +70,6 @@ op.onAnimFrame=function(time)
     }
     cgl.renderEnd(cgl);
     
-    if(!cgl.frameStore.phong)cgl.frameStore.phong={}
+    if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     rframes++;
-    
-
 };
