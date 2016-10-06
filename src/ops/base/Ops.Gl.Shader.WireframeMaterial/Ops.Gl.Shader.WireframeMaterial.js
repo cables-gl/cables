@@ -52,6 +52,7 @@ var srcVert=''
     .endl()+'uniform float width;'
     .endl()+'uniform float opacity;'
     .endl()+'uniform float r,g,b;'
+    .endl()+'uniform float fr,fg,fb;'
     .endl()+''
     .endl()+'float edgeFactor()'
     .endl()+'{'
@@ -65,7 +66,11 @@ var srcVert=''
 
     .endl()+'   #ifdef WIREFRAME_FILL'
     .endl()+'       float v=opacity*(1.0-edgeFactor())*0.95;'
-    .endl()+'       col = vec4(v*r,v*g,v*b,opacity);'
+    .endl()+'       vec3 wire = vec3(r, g, b);'
+    .endl()+'       col.rgb = vec3(fr, fg, fb);'
+    .endl()+'       col.rgb = mix(wire,col.rgb,v);'
+    .endl()+'       col.a = opacity;'
+    
     .endl()+'#endif'
     .endl()+''
     .endl()+'#ifndef WIREFRAME_FILL'
@@ -123,6 +128,23 @@ shader.wireframe=true;
     r.set(Math.random());
     g.set(Math.random());
     b.set(Math.random());
+}
+
+{
+    // diffuse color
+
+    var fr=op.addInPort(new Port(op,"Fill R",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    fr.uniform=new CGL.Uniform(shader,'f','fr',fr);
+
+    var fg=op.addInPort(new Port(op,"Fill G",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    fg.uniform=new CGL.Uniform(shader,'f','fg',fg);
+
+    var fb=op.addInPort(new Port(op,"Fill B",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    fb.uniform=new CGL.Uniform(shader,'f','fb',fb);
+
+    fr.set(0);
+    fg.set(0);
+    fb.set(0);
 }
 
 

@@ -30,7 +30,9 @@ function resize()
         w=_w;
         h=_h;
 
-        cgl.setViewPort(0,0,w,h);
+        var vp=cgl.getViewPort();
+
+        // cgl.setViewPort(0,vp[2]-h,w,h);
 
         for(var i=0;i<op.patch.ops.length;i++)
         {
@@ -43,7 +45,7 @@ op.onDelete=function()
 {
     // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
     cgl.resetViewPort();
-}
+};
 
 render.onTriggered=function()
 {
@@ -57,9 +59,12 @@ render.onTriggered=function()
 
     w=Math.round(w+0.5);
     h=Math.round(h+0.5);
+    
+    var vp=cgl.getViewPort();
 
     cgl.gl.scissor(0,0,w,h);
     cgl.setViewPort(0,0,w,h);
+    // cgl.setViewPort(0,vp[2]-h,w,h);
     
     mat4.perspective(cgl.pMatrix,45, ratio.get(), 0.1, 1100.0);
 
