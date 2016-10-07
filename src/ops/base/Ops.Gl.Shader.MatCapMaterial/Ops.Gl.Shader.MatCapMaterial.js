@@ -17,7 +17,7 @@ this.textureNormal=this.addInPort(new Port(this,"normal",OP_PORT_TYPE_TEXTURE,{p
 this.textureNormalUniform=null;
 
 this.normalScale=this.addInPort(new Port(this,"normalScale",OP_PORT_TYPE_VALUE,{display:'range'}));
-this.normalScale.set(1.0);
+this.normalScale.set(0.4);
 this.normalScaleUniform=null;
 
 this.textureSpec=this.addInPort(new Port(this,"specular",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
@@ -220,9 +220,40 @@ this.doRender=function()
     bindTextures();
     cgl.setShader(shader);
     
-
     self.trigger.trigger();
+
     cgl.setPreviousShader();
+    
+    
+    
+    // if(self.texture.get())
+    // {
+    //     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+    // }
+
+    // if(self.textureDiffuse.get())
+    // {
+    //     cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+    // }
+
+    // if(self.textureNormal.get())
+    // {
+    //     cgl.gl.activeTexture(cgl.gl.TEXTURE2);
+    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+    // }
+
+    // if(self.textureSpec.get())
+    // {
+    //     cgl.gl.activeTexture(cgl.gl.TEXTURE3);
+    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+    // }
+    // if(self.textureSpecMatCap.get())
+    // {
+    //     cgl.gl.activeTexture(cgl.gl.TEXTURE4);
+    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+    // }
 };
 
 var srcVert=''

@@ -23,9 +23,45 @@ width.set(512);
 height.set(512);
 useVPSize.set(true);
 tfilter.set('linear');
-
-
 var reInitFb=true;
+
+
+// todo why does it only work when we render a mesh before>?>?????
+// only happens with matcap material with normal map....
+var mesh=null;
+{
+var geom=new CGL.Geometry();
+
+    geom.vertices = [
+         0.0,           0,  0.0,
+        -0,  -0,  0.0,
+         0,  -0,  0.0
+    ];
+
+    geom.vertexNormals = [
+         0.0,  0.0,  1.0,
+         0.0,  0.0,  1.0,
+         0.0,  0.0,  1.0
+    ];
+
+    geom.texCoords = [
+         0.5,  0.0,
+         1.0,  1.0,
+         0.0,  1.0,
+    ];
+
+    
+    geom.verticesIndices = [
+        0, 1, 2
+    ];
+
+
+    mesh=new CGL.Mesh(cgl,geom);
+    
+}
+
+
+
 
 fpTexture.onChange=function()
 {
@@ -44,10 +80,10 @@ function doRender()
     if(!fb || reInitFb)
     {
         if(fb) fb.delete();
-        fb=new CGL.Framebuffer(cgl,512,512,{isFloatingPointTexture:fpTexture.get()});
-        if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
-            else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
-            else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+        fb=new CGL.Framebuffer(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
+        // if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
+        //     else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
+        //     else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
         tex.set( fb.getTextureColor() );
         texDepth.set ( fb.getTextureDepth() );
@@ -60,16 +96,18 @@ function doRender()
         height.set( cgl.getViewPort()[3] );
     }
 
-
-
     if(fb.getWidth()!=width.get() || fb.getHeight()!=height.get() )
     {
         fb.setSize( width.get(),height.get() );
     }
 
     fb.renderStart(cgl);
+    
+    mesh.render(cgl.getShader());
     trigger.trigger();
     fb.renderEnd(cgl);
+    
+
 
     cgl.resetViewPort();
 }

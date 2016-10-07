@@ -25,6 +25,11 @@ op.bindTextures=function()
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.get().tex);
     }
+    else
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+    }
 };
 
 function doRender()
