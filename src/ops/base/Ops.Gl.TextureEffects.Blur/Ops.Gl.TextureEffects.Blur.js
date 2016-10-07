@@ -50,7 +50,7 @@ var srcFrag=''
     
     // .endl()+'    /* switch back from pre-multiplied alpha */'
     .endl()+'    gl_FragColor.rgb /= gl_FragColor.a + 0.00001;'
-    .endl()+'}'
+    .endl()+'}';
 
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
