@@ -34,6 +34,7 @@ function setAnim()
     anim.keys[0].value=0;
     anim.keys[1].time=delay.get()+interval.get();
     anim.keys[1].value=1;
+    startTime=performance.now();
 }
 
 

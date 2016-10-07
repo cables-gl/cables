@@ -26,3 +26,15 @@ for(var i=0;i<num;i++)
     var newVal=op.addInPort(new Port(op,"Value "+i,OP_PORT_TYPE_VALUE));
     inVals.push( newVal );
 }
+
+var defaultVal = op.inValueString("Default Value");
+
+currentVal.set(defaultVal.get());
+oldVal.set(defaultVal.get());
+
+defaultVal.onChange = function(){
+    oldVal.set(currentVal.get());
+    currentVal.set(defaultVal.get());  
+    console.log("chang");
+};
+

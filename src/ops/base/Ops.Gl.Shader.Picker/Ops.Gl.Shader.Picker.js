@@ -38,8 +38,6 @@ function renderPickingPass()
 
 var doRender=function()
 {
-
-    
     if(self.enabled.get())
     {
         {
@@ -54,17 +52,15 @@ var doRender=function()
             {
                 fb.setSize( vpW,vpH );
             }
-            
-            
+
             cgl.pushMvMatrix();
             fb.renderStart();
             cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
 
             renderPickingPass();
-        
 
             var x=Math.floor(self.x.get()/minimizeFB);
-            var y=Math.floor(vpH-self.y.get()/minimizeFB);
+            var y=Math.floor( vpH-self.y.get()/minimizeFB);
             if(x<0)x=0;
             if(y<0)y=0;
             cgl.gl.readPixels(x,y, 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);

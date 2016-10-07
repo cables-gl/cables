@@ -29,7 +29,7 @@ op.bindTextures=function()
 
 function doRender()
 {
-    if(!op.texture.get())console.log('has not texture!');
+    // if(!op.texture.get())console.log('has not texture!');
 
 
     cgl.setShader(shader);

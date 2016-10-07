@@ -11,6 +11,7 @@ var posTop=op.addInPort(new Port(op,"Top",OP_PORT_TYPE_VALUE));
 
 var borderRadius=op.addInPort(new Port(op,"Border radius",OP_PORT_TYPE_VALUE));
 var fontSize=op.addInPort(new Port(op,"Font size",OP_PORT_TYPE_VALUE));
+var fontFamily=op.addInPort(new Port(op,"Font Family",OP_PORT_TYPE_VALUE,{type:'string'}));
 
 var cursor=op.addInPort(new Port(op,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 
@@ -55,6 +56,7 @@ text.set('This is a HTML element');
 width.set(100);
 height.set(30);
 fontSize.set(12);
+fontFamily.set("Arial");
 autoSize.set(true);
 autoSize.set(true);
 
@@ -79,6 +81,7 @@ b.onValueChanged=updateColor;
 a.onValueChanged=updateColor;
 
 fontSize.onValueChanged=updateFont;
+fontFamily.onValueChanged=updateFont;
 borderRadius.onValueChanged=updateBorder;
 cursor.onValueChanged=updateCursor;
 ignoreMouse.onValueChanged=updateIgnoreMouse;
@@ -116,6 +119,7 @@ function updateFont()
 {
     if(!element) return;
     element.style['font-size']=fontSize.get()+"px";
+    element.style['font-family']=fontFamily.get();
     updateClientSize();
 }
 
