@@ -17,7 +17,7 @@ There are different types of ports your op can use:
 OP_PORT_TYPE_FUNCTION
 ```
 
-Function ports are being used to trigger another op. If you do a visual-patch the first op you need to add is the [op: Renderer](#)-op, which has a `trigger`-port – a function port which updates all connected ports 60 times a second.
+Function ports are being used to trigger another op. If you do a visual-patch the first op you need to add is the `MainLoop`-op, which has a `trigger`-port – a function port which updates all connected ports 60 times a second.
 Function ports can also be used to trigger under certain conditions – the [Op: Mouse](#)-op e.g. triggers on the `click`-port once a user clicked in the preview pane.
 
 ```javascript
@@ -48,7 +48,7 @@ var tap = op.addInPort( new Port( this, "tap", OP_PORT_TYPE_FUNCTION, { "display
 OP_PORT_TYPE_VALUE
 ```
 
-Value ports can hold a single value, a number (e.g. -1, 2.45), a bool (true, false), a string ("foo bar"), a string with multiple lines or a certain value from a dropdown-input. 
+Value ports can hold a single value, a number (e.g. -1, 2.45), a bool (true, false), a string ("foo bar"), a string with multiple lines or a certain value from a dropdown-input.
 
 ```javascript
 var inPort = op.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
@@ -104,9 +104,9 @@ var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { displ
 
 inPort.onValueChange( function() {
 	if( inPort.get() === true ){
-		op.log( 'Checkbox checked' );	
+		op.log( 'Checkbox checked' );
 	} else {
-		op.log( 'Checkbox unchecked' );	
+		op.log( 'Checkbox unchecked' );
 	}
 });
 ```

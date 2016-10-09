@@ -11,8 +11,8 @@ To draw a circle, we need two operators:
 ## 1.Add the WebGL-op
 
 - To create an operator press `[esc]` – the `Select Operator`-dialog shows up
-- Now enter `render`
-- The first entry in the list should be [Ops.Gl.Renderer](../ops/Ops.Gl.Renderer/Ops.Gl.Renderer.md)
+- Now enter `Main`
+- The first entry in the list should be [Ops.Gl.MainLoop](../ops/Ops.Gl.MainLoop/Ops.Gl.MainLoop.md)
 - Press `[enter]` to create the operator
 
 ## 2. Add The Circle Operator
@@ -22,7 +22,7 @@ To draw a circle, we need two operators:
 ![](img/create_op_pull.gif)
 
 - The `Select Operator`-dialog is showing again
-- Enter `circle`, now the entry [Ops.Gl.Meshes.Circle](../ops/Ops.Gl.Renderer/Ops.Gl.Renderer.md) should be selected
+- Enter `circle`, now the entry [Ops.Gl.Meshes.Circle](../ops/Ops.Gl.Meshes.Circle/Ops.Gl.Meshes.Circle.md) should be selected
 - Press `[enter]` to create it
 
 Now it should look like this:  

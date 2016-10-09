@@ -28,7 +28,7 @@ Can be implemented for `OP_PORT_TYPE_FUNCTION`.
 
 Every time a connected op calls `myOutPort.trigger()` the connected in-ports’ `onTrigger` callback is called.
 
-If your op needs to update its values continuously it should have an input port of type `OP_PORT_TYPE_FUNCTION`, which you can then connect to the [Renderer](../ops/Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op e.g..
+If your op needs to update its values continuously it should have an input port of type `OP_PORT_TYPE_FUNCTION`, which you can then connect to the [MainLoop](../ops/Ops.Gl.MainLoop/Ops.Gl.MainLoop.md)-op e.g..
 
 ```javascript
 var exe = op.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION ) );
@@ -84,7 +84,3 @@ op.onResize( function() {
 	// adapt to the new size
 });
 ```
-
-
-
- 
