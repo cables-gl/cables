@@ -5,8 +5,8 @@ First, we need a project to work with, so press the `New Project`-button.
 
 To draw a circle, we need two operators:  
 
-1. The WebGL-renderer
-2. A circle-op
+1. The `MainLoop`-op
+2. A `Circle`-op
 
 ## 1.Add the WebGL-op
 
