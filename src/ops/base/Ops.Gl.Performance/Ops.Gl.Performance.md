@@ -9,8 +9,4 @@ Displays a small window on the bottom right side of the screen which shows the f
 ### Execute
 
 *Type: Function*  
-Connect e.g. to [Renderer](../Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op
-
-## Output
-
-// TODO
+Connect e.g. to [MainLoop](../Ops.Gl.MainLoop/Ops.Gl.MainLoop.md)-op

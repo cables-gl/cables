@@ -9,7 +9,7 @@ Generates random values between a minimum and a maximum value.
 ### Execute
 
 *Type: Trigger*  
-Connect e.g. to `trigger` port of [Renderer](../Ops.Gl.Renderer/Ops.Gl.Renderer.md)-op to continuously send out values.
+Connect e.g. to `trigger` port of [MainLoop](../Ops.Gl.MainLoop/Ops.Gl.MainLoop.md)-op to continuously send out values.
 
 ### Min
 
@@ -27,4 +27,3 @@ Maximum value
 
 *Type: Value*  
 Random value between `Min` and `Max`.
-
