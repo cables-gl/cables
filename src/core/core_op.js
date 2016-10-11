@@ -219,9 +219,13 @@ CABLES.Op = function()
             this.portsIn[i].updateAnim();
     };
 
-    CABLES.Op.prototype.log=function(txt)
+    CABLES.Op.prototype.log=function()
     {
-        if(!this.patch.silent) console.log('['+(this.getName())+'] '+txt);
+        // console.log(arguments);
+        console.log( Array.prototype.slice.call(arguments) );
+
+
+        // if(!this.patch.silent) console.log('['+(this.getName())+'] '+txt);
     };
 
     CABLES.Op.prototype.unLinkShake=function()

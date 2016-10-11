@@ -1,7 +1,7 @@
 op.name='Interval';
 
-var interval=op.addInPort(new Port(op,"interval"));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var interval=op.inValue('interval');
+var trigger=op.outFunction('trigger');
 
 interval.set(1000);
 var timeOutId=-1;
