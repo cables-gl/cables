@@ -2,7 +2,7 @@
 
 *cables* has a lot of small helpers which make working with *cables* as easy and fast as possible. In this chapter you will get to know the most important keyboard shortcuts, elements and mouse actions.  
 
-To **add an op** press the `Esc`-key. In the popup you can now enter any text which is part of the op’s namespace (e.g. `renderer`). You can now navigate through the result-set using your arrow keys (`↓` and `↑`).  
+To **add an op** press the `Esc`-key. In the popup you can now enter any text which is part of the op’s namespace (e.g. `MainLoop`). You can now navigate through the result-set using your arrow keys (`↓` and `↑`).  
 
 When you press `Enter` the selected op will be added to the editor.     
 

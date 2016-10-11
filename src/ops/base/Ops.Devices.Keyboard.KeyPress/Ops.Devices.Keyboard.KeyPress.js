@@ -1,9 +1,9 @@
-this.name="KeyPress";
+op.name="KeyPress";
 
-var cgl=this.patch.cgl;
+var cgl=op.patch.cgl;
 
-var onPress=this.addOutPort(new Port(this,"on press",OP_PORT_TYPE_FUNCTION));
-var keyCode=this.addOutPort(new Port(this,"key code",OP_PORT_TYPE_VALUE));
+var onPress=op.addOutPort(new Port(op,"on press",OP_PORT_TYPE_FUNCTION));
+var keyCode=op.addOutPort(new Port(op,"key code",OP_PORT_TYPE_VALUE));
 
 function onKeyPress(e)
 {
@@ -11,12 +11,9 @@ function onKeyPress(e)
     onPress.trigger();
 }
 
-this.onDelete=function()
+op.onDelete=function()
 {
-    console.log("remove keypress op...");
     cgl.canvas.removeEventListener('keypress', onKeyPress);
 };
 
 cgl.canvas.addEventListener("keypress", onKeyPress );
-
-console.log('keypress op');
