@@ -1,9 +1,9 @@
-var p=this.patch;
-this.name='set var array';
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var p=op.patch;
+op.name='set var array';
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
-var val=this.addInPort(new Port(this,"val",OP_PORT_TYPE_ARRAY,{}));
-var varname=this.addInPort(new Port(this,"name",OP_PORT_TYPE_VALUE,{type:"string"}));
+var val=op.addInPort(new Port(op,"val",OP_PORT_TYPE_ARRAY,{}));
+var varname=op.addInPort(new Port(op,"name",OP_PORT_TYPE_VALUE,{type:"string"}));
 
 function updateVar()
 {
