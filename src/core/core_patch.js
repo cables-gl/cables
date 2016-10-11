@@ -129,7 +129,7 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
         CABLES.UI.MODAL.showError('could not create op','op unknown');
         return;
     }
-console.log(1234);
+
     var parts=objName.split('.');
     var op=null;
 
