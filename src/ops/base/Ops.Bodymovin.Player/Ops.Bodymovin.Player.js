@@ -133,7 +133,7 @@ exe.onTriggered=function()
 op.onDelete=function()
 {
     op.log('delete bodymovin...');
-    anim.stop();
+    if(anim)anim.stop();
     anim=null;
 };
 
