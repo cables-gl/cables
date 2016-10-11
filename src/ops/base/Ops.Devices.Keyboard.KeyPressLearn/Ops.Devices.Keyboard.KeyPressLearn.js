@@ -1,22 +1,19 @@
-this.name="Ops.Devices.Keyboard.KeyPressLearn";
+op.name="KeyPressLearn";
 
-var op = this;
-var cgl=this.patch.cgl;
 
-var onPress=this.addOutPort(new Port(this,"on press",OP_PORT_TYPE_FUNCTION));
-var onRelease=this.addOutPort(new Port(this,"on release",OP_PORT_TYPE_FUNCTION));
-var learn = this.addInPort( new Port( this, "learn", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
-var learnedKeyCode = this.addInPort( new Port( this, "key code", OP_PORT_TYPE_VALUE));
-var canvasOnly=this.addInPort(new Port(this,"canvas only",OP_PORT_TYPE_VALUE, {"display": "bool"}));
+var onPress=op.addOutPort(new Port(op,"on press",OP_PORT_TYPE_FUNCTION));
+var onRelease=op.addOutPort(new Port(op,"on release",OP_PORT_TYPE_FUNCTION));
+var learn = op.addInPort( new Port( op, "learn", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var learnedKeyCode = op.addInPort( new Port( op, "key code", OP_PORT_TYPE_VALUE));
+var canvasOnly=op.addInPort(new Port(op,"canvas only",OP_PORT_TYPE_VALUE, {"display": "bool"}));
 
 var modKey=op.addInPort(new Port(op,"Mod Key",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['none','alt']} ));
 
+var cgl=op.patch.cgl;
 var learning = false;
 
 function onKeyDown(e) 
 {
-    
-    // console.log(e);
     if(learning){
         learnedKeyCode.set(e.keyCode);
         if(CABLES.UI){
@@ -53,8 +50,8 @@ function onKeyUp(e) {
     }
 }
 
-this.onDelete=function() {
-    // console.log("Remove keypress op...");
+op.onDelete=function()
+{
     cgl.canvas.removeEventListener('keyup', onKeyUp, false);
     cgl.canvas.removeEventListener('keydown', onKeyDown, false);
     document.removeEventListener("keyup", onKeyUp, false);

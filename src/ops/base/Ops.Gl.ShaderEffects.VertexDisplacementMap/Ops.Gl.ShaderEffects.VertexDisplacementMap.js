@@ -104,7 +104,7 @@ var srcBodyVert=''
 
     .endl()+'#ifdef DISPLACE_METH_MULXYZ'
     .endl()+'   {{mod}}_texVal+=1.0;'
-    .endl()+'   pos.xyz+=pos.xyz*{{mod}}_texVal * {{mod}}_extrude;'
+    .endl()+'   pos.xyz*={{mod}}_texVal * {{mod}}_extrude;'
     .endl()+'#endif'
     
     .endl()+'#ifdef DISPLACE_METH_ADDZ'

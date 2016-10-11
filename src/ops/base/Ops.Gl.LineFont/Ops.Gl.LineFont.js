@@ -1,16 +1,12 @@
 op.name="LineFont";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var string=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+var render=op.inFunction('render');
+var string=op.inValueString('Text','cables');
 
-var letterSpacing=op.addInPort(new Port(op,"Letter Spacing",OP_PORT_TYPE_VALUE));
-var lineWidth=op.addInPort(new Port(op,"Line Width",OP_PORT_TYPE_VALUE));
-var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
+var letterSpacing=op.inValue('Letter Spacing',1);
+var lineWidth=op.inValue('Line Width',2);
+var align=op.inValueSelect('align',['left','center','right']);
 
-
-letterSpacing.set(1);
-lineWidth.set(2);
-string.set("cables");
 var stringWidth=0;
 var meshes=[];
 var vec=vec3.create();
@@ -392,10 +388,6 @@ var characters=
             ]
         },
 
-
-
-
-
     ];
 
 
@@ -446,7 +438,7 @@ render.onTriggered=function()
     if(!string.get())return;
     var spaceWidth=0.3;
     vec3.set(vec, 0.3,0,0);
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     var startCharacters=97;
     var startNumbers=48;
@@ -504,7 +496,7 @@ render.onTriggered=function()
         }
     }
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };
 
 function avg(which)
@@ -591,6 +583,5 @@ for(var i=0;i<characters.length;i++)
         characters[i].m.push(mesh);
     }
     
-    // console.log(i,characters[i].m.length,characters[i].w);
     characters[i].w+=0.1;
 }
