@@ -1,21 +1,17 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
 
-this.name='RgbMultiply';
+op.name='RgbMultiply';
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.r=this.addInPort(new Port(this,"r"));
-this.g=this.addInPort(new Port(this,"g"));
-this.b=this.addInPort(new Port(this,"b"));
-this.r.val=1.0;
-this.g.val=1.0;
-this.b.val=1.0;
+var render=op.inFunction("render");
+var r=op.inValue('r',1);
+var g=op.inValue('g',1);
+var b=op.inValue('b',1);
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var cgl=op.patch.cgl;
+
+var trigger=op.outFunction('trigger');
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -42,26 +38,11 @@ var srcFrag=''
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var uniformR=new CGL.Uniform(shader,'f','r',1.0);
-var uniformG=new CGL.Uniform(shader,'f','g',1.0);
-var uniformB=new CGL.Uniform(shader,'f','b',1.0);
+var uniformR=new CGL.Uniform(shader,'f','r',r);
+var uniformG=new CGL.Uniform(shader,'f','g',g);
+var uniformB=new CGL.Uniform(shader,'f','b',b);
 
-this.r.onValueChanged=function()
-{
-    uniformR.setValue(self.r.val);
-};
-
-this.g.onValueChanged=function()
-{
-    uniformG.setValue(self.g.val);
-};
-
-this.b.onValueChanged=function()
-{
-    uniformB.setValue(self.b.val);
-};
-
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -74,5 +55,5 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };

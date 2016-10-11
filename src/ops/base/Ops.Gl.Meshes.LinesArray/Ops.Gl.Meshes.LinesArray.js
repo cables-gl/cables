@@ -98,11 +98,11 @@ function rebuild()
 
     var min=Math.log(1/numRows);
     var max=Math.log(1);
-    // console.log(min,max);
+    // op.log(min,max);
 
     for(r=numRows;r>=0;r--)
     {
-        // console.log(r/numRows);
+        // op.log(r/numRows);
         var lvx=null,lvy=null,lvz=null;
         var ltx=null,lxy=null;
         var log=0;
@@ -167,7 +167,7 @@ function rebuild()
     
     addMesh();
 
-    // console.log(meshes.length,' meshes');
+    // op.log(meshes.length,' meshes');
 
 
 }
