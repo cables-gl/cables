@@ -58,7 +58,7 @@ render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
-    if(animated.get()) timeUniform.setValue(Date.now()/10000%100);
+    if(animated.get()) timeUniform.setValue(op.patch.freeTimer.get()/1000%100);
         else timeUniform.setValue(0);
 
     cgl.setShader(shader);

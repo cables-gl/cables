@@ -13,7 +13,7 @@ var inExes=[];
 function onTrigger()
 {
     oldVal.set(currentVal.get());
-    currentVal.set( inVals[this.slot].get() );
+    currentVal.set( inVals[op.slot].get() );
     triggered.trigger();
 }
 
@@ -35,6 +35,5 @@ oldVal.set(defaultVal.get());
 defaultVal.onChange = function(){
     oldVal.set(currentVal.get());
     currentVal.set(defaultVal.get());  
-    console.log("chang");
 };
 

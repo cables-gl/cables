@@ -1,7 +1,7 @@
 op.name="AnalyserTexture";
 
-var refresh=this.addInPort(new Port(this,"refresh",OP_PORT_TYPE_FUNCTION));
-var fftArr=this.addInPort(new Port(this, "FFT Array",OP_PORT_TYPE_ARRAY));
+var refresh=op.addInPort(new Port(op,"refresh",OP_PORT_TYPE_FUNCTION));
+var fftArr=op.addInPort(new Port(op, "FFT Array",OP_PORT_TYPE_ARRAY));
 
 
 var amount=op.inValueSlider("Blur Amount");
