@@ -66,6 +66,12 @@ CABLES.Timer.prototype.update=function()
     return this._currentTime;
 };
 
+
+CABLES.Timer.prototype.getMillis=function()
+{
+    return this.get()*1000;
+};
+
 CABLES.Timer.prototype.get=CABLES.Timer.prototype.getTime=function()
 {
     if(this.overwriteTime>=0)return this.overwriteTime-this._delay;
