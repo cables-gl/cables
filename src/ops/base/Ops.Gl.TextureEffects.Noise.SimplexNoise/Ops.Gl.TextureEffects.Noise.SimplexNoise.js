@@ -1,4 +1,4 @@
-this.name='SimplexNoise';
+op.name='SimplexNoise';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
@@ -56,14 +56,14 @@ var srcFrag=''
 .endl()+'    //  compute x*x*y*y for the 4 corners'
 .endl()+'    vec4 P = vec4( gridcell.xy, gridcell_inc1.xy ) + OFFSET.xyxy;'
 .endl()+'    P *= P;'
-.endl()+'    vec4 V1xy_V2xy = mix( P.xyxy, P.zwzw, vec4( v1_mask.xy, v2_mask.xy ) );     //  apply mask for v1 and v2'
+.endl()+'    vec4 V1xy_V2xy = mix( P.xyxy, P.zwzw, vec4( v1_mask.xy, v2_mask.xy ) );     //  appl y mask for v1 and v2'
 .endl()+'    P = vec4( P.x, V1xy_V2xy.xz, P.z ) * vec4( P.y, V1xy_V2xy.yw, P.w );'
 .endl()+''
 .endl()+'    //  get the lowz and highz mods'
 .endl()+'    vec3 lowz_mods = vec3( 1.0 / ( SOMELARGEFLOATS.xyz + gridcell.zzz * ZINC.xyz ) );'
 .endl()+'    vec3 highz_mods = vec3( 1.0 / ( SOMELARGEFLOATS.xyz + gridcell_inc1.zzz * ZINC.xyz ) );'
 .endl()+''
-.endl()+'    //  apply mask for v1 and v2 mod values'
+.endl()+'    //  appl mask for v1 and v2 mod values'
 .endl()+'    v1_mask = ( v1_mask.z < 0.5 ) ? lowz_mods : highz_mods;'
 .endl()+'    v2_mask = ( v2_mask.z < 0.5 ) ? lowz_mods : highz_mods;'
 .endl()+''

@@ -27,18 +27,24 @@ var avgMillis = getAvgMillis();
 var beatCounter = 1; // [1, 2, 3, 4]
 var states=[1,0,0,0];
 
-exe.onTriggered=function() {
-    if(Date.now() > lastFlash + avgMillis){
+exe.onTriggered=function()
+{
+    if(op.patch.freeTimer.get()*1000<lastFlash)
+    {
+        lastFlash=op.patch.freeTimer.get()*1000;
+    }
+    
+    if(op.patch.freeTimer.get()*1000 > lastFlash + avgMillis){
         beat.trigger();
         incrementState();
         outStates.set(null);
         outStates.set(states);
         
         bpm.set(millisToBpm(avgMillis)); 
-        lastFlash = Date.now();
+        lastFlash = op.patch.freeTimer.get()*1000;
         //console.log("Date.now: " + Date.now());
     }
-}
+};
 
 function incrementState(){
     beatCounter++;
@@ -56,14 +62,14 @@ beatNum.set(beatCounter-1);
 
 function tapPressed() {
     // start new tap session
-    if(Date.now() - lastTap > 1000) {
+    if(op.patch.freeTimer.get()*1000 - lastTap > 1000) {
         taps.length=0;
         beatCounter = 0;
     }
     else {
-        taps.push(Date.now() - lastTap);
+        taps.push(op.patch.freeTimer.get()*1000 - lastTap);
     }
-    lastTap = Date.now();
+    lastTap = op.patch.freeTimer.get()*1000;
     avgMillis = getAvgMillis();
 }
 

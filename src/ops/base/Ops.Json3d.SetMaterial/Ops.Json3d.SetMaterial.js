@@ -1,12 +1,11 @@
-this.name="SetMaterial";
+op.name="SetMaterial";
 
-var cgl=this.patch.cgl;
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var materialName=op.addInPort(new Port(op,"name",OP_PORT_TYPE_VALUE,{'type':'string'}));
+var material=op.addInPort(new Port(op,"material",OP_PORT_TYPE_OBJECT));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var materialName=this.addInPort(new Port(this,"name",OP_PORT_TYPE_VALUE,{'type':'string'}));
-var material=this.addInPort(new Port(this,"material",OP_PORT_TYPE_OBJECT));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
+var cgl=op.patch.cgl;
 
 function render()
 {

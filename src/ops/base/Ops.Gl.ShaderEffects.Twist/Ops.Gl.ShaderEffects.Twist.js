@@ -2,18 +2,18 @@ var cgl=op.patch.cgl;
 
 var shader=null;
 
-this.name='Twist';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE));
+op.name='Twist';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE));
 
-var axisX=this.addInPort(new Port(this,"X",OP_PORT_TYPE_VALUE));
-var axisY=this.addInPort(new Port(this,"Y",OP_PORT_TYPE_VALUE));
-var axisZ=this.addInPort(new Port(this,"Z",OP_PORT_TYPE_VALUE));
+var axisX=op.addInPort(new Port(op,"X",OP_PORT_TYPE_VALUE));
+var axisY=op.addInPort(new Port(op,"Y",OP_PORT_TYPE_VALUE));
+var axisZ=op.addInPort(new Port(op,"Z",OP_PORT_TYPE_VALUE));
 
-var centerX=this.addInPort(new Port(this,"Center X",OP_PORT_TYPE_VALUE));
-var centerY=this.addInPort(new Port(this,"Center Y",OP_PORT_TYPE_VALUE));
-var centerZ=this.addInPort(new Port(this,"Center Z",OP_PORT_TYPE_VALUE));
+var centerX=op.addInPort(new Port(op,"Center X",OP_PORT_TYPE_VALUE));
+var centerY=op.addInPort(new Port(op,"Center Y",OP_PORT_TYPE_VALUE));
+var centerZ=op.addInPort(new Port(op,"Center Z",OP_PORT_TYPE_VALUE));
 
 
 var srcHeadVert=''
@@ -43,15 +43,11 @@ var srcHeadVert=''
     .endl()+'   pos.x-={{mod}}_center_x;'
     .endl()+'   pos.y-={{mod}}_center_y;'
     .endl()+'   pos.z-={{mod}}_center_z;'
-    // .endl()+'   float an=( (pos.z-{{mod}}_center_z) * (pos.x - {{mod}}_center_x));'
     .endl()+'   float an=( (pos.y) * (pos.x));'
 
     
 
     .endl()+'   pos=pos*rotationMatrix(vec3({{mod}}_axis_x,{{mod}}_axis_y,{{mod}}_axis_z),an * {{mod}}_amount/100.0 );'
-    // .endl()+'   pos.x+={{mod}}_center_x;'
-    // .endl()+'   pos.y+={{mod}}_center_y;'
-    // .endl()+'   pos.z+={{mod}}_center_z;'
 
     .endl()+'   pos.x+={{mod}}_center_x;'
     .endl()+'   pos.y+={{mod}}_center_y;'
@@ -86,8 +82,6 @@ render.onTriggered=function()
                 srcBodyVert:srcBodyVert
             });
 
-        // uniTime=new CGL.Uniform(shader,'f',module.prefix+'_time',0);
-        // uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'_frequency',self.frequency.val);
         uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_amount',amount);
         uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_axis_x',axisX);
         uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_axis_y',axisY);
@@ -96,15 +90,7 @@ render.onTriggered=function()
         uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_center_x',centerX);
         uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_center_y',centerY);
         uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_center_z',centerZ);
-        
-        // uniPhase=new CGL.Uniform(shader,'f',module.prefix+'_phase',self.phase.val);
-        // setDefines();
     }
 
-    // uniTime.setValue(Date.now()/1000.0-startTime);
     trigger.trigger();
 };
-
-// amount.onValueChange(function(){
-//     if(uniAmount) uniAmount.setValue(amount.get());
-// });

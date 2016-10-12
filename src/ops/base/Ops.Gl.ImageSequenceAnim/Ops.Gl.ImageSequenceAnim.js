@@ -33,9 +33,9 @@ function setRepeat()
 
 exe.onTriggered=function()
 {
-    if(Date.now()-lastSwitch>1000/fps.get())
+    if(op.patch.freeTimer.getMillis()-lastSwitch>1000/fps.get())
     {
-        lastSwitch=Date.now();
+        lastSwitch=op.patch.freeTimer.getMillis();
         frame++;
         posX++;
 
@@ -59,3 +59,5 @@ exe.onTriggered=function()
 
     next.trigger();
 };
+
+
