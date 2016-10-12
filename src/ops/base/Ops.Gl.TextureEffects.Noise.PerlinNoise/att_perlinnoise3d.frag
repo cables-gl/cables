@@ -7,6 +7,9 @@ uniform float scale;
 varying vec2 texCoord;
 uniform sampler2D tex;
 
+uniform float amount;
+
+{{BLENDCODE}}
 
 
 float Interpolation_C2( float x ) { return x * x * x * (x * (x * 6.0 - 15.0) + 10.0); }   //  6x^5-15x^4+10x^3	( Quintic Curve.  As used by Perlin in Improved Noise.  http://mrl.nyu.edu/~perlin/paper445.pdf )
@@ -148,6 +151,7 @@ float Perlin3D( vec3 P )
 
 void main()
 {
+    vec4 base=texture2D(tex,texCoord);
 
    vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
    p=p*scale;
@@ -156,5 +160,10 @@ void main()
 
    float v=Perlin3D(vec3(p.x,p.y,z))*0.5+0.5;
    vec4 col=vec4(v,v,v,1.0);
+
+   // col=vec4( _blend(base.rgb,col.rgb) ,amount);
+   col=vec4( _blend(base.rgb,col.rgb) ,1.0);
+   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
+
    gl_FragColor = col;
 }
