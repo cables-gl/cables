@@ -1,10 +1,11 @@
-this.name="vertex color material";
-var cgl=this.patch.cgl;
+op.name="vertex color material";
+var cgl=op.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var opacity=this.addInPort(new Port(this,"opacity",OP_PORT_TYPE_VALUE,{display:'range'}));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var opacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE,{display:'range'}));
 opacity.set(1);
+
 var srcVert=''
     .endl()+'{{MODULES_HEAD}}'
 
@@ -59,7 +60,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 uniOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 
 shader.setSource(srcVert,srcFrag);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 

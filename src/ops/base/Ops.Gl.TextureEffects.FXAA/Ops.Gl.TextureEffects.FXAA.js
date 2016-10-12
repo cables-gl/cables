@@ -8,7 +8,7 @@ var fxaa_span=op.addInPort(new Port(op,"span",OP_PORT_TYPE_VALUE,{display:'dropd
 var fxaa_reduceMin=op.addInPort(new Port(op,"reduceMin",OP_PORT_TYPE_VALUE));
 var fxaa_reduceMul=op.addInPort(new Port(op,"reduceMul",OP_PORT_TYPE_VALUE));
 
-var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var useVPSize=op.inValueBool("use viewport size",true);
 
 var texWidth=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var texHeight=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));

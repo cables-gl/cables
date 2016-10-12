@@ -1,6 +1,8 @@
 op.name="BrowserCheck";
 
 var isIe=op.outValue("Is IE",false);
+var isIe10Plus=op.outValue("Is IE 10+",false);
+var isIe11=op.outValue("Is IE 11",false);
 var isEdge=op.outValue("Is Edge",false);
 var isChrome=op.outValue("Is Chrome",false);
 var isFirefox=op.outValue("Is Firefox",false);
@@ -17,6 +19,16 @@ if( /MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) 
 {
     isIe.set(true);
     isFirefox.set(false);
+    if( /MSIE 9/i.test(navigator.userAgent) ) {
+        isIe10Plus.set(false);    
+        isIe11.set(false);    
+    } else if( /MSIE 10/i.test(navigator.userAgent) ) {
+        isIe10Plus.set(true);    
+        isIe11.set(false);    
+    } else if( /rv:11.0/i.test(navigator.userAgent) ) {
+        isIe10Plus.set(false);    
+        isIe11.set(true);    
+    }
 }
 
 if(/Edge\/\d./i.test(navigator.userAgent))

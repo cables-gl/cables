@@ -35,7 +35,6 @@ eventIn.onValueChanged=function()
     var event=eventIn.get();
     if(learning)
     {
-        console.log(event.note);
         note.set(event.note);
         learning=false;
 

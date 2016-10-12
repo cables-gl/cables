@@ -8,12 +8,12 @@ var cpsCount=0;
 
 exe.onTriggered=function()
 {
-    if(timeStart===0)timeStart=Date.now();
-    var now = Date.now();
+    if(timeStart===0)timeStart=CABLES.milliSeconds();
+    var now = CABLES.milliSeconds();
 
     if(now-timeStart>1000)
     {
-        timeStart=Date.now();
+        timeStart=CABLES.milliSeconds();
         cps.set(cpsCount);
         cpsCount=0;
     }

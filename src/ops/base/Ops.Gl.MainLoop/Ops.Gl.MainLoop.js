@@ -49,12 +49,12 @@ op.onAnimFrame=function(time)
         height.set(cgl.canvasHeight);
     }
 
-    if(Date.now()-rframeStart>1000)
+    if(CABLES.milliSeconds()-rframeStart>1000)
     {
         CGL.fpsReport=CGL.fpsReport||[];
         if(op.patch.loading.getProgress()>=1.0 && rframeStart!==0)CGL.fpsReport.push(rframes);
         rframes=0;
-        rframeStart=Date.now();
+        rframeStart=CABLES.milliSeconds();
     }
     CGL.MESH.lastShader=null;
     CGL.MESH.lastMesh=null;

@@ -24,8 +24,6 @@ eventIn.onValueChanged=function()
         note.set(event.note);
         learning=false;
         
-        console.log('bound '+event.note);
-        
         if(CABLES.UI)
         {
             op.uiAttr({info:'bound to note: ' + note.get()});

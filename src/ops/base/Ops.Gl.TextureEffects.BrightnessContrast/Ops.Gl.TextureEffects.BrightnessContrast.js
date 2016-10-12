@@ -30,10 +30,10 @@ var srcFrag=''
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'       col=texture2D(tex,texCoord);'
 
-    .endl()+'       // apply contrast'
+    .endl()+'       // appl y contrast'
     .endl()+'       col.rgb = ((col.rgb - 0.5) * max(amount*2.0, 0.0))+0.5;'
 
-    .endl()+'       // apply brightness'
+    .endl()+'       // appl y brightness'
     .endl()+'       col.rgb *= amountbright*2.0;'
 
     .endl()+'   #endif'
