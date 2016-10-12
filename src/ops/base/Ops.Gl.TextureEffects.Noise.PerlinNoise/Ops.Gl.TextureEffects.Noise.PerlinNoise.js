@@ -14,13 +14,22 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-shader.setSource(shader.getDefaultVertexShader(),attachments.perlinnoise3d_frag);
+
+var srcFrag=attachments.perlinnoise3d_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
+
+shader.setSource(shader.getDefaultVertexShader(),srcFrag );
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 var uniZ=new CGL.Uniform(shader,'f','z',z);
 var uniX=new CGL.Uniform(shader,'f','x',x);
 var uniY=new CGL.Uniform(shader,'f','y',y);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
+var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+
+blendMode.onChange=function()
+{
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};
 
 render.onTriggered=function()
 {
