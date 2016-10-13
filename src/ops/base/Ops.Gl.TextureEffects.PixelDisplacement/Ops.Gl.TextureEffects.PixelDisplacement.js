@@ -1,18 +1,17 @@
-CABLES.Op.apply(this, arguments);
-var self=this;
-var cgl=this.patch.cgl;
+op.name='PixelDisplacement';
 
-this.name='PixelDisplacement';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var amount=op.addInPort(new Port(op,"amountX",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var amountY=op.addInPort(new Port(op,"amountY",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-this.amount=this.addInPort(new Port(this,"amountX",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.amountY=this.addInPort(new Port(this,"amountY",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.displaceTex=this.addInPort(new Port(this,"displaceTex",OP_PORT_TYPE_TEXTURE));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var displaceTex=op.inTexture("displaceTex");
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+
+var cgl=op.patch.cgl;
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -44,20 +43,10 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureDisplaceUniform=new CGL.Uniform(shader,'t','displaceTex',1);
 
-var amountXUniform=new CGL.Uniform(shader,'f','amountX',0.0);
-var amountYUniform=new CGL.Uniform(shader,'f','amountY',0.0);
+var amountXUniform=new CGL.Uniform(shader,'f','amountX',amount);
+var amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY);
 
-this.amount.onValueChanged=function()
-{
-    amountXUniform.setValue(self.amount.val);
-};
-
-this.amountY.onValueChanged=function()
-{
-    amountYUniform.setValue(self.amountY.val);
-};
-
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -67,17 +56,15 @@ this.render.onTriggered=function()
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
-    if(self.displaceTex.val)
+    if(displaceTex.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.displaceTex.val.tex );
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, displaceTex.get().tex );
     }
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };
 
-self.amount.val=0.0;
-self.amountY.val=0.0;

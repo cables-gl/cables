@@ -58,6 +58,8 @@ function reset()
     geom.texCoords=texCoords;
 
     mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+    mesh.addVertexNumbers=true;
+    mesh.setGeom(geom);
 }
 
 size.set(40);
