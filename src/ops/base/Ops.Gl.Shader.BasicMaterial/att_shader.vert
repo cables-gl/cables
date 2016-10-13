@@ -30,7 +30,6 @@ void main()
 
    vec4 pos = vec4( vPosition, 1. );
 
-   {{MODULE_VERTEX_POSITION}}
 
     #ifdef BILLBOARD
        vec3 position=vPosition;
@@ -46,6 +45,8 @@ void main()
                mvMatrix[1][1],
                mvMatrix[2][1]) ), 1.0);
     #endif
+
+    {{MODULE_VERTEX_POSITION}}
 
     #ifndef BILLBOARD
         gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
