@@ -46,7 +46,7 @@ void main()
                mvMatrix[2][1]) ), 1.0);
     #endif
     #ifndef BILLBOARD
-        mvMatrix=viewMatrix * modelMatrix;
+        mat4 mvMatrix=viewMatrix * modelMatrix;
     #endif
 
     {{MODULE_VERTEX_POSITION}}
