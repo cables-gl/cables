@@ -3,7 +3,7 @@ op.name="Noise";
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",0.25);
+var amount=op.inValueSlider("Amount",1);
 
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
 
