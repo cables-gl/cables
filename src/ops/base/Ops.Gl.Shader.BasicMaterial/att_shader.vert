@@ -45,10 +45,14 @@ void main()
                mvMatrix[1][1],
                mvMatrix[2][1]) ), 1.0);
     #endif
+    #ifndef BILLBOARD
+        mvMatrix=viewMatrix * modelMatrix;
+    #endif
 
     {{MODULE_VERTEX_POSITION}}
 
     #ifndef BILLBOARD
-        gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
+        // gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
+        gl_Position = projMatrix * mvMatrix * pos;
     #endif
 }
