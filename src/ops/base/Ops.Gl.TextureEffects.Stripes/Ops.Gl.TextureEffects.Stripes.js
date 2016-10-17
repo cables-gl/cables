@@ -55,8 +55,6 @@ axis.onValueChanged=function()
     if(axis.get()=='Y')uniAxis.setValue(1);
     if(axis.get()=='Diagonal')uniAxis.setValue(2);
     if(axis.get()=='Diagonal Flip')uniAxis.setValue(3);
-    
-    console.log(axis.get());
 };
 
 var cgl=op.patch.cgl;
