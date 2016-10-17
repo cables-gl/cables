@@ -2,4 +2,4 @@
 
 *Ops.Gl.TextureEffects.Gradient*
 
-Draws a simple gradient between 3 colors
+Draws a simple gradient between three colors
