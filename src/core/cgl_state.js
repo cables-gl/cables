@@ -81,6 +81,7 @@ CGL.State=function()
     this.doScreenshot=false;
     this.doScreenshotClearAlpha=false;
     this.screenShotDataURL=null;
+    this.screenShotCallBack=null;
 
     this.getViewPort=function()
     {
@@ -138,6 +139,18 @@ CGL.State=function()
 
             this.doScreenshot=false;
             this.screenShotDataURL = document.getElementById("glcanvas").toDataURL('image/png');
+            if(this.onScreenShot)this.onScreenShot(this.screenShotDataURL);
+
+            // this.screenShotDataURL = document.getElementById("glcanvas").toBlob(
+            //     function(blob)
+            //     {
+            //         this.screenShotDataURL=URL.createObjectURL(blob);
+            //         console.log(this.screenShotDataURL);
+            //         console.log('screenshot done');
+            //         if(this.onScreenShot)this.onScreenShot(this.screenShotDataURL);
+            //
+            //     });
+
         }
 
         if(oldCanvasWidth!=self.canvasWidth || oldCanvasHeight!=self.canvasHeight)

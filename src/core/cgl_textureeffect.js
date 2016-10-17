@@ -175,6 +175,10 @@ CGL.TextureEffect.getBlendCode=function()
     .endl()+'   colNew=base*blend;'
     .endl()+'   #endif'
 
+    .endl()+'   #ifdef BM_MULTIPLY_INV'
+    .endl()+'   colNew=base* vec3(1.0)-blend;'
+    .endl()+'   #endif'
+
 
     .endl()+'   #ifdef BM_AVERAGE'
     .endl()+'   colNew=((base + blend) / 2.0);'
@@ -256,6 +260,9 @@ CGL.TextureEffect.onChangeBlendSelect=function(shader,blendName)
     if(blendName=='multiply') shader.define('BM_MULTIPLY');
         else shader.removeDefine('BM_MULTIPLY');
 
+    if(blendName=='multiply invert') shader.define('BM_MULTIPLY_INV');
+        else shader.removeDefine('BM_MULTIPLY_INV');
+
     if(blendName=='average') shader.define('BM_AVERAGE');
         else shader.removeDefine('BM_AVERAGE');
 
@@ -308,6 +315,7 @@ CGL.TextureEffect.AddBlendSelect=function(op,name)
             'lighten',
             'darken',
             'multiply',
+            'multiply invert',
             'average',
             'add',
             'substract',

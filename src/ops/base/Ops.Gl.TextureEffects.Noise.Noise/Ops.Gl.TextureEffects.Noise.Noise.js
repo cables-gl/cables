@@ -15,7 +15,6 @@ var shader=new CGL.Shader(cgl);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 
-
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
