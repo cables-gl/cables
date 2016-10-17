@@ -6,17 +6,17 @@ var trigger=op.addInPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_FUNCTION));
 var time=op.addOutPort(new Port(op,"time",OP_PORT_TYPE_VALUE));
 
-var lastTrigger=Date.now()/1000;
+var lastTrigger=op.patch.freeTimer.get();
 time.set(-1);
 
 exe.onTriggered=function()
 {
-    time.set( Date.now()/1000-lastTrigger);
+    time.set( op.patch.freeTimer.get()-lastTrigger);
     next.trigger();  
 };
 
 trigger.onTriggered=function()
 {
-    lastTrigger=Date.now()/1000;
+    lastTrigger=op.patch.freeTimer.get();
     time.set(0);
 };
