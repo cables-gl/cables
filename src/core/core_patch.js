@@ -286,7 +286,7 @@ CABLES.Patch.prototype.exec=function(e)
         if(now-lastFrameTime>100 && lastFrameTime!==0  && !wasdelayed)
         {
             lastFrameTime=0;
-            setTimeout(this.exec.bind(this),500);
+            setTimeout(this.exec.bind(this),250);
 
             $('#delayed').show();
             // CABLES.UI.notify('renderer delayed...');
