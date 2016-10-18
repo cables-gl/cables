@@ -273,10 +273,20 @@ CABLES.Patch.prototype.exec=function(e)
 
     if(CABLES.UI)
     {
-        if(now-lastFrameTime>90 && lastFrameTime!==0  && !wasdelayed)
+        if(now-lastFrameTime>500 && lastFrameTime!==0  && !wasdelayed)
         {
             lastFrameTime=0;
-            setTimeout(this.exec.bind(this),1200);
+            setTimeout(this.exec.bind(this),3000);
+
+            $('#delayed').show();
+            // CABLES.UI.notify('renderer delayed...');
+            wasdelayed=true;
+            return;
+        }
+        if(now-lastFrameTime>100 && lastFrameTime!==0  && !wasdelayed)
+        {
+            lastFrameTime=0;
+            setTimeout(this.exec.bind(this),500);
 
             $('#delayed').show();
             // CABLES.UI.notify('renderer delayed...');
