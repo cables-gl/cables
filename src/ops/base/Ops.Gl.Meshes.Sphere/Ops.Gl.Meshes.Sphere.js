@@ -128,7 +128,7 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
             geom.texCoords[idx/3*2  ] = (j)/(slices);
             geom.texCoords[idx/3*2+1] = (i-1)/(stacks-2);
             
-            // console.log(geom.texCoords[idx/3*2+1  ]);
+            // op.log(geom.texCoords[idx/3*2+1  ]);
         }
     }
 

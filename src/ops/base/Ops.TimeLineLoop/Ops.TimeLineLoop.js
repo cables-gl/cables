@@ -13,5 +13,4 @@ execute.onTriggered=function()
     }
     
     trigger.trigger();
-
-}
+};

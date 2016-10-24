@@ -65,9 +65,7 @@ function prepare()
         mesh=new CGL.Mesh(cgl,geom.get());
         mesh.numInstances=num;
         mesh.addAttribute('instMat',matrices,16);
-
     }
-
 }
 
 
@@ -99,16 +97,13 @@ function doRender()
             }
             else
             {
-                uniDoInstancing=shader.getUniform('do_instancing')
+                uniDoInstancing=shader.getUniform('do_instancing');
             }
         }
 
         uniDoInstancing.setValue(1);
-        
         mesh.render(shader);
-        
         uniDoInstancing.setValue(0);
-        
     }
     else
     {

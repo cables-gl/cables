@@ -1,23 +1,19 @@
-var self=this;
-Op.apply(this, arguments);
 
-this.name='random';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.result=this.addOutPort(new Port(this,"result"));
+op.name='random';
 
-this.minusPlusOne=this.addInPort(new Port(this,"0 to x / -x to x ",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var exe=op.inFunction('exe');
+var minusPlusOne=op.addInPort(new Port(op,"0 to x / -x to x ",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var max=op.inValue("max",1);
+var result=op.outValue("result");
 
-this.max=this.addInPort(new Port(this,"max"));
+exe.onTriggered=calcRandom;
+max.onChange=calcRandom;
+
+calcRandom();
 
 function calcRandom()
 {
-    if(self.minusPlusOne.val) self.result.val=(Math.random()*self.max.val)*2-self.max.val/2;
-        else self.result.val=Math.random()*self.max.val;
+    if(minusPlusOne.get()) result.set((Math.random()*max.get())*2-max.get()/2);
+        else result.set(Math.random()*max.get());
 }
 
-this.exe.onTriggered=calcRandom;
-this.max.onValueChanged=calcRandom;
-
-
-this.exe.onTriggered();
-this.max.val=1.0;

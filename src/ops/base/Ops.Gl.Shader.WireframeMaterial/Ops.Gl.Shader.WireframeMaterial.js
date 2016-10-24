@@ -66,8 +66,8 @@ var srcVert=''
 
     .endl()+'   #ifdef WIREFRAME_FILL'
     .endl()+'       float v=opacity*(1.0-edgeFactor())*0.95;'
-    .endl()+'       vec3 wire = vec3(r, g, b);'
-    .endl()+'       col.rgb = vec3(fr, fg, fb);'
+    .endl()+'       vec3 wire = vec3(fr, fg, fb);'
+    .endl()+'       col.rgb = vec3(r, g, b);'
     .endl()+'       col.rgb = mix(wire,col.rgb,v);'
     .endl()+'       col.a = opacity;'
     

@@ -5,9 +5,9 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var threshold=op.addInPort(new Port(op,"amthresholdount",OP_PORT_TYPE_VALUE,{display:'range'}));
-var mul=op.inValueSlider("Amount");
+var mul=op.inValue("Amount",2.0);
 threshold.set(0.5);
-mul.set(0.5);
+
 
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;

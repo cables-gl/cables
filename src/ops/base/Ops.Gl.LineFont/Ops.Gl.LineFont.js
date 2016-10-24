@@ -1,16 +1,12 @@
 op.name="LineFont";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var string=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+var render=op.inFunction('render');
+var string=op.inValueString('Text','cables');
 
-var letterSpacing=op.addInPort(new Port(op,"Letter Spacing",OP_PORT_TYPE_VALUE));
-var lineWidth=op.addInPort(new Port(op,"Line Width",OP_PORT_TYPE_VALUE));
-var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
+var letterSpacing=op.inValue('Letter Spacing',1);
+var lineWidth=op.inValue('Line Width',2);
+var align=op.inValueSelect('align',['left','center','right']);
 
-
-letterSpacing.set(1);
-lineWidth.set(2);
-string.set("cables");
 var stringWidth=0;
 var meshes=[];
 var vec=vec3.create();
@@ -392,10 +388,6 @@ var characters=
             ]
         },
 
-
-
-
-
     ];
 
 
@@ -444,13 +436,13 @@ render.onTriggered=function()
 {
     stringWidth=0;
     if(!string.get())return;
-    var spaceWidth=0.3;
+    var spaceWidth=0.15;
     vec3.set(vec, 0.3,0,0);
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     var startCharacters=97;
     var startNumbers=48;
-    
+
     var str=string.get()+'';
 
     cgl.gl.lineWidth(lineWidth.get());
@@ -469,22 +461,22 @@ render.onTriggered=function()
         {
             var w=0;
             var charIndex=str.toLowerCase().charCodeAt(i);
-    
-            if(charIndex==38) renderChar(36); // &
-            else if(charIndex==39) renderChar(37); // '
-            else if(charIndex==34) renderChar(37); // '
-            else if(charIndex==59) renderChar(38); // ;
-            else if(charIndex==58) renderChar(39); // :
-            else if(charIndex==95) renderChar(40); // _
-            else if(charIndex==43) renderChar(41); // +
-            else if(charIndex==45) renderChar(42); // -
-            else if(charIndex==47) renderChar(43); // /
-            else if(charIndex==46) renderChar(44); // .
-            else if(charIndex==44) renderChar(45); // ,
-            else if(charIndex==41) renderChar(46); // )
-            else if(charIndex==40) renderChar(47); // ()
-            else if(charIndex==63) renderChar(48); // ?
-            else if(charIndex==33) renderChar(49); // !
+
+            if(charIndex==38) renderChar(36,simulate); // &
+            else if(charIndex==39) renderChar(37,simulate); // '
+            else if(charIndex==34) renderChar(37,simulate); // '
+            else if(charIndex==59) renderChar(38,simulate); // ;
+            else if(charIndex==58) renderChar(39,simulate); // :
+            else if(charIndex==95) renderChar(40,simulate); // _
+            else if(charIndex==43) renderChar(41,simulate); // +
+            else if(charIndex==45) renderChar(42,simulate); // -
+            else if(charIndex==47) renderChar(43,simulate); // /
+            else if(charIndex==46) renderChar(44,simulate); // .
+            else if(charIndex==44) renderChar(45,simulate); // ,
+            else if(charIndex==41) renderChar(46,simulate); // )
+            else if(charIndex==40) renderChar(47,simulate); // ()
+            else if(charIndex==63) renderChar(48,simulate); // ?
+            else if(charIndex==33) renderChar(49,simulate); // !
             else
             if(charIndex>=startNumbers && charIndex<=startNumbers+10)
             {
@@ -498,13 +490,13 @@ render.onTriggered=function()
             else
             if(charIndex==32)
             {
-                translateX(spaceWidth);
-                stringWidth+=spaceWidth;
+                if(simulate)stringWidth+=spaceWidth;
+                else translateX(spaceWidth);
             }
         }
     }
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };
 
 function avg(which)
@@ -591,6 +583,5 @@ for(var i=0;i<characters.length;i++)
         characters[i].m.push(mesh);
     }
     
-    // console.log(i,characters[i].m.length,characters[i].w);
     characters[i].w+=0.1;
 }

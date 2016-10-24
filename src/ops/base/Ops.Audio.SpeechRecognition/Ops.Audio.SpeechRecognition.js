@@ -1,6 +1,5 @@
 op.name="SpeechRecognition";
 
-// var lang=op.inValueString("Language","en-US");
 var result=op.outValue("Result");
 
 window.SpeechRecognition = window.SpeechRecognition||window.webkitSpeechRecognition || mozSpeechRecognition || window.mozSpeechRecognition;
@@ -31,12 +30,12 @@ function restart()
 recognition.onstart = function() { op.log('recognition start'); };
 recognition.onresult = function(event) { op.log('recognition result'); };
 recognition.onstop = function(event) { op.log('recognition stop'); };
-recognition.onerror = function(event) { console.log('recognition error',result); };
+recognition.onerror = function(event) { op.log('recognition error',result); };
 
 
 recognition.onresult = function(event)
 {
     result.set(event.results[0][0].transcript);
-    console.log('You said: ', event.results[0][0].transcript);
+    op.log('You said: ', event.results[0][0].transcript);
     restart();
 };

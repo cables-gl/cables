@@ -13,7 +13,7 @@ for (var i = 0; i < a.length; i++)
 
 function update()
 {
-    console.log(query);
+    op.log(query);
     result.set(query[paramName.get()]);
 }
 

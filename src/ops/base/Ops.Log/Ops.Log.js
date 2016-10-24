@@ -1,7 +1,8 @@
 op.name='logger';
 var exe=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
 var functionInput=op.addInPort(new Port(op,"Function Input",OP_PORT_TYPE_FUNCTION));
-var valueInput=op.addInPort(new Port(op,"Value Input"));
+// var valueInput=op.addInPort(new Port(op,"Value Input"));
+var valueInput=op.inValueString('Value Input');
 valueInput.set('');
 var arrayInput=op.addInPort(new Port(op,"Array Input", OP_PORT_TYPE_ARRAY));
 arrayInput.set('');

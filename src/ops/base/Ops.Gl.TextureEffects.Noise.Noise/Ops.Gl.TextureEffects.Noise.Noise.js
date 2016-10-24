@@ -3,7 +3,7 @@ op.name="Noise";
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",0.25);
+var amount=op.inValueSlider("Amount",1);
 
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
 
@@ -14,7 +14,6 @@ var shader=new CGL.Shader(cgl);
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
-
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -58,7 +57,7 @@ render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
-    if(animated.get()) timeUniform.setValue(Date.now()/10000%100);
+    if(animated.get()) timeUniform.setValue(op.patch.freeTimer.get()/1000%100);
         else timeUniform.setValue(0);
 
     cgl.setShader(shader);

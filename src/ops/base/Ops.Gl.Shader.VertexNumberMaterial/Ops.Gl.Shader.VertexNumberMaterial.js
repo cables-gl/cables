@@ -24,7 +24,6 @@ var srcFrag=''
     
     .endl()+'void main()'
     .endl()+'{'
-    
 
     .endl()+'   gl_FragColor = vec4(num/numVertices,num/numVertices,num/numVertices,1.0);'
     .endl()+'}';

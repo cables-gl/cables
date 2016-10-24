@@ -20,13 +20,7 @@ delay.onValueChanged=setAnim;
 interval.onValueChanged=setAnim;
 interval.set(1);
 
-
-window.performance = (window.performance || {
-    offset: Date.now(),
-    now: function now(){ return Date.now() - this.offset; }
-});
-
-var startTime=performance.now();
+var startTime=CABLES.milliSeconds();
 
 function setAnim()
 {
@@ -34,16 +28,14 @@ function setAnim()
     anim.keys[0].value=0;
     anim.keys[1].time=delay.get()+interval.get();
     anim.keys[1].value=1;
-    startTime=performance.now();
+    startTime=CABLES.milliSeconds();
 }
 
 
 exe.onTriggered=function()
 {
-    var now=(performance.now()-startTime)/1000;
+    var now=(CABLES.milliSeconds()-startTime)/1000;
     var perc=anim.getValue(now);
 
     percent.set( perc );
-    
-
 };

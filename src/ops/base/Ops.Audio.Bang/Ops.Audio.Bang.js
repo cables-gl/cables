@@ -17,8 +17,6 @@ var anim=new CABLES.TL.Anim();
 var easing=this.addInPort(new Port(this,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
 easing.set('linear');
 
-var lastBeat = 0;
-var lastBeatTimeout = 3000;
 
 function init()
 {
@@ -29,17 +27,16 @@ function init()
     anim.clear();
 
     if(bpm === 0){
-        anim.setValue(parseFloat(1000 + Date.now()/1000.0), endValue.get());
+        anim.setValue(parseFloat(1000 + op.patch.freeTimer.get()), endValue.get());
     }else {
         duration = 4 / (bpm.get()/60); // duration of one beat in seconds
-        anim.setValue(Date.now()/1000.0, startValue.get());
-        anim.setValue(parseFloat(duration + Date.now()/1000.0), endValue.get());
+        anim.setValue(op.patch.freeTimer.get(), startValue.get());
+        anim.setValue(parseFloat(duration + op.patch.freeTimer.get()), endValue.get());
     }
 }
 
 beat.onTriggered = function(){
-    lastBeat = Date.now();
-    var t=Date.now()/1000;
+    var t=op.patch.freeTimer.get();
     var v=anim.getValue(t);
     init();
 };
@@ -53,7 +50,7 @@ exe.onTriggered=function()
         bang.set(endValue.get());
     }
 
-    var t=Date.now()/1000;
+    var t=op.patch.freeTimer.get();
     var v=anim.getValue(t);
 
     bang.set(v);

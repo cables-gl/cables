@@ -13,9 +13,6 @@ var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-
-
-
 makeRound.set(true);
 doScale.set(false);
 pointSize.set(3);
@@ -50,7 +47,8 @@ var uniWidth=new CGL.Uniform(shader,'f','canvasWidth',cgl.canvasWidth);
 var uniHeight=new CGL.Uniform(shader,'f','canvasHeight',cgl.canvasHeight);
 
 render.onTriggered=doRender;
-var texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+
+var texture=op.inTexture("texture");
 var textureUniform=null;
 
 function bindTextures()
@@ -78,13 +76,6 @@ function doRender()
     cgl.setPreviousShader();
 }
 
-texture.onPreviewChanged=function()
-{
-    if(texture.showPreview) render.onTriggered=texture.get().preview;
-        else render.onTriggered=doRender;
-
-    console.log('show preview!');
-};
 
 doScale.onValueChanged=function()
 {

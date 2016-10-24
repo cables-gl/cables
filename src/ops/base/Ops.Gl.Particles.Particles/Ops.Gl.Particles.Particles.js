@@ -34,7 +34,8 @@ function create()
     console.log(verts.length);
 
     if(!mesh)mesh =new CGL.Mesh(cgl,geom);
-        else mesh.setGeom(geom);
+    mesh.addVertexNumbers=true;    
+    mesh.setGeom(geom);
     
 }
 

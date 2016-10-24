@@ -1,23 +1,16 @@
-var self=this;
 
-this.name='if between then';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+op.name='if between then';
+var exe=op.inFunction("exe");
 
-this.number=this.addInPort(new Port(this,"number"));
-this.number.val=0;
+var number=op.inValue("number",0);
+var min=op.inValue("min",0);
+var max=op.inValue("max",1);
 
-this.min=this.addInPort(new Port(this,"min"));
-this.min.val=0;
+var triggerThen=op.outFunction('then');
+var triggerElse=op.outFunction('else');
 
-this.max=this.addInPort(new Port(this,"max"));
-this.max.val=1;
-
-
-this.triggerThen=this.addOutPort(new Port(this,"then",OP_PORT_TYPE_FUNCTION));
-this.triggerElse=this.addOutPort(new Port(this,"else",OP_PORT_TYPE_FUNCTION));
-
-this.exe.onTriggered=function()
+exe.onTriggered=function()
 {
-    if(self.number.get()>=self.min.get() && self.number.get()<self.max.get()) self.triggerThen.trigger();
-        else self.triggerElse.trigger();
+    if(number.get()>=min.get() && number.get()<max.get()) triggerThen.trigger();
+        else triggerElse.trigger();
 };

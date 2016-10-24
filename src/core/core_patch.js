@@ -129,7 +129,7 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
         CABLES.UI.MODAL.showError('could not create op','op unknown');
         return;
     }
-console.log(1234);
+
     var parts=objName.split('.');
     var op=null;
 
@@ -273,10 +273,20 @@ CABLES.Patch.prototype.exec=function(e)
 
     if(CABLES.UI)
     {
-        if(now-lastFrameTime>90 && lastFrameTime!==0  && !wasdelayed)
+        if(now-lastFrameTime>500 && lastFrameTime!==0  && !wasdelayed)
         {
             lastFrameTime=0;
-            setTimeout(this.exec.bind(this),1200);
+            setTimeout(this.exec.bind(this),3000);
+
+            $('#delayed').show();
+            // CABLES.UI.notify('renderer delayed...');
+            wasdelayed=true;
+            return;
+        }
+        if(now-lastFrameTime>100 && lastFrameTime!==0  && !wasdelayed)
+        {
+            lastFrameTime=0;
+            setTimeout(this.exec.bind(this),250);
 
             $('#delayed').show();
             // CABLES.UI.notify('renderer delayed...');

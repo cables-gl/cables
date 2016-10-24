@@ -1,6 +1,6 @@
 op.name="bodymovin";
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 
 var play=op.addInPort(new Port(op,"play",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
@@ -16,11 +16,11 @@ var height=op.addInPort(new Port(op,"texture height"));
 
 var bmScale=op.addInPort(new Port(op,"scale",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['fit','nofit']}));
 
-var rewind=this.addInPort(new Port(this,"rewind",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var rewind=op.addInPort(new Port(op,"rewind",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 var speed=op.addInPort(new Port(op,"speed"));
 var frame=op.addInPort(new Port(op,"frame"));
 
-var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var textureOut=op.outTexture("texture");
 
 var canvasId="bodymovin_"+CABLES.generateUUID();
 
@@ -77,7 +77,7 @@ flip.onValueChanged=function()
 
 wrap.onValueChanged=function()
 {
-    // console.log(wrap.get());
+    // op.log(wrap.get());
     if(wrap.get()=='repeat') cgl_wrap=CGL.Texture.WRAP_REPEAT;
     if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
     if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
@@ -132,8 +132,8 @@ exe.onTriggered=function()
 
 op.onDelete=function()
 {
-    console.log('delete bodymovin...');
-    anim.stop();
+    op.log('delete bodymovin...');
+    if(anim)anim.stop();
     anim=null;
 };
 
@@ -155,19 +155,19 @@ function reload(force)
 
     if(!canvasImage || force)
     {
-        console.log("create canvas...");
+        op.log("create canvas...");
         if(canvas)
         {
             canvas.remove();
         }
         canvas = document.createElement('canvas');
         canvas.id     = canvasId;
-        console.log('canvasId',canvasId);
+        op.log('canvasId',canvasId);
 
         canvas.width  = width.get();
         canvas.height = height.get();
 
-        console.log("canvas size",canvas.width,canvas.height);
+        op.log("canvas size",canvas.width,canvas.height);
 
         canvas.style.display   = "none";
         // canvas.style['z-index']   = "99999";

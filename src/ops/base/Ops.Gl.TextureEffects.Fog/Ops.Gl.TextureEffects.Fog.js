@@ -3,7 +3,7 @@ op.name='fog';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var density=op.addInPort(new Port(op,"density",OP_PORT_TYPE_VALUE));
-var image=op.addInPort(new Port(op,"depth texture",OP_PORT_TYPE_TEXTURE));
+var image=op.inTexture("depth texture");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var ignoreInf=op.addInPort(new Port(op,"ignore infinity",OP_PORT_TYPE_VALUE,{ display:'bool' }));

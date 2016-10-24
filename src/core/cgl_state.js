@@ -15,7 +15,7 @@ CGL.State=function()
     this.frameStore={};
     this.gl=null;
     this.pMatrix=mat4.create();
-    this.mvMatrix=mat4.create();
+    this.mvMatrix=mat4.create();  // this is only modelmatrix not modelviewmatrix!!
     this.vMatrix=mat4.create();
     this.canvas=null;
     mat4.identity(self.mvMatrix);
@@ -24,7 +24,6 @@ CGL.State=function()
     var simpleShader=new CGL.Shader(this,"simpleshader");
     var currentShader=simpleShader;
     var aborted=false;
-
     var cbResize=[];
 
     this.addEventListener=function(event,cb)
@@ -82,6 +81,7 @@ CGL.State=function()
     this.doScreenshot=false;
     this.doScreenshotClearAlpha=false;
     this.screenShotDataURL=null;
+    this.screenShotCallBack=null;
 
     this.getViewPort=function()
     {
@@ -139,6 +139,18 @@ CGL.State=function()
 
             this.doScreenshot=false;
             this.screenShotDataURL = document.getElementById("glcanvas").toDataURL('image/png');
+            if(this.onScreenShot)this.onScreenShot(this.screenShotDataURL);
+
+            // this.screenShotDataURL = document.getElementById("glcanvas").toBlob(
+            //     function(blob)
+            //     {
+            //         this.screenShotDataURL=URL.createObjectURL(blob);
+            //         console.log(this.screenShotDataURL);
+            //         console.log('screenshot done');
+            //         if(this.onScreenShot)this.onScreenShot(this.screenShotDataURL);
+            //
+            //     });
+
         }
 
         if(oldCanvasWidth!=self.canvasWidth || oldCanvasHeight!=self.canvasHeight)
@@ -212,12 +224,10 @@ CGL.State=function()
         self.vMatrix = vMatrixStack.pop();
     };
 
-    // modelview matrix stack
+    // model matrix stack
 
     this.pushMvMatrix=function()
     {
-        // var copy = mat4.create();
-        // mat4.copy(copy,self.mvMatrix);
         var copy=mat4.clone(self.mvMatrix);
         mvMatrixStack.push(copy);
     };
@@ -229,6 +239,7 @@ CGL.State=function()
     };
     this.popModelMatrix=this.popMvMatrix;
     this.pushModelMatrix=this.pushMvMatrix;
+    this.modelMatrix=function(){ return self.mvMatrix; }
 
     // projection matrix stack
 
