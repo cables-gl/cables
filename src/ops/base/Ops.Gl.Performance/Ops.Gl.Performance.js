@@ -12,6 +12,8 @@ this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 this.textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 var outFPS=this.addOutPort(new Port(this,"fps",OP_PORT_TYPE_VALUE));
 
+var drawGraph=op.inValueBool("Draw Graph",true);
+
 
 this.enabled=this.addInPort(new Port(this,"enabled",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.enabled.set(true);
@@ -143,18 +145,21 @@ function refresh()
     ctx.fillStyle="#222222";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-
-    ctx.fillStyle="#555555";
-    var k=0;
-    for(k=512;k>=0;k--)
+    if(drawGraph.get())
     {
-        ctx.fillRect(512-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
-    }
-
-    ctx.fillStyle="#aaaaaa";
-    for(k=512;k>=0;k--)
-    {
-        ctx.fillRect(512-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
+        ctx.fillStyle="#555555";
+        var k=0;
+        for(k=512;k>=0;k--)
+        {
+            ctx.fillRect(512-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
+        }
+    
+        ctx.fillStyle="#aaaaaa";
+        for(k=512;k>=0;k--)
+        {
+            ctx.fillRect(512-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
+        }
+        
     }
 
     ctx.fillStyle="#cccccc";

@@ -8,6 +8,7 @@ var amount=op.inValueSlider("Blur Amount");
 
 var texOut=op.outTexture("texture_out");
 
+
 var fftTexture=null;
 var fftPosition=0;
 
@@ -116,6 +117,8 @@ function scrollTexture()
     cgl.setPreviousShader();
 
     texOut.set(effect.getCurrentSourceTexture());
+    
+    effect.endEffect();
 
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 }
@@ -181,6 +184,8 @@ amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
 function blurTexture()
 {
     cgl.setShader(shaderBlur);
+    
+    if(!effect.getCurrentSourceTexture())return;
 
     uniWidth.setValue(effect.getCurrentSourceTexture().width);
     uniHeight.setValue(effect.getCurrentSourceTexture().height);

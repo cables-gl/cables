@@ -1,32 +1,36 @@
 var CGL=CGL || {};
 
+CGL.TextureEffectMesh=null;
+
 CGL.TextureEffect=function(cgl,options)
 {
     var self=this;
-    var geom=new CGL.Geometry();
 
-    // TODO: make mesh static...
-    geom.vertices = [
-         1.0,  1.0,  0.0,
-        -1.0,  1.0,  0.0,
-         1.0, -1.0,  0.0,
-        -1.0, -1.0,  0.0
-    ];
+    if(!CGL.TextureEffectMesh)
+    {
+        var geom=new CGL.Geometry();
 
-    geom.texCoords = [
-         1.0, 1.0,
-         0.0, 1.0,
-         1.0, 0.0,
-         0.0, 0.0
-    ];
+        geom.vertices = [
+             1.0,  1.0,  0.0,
+            -1.0,  1.0,  0.0,
+             1.0, -1.0,  0.0,
+            -1.0, -1.0,  0.0
+        ];
 
-    geom.verticesIndices = [
-        0, 1, 2,
-        3, 1, 2
-    ];
+        geom.texCoords = [
+             1.0, 1.0,
+             0.0, 1.0,
+             1.0, 0.0,
+             0.0, 0.0
+        ];
 
+        geom.verticesIndices = [
+            0, 1, 2,
+            3, 1, 2
+        ];
 
-    var mesh=new CGL.Mesh(cgl,geom);
+        CGL.TextureEffectMesh=new CGL.Mesh(cgl,geom);
+    }
 
     var textureSource = null;
 
@@ -50,10 +54,6 @@ CGL.TextureEffect=function(cgl,options)
         cgl.gl.deleteFramebuffer(frameBuf);
     };
 
-    this.startEffect=function()
-    {
-        switched=false;
-    };
 
     this.setSourceTexture=function(tex)
     {
@@ -71,7 +71,6 @@ CGL.TextureEffect=function(cgl,options)
 
         textureTarget.filter=textureSource.filter;
         textureTarget.setSize(textureSource.width,textureSource.height);
-
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
 
@@ -96,23 +95,15 @@ CGL.TextureEffect=function(cgl,options)
             else return textureSource;
     };
 
-    this.bind=function()
+    this.startEffect=function()
     {
-        if(textureSource===null)
-        {
-            console.log('no base texture set!');
-            return;
-        }
-
-        cgl.pushMvMatrix();
-
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-        cgl.pushFrameBuffer(frameBuf);
-
-        cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, self.getCurrentTargetTexture().tex, 0);
+        switched=false;
+        cgl.gl.disable(cgl.gl.DEPTH_TEST);
 
         cgl.gl.clearColor(0,0,0,0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+
+        cgl.pushMvMatrix();
 
         cgl.pushPMatrix();
         cgl.gl.viewport(0, 0, self.getCurrentTargetTexture().width,self.getCurrentTargetTexture().height);
@@ -126,6 +117,33 @@ CGL.TextureEffect=function(cgl,options)
 
         cgl.pushMvMatrix();
         mat4.identity(cgl.mvMatrix);
+
+    };
+    this.endEffect=function()
+    {
+        cgl.gl.enable(cgl.gl.DEPTH_TEST);
+        cgl.popMvMatrix();
+
+        cgl.popPMatrix();
+        cgl.popMvMatrix();
+        cgl.popViewMatrix();
+
+        cgl.popPMatrix();
+        cgl.resetViewPort();
+    };
+
+    this.bind=function()
+    {
+        if(textureSource===null)
+        {
+            console.log('no base texture set!');
+            return;
+        }
+
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+        cgl.pushFrameBuffer(frameBuf);
+
+        cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, self.getCurrentTargetTexture().tex, 0);
     };
 
     this.finish=function()
@@ -136,21 +154,9 @@ CGL.TextureEffect=function(cgl,options)
             return;
         }
 
-        mesh.render(cgl.getShader());
-
-        cgl.popPMatrix();
-        cgl.popMvMatrix();
-        cgl.popViewMatrix();
+        CGL.TextureEffectMesh.render(cgl.getShader());
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer());
-
-
-        cgl.popPMatrix();
-        // cgl.gl.viewport(0, 0, cgl.canvasWidth,cgl.canvasHeight);
-        cgl.resetViewPort();
-
-        cgl.popMvMatrix();
-
 
         switched=!switched;
     };
