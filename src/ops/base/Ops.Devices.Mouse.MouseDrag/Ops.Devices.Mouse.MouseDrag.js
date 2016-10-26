@@ -2,7 +2,7 @@ op.name="MouseDrag";
 
 var canvas=op.patch.cgl.canvas;
 
-var mul=op.addInPort(new Port(op,"mul"));
+var mul=op.inValue("mul",1);
 
 var outX=op.addOutPort(new Port(op,"x"));
 var outY=op.addOutPort(new Port(op,"y"));
@@ -30,7 +30,7 @@ doReset.onTriggered=function()
 
     outX.set(0);
     outY.set(0);
-    
+
     // console.log('reset!');
 };
 
@@ -58,20 +58,16 @@ function onmousemove(e)
     var clientY=e.clientY;
     if(flipY.get()) clientY=cgl.canvas.clientHeight-clientY;
 
-
     if(pressed)
     {
         if(lastX!=-1)
         {
-            
-
             var x=(outX.get()+(e.clientX-lastX)*mul.get());
             var y=(outY.get()+(clientY-lastY)*mul.get());
+            
 
             if(!isNaN(x))outX.set(x||0);
                 else outX.set(0);
-
-            
 
             if(!isNaN(y))outY.set(y||0);
                 else outY.set(0);

@@ -122,6 +122,7 @@ function create()
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);
 
+    geomOut.set(null);
     geomOut.set(geom);
 }
 

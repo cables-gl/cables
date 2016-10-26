@@ -88,7 +88,7 @@ function prepare()
         var num=transformations.length;
         var arrs = [].concat.apply([], transformations);
         
-        console.log(transformations);
+        // console.log(transformations);
         var matrices = new Float32Array(arrs);
     
         mesh=new CGL.Mesh(cgl,geom.get());
@@ -139,9 +139,8 @@ function doRender()
 
         if(uniSpaceX)
         {
-        uniSpaceX.setValue(spacingColumns.get());
-        uniSpaceY.setValue(spacingRows.get());
-            
+            uniSpaceX.setValue(spacingColumns.get());
+            uniSpaceY.setValue(spacingRows.get());
         }
 
         if(tex.get())
