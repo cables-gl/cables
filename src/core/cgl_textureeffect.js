@@ -100,8 +100,8 @@ CGL.TextureEffect=function(cgl,options)
         switched=false;
         cgl.gl.disable(cgl.gl.DEPTH_TEST);
 
-        cgl.gl.clearColor(0,0,0,0);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        // cgl.gl.clearColor(0,0,0,0);
+        // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
         cgl.pushMvMatrix();
 
