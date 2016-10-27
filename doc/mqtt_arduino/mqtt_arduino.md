@@ -500,13 +500,407 @@ String orientationString = String("") +
     client.publish("/orientation", orientationString);
 ```
 
+Okay, that’s it for now, I hope you learned something and can start visualizing your Arduino sensor data in cables. In the following section we we build upon and add an LED ring which we can control from within cables.
+
+## Controlling a NeoPixel LED ring with cables
+
+### Testing the LED ring
+
+As we did in earlier steps, let’s connect the LED ring and run a simple example to make sure everything is connected correctly.  
+
+Connect the Adafruit Neopixel ring:
+
+| Arduino MKR1000 | Adafruit Neopixel Ring |
+| --------------- | ---------------------- |
+| GND             | GND                    |
+| VCC             | 5V DC Power            |
+| Data Input      | 6                      |
+
+![Fritzing](img/wiring_Steckplatine_with_neopixel.jpg)
 
 
-Okay, that’s it for now, I hope you learned something and and can start building connected things with cables.
+
+Now let’s run one of the NeoPixel examples to check if everything is working as it should. Open `Examples` —> `Adafruit Neopixel` —> `simple`.
+
+Change the number of pixels in line 14:
+
+```C
+#define NUMPIXELS      16
+```
+
+needs to be:
+
+```C
+#define NUMPIXELS      12
+```
+
+Upload it and the LED ring should light up. Great! Now let’s integrate the code from the example into our main sketch. We just have to copy the needed parts to the right places – before `setup()` – inside `setup()` and inside `draw()`.
+
+Now we have to make a few adjustments:    
+
+Insert the following code somewhere before `setup()`:  
+
+```C
+// rgb color values
+int r = 50;
+int g = 50;
+int b = 50;
+```
+
+We also change the code wich goes into `loop()` a bit, so that it uses these three variables to update the LEDs:  
+
+```C
+for(int i=0;i<NUMPIXELS;i++){
+    pixels.setPixelColor(i, pixels.Color(r, g, b));
+  }
+  pixels.show(); // This sends the updated pixel color to the hardware.
+```
+
+Now we want to send data from cables to the Arduino with the color values in the form `r,g,b`, e.g. `255,0,0` (red). We already have a function called `messageReceived`, which will get called once data is send to the correct channel. We need to define that we want to get notified if there is something new send to the channel `/color`. If you copied the whole sketch from above, this should already be defined:  
+
+```C
+client.subscribe("/color");
+```
+
+Now we have to solve another problem – the incoming data is `r,g,b` – we need individual integer-values to send to the LED ring – for this a google search for `arduino split string` brings us to the following answer on Stack Overflow: [Arduino (C language) parsing string with delimiter)](http://stackoverflow.com/questions/11068450/arduino-c-language-parsing-string-with-delimiter-input-through-serial-interfa)
+
+The first answer is exactly what we need. We just have to change our variable name from `myString` to `payload` – the variable used in the `messageReceived`-function.
+
+Add the following code to the bottom of the `messageReceived`-function:  
+
+``` C
+int commaIndex = payload.indexOf(',');
+//  Search for the next comma just after the first
+int secondCommaIndex = payload.indexOf(',', commaIndex+1);
+String firstValue = payload.substring(0, commaIndex);
+String secondValue = payload.substring(commaIndex+1, secondCommaIndex);
+String thirdValue = payload.substring(secondCommaIndex+1);
+r = firstValue.toInt();
+g = secondValue.toInt();
+b = thirdValue.toInt();
+```
+
+Upload the code and then let’s get back to *cables* to send the color.
+
+### Sending color values from cables
+
+First, let’s add some color to our virtual cube – add the `BasicMaterial`-op in between the `Transform` and `Cube` ops.
+
+Also add a `ColorValue`-op to store our color and connect the `outr`, `outb`
+
+ and `outc` values to the `r`, `g` and `b` ports of the `BasicMaterial`-op. 
+
+![basic](img/cables-basicmaterial.jpg)
+
+Now if you select the `ColorValue` of and turn the sliders the virtual cube should change its color.
+
+![colored](img/cube_colored.jpg)
+
+The same value we now want to send to cables in the form `r,g,b`.  Before we send the values over to the Arduino we need to change it’s range, cables uses a color range `[0..1]` while the NeoPixel-library uses [0..255], we can easily convert our color range before we send it over by multiplying it with `255`.   
+
+Connect one `Multiplier`-op each to the `outr`, `outg` and `outb`-port of the `ColorValue`-op and change their second port `Number2` to `255`. 
+
+Before we can send it over we need to change one more thing – we need to combine the three values into one string `r,g,b` with the `Concat`-op, which joins two strings together. We will use it to combine `r` with `,` to return `r,`, then we do the same with `b`and the output we just generated to produce `r,g` and the same for `b`, so in the end we have `r,g,b`. Every time you want to append a comma, you need to set the `String2`-port of the `Concat`-op to `,`.  
+
+Click on the last `Concat`-op and have a look at the `Result` output-port, if it looks something like this: `0.56,0.34…` it should be right.   
+
+![concat](img/cables_concat.jpg)
+
+*Note: You can always see the results of an operation by connecting the `Log`-op to a port. Then you can see its value on the debug console – in Chrome you can open it using `CMD + ALT + j` , if everything is right putting a `Log`-op on the output of the last `Concat` will show something like this in the console: *  
+
+```
+["[Value] 65.28,1.134,0.3"]
+```
+
+The last part is interesting for us, looks like its in the form we need now – `r,g,b`. Let’s finally send the data out. Connect the output of the last `Concat`-op containing our `r,g,b`-string to the `Message`-port of the `MqttSend`-op. Let’s click on the `Send`-button of the `MqttSend`-op – if nothing happens check the debug console once again, by hitting `CMD + ALT + j`. If you see a `MQTTSend: Could not send message 65.28,1.134,0.3 to /test, maybe try to reconnect?!"]` – the connection timed out. In that case hit the `Reconnect`-button of the `Mqtt`-op and try again.  
+
+Go to your namespace on [shiftr.io](https://shiftr.io) and check if the message is sent correctly to the server.
+
+Nearly done. We now can change the color of the LED ring by changing the value if the `ColorValue`-op and pressing `Send` ond the `MqttSend`-op. To automate this we add the `Interval`-op which we connect to the `Send`-port of `MqttSend`. Set its `Interval`-port to something like `300` (milliseconds). If you set it too small you may be kicked from the server.
+
+So here is the final code together with the layout in cables:
 
 
 
+![cables final](img/cables-final.jpg)
 
+```C
+/*
+ * This example uses an Arduino / Genuino Zero together with
+ * a WiFi101 Shield or a MKR1000 to connect to shiftr.io.
+ * 
+ * Libraries which need to be installed:
+ *     - "WiFi101" (install via Arduino libraries manager)
+ *     - "MQTT" (by Joel Gaehwiler, install via Arduino libraries manager)
+ *     
+ * By undev / cables.gl    
+ * https://github.com/cables-gl/Workshop_Hyper_Island_2016
+ *     
+ * Based on example by Gilberto Conti
+ * https://github.com/256dpi/arduino-mqtt       
+ * 
+ * You can check if your device successfully sends messages here:
+ * https://shiftr.io/try
+ * Also open the serial monitor in Arduino to check for errors
+ * 
+ * Connections: 
+ * - BNO055: Arduino MKR1000
+ *   - GND: GND
+ *   - VIN: VCC
+ *   - SDA: SDA
+ *   - SCL: SCL
+ *  - Adafruit NeoPixel Ring 12: Arduino MKR1000
+ *    - GND: GND
+ *    - 5V Power: VCC
+ *    - Data Input: 6
+  */
+  
+  /* Board layout:
+         +----------+
+         |         *| RST   PITCH  ROLL  HEADING
+     ADR |*        *| SCL
+     INT |*        *| SDA     ^            /->
+     PS1 |*        *| GND     |            |
+     PS0 |*        *| 3VO     Y    Z-->    \-X
+         |         *| VIN
+         +----------+
+  */
+ 
+
+#include <SPI.h>
+#include <WiFi101.h>
+#include <Wire.h>
+#include <MQTTClient.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BNO055.h>
+#include <utility/imumaths.h>
+
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+
+#include "config.h" // WLAN / MQTT user credentials
+
+// how often messages are send (in milliseconds)
+#define SEND_DELAY_MS (100)
+
+Adafruit_BNO055 bno = Adafruit_BNO055(55);
+
+int status = WL_IDLE_STATUS;     // the Wifi radio's status
+unsigned long lastMillis = 0;
+
+#define NEOPIXEL_PIN 6
+#define NUMPIXELS 12
+
+WiFiClient net;
+MQTTClient client;
+
+// rgb color values
+int r = 50;
+int g = 50;
+int b = 50;
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
+
+  pixels.begin(); // This initializes the NeoPixel library.
+
+  // check for the presence of the shield:
+  if (WiFi.status() == WL_NO_SHIELD) {
+    Serial.println("WiFi shield not present");
+    // don't continue:
+    while (true);
+  }
+
+  // attempt to connect to Wifi network:
+  while ( status != WL_CONNECTED) {
+    Serial.print("Attempting to connect to WPA SSID: ");
+    Serial.println(ssid);
+    // Connect to WPA/WPA2 network:
+    status = WiFi.begin(ssid, pass);
+
+    // wait 10 seconds for connection:
+    delay(2000);
+  }
+
+  // you're connected now, so print out the data:
+  Serial.print("You're connected to the network");
+  printCurrentNet();
+  printWifiData();
+
+  // setup MQTT
+  Serial.print("Connecting to MQTT-server "); Serial.println(mqtt_server);
+  client.begin(mqtt_server, net);
+  while (!client.connect(device_name, mqtt_username, mqtt_password)) {
+    Serial.print(".");
+    delay(1000);
+  }
+  client.subscribe("/color");
+  Serial.println("");
+  client.publish("/setup", "MKR1000 check check!");
+
+  Serial.println("Orientation Sensor Test"); Serial.println("");
+
+  /* Initialise the sensor */
+  if(!bno.begin()) {
+    /* There was a problem detecting the BNO055 ... check your connections */
+    Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
+    while(1);
+  }
+
+  /* Display some basic information on this sensor */
+  displaySensorDetails();
+}
+
+void loop() {
+  client.loop();
+
+  for(int i=0;i<NUMPIXELS;i++){
+    pixels.setPixelColor(i, pixels.Color(r, g, b));
+  }
+  pixels.show(); // This sends the updated pixel color to the hardware.
+
+  /* Get a new sensor event */
+  sensors_event_t event;
+  bno.getEvent(&event);
+
+  // publish a message when it's time
+  if(millis() - lastMillis > SEND_DELAY_MS) {
+    lastMillis = millis();
+    
+    
+      String orientationString = String("") +
+          event.orientation.x + "," +
+          event.orientation.y + "," +
+          event.orientation.z
+      ;
+    
+    // The channel this device sends to, the message
+    client.publish("/orientation", orientationString);
+
+    /* roll, pitch, heading, see diagram on top */
+    /*
+    Serial.print(F("Orientation: "));
+    Serial.print((float)event.orientation.x);
+    Serial.print(F(" "));
+    Serial.print((float)event.orientation.y);
+    Serial.print(F(" "));
+    Serial.print((float)event.orientation.z);
+    Serial.println(F(""));
+    */
+  }
+}
+
+void printWifiData() {
+  // print your WiFi shield's IP address:
+  IPAddress ip = WiFi.localIP();
+  Serial.print("IP Address: ");
+  Serial.println(ip);
+  Serial.println(ip);
+
+  // print your MAC address:
+  byte mac[6];
+  WiFi.macAddress(mac);
+  Serial.print("MAC address: ");
+  Serial.print(mac[5], HEX);
+  Serial.print(":");
+  Serial.print(mac[4], HEX);
+  Serial.print(":");
+  Serial.print(mac[3], HEX);
+  Serial.print(":");
+  Serial.print(mac[2], HEX);
+  Serial.print(":");
+  Serial.print(mac[1], HEX);
+  Serial.print(":");
+  Serial.println(mac[0], HEX);
+
+}
+
+void printCurrentNet() {
+  // print the SSID of the network you're attached to:
+  Serial.print("SSID: ");
+  Serial.println(WiFi.SSID());
+
+  // print the MAC address of the router you're attached to:
+  byte bssid[6];
+  WiFi.BSSID(bssid);
+  Serial.print("BSSID: ");
+  Serial.print(bssid[5], HEX);
+  Serial.print(":");
+  Serial.print(bssid[4], HEX);
+  Serial.print(":");
+  Serial.print(bssid[3], HEX);
+  Serial.print(":");
+  Serial.print(bssid[2], HEX);
+  Serial.print(":");
+  Serial.print(bssid[1], HEX);
+  Serial.print(":");
+  Serial.println(bssid[0], HEX);
+
+  // print the received signal strength:
+  long rssi = WiFi.RSSI();
+  Serial.print("signal strength (RSSI):");
+  Serial.println(rssi);
+
+  // print the encryption type:
+  byte encryption = WiFi.encryptionType();
+  Serial.print("Encryption Type:");
+  Serial.println(encryption, HEX);
+  Serial.println();
+}
+
+
+void messageReceived(String topic, String payload, char * bytes, unsigned int length) {
+  Serial.print("incoming: ");
+  Serial.print(topic);
+  Serial.print(" - ");
+  Serial.print(payload);
+  Serial.println();
+  int commaIndex = payload.indexOf(',');
+  //  Search for the next comma just after the first
+  int secondCommaIndex = payload.indexOf(',', commaIndex+1);
+  String firstValue = payload.substring(0, commaIndex);
+  String secondValue = payload.substring(commaIndex+1, secondCommaIndex);
+  String thirdValue = payload.substring(secondCommaIndex+1); // To the end of the string
+  r = firstValue.toInt();
+  g = secondValue.toInt();
+  b = thirdValue.toInt();
+  Serial.print("New color: "); Serial.print(r); Serial.print(", "); Serial.print(g); Serial.print(", "); Serial.println(b);
+}
+
+/**************************************************************************/
+/*
+    Displays some basic information on this sensor from the unified
+    sensor API sensor_t type (see Adafruit_Sensor for more information)
+*/
+/**************************************************************************/
+void displaySensorDetails(void) {
+  sensor_t sensor;
+  bno.getSensor(&sensor);
+  Serial.println("------------------------------------");
+  Serial.print  ("Sensor:       "); Serial.println(sensor.name);
+  Serial.print  ("Driver Ver:   "); Serial.println(sensor.version);
+  Serial.print  ("Unique ID:    "); Serial.println(sensor.sensor_id);
+  Serial.print  ("Max Value:    "); Serial.print(sensor.max_value); Serial.println(" xxx");
+  Serial.print  ("Min Value:    "); Serial.print(sensor.min_value); Serial.println(" xxx");
+  Serial.print  ("Resolution:   "); Serial.print(sensor.resolution); Serial.println(" xxx");
+  Serial.println("------------------------------------");
+  Serial.println("");
+  delay(500);
+}
+
+
+```
+
+
+
+Okay, hope you had fun, the final *cables*-patch will be published soon as well…
 
 
 
