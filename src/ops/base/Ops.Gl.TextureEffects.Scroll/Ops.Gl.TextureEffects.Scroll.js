@@ -1,6 +1,6 @@
 op.name='Scroll';
-op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var amountX=op.inValue("amountX");
 var amountY=op.inValue("amountY");
@@ -32,7 +32,7 @@ var amountXUniform=new CGL.Uniform(shader,'f','amountX',amountX);
 var amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY);
 
 
-this.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
@@ -45,5 +45,5 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    self.trigger.trigger();
+    trigger.trigger();
 };
