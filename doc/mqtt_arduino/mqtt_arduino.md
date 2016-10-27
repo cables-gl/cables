@@ -2,6 +2,8 @@
 
 # Communicating with Arduino over MQTT
 
+*Level: Beginner*  
+
 In this tutorial we will show you how to establish communication to an Arduino MKR1000 over the internet to control a rotating cube in cables with a physical cube (Arduino —> cables). We also add the possibility to change the color of the cube and see the physical cube adapt its color (cables —> Arduino).
 
 ### What is MQTT?
