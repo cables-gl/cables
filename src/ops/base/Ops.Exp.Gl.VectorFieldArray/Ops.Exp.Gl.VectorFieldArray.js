@@ -30,6 +30,7 @@ doCenter.onChange=reset;
 
 geom.onChange=reset;
 exe.onTriggered=doRender;
+exe.onLinkChanged=removeModule;
 
 var srcHeadVert=''
     .endl()+'uniform float do_instancing;'
@@ -67,8 +68,8 @@ var srcBodyVert=''
     .endl()+'       instModelMat[3][1]*={{mod}}_spaceY;'
     .endl()+'       vec4 instCol = texture2D( {{mod}}_field, vec2(tx,ty) );'
     .endl()+'       instModelMat*=rotationMatrix(vec3(0.0,0.0,1.0),instCol.r*3.1415926535897932384626433832795*2.0);'
-
-    .endl()+'       mvMatrix=viewMatrix * modelMatrix * instModelMat;;'
+// .endl()+'       pos*=instCol.r;'
+    .endl()+'       mvMatrix=viewMatrix * modelMatrix * instModelMat;'
     .endl()+'   }'
     .endl()+'#endif'
     .endl();
@@ -100,6 +101,17 @@ function prepare()
 
     }
 }
+
+
+function removeModule()
+{
+    if(shader && mod)
+    {
+        shader.removeModule(mod);
+        shader=null;
+    }
+}
+
 
 function doRender()
 {

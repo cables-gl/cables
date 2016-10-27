@@ -27,7 +27,7 @@ var srcFrag=''
 
     .endl()+'float random(vec2 co)'
     .endl()+'{'
-    .endl()+'   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);'
+    .endl()+'   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 437511.5453);'
     .endl()+'}'
 
     +CGL.TextureEffect.getBlendCode()

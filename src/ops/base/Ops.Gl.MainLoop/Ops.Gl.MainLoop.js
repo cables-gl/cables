@@ -3,7 +3,7 @@ op.name='MainLoop';
 
 var fpsLimit=op.inValue("FPS Limit",0);
 var trigger=op.outFunction("trigger");
-var width=op.inValue("width");
+var width=op.outValue("width");
 var height=op.outValue("height");
 
 var cgl=op.patch.cgl;

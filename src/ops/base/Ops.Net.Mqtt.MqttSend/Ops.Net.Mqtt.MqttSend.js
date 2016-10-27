@@ -10,7 +10,7 @@ var mqttOutObj = op.outObject("MQTT Object");
 send.onTriggered = function(){
     var o = mqttObj.get();
     if(o && o.requestSend) {
-        o.requestSend(message.get(), channel.get());
+        o.requestSend(String(message.get()), channel.get());
     } else {
         op.log("MQTTSend Error: Could not send, MQTT object not defined / not complete");
     }
