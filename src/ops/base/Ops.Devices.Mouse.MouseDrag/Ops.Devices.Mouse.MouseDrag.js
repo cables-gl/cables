@@ -7,9 +7,16 @@ var mul=op.inValue("mul",1);
 var outX=op.addOutPort(new Port(op,"x"));
 var outY=op.addOutPort(new Port(op,"y"));
 var cgl=op.patch.cgl;
-var flipY=op.inValueBool("Flip Y");
+var flipY=op.inValueBool("Flip Y",true);
+var kinetic=op.inValueBool("Inertia Movement",true);
 
 var doReset=op.inFunction("Reset");
+
+var minX=op.inValue("minX",-600);
+var maxX=op.inValue("maxX",600);
+var minY=op.inValue("minY",-600);
+var maxY=op.inValue("maxY",600);
+
 
 outY.ignoreValueSerialize=true;
 outX.ignoreValueSerialize=true;
@@ -22,6 +29,12 @@ var lastX=-1;
 outX.set(0);
 outY.set(0);
 
+var animX=new CABLES.InertiaAnim(updateKineticX);
+var animY=new CABLES.InertiaAnim(updateKineticY);
+
+animX.smoothSpeed=0.0000001;
+animY.smoothSpeed=0.0000001;
+
 
 doReset.onTriggered=function()
 {
@@ -30,31 +43,33 @@ doReset.onTriggered=function()
 
     outX.set(0);
     outY.set(0);
-
-    // console.log('reset!');
 };
+
+function updateKineticX(v)
+{
+
+    if(v>maxX.get())v=maxX.get();
+    if(v<minX.get())v=minX.get();
+
+    outX.set(v);
+}
+
+function updateKineticY(v)
+{
+    if(v>maxY.get())v=maxY.get();
+    if(v<minY.get())v=minY.get();
+
+    outY.set(v);
+}
 
 function onmouseclick()
 {
     
 }
 
-// function fix()
-// {
-//     if(outX.get()===undefined)outX.set(0);
-//     if(outY.get()===undefined)outY.set(0);
-
-// }
-
-// outX.onValueChanged=fix;
-// outY.onValueChanged=fix;
 
 function onmousemove(e)
 {
-    
-    if(outX.get()===undefined)outX.set(0);
-    if(outY.get()===undefined)outY.set(0);
-    
     var clientY=e.clientY;
     if(flipY.get()) clientY=cgl.canvas.clientHeight-clientY;
 
@@ -62,15 +77,53 @@ function onmousemove(e)
     {
         if(lastX!=-1)
         {
-            var x=(outX.get()+(e.clientX-lastX)*mul.get());
-            var y=(outY.get()+(clientY-lastY)*mul.get());
-            
+            if(kinetic.get())
+            {
 
-            if(!isNaN(x))outX.set(x||0);
-                else outX.set(0);
+                var deltaX=(e.clientX-lastX);
+                var deltaY=(clientY-lastY);
 
-            if(!isNaN(y))outY.set(y||0);
-                else outY.set(0);
+                var x=(animX.get()+deltaX*mul.get());
+                var y=(animY.get()+deltaY*mul.get());
+
+
+
+
+
+                if(x!=x)x=0;
+                x=x||0;
+
+                if(y!=y)y=0;
+                y=y||0;
+                
+
+                if(x>maxX.get())x=maxX.get();
+                if(x<minX.get())x=minX.get();
+                if(y<minY.get())y=minY.get();
+                if(y>maxY.get())y=maxY.get();
+
+                animX.set(x);
+                animY.set(y);
+            }
+            else
+            {
+                var x=(outX.get()+(e.clientX-lastX)*mul.get());
+                var y=(outY.get()+(clientY-lastY)*mul.get());
+
+                if(x!=x)x=0;
+                x=x||0;
+
+                if(y!=y)y=0;
+                y=y||0;
+
+                if(x<minX.get())x=minX.get();
+                if(x>maxX.get())x=maxX.get();
+                if(y<minY.get())y=minY.get();
+                if(y>maxY.get())y=maxY.get();
+
+                outX.set(x);
+                outY.set(y);
+            }
         }
 
         lastY=clientY;
@@ -78,18 +131,38 @@ function onmousemove(e)
     }
 }
 
-function onMouseLeave()
+function onMouseLeave(e)
 {
-    onMouseUp();
+    onMouseUp(e);
 }
 
-function onMouseDown()
+function onMouseDown(e)
 {
     pressed=true;
 }
 
-function onMouseUp()
+function checkBounds()
 {
+    // if(animX.get()>maxX.get())
+    // {
+    //     // animX.set(animX.get());
+    //     animX.set(maxX.get());
+    //     animX.release();
+    // }
+}
+
+
+function onMouseUp(e)
+{
+    if(kinetic.get())
+    {
+        animX.release();
+        animY.release();
+        
+        checkBounds();
+    }
+    
+
     lastX=-1;
     lastY=-1;
     pressed=false;

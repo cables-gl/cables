@@ -8,8 +8,8 @@ var doPingPong=false;
 
 function exec()
 {
-    var n2=parseFloat(number2.get());
-    var n1=parseFloat(number1.get());
+    var n2=number2.get();
+    var n1=number1.get();
 
     if(doPingPong)
     {
@@ -20,14 +20,14 @@ function exec()
     }
     else
     {
-        if(n2===0)n2=0.00001;
-        if(n1===0)n1=0.00001;
-        result.set(n1 % n2 );
+        var re=n1 % n2;
+        if(re!=re) re=0;
+        result.set(re);
     }
 }
 
-number1.onValueChange(exec);
-number2.onValueChange(exec);
+number1.onChange=exec;
+number2.onChange=exec;
 
 number1.set(1);
 number2.set(2);

@@ -13,7 +13,7 @@ var inExes=[];
 function onTrigger()
 {
     oldVal.set(currentVal.get());
-    currentVal.set( inVals[op.slot].get() );
+    currentVal.set( inVals[this.slot].get() );
     triggered.trigger();
 }
 

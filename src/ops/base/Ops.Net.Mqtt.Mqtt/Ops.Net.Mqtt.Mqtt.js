@@ -71,7 +71,7 @@ function requestSend(message, topic){
     try{
         client.send(messageObj);
     } catch(e) {
-        op.log("MQTTSend: Could not send message " + message + " to " + topic);
+        op.log("MQTTSend: Could not send message " + message + " to " + topic + ", maybe try to reconnect?!");
     }
 }
 

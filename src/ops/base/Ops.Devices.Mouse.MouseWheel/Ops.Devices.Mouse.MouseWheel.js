@@ -3,6 +3,8 @@ op.name='mousewheel';
 
 var valIn=op.inValue("Value",0);
 
+var mul=op.inValue("Multiply",1);
+
 var min=op.inValue("min",-100);
 var max=op.inValue("max", 100);
 
@@ -82,18 +84,14 @@ function wheelDistance(evt)
 
     if(!isMac)ret*=6;
     if(ret!=ret)ret=0;
-    return ret;
+    return ret*mul.get();
 }
-
-
 
 function checkValue()
 {
     if(v<min.get())v=min.get();
     if(v>max.get())v=max.get();
 }
-
-
 
 flip.onChange=function()
 {
@@ -107,15 +105,16 @@ function onMouseWheel(e)
 {
     var d= wheelDistance(e)*(0.05*dir);
 
+    delta.set(0);
     delta.set(d);
+    
     v-=d;
     
     // vOut=v+valIn.get();
-    
     // v+=valIn.get();
 
     checkValue();
-    
+
     
     if( !smooth.get() )
     {

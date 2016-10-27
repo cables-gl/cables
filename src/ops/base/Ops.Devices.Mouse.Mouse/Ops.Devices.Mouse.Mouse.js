@@ -1,4 +1,4 @@
-Op.apply(this, arguments);
+addListeners();
 var self=this;
 var cgl=self.patch.cgl;
 
@@ -7,6 +7,7 @@ this.mouseX=this.addOutPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
 this.mouseY=this.addOutPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
 this.mouseDown=this.addOutPort(new Port(this,"button down",OP_PORT_TYPE_VALUE));
 this.mouseClick=this.addOutPort(new Port(this,"click",OP_PORT_TYPE_FUNCTION));
+var mouseUp=this.addOutPort(new Port(this,"Button Up",OP_PORT_TYPE_FUNCTION));
 this.mouseClickRight=this.addOutPort(new Port(this,"click right",OP_PORT_TYPE_FUNCTION));
 this.mouseOver=this.addOutPort(new Port(this,"mouseOver",OP_PORT_TYPE_VALUE));
 this.relative=this.addInPort(new Port(this,"relative",OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -110,9 +111,11 @@ var onMouseDown = function(e)
 
 var onMouseUp = function(e)
 {
+    
     outButton.set(0);
     self.mouseDown.set(false);
     self.mouseClick.set(false);
+    mouseUp.trigger();
 };
 
 var onClickRight= function(e)
@@ -252,4 +255,4 @@ this.onDelete=function()
 };
 
 
-addListeners();
+addListeners();ddListeners();

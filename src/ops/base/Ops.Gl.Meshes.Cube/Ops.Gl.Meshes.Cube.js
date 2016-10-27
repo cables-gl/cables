@@ -164,6 +164,7 @@ function buildMesh()
     ];
 
     mesh=new CGL.Mesh(cgl,geom);
+    geomOut.set(null);
     geomOut.set(geom);
 
 }
