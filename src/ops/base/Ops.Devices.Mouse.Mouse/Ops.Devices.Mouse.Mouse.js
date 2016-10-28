@@ -1,4 +1,4 @@
-addListeners();
+
 var self=this;
 var cgl=self.patch.cgl;
 
@@ -255,4 +255,4 @@ this.onDelete=function()
 };
 
 
-addListeners();ddListeners();
+addListeners();
