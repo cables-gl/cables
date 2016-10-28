@@ -165,6 +165,18 @@ CABLES.Op = function()
             this.portsOut[ipo].removeLinks();
     };
 
+    CABLES.Op.prototype.countFittingPorts=function(otherPort)
+    {
+        var count=0;
+        for(var ipo in this.portsOut)
+            if(CABLES.Link.canLink(otherPort,this.portsOut[ipo]))count++;
+
+        for(var ipi in this.portsIn)
+            if(CABLES.Link.canLink(otherPort,this.portsIn[ipi]))count++;
+
+        return count;
+    };
+
     CABLES.Op.prototype.findFittingPort=function(otherPort)
     {
         for(var ipo in this.portsOut)

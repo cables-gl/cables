@@ -208,6 +208,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             {
                 this.links[i].remove();
                 if(this.onLinkChanged)this.onLinkChanged();
+                return;
             }
     };
 
