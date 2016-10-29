@@ -16,9 +16,24 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
     var ext = cgl.gl.getExtension("ANGLE_instanced_arrays");
     this.addVertexNumbers=false;
 
-    function setAttribute(name,array,itemSize,cb)
+    function setAttribute(name,array,itemSize,options)
     {
         var arr=null;
+        var cb=null;
+        var instanced=false;
+
+        if(typeof options=='function')
+        {
+            // deprecated
+            cb=options;
+        }
+        if(typeof options=='object')
+        {
+            if(options.cb)cb=options.cb;
+            if(options.instanced)instanced=options.instanced;
+        }
+
+
 
         if(array instanceof Float32Array)arr=new Float32Array(array);
         else arr=new Float32Array(array);
@@ -46,7 +61,8 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
                 name:name,
                 cb:cb,
                 itemSize:itemSize,
-                numItems: array.length/itemSize
+                numItems: array.length/itemSize,
+                instanced:instanced
             };
 
         attributes.push(attr);
@@ -60,6 +76,7 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
     }
     this.addAttribute=setAttribute;
     this.updateAttribute=setAttribute;
+    this.setAttribute=setAttribute;
 
     this.getAttributes=function()
     {
@@ -150,23 +167,29 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
                 cgl.gl.enableVertexAttribArray(attributes[i].loc);
                 cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, attributes[i].buffer);
 
-                if(attributes[i].name=='instMat')
+                if(attributes[i].instanced || attributes[i].name=='instMat')
                 {
-                    // todo: make create attribute flag for instanced stuff...
                     // todo: easier way to fill mat4 attribs...
+                    if(attributes[i].itemSize<=4)
+                    {
+                        cgl.gl.vertexAttribPointer(attributes[i].loc, attributes[i].itemSize, cgl.gl.FLOAT,  false, attributes[i].itemSize*4,0);
+                        ext.vertexAttribDivisorANGLE(attributes[i].loc, 1);
+                    }
+                    if(attributes[i].itemSize==16)
+                    {
+                        cgl.gl.vertexAttribPointer(attributes[i].loc, 4, cgl.gl.FLOAT,  false, 16*4,0);
+                        cgl.gl.enableVertexAttribArray(attributes[i].loc+1);
+                        cgl.gl.vertexAttribPointer(attributes[i].loc+1, 4, cgl.gl.FLOAT,  false, 16*4, 4*4*1);
+                        cgl.gl.enableVertexAttribArray(attributes[i].loc+2);
+                        cgl.gl.vertexAttribPointer(attributes[i].loc+2, 4, cgl.gl.FLOAT,  false, 16*4, 4*4*2);
+                        cgl.gl.enableVertexAttribArray(attributes[i].loc+3);
+                        cgl.gl.vertexAttribPointer(attributes[i].loc+3, 4, cgl.gl.FLOAT,  false, 16*4, 4*4*3);
 
-                    cgl.gl.vertexAttribPointer(attributes[i].loc, 4, cgl.gl.FLOAT,  false, 16*4,0);
-                    cgl.gl.enableVertexAttribArray(attributes[i].loc+1);
-                    cgl.gl.vertexAttribPointer(attributes[i].loc+1, 4, cgl.gl.FLOAT,  false, 16*4, 4*4*1);
-                    cgl.gl.enableVertexAttribArray(attributes[i].loc+2);
-                    cgl.gl.vertexAttribPointer(attributes[i].loc+2, 4, cgl.gl.FLOAT,  false, 16*4, 4*4*2);
-                    cgl.gl.enableVertexAttribArray(attributes[i].loc+3);
-                    cgl.gl.vertexAttribPointer(attributes[i].loc+3, 4, cgl.gl.FLOAT,  false, 16*4, 4*4*3);
-
-                    ext.vertexAttribDivisorANGLE(attributes[i].loc, 1);
-                    ext.vertexAttribDivisorANGLE(attributes[i].loc+1, 1);
-                    ext.vertexAttribDivisorANGLE(attributes[i].loc+2, 1);
-                    ext.vertexAttribDivisorANGLE(attributes[i].loc+3, 1);
+                        ext.vertexAttribDivisorANGLE(attributes[i].loc, 1);
+                        ext.vertexAttribDivisorANGLE(attributes[i].loc+1, 1);
+                        ext.vertexAttribDivisorANGLE(attributes[i].loc+2, 1);
+                        ext.vertexAttribDivisorANGLE(attributes[i].loc+3, 1);
+                    }
                 }
                 else
                 {
@@ -185,17 +208,27 @@ CGL.Mesh=function(_cgl,geom,glPrimitive)
 
         for(i=0;i<attributes.length;i++)
         {
-            if(attributes[i].loc!=-1) cgl.gl.disableVertexAttribArray(attributes[i].loc);
-            if(attributes[i].name=='instMat')
+            if(attributes[i].instanced || attributes[i].name=='instMat')
             {
-                ext.vertexAttribDivisorANGLE(attributes[i].loc, 0);
-                ext.vertexAttribDivisorANGLE(attributes[i].loc+1, 0);
-                ext.vertexAttribDivisorANGLE(attributes[i].loc+2, 0);
-                ext.vertexAttribDivisorANGLE(attributes[i].loc+3, 0);
-                cgl.gl.disableVertexAttribArray(attributes[i].loc+1);
-                cgl.gl.disableVertexAttribArray(attributes[i].loc+2);
-                cgl.gl.disableVertexAttribArray(attributes[i].loc+3);
+                // todo: easier way to fill mat4 attribs...
+                if(attributes[i].itemSize<=4)
+                {
+                    ext.vertexAttribDivisorANGLE(attributes[i].loc, 0);
+                    // cgl.gl.disableVertexAttribArray(attributes[i].loc);
+                }
+                else
+                {
+                    ext.vertexAttribDivisorANGLE(attributes[i].loc, 0);
+                    ext.vertexAttribDivisorANGLE(attributes[i].loc+1, 0);
+                    ext.vertexAttribDivisorANGLE(attributes[i].loc+2, 0);
+                    ext.vertexAttribDivisorANGLE(attributes[i].loc+3, 0);
+                    cgl.gl.disableVertexAttribArray(attributes[i].loc+1);
+                    cgl.gl.disableVertexAttribArray(attributes[i].loc+2);
+                    cgl.gl.disableVertexAttribArray(attributes[i].loc+3);
+                }
             }
+
+            if(attributes[i].loc!=-1) cgl.gl.disableVertexAttribArray(attributes[i].loc);
         }
     };
 

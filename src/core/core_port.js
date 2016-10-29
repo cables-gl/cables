@@ -199,7 +199,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     {
 
         this._valueBeforeLink=this.value;
-        console.log('this._valueBeforeLink',this._valueBeforeLink);
+
         this.links.push(l);
         if(this.onLinkChanged)this.onLinkChanged();
     };

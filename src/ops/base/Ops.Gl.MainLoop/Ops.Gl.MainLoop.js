@@ -63,6 +63,10 @@ op.onAnimFrame=function(time)
 
     trigger.trigger();
 
+    
+    CGL.MESH.lastMesh.unBind();
+
+
     if(CGL.Texture.previewTexture)
     {
         if(!CGL.Texture.texturePreviewer) CGL.Texture.texturePreviewer=new CGL.Texture.texturePreview(cgl);
