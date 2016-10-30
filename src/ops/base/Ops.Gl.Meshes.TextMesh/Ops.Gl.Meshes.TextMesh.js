@@ -297,8 +297,6 @@ function generateTexture()
 
     textureOut.get().unpackAlpha=true;
     
-    textureOut.get().printInfo();
-    
     createMesh=true;
     createTexture=false;
 }

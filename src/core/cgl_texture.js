@@ -16,6 +16,7 @@ CGL.Texture=function(__cgl,options)
     if(options && options.type)this.texTarget=options.type;
     this.textureType='default';
     this.unpackAlpha=true;
+    this.name="unknown";
 
     if(options)
     {
@@ -23,6 +24,7 @@ CGL.Texture=function(__cgl,options)
         if(options.isFloatingPointTexture) this.textureType='floatingpoint';
         if(options.filter) this.filter=options.filter;
         if(options.wrap) this.wrap=options.wrap;
+        this.name=options.name||this.name;
         this.flip=options.flip;
     }
 
@@ -118,8 +120,10 @@ CGL.Texture.prototype.isPowerOfTwo=function()
 
 CGL.Texture.prototype.printInfo=function()
 {
+    console.log('-----------');
     console.log("power of two:",this.isPowerOfTwo() );
     console.log("size:",this.width,this.height );
+    console.log("unpackAlpha:",textureOut.get().unpackAlpha );
 
     if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE) console.log("wrap: CLAMP_TO_EDGE");
     if(this.wrap==CGL.Texture.WRAP_REPEAT) console.log("wrap: WRAP_REPEAT");
@@ -135,7 +139,7 @@ CGL.Texture.prototype._setFilter=function()
 {
     if(!this.isPowerOfTwo() )
     {
-        console.log( 'non power of two',this.width,this.height );
+        // console.log( 'non power of two',this.width,this.height );
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
 
