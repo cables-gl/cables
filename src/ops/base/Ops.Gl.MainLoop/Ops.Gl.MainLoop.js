@@ -63,13 +63,17 @@ op.onAnimFrame=function(time)
 
     trigger.trigger();
 
+
+    if(CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
+
+
     if(CGL.Texture.previewTexture)
     {
         if(!CGL.Texture.texturePreviewer) CGL.Texture.texturePreviewer=new CGL.Texture.texturePreview(cgl);
         CGL.Texture.texturePreviewer.render(CGL.Texture.previewTexture);
     }
     cgl.renderEnd(cgl);
-    
+
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     rframes++;
 };
