@@ -5,6 +5,7 @@ var reset=op.inFunction("Reset");
 var next=op.outFunction("Next");
 var textureField=op.inTexture("textureField");
 var shader=null;
+var outSimTex=op.outTexture("sim tex");
 
 function removeModule()
 {
@@ -75,7 +76,7 @@ var srcFrag=''
     
     .endl()+'   if(y>=1.0 || y<=0.0 || x>=1.0 || x<=0.0)'
     .endl()+'   {'
-    .endl()+'       x =random(time*gl_FragCoord.xy);'
+    .endl()+'       x=random(time*gl_FragCoord.xy);'
     .endl()+'       y=random(x*gl_FragCoord.xy);'
     .endl()+'   }'
     
@@ -84,9 +85,13 @@ var srcFrag=''
 
 
 
-var simTexture=new CGL.Texture(cgl,{isFloatingPointTexture:true});
+var simTexture=new CGL.Texture(cgl,{
+    "isFloatingPointTexture":true,
+    "filter":CGL.Texture.FILTER_NEAREST,
+    "name":"simtex vectorfield2d",
+
+});
 simTexture.setSize(1024,1024);
-   
 
 var shaderSim=new CGL.Shader(cgl);
 shaderSim.setSource(shaderSim.getDefaultVertexShader(),srcFrag);
@@ -100,7 +105,7 @@ var effect=new CGL.TextureEffect(cgl,{fp:true});
 
 effect.setSourceTexture(simTexture);
 var firstTime=true;
-
+simTexture.printInfo();
 
 // draw
 
@@ -113,8 +118,6 @@ var srcHeadVert=''
 
 var srcBodyVert=''
 
-
-
     .endl()+'   float size=1024.0;'
     .endl()+'   float tx = mod(attrVertIndex,size)/size;'
     .endl()+'   float ty = float( int((attrVertIndex/size)) )/size;'
@@ -122,13 +125,14 @@ var srcBodyVert=''
 
     .endl()+'vec4 {{mod}}_col=texture2D( {{mod}}_texture, vec2(tx,ty) );'
 
-.endl()+'{{mod}}_col.xyz-=0.5;'
+    .endl()+'{{mod}}_col.xyz-=0.5;'
 
     .endl()+'pos.xyz={{mod}}_col.xyz;'
     // .endl()+'pos.z=0.0;'
     .endl();
 
 
+var t=null;
 render.onTriggered=function()
 {
     
@@ -140,17 +144,21 @@ render.onTriggered=function()
         doReset=false;
         uniTime2.setValue(0);
         uniTime.setValue(0);
-
     }
     
-    var t=effect.getCurrentSourceTexture().tex;
+    effect.startEffect();
     cgl.setShader(shaderSim);
+    t=effect.getCurrentSourceTexture().tex;
     effect.bind();
 
     cgl.setTexture(5,t);
     cgl.setTexture(6,textureField.get().tex);
 
     effect.finish();
+    t=effect.getCurrentSourceTexture().tex;
+    outSimTex.set(effect.getCurrentSourceTexture());
+    effect.endEffect();
+    
     cgl.setPreviousShader();
 
     cgl.resetViewPort();
