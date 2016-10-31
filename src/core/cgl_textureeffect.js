@@ -71,7 +71,9 @@ CGL.TextureEffect=function(cgl,options)
 
         if(!textureSource.compare(textureTarget))
         {
-            console.log('change effect target texture');
+            // console.log('change effect target texture ');
+            if(textureTarget)
+                console.log('change effect target texture from to ',textureTarget.width,textureSource.width);
             // textureTarget.textureType=textureSource.textureType;
             if(textureTarget)textureTarget.delete();
 
@@ -89,8 +91,6 @@ CGL.TextureEffect=function(cgl,options)
             // textureTarget.setSize(textureSource.width,textureSource.height);
             // textureTarget.name="effect target";
 
-            textureSource.printInfo();
-            textureTarget.printInfo();
 
 
             CGL.profileEffectBuffercreate++;

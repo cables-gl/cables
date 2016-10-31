@@ -57,10 +57,6 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         texture.setSize(width,height);
         textureDepth.setSize(width,height);
 
-        texture.printInfo();
-        textureDepth.printInfo();
-
-        console.log(width,height);
 
         cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, width,height);
 

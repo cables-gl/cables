@@ -83,8 +83,6 @@ function updateResolution()
         tex.filter=CGL.Texture.FILTER_LINEAR;
         tex.setSize(w,h);
         
-        op.log("resize...");
-
         effect.setSourceTexture(tex);
         // texOut.set(effect.getCurrentSourceTexture());
     }

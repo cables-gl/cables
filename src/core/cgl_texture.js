@@ -49,7 +49,6 @@ CGL.Texture.prototype.compare=function(tex)
 
 CGL.Texture.prototype.clone=function()
 {
-    console.log('cloning...');
     var newTex=new CGL.Texture(this._cgl,
         {
             "filter":this.filter,
@@ -158,32 +157,38 @@ CGL.Texture.prototype.isPowerOfTwo=function()
 
 CGL.Texture.prototype.printInfo=function()
 {
-    console.log('-----------');
-    console.log("name:",this.name );
-    console.log("power of two:",this.isPowerOfTwo() );
-    console.log("size:",this.width,this.height );
+    console.log(this.getInfo());
+};
+
+CGL.Texture.prototype.getInfo=function()
+{
+    var obj={};
+
+    obj.name=this.name;
+    obj["power of two"]=this.isPowerOfTwo();
+    obj.size=this.width+" x "+this.height;
 
     var targetString=this.texTarget;
     if(this.texTarget==this._cgl.gl.TEXTURE_2D)targetString="TEXTURE_2D";
-    console.log("target:", targetString);
+    obj.target=targetString;
 
-    console.log("unpackAlpha:",this.unpackAlpha );
+    obj.unpackAlpha=this.unpackAlpha;
 
-    if(this.textureType==CGL.Texture.TYPE_FLOAT) console.log("textureType: TYPE_FLOAT");
-    else if(this.textureType==CGL.Texture.TYPE_DEPTH) console.log("textureType: TYPE_DEPTH");
-    else if(this.textureType==CGL.Texture.TYPE_DEFAULT) console.log("textureType: TYPE_DEFAULT");
-    else console.log("textureType: UNKNOWN");
+    if(this.textureType==CGL.Texture.TYPE_FLOAT) obj.textureType='TYPE_FLOAT';
+    else if(this.textureType==CGL.Texture.TYPE_DEPTH) obj.textureType='TYPE_DEPTH';
+    else if(this.textureType==CGL.Texture.TYPE_DEFAULT) obj.textureType='TYPE_DEFAULT';
+    else obj.textureType='UNKNOWN';
 
-    if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE) console.log("wrap: CLAMP_TO_EDGE");
-    else if(this.wrap==CGL.Texture.WRAP_REPEAT) console.log("wrap: WRAP_REPEAT");
-    else if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT) console.log("wrap: WRAP_MIRRORED_REPEAT");
-    else console.log("wrap: UNKNOWN");
+    if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE) obj.wrap="CLAMP_TO_EDGE";
+    else if(this.wrap==CGL.Texture.WRAP_REPEAT) obj.wrap="WRAP_REPEAT";
+    else if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT) obj.wrap="WRAP_MIRRORED_REPEAT";
+    else obj.wrap="UNKNOWN";
 
-    if(this.filter==CGL.Texture.FILTER_NEAREST) console.log("filter: FILTER_NEAREST");
-    else if(this.filter==CGL.Texture.FILTER_LINEAR) console.log("filter: FILTER_LINEAR");
-    else if(this.filter==CGL.Texture.FILTER_MIPMAP) console.log("filter: FILTER_MIPMAP");
-    else console.log("filter: UNKNOWN");
-
+    if(this.filter==CGL.Texture.FILTER_NEAREST) obj.filter="filter: FILTER_NEAREST";
+    else if(this.filter==CGL.Texture.FILTER_LINEAR) obj.filter="filter: FILTER_LINEAR";
+    else if(this.filter==CGL.Texture.FILTER_MIPMAP) obj.filter="filter: FILTER_MIPMAP";
+    else obj.filter="filter: UNKNOWN";
+    return obj;
 };
 
 CGL.Texture.prototype._setFilter=function()
