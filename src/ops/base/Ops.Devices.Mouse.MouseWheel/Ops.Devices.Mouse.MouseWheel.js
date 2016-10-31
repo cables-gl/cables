@@ -88,7 +88,7 @@ function wheelDistance(evt)
             else ret= w/120;             // IE/Safari/Chrome TODO: /3 for Chrome OS X
     }
 
-    if(!isMac)ret*=6;
+    // if(!isMac)ret*=6;
     if(ret!=ret)ret=0;
     
     
