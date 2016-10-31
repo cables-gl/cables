@@ -2,21 +2,25 @@ op.name="MouseDrag";
 
 var canvas=op.patch.cgl.canvas;
 
-var mul=op.inValue("mul",1);
 
 var outX=op.addOutPort(new Port(op,"x"));
 var outY=op.addOutPort(new Port(op,"y"));
-var cgl=op.patch.cgl;
 var flipY=op.inValueBool("Flip Y",true);
 var kinetic=op.inValueBool("Inertia Movement",true);
 
 var doReset=op.inFunction("Reset");
+
+
 
 var minX=op.inValue("minX",-600);
 var maxX=op.inValue("maxX",600);
 var minY=op.inValue("minY",-600);
 var maxY=op.inValue("maxY",600);
 
+
+
+
+var cgl=op.patch.cgl;
 
 outY.ignoreValueSerialize=true;
 outX.ignoreValueSerialize=true;
@@ -32,9 +36,6 @@ outY.set(0);
 var animX=new CABLES.InertiaAnim(updateKineticX);
 var animY=new CABLES.InertiaAnim(updateKineticY);
 
-animX.smoothSpeed=0.0000001;
-animY.smoothSpeed=0.0000001;
-
 
 doReset.onTriggered=function()
 {
@@ -43,11 +44,16 @@ doReset.onTriggered=function()
 
     outX.set(0);
     outY.set(0);
+    
+    if(kinetic.get())
+    {
+        animX.set(0);
+        animY.set(0);
+    }
 };
 
 function updateKineticX(v)
 {
-
     if(v>maxX.get())v=maxX.get();
     if(v<minX.get())v=minX.get();
 
@@ -83,19 +89,14 @@ function onmousemove(e)
                 var deltaX=(e.clientX-lastX);
                 var deltaY=(clientY-lastY);
 
-                var x=(animX.get()+deltaX*mul.get());
-                var y=(animY.get()+deltaY*mul.get());
-
-
-
-
+                var x=(animX.get()+deltaX);
+                var y=(animY.get()+deltaY);
 
                 if(x!=x)x=0;
                 x=x||0;
 
                 if(y!=y)y=0;
                 y=y||0;
-                
 
                 if(x>maxX.get())x=maxX.get();
                 if(x<minX.get())x=minX.get();
@@ -107,8 +108,8 @@ function onmousemove(e)
             }
             else
             {
-                var x=(outX.get()+(e.clientX-lastX)*mul.get());
-                var y=(outY.get()+(clientY-lastY)*mul.get());
+                var x=(outX.get()+(e.clientX-lastX));
+                var y=(outY.get()+(clientY-lastY));
 
                 if(x!=x)x=0;
                 x=x||0;
@@ -141,15 +142,6 @@ function onMouseDown(e)
     pressed=true;
 }
 
-function checkBounds()
-{
-    // if(animX.get()>maxX.get())
-    // {
-    //     // animX.set(animX.get());
-    //     animX.set(maxX.get());
-    //     animX.release();
-    // }
-}
 
 
 function onMouseUp(e)
@@ -158,8 +150,6 @@ function onMouseUp(e)
     {
         animX.release();
         animY.release();
-        
-        checkBounds();
     }
     
 

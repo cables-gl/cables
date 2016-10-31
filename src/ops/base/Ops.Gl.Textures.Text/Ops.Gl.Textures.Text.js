@@ -17,7 +17,6 @@ var textureOut=op.outTexture("texture");
 var outRatio=op.addOutPort(new Port(op,"Ratio",OP_PORT_TYPE_VALUE));
 var cgl=op.patch.cgl;
 
-
 doRefresh.onTriggered=refresh;
 
 border.set(0);
@@ -121,7 +120,7 @@ function refresh()
     outRatio.set(ctx.canvas.height/ctx.canvas.width);
 
     if(textureOut.get()) textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
-        else textureOut.set(new CGL.Texture.fromImage(cgl,fontImage,CGL.Texture.FILTER_MIPMAP));
+        else textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { "filter":CGL.Texture.FILTER_MIPMAP } ));
         
     textureOut.get().unpackAlpha=false;
 }

@@ -16,6 +16,7 @@ CGL.Texture=function(__cgl,options)
     if(options && options.type)this.texTarget=options.type;
     this.textureType='default';
     this.unpackAlpha=true;
+    this.name="unknown";
 
     if(options)
     {
@@ -23,6 +24,7 @@ CGL.Texture=function(__cgl,options)
         if(options.isFloatingPointTexture) this.textureType='floatingpoint';
         if(options.filter) this.filter=options.filter;
         if(options.wrap) this.wrap=options.wrap;
+        this.name=options.name||this.name;
         this.flip=options.flip;
     }
 
@@ -118,17 +120,18 @@ CGL.Texture.prototype.isPowerOfTwo=function()
 
 CGL.Texture.prototype.printInfo=function()
 {
+    console.log('-----------');
     console.log("power of two:",this.isPowerOfTwo() );
     console.log("size:",this.width,this.height );
-
+    console.log("unpackAlpha:",textureOut.get().unpackAlpha );
 
     if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE) console.log("wrap: CLAMP_TO_EDGE");
     if(this.wrap==CGL.Texture.WRAP_REPEAT) console.log("wrap: WRAP_REPEAT");
     if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT) console.log("wrap: WRAP_MIRRORED_REPEAT");
 
-    if(this.filter==CGL.Texture.FILTER_NEAREST) console.log("wrap: CLAMP_TO_EDGE");
-    if(this.filter==CGL.Texture.FILTER_LINEAR) console.log("wrap: WRAP_REPEAT");
-    if(this.filter==CGL.Texture.FILTER_MIPMAP) console.log("wrap: WRAP_MIRRORED_REPEAT");
+    if(this.filter==CGL.Texture.FILTER_NEAREST) console.log("filter: FILTER_NEAREST");
+    if(this.filter==CGL.Texture.FILTER_LINEAR) console.log("filter: FILTER_LINEAR");
+    if(this.filter==CGL.Texture.FILTER_MIPMAP) console.log("filter: FILTER_MIPMAP");
 
 };
 
@@ -136,14 +139,15 @@ CGL.Texture.prototype._setFilter=function()
 {
     if(!this.isPowerOfTwo() )
     {
+        // console.log( 'non power of two',this.width,this.height );
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
 
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.CLAMP_TO_EDGE);
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.CLAMP_TO_EDGE);
 
-        this.filter=this._cgl.gl.NEAREST;
-        this.wrap=this._cgl.gl.CLAMP_TO_EDGE;
+        this.filter=CGL.Texture.FILTER_NEAREST;
+        this.wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
     }
     else
     {
@@ -183,6 +187,9 @@ CGL.Texture.prototype._setFilter=function()
         else
         {
             console.log('unknown texture filter!',this.filter);
+            var err = new Error();
+            throw err;
+
         }
     }
 };
@@ -269,12 +276,17 @@ CGL.Texture.createFromImage=function(cgl,img,options)
     texture.width=img.width;
     texture.height=img.height;
     texture.initTexture(img);
+
     return texture;
 };
 
 // deprecated!
 CGL.Texture.fromImage=function(cgl,img,filter,wrap)
 {
+    console.log('deprecated texture from image...');
+    // var err = new Error();
+    // throw err;
+
     var texture=new CGL.Texture(cgl);
     texture.flip=false;
     if(filter)texture.filter=filter;
