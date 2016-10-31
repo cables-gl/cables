@@ -123,7 +123,7 @@ CGL.Texture.prototype.printInfo=function()
     console.log('-----------');
     console.log("power of two:",this.isPowerOfTwo() );
     console.log("size:",this.width,this.height );
-    console.log("unpackAlpha:",textureOut.get().unpackAlpha );
+    console.log("unpackAlpha:",this.unpackAlpha );
 
     if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE) console.log("wrap: CLAMP_TO_EDGE");
     if(this.wrap==CGL.Texture.WRAP_REPEAT) console.log("wrap: WRAP_REPEAT");
