@@ -2,13 +2,13 @@
 
 # Communicating with Arduino over MQTT
 
-*Level: Beginner*  
+*Level: Beginner*  – you should already have read a tutorial on how to do basic things in cables, also soldering is needed for the electronic parts. 
 
-In this tutorial we will show you how to establish communication to an Arduino MKR1000 over the internet to control a rotating cube in cables with a physical cube (Arduino —> cables). We also add the possibility to change the color of the cube and see the physical cube adapt its color (cables —> Arduino).
+In this tutorial we will show you how to establish a communication to an Arduino MKR1000 over the internet to control a rotating cube in cables with a physical cube (Arduino —> cables). We also add the possibility to change the color of the cube and see the physical cube adapt its color (cables —> Arduino).
 
 ### What is MQTT?
 
-**MQTT** is a leightweight protocol which makes it easy to publish and subscribe information, much like [OSC](https://en.wikipedia.org/wiki/Open_Sound_Control), and use in on various devices.  
+**MQTT** is a leightweight protocol which makes it easy to publish and subscribe information, much like [OSC](https://en.wikipedia.org/wiki/Open_Sound_Control), and use on various devices.  
 
 In order to send / receive data you need to have access to a MQTT-server (broker). Luckily there are some free ones around, our favoruite is [shiftr.io](https://shiftr.io).  
 
@@ -32,7 +32,7 @@ Before we can get started, we have to install some libraries. Klick on *Sketch* 
 
 ## Testing the components
 
-In genereal it’s a good idea to test every functionality of our project on its own and make sure they work individually. Getting started with Arduino
+In genereal it’s a good idea to test every functionality of our project on its own and make sure they work individually. 
 
 Follow the tutorial on [Getting started with the Arduino/Genuino MKR1000](https://www.arduino.cc/en/Guide/MKR1000) and make sure you can successfully upload the *Blink* example (*Examples* —> *Basic* —> *Blink*). 
 
@@ -78,7 +78,7 @@ client.publish("/hello", "world");
 to something unique:
 
 ```C
-client.publish("/hellofromcaroline", "world");
+client.publish("/hellofromarduinoooo", "world");
 ```
 
 Now upload the code, open the *Serial Monitor* and you should see:
@@ -119,7 +119,7 @@ For the communication with MQTT in cables you need three ops – `Mqtt` (for aut
 
 Connect the `Mqtt` out port `MQTT Object` to the `MQTT Object` in ports of `MqttReceive` and `MqttSend`.  
 
-Per default the MQTT-ops use the public namespace (`try` / `try`). Select the MQTT ob and put in your own read/write user token. Click `connect` (a few lines below).
+Per default the MQTT-ops use the public namespace (`try` / `try`). Select the MQTT op and put in your own read/write user token. Click `Reconnect` (a few lines below).
 
 ![Cables MQTT credentials](img/cables-mqtt-credentials.jpg)
 
@@ -423,7 +423,7 @@ Using our patch from before, which contains three ops (*Mqtt*, *MqttReceive* and
 
 The *Message Type* can be left as *String*, because we send over the rotation data in a combined form as `x,y,z`. 
 
-If the *Message*-port does update as it should, try saving your patch and reload the browser.  
+If the *Message*-port does not update as it should, try saving your patch and reload the browser.  
 
 To make sense of the data we send over we have to take it apart, so that `x,y,z` can be used as three individual values `x`, `y` and `z`. For this we need to use the `SplitString`-op. Connect its input-port `Input Text` to the `Message`-output port of the `MqttReceive`-op.  
 
@@ -456,7 +456,7 @@ The rotation is not right, yet, we have to switch the `rotX` and `rotY` connecti
 If this does not work for you, here are some things you should check:
 
 - Is the Arduino sending data? Go to [shiftr.io](https://shiftr.io), click on your namespace and you should see if the Arduino sends data or not.
-  - If is does not it is probably disconnected, try plugging it out and back in again.
+  - If it does not it is probably disconnected, try plugging it out and back in again.
   - Open the serial monitor and check if there are any connection errors
 - if the Arduino is sending data but it is not coming in in cables try saving your patch and reloading the page or pressing the `Reconnect`-button in the `Mqtt`-op parameters.
 - If the problem is on the Arduino side and it disconnects often, try changing the line `#define SEND_DELAY_MS (100)` – the milliseconds between each MQTT-send to a bigger value  – `#define SEND_DELAY_MS (300)`. 
@@ -500,7 +500,7 @@ String orientationString = String("") +
     client.publish("/orientation", orientationString);
 ```
 
-Okay, that’s it for now, I hope you learned something and can start visualizing your Arduino sensor data in cables. In the following section we we build upon and add an LED ring which we can control from within cables.
+Okay, that’s it for now, I hope you learned something and can start visualizing your Arduino sensor data in cables. In the following section we we build upon and add a LED ring which we can control from within cables.
 
 ## Controlling a NeoPixel LED ring with cables
 
