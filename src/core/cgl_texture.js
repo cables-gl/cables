@@ -7,8 +7,8 @@ CGL.Texture=function(__cgl,options)
 
     this._cgl=__cgl;
     this.tex = this._cgl.gl.createTexture();
-    this.width = 0;
-    this.height = 0;
+    this.width = 8;
+    this.height = 8;
     this.flip = true;
     this.filter = CGL.Texture.FILTER_NEAREST;
     this.wrap = CGL.Texture.CLAMP_TO_EDGE;
@@ -26,9 +26,11 @@ CGL.Texture=function(__cgl,options)
         if(options.wrap) this.wrap=options.wrap;
         this.name=options.name||this.name;
         this.flip=options.flip;
+        if(options.width)this.width=options.width;
+        if(options.height)this.height=options.height;
     }
 
-    this.setSize(8,8);
+    this.setSize(this.width,this.height);
 };
 
 CGL.Texture.prototype.setSize=function(w,h)
