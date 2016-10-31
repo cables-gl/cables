@@ -69,18 +69,43 @@ CGL.TextureEffect=function(cgl,options)
             textureSource=tex;
         }
 
-        textureTarget.filter=textureSource.filter;
-        textureTarget.setSize(textureSource.width,textureSource.height);
+        if(!textureSource.compare(textureTarget))
+        {
+            console.log('change effect target texture');
+            // textureTarget.textureType=textureSource.textureType;
+            if(textureTarget)textureTarget.delete();
 
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+            textureTarget=textureSource.clone();
 
-        cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, renderbuffer);
-        cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, textureSource.width,textureSource.height);
-        cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, textureTarget.tex, 0);
-        cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, renderbuffer);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-        cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
+            if(!textureSource.compare(textureTarget))
+            {
+                console.log('still not comparing!!!!!!!!!!!');
+            }
+
+
+
+
+            // textureTarget.filter=textureSource.filter;
+            // textureTarget.setSize(textureSource.width,textureSource.height);
+            // textureTarget.name="effect target";
+
+            textureSource.printInfo();
+            textureTarget.printInfo();
+
+
+            CGL.profileEffectBuffercreate++;
+            cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+
+            cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, renderbuffer);
+            cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, textureSource.width,textureSource.height);
+            cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, textureTarget.tex, 0);
+            cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, renderbuffer);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+            cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
+            cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
+
+        }
+
     };
 
     this.getCurrentTargetTexture=function()

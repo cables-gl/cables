@@ -106,6 +106,8 @@ function refresh()
         if(CGL.profileShaderGetUniform>0)warn+='Shader get uni loc! ';
         if(CGL.profileTextureResize>0)warn+='Texture resize! ';
         if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
+        if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
+        
         
 
 
@@ -138,6 +140,8 @@ function refresh()
         CGL.profileShaderBinds=0;
         CGL.profileTextureResize=0;
         CGL.profileFrameBuffercreate=0;
+        CGL.profileEffectBuffercreate=0;
+        
 
     }
     ctx.clearRect(0,0,canvas.width,canvas.height);

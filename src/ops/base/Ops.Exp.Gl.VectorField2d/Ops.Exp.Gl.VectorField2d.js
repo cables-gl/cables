@@ -87,7 +87,8 @@ var srcFrag=''
 
 var simTexture=new CGL.Texture(cgl,{
     "isFloatingPointTexture":true,
-    "filter":CGL.Texture.FILTER_NEAREST
+    "filter":CGL.Texture.FILTER_NEAREST,
+    "name":"simtex vectorfield2d",
 
 });
 simTexture.setSize(1024,1024);
@@ -104,7 +105,7 @@ var effect=new CGL.TextureEffect(cgl,{fp:true});
 
 effect.setSourceTexture(simTexture);
 var firstTime=true;
-
+simTexture.printInfo();
 
 // draw
 
@@ -163,7 +164,6 @@ render.onTriggered=function()
     cgl.resetViewPort();
     
     
-    
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
@@ -190,6 +190,8 @@ render.onTriggered=function()
     uniTime.setValue(op.patch.freeTimer.get());
     next.trigger();
 };
+
+
 
 
 

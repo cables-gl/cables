@@ -7,31 +7,63 @@ CGL.Texture=function(__cgl,options)
 
     this._cgl=__cgl;
     this.tex = this._cgl.gl.createTexture();
-    this.width = 8;
-    this.height = 8;
+    this.width = 0;
+    this.height = 0;
     this.flip = true;
     this.filter = CGL.Texture.FILTER_NEAREST;
     this.wrap = CGL.Texture.CLAMP_TO_EDGE;
     this.texTarget= this._cgl.gl.TEXTURE_2D;
     if(options && options.type)this.texTarget=options.type;
-    this.textureType='default';
+    this.textureType=CGL.Texture.TYPE_DEFAULT;
     this.unpackAlpha=true;
     this.name="unknown";
 
     if(options)
     {
-        if(options.isDepthTexture) this.textureType='depth';
-        if(options.isFloatingPointTexture) this.textureType='floatingpoint';
+        if(options.isDepthTexture) this.textureType=CGL.Texture.TYPE_DEPTH;
+        if(options.isFloatingPointTexture) this.textureType=CGL.Texture.TYPE_FLOAT;
+        if(options.textureType) this.textureType=options.textureType;
         if(options.filter) this.filter=options.filter;
         if(options.wrap) this.wrap=options.wrap;
         this.name=options.name||this.name;
         this.flip=options.flip;
-        if(options.width)this.width=options.width;
-        if(options.height)this.height=options.height;
     }
 
-    this.setSize(this.width,this.height);
+    if(options && options.width && options.height)this.setSize(options.width, options.height);
+        else this.setSize(8,8);
 };
+
+CGL.Texture.prototype.compare=function(tex)
+{
+    if(!tex)return false;
+    return (
+        tex.width==this.width &&
+        tex.height==this.height &&
+        tex.filter==this.filter &&
+        tex.wrap==this.wrap &&
+        tex.textureType==this.textureType &&
+        tex.unpackAlpha==this.unpackAlpha &&
+        tex.flip==this.flip
+    );
+};
+
+CGL.Texture.prototype.clone=function()
+{
+    console.log('cloning...');
+    var newTex=new CGL.Texture(this._cgl,
+        {
+            "filter":this.filter,
+            "wrap":this.wrap,
+            "textureType":this.textureType,
+            "unpackAlpha":this.unpackAlpha,
+            "flip":this.flip,
+            "width":this.width,
+            "height":this.height,
+        });
+    return newTex;
+};
+
+
 
 CGL.Texture.prototype.setSize=function(w,h)
 {
@@ -46,16 +78,20 @@ CGL.Texture.prototype.setSize=function(w,h)
     var uarr=null;
     this._setFilter();
 
-    if(this.textureType=='floatingpoint')
+    if(this.textureType==CGL.Texture.TYPE_FLOAT)
     {
         if(!this._cgl.gl.getExtension('OES_texture_float')) throw "no floating point texture extension";
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
     }
     else
-    if(this.textureType=='depth')
+    if(this.textureType==CGL.Texture.TYPE_DEPTH)
+    {
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.DEPTH_COMPONENT, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
+    }
     else
+    {
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
+    }
 
     if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP)
     {
@@ -123,17 +159,30 @@ CGL.Texture.prototype.isPowerOfTwo=function()
 CGL.Texture.prototype.printInfo=function()
 {
     console.log('-----------');
+    console.log("name:",this.name );
     console.log("power of two:",this.isPowerOfTwo() );
     console.log("size:",this.width,this.height );
+
+    var targetString=this.texTarget;
+    if(this.texTarget==this._cgl.gl.TEXTURE_2D)targetString="TEXTURE_2D";
+    console.log("target:", targetString);
+
     console.log("unpackAlpha:",this.unpackAlpha );
 
+    if(this.textureType==CGL.Texture.TYPE_FLOAT) console.log("textureType: TYPE_FLOAT");
+    else if(this.textureType==CGL.Texture.TYPE_DEPTH) console.log("textureType: TYPE_DEPTH");
+    else if(this.textureType==CGL.Texture.TYPE_DEFAULT) console.log("textureType: TYPE_DEFAULT");
+    else console.log("textureType: UNKNOWN");
+
     if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE) console.log("wrap: CLAMP_TO_EDGE");
-    if(this.wrap==CGL.Texture.WRAP_REPEAT) console.log("wrap: WRAP_REPEAT");
-    if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT) console.log("wrap: WRAP_MIRRORED_REPEAT");
+    else if(this.wrap==CGL.Texture.WRAP_REPEAT) console.log("wrap: WRAP_REPEAT");
+    else if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT) console.log("wrap: WRAP_MIRRORED_REPEAT");
+    else console.log("wrap: UNKNOWN");
 
     if(this.filter==CGL.Texture.FILTER_NEAREST) console.log("filter: FILTER_NEAREST");
-    if(this.filter==CGL.Texture.FILTER_LINEAR) console.log("filter: FILTER_LINEAR");
-    if(this.filter==CGL.Texture.FILTER_MIPMAP) console.log("filter: FILTER_MIPMAP");
+    else if(this.filter==CGL.Texture.FILTER_LINEAR) console.log("filter: FILTER_LINEAR");
+    else if(this.filter==CGL.Texture.FILTER_MIPMAP) console.log("filter: FILTER_MIPMAP");
+    else console.log("filter: UNKNOWN");
 
 };
 
@@ -202,6 +251,8 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
 {
     var loadingId=cgl.patch.loading.start('texture',url);
     var texture=new CGL.Texture(cgl);
+
+    texture.name=url;
 
     if(CABLES.UI) gui.jobs().start({id:'loadtexture'+loadingId,title:'loading texture ('+url+')'});
 
@@ -310,5 +361,9 @@ CGL.Texture.FILTER_MIPMAP=2;
 CGL.Texture.WRAP_REPEAT=0;
 CGL.Texture.WRAP_MIRRORED_REPEAT=1;
 CGL.Texture.WRAP_CLAMP_TO_EDGE=2;
+
+CGL.Texture.TYPE_DEFAULT=0;
+CGL.Texture.TYPE_DEPTH=1;
+CGL.Texture.TYPE_FLOAT=2;
 
 // ---------------------------------------------------------------------------
