@@ -70,8 +70,10 @@ var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
 
 function wheelDistance(evt)
 {
+
+
     if (!evt) evt=event;
-    var w=evt.wheelDelta, d=evt.detail;
+    var w=evt.wheelDelta||evt.deltaY||0, d=evt.detail;
 
     var ret=0;
 
@@ -80,10 +82,16 @@ function wheelDistance(evt)
         if (w) ret= w/d/40*d>0?1:-1; // Opera
             else ret= -d/3;              // Firefox;         TODO: do not /3 for OS X
     }
-    else ret= w/120;             // IE/Safari/Chrome TODO: /3 for Chrome OS X
+    else 
+    {
+        if(isMac)ret= w;
+            else ret= w/120;             // IE/Safari/Chrome TODO: /3 for Chrome OS X
+    }
 
-    if(!isMac)ret*=6;
+    // if(!isMac)ret*=6;
     if(ret!=ret)ret=0;
+    
+    
     return ret*mul.get();
 }
 
@@ -110,6 +118,7 @@ function onMouseWheel(e)
     
     v-=d;
     
+
     // vOut=v+valIn.get();
     // v+=valIn.get();
 
