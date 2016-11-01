@@ -182,7 +182,7 @@ CGL.TextureEffect.prototype.createMesh=function()
 CGL.TextureEffect.getBlendCode=function()
 {
     return ''
-    .endl()+'#define Blend(base, blend, funcf)       vec3(funcf(base.r, blend.r), funcf(base.g, blend.g), funcf(base.b, blend.b))'
+    //.endl()+'#define Blend(base, blend, funcf)       vec3(funcf(base.r, blend.r), funcf(base.g, blend.g), funcf(base.b, blend.b))'
 
     .endl()+'vec3 _blend(vec3 base,vec3 blend)'
     .endl()+'{'
@@ -235,35 +235,45 @@ CGL.TextureEffect.getBlendCode=function()
     .endl()+'   #ifdef BM_OVERLAY'
     .endl()+'      #define BlendOverlayf(base, blend)  (base < 0.5 ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend)))'
     // .endl()+'       #define BlendOverlay(base, blend)       Blend(base, blend, BlendOverlayf)'
-    .endl()+'      colNew=Blend(base, blend, BlendOverlayf);'
+//    .endl()+'      colNew=Blend(base, blend, BlendOverlayf);'
+    .endl()+'      colNew=vec3(BlendOverlayf(base.r, blend.r),BlendOverlayf(base.g, blend.g),BlendOverlayf(base.b, blend.b));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_SCREEN'
     .endl()+'      #define BlendScreenf(base, blend)       (1.0 - ((1.0 - base) * (1.0 - blend)))'
     // .endl()+'       #define BlendScreen(base, blend)        Blend(base, blend, BlendScreenf)'
-    .endl()+'      colNew=Blend(base, blend, BlendScreenf);'
+    //.endl()+'      colNew=Blend(base, blend, BlendScreenf);'
+    .endl()+'      colNew=vec3(BlendScreenf(base.r, blend.r),BlendScreenf(base.g, blend.g),BlendScreenf(base.b, blend.b));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_SOFTLIGHT'
     .endl()+'      #define BlendSoftLightf(base, blend)    ((blend < 0.5) ? (2.0 * base * blend + base * base * (1.0 - 2.0 * blend)) : (sqrt(base) * (2.0 * blend - 1.0) + 2.0 * base * (1.0 - blend)))'
     // .endl()+'       #define BlendSoftLight(base, blend)     Blend(base, blend, BlendSoftLightf)'
-    .endl()+'      colNew=Blend(base, blend, BlendSoftLightf);'
+//    .endl()+'      colNew=Blend(base, blend, BlendSoftLightf);'
+    .endl()+'      colNew=vec3(BlendSoftLightf(base.r, blend.r),BlendSoftLightf(base.g, blend.g),BlendSoftLightf(base.b, blend.b));'
+
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_HARDLIGHT'
     .endl()+'      #define BlendOverlayf(base, blend)  (base < 0.5 ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend)))'
     // .endl()+'       #define BlendOverlay(base, blend)       Blend(base, blend, BlendOverlayf)'
-    .endl()+'      colNew=Blend(blend, base, BlendOverlayf);'
+    //.endl()+'      colNew=Blend(blend, base, BlendOverlayf);'
+    .endl()+'      colNew=vec3(BlendOverlayf(base.r, blend.r),BlendOverlayf(base.g, blend.g),BlendOverlayf(base.b, blend.b));'
+
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_COLORDODGE'
     .endl()+'      #define BlendColorDodgef(base, blend)   ((blend == 1.0) ? blend : min(base / (1.0 - blend), 1.0))'
-    .endl()+'      colNew=Blend(base, blend, BlendColorDodgef);'
+   // .endl()+'      colNew=Blend(base, blend, BlendColorDodgef);'
+    .endl()+'      colNew=vec3(BlendColorDodgef(base.r, blend.r),BlendColorDodgef(base.g, blend.g),BlendColorDodgef(base.b, blend.b));'
+
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_COLORBURN'
     .endl()+'      #define BlendColorBurnf(base, blend)    ((blend == 0.0) ? blend : max((1.0 - ((1.0 - base) / blend)), 0.0))'
-    .endl()+'      colNew=Blend(base, blend, BlendColorBurnf);'
+    //.endl()+'      colNew=Blend(base, blend, BlendColorBurnf);'
+    .endl()+'      colNew=vec3(BlendColorBurnf(base.r, blend.r),BlendColorBurnf(base.g, blend.g),BlendColorBurnf(base.b, blend.b));'
+
     .endl()+'   #endif'
 
     .endl()+'   return colNew;'
