@@ -4,188 +4,180 @@ CGL.TextureEffectMesh=null;
 
 CGL.TextureEffect=function(cgl,options)
 {
-    var self=this;
+    this._cgl=cgl;
 
-    if(!CGL.TextureEffectMesh)
-    {
-        var geom=new CGL.Geometry();
+    if(!CGL.TextureEffectMesh)this.createMesh();
 
-        geom.vertices = [
-             1.0,  1.0,  0.0,
-            -1.0,  1.0,  0.0,
-             1.0, -1.0,  0.0,
-            -1.0, -1.0,  0.0
-        ];
+    this._textureSource = null;
 
-        geom.texCoords = [
-             1.0, 1.0,
-             0.0, 1.0,
-             1.0, 0.0,
-             0.0, 0.0
-        ];
-
-        geom.verticesIndices = [
-            0, 1, 2,
-            3, 1, 2
-        ];
-
-        CGL.TextureEffectMesh=new CGL.Mesh(cgl,geom);
-    }
-
-    var textureSource = null;
-
+    //TODO: do we still need the options ?
     var opts=options ||
         {
             isFloatingPointTexture:false,
             filter:CGL.Texture.FILTER_LINEAR
         };
     if(options && options.fp)opts.isFloatingPointTexture=true;
-    var textureTarget = new CGL.Texture(cgl,opts);
-    var frameBuf      = cgl.gl.createFramebuffer();
-    var renderbuffer  = cgl.gl.createRenderbuffer();
 
-    var switched=false;
+    this._textureTarget = new CGL.Texture(this._cgl,opts);
+    this._frameBuf      = this._cgl.gl.createFramebuffer();
+    this._renderbuffer  = this._cgl.gl.createRenderbuffer();
+    this.switched=false;
+};
 
-    this.delete=function()
+
+CGL.TextureEffect.prototype.setSourceTexture=function(tex)
+{
+    // if(this._textureSource==tex)return;
+
+    if(tex===null)
     {
-        if(textureTarget)textureTarget.delete();
-        if(textureSource)textureSource.delete();
-        cgl.gl.deleteRenderbuffer(renderbuffer);
-        cgl.gl.deleteFramebuffer(frameBuf);
-    };
-
-
-    this.setSourceTexture=function(tex)
+        this._textureSource=new CGL.Texture(this._cgl);
+        this._textureSource.setSize(16,16);
+    }
+    else
     {
-        // if(textureSource==tex)return;
+        this._textureSource=tex;
+    }
 
-        if(tex===null)
-        {
-            textureSource=new CGL.Texture(cgl,opts);
-            textureSource.setSize(16,16);
-        }
-        else
-        {
-            textureSource=tex;
-        }
-
-        if(!textureSource.compare(textureTarget))
-        {
-            // console.log('change effect target texture ');
-            if(textureTarget)
-                console.log('change effect target texture from to ',textureTarget.width,textureSource.width);
-            // textureTarget.textureType=textureSource.textureType;
-            if(textureTarget)textureTarget.delete();
-
-            textureTarget=textureSource.clone();
-
-            if(!textureSource.compare(textureTarget))
-            {
-                console.log('still not comparing!!!!!!!!!!!');
-            }
-
-
-
-
-            // textureTarget.filter=textureSource.filter;
-            // textureTarget.setSize(textureSource.width,textureSource.height);
-            // textureTarget.name="effect target";
-
-
-
-            CGL.profileEffectBuffercreate++;
-            cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-
-            cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, renderbuffer);
-            cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, textureSource.width,textureSource.height);
-            cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, textureTarget.tex, 0);
-            cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, renderbuffer);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-            cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
-            cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
-
-        }
-
-    };
-
-    this.getCurrentTargetTexture=function()
+    if(!this._textureSource.compareSettings(this._textureTarget))
     {
-        if(switched)return textureSource;
-            else return textureTarget;
-    };
+        // console.log('change effect target texture ');
+        if(this._textureTarget)
+            console.log('change effect target texture from to ',this._textureTarget.width,this._textureSource.width);
+        // this._textureTarget.textureType=this._textureSource.textureType;
+        if(this._textureTarget)this._textureTarget.delete();
 
-    this.getCurrentSourceTexture=function()
+        this._textureTarget=this._textureSource.clone();
+
+        CGL.profileEffectBuffercreate++;
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
+
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._renderbuffer);
+        this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this._textureSource.width,this._textureSource.height);
+        this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureTarget.tex, 0);
+        this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._renderbuffer);
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
+    }
+};
+
+
+
+CGL.TextureEffect.prototype.startEffect=function()
+{
+
+    this.switched=false;
+    this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
+
+    // this._cgl.gl.clearColor(0,0,0,0);
+    // this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+
+    this._cgl.pushMvMatrix();
+
+    this._cgl.pushPMatrix();
+    this._cgl.gl.viewport(0, 0, this.getCurrentTargetTexture().width,this.getCurrentTargetTexture().height);
+    mat4.perspective(this._cgl.pMatrix,45, this.getCurrentTargetTexture().width/this.getCurrentTargetTexture().height, 0.1, 1100.0);
+
+    this._cgl.pushPMatrix();
+    mat4.identity(this._cgl.pMatrix);
+
+    this._cgl.pushViewMatrix();
+    mat4.identity(this._cgl.vMatrix);
+
+    this._cgl.pushMvMatrix();
+    mat4.identity(this._cgl.mvMatrix);
+
+};
+CGL.TextureEffect.prototype.endEffect=function()
+{
+    this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
+    this._cgl.popMvMatrix();
+
+    this._cgl.popPMatrix();
+    this._cgl.popMvMatrix();
+    this._cgl.popViewMatrix();
+
+    this._cgl.popPMatrix();
+    this._cgl.resetViewPort();
+};
+
+CGL.TextureEffect.prototype.bind=function()
+{
+    if(this._textureSource===null)
     {
-        if(switched)return textureTarget;
-            else return textureSource;
-    };
+        console.log('no base texture set!');
+        return;
+    }
 
-    this.startEffect=function()
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
+    this._cgl.pushFrameBuffer(this._frameBuf);
+
+    this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this.getCurrentTargetTexture().tex, 0);
+};
+
+CGL.TextureEffect.prototype.finish=function()
+{
+    if(this._textureSource===null)
     {
-        switched=false;
-        cgl.gl.disable(cgl.gl.DEPTH_TEST);
+        console.log('no base texture set!');
+        return;
+    }
 
-        // cgl.gl.clearColor(0,0,0,0);
-        // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    CGL.TextureEffectMesh.render(this._cgl.getShader());
 
-        cgl.pushMvMatrix();
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer());
 
-        cgl.pushPMatrix();
-        cgl.gl.viewport(0, 0, self.getCurrentTargetTexture().width,self.getCurrentTargetTexture().height);
-        mat4.perspective(cgl.pMatrix,45, self.getCurrentTargetTexture().width/self.getCurrentTargetTexture().height, 0.1, 1100.0);
+    this.switched=!this.switched;
+};
 
-        cgl.pushPMatrix();
-        mat4.identity(cgl.pMatrix);
 
-        cgl.pushViewMatrix();
-        mat4.identity(cgl.vMatrix);
 
-        cgl.pushMvMatrix();
-        mat4.identity(cgl.mvMatrix);
+CGL.TextureEffect.prototype.getCurrentTargetTexture=function()
+{
+    if(this.switched)return this._textureSource;
+        else return this._textureTarget;
+};
 
-    };
-    this.endEffect=function()
-    {
-        cgl.gl.enable(cgl.gl.DEPTH_TEST);
-        cgl.popMvMatrix();
+CGL.TextureEffect.prototype.getCurrentSourceTexture=function()
+{
+    if(this.switched)return this._textureTarget;
+        else return this._textureSource;
+};
 
-        cgl.popPMatrix();
-        cgl.popMvMatrix();
-        cgl.popViewMatrix();
+CGL.TextureEffect.prototype.delete=function()
+{
+    if(this._textureTarget)this._textureTarget.delete();
+    if(this._textureSource)this._textureSource.delete();
+    this._cgl.gl.deleteRenderbuffer(this._renderbuffer);
+    this._cgl.gl.deleteFramebuffer(this._frameBuf);
+};
 
-        cgl.popPMatrix();
-        cgl.resetViewPort();
-    };
 
-    this.bind=function()
-    {
-        if(textureSource===null)
-        {
-            console.log('no base texture set!');
-            return;
-        }
+CGL.TextureEffect.prototype.createMesh=function()
+{
+    var geom=new CGL.Geometry();
 
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-        cgl.pushFrameBuffer(frameBuf);
+    geom.vertices = [
+         1.0,  1.0,  0.0,
+        -1.0,  1.0,  0.0,
+         1.0, -1.0,  0.0,
+        -1.0, -1.0,  0.0
+    ];
 
-        cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, self.getCurrentTargetTexture().tex, 0);
-    };
+    geom.texCoords = [
+         1.0, 1.0,
+         0.0, 1.0,
+         1.0, 0.0,
+         0.0, 0.0
+    ];
 
-    this.finish=function()
-    {
-        if(textureSource===null)
-        {
-            console.log('no base texture set!');
-            return;
-        }
+    geom.verticesIndices = [
+        0, 1, 2,
+        3, 1, 2
+    ];
 
-        CGL.TextureEffectMesh.render(cgl.getShader());
-
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer());
-
-        switched=!switched;
-    };
-
+    CGL.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
 };
 
 

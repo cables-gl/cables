@@ -33,7 +33,7 @@ CGL.Texture=function(__cgl,options)
         else this.setSize(8,8);
 };
 
-CGL.Texture.prototype.compare=function(tex)
+CGL.Texture.prototype.compareSettings=function(tex)
 {
     if(!tex)return false;
     return (
@@ -59,6 +59,12 @@ CGL.Texture.prototype.clone=function()
             "width":this.width,
             "height":this.height,
         });
+
+    if(!this.compareSettings(newTex))
+    {
+        console.error('Cloned texture settings do not compare!');
+    }
+
     return newTex;
 };
 
