@@ -136,6 +136,7 @@ render.onTriggered=function()
 
 function generateMesh()
 {
+
     if(!str.get())return;
     if(!textureOut.get())return;
     if(!geom)
@@ -185,7 +186,6 @@ function generateMesh()
     else if(align.get()=='right') offX=width;
     else if(align.get()=='center') offX=width/2;
 
-    
     for(var i=0;i<numChars;i++)
     {
         var chStr=txt.substring(i,i+1);
