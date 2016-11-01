@@ -6,6 +6,8 @@ var textureOut=op.outTexture("texture");
 var str=op.inValueString("Text","cables");
 var scale=op.inValue("Scale",10);
 var inFont=op.inValueString("Font","Arial");
+var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
+
 var cgl=op.patch.cgl;
 
 var textureSize=2048;
@@ -162,7 +164,6 @@ function generateMesh()
         mesh=new CGL.Mesh(cgl,geom);
     }
 
-
     var numChars=str.get().length;
     var m=mat4.create();
     var txt=str.get();
@@ -170,6 +171,20 @@ function generateMesh()
     var tcSize=[];
     var pos=0;
     createTexture=false;
+    
+    var offX=0;
+    var width=0;
+    for(var i=0;i<numChars;i++)
+    {
+        var chStr=txt.substring(i,i+1);
+        var char=chars[chStr];
+        if(char) width+=(char.texCoordWidth/char.texCoordHeight);
+    }
+    
+    if(align.get()=='left') offX=0;
+    else if(align.get()=='right') offX=width;
+    else if(align.get()=='center') offX=width/2;
+
     
     for(var i=0;i<numChars;i++)
     {
@@ -189,7 +204,7 @@ function generateMesh()
             tcSize[i*2+1]=char.texCoordHeight;
 
             mat4.identity(m);
-            mat4.translate(m,m,[pos,0,0]);
+            mat4.translate(m,m,[pos-offX,0,0]);
             pos+=(char.texCoordWidth/char.texCoordHeight);
             transformations[i]=Array.prototype.slice.call(m);
         }
