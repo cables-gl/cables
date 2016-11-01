@@ -28,38 +28,7 @@ var reInitFb=true;
 
 // todo why does it only work when we render a mesh before>?>?????
 // only happens with matcap material with normal map....
-var mesh=null;
-{
-var geom=new CGL.Geometry();
-
-    geom.vertices = [
-         0.0,           0,  0.0,
-        -0,  -0,  0.0,
-         0,  -0,  0.0
-    ];
-
-    geom.vertexNormals = [
-         0.0,  0.0,  1.0,
-         0.0,  0.0,  1.0,
-         0.0,  0.0,  1.0
-    ];
-
-    geom.texCoords = [
-         0.5,  0.0,
-         1.0,  1.0,
-         0.0,  1.0,
-    ];
-
-    
-    geom.verticesIndices = [
-        0, 1, 2
-    ];
-
-
-    mesh=new CGL.Mesh(cgl,geom);
-    
-}
-
+// m
 
 
 
@@ -103,7 +72,7 @@ function doRender()
 
     fb.renderStart(cgl);
     
-    mesh.render(cgl.getShader());
+    // mesh.render(cgl.getShader());
     trigger.trigger();
     fb.renderEnd(cgl);
     
