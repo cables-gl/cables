@@ -20,7 +20,7 @@ str.onChange=generateMesh;
 
 var ctx = fontImage.getContext('2d');
 var chars={};
-var characters='?abcdefghijklmnopqrstuvwxyz';
+var characters='?ABC';
 
 var cgl=op.patch.cgl;
 var geom=null;
@@ -28,6 +28,7 @@ var mesh=null;
 var transformations=[];
 var createMesh=true;
 var createTexture=true;
+var fontSize=320;
 
 textureOut.set(null);
 inFont.onChange=function(){ createTexture=true;createMesh=true; };
@@ -81,7 +82,7 @@ var srcVert=''
     .endl()+'   instModelMat[3][0]*=scale;'
 
     .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
-    .endl()+'   vec4 vert=vec4( vPosition.x*attrTexSize.x*scale,vPosition.y*attrTexSize.y*scale,vPosition.z*scale, 1. );'
+    .endl()+'   vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );'
 
     .endl()+'   gl_Position = projMatrix * mvMatrix * vert;'
     .endl()+'}'
@@ -114,7 +115,6 @@ render.onTriggered=function()
 {
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
-
 
     cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
@@ -177,7 +177,6 @@ function generateMesh()
         var char=chars[chStr];
         if(!char)
         {
-            characters+=chStr;
             createTexture=true;
             return;
         }
@@ -188,10 +187,10 @@ function generateMesh()
     
             tcSize[i*2+0]=char.texCoordWidth;
             tcSize[i*2+1]=char.texCoordHeight;
-    
+
             mat4.identity(m);
             mat4.translate(m,m,[pos,0,0]);
-            pos+=char.texCoordWidth;
+            pos+=(char.texCoordWidth/char.texCoordHeight);
             transformations[i]=Array.prototype.slice.call(m);
         }
     }
@@ -230,7 +229,7 @@ function printChars(fontSize,simulate)
     for(i=0;i<characters.length;i++)
     {
         var chStr=characters.substring(i,i+1);
-        var chWidth=Math.round(ctx.measureText(chStr).width);
+        var chWidth=(ctx.measureText(chStr).width);
 
         if(posx+chWidth>=textureSize)
         {
@@ -265,10 +264,17 @@ function printChars(fontSize,simulate)
     return result;
 }
 
-var fontSize=320;
+
 
 function generateTexture()
 {
+    var string=str.get();
+    for(var i=0;i<string.length;i++)
+    {
+        var ch=string.substring(i,i+1);
+        if(characters.indexOf(ch)==-1)characters+=ch;
+    }
+
     ctx.canvas.width=fontImage.width=ctx.canvas.height=fontImage.height=textureSize;
     
     if(!textureOut.get()) textureOut.set( CGL.Texture.createFromImage(cgl,fontImage,
