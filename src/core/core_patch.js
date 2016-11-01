@@ -54,11 +54,13 @@ CABLES.Patch.prototype.isPlaying=function()
 CABLES.Patch.prototype.pause=function()
 {
     this._paused=true;
+    this.freeTimer.pause();
 };
 
 CABLES.Patch.prototype.resume=function()
 {
     this._paused=false;
+    this.freeTimer.play();
     this.exec();
 };
 
