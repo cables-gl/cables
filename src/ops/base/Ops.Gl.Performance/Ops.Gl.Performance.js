@@ -97,8 +97,6 @@ function refresh()
 
         text=self.patch.config.glCanvasId+' fps: '+fps;
         text+=' '+cgl.canvas.clientWidth+' x '+cgl.canvas.clientHeight;
-        
-        
 
         fpsStartTime=Date.now();
         warn='';
@@ -107,10 +105,7 @@ function refresh()
         if(CGL.profileTextureResize>0)warn+='Texture resize! ';
         if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
         if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
-        
-        
-
-
+        if(CGL.profileTextureDelete>0)warn+='Texture delete! ';
 
         var count=0;
         for(var i=queue.length;i>queue.length-queue.length/3;i--)
@@ -132,7 +127,7 @@ function refresh()
         text2='frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         text3='shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+' uniforms: '+Math.ceil(CGL.profileUniformCount/fps);
         text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
-        
+
 
         CGL.profileUniformCount=0;
         CGL.profileShaderGetUniform=0;
@@ -141,7 +136,8 @@ function refresh()
         CGL.profileTextureResize=0;
         CGL.profileFrameBuffercreate=0;
         CGL.profileEffectBuffercreate=0;
-        
+        CGL.profileTextureDelete=0;
+
 
     }
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -157,13 +153,13 @@ function refresh()
         {
             ctx.fillRect(512-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
         }
-    
+
         ctx.fillStyle="#aaaaaa";
         for(k=512;k>=0;k--)
         {
             ctx.fillRect(512-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
         }
-        
+
     }
 
     ctx.fillStyle="#cccccc";

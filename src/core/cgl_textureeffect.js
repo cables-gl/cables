@@ -11,14 +11,14 @@ CGL.TextureEffect=function(cgl,options)
     this._textureSource = null;
 
     //TODO: do we still need the options ?
-    var opts=options ||
-        {
-            isFloatingPointTexture:false,
-            filter:CGL.Texture.FILTER_LINEAR
-        };
-    if(options && options.fp)opts.isFloatingPointTexture=true;
+    // var opts=options ||
+    //     {
+    //         isFloatingPointTexture:false,
+    //         filter:CGL.Texture.FILTER_LINEAR
+    //     };
+    // if(options && options.fp)opts.isFloatingPointTexture=true;
 
-    this._textureTarget = new CGL.Texture(this._cgl,opts);
+    this._textureTarget = null;//new CGL.Texture(this._cgl,opts);
     this._frameBuf      = this._cgl.gl.createFramebuffer();
     this._renderbuffer  = this._cgl.gl.createRenderbuffer();
     this.switched=false;
@@ -27,8 +27,6 @@ CGL.TextureEffect=function(cgl,options)
 
 CGL.TextureEffect.prototype.setSourceTexture=function(tex)
 {
-    // if(this._textureSource==tex)return;
-
     if(tex===null)
     {
         this._textureSource=new CGL.Texture(this._cgl);
@@ -42,8 +40,7 @@ CGL.TextureEffect.prototype.setSourceTexture=function(tex)
     if(!this._textureSource.compareSettings(this._textureTarget))
     {
         // console.log('change effect target texture ');
-        if(this._textureTarget)
-            console.log('change effect target texture from to ',this._textureTarget.width,this._textureSource.width);
+        // if(this._textureTarget) console.log('change effect target texture from to ',this._textureTarget.width,this._textureSource.width);
         // this._textureTarget.textureType=this._textureSource.textureType;
         if(this._textureTarget)this._textureTarget.delete();
 
@@ -62,10 +59,13 @@ CGL.TextureEffect.prototype.setSourceTexture=function(tex)
     }
 };
 
-
-
 CGL.TextureEffect.prototype.startEffect=function()
 {
+    if(!this._textureTarget)
+    {
+        console.log('effect has no target');
+        return;
+    }
 
     this.switched=false;
     this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
@@ -87,8 +87,8 @@ CGL.TextureEffect.prototype.startEffect=function()
 
     this._cgl.pushMvMatrix();
     mat4.identity(this._cgl.mvMatrix);
-
 };
+
 CGL.TextureEffect.prototype.endEffect=function()
 {
     this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
@@ -131,8 +131,6 @@ CGL.TextureEffect.prototype.finish=function()
     this.switched=!this.switched;
 };
 
-
-
 CGL.TextureEffect.prototype.getCurrentTargetTexture=function()
 {
     if(this.switched)return this._textureSource;
@@ -152,7 +150,6 @@ CGL.TextureEffect.prototype.delete=function()
     this._cgl.gl.deleteRenderbuffer(this._renderbuffer);
     this._cgl.gl.deleteFramebuffer(this._frameBuf);
 };
-
 
 CGL.TextureEffect.prototype.createMesh=function()
 {
@@ -180,7 +177,7 @@ CGL.TextureEffect.prototype.createMesh=function()
     CGL.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
 };
 
-
+// ---------------------------------------------------------------------------------
 
 CGL.TextureEffect.getBlendCode=function()
 {

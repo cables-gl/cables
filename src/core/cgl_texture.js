@@ -153,6 +153,7 @@ CGL.Texture.prototype.initTexture=function(img,filter)
 
 CGL.Texture.prototype.delete=function()
 {
+    CGL.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
 };
 
