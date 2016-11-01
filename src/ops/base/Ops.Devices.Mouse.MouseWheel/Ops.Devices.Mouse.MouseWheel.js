@@ -85,20 +85,15 @@ var vOut=0;
 
 function onMouseWheel(e)
 {
-    var d= CGL.getWheelSpeed(e)*(0.05*dir)*mul.get();
+    var d= CGL.getWheelSpeed(e)*(dir)*mul.get();
 
     delta.set(0);
     delta.set(d);
     
     v-=d;
     
-
-    // vOut=v+valIn.get();
-    // v+=valIn.get();
-
     checkValue();
 
-    
     if( !smooth.get() )
     {
         absVal.set(v);
