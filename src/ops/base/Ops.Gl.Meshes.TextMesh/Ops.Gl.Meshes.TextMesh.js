@@ -54,7 +54,7 @@ var srcFrag=''
     .endl()+'   col.r*=r;'
     .endl()+'   col.g*=g;'
     .endl()+'   col.b*=b;'
-    .endl()+'   col.a*=a;'
+    .endl()+'   col*=a;'
     .endl()+'   gl_FragColor=col;'
     .endl()+'}'
     .endl();
@@ -134,6 +134,7 @@ render.onTriggered=function()
 
 function generateMesh()
 {
+    if(!str.get())return;
     if(!textureOut.get())return;
     if(!geom)
     {
@@ -160,6 +161,7 @@ function generateMesh()
         
         mesh=new CGL.Mesh(cgl,geom);
     }
+
 
     var numChars=str.get().length;
     var m=mat4.create();

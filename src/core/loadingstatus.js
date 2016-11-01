@@ -2,12 +2,12 @@ CABLES.LoadingStatus=function()
 {
     // console.log('created loadingmanager');
     var loadingAssets={};
-    var cbFinished=null;
+    var cbFinished=[];
     var percent=0;
 
     this.setOnFinishedLoading=function(cb)
     {
-        cbFinished=cb;
+        cbFinished.push(cb);
     };
 
     this.getProgress=function()
@@ -34,13 +34,17 @@ CABLES.LoadingStatus=function()
 
         if(CGL.onLoadingAssetsFinished)
         {
-            console.warn('CGL.onLoadingAssetsFinished is deprecated, please use config parameter onFinishedLoading with scene/patch constructor');
-            cbFinished=CGL.onLoadingAssetsFinished;
+            console.error('CGL.onLoadingAssetsFinished is deprecated, please use config parameter onFinishedLoading with scene/patch constructor');
+            // cbFinished=CGL.onLoadingAssetsFinished;
+            setTimeout(cbFinished,200);
         }
 
-        if(countFinished===0 && cbFinished)
+        if(countFinished===0)
         {
-            setTimeout(cbFinished,200);
+            for(var j=0;j<cbFinished.length;j++)
+            {
+                setTimeout(cbFinished[j],200);
+            }
         }
     };
 
