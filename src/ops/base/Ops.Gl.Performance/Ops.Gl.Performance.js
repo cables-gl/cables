@@ -96,6 +96,10 @@ function refresh()
         outFPS.set(fps);
 
         text=self.patch.config.glCanvasId+' fps: '+fps;
+        
+        if(op.patch.config.fpsLimit!=0)
+            text+=' (limit '+op.patch.config.fpsLimit+') ';
+
         text+=' '+cgl.canvas.clientWidth+' x '+cgl.canvas.clientHeight;
 
         fpsStartTime=Date.now();
