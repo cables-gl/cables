@@ -1,12 +1,10 @@
 op.name='String';
 
-// var v=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE,{type:'string'}));
-var v=op.inValueString('value');
+var v=op.inValueString("value","ABC");
 var result=op.addOutPort(new Port(op,"result"));
 
-v.onValueChanged=function()
+v.onChange=function()
 {
     if(result.get()!=v.get()) result.set(v.get());
 };
 
-v.set('');
