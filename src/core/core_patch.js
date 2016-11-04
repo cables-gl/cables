@@ -21,7 +21,7 @@ CABLES.Patch = function(cfg)
 
     this.config = cfg ||
     {
-
+        glCanvasResizeToWindow:false,
         glCanvasId:'glcanvas',
         prefixAssetPath:'',
         silent:false,
@@ -64,7 +64,6 @@ CABLES.Patch = function(cfg)
             }
 
             this.deSerialize(data);
-            hideLoading();
         }.bind(this));
 
         this.timer.play();
