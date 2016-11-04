@@ -313,4 +313,27 @@ CGL.State=function()
         else if(this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     };
 
+    this._resizeToWindowSize=function()
+    {
+        this.canvas.style.width=window.innerWidth;
+        this.canvas.style.height=window.innerHeight;
+        this.canvas.width=window.innerWidth;
+        this.canvas.height=window.innerHeight;
+    };
+
+    this.setAutoResizeToWindow=function(resize)
+    {
+        if(resize)
+        {
+            window.addEventListener( 'resize', this._resizeToWindowSize.bind(this) );
+            this._resizeToWindowSize();
+        }
+        else
+        {
+            window.removeEventListener( 'resize', this._resizeToWindowSize.bind(this) );
+        }
+
+
+    };
+
 };
