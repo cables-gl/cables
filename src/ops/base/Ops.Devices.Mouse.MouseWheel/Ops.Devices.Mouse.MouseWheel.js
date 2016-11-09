@@ -68,32 +68,6 @@ smooth.onChange=function()
 
 var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
 
-function wheelDistance(evt)
-{
-
-
-    if (!evt) evt=event;
-    var w=evt.wheelDelta||evt.deltaY||0, d=evt.detail;
-
-    var ret=0;
-
-    if (d)
-    {
-        if (w) ret= w/d/40*d>0?1:-1; // Opera
-            else ret= -d/3;              // Firefox;         TODO: do not /3 for OS X
-    }
-    else 
-    {
-        if(isMac)ret= w;
-            else ret= w/120;             // IE/Safari/Chrome TODO: /3 for Chrome OS X
-    }
-
-    // if(!isMac)ret*=6;
-    if(ret!=ret)ret=0;
-    
-    
-    return ret*mul.get();
-}
 
 function checkValue()
 {
@@ -111,20 +85,15 @@ var vOut=0;
 
 function onMouseWheel(e)
 {
-    var d= wheelDistance(e)*(0.05*dir);
+    var d= CGL.getWheelSpeed(e)*(dir)*mul.get();
 
     delta.set(0);
     delta.set(d);
     
     v-=d;
     
-
-    // vOut=v+valIn.get();
-    // v+=valIn.get();
-
     checkValue();
 
-    
     if( !smooth.get() )
     {
         absVal.set(v);

@@ -3,6 +3,7 @@ op.name='Vignette';
 var render=op.inFunction("render");
 var trigger=op.outFunction("trigger");
 
+var amount=op.inValueSlider("Amount",1);
 var lensRadius1=op.inValue("lensRadius1",0.8);
 var lensRadius2=op.inValue("lensRadius2",0.4);
 var ratio=op.inValue("Ratio",1);
@@ -20,6 +21,7 @@ var srcFrag=''
     .endl()+'uniform float lensRadius1;'
     .endl()+'uniform float lensRadius2;'
     .endl()+'uniform float ratio;'
+    .endl()+'uniform float amount;'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -28,7 +30,7 @@ var srcFrag=''
     .endl()+'       col=texture2D(tex,texCoord);'
     .endl()+'       vec2 tcPos=vec2(texCoord.x,(texCoord.y-0.5)*ratio+0.5);'
 
-    .endl()+'       float dist = distance(tcPos, vec2(0.5,0.5));'
+    .endl()+'       float dist = distance(tcPos, vec2(0.5,0.5))*amount;'
     .endl()+'       col.rgb *= smoothstep(lensRadius1, lensRadius2, dist);'
     .endl()+'   #endif'
     .endl()+'   gl_FragColor = col;'
@@ -39,6 +41,8 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniLensRadius1=new CGL.Uniform(shader,'f','lensRadius1',lensRadius1);
 var uniLensRadius2=new CGL.Uniform(shader,'f','lensRadius2',lensRadius2);
 var uniRatio=new CGL.Uniform(shader,'f','ratio',ratio);
+var uniAmount=new CGL.Uniform(shader,'f','amount',amount);
+
 
 render.onTriggered=function()
 {

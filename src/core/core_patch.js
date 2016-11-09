@@ -21,6 +21,7 @@ CABLES.Patch = function(cfg)
 
     this.config = cfg ||
     {
+        glCanvasResizeToWindow:false,
         glCanvasId:'glcanvas',
         prefixAssetPath:'',
         silent:false,
@@ -32,11 +33,13 @@ CABLES.Patch = function(cfg)
     if(!this.config.prefixAssetPath)this.config.prefixAssetPath='';
     if(!this.config.masterVolume)this.config.masterVolume=1.0;
 
+
     this.vars={};
 
     this.cgl=new CGL.State();
     this.cgl.patch=this;
     this.cgl.setCanvas(this.config.glCanvasId);
+    if(this.config.glCanvasResizeToWindow===true)this.cgl.setAutoResizeToWindow(true);
     this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
 
     if(this.cgl.aborted) this.aborted=true;
@@ -44,6 +47,29 @@ CABLES.Patch = function(cfg)
 
     this.freeTimer.play();
     this.exec();
+
+    if(!this.aborted && this.config.patchFile)
+    {
+        CABLES.ajax(this.config.patchFile,function(err,_data)
+        {
+            var data=JSON.parse(_data);
+            if(err)
+            {
+                var txt = '';
+
+                console.error('err',err);
+                console.error('data',data);
+                console.error('data',data.msg);
+                return;
+            }
+
+            this.deSerialize(data);
+        }.bind(this));
+
+        this.timer.play();
+    }
+
+
 };
 
 CABLES.Patch.prototype.isPlaying=function()
@@ -54,11 +80,13 @@ CABLES.Patch.prototype.isPlaying=function()
 CABLES.Patch.prototype.pause=function()
 {
     this._paused=true;
+    this.freeTimer.pause();
 };
 
 CABLES.Patch.prototype.resume=function()
 {
     this._paused=false;
+    this.freeTimer.play();
     this.exec();
 };
 
@@ -82,6 +110,7 @@ CABLES.Patch.prototype.getFilePath=function(filename)
 
 CABLES.Patch.prototype.clear=function()
 {
+    CGL.TextureEffectMesh=null;
     this.animFrameOps.length=0;
     this.timer=new CABLES.Timer();
     while(this.ops.length>0)

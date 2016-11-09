@@ -39,13 +39,12 @@ function initEffect()
     if(effect)effect.delete();
     if(tex)tex.delete();
 
-    effect=new CGL.TextureEffect(cgl,{isFloatingPointTexture:fpTexture.get()});
+    effect=new CGL.TextureEffect(cgl,{"isFloatingPointTexture":fpTexture.get()});
 
     tex=new CGL.Texture(cgl,
         {
-            isFloatingPointTexture:fpTexture.get(),
-            filter:CGL.Texture.FILTER_LINEAR,
-            
+            "isFloatingPointTexture":fpTexture.get(),
+            "filter":CGL.Texture.FILTER_LINEAR,
         });
 
     effect.setSourceTexture(tex);
@@ -84,7 +83,6 @@ function updateResolution()
         tex.filter=CGL.Texture.FILTER_LINEAR;
         tex.setSize(w,h);
         
-
         effect.setSourceTexture(tex);
         // texOut.set(effect.getCurrentSourceTexture());
     }

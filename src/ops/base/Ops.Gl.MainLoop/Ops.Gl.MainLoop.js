@@ -5,6 +5,7 @@ var fpsLimit=op.inValue("FPS Limit",0);
 var trigger=op.outFunction("trigger");
 var width=op.outValue("width");
 var height=op.outValue("height");
+var reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
 
 var cgl=op.patch.cgl;
 
@@ -31,9 +32,20 @@ op.onDelete=function()
     op.patch.removeOnAnimFrame(op);
 };
 
+
+op.patch.loading.setOnFinishedLoading(function(cb)
+{
+    op.patch.config.fpsLimit=fpsLimit.get();
+});
+
 op.onAnimFrame=function(time)
 {
     if(cgl.aborted || cgl.canvas.clientWidth===0 || cgl.canvas.clientHeight===0)return;
+
+    if(op.patch.loading.getProgress()<1.0)
+    {
+        op.patch.config.fpsLimit=5;
+    }
 
     if(cgl.canvasWidth==-1)
     {

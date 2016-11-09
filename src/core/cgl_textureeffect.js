@@ -4,171 +4,185 @@ CGL.TextureEffectMesh=null;
 
 CGL.TextureEffect=function(cgl,options)
 {
-    var self=this;
+    this._cgl=cgl;
 
-    if(!CGL.TextureEffectMesh)
-    {
-        var geom=new CGL.Geometry();
+    if(!CGL.TextureEffectMesh)this.createMesh();
 
-        geom.vertices = [
-             1.0,  1.0,  0.0,
-            -1.0,  1.0,  0.0,
-             1.0, -1.0,  0.0,
-            -1.0, -1.0,  0.0
-        ];
+    this._textureSource = null;
 
-        geom.texCoords = [
-             1.0, 1.0,
-             0.0, 1.0,
-             1.0, 0.0,
-             0.0, 0.0
-        ];
+    //TODO: do we still need the options ?
+    // var opts=options ||
+    //     {
+    //         isFloatingPointTexture:false,
+    //         filter:CGL.Texture.FILTER_LINEAR
+    //     };
+    // if(options && options.fp)opts.isFloatingPointTexture=true;
 
-        geom.verticesIndices = [
-            0, 1, 2,
-            3, 1, 2
-        ];
-
-        CGL.TextureEffectMesh=new CGL.Mesh(cgl,geom);
-    }
-
-    var textureSource = null;
-
-    var opts=options ||
-        {
-            isFloatingPointTexture:false,
-            filter:CGL.Texture.FILTER_LINEAR
-        };
-    if(options && options.fp)opts.isFloatingPointTexture=true;
-    var textureTarget = new CGL.Texture(cgl,opts);
-    var frameBuf      = cgl.gl.createFramebuffer();
-    var renderbuffer  = cgl.gl.createRenderbuffer();
-
-    var switched=false;
-
-    this.delete=function()
-    {
-        if(textureTarget)textureTarget.delete();
-        if(textureSource)textureSource.delete();
-        cgl.gl.deleteRenderbuffer(renderbuffer);
-        cgl.gl.deleteFramebuffer(frameBuf);
-    };
-
-
-    this.setSourceTexture=function(tex)
-    {
-        // if(textureSource==tex)return;
-
-        if(tex===null)
-        {
-            textureSource=new CGL.Texture(cgl,opts);
-            textureSource.setSize(16,16);
-        }
-        else
-        {
-            textureSource=tex;
-        }
-
-        textureTarget.filter=textureSource.filter;
-        textureTarget.setSize(textureSource.width,textureSource.height);
-
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-
-        cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, renderbuffer);
-        cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, textureSource.width,textureSource.height);
-        cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, textureTarget.tex, 0);
-        cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, renderbuffer);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-        cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
-    };
-
-    this.getCurrentTargetTexture=function()
-    {
-        if(switched)return textureSource;
-            else return textureTarget;
-    };
-
-    this.getCurrentSourceTexture=function()
-    {
-        if(switched)return textureTarget;
-            else return textureSource;
-    };
-
-    this.startEffect=function()
-    {
-        switched=false;
-        cgl.gl.disable(cgl.gl.DEPTH_TEST);
-
-        // cgl.gl.clearColor(0,0,0,0);
-        // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
-        cgl.pushMvMatrix();
-
-        cgl.pushPMatrix();
-        cgl.gl.viewport(0, 0, self.getCurrentTargetTexture().width,self.getCurrentTargetTexture().height);
-        mat4.perspective(cgl.pMatrix,45, self.getCurrentTargetTexture().width/self.getCurrentTargetTexture().height, 0.1, 1100.0);
-
-        cgl.pushPMatrix();
-        mat4.identity(cgl.pMatrix);
-
-        cgl.pushViewMatrix();
-        mat4.identity(cgl.vMatrix);
-
-        cgl.pushMvMatrix();
-        mat4.identity(cgl.mvMatrix);
-
-    };
-    this.endEffect=function()
-    {
-        cgl.gl.enable(cgl.gl.DEPTH_TEST);
-        cgl.popMvMatrix();
-
-        cgl.popPMatrix();
-        cgl.popMvMatrix();
-        cgl.popViewMatrix();
-
-        cgl.popPMatrix();
-        cgl.resetViewPort();
-    };
-
-    this.bind=function()
-    {
-        if(textureSource===null)
-        {
-            console.log('no base texture set!');
-            return;
-        }
-
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-        cgl.pushFrameBuffer(frameBuf);
-
-        cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, self.getCurrentTargetTexture().tex, 0);
-    };
-
-    this.finish=function()
-    {
-        if(textureSource===null)
-        {
-            console.log('no base texture set!');
-            return;
-        }
-
-        CGL.TextureEffectMesh.render(cgl.getShader());
-
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer());
-
-        switched=!switched;
-    };
-
+    this._textureTarget = null;//new CGL.Texture(this._cgl,opts);
+    this._frameBuf      = this._cgl.gl.createFramebuffer();
+    this._renderbuffer  = this._cgl.gl.createRenderbuffer();
+    this.switched=false;
 };
 
 
+CGL.TextureEffect.prototype.setSourceTexture=function(tex)
+{
+    if(tex===null)
+    {
+        this._textureSource=new CGL.Texture(this._cgl);
+        this._textureSource.setSize(16,16);
+    }
+    else
+    {
+        this._textureSource=tex;
+    }
+
+    if(!this._textureSource.compareSettings(this._textureTarget))
+    {
+        // console.log('change effect target texture ');
+        // if(this._textureTarget) console.log('change effect target texture from to ',this._textureTarget.width,this._textureSource.width);
+        // this._textureTarget.textureType=this._textureSource.textureType;
+        if(this._textureTarget)this._textureTarget.delete();
+
+        this._textureTarget=this._textureSource.clone();
+
+        CGL.profileEffectBuffercreate++;
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
+
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._renderbuffer);
+        this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this._textureSource.width,this._textureSource.height);
+        this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureTarget.tex, 0);
+        this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._renderbuffer);
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
+    }
+};
+
+CGL.TextureEffect.prototype.startEffect=function()
+{
+    if(!this._textureTarget)
+    {
+        console.log('effect has no target');
+        return;
+    }
+
+    this.switched=false;
+    this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
+
+    // this._cgl.gl.clearColor(0,0,0,0);
+    // this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+
+    this._cgl.pushMvMatrix();
+
+    this._cgl.pushPMatrix();
+    this._cgl.gl.viewport(0, 0, this.getCurrentTargetTexture().width,this.getCurrentTargetTexture().height);
+    mat4.perspective(this._cgl.pMatrix,45, this.getCurrentTargetTexture().width/this.getCurrentTargetTexture().height, 0.1, 1100.0);
+
+    this._cgl.pushPMatrix();
+    mat4.identity(this._cgl.pMatrix);
+
+    this._cgl.pushViewMatrix();
+    mat4.identity(this._cgl.vMatrix);
+
+    this._cgl.pushMvMatrix();
+    mat4.identity(this._cgl.mvMatrix);
+};
+
+CGL.TextureEffect.prototype.endEffect=function()
+{
+    this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
+    this._cgl.popMvMatrix();
+
+    this._cgl.popPMatrix();
+    this._cgl.popMvMatrix();
+    this._cgl.popViewMatrix();
+
+    this._cgl.popPMatrix();
+    this._cgl.resetViewPort();
+};
+
+CGL.TextureEffect.prototype.bind=function()
+{
+    if(this._textureSource===null)
+    {
+        console.log('no base texture set!');
+        return;
+    }
+
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
+    this._cgl.pushFrameBuffer(this._frameBuf);
+
+    this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this.getCurrentTargetTexture().tex, 0);
+};
+
+CGL.TextureEffect.prototype.finish=function()
+{
+    if(this._textureSource===null)
+    {
+        console.log('no base texture set!');
+        return;
+    }
+
+    CGL.TextureEffectMesh.render(this._cgl.getShader());
+
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer());
+
+    this.switched=!this.switched;
+};
+
+CGL.TextureEffect.prototype.getCurrentTargetTexture=function()
+{
+    if(this.switched)return this._textureSource;
+        else return this._textureTarget;
+};
+
+CGL.TextureEffect.prototype.getCurrentSourceTexture=function()
+{
+    if(this.switched)return this._textureTarget;
+        else return this._textureSource;
+};
+
+CGL.TextureEffect.prototype.delete=function()
+{
+    if(this._textureTarget)this._textureTarget.delete();
+    if(this._textureSource)this._textureSource.delete();
+    this._cgl.gl.deleteRenderbuffer(this._renderbuffer);
+    this._cgl.gl.deleteFramebuffer(this._frameBuf);
+};
+
+CGL.TextureEffect.prototype.createMesh=function()
+{
+    var geom=new CGL.Geometry();
+
+    geom.vertices = [
+         1.0,  1.0,  0.0,
+        -1.0,  1.0,  0.0,
+         1.0, -1.0,  0.0,
+        -1.0, -1.0,  0.0
+    ];
+
+    geom.texCoords = [
+         1.0, 1.0,
+         0.0, 1.0,
+         1.0, 0.0,
+         0.0, 0.0
+    ];
+
+    geom.verticesIndices = [
+        0, 1, 2,
+        3, 1, 2
+    ];
+
+    CGL.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
+};
+
+// ---------------------------------------------------------------------------------
 
 CGL.TextureEffect.getBlendCode=function()
 {
     return ''
-    .endl()+'#define Blend(base, blend, funcf)       vec3(funcf(base.r, blend.r), funcf(base.g, blend.g), funcf(base.b, blend.b))'
+    //.endl()+'#define Blend(base, blend, funcf)       vec3(funcf(base.r, blend.r), funcf(base.g, blend.g), funcf(base.b, blend.b))'
 
     .endl()+'vec3 _blend(vec3 base,vec3 blend)'
     .endl()+'{'
@@ -221,35 +235,45 @@ CGL.TextureEffect.getBlendCode=function()
     .endl()+'   #ifdef BM_OVERLAY'
     .endl()+'      #define BlendOverlayf(base, blend)  (base < 0.5 ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend)))'
     // .endl()+'       #define BlendOverlay(base, blend)       Blend(base, blend, BlendOverlayf)'
-    .endl()+'      colNew=Blend(base, blend, BlendOverlayf);'
+//    .endl()+'      colNew=Blend(base, blend, BlendOverlayf);'
+    .endl()+'      colNew=vec3(BlendOverlayf(base.r, blend.r),BlendOverlayf(base.g, blend.g),BlendOverlayf(base.b, blend.b));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_SCREEN'
     .endl()+'      #define BlendScreenf(base, blend)       (1.0 - ((1.0 - base) * (1.0 - blend)))'
     // .endl()+'       #define BlendScreen(base, blend)        Blend(base, blend, BlendScreenf)'
-    .endl()+'      colNew=Blend(base, blend, BlendScreenf);'
+    //.endl()+'      colNew=Blend(base, blend, BlendScreenf);'
+    .endl()+'      colNew=vec3(BlendScreenf(base.r, blend.r),BlendScreenf(base.g, blend.g),BlendScreenf(base.b, blend.b));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_SOFTLIGHT'
     .endl()+'      #define BlendSoftLightf(base, blend)    ((blend < 0.5) ? (2.0 * base * blend + base * base * (1.0 - 2.0 * blend)) : (sqrt(base) * (2.0 * blend - 1.0) + 2.0 * base * (1.0 - blend)))'
     // .endl()+'       #define BlendSoftLight(base, blend)     Blend(base, blend, BlendSoftLightf)'
-    .endl()+'      colNew=Blend(base, blend, BlendSoftLightf);'
+//    .endl()+'      colNew=Blend(base, blend, BlendSoftLightf);'
+    .endl()+'      colNew=vec3(BlendSoftLightf(base.r, blend.r),BlendSoftLightf(base.g, blend.g),BlendSoftLightf(base.b, blend.b));'
+
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_HARDLIGHT'
     .endl()+'      #define BlendOverlayf(base, blend)  (base < 0.5 ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend)))'
     // .endl()+'       #define BlendOverlay(base, blend)       Blend(base, blend, BlendOverlayf)'
-    .endl()+'      colNew=Blend(blend, base, BlendOverlayf);'
+    //.endl()+'      colNew=Blend(blend, base, BlendOverlayf);'
+    .endl()+'      colNew=vec3(BlendOverlayf(base.r, blend.r),BlendOverlayf(base.g, blend.g),BlendOverlayf(base.b, blend.b));'
+
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_COLORDODGE'
     .endl()+'      #define BlendColorDodgef(base, blend)   ((blend == 1.0) ? blend : min(base / (1.0 - blend), 1.0))'
-    .endl()+'      colNew=Blend(base, blend, BlendColorDodgef);'
+   // .endl()+'      colNew=Blend(base, blend, BlendColorDodgef);'
+    .endl()+'      colNew=vec3(BlendColorDodgef(base.r, blend.r),BlendColorDodgef(base.g, blend.g),BlendColorDodgef(base.b, blend.b));'
+
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_COLORBURN'
     .endl()+'      #define BlendColorBurnf(base, blend)    ((blend == 0.0) ? blend : max((1.0 - ((1.0 - base) / blend)), 0.0))'
-    .endl()+'      colNew=Blend(base, blend, BlendColorBurnf);'
+    //.endl()+'      colNew=Blend(base, blend, BlendColorBurnf);'
+    .endl()+'      colNew=vec3(BlendColorBurnf(base.r, blend.r),BlendColorBurnf(base.g, blend.g),BlendColorBurnf(base.b, blend.b));'
+
     .endl()+'   #endif'
 
     .endl()+'   return colNew;'

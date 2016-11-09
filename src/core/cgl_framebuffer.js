@@ -16,7 +16,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         };
 
     var texture=new CGL.Texture(cgl,{isFloatingPointTexture:options.isFloatingPointTexture,filter:CGL.Texture.FILTER_LINEAR});
-    var textureDepth=new CGL.Texture(cgl,{isDepthTexture:true});
+    var textureDepth=new CGL.Texture(cgl,{"isDepthTexture":true});
 
     var frameBuf = cgl.gl.createFramebuffer();
     var depthBuffer = cgl.gl.createRenderbuffer();
@@ -56,6 +56,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
         texture.setSize(width,height);
         textureDepth.setSize(width,height);
+
 
         cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, width,height);
 

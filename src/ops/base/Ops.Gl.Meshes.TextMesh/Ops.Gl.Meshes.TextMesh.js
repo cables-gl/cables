@@ -6,6 +6,8 @@ var textureOut=op.outTexture("texture");
 var str=op.inValueString("Text","cables");
 var scale=op.inValue("Scale",10);
 var inFont=op.inValueString("Font","Arial");
+var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
+
 var cgl=op.patch.cgl;
 
 var textureSize=2048;
@@ -20,7 +22,7 @@ str.onChange=generateMesh;
 
 var ctx = fontImage.getContext('2d');
 var chars={};
-var characters='?abcdefghijklmnopqrstuvwxyz';
+var characters='?ABC';
 
 var cgl=op.patch.cgl;
 var geom=null;
@@ -28,6 +30,7 @@ var mesh=null;
 var transformations=[];
 var createMesh=true;
 var createTexture=true;
+var fontSize=320;
 
 textureOut.set(null);
 inFont.onChange=function(){ createTexture=true;createMesh=true; };
@@ -54,7 +57,7 @@ var srcFrag=''
     .endl()+'   col.r*=r;'
     .endl()+'   col.g*=g;'
     .endl()+'   col.b*=b;'
-    .endl()+'   col.a*=a;'
+    .endl()+'   col*=a;'
     .endl()+'   gl_FragColor=col;'
     .endl()+'}'
     .endl();
@@ -81,7 +84,7 @@ var srcVert=''
     .endl()+'   instModelMat[3][0]*=scale;'
 
     .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
-    .endl()+'   vec4 vert=vec4( vPosition.x*attrTexSize.x*scale,vPosition.y*attrTexSize.y*scale,vPosition.z*scale, 1. );'
+    .endl()+'   vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );'
 
     .endl()+'   gl_Position = projMatrix * mvMatrix * vert;'
     .endl()+'}'
@@ -115,7 +118,6 @@ render.onTriggered=function()
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
 
-
     cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     cgl.setShader(shader);
@@ -134,6 +136,8 @@ render.onTriggered=function()
 
 function generateMesh()
 {
+
+    if(!str.get())return;
     if(!textureOut.get())return;
     if(!geom)
     {
@@ -169,13 +173,25 @@ function generateMesh()
     var pos=0;
     createTexture=false;
     
+    var offX=0;
+    var width=0;
+    for(var i=0;i<numChars;i++)
+    {
+        var chStr=txt.substring(i,i+1);
+        var char=chars[chStr];
+        if(char) width+=(char.texCoordWidth/char.texCoordHeight);
+    }
+    
+    if(align.get()=='left') offX=0;
+    else if(align.get()=='right') offX=width;
+    else if(align.get()=='center') offX=width/2;
+
     for(var i=0;i<numChars;i++)
     {
         var chStr=txt.substring(i,i+1);
         var char=chars[chStr];
         if(!char)
         {
-            characters+=chStr;
             createTexture=true;
             return;
         }
@@ -186,10 +202,10 @@ function generateMesh()
     
             tcSize[i*2+0]=char.texCoordWidth;
             tcSize[i*2+1]=char.texCoordHeight;
-    
+
             mat4.identity(m);
-            mat4.translate(m,m,[pos,0,0]);
-            pos+=char.texCoordWidth;
+            mat4.translate(m,m,[pos-offX,0,0]);
+            pos+=(char.texCoordWidth/char.texCoordHeight);
             transformations[i]=Array.prototype.slice.call(m);
         }
     }
@@ -228,7 +244,7 @@ function printChars(fontSize,simulate)
     for(i=0;i<characters.length;i++)
     {
         var chStr=characters.substring(i,i+1);
-        var chWidth=Math.round(ctx.measureText(chStr).width);
+        var chWidth=(ctx.measureText(chStr).width);
 
         if(posx+chWidth>=textureSize)
         {
@@ -263,10 +279,17 @@ function printChars(fontSize,simulate)
     return result;
 }
 
-var fontSize=320;
+
 
 function generateTexture()
 {
+    var string=str.get();
+    for(var i=0;i<string.length;i++)
+    {
+        var ch=string.substring(i,i+1);
+        if(characters.indexOf(ch)==-1)characters+=ch;
+    }
+
     ctx.canvas.width=fontImage.width=ctx.canvas.height=fontImage.height=textureSize;
     
     if(!textureOut.get()) textureOut.set( CGL.Texture.createFromImage(cgl,fontImage,

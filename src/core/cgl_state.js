@@ -45,6 +45,7 @@ CGL.State=function()
 
     this.setCanvas=function(id)
     {
+        CGL.TextureEffectMesh=null;
         this.canvas=document.getElementById(id);
 
         if(!this.patch.config.canvas) this.patch.config.canvas={};
@@ -310,6 +311,29 @@ CGL.State=function()
         else if(this.canvas.mozRequestFullScreen) this.canvas.mozRequestFullScreen();
         else if(this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
         else if(this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
+    };
+
+    this._resizeToWindowSize=function()
+    {
+        this.canvas.style.width=window.innerWidth;
+        this.canvas.style.height=window.innerHeight;
+        this.canvas.width=window.innerWidth;
+        this.canvas.height=window.innerHeight;
+    };
+
+    this.setAutoResizeToWindow=function(resize)
+    {
+        if(resize)
+        {
+            window.addEventListener( 'resize', this._resizeToWindowSize.bind(this) );
+            this._resizeToWindowSize();
+        }
+        else
+        {
+            window.removeEventListener( 'resize', this._resizeToWindowSize.bind(this) );
+        }
+
+
     };
 
 };

@@ -24,6 +24,7 @@ var firstTime=true;
 var identTranslate=vec3.create();
 vec3.set(identTranslate, 0,0,-2);
 
+
 var preRenderAnimFrame=function(t)
 {
     var time=preRenderTimes[0];
