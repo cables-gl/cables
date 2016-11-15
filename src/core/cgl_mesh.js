@@ -45,7 +45,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
         if(this._attributes[i].name==name)
         {
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
-            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.STATIC_DRAW);
+            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
             return;
         }
     }
@@ -54,7 +54,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 
     // console.log('attribute: '+name,array.length);
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.STATIC_DRAW);
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
 
     var attr=
         {
@@ -89,7 +89,7 @@ console.log('dynamic MESH');
 CGL.Mesh.prototype.updateVertices=function(geom)
 {
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
-    // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.STATIC_DRAW);
+    // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.DYNAMIC_DRAW);
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.DYNAMIC_DRAW);
 
     this._bufVertices.itemSize = 3;
@@ -117,7 +117,7 @@ CGL.Mesh.prototype.setGeom=function(geom)
     if(this._geom.verticesIndices.length>0)
     {
         this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
-        this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this._geom.verticesIndices), this._cgl.gl.STATIC_DRAW);
+        this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this._geom.verticesIndices), this._cgl.gl.DYNAMIC_DRAW);
         this._bufVerticesIndizes.itemSize = 1;
         this._bufVerticesIndizes.numItems = this._geom.verticesIndices.length;
     }
