@@ -118,7 +118,6 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'   {{MODULE_COLOR}}'
 .endl()+'   col=texture2D(tex,texCoord);'
 
-
 .endl()+'   float maxrb = max( col.r, col.b );'
 .endl()+'   float perc = min(1.0,(col.g*weightMul-maxrb)*7.0);'
 

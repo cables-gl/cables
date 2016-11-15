@@ -5,6 +5,9 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var sizeW=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var sizeH=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
+var geom=new CGL.Geometry();
+
+
 sizeW.set(1);
 sizeH.set(1);
 
@@ -20,7 +23,6 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
-var geom=new CGL.Geometry();
 
 function create()
 {
