@@ -84,10 +84,14 @@ CGL.Mesh.prototype.getAttributes=function()
     return this._attributes;
 };
 
+console.log('dynamic MESH');
+
 CGL.Mesh.prototype.updateVertices=function(geom)
 {
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.STATIC_DRAW);
+    // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.STATIC_DRAW);
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.DYNAMIC_DRAW);
+
     this._bufVertices.itemSize = 3;
     this._bufVertices.numItems = geom.vertices.length/3;
 };
