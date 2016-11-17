@@ -141,9 +141,8 @@ function refresh()
         CGL.profileFrameBuffercreate=0;
         CGL.profileEffectBuffercreate=0;
         CGL.profileTextureDelete=0;
-
-
     }
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     ctx.fillStyle="#222222";

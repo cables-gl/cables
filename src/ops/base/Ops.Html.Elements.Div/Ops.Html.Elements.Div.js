@@ -6,6 +6,10 @@ var id=op.addInPort(new Port(op,"Id",OP_PORT_TYPE_VALUE,{type:'string'}));
 var visible=op.addInPort(new Port(op,"Visible",OP_PORT_TYPE_VALUE,{display:"bool"}));
 visible.set(true);
 
+
+var doCenterX=op.inValueBool("Center X",false);
+var doCenterY=op.inValueBool("Center Y",false);
+
 var posLeft=op.addInPort(new Port(op,"Left",OP_PORT_TYPE_VALUE));
 var posTop=op.addInPort(new Port(op,"Top",OP_PORT_TYPE_VALUE));
 
@@ -69,6 +73,7 @@ height.onValueChanged=updateSize;
 autoSize.onValueChanged=updateSize;
 posLeft.onValueChanged=updatePos;
 posTop.onValueChanged=updatePos;
+doCenter.onValueChanged=updatePos;
 
 bgR.onValueChanged=updateBgColor;
 bgG.onValueChanged=updateBgColor;
@@ -92,6 +97,7 @@ visible.onValueChanged=function()
     if(visible.get()) element.style.display="block";
     else element.style.display="none";
 };
+
 
 function updateClientSize()
 {
@@ -144,8 +150,13 @@ function updateColor()
 function updatePos()
 {
     if(!element) return;
-    element.style['margin-left']=posLeft.get()+"px";
-    element.style['margin-top']=posTop.get()+"px";
+    var l=posLeft.get();
+    var t=posTop.get();
+    if(doCenterX.get()) l-=element.clientWidth/2;
+    if(doCenterY.get()) t-=element.clientHeight/2;
+
+    element.style['margin-left']=l+"px";
+    element.style['margin-top']=t+"px";
 }
 
 function updateCursor()
@@ -179,11 +190,12 @@ function init()
     element.style.padding="10px";
     element.style.position="absolute";
     element.style.overflow="hidden";
-    element.style["z-index"]="99999";
+    element.style["z-index"]="9999";
     // element.style["background-color"]="#f00";
     element.appendChild(textContent);
 
-    var canvas = document.getElementById("cablescanvas") || document.body; 
+    // var canvas = document.getElementById("cablescanvas") || document.body; 
+    var canvas = op.patch.cgl.canvas.parentElement;
     canvas.appendChild(element);
 
     updateSize();

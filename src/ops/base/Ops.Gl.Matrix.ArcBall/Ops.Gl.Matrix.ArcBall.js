@@ -24,6 +24,11 @@ vScale=vec3.create();
 var mouseDown=false;
 var radius=1.0;
 
+var startX=-1;
+var startY=-1;
+var lastMouseX=-1;
+var lastMouseY=-1;
+
 var finalRotMatrix = mat4.create();
 
 inRadius.onChange=function()
@@ -54,9 +59,46 @@ render.onTriggered=function()
     cgl.popModelMatrix();
 };
 
+function touchToMouse(event)
+{
+    event.offsetX = event.pageX - event.target.offsetLeft;     
+    event.offsetY = event.pageY - event.target.offsetTop;
+    event.which=1;
+
+    if(startX==-1 && startY==-1 && event.offsetX==event.offsetX && event.offsetY==event.offsetY)
+    {
+        lastMouseX=startX=event.offsetX;
+        lastMouseY=startY=event.offsetY;
+        // console.log("STARTED TOUCH...");
+    }
+
+    if(event.offsetX!=event.offsetX)event.offsetX=0;
+    if(event.offsetY!=event.offsetY)event.offsetY=0;
+
+    return event;
+}
+
+function onTouchMove(event)
+{
+    // console.log(event);
+    
+    for(var i=0;i<event.touches.length;i++)
+    {
+        var e=touchToMouse(event.touches[i]);
+        
+        if(e.offsetX==e.offsetX && e.offsetY==e.offsetY)
+            onmousemove(e);
+        console.log(e);
+    }
+    event.preventDefault();
+    // onmousemove('event',event);
+}
+
 function onmousemove(event)
 {
     if(!mouseDown) return;
+
+    if(lastMouseX==-1 && lastMouseY==-1)return;
 
     var x = event.offsetX;
     var y = event.offsetY;
@@ -78,6 +120,7 @@ function onmousemove(event)
     if(event.which==1)
     {
         var deltaX = x - lastMouseX;
+
         var newRotationMatrix = mat4.create();
         mat4.identity(newRotationMatrix);
         mat4.rotate(newRotationMatrix,newRotationMatrix,CGL.DEG2RAD*(deltaX / 10)*mulRotate.get(), [0, 1, 0]);
@@ -125,6 +168,26 @@ var onMouseWheel=function(event)
     }
 };
 
+
+function touchStart(event)
+{
+    mouseDown=true;
+    event.preventDefault();
+}
+
+function touchEnd(event)
+{
+    mouseDown=false;
+    startX=-1;
+    startY=-1;
+    event.preventDefault();
+    
+}
+
+cgl.canvas.addEventListener("touchmove", onTouchMove);
+cgl.canvas.addEventListener("touchstart", touchStart);
+cgl.canvas.addEventListener("touchend", touchEnd);
+
 cgl.canvas.addEventListener('mousemove', onmousemove);
 cgl.canvas.addEventListener('mousedown', onMouseDown);
 cgl.canvas.addEventListener('mouseup', onMouseUp);
@@ -135,6 +198,10 @@ cgl.canvas.addEventListener('wheel', onMouseWheel);
 
 op.onDelete=function()
 {
+    cgl.canvas.removeEventListener("touchmove", onTouchMove);
+    cgl.canvas.removeEventListener("touchstart", touchStart);
+    cgl.canvas.removeEventListener("touchend", touchEnd);
+
     cgl.canvas.removeEventListener('mousemove', onmousemove);
     cgl.canvas.removeEventListener('mousedown', onMouseDown);
     cgl.canvas.removeEventListener('mouseup', onMouseUp);

@@ -127,6 +127,22 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 
 .endl()+'   col.a=1.0-perc;'
 
+ // JUST A TEST / REMOVE AGAIN
+  // JUST A TEST / REMOVE AGAIN
+   // JUST A TEST / REMOVE AGAIN
+    // JUST A TEST / REMOVE AGAIN
+     // JUST A TEST / REMOVE AGAIN
+      // JUST A TEST / REMOVE AGAIN
+       // JUST A TEST / REMOVE AGAIN
+        // JUST A TEST / REMOVE AGAIN
+         // JUST A TEST / REMOVE AGAIN
+          // JUST A TEST / REMOVE AGAIN
+           // JUST A TEST / REMOVE AGAIN
+            // JUST A TEST / REMOVE AGAIN
+.endl()+'   if(col.a<=0.9){col.a=0.4;col.g=1.0;}'
+
+
+
 .endl()+'   gl_FragColor = col;'
 .endl()+'}'
 .endl()+'';
