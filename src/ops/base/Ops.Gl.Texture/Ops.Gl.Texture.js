@@ -78,7 +78,7 @@ function realReload(nocache)
                 textureOut.set(null);
                 textureOut.set(tex);
                 
-                tex.printInfo();
+                // tex.printInfo();
 
             },{
                 wrap:cgl_wrap,

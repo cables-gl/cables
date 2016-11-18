@@ -7,8 +7,8 @@ var isEdge=op.outValue("Is Edge",false);
 var isChrome=op.outValue("Is Chrome",false);
 var isFirefox=op.outValue("Is Firefox",false);
 var isIos=op.outValue("Is iOS",false);
+var isMobile=op.outValue("Is Mobile",false);
 var outNav=op.outValue("Language");
-
 
 outNav.set(navigator.language || navigator.userLanguage);
 
@@ -55,4 +55,10 @@ else
    // not Google Chrome
 }
 
+
 isIos.set( /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
+
+isMobile.set(false);
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+isMobile.set(true);
+

@@ -11,3 +11,5 @@ render.onTriggered=function()
     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
     trigger.trigger();
 };
+
+

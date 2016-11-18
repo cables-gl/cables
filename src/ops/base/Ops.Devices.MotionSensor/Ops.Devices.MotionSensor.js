@@ -1,53 +1,40 @@
-    var self=this;
-    Op.apply(this, arguments);
+op.name='MotionSensor';
 
-    this.name='MotionSensor';
-    
+var mulAxis=op.inValue("mulAxis",1);
 
-    this.mulAxis=this.addInPort(new Port(this,"mulAxis"));
-    this.mulAxis.val=1.0;
-    
-    this.foundSensor=this.addOutPort(new Port(this,"foundSensor"));
-    
-    this.axis1=this.addOutPort(new Port(this,"axis1"));
-    this.axis2=this.addOutPort(new Port(this,"axis2"));
-    this.axis3=this.addOutPort(new Port(this,"axis3"));
+// var foundSensor=op.addOutPort(new Port(this,"foundSensor"));
 
-    this.accX=this.addOutPort(new Port(this,"accX"));
-    this.accY=this.addOutPort(new Port(this,"accY"));
-    this.accZ=this.addOutPort(new Port(this,"accX"));
+var axis1=op.outValue("axis1");
+var axis2=op.outValue("axis2");
+var axis3=op.outValue("axis3");
 
-    this.axis1.set(0);
-    this.axis2.set(0);
-    this.axis3.set(0);
+var accX=op.outValue("accX");
+var accY=op.outValue("accY");
+var accZ=op.outValue("accX");
 
-    this.accX.set(0);
-    this.accY.set(0);
-    this.accZ.set(0);
+var lastTime=0;
+var lastTimeAcc=0;
 
-    var lastTime=0;
-    var lastTimeAcc=0;
-
-    window.ondevicemotion = function(event)
+window.ondevicemotion = function(event)
+{
+    if(Date.now()-lastTimeAcc>15)
     {
-        if(Date.now()-lastTimeAcc>15)
-        {
-            lastTimeAcc=Date.now();
+        lastTimeAcc=Date.now();
 
-            self.accX.set( event.accelerationIncludingGravity.x );
-            self.accY.set( event.accelerationIncludingGravity.y );
-            self.accZ.set( event.accelerationIncludingGravity.z );
-        }
-    };
+        accX.set( event.accelerationIncludingGravity.x );
+        accY.set( event.accelerationIncludingGravity.y );
+        accZ.set( event.accelerationIncludingGravity.z );
+    }
+};
 
-    window.addEventListener("deviceorientation", function (event)
+window.addEventListener("deviceorientation", function (event)
+{
+    if(Date.now()-lastTime>15)
     {
-        if(Date.now()-lastTime>15)
-        {
-            lastTime=Date.now();
-            self.axis1.set( (event.alpha || 0) *self.mulAxis.get() );
-            self.axis2.set( (event.beta || 0 ) *self.mulAxis.get() );
-            self.axis3.set( (event.gamma || 0) *self.mulAxis.get() );
+        lastTime=Date.now();
+        axis1.set( (event.alpha || 0) *mulAxis.get() );
+        axis2.set( (event.beta || 0 ) *mulAxis.get() );
+        axis3.set( (event.gamma || 0) *mulAxis.get() );
 
-        }
-    }, true);
+    }
+}, true);

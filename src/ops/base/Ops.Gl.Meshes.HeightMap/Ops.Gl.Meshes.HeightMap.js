@@ -2,6 +2,7 @@ op.name="HeightMap";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+
 var extrude=op.addInPort(new Port(op,"extrude",OP_PORT_TYPE_VALUE));
 var mWidth=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var mHeight=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
@@ -149,7 +150,9 @@ function rebuildGeom()
 function reload()
 {
     image.crossOrigin = '';
-    var loadingId=op.patch.loading.start('heightmapImage',filename.get());
+    var url=op.patch.getFilePath(filename.get());
+
+    var loadingId=op.patch.loading.start('heightmapImage',url);
 
     image.onabort=image.onerror=function(e)
     {
@@ -162,6 +165,6 @@ function reload()
         rebuildGeom();
         op.patch.loading.finished(loadingId);
     };
-    image.src = filename.get();
+    image.src = url;
 }
 
