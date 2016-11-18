@@ -500,6 +500,7 @@ CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
 {
     var port=op.addInPort(new Port(op,title,OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
         "linear",
+        "absolute",
         "smoothstep",
         "smootherstep",
         "Cubic In",
@@ -516,6 +517,7 @@ CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
     port.onChange=function()
     {
         if(port.get()=='linear') this.defaultEasing=CABLES.TL.EASING_LINEAR;
+        if(port.get()=='absolute') this.defaultEasing=CABLES.TL.EASING_ABSOLUTE;
         if(port.get()=='smoothstep') this.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
         if(port.get()=='smootherstep') this.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
 
@@ -531,7 +533,7 @@ CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
         if(port.get()=='Sin Out') this.defaultEasing=CABLES.TL.EASING_SIN_OUT;
         if(port.get()=='Sin In Out') this.defaultEasing=CABLES.TL.EASING_SIN_INOUT;
 
-        cb();
+        if(cb)cb();
 
     }.bind(this);
 
