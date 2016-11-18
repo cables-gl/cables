@@ -5,6 +5,7 @@ var amount=op.inValueSlider("amount",0.5);//op.addInPort(new Port(op,"amount",OP
 var lum=op.inValueSlider("Lumi Scale",0.9);
 var lineSize=op.inValue("Line Size",2);
 
+var add=op.inValue("Add",0.02);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -20,6 +21,7 @@ var srcFrag=''
     .endl()+'#endif'
     .endl()+'uniform float amount;'
     .endl()+'uniform float lum;'
+    .endl()+'uniform float add;'
     .endl()+'uniform float lineSize;'
     .endl()+''
 
@@ -34,6 +36,8 @@ var srcFrag=''
     .endl()+'       float gray = vec3(dot(vec3(0.2126,0.7152,0.0722), col.rgb)).r;'
     .endl()+'       col.rgb=col.rgb*(1.0-amount) + (col.rgb*gray*gray*lum)*amount;'
     .endl()+'   }'
+    .endl()+'   else col+=add;'
+    
 
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
@@ -44,6 +48,7 @@ var uniAmount=new CGL.Uniform(shader,'f','amount',amount);
 
 var uniLum=new CGL.Uniform(shader,'f','lum',lum);
 var uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
+var uniAdd=new CGL.Uniform(shader,'f','add',add);
 
 
 

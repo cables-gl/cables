@@ -13,6 +13,7 @@ var inExes=[];
 function onTrigger()
 {
     oldVal.set(currentVal.get());
+    console.log('trivver value',this.slot);
     currentVal.set( inVals[this.slot].get() );
     triggered.trigger();
 }

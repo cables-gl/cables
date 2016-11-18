@@ -60,5 +60,5 @@ init();
 
 // inStart.onValueChange(init);
 // inEnd.onValueChange(init);
-// duration.onValueChange(init);
+duration.onChange=init;
 // easing.onValueChange(init);
