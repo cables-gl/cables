@@ -8,17 +8,13 @@ var duration=op.inValue("duration",0.5);
 var result=op.outValue("result");
 
 var anim=new CABLES.TL.Anim();
-
-var easing=op.addInPort(new Port(op,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep","absolute"]} ));
-easing.set('linear');
+anim.createPort(op,"easing",init);
 
 init();
 
 min.onChange=init;
 max.onChange=init;
 duration.onChange=init;
-easing.onChange=init;
-
 
 function getRandom()
 {
@@ -29,11 +25,6 @@ function getRandom()
 
 function init(v)
 {
-    if(easing.get()=='linear') anim.defaultEasing=CABLES.TL.EASING_LINEAR;
-    if(easing.get()=='smoothstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
-    if(easing.get()=='smootherstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
-    if(easing.get()=='absolute') anim.defaultEasing=CABLES.TL.EASING_ABSOLUTE;
-
     anim.clear();
     if(v===undefined) v=getRandom();
     anim.setValue(op.patch.freeTimer.get(), v);
