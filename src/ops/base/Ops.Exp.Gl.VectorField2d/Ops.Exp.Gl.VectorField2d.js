@@ -52,9 +52,9 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 old = texture2D( tex, texCoord );'
 
-    .endl()+'       c =random((0.2323)*gl_FragCoord.xy);'
-    .endl()+'       c1=random(c*gl_FragCoord.xy);'
-    .endl()+'       c2=random(c1*gl_FragCoord.xy);'
+    .endl()+'   c =random((0.2323)*gl_FragCoord.xy);'
+    .endl()+'   c1=random(c*gl_FragCoord.xy);'
+    .endl()+'   c2=random(c1*gl_FragCoord.xy);'
 
     .endl()+'   vec4 field = texture2D( texField, vec2( old.r,old.g ));'
     .endl()+'   field -= 0.5; '
@@ -87,7 +87,8 @@ var srcFrag=''
 
 var simTexture=new CGL.Texture(cgl,{
     "isFloatingPointTexture":true,
-    "filter":CGL.Texture.FILTER_NEAREST,
+    "filter":CGL.Texture.FILTER_WRAP,
+    "wrap":CGL.Texture.WRAP_CLAMP_TO_EDGE,
     "name":"simtex vectorfield2d",
 
 });
@@ -118,9 +119,9 @@ var srcHeadVert=''
 
 var srcBodyVert=''
 
-    .endl()+'   float size=1024.0;'
-    .endl()+'   float tx = mod(attrVertIndex,size)/size;'
-    .endl()+'   float ty = float( int((attrVertIndex/size)) )/size;'
+    .endl()+'float size=1024.0;'
+    .endl()+'float tx = mod(attrVertIndex,size)/size;'
+    .endl()+'float ty = float( int((attrVertIndex/size)) )/size;'
     // .endl()+'   vec2 vec2(tx,ty);'
 
     .endl()+'vec4 {{mod}}_col=texture2D( {{mod}}_texture, vec2(tx,ty) );'
@@ -146,20 +147,23 @@ render.onTriggered=function()
         uniTime.setValue(0);
     }
     
+
+    
+
     effect.startEffect();
-    cgl.setShader(shaderSim);
     t=effect.getCurrentSourceTexture().tex;
+    cgl.setShader(shaderSim);
     effect.bind();
 
     cgl.setTexture(5,t);
     cgl.setTexture(6,textureField.get().tex);
 
     effect.finish();
-    t=effect.getCurrentSourceTexture().tex;
-    outSimTex.set(effect.getCurrentSourceTexture());
     effect.endEffect();
+    t=effect.getCurrentSourceTexture().tex;
     
     cgl.setPreviousShader();
+    outSimTex.set(effect.getCurrentSourceTexture());
 
     cgl.resetViewPort();
     
@@ -188,6 +192,7 @@ render.onTriggered=function()
 
     uniTime2.setValue(op.patch.freeTimer.get());
     uniTime.setValue(op.patch.freeTimer.get());
+    // console.log(op.patch.freeTimer.get());
     next.trigger();
 };
 

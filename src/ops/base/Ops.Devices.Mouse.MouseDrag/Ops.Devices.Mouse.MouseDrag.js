@@ -39,6 +39,7 @@ var animY=new CABLES.InertiaAnim(updateKineticY);
 
 doReset.onTriggered=function()
 {
+    console.log("reset mousedrag!");
     lastY=-1;
     lastX=-1;
 
