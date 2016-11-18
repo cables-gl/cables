@@ -496,6 +496,51 @@ CABLES.TL.Anim.prototype.addKey=function(k)
     }
 };
 
+CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
+{
+    var port=op.addInPort(new Port(op,title,OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
+        "linear",
+        "smoothstep",
+        "smootherstep",
+        "Cubic In",
+        "Cubic Out",
+        "Cubic In Out",
+        "Expo In",
+        "Expo Out",
+        "Expo In Out",
+        "Sin In",
+        "Sin Out",
+        "Sin In Out",
+        ]} ));
+
+    port.onChange=function()
+    {
+        if(port.get()=='linear') this.defaultEasing=CABLES.TL.EASING_LINEAR;
+        if(port.get()=='smoothstep') this.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
+        if(port.get()=='smootherstep') this.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
+
+        if(port.get()=='Cubic In') this.defaultEasing=CABLES.TL.EASING_CUBIC_IN;
+        if(port.get()=='Cubic Out') this.defaultEasing=CABLES.TL.EASING_CUBIC_OUT;
+        if(port.get()=='Cubic In Out') this.defaultEasing=CABLES.TL.EASING_CUBIC_INOUT;
+
+        if(port.get()=='Expo In') this.defaultEasing=CABLES.TL.EASING_EXPO_IN;
+        if(port.get()=='Expo Out') this.defaultEasing=CABLES.TL.EASING_EXPO_OUT;
+        if(port.get()=='Expo In Out') this.defaultEasing=CABLES.TL.EASING_EXPO_INOUT;
+
+        if(port.get()=='Sin In') this.defaultEasing=CABLES.TL.EASING_SIN_IN;
+        if(port.get()=='Sin Out') this.defaultEasing=CABLES.TL.EASING_SIN_OUT;
+        if(port.get()=='Sin In Out') this.defaultEasing=CABLES.TL.EASING_SIN_INOUT;
+
+        cb();
+
+    }.bind(this);
+
+    return port;
+};
+
+
+
+
 
 // ------------------------------
 

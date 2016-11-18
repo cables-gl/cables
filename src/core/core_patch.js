@@ -312,10 +312,10 @@ CABLES.Patch.prototype.exec=function(e)
             wasdelayed=true;
             return;
         }
-        if(now-lastFrameTime>100 && lastFrameTime!==0  && !wasdelayed)
+        if(now-lastFrameTime>200 && lastFrameTime!==0  && !wasdelayed)
         {
             lastFrameTime=0;
-            setTimeout(this.exec.bind(this),250);
+            setTimeout(this.exec.bind(this),400);
 
             $('#delayed').show();
             // CABLES.UI.notify('renderer delayed...');
