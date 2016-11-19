@@ -38,8 +38,6 @@ CABLES.TL.EASING_QUINT_IN=25;
 CABLES.TL.EASING_QUINT_OUT=26;
 CABLES.TL.EASING_QUINT_INOUT=27;
 
-
-
 CABLES.TL.Key=function(obj)
 {
     this.time=0.0;
@@ -58,82 +56,9 @@ CABLES.TL.Key=function(obj)
     var bezierAnim=null;
     var updateBezier=false;
 
-    // this.setBezierControlOut=function(t,v)
-    // {
-    //     this.bezTime=t;
-    //     this.bezValue=v;
-    //     updateBezier=true;
-    //     if(this.onChange!==null)this.onChange();
-    // };
-    //
-    // this.setBezierControlIn=function(t,v)
-    // {
-    //     this.bezTimeIn=t;
-    //     this.bezValueIn=v;
-    //     updateBezier=true;
-    //     if(this.onChange!==null)this.onChange();
-    // };
-    //
-    // BezierB1=function(t) { return t*t*t; };
-    // BezierB2=function(t) { return 3*t*t*(1-t); };
-    // BezierB3=function(t) { return 3*t*(1-t)*(1-t); };
-    // BezierB4=function(t) { return (1-t)*(1-t)*(1-t); };
-    // Bezier =function(percent,nextKey)
-    // {
-    //     var val1x=nextKey.time;
-    //     var val1y=nextKey.value;
-    //
-    //     var c1x=nextKey.time+nextKey.bezTimeIn;
-    //     var c1y=nextKey.value-nextKey.bezValueIn;
-    //
-    //     var val2x=this._self.time;
-    //     var val2y=this._self.value;
-    //
-    //     var c2x=this._self.time+this._self.bezTime;
-    //     var c2y=this._self.value-this._self.bezValue;
-    //
-    //     var x = val1x*BezierB1(percent) + c1x*BezierB2(percent) + val2x*BezierB3(percent) + c2x*BezierB4(percent);
-    //     var y = val1y*BezierB1(percent) + c1y*BezierB2(percent) + val2y*BezierB3(percent) + c2y*BezierB4(percent);
-    //
-    //     return {x:x,y:y};
-    // };
-    //
-    // this.easeBezier=function(percent,nextKey)
-    // {
-    //     if(!bezierAnim)
-    //     {
-    //         bezierAnim=new CABLES.TL.Anim();
-    //         updateBezier=true;
-    //     }
-    //
-    //     var timeSpan=nextKey.time-this._self.time;
-    //     if(updateBezier)
-    //     {
-    //         bezierAnim.clear();
-    //
-    //         var steps=20;
-    //         var is=1/steps;
-    //
-    //         for(var i=0;i<steps;i++)
-    //         {
-    //             var v=Bezier(i*is,nextKey);
-    //             var time=this._self.time+timeSpan/steps*i;
-    //
-    //             bezierAnim.setValue(v.x,v.y);
-    //         }
-    //         updateBezier=false;
-    //     }
-    //
-    //     return bezierAnim.getValue(this._self.time+percent*timeSpan);
-    // };
-
     this.setEasing(CABLES.TL.EASING_LINEAR);
     this.set(obj);
-
 };
-
-
-
 
 CABLES.TL.Key.linear=function(perc,key1,key2)
 {
@@ -144,8 +69,6 @@ CABLES.TL.Key.easeLinear=function(perc,key2)
 {
     return CABLES.TL.Key.linear(perc,this,key2);
 };
-
-
 
 CABLES.TL.Key.easeAbsolute=function(perc,key2)
 {
@@ -185,11 +108,6 @@ CABLES.TL.Key.easeSinIn=function( t,key2)
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
-
-
-
-
-
 CABLES.TL.Key.easeSinOut=function( t,key2)
 {
     t= Math.sin(t * Math.PI/2);
@@ -228,8 +146,8 @@ CABLES.TL.Key.easeOutQuint=function(t,key2)
 };
 CABLES.TL.Key.easeInOutQuint=function(t,key2)
 {
-    if ((t/=0.5) < 1) return 0.5*t*t*t*t*t;
-    t= 0.5*((t-=2)*t*t*t*t + 2);
+    if ((t/=0.5) < 1) t= 0.5*t*t*t*t*t;
+        else t= 0.5*((t-=2)*t*t*t*t + 2);
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
@@ -277,8 +195,6 @@ CABLES.TL.Key.easeOutBounce=function(t,key2)
 {
     return CABLES.TL.Key.linear(CABLES.TL.Key.bounce(t),this,key2);
 };
-
-
 
 CABLES.TL.Key.easeInElastic=function(t,key2)
 {
@@ -376,10 +292,6 @@ CABLES.TL.Key.easeCubicInOut=function(t,key2)
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
-
-
-
-
 CABLES.TL.Key.easeSmoothStep=function(perc,key2)
 {
     var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
@@ -433,9 +345,6 @@ CABLES.TL.Key.prototype.setEasing=function(e)
     else if(easing==CABLES.TL.EASING_QUINT_OUT) this.ease=CABLES.TL.Key.easeOutQuint;
     else if(easing==CABLES.TL.EASING_QUINT_IN) this.ease=CABLES.TL.Key.easeInQuint;
     else if(easing==CABLES.TL.EASING_QUINT_INOUT) this.ease=CABLES.TL.Key.easeInOutQuint;
-
-
-
 
     else if(easing==CABLES.TL.EASING_BEZIER)
     {
