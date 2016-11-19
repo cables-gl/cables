@@ -46,7 +46,7 @@ var srcFrag=''
     .endl()+'   #endif'
 
     .endl()+'   #ifdef FROM_LUMINANCE'
-    .endl()+'       vec3 gray = vec3(dot(vec3(0.2126,0.7152,0.0722), texture2D(image,texCoord).rgb ));'
+    .endl()+'       vec3 gray = vec3(dot(vec3(0.2126,0.7152,0.0722), texture2D(tex,texCoord).rgb ));'
     .endl()+'       col.a=(gray.r+gray.g+gray.b)/3.0;'
     .endl()+'   #endif'
 
