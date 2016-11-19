@@ -2,7 +2,6 @@ op.name="MouseDrag";
 
 var canvas=op.patch.cgl.canvas;
 
-
 var outX=op.addOutPort(new Port(op,"x"));
 var outY=op.addOutPort(new Port(op,"y"));
 var flipY=op.inValueBool("Flip Y",true);
@@ -10,15 +9,10 @@ var kinetic=op.inValueBool("Inertia Movement",true);
 
 var doReset=op.inFunction("Reset");
 
-
-
 var minX=op.inValue("minX",-600);
 var maxX=op.inValue("maxX",600);
 var minY=op.inValue("minY",-600);
 var maxY=op.inValue("maxY",600);
-
-
-
 
 var cgl=op.patch.cgl;
 
@@ -39,7 +33,6 @@ var animY=new CABLES.InertiaAnim(updateKineticY);
 
 doReset.onTriggered=function()
 {
-    console.log("reset mousedrag!");
     lastY=-1;
     lastX=-1;
 
