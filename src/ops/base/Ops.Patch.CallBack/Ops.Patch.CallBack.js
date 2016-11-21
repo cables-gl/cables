@@ -15,7 +15,7 @@ exe.onTriggered=function()
 {
     if(op.patch.config.hasOwnProperty(callbackname.get()))
     {
-        op.log('has callback!',callbackname.get());
+        // op.log('has callback!',callbackname.get());
         op.patch.config[callbackname.get()](values);
     }
     else
@@ -23,4 +23,3 @@ exe.onTriggered=function()
         op.log('callback not found!',callbackname.get());
     }
 };
-

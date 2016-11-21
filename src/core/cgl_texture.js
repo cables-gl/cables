@@ -25,7 +25,10 @@ CGL.Texture=function(__cgl,options)
         if(options.textureType) this.textureType=options.textureType;
         if(options.filter) this.filter=options.filter;
         if(options.wrap) this.wrap=options.wrap;
+
+        if(options.hasOwnProperty("unpackAlpha")) this.unpackAlpha=options.unpackAlpha;
         this.name=options.name||this.name;
+
         this.flip=options.flip;
     }
 
@@ -82,6 +85,7 @@ CGL.Texture.prototype.setSize=function(w,h)
 
     var uarr=null;
     this._setFilter();
+
 
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
     {
@@ -200,6 +204,7 @@ CGL.Texture.prototype.getInfo=function()
 
 CGL.Texture.prototype._setFilter=function()
 {
+    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     if(!this.isPowerOfTwo() )
     {
         // console.log( 'non power of two',this.width,this.height );
