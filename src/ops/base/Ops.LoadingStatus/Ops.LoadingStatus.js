@@ -37,8 +37,7 @@ var preRenderAnimFrame=function(t)
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     // self.loading.trigger();
-    console.log('pre render',preRenderTimes.length);
-    
+
     cgl.renderEnd(cgl);
 
     // preRenderDone=preRenderInc;
@@ -58,14 +57,14 @@ this.onLoaded=function()
 
     preRenderTimes.push(1);
     
-    console.log('prerender steps:',preRenderTimes);
+    // console.log('prerender steps:',preRenderTimes);
 };
 
 function checkPreRender()
 {
     if(patch.loading.getProgress()>=1.0)
     {
-        console.log(' checkprerender ',preRenderTimes.length);
+        // console.log(' checkprerender ',preRenderTimes.length);
 
         if(preRenderTimes.length===0 )
         {
@@ -103,7 +102,7 @@ this.exe.onTriggered= function()
         
         if(firstTime)
         {
-            console.log('finished loading and prerendering...');
+            // console.log('finished loading and prerendering...');
             loadingFinished.trigger();
             self.patch.timer.setTime(0);
             self.patch.timer.play();
