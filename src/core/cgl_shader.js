@@ -182,7 +182,7 @@ CGL.Shader=function(_cgl,_name)
         return false;
     };
 
-    function printStats()
+    this.printStats=function()
     {
         var activeUniforms = cgl.gl.getProgramParameter(program, cgl.gl.ACTIVE_UNIFORMS);
         var activeAttributes = cgl.gl.getProgramParameter(program, cgl.gl.ACTIVE_ATTRIBUTES);
@@ -216,26 +216,32 @@ CGL.Shader=function(_cgl,_name)
             uniformCount:0,
             attributeCount:0
         };
+
+        console.log("shader uniforms");
         for (i=0; i < activeUniforms; i++)
         {
             var uniform = cgl.gl.getActiveUniform(program, i);
             uniform.typeName = enums[uniform.type];
             // result.uniforms.push(uniform);
+            console.log("  ",i,uniform.name,uniform.typeName);
+
             result.uniformCount += uniform.size;
         }
 
         // Loop through active attributes
+        console.log("shader attributes");
         for (i=0; i < activeAttributes; i++)
         {
             var attribute = cgl.gl.getActiveAttrib(program, i);
             attribute.typeName = enums[attribute.type];
             // result.attributes.push(attribute);
+            console.log("  ",i,attribute.name,attribute.typeName);
             result.attributeCount += attribute.size;
         }
 
         console.log(result);
 
-    }
+    };
 
     this.compile=function()
     {

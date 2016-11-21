@@ -9,7 +9,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var flipY=op.inValueBool("Flip Y");
 var cgl=op.patch.cgl;
 var mesh=null;
-var geom=new CGL.Geometry();
+var geom=new CGL.Geometry("fullscreen rectangle");
 var x=0,y=0,z=0,w=0;
 op.onResize=rebuild;
 

@@ -242,6 +242,34 @@ CGL.Mesh.prototype.meshChanged=function()
     return (this._cgl.lastMesh && ( this._cgl.lastMesh!=this ));
 };
 
+
+CGL.Mesh.prototype.printDebug=function()
+{
+    var error = this._cgl.gl.getError();
+    if (error != this._cgl.gl.NO_ERROR )
+    {
+
+        console.error('mesh error');
+        console.log('shader:',shader.name);
+        console.log('geom:',this._geom.name);
+        console.log('verts:',this._geom.vertices.length);
+        if(this._geom.tangents)console.log('tangents:',this._geom.tangents.length);
+        console.log('texCoords:',this._geom.texCoords.length);
+        console.log('indizes:',this._geom.verticesIndices.length);
+
+        var maxIndex=0;
+        for(var j=0;j<this._geom.verticesIndices.length;j++)
+        {
+            maxIndex=Math.max(this._geom.verticesIndices[j],maxIndex);
+        }
+        console.log('max index',maxIndex);
+        console.log('get error: ',error);
+
+        shader.printStats();
+    }
+};
+
+
 CGL.Mesh.prototype.render=function(shader)
 {
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
@@ -311,6 +339,8 @@ CGL.Mesh.prototype.render=function(shader)
         {
             this._extInstances.drawElementsInstancedANGLE(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this.numInstances);
         }
+
+        // this.printDebug();
 
     }
 

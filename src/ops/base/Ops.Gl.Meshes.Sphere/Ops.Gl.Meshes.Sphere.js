@@ -19,13 +19,15 @@ var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 
-slices.onValueChanged=updateMesh;
-stacks.onValueChanged=updateMesh;
-radius.onValueChanged=updateMesh;
+slices.onValueChanged=function(){ mesh=null; };
+stacks.onValueChanged=function(){ mesh=null; };
+radius.onValueChanged=function(){ mesh=null; };
 
 render.onTriggered=function()
 {
     if(mesh!==null) mesh.render(cgl.getShader());
+    else updateMesh();
+    
     trigger.trigger();
 };
 
@@ -36,10 +38,12 @@ function updateMesh()
     if(nslices<1)nslices=1;
     if(nstacks<1)nstacks=1;
     var r=radius.get();
+    
+    console.log("generate sphere",r, nslices, nstacks);
     generateSphere(r, nslices, nstacks);
 }
 
-updateMesh();
+// updateMesh();
 
 function circleTable(n,halfCircle)
 {
@@ -84,7 +88,7 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
     var idx = 0;    /* idx into vertex/normal buffer */
     var x,y,z;
 
-    var geom=new CGL.Geometry();
+    var geom=new CGL.Geometry("sphere");
 
     /* precompute values on unit circle */
     var table1=circleTable(-slices,false);
