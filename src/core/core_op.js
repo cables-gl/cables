@@ -239,11 +239,8 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.log=function()
     {
-        // console.log(arguments);
-        console.log( Array.prototype.slice.call(arguments) );
-
-
-        // if(!this.patch.silent) console.log('['+(this.getName())+'] '+txt);
+        if(!this.patch.silent)
+            Function.apply.call(console.log, console, arguments);
     };
 
     CABLES.Op.prototype.unLinkShake=function()
@@ -287,7 +284,6 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.findParent=function(objName)
     {
-
         for(var ipi in this.portsIn)
         {
             if(this.portsIn[ipi].isLinked())
@@ -302,18 +298,13 @@ CABLES.Op = function()
                 }
             }
         }
-
         return null;
     };
-
-
 }
-
 
 CABLES.Op.isSubpatchOp=function(name)
 {
     return (name=='Ops.Ui.Patch' || name=='Ops.Ui.SubPatch');
 };
-
 
 var Op=CABLES.Op; // deprecated!

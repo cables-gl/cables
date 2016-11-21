@@ -43,6 +43,7 @@ var mesh=new CGL.Mesh(cgl,geom);
 
 function calc()
 {
+
     geom.clear();
     var i=0,degInRad=0;
     var oldPosX=0,oldPosY=0;
