@@ -84,8 +84,6 @@ CGL.Mesh.prototype.getAttributes=function()
     return this._attributes;
 };
 
-console.log('dynamic MESH');
-
 CGL.Mesh.prototype.updateVertices=function(geom)
 {
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
