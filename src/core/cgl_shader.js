@@ -14,10 +14,10 @@ CGL.Shader=function(_cgl,_name)
     var name=_name || 'unknown';
 
     var self=this;
-    var program=null;
+    this._program=null;
     var uniforms=[];
     var defines=[];
-    var needsRecompile=true;
+    this._needsRecompile=true;
     var infoLog='';
     var cgl=_cgl;
     var projMatrixUniform=null;
@@ -30,8 +30,13 @@ CGL.Shader=function(_cgl,_name)
 
     this.glPrimitive=null;
     this.offScreenPass=false;
-    this.wireframe=false;
     this._extensions=[];
+    this.srcVert=CGL.Shader.getDefaultVertexShader();
+    this.srcFrag=CGL.Shader.getDefaultFragmentShader();
+
+    var moduleNames=[];
+    var modules=[];
+    var moduleNumId=0;
 
     this.getCgl=function()
     {
@@ -40,7 +45,7 @@ CGL.Shader=function(_cgl,_name)
 
     this.enableExtension=function(name)
     {
-        needsRecompile=true;
+        this._needsRecompile=true;
         this._extensions.push(name);
     };
 
@@ -54,12 +59,12 @@ CGL.Shader=function(_cgl,_name)
             if(defines[i][0]==name)
             {
                 defines[i][1]=value;
-                needsRecompile=true;
+                this._needsRecompile=true;
                 return;
             }
         }
         defines.push([name,value]);
-        needsRecompile=true;
+        this._needsRecompile=true;
     };
 
     this.hasDefine=function(name,value)
@@ -78,7 +83,7 @@ CGL.Shader=function(_cgl,_name)
             if(defines[i][0]==name)
             {
                 defines.splice(i,1);
-                needsRecompile=true;
+                this._needsRecompile=true;
                 return;
             }
         }
@@ -101,69 +106,14 @@ CGL.Shader=function(_cgl,_name)
                 uniforms.splice(i,1);
             }
         }
-        needsRecompile=true;
+        this._needsRecompile=true;
     };
 
     this.addUniform=function(uni)
     {
         uniforms.push(uni);
-        needsRecompile=true;
+        this._needsRecompile=true;
     };
-
-    // TODO: make static!
-
-    this.getDefaultVertexShader=function()
-    {
-        return ''
-        // .endl()+'{{MODULES_HEAD}}'
-        .endl()+'attribute vec3 vPosition;'
-        .endl()+'attribute vec2 attrTexCoord;'
-        .endl()+'attribute vec3 attrVertNormal;'
-        .endl()+'varying vec2 texCoord;'
-        .endl()+'varying vec3 norm;'
-        .endl()+'uniform mat4 projMatrix;'
-        .endl()+'uniform mat4 mvMatrix;'
-        // .endl()+'uniform mat4 normalMatrix;'
-
-        .endl()+'void main()'
-        .endl()+'{'
-        .endl()+'   texCoord=attrTexCoord;'
-        .endl()+'   norm=attrVertNormal;'
-        // .endl()+'   {{MODULE_VERTEX_POSITION}}'
-
-        .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
-        .endl()+'}';
-    };
-
-    this.getDefaultFragmentShader=function()
-    {
-        return ''
-        .endl()+'precision highp float;'
-        // .endl()+'varying vec3 norm;'
-        .endl()+'void main()'
-        .endl()+'{'
-
-        .endl()+'   gl_FragColor = vec4(0.5,0.5,0.5,1.0);'
-        // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
-        .endl()+'}';
-    };
-
-    this.getErrorFragmentShader=function()
-    {
-        return ''
-        .endl()+'precision mediump float;'
-        .endl()+'varying vec3 norm;'
-        .endl()+'void main()'
-        .endl()+'{'
-        .endl()+'   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'
-        .endl()+'   if(g>0.5)g=0.4;'
-        .endl()+'       else g=0.0;'
-        .endl()+'   gl_FragColor = vec4( 1.0, g, 0.0, 1.0);'
-        .endl()+'}';
-    };
-
-    this.srcVert=this.getDefaultVertexShader();
-    this.srcFrag=this.getDefaultFragmentShader();
 
     this.setSource=function(srcVert,srcFrag)
     {
@@ -184,8 +134,8 @@ CGL.Shader=function(_cgl,_name)
 
     this.printStats=function()
     {
-        var activeUniforms = cgl.gl.getProgramParameter(program, cgl.gl.ACTIVE_UNIFORMS);
-        var activeAttributes = cgl.gl.getProgramParameter(program, cgl.gl.ACTIVE_ATTRIBUTES);
+        var activeUniforms = cgl.gl.getProgramParameter(this._program, cgl.gl.ACTIVE_UNIFORMS);
+        var activeAttributes = cgl.gl.getProgramParameter(this._program, cgl.gl.ACTIVE_ATTRIBUTES);
 
         var enums = {
             0x8B50: 'FLOAT_VEC2',
@@ -220,7 +170,7 @@ CGL.Shader=function(_cgl,_name)
         console.log("shader uniforms");
         for (i=0; i < activeUniforms; i++)
         {
-            var uniform = cgl.gl.getActiveUniform(program, i);
+            var uniform = cgl.gl.getActiveUniform(this._program, i);
             uniform.typeName = enums[uniform.type];
             // result.uniforms.push(uniform);
             console.log("  ",i,uniform.name,uniform.typeName);
@@ -232,7 +182,7 @@ CGL.Shader=function(_cgl,_name)
         console.log("shader attributes");
         for (i=0; i < activeAttributes; i++)
         {
-            var attribute = cgl.gl.getActiveAttrib(program, i);
+            var attribute = cgl.gl.getActiveAttrib(this._program, i);
             attribute.typeName = enums[attribute.type];
             // result.attributes.push(attribute);
             console.log("  ",i,attribute.name,attribute.typeName);
@@ -307,16 +257,16 @@ CGL.Shader=function(_cgl,_name)
         fs=fs.replace('{{MODULES_HEAD}}',srcHeadFrag);
 
 
-        if(!program)
+        if(!self._program)
         {
-            program=createProgram(vs,fs, program);
+            self._program=createProgram(vs,fs);
         }
         else
         {
             // self.vshader=createShader(vs, gl.VERTEX_SHADER, self.vshader );
             // self.fshader=createShader(fs, gl.FRAGMENT_SHADER, self.fshader );
             // linkProgram(program);
-            program=createProgram(vs,fs, program);
+            self._program=createProgram(vs,fs);
 
             projMatrixUniform=null;
 
@@ -325,7 +275,7 @@ CGL.Shader=function(_cgl,_name)
         }
 
         // printStats();
-        needsRecompile=false;
+        self._needsRecompile=false;
     };
 
     this.bind=function()
@@ -335,24 +285,24 @@ CGL.Shader=function(_cgl,_name)
 
         CGL.profileShaderBinds++;
 
-        if(!program || needsRecompile) self.compile();
+        if(!this._program || this._needsRecompile) self.compile();
 
         if(!projMatrixUniform)
         {
-            attrVertexPos = cgl.gl.getAttribLocation(program, 'vPosition');
-            projMatrixUniform = cgl.gl.getUniformLocation(program, "projMatrix");
-            mvMatrixUniform = cgl.gl.getUniformLocation(program, "mvMatrix");
-            vMatrixUniform = cgl.gl.getUniformLocation(program, "viewMatrix");
-            mMatrixUniform = cgl.gl.getUniformLocation(program, "modelMatrix");
-            camPosUniform = cgl.gl.getUniformLocation(program, "camPos");
-            normalMatrixUniform = cgl.gl.getUniformLocation(program, "normalMatrix");
+            attrVertexPos = cgl.gl.getAttribLocation(this._program, 'vPosition');
+            projMatrixUniform = cgl.gl.getUniformLocation(this._program, "projMatrix");
+            mvMatrixUniform = cgl.gl.getUniformLocation(this._program, "mvMatrix");
+            vMatrixUniform = cgl.gl.getUniformLocation(this._program, "viewMatrix");
+            mMatrixUniform = cgl.gl.getUniformLocation(this._program, "modelMatrix");
+            camPosUniform = cgl.gl.getUniformLocation(this._program, "camPos");
+            normalMatrixUniform = cgl.gl.getUniformLocation(this._program, "normalMatrix");
             for(i=0;i<uniforms.length;i++)uniforms[i].needsUpdate=true;
         }
 
-        if(cgl.currentProgram!=program)
+        if(cgl.currentProgram!=this._program)
         {
-            cgl.gl.useProgram(program);
-            cgl.currentProgram=program;
+            cgl.gl.useProgram(this._program);
+            cgl.currentProgram=this._program;
         }
 
         for(i=0;i<uniforms.length;i++)
@@ -392,14 +342,8 @@ CGL.Shader=function(_cgl,_name)
         }
     };
 
-    this.getProgram=function()
-    {
-        return program;
-    };
-
     var createShader =function(str, type,_shader)
     {
-
         function getBadLines(infoLog)
         {
             var basLines=[];
@@ -418,8 +362,6 @@ CGL.Shader=function(_cgl,_name)
         var shader = _shader || cgl.gl.createShader(type);
         cgl.gl.shaderSource(shader, str);
         cgl.gl.compileShader(shader);
-
-
 
         if (!cgl.gl.getShaderParameter(shader, cgl.gl.COMPILE_STATUS))
         {
@@ -464,7 +406,7 @@ CGL.Shader=function(_cgl,_name)
             htmlWarning+='</div>';
 
             name="errorshader";
-            self.setSource(self.getDefaultVertexShader(),self.getErrorFragmentShader());
+            self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
         }
         else
         {
@@ -489,7 +431,7 @@ CGL.Shader=function(_cgl,_name)
             console.log(this.srcFrag);
             console.log(name+' programinfo: ',cgl.gl.getProgramInfoLog(program));
             name="errorshader";
-            self.setSource(self.getDefaultVertexShader(),self.getErrorFragmentShader());
+            self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
         }
         else
         {
@@ -517,9 +459,6 @@ CGL.Shader=function(_cgl,_name)
         return program;
     };
 
-    var moduleNames=[];
-    var modules=[];
-    var moduleNumId=0;
 
     this.removeModule=function(mod)
     {
@@ -531,18 +470,17 @@ CGL.Shader=function(_cgl,_name)
                 break;
             }
         }
-        needsRecompile=true;
+        this._needsRecompile=true;
     };
 
     this.addModule=function(mod)
     {
-
         mod.id=CABLES.generateUUID();
         mod.numId=moduleNumId;
         mod.prefix='mod'+moduleNumId;
 
         modules.push(mod);
-        needsRecompile=true;
+        this._needsRecompile=true;
         moduleNumId++;
 
         return mod;
@@ -552,6 +490,61 @@ CGL.Shader=function(_cgl,_name)
     {
         moduleNames=names;
     };
+};
 
 
+CGL.Shader.prototype.getProgram=function()
+{
+    return this._program;
+};
+
+
+CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader=function()
+{
+    return ''
+    // .endl()+'{{MODULES_HEAD}}'
+    .endl()+'attribute vec3 vPosition;'
+    .endl()+'attribute vec2 attrTexCoord;'
+    .endl()+'attribute vec3 attrVertNormal;'
+    .endl()+'varying vec2 texCoord;'
+    .endl()+'varying vec3 norm;'
+    .endl()+'uniform mat4 projMatrix;'
+    .endl()+'uniform mat4 mvMatrix;'
+    // .endl()+'uniform mat4 normalMatrix;'
+
+    .endl()+'void main()'
+    .endl()+'{'
+    .endl()+'   texCoord=attrTexCoord;'
+    .endl()+'   norm=attrVertNormal;'
+    // .endl()+'   {{MODULE_VERTEX_POSITION}}'
+
+    .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+    .endl()+'}';
+};
+
+CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentShader=function()
+{
+    return ''
+    .endl()+'precision highp float;'
+    // .endl()+'varying vec3 norm;'
+    .endl()+'void main()'
+    .endl()+'{'
+
+    .endl()+'   gl_FragColor = vec4(0.5,0.5,0.5,1.0);'
+    // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
+    .endl()+'}';
+};
+
+CGL.Shader.getErrorFragmentShader=function()
+{
+    return ''
+    .endl()+'precision mediump float;'
+    .endl()+'varying vec3 norm;'
+    .endl()+'void main()'
+    .endl()+'{'
+    .endl()+'   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'
+    .endl()+'   if(g>0.5)g=0.4;'
+    .endl()+'       else g=0.0;'
+    .endl()+'   gl_FragColor = vec4( 1.0, g, 0.0, 1.0);'
+    .endl()+'}';
 };
