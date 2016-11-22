@@ -74,7 +74,6 @@ CGL.Shader=function(_cgl,_name)
                 return true;
     };
 
-
     this.removeDefine=function(name,value)
     {
         // console.log('remove define',name);
@@ -115,20 +114,12 @@ CGL.Shader=function(_cgl,_name)
         this._needsRecompile=true;
     };
 
-    this.setSource=function(srcVert,srcFrag)
-    {
-        this.srcVert=srcVert;
-        this.srcFrag=srcFrag;
-    };
-
     this.getAttrVertexPos=function(){return attrVertexPos;};
 
     this.hasTextureUniforms=function()
     {
         for(var i=0;i<uniforms.length;i++)
-        {
             if(uniforms[i].getType()=='t') return true;
-        }
         return false;
     };
 
@@ -190,7 +181,6 @@ CGL.Shader=function(_cgl,_name)
         }
 
         console.log(result);
-
     };
 
     this.compile=function()
@@ -204,13 +194,13 @@ CGL.Shader=function(_cgl,_name)
             extensionString+='#extension GL_OES_standard_derivatives : enable'.endl();
         }
 
-
         var definesStr='';
         var i=0;
         for(i=0;i<defines.length;i++)
         {
             definesStr+='#define '+defines[i][0]+' '+defines[i][1]+''.endl();
         }
+
         for(i=0;i<uniforms.length;i++)
         {
             uniforms[i].needsUpdate=true;
@@ -270,8 +260,7 @@ CGL.Shader=function(_cgl,_name)
 
             projMatrixUniform=null;
 
-            for(i=0;i<uniforms.length;i++)
-                uniforms[i].resetLoc();
+            for(i=0;i<uniforms.length;i++) uniforms[i].resetLoc();
         }
 
         // printStats();
@@ -342,79 +331,6 @@ CGL.Shader=function(_cgl,_name)
         }
     };
 
-    var createShader =function(str, type,_shader)
-    {
-        function getBadLines(infoLog)
-        {
-            var basLines=[];
-            var lines=infoLog.split('\n');
-            for(var i in lines)
-            {
-                var divide=lines[i].split(':');
-
-                if(parseInt(divide[2],10))
-                    basLines.push(parseInt( divide[2],10) );
-            }
-            // console.log('lines ',lines.length);
-            return basLines;
-        }
-
-        var shader = _shader || cgl.gl.createShader(type);
-        cgl.gl.shaderSource(shader, str);
-        cgl.gl.compileShader(shader);
-
-        if (!cgl.gl.getShaderParameter(shader, cgl.gl.COMPILE_STATUS))
-        {
-            console.log('compile status: ');
-
-            if(type==cgl.gl.VERTEX_SHADER)console.log('VERTEX_SHADER');
-            if(type==cgl.gl.FRAGMENT_SHADER)console.log('FRAGMENT_SHADER');
-
-            console.warn( cgl.gl.getShaderInfoLog(shader) );
-
-            var infoLog=cgl.gl.getShaderInfoLog(shader);
-            var badLines=getBadLines(infoLog);
-            var htmlWarning='<div class="shaderErrorCode">';
-            var lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
-
-            for(var i in lines)
-            {
-                var j=parseInt(i,10)+1;
-                var line=j+': '+lines[i];
-                console.log(line);
-
-                var isBadLine=false;
-                for(var bj in badLines) if(badLines[bj]==j) isBadLine=true;
-
-                if(isBadLine) htmlWarning+='<span class="error">';
-                htmlWarning+=line;
-                if(isBadLine) htmlWarning+='</span>';
-            }
-
-            console.warn( infoLog );
-
-            infoLog=infoLog.replace(/\n/g,'<br/>');
-
-            htmlWarning=infoLog+'<br/>'+htmlWarning+'<br/><br/>';
-
-            if(CABLES.UI) CABLES.UI.MODAL.showError('shader error '+name,htmlWarning);
-            else
-            {
-                console.log('shader error '+name,htmlWarning);
-            }
-
-            htmlWarning+='</div>';
-
-            name="errorshader";
-            self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
-        }
-        else
-        {
-            // console.log(name+' shader compiled...');
-        }
-        return shader;
-    };
-
     var linkProgram=function(program)
     {
         cgl.gl.linkProgram(program);
@@ -433,10 +349,6 @@ CGL.Shader=function(_cgl,_name)
             name="errorshader";
             self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
         }
-        else
-        {
-
-        }
 
         // var error = cgl.gl.getError();
         // if (error == cgl.gl.NO_ERROR )
@@ -449,8 +361,8 @@ CGL.Shader=function(_cgl,_name)
     var createProgram=function(vstr, fstr)
     {
         var program = cgl.gl.createProgram();
-        self.vshader = createShader(vstr, cgl.gl.VERTEX_SHADER);
-        self.fshader = createShader(fstr, cgl.gl.FRAGMENT_SHADER);
+        self.vshader = CGL.Shader.createShader(cgl,vstr, cgl.gl.VERTEX_SHADER);
+        self.fshader = CGL.Shader.createShader(cgl,fstr, cgl.gl.FRAGMENT_SHADER);
 
         cgl.gl.attachShader(program, self.vshader);
         cgl.gl.attachShader(program, self.fshader);
@@ -458,7 +370,6 @@ CGL.Shader=function(_cgl,_name)
         linkProgram(program);
         return program;
     };
-
 
     this.removeModule=function(mod)
     {
@@ -493,6 +404,13 @@ CGL.Shader=function(_cgl,_name)
 };
 
 
+
+CGL.Shader.prototype.setSource=function(srcVert,srcFrag)
+{
+    this.srcVert=srcVert;
+    this.srcFrag=srcFrag;
+};
+
 CGL.Shader.prototype.getProgram=function()
 {
     return this._program;
@@ -502,49 +420,119 @@ CGL.Shader.prototype.getProgram=function()
 CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader=function()
 {
     return ''
-    // .endl()+'{{MODULES_HEAD}}'
-    .endl()+'attribute vec3 vPosition;'
-    .endl()+'attribute vec2 attrTexCoord;'
-    .endl()+'attribute vec3 attrVertNormal;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'varying vec3 norm;'
-    .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 mvMatrix;'
-    // .endl()+'uniform mat4 normalMatrix;'
+        // .endl()+'{{MODULES_HEAD}}'
+        .endl()+'attribute vec3 vPosition;'
+        .endl()+'attribute vec2 attrTexCoord;'
+        .endl()+'attribute vec3 attrVertNormal;'
+        .endl()+'varying vec2 texCoord;'
+        .endl()+'varying vec3 norm;'
+        .endl()+'uniform mat4 projMatrix;'
+        .endl()+'uniform mat4 mvMatrix;'
+        // .endl()+'uniform mat4 normalMatrix;'
 
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   texCoord=attrTexCoord;'
-    .endl()+'   norm=attrVertNormal;'
-    // .endl()+'   {{MODULE_VERTEX_POSITION}}'
+        .endl()+'void main()'
+        .endl()+'{'
+        .endl()+'   texCoord=attrTexCoord;'
+        .endl()+'   norm=attrVertNormal;'
+        // .endl()+'   {{MODULE_VERTEX_POSITION}}'
 
-    .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
-    .endl()+'}';
+        .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+        .endl()+'}';
 };
 
 CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentShader=function()
 {
     return ''
-    .endl()+'precision highp float;'
-    // .endl()+'varying vec3 norm;'
-    .endl()+'void main()'
-    .endl()+'{'
+        .endl()+'precision highp float;'
+        // .endl()+'varying vec3 norm;'
+        .endl()+'void main()'
+        .endl()+'{'
 
-    .endl()+'   gl_FragColor = vec4(0.5,0.5,0.5,1.0);'
-    // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
-    .endl()+'}';
+        .endl()+'   gl_FragColor = vec4(0.5,0.5,0.5,1.0);'
+        // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
+        .endl()+'}';
 };
 
 CGL.Shader.getErrorFragmentShader=function()
 {
     return ''
-    .endl()+'precision mediump float;'
-    .endl()+'varying vec3 norm;'
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'
-    .endl()+'   if(g>0.5)g=0.4;'
-    .endl()+'       else g=0.0;'
-    .endl()+'   gl_FragColor = vec4( 1.0, g, 0.0, 1.0);'
-    .endl()+'}';
+        .endl()+'precision mediump float;'
+        .endl()+'varying vec3 norm;'
+        .endl()+'void main()'
+        .endl()+'{'
+        .endl()+'   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'
+        .endl()+'   if(g>0.5)g=0.4;'
+        .endl()+'       else g=0.0;'
+        .endl()+'   gl_FragColor = vec4( 1.0, g, 0.0, 1.0);'
+        .endl()+'}';
+};
+
+CGL.Shader.createShader =function(cgl,str, type,_shader)
+{
+    function getBadLines(infoLog)
+    {
+        var basLines=[];
+        var lines=infoLog.split('\n');
+        for(var i in lines)
+        {
+            var divide=lines[i].split(':');
+            if(parseInt(divide[2],10)) basLines.push(parseInt( divide[2],10) );
+        }
+        return basLines;
+    }
+
+    var shader = _shader || cgl.gl.createShader(type);
+    cgl.gl.shaderSource(shader, str);
+    cgl.gl.compileShader(shader);
+
+    if (!cgl.gl.getShaderParameter(shader, cgl.gl.COMPILE_STATUS))
+    {
+        console.log('compile status: ');
+
+        if(type==cgl.gl.VERTEX_SHADER)console.log('VERTEX_SHADER');
+        if(type==cgl.gl.FRAGMENT_SHADER)console.log('FRAGMENT_SHADER');
+
+        console.warn( cgl.gl.getShaderInfoLog(shader) );
+
+        var infoLog=cgl.gl.getShaderInfoLog(shader);
+        var badLines=getBadLines(infoLog);
+        var htmlWarning='<div class="shaderErrorCode">';
+        var lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
+
+        for(var i in lines)
+        {
+            var j=parseInt(i,10)+1;
+            var line=j+': '+lines[i];
+            console.log(line);
+
+            var isBadLine=false;
+            for(var bj in badLines) if(badLines[bj]==j) isBadLine=true;
+
+            if(isBadLine) htmlWarning+='<span class="error">';
+            htmlWarning+=line;
+            if(isBadLine) htmlWarning+='</span>';
+        }
+
+        console.warn( infoLog );
+
+        infoLog=infoLog.replace(/\n/g,'<br/>');
+
+        htmlWarning=infoLog+'<br/>'+htmlWarning+'<br/><br/>';
+
+        if(CABLES.UI) CABLES.UI.MODAL.showError('shader error '+name,htmlWarning);
+        else
+        {
+            console.log('shader error '+name,htmlWarning);
+        }
+
+        htmlWarning+='</div>';
+
+        name="errorshader";
+        self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
+    }
+    else
+    {
+        // console.log(name+' shader compiled...');
+    }
+    return shader;
 };
