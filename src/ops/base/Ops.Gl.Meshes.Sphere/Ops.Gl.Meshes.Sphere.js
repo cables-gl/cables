@@ -39,7 +39,6 @@ function updateMesh()
     if(nstacks<1)nstacks=1;
     var r=radius.get();
     
-    console.log("generate sphere",r, nslices, nstacks);
     generateSphere(r, nslices, nstacks);
 }
 
