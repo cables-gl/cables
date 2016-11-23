@@ -66,14 +66,15 @@ autoSize.set(true);
 
 mouseOver.set(false);
 var element=null;
-var textContent = document.createTextNode(text.get()); 
+
 
 width.onValueChanged=updateSize;
 height.onValueChanged=updateSize;
 autoSize.onValueChanged=updateSize;
 posLeft.onValueChanged=updatePos;
 posTop.onValueChanged=updatePos;
-doCenter.onValueChanged=updatePos;
+doCenterX.onValueChanged=updatePos;
+doCenterY.onValueChanged=updatePos;
 
 bgR.onValueChanged=updateBgColor;
 bgG.onValueChanged=updateBgColor;
@@ -173,7 +174,9 @@ function updateIgnoreMouse()
 
 text.onValueChanged=function()
 {
-    textContent.nodeValue=text.get();
+    var str= (text.get()||'').replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+    element.innerHTML=str;
     updateClientSize();
 };
 
@@ -192,7 +195,7 @@ function init()
     element.style.overflow="hidden";
     element.style["z-index"]="9999";
     // element.style["background-color"]="#f00";
-    element.appendChild(textContent);
+    
 
     // var canvas = document.getElementById("cablescanvas") || document.body; 
     var canvas = op.patch.cgl.canvas.parentElement;
