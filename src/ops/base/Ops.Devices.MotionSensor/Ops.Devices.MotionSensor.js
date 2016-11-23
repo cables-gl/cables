@@ -29,9 +29,9 @@ window.addEventListener("devicemotion", function(event)
         accZ.set( event.accelerationIncludingGravity.z || 0 );
         
         obj.AccelerationX=accX.get();
-        obj.AccelerationX=accY.get();
-        obj.AccelerationX=accZ.get();
-        
+        obj.AccelerationY=accY.get();
+        obj.AccelerationZ=accZ.get();
+
         outObj.set(null);
         outObj.set(obj);
     }
