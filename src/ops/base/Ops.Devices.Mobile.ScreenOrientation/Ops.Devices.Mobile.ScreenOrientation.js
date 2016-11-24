@@ -3,20 +3,27 @@ op.name="ScreenOrientation";
 var angle=op.outValue("Angle");
 var str=op.outValue("Description");
 
+var count=0;
+window.addEventListener("resize", onOrientationChange, false);
+window.addEventListener("orientationchange", onOrientationChange,false);
+
 onOrientationChange();
 
-window.addEventListener("resize", onOrientationChange, false);
-window.addEventListener("orientationchange", onOrientationChange);
+screen.orientation.addEventListener('change', onOrientationChange);
+
+
 
 function onOrientationChange()
 {
+    count++;
     angle.set(screen.orientation.angle);
-    str.set(screen.orientation.type);
+    var s=screen.orientation.type+"_"+count;
+    str.set(s);
 }
 
 op.onDelete=function()
 {
-    window.removeEventListener("resize", onOrientationChange, false);
+    window.removeEventListener("resize", onOrientationChange);
     window.removeEventListener("orientationchange", onOrientationChange);
 };
 
