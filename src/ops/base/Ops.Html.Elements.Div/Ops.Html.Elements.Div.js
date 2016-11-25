@@ -19,7 +19,6 @@ var fontFamily=op.addInPort(new Port(op,"Font Family",OP_PORT_TYPE_VALUE,{type:'
 
 var cursor=op.addInPort(new Port(op,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 
-
 var r=op.addInPort(new Port(op,"Text Red",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=op.addInPort(new Port(op,"Text Green",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=op.addInPort(new Port(op,"Text Blue",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -29,9 +28,6 @@ var bgR=op.addInPort(new Port(op,"Background Red",OP_PORT_TYPE_VALUE,{ display:'
 var bgG=op.addInPort(new Port(op,"Background Green",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var bgB=op.addInPort(new Port(op,"Background Blue",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var bgA=op.addInPort(new Port(op,"Background Opacity",OP_PORT_TYPE_VALUE,{ display:'range' }));
-
-
-
 
 r.set(1);
 g.set(1);
@@ -174,7 +170,8 @@ function updateIgnoreMouse()
 
 text.onValueChanged=function()
 {
-    var str= (text.get()||'').replace(/(?:\r\n|\r|\n)/g, '<br />');
+    var str=String(text.get()||'').replace(/(?:\r\n|\r|\n)/g, '<br />');
+
 
     element.innerHTML=str;
     updateClientSize();

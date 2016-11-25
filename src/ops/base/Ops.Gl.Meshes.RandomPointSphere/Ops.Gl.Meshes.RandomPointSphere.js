@@ -1,9 +1,11 @@
 op.name="RandomPointSphere";
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.inFunction("Render");
 var num=op.inValue("Num",1000);
 var size=op.inValue("Size",1);
 var seed=op.inValue("Seed",0);
+var distRand=op.inValueSlider("Distance Random",0);
+
 var distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"]);
 
 var cgl=op.patch.cgl;
@@ -13,9 +15,9 @@ seed.onChange=reset;
 num.onChange=reset;
 size.onChange=reset;
 distrib.onChange=reset;
+distRand.onChange=reset;
 
 exe.onTriggered=doRender;
-
 
 reset();
 
@@ -43,6 +45,8 @@ function reset()
     var dist=0;
     if(distrib.get()=="Poles")dist=1;
     if(distrib.get()=="Half")dist=2;
+    
+    var dRand=distRand.get();
 
     for(var i=0;i<num.get();i++)
     {
@@ -71,10 +75,12 @@ function reset()
         {
             if(i%2===0) tempv[0]=-size.get();
                 else tempv[0]=size.get();
-            
         }
+
         tempv[1]=0;
         tempv[2]=0;
+        
+        if(dRand!==0) tempv[0]-=Math.random()*dRand;
 
         vec3.transformQuat(tempv, tempv, rndq) ;
         verts[i*3]=tempv[0];
@@ -91,6 +97,7 @@ function reset()
 
     if(mesh) mesh.setGeom(geom);
         else mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+
     mesh.addVertexNumbers=true;
     mesh.setGeom(geom);
 }
