@@ -17,7 +17,7 @@ function onOrientationChange()
 {
     count++;
     angle.set(screen.orientation.angle);
-    var s=screen.orientation.type+"_"+count;
+    var s=screen.orientation.type+" #"+count+" WINORIENT:"+window.orientation;
     str.set(s);
 }
 

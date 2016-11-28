@@ -6,10 +6,9 @@ var r=op.inValue('r',1);
 var g=op.inValue('g',1);
 var b=op.inValue('b',1);
 
-var cgl=op.patch.cgl;
-
 var trigger=op.outFunction('trigger');
 
+var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 

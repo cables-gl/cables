@@ -1,27 +1,20 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
+var cgl=op.patch.cgl;
 
-// if(cgl.aborted)return false;
 
-this.name='Performance';
+op.name='Performance';
 
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
+var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 
-this.textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
+var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 var outFPS=this.addOutPort(new Port(this,"fps",OP_PORT_TYPE_VALUE));
 
 var drawGraph=op.inValueBool("Draw Graph",true);
-
-
-this.enabled=this.addInPort(new Port(this,"enabled",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.enabled.set(true);
-
-
+var enabled=op.inValueBool("enabled",true);
+var numBars=256;
 
 var canvas = document.createElement('canvas');
-canvas.id     = "performance_"+self.patch.config.glCanvasId;
+canvas.id     = "performance_"+op.patch.config.glCanvasId;
 canvas.width  = 512;
 canvas.height = 128;
 canvas.style.display   = "block";
@@ -37,7 +30,7 @@ if(!CABLES.UI)
 
 
 var fontImage = document.getElementById(canvas.id);
-var ctx = fontImage.getContext('2d');
+var ctx = canvas.getContext('2d');
 
 var text='';
 
@@ -53,7 +46,7 @@ var childsTime=0;
 
 var queue=[];
 var queueChilds=[];
-for(var i=0;i<canvas.width;i++)
+for(var i=0;i<numBars;i++)
 {
     queue[i]=-1;
     queueChilds[i]=-1;
@@ -72,9 +65,9 @@ var countFrames=0;
 
 function refresh()
 {
-    if(!self.enabled.get())
+    if(!enabled.get())
     {
-        self.trigger.trigger();
+        trigger.trigger();
         return;
     }
     ll=performance.now();
@@ -95,7 +88,7 @@ function refresh()
         frames=0;
         outFPS.set(fps);
 
-        text=self.patch.config.glCanvasId+' fps: '+fps;
+        text=op.patch.config.glCanvasId+' fps: '+fps;
         
         if(op.patch.config.fpsLimit!=0)
             text+=' (limit '+op.patch.config.fpsLimit+') ';
@@ -143,7 +136,7 @@ function refresh()
         CGL.profileTextureDelete=0;
     }
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    // ctx.clearRect(0,0,canvas.width,canvas.height);
 
     ctx.fillStyle="#222222";
     ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -152,15 +145,16 @@ function refresh()
     {
         ctx.fillStyle="#555555";
         var k=0;
-        for(k=512;k>=0;k--)
+        for(k=numBars;k>=0;k--)
         {
-            ctx.fillRect(512-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
+            ctx.fillRect(numBars-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
+
         }
 
         ctx.fillStyle="#aaaaaa";
-        for(k=512;k>=0;k--)
+        for(k=numBars;k>=0;k--)
         {
-            ctx.fillRect(512-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
+            ctx.fillRect(numBars-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
         }
 
     }
@@ -180,10 +174,10 @@ function refresh()
 
     ctx.restore();
 
-    if(self.textureOut.isLinked())
+    if(textureOut.isLinked())
     {
-        if(self.textureOut.get()) self.textureOut.get().initTexture(cgl,fontImage);
-            else self.textureOut.set( new CGL.Texture.fromImage(cgl,fontImage) );
+        if(textureOut.get()) textureOut.get().initTexture(cgl,fontImage);
+            else textureOut.set( new CGL.Texture.fromImage(cgl,fontImage) );
     }
 
     lastTime=performance.now();
@@ -191,7 +185,7 @@ function refresh()
 
     var startTimeChilds=performance.now();
 
-    self.trigger.trigger();
+    trigger.trigger();
 
     childsTime=performance.now()-startTimeChilds;
 
@@ -214,5 +208,5 @@ this.onDelete=function()
     document.getElementById(canvas.id).remove();
 };
 
-self.exe.onTriggered=refresh;
+exe.onTriggered=refresh;
 if(CABLES.UI)gui.setLayout();
