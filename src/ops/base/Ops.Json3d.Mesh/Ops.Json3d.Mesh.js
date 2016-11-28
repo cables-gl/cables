@@ -1,14 +1,14 @@
 
 op.name='json3d Mesh';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION ));
-var index=op.addInPort(new Port(op,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
+op.index=op.addInPort(new Port(op,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
 var centerPivot=op.addInPort(new Port(op,"center pivot",OP_PORT_TYPE_VALUE,{display:'bool'} ));
 var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_FUNCTION));
 
 var geometryOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT ));
 var draw=op.addInPort(new Port(op,"draw",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-index.set(-1);
+op.index.set(-1);
 geometryOut.ignoreValueSerialize=true;
 centerPivot.set(false);
 draw.set(true);
@@ -17,12 +17,12 @@ var cgl=op.patch.cgl;
 var mesh=null;
 var currentIndex=-1;
 
-index.onValueChanged=reload;
+op.index.onValueChanged=reload;
 render.onTriggered=doRender;
 
 function doRender()
 {
-    if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=index.get()) reload();
+    if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=op.index.get()) reload();
     if(draw.get())
     {
         if(mesh!==null) mesh.render(cgl.getShader());
@@ -35,24 +35,24 @@ function reload()
     if(!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.getValue())return;
     var meshes=cgl.frameStore.currentScene.getValue().meshes;
 
-    if(cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() && index.get()>=0)
+    if(cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() && op.index.get()>=0)
     {
         op.uiAttr({warning:''});
         op.uiAttr({info:''});
 
         var jsonMesh=null;
 
-        currentIndex=index.get();
+        currentIndex=op.index.get();
 
-        if(isNumeric(index.get()))
+        if(isNumeric(op.index.get()))
         {
-            if(index.get()<0 || index.get()>=cgl.frameStore.currentScene.getValue().meshes.length)
+            if(op.index.get()<0 || op.index.get()>=cgl.frameStore.currentScene.getValue().meshes.length)
             {
                 op.uiAttr({warning:'mesh not found - index out of range '});
                 return;
             }
 
-            jsonMesh=cgl.frameStore.currentScene.getValue().meshes[parseInt(index.get(),10) ];
+            jsonMesh=cgl.frameStore.currentScene.getValue().meshes[parseInt(op.index.get(),10) ];
         }
 
         if(!jsonMesh)

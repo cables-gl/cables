@@ -1,7 +1,7 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-this.name='json3dFile';
+op.name='json3dFile';
 var scene=new CABLES.Variable();
 
 cgl.frameStore.currentScene=null;

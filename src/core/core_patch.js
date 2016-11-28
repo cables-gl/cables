@@ -137,16 +137,16 @@ CABLES.Patch.prototype.getOpClass=function(objName)
 
 CABLES.Patch.prototype.addOp=function(objName,uiAttribs,next)
 {
-    if(CABLES.UI)
+    if(CABLES.UI && gui.serverOps.opHasLibs(objName))
     {
         var self=this;
+
         gui.serverOps.loadOpLibs(objName,function()
         {
             self.doAddOp(objName,uiAttribs,next);
         });
     }
-    else
-        this.doAddOp(objName,uiAttribs,next);
+    else return this.doAddOp(objName,uiAttribs,next);
 };
 
 
@@ -217,6 +217,7 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
     }
 
     if(next) next(op);
+    return op;
 };
 
 

@@ -1,4 +1,4 @@
-op.name='Multiply';
+op.name='multiply';
 
 var number1=op.addInPort(new Port(op,"number1"));
 var number2=op.addInPort(new Port(op,"number2"));
