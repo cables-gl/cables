@@ -1,31 +1,43 @@
 op.name='MotionSensor';
 
-var mulAxis=op.inValue("mulAxis",1);
+var mulAxis=op.inValue("Mul Orientation",1);
 
-// var foundSensor=op.addOutPort(new Port(this,"foundSensor"));
 
-var axis1=op.outValue("axis1");
-var axis2=op.outValue("axis2");
-var axis3=op.outValue("axis3");
+var axis1=op.outValue("Orientation Alpha");
+var axis2=op.outValue("Orientation Beta");
+var axis3=op.outValue("Orientation Gamme");
 
-var accX=op.outValue("accX");
-var accY=op.outValue("accY");
-var accZ=op.outValue("accX");
+var accX=op.outValue("Acceleration X");
+var accY=op.outValue("Acceleration Y");
+var accZ=op.outValue("Acceleration X");
+
+var outObj=op.outObject("Object");
+
 
 var lastTime=0;
 var lastTimeAcc=0;
 
-window.ondevicemotion = function(event)
+var obj={};
+
+window.addEventListener("devicemotion", function(event)
 {
     if(Date.now()-lastTimeAcc>15)
     {
         lastTimeAcc=Date.now();
+        accX.set( event.accelerationIncludingGravity.x || 0);
+        accY.set( event.accelerationIncludingGravity.y || 0 );
+        accZ.set( event.accelerationIncludingGravity.z || 0 );
+        
+        obj.AccelerationX=accX.get();
+        obj.AccelerationY=accY.get();
+        obj.AccelerationZ=accZ.get();
 
-        accX.set( event.accelerationIncludingGravity.x );
-        accY.set( event.accelerationIncludingGravity.y );
-        accZ.set( event.accelerationIncludingGravity.z );
+        outObj.set(null);
+        outObj.set(obj);
     }
-};
+
+}, true);
+
 
 window.addEventListener("deviceorientation", function (event)
 {
@@ -36,5 +48,13 @@ window.addEventListener("deviceorientation", function (event)
         axis2.set( (event.beta || 0 ) *mulAxis.get() );
         axis3.set( (event.gamma || 0) *mulAxis.get() );
 
+        obj.OrientationAlpha=axis1.get();
+        obj.OrientationBeta=axis2.get();
+        obj.OrientationGamma=axis3.get();
+
+        outObj.set(null);
+        outObj.set(obj);
+
     }
 }, true);
+
