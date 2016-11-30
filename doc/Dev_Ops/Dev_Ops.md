@@ -40,12 +40,18 @@ These attributes are visible in the op parameter panel and can be used for debug
 
 - `info`: Shows an information message in op parameter panel
 - `warning`: Shows a warning message in op parameter panel
-- `error`: Shows an error message in op parameter panel and colors the op red
+- `error`: Shows an error message in op parameter panel
 
 ```javascript
 op.uiAttr( { 'info': 'Something happened, not too serious but still...' } );
 op.uiAttr( { 'warning': 'Something happened, not too serious but still...' } );
 op.uiAttr( { 'error': 'Big problem here, this is serious!' } );
+```
+
+To clear a UI attribute you just have to set it to `null`:
+
+```
+op.uiAttr( { 'error': null } );
 ```
 
 ### Naming Conventions
