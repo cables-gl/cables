@@ -1,53 +1,60 @@
-    var self=this;
-    Op.apply(this, arguments);
+op.name='MotionSensor';
 
-    this.name='MotionSensor';
-    
+var mulAxis=op.inValue("Mul Orientation",1);
 
-    this.mulAxis=this.addInPort(new Port(this,"mulAxis"));
-    this.mulAxis.val=1.0;
-    
-    this.foundSensor=this.addOutPort(new Port(this,"foundSensor"));
-    
-    this.axis1=this.addOutPort(new Port(this,"axis1"));
-    this.axis2=this.addOutPort(new Port(this,"axis2"));
-    this.axis3=this.addOutPort(new Port(this,"axis3"));
 
-    this.accX=this.addOutPort(new Port(this,"accX"));
-    this.accY=this.addOutPort(new Port(this,"accY"));
-    this.accZ=this.addOutPort(new Port(this,"accX"));
+var axis1=op.outValue("Orientation Alpha");
+var axis2=op.outValue("Orientation Beta");
+var axis3=op.outValue("Orientation Gamme");
 
-    this.axis1.set(0);
-    this.axis2.set(0);
-    this.axis3.set(0);
+var accX=op.outValue("Acceleration X");
+var accY=op.outValue("Acceleration Y");
+var accZ=op.outValue("Acceleration X");
 
-    this.accX.set(0);
-    this.accY.set(0);
-    this.accZ.set(0);
+var outObj=op.outObject("Object");
 
-    var lastTime=0;
-    var lastTimeAcc=0;
 
-    window.ondevicemotion = function(event)
+var lastTime=0;
+var lastTimeAcc=0;
+
+var obj={};
+
+window.addEventListener("devicemotion", function(event)
+{
+    if(Date.now()-lastTimeAcc>15)
     {
-        if(Date.now()-lastTimeAcc>15)
-        {
-            lastTimeAcc=Date.now();
+        lastTimeAcc=Date.now();
+        accX.set( event.accelerationIncludingGravity.x || 0);
+        accY.set( event.accelerationIncludingGravity.y || 0 );
+        accZ.set( event.accelerationIncludingGravity.z || 0 );
+        
+        obj.AccelerationX=accX.get();
+        obj.AccelerationY=accY.get();
+        obj.AccelerationZ=accZ.get();
 
-            self.accX.set( event.accelerationIncludingGravity.x );
-            self.accY.set( event.accelerationIncludingGravity.y );
-            self.accZ.set( event.accelerationIncludingGravity.z );
-        }
-    };
+        outObj.set(null);
+        outObj.set(obj);
+    }
 
-    window.addEventListener("deviceorientation", function (event)
+}, true);
+
+
+window.addEventListener("deviceorientation", function (event)
+{
+    if(Date.now()-lastTime>15)
     {
-        if(Date.now()-lastTime>15)
-        {
-            lastTime=Date.now();
-            self.axis1.set( (event.alpha || 0) *self.mulAxis.get() );
-            self.axis2.set( (event.beta || 0 ) *self.mulAxis.get() );
-            self.axis3.set( (event.gamma || 0) *self.mulAxis.get() );
+        lastTime=Date.now();
+        axis1.set( (event.alpha || 0) *mulAxis.get() );
+        axis2.set( (event.beta || 0 ) *mulAxis.get() );
+        axis3.set( (event.gamma || 0) *mulAxis.get() );
 
-        }
-    }, true);
+        obj.OrientationAlpha=axis1.get();
+        obj.OrientationBeta=axis2.get();
+        obj.OrientationGamma=axis3.get();
+
+        outObj.set(null);
+        outObj.set(obj);
+
+    }
+}, true);
+

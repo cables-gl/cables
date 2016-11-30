@@ -46,18 +46,17 @@ var srcVert=''
         .endl()+'   texCoord=attrTexCoord;'
         .endl()+'   norm=attrVertNormal;'
 
-.endl()+'       #ifdef TEX_TRANSFORM'
-.endl()+'    vec3 coordinates=vec3(attrTexCoord.x, attrTexCoord.y,1.0);'
-.endl()+'    float angle = radians( rotate );'
-.endl()+'    vec2 scale= vec2(scale,scale);'
-.endl()+'    vec2 translate= vec2(posX,posY);'
-
-// .endl()+'    transform;'
-.endl()+'    transform = mat3(   scale.x * cos( angle ), scale.x * sin( angle ), 0.0,'
-.endl()+'                           - scale.y * sin( angle ), scale.y * cos( angle ), 0.0,'
-.endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x*2.0 + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y*2.0 + 0.5, 1.0);'
-
-.endl()+'       #endif'
+        .endl()+'   #ifdef TEX_TRANSFORM'
+        .endl()+'     vec3 coordinates=vec3(attrTexCoord.x, attrTexCoord.y,1.0);'
+        .endl()+'     float angle = radians( rotate );'
+        .endl()+'     vec2 scale= vec2(scale,scale);'
+        .endl()+'     vec2 translate= vec2(posX,posY);'
+        
+        .endl()+'     transform = mat3(   scale.x * cos( angle ), scale.x * sin( angle ), 0.0,'
+        .endl()+'                           - scale.y * sin( angle ), scale.y * cos( angle ), 0.0,'
+        .endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x*2.0 + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y*2.0 + 0.5, 1.0);'
+        
+        .endl()+'   #endif'
 
         .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
         .endl()+'}';

@@ -20,6 +20,24 @@ CABLES.TL.EASING_SIN_IN=11;
 CABLES.TL.EASING_SIN_OUT=12;
 CABLES.TL.EASING_SIN_INOUT=13;
 
+CABLES.TL.EASING_BACK_IN=14;
+CABLES.TL.EASING_BACK_OUT=15;
+CABLES.TL.EASING_BACK_INOUT=16;
+
+CABLES.TL.EASING_ELASTIC_IN=17;
+CABLES.TL.EASING_ELASTIC_OUT=18;
+
+CABLES.TL.EASING_BOUNCE_IN=19;
+CABLES.TL.EASING_BOUNCE_OUT=21;
+
+CABLES.TL.EASING_QUART_IN=22;
+CABLES.TL.EASING_QUART_OUT=23;
+CABLES.TL.EASING_QUART_INOUT=24;
+
+CABLES.TL.EASING_QUINT_IN=25;
+CABLES.TL.EASING_QUINT_OUT=26;
+CABLES.TL.EASING_QUINT_INOUT=27;
+
 CABLES.TL.Key=function(obj)
 {
     this.time=0.0;
@@ -38,82 +56,9 @@ CABLES.TL.Key=function(obj)
     var bezierAnim=null;
     var updateBezier=false;
 
-    // this.setBezierControlOut=function(t,v)
-    // {
-    //     this.bezTime=t;
-    //     this.bezValue=v;
-    //     updateBezier=true;
-    //     if(this.onChange!==null)this.onChange();
-    // };
-    //
-    // this.setBezierControlIn=function(t,v)
-    // {
-    //     this.bezTimeIn=t;
-    //     this.bezValueIn=v;
-    //     updateBezier=true;
-    //     if(this.onChange!==null)this.onChange();
-    // };
-    //
-    // BezierB1=function(t) { return t*t*t; };
-    // BezierB2=function(t) { return 3*t*t*(1-t); };
-    // BezierB3=function(t) { return 3*t*(1-t)*(1-t); };
-    // BezierB4=function(t) { return (1-t)*(1-t)*(1-t); };
-    // Bezier =function(percent,nextKey)
-    // {
-    //     var val1x=nextKey.time;
-    //     var val1y=nextKey.value;
-    //
-    //     var c1x=nextKey.time+nextKey.bezTimeIn;
-    //     var c1y=nextKey.value-nextKey.bezValueIn;
-    //
-    //     var val2x=this._self.time;
-    //     var val2y=this._self.value;
-    //
-    //     var c2x=this._self.time+this._self.bezTime;
-    //     var c2y=this._self.value-this._self.bezValue;
-    //
-    //     var x = val1x*BezierB1(percent) + c1x*BezierB2(percent) + val2x*BezierB3(percent) + c2x*BezierB4(percent);
-    //     var y = val1y*BezierB1(percent) + c1y*BezierB2(percent) + val2y*BezierB3(percent) + c2y*BezierB4(percent);
-    //
-    //     return {x:x,y:y};
-    // };
-    //
-    // this.easeBezier=function(percent,nextKey)
-    // {
-    //     if(!bezierAnim)
-    //     {
-    //         bezierAnim=new CABLES.TL.Anim();
-    //         updateBezier=true;
-    //     }
-    //
-    //     var timeSpan=nextKey.time-this._self.time;
-    //     if(updateBezier)
-    //     {
-    //         bezierAnim.clear();
-    //
-    //         var steps=20;
-    //         var is=1/steps;
-    //
-    //         for(var i=0;i<steps;i++)
-    //         {
-    //             var v=Bezier(i*is,nextKey);
-    //             var time=this._self.time+timeSpan/steps*i;
-    //
-    //             bezierAnim.setValue(v.x,v.y);
-    //         }
-    //         updateBezier=false;
-    //     }
-    //
-    //     return bezierAnim.getValue(this._self.time+percent*timeSpan);
-    // };
-
     this.setEasing(CABLES.TL.EASING_LINEAR);
     this.set(obj);
-
 };
-
-
-
 
 CABLES.TL.Key.linear=function(perc,key1,key2)
 {
@@ -175,10 +120,156 @@ CABLES.TL.Key.easeSinInOut=function( t,key2)
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
-
 CABLES.TL.Key.easeCubicIn=function(t,key2)
 {
     t=t*t*t;
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+// b 0
+// c 1/2 or 1
+// d always 1
+// easeOutCubic: function (x, t, b, c, d) {
+//     return c*((t=t/d-1)*t*t + 1) + b;
+
+
+CABLES.TL.Key.easeInQuint=function(t,key2)
+{
+
+    t= t*t*t*t*t;
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+CABLES.TL.Key.easeOutQuint=function(t,key2)
+{
+    t= ((t-=1)*t*t*t*t + 1);
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+CABLES.TL.Key.easeInOutQuint=function(t,key2)
+{
+    if ((t/=0.5) < 1) t= 0.5*t*t*t*t*t;
+        else t= 0.5*((t-=2)*t*t*t*t + 2);
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+
+
+
+CABLES.TL.Key.easeInQuart=function(t,key2)
+{
+    t=t*t*t*t;
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+CABLES.TL.Key.easeOutQuart=function(t,key2)
+{
+    // return -c * ((t=t/d-1)*t*t*t - 1) + b;
+    t= -1 * ((t-=1)*t*t*t - 1);
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+CABLES.TL.Key.easeInOutQuart=function(t,key2)
+{
+    if((t/=0.5) < 1) t= 0.5*t*t*t*t;
+        else t= -0.5 * ((t-=2)*t*t*t - 2);
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+
+
+CABLES.TL.Key.bounce=function(t)
+{
+    if ((t/=1) < (1/2.75)) t= (7.5625*t*t);
+    else if (t < (2/2.75)) t= (7.5625*(t-=(1.5/2.75))*t + 0.75);
+    else if (t < (2.5/2.75)) t= (7.5625*(t-=(2.25/2.75))*t + 0.9375);
+    else t= (7.5625*(t-=(2.625/2.75))*t + 0.984375);
+    return t;
+};
+
+CABLES.TL.Key.easeInBounce=function(t,key2)
+{
+    return CABLES.TL.Key.linear(CABLES.TL.Key.bounce(t),this,key2);
+    // return c - jQuery.easing.easeOutBounce (x, d-t, 0, c, d);
+};
+
+CABLES.TL.Key.easeOutBounce=function(t,key2)
+{
+    return CABLES.TL.Key.linear(CABLES.TL.Key.bounce(t),this,key2);
+};
+
+CABLES.TL.Key.easeInElastic=function(t,key2)
+{
+    var s=1.70158;
+    var p=0;
+    var a=1;
+
+    var b=0;
+    var d=1;
+    var c=1;
+
+    if (t===0) t= b;
+        else if ((t/=d)==1) t= b+c;
+            else
+            {
+                if(!p) p=d*0.3;
+                if(a < Math.abs(c)) { a=c; s=p/4; }
+                    else s = p/(2*Math.PI) * Math.asin (c/a);
+                t= -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+            }
+
+
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+CABLES.TL.Key.easeOutElastic=function(t,key2)
+{
+    var s=1.70158;
+    var p=0;
+    var a=1;
+
+    var b=0;
+    var d=1;
+    var c=1;
+
+    if (t===0) t=b;
+        else if ((t/=d)==1) t=b+c;
+            else
+            {
+                if (!p) p=d*0.3;
+                if (a < Math.abs(c)) { a=c; s=p/4; }
+                    else s = p/(2*Math.PI) * Math.asin (c/a);
+                t= a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+            }
+
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+
+
+
+
+CABLES.TL.Key.easeInBack=function(t,key2)
+{
+    var s = 1.70158;
+    t=(t)*t*((s+1)*t - s) ;
+
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+CABLES.TL.Key.easeOutBack=function (t,key2)
+{
+    var s = 1.70158;
+    t= ((t=t/1-1)*t*((s+1)*t + s) + 1) ;
+
+    return CABLES.TL.Key.linear(t,this,key2);
+};
+
+CABLES.TL.Key.easeInOutBack=function(t, key2)
+{
+    var s = 1.70158;
+    var c=1/2;
+    if ((t/=1/2) < 1) t= c*(t*t*(((s*=(1.525))+1)*t - s));
+        else t= c*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2);
+
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
@@ -200,8 +291,6 @@ CABLES.TL.Key.easeCubicInOut=function(t,key2)
     }
     return CABLES.TL.Key.linear(t,this,key2);
 };
-
-
 
 CABLES.TL.Key.easeSmoothStep=function(perc,key2)
 {
@@ -239,6 +328,24 @@ CABLES.TL.Key.prototype.setEasing=function(e)
     else if(easing==CABLES.TL.EASING_SIN_OUT) this.ease=CABLES.TL.Key.easeSinOut;
     else if(easing==CABLES.TL.EASING_SIN_INOUT) this.ease=CABLES.TL.Key.easeSinInOut;
 
+    else if(easing==CABLES.TL.EASING_BACK_OUT) this.ease=CABLES.TL.Key.easeOutBack;
+    else if(easing==CABLES.TL.EASING_BACK_IN) this.ease=CABLES.TL.Key.easeInBack;
+    else if(easing==CABLES.TL.EASING_BACK_INOUT) this.ease=CABLES.TL.Key.easeInOutBack;
+
+    else if(easing==CABLES.TL.EASING_ELASTIC_IN) this.ease=CABLES.TL.Key.easeInElastic;
+    else if(easing==CABLES.TL.EASING_ELASTIC_OUT) this.ease=CABLES.TL.Key.easeOutElastic;
+
+    else if(easing==CABLES.TL.EASING_BOUNCE_IN) this.ease=CABLES.TL.Key.easeInBounce;
+    else if(easing==CABLES.TL.EASING_BOUNCE_OUT) this.ease=CABLES.TL.Key.easeOutBounce;
+
+    else if(easing==CABLES.TL.EASING_QUART_OUT) this.ease=CABLES.TL.Key.easeOutQuart;
+    else if(easing==CABLES.TL.EASING_QUART_IN) this.ease=CABLES.TL.Key.easeInQuart;
+    else if(easing==CABLES.TL.EASING_QUART_INOUT) this.ease=CABLES.TL.Key.easeInOutQuart;
+
+    else if(easing==CABLES.TL.EASING_QUINT_OUT) this.ease=CABLES.TL.Key.easeOutQuint;
+    else if(easing==CABLES.TL.EASING_QUINT_IN) this.ease=CABLES.TL.Key.easeInQuint;
+    else if(easing==CABLES.TL.EASING_QUINT_INOUT) this.ease=CABLES.TL.Key.easeInOutQuint;
+
     else if(easing==CABLES.TL.EASING_BEZIER)
     {
         updateBezier=true;
@@ -274,7 +381,6 @@ CABLES.TL.Key.prototype.set=function(obj)
         {
             this.cb=obj.cb;
             this.cbTriggered=false;
-
         }
 
         if(obj.b)
@@ -495,6 +601,86 @@ CABLES.TL.Anim.prototype.addKey=function(k)
         this.keys.push(k);
     }
 };
+
+CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
+{
+    var port=op.addInPort(new Port(op,title,OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
+        "linear",
+        "absolute",
+        "smoothstep",
+        "smootherstep",
+        "Cubic In",
+        "Cubic Out",
+        "Cubic In Out",
+        "Expo In",
+        "Expo Out",
+        "Expo In Out",
+        "Sin In",
+        "Sin Out",
+        "Sin In Out",
+        "Quart In",
+        "Quart Out",
+        "Quart In Out",
+        "Quint In",
+        "Quint Out",
+        "Quint In Out",
+        "Back In",
+        "Back Out",
+        "Back In Out",
+        "Elastic In",
+        "Elastic Out",
+        "Elastic In Out",
+        "Bounce In",
+        "Bounce Out",
+        ]} ));
+
+    port.onChange=function()
+    {
+        if(port.get()=='linear') this.defaultEasing=CABLES.TL.EASING_LINEAR;
+        if(port.get()=='absolute') this.defaultEasing=CABLES.TL.EASING_ABSOLUTE;
+        if(port.get()=='smoothstep') this.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
+        if(port.get()=='smootherstep') this.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
+
+        if(port.get()=='Cubic In') this.defaultEasing=CABLES.TL.EASING_CUBIC_IN;
+        if(port.get()=='Cubic Out') this.defaultEasing=CABLES.TL.EASING_CUBIC_OUT;
+        if(port.get()=='Cubic In Out') this.defaultEasing=CABLES.TL.EASING_CUBIC_INOUT;
+
+        if(port.get()=='Expo In') this.defaultEasing=CABLES.TL.EASING_EXPO_IN;
+        if(port.get()=='Expo Out') this.defaultEasing=CABLES.TL.EASING_EXPO_OUT;
+        if(port.get()=='Expo In Out') this.defaultEasing=CABLES.TL.EASING_EXPO_INOUT;
+
+        if(port.get()=='Sin In') this.defaultEasing=CABLES.TL.EASING_SIN_IN;
+        if(port.get()=='Sin Out') this.defaultEasing=CABLES.TL.EASING_SIN_OUT;
+        if(port.get()=='Sin In Out') this.defaultEasing=CABLES.TL.EASING_SIN_INOUT;
+
+        if(port.get()=='Back In') this.defaultEasing=CABLES.TL.EASING_BACK_IN;
+        if(port.get()=='Back Out') this.defaultEasing=CABLES.TL.EASING_BACK_OUT;
+        if(port.get()=='Back In Out') this.defaultEasing=CABLES.TL.EASING_BACK_INOUT;
+
+        if(port.get()=='Elastic In') this.defaultEasing=CABLES.TL.EASING_ELASTIC_IN;
+        if(port.get()=='Elastic Out') this.defaultEasing=CABLES.TL.EASING_ELASTIC_OUT;
+
+        if(port.get()=='Bounce In') this.defaultEasing=CABLES.TL.EASING_BOUNCE_IN;
+        if(port.get()=='Bounce Out') this.defaultEasing=CABLES.TL.EASING_BOUNCE_OUT;
+
+        if(port.get()=='Quart Out') this.defaultEasing=CABLES.TL.EASING_QUART_OUT;
+        if(port.get()=='Quart In') this.defaultEasing=CABLES.TL.EASING_QUART_IN;
+        if(port.get()=='Quart In Out') this.defaultEasing=CABLES.TL.EASING_QUART_INOUT;
+
+        if(port.get()=='Quint Out') this.defaultEasing=CABLES.TL.EASING_QUINT_OUT;
+        if(port.get()=='Quint In') this.defaultEasing=CABLES.TL.EASING_QUINT_IN;
+        if(port.get()=='Quint In Out') this.defaultEasing=CABLES.TL.EASING_QUINT_INOUT;
+
+
+        if(cb)cb();
+
+    }.bind(this);
+
+    return port;
+};
+
+
+
 
 
 // ------------------------------

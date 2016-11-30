@@ -7,7 +7,8 @@ var index=this.addInPort(new Port(this,"index",OP_PORT_TYPE_VALUE));
 
 var inReset=this.addInPort(new Port(this,"reset",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
+// var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texOut=op.outTexture("Texture");
 
 var cgl=op.patch.cgl;
 

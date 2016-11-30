@@ -20,13 +20,15 @@ CGL.Texture=function(__cgl,options)
 
     if(options)
     {
+        this.name=options.name||this.name;
         if(options.isDepthTexture) this.textureType=CGL.Texture.TYPE_DEPTH;
         if(options.isFloatingPointTexture) this.textureType=CGL.Texture.TYPE_FLOAT;
-        if(options.textureType) this.textureType=options.textureType;
-        if(options.filter) this.filter=options.filter;
-        if(options.wrap) this.wrap=options.wrap;
-        this.name=options.name||this.name;
-        this.flip=options.flip;
+
+        if("textureType" in options) this.textureType=options.textureType;
+        if("filter" in options) this.filter=options.filter;
+        if("wrap" in options) this.wrap=options.wrap;
+        if("unpackAlpha" in options) this.unpackAlpha=options.unpackAlpha;
+        if("flip" in options) this.flip=options.flip;
     }
 
     if(options && options.width && options.height)this.setSize(options.width, options.height);
@@ -83,6 +85,7 @@ CGL.Texture.prototype.setSize=function(w,h)
     var uarr=null;
     this._setFilter();
 
+
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
     {
         if(!this._cgl.gl.getExtension('OES_texture_float')) throw "no floating point texture extension";
@@ -135,18 +138,13 @@ CGL.Texture.prototype.initTexture=function(img,filter)
     if(img.height)this.height=img.height;
     if(filter)this.filter=filter;
 
-// this._setFilter();
-
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
-
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, this.image);
 
     this._setFilter();
 
-
-    if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP)
-        this._cgl.gl.generateMipmap(this.texTarget);
+    if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
 
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
@@ -200,6 +198,7 @@ CGL.Texture.prototype.getInfo=function()
 
 CGL.Texture.prototype._setFilter=function()
 {
+    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     if(!this.isPowerOfTwo() )
     {
         // console.log( 'non power of two',this.width,this.height );
@@ -252,12 +251,9 @@ CGL.Texture.prototype._setFilter=function()
             console.log('unknown texture filter!',this.filter);
             var err = new Error();
             throw err;
-
         }
     }
 };
-
-
 
 CGL.Texture.load=function(cgl,url,finishedCallback,settings)
 {
@@ -348,9 +344,7 @@ CGL.Texture.createFromImage=function(cgl,img,options)
 // deprecated!
 CGL.Texture.fromImage=function(cgl,img,filter,wrap)
 {
-    console.log('deprecated texture from image...');
-    // var err = new Error();
-    // throw err;
+    console.error('deprecated texture from image...');
 
     var texture=new CGL.Texture(cgl);
     texture.flip=false;

@@ -40,7 +40,7 @@ invert.onValueChanged=updateInvert;
 
 var meth=op.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
     values:['mul xyz','add z','add y','sub z']}));
-    
+
 
 removeZero.onValueChanged=updateRemoveZero;
 
@@ -65,7 +65,7 @@ var updateMethod=function()
         if(meth.get()=='mul xyz') shader.define('DISPLACE_METH_MULXYZ');
         if(meth.get()=='add z') shader.define('DISPLACE_METH_ADDZ');
         if(meth.get()=='add y') shader.define('DISPLACE_METH_ADDY');
-        
+
         updateRemoveZero();
     }
 };
@@ -90,7 +90,7 @@ var srcBodyVert=''
 
 
     .endl()+'vec2 tc=texCoord;'
-    
+
     .endl()+'#ifdef FLIPY'
     .endl()+'    tc.y=1.0-tc.y;'
     .endl()+'#endif'
@@ -106,17 +106,17 @@ var srcBodyVert=''
     .endl()+'   {{mod}}_texVal+=1.0;'
     .endl()+'   pos.xyz*={{mod}}_texVal * {{mod}}_extrude;'
     .endl()+'#endif'
-    
+
     .endl()+'#ifdef DISPLACE_METH_ADDZ'
     .endl()+'   pos.z+=({{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
-    
+
     .endl()+'#ifdef DISPLACE_METH_ADDY'
     .endl()+'   pos.y+=({{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
 
     .endl()+'displHeightMapColor={{mod}}_texVal;'
-    
+
     .endl();
 
 var srcHeadFrag=''
@@ -128,7 +128,7 @@ var srcHeadFrag=''
     .endl();
 
 var srcBodyFrag=''
-    
+
     .endl()+'#ifdef HEIGHTMAP_COLORIZE'
     .endl()+'   col.rgb*=displHeightMapColor*(1.0-{{mod}}_colorizeAdd);'
     .endl()+'   col+={{mod}}_colorizeAdd;'
@@ -164,8 +164,8 @@ op.render.onTriggered=function()
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
-        
-        console.log('re init shader module vertexdisplacement');
+
+        // console.log('re init shader module vertexdisplacement');
 
         shader=cgl.getShader();
 

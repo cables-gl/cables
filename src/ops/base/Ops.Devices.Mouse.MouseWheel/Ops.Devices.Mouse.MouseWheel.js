@@ -31,6 +31,8 @@ var v=0;
 anim.clear();
 anim.setValue(Date.now()/1000.0-startTime,absVal.get());
 var dir=1;
+var isWindows=navigator.appVersion.indexOf("Win")!=-1;
+
 
 reset.onTriggered=function()
 {
@@ -86,6 +88,7 @@ var vOut=0;
 function onMouseWheel(e)
 {
     var d= CGL.getWheelSpeed(e)*(dir)*mul.get();
+    if(isWindows)d*=4;
 
     delta.set(0);
     delta.set(d);

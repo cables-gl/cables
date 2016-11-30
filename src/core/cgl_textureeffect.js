@@ -153,7 +153,7 @@ CGL.TextureEffect.prototype.delete=function()
 
 CGL.TextureEffect.prototype.createMesh=function()
 {
-    var geom=new CGL.Geometry();
+    var geom=new CGL.Geometry("textureEffect rect");
 
     geom.vertices = [
          1.0,  1.0,  0.0,

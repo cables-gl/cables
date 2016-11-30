@@ -16,27 +16,12 @@ var finished=op.addOutPort(new Port(op,"finished",OP_PORT_TYPE_VALUE));
 
 var anim=new CABLES.TL.Anim();
 
-var easing=op.addInPort(new Port(op,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
-    "linear",
-    "smoothstep",
-    "smootherstep",
-    "Cubic In",
-    "Cubic Out",
-    "Cubic In Out"
-    ]} ));
+anim.createPort(op,"easing",init);
 
-easing.set('linear');
+
 
 function init()
 {
-    if(easing.get()=='linear') anim.defaultEasing=CABLES.TL.EASING_LINEAR;
-    if(easing.get()=='smoothstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
-    if(easing.get()=='smootherstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
-    
-    if(easing.get()=='Cubic In') anim.defaultEasing=CABLES.TL.EASING_CUBIC_IN;
-    if(easing.get()=='Cubic Out') anim.defaultEasing=CABLES.TL.EASING_CUBIC_OUT;
-    if(easing.get()=='Cubic In Out') anim.defaultEasing=CABLES.TL.EASING_CUBIC_INOUT;
-
     anim.clear();
     anim.setValue(Date.now()/1000.0, inStart.get());
     anim.setValue(parseFloat(duration.get())+Date.now()/1000.0, inEnd.get());
@@ -75,5 +60,5 @@ init();
 
 // inStart.onValueChange(init);
 // inEnd.onValueChange(init);
-// duration.onValueChange(init);
+duration.onChange=init;
 // easing.onValueChange(init);

@@ -3,8 +3,10 @@ op.name="NumberToString";
 var val=op.addInPort(new Port(op,"Number",OP_PORT_TYPE_VALUE));
 var result=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_VALUE,{type:'string'}));
 
-val.onValueChanged=function()
+function update()
 {
-    result.set( String(val.get()));
-};
+    result.set( ''+String(val.get()));
+}
 
+val.onChange=update;
+update();

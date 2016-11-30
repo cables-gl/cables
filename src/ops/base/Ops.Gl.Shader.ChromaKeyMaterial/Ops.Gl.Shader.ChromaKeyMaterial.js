@@ -118,7 +118,6 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'   {{MODULE_COLOR}}'
 .endl()+'   col=texture2D(tex,texCoord);'
 
-
 .endl()+'   float maxrb = max( col.r, col.b );'
 .endl()+'   float perc = min(1.0,(col.g*weightMul-maxrb)*7.0);'
 
@@ -127,6 +126,22 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'   col=normalize(col)*len;'
 
 .endl()+'   col.a=1.0-perc;'
+
+ // JUST A TEST / REMOVE AGAIN
+  // JUST A TEST / REMOVE AGAIN
+   // JUST A TEST / REMOVE AGAIN
+    // JUST A TEST / REMOVE AGAIN
+     // JUST A TEST / REMOVE AGAIN
+      // JUST A TEST / REMOVE AGAIN
+       // JUST A TEST / REMOVE AGAIN
+        // JUST A TEST / REMOVE AGAIN
+         // JUST A TEST / REMOVE AGAIN
+          // JUST A TEST / REMOVE AGAIN
+           // JUST A TEST / REMOVE AGAIN
+            // JUST A TEST / REMOVE AGAIN
+.endl()+'   if(col.a<=0.9){col.a=0.4;col.g=1.0;}'
+
+
 
 .endl()+'   gl_FragColor = col;'
 .endl()+'}'

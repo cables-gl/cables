@@ -130,15 +130,26 @@ function connect(){
     op.log("MQTT Trying to connect to broker...");
     outObj.set(null);
 
-    // connect the client
-    client.connect({
+    // connect the client with username / password
+    if(mqttUsername.get() && mqttUsername.get().trim().length > 0) {
+        op.log("with user credentials");
+        client.connect({
+            onSuccess: onConnect,
+            onFailure: onFailure,
+            userName: mqttUsername.get(),
+            password: mqttPassword.get(),
+            useSSL: useSsl.get(),
+            timeout: TIMEOUT
+        });    
+    } else { // connect anonymous
+        op.log("anonymous");
+        client.connect({
         onSuccess: onConnect,
         onFailure: onFailure,
-        userName: mqttUsername.get(),
-        password: mqttPassword.get(),
         useSSL: useSsl.get(),
         timeout: TIMEOUT
-    });
+    });    
+    }
 }
 
 function handleReconnect(){

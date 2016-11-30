@@ -4,7 +4,7 @@ op.name='TextMesh';
 var render=op.inFunction("Render");
 var textureOut=op.outTexture("texture");
 var str=op.inValueString("Text","cables");
-var scale=op.inValue("Scale",10);
+var scale=op.inValue("Scale",1);
 var inFont=op.inValueString("Font","Arial");
 var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
 

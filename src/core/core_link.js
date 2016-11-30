@@ -43,8 +43,7 @@ CABLES.Link = function(scene)
         if(this.portOut)this.portOut.removeLink(this);
         if(this.scene)this.scene.onUnLink(this.portIn,this.portOut);
 
-
-        if(this.portIn.type==OP_PORT_TYPE_OBJECT)
+        if(this.portIn && this.portIn.type==OP_PORT_TYPE_OBJECT)
         {
             this.portIn.set(null);
         }

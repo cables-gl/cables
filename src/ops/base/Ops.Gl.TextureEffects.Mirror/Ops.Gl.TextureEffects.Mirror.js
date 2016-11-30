@@ -29,16 +29,19 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
     .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+''
 
-    .endl()+'       float x=(texCoord.x);'
-    .endl()+'       if(texCoord.x>=0.5)x=1.0-texCoord.x;'
+    .endl()+'       float tc=texCoord.x;'
+    .endl()+'       if(axis==1.0) tc=(texCoord.y);'
+
+    .endl()+'       float x=(tc);'
+    .endl()+'       if(tc>=0.5)x=1.0-tc;'
     
     .endl()+'       x*=width*2.0;'
     .endl()+'       if(flip==1.0)x=1.0-x;'
     .endl()+'       x*=1.0-offset;'
-    
-    .endl()+'           col=texture2D(tex,vec2(x,texCoord.y) );'
+
+    .endl()+'       if(axis==1.0) col=texture2D(tex,vec2(texCoord.x,x) );'
+    .endl()+'           else col=texture2D(tex,vec2(x,texCoord.y) );'
 
     .endl()+'   #endif'
     .endl()+'   gl_FragColor = col;'

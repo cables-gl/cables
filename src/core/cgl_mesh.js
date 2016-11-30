@@ -45,7 +45,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
         if(this._attributes[i].name==name)
         {
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
-            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.STATIC_DRAW);
+            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
             return;
         }
     }
@@ -54,7 +54,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 
     // console.log('attribute: '+name,array.length);
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.STATIC_DRAW);
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
 
     var attr=
         {
@@ -87,7 +87,9 @@ CGL.Mesh.prototype.getAttributes=function()
 CGL.Mesh.prototype.updateVertices=function(geom)
 {
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.STATIC_DRAW);
+    // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.DYNAMIC_DRAW);
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.DYNAMIC_DRAW);
+
     this._bufVertices.itemSize = 3;
     this._bufVertices.numItems = geom.vertices.length/3;
 };
@@ -113,7 +115,7 @@ CGL.Mesh.prototype.setGeom=function(geom)
     if(this._geom.verticesIndices.length>0)
     {
         this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
-        this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this._geom.verticesIndices), this._cgl.gl.STATIC_DRAW);
+        this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this._geom.verticesIndices), this._cgl.gl.DYNAMIC_DRAW);
         this._bufVerticesIndizes.itemSize = 1;
         this._bufVerticesIndizes.numItems = this._geom.verticesIndices.length;
     }
@@ -240,6 +242,47 @@ CGL.Mesh.prototype.meshChanged=function()
     return (this._cgl.lastMesh && ( this._cgl.lastMesh!=this ));
 };
 
+
+CGL.Mesh.hadError=false;
+
+CGL.Mesh.prototype.printDebug=function(shader)
+{
+    if(CGL.Mesh.hadError)return;
+    var error = this._cgl.gl.getError();
+    if (error != this._cgl.gl.NO_ERROR )
+    {
+        CGL.Mesh.hadError=true;
+        if(error==this._cgl.gl.OUT_OF_MEMORY)console.log("OUT_OF_MEMORY");
+        if(error==this._cgl.gl.INVALID_ENUM)console.log("INVALID_ENUM");
+        if(error==this._cgl.gl.INVALID_OPERATION)console.log("INVALID_OPERATION");
+        if(error==this._cgl.gl.INVALID_FRAMEBUFFER_OPERATION)console.log("INVALID_FRAMEBUFFER_OPERATION");
+        if(error==this._cgl.gl.INVALID_VALUE)console.log("INVALID_VALUE");
+        if(error==this._cgl.gl.CONTEXT_LOST_WEBGL)console.log("CONTEXT_LOST_WEBGL");
+        if(error==this._cgl.gl.NO_ERROR)console.log("NO_ERROR");
+
+
+        console.error('mesh error');
+        console.log('shader:',shader.name);
+        console.log('geom:',this._geom.name);
+        console.log('verts:',this._geom.vertices.length);
+        if(this._geom.tangents)console.log('tangents:',this._geom.tangents.length);
+        console.log('texCoords:',this._geom.texCoords.length);
+        console.log('texCoords indizes:',this._geom.texCoordsIndices.length);
+        console.log('indizes:',this._geom.verticesIndices.length);
+
+        var maxIndex=0;
+        for(var j=0;j<this._geom.verticesIndices.length;j++)
+        {
+            maxIndex=Math.max(this._geom.verticesIndices[j],maxIndex);
+        }
+        console.log('max index',maxIndex);
+        console.log('get error: ',error);
+
+        shader.printStats();
+    }
+};
+
+
 CGL.Mesh.prototype.render=function(shader)
 {
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
@@ -304,11 +347,15 @@ CGL.Mesh.prototype.render=function(shader)
         if(this.numInstances===0)
         {
             this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
+
+            // if(this._bufVerticesIndizes.numItems>100)console.log(this._bufVerticesIndizes.numItems);
         }
         else
         {
             this._extInstances.drawElementsInstancedANGLE(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this.numInstances);
         }
+
+        // this.printDebug(shader);
 
     }
 

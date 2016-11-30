@@ -66,14 +66,8 @@ function setDefines()
 
     if(self.toAxisZ.val)shader.define(module.prefix+'_TO_AXIS_Z');
         else shader.removeDefine(module.prefix+'_TO_AXIS_Z');
-
-
     
-    if(!src.get() || src.get()=='X * Z + Time' || src.get()==='')
-    {
-        shader.define(module.prefix+'_SRC_XZ');
-        console.log('default');
-    }
+    if(!src.get() || src.get()=='X * Z + Time' || src.get()==='') shader.define(module.prefix+'_SRC_XZ');
         else shader.removeDefine(module.prefix+'_SRC_XZ');
 
     if(src.get()=='X * Y + Time')shader.define(module.prefix+'_SRC_XY');
@@ -88,8 +82,8 @@ function setDefines()
     if(src.get()=='Z + Time')shader.define(module.prefix+'_SRC_Z');
         else shader.removeDefine(module.prefix+'_SRC_Z');
 
-    
-    
+
+
 }
 
 var srcHeadVert=''

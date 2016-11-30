@@ -5,6 +5,7 @@ var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 // var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
+var twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
 var bgAlpha=op.inValueSlider("Background Alpha",1);
 var fpTexture=op.inValueBool("HDR");
 
@@ -32,6 +33,8 @@ var bgShader=new CGL.Shader(cgl,'imgcompose bg');
 bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);
 var uniBgAlpha=new CGL.Uniform(bgShader,'f','a',bgAlpha);
 
+var selectedFilter=CGL.Texture.FILTER_LINEAR;
+var selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
 
 function initEffect()
@@ -44,7 +47,10 @@ function initEffect()
     tex=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":fpTexture.get(),
-            "filter":CGL.Texture.FILTER_LINEAR,
+            "filter":selectedFilter,
+            "wrap":selectedWrap,
+            "width": width.get(),
+            "height": height.get(),
         });
 
     effect.setSourceTexture(tex);
@@ -52,7 +58,9 @@ function initEffect()
     // texOut.set(effect.getCurrentSourceTexture());
 
     reInitEffect=false;
-
+    
+    // op.log("reinit effect");
+    // tex.printInfo();
 }
 
 fpTexture.onChange=function()
@@ -149,18 +157,32 @@ var doRender=function()
 };
 
 
+function onWrapChange()
+{
+    if(twrap.get()=='repeat') selectedWrap=CGL.Texture.WRAP_REPEAT;
+    if(twrap.get()=='mirrored repeat') selectedWrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if(twrap.get()=='clamp to edge') selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+    reInitEffect=true;
+    updateResolution();
+}
+
+twrap.set('clamp to edge');
+twrap.onValueChanged=onWrapChange;
+
+
+
 
 function onFilterChange()
 {
-    var newFilter=CGL.Texture.FILTER_LINEAR;
-    // if(tfilter.get()=='nearest') newFilter=CGL.Texture.FILTER_NEAREST;
-    // if(tfilter.get()=='linear')  newFilter=CGL.Texture.FILTER_LINEAR;
-    // if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
-    // if(newFilter!=tex.filter)tex.width=0;
-    tex.filter=newFilter;
+    if(tfilter.get()=='nearest') selectedFilter=CGL.Texture.FILTER_NEAREST;
+    if(tfilter.get()=='linear')  selectedFilter=CGL.Texture.FILTER_LINEAR;
+    // if(tfilter.get()=='mipmap')  selectedFilter=CGL.Texture.FILTER_MIPMAP;
 
-    effect.setSourceTexture(tex);
+    reInitEffect=true;
     updateResolution();
+    // effect.setSourceTexture(tex);
+    // updateResolution();
 }
 
 tfilter.set('linear');

@@ -13,7 +13,7 @@ var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 var loading=op.addOutPort(new Port(op,"loading",OP_PORT_TYPE_VALUE));
 
 flip.set(false);
-unpackAlpha.set(true);
+unpackAlpha.set(false);
 
 var cgl=op.patch.cgl;
 var cgl_filter=0;
@@ -78,7 +78,7 @@ function realReload(nocache)
                 textureOut.set(null);
                 textureOut.set(tex);
                 
-                tex.printInfo();
+                // tex.printInfo();
 
             },{
                 wrap:cgl_wrap,

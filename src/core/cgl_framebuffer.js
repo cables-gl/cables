@@ -5,18 +5,25 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     var cgl=_cgl;
 
     var depthTextureExt = cgl.gl.getExtension('WEBGL_depth_texture') || cgl.gl.getExtension( "WEBKIT_WEBGL_depth_texture" ) || cgl.gl.getExtension( "MOZ_WEBGL_depth_texture" );
-    if(!depthTextureExt) throw new Error("no depth texture support");
+    if(!depthTextureExt) console.error("no depth texture support");
 
     var width = w || 512;
     var height = h || 512;
 
     options=options ||
         {
-            isFloatingPointTexture:false
+            "isFloatingPointTexture":false
         };
 
-    var texture=new CGL.Texture(cgl,{isFloatingPointTexture:options.isFloatingPointTexture,filter:CGL.Texture.FILTER_LINEAR});
-    var textureDepth=new CGL.Texture(cgl,{"isDepthTexture":true});
+    var texture=new CGL.Texture(cgl,
+        {
+            "isFloatingPointTexture":options.isFloatingPointTexture,
+            "filter":CGL.Texture.FILTER_LINEAR
+        });
+    var textureDepth=new CGL.Texture(cgl,
+        {
+            "isDepthTexture":true
+        });
 
     var frameBuf = cgl.gl.createFramebuffer();
     var depthBuffer = cgl.gl.createRenderbuffer();
@@ -48,7 +55,6 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         width=w;
         height=h;
 
-
         CGL.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
@@ -57,22 +63,22 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         texture.setSize(width,height);
         textureDepth.setSize(width,height);
 
-
-        cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, width,height);
+        if(depthTextureExt) cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, width,height);
 
         cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, texture.tex, 0);
-        cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
 
-        cgl.gl.framebufferTexture2D(
-            cgl.gl.FRAMEBUFFER,
-            cgl.gl.DEPTH_ATTACHMENT,
-            cgl.gl.TEXTURE_2D,
-            textureDepth.tex,
-            0 );
-
-        if (!cgl.gl.isFramebuffer(frameBuf)) {
-            throw("Invalid framebuffer");
+        if(depthTextureExt)
+        {
+            cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
+            cgl.gl.framebufferTexture2D(
+                cgl.gl.FRAMEBUFFER,
+                cgl.gl.DEPTH_ATTACHMENT,
+                cgl.gl.TEXTURE_2D,
+                textureDepth.tex,
+                0 );
         }
+
+        if (!cgl.gl.isFramebuffer(frameBuf)) throw("Invalid framebuffer");
         var status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
         switch (status)
         {

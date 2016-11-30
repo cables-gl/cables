@@ -1,6 +1,7 @@
 
-CGL.Geometry=function()
+CGL.Geometry=function(name)
 {
+    this.name=name;
     this.faceVertCount=3;
     this.vertices=[];
     this.verticesIndices=[];
