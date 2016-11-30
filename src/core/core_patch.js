@@ -617,7 +617,11 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
 
     for(var i in this.ops)
     {
-        if(this.ops[i].onLoaded)this.ops[i].onLoaded();
+        if(this.ops[i].onLoaded)
+        {
+            this.ops[i].onLoaded();
+            this.ops[i].onLoaded=null;
+        }
         // this.ops[i].id=generateUUID();
     }
 
