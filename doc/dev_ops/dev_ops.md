@@ -43,15 +43,21 @@ These attributes are visible in the op parameter panel and can be used for debug
 - `error`: Shows an error message in op parameter panel
 
 ```javascript
-op.uiAttr( { 'info': 'Something happened, not too serious but still...' } );
-op.uiAttr( { 'warning': 'Something happened, not too serious but still...' } );
-op.uiAttr( { 'error': 'Big problem here, this is serious!' } );
+if(CABLES.UI) {
+  op.uiAttr( { 'info': 'Something happened, not too serious but still...' } );
+  op.uiAttr( { 'warning': 'Something happened, not too serious but still...' } );
+  op.uiAttr( { 'error': 'Big problem here, this is serious!' } );
+  gui.patch().showOpParams(op); // update GUI
+}
 ```
 
-To clear a UI attribute you just have to set it to `null`:
+To clear a UI attribute you just have to set it to `null` :
 
-```
-op.uiAttr( { 'error': null } );
+```javascript
+if(CABLES.UI) {
+  op.uiAttr( { 'error': null } );
+  gui.patch().showOpParams(op); // update GUI
+}
 ```
 
 ### Naming Conventions
