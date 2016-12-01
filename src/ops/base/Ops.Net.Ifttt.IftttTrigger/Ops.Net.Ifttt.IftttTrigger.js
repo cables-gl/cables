@@ -18,18 +18,23 @@ trigger.onTriggered = function() {
 
   if(key.get()) {
     if(key.get().trim() == dummyKey) {
-        // TODO: Show warning
-        //op.uiAttr( { 'warning': 'You have to enter your own API key first! Check out the docs below!' } );
+        if(CABLES.UI) {
+            op.uiAttr( { 'warning': 'You have to enter your own API key first! Check out the docs below!' } );
+            gui.patch().showOpParams(op);
+        }
     } else {
-      // TODO: Hide warning
-      //op.uiAttr( { 'warning': null } ); // clear warning
-      CABLES.ajax (
-        url,
-        function(err, _data, xhr) {
-          if(err) {
-            op.log("Error: Could not trigger IFTTT applet :/");
-          }
-        });
+        if(CABLES.UI) {
+            op.uiAttr( { 'warning': null } ); // clear UI warning
+            gui.patch().showOpParams(op);
+        }
+        CABLES.ajax (
+            url,
+            function(err, _data, xhr) {
+              if(err) {
+                op.log("Error: Could not trigger IFTTT applet :/");
+              }
+            }
+        );
     }
   }
 };
