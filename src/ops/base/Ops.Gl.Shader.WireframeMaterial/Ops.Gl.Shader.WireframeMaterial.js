@@ -8,7 +8,7 @@ var enableDepth=op.addInPort(new Port(op,"enable depth testing",OP_PORT_TYPE_VAL
 enableDepth.set(true);
 
 var fill=op.addInPort(new Port(op,"fill",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-fill.set(false);
+fill.set(true);
 fill.onValueChanged=function()
 {
     if(fill.get()) shader.define('WIREFRAME_FILL');
