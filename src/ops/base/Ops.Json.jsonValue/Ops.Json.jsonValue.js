@@ -8,7 +8,8 @@ var result=op.addOutPort(new Port(op,"result"));
 result.ignoreValueSerialize=true;
 data.ignoreValueSerialize=true;
 
-data.onValueChanged=exec;
+key.onChange=exec;
+data.onChange=exec;
 
 function exec()
 {

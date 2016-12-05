@@ -4,11 +4,25 @@ var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file'
 var outData=op.addOutPort(new Port(op,"data",OP_PORT_TYPE_OBJECT));
 var isLoading=op.outValue("Is Loading",false);
 
+var jsonp=op.inValueBool("JsonP",false);
+
 outData.ignoreValueSerialize=true;
 var patch=op.patch;
 
-filename.onValueChanged=reload;
+
+filename.onChange=delayedReload;
+jsonp.onChange=delayedReload;
 var loadingId=0;
+
+
+var reloadTimeout=0;
+
+function delayedReload()
+{
+    clearTimeout(reloadTimeout);
+    reloadTimeout=setTimeout(reload,100);
+}
+
 function reload()
 {
     if(!filename.get())return;
@@ -18,13 +32,18 @@ function reload()
     loadingId=patch.loading.start('jsonFile',''+filename.get());
     isLoading.set(true);
 
-    CABLES.ajax(
+    var f=CABLES.ajax;
+    if(jsonp.get())f=CABLES.jsonp;
+
+    f(
         patch.getFilePath(filename.get()),
         function(err,_data,xhr)
         {
             try
             {
-                var data=JSON.parse(_data);
+                var data=_data;
+                if(typeof data === 'string') data=JSON.parse(_data);
+
                 if(outData.get())outData.set(null);
                 outData.set(data);
                 op.uiAttr({'error':''});

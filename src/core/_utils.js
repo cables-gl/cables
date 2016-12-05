@@ -59,17 +59,51 @@ function ajaxRequest(url, callback)
 // ----------------------------------------------------------------
 
 
+
+
+CABLES.jsonp=function(url,cb)
+{
+
+    CABLES.jsonpCounter=CABLES.jsonpCounter||0;
+    CABLES.jsonpCounter++;
+    var jsonPID=CABLES.jsonpCounter;
+
+    console.log('making jsonp request...');
+
+
+    CABLES["jsonpFunc"+jsonPID]=function(data)
+    {
+
+        console.log(data);
+        cb(false, data);
+    };
+
+
+    var paramChar='?';
+    if(url.indexOf(paramChar)>-1)paramChar='&';
+
+    var s = document.createElement( 'script' );
+    s.setAttribute( 'src', url+paramChar+'callback=CABLES.jsonpFunc'+jsonPID );
+    // s.onload=function()
+    // {
+    // };
+    document.body.appendChild( s );
+
+};
+
 CABLES.ajaxSync=function(url,cb,method,post,contenttype)
 {
     CABLES.ajaxIntern(url,cb,method,post,contenttype,false);
 };
-CABLES.ajax=function(url,cb,method,post,contenttype)
+
+CABLES.ajax=function(url,cb,method,post,contenttype,jsonp)
 {
-    CABLES.ajaxIntern(url,cb,method,post,contenttype,true);
+    CABLES.ajaxIntern(url,cb,method,post,contenttype,true,jsonp);
 };
 
 CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
 {
+
     var xhr;
     try{ xhr = new XMLHttpRequest(); }catch(e){}
 
@@ -93,6 +127,8 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
 
 
     xhr.open(method?method.toUpperCase():"GET", url, asynch);
+
+
 
     if(!post) xhr.send();
     else
