@@ -9,10 +9,16 @@ enableDepth.set(true);
 
 var fill=op.addInPort(new Port(op,"fill",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 fill.set(true);
-fill.onValueChanged=function()
+
+function setDefines()
 {
-    if(fill.get()) shader.define('WIREFRAME_FILL');
-        else shader.removeDefine('WIREFRAME_FILL');
+    if(shader)
+        if(fill.get()) shader.define('WIREFRAME_FILL');
+            else shader.removeDefine('WIREFRAME_FILL');
+}
+fill.onChange=function()
+{
+    setDefines();
 };
 
 var w=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -64,17 +70,17 @@ var srcVert=''
     .endl()+'{'
     .endl()+'vec4 col;'
 
-    .endl()+'   #ifdef WIREFRAME_FILL'
-    .endl()+'       float v=opacity*(1.0-edgeFactor())*0.95;'
-    .endl()+'       vec3 wire = vec3(fr, fg, fb);'
-    .endl()+'       col.rgb = vec3(r, g, b);'
-    .endl()+'       col.rgb = mix(wire,col.rgb,v);'
-    .endl()+'       col.a = opacity;'
-    
+    .endl()+'#ifdef WIREFRAME_FILL'
+    .endl()+'    float v=opacity*(1.0-edgeFactor())*0.95;'
+    .endl()+'    vec3 wire = vec3(fr, fg, fb);'
+    .endl()+'    col.rgb = vec3(r, g, b);'
+    .endl()+'    col.rgb = mix(wire,col.rgb,v);'
+    .endl()+'    col.a = opacity;'
+    // .endl()+'    col = wire;'
     .endl()+'#endif'
-    .endl()+''
+
     .endl()+'#ifndef WIREFRAME_FILL'
-    .endl()+'       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
+    .endl()+'    col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
     .endl()+'#endif'
     // .endl()+'col.xyz=baycentric;'
 
@@ -99,7 +105,7 @@ var uniformOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 shader.setSource(srcVert,srcFrag);
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.wireframe=true;
-
+setDefines();
 
 {
     // diffuse color
@@ -148,7 +154,7 @@ shader.wireframe=true;
 }
 
 
-op.onLoaded=shader.compile;
+// op.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 
