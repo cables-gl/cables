@@ -17,11 +17,18 @@ var client = null;
 var mqttCablesObj = null;
 var topicMap = {};
 
+function handleReconnect(){
+    console.log("Reconnecting...");
+    connect();
+}
+
+reconnect.onTriggered = handleReconnect;
+
 op.onLoaded = function(){
+    op.log("MQTT op loaded");
     outObj.set(null);
     initLib();
     connect();
-    reconnect.onTriggered = handleReconnect;
 };
 
 function initLib(){
@@ -70,8 +77,10 @@ function requestSend(message, topic){
     messageObj.destinationName = topic;
     try{
         client.send(messageObj);
+        op.uiAttr( { 'error': null } );
     } catch(e) {
         op.log("MQTTSend: Could not send message " + message + " to " + topic + ", maybe try to reconnect?!");
+        op.uiAttr( { 'error': 'Could not send message, try to reconnect!' } );
     }
 }
 
@@ -150,9 +159,4 @@ function connect(){
         timeout: TIMEOUT
     });    
     }
-}
-
-function handleReconnect(){
-    console.log("Reconnecting...");
-    connect();
 }
