@@ -202,6 +202,7 @@ function blurTexture()
         uniDirY.setValue(1.0);
 
         effect.finish();
+        effect.endEffect();
     }
 
     // second pass
@@ -216,6 +217,7 @@ function blurTexture()
         uniDirY.setValue(0.0);
 
         effect.finish();
+        effect.endEffect();
     }
 
     cgl.setPreviousShader();
@@ -285,6 +287,8 @@ function mirrorTexture()
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
 
     effect.finish();
+    effect.endEffect();
+
     cgl.setPreviousShader();
 
 };

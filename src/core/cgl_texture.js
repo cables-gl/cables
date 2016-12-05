@@ -117,12 +117,13 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
     this.width=w;
     this.height=h;
 
-    this._setFilter();
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
 
+    this._setFilter();
+    
     if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP)
     {
         this._cgl.gl.generateMipmap(this.texTarget);

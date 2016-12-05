@@ -24,10 +24,7 @@ outPlaying.ignoreValueSerialize=true;
 outEnded.ignoreValueSerialize=true;
 
 window.AudioContext = window.AudioContext||window.webkitAudioContext;
-
-if(!window.audioContext) {
-    window.audioContext = new AudioContext();
-}
+if(!window.audioContext) window.audioContext = new AudioContext();
 
 if(!window.audioContext) {
     if(this.patch.config.onError) this.patch.config.onError('sorry, could not initialize WebAudio. Please check if your Browser supports WebAudio');
@@ -42,6 +39,15 @@ outPlaying.set(false);
 
 play.onValueChanged=function()
 {
+    
+    if(!self.audio) 
+    {
+        op.uiAttr({'error':'No audio file selected'});
+        return;
+    }
+    else op.uiAttr({'error':null});
+        
+
     if(play.get())
     {
         playing=true;
