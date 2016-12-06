@@ -50,11 +50,9 @@ refresh.onTriggered=function()
     {
         line=0;
     }
-    
-    
 
     position.set(line/height);
-    
+
     for(var i=0;i<width;i++)
     {
         data[i*4+0]=arr[i];
@@ -64,8 +62,6 @@ refresh.onTriggered=function()
     }
 
     buffer.set(data,line*width*4);
-
-// console.log(        width,height);
 
     if(tex.width!=width || tex.height!=height)
     {
