@@ -43,6 +43,13 @@ CGL.Shader=function(_cgl,_name)
         return cgl;
     };
 
+    this.setSource=function(srcVert,srcFrag)
+    {
+        this.srcVert=srcVert;
+        this.srcFrag=srcFrag;
+    };
+
+
     this.enableExtension=function(name)
     {
         this._needsRecompile=true;
@@ -346,6 +353,11 @@ CGL.Shader=function(_cgl,_name)
             console.error(name+" shader linking fail...");
             console.log(this.srcFrag);
             console.log(name+' programinfo: ',cgl.gl.getProgramInfoLog(program));
+
+console.log('--------------------------------------');
+console.log(self);
+console.log('--------------------------------------');
+
             name="errorshader";
             self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
         }
@@ -361,8 +373,8 @@ CGL.Shader=function(_cgl,_name)
     var createProgram=function(vstr, fstr)
     {
         var program = cgl.gl.createProgram();
-        self.vshader = CGL.Shader.createShader(cgl,vstr, cgl.gl.VERTEX_SHADER);
-        self.fshader = CGL.Shader.createShader(cgl,fstr, cgl.gl.FRAGMENT_SHADER);
+        self.vshader = CGL.Shader.createShader(cgl,vstr, cgl.gl.VERTEX_SHADER,self);
+        self.fshader = CGL.Shader.createShader(cgl,fstr, cgl.gl.FRAGMENT_SHADER,self);
 
         cgl.gl.attachShader(program, self.vshader);
         cgl.gl.attachShader(program, self.fshader);
@@ -405,11 +417,6 @@ CGL.Shader=function(_cgl,_name)
 
 
 
-CGL.Shader.prototype.setSource=function(srcVert,srcFrag)
-{
-    this.srcVert=srcVert;
-    this.srcFrag=srcFrag;
-};
 
 CGL.Shader.prototype.getProgram=function()
 {
@@ -467,7 +474,7 @@ CGL.Shader.getErrorFragmentShader=function()
         .endl()+'}';
 };
 
-CGL.Shader.createShader =function(cgl,str, type,_shader)
+CGL.Shader.createShader =function(cgl,str, type,cglShader)
 {
     function getBadLines(infoLog)
     {
@@ -481,7 +488,7 @@ CGL.Shader.createShader =function(cgl,str, type,_shader)
         return basLines;
     }
 
-    var shader = _shader || cgl.gl.createShader(type);
+    var shader = cgl.gl.createShader(type);
     cgl.gl.shaderSource(shader, str);
     cgl.gl.compileShader(shader);
 
@@ -528,7 +535,7 @@ CGL.Shader.createShader =function(cgl,str, type,_shader)
         htmlWarning+='</div>';
 
         name="errorshader";
-        self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
+        cglShader.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
     }
     else
     {

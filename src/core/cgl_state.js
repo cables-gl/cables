@@ -141,7 +141,7 @@ CGL.State=function()
             this.doScreenshot=false;
             this.screenShotDataURL = document.getElementById("glcanvas").toDataURL('image/png');
             if(this.onScreenShot)this.onScreenShot(this.screenShotDataURL);
-
+                else console.log('no onscreenshot callback');
             // this.screenShotDataURL = document.getElementById("glcanvas").toBlob(
             //     function(blob)
             //     {

@@ -302,6 +302,7 @@ CABLES.Patch.prototype.exec=function(e)
 
     if(CABLES.UI)
     {
+        if(CABLES.UI.capturer)CABLES.UI.capturer.capture(this.cgl.canvas);
         if(now-lastFrameTime>500 && lastFrameTime!==0  && !wasdelayed)
         {
             lastFrameTime=0;

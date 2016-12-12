@@ -139,7 +139,7 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
           // JUST A TEST / REMOVE AGAIN
            // JUST A TEST / REMOVE AGAIN
             // JUST A TEST / REMOVE AGAIN
-.endl()+'   if(col.a<=0.9){col.a=0.4;col.g=1.0;}'
+// .endl()+'   if(col.a<=0.9){col.a=0.4;col.g=1.0;}'
 
 
 

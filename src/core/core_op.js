@@ -27,7 +27,15 @@ CABLES.Op = function()
     this.onUiAttrChange=null;
 };
 {
-    CABLES.Op.prototype.uiAttr=function(newAttribs)
+
+    CABLES.Op.prototype.clearUiAttrib=function(name)
+    {
+        var obj={};
+        obj.name=null;
+        this.uiAttrib(obj);
+    };
+
+    CABLES.Op.prototype.setUiAttrib=CABLES.Op.prototype.uiAttr=function(newAttribs)
     {
         if(newAttribs && newAttribs.error)
         {
