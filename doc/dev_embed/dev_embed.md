@@ -5,6 +5,7 @@
 - In your project settings click `Export Static Archive`
 - A *.zip*-archive containing all your project data is created
 - The archive contains an `index.html`-file – put this on a web-server and load it, your project should be shown. You can open your browser’s developer tools to check if there are any errors.
+- An easy way to start a local web-server on your computer is by using a program like [anvil](anvilformac.com) – after you downloaded the zip file of your project and unpacked it, just drag the extracted folder onto the menu bar icon of *anvil* and click on the newly created local web-server to open it in your browser
 
 ## Parameters
 
