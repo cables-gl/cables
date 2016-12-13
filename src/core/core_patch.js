@@ -33,7 +33,7 @@ CABLES.Patch = function(cfg)
     if(!this.config.prefixAssetPath)this.config.prefixAssetPath='';
     if(!this.config.masterVolume)this.config.masterVolume=1.0;
 
-    this.vars={};
+    this.vars=cfg.vars||{};
 
     this.cgl=new CGL.State();
     this.cgl.patch=this;
