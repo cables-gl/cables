@@ -13,8 +13,8 @@ geometry.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
 var buffer = cgl.gl.createBuffer();
 
-geometry.onValueChanged=rebuild;
-mul.onValueChanged=rebuild;
+geometry.onChange=rebuild;
+mul.onChange=rebuild;
 
 function rebuild()
 {
