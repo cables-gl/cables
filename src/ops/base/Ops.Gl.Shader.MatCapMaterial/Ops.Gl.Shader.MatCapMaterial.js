@@ -219,13 +219,13 @@ this.doRender=function()
 {
     bindTextures();
     cgl.setShader(shader);
-    
+
     self.trigger.trigger();
 
     cgl.setPreviousShader();
-    
-    
-    
+
+
+
     // if(self.texture.get())
     // {
     //     cgl.gl.activeTexture(cgl.gl.TEXTURE0);

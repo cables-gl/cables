@@ -18,6 +18,12 @@ uniform float canvasWidth;
 uniform float canvasHeight;
 uniform float camDistMul;
 
+uniform float randomSize;
+
+attribute float attrVertIndex;
+
+float rand(float n){return fract(sin(n) * 43758.5453123);}
+
 void main()
 {
     float psMul=sqrt(canvasWidth*canvasHeight)*0.001+0.00000000001;
@@ -34,6 +40,10 @@ void main()
 
     vec4 model=modelMatrix * pos;
 
+    if(randomSize>0.0) psMul=rand(attrVertIndex)*randomSize;
+
+
+
     #ifndef SCALE_BY_DISTANCE
         gl_PointSize = pointSize * psMul;
     #endif
@@ -41,6 +51,8 @@ void main()
         float cameraDist = distance(model.xyz, camPos);
         gl_PointSize = (pointSize / cameraDist) * psMul;
     #endif
+
+
 
 
     gl_Position = projMatrix * viewMatrix * model;
