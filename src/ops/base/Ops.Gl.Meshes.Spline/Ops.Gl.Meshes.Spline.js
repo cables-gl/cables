@@ -62,6 +62,7 @@ render.onTriggered=function()
         }
     }
 
+    outPoints.set(null);
     outPoints.set(points);
 
     cgl.popMvMatrix();

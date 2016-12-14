@@ -2,8 +2,11 @@ op.name='ArrayIterator 3x';
 var exe=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
 var arr=op.addInPort(new Port(op,"Array",OP_PORT_TYPE_ARRAY));
 
+var pStep=op.inValue("Step");
+
 var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
 var idx=op.addOutPort(new Port(op,"Index"));
+
 var valX=op.addOutPort(new Port(op,"Value 1"));
 var valY=op.addOutPort(new Port(op,"Value 2"));
 var valZ=op.addOutPort(new Port(op,"Value 3"));
@@ -12,8 +15,10 @@ exe.onTriggered=function()
 {
     if(!arr.get())return;
     
+    var step=pStep.get()||1;
+    if(step<1.0)step=1.0;
     var ar=arr.get();
-    for(var i=0;i<ar.length;i+=3)
+    for(var i=0;i<ar.length;i+=3*step)
     {
         idx.set(i/3);
         valX.set(arr.val[i+0]);

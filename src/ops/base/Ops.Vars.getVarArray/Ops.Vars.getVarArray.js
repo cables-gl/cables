@@ -13,4 +13,4 @@ function updateVar()
 
 exe.onTriggered=updateVar;
 varname.onValueChange(updateVar);
-val.onValueChange(updateVar);
+// val.onValueChange(updateVar);
