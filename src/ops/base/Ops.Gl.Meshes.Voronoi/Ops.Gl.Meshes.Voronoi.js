@@ -4,12 +4,16 @@ var pSites=op.inArray("Site Points");
 
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
 
+
+pExtrCenter.onChange=queueUpdate;
+
 var needsUpdate=true;
 var cgl=op.patch.cgl;
 
 var voronoi = new Voronoi();
 var bbox = {xl: -1, xr: 1, yt: -1, yb: 1}; // xl is x-left, xr is x-right, yt is y-top, and yb is y-bottom
 var sites=[];
+
 for(var i=0;i<75;i++)
 {
     sites.push(
@@ -19,14 +23,9 @@ for(var i=0;i<75;i++)
         });
 }
 
-
-
 var diagram = voronoi.compute(sites, bbox);
-
-
 var meshes=[];
 var geoms=[];
-
 
 pSites.onChange=function()
 {
@@ -34,7 +33,6 @@ pSites.onChange=function()
     {
         var arr=pSites.get();
         if(arr.length%2!==0)arr.length--;
-        // var sites=[];
         sites.length=arr.length/2;
         console.log(sites.length);
 
@@ -47,33 +45,25 @@ pSites.onChange=function()
                 });
         }
 
-        
-        
         needsUpdate=true;
-        console.log(sites);
-        // diagram = voronoi.compute(sites, bbox);
     }
 };
 
 
 
-pExtrCenter.onChange=queueUpdate;
 
 function queueUpdate()
 {
     needsUpdate=true;
 }
 
-
 function updateGeom()
 {
     if(!sites)return;
-    
     diagram = voronoi.compute(sites, bbox);
 
     // todo delete unalloc old mesh objects
     meshes.length=0;
-    
     needsUpdate=false;
 
     for (var ic = 0; ic < sites.length; ic++)
@@ -116,24 +106,17 @@ function updateGeom()
             tc.push(0);
             tc.push(1);
             indices.push(verts.length/3-1);
-
         }
         
         geoms[vid].vertices=verts;
         geoms[vid].verticesIndices=indices;
         geoms[vid].texCoords=tc;
-        // geoms[vid].unIndex();
         geoms[vid].calculateNormals({"forceZUp":true});
         
         if(!meshes[vid]) meshes[vid]=new CGL.Mesh(op.patch.cgl,geoms[vid]);
             else meshes[vid].setGeom(geoms[vid]);
     }
-
-    console.log("generated meshes ",meshes.length);
-
 }
-
-
 
 render.onTriggered=function()
 {
@@ -142,14 +125,9 @@ render.onTriggered=function()
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
-    
-    // shader.glPrimitive=cgl.gl.TRIANGLE_FAN;
 
     for(var i in meshes)
-    {
         meshes[i].render(op.patch.cgl.getShader());
-    }
-    
-    // shader.glPrimitive=oldPrim;
+
 
 };
