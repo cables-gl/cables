@@ -332,6 +332,7 @@ var srcFrag=''
     .endl()+'varying vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'varying vec2 vNorm;'
+    .endl()+'uniform mat4 viewMatrix;'
 
     .endl()+'uniform float diffuseRepeatX;'
     .endl()+'uniform float diffuseRepeatY;'
@@ -405,7 +406,7 @@ var srcFrag=''
 
     .endl()+'       tnorm=normalize(tangent*tnorm.x + binormal*tnorm.y + norm*tnorm.z);'
 
-    .endl()+'       vec3 n = normalize( mat3(normalMatrix) * (norm+tnorm*normalScale) );'
+    .endl()+'       vec3 n = normalize( mat3(normalMatrix*viewMatrix) * (norm+tnorm*normalScale) );'
 
     .endl()+'       vec3 r = reflect( e, n );'
     .endl()+'       float m = 2. * sqrt( '

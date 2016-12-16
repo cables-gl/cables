@@ -48,25 +48,35 @@ CABLES.Patch = function(cfg)
     this.freeTimer.play();
     this.exec();
 
-    if(!this.aborted && this.config.patchFile)
+    if(!this.aborted)
     {
-        CABLES.ajax(this.config.patchFile,function(err,_data)
+        if(this.config.patch)
         {
-            var data=JSON.parse(_data);
-            if(err)
+            this.deSerialize(this.config.patch);
+            this.timer.play();
+        }
+        else
+        if(this.config.patchFile)
+        {
+            CABLES.ajax(this.config.patchFile,function(err,_data)
             {
-                var txt = '';
+                var data=JSON.parse(_data);
+                if(err)
+                {
+                    var txt = '';
 
-                console.error('err',err);
-                console.error('data',data);
-                console.error('data',data.msg);
-                return;
-            }
+                    console.error('err',err);
+                    console.error('data',data);
+                    console.error('data',data.msg);
+                    return;
+                }
 
-            this.deSerialize(data);
-        }.bind(this));
+                this.deSerialize(data);
+            }.bind(this));
 
-        this.timer.play();
+            this.timer.play();
+        }
+
     }
 
 
