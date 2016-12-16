@@ -3,6 +3,8 @@ op.name="HoverPoint";
 var exec=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
 
+var pPointSize=op.inValue("Size Point",10);
+
 var show=op.inValueBool("show");
 var index=op.inValue("index");
 var title=op.inValueString("Title");
@@ -16,6 +18,19 @@ var elementOver=null;
 
 var pointSize=10;
 var currentIndex=0;
+
+pPointSize.onChange=function()
+{
+    pointSize=pPointSize.get();
+    for(i=0;i<elements.length;i++) 
+    {
+        elements[i].style.width=pointSize+"px";
+        elements[i].style.height=pointSize+"px";
+        elements[i].style['border-radius']=2*pointSize+"px";
+        
+    }
+
+};
 
 show.onChange=function()
 {
@@ -92,7 +107,7 @@ function init()
     elements[currentIndex].style.border="2px solid black";
     elements[currentIndex].style["z-index"]="99999";
     elements[currentIndex].style['background-color']="white";
-    elements[currentIndex].style.transition="opacity 0.8s ease "+Math.random()*0.2+"s";
+    elements[currentIndex].style.transition="opacity 0.1s ease "+Math.random()*0.2+"s";
     elements[currentIndex].style.opacity=0;
     elements[currentIndex].index=currentIndex;
     
@@ -139,17 +154,33 @@ exec.onTriggered=function()
 {
     if(!elements[currentIndex])init();
 
-    var pos=[0,0,0];
-    mat4.multiply(m,cgl.vMatrix,cgl.mvMatrix);
-    vec3.transformMat4(pos, [0,0,0], m);
+    var screenPos=[0,0,0];
+    vec3.transformMat4(screenPos, screenPos, cgl.mvMatrix);
+    
+    screenPos=vec3.transformMat4(screenPos, screenPos, cgl.vMatrix);
+    screenPos=vec3.transformMat4(screenPos, screenPos, cgl.pMatrix);
 
-    vec3.transformMat4(trans, pos, cgl.pMatrix);
+// screenPos[2]-=0.2;
+    screenPos[0] /= screenPos[2];
+    screenPos[1] /= screenPos[2];
+    screenPos[0] = (screenPos[0] + 1) * cgl.getViewPort()[2] / 2;
+    screenPos[1] = (screenPos[1] + 1) * cgl.getViewPort()[3] / 2;
 
-    x=( cgl.getViewPort()[2]-( cgl.getViewPort()[2]  * 0.5 - trans[0] * cgl.getViewPort()[2] * 0.5 / trans[2] ))-pointSize;
-    y=cgl.getViewPort()[3]-( cgl.getViewPort()[3]  * 0.5 + trans[1] * cgl.getViewPort()[3] * 0.5 / trans[2] )-pointSize/2;
+    // var x=screenPos[0]-pointSize/2;
+    var x=screenPos[0]-pointSize/2;
+    var y=cgl.getViewPort()[3]-screenPos[1] -pointSize/2;
+
+    // var pos=[0,0,0];
+    // mat4.multiply(m,cgl.vMatrix,cgl.mvMatrix);
+    // vec3.transformMat4(pos, [0,0,0], m);
+
+    // vec3.transformMat4(trans, pos, cgl.pMatrix);
+
+    // x=( cgl.getViewPort()[2]-( cgl.getViewPort()[2]  * 0.5 - trans[0] * cgl.getViewPort()[2] * 0.5 / trans[2] ))-pointSize/2;
+    // y=cgl.getViewPort()[3]-( cgl.getViewPort()[3]  * 0.5 + trans[1] * cgl.getViewPort()[3] * 0.5 / trans[2] )-pointSize/2;
 
 
-    if(elements[currentIndex] && elements[currentIndex].y!=y && elements[currentIndex].x!=x)
+    if(elements[currentIndex] && (elements[currentIndex].y!=y || elements[currentIndex].x!=x))
     {
         elements[currentIndex].title=title.get();
         elements[currentIndex].style.top=y+'px';
