@@ -329,8 +329,8 @@ CGL.Shader=function(_cgl,_name)
         {
             var normalMatrix = mat4.create();
 
-            // mat4.mul(normalMatrix,cgl.vMatrix,cgl.mvMatrix);
-            mat4.clone(normalMatrix,cgl.mvMatrix);
+            mat4.mul(normalMatrix,cgl.vMatrix,cgl.mvMatrix);
+            // mat4.clone(normalMatrix,cgl.mvMatrix);
 
             mat4.invert(normalMatrix,normalMatrix);
             mat4.transpose(normalMatrix, normalMatrix);
