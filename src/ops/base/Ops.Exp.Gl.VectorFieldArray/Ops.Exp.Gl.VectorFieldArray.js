@@ -12,7 +12,24 @@ var numColumns=op.inValue("Columns",100);
 var numRows=op.inValue("Rows",100);
 var spacingColumns=op.inValue("Spacing Columns",1);
 var spacingRows=op.inValue("Spacing Rows",1);
-var doCenter=op.inValueBool("Center");
+var doCenter=op.inValueBool("Center",true);
+
+var transRotate=op.inValueBool("Rotate",true);
+var transScale=op.inValueBool("Scale",false);
+
+function updateTransforms()
+{
+    if(!shader)return;
+    if(transRotate.get())shader.define("TRANS_ROTATE");
+        else shader.removeDefine("TRANS_ROTATE");
+
+    if(transScale.get())shader.define("TRANS_SCALE");
+        else shader.removeDefine("TRANS_SCALE");
+}
+
+transRotate.onChange=updateTransforms;
+transScale.onChange=updateTransforms;
+
 
 var transformations=[];
 var mod=null;
@@ -38,6 +55,8 @@ var srcHeadVert=''
     
     .endl()+'uniform float {{mod}}_spaceX;'
     .endl()+'uniform float {{mod}}_spaceY;'
+    .endl()+'uniform float {{mod}}_rows;'
+    .endl()+'uniform float {{mod}}_cols;'
     
     .endl()+'#ifdef INSTANCING'
     .endl()+'   attribute mat4 instMat;'
@@ -62,12 +81,20 @@ var srcBodyVert=''
     .endl()+'   if( do_instancing==1.0 )'
     .endl()+'   {'
     .endl()+'       instModelMat=instMat;'
-    .endl()+'       float tx=instModelMat[3][0]/200.0;'
-    .endl()+'       float ty=instModelMat[3][1]/200.0;'
+    .endl()+'       float tx=(instModelMat[3][0])/{{mod}}_cols;'
+    .endl()+'       float ty=(instModelMat[3][1])/{{mod}}_rows;'
     .endl()+'       instModelMat[3][0]*={{mod}}_spaceX;'
     .endl()+'       instModelMat[3][1]*={{mod}}_spaceY;'
     .endl()+'       vec4 instCol = texture2D( {{mod}}_field, vec2(tx,ty) );'
-    .endl()+'       instModelMat*=rotationMatrix(vec3(0.0,0.0,1.0),instCol.r*3.1415926535897932384626433832795*2.0);'
+    
+    .endl()+'       #ifdef TRANS_ROTATE'
+    .endl()+'           instModelMat*=rotationMatrix(vec3(0.0,0.0,1.0),instCol.r*3.1415926535897932384626433832795*2.0);'
+    .endl()+'       #endif'
+
+    .endl()+'       #ifdef TRANS_SCALE'
+    .endl()+'           pos.rgb*=instCol.r;'
+    .endl()+'       #endif'
+    
 // .endl()+'       pos*=instCol.r;'
     .endl()+'       mvMatrix=viewMatrix * modelMatrix * instModelMat;'
     .endl()+'   }'
@@ -141,7 +168,10 @@ function doRender()
                 uniSpaceX=new CGL.Uniform(shader,'f',mod.prefix+'_spaceX',0);
                 uniSpaceY=new CGL.Uniform(shader,'f',mod.prefix+'_spaceY',0);
                 uniTexture=new CGL.Uniform(shader,'t',mod.prefix+'_field',5);
-
+                uniCols=new CGL.Uniform(shader,'f',mod.prefix+'_cols',numColumns);
+                uniRows=new CGL.Uniform(shader,'f',mod.prefix+'_rows',numRows);
+                
+                updateTransforms();
             }
             else
             {
@@ -153,6 +183,10 @@ function doRender()
         {
             uniSpaceX.setValue(spacingColumns.get());
             uniSpaceY.setValue(spacingRows.get());
+            
+            uniCols.setValue(numColumns.get());
+            uniRows.setValue(numRows.get());
+            
         }
 
         if(tex.get())
@@ -182,6 +216,14 @@ function calc()
     var distX=spacingColumns.get();
     var distY=spacingRows.get();
     
+    var centerX=0;
+    var centerY=0;
+    if(doCenter.get())
+    {
+        centerX=cols*spacingColumns.get()/2;
+        centerY=rows*spacingRows.get()/2;
+    }
+    
     transformations.length=cols*rows;
     
 
@@ -190,7 +232,7 @@ function calc()
         for(var y=0;y<rows;y++)
         {
             mat4.identity(m);
-            mat4.translate(m,m,[x,y, 0]);
+            mat4.translate(m,m,[x-centerX,y-centerY, 0]);
             transformations[x+y*cols]= Array.prototype.slice.call(m);
         }        
     }

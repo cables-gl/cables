@@ -3,17 +3,22 @@ op.name="ColorPalettes";
 var index=op.inValue("Index",0);
 var textureOut=op.outTexture("Texture");
 
+var arrOut=op.outArray("Color Array");
+
 var canvas = document.createElement('canvas');
 canvas.id = "canvas_"+CABLES.generateUUID();
-canvas.width=256;
-canvas.height=64;
+canvas.width=1024;
+canvas.height=8;
 canvas.style.display = "none";
 
 var body = document.getElementsByTagName("body")[0];
 body.appendChild(canvas);
 var ctx = canvas.getContext('2d');
 
+index.onChange=buildTexture;
 
+var arr=[];
+arr.length=5*3;
 
 function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
 function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
@@ -21,37 +26,48 @@ function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
 function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
 
 
-index.onChange=function()
+function buildTexture()
 {
     var ind=Math.round(index.get())*5;
     if(ind>=colors.length-5)ind=0;
+    if(ind<0)ind=0;
+    if(ind!=ind)ind=0;
 
     for(var i=0;i<5;i++)
     {
         var r = hexToR(colors[ind+i]);
         var g = hexToG(colors[ind+i]);
         var b = hexToB(colors[ind+i]);
+        
+        arr[i*3+0]=r/255;
+        arr[i*3+1]=g/255;
+        arr[i*3+2]=b/255;
 
         ctx.fillStyle = 'rgb('+r+','+g+','+b+')';
         ctx.fillRect(
-            canvas.width/5*i,
+            canvas.width/5*i-2,
             0,
-            canvas.width/5,
+            canvas.width/5+2,
             canvas.height
             );
     }
 
-    if(textureOut.get()) textureOut.get().initTexture(canvas,CGL.Texture.FILTER_MIPMAP);
-        else textureOut.set(new CGL.Texture.createFromImage( op.patch.cgl, canvas, { "filter":CGL.Texture.FILTER_MIPMAP } ));
-        
+    if(textureOut.get()) textureOut.get().initTexture(canvas,CGL.Texture.FILTER_NEAREST);
+        else textureOut.set(new CGL.Texture.createFromImage( op.patch.cgl, canvas, { "filter":CGL.Texture.FILTER_NEAREST } ));
+    
+    arrOut.set(null);
+    arrOut.set(arr);
     textureOut.get().unpackAlpha=false;
 
-};
+}
+
+
 
 op.onDelete=function()
 {
     canvas.remove();
 };
+
 
 
 
@@ -1057,3 +1073,7 @@ var colors=[
 '#990000','#336699','#DDDDDD','#999999','333333',
 '#F13A4B','#3D3C3E','#22BDAF','#F4F4F4','D7D7D7',
 '#F53A59','#001D2D','#15A88C','#B7D9C8','F3F5F4',];
+
+
+
+buildTexture();
