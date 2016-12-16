@@ -148,7 +148,9 @@ CABLES.Patch.prototype.getOpClass=function(objName)
 
 CABLES.Patch.prototype.addOp=function(objName,uiAttribs,next)
 {
-    if(CABLES.UI && gui.serverOps.opHasLibs(objName))
+
+
+    if(CABLES.UI && gui.serverOps.opHasLibs(objName) && !gui.serverOps.opLibsLoaded(objName) )
     {
         var self=this;
 
@@ -563,6 +565,7 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
                 );
         }
     }
+
 
     // console.log('add ops ',self.config.glCanvasId);
     // add ops...
