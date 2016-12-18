@@ -2,8 +2,12 @@ op.name="voronoi";
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var pSites=op.inArray("Site Points");
 
+var pRender=op.inValueBool("Render",true);
+
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
 
+
+var next=op.outFunction("Next");
 
 pExtrCenter.onChange=queueUpdate;
 
@@ -49,7 +53,12 @@ pSites.onChange=function()
     }
 };
 
-
+function distance(x1,y1,x2,y2)
+{
+	var xd = x2-x1;
+	var yd = y2-y1;
+	return Math.sqrt(xd*xd + yd*yd);
+}
 
 
 function queueUpdate()
@@ -81,6 +90,11 @@ function updateGeom()
         
         if(!geoms[vid])geoms[vid]=new CGL.Geometry();
 
+        var minDist=9999999;
+
+// console.log(cell.site);
+
+
         for(var j=0;j<cell.halfedges.length;j++)
         {
             var edge=cell.halfedges[j].edge;
@@ -88,10 +102,9 @@ function updateGeom()
             verts.push(cell.site.x);
             verts.push(cell.site.y);
             verts.push(pExtrCenter.get());
+            tc.push(0);
+            tc.push(0);
             indices.push(verts.length/3-1);
-            
-            tc.push(0);
-            tc.push(0);
 
             verts.push(edge.va.x);
             verts.push(edge.va.y);
@@ -99,7 +112,10 @@ function updateGeom()
             tc.push(1);
             tc.push(1);
             indices.push(verts.length/3-1);
-            
+
+            // minDist=Math.min(Math.abs(cell.site.x-edge.va.x),minDist);
+            // minDist=Math.min(Math.abs(cell.site.y-edge.va.y),minDist);
+
             verts.push(edge.vb.x);
             verts.push(edge.vb.y);
             verts.push(0);
@@ -115,7 +131,35 @@ function updateGeom()
         
         if(!meshes[vid]) meshes[vid]=new CGL.Mesh(op.patch.cgl,geoms[vid]);
             else meshes[vid].setGeom(geoms[vid]);
+        
+        meshes[vid].pos=[sites[ic].x,sites[ic].y,0];
+        
+        
+        var md=99999;
+
+        for (var s = 0; s < sites.length; s++)
+        {
+            var d=distance(
+                sites[ic].x,sites[ic].y,
+                sites[s].x,sites[s].y);
+
+            if(d!==0 )
+            {
+                md=Math.min(d,md);
+                sites[ic].md=md/2;
+                sites[ic].mdIndex=s;
+            }
+        }
+        
+        // md=md*md;
+        meshes[vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
+        
+        // console.log(md);
     }
+    
+    
+    
+
 }
 
 render.onTriggered=function()
@@ -127,7 +171,20 @@ render.onTriggered=function()
     oldPrim=shader.glPrimitive;
 
     for(var i in meshes)
-        meshes[i].render(op.patch.cgl.getShader());
+    {
+        if(pRender.get())meshes[i].render(op.patch.cgl.getShader());
+
+        if(next.isLinked())
+        {
+            cgl.pushMvMatrix();
+            mat4.translate(cgl.mvMatrix,cgl.mvMatrix, meshes[i].pos);
+            mat4.scale(cgl.mvMatrix,cgl.mvMatrix, meshes[i].scale);
+
+            next.trigger();
+            cgl.popMvMatrix();
+        }
+    }
+        
 
 
 };
