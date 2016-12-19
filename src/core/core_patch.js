@@ -120,7 +120,7 @@ CABLES.Patch.prototype.getFilePath=function(filename)
 
 CABLES.Patch.prototype.clear=function()
 {
-    CGL.TextureEffectMesh=null;
+    this.cgl.TextureEffectMesh=null;
     this.animFrameOps.length=0;
     this.timer=new CABLES.Timer();
     while(this.ops.length>0)
