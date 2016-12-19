@@ -354,8 +354,6 @@ normIntensity.set(1);
         }
     }
 
-    console.log("light ok...");
-
 }
 
 var bindTextures=function()
