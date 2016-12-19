@@ -12,8 +12,8 @@ for(var i=0; i<N_OUT_PORTS; i++) {
     outPorts[i] = op.outValue("Part " + (i+1))
 }
 
-inString.onValueChanged = function() {
-    console.log("Change");
+inString.onValueChanged = function()
+{
     var s = inString.get();
     if(s) {
         var arr = s.split(separator.get());

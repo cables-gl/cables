@@ -354,7 +354,7 @@ normIntensity.set(1);
         }
     }
     
-    console.log("light ok...");
+    // console.log("light ok...");
 
 }
 
