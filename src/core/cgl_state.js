@@ -45,7 +45,7 @@ CGL.State=function()
 
     this.setCanvas=function(id)
     {
-        CGL.TextureEffectMesh=null;
+        CGL.TextureEffectMesh=CGL.TextureEffectMesh||null;
         this.canvas=document.getElementById(id);
 
         if(!this.patch.config.canvas) this.patch.config.canvas={};

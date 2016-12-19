@@ -44,7 +44,7 @@ use `CABLES.EMBED.addPatch(...)` to create a canvas element and insert it into a
 ```
 
 
-## Advanced: 
+## Advanced: Create Canvas and Patch  
 
 Create the Canvas Element yourself. Load the Patch and use the canvas id as parameter. Cables will then use this canvas. The Canvas is not resized automatically.
 

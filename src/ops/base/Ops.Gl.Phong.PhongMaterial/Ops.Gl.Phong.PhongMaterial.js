@@ -253,7 +253,7 @@ normIntensity.set(1);
 {
     //lights
 
-    
+
     var numLights=-1;
 
     var updateLights=function()
@@ -278,24 +278,24 @@ normIntensity.set(1);
             numLights=num;
             shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
         }
-            
+
 
         // console.log('lights...',numLights,num);
 
 //         if(num!=numLights)
 //         {
-            
+
 //             if(shader)
 //             {
-                
+
 //                 console.log('reset lights...');
-                
+
 //                 count=0;
 //                 // lights.length=0;
 
 //                 // for(i=0;i<16;i++)
 //                 // {
-                    
+
 //                 //     new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
 //                 //     new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
 //                 //     new CGL.Uniform(shader,'3f','lights['+count+'].color',[0,0,0]);
@@ -346,14 +346,14 @@ normIntensity.set(1);
 
                         lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);
                     }
-    
+
                     count++;
                 }
             // console.log(count,'lights');
             // cgl.frameStore.phong.lights.length=0;
         }
     }
-    
+
     console.log("light ok...");
 
 }
@@ -365,7 +365,7 @@ var bindTextures=function()
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
-    
+
     if(aoTexture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
@@ -413,7 +413,7 @@ var bindTextures=function()
 var doRender=function()
 {
     if(!shader)return;
-    
+
     cgl.setShader(shader);
     updateLights();
     shader.bindTextures();
