@@ -7,66 +7,98 @@
 - The archive contains an `index.html`-file – put this on a web-server and load it, your project should be shown. You can open your browser’s developer tools to check if there are any errors.
 - An easy way to start a local web-server on your computer is by using a program like [anvil](anvilformac.com) – after you downloaded the zip file of your project and unpacked it, just drag the extracted folder onto the menu bar icon of *anvil* and click on the newly created local web-server to open it in your browser
 
-## Parameters
+## Simple: Insert patch into an HTML container element
+
+use `CABLES.EMBED.addPatch(...)` to create a canvas element and insert it into a container element. You can then set the Size of the container Element and the canvas will be resized automatically.
+
+```html
+<html>
+<head>
+    <title>cables</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+        #mypatch
+        {
+            width:800px;
+            height:480px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mypatch"></div>
+
+    <script type="text/javascript" src="js/libs.core.min.js"></script>
+    <script type="text/javascript" src="js/cables.min.js"></script>
+    <script type="text/javascript" src="js/ops.js"></script>
+
+    <script>
+        CABLES.EMBED.addPatch("mypatch",
+        {
+            patchFile:'js/city.json',
+            prefixAssetPath:''
+        });
+    </script>
+</body>
+</html>
+
+```
+
+
+## Advanced: 
+
+Create the Canvas Element yourself. Load the Patch and use the canvas id as parameter. Cables will then use this canvas. The Canvas is not resized automatically.
+
+```html
+<html>
+<head>
+    <title>cables</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+    
+    <canvas id="glcanvas" width="800" height="480"></canvas>
+
+    <script type="text/javascript" src="js/libs.core.min.js"></script>
+    <script type="text/javascript" src="js/cables.min.js"></script>
+    <script type="text/javascript" src="js/ops.js"></script>
+
+    <script>
+
+        var patch=null
+
+        document.addEventListener("DOMContentLoaded", function(event)
+        {
+            patch=new CABLES.Patch(
+            {
+                patchFile:'js/city.json',
+                prefixAssetPath:'',
+                glCanvasId:'glcanvas',
+                onError:alert
+            });
+        });
+
+
+    </script>
+</body>
+</html>
+```
+
+### Pausing the Patch
+
+For performance Reasons, you should pause the patch, when its not visible using`patch.pause()` . To Resume rendering use `patch.resume()`
+
+## Patch Option Parameters
 
 - `glCanvasId` (string): The element ID of your canvas object
-- `prefixAssetPath` (string): Path where to find the assets folder
+- `prefixAssetPath` (string): Path where to find the assets folder 
 - `onError` (function): Function to be called if a critical error occurs (e.g. browser has no WebGL / Web Audio)
 - `silent` (bool): Enable / disable all logging to console.
+- `glCanvasResizeToWindow` Resize the Canvas to the size of the window
 
-## Embedding Multiple Projects On A Page
+## Settings variables programmatically
 
-This example shows two projects on one page. The projects are loaded one after another.
+In your cables patch you can use `Ops.Vars.GetVar` to use Values, that can be easily set from outside:
 
-```javascript
-function loadScene1()
-{
-    var scene=new Scene(
-    {
-        glCanvasId:'glcanvas1',
-        prefixAssetPath:'/myabsolutepath/'
-    });
+`patch.vars['color_r']=1.0;`
 
-    CABLES.ajax('js/digital_bisquit20.json',function(err,data)
-    {
-        scene.deSerialize(JSON.parse(data)); 
-    });
-    scene.timer.play();
-}
-
-function loadScene2()
-{
-    // remove callback to not load it twice...
-    CGL.onLoadingAssetsFinished=null;
-
-    var scene2=new Scene(
-    {
-        glCanvasId:'glcanvas2',
-        prefixAssetPath:'blahund/'
-    });
-
-    CABLES.ajax('js/digital_bisquit28.json',function(err,data)
-    {
-        scene2.deSerialize(JSON.parse(data)); 
-    });
-    scene2.timer.play();
-}
-
-document.addEventListener("DOMContentLoaded", function(event)
-{
-    // insert 2 canvas elements...
-    var canv = document.createElement('canvas');
-    canv.setAttribute("id", "glcanvas1");
-    document.body.appendChild(canv);
-
-    var canv2 = document.createElement('canvas');
-    canv2.setAttribute("id", "glcanvas2");
-    document.body.appendChild(canv2);
-
-    // setup callback to load scene 2 after everithing for the first scene is loaded and playing...
-    CGL.onLoadingAssetsFinished=loadScene2;
-
-    // start loading scene 1
-    loadScene1();
-});
-```
+The Parameter "name" of GetVar is the `vars` Index, in this case "color_r".

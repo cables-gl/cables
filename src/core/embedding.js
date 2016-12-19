@@ -22,12 +22,12 @@ CABLES.EMBED.addPatch=function(_element,options)
     canvEl.width=el.clientWidth;
     canvEl.height=el.clientHeight;
 
-    window.addEventListener( 'resize', function()
-    {
-        console.log("resize ",this.id,el.clientWidth,el.id);
-        this.setAttribute("width",el.clientWidth);
-        this.height=el.clientHeight;
-    }.bind(canvEl));
+    window.addEventListener( 'resize',
+        function()
+        {
+            this.setAttribute("width",el.clientWidth);
+            this.height=el.clientHeight;
+        }.bind(canvEl));
 
     el.appendChild(canvEl);
 
