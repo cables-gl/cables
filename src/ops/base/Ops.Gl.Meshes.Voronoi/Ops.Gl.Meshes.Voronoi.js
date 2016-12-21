@@ -4,6 +4,9 @@ var pSites=op.inArray("Site Points");
 
 var pRender=op.inValueBool("Render",true);
 
+var pWidth=op.inValue("Width",2);
+var pHeight=op.inValue("Height",2);
+
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
 
 
@@ -17,6 +20,19 @@ var cgl=op.patch.cgl;
 var voronoi = new Voronoi();
 var bbox = {xl: -1, xr: 1, yt: -1, yb: 1}; // xl is x-left, xr is x-right, yt is y-top, and yb is y-bottom
 var sites=[];
+
+function updateSize()
+{
+    bbox.xl=-pWidth.get()/2;
+    bbox.xr=pWidth.get()/2;
+    bbox.yt=-pHeight.get()/2;
+    bbox.yb=pHeight.get()/2;
+    queueUpdate();
+}
+
+pWidth.onChange=updateSize;
+pHeight.onChange=updateSize;
+
 
 for(var i=0;i<75;i++)
 {
@@ -38,7 +54,6 @@ pSites.onChange=function()
         var arr=pSites.get();
         if(arr.length%2!==0)arr.length--;
         sites.length=arr.length/2;
-        console.log(sites.length);
 
         for(var i=0;i<sites.length;i++)
         {
@@ -91,9 +106,6 @@ function updateGeom()
         if(!geoms[vid])geoms[vid]=new CGL.Geometry();
 
         var minDist=9999999;
-
-// console.log(cell.site);
-
 
         for(var j=0;j<cell.halfedges.length;j++)
         {
@@ -154,12 +166,7 @@ function updateGeom()
         // md=md*md;
         meshes[vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
         
-        // console.log(md);
     }
-    
-    
-    
-
 }
 
 render.onTriggered=function()

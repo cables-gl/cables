@@ -27,7 +27,6 @@ pPointSize.onChange=function()
         elements[i].style.width=pointSize+"px";
         elements[i].style.height=pointSize+"px";
         elements[i].style['border-radius']=2*pointSize+"px";
-        
     }
 
 };
@@ -74,6 +73,8 @@ var textContent=null;
 function onMouseEnter(e)
 {
     var index=e.currentTarget.index;
+    
+    
     if(elementOver)
     {
         elementOver.innerHTML=elements[index].title;
@@ -179,11 +180,13 @@ exec.onTriggered=function()
     // x=( cgl.getViewPort()[2]-( cgl.getViewPort()[2]  * 0.5 - trans[0] * cgl.getViewPort()[2] * 0.5 / trans[2] ))-pointSize/2;
     // y=cgl.getViewPort()[3]-( cgl.getViewPort()[3]  * 0.5 + trans[1] * cgl.getViewPort()[3] * 0.5 / trans[2] )-pointSize/2;
 
+    // var rect = op.patch.cgl.canvas.getBoundingClientRect();
+    var offsetTop = op.patch.cgl.canvas.offsetTop;
 
     if(elements[currentIndex] && (elements[currentIndex].y!=y || elements[currentIndex].x!=x))
     {
         elements[currentIndex].title=title.get();
-        elements[currentIndex].style.top=y+'px';
+        elements[currentIndex].style.top=offsetTop+y+'px';
         elements[currentIndex].style.left=x+'px';
         elements[currentIndex].y=y;
         elements[currentIndex].x=x;
