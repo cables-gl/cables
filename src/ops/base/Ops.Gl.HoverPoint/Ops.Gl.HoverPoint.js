@@ -101,6 +101,7 @@ function init()
     elements[currentIndex].style.position="absolute";
     
     // elements[currentIndex].style.display="block";
+    elements[currentIndex].classList.add("hoverpoint");
     
     elements[currentIndex].style.width=pointSize+"px";
     elements[currentIndex].style.height=pointSize+"px";

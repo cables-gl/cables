@@ -12,9 +12,14 @@ val.ignoreValueSerialize=true;
 function updateVar()
 {
     if(op.patch.vars && op.patch.vars[varname.get()])
-        val.set( op.patch.vars[varname.get()] );
-        else 
+    {
+        if(op.patch.vars[varname.get()]!=val.get()) 
+            val.set( op.patch.vars[varname.get()] );
+    }
+    else 
+    {
         val.set(defaultValue.get());
+    }
 }
 
 exe.onTriggered=updateVar;

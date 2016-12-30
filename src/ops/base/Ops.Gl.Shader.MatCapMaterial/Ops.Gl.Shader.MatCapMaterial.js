@@ -32,6 +32,9 @@ this.diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",OP_PORT_TYPE_V
 this.diffuseRepeatX.set(1.0);
 this.diffuseRepeatY.set(1.0);
 
+var pOpacity=op.inValueSlider("Opacity",1);
+
+
 this.diffuseRepeatX.onValueChanged=function()
 {
     self.diffuseRepeatXUniform.setValue(self.diffuseRepeatX.get());
@@ -336,7 +339,7 @@ var srcFrag=''
 
     .endl()+'uniform float diffuseRepeatX;'
     .endl()+'uniform float diffuseRepeatY;'
-
+    .endl()+'uniform float opacity;'
 
     .endl()+'#ifdef HAS_DIFFUSE_TEXTURE'
     .endl()+'   uniform sampler2D texDiffuse;'
@@ -440,6 +443,8 @@ var srcFrag=''
     .endl()+'       col+=spec;'
     .endl()+'    #endif'
 
+    .endl()+'    col.a*=opacity;'
+
     .endl()+'    {{MODULE_COLOR}}'
 
     // .endl()+'    col.xy=vn;'
@@ -457,7 +462,7 @@ var srcFrag=''
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl,'MatCapMaterial');
-
+var uniOpacity=new CGL.Uniform(shader,'f','opacity',pOpacity);
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
 
