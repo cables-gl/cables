@@ -529,8 +529,6 @@ CGL.Geometry.LinesToGeom=function(points,options)
         var vEnd=vec3.create();
         var q=quat.create();
 
-        tc.push(p/3/points.length);
-        tc.push(0);
 
 
 
@@ -580,30 +578,48 @@ CGL.Geometry.LinesToGeom=function(points,options)
         rectPoints[index++ ]=vecA[1];
         rectPoints[index++ ]=vecA[2];
 
+        tc.push(p/3/points.length);
+        tc.push(0);
+
         // b
         rectPoints[index++ ]=vecB[0];
         rectPoints[index++ ]=vecB[1];
         rectPoints[index++ ]=vecB[2];
 
+        tc.push(p/3/points.length);
+        tc.push(0);
+
         // c
         rectPoints[index++ ]=vecC[0];
         rectPoints[index++ ]=vecC[1];
         rectPoints[index++ ]=vecC[2];
+
+        tc.push(p/3/points.length);
+        tc.push(0);
 
         // d
         rectPoints[index++ ]=vecD[0];
         rectPoints[index++]=vecD[1];
         rectPoints[index++]=vecD[2];
 
+        tc.push(p/3/points.length);
+        tc.push(0);
+
         // c
         rectPoints[index++ ]=vecC[0];
         rectPoints[index++ ]=vecC[1];
         rectPoints[index++ ]=vecC[2];
 
+        tc.push(p/3/points.length);
+        tc.push(0);
+
         // b
         rectPoints[index++]=vecB[0];
         rectPoints[index++]=vecB[1];
         rectPoints[index++]=vecB[2];
+
+        tc.push(p/3/points.length);
+        tc.push(0);
 
         if(lastC)
         {
@@ -611,26 +627,44 @@ CGL.Geometry.LinesToGeom=function(points,options)
             rectPoints[index++]=vecA[1];
             rectPoints[index++]=vecA[2];
 
+            tc.push(p/3/points.length);
+            tc.push(0);
+
             rectPoints[index++]=vecB[0];
             rectPoints[index++]=vecB[1];
             rectPoints[index++]=vecB[2];
 
+            tc.push(p/3/points.length);
+            tc.push(0);
+
             rectPoints[index++]=lastC[0];
             rectPoints[index++]=lastC[1];
             rectPoints[index++]=lastC[2];
+
+            tc.push(p/3/points.length);
+            tc.push(0);
 
 
             rectPoints[index++]=lastD[0];
             rectPoints[index++]=lastD[1];
             rectPoints[index++]=lastD[2];
 
+            tc.push(p/3/points.length);
+            tc.push(0);
+
             rectPoints[index++]=vecA[0];
             rectPoints[index++]=vecA[1];
             rectPoints[index++]=vecA[2];
 
+            tc.push(p/3/points.length);
+            tc.push(0);
+
             rectPoints[index++]=vecB[0];
             rectPoints[index++]=vecB[1];
             rectPoints[index++]=vecB[2];
+
+            tc.push(p/3/points.length);
+            tc.push(0);
         }
         else
         {
