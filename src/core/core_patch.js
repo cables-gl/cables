@@ -76,9 +76,7 @@ CABLES.Patch = function(cfg)
 
             this.timer.play();
         }
-
     }
-
 
 };
 

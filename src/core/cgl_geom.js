@@ -647,7 +647,7 @@ CGL.Geometry.LinesToGeom=function(points,options)
     // console.log(rectPoints);
     for(i=0;i<rectPoints.length;i++)
     {
-        tc.push(0);
+        tc.push(i/rectPoints.length);
         tc.push(0);
     }
 

@@ -27,9 +27,7 @@ var vec=vec3.create();
 
 function analyze(x,y,z)
 {
-    
     var livingNeighbours=0;
-    
 
     if(cells[index(x-1,y,z)]) livingNeighbours++;
     // if(cells[index(x,y)]) livingNeighbours++;
@@ -46,6 +44,7 @@ function analyze(x,y,z)
 
 
 
+    if(cells[index(x  ,y,z+1)]) livingNeighbours++;
     if(cells[index(x-1,y,z+1)]) livingNeighbours++;
     if(cells[index(x+1,y,z+1)]) livingNeighbours++;
 
@@ -59,6 +58,7 @@ function analyze(x,y,z)
 
 
 
+    if(cells[index(x  ,y,z-1)]) livingNeighbours++;
     if(cells[index(x-1,y,z-1)]) livingNeighbours++;
     if(cells[index(x+1,y,z-1)]) livingNeighbours++;
 
@@ -70,14 +70,13 @@ function analyze(x,y,z)
     if(cells[index(x  ,y+1,z-1)]) livingNeighbours++;
     if(cells[index(x+1,y+1,z-1)]) livingNeighbours++;
 
-
     cellsA[index(x,y,z)]=cells[index(x,y,z)];
+
+
     if(livingNeighbours<2*2)cellsA[index(x,y,z)]=false;
     if(livingNeighbours>3*3)cellsA[index(x,y,z)]=false;
-    if(livingNeighbours==3*3)cellsA[index(x,y,z)]=true;
     
-    
-    
+    if(livingNeighbours==3*3) cellsA[index(x,y,z)]=true;
 }
 
 function index(x,y,z)
@@ -106,7 +105,6 @@ render.onTriggered=function()
     for(var i=0;i<cells.length;i++)
         cells[i]=cellsA[i];
 
-
     for(var x=0;x<size;x++)
     {
         for(var y=0;y<size;y++)
@@ -120,14 +118,12 @@ render.onTriggered=function()
                     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
                     next.trigger();
                     cgl.popMvMatrix();
-                    
                 }
             }
         }
     }
 
-    
-    
+
 };
 
 
