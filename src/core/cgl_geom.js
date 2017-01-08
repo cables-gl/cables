@@ -645,9 +645,9 @@ CGL.Geometry.LinesToGeom=function(points,options)
     verts=rectPoints;
 
     // console.log(rectPoints);
-    for(i=0;i<rectPoints.length;i++)
+    for(i=0;i<rectPoints.length/3;i++)
     {
-        tc.push(i/rectPoints.length);
+        tc.push(i/rectPoints.length/3);
         tc.push(0);
     }
 
