@@ -529,6 +529,11 @@ CGL.Geometry.LinesToGeom=function(points,options)
         var vEnd=vec3.create();
         var q=quat.create();
 
+        tc.push(p/3/points.length);
+        tc.push(0);
+
+
+
         vec3.set(vStart,
             points[p+0],
             points[p+1],
@@ -645,11 +650,11 @@ CGL.Geometry.LinesToGeom=function(points,options)
     verts=rectPoints;
 
     // console.log(rectPoints);
-    for(i=0;i<rectPoints.length/3;i++)
-    {
-        tc.push(i/rectPoints.length/3);
-        tc.push(0);
-    }
+    // for(i=0;i<rectPoints.length/3;i++)
+    // {
+    //     tc.push(i/rectPoints.length/3);
+    //     tc.push(0);
+    // }
 
     count=0;
     for(i=0;i<rectPoints.length;i+=3)
