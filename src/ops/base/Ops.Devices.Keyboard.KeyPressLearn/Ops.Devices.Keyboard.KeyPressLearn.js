@@ -6,7 +6,7 @@ var onRelease=op.addOutPort(new Port(op,"on release",OP_PORT_TYPE_FUNCTION));
 var learn = op.addInPort( new Port( op, "learn", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var learnedKeyCode = op.addInPort( new Port( op, "key code", OP_PORT_TYPE_VALUE));
 var canvasOnly=op.addInPort(new Port(op,"canvas only",OP_PORT_TYPE_VALUE, {"display": "bool"}));
-
+var outPressed=op.outValue("Pressed",false);
 var modKey=op.addInPort(new Port(op,"Mod Key",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['none','alt']} ));
 
 var cgl=op.patch.cgl;
@@ -28,17 +28,18 @@ function onKeyDown(e)
             
             if(modKey.get()=='alt' )
             {
-                if(e.altKey==true)
+                if(e.altKey===true)
                 {
                     onPress.trigger();
+                    outPressed.set(true);
                 }
             }
             else 
-            onPress.trigger();
-            
-            
-            // op.log("Key pressed, key code: " + e.keyCode);
-            
+            {
+                onPress.trigger();
+                outPressed.set(true);
+            }
+
         }
     }
 }
@@ -47,6 +48,7 @@ function onKeyUp(e) {
     if(e.keyCode == learnedKeyCode.get()) {
         // op.log("Key released, key code: " + e.keyCode);
         onRelease.trigger();
+        outPressed.set(false);
     }
 }
 
@@ -83,6 +85,7 @@ function removeListeners() {
     document.removeEventListener("keyup", onKeyUp, false);
     cgl.canvas.removeEventListener('keydown', onKeyDown, false);
     cgl.canvas.removeEventListener('keyup', onKeyUp, false);
+    outPressed.set(false);
 }
 
 function addCanvasListener() {
