@@ -1,0 +1,53 @@
+op.name="PolyColor";
+
+var pDefaultR=op.addInPort(new Port(op,"default r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var pDefaultG=op.addInPort(new Port(op,"default g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var pDefaultB=op.addInPort(new Port(op,"default b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var pDefaultA=op.addInPort(new Port(op,"default a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var pName=op.inValueString("name","paramname");
+var pTitle=op.inValueString("title","something readable");
+var pDescription=op.inValueString("description","description");
+var pTab=op.inValueString("tab","tab");
+var pOrder=op.inValueString("order","0");
+
+
+
+var resultR=op.outValue("value r");
+var resultG=op.outValue("value g");
+var resultB=op.outValue("value b");
+var resultA=op.outValue("value a");
+
+pDefaultR.onChange=update;
+pDefaultG.onChange=update;
+pDefaultB.onChange=update;
+pDefaultA.onChange=update;
+
+this.setDefaultVars=function()
+{
+    op.patch.vars[pName.get()]=pDefault.get();
+};
+
+window.polyshapes=window.polyshapes||{};
+window.polyshapes.polyvalues=window.polyshapes.polyvalues||[];
+window.polyshapes.polyvalues.push(op);
+
+
+this.updateVarValue=function()
+{
+    if(op.patch.vars[pName.get()]!==undefined)
+    {
+        resultR.set(op.patch.vars[pName.get()][0]);
+        resultG.set(op.patch.vars[pName.get()][1]);
+        resultB.set(op.patch.vars[pName.get()][2]);
+    }
+
+};
+
+
+function update()
+{
+    resultR.set(pDefaultR.get());
+    resultG.set(pDefaultG.get());
+    resultB.set(pDefaultB.get());
+    resultA.set(pDefaultA.get());
+}

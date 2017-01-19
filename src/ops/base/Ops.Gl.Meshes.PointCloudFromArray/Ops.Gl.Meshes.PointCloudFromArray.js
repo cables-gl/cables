@@ -28,15 +28,15 @@ function reset()
     geom=new CGL.Geometry();
     
     var num=verts.length/3;
+    num=Math.round(num);
     var texCoords=[];
     var vertColors=[];
     texCoords.length=num*2;
     var changed=false;
-    
-    
-    var rndTc=pTexCoordRand.get();
 
-Math.randomSeed=seed.get();
+    var rndTc=pTexCoordRand.get();
+    Math.randomSeed=seed.get();
+    
     for(var i=0;i<num;i++)
     {
         

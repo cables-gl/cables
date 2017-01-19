@@ -7,6 +7,10 @@ var amount=op.inValueSlider("Amount",1);
 
 
 var inSize=op.addInPort(new Port(op,"size",OP_PORT_TYPE_VALUE,{display:'range'}));
+
+var inInner=op.addInPort(new Port(op,"Inner",OP_PORT_TYPE_VALUE,{display:'range'}));
+
+
 var inFadeOut=op.addInPort(new Port(op,"fade Out",OP_PORT_TYPE_VALUE,{display:'range'}));
 
 var warnOverflow=op.addInPort(new Port(op,"warn overflow",OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -28,6 +32,7 @@ var srcFrag=''
 
     .endl()+'uniform float amount;'
     .endl()+'uniform float size;'
+    .endl()+'uniform float inner;'
     .endl()+'uniform float fadeOut;'
 
     .endl()+'uniform float r;'
@@ -47,7 +52,7 @@ var srcFrag=''
     .endl()+'   float v=0.0;'
     .endl()+'   float fade=fadeOut+0.002;'
 
-    .endl()+'   if(dist<sz) v=1.0;'
+    .endl()+'   if(dist<sz && dist>inner*sz) v=1.0;'
 
     .endl()+'   #ifdef FALLOFF_SMOOTHSTEP'
     .endl()+'       if(dist>sz && dist<sz+fade)v=1.0-(smoothstep(0.0,1.0,(dist-sz)/(fade)) );'
@@ -56,15 +61,15 @@ var srcFrag=''
     .endl()+'       if(dist>sz && dist<sz+fade)v=1.0-((dist-sz)/(fade));'
     .endl()+'   #endif'
 
-    .endl()+'   col=vec4( _blend(base.rgb,vec3(v*r,v*g,v*b)) ,1.0);'
-    .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
+    .endl()+'   col=vec4( _blend(base.rgb,vec3(r,g,b)) ,1.0);'
+    .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*v*amount),1.0);'
 
     .endl()+'   gl_FragColor=col;'
 
     .endl()+'   #ifdef WARN_OVERFLOW'
     .endl()+'       float width=0.01;'
     .endl()+'       if( texCoord.x>1.0-width || texCoord.y>1.0-width || texCoord.y<width || texCoord.x<width )'
-    .endl()+'           if(v>0.0)gl_FragColor = vec4(1.0,0.0,0.0, 1.0);'
+    .endl()+'           if(v>0.001*amount)gl_FragColor = vec4(1.0,0.0,0.0, 1.0);'
     .endl()+'   #endif'
 
     .endl()+'}';
@@ -79,6 +84,8 @@ var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 op.onLoaded=shader.compile;
 var uniSize=new CGL.Uniform(shader,'f','size',inSize);
 var uniFadeOut=new CGL.Uniform(shader,'f','fadeOut',inFadeOut);
+var uniInner=new CGL.Uniform(shader,'f','inner',inInner);
+
 
 r.set(1.0);
 g.set(1.0);

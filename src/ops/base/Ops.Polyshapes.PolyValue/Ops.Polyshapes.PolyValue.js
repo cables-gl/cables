@@ -1,23 +1,39 @@
 op.name="PolyValue";
 
 var pDefault=op.inValue("default",0);
-var pName=op.inValueString("name","paramname");
-var pTitle=op.inValueString("title","something readable");
-var pDescription=op.inValueString("description","description");
-
-var pDisplay=op.inValueSelect("display",['slider','input'],"slider");
-
 var pMin=op.inValue("min",0);
 var pMax=op.inValue("max",1);
 
+var pName=op.inValueString("name","paramname");
+var pTitle=op.inValueString("title","something readable");
+var pDescription=op.inValueString("description","description");
+var pTab=op.inValueString("tab","tab");
+var pOrder=op.inValueString("order","0");
+
+var pDisplay=op.inValueSelect("display",['slider','slider int','input'],"slider");
 var result=op.outValue("value");
 
 pDefault.onChange=update;
 
-this.setDefaultVars=function()
+
+window.polyshapes=window.polyshapes||{};
+window.polyshapes.polyvalues=window.polyshapes.polyvalues||[];
+window.polyshapes.polyvalues.push(op);
+
+window.polyshapes.updateParams=function()
 {
-    op.patch.vars[pName.get()]=pDefault.get();
+    for(var i=0;i<window.polyshapes.polyvalues.length;i++)
+    {
+        window.polyshapes.polyvalues[i].updateVarValue();
+    }
 };
+
+this.updateVarValue=function()
+{
+    if(op.patch.vars[pName.get()]!==undefined)
+        result.set(op.patch.vars[pName.get()]);
+};
+
 
 function update()
 {

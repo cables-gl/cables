@@ -117,34 +117,40 @@ function updateGeom()
             verts.push(cell.site.x);
             verts.push(cell.site.y);
             verts.push(pExtrCenter.get());
-            tc.push((cell.site.x+w/2)/w);
-            tc.push((cell.site.y+h/2)/h);
+            // tc.push((cell.site.x+w/2)/w);
+            // tc.push((cell.site.y+h/2)/h);
             // tc.push(cell.site.y/h);
             // tc.push(0);
             // tc.push(0);
+            tc.push(cell.site.x/w-0.5);
+            tc.push(cell.site.y/h-0.5);
 
             indices.push(verts.length/3-1);
 
             verts.push(edge.va.x);
             verts.push(edge.va.y);
             verts.push(0);
-            tc.push((edge.va.x+w/2)/w);
-            tc.push((edge.va.y+h/2)/h);
+            // tc.push((edge.va.x+w/2)/w);
+            // tc.push((edge.va.y+h/2)/h);
             // tc.push(edge.va.x/w);
             // tc.push(edge.va.y/h);
             // tc.push(1);
             // tc.push(1);
+            tc.push(cell.site.x/w-0.5);
+            tc.push(cell.site.y/h-0.5);
             indices.push(verts.length/3-1);
 
             verts.push(edge.vb.x);
             verts.push(edge.vb.y);
             verts.push(0);
-            tc.push((edge.vb.x+w/2)/w);
-            tc.push((edge.vb.y+h/2)/h);
+            // tc.push((edge.vb.x+w/2)/w);
+            // tc.push((edge.vb.y+h/2)/h);
             // tc.push(edge.vb.x/w);
             // tc.push(edge.vb.y/h);
             // tc.push(1);
             // tc.push(1);
+            tc.push(cell.site.x/w-0.5);
+            tc.push(cell.site.y/h-0.5);
 
             indices.push(verts.length/3-1);
         }

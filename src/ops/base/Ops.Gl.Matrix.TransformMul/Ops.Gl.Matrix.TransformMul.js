@@ -1,23 +1,21 @@
-    Op.apply(this, arguments);
-    var self=this;
-    var cgl=self.patch.cgl;
+var cgl=op.patch.cgl;
 
-    this.name='TransformMul';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    this.mul=this.addInPort(new Port(this,"mul"));
+op.name='TransformMul';
+var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var mul=this.addInPort(new Port(this,"mul"));
 
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-    this.render.onTriggered=function()
-    {
-        var pos=[0,0,0];
-        vec3.transformMat4(pos, [0,0,0], cgl.mvMatrix);
+render.onTriggered=function()
+{
+    var pos=[0,0,0];
+    vec3.transformMat4(pos, [0,0,0], cgl.mvMatrix);
 
-        cgl.pushMvMatrix();
-        vec3.mul(pos,pos,[self.mul.get(),self.mul.get(),self.mul.get()] );
+    cgl.pushMvMatrix();
+    vec3.mul(pos,pos,[mul.get(),mul.get(),mul.get()] );
 
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos );
-        self.trigger.trigger();
+    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos );
+    trigger.trigger();
 
-        cgl.popMvMatrix();
-    };
+    cgl.popMvMatrix();
+};

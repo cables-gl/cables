@@ -21,13 +21,20 @@ var points=[];
 var mesh=null;
 var oldLength=0;
 var cgl=op.patch.cgl;
-cgl.frameStore.SplinePoints=[];
+
 
 var geom=new CGL.Geometry();
 
+var mySplinePoints=[];
+var oldSplinePoints=null;
 render.onTriggered=function()
 {
-    cgl.frameStore.SplinePoints.length=0;
+
+    if(cgl.frameStore.SplinePoints) oldSplinePoints=cgl.frameStore.SplinePoints;
+
+    mySplinePoints.length=0;
+    cgl.frameStore.SplinePoints=mySplinePoints;
+    
 
     var shader=cgl.getShader();
     trigger.trigger();
@@ -66,7 +73,12 @@ render.onTriggered=function()
     outPoints.set(points);
 
     cgl.popMvMatrix();
-    cgl.frameStore.SplinePoints.length=0;
+    // cgl.frameStore.SplinePoints.length=0;
+    mySplinePoints.length=0;
+    
+    if(oldSplinePoints) cgl.frameStore.SplinePoints=oldSplinePoints;
+    oldSplinePoints=null;
+
 };
 
 function ip(x0,x1,x2,t)//Bezier 
@@ -81,7 +93,7 @@ function bufferData()
     var i=0,k=0,j=0;
     var subd=subDivs.get();
 
-    if(cgl.frameStore.SplinePoints.length===0)return;
+    if(!cgl.frameStore.SplinePoints || cgl.frameStore.SplinePoints.length===0)return;
     points.length=0;
 
     if(doClose.get())

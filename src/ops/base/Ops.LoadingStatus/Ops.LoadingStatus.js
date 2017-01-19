@@ -87,7 +87,7 @@ var loadingId=patch.loading.start('delayloading','delayloading');
 setTimeout(function()
 {
     patch.loading.finished(loadingId);
-},2000);
+},100);
 
 this.exe.onTriggered= function()
 {
