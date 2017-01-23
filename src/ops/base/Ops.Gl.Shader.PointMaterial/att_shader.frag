@@ -7,6 +7,9 @@ precision highp float;
    #ifdef HAS_TEXTURE_DIFFUSE
        uniform sampler2D tex;
    #endif
+   #ifdef HAS_TEXTURE_MASK
+       uniform sampler2D texMask;
+   #endif
 #endif
 uniform float r;
 uniform float g;
@@ -23,6 +26,10 @@ void main()
 
 
     #ifdef HAS_TEXTURES
+
+        #ifdef HAS_TEXTURE_MASK
+            float mask=texture2D(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
+        #endif
 
 
         #ifdef HAS_TEXTURE_DIFFUSE
@@ -50,6 +57,10 @@ void main()
 
     #ifdef MAKE_ROUND
         if ((gl_PointCoord.x-0.5)*(gl_PointCoord.x-0.5) + (gl_PointCoord.y-0.5)*(gl_PointCoord.y-0.5) > 0.25) discard; //col.a=0.0;
+    #endif
+
+    #ifdef HAS_TEXTURE_MASK
+        col.a=mask;
     #endif
 
     gl_FragColor = col;

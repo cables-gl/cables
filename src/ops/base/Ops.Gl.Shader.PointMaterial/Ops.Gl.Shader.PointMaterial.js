@@ -54,12 +54,20 @@ render.onTriggered=doRender;
 var texture=op.inTexture("texture");
 var textureUniform=null;
 
+var textureMask=op.inTexture("Texture Mask");
+var textureMaskUniform=null;
+
 function bindTextures()
 {
     if(texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
+    }
+    if(textureMask.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, textureMask.get().tex);
     }
 }
 
@@ -108,6 +116,24 @@ texture.onValueChanged=function()
         textureUniform=null;
     }
 };
+
+textureMask.onValueChanged=function()
+{
+    if(textureMask.get())
+    {
+        if(textureMaskUniform!==null)return;
+        shader.removeUniform('texMask');
+        shader.define('HAS_TEXTURE_MASK');
+        textureMaskUniform=new CGL.Uniform(shader,'t','texMask',1);
+    }
+    else
+    {
+        shader.removeUniform('texMask');
+        shader.removeDefine('HAS_TEXTURE_MASK');
+        textureMaskUniform=null;
+    }
+};
+
 
 
 var colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
