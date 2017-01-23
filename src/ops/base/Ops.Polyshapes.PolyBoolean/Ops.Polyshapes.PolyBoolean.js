@@ -24,3 +24,13 @@ function update()
 {
     result.set(pDefault.get());
 }
+
+window.polyshapes=window.polyshapes||{};
+window.polyshapes.polyvalues=window.polyshapes.polyvalues||[];
+window.polyshapes.polyvalues.push(op);
+
+this.updateVarValue=function()
+{
+    if(op.patch.vars[pName.get()]!==undefined)
+        result.set(op.patch.vars[pName.get()]);
+};

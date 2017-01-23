@@ -9,7 +9,7 @@ var gType=op.inValueSelect("Type",['X','Y','XY','Radial']);
 var pos1=op.inValueSlider("Pos",0.5);
 
 var smoothStep=op.inValueBool("Smoothstep",true);
-
+smoothStep.onChange=updateSmoothstep;
 
 
 var r=op.addInPort(new Port(op,"r1",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
@@ -33,15 +33,17 @@ var shader=new CGL.Shader(cgl);
 var srcFrag=attachments.gradient_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag );
 
+updateSmoothstep();
+
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 var uniPos=new CGL.Uniform(shader,'f','pos',pos1);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-smoothStep.onChange=function()
+function updateSmoothstep()
 {
     if(smoothStep.get()) shader.define('GRAD_SMOOTHSTEP');
         else shader.removeDefine('GRAD_SMOOTHSTEP');
-};
+}
 
 gType.onChange=function()
 {

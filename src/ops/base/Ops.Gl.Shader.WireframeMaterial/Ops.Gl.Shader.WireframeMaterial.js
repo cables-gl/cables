@@ -97,6 +97,11 @@ var doRender=function()
     cgl.setShader(shader);
     trigger.trigger();
     cgl.setPreviousShader();
+    
+    if(true!==enableDepth.get()) cgl.gl.enable(cgl.gl.DEPTH_TEST);
+
+
+
 };
 
 var shader=new CGL.Shader(cgl,'Wireframe Material');

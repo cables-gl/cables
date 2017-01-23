@@ -6,8 +6,8 @@ var pMax=op.inValue("max",1);
 
 var pName=op.inValueString("name","paramname");
 var pTitle=op.inValueString("title","something readable");
-var pDescription=op.inValueString("description","description");
-var pTab=op.inValueString("tab","tab");
+var pDescription=op.inValueString("description","");
+var pTab=op.inValueString("tab","form");
 var pOrder=op.inValueString("order","0");
 
 var pDisplay=op.inValueSelect("display",['slider','slider int','input'],"slider");

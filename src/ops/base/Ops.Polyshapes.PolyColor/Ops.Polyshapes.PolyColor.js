@@ -6,8 +6,8 @@ var pDefaultB=op.addInPort(new Port(op,"default b",OP_PORT_TYPE_VALUE,{ display:
 var pDefaultA=op.addInPort(new Port(op,"default a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var pName=op.inValueString("name","paramname");
 var pTitle=op.inValueString("title","something readable");
-var pDescription=op.inValueString("description","description");
-var pTab=op.inValueString("tab","tab");
+var pDescription=op.inValueString("description","");
+var pTab=op.inValueString("tab","color");
 var pOrder=op.inValueString("order","0");
 
 

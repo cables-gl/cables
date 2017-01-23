@@ -296,8 +296,8 @@ var srcVert=''
 
     .endl()+'    vec4 pos = vec4( vPosition, 1. );'
 
-    .endl()+'    {{MODULE_VERTEX_POSITION}}'
     .endl()+'    mat4 mvMatrix= viewMatrix * modelMatrix;'
+    .endl()+'    {{MODULE_VERTEX_POSITION}}'
     .endl()+'    e = normalize( vec3( mvMatrix * pos ) );'
     .endl()+'    vec3 n = normalize( mat3(normalMatrix) * norm );'
 

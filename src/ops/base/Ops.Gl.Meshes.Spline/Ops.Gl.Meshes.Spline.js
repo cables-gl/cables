@@ -170,7 +170,7 @@ function bufferData()
 
     if(!points || points.length===0)
     {
-        console.log('no points...',cgl.frameStore.SplinePoints.length);
+        // console.log('no points...',cgl.frameStore.SplinePoints.length);
     }
 
     geom.vertices=points;
