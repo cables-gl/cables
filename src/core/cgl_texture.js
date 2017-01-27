@@ -101,7 +101,7 @@ CGL.Texture.prototype.setSize=function(w,h)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
 
-    if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP)
+    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
     {
         this._cgl.gl.generateMipmap(this.texTarget);
     }
@@ -123,8 +123,8 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
 
     this._setFilter();
-    
-    if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP)
+
+    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
     {
         this._cgl.gl.generateMipmap(this.texTarget);
     }
@@ -145,7 +145,7 @@ CGL.Texture.prototype.initTexture=function(img,filter)
 
     this._setFilter();
 
-    if(this.isPowerOfTwo() && this.filter==CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
+    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
 
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
@@ -200,7 +200,7 @@ CGL.Texture.prototype.getInfo=function()
 CGL.Texture.prototype._setFilter=function()
 {
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
-    if(!this.isPowerOfTwo() )
+    if( this._cgl.glVersion==1 && !this.isPowerOfTwo() )
     {
         // console.log( 'non power of two',this.width,this.height );
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);

@@ -10,6 +10,7 @@ CGL.State=function()
     var shaderStack=[];
     var frameBufferStack=[null];
     var viewPort=[0,0,0,0];
+    this.glVersion=0;
 
     this.temporaryTexture=null;
     this.frameStore={};
@@ -56,7 +57,19 @@ CGL.State=function()
         if(!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha=this.patch.config.canvas.alpha;
         if(!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias=this.patch.config.canvas.antialias;
 
-        this.gl=this.canvas.getContext("experimental-webgl",this.patch.config.canvas);
+        // this.gl=this.canvas.getContext("experimental-webgl",this.patch.config.canvas);
+
+        this.gl = this.canvas.getContext('webgl2');
+        if(this.gl)
+        {
+            this.glVersion=2;
+        }
+        else
+        {
+            this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+            this.glVersion=1;
+        }
+
 
         if(!this.gl)
         {

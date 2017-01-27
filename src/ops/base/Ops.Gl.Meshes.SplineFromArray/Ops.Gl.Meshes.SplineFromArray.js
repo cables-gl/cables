@@ -3,15 +3,10 @@ op.name="SplineFromArray";
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 
 var inIndex=op.inValue("index");
+var inOffset=op.inValue("offset");
 
 var inPoints=op.inArray("points");
 
-
-
-var subDivs=op.addInPort(new Port(op,"subDivs",OP_PORT_TYPE_VALUE));
-var bezier=op.addInPort(new Port(op,"Bezier",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var centerpoint=op.addInPort(new Port(op,"centerpoint",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var doClose=op.addInPort(new Port(op,"Closed",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 
 
@@ -48,6 +43,23 @@ inPoints.onChange=function()
 
 render.onTriggered=function()
 {
+    var indx=Math.floor(inIndex.get());
+    if(indx>=splines.length)return;
+if(!splines[indx].mesh)return;
+    var shader=cgl.getShader();
+    if(!shader)return;
+    cgl.pushMvMatrix();
+    var oldPrim=shader.glPrimitive;
+    shader.glPrimitive=cgl.gl.LINE_STRIP;
+    // shader.glPrimitive=cgl.gl.POINTS;
+    cgl.gl.lineWidth(4);
+        
+    // for(var i=0;i<splines.length;i++)
+        splines[indx].mesh.render(shader);
+
+    shader.glPrimitive=oldPrim;
+
+    cgl.popMvMatrix();
 
 };
 
@@ -55,109 +67,19 @@ render.onTriggered=function()
 
 function bufferData(spline,pointArr)
 {
-    var i=0,k=0,j=0;
-    var subd=subDivs.get();
-
-    // if(!points || pointArr.length===0)return;
-    spline.points.length=0;
-
-    if(doClose.get())
+    if(!spline.geom)
     {
-        pointArr.push(pointArr[0]);
-        pointArr.push(pointArr[1]);
-        pointArr.push(pointArr[2]);
+        spline.geom=new CGL.Geometry();
+        spline.geom.setPointVertices(pointArr);
     }
-
-    if(centerpoint.get())
+    if(!spline.mesh) 
     {
-        for(i=0;i<pointArr.length;i+=3)
-        {
-            //center point...
-            spline.points.push( pointArr[0] );
-            spline.points.push( pointArr[1] );
-            spline.points.push( pointArr[2] );
-
-            //other point
-            spline.points.push( pointArr[i+0] );
-            spline.points.push( pointArr[i+1] );
-            spline.points.push( pointArr[i+2] );
-        }
-
-        // pointArr=points;
-    }
-    else
-    if(subd>0 && !bezier.get())
-    {
-        
-        for(i=0;i<pointArr.length-3;i+=3)
-        {
-            for(j=0;j<subd;j++)
-            {
-                for(k=0;k<3;k++)
-                {
-                    spline.points.push(
-                        pointArr[i+k]+
-                            ( pointArr[i+k+3] - pointArr[i+k] ) *
-                            j/subd
-                            );
-                }
-            }
-        }
-    }
-    else
-    if(subd>0 && bezier.get() )
-    {
-
-        for(i=3;i<pointArr.length-6;i+=3)
-        {
-            for(j=0;j<subd;j++)
-            {
-                for(k=0;k<3;k++)
-                {
-                    var p=ip(
-                            (pointArr[i+k-3]+pointArr[i+k])/2,
-                            pointArr[i+k+0],
-                            (pointArr[i+k+3]+pointArr[i+k+0])/2,
-                            j/subd
-                            );
-
-                    spline.points.push(p);
-                }
-            }
-        }
+        spline.mesh=new CGL.Mesh(cgl, spline.geom);
     }
     else
     {
-        points = pointArr.slice(); //fast array copy
+        spline.geom.vertices=pointArr;
+        spline.mesh.updateVertices(spline.geom);
     }
-
-    // if(thickness.get()<1) thickness.set(1);
-
-    if(!points || points.length===0)
-    {
-        // console.log('no points...',pointArr.length);
-    }
-
-    spline.geom.vertices=points;
-    
-    if(spline.oldLength!=spline.geom.vertices.length)
-    {
-        spline.oldLength=spline.geom.vertices.length;
-        spline.geom.texCoords.length=0;
-        spline.geom.verticesIndices.length=0;
-        for(i=0;i<spline.geom.vertices.length;i+=3)
-        {
-            spline.geom.texCoords.push(0);
-            spline.geom.texCoords.push(0);
-            spline.geom.verticesIndices.push(i/3);
-        }
-        
-    }
-
-
-    
-
-    if(!spline.mesh)  spline.mesh=new CGL.Mesh(cgl,spline.geom);
-        else spline.mesh.setGeom(spline.geom);
 
 }

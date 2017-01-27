@@ -48,7 +48,7 @@ render.onTriggered=function()
     {
         var oldPrim=shader.glPrimitive;
         if(centerpoint.get()) shader.glPrimitive=cgl.gl.LINES;
-            else shader.glPrimitive=cgl.gl.LINE_STRIP;
+            shader.glPrimitive=cgl.gl.LINE_STRIP;
         
         cgl.gl.lineWidth(thickness.get());
         

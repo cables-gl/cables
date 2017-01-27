@@ -28,6 +28,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     var frameBuf = cgl.gl.createFramebuffer();
     var depthBuffer = cgl.gl.createRenderbuffer();
 
+
     this.getWidth=function(){ return width; };
     this.getHeight=function(){ return height; };
 
@@ -58,6 +59,10 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         CGL.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+
+        //webgl2
+        // cgl.gl.renderbufferStorageMultisample(cgl.gl.RENDERBUFFER, 4, cgl.gl.RGBA8, width,height);
+
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
 
         texture.setSize(width,height);
