@@ -1,3 +1,6 @@
+
+
+
 var CGL=CGL || {};
 
 CGL.Framebuffer=function(_cgl,w,h,options)
@@ -20,6 +23,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
             "isFloatingPointTexture":options.isFloatingPointTexture,
             "filter":CGL.Texture.FILTER_LINEAR
         });
+
     var textureDepth=new CGL.Texture(cgl,
         {
             "isDepthTexture":true
@@ -59,9 +63,6 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         CGL.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-
-        //webgl2
-        // cgl.gl.renderbufferStorageMultisample(cgl.gl.RENDERBUFFER, 4, cgl.gl.RGBA8, width,height);
 
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
 
