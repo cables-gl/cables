@@ -13,6 +13,8 @@ var offset=op.addInPort(new Port(op,"offset"));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var index=op.addOutPort(new Port(op,"index"));
 
+var speed=op.inValue("speed",1);
+
 var startTime=Date.now()/1000;
 var cgl=op.patch.cgl;
 var animX=new CABLES.TL.Anim();
@@ -27,7 +29,6 @@ mulX.set(1);
 mulY.set(1);
 
 segments.onValueChanged=calc;
-// radius.onValueChanged=calc;
 
 calc();
 
@@ -35,7 +36,7 @@ render.onTriggered=function()
 {
     cgl.pushMvMatrix();
 
-    var time=Date.now()/1000-startTime+Math.round(segments.get())*0.1*percent.get();
+    var time=(Date.now()/1000-startTime)*speed.get()+Math.round(segments.get())*0.1*percent.get();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, [
         animX.getValue(time+offset.get())*mulX.get()*radius.get(),
         animY.getValue(time+offset.get())*mulY.get()*radius.get(),

@@ -15,7 +15,7 @@ var pOrder=op.inValueString("order","0");
 var resultR=op.outValue("value r");
 var resultG=op.outValue("value g");
 var resultB=op.outValue("value b");
-var resultA=op.outValue("value a");
+var resultA=op.outValue("value a",1);
 
 pDefaultR.onChange=update;
 pDefaultG.onChange=update;

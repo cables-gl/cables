@@ -4,9 +4,9 @@ var pDefault=op.inValueBool("default",true);
 
 var pName=op.inValueString("name","paramname");
 var pTitle=op.inValueString("title","something readable");
-var pDescription=op.inValueString("description","description");
+var pDescription=op.inValueString("description","");
 var pTab=op.inValueString("tab","tab");
-var pOrder=op.inValueString("order","order");
+var pOrder=op.inValueString("order","0");
 
 var result=op.outValue("value",pDefault.get());
 
