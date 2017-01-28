@@ -94,8 +94,9 @@ CGL.Texture.prototype.setSize=function(w,h)
     else
     if(this.textureType==CGL.Texture.TYPE_DEPTH)
     {
-        // this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.DEPTH_COMPONENT, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
-        this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.DEPTH_COMPONENT16, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
+        var tcomp=this._cgl.gl.DEPTH_COMPONENT;
+        if(this._cgl.glVersion!=1) tcomp=this._cgl.gl.DEPTH_COMPONENT16;
+        this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
     }
     else
     {

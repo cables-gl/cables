@@ -1,6 +1,3 @@
-
-
-
 var CGL=CGL || {};
 
 CGL.Framebuffer=function(_cgl,w,h,options)
@@ -23,7 +20,6 @@ CGL.Framebuffer=function(_cgl,w,h,options)
             "isFloatingPointTexture":options.isFloatingPointTexture,
             "filter":CGL.Texture.FILTER_LINEAR
         });
-
     var textureDepth=new CGL.Texture(cgl,
         {
             "isDepthTexture":true
