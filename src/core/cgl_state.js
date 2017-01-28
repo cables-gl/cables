@@ -57,8 +57,6 @@ CGL.State=function()
         if(!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha=this.patch.config.canvas.alpha;
         if(!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias=this.patch.config.canvas.antialias;
 
-        // this.gl=this.canvas.getContext("experimental-webgl",this.patch.config.canvas);
-
         this.gl = this.canvas.getContext('webgl2');
         if(this.gl)
         {
@@ -79,10 +77,12 @@ CGL.State=function()
         }
         else
         {
-            var ext = this.gl.getExtension("ANGLE_instanced_arrays");
-            if(!ext)
+            var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
+
+            if(instancingExt.vertexAttribDivisorANGLE)
             {
-                console.error('no instanced arrays extension');
+                this.gl.vertexAttribDivisor=instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
+                this.gl.drawElementsInstanced=instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
             }
 
             this.canvasWidth=this.canvas.clientWidth;
@@ -176,7 +176,6 @@ CGL.State=function()
             oldCanvasWidth=self.canvasWidth;
             oldCanvasHeight=self.canvasHeight;
         }
-
     };
 
     // shader stack
@@ -255,7 +254,7 @@ CGL.State=function()
     };
     this.popModelMatrix=this.popMvMatrix;
     this.pushModelMatrix=this.pushMvMatrix;
-    this.modelMatrix=function(){ return self.mvMatrix; }
+    this.modelMatrix=function(){ return self.mvMatrix; };
 
     // projection matrix stack
 
@@ -347,8 +346,6 @@ CGL.State=function()
         {
             window.removeEventListener( 'resize', this._resizeToWindowSize.bind(this) );
         }
-
-
     };
 
 };

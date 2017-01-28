@@ -49,7 +49,8 @@ function doRender()
     {
         if(fb) fb.delete();
         if(cgl.glVersion>=2) fb=new CGL.Framebuffer2(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
-            else fb=new CGL.Framebuffer(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
+            else
+            fb=new CGL.Framebuffer(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
 
         if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
             else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);

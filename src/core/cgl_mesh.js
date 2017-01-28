@@ -13,12 +13,14 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._geom=null;
     this.numInstances=0;
     this._glPrimitive=glPrimitive;
-    this._extInstances = this._cgl.gl.getExtension("ANGLE_instanced_arrays");
+
     this.addVertexNumbers=false;
 
     this.setGeom(__geom);
-};
 
+
+
+};
 
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 {
@@ -178,7 +180,7 @@ CGL.Mesh.prototype._bind=function(shader)
                 if(this._attributes[i].itemSize<=4)
                 {
                     this._cgl.gl.vertexAttribPointer(this._attributes[i].loc, this._attributes[i].itemSize, this._cgl.gl.FLOAT,  false, this._attributes[i].itemSize*4,0);
-                    this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc, 1);
+                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 1);
                 }
                 if(this._attributes[i].itemSize==16)
                 {
@@ -190,10 +192,10 @@ CGL.Mesh.prototype._bind=function(shader)
                     this._cgl.gl.enableVertexAttribArray(this._attributes[i].loc+3);
                     this._cgl.gl.vertexAttribPointer(this._attributes[i].loc+3, 4, this._cgl.gl.FLOAT,  false, 16*4, 4*4*3);
 
-                    this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc, 1);
-                    this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc+1, 1);
-                    this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc+2, 1);
-                    this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc+3, 1);
+                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 1);
+                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+1, 1);
+                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+2, 1);
+                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+3, 1);
                 }
             }
             else
@@ -218,15 +220,15 @@ CGL.Mesh.prototype.unBind=function(shader)
             // todo: easier way to fill mat4 attribs...
             if(this._attributes[i].itemSize<=4)
             {
-                this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc, 0);
+                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
                 // this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
             }
             else
             {
-                this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc, 0);
-                this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc+1, 0);
-                this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc+2, 0);
-                this._extInstances.vertexAttribDivisorANGLE(this._attributes[i].loc+3, 0);
+                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
+                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+1, 0);
+                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+2, 0);
+                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+3, 0);
                 this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc+1);
                 this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc+2);
                 this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc+3);
@@ -352,7 +354,7 @@ CGL.Mesh.prototype.render=function(shader)
         }
         else
         {
-            this._extInstances.drawElementsInstancedANGLE(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this.numInstances);
+            this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this.numInstances);
         }
 
         // this.printDebug(shader);
