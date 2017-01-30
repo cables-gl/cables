@@ -102,17 +102,13 @@ CABLES.Patch.prototype.setVolume=function(v)
 {
     this.config.masterVolume=v;
     for(var i=0;i<this._volumeListeners.length;i++)
-    {
         this._volumeListeners[i].onMasterVolumeChanged(v);
-    }
 };
 
 CABLES.Patch.prototype.getFilePath=function(filename)
 {
     if(!filename)return filename;
-
     if(filename.indexOf('https:')===0 || filename.indexOf('http:')===0 ) return filename;
-
     return this.config.prefixAssetPath+filename;
 };
 
@@ -122,9 +118,7 @@ CABLES.Patch.prototype.clear=function()
     this.animFrameOps.length=0;
     this.timer=new CABLES.Timer();
     while(this.ops.length>0)
-    {
         this.deleteOp(this.ops[0].id);
-    }
 };
 
 
@@ -146,8 +140,6 @@ CABLES.Patch.prototype.getOpClass=function(objName)
 
 CABLES.Patch.prototype.addOp=function(objName,uiAttribs,next)
 {
-
-
     if(CABLES.UI && gui.serverOps.opHasLibs(objName) && !gui.serverOps.opLibsLoaded(objName) )
     {
         var self=this;
@@ -159,7 +151,6 @@ CABLES.Patch.prototype.addOp=function(objName,uiAttribs,next)
     }
     else return this.doAddOp(objName,uiAttribs,next);
 };
-
 
 CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
 {
@@ -203,10 +194,9 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
         console.error('!instancing error '+objName);
 
         if(CABLES.UI)
-        {
             CABLES.UI.MODAL.showOpException(e,objName);
-        }
-        else if(CABLES.api) CABLES.api.sendErrorReport(e);
+        else
+            if(CABLES.api) CABLES.api.sendErrorReport(e);
 
         // return;
     }
@@ -214,7 +204,6 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
     {
         op.objName=objName;
         op.patch=this;
-// console.log('instancedd');
 
         op.uiAttr(uiAttribs);
         if(op.onCreate)op.onCreate();
@@ -231,14 +220,10 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
     return op;
 };
 
-
 CABLES.Patch.prototype.removeOnAnimFrame=function(op)
 {
-
     for(var i=0;i<this.animFrameOps.length;i++)
-    {
         this.animFrameOps.splice(i,1);
-    }
 };
 
 CABLES.Patch.prototype.deleteOp=function(opid,tryRelink)
@@ -298,6 +283,25 @@ var frameNext=0;
 var frameInterval=0;
 var lastFrameTime=0;
 var wasdelayed=false;
+
+CABLES.Patch.prototype.renderFrame=function(e)
+{
+    this.timer.update();
+    this.freeTimer.update();
+
+    var time=this.timer.getTime();
+
+    for (var i = 0; i < this.animFrameOps.length; ++i)
+    {
+        if(this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
+    }
+    this._frameNum++;
+    if(this._frameNum==1)
+    {
+        if(this.config.onFirstFrameRendered)this.config.onFirstFrameRendered();
+    }
+};
+
 CABLES.Patch.prototype.exec=function(e)
 {
     if(this._paused)return;
@@ -338,23 +342,9 @@ CABLES.Patch.prototype.exec=function(e)
 
     if(this.config.fpsLimit===0 || frameDelta > frameInterval || wasdelayed)
     {
-        this.timer.update();
-        this.freeTimer.update();
+        this.renderFrame();
 
-        var time=this.timer.getTime();
-
-        for (var i = 0; i < this.animFrameOps.length; ++i)
-        {
-            if(this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
-        }
-        this._frameNum++;
-        if(this._frameNum==1)
-        {
-            if(this.config.onFirstFrameRendered)this.config.onFirstFrameRendered();
-        }
-
-        if(frameInterval)
-            frameNext = now - (frameDelta % frameInterval);
+        if(frameInterval) frameNext = now - (frameDelta % frameInterval);
 
         lastFrameTime=CABLES.milliSeconds();
     }
@@ -635,7 +625,6 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
             this.ops[i].onLoaded();
             this.ops[i].onLoaded=null;
         }
-        // this.ops[i].id=generateUUID();
     }
 
     this.loading.finished(loadingId);

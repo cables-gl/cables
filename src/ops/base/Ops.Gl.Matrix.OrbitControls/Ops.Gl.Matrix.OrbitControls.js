@@ -148,7 +148,7 @@ initialAxis.onValueChange(function()
 var onMouseWheel=function(event)
 {
 
-    var delta=CGL.getWheelSpeed(event)*-0.06;
+    var delta=CGL.getWheelSpeed(event)*0.06;
     radius+=(parseFloat(delta))*1.2;
 
     eye=circlePos(percY);

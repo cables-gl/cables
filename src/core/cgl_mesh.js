@@ -89,8 +89,11 @@ CGL.Mesh.prototype.getAttributes=function()
 CGL.Mesh.prototype.updateVertices=function(geom)
 {
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
-    // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.DYNAMIC_DRAW);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, new Float32Array(geom.vertices), this._cgl.gl.DYNAMIC_DRAW);
+
+    if(!this.verticeBuffer || this.verticeBuffer.length!=geom.vertices.length) this.verticeBuffer=new Float32Array(geom.vertices);
+        else this.verticeBuffer.set(geom.vertices);
+
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, this.verticeBuffer, this._cgl.gl.DYNAMIC_DRAW);
 
     this._bufVertices.itemSize = 3;
     this._bufVertices.numItems = geom.vertices.length/3;
