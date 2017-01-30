@@ -222,8 +222,8 @@ CGL.Shader=function(_cgl,_name)
         // console.log('shader compile...');
         // console.log('has textures: '+self.hasTextureUniforms() );
 
-        var vs=this.versionString.endl().endl()+extensionString+definesStr+self.srcVert;
-        var fs=this.versionString.endl().endl()+extensionString+definesStr+self.srcFrag;
+        var vs=self.versionString+'\n\n'+extensionString+definesStr+self.srcVert;
+        var fs=self.versionString+'\n\n'+extensionString+definesStr+self.srcFrag;
 
         // console.log(name);
         // console.log(fs);
