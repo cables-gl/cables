@@ -29,19 +29,43 @@ var opacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE,{ display:'ran
 opacity.set(1.0);
 opacity.onValueChanged=function(){ uniformOpacity.setValue(opacity.get()); };
 
-if(!cgl.gl.getExtension('OES_standard_derivatives') ) op.uiAttr( { 'error': 'no oes standart dericatives' } );
+if(cgl.glVersion==1 && !cgl.gl.getExtension('OES_standard_derivatives') ) 
+{
+    console.log(123);
+    op.uiAttr( { 'error': 'no oes standart derivatives!' } );
+}
 
-var srcVert=''
-    .endl()+'{{MODULES_HEAD}}'
-    .endl()+'attribute vec3 vPosition;'
-    .endl()+'attribute vec3 attrBaycentric;'
-    .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 modelMatrix;'
-    .endl()+'uniform mat4 viewMatrix;'
-    .endl()+'varying vec3 baycentric;'
-    .endl()+'attribute vec2 attrTexCoord;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+''
+
+if(cgl.glVersion==1)
+{
+    var srcVert=''
+        .endl()+'{{MODULES_HEAD}}'
+        .endl()+'attribute vec3 vPosition;'
+        .endl()+'attribute vec3 attrBaycentric;'
+        .endl()+'uniform mat4 projMatrix;'
+        .endl()+'uniform mat4 modelMatrix;'
+        .endl()+'uniform mat4 viewMatrix;'
+        .endl()+'varying vec3 baycentric;'
+        .endl()+'attribute vec2 attrTexCoord;'
+        .endl()+'varying vec2 texCoord;'
+        .endl();
+}
+else
+{
+    var srcVert=''
+        .endl()+'{{MODULES_HEAD}}'
+        .endl()+'in vec3 vPosition;'
+        .endl()+'in vec3 attrBaycentric;'
+        .endl()+'uniform mat4 projMatrix;'
+        .endl()+'uniform mat4 modelMatrix;'
+        .endl()+'uniform mat4 viewMatrix;'
+        .endl()+'out vec3 baycentric;'
+        .endl()+'in vec2 attrTexCoord;'
+        .endl()+'out vec2 texCoord;'
+        .endl();
+}
+
+srcVert+=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'    texCoord=attrTexCoord;'
@@ -51,10 +75,28 @@ var srcVert=''
     .endl()+'    gl_Position = projMatrix * viewMatrix * modelMatrix * pos;'
     .endl()+'}';
 
-    var srcFrag=''
-    .endl()+'#extension GL_OES_standard_derivatives : enable'
-    .endl()+'precision highp float;'
-    .endl()+'varying vec3 baycentric;'
+
+
+    var srcFrag='';
+    
+    if(cgl.glVersion==1)
+    {
+        srcFrag='#extension GL_OES_standard_derivatives : enable'
+        .endl()+'precision highp float;'
+        .endl()+'varying vec3 baycentric;'
+        .endl();
+    }
+    else
+    {
+        srcFrag=''
+        .endl()+'precision highp float;'
+        .endl()+'in vec3 baycentric;'
+        .endl()+'out vec4 fragColor;'
+        
+        .endl();
+    }
+
+    srcFrag+=''
     .endl()+'uniform float width;'
     .endl()+'uniform float opacity;'
     .endl()+'uniform float r,g,b;'
@@ -83,11 +125,12 @@ var srcVert=''
     .endl()+'    col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
     .endl()+'#endif'
     // .endl()+'col.xyz=baycentric;'
+    .endl();
+    
+    if(cgl.glVersion==1)srcFrag+='gl_FragColor =col;';
+    else srcFrag+='fragColor =col;';
 
-
-    .endl()+'gl_FragColor =col;'
-
-    .endl()+'}';
+    srcFrag+=''.endl()+'}';
 
 var doRender=function()
 {
@@ -105,6 +148,8 @@ var doRender=function()
 };
 
 var shader=new CGL.Shader(cgl,'Wireframe Material');
+
+if(cgl.glVersion)shader.versionString="#version 300 es";
 var uniformWidth=new CGL.Uniform(shader,'f','width',w.get());
 var uniformOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 shader.setSource(srcVert,srcFrag);

@@ -13,6 +13,7 @@ CGL.Shader=function(_cgl,_name)
     if(!_cgl) throw "shader constructed without cgl";
     var name=_name || 'unknown';
 
+    this.versionString="";
     var self=this;
     this._program=null;
     var uniforms=[];
@@ -194,6 +195,9 @@ CGL.Shader=function(_cgl,_name)
     {
         CGL.profileShaderCompiles++;
 
+
+
+
         var extensionString='';
         if(this._extensions)
         for(i=0;i<this._extensions.length;i++)
@@ -218,8 +222,8 @@ CGL.Shader=function(_cgl,_name)
         // console.log('shader compile...');
         // console.log('has textures: '+self.hasTextureUniforms() );
 
-        var vs=extensionString+definesStr+self.srcVert;
-        var fs=extensionString+definesStr+self.srcFrag;
+        var vs=this.versionString.endl().endl()+extensionString+definesStr+self.srcVert;
+        var fs=this.versionString.endl().endl()+extensionString+definesStr+self.srcFrag;
 
         // console.log(name);
         // console.log(fs);
@@ -423,6 +427,7 @@ CGL.Shader.prototype.getProgram=function()
 {
     return this._program;
 };
+
 
 
 CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader=function()

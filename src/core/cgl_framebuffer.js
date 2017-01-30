@@ -4,7 +4,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 {
     var cgl=_cgl;
 
-    var depthTextureExt = cgl.gl.getExtension('WEBGL_depth_texture') || cgl.gl.getExtension( "WEBKIT_WEBGL_depth_texture" ) || cgl.gl.getExtension( "MOZ_WEBGL_depth_texture" );
+    var depthTextureExt = cgl.gl.getExtension('WEBGL_depth_texture') || cgl.gl.getExtension( "WEBKIT_WEBGL_depth_texture" ) || cgl.gl.getExtension( "MOZ_WEBGL_depth_texture" ) || cgl.gl.DEPTH_TEXTURE;
     if(!depthTextureExt) console.error("no depth texture support");
 
     var width = w || 512;
