@@ -18,7 +18,7 @@ CGL.Framebuffer2=function(cgl,w,h,options)
 
     this._texture=new CGL.Texture(cgl,
         {
-            "isFloatingPointTexture":options.isFloatingPointTexture,
+            "isFloatingPointTexture":this._options.isFloatingPointTexture,
             "filter":CGL.Texture.FILTER_LINEAR
         });
 
@@ -85,11 +85,13 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
 
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._colorRenderbuffer);
-    this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4, this._cgl.gl.RGBA8, this._width, this._height);
+    if(!this._options.isFloatingPointTexture)
+        this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4, this._cgl.gl.RGBA8, this._width, this._height);
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffer);
 
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
-    this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4,this._cgl.gl.DEPTH_COMPONENT16, this._width,this._height);
+    if(!this._options.isFloatingPointTexture)
+        this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4,this._cgl.gl.DEPTH_COMPONENT16, this._width,this._height);
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);

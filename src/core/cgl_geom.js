@@ -3,7 +3,7 @@ CGL.Geometry=function(name)
 {
     this.name=name;
     this.faceVertCount=3;
-    this.vertices=[];
+    this._vertices=[];
     this.verticesIndices=[];
     this.texCoords=[];
     this.texCoordsIndices=[];
@@ -13,7 +13,19 @@ CGL.Geometry=function(name)
     this.vertexColors=[];
 
     this._indexed=true;
+
 };
+
+
+CGL.Geometry.prototype.__defineGetter__("vertices", function()
+{
+    return this._vertices;
+});
+
+CGL.Geometry.prototype.__defineSetter__("vertices", function(v)
+{
+    this.setVertices(v);
+});
 
 CGL.Geometry.prototype.clear=function()
 {
@@ -24,6 +36,14 @@ CGL.Geometry.prototype.clear=function()
     this.texCoordsIndices.length=0;
     this.vertexNormals.length=0;
 };
+
+CGL.Geometry.prototype.setVertices=function(arr)
+{
+    if(arr instanceof Float32Array)this._vertices=arr;
+        else this._vertices=new Float32Array(arr);
+};
+
+
 
 // deprecated
 CGL.Geometry.prototype.calcNormals=function(smooth)

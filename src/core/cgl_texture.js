@@ -83,13 +83,23 @@ CGL.Texture.prototype.setSize=function(w,h)
     CGL.profileTextureResize++;
 
     var uarr=null;
+
+    if(this.textureType==CGL.Texture.TYPE_FLOAT)
+    {
+        this.filter = CGL.Texture.FILTER_NEAREST;
+    }
+
     this._setFilter();
 
 
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
     {
-        if(!this._cgl.gl.getExtension('OES_texture_float')) throw "no floating point texture extension";
-        this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+        if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no floating point texture extension";
+
+        if(this._cgl.glVersion==1)
+            this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+        else
+            this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
     }
     else
     if(this.textureType==CGL.Texture.TYPE_DEPTH)
@@ -103,7 +113,7 @@ CGL.Texture.prototype.setSize=function(w,h)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
 
-    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
+    if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
     {
         this._cgl.gl.generateMipmap(this.texTarget);
     }
@@ -296,10 +306,23 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
 };
 
 CGL.tempTexture=null;
+CGL.tempTextureEmpty=null;
 CGL.Texture.getTempTexture=function(cgl)
 {
     if(!CGL.tempTexture) CGL.tempTexture=CGL.Texture.getTemporaryTexture(cgl,256,CGL.Texture.FILTER_LINEAR,CGL.Texture.REPEAT);
     return CGL.tempTexture;
+};
+
+CGL.Texture.getEmptyTexture=function(cgl)
+{
+    if(CGL.tempTexture) return CGL.tempTexture;
+
+    var temptex=new CGL.Texture(cgl);
+    var data = new Uint8Array(8*8*4).fill(0);
+
+    temptex.initFromData(data,8,8,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
+
+    return temptex;
 };
 
 CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)

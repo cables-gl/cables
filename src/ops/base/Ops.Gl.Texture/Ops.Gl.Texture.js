@@ -140,3 +140,6 @@ op.onFileUploaded=function(fn)
 
 tfilter.set('linear');
 wrap.set('repeat');
+
+textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+

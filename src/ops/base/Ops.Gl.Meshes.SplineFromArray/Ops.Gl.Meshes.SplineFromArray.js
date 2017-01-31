@@ -45,7 +45,7 @@ render.onTriggered=function()
 {
     var indx=Math.floor(inIndex.get());
     if(indx>=splines.length)return;
-if(!splines[indx].mesh)return;
+    if(!splines[indx].mesh)return;
     var shader=cgl.getShader();
     if(!shader)return;
     cgl.pushMvMatrix();
