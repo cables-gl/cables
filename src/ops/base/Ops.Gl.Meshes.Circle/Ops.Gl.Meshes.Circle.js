@@ -62,25 +62,40 @@ function calc()
     {
         var lastX=0;
         var lastY=0;
+        var tc=[];
         for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
         {
             degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
             posx=Math.cos(degInRad)*radius.get();
             posy=Math.sin(degInRad)*radius.get();
+            
+            posyTexCoord=0.5;
+
+
             if(i>0)
             {
                 verts.push(lastX);
                 verts.push(lastY);
                 verts.push(0);
+                posxTexCoord=1.0-(i-1)/segments.get();
+                
+                tc.push(posxTexCoord,posyTexCoord);
+
             }
             verts.push(posx);
             verts.push(posy);
             verts.push(0);
             
+            posxTexCoord=1.0-i/segments.get();
+            tc.push(posxTexCoord,posyTexCoord);
+
+
+
             lastX=posx;
             lastY=posy;
         }
         geom.setPointVertices(verts);
+        geom.texCoords=tc;
     }
     else
     if(innerRadius.get()<=0)

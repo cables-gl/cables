@@ -4,7 +4,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 {
     var cgl=_cgl;
 
-    var depthTextureExt = cgl.gl.getExtension('WEBGL_depth_texture') || cgl.gl.getExtension( "WEBKIT_WEBGL_depth_texture" ) || cgl.gl.getExtension( "MOZ_WEBGL_depth_texture" );
+    var depthTextureExt = cgl.gl.getExtension('WEBGL_depth_texture') || cgl.gl.getExtension( "WEBKIT_WEBGL_depth_texture" ) || cgl.gl.getExtension( "MOZ_WEBGL_depth_texture" ) || cgl.gl.DEPTH_TEXTURE;
     if(!depthTextureExt) console.error("no depth texture support");
 
     var width = w || 512;
@@ -27,6 +27,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
     var frameBuf = cgl.gl.createFramebuffer();
     var depthBuffer = cgl.gl.createRenderbuffer();
+
 
     this.getWidth=function(){ return width; };
     this.getHeight=function(){ return height; };
@@ -58,6 +59,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         CGL.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
+
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
 
         texture.setSize(width,height);

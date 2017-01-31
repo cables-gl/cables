@@ -108,6 +108,7 @@ function rebuild()
         }
     }
 
+    geom.clear();
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;

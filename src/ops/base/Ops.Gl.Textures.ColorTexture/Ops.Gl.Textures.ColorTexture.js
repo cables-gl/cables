@@ -14,7 +14,8 @@ var render=function()
 {
     if(!fb)
     {
-        fb=new CGL.Framebuffer(cgl,4,4);
+        if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
+        else fb=new CGL.Framebuffer2(cgl,4,4);
         fb.setFilter(CGL.Texture.FILTER_NEAREST);
     }
 

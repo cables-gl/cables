@@ -1,12 +1,11 @@
 var CGL=CGL || {};
 
-CGL.TextureEffectMesh=null;
 
 CGL.TextureEffect=function(cgl,options)
 {
     this._cgl=cgl;
 
-    if(!CGL.TextureEffectMesh)this.createMesh();
+    if(!cgl.TextureEffectMesh)this.createMesh();
 
     this._textureSource = null;
 
@@ -124,7 +123,7 @@ CGL.TextureEffect.prototype.finish=function()
         return;
     }
 
-    CGL.TextureEffectMesh.render(this._cgl.getShader());
+    this._cgl.TextureEffectMesh.render(this._cgl.getShader());
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer());
 
@@ -174,7 +173,7 @@ CGL.TextureEffect.prototype.createMesh=function()
         3, 1, 2
     ];
 
-    CGL.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
+    this._cgl.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
 };
 
 // ---------------------------------------------------------------------------------

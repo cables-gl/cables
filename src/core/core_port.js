@@ -55,8 +55,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.get=function()
     {
-
-
         if(this._animated && this._lastAnimFrame!=this.parent.patch.getFrameNum())
         {
             this._lastAnimFrame=this.parent.patch.getFrameNum();

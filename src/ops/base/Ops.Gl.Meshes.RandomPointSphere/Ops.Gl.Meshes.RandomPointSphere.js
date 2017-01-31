@@ -8,6 +8,8 @@ var distRand=op.inValueSlider("Distance Random",0);
 
 var distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"]);
 
+var outGeom=op.outObject("Geometry");
+
 var cgl=op.patch.cgl;
 var mesh=null;
 
@@ -64,7 +66,7 @@ function reset()
             rndq[2]=Math.seededRandom()*2.0-1.0;
             rndq[3]=Math.seededRandom()*2.0-1.0;
         }
-        
+
         quat.normalize(rndq,rndq);
 
         if(dist==2)
@@ -94,6 +96,8 @@ function reset()
     geom.setPointVertices(verts);
     geom.vertColors=vertColors;
     geom.texCoords=texCoords;
+    outGeom.set(null);
+    outGeom.set(geom);
 
     if(mesh) mesh.setGeom(geom);
         else mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);

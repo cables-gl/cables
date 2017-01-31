@@ -15,11 +15,10 @@ parse();
 
 function parse()
 {
-    if(arr.get())
+    if(arr.get() && arr.get().join)
     {
         var r=arr.get().join(separator.get());
         result.set(r);
-
     }
 }
 

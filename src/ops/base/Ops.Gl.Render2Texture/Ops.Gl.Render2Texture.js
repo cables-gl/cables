@@ -28,7 +28,6 @@ var reInitFb=true;
 
 // todo why does it only work when we render a mesh before>?>?????
 // only happens with matcap material with normal map....
-// m
 
 
 
@@ -49,10 +48,12 @@ function doRender()
     if(!fb || reInitFb)
     {
         if(fb) fb.delete();
-        fb=new CGL.Framebuffer(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
-        // if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
-        //     else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
-        //     else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+        if(cgl.glVersion>=2) fb=new CGL.Framebuffer2(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
+            else fb=new CGL.Framebuffer(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
+
+        if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
+            else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
+            else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
         tex.set( fb.getTextureColor() );
         texDepth.set ( fb.getTextureDepth() );
@@ -75,23 +76,10 @@ function doRender()
     // mesh.render(cgl.getShader());
     trigger.trigger();
     fb.renderEnd(cgl);
-    
-
 
     cgl.resetViewPort();
 }
 
-function preview()
-{
-    doRender();
-    tex.val.preview();
-}
-
-tex.onPreviewChanged=function()
-{
-    if(tex.showPreview) render.onTriggered=preview;
-    else render.onTriggered=doRender;
-};
 
 render.onTriggered=doRender;
 

@@ -11,7 +11,7 @@ numOut.set(2);
 num.set(0);
 
 var triggers=[];
-var numTriggers=10;
+var numTriggers=20;
 
 var trigger=function()
 {

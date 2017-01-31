@@ -29,11 +29,12 @@ function reset()
 {
     geom=new CGL.Geometry();
     var verts=[];
+    var n=Math.round(num.get())||1;
     var texCoords=[];
     var vertColors=[];
-    verts.length=Math.round(num.get())*3;
-    texCoords.length=Math.round(num.get())*2;
-    vertColors.length=Math.round(num.get())*3;
+    verts.length=n*3;
+    texCoords.length=n*2;
+    vertColors.length=n*3;
     
     Math.randomSeed=seed.get();
 

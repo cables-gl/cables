@@ -5,7 +5,7 @@ var fragmentShader=op.addInPort(new Port(op,"fragment",OP_PORT_TYPE_VALUE,{displ
 var vertexShader=op.addInPort(new Port(op,"vertex",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
+var outShader=op.outObject("Shader");
 var cgl=op.patch.cgl;
 var uniformInputs=[];
 var uniformTextures=[];
@@ -76,7 +76,8 @@ function updateShader()
     }
     
     if(CABLES.UI) gui.patch().showOpParams(op);
-
+    outShader.set(null);
+    outShader.set(shader);
 
 }
 

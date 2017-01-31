@@ -5,6 +5,8 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
 
 var pointSize=op.addInPort(new Port(op,"PointSize",OP_PORT_TYPE_VALUE));
+var randomSize=op.inValue("Random Size",0);
+
 var makeRound=op.addInPort(new Port(op,"Round",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var doScale=op.addInPort(new Port(op,"Scale by Distance",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
@@ -24,6 +26,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shader.define('MAKE_ROUND');
 
 var uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize);
+var uniRandomSize=new CGL.Uniform(shader,'f','randomSize',randomSize);
 
 
 shaderOut.set(shader);
@@ -51,12 +54,20 @@ render.onTriggered=doRender;
 var texture=op.inTexture("texture");
 var textureUniform=null;
 
+var textureMask=op.inTexture("Texture Mask");
+var textureMaskUniform=null;
+
 function bindTextures()
 {
     if(texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
+    }
+    if(textureMask.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, textureMask.get().tex);
     }
 }
 
@@ -105,6 +116,24 @@ texture.onValueChanged=function()
         textureUniform=null;
     }
 };
+
+textureMask.onValueChanged=function()
+{
+    if(textureMask.get())
+    {
+        if(textureMaskUniform!==null)return;
+        shader.removeUniform('texMask');
+        shader.define('HAS_TEXTURE_MASK');
+        textureMaskUniform=new CGL.Uniform(shader,'t','texMask',1);
+    }
+    else
+    {
+        shader.removeUniform('texMask');
+        shader.removeDefine('HAS_TEXTURE_MASK');
+        textureMaskUniform=null;
+    }
+};
+
 
 
 var colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));

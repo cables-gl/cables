@@ -16,9 +16,11 @@ function update()
 {
     if(!array.get())return;
     array.get()[index.get()]=value.get();
+    values.set(null);
     values.set(array.get());
 }
 
-index.onValueChanged=updateIndex;
-array.onValueChanged=updateIndex;
-exe.onTriggered=update;
+index.onChange=updateIndex;
+array.onChange=updateIndex;
+value.onChange=update;
+// exe.onTriggered=update;

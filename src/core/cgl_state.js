@@ -10,6 +10,7 @@ CGL.State=function()
     var shaderStack=[];
     var frameBufferStack=[null];
     var viewPort=[0,0,0,0];
+    this.glVersion=0;
 
     this.temporaryTexture=null;
     this.frameStore={};
@@ -45,16 +46,28 @@ CGL.State=function()
 
     this.setCanvas=function(id)
     {
-        CGL.TextureEffectMesh=null;
+        CGL.TextureEffectMesh=CGL.TextureEffectMesh||null;
         this.canvas=document.getElementById(id);
 
         if(!this.patch.config.canvas) this.patch.config.canvas={};
-        if(!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer=true;
-        if(!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha=true;
-        if(!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha=true;
-        if(!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias=true;
 
-        this.gl=this.canvas.getContext("experimental-webgl",this.patch.config.canvas);
+
+        if(!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer=this.patch.config.canvas.preserveDrawingBuffer;
+        if(!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha=this.patch.config.canvas.premultipliedAlpha;
+        if(!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha=this.patch.config.canvas.alpha;
+        if(!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias=this.patch.config.canvas.antialias;
+
+        this.gl = this.canvas.getContext('webgl2');
+        if(this.gl)
+        {
+            this.glVersion=2;
+        }
+        else
+        {
+            this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+            this.glVersion=1;
+        }
+
 
         if(!this.gl)
         {
@@ -64,10 +77,12 @@ CGL.State=function()
         }
         else
         {
-            var ext = this.gl.getExtension("ANGLE_instanced_arrays");
-            if(!ext)
+            var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
+
+            if(instancingExt.vertexAttribDivisorANGLE)
             {
-                console.error('no instanced arrays extension');
+                this.gl.vertexAttribDivisor=instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
+                this.gl.drawElementsInstanced=instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
             }
 
             this.canvasWidth=this.canvas.clientWidth;
@@ -161,7 +176,6 @@ CGL.State=function()
             oldCanvasWidth=self.canvasWidth;
             oldCanvasHeight=self.canvasHeight;
         }
-
     };
 
     // shader stack
@@ -240,7 +254,7 @@ CGL.State=function()
     };
     this.popModelMatrix=this.popMvMatrix;
     this.pushModelMatrix=this.pushMvMatrix;
-    this.modelMatrix=function(){ return self.mvMatrix; }
+    this.modelMatrix=function(){ return self.mvMatrix; };
 
     // projection matrix stack
 
@@ -332,8 +346,6 @@ CGL.State=function()
         {
             window.removeEventListener( 'resize', this._resizeToWindowSize.bind(this) );
         }
-
-
     };
 
 };

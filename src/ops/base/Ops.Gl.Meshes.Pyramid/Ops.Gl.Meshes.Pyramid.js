@@ -69,6 +69,10 @@ function create()
     ];
 
 
+geom.unIndex();
+    geom.calculateNormals({forceZUp:false});
+    
+
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);
     geomOut.set(geom);

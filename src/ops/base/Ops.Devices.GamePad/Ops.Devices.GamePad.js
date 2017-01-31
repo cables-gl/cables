@@ -1,51 +1,64 @@
-    Op.apply(this, arguments);
+op.name='GamePad';
+var data=op.inObject("GamePad Data");
 
-    this.name='GamePad';
-    this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-    this.numPads=this.addOutPort(new Port(this,"numPads"));
-    this.axis1=this.addOutPort(new Port(this,"axis1"));
-    this.axis2=this.addOutPort(new Port(this,"axis2"));
-    this.axis3=this.addOutPort(new Port(this,"axis3"));
-    this.axis4=this.addOutPort(new Port(this,"axis4"));
-    this.button0=this.addOutPort(new Port(this,"button0"));
-    this.button1=this.addOutPort(new Port(this,"button1"));
-    this.button2=this.addOutPort(new Port(this,"button2"));
-    this.button3=this.addOutPort(new Port(this,"button3"));
-    this.button4=this.addOutPort(new Port(this,"button4"));
+var outID=op.outValue("ID");
+var outAxes=op.outArray("Axes");
 
-    var self=this;
-    var startTime=Date.now()/1000.0;
+var pressedLeft=op.outValueBool("Pad Left");
+var pressedRight=op.outValueBool("Pad Right");
+var pressedUp=op.outValueBool("Pad Up");
+var pressedDown=op.outValueBool("Pad Down");
 
-    this.exe.onTriggered=function()
+var pressedButton1=op.outValueBool("Button 1");
+var pressedButton2=op.outValueBool("Button 2");
+var pressedButton3=op.outValueBool("Button 3");
+var pressedButton4=op.outValueBool("Button 4");
+
+data.onChange=function()
+{
+    if(data.get())
     {
-        var gamePads=navigator.getGamepads();
-        var count=0;
-
-        for(var gp=0;gp< gamePads.length;gp++)
+        outID.set(data.get().id);
+        if(data.get().axes)outAxes.set(data.get().axes);
+        
+        var buttons=data.get().buttons;
+        if(buttons)
         {
-            if(gamePads[gp])
-            {
-
-                if(gamePads[gp].axes)
-                {
-                    self.axis1.val=gamePads[gp].axes[0];
-                    self.axis2.val=gamePads[gp].axes[1];
-                    self.axis3.val=gamePads[gp].axes[2];
-                    self.axis4.val=gamePads[gp].axes[3];
-    
-                    self.button0.val=gamePads[gp].buttons[0].pressed;
-                    self.button0.val=gamePads[gp].buttons[1].pressed;
-                    self.button2.val=gamePads[gp].buttons[2].pressed;
-                    if(gamePads[gp].buttons[3]) self.button3.val=gamePads[gp].buttons[3].pressed;
-                    if(gamePads[gp].buttons[4]) self.button4.val=gamePads[gp].buttons[4].pressed;
-    
-                }
-                count++;
-                
-            }
+            pressedLeft.set(buttons[14].pressed);
+            pressedRight.set(buttons[15].pressed);
+            pressedDown.set(buttons[13].pressed);
+            pressedUp.set(buttons[12].pressed);
+            
+            pressedButton1.set(buttons[0].pressed);
+            pressedButton2.set(buttons[1].pressed);
+            pressedButton3.set(buttons[2].pressed);
+            pressedButton4.set(buttons[3].pressed);
         }
+    }
+};
 
-        self.numPads.val=count;
-    };
+// gamepad.BUTTONS = {
+//   FACE_1: 0, // Face (main) buttons
+//   FACE_2: 1,
+//   FACE_3: 2,
+//   FACE_4: 3,
+//   LEFT_SHOULDER: 4, // Top shoulder buttons
+//   RIGHT_SHOULDER: 5,
+//   LEFT_SHOULDER_BOTTOM: 6, // Bottom shoulder buttons
+//   RIGHT_SHOULDER_BOTTOM: 7,
+//   SELECT: 8,
+//   START: 9,
+//   LEFT_ANALOGUE_STICK: 10, // Analogue sticks (if depressible)
+//   RIGHT_ANALOGUE_STICK: 11,
+//   PAD_TOP: 12, // Directional (discrete) pad
+//   PAD_BOTTOM: 13,
+//   PAD_LEFT: 14,
+//   PAD_RIGHT: 15
+// };
 
-    this.exe.onTriggered();
+// gamepad.AXES = {
+//   LEFT_ANALOGUE_HOR: 0,
+//   LEFT_ANALOGUE_VERT: 1,
+//   RIGHT_ANALOGUE_HOR: 2,
+//   RIGHT_ANALOGUE_VERT: 3
+// };

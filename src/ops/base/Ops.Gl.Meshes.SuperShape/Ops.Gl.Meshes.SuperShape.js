@@ -2,9 +2,8 @@
 
 op.name="SuperShape";
 
-
 var render=op.inFunction("render");
-
+var pNormalizeSize=op.inValueBool("Normalize Size",true);
 var asPointCloud=op.inValueBool("Point Cloud",false);
 var pStep=op.inValue("Step",0.05);
 
@@ -22,15 +21,26 @@ var n12=op.inValue("n12",1);
 var n22=op.inValue("n22",1);
 var n32=op.inValue("n32",3);
 
+var trigger=op.outFunction("Trigger");
 var outNumVerts=op.outValue("Num Vertices");
+var outGeom=op.outObject("geom");
 
 var needsUpdate=true;
+var geometry=new CGL.Geometry();
+var mesh=null;
+var verts=[];
 
 function doUpdate()
 {
     needsUpdate=true;
 }
 
+asPointCloud.onChange=function()
+{
+    mesh=null;
+    needsUpdate=true;
+};
+pNormalizeSize.onChange=doUpdate;
 pStep.onChange=doUpdate;
 a1.onChange=doUpdate;
 b1.onChange=doUpdate;
@@ -47,21 +57,11 @@ n32.onChange=doUpdate;
 
 render.onTriggered=function()
 {
-    
     if(needsUpdate)update();
-    
-    if(mesh)
-    {
-        mesh.render(op.patch.cgl.getShader());
-    }
+    if(mesh) mesh.render(op.patch.cgl.getShader());
 
+    trigger.trigger();
 };
-
-
-var geometry=new CGL.Geometry();
-var mesh=null;
-var verts=[];
-
 
 function update()
 {
@@ -71,6 +71,10 @@ function update()
     step = pStep.get();
     var q = parseInt(2 * Math.PI / step + 1.3462);
     var o = parseInt(Math.PI / step + 1.5);
+    
+    var resize=pNormalizeSize.get();
+    var max=0;
+
     for (var l = 0; l < (q); l++) {
         var u = -Math.PI + l * step;
         for (var h = 0; h < (o); h++) {
@@ -97,24 +101,31 @@ function update()
             e = Math.pow(m, n22.get()) + Math.pow(k, n32.get());
             t = Math.abs(e);
             t = Math.pow(t, (-1 / n12.get()));
-            f = v * Math.cos(u) * t * Math.cos(s) * 100;
-            p = v * Math.sin(u) * t * Math.cos(s) * 100;
-            w = t * Math.sin(s) * 100;
+            f = v * Math.cos(u) * t * Math.cos(s);
+            p = v * Math.sin(u) * t * Math.cos(s);
+            w = t * Math.sin(s);
             verts.push(f);
             verts.push(p);
             verts.push(w);
+            
+            if(resize)
+            {
+                max=Math.max(max,Math.abs(f));
+                max=Math.max(max,Math.abs(p));
+                max=Math.max(max,Math.abs(w));
+            }
         }
     }
+    
+    if(resize && max>1) for(var i=0;i<verts.length;i++) verts[i]/=max;
+
     
     if(asPointCloud.get())
     {
         geometry.setPointVertices(verts);
-        // geom.texCoords=texCoords;
-    
         mesh =new CGL.Mesh(op.patch.cgl,geometry,op.patch.cgl.gl.POINTS);
         mesh.addVertexNumbers=true;
         mesh.setGeom(geometry);
-
     }
     else
     {
@@ -145,7 +156,7 @@ function update()
             else mesh.setGeom(geometry);        
     }
 
-        
-
-
+    outGeom.set(null);
+    outGeom.set(geometry);
 };
+

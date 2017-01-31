@@ -14,6 +14,10 @@ var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{display:"bool"}));
 var result=op.addOutPort(new Port(op,"result"));
 var finished=op.addOutPort(new Port(op,"finished",OP_PORT_TYPE_VALUE));
 
+var resetted=false;
+var waitForReset=op.inValueBool("Wait for Reset",false);
+
+
 var anim=new CABLES.TL.Anim();
 
 anim.createPort(op,"easing",init);
@@ -34,7 +38,11 @@ function init()
 }
 
 loop.onValueChanged=init;
-reset.onTriggered=init;
+reset.onTriggered=function()
+{
+    resetted=true;
+    init();
+};
 
 rewind.onTriggered=function()
 {
@@ -44,6 +52,11 @@ rewind.onTriggered=function()
 
 exe.onTriggered=function()
 {
+    if(waitForReset.get() && !resetted) 
+    {
+        result.set(inStart.get());
+        return;
+    }
     var t=Date.now()/1000;
     var v=anim.getValue(t);
     if(anim.hasEnded(t))

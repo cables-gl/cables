@@ -3,7 +3,7 @@ CGL.Geometry=function(name)
 {
     this.name=name;
     this.faceVertCount=3;
-    this.vertices=[];
+    this._vertices=[];
     this.verticesIndices=[];
     this.texCoords=[];
     this.texCoordsIndices=[];
@@ -13,7 +13,19 @@ CGL.Geometry=function(name)
     this.vertexColors=[];
 
     this._indexed=true;
+
 };
+
+
+CGL.Geometry.prototype.__defineGetter__("vertices", function()
+{
+    return this._vertices;
+});
+
+CGL.Geometry.prototype.__defineSetter__("vertices", function(v)
+{
+    this.setVertices(v);
+});
 
 CGL.Geometry.prototype.clear=function()
 {
@@ -24,6 +36,14 @@ CGL.Geometry.prototype.clear=function()
     this.texCoordsIndices.length=0;
     this.vertexNormals.length=0;
 };
+
+CGL.Geometry.prototype.setVertices=function(arr)
+{
+    if(arr instanceof Float32Array)this._vertices=arr;
+        else this._vertices=new Float32Array(arr);
+};
+
+
 
 // deprecated
 CGL.Geometry.prototype.calcNormals=function(smooth)
@@ -529,6 +549,9 @@ CGL.Geometry.LinesToGeom=function(points,options)
         var vEnd=vec3.create();
         var q=quat.create();
 
+
+
+
         vec3.set(vStart,
             points[p+0],
             points[p+1],
@@ -575,30 +598,48 @@ CGL.Geometry.LinesToGeom=function(points,options)
         rectPoints[index++ ]=vecA[1];
         rectPoints[index++ ]=vecA[2];
 
+        tc.push(p/points.length);
+        tc.push(0);
+
         // b
         rectPoints[index++ ]=vecB[0];
         rectPoints[index++ ]=vecB[1];
         rectPoints[index++ ]=vecB[2];
 
+        tc.push(p/points.length);
+        tc.push(0);
+
         // c
         rectPoints[index++ ]=vecC[0];
         rectPoints[index++ ]=vecC[1];
         rectPoints[index++ ]=vecC[2];
+
+        tc.push(p/points.length);
+        tc.push(0);
 
         // d
         rectPoints[index++ ]=vecD[0];
         rectPoints[index++]=vecD[1];
         rectPoints[index++]=vecD[2];
 
+        tc.push(p/points.length);
+        tc.push(0);
+
         // c
         rectPoints[index++ ]=vecC[0];
         rectPoints[index++ ]=vecC[1];
         rectPoints[index++ ]=vecC[2];
 
+        tc.push(p/points.length);
+        tc.push(0);
+
         // b
         rectPoints[index++]=vecB[0];
         rectPoints[index++]=vecB[1];
         rectPoints[index++]=vecB[2];
+
+        tc.push(p/points.length);
+        tc.push(0);
 
         if(lastC)
         {
@@ -606,26 +647,44 @@ CGL.Geometry.LinesToGeom=function(points,options)
             rectPoints[index++]=vecA[1];
             rectPoints[index++]=vecA[2];
 
+            tc.push(p/points.length);
+            tc.push(0);
+
             rectPoints[index++]=vecB[0];
             rectPoints[index++]=vecB[1];
             rectPoints[index++]=vecB[2];
 
+            tc.push(p/points.length);
+            tc.push(0);
+
             rectPoints[index++]=lastC[0];
             rectPoints[index++]=lastC[1];
             rectPoints[index++]=lastC[2];
+
+            tc.push(p/points.length);
+            tc.push(0);
 
 
             rectPoints[index++]=lastD[0];
             rectPoints[index++]=lastD[1];
             rectPoints[index++]=lastD[2];
 
+            tc.push(p/points.length);
+            tc.push(0);
+
             rectPoints[index++]=vecA[0];
             rectPoints[index++]=vecA[1];
             rectPoints[index++]=vecA[2];
 
+            tc.push(p/points.length);
+            tc.push(0);
+
             rectPoints[index++]=vecB[0];
             rectPoints[index++]=vecB[1];
             rectPoints[index++]=vecB[2];
+
+            tc.push(p/points.length);
+            tc.push(0);
         }
         else
         {
@@ -645,11 +704,11 @@ CGL.Geometry.LinesToGeom=function(points,options)
     verts=rectPoints;
 
     // console.log(rectPoints);
-    for(i=0;i<rectPoints.length;i++)
-    {
-        tc.push(0);
-        tc.push(0);
-    }
+    // for(i=0;i<rectPoints.length/3;i++)
+    // {
+    //     tc.push(i/rectPoints.length/3);
+    //     tc.push(0);
+    // }
 
     count=0;
     for(i=0;i<rectPoints.length;i+=3)

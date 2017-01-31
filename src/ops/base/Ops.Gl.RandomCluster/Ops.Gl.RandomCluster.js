@@ -13,6 +13,10 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 var idx=op.addOutPort(new Port(op,"index")) ;
 var rnd=op.addOutPort(new Port(op,"rnd")) ;
 
+var rotX=op.inValueSlider("Rotate X",1);
+var rotY=op.inValueSlider("Rotate Y",1);
+var rotZ=op.inValueSlider("Rotate Z",1);
+
 var cgl=op.patch.cgl;
 var randoms=[];
 var randomsRot=[];
@@ -83,9 +87,9 @@ function reset()
         randoms.push(v);
 
         randomsRot.push(vec3.fromValues(
-            Math.seededRandom()*360*CGL.DEG2RAD,
-            Math.seededRandom()*360*CGL.DEG2RAD,
-            Math.seededRandom()*360*CGL.DEG2RAD
+            Math.seededRandom()*360*CGL.DEG2RAD*rotX.get(),
+            Math.seededRandom()*360*CGL.DEG2RAD*rotY.get(),
+            Math.seededRandom()*360*CGL.DEG2RAD*rotZ.get()
             ));
     }
 }
@@ -99,5 +103,8 @@ scaleX.onChange=reset;
 scaleZ.onChange=reset;
 scaleY.onChange=reset;
 round.onChange=reset;
+rotX.onChange=reset;
+rotY.onChange=reset;
+rotZ.onChange=reset;
 
 num.set(100);

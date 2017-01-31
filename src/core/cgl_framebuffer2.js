@@ -1,0 +1,156 @@
+
+// look at this: https://github.com/WebGLSamples/WebGL2Samples/blob/master/samples/fbo_multisample.html
+
+
+var CGL=CGL || {};
+
+CGL.Framebuffer2=function(cgl,w,h,options)
+{
+    this._cgl=cgl;
+
+    this._width = 0;
+    this._height = 0;
+
+    this._options=options ||
+        {
+            "isFloatingPointTexture":false
+        };
+
+    this._texture=new CGL.Texture(cgl,
+        {
+            "isFloatingPointTexture":this._options.isFloatingPointTexture,
+            "filter":CGL.Texture.FILTER_LINEAR
+        });
+
+    this._textureDepth=new CGL.Texture(cgl,
+        {
+            "isDepthTexture":true
+        });
+
+
+
+
+
+    this.setSize(w||512 ,h||512);
+};
+
+
+
+
+CGL.Framebuffer2.prototype.getWidth=function(){ return this._width; };
+CGL.Framebuffer2.prototype.getHeight=function(){ return this._height; };
+
+CGL.Framebuffer2.prototype.getTextureColor=function()
+{
+    return this._texture;
+};
+
+CGL.Framebuffer2.prototype.getTextureDepth=function()
+{
+    return this._textureDepth;
+};
+
+CGL.Framebuffer2.prototype.setFilter=function(f)
+{
+    this._texture.filter=f;
+    this._texture.setSize(this._width,this._height);
+};
+
+CGL.Framebuffer2.prototype.delete=function()
+{
+    this._texture.delete();
+    this._textureDepth.delete();
+    // cgl.gl.deleteRenderbuffer(depthBuffer);
+    // cgl.gl.deleteFramebuffer(frameBuf);
+};
+
+
+CGL.Framebuffer2.prototype.setSize=function(w,h)
+{
+    this._width=w;
+    this._height=h;
+
+    CGL.profileFrameBuffercreate++;
+
+    this._frameBuffer=this._cgl.gl.createFramebuffer();
+    this._colorBuffer=this._cgl.gl.createFramebuffer();
+
+    this._texture.setSize(this._width,this._height);
+    this._textureDepth.setSize(this._width,this._height);
+
+
+    this._colorRenderbuffer = this._cgl.gl.createRenderbuffer();
+    this._depthRenderbuffer = this._cgl.gl.createRenderbuffer();
+
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
+
+    this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._colorRenderbuffer);
+    if(!this._options.isFloatingPointTexture)
+        this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4, this._cgl.gl.RGBA8, this._width, this._height);
+    this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffer);
+
+    this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
+    if(!this._options.isFloatingPointTexture)
+        this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4,this._cgl.gl.DEPTH_COMPONENT16, this._width,this._height);
+    this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
+
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._colorBuffer);
+    this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._texture.tex, 0);
+
+    this._cgl.gl.framebufferTexture2D(
+        this._cgl.gl.FRAMEBUFFER,
+        this._cgl.gl.DEPTH_ATTACHMENT,
+        this._cgl.gl.TEXTURE_2D,
+        this._textureDepth.tex,
+        0 );
+
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
+    this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
+};
+
+
+CGL.Framebuffer2.prototype.renderStart=function()
+{
+    this._cgl.pushMvMatrix();
+
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
+
+    this._cgl.pushFrameBuffer(this._frameBuffer);
+
+    this._cgl.pushPMatrix();
+    this._cgl.gl.viewport(0, 0, this._width,this._height );
+
+    this._cgl.gl.clearColor(0,0,0,0);
+    this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+};
+
+CGL.Framebuffer2.prototype.renderEnd=function()
+{
+    this._cgl.popPMatrix();
+
+    // Blit framebuffers, no Multisample texture 2d in WebGL 2
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._frameBuffer);
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this._colorBuffer);
+    this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
+    this._cgl.gl.blitFramebuffer(
+        0, 0, this._width, this._height,
+        0, 0, this._width, this._height,
+        this._cgl.gl.COLOR_BUFFER_BIT, this._cgl.gl.NEAREST
+    );
+
+
+    this._cgl.gl.blitFramebuffer(
+        0, 0, this._width, this._height,
+        0, 0, this._width, this._height,
+        this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST
+    );
+
+    // Pass 2
+
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer() );
+
+
+    this._cgl.popMvMatrix();
+    this._cgl.resetViewPort();
+};
