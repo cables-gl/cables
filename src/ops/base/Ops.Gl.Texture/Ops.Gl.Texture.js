@@ -6,7 +6,6 @@ var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"c
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-// var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var textureOut=op.outTexture("texture");
 var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
@@ -45,12 +44,8 @@ function reload(nocache)
 
 function realReload(nocache)
 {
-
-    // if(!opInstanced)return;
     var url=op.patch.getFilePath(filename.get());
     if(nocache)url+='?rnd='+CABLES.generateUUID();
-
-    // console.log('startloading ',filename.get());
 
     if((filename.get() && filename.get().length>1))
     {
@@ -118,11 +113,6 @@ function onWrapChange()
 
     reload();
 }
-
-// textureOut.onPreviewChanged=function()
-// {
-//     if(textureOut.showPreview) CGL.Texture.previewTexture=textureOut.get();
-// };
 
 op.onFileUploaded=function(fn)
 {

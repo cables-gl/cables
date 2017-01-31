@@ -32,7 +32,6 @@ var srcFrag=''
 
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   vec4 texCol=texture2D(tex,texCoord);'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
     
     
