@@ -71,7 +71,7 @@ CGL.State=function()
 
         if(!this.gl)
         {
-            if(this.patch.config.onError)this.patch.config.onError('sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
+            if(this.patch.config.onError)this.patch.config.onError('NO_WEBGL','sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
             this.aborted=true;
             return;
         }

@@ -94,20 +94,22 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
     var table2=circleTable(stacks,true);
 
     /* Allocate vertex and normal buffers, bail out if memory allocation fails */
-    geom.vertices=[];
-    geom.vertexNormals=[];
-    geom.texCoords=[];
+    geom.clear();
+    geomVertices=[];
+    geomVertexNormals=[];
+    geomTexCoords=[];
+    geomVerticesIndices=[];
 
     /* top */
-    geom.vertices[0] = 0;
-    geom.vertices[1] = 0;
-    geom.vertices[2] = radius;
-    geom.vertexNormals[0] = 0;
-    geom.vertexNormals[1] = 0;
-    geom.vertexNormals[2] = 1;
+    geomVertices[0] = 0;
+    geomVertices[1] = 0;
+    geomVertices[2] = radius;
+    geomVertexNormals[0] = 0;
+    geomVertexNormals[1] = 0;
+    geomVertexNormals[2] = 1;
 
-    geom.texCoords[0] = 0;
-    geom.texCoords[1] = 0;
+    geomTexCoords[0] = 0;
+    geomTexCoords[1] = 0;
 
     idx = 3;
 
@@ -120,31 +122,31 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
             y = table1.sint[j]*table2.sint[i];
             z = table2.cost[i];
 
-            geom.vertices[idx  ] = x*radius;
-            geom.vertices[idx+1] = y*radius;
-            geom.vertices[idx+2] = z*radius;
+            geomVertices[idx  ] = x*radius;
+            geomVertices[idx+1] = y*radius;
+            geomVertices[idx+2] = z*radius;
 
-            geom.vertexNormals[idx  ] = x;
-            geom.vertexNormals[idx+1] = y;
-            geom.vertexNormals[idx+2] = z;
+            geomVertexNormals[idx  ] = x;
+            geomVertexNormals[idx+1] = y;
+            geomVertexNormals[idx+2] = z;
 
-            geom.texCoords[idx/3*2  ] = (j)/(slices);
-            geom.texCoords[idx/3*2+1] = (i-1)/(stacks-2);
+            geomTexCoords[idx/3*2  ] = (j)/(slices);
+            geomTexCoords[idx/3*2+1] = (i-1)/(stacks-2);
             
-            // op.log(geom.texCoords[idx/3*2+1  ]);
+            // op.log(geomTexCoords[idx/3*2+1  ]);
         }
     }
 
     /* bottom */
-    geom.vertices[idx  ] =  0;
-    geom.vertices[idx+1] =  0;
-    geom.vertices[idx+2] = -radius;
-    geom.vertexNormals[idx  ] =  0;
-    geom.vertexNormals[idx+1] =  0;
-    geom.vertexNormals[idx+2] = -1;
+    geomVertices[idx  ] =  0;
+    geomVertices[idx+1] =  0;
+    geomVertices[idx+2] = -radius;
+    geomVertexNormals[idx  ] =  0;
+    geomVertexNormals[idx+1] =  0;
+    geomVertexNormals[idx+2] = -1;
 
-    geom.texCoords[(idx+3)/3*2] = 1;
-    geom.texCoords[(idx+3)/3*2+1] = 1;
+    geomTexCoords[(idx+3)/3*2] = 1;
+    geomTexCoords[(idx+3)/3*2+1] = 1;
 
     // indices
 
@@ -152,15 +154,13 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
 
     for (j=0, idx=0;  j<=slices;  j++, idx+=2)
     {
-        geom.verticesIndices[idx  ] = j+1;              /* 0 is top vertex, 1 is first for first stack */
-        geom.verticesIndices[idx+1] = 0;
+        geomVerticesIndices[idx  ] = j+1;              /* 0 is top vertex, 1 is first for first stack */
+        geomVerticesIndices[idx+1] = 0;
     }
-    geom.verticesIndices[idx  ] = 1;                    /* repeat first slice's idx for closing off shape */
-    geom.verticesIndices[idx+1] = 0;
-    // idx+=2;
- 
+    geomVerticesIndices[idx  ] = 1;                    /* repeat first slice's idx for closing off shape */
+    geomVerticesIndices[idx+1] = 0;
 
-var nVert=geom.vertices.length/3;
+    var nVert=geomVertices.length/3;
 
     /* middle stacks: */
     /* Strip indices are relative to first index belonging to strip, NOT relative to first vertex/normal pair in array */
@@ -169,22 +169,27 @@ var nVert=geom.vertices.length/3;
         offset = 1+i*slices;                    /* triangle_strip indices start at 1 (0 is top vertex), and we advance one stack down as we go along */
         for (j=0; j<slices; j++, idx+=2)
         {
-            geom.verticesIndices[idx  ] = offset+j+slices;
-            geom.verticesIndices[idx+1] = offset+j;
+            geomVerticesIndices[idx  ] = offset+j+slices;
+            geomVerticesIndices[idx+1] = offset+j;
         }
-        geom.verticesIndices[idx  ] = offset+slices;        /* repeat first slice's idx for closing off shape */
-        geom.verticesIndices[idx+1] = offset;
+        geomVerticesIndices[idx  ] = offset+slices;        /* repeat first slice's idx for closing off shape */
+        geomVerticesIndices[idx+1] = offset;
     }
 
     /* bottom stack */
     offset = 1+(stacks-2)*slices;               /* triangle_strip indices start at 1 (0 is top vertex), and we advance one stack down as we go along */
     for (j=0; j<slices; j++, idx+=2)
     {
-        geom.verticesIndices[idx  ] = nVert-1;              /* zero based index, last element in array (bottom vertex)... */
-        geom.verticesIndices[idx+1] = offset+j;
+        geomVerticesIndices[idx  ] = nVert-1;              /* zero based index, last element in array (bottom vertex)... */
+        geomVerticesIndices[idx+1] = offset+j;
     }
-    geom.verticesIndices[idx  ] = nVert-1;                  /* repeat first slice's idx for closing off shape */
-    geom.verticesIndices[idx+1] = offset;
+    geomVerticesIndices[idx  ] = nVert-1;                  /* repeat first slice's idx for closing off shape */
+    geomVerticesIndices[idx+1] = offset;
+
+    geom.vertices=geomVertices;
+    geom.vertexNormals=geomVertexNormals;
+    geom.texCoords=geomTexCoords;
+    geom.verticesIndices=geomVerticesIndices;
 
     geomOut.set(geom);
 

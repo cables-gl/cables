@@ -186,11 +186,7 @@ function bufferData()
             geom.texCoords.push(0);
             geom.verticesIndices.push(i/3);
         }
-        
     }
-
-
-    
 
     if(!mesh)  mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);

@@ -16,8 +16,6 @@ var cgl=op.patch.cgl;
 var drawSpline=op.addInPort(new Port(op,"Spline",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 drawSpline.set(false);
 
-var hund=op.inValueBool('');
-
 
 
 var oldPrim=0;
