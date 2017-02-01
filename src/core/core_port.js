@@ -5,7 +5,6 @@ var CABLES=CABLES || {};
 
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
-    // var self=this;
     this.direction=PORT_DIR_IN;
     this.id=CABLES.generateUUID();
     this.parent=__parent;
@@ -35,7 +34,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this._warnedDeprecated=false;
 };
 {
-
     CABLES.Port.prototype.onAnimToggle=function(){};
     CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
 
@@ -63,9 +61,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             // if(oldAnimVal!=this.value)
             {
                 oldAnimVal=this.value;
-
-                if(this.onChange) this.onChange(this,this.value);
-                    else if(this.onValueChanged) this.onValueChanged(this,this.value); // deprecated
+                this.forceChange();
             }
         }
 
@@ -88,8 +84,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                     try
                     {
                         this.value=v;
-                        if(this.onChange) this.onChange();
-                        else if(this.onValueChanged) this.onValueChanged();
+                        this.forceChange();
                     }
                     catch(ex)
                     {
@@ -123,12 +118,19 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             if(oldAnimVal!=this.value)
             {
                 oldAnimVal=this.value;
-                if(this.onValueChanged)this.onValueChanged();
-                else if(this.onChange)this.onChange();
+                this.forceChange();
             }
             oldAnimVal=this.value;
         }
     };
+
+    CABLES.Port.prototype.forceChange=function()
+    {
+        if(this.onChange) this.onChange(this,this.value);
+            else if(this.onValueChanged) this.onValueChanged(this,this.value); // deprecated
+    };
+
+
 
     CABLES.Port.prototype.getTypeString=function()
     {
