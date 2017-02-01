@@ -34,6 +34,10 @@ if(cgl.glVersion==1 && !cgl.gl.getExtension('OES_standard_derivatives') )
     console.log(123);
     op.uiAttr( { 'error': 'no oes standart derivatives!' } );
 }
+else
+{
+    op.uiAttr( { 'error': null } );
+}
 
 
 if(cgl.glVersion==1)
