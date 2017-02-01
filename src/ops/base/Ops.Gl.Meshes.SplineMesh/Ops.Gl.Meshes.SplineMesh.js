@@ -57,6 +57,7 @@ function doRebuild()
 
     geomOut.set(null);
     geomOut.set(geom);
+    
 
     if(calcNormals.get())geom.calculateNormals({forceZUp:true});
 needsBuild=false;

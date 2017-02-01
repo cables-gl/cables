@@ -39,8 +39,13 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
         if(options.instanced)instanced=options.instanced;
     }
 
-    if(array instanceof Float32Array)arr=new Float32Array(array);
-    else arr=new Float32Array(array);
+    if(!(array instanceof Float32Array))
+    {
+        arr=new Float32Array(array);
+        CGL.profileNonTypedAttrib++;
+        CGL.profileNonTypedAttribNames=this._geom.name+' '+name+' ';
+    }
+    else arr=array;
 
     for(var i=0;i<this._attributes.length;i++)
     {
@@ -93,6 +98,8 @@ CGL.Mesh.prototype.updateVertices=function(geom)
     var verticeBuffer=geom.vertices;
     if(!(verticeBuffer instanceof Float32Array))
     {
+        CGL.profileNonTypedAttrib++;
+        CGL.profileNonTypedAttribNames=this._geom.name+' '+name+' ';
         verticeBuffer=new Float32Array(geom.vertices);
     }
 
@@ -140,10 +147,9 @@ CGL.Mesh.prototype.setGeom=function(geom)
     // make this optional!
 	if(this.addVertexNumbers)
 	{
-       	var verticesNumbers=[];
-        verticesNumbers.length=this._geom.vertices.length/3;
+       	var verticesNumbers=new Float32Array(this._geom.vertices.length/3);
         for(i=0;i<this._geom.vertices.length/3;i++)verticesNumbers[i]=i;
-        this.setAttribute('attrVertIndex',verticesNumbers,1,
+            this.setAttribute('attrVertIndex',verticesNumbers,1,
             function(attr,geom,shader)
             {
                 if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);

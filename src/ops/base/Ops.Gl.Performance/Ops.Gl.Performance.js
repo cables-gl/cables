@@ -118,6 +118,13 @@ function updateText()
     if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
     if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
     if(CGL.profileTextureDelete>0)warn+='Texture delete! ';
+    
+    if(CGL.profileNonTypedAttrib>0)warn+='Not-Typed Buffer Attrib! '+CGL.profileNonTypedAttribNames;
+    
+    //     CGL.profileNonTypedAttrib=0;
+    // CGL.profileNonTypedAttribNames="";
+
+    
     if(warn.length>0)
     {
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
@@ -166,6 +173,8 @@ function updateText()
     CGL.profileEffectBuffercreate=0;
     CGL.profileTextureDelete=0;
 
+    CGL.profileNonTypedAttrib=0;
+    CGL.profileNonTypedAttribNames="";
 
 }
 

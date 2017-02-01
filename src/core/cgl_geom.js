@@ -77,6 +77,8 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 };
 
 
+
+
 CGL.Geometry.prototype.merge=function(geom)
 {
     var oldIndizesLength=this.verticesIndices.length;
@@ -88,14 +90,13 @@ CGL.Geometry.prototype.merge=function(geom)
         this.verticesIndices[oldIndizesLength+i]=geom.verticesIndices[i]+vertLength;
     }
 
-    // console.log('this.vertices.length',this.vertices.length);
+    // this.vertices=this.vertices.concat(geom.vertices);
+    // this.texCoords=this.texCoords.concat(geom.texCoords);
+    // this.vertexNormals=this.vertexNormals.concat(geom.vertexNormals);
 
-    this.vertices=this.vertices.concat(geom.vertices);
-
-    // console.log('this.vertices.length',this.vertices.length);
-
-    this.texCoords=this.texCoords.concat(geom.texCoords);
-    this.vertexNormals=this.vertexNormals.concat(geom.vertexNormals);
+    this.vertices=float32Concat(this.vertices,geom.vertices);
+    this.texCoords=float32Concat(this.texCoords,geom.texCoords);
+    this.vertexNormals=float32Concat(this.vertexNormals,geom.vertexNormals);
 
 };
 
@@ -168,9 +169,10 @@ CGL.Geometry.prototype.calculateNormals=function(options)
 
     var i=0;
 
-    // console.log('calcNormals');
 
-    this.vertexNormals.length=this.vertices.length;
+    if(!(this.vertexNormals instanceof Float32Array)) this.vertexNormals=new Float32Array(this.vertices.length);
+        else this.vertexNormals.length=this.vertices.length;
+
     for(i=0;i<this.vertices.length;i++)
     {
         this.vertexNormals[i]=0;
@@ -509,10 +511,8 @@ CGL.WirePoint=function(cgl,size)
 CGL.Geometry.LinesToGeom=function(points,options,geom)
 {
     // todo: optimize: do not create new arrays if length is the same - use existing geom arrays ...
+    if(!geom)geom=new CGL.Geometry();
 
-    var verts=[];
-    var tc=[];
-    var indices=[];
 
     var norms=[];
     var i=0;
@@ -523,7 +523,7 @@ CGL.Geometry.LinesToGeom=function(points,options,geom)
 
     if(points.length===0)
     {
-        for(i=0;i<7;i++)
+        for(i=0;i<8;i++)
         {
             points.push(Math.random()*2-1);
             points.push(Math.random()*2-1);
@@ -535,9 +535,19 @@ CGL.Geometry.LinesToGeom=function(points,options,geom)
     var lastPA=null;
     var lastPB=null;
 
-    verts.length=points.length/3*18;
-    indices.length=points.length/3;
-    tc.length=points.length/3*12;
+    var verts=geom.vertices;
+    var tc=geom.texCoords;
+    var indices=geom.verticesIndices;
+    if(verts.length!=points.length/3*18) verts=new Float32Array(points.length/3*18);
+    if(tc.length!=points.length/3*12) tc=new Float32Array(points.length/3*12);
+    if(indices.length!=points.length/3) indices=new Float32Array(points.length/3);
+
+
+    // var indices=new Float32Array(points.length/3);
+
+    // verts.length=points.length/3*18;
+    // indices.length=points.length/3;
+    // tc.length=points.length/3*12;
 
     var vecRot=vec3.create();
     var lastC=null;
@@ -672,14 +682,8 @@ CGL.Geometry.LinesToGeom=function(points,options,geom)
 
     // verts=verts;
 
-    count=0;
-    for(i=0;i<verts.length;i+=3)
-    {
-        indices[i/3]=count;
-        count++;
-    }
+    for(i=0;i<indices.length;i++) indices[i]=i;
 
-    if(!geom)geom=new CGL.Geometry();
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;

@@ -195,3 +195,19 @@ CGL.getWheelSpeed=function(event)
     return normalized;
 
 };
+
+// ----------------------------------------------------------------
+
+function float32Concat(first, second)
+{
+    if(!(first instanceof Float32Array))first=new Float32Array(first);
+    if(!(second instanceof Float32Array))second=new Float32Array(second);
+
+    var firstLength = first.length,
+        result = new Float32Array(firstLength + second.length);
+
+    result.set(first);
+    result.set(second, firstLength);
+
+    return result;
+}
