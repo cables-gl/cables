@@ -60,5 +60,5 @@ function doRebuild()
     
 
     if(calcNormals.get())geom.calculateNormals({forceZUp:true});
-needsBuild=false;
+    needsBuild=false;
 }
