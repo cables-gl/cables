@@ -31,6 +31,15 @@ Math.seededRandom = function(max, min)
 
 // ----------------------------------------------------------------
 
+function arrayWriteToEnd(arr,v)
+{
+    for(var i=1;i<arr.length;i++)arr[i-1]=arr[i];
+    arr[arr.length-1]=v;
+}
+
+// ----------------------------------------------------------------
+
+
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
