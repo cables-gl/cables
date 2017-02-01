@@ -21,7 +21,7 @@ var Spline=function()
 {
     this.mesh=null;
     this.points=[];
-    this.geom=new CGL.Geometry();
+    this.geom=new CGL.Geometry("splinefromarray");
     this.oldLength=0;
 };
 
@@ -67,10 +67,11 @@ render.onTriggered=function()
 
 function bufferData(spline,pointArr)
 {
+    if(!pointArr || pointArr.length==0)return;
     if(!spline.geom)
     {
-        spline.geom=new CGL.Geometry();
-        spline.geom.setPointVertices(pointArr);
+        spline.geom=new CGL.Geometry("splinefromarray");
+        // spline.geom.setPointVertices(pointArr);
     }
     if(!spline.mesh) 
     {
@@ -78,8 +79,9 @@ function bufferData(spline,pointArr)
     }
     else
     {
+
+    }
         spline.geom.vertices=pointArr;
         spline.mesh.updateVertices(spline.geom);
-    }
 
 }

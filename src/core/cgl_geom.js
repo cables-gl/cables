@@ -61,7 +61,10 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
         console.error('CGL MESH : SetPointVertices: Array must be multiple of three.');
         return;
     }
-    this.vertices=verts;
+
+    if(!(verts instanceof Float32Array)) this.vertices=new Float32Array(verts);
+        else this.vertices=verts;
+
     this.texCoords.length=verts.length/3*2;
     this.verticesIndices.length=verts.length/3;
 

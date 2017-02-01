@@ -12,7 +12,7 @@ geomOut.ignoreValueSerialize=true;
 
 var inPoints=op.inArray('points');
 
-var geom=new CGL.Geometry();
+var geom=new CGL.Geometry("splinemesh");
 var mesh=null;
 var cgl=op.patch.cgl;
 

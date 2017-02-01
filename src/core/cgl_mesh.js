@@ -91,7 +91,10 @@ CGL.Mesh.prototype.updateVertices=function(geom)
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
 
     var verticeBuffer=geom.vertices;
-    if(typeof verticeBuffer!= Float32Array) verticeBuffer=new Float32Array(geom.vertices);
+    if(!(verticeBuffer instanceof Float32Array))
+    {
+        verticeBuffer=new Float32Array(geom.vertices);
+    }
 
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, verticeBuffer, this._cgl.gl.DYNAMIC_DRAW);
 
