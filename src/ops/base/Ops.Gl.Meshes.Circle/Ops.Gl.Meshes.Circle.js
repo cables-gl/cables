@@ -42,7 +42,11 @@ var mesh=new CGL.Mesh(cgl,geom);
 function calc()
 {
 
+    var segs=Math.max(3,Math.floor(segments.get()));
+
     geom.clear();
+
+    
     var i=0,degInRad=0;
     var oldPosX=0,oldPosY=0;
     var oldPosXTexCoord=0,oldPosYTexCoord=0;
@@ -61,9 +65,9 @@ function calc()
         var lastX=0;
         var lastY=0;
         var tc=[];
-        for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
+        for (i=0; i <= segs*percent.get(); i++)
         {
-            degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+            degInRad = (360/segs)*i*CGL.DEG2RAD;
             posx=Math.cos(degInRad)*radius.get();
             posy=Math.sin(degInRad)*radius.get();
             
@@ -75,7 +79,7 @@ function calc()
                 verts.push(lastX);
                 verts.push(lastY);
                 verts.push(0);
-                posxTexCoord=1.0-(i-1)/segments.get();
+                posxTexCoord=1.0-(i-1)/segs;
                 
                 tc.push(posxTexCoord,posyTexCoord);
 
@@ -84,7 +88,7 @@ function calc()
             verts.push(posy);
             verts.push(0);
             
-            posxTexCoord=1.0-i/segments.get();
+            posxTexCoord=1.0-i/segs;
             tc.push(posxTexCoord,posyTexCoord);
 
 
@@ -98,9 +102,10 @@ function calc()
     else
     if(innerRadius.get()<=0)
     {
-        for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
+        var faces=[];
+        for (i=0; i <= segs*percent.get(); i++)
         {
-            degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+            degInRad = (360/segs)*i*CGL.DEG2RAD;
             posx=Math.cos(degInRad)*radius.get();
             posy=Math.sin(degInRad)*radius.get();
 
@@ -113,16 +118,13 @@ function calc()
             }
             else if(mapping.get()=='round')
             {
-                posxTexCoord=1.0-i/segments.get();
+                posxTexCoord=1.0-i/segs;
                 posyTexCoord=0;
                 posxTexCoordIn=posxTexCoord;
                 posyTexCoordIn=1;
             }
 
-        //   posxTexCoord=(Math.cos(degInRad)+1.0)/2;
-        //   posyTexCoord=(Math.sin(degInRad)+1.0)/2;
-
-            geom.addFace(
+            faces.push(
                       [posx,posy,0],
                       [oldPosX,oldPosY,0],
                       [0,0,0]
@@ -137,15 +139,20 @@ function calc()
             oldPosX=posx;
             oldPosY=posy;
       }
+      
+      geom=CGL.Geometry.buildFromFaces(faces);
     }
     else
     {
+        var faces=[];
+        var texCoords=[];
+        var vertexNormals=[];
         var count=0;
-        for (i=0; i <= Math.round(segments.get())*percent.get(); i++)
+        for (i=0; i <= segs*percent.get(); i++)
         {
             count++;
             
-            degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
+            degInRad = (360/segs)*i*CGL.DEG2RAD;
             posx=Math.cos(degInRad)*radius.get();
             posy=Math.sin(degInRad)*radius.get();
             
@@ -162,7 +169,7 @@ function calc()
             }
             else if(mapping.get()=='round')
             {
-                posxTexCoord=1.0-i/segments.get();
+                posxTexCoord=1.0-i/segs;
                 posyTexCoord=0;
                 posxTexCoordIn=posxTexCoord;
                 posyTexCoordIn=1;
@@ -173,23 +180,23 @@ function calc()
                 (count%parseInt(steps.get(),10)===0 && !invertSteps.get()) ||
                 (count%parseInt(steps.get(),10)!==0 && invertSteps.get()) )
             {
-                geom.addFace(
+                faces.push(
                           [posx,posy,0],
                           [oldPosX,oldPosY,0],
                           [posxIn,posyIn,0]
                           );
 
-                geom.addFace(
+                faces.push(
                           [posxIn,posyIn,0],
                           [oldPosX,oldPosY,0],
                           [oldPosXIn,oldPosYIn,0]
                           );
 
-                geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
-                geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
+                texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
+                texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
 
-                geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
-                geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
+                vertexNormals.push(0,0,1,0,0,1,0,0,1);
+                vertexNormals.push(0,0,1,0,0,1,0,0,1);
             }
 
             oldPosXTexCoordIn=posxTexCoordIn;
@@ -204,6 +211,9 @@ function calc()
             oldPosXIn=posxIn;
             oldPosYIn=posyIn;
         }
+        geom=CGL.Geometry.buildFromFaces(faces);
+        geom.vertexNormals=vertexNormals;
+        geom.texCoords=texCoords;
     }
 
     geomOut.set(null);

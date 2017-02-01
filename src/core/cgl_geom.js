@@ -226,51 +226,6 @@ CGL.Geometry.prototype.calculateNormals=function(options)
 };
 
 
-CGL.Geometry.prototype.addFace=function(a,b,c)
-{
-    var face=[-1,-1,-1];
-
-    for(var iv=0;iv<this.vertices;iv+=3)
-    {
-        if( this.vertices[iv+0]==a[0] &&
-            this.vertices[iv+1]==a[1] &&
-            this.vertices[iv+2]==a[2]) face[0]=iv/3;
-
-        if( this.vertices[iv+0]==b[0] &&
-            this.vertices[iv+1]==b[1] &&
-            this.vertices[iv+2]==b[2]) face[1]=iv/3;
-
-        if( this.vertices[iv+0]==c[0] &&
-            this.vertices[iv+1]==c[1] &&
-            this.vertices[iv+2]==c[2]) face[2]=iv/3;
-    }
-
-    if(face[0]==-1)
-    {
-        this.vertices.push(a[0],a[1],a[2]);
-        face[0]=(this.vertices.length-1)/3;
-    }
-
-    if(face[1]==-1)
-    {
-        this.vertices.push(b[0],b[1],b[2]);
-        face[1]=(this.vertices.length-1)/3;
-    }
-
-    if(face[2]==-1)
-    {
-        this.vertices.push(c[0],c[1],c[2]);
-        face[2]=(this.vertices.length-1)/3;
-    }
-
-    this.verticesIndices.push( parseInt( face[0],10 ) );
-    this.verticesIndices.push( parseInt( face[1],10 ) );
-    this.verticesIndices.push( parseInt( face[2],10 ) );
-
-    this.faceVertCount=this.verticesIndices.length;
-
-};
-
 
 
 
@@ -690,4 +645,67 @@ CGL.Geometry.LinesToGeom=function(points,options,geom)
 
     return geom;
 
+};
+
+
+
+CGL.Geometry.buildFromFaces=function(arr)
+{
+    var vertices=[];
+    var verticesIndices=[];
+
+
+    for(var i=0;i<arr.length;i+=3)
+    {
+        var a=arr[i+0];
+        var b=arr[i+1];
+        var c=arr[i+2];
+
+        var face=[-1,-1,-1];
+
+        for(var iv=0;iv<vertices;iv+=3)
+        {
+            if( vertices[iv+0]==a[0] &&
+                vertices[iv+1]==a[1] &&
+                vertices[iv+2]==a[2]) face[0]=iv/3;
+
+            if( vertices[iv+0]==b[0] &&
+                vertices[iv+1]==b[1] &&
+                vertices[iv+2]==b[2]) face[1]=iv/3;
+
+            if( vertices[iv+0]==c[0] &&
+                vertices[iv+1]==c[1] &&
+                vertices[iv+2]==c[2]) face[2]=iv/3;
+        }
+
+        if(face[0]==-1)
+        {
+            vertices.push(a[0],a[1],a[2]);
+            face[0]=(vertices.length-1)/3;
+        }
+
+        if(face[1]==-1)
+        {
+            vertices.push(b[0],b[1],b[2]);
+            face[1]=(vertices.length-1)/3;
+        }
+
+        if(face[2]==-1)
+        {
+            vertices.push(c[0],c[1],c[2]);
+            face[2]=(vertices.length-1)/3;
+        }
+
+        verticesIndices.push( parseInt( face[0],10 ) );
+        verticesIndices.push( parseInt( face[1],10 ) );
+        verticesIndices.push( parseInt( face[2],10 ) );
+
+        // this.faceVertCount=verticesIndices.length;
+    }
+
+    var geom=new CGL.Geometry();
+    geom.vertices=vertices;
+    geom.verticesIndices=verticesIndices;
+
+    return geom;
 };
