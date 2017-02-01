@@ -173,8 +173,8 @@ CGL.Geometry.prototype.calculateNormals=function(options)
     var i=0;
 
 
-    if(!(this.vertexNormals instanceof Float32Array)) this.vertexNormals=new Float32Array(this.vertices.length);
-        else this.vertexNormals.length=this.vertices.length;
+    if(!(this.vertexNormals instanceof Float32Array) || this.vertexNormals.length!=this.vertices.length) this.vertexNormals=new Float32Array(this.vertices.length);
+
 
     for(i=0;i<this.vertices.length;i++)
     {
