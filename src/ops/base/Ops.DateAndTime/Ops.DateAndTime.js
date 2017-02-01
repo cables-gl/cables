@@ -9,6 +9,7 @@ var outSeconds=op.outValue("Seconds");
 var d = new Date();
 
 var timeout=setTimeout(update,1000);
+update();
 
 function update()
 {

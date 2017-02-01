@@ -17,7 +17,7 @@ reset();
 
 function reset()
 {
-    arr.length=maxLength.get();
+    arr.length=Math.abs(Math.floor(maxLength.get()))||0;
     for(var i=0;i<arr.length;i++) arr[i]=0;
 }
 
