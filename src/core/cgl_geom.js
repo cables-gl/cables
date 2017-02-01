@@ -5,7 +5,7 @@ CGL.Geometry=function(name)
     this.faceVertCount=3;
     this._vertices=[];
     this.verticesIndices=[];
-    this.texCoords=[];
+    this.texCoords=new Float32Array();
     this.texCoordsIndices=[];
     this.vertexNormals=[];
     this.baycentrics=[];
@@ -64,6 +64,9 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 
     if(!(verts instanceof Float32Array)) this.vertices=new Float32Array(verts);
         else this.vertices=verts;
+
+    if(!(this.texCoords instanceof Float32Array)) this.texCoords=new Float32Array(verts.length/3*2);
+
 
     this.texCoords.length=verts.length/3*2;
     this.verticesIndices.length=verts.length/3;
@@ -170,8 +173,8 @@ CGL.Geometry.prototype.calculateNormals=function(options)
     var i=0;
 
 
-    if(!(this.vertexNormals instanceof Float32Array)) this.vertexNormals=new Float32Array(this.vertices.length);
-        else this.vertexNormals.length=this.vertices.length;
+    if(!(this.vertexNormals instanceof Float32Array) || this.vertexNormals.length!=this.vertices.length) this.vertexNormals=new Float32Array(this.vertices.length);
+
 
     for(i=0;i<this.vertices.length;i++)
     {

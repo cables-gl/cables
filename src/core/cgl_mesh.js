@@ -120,6 +120,8 @@ CGL.Mesh.prototype.setGeom=function(geom)
     CGL.MESH.lastShader=null;
     CGL.MESH.lastMesh=null;
 
+    CGL.profileMeshSetGeom++;
+
     if(!this.meshChanged()) this.unBind();
     var i=0;
 
@@ -130,7 +132,12 @@ CGL.Mesh.prototype.setGeom=function(geom)
     if(this._geom.verticesIndices.length>0)
     {
         this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
-        this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this._geom.verticesIndices), this._cgl.gl.DYNAMIC_DRAW);
+
+        if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
+            this.vertIndicesTyped=new Uint16Array(this._geom.verticesIndices);
+
+
+        this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
         this._bufVerticesIndizes.itemSize = 1;
         this._bufVerticesIndizes.numItems = this._geom.verticesIndices.length;
     }
@@ -144,17 +151,24 @@ CGL.Mesh.prototype.setGeom=function(geom)
     if(this._geom.hasOwnProperty('biTangents') && this._geom.biTangents && this._geom.biTangents.length>0) this.setAttribute('attrBiTangent',this._geom.biTangents,3);
     if(this._geom.vertexColors.length>0) this.setAttribute('attrVertColor',this._geom.vertexColors,4);
 
-    // make this optional!
+
+
 	if(this.addVertexNumbers)
 	{
-       	var verticesNumbers=new Float32Array(this._geom.vertices.length/3);
-        for(i=0;i<this._geom.vertices.length/3;i++)verticesNumbers[i]=i;
-            this.setAttribute('attrVertIndex',verticesNumbers,1,
-            function(attr,geom,shader)
-            {
-                if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);
-                shader.uniformNumVertices.setValue(geom.vertices.length/3);
-           });
+        var numVerts=this._geom.vertices.length/3;
+        if(!this._verticesNumbers || this._verticesNumbers.length!=numVerts)
+        {
+            this._verticesNumbers=new Float32Array(numVerts);
+
+            for(i=0;i<numVerts;i++)this._verticesNumbers[i]=i;
+
+            this.setAttribute('attrVertIndex',this._verticesNumbers,1,
+                function(attr,geom,shader)
+                {
+                    if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);
+                    shader.uniformNumVertices.setValue(geom.vertices.length/3);
+               });
+       }
 	}
     // for(i=0;i<this._geom.morphTargets.length;i++) addAttribute('attrMorphTargetA',this._geom.morphTargets[i],3);
 };

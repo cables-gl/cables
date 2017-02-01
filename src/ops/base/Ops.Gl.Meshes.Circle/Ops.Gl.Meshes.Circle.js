@@ -103,6 +103,9 @@ function calc()
     if(innerRadius.get()<=0)
     {
         var faces=[];
+        var texCoords=[];
+        var vertexNormals=[];
+
         for (i=0; i <= segs*percent.get(); i++)
         {
             degInRad = (360/segs)*i*CGL.DEG2RAD;
@@ -130,17 +133,20 @@ function calc()
                       [0,0,0]
                       );
 
-            geom.texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
-            geom.vertexNormals.push(0,0,1,0,0,1,0,0,1);
+            texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
+            vertexNormals.push(0,0,1,0,0,1,0,0,1);
             
             oldPosXTexCoord=posxTexCoord;
             oldPosYTexCoord=posyTexCoord;
             
             oldPosX=posx;
             oldPosY=posy;
-      }
+        }
       
-      geom=CGL.Geometry.buildFromFaces(faces);
+        geom=CGL.Geometry.buildFromFaces(faces);
+        geom.vertexNormals=vertexNormals;
+        geom.texCoords=texCoords;
+
     }
     else
     {
