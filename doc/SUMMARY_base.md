@@ -21,5 +21,6 @@
     * [Op Development](dev_ops/dev_ops.md)
     * [Ports](dev_creating_ports/dev_creating_ports.md)
     * [Callbacks](dev_callbacks/dev_callbacks.md)
+    * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
 
 * [Ops](chapter_readmes/ops/Readme.md)
