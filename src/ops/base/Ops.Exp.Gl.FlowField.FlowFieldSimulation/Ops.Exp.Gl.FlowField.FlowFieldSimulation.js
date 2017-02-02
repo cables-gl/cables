@@ -44,12 +44,12 @@ inDamping.onChange=function()
 function respawnAll()
 {
     particles.length=0;
-        for(var i=0;i<numParticles;i++)
-        {
-            var p=new Particle();    
-            p.spawn();
-            particles.push(p);
-        }
+    for(var i=0;i<numParticles;i++)
+    {
+        var p=new Particle();    
+        p.spawn();
+        particles.push(p);
+    }
 }
 
 
@@ -114,47 +114,27 @@ var Particle=function()
     this.speed=0;
     
     this.buff=new Float32Array(360);
-    
-    // this.buff=[];
-    // this.buff.length=360;
-    
 };
 
 Particle.prototype.spawn=function()
 {
-    // this.velocity=vec3.fromValues(0,0,0);
-    // this.velocity=vec3.fromValues(
-    //   120*(Math.random()-0.5),
-    //     120*(Math.random()-0.5),
-    //     0
-    //     );
     this.idleFrames=0;
     this.oldPos[0]=this.pos[0]=Math.random()*size-size/2;
     this.oldPos[1]=this.pos[1]=Math.random()*size-size/2;
     this.oldPos[2]=this.pos[2]=Math.random()*size/10-size/2/10;
-    // this.oldPos[2]=this.pos[2]=0;
-    // this.pos[2]=Math.random()*2-1;
     this.points=[];
-    // this.buff.clear();
-    
+
     for(var i=0;i<this.buff.length;i+=3)
     {
         this.buff[i+0]=this.pos[0]/size;
         this.buff[i+1]=this.pos[1]/size;
-        // this.buff[i+2]=this.pos[2]/size;
         this.buff[i+2]=0;
-        
     }
     this.rnd=Math.random();
-    // this.buff=new CGL.RingBuffer(150);
-
 
     this.startTime=Date.now();
     this.endTime=Date.now()+Math.random()*10*1000+5000;
     this.lifetime=0;
-    
-    
-    
 };
 
 
@@ -162,16 +142,11 @@ Particle.prototype.spawn=function()
 
 function vecLimit(v,max)
 {
-    
     if (vec3.sqrLen(v) > max*max)
     {
         vec3.normalize(v,v);
-    //   normalize();
         vec3.mul(v,v,vec3.fromValues(max,max,max));
-    //   mult(max);
     }
-    
-
 }
 
 var vecLength=vec3.create();
@@ -194,25 +169,14 @@ Particle.prototype.update=function(forces)
     
 
     vecLimit(this.velocity,maxSpeed);
-    // this.velocity.limit(maxSpeed);
-    // console.log(this.velocity);
-    // vec3.add(this.pos,this.pos,vec3.fromValues(0.3,0,0));
     vec3.add(this.pos,this.pos,this.velocity);
 
-    // this.points.push(this.pos[0]/size,this.pos[1]/size,this.pos[2]/size);
 
 
     // Get particle speed
-    // PVector vecLength = m_vecPos.get();
-    
-
-    // vecLength.sub(m_vecOldPos);
     vec3.sub(vecLength,this.oldPos,this.pos);
-    
-    //float fSpeed = vecLength.mag();
     this.speed = vec3.len(vecLength);
-    // console.log(speed);
-    
+
     if (this.speed < 0.05)
     {
         // Particle is pretty stationary
@@ -239,21 +203,6 @@ Particle.prototype.update=function(forces)
             this.spawn();
             // console.log("die off");
         }
-        else
-        {
-            // Particle is moving and not too far off screen
-            // this.idleFrames = 0;
-            
-            // Render it
-            // PVector vecDirNorm = vecLength.get();
-            // var vecDirNorm=vec3.create();
-            // vec3.normalize(vecDirNorm,vecLength);
-            // stroke(255,
-            //       150 + 100 * sin(vecDirNorm.x * 10),
-            //       120 + 90 * sin(vecDirNorm.y * 5),
-            //       fSpeed / fMaxSpeed * 200 + 55);
-            // line(m_vecPos.x, m_vecPos.y, m_vecOldPos.x, m_vecOldPos.y);
-        }
     }
 
     vec3.mul(this.velocity,this.velocity,damping);
@@ -267,58 +216,35 @@ Particle.prototype.apply=function(force)
 {
 
     // Are we close enough to be influenced?
-    // PVector  = m_vecPos.get();
-    // vecToOrigin.sub(force.pos);
     vec3.sub(vecToOrigin,this.pos,force.pos);
-    // float fDist = vecToOrigin.mag();
     var dist = vec3.len(vecToOrigin);
-    
-    // console.log(dist);
     
     if (dist < force.range)
     {
         var distAlpha = (force.range - dist) / force.range;
         distAlpha = distAlpha * distAlpha;
         
-        //   console.log(distAlpha);
         if (distAlpha > 0.92)
         {
             // If particle is too close to origin then kill it
-            // this.spawn();
             this.spawn();
             dieNear++;
         }
         else
         {
-            // console.log("YES");
-            // // Apply attraction/replusion force
-            // PVector vecNormal = vecToOrigin.get();
-            
-            // vecNormal.normalize();
             vec3.normalize(vecNormal,vecToOrigin);
-            // PVector vecForce = vecNormal.get();
             vec3.copy(vecForce,vecNormal);
-            // vecForce.mult(fDistAlpha * fMaxAttractForce);
             var vf=force.maxAttractForce;
             vec3.mul(vecForce,vecForce,vec3.fromValues(vf*distAlpha,vf*distAlpha,vf*distAlpha));
-            // m_vecVelocity.add(vecForce);
             vec3.add(this.velocity,this.velocity,vecForce);
-            
-            
-            
-            
+
             // // Apply spin force
-            // PVector vecTangentForce = new PVector(vecNormal.y, -vecNormal.x, 0);
-            
             this.tangentForce[0]=vecNormal[1];
             this.tangentForce[1]=-vecNormal[0];
             this.tangentForce[2]=-vecNormal[2];
             
-            
-            // vecTangentForce.mult(fDistAlpha * fMaxAngleForce);
             var f=distAlpha * force.maxAngleForce;
             vec3.mul(this.tangentForce,this.tangentForce,vec3.fromValues(f,f,f));
-            // m_vecVelocity.add(vecTangentForce);
             vec3.add(this.velocity,this.velocity,this.tangentForce);
         }
     }
@@ -353,51 +279,28 @@ exec.onTriggered=function()
     {
         var p=particles[i];
         p.update(forces);
-        // vec3.set(vec, p.pos[0]/size,p.pos[1]/size,p.pos[2]/size);
-        // cgl.pushMvMatrix();
-        // mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
-        
         outSpeed.set(p.speed/maxSpeed);
         
-        
-var ppos=Math.abs( (p.pos[0]/size) );
-
-var lifetimeMul=Math.min(p.lifetime/3000,1);
-
-// p.buff.copyWithin(0, 3);
-// p.buff[p.buff.length-3]=p.pos[0]/size;
-// p.buff[p.buff.length-2]=p.pos[1]/size;
-// p.buff[p.buff.length-1]=vec3.len(p.velocity)*0.01*lifetimeMul;
+                
+        var ppos=Math.abs( (p.pos[0]/size) );
+        var lifetimeMul=Math.min(p.lifetime/3000,1);
 
         arrayWriteToEnd(p.buff,p.pos[0]/size)
         arrayWriteToEnd(p.buff,p.pos[1]/size)
         // arrayWriteToEnd(p.buff,p.pos[2]/size)
         arrayWriteToEnd(p.buff,vec3.len(p.velocity)*0.01*lifetimeMul)
         
-        // arrayWriteToEnd(p.buff, Math.sin(p.speed+ppos+p.rnd*20)*0.01 );
-
-// if( ppos>0.3 && ppos<0.6)
-// {
-//     col.set(1);
-// }
-// else
-col.set(ppos);
-// col.set( Math.abs( p.pos[0]/size) );
-outIndex.set(i);
-// outOffset.set(p.buff.pos());
-outPoints.set(p.buff);
+        
+        col.set(ppos);
+        outIndex.set(i);
+        outPoints.set(p.buff);
 
         next.trigger();
-        // cgl.popMvMatrix();
-        
-
-        // outArr.set(p.points);
-        
     }
-    
-    // console.log(dieOffArea,dieSlow,dieNear);
-    
+
+
+};
 
 
 
-};reset();
+reset();
