@@ -170,7 +170,9 @@ var arrayContains = function(arr,obj)
 // ----------------------------------------------------------------
 
 CGL=CGL || {};
-CGL.DEG2RAD=3.14159/180.0;
+CGL.DEG2RAD=Math.PI/180.0;
+CGL.RAD2DEG=180.0/Math.PI;
+
 
 CGL.onLoadingAssetsFinished=null; // deprecated / remove later
 
