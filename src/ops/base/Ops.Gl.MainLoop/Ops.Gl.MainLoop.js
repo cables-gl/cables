@@ -6,6 +6,7 @@ var trigger=op.outFunction("trigger");
 var width=op.outValue("width");
 var height=op.outValue("height");
 var reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
+var active=op.inValueBool("Active",true);
 
 var cgl=op.patch.cgl;
 
@@ -40,6 +41,7 @@ op.patch.loading.setOnFinishedLoading(function(cb)
 
 op.onAnimFrame=function(time)
 {
+    if(!active.get())return;
     if(cgl.aborted || cgl.canvas.clientWidth===0 || cgl.canvas.clientHeight===0)return;
 
     if(op.patch.loading.getProgress()<1.0)
