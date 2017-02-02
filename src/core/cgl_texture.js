@@ -1,6 +1,8 @@
 
 var CGL=CGL || {};
 
+CGL.DEFAULT_TEXTURE_SIZE=8;
+
 CGL.Texture=function(__cgl,options)
 {
     if(!__cgl) throw "no cgl";
@@ -30,9 +32,18 @@ CGL.Texture=function(__cgl,options)
         if("unpackAlpha" in options) this.unpackAlpha=options.unpackAlpha;
         if("flip" in options) this.flip=options.flip;
     }
+    else
+    {
+        options=
+        {
+            width:CGL.DEFAULT_TEXTURE_SIZE,
+            height:CGL.DEFAULT_TEXTURE_SIZE
+        };
+    }
 
-    if(options && options.width && options.height)this.setSize(options.width, options.height);
-        else this.setSize(8,8);
+
+    this.setSize(options.width, options.height);
+        // else this.setSize(CGL.DEFAULT_TEXTURE_SIZE,CGL.DEFAULT_TEXTURE_SIZE);
 };
 
 CGL.Texture.prototype.compareSettings=function(tex)
@@ -65,6 +76,8 @@ CGL.Texture.prototype.clone=function()
     if(!this.compareSettings(newTex))
     {
         console.error('Cloned texture settings do not compare!');
+        console.log(this);
+        console.log(newTex);
     }
 
     return newTex;
@@ -74,6 +87,10 @@ CGL.Texture.prototype.clone=function()
 
 CGL.Texture.prototype.setSize=function(w,h)
 {
+    if(w!=w || w<=0)w=CGL.DEFAULT_TEXTURE_SIZE;
+    if(h!=h || h<=0)h=CGL.DEFAULT_TEXTURE_SIZE;
+    w=Math.floor(w);
+    h=Math.floor(h);
     if(this.width==w && this.height==h)return;
 
     this.width=w;
