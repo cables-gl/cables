@@ -141,7 +141,7 @@ function generateMesh()
     if(!textureOut.get())return;
     if(!geom)
     {
-        geom=new CGL.Geometry();
+        geom=new CGL.Geometry("textmesh");
         
         geom.vertices = [
             1.0, 1.0, 0.0,
@@ -150,12 +150,12 @@ function generateMesh()
             0.0, 0.0, 0.0
         ];
         
-        geom.texCoords = [
+        geom.texCoords = new Float32Array([
              1.0, 1.0,
              0.0, 1.0,
              1.0, 0.0,
              0.0, 0.0
-        ];
+        ]);
         
         geom.verticesIndices = [
             0, 1, 2,
@@ -168,8 +168,8 @@ function generateMesh()
     var numChars=str.get().length;
     var m=mat4.create();
     var txt=str.get();
-    var tcOffsets=[];
-    var tcSize=[];
+    var tcOffsets=new Float32Array(numChars*2)
+    var tcSize=new Float32Array(numChars*2);
     var pos=0;
     createTexture=false;
     

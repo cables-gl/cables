@@ -23,7 +23,7 @@ var oldLength=0;
 var cgl=op.patch.cgl;
 
 
-var geom=new CGL.Geometry();
+var geom=new CGL.Geometry("spline");
 
 var mySplinePoints=[];
 var oldSplinePoints=null;
