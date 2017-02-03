@@ -1,7 +1,7 @@
 CABLES=CABLES||{};
 CABLES.WebAudio = CABLES.WebAudio || {};
 
-CABLES.WebAudio.createAudioContext = function() {
+CABLES.WebAudio.createAudioContext = function(op) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   if(window.AudioContext) {
     if(!window.audioContext) {
