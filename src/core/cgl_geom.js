@@ -82,6 +82,8 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 
 
 
+
+
 CGL.Geometry.prototype.merge=function(geom)
 {
     var oldIndizesLength=this.verticesIndices.length;
@@ -309,8 +311,6 @@ CGL.Geometry.prototype.unIndex=function()
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
     this.verticesIndices=newIndizes;
-    // console.log(newTexCoords);
-
 };
 
 CGL.Geometry.prototype.calcBaycentric=function()

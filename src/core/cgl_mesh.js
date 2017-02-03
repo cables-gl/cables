@@ -13,13 +13,9 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._geom=null;
     this.numInstances=0;
     this._glPrimitive=glPrimitive;
-
     this.addVertexNumbers=false;
 
     this.setGeom(__geom);
-
-
-
 };
 
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
@@ -119,7 +115,6 @@ CGL.Mesh.prototype.setGeom=function(geom)
     this._geom=geom;
     CGL.MESH.lastShader=null;
     CGL.MESH.lastMesh=null;
-
     CGL.profileMeshSetGeom++;
 
     if(!this.meshChanged()) this.unBind();
@@ -133,9 +128,9 @@ CGL.Mesh.prototype.setGeom=function(geom)
     {
         this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 
-        if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
-            this.vertIndicesTyped=new Uint16Array(this._geom.verticesIndices);
-
+        // todo cache this ?
+        // if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
+        this.vertIndicesTyped=new Uint16Array(this._geom.verticesIndices);
 
         this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
         this._bufVerticesIndizes.itemSize = 1;
@@ -150,8 +145,6 @@ CGL.Mesh.prototype.setGeom=function(geom)
     if(this._geom.hasOwnProperty('tangents') && this._geom.tangents && this._geom.tangents.length>0) this.setAttribute('attrTangent',this._geom.tangents,3);
     if(this._geom.hasOwnProperty('biTangents') && this._geom.biTangents && this._geom.biTangents.length>0) this.setAttribute('attrBiTangent',this._geom.biTangents,3);
     if(this._geom.vertexColors.length>0) this.setAttribute('attrVertColor',this._geom.vertexColors,4);
-
-
 
 	if(this.addVertexNumbers)
 	{
@@ -185,10 +178,12 @@ CGL.Mesh.prototype._preBind=function(shader)
     }
 };
 
+
 CGL.Mesh.prototype._bind=function(shader)
 {
     this._cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
+
     this._cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(),this._bufVertices.itemSize, this._cgl.gl.FLOAT, false, 0, 0);
 
     for(i=0;i<this._attributes.length;i++)
@@ -320,6 +315,7 @@ CGL.Mesh.prototype.render=function(shader)
 
     if(shader.wireframe && this._geom.isIndexed())
     {
+        console.log("unindex");
         this._geom.unIndex();
         this._geom.calcBaycentric();
         this.setGeom(this._geom);
@@ -365,6 +361,19 @@ CGL.Mesh.prototype.render=function(shader)
     // if(shader.glPrimitive==2)prim=this._cgl.gl.LINE_STRIP;
     // if(cgl.points)prim=; // todo this should be in the shader...
     // prim=this._cgl.gl.LINE_STRIP;
+
+    // if(this._bufVerticesIndizes.numItems===0)
+    if(this.buffB)
+    {
+        this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, 0, this.buffB);
+        this._cgl.gl.beginTransformFeedback(this._cgl.gl.POINTS);
+
+        this._cgl.gl.drawArrays(prim, 0,this._bufVertices.numItems);
+        this._cgl.gl.endTransformFeedback();
+        this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, 0, null);
+        return;
+    }
+
 
     if(this._bufVerticesIndizes.numItems===0)
     {

@@ -81,60 +81,60 @@ srcVert+=''
 
 
 
-    var srcFrag='';
-    
-    if(cgl.glVersion==1)
-    {
-        srcFrag='#extension GL_OES_standard_derivatives : enable'
-        .endl()+'precision highp float;'
-        .endl()+'varying vec3 baycentric;'
-        .endl();
-    }
-    else
-    {
-        srcFrag=''
-        .endl()+'precision highp float;'
-        .endl()+'in vec3 baycentric;'
-        .endl()+'out vec4 fragColor;'
-        
-        .endl();
-    }
+var srcFrag='';
 
-    srcFrag+=''
-    .endl()+'uniform float width;'
-    .endl()+'uniform float opacity;'
-    .endl()+'uniform float r,g,b;'
-    .endl()+'uniform float fr,fg,fb;'
-    .endl()+''
-    .endl()+'float edgeFactor()'
-    .endl()+'{'
-    .endl()+'    vec3 d = fwidth(baycentric);'
-    .endl()+'    vec3 a3 = smoothstep(vec3(0.0), d*width*4.0, baycentric);'
-    .endl()+'    return min(min(a3.x, a3.y), a3.z);'
-    .endl()+'}'
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'vec4 col;'
-
-    .endl()+'#ifdef WIREFRAME_FILL'
-    .endl()+'    float v=opacity*(1.0-edgeFactor())*0.95;'
-    .endl()+'    vec3 wire = vec3(fr, fg, fb);'
-    .endl()+'    col.rgb = vec3(r, g, b);'
-    .endl()+'    col.rgb = mix(wire,col.rgb,v);'
-    .endl()+'    col.a = opacity;'
-    // .endl()+'    col = wire;'
-    .endl()+'#endif'
-
-    .endl()+'#ifndef WIREFRAME_FILL'
-    .endl()+'    col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
-    .endl()+'#endif'
-    // .endl()+'col.xyz=baycentric;'
+if(cgl.glVersion==1)
+{
+    srcFrag='#extension GL_OES_standard_derivatives : enable'
+    .endl()+'precision highp float;'
+    .endl()+'varying vec3 baycentric;'
     .endl();
+}
+else
+{
+    srcFrag=''
+    .endl()+'precision highp float;'
+    .endl()+'in vec3 baycentric;'
+    .endl()+'out vec4 fragColor;'
     
-    if(cgl.glVersion==1)srcFrag+='gl_FragColor =col;';
-    else srcFrag+='fragColor =col;';
+    .endl();
+}
 
-    srcFrag+=''.endl()+'}';
+srcFrag+=''
+.endl()+'uniform float width;'
+.endl()+'uniform float opacity;'
+.endl()+'uniform float r,g,b;'
+.endl()+'uniform float fr,fg,fb;'
+.endl()+''
+.endl()+'float edgeFactor()'
+.endl()+'{'
+.endl()+'    vec3 d = fwidth(baycentric);'
+.endl()+'    vec3 a3 = smoothstep(vec3(0.0), d*width*4.0, baycentric);'
+.endl()+'    return min(min(a3.x, a3.y), a3.z);'
+.endl()+'}'
+.endl()+'void main()'
+.endl()+'{'
+.endl()+'   vec4 col;'
+
+.endl()+'   #ifdef WIREFRAME_FILL'
+.endl()+'        float v=opacity*(1.0-edgeFactor())*0.95;'
+.endl()+'       vec3 wire = vec3(fr, fg, fb);'
+.endl()+'       col.rgb = vec3(r, g, b);'
+.endl()+'       col.rgb = mix(wire,col.rgb,v);'
+.endl()+'       col.a = opacity;'
+// .endl()+'    col = wire;'
+.endl()+'   #endif'
+
+.endl()+'   #ifndef WIREFRAME_FILL'
+.endl()+'       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
+.endl()+'   #endif'
+// .endl()+'col.xyz=baycentric;'
+.endl();
+
+if(cgl.glVersion==1)srcFrag+='gl_FragColor=col;';
+else srcFrag+='fragColor=col;';
+
+srcFrag+=''.endl()+'}';
 
 var doRender=function()
 {

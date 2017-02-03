@@ -17,16 +17,16 @@ var outOffset=op.outValue("offset");
 var outIndex=op.outValue("Index");
 var outPoints=op.outArray("Points");
 
+var outDieSlow=op.outValue("Die Slow");
+
 
 var numParticles=1000;
 
-// var outArr=op.outArray("points");
-var size=1000;
+var size=10;
 var forces=[];
 var particles=[];
-// var damping = 0.85;
-var damping=vec3.fromValues(0.9,0.9,0.9);
-var maxSpeed=18.4252;
+var damping=vec3.fromValues(0.8,0.8,0.8);
+var maxSpeed=10.04252;
 
 var dieOffArea=0;
 var dieSlow=0;
@@ -58,9 +58,9 @@ function reset()
     forces.length=0;
     var force=new Force();
     forces.push(force);
-    force.range=2000;
-    force.maxAttractForce=0.0;
-    force.maxAngleForce=0.5;
+    force.range=22;
+    force.maxAttractForce=0.001;
+    force.maxAngleForce=0.02;
     force.pos=vec3.fromValues(0,0,0);
     
     
@@ -68,9 +68,9 @@ function reset()
     {
         var force=new Force();
         forces.push(force);
-        force.range=Math.random()*300+50;
-        force.maxAttractForce=Math.random()*-1;
-        force.maxAngleForce=rndPos(10)+2;
+        force.range=Math.random()*size/3+size/10;
+        force.maxAttractForce=Math.random()*0.1;
+        force.maxAngleForce=Math.random()*0.1;
         force.pos=vec3.fromValues(rndPos(),rndPos(),0);
     }
     
@@ -91,8 +91,8 @@ function reset()
 var Force=function()
 {
     this.range=200;
-    this.maxAttractForce=-8;
-    this.maxAngleForce=2;
+    this.maxAttractForce=-0.1;
+    this.maxAngleForce=0.1;
     this.pos=vec3.create();
 };
 
@@ -126,8 +126,8 @@ Particle.prototype.spawn=function()
 
     for(var i=0;i<this.buff.length;i+=3)
     {
-        this.buff[i+0]=this.pos[0]/size;
-        this.buff[i+1]=this.pos[1]/size;
+        this.buff[i+0]=this.pos[0];
+        this.buff[i+1]=this.pos[1];
         this.buff[i+2]=0;
     }
     this.rnd=Math.random();
@@ -177,7 +177,7 @@ Particle.prototype.update=function(forces)
     vec3.sub(vecLength,this.oldPos,this.pos);
     this.speed = vec3.len(vecLength);
 
-    if (this.speed < 0.05)
+    if (this.speed < 0.005)
     {
         // Particle is pretty stationary
         this.idleFrames++;
@@ -186,6 +186,7 @@ Particle.prototype.update=function(forces)
         if (this.idleFrames > 100)
         {
             dieSlow++;
+            
             // console.log('die faul');
             this.spawn();
         }
@@ -259,6 +260,8 @@ var vec=vec3.create();
 exec.onTriggered=function()
 {
     
+    outDieSlow.set(dieSlow);
+    
     dieOffArea=0;
     dieSlow=0;
     dieNear=0;
@@ -266,7 +269,7 @@ exec.onTriggered=function()
     for(var j=0;j<forces.length;j++)
     {
         cgl.pushMvMatrix();
-        vec3.set(vec, forces[j].pos[0]/size,forces[j].pos[1]/size,forces[j].pos[2]/size);
+        vec3.set(vec, forces[j].pos[0],forces[j].pos[1],forces[j].pos[2]);
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
 
         // outSpeed.set(p.speed/maxSpeed);
@@ -282,13 +285,13 @@ exec.onTriggered=function()
         outSpeed.set(p.speed/maxSpeed);
         
                 
-        var ppos=Math.abs( (p.pos[0]/size) );
+        var ppos=Math.abs( (p.pos[0]) );
         var lifetimeMul=Math.min(p.lifetime/3000,1);
 
-        arrayWriteToEnd(p.buff,p.pos[0]/size)
-        arrayWriteToEnd(p.buff,p.pos[1]/size)
-        // arrayWriteToEnd(p.buff,p.pos[2]/size)
-        arrayWriteToEnd(p.buff,vec3.len(p.velocity)*0.01*lifetimeMul)
+        arrayWriteToEnd(p.buff,p.pos[0])
+        arrayWriteToEnd(p.buff,p.pos[1])
+        // arrayWriteToEnd(p.buff,p.pos[2])
+        arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
         
         
         col.set(ppos);

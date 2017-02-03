@@ -28,6 +28,7 @@ CGL.Shader=function(_cgl,_name)
     var camPosUniform=null;
     var normalMatrixUniform=null;
     var attrVertexPos = -1;
+    this.transformFeedbackVaryings=false;
 
     this.glPrimitive=null;
     this.offScreenPass=false;
@@ -345,6 +346,10 @@ CGL.Shader=function(_cgl,_name)
 
     var linkProgram=function(program)
     {
+
+        if(self.transformFeedbackVaryings)
+            cgl.gl.transformFeedbackVaryings( program, ["outPos"], cgl.gl.SEPARATE_ATTRIBS );
+
         cgl.gl.linkProgram(program);
 
         var infoLog=cgl.gl.getProgramInfoLog(program);
@@ -359,9 +364,9 @@ CGL.Shader=function(_cgl,_name)
             console.log(this.srcFrag);
             console.log(name+' programinfo: ',cgl.gl.getProgramInfoLog(program));
 
-console.log('--------------------------------------');
-console.log(self);
-console.log('--------------------------------------');
+            console.log('--------------------------------------');
+            console.log(self);
+            console.log('--------------------------------------');
 
             name="errorshader";
             self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());

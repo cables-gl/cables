@@ -42,6 +42,13 @@ var srcFrag=''
     .endl()+'   float am=amount;'
     .endl()+'   #ifdef HAS_MASK'
     .endl()+'       am=amount*texture2D(imageMask,texCoord).r;'
+    .endl()+'       if(am<=0.02)'
+    .endl()+'       {'
+    .endl()+'           gl_FragColor=texture2D(texture, texCoord);'
+    // .endl()+'           gl_FragColor.r=1.0;'
+
+    .endl()+'           return;'
+    .endl()+'       }'
     .endl()+'   #endif'
 
     .endl()+'   vec2 delta=vec2(dirX*am*0.01,dirY*am*0.01);'
