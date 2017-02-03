@@ -28,7 +28,8 @@ render.onTriggered=function()
 
 function buildMesh()
 {
-    if(!geom)geom=new CGL.Geometry();
+    if(!geom)geom=new CGL.Geometry("cube");
+    geom.clear();
 
     var w=parseFloat(width.get());
     var nw=-1*parseFloat(width.get());

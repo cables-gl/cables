@@ -10,7 +10,7 @@ var srcHeadVert=''
     .endl()+'uniform float numVertices;'
     .endl()+'uniform float time;'
     .endl()+'float size=1000.0;'
-    .endl()+'attribute float attrVertIndex;'
+    // .endl()+'attribute float attrVertIndex;'
     .endl();
 
 var srcBodyVert=''
