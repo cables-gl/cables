@@ -363,14 +363,13 @@ CGL.Mesh.prototype.render=function(shader)
     // prim=this._cgl.gl.LINE_STRIP;
 
     // if(this._bufVerticesIndizes.numItems===0)
-    if(this.buffB)
+    if(shader.hasFeedbacks())
     {
-        this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, 0, this.buffB);
-        this._cgl.gl.beginTransformFeedback(this._cgl.gl.POINTS);
+        shader.bindFeedbacks();
 
         this._cgl.gl.drawArrays(prim, 0,this._bufVertices.numItems);
-        this._cgl.gl.endTransformFeedback();
-        this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, 0, null);
+        shader.unBindFeedbacks();
+
         return;
     }
 
