@@ -44,6 +44,7 @@ refresh.onTriggered = function()
     avgVolume.set(average/128);
 
     analyser.getByteFrequencyData(fftDataArray);
+    fftOut.set(null);
     fftOut.set(fftDataArray);
     
     

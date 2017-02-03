@@ -3,11 +3,10 @@ op.name="SplineFromArray";
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 
 var inIndex=op.inValue("index");
-var inOffset=op.inValue("offset");
 
 var inPoints=op.inArray("points");
 
-
+var dimensions=op.inValueSelect("Dimensions",["1","3"],3);
 
 
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
@@ -21,7 +20,7 @@ var Spline=function()
 {
     this.mesh=null;
     this.points=[];
-    this.geom=new CGL.Geometry();
+    this.geom=new CGL.Geometry("splinefromarray");
     this.oldLength=0;
 };
 
@@ -32,6 +31,7 @@ inPoints.onChange=function()
     var pointArr=inPoints.get();
     if(!pointArr)return;
     if(indx<0)return;
+    
     if(!splines[indx])
     {
         splines[indx]=new Spline();
@@ -45,7 +45,7 @@ render.onTriggered=function()
 {
     var indx=Math.floor(inIndex.get());
     if(indx>=splines.length)return;
-    if(!splines[indx].mesh)return;
+    if(!splines[indx] || !splines[indx].mesh)return;
     var shader=cgl.getShader();
     if(!shader)return;
     cgl.pushMvMatrix();
@@ -63,23 +63,55 @@ render.onTriggered=function()
 
 };
 
-
+var dataBuffer=new Float32Array();
 
 function bufferData(spline,pointArr)
 {
+    if(!pointArr || pointArr.length==0)return;
     if(!spline.geom)
     {
-        spline.geom=new CGL.Geometry();
-        spline.geom.setPointVertices(pointArr);
+        spline.geom=new CGL.Geometry("splinefromarray");
+        // spline.geom.setPointVertices(pointArr);
     }
     if(!spline.mesh) 
     {
         spline.mesh=new CGL.Mesh(cgl, spline.geom);
     }
-    else
+    
+    
+    if(dimensions.get()==3)
     {
         spline.geom.vertices=pointArr;
-        spline.mesh.updateVertices(spline.geom);
     }
+    else
+    if(dimensions.get()==1)
+    {
+        if(Math.floor(pointArr.length)*3 != dataBuffer.length)
+        {
+            dataBuffer=new Float32Array(Math.floor(pointArr.length*3));
+            for(var i=0;i<dataBuffer.length;i+=3)
+            {
+                dataBuffer[i+0]=i;
+                dataBuffer[i+1]=0;
+                dataBuffer[i+2]=0;
+            }
+        }
+    
+        for(var i=0;i<dataBuffer.length;i+=3)
+        {
+            dataBuffer[i+1]=pointArr[i];
+        }
+
+
+        spline.geom.vertices=dataBuffer;
+
+    }
+    spline.mesh.updateVertices(spline.geom);
 
 }
+
+
+
+
+
+

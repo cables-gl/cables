@@ -5,7 +5,7 @@ CGL.Geometry=function(name)
     this.faceVertCount=3;
     this._vertices=[];
     this.verticesIndices=[];
-    this.texCoords=[];
+    this.texCoords=new Float32Array();
     this.texCoordsIndices=[];
     this.vertexNormals=[];
     this.baycentrics=[];
@@ -61,7 +61,13 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
         console.error('CGL MESH : SetPointVertices: Array must be multiple of three.');
         return;
     }
-    this.vertices=verts;
+
+    if(!(verts instanceof Float32Array)) this.vertices=new Float32Array(verts);
+        else this.vertices=verts;
+
+    if(!(this.texCoords instanceof Float32Array)) this.texCoords=new Float32Array(verts.length/3*2);
+
+
     this.texCoords.length=verts.length/3*2;
     this.verticesIndices.length=verts.length/3;
 
@@ -72,6 +78,10 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
         this.texCoords[i*2+1]=0;
     }
 };
+
+
+
+
 
 
 CGL.Geometry.prototype.merge=function(geom)
@@ -85,14 +95,13 @@ CGL.Geometry.prototype.merge=function(geom)
         this.verticesIndices[oldIndizesLength+i]=geom.verticesIndices[i]+vertLength;
     }
 
-    // console.log('this.vertices.length',this.vertices.length);
+    // this.vertices=this.vertices.concat(geom.vertices);
+    // this.texCoords=this.texCoords.concat(geom.texCoords);
+    // this.vertexNormals=this.vertexNormals.concat(geom.vertexNormals);
 
-    this.vertices=this.vertices.concat(geom.vertices);
-
-    // console.log('this.vertices.length',this.vertices.length);
-
-    this.texCoords=this.texCoords.concat(geom.texCoords);
-    this.vertexNormals=this.vertexNormals.concat(geom.vertexNormals);
+    this.vertices=float32Concat(this.vertices,geom.vertices);
+    this.texCoords=float32Concat(this.texCoords,geom.texCoords);
+    this.vertexNormals=float32Concat(this.vertexNormals,geom.vertexNormals);
 
 };
 
@@ -165,9 +174,10 @@ CGL.Geometry.prototype.calculateNormals=function(options)
 
     var i=0;
 
-    // console.log('calcNormals');
 
-    this.vertexNormals.length=this.vertices.length;
+    if(!(this.vertexNormals instanceof Float32Array) || this.vertexNormals.length!=this.vertices.length) this.vertexNormals=new Float32Array(this.vertices.length);
+
+
     for(i=0;i<this.vertices.length;i++)
     {
         this.vertexNormals[i]=0;
@@ -220,51 +230,6 @@ CGL.Geometry.prototype.calculateNormals=function(options)
     }
 };
 
-
-CGL.Geometry.prototype.addFace=function(a,b,c)
-{
-    var face=[-1,-1,-1];
-
-    for(var iv=0;iv<this.vertices;iv+=3)
-    {
-        if( this.vertices[iv+0]==a[0] &&
-            this.vertices[iv+1]==a[1] &&
-            this.vertices[iv+2]==a[2]) face[0]=iv/3;
-
-        if( this.vertices[iv+0]==b[0] &&
-            this.vertices[iv+1]==b[1] &&
-            this.vertices[iv+2]==b[2]) face[1]=iv/3;
-
-        if( this.vertices[iv+0]==c[0] &&
-            this.vertices[iv+1]==c[1] &&
-            this.vertices[iv+2]==c[2]) face[2]=iv/3;
-    }
-
-    if(face[0]==-1)
-    {
-        this.vertices.push(a[0],a[1],a[2]);
-        face[0]=(this.vertices.length-1)/3;
-    }
-
-    if(face[1]==-1)
-    {
-        this.vertices.push(b[0],b[1],b[2]);
-        face[1]=(this.vertices.length-1)/3;
-    }
-
-    if(face[2]==-1)
-    {
-        this.vertices.push(c[0],c[1],c[2]);
-        face[2]=(this.vertices.length-1)/3;
-    }
-
-    this.verticesIndices.push( parseInt( face[0],10 ) );
-    this.verticesIndices.push( parseInt( face[1],10 ) );
-    this.verticesIndices.push( parseInt( face[2],10 ) );
-
-    this.faceVertCount=this.verticesIndices.length;
-
-};
 
 
 
@@ -346,8 +311,6 @@ CGL.Geometry.prototype.unIndex=function()
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
     this.verticesIndices=newIndizes;
-    // console.log(newTexCoords);
-
 };
 
 CGL.Geometry.prototype.calcBaycentric=function()
@@ -503,22 +466,22 @@ CGL.WirePoint=function(cgl,size)
 };
 
 
-CGL.Geometry.LinesToGeom=function(points,options)
+CGL.Geometry.LinesToGeom=function(points,options,geom)
 {
-    var verts=[];
-    var tc=[];
-    var indices=[];
+    // todo: optimize: do not create new arrays if length is the same - use existing geom arrays ...
+    if(!geom)geom=new CGL.Geometry();
+
+
     var norms=[];
     var i=0;
 
     options=options||{};
     options.thickness=options.thickness||0.1;
-
     points=points||[];
 
     if(points.length===0)
     {
-        for(i=0;i<7;i++)
+        for(i=0;i<8;i++)
         {
             points.push(Math.random()*2-1);
             points.push(Math.random()*2-1);
@@ -526,12 +489,23 @@ CGL.Geometry.LinesToGeom=function(points,options)
         }
     }
 
-    var rectPoints=[];
     var count=0;
     var lastPA=null;
     var lastPB=null;
 
-    rectPoints.length=points.length/3*18+18;
+    var verts=geom.vertices;
+    var tc=geom.texCoords;
+    var indices=geom.verticesIndices;
+    if(verts.length!=points.length/3*18) verts=new Float32Array(points.length/3*18);
+    if(tc.length!=points.length/3*12) tc=new Float32Array(points.length/3*12);
+    if(indices.length!=points.length/3) indices=new Float32Array(points.length/3);
+
+
+    // var indices=new Float32Array(points.length/3);
+
+    // verts.length=points.length/3*18;
+    // indices.length=points.length/3;
+    // tc.length=points.length/3*12;
 
     var vecRot=vec3.create();
     var lastC=null;
@@ -542,16 +516,13 @@ CGL.Geometry.LinesToGeom=function(points,options)
     var vecC=vec3.create();
     var vecD=vec3.create();
     var index=0;
+    var indexTc=0;
+    var vStart=vec3.create();
+    var vEnd=vec3.create();
+    var q=quat.create();
 
     for(var p=0;p<points.length;p+=3)
     {
-        var vStart=vec3.create();
-        var vEnd=vec3.create();
-        var q=quat.create();
-
-
-
-
         vec3.set(vStart,
             points[p+0],
             points[p+1],
@@ -573,15 +544,23 @@ CGL.Geometry.LinesToGeom=function(points,options)
 
         var m=options.thickness/2;
 
-        vec3.set(vecA,
-            points[p+0]+vecRot[0]*m,
-            points[p+1]+vecRot[1]*m,
-            points[p+2]+vecRot[2]*m);
+        if(lastC)
+        {
+            vec3.copy(vecA,lastC);
+            vec3.copy(vecB,lastD);
+        }
+        else
+        {
+            vec3.set(vecA,
+                points[p+0]+vecRot[0]*m,
+                points[p+1]+vecRot[1]*m,
+                points[p+2]+vecRot[2]*m);
 
-        vec3.set(vecB,
-            points[p+0]+vecRot[0]*-m,
-            points[p+1]+vecRot[1]*-m,
-            points[p+2]+vecRot[2]*-m);
+            vec3.set(vecB,
+                points[p+0]+vecRot[0]*-m,
+                points[p+1]+vecRot[1]*-m,
+                points[p+2]+vecRot[2]*-m);
+        }
 
         vec3.set(vecC,
             points[p+3]+vecRot[0]*m,
@@ -594,138 +573,142 @@ CGL.Geometry.LinesToGeom=function(points,options)
             points[p+5]+vecRot[2]*-m);
 
         // a
-        rectPoints[index++ ]=vecA[0];
-        rectPoints[index++ ]=vecA[1];
-        rectPoints[index++ ]=vecA[2];
+        verts[index++]=vecA[0];
+        verts[index++]=vecA[1];
+        verts[index++]=vecA[2];
 
-        tc.push(p/points.length);
-        tc.push(0);
+        tc[indexTc++]=p/points.length;
+        tc[indexTc++]=0;
 
         // b
-        rectPoints[index++ ]=vecB[0];
-        rectPoints[index++ ]=vecB[1];
-        rectPoints[index++ ]=vecB[2];
+        verts[index++]=vecB[0];
+        verts[index++]=vecB[1];
+        verts[index++]=vecB[2];
 
-        tc.push(p/points.length);
-        tc.push(0);
+        tc[indexTc++]=p/points.length;
+        tc[indexTc++]=0;
 
         // c
-        rectPoints[index++ ]=vecC[0];
-        rectPoints[index++ ]=vecC[1];
-        rectPoints[index++ ]=vecC[2];
+        verts[index++]=vecC[0];
+        verts[index++]=vecC[1];
+        verts[index++]=vecC[2];
 
-        tc.push(p/points.length);
-        tc.push(0);
+        tc[indexTc++]=p/points.length;
+        tc[indexTc++]=0;
 
         // d
-        rectPoints[index++ ]=vecD[0];
-        rectPoints[index++]=vecD[1];
-        rectPoints[index++]=vecD[2];
+        verts[index++]=vecD[0];
+        verts[index++]=vecD[1];
+        verts[index++]=vecD[2];
 
-        tc.push(p/points.length);
-        tc.push(0);
+        tc[indexTc++]=p/points.length;
+        tc[indexTc++]=0;
 
         // c
-        rectPoints[index++ ]=vecC[0];
-        rectPoints[index++ ]=vecC[1];
-        rectPoints[index++ ]=vecC[2];
+        verts[index++]=vecC[0];
+        verts[index++]=vecC[1];
+        verts[index++]=vecC[2];
 
-        tc.push(p/points.length);
-        tc.push(0);
+        tc[indexTc++]=p/points.length;
+        tc[indexTc++]=0;
 
         // b
-        rectPoints[index++]=vecB[0];
-        rectPoints[index++]=vecB[1];
-        rectPoints[index++]=vecB[2];
+        verts[index++]=vecB[0];
+        verts[index++]=vecB[1];
+        verts[index++]=vecB[2];
 
-        tc.push(p/points.length);
-        tc.push(0);
+        tc[indexTc++]=p/points.length;
+        tc[indexTc++]=0;
 
-        if(lastC)
-        {
-            rectPoints[index++]=vecA[0];
-            rectPoints[index++]=vecA[1];
-            rectPoints[index++]=vecA[2];
-
-            tc.push(p/points.length);
-            tc.push(0);
-
-            rectPoints[index++]=vecB[0];
-            rectPoints[index++]=vecB[1];
-            rectPoints[index++]=vecB[2];
-
-            tc.push(p/points.length);
-            tc.push(0);
-
-            rectPoints[index++]=lastC[0];
-            rectPoints[index++]=lastC[1];
-            rectPoints[index++]=lastC[2];
-
-            tc.push(p/points.length);
-            tc.push(0);
-
-
-            rectPoints[index++]=lastD[0];
-            rectPoints[index++]=lastD[1];
-            rectPoints[index++]=lastD[2];
-
-            tc.push(p/points.length);
-            tc.push(0);
-
-            rectPoints[index++]=vecA[0];
-            rectPoints[index++]=vecA[1];
-            rectPoints[index++]=vecA[2];
-
-            tc.push(p/points.length);
-            tc.push(0);
-
-            rectPoints[index++]=vecB[0];
-            rectPoints[index++]=vecB[1];
-            rectPoints[index++]=vecB[2];
-
-            tc.push(p/points.length);
-            tc.push(0);
-        }
-        else
+        if(!lastC)
         {
             lastC=vec3.create();
             lastD=vec3.create();
         }
 
-        lastC[0]=vecC[0];
-        lastC[1]=vecC[1];
-        lastC[2]=vecC[2];
+        vec3.copy(lastC,vecC);
+        vec3.copy(lastD,vecD);
 
-        lastD[0]=vecD[0];
-        lastD[1]=vecD[1];
-        lastD[2]=vecD[2];
+        // lastC[0]=vecC[0];
+        // lastC[1]=vecC[1];
+        // lastC[2]=vecC[2];
+        //
+        // lastD[0]=vecD[0];
+        // lastD[1]=vecD[1];
+        // lastD[2]=vecD[2];
     }
 
-    verts=rectPoints;
+    // verts=verts;
 
-    // console.log(rectPoints);
-    // for(i=0;i<rectPoints.length/3;i++)
-    // {
-    //     tc.push(i/rectPoints.length/3);
-    //     tc.push(0);
-    // }
+    for(i=0;i<indices.length;i++) indices[i]=i;
 
-    count=0;
-    for(i=0;i<rectPoints.length;i+=3)
-    {
-        indices.push(count);
-        count++;
-    }
-
-    var geom=new CGL.Geometry();
     geom.vertices=verts;
     geom.texCoords=tc;
     geom.verticesIndices=indices;
-    geom.calculateNormals({forceZUp:false});
-
-    // if(!mesh) mesh=new CGL.Mesh(cgl,geom);
-    //     else mesh.setGeom(geom);
 
     return geom;
 
+};
+
+
+
+CGL.Geometry.buildFromFaces=function(arr)
+{
+    var vertices=[];
+    var verticesIndices=[];
+
+
+    for(var i=0;i<arr.length;i+=3)
+    {
+        var a=arr[i+0];
+        var b=arr[i+1];
+        var c=arr[i+2];
+
+        var face=[-1,-1,-1];
+
+        for(var iv=0;iv<vertices;iv+=3)
+        {
+            if( vertices[iv+0]==a[0] &&
+                vertices[iv+1]==a[1] &&
+                vertices[iv+2]==a[2]) face[0]=iv/3;
+
+            if( vertices[iv+0]==b[0] &&
+                vertices[iv+1]==b[1] &&
+                vertices[iv+2]==b[2]) face[1]=iv/3;
+
+            if( vertices[iv+0]==c[0] &&
+                vertices[iv+1]==c[1] &&
+                vertices[iv+2]==c[2]) face[2]=iv/3;
+        }
+
+        if(face[0]==-1)
+        {
+            vertices.push(a[0],a[1],a[2]);
+            face[0]=(vertices.length-1)/3;
+        }
+
+        if(face[1]==-1)
+        {
+            vertices.push(b[0],b[1],b[2]);
+            face[1]=(vertices.length-1)/3;
+        }
+
+        if(face[2]==-1)
+        {
+            vertices.push(c[0],c[1],c[2]);
+            face[2]=(vertices.length-1)/3;
+        }
+
+        verticesIndices.push( parseInt( face[0],10 ) );
+        verticesIndices.push( parseInt( face[1],10 ) );
+        verticesIndices.push( parseInt( face[2],10 ) );
+
+        // this.faceVertCount=verticesIndices.length;
+    }
+
+    var geom=new CGL.Geometry();
+    geom.vertices=vertices;
+    geom.verticesIndices=verticesIndices;
+
+    return geom;
 };

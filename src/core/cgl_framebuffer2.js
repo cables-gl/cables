@@ -105,8 +105,42 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
         this._textureDepth.tex,
         0 );
 
+
+
+
+
+
+
+
+
+    if (!this._cgl.gl.isFramebuffer(this._colorBuffer)) throw("Invalid framebuffer");
+    var status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
+    switch (status)
+    {
+        case this._cgl.gl.FRAMEBUFFER_COMPLETE:
+            break;
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+            console.log('FRAMEBUFFER_INCOMPLETE_ATTACHMENT...');
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
+            console.log('FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT');
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
+            console.log('FRAMEBUFFER_INCOMPLETE_DIMENSIONS');
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+        case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
+            console.log('FRAMEBUFFER_UNSUPPORTED');
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+        default:
+            console.log('incomplete framebuffer',status);
+            throw new Error("Incomplete framebuffer: " + status);
+            // throw("Incomplete framebuffer: " + status);
+    }
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
+
+
+
 };
 
 

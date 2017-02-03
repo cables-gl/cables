@@ -3,7 +3,7 @@ var patch=this.patch;
 
 this.name='AudioPlayer';
 
-this.file=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',filter:'audio' }));
+this.file=op.inFile("file","audio");
 var play=op.addInPort(new Port(this,"play",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var autoPlay=op.addInPort(new Port(this,"Autoplay",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 

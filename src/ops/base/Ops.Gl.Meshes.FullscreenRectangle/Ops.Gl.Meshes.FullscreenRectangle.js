@@ -66,8 +66,6 @@ function rebuild()
     w=currentViewPort[2];
     h=currentViewPort[3];
 
-
-
     geom.vertices = [
          xx+w, xy+h,  0.0,
          xx,   xy+h,  0.0,
@@ -75,21 +73,21 @@ function rebuild()
          xx,   xy,    0.0
     ];
 
-if(flipY.get())
-    geom.texCoords = [
-         1.0, 0.0,
-         0.0, 0.0,
-         1.0, 1.0,
-         0.0, 1.0
-    ];
-
-else
-    geom.texCoords = [
-         1.0, 1.0,
-         0.0, 1.0,
-         1.0, 0.0,
-         0.0, 0.0
-    ];
+    if(flipY.get())
+        geom.texCoords = [
+             1.0, 0.0,
+             0.0, 0.0,
+             1.0, 1.0,
+             0.0, 1.0
+        ];
+    
+    else
+        geom.texCoords = [
+             1.0, 1.0,
+             0.0, 1.0,
+             1.0, 0.0,
+             0.0, 0.0
+        ];
 
     geom.verticesIndices = [
         0, 1, 2,

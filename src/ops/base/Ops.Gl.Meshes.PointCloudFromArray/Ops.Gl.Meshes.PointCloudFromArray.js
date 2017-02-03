@@ -25,13 +25,13 @@ function reset()
     var verts=arr.get();
     if(!verts)return;
     // if(!geom)
-    geom=new CGL.Geometry();
+    geom=new CGL.Geometry("pointcloudfromarray");
     
     var num=verts.length/3;
     num=Math.round(num);
-    var texCoords=[];
+    var texCoords=new Float32Array(num*2);
     var vertColors=[];
-    texCoords.length=num*2;
+    
     var changed=false;
 
     var rndTc=pTexCoordRand.get();

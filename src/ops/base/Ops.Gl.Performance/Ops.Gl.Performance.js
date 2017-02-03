@@ -118,6 +118,13 @@ function updateText()
     if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
     if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
     if(CGL.profileTextureDelete>0)warn+='Texture delete! ';
+    
+    if(CGL.profileNonTypedAttrib>0)warn+='Not-Typed Buffer Attrib! '+CGL.profileNonTypedAttribNames;
+    
+    //     CGL.profileNonTypedAttrib=0;
+    // CGL.profileNonTypedAttribNames="";
+
+    
     if(warn.length>0)
     {
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
@@ -152,7 +159,9 @@ function updateText()
         element.innerHTML+='<br/>frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         element.innerHTML+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         
-        element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+' uniforms: '+Math.ceil(CGL.profileUniformCount/fps);
+        element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+
+        ' uniforms: '+Math.ceil(CGL.profileUniformCount/fps)+
+        ' mesh.setGeom: '+CGL.profileMeshSetGeom;
         
     }
 
@@ -165,7 +174,10 @@ function updateText()
     CGL.profileFrameBuffercreate=0;
     CGL.profileEffectBuffercreate=0;
     CGL.profileTextureDelete=0;
+    CGL.profileMeshSetGeom=0;
 
+    CGL.profileNonTypedAttrib=0;
+    CGL.profileNonTypedAttribNames="";
 
 }
 

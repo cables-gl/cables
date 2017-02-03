@@ -23,7 +23,7 @@ var oldLength=0;
 var cgl=op.patch.cgl;
 
 
-var geom=new CGL.Geometry();
+var geom=new CGL.Geometry("spline");
 
 var mySplinePoints=[];
 var oldSplinePoints=null;
@@ -173,27 +173,29 @@ function bufferData()
         // console.log('no points...',cgl.frameStore.SplinePoints.length);
     }
 
-    geom.vertices=points;
-    
-    if(oldLength!=geom.vertices.length)
+
+    if(renderLines.get())
     {
-        oldLength=geom.vertices.length;
-        geom.texCoords.length=0;
-        geom.verticesIndices.length=0;
-        for(i=0;i<geom.vertices.length;i+=3)
-        {
-            geom.texCoords.push(0);
-            geom.texCoords.push(0);
-            geom.verticesIndices.push(i/3);
-        }
+        geom.vertices=points;
         
-    }
-
-
+        // console.log(geom.vertices.length);
+        
+        if(oldLength!=geom.vertices.length)
+        {
+            oldLength=geom.vertices.length;
+            if(geom.vertices.length*2!=geom.texCoords.length)geom.texCoords.length=geom.vertices.length*2;
+            geom.verticesIndices.length=geom.vertices.length;
+            for(i=0;i<geom.vertices.length;i+=3)
+            {
+                geom.texCoords[i*2+0]=0;
+                geom.texCoords[i*2+1]=0;
+                geom.verticesIndices[i/3]=i/3;
+            }
+        }
     
-
-    if(!mesh)  mesh=new CGL.Mesh(cgl,geom);
-        else mesh.setGeom(geom);
+        if(!mesh)  mesh=new CGL.Mesh(cgl,geom);
+            else mesh.setGeom(geom);
+    }
 
 }
 

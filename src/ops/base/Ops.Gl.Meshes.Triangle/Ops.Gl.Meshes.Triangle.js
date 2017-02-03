@@ -5,7 +5,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var sizeW=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var sizeH=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
-var geom=new CGL.Geometry();
+var geom=new CGL.Geometry("triangle");
 
 
 sizeW.set(1);

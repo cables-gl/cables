@@ -2,7 +2,6 @@ op.name="VectorField";
 
 var render=op.inFunction("Render");
 var next=op.outFunction("Next");
-var textureField=op.inTexture("textureField");
 var shader=null;
 
 function removeModule()
@@ -77,12 +76,15 @@ effect.setSourceTexture(simTexture);
 var firstTime=true;
 
 
+var outTex=op.outObject("simtex",simTexture);
+
+
 // draw
 
 var srcHeadVert=''
     .endl()+'uniform float {{mod}}_time;'
     .endl()+'uniform sampler2D {{mod}}_texture;'
-    .endl()+'attribute float attrVertIndex;'
+    // .endl()+'attribute float attrVertIndex;'
 
     .endl();
 
@@ -107,7 +109,7 @@ var srcBodyVert=''
 render.onTriggered=function()
 {
     
-    if(!textureField.get())return;
+    // if(!textureField.get())return;
     // simulation shader
     
     var t=effect.getCurrentSourceTexture().tex;
@@ -115,7 +117,7 @@ render.onTriggered=function()
     effect.bind();
 
     cgl.setTexture(0,t);
-    cgl.setTexture(1,textureField.get().tex);
+    // cgl.setTexture(1,textureField.get().tex);
 
     effect.finish();
     cgl.setPreviousShader();

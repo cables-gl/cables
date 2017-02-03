@@ -31,6 +31,15 @@ Math.seededRandom = function(max, min)
 
 // ----------------------------------------------------------------
 
+function arrayWriteToEnd(arr,v)
+{
+    for(var i=1;i<arr.length;i++)arr[i-1]=arr[i];
+    arr[arr.length-1]=v;
+}
+
+// ----------------------------------------------------------------
+
+
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
@@ -161,7 +170,9 @@ var arrayContains = function(arr,obj)
 // ----------------------------------------------------------------
 
 CGL=CGL || {};
-CGL.DEG2RAD=3.14159/180.0;
+CGL.DEG2RAD=Math.PI/180.0;
+CGL.RAD2DEG=180.0/Math.PI;
+
 
 CGL.onLoadingAssetsFinished=null; // deprecated / remove later
 
@@ -186,3 +197,19 @@ CGL.getWheelSpeed=function(event)
     return normalized;
 
 };
+
+// ----------------------------------------------------------------
+
+function float32Concat(first, second)
+{
+    if(!(first instanceof Float32Array))first=new Float32Array(first);
+    if(!(second instanceof Float32Array))second=new Float32Array(second);
+
+    var firstLength = first.length,
+        result = new Float32Array(firstLength + second.length);
+
+    result.set(first);
+    result.set(second, firstLength);
+
+    return result;
+}

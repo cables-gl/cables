@@ -21,6 +21,7 @@ CGL.Shader=function(_cgl,_name)
     this._needsRecompile=true;
     var infoLog='';
     var cgl=_cgl;
+    this._cgl=_cgl;
     var projMatrixUniform=null;
     var mvMatrixUniform=null;
     var mMatrixUniform=null;
@@ -28,6 +29,8 @@ CGL.Shader=function(_cgl,_name)
     var camPosUniform=null;
     var normalMatrixUniform=null;
     var attrVertexPos = -1;
+
+    this._feedBacks=[];
 
     this.glPrimitive=null;
     this.offScreenPass=false;
@@ -345,6 +348,13 @@ CGL.Shader=function(_cgl,_name)
 
     var linkProgram=function(program)
     {
+
+        if(self.hasFeedbacks())
+        {
+            cgl.gl.transformFeedbackVaryings( program, [ self._feedBacks[0].name ], cgl.gl.SEPARATE_ATTRIBS );
+        }
+
+
         cgl.gl.linkProgram(program);
 
         var infoLog=cgl.gl.getProgramInfoLog(program);
@@ -359,9 +369,9 @@ CGL.Shader=function(_cgl,_name)
             console.log(this.srcFrag);
             console.log(name+' programinfo: ',cgl.gl.getProgramInfoLog(program));
 
-console.log('--------------------------------------');
-console.log(self);
-console.log('--------------------------------------');
+            console.log('--------------------------------------');
+            console.log(self);
+            console.log('--------------------------------------');
 
             name="errorshader";
             self.setSource(CGL.Shader.getDefaultVertexShader(),CGL.Shader.getErrorFragmentShader());
@@ -422,6 +432,39 @@ console.log('--------------------------------------');
 
 
 
+
+CGL.Shader.prototype.hasFeedbacks=function()
+{
+    return (this._feedBacks.length>0);
+};
+
+CGL.Shader.prototype.bindFeedbacks=function()
+{
+    this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, 0, this._feedBacks[0].buffer);
+    this._cgl.gl.beginTransformFeedback(this.glPrimitive);
+};
+
+CGL.Shader.prototype.unBindFeedbacks=function()
+{
+
+    this._cgl.gl.endTransformFeedback();
+    this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, 0, null);
+};
+
+
+CGL.Shader.prototype.addFeedback=function(name)
+{
+    var fb={
+                "name":name,
+                "buffer":null
+            };
+    this._feedBacks.push(fb);
+
+// console.log(this._feedBacks.lengh+" transform feedbacks ");
+
+    return fb;
+
+};
 
 CGL.Shader.prototype.getProgram=function()
 {
