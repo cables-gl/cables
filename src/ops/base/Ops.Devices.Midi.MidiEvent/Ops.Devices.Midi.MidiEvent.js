@@ -9,6 +9,7 @@ var outVelocity=op.addOutPort(new Port(this,"Velocity",OP_PORT_TYPE_VALUE));
 var outChannel=op.addOutPort(new Port(this,"Channel",OP_PORT_TYPE_VALUE));
 var outCmd=op.addOutPort(new Port(this,"Cmd",OP_PORT_TYPE_VALUE));
 var outType=op.addOutPort(new Port(this,"Type",OP_PORT_TYPE_VALUE));
+var outTrigger = op.outFunction("Event Received");
 
 
 eventIn.onValueChanged=function()
@@ -22,7 +23,7 @@ eventIn.onValueChanged=function()
     outCmd.set(event.cmd);
     outType.set(event.type);
 
-    
     eventOut.set(event);
+    outTrigger.trigger();
 };
 

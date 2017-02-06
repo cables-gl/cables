@@ -33,7 +33,6 @@ function note (num, sharps) {
 
 midiValuePort.onValueChanged = function(){
   var val = midiValuePort.get();
-  console.log("Port change: " + val);
   if(val) {
     var n = note(val, true);
     notePort.set(n);

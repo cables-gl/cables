@@ -18,8 +18,10 @@
     * [Embedding](dev_embed/dev_embed.md)
   * [Writing Ops](chapter_readmes/writing_ops/Readme.md)
     * [Hello Op](dev_hello_op/dev_hello_op.md)
+    * [Namespaces](namespaces/namespaces.md)
     * [Op Development](dev_ops/dev_ops.md)
     * [Ports](dev_creating_ports/dev_creating_ports.md)
     * [Callbacks](dev_callbacks/dev_callbacks.md)
+    * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
 
 * [Ops](chapter_readmes/ops/Readme.md)
