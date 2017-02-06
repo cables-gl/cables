@@ -149,6 +149,8 @@ CGL.Mesh.prototype.setGeom=function(geom)
 	if(this.addVertexNumbers)
 	{
         var numVerts=this._geom.vertices.length/3;
+
+
         if(!this._verticesNumbers || this._verticesNumbers.length!=numVerts)
         {
             this._verticesNumbers=new Float32Array(numVerts);
@@ -158,8 +160,8 @@ CGL.Mesh.prototype.setGeom=function(geom)
             this.setAttribute('attrVertIndex',this._verticesNumbers,1,
                 function(attr,geom,shader)
                 {
-                    if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',geom.vertices.length/3);
-                    shader.uniformNumVertices.setValue(geom.vertices.length/3);
+                    if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',numVerts);
+                    shader.uniformNumVertices.setValue(numVerts);
                });
        }
 	}

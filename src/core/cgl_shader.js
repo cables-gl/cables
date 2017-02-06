@@ -13,7 +13,7 @@ CGL.Shader=function(_cgl,_name)
     if(!_cgl) throw "shader constructed without cgl";
     var name=_name || 'unknown';
 
-    this.versionString="";
+    this.glslVersion="";
     var self=this;
     this._program=null;
     var uniforms=[];
@@ -225,11 +225,26 @@ CGL.Shader=function(_cgl,_name)
         // console.log('shader compile...');
         // console.log('has textures: '+self.hasTextureUniforms() );
 
-        var vs=self.versionString+'\n\n'+extensionString+definesStr+self.srcVert;
-        var fs=self.versionString+'\n\n'+extensionString+definesStr+self.srcFrag;
+        var vs='';
+        var fs='';
+        if(self.glslVersion==300)
+        {
+            vs='#version 300 es'
+                .endl()+''
+                .endl()+'#define attribute in'
+                .endl()+'#define varying out'
+                .endl()+'';
 
-        // console.log(name);
-        // console.log(fs);
+
+            fs='#version 300 es'
+                .endl()+''
+                .endl()+'#define varying in'
+                .endl()+'';
+        }
+
+        vs+=extensionString+definesStr+self.srcVert;
+        fs+=extensionString+definesStr+self.srcFrag;
+
 
         var srcHeadVert='';
         var srcHeadFrag='';

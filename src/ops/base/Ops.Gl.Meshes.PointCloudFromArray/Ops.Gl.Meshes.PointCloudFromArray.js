@@ -17,21 +17,22 @@ function doRender()
 exe.onTriggered=doRender;
 
 var mesh=null;
-var geom=null;
-
+var geom=new CGL.Geometry("pointcloudfromarray");
+var texCoords=null;
 function reset()
 {
     
     var verts=arr.get();
     if(!verts)return;
     // if(!geom)
-    geom=new CGL.Geometry("pointcloudfromarray");
+    
     
     var num=verts.length/3;
     num=Math.round(num);
-    var texCoords=new Float32Array(num*2);
-    var vertColors=[];
     
+    
+    texCoords=new Float32Array(num*2);
+
     var changed=false;
 
     var rndTc=pTexCoordRand.get();
@@ -39,8 +40,6 @@ function reset()
     
     for(var i=0;i<num;i++)
     {
-        
-
         if(geom.vertices[i*3]!=verts[i*3] ||
             geom.vertices[i*3+1]!=verts[i*3+1] ||
             geom.vertices[i*3+2]!=verts[i*3+2])
@@ -62,12 +61,12 @@ function reset()
     
     if(changed)
     {
-        geom.clear();
+        // geom.clear();
         geom.setPointVertices(verts);
         geom.texCoords=texCoords;
         
         if(!mesh)mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
-            else mesh.setGeom(geom);
+            // else mesh.setGeom(geom);
         mesh.addVertexNumbers=true;
         mesh.setGeom(geom);
     }

@@ -2,7 +2,7 @@ op.name="Grid";
 
 var render=op.inFunction("Render");
 var inNum=op.inValue("Num",10);
-var inSpacing=op.inValue("Spacing",0.2);
+var inSpacing=op.inValue("Spacing",1);
 var next=op.outFunction("Next");
 
 

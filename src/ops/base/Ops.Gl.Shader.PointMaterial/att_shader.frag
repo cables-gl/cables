@@ -18,19 +18,15 @@ uniform float a;
 
 void main()
 {
-
-
     {{MODULE_BEGIN_FRAG}}
 
     vec4 col=vec4(r,g,b,a);
-
 
     #ifdef HAS_TEXTURES
 
         #ifdef HAS_TEXTURE_MASK
             float mask=texture2D(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
         #endif
-
 
         #ifdef HAS_TEXTURE_DIFFUSE
 
@@ -40,9 +36,6 @@ void main()
             #ifndef LOOKUP_TEXTURE
                 col=texture2D(tex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));
             #endif
-
-
-
 
             #ifdef COLORIZE_TEXTURE
                col.r*=r;

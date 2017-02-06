@@ -67,8 +67,7 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 
     if(!(this.texCoords instanceof Float32Array)) this.texCoords=new Float32Array(verts.length/3*2);
 
-
-    this.texCoords.length=verts.length/3*2;
+    // this.texCoords.length=verts.length/3*2;
     this.verticesIndices.length=verts.length/3;
 
     for(i=0;i<verts.length/3;i++)
@@ -408,9 +407,9 @@ CGL.WirePoint=function(cgl,size)
     function bufferData()
     {
         var points=[];
-        var segments=4;
+        var segments=24;
         var i=0,degInRad=0;
-        var radius=size || 1.0;
+        var radius=0.5;
 
         for (i=0; i <= Math.round(segments); i++)
         {
@@ -443,9 +442,12 @@ CGL.WirePoint=function(cgl,size)
     }
 
 
-    this.render=function(cgl)
+    this.render=function(cgl,size)
     {
         cgl.pushMvMatrix();
+
+        vec3.set(vScale, size,size,size);
+        mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
 
         var shader=cgl.getDefaultShader();
         shader.bind();
