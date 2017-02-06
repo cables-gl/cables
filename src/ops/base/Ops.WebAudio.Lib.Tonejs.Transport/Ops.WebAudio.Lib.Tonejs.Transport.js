@@ -1,7 +1,6 @@
 op.name="Transport";
 
 CABLES.WebAudio.createAudioContext(op);
-Tone.setContext(window.audioContext);
 
 // in ports
 var bpmPort = op.addInPort( new Port( this, "BPM", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 300 } ));

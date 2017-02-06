@@ -1,7 +1,6 @@
 op.name="StartTransport";
 
 CABLES.WebAudio.createAudioContext(op);
-Tone.setContext(window.audioContext);
 
 // input ports
 var startPort = op.addInPort( new Port( this, "Start", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));

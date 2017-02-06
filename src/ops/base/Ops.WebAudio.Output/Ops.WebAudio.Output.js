@@ -1,7 +1,6 @@
 op.name='audioOutput';
 
-window.AudioContext = window.AudioContext||window.webkitAudioContext;
-if(!window.audioContext) window.audioContext = new AudioContext();
+CABLES.WebAudio.createAudioContext(op);
 
 var audioIn=this.addInPort(new Port(this,"audio in",OP_PORT_TYPE_OBJECT));
 var oldAudioIn=null;

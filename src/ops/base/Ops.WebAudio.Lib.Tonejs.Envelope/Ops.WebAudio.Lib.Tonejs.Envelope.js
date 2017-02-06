@@ -1,7 +1,6 @@
 op.name="Envelope";
 
 CABLES.WebAudio.createAudioContext(op);
-Tone.setContext(window.audioContext);
 
 // input port
 

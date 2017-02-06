@@ -1,7 +1,8 @@
 op.name="ScheduleRepeat";
 
 CABLES.WebAudio.createAudioContext(op);
-Tone.setContext(window.audioContext);
+
+window.blatest=true;
 
 // input ports
 var intervalPort = op.inValueString("Interval");
@@ -26,14 +27,9 @@ function handleChange() {
     var interval =  intervalPort.get();
     var startTime = startTimePort.get();
     
-    
     if(!interval || interval == 0) {
         return;
     }
-    op.log("duration: ", duration);
-    op.log("interval: ", interval);
-    op.log("startTime: ", startTime);
-    op.log("---");
     
     // clear old schedule
     if(lastListenerId) {
@@ -44,9 +40,9 @@ function handleChange() {
     var cb = function(time) {
         timeOutPort.set(time);
 	    triggerPort.trigger();
+	    op.log("cb: ", intervalPort.get());
     };
-    
-    if(startTime) {
+    if(startTime.length>0) {
         if(duration) {
             lastListenerId = Tone.Transport.scheduleRepeat(
                 cb, 
@@ -61,14 +57,11 @@ function handleChange() {
             );
         }
     } else {
-        op.log("setting schedule for interval: ", interval);
         lastListenerId = Tone.Transport.scheduleRepeat(
             cb, 
             interval
         );  
     }
 }
-
-handleChange();
 
 
