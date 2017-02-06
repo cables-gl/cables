@@ -61,11 +61,13 @@ notePort.onChange = function() {
   var newNote = notePort.get();
   if(newNote) {
       var time = timePort.get();
+      try {
         if(time) {
             synth.setNote(notePort.get(), time);  
         } else {
             synth.setNote(notePort.get());
         }
+      } catch(e) {}
   }
 };
 
