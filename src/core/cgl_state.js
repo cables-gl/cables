@@ -154,19 +154,11 @@ CGL.State=function()
             }
 
             this.doScreenshot=false;
-            this.screenShotDataURL = document.getElementById("glcanvas").toDataURL('image/png');
-            if(this.onScreenShot)this.onScreenShot(this.screenShotDataURL);
-                else console.log('no onscreenshot callback');
-            // this.screenShotDataURL = document.getElementById("glcanvas").toBlob(
-            //     function(blob)
-            //     {
-            //         this.screenShotDataURL=URL.createObjectURL(blob);
-            //         console.log(this.screenShotDataURL);
-            //         console.log('screenshot done');
-            //         if(this.onScreenShot)this.onScreenShot(this.screenShotDataURL);
-            //
-            //     });
-
+            this.screenShotDataURL = this.canvas.toBlob(
+                function(blob)
+                {
+                    if(this.onScreenShot)this.onScreenShot(blob);
+                }.bind(this));
         }
 
         if(oldCanvasWidth!=self.canvasWidth || oldCanvasHeight!=self.canvasHeight)

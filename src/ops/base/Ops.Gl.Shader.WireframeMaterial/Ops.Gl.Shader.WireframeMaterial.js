@@ -29,7 +29,7 @@ var opacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE,{ display:'ran
 opacity.set(1.0);
 opacity.onValueChanged=function(){ uniformOpacity.setValue(opacity.get()); };
 
-if(cgl.glVersion==1 && !cgl.gl.getExtension('OES_standard_derivatives') ) 
+if(cgl.glVersion==1 && !cgl.gl.getExtension('OES_standard_derivatives') )
 {
     console.log(123);
     op.uiAttr( { 'error': 'no oes standart derivatives!' } );
@@ -96,7 +96,7 @@ else
     .endl()+'precision highp float;'
     .endl()+'in vec3 baycentric;'
     .endl()+'out vec4 fragColor;'
-    
+
     .endl();
 }
 
@@ -144,7 +144,7 @@ var doRender=function()
     cgl.setShader(shader);
     trigger.trigger();
     cgl.setPreviousShader();
-    
+
     if(true!==enableDepth.get()) cgl.gl.enable(cgl.gl.DEPTH_TEST);
 
 
@@ -153,7 +153,7 @@ var doRender=function()
 
 var shader=new CGL.Shader(cgl,'Wireframe Material');
 
-if(cgl.glVersion)shader.versionString="#version 300 es";
+if(cgl.glVersion)shader.glslVersion=300;
 var uniformWidth=new CGL.Uniform(shader,'f','width',w.get());
 var uniformOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 shader.setSource(srcVert,srcFrag);

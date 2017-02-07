@@ -1,11 +1,12 @@
 precision highp float;
+precision highp float;
 
 {{MODULES_HEAD}}
 
 #ifdef HAS_TEXTURES
    varying vec2 texCoord;
    #ifdef HAS_TEXTURE_DIFFUSE
-       uniform sampler2D tex;
+       uniform sampler2D diffTex;
    #endif
    #ifdef HAS_TEXTURE_MASK
        uniform sampler2D texMask;
@@ -18,12 +19,9 @@ uniform float a;
 
 void main()
 {
-
-
     {{MODULE_BEGIN_FRAG}}
 
     vec4 col=vec4(r,g,b,a);
-
 
     #ifdef HAS_TEXTURES
 
@@ -31,18 +29,14 @@ void main()
             float mask=texture2D(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
         #endif
 
-
         #ifdef HAS_TEXTURE_DIFFUSE
 
             #ifdef LOOKUP_TEXTURE
-                col=texture2D(tex,texCoord);
+                col=texture2D(diffTex,texCoord);
             #endif
             #ifndef LOOKUP_TEXTURE
-                col=texture2D(tex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));
+                col=texture2D(diffTex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));
             #endif
-
-
-
 
             #ifdef COLORIZE_TEXTURE
                col.r*=r;
@@ -63,5 +57,5 @@ void main()
         col.a=mask;
     #endif
 
-    gl_FragColor = col;
+    outColor = col;
 }
