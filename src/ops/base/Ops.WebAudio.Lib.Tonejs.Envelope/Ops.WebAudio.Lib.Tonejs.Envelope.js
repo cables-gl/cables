@@ -69,17 +69,21 @@ function updateEnvObjPort() {
     });    
 }
 
-// set defaults (input)
-envObjPort.set(DEFAULT_ENVELOPE_OBJ);
-attackPort.set(DEFAULT_ENVELOPE_OBJ.attack);
-decayPort.set(DEFAULT_ENVELOPE_OBJ.decay);
-sustainPort.set(DEFAULT_ENVELOPE_OBJ.sustain);
-releasePort.set(DEFAULT_ENVELOPE_OBJ.release);
-timePort.set(DEFAULT_TIME);
-velocityPort.set(DEFAULT_VELOCITY);
+op.onLoaded = function() {
+    op.log("Loadedddddddddddddd");
+    // set defaults (input)
+    envObjPort.set(DEFAULT_ENVELOPE_OBJ);
+    attackPort.set(DEFAULT_ENVELOPE_OBJ.attack);
+    decayPort.set(DEFAULT_ENVELOPE_OBJ.decay);
+    sustainPort.set(DEFAULT_ENVELOPE_OBJ.sustain);
+    releasePort.set(DEFAULT_ENVELOPE_OBJ.release);
+    timePort.set(DEFAULT_TIME);
+    velocityPort.set(DEFAULT_VELOCITY);
+    
+    // set defaults (output)
+    signalPort.set(env);
+    updateEnvObjPort();    
+};
 
-// set defaults (output)
-signalPort.set(env);
-updateEnvObjPort();
 
 

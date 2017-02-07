@@ -1,4 +1,4 @@
-op.name="ArrayStore";
+op.name="ArrayBuffer";
 
 
 var exec=op.inFunction("exec");

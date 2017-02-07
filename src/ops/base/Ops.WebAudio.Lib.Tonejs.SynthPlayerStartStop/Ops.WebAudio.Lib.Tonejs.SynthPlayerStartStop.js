@@ -5,6 +5,7 @@ CABLES.WebAudio.createAudioContext(op);
 // default values
 var DEFAULT_SYNTH = new Tone.Synth();
 var DEFAULT_VELOCITY = 1;
+var DEFAULT_TIME = "+0";
 
 // input ports
 var synthPort = op.inObject("Synth");
@@ -74,7 +75,7 @@ notePort.onChange = function() {
 timePort.onChange = function() {
   var val = timePort.get();
   if(!val) {
-    //timePort.set(DEFAULT_TIME)
+    timePort.set(DEFAULT_TIME)
   }
 };
 
