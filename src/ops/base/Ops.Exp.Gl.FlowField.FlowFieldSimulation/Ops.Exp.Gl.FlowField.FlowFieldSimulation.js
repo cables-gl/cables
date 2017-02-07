@@ -26,7 +26,7 @@ var size=10;
 var forces=[];
 var particles=[];
 var damping=vec3.fromValues(0.8,0.8,0.8);
-var maxSpeed=10.04252;
+var maxSpeed=5.04252;
 
 var dieOffArea=0;
 var dieSlow=0;

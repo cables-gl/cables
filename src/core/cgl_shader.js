@@ -13,7 +13,7 @@ CGL.Shader=function(_cgl,_name)
     if(!_cgl) throw "shader constructed without cgl";
     var name=_name || 'unknown';
 
-    this.versionString="";
+    this.glslVersion="";
     var self=this;
     this._program=null;
     var uniforms=[];
@@ -225,8 +225,37 @@ CGL.Shader=function(_cgl,_name)
         // console.log('shader compile...');
         // console.log('has textures: '+self.hasTextureUniforms() );
 
-        var vs=self.versionString+'\n\n'+extensionString+definesStr+self.srcVert;
-        var fs=self.versionString+'\n\n'+extensionString+definesStr+self.srcFrag;
+        var vs='';
+        var fs='';
+        if(self.glslVersion==300)
+        {
+            vs='#version 300 es'
+                .endl()+'precision highp float;'
+                .endl()+''
+                .endl()+'#define attribute in'
+                .endl()+'#define varying out'
+                .endl()+'';
+
+
+            fs='#version 300 es'
+                .endl()+'precision highp float;'
+                .endl()+''
+                .endl()+'#define varying in'
+                .endl()+'#define texture2D texture'
+                .endl()+'out vec4 outColor;'
+
+                .endl()+'';
+        }
+        else
+        {
+            fs=''
+                .endl()+''
+                .endl()+'#define outColor gl_FragColor'
+                .endl()+'';
+        }
+
+        vs+=extensionString+definesStr+self.srcVert;
+        fs+=extensionString+definesStr+self.srcFrag;
 
         // console.log(name);
         // console.log(fs);
@@ -499,12 +528,12 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader=
 CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentShader=function()
 {
     return ''
-        .endl()+'precision highp float;'
+        // .endl()+'precision highp float;'
         // .endl()+'varying vec3 norm;'
         .endl()+'void main()'
         .endl()+'{'
 
-        .endl()+'   gl_FragColor = vec4(0.5,0.5,0.5,1.0);'
+        .endl()+'   outColor = vec4(0.5,0.5,0.5,1.0);'
         // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
         .endl()+'}';
 };
@@ -512,14 +541,14 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
 CGL.Shader.getErrorFragmentShader=function()
 {
     return ''
-        .endl()+'precision mediump float;'
+        // .endl()+'precision mediump float;'
         .endl()+'varying vec3 norm;'
         .endl()+'void main()'
         .endl()+'{'
         .endl()+'   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'
         .endl()+'   if(g>0.5)g=0.4;'
         .endl()+'       else g=0.0;'
-        .endl()+'   gl_FragColor = vec4( 1.0, g, 0.0, 1.0);'
+        .endl()+'   outColor = vec4( 1.0, g, 0.0, 1.0);'
         .endl()+'}';
 };
 

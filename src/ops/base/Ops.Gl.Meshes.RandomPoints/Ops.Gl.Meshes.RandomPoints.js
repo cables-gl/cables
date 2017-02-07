@@ -7,7 +7,7 @@ var seed=op.addInPort(new Port(op,"random seed"));
 var scaleX=op.addInPort(new Port(op,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var scaleY=op.addInPort(new Port(op,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var scaleZ=op.addInPort(new Port(op,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var round=op.inValueBool('round',false);
+// var round=op.inValueBool('round',false);
 
 var cgl=op.patch.cgl;
 
