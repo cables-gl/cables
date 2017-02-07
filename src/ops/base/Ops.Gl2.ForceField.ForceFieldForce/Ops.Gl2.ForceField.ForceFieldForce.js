@@ -33,6 +33,11 @@ function updateForceObject()
     forceObj.pos=pos;
 }
 
+op.onDelete=function()
+{
+    
+}
+
 exec.onTriggered=function()
 {
     if(show.get())

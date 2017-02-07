@@ -11,10 +11,12 @@ var inSize=op.inValue("Size",3);
 var opacity=op.inValueSlider("Opacity",1);
 var pointSize=op.inValue("PointSize",1);
 var numPoints=op.inValue("Particles",10000);
-
+var speed=op.inValue("Speed",0.2);
 
 
 var cgl=op.patch.cgl;
+
+var shaderModule=null;
 
 var bufferB=null;
 var verts=null;
@@ -23,12 +25,15 @@ var geom=null;
 
 var mesh=null;
 var buffB=null;
+var shader=null;
 
 numPoints.onChange=reset;
 inSize.onChange=reset;
 resetButton.onTriggered=reset;
 
 var id=CABLES.generateUUID();
+
+var lastTime=0;
 
 function reset()
 {
@@ -71,29 +76,29 @@ reset();
 
 // shader...
 
-var frag=''
-    .endl()+'precision highp float;'
-    .endl()+'out vec4 color;'
-    .endl()+'in vec3 col;'
+// var frag=''
+//     .endl()+'precision highp float;'
+//     .endl()+'out vec4 color;'
+//     .endl()+'in vec3 col;'
 
-    .endl()+'uniform float a;'
+//     .endl()+'uniform float a;'
 
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   color=vec4(1.0,1.0,1.0,a);'
-    .endl()+'}';
+//     .endl()+'void main()'
+//     .endl()+'{'
+//     .endl()+'   color=vec4(1.0,1.0,1.0,a);'
+//     .endl()+'}';
 
 
-var shader=new CGL.Shader(cgl,'MinimalMaterial');
-shader.transformFeedbackVaryings=true;
-shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-shader.glslVersion=300;//"#version 300 es";
+// var shader=new CGL.Shader(cgl,'MinimalMaterial');
+// shader.transformFeedbackVaryings=true;
+// shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+// shader.glslVersion=300;//"#version 300 es";
 
-shader.setSource(attachments.flowfield_vert,frag);
+// shader.setSource(attachments.flowfield_vert,frag);
 
-var uniOpacity=new CGL.Uniform(shader,'f','a',opacity);
-var uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize);
-var uniTime=new CGL.Uniform(shader,'f','time',0);
+// var uniOpacity=new CGL.Uniform(shader,'f','a',opacity);
+// var uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize);
+// var uniTime=new CGL.Uniform(shader,'f','time',0);
 
 
 var numForces=0;
@@ -101,16 +106,56 @@ var forceUniforms=[];
 
 var firstTime=true;
 
-var feebackOutpos=shader.addFeedback("outPos");
-feebackOutpos.buffer=buffB;
+
+
+
+
+function removeModule()
+{
+    if(shader && shaderModule)
+    {
+        shader.removeModule(shaderModule);
+        shader=null;
+    }
+}
+
+
+var uniTime=null;
+var uniSize=null;
+var uniTimeDiff=null;
+var feebackOutpos=null;
 
 render.onTriggered=function()
 {
-    cgl.setShader(shader);
+    // cgl.setShader(shader);
+var time=op.patch.freeTimer.get();
+var timeDiff=time=lastTime;
+    if(cgl.getShader()!=shader)
+    {
+        if(shader) removeModule();
+        shader=cgl.getShader();
+        shader.glslVersion=300;
+        shaderModule=shader.addModule(
+            {
+                name:'MODULE_VERTEX_POSITION',
+                srcHeadVert:attachments.flowfield_head_vert,
+                srcBodyVert:attachments.flowfield_vert
+            });
 
- uniTime.setValue(op.patch.freeTimer.get());
 
-    // console.log("force field forces",CABLES.forceFieldForces.length);
+// var uniOpacity=new CGL.Uniform(shader,'f',shaderModule.prefix+'a',opacity);
+// var uniPointSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'pointSize',pointSize);
+        uniTime=new CGL.Uniform(shader,'f',shaderModule.prefix+'time',0);
+        uniSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'size',inSize.get());
+        uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
+
+        feebackOutpos=shader.addFeedback("outPos");
+        feebackOutpos.buffer=buffB;
+    }
+    
+    if(!shader)return;
+
+
 
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
     {
@@ -121,6 +166,8 @@ render.onTriggered=function()
             force[id+'uniAttraction']=new CGL.Uniform(shader,'f','forces['+i+'].attraction',force.attraction);
             force[id+'uniAngle']=new CGL.Uniform(shader,'f','forces['+i+'].angle',force.angle);
             force[id+'uniPos']=new CGL.Uniform(shader,'3f','forces['+i+'].pos',force.pos);
+            force[id+'uniTime']=new CGL.Uniform(shader,'f','forces['+i+'].time',time);
+
         }
         else
         {
@@ -128,14 +175,24 @@ render.onTriggered=function()
             force[id+'uniAttraction'].setValue(force.attraction);
             force[id+'uniAngle'].setValue(force.angle);
             force[id+'uniPos'].setValue(force.pos);
+            force[id+'uniTime'].setValue(time);
         }
     }
 
+    uniTimeDiff.setValue(timeDiff*(speed.get()*3.0));
+    uniTime.setValue(time);
 
-    if(mesh) mesh.render(cgl.getShader());
-    cgl.setPreviousShader();
+    // console.log("force field forces",CABLES.forceFieldForces.length);
+
+// shader.bindTextures();
+
+    if(mesh) mesh.render(shader);
+    
+    
+    // cgl.setPreviousShader();
 
     var t=mesh._bufVertices;
     mesh._bufVertices=feebackOutpos.buffer;
     feebackOutpos.buffer=t;
+    lastTime=op.patch.freeTimer.get();
 };

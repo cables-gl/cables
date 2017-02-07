@@ -105,13 +105,13 @@ texture.onValueChanged=function()
     if(texture.get())
     {
         if(textureUniform!==null)return;
-        shader.removeUniform('tex');
+        shader.removeUniform('diffTex');
         shader.define('HAS_TEXTURE_DIFFUSE');
-        textureUniform=new CGL.Uniform(shader,'t','tex',0);
+        textureUniform=new CGL.Uniform(shader,'t','diffTex',0);
     }
     else
     {
-        shader.removeUniform('tex');
+        shader.removeUniform('diffTex');
         shader.removeDefine('HAS_TEXTURE_DIFFUSE');
         textureUniform=null;
     }

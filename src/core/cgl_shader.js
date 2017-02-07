@@ -230,6 +230,7 @@ CGL.Shader=function(_cgl,_name)
         if(self.glslVersion==300)
         {
             vs='#version 300 es'
+                .endl()+'precision highp float;'
                 .endl()+''
                 .endl()+'#define attribute in'
                 .endl()+'#define varying out'
@@ -237,14 +238,27 @@ CGL.Shader=function(_cgl,_name)
 
 
             fs='#version 300 es'
+                .endl()+'precision highp float;'
                 .endl()+''
                 .endl()+'#define varying in'
+                .endl()+'#define texture2D texture'
+                .endl()+'out vec4 outColor;'
+
+                .endl()+'';
+        }
+        else
+        {
+            fs=''
+                .endl()+''
+                .endl()+'#define outColor gl_FragColor'
                 .endl()+'';
         }
 
         vs+=extensionString+definesStr+self.srcVert;
         fs+=extensionString+definesStr+self.srcFrag;
 
+        // console.log(name);
+        // console.log(fs);
 
         var srcHeadVert='';
         var srcHeadFrag='';
@@ -514,12 +528,12 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader=
 CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentShader=function()
 {
     return ''
-        .endl()+'precision highp float;'
+        // .endl()+'precision highp float;'
         // .endl()+'varying vec3 norm;'
         .endl()+'void main()'
         .endl()+'{'
 
-        .endl()+'   gl_FragColor = vec4(0.5,0.5,0.5,1.0);'
+        .endl()+'   outColor = vec4(0.5,0.5,0.5,1.0);'
         // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
         .endl()+'}';
 };
@@ -527,14 +541,14 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
 CGL.Shader.getErrorFragmentShader=function()
 {
     return ''
-        .endl()+'precision mediump float;'
+        // .endl()+'precision mediump float;'
         .endl()+'varying vec3 norm;'
         .endl()+'void main()'
         .endl()+'{'
         .endl()+'   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'
         .endl()+'   if(g>0.5)g=0.4;'
         .endl()+'       else g=0.0;'
-        .endl()+'   gl_FragColor = vec4( 1.0, g, 0.0, 1.0);'
+        .endl()+'   outColor = vec4( 1.0, g, 0.0, 1.0);'
         .endl()+'}';
 };
 

@@ -1,8 +1,8 @@
-CABLES.Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 
 var shader=null;
+var module=null;
 var uniTime;
 
 this.name='VertexSinusWobble';
@@ -81,9 +81,6 @@ function setDefines()
 
     if(src.get()=='Z + Time')shader.define(module.prefix+'_SRC_Z');
         else shader.removeDefine(module.prefix+'_SRC_Z');
-
-
-
 }
 
 var srcHeadVert=''
