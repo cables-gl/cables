@@ -1,26 +1,9 @@
 op.name='audioOutput';
 
-CABLES.WebAudio.createAudioContext(op);
+var audioContext = CABLES.WebAudio.createAudioContext(op);
 
-var audioIn=this.addInPort(new Port(this,"audio in",OP_PORT_TYPE_OBJECT));
-var oldAudioIn=null;
+var audioNode = audioContext.destination
 
-audioIn.onValueChanged = function() {
+var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", audioNode);
+var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", audioNode);
 
-    if (!audioIn.get())
-    {
-        if (oldAudioIn !== null)
-        {
-            try
-            {
-                oldAudioIn.disconnect(audioContext.destination);
-            }
-            catch(e) { console.log(e); }
-        }
-    }
-    else
-    {
-        audioIn.get().connect(audioContext.destination);
-    }
-    oldAudioIn = audioIn.get();
-};
