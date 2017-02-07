@@ -26,10 +26,18 @@ CABLES.WebAudio.createAudioContext = function(op) {
 // When disconnected it will disconnect the previous connected audio node
 // from the op's audio node.
 // Please Note: The op's audio node must be declared with "op.audioNode = ..."
-CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode) {
+// @param op: required
+// @param portName: required, The name of the port
+// @param audioNode: required: The audionode incoming connections should connect to
+// @param inputChannelIndex: optional, INT, if the audio node has multiple inputs,
+//                           "1" would be the second input, default "0"
+CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChannelIndex) {
   if(!op || !portName || !audioNode) {
     op.log("ERROR: createAudioInPort needs three parameters, op, portName and audioNode");
     return;
+  }
+  if(!inputChannelIndex) {
+    inputChannelIndex = 0;
   }
   op.webAudio = op.webAudio || {};
   op.webAudio.audioInPorts = op.webAudio.audioInPorts || [];
@@ -45,13 +53,13 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode) {
     if (!audioInNode) {
         if (port.webAudio.previousAudioInNode) {
             try{
-                port.webAudio.previousAudioInNode.disconnect(audioNode);
+                port.webAudio.previousAudioInNode.disconnect(audioNode, 0, inputChannelIndex);
             } catch(e) {
                 console.log(e);
             }
         }
     } else {
-        audioInNode.connect(audioNode);
+      audioInNode.connect(audioNode, 0, inputChannelIndex);
     }
     port.webAudio.previousAudioInNode = audioInNode;
   };
