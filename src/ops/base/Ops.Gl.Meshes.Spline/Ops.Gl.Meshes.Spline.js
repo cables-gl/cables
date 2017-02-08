@@ -123,25 +123,36 @@ function bufferData()
     else
     if(subd>0 && !bezier.get())
     {
+
+        points.length=(cgl.frameStore.SplinePoints.length-3)*(subd);
         
+        // console.log("should be length",points.length);
+        
+        var count=0;
         for(i=0;i<cgl.frameStore.SplinePoints.length-3;i+=3)
         {
             for(j=0;j<subd;j++)
             {
                 for(k=0;k<3;k++)
                 {
-                    points.push(
+                    points[count]=
                         cgl.frameStore.SplinePoints[i+k]+
                             ( cgl.frameStore.SplinePoints[i+k+3] - cgl.frameStore.SplinePoints[i+k] ) *
                             j/subd
-                            );
+                            ;
+                    count++;
                 }
             }
         }
+
+        // console.log(" length",count);
+
     }
     else
     if(subd>0 && bezier.get() )
     {
+        points.length=(cgl.frameStore.SplinePoints.length-3)*(subd);
+        var count=0;
 
         for(i=3;i<cgl.frameStore.SplinePoints.length-6;i+=3)
         {
@@ -156,10 +167,13 @@ function bufferData()
                             j/subd
                             );
 
-                    points.push(p);
+                    // points.push(p);
+                    points[count]=p;
+                    count++;
                 }
             }
         }
+        
     }
     else
     {
@@ -176,6 +190,7 @@ function bufferData()
 
     if(renderLines.get())
     {
+        geom.clear();
         geom.vertices=points;
         
         // console.log(geom.vertices.length);
@@ -193,7 +208,7 @@ function bufferData()
             }
         }
     
-        if(!mesh)  mesh=new CGL.Mesh(cgl,geom);
+        if(!mesh) mesh=new CGL.Mesh(cgl,geom);
             else mesh.setGeom(geom);
     }
 

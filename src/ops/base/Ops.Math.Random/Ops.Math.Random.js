@@ -18,7 +18,7 @@ calcRandom();
 function calcRandom()
 {
     Math.randomSeed=seed.get();
-    if(minusPlusOne.get()) result.set((Math.seededRandom()*max.get())*2-max.get()/2);
+    if(minusPlusOne.get()) result.set((Math.seededRandom()*max.get())*2-max.get() );
         else result.set(Math.seededRandom()*max.get());
 }
 
