@@ -72,16 +72,18 @@ for(int i=0;i<NUM_FORCES;i++)
 if(respawn)
 {
     outPos=2.0*vec3(
-        (random(vec2({{mod}}time+rndpos.y,rndpos.x))-0.5)*{{mod}}size,
-        (random(vec2({{mod}}time+rndpos.z,rndpos.x))-0.5)*{{mod}}size,
-        (random(vec2(rndpos.x,{{mod}}time+rndpos.z))-0.5)*{{mod}}size
+        (random(vec2({{mod}}time+rndpos.y,rndpos.x))-0.5),
+        (random(vec2({{mod}}time+rndpos.z,rndpos.x))-0.5),
+        (random(vec2(rndpos.x,{{mod}}time+rndpos.z))-0.5)
         );
+        outPos*={{mod}}size;
+        outPos+={{mod}}emitterPos;
     // outPos.z=0.0;
 }
 else
 {
     outPos=vPosition+velocity;
+    // outPos.z=0.0;
 }
 
-gl_PointSize=pointSize;
-// gl_Position = projMatrix * modelMatrix *  viewMatrix * vec4(vPosition,1.0);
+// gl_PointSize=pointSize;

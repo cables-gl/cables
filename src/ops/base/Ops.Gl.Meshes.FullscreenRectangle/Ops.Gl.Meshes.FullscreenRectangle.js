@@ -58,41 +58,40 @@ render.onTriggered=function()
 function rebuild()
 {
     var currentViewPort=cgl.getViewPort().slice();
+    if(currentViewPort[2]==w && currentViewPort[3]==h)return;
 
     var xx=0,xy=0;
 
-    // x=currentViewPort[0];
-    // y=currentViewPort[1];
     w=currentViewPort[2];
     h=currentViewPort[3];
 
-    geom.vertices = [
+    geom.vertices = new Float32Array([
          xx+w, xy+h,  0.0,
          xx,   xy+h,  0.0,
          xx+w, xy,    0.0,
          xx,   xy,    0.0
-    ];
+    ]);
 
     if(flipY.get())
-        geom.texCoords = [
+        geom.texCoords = new Float32Array([
              1.0, 0.0,
              0.0, 0.0,
              1.0, 1.0,
              0.0, 1.0
-        ];
+        ]);
     
     else
-        geom.texCoords = [
+        geom.texCoords = new Float32Array([
              1.0, 1.0,
              0.0, 1.0,
              1.0, 0.0,
              0.0, 0.0
-        ];
+        ]);
 
-    geom.verticesIndices = [
+    geom.verticesIndices = new Float32Array([
         0, 1, 2,
         3, 1, 2
-    ];
+    ]);
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);

@@ -132,6 +132,25 @@ CABLES.Op = function()
     CABLES.Op.prototype.outArray=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
     CABLES.Op.prototype.outTexture=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
 
+
+
+
+    CABLES.Op.prototype.inDynamic=
+        function(name,v,filter){
+            var p=new Port(this,name,OP_PORT_TYPE_DYNAMIC,{display:'range'});
+
+            p.shouldLink=function(p1,p2)
+            {
+                if(p1==this && (p2.type==OP_PORT_TYPE_VALUE || p2.type==OP_PORT_TYPE_OBJECT) ) return true;
+                if(p2==this && (p1.type==OP_PORT_TYPE_VALUE || p1.type==OP_PORT_TYPE_OBJECT) ) return true;
+            };
+
+            this.addInPort(p); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p;
+        };
+
+
+
+
     CABLES.Op.prototype.printInfo=function()
     {
         for(var i=0;i<this.portsIn.length;i++)
@@ -218,12 +237,12 @@ CABLES.Op = function()
 
         for(var i=0;i<this.portsIn.length;i++)
         {
-            if(this.portsIn[i].type!=OP_PORT_TYPE_DYNAMIC)
-            op.portsIn.push( this.portsIn[i].getSerialized() );
+            // if(this.portsIn[i].type!=OP_PORT_TYPE_DYNAMIC)
+                op.portsIn.push( this.portsIn[i].getSerialized() );
         }
 
         for(var ipo in this.portsOut)
-            if(this.portsOut[ipo].type!=OP_PORT_TYPE_DYNAMIC)
+            // if(this.portsOut[ipo].type!=OP_PORT_TYPE_DYNAMIC)
                 op.portsOut.push( this.portsOut[ipo].getSerialized() );
 
         return op;

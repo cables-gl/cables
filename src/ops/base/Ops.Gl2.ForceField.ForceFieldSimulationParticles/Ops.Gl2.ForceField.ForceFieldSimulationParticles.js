@@ -12,6 +12,13 @@ var opacity=op.inValueSlider("Opacity",1);
 var pointSize=op.inValue("PointSize",1);
 var numPoints=op.inValue("Particles",10000);
 var speed=op.inValue("Speed",0.2);
+var lifetime=op.inValue("Lifetime",5);
+
+var show=op.inValueBool("Show");
+
+var posX=op.inValue("Pos X");
+var posY=op.inValue("Pos Y");
+var posZ=op.inValue("Pos Z");
 
 
 var cgl=op.patch.cgl;
@@ -34,6 +41,7 @@ resetButton.onTriggered=reset;
 var id=CABLES.generateUUID();
 
 var lastTime=0;
+var mark=new CGL.Marker(cgl);
 
 function reset()
 {
@@ -43,9 +51,9 @@ function reset()
     var size=inSize.get();
     for(var i=0;i<verts.length;i+=3)
     {
-        verts[i+0]=(Math.random()-0.5)*size;
-        verts[i+1]=(Math.random()-0.5)*size;
-        verts[i+2]=(Math.random()-0.5)*size;
+        verts[i+0]=(Math.random()-0.5)*size+posX.get();
+        verts[i+1]=(Math.random()-0.5)*size+posY.get();
+        verts[i+2]=(Math.random()-0.5)*size+posZ.get();
         // verts[i+2]=0.0;
 
         bufferB[i+0]=(Math.random()-0.5)*size;
@@ -73,41 +81,9 @@ function reset()
 
 reset();
 
-
-// shader...
-
-// var frag=''
-//     .endl()+'precision highp float;'
-//     .endl()+'out vec4 color;'
-//     .endl()+'in vec3 col;'
-
-//     .endl()+'uniform float a;'
-
-//     .endl()+'void main()'
-//     .endl()+'{'
-//     .endl()+'   color=vec4(1.0,1.0,1.0,a);'
-//     .endl()+'}';
-
-
-// var shader=new CGL.Shader(cgl,'MinimalMaterial');
-// shader.transformFeedbackVaryings=true;
-// shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-// shader.glslVersion=300;//"#version 300 es";
-
-// shader.setSource(attachments.flowfield_vert,frag);
-
-// var uniOpacity=new CGL.Uniform(shader,'f','a',opacity);
-// var uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize);
-// var uniTime=new CGL.Uniform(shader,'f','time',0);
-
-
 var numForces=0;
 var forceUniforms=[];
-
 var firstTime=true;
-
-
-
 
 
 function removeModule()
@@ -118,18 +94,22 @@ function removeModule()
         shader=null;
     }
 }
+render.onLinkChanged=removeModule;
+
 
 
 var uniTime=null;
 var uniSize=null;
 var uniTimeDiff=null;
 var feebackOutpos=null;
+var uniPos=null;
 
 render.onTriggered=function()
 {
     // cgl.setShader(shader);
-var time=op.patch.freeTimer.get();
-var timeDiff=time=lastTime;
+    var time=op.patch.freeTimer.get();
+    var timeDiff=time=lastTime;
+
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
@@ -142,10 +122,11 @@ var timeDiff=time=lastTime;
                 srcBodyVert:attachments.flowfield_vert
             });
 
+        // var uniOpacity=new CGL.Uniform(shader,'f',shaderModule.prefix+'a',opacity);
+        // var uniPointSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'pointSize',pointSize);
 
-// var uniOpacity=new CGL.Uniform(shader,'f',shaderModule.prefix+'a',opacity);
-// var uniPointSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'pointSize',pointSize);
         uniTime=new CGL.Uniform(shader,'f',shaderModule.prefix+'time',0);
+        uniPos=new CGL.Uniform(shader,'3f',shaderModule.prefix+'emitterPos',0);
         uniSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'size',inSize.get());
         uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
 
@@ -171,6 +152,9 @@ var timeDiff=time=lastTime;
         }
         else
         {
+            
+            // console.log(force.range,force.attraction,force.angle,force.pos)
+            
             force[id+'uniRange'].setValue(force.range);
             force[id+'uniAttraction'].setValue(force.attraction);
             force[id+'uniAngle'].setValue(force.angle);
@@ -179,12 +163,14 @@ var timeDiff=time=lastTime;
         }
     }
 
-    uniTimeDiff.setValue(timeDiff*(speed.get()*3.0));
+    uniSize.setValue(inSize.get());
+    uniTimeDiff.setValue(timeDiff*(speed.get()));
     uniTime.setValue(time);
+    uniPos.setValue([posX.get(),posY.get(),posZ.get()]);
+    
 
     // console.log("force field forces",CABLES.forceFieldForces.length);
-
-// shader.bindTextures();
+    // shader.bindTextures();
 
     if(mesh) mesh.render(shader);
     
@@ -195,4 +181,14 @@ var timeDiff=time=lastTime;
     mesh._bufVertices=feebackOutpos.buffer;
     feebackOutpos.buffer=t;
     lastTime=op.patch.freeTimer.get();
+    
+    
+    if(show.get())
+    {
+        cgl.pushMvMatrix();
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[posX.get(),posY.get(),posZ.get()]);
+        mark.draw(cgl);
+        cgl.popMvMatrix();
+    }
+
 };

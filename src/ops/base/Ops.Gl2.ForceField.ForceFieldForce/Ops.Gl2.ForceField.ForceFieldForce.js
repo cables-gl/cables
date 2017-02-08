@@ -36,7 +36,9 @@ function updateForceObject()
 op.onDelete=function()
 {
     
-}
+};
+
+var mark=new CGL.Marker(cgl);
 
 exec.onTriggered=function()
 {
@@ -44,15 +46,16 @@ exec.onTriggered=function()
     {
         cgl.pushMvMatrix();
 
-        if(!mesh)mesh=new CGL.WirePoint(cgl);
+        // if(!mesh)mesh=new CGL.WirePoint(cgl);
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[posX.get(),posY.get(),posZ.get()]);
-        mesh.render(cgl,range.get()*2);
+        // mesh.render(cgl,range.get()*2);
+        mark.draw(cgl);
         cgl.popMvMatrix();
     }
 
     vec3.transformMat4(pos, [posX.get(),posY.get(),posZ.get()], cgl.mvMatrix);
 
-
+updateForceObject();
 
     CABLES.forceFieldForces=CABLES.forceFieldForces||[];
     CABLES.forceFieldForces.push(forceObj);

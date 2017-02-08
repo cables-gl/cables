@@ -197,7 +197,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.addLink=function(l)
     {
-
         this._valueBeforeLink=this.value;
 
         this.links.push(l);

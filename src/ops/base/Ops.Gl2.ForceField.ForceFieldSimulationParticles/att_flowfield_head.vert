@@ -6,6 +6,7 @@ out vec3 col;
 uniform float {{mod}}time;
 uniform float {{mod}}size;
 uniform float {{mod}}timeDiff;
+uniform vec3 {{mod}}emitterPos;
 
 struct force
     {
@@ -17,7 +18,7 @@ struct force
     };
 
 
-#define NUM_FORCES 8
+#define NUM_FORCES 16
 // force forces[NUM_FORCES];
 uniform force forces[NUM_FORCES];
 

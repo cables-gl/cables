@@ -96,7 +96,7 @@ CGL.State=function()
     var oldCanvasHeight=-1;
     this.doScreenshot=false;
     this.doScreenshotClearAlpha=false;
-    this.screenShotDataURL=null;
+    // this.screenShotDataURL=null;
     this.screenShotCallBack=null;
 
     this.getViewPort=function()
@@ -154,7 +154,8 @@ CGL.State=function()
             }
 
             this.doScreenshot=false;
-            this.screenShotDataURL = this.canvas.toBlob(
+            // this.screenShotDataURL = 
+            this.canvas.toBlob(
                 function(blob)
                 {
                     if(this.onScreenShot)this.onScreenShot(blob);

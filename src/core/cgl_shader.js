@@ -446,11 +446,18 @@ CGL.Shader=function(_cgl,_name)
         mod.numId=moduleNumId;
         mod.prefix='mod'+moduleNumId;
 
+        mod.num=modules.length;
+
         modules.push(mod);
         this._needsRecompile=true;
         moduleNumId++;
 
         return mod;
+    };
+
+    this.getNumModules=function()
+    {
+        return modules.length;
     };
 
     this.setModules=function(names)
@@ -489,7 +496,7 @@ CGL.Shader.prototype.addFeedback=function(name)
             };
     this._feedBacks.push(fb);
 
-// console.log(this._feedBacks.lengh+" transform feedbacks ");
+    // console.log(this._feedBacks.lengh+" transform feedbacks ");
 
     return fb;
 
