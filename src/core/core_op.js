@@ -9,6 +9,9 @@ var OP_PORT_TYPE_DYNAMIC=4;
 var Ops = {};
 var CABLES=CABLES || {};
 
+CABLES.Helpers = CABLES.Helpers || {};
+CABLES.Helpers.isArray = function(v) {return Object.prototype.toString.call(v) === '[object Array]';};
+
 CABLES.Op = function()
 {
     this.objName='';
@@ -136,13 +139,22 @@ CABLES.Op = function()
 
 
     CABLES.Op.prototype.inDynamic=
-        function(name,v,filter){
-            var p=new Port(this,name,OP_PORT_TYPE_DYNAMIC,{display:'range'});
+        function(name,filter,options,v){
+            var p=new Port(this,name,OP_PORT_TYPE_DYNAMIC,options);
 
             p.shouldLink=function(p1,p2)
             {
-                if(p1==this && (p2.type==OP_PORT_TYPE_VALUE || p2.type==OP_PORT_TYPE_OBJECT) ) return true;
-                if(p2==this && (p1.type==OP_PORT_TYPE_VALUE || p1.type==OP_PORT_TYPE_OBJECT) ) return true;
+              if(filter && CABLES.Helpers.isArray(filter))
+              {
+                for(var i=0; i<filter.length; i++)
+                {
+                  if(p1==this && p2.type===filter[i]) return true;
+                  if(p2==this && p1.type===filter[i]) return true;
+                }
+                return false; // types do not match
+              } else {
+                return true; // no filter set
+              }
             };
 
             this.addInPort(p); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p;
