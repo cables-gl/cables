@@ -142,7 +142,7 @@ CABLES.Op = function()
         function(name,filter,options,v){
             var p=new Port(this,name,OP_PORT_TYPE_DYNAMIC,options);
 
-            p.shouldLink=function(p1,p2)
+            p.shouldLink=function(p1,p2) 
             {
               if(filter && CABLES.Helpers.isArray(filter))
               {
