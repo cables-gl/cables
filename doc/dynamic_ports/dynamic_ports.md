@@ -1,0 +1,46 @@
+# Dynamic Ports
+
+Dynamic Ports accept various types. 
+
+`inDynamic(name, filter)`  
+
+`inDynamic(name, filter, options)`  
+
+`inDynamic(name, filter, options, defaultValue)`  
+
+## Parameters
+
+- `name` (String, required):  
+  - The name of the port, e.g. `"My Dynamic Port"`
+- `filter` (Array, required): 
+  - The types which should be accepted for linking, e.g. `[OP_PORT_TYPE_VALUE, OP_PORT_TYPE_OBJECT]`  
+- `options` (Object, optional):
+  - The port-options, have a look at the other port-definitions to see what’s possible
+  - E.g. `{"display": "range"}` (displays a range-slider when port is not linked)
+- `defaultValue` (Any type, optional):
+  - The default value to be set, can be any type, e.g. `123`
+
+## Example
+
+```javascript
+op.name="TestDynOp";
+
+var dynPort = op.inDynamic(
+  "My Dynamic Port", 
+  [
+    OP_PORT_TYPE_VALUE, 
+    OP_PORT_TYPE_OBJECT
+  ], 
+  {
+    "display": "range"
+  }, 
+  123
+);
+
+dynPort.onChange = function() {
+    op.log("value changed: ", dynPort.get());
+};
+```
+
+
+
