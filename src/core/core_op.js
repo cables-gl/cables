@@ -297,13 +297,10 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.undoShake=function()
     {
-
         if(this.shakeLink)this.shakeLink.remove();
 
-        console.log('undo shake...');
         if(this.oldLinks)
         {
-
             for(var i=0;i<this.oldLinks.length;i++)
             {
                 this.patch.link(
@@ -312,7 +309,6 @@ CABLES.Op = function()
                     this.oldLinks[i].out.parent,
                     this.oldLinks[i].out.getName()
                     );
-
             }
 
             this.oldLinks.length=0;
@@ -343,7 +339,6 @@ CABLES.Op = function()
             }
         }
 
-
         for(var ipi in this.portsIn)
         {
             for(i=0;i<this.portsIn[ipi].links.length;i++)
@@ -368,8 +363,6 @@ CABLES.Op = function()
             this.portsOut[ipo].removeLinks();
         }
 
-
-
         if(reLinkP1 && reLinkP2)
         {
             this.shakeLink=this.patch.link(
@@ -378,10 +371,7 @@ CABLES.Op = function()
                 reLinkP2.parent,
                 reLinkP2.getName()
                 );
-
         }
-
-
     };
 
     CABLES.Op.prototype.profile=function(enable)

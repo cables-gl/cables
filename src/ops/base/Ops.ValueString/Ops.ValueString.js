@@ -1,6 +1,6 @@
 op.name='String';
 
-var v=op.inValueString("value","");
+var v=op.inValueString("value","ABC");
 var result=op.addOutPort(new Port(op,"result"));
 
 v.onChange=function()
