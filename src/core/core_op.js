@@ -145,7 +145,7 @@ CABLES.Op = function()
         function(name,filter,options,v){
             var p=new Port(this,name,OP_PORT_TYPE_DYNAMIC,options);
 
-            p.shouldLink=function(p1,p2) 
+            p.shouldLink=function(p1,p2)
             {
               if(filter && CABLES.Helpers.isArray(filter))
               {
@@ -295,11 +295,40 @@ CABLES.Op = function()
             Function.apply.call(console.log, console, arguments);
     };
 
+    CABLES.Op.prototype.undoShake=function()
+    {
+
+        if(this.shakeLink)this.shakeLink.remove();
+
+        console.log('undo shake...');
+        if(this.oldLinks)
+        {
+
+            for(var i=0;i<this.oldLinks.length;i++)
+            {
+                this.patch.link(
+                    this.oldLinks[i].in.parent,
+                    this.oldLinks[i].in.getName(),
+                    this.oldLinks[i].out.parent,
+                    this.oldLinks[i].out.getName()
+                    );
+
+            }
+
+            this.oldLinks.length=0;
+        }
+    };
+
     CABLES.Op.prototype.unLinkShake=function()
     {
         var reLinkP1=null;
         var reLinkP2=null;
         var tryRelink=true;
+        var i=0;
+
+        this.shakeLink=null;
+        this.oldLinks=[];
+
         if(tryRelink)
         {
             if(
@@ -314,32 +343,43 @@ CABLES.Op = function()
             }
         }
 
-        for(var ipi in this.portsIn) this.portsIn[ipi].removeLinks();
-        for(var ipo in this.portsOut) this.portsOut[ipo].removeLinks();
+
+        for(var ipi in this.portsIn)
+        {
+            for(i=0;i<this.portsIn[ipi].links.length;i++)
+                this.oldLinks.push(
+                    {
+                        in:this.portsIn[ipi].links[i].portIn,
+                        out:this.portsIn[ipi].links[i].portOut
+                    });
+
+            this.portsIn[ipi].removeLinks();
+        }
+
+        for(var ipo in this.portsOut)
+        {
+            for(i=0;i<this.portsOut[ipo].links.length;i++)
+                this.oldLinks.push(
+                    {
+                        in:this.portsOut[ipo].links[i].portIn,
+                        out:this.portsOut[ipo].links[i].portOut
+                    });
+
+            this.portsOut[ipo].removeLinks();
+        }
+
+
 
         if(reLinkP1 && reLinkP2)
         {
-            this.patch.link(
+            this.shakeLink=this.patch.link(
                 reLinkP1.parent,
                 reLinkP1.getName(),
                 reLinkP2.parent,
                 reLinkP2.getName()
                 );
+
         }
-
-
-        // var undofunc=function(opid,objName)
-        // {
-        //     CABLES.undo.add({
-        //         undo: function() {
-        //             gui.scene().deleteOp( opid,true);
-        //         },
-        //         redo: function() {
-        //             gui.scene().addOp(objName,op.uiAttribs,opid);
-        //         }
-        //     });
-        //
-        // }(op.id,op.objName);
 
 
     };
