@@ -6,11 +6,11 @@ var render=op.inFunction("render");
 
 var resetButton=op.inFunctionButton("Reset");
 
-var inSize=op.inValue("Size",3);
+var inSize=op.inValue("Size Area",3);
 
-var opacity=op.inValueSlider("Opacity",1);
-var pointSize=op.inValue("PointSize",1);
-var numPoints=op.inValue("Particles",10000);
+// var opacity=op.inValueSlider("Opacity",1);
+// var pointSize=op.inValue("PointSize",1);
+var numPoints=op.inValue("Particles",3000);
 var speed=op.inValue("Speed",0.2);
 var lifetime=op.inValue("Lifetime",5);
 
@@ -106,9 +106,8 @@ var uniPos=null;
 
 render.onTriggered=function()
 {
-    // cgl.setShader(shader);
     var time=op.patch.freeTimer.get();
-    var timeDiff=time=lastTime;
+    var timeDiff=time-lastTime;
 
     if(cgl.getShader()!=shader)
     {
@@ -122,9 +121,6 @@ render.onTriggered=function()
                 srcBodyVert:attachments.flowfield_vert
             });
 
-        // var uniOpacity=new CGL.Uniform(shader,'f',shaderModule.prefix+'a',opacity);
-        // var uniPointSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'pointSize',pointSize);
-
         uniTime=new CGL.Uniform(shader,'f',shaderModule.prefix+'time',0);
         uniPos=new CGL.Uniform(shader,'3f',shaderModule.prefix+'emitterPos',0);
         uniSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'size',inSize.get());
@@ -136,8 +132,6 @@ render.onTriggered=function()
     
     if(!shader)return;
 
-
-
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
     {
         var force=CABLES.forceFieldForces[i];
@@ -148,13 +142,9 @@ render.onTriggered=function()
             force[id+'uniAngle']=new CGL.Uniform(shader,'f','forces['+i+'].angle',force.angle);
             force[id+'uniPos']=new CGL.Uniform(shader,'3f','forces['+i+'].pos',force.pos);
             force[id+'uniTime']=new CGL.Uniform(shader,'f','forces['+i+'].time',time);
-
         }
         else
         {
-            
-            // console.log(force.range,force.attraction,force.angle,force.pos)
-            
             force[id+'uniRange'].setValue(force.range);
             force[id+'uniAttraction'].setValue(force.attraction);
             force[id+'uniAngle'].setValue(force.angle);
@@ -168,15 +158,8 @@ render.onTriggered=function()
     uniTime.setValue(time);
     uniPos.setValue([posX.get(),posY.get(),posZ.get()]);
     
-
-    // console.log("force field forces",CABLES.forceFieldForces.length);
-    // shader.bindTextures();
-
     if(mesh) mesh.render(shader);
     
-    
-    // cgl.setPreviousShader();
-
     var t=mesh._bufVertices;
     mesh._bufVertices=feebackOutpos.buffer;
     feebackOutpos.buffer=t;

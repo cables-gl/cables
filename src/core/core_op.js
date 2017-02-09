@@ -113,6 +113,9 @@ CABLES.Op = function()
     CABLES.Op.prototype.inValueString=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
     CABLES.Op.prototype.inValueSelect=function(name,values,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
+    CABLES.Op.prototype.inValueInt=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
+
     CABLES.Op.prototype.inFile=function(name,filter,v){var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"file","filter":filter})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
 
@@ -311,6 +314,22 @@ CABLES.Op = function()
                 reLinkP2.getName()
                 );
         }
+
+
+        // var undofunc=function(opid,objName)
+        // {
+        //     CABLES.undo.add({
+        //         undo: function() {
+        //             gui.scene().deleteOp( opid,true);
+        //         },
+        //         redo: function() {
+        //             gui.scene().addOp(objName,op.uiAttribs,opid);
+        //         }
+        //     });
+        //
+        // }(op.id,op.objName);
+
+
     };
 
     CABLES.Op.prototype.profile=function(enable)

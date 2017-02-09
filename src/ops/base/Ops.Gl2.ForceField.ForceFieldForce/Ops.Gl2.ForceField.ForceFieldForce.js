@@ -55,7 +55,7 @@ exec.onTriggered=function()
 
     vec3.transformMat4(pos, [posX.get(),posY.get(),posZ.get()], cgl.mvMatrix);
 
-updateForceObject();
+    updateForceObject();
 
     CABLES.forceFieldForces=CABLES.forceFieldForces||[];
     CABLES.forceFieldForces.push(forceObj);

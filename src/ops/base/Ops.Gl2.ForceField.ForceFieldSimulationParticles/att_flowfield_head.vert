@@ -18,7 +18,7 @@ struct force
     };
 
 
-#define NUM_FORCES 16
+#define NUM_FORCES 127
 // force forces[NUM_FORCES];
 uniform force forces[NUM_FORCES];
 
