@@ -113,8 +113,11 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.inValue=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
     CABLES.Op.prototype.inValueBool=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
-    CABLES.Op.prototype.inValueString=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueString=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
     CABLES.Op.prototype.inValueSelect=function(name,values,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
+    CABLES.Op.prototype.inValueInt=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
 
     CABLES.Op.prototype.inFile=function(name,filter,v){var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"file","filter":filter})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
@@ -142,7 +145,7 @@ CABLES.Op = function()
         function(name,filter,options,v){
             var p=new Port(this,name,OP_PORT_TYPE_DYNAMIC,options);
 
-            p.shouldLink=function(p1,p2) 
+            p.shouldLink=function(p1,p2)
             {
               if(filter && CABLES.Helpers.isArray(filter))
               {
@@ -292,11 +295,36 @@ CABLES.Op = function()
             Function.apply.call(console.log, console, arguments);
     };
 
+    CABLES.Op.prototype.undoShake=function()
+    {
+        if(this.shakeLink)this.shakeLink.remove();
+
+        if(this.oldLinks)
+        {
+            for(var i=0;i<this.oldLinks.length;i++)
+            {
+                this.patch.link(
+                    this.oldLinks[i].in.parent,
+                    this.oldLinks[i].in.getName(),
+                    this.oldLinks[i].out.parent,
+                    this.oldLinks[i].out.getName()
+                    );
+            }
+
+            this.oldLinks.length=0;
+        }
+    };
+
     CABLES.Op.prototype.unLinkShake=function()
     {
         var reLinkP1=null;
         var reLinkP2=null;
         var tryRelink=true;
+        var i=0;
+
+        this.shakeLink=null;
+        this.oldLinks=[];
+
         if(tryRelink)
         {
             if(
@@ -311,12 +339,33 @@ CABLES.Op = function()
             }
         }
 
-        for(var ipi in this.portsIn) this.portsIn[ipi].removeLinks();
-        for(var ipo in this.portsOut) this.portsOut[ipo].removeLinks();
+        for(var ipi in this.portsIn)
+        {
+            for(i=0;i<this.portsIn[ipi].links.length;i++)
+                this.oldLinks.push(
+                    {
+                        in:this.portsIn[ipi].links[i].portIn,
+                        out:this.portsIn[ipi].links[i].portOut
+                    });
+
+            this.portsIn[ipi].removeLinks();
+        }
+
+        for(var ipo in this.portsOut)
+        {
+            for(i=0;i<this.portsOut[ipo].links.length;i++)
+                this.oldLinks.push(
+                    {
+                        in:this.portsOut[ipo].links[i].portIn,
+                        out:this.portsOut[ipo].links[i].portOut
+                    });
+
+            this.portsOut[ipo].removeLinks();
+        }
 
         if(reLinkP1 && reLinkP2)
         {
-            this.patch.link(
+            this.shakeLink=this.patch.link(
                 reLinkP1.parent,
                 reLinkP1.getName(),
                 reLinkP2.parent,

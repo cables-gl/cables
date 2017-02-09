@@ -44,7 +44,7 @@ for(int i=0;i<NUM_FORCES;i++)
 
         //     vec3.mul(vecForce,vecForce,vec3.fromValues(vf*distAlpha,vf*distAlpha,vf*distAlpha));
         //     vec3.add(this.velocity,this.velocity,vecForce);
-        velocity += (vecNormal * distAlpha * forces[i].attraction / 1000.0)*{{mod}}timeDiff;
+        velocity += (vecNormal * distAlpha * forces[i].attraction )*{{mod}}timeDiff;
 
         vec3 tangentForce=vec3(
             vecNormal.y,
@@ -58,7 +58,7 @@ for(int i=0;i<NUM_FORCES;i++)
         //     this.tangentForce[2]=-vecNormal[2];
         //
         //     var f=distAlpha * force.angle;
-        float f=distAlpha * forces[i].angle/1000.0;
+        float f=distAlpha * forces[i].angle/100.0;
 
         velocity+=(tangentForce*f)*{{mod}}timeDiff;
         //     vec3.mul(this.tangentForce,this.tangentForce,vec3.fromValues(f,f,f));
