@@ -182,7 +182,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
         if(this.direction==PORT_DIR_IN)
         {
-
             if(this.type==OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
                 else this.setValue(this._valueBeforeLink);
         }
