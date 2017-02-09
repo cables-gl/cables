@@ -25,7 +25,6 @@ CABLES.WebAudio.createAudioContext = function(op) {
 // Creates an audio in port for the op with name portName
 // When disconnected it will disconnect the previous connected audio node
 // from the op's audio node.
-// Please Note: The op's audio node must be declared with "op.audioNode = ..."
 // @param op: required
 // @param portName: required, The name of the port
 // @param audioNode: required: The audionode incoming connections should connect to
@@ -77,4 +76,78 @@ CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
   // TODO: Maybe add subtype to audio-node-object?
   port.set(audioNode);
   return port;
+};
+
+// Creates an audio param in port for the op with name portName.
+// The port accepts other audio nodes as signals as well as values (numbers)
+// When the port is disconnected it will disconnect the previous connected audio node
+// from the op's audio node and restore the number value set before.
+// @param op: required
+// @param portName: required, The name of the port
+// @param audioNode: required: The audionode incoming connections should connect to
+CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, options, defaultValue) {
+  if(!op || !portName || !audioNode) {
+    op.log("ERROR: createAudioInPort needs three parameters, op, portName and audioNode");
+    return;
+  }
+  op.webAudio = op.webAudio || {};
+  op.webAudio.audioInPorts = op.webAudio.audioInPorts || [];
+  //var port = op.inObject(portName);
+  var port = op.inDynamic(portName, [OP_PORT_TYPE_VALUE, OP_PORT_TYPE_OBJECT], options, defaultValue);
+  port.webAudio = {};
+  port.webAudio.previousAudioInNode = null;
+
+  op.webAudio.audioInPorts[portName] = port;
+
+  // port.onLinkChanged = function() {
+  //   op.log("onLinkChanged");
+  //   if(port.isLinked()) {
+  //
+  //       if(port.links[0].portOut.type === OP_PORT_TYPE_VALUE) { // value
+  //
+  //       } else if(port.links[0].portOut.type === OP_PORT_TYPE_OBJECT) { // object
+  //
+  //       }
+  //   } else { // unlinked
+  //
+  //   }
+  // };
+
+  port.onChange = function() {
+    var audioInNode = port.get();
+
+    if(port.webAudio.previousAudioInNode) op.log("previousAudioInNode: ", port.webAudio.previousAudioInNode);
+    op.log("audioNode: ", audioNode);
+    op.log("audioInNode: ", audioInNode);
+
+    if (audioInNode != undefined) {
+      if(typeof audioInNode === 'object') {
+        try {
+          audioInNode.connect(audioNode);
+        } catch(e) {
+          op.log(e);
+        }
+        port.webAudio.previousAudioInNode = audioInNode;
+      } else {
+        audioNode.value = audioInNode;
+        if(port.webAudio.previousAudioInNode) {
+          try{
+              op.log("disconnecting node :");
+              op.log("previousAudioInNode: ", port.webAudio.previousAudioInNode);
+              op.log("audioNode: ", audioNode);
+              port.webAudio.previousAudioInNode.disconnect(audioNode);
+          } catch(e) {
+              console.log(e);
+          }
+          port.webAudio.previousAudioInNode = undefined;
+        }
+      }
+    } else {
+      // disconnected
+      if (port.webAudio.previousAudioInNode) {
+
+      }
+    }
+    return port;
+  };
 };
