@@ -2,34 +2,37 @@ this.name='Oscillator';
 
 CABLES.WebAudio.createAudioContext(op);
 
-//inputs 
+//inputs
 var type=this.addInPort(new Port(this,"type",OP_PORT_TYPE_VALUE,{display:'dropdown',values:[ 'sine','square','sawtooth','triangle' ]}));
 var frequency=this.addInPort(new Port(this,"frequency",OP_PORT_TYPE_VALUE));
 
-frequency.onValueChange(updateFrequency);
+//outputs
+var audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
 
+//initialisation
 var oscillator = audioContext.createOscillator();
+
+audioOut.set(oscillator );
 oscillator.start(0);
 
-oscillator.frequency.value = 200;
 
-function updateFrequency()
+//defaults
+type.set('sawtooth');
+frequency.set(200);
+
+
+//valueChanges
+var updateFrequency = function ()
 {
     oscillator.frequency.value=frequency.get();
-}
+};
+frequency.onValueChange(updateFrequency);
 
-function updateType()
+var updateType = function ()
 {
     oscillator.type=type.get();
-}
-
-
-type.set('sawtooth');
+};
 type.onValueChange(updateType);
 
 
 
-var audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
-audioOut.set( oscillator );
-
-frequency.set(200);
