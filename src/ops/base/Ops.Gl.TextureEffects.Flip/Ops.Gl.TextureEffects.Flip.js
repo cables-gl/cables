@@ -1,14 +1,10 @@
 op.name="Flip";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-
 var x=op.inValueBool("X");
 var y=op.inValueBool("Y");
 
-
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -37,18 +33,8 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-var uniX=new CGL.Uniform(shader,'f','x',0);
-var uniY=new CGL.Uniform(shader,'f','y',0);
-
-x.onChange=updateXY;
-y.onChange=updateXY;
-
-function updateXY()
-{
-    uniX.setValue(x.get() ? 1 : 0);
-    uniY.setValue(y.get() ? 1 : 0);
-}
-
+var uniX=new CGL.Uniform(shader,'f','x',x);
+var uniY=new CGL.Uniform(shader,'f','y',y);
 
 render.onTriggered=function()
 {
