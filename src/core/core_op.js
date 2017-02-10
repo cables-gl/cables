@@ -295,10 +295,14 @@ CABLES.Op = function()
             Function.apply.call(console.log, console, arguments);
     };
 
-    CABLES.Op.prototype.undoShake=function()
+
+    CABLES.Op.prototype.preUndoShake=function()
     {
         if(this.shakeLink)this.shakeLink.remove();
+    };
 
+    CABLES.Op.prototype.undoShake=function()
+    {
         if(this.oldLinks)
         {
             for(var i=0;i<this.oldLinks.length;i++)
@@ -372,6 +376,7 @@ CABLES.Op = function()
                 reLinkP2.getName()
                 );
         }
+
     };
 
     CABLES.Op.prototype.profile=function(enable)
