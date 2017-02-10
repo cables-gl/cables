@@ -39,7 +39,7 @@ function reset()
     forces.length=Math.floor(num.get());
     for(var i=0;i<num.get();i++)
     {
-        forces[i]={};
+        forces[i]=forces[i]||{};
 
         // forces[i].pos=[0,0,0,0];
         forces[i].pos=[

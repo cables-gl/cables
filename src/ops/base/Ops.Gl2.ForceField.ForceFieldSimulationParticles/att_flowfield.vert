@@ -76,7 +76,7 @@ if(respawn)
         (random(vec2({{mod}}time+rndpos.z,rndpos.x))-0.5),
         (random(vec2(rndpos.x,{{mod}}time+rndpos.z))-0.5)
         );
-        outPos*={{mod}}size;
+        outPos*={{mod}}size/2.0;
         outPos+={{mod}}emitterPos;
     // outPos.z=0.0;
 }

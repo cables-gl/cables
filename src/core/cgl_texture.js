@@ -379,7 +379,7 @@ CGL.Texture.createFromImage=function(cgl,img,options)
     texture.image = img;
     texture.width=img.width;
     texture.height=img.height;
-    texture.initTexture(img);
+    texture.initTexture(img,options.filter);
 
     return texture;
 };

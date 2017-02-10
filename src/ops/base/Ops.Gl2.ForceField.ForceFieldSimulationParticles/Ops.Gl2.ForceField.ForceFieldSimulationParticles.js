@@ -45,8 +45,9 @@ var mark=new CGL.Marker(cgl);
 
 function reset()
 {
-    verts=new Float32Array(Math.floor(numPoints.get())*3);
-    bufferB=new Float32Array(Math.floor(numPoints.get())*3);
+    var num=Math.floor(numPoints.get())*3;
+    if(!verts || verts.length!=num) verts=new Float32Array(num);
+    if(!bufferB || bufferB.length!=num)bufferB=new Float32Array(num);
 
     var size=inSize.get();
     for(var i=0;i<verts.length;i+=3)
@@ -62,8 +63,14 @@ function reset()
         // bufferB[i+2]=0.0;
     }
 
-    geom=new CGL.Geometry();
+    if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
+    
+    for(var i=0;i<geom.texCoords.length;i+=2)
+    {
+        geom.texCoords[i]=Math.random();
+        geom.texCoords[i+1]=Math.random();
+    }
 
     if(!mesh) mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
     mesh.addVertexNumbers=true;

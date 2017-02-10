@@ -25,8 +25,9 @@ var ctx = canvImage.getContext('2d');
 
 
 var buff=[];
-var maxValue=-999999;
-var minValue=999999;
+
+var maxValue=-Number.MAX_VALUE;
+var minValue=Number.MAX_VALUE;
 var colors=[];
 var lastTime=Date.now();
 
@@ -86,8 +87,7 @@ function updateGraph()
 
     ctx.fillStyle="#444";
     ctx.fillRect(0,getPos(0),canvas.width,1);
-    
-    
+
     for(var b=0;b<buff.length;b++)
     {
         buf=buff[b];
@@ -122,7 +122,11 @@ function updateGraph()
 
 
     if(texOut.get()) texOut.get().initTexture(canvImage);
-        else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage) );
+        else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage,
+        {
+            "filter":CGL.Texture.FILTER_MIPMAP
+            
+        }) );
 
     lastTime=Date.now();
 };
