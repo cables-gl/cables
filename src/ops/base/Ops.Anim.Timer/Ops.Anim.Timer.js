@@ -2,18 +2,15 @@ op.name="Timer";
 
 var playPause=op.inValueBool("Play",true);
 var reset=op.inFunctionButton("Reset");
-
 var outTime=op.outValue("Time");
 
 var timer=new CABLES.Timer();
-
 
 playPause.onChange=setState;
 setState();
 
 function setState()
 {
-    
     if(playPause.get())
     {
         timer.play();
@@ -21,14 +18,10 @@ function setState()
     }
     else
     {
-    timer.pause();
-    op.patch.removeOnAnimFrame(op);
-
+        timer.pause();
+        op.patch.removeOnAnimFrame(op);
     }
-
 }
-
-
 
 reset.onTriggered=function()
 {
@@ -39,5 +32,5 @@ op.onAnimFrame=function()
 {
     timer.update();
     outTime.set(timer.get());
-    
+
 };
