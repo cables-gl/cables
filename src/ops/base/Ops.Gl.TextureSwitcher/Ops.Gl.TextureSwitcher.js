@@ -19,7 +19,7 @@ function updateTexture()
     if(texturePorts[index]) self.textureOut.set(texturePorts[index].get());
 }
 
-for(var i=0;i<5;i++)
+for(var i=0;i<16;i++)
 {
     var tex=this.addInPort(new Port(this,"texture"+i,OP_PORT_TYPE_TEXTURE));
     texturePorts.push(tex);
