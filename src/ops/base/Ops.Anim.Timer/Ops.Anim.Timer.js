@@ -1,24 +1,34 @@
 op.name="Timer";
 
-var play=op.inFunctionButton("Play");
-var pause=op.inFunctionButton("Pause");
+var playPause=op.inValueBool("Play",true);
 var reset=op.inFunctionButton("Reset");
 
 var outTime=op.outValue("Time");
 
 var timer=new CABLES.Timer();
 
-play.onTriggered=function()
-{
-    timer.play();
-    op.patch.addOnAnimFrame(op);
-};
 
-pause.onTriggered=function()
+playPause.onChange=setState;
+setState();
+
+function setState()
 {
+    
+    if(playPause.get())
+    {
+        timer.play();
+        op.patch.addOnAnimFrame(op);
+    }
+    else
+    {
     timer.pause();
     op.patch.removeOnAnimFrame(op);
-};
+
+    }
+
+}
+
+
 
 reset.onTriggered=function()
 {
