@@ -173,7 +173,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.removeLinks=function()
     {
         while(this.links.length>0)
+        {
             this.links[0].remove();
+        }
+
     };
 
     CABLES.Port.prototype.removeLink=function(link)

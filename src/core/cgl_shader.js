@@ -197,6 +197,7 @@ CGL.Shader=function(_cgl,_name)
     this.compile=function()
     {
         CGL.profileShaderCompiles++;
+        CGL.profileShaderCompileName=name;
 
 
 

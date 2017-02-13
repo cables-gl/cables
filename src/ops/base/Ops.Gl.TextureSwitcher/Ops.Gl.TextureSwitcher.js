@@ -9,14 +9,16 @@ this.textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{pr
 
 var texturePorts=[];
 var index=0;
-
+var lastIndex=-1;
 function updateTexture()
 {
     index=parseInt(self.num.get(),10);
+    if(index==lastIndex)return;
     if(index!=index)return;
     if(index>texturePorts.length-1)index=0;
     if(index<0)index=0;
     if(texturePorts[index]) self.textureOut.set(texturePorts[index].get());
+    lastIndex=index;
 }
 
 for(var i=0;i<16;i++)
