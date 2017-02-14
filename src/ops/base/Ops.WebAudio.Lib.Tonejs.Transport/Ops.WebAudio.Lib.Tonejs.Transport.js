@@ -46,15 +46,15 @@ swingSubdivisionPort.onChange = function() {
 };
 
 timeSignaturePort.onChange = function() {
-    Tone.Transport.set("timeSignature", timeSignature.get());
+    Tone.Transport.set("timeSignature", timeSignaturePort.get());
 };
 
 loopStartPort.onChange = function() {
-    Tone.Transport.set("loopStart", loopStart.get());
+    Tone.Transport.set("loopStart", loopStartPort.get());
 };
 
 loopEndPort.onChange = function() {
-    Tone.Transport.set("loopEnd", loopEnd.get());
+    Tone.Transport.set("loopEnd", loopEndPort.get());
 };
 
 ppqPort.onChange = function() {
