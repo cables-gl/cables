@@ -42,7 +42,7 @@ function handleChange() {
 	    triggerPort.trigger();
 	    op.log("cb: ", intervalPort.get());
     };
-    if(startTime.length>0) {
+    if(startTime && startTime.length && startTime.length>0) {
         if(duration) {
             lastListenerId = Tone.Transport.scheduleRepeat(
                 cb, 
