@@ -7,23 +7,45 @@ var pressedDown=op.outValue("Down");
 var pressedLeft=op.outValue("Left");
 var pressedRight=op.outValue("Right");
 
+var keysCursor=op.inValueBool("Cursor Keys",true);
+var keysWasd=op.inValueBool("WASD",true);
 
 var cgl=op.patch.cgl;
 
 function onKeyDown(e) 
 {
-    if(e.keyCode==38) pressedUp.set(true);
-    if(e.keyCode==40) pressedDown.set(true);
-    if(e.keyCode==37) pressedLeft.set(true);
-    if(e.keyCode==39) pressedRight.set(true);
+    if(keysWasd.get())
+    {
+        if(e.keyCode==87) pressedUp.set(true);
+        if(e.keyCode==83) pressedDown.set(true);
+        if(e.keyCode==65) pressedLeft.set(true);
+        if(e.keyCode==68) pressedRight.set(true);
+    }    
+    if(keysCursor.get())
+    {
+        if(e.keyCode==38) pressedUp.set(true);
+        if(e.keyCode==40) pressedDown.set(true);
+        if(e.keyCode==37) pressedLeft.set(true);
+        if(e.keyCode==39) pressedRight.set(true);
+    }
 }
 
 function onKeyUp(e)
 {
-    if(e.keyCode==38) pressedUp.set(false);
-    if(e.keyCode==40) pressedDown.set(false);
-    if(e.keyCode==37) pressedLeft.set(false);
-    if(e.keyCode==39) pressedRight.set(false);
+    if(keysWasd.get())
+    {
+        if(e.keyCode==87) pressedUp.set(false);
+        if(e.keyCode==83) pressedDown.set(false);
+        if(e.keyCode==65) pressedLeft.set(false);
+        if(e.keyCode==68) pressedRight.set(false);
+    }    
+    if(keysCursor.get())
+    {
+        if(e.keyCode==38) pressedUp.set(false);
+        if(e.keyCode==40) pressedDown.set(false);
+        if(e.keyCode==37) pressedLeft.set(false);
+        if(e.keyCode==39) pressedRight.set(false);
+    }
 }
 
 op.onDelete=function()

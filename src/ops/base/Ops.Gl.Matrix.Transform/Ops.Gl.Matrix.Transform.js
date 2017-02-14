@@ -3,9 +3,9 @@ op.name='Transform';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var posX=op.addInPort(new Port(op,"posX"));
-var posY=op.addInPort(new Port(op,"posY"));
-var posZ=op.addInPort(new Port(op,"posZ"));
+var posX=op.addInPort(new Port(op,"posX"),0);
+var posY=op.addInPort(new Port(op,"posY"),0);
+var posZ=op.addInPort(new Port(op,"posZ"),0);
 
 var scale=op.addInPort(new Port(op,"scale"));
 

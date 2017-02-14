@@ -121,6 +121,8 @@ CABLES.Link.canLinkText=function(p1,p2)
     if(p2.direction==PORT_DIR_IN && p2.links.length>0)return 'input port already busy';
     if(p1.isLinkedTo(p2))return 'ports already linked';
 
+    if( (p1.canLink && !p1.canLink(p2)) || p2.canLink && !p2.canLink(p1) )return 'Incompatible';
+
     return 'can link';
 };
 
@@ -138,6 +140,9 @@ CABLES.Link.canLink=function(p1,p2)
     if(p1.direction==p2.direction)return false;
     if(p1.type!=p2.type)return false;
     if(p1.parent==p2.parent)return false;
+
+    if(p1.canLink && !p1.canLink(p2))return false;
+    if(p2.canLink && !p2.canLink(p1))return false;
 
     return true;
 };

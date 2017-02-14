@@ -220,6 +220,11 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
     return op;
 };
 
+CABLES.Patch.prototype.addOnAnimFrame=function(op)
+{
+    this.animFrameOps.push(op);
+};
+
 CABLES.Patch.prototype.removeOnAnimFrame=function(op)
 {
     for(var i=0;i<this.animFrameOps.length;i++)

@@ -95,7 +95,7 @@ else
     srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'in vec3 baycentric;'
-    .endl()+'out vec4 fragColor;'
+    // .endl()+'out vec4 fragColor;'
 
     .endl();
 }
@@ -131,8 +131,9 @@ srcFrag+=''
 // .endl()+'col.xyz=baycentric;'
 .endl();
 
-if(cgl.glVersion==1)srcFrag+='gl_FragColor=col;';
-else srcFrag+='fragColor=col;';
+// if(cgl.glVersion==1)srcFrag+='gl_FragColor=col;';
+// else 
+srcFrag+='outColor=col;';
 
 srcFrag+=''.endl()+'}';
 

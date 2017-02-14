@@ -295,9 +295,12 @@ CABLES.Op = function()
             Function.apply.call(console.log, console, arguments);
     };
 
-    CABLES.Op.prototype.undoShake=function()
+
+
+    CABLES.Op.prototype.undoUnLinkTemporary=function()
     {
         if(this.shakeLink)this.shakeLink.remove();
+        this.shakeLink=null;
 
         if(this.oldLinks)
         {
@@ -315,10 +318,22 @@ CABLES.Op = function()
         }
     };
 
-    CABLES.Op.prototype.unLinkShake=function()
+    CABLES.Op.prototype.unLink=function()
     {
-        var reLinkP1=null;
-        var reLinkP2=null;
+        for(var ipo in this.portsOut)
+            this.portsOut[ipo].removeLinks();
+
+        for(var ipi in this.portsIn)
+            this.portsIn[ipi].removeLinks();
+
+    };
+
+    var unLinkTempReLinkP1=null;
+    var unLinkTempReLinkP2=null;
+
+
+    CABLES.Op.prototype.unLinkTemporary=function()
+    {
         var tryRelink=true;
         var i=0;
 
@@ -333,8 +348,8 @@ CABLES.Op = function()
             {
                 if(this.portsIn[0].getType()==this.portsOut[0].getType())
                 {
-                    reLinkP1=this.portsIn[0].links[0].getOtherPort(this.portsIn[0]);
-                    reLinkP2=this.portsOut[0].links[0].getOtherPort(this.portsOut[0]);
+                    unLinkTempReLinkP1=this.portsIn[0].links[0].getOtherPort(this.portsIn[0]);
+                    unLinkTempReLinkP2=this.portsOut[0].links[0].getOtherPort(this.portsOut[0]);
                 }
             }
         }
@@ -347,8 +362,6 @@ CABLES.Op = function()
                         in:this.portsIn[ipi].links[i].portIn,
                         out:this.portsIn[ipi].links[i].portOut
                     });
-
-            this.portsIn[ipi].removeLinks();
         }
 
         for(var ipo in this.portsOut)
@@ -360,18 +373,22 @@ CABLES.Op = function()
                         out:this.portsOut[ipo].links[i].portOut
                     });
 
-            this.portsOut[ipo].removeLinks();
+
         }
 
-        if(reLinkP1 && reLinkP2)
+        this.unLink();
+
+        if(unLinkTempReLinkP1 && unLinkTempReLinkP2)
         {
             this.shakeLink=this.patch.link(
-                reLinkP1.parent,
-                reLinkP1.getName(),
-                reLinkP2.parent,
-                reLinkP2.getName()
+                unLinkTempReLinkP1.parent,
+                unLinkTempReLinkP1.getName(),
+                unLinkTempReLinkP2.parent,
+                unLinkTempReLinkP2.getName()
                 );
         }
+
+
     };
 
     CABLES.Op.prototype.profile=function(enable)

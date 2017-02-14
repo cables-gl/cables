@@ -112,8 +112,8 @@ function updateText()
 {
 
     var warn="";
-    if(CGL.profileShaderCompiles>0)warn+='Shader compile! ';
-    if(CGL.profileShaderGetUniform>0)warn+='Shader get uni loc! ';
+    if(CGL.profileShaderCompiles>0)warn+='Shader compile ('+CGL.profileShaderCompileName+') ';
+    if(CGL.profileShaderGetUniform>0)warn+='Shader get uni loc! ('+CGL.profileShaderGetUniformName+')';
     if(CGL.profileTextureResize>0)warn+='Texture resize! ';
     if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
     if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';

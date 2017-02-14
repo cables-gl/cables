@@ -70,9 +70,9 @@ function reload()
 
         var geom=new CGL.Geometry();
         geom.vertices=verts;
-        geom.vertexNormals=jsonMesh.normals;
-        geom.tangents=jsonMesh.tangents;
-        geom.biTangents=jsonMesh.bitangents;
+        geom.vertexNormals=jsonMesh.normals||[];
+        geom.tangents=jsonMesh.tangents||[];
+        geom.biTangents=jsonMesh.bitangents||[];
         
         if(centerPivot.get())geom.center();
 
@@ -85,7 +85,7 @@ function reload()
         nfo += geom.verticesIndices.length+' faces <br/>';
         nfo += geom.vertices.length+' vertices <br/>';
         nfo += geom.texCoords.length+' texturecoords <br/>';
-        nfo += geom.vertexNormals.length+' normals <br/>';
+        if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
         
         op.uiAttr({info:nfo});
 

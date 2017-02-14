@@ -84,17 +84,20 @@ op.textureUniform=null;
 // };
 
 
-op.texture.onValueChanged=function()
+op.texture.onChange=function()
 {
-    if(op.texture.get())
+    
+    
+    if(op.texture.get()!==null)
     {
-        if(op.textureUniform!==null)return;
+        if(op.textureUniform)return;
         shader.removeUniform('tex');
         shader.define('HAS_TEXTURE_DIFFUSE');
         op.textureUniform=new CGL.Uniform(shader,'t','tex',0);
     }
     else
     {
+    console.log("NO TEXTURE!",op.texture.get());    
         shader.removeUniform('tex');
         shader.removeDefine('HAS_TEXTURE_DIFFUSE');
         op.textureUniform=null;
@@ -120,7 +123,7 @@ op.textureOpacity.onValueChanged=function()
         console.log('TEXTURE OPACITY ADDED');
         shader.removeUniform('texOpacity');
         shader.define('HAS_TEXTURE_OPACITY');
-        op.textureOpacityUniform=new CGL.Uniform(shader,'t','texOpacity',1);
+        if(!op.textureOpacityUniform)op.textureOpacityUniform=new CGL.Uniform(shader,'t','texOpacity',1);
     }
     else
     {

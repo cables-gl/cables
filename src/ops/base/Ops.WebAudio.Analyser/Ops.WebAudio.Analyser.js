@@ -8,6 +8,18 @@ var audioOut=op.addOutPort(new Port(op, "audio out",OP_PORT_TYPE_OBJECT));
 var avgVolume=op.addOutPort(new Port(op, "average volume",OP_PORT_TYPE_VALUE));
 var fftOut=op.addOutPort(new Port(op, "fft",OP_PORT_TYPE_ARRAY));
 
+var anData=op.inValueSelect("Data",["Frequency","Time Domain"],"Frequency");
+
+var getFreq=true;
+
+anData.onChange=function()
+{
+    if(anData.get()=="Frequency")getFreq=true;
+    if(anData.get()=="Time Domain")getFreq=false;
+    
+};
+
+
 var oldAudioIn=null;
 
 window.AudioContext = window.AudioContext||window.webkitAudioContext;
@@ -20,30 +32,32 @@ var fftBufferLength=0;
 var fftDataArray =null;
 audioOut.set( analyser );
 
+var array=null;
 
 refresh.onTriggered = function()
 {
-    var array = new Uint8Array(analyser.frequencyBinCount);
+    if(!array || array.length != analyser.frequencyBinCount)
+        array = new Uint8Array(analyser.frequencyBinCount);
     
     if(!array)return;
     analyser.getByteFrequencyData(array);
-    analyser.minDecibels = -110;
+    analyser.minDecibels = -90;
     analyser.maxDecibels = -10;
+    // analyser.smoothingTimeConstant =0.8;
 
     if(!fftDataArray)return;
     var values = 0;
-    var average;
 
     for (var i = 0; i < array.length; i++)
-    {
         values += array[i];
-    }
 
-    average = values / array.length;
+    var average = values / array.length;
     
     avgVolume.set(average/128);
 
-    analyser.getByteFrequencyData(fftDataArray);
+    if(getFreq) analyser.getByteFrequencyData(2);
+        else analyser.getByteTimeDomainData(fftDataArray);
+    
     fftOut.set(null);
     fftOut.set(fftDataArray);
     

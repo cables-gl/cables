@@ -10,14 +10,14 @@ In order to get informed on port-value-changes, function-triggers (also see [Por
 
 There is no explicit callback for initialization, all code in your op is automatically executed.
 
-### onValueChange
+### onChange
 
 Can be implemented for `OP_PORT_TYPE_VALUE`, `OP_PORT_TYPE_ARRAY`, `OP_PORT_TYPE_OBJECT`.  
 
 Every time a connected op calls the `myOutPort.set(...)` method, the in-port-callback `onValueChange` is called.
 
 ```javascript
-myPort.onValueChange( function() {
+myPort.onChange( function() {
     this.log('value of myPort changed to:' + myPort.get());
 });
 ```
