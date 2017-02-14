@@ -8,92 +8,94 @@ CABLES.Link = function(scene)
     this.scene=scene;
 };
 
+CABLES.Link.prototype.setValue=function(v)
 {
-    CABLES.Link.prototype.setValue=function(v)
-    {
-        if(v===undefined) this._setValue();
-            else this.portIn.set(v);
-    };
+    if(v===undefined) this._setValue();
+        else this.portIn.set(v);
+};
 
-    CABLES.Link.prototype._setValue=function()
+CABLES.Link.prototype._setValue=function()
+{
+    if(!this.portOut)
     {
-        if(!this.portOut)
+        this.remove();
+        return;
+    }
+    var v=this.portOut.get();
+
+    if( v==v)  // NaN is the only JavaScript value that is treated as unequal to itself
+        if ( this.portIn.get()!=v )
         {
-            // console.log('NO this.portOut !',this);
-            this.remove();
-            return;
-        }
-        var v=this.portOut.get();
-        // if(v!=v)return;
-
-        if( v==v &&  // NaN is the only JavaScript value that is treated as unequal to itself
-            this.portIn.get()!=v )
-                this.portIn.set(v);
-    };
-
-    CABLES.Link.prototype.getOtherPort=function(p)
-    {
-        if(p==this.portIn)return this.portOut;
-        return this.portIn;
-    };
-
-    CABLES.Link.prototype.remove=function()
-    {
-        if(this.portIn)this.portIn.removeLink(this);
-        if(this.portOut)this.portOut.removeLink(this);
-        if(this.scene)this.scene.onUnLink(this.portIn,this.portOut);
-
-        if(this.portIn && this.portIn.type==OP_PORT_TYPE_OBJECT)
-        {
-            this.portIn.set(null);
-        }
-
-        this.portIn=null;
-        this.portOut=null;
-        this.scene=null;
-    };
-
-    CABLES.Link.prototype.link=function(p1,p2)
-    {
-        if(!CABLES.Link.canLink(p1,p2))
-        {
-            console.log('cannot link ports!');
-            return false;
-        }
-
-        if(p1.direction==PORT_DIR_IN)
-        {
-            this.portIn=p1;
-            this.portOut=p2;
+            this.portIn.set(v);
         }
         else
         {
-            this.portIn=p2;
-            this.portOut=p1;
+            if(this.portIn.changeAlways)
+                this.portIn.set(v);
+
+
         }
+};
 
-        p1.addLink(this);
-        p2.addLink(this);
+CABLES.Link.prototype.getOtherPort=function(p)
+{
+    if(p==this.portIn)return this.portOut;
+    return this.portIn;
+};
 
-        this.setValue();
+CABLES.Link.prototype.remove=function()
+{
+    if(this.portIn)this.portIn.removeLink(this);
+    if(this.portOut)this.portOut.removeLink(this);
+    if(this.scene)this.scene.onUnLink(this.portIn,this.portOut);
 
+    if(this.portIn && this.portIn.type==OP_PORT_TYPE_OBJECT)
+        this.portIn.set(null);
 
-        if(p1.onLink) p1.onLink(this);
-        if(p2.onLink) p2.onLink(this);
-    };
+    this.portIn=null;
+    this.portOut=null;
+    this.scene=null;
+};
 
-    CABLES.Link.prototype.getSerialized=function()
+CABLES.Link.prototype.link=function(p1,p2)
+{
+    if(!CABLES.Link.canLink(p1,p2))
     {
-        var obj={};
+        console.log('cannot link ports!');
+        return false;
+    }
 
-        obj.portIn=this.portIn.getName();
-        obj.portOut=this.portOut.getName();
-        obj.objIn=this.portIn.parent.id;
-        obj.objOut=this.portOut.parent.id;
+    if(p1.direction==PORT_DIR_IN)
+    {
+        this.portIn=p1;
+        this.portOut=p2;
+    }
+    else
+    {
+        this.portIn=p2;
+        this.portOut=p1;
+    }
 
-        return obj;
-    };
-}
+    p1.addLink(this);
+    p2.addLink(this);
+
+    this.setValue();
+
+    if(p1.onLink) p1.onLink(this);
+    if(p2.onLink) p2.onLink(this);
+};
+
+CABLES.Link.prototype.getSerialized=function()
+{
+    var obj={};
+
+    obj.portIn=this.portIn.getName();
+    obj.portOut=this.portOut.getName();
+    obj.objIn=this.portIn.parent.id;
+    obj.objOut=this.portOut.parent.id;
+
+    return obj;
+};
 
 // --------------------------------------------
 
