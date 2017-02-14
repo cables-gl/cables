@@ -74,7 +74,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     {
         if(this.parent.enabled)
         {
-            if(v!=this.value || this.changeAlways || this.type==OP_PORT_TYPE_TEXTURE || this.type==OP_PORT_TYPE_ARRAY)
+            // if(v!=this.value || this.changeAlways || this.type==OP_PORT_TYPE_TEXTURE || this.type==OP_PORT_TYPE_ARRAY)
             {
                 if(this._animated)
                 {
@@ -102,10 +102,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                     }
                 }
 
-                for (var i = 0; i < this.links.length; ++i)
-                {
-                    this.links[i].setValue();
-                }
+                if(this.direction==PORT_DIR_OUT)
+                    for (var i = 0; i < this.links.length; ++i)
+                        this.links[i].setValue();
             }
         }
     };
