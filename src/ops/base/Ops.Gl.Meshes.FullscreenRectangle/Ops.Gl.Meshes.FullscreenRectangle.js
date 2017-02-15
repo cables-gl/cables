@@ -10,7 +10,7 @@ var flipY=op.inValueBool("Flip Y");
 var cgl=op.patch.cgl;
 var mesh=null;
 var geom=new CGL.Geometry("fullscreen rectangle");
-var x=0,y=0,z=0,w=0;
+var x=0,y=0,z=0,w=0,h=0;
 op.onResize=rebuild;
 
 
