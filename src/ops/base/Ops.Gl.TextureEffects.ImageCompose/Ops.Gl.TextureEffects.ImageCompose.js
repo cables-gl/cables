@@ -86,8 +86,8 @@ function updateResolution()
 
     if((w!=tex.width || h!= tex.height) && (w!==0 && h!==0))
     {
-        height.set(h);
-        width.set(w);
+        // height.set(h);
+        // width.set(w);
         tex.filter=CGL.Texture.FILTER_LINEAR;
         tex.setSize(w,h);
         
