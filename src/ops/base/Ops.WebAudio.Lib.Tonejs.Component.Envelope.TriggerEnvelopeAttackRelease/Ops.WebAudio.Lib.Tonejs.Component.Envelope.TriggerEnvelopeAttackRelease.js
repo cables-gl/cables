@@ -1,4 +1,4 @@
-op.name="TriggerAttackRelease";
+op.name="TriggerEnvelopeAttackRelease";
 
 CABLES.WebAudio.createAudioContext(op);
 
@@ -24,5 +24,5 @@ triggerAttackReleasePort.onTriggered = function() {
         var time = timePort.get() || TIME_DEFAULT;
         var velocity = velocityPort.get();
         node.triggerAttackRelease(duration, time, velocity);
-    }    
+    }
 };
