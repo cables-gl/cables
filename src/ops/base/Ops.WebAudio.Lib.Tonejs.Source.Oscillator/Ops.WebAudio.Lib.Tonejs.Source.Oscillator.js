@@ -76,7 +76,11 @@ mutePort.onChange = function() {setNodeValue("mute", mutePort.get());};
 // functions
 function setNodeValue(key, value) {
     op.log("setting key: ", key, " to value: ", value);
-    node.set(key, value);
+    try{
+        node.set(key, value);    
+    } catch(e) {
+        op.log("ERROR!", e);
+    }
 }
 
 // output ports

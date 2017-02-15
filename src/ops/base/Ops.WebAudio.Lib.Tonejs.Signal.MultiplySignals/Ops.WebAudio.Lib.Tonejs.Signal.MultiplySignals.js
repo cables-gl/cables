@@ -1,9 +1,9 @@
-op.name="AddSignals";
+op.name="MultiplySignals";
 
 CABLES.WebAudio.createAudioContext(op);
 
 // vars
-var addNode = new Tone.Add();
+var addNode = new Tone.Multiply();
 
 // input ports
 var audioInPort1 = CABLES.WebAudio.createAudioInPort(op, "Signal 1", addNode, 0);
