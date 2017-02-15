@@ -74,7 +74,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     {
         if(this.parent.enabled)
         {
-            // if(v!=this.value || this.changeAlways || this.type==OP_PORT_TYPE_TEXTURE || this.type==OP_PORT_TYPE_ARRAY)
+            if(v!=this.value || this.changeAlways || this.type==OP_PORT_TYPE_TEXTURE || this.type==OP_PORT_TYPE_ARRAY)
             {
                 if(this._animated)
                 {
