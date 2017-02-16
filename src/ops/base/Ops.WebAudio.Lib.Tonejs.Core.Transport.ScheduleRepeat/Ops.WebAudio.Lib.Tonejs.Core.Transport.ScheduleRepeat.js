@@ -3,7 +3,7 @@ op.name="ScheduleRepeat";
 CABLES.WebAudio.createAudioContext(op);
 
 var INFINITE = "Infinite";
-var START_TIME_DEFAULT = "+0";
+var START_TIME_DEFAULT = "0";
 
 // input ports
 var intervalPort = op.inValueString("Interval", "4n");
