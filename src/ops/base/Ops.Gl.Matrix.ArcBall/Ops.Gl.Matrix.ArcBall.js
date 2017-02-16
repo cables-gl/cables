@@ -10,7 +10,7 @@ var maxScale=op.addInPort(new Port(op,"Max Scale",OP_PORT_TYPE_VALUE));
 
 var useWheel=op.inValueBool('Use Mouse Wheel',true);
 
-var inRadius=op.inValue("Radius");
+var inRadius=op.inValue("Radius",1);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -33,7 +33,7 @@ var finalRotMatrix = mat4.create();
 
 inRadius.onChange=function()
 {
-    radius=inRadius.get();
+    radius=inRadius.get()||1;
 };
 
 render.onTriggered=function()

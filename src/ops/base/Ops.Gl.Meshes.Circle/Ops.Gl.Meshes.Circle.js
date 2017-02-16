@@ -1,4 +1,6 @@
 op.name='Circle';
+
+
 var render=op.inFunction("render");
 var segments=op.inValue('segments',40);
 var radius=op.inValue('radius',1);
@@ -16,12 +18,19 @@ var cgl=op.patch.cgl;
 var drawSpline=op.addInPort(new Port(op,"Spline",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 drawSpline.set(false);
 
-
-
 var oldPrim=0;
 var shader=null;
 render.onTriggered=function()
 {
+    if(op.instanced(render))return;
+    
+    // console.log("RENDER");
+    // console.log( 
+    //     op.patch.instancing.index(),
+    //     op.patch.instancing.numCycles(),
+    //     op.patch.instancing.numLoops()
+    //     );
+    
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
@@ -36,17 +45,19 @@ render.onTriggered=function()
 
 percent.set(1);
 
-var geom=new CGL.Geometry();
+var geom=new CGL.Geometry("circle");
 var mesh=new CGL.Mesh(cgl,geom);
-
+var lastSegs=-1;
 function calc()
 {
-
     var segs=Math.max(3,Math.floor(segments.get()));
-
+    
     geom.clear();
 
-    
+    var faces=[];
+    var texCoords=[];
+    var vertexNormals=[];
+
     var i=0,degInRad=0;
     var oldPosX=0,oldPosY=0;
     var oldPosXTexCoord=0,oldPosYTexCoord=0;
@@ -73,7 +84,6 @@ function calc()
             
             posyTexCoord=0.5;
 
-
             if(i>0)
             {
                 verts.push(lastX);
@@ -91,8 +101,6 @@ function calc()
             posxTexCoord=1.0-i/segs;
             tc.push(posxTexCoord,posyTexCoord);
 
-
-
             lastX=posx;
             lastY=posy;
         }
@@ -102,9 +110,6 @@ function calc()
     else
     if(innerRadius.get()<=0)
     {
-        var faces=[];
-        var texCoords=[];
-        var vertexNormals=[];
 
         for (i=0; i <= segs*percent.get(); i++)
         {
@@ -150,11 +155,13 @@ function calc()
     }
     else
     {
-        var faces=[];
-        var texCoords=[];
-        var vertexNormals=[];
+
         var count=0;
-        for (i=0; i <= segs*percent.get(); i++)
+        
+        var numSteps=segs*percent.get();
+        var pos=0;
+
+        for (i=0; i <= numSteps; i++)
         {
             count++;
             
@@ -164,8 +171,8 @@ function calc()
             
             var posxIn=Math.cos(degInRad)*innerRadius.get()*radius.get();
             var posyIn=Math.sin(degInRad)*innerRadius.get()*radius.get();
-            
-    
+
+
             if(mapping.get()=='flat')
             {
                 posxTexCoord=(Math.cos(degInRad)+1.0)/2;
@@ -239,3 +246,4 @@ steps.onChange=calc;
 invertSteps.onChange=calc;
 drawSpline.onChange=calc;
 calc();
+

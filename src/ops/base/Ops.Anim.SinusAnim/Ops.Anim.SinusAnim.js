@@ -1,4 +1,4 @@
-op.name='SinusAnim';
+op.name='SineAnim';
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var result=op.addOutPort(new Port(op,"result"));
 

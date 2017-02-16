@@ -14,10 +14,12 @@ var valZ=op.addOutPort(new Port(op,"Value 3"));
 exe.onTriggered=function()
 {
     if(!arr.get())return;
-    
+
     var step=pStep.get()||1;
     if(step<1.0)step=1.0;
     var ar=arr.get();
+    op.patch.instancing.pushLoop(ar.length);
+
     for(var i=0;i<ar.length;i+=3*step)
     {
         idx.set(i/3);
@@ -25,5 +27,8 @@ exe.onTriggered=function()
         valY.set(arr.val[i+1]);
         valZ.set(arr.val[i+2]);
         trigger.trigger();
+        op.patch.instancing.increment();
     }
+    op.patch.instancing.popLoop();
+
 };

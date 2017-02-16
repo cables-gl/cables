@@ -2,13 +2,12 @@ op.name="ScheduleRepeat";
 
 CABLES.WebAudio.createAudioContext(op);
 
-window.blatest=true;
-
 var INFINITE = "Infinite";
+var START_TIME_DEFAULT = "+0";
 
 // input ports
 var intervalPort = op.inValueString("Interval", "4n");
-var startTimePort = op.inValueString("Start Time", "+0");
+var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var durationPort = op.inValueString("Duration", INFINITE);
 
 // output ports

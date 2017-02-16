@@ -33,7 +33,7 @@ var createTexture=true;
 var fontSize=320;
 
 textureOut.set(null);
-inFont.onChange=function(){ createTexture=true;createMesh=true; };
+inFont.onChange=function(){ createTexture=true;createMesh=true;chars={}; };
 
 op.onDelete=function()
 {

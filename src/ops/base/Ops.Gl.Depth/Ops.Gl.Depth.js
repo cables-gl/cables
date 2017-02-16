@@ -24,7 +24,7 @@ function updateFunc()
     if(depthFunc.get()=='less') theDepthFunc=cgl.gl.LESS;
     if(depthFunc.get()=='less or equal') theDepthFunc=cgl.gl.LEQUAL;
     if(depthFunc.get()=='greater') theDepthFunc=cgl.gl.GREATER;
-    if(depthFunc.get()=='greater or equal') theDepthFunc=cgl.gl.EQUAL;
+    if(depthFunc.get()=='greater or equal') theDepthFunc=cgl.gl.GEQUAL;
     if(depthFunc.get()=='equal') theDepthFunc=cgl.gl.EQUAL;
     if(depthFunc.get()=='not equal') theDepthFunc=cgl.gl.NOTEQUAL;
 }

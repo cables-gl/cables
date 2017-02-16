@@ -18,6 +18,7 @@ CABLES.Patch = function(cfg)
     this._volumeListeners=[];
     this._paused=false;
     this._frameNum=0;
+    this.instancing=new CABLES.Instancing();
 
     this.config = cfg ||
     {
@@ -152,14 +153,8 @@ CABLES.Patch.prototype.addOp=function(objName,uiAttribs,next)
     else return this.doAddOp(objName,uiAttribs,next);
 };
 
-CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
+CABLES.Patch.prototype.createOp=function(objName)
 {
-    if(!objName || objName.indexOf('.') == -1)
-    {
-        CABLES.UI.MODAL.showError('could not create op','op unknown');
-        return;
-    }
-
     var parts=objName.split('.');
     var op=null;
 
@@ -200,10 +195,29 @@ CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
 
         // return;
     }
+
     if(op)
     {
         op.objName=objName;
         op.patch=this;
+
+
+    }
+    return op;
+};
+
+CABLES.Patch.prototype.doAddOp=function(objName,uiAttribs,next)
+{
+    if(!objName || objName.indexOf('.') == -1)
+    {
+        CABLES.UI.MODAL.showError('could not create op','op unknown');
+        return;
+    }
+
+    var op=this.createOp(objName);
+
+    if(op)
+    {
 
         op.uiAttr(uiAttribs);
         if(op.onCreate)op.onCreate();
