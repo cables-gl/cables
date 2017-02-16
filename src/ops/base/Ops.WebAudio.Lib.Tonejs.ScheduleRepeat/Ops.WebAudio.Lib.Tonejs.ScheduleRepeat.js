@@ -2,13 +2,12 @@ op.name="ScheduleRepeat";
 
 CABLES.WebAudio.createAudioContext(op);
 
-window.blatest=true;
-
 var INFINITE = "Infinite";
+var START_TIME_DEFAULT = "+0";
 
 // input ports
 var intervalPort = op.inValueString("Interval", "4n");
-var startTimePort = op.inValueString("Start Time", "0");
+var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var durationPort = op.inValueString("Duration", INFINITE);
 
 // output ports
@@ -57,7 +56,7 @@ function handleChange() {
 	    triggerPort.trigger();
 	    op.log("cb: ", intervalPort.get());
     };
-    if(startTime && startTime.length && startTime.length>0) {
+    if(isValidTime(startTime)) {
         if(duration && duration !== INFINITE) {
             lastListenerId = Tone.Transport.scheduleRepeat(
                 cb, 
@@ -76,6 +75,16 @@ function handleChange() {
             cb, 
             interval
         );  
+    }
+}
+
+// functions
+function isValidTime(time) {
+    try {
+        new Tone.TimeBase(time)
+        return true;
+    } catch(e) {
+        return false;
     }
 }
 
