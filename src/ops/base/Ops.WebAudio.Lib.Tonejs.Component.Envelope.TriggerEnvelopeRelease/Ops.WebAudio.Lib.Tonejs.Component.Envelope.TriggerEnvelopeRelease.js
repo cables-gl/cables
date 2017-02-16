@@ -1,4 +1,4 @@
-op.name="TriggerRelease";
+op.name="TriggerEnvelopeRelease";
 
 CABLES.WebAudio.createAudioContext(op);
 
@@ -16,5 +16,5 @@ triggerReleasePort.onTriggered = function() {
     if(node && node.triggerRelease) {
         var time = timePort.get() || TIME_DEFAULT;
         node.triggerRelease(time);
-    }    
+    }
 };
