@@ -8,7 +8,7 @@ var INFINITE = "Infinite";
 
 // input ports
 var intervalPort = op.inValueString("Interval", "4n");
-var startTimePort = op.inValueString("Start Time", "0");
+var startTimePort = op.inValueString("Start Time", "+0");
 var durationPort = op.inValueString("Duration", INFINITE);
 
 // output ports
@@ -35,7 +35,7 @@ function handleChange() {
     
     // check if interval is valid
     try{
-	var time = new Tone.TimeBase(interval);	
+	    var time = new Tone.TimeBase(interval);	
     } catch(e) {
         // interval not valid
         op.uiAttr( { 'error': 'Interval not valid, Examples: "4n", "1m", 2' } );
@@ -55,9 +55,8 @@ function handleChange() {
     var cb = function(time) {
         timeOutPort.set(time);
 	    triggerPort.trigger();
-	    op.log("cb: ", intervalPort.get());
     };
-    if(startTime && startTime.length && startTime.length>0) {
+    if(isValidTime(startTime)) {
         if(duration && duration !== INFINITE) {
             lastListenerId = Tone.Transport.scheduleRepeat(
                 cb, 
@@ -76,6 +75,18 @@ function handleChange() {
             cb, 
             interval
         );  
+    }
+}
+
+handleChange();
+
+// functions
+function isValidTime(time) {
+    try {
+        new Tone.TimeBase(time)
+        return true;
+    } catch(e) {
+        return false;
     }
 }
 
