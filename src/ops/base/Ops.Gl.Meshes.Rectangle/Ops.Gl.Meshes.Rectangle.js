@@ -24,18 +24,21 @@ pivotY.set('center');
 var geom=new CGL.Geometry();
 var mesh=null;
 
-axis.onValueChanged=rebuild;
-pivotX.onValueChanged=rebuild;
-pivotY.onValueChanged=rebuild;
-width.onValueChanged=rebuild;
-height.onValueChanged=rebuild;
-nRows.onValueChanged=rebuild;
-nColumns.onValueChanged=rebuild;
+axis.onChange=rebuild;
+pivotX.onChange=rebuild;
+pivotY.onChange=rebuild;
+width.onChange=rebuild;
+height.onChange=rebuild;
+nRows.onChange=rebuild;
+nColumns.onChange=rebuild;
 rebuild();
 
 render.onTriggered=function()
 {
+    if(op.instanced(render))return;
+    
     mesh.render(cgl.getShader());
+    
     trigger.trigger();
 };
 

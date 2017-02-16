@@ -33,6 +33,8 @@ function init(v)
 
 exe.onTriggered=function()
 {
+    if(op.instanced(exe))return;
+
     var t=op.patch.freeTimer.get();
     var v=anim.getValue(t);
     if(anim.hasEnded(t))

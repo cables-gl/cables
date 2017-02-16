@@ -17,6 +17,8 @@ numy.set(5);
 
 exe.onTriggered=function()
 {
+    op.patch.instancing.pushLoop(numx.get()*numy.get());
+
     var subX=0;
     var subY=0;
     if(center.get())
@@ -33,6 +35,10 @@ exe.onTriggered=function()
             idxx.set(x*m - subX);
             idx.set(x+y*numx.get());
             trigger.trigger();
+            op.patch.instancing.increment();
+
         }
     }
+    op.patch.instancing.popLoop();
+
 };
