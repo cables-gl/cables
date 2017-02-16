@@ -1,4 +1,6 @@
 op.name='Circle';
+
+
 var render=op.inFunction("render");
 var segments=op.inValue('segments',40);
 var radius=op.inValue('radius',1);
@@ -17,11 +19,22 @@ var drawSpline=op.addInPort(new Port(op,"Spline",OP_PORT_TYPE_VALUE,{ display:'b
 drawSpline.set(false);
 
 
+op.log("CREATED CIRCLE");
+
 
 var oldPrim=0;
 var shader=null;
 render.onTriggered=function()
 {
+    if(op.instanced(render))return;
+    
+    // console.log("RENDER");
+    // console.log( 
+    //     op.patch.instancing.index(),
+    //     op.patch.instancing.numCycles(),
+    //     op.patch.instancing.numLoops()
+    //     );
+    
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
@@ -38,15 +51,13 @@ percent.set(1);
 
 var geom=new CGL.Geometry();
 var mesh=new CGL.Mesh(cgl,geom);
-
+var lastSegs=-1;
 function calc()
 {
-
     var segs=Math.max(3,Math.floor(segments.get()));
-
+    
     geom.clear();
 
-    
     var i=0,degInRad=0;
     var oldPosX=0,oldPosY=0;
     var oldPosXTexCoord=0,oldPosYTexCoord=0;
@@ -239,3 +250,4 @@ steps.onChange=calc;
 invertSteps.onChange=calc;
 drawSpline.onChange=calc;
 calc();
+

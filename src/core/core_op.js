@@ -28,6 +28,7 @@ CABLES.Op = function()
     this.onLoaded=null;
     this.onDelete=null;
     this.onUiAttrChange=null;
+    this._instances=null;
 };
 {
 
@@ -374,8 +375,6 @@ CABLES.Op = function()
                         in:this.portsOut[ipo].links[i].portIn,
                         out:this.portsOut[ipo].links[i].portOut
                     });
-
-
         }
 
         this.unLink();
@@ -389,8 +388,6 @@ CABLES.Op = function()
                 unLinkTempReLinkP2.getName()
                 );
         }
-
-
     };
 
     CABLES.Op.prototype.profile=function(enable)
@@ -417,6 +414,153 @@ CABLES.Op = function()
         }
         return null;
     };
+
+    CABLES.Op.prototype.instanced=function(triggerPort)
+    {
+        if(this.patch.instancing.numCycles()===0)return false;
+
+
+
+        var i=0;
+        var ipi=0;
+        if(!this._instances || this._instances.length!=this.patch.instancing.numCycles())
+        {
+            if(!this._instances)this._instances=[];
+            console.log('creating instances of ',this.objName,this.patch.instancing.numCycles(),this._instances.length);
+            this._instances.length=this.patch.instancing.numCycles();
+            for(i=0;i<this._instances.length;i++)
+            {
+                this._instances[i]=this.patch.createOp(this.objName,true);
+                this._instances[i].instanced=function()
+                {
+                    // console.log("INST CANCEL");
+                    return false;
+                };
+                this._instances[i].uiAttr(this.uiAttribs);
+
+
+                for(var ipo=0;ipo<this.portsOut.length;ipo++)
+                {
+                    if(this.portsOut[ipo].type==OP_PORT_TYPE_FUNCTION)
+                    {
+                        this._instances[ i ].getPortByName(this.portsOut[ipo].name).trigger=this.portsOut[ ipo ].trigger.bind(this.portsOut[ipo]);
+                    }
+                }
+
+            }
+
+            for(ipi=0;ipi<this.portsIn.length;ipi++)
+            {
+                this.portsIn[ipi].onChange=null;
+                this.portsIn[ipi].onValueChanged=null;
+            }
+
+        }
+
+
+// console.log(this.patch.instancing.index());
+
+        var theTriggerPort=null;
+        for(ipi=0;ipi<this.portsIn.length;ipi++)
+        {
+            if(this.portsIn[ipi].type==OP_PORT_TYPE_VALUE)
+            {
+                // this._instances[ this.patch.instancing.index() ].getPortByName(this.portsIn[ipi].name).set(this.portsIn[ipi].get());
+                this._instances[ this.patch.instancing.index() ].portsIn[ipi].set(this.portsIn[ipi].get());
+                // console.log('set');
+            }
+            if(this.portsIn[ipi].type==OP_PORT_TYPE_FUNCTION)
+            {
+                if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
+                    theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
+
+                // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
+                //     theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
+                // this._instances[ this.patch.instancing.index() ].getPortByName(this.portsIn[ipi].name).set(this.portsIn[ipi].get());
+            }
+
+        }
+
+        // console.log(theTriggerPort);
+
+        theTriggerPort.onTriggered();
+
+        for(ipi=0;ipi<this.portsOut.length;ipi++)
+        {
+            if(this.portsOut[ipi].type==OP_PORT_TYPE_VALUE)
+            {
+                // this._instances[ this.patch.instancing.index() ].getPortByName(this.portsIn[ipi].name).set(this.portsIn[ipi].get());
+                this.portsOut[ipi].set(this._instances[ this.patch.instancing.index() ].portsOut[ipi].get());
+                // console.log('set');
+            }
+        }
+
+        //
+        // for(i=0;i<this._instances.length;i++)
+        // {
+        //     // console.log(i,piIndex);
+        //     this._instances[ this.patch.instancing.index() ].portsIn[piIndex].trigger();
+        // }
+
+
+
+
+
+
+        return true;
+    };
+
+    CABLES.Op.prototype.initInstancable=function()
+    {
+//         if(this.isInstanced)
+//         {
+//             console.log('cancel instancing');
+//             return;
+//         }
+//         this._instances=[];
+//         for(var ipi=0;ipi<this.portsIn.length;ipi++)
+//         {
+//             if(this.portsIn[ipi].type==OP_PORT_TYPE_VALUE)
+//             {
+//
+//             }
+//             if(this.portsIn[ipi].type==OP_PORT_TYPE_FUNCTION)
+//             {
+//                 // var piIndex=ipi;
+//                 this.portsIn[ipi].onTriggered=function(piIndex)
+//                 {
+//
+//                     var i=0;
+//
+//
+// // console.log('trigger',this._instances.length);
+//
+//
+//
+//
+//                 }.bind(this,ipi );
+//
+//             }
+        // };
+
+
+
+
+
+        // this._instances=null;
+
+    };
+
+
+
+
+
+
+
+
+
+
+
 }
 
 CABLES.Op.isSubpatchOp=function(name)
