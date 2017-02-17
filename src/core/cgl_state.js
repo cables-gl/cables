@@ -112,6 +112,7 @@ CGL.State=function()
             viewPort[2],
             viewPort[3]);
     };
+
     this.setViewPort=function(x,y,w,h)
     {
         viewPort[0]=Math.round(x);
@@ -154,7 +155,7 @@ CGL.State=function()
             }
 
             this.doScreenshot=false;
-            // this.screenShotDataURL = 
+            // this.screenShotDataURL =
             this.canvas.toBlob(
                 function(blob)
                 {
