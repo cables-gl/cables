@@ -12,17 +12,9 @@ var cgl=op.patch.cgl;
 
 var textureSize=2048;
 
-var fontImage = document.createElement('canvas');
-fontImage.id = "texturetext_"+CABLES.generateUUID();
-fontImage.style.display = "none";
-var body = document.getElementsByTagName("body")[0];
-body.appendChild(fontImage);
 
 str.onChange=generateMesh;
 
-var ctx = fontImage.getContext('2d');
-var chars={};
-var characters='?ABC';
 
 var cgl=op.patch.cgl;
 var geom=null;
@@ -30,10 +22,43 @@ var mesh=null;
 var transformations=[];
 var createMesh=true;
 var createTexture=true;
-var fontSize=320;
+
 
 textureOut.set(null);
-inFont.onChange=function(){ createTexture=true;createMesh=true;chars={}; };
+inFont.onChange=function(){ createTexture=true;createMesh=true; };
+
+
+
+CABLES.OpTextureMeshCanvas={};
+
+function getFont()
+{
+    var canvasid=''+inFont.get();
+    if(CABLES.OpTextureMeshCanvas.hasOwnProperty(canvasid))
+    {
+        return CABLES.OpTextureMeshCanvas[canvasid];
+    }
+
+    var fontImage = document.createElement('canvas');
+    fontImage.id = "texturetext_"+CABLES.generateUUID();
+    fontImage.style.display = "none";
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(fontImage);
+    _ctx= fontImage.getContext('2d');
+    CABLES.OpTextureMeshCanvas[canvasid]=
+        {
+            ctx:_ctx,
+            canvas:fontImage,
+            chars:{},
+            characters:'?',
+            fontSize:320
+            
+        };
+    return CABLES.OpTextureMeshCanvas[canvasid];
+
+}
+
+
 
 op.onDelete=function()
 {
@@ -139,6 +164,8 @@ a.set(1.0);
 
 render.onTriggered=function()
 {
+    if(op.instanced(render))return;
+
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
 
@@ -163,36 +190,44 @@ function generateMesh()
 
     if(!str.get())return;
     if(!textureOut.get())return;
-    if(!geom)
+    
+    var font=getFont();
+    if(!font.geom)
     {
-        geom=new CGL.Geometry("textmesh");
+        font.geom=new CGL.Geometry("textmesh");
         
-        geom.vertices = [
+        font.geom.vertices = [
             1.0, 1.0, 0.0,
             0.0, 1.0, 0.0,
             1.0, 0.0, 0.0,
             0.0, 0.0, 0.0
         ];
         
-        geom.texCoords = new Float32Array([
+        font.geom.texCoords = new Float32Array([
              1.0, 1.0,
              0.0, 1.0,
              1.0, 0.0,
              0.0, 0.0
         ]);
         
-        geom.verticesIndices = [
+        font.geom.verticesIndices = [
             0, 1, 2,
             3, 1, 2
         ];
         
-        mesh=new CGL.Mesh(cgl,geom);
+        
     }
+    if(!mesh)
+        mesh=new CGL.Mesh(cgl,font.geom);
+
+
+
+
 
     var numChars=str.get().length;
     var m=mat4.create();
     var txt=str.get();
-    var tcOffsets=new Float32Array(numChars*2)
+    var tcOffsets=new Float32Array(numChars*2);
     var tcSize=new Float32Array(numChars*2);
     var pos=0;
     createTexture=false;
@@ -202,7 +237,7 @@ function generateMesh()
     for(var i=0;i<numChars;i++)
     {
         var chStr=txt.substring(i,i+1);
-        var char=chars[chStr];
+        var char=font.chars[chStr];
         if(char) width+=(char.texCoordWidth/char.texCoordHeight);
     }
     
@@ -213,7 +248,7 @@ function generateMesh()
     for(var i=0;i<numChars;i++)
     {
         var chStr=txt.substring(i,i+1);
-        var char=chars[chStr];
+        var char=font.chars[chStr];
         if(!char)
         {
             createTexture=true;
@@ -249,10 +284,14 @@ function generateMesh()
 
 function printChars(fontSize,simulate)
 {
+    var font=getFont();
     if(!simulate)
     {
-        chars={};
+        font.chars={};
     }
+
+    var font=getFont();
+    var ctx=font.ctx;
 
     ctx.font = fontSize+'px '+inFont.get();
     ctx.textAlign = "left";
@@ -265,9 +304,9 @@ function printChars(fontSize,simulate)
             "fits":true
         };
 
-    for(i=0;i<characters.length;i++)
+    for(i=0;i<font.characters.length;i++)
     {
-        var chStr=characters.substring(i,i+1);
+        var chStr=font.characters.substring(i,i+1);
         var chWidth=(ctx.measureText(chStr).width);
 
         if(posx+chWidth>=textureSize)
@@ -278,7 +317,7 @@ function printChars(fontSize,simulate)
 
         if(!simulate)
         {
-            chars[chStr]=
+            font.chars[chStr]=
                 {
                     str:chStr,
                     texCoordX:posx/textureSize,
@@ -307,27 +346,35 @@ function printChars(fontSize,simulate)
 
 function generateTexture()
 {
+    var font=getFont();
     var string=str.get();
     for(var i=0;i<string.length;i++)
     {
         var ch=string.substring(i,i+1);
-        if(characters.indexOf(ch)==-1)characters+=ch;
+        if(font.characters.indexOf(ch)==-1)
+        {
+            font.characters+=ch;
+            createTexture=true;
+        }
     }
 
-    ctx.canvas.width=fontImage.width=ctx.canvas.height=fontImage.height=textureSize;
+    var ctx=font.ctx;
+    font.canvas.width=font.canvas.height=textureSize;
     
-    if(!textureOut.get()) textureOut.set( CGL.Texture.createFromImage(cgl,fontImage,
+    if(!font.texture) 
+    
+    font.texture=CGL.Texture.createFromImage(cgl,font.canvas,
         {
             filter:CGL.Texture.FILTER_MIPMAP
-        }));
+        });
 
-    textureOut.get().setSize(textureSize,textureSize);
+    font.texture.setSize(textureSize,textureSize);
 
     ctx.fillStyle = 'transparent';
     ctx.clearRect(0,0,textureSize,textureSize);
     ctx.fillStyle = 'rgba(255,255,255,255)';
 
-    fontSize+=40;
+    var fontSize=font.fontSize+40;
     
     var simu=printChars(fontSize,true);
     while(!simu.fits)
@@ -340,9 +387,11 @@ function generateTexture()
 
     ctx.restore();
     
-    if(textureOut.get()) textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
+    font.texture.initTexture(font.canvas,CGL.Texture.FILTER_MIPMAP);
+    font.texture.unpackAlpha=true;
+    textureOut.set(font.texture);
 
-    textureOut.get().unpackAlpha=true;
+    
     
     createMesh=true;
     createTexture=false;
