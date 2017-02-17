@@ -86,8 +86,6 @@ op.textureUniform=null;
 
 op.texture.onChange=function()
 {
-    
-    
     if(op.texture.get()!==null)
     {
         if(op.textureUniform)return;
@@ -97,8 +95,9 @@ op.texture.onChange=function()
     }
     else
     {
-    console.log("NO TEXTURE!",op.texture.get());    
+        // console.log("NO TEXTURE!",op.texture.get());
         shader.removeUniform('tex');
+        shader.removeDefine('HAS_TEXTURES');
         shader.removeDefine('HAS_TEXTURE_DIFFUSE');
         op.textureUniform=null;
     }
@@ -180,10 +179,10 @@ var diffuseOffsetYUniform=null;
 
 function updateTexRepeat()
 {
-    if(diffuseRepeatY.get()!=1 || 
-        diffuseRepeatX.get()!=1 || 
-        diffuseOffsetY.get()!=0 || 
-        diffuseOffsetX.get()!=0)  
+    if(diffuseRepeatY.get()!=1 ||
+        diffuseRepeatX.get()!=1 ||
+        diffuseOffsetY.get()!=0 ||
+        diffuseOffsetX.get()!=0)
         {
             shader.define('TEXTURE_REPEAT');
 
@@ -197,11 +196,3 @@ function updateTexRepeat()
         }
         else shader.removeDefine('TEXTURE_REPEAT');
 }
-
-
-
-
-
-
-
-
