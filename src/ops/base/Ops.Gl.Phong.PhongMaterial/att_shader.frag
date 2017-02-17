@@ -1,4 +1,3 @@
-precision mediump float;
 {{MODULES_HEAD}}
 varying mediump vec3 norm;
 varying mediump vec3 vert;

@@ -1,4 +1,4 @@
-precision mediump float;
+
 {{MODULES_HEAD}}
 
 attribute vec3 vPosition;

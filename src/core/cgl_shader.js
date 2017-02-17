@@ -254,6 +254,8 @@ CGL.Shader=function(_cgl,_name)
                 .endl()+'#define outColor gl_FragColor'
                 .endl()+'';
         }
+        if(fs.indexOf("precisison")==-1) fs='precision highp float;'.endl()+fs;
+        if(vs.indexOf("precisison")==-1) vs='precision highp float;'.endl()+fs;
 
         vs+=extensionString+definesStr+self.srcVert;
         fs+=extensionString+definesStr+self.srcFrag;
