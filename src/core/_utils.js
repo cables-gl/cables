@@ -195,8 +195,8 @@ CGL.getWheelSpeed=function(event)
 
     normalized*=-1.5;
 
-if(normalized>20)normalized=20;
-if(normalized<-20)normalized=-20;
+    if(normalized>20)normalized=20;
+    if(normalized<-20)normalized=-20;
 
     return normalized;
 
