@@ -18,6 +18,7 @@ CGL.Texture=function(__cgl,options)
     if(options && options.type)this.texTarget=options.type;
     this.textureType=CGL.Texture.TYPE_DEFAULT;
     this.unpackAlpha=true;
+    this._fromData=true;
     this.name="unknown";
 
     if(options)
@@ -140,15 +141,16 @@ CGL.Texture.prototype.setSize=function(w,h)
 
 CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 {
-    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
+    // this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     this.filter=filter;
     this.wrap=wrap;
     this.width=w;
     this.height=h;
+    this._fromData=true;
 
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
-    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
+    // this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
 
     this._setFilter();
@@ -163,6 +165,7 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 
 CGL.Texture.prototype.initTexture=function(img,filter)
 {
+    this._fromData=false;
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     if(img.width)this.width=img.width;
     if(img.height)this.height=img.height;
@@ -228,7 +231,11 @@ CGL.Texture.prototype.getInfo=function()
 
 CGL.Texture.prototype._setFilter=function()
 {
-    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
+    if(!this._fromData)
+    {
+        this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
+    }
+
     if( this._cgl.glVersion==1 && !this.isPowerOfTwo() )
     {
         // console.log( 'non power of two',this.width,this.height );
