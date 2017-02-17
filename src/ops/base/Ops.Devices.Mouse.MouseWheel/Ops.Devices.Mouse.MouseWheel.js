@@ -27,6 +27,7 @@ anim.defaultEasing=CABLES.TL.EASING_EXPO_OUT;
 
 var startTime=Date.now()/1000.0;
 var v=0;
+var smoothTimer=0;
 
 anim.clear();
 anim.setValue(Date.now()/1000.0-startTime,absVal.get());

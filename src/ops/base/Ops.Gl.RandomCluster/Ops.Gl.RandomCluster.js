@@ -31,6 +31,8 @@ var mat=mat4.create();
 
 function doRender()
 {
+    op.patch.instancing.pushLoop(randoms.length);
+
     for(var i=0;i<randoms.length;i++)
     {
         cgl.pushMvMatrix();
@@ -47,9 +49,12 @@ function doRender()
         rnd.set(randomsFloats[i]);
 
         trigger.trigger();
+        op.patch.instancing.increment();
 
         cgl.popMvMatrix();
     }
+    op.patch.instancing.popLoop();
+
 }
 
 exe.onTriggered=doRender;

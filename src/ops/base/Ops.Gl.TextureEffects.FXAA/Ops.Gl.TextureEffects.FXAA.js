@@ -132,8 +132,8 @@ function changeRes()
         var h=cgl.getViewPort()[3];
         uWidth.setValue(w);
         uHeight.setValue(h);
-        texWidth.set(w);
-        texHeight.set(h);
+        // texWidth.set(w);
+        // texHeight.set(h);
     }
     else
     {
@@ -148,8 +148,8 @@ useVPSize.onValueChanged=changeRes;
 op.onResize=changeRes;
 
 fxaa_span.set(8);
-texWidth.set(1920);
-texHeight.set(1080);
+// texWidth.set(1920);
+// texHeight.set(1080);
 
 fxaa_reduceMul.onValueChanged=function()
 {

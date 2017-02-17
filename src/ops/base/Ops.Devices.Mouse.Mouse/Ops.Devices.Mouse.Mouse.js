@@ -1,6 +1,6 @@
 
 var self=this;
-var cgl=self.patch.cgl;
+var cgl=op.patch.cgl;
 
 this.name='mouse';
 this.mouseX=this.addOutPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
@@ -29,11 +29,12 @@ this.multiply=this.addInPort(new Port(this,"multiply",OP_PORT_TYPE_VALUE));
 this.flipY=this.addInPort(new Port(this,"flip y",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.multiply.set(1.0);
 
+var smoothTimer=0;
 this.smoothSpeed.set(20);
 var speed=this.smoothSpeed.get();
 var listenerElement=null;
 
-var smoothTimer;
+
 
 function setValue(x,y)
 {
@@ -59,7 +60,7 @@ function setValue(x,y)
 this.smooth.onValueChanged=function()
 {
     if(self.smooth.get()) smoothTimer = setInterval(updateSmooth, 15);
-        else clearTimeout(smoothTimer);
+        else if(smoothTimer)clearTimeout(smoothTimer);
 };
 
 var smoothX,smoothY;
