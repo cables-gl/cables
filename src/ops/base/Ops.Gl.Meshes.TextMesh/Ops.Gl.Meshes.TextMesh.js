@@ -83,10 +83,34 @@ var srcVert=''
     .endl()+'   mat4 instModelMat=instMat;'
     .endl()+'   instModelMat[3][0]*=scale;'
 
-    .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+
+
     .endl()+'   vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );'
 
-    .endl()+'   gl_Position = projMatrix * mvMatrix * vert;'
+    .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+    
+// .endl()+'    #define BILLBOARD'
+// .endl()+'    #ifdef BILLBOARD'
+// .endl()+'       vec3 position=vert.xyz;'
+// .endl()+'       mat4 mvMatrix=viewMatrix*modelMatrix;'
+
+// .endl()+'       gl_Position = projMatrix * mvMatrix * vec4(('
+// .endl()+'           position.x * vec3('
+// .endl()+'               mvMatrix[0][0],'
+// .endl()+'               mvMatrix[1][0],'
+// .endl()+'               mvMatrix[2][0] ) +'
+// .endl()+'           position.y * vec3('
+// .endl()+'               mvMatrix[0][1],'
+// .endl()+'               mvMatrix[1][1],'
+// .endl()+'               mvMatrix[2][1]) ), 1.0);'
+// .endl()+'    #endif'
+// .endl()+'    #ifndef BILLBOARD'
+// .endl()+'        mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+// .endl()+'    #endif'
+    
+    .endl()+'   #ifndef BILLBOARD'
+    .endl()+'       gl_Position = projMatrix * mvMatrix * vert;'
+    .endl()+'   #endif'
     .endl()+'}'
     .endl();
 
@@ -323,5 +347,4 @@ function generateTexture()
     createMesh=true;
     createTexture=false;
 }
-
 
