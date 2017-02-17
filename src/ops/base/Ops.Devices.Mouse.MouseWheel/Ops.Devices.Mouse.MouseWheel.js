@@ -69,7 +69,7 @@ smooth.onChange=function()
         else clearTimeout(smoothTimer);
 };
 
-var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
+// var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
 
 
 function checkValue()
