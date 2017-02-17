@@ -342,7 +342,7 @@ CGL.Texture.getEmptyTexture=function(cgl)
     if(CGL.tempTexture) return CGL.tempTexture;
 
     var temptex=new CGL.Texture(cgl);
-    var data = new Uint8Array(8*8*4).fill(0);
+    var data = new Uint8Array(8*8*4);//.fill(0);
 
     temptex.initFromData(data,8,8,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
 
