@@ -7,8 +7,9 @@ CGL.MESH.lastMesh=null;
 CGL.Mesh=function(_cgl,__geom,glPrimitive)
 {
     this._cgl=_cgl;
-    this._bufVertices = this._cgl.gl.createBuffer();
+    this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
+    this._attributes=[];
     this._attributes=[];
     this._geom=null;
     this.numInstances=0;
@@ -18,8 +19,35 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this.setGeom(__geom);
 };
 
+
+CGL.Mesh.prototype.updateVertices=function(geom)
+{
+    this.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,geom.vertices,3);
+};
+
+CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
+{
+    for(var i=0;i<this._attributes.length;i++)
+    {
+        if(this._attributes[i].name==attrName)
+        {
+            if(!this._attributes[i].pointer) this._attributes[i].pointer=[];
+            this._attributes[i].pointer.push(
+                {
+                    "loc":-1,
+                    "name":name,
+                    "stride":stride,
+                    "offset":offset
+                });
+
+        }
+    }
+
+};
+
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 {
+
     var arr=null;
     var cb=null;
     var instanced=false;
@@ -43,19 +71,27 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     }
     else arr=array;
 
+    var numItems=array.length/itemSize;
+
+    if(numItems===0)
+    {
+        console.warn('CGL_MESH: num items in attribute '+name+' is ZERO');
+    }
+
     for(var i=0;i<this._attributes.length;i++)
     {
         if(this._attributes[i].name==name)
         {
+            this._attributes[i].numItems=numItems;
+
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
             this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
-            return;
+            return this._attributes[i];
         }
     }
 
     var buffer= this._cgl.gl.createBuffer();
 
-    // console.log('attribute: '+name,array.length);
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
 
@@ -66,9 +102,12 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
             name:name,
             cb:cb,
             itemSize:itemSize,
-            numItems: array.length/itemSize,
-            instanced:instanced
+            numItems: numItems,
+            instanced:instanced,
+            type:this._cgl.gl.FLOAT
         };
+
+    if(name==CGL.SHADERVAR_VERTEX_POSITION) this._bufVertexAttrib=attr;
 
     this._attributes.push(attr);
 
@@ -76,6 +115,8 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     {
         this._attributes[i].loc=-1;
     }
+
+    return attr;
     // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, null);
 };
 
@@ -85,24 +126,6 @@ CGL.Mesh.prototype.updateAttribute=CGL.Mesh.prototype.setAttribute;
 CGL.Mesh.prototype.getAttributes=function()
 {
     return this._attributes;
-};
-
-CGL.Mesh.prototype.updateVertices=function(geom)
-{
-    this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
-
-    var verticeBuffer=geom.vertices;
-    if(!(verticeBuffer instanceof Float32Array))
-    {
-        CGL.profileNonTypedAttrib++;
-        CGL.profileNonTypedAttribNames=this._geom.name+' '+name+' ';
-        verticeBuffer=new Float32Array(geom.vertices);
-    }
-
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, verticeBuffer, this._cgl.gl.DYNAMIC_DRAW);
-
-    this._bufVertices.itemSize = 3;
-    this._bufVertices.numItems = geom.vertices.length/3;
 };
 
 CGL.Mesh.prototype.updateTexCoords=function(geom)
@@ -183,47 +206,65 @@ CGL.Mesh.prototype._preBind=function(shader)
 
 CGL.Mesh.prototype._bind=function(shader)
 {
-    this._cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
-    this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._bufVertices);
-
-    this._cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(),this._bufVertices.itemSize, this._cgl.gl.FLOAT, false, 0, 0);
-
     for(i=0;i<this._attributes.length;i++)
     {
-        this._attributes[i].loc = this._cgl.gl.getAttribLocation(shader.getProgram(), this._attributes[i].name);
+        var attribute=this._attributes[i];
+        if(attribute.loc==-1)
+            attribute.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), attribute.name);
 
-        if(this._attributes[i].loc!=-1)
+        if(attribute.loc!=-1)
         {
-            this._cgl.gl.enableVertexAttribArray(this._attributes[i].loc);
-            this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
+            this._cgl.gl.enableVertexAttribArray(attribute.loc);
+            this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
 
-            if(this._attributes[i].instanced || this._attributes[i].name=='instMat')
+            if(attribute.instanced || attribute.name=='instMat')
             {
                 // todo: easier way to fill mat4 attribs...
-                if(this._attributes[i].itemSize<=4)
+                if(attribute.itemSize<=4)
                 {
-                    this._cgl.gl.vertexAttribPointer(this._attributes[i].loc, this._attributes[i].itemSize, this._cgl.gl.FLOAT,  false, this._attributes[i].itemSize*4,0);
-                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 1);
+                    this._cgl.gl.vertexAttribPointer(attribute.loc, attribute.itemSize, attribute.type,  false, attribute.itemSize*4,0);
+                    this._cgl.gl.vertexAttribDivisor(attribute.loc, 1);
                 }
-                if(this._attributes[i].itemSize==16)
+                if(attribute.itemSize==16)
                 {
-                    this._cgl.gl.vertexAttribPointer(this._attributes[i].loc, 4, this._cgl.gl.FLOAT,  false, 16*4,0);
-                    this._cgl.gl.enableVertexAttribArray(this._attributes[i].loc+1);
-                    this._cgl.gl.vertexAttribPointer(this._attributes[i].loc+1, 4, this._cgl.gl.FLOAT,  false, 16*4, 4*4*1);
-                    this._cgl.gl.enableVertexAttribArray(this._attributes[i].loc+2);
-                    this._cgl.gl.vertexAttribPointer(this._attributes[i].loc+2, 4, this._cgl.gl.FLOAT,  false, 16*4, 4*4*2);
-                    this._cgl.gl.enableVertexAttribArray(this._attributes[i].loc+3);
-                    this._cgl.gl.vertexAttribPointer(this._attributes[i].loc+3, 4, this._cgl.gl.FLOAT,  false, 16*4, 4*4*3);
+                    this._cgl.gl.vertexAttribPointer(attribute.loc, 4, attribute.type,  false, 16*4,0);
+                    this._cgl.gl.enableVertexAttribArray(attribute.loc+1);
+                    this._cgl.gl.vertexAttribPointer(attribute.loc+1, 4, attribute.type,  false, 16*4, 4*4*1);
+                    this._cgl.gl.enableVertexAttribArray(attribute.loc+2);
+                    this._cgl.gl.vertexAttribPointer(attribute.loc+2, 4, attribute.type,  false, 16*4, 4*4*2);
+                    this._cgl.gl.enableVertexAttribArray(attribute.loc+3);
+                    this._cgl.gl.vertexAttribPointer(attribute.loc+3, 4, attribute.type,  false, 16*4, 4*4*3);
 
-                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 1);
-                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+1, 1);
-                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+2, 1);
-                    this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+3, 1);
+                    this._cgl.gl.vertexAttribDivisor(attribute.loc, 1);
+                    this._cgl.gl.vertexAttribDivisor(attribute.loc+1, 1);
+                    this._cgl.gl.vertexAttribDivisor(attribute.loc+2, 1);
+                    this._cgl.gl.vertexAttribDivisor(attribute.loc+3, 1);
                 }
             }
             else
             {
-                this._cgl.gl.vertexAttribPointer(this._attributes[i].loc,this._attributes[i].itemSize, this._cgl.gl.FLOAT, false, this._attributes[i].itemSize*4, 0);
+                this._cgl.gl.vertexAttribPointer(
+                    attribute.loc,
+                    attribute.itemSize,
+                    attribute.type,
+                    false,
+                    attribute.itemSize*4, 0);
+
+                if(attribute.pointer)
+                {
+                    for(var ip=0;ip<attribute.pointer.length;ip++)
+                    {
+                        var pointer=attribute.pointer[ip];
+
+                        if(pointer.loc==-1) pointer.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), pointer.name);
+
+                        // console.log(pointer,attribute);
+
+                        this._cgl.gl.enableVertexAttribArray(pointer.loc);
+                        this._cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
+
+                    }
+                }
             }
         }
     }
@@ -365,11 +406,14 @@ CGL.Mesh.prototype.render=function(shader)
     // prim=this._cgl.gl.LINE_STRIP;
 
     // if(this._bufVerticesIndizes.numItems===0)
+
+
+
     if(shader.hasFeedbacks())
     {
         shader.bindFeedbacks();
 
-        this._cgl.gl.drawArrays(prim, 0,this._bufVertices.numItems);
+        this._cgl.gl.drawArrays(prim, 0,this._bufVertexAttrib);
         shader.unBindFeedbacks();
 
         return;
@@ -378,7 +422,10 @@ CGL.Mesh.prototype.render=function(shader)
 
     if(this._bufVerticesIndizes.numItems===0)
     {
-        this._cgl.gl.drawArrays(prim, 0,this._bufVertices.numItems);
+
+// console.log(this._bufVertexAttrib.numItems);
+
+        this._cgl.gl.drawArrays(prim, 0,this._bufVertexAttrib.numItems);
     }
     else
     {
