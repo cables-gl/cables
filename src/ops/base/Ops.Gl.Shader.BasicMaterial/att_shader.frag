@@ -1,6 +1,3 @@
-precision highp float;
-
-
 {{MODULES_HEAD}}
 
 #ifdef HAS_TEXTURES

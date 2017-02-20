@@ -415,6 +415,21 @@ CABLES.Op = function()
         return null;
     };
 
+
+    CABLES.Op.prototype.cleanUp=function()
+    {
+        if(this._instances)
+        {
+            for(var i=0;i<this._instances.length;i++)
+            {
+                if(this._instances[i].onDelete)this._instances[i].onDelete();
+            }
+            this._instances.length=0;
+        }
+
+    };
+
+
     CABLES.Op.prototype.instanced=function(triggerPort)
     {
         if(this.patch.instancing.numCycles()===0)return false;

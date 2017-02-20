@@ -1,4 +1,3 @@
-precision mediump float;
 {{MODULES_HEAD}}
 varying mediump vec3 norm;
 varying mediump vec3 vert;
@@ -49,7 +48,7 @@ uniform float diffuseRepeatY;
 
 //uniform sampler2D depthTex;
 
-uniform struct Light
+struct Light
 {
     float type;
     float attenuation;
@@ -60,7 +59,7 @@ uniform struct Light
     float cone;
     mat4 depthMVP;
     float mul;
-} light;
+};
 
 uniform Light lights[4];
 

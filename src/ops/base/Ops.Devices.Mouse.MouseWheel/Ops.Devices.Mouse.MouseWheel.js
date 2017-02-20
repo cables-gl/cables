@@ -69,13 +69,17 @@ smooth.onChange=function()
         else clearTimeout(smoothTimer);
 };
 
-var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
+// var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
 
 
 function checkValue()
 {
-    if(v<min.get())v=min.get();
-    if(v>max.get())v=max.get();
+    if(min.get()!==0 && max.get()!==0)
+    {
+        if(v<min.get())v=min.get();
+        if(v>max.get())v=max.get();
+
+    }
 }
 
 flip.onChange=function()

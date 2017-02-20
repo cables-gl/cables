@@ -278,6 +278,7 @@ CABLES.Patch.prototype.deleteOp=function(opid,tryRelink)
                 this.ops.splice( i, 1 );
 
                 if(opToDelete.onDelete)opToDelete.onDelete();
+                opToDelete.cleanUp();
 
                 if(reLinkP1!==null && reLinkP2!==null)
                 {

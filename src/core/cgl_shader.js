@@ -6,6 +6,8 @@ CGL.profileShaderBinds=0;
 CGL.profileUniformCount=0;
 CGL.profileShaderCompiles=0;
 
+CGL.SHADERVAR_VERTEX_POSITION='vPosition';
+
 // ---------------------------------------------------------------------------
 
 CGL.Shader=function(_cgl,_name)
@@ -255,6 +257,9 @@ CGL.Shader=function(_cgl,_name)
                 .endl()+'';
         }
 
+        if(fs.indexOf("precision")==-1) fs='precision highp float;'.endl()+fs;
+        if(vs.indexOf("precision")==-1) vs='precision highp float;'.endl()+fs;
+
         vs+=extensionString+definesStr+self.srcVert;
         fs+=extensionString+definesStr+self.srcFrag;
 
@@ -322,7 +327,7 @@ CGL.Shader=function(_cgl,_name)
 
         if(!projMatrixUniform)
         {
-            attrVertexPos = cgl.gl.getAttribLocation(this._program, 'vPosition');
+            attrVertexPos = cgl.gl.getAttribLocation(this._program, CGL.SHADERVAR_VERTEX_POSITION);
             projMatrixUniform = cgl.gl.getUniformLocation(this._program, "projMatrix");
             mvMatrixUniform = cgl.gl.getUniformLocation(this._program, "mvMatrix");
             vMatrixUniform = cgl.gl.getUniformLocation(this._program, "viewMatrix");

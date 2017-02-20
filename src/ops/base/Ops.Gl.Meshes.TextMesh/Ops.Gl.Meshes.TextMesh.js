@@ -12,17 +12,9 @@ var cgl=op.patch.cgl;
 
 var textureSize=2048;
 
-var fontImage = document.createElement('canvas');
-fontImage.id = "texturetext_"+CABLES.generateUUID();
-fontImage.style.display = "none";
-var body = document.getElementsByTagName("body")[0];
-body.appendChild(fontImage);
 
 str.onChange=generateMesh;
 
-var ctx = fontImage.getContext('2d');
-var chars={};
-var characters='?ABC';
 
 var cgl=op.patch.cgl;
 var geom=null;
@@ -30,14 +22,51 @@ var mesh=null;
 var transformations=[];
 var createMesh=true;
 var createTexture=true;
-var fontSize=320;
+
 
 textureOut.set(null);
-inFont.onChange=function(){ createTexture=true;createMesh=true;chars={}; };
+inFont.onChange=function(){ createTexture=true;createMesh=true; };
+
+
+
+CABLES.OpTextureMeshCanvas={};
+
+function getFont()
+{
+    var canvasid=''+inFont.get();
+    if(CABLES.OpTextureMeshCanvas.hasOwnProperty(canvasid))
+    {
+        return CABLES.OpTextureMeshCanvas[canvasid];
+    }
+
+    var fontImage = document.createElement('canvas');
+    fontImage.id = "texturetext_"+CABLES.generateUUID();
+    fontImage.style.display = "none";
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(fontImage);
+    _ctx= fontImage.getContext('2d');
+    CABLES.OpTextureMeshCanvas[canvasid]=
+        {
+            ctx:_ctx,
+            canvas:fontImage,
+            chars:{},
+            characters:'?',
+            fontSize:320
+
+        };
+    return CABLES.OpTextureMeshCanvas[canvasid];
+
+}
+
+
 
 op.onDelete=function()
 {
-    fontImage.remove();
+    // fontImage.remove();
+    if(CABLES.OpTextureMeshCanvas[canvasid])
+        CABLES.OpTextureMeshCanvas[canvasid].canvas.remove();
+
+
 };
 
 var srcFrag=''
@@ -83,10 +112,34 @@ var srcVert=''
     .endl()+'   mat4 instModelMat=instMat;'
     .endl()+'   instModelMat[3][0]*=scale;'
 
-    .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+
+
     .endl()+'   vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );'
 
-    .endl()+'   gl_Position = projMatrix * mvMatrix * vert;'
+    .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+
+// .endl()+'    #define BILLBOARD'
+// .endl()+'    #ifdef BILLBOARD'
+// .endl()+'       vec3 position=vert.xyz;'
+// .endl()+'       mat4 mvMatrix=viewMatrix*modelMatrix;'
+
+// .endl()+'       gl_Position = projMatrix * mvMatrix * vec4(('
+// .endl()+'           position.x * vec3('
+// .endl()+'               mvMatrix[0][0],'
+// .endl()+'               mvMatrix[1][0],'
+// .endl()+'               mvMatrix[2][0] ) +'
+// .endl()+'           position.y * vec3('
+// .endl()+'               mvMatrix[0][1],'
+// .endl()+'               mvMatrix[1][1],'
+// .endl()+'               mvMatrix[2][1]) ), 1.0);'
+// .endl()+'    #endif'
+// .endl()+'    #ifndef BILLBOARD'
+// .endl()+'        mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+// .endl()+'    #endif'
+
+    .endl()+'   #ifndef BILLBOARD'
+    .endl()+'       gl_Position = projMatrix * mvMatrix * vert;'
+    .endl()+'   #endif'
     .endl()+'}'
     .endl();
 
@@ -115,6 +168,8 @@ a.set(1.0);
 
 render.onTriggered=function()
 {
+    if(op.instanced(render))return;
+
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
 
@@ -125,7 +180,7 @@ render.onTriggered=function()
     cgl.setTexture(0,textureOut.get().tex);
 
     mesh.render(cgl.getShader());
-    
+
     cgl.setTexture(0,null);
     cgl.setPreviousShader();
 
@@ -139,49 +194,57 @@ function generateMesh()
 
     if(!str.get())return;
     if(!textureOut.get())return;
-    if(!geom)
+
+    var font=getFont();
+    if(!font.geom)
     {
-        geom=new CGL.Geometry("textmesh");
-        
-        geom.vertices = [
+        font.geom=new CGL.Geometry("textmesh");
+
+        font.geom.vertices = [
             1.0, 1.0, 0.0,
             0.0, 1.0, 0.0,
             1.0, 0.0, 0.0,
             0.0, 0.0, 0.0
         ];
-        
-        geom.texCoords = new Float32Array([
+
+        font.geom.texCoords = new Float32Array([
              1.0, 1.0,
              0.0, 1.0,
              1.0, 0.0,
              0.0, 0.0
         ]);
-        
-        geom.verticesIndices = [
+
+        font.geom.verticesIndices = [
             0, 1, 2,
             3, 1, 2
         ];
-        
-        mesh=new CGL.Mesh(cgl,geom);
+
+
     }
+    if(!mesh)
+        mesh=new CGL.Mesh(cgl,font.geom);
+
+
+
+
 
     var numChars=str.get().length;
     var m=mat4.create();
     var txt=str.get();
-    var tcOffsets=new Float32Array(numChars*2)
+    var tcOffsets=new Float32Array(numChars*2);
     var tcSize=new Float32Array(numChars*2);
     var pos=0;
     createTexture=false;
-    
+
     var offX=0;
     var width=0;
     for(var i=0;i<numChars;i++)
     {
         var chStr=txt.substring(i,i+1);
-        var char=chars[chStr];
+        var char=font.chars[chStr];
         if(char) width+=(char.texCoordWidth/char.texCoordHeight);
     }
-    
+
     if(align.get()=='left') offX=0;
     else if(align.get()=='right') offX=width;
     else if(align.get()=='center') offX=width/2;
@@ -189,7 +252,7 @@ function generateMesh()
     for(var i=0;i<numChars;i++)
     {
         var chStr=txt.substring(i,i+1);
-        var char=chars[chStr];
+        var char=font.chars[chStr];
         if(!char)
         {
             createTexture=true;
@@ -199,7 +262,7 @@ function generateMesh()
         {
             tcOffsets[i*2+0]=char.texCoordX;
             tcOffsets[i*2+1]=1-char.texCoordY-char.texCoordHeight;
-    
+
             tcSize[i*2+0]=char.texCoordWidth;
             tcSize[i*2+1]=char.texCoordHeight;
 
@@ -209,15 +272,15 @@ function generateMesh()
             transformations[i]=Array.prototype.slice.call(m);
         }
     }
-    
+
     var arrs = [].concat.apply([], transformations);
     var matrices = new Float32Array(arrs);
-    
+
     mesh.numInstances=numChars;
     mesh.setAttribute('instMat',matrices,16,{"instanced":true});
     mesh.setAttribute('attrTexOffsets',tcOffsets,2,{"instanced":true});
     mesh.setAttribute('attrTexSize',tcSize,2,{"instanced":true});
-    
+
     if(createTexture) generateTexture();
 }
 
@@ -225,10 +288,14 @@ function generateMesh()
 
 function printChars(fontSize,simulate)
 {
+    var font=getFont();
     if(!simulate)
     {
-        chars={};
+        font.chars={};
     }
+
+    var font=getFont();
+    var ctx=font.ctx;
 
     ctx.font = fontSize+'px '+inFont.get();
     ctx.textAlign = "left";
@@ -241,9 +308,9 @@ function printChars(fontSize,simulate)
             "fits":true
         };
 
-    for(i=0;i<characters.length;i++)
+    for(i=0;i<font.characters.length;i++)
     {
-        var chStr=characters.substring(i,i+1);
+        var chStr=font.characters.substring(i,i+1);
         var chWidth=(ctx.measureText(chStr).width);
 
         if(posx+chWidth>=textureSize)
@@ -254,7 +321,7 @@ function printChars(fontSize,simulate)
 
         if(!simulate)
         {
-            chars[chStr]=
+            font.chars[chStr]=
                 {
                     str:chStr,
                     texCoordX:posx/textureSize,
@@ -262,7 +329,7 @@ function printChars(fontSize,simulate)
                     texCoordWidth:chWidth/textureSize,
                     texCoordHeight:lineHeight/textureSize,
                 };
-            
+
             ctx.fillText(chStr, posx, posy+fontSize);
         }
 
@@ -273,7 +340,7 @@ function printChars(fontSize,simulate)
     {
         result.fits=false;
     }
-    
+
     result.spaceLeft=textureSize-posy;
 
     return result;
@@ -283,28 +350,36 @@ function printChars(fontSize,simulate)
 
 function generateTexture()
 {
+    var font=getFont();
     var string=str.get();
     for(var i=0;i<string.length;i++)
     {
         var ch=string.substring(i,i+1);
-        if(characters.indexOf(ch)==-1)characters+=ch;
+        if(font.characters.indexOf(ch)==-1)
+        {
+            font.characters+=ch;
+            createTexture=true;
+        }
     }
 
-    ctx.canvas.width=fontImage.width=ctx.canvas.height=fontImage.height=textureSize;
-    
-    if(!textureOut.get()) textureOut.set( CGL.Texture.createFromImage(cgl,fontImage,
+    var ctx=font.ctx;
+    font.canvas.width=font.canvas.height=textureSize;
+
+    if(!font.texture)
+
+    font.texture=CGL.Texture.createFromImage(cgl,font.canvas,
         {
             filter:CGL.Texture.FILTER_MIPMAP
-        }));
+        });
 
-    textureOut.get().setSize(textureSize,textureSize);
+    font.texture.setSize(textureSize,textureSize);
 
     ctx.fillStyle = 'transparent';
     ctx.clearRect(0,0,textureSize,textureSize);
     ctx.fillStyle = 'rgba(255,255,255,255)';
 
-    fontSize+=40;
-    
+    var fontSize=font.fontSize+40;
+
     var simu=printChars(fontSize,true);
     while(!simu.fits)
     {
@@ -315,13 +390,13 @@ function generateTexture()
     printChars(fontSize,false);
 
     ctx.restore();
-    
-    if(textureOut.get()) textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
 
-    textureOut.get().unpackAlpha=true;
-    
+    font.texture.initTexture(font.canvas,CGL.Texture.FILTER_MIPMAP);
+    font.texture.unpackAlpha=true;
+    textureOut.set(font.texture);
+
+
+
     createMesh=true;
     createTexture=false;
 }
-
-

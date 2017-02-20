@@ -176,6 +176,8 @@ CGL.RAD2DEG=180.0/Math.PI;
 
 CGL.onLoadingAssetsFinished=null; // deprecated / remove later
 
+CGL.isWindows=window.navigator.userAgent.indexOf("Windows") != -1;
+
 
 CGL.getWheelSpeed=function(event)
 {
@@ -185,17 +187,20 @@ CGL.getWheelSpeed=function(event)
         //chrome
         normalized = (event.wheelDelta % 120 - 0) == -0 ? event.wheelDelta / 120 : event.wheelDelta / 30;
         normalized*=-1.5;
+        if(CGL.isWindows)normalized*=2;
     }
     else
     {
         //firefox
         var rawAmmount = event.deltaY ? event.deltaY : event.detail;
         normalized = -(rawAmmount % 3 ? rawAmmount * 10 : rawAmmount / 3);
-        normalized*=-0.2;
+        normalized*=-3;
     }
 
-    return normalized;
+    if(normalized>20)normalized=20;
+    if(normalized<-20)normalized=-20;
 
+    return normalized;
 };
 
 // ----------------------------------------------------------------

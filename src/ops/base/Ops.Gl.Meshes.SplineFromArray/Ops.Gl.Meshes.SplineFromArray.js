@@ -102,10 +102,11 @@ function bufferData(spline,pointArr)
             dataBuffer[i+1]=pointArr[i];
         }
 
-
         spline.geom.vertices=dataBuffer;
 
     }
+    console.log("spline.geom.length",spline.geom.vertices.length);
+    
     spline.mesh.updateVertices(spline.geom);
 
 }
