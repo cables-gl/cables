@@ -13,6 +13,8 @@ var ppqPort = op.inValue("Pulses Per Quarter Note");
 
 // in port defaults
 var BPM_DEFAULT = 120;
+var BPM_MIN = 1;
+var BPM_MAX = 2000;
 var SWING_DEFAULT = 0;
 var SWING_SUBDIVISION_DEFAULT = "8n";
 var TIME_SIGNATURE_DEFAULT = 4;
@@ -34,7 +36,10 @@ ppqPort.set(PPQ_DEFAULT);
 // change events
 
 bpmPort.onChange = function() {
-    Tone.Transport.set("bpm", bpmPort.get());    
+    var bpm = bpmPort.get();
+    if(bpm && bpm >= BPM_MIN && bpm <= BPM_MAX) {
+        Tone.Transport.set("bpm", bpmPort.get());        
+    }
 };
 
 swingPort.onChange = function() {
