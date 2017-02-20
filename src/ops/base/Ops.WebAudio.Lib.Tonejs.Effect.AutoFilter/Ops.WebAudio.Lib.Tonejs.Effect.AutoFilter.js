@@ -15,6 +15,8 @@ var FREQUENCY_DEFAULT = 200;
 var OSCILLATOR_TYPES = ["sine", "square", "triangle", "sawtooth"];
 var MIN_DEFAULT = 100; // ??
 var OCTAVES_DEFAULT = 2.6;
+var OCTAVES_MIN = -1;
+var OCTAVES_MAX = 10;
 var WET_DEFAULT = 1.0;
 var WET_MIN = 0.0;
 var WET_MAX = 1.0;
@@ -36,7 +38,13 @@ minPort.onChange = function() {
 };
 
 octavesPort.onChange = function() {
-    node.set("octaves", octavesPort.get());
+    var octaves = octavesPort.get();
+    if(octaves) {
+        octaves = Math.round(parseFloat(octaves));
+        if(octaves && octaves >= OCTAVES_MIN && octaves <= OCTAVES_MAX) {
+            node.set("octaves", octaves);    
+        }
+    }
 };
 
 typePort.onChange = function() {
