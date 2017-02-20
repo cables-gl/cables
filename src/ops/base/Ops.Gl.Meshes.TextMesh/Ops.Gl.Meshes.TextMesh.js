@@ -52,7 +52,7 @@ function getFont()
             chars:{},
             characters:'?',
             fontSize:320
-            
+
         };
     return CABLES.OpTextureMeshCanvas[canvasid];
 
@@ -62,7 +62,11 @@ function getFont()
 
 op.onDelete=function()
 {
-    fontImage.remove();
+    // fontImage.remove();
+    if(CABLES.OpTextureMeshCanvas[canvasid])
+        CABLES.OpTextureMeshCanvas[canvasid].canvas.remove();
+
+
 };
 
 var srcFrag=''
@@ -113,7 +117,7 @@ var srcVert=''
     .endl()+'   vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );'
 
     .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
-    
+
 // .endl()+'    #define BILLBOARD'
 // .endl()+'    #ifdef BILLBOARD'
 // .endl()+'       vec3 position=vert.xyz;'
@@ -132,7 +136,7 @@ var srcVert=''
 // .endl()+'    #ifndef BILLBOARD'
 // .endl()+'        mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
 // .endl()+'    #endif'
-    
+
     .endl()+'   #ifndef BILLBOARD'
     .endl()+'       gl_Position = projMatrix * mvMatrix * vert;'
     .endl()+'   #endif'
@@ -176,7 +180,7 @@ render.onTriggered=function()
     cgl.setTexture(0,textureOut.get().tex);
 
     mesh.render(cgl.getShader());
-    
+
     cgl.setTexture(0,null);
     cgl.setPreviousShader();
 
@@ -190,32 +194,32 @@ function generateMesh()
 
     if(!str.get())return;
     if(!textureOut.get())return;
-    
+
     var font=getFont();
     if(!font.geom)
     {
         font.geom=new CGL.Geometry("textmesh");
-        
+
         font.geom.vertices = [
             1.0, 1.0, 0.0,
             0.0, 1.0, 0.0,
             1.0, 0.0, 0.0,
             0.0, 0.0, 0.0
         ];
-        
+
         font.geom.texCoords = new Float32Array([
              1.0, 1.0,
              0.0, 1.0,
              1.0, 0.0,
              0.0, 0.0
         ]);
-        
+
         font.geom.verticesIndices = [
             0, 1, 2,
             3, 1, 2
         ];
-        
-        
+
+
     }
     if(!mesh)
         mesh=new CGL.Mesh(cgl,font.geom);
@@ -231,7 +235,7 @@ function generateMesh()
     var tcSize=new Float32Array(numChars*2);
     var pos=0;
     createTexture=false;
-    
+
     var offX=0;
     var width=0;
     for(var i=0;i<numChars;i++)
@@ -240,7 +244,7 @@ function generateMesh()
         var char=font.chars[chStr];
         if(char) width+=(char.texCoordWidth/char.texCoordHeight);
     }
-    
+
     if(align.get()=='left') offX=0;
     else if(align.get()=='right') offX=width;
     else if(align.get()=='center') offX=width/2;
@@ -258,7 +262,7 @@ function generateMesh()
         {
             tcOffsets[i*2+0]=char.texCoordX;
             tcOffsets[i*2+1]=1-char.texCoordY-char.texCoordHeight;
-    
+
             tcSize[i*2+0]=char.texCoordWidth;
             tcSize[i*2+1]=char.texCoordHeight;
 
@@ -268,15 +272,15 @@ function generateMesh()
             transformations[i]=Array.prototype.slice.call(m);
         }
     }
-    
+
     var arrs = [].concat.apply([], transformations);
     var matrices = new Float32Array(arrs);
-    
+
     mesh.numInstances=numChars;
     mesh.setAttribute('instMat',matrices,16,{"instanced":true});
     mesh.setAttribute('attrTexOffsets',tcOffsets,2,{"instanced":true});
     mesh.setAttribute('attrTexSize',tcSize,2,{"instanced":true});
-    
+
     if(createTexture) generateTexture();
 }
 
@@ -325,7 +329,7 @@ function printChars(fontSize,simulate)
                     texCoordWidth:chWidth/textureSize,
                     texCoordHeight:lineHeight/textureSize,
                 };
-            
+
             ctx.fillText(chStr, posx, posy+fontSize);
         }
 
@@ -336,7 +340,7 @@ function printChars(fontSize,simulate)
     {
         result.fits=false;
     }
-    
+
     result.spaceLeft=textureSize-posy;
 
     return result;
@@ -360,9 +364,9 @@ function generateTexture()
 
     var ctx=font.ctx;
     font.canvas.width=font.canvas.height=textureSize;
-    
-    if(!font.texture) 
-    
+
+    if(!font.texture)
+
     font.texture=CGL.Texture.createFromImage(cgl,font.canvas,
         {
             filter:CGL.Texture.FILTER_MIPMAP
@@ -375,7 +379,7 @@ function generateTexture()
     ctx.fillStyle = 'rgba(255,255,255,255)';
 
     var fontSize=font.fontSize+40;
-    
+
     var simu=printChars(fontSize,true);
     while(!simu.fits)
     {
@@ -386,14 +390,13 @@ function generateTexture()
     printChars(fontSize,false);
 
     ctx.restore();
-    
+
     font.texture.initTexture(font.canvas,CGL.Texture.FILTER_MIPMAP);
     font.texture.unpackAlpha=true;
     textureOut.set(font.texture);
 
-    
-    
+
+
     createMesh=true;
     createTexture=false;
 }
-

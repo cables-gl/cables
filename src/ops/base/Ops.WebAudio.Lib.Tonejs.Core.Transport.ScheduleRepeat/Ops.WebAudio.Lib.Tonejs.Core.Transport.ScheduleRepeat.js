@@ -3,7 +3,7 @@ op.name="ScheduleRepeat";
 CABLES.WebAudio.createAudioContext(op);
 
 var INFINITE = "Infinite";
-var START_TIME_DEFAULT = "+0";
+var START_TIME_DEFAULT = "0";
 
 // input ports
 var intervalPort = op.inValueString("Interval", "4n");
@@ -34,7 +34,7 @@ function handleChange() {
     
     // check if interval is valid
     try{
-	var time = new Tone.TimeBase(interval);	
+	    var time = new Tone.TimeBase(interval);	
     } catch(e) {
         // interval not valid
         op.uiAttr( { 'error': 'Interval not valid, Examples: "4n", "1m", 2' } );
@@ -54,7 +54,6 @@ function handleChange() {
     var cb = function(time) {
         timeOutPort.set(time);
 	    triggerPort.trigger();
-	    op.log("cb: ", intervalPort.get());
     };
     if(isValidTime(startTime)) {
         if(duration && duration !== INFINITE) {
@@ -77,6 +76,8 @@ function handleChange() {
         );  
     }
 }
+
+handleChange();
 
 // functions
 function isValidTime(time) {
