@@ -35,7 +35,10 @@ var updateType = function(){
 };
 
 var updateFrequency = function(){
-    biquadFilter.frequency.value = frequency.get();
+    var freq = frequency.get();
+    if(freq && freq >= FREQUENCY_MIN && freq <= FREQUENCY_MAX) {
+        biquadFilter.frequency.value = frequency.get();    
+    }
 };
 
 var updateDetune = function(){

@@ -8,7 +8,7 @@ var timePort = op.inValueString("Time");
 var offsetPort = op.inValueString("Offset");
 
 // input port defaults
-var TIME_DEFAULT = "0";
+var TIME_DEFAULT = "+0";
 var OFFSET_DEFAULT = "0";
 
 // set default ports
@@ -19,8 +19,6 @@ offsetPort.set(OFFSET_DEFAULT);
 startPort.onTriggered = function() {
     var time = timePort.get();
     var offset = timePort.get();
-    op.log("time: ", time);
-    op.log("offset: ", offset);
     if(time) {
         if(offset) {
             Tone.Transport.start(time, offset);

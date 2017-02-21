@@ -10,7 +10,11 @@ var QUALITY_DEFAULT = 2;
 var QUALITY_MIN = 1; // TODO: check
 var QUALITY_MAX = 8; // TODO: check
 var OCTAVES_DEFAULT = 6;
+var OCTAVES_MIN = 1;
+var OCTAVES_MAX = 30;
 var BASE_FREQUENCY_DEFAULT = 100;
+var BASE_FREQUENCY_MIN = 1;
+var BASE_FREQUENCY_MAX = 20000;
 var SENSITIVITY_DEFAULT = 0;
 var WET_DEFAULT = 1.0;
 var WET_MIN = 0.0;
@@ -32,11 +36,17 @@ var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"disp
 
 // change listeners
 octavesPort.onChange = function() {
-    node.set("octaves", octavesPort.get());    
+    var octaves = octavesPort.get();
+    if(octaves && octaves >= OCTAVES_MIN && octaves <= OCTAVES_MAX) {
+        node.set("octaves", octavesPort.get());        
+    }
 };
 
 baseFrequencyPort.onChange = function() {
-    node.set("baseFrequency", baseFrequencyPort.get());    
+    var freq = baseFrequencyPort.get();
+    if(freq && freq >= BASE_FREQUENCY_MIN && freq <= BASE_FREQUENCY_MAX) {
+        node.set("baseFrequency", baseFrequencyPort.get());        
+    }
 };
 
 sensitivityPort.onChange = function() {
