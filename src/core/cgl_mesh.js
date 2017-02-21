@@ -95,6 +95,8 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
 
+    var type=this._cgl.gl.FLOAT
+    if(options && options.type)type=options.type;
     var attr=
         {
             loc:-1,
@@ -104,7 +106,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
             itemSize:itemSize,
             numItems: numItems,
             instanced:instanced,
-            type:this._cgl.gl.FLOAT
+            type:type
         };
 
     if(name==CGL.SHADERVAR_VERTEX_POSITION) this._bufVertexAttrib=attr;
@@ -212,6 +214,12 @@ CGL.Mesh.prototype._bind=function(shader)
         if(attribute.loc==-1)
             attribute.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), attribute.name);
 
+
+// console.log(attribute.name,attribute.loc);
+
+
+
+
         if(attribute.loc!=-1)
         {
             this._cgl.gl.enableVertexAttribArray(attribute.loc);
@@ -261,6 +269,7 @@ CGL.Mesh.prototype._bind=function(shader)
                         // console.log(pointer,attribute);
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
+                        // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
                         this._cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
 
                     }
@@ -391,7 +400,6 @@ CGL.Mesh.prototype.render=function(shader)
     // if(geom.morphTargets.length>0) shader.define('HAS_MORPH_TARGETS');
     // var what=this._cgl.gl.TRIANGLES;
 
-
     var prim=this._cgl.gl.TRIANGLES;
     if(this._glPrimitive!==undefined) prim=this._glPrimitive;
     if(shader.glPrimitive!==null) prim=shader.glPrimitive;
@@ -407,8 +415,6 @@ CGL.Mesh.prototype.render=function(shader)
 
     // if(this._bufVerticesIndizes.numItems===0)
 
-
-
     if(shader.hasFeedbacks())
     {
         shader.bindFeedbacks();
@@ -419,12 +425,9 @@ CGL.Mesh.prototype.render=function(shader)
         return;
     }
 
-
     if(this._bufVerticesIndizes.numItems===0)
     {
-
-// console.log(this._bufVertexAttrib.numItems);
-
+        // console.log(this._bufVertexAttrib.numItems);
         this._cgl.gl.drawArrays(prim, 0,this._bufVertexAttrib.numItems);
     }
     else
@@ -432,7 +435,6 @@ CGL.Mesh.prototype.render=function(shader)
         if(this.numInstances===0)
         {
             this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
-
             // if(this._bufVerticesIndizes.numItems>100)console.log(this._bufVerticesIndizes.numItems);
         }
         else
@@ -441,7 +443,6 @@ CGL.Mesh.prototype.render=function(shader)
         }
 
         // this.printDebug(shader);
-
     }
 
     // this.unBind(shader);

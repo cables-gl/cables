@@ -4,18 +4,21 @@ var CABLES=CABLES||{};
 CABLES.Instancing=function()
 {
     this._loops=[];
+    this._indizes=[];
     this._index=0;
 };
 
 CABLES.Instancing.prototype.pushLoop=function(maxNum)
 {
     this._loops.push( Math.abs(Math.floor(maxNum)) );
+    this._indizes.push( this._index);
 };
 
 CABLES.Instancing.prototype.popLoop=function()
 {
     this._loops.pop();
-    this._index--;
+    // this._index--;
+    this._index=this._indizes.pop();
     if(this._loops.length===0) this._index=0;
 };
 

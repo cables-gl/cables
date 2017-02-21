@@ -469,12 +469,16 @@ CABLES.Op = function()
         var theTriggerPort=null;
         for(ipi=0;ipi<this.portsIn.length;ipi++)
         {
-            if(this.portsIn[ipi].type==OP_PORT_TYPE_VALUE)
+            if(this.portsIn[ipi].type==OP_PORT_TYPE_VALUE || this.portsIn[ipi].type==OP_PORT_TYPE_ARRAY)
             {
                 this._instances[ this.patch.instancing.index() ].portsIn[ipi].set(this.portsIn[ipi].get());
             }
             if(this.portsIn[ipi].type==OP_PORT_TYPE_FUNCTION)
             {
+
+// console.log(this.patch.instancing.index());
+// console.log(this._instances.length);
+
                 if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
                     theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
             }

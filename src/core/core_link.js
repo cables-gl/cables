@@ -6,6 +6,8 @@ CABLES.Link = function(scene)
     this.portIn=null;
     this.portOut=null;
     this.scene=scene;
+
+    this.activityCounter=0;
 };
 
 CABLES.Link.prototype.setValue=function(v)
@@ -13,6 +15,19 @@ CABLES.Link.prototype.setValue=function(v)
     if(v===undefined) this._setValue();
         else this.portIn.set(v);
 };
+
+CABLES.Link.prototype.activity=function()
+{
+    this.activityCounter++;
+    // if(Date.now()-this.lastTime>100)
+    // {
+    //     // this.lastTime=Date.now();
+    //     // this.changesPerSecond=this.changesCounter*10;
+    //     this.changesCounter=0;
+    // }
+
+};
+
 
 CABLES.Link.prototype._setValue=function()
 {
@@ -24,6 +39,9 @@ CABLES.Link.prototype._setValue=function()
     var v=this.portOut.get();
 
     if( v==v)  // NaN is the only JavaScript value that is treated as unequal to itself
+    {
+        this.activity();
+
         if ( this.portIn.get()!=v )
         {
             this.portIn.set(v);
@@ -31,10 +49,9 @@ CABLES.Link.prototype._setValue=function()
         else
         {
             if(this.portIn.changeAlways)
-                this.portIn.set(v);
-
-
+            this.portIn.set(v);
         }
+    }
 };
 
 CABLES.Link.prototype.getOtherPort=function(p)
