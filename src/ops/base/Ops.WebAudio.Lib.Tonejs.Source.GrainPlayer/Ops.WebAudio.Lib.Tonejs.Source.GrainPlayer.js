@@ -76,7 +76,7 @@ playbackRatePort.onChange = function(){
         } else {
             playbackRatePort.set(PLAYBACK_RATE_MIN);
         }
-    } else { //string
+    } else if(typeof playBackRate === 'string') {
         op.log("playbackrate: ", playBackRate);
         if(isValidTime(playBackRate)) {
             op.log("... is valid time");

@@ -38,7 +38,9 @@ var ctx = fontImage.getContext('2d');
 
 function reSize()
 {
+
     textureOut.get().setSize(texWidth.get(),texHeight.get());
+
     ctx.canvas.width=fontImage.width=texWidth.get();
     ctx.canvas.height=fontImage.height=texHeight.get();
     refresh();

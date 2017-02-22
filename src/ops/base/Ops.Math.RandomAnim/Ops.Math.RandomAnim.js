@@ -3,6 +3,10 @@ op.name='random anim';
 var exe=op.inFunction("exe");
 var min=op.inValue("min",0);
 var max=op.inValue("max",1);
+
+var seed=op.inValue("random seed",0);
+
+
 var duration=op.inValue("duration",0.5);
 
 var result=op.outValue("result");
@@ -31,9 +35,14 @@ function init(v)
     anim.setValue(parseFloat(duration.get())+op.patch.freeTimer.get(), getRandom());
 }
 
+
 exe.onTriggered=function()
 {
     if(op.instanced(exe))return;
+
+
+    Math.randomSeed=seed.get();
+
 
     var t=op.patch.freeTimer.get();
     var v=anim.getValue(t);

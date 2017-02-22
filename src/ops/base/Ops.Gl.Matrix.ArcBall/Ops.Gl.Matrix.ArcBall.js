@@ -87,7 +87,7 @@ function onTouchMove(event)
 
         if(e.offsetX==e.offsetX && e.offsetY==e.offsetY)
             onmousemove(e);
-        console.log(e);
+        // console.log(e);
     }
     event.preventDefault();
     // onmousemove('event',event);

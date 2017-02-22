@@ -81,6 +81,7 @@ function reset()
     cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, bufferB, cgl.gl.DYNAMIC_COPY);
     buffB.itemSize = 3;
     buffB.numItems = bufferB.length/3;
+
     mesh.setAttribute("rndpos",bufferB,3);
 
     if(feebackOutpos)feebackOutpos.buffer=buffB;

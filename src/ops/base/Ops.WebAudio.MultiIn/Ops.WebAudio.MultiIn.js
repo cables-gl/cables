@@ -1,4 +1,4 @@
-this.name="Ops.WebAudio.MultiIn";
+this.name="MultiIn";
 
 var op = this;
 
