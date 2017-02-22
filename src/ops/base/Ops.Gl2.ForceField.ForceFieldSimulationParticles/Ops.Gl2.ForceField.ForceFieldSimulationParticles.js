@@ -167,8 +167,14 @@ render.onTriggered=function()
     
     if(mesh) mesh.render(shader);
     
-    var t=mesh._bufVertices;
-    mesh._bufVertices=feebackOutpos.buffer;
+    
+    // console.log( '1',mesh._bufVertexAttrib );
+    // console.log( '1',feebackOutpos.buffer );
+    
+    
+    
+    var t=mesh._bufVertexAttrib.buffer;
+    mesh._bufVertexAttrib.buffer=feebackOutpos.buffer;
     feebackOutpos.buffer=t;
     lastTime=op.patch.freeTimer.get();
     

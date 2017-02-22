@@ -130,8 +130,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             else if(this.onValueChanged) this.onValueChanged(this,this.value); // deprecated
     };
 
-
-
     CABLES.Port.prototype.getTypeString=function()
     {
         if(this.type==OP_PORT_TYPE_VALUE)return 'Value';
@@ -318,7 +316,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         // deprecated
         this.onChange=cb;
     };
-
 
     CABLES.Port.prototype.getUiActiveState=function()
     {
