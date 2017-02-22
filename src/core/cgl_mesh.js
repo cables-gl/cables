@@ -39,7 +39,6 @@ CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
                     "stride":stride,
                     "offset":offset
                 });
-
         }
     }
 
@@ -376,7 +375,6 @@ CGL.Mesh.prototype.render=function(shader)
     }
 
     // var meshChanged=this.meshChanged();
-
     // if(meshChanged)
     // cgl.lastMesh.unBind();
 
@@ -419,7 +417,7 @@ CGL.Mesh.prototype.render=function(shader)
     {
         shader.bindFeedbacks();
 
-        this._cgl.gl.drawArrays(prim, 0,this._bufVertexAttrib);
+        this._cgl.gl.drawArrays(prim, 0,this._bufVertexAttrib.numItems);
         shader.unBindFeedbacks();
 
         return;
