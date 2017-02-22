@@ -40,6 +40,7 @@ CGL.Marker=function(cgl)
 
     shader.setSource(vert,frag);
 
+    this._vScale=vec3.create();
 
     this.draw=function(cgl)
     {
@@ -52,8 +53,8 @@ CGL.Marker=function(cgl)
 
 
 
-        vec3.set(vScale, size,size,size);
-        mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
+        vec3.set(this._vScale, size,size,size);
+        mat4.scale(cgl.mvMatrix,cgl.mvMatrix, this._vScale);
 
         cgl.gl.disable(cgl.gl.DEPTH_TEST);
 

@@ -1,5 +1,16 @@
 var self = this;
 var patch=this.patch;
+// todo: audio object: firefox does not support .loop=true
+//
+// myAudio = new Audio('someSound.ogg'); 
+// myAudio.addEventListener('ended', function() {
+//     this.currentTime = 0;
+//     this.play();
+// }, false);
+// myAudio.play();
+
+
+
 
 this.name='AudioPlayer';
 
@@ -71,7 +82,8 @@ this.onDelete=function()
 
 doLoop.onValueChanged=function()
 {
-    self.audio.loop=doLoop.get();
+    if(self.audio) self.audio.loop=doLoop.get();
+    else if(self.media) self.media.loop=doLoop.get();
 };
 
 function seek()
@@ -187,6 +199,7 @@ this.file.onValueChanged = function()
     else
     {
         self.media = audioContext.createBufferSource();
+        self.media.loop=doLoop.get();
 
         var request = new XMLHttpRequest();
 
@@ -204,6 +217,7 @@ this.file.onValueChanged = function()
                 self.media.buffer = res;
                 self.media.connect(self.filter);
                 self.audioOut.val = self.filter;
+                self.media.loop=doLoop.get();
 
                 patch.loading.finished(loadingId);
 

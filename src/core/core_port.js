@@ -130,8 +130,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             else if(this.onValueChanged) this.onValueChanged(this,this.value); // deprecated
     };
 
-
-
     CABLES.Port.prototype.getTypeString=function()
     {
         if(this.type==OP_PORT_TYPE_VALUE)return 'Value';
@@ -205,6 +203,14 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this.onLinkChanged)this.onLinkChanged();
     };
 
+    CABLES.Port.prototype.getLinkTo=function(p2)
+    {
+        for(var i in this.links)
+            if(this.links[i].portIn==p2 || this.links[i].portOut==p2)
+                return this.links[i];
+    };
+
+
     CABLES.Port.prototype.removeLinkTo=function(p2)
     {
         for(var i in this.links)
@@ -234,7 +240,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             for (var i = 0; i < this.links.length; ++i)
             {
                 if(this.links[i].portIn)
+                {
                     this.links[i].portIn._onTriggered();
+                }
+                this.links[i].activity();
+                // console.log(1);
+
             }
         }
         catch(ex)
@@ -305,7 +316,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         // deprecated
         this.onChange=cb;
     };
-
 
     CABLES.Port.prototype.getUiActiveState=function()
     {

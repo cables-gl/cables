@@ -81,6 +81,7 @@ function reset()
     cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, bufferB, cgl.gl.DYNAMIC_COPY);
     buffB.itemSize = 3;
     buffB.numItems = bufferB.length/3;
+
     mesh.setAttribute("rndpos",bufferB,3);
 
     if(feebackOutpos)feebackOutpos.buffer=buffB;
@@ -158,6 +159,7 @@ render.onTriggered=function()
             force[id+'uniPos'].setValue(force.pos);
             force[id+'uniTime'].setValue(time);
         }
+        
     }
 
     uniSize.setValue(inSize.get());
@@ -167,8 +169,14 @@ render.onTriggered=function()
     
     if(mesh) mesh.render(shader);
     
-    var t=mesh._bufVertices;
-    mesh._bufVertices=feebackOutpos.buffer;
+    
+    // console.log( '1',mesh._bufVertexAttrib );
+    // console.log( '1',feebackOutpos.buffer );
+    
+    
+    
+    var t=mesh._bufVertexAttrib.buffer;
+    mesh._bufVertexAttrib.buffer=feebackOutpos.buffer;
     feebackOutpos.buffer=t;
     lastTime=op.patch.freeTimer.get();
     

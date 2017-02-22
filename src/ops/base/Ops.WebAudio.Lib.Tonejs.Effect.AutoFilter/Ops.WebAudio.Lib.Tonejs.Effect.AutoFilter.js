@@ -13,7 +13,11 @@ var DEPTH_MIN = 0;
 var DEPTH_MAX = 1;
 var FREQUENCY_DEFAULT = 200;
 var OSCILLATOR_TYPES = ["sine", "square", "triangle", "sawtooth"];
+/*
 var MIN_DEFAULT = 100; // ??
+var MIN_MIN = 0; // ??
+var MIN_MAX = 20000; // ??
+*/
 var OCTAVES_DEFAULT = 2.6;
 var OCTAVES_MIN = -1;
 var OCTAVES_MAX = 10;
@@ -28,14 +32,19 @@ var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node
 //var filterPort = op.inObject("Filter");
 var typePort = this.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: OSCILLATOR_TYPES }, OSCILLATOR_TYPES[0] ) );
 typePort.set(OSCILLATOR_TYPES[0]);
-var minPort = op.inValue("Min", MIN_DEFAULT);
+//var minPort = op.inValue("Min", MIN_DEFAULT); // not noticable, tone.js bug?
 var octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
 var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 
 // change listeners
+/*
 minPort.onChange = function() {
-    node.set("min", minPort.get());
+    var min = minPort.get();
+    if(min && min >= MIN_MIN && min >= MIN_MAX) {
+        node.set("min", minPort.get());    
+    }
 };
+*/
 
 octavesPort.onChange = function() {
     var octaves = octavesPort.get();
@@ -48,7 +57,9 @@ octavesPort.onChange = function() {
 };
 
 typePort.onChange = function() {
-    node.set("type", typePort.get());
+    if(typePort.get()) {
+        node.set("type", typePort.get());    
+    }
 };
 
 // output ports

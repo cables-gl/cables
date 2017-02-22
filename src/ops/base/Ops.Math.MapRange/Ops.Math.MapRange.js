@@ -27,7 +27,7 @@ function exec()
         return;
     }
     else
-    if(v.get()<=old_min.get())
+    if(v.get()<=old_min.get()) 
     {
         result.set(new_min.get());
         return;
@@ -95,5 +95,7 @@ old_min.onValueChanged=exec;
 old_max.onValueChanged=exec;
 new_min.onValueChanged=exec;
 new_max.onValueChanged=exec;
+
+result.set(0);
 
 exec();

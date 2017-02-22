@@ -26,14 +26,14 @@ var createTexture=true;
 
 textureOut.set(null);
 inFont.onChange=function(){ createTexture=true;createMesh=true; };
-
+var canvasid=null;
 
 
 CABLES.OpTextureMeshCanvas={};
 
 function getFont()
 {
-    var canvasid=''+inFont.get();
+    canvasid=''+inFont.get();
     if(CABLES.OpTextureMeshCanvas.hasOwnProperty(canvasid))
     {
         return CABLES.OpTextureMeshCanvas[canvasid];
@@ -63,7 +63,7 @@ function getFont()
 op.onDelete=function()
 {
     // fontImage.remove();
-    if(CABLES.OpTextureMeshCanvas[canvasid])
+    if(canvasid && CABLES.OpTextureMeshCanvas[canvasid])
         CABLES.OpTextureMeshCanvas[canvasid].canvas.remove();
 
 

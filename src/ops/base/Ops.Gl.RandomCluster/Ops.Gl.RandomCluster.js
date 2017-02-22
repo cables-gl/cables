@@ -31,6 +31,9 @@ var mat=mat4.create();
 
 function doRender()
 {
+    // console.log(doRender);
+    if(op.instanced(exe))return;
+
     op.patch.instancing.pushLoop(randoms.length);
 
     for(var i=0;i<randoms.length;i++)

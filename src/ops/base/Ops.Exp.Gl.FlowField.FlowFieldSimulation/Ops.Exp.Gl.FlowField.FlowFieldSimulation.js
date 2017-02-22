@@ -290,7 +290,7 @@ exec.onTriggered=function()
 
         arrayWriteToEnd(p.buff,p.pos[0])
         arrayWriteToEnd(p.buff,p.pos[1])
-        // arrayWriteToEnd(p.buff,p.pos[2])
+
         arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
         
         

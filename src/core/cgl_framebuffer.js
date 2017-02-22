@@ -20,10 +20,13 @@ CGL.Framebuffer=function(_cgl,w,h,options)
             "isFloatingPointTexture":options.isFloatingPointTexture,
             "filter":CGL.Texture.FILTER_LINEAR
         });
-    var textureDepth=new CGL.Texture(cgl,
-        {
-            "isDepthTexture":true
-        });
+
+    var textureDepth=null;
+    if(depthTextureExt)
+        textureDepth=new CGL.Texture(cgl,
+            {
+                "isDepthTexture":true
+            });
 
     var frameBuf = cgl.gl.createFramebuffer();
     var depthBuffer = cgl.gl.createRenderbuffer();
@@ -63,7 +66,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
 
         texture.setSize(width,height);
-        textureDepth.setSize(width,height);
+        if(textureDepth)textureDepth.setSize(width,height);
 
         if(depthTextureExt) cgl.gl.renderbufferStorage(cgl.gl.RENDERBUFFER, cgl.gl.DEPTH_COMPONENT16, width,height);
 
@@ -134,7 +137,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     this.delete=function()
     {
         texture.delete();
-        textureDepth.delete();
+        if(textureDepth)textureDepth.delete();
         cgl.gl.deleteRenderbuffer(depthBuffer);
         cgl.gl.deleteFramebuffer(frameBuf);
     };

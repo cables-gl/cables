@@ -38,12 +38,12 @@ function handleChange() {
     } catch(e) {
         // interval not valid
         op.uiAttr( { 'error': 'Interval not valid, Examples: "4n", "1m", 2' } );
-        gui.patch().showOpParams(op); // update GUI
+        if(window && window.gui && gui.patch) gui.patch().showOpParams(op); // update GUI
     	return;
     }
     // reset UI warning
     op.uiAttr( { 'error': null } );
-    gui.patch().showOpParams(op); // update GUI
+    if(window && window.gui && gui.patch) gui.patch().showOpParams(op); // update GUI
     
     // clear old schedule
     if(lastListenerId) {

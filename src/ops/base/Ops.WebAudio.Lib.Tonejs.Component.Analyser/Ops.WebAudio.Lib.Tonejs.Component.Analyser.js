@@ -55,6 +55,7 @@ minDecibelsPort.onChange = function(){setNodeValue("minDecibels", parseInt(minDe
 maxDecibelsPort.onChange = function(){setNodeValue("maxDecibels", parseInt(maxDecibelsPort.get()));};
 refreshPort.onTriggered = function() {
     var arr = node.analyse();
+    analyserArrayPort.set(null);
     analyserArrayPort.set(arr);
     //op.log("Analyser Array: ", arr);
 };
