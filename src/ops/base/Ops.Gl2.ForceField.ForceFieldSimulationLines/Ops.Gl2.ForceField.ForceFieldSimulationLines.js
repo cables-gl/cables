@@ -3,12 +3,13 @@ op.name="ForceFieldSimulationLines";
 var exec=op.inFunction("exec");
 var next=op.outFunction("next");
 
+var numParticles=op.inValueInt("Num Particles",100);
+
 var inReset=op.inFunction("Reset");
 var inRespawn=op.inFunction("Respawn all");
 var inSpeed=op.inValue("Speed",1);
 var inDamping=op.inValue("Damping");
 
-// var outSpeed=op.outValue("Speed");
 var col=op.outValue("color");
 
 var triggerForce=op.outFunction("force");
@@ -23,8 +24,6 @@ var outPoints=op.outArray("Points");
 var outDieSlow=op.outValue("Die Slow");
 
 
-
-var numParticles=op.inValueInt("Num Particles",100);
 var numLinePoints=op.inValueInt("Num Line Points",100);
 
 var minLifetime=op.inValueInt("Min LifeTime",5);
@@ -38,7 +37,6 @@ var posZ=op.inValue("Pos Z");
 var size=140;
 var particles=[];
 var damping=vec3.fromValues(0.8,0.8,0.8);
-// var maxSpeed=0.24252;
 
 var dieOffArea=0;
 var dieSlow=0;
@@ -85,7 +83,6 @@ function reset()
     {
         for(var i=0;i<numParticles.get();i++)
         {
-            
             particles[i].spawn();
         }
     }
@@ -256,8 +253,14 @@ Particle.prototype.apply=function(force)
         {
             vec3.normalize(vecNormal,vecToOrigin);
             vec3.copy(vecForce,vecNormal);
-            var vf=force.attraction;
-            vec3.mul(vecForce,vecForce,vec3.fromValues(vf*distAlpha,vf*distAlpha,vf*distAlpha));
+            this.velocity[0]=0;
+            this.velocity[1]=0;
+            this.velocity[2]=0;
+
+            vec3.mul(vecForce,vecForce,vec3.fromValues(
+                force.attraction * distAlpha*timeDiff,
+                force.attraction * distAlpha*timeDiff,
+                force.attraction * distAlpha*timeDiff));
             vec3.add(this.velocity,this.velocity,vecForce);
 
             // // Apply spin force
@@ -268,7 +271,10 @@ Particle.prototype.apply=function(force)
             // this.velocity[0]+=0.08;
 
             var f=distAlpha * force.angle;
-            vec3.mul(this.tangentForce,this.tangentForce,vec3.fromValues(f,f,f));
+            vec3.mul(this.tangentForce,this.tangentForce,vec3.fromValues(
+                f*timeDiff,
+                f*timeDiff,
+                f*timeDiff));
             
             
             vec3.add(this.velocity,this.velocity,this.tangentForce);
@@ -285,9 +291,8 @@ var lastTime=0;
 var timeDiff=0;
 exec.onTriggered=function()
 {
-    
     var time=op.patch.freeTimer.get();
-    timeDiff=time-lastTime;
+    timeDiff=(time-lastTime)*inSpeed.get();
 
     
     outDieSlow.set(dieSlow);
@@ -321,16 +326,16 @@ exec.onTriggered=function()
         arrayWriteToEnd(p.buff,p.pos[1])
         arrayWriteToEnd(p.buff,p.pos[2])
         // arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
-        
-        
+
         col.set(ppos);
         outIndex.set(i);
         outPoints.set(p.buff);
 
         next.trigger();
+        lastTime=time;
     }
 
-    timeTime=op.patch.freeTimer.get();
+    
 
 };
 

@@ -158,6 +158,7 @@ render.onTriggered=function()
             force[id+'uniPos'].setValue(force.pos);
             force[id+'uniTime'].setValue(time);
         }
+        
     }
 
     uniSize.setValue(inSize.get());
