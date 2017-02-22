@@ -88,8 +88,8 @@ CGL.Texture.prototype.clone=function()
 
 CGL.Texture.prototype.setSize=function(w,h)
 {
-    if(w!=w || w<=0)w=CGL.DEFAULT_TEXTURE_SIZE;
-    if(h!=h || h<=0)h=CGL.DEFAULT_TEXTURE_SIZE;
+    if(w!=w || w<=0 || !w)w=CGL.DEFAULT_TEXTURE_SIZE;
+    if(h!=h || h<=0 || !h)h=CGL.DEFAULT_TEXTURE_SIZE;
     w=Math.floor(w);
     h=Math.floor(h);
     if(this.width==w && this.height==h)return;
@@ -100,6 +100,7 @@ CGL.Texture.prototype.setSize=function(w,h)
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     CGL.profileTextureResize++;
 
+
     var uarr=null;
 
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
@@ -108,6 +109,7 @@ CGL.Texture.prototype.setSize=function(w,h)
     }
 
     this._setFilter();
+
 
 
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
@@ -135,7 +137,6 @@ CGL.Texture.prototype.setSize=function(w,h)
     {
         this._cgl.gl.generateMipmap(this.texTarget);
     }
-
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
 

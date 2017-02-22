@@ -5,5 +5,4 @@ var audioContext = CABLES.WebAudio.createAudioContext(op);
 var audioNode = audioContext.destination
 
 var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", audioNode);
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", audioNode);
 
