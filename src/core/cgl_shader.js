@@ -282,10 +282,16 @@ CGL.Shader=function(_cgl,_name)
                     srcHeadVert+=modules[j].srcHeadVert || '';
                     srcHeadFrag+=modules[j].srcHeadFrag || '';
 
+
                     srcVert=srcVert.replace(/{{mod}}/g,modules[j].prefix);
                     srcFrag=srcFrag.replace(/{{mod}}/g,modules[j].prefix);
                     srcHeadVert=srcHeadVert.replace(/{{mod}}/g,modules[j].prefix);
                     srcHeadFrag=srcHeadFrag.replace(/{{mod}}/g,modules[j].prefix);
+
+                    srcVert=srcVert.replace(/MOD_/g,modules[j].prefix);
+                    srcFrag=srcFrag.replace(/MOD_/g,modules[j].prefix);
+                    srcHeadVert=srcHeadVert.replace(/MOD_/g,modules[j].prefix);
+                    srcHeadFrag=srcHeadFrag.replace(/MOD_/g,modules[j].prefix);
                 }
             }
 

@@ -102,7 +102,7 @@ var Particle=function()
     this.velocity=vec3.create();
     this.tangentForce=vec3.create();
     this.idleFrames=0;
-    this.points=[];
+    // this.points=[];
     this.speed=0;
     
     this.buff=new Float32Array(3*Math.floor(numLinePoints.get()));
@@ -120,7 +120,9 @@ Particle.prototype.spawn=function()
     this.pos[1]+=posY.get();
     this.pos[2]+=posZ.get();
     // this.oldPos[2]=this.pos[2]=Math.random()*size-size/2;
-    this.points=[];
+    
+    // for(var i=0;i<this.points.length;i++)
+    // this.points.length=0;
     
     // this.oldPos[0]=Math.round( this.oldPos[0]/153 )*153;
     // this.oldPos[1]=Math.round( this.oldPos[1]/153 )*153;
@@ -163,6 +165,9 @@ var vecLength=vec3.create();
 
 Particle.prototype.update=function(forces)
 {
+    this.velocity[0]=0;
+    this.velocity[1]=0;
+    this.velocity[2]=0;
     // Update position
     vec3.copy(this.oldPos,this.pos);
     if(Date.now()>this.endTime)
@@ -253,9 +258,9 @@ Particle.prototype.apply=function(force)
         {
             vec3.normalize(vecNormal,vecToOrigin);
             vec3.copy(vecForce,vecNormal);
-            this.velocity[0]=0;
-            this.velocity[1]=0;
-            this.velocity[2]=0;
+            // this.velocity[0]=0;
+            // this.velocity[1]=0;
+            // this.velocity[2]=0;
 
             vec3.mul(vecForce,vecForce,vec3.fromValues(
                 force.attraction * distAlpha*timeDiff,

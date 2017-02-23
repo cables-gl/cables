@@ -46,7 +46,7 @@ render.onTriggered=function()
 percent.set(1);
 
 var geom=new CGL.Geometry("circle");
-var mesh=new CGL.Mesh(cgl,geom);
+var mesh=null;
 var lastSegs=-1;
 function calc()
 {
@@ -231,6 +231,10 @@ function calc()
 
     geomOut.set(null);
     geomOut.set(geom);
+    
+    if(geom.vertices.length==0)return;
+    if(!mesh)mesh=new CGL.Mesh(cgl,geom);
+
     mesh.setGeom(geom);
 }
 

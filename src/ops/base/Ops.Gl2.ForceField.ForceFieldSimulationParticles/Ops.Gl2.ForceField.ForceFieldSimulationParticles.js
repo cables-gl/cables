@@ -74,7 +74,9 @@ function reset()
 
     if(!mesh) mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
     mesh.addVertexNumbers=true;
+    mesh._verticesNumbers=null;
     mesh.setGeom(geom);
+    
 
     buffB = cgl.gl.createBuffer();
     cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffB);
@@ -83,6 +85,12 @@ function reset()
     buffB.numItems = bufferB.length/3;
 
     mesh.setAttribute("rndpos",bufferB,3);
+    
+    
+    var timeOffsetArr=new Float32Array(num);
+    for(i=0;i<num;i++)timeOffsetArr[i]=Math.random();
+    
+    mesh.setAttribute("timeOffset",timeOffsetArr,1);
 
     if(feebackOutpos)feebackOutpos.buffer=buffB;
 }

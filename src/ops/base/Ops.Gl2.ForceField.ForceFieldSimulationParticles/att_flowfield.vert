@@ -58,7 +58,7 @@ for(int i=0;i<NUM_FORCES;i++)
         //     this.tangentForce[2]=-vecNormal[2];
         //
         //     var f=distAlpha * force.angle;
-        float f=distAlpha * forces[i].angle/100.0;
+        float f=distAlpha * forces[i].angle;
 
         velocity+=(tangentForce*f)*{{mod}}timeDiff;
         //     vec3.mul(this.tangentForce,this.tangentForce,vec3.fromValues(f,f,f));
@@ -66,7 +66,6 @@ for(int i=0;i<NUM_FORCES;i++)
         // }
 
     }
-
 }
 
 if(respawn)
@@ -85,5 +84,7 @@ else
     outPos=vPosition+velocity;
     // outPos.z=0.0;
 }
+
+// psMul*=timeOffset;
 
 // gl_PointSize=pointSize;
