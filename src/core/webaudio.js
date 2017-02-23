@@ -152,3 +152,21 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
     return port;
   };
 };
+
+CABLES.WebAudio.loadAudioFile = function(patch, url, onFinished, onError) {
+  var audioContext = CABLES.WebAudio.createAudioContext();
+  var loadingId = patch.loading.start('audio', url);
+  if(CABLES.UI) gui.jobs().start({id: 'loadaudio' + loadingId, title:' loading audio (' + url + ')'});
+  var request = new XMLHttpRequest();
+  if(!url) { return; }
+  request.open('GET', url, true);
+  request.responseType = 'arraybuffer';
+  // TODO: maybe crossorigin stuff needed?
+  // Decode asynchronously
+  request.onload = function() {
+    patch.loading.finished(loadingId);
+    if(CABLES.UI) gui.jobs().finish('loadaudio' + loadingId);
+    audioContext.decodeAudioData(request.response, onFinished, onError);
+  }
+  request.send();
+};
