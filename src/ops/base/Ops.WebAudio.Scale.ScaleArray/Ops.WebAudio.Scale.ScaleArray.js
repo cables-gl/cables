@@ -108,3 +108,4 @@ function setOutput() {
     }
 }
 
+setOutput();
