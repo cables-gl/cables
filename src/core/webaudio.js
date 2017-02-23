@@ -58,7 +58,9 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
             }
         }
     } else {
-      audioInNode.connect(audioNode, 0, inputChannelIndex);
+      try{
+        audioInNode.connect(audioNode, 0, inputChannelIndex);
+      } catch(e) { op.log(e); }
     }
     port.webAudio.previousAudioInNode = audioInNode;
   };
