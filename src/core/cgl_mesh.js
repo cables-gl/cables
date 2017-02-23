@@ -84,7 +84,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
             this._attributes[i].numItems=numItems;
 
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
-            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.STREAM);
+            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
             return this._attributes[i];
         }
     }
@@ -92,7 +92,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     var buffer= this._cgl.gl.createBuffer();
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.STREAM);
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 
     var type=this._cgl.gl.FLOAT;
     if(options && options.type)type=options.type;
