@@ -16,7 +16,9 @@ CGL.Framebuffer2=function(cgl,w,h,options)
             "isFloatingPointTexture":false
         };
 
-    if(!options.hasOwnProperty("disableMultisampling"))options.multisampling=true;
+    if(!this._options.hasOwnProperty("multisampling"))this._options.multisampling=true;
+
+    console.log('multisampling: ',this._options.multisampling);
 
     this._texture=new CGL.Texture(cgl,
         {
@@ -90,12 +92,18 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
 
     if(!this._options.isFloatingPointTexture && this._options.multisampling)
         this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4, this._cgl.gl.RGBA8, this._width, this._height);
+        else
+        this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA8, this._width, this._height);
 
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffer);
 
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
-    if(!this._options.isFloatingPointTexture)
+    if(!this._options.isFloatingPointTexture && this._options.multisampling)
         this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4,this._cgl.gl.DEPTH_COMPONENT16, this._width,this._height);
+        else
+        this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.DEPTH_COMPONENT16, this._width, this._height);
+
+
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
