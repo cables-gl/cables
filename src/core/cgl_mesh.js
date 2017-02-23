@@ -47,7 +47,7 @@ CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 {
 
-    var buff=null;
+    var floatArray=null;
     var cb=null;
     var instanced=false;
 
@@ -64,11 +64,11 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 
     if(!(array instanceof Float32Array))
     {
-        buff=new Float32Array(array);
+        floatArray=new Float32Array(array);
         CGL.profileNonTypedAttrib++;
         CGL.profileNonTypedAttribNames=this._geom.name+' '+name+' ';
     }
-    else buff=array;
+    else floatArray=array;
 
     var numItems=array.length/itemSize;
 
@@ -84,7 +84,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
             this._attributes[i].numItems=numItems;
 
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
-            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, buff, this._cgl.gl.STREAM);
+            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.STREAM);
             return this._attributes[i];
         }
     }
@@ -92,9 +92,9 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     var buffer= this._cgl.gl.createBuffer();
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.STREAM);
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.STREAM);
 
-    var type=this._cgl.gl.FLOAT
+    var type=this._cgl.gl.FLOAT;
     if(options && options.type)type=options.type;
     var attr=
         {
