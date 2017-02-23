@@ -170,3 +170,12 @@ CABLES.WebAudio.loadAudioFile = function(patch, url, onFinished, onError) {
   }
   request.send();
 };
+
+CABLES.WebAudio.isValidToneTime = function(t) {
+    try{
+	    var time = new Tone.TimeBase(t);
+    } catch(e) {
+    	return false;
+    }
+    return true;
+};
