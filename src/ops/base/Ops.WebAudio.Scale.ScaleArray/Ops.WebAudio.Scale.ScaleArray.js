@@ -2,6 +2,12 @@ op.name="ScaleArray";
 
 // constants
 var BASE_TONES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+var BASE_TONE_DEFAULT = "D";
+var SCALE_TYPE_DEFAULT = "Minor";
+var APPEND_OCTAVE_DEFAULT = true;
+var OCTAVE_DEFAULT = 3;
+var OCTAVE_MIN = 0;
+var OCTAVE_MAX = 7;
 
 // scale types taken from: https://github.com/stagas/scales/blob/master/index.js
 var SCALE_TYPES = {
@@ -36,10 +42,14 @@ var SCALE_TYPES = {
 };
 
 // input
-var baseTonePort = this.addInPort( new Port( this, "Base Tone", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: BASE_TONES } ) );
-baseTonePort.set("C");
-var scaleTypePort = this.addInPort( new Port( this, "Scale Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: Object.keys(SCALE_TYPES) } ) );
-scaleTypePort.set("Major");
+var baseTonePort = op.addInPort( new Port( op, "Base Tone", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: BASE_TONES } ) );
+baseTonePort.set(BASE_TONE_DEFAULT);
+var scaleTypePort = op.addInPort( new Port( op, "Scale Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: Object.keys(SCALE_TYPES) } ) );
+scaleTypePort.set(SCALE_TYPE_DEFAULT);
+var appendOctavePort = op.addInPort( new Port( op, "Append Octave", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+appendOctavePort.set(APPEND_OCTAVE_DEFAULT);
+var octavePort = op.addInPort( new Port( op, "Octave", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVE_MIN, 'max': OCTAVE_MAX } ));
+octavePort.set(OCTAVE_DEFAULT);
 
 // output
 var scaleArrayPort = op.outArray("Scale Array");
@@ -47,6 +57,12 @@ var scaleArrayPort = op.outArray("Scale Array");
 // change listeners
 baseTonePort.onChange = setOutput;
 scaleTypePort.onChange = setOutput;
+octavePort.onChange = function() {
+    var octave = octavePort.get();
+    if(octave && octave >= OCTAVE_MIN && octave <= OCTAVE_MAX && appendOctavePort.get()) {
+        setOutput();
+    }
+};
 
 // functions
 function getToneAt(index, offset) {
@@ -73,10 +89,22 @@ function setOutput() {
     if(SCALE_TYPES.hasOwnProperty(scaleType) && BASE_TONES.indexOf(baseTone) > -1) {
         var scale = SCALE_TYPES[scaleType];
         var scaleArray = [];
-        for(var i=0; i<scale.length; i++) {
-            scaleArray.push(getToneAt(scale[i], baseToneIndex));
+        var appendOctave = appendOctavePort.get();
+        var octave = octavePort.get();
+        if(appendOctave && octave && octave >= OCTAVE_MIN && octave <= OCTAVE_MAX) { // "C4", "D4", ...
+            octave = Math.round(octave);
+            for(var i=0; i<scale.length; i++) {
+                scaleArray.push(getToneAt(scale[i], baseToneIndex) + octave);
+            }
+            // append the base tone in the next octave
+            scaleArray.push(getToneAt(scale[0], baseToneIndex) + (octave+1));
+        } else { // "C", "D", ...
+            for(var j=0; j<scale.length; j++) {
+                scaleArray.push(getToneAt(scale[j], baseToneIndex));
+            }    
         }
         scaleArrayPort.set(scaleArray);
+        op.log("Scale Array: ", scaleArray);
     }
 }
 
