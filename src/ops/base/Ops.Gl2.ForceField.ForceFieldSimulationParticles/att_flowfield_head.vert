@@ -8,6 +8,8 @@ uniform float {{mod}}size;
 uniform float {{mod}}timeDiff;
 uniform vec3 {{mod}}emitterPos;
 
+attribute float timeOffset;
+
 struct force
     {
         vec3 pos;

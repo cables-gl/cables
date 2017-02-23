@@ -47,7 +47,7 @@ CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 {
 
-    var arr=null;
+    var floatArray=null;
     var cb=null;
     var instanced=false;
 
@@ -64,11 +64,11 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 
     if(!(array instanceof Float32Array))
     {
-        arr=new Float32Array(array);
+        floatArray=new Float32Array(array);
         CGL.profileNonTypedAttrib++;
         CGL.profileNonTypedAttribNames=this._geom.name+' '+name+' ';
     }
-    else arr=array;
+    else floatArray=array;
 
     var numItems=array.length/itemSize;
 
@@ -84,7 +84,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
             this._attributes[i].numItems=numItems;
 
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
-            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
+            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
             return this._attributes[i];
         }
     }
@@ -92,9 +92,9 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     var buffer= this._cgl.gl.createBuffer();
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, arr, this._cgl.gl.DYNAMIC_DRAW);
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 
-    var type=this._cgl.gl.FLOAT
+    var type=this._cgl.gl.FLOAT;
     if(options && options.type)type=options.type;
     var attr=
         {
@@ -132,6 +132,27 @@ CGL.Mesh.prototype.getAttributes=function()
 CGL.Mesh.prototype.updateTexCoords=function(geom)
 {
     if(geom.texCoords && geom.texCoords.length>0) this.setAttribute('attrTexCoord',geom.texCoords,2);
+};
+
+CGL.Mesh.prototype._setVertexNumbers=function()
+{
+    var numVerts=this._geom.vertices.length/3;
+
+    if(!this._verticesNumbers || this._verticesNumbers.length!=numVerts)
+    {
+        this._verticesNumbers=new Float32Array(numVerts);
+
+        for(i=0;i<numVerts;i++)this._verticesNumbers[i]=i;
+
+        this.setAttribute('attrVertIndex',this._verticesNumbers,1,
+            function(attr,geom,shader)
+            {
+                if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',numVerts);
+                shader.uniformNumVertices.setValue(numVerts);
+           });
+   }
+
+
 };
 
 CGL.Mesh.prototype.setGeom=function(geom)
@@ -172,22 +193,7 @@ CGL.Mesh.prototype.setGeom=function(geom)
 
 	if(this.addVertexNumbers)
 	{
-        var numVerts=this._geom.vertices.length/3;
-
-
-        if(!this._verticesNumbers || this._verticesNumbers.length!=numVerts)
-        {
-            this._verticesNumbers=new Float32Array(numVerts);
-
-            for(i=0;i<numVerts;i++)this._verticesNumbers[i]=i;
-
-            this.setAttribute('attrVertIndex',this._verticesNumbers,1,
-                function(attr,geom,shader)
-                {
-                    if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',numVerts);
-                    shader.uniformNumVertices.setValue(numVerts);
-               });
-       }
+        this._setVertexNumbers();
 	}
     // for(i=0;i<this._geom.morphTargets.length;i++) addAttribute('attrMorphTargetA',this._geom.morphTargets[i],3);
 };
@@ -390,6 +396,7 @@ CGL.Mesh.prototype.render=function(shader)
     shader.bind();
 
     if(needsBind) this._bind(shader);
+    if(this.addVertexNumbers)_setVertexNumbers();
 
 
     CGL.MESH.lastMesh=this;

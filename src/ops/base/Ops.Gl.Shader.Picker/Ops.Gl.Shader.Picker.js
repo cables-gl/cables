@@ -1,8 +1,7 @@
-Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 
-this.name='Picker';
+op.name='Picker';
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 
 this.x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
@@ -18,7 +17,14 @@ this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 
 var pixelRGB = new Uint8Array(4);
-var fb=new CGL.Framebuffer(cgl);
+var fb=null;
+if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
+    else 
+    {
+        console.log("new framebuffer...");
+        fb=new CGL.Framebuffer2(cgl,4,4,{multisampling:false});
+    }
+
 
 
 // var tex=this.addOutPort(new Port(this,"pick texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
@@ -43,11 +49,9 @@ var doRender=function()
         {
             var minimizeFB=8;
             cgl.resetViewPort();
-            // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
-            // var vpW=cgl.getViewPort()[2]/minimizeFB;
-            // var vpH=cgl.getViewPort()[3]/minimizeFB;
-            var vpW=cgl.canvas.width/minimizeFB;
-            var vpH=cgl.canvas.height/minimizeFB;
+
+            var vpW=Math.floor(cgl.canvas.width/minimizeFB);
+            var vpH=Math.floor(cgl.canvas.height/minimizeFB);
             if(vpW!=fb.getWidth() || vpH!=fb.getHeight() )
             {
                 fb.setSize( vpW,vpH );
@@ -63,6 +67,8 @@ var doRender=function()
             var y=Math.floor( vpH-self.y.get()/minimizeFB);
             if(x<0)x=0;
             if(y<0)y=0;
+            
+            // console.log('',x,y,vpW,vpH);
             cgl.gl.readPixels(x,y, 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
             // cgl.gl.readPixels(self.x.get(), self.y.get(), 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
 
