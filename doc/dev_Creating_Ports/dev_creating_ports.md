@@ -87,6 +87,16 @@ var filename = op.addInPort( new Port( this, "file", OP_PORT_TYPE_VALUE, { displ
 The `filter` is a file filter for the assets-browser, in the example above only images will be shown. You can currently use `image` and `audio`.  
 `type: 'string'` means the port accepts a `url` as input, so you can load assets from another server without uploading them. Please note that there can be problems loading files from external servers, you should make sure that you catch any errors and inform the user by calling `op.uiAttr( { 'error': 'Could not load file!' } );`. This will color the op red and shows an error message in the op-settings.
 
+If you want to react on a change of the file port you need to use the `getFilePath` function, which makes sure the file-path is correctly resolved (this is important if users want to export their patches):
+
+```javascript
+inUrlPort.onChange = function() {
+	var url = op.patch.getFilePath(inUrlPort.get());  
+};
+```
+
+
+
 ##### Display: Range
 
 Displays a slider in the range `[min..max]` along with a text input field. The value of the input field can be out of range, so if your op cannot handle these values you need to manually check and reset the port by calling `inPort.set(...)`.
