@@ -21,8 +21,8 @@ Function ports are being used to trigger another op. If you do a visual-patch th
 Function ports can also be used to trigger under certain conditions – the [Op: Mouse](#)-op e.g. triggers on the `click`-port once a user clicked in the preview pane.
 
 ```javascript
-var exec = this.addInPort( new Port( this, "exec", OP_PORT_TYPE_FUNCTION ));
-var next = this.addOutPort( new Port( this, "next", OP_PORT_TYPE_FUNCTION ));
+var exec = op.addInPort( new Port( op, "exec", OP_PORT_TYPE_FUNCTION ));
+var next = op.addOutPort( new Port( op, "next", OP_PORT_TYPE_FUNCTION ));
 
 exec.onTrigger( function(){
 	// ...
@@ -39,7 +39,7 @@ exec.onTrigger( function(){
 By adding `{ "display": "button" }` to a port-definition a button-UI element will be added to the op settings pane to manually trigger the port.
 
 ```javascript
-var tap = op.addInPort( new Port( this, "tap", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var tap = op.addInPort( new Port( op, "tap", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 ```
 
 ### Value Ports
@@ -51,8 +51,8 @@ OP_PORT_TYPE_VALUE
 Value ports can hold a single value, a number (e.g. -1, 2.45), a bool (true, false), a string ("foo bar"), a string with multiple lines or a certain value from a dropdown-input.
 
 ```javascript
-var inPort = op.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
-var outPort = op.addOutPort( new Port( this, "out port", OP_PORT_TYPE_VALUE ) );
+var inPort = op.addInPort( new Port( op, "in port", OP_PORT_TYPE_VALUE ) );
+var outPort = op.addOutPort( new Port( op, "out port", OP_PORT_TYPE_VALUE ) );
 ```
 
 - Use `outPort.set(x);` / `inPort.set(x);` to change the value of a port
@@ -67,7 +67,7 @@ To set the default value of a port to e.g. `5` use `inPort.set(5)`.
 **TODO: Implement default, right now, just remove display if you want the default UI-element `**  
 
 ```javascript
-var inPort = op.addInPort( new Port( this, "in port", OP_PORT_TYPE_VALUE ) );
+var inPort = op.addInPort( new Port( op, "in port", OP_PORT_TYPE_VALUE ) );
 
 inPort.onValueChange( function() {
     op.log('in port changed to:' + inPort.get());
@@ -81,7 +81,7 @@ Text-input-field which can be used to enter numbers, booleans and strings.
 Used for images, audio files and so on.
 
 ```javascript
-var filename = op.addInPort( new Port( this, "file", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'image'  } ));
+var inUrlPort = op.addInPort( new Port( op, "file", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'image'  } ));
 ```
 
 The `filter` is a file filter for the assets-browser, in the example above only images will be shown. You can currently use `image` and `audio`.  
@@ -102,7 +102,7 @@ inUrlPort.onChange = function() {
 Displays a slider in the range `[min..max]` along with a text input field. The value of the input field can be out of range, so if your op cannot handle these values you need to manually check and reset the port by calling `inPort.set(...)`.
 
 ```javascript
-var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 10 } ));
+var inPort = op.addInPort( new Port( op, "inPort", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 10 } ));
 ```
 
 ##### Display: Bool
@@ -110,7 +110,7 @@ var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { 'disp
 ![](img/checkbox.png)
 
 ```javascript
-var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var inPort = op.addInPort( new Port( op, "inPort", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 
 inPort.onValueChange( function() {
 	if( inPort.get() === true ){
@@ -124,7 +124,7 @@ inPort.onValueChange( function() {
 ##### Display: String
 
 ```javascript
-var inPort = op.addInPort( new Port( this, "inPort", OP_PORT_TYPE_VALUE, { display: 'string' } ) );
+var inPort = op.addInPort( new Port( op, "inPort", OP_PORT_TYPE_VALUE, { display: 'string' } ) );
 
 inPort.onValueChange( function() {
 	op.log( "Port changed to: " + inPort.get() === "foo bar" );
@@ -137,7 +137,7 @@ inPort.onValueChange( function() {
 ![Editor Button](img/editor.png)
 
 ```javascript
-var text = op.addInPort( new Port( this, "text", OP_PORT_TYPE_VALUE, { display: 'editor' } ) );
+var text = op.addInPort( new Port( op, "text", OP_PORT_TYPE_VALUE, { display: 'editor' } ) );
 
 text.onValueChange( function() {
     op.log('text changed to:' + text.get());
@@ -151,7 +151,7 @@ If you click the edit button, text can be edited in the editor. Used for all kin
 For a fixed amount of values to choose from.
 
 ```javascript
-var align = this.addInPort( new Port( this, "align", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: ['left', 'center', 'right'] } ) );
+var align = op.addInPort( new Port( op, "align", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: ['left', 'center', 'right'] } ) );
 ```
 
 ### Array Ports
