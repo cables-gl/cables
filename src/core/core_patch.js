@@ -110,7 +110,12 @@ CABLES.Patch.prototype.getFilePath=function(filename)
 {
     if(!filename)return filename;
     if(filename.indexOf('https:')===0 || filename.indexOf('http:')===0 ) return filename;
-    return this.config.prefixAssetPath+filename;
+
+    var finalFilename=this.config.prefixAssetPath+filename;
+
+    finalFilename=finalFilename.replace('//','/');
+
+    return finalFilename;
 };
 
 CABLES.Patch.prototype.clear=function()

@@ -16,8 +16,8 @@ var numberOfChannelsPort = op.outValue("Number of Channels", 0);
 
 // change listeners
 inUrlPort.onChange = function() {
-    var url = inUrlPort.get();
-    if(typeof url === 'string' && url.length > 0) {
+    var url=op.patch.getFilePath(inUrlPort.get());
+    if(typeof url === 'string' && url.length > 1) {
         CABLES.WebAudio.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
     }
 };

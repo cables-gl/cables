@@ -396,7 +396,7 @@ CGL.Mesh.prototype.render=function(shader)
     shader.bind();
 
     if(needsBind) this._bind(shader);
-    if(this.addVertexNumbers)_setVertexNumbers();
+    if(this.addVertexNumbers)this._setVertexNumbers();
 
 
     CGL.MESH.lastMesh=this;
