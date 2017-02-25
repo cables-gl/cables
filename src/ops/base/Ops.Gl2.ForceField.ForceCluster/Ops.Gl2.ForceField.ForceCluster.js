@@ -1,7 +1,7 @@
 op.name="ForceCluster";
 
 var exec=op.inFunction("Exec");
-var doreset=op.inFunction("reset");
+var doreset=op.inFunctionButton("reset");
 
 var num=op.inValue("num",20);
 

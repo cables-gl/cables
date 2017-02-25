@@ -25,6 +25,7 @@ struct force
 uniform force forces[NUM_FORCES];
 
 
+in vec3 inPos;
 out vec3 outPos;
 
 // uniform mat4 projMatrix;

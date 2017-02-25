@@ -40,7 +40,7 @@ void main()
 
     vec4 model=modelMatrix * pos;
 
-    if(randomSize>0.0) psMul=rand(attrVertIndex)*randomSize;
+    if(randomSize>0.0) psMul+=rand(attrVertIndex)*randomSize;
 
 
 

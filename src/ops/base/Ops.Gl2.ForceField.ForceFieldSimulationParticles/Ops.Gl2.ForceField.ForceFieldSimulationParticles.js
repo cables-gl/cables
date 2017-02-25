@@ -1,37 +1,22 @@
 op.name="ForceFieldSimulationParticles";
 
-
 var render=op.inFunction("render");
-
-
 var resetButton=op.inFunctionButton("Reset");
-
 var inSize=op.inValue("Size Area",3);
-
-// var opacity=op.inValueSlider("Opacity",1);
-// var pointSize=op.inValue("PointSize",1);
-var numPoints=op.inValue("Particles",3000);
+var numPoints=op.inValue("Particles",300);
 var speed=op.inValue("Speed",0.2);
 var lifetime=op.inValue("Lifetime",5);
-
 var show=op.inValueBool("Show");
-
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
-
 var cgl=op.patch.cgl;
-
 var shaderModule=null;
-
 var bufferB=null;
 var verts=null;
-
 var geom=null;
-
 var mesh=null;
-var buffB=null;
 var shader=null;
 
 numPoints.onChange=reset;
@@ -45,12 +30,15 @@ var mark=new CGL.Marker(cgl);
 
 function reset()
 {
+    var i=0;
     var num=Math.floor(numPoints.get())*3;
     if(!verts || verts.length!=num) verts=new Float32Array(num);
     if(!bufferB || bufferB.length!=num)bufferB=new Float32Array(num);
 
+if(mesh)op.log("jaja blna",mesh._attributes.length);
+
     var size=inSize.get();
-    for(var i=0;i<verts.length;i+=3)
+    for(i=0;i<verts.length;i+=3)
     {
         verts[i+0]=(Math.random()-0.5)*size+posX.get();
         verts[i+1]=(Math.random()-0.5)*size+posY.get();
@@ -66,33 +54,54 @@ function reset()
     if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
     
-    for(var i=0;i<geom.texCoords.length;i+=2)
+    for(i=0;i<geom.texCoords.length;i+=2)
     {
         geom.texCoords[i]=Math.random();
         geom.texCoords[i+1]=Math.random();
     }
 
-    if(!mesh) mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
-    mesh.addVertexNumbers=true;
-    mesh._verticesNumbers=null;
+    if(!mesh) 
+    {
+        mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+    
+        mesh.addVertexNumbers=true;
+        mesh._verticesNumbers=null;
+
+
+        op.log("NEW MESH");
+    }
     mesh.setGeom(geom);
+
+    // mesh.updateVertices(geom);
+    
+    op.log("set geom",mesh._attributes.length);
+    op.log("set geom",mesh._attributes.length);
     
 
-    buffB = cgl.gl.createBuffer();
-    cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffB);
-    cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, bufferB, cgl.gl.DYNAMIC_COPY);
-    buffB.itemSize = 3;
-    buffB.numItems = bufferB.length/3;
+    // buffB = cgl.gl.createBuffer();
+    // cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffB);
+    // cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, bufferB, cgl.gl.DYNAMIC_COPY);
+    // buffB.itemSize = 3;
+    // buffB.numItems = bufferB.length/3;
 
     mesh.setAttribute("rndpos",bufferB,3);
     
+    op.log("Reset particles",num,numPoints.get());
     
-    var timeOffsetArr=new Float32Array(num);
+    
+    mesh.setFeedback(
+        mesh.setAttribute("inPos",bufferB,3),
+        "outPos",bufferB );
+        // feebackOutpos.buffer=buffB;
+
+    
+    
+    var timeOffsetArr=new Float32Array(num/3);
     for(i=0;i<num;i++)timeOffsetArr[i]=Math.random();
     
     mesh.setAttribute("timeOffset",timeOffsetArr,1);
 
-    if(feebackOutpos)feebackOutpos.buffer=buffB;
+    // if(feebackOutpos)feebackOutpos.buffer=buffB;
 }
 
 reset();
@@ -117,7 +126,7 @@ render.onLinkChanged=removeModule;
 var uniTime=null;
 var uniSize=null;
 var uniTimeDiff=null;
-var feebackOutpos=null;
+// var feebackOutpos=null;
 var uniPos=null;
 
 render.onTriggered=function()
@@ -141,9 +150,7 @@ render.onTriggered=function()
         uniPos=new CGL.Uniform(shader,'3f',shaderModule.prefix+'emitterPos',0);
         uniSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'size',inSize.get());
         uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
-
-        feebackOutpos=shader.addFeedback("outPos");
-        feebackOutpos.buffer=buffB;
+console.log(1);
     }
     
     if(!shader)return;
@@ -167,7 +174,6 @@ render.onTriggered=function()
             force[id+'uniPos'].setValue(force.pos);
             force[id+'uniTime'].setValue(time);
         }
-        
     }
 
     uniSize.setValue(inSize.get());
@@ -183,9 +189,9 @@ render.onTriggered=function()
     
     
     
-    var t=mesh._bufVertexAttrib.buffer;
-    mesh._bufVertexAttrib.buffer=feebackOutpos.buffer;
-    feebackOutpos.buffer=t;
+    // var t=mesh._bufVertexAttrib.buffer;
+    // mesh._bufVertexAttrib.buffer=feebackOutpos.buffer;
+    // feebackOutpos.buffer=t;
     lastTime=op.patch.freeTimer.get();
     
     
