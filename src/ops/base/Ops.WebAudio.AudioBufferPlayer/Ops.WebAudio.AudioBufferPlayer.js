@@ -48,7 +48,9 @@ detunePort.onChange = setDetune;
 function setDetune() {
     if(source) {
         var detune = detunePort.get() || 0;
-        source.detune.value = detune;
+        if(source.detune && source.detune.value) {
+            source.detune.value = detune;    
+        }
     }
 }
 

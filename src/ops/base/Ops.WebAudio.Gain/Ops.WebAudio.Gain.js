@@ -11,7 +11,7 @@ if(!window.audioContext){ audioContext = new AudioContext(); }
 var gainNode = audioContext.createGain();
 
 function updateGain(){
-    gainNode.gain.value = parseFloat( gain.get() );
+    gainNode.gain.value = parseFloat( gain.get() )||0;
 }
 
 
