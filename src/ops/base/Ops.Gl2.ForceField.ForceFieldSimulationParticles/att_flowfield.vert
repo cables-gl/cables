@@ -1,5 +1,7 @@
 
 
+
+
 col=rndpos+0.5;
 
 // vec3.add(this.pos,this.pos,this.velocity);
@@ -10,7 +12,7 @@ for(int i=0;i<NUM_FORCES;i++)
 {
     if(forces[i].time<{{mod}}time)continue;
 
-    vec3 vecToOrigin=vPosition-forces[i].pos;
+    vec3 vecToOrigin=inPos-forces[i].pos;
     float dist=abs(length(vecToOrigin));
 
     if(forces[i].range > dist)
@@ -81,10 +83,14 @@ if(respawn)
 }
 else
 {
-    outPos=vPosition+velocity;
+    outPos=inPos+velocity;
     // outPos.z=0.0;
 }
 
+// psMul*=timeOffset;
+
+// gl_PointSize=pointSize;
+pos=vec4(outPos,1.0);
 // psMul*=timeOffset;
 
 // gl_PointSize=pointSize;
