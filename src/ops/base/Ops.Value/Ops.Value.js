@@ -1,3 +1,7 @@
+
+// remove trigger - see valuetrigger...
+
+
 op.name='Value';
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var v=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
