@@ -38,6 +38,7 @@ CABLES.Link.prototype._setValue=function()
     }
     var v=this.portOut.get();
 
+
     if( v==v)  // NaN is the only JavaScript value that is treated as unequal to itself
     {
         this.activity();
