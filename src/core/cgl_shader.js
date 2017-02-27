@@ -390,6 +390,8 @@ CGL.Shader=function(_cgl,_name)
         if(self._feedBackNames.length>0)
         {
             cgl.gl.transformFeedbackVaryings( program, self._feedBackNames, cgl.gl.SEPARATE_ATTRIBS );
+            // INTERLEAVED_ATTRIBS
+            //SEPARATE_ATTRIBS
         }
 
         cgl.gl.linkProgram(program);
@@ -427,7 +429,7 @@ CGL.Shader=function(_cgl,_name)
     var createProgram=function(vstr, fstr)
     {
 
-        
+
         var program = cgl.gl.createProgram();
         self.vshader = CGL.Shader.createShader(cgl,vstr, cgl.gl.VERTEX_SHADER,self);
         self.fshader = CGL.Shader.createShader(cgl,fstr, cgl.gl.FRAGMENT_SHADER,self);

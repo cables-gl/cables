@@ -84,16 +84,18 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 
     for(var i=0;i<this._attributes.length;i++)
     {
-        console.log('  -  ',this._attributes[i].name,name);
+        // console.log('  -  ',this._attributes[i].name,name);
 
         if(this._attributes[i].name==name)
         {
-            console.log('numItems',name,numItems);
+            // console.log('numItems',name,numItems);
 
             if(this._attributes[i].numItems!=numItems)
             {
                 this._attributes[i].loc=-1;
                 this._attributes[i].numItems=numItems;
+
+                console.log('updating attrib');
 
                 this._cgl.gl.deleteBuffer(this._attributes[i].buffer);
                 this._attributes[i].buffer=this._cgl.gl.createBuffer();

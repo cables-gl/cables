@@ -24,6 +24,9 @@ struct force
 // force forces[NUM_FORCES];
 uniform force forces[NUM_FORCES];
 
+in vec3 life;
+out vec3 outLife;
+
 
 in vec3 inPos;
 out vec3 outPos;

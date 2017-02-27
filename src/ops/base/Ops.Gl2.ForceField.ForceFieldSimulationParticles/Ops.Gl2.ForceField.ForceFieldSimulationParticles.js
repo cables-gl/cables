@@ -35,7 +35,6 @@ function reset()
     if(!verts || verts.length!=num) verts=new Float32Array(num);
     if(!bufferB || bufferB.length!=num)bufferB=new Float32Array(num);
 
-if(mesh)op.log("jaja blna",mesh._attributes.length);
 
     var size=inSize.get();
     for(i=0;i<verts.length;i+=3)
@@ -74,9 +73,9 @@ if(mesh)op.log("jaja blna",mesh._attributes.length);
 
     // mesh.updateVertices(geom);
     
-    op.log("set geom",mesh._attributes.length);
-    op.log("set geom",mesh._attributes.length);
-    
+    // op.log("set geom",mesh._attributes.length);
+    // op.log("set geom",mesh._attributes.length);
+
 
     // buffB = cgl.gl.createBuffer();
     // cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffB);
@@ -86,12 +85,38 @@ if(mesh)op.log("jaja blna",mesh._attributes.length);
 
     mesh.setAttribute("rndpos",bufferB,3);
     
+
     op.log("Reset particles",num,numPoints.get());
+    
+    mesh.removeFeedbacks();
+
+
+
+    var life=new Float32Array(num);
+    for(i=0;i<num;i++) life[i]=op.patch.freeTimer.get();
+    
+    // console.log(op.patch.freeTimer.get(),life[0],bufferB[0]);
+
+
+
+
+    // mesh.setAttribute("life",life,3);
+    // mesh.setAttributeFeedback("life","outLife",life),
+
+
+
     
     
     mesh.setFeedback(
         mesh.setAttribute("inPos",bufferB,3),
         "outPos",bufferB );
+
+
+    mesh.setFeedback(
+        mesh.setAttribute("life",life,3),
+        "outLife",life );
+
+
         // feebackOutpos.buffer=buffB;
 
     
@@ -150,7 +175,6 @@ render.onTriggered=function()
         uniPos=new CGL.Uniform(shader,'3f',shaderModule.prefix+'emitterPos',0);
         uniSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'size',inSize.get());
         uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
-console.log(1);
     }
     
     if(!shader)return;
@@ -179,6 +203,8 @@ console.log(1);
     uniSize.setValue(inSize.get());
     uniTimeDiff.setValue(timeDiff*(speed.get()));
     uniTime.setValue(time);
+    
+    
     uniPos.setValue([posX.get(),posY.get(),posZ.get()]);
     
     if(mesh) mesh.render(shader);
