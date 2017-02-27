@@ -26,6 +26,8 @@ CGL.Mesh.prototype.setFeedback=function(attrib,nameOut,initialArr)
 
     var found=false;
 
+this.unBindFeedbacks();
+
     for(var i=0;i<this._feedBacks.length;i++)
     {
         if(this._feedBacks[i].nameOut==nameOut)
@@ -62,10 +64,47 @@ CGL.Mesh.prototype.setFeedback=function(attrib,nameOut,initialArr)
     return fb;
 };
 
+CGL.Mesh.prototype.bindFeedback=function(attrib)
+{
+    if(!this._feedBacks || this._feedBacks.length===0)return;
+    if(this._transformFeedBackLoc==-1)this._transformFeedBackLoc=this._cgl.gl.createTransformFeedback();
+
+    this._cgl.gl.bindTransformFeedback(this._cgl.gl.TRANSFORM_FEEDBACK, this._transformFeedBackLoc);
+
+    var found=false;
+
+    for(var  i=0;i<this._feedBacks.length;i++)
+    {
+        var fb=this._feedBacks[i];
+
+        if(fb.attrib==attrib)
+        {
+            found=true;
+            // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, fb.attrib.buffer);
+            //
+            // this._cgl.gl.vertexAttribPointer(
+            //     fb.attrib.loc,
+            //     fb.attrib.itemSize,
+            //     fb.attrib.type,
+            //     false,
+            //     fb.attrib.itemSize*4, 0);
+
+            this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, i, fb.outBuffer);
+
+        }
+
+    }
+
+    if(!found)
+    {
+        // console.log("ARTTRIB NOT FOUND",attrib.name);
+    }
+
+};
+
 CGL.Mesh.prototype.drawFeedbacks=function(shader,prim)
 {
     var i=0;
-    if(this._transformFeedBackLoc==-1)this._transformFeedBackLoc=this._cgl.gl.createTransformFeedback();
 
     if(this._feedBacksChanged)
     {
@@ -82,23 +121,6 @@ CGL.Mesh.prototype.drawFeedbacks=function(shader,prim)
         this._cgl.gl.bindTransformFeedback(this._cgl.gl.TRANSFORM_FEEDBACK, null);
         console.log('changed finished');
         return;
-    }
-    this._cgl.gl.bindTransformFeedback(this._cgl.gl.TRANSFORM_FEEDBACK, this._transformFeedBackLoc);
-
-    for( i=0;i<this._feedBacks.length;i++)
-    {
-        var fb=this._feedBacks[i];
-
-        this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, fb.attrib.buffer);
-
-        this._cgl.gl.vertexAttribPointer(
-            fb.attrib.loc,
-            fb.attrib.itemSize,
-            fb.attrib.type,
-            false,
-            fb.attrib.itemSize*4, 0);
-
-        this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, i, fb.outBuffer);
     }
 
 
@@ -117,11 +139,13 @@ CGL.Mesh.prototype.drawFeedbacks=function(shader,prim)
     // unbind
     this._cgl.gl.endTransformFeedback();
 
+    this.unBindFeedbacks();
 
+    this.feedBacksSwapBuffers();
+};
 
-
-
-
+CGL.Mesh.prototype.unBindFeedbacks=function()
+{
     for(i=0;i<this._feedBacks.length;i++)
     {
         // this._cgl.gl.disableVertexAttribArray(this._feedBacks[i].attrib.loc);
@@ -129,8 +153,6 @@ CGL.Mesh.prototype.drawFeedbacks=function(shader,prim)
     }
 
     this._cgl.gl.bindTransformFeedback(this._cgl.gl.TRANSFORM_FEEDBACK, null);
-
-    this.feedBacksSwapBuffers();
 };
 
 CGL.Mesh.prototype.feedBacksSwapBuffers=function()

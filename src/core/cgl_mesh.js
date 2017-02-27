@@ -289,6 +289,9 @@ CGL.Mesh.prototype._bind=function(shader)
 
                     }
                 }
+
+                this.bindFeedback(attribute);
+
             }
         }
     }

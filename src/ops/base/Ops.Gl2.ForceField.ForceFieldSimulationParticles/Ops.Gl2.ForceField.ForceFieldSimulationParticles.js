@@ -27,9 +27,17 @@ var id=CABLES.generateUUID();
 
 var lastTime=0;
 var mark=new CGL.Marker(cgl);
+var needsRebuild=false;
 
 function reset()
 {
+    needsRebuild=true;
+}
+
+function doReset()
+{
+    mesh=null;
+    needsRebuild=false;
     var i=0;
     var num=Math.floor(numPoints.get())*3;
     if(!verts || verts.length!=num) verts=new Float32Array(num);
@@ -69,6 +77,10 @@ function reset()
 
         op.log("NEW MESH");
     }
+    else
+    {
+        mesh.unBind();
+    }
     mesh.setGeom(geom);
 
     // mesh.updateVertices(geom);
@@ -93,7 +105,12 @@ function reset()
 
 
     var life=new Float32Array(num);
-    for(i=0;i<num;i++) life[i]=op.patch.freeTimer.get();
+    for(i=0;i<num;i+=3) 
+    {
+        life[i]=Math.random()*10;
+        life[i+1]=op.patch.freeTimer.get();
+        life[i+2]=op.patch.freeTimer.get();
+    }
     
     // console.log(op.patch.freeTimer.get(),life[0],bufferB[0]);
 
@@ -121,10 +138,10 @@ function reset()
 
     
     
-    var timeOffsetArr=new Float32Array(num/3);
-    for(i=0;i<num;i++)timeOffsetArr[i]=Math.random();
+    // var timeOffsetArr=new Float32Array(num/3);
+    // for(i=0;i<num;i++)timeOffsetArr[i]=Math.random();
     
-    mesh.setAttribute("timeOffset",timeOffsetArr,1);
+    // mesh.setAttribute("timeOffset",timeOffsetArr,1);
 
     // if(feebackOutpos)feebackOutpos.buffer=buffB;
 }
@@ -156,6 +173,7 @@ var uniPos=null;
 
 render.onTriggered=function()
 {
+    if(needsRebuild)doReset();
     var time=op.patch.freeTimer.get();
     var timeDiff=time-lastTime;
 

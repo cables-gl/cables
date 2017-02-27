@@ -72,36 +72,44 @@ for(int i=0;i<NUM_FORCES;i++)
 
 respawn=false;
 
-if(MOD_time>life.x)
+// if(MOD_time>life.x)
 {
     // outPos+=0.1;
     // respawn=true;
-    outLife.x=MOD_time+10.0;
+    outLife.x=life.x+0.1;
 }
 
+if(length(inPos)>100.0) respawn=true;
 
-// if(respawn)
-// {
-//     // outLife.x=MOD_time+10.0;
-//     // outLife.y=MOD_time+10.0;
-//     // outLife.z=MOD_time+10.0;
-//
-//     outPos=2.0*vec3(
-//         (random(vec2(MOD_time+rndpos.y,rndpos.x))-0.5),
-//         (random(vec2(MOD_time+rndpos.z,rndpos.x))-0.5),
-//         (random(vec2(rndpos.x,MOD_time+rndpos.z))-0.5)
-//         );
-//     outPos*=MOD_size/2.0;
-//     outPos+=MOD_emitterPos;
-//     // outPos.z=0.0;
-// }
-// else
+if(life.x>10.0) respawn=true;
+
+
+if(respawn)
+{
+    // outLife.x=MOD_time+10.0;
+    // outLife.y=MOD_time+10.0;
+    // outLife.z=MOD_time+10.0;
+
+    outLife.x=0.0;
+
+    outPos=2.0*vec3(
+        (random(vec2(MOD_time+rndpos.y,rndpos.x))-0.5),
+        (random(vec2(MOD_time+rndpos.z,rndpos.x))-0.5),
+        (random(vec2(rndpos.x,MOD_time+rndpos.z))-0.5)
+        );
+    outPos*=MOD_size/2.0;
+    outPos+=MOD_emitterPos;
+    // outPos.z=0.0;
+}
+else
 {
     outPos=inPos+velocity;
+
+
     // outPos.z=0.0;
-    outPos.z=life.x;
 }
 
+// outPos.z=life.x;
 
 
 // psMul*=timeOffset;
