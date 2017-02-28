@@ -41,15 +41,30 @@ var maxPort = op.inValue("Max", MAX_DEFAULT);
 var exponentPort = op.inValue("Exponent", EXPONENT_DEFAULT);
 
 // value change listeners
-attackPort.onChange = setNodeValue("attack", attackPort.get());
-decayPort.onChange = setNodeValue("decay", decayPort.get());
-sustainPort.onChange = setNodeValue("sustain", sustainPort.get());
-releasePort.onChange = setNodeValue("release", releasePort.get());
-minPort.onChange = setNodeValue("min", minPort.get());
-maxPort.onChange = setNodeValue("max", maxPort.get());
-exponentPort.onChange = setNodeValue("exponent", exponentPort.get());
+attackPort.onChange = function() {
+    setNodeValue("attack", attackPort.get());   
+};
+decayPort.onChange = function() {
+    setNodeValue("decay", decayPort.get());    
+};
+sustainPort.onChange = function() {
+  setNodeValue("sustain", sustainPort.get());  
+};
+releasePort.onChange = function() {
+  setNodeValue("release", releasePort.get());  
+};
+minPort.onChange = function() {
+  setNodeValue("min", minPort.get());  
+};
+maxPort.onChange = function() {
+  setNodeValue("max", maxPort.get());  
+};
+exponentPort.onChange = function() {
+  setNodeValue("exponent", exponentPort.get());  
+};
 
 function setNodeValue(key, value) {
+    op.log("setting node val: ", value, " for key: ", key);
     node.set(key, value);
 }
 

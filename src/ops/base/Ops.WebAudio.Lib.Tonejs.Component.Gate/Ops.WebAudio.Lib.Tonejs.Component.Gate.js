@@ -27,7 +27,6 @@ releasePort.onChange = function(){setNodeValue("release", releasePort.get());};
 thresholdPort.onChange = function(){setNodeValue("threshold", thresholdPort.get());};
 
 function setNodeValue(key, value) {
-    op.log("change in key: ", key);
     node.set(key, value);
 }
 
