@@ -20,17 +20,19 @@ var oldAudioIn = null;
 audioIn.onValueChanged = function()
 {
     if (!audioIn.get()) {
-        if (oldAudioIn !== null) {
+        if (oldAudioIn) {
             try{
                 oldAudioIn.disconnect(gainNode);
             } catch(e) {
+                
+                
                 console.log(e);
             }
         }
     } else {
         audioIn.val.connect(gainNode);
     }  
-    oldAudioIn=audioIn.val;
+    oldAudioIn=audioIn.get();
 };
 
 gain.set( 1.0 );

@@ -94,9 +94,9 @@ if(MOD_time-life.x>MOD_lifeTime)
 
 #ifdef POINTMATERIAL
 
-    psMul=(MOD_time-life.x)/MOD_lifeTime;
+    float lifeElapsed=(MOD_time-life.x)/MOD_lifeTime;
 
-    psMul = smoothstep(0.0, MOD_fadeinout, psMul) * (1.0 - smoothstep(1.0-MOD_fadeinout, 1.0, psMul));
+    sizeMultiply *= smoothstep(0.0, MOD_fadeinout, lifeElapsed) * (1.0 - smoothstep(1.0-MOD_fadeinout, 1.0, lifeElapsed));
 
 
     // psMul=smoothstep(0.0,1.0,min(1.0,psMul));

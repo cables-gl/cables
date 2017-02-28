@@ -1,8 +1,8 @@
 op.name="Array3xSubdivide";
 
 var inArr=op.inArray("Points");
-var subDivs=op.inValue("Num Subdivs");
-var bezier=op.inValueBool("Smooth");
+var subDivs=op.inValue("Num Subdivs",5);
+var bezier=op.inValueBool("Smooth",true);
 
 var result=op.outArray("Result");
 
@@ -79,11 +79,10 @@ function calc()
                 }
             }
         }
-        
     }
     
     // op.log('subdiv ',inPoints.length,arr.length);
     // op.log(arr);
-    
+    result.set(null);
     result.set(arr);
 }
