@@ -21,13 +21,15 @@ var source = null;
 // change listeners
 audioBufferPort.onChange = function() {
     createAudioBufferSource();
-    if(autoPlayPort.get() && audioBufferPort.get()) {
+    if(
+        (autoPlayPort.get() && audioBufferPort.get()) ||
+    (playPort.get() && audioBufferPort.get())
+    ) {
         start(startTimePort.get());
     }
 };
 playPort.onChange = function() {
     if(source) {
-        stop(0);
         if(playPort.get()) {
             var startTime = startTimePort.get() || 0;
             start(startTime);    
@@ -67,6 +69,7 @@ function setPlaybackRate() {
 
 // functions
 function createAudioBufferSource() {
+    if(source)stop(0);
     source = audioCtx.createBufferSource();
     var buffer = audioBufferPort.get();
     if(buffer) {
@@ -82,13 +85,18 @@ function createAudioBufferSource() {
 function start(time) {
     try {
         source.start(time); // 0 = now
-    } catch(e) {} // already playing!?
+    } catch(e){
+        // console.log(e);
+    } // already playing!?
 }
 
 function stop(time) {
     try {
         source.stop(time); // 0 = now
-    } catch(e) {} // not playing!?
+    } catch(e) 
+    {
+        // console.log(e);
+    } // not playing!?
 }
 
 function onPlaybackEnded() {

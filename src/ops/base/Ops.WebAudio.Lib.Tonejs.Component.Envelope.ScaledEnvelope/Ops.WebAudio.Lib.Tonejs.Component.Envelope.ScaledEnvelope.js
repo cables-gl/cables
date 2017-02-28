@@ -24,7 +24,7 @@ var MAX_DEFAULT = 1;
 var EXPONENT_DEFAULT = 1;
 
 // vars
-var node = new Tone.AmplitudeEnvelope();
+var node = new Tone.ScaledEnvelope();
 
 // in ports
 var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
@@ -45,9 +45,9 @@ attackPort.onChange = setNodeValue("attack", attackPort.get());
 decayPort.onChange = setNodeValue("decay", decayPort.get());
 sustainPort.onChange = setNodeValue("sustain", sustainPort.get());
 releasePort.onChange = setNodeValue("release", releasePort.get());
-minPort.onChange = setNodeValue("min", releasePort.get());
-maxPort.onChange = setNodeValue("max", releasePort.get());
-exponentPort.onChange = setNodeValue("exponent", releasePort.get());
+minPort.onChange = setNodeValue("min", minPort.get());
+maxPort.onChange = setNodeValue("max", maxPort.get());
+exponentPort.onChange = setNodeValue("exponent", exponentPort.get());
 
 function setNodeValue(key, value) {
     node.set(key, value);
