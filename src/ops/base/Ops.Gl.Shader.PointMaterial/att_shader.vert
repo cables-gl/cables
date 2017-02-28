@@ -24,6 +24,8 @@ attribute float attrVertIndex;
 
 float rand(float n){return fract(sin(n) * 43758.5453123);}
 
+#define POINTMATERIAL
+
 void main()
 {
     float psMul=sqrt(canvasWidth*canvasHeight)*0.001+0.00000000001;

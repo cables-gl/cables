@@ -6,6 +6,7 @@ var inSize=op.inValue("Size Area",3);
 var numPoints=op.inValue("Particles",300);
 var speed=op.inValue("Speed",0.2);
 var lifetime=op.inValue("Lifetime",5);
+var fadeInOut=op.inValueSlider("Fade Birth Death",0.2);
 var show=op.inValueBool("Show");
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
@@ -107,7 +108,7 @@ function doReset()
     var life=new Float32Array(num);
     for(i=0;i<num;i+=3) 
     {
-        life[i]=Math.random()*10;
+        life[i]=op.patch.freeTimer.get()-Math.random()*lifetime.get();
         life[i+1]=op.patch.freeTimer.get();
         life[i+2]=op.patch.freeTimer.get();
     }
@@ -168,8 +169,9 @@ render.onLinkChanged=removeModule;
 var uniTime=null;
 var uniSize=null;
 var uniTimeDiff=null;
-// var feebackOutpos=null;
 var uniPos=null;
+var uniLifetime=null;
+var uniFadeInOut=null;
 
 render.onTriggered=function()
 {
@@ -193,6 +195,9 @@ render.onTriggered=function()
         uniPos=new CGL.Uniform(shader,'3f',shaderModule.prefix+'emitterPos',0);
         uniSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'size',inSize.get());
         uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
+        uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
+        uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
+        
     }
     
     if(!shader)return;

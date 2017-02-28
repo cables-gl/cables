@@ -73,25 +73,41 @@ for(int i=0;i<NUM_FORCES;i++)
 respawn=false;
 
 // if(MOD_time>life.x)
+// {
+//     // outPos+=0.1;
+//     // respawn=true;
+//     outLife.x=life.x+0.1;
+// }
+//
+// if(length(inPos)>100.0) respawn=true;
+//
+// if(life.x>10.0) respawn=true;
+
+outLife=life;
+
+
+if(MOD_time-life.x>MOD_lifeTime)
 {
-    // outPos+=0.1;
-    // respawn=true;
-    outLife.x=life.x+0.1;
+    outLife.x=MOD_time;
+    respawn=true;
 }
 
-if(length(inPos)>100.0) respawn=true;
+#ifdef POINTMATERIAL
 
-if(life.x>10.0) respawn=true;
+    psMul=(MOD_time-life.x)/MOD_lifeTime;
+
+    psMul = smoothstep(0.0, MOD_fadeinout, psMul) * (1.0 - smoothstep(1.0-MOD_fadeinout, 1.0, psMul));
+
+
+    // psMul=smoothstep(0.0,1.0,min(1.0,psMul));
+
+#endif
+
+
 
 
 if(respawn)
 {
-    // outLife.x=MOD_time+10.0;
-    // outLife.y=MOD_time+10.0;
-    // outLife.z=MOD_time+10.0;
-
-    outLife.x=0.0;
-
     outPos=2.0*vec3(
         (random(vec2(MOD_time+rndpos.y,rndpos.x))-0.5),
         (random(vec2(MOD_time+rndpos.z,rndpos.x))-0.5),
@@ -99,15 +115,12 @@ if(respawn)
         );
     outPos*=MOD_size/2.0;
     outPos+=MOD_emitterPos;
-    // outPos.z=0.0;
 }
 else
 {
     outPos=inPos+velocity;
-
-
-    // outPos.z=0.0;
 }
+
 
 // outPos.z=life.x;
 
