@@ -17,6 +17,7 @@ var buff=new Float32Array();
 
 render.onTriggered=function()
 {
+    if(!points.get())return;
     if(op.instanced(render))return;
 
     if(points.get().length===0)return;
@@ -38,6 +39,8 @@ render.onTriggered=function()
     mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
     
     mesh.render(shader);
+    
+    shader.glPrimitive=oldPrim;
     
     
     next.trigger();
