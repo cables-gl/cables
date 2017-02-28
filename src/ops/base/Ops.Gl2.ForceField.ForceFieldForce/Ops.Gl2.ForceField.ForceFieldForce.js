@@ -53,7 +53,8 @@ exec.onTriggered=function()
         cgl.popMvMatrix();
     }
 
-    vec3.transformMat4(pos, [posX.get(),posY.get(),posZ.get()], cgl.mvMatrix);
+    // vec3.transformMat4(pos, [posX.get(),posY.get(),posZ.get()], cgl.mvMatrix);
+    pos=[posX.get(),posY.get(),posZ.get()];
 
     updateForceObject();
 
