@@ -73,11 +73,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.set=CABLES.Port.prototype.setValue=function(v)
     {
 
-if(v===undefined)
-{
-    console.log(v);
-    throw "dsjklswd";
-}
+        if(v===undefined)return;
 
         if(this.parent.enabled)
         {
