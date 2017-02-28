@@ -1,5 +1,7 @@
 
 
+
+
 col=rndpos+0.5;
 
 // vec3.add(this.pos,this.pos,this.velocity);
@@ -8,9 +10,9 @@ vec3 velocity=vec3(0.0);
 
 for(int i=0;i<NUM_FORCES;i++)
 {
-    if(forces[i].time<{{mod}}time)continue;
+    if(forces[i].time<MOD_time)continue;
 
-    vec3 vecToOrigin=vPosition-forces[i].pos;
+    vec3 vecToOrigin=inPos-forces[i].pos;
     float dist=abs(length(vecToOrigin));
 
     if(forces[i].range > dist)
@@ -21,7 +23,7 @@ for(int i=0;i<NUM_FORCES;i++)
 
         if (abs(distAlpha) > 0.98)
         {
-            respawn=true;
+            // respawn=true;
         }
         // distAlpha = distAlpha * distAlpha;
         //
@@ -44,7 +46,7 @@ for(int i=0;i<NUM_FORCES;i++)
 
         //     vec3.mul(vecForce,vecForce,vec3.fromValues(vf*distAlpha,vf*distAlpha,vf*distAlpha));
         //     vec3.add(this.velocity,this.velocity,vecForce);
-        velocity += (vecNormal * distAlpha * forces[i].attraction )*{{mod}}timeDiff;
+        velocity += (vecNormal * distAlpha * forces[i].attraction )*MOD_timeDiff;
 
         vec3 tangentForce=vec3(
             vecNormal.y,
@@ -60,7 +62,7 @@ for(int i=0;i<NUM_FORCES;i++)
         //     var f=distAlpha * force.angle;
         float f=distAlpha * forces[i].angle;
 
-        velocity+=(tangentForce*f)*{{mod}}timeDiff;
+        velocity+=(tangentForce*f)*MOD_timeDiff;
         //     vec3.mul(this.tangentForce,this.tangentForce,vec3.fromValues(f,f,f));
         //     vec3.add(this.velocity,this.velocity,this.tangentForce);
         // }
@@ -68,22 +70,65 @@ for(int i=0;i<NUM_FORCES;i++)
     }
 }
 
+respawn=false;
+
+// if(MOD_time>life.x)
+// {
+//     // outPos+=0.1;
+//     // respawn=true;
+//     outLife.x=life.x+0.1;
+// }
+//
+// if(length(inPos)>100.0) respawn=true;
+//
+// if(life.x>10.0) respawn=true;
+
+outLife=life;
+
+
+if(MOD_time-life.x>MOD_lifeTime)
+{
+    outLife.x=MOD_time;
+    respawn=true;
+}
+
+#ifdef POINTMATERIAL
+
+    psMul=(MOD_time-life.x)/MOD_lifeTime;
+
+    psMul = smoothstep(0.0, MOD_fadeinout, psMul) * (1.0 - smoothstep(1.0-MOD_fadeinout, 1.0, psMul));
+
+
+    // psMul=smoothstep(0.0,1.0,min(1.0,psMul));
+
+#endif
+
+
+
+
 if(respawn)
 {
     outPos=2.0*vec3(
-        (random(vec2({{mod}}time+rndpos.y,rndpos.x))-0.5),
-        (random(vec2({{mod}}time+rndpos.z,rndpos.x))-0.5),
-        (random(vec2(rndpos.x,{{mod}}time+rndpos.z))-0.5)
+        (random(vec2(MOD_time+rndpos.y,rndpos.x))-0.5),
+        (random(vec2(MOD_time+rndpos.z,rndpos.x))-0.5),
+        (random(vec2(rndpos.x,MOD_time+rndpos.z))-0.5)
         );
-        outPos*={{mod}}size/2.0;
-        outPos+={{mod}}emitterPos;
-    // outPos.z=0.0;
+    outPos*=MOD_size/2.0;
+    outPos+=MOD_emitterPos;
 }
 else
 {
-    outPos=vPosition+velocity;
-    // outPos.z=0.0;
+    outPos=inPos+velocity;
 }
+
+
+// outPos.z=life.x;
+
+
+// psMul*=timeOffset;
+
+// gl_PointSize=pointSize;
+pos=vec4(outPos,1.0);
 
 // psMul*=timeOffset;
 

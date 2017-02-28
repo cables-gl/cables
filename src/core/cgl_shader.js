@@ -32,7 +32,7 @@ CGL.Shader=function(_cgl,_name)
     var normalMatrixUniform=null;
     var attrVertexPos = -1;
 
-    this._feedBacks=[];
+    this._feedBackNames=[];
 
     this.glPrimitive=null;
     this.offScreenPass=false;
@@ -79,6 +79,8 @@ CGL.Shader=function(_cgl,_name)
         defines.push([name,value]);
         this._needsRecompile=true;
     };
+
+
 
     this.hasDefine=function(name,value)
     {
@@ -201,9 +203,6 @@ CGL.Shader=function(_cgl,_name)
         CGL.profileShaderCompiles++;
         CGL.profileShaderCompileName=name;
 
-
-
-
         var extensionString='';
         if(this._extensions)
         for(i=0;i<this._extensions.length;i++)
@@ -281,7 +280,6 @@ CGL.Shader=function(_cgl,_name)
                     srcFrag+=modules[j].srcBodyFrag || '';
                     srcHeadVert+=modules[j].srcHeadVert || '';
                     srcHeadFrag+=modules[j].srcHeadFrag || '';
-
 
                     srcVert=srcVert.replace(/{{mod}}/g,modules[j].prefix);
                     srcFrag=srcFrag.replace(/{{mod}}/g,modules[j].prefix);
@@ -389,12 +387,12 @@ CGL.Shader=function(_cgl,_name)
 
     var linkProgram=function(program)
     {
-
-        if(self.hasFeedbacks())
+        if(self._feedBackNames.length>0)
         {
-            cgl.gl.transformFeedbackVaryings( program, [ self._feedBacks[0].name ], cgl.gl.SEPARATE_ATTRIBS );
+            cgl.gl.transformFeedbackVaryings( program, self._feedBackNames, cgl.gl.SEPARATE_ATTRIBS );
+            // INTERLEAVED_ATTRIBS
+            //SEPARATE_ATTRIBS
         }
-
 
         cgl.gl.linkProgram(program);
 
@@ -423,11 +421,15 @@ CGL.Shader=function(_cgl,_name)
         // console.log('no error: ',error);
         // else
         //   console.log('get error: ',error);
+        // if(self._feedBackNames.length>0)
+        //    cgl.gl.transformFeedbackVaryings( program, [], cgl.gl.SEPARATE_ATTRIBS );
 
     };
 
     var createProgram=function(vstr, fstr)
     {
+
+
         var program = cgl.gl.createProgram();
         self.vshader = CGL.Shader.createShader(cgl,vstr, cgl.gl.VERTEX_SHADER,self);
         self.fshader = CGL.Shader.createShader(cgl,fstr, cgl.gl.FRAGMENT_SHADER,self);
@@ -478,48 +480,16 @@ CGL.Shader=function(_cgl,_name)
     };
 };
 
-
-
-
-CGL.Shader.prototype.hasFeedbacks=function()
-{
-    return (this._feedBacks.length>0);
-};
-
-CGL.Shader.prototype.bindFeedbacks=function()
-{
-    this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, 0, this._feedBacks[0].buffer);
-    this._cgl.gl.beginTransformFeedback(this.glPrimitive);
-};
-
-CGL.Shader.prototype.unBindFeedbacks=function()
-{
-
-    this._cgl.gl.endTransformFeedback();
-    this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, 0, null);
-};
-
-
-CGL.Shader.prototype.addFeedback=function(name)
-{
-    var fb={
-                "name":name,
-                "buffer":null
-            };
-    this._feedBacks.push(fb);
-
-    // console.log(this._feedBacks.lengh+" transform feedbacks ");
-
-    return fb;
-
-};
-
 CGL.Shader.prototype.getProgram=function()
 {
     return this._program;
 };
 
-
+CGL.Shader.prototype.setFeedbackNames=function(names)
+{
+    this._needsRecompile=true;
+    this._feedBackNames=names;
+};
 
 CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader=function()
 {

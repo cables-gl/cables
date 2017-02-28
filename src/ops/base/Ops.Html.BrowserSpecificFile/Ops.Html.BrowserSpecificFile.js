@@ -11,6 +11,8 @@ var defaultFilePort = op.addInPort( new Port( op, "Default File", OP_PORT_TYPE_V
 
 // output port
 var outFile = op.outValue("Browser Specific File");
+var detectedBrowserPort = op.outValue("Detected Browser");
+detectedBrowserPort.set("None");
 
 // change listeners
 chromeFilePort.onChange = checkBrowserAndSetOutput;
@@ -42,16 +44,22 @@ function checkBrowserAndSetOutput() {
     if(isOpera) {
         outFile.set(operaFilePort.get() || defaultFilePort.get());
     } else if(isFirefox) {
+        detectedBrowserPort.set("Firefox");
         outFile.set(firefoxFilePort.get() || defaultFilePort.get());
     } else if(isSafari) {
+        detectedBrowserPort.set("Safari");
         outFile.set(safariFilePort.get() || defaultFilePort.get());
     } else if(isIE) {
+        detectedBrowserPort.set("IE");
         outFile.set(ieFilePort.get() || defaultFilePort.get());
     } else if(isEdge) {
+        detectedBrowserPort.set("Edge");
         outFile.set(edgeFilePort.get() || defaultFilePort.get());
     } else if(isChrome) {
+        detectedBrowserPort.set("Chrome");
         outFile.set(chromeFilePort.get() || defaultFilePort.get());
     } else {
+        detectedBrowserPort.set("None");
         outFile.set(defaultFilePort.get());
     }
 }

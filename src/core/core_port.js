@@ -72,6 +72,13 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.set=CABLES.Port.prototype.setValue=function(v)
     {
+
+if(v===undefined)
+{
+    console.log(v);
+    throw "dsjklswd";
+}
+
         if(this.parent.enabled)
         {
             if(v!=this.value || this.changeAlways || this.type==OP_PORT_TYPE_TEXTURE || this.type==OP_PORT_TYPE_ARRAY)
@@ -184,7 +191,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this.direction==PORT_DIR_IN)
         {
             if(this.type==OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
-                else this.setValue(this._valueBeforeLink);
+                else this.setValue(this._valueBeforeLink || null);
         }
 
         if(this.onLinkChanged)this.onLinkChanged();

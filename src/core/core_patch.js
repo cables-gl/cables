@@ -110,7 +110,12 @@ CABLES.Patch.prototype.getFilePath=function(filename)
 {
     if(!filename)return filename;
     if(filename.indexOf('https:')===0 || filename.indexOf('http:')===0 ) return filename;
-    return this.config.prefixAssetPath+filename;
+
+    var finalFilename=this.config.prefixAssetPath+filename;
+
+    finalFilename=finalFilename.replace('//','/');
+
+    return finalFilename;
 };
 
 CABLES.Patch.prototype.clear=function()
@@ -594,7 +599,7 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
                     if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
                     if(port && (port.uiAttribs.display=='bool' || port.uiAttribs.type=='bool') && !isNaN(objPort.value) ) objPort.value=true===objPort.value;
 
-                    if(port && port.type!=OP_PORT_TYPE_TEXTURE)port.set(objPort.value);
+                    if(port && objPort.value!==undefined && port.type!=OP_PORT_TYPE_TEXTURE)port.set(objPort.value);
                     if(objPort.animated)port.setAnimated(objPort.animated);
                     if(objPort.anim)
                     {

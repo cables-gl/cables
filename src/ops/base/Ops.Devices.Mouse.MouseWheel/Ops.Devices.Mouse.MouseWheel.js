@@ -34,6 +34,22 @@ anim.setValue(Date.now()/1000.0-startTime,absVal.get());
 var dir=1;
 var isWindows=navigator.appVersion.indexOf("Win")!=-1;
 
+min.onChange=function()
+{
+    checkValue();
+    console.log(v);
+    absVal.set( v );
+    console.log(v);
+};
+
+max.onChange=function()
+{
+    checkValue();
+    console.log(v);
+    absVal.set( v );
+    console.log(v);
+};
+
 
 reset.onTriggered=function()
 {
@@ -78,8 +94,8 @@ function checkValue()
     {
         if(v<min.get())v=min.get();
         if(v>max.get())v=max.get();
-
     }
+
 }
 
 flip.onChange=function()
