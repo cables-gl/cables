@@ -83,6 +83,6 @@ function calc()
     
     // op.log('subdiv ',inPoints.length,arr.length);
     // op.log(arr);
-    
+    result.set(null);
     result.set(arr);
 }

@@ -29,8 +29,7 @@ float rand(float n){return fract(sin(n) * 43758.5453123);}
 void main()
 {
     float psMul=sqrt(canvasWidth*canvasHeight)*0.001+0.00000000001;
-
-
+    float sizeMultiply=1.0;
 
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
@@ -44,7 +43,7 @@ void main()
 
     if(randomSize>0.0) psMul+=rand(attrVertIndex)*randomSize;
 
-
+    psMul*=sizeMultiply;
 
     #ifndef SCALE_BY_DISTANCE
         gl_PointSize = pointSize * psMul;
