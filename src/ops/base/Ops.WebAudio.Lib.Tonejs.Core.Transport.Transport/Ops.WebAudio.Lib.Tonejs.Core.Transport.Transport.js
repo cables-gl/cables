@@ -83,13 +83,13 @@ loopPort.onChange = function() {
 
 loopStartPort.onChange = function() {
     try {
-        Tone.Transport.set("loopStart", loopStartPort.get());
+        Tone.Transport.set("loopStart", loopStartPort.get() || 0);
     } catch(e) {}
 };
 
 loopEndPort.onChange = function() {
     try {
-        Tone.Transport.set("loopEnd", loopEndPort.get());
+        Tone.Transport.set("loopEnd", loopEndPort.get() || 0);
     } catch(e) {}
 };
 
