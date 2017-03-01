@@ -175,7 +175,7 @@ CABLES.WebAudio.loadAudioFile = function(patch, url, onFinished, onError) {
 
 CABLES.WebAudio.isValidToneTime = function(t) {
     try{
-	    var time = new Tone.TimeBase(t);
+	    var time = new Tone.Time(t);
     } catch(e) {
     	return false;
     }
