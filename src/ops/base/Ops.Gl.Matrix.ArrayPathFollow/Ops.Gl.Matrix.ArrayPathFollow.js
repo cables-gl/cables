@@ -62,14 +62,17 @@ function setup()
         animX.setValue(i/3*timeStep,arr[i+0]*size.get());
         animY.setValue(i/3*timeStep,arr[i+1]*size.get());
         animZ.setValue(i/3*timeStep,arr[i+2]*size.get());
-        animLength=i/3*timeStep;
+        animLength=i/3*timeStep+lookAhead.get();
     }
     
     for(i=0;i<arr.length/3;i++)
     {
         var t = i*timeStep;
-        var nt = (i*timeStep+timeStep)%animLength;
-        
+        // var nt = (i*timeStep+timeStep*lookAhead.get())%animLength;
+        var nt = (t+lookAhead.get()+offset.get())%(animLength);
+        // var nt = i+timeStep+ ( (i+timeStep)+(timeStep*lookAhead.get())+parseFloat(timeStep*offset.get()))%animLength;
+
+
         vec3.set(vec, 
             animX.getValue(t),
             animY.getValue(t),
@@ -80,12 +83,18 @@ function setup()
             animY.getValue(nt),
             animZ.getValue(nt)
         );
-    
-        // console.log( nt,animLength,vecn );
 
-        vec3.set(vec,vecn[0]-vec[0],vecn[1]-vec[1],vecn[2]-vec[2]);
+        // vec3.set(vec,vecn[0]-vec[0],vecn[1]-vec[1],vecn[2]-vec[2]);
+        // vec3.normalize(vec,vec);
+        // vec3.set(vecn,0,0,1);
+
+        vec3.set(vec,vec[0],vec[1],vec[2]);
         vec3.normalize(vec,vec);
-        vec3.set(vecn,0,0,1);
+
+        vec3.set(vecn,vecn[0],vecn[1],vecn[2]);
+        vec3.normalize(vecn,vecn);
+
+
     
         if(doAlign.get())
         {
@@ -95,15 +104,8 @@ function setup()
             animQY.setValue(i*timeStep,q[1]);
             animQZ.setValue(i*timeStep,q[2]);
             animQW.setValue(i*timeStep,q[3]);
-            
         }
-
-
-        // t,nt);
-
-
     }
-
 }
 
 size.onValueChange(setup);
@@ -149,7 +151,6 @@ function render()
         CABLES.TL.Anim.slerpQuaternion(t,q,animQX,animQY,animQZ,animQW);
         mat4.fromQuat(qMat, q);
         mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
-        
     }
 
     trigger.trigger();
