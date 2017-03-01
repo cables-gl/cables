@@ -3,7 +3,7 @@ op.name="Note";
 // constants
 var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 var NOTE_DEFAULT = "C";
-var APPEND_OCTAVE_DEFAULT = false;
+var APPEND_OCTAVE_DEFAULT = true;
 var OCTAVE_DEFAULT = 3;
 var OCTAVE_MIN = 0;
 var OCTAVE_MAX = 7;
