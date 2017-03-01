@@ -54,9 +54,11 @@ refresh.onTriggered = function()
     var average = values / array.length;
     
     avgVolume.set(average/128);
-
-    if(getFreq) analyser.getByteFrequencyData(2);
-        else analyser.getByteTimeDomainData(fftDataArray);
+    try{
+        if(getFreq) analyser.getByteFrequencyData(2);
+        else analyser.getByteTimeDomainData(fftDataArray);    
+    } catch(e) {}
+    
     
     fftOut.set(null);
     fftOut.set(fftDataArray);

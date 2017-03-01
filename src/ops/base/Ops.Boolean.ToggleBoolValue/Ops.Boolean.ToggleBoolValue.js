@@ -5,5 +5,5 @@ var outbool=op.addOutPort(new Port(op,"out bool",OP_PORT_TYPE_VALUE,{display:'bo
 
 bool.onValueChanged=function()
 {
-  outbool.set(!bool.get());
+  outbool.set( ! (true==bool.get()) );
 };

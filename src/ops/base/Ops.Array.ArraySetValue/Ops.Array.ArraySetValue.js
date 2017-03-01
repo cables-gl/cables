@@ -1,6 +1,6 @@
 
 op.name='ArraySetValue';
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.inFunctionButton("exe");
 
 var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
 var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
@@ -16,11 +16,14 @@ function update()
 {
     if(!array.get())return;
     array.get()[index.get()]=value.get();
+
+    console.log(index.get(),value.get());
+
     values.set(null);
     values.set(array.get());
 }
 
-index.onChange=updateIndex;
-array.onChange=updateIndex;
-value.onChange=update;
-// exe.onTriggered=update;
+// index.onChange=updateIndex;
+// array.onChange=updateIndex;
+// value.onChange=update;
+exe.onTriggered=update;

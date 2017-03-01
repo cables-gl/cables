@@ -32,12 +32,16 @@ var BASE_FREQUENCY_MAX = 20000; // ?
 var OCTAVES_DEFAULT = 4;
 var OCTAVES_MIN = 1;
 var OCTAVES_MIN = 12; // ?
+var BASE_FREQUENCY_DEFAULT = 200;
+var BASE_FREQUENCY_MIN = 0.01;
+var BASE_FREQUENCY_MAX = 20000;
 
 // vars
 var node = new Tone.FrequencyEnvelope();
 
 // in ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+//var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var baseFrequencyPort = op.inValue("Base Frequency", BASE_FREQUENCY_DEFAULT);
 var attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
 var decayPort = op.inValue("Decay", DECAY_DEFAULT);
 var sustainPort = op.inValueSlider("Sustain", SUSTAIN_DEFAULT);
@@ -49,14 +53,15 @@ releaseCurvePort.set(ATTACK_CURVE_DEFAULT);
 var exponentPort = op.inValue("Exponent", EXPONENT_DEFAULT);
 
 // value change listeners
-attackPort.onChange = setNodeValue("attack", attackPort.get());
-decayPort.onChange = setNodeValue("decay", decayPort.get());
-sustainPort.onChange = setNodeValue("sustain", sustainPort.get());
-releasePort.onChange = setNodeValue("release", releasePort.get());
-attackCurvePort.onChange = setNodeValue("attackCurve", attackCurvePort.get());
-releaseCurvePort.onChange = setNodeValue("releaseCurve", releaseCurvePort.get());
+baseFrequencyPort.onChange = function() { setNodeValue("baseFrequency", baseFrequencyPort.get()); };
+attackPort.onChange = function() { setNodeValue("attack", attackPort.get()); };
+decayPort.onChange = function() { setNodeValue("decay", decayPort.get()); };
+sustainPort.onChange = function() { setNodeValue("sustain", sustainPort.get()); };
+releasePort.onChange = function() { setNodeValue("release", releasePort.get()); };
+attackCurvePort.onChange = function() { setNodeValue("attackCurve", attackCurvePort.get()); };
+releaseCurvePort.onChange = function() { setNodeValue("releaseCurve", releaseCurvePort.get()); };
 
-exponentPort.onChange = setNodeValue("exponent", releasePort.get());
+exponentPort.onChange = function() { setNodeValue("exponent", releasePort.get()); };
 
 function setNodeValue(key, value) {
     node.set(key, value);
