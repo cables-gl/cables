@@ -181,3 +181,12 @@ CABLES.WebAudio.isValidToneTime = function(t) {
     }
     return true;
 };
+
+CABLES.WebAudio.isValidToneNote = function(note) {
+  try {
+    Tone.Frequency(note);
+  } catch(e) {
+    return false;
+  }
+  return true;
+};
