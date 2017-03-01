@@ -9,12 +9,12 @@ CABLES.WebAudio.createAudioContext = function(op) {
   if(window.AudioContext) {
     if(!window.audioContext) {
       window.audioContext = new AudioContext();
-      // check if tone.js lib is being used
-      if(window.Tone && !CABLES.WebAudio.toneJsInitialized) {
-        // set current audio context in tone.js
-        Tone.setContext(window.audioContext);
-        CABLES.WebAudio.toneJsInitialized = true;
-      }
+    }
+    // check if tone.js lib is being used
+    if(window.Tone && !CABLES.WebAudio.toneJsInitialized) {
+      // set current audio context in tone.js
+      Tone.setContext(window.audioContext);
+      CABLES.WebAudio.toneJsInitialized = true;
     }
   } else {
     op.patch.config.onError('NO_WEBAUDIO','Web Audio is not supported in this browser.');
@@ -69,6 +69,8 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
 };
 
 CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
+  op.log("Audio out port created: ", audioNode);
+  op.log("Audio out.connect: ", audioNode.connect);
   if(!op || !portName || !audioNode) {
     op.log("ERROR: createAudioOutPort needs three parameters, op, portName and audioNode");
     return;
@@ -175,9 +177,18 @@ CABLES.WebAudio.loadAudioFile = function(patch, url, onFinished, onError) {
 
 CABLES.WebAudio.isValidToneTime = function(t) {
     try{
-	    var time = new Tone.TimeBase(t);
+	    var time = new Tone.Time(t);
     } catch(e) {
     	return false;
     }
     return true;
+};
+
+CABLES.WebAudio.isValidToneNote = function(note) {
+  try {
+    Tone.Frequency(note);
+  } catch(e) {
+    return false;
+  }
+  return true;
 };
