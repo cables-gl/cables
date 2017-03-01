@@ -8,21 +8,22 @@ CGL.Marker=function(cgl)
     var geom=new CGL.Geometry("marker");
     geom.setPointVertices(
         [
-            0, 0, 0,   1,0,0,
-            0, 0, 0,   0,1,0,
-            0, 0, 0,   0,0,1,
+            0.00001, 0, 0,   1,0,0,
+            0, 0.00001, 0,   0,1,0,
+            0, 0, 0.00001,   0,0,1,
         ]);
     var mesh=new CGL.Mesh(cgl, geom, cgl.gl.LINES);
     mesh.setGeom(geom);
-
 
     var shader=new CGL.Shader(cgl,'markermaterial');
 
     var frag=''
         .endl()+'precision highp float;'
+        .endl()+'varying vec3 axisColor;'
+
         .endl()+'void main()'
         .endl()+'{'
-        .endl()+'    vec4 col=vec4(0.0,1.0,1.0,1.0);'
+        .endl()+'    vec4 col=vec4(axisColor,1.0);'
         .endl()+'    gl_FragColor = col;'
         .endl()+'}';
 
@@ -30,10 +31,15 @@ CGL.Marker=function(cgl)
         .endl()+'attribute vec3 vPosition;'
         .endl()+'uniform mat4 projMatrix;'
         .endl()+'uniform mat4 mvMatrix;'
+        .endl()+'varying vec3 axisColor;'
 
         .endl()+'void main()'
         .endl()+'{'
-        .endl()+'   vec4 pos=vec4(vPosition,  1.0);'
+        .endl()+'   vec4 pos=vec4(vPosition, 1.0);'
+        .endl()+'   if(pos.x!=0.0)axisColor=vec3(1.0,0.3,0.0);'
+        .endl()+'   if(pos.y!=0.0)axisColor=vec3(0.0,1.0,0.2);'
+        .endl()+'   if(pos.z!=0.0)axisColor=vec3(0.0,0.5,1.0);'
+
         .endl()+'   gl_Position = projMatrix * mvMatrix * pos;'
         .endl()+'}';
 

@@ -24,12 +24,12 @@ function sliceArray()
     }
 }
 
-
 inArr.onChange=function()
 {
     if(!inArr.get())return;
     if(!comparator)
     {
+        outArr.set(null);
         outArr.set(inArr.get());
         return;
     }
@@ -50,6 +50,4 @@ what.onChange=function()
     if(what.get()=='Y')comparator=compareY;
     if(what.get()=='Z')comparator=compareZ;
     if(what.get()=='XYZ')comparator=compareXYZ;
-
-}
-
+};
