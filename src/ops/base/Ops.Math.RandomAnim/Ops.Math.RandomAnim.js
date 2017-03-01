@@ -9,6 +9,8 @@ var seed=op.inValue("random seed",0);
 
 var duration=op.inValue("duration",0.5);
 
+// var offset=op.inValue("offset",0);
+
 var result=op.outValue("result");
 
 var anim=new CABLES.TL.Anim();
@@ -43,7 +45,7 @@ exe.onTriggered=function()
 
     Math.randomSeed=seed.get();
 
-
+// +offset.get())%duration.get()
     var t=op.patch.freeTimer.get();
     var v=anim.getValue(t);
     if(anim.hasEnded(t))

@@ -28,7 +28,7 @@ synth = DEFAULT_SYNTH;
 notePort.set("C4");
 velocityPort.set(1);
 durationPort.set("4n");
-timePort.set();
+timePort.set("+0");
 audioOutPort.set(synth);
 
 // trigger listeners

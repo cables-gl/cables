@@ -25,7 +25,7 @@ function init()
 {
     Math.randomSeed=seed.get();
     
-    arr.length=parseInt(numValues.get()) || 100;
+    arr.length=Math.abs(parseInt(numValues.get())) || 100;
     for(var i=0;i<arr.length;i++)
     {
         arr[i]=Math.seededRandom()* ( max.get() - min.get() ) + parseFloat(min.get()) ;
