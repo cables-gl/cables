@@ -14,7 +14,6 @@ CABLES.WebAudio.createAudioContext = function(op) {
     if(window.Tone && !CABLES.WebAudio.toneJsInitialized) {
       // set current audio context in tone.js
       Tone.setContext(window.audioContext);
-      console.log("Tone.setContext(window.audioContext); called");
       CABLES.WebAudio.toneJsInitialized = true;
     }
   } else {
