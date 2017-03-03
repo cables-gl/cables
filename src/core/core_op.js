@@ -296,8 +296,6 @@ CABLES.Op = function()
             Function.apply.call(console.log, console, arguments);
     };
 
-
-
     CABLES.Op.prototype.undoUnLinkTemporary=function()
     {
         if(this.shakeLink)this.shakeLink.remove();
