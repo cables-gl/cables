@@ -25,12 +25,8 @@ function doRender()
     if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=op.index.get()) reload();
     if(draw.get())
     {
-        cgl.pushMvMatrix();
-        mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
-
         if(mesh!==null) mesh.render(cgl.getShader());
         next.trigger();
-        cgl.popMvMatrix();
     }
 }
 
