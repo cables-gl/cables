@@ -404,16 +404,12 @@ CGL.Geometry.prototype.mapTexCoords2d=function()
     }
 };
 
-
 // -----------------
-
-
 
 CGL.Geometry.LinesToGeom=function(points,options,geom)
 {
     // todo: optimize: do not create new arrays if length is the same - use existing geom arrays ...
     if(!geom)geom=new CGL.Geometry();
-
 
     var norms=[];
     var i=0;

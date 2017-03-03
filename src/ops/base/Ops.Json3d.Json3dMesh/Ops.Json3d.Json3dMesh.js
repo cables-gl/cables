@@ -15,12 +15,14 @@ var draw=op.inValueBool("Draw",true);
 var centerPivot=op.inValueBool("Center Mesh",true);
 var inSize=op.inValue("Size",1);
 
+
 var next=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.outObject("Geometry");
 
 
 exe.onTriggered=render;
 filename.onChange=reload;
+centerPivot.onChange=setMesh;
 meshIndex.onChange=setMesh;
 inSize.onChange=updateScale;
 
@@ -65,29 +67,26 @@ function updateScale()
 function updateInfo(geom)
 {
     if(!CABLES.UI)return;
-    
 
     var nfo='<div class="panel">';
-    
 
     if(data)
     {
         nfo += 'Mesh '+(currentIndex+1)+' of '+data.meshes.length+'<br/>';
         nfo += '<br/>';
     }
-    
+
     if(geom)
     {
-        nfo += geom.verticesIndices.length+' faces <br/>';
-        nfo += geom.vertices.length+' vertices <br/>';
-        nfo += geom.texCoords.length+' texturecoords <br/>';
+        nfo += geom.verticesIndices.length/3+' faces <br/>';
+        nfo += geom.vertices.length/3+' vertices <br/>';
+        nfo += geom.texCoords.length/2+' texturecoords <br/>';
         if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
     }
-    
-    nfo+="</div>";
-    
-    op.uiAttr({info:nfo});
 
+    nfo+="</div>";
+
+    op.uiAttr({info:nfo});
 }
 
 
@@ -128,8 +127,6 @@ function setMesh()
     geom.verticesIndices=[];
     geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 
-    updateInfo();
-
     bounds=geom.getBounds();
     updateScale();
     updateInfo(geom);
@@ -138,7 +135,6 @@ function setMesh()
     mesh=new CGL.Mesh(cgl,geom);
 
     op.uiAttr({'warning':null});
-
 }
 
 function reload()
@@ -163,7 +159,6 @@ function reload()
                 else
                 {
                     if(CABLES.UI)op.uiAttr({'error':null});
-
                 }
 
                 try
@@ -174,7 +169,6 @@ function reload()
                 {
                     if(CABLES.UI)op.uiAttr({'error':'could not load file...'});
                     return;
-
                 }
 
                 setMesh(meshIndex.get());
@@ -190,6 +184,4 @@ function reload()
 
     if(CABLES.UI) gui.jobs().start({id:'loading3d'+loadingId,title:'loading 3d data'},doLoad);
         else doLoad();
-
-
 }
