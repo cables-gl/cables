@@ -42,6 +42,7 @@ var node = new Tone.FrequencyEnvelope();
 // in ports
 //var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
 var baseFrequencyPort = op.inValue("Base Frequency", BASE_FREQUENCY_DEFAULT);
+var octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
 var attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
 var decayPort = op.inValue("Decay", DECAY_DEFAULT);
 var sustainPort = op.inValueSlider("Sustain", SUSTAIN_DEFAULT);
@@ -54,6 +55,7 @@ var exponentPort = op.inValue("Exponent", EXPONENT_DEFAULT);
 
 // value change listeners
 baseFrequencyPort.onChange = function() { setNodeValue("baseFrequency", baseFrequencyPort.get()); };
+octavesPort.onChange = function() { setNodeValue("octaves", octavesPort.get()); };
 attackPort.onChange = function() { setNodeValue("attack", attackPort.get()); };
 decayPort.onChange = function() { setNodeValue("decay", decayPort.get()); };
 sustainPort.onChange = function() { setNodeValue("sustain", sustainPort.get()); };

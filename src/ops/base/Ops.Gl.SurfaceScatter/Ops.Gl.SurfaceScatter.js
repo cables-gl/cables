@@ -8,6 +8,8 @@ var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var index=op.addOutPort(new Port(op,"index",OP_PORT_TYPE_VALUE));
 
+var outPoints=op.outArray("Points");
+
 num.set(20);
 geometry.ignoreValueSerialize=true;
 
@@ -19,6 +21,7 @@ var vec=vec3.create();
 
 function initRandom()
 {
+    var points=[];
     objects.length=0;
 
     if(!geometry.get())
@@ -41,6 +44,11 @@ function initRandom()
         
         obj.pos=vec3.create();
         obj.norm=vec3.create();
+        
+        points.push( geom.vertices[geom.verticesIndices[faceIndex+0]*3+0] );
+        points.push( geom.vertices[geom.verticesIndices[faceIndex+0]*3+1] );
+        points.push( geom.vertices[geom.verticesIndices[faceIndex+0]*3+2] );
+        
         
         vec3.set(obj.pos,
             geom.vertices[geom.verticesIndices[faceIndex+0]*3+0],
@@ -65,6 +73,7 @@ function initRandom()
 
         objects.push(obj);
     }
+    outPoints.set(points);
 }
 
 geometry.onValueChanged=initRandom;

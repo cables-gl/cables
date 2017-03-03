@@ -58,6 +58,8 @@ function doRebuild()
     geomOut.set(null);
     geomOut.set(geom);
     
+    console.log(geom.vertices.length);
+    
 
     if(calcNormals.get())geom.calculateNormals({forceZUp:true});
     needsBuild=false;

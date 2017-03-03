@@ -1,13 +1,10 @@
 op.name="ArrayBuffer";
 
-
 var exec=op.inFunction("exec");
-
 var val=op.inValue("Value");
+var arrOut=op.outArray("Result");
 
 var arr=[];
-
-var arrOut=op.outArray("Result");
 
 var maxLength=op.inValue("Max Length",100);
 arrOut.set(arr);
@@ -23,11 +20,6 @@ function reset()
 
 exec.onTriggered=function()
 {
-
     for(var i=1;i<arr.length;i++)arr[i-1]=arr[i];
-
     arr[arr.length-1]=val.get();
-    
-
-
 };
