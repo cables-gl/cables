@@ -35,7 +35,7 @@ rebuild();
 
 render.onTriggered=function()
 {
-    if(op.instanced(render))return;
+    // if(op.instanced(render))return;
     
     mesh.render(cgl.getShader());
     
