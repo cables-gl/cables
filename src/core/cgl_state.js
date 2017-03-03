@@ -342,4 +342,25 @@ CGL.State=function()
         }
     };
 
+    this.printError=function(str)
+    {
+        var error = this.gl.getError();
+        if (error != this.gl.NO_ERROR )
+        {
+            var errStr='';
+            if(error==this.gl.OUT_OF_MEMORY)errStr="OUT_OF_MEMORY";
+            if(error==this.gl.INVALID_ENUM)errStr="INVALID_ENUM";
+            if(error==this.gl.INVALID_OPERATION)errStr="INVALID_OPERATION";
+            if(error==this.gl.INVALID_FRAMEBUFFER_OPERATION)errStr="INVALID_FRAMEBUFFER_OPERATION";
+            if(error==this.gl.INVALID_VALUE)errStr="INVALID_VALUE";
+            if(error==this.gl.CONTEXT_LOST_WEBGL)errStr="CONTEXT_LOST_WEBGL";
+            if(error==this.gl.NO_ERROR)errStr="NO_ERROR";
+
+            console.log("gl error: ",str,error,errStr);
+
+        }
+
+    };
+
+
 };

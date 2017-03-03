@@ -44,7 +44,6 @@ var onFilterChange=function()
 
 function doRender()
 {
-    
     if(!fb || reInitFb)
     {
         if(fb) fb.delete();
@@ -72,11 +71,15 @@ function doRender()
         fb.setSize( width.get(),height.get() );
     }
 
+
     fb.renderStart(cgl);
     
+
     // mesh.render(cgl.getShader());
     trigger.trigger();
+    cgl.printError("start r2t");
     fb.renderEnd(cgl);
+        cgl.printError("end r2t");
 
     cgl.resetViewPort();
 }
