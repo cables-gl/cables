@@ -7,7 +7,7 @@ var scene=new CABLES.Variable();
 cgl.frameStore.currentScene=null;
 
 var exe=op.inFunction("Render");
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
 var meshIndex=op.inValueInt("Mesh Index",0);
 
 
