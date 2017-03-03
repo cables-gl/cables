@@ -10,10 +10,30 @@ CGL.Uniform=function(__shader,__type,__name,_value)
     this._shader.addUniform(this);
     this.needsUpdate=true;
 
+
+
+    if(__type=='3f[]')
+    {
+        this.setValue=this.setValueArray3F.bind(this);
+        this.updateValue=this.updateValueArray3F.bind(this);
+    }
+
     if(__type=='f')
     {
         this.setValue=this.setValueF.bind(this);
         this.updateValue=this.updateValueF.bind(this);
+    }
+
+    if(__type=='i')
+    {
+        this.setValue=this.setValueI.bind(this);
+        this.updateValue=this.updateValueI.bind(this);
+    }
+
+    if(__type=='b')
+    {
+        this.setValue=this.setValueBool.bind(this);
+        this.updateValue=this.updateValueBool.bind(this);
     }
 
     if(__type=='4f')
@@ -93,6 +113,62 @@ CGL.Uniform.prototype.setValueF=function(v)
         this.needsUpdate=true;
         this._value=v;
     }
+};
+
+
+
+
+CGL.Uniform.prototype.updateValueI=function()
+{
+    if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    else this.needsUpdate=false;
+    this._shader.getCgl().gl.uniform1i(this._loc, this._value);
+    CGL.profileUniformCount++;
+};
+
+CGL.Uniform.prototype.setValueI=function(v)
+{
+    if(v!=this._value)
+    {
+        this.needsUpdate=true;
+        this._value=v;
+    }
+};
+
+
+CGL.Uniform.prototype.updateValueBool=function()
+{
+    if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    else this.needsUpdate=false;
+    this._shader.getCgl().gl.uniform1i(this._loc, this._value ? 1 : 0 );
+    CGL.profileUniformCount++;
+};
+
+CGL.Uniform.prototype.setValueBool=function(v)
+{
+    if(v!=this._value)
+    {
+        this.needsUpdate=true;
+        this._value=v;
+    }
+};
+
+
+
+CGL.Uniform.prototype.setValueArray3F=function(v)
+{
+    this.needsUpdate=true;
+    this._value=v;
+};
+
+CGL.Uniform.prototype.updateValueArray3F=function()
+{
+    if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        else this.needsUpdate=false;
+
+    if(!this._value)return;
+    this._shader.getCgl().gl.uniform3fv(this._loc, this._value);
+    CGL.profileUniformCount++;
 };
 
 CGL.Uniform.prototype.updateValue3F=function()

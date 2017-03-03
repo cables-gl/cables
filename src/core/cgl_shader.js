@@ -7,6 +7,7 @@ CGL.profileUniformCount=0;
 CGL.profileShaderCompiles=0;
 
 CGL.SHADERVAR_VERTEX_POSITION='vPosition';
+CGL.SHADERVAR_VERTEX_NUMBER='attrVertIndex';
 
 // ---------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 
-op.name='json3d Mesh';
+op.name='Mesh';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION ));
 op.index=op.addInPort(new Port(op,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
 var centerPivot=op.addInPort(new Port(op,"center pivot",OP_PORT_TYPE_VALUE,{display:'bool'} ));
@@ -25,8 +25,12 @@ function doRender()
     if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=op.index.get()) reload();
     if(draw.get())
     {
+        cgl.pushMvMatrix();
+        mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
+
         if(mesh!==null) mesh.render(cgl.getShader());
         next.trigger();
+        cgl.popMvMatrix();
     }
 }
 
@@ -87,7 +91,7 @@ function reload()
         nfo += geom.texCoords.length+' texturecoords <br/>';
         if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
         
-        op.uiAttr({info:nfo});
+        op.uiAttr({"info":nfo});
 
         geometryOut.set(geom);
         mesh=new CGL.Mesh(cgl,geom);
