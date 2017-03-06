@@ -29,7 +29,7 @@ varying vec3 vNormal;
 
 
 
-
+varying mat3 normalMatrix;
 
 
 
@@ -113,7 +113,7 @@ void main()
 
     // Rotate the object normals by a 3x3 normal matrix.
     // We could also do this CPU-side to avoid doing it per-vertex
-    mat3 normalMatrix = transpose_1_0(inverse_2_1(mat3(mvMatrix)));
+    normalMatrix = transpose_1_0(inverse_2_1(mat3(mvMatrix)));
     vNormal = normalize(normalMatrix * -norm);
 
     gl_Position = projMatrix * mvMatrix * pos;

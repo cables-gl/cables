@@ -173,14 +173,14 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
         if(specTexture.get())
         {
             if(specTextureUniform!==null)return;
-            shader.removeUniform('texSpec');
-            shader.define('HAS_TEXTURE_SPEC');
-            specTextureUniform=new CGL.Uniform(shader,'t','texSpec',2);
+            shader.removeUniform('texSpecular');
+            shader.define('HAS_TEXTURE_SPECULAR');
+            specTextureUniform=new CGL.Uniform(shader,'t','texSpecular',2);
         }
         else
         {
-            shader.removeUniform('texSpec');
-            shader.removeDefine('HAS_TEXTURE_SPEC');
+            shader.removeUniform('texSpecular');
+            shader.removeDefine('HAS_TEXTURE_SPECULAR');
             specTextureUniform=null;
         }
     };
