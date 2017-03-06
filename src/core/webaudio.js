@@ -121,10 +121,6 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
   port.onChange = function() {
     var audioInNode = port.get();
 
-    if(port.webAudio.previousAudioInNode) op.log("previousAudioInNode: ", port.webAudio.previousAudioInNode);
-    op.log("audioNode: ", audioNode);
-    op.log("audioInNode: ", audioInNode);
-
     if (audioInNode != undefined) {
       if(typeof audioInNode === 'object') {
         try {
@@ -134,12 +130,25 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
         }
         port.webAudio.previousAudioInNode = audioInNode;
       } else {
-        audioNode.value = audioInNode;
-        if(port.webAudio.previousAudioInNode) {
+        // tone.js audio param
+        if(audioNode._param && audioNode._param.minValue && audioNode._param.maxValue) {
+            if(audioInNode >= audioNode._param.minValue && audioInNode <= audioNode._param.maxValue) {
+                audioNode.value = audioInNode;
+            } else {
+              op.log("Warning: The value for an audio parameter is out of range!");
+            }
+        } else { // native Web Audio param
+          if(audioNode.minValue && audioNode.maxValue) {
+            if(audioInNode >= audioNode.minValue && audioInNode <= audioNode.maxValue) {
+                audioNode.value = audioInNode;
+            } else {
+              op.log("Warning: The value for an auudio parameter is out of range!");
+            }
+          }
+        }
+
+        if(port.webAudio.previousAudioInNode && port.webAudio.previousAudioInNode.disconnect) {
           try{
-              op.log("disconnecting node :");
-              op.log("previousAudioInNode: ", port.webAudio.previousAudioInNode);
-              op.log("audioNode: ", audioNode);
               port.webAudio.previousAudioInNode.disconnect(audioNode);
           } catch(e) {
               console.log(e);
