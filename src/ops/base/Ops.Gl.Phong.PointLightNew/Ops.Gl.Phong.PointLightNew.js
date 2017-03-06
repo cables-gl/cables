@@ -4,7 +4,10 @@ var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
-var attenuation=op.addInPort(new Port(op,"attenuation",OP_PORT_TYPE_VALUE));
+
+var fallOff=op.inValue("Fall Off",0);
+var radius=op.inValue("Radius",10);
+
 
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -21,15 +24,17 @@ mul.set(1);
 r.set(1);
 g.set(1);
 b.set(1);
-attenuation.set(0);
 
+
+radius.onValueChanged=updateAll;
+fallOff.onValueChanged=updateAll;
 r.onValueChanged=updateAll;
 g.onValueChanged=updateAll;
 b.onValueChanged=updateAll;
 x.onValueChanged=updateAll;
 y.onValueChanged=updateAll;
 z.onValueChanged=updateAll;
-attenuation.onValueChanged=updateAttenuation;
+
 
 
 var id=CABLES.generateUUID();
@@ -48,11 +53,6 @@ function updateColor()
     light.changed=true;
 }
 
-function updateAttenuation()
-{
-    light.attenuation=attenuation.get();
-    light.changed=true;
-}
 
 function updatePos()
 {
@@ -66,10 +66,11 @@ function updateAll()
     light.id=id;
     light.type=0;
     light.changed=true;
+    light.radius=radius.get();
+    light.fallOff=fallOff.get();
 
     updatePos();
     updateColor();
-    updateAttenuation();
 }
 
 exe.onTriggered=function()
