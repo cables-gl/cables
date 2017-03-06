@@ -77,9 +77,9 @@ function doRender()
 
     // mesh.render(cgl.getShader());
     trigger.trigger();
-    cgl.printError("start r2t");
+    // cgl.printError("start r2t");
     fb.renderEnd(cgl);
-        cgl.printError("end r2t");
+        // cgl.printError("end r2t");
 
     cgl.resetViewPort();
 }
