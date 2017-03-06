@@ -17,7 +17,7 @@ numy.set(5);
 
 exe.onTriggered=function()
 {
-    op.patch.instancing.pushLoop(numx.get()*numy.get());
+    op.patch.instancing.pushLoop((numx.get()+1)*numy.get());
 
     var subX=0;
     var subY=0;
@@ -27,10 +27,12 @@ exe.onTriggered=function()
         subY=(numy.get()*mul.get())/2;
     }
     var m=mul.get();
-    for(var y=numy.get()-1;y>-1;y--)
+    // for(var y=numy.get()-1;y>-1;y--)
+    for(var y=0;y<numy.get()-1;y++)
     {
         idxy.set(y*m - subY);
-        for(var x=numx.get()-1;x>-1;x--)
+        // for(var x=numx.get()-1;x>-1;x--)
+        for(var x=0;x<numx.get()-1;x++)
         {
             idxx.set(x*m - subX);
             idx.set(x+y*numx.get());

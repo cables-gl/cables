@@ -1,7 +1,7 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-op.name='json3dFile';
+op.name='json3dScene';
 var scene=new CABLES.Variable();
 
 cgl.frameStore.currentScene=null;
@@ -64,15 +64,15 @@ function loadMaterials(data,root)
                         setMatOp.getPort('name').set(matName);
                         setMatOp.name='Set Material '+matName;
                         self.patch.link(root,'trigger 0',setMatOp,'exe');
-    
+
                         var matOp=self.patch.addOp('Ops.Gl.Phong.PhongMaterial',{"subPatch":op.uiAttribs.subPatch,"translate":{x:self.uiAttribs.translate.x+350,y:posyAdd}});
                         matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
                         matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
                         matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
                         matOp.uiAttribs.title=matOp.name='Material '+matName;
-    
+
                         self.patch.link(setMatOp,'material',matOp,'shader');
-    
+
                         prevOp=matOp;
 
                     });
@@ -605,7 +605,7 @@ var reload=function()
             });
     }
 
-    var loadingId=self.patch.loading.start('json3dFile',self.filename.get());
+    var loadingId=self.patch.loading.start('json3dScene',self.filename.get());
     if(CABLES.UI) gui.jobs().start({id:'loading3d'+loadingId,title:'loading 3d data'},doLoad);
         else doLoad();
 

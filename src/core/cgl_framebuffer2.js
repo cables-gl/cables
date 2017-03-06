@@ -18,7 +18,6 @@ CGL.Framebuffer2=function(cgl,w,h,options)
 
     if(!this._options.hasOwnProperty("multisampling"))this._options.multisampling=true;
 
-    console.log('multisampling: ',this._options.multisampling);
 
     this._texture=new CGL.Texture(cgl,
         {
@@ -30,10 +29,6 @@ CGL.Framebuffer2=function(cgl,w,h,options)
         {
             "isDepthTexture":true
         });
-
-
-
-
 
     this.setSize(w||512 ,h||512);
 };
@@ -76,6 +71,7 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
 
     CGL.profileFrameBuffercreate++;
 
+
     this._frameBuffer=this._cgl.gl.createFramebuffer();
     this._colorBuffer=this._cgl.gl.createFramebuffer();
 
@@ -99,7 +95,7 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
 
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
     if(!this._options.isFloatingPointTexture && this._options.multisampling)
-        this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4,this._cgl.gl.DEPTH_COMPONENT16, this._width,this._height);
+        this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4,this._cgl.gl.DEPTH_COMPONENT32F, this._width,this._height);
         else
         this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.DEPTH_COMPONENT16, this._width, this._height);
 
@@ -152,7 +148,6 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
 
 
-
 };
 
 
@@ -182,15 +177,15 @@ CGL.Framebuffer2.prototype.renderEnd=function()
     this._cgl.gl.blitFramebuffer(
         0, 0, this._width, this._height,
         0, 0, this._width, this._height,
-        this._cgl.gl.COLOR_BUFFER_BIT, this._cgl.gl.NEAREST
+        this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST
     );
 
 
-    this._cgl.gl.blitFramebuffer(
-        0, 0, this._width, this._height,
-        0, 0, this._width, this._height,
-        this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST
-    );
+    // this._cgl.gl.blitFramebuffer(
+    //     0, 0, this._width, this._height,
+    //     0, 0, this._width, this._height,
+    //     this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST
+    // );
 
     // Pass 2
 

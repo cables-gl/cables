@@ -87,6 +87,11 @@ op.onAnimFrame=function(time)
         CGL.Texture.texturePreviewer.render(CGL.Texture.previewTexture);
     }
     cgl.renderEnd(cgl);
+    
+    
+    cgl.printError('mainloop end');
+    
+    
 
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     rframes++;

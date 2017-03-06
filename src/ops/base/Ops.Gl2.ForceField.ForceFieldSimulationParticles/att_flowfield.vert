@@ -1,7 +1,6 @@
 
 
 
-
 col=rndpos+0.5;
 
 // vec3.add(this.pos,this.pos,this.velocity);

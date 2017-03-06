@@ -45,7 +45,6 @@ CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
                 });
         }
     }
-
 };
 
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
@@ -161,7 +160,7 @@ CGL.Mesh.prototype._setVertexNumbers=function()
 
         for(i=0;i<numVerts;i++)this._verticesNumbers[i]=i;
 
-        this.setAttribute('attrVertIndex',this._verticesNumbers,1,
+        this.setAttribute(CGL.SHADERVAR_VERTEX_NUMBER,this._verticesNumbers,1,
             function(attr,geom,shader)
             {
                 if(!shader.uniformNumVertices) shader.uniformNumVertices=new CGL.Uniform(shader,'f','numVertices',numVerts);
@@ -469,5 +468,11 @@ CGL.Mesh.prototype.render=function(shader)
 
     // cgl.lastMesh=this;
     // cgl.lastMeshShader=shader;
+
+};
+
+CGL.Mesh.prototype.dispose=function()
+{
+    
 
 };

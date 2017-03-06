@@ -327,6 +327,7 @@ CGL.Geometry.prototype.calcBaycentric=function()
     }
 };
 
+
 CGL.Geometry.prototype.getBounds=function()
 {
     var bounds={
@@ -352,6 +353,12 @@ CGL.Geometry.prototype.getBounds=function()
             bounds.minZ=Math.min(bounds.minZ,this.vertices[i+2]);
         }
     }
+
+    bounds.x=Math.abs(bounds.maxX)+ Math.abs(bounds.minX);
+    bounds.y=Math.abs(bounds.maxY)+ Math.abs(bounds.minY);
+    bounds.z=Math.abs(bounds.maxZ)+ Math.abs(bounds.minZ);
+
+    bounds.maxAxis=Math.max(bounds.z,Math.max(bounds.x,bounds.y));
 
     return bounds;
 };
@@ -397,16 +404,12 @@ CGL.Geometry.prototype.mapTexCoords2d=function()
     }
 };
 
-
 // -----------------
-
-
 
 CGL.Geometry.LinesToGeom=function(points,options,geom)
 {
     // todo: optimize: do not create new arrays if length is the same - use existing geom arrays ...
     if(!geom)geom=new CGL.Geometry();
-
 
     var norms=[];
     var i=0;

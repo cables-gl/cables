@@ -16,13 +16,19 @@ radius.set(1);
 percent.set(1);
 
 var pos=[];
-segments.onValueChanged=calc;
-radius.onValueChanged=calc;
-percent.onValueChanged=calc;
-calc();
+segments.onChange=calcLater;
+radius.onChange=calcLater;
+percent.onChange=calcLater;
 
-render.onTriggered=function()
+needsCalc=true;
+// calc();
+
+render.onTriggered=doRender;
+
+function doRender()
 {
+
+    if(needsCalc)calc();
     for(var i=0;i<pos.length;i++)
     {
         cgl.pushMvMatrix();
@@ -34,12 +40,17 @@ render.onTriggered=function()
 
         cgl.popMvMatrix();
     }
-};
 
+}
 
+function calcLater()
+{
+    needsCalc=true;
+}
 
 function calc()
 {
+    needsCalc=false;
     pos.length=0;
 
     var i=0,degInRad=0;

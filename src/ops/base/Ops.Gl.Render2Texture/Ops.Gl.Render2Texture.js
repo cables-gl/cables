@@ -44,12 +44,11 @@ var onFilterChange=function()
 
 function doRender()
 {
-    
     if(!fb || reInitFb)
     {
         if(fb) fb.delete();
         if(cgl.glVersion>=2) fb=new CGL.Framebuffer2(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
-            else 
+            else
             fb=new CGL.Framebuffer(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
 
         if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
@@ -60,7 +59,7 @@ function doRender()
         texDepth.set ( fb.getTextureDepth() );
         reInitFb=false;
     }
-    
+
     if(useVPSize.val)
     {
         width.set( cgl.getViewPort()[2] );
@@ -72,11 +71,15 @@ function doRender()
         fb.setSize( width.get(),height.get() );
     }
 
+
     fb.renderStart(cgl);
-    
+
+
     // mesh.render(cgl.getShader());
     trigger.trigger();
+    // cgl.printError("start r2t");
     fb.renderEnd(cgl);
+    // cgl.printError("end r2t");
 
     cgl.resetViewPort();
 }

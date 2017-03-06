@@ -17,8 +17,6 @@ function update()
     if(!array.get())return;
     array.get()[index.get()]=value.get();
 
-    console.log(index.get(),value.get());
-
     values.set(null);
     values.set(array.get());
 }

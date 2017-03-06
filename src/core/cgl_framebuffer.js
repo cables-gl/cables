@@ -132,6 +132,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
         cgl.popMvMatrix();
         cgl.resetViewPort();
+
+
     };
 
     this.delete=function()

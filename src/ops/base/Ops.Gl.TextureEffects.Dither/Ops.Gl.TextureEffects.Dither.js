@@ -1,39 +1,48 @@
 op.name="Dither";
 
 var render=op.inFunction("Render");
+
+var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+var amount=op.inValueSlider("Amount",1);
+
+
 var trigger=op.outFunction("Trigger");
 
-var amount=op.inValue("amount",2);
+
+var strength=op.inValue("strength",2);
 var threshold=op.inValueSlider("threshold",0.35);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
+var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'varying vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
+    .endl()+'uniform float strength;'
     .endl()+'uniform float amount;'
     .endl()+'uniform float width;'
     .endl()+'uniform float height;'
     .endl()+'uniform float threshold;'
     .endl()+''
 
-    .endl()+'vec4 lumcoeff = vec4(0.299,0.587,0.114, 0.);'
+    .endl()+'const vec4 lumcoeff = vec4(0.299,0.587,0.114, 0.);'
 
-    .endl()+'   float mult = 1.0 / amount;'
+    
     .endl()+'   mat4 adjustments = (mat4('
     .endl()+'       1, 13, 4, 16,'
     .endl()+'       9, 5, 12, 8,'
     .endl()+'       3, 15, 2, 14,'
     .endl()+'       11, 7, 10, 6'
-    .endl()+'   ) - 8.) * mult;'
+    .endl()+'   ) - 8.) *  1.0 / strength;'
     
     .endl()+'   float getLuminance( vec4 color ) {'
     .endl()+'       return (0.2126*color.r + 0.7152*color.g + 0.0722*color.b);'
     .endl()+'   }'
-    
+    +CGL.TextureEffect.getBlendCode()
+
     .endl()+'   float adjustFrag( float val, vec2 coord ) {'
     .endl()+'       vec2 coordMod = mod(vec2(coord.x*width,coord.y*height), 4.0);'
     .endl()+'       int xMod = int(coordMod.x);'
@@ -56,27 +65,40 @@ var srcFrag=''
 
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
-    .endl()+'   col=texture2D(tex,texCoord);'
 
-    .endl()+'    float vidLum = getLuminance(col);'
-    .endl()+'    vidLum = adjustFrag(vidLum, texCoord.xy);'
+    .endl()+'   vec4 base=texture2D(tex,texCoord);'
+    .endl()+'   vec4 color;'
 
-    .endl()+'    if (vidLum > threshold) {'
-    .endl()+'        gl_FragColor = vec4(1, 1, 1, 1);'
+    .endl()+'    float lum = getLuminance(base);'
+    .endl()+'    lum = adjustFrag(lum, texCoord.xy);'
+
+
+
+    .endl()+'    if (lum > threshold) {'
+    .endl()+'        color = vec4(1, 1, 1, 1);'
     .endl()+'    } else {'
-    .endl()+'    	gl_FragColor = vec4(0, 0, 0, 1);'
+    .endl()+'    	color = vec4(0, 0, 0, 1);'
     .endl()+'    }'
+
+
+    .endl()+'   vec4 col=vec4( _blend(base.rgb,color.rgb) ,1.0);'
+    .endl()+'   col=vec4( mix( color.rgb, base.rgb ,1.0-base.a*amount),1.0);'
+    .endl()+'  	gl_FragColor = col;'
 
 
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+var strengthUniform=new CGL.Uniform(shader,'f','strength',strength);
 var uniWidth=new CGL.Uniform(shader,'f','width',0);
 var uniHeight=new CGL.Uniform(shader,'f','height',0);
 var unithreshold=new CGL.Uniform(shader,'f','threshold',threshold);
+
+blendMode.onValueChanged=function()
+{
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};
 
 
 render.onTriggered=function()

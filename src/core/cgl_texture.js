@@ -125,8 +125,8 @@ CGL.Texture.prototype.setSize=function(w,h)
     if(this.textureType==CGL.Texture.TYPE_DEPTH)
     {
         var tcomp=this._cgl.gl.DEPTH_COMPONENT;
-        if(this._cgl.glVersion!=1) tcomp=this._cgl.gl.DEPTH_COMPONENT16;
-        this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
+        if(this._cgl.glVersion!=1) tcomp=this._cgl.gl.DEPTH_COMPONENT32F;
+        this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
     }
     else
     {
@@ -138,6 +138,9 @@ CGL.Texture.prototype.setSize=function(w,h)
         this._cgl.gl.generateMipmap(this.texTarget);
     }
     this._cgl.gl.bindTexture(this.texTarget, null);
+
+
+    this._cgl.printError("tex create");
 };
 
 CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
