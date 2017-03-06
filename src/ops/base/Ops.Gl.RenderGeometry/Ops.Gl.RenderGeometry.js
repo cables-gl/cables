@@ -56,6 +56,7 @@ function update()
         }
 
         mesh.addVertexNumbers=vertNums.get();
+
         mesh.setGeom(geometry.get());
 
 

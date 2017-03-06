@@ -5,35 +5,50 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
 
-var fallOff=op.inValue("Fall Off",0);
+var fallOff=op.inValue("Fall Off",11);
 var radius=op.inValue("Radius",10);
-
-
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
 var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
 var z=op.addInPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
 
+var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+
+var ambientR=op.addInPort(new Port(op,"Ambient R",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var ambientG=op.addInPort(new Port(op,"Ambient G",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var ambientB=op.addInPort(new Port(op,"Ambient B",OP_PORT_TYPE_VALUE,{ display:'range' }));
+
+
 var mul=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var cgl=op.patch.cgl;
+
+ambientR.set(0);
+ambientG.set(0);
+ambientB.set(0);
 mul.set(1);
 r.set(1);
 g.set(1);
 b.set(1);
 
 
-radius.onValueChanged=updateAll;
-fallOff.onValueChanged=updateAll;
-r.onValueChanged=updateAll;
-g.onValueChanged=updateAll;
-b.onValueChanged=updateAll;
-x.onValueChanged=updateAll;
-y.onValueChanged=updateAll;
-z.onValueChanged=updateAll;
+var cgl=op.patch.cgl;
+
+
+radius.onChange=updateAll;
+fallOff.onChange=updateAll;
+r.onChange=updateAll;
+g.onChange=updateAll;
+b.onChange=updateAll;
+x.onChange=updateAll;
+y.onChange=updateAll;
+z.onChange=updateAll;
+
+ambientR.onChange=updateAll;
+ambientG.onChange=updateAll;
+ambientB.onChange=updateAll;
+
 
 
 
@@ -50,6 +65,7 @@ updateAll();
 function updateColor()
 {
     light.color=[ r.get(), g.get(), b.get() ];
+    light.ambient=[ ambientR.get(), ambientG.get(), ambientB.get() ];
     light.changed=true;
 }
 
