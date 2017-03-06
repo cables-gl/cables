@@ -79,7 +79,6 @@ function doRender()
     trigger.trigger();
     // cgl.printError("start r2t");
     fb.renderEnd(cgl);
-    // cgl.printError("end r2t");
 
     cgl.resetViewPort();
 }
