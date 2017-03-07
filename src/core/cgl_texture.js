@@ -140,7 +140,7 @@ CGL.Texture.prototype.setSize=function(w,h)
     this._cgl.gl.bindTexture(this.texTarget, null);
 
 
-    this._cgl.printError("tex create");
+    // this._cgl.printError("tex create");
 };
 
 CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)

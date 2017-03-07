@@ -5,7 +5,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
 
-var fallOff=op.inValue("Fall Off",11);
+// var fallOff=op.inValue("Fall Off",11);
 var radius=op.inValue("Radius",10);
 
 var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
@@ -37,7 +37,7 @@ var cgl=op.patch.cgl;
 
 
 radius.onChange=updateAll;
-fallOff.onChange=updateAll;
+// fallOff.onChange=updateAll;
 r.onChange=updateAll;
 g.onChange=updateAll;
 b.onChange=updateAll;
@@ -83,7 +83,7 @@ function updateAll()
     light.type=0;
     light.changed=true;
     light.radius=radius.get();
-    light.fallOff=fallOff.get();
+    light.fallOff=0.15;//fallOff.get();
 
     updatePos();
     updateColor();
