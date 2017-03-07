@@ -601,9 +601,6 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
 
                     if(port && objPort.value!==undefined && port.type!=OP_PORT_TYPE_TEXTURE)
                     {
-                        console.log('set value ',objPort.value);
-
-
                         port.set(objPort.value);
                     }
                     if(objPort.animated)port.setAnimated(objPort.animated);
