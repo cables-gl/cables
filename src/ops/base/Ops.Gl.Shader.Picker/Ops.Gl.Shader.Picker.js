@@ -1,18 +1,18 @@
-var self=this;
-var cgl=self.patch.cgl;
+
+var cgl=op.patch.cgl;
 
 op.name='Picker';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-this.x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
-this.y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-this.enabled=this.addInPort(new Port(this,"enabled",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.enabled.set(true);
+op.x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
+op.y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
+op.enabled=op.addInPort(new Port(op,"enabled",OP_PORT_TYPE_VALUE,{display:'bool'}));
+op.enabled.set(true);
 
-this.showPass=this.addInPort(new Port(this,"show picking pass",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.showPass.set(false);
+op.showPass=op.addInPort(new Port(op,"show picking pass",OP_PORT_TYPE_VALUE,{display:'bool'}));
+op.showPass.set(false);
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 
 
@@ -27,7 +27,7 @@ if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
 
 
 
-// var tex=this.addOutPort(new Port(this,"pick texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+// var tex=op.addOutPort(new Port(op,"pick texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var tex=op.outTexture("pick texture");
 tex.set( fb.getTextureColor() );
  
@@ -36,7 +36,7 @@ function renderPickingPass()
     cgl.frameStore.renderOffscreen=true;
     cgl.frameStore.pickingpass=true;
     cgl.frameStore.pickingpassNum=0;
-    self.trigger.trigger();
+    op.trigger.trigger();
     cgl.frameStore.pickingpass=false;
     cgl.frameStore.renderOffscreen=false;
 }
@@ -44,7 +44,7 @@ function renderPickingPass()
 
 var doRender=function()
 {
-    if(self.enabled.get())
+    if(op.enabled.get())
     {
         {
             var minimizeFB=8;
@@ -63,18 +63,18 @@ var doRender=function()
 
             renderPickingPass();
 
-            var x=Math.floor(self.x.get()/minimizeFB);
-            var y=Math.floor( vpH-self.y.get()/minimizeFB);
+            var x=Math.floor(op.x.get()/minimizeFB);
+            var y=Math.floor( vpH-op.y.get()/minimizeFB);
             if(x<0)x=0;
             if(y<0)y=0;
             
             // console.log('',x,y,vpW,vpH);
             cgl.gl.readPixels(x,y, 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
-            // cgl.gl.readPixels(self.x.get(), self.y.get(), 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
+            // cgl.gl.readPixels(op.x.get(), op.y.get(), 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
 
             fb.renderEnd();
             cgl.popMvMatrix();
-            //   console.log(cgl.getViewPort()[2],cgl.getViewPort()[3],self.x.get(), self.y.get(),pixelRGB[0]);
+            //   console.log(cgl.getViewPort()[2],cgl.getViewPort()[3],op.x.get(), op.y.get(),pixelRGB[0]);
 
             // cgl.gl.enable(cgl.gl.SCISSOR_TEST);
         }
@@ -84,9 +84,9 @@ var doRender=function()
         cgl.frameStore.pickedColor=pixelRGB[0];
         // console.log(cgl.frameStore.pickedColor);
         cgl.frameStore.pickingpassNum=0;
-        self.trigger.trigger();
+        op.trigger.trigger();
     
-        // if(self.showPass.get())
+        // if(op.showPass.get())
         // {
         //     cgl.frameStore.pickingpassNum=2;
         //     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
@@ -97,22 +97,22 @@ var doRender=function()
     }
     else
     {
-        self.trigger.trigger();
+        op.trigger.trigger();
     }
 
 };
 
-    function preview()
-    {
-        render();
-        tex.val.preview();
-    }
+function preview()
+{
+    render();
+    tex.val.preview();
+}
 
-    tex.onPreviewChanged=function()
-    {
-        if(tex.showPreview) self.render.onTriggered=doRender;
-        else self.render.onTriggered=doRender;
-    };
+tex.onPreviewChanged=function()
+{
+    if(tex.showPreview) op.render.onTriggered=doRender;
+    else op.render.onTriggered=doRender;
+};
 
 
-this.render.onTriggered=doRender;
+op.render.onTriggered=doRender;

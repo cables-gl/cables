@@ -43,7 +43,7 @@ var srcFrag=''
 .endl()+'float compareDepths( in float depth1, in float depth2 )'
 .endl()+'{'
 .endl()+'    float aoCap = 1.9;'
-.endl()+'    float aoMultiplier =40.0;'
+.endl()+'    float aoMultiplier =20.0;'
 .endl()+'    float depthTolerance = 0.001;'
 .endl()+'    float aorange = 100.0;'// units in space the AO effect extends to (this gets divided by the camera far range
 .endl()+'    float diff = sqrt(clamp(1.0-(depth1-depth2) / (aorange/(far-near)),0.0,1.0));'
@@ -81,10 +81,10 @@ var srcFrag=''
 
     .endl()+'       d = readDepth( vec2(texCoord.s+pw*w,texCoord.t+ph*h));'
 
-    .endl()+'       if(d<0.999){'
+    // .endl()+'       if(d<0.9999){'
     .endl()+'           ao += compareDepths(depth,d)*fade;'
     .endl()+'           s += 1.0*fade*1.0;'
-    .endl()+'       } else ao=0.0;'
+    // .endl()+'       } else ao=0.0;'
     .endl()+'   }'
     .endl()+'}'
 

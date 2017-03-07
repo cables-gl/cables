@@ -46,7 +46,7 @@ var srcFrag=''
 
     .endl()+'float getDepth(vec2 tc)'
     .endl()+'{'
-    .endl()+'    float z=texture2D(depthTex,tc).r;'
+    .endl()+'    float z=texture2D(depthTex,tc).r*1.1;'
     .endl()+'    float c=(2.0*n)/(f+n-z*(f-n));'
     .endl()+'    return c;'
     .endl()+'}'
