@@ -11,6 +11,60 @@ op.name = 'MyVerySpecialOp';
 
 See [Creating Ports](../dev_Creating_Ports/dev_creating_ports.md)
 
+## Op Functions / Op Structure
+
+### Op root
+
+All the code you write inside your op will be executed once the patch is added to the patch-view, so all your initialisation-code should be in the root of your patch, e.g. 
+
+```javascript
+op.name = "MyOp";
+
+var inPort = op.inValue("My Input Port");
+var outPort = op.outValue("My Output Port");
+
+// put your initialisation code here
+...
+```
+
+If your op requires another library (e.g. `tone.min.js`) the library will already be loaded once your code is executed.
+
+At this state the links between ops / the port-values are not set, yet, we will come to this later…
+
+### port.onChange
+
+For every input-port (except `inFunction` and `inFunctionButton`) you can implement the `onChange`-method which gets called every time the value on the port changes. This means that it is being called when:
+
+- the user entered a new value in the GUI (input field / moved a slider / checkbox / …)
+- Another op linked to this port
+- A link was removed
+
+When a link to a value or string-value port was removed the old value (from the form) will be set again. If the old value is the same as the value from the linked op `onChange` will **not** be called, so only if the value really changed.
+
+If a connection to an object or array-port is removed the port will contain `null`.
+
+### op.onLoaded 
+
+In some cases you may want to run some code once all links have been set and all ports are fully loaded. Usually you don’t need this.
+
+```
+op.onLoaded = function() {
+	// all ports are loaded  
+};
+```
+
+### op.onDelete
+
+When an op is removed from the patch or when another patch is loaded this is the place to clean up after yourself. Mostly you don’t need this.
+
+```
+op.onDelete = function() {
+  // clean up here
+};
+```
+
+
+
 ## Logging
 
 ```javascript
