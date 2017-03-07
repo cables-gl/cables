@@ -7,7 +7,7 @@ var scene=new CABLES.Variable();
 cgl.frameStore.currentScene=null;
 
 this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+this.filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var defaultEasing=CABLES.TL.EASING_LINEAR;

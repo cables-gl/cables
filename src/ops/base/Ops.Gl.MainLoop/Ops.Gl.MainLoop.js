@@ -89,7 +89,7 @@ op.onAnimFrame=function(time)
     cgl.renderEnd(cgl);
     
     
-    cgl.printError('mainloop end');
+    // cgl.printError('mainloop end');
     
     
 

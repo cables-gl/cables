@@ -30,7 +30,7 @@ varying vec3 vNormal;
 
 
 varying mat3 normalMatrix;
-
+varying vec4 modelPos;
 
 
 
@@ -105,7 +105,11 @@ void main()
     #endif
 
     vec4 pos = vec4( vPosition, 1. );
+    modelPos=modelMatrix*pos;
     mvMatrix=viewMatrix * modelMatrix;
+    
+    
+    
     {{MODULE_VERTEX_POSITION}}
     
     vec4 viewModelPosition = mvMatrix * pos;
@@ -114,7 +118,7 @@ void main()
     // Rotate the object normals by a 3x3 normal matrix.
     // We could also do this CPU-side to avoid doing it per-vertex
     normalMatrix = transpose_1_0(inverse_2_1(mat3(mvMatrix)));
-    vNormal = normalize(normalMatrix * -norm);
+    vNormal = normalize(normalMatrix * norm);
 
     gl_Position = projMatrix * mvMatrix * pos;
 }

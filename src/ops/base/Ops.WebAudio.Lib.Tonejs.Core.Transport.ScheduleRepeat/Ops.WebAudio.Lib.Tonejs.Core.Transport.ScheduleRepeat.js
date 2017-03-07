@@ -29,6 +29,7 @@ function handleChange() {
     var startTime = startTimePort.get();
     
     if(!interval || interval == 0) {
+        op.log("Warning: Interval should not be 0!");
         return;
     }
     
@@ -55,6 +56,7 @@ function handleChange() {
         timeOutPort.set(time);
 	    triggerPort.trigger();
     };
+    op.log("Creating new interval with interval: " + interval);
     if(isValidTime(startTime)) {
         if(duration && duration !== INFINITE) {
             lastListenerId = Tone.Transport.scheduleRepeat(

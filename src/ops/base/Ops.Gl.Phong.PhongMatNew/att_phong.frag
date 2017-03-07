@@ -233,7 +233,7 @@ void main()
           
         
         vec3 L = normalize(lightVector);              //light direction
-        vec3 V = -normalize(vViewPosition);            //eye direction
+        vec3 V = normalize(vViewPosition);            //eye direction
         
         vec3 N = normal;//perturb_6_2(normalMap, normal, -V, vUv); //surface normal
         
@@ -243,8 +243,8 @@ void main()
 
 
         //compute our diffuse & specular terms
-        specular += specStrength * phongSpecular_7_4(L, V, N, shininess) * specularScale * falloff;
-        vec3 diffuse = light.color * orenNayarDiffuse_5_3(L, V, -N, roughness, albedo) * falloff;
+        specular += specStrength * phongSpecular_7_4(L, -V, N, shininess) * specularScale * falloff;
+        vec3 diffuse = light.color * orenNayarDiffuse_5_3(L, V, N, roughness, albedo) * falloff;
         vec3 ambient = light.ambient;
         
         //add the lighting

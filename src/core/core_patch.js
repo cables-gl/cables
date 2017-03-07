@@ -596,10 +596,13 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
                     var objPort=obj.ops[iop].portsIn[ipi];
                     var port=op.getPort(objPort.name);
 
-                    if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
+                    // if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
                     if(port && (port.uiAttribs.display=='bool' || port.uiAttribs.type=='bool') && !isNaN(objPort.value) ) objPort.value=true===objPort.value;
 
-                    if(port && objPort.value!==undefined && port.type!=OP_PORT_TYPE_TEXTURE)port.set(objPort.value);
+                    if(port && objPort.value!==undefined && port.type!=OP_PORT_TYPE_TEXTURE)
+                    {
+                        port.set(objPort.value);
+                    }
                     if(objPort.animated)port.setAnimated(objPort.animated);
                     if(objPort.anim)
                     {
@@ -619,7 +622,9 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
                 {
                     var port2=op.getPort(obj.ops[iop].portsOut[ipo].name);
                     if(port2&& port2.type!=OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value') )
+                    {
                         port2.set(obj.ops[iop].portsOut[ipo].value);
+                    }
                 }
             }
 

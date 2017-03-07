@@ -22,6 +22,11 @@ var noteOutPort = op.outValue("Note String");
 notePort.onChange = setOutPort;
 octavePort.onChange = setOutPort;
 
+// initialization
+op.onLoaded = function() {
+    setOutPort();
+};
+
 // functions
 function setOutPort() {
     var octave = octavePort.get();
