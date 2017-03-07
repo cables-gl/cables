@@ -41,8 +41,9 @@ function render()
         mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
         if(mesh) mesh.render(cgl.getShader());
-        next.trigger();
+        
         cgl.popMvMatrix();
+        next.trigger();
     }
 }
 

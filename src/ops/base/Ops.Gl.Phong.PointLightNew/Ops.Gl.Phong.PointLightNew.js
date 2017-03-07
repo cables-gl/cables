@@ -5,7 +5,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
 
-// var fallOff=op.inValue("Fall Off",11);
+
 var radius=op.inValue("Radius",10);
 
 var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
@@ -20,14 +20,15 @@ var ambientR=op.addInPort(new Port(op,"Ambient R",OP_PORT_TYPE_VALUE,{ display:'
 var ambientG=op.addInPort(new Port(op,"Ambient G",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var ambientB=op.addInPort(new Port(op,"Ambient B",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
+var fallOff=op.inValue("Fall Off",0.1);
+// var mul=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var mul=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
 
 
 ambientR.set(0);
 ambientG.set(0);
 ambientB.set(0);
-mul.set(1);
+// mul.set(1);
 r.set(1);
 g.set(1);
 b.set(1);
@@ -37,7 +38,7 @@ var cgl=op.patch.cgl;
 
 
 radius.onChange=updateAll;
-// fallOff.onChange=updateAll;
+fallOff.onChange=updateAll;
 r.onChange=updateAll;
 g.onChange=updateAll;
 b.onChange=updateAll;
@@ -83,7 +84,7 @@ function updateAll()
     light.type=0;
     light.changed=true;
     light.radius=radius.get();
-    light.fallOff=0.15;//fallOff.get();
+    light.fallOff=fallOff.get();
 
     updatePos();
     updateColor();
@@ -98,7 +99,7 @@ exe.onTriggered=function()
     
     // console.log(mpos);
     light.pos=mpos;
-    light.mul=mul.get();
+    light.mul=1.0;//mul.get();
     light.type=0;
 
     if(attachment.isLinked())
