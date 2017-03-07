@@ -69,8 +69,6 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
 };
 
 CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
-  op.log("Audio out port created: ", audioNode);
-  op.log("Audio out.connect: ", audioNode.connect);
   if(!op || !portName || !audioNode) {
     op.log("ERROR: createAudioOutPort needs three parameters, op, portName and audioNode");
     return;
@@ -133,18 +131,26 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
         // tone.js audio param
         if(audioNode._param && audioNode._param.minValue && audioNode._param.maxValue) {
             if(audioInNode >= audioNode._param.minValue && audioInNode <= audioNode._param.maxValue) {
-                audioNode.value = audioInNode;
+                try{
+                  audioNode.value = audioInNode;
+                } catch (e) { op.log("Possible AudioParam problem: ", e); }
             } else {
               op.log("Warning: The value for an audio parameter is out of range!");
             }
-        } else { // native Web Audio param
-          if(audioNode.minValue && audioNode.maxValue) {
-            if(audioInNode >= audioNode.minValue && audioInNode <= audioNode.maxValue) {
-                audioNode.value = audioInNode;
-            } else {
-              op.log("Warning: The value for an auudio parameter is out of range!");
-            }
+        } // native Web Audio param
+        else if(audioNode.minValue && audioNode.maxValue) {
+          if(audioInNode >= audioNode.minValue && audioInNode <= audioNode.maxValue) {
+            try{
+              audioNode.value = audioInNode;
+            } catch (e) { op.log("Possible AudioParam problem: ", e); }
+          } else {
+            op.log("Warning: The value for an audio parameter is out of range!");
           }
+        } // no min-max values, try anyway
+        else {
+          try{
+            audioNode.value = audioInNode;
+          } catch (e) { op.log("Possible AudioParam problem: ", e); }
         }
 
         if(port.webAudio.previousAudioInNode && port.webAudio.previousAudioInNode.disconnect) {
