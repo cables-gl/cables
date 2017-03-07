@@ -21,6 +21,10 @@ uniform float specularStrength;
     uniform sampler2D texNormal;
 #endif
 
+#ifdef HAS_TEXTURE_AO
+    uniform sampler2D texAo;
+#endif 
+
 uniform float r,g,b,a;
 
 uniform float diffuseRepeatX;
@@ -188,6 +192,12 @@ void main()
     #ifndef HAS_TEXTURE_DIFFUSE
         vec3 diffuseColor = vec3(r,g,b);
     #endif
+
+    #ifdef HAS_TEXTURE_AO
+        diffuseColor*= texture2D(texAo, uv).rgb;
+    #endif
+    
+    
     
 
     #ifdef HAS_TEXTURE_NORMAL
