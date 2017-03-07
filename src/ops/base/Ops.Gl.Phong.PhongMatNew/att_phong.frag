@@ -194,7 +194,7 @@ void main()
         vec3 normalMap = texture2D(texNormal, uv).rgb * 2.0 - 1.0;
         // normalMap.y *= -1.0;
         // normalMap *= -1.0;
-        normalMap=normalize(normalMatrix * normalMap);
+        normalMap=-normalize( -normalMap);
 
     #endif
     
