@@ -220,7 +220,7 @@ CGL.Shader=function(_cgl,_name)
 
         for(i=0;i<uniforms.length;i++)
         {
-            uniforms[i].needsUpdate=true;
+            uniforms[i].resetLoc();//needsUpdate=true;
         }
 
         if(self.hasTextureUniforms()) definesStr+='#define HAS_TEXTURES'.endl();
@@ -317,6 +317,8 @@ CGL.Shader=function(_cgl,_name)
             for(i=0;i<uniforms.length;i++) uniforms[i].resetLoc();
         }
 
+self.finalShaderFrag=fs;
+self.finalShaderVert=vs;
         // printStats();
         self._needsRecompile=false;
     };
