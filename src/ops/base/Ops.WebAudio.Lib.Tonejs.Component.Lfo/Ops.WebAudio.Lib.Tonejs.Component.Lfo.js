@@ -37,8 +37,11 @@ var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display
 typePort.set("sine");
 var phasePort = op.addInPort( new Port( op, "Phase", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX }, PHASE_DEFAULT ));
 phasePort.set(PHASE_DEFAULT);
-var detunePort = CABLES.WebAudio.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
+// TODO: volume should be a dynamic port, but must be changed like this: node.volume.value, not node.set("volume", volume);
+//var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
+var volumePort = op.addInPort( new Port( op, "Volume", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX } ));
+volumePort.set(VOLUME_DEFAULT);
+
 var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(false);
 
@@ -48,6 +51,14 @@ maxPort.onChange = function() {setNodeValue("max", maxPort.get());};
 typePort.onChange = function() {setNodeValue("type", typePort.get());};
 phasePort.onChange = function() {setNodeValue("phase", phasePort.get());};
 mutePort.onChange = function() {setNodeValue("mute", mutePort.get());};
+volumePort.onChange = function() {
+    var volume = volumePort.get();
+    if(volume >= VOLUME_MIN && volume <= VOLUME_MAX) {
+        node.volume.value = volume;    
+    } else {
+        op.log("Volume out of range: ", volume);
+    }
+};
 
 
 // functions
