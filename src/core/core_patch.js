@@ -307,7 +307,7 @@ CABLES.Patch.prototype.getFrameNum=function()
 var frameNext=0;
 var frameInterval=0;
 var lastFrameTime=0;
-var wasdelayed=false;
+var wasdelayed=true;
 
 CABLES.Patch.prototype.renderFrame=function(e)
 {
@@ -349,17 +349,16 @@ CABLES.Patch.prototype.exec=function(e)
             setTimeout(this.exec.bind(this),3000);
 
             $('#delayed').show();
-            // CABLES.UI.notify('renderer delayed...');
             wasdelayed=true;
             return;
         }
-        if(now-lastFrameTime>100 && lastFrameTime!==0  && !wasdelayed)
+
+        if(now-lastFrameTime>400 && lastFrameTime!==0  && !wasdelayed)
         {
             lastFrameTime=0;
-            setTimeout(this.exec.bind(this),250);
+            setTimeout(this.exec.bind(this),650);
 
             $('#delayed').show();
-            // CABLES.UI.notify('renderer delayed...');
             wasdelayed=true;
             return;
         }
