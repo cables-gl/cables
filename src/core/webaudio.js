@@ -89,8 +89,10 @@ CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
 // @param audioNode: required: The audionode incoming connections should connect to
 CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, options, defaultValue) {
   if(!op || !portName || !audioNode) {
-    op.log("ERROR: createAudioInPort needs three parameters, op, portName and audioNode");
-    if(!audioNode) {op.log("AudioNode is null!");}
+    op.log("ERROR: createAudioParamInPort needs three parameters, op, portName and audioNode");
+    if(op && op.name) op.log("opname: ", op.name);
+    op.log("portName", portName);
+    op.log("audioNode: ", audioNode);
     return;
   }
   op.webAudio = op.webAudio || {};
