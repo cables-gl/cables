@@ -52,7 +52,8 @@ var shader=new CGL.Shader(cgl,'BasicMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=op.bindTextures;
 shaderOut.set(shader);
-op.onLoaded=shader.compile;
+
+
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
 
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
@@ -82,24 +83,29 @@ op.textureUniform=null;
 //
 //     console.log('show preview!');
 // };
+op.textureUniform=new CGL.Uniform(shader,'t','tex',0);        
 
 
 op.texture.onChange=function()
 {
-    if(op.texture.get()!==null)
+    
+    console.log( op.texture.get() );
+    if(op.texture.get())
     {
-        if(op.textureUniform)return;
-        shader.removeUniform('tex');
+        // if(op.textureUniform)return;
+        // shader.removeUniform('tex');
+        shader.define('HAS_TEXTURES');
         shader.define('HAS_TEXTURE_DIFFUSE');
-        op.textureUniform=new CGL.Uniform(shader,'t','tex',0);
+
+        // shader.reCompile();
     }
     else
     {
         // console.log("NO TEXTURE!",op.texture.get());
-        shader.removeUniform('tex');
+        // shader.removeUniform('tex');
         shader.removeDefine('HAS_TEXTURES');
         shader.removeDefine('HAS_TEXTURE_DIFFUSE');
-        op.textureUniform=null;
+        // op.textureUniform=null;
     }
 };
 
@@ -114,7 +120,7 @@ op.textureOpacity.onPreviewChanged=function()
     console.log('show preview!');
 };
 
-op.textureOpacity.onValueChanged=function()
+op.textureOpacity.onChange=function()
 {
     if(op.textureOpacity.get())
     {
@@ -135,7 +141,7 @@ op.textureOpacity.onValueChanged=function()
 
 op.colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 op.colorizeTexture.set(false);
-op.colorizeTexture.onValueChanged=function()
+op.colorizeTexture.onChange=function()
 {
     if(op.colorizeTexture.get()) shader.define('COLORIZE_TEXTURE');
         else shader.removeDefine('COLORIZE_TEXTURE');
@@ -144,7 +150,7 @@ op.colorizeTexture.onValueChanged=function()
 
 op.doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 op.doBillboard.set(false);
-op.doBillboard.onValueChanged=function()
+op.doBillboard.onChange=function()
 {
     if(op.doBillboard.get()) shader.define('BILLBOARD');
         else shader.removeDefine('BILLBOARD');
@@ -159,8 +165,8 @@ var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE)
 diffuseRepeatX.set(1);
 diffuseRepeatY.set(1);
 
-diffuseRepeatX.onValueChanged=updateTexRepeat;
-diffuseRepeatY.onValueChanged=updateTexRepeat;
+diffuseRepeatX.onChange=updateTexRepeat;
+diffuseRepeatY.onChange=updateTexRepeat;
 
 
 var diffuseOffsetX=op.addInPort(new Port(op,"Tex Offset X",OP_PORT_TYPE_VALUE));
@@ -168,8 +174,8 @@ var diffuseOffsetY=op.addInPort(new Port(op,"Tex Offset Y",OP_PORT_TYPE_VALUE));
 diffuseOffsetX.set(0);
 diffuseOffsetY.set(0);
 
-diffuseOffsetY.onValueChanged=updateTexRepeat;
-diffuseOffsetX.onValueChanged=updateTexRepeat;
+diffuseOffsetY.onChange=updateTexRepeat;
+diffuseOffsetX.onChange=updateTexRepeat;
 
 var diffuseRepeatXUniform=null;
 var diffuseRepeatYUniform=null;
@@ -177,8 +183,10 @@ var diffuseOffsetXUniform=null;
 var diffuseOffsetYUniform=null;
 
 
+
 function updateTexRepeat()
 {
+    
     if(diffuseRepeatY.get()!=1 ||
         diffuseRepeatX.get()!=1 ||
         diffuseOffsetY.get()!=0 ||
@@ -193,6 +201,17 @@ function updateTexRepeat()
                 diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
                 diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
             }
+            
+            diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
+            diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
+            diffuseOffsetXUniform.setValue(diffuseOffsetX.get());
+            diffuseOffsetYUniform.setValue(diffuseOffsetY.get());
+
         }
-        else shader.removeDefine('TEXTURE_REPEAT');
+        else 
+        {
+            diffuseRepeatXUniform=null;
+            shader.removeDefine('TEXTURE_REPEAT');
+        }
+        
 }

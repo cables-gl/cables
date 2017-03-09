@@ -23,8 +23,8 @@ void main()
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
         #ifdef TEXTURE_REPEAT
-            texCoord.s=texCoord.s*diffuseRepeatX+texOffsetX;
-            texCoord.t=texCoord.t*diffuseRepeatY+texOffsetY;
+            texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
+            texCoord.y=texCoord.y*diffuseRepeatY+texOffsetY;
         #endif
    #endif
 
