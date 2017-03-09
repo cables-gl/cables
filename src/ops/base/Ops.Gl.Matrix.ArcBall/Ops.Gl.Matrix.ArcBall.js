@@ -49,7 +49,7 @@ render.onTriggered=function()
 
 
     var r=radius;
-    vec3.set(vScale, 0,0,r*30.0);
+    vec3.set(vScale, r,r,r);
     mat4.scale(cgl.vMatrix,cgl.vMatrix, vScale);
     // mat4.translate(cgl.vMatrix,cgl.vMatrix, vScale);
 

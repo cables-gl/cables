@@ -92,6 +92,7 @@ portamentoPort.onChange = function() {
 // functions
 function setNodeValue(key, val) {
     if(key && typeof val !== 'undefined') {
+        op.log("FMSynth set key: " + key + " to: ", val);
         node.set(key, val);
     }
 }
