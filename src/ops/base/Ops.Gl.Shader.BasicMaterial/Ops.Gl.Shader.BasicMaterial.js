@@ -52,7 +52,8 @@ var shader=new CGL.Shader(cgl,'BasicMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=op.bindTextures;
 shaderOut.set(shader);
-op.onLoaded=shader.compile;
+
+
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
 
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
@@ -182,8 +183,10 @@ var diffuseOffsetXUniform=null;
 var diffuseOffsetYUniform=null;
 
 
+
 function updateTexRepeat()
 {
+    
     if(diffuseRepeatY.get()!=1 ||
         diffuseRepeatX.get()!=1 ||
         diffuseOffsetY.get()!=0 ||
@@ -198,6 +201,17 @@ function updateTexRepeat()
                 diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
                 diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
             }
+            
+            diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
+            diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
+            diffuseOffsetXUniform.setValue(diffuseOffsetX.get());
+            diffuseOffsetYUniform.setValue(diffuseOffsetY.get());
+
         }
-        else shader.removeDefine('TEXTURE_REPEAT');
+        else 
+        {
+            diffuseRepeatXUniform=null;
+            shader.removeDefine('TEXTURE_REPEAT');
+        }
+        
 }
