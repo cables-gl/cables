@@ -40,7 +40,6 @@ node.set("detune", DETUNE_DEFAULT);
 node.set("modulationFrequency", MODULATION_FREQUENCY_DEFAULT);
 node.set("phase", PHASE_DEFAULT);
 node.set("volume", VOLUME_DEFAULT);
-node.set("frequency", FREQUENCY_DEFAULT);
 node.set("mute", MUTE_DEFAULT);
 
 // init
@@ -123,6 +122,5 @@ var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
 
 // clean up
 op.onDelete = function() {
-    op.log("Delete");
     node.dispose();
 };
