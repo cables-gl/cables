@@ -18,7 +18,7 @@ The frequency of the oscillator
 
 The detune amount, `100` = one semitone up, `-100` = one semitone down, `1200` = one octave up
 
-## Phase [Number]
+### Phase [Number]
 
 The phase of the oscillator in degrees (between `0`and `180`.
 
