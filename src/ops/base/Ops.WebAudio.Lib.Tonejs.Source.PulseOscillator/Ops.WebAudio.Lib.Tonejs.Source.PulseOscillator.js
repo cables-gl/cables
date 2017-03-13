@@ -21,7 +21,6 @@ var AUTO_START_DEFAULT = true;
 
 // vars
 var node = new Tone.PulseOscillator();
-node.start();
 
 //inputs
 var widthPort = CABLES.WebAudio.createAudioParamInPort(op, "Width", node.width, {'display': 'range', 'min': WIDTH_MIN, 'max': WIDTH_MAX}, WIDTH_DEFAULT);
