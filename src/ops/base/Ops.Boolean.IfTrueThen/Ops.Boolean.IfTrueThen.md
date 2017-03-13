@@ -3,7 +3,8 @@
 *Ops.Boolean.IfTrueThen*  
 
 Can be used as a switch. If the input `Boolean` is `true`/ `1` the output port `Then` will be triggered. If `Boolean` is `false` / `0` the output port `Else` will be triggered.  
-Will trigger `True` or `False` every time `Execute` is triggered.
+
+You can use it in two ways: If `exe` is connected `True` / `False` will be triggered every time `exe` is triggered. If `exe` is not connection `True` / `False` will be triggered every time `Value` changes. This way you can convert a bool to a function.
 
 ## Input
 
