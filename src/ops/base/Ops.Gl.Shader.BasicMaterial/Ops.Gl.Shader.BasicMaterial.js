@@ -162,8 +162,6 @@ var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TY
 
 var diffuseRepeatX=op.addInPort(new Port(op,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
 var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
-diffuseRepeatX.set(1);
-diffuseRepeatY.set(1);
 
 diffuseRepeatX.onChange=updateTexRepeat;
 diffuseRepeatY.onChange=updateTexRepeat;
@@ -171,8 +169,6 @@ diffuseRepeatY.onChange=updateTexRepeat;
 
 var diffuseOffsetX=op.addInPort(new Port(op,"Tex Offset X",OP_PORT_TYPE_VALUE));
 var diffuseOffsetY=op.addInPort(new Port(op,"Tex Offset Y",OP_PORT_TYPE_VALUE));
-diffuseOffsetX.set(0);
-diffuseOffsetY.set(0);
 
 diffuseOffsetY.onChange=updateTexRepeat;
 diffuseOffsetX.onChange=updateTexRepeat;
@@ -182,17 +178,17 @@ var diffuseRepeatYUniform=null;
 var diffuseOffsetXUniform=null;
 var diffuseOffsetYUniform=null;
 
-
+shader.define('TEXTURE_REPEAT');
 
 function updateTexRepeat()
 {
     
-    if(diffuseRepeatY.get()!=1 ||
-        diffuseRepeatX.get()!=1 ||
-        diffuseOffsetY.get()!=0 ||
-        diffuseOffsetX.get()!=0)
-        {
-            shader.define('TEXTURE_REPEAT');
+    // if(diffuseRepeatY.get()!=1 ||
+    //     diffuseRepeatX.get()!=1 ||
+    //     diffuseOffsetY.get()!=0 ||
+    //     diffuseOffsetX.get()!=0)
+    //     {
+            
 
             if(!diffuseRepeatXUniform)
             {
@@ -201,17 +197,22 @@ function updateTexRepeat()
                 diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
                 diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
             }
-            
+
             diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
             diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
             diffuseOffsetXUniform.setValue(diffuseOffsetX.get());
             diffuseOffsetYUniform.setValue(diffuseOffsetY.get());
 
-        }
-        else 
-        {
-            diffuseRepeatXUniform=null;
-            shader.removeDefine('TEXTURE_REPEAT');
-        }
+        // }
+        // else 
+        // {
+        //     diffuseRepeatXUniform=null;
+        //     shader.removeDefine('TEXTURE_REPEAT');
+        // }
         
 }
+
+diffuseOffsetX.set(0);
+diffuseOffsetY.set(0);
+diffuseRepeatX.set(1);
+diffuseRepeatY.set(1);
