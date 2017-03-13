@@ -2,27 +2,19 @@ op.name="ArcBall";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
-var mulRotate=op.addInPort(new Port(op,"Mul Rotate",OP_PORT_TYPE_VALUE));
-var mulScale=op.addInPort(new Port(op,"Mul Scale",OP_PORT_TYPE_VALUE));
-
-var minScale=op.addInPort(new Port(op,"Min Scale",OP_PORT_TYPE_VALUE));
-var maxScale=op.addInPort(new Port(op,"Max Scale",OP_PORT_TYPE_VALUE));
-
 var useWheel=op.inValueBool('Use Mouse Wheel',true);
+var minRadius=op.inValue("Min Radius",0.1);
 
-var inRadius=op.inValue("Radius",1);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var outRadius=op.outValue("Radius");
 
-mulRotate.set(1);
-mulScale.set(1);
-minScale.set(0.1);
-maxScale.set(1.5);
+
 
 var cgl=op.patch.cgl;
 vScale=vec3.create();
 var mouseDown=false;
-var radius=1.0;
+var radius=0.0;
 
 var startX=-1;
 var startY=-1;
@@ -31,34 +23,31 @@ var lastMouseY=-1;
 
 var finalRotMatrix = mat4.create();
 
-inRadius.onChange=function()
-{
-    radius=inRadius.get()||1;
-};
-
 render.onTriggered=function()
 {
     cgl.pushViewMatrix();
-    // cgl.pushModelMatrix();
 
-    if(inRadius.get()===0)
+    var r=radius*30.0+minRadius.get();
+
+    if(r<minRadius.get())
     {
-        if(radius<minScale.get()) radius=minScale.get();
-        if(radius>maxScale.get()) radius=maxScale.get();
+        r=minRadius.get();
+        radius=0;
     }
+    outRadius.set(r);
+    vec3.set(vScale, vOffset[1],-vOffset[0],-r );
 
-
-    var r=radius;
-    vec3.set(vScale, r,r,r);
-    mat4.scale(cgl.vMatrix,cgl.vMatrix, vScale);
-    // mat4.translate(cgl.vMatrix,cgl.vMatrix, vScale);
-
-
+    // vec3.set(vScale, 0,0,-r );
+    
+    mat4.translate(cgl.vMatrix,cgl.vMatrix, vScale);    
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,finalRotMatrix);
+
+    // vec3.set(vScale, -vOffset[1],-vOffset[0],0 );
+    // mat4.translate(cgl.vMatrix,cgl.vMatrix, vScale);
 
     trigger.trigger();
     cgl.popViewMatrix();
-    // cgl.popModelMatrix();
+
 };
 
 function touchToMouse(event)
@@ -95,6 +84,8 @@ function onTouchMove(event)
     // onmousemove('event',event);
 }
 
+var vOffset=[0,0];
+
 function onmousemove(event)
 {
     if(!mouseDown) return;
@@ -106,17 +97,10 @@ function onmousemove(event)
 
     if(event.which==3)
     {
-        // vOffset[2]+=(x-lastMouseX)*0.01*mulTrans.get();
-        // vOffset[1]+=(y-lastMouseY)*0.01*mulTrans.get();
+        vOffset[1]+=(x-lastMouseX)*0.01;
+        vOffset[0]+=(y-lastMouseY)*0.01;
     }
 
-    if(inRadius.get()===0)
-    {
-        if(event.which==2)
-        {
-            radius-=(y-lastMouseY)*0.001*mulScale.get();
-        }
-    }
 
     if(event.which==1)
     {
@@ -124,10 +108,13 @@ function onmousemove(event)
 
         var newRotationMatrix = mat4.create();
         mat4.identity(newRotationMatrix);
-        mat4.rotate(newRotationMatrix,newRotationMatrix,CGL.DEG2RAD*(deltaX / 10)*mulRotate.get(), [0, 1, 0]);
+        // vec3.set(vScale, -vOffset[1],-vOffset[0],0 );
+        // mat4.translate(newRotationMatrix,newRotationMatrix, vScale);
+
+        mat4.rotate(newRotationMatrix,newRotationMatrix,CGL.DEG2RAD*(deltaX / 10), [0, 1, 0]);
 
         var deltaY = y - lastMouseY;
-        mat4.rotate(newRotationMatrix,newRotationMatrix, CGL.DEG2RAD*(deltaY / 10)*mulRotate.get(), [1, 0, 0]);
+        mat4.rotate(newRotationMatrix,newRotationMatrix, CGL.DEG2RAD*(deltaY / 10), [1, 0, 0]);
 
         mat4.multiply(finalRotMatrix,newRotationMatrix, finalRotMatrix);
 
@@ -164,7 +151,7 @@ var onMouseWheel=function(event)
     if(useWheel.get())
     {
         var delta=CGL.getWheelSpeed(event)*0.001;
-        radius+=(parseFloat(delta)*mulScale.get());
+        radius+=(parseFloat(delta));
         event.preventDefault();
     }
 };

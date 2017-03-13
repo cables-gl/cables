@@ -77,7 +77,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
             cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
             cgl.gl.framebufferTexture2D(
                 cgl.gl.FRAMEBUFFER,
-                cgl.gl.DEPTH_ATTACHMENT,
+                cgl.gl.DEPTH_ATTACHMENT16,
                 cgl.gl.TEXTURE_2D,
                 textureDepth.tex,
                 0 );

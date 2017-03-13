@@ -1,6 +1,7 @@
 op.name='VideoTexture';
 
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+// var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'video' } ));
+var filename=op.inFile("file","video");
 var play=op.addInPort(new Port(op,"play",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 
@@ -29,6 +30,7 @@ var intervalID=null;
 fps.set(25);
 speed.set(1);
 volume.set(1);
+flip.set(true);
 
 var tex=new CGL.Texture(cgl);
 tex.setSize(32,33);
