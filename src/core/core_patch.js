@@ -375,7 +375,7 @@ CABLES.Patch.prototype.exec=function(e)
 
     if(wasdelayed)
     {
-        $('#delayed').hide();
+        if(CABLES.UI) $('#delayed').hide();
         wasdelayed=false;
     }
     requestAnimationFrame(this.exec.bind(this));

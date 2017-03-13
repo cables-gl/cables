@@ -4,32 +4,53 @@ var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
-var attenuation=op.addInPort(new Port(op,"attenuation",OP_PORT_TYPE_VALUE));
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+
+var radius=op.inValue("Radius",10);
 
 var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
 var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
 var z=op.addInPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
 
-var mul=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
+var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var cgl=op.patch.cgl;
-mul.set(1);
+var ambientR=op.addInPort(new Port(op,"Ambient R",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var ambientG=op.addInPort(new Port(op,"Ambient G",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var ambientB=op.addInPort(new Port(op,"Ambient B",OP_PORT_TYPE_VALUE,{ display:'range' }));
+
+var fallOff=op.inValue("Fall Off",0.1);
+// var mul=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
+
+
+
+ambientR.set(0);
+ambientG.set(0);
+ambientB.set(0);
+// mul.set(1);
 r.set(1);
 g.set(1);
 b.set(1);
-attenuation.set(0);
 
-r.onValueChanged=updateAll;
-g.onValueChanged=updateAll;
-b.onValueChanged=updateAll;
-x.onValueChanged=updateAll;
-y.onValueChanged=updateAll;
-z.onValueChanged=updateAll;
-attenuation.onValueChanged=updateAttenuation;
+
+var cgl=op.patch.cgl;
+
+
+radius.onChange=updateAll;
+fallOff.onChange=updateAll;
+r.onChange=updateAll;
+g.onChange=updateAll;
+b.onChange=updateAll;
+x.onChange=updateAll;
+y.onChange=updateAll;
+z.onChange=updateAll;
+
+ambientR.onChange=updateAll;
+ambientG.onChange=updateAll;
+ambientB.onChange=updateAll;
+
+
 
 
 var id=CABLES.generateUUID();
@@ -45,14 +66,10 @@ updateAll();
 function updateColor()
 {
     light.color=[ r.get(), g.get(), b.get() ];
+    light.ambient=[ ambientR.get(), ambientG.get(), ambientB.get() ];
     light.changed=true;
 }
 
-function updateAttenuation()
-{
-    light.attenuation=attenuation.get();
-    light.changed=true;
-}
 
 function updatePos()
 {
@@ -66,10 +83,11 @@ function updateAll()
     light.id=id;
     light.type=0;
     light.changed=true;
+    light.radius=radius.get();
+    light.fallOff=fallOff.get();
 
     updatePos();
     updateColor();
-    updateAttenuation();
 }
 
 exe.onTriggered=function()
@@ -81,7 +99,7 @@ exe.onTriggered=function()
     
     // console.log(mpos);
     light.pos=mpos;
-    light.mul=mul.get();
+    light.mul=1.0;//mul.get();
     light.type=0;
 
     if(attachment.isLinked())

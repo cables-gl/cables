@@ -16,22 +16,20 @@ triggerPort.onTriggered = function() {
         var velocity = velocityPort.get();
         
         // check time
-        try {
-            new Tone.TimeBase(time)
-        } catch(e) {
-            op.log("Warning: Invalid time, using '+0'");
+        if(!CABLES.WebAudio.isValidToneTime(time)) {
+            op.uiAttr( { "error": "Invalid time, using '+0'" } );
             time = "+0";
         }
         
         // check tone
-        try {
-            Tone.Frequency(note);
-        } catch(e) {
+        if(!CABLES.WebAudio.isValidToneNote(note)) {
             op.uiAttr( { 'error': 'Invalid note, should be either a tone, e.g. "C4" or a frequency, e.g. "440"' } );
             return;
         }
+            
         synth.triggerAttack(note, time, velocity);
-        op.uiAttr( { 'error': null } ); // clear UI error
+        // clear UI error
+        op.uiAttr( { 'error': null } );
     }
 };
 
