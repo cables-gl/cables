@@ -8,7 +8,7 @@
 
 The oscillator's frequency
 
-### Detune
+### Detune [Number, Audio]
 
 How much it is detunes, `0` = not at all, `100` = one semitone up, `-100` = one semitone down, `12000` = one octave up
 
