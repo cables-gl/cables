@@ -35,8 +35,10 @@ struct Light {
   vec3 pos;
   vec3 color;
   vec3 ambient;
+  vec3 specular;
   float falloff;
   float radius;
+  float mul;
 };
 
 varying mat3 normalMatrix;
@@ -176,7 +178,6 @@ vec4 textureLinear(sampler2D uTex, vec2 uv) {
 
 void main()
 {
-    
     vec2 UV_SCALE = vec2(diffuseRepeatX,diffuseRepeatY);
 
     vec3 color = vec3(0.0);
@@ -188,14 +189,10 @@ void main()
     #ifndef HAS_TEXTURE_DIFFUSE
         vec3 diffuseColor = vec3(r,g,b);
     #endif
-    
 
     #ifdef HAS_TEXTURE_NORMAL
         vec3 normalMap = texture2D(texNormal, uv).rgb * 2.0 - 1.0;
-        // normalMap.y *= -1.0;
-        // normalMap *= -1.0;
         normalMap=normalize(normalMatrix * normalMap);
-
     #endif
     
     float specStrength = specularStrength;
@@ -203,8 +200,7 @@ void main()
         specStrength = specularStrength*texture2D(texSpecular, uv).r;
     #endif
 
-    
-    float specular=0.0;
+    vec3 specular=vec3(0.0);
 
     for(int l=0;l<NUM_LIGHTS;l++)
     {
@@ -215,7 +211,7 @@ void main()
         //   if (flatShading == 1) {
         //     normal = normals_4_0(vViewPosition);
         //   } else {
-            normal = vNormal;
+        normal = vNormal;
         //   }
 
         //determine surface to light direction
@@ -225,12 +221,11 @@ void main()
         //calculate attenuation
         float lightDistance = length(lightVector);
         float falloff = attenuation_1_5(light.radius, light.falloff, lightDistance);
-        
+
         //now sample from our repeating brick texture
         //assume its in sRGB, so we need to correct for gamma
-          
+
         //our normal map has an inverted green channel
-          
         
         vec3 L = normalize(lightVector);              //light direction
         vec3 V = normalize(vViewPosition);            //eye direction
@@ -241,21 +236,20 @@ void main()
             N=normalize(normalMap+normal);
         #endif
 
-
         //compute our diffuse & specular terms
-        specular += specStrength * phongSpecular_7_4(L, -V, N, shininess) * specularScale * falloff;
-        vec3 diffuse = light.color * orenNayarDiffuse_5_3(L, V, N, roughness, albedo) * falloff;
+        specular += specStrength * phongSpecular_7_4(L, -V, N, shininess) * specularScale * falloff * light.specular;
+        vec3 diffuse = light.color * orenNayarDiffuse_5_3(L, V, N, roughness, albedo) * falloff * light.mul;
         vec3 ambient = light.ambient;
-        
+
         //add the lighting
         color += (diffuse + ambient);
-        
+
         //re-apply gamma to output buffer
     }
     
     color*=diffuseColor;
     color+=specular;
-    color = toGamma_3_9(color);
+    color=toGamma_3_9(color);
 
     gl_FragColor.rgb = color;
     gl_FragColor.a = 1.0;
