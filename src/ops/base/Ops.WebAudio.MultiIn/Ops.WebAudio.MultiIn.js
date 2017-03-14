@@ -24,7 +24,9 @@ var createValueChangedFunction = function( port ) {
         if(audioIns[port].get()){
             op.log("Linked");
             oldAudioIns[port] = audioIns[port].get();
-            audioIns[port].get().connect(gain);
+            try{
+                audioIns[port].get().connect(gain);
+            } catch(e) { op.log("[Error] " + e); }
         }
          else if (!audioIns[port].isLinked()){
             try{
