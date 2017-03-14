@@ -1,6 +1,6 @@
 var cgl=op.patch.cgl;
 
-op.name='Shader';
+op.name='SetShader';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var shader=op.addInPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
