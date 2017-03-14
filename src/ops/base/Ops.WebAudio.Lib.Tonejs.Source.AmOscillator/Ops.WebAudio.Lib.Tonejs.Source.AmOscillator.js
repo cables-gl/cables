@@ -6,7 +6,6 @@ var DETUNE_DEFAULT = 0;
 var PHASE_DEFAULT = 0;
 var PHASE_MIN = 0;
 var PHASE_MAX = 180;
-var MODULATION_INDEX_DEFAULT = 2;
 var MODULATION_TYPE_DEFAULT = "square";
 var HARMONICITY_DEFAULT = 1;
 var VOLUME_DEFAULT = -6;
@@ -30,7 +29,6 @@ var node = new Tone.AMOscillator();
 // inputs
 var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 var detunePort = CABLES.WebAudio.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
-var modulationIndexPort = CABLES.WebAudio.createAudioParamInPort(op, "Modulation Index", node.modulationIndex, null, MODULATION_INDEX_DEFAULT);
 var harmonicityPort = CABLES.WebAudio.createAudioParamInPort(op, "Harmonicity", node.harmonicity, null, HARMONICITY_DEFAULT);
 var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
 typePort.set(TYPE_DEFAULT);

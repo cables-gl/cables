@@ -28,7 +28,7 @@ var node = new Tone.AutoWah();
 // input ports
 var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
 var gainPort = CABLES.WebAudio.createAudioParamInPort(op, "Gain", node.gain, {"display": "range", "min": GAIN_MIN, "max": GAIN_MAX}, GAIN_DEFAULT);
-var qualityPort = CABLES.WebAudio.createAudioParamInPort(op, "Quality", node.q, {"display": "range", "min": QUALITY_MIN, "max": QUALITY_MIN}, QUALITY_DEFAULT);
+var qualityPort = CABLES.WebAudio.createAudioParamInPort(op, "Quality", node.Q, {"display": "range", "min": QUALITY_MIN, "max": QUALITY_MIN}, QUALITY_DEFAULT);
 var octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
 var baseFrequencyPort = op.inValue("Base Frequency", BASE_FREQUENCY_DEFAULT);
 var sensitivityPort = op.inValue("Sensitivity", SENSITIVITY_DEFAULT);

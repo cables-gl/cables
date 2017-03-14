@@ -63,7 +63,6 @@ volumePort.onChange = function() {
 
 // functions
 function setNodeValue(key, value) {
-    op.log("setting key: ", key, " to value: ", value);
     node.set(key, value);
 }
 
