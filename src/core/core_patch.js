@@ -458,7 +458,6 @@ CABLES.Patch.prototype.getOpsByName=function(name)
 
 CABLES.Patch.prototype.loadLib=function(which)
 {
-
     CABLES.ajaxSync('/ui/libs/'+which+'.js',
         function(err,res)
         {
@@ -466,13 +465,11 @@ CABLES.Patch.prototype.loadLib=function(which)
             se.type = "text/javascript";
             se.text = res;
             document.getElementsByTagName('head')[0].appendChild(se);
-
         },'GET');
     // open and send a synchronous request
     // xhrObj.open('GET', '/ui/libs/'+which+'.js', false);
     // xhrObj.send('');
     // add the returned content to a newly created script tag
-
 };
 
 CABLES.Patch.prototype.reloadOp=function(objName,cb)

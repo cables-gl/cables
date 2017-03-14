@@ -54,7 +54,9 @@ function refresh()
     
     ctx.fillStyle = 'white';
     var fontSize=parseFloat(inFontSize.get());
-    ctx.font = fontSize+'px "'+font.get()+'","Arial"';
+    var fontname=font.get();
+    if(fontname.indexOf(" ")>-1)fontname='"'+fontname+'"';
+    ctx.font = fontSize+'px '+fontname+'';
     ctx.textAlign = align.get();
 
     if(border.get()>0)
