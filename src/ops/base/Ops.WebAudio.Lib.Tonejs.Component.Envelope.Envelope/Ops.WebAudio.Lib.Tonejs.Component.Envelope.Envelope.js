@@ -55,10 +55,10 @@ triggerReleasePort.onTriggered = function(){
 
 // default values
 var DEFAULT_ENVELOPE_OBJ = {
-    attack: 0.1,
-    decay: 0.2,
-    sustain: 1,
-    release: 0.8
+    'attack': 0.1,
+    'decay': 0.2,
+    'sustain': 1,
+    'release' : 0.8
 };
 var DEFAULT_ATTACK_TIME = "+0";
 var DEFAULT_RELEASE_TIME = "+0.125";
@@ -70,10 +70,10 @@ var env = new Tone.Envelope();
 // functions
 function updateEnvObjPort() {
     envObjPort.set({
-        attack: attackPort.get(),
-        decay: decayPort.get(),
-        sustain: sustainPort.get(),
-        release: releasePort.get()
+        'attack': attackPort.get(),
+        'decay': decayPort.get(),
+        'sustain': sustainPort.get(),
+        'release': releasePort.get()
     });    
 }
 
