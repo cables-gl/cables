@@ -1,9 +1,21 @@
-op.name="PwmOscillator";
+op.name="FatOscillator";
 
 // defaults
 var FREQUENCY_DEFAULT = 440;
 var DETUNE_DEFAULT = 0;
-var MODULATION_FREQUENCY_DEFAULT = 0.4;
+var TYPES = [
+    "sine",
+    "square",
+    "sawtooth",
+    "triangle"
+];
+var TYPE_DEFAULT = 0;
+var SPREAD_DEFAULT = 20;
+var SPREAD_MIN = 1; // ?
+var SPREAD_MAX = 2000; // ?
+var COUNT_DEFAULT = 3;
+var COUNT_MIN = 2;
+var COUNT_MAX = 9;
 var PHASE_DEFAULT = 0;
 var PHASE_MIN = 0;
 var PHASE_MAX = 180;
@@ -16,12 +28,15 @@ var STOP_TIME_DEFAULT = "+0";
 var AUTO_START_DEFAULT = true;
 
 // vars
-var node = new Tone.PWMOscillator(FREQUENCY_DEFAULT, MODULATION_FREQUENCY_DEFAULT);
+var node = new Tone.FatOscillator()
 
-// input ports
+// inputs
 var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 var detunePort = CABLES.WebAudio.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
-var modulationFrequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Modulation Frequency", node.modulationFrequency, null, MODULATION_FREQUENCY_DEFAULT);
+var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
+typePort.set(TYPE_DEFAULT);
+var spreadPort = op.inValue("Spread", SPREAD_DEFAULT);
+var countPort = op.inValue("Count", COUNT_DEFAULT);
 var phasePort = op.addInPort( new Port( op, "Phase", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX } ));
 phasePort.set(PHASE_DEFAULT);
 var syncFrequencyPort = op.inValueBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
@@ -34,14 +49,6 @@ var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volum
 var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(MUTE_DEFAULT);
 
-// set defaults
-node.set("frequency", FREQUENCY_DEFAULT);
-node.set("detune", DETUNE_DEFAULT);
-node.set("modulationFrequency", MODULATION_FREQUENCY_DEFAULT);
-node.set("phase", PHASE_DEFAULT);
-node.set("volume", VOLUME_DEFAULT);
-node.set("mute", MUTE_DEFAULT);
-
 // init
 op.onLoaded = function() {
     var syncFrequency = syncFrequencyPort.get();
@@ -53,10 +60,6 @@ op.onLoaded = function() {
     if(autoStartPort.get()) {
         start();
     }
-};
-
-autoStartPort.onChange = function() {
-    op.log("autoStartPort changed: ", autoStartPort.get());
 };
 
 // functions
@@ -89,6 +92,37 @@ function stop() {
 }
 
 // change listeners
+typePort.onChange = function() {
+    var type = typePort.get();
+    if(type && TYPES.indexOf(type) > -1) {
+        node.set("type", type);
+    }
+};
+spreadPort.onChange = function() {
+    var spread = spreadPort.get();
+    try {
+        spread = Math.round(spread);
+    } catch(e) {
+        op.log("Warning: Spread is not in range...");
+        return;
+    }
+    if(spread >= SPREAD_MIN && spread <= SPREAD_MAX) {
+        node.set("spread", spread);
+    }
+};
+countPort.onChange = function() {
+    var count = countPort.get();
+    count = Math.floor(count);
+    if(count >= COUNT_MIN && count <= COUNT_MAX) {
+        node.set("count", count);
+    }
+};
+phasePort.onChange = function() {
+    var phase = phasePort.get();
+    if(phase >= PHASE_MIN && phase <= PHASE_MAX) {
+        node.set("phase", phase);    
+    }
+};
 startPort.onTriggered = function() {
     start();
 };
@@ -109,12 +143,8 @@ syncFrequencyPort.onChange = function() {
         unsyncFrequency();
     }
 };
-
-phasePort.onChange = function() {
-    var phase = phasePort.get();
-    if(phase >= PHASE_MIN && phase <= PHASE_MAX) {
-        node.set("phase", phase);    
-    }
+autoStartPort.onChange = function() {
+    op.log("autoStartPort changed: ", autoStartPort.get());
 };
 
 // outputs

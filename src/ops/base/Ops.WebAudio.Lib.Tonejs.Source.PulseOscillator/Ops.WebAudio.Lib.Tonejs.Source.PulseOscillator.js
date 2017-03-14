@@ -12,10 +12,15 @@ var PHASE_DEFAULT = 0;
 var PHASE_MIN = 0;
 var PHASE_MAX = 180;
 var VOLUME_DEFAULT = -6;
+var MUTE_DEFAULT = false;
+var SYNC_FREQUENCY_DEFAULT = false;
+var START_DEFAULT = true;
+var START_TIME_DEFAULT = "+0";
+var STOP_TIME_DEFAULT = "+0";
+var AUTO_START_DEFAULT = true;
 
 // vars
 var node = new Tone.PulseOscillator();
-node.start();
 
 //inputs
 var widthPort = CABLES.WebAudio.createAudioParamInPort(op, "Width", node.width, {'display': 'range', 'min': WIDTH_MIN, 'max': WIDTH_MAX}, WIDTH_DEFAULT);
@@ -23,19 +28,99 @@ var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node
 var detunePort = CABLES.WebAudio.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
 var phasePort = op.addInPort( new Port( op, "Phase", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX } ));
 phasePort.set(PHASE_DEFAULT);
+var syncFrequencyPort = op.inValueBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
+var startPort = op.addInPort( new Port( op, "Start", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
+var stopPort = op.addInPort( new Port( op, "Stop", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
+var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
 var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 
+// set defaults
+node.set("width", WIDTH_DEFAULT);
+node.set("frequency", FREQUENCY_DEFAULT);
+node.set("detune", DETUNE_DEFAULT);
+node.set("phase", PHASE_DEFAULT);
+node.set("volume", VOLUME_DEFAULT);
+node.set("mute", MUTE_DEFAULT);
+
+// init
+op.onLoaded = function() {
+    var syncFrequency = syncFrequencyPort.get();
+    if(syncFrequency) {
+        syncFrequency();
+    } else {
+        unsyncFrequency();
+    }
+    if(autoStartPort.get()) {
+        start();
+    }
+};
+
+// functions
+function syncFrequency() {
+    node.syncFrequency();
+}
+
+function unsyncFrequency() {
+    node.unsyncFrequency();
+}
+
+function start() {
+    if(node.state !== 'started') {
+        var startTime = startTimePort.get();
+        if(!CABLES.WebAudio.isValidToneTime(startTime)) {
+            startTime = START_TIME_DEFAULT;
+        }
+        node.start(startTime);
+    }
+}
+
+function stop() {
+    if(node.state !== 'stopped') {
+        var stopTime = stopTimePort.get();
+        if(!CABLES.WebAudio.isValidToneTime(stopTime)) {
+            stopTime = STOP_TIME_DEFAULT;
+        }
+        node.stop(stopTime);
+    }
+}
+
 // change listeners
+startPort.onTriggered = function() {
+    start();
+};
+
+stopPort.onTriggered = function() {
+    stop();
+};
+
 mutePort.onChange = function() {
-    var mute = mutePort.get();
-    if(mute) {
-        node.mute = mute ? true : false;
+    node.mute = mutePort.get() ? true : false; 
+};
+
+syncFrequencyPort.onChange = function() {
+    var sync = syncFrequencyPort.get();
+    if(sync) {
+        syncFrequency();
+    } else {
+        unsyncFrequency();
+    }
+};
+
+phasePort.onChange = function() {
+    var phase = phasePort.get();
+    if(phase >= PHASE_MIN && phase <= PHASE_MAX) {
+        node.set("phase", phase);
     }
 };
 
 //outputs
 var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
 
-
+// clean up
+op.onDelete = function() {
+    node.dispose();
+};
 

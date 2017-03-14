@@ -1,12 +1,14 @@
-op.name="PwmOscillator";
+op.name="FmOscillator";
 
-// defaults
+// constants
 var FREQUENCY_DEFAULT = 440;
 var DETUNE_DEFAULT = 0;
-var MODULATION_FREQUENCY_DEFAULT = 0.4;
 var PHASE_DEFAULT = 0;
 var PHASE_MIN = 0;
 var PHASE_MAX = 180;
+var MODULATION_INDEX_DEFAULT = 2;
+var MODULATION_TYPE_DEFAULT = "square";
+var HARMONICITY_DEFAULT = 1;
 var VOLUME_DEFAULT = -6;
 var MUTE_DEFAULT = false;
 var SYNC_FREQUENCY_DEFAULT = false;
@@ -14,14 +16,26 @@ var START_DEFAULT = true;
 var START_TIME_DEFAULT = "+0";
 var STOP_TIME_DEFAULT = "+0";
 var AUTO_START_DEFAULT = true;
+var TYPES = [
+    "sine",
+    "square",
+    "sawtooth",
+    "triangle"
+];
+var TYPE_DEFAULT = "sine";
 
 // vars
-var node = new Tone.PWMOscillator(FREQUENCY_DEFAULT, MODULATION_FREQUENCY_DEFAULT);
+var node = new Tone.FMOscillator();
 
-// input ports
+// inputs
 var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 var detunePort = CABLES.WebAudio.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
-var modulationFrequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Modulation Frequency", node.modulationFrequency, null, MODULATION_FREQUENCY_DEFAULT);
+var modulationIndexPort = CABLES.WebAudio.createAudioParamInPort(op, "Modulation Index", node.modulationIndex, null, MODULATION_INDEX_DEFAULT);
+var harmonicityPort = CABLES.WebAudio.createAudioParamInPort(op, "Harmonicity", node.harmonicity, null, HARMONICITY_DEFAULT);
+var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
+typePort.set(TYPE_DEFAULT);
+var modulationTypePort = op.addInPort( new Port( op, "Modulation Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
+modulationTypePort.set(MODULATION_TYPE_DEFAULT);
 var phasePort = op.addInPort( new Port( op, "Phase", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX } ));
 phasePort.set(PHASE_DEFAULT);
 var syncFrequencyPort = op.inValueBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
@@ -34,14 +48,6 @@ var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volum
 var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(MUTE_DEFAULT);
 
-// set defaults
-node.set("frequency", FREQUENCY_DEFAULT);
-node.set("detune", DETUNE_DEFAULT);
-node.set("modulationFrequency", MODULATION_FREQUENCY_DEFAULT);
-node.set("phase", PHASE_DEFAULT);
-node.set("volume", VOLUME_DEFAULT);
-node.set("mute", MUTE_DEFAULT);
-
 // init
 op.onLoaded = function() {
     var syncFrequency = syncFrequencyPort.get();
@@ -53,10 +59,6 @@ op.onLoaded = function() {
     if(autoStartPort.get()) {
         start();
     }
-};
-
-autoStartPort.onChange = function() {
-    op.log("autoStartPort changed: ", autoStartPort.get());
 };
 
 // functions
@@ -89,6 +91,24 @@ function stop() {
 }
 
 // change listeners
+typePort.onChange = function() {
+    var type = typePort.get();
+    if(type && TYPES.indexOf(type) > -1) {
+        node.set("type", type);
+    }
+};
+modulationTypePort.onChange = function() {
+    var modulationType = modulationTypePort.get();
+    if(modulationType && TYPES.indexOf(modulationType) > -1) {
+        node.set("modulationType", modulationType);
+    }
+};
+phasePort.onChange = function() {
+    var phase = phasePort.get();
+    if(phase >= PHASE_MIN && phase <= PHASE_MAX) {
+        node.set("phase", phase);    
+    }
+};
 startPort.onTriggered = function() {
     start();
 };
@@ -109,12 +129,8 @@ syncFrequencyPort.onChange = function() {
         unsyncFrequency();
     }
 };
-
-phasePort.onChange = function() {
-    var phase = phasePort.get();
-    if(phase >= PHASE_MIN && phase <= PHASE_MAX) {
-        node.set("phase", phase);    
-    }
+autoStartPort.onChange = function() {
+    op.log("autoStartPort changed: ", autoStartPort.get());
 };
 
 // outputs
@@ -124,3 +140,4 @@ var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
 op.onDelete = function() {
     node.dispose();
 };
+

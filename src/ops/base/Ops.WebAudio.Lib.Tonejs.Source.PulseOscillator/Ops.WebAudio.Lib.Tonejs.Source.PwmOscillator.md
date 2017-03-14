@@ -1,10 +1,14 @@
-# PwmOscillator
+# PulseOscillator
 
 *Ops.WebAudio.Lib.Tonejs.Source.PwmOscillator*   
 
 `PwmOscillator` modulates the width of a `PulseOscillator` at the `modulationFrequency`. This has the effect of continuously changing the timbre of the oscillator by altering the harmonics generated.
 
 ## Input
+
+### Width [Number]
+
+The width of the pulse
 
 ### Frequency [Number]
 
@@ -14,11 +18,7 @@ The frequency of the oscillator
 
 The detune amount, `100` = one semitone up, `-100` = one semitone down, `1200` = one octave up
 
-### Modulation Frequency [Number]
-
-The modulation rate of the oscillator.
-
-## Phase [Number]
+### Phase [Number]
 
 The phase of the oscillator in degrees (between `0`and `180`.
 

@@ -28,6 +28,7 @@ startPort.onTriggered = function() {
     } else {
         Tone.Transport.start();
     }
+    op.log("Transport started with time: ", time);
 };
 
 
