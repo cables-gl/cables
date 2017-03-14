@@ -51,6 +51,7 @@ for(i=0;i<MAX_LIGHTS;i++)
     lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
     
     lights[count].ambient=new CGL.Uniform(shader,'3f','lights['+count+'].ambient',1);
+    lights[count].specular=new CGL.Uniform(shader,'3f','lights['+count+'].specular',1);
     
     lights[count].fallOff=new CGL.Uniform(shader,'f','lights['+count+'].falloff',0);
     lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',10);
@@ -282,13 +283,14 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
 
                         lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
                         lights[count].ambient.setValue(cgl.frameStore.phong.lights[i].ambient);
+                        lights[count].specular.setValue(cgl.frameStore.phong.lights[i].specular);
                         lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
                         lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
                         if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
                         // if(cgl.frameStore.phong.lights[i].depthMVP) lights[count].depthMVP.setValue(cgl.frameStore.phong.lights[i].depthMVP);
                         if(cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex=cgl.frameStore.phong.lights[i].depthTex;
 
-                        lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);
+                        lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul||1);
                     }
 
                     count++;

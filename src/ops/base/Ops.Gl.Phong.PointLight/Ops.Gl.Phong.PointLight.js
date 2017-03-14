@@ -8,6 +8,8 @@ var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
 
 var radius=op.inValue("Radius",10);
 
+var intensity=op.inValue("Intensity",1);
+
 var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
 var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
 var z=op.addInPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
@@ -20,15 +22,20 @@ var ambientR=op.addInPort(new Port(op,"Ambient R",OP_PORT_TYPE_VALUE,{ display:'
 var ambientG=op.addInPort(new Port(op,"Ambient G",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var ambientB=op.addInPort(new Port(op,"Ambient B",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var fallOff=op.inValue("Fall Off",0.1);
-// var mul=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE,{display:'range'}));
+var specularR=op.addInPort(new Port(op,"Specular R",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var specularG=op.addInPort(new Port(op,"Specular G",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var specularB=op.addInPort(new Port(op,"Specular B",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-
+var fallOff=op.inValueSlider("Fall Off",0.1);
 
 ambientR.set(0);
 ambientG.set(0);
 ambientB.set(0);
-// mul.set(1);
+
+specularR.set(1);
+specularG.set(1);
+specularB.set(1);
+
 r.set(1);
 g.set(1);
 b.set(1);
@@ -39,6 +46,7 @@ var cgl=op.patch.cgl;
 
 radius.onChange=updateAll;
 fallOff.onChange=updateAll;
+intensity.onChange=updateAll;
 r.onChange=updateAll;
 g.onChange=updateAll;
 b.onChange=updateAll;
@@ -49,6 +57,9 @@ z.onChange=updateAll;
 ambientR.onChange=updateAll;
 ambientG.onChange=updateAll;
 ambientB.onChange=updateAll;
+specularR.onChange=updateAll;
+specularG.onChange=updateAll;
+specularB.onChange=updateAll;
 
 
 
@@ -67,6 +78,7 @@ function updateColor()
 {
     light.color=[ r.get(), g.get(), b.get() ];
     light.ambient=[ ambientR.get(), ambientG.get(), ambientB.get() ];
+    light.specular=[ specularR.get(), specularG.get(), specularB.get() ];
     light.changed=true;
 }
 
@@ -79,12 +91,13 @@ function updateAll()
 {
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights=[];
-    light={};
+    light=light||{};
     light.id=id;
     light.type=0;
     light.changed=true;
     light.radius=radius.get();
     light.fallOff=fallOff.get();
+    light.mul=intensity.get();
 
     updatePos();
     updateColor();
@@ -99,7 +112,7 @@ exe.onTriggered=function()
     
     // console.log(mpos);
     light.pos=mpos;
-    light.mul=1.0;//mul.get();
+    // light.mul=1.0;//mul.get();
     light.type=0;
 
     if(attachment.isLinked())
