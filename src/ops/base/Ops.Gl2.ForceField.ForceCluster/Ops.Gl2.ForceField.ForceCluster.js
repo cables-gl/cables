@@ -16,6 +16,8 @@ var posZ=op.inValue("Pos Z");
 
 var next=op.outFunction("next");
 
+var outPoints=op.outArray("Points");
+
 var forceObj={};
 
 var mesh=null;
@@ -36,6 +38,7 @@ doreset.onTriggered=reset;
 
 function reset()
 {
+
     forces.length=Math.floor(num.get());
     for(var i=0;i<num.get();i++)
     {

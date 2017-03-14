@@ -36,10 +36,10 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 base=texture2D(tex,texCoord);'
 
-	.endl()+'   vec4 inputRange = min(max(base - vec4(inMin), vec4(0.0)) / (vec4(inMax) - vec4(inMin)), vec4(1.0));'
+	.endl()+'   vec4 inputRange = min(max(base - vec4(inMin), vec4(0.0)) / (vec4(inMax) - vec4(inMin)), vec4(outMax));'
 	.endl()+'   inputRange = pow(inputRange, vec4(1.0 / (1.5 - midPoint)));'
 
-	.endl()+'   gl_FragColor = mix(vec4(outMin), vec4(outMax), inputRange);'
+	.endl()+'   gl_FragColor = mix(vec4(outMin), vec4(1.0), inputRange);'
 
     .endl()+'}';
 
