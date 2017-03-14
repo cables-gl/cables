@@ -349,7 +349,7 @@ CABLES.Patch.prototype.exec=function(e)
             lastFrameTime=0;
             setTimeout(this.exec.bind(this),3000);
 
-            $('#delayed').show();
+            if(CABLES.UI)$('#delayed').show();
             wasdelayed=true;
             return;
         }
@@ -359,7 +359,7 @@ CABLES.Patch.prototype.exec=function(e)
             lastFrameTime=0;
             setTimeout(this.exec.bind(this),650);
 
-            $('#delayed').show();
+            if(CABLES.UI)$('#delayed').show();
             wasdelayed=true;
             return;
         }
@@ -376,7 +376,7 @@ CABLES.Patch.prototype.exec=function(e)
 
     if(wasdelayed)
     {
-        $('#delayed').hide();
+        if(CABLES.UI)$('#delayed').hide();
         wasdelayed=false;
     }
     requestAnimationFrame(this.exec.bind(this));

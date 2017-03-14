@@ -3,7 +3,7 @@ op.name="Limiter";
 CABLES.WebAudio.createAudioContext(op);
 
 // default
-var THRESHOLD_DEFAULT = -12;
+var THRESHOLD_DEFAULT = -28;
 var THRESHOLD_MIN = -100;
 var THRESHOLD_MAX = 0;
 
