@@ -601,12 +601,10 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
                 if(port && (port.uiAttribs.display=='bool' || port.uiAttribs.type=='bool') && !isNaN(objPort.value) )
                 {
                     objPort.value=true===objPort.value;
-                    console.log("SETVALUE");
                 }
 
                 if(port && objPort.value!==undefined && port.type!=OP_PORT_TYPE_TEXTURE)
                 {
-                    console.log("SETVALUE");
                     port.set(objPort.value);
                 }
                 if(objPort.animated)port.setAnimated(objPort.animated);
@@ -652,7 +650,6 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
         }
     }
 
-console.log('call onloaded');
     for(var i in this.ops)
     {
         if(this.ops[i].onLoaded)
