@@ -157,11 +157,13 @@ function updateGeom()
         
         geoms[vid].vertices=verts;
         geoms[vid].verticesIndices=indices;
-        geoms[vid].texCoords=tc;
+        geoms[vid].texCoords=new Float32Array(tc);
         geoms[vid].calculateNormals({"forceZUp":true});
         
         if(!meshes[vid]) meshes[vid]=new CGL.Mesh(op.patch.cgl,geoms[vid]);
-            else meshes[vid].setGeom(geoms[vid]);
+            // else meshes[vid].setGeom(geoms[vid]);
+            else meshes[vid].updateVertices(geoms[vid]);
+            
         
         meshes[vid].pos=[sites[ic].x,sites[ic].y,0];
         

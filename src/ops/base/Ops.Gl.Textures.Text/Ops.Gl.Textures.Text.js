@@ -1,5 +1,5 @@
-
 op.name='TextureText';
+
 var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var inFontSize=op.addInPort(new Port(op,"fontSize"));
 var maximize=op.addInPort(new Port(op,"Maximize Size",OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -38,7 +38,6 @@ var ctx = fontImage.getContext('2d');
 
 function reSize()
 {
-
     textureOut.get().setSize(texWidth.get(),texHeight.get());
 
     ctx.canvas.width=fontImage.width=texWidth.get();
@@ -49,9 +48,6 @@ function reSize()
 function refresh()
 {
     ctx.clearRect(0,0,fontImage.width,fontImage.height);
-    // ctx.fillStyle = 'rgba(255,255,255,0)';
-    // ctx.fillRect(0,0,fontImage.width,fontImage.height);
-    
     ctx.fillStyle = 'white';
     var fontSize=parseFloat(inFontSize.get());
     var fontname=font.get();
