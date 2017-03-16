@@ -17,34 +17,18 @@ var vibratoAmountPort = CABLES.WebAudio.createAudioParamInPort(op, "Vibrato Amou
 var vibratoRatePort = CABLES.WebAudio.createAudioParamInPort(op, "Vibrato Rate", node.vibratoRate, null, VIBRATO_RATE_DEFAULT);
 var harmonicityPort = CABLES.WebAudio.createAudioParamInPort(op, "Harmonicity", node.harmonicity, null, HARMONICITY_DEFAULT);
 var portamentoPort = op.inValueString("Portamento", PORTAMENTO_DEFAULT);
-var voice1Port = op.inObject("MonoSynth 1");
-voice1Port.shouldLink = canLinkVoicePort;
-var voice2Port = op.inObject("MonoSynth 2");
-voice2Port.shouldLink = canLinkVoicePort;
 var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 
-
-// functions
-// checks if another object port can connect
-function canLinkVoicePort(p1, p2) {
-    if(p1 == this && isMonoSynth(p2)) return true;
-    if(p2 == this && isMonoSynth(p2)) return true;
-    return false; // no monosynth object
-}
-
-function isMonoSynth(o){
-    return o instanceof Tone.MonoSynth;
-}
-
 // change listeners
-voice1Port.onChange = function() {
-    var voice1 = voice1Port.get();
-    if(voice1) {
-        if(isMonoSynth(voice1)) {
-                
-        } else {
-            // TODO: Show warning
-        }    
+portamentoPort.onChange = function() {
+    var portamento = portamentoPort.get();
+    if(CABLES.WebAudio.isValidToneTime(portamento)) {
+        node.set("portamento", portamento);
+        op.uiAttr( { 'warning': null } ); // clear warning
+        gui.patch().showOpParams(op); // update GUI
+    } else {
+        op.uiAttr( { 'warning': 'Portamento is not a valid time!' } );
+        gui.patch().showOpParams(op); // update GUI
     }
 };
 
