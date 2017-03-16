@@ -389,9 +389,6 @@ CABLES.Patch.prototype.link=function(op1,port1Name,op2,port2Name)
     var port1=op1.getPort(port1Name);
     var port2=op2.getPort(port2Name);
 
-console.log(port1.type,port2.type);
-
-
     if(!port1)
     {
         console.warn('port not found! '+port1Name);
