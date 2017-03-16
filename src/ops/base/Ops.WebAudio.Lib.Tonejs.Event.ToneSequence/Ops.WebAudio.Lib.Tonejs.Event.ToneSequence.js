@@ -1,4 +1,4 @@
-op.name="Sequence";
+op.name="ToneSequence";
 
 CABLES.WebAudio.createAudioContext(op);
 
