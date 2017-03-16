@@ -17,16 +17,16 @@ var srcFrag=attachments.fbmnoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.
 shader.setSource(shader.getDefaultVertexShader(),srcFrag );
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-new CGL.Uniform(shader,'f','scale',op.inValue("scale",1));
+new CGL.Uniform(shader,'f','scale',op.inValue("scale",2));
 new CGL.Uniform(shader,'f','anim',op.inValue("anim",0));
 new CGL.Uniform(shader,'f','scrollX',op.inValue("scrollX",9));
 new CGL.Uniform(shader,'f','scrollY',op.inValue("scrollY",0));
 new CGL.Uniform(shader,'f','repeat',op.inValue("repeat",1));
 
-new CGL.Uniform(shader,'b','layer1',op.inValueBool("Layer 1",false));
-new CGL.Uniform(shader,'b','layer2',op.inValueBool("Layer 2",false));
-new CGL.Uniform(shader,'b','layer3',op.inValueBool("Layer 3",false));
-new CGL.Uniform(shader,'b','layer4',op.inValueBool("Layer 4",false));
+new CGL.Uniform(shader,'b','layer1',op.inValueBool("Layer 1",true));
+new CGL.Uniform(shader,'b','layer2',op.inValueBool("Layer 2",true));
+new CGL.Uniform(shader,'b','layer3',op.inValueBool("Layer 3",true));
+new CGL.Uniform(shader,'b','layer4',op.inValueBool("Layer 4",true));
 
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
