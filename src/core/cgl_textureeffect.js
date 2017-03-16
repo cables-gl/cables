@@ -357,7 +357,7 @@ CGL.TextureEffect.AddBlendSelect=function(op,name)
             'color burn',
             'softlight',
             'hardlight'
-        ]);
+        ],"normal");
 
     return p;
 };

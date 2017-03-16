@@ -56,7 +56,7 @@ void main() {
         }
         
         float dist = distance(texCoord, pos);
-        if ( dist < m_dist )
+        if( dist < m_dist )
         {
             // Keep the closer distance
             m_dist = dist;
@@ -70,6 +70,7 @@ void main() {
     // tint acording the closest point position
     if(fill==1) color.rgb = vec3( indexColor );
     if(fill==2) color.rgb = vec3( m_point.x );
+    if(fill==3) color.rgb = vec3( 0.5 );
 
     // Add distance field to closest point center 
     if(drawDistance) color += m_dist*2.;

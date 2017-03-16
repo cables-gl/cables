@@ -12,7 +12,7 @@ var movement=op.inValueSlider("Movement",0);
 var num=op.inValue("Num",50);
 var seed=op.inValue("seed",0);
 
-var fill=op.inValueSelect("Fill",["None","Random","Gradient"],"Random");
+var fill=op.inValueSelect("Fill",["None","Random","Gradient","Gray"],"Random");
 var drawIsoLines=op.inValueBool("Draw Isolines",false);
 var drawDistance=op.inValueBool("Draw Distance",false);
 var centerSize=op.inValueSlider("Draw Center",0);
@@ -41,7 +41,7 @@ var uniCenterSize=new CGL.Uniform(shader,'f','centerSize',centerSize);
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag );
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-
+shader.define("NUM",20.01);
 
 num.onChange=function()
 {
@@ -52,6 +52,7 @@ fill.onChange=function()
 {
     if(fill.get()=="Random") uniFill.setValue(1);
     else if(fill.get()=="Gradient") uniFill.setValue(2);
+    else if(fill.get()=="Gray") uniFill.setValue(3);
     else uniFill.setValue(0);
 };
 
