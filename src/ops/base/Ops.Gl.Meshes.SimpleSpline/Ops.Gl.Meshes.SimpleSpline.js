@@ -18,6 +18,7 @@ var buff=new Float32Array();
 render.onTriggered=function()
 {
     if(!points.get())return;
+    if(points.get().length===0)return;
     if(op.instanced(render))return;
 
     if(points.get().length===0)return;

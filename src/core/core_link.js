@@ -39,7 +39,7 @@ CABLES.Link.prototype._setValue=function()
     var v=this.portOut.get();
 
 
-    if( v==v)  // NaN is the only JavaScript value that is treated as unequal to itself
+    if(v==v)  // NaN is the only JavaScript value that is treated as unequal to itself
     {
         this.activity();
 
@@ -154,12 +154,18 @@ CABLES.Link.canLink=function(p1,p2)
     if(p1.direction==PORT_DIR_IN && p1.isAnimated())return false;
     if(p2.direction==PORT_DIR_IN && p2.isAnimated())return false;
 
+
+
     if(p1.direction==PORT_DIR_IN && p1.links.length>0)return false;
     if(p2.direction==PORT_DIR_IN && p2.links.length>0)return false;
     if(p1.isLinkedTo(p2))return false;
+
+
+
     if(p1.direction==p2.direction)return false;
     if(p1.type!=p2.type)return false;
     if(p1.parent==p2.parent)return false;
+
 
     if(p1.canLink && !p1.canLink(p2))return false;
     if(p2.canLink && !p2.canLink(p1))return false;

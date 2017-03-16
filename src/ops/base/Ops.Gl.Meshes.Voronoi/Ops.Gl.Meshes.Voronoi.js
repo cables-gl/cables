@@ -161,9 +161,9 @@ function updateGeom()
         geoms[vid].calculateNormals({"forceZUp":true});
         
         if(!meshes[vid]) meshes[vid]=new CGL.Mesh(op.patch.cgl,geoms[vid]);
-            // else meshes[vid].setGeom(geoms[vid]);
-            else meshes[vid].updateVertices(geoms[vid]);
-            
+            else meshes[vid].setGeom(geoms[vid]);
+            // else meshes[vid].updateVertices(geoms[vid]);
+
         
         meshes[vid].pos=[sites[ic].x,sites[ic].y,0];
         
@@ -198,7 +198,7 @@ render.onTriggered=function()
     if(!shader)return;
     oldPrim=shader.glPrimitive;
 
-    for(var i in meshes)
+    for(var i=0;i<meshes.length;i++)
     {
         if(pRender.get())meshes[i].render(op.patch.cgl.getShader());
 
