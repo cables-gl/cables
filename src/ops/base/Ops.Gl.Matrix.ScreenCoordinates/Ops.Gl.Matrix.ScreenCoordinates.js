@@ -13,7 +13,6 @@ var m=mat4.create();
 var pos=[0,0,0];
 exec.onTriggered=function()
 {
-    
     mat4.multiply(m,cgl.vMatrix,cgl.mvMatrix);
     vec3.transformMat4(pos, [0,0,0], m);
     

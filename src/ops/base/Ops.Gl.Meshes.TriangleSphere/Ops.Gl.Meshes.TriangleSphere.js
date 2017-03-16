@@ -184,6 +184,7 @@ function generate()
         geom.verticesIndices=indices;
     }
     
+    
     geom.calculateNormals({"forceZUp":false});
     
     mesh=new CGL.Mesh(cgl,geom);

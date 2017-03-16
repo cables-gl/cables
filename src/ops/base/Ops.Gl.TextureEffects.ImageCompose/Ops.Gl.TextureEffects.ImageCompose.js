@@ -148,8 +148,10 @@ var doRender=function()
 
 
     trigger.trigger();
-    texOut.set(effect.getCurrentSourceTexture());
     
+
+    texOut.set(effect.getCurrentSourceTexture());
+
     effect.endEffect();
 
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);

@@ -78,6 +78,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     if(numItems===0)
     {
         console.warn('CGL_MESH: num items in attribute '+name+' is ZERO');
+        // return;
     }
 
 
@@ -473,6 +474,6 @@ CGL.Mesh.prototype.render=function(shader)
 
 CGL.Mesh.prototype.dispose=function()
 {
-    
+
 
 };

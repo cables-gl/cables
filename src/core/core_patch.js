@@ -349,7 +349,7 @@ CABLES.Patch.prototype.exec=function(e)
             lastFrameTime=0;
             setTimeout(this.exec.bind(this),3000);
 
-            $('#delayed').show();
+            if(CABLES.UI)$('#delayed').show();
             wasdelayed=true;
             return;
         }
@@ -359,7 +359,7 @@ CABLES.Patch.prototype.exec=function(e)
             lastFrameTime=0;
             setTimeout(this.exec.bind(this),650);
 
-            $('#delayed').show();
+            if(CABLES.UI)$('#delayed').show();
             wasdelayed=true;
             return;
         }
@@ -376,7 +376,7 @@ CABLES.Patch.prototype.exec=function(e)
 
     if(wasdelayed)
     {
-        $('#delayed').hide();
+        if(CABLES.UI)$('#delayed').hide();
         wasdelayed=false;
     }
     requestAnimationFrame(this.exec.bind(this));
@@ -414,6 +414,7 @@ CABLES.Patch.prototype.link=function(op1,port1Name,op2,port2Name)
         this.onLink(port1,port2);
         return link;
     }
+
     // else console.log(CABLES.Link.canLinkText(port1,port2));
 
 };
@@ -458,7 +459,6 @@ CABLES.Patch.prototype.getOpsByName=function(name)
 
 CABLES.Patch.prototype.loadLib=function(which)
 {
-
     CABLES.ajaxSync('/ui/libs/'+which+'.js',
         function(err,res)
         {
@@ -466,13 +466,11 @@ CABLES.Patch.prototype.loadLib=function(which)
             se.type = "text/javascript";
             se.text = res;
             document.getElementsByTagName('head')[0].appendChild(se);
-
         },'GET');
     // open and send a synchronous request
     // xhrObj.open('GET', '/ui/libs/'+which+'.js', false);
     // xhrObj.send('');
     // add the returned content to a newly created script tag
-
 };
 
 CABLES.Patch.prototype.reloadOp=function(objName,cb)
