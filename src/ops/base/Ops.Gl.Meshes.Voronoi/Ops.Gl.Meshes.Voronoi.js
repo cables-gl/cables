@@ -1,4 +1,5 @@
-op.name="voronoi";
+op.name="Voronoi";
+
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var pSites=op.inArray("Site Points");
 
@@ -7,12 +8,15 @@ var pRender=op.inValueBool("Render",true);
 var pWidth=op.inValue("Width",2);
 var pHeight=op.inValue("Height",2);
 
+var fill=op.inValueSlider("Fill",0);
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
-
-
+var inCalcNormals=op.inValueBool("Calc Normals",true);
 var next=op.outFunction("Next");
+var outVerts=op.outArray("Points");
 
 pExtrCenter.onChange=queueUpdate;
+fill.onChange=queueUpdate;
+inCalcNormals.onChange=queueUpdate;
 
 var needsUpdate=true;
 var cgl=op.patch.cgl;
@@ -45,7 +49,7 @@ for(var i=0;i<75;i++)
 
 var diagram = voronoi.compute(sites, bbox);
 var meshes=[];
-var geoms=[];
+var geom=null
 
 pSites.onChange=function()
 {
@@ -81,6 +85,11 @@ function queueUpdate()
     needsUpdate=true;
 }
 
+var verts=[];    
+var indices=[];
+var tc=new Float32Array(99000);
+
+
 function updateGeom()
 {
     if(!sites)return;
@@ -90,83 +99,109 @@ function updateGeom()
     meshes.length=0;
     needsUpdate=false;
 
+
+    var count=0;
     for (var ic = 0; ic < sites.length; ic++)
     {
         var vid=sites[ic].voronoiId;
-        var verts=[];
-        var tc=[];
+
+        var cell = diagram.cells[vid];
+
+        if(cell)
+        {
+            for(var j=0;j<cell.halfedges.length;j++)
+            {
+                count++;
+            }
+            
+        }
+    }
+    
+    var filling=fill.get();
+
+    if(filling<=0.0) verts.length=count*3*3;
+    else verts.length=count*6*3;
+    
+    // console.log(count*6);
+    
+    count=0;
+
+
+    for (var ic = 0; ic < sites.length; ic++)
+    {
+        
+        var vid=sites[ic].voronoiId;
+
+        
         var cell = diagram.cells[vid];
         if(!cell)return;
 
         var mX=0;
         var mY=0;
         var check=0;
-        var indices=[];
         
         var w=pWidth.get();
         var h=pHeight.get();
         
-        if(!geoms[vid])geoms[vid]=new CGL.Geometry();
+        
 
         var minDist=9999999;
+
+
 
         for(var j=0;j<cell.halfedges.length;j++)
         {
             var edge=cell.halfedges[j].edge;
 
-            verts.push(cell.site.x);
-            verts.push(cell.site.y);
-            verts.push(pExtrCenter.get());
-            // tc.push((cell.site.x+w/2)/w);
-            // tc.push((cell.site.y+h/2)/h);
-            // tc.push(cell.site.y/h);
-            // tc.push(0);
-            // tc.push(0);
-            tc.push(cell.site.x/w-0.5);
-            tc.push(cell.site.y/h-0.5);
+            
+            if(filling<=0.0)
+            {
+                verts[count++]=cell.site.x;
+                verts[count++]=cell.site.y;
+                verts[count++]=pExtrCenter.get();
+    
+                verts[count++]=edge.va.x;
+                verts[count++]=edge.va.y;
+                verts[count++]=0;
+    
+    
+                verts[count++]=edge.vb.x;
+                verts[count++]=edge.vb.y;
+                verts[count++]=0;
+            }
+            else
+            {
+                verts[count++]=cell.site.x+(edge.va.x-cell.site.x)*filling;
+                verts[count++]=cell.site.y+(edge.va.y-cell.site.y)*filling;
+                verts[count++]=0;
+    
+                verts[count++]=edge.va.x;
+                verts[count++]=edge.va.y;
+                verts[count++]=0;
 
-            indices.push(verts.length/3-1);
+                verts[count++]=edge.vb.x;
+                verts[count++]=edge.vb.y;
+                verts[count++]=0;
 
-            verts.push(edge.va.x);
-            verts.push(edge.va.y);
-            verts.push(0);
-            // tc.push((edge.va.x+w/2)/w);
-            // tc.push((edge.va.y+h/2)/h);
-            // tc.push(edge.va.x/w);
-            // tc.push(edge.va.y/h);
-            // tc.push(1);
-            // tc.push(1);
-            tc.push(cell.site.x/w-0.5);
-            tc.push(cell.site.y/h-0.5);
-            indices.push(verts.length/3-1);
 
-            verts.push(edge.vb.x);
-            verts.push(edge.vb.y);
-            verts.push(0);
-            // tc.push((edge.vb.x+w/2)/w);
-            // tc.push((edge.vb.y+h/2)/h);
-            // tc.push(edge.vb.x/w);
-            // tc.push(edge.vb.y/h);
-            // tc.push(1);
-            // tc.push(1);
-            tc.push(cell.site.x/w-0.5);
-            tc.push(cell.site.y/h-0.5);
 
-            indices.push(verts.length/3-1);
+                verts[count++]=cell.site.x+(edge.vb.x-cell.site.x)*filling;
+                verts[count++]=cell.site.y+(edge.vb.y-cell.site.y)*filling;
+                verts[count++]=0;
+    
+                verts[count++]=cell.site.x+(edge.va.x-cell.site.x)*filling;
+                verts[count++]=cell.site.y+(edge.va.y-cell.site.y)*filling;
+                verts[count++]=0;
+                
+                verts[count++]=edge.vb.x;
+                verts[count++]=edge.vb.y;
+                verts[count++]=0;
+
+            }
+
         }
         
-        geoms[vid].vertices=verts;
-        geoms[vid].verticesIndices=indices;
-        geoms[vid].texCoords=new Float32Array(tc);
-        geoms[vid].calculateNormals({"forceZUp":true});
-        
-        if(!meshes[vid]) meshes[vid]=new CGL.Mesh(op.patch.cgl,geoms[vid]);
-            else meshes[vid].setGeom(geoms[vid]);
-            // else meshes[vid].updateVertices(geoms[vid]);
 
-        
-        meshes[vid].pos=[sites[ic].x,sites[ic].y,0];
-        
         
         var md=99999;
 
@@ -185,9 +220,50 @@ function updateGeom()
         }
         
         // md=md*md;
-        meshes[vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
+        // meshes[vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
         
     }
+
+    // geom.unIndex();
+    
+    if(pRender.get())
+    {
+        tc.length=verts.length/3*2;
+        indices.length=verts.length;
+        var c=0;
+        
+        for(i=0;i<verts.length/3;i++)indices.push(i);
+    
+        // for(i=0;i<verts.length/3;i++)
+        // {
+        //     tc[i*2+0]=0.0;
+        //     tc[i*2+1]=0.0;
+        // }
+    
+        if(!geom)geom=new CGL.Geometry();
+    
+        geom.vertices=verts;
+        geom.verticesIndices=indices;
+        geom.texCoords=tc;
+        if(inCalcNormals.get())
+            geom.calculateNormals({"forceZUp":true});
+        
+        if(!meshes[0]) meshes[0]=new CGL.Mesh(op.patch.cgl,geom);
+            else meshes[0].setGeom(geom);
+            // else meshes[0].updateVertices(geom);
+
+        // console.log('verts ',verts.length);
+        // meshes[0].pos=[sites[ic].x,sites[ic].y,0];
+        
+    }
+    
+    // console.log(verts.length);
+    
+    outVerts.set(null);
+    outVerts.set(verts);
+
+    
+    
 }
 
 render.onTriggered=function()
