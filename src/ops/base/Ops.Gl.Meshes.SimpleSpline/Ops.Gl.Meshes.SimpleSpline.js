@@ -25,7 +25,7 @@ render.onTriggered=function()
 
     if(points.get().length!=buff.length)
     {
-        console.log("Resize...");
+        // console.log("Resize...");
         buff=new Float32Array(points.get());
     }
     else

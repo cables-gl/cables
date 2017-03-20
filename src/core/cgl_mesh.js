@@ -95,7 +95,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
                 this._attributes[i].loc=-1;
                 this._attributes[i].numItems=numItems;
 
-                console.log('updating attrib');
+                // console.log('updating attrib');
 
                 this._cgl.gl.deleteBuffer(this._attributes[i].buffer);
                 this._attributes[i].buffer=this._cgl.gl.createBuffer();
