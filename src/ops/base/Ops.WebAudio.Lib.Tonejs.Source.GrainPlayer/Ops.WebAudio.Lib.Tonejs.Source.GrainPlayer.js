@@ -10,6 +10,7 @@ var DRIFT_DEFAULT = 0;
 var PLAYBACK_RATE_DEFAULT = 1;
 var PLAYBACK_RATE_MIN = 0.0001;
 var PLAYBACK_RATE_MAX = 100;
+var OVERLAP_DEFAULT = 0;
 var GRAIN_SIZE_MIN = 0.0001;
 var GRAIN_SIZE_DEFAULT = 0.2;
 var PLAY_DEFAULT = true;
@@ -29,6 +30,7 @@ var sampleUrlPort = op.addInPort( new Port( this, "Sample", OP_PORT_TYPE_VALUE, 
 var detunePort = op.inValue("Detune", DETUNE_DEFAULT);
 var driftPort = op.inValue("Drift", DRIFT_DEFAULT);
 var playbackRatePort = op.inValue("Playback Rate", PLAYBACK_RATE_DEFAULT);
+var overlapPort = op.inValue("Overlap", OVERLAP_DEFAULT);
 var grainSizePort = op.inValue("Grain Size", GRAIN_SIZE_DEFAULT);
 var loopPort = op.addInPort( new Port( this, "Loop", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 loopPort.set(PLAY_DEFAULT);
@@ -60,12 +62,10 @@ driftPort.onChange = function(){
     op.log(drift);
     if(drift < 0) {
         drift = 0;
-        driftPort.set(drift);
-    } else if(drift < buffer.duration) {
+    } else if(drift > buffer.duration) {
         drift = buffer.duration - 0.00001;
-        driftPort.set(drift);
     }
-    setNodeValue("drift", driftPort.get());    
+    setNodeValue("drift", drift);    
 };
 playbackRatePort.onChange = function(){
     var playBackRate = playbackRatePort.get();
@@ -86,16 +86,24 @@ playbackRatePort.onChange = function(){
         }
     }
 };
+overlapPort.onChange = function() {
+    var overlap = overlapPort.get();
+    if(CABLES.WebAudio.isValidToneTime(overlap)) {
+        setNodeValue( "overlap", overlap );    
+    } else {
+        // TODO, show error
+    }
+};
 loopPort.onChange = function(){ setNodeValue( "loop", loopPort.get() ); };
 loopStartPort.onChange = function(){ 
     var t = loopStartPort.get();
-    if(isValidTime(t)) {
+    if(CABLES.WebAudio.isValidToneTime(t)) {
         setNodeValue("loopStart", t);     
     }
 };
 loopEndPort.onChange = function(){
     var t = loopEndPort.get();
-    if(isValidTime(t)) {
+    if(CABLES.WebAudio.isValidToneTime(t)) {
         setNodeValue("loopStart", t);     
     }
     
