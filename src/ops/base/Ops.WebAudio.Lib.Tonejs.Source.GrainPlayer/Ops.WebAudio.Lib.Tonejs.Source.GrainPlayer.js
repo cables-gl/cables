@@ -26,7 +26,7 @@ var bufferLoaded = false;
 // input ports
 var playPort = op.addInPort( new Port( this, "Play", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 playPort.set(PLAY_DEFAULT);
-var sampleUrlPort = op.addInPort( new Port( this, "Sample", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'audio'  } ));
+var samplePort = op.inObject("Sample (AudioBuffer)");
 var detunePort = op.inValue("Detune", DETUNE_DEFAULT);
 var driftPort = op.inValue("Drift", DRIFT_DEFAULT);
 var playbackRatePort = op.inValue("Playback Rate", PLAYBACK_RATE_DEFAULT);
@@ -59,7 +59,6 @@ playPort.onChange = function() {
 detunePort.onChange = function(){ setNodeValue( "detune", detunePort.get() ); };
 driftPort.onChange = function(){
     var drift = driftPort.get();
-    op.log(drift);
     if(drift < 0) {
         drift = 0;
     } else if(drift > buffer.duration) {
@@ -74,15 +73,13 @@ playbackRatePort.onChange = function(){
         if(playBackRateF > 0) {
             setNodeValue("playbackRate", playBackRateF);
         } else {
-            playbackRatePort.set(PLAYBACK_RATE_MIN);
+            // TODO: Show error
         }
     } else if(typeof playBackRate === 'string') {
-        op.log("playbackrate: ", playBackRate);
-        if(isValidTime(playBackRate)) {
-            op.log("... is valid time");
+        if(CABLES.WebAudio.isValidToneTime(playBackRate)) {
             setNodeValue("playbackRate", playBackRate);
         } else {
-            // do nothing?
+            // TODO: Show error
         }
     }
 };
@@ -123,50 +120,29 @@ grainSizePort.onChange = function() {
     }
 };
 
-sampleUrlPort.onChange = function() {
-    var sampleUrl = sampleUrlPort.get();
-    if(sampleUrl) {
-        sampleUrl = sampleUrl.trim();
-    }
-    if(sampleUrl) {
-        bufferLoaded = false;
-        buffer = new Tone.Buffer (sampleUrl, sampleLoaded, function(e){
-        	op.log("Could not load sample!", e);
-        });    
+samplePort.onChange = function() {
+    var sample = samplePort.get();
+    if(sample) { // TODO: Add better validity-check
+        node.set("buffer", sample);
+    	var play = playPort.get();
+        if(play) {
+            try {
+                node.start();    
+            } catch(e) {
+                op.log("ERROR: ", e);
+            }
+        } else {
+            try {
+                node.stop();    
+            } catch(e) {
+                op.log("ERROR: ", e);
+            }
+        }
+    	bufferLoaded = true;    
     }
 };
 
 // functions
-function sampleLoaded() {
-    console.log("sample loaded");
-	node.set("buffer", buffer.get());
-	var play = playPort.get();
-    if(play) {
-        try {
-            node.start();    
-        } catch(e) {
-            op.log("ERROR: ", e);
-        }
-    } else {
-        try {
-            node.stop();    
-        } catch(e) {
-            op.log("ERROR: ", e);
-        }
-    }
-	bufferLoaded = true;
-	op.log("buffer duration:", buffer.duration);
-}
-
-function isValidTime(t) {
-    try{
-	    var time = new Tone.TimeBase(t);	
-    } catch(e) {
-    	return false;
-    }
-    return true;
-}
-
 function setNodeValue(key, val) {
     node.set(key, val);
 }
