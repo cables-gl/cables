@@ -8,6 +8,7 @@ var APPEND_OCTAVE_DEFAULT = true;
 var OCTAVE_DEFAULT = 3;
 var OCTAVE_MIN = 0;
 var OCTAVE_MAX = 7;
+var INCLUDE_HIGH_BASE_TONE_DEFAULT = false;
 
 // scale types taken from: https://github.com/stagas/scales/blob/master/index.js
 var SCALE_TYPES = {
@@ -50,6 +51,8 @@ var appendOctavePort = op.addInPort( new Port( op, "Append Octave", OP_PORT_TYPE
 appendOctavePort.set(APPEND_OCTAVE_DEFAULT);
 var octavePort = op.addInPort( new Port( op, "Octave", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVE_MIN, 'max': OCTAVE_MAX } ));
 octavePort.set(OCTAVE_DEFAULT);
+var includeHighBaseTonePort = op.addInPort( new Port( op, "Include High Base Tone", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+includeHighBaseTonePort.set(INCLUDE_HIGH_BASE_TONE_DEFAULT);
 
 // output
 var scaleArrayPort = op.outArray("Scale Array");
@@ -57,12 +60,9 @@ var scaleArrayPort = op.outArray("Scale Array");
 // change listeners
 baseTonePort.onChange = setOutput;
 scaleTypePort.onChange = setOutput;
-octavePort.onChange = function() {
-    var octave = octavePort.get();
-    if(octave && octave >= OCTAVE_MIN && octave <= OCTAVE_MAX && appendOctavePort.get()) {
-        setOutput();
-    }
-};
+octavePort.onChange = setOutput;
+
+includeHighBaseTonePort.onChange = setOutput;
 
 // functions
 function getToneAt(index, offset) {
@@ -97,7 +97,9 @@ function setOutput() {
                 scaleArray.push(getToneAt(scale[i], baseToneIndex) + octave);
             }
             // append the base tone in the next octave
-            scaleArray.push(getToneAt(scale[0], baseToneIndex) + (octave+1));
+            if(includeHighBaseTonePort.get()) {
+                scaleArray.push(getToneAt(scale[0], baseToneIndex) + (octave+1));    
+            }
         } else { // "C", "D", ...
             for(var j=0; j<scale.length; j++) {
                 scaleArray.push(getToneAt(scale[j], baseToneIndex));
