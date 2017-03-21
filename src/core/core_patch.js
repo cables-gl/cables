@@ -347,22 +347,22 @@ CABLES.Patch.prototype.exec=function(e)
         if(now-lastFrameTime>500 && lastFrameTime!==0  && !wasdelayed)
         {
             lastFrameTime=0;
-            setTimeout(this.exec.bind(this),3000);
+            setTimeout(this.exec.bind(this),500);
 
             if(CABLES.UI)$('#delayed').show();
             wasdelayed=true;
             return;
         }
 
-        if(now-lastFrameTime>400 && lastFrameTime!==0  && !wasdelayed)
-        {
-            lastFrameTime=0;
-            setTimeout(this.exec.bind(this),650);
-
-            if(CABLES.UI)$('#delayed').show();
-            wasdelayed=true;
-            return;
-        }
+        // if(now-lastFrameTime>300 && lastFrameTime!==0  && !wasdelayed)
+        // {
+        //     lastFrameTime=0;
+        //     setTimeout(this.exec.bind(this),300);
+        //
+        //     if(CABLES.UI)$('#delayed').show();
+        //     wasdelayed=true;
+        //     return;
+        // }
     }
 
     if(this.config.fpsLimit===0 || frameDelta > frameInterval || wasdelayed)
