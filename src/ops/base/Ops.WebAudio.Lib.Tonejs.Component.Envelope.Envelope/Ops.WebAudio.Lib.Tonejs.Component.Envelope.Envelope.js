@@ -2,6 +2,18 @@ op.name="Envelope";
 
 CABLES.WebAudio.createAudioContext(op);
 
+// vars
+var node = new Tone.Envelope();
+
+// global functions
+op.webAudio = op.WebAudio || {};
+op.webAudio.setNodeSettings = function(settings) {
+    if(settings) {
+        node.set(settings);
+        updateUi();
+    }
+};
+
 // input port
 
 var attackPort = op.addInPort( new Port( this, "Attack", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
@@ -20,19 +32,20 @@ var envObjPort = op.outObject("Envelope Object");
 
 // change listeners
 attackPort.onChange = function() {
-    env.set("attack", attackPort.get());
+    node.set("attack", attackPort.get());
     updateEnvObjPort();
+    // signalPort.forceChange(); not working, so we need the envObjPort
 };
 decayPort.onChange = function() {
-    env.set("decay", decayPort.get());
+    node.set("decay", decayPort.get());
     updateEnvObjPort();
 };
 sustainPort.onChange = function() {
-    env.set("sustain", sustainPort.get());
+    node.set("sustain", sustainPort.get());
     updateEnvObjPort();
 };
 releasePort.onChange = function() {
-    env.set("release", releasePort.get());
+    node.set("release", releasePort.get());
     updateEnvObjPort();
 };
 
@@ -42,7 +55,7 @@ triggerAttackPort.onTriggered = function(){
     if(!CABLES.WebAudio.isValidToneTime(time)) {
         time = DEFAULT_ATTACK_TIME;
     }
-    env.triggerAttack(time, velocity);
+    node.triggerAttack(time, velocity);
 };
 
 triggerReleasePort.onTriggered = function(){
@@ -50,7 +63,7 @@ triggerReleasePort.onTriggered = function(){
     if(!CABLES.WebAudio.isValidToneTime(time)) {
         time = DEFAULT_RELEASE_TIME;
     }
-    env.triggerRelease(time);
+    node.triggerRelease(time);
 };
 
 // default values
@@ -64,9 +77,6 @@ var DEFAULT_ATTACK_TIME = "+0";
 var DEFAULT_RELEASE_TIME = "+0.125";
 var DEFAULT_VELOCITY = 1.0;
 
-// vars
-var env = new Tone.Envelope();
-
 // functions
 function updateEnvObjPort() {
     envObjPort.set({
@@ -75,6 +85,13 @@ function updateEnvObjPort() {
         'sustain': sustainPort.get(),
         'release': releasePort.get()
     });    
+}
+
+function updateUi() {
+    attackPort.set(node.get("attack").attack);
+    decayPort.set(node.get("decay").decay);
+    sustainPort.set(node.get("sustain").sustain);
+    releasePort.set(node.get("release").release);
 }
 
 // set defaults (input)
@@ -88,7 +105,7 @@ releaseTimePort.set(DEFAULT_RELEASE_TIME);
 velocityPort.set(DEFAULT_VELOCITY);
 
 // set defaults (output)
-signalPort.set(env);
+signalPort.set(node);
 updateEnvObjPort();    
 
 

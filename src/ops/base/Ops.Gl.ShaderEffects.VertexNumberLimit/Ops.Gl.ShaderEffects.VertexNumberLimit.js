@@ -13,7 +13,7 @@ var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var srcHeadVert=''
     .endl()+'uniform float {{mod}}_max;'
     .endl()+'varying float vertNumberLimitDiscarded;'
-    // .endl()+'attribute float attrVertIndex;'
+    .endl()+'attribute float attrVertIndex;'
     .endl();
 
 var srcBodyVert=''

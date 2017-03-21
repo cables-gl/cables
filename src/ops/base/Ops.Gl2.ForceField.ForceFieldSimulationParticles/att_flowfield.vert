@@ -112,7 +112,9 @@ if(respawn)
         (random(vec2(MOD_time+rndpos.z,rndpos.x))-0.5),
         (random(vec2(rndpos.x,MOD_time+rndpos.z))-0.5)
         );
-    outPos*=MOD_size/2.0;
+    outPos.x*=MOD_sizeX/2.0;
+    outPos.y*=MOD_sizeY/2.0;
+    outPos.z*=MOD_sizeZ/2.0;
     outPos+=MOD_emitterPos;
 }
 else

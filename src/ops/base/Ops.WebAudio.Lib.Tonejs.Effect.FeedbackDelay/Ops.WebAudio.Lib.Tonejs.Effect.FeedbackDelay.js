@@ -25,3 +25,7 @@ var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"disp
 // output ports
 var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
 
+// clean up
+op.onDelete = function() {
+    node.dispose();
+};

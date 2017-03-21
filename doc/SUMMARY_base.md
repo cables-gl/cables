@@ -21,7 +21,8 @@
     * [Namespaces](namespaces/namespaces.md)
     * [Op Development](dev_ops/dev_ops.md)
     * [Ports](dev_creating_ports/dev_creating_ports.md)
-    * [Dynamic Ports](dynamic_ports/dynamic_ports.md)
+      * [Object Ports](object_ports/object_ports.md)
+      * [Dynamic Ports](dynamic_ports/dynamic_ports.md)
     * [Callbacks](dev_callbacks/dev_callbacks.md)
     * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
 

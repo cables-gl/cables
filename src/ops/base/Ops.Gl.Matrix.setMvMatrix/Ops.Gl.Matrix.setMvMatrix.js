@@ -1,20 +1,23 @@
-    Op.apply(this, arguments);
-    var self=this;
-    var cgl=self.patch.cgl;
-    this.name='set MV Matrix';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var cgl=op.patch.cgl;
+op.name='set MV Matrix';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var inIdentity=op.inValueBool("Identity",false);
+var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-    var m=mat4.create();
-    this.matrix=this.addInPort(new Port(this,"matrix",OP_PORT_TYPE_ARRAY));
+var m=mat4.create();
+var matrix=op.addInPort(new Port(op,"matrix",OP_PORT_TYPE_ARRAY));
 
-    this.render.onTriggered=function()
-    {
-        cgl.pushMvMatrix();
-        mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,self.matrix.get());
+render.onTriggered=function()
+{
+    cgl.pushMvMatrix();
 
-        self.trigger.trigger();
-        cgl.popMvMatrix();
-    };
+    if(inIdentity.get())    
+        mat4.identity(cgl.mvMatrix);
 
-    this.matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );
+    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,matrix.get());
+
+    next.trigger();
+    cgl.popMvMatrix();
+};
+
+matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );

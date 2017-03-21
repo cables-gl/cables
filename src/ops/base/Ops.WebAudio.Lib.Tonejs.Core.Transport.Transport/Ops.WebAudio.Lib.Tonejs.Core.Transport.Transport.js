@@ -2,17 +2,6 @@ op.name="Transport";
 
 CABLES.WebAudio.createAudioContext(op);
 
-// in ports
-var updatePort = op.inFunction("Update");
-var bpmPort = op.addInPort( new Port( this, "BPM", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 300 } ));
-var swingPort = op.addInPort( new Port( this, "Swing", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
-var swingSubdivisionPort = op.inValueString("Swing Subdivision");
-var timeSignaturePort = op.inValue("Time Division");
-var loopPort = op.addInPort( new Port( op, "Loop", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
-var loopStartPort = op.inValueString("Loop Start");
-var loopEndPort = op.inValueString("Loop End");
-var ppqPort = op.inValue("Pulses Per Quarter Note");
-
 // in port defaults
 var BPM_DEFAULT = 120;
 var BPM_MIN = 1;
@@ -24,10 +13,31 @@ var LOOP_DEFAULT = true;
 var LOOP_START_DEFAULT = 0;
 var LOOP_END_DEFAULT = "4m";
 var PPQ_DEFAULT = 192;
+var START_TIME_DEFAULT = "+0";
+var START_OFFSET_DEFAULT = "0";
+var AUTO_START_DEFAULT = "true";
+var STOP_TIME_DEFAULT = "+0";
+
+// in ports
+var updatePort = op.inFunction("Update");
+var bpmPort = op.addInPort( new Port( this, "BPM", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 300 } ));
+var swingPort = op.addInPort( new Port( this, "Swing", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
+var swingSubdivisionPort = op.inValueString("Swing Subdivision");
+var timeSignaturePort = op.inValue("Time Division");
+var loopPort = op.addInPort( new Port( op, "Loop", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var loopStartPort = op.inValueString("Loop Start");
+var loopEndPort = op.inValueString("Loop End");
+var ppqPort = op.inValue("Pulses Per Quarter Note");
+var startPort = op.addInPort( new Port( this, "Start", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
+var startOffsetPort = op.inValueString("Start Offset", START_OFFSET_DEFAULT);
+var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
+var stopPort = op.addInPort( new Port( this, "Stop", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 
 // out ports
 var statePort = op.outValue("State");
-var positionPort = op.outValue("Position");
+var positionPort = op.outValue("Position (BarsBeatsSixteenth)");
 var secondsPort = op.outValue("Seconds");
 var progressPort = op.outValue("Progress");
 var ticksPort = op.outValue("Ticks");
@@ -51,6 +61,31 @@ Tone.Transport.set("loop", LOOP_DEFAULT);
 Tone.Transport.set("loopStart", LOOP_START_DEFAULT);
 Tone.Transport.set("loopEnd", LOOP_END_DEFAULT);
 Tone.Transport.set("ppq", PPQ_DEFAULT);
+
+// functions
+function startTransport() {
+    var startTime = startTimePort.get();
+    var startOffset = startOffsetPort.get();
+    if(startTime) {
+        if(startOffset) {
+            Tone.Transport.start(startTime, startOffset);
+        } else {
+            Tone.Transport.start(startTime);
+        }
+    } else {
+        Tone.Transport.start();
+    }
+    //op.log("Transport started with time: ", startTime);
+}
+
+function stopTransport() {
+    var stopTime = stopTimePort.get();
+    if(stopTime) {
+        Tone.Transport.stop(stopTime);
+    } else {
+        Tone.Transport.stop();
+    }
+}
 
 // change events
 updatePort.onTriggered = function() {
@@ -111,6 +146,19 @@ ppqPort.onChange = function() {
         Tone.Transport.set("ppq", ppqPort.get());
     } catch(e) {}
 };
+startPort.onTriggered = startTransport;
+stopPort.onTriggered = stopTransport;
+autoStartPort.onChange = function() {
+    if(autoStartPort.get() && Tone.Transport.get("state") !== "started") {
+        startTransport();
+    }
+};
 
+// initialiation when all ports are set
+op.onLoaded = function() {
+    if(autoStartPort.get() && Tone.Transport.get("state") !== "started") {
+        Tone.Transport.start();
+    }
+};
 
 

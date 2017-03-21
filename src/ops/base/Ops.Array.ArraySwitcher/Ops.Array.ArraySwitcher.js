@@ -3,21 +3,21 @@ op.name="ArraySwitcher";
 var N_PORTS = 8;
 
 // input ports
-var inTrigger1 = op.inFunction("Trigger 1");
+var inTrigger1 = op.inFunctionButton("Trigger 1");
 var inArray1 = op.inArray("Array 1");
-var inTrigger2 = op.inFunction("Trigger 2");
+var inTrigger2 = op.inFunctionButton("Trigger 2");
 var inArray2 = op.inArray("Array 2");
-var inTrigger3 = op.inFunction("Trigger 3");
+var inTrigger3 = op.inFunctionButton("Trigger 3");
 var inArray3 = op.inArray("Array 3");
-var inTrigger4 = op.inFunction("Trigger 4");
+var inTrigger4 = op.inFunctionButton("Trigger 4");
 var inArray4 = op.inArray("Array 4");
-var inTrigger5 = op.inFunction("Trigger 5");
+var inTrigger5 = op.inFunctionButton("Trigger 5");
 var inArray5 = op.inArray("Array 5");
-var inTrigger6 = op.inFunction("Trigger 6");
+var inTrigger6 = op.inFunctionButton("Trigger 6");
 var inArray6 = op.inArray("Array 6");
-var inTrigger7 = op.inFunction("Trigger 7");
+var inTrigger7 = op.inFunctionButton("Trigger 7");
 var inArray7 = op.inArray("Array 7");
-var inTrigger8 = op.inFunction("Trigger 8");
+var inTrigger8 = op.inFunctionButton("Trigger 8");
 var inArray8 = op.inArray("Array 8");
 
 // output ports

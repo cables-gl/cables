@@ -89,9 +89,10 @@ op.textureUniform=new CGL.Uniform(shader,'t','tex',0);
 op.texture.onChange=function()
 {
     
-    console.log( op.texture.get() );
+    // console.log( op.texture.get() );
     if(op.texture.get())
     {
+        if(shader.hasDefine('HAS_TEXTURE_DIFFUSE'))return;
         // if(op.textureUniform)return;
         // shader.removeUniform('tex');
         shader.define('HAS_TEXTURES');
@@ -101,6 +102,7 @@ op.texture.onChange=function()
     }
     else
     {
+        if(!shader.hasDefine('HAS_TEXTURE_DIFFUSE'))return;
         // console.log("NO TEXTURE!",op.texture.get());
         // shader.removeUniform('tex');
         shader.removeDefine('HAS_TEXTURES');
