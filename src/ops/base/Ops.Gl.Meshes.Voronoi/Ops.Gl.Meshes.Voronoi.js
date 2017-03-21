@@ -5,6 +5,7 @@ var pSites=op.inArray("Site Points");
 
 var pRender=op.inValueBool("Render",true);
 
+var pArray3d=op.inValueBool("3d Points",false);
 var pWidth=op.inValue("Width",2);
 var pHeight=op.inValue("Height",2);
 
@@ -49,23 +50,42 @@ for(var i=0;i<75;i++)
 
 var diagram = voronoi.compute(sites, bbox);
 var meshes=[];
-var geom=null
+var geom=null;
 
 pSites.onChange=function()
 {
     if(pSites.get())
     {
         var arr=pSites.get();
-        if(arr.length%2!==0)arr.length--;
-        sites.length=arr.length/2;
-
-        for(var i=0;i<sites.length;i++)
+        
+        if(pArray3d.get())
         {
-            sites[i]=(
-                {
-                  x:arr[i*2],
-                  y:arr[i*2+1]
-                });
+            sites.length=arr.length/3;
+    
+            for(var i=0;i<sites.length;i++)
+            {
+                sites[i]=(
+                    {
+                      x:arr[i*3],
+                      y:arr[i*3+1]
+                    });
+            }
+
+        }
+        else
+        {
+            if(arr.length%2!==0)arr.length--;
+            sites.length=arr.length/2;
+    
+            for(var i=0;i<sites.length;i++)
+            {
+                sites[i]=(
+                    {
+                      x:arr[i*2],
+                      y:arr[i*2+1]
+                    });
+            }
+
         }
 
         needsUpdate=true;
@@ -129,7 +149,7 @@ function updateGeom()
 
     for (var ic = 0; ic < sites.length; ic++)
     {
-        
+        // if(ic==0)console.log(sites[ic]);
         var vid=sites[ic].voronoiId;
 
         
