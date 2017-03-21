@@ -10,7 +10,7 @@ var DRIFT_DEFAULT = 0;
 var PLAYBACK_RATE_DEFAULT = 1;
 var PLAYBACK_RATE_MIN = 0.0001;
 var PLAYBACK_RATE_MAX = 100;
-var OVERLAP_DEFAULT = 0;
+var OVERLAP_DEFAULT = 0.1;
 var GRAIN_SIZE_MIN = 0.0001;
 var GRAIN_SIZE_DEFAULT = 0.2;
 var PLAY_DEFAULT = true;
@@ -61,9 +61,12 @@ driftPort.onChange = function(){
     var drift = driftPort.get();
     if(drift < 0) {
         drift = 0;
-    } else if(drift > buffer.duration) {
+    } 
+    /*
+    else if(drift > buffer.duration) {
         drift = buffer.duration - 0.00001;
     }
+    */
     setNodeValue("drift", drift);    
 };
 playbackRatePort.onChange = function(){
