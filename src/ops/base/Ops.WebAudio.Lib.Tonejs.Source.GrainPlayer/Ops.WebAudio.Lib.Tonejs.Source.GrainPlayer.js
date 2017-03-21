@@ -105,7 +105,7 @@ grainSizePort.onChange = function() {
     var grainSizeF = parseFloat(grainSize);
     //var grainSizeF = parseFloat("okjl");
     if(!isNaN(grainSizeF)) {
-        if(!grainSizeF || grainSizeF < 0) {
+        if(!grainSizeF || grainSizeF < 0.02) {
             grainSizePort.set(GRAIN_SIZE_MIN);
         } else {
             setNodeValue( "grainSize", grainSizeF );    
