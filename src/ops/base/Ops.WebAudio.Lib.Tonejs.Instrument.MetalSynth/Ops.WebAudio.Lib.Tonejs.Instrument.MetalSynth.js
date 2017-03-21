@@ -3,7 +3,9 @@ op.name="MetalSynth";
 op.webAudio = op.webAudio || {};
 
 // TODO:
-// - envelope
+// - add envelope: 
+//     - for this we need a mechanism to update the force the input port to 
+//       trigger an on-change event every time ADSR was edited
 //
 
 // vars
@@ -11,6 +13,7 @@ var node = new Tone.MetalSynth ();
 
 // inputs
 var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, node.get("frequency").frequency);
+/*
 var envelopePort = op.inObject("Envelope", null, {
         "linkRecommendations": {
             "ops": [ {
@@ -20,6 +23,7 @@ var envelopePort = op.inObject("Envelope", null, {
             ]
         }
 });
+*/
 var modulationIndexPort = op.inValue("Modulation Index", node.get("modulationIndex").modulationIndex);
 var harmonicityPort = op.inValue("Harmonicity", node.get('harmonicity').harmonicity);
 var resonancePort = op.inValue("Resonance", node.get('resonance').resonance);
@@ -48,9 +52,19 @@ modulationIndexPort.onChange = function() {
         // TODO
     }
 };
+/*
 envelopePort.onLinkChanged = function() {
-    // TODO
+    console.log("LINK CHANGE");
+    
+    if(envelopePort.links.length > 0) {
+        var otherOp = envelopePort.links[0].getOtherPort(envelopePort).parent;
+        //otherOp.setValues({ "value":100 });
+        otherOp.webAudio.setNodeSettings(node.get("envelope").envelope);
+
+        console.log("otherOp ", otherOp);
+    }
 };
+*/
 harmonicityPort.onChange = function() {
     var harmonicity = harmonicityPort.get();
     if(harmonicity > 0) {
@@ -75,7 +89,6 @@ octavesPort.onChange = function() {
         // TODO
     }
 };
-
 
 //outputs
 var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
