@@ -13,7 +13,6 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 var idx=op.addOutPort(new Port(op,"index")) ;
 var rnd=op.addOutPort(new Port(op,"rnd")) ;
 
-
 var rotX=op.inValueSlider("Rotate X",1);
 var rotY=op.inValueSlider("Rotate Y",1);
 var rotZ=op.inValueSlider("Rotate Z",1);

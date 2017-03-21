@@ -2,7 +2,9 @@ op.name="ForceFieldSimulationParticles";
 
 var render=op.inFunction("render");
 var resetButton=op.inFunctionButton("Reset");
-var inSize=op.inValue("Size Area",3);
+var inSizeX=op.inValue("Size Area X",3);
+var inSizeY=op.inValue("Size Area Y",3);
+var inSizeZ=op.inValue("Size Area Z",3);
 var numPoints=op.inValue("Particles",300);
 var speed=op.inValue("Speed",0.2);
 var lifetime=op.inValue("Lifetime",5);
@@ -21,7 +23,9 @@ var mesh=null;
 var shader=null;
 
 numPoints.onChange=reset;
-inSize.onChange=reset;
+inSizeX.onChange=reset;
+inSizeY.onChange=reset;
+inSizeZ.onChange=reset;
 resetButton.onTriggered=reset;
 
 var id=CABLES.generateUUID();
@@ -45,17 +49,19 @@ function doReset()
     if(!bufferB || bufferB.length!=num)bufferB=new Float32Array(num);
 
 
-    var size=inSize.get();
+    var sizeX=inSizeX.get();
+    var sizeY=inSizeY.get();
+    var sizeZ=inSizeZ.get();
     for(i=0;i<verts.length;i+=3)
     {
-        verts[i+0]=(Math.random()-0.5)*size+posX.get();
-        verts[i+1]=(Math.random()-0.5)*size+posY.get();
-        verts[i+2]=(Math.random()-0.5)*size+posZ.get();
+        verts[i+0]=(Math.random()-0.5)*sizeX+posX.get();
+        verts[i+1]=(Math.random()-0.5)*sizeY+posY.get();
+        verts[i+2]=(Math.random()-0.5)*sizeZ+posZ.get();
         // verts[i+2]=0.0;
 
-        bufferB[i+0]=(Math.random()-0.5)*size;
-        bufferB[i+1]=(Math.random()-0.5)*size;
-        bufferB[i+2]=(Math.random()-0.5)*size;
+        bufferB[i+0]=(Math.random()-0.5)*sizeX;
+        bufferB[i+1]=(Math.random()-0.5)*sizeY;
+        bufferB[i+2]=(Math.random()-0.5)*sizeZ;
         // bufferB[i+2]=0.0;
     }
 
@@ -193,7 +199,9 @@ render.onTriggered=function()
 
         uniTime=new CGL.Uniform(shader,'f',shaderModule.prefix+'time',0);
         uniPos=new CGL.Uniform(shader,'3f',shaderModule.prefix+'emitterPos',0);
-        uniSize=new CGL.Uniform(shader,'f',shaderModule.prefix+'size',inSize.get());
+        uniSizeX=new CGL.Uniform(shader,'f',shaderModule.prefix+'sizeX',inSizeX.get());
+        uniSizeY=new CGL.Uniform(shader,'f',shaderModule.prefix+'sizeY',inSizeY.get());
+        uniSizeZ=new CGL.Uniform(shader,'f',shaderModule.prefix+'sizeZ',inSizeZ.get());
         uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
         uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
         uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
@@ -205,6 +213,7 @@ render.onTriggered=function()
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
     {
         var force=CABLES.forceFieldForces[i];
+        if(force)
         if(!force.hasOwnProperty(id+"uniRange"))
         {
             force[id+'uniRange']=new CGL.Uniform(shader,'f','forces['+i+'].range',force.range);
@@ -223,7 +232,9 @@ render.onTriggered=function()
         }
     }
 
-    uniSize.setValue(inSize.get());
+    uniSizeX.setValue(inSizeX.get());
+    uniSizeY.setValue(inSizeY.get());
+    uniSizeZ.setValue(inSizeZ.get());
     uniTimeDiff.setValue(timeDiff*(speed.get()));
     uniTime.setValue(time);
     

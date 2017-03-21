@@ -26,12 +26,17 @@ exec.onTriggered=function()
 {
     // if(op.instanced(exec))return;
 
-    for(var i=3;i<arr.length;i++)arr[i-3]=arr[i];
+    for (var i = 0, len = arr.length; i < len; i++)
+        arr[i-3]=arr[i];
+
+
+    // for(var i=3;i<arr.length;i++)
+
 
     arr[arr.length-3]=valX.get();
     arr[arr.length-2]=valY.get();
     arr[arr.length-1]=valZ.get();
-    
-
+    arrOut.set(null);
+arrOut.set(arr);
 
 };
