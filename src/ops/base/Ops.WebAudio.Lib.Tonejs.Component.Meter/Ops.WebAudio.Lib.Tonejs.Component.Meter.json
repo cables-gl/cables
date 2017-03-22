@@ -1,1 +1,1 @@
-{"libs":["tone.min.js"]}
+{"libs":["tone.min.js"],"summary":"Gets the RMS of an input signal with some averaging applied. It can also get the raw value of the input signal."}

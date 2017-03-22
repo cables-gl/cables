@@ -1,1 +1,1 @@
-{"libs":["tone.min.js"]}
+{"libs":["tone.min.js"],"summary":"Composed of two Synths where one Synth modulates the frequency of a second Synth"}
