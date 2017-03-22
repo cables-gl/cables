@@ -1,9 +1,9 @@
-op.name="FeedbackDelay";
+op.name="PingPongDelay";
 
 CABLES.WebAudio.createAudioContext(op);
 
 // vars
-var node = new Tone.FeedbackDelay();
+var node = new Tone.PingPongDelay();
 
 // default values
 var DELAY_TIME_DEFAULT = 0.25;

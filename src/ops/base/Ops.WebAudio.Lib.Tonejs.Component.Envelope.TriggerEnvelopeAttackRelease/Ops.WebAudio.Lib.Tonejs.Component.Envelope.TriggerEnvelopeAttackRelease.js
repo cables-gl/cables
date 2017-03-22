@@ -18,10 +18,8 @@ var triggerAttackReleasePort = op.addInPort( new Port( this, "Trigger Attack Rel
 
 // listeners
 triggerAttackReleasePort.onTriggered = function() {
-    op.log("triggerAttackReleasePort");
     var node = audioIn.get();
     if(node && node.triggerAttackRelease) {
-        op.log(node);
         var duration = durationPort.get() || DURATION_DEFAULT;
         var time = timePort.get() || TIME_DEFAULT;
         var velocity = velocityPort.get();

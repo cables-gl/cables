@@ -5,11 +5,12 @@ var inRestart=op.inFunctionButton("Restart");
 var speed=op.inValue("Speed",500);
 var speedVariation=op.inValueSlider("Speed Variation");
 
-var outText=op.outValue("Result");
+var outText=op.outValueString("Result");
 var outChanged=op.outFunction("Changed");
 var outFinished=op.outFunction("Finished");
 
-outText.set('');
+outText.set('  \n  ');
+
 var pos=0;
 var updateInterval=0;
 var cursorblink=true;
@@ -30,7 +31,14 @@ inRestart.onTriggered=function()
 
 function update()
 {
-    if(!text.get())return;
+    if(!text.get() || text.get()==='' || text.get()==='0' ||text.get()=='0' )
+    {
+        outText.set( ' ' );
+        return;
+    }
+    
+    
+    
     var t=text.get().substring(0,pos);
     cursorblink=!cursorblink;
 

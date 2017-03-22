@@ -49,18 +49,26 @@ function doRebuild()
     geom=CGL.Geometry.LinesToGeom(points,{"thickness":thick.get()},geom);
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
-        else 
-        {
-            mesh.addVertexNumbers=true;
-            mesh.setGeom(geom);
-        }
+    else 
+    {
+        
+
+    }
+
 
     geomOut.set(null);
     geomOut.set(geom);
+    
+
+    mesh.addVertexNumbers=true;
+    mesh.setGeom(geom);
+    mesh._setVertexNumbers();
+    
     
     // console.log(geom.vertices.length);
     
 
     if(calcNormals.get())geom.calculateNormals({forceZUp:true});
+    
     needsBuild=false;
 }

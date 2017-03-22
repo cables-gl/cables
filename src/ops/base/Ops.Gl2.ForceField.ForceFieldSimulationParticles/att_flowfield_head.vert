@@ -6,7 +6,9 @@ out vec3 col;
 uniform vec3 MOD_emitterPos;
 
 uniform float MOD_time;
-uniform float MOD_size;
+uniform float MOD_sizeX;
+uniform float MOD_sizeY;
+uniform float MOD_sizeZ;
 uniform float MOD_timeDiff;
 uniform float MOD_lifeTime;
 uniform float MOD_fadeinout;

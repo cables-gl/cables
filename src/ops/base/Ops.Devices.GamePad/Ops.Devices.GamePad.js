@@ -2,6 +2,9 @@ op.name='GamePad';
 var data=op.inObject("GamePad Data");
 
 var outID=op.outValue("ID");
+
+var digitalAnalog=op.inValueBool("Analog to Digital",true);
+
 var outAxes=op.outArray("Axes");
 
 var pressedLeft=op.outValueBool("Pad Left");
@@ -24,15 +27,32 @@ data.onChange=function()
         var buttons=data.get().buttons;
         if(buttons)
         {
-            pressedLeft.set(buttons[14].pressed);
-            pressedRight.set(buttons[15].pressed);
-            pressedDown.set(buttons[13].pressed);
-            pressedUp.set(buttons[12].pressed);
-            
+            if(buttons[14])pressedLeft.set(buttons[14].pressed);
+            if(buttons[15])pressedRight.set(buttons[15].pressed);
+            if(buttons[13])pressedDown.set(buttons[13].pressed);
+            if(buttons[12])pressedUp.set(buttons[12].pressed);
+
             pressedButton1.set(buttons[0].pressed);
             pressedButton2.set(buttons[1].pressed);
             pressedButton3.set(buttons[2].pressed);
             pressedButton4.set(buttons[3].pressed);
+        }
+        
+        if(digitalAnalog.get())
+        {
+            var axes=data.get().axes;
+            if(axes)
+            {
+                if(axes[0]<-0.5)pressedLeft.set(true);
+                    else pressedLeft.set(false);
+                if(axes[0]>0.5)pressedRight.set(true);
+                    else pressedRight.set(false);
+                
+                if(axes[1]<-0.5)pressedUp.set(true);
+                    else pressedUp.set(false);
+                if(axes[1]>0.5)pressedDown.set(true);
+                    else pressedDown.set(false);
+            }
         }
     }
 };
