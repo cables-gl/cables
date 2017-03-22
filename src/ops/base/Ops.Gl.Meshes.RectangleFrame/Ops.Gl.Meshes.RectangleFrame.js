@@ -113,11 +113,14 @@ function create()
         ];
 
     if(geom.texCoords.length===0)
+    {
+        geom.texCoords=new Float32Array();
         for(var i=0;i<geom.vertices.length;i+=3)
         {
-            geom.texCoords.push(geom.vertices[i+0]/width.get()-0.5);
-            geom.texCoords.push(geom.vertices[i+1]/height.get()-0.5);
+            geom.texCoords[i/3*2]=geom.vertices[i+0]/width.get()-0.5;
+            geom.texCoords[i/3*2]=geom.vertices[i+1]/height.get()-0.5;
         }
+    }
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);

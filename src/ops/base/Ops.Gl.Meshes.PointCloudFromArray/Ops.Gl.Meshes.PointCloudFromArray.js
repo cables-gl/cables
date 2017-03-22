@@ -3,6 +3,7 @@ op.name="PointCloudFromArray";
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var arr=op.inArray("Array");
 var seed=op.inValue("Seed");
+var numPoints=op.inValue("Num Points");
 
 var pTexCoordRand=op.inValueBool("Scramble Texcoords");
 
@@ -24,20 +25,18 @@ function reset()
     
     var verts=arr.get();
     if(!verts)return;
-    // if(!geom)
-    
-    
+
     var num=verts.length/3;
     num=Math.round(num);
-    
-    
+
+    if(!texCoords || texCoords.length!=num*2)
     texCoords=new Float32Array(num*2);
 
     var changed=false;
 
     var rndTc=pTexCoordRand.get();
     Math.randomSeed=seed.get();
-    
+
     for(var i=0;i<num;i++)
     {
         if(geom.vertices[i*3]!=verts[i*3] ||
@@ -59,6 +58,7 @@ function reset()
         }
     }
     
+    
     if(changed)
     {
         // geom.clear();
@@ -70,6 +70,14 @@ function reset()
         mesh.addVertexNumbers=true;
         mesh.setGeom(geom);
     }
+    
+    if(verts instanceof Float32Array)
+    {
+        var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,verts,3);
+        attr.numItems=numPoints.get();
+    }
+    
+
 }
 
 arr.onChange=reset;

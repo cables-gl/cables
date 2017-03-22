@@ -90,16 +90,18 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
         {
             // console.log('numItems',name,numItems);
 
-            if(this._attributes[i].numItems!=numItems)
-            {
-                this._attributes[i].loc=-1;
-                this._attributes[i].numItems=numItems;
+            // if(this._attributes[i].numItems!=numItems)
+            // {
+            //     this._attributes[i].loc=-1;
+            //     this._attributes[i].numItems=numItems;
+            //
+            //     // console.log('updating attrib');
+            //
+            //     this._cgl.gl.deleteBuffer(this._attributes[i].buffer);
+            //     this._attributes[i].buffer=this._cgl.gl.createBuffer();
+            // }
 
-                // console.log('updating attrib');
-
-                this._cgl.gl.deleteBuffer(this._attributes[i].buffer);
-                this._attributes[i].buffer=this._cgl.gl.createBuffer();
-            }
+            this._attributes[i].numItems=numItems;
 
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
             this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
@@ -375,6 +377,11 @@ CGL.Mesh.prototype.printDebug=function(shader)
     }
 };
 
+CGL.Mesh.prototype.setNumVertices=function(num)
+{
+    this._bufVertexAttrib.numItems=num;
+
+};
 
 CGL.Mesh.prototype.render=function(shader)
 {
@@ -449,6 +456,8 @@ CGL.Mesh.prototype.render=function(shader)
     {
         // console.log(this._bufVertexAttrib.numItems);
         this._cgl.gl.drawArrays(prim, 0,this._bufVertexAttrib.numItems);
+
+        // console.log(this._bufVertexAttrib.numItems);
     }
     else
     {
