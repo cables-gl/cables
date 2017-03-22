@@ -1,5 +1,7 @@
 op.name="AmOscillator";
 
+CABLES.WebAudio.createAudioContext(op);
+
 // constants
 var FREQUENCY_DEFAULT = 440;
 var DETUNE_DEFAULT = 0;
