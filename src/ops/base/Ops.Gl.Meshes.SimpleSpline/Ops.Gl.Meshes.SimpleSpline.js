@@ -2,7 +2,8 @@ op.name="SimpleSpline";
 
 var render=op.inFunction("Render");
 
-var points=op.inArray("Points");
+var inPoints=op.inArray("Points");
+var numPoints=op.inValue("Num Points");
 
 var next=op.outFunction("Next");
 
@@ -17,27 +18,43 @@ var buff=new Float32Array();
 
 render.onTriggered=function()
 {
-    if(!points.get())return;
-    if(points.get().length===0)return;
+    var points=inPoints.get();
+
+    if(!points)return;
+    if(points.length===0)return;
+    
     if(op.instanced(render))return;
 
-    if(points.get().length===0)return;
 
-    if(points.get().length!=buff.length)
+    if(!(points instanceof Float32Array))
     {
-        // console.log("Resize...");
-        buff=new Float32Array(points.get());
+        if(points.length!=buff.length)
+        {
+            // console.log("Resize...");
+    
+            buff=new Float32Array(points.length);
+            buff.set(points);
+        }
+        else
+        {
+            buff.set(points);
+        }
+        
     }
     else
     {
-        buff.set(points.get());
+        buff=points;
     }
     
     var shader=cgl.getShader();
-    
+
     var oldPrim=shader.glPrimitive;
     shader.glPrimitive=cgl.gl.LINE_STRIP;
-    mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
+    var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
+    
+    if(numPoints.get()<=0)attr.numItems=buff.length/3;
+        else attr.numItems=Math.min(numPoints.get(),buff.length/3);
+
     
     mesh.render(shader);
     

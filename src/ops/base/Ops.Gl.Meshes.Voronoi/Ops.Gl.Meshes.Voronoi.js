@@ -381,9 +381,9 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
                         verts[count++]=edgevbx;
                         verts[count++]=edgevby;
                         verts[count++]=0;
-        
-        
-        
+
+
+
                         verts[count++]=cell.site.x+(edgevbx-cell.site.x)*filli;
                         verts[count++]=cell.site.y+(edgevby-cell.site.y)*filli;
                         verts[count++]=0;
@@ -462,10 +462,8 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
     
     outVerts.set(null);
     outVerts.set(verts);
-
-    
-    
 }
+
 
 render.onTriggered=function()
 {

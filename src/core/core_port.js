@@ -5,6 +5,7 @@ var CABLES=CABLES || {};
 
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
+    this.data = {}; // reserved for port-specific user-data
     this.direction=PORT_DIR_IN;
     this.id=CABLES.generateUUID();
     this.parent=__parent;

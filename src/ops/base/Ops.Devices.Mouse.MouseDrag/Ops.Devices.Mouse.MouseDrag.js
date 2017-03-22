@@ -9,6 +9,8 @@ var kinetic=op.inValueBool("Inertia Movement",true);
 
 var doReset=op.inFunction("Reset");
 
+var mul=op.inValue("mul",0.1);
+
 var minX=op.inValue("minX",-600);
 var maxX=op.inValue("maxX",600);
 var minY=op.inValue("minY",-600);
@@ -51,7 +53,7 @@ function updateKineticX(v)
     if(v>maxX.get())v=maxX.get();
     if(v<minX.get())v=minX.get();
 
-    outX.set(v);
+    outX.set(v*mul.get());
 }
 
 function updateKineticY(v)
@@ -59,14 +61,13 @@ function updateKineticY(v)
     if(v>maxY.get())v=maxY.get();
     if(v<minY.get())v=minY.get();
 
-    outY.set(v);
+    outY.set(v*mul.get());
 }
 
 function onmouseclick()
 {
     
 }
-
 
 function onmousemove(e)
 {

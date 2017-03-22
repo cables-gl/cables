@@ -1,5 +1,7 @@
 op.name="Meter";
 
+CABLES.WebAudio.createAudioContext(op);
+
 // defaults
 var TYPE_DEFAULT = Tone.Meter.Type.Level;
 var TYPES = [Tone.Meter.Type.Level, Tone.Meter.Type.Signal];

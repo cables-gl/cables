@@ -15,7 +15,7 @@ See [Creating Ports](../dev_Creating_Ports/dev_creating_ports.md)
 
 ### Op root
 
-All the code you write inside your op will be executed once the patch is added to the patch-view, so all your initialisation-code should be in the root of your patch, e.g. 
+All the code you write inside your op will be executed once the patch is added to the patch-view, so all your initialisation-code should be in the root of your patch, e.g.
 
 ```javascript
 op.name = "MyOp";
@@ -43,7 +43,7 @@ When a link to a value or string-value port was removed the old value (from the 
 
 If a connection to an object or array-port is removed the port will contain `null`.
 
-### op.onLoaded 
+### op.onLoaded
 
 In some cases you may want to run some code once all links have been set and all ports are fully loaded. Usually you don’t need this.
 
@@ -63,7 +63,19 @@ op.onDelete = function() {
 };
 ```
 
+### op.data
 
+Sometimes you need to create variables inside your op and make them accessible globally. Every op has a `data`-object-property which can be used for this. Instead of writing:
+```javascript
+var myVar = 1;
+```
+
+you could then do:
+```javascript
+op.data.myVar = 1; // globally accessible if you have access to the op
+```
+
+In most cases you don’t need this, but there are some use cases where it is helpful.
 
 ## Logging
 
@@ -76,7 +88,7 @@ Do **not** use `console.log()`!
 
 ## GUI
 
-### Updating value-port UI-elements 
+### Updating value-port UI-elements
 
 If you want to update an UI-element like a slider in op-settings (e.g. when manually setting a value port) you need to call `showOpParams`:
 
@@ -122,7 +134,7 @@ UpperCamelCase, e.g. `KeyPressLearn` (`Ops.Devices.Keyboard.KeyPressLearn`). If 
 
 #### Port Names
 
-Use capitals with spaces for the user-visible names in the op-settings, e.g. `Inner Radius`. You can use all capital letters for port names like `BPM` or `MIDI`. 
+Use capitals with spaces for the user-visible names in the op-settings, e.g. `Inner Radius`. You can use all capital letters for port names like `BPM` or `MIDI`.
 Feel free to use whatever you prefer in code, most common is lowerCamelCase, e.g. `innerRadius`.  
 If your op has one main-port which is needed to trigger it, call it `Execute`, if your op has an output-port to trigger other ops call it `Trigger`.
 

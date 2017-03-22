@@ -13,7 +13,6 @@ var node = new Tone.MetalSynth ();
 
 // inputs
 var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, node.get("frequency").frequency);
-/*
 var envelopePort = op.inObject("Envelope", null, {
         "linkRecommendations": {
             "ops": [ {
@@ -23,7 +22,8 @@ var envelopePort = op.inObject("Envelope", null, {
             ]
         }
 });
-*/
+envelopePort.changeAlways = true; // get updates when set was called in connected port
+
 var modulationIndexPort = op.inValue("Modulation Index", node.get("modulationIndex").modulationIndex);
 var harmonicityPort = op.inValue("Harmonicity", node.get('harmonicity').harmonicity);
 var resonancePort = op.inValue("Resonance", node.get('resonance').resonance);
@@ -52,7 +52,7 @@ modulationIndexPort.onChange = function() {
         // TODO
     }
 };
-/*
+
 envelopePort.onLinkChanged = function() {
     console.log("LINK CHANGE");
     
@@ -60,11 +60,15 @@ envelopePort.onLinkChanged = function() {
         var otherOp = envelopePort.links[0].getOtherPort(envelopePort).parent;
         //otherOp.setValues({ "value":100 });
         otherOp.webAudio.setNodeSettings(node.get("envelope").envelope);
-
-        console.log("otherOp ", otherOp);
     }
 };
-*/
+envelopePort.onChange = function() {
+    var env = envelopePort.get();
+    if(env && env.get) {
+        node.set("envelope", env.get());
+    }
+};
+
 harmonicityPort.onChange = function() {
     var harmonicity = harmonicityPort.get();
     if(harmonicity > 0) {

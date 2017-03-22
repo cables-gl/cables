@@ -12,7 +12,7 @@ var smooth=op.inValueBool("smooth");
 var smoothSpeed=op.inValue("delay",0.3);
 var preventScroll=op.inValueBool("prevent scroll");
 var flip=op.inValueBool("Flip Direction");
-var reset=op.inFunction("Reset");
+var reset=op.inFunctionButton("Reset");
 
 var absVal=op.outValue("absolute value",0);
 var delta=op.outValue("delta",0);

@@ -34,19 +34,22 @@ var envObjPort = op.outObject("Envelope Object");
 attackPort.onChange = function() {
     node.set("attack", attackPort.get());
     updateEnvObjPort();
-    // signalPort.forceChange(); not working, so we need the envObjPort
+    signalPort.set(node);
 };
 decayPort.onChange = function() {
     node.set("decay", decayPort.get());
     updateEnvObjPort();
+    signalPort.set(node);
 };
 sustainPort.onChange = function() {
     node.set("sustain", sustainPort.get());
     updateEnvObjPort();
+    signalPort.set(node);
 };
 releasePort.onChange = function() {
     node.set("release", releasePort.get());
     updateEnvObjPort();
+    signalPort.set(node);
 };
 
 triggerAttackPort.onTriggered = function(){
