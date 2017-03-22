@@ -1,5 +1,7 @@
 op.name="DuoSynth";
 
+CABLES.WebAudio.createAudioContext(op);
+
 // constants
 var FREQUENCY_DEFAULT = 440;
 var VIBRATO_AMOUNT_DEFAULT = 0.5;

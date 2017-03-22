@@ -95,8 +95,6 @@ inUrlPort.onChange = function() {
 };
 ```
 
-
-
 ##### Display: Range
 
 Displays a slider in the range `[min..max]` along with a text input field. The value of the input field can be out of range, so if your op cannot handle these values you need to manually check and reset the port by calling `inPort.set(...)`.
@@ -181,4 +179,14 @@ An object can contain basically anything, e.g.:
     "e": [1, 2, 3, 4]
   }
 }
+```
+
+## Storing data in ports
+
+Every port has a `data`-object-attribute, which can be used to store port-specific-data. This can be useful e.g. when you create ports in a for loop and need to store an index-reference or something similar.
+
+```javascript
+var myPort = op.inValue("My In Port");
+myPort.data.someValue = 1;
+
 ```

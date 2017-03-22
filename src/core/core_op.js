@@ -14,6 +14,7 @@ CABLES.Helpers.isArray = function(v) {return Object.prototype.toString.call(v) =
 
 CABLES.Op = function()
 {
+    this.data={}; // reserved for op-specific user-data
     this.objName='';
     this.portsOut=[];
     this.portsIn=[];

@@ -40,7 +40,6 @@ var getTimeSuffix = function(key) {
 
 timeTypePort.onChange = function() {
   currentTimeSuffix = getTimeSuffix(timeTypePort.get());
-  console.log("CurTimeSuffix: ", currentTimeSuffix);
   setToneTimePort();
 };
 
