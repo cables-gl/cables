@@ -20,8 +20,6 @@ var WET_DEFAULT = 1.0;
 var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 
-op.log('node.get("windowSize")', node.get("windowSize").windowSize);
-
 // input ports
 var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
 var widthPort = CABLES.WebAudio.createAudioParamInPort(op, "Width", node.width, {"display": "range", "min": WIDTH_MIN, "max": WIDTH_MAX}, node.get("width").width);

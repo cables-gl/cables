@@ -1,1 +1,1 @@
-{"libs":["tone.min.js"]}
+{"libs":["tone.min.js"],"summary":"Uses the output of one Synth to modulate the amplitude of another Synth"}

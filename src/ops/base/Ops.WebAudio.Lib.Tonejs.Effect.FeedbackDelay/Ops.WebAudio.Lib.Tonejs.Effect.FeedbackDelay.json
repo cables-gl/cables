@@ -1,1 +1,1 @@
-{"libs":["tone.min.js"]}
+{"libs":["tone.min.js"],"summary":"Delay in which part of output signal is fed back into the delay"}

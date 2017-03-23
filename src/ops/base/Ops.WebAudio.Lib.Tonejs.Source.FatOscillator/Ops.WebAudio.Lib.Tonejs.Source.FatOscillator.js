@@ -28,7 +28,7 @@ var STOP_TIME_DEFAULT = "+0";
 var AUTO_START_DEFAULT = true;
 
 // vars
-var node = new Tone.FatOscillator()
+var node = new Tone.FatOscillator();
 
 // inputs
 var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);

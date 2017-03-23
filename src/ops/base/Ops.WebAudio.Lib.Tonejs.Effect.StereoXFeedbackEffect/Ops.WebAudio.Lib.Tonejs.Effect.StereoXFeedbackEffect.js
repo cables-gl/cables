@@ -1,16 +1,13 @@
 op.name="StereoXFeedbackEffect";
-op.name="PitchShift";
 
 CABLES.WebAudio.createAudioContext(op);
 
 // vars
-var node = new Tone.PitchShift();
+var node = new Tone.StereoXFeedbackEffect();
 
 // default values
-var FEEDBACK_DEFAULT = 0.1 // ?
 var FEEDBACK_MIN = 0.0 // ?
 var FEEDBACK_MAX = 1.0 // ?
-var WET_DEFAULT = 1.0;
 var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 
