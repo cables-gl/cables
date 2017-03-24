@@ -6,7 +6,7 @@ CABLES.WebAudio.createAudioContext(op);
 var node = new Tone.Split();
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Stereo", node);
 
 // output ports
 var leftAudioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Left", node.left);
