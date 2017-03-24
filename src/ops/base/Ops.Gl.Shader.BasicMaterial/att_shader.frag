@@ -38,7 +38,7 @@ void main()
            #endif
       #endif
       #ifdef HAS_TEXTURE_OPACITY
-          col.a*=texture2D(texOpacity,texCoords).g;
+          col.a*=texture2D(texOpacity,vec2(texCoords.s,1.0-texCoords.t)).g;
        #endif
        col.a*=a;
    #endif

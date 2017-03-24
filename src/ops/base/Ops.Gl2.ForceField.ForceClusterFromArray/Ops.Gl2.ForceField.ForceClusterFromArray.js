@@ -17,7 +17,7 @@ var posZ=op.inValue("Pos Z");
 
 var next=op.outFunction("next");
 
-var outPoints=op.outArray("Points");
+var outNumPoints=op.outValue("Num Points");
 
 var forceObj={};
 
@@ -42,8 +42,13 @@ inPoints.onChange=reset;
 
 function reset()
 {
+    
     var points=inPoints.get();
     if(!points)return;
+
+
+forces.length=points.length/3;
+
 
     // forces.length=Math.floor(num.get());
     for(var i=0;i<points.length/3;i++)
@@ -105,6 +110,8 @@ exec.onTriggered=function()
             }
         }
     }
+
+    outNumPoints.set( inPoints.get().length/3 );
 
 
     // updateForceObject();

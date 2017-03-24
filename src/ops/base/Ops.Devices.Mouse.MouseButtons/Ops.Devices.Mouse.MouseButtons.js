@@ -67,6 +67,7 @@ function addListeners()
     listenerElement=cgl.canvas;
     if(area.get()=='Document') listenerElement=document.body;
     
+    listenerElement.addEventListener('dblclick', onDoubleClick);
     listenerElement.addEventListener('click', onmouseclick);
     listenerElement.addEventListener('mousedown', onMouseDown);
     listenerElement.addEventListener('mouseup', onMouseUp);

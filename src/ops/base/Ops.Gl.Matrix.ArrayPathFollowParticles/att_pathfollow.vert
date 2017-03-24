@@ -8,13 +8,18 @@ if(MOD_randomSpeed)
     
 }
 
-float fr=fract(abs(mod(off+rndOffset,float(PATHFOLLOW_POINTS-3))));
-int index=int(abs(mod(off+rndOffset,float(PATHFOLLOW_POINTS-3))));
-int index2=int(abs(mod(off+1.0+rndOffset,float(PATHFOLLOW_POINTS-3))));
+float fr=fract(abs(mod(off+rndOffset,float(PATHFOLLOW_POINTS))));
+int index=int(abs(mod(off+rndOffset,float(PATHFOLLOW_POINTS))));
+int index2=int(abs(mod(off+1.0+rndOffset,float(PATHFOLLOW_POINTS))));
 
-
-pos.xyz = mix( MOD_points[index] ,MOD_points[index2] ,fr);
-
-// pos.xyz = MOD_points[index];
+if(index2!=0)
+{
+    pos.xyz = mix( MOD_points[index] ,MOD_points[index2] ,fr);
+    // pos.xyz = MOD_points[index];
+}
+else
+{
+    pos.xyz=MOD_points[0];
+}
 
 pos.xyz+=rndPos;

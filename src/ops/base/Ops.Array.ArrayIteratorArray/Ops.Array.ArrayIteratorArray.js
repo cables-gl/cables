@@ -10,10 +10,18 @@ var val=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_ARRAY));
 exe.onTriggered=function()
 {
     if(!arr.val)return;
+    
+        op.patch.instancing.pushLoop(arr.get().length);
+
     for(var i=0;i<arr.get().length;i++)
     {
         idx.set(i);
         val.set(arr.val[i]);
         trigger.trigger();
+                op.patch.instancing.increment();
+
     }
+        op.patch.instancing.popLoop();
+
+
 };
