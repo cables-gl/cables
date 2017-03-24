@@ -223,7 +223,7 @@ myPort.onLinkChanged = function() {
 		op.log("myPort has been linked");
 		// get the other port, as there can be multiple connections, get the last added one
 		var otherPort = myPort.links[links.length-1].getOtherPort(myPort);
-		op.log("Port is linked to: ", myPort.name);
+		op.log("Port is linked to: ", otherPort.name);
 	} else {
 		op.log("myPort has been unlinked ");
 	}
