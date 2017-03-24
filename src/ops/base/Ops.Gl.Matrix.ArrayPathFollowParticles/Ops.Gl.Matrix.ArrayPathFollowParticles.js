@@ -160,6 +160,7 @@ exec.onTriggered=function()
         // shaderModule.uniNumPoints.setValue(pointArray.length/3);
         shaderModule.uniPoints.setValue(pointArray);
         updateUniformPoints=false;
+        console.log("update uniforms");
     }
 
     // var off=inOffset.get()%((pointArray.length-1)/3);

@@ -7,6 +7,8 @@ uniform float amount;
 uniform float texWidth;
 uniform float texHeight;
 
+uniform float mulColor;
+
 
 const vec4 lumcoeff = vec4(0.299,0.587,0.114, 0.);
 
@@ -49,8 +51,16 @@ void main()
 // 	if(edge.r>1.1)edge=vec3(1.0,1.0,1.0);
 // 	else edge=vec3(0.0,0.0,0.0);
 
+// edge*=5.0;
+
+
+edge=desaturate(edge);
+
+    if(mulColor>0.0)
+        edge*=texture2D( tex, texCoord ).rgb*mulColor*4.0;
     
-    
-    gl_FragColor = vec4(desaturate(edge),1.0);
+    gl_FragColor = vec4(edge,1.0);
 
 }
+    
+ 

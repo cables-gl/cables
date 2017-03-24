@@ -5,6 +5,8 @@ var trigger=op.outFunction("Trigger");
 
 var amount=op.inValueSlider("amount",1);
 
+var mulColor=op.inValueSlider("Mul Color",0);
+
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
@@ -17,6 +19,8 @@ var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 var uniWidth=new CGL.Uniform(shader,'f','texWidth',128);
 var uniHeight=new CGL.Uniform(shader,'f','texHeight',128);
+var uniMulColor=new CGL.Uniform(shader,'f','mulColor',mulColor);
+
 
 render.onTriggered=function()
 {

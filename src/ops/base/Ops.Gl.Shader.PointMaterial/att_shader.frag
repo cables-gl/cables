@@ -39,12 +39,12 @@ void main()
             #endif
 
             #ifdef COLORIZE_TEXTURE
-               col.r*=r;
-               col.g*=g;
-               col.b*=b;
-           #endif
-       #endif
-       col.a*=a;
+              col.r*=r;
+              col.g*=g;
+              col.b*=b;
+          #endif
+      #endif
+      col.a*=a;
     #endif
 
     {{MODULE_COLOR}}

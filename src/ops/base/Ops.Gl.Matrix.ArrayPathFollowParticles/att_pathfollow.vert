@@ -15,11 +15,7 @@ int index2=int(abs(mod(off+1.0+rndOffset,float(PATHFOLLOW_POINTS))));
 if(index2!=0)
 {
     pos.xyz = mix( MOD_points[index] ,MOD_points[index2] ,fr);
-
-// pos.xyz = MOD_points[index];
-
-
-    
+    // pos.xyz = MOD_points[index];
 }
 else
 {
