@@ -11,9 +11,9 @@ function update()
     {
         var string="";
         var o=obj.get();
-        
+
         if(typeof(o[i])==='number') o[i]=Math.round(o[i]*100)/100;
-        
+
         for(var i in o)
             string+=i+": "+o[i]+"\n";
 
