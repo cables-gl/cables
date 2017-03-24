@@ -1,14 +1,15 @@
 op.name='audioOutput';
 
+var audioCtx = CABLES.WebAudio.createAudioContext(op);
+
 // constants
 var VOLUME_DEFAULT = 1;
 var VOLUME_MIN = 0;
 var VOLUME_MAX = 1;
 
 // vars
-var audioContext = CABLES.WebAudio.createAudioContext(op);
-var gainNode = audioContext.createGain();
-var destinationNode = audioContext.destination;
+var gainNode = audioCtx.createGain();
+var destinationNode = audioCtx.destination;
 gainNode.connect(destinationNode);
 var masterVolume = 1;
 
