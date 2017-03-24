@@ -202,7 +202,7 @@ var myPort = op.inValue("My Port");
 
 myPort.onLinkChanged = function() {
 	op.log("A link to myPort has been added or removed");
-	if(dyn.isLinked()) {
+	if(myPort.isLinked()) {
 		op.log("myPort has been linked");
 	} else {
 		op.log("myPort has been unlinked ");
@@ -214,12 +214,12 @@ myPort.onLinkChanged = function() {
 }
 ```
 
-If you need to access to other (linked) op you can also do so:
+If you need to access to other (linked) port you can also do so:
 
 ```javascript
 myPort.onLinkChanged = function() {
 	op.log("A link to myPort has been added or removed");
-	if(dyn.isLinked()) {
+	if(myPort.isLinked()) {
 		op.log("myPort has been linked");
 		// get the other port, as there can be multiple connections, get the last added one
 	  var otherPort = myPort.links[links.length-1].getOtherPort(myPort);
