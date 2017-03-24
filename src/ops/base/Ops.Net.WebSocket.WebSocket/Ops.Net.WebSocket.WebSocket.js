@@ -2,12 +2,11 @@ op.name='Websocket';
 
 var inUrl=this.addInPort(new Port(this,"url",OP_PORT_TYPE_VALUE,{type:'string'}));
 
+var outResult=op.outObject("result");
+var outConnected=op.outValue("connected");
+var outConnection=this.outObject("Connection");
 
-var inSend=op.inFunctionButton("Send");
-var inText=op.inValue("Send String");
-
-var outResult=this.addOutPort(new Port(this,"result", OP_PORT_TYPE_OBJECT));
-var outConnected=this.addOutPort(new Port(this,"connected"));
+var outReceived=op.outFunction("Received Data");
 
 var connection=null;
 var timeout=null;
@@ -25,12 +24,6 @@ function checkConnection()
     timeout=setTimeout(checkConnection,1000);
 }
 
-inSend.onTriggered=function()
-{
-    connection.send('{"HURZ":123}');
-
-    
-};
 
 function connect()
 {
@@ -62,17 +55,20 @@ function connect()
     connection.onerror = function (message)
     {
         outConnected.set(false);
+        outConnection.set(null);
     };
 
     connection.onclose = function (message)
     {
         outConnected.set(false);
+        outConnection.set(null);
     };
 
     connection.onopen = function (message)
     {
         outConnected.set(true);
         connectedTo=inUrl.get();
+        outConnection.set(connection);
     };
 
     connection.onmessage = function (message)
@@ -80,7 +76,10 @@ function connect()
         try
         {
             var json = JSON.parse(message.data);
+            outResult.set(null);
             outResult.set(json);
+            outReceived.trigger();
+
         }
         catch(e)
         {
