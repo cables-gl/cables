@@ -75,5 +75,5 @@ function isInRange(val, min, max) {
 var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
 
 op.onDelete = function() {
-    op.log("Phaser deleted");
+    node.dispose();
 };
