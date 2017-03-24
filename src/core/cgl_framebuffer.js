@@ -18,7 +18,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     var texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":options.isFloatingPointTexture,
-            "filter":CGL.Texture.FILTER_LINEAR
+            "filter":CGL.Texture.FILTER_LINEAR,
+            "wrap":CGL.Texture.CLAMP_TO_EDGE
         });
 
     var textureDepth=null;

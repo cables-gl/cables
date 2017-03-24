@@ -9,8 +9,8 @@ var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropd
 var nColumns=op.addInPort(new Port(op,"num columns"));
 var nRows=op.addInPort(new Port(op,"num rows"));
 var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
-
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var outPointArrays=op.outArray("Point Arrays");
 
 var cgl=op.patch.cgl;
 axis.set('xy');
@@ -100,6 +100,8 @@ function rebuild()
     var max=Math.log(1);
     // op.log(min,max);
 
+    var lines=[];
+
     for(r=numRows;r>=0;r--)
     {
         // op.log(r/numRows);
@@ -107,6 +109,10 @@ function rebuild()
         var ltx=null,lxy=null;
         var log=0;
         var doLoga=doLog.get();
+        
+        var linePoints=[];
+        lines.push(linePoints);
+        
 
         for(c=numColumns;c>=0;c--)
         {
@@ -134,6 +140,8 @@ function rebuild()
                 verts.push( lvx );
                 verts.push( lvy );
                 verts.push( lvz );
+                
+                linePoints.push(lvx,lvy,lvz);
     
                 verts.push( vx );
                 verts.push( vy );
@@ -165,6 +173,8 @@ function rebuild()
         }
     }
     
+    outPointArrays.set(lines);
+
     addMesh();
 
     // op.log(meshes.length,' meshes');

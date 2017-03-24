@@ -129,13 +129,16 @@ function removeModule()
 
 exec.onTriggered=function()
 {
+    if(op.instanced(exec))return;
     if(!inPoints.get())return;
     if(needsRebuild)rebuild();
 
     if(cgl.getShader()!=shader)
     {
-        if(shader) removeModule();
+        if(shader)removeModule();
+
         shader=cgl.getShader();
+
         shader.glslVersion=300;
         shaderModule=shader.addModule(
             {
@@ -148,6 +151,7 @@ exec.onTriggered=function()
         shaderModule.point=new CGL.Uniform(shader,'i',shaderModule.prefix+'point',0);
         shaderModule.uniPoints=new CGL.Uniform(shader,'3f[]',shaderModule.prefix+'points',new Float32Array([0,0,0,0,0,0]));
         shaderModule.randomSpeed=new CGL.Uniform(shader,'b',shaderModule.prefix+'randomSpeed',false);
+
     }
     
     if(updateUniformPoints && pointArray)
