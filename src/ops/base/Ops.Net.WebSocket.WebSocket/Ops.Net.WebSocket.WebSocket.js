@@ -1,5 +1,5 @@
 op.name='Websocket';
-
+// ws://192.168.1.235
 var inUrl=this.addInPort(new Port(this,"url",OP_PORT_TYPE_VALUE,{type:'string'}));
 
 var outResult=op.outObject("result");
@@ -17,9 +17,19 @@ timeout=setTimeout(checkConnection,1000);
 
 inUrl.set();
 
+
+
+
 function checkConnection()
 {
-    if(outConnected.get===false) connect();
+    if(outConnected.get()===false)
+    {
+        connect();
+        console.log("reconnect websocket...");
+    }
+
+
+
 
     timeout=setTimeout(checkConnection,1000);
 }
@@ -52,42 +62,48 @@ function connect()
         console.log('could not connect to',inUrl.get());
     }
 
-    connection.onerror = function (message)
+    if(connection)
     {
-        outConnected.set(false);
-        outConnection.set(null);
-    };
-
-    connection.onclose = function (message)
-    {
-        outConnected.set(false);
-        outConnection.set(null);
-    };
-
-    connection.onopen = function (message)
-    {
-        outConnected.set(true);
-        connectedTo=inUrl.get();
-        outConnection.set(connection);
-    };
-
-    connection.onmessage = function (message)
-    {
-        try
+        connection.onerror = function (message)
         {
-            var json = JSON.parse(message.data);
-            outResult.set(null);
-            outResult.set(json);
-            outReceived.trigger();
-
-        }
-        catch(e)
+            console.log("ws error");
+            outConnected.set(false);
+            outConnection.set(null);
+        };
+    
+        connection.onclose = function (message)
         {
-            console.log(e);
-            console.log('This doesn\'t look like a valid JSON: ', message.data);
-            return;
-        }
-    };
+            console.log("ws close");
+            outConnected.set(false);
+            outConnection.set(null);
+        };
+    
+        connection.onopen = function (message)
+        {
+            outConnected.set(true);
+            connectedTo=inUrl.get();
+            outConnection.set(connection);
+        };
+    
+        connection.onmessage = function (message)
+        {
+            try
+            {
+                var json = JSON.parse(message.data);
+                outResult.set(null);
+                outResult.set(json);
+                outReceived.trigger();
+    
+            }
+            catch(e)
+            {
+                console.log(e);
+                console.log('This doesn\'t look like a valid JSON: ', message.data);
+                return;
+            }
+        };
+        
+    }
 
 }
 

@@ -14,6 +14,10 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
+var areaX=op.inValue("Area X");
+var areaY=op.inValue("Area Y");
+var areaZ=op.inValue("Area Z");
+
 var next=op.outFunction("next");
 
 var outPoints=op.outArray("Points");
@@ -46,9 +50,9 @@ function reset()
 
         // forces[i].pos=[0,0,0,0];
         forces[i].pos=[
-            posX.get()*Math.random()-posX.get()/2,
-            posY.get()*Math.random()-posY.get()/2,
-            posZ.get()*Math.random()-posZ.get()/2,
+            posX.get()+areaX.get()*Math.random()-areaX.get()/2,
+            posY.get()+areaY.get()*Math.random()-areaY.get()/2,
+            posZ.get()+areaZ.get()*Math.random()-areaZ.get()/2,
             ];
             
         forces[i].range=range.get()*Math.random()-range.get()/2;
