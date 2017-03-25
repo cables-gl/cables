@@ -27,7 +27,7 @@ function muteOnChange() {
     var mute = mutePorts[i].get();
     var volume = volumePorts[i].get();
     volumeNodes[i].set("mute", mute ? true : false);
-    if(!mute && soloChannel === i || soloChannel === NONE) {
+    if(!mute && (soloChannel === i || soloChannel === NONE)) {
         volumeNodes[i].set("volume", volume);
     }
 }
@@ -61,6 +61,7 @@ function soloOnChange() {
                 volumeNodes[k].set("volume", volumePorts[k].get());    
             }
         }
+        soloChannel = NONE;
     }
 }
 
@@ -68,7 +69,7 @@ function volumeOnChange() {
     var i = this.data.index;
     var mute = mutePorts[i].get();
     var volume = volumePorts[i].get();
-    if(!mute && soloChannel === i || soloChannel === NONE) {
+    if(!mute && (soloChannel === i || soloChannel === NONE)) {
         volumeNodes[i].set("volume", volume);
     }
 }
