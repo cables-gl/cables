@@ -1,6 +1,8 @@
 op.name="ForceMeshDeformer";
 
 var render=op.inFunction("Render");
+
+var inSmooth=op.inValueBool("Smooth",true);
 var next=op.outFunction("Next");
 
 var cgl=op.patch.cgl;
@@ -53,6 +55,9 @@ render.onTriggered=function()
         // uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
         // uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
         // uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
+        
+        uniSmooth=new CGL.Uniform(shader,'f',shaderModule.prefix+'smooth',inSmooth);
+                    
     }
     
     if(!shader)return;
@@ -78,7 +83,6 @@ render.onTriggered=function()
             force[id+'uniTime'].setValue(time);
         }
     }
-
 
     lastTime=op.patch.freeTimer.get();
     

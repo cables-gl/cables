@@ -5,6 +5,9 @@
 
 // uniform vec3 MOD_emitterPos;
 
+uniform bool MOD_smooth;
+
+
 // uniform float MOD_time;
 // uniform float MOD_sizeX;
 // uniform float MOD_sizeY;
