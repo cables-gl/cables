@@ -11,7 +11,7 @@ var TYPES = ["sine", "square", "triangle", "sawtooth"];
 var NORMAL_RANGE_MIN = 0;
 var NORMAL_RANGE_MAX = 1;
 
-var FREQUENCY_DEFAULT = 440;
+var FREQUENCY_DEFAULT = 0.5;
 var AMPLITUDE_DEFAULT = 1.0;
 var MIN_DEFAULT = 0;
 var MAX_DEFAULT = 1;
