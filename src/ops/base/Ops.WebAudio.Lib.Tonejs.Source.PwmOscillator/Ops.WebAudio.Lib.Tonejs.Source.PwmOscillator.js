@@ -42,8 +42,7 @@ node.set("phase", PHASE_DEFAULT);
 node.set("volume", VOLUME_DEFAULT);
 node.set("mute", MUTE_DEFAULT);
 
-// init
-op.onLoaded = function() {
+function setSyncAndAutostart() {
     var syncFrequency = syncFrequencyPort.get();
     if(syncFrequency) {
         syncFrequency();
@@ -53,7 +52,10 @@ op.onLoaded = function() {
     if(autoStartPort.get()) {
         start();
     }
-};
+}
+
+// init
+op.onLoaded = setSyncAndAutostart;
 
 autoStartPort.onChange = function() {
     op.log("autoStartPort changed: ", autoStartPort.get());
@@ -119,6 +121,12 @@ phasePort.onChange = function() {
 
 // outputs
 var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+audioOutPort.onLinkChanged = function() {
+    //op.log("link changed");
+    if(audioOutPort.isLinked()) {
+        setSyncAndAutostart();
+    }
+};
 
 // clean up
 op.onDelete = function() {
