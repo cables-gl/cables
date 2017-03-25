@@ -1,4 +1,4 @@
-op.name="Object";
+op.name="KeyValue";
 
 var inObject=op.inObject("Object");
 var outObject=op.outObject("Result Object");
