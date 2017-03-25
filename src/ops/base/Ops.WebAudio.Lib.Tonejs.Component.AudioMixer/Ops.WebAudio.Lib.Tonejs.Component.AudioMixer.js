@@ -111,3 +111,11 @@ createInputPorts();
 
 // output ports
 var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", gainNode);
+
+// clean up
+op.onDelete = function() {
+    for(var i=0; i<nPorts; i++) {
+        volumeNodes[i].dispose();
+    }
+    gainNode.dispose();
+};
