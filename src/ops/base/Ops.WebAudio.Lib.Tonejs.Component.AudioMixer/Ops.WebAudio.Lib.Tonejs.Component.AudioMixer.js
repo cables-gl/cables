@@ -28,8 +28,21 @@ function muteOnChange() {
     var volume = volumePorts[i].get();
     volumeNodes[i].set("mute", mute ? true : false);
     if(!mute && (soloChannel === i || soloChannel === NONE)) {
-        volumeNodes[i].set("volume", volume);
+        setVolume(volumeNodes[i], volume);
     }
+}
+
+function setVolume(node, volume) {
+    var volumeF;
+    try {
+        volumeF = parseFloat(volume);    
+    } catch(e) { 
+        op.log("Warning: volume is not a number"); 
+        return;
+    }
+    if(volumeF < VOLUME_MIN) volumeF = VOLUME_MIN;
+    else if(volumeF > VOLUME_MAX) volumeF = VOLUME_MAX;
+    node.set("volume", volumeF);
 }
 
 function soloOnChange() {
@@ -47,18 +60,18 @@ function soloOnChange() {
     if(solo) {
         // set all volumes to VOLUME_MIN
         for(var j=0; j<nPorts; j++) {
-            volumeNodes[j].set("volume", VOLUME_MIN);
+            setVolume(volumeNodes[j], VOLUME_MIN);
         }
         // set volume of soloed channel if not muted
         if(!mutePorts[soloChannel].get()) {
-            volumeNodes[soloChannel].set("volume", volumePorts[soloChannel].get()); // TODO: Add min, max check        
+            setVolume(volumeNodes[soloChannel], volumePorts[soloChannel].get());
         }
     } else { // unsolo
         // set all channels back to original volume if not muted   
         for(var k=0; k<nPorts; k++) {
             // set volume if not muted
             if(!mutePorts[k].get()) {
-                volumeNodes[k].set("volume", volumePorts[k].get());    
+                setVolume(volumeNodes[k], volumePorts[k].get());
             }
         }
         soloChannel = NONE;
@@ -70,7 +83,7 @@ function volumeOnChange() {
     var mute = mutePorts[i].get();
     var volume = volumePorts[i].get();
     if(!mute && (soloChannel === i || soloChannel === NONE)) {
-        volumeNodes[i].set("volume", volume);
+        setVolume(volumeNodes[i], volume);
     }
 }
 
