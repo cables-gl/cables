@@ -14,12 +14,12 @@ There is no explicit callback for initialization, all code in your op is automat
 
 Can be implemented for `OP_PORT_TYPE_VALUE`, `OP_PORT_TYPE_ARRAY`, `OP_PORT_TYPE_OBJECT`.  
 
-Every time a connected op calls the `myOutPort.set(...)` method, the in-port-callback `onValueChange` is called.
+Every time a connected op calls the `myOutPort.set(...)` method, the in-port-callback `onChange` is called.
 
 ```javascript
-myPort.onChange( function() {
-    this.log('value of myPort changed to:' + myPort.get());
-});
+myPort.onChange = function() {
+  op.log('value of myPort changed to: ', myPort.get());
+};
 ```
 
 ### onTrigger
@@ -33,24 +33,24 @@ If your op needs to update its values continuously it should have an input port 
 ```javascript
 var exe = op.addInPort( new Port( this, "exe", OP_PORT_TYPE_FUNCTION ) );
 
-exe.onTriggered( function() {
+exe.onTrigger = function() {
 	// do something
-});
+};
 ```
 
 
 ### onLinkChange
 
-Gets called whenever a port is connected / disconnected.
+Gets called whenever a port is connected / disconnected. It may not have a value yet.
 
 ```javascript
-myPort.onLinkChange( function() {
+myPort.onLinkChanged = function() {
 	if( myPort.isLinked() ) {
 		// port connected  
 	} else {
 		// port disconnected
 	}
-});
+};
 ```
 
 ## General Op Callbacks
@@ -67,12 +67,12 @@ op.onDelete( function() {
 
 ### onLoaded
 
-Gets called when the whole patch is loaded / all ops are linked etc. You mostly don’t need this, as op-specific init-code can just be put in your op-code without a callback.
+Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. You mostly don’t need this, as op-specific init-code can just be put in your op-code without a callback. `op.onLoaded` is not called when the patch has just been added to the patch, only when the patch is loaded.
 
 ```javascript
-op.onLoaded( function() {
+op.onLoaded = function() {
 	// do something
-});
+};
 ```
 
 ### onResize

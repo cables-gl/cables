@@ -38,5 +38,27 @@ typePort.set(TYPE_DEFAULT);
 var rolloffPort = op.addInPort( new Port( op, "Rolloff", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: ROLLOFF_VALUES }, ROLLOFF_DEFAULT ) );
 rolloffPort.set(ROLLOFF_DEFAULT);
 
+// change listeneers
+typePort.onChange = function() {
+    var t = typePort.get();
+    if(t && TYPES.indexOf(t) > -1) {
+        node.set("type", t);
+    }
+};
+
+rolloffPort.onChange = function() {
+    var r = rolloffPort.get();
+    try {
+        r = parseFloat(r);   
+    } catch(e) {
+        op.log(e); 
+        return;
+    }
+    if(r && ROLLOFF_VALUES.indexOf(r) > -1) {
+        node.set("rolloff", r);
+        op.log("Setting rolloff", r);
+    }
+};
+
 // output ports
 var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);

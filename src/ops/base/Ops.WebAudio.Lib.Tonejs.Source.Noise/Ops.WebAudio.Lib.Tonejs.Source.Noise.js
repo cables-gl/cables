@@ -33,12 +33,14 @@ var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volum
 var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(MUTE_DEFAULT);
 
-// init
-op.onLoaded = function() {
+function checkAutostart() {
     if(autoStartPort.get()) {
         start();
     }
-};
+}
+
+// init
+op.onLoaded = checkAutostart;
 
 // functions
 function start() {
@@ -98,6 +100,12 @@ mutePort.onChange = function() {
 
 // outputs
 var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+
+audioOutPort.onLinkChanged = function() {
+    if(audioOutPort.isLinked()) {
+        checkAutostart();
+    }
+};
 
 // clean up
 op.onDelete = function() {

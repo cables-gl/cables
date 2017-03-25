@@ -190,3 +190,42 @@ var myPort = op.inValue("My In Port");
 myPort.data.someValue = 1;
 
 ```
+
+## Port linking
+
+Once a port is linked with another port `myPort.onLinkChanged` is executed. When it is executed the port may not have a value yet, it just sais: «There is a new connection». Later on `myPort.onLinkChanged` is called and you can get the new value with `myPort.get()`.
+
+```javascript
+op.name="MyTestOp";
+
+var myPort = op.inValue("My Port");
+
+myPort.onLinkChanged = function() {
+	op.log("A link to myPort has been added or removed");
+	if(myPort.isLinked()) {
+		op.log("myPort has been linked");
+	} else {
+		op.log("myPort has been unlinked ");
+	}
+};
+
+myPort.onLinkChanged = function() {
+	op.log("The value on myPort changed to: ", myPort.get());
+}
+```
+
+If you need to access to other (linked) port you can also do so:
+
+```javascript
+myPort.onLinkChanged = function() {
+	op.log("A link to myPort has been added or removed");
+	if(myPort.isLinked()) {
+		op.log("myPort has been linked");
+		// get the other port, as there can be multiple connections, get the last added one
+		var otherPort = myPort.links[links.length-1].getOtherPort(myPort);
+		op.log("Port is linked to: ", otherPort.name);
+	} else {
+		op.log("myPort has been unlinked ");
+	}
+};
+```

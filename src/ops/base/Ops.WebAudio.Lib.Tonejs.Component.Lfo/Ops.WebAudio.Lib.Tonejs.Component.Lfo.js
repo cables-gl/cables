@@ -11,10 +11,10 @@ var TYPES = ["sine", "square", "triangle", "sawtooth"];
 var NORMAL_RANGE_MIN = 0;
 var NORMAL_RANGE_MAX = 1;
 
-var FREQUENCY_DEFAULT = 440;
+var FREQUENCY_DEFAULT = 0.5;
 var AMPLITUDE_DEFAULT = 1.0;
-var MIN_DEFAULT = 300;
-var MAX_DEFAULT = 700;
+var MIN_DEFAULT = 0;
+var MAX_DEFAULT = 1;
 var TYPE_DEFAULT = "sine";
 var PHASE_DEFAULT = 0;
 var PHASE_MIN = 0;
@@ -54,7 +54,11 @@ mutePort.onChange = function() {setNodeValue("mute", mutePort.get());};
 volumePort.onChange = function() {
     var volume = volumePort.get();
     if(volume >= VOLUME_MIN && volume <= VOLUME_MAX) {
-        node.volume.value = volume;    
+        try{
+            node.set("volume", volume);
+        } catch(e) {
+            op.log(e);
+        }
     } else {
         op.log("Volume out of range: ", volume);
     }
