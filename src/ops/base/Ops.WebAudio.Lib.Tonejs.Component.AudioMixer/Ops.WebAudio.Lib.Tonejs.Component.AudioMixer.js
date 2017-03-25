@@ -3,9 +3,9 @@ op.name="AudioMixer";
 CABLES.WebAudio.createAudioContext(op);
 
 // constants
-var VOLUME_DEFAULT = 0;
+var VOLUME_DEFAULT = -0.1;
 var VOLUME_MIN = -96;
-var VOLUME_MAX = 0;
+var VOLUME_MAX = -0.1;
 var NONE = -1;
 
 // vars

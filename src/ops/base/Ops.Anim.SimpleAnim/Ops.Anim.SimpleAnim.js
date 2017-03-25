@@ -2,8 +2,8 @@ op.name="SimpleAnim";
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
-var reset=op.addInPort(new Port(op,"reset",OP_PORT_TYPE_FUNCTION));
-var rewind=op.addInPort(new Port(op,"rewind",OP_PORT_TYPE_FUNCTION));
+var reset=op.inFunctionButton("reset");
+var rewind=op.inFunctionButton("rewind");
 
 var inStart=op.addInPort(new Port(op,"start"));
 var inEnd=op.addInPort(new Port(op,"end"));

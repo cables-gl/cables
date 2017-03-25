@@ -129,7 +129,7 @@ CABLES.Op = function()
     CABLES.Op.prototype.inTexture=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); return p; };
     CABLES.Op.prototype.inObject=function(name,v,options)
     {
-        console.log(options);
+        // console.log(options);
         var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT,options)); if(v!==undefined)p.set(v); return p;
     };
     CABLES.Op.prototype.inArray=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); return p; };

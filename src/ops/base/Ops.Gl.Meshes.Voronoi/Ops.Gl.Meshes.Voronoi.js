@@ -58,7 +58,7 @@ for(var i=0;i<75;i++)
 }
 
 var diagram = voronoi.compute(sites, bbox);
-var meshes=[];
+var mesh=null;
 var geom=null;
 
 
@@ -123,9 +123,9 @@ function queueUpdate()
     needsUpdate=true;
 }
 
-var verts=[];    
-var indices=[];
-var tc=new Float32Array(99000);
+var verts=null;
+var indices=new Uint16Array();
+// var tc=new Float32Array(99000);
 
 function updateGeom()
 {
@@ -133,7 +133,7 @@ function updateGeom()
     diagram = voronoi.compute(sites, bbox);
 
     // todo delete unalloc old mesh objects
-    meshes.length=0;
+    // meshes.length=0;
     needsUpdate=false;
 
 
@@ -156,8 +156,8 @@ function updateGeom()
     
     var filling=fill.get();
 
-    if(filling<=0.0) verts.length=count*3*3;
-    else verts.length=count*6*3;
+    if(filling<=0.0) verts=new Float32Array(count*3*3);
+    else verts=new Float32Array(count*6*3);
     
     // console.log(count*6);
     
@@ -171,18 +171,14 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
 
     for (var ic = 0; ic < sites.length; ic++)
     {
-        
         var vid=sites[ic].voronoiId;
 
+        // if(ic==0)console.log(sites[ic]);
 
-// if(ic==0)console.log(sites[ic]);
-
-        
         var cell = diagram.cells[vid];
         if(!cell)return;
 
-
-// if(ic==0) console.log(cell);
+        // if(ic==0) console.log(cell);
 
         var mX=0;
         var mY=0;
@@ -193,14 +189,9 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
 
         var minDist=9999999;
 
-
-
-
         var maxDist=0;
         var ignoreCell=false;
-        
-        
-    
+
         if(ignoreBorderCells)    
         {
             for(var j=0;j<cell.halfedges.length;j++)
@@ -214,8 +205,6 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
         }
         
         var scale=1;
-        
-
 
         for(var j=0;j<cell.halfedges.length;j++)
         {
@@ -421,7 +410,7 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
         // }
         
         // md=md*md;
-        // meshes[vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
+        // [vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
         
     }
 
@@ -429,11 +418,26 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
     
     if(pRender.get())
     {
-        tc.length=verts.length/3*2;
-        indices.length=verts.length;
-        var c=0;
+        // tc.length=verts.length/3*2;
         
-        for(i=0;i<verts.length/3;i++)indices.push(i);
+        
+        if(indices.length<verts.length)
+        {
+            indices=new Uint16Array(verts.length/3);
+            var c=0;
+            
+            for(i=0;i<verts.length/3;i++)indices[i]=i;
+            
+        }
+    
+    
+        // indices.length=verts.length;
+        // var c=0;
+        
+        // for(i=0;i<verts.length/3;i++)indices.push(i);
+    
+    
+    
     
         // for(i=0;i<verts.length/3;i++)
         // {
@@ -445,16 +449,26 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
     
         geom.vertices=verts;
         geom.verticesIndices=indices;
-        geom.texCoords=tc;
+        // geom.texCoords=tc;
         if(inCalcNormals.get())
             geom.calculateNormals({"forceZUp":true});
         
-        if(!meshes[0]) meshes[0]=new CGL.Mesh(op.patch.cgl,geom);
-            else meshes[0].setGeom(geom);
-            // else meshes[0].updateVertices(geom);
+        if(!mesh) 
+        {
+            mesh=new CGL.Mesh(op.patch.cgl,geom);
+            console.log("new voronoi mesh");
+        }
+            // else mesh.setGeom(geom);
+            
+        var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,verts,3);
+        attr.numItems=verts.length/3;
+        
+        mesh.setVertexIndices(indices);
+
+            // else mesh.updateVertices(geom);
 
         // console.log('verts ',verts.length);
-        // meshes[0].pos=[sites[ic].x,sites[ic].y,0];
+        // mesh.pos=[sites[ic].x,sites[ic].y,0];
         
     }
     
@@ -473,21 +487,21 @@ render.onTriggered=function()
     if(!shader)return;
     oldPrim=shader.glPrimitive;
 
-    for(var i=0;i<meshes.length;i++)
-    {
-        if(pRender.get())meshes[i].render(op.patch.cgl.getShader());
+    // for(var i=0;i<meshes.length;i++)
+    // {
+        if(pRender.get())mesh.render(op.patch.cgl.getShader());
 
         if(next.isLinked())
         {
             cgl.pushMvMatrix();
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix, meshes[i].pos);
-            mat4.scale(cgl.mvMatrix,cgl.mvMatrix, meshes[i].scale);
+            mat4.translate(cgl.mvMatrix,cgl.mvMatrix, mesh.pos);
+            mat4.scale(cgl.mvMatrix,cgl.mvMatrix, mesh.scale);
 
             next.trigger();
             cgl.popMvMatrix();
         }
-    }
-        
+    // }
+    
 
 
 };
