@@ -35,10 +35,18 @@ var releaseCurvePort = this.addInPort( new Port( this, "Release Curve", OP_PORT_
 releaseCurvePort.set(ATTACK_CURVE_DEFAULT);
 
 // value change listeners
-attackPort.onChange = setNodeValue("attack", attackPort.get());
-decayPort.onChange = setNodeValue("decay", decayPort.get());
-sustainPort.onChange = setNodeValue("sustain", sustainPort.get());
-releasePort.onChange = setNodeValue("release", releasePort.get());
+attackPort.onChange = function() {
+    setNodeValue("attack", attackPort.get());    
+};
+decayPort.onChange = function() {
+    setNodeValue("decay", decayPort.get());
+};
+sustainPort.onChange = function() {
+    setNodeValue("sustain", sustainPort.get());    
+};
+releasePort.onChange = function() {
+  setNodeValue("release", releasePort.get());  
+};
 
 function setNodeValue(key, value) {
     node.set(key, value);

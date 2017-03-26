@@ -170,8 +170,25 @@ CGL.Mesh.prototype._setVertexNumbers=function()
                 shader.uniformNumVertices.setValue(numVerts);
            });
    }
+};
 
+CGL.Mesh.prototype.setVertexIndices=function(vertIndices)
+{
+    if(vertIndices.length>0)
+    {
+        this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 
+        // todo cache this ?
+        // if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
+
+        if(!(vertIndices instanceof Uint16Array)) this.vertIndicesTyped=new Uint16Array(vertIndices);
+            else this.vertIndicesTyped=vertIndices;
+
+        this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
+        this._bufVerticesIndizes.itemSize = 1;
+        this._bufVerticesIndizes.numItems = vertIndices.length;
+    }
+    else this._bufVerticesIndizes.numItems=0;
 };
 
 CGL.Mesh.prototype.setGeom=function(geom)
@@ -189,19 +206,7 @@ CGL.Mesh.prototype.setGeom=function(geom)
 
     this.updateVertices(this._geom);
 
-    if(this._geom.verticesIndices.length>0)
-    {
-        this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
-
-        // todo cache this ?
-        // if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
-        this.vertIndicesTyped=new Uint16Array(this._geom.verticesIndices);
-
-        this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
-        this._bufVerticesIndizes.itemSize = 1;
-        this._bufVerticesIndizes.numItems = this._geom.verticesIndices.length;
-    }
-    else this._bufVerticesIndizes.numItems=0;
+    this.setVertexIndices(this._geom.verticesIndices);
 
     if(this._geom.vertexNormals.length>0) this.setAttribute('attrVertNormal',this._geom.vertexNormals,3);
 

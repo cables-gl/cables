@@ -1,5 +1,5 @@
 
-if(!Ops.Ui.Patch.maxPatchId)Ops.Ui.Patch.maxPatchId=0;
+// if(!Ops.Ui.Patch.maxPatchId)Ops.Ui.Patch.maxPatchId=0;
 
 op.name='Patch';
 op.patchId=op.addInPort(new Port(op,"patchId",OP_PORT_TYPE_VALUE,{ display:'readonly' }));
@@ -78,7 +78,7 @@ var getSubPatchInputOp=function()
 
     if(op.uiAttribs && op.uiAttribs.translate)
     {
-        patchInputOP.uiAttribs.translate={x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y-100};        
+        patchInputOP.uiAttribs.translate={x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y-100};
     }
 
     return patchInputOP;
@@ -188,14 +188,14 @@ op.shouldLink=function(p1,p2)
     if(!op.hasDynamicPort())getNewDynamicPort('dyn');
 
     return true;
-}
+};
 
 op.patchId.onValueChanged=function()
 {
-    Ops.Ui.Patch.maxPatchId=Math.max(Ops.Ui.Patch.maxPatchId,op.patchId.get());
+    // Ops.Ui.Patch.maxPatchId=Math.max(Ops.Ui.Patch.maxPatchId,op.patchId.get());
 };
 
-op.patchId.set(Ops.Ui.Patch.maxPatchId+1);
+op.patchId.set(CABLES.generateUUID());
 
 op.onCreate=function()
 {
