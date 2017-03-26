@@ -8,8 +8,21 @@ op.patchId=op.addInPort(new Port(op,"patchId",OP_PORT_TYPE_VALUE,{ display:'read
 
 var data={"ports":[],"portsOut":[]};
 
-Ops.Ui.Patch.maxPatchId=(Ops.Ui.Patch.maxPatchId||0)+1;
-op.patchId.set(Ops.Ui.Patch.maxPatchId);
+// Ops.Ui.Patch.maxPatchId=CABLES.generateUUID();
+
+op.patchId.onChange=function()
+{
+    console.log("subpatchid changed!",op.patchId.get());
+    
+};
+
+
+
+op.patchId.set(CABLES.generateUUID());
+
+
+
+
 
 getSubPatchInputOp();
 getSubPatchOutputOp();
@@ -71,9 +84,17 @@ function setupPorts()
     {
         if(!op.getPortByName(ports[i].name))
         {
+            console.log("ports[i].name",ports[i].name);
+
             var newPort=op.addInPort(new Port(op,ports[i].name,ports[i].type));
             var patchInputOp=getSubPatchInputOp();
+
+            console.log(patchInputOp);
+
             var newPortInPatch=patchInputOp.addOutPort(new Port(patchInputOp,ports[i].name,ports[i].type));
+
+console.log('newPortInPatch',newPortInPatch);
+
 
             newPort.ignoreValueSerialize=true;
             addPortListener(newPort,newPortInPatch);
@@ -93,10 +114,12 @@ function setupPorts()
             addPortListener(newPortOutPatch,newPortOut);
         }
     }
-    
+
     dataLoaded=true;
-    
+
 }
+
+
 
 op.dyn.onLinkChanged=function()
 {
@@ -105,7 +128,7 @@ op.dyn.onLinkChanged=function()
         var otherPort=op.dyn.links[0].getOtherPort(op.dyn);
         op.dyn.removeLinks();
         otherPort.removeLinkTo(op.dyn);
-        
+
         var newName="in"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
 
         data.ports.push({"name":newName,"type":otherPort.type});
@@ -118,7 +141,7 @@ op.dyn.onLinkChanged=function()
             op,
             newName
             );
-            
+
         console.log('-----+===== ',otherPort.getName(),otherPort.get() );
         // l._setValue();
         // l.setValue(otherPort.get());
@@ -134,7 +157,7 @@ op.dyn.onLinkChanged=function()
             gui.patch().removeDeadLinks();
         },100);
     }
-    
+
 };
 
 op.dynOut.onLinkChanged=function()
@@ -208,7 +231,7 @@ function getSubPatchInputOp()
 op.addSubLink=function(p,p2)
 {
     var num=data.ports.length;
-    
+
     console.log('sublink! ',p.getName(), (num-1)+" "+p2.parent.name+" "+p2.name);
 
 
@@ -244,7 +267,7 @@ op.addSubLink=function(p,p2)
                 "y":bounds.miny-100
             }
         });
-        
+
     getSubPatchOutputOp().uiAttr(
         {
             "translate":
@@ -268,11 +291,7 @@ op.onDelete=function()
             op.patch.deleteOp(op.patch.ops[i].id);
         }
     }
-    
+
 
 
 };
-
-
-
-
