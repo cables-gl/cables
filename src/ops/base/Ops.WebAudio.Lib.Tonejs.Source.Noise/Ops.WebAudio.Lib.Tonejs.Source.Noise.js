@@ -1,5 +1,7 @@
 op.name="Noise";
 
+CABLES.WebAudio.createAudioContext(op);
+
 // constants
 var PLAYBACK_RATE_DEFAULT = 1;
 var PLAYBACK_RATE_MIN = 0.01; //?
