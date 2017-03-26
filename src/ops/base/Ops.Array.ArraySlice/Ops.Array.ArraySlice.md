@@ -2,7 +2,7 @@
 
 *Ops.Array.ArraySlice*  
 
-Extracts parts of an array.
+Extracts parts of an array (shallow copy).
 
 *Example:* 
 

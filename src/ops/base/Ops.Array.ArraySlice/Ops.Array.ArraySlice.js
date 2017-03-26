@@ -2,8 +2,8 @@ op.name="ArraySlice";
 
 // inputs
 var inArrayPort = op.inArray("Input Array");
-var beginPort = op.inValue("Begin Index");
-var endPort = op.inValue("End Index");
+var beginPort = op.inValue("Begin Index", 0);
+var endPort = op.inValue("End Index", 1);
 
 // functions
 function setOutarray() {
