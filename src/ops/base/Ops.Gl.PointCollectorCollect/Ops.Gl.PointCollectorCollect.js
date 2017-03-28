@@ -26,7 +26,7 @@ render.onTriggered=function()
     cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter+0]=pos[0];
     cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter+1]=pos[1];
     cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter+2]=pos[2];
-    
+
     cgl.frameStore.SplinePointCounter+=3;
 
     trigger.trigger();

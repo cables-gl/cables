@@ -57,7 +57,7 @@ function calc()
     else
     if(subd>0 && bezier.get() )
     {
-        arr.length=(inPoints.length-3)*(subd);
+        arr.length=(inPoints.length-3)*(subd-1);
         var count=0;
 
         for(i=3;i<inPoints.length-6;i+=3)

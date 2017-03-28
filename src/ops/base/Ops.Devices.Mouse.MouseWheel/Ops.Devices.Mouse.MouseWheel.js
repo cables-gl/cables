@@ -37,17 +37,13 @@ var isWindows=navigator.appVersion.indexOf("Win")!=-1;
 min.onChange=function()
 {
     checkValue();
-    console.log(v);
     absVal.set( v );
-    console.log(v);
 };
 
 max.onChange=function()
 {
     checkValue();
-    console.log(v);
     absVal.set( v );
-    console.log(v);
 };
 
 

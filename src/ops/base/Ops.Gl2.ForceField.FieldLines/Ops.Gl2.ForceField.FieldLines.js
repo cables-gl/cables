@@ -15,15 +15,18 @@ var outCanceled=op.outValue("Canceled lines");
 
 var dots = new Float32Array(3000);
 
+var p=0.025;
+
+var dxPos = [p,0,-p,0];
+var dyPos = [0,p,0,-p];
+var dxNeg = [p,p,-p,-p];
+var dyNeg = [-p,p,p,-p];
+
+
 exec.onTriggered=function()
 {
     var numLines=4;
-    var p=0.025;
 
-    var dxPos = [p,0,-p,0];
-    var dyPos = [0,p,0,-p];
-    var dxNeg = [p,p,-p,-p];
-    var dyNeg = [-p,p,p,-p];
     var forces=CABLES.forceFieldForces;
     var canceled=0;
 
