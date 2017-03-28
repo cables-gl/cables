@@ -191,6 +191,12 @@ myPort.data.someValue = 1;
 
 ```
 
+Additionally you can create a **read-only** port, which is visible, but cannot be edited.
+
+```javascript
+op.patchId = op.addInPort(new Port(op, "Patch ID", OP_PORT_TYPE_VALUE, { display: 'readonly' }));
+```
+
 ## Port linking
 
 Once a port is linked with another port `myPort.onLinkChanged` is executed. When it is executed the port may not have a value yet, it just sais: «There is a new connection». Later on `myPort.onLinkChanged` is called and you can get the new value with `myPort.get()`.
