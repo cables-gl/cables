@@ -1,7 +1,9 @@
 op.name="ChordTriad";
 
+// constants
+var OCTAVE_DEFAULT = 4;
+
 // vars
-//var scaleIsDamaged = true;
 var noteOctaveRegex = /([a-zA-Z#]+)([0-9]+)/;
 
 // input
@@ -68,7 +70,7 @@ function findInArray(val, arr) {
     }    
     for(var i=0; i<arr.length; i++) {
         var noteOct = getNoteAndOctaveFromString(arr[i]);
-        if(arr[i] === val || noteOct && noteOct[0] === note) {
+        if(arr[i] === val || noteOct && noteOct[0] === note || arr[i] === note) {
             return i;
         }
     }
@@ -79,24 +81,45 @@ function getChord(scale, baseNote) {
     if(!scale || scale.length === 0 || !baseNote) {
         return;
     }
+    var scaleLength = scale.length;
     if(scaleHasOctave(scale)) {
         scale = appendOctave(scale);
         var baseNoteI = findInArray(baseNote, scale);
         if(baseNoteI !== -1 && (baseNoteI+4) < scale.length) {
             return [scale[baseNoteI], scale[baseNoteI+2], scale[baseNoteI+4]];
         }
+    } else { // scale does not have octave, e.g. ["C", "D", "E", ...]
+        var baseToneArr = getNoteAndOctaveFromString(baseNote);
+        if(!baseToneArr) {
+            return;
+        }
+        var baseoctave = baseToneArr[1];
+        scale = scale.slice(); // append the scale
+        var baseNoteI = findInArray(baseNote, scale);
+        if(baseNoteI !== -1 && (baseNoteI+4) < scale.length) {
+            var ret = [
+                scale[baseNoteI] + baseoctave,
+                scale[baseNoteI+2] + (baseNoteI+2 < scaleLength  ? baseoctave : baseoctave+1 ),
+                scale[baseNoteI+4] + (baseNoteI+4 < scaleLength  ? baseoctave : baseoctave+1 ),
+            ];
+            //return , scale[baseNoteI+2], ];
+            return ret;
+        }
     }
 }
 
-// change listeners
-baseNotePort.onChange = function() {
+function setChordPort() {
     var scale = scalePort.get();
     var baseNote = baseNotePort.get();
     var chord = getChord(scale, baseNote);
     if(chord) {
         chordPort.set(chord);
     }
-};
+}
+
+// change listeners
+baseNotePort.onChange = setChordPort;
+scalePort.onChange = setChordPort;
 
 // output
 var chordPort = op.outArray("Chord");
