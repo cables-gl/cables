@@ -2,7 +2,7 @@ op.name="ScaleArray";
 
 // constants
 var BASE_TONES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-var BASE_TONE_DEFAULT = "D";
+var BASE_TONE_DEFAULT = "C";
 var SCALE_TYPE_DEFAULT = "Minor";
 var APPEND_OCTAVE_DEFAULT = true;
 var OCTAVE_DEFAULT = 3;
@@ -61,6 +61,7 @@ var scaleArrayPort = op.outArray("Scale Array");
 baseTonePort.onChange = setOutput;
 scaleTypePort.onChange = setOutput;
 octavePort.onChange = setOutput;
+appendOctavePort.onChange = setOutput;
 
 includeHighBaseTonePort.onChange = setOutput;
 
