@@ -3,7 +3,6 @@ var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
 
 var thick=op.inValue("Thickness");
-var test=op.addInPort(new Port(op,"test",OP_PORT_TYPE_VALUE));
 
 var calcNormals=op.inValueBool("Calculate Normals",false);
 
@@ -25,7 +24,6 @@ render.onTriggered=function()
 
 rebuild();
 
-test.onValueChanged=rebuild;
 inPoints.onChange=rebuild;
 thick.onChange=rebuild;
 var geom=null;
@@ -51,8 +49,6 @@ function doRebuild()
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     else 
     {
-        
-
     }
 
 

@@ -437,7 +437,7 @@ CGL.Geometry.LinesToGeom=function(points,options,geom)
     var indices=geom.verticesIndices;
     if(verts.length!=points.length/3*18) verts=new Float32Array(points.length/3*18);
     if(tc.length!=points.length/3*12) tc=new Float32Array(points.length/3*12);
-    if(indices.length!=points.length/3) indices=new Float32Array(points.length/3);
+    if(indices.length!=points.length*2) indices=new Uint16Array(points.length*2);
 
 
     // var indices=new Float32Array(points.length/3);
