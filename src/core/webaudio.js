@@ -48,8 +48,6 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
   op.webAudio.audioInPorts[portName] = port;
 
   port.onChange = function() {
-
-      console.log("onchange: ",port.get());
     var audioInNode = port.get();
     // when port disconnected, disconnect audio nodes
     if (!audioInNode) {
@@ -58,6 +56,15 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
                 port.webAudio.previousAudioInNode.disconnect(port.webAudio.audioNode, 0, inputChannelIndex);
             } catch(e) {
                 console.log(e);
+                op.log("Node to call disconnect on: ", port.webAudio.previousAudioInNode);
+                op.log("its disconnect function: ", port.webAudio.previousAudioInNode.disconnect);
+                op.log("Node to disconnect: ", port.webAudio.audioNode);
+                op.log("inputChannelIndex: ", inputChannelIndex);
+                try {
+                  port.webAudio.previousAudioInNode.disconnect(port.webAudio.audioNode);
+                } catch(e) {
+                  op.log("Disconnecting without in/out-port-index also did not work ", e);
+                }
             }
         }
     } else {
