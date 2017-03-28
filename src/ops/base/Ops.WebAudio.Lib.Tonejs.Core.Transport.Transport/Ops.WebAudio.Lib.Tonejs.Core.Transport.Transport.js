@@ -63,6 +63,12 @@ Tone.Transport.set("loopEnd", LOOP_END_DEFAULT);
 Tone.Transport.set("ppq", PPQ_DEFAULT);
 
 // functions
+function checkAutoStart() {
+    if(autoStartPort.get() && Tone.Transport.get("state") !== "started") {
+        Tone.Transport.start();
+    }
+}
+
 function startTransport() {
     var startTime = startTimePort.get();
     var startOffset = startOffsetPort.get();
@@ -94,6 +100,9 @@ updatePort.onTriggered = function() {
     secondsPort.set(Tone.Transport.seconds);
     progressPort.set(Tone.Transport.progress);
     ticksPort.set(Tone.Transport.ticks);
+};
+updatePort.onLinkChanged = function() {
+    checkAutoStart();
 };
 bpmPort.onChange = function() {
     var bpm = bpmPort.get();
@@ -156,9 +165,7 @@ autoStartPort.onChange = function() {
 
 // initialiation when all ports are set
 op.onLoaded = function() {
-    if(autoStartPort.get() && Tone.Transport.get("state") !== "started") {
-        Tone.Transport.start();
-    }
+    checkAutoStart();
 };
 
 
