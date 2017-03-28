@@ -67,19 +67,21 @@ pSites.onChange=function()
     }
 };
 
+var outObj={};
+
 function updateGeom()
 {
     if(!sites)return;
     diagram = voronoi.compute(sites, bbox);
     needsUpdate=false;
     outVoronoi.set(null);
-    outVoronoi.set(
-        {
-            diagram:diagram,
-            sites:sites,
-            width:pWidth.get(),
-            height:pHeight.get()
-        });
+
+    outObj.diagram=diagram;
+    outObj.sites=sites;
+    outObj.width=pWidth.get();
+    outObj.height=pHeight.get();
+
+    outVoronoi.set(outObj);
 }
 
 render.onTriggered=function()
