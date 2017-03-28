@@ -9,6 +9,7 @@ var range=op.inValue("Range Radius",1);
 var attraction=op.inValue("attraction");
 var angle=op.inValue("Angle");
 var show=op.inValueBool("Show");
+var seed=op.inValue("Random Seed");
 
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
@@ -34,6 +35,10 @@ angle.onChange=reset;
 posX.onChange=reset;
 posY.onChange=reset;
 posZ.onChange=reset;
+areaX.onChange=reset;
+areaY.onChange=reset;
+areaZ.onChange=reset;
+seed.onChange=reset;
 
 var forces=[];
 
@@ -42,24 +47,30 @@ doreset.onTriggered=reset;
 
 function reset()
 {
+    var fPoints=[];
+    Math.randomSeed=seed.get();
+
 
     forces.length=Math.floor(num.get());
     for(var i=0;i<num.get();i++)
     {
         forces[i]=forces[i]||{};
 
+        var x=posX.get()+areaX.get()*Math.seededRandom()-areaX.get()/2;
+        var y=posY.get()+areaY.get()*Math.seededRandom()-areaY.get()/2;
+        var z=posZ.get()+areaZ.get()*Math.seededRandom()-areaZ.get()/2;
+
+        fPoints.push(x,y,z);
+
         // forces[i].pos=[0,0,0,0];
-        forces[i].pos=[
-            posX.get()+areaX.get()*Math.random()-areaX.get()/2,
-            posY.get()+areaY.get()*Math.random()-areaY.get()/2,
-            posZ.get()+areaZ.get()*Math.random()-areaZ.get()/2,
-            ];
+        forces[i].pos=[x,y,z];
             
-        forces[i].range=range.get()*Math.random()-range.get()/2;
-        forces[i].attraction=attraction.get()*Math.random()-attraction.get()/2;
-        forces[i].angle=angle.get()*Math.random()-angle.get()/2;
+        forces[i].range=range.get()*Math.seededRandom()-range.get()/2;
+        forces[i].attraction=attraction.get()*Math.seededRandom()-attraction.get()/2;
+        forces[i].angle=angle.get()*Math.seededRandom()-angle.get()/2;
     }
-    
+
+    outPoints.set(fPoints);
     // console.log(forces);
 }
 
