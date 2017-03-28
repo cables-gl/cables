@@ -296,7 +296,6 @@ CGL.Mesh.prototype._bind=function(shader)
 
                     }
                 }
-
                 this.bindFeedback(attribute);
 
             }
@@ -341,7 +340,6 @@ CGL.Mesh.prototype.meshChanged=function()
 {
     return (this._cgl.lastMesh && ( this._cgl.lastMesh!=this ));
 };
-
 
 CGL.Mesh.hadError=false;
 
@@ -437,7 +435,6 @@ CGL.Mesh.prototype.render=function(shader)
     if(shader.glPrimitive!==null) prim=shader.glPrimitive;
 
     // console.log(shader.glPrimitive);
-
     // if(prim==this._cgl.gl.POINTS) console.log('points');
     // if(shader.glPrimitive==this._cgl.gl.POINTS) console.log('shader points');
     // if(shader.glPrimitive==1)prim=this._cgl.gl.POINTS;
@@ -446,11 +443,7 @@ CGL.Mesh.prototype.render=function(shader)
     // prim=this._cgl.gl.LINE_STRIP;
 
     // if(this._bufVerticesIndizes.numItems===0)
-
-
-// console.log(this._bufVertexAttrib.numItems);
-
-
+    // console.log(this._bufVertexAttrib.numItems);
 
     if(this.hasFeedbacks())
     {

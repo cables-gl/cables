@@ -11,6 +11,11 @@ CGL.Framebuffer2=function(cgl,w,h,options)
     this._width = 0;
     this._height = 0;
 
+    this._colorRenderbuffer=null;
+    this._depthRenderbuffer=null;
+    this._frameBuffer=null;
+    this._colorBuffer=null;
+
     this._options=options ||
         {
             "isFloatingPointTexture":false
@@ -59,8 +64,10 @@ CGL.Framebuffer2.prototype.delete=function()
 {
     this._texture.delete();
     this._textureDepth.delete();
-    // cgl.gl.deleteRenderbuffer(depthBuffer);
-    // cgl.gl.deleteFramebuffer(frameBuf);
+    this._cgl.gl.deleteRenderbuffer(this._colorRenderbuffer);
+    this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
+    this._cgl.gl.deleteFramebuffer(this._frameBuffer);
+    this._cgl.gl.deleteFramebuffer(this._colorBuffer);
 };
 
 
@@ -70,6 +77,18 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     this._height=Math.floor(h);
 
     CGL.profileFrameBuffercreate++;
+
+
+    if(this._frameBuffer)
+    {
+        this._cgl.gl.deleteRenderbuffer(this._colorRenderbuffer);
+        this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
+        this._cgl.gl.deleteFramebuffer(this._frameBuffer);
+        this._cgl.gl.deleteFramebuffer(this._colorBuffer);
+
+    }
+
+
 
 
     this._frameBuffer=this._cgl.gl.createFramebuffer();

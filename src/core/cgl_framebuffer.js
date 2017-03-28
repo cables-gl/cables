@@ -63,7 +63,6 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         CGL.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
 
         texture.setSize(width,height);
@@ -134,8 +133,6 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
         cgl.popMvMatrix();
         cgl.resetViewPort();
-
-
     };
 
     this.delete=function()
