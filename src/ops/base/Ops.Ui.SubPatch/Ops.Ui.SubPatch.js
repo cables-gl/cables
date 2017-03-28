@@ -12,14 +12,51 @@ var data={"ports":[],"portsOut":[]};
 
 op.patchId.onChange=function()
 {
-    console.log("subpatchid changed!",op.patchId.get());
+    console.log("subpatch changed...");
+    // clean up old subpatch if empty
+    var oldPatchOps=op.patch.getSubPatchOps(oldPatchId);
     
+    console.log("subpatch has childs ",oldPatchOps.length);
+    
+    if(oldPatchOps.length==2)
+    {
+        for(var i=0;i<oldPatchOps.length;i++)
+        {
+            console.log("delete ",oldPatchOps[i]);
+            op.patch.deleteOp(oldPatchOps[i].id);
+        }
+    }
+    else
+    {
+        console.log("old subpatch has ops.,...");
+    }
+    
+
+};
+
+var oldPatchId=CABLES.generateUUID();
+op.patchId.set(oldPatchId);
+
+op.onLoaded=function()
+{
+    // op.patchId.set(CABLES.generateUUID());
+};
+
+op.onLoadedValueSet=function()
+{
+    data=JSON.parse(dataStr.get());
+    setupPorts();
+
 };
 
 
 
-op.patchId.set(CABLES.generateUUID());
 
+function loadData()
+{
+
+
+}
 
 
 
@@ -36,8 +73,7 @@ dataStr.onChange=function()
     try
     {
         console.log('parse subpatch data');
-        data=JSON.parse(dataStr.get());
-        setupPorts();
+        loadData();
     }
     catch(e)
     {
@@ -76,6 +112,7 @@ function addPortListener(newPort,newPortInPatch)
 
 function setupPorts()
 {
+    if(!op.patchId.get())return;
     var ports=data.ports;
     var portsOut=data.portsOut;
     var i=0;
@@ -142,7 +179,7 @@ op.dyn.onLinkChanged=function()
             newName
             );
 
-        console.log('-----+===== ',otherPort.getName(),otherPort.get() );
+        // console.log('-----+===== ',otherPort.getName(),otherPort.get() );
         // l._setValue();
         // l.setValue(otherPort.get());
 
@@ -198,12 +235,14 @@ op.dynOut.onLinkChanged=function()
 };
 
 
+
 function getSubPatchOutputOp()
 {
     var patchOutputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchOutput');
 
     if(!patchOutputOP)
     {
+        console.log("Creating output for ",op.patchId.get());
         op.patch.addOp('Ops.Ui.PatchOutput',{'subPatch':op.patchId.get()} );
         patchOutputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchOutput');
 

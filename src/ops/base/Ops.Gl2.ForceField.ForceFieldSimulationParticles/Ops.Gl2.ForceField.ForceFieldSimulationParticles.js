@@ -59,9 +59,9 @@ function doReset()
         verts[i+2]=(Math.random()-0.5)*sizeZ+posZ.get();
         // verts[i+2]=0.0;
 
-        bufferB[i+0]=(Math.random()-0.5)*sizeX;
-        bufferB[i+1]=(Math.random()-0.5)*sizeY;
-        bufferB[i+2]=(Math.random()-0.5)*sizeZ;
+        bufferB[i+0]=(Math.random()-0.5)*sizeX+posX.get();
+        bufferB[i+1]=(Math.random()-0.5)*sizeY+posY.get();
+        bufferB[i+2]=(Math.random()-0.5)*sizeZ+posZ.get();
         // bufferB[i+2]=0.0;
     }
 

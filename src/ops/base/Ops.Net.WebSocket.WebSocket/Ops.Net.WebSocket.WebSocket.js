@@ -13,25 +13,22 @@ var timeout=null;
 var connectedTo='';
 
 inUrl.onValueChanged=connect;
-timeout=setTimeout(checkConnection,1000);
+timeout=setTimeout(checkConnection,2000);
 
 inUrl.set();
 
-
+var connecting=false;
 
 
 function checkConnection()
 {
-    if(outConnected.get()===false)
+    if(outConnected.get()===false && !connecting)
     {
-        connect();
         console.log("reconnect websocket...");
+        connect();
     }
 
-
-
-
-    timeout=setTimeout(checkConnection,1000);
+    timeout=setTimeout(checkConnection,2000);
 }
 
 
@@ -54,18 +51,21 @@ function connect()
 
     try
     {
+        connecting=true;
         if(connection!==null)connection.close();
         connection = new WebSocket(inUrl.get());
     }
     catch (e)
     {
         console.log('could not connect to',inUrl.get());
+        connecting=false;
     }
 
     if(connection)
     {
         connection.onerror = function (message)
         {
+            connecting=false;
             console.log("ws error");
             outConnected.set(false);
             outConnection.set(null);
@@ -73,6 +73,7 @@ function connect()
     
         connection.onclose = function (message)
         {
+            connecting=false;
             console.log("ws close");
             outConnected.set(false);
             outConnection.set(null);
@@ -80,6 +81,7 @@ function connect()
     
         connection.onopen = function (message)
         {
+            connecting=false;
             outConnected.set(true);
             connectedTo=inUrl.get();
             outConnection.set(connection);

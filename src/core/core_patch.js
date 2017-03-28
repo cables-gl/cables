@@ -397,7 +397,7 @@ CABLES.Patch.prototype.link=function(op1,port1Name,op2,port2Name)
 
     if(!port2)
     {
-        console.warn('port not found! '+port2Name);
+        console.warn('port not found! '+port2Name+' of '+op2.name);
         return;
     }
 
@@ -540,6 +540,21 @@ CABLES.Patch.prototype.reloadOp=function(objName,cb)
 
 };
 
+CABLES.Patch.prototype.getSubPatchOps=function(patchId)
+{
+    var ops=[];
+    for(var i in this.ops)
+    {
+        if(this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch==patchId )
+        {
+            ops.push(this.ops[i]);
+        }
+    }
+
+    return ops;
+};
+
+
 CABLES.Patch.prototype.getSubPatchOp=function(patchId,objName)
 {
     for(var i in this.ops)
@@ -630,6 +645,17 @@ CABLES.Patch.prototype.deSerialize=function(obj,genIds)
             }
         }
     }
+
+    for(var i in this.ops)
+    {
+        if(this.ops[i].onLoadedValueSet)
+        {
+            this.ops[i].onLoadedValueSet();
+            this.ops[i].onLoadedValueSet=null;
+        }
+    }
+
+
 
     // create links...
     for(iop in obj.ops)
