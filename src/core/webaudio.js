@@ -48,10 +48,6 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
   op.webAudio.audioInPorts[portName] = port;
 
   port.onChange = function() {
-<<<<<<< HEAD
-
-=======
->>>>>>> 269a42aff0db2e3318cc4c32410708f6adc4f114
     var audioInNode = port.get();
     // when port disconnected, disconnect audio nodes
     if (!audioInNode) {
