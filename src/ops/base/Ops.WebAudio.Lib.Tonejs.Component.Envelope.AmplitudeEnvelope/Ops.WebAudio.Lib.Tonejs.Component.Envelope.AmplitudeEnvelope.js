@@ -15,13 +15,14 @@ var CURVE_VALUES = [
 // default values
 var ATTACK_DEFAULT = 0.1;
 var DECAY_DEFAULT = 0.2;
-var SUSTAIN_DEFAULT = 1.0;
+var SUSTAIN_DEFAULT = 0.5;
 var RELEASE_DEFAULT = 0.8;
 var ATTACK_CURVE_DEFAULT = "linear";
 var RELEASE_CURVE_DEFAULT = "linear";
 
 // vars
 var node = new Tone.AmplitudeEnvelope();
+op.log(node.get("sustain"));
 
 // in ports
 var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);

@@ -15,7 +15,7 @@ var LOOP_END_DEFAULT = "4m";
 var PPQ_DEFAULT = 192;
 var START_TIME_DEFAULT = "+0";
 var START_OFFSET_DEFAULT = "0";
-var AUTO_START_DEFAULT = "true";
+var AUTO_START_DEFAULT = true;
 var STOP_TIME_DEFAULT = "+0";
 
 // in ports
@@ -138,7 +138,7 @@ loopStartPort.onChange = function() {
 loopEndPort.onChange = function() {
     try {
         Tone.Transport.set("loopEnd", loopEndPort.get() || 0);
-    } catch(e) {}
+    } catch(e) { op.log(e); }
 };
 
 ppqPort.onChange = function() {
