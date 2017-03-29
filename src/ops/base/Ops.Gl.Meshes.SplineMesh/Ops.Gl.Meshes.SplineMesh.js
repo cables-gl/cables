@@ -29,11 +29,14 @@ render.onTriggered=function()
     
     // mesh._bufVertexAttrib.numItems=200;
     
-    mesh._bufVertexAttrib.startItem=Math.floor( inStart.get()*(geom.vertices.length/18));
-    mesh._bufVertexAttrib.numItems=Math.floor( (inLength.get()) * (geom.vertices.length/3)); // OK
-
-
-    if(mesh) mesh.render(cgl.getShader());
+    if(mesh)
+    {
+        mesh._bufVertexAttrib.startItem=Math.floor( inStart.get()*(geom.vertices.length/18))*6;
+        mesh._bufVertexAttrib.numItems=Math.floor( Math.min(1,inLength.get()+inStart.get()) * (geom.vertices.length/3)); // OK
+    
+        mesh.render(cgl.getShader());
+        
+    }
     trigger.trigger();
 };
 
