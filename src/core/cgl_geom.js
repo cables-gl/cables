@@ -416,6 +416,8 @@ CGL.Geometry.LinesToGeom=function(points,options,geom)
 
     options=options||{};
     options.thickness=options.thickness||0.1;
+    options.start=options.start||0;
+    options.end=options.end||0;
     points=points||[];
 
     if(points.length===0)
@@ -583,7 +585,7 @@ CGL.Geometry.LinesToGeom=function(points,options,geom)
 
     geom.vertices=verts;
     geom.texCoords=tc;
-    geom.verticesIndices=indices;
+    // geom.verticesIndices=indices;
 
     return geom;
 

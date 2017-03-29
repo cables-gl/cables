@@ -124,6 +124,8 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
             cb:cb,
             itemSize:itemSize,
             numItems: numItems,
+            startItem: 0,
+
             instanced:instanced,
             type:type
         };
@@ -453,7 +455,7 @@ CGL.Mesh.prototype.render=function(shader)
     if(this._bufVerticesIndizes.numItems===0)
     {
         // console.log(this._bufVertexAttrib.numItems);
-        this._cgl.gl.drawArrays(prim, 0,this._bufVertexAttrib.numItems);
+        this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem,this._bufVertexAttrib.numItems-this._bufVertexAttrib.startItem);
 
         // console.log(this._bufVertexAttrib.numItems);
     }

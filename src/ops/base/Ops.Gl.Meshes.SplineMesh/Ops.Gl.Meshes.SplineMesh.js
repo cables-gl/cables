@@ -4,6 +4,10 @@ var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
 
 var thick=op.inValue("Thickness");
 
+var inStart=op.inValueSlider("Start");
+var inLength=op.inValueSlider("Length",1);
+
+
 var calcNormals=op.inValueBool("Calculate Normals",false);
 
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
@@ -18,6 +22,17 @@ var cgl=op.patch.cgl;
 render.onTriggered=function()
 {
     if(needsBuild)doRebuild();
+    if(inLength.get()===0)return;
+    
+    
+    // console.log(mesh._bufVertexAttrib.numItems);
+    
+    // mesh._bufVertexAttrib.numItems=200;
+    
+    mesh._bufVertexAttrib.startItem=Math.floor( inStart.get()*(geom.vertices.length/18));
+    mesh._bufVertexAttrib.numItems=Math.floor( (inLength.get()) * (geom.vertices.length/3)); // OK
+
+
     if(mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
@@ -44,7 +59,12 @@ function doRebuild()
     //     points.push(0);
     // }
 
-    geom=CGL.Geometry.LinesToGeom(points,{"thickness":thick.get()},geom);
+    geom=CGL.Geometry.LinesToGeom(points,
+        {
+            "thickness":thick.get(),
+            "start":10,
+            "end":30,
+        },geom);
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
     else 
@@ -60,6 +80,9 @@ function doRebuild()
     mesh.setGeom(geom);
     mesh._setVertexNumbers();
     
+    
+
+    // mesh._bufVertexAttrib.startItem=30;
     
     // console.log(geom.vertices.length);
     
