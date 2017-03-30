@@ -77,13 +77,17 @@ function updateCanvas()
     var k=0;
     for(k=numBars;k>=0;k--)
     {
+        if(queue[k]>30)ctx.fillStyle="#885555";
         ctx.fillRect(numBars-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
+        if(queue[k]>30)ctx.fillStyle="#555555";
     }
 
     ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
+        if(queue[k]>30)ctx.fillStyle="#ccaaaa";
         ctx.fillRect(numBars-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
+        if(queue[k]>30)ctx.fillStyle="#aaaaaa";
     }
 
 }
@@ -103,7 +107,7 @@ function createCanvas()
     canvas.style['z-index']   = "9998";
     container.appendChild(canvas);
     ctx = canvas.getContext('2d');
-        
+
     canvas.addEventListener("click", toggleOpened);
     
 }

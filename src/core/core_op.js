@@ -298,7 +298,7 @@ CABLES.Op = function()
     CABLES.Op.prototype.log=function()
     {
         if(!this.patch.silent)
-            Function.apply.call(console.log, console, arguments);
+            Function.prototype.apply.apply(console.log, [console, arguments]);
     };
 
     CABLES.Op.prototype.undoUnLinkTemporary=function()

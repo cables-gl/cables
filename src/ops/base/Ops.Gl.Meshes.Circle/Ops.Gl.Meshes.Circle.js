@@ -234,7 +234,6 @@ function calc()
     
     if(geom.vertices.length==0)return;
     if(!mesh)mesh=new CGL.Mesh(cgl,geom);
-
     mesh.setGeom(geom);
 }
 
