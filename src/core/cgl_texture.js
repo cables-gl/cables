@@ -184,6 +184,7 @@ CGL.Texture.prototype.initTexture=function(img,filter)
     if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
 
     this._cgl.gl.bindTexture(this.texTarget, null);
+    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
 };
 
 CGL.Texture.prototype.delete=function()

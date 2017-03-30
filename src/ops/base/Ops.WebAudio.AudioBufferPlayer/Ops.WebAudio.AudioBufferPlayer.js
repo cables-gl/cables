@@ -7,6 +7,7 @@ var audioBufferPort = op.inObject("Audio Buffer");
 var playPort = op.inValueBool("Start / Stop", false);
 var startTimePort = op.inValue("Start Time", 0);
 var stopTimePort = op.inValue("Stop Time", 0);
+var offsetPort = op.inValue("Offset", 0);
 var autoPlayPort = op.inValueBool("Autoplay", false);
 var loopPort = op.inValueBool("Loop", false);
 var detunePort = op.inValue("Detune", 0);
@@ -84,7 +85,7 @@ function createAudioBufferSource() {
 
 function start(time) {
     try {
-        source.start(time); // 0 = now
+        source.start(time,offsetPort.get()); // 0 = now
     } catch(e){
         // console.log(e);
     } // already playing!?
