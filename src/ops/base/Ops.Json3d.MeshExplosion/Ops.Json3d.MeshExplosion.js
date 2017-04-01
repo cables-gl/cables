@@ -20,6 +20,8 @@ var objects=[];
 var tempVec=vec3.create();
 var tempMat4=mat4.create();
 
+var empty=[0,0,0];
+
 // var startRotation
 
 function doRender()
@@ -35,7 +37,7 @@ function doRender()
             // tempMat4 = objects[i].transformation;
             // tempMat4.set(objects[i].transformation);
             tempMat4=mat4.clone(objects[i].transformation);
-            vec3.transformMat4(tempVec, [0,0,0], tempMat4);
+            vec3.transformMat4(tempVec, empty, tempMat4);
 
             vec3.normalize(tempVec,tempVec);
             vec3.mul(tempVec,tempVec,[expansion.get(),expansion.get(),expansion.get()]);
