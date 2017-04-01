@@ -15,8 +15,6 @@ var col=op.outValue("color");
 var triggerForce=op.outFunction("force");
 var inSize=op.inValue("Size Area");
 
-
-
 var outOffset=op.outValue("offset");
 var outIndex=op.outValue("Index");
 var outPoints=op.outArray("Points");

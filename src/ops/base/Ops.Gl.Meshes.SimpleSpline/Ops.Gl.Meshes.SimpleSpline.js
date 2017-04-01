@@ -28,9 +28,9 @@ render.onTriggered=function()
 
     if(!(points instanceof Float32Array))
     {
-        if(points.length!=buff.length)
+        if(points.length>buff.length)
         {
-            // console.log("Resize...");
+            console.log("Resize...");
     
             buff=new Float32Array(points.length);
             buff.set(points);
@@ -52,8 +52,8 @@ render.onTriggered=function()
     shader.glPrimitive=cgl.gl.LINE_STRIP;
     var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
     
-    if(numPoints.get()<=0)attr.numItems=buff.length/3;
-        else attr.numItems=Math.min(numPoints.get(),buff.length/3);
+    if(numPoints.get()<=0)attr.numItems=points.length/3;
+        else attr.numItems=Math.min(numPoints.get(),points.length/3);
 
     
     mesh.render(shader);

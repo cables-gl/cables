@@ -17,6 +17,7 @@ var cgl=op.patch.cgl;
 
 var mesh=null;
 var geom=null;
+var needsBuild=true;
 
 inPoints.onChange=rebuild;
 thick.onChange=rebuild;
