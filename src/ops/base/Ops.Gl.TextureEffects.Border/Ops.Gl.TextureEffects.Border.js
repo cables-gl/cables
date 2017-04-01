@@ -3,6 +3,7 @@ op.name='border';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var smooth=op.inValueBool("Smooth",false);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -16,16 +17,31 @@ var srcFrag=''
     .endl()+'uniform float r;'
     .endl()+'uniform float g;'
     .endl()+'uniform float b;'
+    .endl()+'uniform float aspect;'
+    .endl()+'uniform bool smooth;'
     .endl()+''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
+    
+    .endl()+'if(!smooth)'
+    .endl()+'{'
+    
     .endl()+'   if( texCoord.x>1.0-width || texCoord.y>1.0-width || texCoord.y<width || texCoord.x<width ) col = vec4(r,g,b, 1.0);'
     .endl()+'   gl_FragColor = col;'
+    .endl()+'} else {'    
+    .endl()+'   float f=smoothstep(0.0,width,texCoord.x)-smoothstep(1.0-width,1.0,texCoord.x);'
+    .endl()+'   f*=smoothstep(0.0,width/aspect,texCoord.y);'
+    .endl()+'   f*=smoothstep(1.0,1.0-width/aspect,texCoord.y);'
+
+    .endl()+'   gl_FragColor = mix(col,vec4(r,g,b, 1.0),1.0-f);'
+    .endl()+'}'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+var aspectUniform=new CGL.Uniform(shader,'f','aspect',0);
+var uniSmooth=new CGL.Uniform(shader,'b','smooth',smooth);
 
 {
     var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
@@ -76,11 +92,14 @@ render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
+var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
+aspectUniform.set(texture.height/texture.width);
+
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
