@@ -44,7 +44,7 @@ CABLES.TL.Key=function(obj)
     this.value=0.0;
     this.ui={};
     this.onChange=null;
-    var easing=0;
+    this._easing=0;
     this.bezTime=0.5;
     this.bezValue=0;
     this.bezTimeIn=-0.5;
@@ -310,50 +310,50 @@ CABLES.TL.Key.easeSmootherStep=function(perc,key2)
 CABLES.TL.Key.prototype.setEasing=function(e)
 {
     // console.log('set easing uyay');
-    easing=e;
+    this._easing=e;
 
-    if(easing==CABLES.TL.EASING_ABSOLUTE) this.ease=CABLES.TL.Key.easeAbsolute;
-    else if(easing==CABLES.TL.EASING_SMOOTHSTEP) this.ease=CABLES.TL.Key.easeSmoothStep;
-    else if(easing==CABLES.TL.EASING_SMOOTHERSTEP) this.ease=CABLES.TL.Key.easeSmootherStep;
+    if(this._easing==CABLES.TL.EASING_ABSOLUTE) this.ease=CABLES.TL.Key.easeAbsolute;
+    else if(this._easing==CABLES.TL.EASING_SMOOTHSTEP) this.ease=CABLES.TL.Key.easeSmoothStep;
+    else if(this._easing==CABLES.TL.EASING_SMOOTHERSTEP) this.ease=CABLES.TL.Key.easeSmootherStep;
 
-    else if(easing==CABLES.TL.EASING_CUBIC_IN) this.ease=CABLES.TL.Key.easeCubicIn;
-    else if(easing==CABLES.TL.EASING_CUBIC_OUT) this.ease=CABLES.TL.Key.easeCubicOut;
-    else if(easing==CABLES.TL.EASING_CUBIC_INOUT) this.ease=CABLES.TL.Key.easeCubicInOut;
+    else if(this._easing==CABLES.TL.EASING_CUBIC_IN) this.ease=CABLES.TL.Key.easeCubicIn;
+    else if(this._easing==CABLES.TL.EASING_CUBIC_OUT) this.ease=CABLES.TL.Key.easeCubicOut;
+    else if(this._easing==CABLES.TL.EASING_CUBIC_INOUT) this.ease=CABLES.TL.Key.easeCubicInOut;
 
-    else if(easing==CABLES.TL.EASING_EXPO_IN) this.ease=CABLES.TL.Key.easeExpoIn;
-    else if(easing==CABLES.TL.EASING_EXPO_OUT) this.ease=CABLES.TL.Key.easeExpoOut;
-    else if(easing==CABLES.TL.EASING_EXPO_INOUT) this.ease=CABLES.TL.Key.easeExpoInOut;
+    else if(this._easing==CABLES.TL.EASING_EXPO_IN) this.ease=CABLES.TL.Key.easeExpoIn;
+    else if(this._easing==CABLES.TL.EASING_EXPO_OUT) this.ease=CABLES.TL.Key.easeExpoOut;
+    else if(this._easing==CABLES.TL.EASING_EXPO_INOUT) this.ease=CABLES.TL.Key.easeExpoInOut;
 
-    else if(easing==CABLES.TL.EASING_SIN_IN) this.ease=CABLES.TL.Key.easeSinIn;
-    else if(easing==CABLES.TL.EASING_SIN_OUT) this.ease=CABLES.TL.Key.easeSinOut;
-    else if(easing==CABLES.TL.EASING_SIN_INOUT) this.ease=CABLES.TL.Key.easeSinInOut;
+    else if(this._easing==CABLES.TL.EASING_SIN_IN) this.ease=CABLES.TL.Key.easeSinIn;
+    else if(this._easing==CABLES.TL.EASING_SIN_OUT) this.ease=CABLES.TL.Key.easeSinOut;
+    else if(this._easing==CABLES.TL.EASING_SIN_INOUT) this.ease=CABLES.TL.Key.easeSinInOut;
 
-    else if(easing==CABLES.TL.EASING_BACK_OUT) this.ease=CABLES.TL.Key.easeOutBack;
-    else if(easing==CABLES.TL.EASING_BACK_IN) this.ease=CABLES.TL.Key.easeInBack;
-    else if(easing==CABLES.TL.EASING_BACK_INOUT) this.ease=CABLES.TL.Key.easeInOutBack;
+    else if(this._easing==CABLES.TL.EASING_BACK_OUT) this.ease=CABLES.TL.Key.easeOutBack;
+    else if(this._easing==CABLES.TL.EASING_BACK_IN) this.ease=CABLES.TL.Key.easeInBack;
+    else if(this._easing==CABLES.TL.EASING_BACK_INOUT) this.ease=CABLES.TL.Key.easeInOutBack;
 
-    else if(easing==CABLES.TL.EASING_ELASTIC_IN) this.ease=CABLES.TL.Key.easeInElastic;
-    else if(easing==CABLES.TL.EASING_ELASTIC_OUT) this.ease=CABLES.TL.Key.easeOutElastic;
+    else if(this._easing==CABLES.TL.EASING_ELASTIC_IN) this.ease=CABLES.TL.Key.easeInElastic;
+    else if(this._easing==CABLES.TL.EASING_ELASTIC_OUT) this.ease=CABLES.TL.Key.easeOutElastic;
 
-    else if(easing==CABLES.TL.EASING_BOUNCE_IN) this.ease=CABLES.TL.Key.easeInBounce;
-    else if(easing==CABLES.TL.EASING_BOUNCE_OUT) this.ease=CABLES.TL.Key.easeOutBounce;
+    else if(this._easing==CABLES.TL.EASING_BOUNCE_IN) this.ease=CABLES.TL.Key.easeInBounce;
+    else if(this._easing==CABLES.TL.EASING_BOUNCE_OUT) this.ease=CABLES.TL.Key.easeOutBounce;
 
-    else if(easing==CABLES.TL.EASING_QUART_OUT) this.ease=CABLES.TL.Key.easeOutQuart;
-    else if(easing==CABLES.TL.EASING_QUART_IN) this.ease=CABLES.TL.Key.easeInQuart;
-    else if(easing==CABLES.TL.EASING_QUART_INOUT) this.ease=CABLES.TL.Key.easeInOutQuart;
+    else if(this._easing==CABLES.TL.EASING_QUART_OUT) this.ease=CABLES.TL.Key.easeOutQuart;
+    else if(this._easing==CABLES.TL.EASING_QUART_IN) this.ease=CABLES.TL.Key.easeInQuart;
+    else if(this._easing==CABLES.TL.EASING_QUART_INOUT) this.ease=CABLES.TL.Key.easeInOutQuart;
 
-    else if(easing==CABLES.TL.EASING_QUINT_OUT) this.ease=CABLES.TL.Key.easeOutQuint;
-    else if(easing==CABLES.TL.EASING_QUINT_IN) this.ease=CABLES.TL.Key.easeInQuint;
-    else if(easing==CABLES.TL.EASING_QUINT_INOUT) this.ease=CABLES.TL.Key.easeInOutQuint;
+    else if(this._easing==CABLES.TL.EASING_QUINT_OUT) this.ease=CABLES.TL.Key.easeOutQuint;
+    else if(this._easing==CABLES.TL.EASING_QUINT_IN) this.ease=CABLES.TL.Key.easeInQuint;
+    else if(this._easing==CABLES.TL.EASING_QUINT_INOUT) this.ease=CABLES.TL.Key.easeInOutQuint;
 
-    else if(easing==CABLES.TL.EASING_BEZIER)
+    else if(this._easing==CABLES.TL.EASING_BEZIER)
     {
         updateBezier=true;
         this.ease=CABLES.TL.Key.easeBezier;
     }
     else
     {
-        easing=CABLES.TL.EASING_LINEAR;
+        this._easing=CABLES.TL.EASING_LINEAR;
         this.ease=CABLES.TL.Key.easeLinear;
     }
 };
@@ -407,8 +407,8 @@ CABLES.TL.Key.prototype.getSerialized=function()
     var obj={};
     obj.t=this.time;
     obj.v=this.value;
-    obj.e=easing;
-    if(easing==CABLES.TL.EASING_BEZIER)
+    obj.e=this._easing;
+    if(this._easing==CABLES.TL.EASING_BEZIER)
         obj.b=[this.bezTime,this.bezValue,this.bezTimeIn,this.bezValueIn];
 
     return obj;
@@ -417,7 +417,7 @@ CABLES.TL.Key.prototype.getSerialized=function()
 
 CABLES.TL.Key.prototype.getEasing=function()
 {
-    return easing;
+    return this._easing;
 };
 
 
