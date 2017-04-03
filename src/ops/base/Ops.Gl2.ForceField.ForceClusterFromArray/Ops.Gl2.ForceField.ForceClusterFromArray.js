@@ -42,32 +42,26 @@ inPoints.onChange=reset;
 
 function reset()
 {
-    
     var points=inPoints.get();
     if(!points)return;
 
-
-forces.length=points.length/3;
-
+    if(forces.length != points.length/3) forces.length=points.length/3;
 
     // forces.length=Math.floor(num.get());
     for(var i=0;i<points.length/3;i++)
     {
         forces[i]=forces[i]||{};
 
-        forces[i].pos=[
-            points[i*3+0],
-            points[i*3+1],
-            points[i*3+2],
-            ];
-            
+        forces[i].pos=forces[i].pos||[0,0,0];
+        forces[i].pos[0]=points[i*3+0];
+        forces[i].pos[1]=points[i*3+1];
+        forces[i].pos[2]=points[i*3+2];
+
         forces[i].range=range.get()*0.8;
         forces[i].attraction=attraction.get()*4;
         forces[i].angle=angle.get();
-        
-        
-        // forces[(i*2+1)]=forces[i*2+1]||{};
 
+        // forces[(i*2+1)]=forces[i*2+1]||{};
         // forces[(i*2+1)].pos=[
         //     points[(i)*3+0],
         //     points[(i)*3+1],
@@ -78,8 +72,6 @@ forces.length=points.length/3;
         // forces[(i*2+1)].attraction=-attraction.get();
         // forces[(i*2+1)].angle=angle.get();
     }
-
-    
 }
 
 

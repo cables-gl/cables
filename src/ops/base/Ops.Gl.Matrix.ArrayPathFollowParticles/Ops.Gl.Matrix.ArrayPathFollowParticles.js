@@ -37,7 +37,10 @@ inPoints.onChange=function()
     {
         pointArray=inPoints.get();//new Float32Array(inPoints.get());
         updateUniformPoints=true;
-        
+
+        if(shader)
+            if(shader.getDefine("PATHFOLLOW_POINTS")!=pointArray.length/3)
+                shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
         // console.log(inPoints.get().length,"points");
         // resetLater();
     }
@@ -160,7 +163,10 @@ exec.onTriggered=function()
     
     if(updateUniformPoints && pointArray)
     {
-        if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+        // if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+        if(shader.getDefine("PATHFOLLOW_POINTS")!=pointArray.length/3)
+            shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+
         // shaderModule.uniNumPoints.setValue(pointArray.length/3);
         shaderModule.uniPoints.setValue(pointArray);
         updateUniformPoints=false;

@@ -82,9 +82,15 @@ CGL.Shader=function(_cgl,_name)
         this._needsRecompile=true;
     };
 
+    this.getDefine=function(name)
+    {
+        for(var i=0;i<defines.length;i++)
+            if(defines[i][0]==name)return defines[i][1];
+        return null;
+    };
 
 
-    this.hasDefine=function(name,value)
+    this.hasDefine=function(name)
     {
         for(var i=0;i<defines.length;i++)
             if(defines[i][0]==name)

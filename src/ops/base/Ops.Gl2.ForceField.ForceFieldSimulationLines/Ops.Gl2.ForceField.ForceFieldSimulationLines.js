@@ -103,7 +103,9 @@ var Particle=function()
     // this.points=[];
     this.speed=0;
     
-    this.buff=new Float32Array(3*Math.floor(numLinePoints.get()));
+    this.buffLineStart=0;
+    
+    this.buff=new Float32Array(2*3*Math.floor(numLinePoints.get()));
     this.spawn();
 };
 
@@ -117,15 +119,6 @@ Particle.prototype.spawn=function()
     this.pos[0]+=posX.get();
     this.pos[1]+=posY.get();
     this.pos[2]+=posZ.get();
-    // this.oldPos[2]=this.pos[2]=Math.random()*size-size/2;
-    
-    // for(var i=0;i<this.points.length;i++)
-    // this.points.length=0;
-    
-    // this.oldPos[0]=Math.round( this.oldPos[0]/153 )*153;
-    // this.oldPos[1]=Math.round( this.oldPos[1]/153 )*153;
-    // this.oldPos[2]=Math.round( this.oldPos[2]/153 )*153;
-    
 
     for(var i=0;i<this.buff.length;i+=3)
     {
@@ -256,9 +249,6 @@ Particle.prototype.apply=function(force)
         {
             vec3.normalize(vecNormal,vecToOrigin);
             vec3.copy(vecForce,vecNormal);
-            // this.velocity[0]=0;
-            // this.velocity[1]=0;
-            // this.velocity[2]=0;
 
             vec3.mul(vecForce,vecForce,vec3.fromValues(
                 force.attraction * distAlpha*timeDiff,
@@ -270,24 +260,16 @@ Particle.prototype.apply=function(force)
             this.tangentForce[0]=vecNormal[1];
             this.tangentForce[1]=-vecNormal[0];
             this.tangentForce[2]=-vecNormal[2];
-            
-            // this.velocity[0]+=0.08;
 
             var f=distAlpha * force.angle;
             vec3.mul(this.tangentForce,this.tangentForce,vec3.fromValues(
                 f*timeDiff,
                 f*timeDiff,
                 f*timeDiff));
-            
-            
             vec3.add(this.velocity,this.velocity,this.tangentForce);
         }
     }
 };
-
-
-
-
 
 var vec=vec3.create();
 var lastTime=0;
@@ -324,6 +306,9 @@ exec.onTriggered=function()
         
         var ppos=Math.abs( (p.pos[0]) );
         var lifetimeMul=Math.min(p.lifetime/3000,1);
+
+// p.buff[i*3+0]=p.pos[0];
+// buffLineStart
 
         arrayWriteToEnd(p.buff,p.pos[0])
         arrayWriteToEnd(p.buff,p.pos[1])
