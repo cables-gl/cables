@@ -14,55 +14,55 @@ CGL.Uniform=function(__shader,__type,__name,_value)
 
     if(__type=='3f[]')
     {
-        this.setValue=this.setValueArray3F.bind(this);
+        this.set=this.setValue=this.setValueArray3F.bind(this);
         this.updateValue=this.updateValueArray3F.bind(this);
     }
 
     if(__type=='f')
     {
-        this.setValue=this.setValueF.bind(this);
+        this.set=this.setValue=this.setValueF.bind(this);
         this.updateValue=this.updateValueF.bind(this);
     }
 
     if(__type=='i')
     {
-        this.setValue=this.setValueI.bind(this);
+        this.set=this.setValue=this.setValueI.bind(this);
         this.updateValue=this.updateValueI.bind(this);
     }
 
     if(__type=='b')
     {
-        this.setValue=this.setValueBool.bind(this);
+        this.set=this.setValue=this.setValueBool.bind(this);
         this.updateValue=this.updateValueBool.bind(this);
     }
 
     if(__type=='4f')
     {
-        this.setValue=this.setValue4F.bind(this);
+        this.set=this.setValue=this.setValue4F.bind(this);
         this.updateValue=this.updateValue4F.bind(this);
     }
 
     if(__type=='3f')
     {
-        this.setValue=this.setValue3F.bind(this);
+        this.set=this.setValue=this.setValue3F.bind(this);
         this.updateValue=this.updateValue3F.bind(this);
     }
 
     if(__type=='2f')
     {
-        this.setValue=this.setValue2F.bind(this);
+        this.set=this.setValue=this.setValue2F.bind(this);
         this.updateValue=this.updateValue2F.bind(this);
     }
 
     if(__type=='t')
     {
-        this.setValue=this.setValueT.bind(this);
+        this.set=this.setValue=this.setValueT.bind(this);
         this.updateValue=this.updateValueT.bind(this);
     }
 
     if(__type=='m4')
     {
-        this.setValue=this.setValueM4.bind(this);
+        this.set=this.setValue=this.setValueM4.bind(this);
         this.updateValue=this.updateValueM4.bind(this);
     }
 

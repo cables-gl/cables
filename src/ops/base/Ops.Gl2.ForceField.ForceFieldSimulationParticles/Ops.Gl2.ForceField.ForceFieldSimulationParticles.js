@@ -68,7 +68,7 @@ function doReset()
     if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
     
-    for(i=0;i<geom.texCoords.length;i+=2)
+    for(i=0;i<verts.length/3*2;i+=2)
     {
         geom.texCoords[i]=Math.random();
         geom.texCoords[i+1]=Math.random();

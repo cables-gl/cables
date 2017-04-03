@@ -28,14 +28,18 @@ inParticles.onChange=resetLater;
 inLength.onChange=resetLater;
 inSpread.onChange=resetLater;
 
+pointArray=new Float32Array(99);
+
+
 inPoints.onChange=function()
 {
     if(inPoints.get())
     {
-        pointArray=new Float32Array(inPoints.get());
+        pointArray=inPoints.get();//new Float32Array(inPoints.get());
         updateUniformPoints=true;
-        console.log(inPoints.get().length,"points");
-        resetLater();
+        
+        // console.log(inPoints.get().length,"points");
+        // resetLater();
     }
 };
 
@@ -156,11 +160,11 @@ exec.onTriggered=function()
     
     if(updateUniformPoints && pointArray)
     {
-        shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+        if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
         // shaderModule.uniNumPoints.setValue(pointArray.length/3);
         shaderModule.uniPoints.setValue(pointArray);
         updateUniformPoints=false;
-        console.log("update uniforms");
+        // console.log("update uniforms");
     }
 
     // var off=inOffset.get()%((pointArray.length-1)/3);

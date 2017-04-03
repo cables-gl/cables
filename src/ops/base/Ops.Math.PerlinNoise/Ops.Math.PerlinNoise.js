@@ -12,6 +12,6 @@ y.onChange=update;
 
 function update()
 {
-    result.set(0.5+noise.perlin2(x.get(),y.get()));
+    result.set(noise.perlin2(x.get(),y.get()));
 }
 
