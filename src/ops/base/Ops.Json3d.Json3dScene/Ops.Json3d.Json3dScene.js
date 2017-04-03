@@ -102,6 +102,7 @@ var loadCameras=function(data,seq)
                 {
                     if(root.children[j].name == root.children[i].name+'_Target')
                     {
+                        console.log("FOund cameratarget!")
                         cam.target=root.children[i];
                         root.children.splice(j,1);
                         root.children.splice(i,1);
@@ -145,9 +146,9 @@ var loadCameras=function(data,seq)
                     camOp.getPort('clip near').set(cam.cam.clipplanenear);
                     camOp.getPort('clip far' ).set(cam.cam.clipplanefar);
 
-                    camOp.getPort('lookat x').set(cam.cam.lookat[0]);
-                    camOp.getPort('lookat y').set(cam.cam.lookat[1]);
-                    camOp.getPort('lookat z').set(cam.cam.lookat[2]);
+                    camOp.getPort('CenterX').set(cam.cam.lookat[0]);
+                    camOp.getPort('CenterY').set(cam.cam.lookat[1]);
+                    camOp.getPort('CenterZ').set(cam.cam.lookat[2]);
 
                     camOp.getPort('matrix').set(cam.transformation);
 
@@ -155,18 +156,18 @@ var loadCameras=function(data,seq)
                     {
                         if(an.positionkeys)
                         {
-                            setPortAnimated(camOp.getPort('posX'),false);
-                            setPortAnimated(camOp.getPort('posY'),false);
-                            setPortAnimated(camOp.getPort('posZ'),false);
+                            setPortAnimated(camOp.getPort('EyeX'),false);
+                            setPortAnimated(camOp.getPort('EyeY'),false);
+                            setPortAnimated(camOp.getPort('EyeZ'),false);
 
                             frameNum=skipFrames;
                             for(var k in an.positionkeys)
                             {
                                 if(frameNum%skipFrames===0)
                                 {
-                                    camOp.getPort('posX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
-                                    camOp.getPort('posY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
-                                    camOp.getPort('posZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
+                                    camOp.getPort('EyeX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
+                                    camOp.getPort('EyeY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
+                                    camOp.getPort('EyeZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
                                 }
                                 frameNum++;
                             }
