@@ -1,4 +1,4 @@
-op.name="ForceFieldSimulationParticles";
+op.name="ForceFieldParticleEmitter";
 
 var render=op.inFunction("render");
 var resetButton=op.inFunctionButton("Reset");
@@ -88,6 +88,7 @@ function doReset()
     {
         mesh.unBind();
     }
+    mesh.addVertexNumbers=true;
     mesh.setGeom(geom);
 
     // mesh.updateVertices(geom);
@@ -120,9 +121,6 @@ function doReset()
     }
     
     // console.log(op.patch.freeTimer.get(),life[0],bufferB[0]);
-
-
-
 
     // mesh.setAttribute("life",life,3);
     // mesh.setAttributeFeedback("life","outLife",life),
@@ -171,13 +169,15 @@ function removeModule()
 render.onLinkChanged=removeModule;
 
 
-
+var particleSpawnStart=0;
 var uniTime=null;
 var uniSize=null;
 var uniTimeDiff=null;
 var uniPos=null;
 var uniLifetime=null;
 var uniFadeInOut=null;
+var uniSpawnFrom=null;
+var uniSpawnTo=null;
 
 render.onTriggered=function()
 {
@@ -206,6 +206,10 @@ render.onTriggered=function()
         uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
         uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
         
+        
+        
+        uniSpawnFrom=new CGL.Uniform(shader,'f',shaderModule.prefix+'spawnFrom',0);
+        uniSpawnTo=new CGL.Uniform(shader,'f',shaderModule.prefix+'spawnTo',0);
     }
     
     if(!shader)return;
@@ -242,13 +246,10 @@ render.onTriggered=function()
     uniPos.setValue([posX.get(),posY.get(),posZ.get()]);
     
     if(mesh) mesh.render(shader);
-    
-    
+
     // console.log( '1',mesh._bufVertexAttrib );
     // console.log( '1',feebackOutpos.buffer );
-    
-    
-    
+
     // var t=mesh._bufVertexAttrib.buffer;
     // mesh._bufVertexAttrib.buffer=feebackOutpos.buffer;
     // feebackOutpos.buffer=t;
@@ -262,5 +263,21 @@ render.onTriggered=function()
         mark.draw(cgl);
         cgl.popMvMatrix();
     }
+
+    if(particleSpawnStart>numPoints.get())particleSpawnStart=0;
+
+    var perSecond=numPoints.get()/lifetime.get();
+    var numSpawn=perSecond*Math.min(1/33,timeDiff);
+    uniSpawnFrom.setValue(particleSpawnStart);
+    uniSpawnTo.setValue(particleSpawnStart+numSpawn);
+    
+    // op.log(particleSpawnStart,particleSpawnStart+numSpawn);
+    // if(numSpawn>30)
+    // console.log("should spawn",numSpawn);
+    particleSpawnStart+=numSpawn;
+
+    
+    
+
 
 };
