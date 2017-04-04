@@ -23,6 +23,7 @@ generate();
 
 flat.onChange=generate;
 
+var verts=[];
 
 render.onTriggered=function()
 {

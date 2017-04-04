@@ -21,7 +21,6 @@ var outPoints=op.outArray("Points");
 
 var outDieSlow=op.outValue("Die Slow");
 
-
 var numLinePoints=op.inValueInt("Num Line Points",100);
 
 var minLifetime=op.inValueInt("Min LifeTime",5);
@@ -30,7 +29,6 @@ var maxLifetime=op.inValueInt("Max LifeTime",5);
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
-
 
 var size=140;
 var particles=[];
@@ -57,7 +55,6 @@ inDamping.onChange=function()
 
 numParticles.onChange=respawnAll;
 numLinePoints.onChange=respawnAll;
-
 
 function respawnAll()
 {
