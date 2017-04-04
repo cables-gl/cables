@@ -21,7 +21,6 @@ var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 var needsBuild=true;
-var vecX=[1,0,0];
 
 inPoints.onChange=rebuild;
 thick.onChange=rebuild;
@@ -30,12 +29,24 @@ render.onTriggered=function()
 {
     if(needsBuild)doRebuild();
     if(inLength.get()===0)return;
-    
+
     if(mesh)
     {
-        mesh._bufVertexAttrib.startItem=Math.floor( inStart.get()*(geom.vertices.length/18))*6;
-        mesh._bufVertexAttrib.numItems=Math.floor( Math.min(1,inLength.get()+inStart.get()) * (geom.vertices.length/3)); // OK
+        // mesh._bufVertexAttrib.startItem=Math.floor( 
+        //     inStart.get()*(geom.vertices.length/18))*6;
+        // mesh._bufVertexAttrib.numItems=Math.floor( 
+        //     Math.min(1,inLength.get()+inStart.get()) * (geom.vertices.length/3)
+        //     ); // OK
+
+        mesh._bufVertexAttrib.startItem=Math.floor( 
+            inStart.get()*(index/18))*6;
+        mesh._bufVertexAttrib.numItems=Math.floor( 
+            Math.min(1,inLength.get()+inStart.get()) * (index/3)
+            ); // OK
+
+
         mesh.render(cgl.getShader());
+
     }
     trigger.trigger();
 };
@@ -54,7 +65,8 @@ var vStart=vec3.create();
 var vEnd=vec3.create();
 var q=quat.create();
 var vecRotation=vec3.create();
-vec3.set(vecRotation, 1,0,0);
+vec3.set(vecRotation, 1,1,0);
+var vecX=[1,0,0];
 
 
 var index=0;
@@ -83,16 +95,18 @@ function linesToGeom(points,options)
         }
     }
 
+    var numPoints=points.length;
+    if(inNumPoints.get()!==0)numPoints=(inNumPoints.get()-1)*3;
+
     var count=0;
     var lastPA=null;
     var lastPB=null;
 
-
-    if(points.length/3*18 !=geom.vertices.length ) 
+    if(numPoints/3*18 >geom.vertices.length ) 
     {
         op.log('resize verts');
-        geom.vertices=new Float32Array( (points.length/3*18 ) );
-        tc=new Float32Array( (points.length/3*12) );
+        geom.vertices=new Float32Array( (numPoints/3*18 ) );
+        tc=new Float32Array( (numPoints/3*12) );
         // make a better buffer for not resizing all the time...
     }
 
@@ -102,16 +116,17 @@ function linesToGeom(points,options)
     var lastC=null;
     var lastD=null;
 
-    var numPoints=points.length;
-    if(inNumPoints.get()!==0)numPoints=(inNumPoints.get()-1)*3;
 
     var m=(thick.get()||0.1)/2;
-    var ppl=p/points.length;
-    var pi2=Math.PI/2;
+    var ppl=p/numPoints;
+    var pi2=Math.PI/4;
     
     var strip=inStrip.get();
 
-    for(var p=0;p<numPoints;p+=3)
+    var it=3;
+    if(!strip)it=6;
+
+    for(var p=0;p<numPoints;p+=it)
     {
         vec3.set(vStart,
             points[p+0],
@@ -127,9 +142,18 @@ function linesToGeom(points,options)
             points[p+4],
             points[p+5]);
 
-        vec3.normalize(vEnd,vEnd);
-        quat.rotationTo(q,vecX,vEnd);
+        // vec3.normalize(vEnd,vEnd);
+        // vec3.normalize(vStart,vStart);
+        
+        var vv=vec3.create();
+        vv[0]=vStart[0]-vEnd[0];
+        vv[1]=vStart[1]-vEnd[1];
+        vv[2]=vStart[2]-vEnd[2];
+        
+        vec3.normalize(vv,vv);
+        
 
+        quat.rotationTo(q,vecX,vv);
 
         quat.rotateZ(q, q, pi2);
 
@@ -166,9 +190,7 @@ function linesToGeom(points,options)
                 points[p+0]+vecRot[0]*-m,
                 points[p+1]+vecRot[1]*-m,
                 points[p+2]+vecRot[2]*-m);
-
         }
-
 
         vec3.set(vecC,
             points[p+3]+vecRot[0]*m,
