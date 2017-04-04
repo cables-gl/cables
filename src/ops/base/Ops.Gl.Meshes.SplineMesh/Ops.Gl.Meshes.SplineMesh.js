@@ -95,7 +95,6 @@ function linesToGeom(points,options)
     if(!geom)
     {
         geom=new CGL.Geometry();
-        op.log("new geom");
     }
 
     var norms=[];
@@ -133,7 +132,6 @@ function linesToGeom(points,options)
 
     if((numPoints/3)*18 > geom.vertices.length ) 
     {
-        op.log('resize verts',numPoints/3*18);
         geom.vertices=new Float32Array( (numPoints/3*18 ) );
         geom.texCoords=new Float32Array( (numPoints/3*12) );
     }

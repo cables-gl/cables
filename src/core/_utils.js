@@ -1,4 +1,6 @@
-CABLES=CABLES || {};
+
+
+var CABLES=CABLES || {};
 
 CABLES.generateUUID=function()
 {
