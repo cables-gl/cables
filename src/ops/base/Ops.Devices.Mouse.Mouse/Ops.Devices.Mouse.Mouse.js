@@ -83,9 +83,11 @@ addListeners();
 
 area.onValueChanged=addListeners;
 
+var speed=0;
+
 function updateSmooth()
 {
-    var speed=self.smoothSpeed.get();
+    speed=self.smoothSpeed.get();
     if(speed<=0)speed=0.01;
     var distanceX = Math.abs(mouseX - lineX);
     var speedX = Math.round( distanceX / speed, 0 );

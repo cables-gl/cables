@@ -33,7 +33,6 @@ var uniRandomSize=new CGL.Uniform(shader,'f','randomSize',randomSize);
 
 
 shaderOut.set(shader);
-onLoaded=shader.compile;
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
 shader.glPrimitive=cgl.gl.POINTS;
 shader.bindTextures=bindTextures;

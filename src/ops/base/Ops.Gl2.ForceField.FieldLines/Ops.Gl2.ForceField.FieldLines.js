@@ -13,7 +13,7 @@ var outNumPoints=op.outValue("Num Points");
 var outCanceled=op.outValue("Canceled lines");
 
 
-var dots = new Float32Array(3000);
+var dots = new Float32Array(9000);
 
 var p=0.025;
 
@@ -100,7 +100,7 @@ exec.onTriggered=function()
                 curX = curX + addFactor*dirX;
                 curY = curY + addFactor*dirY;
 
-                doStop=false;
+                
 
 
                 {

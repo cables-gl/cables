@@ -1,4 +1,6 @@
+
 op.name="SplineMesh";
+
 
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
@@ -18,19 +20,27 @@ geomOut.ignoreValueSerialize=true;
 var geom=new CGL.Geometry("splinemesh");
 var cgl=op.patch.cgl;
 
+var draw=false;
 var mesh=null;
 var geom=null;
 var needsBuild=true;
 
 inPoints.onChange=rebuild;
 thick.onChange=rebuild;
+inNumPoints.onChange=rebuild;
+inStrip.onChange=rebuild;
+calcNormals.onChange=rebuild;
+var numItems=0;
 
 render.onTriggered=function()
 {
     if(needsBuild)doRebuild();
-    if(inLength.get()===0)return;
+    if(inLength.get()===0 || inStart.get()==1.0)return;
 
-    if(mesh)
+
+// console.log('draw',draw);
+
+    if(mesh && draw)
     {
         // mesh._bufVertexAttrib.startItem=Math.floor( 
         //     inStart.get()*(geom.vertices.length/18))*6;
@@ -38,12 +48,21 @@ render.onTriggered=function()
         //     Math.min(1,inLength.get()+inStart.get()) * (geom.vertices.length/3)
         //     ); // OK
 
-        mesh._bufVertexAttrib.startItem=Math.floor( 
-            inStart.get()*(index/18))*6;
-        mesh._bufVertexAttrib.numItems=Math.floor( 
-            Math.min(1,inLength.get()+inStart.get()) * (index/3)
-            ); // OK
+        // mesh._bufVertexAttrib.startItem=Math.floor( 
+        //     inStart.get()*(index/18))*6;
+        // mesh._bufVertexAttrib.numItems=Math.floor( 
+        //     Math.min(1,inLength.get()+inStart.get()) * (index/3)
+        //     ); // OKnu
 
+
+        mesh._bufVertexAttrib.startItem=Math.floor( 
+            inStart.get()*(numItems/9))*6;
+        mesh._bufVertexAttrib.numItems=
+            Math.floor( 
+                Math.min(1,inLength.get()+inStart.get()) * (numItems)
+            );
+        
+        
 
         mesh.render(cgl.getShader());
 
@@ -65,7 +84,7 @@ var vStart=vec3.create();
 var vEnd=vec3.create();
 var q=quat.create();
 var vecRotation=vec3.create();
-vec3.set(vecRotation, 1,1,0);
+vec3.set(vecRotation, 1,0,0);
 var vecX=[1,0,0];
 
 
@@ -96,18 +115,27 @@ function linesToGeom(points,options)
     }
 
     var numPoints=points.length;
-    if(inNumPoints.get()!==0)numPoints=(inNumPoints.get()-1)*3;
+    if(inNumPoints.get()!=0 && 
+        inNumPoints.get()*3<points.length)numPoints=(inNumPoints.get()-1)*3;
+        
+    if(numPoints<6)
+    {
+        draw=false;
+        return;
+    }
+        
+        // console.log(numPoints);
+
 
     var count=0;
     var lastPA=null;
     var lastPB=null;
 
-    if(numPoints/3*18 >geom.vertices.length ) 
+    if((numPoints/3)*18 > geom.vertices.length ) 
     {
-        op.log('resize verts');
+        op.log('resize verts',numPoints/3*18);
         geom.vertices=new Float32Array( (numPoints/3*18 ) );
-        tc=new Float32Array( (numPoints/3*12) );
-        // make a better buffer for not resizing all the time...
+        geom.texCoords=new Float32Array( (numPoints/3*12) );
     }
 
     index=0;
@@ -267,8 +295,8 @@ function linesToGeom(points,options)
 
     // for(i=0;i<indices.length;i++) indices[i]=i;
 
-    geom.vertices=geom.vertices;
-    geom.texCoords=tc;
+    // geom.vertices=geom.vertices;
+    // geom.texCoords=tc;
     // geom.verticesIndices=indices;
 
 
@@ -276,6 +304,7 @@ function linesToGeom(points,options)
 
 function doRebuild()
 {
+    draw=true;
     var points=inPoints.get()||[];
     if(!points.length)return;
 
@@ -284,19 +313,26 @@ function doRebuild()
     if(!mesh) 
     {
         mesh=new CGL.Mesh(cgl,geom);
-        op.log("rebuild");
+        
     }
 
     geomOut.set(null);
     geomOut.set(geom);
 
+
+    if(!draw) op.log("!DRAWrebuild");
+
     // mesh.addVertexNumbers=true;
 
+    numItems=index/3;
+
     var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,geom.vertices,3);
-    attr.numItems=index/3;
+    attr.numItems=numItems;
 
     var attr2=mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
-    attr2.numItems=(index/3);
+    attr2.numItems=numItems;
+    
+    // console.log(numItems);
 
     // mesh._setVertexNumbers();
 

@@ -19,7 +19,6 @@ render.onTriggered=function()
 
 var scaleChanged=function()
 {
-    doScale=false;
     vec3.set(vScale, scale.get(),scale.get(),scale.get());
     mat4.identity(transMatrix);
     mat4.scale(transMatrix,transMatrix, vScale);
