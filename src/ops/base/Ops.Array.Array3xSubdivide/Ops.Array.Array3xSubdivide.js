@@ -32,7 +32,12 @@ function calc()
 
     if(subd>0 && !bezier.get())
     {
-        arr.length=(inPoints.length-3)*(subd);
+        var newLen=(inPoints.length-3)*(subd);
+        if(newLen!=arr.length)
+        {
+            op.log("resize subdiv arr");
+            arr.length=newLen;
+        }
 
         var count=0;
         for(i=0;i<inPoints.length-3;i+=3)
@@ -57,7 +62,8 @@ function calc()
     else
     if(subd>0 && bezier.get() )
     {
-        arr.length=(inPoints.length-3)*(subd-1);
+        var newLen=(inPoints.length-3)*(subd-1);
+        if(newLen!=arr.length)  arr.length=newLen;
         var count=0;
 
         for(i=3;i<inPoints.length-6;i+=3)
