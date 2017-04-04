@@ -6,11 +6,14 @@ var thick=op.inValue("Thickness");
 var inStart=op.inValueSlider("Start");
 var inLength=op.inValueSlider("Length",1);
 var calcNormals=op.inValueBool("Calculate Normals",false);
+var inStrip=op.inValueBool("Line Strip",true);
+
+var inPoints=op.inArray('points');
+var inNumPoints=op.inValue("Num Points",0);
+
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize=true;
-
-var inPoints=op.inArray('points');
 
 var geom=new CGL.Geometry("splinemesh");
 var cgl=op.patch.cgl;
@@ -18,6 +21,7 @@ var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 var needsBuild=true;
+var vecX=[1,0,0];
 
 inPoints.onChange=rebuild;
 thick.onChange=rebuild;
@@ -49,18 +53,24 @@ var vecD=vec3.create();
 var vStart=vec3.create();
 var vEnd=vec3.create();
 var q=quat.create();
-    var index=0;
+var vecRotation=vec3.create();
+vec3.set(vecRotation, 1,0,0);
+
+
+var index=0;
 
 function linesToGeom(points,options)
 {
-    // todo: optimize: do not create new arrays if length is the same - use existing geom arrays ...
-    if(!geom)geom=new CGL.Geometry();
+    if(!geom)
+    {
+        geom=new CGL.Geometry();
+        op.log("new geom");
+    }
 
     var norms=[];
     var i=0;
 
-    options=options||{};
-    options.thickness=options.thickness||0.1;
+
     points=points||[];
 
     if(points.length===0)
@@ -77,25 +87,14 @@ function linesToGeom(points,options)
     var lastPA=null;
     var lastPB=null;
 
-    var verts=geom.vertices;
-    var tc=geom.texCoords;
-    var indices=geom.verticesIndices;
-    if(points.length/3*18 !=verts.length ) 
+
+    if(points.length/3*18 !=geom.vertices.length ) 
     {
         op.log('resize verts');
-        verts=new Float32Array( (points.length/3*18 ) );
+        geom.vertices=new Float32Array( (points.length/3*18 ) );
         tc=new Float32Array( (points.length/3*12) );
         // make a better buffer for not resizing all the time...
     }
-    // if(tc.length!=points.length/3*12) 
-    // if(indices.length!=points.length*2) indices=new Uint16Array(points.length*2);
-
-
-    // var indices=new Float32Array(points.length/3);
-
-    // verts.length=points.length/3*18;
-    // indices.length=points.length/3;
-    // tc.length=points.length/3*12;
 
     index=0;
 
@@ -103,33 +102,58 @@ function linesToGeom(points,options)
     var lastC=null;
     var lastD=null;
 
-    for(var p=0;p<points.length;p+=3)
+    var numPoints=points.length;
+    if(inNumPoints.get()!==0)numPoints=(inNumPoints.get()-1)*3;
+
+    var m=(thick.get()||0.1)/2;
+    var ppl=p/points.length;
+    var pi2=Math.PI/2;
+    
+    var strip=inStrip.get();
+
+    for(var p=0;p<numPoints;p+=3)
     {
         vec3.set(vStart,
             points[p+0],
             points[p+1],
             points[p+2]);
 
+        // vec3.set(vEnd,
+        //     points[p+3]-points[p+0],
+        //     points[p+4]-points[p+1],
+        //     points[p+5]-points[p+2]);
         vec3.set(vEnd,
-            points[p+3]-points[p+0],
-            points[p+4]-points[p+1],
-            points[p+5]-points[p+2]);
+            points[p+3],
+            points[p+4],
+            points[p+5]);
 
         vec3.normalize(vEnd,vEnd);
-        quat.rotationTo(q,[1,0,0],vEnd);
+        quat.rotationTo(q,vecX,vEnd);
 
-        vec3.set(vecRot, 1,0,0);
 
-        quat.rotateZ(q, q, Math.PI/2);
+        quat.rotateZ(q, q, pi2);
 
-        vec3.transformQuat(vecRot,vecRot,q);
+        vec3.transformQuat(vecRot,vecRotation,q);
 
-        var m=options.thickness/2;
-
-        if(lastC)
+        if(strip)
         {
-            vec3.copy(vecA,lastC);
-            vec3.copy(vecB,lastD);
+            if(lastC)
+            {
+                vec3.copy(vecA,lastC);
+                vec3.copy(vecB,lastD);
+            }
+            else
+            {
+                vec3.set(vecA,
+                    points[p+0]+vecRot[0]*m,
+                    points[p+1]+vecRot[1]*m,
+                    points[p+2]+vecRot[2]*m);
+    
+                vec3.set(vecB,
+                    points[p+0]+vecRot[0]*-m,
+                    points[p+1]+vecRot[1]*-m,
+                    points[p+2]+vecRot[2]*-m);
+            }
         }
         else
         {
@@ -137,12 +161,14 @@ function linesToGeom(points,options)
                 points[p+0]+vecRot[0]*m,
                 points[p+1]+vecRot[1]*m,
                 points[p+2]+vecRot[2]*m);
-
+    
             vec3.set(vecB,
                 points[p+0]+vecRot[0]*-m,
                 points[p+1]+vecRot[1]*-m,
                 points[p+2]+vecRot[2]*-m);
+
         }
+
 
         vec3.set(vecC,
             points[p+3]+vecRot[0]*m,
@@ -155,70 +181,71 @@ function linesToGeom(points,options)
             points[p+5]+vecRot[2]*-m);
 
         // a
-        verts[index++]=vecA[0];
-        verts[index++]=vecA[1];
-        verts[index++]=vecA[2];
+        geom.vertices[index++]=vecA[0];
+        geom.vertices[index++]=vecA[1];
+        geom.vertices[index++]=vecA[2];
 
-        tc[indexTc++]=p/points.length;
-        tc[indexTc++]=0;
+        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=0;
 
         // b
-        verts[index++]=vecB[0];
-        verts[index++]=vecB[1];
-        verts[index++]=vecB[2];
+        geom.vertices[index++]=vecB[0];
+        geom.vertices[index++]=vecB[1];
+        geom.vertices[index++]=vecB[2];
 
-        tc[indexTc++]=p/points.length;
-        tc[indexTc++]=0;
+        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=0;
 
         // c
-        verts[index++]=vecC[0];
-        verts[index++]=vecC[1];
-        verts[index++]=vecC[2];
+        geom.vertices[index++]=vecC[0];
+        geom.vertices[index++]=vecC[1];
+        geom.vertices[index++]=vecC[2];
 
-        tc[indexTc++]=p/points.length;
-        tc[indexTc++]=0;
+        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=0;
 
         // d
-        verts[index++]=vecD[0];
-        verts[index++]=vecD[1];
-        verts[index++]=vecD[2];
+        geom.vertices[index++]=vecD[0];
+        geom.vertices[index++]=vecD[1];
+        geom.vertices[index++]=vecD[2];
 
-        tc[indexTc++]=p/points.length;
-        tc[indexTc++]=0;
+        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=0;
 
         // c
-        verts[index++]=vecC[0];
-        verts[index++]=vecC[1];
-        verts[index++]=vecC[2];
+        geom.vertices[index++]=vecC[0];
+        geom.vertices[index++]=vecC[1];
+        geom.vertices[index++]=vecC[2];
 
-        tc[indexTc++]=p/points.length;
-        tc[indexTc++]=0;
+        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=0;
 
         // b
-        verts[index++]=vecB[0];
-        verts[index++]=vecB[1];
-        verts[index++]=vecB[2];
+        geom.vertices[index++]=vecB[0];
+        geom.vertices[index++]=vecB[1];
+        geom.vertices[index++]=vecB[2];
 
-        tc[indexTc++]=p/points.length;
-        tc[indexTc++]=0;
+        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=0;
 
         if(!lastC)
         {
             lastC=vec3.create();
             lastD=vec3.create();
         }
-
-        vec3.copy(lastC,vecC);
-        vec3.copy(lastD,vecD);
-
-
+    
+        if(strip)
+        {
+            vec3.copy(lastC,vecC);
+            vec3.copy(lastD,vecD);
+        }
     }
 
-    // verts=verts;
+    // geom.vertices=geom.vertices;
 
     // for(i=0;i<indices.length;i++) indices[i]=i;
 
-    geom.vertices=verts;
+    geom.vertices=geom.vertices;
     geom.texCoords=tc;
     // geom.verticesIndices=indices;
 
@@ -230,10 +257,7 @@ function doRebuild()
     var points=inPoints.get()||[];
     if(!points.length)return;
 
-    linesToGeom(points,
-        {
-            "thickness":thick.get(),
-        });
+    linesToGeom(points);
 
     if(!mesh) 
     {
@@ -244,17 +268,15 @@ function doRebuild()
     geomOut.set(null);
     geomOut.set(geom);
 
-    mesh.addVertexNumbers=true;
-    // mesh.setGeom(geom);
-    
-    
+    // mesh.addVertexNumbers=true;
+
     var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,geom.vertices,3);
     attr.numItems=index/3;
 
     var attr2=mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
     attr2.numItems=(index/3);
 
-    mesh._setVertexNumbers();
+    // mesh._setVertexNumbers();
 
     if(calcNormals.get())geom.calculateNormals({forceZUp:true});
 
