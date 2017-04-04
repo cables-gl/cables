@@ -81,6 +81,8 @@ function loadMaterials(data,root)
     }
 }
 
+
+
 var loadCameras=function(data,seq)
 {
     var i=0;
@@ -98,11 +100,12 @@ var loadCameras=function(data,seq)
                 mat4.transpose(cam.transformation,cam.transformation);
 
                 // guess camera target (...)
+            
                 for(var j=0;j<root.children.length;j++)
                 {
                     if(root.children[j].name == root.children[i].name+'_Target')
                     {
-                        console.log("FOund cameratarget!")
+                        console.log("FOund cameratarget!");
                         cam.target=root.children[i];
                         root.children.splice(j,1);
                         root.children.splice(i,1);
@@ -146,9 +149,9 @@ var loadCameras=function(data,seq)
                     camOp.getPort('clip near').set(cam.cam.clipplanenear);
                     camOp.getPort('clip far' ).set(cam.cam.clipplanefar);
 
-                    camOp.getPort('CenterX').set(cam.cam.lookat[0]);
-                    camOp.getPort('CenterY').set(cam.cam.lookat[1]);
-                    camOp.getPort('CenterZ').set(cam.cam.lookat[2]);
+                    camOp.getPort('centerX').set(cam.cam.lookat[0]);
+                    camOp.getPort('centerY').set(cam.cam.lookat[1]);
+                    camOp.getPort('centerZ').set(cam.cam.lookat[2]);
 
                     camOp.getPort('matrix').set(cam.transformation);
 
@@ -248,6 +251,24 @@ var loadCameras=function(data,seq)
                             frameNum++;
                         }
                     }
+                    else
+                    {
+
+console.log(cam);
+                    camOp.getPort('centerX').set(cam.target.transformation[12]);
+                    camOp.getPort('centerY').set(cam.target.transformation[13]);
+                    camOp.getPort('centerZ').set(cam.target.transformation[14]);
+
+                        op.log("target not animated",cam.target.transformation[3]);
+                        
+                        // var cc=findCamTarget(data,cam.cam.name);
+                        // op.log(cc);
+                        
+
+
+
+                    }
+                    
                 }
             }
         }
