@@ -38,9 +38,8 @@ inPoints.onChange=function()
         pointArray=inPoints.get();//new Float32Array(inPoints.get());
         updateUniformPoints=true;
 
-        if(shader)
-            if(shader.getDefine("PATHFOLLOW_POINTS")!=pointArray.length/3)
-                shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+
+                
         // console.log(inPoints.get().length,"points");
         // resetLater();
     }
@@ -158,14 +157,19 @@ exec.onTriggered=function()
         shaderModule.point=new CGL.Uniform(shader,'i',shaderModule.prefix+'point',0);
         shaderModule.uniPoints=new CGL.Uniform(shader,'3f[]',shaderModule.prefix+'points',new Float32Array([0,0,0,0,0,0]));
         shaderModule.randomSpeed=new CGL.Uniform(shader,'b',shaderModule.prefix+'randomSpeed',false);
-
+        shaderModule.maxIndex=new CGL.Uniform(shader,'i',shaderModule.prefix+'maxIndex',0);
     }
     
     if(updateUniformPoints && pointArray)
     {
         // if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
-        if(shader.getDefine("PATHFOLLOW_POINTS")!=pointArray.length/3)
-            shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+        if(shader.getDefine("PATHFOLLOW_POINTS")<pointArray.length/3)
+        {
+                console.log(shader.getDefine("PATHFOLLOW_POINTS"));
+                shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+                console.log('pointArray.length/3',pointArray.length/3);
+        }
+        // shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
 
         // shaderModule.uniNumPoints.setValue(pointArray.length/3);
         shaderModule.uniPoints.setValue(pointArray);
@@ -173,6 +177,7 @@ exec.onTriggered=function()
         // console.log("update uniforms");
     }
 
+    shaderModule.maxIndex.setValue(pointArray.length);
     // var off=inOffset.get()%((pointArray.length-1)/3);
     var off=inOffset.get();
 

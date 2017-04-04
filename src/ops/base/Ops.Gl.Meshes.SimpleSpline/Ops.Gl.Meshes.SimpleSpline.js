@@ -3,7 +3,10 @@ op.name="SimpleSpline";
 var render=op.inFunction("Render");
 
 var inPoints=op.inArray("Points");
+var strip=op.inValueBool("Line Strip",true);
 var numPoints=op.inValue("Num Points");
+
+
 
 var next=op.outFunction("Next");
 
@@ -31,7 +34,6 @@ render.onTriggered=function()
         if(points.length!=buff.length)
         {
             // console.log("Resize...");
-    
             buff=new Float32Array(points.length);
             buff.set(points);
         }
@@ -39,7 +41,6 @@ render.onTriggered=function()
         {
             buff.set(points);
         }
-        
     }
     else
     {
@@ -49,7 +50,8 @@ render.onTriggered=function()
     var shader=cgl.getShader();
 
     var oldPrim=shader.glPrimitive;
-    shader.glPrimitive=cgl.gl.LINE_STRIP;
+    if(strip.get())shader.glPrimitive=cgl.gl.LINE_STRIP;
+        else shader.glPrimitive=cgl.gl.LINES;
     var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
     
     if(numPoints.get()<=0)attr.numItems=buff.length/3;

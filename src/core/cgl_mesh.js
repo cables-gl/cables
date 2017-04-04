@@ -152,7 +152,7 @@ CGL.Mesh.prototype.getAttributes=function()
 
 CGL.Mesh.prototype.updateTexCoords=function(geom)
 {
-    if(geom.texCoords && geom.texCoords.length>0) this.setAttribute('attrTexCoord',geom.texCoords,2);
+    if(geom.texCoords && geom.texCoords.length>0) this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
 };
 
 CGL.Mesh.prototype._setVertexNumbers=function()
