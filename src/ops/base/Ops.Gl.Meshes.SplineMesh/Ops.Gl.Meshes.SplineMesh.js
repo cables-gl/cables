@@ -56,7 +56,7 @@ render.onTriggered=function()
 
 
         mesh._bufVertexAttrib.startItem=Math.floor( 
-            inStart.get()*(numItems/9))*6;
+            inStart.get()*(numItems/3))*3;
         mesh._bufVertexAttrib.numItems=
             Math.floor( 
                 Math.min(1,inLength.get()+inStart.get()) * (numItems)
