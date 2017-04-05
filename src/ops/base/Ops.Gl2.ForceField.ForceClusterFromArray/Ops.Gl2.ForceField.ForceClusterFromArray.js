@@ -11,9 +11,6 @@ var attraction=op.inValue("attraction");
 var angle=op.inValue("Angle");
 var show=op.inValueBool("Show");
 
-var posX=op.inValue("Pos X");
-var posY=op.inValue("Pos Y");
-var posZ=op.inValue("Pos Z");
 
 var next=op.outFunction("next");
 
@@ -28,9 +25,6 @@ var cgl=op.patch.cgl;
 range.onChange=reset;
 attraction.onChange=reset;
 angle.onChange=reset;
-posX.onChange=reset;
-posY.onChange=reset;
-posZ.onChange=reset;
 
 var forces=[];
 
@@ -45,7 +39,8 @@ function reset()
     var points=inPoints.get();
     if(!points)return;
 
-    if(forces.length != points.length/3) forces.length=points.length/3;
+    if(forces.length != points.length/3) 
+        forces.length=points.length/3;
 
     // forces.length=Math.floor(num.get());
     for(var i=0;i<points.length/3;i++)
@@ -81,6 +76,7 @@ op.onDelete=function(){};
 
 exec.onTriggered=function()
 {
+    if(!inPoints.get())return;
 
     var num=inPoints.get().length/3*2;
 
