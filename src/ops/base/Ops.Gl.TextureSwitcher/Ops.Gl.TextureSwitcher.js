@@ -4,12 +4,18 @@ var cgl=self.patch.cgl;
 
 this.name='TextureSwitcher';
 
+var exec=op.inFunction("exec");
 this.num=this.addInPort(new Port(this,"num",OP_PORT_TYPE_VALUE));
+
+
 this.textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
 var texturePorts=[];
 var index=0;
 var lastIndex=-1;
+
+exec.onTriggered=updateTexture;
+
 function updateTexture()
 {
     index=parseInt(self.num.get(),10);

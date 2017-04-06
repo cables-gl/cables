@@ -66,7 +66,7 @@ var vEnd=vec3.create();
 var q=quat.create();
 var vecRotation=vec3.create();
 vec3.set(vecRotation, 1,1,0);
-var vecX=[1,0,0];
+var vecX=[0,0,0];
 
 
 var index=0;
