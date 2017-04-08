@@ -50,11 +50,10 @@ if(attrVertIndex> MOD_spawnFrom && attrVertIndex<MOD_spawnTo)
                 -vecNormal.x,
                 -vecNormal.z
                 );
-    
+
             float f=distAlpha * forces[i].angle;
-    
+
             velocity+=(tangentForce*f)*MOD_timeDiff;
-    
         }
     }
     
@@ -66,31 +65,39 @@ if(attrVertIndex> MOD_spawnFrom && attrVertIndex<MOD_spawnTo)
         // respawn=;
     }
     
-
     outPos=inPos+velocity;
 
     #ifdef POINTMATERIAL
         float lifeElapsed=(MOD_time-life.x)/MOD_lifeTime;
         sizeMultiply *= smoothstep(0.0, MOD_fadeinout, lifeElapsed) * (1.0 - smoothstep(1.0-MOD_fadeinout, 1.0, lifeElapsed));
     #endif
-
-    
 }
+
 
 if(respawn)
 {
+    outPos.xyz=vec3(0.0);
+    int ind=int( random(vec2(MOD_time+rndpos.y,rndpos.x+MOD_time))*MOD_numSpawns );
+    outPos=MOD_spawnPositions[ind];
 
-    outPos=(
-        2.0*vec3(
-        (random(vec2(MOD_time+rndpos.y,rndpos.x))-0.5),
-        (random(vec2(MOD_time+rndpos.z,rndpos.x))-0.5),
-        (random(vec2(rndpos.x,MOD_time+rndpos.z))-0.5)
-        ));
+    float spawnAreaSize=1.3;
+    outPos.x+=spawnAreaSize*random(vec2(MOD_time+rndpos.y,rndpos.x+MOD_time))-spawnAreaSize/2.0;
+    outPos.y+=spawnAreaSize*random(vec2(rndpos.y,rndpos.x+MOD_time))-spawnAreaSize/2.0;
+    outPos.z+=spawnAreaSize*random(vec2(MOD_time+rndpos.y,rndpos.x))-spawnAreaSize/2.0;
 
-    outPos.x*=MOD_sizeX;
-    outPos.y*=MOD_sizeY;
-    outPos.z*=MOD_sizeZ;
-    outPos+=MOD_emitterPos;
+
+
+    // outPos=(
+    //     2.0*vec3(
+    //     (random(vec2(MOD_time+rndpos.y,rndpos.x))-0.5),
+    //     (random(vec2(MOD_time+rndpos.z,rndpos.x))-0.5),
+    //     (random(vec2(rndpos.x,MOD_time+rndpos.z))-0.5)
+    //     ));
+
+    // outPos.x*=MOD_sizeX;
+    // outPos.y*=MOD_sizeY;
+    // outPos.z*=MOD_sizeZ;
+    // outPos+=MOD_emitterPos;
     outLife.x=MOD_time;
     
     #ifdef POINTMATERIAL

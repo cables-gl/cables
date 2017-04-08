@@ -3,8 +3,9 @@ precision highp float;
 
 {{MODULES_HEAD}}
 
+varying vec2 texCoord;
 #ifdef HAS_TEXTURES
-   varying vec2 texCoord;
+   
    #ifdef HAS_TEXTURE_DIFFUSE
        uniform sampler2D diffTex;
    #endif
@@ -42,9 +43,9 @@ void main()
               col.r*=r;
               col.g*=g;
               col.b*=b;
-          #endif
-      #endif
-      col.a*=a;
+            #endif
+        #endif
+        col.a*=a;
     #endif
 
     {{MODULE_COLOR}}
@@ -56,6 +57,11 @@ void main()
     #ifdef HAS_TEXTURE_MASK
         col.a=mask;
     #endif
+
+
+    // #ifdef RANDOMIZE_COLOR
+        // col.rgb*=fract(sin(dot(texCoord.xy ,vec2(12.9898,78.233))) * 43758.5453);
+    // #endif
 
     outColor = col;
 }

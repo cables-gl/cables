@@ -76,7 +76,11 @@ op.onDelete=function(){};
 
 exec.onTriggered=function()
 {
-    if(!inPoints.get())return;
+    if(!inPoints.get())
+    {
+        next.trigger();
+        return;
+    }
 
     var num=inPoints.get().length/3*2;
 
