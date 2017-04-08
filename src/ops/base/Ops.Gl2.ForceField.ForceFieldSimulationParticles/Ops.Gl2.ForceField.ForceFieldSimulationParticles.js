@@ -13,6 +13,7 @@ var show=op.inValueBool("Show");
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
+var spawns=op.inArray("Spawn Positions");
 
 var cgl=op.patch.cgl;
 var shaderModule=null;
@@ -68,7 +69,7 @@ function doReset()
     if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
 
-    for(i=0;i<verts.length/3*2;i+=2)
+    for(i=0;i<(verts.length/3)*2;i+=2)
     {
         geom.texCoords[i]=Math.random();
         geom.texCoords[i+1]=Math.random();
@@ -181,6 +182,8 @@ var uniLifetime=null;
 var uniFadeInOut=null;
 var uniSpawnFrom=null;
 var uniSpawnTo=null;
+var uniSpawnPositions=null;
+var uniNumSpawns=null;
 
 render.onTriggered=function()
 {
@@ -208,7 +211,9 @@ render.onTriggered=function()
         uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
         uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
         uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
-
+        
+        uniSpawnPositions=new CGL.Uniform(shader,'3f[]',shaderModule.prefix+'spawnPositions',[]);
+        uniNumSpawns=new CGL.Uniform(shader,'f',shaderModule.prefix+'numSpawns',0);
 
 
         uniSpawnFrom=new CGL.Uniform(shader,'f',shaderModule.prefix+'spawnFrom',0);
@@ -246,6 +251,7 @@ render.onTriggered=function()
     uniTime.setValue(time);
 
 
+
     uniPos.setValue([posX.get(),posY.get(),posZ.get()]);
 
     if(mesh) mesh.render(shader);
@@ -266,6 +272,12 @@ render.onTriggered=function()
         mark.draw(cgl);
         cgl.popMvMatrix();
     }
+    
+    uniSpawnPositions.set(spawns.get() || []);
+    var numSpawnPos=( (spawns.get()||[]).length)/3;
+    // op.log('numSpawnPos',numSpawnPos);
+    uniNumSpawns.set( numSpawnPos );
+    
 
     if(particleSpawnStart>numPoints.get())particleSpawnStart=0;
 

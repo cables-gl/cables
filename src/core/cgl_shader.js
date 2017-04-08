@@ -193,7 +193,6 @@ CGL.Shader=function(_cgl,_name)
         }
 
         // Loop through active attributes
-        console.log("shader attributes");
         for (i=0; i < activeAttributes; i++)
         {
             var attribute = cgl.gl.getActiveAttrib(this._program, i);
@@ -275,8 +274,16 @@ CGL.Shader=function(_cgl,_name)
 
         var srcHeadVert='';
         var srcHeadFrag='';
+
+
+        modules.sort(function (a, b) {
+            return a.priority - b.priority;
+        });
+
+
         for(i=0;i<moduleNames.length;i++)
         {
+            // console.log('moduleName',moduleNames[i]);
             var srcVert='';
             var srcFrag='';
 
@@ -284,6 +291,7 @@ CGL.Shader=function(_cgl,_name)
             {
                 if(modules[j].name==moduleNames[i])
                 {
+
                     srcVert+=modules[j].srcBodyVert || '';
                     srcFrag+=modules[j].srcBodyFrag || '';
                     srcHeadVert+=modules[j].srcHeadVert || '';
@@ -324,8 +332,10 @@ CGL.Shader=function(_cgl,_name)
             for(i=0;i<uniforms.length;i++) uniforms[i].resetLoc();
         }
 
-self.finalShaderFrag=fs;
-self.finalShaderVert=vs;
+        self.finalShaderFrag=fs;
+        self.finalShaderVert=vs;
+
+
         // printStats();
         self._needsRecompile=false;
     };
