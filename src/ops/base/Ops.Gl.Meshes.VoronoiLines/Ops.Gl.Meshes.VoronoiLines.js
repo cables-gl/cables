@@ -8,6 +8,7 @@ var pIgnoreBorderCells=op.inValueBool("Ignore Border Cells",false);
 var needsGeomUpdate=false;
 var verts=null;
 var indices=new Uint16Array();
+var needsUpdate=false;
 
 inDiagram.ignoreValueSerialize=true;
 

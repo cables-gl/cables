@@ -28,6 +28,7 @@ var uniTimeDiff=null;
 var uniPos=null;
 var uniLifetime=null;
 var uniFadeInOut=null;
+var uniSmooth=null;
 
 render.onTriggered=function()
 {

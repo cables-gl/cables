@@ -34,7 +34,7 @@ var uniShininess=new CGL.Uniform(shader,'f','shininess',shininess);
 
 var lights=[];
 
-depthTex=new CGL.Uniform(shader,'t','depthTex',5);
+var depthTex=new CGL.Uniform(shader,'t','depthTex',5);
 
 var uniShadowPass=new CGL.Uniform(shader,'f','shadowPass',0);
 

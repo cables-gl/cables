@@ -19,7 +19,7 @@ geomOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
-
+var j=0,i=0,idx=0;
 rings.onValueChanged=updateMesh;
 sides.onValueChanged=updateMesh;
 innerRadius.onValueChanged=updateMesh;

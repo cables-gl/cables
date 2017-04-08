@@ -11,7 +11,7 @@ val.ignoreValueSerialize=true;
 
 function updateVar()
 {
-    if(op.patch.vars && op.patch.vars[varname.get()])
+    if(op.patch.vars && op.patch.vars.hasOwnProperty(varname.get()))
     {
         if(op.patch.vars[varname.get()]!=val.get()) 
             val.set( op.patch.vars[varname.get()] );

@@ -2,7 +2,6 @@
 op.name='TimeLineTime';
 var theTime=op.addOutPort(new Port(this,"time"));
 
-
 theTime.set(0);
 
 

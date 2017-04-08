@@ -48,6 +48,7 @@ render.onTriggered=function()
     }
     
     var shader=cgl.getShader();
+    if(!shader)return;
 
     var oldPrim=shader.glPrimitive;
     if(strip.get())shader.glPrimitive=cgl.gl.LINE_STRIP;

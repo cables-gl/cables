@@ -19,6 +19,7 @@ var numBars=128;
 var avgMs=0;
 var selfTime=0;
 var canvas=null;
+var lastTime=0;
 
 for(var i=0;i<numBars;i++)
 {

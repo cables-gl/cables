@@ -24,11 +24,12 @@ var firstTime=true;
 var identTranslate=vec3.create();
 vec3.set(identTranslate, 0,0,-2);
 
-
+var prerenderCount=0;
 var preRenderAnimFrame=function(t)
 {
-    var time=preRenderTimes[0];
+    var time=preRenderTimes[prerenderCount];
     self.patch.timer.setTime(time);
+    console.log('prerender',time);
     self.finished.trigger();
 
     cgl.renderStart(cgl,identTranslate);
@@ -39,6 +40,7 @@ var preRenderAnimFrame=function(t)
     // self.loading.trigger();
 
     cgl.renderEnd(cgl);
+    prerenderCount++;
 
     // preRenderDone=preRenderInc;
     preRenderTimes.splice(0,1);
@@ -57,7 +59,7 @@ this.onLoaded=function()
 
     preRenderTimes.push(1);
     
-    // console.log('prerender steps:',preRenderTimes);
+    console.log('prerender steps:',preRenderTimes);
 };
 
 function checkPreRender()

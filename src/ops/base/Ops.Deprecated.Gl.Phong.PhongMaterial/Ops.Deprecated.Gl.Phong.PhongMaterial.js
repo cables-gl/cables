@@ -29,7 +29,7 @@ shaderOut.set(shader);
 
 var lights=[];
 
-depthTex=new CGL.Uniform(shader,'t','depthTex',5);
+var depthTex=new CGL.Uniform(shader,'t','depthTex',5);
 var uniShadowPass=new CGL.Uniform(shader,'f','shadowPass',0);
 
 for(i=0;i<MAX_LIGHTS;i++)

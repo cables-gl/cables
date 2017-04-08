@@ -13,23 +13,22 @@ function calcArray()
 {
     var segs=Math.max(3,Math.floor(segments.get()));
     var points=[];
-    
+
     var count=0;
     for (i=0; i <= segs*percent.get(); i++)
     {
-        degInRad = (360/segs)*i*CGL.DEG2RAD;
-        posx=Math.cos(degInRad)*radius.get();
-        posy=Math.sin(degInRad)*radius.get();
+        var degInRad = (360/segs)*i*CGL.DEG2RAD;
+        var posx=Math.cos(degInRad)*radius.get();
+        var posy=Math.sin(degInRad)*radius.get();
 
         points.push(posx);
         points.push(posy);
         points.push(0);
-    
     }
 
     outArr.set(null);
     outArr.set(points);
-    
+
 }
 
 calcArray();

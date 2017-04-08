@@ -21,7 +21,6 @@ var outPoints=op.outArray("Points");
 
 var outDieSlow=op.outValue("Die Slow");
 
-
 var numLinePoints=op.inValueInt("Num Line Points",100);
 
 var minLifetime=op.inValueInt("Min LifeTime",5);
@@ -30,7 +29,6 @@ var maxLifetime=op.inValueInt("Max LifeTime",5);
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
-
 
 var size=140;
 var particles=[];
@@ -58,12 +56,14 @@ inDamping.onChange=function()
 numParticles.onChange=respawnAll;
 numLinePoints.onChange=respawnAll;
 
-
 function respawnAll()
 {
     particles.length=0;
+    
+    op.log("respawn all");
     for(var i=0;i<numParticles.get();i++)
     {
+        
         var p=new Particle();    
         p.spawn();
         particles[i]=p;
@@ -170,23 +170,17 @@ Particle.prototype.update=function(forces)
     
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
     {
-        this.apply(CABLES.forceFieldForces[i]);
+        this.applyForce(CABLES.forceFieldForces[i]);
     }
-    
 
     // var speed=timeDiff*inSpeed.get();
     // this.velocity[0]*=speed;
     // this.velocity[1]*=speed;
     // this.velocity[2]*=speed;
-    
     // vec3.mul(this.velocity,this.velocity,speed);
 
-
     vecLimit(this.velocity,inSpeed.get());
-    
     vec3.add(this.pos,this.pos,this.velocity);
-
-
 
     // Get particle speed
     vec3.sub(vecLength,this.oldPos,this.pos);
@@ -198,25 +192,25 @@ Particle.prototype.update=function(forces)
         this.idleFrames++;
       
         // Should we kill it yet?
-        if (this.idleFrames > 100)
-        {
-            dieSlow++;
+        // if (this.idleFrames > 100)
+        // {
+        //     dieSlow++;
             
-            // console.log('die faul');
-            this.spawn();
-        }
+        //     // console.log('die faul');
+        //     this.spawn();
+        // }
     }
     else
     {
-      // How far is particle from center of screen
-    //   PVector vecDistance = new PVector(512/2, 512/2, 0);
-    //   vecDistance.sub(m_vecPos);
-    //   if(vecDistance.mag() > (512 * 2))
+        // How far is particle from center of screen
+        //   PVector vecDistance = new PVector(512/2, 512/2, 0);
+        //   vecDistance.sub(m_vecPos);
+        //   if(vecDistance.mag() > (512 * 2))
         if(vec3.len(this.pos)>1000)
         {
             // Too far off screen - kill it
             dieOffArea++;
-            this.spawn();
+            // this.spawn();
             // console.log("die off");
         }
     }
@@ -228,7 +222,7 @@ var vecToOrigin=vec3.create();
 var vecNormal=vec3.create();
 var vecForce=vec3.create();
 
-Particle.prototype.apply=function(force)
+Particle.prototype.applyForce=function(force)
 {
     // Are we close enough to be influenced?
     vec3.sub(vecToOrigin,this.pos,force.pos);
@@ -242,7 +236,7 @@ Particle.prototype.apply=function(force)
         if (distAlpha > 0.92)
         {
             // If particle is too close to origin then kill it
-            this.spawn();
+            // this.spawn();
             dieNear++;
         }
         else
@@ -278,14 +272,12 @@ exec.onTriggered=function()
 {
     var time=op.patch.freeTimer.get();
     timeDiff=(time-lastTime)*inSpeed.get();
-
-    
     outDieSlow.set(dieSlow);
-    
     dieOffArea=0;
     dieSlow=0;
     dieNear=0;
 
+    if(triggerForce.isLinked())
     for(var j=0;j<CABLES.forceFieldForces.length;j++)
     {
         cgl.pushMvMatrix();
@@ -307,8 +299,8 @@ exec.onTriggered=function()
         var ppos=Math.abs( (p.pos[0]) );
         var lifetimeMul=Math.min(p.lifetime/3000,1);
 
-// p.buff[i*3+0]=p.pos[0];
-// buffLineStart
+        // p.buff[i*3+0]=p.pos[0];
+        // buffLineStart
 
         arrayWriteToEnd(p.buff,p.pos[0])
         arrayWriteToEnd(p.buff,p.pos[1])
