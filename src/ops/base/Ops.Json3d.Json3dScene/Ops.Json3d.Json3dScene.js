@@ -619,7 +619,7 @@ var reload=function()
                     }
                 }
 
-                render();
+                // render();
                 self.patch.loading.finished(loadingId);
                 if(CABLES.UI) gui.jobs().finish('loading3d'+loadingId);
 
