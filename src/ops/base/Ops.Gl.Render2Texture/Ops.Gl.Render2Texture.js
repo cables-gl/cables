@@ -18,6 +18,7 @@ var tex=op.outTexture("texture");
 var texDepth=op.outTexture("textureDepth");
 
 var fpTexture=op.inValueBool("HDR");
+var depth=op.inValueBool("Depth");
 
 
 var fb=null;//new CGL.Framebuffer(cgl,512,512);
@@ -35,6 +36,11 @@ var reInitFb=true;
 
 
 fpTexture.onChange=function()
+{
+    reInitFb=true;
+};
+
+depth.onChange=function()
 {
     reInitFb=true;
 };
@@ -57,7 +63,6 @@ function doRender()
         if(fb) fb.delete();
         if(cgl.glVersion>=2) 
         {
-            
             var ms=true;
             var msSamples=4;
             
@@ -74,11 +79,14 @@ function doRender()
             {
                 isFloatingPointTexture:fpTexture.get(),
                 multisampling:ms,
+                depth:depth.get(),
                 multisamplingSamples:msSamples
             });
         }
         else
+        {
             fb=new CGL.Framebuffer(cgl,8,8,{isFloatingPointTexture:fpTexture.get()});
+        }
 
         if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
             else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
@@ -100,8 +108,9 @@ function doRender()
         fb.setSize( width.get(),height.get() );
     }
 
-    fb.renderStart(cgl);
 
+
+    fb.renderStart(cgl);
     // mesh.render(cgl.getShader());
     trigger.trigger();
     // cgl.printError("start r2t");
