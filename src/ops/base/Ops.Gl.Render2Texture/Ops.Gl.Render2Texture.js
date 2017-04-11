@@ -18,7 +18,7 @@ var tex=op.outTexture("texture");
 var texDepth=op.outTexture("textureDepth");
 
 var fpTexture=op.inValueBool("HDR");
-var depth=op.inValueBool("Depth");
+var depth=op.inValueBool("Depth",true);
 
 
 var fb=null;//new CGL.Framebuffer(cgl,512,512);
