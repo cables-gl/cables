@@ -78,7 +78,7 @@ function updateCanvas()
     var k=0;
     for(k=numBars;k>=0;k--)
     {
-        if(queue[k]>30)ctx.fillStyle="#885555";
+        if(queue[k]>30)ctx.fillStyle="#ff5555";
         ctx.fillRect(numBars-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
         if(queue[k]>30)ctx.fillStyle="#555555";
     }
@@ -86,9 +86,9 @@ function updateCanvas()
     ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
-        if(queue[k]>30)ctx.fillStyle="#ccaaaa";
+        if(queueChilds[k]>30)ctx.fillStyle="#ff9900";
         ctx.fillRect(numBars-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
-        if(queue[k]>30)ctx.fillStyle="#aaaaaa";
+        if(queueChilds[k]>30)ctx.fillStyle="#aaaaaa";
     }
 
 }

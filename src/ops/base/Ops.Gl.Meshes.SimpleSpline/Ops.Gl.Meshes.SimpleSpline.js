@@ -15,8 +15,6 @@ var cgl=op.patch.cgl;
 var geom=new CGL.Geometry("simplespline");
 geom.vertices=[0,0,0,0,0,0,0,0,0];
 var mesh=new CGL.Mesh(cgl,geom);
-
-
 var buff=new Float32Array();
 
 render.onTriggered=function()

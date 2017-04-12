@@ -12,9 +12,14 @@ inConnection.onChange=function()
 
 inSend.onTriggered=function()
 {
-    if(connection)
+    if(connection && inObject.get())
     {
+        
         connection.send(JSON.stringify(inObject.get()));
 
+    }
+    else
+    {
+        // console.log("no connection");
     }
 };
