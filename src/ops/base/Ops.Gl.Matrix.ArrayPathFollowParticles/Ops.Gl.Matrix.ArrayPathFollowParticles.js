@@ -8,6 +8,9 @@ var inSpread=op.inValue("Spread",0.2);
 var inOffset=op.inValue("Offset");
 var inRandomSpeed=op.inValueBool("RandomSpeed");
 
+var next=op.outFunction("Next");
+
+
 var cgl=op.patch.cgl;
 var shaderModule=null;
 var shader=null;
@@ -28,14 +31,20 @@ inParticles.onChange=resetLater;
 inLength.onChange=resetLater;
 inSpread.onChange=resetLater;
 
+pointArray=new Float32Array(99);
+
+
 inPoints.onChange=function()
 {
     if(inPoints.get())
     {
-        pointArray=new Float32Array(inPoints.get());
+        pointArray=inPoints.get();//new Float32Array(inPoints.get());
         updateUniformPoints=true;
-        console.log(inPoints.get().length,"points");
-        resetLater();
+
+
+                
+        // console.log(inPoints.get().length,"points");
+        // resetLater();
     }
 };
 
@@ -129,12 +138,13 @@ function removeModule()
 
 exec.onTriggered=function()
 {
-    if(op.instanced(exec))return;
+    // if(op.instanced(exec))return;
     if(!inPoints.get())return;
     if(needsRebuild)rebuild();
 
     if(cgl.getShader()!=shader)
     {
+        console.log("shader changed....");
         if(shader)removeModule();
 
         shader=cgl.getShader();
@@ -144,25 +154,35 @@ exec.onTriggered=function()
             {
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:attachments.pathfollow_head_vert,
-                srcBodyVert:attachments.pathfollow_vert
+                srcBodyVert:attachments.pathfollow_vert,
+                priority:0
             });
 
         shaderModule.offset=new CGL.Uniform(shader,'f',shaderModule.prefix+'offset',0);
         shaderModule.point=new CGL.Uniform(shader,'i',shaderModule.prefix+'point',0);
         shaderModule.uniPoints=new CGL.Uniform(shader,'3f[]',shaderModule.prefix+'points',new Float32Array([0,0,0,0,0,0]));
         shaderModule.randomSpeed=new CGL.Uniform(shader,'b',shaderModule.prefix+'randomSpeed',false);
-
+        shaderModule.maxIndex=new CGL.Uniform(shader,'i',shaderModule.prefix+'maxIndex',0);
     }
-    
+
     if(updateUniformPoints && pointArray)
     {
-        shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+        // if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+        if(shader.getDefine("PATHFOLLOW_POINTS")<pointArray.length/3)
+        {
+                console.log(shader.getDefine("PATHFOLLOW_POINTS"));
+                shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+                console.log('pointArray.length/3',pointArray.length/3);
+        }
+        // shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
+
         // shaderModule.uniNumPoints.setValue(pointArray.length/3);
         shaderModule.uniPoints.setValue(pointArray);
         updateUniformPoints=false;
-        console.log("update uniforms");
+        // console.log("update uniforms");
     }
 
+    shaderModule.maxIndex.setValue(pointArray.length);
     // var off=inOffset.get()%((pointArray.length-1)/3);
     var off=inOffset.get();
 
@@ -173,5 +193,7 @@ exec.onTriggered=function()
     if(!shader)return;
 
     if(mesh) mesh.render(shader);
+    
+    next.trigger();
 
 };

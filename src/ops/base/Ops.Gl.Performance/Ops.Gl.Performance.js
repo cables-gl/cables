@@ -15,10 +15,11 @@ var childsTime=0;
 var avgMsChilds=0;
 var queue=[];
 var queueChilds=[];
-var numBars=256;
+var numBars=128;
 var avgMs=0;
 var selfTime=0;
 var canvas=null;
+var lastTime=0;
 
 for(var i=0;i<numBars;i++)
 {
@@ -77,13 +78,17 @@ function updateCanvas()
     var k=0;
     for(k=numBars;k>=0;k--)
     {
+        if(queue[k]>30)ctx.fillStyle="#ff5555";
         ctx.fillRect(numBars-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
+        if(queue[k]>30)ctx.fillStyle="#555555";
     }
 
     ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
+        if(queueChilds[k]>30)ctx.fillStyle="#ff9900";
         ctx.fillRect(numBars-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
+        if(queueChilds[k]>30)ctx.fillStyle="#aaaaaa";
     }
 
 }
@@ -103,7 +108,7 @@ function createCanvas()
     canvas.style['z-index']   = "9998";
     container.appendChild(canvas);
     ctx = canvas.getContext('2d');
-        
+
     canvas.addEventListener("click", toggleOpened);
     
 }

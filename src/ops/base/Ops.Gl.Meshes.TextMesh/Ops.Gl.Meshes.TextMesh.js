@@ -44,7 +44,7 @@ function getFont()
     fontImage.style.display = "none";
     var body = document.getElementsByTagName("body")[0];
     body.appendChild(fontImage);
-    _ctx= fontImage.getContext('2d');
+    var _ctx= fontImage.getContext('2d');
     CABLES.OpTextureMeshCanvas[canvasid]=
         {
             ctx:_ctx,

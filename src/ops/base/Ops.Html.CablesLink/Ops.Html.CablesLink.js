@@ -16,7 +16,7 @@ opacity.onChange=function()
     element.style.opacity=opacity.get();
 };
 
-element.id.padding="10px";
+element.style.padding="10px";
 element.style="cableslink";
 element.style.position="absolute";
 element.style.right="0px";

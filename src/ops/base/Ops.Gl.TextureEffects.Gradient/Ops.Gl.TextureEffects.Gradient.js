@@ -66,21 +66,21 @@ blendMode.onValueChanged=function()
 
 r.onChange=g.onChange=b.onChange=function()
 {
-    colA=[r.get(),g.get(),b.get()];
+    var colA=[r.get(),g.get(),b.get()];
     if(!r.uniform) r.uniform=new CGL.Uniform(shader,'3f','colA',colA);
     else r.uniform.setValue(colA);
 };
 
 r2.onChange=g2.onChange=b2.onChange=function()
 {
-    colB=[r2.get(),g2.get(),b2.get()];
+    var colB=[r2.get(),g2.get(),b2.get()];
     if(!r2.uniform) r2.uniform=new CGL.Uniform(shader,'3f','colB',colB);
     else r2.uniform.setValue(colB);
 };
 
 r3.onChange=g3.onChange=b3.onChange=function()
 {
-    colC=[r3.get(),g3.get(),b3.get()];
+    var colC=[r3.get(),g3.get(),b3.get()];
     if(!r3.uniform) r3.uniform=new CGL.Uniform(shader,'3f','colC',colC);
     else r3.uniform.setValue(colC);
 };

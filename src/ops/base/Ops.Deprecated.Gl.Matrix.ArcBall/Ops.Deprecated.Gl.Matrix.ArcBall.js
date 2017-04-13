@@ -20,7 +20,7 @@ minScale.set(0.1);
 maxScale.set(1.5);
 
 var cgl=op.patch.cgl;
-vScale=vec3.create();
+var vScale=vec3.create();
 var mouseDown=false;
 var radius=1.0;
 

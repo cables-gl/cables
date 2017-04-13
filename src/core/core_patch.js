@@ -1,3 +1,4 @@
+
 var CABLES=CABLES || {};
 
 CABLES.Patch = function(cfg)
@@ -94,9 +95,12 @@ CABLES.Patch.prototype.pause=function()
 
 CABLES.Patch.prototype.resume=function()
 {
-    this._paused=false;
-    this.freeTimer.play();
-    this.exec();
+    if(this._paused)
+    {
+      this._paused=false;
+      this.freeTimer.play();
+      this.exec();
+    }
 };
 
 CABLES.Patch.prototype.setVolume=function(v)

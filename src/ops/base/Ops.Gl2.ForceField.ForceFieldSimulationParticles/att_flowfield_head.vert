@@ -1,4 +1,4 @@
-#define NUM_FORCES 127
+#define NUM_FORCES 80
 
 in vec3 rndpos;
 out vec3 col;
@@ -12,6 +12,9 @@ uniform float MOD_sizeZ;
 uniform float MOD_timeDiff;
 uniform float MOD_lifeTime;
 uniform float MOD_fadeinout;
+uniform float MOD_spawnTo;
+uniform float MOD_spawnFrom;
+
 
 attribute float timeOffset;
 
@@ -33,6 +36,8 @@ struct force
 
 uniform force forces[NUM_FORCES];
 
+uniform vec3 MOD_spawnPositions[32];
+uniform float MOD_numSpawns;
 
 
 

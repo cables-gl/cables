@@ -20,11 +20,6 @@ var next=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.outObject("Geometry");
 
 
-exe.onTriggered=render;
-filename.onChange=reload;
-centerPivot.onChange=setMesh;
-meshIndex.onChange=setMesh;
-inSize.onChange=updateScale;
 
 var data=null;
 var mesh=null;
@@ -33,8 +28,17 @@ var transMatrix=mat4.create();
 var bounds={};
 var vScale=vec3.fromValues(1,1,1);
 
+exe.onTriggered=render;
+filename.onChange=reload;
+centerPivot.onChange=setMeshLater;
+meshIndex.onChange=setMeshLater;
+inSize.onChange=updateScale;
+var needSetMesh=true;
+
 function render()
 {
+    if(needSetMesh) setMesh();
+
     if(draw.get())
     {
         cgl.pushMvMatrix();
@@ -45,6 +49,11 @@ function render()
         cgl.popMvMatrix();
         next.trigger();
     }
+}
+
+function setMeshLater()
+{
+    needSetMesh=true;
 }
 
 
@@ -113,7 +122,7 @@ function setMesh()
         return;
     }
     op.uiAttribs.warning='';
-
+    
     var i=0;
 
     var geom=new CGL.Geometry();
@@ -134,6 +143,7 @@ function setMesh()
 
     geometryOut.set(geom);
     mesh=new CGL.Mesh(cgl,geom);
+    needSetMesh=false;
 
     op.uiAttr({'warning':null});
 }
@@ -172,13 +182,12 @@ function reload()
                     return;
                 }
 
-                setMesh(meshIndex.get());
-
-                render();
+                needSetMesh=true;
                 op.patch.loading.finished(loadingId);
                 if(CABLES.UI) gui.jobs().finish('loading3d'+loadingId);
 
             });
+        // setMesh();
     }
 
     var loadingId=op.patch.loading.start('json3dFile',filename.get());

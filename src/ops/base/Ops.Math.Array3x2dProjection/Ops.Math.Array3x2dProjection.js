@@ -8,7 +8,7 @@ var w=this.addInPort(new Port(this,"w",OP_PORT_TYPE_VALUE));
 var h=this.addInPort(new Port(this,"h",OP_PORT_TYPE_VALUE));
 
 var coordmul=this.addInPort(new Port(this,"mul",OP_PORT_TYPE_VALUE));
-var coordClamp=this.addInPort(new Port(this,"clamp",OP_PORT_TYPE_VALUE));
+// var coordClamp=this.addInPort(new Port(this,"clamp",OP_PORT_TYPE_VALUE));
 
 exe.onTriggered=function()
 {
@@ -43,20 +43,28 @@ function project(vec,viewWidth, viewHeight, fov, viewDistance)
 var pos=vec3.create();
 var m=mat4.create();
 var trans=vec3.create();
+var pm=mat4.create();
 
 function proj(p)
 {
+    
+    pm=mat4.perspective(pm, fov.get()*CGL.DEG2RAD, 1, 0.0001, 100);
+    
     // mat4.identity(m);
     mat4.multiply(m,cgl.vMatrix,cgl.mvMatrix);
     vec3.transformMat4(pos, [0,0,0], m);
     vec3.add(pos,pos,p);
 
-    vec3.transformMat4(trans, pos, cgl.pMatrix);
+ 
+    vec3.transformMat4(trans, pos, pm);
 
     var height=h.get();
     var width=w.get();
-    x= width  * 0.5 - trans[0] * width * 0.5 / trans[2] ;
-    y= height  * 0.5 + trans[1] * height * 0.5 / trans[2] ;
+    x= trans[0] * width  ;
+    y= trans[1] * height ;
+
+    // x.set( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
+    // y.set( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
 
     return [x,y,0];
 }
@@ -108,33 +116,12 @@ function update()
             if(x==null)x=0;
             if(y==null)y=0;
             
-            // x+=w.get();
-            // y+=h.get();
+            x+=w.get()/2;
+            y+=h.get()/2;
             
-            x+=coordClamp.get()/2;
-            y+=coordClamp.get()/2;
+            // x+=coordClamp.get()/2;
+            // y+=coordClamp.get()/2;
 
-            var clamped=false;
-            if(x>coordClamp.get()) 
-            {
-                clamped=true;
-                x=coordClamp.get();
-            }
-            if(y>coordClamp.get())
-            {
-                clamped=true;
-                y=coordClamp.get();
-            }
-            if(x<0) 
-            {
-                clamped=true;
-                x=0;
-            }
-            if(y<0)
-            {
-                clamped=true;
-                y=0;
-            }
             
             // var addBlack=false;
     
@@ -193,6 +180,7 @@ function update()
         // lastY=y;
     }
     
+    outArr.set(null);
     outArr.set(laserArr);
     needsUpdate=false;
     

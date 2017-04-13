@@ -31,7 +31,7 @@ this.multiply.set(1.0);
 
 var smoothTimer=0;
 this.smoothSpeed.set(20);
-var speed=this.smoothSpeed.get();
+
 var listenerElement=null;
 
 
@@ -59,7 +59,7 @@ function setValue(x,y)
 
 this.smooth.onValueChanged=function()
 {
-    if(self.smooth.get()) smoothTimer = setInterval(updateSmooth, 15);
+    if(self.smooth.get()) smoothTimer = setInterval(updateSmooth, 5);
         else if(smoothTimer)clearTimeout(smoothTimer);
 };
 
@@ -83,8 +83,11 @@ addListeners();
 
 area.onValueChanged=addListeners;
 
+var speed=0;
+
 function updateSmooth()
 {
+    speed=self.smoothSpeed.get();
     if(speed<=0)speed=0.01;
     var distanceX = Math.abs(mouseX - lineX);
     var speedX = Math.round( distanceX / speed, 0 );

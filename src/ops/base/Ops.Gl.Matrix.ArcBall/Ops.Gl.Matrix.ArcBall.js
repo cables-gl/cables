@@ -12,7 +12,7 @@ var outRadius=op.outValue("Radius");
 
 
 var cgl=op.patch.cgl;
-vScale=vec3.create();
+var vScale=vec3.create();
 var mouseDown=false;
 var radius=0.0;
 

@@ -18,6 +18,8 @@ geomOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
+var i=0,j=0;
+var offset=0;
 
 stacks.onValueChanged=updateMesh;
 slices.onValueChanged=updateMesh;

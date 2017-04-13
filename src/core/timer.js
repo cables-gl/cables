@@ -38,13 +38,13 @@ CABLES.Timer.prototype._getTime=function()
 CABLES.Timer.prototype._eventPlayPause=function()
 {
     if(this._eventsPaused)return;
-    for(var i in this._cbPlayPause) this._cbPlayPause[i]();
+    for(var i in this.cbPlayPause) this.cbPlayPause[i]();
 };
 
 CABLES.Timer.prototype._eventTimeChange=function()
 {
     if(this._eventsPaused)return;
-    for(var i in this._cbTimeChange) this._cbTimeChange[i]();
+    for(var i in this.cbTimeChange) this.cbTimeChange[i]();
 };
 
 CABLES.Timer.prototype.setDelay=function(d)
@@ -131,11 +131,11 @@ CABLES.Timer.prototype.pauseEvents=function(onoff)
 CABLES.Timer.prototype.onPlayPause=function(cb)
 {
     if(cb && typeof cb == "function")
-        this._cbPlayPause.push(cb);
+        this.cbPlayPause.push(cb);
 };
 
 CABLES.Timer.prototype.onTimeChange=function(cb)
 {
     if(cb && typeof cb == "function")
-        this._cbTimeChange.push(cb);
+        this.cbTimeChange.push(cb);
 };

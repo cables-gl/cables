@@ -68,6 +68,7 @@ function reload()
         var verts=JSON.parse(JSON.stringify(jsonMesh.vertices));
 
 
+
         var geom=new CGL.Geometry();
         geom.vertices=verts;
         geom.vertexNormals=jsonMesh.normals||[];

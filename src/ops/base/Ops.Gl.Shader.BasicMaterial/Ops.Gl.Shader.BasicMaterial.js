@@ -127,14 +127,12 @@ op.textureOpacity.onChange=function()
     if(op.textureOpacity.get())
     {
         if(op.textureOpacityUniform!==null)return;
-        console.log('TEXTURE OPACITY ADDED');
         shader.removeUniform('texOpacity');
         shader.define('HAS_TEXTURE_OPACITY');
         if(!op.textureOpacityUniform)op.textureOpacityUniform=new CGL.Uniform(shader,'t','texOpacity',1);
     }
     else
     {
-        console.log('TEXTURE OPACITY REMOVED');
         shader.removeUniform('texOpacity');
         shader.removeDefine('HAS_TEXTURE_OPACITY');
         op.textureOpacityUniform=null;

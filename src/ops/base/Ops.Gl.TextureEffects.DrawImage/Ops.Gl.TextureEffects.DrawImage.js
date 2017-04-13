@@ -239,7 +239,7 @@ function doRender()
 {
     if(!cgl.currentTextureEffect)return;
 
-    if(image.get() && image.get().tex)
+    if(image.get() && image.get().tex && amount.get()>0.0)
     {
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();

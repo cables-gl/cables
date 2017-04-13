@@ -15,7 +15,7 @@ function exec()
     {
         var r=n1 % n2*2;
         if(r>n2) result.set( n2 * 2.0-r );
-        else result.set(r);
+            else result.set(r);
         return;
     }
     else

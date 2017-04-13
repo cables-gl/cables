@@ -1,4 +1,4 @@
-op.name="ForceFieldSimulationParticles";
+op.name="ForceFieldParticleEmitter";
 
 var render=op.inFunction("render");
 var resetButton=op.inFunctionButton("Reset");
@@ -13,6 +13,7 @@ var show=op.inValueBool("Show");
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
+var spawns=op.inArray("Spawn Positions");
 
 var cgl=op.patch.cgl;
 var shaderModule=null;
@@ -67,17 +68,17 @@ function doReset()
 
     if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
-    
-    for(i=0;i<geom.texCoords.length;i+=2)
+
+    for(i=0;i<(verts.length/3)*2;i+=2)
     {
         geom.texCoords[i]=Math.random();
         geom.texCoords[i+1]=Math.random();
     }
 
-    if(!mesh) 
+    if(!mesh)
     {
         mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
-    
+
         mesh.addVertexNumbers=true;
         mesh._verticesNumbers=null;
 
@@ -88,10 +89,11 @@ function doReset()
     {
         mesh.unBind();
     }
+    mesh.addVertexNumbers=true;
     mesh.setGeom(geom);
 
     // mesh.updateVertices(geom);
-    
+
     // op.log("set geom",mesh._attributes.length);
     // op.log("set geom",mesh._attributes.length);
 
@@ -103,34 +105,31 @@ function doReset()
     // buffB.numItems = bufferB.length/3;
 
     mesh.setAttribute("rndpos",bufferB,3);
-    
+
 
     op.log("Reset particles",num,numPoints.get());
-    
+
     mesh.removeFeedbacks();
 
 
 
     var life=new Float32Array(num);
-    for(i=0;i<num;i+=3) 
+    for(i=0;i<num;i+=3)
     {
         life[i]=op.patch.freeTimer.get()-Math.random()*lifetime.get();
         life[i+1]=op.patch.freeTimer.get();
         life[i+2]=op.patch.freeTimer.get();
     }
-    
+
     // console.log(op.patch.freeTimer.get(),life[0],bufferB[0]);
-
-
-
 
     // mesh.setAttribute("life",life,3);
     // mesh.setAttributeFeedback("life","outLife",life),
 
 
 
-    
-    
+
+
     mesh.setFeedback(
         mesh.setAttribute("inPos",bufferB,3),
         "outPos",bufferB );
@@ -143,11 +142,11 @@ function doReset()
 
         // feebackOutpos.buffer=buffB;
 
-    
-    
+
+
     // var timeOffsetArr=new Float32Array(num/3);
     // for(i=0;i<num;i++)timeOffsetArr[i]=Math.random();
-    
+
     // mesh.setAttribute("timeOffset",timeOffsetArr,1);
 
     // if(feebackOutpos)feebackOutpos.buffer=buffB;
@@ -171,13 +170,20 @@ function removeModule()
 render.onLinkChanged=removeModule;
 
 
-
+var particleSpawnStart=0;
 var uniTime=null;
 var uniSize=null;
+var uniSizeX=null;
+var uniSizeY=null;
+var uniSizeZ=null;
 var uniTimeDiff=null;
 var uniPos=null;
 var uniLifetime=null;
 var uniFadeInOut=null;
+var uniSpawnFrom=null;
+var uniSpawnTo=null;
+var uniSpawnPositions=null;
+var uniNumSpawns=null;
 
 render.onTriggered=function()
 {
@@ -206,8 +212,14 @@ render.onTriggered=function()
         uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
         uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
         
+        uniSpawnPositions=new CGL.Uniform(shader,'3f[]',shaderModule.prefix+'spawnPositions',[]);
+        uniNumSpawns=new CGL.Uniform(shader,'f',shaderModule.prefix+'numSpawns',0);
+
+
+        uniSpawnFrom=new CGL.Uniform(shader,'f',shaderModule.prefix+'spawnFrom',0);
+        uniSpawnTo=new CGL.Uniform(shader,'f',shaderModule.prefix+'spawnTo',0);
     }
-    
+
     if(!shader)return;
 
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
@@ -237,24 +249,22 @@ render.onTriggered=function()
     uniSizeZ.setValue(inSizeZ.get());
     uniTimeDiff.setValue(timeDiff*(speed.get()));
     uniTime.setValue(time);
-    
-    
+
+
+
     uniPos.setValue([posX.get(),posY.get(),posZ.get()]);
-    
+
     if(mesh) mesh.render(shader);
-    
-    
+
     // console.log( '1',mesh._bufVertexAttrib );
     // console.log( '1',feebackOutpos.buffer );
-    
-    
-    
+
     // var t=mesh._bufVertexAttrib.buffer;
     // mesh._bufVertexAttrib.buffer=feebackOutpos.buffer;
     // feebackOutpos.buffer=t;
     lastTime=op.patch.freeTimer.get();
-    
-    
+
+
     if(show.get())
     {
         cgl.pushMvMatrix();
@@ -262,5 +272,27 @@ render.onTriggered=function()
         mark.draw(cgl);
         cgl.popMvMatrix();
     }
+    
+    uniSpawnPositions.set(spawns.get() || []);
+    var numSpawnPos=( (spawns.get()||[]).length)/3;
+    // op.log('numSpawnPos',numSpawnPos);
+    uniNumSpawns.set( numSpawnPos );
+    
+
+    if(particleSpawnStart>numPoints.get())particleSpawnStart=0;
+
+    var perSecond=numPoints.get()/lifetime.get();
+    var numSpawn=perSecond*Math.min(1/33,timeDiff);
+    uniSpawnFrom.setValue(particleSpawnStart);
+    uniSpawnTo.setValue(particleSpawnStart+numSpawn);
+
+    // op.log(particleSpawnStart,particleSpawnStart+numSpawn);
+    // if(numSpawn>30)
+    // console.log("should spawn",numSpawn);
+    particleSpawnStart+=numSpawn;
+
+
+
+
 
 };

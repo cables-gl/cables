@@ -11,7 +11,7 @@ var cgl=op.patch.cgl;
 var mesh=null;
 var geom=new CGL.Geometry("fullscreen rectangle");
 var x=0,y=0,z=0,w=0,h=0;
-op.onResize=rebuild;
+// op.onResize=rebuild;
 
 
 centerInCanvas.onValueChanged=rebuild;
@@ -21,7 +21,10 @@ render.onTriggered=function()
 {
     if(
       cgl.getViewPort()[2]!=w ||
-      cgl.getViewPort()[3]!=h ) rebuild();
+      cgl.getViewPort()[3]!=h ) 
+      {
+          rebuild();
+      }
 
     cgl.pushPMatrix();
     mat4.identity(cgl.pMatrix);
@@ -57,9 +60,10 @@ render.onTriggered=function()
 
 function rebuild()
 {
+    
     var currentViewPort=cgl.getViewPort().slice();
     if(currentViewPort[2]==w && currentViewPort[3]==h)return;
-
+    
     var xx=0,xy=0;
 
     w=currentViewPort[2];

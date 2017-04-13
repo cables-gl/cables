@@ -1,35 +1,42 @@
 op.name="SvgPathes";
 
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var svgFile=op.addInPort(new Port(op,"object",OP_PORT_TYPE_OBJECT));
 
 var thickness=op.addInPort(new Port(op,"thickness",OP_PORT_TYPE_VALUE));
 
+var outEach=op.outFunction("Each");
+var outPoints=op.outArray("Points");
+
+
 thickness.set(0.1);
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var paths=[];
 
-
-var meshes=[];
 var cgl=op.patch.cgl;
 
 render.onTriggered=function()
 {
-    for(var i=0;i<meshes.length;i++)
+    
+    for(var i=0;i<paths.length;i++)
     {
-        meshes[i].render(cgl.getShader());
+        outPoints.set(null);
+        outPoints.set(paths[i]);
+        outEach.trigger();
     }
+
 };
 
 svgFile.onValueChanged=parse;
 thickness.onValueChanged=parse;
-doCenter=parse;
+var doCenter=parse;
 
 function parse()
 {
-    meshes.length=0;
 
     var arr=svgFile.get();
     var geom=null;
+    paths.length=0;
 
     for(var i in arr)
     {
@@ -42,28 +49,31 @@ function parse()
             verts.push(0);
         }
 
-        var newGeom=CGL.Geometry.LinesToGeom(verts,{thickness:thickness.get()});
+paths.push(verts);
 
-        if(!geom)
-        {
-            geom=newGeom;
-        }
-        else
-        {
-            if(geom.vertices.length>50000*3)
-            {
-                meshes.push(new CGL.Mesh(cgl,geom));
-                geom=null;
-            }
-            else
-            geom.merge(newGeom);
-        }
+
+        // var newGeom=CGL.Geometry.LinesToGeom(verts,{thickness:thickness.get()});
+
+        // if(!geom)
+        // {
+        //     geom=newGeom;
+        // }
+        // else
+        // {
+        //     if(geom.vertices.length>50000*3)
+        //     {
+        //         meshes.push(new CGL.Mesh(cgl,geom));
+        //         geom=null;
+        //     }
+        //     else
+        //     geom.merge(newGeom);
+        // }
     }
 
-    if(geom)
-    {
-        meshes.push(new CGL.Mesh(cgl,geom));
-    }
+    // if(geom)
+    // {
+    //     meshes.push(new CGL.Mesh(cgl,geom));
+    // }
 
-    console.log(meshes.length+' meshes!');
+    console.log(paths.length+' meshes!');
 }

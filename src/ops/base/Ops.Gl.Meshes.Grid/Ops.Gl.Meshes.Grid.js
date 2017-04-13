@@ -48,10 +48,10 @@ function init()
 render.onTriggered=function()
 {
     if(!mesh)init();
-    shader=cgl.getShader();
+    var shader=cgl.getShader();
     if(!shader)return;
 
-    oldPrim=shader.glPrimitive;
+    var oldPrim=shader.glPrimitive;
 
     shader.glPrimitive=cgl.gl.LINES;
 

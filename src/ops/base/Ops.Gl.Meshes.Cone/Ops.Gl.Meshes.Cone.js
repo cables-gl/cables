@@ -20,6 +20,7 @@ geomOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
+var i=0,j=0,idx=0,offset=0;
 
 render.onTriggered=function()
 {

@@ -130,6 +130,12 @@ var doRender=function()
     prevViewPort[2]=vp[2];
     prevViewPort[3]=vp[3];
 
+
+    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+    // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
+
+
+
     updateResolution();
 
     cgl.currentTextureEffect=effect;
@@ -155,6 +161,10 @@ var doRender=function()
     effect.endEffect();
 
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
+
+
+    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
+
 
 };
 

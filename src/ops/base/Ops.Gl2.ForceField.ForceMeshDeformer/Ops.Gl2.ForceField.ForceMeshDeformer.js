@@ -28,6 +28,10 @@ var uniTimeDiff=null;
 var uniPos=null;
 var uniLifetime=null;
 var uniFadeInOut=null;
+var uniSmooth=null;
+var uniModelMatrix=null;
+
+var mmat=mat4.create();
 
 render.onTriggered=function()
 {
@@ -44,20 +48,14 @@ render.onTriggered=function()
             {
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:attachments.deformer_head_vert,
-                srcBodyVert:attachments.deformer_vert
+                srcBodyVert:attachments.deformer_vert,
+                priority:10
             });
 
         uniTime=new CGL.Uniform(shader,'f',shaderModule.prefix+'time',0);
-        // uniPos=new CGL.Uniform(shader,'3f',shaderModule.prefix+'emitterPos',0);
-        // uniSizeX=new CGL.Uniform(shader,'f',shaderModule.prefix+'sizeX',inSizeX.get());
-        // uniSizeY=new CGL.Uniform(shader,'f',shaderModule.prefix+'sizeY',inSizeY.get());
-        // uniSizeZ=new CGL.Uniform(shader,'f',shaderModule.prefix+'sizeZ',inSizeZ.get());
-        // uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
-        // uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
-        // uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
         
         uniSmooth=new CGL.Uniform(shader,'f',shaderModule.prefix+'smooth',inSmooth);
-                    
+        uniModelMatrix=new CGL.Uniform(shader,'m4',shaderModule.prefix+'modelMatrix',cgl.modelMatrix());
     }
     
     if(!shader)return;
@@ -81,13 +79,17 @@ render.onTriggered=function()
             force[id+'uniAngle'].setValue(force.angle);
             force[id+'uniPos'].setValue(force.pos);
             force[id+'uniTime'].setValue(time);
+            force[id+'uniTime'].setValue(time);
         }
     }
 
+mat4.copy(mmat,cgl.modelMatrix());
+    uniModelMatrix.setValue(mmat);
+    // op.log(cgl.modelMatrix());
+
     lastTime=op.patch.freeTimer.get();
-    
-next.trigger();    
-  
+
+    next.trigger();    
 
 };
 

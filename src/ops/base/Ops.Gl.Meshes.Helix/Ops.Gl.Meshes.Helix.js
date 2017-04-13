@@ -33,6 +33,7 @@ function doRender()
     if(mesh)
     {
         var shader=cgl.getShader();
+        if(!shader)return;
         var oldPrim=shader.glPrimitive;
         shader.glPrimitive=cgl.gl.LINE_STRIP;
         mesh.render(shader);

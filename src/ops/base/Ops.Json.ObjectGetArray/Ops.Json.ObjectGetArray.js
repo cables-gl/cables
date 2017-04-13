@@ -8,11 +8,14 @@ var arrLength=op.addOutPort(new Port(op,"Length",OP_PORT_TYPE_VALUE));
 result.ignoreValueSerialize=true;
 data.ignoreValueSerialize=true;
 
-data.onValueChange(function()
+data.onChange=update;
+key.onChange=update;
+    
+function update()
 {
     if(data.get() && data.get().hasOwnProperty(key.get()))
     {
         result.set(data.val[key.get()]);
         arrLength.set(result.get().length);
     }
-});
+}

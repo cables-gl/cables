@@ -44,7 +44,7 @@ function updateSize()
 
 pWidth.onChange=updateSize;
 pHeight.onChange=updateSize;
-centerPoints=[];
+var centerPoints=[];
 outCenter.set(centerPoints);
 
 
@@ -483,9 +483,9 @@ render.onTriggered=function()
 {
     if(needsUpdate)updateGeom();
     
-    shader=cgl.getShader();
+    var shader=cgl.getShader();
     if(!shader)return;
-    oldPrim=shader.glPrimitive;
+    var oldPrim=shader.glPrimitive;
 
     // for(var i=0;i<meshes.length;i++)
     // {

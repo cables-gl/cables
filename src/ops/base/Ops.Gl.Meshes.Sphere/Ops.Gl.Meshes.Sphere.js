@@ -18,6 +18,11 @@ geomOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
+var geomVertices=[];
+var geomVertexNormals=[];
+var geomTexCoords=[];
+var geomVerticesIndices=[];
+
 
 slices.onValueChanged=function(){ mesh=null; };
 stacks.onValueChanged=function(){ mesh=null; };
