@@ -10,17 +10,25 @@ var blackEnd=op.inValueBool("blackEnd");
 var inPoints=op.inArray("Points");
 var inColors=op.inArray("Colors");
 
-var inClampX=op.inValue("Clamp X");
-var inClampY=op.inValue("Clamp Y");
+
+var inClampXLeft=op.inValue("Clamp X Left");
+var inClampYTop=op.inValue("Clamp Y Top");
+
+var inClampX=op.inValue("Clamp X",4000);
+var inClampY=op.inValue("Clamp Y",2250);
 
 
 var objOut=op.outObject("Packet");
-
 var outNumPoints=op.outValue("Numpoints");
 
-// inPoints.onChange=send;
-// inColors.onChange=send;
 exe.onTriggered=send;
+
+var clippedPoints=[];
+clippedPoints.length=3000;
+
+var clippedColors=[];
+clippedColors.length=3000;
+
 
 
 function send()
@@ -32,6 +40,8 @@ function send()
     
     clipBottom=inClampY.get();
     clipRight=inClampX.get();
+    clipTop=inClampYTop.get();
+    clipLeft=inClampXLeft.get();
 
     
     if(!icolors)
@@ -86,9 +96,11 @@ function send()
     
     
     // now clip
-    var clippedPoints=[];
-    var clippedColors=[];
-
+    // var clippedPoints=[];
+    // var clippedColors=[];
+    var cpIndex=0;
+    var ccIndex=0;
+    
     
     var wasClipped=false;
     
@@ -96,45 +108,42 @@ function send()
     {
         var l=clip( [ points[i+0],points[i+1] ],[points[i+2],points[i+3]] );
 
-        
         if(l)
         {
             
             if(wasClipped)
             {
-                clippedPoints.push(Math.round(l[0]));
-                clippedPoints.push(Math.round(l[1]));
-                clippedColors.push(0);
-                clippedColors.push(0);
-                clippedColors.push(0);
-                clippedPoints.push(Math.round(l[0]));
-                clippedPoints.push(Math.round(l[1]));
-                clippedColors.push(0);
-                clippedColors.push(0);
-                clippedColors.push(0);
+                clippedPoints[cpIndex++]=Math.round(l[0]);
+                clippedPoints[cpIndex++]=Math.round(l[1]);
+                clippedColors[ccIndex++]=0;
+                clippedColors[ccIndex++]=0;
+                clippedColors[ccIndex++]=0;
+                clippedPoints[cpIndex++]=Math.round(l[0]);
+                clippedPoints[cpIndex++]=Math.round(l[1]);
+                clippedColors[ccIndex++]=0;
+                clippedColors[ccIndex++]=0;
+                clippedColors[ccIndex++]=0;
             }
 
             wasClipped=false;
             
-            clippedPoints.push(Math.round(l[0]));
-            clippedPoints.push(Math.round(l[1]));
-            clippedPoints.push(Math.round(l[2]));
-            clippedPoints.push(Math.round(l[3]));
+            clippedPoints[cpIndex++]=Math.round(l[0]);
+            clippedPoints[cpIndex++]=Math.round(l[1]);
+            clippedPoints[cpIndex++]=Math.round(l[2]);
+            clippedPoints[cpIndex++]=Math.round(l[3]);
             
-            clippedColors.push(colors[0]);
-            clippedColors.push(colors[1]);
-            clippedColors.push(colors[2]);
+            clippedColors[ccIndex++]=colors[0];
+            clippedColors[ccIndex++]=colors[1];
+            clippedColors[ccIndex++]=colors[2];
             
-            clippedColors.push(colors[0]);
-            clippedColors.push(colors[1]);
-            clippedColors.push(colors[2]);
+            clippedColors[ccIndex++]=colors[0];
+            clippedColors[ccIndex++]=colors[1];
+            clippedColors[ccIndex++]=colors[2];
         }
         else wasClipped=true;
     }
     
 
-    points=clippedPoints;
-    colors=clippedColors;
 
     
     // if(colors.length/3 != points.length/2)
@@ -163,31 +172,37 @@ function send()
     {
         var lastX=points[points.length-2];
         var lastY=points[points.length-1];
-        points.push(lastX);
-        points.push(lastY);
+        clippedPoints[cpIndex++]=lastX;
+        clippedPoints[cpIndex++]=lastY;
 
-        colors.push(0);
-        colors.push(0);
-        colors.push(0);
-
-        lastX=points[0];
-        lastY=points[1];
-        points.push(lastX);
-        points.push(lastY);
-
-        colors.push(0);
-        colors.push(0);
-        colors.push(0);
+        clippedColors[ccIndex++]=0;
+        clippedColors[ccIndex++]=0;
+        clippedColors[ccIndex++]=0;
 
         lastX=points[0];
         lastY=points[1];
-        points.push(lastX);
-        points.push(lastY);
+        clippedPoints[cpIndex++]=lastX;
+        clippedPoints[cpIndex++]=lastY;
 
-        colors.push(0);
-        colors.push(0);
-        colors.push(0);
+        clippedColors[ccIndex++]=0;
+        clippedColors[ccIndex++]=0;
+        clippedColors[ccIndex++]=0;
+
+        lastX=points[0];
+        lastY=points[1];
+        clippedPoints[cpIndex++]=lastX;
+        clippedPoints[cpIndex++]=lastY;
+
+        clippedColors[ccIndex++]=0;
+        clippedColors[ccIndex++]=0;
+        clippedColors[ccIndex++]=0;
     }
+
+points=clippedPoints;
+colors=clippedColors;
+
+points.length=cpIndex;
+colors.length=ccIndex;
 
     if(close.get())
     {
@@ -201,13 +216,44 @@ function send()
         colors.unshift(colors[2]);
         colors.unshift(colors[1]);
         colors.unshift(colors[0]);
+
+        points.unshift(firstY);
+        points.unshift(firstX);
+
+        colors.unshift(0);
+        colors.unshift(0);
+        colors.unshift(0);
+
+        points.unshift(firstY);
+        points.unshift(firstX);
+
+        colors.unshift(0);
+        colors.unshift(0);
+        colors.unshift(0);
+
     }
+
+
 
 
     // first point black!
     var firstX=points[0];
     var firstY=points[1];
+    
+    var lastX=points[points.length-2];
+    var lastY=points[points.length-1];
+    points.push(lastX,lastY);
+    colors.push(0,0,0);
 
+    points.push(lastX,lastY);
+    colors.push(0,0,0);
+
+
+    points.unshift(firstY);
+    points.unshift(firstX);
+    colors.unshift(0);
+    colors.unshift(0);
+    colors.unshift(0);
     points.unshift(firstY);
     points.unshift(firstX);
     colors.unshift(0);
@@ -231,8 +277,8 @@ function send()
     
     var packet=
         {
-            "points":points,
-            "colors":colors,
+            "points":points.slice(0),
+            "colors":colors.slice(0),
             "numPoints": (points.length/2),
             "speed": "15000",
             "laserId": "2"
@@ -247,9 +293,7 @@ function send()
         //     packet.numPoints,
         //     points.length/2,
         //     colors.length/3);
-
         // console.log(packet.points);
-
 
         objOut.set(null);
         objOut.set(packet);
@@ -377,7 +421,6 @@ function drawLine(arr)
         buff[i*3+1]=arr[i*2+1];
         buff[i*3+2]=0;
     }
-    
     
     var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
     

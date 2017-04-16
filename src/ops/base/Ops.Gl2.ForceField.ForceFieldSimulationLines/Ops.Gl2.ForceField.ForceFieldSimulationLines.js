@@ -5,8 +5,8 @@ var next=op.outFunction("next");
 
 var numParticles=op.inValueInt("Num Particles",100);
 
-var inReset=op.inFunction("Reset");
-var inRespawn=op.inFunction("Respawn all");
+var inReset=op.inFunctionButton("Reset");
+var inRespawn=op.inFunctionButton("Respawn all");
 var inSpeed=op.inValue("Speed",1);
 var inDamping=op.inValue("Damping");
 
@@ -30,6 +30,8 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
+var spawns=op.inArray("Spawn Positions");
+
 var size=140;
 var particles=[];
 var damping=vec3.fromValues(0.8,0.8,0.8);
@@ -41,6 +43,8 @@ var dieNear=0;
 inRespawn.onTriggered=respawnAll;
 var cgl=op.patch.cgl;
 inReset.onTriggered=reset;
+
+spawns.onChange=reset;
 
 inSize.onChange=function()
 {
@@ -112,10 +116,25 @@ var Particle=function()
 Particle.prototype.spawn=function()
 {
     this.idleFrames=0;
-    this.pos[0]=Math.random()*size-size/2;
-    this.pos[1]=Math.random()*size-size/2;
-    this.pos[2]=Math.random()*size-size/2;
     
+    if(spawns.get())
+    {
+        var spawnArr=spawns.get();
+        var num=spawnArr.length/3;
+        
+        var ind=Math.floor(num*Math.random());
+        
+        this.pos[0]=spawnArr[ind*3+0]+Math.random()*size-(size/2);
+        this.pos[1]=spawnArr[ind*3+1]+Math.random()*size-(size/2);
+        this.pos[2]=spawnArr[ind*3+2]+Math.random()*size-(size/2);
+    }
+    else
+    {
+        this.pos[0]=Math.random()*size-size/2;
+        this.pos[1]=Math.random()*size-size/2;
+        this.pos[2]=Math.random()*size-size/2;
+    }
+
     this.pos[0]+=posX.get();
     this.pos[1]+=posY.get();
     this.pos[2]+=posZ.get();
@@ -127,7 +146,11 @@ Particle.prototype.spawn=function()
         this.buff[i+2]=this.pos[2];
     }
     this.rnd=Math.random();
-    this.startTime=Date.now();
+    
+    
+    var lt=(maxLifetime.get()-minLifetime.get())*Math.random();
+    
+    this.startTime=Date.now()+(lt*1000);
 
     this.endTime=
         Date.now()+
@@ -161,6 +184,7 @@ Particle.prototype.update=function(forces)
     this.velocity[2]=0;
     // Update position
     vec3.copy(this.oldPos,this.pos);
+    if(Date.now()<this.startTime)return;
     if(Date.now()>this.endTime)
     {
         this.spawn();

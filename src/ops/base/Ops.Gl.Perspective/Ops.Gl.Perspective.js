@@ -6,7 +6,11 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var fovY=op.addInPort(new Port(op,"fov y",OP_PORT_TYPE_VALUE ));
 var zNear=op.addInPort(new Port(op,"frustum near",OP_PORT_TYPE_VALUE ));
 var zFar=op.addInPort(new Port(op,"frustum far",OP_PORT_TYPE_VALUE ));
+var autoAspect=op.inValueBool("Auto Aspect Ratio",true);
+var aspect=op.inValue("Aspect Ratio");
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+
 
 var cgl=op.patch.cgl;
 zNear.set(1);
@@ -20,11 +24,14 @@ changed();
 
 render.onTriggered=function()
 {
+    var asp=cgl.getViewPort()[2]/cgl.getViewPort()[3];
+    if(!autoAspect.get())asp=aspect.get();
+    
     cgl.pushPMatrix();
     mat4.perspective(
         cgl.pMatrix,
         fovY.get()*0.0174533, 
-        cgl.getViewPort()[2]/cgl.getViewPort()[3], 
+        asp, 
         zNear.get(), 
         zFar.get());
 

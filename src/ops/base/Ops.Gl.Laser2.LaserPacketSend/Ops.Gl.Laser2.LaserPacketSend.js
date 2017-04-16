@@ -1,7 +1,9 @@
 op.name="LaserPacketSend";
 
 var exec=op.inFunction("Exec");
+var laserId=op.inValueInt("Laser Id",0);
 var next=op.outFunction("Next");
+
 
 var outPacket=op.outObject("out packet");
 
@@ -17,7 +19,6 @@ inPacket.onChange=function()
     {
         packets[index]=inPacket.get();
         index++;
-        
     }
 };
 
@@ -28,9 +29,9 @@ exec.onTriggered=function()
             points:[],
             colors:[],
             "speed": "15000",
-            "laserId": "2"
+            "laserId": laserId.get()
         };
-    
+        
     for(var i=0;i<index;i++)
     {
         newPacket.points=newPacket.points.concat(packets[i].points);
@@ -42,6 +43,7 @@ exec.onTriggered=function()
     // console.log("newPacket.numPoints",newPacket.numPoints);
     // console.log("index",index);
 
+    outPacket.set(null);
     outPacket.set(newPacket);
 
     next.trigger();

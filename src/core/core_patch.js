@@ -489,7 +489,6 @@ CABLES.Patch.prototype.reloadOp=function(objName,cb)
             oldOp.deleted=true;
             var self=this;
 
-
             var op=this.addOp(objName,oldOp.uiAttribs);
 
             var j,k,l;
