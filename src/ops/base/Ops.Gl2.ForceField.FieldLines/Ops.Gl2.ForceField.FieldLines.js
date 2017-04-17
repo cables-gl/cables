@@ -166,6 +166,7 @@ exec.onTriggered=function()
             //         console.log(dots);
             //     }
             // }
+
             
             outNumPoints.set(dotCount);
             outPoints.set(null);
