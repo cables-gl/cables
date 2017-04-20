@@ -38,8 +38,7 @@ render.onTriggered=function()
     if(needsBuild)doRebuild();
     if(inLength.get()===0 || inStart.get()==1.0)return;
 
-
-// console.log('draw',draw);
+    // console.log('draw',draw);
 
     if(mesh && draw)
     {
@@ -62,8 +61,6 @@ render.onTriggered=function()
             Math.floor( 
                 Math.min(1,inLength.get()+inStart.get()) * (numItems)
             );
-        
-        
 
         mesh.render(cgl.getShader());
 
@@ -100,9 +97,7 @@ function linesToGeom(points,options)
         geom=new CGL.Geometry();
     }
 
-    var norms=[];
     var i=0;
-
 
     points=points||[];
 
@@ -144,7 +139,6 @@ function linesToGeom(points,options)
     var lastC=null;
     var lastD=null;
 
-
     var m=(thick.get()||0.1)/2;
     var ppl=p/numPoints;
 
@@ -180,12 +174,8 @@ function linesToGeom(points,options)
         vv[2]=vStart[2]-vEnd[2];
         
         vec3.normalize(vv,vv);
-        
-
         quat.rotationTo(q,vecX,vv);
-
         quat.rotateZ(q, q, pi2);
-
         vec3.transformQuat(vecRot,vecRotation,q);
 
         if(strip)
@@ -239,12 +229,12 @@ function linesToGeom(points,options)
 
 
 
-var xd = vecC[0]-vecA[0];
-var yd = vecC[1]-vecA[1];
-var zd = vecC[2]-vecA[2];
-var dist = 3*Math.sqrt(xd*xd + yd*yd + zd*zd);
+// var xd = vecC[0]-vecA[0];
+// var yd = vecC[1]-vecA[1];
+// var zd = vecC[2]-vecA[2];
+// var dist = 3*Math.sqrt(xd*xd + yd*yd + zd*zd);
 
-var repx=dist;
+var repx=1;
 var repy=1;
 
         // a

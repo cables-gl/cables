@@ -58,8 +58,8 @@ pSites.onChange=function()
         {
             sites[i]=(
                 {
-                  x:arr[i*2],
-                  y:arr[i*2+1]
+                    x:arr[i*2],
+                    y:arr[i*2+1]
                 });
         }
 

@@ -20,14 +20,13 @@ segments.onChange=calcLater;
 radius.onChange=calcLater;
 percent.onChange=calcLater;
 
-needsCalc=true;
+var needsCalc=true;
 // calc();
 
 render.onTriggered=doRender;
 
 function doRender()
 {
-
     if(needsCalc)calc();
     for(var i=0;i<pos.length;i++)
     {
@@ -40,7 +39,6 @@ function doRender()
 
         cgl.popMvMatrix();
     }
-
 }
 
 function calcLater()
@@ -50,13 +48,12 @@ function calcLater()
 
 function calc()
 {
-    needsCalc=false;
     pos.length=0;
 
     var i=0,degInRad=0;
     var segs=segments.get();
     if(segs<1)segs=1;
-
+    
     for (i=0; i < Math.round(segs)*percent.get(); i++)
     {
         degInRad = (360/Math.round(segs))*i*CGL.DEG2RAD;
@@ -68,5 +65,7 @@ function calc()
             ]
             );
     }
+
+    needsCalc=false;
 }
 
