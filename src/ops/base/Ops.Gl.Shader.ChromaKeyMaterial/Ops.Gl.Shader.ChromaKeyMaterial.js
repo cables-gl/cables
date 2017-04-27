@@ -6,6 +6,9 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
 op.texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 op.textureUniform=null;
 
+var inMode=op.inValueSelect("Mode",["G","R"]);
+
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
@@ -118,11 +121,18 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'   {{MODULE_COLOR}}'
 .endl()+'   col=texture2D(tex,texCoord);'
 
+.endl()+'#ifdef MODE_R'
+.endl()+'   float maxrb = max( col.g, col.b );'
+.endl()+'   float perc = min(1.0,(col.r*weightMul-maxrb)*2.0);'
+.endl()+'#endif'
+
+.endl()+'#ifdef MODE_G'
 .endl()+'   float maxrb = max( col.r, col.b );'
-.endl()+'   float perc = min(1.0,(col.g*weightMul-maxrb)*7.0);'
+.endl()+'   float perc = min(1.0,(col.g*weightMul-maxrb)*2.0);'
+.endl()+'   col.g=min(maxrb,col.g);'
+.endl()+'#endif'
 
 .endl()+'   float len=length(col);'
-.endl()+'   col.g=min(maxrb*0.9,col.g);'
 .endl()+'   col=normalize(col)*len;'
 
 .endl()+'   col.a=1.0-perc;'
@@ -149,6 +159,7 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 
 
 shader.setSource(shader_vert,shader_frag);
+shader.define('MODE_G');
 op.onLoaded=shader.compile;
 
 shader.bindTextures=function()
@@ -164,6 +175,22 @@ render.onTriggered=doRender;
 
 
 var uniTime=new CGL.Uniform(shader,'f','time',0);
+
+inMode.onChange=function()
+{
+    
+    
+    if(inMode.get()=="R")
+    {
+        shader.removeDefine('MODE_G');
+        shader.define('MODE_R');
+    }
+    if(inMode.get()=="G")
+    {
+        shader.removeDefine('MODE_R');
+        shader.define('MODE_G');
+    }
+};
 
 
 op.texture.onValueChanged=function()

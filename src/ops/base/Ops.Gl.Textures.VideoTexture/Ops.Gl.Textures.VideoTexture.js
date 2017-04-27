@@ -24,6 +24,7 @@ var outTime=op.addOutPort(new Port(op,"CurrentTime",OP_PORT_TYPE_VALUE));
 var loading=op.addOutPort(new Port(op,"Loading",OP_PORT_TYPE_VALUE));
 
 
+
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
 var intervalID=null;
@@ -32,7 +33,12 @@ speed.set(1);
 volume.set(1);
 flip.set(true);
 
-var tex=new CGL.Texture(cgl);
+var emptyTexture=CGL.Texture.getEmptyTexture(cgl);
+
+var tex=new CGL.Texture(cgl,
+{
+    filter:CGL.Texture.FILTER_LINEAR
+});
 tex.setSize(32,33);
 textureOut.set(tex);
 var timeout=null;
@@ -40,6 +46,9 @@ var timeout=null;
 rewind.onTriggered=function()
 {
     videoElement.currentTime=0;
+    textureOut.set(emptyTexture);
+    // updateTexture();
+
 };
 
 time.onValueChanged=function()
@@ -59,6 +68,8 @@ play.onValueChanged=function()
 {
     if(play.get()) 
     {
+        videoElement.currentTime=time.get() || 0;
+
         videoElement.play();
         updateTexture();
     }
@@ -82,6 +93,9 @@ muted.onValueChanged=function()
 
 function updateTexture()
 {
+    // console.log('videoElement.currentTime',videoElement.currentTime);
+
+
     var perc=(videoElement.currentTime)/videoElement.duration;
     if(!isNaN(perc)) outProgress.set(perc);
     outTime.set(videoElement.currentTime);
@@ -89,23 +103,26 @@ function updateTexture()
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);
     cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
+    textureOut.set(tex);
+
+    CGL.profileVideosPlaying++;
 
     if(play.get())
     {
         clearTimeout(timeout);
-        timeout=setTimeout(updateTexture, 1000/fps.get());
+        timeout=setTimeout( updateTexture, 1000/fps.get() );
     }
     
     if(videoElement.readyState==4) loading.set(false);
         else loading.set(false);
 }
 
-function startVideo()
+function initVideo()
 {
-    videoElement.play();
     videoElement.controls = false;
     videoElement.muted = muted.get();
     videoElement.loop = loop.get();
+    if(play.get()) videoElement.play()
     updateTexture();
 }
 
@@ -121,6 +138,8 @@ op.onMasterVolumeChanged=updateVolume;
 function loadedMetaData()
 {
     outDuration.set(videoElement.duration);
+
+
     // console.log('loaded metadata...');
     // console.log('length ',videoElement.buffered.length);
     // console.log('duration ',videoElement.duration);
@@ -137,13 +156,13 @@ function loadVideo()
     // console.log('start loading...',filename.get());
     clearTimeout(timeout);
     loading.set(true);
-    videoElement.preload = 'auto';
+    videoElement.preload = 'true';
     var url=op.patch.getFilePath(filename.get());
     videoElement.setAttribute('src',url);
     if(!addedListeners)
     {
         addedListeners=true;
-        videoElement.addEventListener("canplaythrough", startVideo, true);
+        videoElement.addEventListener("canplaythrough", initVideo, true);
         videoElement.addEventListener('loadedmetadata', loadedMetaData );
     }
 }
@@ -155,4 +174,3 @@ function reload()
 }
 
 filename.onValueChange(reload);
-
