@@ -387,6 +387,7 @@ CABLES.Patch.prototype.exec=function(e)
 
 };
 
+
 CABLES.Patch.prototype.link=function(op1,port1Name,op2,port2Name)
 {
     if(!op1 || !op2)return;
