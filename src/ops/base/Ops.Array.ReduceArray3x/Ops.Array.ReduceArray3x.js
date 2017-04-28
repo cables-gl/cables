@@ -15,7 +15,7 @@ function update()
     var theArray=arr.get();
     if(!theArray)return;
 
-    theLength=theArray.length;
+    var theLength=theArray.length;
 
     if(maxOldIndex.get()!=0)
     {

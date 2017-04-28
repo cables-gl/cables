@@ -10,6 +10,7 @@ var inLength=op.inValueSlider("Length",1);
 var calcNormals=op.inValueBool("Calculate Normals",false);
 var inStrip=op.inValueBool("Line Strip",true);
 
+
 var inPoints=op.inArray('points');
 var inNumPoints=op.inValue("Num Points",0);
 
@@ -37,8 +38,7 @@ render.onTriggered=function()
     if(needsBuild)doRebuild();
     if(inLength.get()===0 || inStart.get()==1.0)return;
 
-
-// console.log('draw',draw);
+    // console.log('draw',draw);
 
     if(mesh && draw)
     {
@@ -61,8 +61,6 @@ render.onTriggered=function()
             Math.floor( 
                 Math.min(1,inLength.get()+inStart.get()) * (numItems)
             );
-        
-        
 
         mesh.render(cgl.getShader());
 
@@ -84,6 +82,8 @@ var vStart=vec3.create();
 var vEnd=vec3.create();
 var q=quat.create();
 var vecRotation=vec3.create();
+//vec3.set(vecRotation, 1,1,0);
+//var vecX=[0,0,0];
 vec3.set(vecRotation, 1,0,0);
 var vecX=[1,0,0];
 var vv=vec3.create();
@@ -97,9 +97,7 @@ function linesToGeom(points,options)
         geom=new CGL.Geometry();
     }
 
-    var norms=[];
     var i=0;
-
 
     points=points||[];
 
@@ -122,9 +120,8 @@ function linesToGeom(points,options)
         draw=false;
         return;
     }
-        
-        // console.log(numPoints);
 
+    // console.log(numPoints);
 
     var count=0;
     var lastPA=null;
@@ -142,9 +139,9 @@ function linesToGeom(points,options)
     var lastC=null;
     var lastD=null;
 
-
     var m=(thick.get()||0.1)/2;
     var ppl=p/numPoints;
+
     var pi2=Math.PI/4;
     
     var strip=inStrip.get();
@@ -178,11 +175,8 @@ function linesToGeom(points,options)
         vv[2]=vStart[2]-vEnd[2];
         
         vec3.normalize(vv,vv);
-
         quat.rotationTo(q,vecX,vv);
-
         quat.rotateZ(q, q, pi2);
-
         vec3.transformQuat(vecRot,vecRotation,q);
 
         if(strip)
@@ -228,12 +222,28 @@ function linesToGeom(points,options)
             points[p+4]+vecRot[1]*-m,
             points[p+5]+vecRot[2]*-m);
 
+
+//    A-----C
+//    |     |
+//    B-----D
+//
+
+
+
+// var xd = vecC[0]-vecA[0];
+// var yd = vecC[1]-vecA[1];
+// var zd = vecC[2]-vecA[2];
+// var dist = 3*Math.sqrt(xd*xd + yd*yd + zd*zd);
+
+var repx=1;
+var repy=1;
+
         // a
         geom.vertices[index++]=vecA[0];
         geom.vertices[index++]=vecA[1];
         geom.vertices[index++]=vecA[2];
 
-        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=repx;
         geom.texCoords[indexTc++]=0;
 
         // b
@@ -241,15 +251,15 @@ function linesToGeom(points,options)
         geom.vertices[index++]=vecB[1];
         geom.vertices[index++]=vecB[2];
 
-        geom.texCoords[indexTc++]=ppl;
-        geom.texCoords[indexTc++]=0;
+        geom.texCoords[indexTc++]=repx;
+        geom.texCoords[indexTc++]=repy;
 
         // c
         geom.vertices[index++]=vecC[0];
         geom.vertices[index++]=vecC[1];
         geom.vertices[index++]=vecC[2];
 
-        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=0;
         geom.texCoords[indexTc++]=0;
 
         // d
@@ -257,15 +267,15 @@ function linesToGeom(points,options)
         geom.vertices[index++]=vecD[1];
         geom.vertices[index++]=vecD[2];
 
-        geom.texCoords[indexTc++]=ppl;
         geom.texCoords[indexTc++]=0;
+        geom.texCoords[indexTc++]=repy;
 
         // c
         geom.vertices[index++]=vecC[0];
         geom.vertices[index++]=vecC[1];
         geom.vertices[index++]=vecC[2];
 
-        geom.texCoords[indexTc++]=ppl;
+        geom.texCoords[indexTc++]=0;
         geom.texCoords[indexTc++]=0;
 
         // b
@@ -273,8 +283,8 @@ function linesToGeom(points,options)
         geom.vertices[index++]=vecB[1];
         geom.vertices[index++]=vecB[2];
 
-        geom.texCoords[indexTc++]=ppl;
-        geom.texCoords[indexTc++]=0;
+        geom.texCoords[indexTc++]=repx;
+        geom.texCoords[indexTc++]=repy;
 
         if(!lastC)
         {
@@ -303,8 +313,6 @@ function linesToGeom(points,options)
     // geom.vertices=geom.vertices;
     // geom.texCoords=tc;
     // geom.verticesIndices=indices;
-
-
 }
 
 function doRebuild()

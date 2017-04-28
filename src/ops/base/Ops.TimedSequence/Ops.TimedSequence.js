@@ -1,4 +1,3 @@
-CABLES.Op.apply(this, arguments);
 var self=this;
 
 this.name='TimedSequence';

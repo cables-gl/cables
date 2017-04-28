@@ -418,8 +418,6 @@ CGL.Mesh.prototype.render=function(shader)
     if(!CGL.MESH.lastMesh || !CGL.MESH.lastShader) needsBind=true;
     if(needsBind) this._preBind(shader);
 
-
-
     shader.bind();
 
     if(needsBind) this._bind(shader);

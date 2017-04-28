@@ -12,23 +12,23 @@ var data={"ports":[],"portsOut":[]};
 
 op.patchId.onChange=function()
 {
-    console.log("subpatch changed...");
+    // console.log("subpatch changed...");
     // clean up old subpatch if empty
     var oldPatchOps=op.patch.getSubPatchOps(oldPatchId);
     
-    console.log("subpatch has childs ",oldPatchOps.length);
+    // console.log("subpatch has childs ",oldPatchOps.length);
     
     if(oldPatchOps.length==2)
     {
         for(var i=0;i<oldPatchOps.length;i++)
         {
-            console.log("delete ",oldPatchOps[i]);
+            // console.log("delete ",oldPatchOps[i]);
             op.patch.deleteOp(oldPatchOps[i].id);
         }
     }
     else
     {
-        console.log("old subpatch has ops.,...");
+        // console.log("old subpatch has ops.,...");
     }
     
 
@@ -47,6 +47,7 @@ op.onLoadedValueSet=function()
     data=JSON.parse(dataStr.get());
     setupPorts();
 
+    
 };
 
 
@@ -72,12 +73,12 @@ dataStr.onChange=function()
     if(!dataStr.get())return;
     try
     {
-        console.log('parse subpatch data');
+        // console.log('parse subpatch data');
         loadData();
     }
     catch(e)
     {
-        op.log('cannot load subpatch data...');
+        // op.log('cannot load subpatch data...');
         console.log(e);
     }
 };
@@ -121,16 +122,16 @@ function setupPorts()
     {
         if(!op.getPortByName(ports[i].name))
         {
-            console.log("ports[i].name",ports[i].name);
+            // console.log("ports[i].name",ports[i].name);
 
             var newPort=op.addInPort(new Port(op,ports[i].name,ports[i].type));
             var patchInputOp=getSubPatchInputOp();
 
-            console.log(patchInputOp);
+            // console.log(patchInputOp);
 
             var newPortInPatch=patchInputOp.addOutPort(new Port(patchInputOp,ports[i].name,ports[i].type));
 
-console.log('newPortInPatch',newPortInPatch);
+// console.log('newPortInPatch',newPortInPatch);
 
 
             newPort.ignoreValueSerialize=true;
@@ -242,7 +243,7 @@ function getSubPatchOutputOp()
 
     if(!patchOutputOP)
     {
-        console.log("Creating output for ",op.patchId.get());
+        // console.log("Creating output for ",op.patchId.get());
         op.patch.addOp('Ops.Ui.PatchOutput',{'subPatch':op.patchId.get()} );
         patchOutputOP=op.patch.getSubPatchOp(op.patchId.get(),'Ops.Ui.PatchOutput');
 

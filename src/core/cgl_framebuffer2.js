@@ -21,7 +21,13 @@ CGL.Framebuffer2=function(cgl,w,h,options)
             "isFloatingPointTexture":false
         };
 
-    if(!this._options.hasOwnProperty("multisampling"))this._options.multisampling=true;
+    if(!this._options.hasOwnProperty("depth"))this._options.depth=true;
+
+    if(!this._options.hasOwnProperty("multisampling"))
+    {
+        this._options.multisampling=true;
+        this._options.multisamplingSamples=2;
+    }
 
 
     this._texture=new CGL.Texture(cgl,
@@ -78,64 +84,88 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
 
     CGL.profileFrameBuffercreate++;
 
-
     if(this._frameBuffer)
     {
         this._cgl.gl.deleteRenderbuffer(this._colorRenderbuffer);
         this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
         this._cgl.gl.deleteFramebuffer(this._frameBuffer);
         this._cgl.gl.deleteFramebuffer(this._colorBuffer);
-
     }
-
-
-
 
     this._frameBuffer=this._cgl.gl.createFramebuffer();
     this._colorBuffer=this._cgl.gl.createFramebuffer();
 
-    this._texture.setSize(this._width,this._height);
-    this._textureDepth.setSize(this._width,this._height);
+    var depth=this._options.depth;
+    if(depth) this._texture.setSize(this._width,this._height);
+    if(depth) this._textureDepth.setSize(this._width,this._height);
 
 
     this._colorRenderbuffer = this._cgl.gl.createRenderbuffer();
-    this._depthRenderbuffer = this._cgl.gl.createRenderbuffer();
+    if(depth) this._depthRenderbuffer = this._cgl.gl.createRenderbuffer();
 
-//color renderbuffer
-var ext = this._cgl.gl.getExtension('EXT_color_buffer_float');
+    //color renderbuffer
+    var ext = this._cgl.gl.getExtension('EXT_color_buffer_float');
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
 
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._colorRenderbuffer);
 
-    if(this._options.isFloatingPointTexture) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA32F, this._width, this._height);
-        else if(this._options.multisampling) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4, this._cgl.gl.RGBA8, this._width, this._height);
-            else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA8, this._width, this._height);
+
+
+    if(this._options.isFloatingPointTexture)
+    {
+        if(this._options.multisampling)
+            this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
+                else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA32F, this._width, this._height);
+    }
+    else if(this._options.multisampling)
+    {
+        this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA8, this._width, this._height);
+    }
+    else
+    {
+        this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA8, this._width, this._height);
+    }
 
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffer);
 
+    // depth renderbuffer
 
-    //depth renderbuffer
+    if(depth)
+    {
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
+        if(this._options.isFloatingPointTexture)
+        {
+            if(this._options.multisampling)
+                this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples,this._cgl.gl.DEPTH_COMPONENT32F, this._width,this._height);
+                    else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.DEPTH_COMPONENT32F, this._width, this._height);
+        }
+        else if(this._options.multisampling)
+        {
+            this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples,this._cgl.gl.DEPTH_COMPONENT32F, this._width,this._height);
+        }
+        else
+        {
+            this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.DEPTH_COMPONENT32F, this._width, this._height);
+        }
 
-    this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
-    if(this._options.isFloatingPointTexture) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.DEPTH_COMPONENT32F, this._width, this._height);
-        else if(this._options.multisampling) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, 4,this._cgl.gl.DEPTH_COMPONENT32F, this._width,this._height);
-            else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.DEPTH_COMPONENT16, this._width, this._height);
+        this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
 
-
-    this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
+    }
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._colorBuffer);
     this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._texture.tex, 0);
 
-    this._cgl.gl.framebufferTexture2D(
-        this._cgl.gl.FRAMEBUFFER,
-        this._cgl.gl.DEPTH_ATTACHMENT,
-        this._cgl.gl.TEXTURE_2D,
-        this._textureDepth.tex,
-        0 );
-
+    if(depth)
+    {
+        this._cgl.gl.framebufferTexture2D(
+            this._cgl.gl.FRAMEBUFFER,
+            this._cgl.gl.DEPTH_ATTACHMENT,
+            this._cgl.gl.TEXTURE_2D,
+            this._textureDepth.tex,
+            0 );
+    }
 
 
 

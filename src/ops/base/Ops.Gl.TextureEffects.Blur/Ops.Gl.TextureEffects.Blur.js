@@ -3,6 +3,10 @@ var cgl=op.patch.cgl;
 op.name='Blur';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var fast=op.inValueBool("Fast",true);
+
+
+
 
 var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE));
 amount.set(10);
@@ -10,7 +14,14 @@ amount.set(10);
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
+shader.define("FASTBLUR");
 
+fast.onChange=function()
+{
+    if(fast.get()) shader.define("FASTBLUR");
+        else shader.removeDefine("FASTBLUR");
+    
+};
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -58,7 +69,13 @@ var srcFrag=''
     // .endl()+'    /* randomize the lookup values to hide the fixed number of samples */'
     .endl()+'    float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);'
     
+    
+    .endl()+'    #ifndef FASTBLUR'
     .endl()+'    const float range=20.0;'
+    .endl()+'    #endif'
+    .endl()+'    #ifdef FASTBLUR'
+    .endl()+'    const float range=5.0;'
+    .endl()+'    #endif'
     
     .endl()+'    for (float t = -range; t <= range; t++) {'
     .endl()+'        float percent = (t + offset - 0.5) / range;'
@@ -110,6 +127,7 @@ mask.onValueChanged=function()
     if(mask.get() && mask.get().tex) shader.define('HAS_MASK');
         else shader.removeDefine('HAS_MASK');
 };
+
 
 
 render.onTriggered=function()

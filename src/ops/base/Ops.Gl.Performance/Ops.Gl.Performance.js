@@ -15,7 +15,7 @@ var childsTime=0;
 var avgMsChilds=0;
 var queue=[];
 var queueChilds=[];
-var numBars=256;
+var numBars=128;
 var avgMs=0;
 var selfTime=0;
 var canvas=null;
@@ -78,7 +78,7 @@ function updateCanvas()
     var k=0;
     for(k=numBars;k>=0;k--)
     {
-        if(queue[k]>30)ctx.fillStyle="#885555";
+        if(queue[k]>30)ctx.fillStyle="#ff5555";
         ctx.fillRect(numBars-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
         if(queue[k]>30)ctx.fillStyle="#555555";
     }
@@ -86,9 +86,9 @@ function updateCanvas()
     ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
-        if(queue[k]>30)ctx.fillStyle="#ccaaaa";
+        if(queueChilds[k]>30)ctx.fillStyle="#ff9900";
         ctx.fillRect(numBars-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
-        if(queue[k]>30)ctx.fillStyle="#aaaaaa";
+        if(queueChilds[k]>30)ctx.fillStyle="#aaaaaa";
     }
 
 }
@@ -123,7 +123,7 @@ function updateText()
     if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
     if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
     if(CGL.profileTextureDelete>0)warn+='Texture delete! ';
-    
+
     if(CGL.profileNonTypedAttrib>0)warn+='Not-Typed Buffer Attrib! '+CGL.profileNonTypedAttribNames;
     
     //     CGL.profileNonTypedAttrib=0;
@@ -166,7 +166,8 @@ function updateText()
         
         element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+
         ' uniforms: '+Math.ceil(CGL.profileUniformCount/fps)+
-        ' mesh.setGeom: '+CGL.profileMeshSetGeom;
+        ' mesh.setGeom: '+CGL.profileMeshSetGeom+
+        ' videos: '+CGL.profileVideosPlaying;
         
     }
 
@@ -180,6 +181,7 @@ function updateText()
     CGL.profileEffectBuffercreate=0;
     CGL.profileTextureDelete=0;
     CGL.profileMeshSetGeom=0;
+    CGL.profileVideosPlaying=0;
 
     CGL.profileNonTypedAttrib=0;
     CGL.profileNonTypedAttribNames="";

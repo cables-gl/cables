@@ -60,9 +60,10 @@ render.onTriggered=function()
 
 function rebuild()
 {
+    
     var currentViewPort=cgl.getViewPort().slice();
     if(currentViewPort[2]==w && currentViewPort[3]==h)return;
-
+    
     var xx=0,xy=0;
 
     w=currentViewPort[2];

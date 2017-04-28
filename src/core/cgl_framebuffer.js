@@ -11,9 +11,10 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     var height = h || 512;
 
     options=options ||
-        {
-            "isFloatingPointTexture":false
-        };
+    {
+        "isFloatingPointTexture":false
+    };
+
 
     var texture=new CGL.Texture(cgl,
         {

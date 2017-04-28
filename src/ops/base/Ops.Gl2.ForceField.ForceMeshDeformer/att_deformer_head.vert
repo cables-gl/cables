@@ -1,25 +1,8 @@
 #define NUM_FORCES 30
-
-// in vec3 rndpos;
-// out vec3 col;
-
-// uniform vec3 MOD_emitterPos;
-
 uniform bool MOD_smooth;
 
+uniform mat4 MOD_modelMatrix;
 
-// uniform float MOD_time;
-// uniform float MOD_sizeX;
-// uniform float MOD_sizeY;
-// uniform float MOD_sizeZ;
-// uniform float MOD_timeDiff;
-// uniform float MOD_lifeTime;
-// uniform float MOD_fadeinout;
-
-// attribute float timeOffset;
-
-// in vec3 life;
-// out vec3 outLife;
 
 struct force
 {

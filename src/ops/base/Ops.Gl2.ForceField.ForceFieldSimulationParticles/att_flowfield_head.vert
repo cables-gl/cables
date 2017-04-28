@@ -36,6 +36,8 @@ struct force
 
 uniform force forces[NUM_FORCES];
 
+uniform vec3 MOD_spawnPositions[32];
+uniform float MOD_numSpawns;
 
 
 

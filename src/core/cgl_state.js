@@ -295,7 +295,6 @@ CGL.State=function()
         cgl.gl.enable(cgl.gl.BLEND);
         cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
-
         cgl.beginFrame();
     };
 

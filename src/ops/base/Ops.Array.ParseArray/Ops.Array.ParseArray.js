@@ -20,6 +20,9 @@ parse();
 
 function parse()
 {
+    if(!text.get())return;
+    
+    // console.log("parse array");
     var r=text.get().split(separator.get());
     len.set(r.length);
 
