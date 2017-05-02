@@ -29,4 +29,6 @@ exec.onTriggered=function()
     if(divisor!=divisor)val=0;
     result.set(val);
     
+    next.trigger();
+    
 };

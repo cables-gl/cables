@@ -20,7 +20,7 @@ When set the playback is started
 
 ### Start Time [Number]
 
-The time in seconds when the sound should begin to play (once `Start / Stop` has been set to `true`). A time of `0` means *play now*, 
+The time in seconds when the sound should begin to play (once `Start / Stop` has been set to `true`). A time of `0` means *play now*, `3` means at 3 seconds of the web audio time. 
 
 ### Stop Time [Number]
 

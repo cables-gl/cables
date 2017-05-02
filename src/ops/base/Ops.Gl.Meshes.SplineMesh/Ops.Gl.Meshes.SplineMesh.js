@@ -86,7 +86,7 @@ var vecRotation=vec3.create();
 //var vecX=[0,0,0];
 vec3.set(vecRotation, 1,0,0);
 var vecX=[1,0,0];
-
+var vv=vec3.create();
 
 var index=0;
 
@@ -148,6 +148,7 @@ function linesToGeom(points,options)
 
     var it=3;
     if(!strip)it=6;
+    // it*=2;
 
     for(var p=0;p<numPoints;p+=it)
     {
@@ -169,6 +170,8 @@ function linesToGeom(points,options)
         // vec3.normalize(vStart,vStart);
 
         var vv=vec3.create();
+        
+        
         vv[0]=vStart[0]-vEnd[0];
         vv[1]=vStart[1]-vEnd[1];
         vv[2]=vStart[2]-vEnd[2];
@@ -293,8 +296,15 @@ var repy=1;
 
         if(strip)
         {
-            vec3.copy(lastC,vecC);
-            vec3.copy(lastD,vecD);
+            lastC[0]=vecC[0];
+            lastC[1]=vecC[1];
+            lastC[2]=vecC[2];
+
+            lastD[0]=vecD[0];
+            lastD[1]=vecD[1];
+            lastD[2]=vecD[2];
+            // vec3.copy(lastC,vecC);
+            // vec3.copy(lastD,vecD);
         }
     }
 
