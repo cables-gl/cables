@@ -5,6 +5,7 @@ var CGL=CGL || {};
 CGL.profileShaderBinds=0;
 CGL.profileUniformCount=0;
 CGL.profileShaderCompiles=0;
+CGL.profileVideosPlaying=0;
 
 CGL.SHADERVAR_VERTEX_POSITION='vPosition';
 CGL.SHADERVAR_VERTEX_NUMBER='attrVertIndex';
@@ -56,7 +57,6 @@ CGL.Shader=function(_cgl,_name)
         this.srcVert=srcVert;
         this.srcFrag=srcFrag;
     };
-
 
     this.enableExtension=function(name)
     {
@@ -366,6 +366,8 @@ CGL.Shader=function(_cgl,_name)
             cgl.gl.useProgram(this._program);
             cgl.currentProgram=this._program;
         }
+
+        // console.log("Shaderbind");
 
         for(i=0;i<uniforms.length;i++)
         {

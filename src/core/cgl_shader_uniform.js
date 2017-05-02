@@ -102,6 +102,7 @@ CGL.Uniform.prototype.updateValueF=function()
 {
     if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate=false;
+
     this._shader.getCgl().gl.uniform1f(this._loc, this._value);
     CGL.profileUniformCount++;
 };
@@ -254,6 +255,8 @@ CGL.Uniform.prototype.updateValueT=function()
         if(this._loc==-1) console.log('texture this._loc unknown!!');
     }
     CGL.profileUniformCount++;
+
+
     this._shader.getCgl().gl.uniform1i(this._loc, this._value);
     this.needsUpdate=false;
 };

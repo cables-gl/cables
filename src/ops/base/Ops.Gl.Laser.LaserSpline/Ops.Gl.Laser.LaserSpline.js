@@ -63,7 +63,7 @@ this.render.onTriggered=function()
     if(!cgl.frameStore.laserPoints)cgl.frameStore.laserPoints=[];
     var shader=cgl.getShader();
     self.trigger.trigger();
-    
+
     if(!shader)return;
     bufferData();
 
@@ -82,14 +82,14 @@ this.render.onTriggered=function()
         vec3.set(v,x,y,0);
         return v;
     }
-    
+
 
 
     var minX=9999999;
     var maxX=-9999999;
     var minY=9999999;
     var maxY=-9999999;
-    
+
 
     var lastR=0;
     var lastG=0;
@@ -111,17 +111,17 @@ this.render.onTriggered=function()
     {
         var vec=[0,0,0];
         vec3.set(vec, cgl.frameStore.laserPoints[i].x, cgl.frameStore.laserPoints[i].y, cgl.frameStore.laserPoints[i].z);
-        
+
         cgl.pushMvMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
         self.triggerPoints.trigger();
         cgl.popMvMatrix();
 
         var point=[
-            cgl.frameStore.laserPoints[i].x, 
-            cgl.frameStore.laserPoints[i].y, 
+            cgl.frameStore.laserPoints[i].x,
+            cgl.frameStore.laserPoints[i].y,
             cgl.frameStore.laserPoints[i].z];
-        
+
         var vv=project(point,w.get(),h.get(),fov.get(),0.01);//viewWidth, viewHeight, fov, viewDistance)
 
         for(var ni=0;ni<Math.abs(cgl.frameStore.laserPoints[i].num);ni++)
@@ -130,7 +130,7 @@ this.render.onTriggered=function()
             var y=Math.round(-1*vv[1]*coordmul.get());
 
             var clamped=false;
-            if(x>coordClamp.get()) 
+            if(x>coordClamp.get())
             {
                 clamped=true;
                 x=coordClamp.get();
@@ -140,7 +140,7 @@ this.render.onTriggered=function()
                 clamped=true;
                 y=coordClamp.get();
             }
-            if(x<0-coordClamp.get()) 
+            if(x<0-coordClamp.get())
             {
                 clamped=true;
                 x=0-coordClamp.get();
@@ -150,11 +150,11 @@ this.render.onTriggered=function()
                 clamped=true;
                 y=0-coordClamp.get();
             }
-            
-    
+
+
             if(addBlack)
             {
-                
+
                 for(var nn=0;nn<2;nn++)
                 {
                     laserObj[ind*stride+0] = x;
@@ -165,13 +165,13 @@ this.render.onTriggered=function()
                     laserObj[ind*stride+5] = 0;
                     ind++;
                 }
-    
+
                 addBlack=false;
             }
 
             minX=Math.min(x,minX);
             maxX=Math.max(x,maxX);
-            
+
             minY=Math.min(y,minY);
             maxY=Math.max(y,maxY);
 
@@ -185,14 +185,14 @@ this.render.onTriggered=function()
                 lastR=cgl.frameStore.laserPoints[i].colR;
             }
             else cgl.frameStore.laserPoints[i].colR=lastR;
-            
+
             if(cgl.frameStore.laserPoints[i].hasOwnProperty('colG'))
             {
                 cgl.frameStore.laserPoints[i].colG*=colorMul.get();
                 lastG=cgl.frameStore.laserPoints[i].colG;
             }
             else cgl.frameStore.laserPoints[i].colG=lastG;
-            
+
             if(cgl.frameStore.laserPoints[i].hasOwnProperty('colB'))
             {
                 cgl.frameStore.laserPoints[i].colB*=colorMul.get();
@@ -205,7 +205,7 @@ this.render.onTriggered=function()
             laserObj[ind*stride+4] = cgl.frameStore.laserPoints[i].colG*255;//parseInt((cgl.frameStore.laserPoints[i].colG || lastG)*255*colorMul.get(),10);
             laserObj[ind*stride+5] = cgl.frameStore.laserPoints[i].colB*255;//parseInt((cgl.frameStore.laserPoints[i].colB || lastB)*255*colorMul.get(),10);
 
-            
+
             if(!showR.get()) laserObj[ind*stride+3]=0;
             if(!showG.get()) laserObj[ind*stride+4]=0;
             if(!showB.get()) laserObj[ind*stride+5]=0;
@@ -275,13 +275,13 @@ function bufferData()
 
         if(cgl.frameStore.laserPoints[i].hasOwnProperty('colR'))
             colR=cgl.frameStore.laserPoints[i].colR;
-        
+
         if(cgl.frameStore.laserPoints[i].hasOwnProperty('colG'))
             colG=cgl.frameStore.laserPoints[i].colG;
-        
+
         if(cgl.frameStore.laserPoints[i].hasOwnProperty('colB'))
             colB=cgl.frameStore.laserPoints[i].colB;
-        
+
         if(addBlack)
         {
             addBlack=false;
@@ -295,30 +295,30 @@ function bufferData()
             verts.push( cgl.frameStore.laserPoints[i].y );
             verts.push( cgl.frameStore.laserPoints[i].z );
 
-            
+
             indices[index]=index;
             index++;
         }
-        
-        
+
+
         vertsColors.push(colR);
         vertsColors.push(colG);
         vertsColors.push(colB);
         vertsColors.push(1);
-        
+
         if(cgl.frameStore.laserPoints[i].hasOwnProperty('black'))
         {
             addBlack=true;
         }
 
-    
+
         indices[index]=index;
         index++;
     }
 
     cgl.frameStore.SplinePoints=verts;
 
-    
+
 
     geom.vertices=verts;
     geom.vertexColors=vertsColors;

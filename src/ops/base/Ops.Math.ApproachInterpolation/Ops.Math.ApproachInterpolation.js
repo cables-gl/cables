@@ -7,23 +7,19 @@ var val=0;
 var goal=0;
 var divisor=5;
 
-
 var inDivisor=op.inValue("Divisor",divisor);
 var result=op.outValue("Result",0);
 var next=op.outFunction("Next");
-
 
 inVal.onChange=function()
 {
     goal=inVal.get();
 };
 
-
 inDivisor.onChange=function()
 {
     divisor=inDivisor.get();
 };
-
 
 exec.onTriggered=function()
 {

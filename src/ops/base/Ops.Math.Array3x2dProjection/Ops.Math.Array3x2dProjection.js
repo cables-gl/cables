@@ -7,6 +7,9 @@ var fov=this.addInPort(new Port(this,"fov",OP_PORT_TYPE_VALUE));
 var w=this.addInPort(new Port(this,"w",OP_PORT_TYPE_VALUE));
 var h=this.addInPort(new Port(this,"h",OP_PORT_TYPE_VALUE));
 
+var px=this.addInPort(new Port(this,"Pos X",OP_PORT_TYPE_VALUE));
+var py=this.addInPort(new Port(this,"Pos Y",OP_PORT_TYPE_VALUE));
+
 var coordmul=this.addInPort(new Port(this,"mul",OP_PORT_TYPE_VALUE));
 // var coordClamp=this.addInPort(new Port(this,"clamp",OP_PORT_TYPE_VALUE));
 
@@ -52,7 +55,7 @@ function proj(p)
     
     // mat4.identity(m);
     mat4.multiply(m,cgl.vMatrix,cgl.mvMatrix);
-    vec3.transformMat4(pos, [0,0,0], m);
+    vec3.transformMat4(pos, [px.get(),py.get(),0], m);
     vec3.add(pos,pos,p);
 
  

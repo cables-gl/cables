@@ -51,7 +51,6 @@ CGL.State=function()
 
         if(!this.patch.config.canvas) this.patch.config.canvas={};
 
-
         if(!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer=this.patch.config.canvas.preserveDrawingBuffer;
         if(!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha=this.patch.config.canvas.premultipliedAlpha;
         if(!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha=this.patch.config.canvas.alpha;
