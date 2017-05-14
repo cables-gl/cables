@@ -481,6 +481,7 @@ CABLES.Patch.prototype.loadLib=function(which)
 CABLES.Patch.prototype.reloadOp=function(objName,cb)
 {
     var count=0;
+    var ops=[];
     for(var i in this.ops)
     {
         if(this.ops[i].objName==objName)
@@ -491,6 +492,7 @@ CABLES.Patch.prototype.reloadOp=function(objName,cb)
             var self=this;
 
             var op=this.addOp(objName,oldOp.uiAttribs);
+            ops.push(op);
 
             var j,k,l;
             for(j in oldOp.portsIn)
@@ -540,7 +542,7 @@ CABLES.Patch.prototype.reloadOp=function(objName,cb)
             this.deleteOp(oldOp.id);
         }
     }
-    cb(count);
+    cb(count,ops);
 
 };
 

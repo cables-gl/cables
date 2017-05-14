@@ -10,16 +10,28 @@ CABLES.PACO_OP_CREATE=6;
 CABLES.PACO_OP_ENABLE=7;
 CABLES.PACO_OP_DISABLE=8;
 
-CABLES.PatchConnectionReceiver=function(patch,options)
+CABLES.PatchConnectionReceiver=function(patch,options,connector)
 {
     this._patch=patch;
-    var bc = new BroadcastChannel('test_channel');
-    bc.onmessage = this._receive.bind(this);//function (ev) { console.log(ev); }
+
+    if(connector)
+    {
+        this.connector=connector;
+    }
+    else
+    {
+        this.connector=new CABLES.PatchConnectorBroadcastChannel();
+    }
+    this.connector.receive(this);
 }
 
 CABLES.PatchConnectionReceiver.prototype._receive=function(ev)
 {
-    var data=JSON.parse(ev.data);
+    var data={};
+    if(ev.event)data=ev;
+    else data=JSON.parse(ev.data);
+
+    console.log(data);
 
     if(data.event==CABLES.PACO_OP_CREATE)
     {
@@ -89,13 +101,106 @@ CABLES.PatchConnectionReceiver.prototype._receive=function(ev)
 
 CABLES.PatchConnectionSender=function(patch,options)
 {
-    this.bc = new BroadcastChannel('test_channel');
+    this.connectors=[];
+    this.connectors.push(new CABLES.PatchConnectorBroadcastChannel());
+    
+
 }
 
 CABLES.PatchConnectionSender.prototype.send=function(event,vars)
+{
+    for(var i=0;i<this.connectors.length;i++)
+    {
+        this.connectors[i].send(event,vars);
+    }
+
+}
+
+// -------------
+
+CABLES.PatchConnectorBroadcastChannel=function()
+{
+    this.bc = new BroadcastChannel('test_channel');
+}
+
+CABLES.PatchConnectorBroadcastChannel.prototype.receive=function(paco)
+{
+    console.log('init');
+    this.bc.onmessage = paco._receive.bind(paco);
+}
+
+CABLES.PatchConnectorBroadcastChannel.prototype.send=function(event,vars)
 {
     var data={};
     data.event=event;
     data.vars=vars;
     this.bc.postMessage(JSON.stringify(data));
+    console.log(data);
+
+};
+
+// -------------
+
+CABLES.PatchConnectorSocketIO=function()
+{
+
+    this._socket = io("localhost:5712");
+    console.log("socket io paco...");
+    this._socket.emit('channel', { name: "hund" });
+
+    this._socket.on("connect",function()
+    {
+        console.log("CONNECTED");
+        // connection.set(socket);
+        // connected.set(true);
+    });
+
+    this._socket.on("reconnect_error",function()
+    {
+        console.log("reconnect_error");
+        // connected.set(false);
+    });
+
+    this._socket.on("connect_error",function()
+    {
+        console.log("connect_error");
+        // connected.set(false);
+    });
+
+    this._socket.on("error",function()
+    {
+        console.log("socket error");
+        // connected.set(false);
+    });
+
+
 }
+
+CABLES.PatchConnectorSocketIO.prototype.receive=function(paco)
+{
+    this._socket.on("event",function( r )
+    {
+            console.log('socket io receive',r);
+            paco._receive(r.data);
+
+    });
+
+    // console.log('init');
+
+}
+
+CABLES.PatchConnectorSocketIO.prototype.send=function(event,vars)
+{
+    console.log('send socketio');
+    var data={};
+    data.event=event;
+    data.vars=vars;
+
+    this._socket.emit("event",
+        {
+            "msg":"paco event",
+            "event":event,
+            "data":data
+        });
+
+};

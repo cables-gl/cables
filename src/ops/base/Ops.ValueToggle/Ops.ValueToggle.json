@@ -1,0 +1,1 @@
+{"layout":{"portsIn":[{"type":"0","name":"Value 0"},{"type":"0","name":"Value 1"},{"type":"0","name":"Use Value 1"}],"portsOut":[{"type":"0","name":"Out Value"}],"name":"Ops.ValueToggle"}}
