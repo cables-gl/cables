@@ -30,8 +30,9 @@ radius.onValueChanged=function(){ mesh=null; };
 
 render.onTriggered=function()
 {
-    if(mesh!==null) mesh.render(cgl.getShader());
-    else updateMesh();
+    if(!mesh) updateMesh();
+
+    mesh.render(cgl.getShader());
     
     trigger.trigger();
 };
@@ -199,4 +200,5 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
     geomOut.set(geom);
 
     mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
+    
 }
