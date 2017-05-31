@@ -18,11 +18,7 @@ var oldAudioIns = [];
 var createValueChangedFunction = function( port ) {
     // value changed function
     return function() {
-        op.log("In Port " + port + " changed");
-        op.log("audio ins: ");
-        console.log(audioIns[port]);
         if(audioIns[port].get()){
-            op.log("Linked");
             oldAudioIns[port] = audioIns[port].get();
             try{
                 audioIns[port].get().connect(gain);
