@@ -1,0 +1,1 @@
+{"layout":{"portsIn":[{"type":"2","name":"Event Input"},{"type":"0","name":"note"},{"type":"1","name":"learn"}],"portsOut":[{"type":"2","name":"Event Output"},{"type":"0","name":"pressed"}],"name":"Ops.Devices.Midi.MidiToggle"}}

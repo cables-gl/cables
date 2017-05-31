@@ -1,1 +1,1 @@
-{"summary":"Draw a line between two points"}
+{"summary":"Draw a line between two points","layout":{"portsIn":[{"type":"1","name":"Render"},{"type":"0","name":"X 1"},{"type":"0","name":"Y 1"},{"type":"0","name":"Z 1"},{"type":"0","name":"X 2"},{"type":"0","name":"Y 2"},{"type":"0","name":"Z 2"}],"portsOut":[{"type":"1","name":"Next"}],"name":"Ops.Gl.Meshes.Line"}}

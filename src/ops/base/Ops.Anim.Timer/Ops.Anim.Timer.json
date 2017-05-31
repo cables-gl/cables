@@ -1,1 +1,1 @@
-{"summary":"A timer that can be started, paused and reset by triggering"}
+{"summary":"A timer that can be started, paused and reset by triggering","layout":{"portsIn":[{"type":"0","name":"Play"},{"type":"1","name":"Reset"},{"type":"0","name":"Speed"}],"portsOut":[{"type":"0","name":"Time"}],"name":"Ops.Anim.Timer"}}
