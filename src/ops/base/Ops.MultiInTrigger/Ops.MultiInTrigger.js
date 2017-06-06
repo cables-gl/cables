@@ -18,7 +18,5 @@ for(var i=0; i<N_PORTS; i++) {
     inPorts.push(port);
 }
 
-op.log("inPorts", inPorts);
-
 // outpus
 var outTriggerPort = op.outFunction("Trigger");
