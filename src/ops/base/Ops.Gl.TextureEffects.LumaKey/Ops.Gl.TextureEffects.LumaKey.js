@@ -4,6 +4,11 @@ var cgl=op.patch.cgl;
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var inInvert=op.inValueBool("Invert");
+var inBlackWhite=op.inValueBool("Black White");
+
+
+
 var threshold=op.addInPort(new Port(op,"amthresholdount",OP_PORT_TYPE_VALUE,{display:'range'}));
 threshold.set(0.5);
 
@@ -23,12 +28,22 @@ var srcFrag=''
     .endl()+'   vec4 col = texture2D(texture, texCoord );'
 
     .endl()+'   float gray = dot(vec3(0.2126,0.7152,0.0722), col.rgb );'
-    .endl()+'   if(gray < threshhold) col.r=col.g=col.b=col.a=0.0;'
-    // .endl()+'   col.r=threshhold;'
-    // .endl()+'   col.g=threshhold;'
+
+    .endl()+'   #ifndef INVERT'
+    .endl()+'       if(gray < threshhold) col.r=col.g=col.b=col.a=0.0;'
+    .endl()+'   #ifdef BLACKWHITE'
+    .endl()+'       else col.r=col.g=col.b=col.a=1.0;'
+    .endl()+'   #endif'
+    
+    .endl()+'   #endif'
+    .endl()+'   #ifdef INVERT'
+    .endl()+'       if(gray > threshhold) col.r=col.g=col.b=col.a=0.0;'
+    .endl()+'   #ifdef BLACKWHITE'
+    .endl()+'       else col.r=col.g=col.b=col.a=1.0;'
+    .endl()+'   #endif'
+    .endl()+'   #endif'
 
     .endl()+'   gl_FragColor = col;'
-
     .endl()+'}';
 
 
@@ -36,6 +51,19 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 var unThreshold=new CGL.Uniform(shader,'f','threshhold',threshold);
+
+inBlackWhite.onChange=function()
+{
+    if(inInvert.get()) shader.define('BLACKWHITE');
+        else shader.removeDefine('BLACKWHITE');
+};
+
+inInvert.onChange=function()
+{
+    if(inInvert.get()) shader.define('INVERT');
+        else shader.removeDefine('INVERT');
+};
+
 
 render.onTriggered=function()
 {

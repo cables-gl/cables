@@ -1,5 +1,7 @@
 op.name="FatOscillator";
 
+CABLES.WebAudio.createAudioContext(op);
+
 // defaults
 var FREQUENCY_DEFAULT = 440;
 var DETUNE_DEFAULT = 0;

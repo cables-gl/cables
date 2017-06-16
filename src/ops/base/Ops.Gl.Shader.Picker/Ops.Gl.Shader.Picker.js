@@ -4,32 +4,38 @@ var cgl=op.patch.cgl;
 op.name='Picker';
 op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
+var useMouseCoords=op.inValueBool("Use Mouse Coordinates",true);
+
 op.x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
 op.y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
 op.enabled=op.addInPort(new Port(op,"enabled",OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.enabled.set(true);
 
-op.showPass=op.addInPort(new Port(op,"show picking pass",OP_PORT_TYPE_VALUE,{display:'bool'}));
-op.showPass.set(false);
+// op.showPass=op.addInPort(new Port(op,"show picking pass",OP_PORT_TYPE_VALUE,{display:'bool'}));
+// op.showPass.set(false);
 
 op.trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 
+var cursor=this.addInPort(new Port(this,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
+cursor.set('default');
 
 var pixelRGB = new Uint8Array(4);
 var fb=null;
 if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
-    else 
-    {
-        console.log("new framebuffer...");
-        fb=new CGL.Framebuffer2(cgl,4,4,{multisampling:false});
-    }
+else 
+{
+    console.log("new framebuffer...");
+    fb=new CGL.Framebuffer2(cgl,4,4,{multisampling:false});
+}
 
 
 
 // var tex=op.addOutPort(new Port(op,"pick texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var tex=op.outTexture("pick texture");
 tex.set( fb.getTextureColor() );
+useMouseCoords.onChange=updateListeners;
+updateListeners();
  
 function renderPickingPass()
 {
@@ -41,9 +47,28 @@ function renderPickingPass()
     cgl.frameStore.renderOffscreen=false;
 }
 
+function mouseMove(e)
+{
+    op.x.set(e.offsetX);
+    op.y.set(e.offsetY);
+}
+
+function updateListeners()
+{
+    cgl.canvas.removeEventListener('mousemove', mouseMove);
+    if(useMouseCoords.get()) cgl.canvas.addEventListener('mousemove', mouseMove);
+}
+
+
 
 var doRender=function()
 {
+    
+    if(cursor.get()!=cgl.canvas.style.cursor)
+    {
+        cgl.canvas.style.cursor=cursor.get();
+    }
+
     if(op.enabled.get())
     {
         {

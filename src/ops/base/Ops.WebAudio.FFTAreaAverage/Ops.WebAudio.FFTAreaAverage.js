@@ -91,8 +91,18 @@ refresh.onTriggered=function()
     ctx.fillStyle="#000";
     ctx.fillText(arr.length+' ...', 10, height-10);
 
-    if(texOut.get()) texOut.get().initTexture(canvImage);
-        else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage,256,256) );
+    // if(!texOut.get()) 
+    //     texOut.set(new CGL.Texture(cgl,
+    //         {
+    //             "wrap":CGL.Texture.CLAMP_TO_EDGE
+    //         }));
+
+    // texOut.get().initTexture(canvImage);
+        // else 
+        // texOut.set( new CGL.Texture.createFromImage(canvImage) );
+
+    if(texOut.get()) texOut.get().initTexture(canvImage,CGL.Texture.FILTER_MIPMAP);
+        else texOut.set(new CGL.Texture.createFromImage( cgl, canvImage, { "filter":CGL.Texture.FILTER_MIPMAP } ));
 
 };
 

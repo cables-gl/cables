@@ -14,7 +14,7 @@ var fps=op.addInPort(new Port(op,"fps",OP_PORT_TYPE_VALUE ));
 var time=op.addInPort(new Port(op,"set time",OP_PORT_TYPE_VALUE ));
 var rewind=op.addInPort(new Port(op,"rewind",OP_PORT_TYPE_FUNCTION,{display:'button'} ));
 
-
+var inPreload=op.inValueBool("Preload",true);
 
 var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var outDuration=op.addOutPort(new Port(op,"duration",OP_PORT_TYPE_VALUE));
@@ -24,7 +24,8 @@ var outTime=op.addOutPort(new Port(op,"CurrentTime",OP_PORT_TYPE_VALUE));
 var loading=op.addOutPort(new Port(op,"Loading",OP_PORT_TYPE_VALUE));
 
 
-
+var videoElementPlaying=false;
+var embedded=false;
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
 var intervalID=null;
@@ -66,6 +67,12 @@ fps.onValueChanged=function()
 
 play.onValueChanged=function()
 {
+    
+    if(!embedded)
+    {
+        embedVideo(true);
+    }
+    
     if(play.get()) 
     {
         videoElement.currentTime=time.get() || 0;
@@ -96,6 +103,7 @@ function updateTexture()
     // console.log('videoElement.currentTime',videoElement.currentTime);
 
 
+    if(!videoElementPlaying)return;
     var perc=(videoElement.currentTime)/videoElement.duration;
     if(!isNaN(perc)) outProgress.set(perc);
     outTime.set(videoElement.currentTime);
@@ -151,20 +159,36 @@ function loadedMetaData()
 
 var addedListeners=false;
 
+function embedVideo(force)
+{
+    if(filename.get()!=0 && filename.get().length>1)
+    if(inPreload.get()||force)
+    {
+        // console.log("embedVideo"+filename.get() );
+        clearTimeout(timeout);
+        loading.set(true);
+        videoElement.preload = 'true';
+        var url=op.patch.getFilePath(filename.get());
+        videoElement.setAttribute('src',url);
+        if(!addedListeners)
+        {
+            addedListeners=true;
+            videoElement.addEventListener("canplaythrough", initVideo, true);
+            videoElement.addEventListener('loadedmetadata', loadedMetaData );
+            videoElement.addEventListener("playing", function() {videoElementPlaying = true;}, true);
+
+        }
+        embedded=true
+        
+    }
+
+}
+
+
 function loadVideo()
 {
-    // console.log('start loading...',filename.get());
-    clearTimeout(timeout);
-    loading.set(true);
-    videoElement.preload = 'true';
-    var url=op.patch.getFilePath(filename.get());
-    videoElement.setAttribute('src',url);
-    if(!addedListeners)
-    {
-        addedListeners=true;
-        videoElement.addEventListener("canplaythrough", initVideo, true);
-        videoElement.addEventListener('loadedmetadata', loadedMetaData );
-    }
+    setTimeout(embedVideo,100);
+    
 }
 
 function reload()

@@ -22,9 +22,11 @@ zFar.onValueChanged=changed;
 zNear.onValueChanged=changed;
 changed();
 
+var asp=0;
+
 render.onTriggered=function()
 {
-    var asp=cgl.getViewPort()[2]/cgl.getViewPort()[3];
+    asp=cgl.getViewPort()[2]/cgl.getViewPort()[3];
     if(!autoAspect.get())asp=aspect.get();
     
     cgl.pushPMatrix();

@@ -17,12 +17,13 @@ var rotX=op.inValueSlider("Rotate X",1);
 var rotY=op.inValueSlider("Rotate Y",1);
 var rotZ=op.inValueSlider("Rotate Z",1);
 
+var scrollX=op.inValue("Scroll X",0);
+
 var cgl=op.patch.cgl;
 var randoms=[];
+var origRandoms=[];
 var randomsRot=[];
 var randomsFloats=[];
-
-
 
 scaleX.set(1);
 scaleY.set(1);
@@ -31,12 +32,26 @@ scaleZ.set(1);
 var transVec=vec3.create();
 var mat=mat4.create();
 
+
+
+
 function doRender()
 {
     // console.log(doRender);
     if(op.instanced(exe))return;
 
     op.patch.instancing.pushLoop(randoms.length);
+    
+    if(scrollX.get()!=0)
+    {
+        for(var i=0;i<origRandoms.length;i++)
+        {
+            randoms[i][0]=origRandoms[i][0]+scrollX.get();
+            randoms[i][0]=(randoms[i][0]%size.get())-(size.get()/2);
+        }
+    }
+    
+    
 
     for(var i=0;i<randoms.length;i++)
     {
@@ -47,8 +62,6 @@ function doRender()
         mat4.rotateX(cgl.mvMatrix,cgl.mvMatrix, randomsRot[i][0]);
         mat4.rotateY(cgl.mvMatrix,cgl.mvMatrix, randomsRot[i][1]);
         mat4.rotateZ(cgl.mvMatrix,cgl.mvMatrix, randomsRot[i][2]);
-        // mat4.fromRotationTranslation(mat, randomsRot[i], randoms[i]);
-        // mat4.multiply(cgl.mvMatrix, cgl.mvMatrix, mat);
 
         idx.set(i);
         rnd.set(randomsFloats[i]);
@@ -79,6 +92,7 @@ function reset()
     randoms.length=0;
     randomsRot.length=0;
     randomsFloats.length=0;
+    origRandoms.length=0;
 
     Math.randomSeed=seed.get();
     
@@ -94,6 +108,7 @@ function reset()
             while(vec3.len(v)>size.get()/2)
                 v=getRandomPos();
 
+        origRandoms.push( [ v[0],v[1],v[2] ]);
         randoms.push(v);
 
         randomsRot.push(vec3.fromValues(
@@ -102,7 +117,7 @@ function reset()
             Math.seededRandom()*360*CGL.DEG2RAD*rotZ.get()
             ));
     }
-    
+
 }
 
 size.set(20);

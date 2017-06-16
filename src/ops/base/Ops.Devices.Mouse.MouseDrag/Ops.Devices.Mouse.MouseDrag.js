@@ -7,6 +7,7 @@ var outY=op.addOutPort(new Port(op,"y"));
 var flipY=op.inValueBool("Flip Y",true);
 var kinetic=op.inValueBool("Inertia Movement",true);
 
+
 var doReset=op.inFunction("Reset");
 
 var mul=op.inValue("mul",0.1);
@@ -15,6 +16,9 @@ var minX=op.inValue("minX",-600);
 var maxX=op.inValue("maxX",600);
 var minY=op.inValue("minY",-600);
 var maxY=op.inValue("maxY",600);
+
+var active=op.inValueBool("Active",true);
+
 
 var cgl=op.patch.cgl;
 
@@ -158,17 +162,17 @@ function onMouseEnter()
     
 }
 
-
-canvas.addEventListener('click', onmouseclick);
-canvas.addEventListener('mousemove', onmousemove);
-canvas.addEventListener('mousedown', onMouseDown);
-canvas.addEventListener('mouseup', onMouseUp);
-canvas.addEventListener('mouseenter', onMouseEnter);
-canvas.addEventListener('mouseleave', onMouseLeave);
-// canvas.addEventListener('contextmenu', onClickRight);
-
-
-op.onDelete=function()
+function bind()
+{
+    canvas.addEventListener('click', onmouseclick);
+    canvas.addEventListener('mousemove', onmousemove);
+    canvas.addEventListener('mousedown', onMouseDown);
+    canvas.addEventListener('mouseup', onMouseUp);
+    canvas.addEventListener('mouseenter', onMouseEnter);
+    canvas.addEventListener('mouseleave', onMouseLeave);
+    // canvas.addEventListener('contextmenu', onClickRight);
+}
+function unbind()
 {
     console.log("remove mouse op...");
     canvas.removeEventListener('click', onmouseclick);
@@ -178,4 +182,20 @@ op.onDelete=function()
     canvas.removeEventListener('mouseenter', onMouseEnter);
     canvas.removeEventListener('mouseleave', onMouseLeave);
     // canvas.removeEventListener('contextmenu', onClickRight);
+
+}
+
+
+active.onChange=function()
+{
+    if(active.get())bind();
+    else unbind();
+}
+
+
+bind();
+
+op.onDelete=function()
+{
+    unbind();
 };

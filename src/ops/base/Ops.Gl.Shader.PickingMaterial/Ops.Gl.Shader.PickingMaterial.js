@@ -1,4 +1,3 @@
-Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 
@@ -7,6 +6,9 @@ this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 this.isPicked=this.addOutPort(new Port(this,"is picked",OP_PORT_TYPE_VALUE));
+
+var pickedTrigger=op.outFunction("On Picked");
+
 this.doBillboard=this.addInPort(new Port(this,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 this.doBillboard.set(false);
 this.doBillboard.onValueChanged=function()
@@ -38,18 +40,19 @@ this.doRender=function()
     }
     else
     {
+        self.isPicked.set( cgl.frameStore.pickedColor==currentPickingColor );
+        
         if(cgl.frameStore.pickedColor==currentPickingColor)
         {
             if(cursor.get().length>0 && cgl.canvas.style.cursor!=cursor.get())
             {
                 cgl.canvas.style.cursor=cursor.get();
             }
+            pickedTrigger.trigger();
         }
         else
         {
-
         }
-        self.isPicked.set( cgl.frameStore.pickedColor==currentPickingColor );
 
         self.trigger.trigger();
     }

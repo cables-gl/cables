@@ -17,7 +17,7 @@ var mesh=null;
 window.meshsequencecounter=window.meshsequencecounter||1;
 window.meshsequencecounter++;
 var prfx=String.fromCharCode(97 + window.meshsequencecounter);
-
+var needsUpdateFrame=false;
 
 var srcHeadVert=''
     .endl()+'attribute vec3 '+prfx+'_attrMorphTargetA;'
@@ -55,6 +55,7 @@ function removeModule()
 
 function doRender()
 {
+    if(needsUpdateFrame)updateFrame();
     var fade=frame.get()%1;
     if(cgl.getShader() && cgl.getShader()!=shader)
     {
@@ -75,6 +76,8 @@ function doRender()
 
     if(uniDoMorph)
     {
+            // updateFrame();
+
         uniFade.setValue(fade);
         uniDoMorph.setValue(1.0);
         if(mesh!==null) mesh.render(cgl.getShader());
@@ -85,6 +88,13 @@ function doRender()
 }
 
 
+
+
+function updateFrameLater()
+{
+    needsUpdateFrame=true;
+}
+
 function updateFrame()
 {
     if(mesh && geoms.length>0)
@@ -94,7 +104,6 @@ function updateFrame()
         n=n%(geoms.length-1);
 
         if(n+1>geoms.length-1) n=0;
-
 
         if(n!=lastFrame && module)
         {
@@ -107,6 +116,7 @@ function updateFrame()
             lastFrame=n;
         }
     }
+    needsUpdateFrame=false;
 }
 
 var uniDoMorph=null;
@@ -189,7 +199,7 @@ function reload()
 }
 
 
-frame.onValueChange(updateFrame);
+frame.onValueChange(updateFrameLater);
 filename.onValueChange(reload);
 render.onTriggered=doRender;
 calcVertexNormals.onValueChange(reload);

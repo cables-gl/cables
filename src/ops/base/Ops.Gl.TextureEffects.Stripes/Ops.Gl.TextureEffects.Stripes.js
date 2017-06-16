@@ -7,6 +7,8 @@ var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',
 
 var offset=op.addInPort(new Port(op,"offset",OP_PORT_TYPE_VALUE));
 
+var smoothed=op.inValueBool("Gradients");
+
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
 var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -45,9 +47,23 @@ var srcFrag=''
     .endl()+'   float m=mod(v,1.0/num);'
     .endl()+'   float rm=width*2.0*1.0/num/2.0;'
     
-    .endl()+'   if(m>rm) col.rgb=mix(col.rgb,vec3( r,g,b ),a);'
+    .endl()+'   if(m>rm)'
+    .endl()+'       col.rgb=mix(col.rgb,vec3( r,g,b ),a);'
+
+    .endl()+'   #ifdef STRIPES_SMOOTHED    '
+    .endl()+'       m*=2.0;'
+    .endl()+'       col.rgb=vec3(  smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));'
+    .endl()+'   #endif'
+    
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
+    
+smoothed.onChange=function()
+{
+    
+    if(smoothed.get())shader.define("STRIPES_SMOOTHED");
+    else shader.removeDefine("STRIPES_SMOOTHED");
+}
 
 axis.onValueChanged=function()
 {

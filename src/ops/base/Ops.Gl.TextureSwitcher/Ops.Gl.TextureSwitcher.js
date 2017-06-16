@@ -16,13 +16,23 @@ var lastIndex=-1;
 
 exec.onTriggered=updateTexture;
 
-function updateTexture()
+function forceUpdateTexture()
+{
+    updateTexture(true);
+}
+
+
+function updateTexture(force)
 {
     index=parseInt(self.num.get(),10);
-    if(index==lastIndex)return;
-    if(index!=index)return;
-    if(index>texturePorts.length-1)index=0;
+    if(!force)
+    {
+        if(index==lastIndex)return;
+        if(index!=index)return;
+    }
     if(index<0)index=0;
+    if(index>texturePorts.length-1)index=0;
+
     if(texturePorts[index]) self.textureOut.set(texturePorts[index].get());
     lastIndex=index;
 }
@@ -31,7 +41,7 @@ for(var i=0;i<16;i++)
 {
     var tex=this.addInPort(new Port(this,"texture"+i,OP_PORT_TYPE_TEXTURE));
     texturePorts.push(tex);
-    tex.onValueChanged=updateTexture;
+    tex.onValueChanged=forceUpdateTexture;
 }
 
 

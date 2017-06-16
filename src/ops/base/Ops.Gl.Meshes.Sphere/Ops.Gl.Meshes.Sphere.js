@@ -198,5 +198,6 @@ function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat 
 
     geomOut.set(geom);
 
-    mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
+    if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
+    mesh.setGeom(geom);
 }
