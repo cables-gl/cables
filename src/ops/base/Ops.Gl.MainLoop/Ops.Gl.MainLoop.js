@@ -46,11 +46,28 @@ function updateFullscreenButton()
 
     if(fullscreen.get())
     {
-        if(!fsElement) fsElement = document.createElement('div');
+        if(!fsElement) 
+        {
+            fsElement = document.createElement('div');
+
+            var container = op.patch.cgl.canvas.parentElement;
+            if(container)container.appendChild(fsElement);
+    
+            fsElement.addEventListener('mouseenter', onMouseEnter);
+            fsElement.addEventListener('click', function(e)
+            {
+                if(CABLES.UI && !e.shiftKey) gui.cycleRendererSize();
+                    else
+                    {
+                        cgl.fullScreen();
+                    }
+            });
+
+        }
         fsElement.style.padding="10px";
         fsElement.style.position="absolute";
         fsElement.style.right="10px";
-        fsElement.style.bottom="10px";
+        fsElement.style.top="10px";
         fsElement.style.width="15px";
         fsElement.style.height="15px";
         fsElement.style.opacity="0.9";
@@ -60,18 +77,6 @@ function updateFullscreenButton()
         fsElement.style["z-index"]="9999";
         fsElement.style.display="none";
 
-        var container = op.patch.cgl.canvas.parentElement;
-        container.appendChild(fsElement);
-
-        fsElement.addEventListener('mouseenter', onMouseEnter);
-        fsElement.addEventListener('click', function(e)
-        {
-            if(CABLES.UI && !e.shiftKey) gui.cycleRendererSize();
-                else
-                {
-                    cgl.fullScreen();
-                }
-        });
     }
     else
     {
