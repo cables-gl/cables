@@ -6,7 +6,12 @@ var trigger=op.outFunction("trigger");
 var width=op.outValue("width");
 var height=op.outValue("height");
 var reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
+
+
+var clear=op.inValueBool("Clear",true);
+var fullscreen=op.inValueBool("Allow Fullscreen",true);
 var active=op.inValueBool("Active",true);
+
 
 var cgl=op.patch.cgl;
 
@@ -19,6 +24,65 @@ var identTranslate=vec3.create();
 vec3.set(identTranslate, 0,0,0);
 var identTranslateView=vec3.create();
 vec3.set(identTranslateView, 0,0,-2);
+
+fullscreen.onChange=updateFullscreenButton;
+setTimeout(updateFullscreenButton,100);
+var fsElement=null;
+
+function updateFullscreenButton()
+{
+    function onMouseEnter()
+    {
+        if(fsElement)fsElement.style.display="block";
+    }
+
+    function onMouseLeave()
+    {
+        if(fsElement)fsElement.style.display="none";
+    }
+    
+    op.patch.cgl.canvas.addEventListener('mouseleave', onMouseLeave);
+    op.patch.cgl.canvas.addEventListener('mouseenter', onMouseEnter);
+
+    if(fullscreen.get())
+    {
+        if(!fsElement) fsElement = document.createElement('div');
+        fsElement.style.padding="10px";
+        fsElement.style.position="absolute";
+        fsElement.style.right="10px";
+        fsElement.style.bottom="10px";
+        fsElement.style.width="15px";
+        fsElement.style.height="15px";
+        fsElement.style.opacity="0.9";
+        fsElement.style.cursor="pointer";
+        fsElement.style['border-radius']="40px";
+        fsElement.style.background="#444";
+        fsElement.style["z-index"]="9999";
+        fsElement.style.display="none";
+
+        var container = op.patch.cgl.canvas.parentElement;
+        container.appendChild(fsElement);
+
+        fsElement.addEventListener('mouseenter', onMouseEnter);
+        fsElement.addEventListener('click', function(e)
+        {
+            if(CABLES.UI && !e.shiftKey) gui.cycleRendererSize();
+                else
+                {
+                    cgl.fullScreen();
+                }
+        });
+    }
+    else
+    {
+        if(fsElement)
+        {
+            fsElement.style.display="none";
+            fsElement.remove();
+        }
+    }
+}
+
 
 fpsLimit.onChange=function()
 {
@@ -74,6 +138,12 @@ op.onAnimFrame=function(time)
     CGL.MESH.lastMesh=null;
 
     cgl.renderStart(cgl,identTranslate,identTranslateView);
+
+    if(clear.get())
+    {
+        cgl.gl.clearColor(0,0,0,1);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    }
 
     trigger.trigger();
 

@@ -31,7 +31,7 @@ CABLES.PatchConnectionReceiver.prototype._receive=function(ev)
     if(ev.event)data=ev;
     else data=JSON.parse(ev.data);
 
-    console.log(data);
+    // console.log(data);
 
     if(data.event==CABLES.PACO_OP_CREATE)
     {
@@ -97,15 +97,15 @@ CABLES.PatchConnectionReceiver.prototype._receive=function(ev)
     {
         console.log("unknown patchConnectionEvent!",ev);
     }
-}
+};
 
 CABLES.PatchConnectionSender=function(patch,options)
 {
     this.connectors=[];
     this.connectors.push(new CABLES.PatchConnectorBroadcastChannel());
-    
 
-}
+
+};
 
 CABLES.PatchConnectionSender.prototype.send=function(event,vars)
 {
@@ -114,20 +114,20 @@ CABLES.PatchConnectionSender.prototype.send=function(event,vars)
         this.connectors[i].send(event,vars);
     }
 
-}
+};
 
 // -------------
 
 CABLES.PatchConnectorBroadcastChannel=function()
 {
     this.bc = new BroadcastChannel('test_channel');
-}
+};
 
 CABLES.PatchConnectorBroadcastChannel.prototype.receive=function(paco)
 {
     console.log('init');
     this.bc.onmessage = paco._receive.bind(paco);
-}
+};
 
 CABLES.PatchConnectorBroadcastChannel.prototype.send=function(event,vars)
 {
@@ -135,7 +135,7 @@ CABLES.PatchConnectorBroadcastChannel.prototype.send=function(event,vars)
     data.event=event;
     data.vars=vars;
     this.bc.postMessage(JSON.stringify(data));
-    console.log(data);
+    // console.log(data);
 
 };
 
@@ -174,7 +174,7 @@ CABLES.PatchConnectorSocketIO=function()
     });
 
 
-}
+};
 
 CABLES.PatchConnectorSocketIO.prototype.receive=function(paco)
 {
@@ -187,7 +187,7 @@ CABLES.PatchConnectorSocketIO.prototype.receive=function(paco)
 
     // console.log('init');
 
-}
+};
 
 CABLES.PatchConnectorSocketIO.prototype.send=function(event,vars)
 {
