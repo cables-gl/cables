@@ -9,6 +9,7 @@ const float albedo = 0.95;
 
 uniform float shininess;
 uniform float specularStrength;
+uniform float fresnel;
 
 #ifdef HAS_TEXTURE_DIFFUSE
     uniform sampler2D texDiffuse;
@@ -176,6 +177,19 @@ vec4 textureLinear(sampler2D uTex, vec2 uv) {
 }
 
 
+float calcFresnel(vec3 direction, vec3 normal)
+{
+    vec3 nDirection = normalize( direction );
+    vec3 nNormal = normalize( normal );
+    vec3 halfDirection = normalize( nNormal + nDirection );
+    
+    float cosine = dot( halfDirection, nDirection );
+    float product = max( cosine, 0.0 );
+    float factor = pow( product, 5.0 );
+    
+    return factor;
+}
+
 void main()
 {
     vec2 UV_SCALE = vec2(diffuseRepeatX,diffuseRepeatY);
@@ -243,6 +257,9 @@ void main()
 
         //add the lighting
         color += (diffuse + ambient);
+        
+        if(fresnel!=0.0) color+=calcFresnel(V,normal)*fresnel*5.0;
+        
 
         //re-apply gamma to output buffer
     }

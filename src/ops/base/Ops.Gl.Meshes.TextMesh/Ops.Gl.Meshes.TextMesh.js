@@ -179,7 +179,7 @@ render.onTriggered=function()
 
     cgl.setTexture(0,textureOut.get().tex);
 
-    mesh.render(cgl.getShader());
+    if(mesh)mesh.render(cgl.getShader());
 
     cgl.setTexture(0,null);
     cgl.setPreviousShader();

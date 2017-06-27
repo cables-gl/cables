@@ -1,0 +1,1 @@
+{"layout":{"portsIn":[{"type":"0","name":"Flip Y"},{"type":"0","name":"Inertia Movement"},{"type":"1","name":"Reset"},{"type":"0","name":"mul"},{"type":"0","name":"minX"},{"type":"0","name":"maxX"},{"type":"0","name":"minY"},{"type":"0","name":"maxY"}],"portsOut":[{"type":"0","name":"x"},{"type":"0","name":"y"}],"name":"Ops.Devices.Mouse.MouseDrag"}}

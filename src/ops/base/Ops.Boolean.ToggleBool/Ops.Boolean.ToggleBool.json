@@ -1,1 +1,2 @@
-{"summary":"Cycle boolean value by triggering"}
+{"summary":"Cycle boolean value by triggering"
+,"layout":{"portsIn":[{"type":"1","name":"trigger"},{"type":"1","name":"reset"}],"portsOut":[{"type":"0","name":"result"}],"name":"Ops.Boolean.ToggleBool"}}

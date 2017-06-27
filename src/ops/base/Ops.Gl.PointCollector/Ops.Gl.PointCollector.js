@@ -19,7 +19,10 @@ var m=mat4.create();
 render.onTriggered=function()
 {
     if(cgl.frameStore.SplinePoints) 
+    {
         oldSplinePoints=cgl.frameStore.SplinePoints;
+        cgl.frameStore.SplinePoints=[];
+    }
 
     cgl.frameStore.SplinePointCounter=0;
     

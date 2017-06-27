@@ -3,6 +3,18 @@ op.name="StopWatch";
 var exec=op.inFunction("exec");
 var next=op.outFunction("next");
 var timeUsed=op.outValue("Time used");
+var outTImes=op.outArray("Times");
+
+var times=[];
+times.length=100;
+for(var i=0;i<times.length;i++)
+{
+    times[i]=0;
+}
+
+
+var count=0;
+outTImes.set(times);
 
 exec.onTriggered=function()
 {
@@ -10,6 +22,13 @@ exec.onTriggered=function()
     next.trigger();
     var end=performance.now();
     
-    timeUsed.set(end-start);
+    var l=end-start;
+    times[count]=l;
+    count++;
+    if(count>=100)count=0;
+    
+    timeUsed.set(l);
+    outTImes.set(null);
+    outTImes.set(times);
     
 };

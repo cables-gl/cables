@@ -1,1 +1,1 @@
-{"summary":"Transform following Meshes around a Circle"}
+{"summary":"Transform following Meshes around a Circle" ,"layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"segments"},{"type":"0","name":"radius"},{"type":"0","name":"percent"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"0","name":"index"}],"name":"Ops.Gl.Matrix.CircleTransform"}}

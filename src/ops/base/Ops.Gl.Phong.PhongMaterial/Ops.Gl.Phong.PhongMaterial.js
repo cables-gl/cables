@@ -11,6 +11,7 @@ var shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
 
 var specularStrength=op.inValue("Specular Strength",1);
 var shininess=op.inValue("Shininess",20);
+var fresnel=op.inValueSlider("Fresnel",0);
 
 
 
@@ -29,6 +30,7 @@ shaderOut.set(shader);
 
 var uniSpecStrngth=new CGL.Uniform(shader,'f','specularStrength',specularStrength);
 var uniShininess=new CGL.Uniform(shader,'f','shininess',shininess);
+var uniFresnel=new CGL.Uniform(shader,'f','fresnel',fresnel);
 
 
 

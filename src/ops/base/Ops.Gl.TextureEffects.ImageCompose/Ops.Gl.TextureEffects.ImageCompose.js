@@ -92,6 +92,8 @@ function updateResolution()
         tex.setSize(w,h);
         
         effect.setSourceTexture(tex);
+        
+        // console.log('resize!');
         // texOut.set(effect.getCurrentSourceTexture());
     }
 

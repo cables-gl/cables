@@ -60,6 +60,8 @@ render.onTriggered=function()
     shader.glPrimitive=oldPrim;
 
     cgl.popMvMatrix();
+    
+    trigger.trigger();
 
 };
 
@@ -103,6 +105,7 @@ function bufferData(spline,pointArr)
         }
 
         spline.geom.vertices=dataBuffer;
+        
 
     }
     console.log("spline.geom.length",spline.geom.vertices.length);

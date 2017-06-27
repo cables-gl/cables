@@ -65,7 +65,9 @@ render.onTriggered=function()
 
 function update()
 {
+    verts.length=0;
     geometry.clear();
+    // geometry=new CGL.Geometry();
     needsUpdate=false;
     // geometry.dynamic = true;
     step = pStep.get();
@@ -152,7 +154,7 @@ function update()
         
         geometry.calculateNormals({"forceZUp":true});
     
-        if(!mesh)mesh=new CGL.Mesh(op.patch.cgl,geometry);
+        if(!mesh) mesh=new CGL.Mesh(op.patch.cgl,geometry);
             else mesh.setGeom(geometry);        
     }
 

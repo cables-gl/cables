@@ -12,7 +12,17 @@ var numGamepads=op.addOutPort(new Port(op,"Num Controller",OP_PORT_TYPE_VALUE));
 var tex0=op.outTexture("texture left");
 var tex1=op.outTexture("texture right");
 
-var fb=[new CGL.Framebuffer(cgl,w,h),new CGL.Framebuffer(cgl,w,h)];
+var w=1025;
+var h=1025;
+
+
+var fb=null;
+if(cgl.glVersion>=2) 
+{
+    fb=[new CGL.Framebuffer2(cgl,w,h,{}),new CGL.Framebuffer2(cgl,w,h,{}) ];
+}
+else fb=[new CGL.Framebuffer(cgl,w,h),new CGL.Framebuffer(cgl,w,h)];
+
 tex0.set( fb[0].getTextureColor() );
 tex1.set( fb[1].getTextureColor() );
 
@@ -25,9 +35,8 @@ var firstQuat=null;
 
 var gp1Matrix=mat4.create();
 var qMat=mat4.create();
-var frameData = null;
-var w=1025;
-var h=1025;
+var frameData = new VRFrameData();
+;
 
 
 var hasDisplay=op.outValue('hasDisplay');
@@ -36,7 +45,7 @@ var hasOrientation=op.outValue('hasorientation');
 var isPresenting=op.outValue('is presenting');
 
 var triggerAfter=op.addOutPort(new Port(op,"trigger After",OP_PORT_TYPE_FUNCTION));
-
+var outDeviceString=op.outValue("Device");
 
 var pose=null;
 
@@ -105,12 +114,13 @@ var eyeRight=null;
 render.onTriggered=function()
 {
 
-    if(vrDisplay)
+    if(vrDisplay && vrDisplay.isPresenting)
     {
         isPresenting.set(vrDisplay.isPresenting);
         hasDisplay.set(true);
-        pose=vrDisplay.getPose();
-        
+        pose=vrDisplay.getFrameData(frameData);
+        pose = frameData.pose;
+
         if(pose) hasPose.set(true);
         else 
         {
@@ -160,19 +170,47 @@ render.onTriggered=function()
         cgl.resetViewPort();
         
         triggerAfter.trigger();
+        
+        vrDisplay.submitFrame(pose);
+
     }
     else
     {
         hasDisplay.set(false);
     }
 
-    if(vrDisplay && pose)
-    {
-        vrDisplay.submitFrame(pose);
-    }
     
     
 };
+
+function webvrbutton()
+{
+    var element = document.createElement('div');
+    
+    element.style.padding="10px";
+    element.style="cableslink";
+    element.style.position="absolute";
+    element.style.right="0px";
+    element.style.bottom="0px";
+    element.style.width="40px";
+    element.style.height="40px";
+    element.style.opacity="0.4";
+    element.style.cursor="pointer";
+    element.style["background-image"]="url(https://cables.gl/img/cables-logo.svg)";
+    element.style["z-index"]="9999";
+    element.style["background-size"]="80%";
+    element.style["background-repeat"]="no-repeat";
+    
+    var canvas = op.patch.cgl.canvas.parentElement;
+    canvas.appendChild(element);
+    
+    element.addEventListener("click", function()
+    {
+        requestVrFullscreen();
+    });
+
+}
+
 
 function requestVrFullscreen()
 {
@@ -184,8 +222,8 @@ function requestVrFullscreen()
         //   webglCanvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
 
      console.log("requestPresent ok.");   
-    }, function () {
-      console.log("requestPresent failed.");
+    }, function (e) {
+      console.log("requestPresent failed.",e);
     });
 
 //     if(!CABLES.UI && vrHMD)
@@ -225,16 +263,20 @@ if(navigator.getVRDisplays)
 // 			{
 				vrDisplay=devices[i];
 // 				console.log(devices[i]);
-				info+='- '+devices[i].displayName+' <br/>';
+				info+='- '+devices[i].displayName+' !!!<br/>';
+				outDeviceString.set(devices[i].displayName);
 // 			}
 		}
 
 		info+=' found input devices <br/>';
         op.uiAttr({info:info});
         op.uiAttr({warning:''});
-    gui.patch().showOpParams(op);
+        if(window.gui) gui.patch().showOpParams(op);
 
-        document.getElementById("glcanvas").ondblclick = requestVrFullscreen;
+        // document.getElementById("glcanvas").ondblclick = requestVrFullscreen;
+        // onTouchstart = requestVrFullscreen;
+
+        document.getElementById("glcanvas").addEventListener('touchstart', requestVrFullscreen);
 
     });
 }
@@ -242,3 +284,5 @@ else
 {
     op.uiAttr({warning:'browser has no webvr api'});
 }
+
+webvrbutton();
