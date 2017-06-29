@@ -17,13 +17,10 @@ var maxX=op.inValue("maxX",600);
 var minY=op.inValue("minY",-600);
 var maxY=op.inValue("maxY",600);
 
-<<<<<<< HEAD
 var active=op.inValueBool("Active",true);
 
-=======
 var isMoving=op.outValue("isMoving");
 var isPressed=op.outValue("isPressed");
->>>>>>> 42856a618eeacf4ddd455111ddd793ef07d9ba78
 
 var cgl=op.patch.cgl;
 
