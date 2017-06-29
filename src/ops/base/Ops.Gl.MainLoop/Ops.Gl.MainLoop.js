@@ -9,7 +9,7 @@ var reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
 
 
 var clear=op.inValueBool("Clear",true);
-var fullscreen=op.inValueBool("Fullscreen Button",true);
+var fullscreen=op.inValueBool("Fullscreen Button",false);
 var active=op.inValueBool("Active",true);
 
 
