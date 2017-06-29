@@ -100,7 +100,6 @@ exec.onTriggered=function()
                 curX = curX + addFactor*dirX;
                 curY = curY + addFactor*dirY;
 
-                
 
 
                 {
@@ -116,13 +115,11 @@ exec.onTriggered=function()
                     }
                     else
                     {
-                        
                         dots[dotCount*3+0]=curX;
                         dots[dotCount*3+1]=curY;
                         dots[dotCount*3+2]=0;
                         // dots.push(curX, curY,0);
                         dotCount++;
-
                     }
                 }
 

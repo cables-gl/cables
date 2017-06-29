@@ -13,9 +13,11 @@ var r=0;
 easing.onChange=function()
 {
     if(easing.get()=="Smoothstep") ease=1;
-    else if(easing.get()=="Smootherstep") ease=2;
-    else ease=0;
+        else if(easing.get()=="Smootherstep") ease=2;
+            else ease=0;
 };
+
+
 
 function exec()
 {

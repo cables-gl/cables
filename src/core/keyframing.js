@@ -294,7 +294,8 @@ CABLES.TL.Key.easeCubicInOut=function(t,key2)
 
 CABLES.TL.Key.easeSmoothStep=function(perc,key2)
 {
-    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
+    // var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
+    var x = Math.max(0, Math.min(1, perc));
     perc= x*x*(3 - 2*x); // smoothstep
     return CABLES.TL.Key.linear(perc,this,key2);
 };

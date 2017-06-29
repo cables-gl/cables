@@ -18,6 +18,65 @@ CABLES.generateUUID=function()
 
 // ----------------------------------------------------------------
 
+CABLES.smoothStep=function(perc)
+{
+    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
+    perc= x*x*(3 - 2*x); // smoothstep
+    return perc;
+};
+
+CABLES.smootherStep=function(perc)
+{
+    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
+    perc= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
+    return perc;
+};
+
+// ----------------------------------------------------------------
+
+CABLES.map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
+{
+    if(x>=_oldMax) return _newMax;
+    if(x<=_oldMin) return _newMin;
+
+    var reverseInput = false;
+    var oldMin = Math.min( _oldMin, _oldMax );
+    var oldMax = Math.max( _oldMin, _oldMax );
+    if(oldMin!= _oldMin) reverseInput = true;
+
+    var reverseOutput = false;
+    var newMin = Math.min( _newMin, _newMax );
+    var newMax = Math.max( _newMin, _newMax );
+    if(newMin != _newMin) reverseOutput = true;
+
+    var portion=0;
+    var r=0;
+
+    if(reverseInput) portion = (oldMax-x)*(newMax-newMin)/(oldMax-oldMin);
+        else portion = (x-oldMin)*(newMax-newMin)/(oldMax-oldMin);
+
+    if(reverseOutput) r=newMax - portion;
+        else r=portion + newMin;
+
+    if(!_easing) return r;
+    else
+    if(_easing==1) // smoothstep
+    {
+        x = Math.max(0, Math.min(1, (r-_newMin)/(_newMax-_newMin)));
+        return ( _newMin+x*x*(3 - 2*x)* (_newMax-_newMin) );
+    }
+    else
+    if(_easing==2) // smootherstep
+    {
+        x = Math.max(0, Math.min(1, (r-_newMin)/(_newMax-_newMin)));
+        return ( _newMin+x*x*x*(x*(x*6 - 15) + 10) * (_newMax-_newMin) ) ;
+    }
+
+    return r;
+};
+
+// ----------------------------------------------------------------
+
 Math.randomSeed=1;
 Math.seededRandom = function(max, min)
 {

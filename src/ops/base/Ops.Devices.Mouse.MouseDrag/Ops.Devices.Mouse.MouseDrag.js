@@ -8,7 +8,7 @@ var flipY=op.inValueBool("Flip Y",true);
 var kinetic=op.inValueBool("Inertia Movement",true);
 
 
-var doReset=op.inFunction("Reset");
+var doReset=op.inFunctionButton("Reset");
 
 var mul=op.inValue("mul",0.1);
 
@@ -17,8 +17,13 @@ var maxX=op.inValue("maxX",600);
 var minY=op.inValue("minY",-600);
 var maxY=op.inValue("maxY",600);
 
+<<<<<<< HEAD
 var active=op.inValueBool("Active",true);
 
+=======
+var isMoving=op.outValue("isMoving");
+var isPressed=op.outValue("isPressed");
+>>>>>>> 42856a618eeacf4ddd455111ddd793ef07d9ba78
 
 var cgl=op.patch.cgl;
 
@@ -73,6 +78,21 @@ function onmouseclick()
     
 }
 
+var movingTimeout=0;
+function seMoving()
+{
+    isMoving.set(true);
+    clearTimeout(movingTimeout);
+    draggingTimeout=setTimeout(
+        function()
+        {
+            isMoving.set(false);
+        },60);
+    
+}
+
+
+
 function onmousemove(e)
 {
     var clientY=e.clientY;
@@ -80,6 +100,8 @@ function onmousemove(e)
 
     if(pressed)
     {
+        seMoving();
+        
         if(lastX!=-1)
         {
             if(kinetic.get())
@@ -134,11 +156,13 @@ function onmousemove(e)
 function onMouseLeave(e)
 {
     onMouseUp(e);
+    isPressed.set(false);
 }
 
 function onMouseDown(e)
 {
     pressed=true;
+    isPressed.set(true);
 }
 
 
@@ -151,7 +175,7 @@ function onMouseUp(e)
         animY.release();
     }
     
-
+    isPressed.set(false);
     lastX=-1;
     lastY=-1;
     pressed=false;

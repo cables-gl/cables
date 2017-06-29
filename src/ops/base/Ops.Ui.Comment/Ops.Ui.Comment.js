@@ -1,12 +1,22 @@
 op.name='Comment';
-var title=op.addInPort(new Port(op,"title",OP_PORT_TYPE_VALUE,{type:'string'}));
-var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string'}));
+op.inTitle=op.inValueString("title");
+op.text=op.inValueText("text");
 
-title.set('comment');
-text.set('');
+op.inTitle.set('comment');
+op.text.set('');
 
-title.onChange=function()
+function update()
 {
-    op.name=title.get();
-    op.uiAttr('title',op.name);
-};
+    if(CABLES.UI)
+    {
+        var uiOp=gui.patch().getUiOp(op);
+        // console.log(uiOp);
+        op.name=op.inTitle.get();
+        op.uiAttr('title',op.inTitle.get());
+        uiOp.oprect.updateComment();
+    }
+}
+
+op.inTitle.onChange=update;
+op.text.onChange=update;
+

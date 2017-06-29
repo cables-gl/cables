@@ -42,23 +42,23 @@ render.onTriggered=function()
 
     if(mesh && draw)
     {
-        // mesh._bufVertexAttrib.startItem=Math.floor( 
+        // mesh._bufVertexAttrib.startItem=Math.floor(
         //     inStart.get()*(geom.vertices.length/18))*6;
-        // mesh._bufVertexAttrib.numItems=Math.floor( 
+        // mesh._bufVertexAttrib.numItems=Math.floor(
         //     Math.min(1,inLength.get()+inStart.get()) * (geom.vertices.length/3)
         //     ); // OK
 
-        // mesh._bufVertexAttrib.startItem=Math.floor( 
+        // mesh._bufVertexAttrib.startItem=Math.floor(
         //     inStart.get()*(index/18))*6;
-        // mesh._bufVertexAttrib.numItems=Math.floor( 
+        // mesh._bufVertexAttrib.numItems=Math.floor(
         //     Math.min(1,inLength.get()+inStart.get()) * (index/3)
         //     ); // OKnu
 
 
-        mesh._bufVertexAttrib.startItem=Math.floor( 
+        mesh._bufVertexAttrib.startItem=Math.floor(
             inStart.get()*(numItems/3))*3;
         mesh._bufVertexAttrib.numItems=
-            Math.floor( 
+            Math.floor(
                 Math.min(1,inLength.get()+inStart.get()) * (numItems)
             );
 
@@ -112,9 +112,9 @@ function linesToGeom(points,options)
     }
 
     var numPoints=points.length;
-    if(inNumPoints.get()!=0 && 
+    if(inNumPoints.get()!=0 &&
         inNumPoints.get()*3<points.length)numPoints=(inNumPoints.get()-1)*3;
-        
+
     if(numPoints<6)
     {
         draw=false;
@@ -127,7 +127,7 @@ function linesToGeom(points,options)
     var lastPA=null;
     var lastPB=null;
 
-    if((numPoints/3)*18 > geom.vertices.length ) 
+    if((numPoints/3)*18 > geom.vertices.length )
     {
         geom.vertices=new Float32Array( (numPoints/3*18 ) );
         geom.texCoords=new Float32Array( (numPoints/3*12) );
@@ -143,7 +143,7 @@ function linesToGeom(points,options)
     var ppl=p/numPoints;
 
     var pi2=Math.PI/4;
-    
+
     var strip=inStrip.get();
 
     var it=3;
@@ -168,12 +168,14 @@ function linesToGeom(points,options)
 
         // vec3.normalize(vEnd,vEnd);
         // vec3.normalize(vStart,vStart);
+
+        var vv=vec3.create();
         
         
         vv[0]=vStart[0]-vEnd[0];
         vv[1]=vStart[1]-vEnd[1];
         vv[2]=vStart[2]-vEnd[2];
-        
+
         vec3.normalize(vv,vv);
         quat.rotationTo(q,vecX,vv);
         quat.rotateZ(q, q, pi2);
@@ -192,7 +194,7 @@ function linesToGeom(points,options)
                     points[p+0]+vecRot[0]*m,
                     points[p+1]+vecRot[1]*m,
                     points[p+2]+vecRot[2]*m);
-    
+
                 vec3.set(vecB,
                     points[p+0]+vecRot[0]*-m,
                     points[p+1]+vecRot[1]*-m,
@@ -205,7 +207,7 @@ function linesToGeom(points,options)
                 points[p+0]+vecRot[0]*m,
                 points[p+1]+vecRot[1]*m,
                 points[p+2]+vecRot[2]*m);
-    
+
             vec3.set(vecB,
                 points[p+0]+vecRot[0]*-m,
                 points[p+1]+vecRot[1]*-m,
@@ -291,7 +293,7 @@ var repy=1;
             lastC=vec3.create();
             lastD=vec3.create();
         }
-    
+
         if(strip)
         {
             lastC[0]=vecC[0];
@@ -323,17 +325,21 @@ function doRebuild()
 
     linesToGeom(points);
 
-    if(!mesh) 
+    if(!mesh)
     {
         mesh=new CGL.Mesh(cgl,geom);
-        
+
     }
 
     geomOut.set(null);
     geomOut.set(geom);
 
 
-    if(!draw) op.log("!DRAWrebuild");
+    if(!draw)
+    {
+        // op.log("!DRAWrebuild");
+        return;
+    }
 
     // mesh.addVertexNumbers=true;
 
@@ -344,7 +350,7 @@ function doRebuild()
 
     var attr2=mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
     attr2.numItems=numItems;
-    
+
     // console.log(numItems);
 
     // mesh._setVertexNumbers();
