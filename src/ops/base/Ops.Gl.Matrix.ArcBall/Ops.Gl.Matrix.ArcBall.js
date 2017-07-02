@@ -5,11 +5,8 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var useWheel=op.inValueBool('Use Mouse Wheel',true);
 var minRadius=op.inValue("Min Radius",0.1);
 
-
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var outRadius=op.outValue("Radius");
-
-
 
 var cgl=op.patch.cgl;
 var vScale=vec3.create();

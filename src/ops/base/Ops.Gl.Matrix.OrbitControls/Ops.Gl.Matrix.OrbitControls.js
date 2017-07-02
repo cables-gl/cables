@@ -7,6 +7,8 @@ var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{di
 var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
 var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
 
+var smoothness=op.inValueSlider("Smoothness",1.0);
+
 var restricted=op.addInPort(new Port(op,"restricted",OP_PORT_TYPE_VALUE,{display:'bool'}));
 restricted.set(true);
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -22,7 +24,7 @@ var cgl=op.patch.cgl;
 var eye=vec3.create();
 var vUp=vec3.create();
 var vCenter=vec3.create();
-var transMatrix=mat4.create();
+var viewMatrix=mat4.create();
 var vOffset=vec3.create();
 
 var mouseDown=false;
@@ -36,7 +38,25 @@ vec3.set(vCenter, 0,0,0);
 vec3.set(vUp, 0,1,0);
 
 var tempEye=vec3.create();
+var finalEye=vec3.create();
 var tempCenter=vec3.create();
+
+var px=0;
+
+var divisor=1;
+updateSmoothness();
+
+function updateSmoothness()
+{
+    divisor=smoothness.get()*10;
+}
+
+smoothness.onChange=updateSmoothness;
+
+function ip(val,goal)
+{
+    return val+(goal-val)/divisor;
+}
 
 render.onTriggered=function()
 {
@@ -45,9 +65,14 @@ render.onTriggered=function()
     vec3.add(tempEye, eye, vOffset);
     vec3.add(tempCenter, vCenter, vOffset);
 
-    mat4.lookAt(transMatrix, tempEye, tempCenter, vUp);
-    mat4.rotate(transMatrix, transMatrix, percX, vUp);
-    mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
+    px=ip(px,percX);
+    finalEye[0]=ip(finalEye[0],tempEye[0]);
+    finalEye[1]=ip(finalEye[1],tempEye[1]);
+    finalEye[2]=ip(finalEye[2],tempEye[2]);
+
+    mat4.lookAt(viewMatrix, finalEye, tempCenter, vUp);
+    mat4.rotate(viewMatrix, viewMatrix, px, vUp);
+    mat4.multiply(cgl.vMatrix,cgl.vMatrix,viewMatrix);
 
     trigger.trigger();
     cgl.popViewMatrix();
