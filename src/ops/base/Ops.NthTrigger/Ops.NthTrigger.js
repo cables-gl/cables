@@ -1,9 +1,7 @@
 op.name="NthTrigger";
 
-var exe=op.inFunction("Exe");
-
+var exe=op.inFunctionButton("Exe");
 var nth=op.inValue("Nth");
-
 var next=op.outFunction("next");
 
 var count=0;

@@ -1,1 +1,22 @@
-{"summary":"Calculate the Average of the last X values"}
+{
+    "summary": "Calculate the Average of the last X values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Number of Values"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.SimpleMovingAverage"
+    }
+}
