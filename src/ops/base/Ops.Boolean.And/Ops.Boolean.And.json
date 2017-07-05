@@ -1,18 +1,13 @@
 {
-    "summary": "outputs the remainder after division of one number by another",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "bool 1"
             },
             {
                 "type": "0",
-                "name": "number2"
-            },
-            {
-                "type": "0",
-                "name": "pingpong"
+                "name": "bool 2"
             }
         ],
         "portsOut": [
@@ -21,6 +16,7 @@
                 "name": "result"
             }
         ],
-        "name": "Ops.Math.Modulo"
-    }
+        "name": "Ops.Boolean.And"
+    },
+    "summary": "outputs true if all input booleans are true"
 }

@@ -1,18 +1,13 @@
 {
-    "summary": "outputs the remainder after division of one number by another",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "value"
             },
             {
                 "type": "0",
-                "name": "number2"
-            },
-            {
-                "type": "0",
-                "name": "pingpong"
+                "name": "Maximum"
             }
         ],
         "portsOut": [
@@ -21,6 +16,7 @@
                 "name": "result"
             }
         ],
-        "name": "Ops.Math.Modulo"
-    }
+        "name": "Ops.Math.Max"
+    },
+    "summary": "Result will be the higher number  either Value or Maximum"
 }

@@ -1,0 +1,18 @@
+{
+    "summary": "randomize the order of an array",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "shuffled array"
+            }
+        ],
+        "name": "Ops.Array.ShuffleArray"
+    }
+}

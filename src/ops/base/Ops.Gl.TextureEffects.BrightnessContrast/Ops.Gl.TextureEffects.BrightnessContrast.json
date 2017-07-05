@@ -1,0 +1,26 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "contrast"
+            },
+            {
+                "type": "0",
+                "name": "brightness"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.BrightnessContrast"
+    },
+    "summary": "Adjust brightness and contrast of an imagecompose"
+}

@@ -1,0 +1,46 @@
+{
+    "summary": "outputs true if one or more of the input booleans are true",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "bool 1"
+            },
+            {
+                "type": "0",
+                "name": "bool 2"
+            },
+            {
+                "type": "0",
+                "name": "bool 3"
+            },
+            {
+                "type": "0",
+                "name": "bool 4"
+            },
+            {
+                "type": "0",
+                "name": "bool 5"
+            },
+            {
+                "type": "0",
+                "name": "bool 6"
+            },
+            {
+                "type": "0",
+                "name": "bool 7"
+            },
+            {
+                "type": "0",
+                "name": "bool 8"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Boolean.Or"
+    }
+}
