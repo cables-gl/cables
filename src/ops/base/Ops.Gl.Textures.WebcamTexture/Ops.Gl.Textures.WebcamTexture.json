@@ -1,0 +1,1 @@
+{"summary":"use your webcam camera as a texture","layout":{"portsIn":[{"type":"0","name":"flip"},{"type":"0","name":"fps"}],"portsOut":[{"type":"2","name":"texture"}],"name":"Ops.Gl.Textures.WebcamTexture"}}

@@ -1,0 +1,1 @@
+{"summary":"outputs the angle between two points","layout":{"portsIn":[{"type":"0","name":"Point 1 X"},{"type":"0","name":"Point 1 Y"},{"type":"0","name":"Point 2 X"},{"type":"0","name":"Point 2 Y"}],"portsOut":[{"type":"0","name":"Angle"}],"name":"Ops.Math.AngleBetweenPoints"}}

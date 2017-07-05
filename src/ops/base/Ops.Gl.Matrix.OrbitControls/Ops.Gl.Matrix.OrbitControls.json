@@ -1,1 +1,1 @@
-{}
+{"layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"min distance"},{"type":"0","name":"max distance"},{"type":"0","name":"initial axis y"},{"type":"0","name":"initial axis x"},{"type":"0","name":"mul"},{"type":"0","name":"Smoothness"},{"type":"0","name":"restricted"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"0","name":"radius"}],"name":"Ops.Gl.Matrix.OrbitControls"},"summary":"rotate your object by clicking and dragging the mouse"}

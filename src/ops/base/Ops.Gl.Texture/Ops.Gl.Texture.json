@@ -1,1 +1,1 @@
-{"summary":"Load an image as a texture"}
+{"summary":"Load an image as a texture","layout":{"portsIn":[{"type":"0","name":"file"},{"type":"0","name":"filter"},{"type":"0","name":"wrap"},{"type":"0","name":"flip"},{"type":"0","name":"unpackPreMultipliedAlpha"}],"portsOut":[{"type":"2","name":"texture"},{"type":"0","name":"width"},{"type":"0","name":"height"},{"type":"0","name":"loading"}],"name":"Ops.Gl.Texture"}}

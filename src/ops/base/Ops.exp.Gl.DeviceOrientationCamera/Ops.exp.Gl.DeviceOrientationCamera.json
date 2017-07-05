@@ -1,1 +1,1 @@
-{}
+{"summary":"gyroscope motionsensor camera","layout":{"portsIn":[{"type":"1","name":"Render"}],"portsOut":[{"type":"1","name":"Next"},{"type":"0","name":"Window Orientation"}],"name":"Ops.exp.Gl.DeviceOrientationCamera"}}

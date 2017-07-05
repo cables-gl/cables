@@ -1,0 +1,1 @@
+{"summary":"Draws a rectangle frame","layout":{"portsIn":[{"type":"1","name":"Render"},{"type":"0","name":"Width"},{"type":"0","name":"Height"},{"type":"0","name":"Thickness"},{"type":"0","name":"pivot x"},{"type":"0","name":"pivot y"}],"portsOut":[{"type":"1","name":"Trigger"},{"type":"2","name":"Geometry"}],"name":"Ops.Gl.Meshes.RectangleFrame"}}

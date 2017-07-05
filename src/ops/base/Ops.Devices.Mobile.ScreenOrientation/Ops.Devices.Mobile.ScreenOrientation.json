@@ -1,0 +1,1 @@
+{"summary":"get orientation of the physical screen","layout":{"portsOut":[{"type":"0","name":"Angle"},{"type":"0","name":"Description"}],"name":"Ops.Devices.Mobile.ScreenOrientation"}}
