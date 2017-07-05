@@ -1,1 +1,1 @@
-{"summary":"HSB to RGB Color Conversion (HSV, HSL)"}
+{"summary":"HSB to RGB Color Conversion (HSV, HSL)","layout":{"portsIn":[{"type":"0","name":"Hue"},{"type":"0","name":"Saturation"},{"type":"0","name":"Brightness"}],"portsOut":[{"type":"0","name":"R"},{"type":"0","name":"G"},{"type":"0","name":"B"}],"name":"Ops.Color.HSBtoRGB"}}

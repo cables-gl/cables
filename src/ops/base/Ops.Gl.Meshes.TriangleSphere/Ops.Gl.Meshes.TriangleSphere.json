@@ -1,5 +1,4 @@
 {
-    "summary": "Draw a triangle",
     "layout": {
         "portsIn": [
             {
@@ -8,23 +7,23 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "Iterations"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "Flat"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "next"
             },
             {
                 "type": "2",
-                "name": "geometry"
+                "name": "Geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.Triangle"
+        "name": "Ops.Gl.Meshes.TriangleSphere"
     }
 }

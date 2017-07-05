@@ -1,5 +1,5 @@
 {
-    "summary": "Decide what to trigger if value is true or false",
+    "summary": "count how often the port was triggered",
     "layout": {
         "portsIn": [
             {
@@ -7,20 +7,20 @@
                 "name": "exe"
             },
             {
-                "type": "0",
-                "name": "boolean"
+                "type": "1",
+                "name": "reset"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "then"
+                "name": "trigger"
             },
             {
-                "type": "1",
-                "name": "else"
+                "type": "0",
+                "name": "timesTriggered"
             }
         ],
-        "name": "Ops.Boolean.IfTrueThen"
+        "name": "Ops.TriggerCounter"
     }
 }

@@ -140,12 +140,11 @@ CGL.TextureEffect.prototype.bind=function()
         this._cgl.pushFrameBuffer(this._frameBuf);
 
     }
-    else {
+    else
+	{
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf2);
         this._cgl.pushFrameBuffer(this._frameBuf2);
     }
-
-
 };
 
 CGL.TextureEffect.prototype.finish=function()

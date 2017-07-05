@@ -27,3 +27,4 @@ var scaleChanged=function()
 scale.onValueChange(scaleChanged);
 scale.set(1.0);
 scaleChanged();
+

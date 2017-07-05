@@ -15,9 +15,9 @@ update();
 function update()
 {
 
-    var hue=Math.fract(inH.get());
-    var saturation=Math.fract(inS.get());
-    var lightness=Math.fract(inV.get());
+    var hue=(inH.get());
+    var saturation=(inS.get());
+    var lightness=(inV.get());
 
 
   // based on algorithm from http://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB

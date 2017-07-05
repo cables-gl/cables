@@ -1,1 +1,1 @@
-{"summary":"Scale all child objects"}
+{"summary":"Scale all child objects","layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"scale"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.Matrix.Scale"}}
