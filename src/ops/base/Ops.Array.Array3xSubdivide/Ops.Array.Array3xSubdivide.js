@@ -55,9 +55,6 @@ function calc()
                 }
             }
         }
-
-        // console.log(" length",count);
-
     }
     else
     if(subd>0 && bezier.get() )

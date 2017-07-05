@@ -8,7 +8,7 @@ var result=op.addOutPort(new Port(op,"result"));
 var smooth=op.inValueBool("Smooth",false);
 var seconds=op.inValueBool("Seconds",false);
 
-var lastTime=Date.now();
+var lastTime=CABLES.now();
 
 var diff=0;
 

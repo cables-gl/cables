@@ -1,1 +1,34 @@
-{"summary":"Test if following meshes are picked by the picker"}
+{
+    "summary": "Test if following meshes are picked by the picker",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "billboard"
+            },
+            {
+                "type": "0",
+                "name": "cursor"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "is picked"
+            },
+            {
+                "type": "1",
+                "name": "On Picked"
+            }
+        ],
+        "name": "Ops.Gl.Shader.PickingMaterial"
+    }
+}

@@ -1,0 +1,74 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "play"
+            },
+            {
+                "type": "0",
+                "name": "loop"
+            },
+            {
+                "type": "0",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "mute"
+            },
+            {
+                "type": "0",
+                "name": "speed"
+            },
+            {
+                "type": "0",
+                "name": "flip"
+            },
+            {
+                "type": "0",
+                "name": "fps"
+            },
+            {
+                "type": "0",
+                "name": "set time"
+            },
+            {
+                "type": "1",
+                "name": "rewind"
+            },
+            {
+                "type": "0",
+                "name": "Preload"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "duration"
+            },
+            {
+                "type": "0",
+                "name": "progress"
+            },
+            {
+                "type": "0",
+                "name": "CurrentTime"
+            },
+            {
+                "type": "0",
+                "name": "Loading"
+            }
+        ],
+        "name": "Ops.Gl.Textures.VideoTexture"
+    },
+    "summary": "play a video file and use it as a texture"
+}

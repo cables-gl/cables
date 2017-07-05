@@ -142,8 +142,6 @@ function doRender()
     {
         uniFade.setValue(anim.getValue(op.patch.freeTimer.get()));
 
-        // console.log(anim.getValue(op.patch.freeTimer.get()));
-        
         uniDoMorph.setValue(1.0);
         if(mesh!==null) mesh.render(cgl.getShader());
         uniDoMorph.setValue(0);

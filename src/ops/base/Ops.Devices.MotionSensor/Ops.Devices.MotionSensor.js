@@ -21,9 +21,9 @@ var obj={};
 
 window.addEventListener("devicemotion", function(event)
 {
-    if(Date.now()-lastTimeAcc>15)
+    if(CABLES.now()-lastTimeAcc>15)
     {
-        lastTimeAcc=Date.now();
+        lastTimeAcc=CABLES.now();
         accX.set( event.accelerationIncludingGravity.x || 0);
         accY.set( event.accelerationIncludingGravity.y || 0 );
         accZ.set( event.accelerationIncludingGravity.z || 0 );
@@ -41,9 +41,9 @@ window.addEventListener("devicemotion", function(event)
 
 window.addEventListener("deviceorientation", function (event)
 {
-    if(Date.now()-lastTime>15)
+    if(CABLES.now()-lastTime>15)
     {
-        lastTime=Date.now();
+        lastTime=CABLES.now();
         axis1.set( (event.alpha || 0) *mulAxis.get() );
         axis2.set( (event.beta || 0 ) *mulAxis.get() );
         axis3.set( (event.gamma || 0) *mulAxis.get() );

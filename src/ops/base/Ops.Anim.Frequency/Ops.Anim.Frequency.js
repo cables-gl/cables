@@ -15,9 +15,9 @@ frequency.onChange=function()
 
 function exec()
 {
-    if(Date.now()-startTime>frequency.get())
+    if(CABLES.now()-startTime>frequency.get())
     {
-        startTime=Date.now();
+        startTime=CABLES.now();
         trigger.trigger();
     }
 }

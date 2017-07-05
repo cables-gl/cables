@@ -1,0 +1,42 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Mul Orientation"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Orientation Alpha"
+            },
+            {
+                "type": "0",
+                "name": "Orientation Beta"
+            },
+            {
+                "type": "0",
+                "name": "Orientation Gamme"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration X"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Y"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration X"
+            },
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "name": "Ops.Devices.MotionSensor"
+    },
+    "summary": "get values from the device motion sensor  mobile"
+}

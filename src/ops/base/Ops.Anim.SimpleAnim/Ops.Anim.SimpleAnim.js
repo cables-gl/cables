@@ -27,13 +27,13 @@ anim.createPort(op,"easing",init);
 function init()
 {
     anim.clear();
-    anim.setValue(Date.now()/1000.0, inStart.get());
-    anim.setValue(parseFloat(duration.get())+Date.now()/1000.0, inEnd.get());
+    anim.setValue(CABLES.now()/1000.0, inStart.get());
+    anim.setValue(parseFloat(duration.get())+CABLES.now()/1000.0, inEnd.get());
     finished.set(false);
     anim.loop=loop.get();
     
     if(anim.loop)
-        anim.setValue(parseFloat(2.0*duration.get())+Date.now()/1000.0, inStart.get());
+        anim.setValue(parseFloat(2.0*duration.get())+CABLES.now()/1000.0, inStart.get());
 
 }
 
@@ -47,7 +47,7 @@ reset.onTriggered=function()
 rewind.onTriggered=function()
 {
     anim.clear();
-    anim.setValue(Date.now()/1000,inStart.get());
+    anim.setValue(CABLES.now()/1000,inStart.get());
 };
 
 exe.onTriggered=function()
@@ -57,7 +57,7 @@ exe.onTriggered=function()
         result.set(inStart.get());
         return;
     }
-    var t=Date.now()/1000;
+    var t=CABLES.now()/1000;
     var v=anim.getValue(t);
     if(anim.hasEnded(t))
     {

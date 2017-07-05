@@ -1,1 +1,30 @@
-{"layout":{"portsIn":[{"type":"0","name":"text"},{"type":"0","name":"separator"},{"type":"0","name":"Numbers"}],"portsOut":[{"type":"3","name":"array"},{"type":"0","name":"length"}],"name":"Ops.Array.ParseArray"}}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "text"
+            },
+            {
+                "type": "0",
+                "name": "separator"
+            },
+            {
+                "type": "0",
+                "name": "Numbers"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "length"
+            }
+        ],
+        "name": "Ops.Array.ParseArray"
+    },
+    "summary": "parse a string into an array"
+}

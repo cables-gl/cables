@@ -1,7 +1,6 @@
 op.name="ParseArray";
 
 var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
-// var separator=op.addInPort(new Port(op,"separator",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var separator=op.inValueString("separator",",");
 
 var toNumber=op.inValueBool("Numbers",false);
@@ -22,19 +21,15 @@ function parse()
 {
     if(!text.get())return;
     
-    // console.log("parse array");
     var r=text.get().split(separator.get());
     len.set(r.length);
 
-    
-    
     if(toNumber.get())
     {
         for(var i=0;i<r.length;i++)
         {
             r[i]=Number(r[i]);
         }
-        
     }
     
     arr.set(r);

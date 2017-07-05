@@ -1,46 +1,44 @@
-var self=this;
-var cgl=self.patch.cgl;
+var cgl=op.patch.cgl;
 
-this.name='PickingMaterial';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.name='PickingMaterial';
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-this.isPicked=this.addOutPort(new Port(this,"is picked",OP_PORT_TYPE_VALUE));
+var isPicked=op.addOutPort(new Port(op,"is picked",OP_PORT_TYPE_VALUE));
 
 var pickedTrigger=op.outFunction("On Picked");
 
-this.doBillboard=this.addInPort(new Port(this,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-this.doBillboard.set(false);
-this.doBillboard.onValueChanged=function()
+var doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+doBillboard.set(false);
+
+doBillboard.onChange=function()
 {
-    if(self.doBillboard.get())
+    if(doBillboard.get())
         shader.define('BILLBOARD');
     else
         shader.removeDefine('BILLBOARD');
 };
 
-var cursor=this.addInPort(new Port(this,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
+var cursor=op.addInPort(new Port(op,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 cursor.set('pointer');
 
-
-
-this.doRender=function()
+function doRender()
 {
     cgl.frameStore.pickingpassNum+=2;
     var currentPickingColor=cgl.frameStore.pickingpassNum;
 
     if(cgl.frameStore.pickingpass)
     {
-        self.isPicked.set(false);
+        isPicked.set(false);
 
         pickColorUniformR.setValue(currentPickingColor/255);
         cgl.setShader(shader);
-        self.trigger.trigger();
+        next.trigger();
         cgl.setPreviousShader();
     }
     else
     {
-        self.isPicked.set( cgl.frameStore.pickedColor==currentPickingColor );
+        isPicked.set( cgl.frameStore.pickedColor==currentPickingColor );
         
         if(cgl.frameStore.pickedColor==currentPickingColor)
         {
@@ -54,10 +52,9 @@ this.doRender=function()
         {
         }
 
-        self.trigger.trigger();
+        next.trigger();
     }
-
-};
+}
 
 var srcVert=''
     .endl()+'attribute vec3 vPosition;'
@@ -98,9 +95,9 @@ var shader=new CGL.Shader(cgl,"PickingMaterial");
 shader.offScreenPass=true;
 shader.setSource(srcVert,srcFrag);
 
-this.onLoaded=shader.compile;
+op.onLoaded=shader.compile;
 
 var pickColorUniformR=new CGL.Uniform(shader,'f','r',0);
 
-this.render.onTriggered=this.doRender;
-this.doRender();
+render.onTriggered=doRender;
+doRender();

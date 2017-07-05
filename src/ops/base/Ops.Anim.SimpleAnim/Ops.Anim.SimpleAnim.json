@@ -49,5 +49,6 @@
             }
         ],
         "name": "Ops.Anim.SimpleAnim"
-    }
+    },
+    "summary": "simple animation between two values"
 }

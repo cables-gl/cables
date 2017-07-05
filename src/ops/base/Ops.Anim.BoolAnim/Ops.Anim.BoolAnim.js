@@ -18,12 +18,12 @@ var anim=new CABLES.TL.Anim();
 anim.createPort(op,"easing");
 
 
-var startTime=Date.now();
+var startTime=CABLES.now();
 
 function setAnim()
 {
 
-    var now=(Date.now()-startTime)/1000;
+    var now=(CABLES.now()-startTime)/1000;
     
     var oldValue=anim.getValue(now);
     anim.clear();
@@ -43,7 +43,7 @@ duration.onValueChanged=setAnim;
 
 exe.onTriggered=function()
 {
-    value.set(anim.getValue( (Date.now()-startTime)/1000 ));
+    value.set(anim.getValue( (CABLES.now()-startTime)/1000 ));
     next.trigger();
 };
 

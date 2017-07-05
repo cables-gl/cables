@@ -1,1 +1,26 @@
-{"summary":"Insert new Vertices into an Array3x to make it to tesselate it and make it smoother","layout":{"portsIn":[{"type":"3","name":"Points"},{"type":"0","name":"Num Subdivs"},{"type":"0","name":"Smooth"}],"portsOut":[{"type":"3","name":"Result"}],"name":"Ops.Array.Array3xSubdivide"}}
+{
+    "summary": "Insert new Vertices into an Array3x to make it to tesselate it and make it smoother",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Points"
+            },
+            {
+                "type": "0",
+                "name": "Num Subdivs"
+            },
+            {
+                "type": "0",
+                "name": "Smooth"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.Array3xSubdivide"
+    }
+}

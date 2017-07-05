@@ -1,0 +1,34 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "duration"
+            },
+            {
+                "type": "0",
+                "name": "easing"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            },
+            {
+                "type": "1",
+                "name": "Finished"
+            }
+        ],
+        "name": "Ops.Anim.ValueChangeAnim"
+    },
+    "summary": "always animates to the current value"
+}

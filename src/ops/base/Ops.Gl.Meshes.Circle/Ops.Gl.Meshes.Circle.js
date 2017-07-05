@@ -24,13 +24,6 @@ render.onTriggered=function()
 {
     if(op.instanced(render))return;
     
-    // console.log("RENDER");
-    // console.log( 
-    //     op.patch.instancing.index(),
-    //     op.patch.instancing.numCycles(),
-    //     op.patch.instancing.numLoops()
-    //     );
-    
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
