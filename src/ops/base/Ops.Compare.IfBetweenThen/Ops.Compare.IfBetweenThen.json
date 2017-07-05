@@ -1,0 +1,33 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "number"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "then"
+            },
+            {
+                "type": "1",
+                "name": "else"
+            }
+        ],
+        "name": "Ops.Compare.IfBetweenThen"
+    }
+}

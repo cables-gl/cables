@@ -1,0 +1,30 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "numValues"
+            },
+            {
+                "type": "0",
+                "name": "random seed"
+            },
+            {
+                "type": "0",
+                "name": "Min"
+            },
+            {
+                "type": "0",
+                "name": "Max"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            }
+        ],
+        "name": "Ops.Array.RandomArray3x"
+    },
+    "summary": "a random array of numbers"
+}

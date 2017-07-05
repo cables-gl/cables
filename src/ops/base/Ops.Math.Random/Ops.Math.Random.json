@@ -1,0 +1,30 @@
+{
+    "summary": "outputs a random number",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "0 to x / -x to x "
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "random seed"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Random"
+    }
+}

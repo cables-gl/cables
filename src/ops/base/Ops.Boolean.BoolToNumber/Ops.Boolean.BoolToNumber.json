@@ -1,0 +1,18 @@
+{
+    "summary": "outputs 0 for false  1 for true",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "bool"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "number"
+            }
+        ],
+        "name": "Ops.Boolean.BoolToNumber"
+    }
+}
