@@ -9,7 +9,7 @@ window.performance = (window.performance ||
 
 // ----------------------------
 
-CABLES.milliSeconds=function() { return window.performance.now(); };
+CABLES.now=CABLES.milliSeconds=function() { return window.performance.now(); };
 
 // ----------------------------
 

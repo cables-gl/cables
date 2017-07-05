@@ -1,0 +1,38 @@
+{
+    "summary": "get the state of your keyboards arrow keys",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "canvas only"
+            },
+            {
+                "type": "0",
+                "name": "Cursor Keys"
+            },
+            {
+                "type": "0",
+                "name": "WASD"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Up"
+            },
+            {
+                "type": "0",
+                "name": "Down"
+            },
+            {
+                "type": "0",
+                "name": "Left"
+            },
+            {
+                "type": "0",
+                "name": "Right"
+            }
+        ],
+        "name": "Ops.Devices.Keyboard.CursorKeys"
+    }
+}

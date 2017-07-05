@@ -1,0 +1,58 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exe"
+            },
+            {
+                "type": "0",
+                "name": "FPS"
+            },
+            {
+                "type": "0",
+                "name": "Row Offset Y"
+            },
+            {
+                "type": "0",
+                "name": "Num Frames"
+            },
+            {
+                "type": "0",
+                "name": "Num X"
+            },
+            {
+                "type": "0",
+                "name": "Num Y"
+            },
+            {
+                "type": "0",
+                "name": "Play"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Repeat X"
+            },
+            {
+                "type": "0",
+                "name": "Repeat Y"
+            },
+            {
+                "type": "0",
+                "name": "Offset X"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y"
+            }
+        ],
+        "name": "Ops.Gl.ImageSequenceAnim"
+    },
+    "summary": "play a image sprite animation"
+}

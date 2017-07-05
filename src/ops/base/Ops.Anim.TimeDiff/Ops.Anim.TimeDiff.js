@@ -1,6 +1,7 @@
 
 op.name='TimeDelta';
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.inFunctionButton("exe");
+// op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var result=op.addOutPort(new Port(op,"result"));
 
@@ -16,7 +17,7 @@ var smoothed=-1;
 
 exe.onTriggered=function()
 {
-    diff=(Date.now()-lastTime);
+    diff=(CABLES.now()-lastTime);
     if(seconds.get()) diff/=1000;
 
     if(smooth.get())
@@ -30,7 +31,7 @@ exe.onTriggered=function()
     }
 
     result.set( diff );
-    lastTime=Date.now();
+    lastTime=CABLES.now();
     trigger.trigger();
 };
 

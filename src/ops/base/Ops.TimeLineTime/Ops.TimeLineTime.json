@@ -1,0 +1,12 @@
+{
+    "summary": "the current time of the timeline",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "time"
+            }
+        ],
+        "name": "Ops.TimeLineTime"
+    }
+}

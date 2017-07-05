@@ -1,0 +1,30 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "Smooth"
+            },
+            {
+                "type": "0",
+                "name": "Seconds"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Anim.TimeDiff"
+    },
+    "summary": "measure the time between two triggers"
+}
