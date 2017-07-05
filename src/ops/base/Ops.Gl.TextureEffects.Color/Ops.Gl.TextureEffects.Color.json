@@ -1,1 +1,1 @@
-{}
+{"layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"r"},{"type":"0","name":"g"},{"type":"0","name":"b"},{"type":"0","name":"a"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.TextureEffects.Color"}}

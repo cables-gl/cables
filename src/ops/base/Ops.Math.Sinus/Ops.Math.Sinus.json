@@ -1,0 +1,1 @@
+{"summary":"outputs sine of a number","layout":{"portsIn":[{"type":"0","name":"value"},{"type":"0","name":"phase"},{"type":"0","name":"frequency"},{"type":"0","name":"amplitude"}],"portsOut":[{"type":"0","name":"result"}],"name":"Ops.Math.Sinus"}}
