@@ -1,1 +1,22 @@
-{}
+{
+    "summary": "outputs number rounded to the nearest integer",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number"
+            },
+            {
+                "type": "0",
+                "name": "Decimal Places"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Round"
+    }
+}

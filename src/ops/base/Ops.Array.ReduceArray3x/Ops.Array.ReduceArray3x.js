@@ -47,7 +47,6 @@ function update()
         newArray[count]=theArray[theLength*3-1];
         count++;
     }
-    // console.log(count);
     
     outArr.set(null);
     outArr.set(newArray);

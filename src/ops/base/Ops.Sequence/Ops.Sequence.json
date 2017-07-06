@@ -1,1 +1,138 @@
-{"summary":"Control execution order"}
+{
+    "summary": "Control execution order",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "1",
+                "name": "exe 0"
+            },
+            {
+                "type": "1",
+                "name": "exe 1"
+            },
+            {
+                "type": "1",
+                "name": "exe 2"
+            },
+            {
+                "type": "1",
+                "name": "exe 3"
+            },
+            {
+                "type": "1",
+                "name": "exe 4"
+            },
+            {
+                "type": "1",
+                "name": "exe 5"
+            },
+            {
+                "type": "1",
+                "name": "exe 6"
+            },
+            {
+                "type": "1",
+                "name": "exe 7"
+            },
+            {
+                "type": "1",
+                "name": "exe 8"
+            },
+            {
+                "type": "1",
+                "name": "exe 9"
+            },
+            {
+                "type": "1",
+                "name": "exe 10"
+            },
+            {
+                "type": "1",
+                "name": "exe 11"
+            },
+            {
+                "type": "1",
+                "name": "exe 12"
+            },
+            {
+                "type": "1",
+                "name": "exe 13"
+            },
+            {
+                "type": "1",
+                "name": "exe 14"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger 0"
+            },
+            {
+                "type": "1",
+                "name": "trigger 1"
+            },
+            {
+                "type": "1",
+                "name": "trigger 2"
+            },
+            {
+                "type": "1",
+                "name": "trigger 3"
+            },
+            {
+                "type": "1",
+                "name": "trigger 4"
+            },
+            {
+                "type": "1",
+                "name": "trigger 5"
+            },
+            {
+                "type": "1",
+                "name": "trigger 6"
+            },
+            {
+                "type": "1",
+                "name": "trigger 7"
+            },
+            {
+                "type": "1",
+                "name": "trigger 8"
+            },
+            {
+                "type": "1",
+                "name": "trigger 9"
+            },
+            {
+                "type": "1",
+                "name": "trigger 10"
+            },
+            {
+                "type": "1",
+                "name": "trigger 11"
+            },
+            {
+                "type": "1",
+                "name": "trigger 12"
+            },
+            {
+                "type": "1",
+                "name": "trigger 13"
+            },
+            {
+                "type": "1",
+                "name": "trigger 14"
+            },
+            {
+                "type": "1",
+                "name": "trigger 15"
+            }
+        ],
+        "name": "Ops.Sequence"
+    }
+}

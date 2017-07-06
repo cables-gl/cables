@@ -29,5 +29,6 @@
             }
         ],
         "name": "Ops.Compare.IfBetweenThen"
-    }
+    },
+    "summary": "triggers when value is between min and max"
 }

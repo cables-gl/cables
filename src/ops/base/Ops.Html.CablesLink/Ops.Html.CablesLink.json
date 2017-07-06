@@ -1,1 +1,16 @@
-{}
+{
+    "summary": "create a cables logo which links to cables gl",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "size"
+            },
+            {
+                "type": "0",
+                "name": "Opacity"
+            }
+        ],
+        "name": "Ops.Html.CablesLink"
+    }
+}

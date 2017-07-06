@@ -69,7 +69,7 @@ var MemoryStats = function (){
 	// If so, reminde user to adopt the --enable-precise-memory-info flag.
 	// open -a "/Applications/Google Chrome.app" --args --enable-precise-memory-info
 
-	var lastTime	= Date.now();
+	var lastTime	= CABLES.now();
 	var lastUsedHeap= performance.memory.usedJSHeapSize;
 	return {
 		domElement: container,
@@ -77,8 +77,8 @@ var MemoryStats = function (){
 		update: function () {
 
 			// refresh only 30time per second
-			if( Date.now() - lastTime < 1000/30 )	return;
-			lastTime	= Date.now()
+			if( CABLES.now() - lastTime < 1000/30 )	return;
+			lastTime	= CABLES.now()
 
 			var delta	= performance.memory.usedJSHeapSize - lastUsedHeap;
 			lastUsedHeap	= performance.memory.usedJSHeapSize;

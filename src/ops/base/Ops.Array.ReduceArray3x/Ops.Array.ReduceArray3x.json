@@ -1,1 +1,26 @@
-{"summary":"Reduce an Array by copying only every xth value","layout":{"portsIn":[{"type":"3","name":"Array"},{"type":"0","name":"Every xth Item"},{"type":"0","name":"Max Index"}],"portsOut":[{"type":"3","name":"Result Array"}],"name":"Ops.Array.ReduceArray3x"}}
+{
+    "summary": "Reduce an Array by copying only every xth value",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Every xth Item"
+            },
+            {
+                "type": "0",
+                "name": "Max Index"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result Array"
+            }
+        ],
+        "name": "Ops.Array.ReduceArray3x"
+    }
+}
