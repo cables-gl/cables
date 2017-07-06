@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Request Fullscreen"
+            },
+            {
+                "type": "1",
+                "name": "Exit Fullscreen"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Is Fullscreen"
+            }
+        ],
+        "name": "Ops.Html.FullscreenMode"
+    },
+    "summary": "switch webgl to fullscreen"
+}

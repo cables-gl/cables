@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Function Name"
+            },
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Patch.Function"
+    },
+    "summary": "trigger an external function when embedded into a website"
+}

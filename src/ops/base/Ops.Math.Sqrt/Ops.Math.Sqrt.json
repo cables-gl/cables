@@ -1,0 +1,18 @@
+{
+    "summary": "square root of a number",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Sqrt"
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exe"
+            },
+            {
+                "type": "0",
+                "name": "Nth"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            }
+        ],
+        "name": "Ops.NthTrigger"
+    },
+    "summary": "trigger childs every x times exe was triggered"
+}
