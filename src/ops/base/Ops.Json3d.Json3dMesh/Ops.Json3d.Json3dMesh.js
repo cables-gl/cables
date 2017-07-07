@@ -23,6 +23,7 @@ var geometryOut=op.outObject("Geometry");
 
 var data=null;
 var mesh=null;
+var meshes=[];
 var currentIndex=-1;
 var transMatrix=mat4.create();
 var bounds={};
@@ -104,6 +105,11 @@ function setMesh()
 {
     mesh=null;
     var index=Math.floor(meshIndex.get());
+    if(meshes[index])
+    {
+        mesh=meshes[index];
+        return;
+    }
 
     if(!data || index!=index || !isNumeric(index) || index<0 || index>=data.meshes.length)
     {
@@ -144,6 +150,7 @@ function setMesh()
     geometryOut.set(geom);
     mesh=new CGL.Mesh(cgl,geom);
     needSetMesh=false;
+    meshes[index]=mesh;
 
     op.uiAttr({'warning':null});
 }

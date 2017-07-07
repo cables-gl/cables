@@ -1,1 +1,42 @@
-{"summary":"Load Single Mesh from a 3d File, e.g. FBX,OBJ,DAE"}
+{
+    "summary": "Load Single Mesh from a 3d File, e.g. FBX,OBJ,DAE",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "Mesh Index"
+            },
+            {
+                "type": "0",
+                "name": "Draw"
+            },
+            {
+                "type": "0",
+                "name": "Center Mesh"
+            },
+            {
+                "type": "0",
+                "name": "Size"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.Json3d.Json3dMesh"
+    }
+}
