@@ -1,10 +1,13 @@
 {{MODULES_HEAD}}
+
 attribute vec3 vPosition;
-attribute vec2 attrTexCoord;
 
 varying vec3 norm;
-#ifdef HAS_TEXTURES
+
     varying vec2 texCoord;
+
+#ifdef HAS_TEXTURES
+    attribute vec2 attrTexCoord;
     #ifdef TEXTURE_REPEAT
         uniform float diffuseRepeatX;
         uniform float diffuseRepeatY;

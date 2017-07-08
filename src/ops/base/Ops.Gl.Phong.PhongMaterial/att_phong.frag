@@ -30,7 +30,7 @@ uniform float diffuseRepeatY;
 uniform int flatShading;
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
-varying mediump vec2 texCoord;
+varying  vec2 texCoord;
 
 struct Light {
   vec3 pos;

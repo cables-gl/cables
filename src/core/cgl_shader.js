@@ -42,6 +42,7 @@ CGL.Shader=function(_cgl,_name)
     this._extensions=[];
     this.srcVert=CGL.Shader.getDefaultVertexShader();
     this.srcFrag=CGL.Shader.getDefaultFragmentShader();
+    this.lastCompile=0;
 
     var moduleNames=[];
     var modules=[];
@@ -207,6 +208,9 @@ CGL.Shader=function(_cgl,_name)
 
     this.compile=function()
     {
+
+
+
         CGL.profileShaderCompiles++;
         CGL.profileShaderCompileName=name;
 
@@ -336,8 +340,12 @@ CGL.Shader=function(_cgl,_name)
         self.finalShaderVert=vs;
 
 
+        CGL.MESH.lastMesh=null;
+        CGL.MESH.lastShader=null;
+
         // printStats();
         self._needsRecompile=false;
+        self.lastCompile=CABLES.now();
     };
 
     this.bind=function()
