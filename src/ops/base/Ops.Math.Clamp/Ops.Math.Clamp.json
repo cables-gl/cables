@@ -1,0 +1,1 @@
+{"layout":{"portsIn":[{"type":"0","name":"val"},{"type":"0","name":"min"},{"type":"0","name":"max"},{"type":"0","name":"ignore outside values"}],"portsOut":[{"type":"0","name":"result"}],"name":"Ops.Math.Clamp"},"summary":"Makes sure a value is within range  cuts off the rest"}

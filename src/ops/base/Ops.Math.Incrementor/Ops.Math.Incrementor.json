@@ -1,0 +1,1 @@
+{"summary":"increment a number by triggering","layout":{"portsIn":[{"type":"1","name":"Increment"},{"type":"0","name":"Length"},{"type":"1","name":"Reset"},{"type":"1","name":"Decrement"},{"type":"0","name":"Mode"}],"portsOut":[{"type":"0","name":"Value"}],"name":"Ops.Math.Incrementor"}}

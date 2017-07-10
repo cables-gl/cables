@@ -21,6 +21,7 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._feedBacks=[];
     this._feedBacksChanged=false;
     this._transformFeedBackLoc=-1;
+    this._lastAttrUpdate=0;
 };
 
 
@@ -52,6 +53,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     var floatArray=null;
     var cb=null;
     var instanced=false;
+
 
     if(typeof options=='function')
     {
@@ -105,6 +107,9 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
             this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
+
+
+
             return this._attributes[i];
         }
     }
@@ -133,10 +138,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     if(name==CGL.SHADERVAR_VERTEX_POSITION) this._bufVertexAttrib=attr;
     this._attributes.push(attr);
 
-    for(i=0;i<this._attributes.length;i++)
-    {
-        this._attributes[i].loc=-1;
-    }
+    for(i=0;i<this._attributes.length;i++) this._attributes[i].loc=-1;
 
     return attr;
     // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, null);
@@ -240,6 +242,12 @@ CGL.Mesh.prototype._preBind=function(shader)
 
 CGL.Mesh.prototype._bind=function(shader)
 {
+    if(shader.lastCompile>this._lastAttrUpdate)
+    {
+        this._lastAttrUpdate=shader.lastCompile;
+        for(i=0;i<this._attributes.length;i++) this._attributes[i].loc=-1;
+    }
+
     for(i=0;i<this._attributes.length;i++)
     {
         var attribute=this._attributes[i];

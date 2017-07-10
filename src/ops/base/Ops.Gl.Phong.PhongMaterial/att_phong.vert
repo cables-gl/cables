@@ -24,7 +24,7 @@ varying vec3 vNormal;
 
 
 #ifdef HAS_TEXTURES
-    varying mediump vec2 texCoord;
+    varying  vec2 texCoord;
 #endif
 
 
