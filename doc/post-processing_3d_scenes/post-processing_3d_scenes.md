@@ -28,7 +28,7 @@ Resulting texture:
   - Set a background color
   - Draw the image from step 1
   - Draw the blurred image from step 2 using `blendmode`: `add`
-  - Apply effects like `Noise` and `ChromaticAberration`
+  - Apply effects like `Noise` and `ChromaticAbberation`
 
 
 Resulting texture:  
