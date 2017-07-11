@@ -1,18 +1,25 @@
 {
-    "summary": "use your webcam camera as a texture",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "flip"
+                "name": "file"
             },
             {
                 "type": "0",
-                "name": "fps"
+                "name": "texture width"
             },
             {
                 "type": "0",
-                "name": "Active"
+                "name": "texture height"
+            },
+            {
+                "type": "0",
+                "name": "wrap"
+            },
+            {
+                "type": "0",
+                "name": "filter"
             }
         ],
         "portsOut": [
@@ -21,6 +28,6 @@
                 "name": "texture"
             }
         ],
-        "name": "Ops.Gl.Textures.WebcamTexture"
+        "name": "Ops.Gl.TextureSVG"
     }
 }

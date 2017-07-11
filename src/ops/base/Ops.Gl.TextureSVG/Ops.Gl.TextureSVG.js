@@ -9,7 +9,9 @@ var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',
 var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 
 
-var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
+// var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
+var textureOut=op.outTexture("texture");
+
 
 tfilter.onValueChanged=onFilterChange;
 wrap.onValueChanged=onWrapChange;
@@ -129,7 +131,9 @@ function update()
         textureOut.set(new CGL.Texture.createFromImage(cgl,canvas,
         {
             wrap:cgl_wrap,
-            filter:cgl_filter
+            filter:cgl_filter,
+            width: canvas.width, 
+            height: canvas.height
         }));
         removeCanvas();
     };
