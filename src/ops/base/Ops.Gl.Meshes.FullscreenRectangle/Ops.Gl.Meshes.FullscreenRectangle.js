@@ -1,34 +1,29 @@
 op.name='fullscreen rectangle';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-
 var centerInCanvas=op.addInPort(new Port(op,"Center in Canvas",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var flipY=op.inValueBool("Flip Y");
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var flipY=op.inValueBool("Flip Y");
 var cgl=op.patch.cgl;
 var mesh=null;
 var geom=new CGL.Geometry("fullscreen rectangle");
 var x=0,y=0,z=0,w=0,h=0;
-// op.onResize=rebuild;
 
-
-centerInCanvas.onValueChanged=rebuild;
-flipY.onValueChanged=rebuild;
+centerInCanvas.onChange=rebuild;
+flipY.onChange=rebuild;
 
 render.onTriggered=function()
 {
-    if(
-      cgl.getViewPort()[2]!=w ||
-      cgl.getViewPort()[3]!=h ) 
-      {
-          rebuild();
-      }
+    if( cgl.getViewPort()[2]!=w || cgl.getViewPort()[3]!=h )
+    {
+        rebuild();
+    }
 
     cgl.pushPMatrix();
     mat4.identity(cgl.pMatrix);
-    mat4.ortho(cgl.pMatrix, 0, w, h, 0, -10.0, 1000);
+    mat4.ortho(cgl.pMatrix, 0, w,h, 0, -10.0, 1000);
 
     cgl.pushMvMatrix();
     mat4.identity(cgl.mvMatrix);
