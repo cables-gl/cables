@@ -1,0 +1,22 @@
+{
+    "summary": "a collection of nice color palettes",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Index"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "3",
+                "name": "Color Array"
+            }
+        ],
+        "name": "Ops.Color.ColorPalettes"
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "summary": "convert a hex color like  fff to number values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Hex"
+            },
+            {
+                "type": "0",
+                "name": "Bytes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "R"
+            },
+            {
+                "type": "0",
+                "name": "G"
+            },
+            {
+                "type": "0",
+                "name": "B"
+            }
+        ],
+        "name": "Ops.Color.HexToRGB"
+    }
+}

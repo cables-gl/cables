@@ -1,0 +1,30 @@
+{
+    "summary": "Simple texture filled with one color",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "a"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "texture_out"
+            }
+        ],
+        "name": "Ops.Gl.Textures.ColorTexture"
+    }
+}

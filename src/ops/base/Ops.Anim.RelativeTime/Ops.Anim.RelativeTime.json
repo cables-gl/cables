@@ -1,1 +1,22 @@
-{"summary":"Time since the patch was loaded"}
+{
+    "summary": "Time since the patch was loaded in seconds",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "Multiply"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Anim.RelativeTime"
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "summary": "enable disable RGB color channels",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "channelR"
+            },
+            {
+                "type": "0",
+                "name": "channelG"
+            },
+            {
+                "type": "0",
+                "name": "channelB"
+            },
+            {
+                "type": "0",
+                "name": "mono"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.ColorChannel"
+    }
+}
