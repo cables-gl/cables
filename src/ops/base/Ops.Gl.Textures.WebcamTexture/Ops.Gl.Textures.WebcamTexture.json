@@ -19,6 +19,10 @@
             {
                 "type": "2",
                 "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Ratio"
             }
         ],
         "name": "Ops.Gl.Textures.WebcamTexture"

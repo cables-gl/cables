@@ -7,6 +7,8 @@ var inActive=op.inValueBool("Active",true);
 // var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var textureOut=op.outTexture("texture");
 
+var outRatio=op.outValue("Ratio");
+
 fps.set(30);
 flip.set(true);
 
@@ -64,6 +66,8 @@ function startWebcam()
             videoElement.onloadedmetadata = function(e)
             {
                 tex.setSize(videoElement.videoWidth,videoElement.videoHeight);
+                
+                outRatio.set(videoElement.videoWidth/videoElement.videoHeight);
 
                 videoElement.play();
                 updateTexture();

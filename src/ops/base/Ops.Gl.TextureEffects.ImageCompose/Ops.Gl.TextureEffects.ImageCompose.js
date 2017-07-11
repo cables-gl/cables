@@ -12,6 +12,8 @@ var fpTexture=op.inValueBool("HDR");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var texOut=op.outTexture("texture_out");
 
+var outRatio=op.outValue("Aspect Ratio");
+
 texOut.set(null);
 var cgl=op.patch.cgl;
 var effect=null;
@@ -90,7 +92,7 @@ function updateResolution()
         width.set(w);
         tex.filter=CGL.Texture.FILTER_LINEAR;
         tex.setSize(w,h);
-        
+        outRatio.set(w/h);
         effect.setSourceTexture(tex);
         
         // console.log('resize!');

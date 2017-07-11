@@ -10,6 +10,7 @@ var textureOut=op.outTexture("texture");
 var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 var loading=op.addOutPort(new Port(op,"loading",OP_PORT_TYPE_VALUE));
+var ratio=op.outValue("Aspect Ratio");
 
 flip.set(false);
 unpackAlpha.set(false);
@@ -66,6 +67,7 @@ function realReload(nocache)
                 textureOut.set(tex);
                 width.set(tex.width);
                 height.set(tex.height);
+                ratio.set(tex.width/tex.height);
 
                 if(!tex.isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
                     else op.uiAttr({warning:''});

@@ -1,1 +1,54 @@
-{"summary":"Compose a new Image"}
+{
+    "summary": "Compose a new Image",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "use viewport size"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "filter"
+            },
+            {
+                "type": "0",
+                "name": "wrap"
+            },
+            {
+                "type": "0",
+                "name": "Background Alpha"
+            },
+            {
+                "type": "0",
+                "name": "HDR"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "texture_out"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.ImageCompose"
+    }
+}
