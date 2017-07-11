@@ -4,8 +4,8 @@ var exe=op.inFunction("exe");
 var min=op.inValue("min",0);
 var max=op.inValue("max",1);
 
+var pause=op.inValue("pause between",0);
 var seed=op.inValue("random seed",0);
-
 
 var duration=op.inValue("duration",0.5);
 
@@ -34,7 +34,9 @@ function init(v)
     anim.clear();
     if(v===undefined) v=getRandom();
     anim.setValue(op.patch.freeTimer.get(), v);
-    anim.setValue(parseFloat(duration.get())+op.patch.freeTimer.get(), getRandom());
+    if(pause.get()!=0.0)anim.setValue(op.patch.freeTimer.get()+pause.get(), v);
+    
+    anim.setValue(parseFloat(duration.get())+op.patch.freeTimer.get()+pause.get(), getRandom());
 }
 
 

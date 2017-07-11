@@ -16,6 +16,10 @@
             },
             {
                 "type": "0",
+                "name": "pause between"
+            },
+            {
+                "type": "0",
                 "name": "random seed"
             },
             {
