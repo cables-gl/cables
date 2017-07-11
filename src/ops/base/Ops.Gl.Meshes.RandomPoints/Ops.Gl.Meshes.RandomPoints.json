@@ -1,42 +1,36 @@
 {
+    "summary": "random points in space",
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "exe"
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "num"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "size"
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "random seed"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "scaleX"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "scaleY"
             },
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "scaleZ"
             }
         ],
-        "portsOut": [
-            {
-                "type": "1",
-                "name": "trigger"
-            }
-        ],
-        "name": "Ops.Gl.TextureEffects.Noise.PerlinNoise"
-    },
-    "summary": "draw perlin noise into an image"
+        "name": "Ops.Gl.Meshes.RandomPoints"
+    }
 }

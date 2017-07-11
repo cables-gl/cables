@@ -1,1 +1,16 @@
-{"summary":"open an url"}
+{
+    "summary": "open an url",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "open"
+            },
+            {
+                "type": "0",
+                "name": "URL"
+            }
+        ],
+        "name": "Ops.Html.HyperLink"
+    }
+}

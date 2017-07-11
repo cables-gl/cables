@@ -1,0 +1,18 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "cps"
+            }
+        ],
+        "name": "Ops.CallsPerSecond"
+    },
+    "summary": "counts how often the port is triggered per second"
+}

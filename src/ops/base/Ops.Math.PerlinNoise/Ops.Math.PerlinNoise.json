@@ -1,1 +1,25 @@
-{"libs":["perlin.js"]}
+{
+    "libs": [
+        "perlin.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.PerlinNoise"
+    },
+    "summary": "outputs a perlin noise value  like random"
+}

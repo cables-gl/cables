@@ -1,0 +1,18 @@
+{
+    "summary": "clear the depth buffer   zbuffer   z buffer",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ClearDepth"
+    }
+}
