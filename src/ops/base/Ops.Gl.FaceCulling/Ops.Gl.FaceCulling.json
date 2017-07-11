@@ -1,0 +1,26 @@
+{
+    "summary": "faces hidden from the viewer will not be rendered when enabled",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "enable"
+            },
+            {
+                "type": "0",
+                "name": "facing"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.FaceCulling"
+    }
+}

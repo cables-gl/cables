@@ -1,1 +1,26 @@
-{"summary":"Interpolate between values, lerp, linear interpolate"}
+{
+    "summary": "Interpolate between values, lerp, linear interpolate",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value 1"
+            },
+            {
+                "type": "0",
+                "name": "Value 2"
+            },
+            {
+                "type": "0",
+                "name": "Percentage"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.Interpolate"
+    }
+}

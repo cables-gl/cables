@@ -1,3 +1,42 @@
 {
-    "summary": "Test if the mouse hovers over drawn elements"
+    "summary": "Test if the mouse hovers over drawn elements",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Use Mouse Coordinates"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "enabled"
+            },
+            {
+                "type": "0",
+                "name": "cursor"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "pick texture"
+            }
+        ],
+        "name": "Ops.Gl.Shader.Picker"
+    }
 }

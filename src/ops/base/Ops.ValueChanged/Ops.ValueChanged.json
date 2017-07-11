@@ -1,0 +1,18 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.ValueChanged"
+    },
+    "summary": "Triggers the next Op if value has changed"
+}

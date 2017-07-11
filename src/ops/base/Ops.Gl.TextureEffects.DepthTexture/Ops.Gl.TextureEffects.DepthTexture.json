@@ -1,0 +1,30 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "image"
+            },
+            {
+                "type": "0",
+                "name": "farplane"
+            },
+            {
+                "type": "0",
+                "name": "nearplane"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.DepthTexture"
+    },
+    "summary": "draw the content of a depth texture"
+}
