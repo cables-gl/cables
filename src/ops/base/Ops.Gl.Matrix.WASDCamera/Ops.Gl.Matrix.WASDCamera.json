@@ -2,57 +2,53 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Flip Y"
-            },
-            {
-                "type": "0",
-                "name": "Inertia Movement"
-            },
-            {
                 "type": "1",
-                "name": "Reset"
+                "name": "render"
             },
             {
                 "type": "0",
-                "name": "mul"
+                "name": "posX"
             },
             {
                 "type": "0",
-                "name": "minX"
+                "name": "posY"
             },
             {
                 "type": "0",
-                "name": "maxX"
+                "name": "posZ"
             },
             {
                 "type": "0",
-                "name": "minY"
+                "name": "rotX"
             },
             {
                 "type": "0",
-                "name": "maxY"
+                "name": "rotY"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "x"
+                "type": "1",
+                "name": "trigger"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "isLocked"
             },
             {
                 "type": "0",
-                "name": "isMoving"
+                "name": "posX"
             },
             {
                 "type": "0",
-                "name": "isPressed"
+                "name": "posY"
+            },
+            {
+                "type": "0",
+                "name": "posZ"
             }
         ],
-        "name": "Ops.Devices.Mouse.MouseDrag"
+        "name": "Ops.Gl.Matrix.WASDCamera"
     },
-    "summary": "get values by dragging the mouse"
+    "summary": "camera controller like in a FPS game  move with WASD keys"
 }

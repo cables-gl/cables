@@ -1,0 +1,102 @@
+{
+    "summary": "a freely deformable plane",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "x 1"
+            },
+            {
+                "type": "0",
+                "name": "y 1"
+            },
+            {
+                "type": "0",
+                "name": "z 1"
+            },
+            {
+                "type": "0",
+                "name": "x 2"
+            },
+            {
+                "type": "0",
+                "name": "y 2"
+            },
+            {
+                "type": "0",
+                "name": "z 2"
+            },
+            {
+                "type": "0",
+                "name": "x 3"
+            },
+            {
+                "type": "0",
+                "name": "y 3"
+            },
+            {
+                "type": "0",
+                "name": "z 3"
+            },
+            {
+                "type": "0",
+                "name": "x 4"
+            },
+            {
+                "type": "0",
+                "name": "y 4"
+            },
+            {
+                "type": "0",
+                "name": "z 4"
+            },
+            {
+                "type": "0",
+                "name": "tc x 1"
+            },
+            {
+                "type": "0",
+                "name": "tc y 1"
+            },
+            {
+                "type": "0",
+                "name": "tc x 2"
+            },
+            {
+                "type": "0",
+                "name": "tc y 2"
+            },
+            {
+                "type": "0",
+                "name": "tc x 3"
+            },
+            {
+                "type": "0",
+                "name": "tc y 3"
+            },
+            {
+                "type": "0",
+                "name": "tc x 4"
+            },
+            {
+                "type": "0",
+                "name": "tc y 4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.FreeFormPlane"
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Num X"
+            },
+            {
+                "type": "0",
+                "name": "Num Y"
+            },
+            {
+                "type": "0",
+                "name": "Space X"
+            },
+            {
+                "type": "0",
+                "name": "Space Y"
+            },
+            {
+                "type": "0",
+                "name": "Align"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Index"
+            }
+        ],
+        "name": "Ops.Gl.GridTransform"
+    },
+    "summary": "transform and arrange elements into a grid"
+}

@@ -1,0 +1,26 @@
+{
+    "summary": "draw a simple grid of lines",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Num"
+            },
+            {
+                "type": "0",
+                "name": "Spacing"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.Grid"
+    }
+}
