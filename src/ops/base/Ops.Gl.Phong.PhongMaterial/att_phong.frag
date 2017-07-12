@@ -5,7 +5,7 @@
 //some settings for the look and feel of the material
 const float specularScale = 0.65;
 const float roughness = 1110.0;
-const float albedo = 0.95;
+const float albedo = 0.9;
 
 uniform float shininess;
 uniform float specularStrength;
@@ -247,7 +247,7 @@ void main()
         vec3 N = normal;//perturb_6_2(normalMap, normal, -V, vUv); //surface normal
         
         #ifdef HAS_TEXTURE_NORMAL
-            N=normalize(normalMap+normal);
+            N = normalize( (normalMap+normal) );
         #endif
 
         //compute our diffuse & specular terms
@@ -266,8 +266,8 @@ void main()
     
     color*=diffuseColor;
     color+=specular;
-    color=toGamma_3_9(color);
+    // color=toGamma_3_9(color);
 
     gl_FragColor.rgb = color;
-    gl_FragColor.a = 1.0;
+    gl_FragColor.a =a;
 }

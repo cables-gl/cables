@@ -1,1 +1,22 @@
-{}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "string1"
+            },
+            {
+                "type": "0",
+                "name": "string2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.String.Concat"
+    },
+    "summary": "Joins two strings together"
+}

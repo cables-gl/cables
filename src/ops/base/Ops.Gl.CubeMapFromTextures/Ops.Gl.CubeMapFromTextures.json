@@ -1,0 +1,37 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "posx"
+            },
+            {
+                "type": "0",
+                "name": "negx"
+            },
+            {
+                "type": "0",
+                "name": "posy"
+            },
+            {
+                "type": "0",
+                "name": "negy"
+            },
+            {
+                "type": "0",
+                "name": "posz"
+            },
+            {
+                "type": "0",
+                "name": "negz"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "cubemap"
+            }
+        ],
+        "name": "Ops.Gl.CubeMapFromTextures"
+    }
+}

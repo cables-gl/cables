@@ -32,12 +32,14 @@ void main()
                col.b*=b;
            #endif
       #endif
+      col.a*=a;
       #ifdef HAS_TEXTURE_OPACITY
           col.a*=texture2D(texOpacity,vec2(texCoord.s,1.0-texCoord.t)).g;
        #endif
-       col.a*=a;
+       
    #endif
-{{MODULE_COLOR}}
+
+    {{MODULE_COLOR}}
 
 
    outColor = col;

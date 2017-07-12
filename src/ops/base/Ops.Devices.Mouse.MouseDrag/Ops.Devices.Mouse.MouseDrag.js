@@ -191,7 +191,11 @@ function bind()
     canvas.addEventListener('mouseup', onMouseUp);
     canvas.addEventListener('mouseenter', onMouseEnter);
     canvas.addEventListener('mouseleave', onMouseLeave);
-    // canvas.addEventListener('contextmenu', onClickRight);
+
+canvas.addEventListener("touchmove", onmousemove);
+canvas.addEventListener("touchstart", onMouseDown);
+canvas.addEventListener("touchend", onMouseUp);
+    
 }
 function unbind()
 {
@@ -202,7 +206,7 @@ function unbind()
     canvas.removeEventListener('mouseup', onMouseUp);
     canvas.removeEventListener('mouseenter', onMouseEnter);
     canvas.removeEventListener('mouseleave', onMouseLeave);
-    // canvas.removeEventListener('contextmenu', onClickRight);
+
 
 }
 

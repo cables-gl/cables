@@ -33,6 +33,7 @@ CGL.Shader=function(_cgl,_name)
     var vMatrixUniform=null;
     var camPosUniform=null;
     var normalMatrixUniform=null;
+	var inverseViewMatrixUniform=null;
     var attrVertexPos = -1;
 
     this._feedBackNames=[];
@@ -366,6 +367,7 @@ CGL.Shader=function(_cgl,_name)
             mMatrixUniform = cgl.gl.getUniformLocation(this._program, "modelMatrix");
             camPosUniform = cgl.gl.getUniformLocation(this._program, "camPos");
             normalMatrixUniform = cgl.gl.getUniformLocation(this._program, "normalMatrix");
+			inverseViewMatrixUniform = cgl.gl.getUniformLocation(this._program, "inverseViewMatrix");
             for(i=0;i<uniforms.length;i++)uniforms[i].needsUpdate=true;
         }
 
@@ -400,6 +402,19 @@ CGL.Shader=function(_cgl,_name)
             mat4.mul(tempmv,cgl.vMatrix,cgl.mvMatrix);
             cgl.gl.uniformMatrix4fv(mvMatrixUniform, false, tempmv);
         }
+
+		if(inverseViewMatrixUniform)
+		{
+			var inverseViewMatrix = mat4.create();
+
+			// mat4.mul(inverseViewMatrix,cgl.mvMatrix,cgl.vMatrix);
+            // mat4.mul(inverseViewMatrix,cgl.mvMatrix,cgl.vMatrix);
+
+            mat4.invert(inverseViewMatrix,cgl.vMatrix);
+
+
+            cgl.gl.uniformMatrix4fv(inverseViewMatrixUniform, false, inverseViewMatrix);
+		}
 
         if(normalMatrixUniform)
         {
