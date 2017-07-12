@@ -1,1 +1,38 @@
-{"summary":"Maps a value from one range into another."}
+{
+    "summary": "Maps a value from one range into another.",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "value"
+            },
+            {
+                "type": "0",
+                "name": "old min"
+            },
+            {
+                "type": "0",
+                "name": "old max"
+            },
+            {
+                "type": "0",
+                "name": "new min"
+            },
+            {
+                "type": "0",
+                "name": "new max"
+            },
+            {
+                "type": "0",
+                "name": "Easing"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.MapRange"
+    }
+}

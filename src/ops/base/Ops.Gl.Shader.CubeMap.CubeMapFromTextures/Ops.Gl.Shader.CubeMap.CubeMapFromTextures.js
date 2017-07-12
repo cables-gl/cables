@@ -74,7 +74,7 @@ function load()
                         gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
                     }
                 } catch(e) {  // (Could be the security exception in some browsers when reading from the local disk)
-                console.log(e);
+                    console.log(e);
                     console.log( "could not load cubemap texture");
                 }
                 gl.generateMipmap(gl.TEXTURE_CUBE_MAP);

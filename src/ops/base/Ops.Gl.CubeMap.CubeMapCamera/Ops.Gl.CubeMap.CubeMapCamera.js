@@ -11,8 +11,8 @@ var initialized=false;
 
 var framebuffer=null;
 
-var projection = mat4.create();   // projection matrix
-mat4.perspective(projection, Math.PI/4, 1, 1, 100);  // renderSkyboxAndCubes() assumes projection and modelview matrix are already set
+// var projection = mat4.create();   // projection matrix
+// mat4.perspective(projection, Math.PI/4, 1, 1, 100);  // renderSkyboxAndCubes() assumes projection and modelview matrix are already set
     
 var dynamicCubemap;
 
@@ -59,6 +59,7 @@ render.onTriggered=function()
     if(!initialized) init();
     
     cgl.pushViewMatrix();
+    cgl.pushPMatrix();
     
 
 
@@ -67,8 +68,10 @@ render.onTriggered=function()
     
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
     gl.viewport(0,0,512,512);  //match size of the texture images
-    mat4.perspective(projection, Math.PI/2, 1, 1, 100);  // Set projection to give 90-degree field of view.
+    mat4.perspective(cgl.pMatrix, Math.PI/2, 1, 1, 400);  // Set projection to give 90-degree field of view.
     
+
+
     
     
     var modelview = mat4.create();
@@ -100,40 +103,44 @@ render.onTriggered=function()
     cgl.vMatrix=modelview;
     next.trigger();
     
-    mat4.identity(modelview);
-    mat4.rotateX(modelview,modelview,Math.PI/2);
-    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, dynamicCubemap, 0);
-    cgl.vMatrix=modelview;
-    next.trigger();
+
+
     
-    mat4.identity(modelview);
-    mat4.rotateX(modelview,modelview,-Math.PI/2);
-    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, dynamicCubemap, 0);
-    cgl.vMatrix=modelview;
-    next.trigger();
+    // mat4.identity(modelview);
+    // mat4.rotateX(modelview,modelview,Math.PI/2);
+    // gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, dynamicCubemap, 0);
+    // next.trigger();
+    
+    // mat4.identity(modelview);
+    // mat4.rotateX(modelview,modelview,-Math.PI/2);
+    // gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, dynamicCubemap, 0);
+    // next.trigger();
+
+
+    
     
     /* The commented out section below is an alternative way of computing the positive and negative Y images,
        including the x/y flip.  The rotations that are used in this version correspond are the correct rotations
        based on the layout of the six images in a cubemap.   The single rotation used above is equivalent to the
        flip and two rotations used below. */
     
-    //mat4.identity(modelview);
-    //mat4.scale(modelview,modelview,[-1,-1,1]);
-    //mat4.rotateX(modelview,modelview,Math.PI/2);
-    //mat4.rotateY(modelview,modelview,Math.PI);
-    //gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, dynamicCubemap, 0);
-    //renderSkyboxAndCubes();
-    //
-    //mat4.identity(modelview);
-    //mat4.scale(modelview,modelview,[-1,-1,1]);
-    //mat4.rotateX(modelview,modelview,-Math.PI/2);
-    //mat4.rotateY(modelview,modelview,Math.PI);
-    //gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, dynamicCubemap, 0);
-    //renderSkyboxAndCubes();
+    mat4.identity(modelview);
+    mat4.scale(modelview,modelview,[-1,-1,1]);
+    mat4.rotateX(modelview,modelview,Math.PI/2);
+    mat4.rotateY(modelview,modelview,Math.PI);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, dynamicCubemap, 0);
+    next.trigger();
+    
+    mat4.identity(modelview);
+    mat4.scale(modelview,modelview,[-1,-1,1]);
+    mat4.rotateX(modelview,modelview,-Math.PI/2);
+    mat4.rotateY(modelview,modelview,Math.PI);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, dynamicCubemap, 0);
+    next.trigger();
     
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap);
     gl.generateMipmap( gl.TEXTURE_CUBE_MAP );
-    
+    cgl.popPMatrix();
     cgl.popViewMatrix();
     
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);

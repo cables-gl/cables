@@ -13,6 +13,7 @@ var cgl=op.patch.cgl;
 
 function doRender()
 {
+    if(!inCubemap.get() || !inCubemap.get().cubemap)return;
     cgl.setShader(shader);
     
     
