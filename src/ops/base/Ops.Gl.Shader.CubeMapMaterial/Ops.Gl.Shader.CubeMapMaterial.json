@@ -8,6 +8,10 @@
             {
                 "type": "2",
                 "name": "Cubemap"
+            },
+            {
+                "type": "0",
+                "name": "Reflection"
             }
         ],
         "portsOut": [
