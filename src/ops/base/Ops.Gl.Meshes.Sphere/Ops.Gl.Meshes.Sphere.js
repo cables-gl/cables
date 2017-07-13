@@ -1,18 +1,17 @@
-// ported from freeglut fg_geometry.c
 
 op.name='Sphere';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var stacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
-var slices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
-var radius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
+var inStacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
+var inSlices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
+var inRadius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
-stacks.set(16);
-slices.set(16);
-radius.set(1);
+inStacks.set(32);
+inSlices.set(32);
+inRadius.set(1);
 geomOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;
@@ -24,9 +23,9 @@ var geomTexCoords=[];
 var geomVerticesIndices=[];
 
 
-slices.onValueChanged=function(){ mesh=null; };
-stacks.onValueChanged=function(){ mesh=null; };
-radius.onValueChanged=function(){ mesh=null; };
+inSlices.onChange=function(){ mesh=null; };
+inStacks.onChange=function(){ mesh=null; };
+inRadius.onChange=function(){ mesh=null; };
 
 render.onTriggered=function()
 {
@@ -39,13 +38,13 @@ render.onTriggered=function()
 
 function updateMesh()
 {
-    var nslices=Math.round(slices.get());
-    var nstacks=Math.round(stacks.get());
+    var nslices=Math.round(inSlices.get());
+    var nstacks=Math.round(inStacks.get());
     if(nslices<1)nslices=1;
     if(nstacks<1)nstacks=1;
-    var r=radius.get();
+    var r=inRadius.get();
     
-    generateSphere(r, nslices, nstacks);
+    uvSphere(r, nslices, nstacks);
 }
 
 // updateMesh();
@@ -87,120 +86,75 @@ function circleTable(n,halfCircle)
     return {cost:cost,sint:sint};
 }
 
-function generateSphere(radius, slices, stacks) //, GLfloat **vertices, GLfloat **normals, int* nVert
-{
-    var i,j;
-    var idx = 0;    /* idx into vertex/normal buffer */
-    var x,y,z;
 
+// from http://math.hws.edu/graphicsbook/source/webgl/basic-object-models-IFS.js
+function uvSphere(radius, slices, stacks)
+{
     var geom=new CGL.Geometry("sphere");
 
-    /* precompute values on unit circle */
-    var table1=circleTable(-slices,false);
-    var table2=circleTable(stacks,true);
-
-    /* Allocate vertex and normal buffers, bail out if memory allocation fails */
-    geom.clear();
-    geomVertices=[];
-    geomVertexNormals=[];
-    geomTexCoords=[];
-    geomVerticesIndices=[];
-
-    /* top */
-    geomVertices[0] = 0;
-    geomVertices[1] = 0;
-    geomVertices[2] = radius;
-    geomVertexNormals[0] = 0;
-    geomVertexNormals[1] = 0;
-    geomVertexNormals[2] = 1;
-
-    geomTexCoords[0] = 0;
-    geomTexCoords[1] = 0;
-
-    idx = 3;
-
-    /* each stack */
-    for( i=1; i<stacks; i++ )
+    radius = radius || 0.5;
+    slices = slices || 32;
+    stacks = stacks || 16;
+    var vertexCount = (slices+1)*(stacks+1);
+    var vertices = new Float32Array( 3*vertexCount );
+    var normals = new Float32Array( 3* vertexCount );
+    var texCoords = new Float32Array( 2*vertexCount );
+    var indices = new Uint16Array( 2*slices*stacks*3 );
+    var du = 2*Math.PI/slices;
+    var dv = Math.PI/stacks;
+    var i,j,u,v,x,y,z;
+    var indexV = 0;
+    var indexT = 0;
+    for (i = 0; i <= stacks; i++)
     {
-        for( j=0; j<=slices; j++, idx+=3 )
+        v = -Math.PI/2 + i*dv;
+        for (j = 0; j <= slices; j++)
         {
-            x = table1.cost[j]*table2.sint[i];
-            y = table1.sint[j]*table2.sint[i];
-            z = table2.cost[i];
+            u = j*du;
+            x = Math.cos(u)*Math.cos(v);
+            y = Math.sin(u)*Math.cos(v);
+            z = Math.sin(v);
 
-            geomVertices[idx  ] = x*radius;
-            geomVertices[idx+1] = y*radius;
-            geomVertices[idx+2] = z*radius;
-
-            geomVertexNormals[idx  ] = x;
-            geomVertexNormals[idx+1] = y;
-            geomVertexNormals[idx+2] = z;
-
-            geomTexCoords[idx/3*2  ] = (j)/(slices);
-            geomTexCoords[idx/3*2+1] = (i-1)/(stacks-2);
+            vertices[indexV] = radius*x;
+            normals[indexV++] = x;
             
-            // op.log(geomTexCoords[idx/3*2+1  ]);
-        }
+            vertices[indexV] = radius*y;
+            normals[indexV++] = y;
+            
+            vertices[indexV] = radius*z;
+            normals[indexV++] = z;
+            
+            texCoords[indexT++] = j/slices;
+            texCoords[indexT++] = i/stacks;
+        } 
     }
-
-    /* bottom */
-    geomVertices[idx  ] =  0;
-    geomVertices[idx+1] =  0;
-    geomVertices[idx+2] = -radius;
-    geomVertexNormals[idx  ] =  0;
-    geomVertexNormals[idx+1] =  0;
-    geomVertexNormals[idx+2] = -1;
-
-    geomTexCoords[(idx+3)/3*2] = 1;
-    geomTexCoords[(idx+3)/3*2+1] = 1;
-
-    // indices
-
-    var offset=0;
-
-    for (j=0, idx=0;  j<=slices;  j++, idx+=2)
+    var k = 0;
+    for (j = 0; j < stacks; j++)
     {
-        geomVerticesIndices[idx  ] = j+1;              /* 0 is top vertex, 1 is first for first stack */
-        geomVerticesIndices[idx+1] = 0;
-    }
-    geomVerticesIndices[idx  ] = 1;                    /* repeat first slice's idx for closing off shape */
-    geomVerticesIndices[idx+1] = 0;
-
-    var nVert=geomVertices.length/3;
-
-    /* middle stacks: */
-    /* Strip indices are relative to first index belonging to strip, NOT relative to first vertex/normal pair in array */
-    for (i=0; i<stacks-1; i++, idx+=2)
-    {
-        offset = 1+i*slices;                    /* triangle_strip indices start at 1 (0 is top vertex), and we advance one stack down as we go along */
-        for (j=0; j<slices; j++, idx+=2)
+        var row1 = j*(slices+1);
+        var row2 = (j+1)*(slices+1);
+        for (i = 0; i < slices; i++)
         {
-            geomVerticesIndices[idx  ] = offset+j+slices;
-            geomVerticesIndices[idx+1] = offset+j;
+            indices[k++] = row1 + i;
+            indices[k++] = row2 + i + 1;
+            indices[k++] = row2 + i;
+            
+            indices[k++] = row1 + i;
+            
+            indices[k++] = row2 + i + 1;
+            indices[k++] = row1 + i + 1;
         }
-        geomVerticesIndices[idx  ] = offset+slices;        /* repeat first slice's idx for closing off shape */
-        geomVerticesIndices[idx+1] = offset;
     }
 
-    /* bottom stack */
-    offset = 1+(stacks-2)*slices;               /* triangle_strip indices start at 1 (0 is top vertex), and we advance one stack down as we go along */
-    for (j=0; j<slices; j++, idx+=2)
-    {
-        geomVerticesIndices[idx  ] = nVert-1;              /* zero based index, last element in array (bottom vertex)... */
-        geomVerticesIndices[idx+1] = offset+j;
-    }
-    geomVerticesIndices[idx  ] = nVert-1;                  /* repeat first slice's idx for closing off shape */
-    geomVerticesIndices[idx+1] = offset;
-
-    geom.vertices=geomVertices;
-    geom.vertexNormals=geomVertexNormals;
-    geom.texCoords=geomTexCoords;
-    geom.verticesIndices=geomVerticesIndices;
+    geom.vertices=vertices;
+    geom.vertexNormals=normals;
+    geom.texCoords=texCoords;
+    geom.verticesIndices=indices;
 
     geomOut.set(geom);
 
     if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
     mesh.setGeom(geom);
-    //mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
-    
+
 }
+

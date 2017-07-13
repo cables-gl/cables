@@ -1,5 +1,8 @@
 op.name="CubeMapCamera";
 
+// adapted from: math.hws.edu/graphicsbook/source/webgl/cube-camera.html
+
+
 var render=op.inFunction("Render");
 var next=op.outFunction("Next");
 var outTex=op.outObject("cubemap");
@@ -11,9 +14,8 @@ var initialized=false;
 
 var framebuffer=null;
 
-// var projection = mat4.create();   // projection matrix
-// mat4.perspective(projection, Math.PI/4, 1, 1, 100);  // renderSkyboxAndCubes() assumes projection and modelview matrix are already set
-    
+var modelview = mat4.create();
+
 var dynamicCubemap;
 
 
@@ -74,7 +76,6 @@ render.onTriggered=function()
 
     
     
-    var modelview = mat4.create();
     
     mat4.identity(modelview);
     mat4.scale(modelview,modelview,[-1,-1,1]);
@@ -106,37 +107,19 @@ render.onTriggered=function()
 
 
     
-    // mat4.identity(modelview);
-    // mat4.rotateX(modelview,modelview,Math.PI/2);
-    // gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, dynamicCubemap, 0);
-    // next.trigger();
-    
-    // mat4.identity(modelview);
-    // mat4.rotateX(modelview,modelview,-Math.PI/2);
-    // gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, dynamicCubemap, 0);
-    // next.trigger();
-
-
-    
-    
-    /* The commented out section below is an alternative way of computing the positive and negative Y images,
-       including the x/y flip.  The rotations that are used in this version correspond are the correct rotations
-       based on the layout of the six images in a cubemap.   The single rotation used above is equivalent to the
-       flip and two rotations used below. */
-    
     mat4.identity(modelview);
-    mat4.scale(modelview,modelview,[-1,-1,1]);
     mat4.rotateX(modelview,modelview,Math.PI/2);
-    mat4.rotateY(modelview,modelview,Math.PI);
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, dynamicCubemap, 0);
     next.trigger();
     
     mat4.identity(modelview);
-    mat4.scale(modelview,modelview,[-1,-1,1]);
     mat4.rotateX(modelview,modelview,-Math.PI/2);
-    mat4.rotateY(modelview,modelview,Math.PI);
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, dynamicCubemap, 0);
     next.trigger();
+
+
+    
+
     
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap);
     gl.generateMipmap( gl.TEXTURE_CUBE_MAP );
