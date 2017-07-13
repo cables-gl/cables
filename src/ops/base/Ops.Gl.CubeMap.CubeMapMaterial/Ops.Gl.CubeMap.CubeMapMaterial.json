@@ -1,0 +1,25 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Cubemap"
+            },
+            {
+                "type": "0",
+                "name": "Reflection"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.CubeMap.CubeMapMaterial"
+    }
+}
