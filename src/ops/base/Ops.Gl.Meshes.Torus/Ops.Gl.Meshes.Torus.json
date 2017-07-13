@@ -1,5 +1,5 @@
 {
-    "summary": "draw a sphere",
+    "summary": "draw a torus   doughnut    donut   ring mesh",
     "layout": {
         "portsIn": [
             {
@@ -8,15 +8,19 @@
             },
             {
                 "type": "0",
-                "name": "stacks"
+                "name": "sides"
             },
             {
                 "type": "0",
-                "name": "slices"
+                "name": "rings"
             },
             {
                 "type": "0",
-                "name": "radius"
+                "name": "innerRadius"
+            },
+            {
+                "type": "0",
+                "name": "outerRadius"
             }
         ],
         "portsOut": [
@@ -29,6 +33,6 @@
                 "name": "geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.Sphere"
+        "name": "Ops.Gl.Meshes.Torus"
     }
 }

@@ -209,7 +209,7 @@ op.render.onTriggered=function()
     
     
     if(!shader)return;
-    var texSlot=moduleVert.num+4;
+    var texSlot=moduleVert.num+5;
 
     if(texture.get())
     {

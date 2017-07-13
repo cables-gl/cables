@@ -1,5 +1,4 @@
 {
-    "summary": "draw a sphere",
     "layout": {
         "portsIn": [
             {
@@ -7,28 +6,20 @@
                 "name": "render"
             },
             {
-                "type": "0",
-                "name": "stacks"
+                "type": "2",
+                "name": "Cubemap"
             },
             {
                 "type": "0",
-                "name": "slices"
-            },
-            {
-                "type": "0",
-                "name": "radius"
+                "name": "Reflection"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "trigger"
-            },
-            {
-                "type": "2",
-                "name": "geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.Sphere"
+        "name": "Ops.Gl.CubeMap.CubeMapMaterial"
     }
 }

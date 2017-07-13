@@ -1,38 +1,37 @@
 {
-    "summary": "Maps a value from one range into another.",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "value"
+                "name": "posx"
             },
             {
                 "type": "0",
-                "name": "old min"
+                "name": "negx"
             },
             {
                 "type": "0",
-                "name": "old max"
+                "name": "posy"
             },
             {
                 "type": "0",
-                "name": "new min"
+                "name": "negy"
             },
             {
                 "type": "0",
-                "name": "new max"
+                "name": "posz"
             },
             {
                 "type": "0",
-                "name": "Easing"
+                "name": "negz"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "result"
+                "type": "2",
+                "name": "cubemap"
             }
         ],
-        "name": "Ops.Math.MapRange"
+        "name": "Ops.Gl.Shader.CubeMap.CubeMapFromTextures"
     }
 }
