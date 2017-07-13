@@ -1,0 +1,16 @@
+{
+    "summary": "set the mouse cursor",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "cursor"
+            },
+            {
+                "type": "1",
+                "name": "Set Cursor"
+            }
+        ],
+        "name": "Ops.Html.Cursor"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "left"
+            },
+            {
+                "type": "0",
+                "name": "top"
+            }
+        ],
+        "name": "Ops.Html.ScrollPosition"
+    },
+    "summary": "the current x y  top left scrolling position of html page"
+}

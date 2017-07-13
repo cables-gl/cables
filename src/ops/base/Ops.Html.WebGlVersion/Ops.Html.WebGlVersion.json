@@ -1,1 +1,12 @@
-{}
+{
+    "summary": "which webgl version is being used",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Major Version"
+            }
+        ],
+        "name": "Ops.Html.WebGlVersion"
+    }
+}

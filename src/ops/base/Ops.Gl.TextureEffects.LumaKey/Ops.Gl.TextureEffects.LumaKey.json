@@ -1,29 +1,30 @@
 {
+    "summary": "remove darker parts of the image",
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "Render"
+                "name": "render"
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Invert"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Black White"
             },
             {
                 "type": "0",
-                "name": "Animated"
+                "name": "amthresholdount"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "Next"
+                "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Noise.Noise"
+        "name": "Ops.Gl.TextureEffects.LumaKey"
     }
 }

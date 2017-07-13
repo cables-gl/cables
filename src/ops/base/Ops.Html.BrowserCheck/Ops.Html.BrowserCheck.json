@@ -1,0 +1,60 @@
+{
+    "summary": "what browser is being used",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Is IE"
+            },
+            {
+                "type": "0",
+                "name": "Is IE 10+"
+            },
+            {
+                "type": "0",
+                "name": "Is IE 11"
+            },
+            {
+                "type": "0",
+                "name": "Is Edge"
+            },
+            {
+                "type": "0",
+                "name": "Is Chrome"
+            },
+            {
+                "type": "0",
+                "name": "Is Firefox"
+            },
+            {
+                "type": "0",
+                "name": "Is Mobile"
+            },
+            {
+                "type": "0",
+                "name": "Is Windows"
+            },
+            {
+                "type": "0",
+                "name": "Is Linux"
+            },
+            {
+                "type": "0",
+                "name": "Is Mac"
+            },
+            {
+                "type": "0",
+                "name": "Is iOS"
+            },
+            {
+                "type": "0",
+                "name": "Is Android"
+            },
+            {
+                "type": "0",
+                "name": "Language"
+            }
+        ],
+        "name": "Ops.Html.BrowserCheck"
+    }
+}
