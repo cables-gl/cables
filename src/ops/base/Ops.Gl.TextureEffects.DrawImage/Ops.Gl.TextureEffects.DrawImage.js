@@ -18,7 +18,6 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 blendMode.set('normal');
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'drawimage');
-// op.onLoaded=shader.compile;
 
 amount.set(1.0);
 
@@ -31,15 +30,12 @@ var srcVert=''
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
 
-
     .endl()+'uniform float posX;'
     .endl()+'uniform float posY;'
     .endl()+'uniform float scale;'
     .endl()+'uniform float rotate;'
 
     .endl()+'varying mat3 transform;'
-
-
 
     .endl()+'void main()'
     .endl()+'{'
@@ -209,7 +205,6 @@ alphaSrc.set("alpha channel");
         }
         else
         {
-            
             // shader.removeDefine('TEX_TRANSFORM');
         }
     }
@@ -235,9 +230,11 @@ imageAlpha.onValueChanged=function()
         else shader.removeDefine('HAS_TEXTUREALPHA');
 };
 
+
+
 function doRender()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(image.get() && image.get().tex && amount.get()>0.0)
     {
@@ -263,3 +260,6 @@ function doRender()
 }
 
 render.onTriggered=doRender;
+
+
+

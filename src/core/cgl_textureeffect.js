@@ -208,7 +208,26 @@ CGL.TextureEffect.prototype.createMesh=function()
     this._cgl.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
 };
 
+
 // ---------------------------------------------------------------------------------
+
+CGL.TextureEffect.checkOpInEffect=function(op)
+{
+    if(!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+    {
+        op.uiAttr({'error':'not in textureeffect!!'});
+        return false;
+    }
+    if(op.patch.cgl.currentTextureEffect && op.uiAttribs.error)
+    {
+        op.uiAttr({'error':null});
+        return true;
+    }
+    if(op.patch.cgl.currentTextureEffect)return true;
+
+    if(!op.patch.cgl.currentTextureEffect)return false;
+    return true;
+};
 
 CGL.TextureEffect.getBlendCode=function()
 {

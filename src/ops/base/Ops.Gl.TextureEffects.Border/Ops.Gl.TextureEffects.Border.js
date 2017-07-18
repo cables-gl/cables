@@ -90,7 +90,7 @@ var uniSmooth=new CGL.Uniform(shader,'b','smooth',smooth);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(CGL.TextureEffect.checkOpInEffect(op)) return;
 
 var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 aspectUniform.set(texture.height/texture.width);

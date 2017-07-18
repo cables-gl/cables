@@ -54,7 +54,7 @@ var uniAdd=new CGL.Uniform(shader,'f','add',add);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

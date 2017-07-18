@@ -1,1 +1,18 @@
-{"summary":"invert image colors"}
+{
+    "summary": "invert image colors",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Invert"
+    }
+}

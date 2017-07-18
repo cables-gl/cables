@@ -52,7 +52,7 @@ CABLES.Op = function()
         {
             this.uiAttribs[p]=newAttribs[p];
         }
-        if(this.onUiAttrChange) this.onUiAttrChange();
+        if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
     };
 
     CABLES.Op.prototype.getName=function()
