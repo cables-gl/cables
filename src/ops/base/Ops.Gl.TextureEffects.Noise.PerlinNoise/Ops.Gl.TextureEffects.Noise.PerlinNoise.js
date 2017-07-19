@@ -33,7 +33,7 @@ blendMode.onChange=function()
 
 render.onTriggered=function()
 {
-    if(CGL.TextureEffect.checkOpInEffect(op)) return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

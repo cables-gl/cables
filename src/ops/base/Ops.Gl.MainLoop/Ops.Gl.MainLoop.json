@@ -1,6 +1,6 @@
 {
     "libs": [],
-    "summary": "Trigger other ops once every frame to create smooth animations  renderer",
+    "summary": "Trigger other ops once every frame to create smooth animations (renderer)",
     "layout": {
         "portsIn": [
             {

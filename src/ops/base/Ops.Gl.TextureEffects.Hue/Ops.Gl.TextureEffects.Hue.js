@@ -59,7 +59,7 @@ hue.onValueChanged=function(){ uniformHue.setValue(hue.get()); };
 
 render.onTriggered=function()
 {
-    if(CGL.TextureEffect.checkOpInEffect(op)) return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

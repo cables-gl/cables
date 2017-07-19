@@ -47,11 +47,11 @@ var srcVert=''
     .endl()+'     float angle = radians( rotate );'
     .endl()+'     vec2 scale= vec2(scale,scale);'
     .endl()+'     vec2 translate= vec2(posX,posY);'
-    
+
     .endl()+'     transform = mat3(   scale.x * cos( angle ), scale.x * sin( angle ), 0.0,'
     .endl()+'                           - scale.y * sin( angle ), scale.y * cos( angle ), 0.0,'
     .endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x*2.0 + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y*2.0 + 0.5, 1.0);'
-    
+
     .endl()+'   #endif'
 
     .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
@@ -120,12 +120,12 @@ var srcFrag=''
     .endl()+'           blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;'
     .endl()+'       #endif'
 
-    
+
     .endl()+'   #endif'
-    
+
     .endl()+'   blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);'
     .endl()+'   blendRGBA.a=1.0;'
-    
+
 
     .endl()+'   gl_FragColor = blendRGBA;'
     .endl()+'}';
@@ -234,7 +234,7 @@ imageAlpha.onValueChanged=function()
 
 function doRender()
 {
-    if(CGL.TextureEffect.checkOpInEffect(op)) return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(image.get() && image.get().tex && amount.get()>0.0)
     {
@@ -247,7 +247,7 @@ function doRender()
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
         if(image.get() && image.get().tex) cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
             else cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-    
+
         cgl.gl.activeTexture(cgl.gl.TEXTURE2);
         if(imageAlpha.get() && imageAlpha.get().tex) cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, imageAlpha.get().tex );
             else cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
@@ -260,6 +260,3 @@ function doRender()
 }
 
 render.onTriggered=doRender;
-
-
-

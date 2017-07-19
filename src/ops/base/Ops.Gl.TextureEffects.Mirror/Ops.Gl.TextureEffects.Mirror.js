@@ -35,7 +35,7 @@ var srcFrag=''
 
     .endl()+'       float x=(tc);'
     .endl()+'       if(tc>=0.5)x=1.0-tc;'
-    
+
     .endl()+'       x*=width*2.0;'
     .endl()+'       if(flip==1.0)x=1.0-x;'
     .endl()+'       x*=1.0-offset;'
@@ -68,7 +68,7 @@ axis.onValueChanged=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
@@ -81,4 +81,3 @@ render.onTriggered=function()
 
     trigger.trigger();
 };
-

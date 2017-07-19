@@ -23,13 +23,13 @@ var srcFrag=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    
+
     .endl()+'if(!smooth)'
     .endl()+'{'
-    
+
     .endl()+'   if( texCoord.x>1.0-width/3.0 || texCoord.y>1.0-width/aspect/3.0 || texCoord.y<width/aspect/3.0 || texCoord.x<width/3.0 ) col = vec4(r,g,b, 1.0);'
     .endl()+'   gl_FragColor = col;'
-    .endl()+'} else {'    
+    .endl()+'} else {'
     .endl()+'   float f=smoothstep(0.0,width,texCoord.x)-smoothstep(1.0-width,1.0,texCoord.x);'
     .endl()+'   f*=smoothstep(0.0,width/aspect,texCoord.y);'
     .endl()+'   f*=smoothstep(1.0,1.0-width/aspect,texCoord.y);'
@@ -90,7 +90,7 @@ var uniSmooth=new CGL.Uniform(shader,'b','smooth',smooth);
 
 render.onTriggered=function()
 {
-    if(CGL.TextureEffect.checkOpInEffect(op)) return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
 var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 aspectUniform.set(texture.height/texture.width);

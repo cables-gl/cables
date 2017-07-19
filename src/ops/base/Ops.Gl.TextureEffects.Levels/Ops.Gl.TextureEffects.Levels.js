@@ -31,7 +31,7 @@ var srcFrag=''
     .endl()+'uniform float midPoint;'
     .endl()+'uniform float outMax;'
     .endl()+'uniform float outMin;'
-    
+
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 base=texture2D(tex,texCoord);'
@@ -49,7 +49,7 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 render.onTriggered=function()
 {
-    if(CGL.TextureEffect.checkOpInEffect(op)) return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
@@ -62,4 +62,3 @@ render.onTriggered=function()
 
     trigger.trigger();
 };
-

@@ -56,14 +56,14 @@ tone.onChange=function()
     if(tone.get()=="Highlights") shader.define("TONE_HIGH");
     if(tone.get()=="Midtones") shader.define("TONE_MID");
     if(tone.get()=="Shadows") shader.define("TONE_LOW");
-    
+
     op.log(tone.get());
 };
 
 
 render.onTriggered=function()
 {
-    if(CGL.TextureEffect.checkOpInEffect(op)) return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

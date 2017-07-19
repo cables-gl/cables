@@ -28,12 +28,12 @@ var srcFrag=''
 
     .endl()+'uniform float sides;'
     .endl()+'uniform float angle;'
-    
+
     .endl()+'uniform float slidex;'
     .endl()+'uniform float slidey;'
     .endl()+'uniform float centerX;'
     .endl()+'uniform float centerY;'
-    
+
     .endl()+'const float tau = 6.28318530718;'
 
     .endl()+'void main()'
@@ -52,16 +52,16 @@ var srcFrag=''
 	.endl()+'vec2 loc = texCoord;'
 	.endl()+'float r = distance(center, loc);'
 	.endl()+'float a = atan ((loc.y-center.y),(loc.x-center.x));'
-	
+
 	// kaleidoscope
 	.endl()+'a = mod(a, tau/sides);'
 	.endl()+'a = abs(a - tau/sides/2.);'
-	
+
 	.endl()+'loc.x = r * cos(a + tau * angle);'
 	.endl()+'loc.y = r * sin(a + tau * angle);'
-	
+
 	.endl()+'loc = (center + loc) *2.1;'
-	
+
 	.endl()+'loc.x = mod(loc.x + slidex, 1.0);'
 	.endl()+'loc.y = mod(loc.y + slidey, 1.0);'
 
@@ -83,7 +83,7 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 render.onTriggered=function()
 {
-    if(CGL.TextureEffect.checkOpInEffect(op)) return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
@@ -96,4 +96,3 @@ render.onTriggered=function()
 
     trigger.trigger();
 };
-
