@@ -462,6 +462,16 @@ CABLES.Patch.prototype.getOpsByName=function(name)
     return arr;
 };
 
+CABLES.Patch.prototype.getOpsByObjName=function(name)
+{
+    var arr=[];
+    for(var i in this.ops)
+    {
+        if(this.ops[i].objName==name)arr.push(this.ops[i]);
+    }
+    return arr;
+};
+
 CABLES.Patch.prototype.loadLib=function(which)
 {
     CABLES.ajaxSync('/ui/libs/'+which+'.js',

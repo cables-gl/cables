@@ -21,5 +21,6 @@
             }
         ],
         "name": "Ops.Gl.CubeMap.CubeMapMaterial"
-    }
+    },
+    "summary": "cubemap as material "
 }

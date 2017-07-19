@@ -15,8 +15,8 @@
                 "name": "Flip Y"
             },
             {
-                "type": "0",
-                "name": "Ratio"
+                "type": "2",
+                "name": "Texture"
             }
         ],
         "portsOut": [
