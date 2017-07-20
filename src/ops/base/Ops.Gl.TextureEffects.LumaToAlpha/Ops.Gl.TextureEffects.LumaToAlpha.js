@@ -9,6 +9,7 @@ var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
+
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'varying vec2 texCoord;'
