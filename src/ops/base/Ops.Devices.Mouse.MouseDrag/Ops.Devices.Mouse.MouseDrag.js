@@ -6,6 +6,7 @@ var outX=op.addOutPort(new Port(op,"x"));
 var outY=op.addOutPort(new Port(op,"y"));
 var flipY=op.inValueBool("Flip Y",true);
 var kinetic=op.inValueBool("Inertia Movement",true);
+var limit=op.inValueBool("Limit");
 
 
 var doReset=op.inFunctionButton("Reset");
@@ -56,16 +57,22 @@ doReset.onTriggered=function()
 
 function updateKineticX(v)
 {
-    if(v>maxX.get())v=maxX.get();
-    if(v<minX.get())v=minX.get();
+    if(limit.get())
+    {
+        if(v>maxX.get())v=maxX.get();
+        if(v<minX.get())v=minX.get();
+    }
 
     outX.set(v*mul.get());
 }
 
 function updateKineticY(v)
 {
-    if(v>maxY.get())v=maxY.get();
-    if(v<minY.get())v=minY.get();
+    if(limit.get())
+    {
+        if(v>maxY.get())v=maxY.get();
+        if(v<minY.get())v=minY.get();
+    }
 
     outY.set(v*mul.get());
 }
@@ -85,7 +92,6 @@ function seMoving()
         {
             isMoving.set(false);
         },60);
-    
 }
 
 

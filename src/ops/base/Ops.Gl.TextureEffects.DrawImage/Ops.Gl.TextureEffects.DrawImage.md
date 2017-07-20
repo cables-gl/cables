@@ -18,7 +18,7 @@ Trigger the rendering
 
 Amount/Percentage of blending the Image on to the current state of the compose
 
-### Imaage
+### Image
 
 *Type: Object*
 
