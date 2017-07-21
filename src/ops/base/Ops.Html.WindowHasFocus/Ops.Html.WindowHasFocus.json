@@ -1,0 +1,12 @@
+{
+    "summary": "result is true when the browser window/tab has focus",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "has focus"
+            }
+        ],
+        "name": "Ops.Html.WindowHasFocus"
+    }
+}
