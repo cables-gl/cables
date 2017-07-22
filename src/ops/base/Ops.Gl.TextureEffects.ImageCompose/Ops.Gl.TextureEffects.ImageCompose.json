@@ -49,5 +49,6 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.ImageCompose"
-    }
+    },
+    "summary": "Compose Images and effects as layers to generate new Images"
 }

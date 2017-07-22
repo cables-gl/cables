@@ -15,9 +15,9 @@ op.patchId.onChange=function()
     // console.log("subpatch changed...");
     // clean up old subpatch if empty
     var oldPatchOps=op.patch.getSubPatchOps(oldPatchId);
-    
+
     // console.log("subpatch has childs ",oldPatchOps.length);
-    
+
     if(oldPatchOps.length==2)
     {
         for(var i=0;i<oldPatchOps.length;i++)
@@ -30,7 +30,7 @@ op.patchId.onChange=function()
     {
         // console.log("old subpatch has ops.,...");
     }
-    
+
 
 };
 
@@ -47,7 +47,7 @@ op.onLoadedValueSet=function()
     data=JSON.parse(dataStr.get());
     setupPorts();
 
-    
+
 };
 
 
@@ -114,7 +114,7 @@ function addPortListener(newPort,newPortInPatch)
 function setupPorts()
 {
     if(!op.patchId.get())return;
-    var ports=data.ports;
+    var ports=data.ports||[];
     var portsOut=data.portsOut;
     var i=0;
 
