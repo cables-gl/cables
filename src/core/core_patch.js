@@ -228,7 +228,6 @@ CABLES.Patch.prototype.addOp=function(objName,uiAttribs)
 
     if(op)
     {
-
         op.uiAttr(uiAttribs);
         if(op.onCreate)op.onCreate();
 
