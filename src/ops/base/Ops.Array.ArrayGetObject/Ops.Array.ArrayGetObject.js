@@ -6,10 +6,19 @@ var value=op.addOutPort(new Port(op, "value",OP_PORT_TYPE_OBJECT));
 array.ignoreValueSerialize=true;
 value.ignoreValueSerialize=true;
 
+
+
 function update()
 {
     if(index.get()<0)return;
-    if(array.get()) value.set( array.get()[index.get()]);
+    
+    
+    var arr=array.get();
+    if(!arr)return;
+    var ind=index.get();
+    if(ind>=arr.length)return;
+    if(arr[ind]) value.set( arr[ind]);
+    
 }
 
 index.onValueChanged=update;

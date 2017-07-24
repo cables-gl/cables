@@ -60,6 +60,7 @@ function updateListeners()
 }
 
 
+var lastReadPixel=0;
 
 var doRender=function()
 {
@@ -71,6 +72,7 @@ var doRender=function()
 
     if(op.enabled.get())
     {
+        if(CABLES.now()-lastReadPixel>=100)
         {
             var minimizeFB=8;
             cgl.resetViewPort();
@@ -94,7 +96,11 @@ var doRender=function()
             if(y<0)y=0;
             
             // console.log('',x,y,vpW,vpH);
-            cgl.gl.readPixels(x,y, 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
+            // if(CABLES.now()-lastReadPixel>=50)
+            {
+                cgl.gl.readPixels(x,y, 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
+                lastReadPixel=CABLES.now();
+            }
             // cgl.gl.readPixels(op.x.get(), op.y.get(), 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
 
             fb.renderEnd();

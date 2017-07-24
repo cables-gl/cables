@@ -93,17 +93,23 @@ function rebuild()
     mesh.setGeom(geom);
 
     var rndArray=new Float32Array(num);
+    
+    var spread=inSpread.get();
+    if(spread<0)spread=0;
+
     for(i=0;i<num/3;i++)
     {
-        var v=getRandomVec(inSpread.get());
-        while(vec3.len(v)>inSpread.get()/2) v=getRandomVec(inSpread.get());
+        
+        
+        var v=getRandomVec(spread);
+        while(vec3.len(v)>spread/2) v=getRandomVec(spread);
         
         rndArray[i*3+0]=v[0];
         rndArray[i*3+1]=v[1];
         rndArray[i*3+2]=v[2];
 
     }
-    rndArray[i]=(Math.random()-0.5)*inSpread.get();
+    rndArray[i]=(Math.random()-0.5)*spread;
 
     mesh.setAttribute("rndPos",rndArray,3);
 

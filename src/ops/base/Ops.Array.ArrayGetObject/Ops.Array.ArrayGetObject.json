@@ -1,0 +1,21 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "value"
+            }
+        ],
+        "name": "Ops.Array.ArrayGetObject"
+    }
+}

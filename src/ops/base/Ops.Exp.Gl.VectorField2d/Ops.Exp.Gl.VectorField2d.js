@@ -45,7 +45,7 @@ var srcFrag=''
 
     .endl()+'float random(vec2 co)'
     .endl()+'{'
-    .endl()+'    return fract(sin(dot(co.xy ,vec2(time+12.9898,78.233))) * 43758.5453);'
+    .endl()+'    return fract(sin(dot(co.xy ,vec2(time+12.9898,78.233))) * 437.5453);'
     .endl()+'}'
 
     .endl()+'void main()'
@@ -58,7 +58,7 @@ var srcFrag=''
 
     .endl()+'   vec4 field = texture2D( texField, vec2( old.r,old.g ));'
     .endl()+'   field -= 0.5; '
-    .endl()+'   field *=0.003;'
+    .endl()+'   field *=0.03;'
 
     .endl()+'   if(time!=0.0)'
     .endl()+'   {'
@@ -102,7 +102,7 @@ var texFieldUni=new CGL.Uniform(shaderSim,'t','texField',6);
 var uniTime2=new CGL.Uniform(shaderSim,'f','time',0);
 var startTime=Date.now()/1000;
 
-var effect=new CGL.TextureEffect(cgl,{fp:true});
+var effect=new CGL.TextureEffect(cgl);
 
 effect.setSourceTexture(simTexture);
 var firstTime=true;
@@ -113,7 +113,7 @@ simTexture.printInfo();
 var srcHeadVert=''
     .endl()+'uniform float {{mod}}_time;'
     .endl()+'uniform sampler2D {{mod}}_texture;'
-    .endl()+'attribute float attrVertIndex;'
+    // .endl()+'attribute float attrVertIndex;'
 
     .endl();
 
@@ -153,17 +153,19 @@ render.onTriggered=function()
     effect.startEffect();
     t=effect.getCurrentSourceTexture().tex;
     cgl.setShader(shaderSim);
+
     effect.bind();
 
     cgl.setTexture(5,t);
     cgl.setTexture(6,textureField.get().tex);
 
     effect.finish();
-    effect.endEffect();
     t=effect.getCurrentSourceTexture().tex;
     
-    cgl.setPreviousShader();
     outSimTex.set(effect.getCurrentSourceTexture());
+    cgl.setPreviousShader();
+    effect.endEffect();
+
 
     cgl.resetViewPort();
     

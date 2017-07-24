@@ -1,12 +1,13 @@
 op.name="MouseButtons";
 var cgl=op.patch.cgl;
 
-var mouseClickRight=op.outFunction("Click Right");
 var mouseClickLeft=op.outFunction("Click Left");
+var mouseClickRight=op.outFunction("Click Right");
 var mouseDoubleClick=op.outFunction("Double Click");
-var mouseDownLeft=op.outValue("Button pressed Left");
-var mouseDownMiddle=op.outValue("Button pressed Middle");
-var mouseDownRight=op.outValue("Button pressed Right");
+
+var mouseDownLeft=op.outValue("Button pressed Left",false);
+var mouseDownMiddle=op.outValue("Button pressed Middle",false);
+var mouseDownRight=op.outValue("Button pressed Right",false);
 
 var triggerMouseDownLeft=op.outFunction("Mouse Down Left");
 var triggerMouseDownMiddle=op.outFunction("Mouse Down Middle");
