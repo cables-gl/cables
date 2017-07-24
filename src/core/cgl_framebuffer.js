@@ -15,7 +15,6 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         "isFloatingPointTexture":false
     };
 
-
     var texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":options.isFloatingPointTexture,

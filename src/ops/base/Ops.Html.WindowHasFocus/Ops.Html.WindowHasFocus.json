@@ -1,5 +1,5 @@
 {
-    "summary": "result is true when the browser window/tab has focus",
+    "summary": "detect if the browser window/tab has focus",
     "layout": {
         "portsOut": [
             {
