@@ -42,7 +42,7 @@ var uniformA=new CGL.Uniform(shader,'f','a',a);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
@@ -97,11 +97,11 @@ render.onTriggered=function()
 //     .endl()+'   vec4 base=texture2D(tex,texCoord);'
 //     .endl()+'   col=vec4( _blend(base.rgb,col.rgb) ,1.0);'
 //     .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
-    
-//     .endl()+'}'
-    
 
-   
+//     .endl()+'}'
+
+
+
 
 //     .endl()+'   gl_FragColor = col;'
 //     .endl()+'}';

@@ -20,7 +20,7 @@ fast.onChange=function()
 {
     if(fast.get()) shader.define("FASTBLUR");
         else shader.removeDefine("FASTBLUR");
-    
+
 };
 
 var srcFrag=''
@@ -30,13 +30,13 @@ var srcFrag=''
     .endl()+'  uniform float dirX;'
     .endl()+'  uniform float dirY;'
     .endl()+'  uniform float amount;'
-    
+
     .endl()+'  #ifdef HAS_MASK'
     .endl()+'    uniform sampler2D imageMask;'
     .endl()+'  #endif'
 
     .endl()+'uniform sampler2D texture;'
-    
+
 
 
     .endl()+''
@@ -68,15 +68,15 @@ var srcFrag=''
     .endl()+'    '
     // .endl()+'    /* randomize the lookup values to hide the fixed number of samples */'
     .endl()+'    float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);'
-    
-    
+
+
     .endl()+'    #ifndef FASTBLUR'
     .endl()+'    const float range=20.0;'
     .endl()+'    #endif'
     .endl()+'    #ifdef FASTBLUR'
     .endl()+'    const float range=5.0;'
     .endl()+'    #endif'
-    
+
     .endl()+'    for (float t = -range; t <= range; t++) {'
     .endl()+'        float percent = (t + offset - 0.5) / range;'
     .endl()+'        float weight = 1.0 - abs(percent);'
@@ -84,13 +84,13 @@ var srcFrag=''
     .endl()+'        '
     // .endl()+'        /* switch to pre-multiplied alpha to correctly blur transparent images */'
     .endl()+'        sample.rgb *= sample.a;'
-    
+
     .endl()+'        color += sample * weight;'
     .endl()+'        total += weight;'
     .endl()+'    }'
-    
+
     .endl()+'    gl_FragColor = color / total;'
-    
+
     // .endl()+'    /* switch back from pre-multiplied alpha */'
     .endl()+'    gl_FragColor.rgb /= gl_FragColor.a + 0.00001;'
     .endl()+'}';
@@ -132,7 +132,7 @@ mask.onValueChanged=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
     cgl.setShader(shader);
 
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
@@ -143,7 +143,7 @@ render.onTriggered=function()
     // first pass
     if(dir===0 || dir==2)
     {
-        
+
         cgl.currentTextureEffect.bind();
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );

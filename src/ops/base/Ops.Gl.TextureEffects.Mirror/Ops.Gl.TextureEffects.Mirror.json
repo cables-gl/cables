@@ -6,12 +6,20 @@
                 "name": "render"
             },
             {
-                "type": "2",
-                "name": "Cubemap"
+                "type": "0",
+                "name": "axis"
             },
             {
                 "type": "0",
-                "name": "Reflection"
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "offset"
+            },
+            {
+                "type": "0",
+                "name": "flip"
             }
         ],
         "portsOut": [
@@ -20,7 +28,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.CubeMap.CubeMapMaterial"
-    },
-    "summary": "cubemap as material "
+        "name": "Ops.Gl.TextureEffects.Mirror"
+    }
 }

@@ -228,7 +228,6 @@ CABLES.Patch.prototype.addOp=function(objName,uiAttribs)
 
     if(op)
     {
-
         op.uiAttr(uiAttribs);
         if(op.onCreate)op.onCreate();
 
@@ -458,6 +457,16 @@ CABLES.Patch.prototype.getOpsByName=function(name)
     for(var i in this.ops)
     {
         if(this.ops[i].name==name)arr.push(this.ops[i]);
+    }
+    return arr;
+};
+
+CABLES.Patch.prototype.getOpsByObjName=function(name)
+{
+    var arr=[];
+    for(var i in this.ops)
+    {
+        if(this.ops[i].objName==name)arr.push(this.ops[i]);
     }
     return arr;
 };

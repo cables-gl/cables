@@ -1,0 +1,61 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "scale"
+            },
+            {
+                "type": "0",
+                "name": "anim"
+            },
+            {
+                "type": "0",
+                "name": "scrollX"
+            },
+            {
+                "type": "0",
+                "name": "scrollY"
+            },
+            {
+                "type": "0",
+                "name": "repeat"
+            },
+            {
+                "type": "0",
+                "name": "Layer 1"
+            },
+            {
+                "type": "0",
+                "name": "Layer 2"
+            },
+            {
+                "type": "0",
+                "name": "Layer 3"
+            },
+            {
+                "type": "0",
+                "name": "Layer 4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.FBMNoise"
+    }
+}

@@ -37,7 +37,7 @@ var srcFrag=''
     .endl()+'       col.rgb=col.rgb*(1.0-amount) + (col.rgb*gray*gray*lum)*amount;'
     .endl()+'   }'
     .endl()+'   else col+=add;'
-    
+
 
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
@@ -54,7 +54,7 @@ var uniAdd=new CGL.Uniform(shader,'f','add',add);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

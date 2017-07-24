@@ -17,7 +17,6 @@ var outRatio=op.outValue("Aspect Ratio");
 texOut.set(null);
 var cgl=op.patch.cgl;
 var effect=null;
-
 var tex=null;
 
 var w=8,h=8;
@@ -94,14 +93,24 @@ function updateResolution()
         tex.setSize(w,h);
         outRatio.set(w/h);
         effect.setSourceTexture(tex);
-        
-        // console.log('resize!');
-        // texOut.set(effect.getCurrentSourceTexture());
     }
 
     if(texOut.get())
-        if(!texOut.get().isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
-            else op.uiAttr({warning:''}); //todo only when needed...
+        if(!texOut.get().isPowerOfTwo() ) 
+        {
+            if(!op.uiAttribs.hint)
+                op.uiAttr(
+                    {
+                        hint:'texture dimensions not power of two! - texture filtering will not work.',
+                        warning:null
+                    });
+        }
+        else 
+        if(op.uiAttribs.hint)
+        {
+            console.log("hint",op.uiAttribs.hint);
+            op.uiAttr({hint:null,warning:null}); //todo only when needed...
+        }
 
 }
 
@@ -155,10 +164,7 @@ var doRender=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-
-
     trigger.trigger();
-    
 
     texOut.set(effect.getCurrentSourceTexture());
 
@@ -169,7 +175,7 @@ var doRender=function()
 
     cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
-
+    cgl.currentTextureEffect=null;
 };
 
 

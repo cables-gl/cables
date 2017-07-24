@@ -203,6 +203,21 @@ CGL.Texture.prototype.printInfo=function()
     console.log(this.getInfo());
 };
 
+CGL.Texture.prototype.getInfoReadable=function()
+{
+    var info=this.getInfo();
+    var html='';
+
+    info.name=info.name.substr(0,info.name.indexOf("?rnd="));
+
+    for(var i in info)
+    {
+        html+='* '+i+':  **'+info[i]+'**\n';
+    }
+
+    return html;
+};
+
 CGL.Texture.prototype.getInfo=function()
 {
     var obj={};
@@ -227,10 +242,10 @@ CGL.Texture.prototype.getInfo=function()
     else if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT) obj.wrap="WRAP_MIRRORED_REPEAT";
     else obj.wrap="UNKNOWN";
 
-    if(this.filter==CGL.Texture.FILTER_NEAREST) obj.filter="filter: FILTER_NEAREST";
-    else if(this.filter==CGL.Texture.FILTER_LINEAR) obj.filter="filter: FILTER_LINEAR";
-    else if(this.filter==CGL.Texture.FILTER_MIPMAP) obj.filter="filter: FILTER_MIPMAP";
-    else obj.filter="filter: UNKNOWN";
+    if(this.filter==CGL.Texture.FILTER_NEAREST) obj.filter="FILTER_NEAREST";
+    else if(this.filter==CGL.Texture.FILTER_LINEAR) obj.filter="FILTER_LINEAR";
+    else if(this.filter==CGL.Texture.FILTER_MIPMAP) obj.filter="FILTER_MIPMAP";
+    else obj.filter="UNKNOWN";
     return obj;
 };
 

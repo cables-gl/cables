@@ -60,7 +60,7 @@ function realReload(nocache)
                 if(err)
                 {
                     setTempTexture();
-                    op.uiAttr({'error':'could not load texture '+filename.get()});
+                    op.uiAttr({'error':'could not load texture "'+filename.get()+'"'});
                     return;
                 }
                 else op.uiAttr({'error':null});
@@ -69,8 +69,16 @@ function realReload(nocache)
                 height.set(tex.height);
                 ratio.set(tex.width/tex.height);
 
-                if(!tex.isPowerOfTwo()) op.uiAttr({warning:'texture dimensions not power of two! - texture filtering will not work.'});
-                    else op.uiAttr({warning:''});
+                if(!tex.isPowerOfTwo()) op.uiAttr(
+                    {
+                        hint:'texture dimensions not power of two! - texture filtering will not work.',
+                        warning:null
+                    });
+                    else op.uiAttr(
+                        {
+                            hint:null,
+                            warning:null
+                        });
 
                 textureOut.set(null);
                 textureOut.set(tex);

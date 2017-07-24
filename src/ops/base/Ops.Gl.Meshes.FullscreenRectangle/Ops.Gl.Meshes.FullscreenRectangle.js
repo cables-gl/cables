@@ -4,6 +4,9 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var centerInCanvas=op.addInPort(new Port(op,"Center in Canvas",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var flipY=op.inValueBool("Flip Y");
 
+var inTexture=op.inTexture("Texture");
+
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
@@ -13,6 +16,26 @@ var x=0,y=0,z=0,w=0,h=0;
 
 centerInCanvas.onChange=rebuild;
 flipY.onChange=rebuild;
+
+var shader=null;
+
+inTexture.onChange=function()
+{
+    console.log("TEXTURE!!!");
+    var tex=inTexture.get();
+    shader=null;
+    if(tex)
+    {
+        shader=new CGL.Shader(cgl,'MinimalMaterial');
+        shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+        
+        shader.setSource(attachments.shader_vert,attachments.shader_frag);
+        new CGL.Uniform(shader,'t','tex',0);
+
+    }
+
+};
+
 
 render.onTriggered=function()
 {
@@ -41,7 +64,20 @@ render.onTriggered=function()
         cgl.setViewPort(x,y,w,h);
     }
 
-    mesh.render(cgl.getShader());
+    if(shader)
+    {
+        if(inTexture.get())
+        {
+            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTexture.get().tex);
+        }
+
+        mesh.render(shader);
+    }
+    else
+    {
+        mesh.render(cgl.getShader());
+    }
 
     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
 
