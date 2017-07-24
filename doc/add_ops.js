@@ -153,32 +153,15 @@ function createOpEntry(filename) {
     fsSync.copy(imgDir, OPS_TMP_DIR + "/" + suffix + "/" + "img");
   }
   // Create markdown-entry based on the namespace (number of tabs)
-  switch(parts.length) {
-    case 0: // no name
-    case 1: // e.g. "Ops"
-      console.log("Op " + filename + " has a bad name! Ignoring");
-      break;
-      return;
-    case 2: // e.g. "Ops.And", no namespace
-      var text = "\t* [" + parts[1] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
-      break;
-    case 3: // e.g. "Ops.Audio.Bang"
-      createOpCategory(parts[1], 1);
-      var text = "\t\t* [" + parts[2] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
-      break;
-    case 4: // e.g. "Ops.Devices.Keyboard.KeyPressLearn"
-      createOpCategory(parts[1], 1);
-      createOpCategory(parts[2], 2);
-      var text = "\t\t\t* [" + parts[3] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
-      break;
-    case 5:  // e.g. "Ops.Devices.Special.Keyboard.KeyPressLearn"
-      createOpCategory(parts[1], 1);
-      createOpCategory(parts[2], 2);
-      createOpCategory(parts[3], 3);
-      var text = "\t\t\t\t* [" + parts[4] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
-      break;
-    default:
-      return;
+  var text = "";
+  if(parts.length > 2) { // 0 = no name, 1 = bad name
+    for(var j=1; j<parts.length-1; j++) {
+      createOpCategory(parts[j], j);
+    }
+    for(var i=0; i<parts.length-1; i++) {
+      text += "\t";
+    }
+    text += "* [" + parts[parts.length-1] + "](" + OPS_TMP_DIR + "/" + suffix + "/" + mdFilename + ")\n";
   }
   fs.appendFileSync('SUMMARY.md', text);
 }
