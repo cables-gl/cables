@@ -132,20 +132,30 @@ CABLES.Patch.prototype.clear=function()
 };
 
 
-CABLES.Patch.prototype.getOpClass=function(objName)
+CABLES.Patch.getOpClass=function(objName)
 {
     var parts=objName.split('.');
     var opObj=null;
-    if(parts.length==2) opObj=window[parts[0]][parts[1]];
-    else if(parts.length==3) opObj=window[parts[0]][parts[1]][parts[2]];
-    else if(parts.length==4) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]];
-    else if(parts.length==5) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]];
-    else if(parts.length==6) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]];
-    else if(parts.length==7) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]];
-    else if(parts.length==8) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]];
-    else if(parts.length==9) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]];
-    else if(parts.length==10) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]];
-    return opObj;
+
+    try
+    {
+
+        if(parts.length==2) opObj=window[parts[0]][parts[1]];
+        else if(parts.length==3) opObj=window[parts[0]][parts[1]][parts[2]];
+        else if(parts.length==4) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]];
+        else if(parts.length==5) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]];
+        else if(parts.length==6) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]];
+        else if(parts.length==7) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]];
+        else if(parts.length==8) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]];
+        else if(parts.length==9) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]];
+        else if(parts.length==10) opObj=window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]];
+        return opObj;
+
+    }
+    catch(e)
+    {
+        return null;
+    }
 };
 
 // CABLES.Patch.prototype.addOp=function(objName,uiAttribs,next)
@@ -170,7 +180,7 @@ CABLES.Patch.prototype.createOp=function(objName)
 
     try
     {
-        var opObj=this.getOpClass(objName);
+        var opObj=CABLES.Patch.getOpClass(objName);
 
         if(!opObj)
         {
