@@ -2,4 +2,4 @@
 
 *Ops.Gl.TextureEffects.EdgeDetection*
 
-![edgedetection](img/edgedetection.png)
+![edgedetection](img/edgedetection.jpg)

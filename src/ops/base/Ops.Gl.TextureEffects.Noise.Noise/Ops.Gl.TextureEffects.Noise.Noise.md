@@ -2,5 +2,5 @@
 
 *Ops.Gl.TextureEffects.Noise.Noise*
 
-![noise](img/noise.png)
+![noise](img/noise.jpg)
 

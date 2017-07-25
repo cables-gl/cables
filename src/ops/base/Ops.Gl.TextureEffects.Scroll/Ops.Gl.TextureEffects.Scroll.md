@@ -2,7 +2,7 @@
 
 *Ops.Gl.TextureEffects.Scroll*
 
-![scroll](img/scroll.png)
+![scroll](img/scroll.jpg)
 
 
 Scroll current Image 

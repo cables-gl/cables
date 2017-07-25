@@ -2,4 +2,4 @@
 
 *Ops.Gl.TextureEffects.Vibrance*
 
-![vibrance](img/vibrance.png)
+![vibrance](img/vibrance.jpg)

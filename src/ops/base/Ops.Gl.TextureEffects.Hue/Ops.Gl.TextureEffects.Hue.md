@@ -2,6 +2,6 @@
 
 *Ops.Gl.TextureEffects.Hue*
 
-![Hue](img/hue.png)
+![Hue](img/hue.jpg)
 
 

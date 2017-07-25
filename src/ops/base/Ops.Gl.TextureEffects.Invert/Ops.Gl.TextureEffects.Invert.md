@@ -2,7 +2,7 @@
 
 *Ops.Gl.TextureEffects.Invert*
 
-![invert](img/invert.png)
+![invert](img/invert.jpg)
 
 
 Invert colors of current ```ImageCompose``` 
