@@ -2,4 +2,6 @@
 
 *Ops.Gl.RandomCluster*
 
-Transforms the following objects randomly in space.
+![randomcluster](img/randomcluster.png)
+
+Transforms the child meshes randomly in space.
