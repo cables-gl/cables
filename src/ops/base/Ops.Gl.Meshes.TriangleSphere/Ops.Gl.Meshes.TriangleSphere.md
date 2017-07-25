@@ -1,5 +1,5 @@
 # Trianglesphere
 
-* Ops.Gl.Meshes.trianglesphere*
+*Ops.Gl.Meshes.trianglesphere*
 
 ![trianglesphere](img/trianglesphere.png)

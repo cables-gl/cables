@@ -1,0 +1,85 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Normalize Size"
+            },
+            {
+                "type": "0",
+                "name": "Point Cloud"
+            },
+            {
+                "type": "0",
+                "name": "Step"
+            },
+            {
+                "type": "0",
+                "name": "a1"
+            },
+            {
+                "type": "0",
+                "name": "b1"
+            },
+            {
+                "type": "0",
+                "name": "m1"
+            },
+            {
+                "type": "0",
+                "name": "n11"
+            },
+            {
+                "type": "0",
+                "name": "n21"
+            },
+            {
+                "type": "0",
+                "name": "n31"
+            },
+            {
+                "type": "0",
+                "name": "a2"
+            },
+            {
+                "type": "0",
+                "name": "b2"
+            },
+            {
+                "type": "0",
+                "name": "m2"
+            },
+            {
+                "type": "0",
+                "name": "n12"
+            },
+            {
+                "type": "0",
+                "name": "n22"
+            },
+            {
+                "type": "0",
+                "name": "n32"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Num Vertices"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.SuperShape"
+    }
+}
