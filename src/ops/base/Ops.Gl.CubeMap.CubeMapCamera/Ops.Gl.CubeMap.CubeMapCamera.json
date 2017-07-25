@@ -17,5 +17,6 @@
             }
         ],
         "name": "Ops.Gl.CubeMap.CubeMapCamera"
-    }
+    },
+    "summary": "render a scene to generate a cubemap "
 }

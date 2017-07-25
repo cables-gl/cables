@@ -3,35 +3,31 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "Render"
+                "name": "render"
             },
             {
                 "type": "0",
-                "name": "In Min"
+                "name": "Radius"
             },
             {
                 "type": "0",
-                "name": "Midpoint"
+                "name": "Strength"
             },
             {
                 "type": "0",
-                "name": "In Max"
+                "name": "Center X"
             },
             {
                 "type": "0",
-                "name": "Out Min"
-            },
-            {
-                "type": "0",
-                "name": "Out Max"
+                "name": "Center Y"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "Next"
+                "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Levels"
+        "name": "Ops.Gl.TextureEffects.BulgePinch"
     }
 }

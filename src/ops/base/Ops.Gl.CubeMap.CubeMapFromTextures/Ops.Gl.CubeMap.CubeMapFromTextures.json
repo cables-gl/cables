@@ -33,5 +33,6 @@
             }
         ],
         "name": "Ops.Gl.CubeMap.CubeMapFromTextures"
-    }
+    },
+    "summary": "combine 6 textures to a cubemap"
 }
