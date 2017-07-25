@@ -1,18 +1,17 @@
 {
-    "summary": "Test if following meshes are picked by the picker",
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "trigger"
             },
             {
                 "type": "0",
-                "name": "billboard"
+                "name": "BPM"
             },
             {
                 "type": "0",
-                "name": "cursor"
+                "name": "Offset"
             }
         ],
         "portsOut": [
@@ -22,17 +21,13 @@
             },
             {
                 "type": "0",
-                "name": "is picked"
-            },
-            {
-                "type": "1",
-                "name": "On Picked"
+                "name": "beat num"
             },
             {
                 "type": "0",
-                "name": "Picked Index"
+                "name": "percent"
             }
         ],
-        "name": "Ops.Gl.Shader.PickingMaterial"
+        "name": "Ops.Audio.BpmTrigger"
     }
 }

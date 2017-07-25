@@ -22,10 +22,14 @@ doBillboard.onChange=function()
 var cursor=op.addInPort(new Port(op,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 cursor.set('pointer');
 
+var index=op.outValue("Picked Index");
+
+
 function doRender()
 {
-    cgl.frameStore.pickingpassNum+=2;
-    var currentPickingColor=cgl.frameStore.pickingpassNum;
+    
+    
+    var currentPickingColor=cgl.frameStore.pickingpassNum*2;
 
     if(cgl.frameStore.pickingpass)
     {
@@ -40,8 +44,11 @@ function doRender()
     {
         isPicked.set( cgl.frameStore.pickedColor==currentPickingColor );
         
+        
         if(cgl.frameStore.pickedColor==currentPickingColor)
         {
+            index.set(currentPickingColor/2);
+            
             if(cursor.get().length>0 && cgl.canvas.style.cursor!=cursor.get())
             {
                 cgl.canvas.style.cursor=cursor.get();
@@ -54,6 +61,7 @@ function doRender()
 
         next.trigger();
     }
+    cgl.frameStore.pickingpassNum+=1;
 }
 
 var srcVert=''
