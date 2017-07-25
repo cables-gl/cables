@@ -1,1 +1,25 @@
-{}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Pixel"
+            },
+            {
+                "type": "0",
+                "name": "Lens Distort"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.ChromaticAberration"
+    }
+}
