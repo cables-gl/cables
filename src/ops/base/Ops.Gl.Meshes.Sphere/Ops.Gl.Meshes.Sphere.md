@@ -2,6 +2,8 @@
 
 *Ops.Gl.Meshes.Sphere*  
 
+![sphere](img/sphere.png)
+
 Draws a Sphere to the canvas.
 
 ## Input
