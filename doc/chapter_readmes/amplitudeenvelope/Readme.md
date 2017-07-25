@@ -1,0 +1,3 @@
+#AmplitudeEnvelope
+
+TODO
