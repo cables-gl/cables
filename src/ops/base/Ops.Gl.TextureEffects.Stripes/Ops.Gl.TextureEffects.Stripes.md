@@ -2,4 +2,7 @@
 
 *Ops.Gl.TextureEffects.Stripes*
 
-Drawes stripes into the current ImageCompose
+![stripes](img/stripes.png)
+
+
+Draws stripes into the current ImageCompose

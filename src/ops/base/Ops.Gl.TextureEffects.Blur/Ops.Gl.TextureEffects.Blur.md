@@ -2,6 +2,9 @@
 
 *Ops.Gl.TextureEffects.Blur*
 
+![blur](img/blur.png)
+
+
 Blur the current state of an image compose
 
 ## Input
