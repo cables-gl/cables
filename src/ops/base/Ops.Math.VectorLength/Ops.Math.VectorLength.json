@@ -1,0 +1,25 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            },
+            {
+                "type": "0",
+                "name": "Z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Length"
+            }
+        ],
+        "name": "Ops.Math.VectorLength"
+    }
+}
