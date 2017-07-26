@@ -2,6 +2,9 @@
 
 *Ops.Gl.Meshes.LinesArray*  
 
+![linesarray](img/linesarray.png)
+
+
 Creates an array of lines
 
 ## Input

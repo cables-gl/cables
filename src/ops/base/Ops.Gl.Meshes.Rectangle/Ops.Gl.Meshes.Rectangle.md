@@ -2,7 +2,6 @@
 
 *Ops.Gl.Meshes.Rectangle*
 
-![rectangle](img/rectangle.png)
 
 
 Draws a rectangle
