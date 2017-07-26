@@ -1,34 +1,37 @@
 {
-    "summary": "configure depth testing and writing to z-buffer",
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "exe"
+            },
+            {
+                "type": "1",
+                "name": "beat"
             },
             {
                 "type": "0",
-                "name": "clear depth"
+                "name": "startValue"
             },
             {
                 "type": "0",
-                "name": "enable depth testing"
+                "name": "endValue"
             },
             {
                 "type": "0",
-                "name": "write to depth buffer"
+                "name": "bpm"
             },
             {
                 "type": "0",
-                "name": "ratio"
+                "name": "easing"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
-                "name": "trigger"
+                "type": "0",
+                "name": "bang"
             }
         ],
-        "name": "Ops.Gl.Depth"
+        "name": "Ops.Audio.Bang"
     }
 }

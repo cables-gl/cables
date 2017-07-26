@@ -1,0 +1,18 @@
+{
+    "summary": "reset the view matrix (cameras etc.)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.IdentityViewMatrix"
+    }
+}

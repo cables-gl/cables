@@ -1,0 +1,18 @@
+{
+    "summary": "triggers when object input has changed",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.ObjectChanged"
+    }
+}

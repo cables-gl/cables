@@ -1,34 +1,34 @@
 {
-    "summary": "configure depth testing and writing to z-buffer",
+    "summary": "enable/disable color channels RGBA",
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Execute"
             },
             {
                 "type": "0",
-                "name": "clear depth"
+                "name": "Red"
             },
             {
                 "type": "0",
-                "name": "enable depth testing"
+                "name": "Green"
             },
             {
                 "type": "0",
-                "name": "write to depth buffer"
+                "name": "Blue"
             },
             {
                 "type": "0",
-                "name": "ratio"
+                "name": "Alpha"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Next"
             }
         ],
-        "name": "Ops.Gl.Depth"
+        "name": "Ops.Gl.ColorMask"
     }
 }

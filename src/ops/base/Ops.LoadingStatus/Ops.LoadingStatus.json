@@ -1,0 +1,42 @@
+{
+    "summary": "get the loading progress, for displaying a loading screen",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "preRenderTimes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "finished"
+            },
+            {
+                "type": "0",
+                "name": "status"
+            },
+            {
+                "type": "0",
+                "name": "preRenderStatus"
+            },
+            {
+                "type": "0",
+                "name": "numAssets"
+            },
+            {
+                "type": "1",
+                "name": "loading"
+            },
+            {
+                "type": "1",
+                "name": "loading finished"
+            }
+        ],
+        "name": "Ops.LoadingStatus"
+    }
+}

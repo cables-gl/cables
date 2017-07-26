@@ -32,7 +32,6 @@ function reload()
     var f=CABLES.ajax;
     if(jsonp.get())f=CABLES.jsonp;
 
-console.log("requesting...");
 
 
     f(
