@@ -1,6 +1,6 @@
-# RandomPoints
+# randompoints
 
-*Ops.Gl.Meshes.RandomPoints*
+*Ops.Gl.Meshes.randompoints*
 
-Generates a cloud of random positioned Points.
-Look of points can be easily adjusted using ```PointMaterial```
+![randompoints](img/randompoints.png)
+

@@ -1,0 +1,18 @@
+{
+    "summary": "was there mouse movement the last x [duration] seconds ?",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Duration"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Events"
+            }
+        ],
+        "name": "Ops.InteractionListener"
+    }
+}

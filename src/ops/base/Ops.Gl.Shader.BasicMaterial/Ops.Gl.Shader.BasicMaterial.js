@@ -104,9 +104,9 @@ function doRender()
         if(diffuseTexture.get())
         {
             // if(diffuseTextureUniform!==null)return;
-            shader.removeUniform('texDiffuse');
-            shader.define('HAS_TEXTURE_DIFFUSE');
-            diffuseTextureUniform=new CGL.Uniform(shader,'t','texDiffuse',0);
+            // shader.addveUniform('texDiffuse');
+            if(!shader.hasDefine('HAS_TEXTURE_DIFFUSE'))shader.define('HAS_TEXTURE_DIFFUSE');
+            if(!diffuseTextureUniform)diffuseTextureUniform=new CGL.Uniform(shader,'t','texDiffuse',0);
             updateTexRepeat();
         }
         else

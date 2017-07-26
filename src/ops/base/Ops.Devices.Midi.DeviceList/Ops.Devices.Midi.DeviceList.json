@@ -1,1 +1,20 @@
-{}
+{
+    "summary": "list of midi devices",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Num Devices"
+            },
+            {
+                "type": "0",
+                "name": "Midi Support"
+            },
+            {
+                "type": "3",
+                "name": "Device Names"
+            }
+        ],
+        "name": "Ops.Devices.Midi.DeviceList"
+    }
+}

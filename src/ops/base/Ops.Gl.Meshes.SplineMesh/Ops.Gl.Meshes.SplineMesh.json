@@ -1,1 +1,50 @@
-{"summary":"Draws a filled Spline with configurable thickness"}
+{
+    "summary": "Draws a filled Spline with configurable thickness",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Thickness"
+            },
+            {
+                "type": "0",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Length"
+            },
+            {
+                "type": "0",
+                "name": "Calculate Normals"
+            },
+            {
+                "type": "0",
+                "name": "Line Strip"
+            },
+            {
+                "type": "3",
+                "name": "points"
+            },
+            {
+                "type": "0",
+                "name": "Num Points"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.SplineMesh"
+    }
+}

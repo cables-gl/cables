@@ -1,0 +1,33 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Radius"
+            },
+            {
+                "type": "0",
+                "name": "Strength"
+            },
+            {
+                "type": "0",
+                "name": "Center X"
+            },
+            {
+                "type": "0",
+                "name": "Center Y"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.BulgePinch"
+    }
+}

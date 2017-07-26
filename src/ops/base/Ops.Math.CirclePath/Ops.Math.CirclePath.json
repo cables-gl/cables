@@ -1,1 +1,26 @@
-{"summary":"calculates a circle path, outputs array3x"}
+{
+    "summary": "calculates a circle path, outputs array3x",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "percent"
+            },
+            {
+                "type": "0",
+                "name": "segments"
+            },
+            {
+                "type": "0",
+                "name": "radius"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Points"
+            }
+        ],
+        "name": "Ops.Math.CirclePath"
+    }
+}

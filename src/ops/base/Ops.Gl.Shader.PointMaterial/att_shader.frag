@@ -1,5 +1,4 @@
 precision highp float;
-precision highp float;
 
 {{MODULES_HEAD}}
 

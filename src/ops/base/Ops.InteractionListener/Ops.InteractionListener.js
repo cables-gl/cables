@@ -1,9 +1,7 @@
 op.name="InteractionListener";
 
 var duration=op.inValue("Duration",0.5);
-
 var events=op.outValue("Events");
-
 
 var timeout=0;
 

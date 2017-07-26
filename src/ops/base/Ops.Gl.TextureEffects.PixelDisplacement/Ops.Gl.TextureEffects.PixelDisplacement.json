@@ -1,0 +1,29 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "amountX"
+            },
+            {
+                "type": "0",
+                "name": "amountY"
+            },
+            {
+                "type": "2",
+                "name": "displaceTex"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.PixelDisplacement"
+    }
+}
