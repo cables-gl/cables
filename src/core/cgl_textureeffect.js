@@ -215,7 +215,7 @@ CGL.TextureEffect.checkOpInEffect=function(op)
 {
     if(!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
     {
-        op.uiAttr({'error':'not in textureeffect!!'});
+        op.uiAttr({'error':'This op must be a child of a texture effect! More infos <a href="https://docs.cables.gl/image_composition/image_composition.html" target="_blank">here</a>.'});
         return false;
     }
     if(op.patch.cgl.currentTextureEffect && op.uiAttribs.error)
