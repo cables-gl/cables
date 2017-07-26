@@ -59,7 +59,7 @@ function initEffect()
     // texOut.set(effect.getCurrentSourceTexture());
 
     reInitEffect=false;
-    
+
     // op.log("reinit effect");
     // tex.printInfo();
 }
@@ -96,7 +96,7 @@ function updateResolution()
     }
 
     if(texOut.get())
-        if(!texOut.get().isPowerOfTwo() ) 
+        if(!texOut.get().isPowerOfTwo() )
         {
             if(!op.uiAttribs.hint)
                 op.uiAttr(
@@ -105,10 +105,9 @@ function updateResolution()
                         warning:null
                     });
         }
-        else 
+        else
         if(op.uiAttribs.hint)
         {
-            console.log("hint",op.uiAttribs.hint);
             op.uiAttr({hint:null,warning:null}); //todo only when needed...
         }
 
