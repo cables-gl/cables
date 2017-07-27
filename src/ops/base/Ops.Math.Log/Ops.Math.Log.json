@@ -1,0 +1,18 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Log"
+    },
+    "summary": "Calculates the logarithm of Number"
+}
