@@ -1,0 +1,58 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "url"
+            },
+            {
+                "type": "0",
+                "name": "Index Start"
+            },
+            {
+                "type": "0",
+                "name": "Index End"
+            },
+            {
+                "type": "0",
+                "name": "filter"
+            },
+            {
+                "type": "0",
+                "name": "wrap"
+            },
+            {
+                "type": "0",
+                "name": "flip"
+            },
+            {
+                "type": "0",
+                "name": "unpackPreMultipliedAlpha"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "TextureArray"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "loading"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio"
+            }
+        ],
+        "name": "Ops.Gl.TextureArrayLoader"
+    },
+    "summary": "load multiple images into an array"
+}

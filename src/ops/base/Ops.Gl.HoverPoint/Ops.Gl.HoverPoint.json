@@ -1,0 +1,41 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Execute"
+            },
+            {
+                "type": "0",
+                "name": "Size Point"
+            },
+            {
+                "type": "0",
+                "name": "show"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "0",
+                "name": "Title"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Hovering"
+            },
+            {
+                "type": "0",
+                "name": "Hover Index"
+            }
+        ],
+        "name": "Ops.Gl.HoverPoint"
+    }
+}

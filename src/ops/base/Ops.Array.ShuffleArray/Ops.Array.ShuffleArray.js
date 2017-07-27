@@ -5,21 +5,33 @@ var arrayOut=op.addOutPort(new Port(op, "shuffled array",OP_PORT_TYPE_ARRAY));
 array.ignoreValueSerialize=true;
 arrayOut.ignoreValueSerialize=true;
 
-// function update()
-// {
-//     if(array.get()) value.set( array.get()[index.get()]);
-// }
+
+var arr=[];
 
 array.onValueChanged=function()
 {
+    
     var a=array.get();
+    
     if(!a)return;
+    if(arr.length!=a.length)
+    {
+        arr.length=a.length;
+    }
+    
     var j, x, i;
-    for (i = a.length; i; i--) {
+    
+    for (i=0;i<a.length;i++) {
+        arr[i]=a[i];
+    }
+    
+    for (i=0;i<a.length;i++) {
         j = Math.floor(Math.random() * i);
         x = a[i - 1];
-        a[i - 1] = a[j];
-        a[j] = x;
+        arr[i - 1] = arr[j];
+        arr[j] = x;
     }
-    arrayOut.set(a);
+    
+    arrayOut.set(null);
+    arrayOut.set(arr);
 };
