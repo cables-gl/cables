@@ -1,1 +1,22 @@
-{"summary":"Adjust image sharpness"}
+{
+    "summary": "Adjust image sharpness",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "amount"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Sharpen"
+    }
+}
