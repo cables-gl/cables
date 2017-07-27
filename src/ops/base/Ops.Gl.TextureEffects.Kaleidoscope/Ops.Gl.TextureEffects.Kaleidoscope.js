@@ -6,8 +6,8 @@ var sides=op.inValue("Sides",10);
 var angle=op.inValueSlider("Angle",0);
 var slidex=op.inValueSlider("Slide X",0);
 var slidey=op.inValueSlider("Slide Y",0);
-var centerX=op.inValueSlider("Center X",0);
-var centerY=op.inValueSlider("Center Y",0);
+var centerX=op.inValueSlider("Center X",0.5);
+var centerY=op.inValueSlider("Center Y",0.5);
 
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
 
