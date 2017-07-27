@@ -2,7 +2,7 @@
 
 *Ops.Gl.TextureEffects.FBMNoise*
 
-![fbmnoise](img/fbmnoise.jpg)
+![fbmnoise](img/fbmoise.jpg)
 
 from: http://iquilezles.org/www/articles/warp/warp.htm
 

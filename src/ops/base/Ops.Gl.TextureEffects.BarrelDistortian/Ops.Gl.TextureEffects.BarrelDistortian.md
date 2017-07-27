@@ -2,4 +2,4 @@
 
 *Ops.Gl.TextureEffects.BarrelDistortian*
 
-![barrel](img/barrel.png)
+![barrel](img/barrel.jpg)
