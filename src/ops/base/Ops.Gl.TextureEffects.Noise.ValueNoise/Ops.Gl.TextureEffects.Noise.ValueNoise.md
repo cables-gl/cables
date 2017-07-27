@@ -2,7 +2,7 @@
 
 *Ops.Gl.TextureEffects.Noise.ValueNoise*
 
-![ValueNoise](img/valuenoise.jpg)
+![ValueNoise](img/valueoise.jpg)
 
 from: https://github.com/BrianSharpe/GPU-Noise-Lib/blob/master/gpu_noise_lib.glsl
 
