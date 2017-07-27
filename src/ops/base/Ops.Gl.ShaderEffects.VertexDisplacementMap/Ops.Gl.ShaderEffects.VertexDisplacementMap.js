@@ -172,14 +172,22 @@ op.render.onLinkChanged=removeModule;
 
 op.render.onTriggered=function()
 {
+    if(!cgl.getShader())
+    {
+         op.trigger.trigger();
+         return;
+    }
+
     
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
+        
 
         // console.log('re init shader module vertexdisplacement');
 
         shader=cgl.getShader();
+
 
         moduleVert=shader.addModule(
             {

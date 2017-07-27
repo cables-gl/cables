@@ -5,20 +5,26 @@ var minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
 var maxDist=op.addInPort(new Port(op,"max distance",OP_PORT_TYPE_VALUE));
 var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
 var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
+var initialRadius=op.inValue("initial radius",5);
+
 var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
 
 var smoothness=op.inValueSlider("Smoothness",1.0);
-
 var restricted=op.addInPort(new Port(op,"restricted",OP_PORT_TYPE_VALUE,{display:'bool'}));
-restricted.set(true);
+
+var active=op.inValueBool("Active",true);
+
+var inReset=op.inFunctionButton("Reset");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
+restricted.set(true);
 mul.set(1);
 minDist.set(0.05);
 maxDist.set(99999);
 initialAxis.set(0.5);
 initialX.set(0.0);
+inReset.onTriggered=reset;
 
 var cgl=op.patch.cgl;
 var eye=vec3.create();
@@ -45,6 +51,18 @@ var px=0;
 
 var divisor=1;
 updateSmoothness();
+
+op.onDelete=unbind;
+
+
+
+function reset()
+{
+    percX=(initialX.get()*Math.PI*2);
+    percY=(initialAxis.get()-0.5);
+    radius=initialRadius.get();
+    eye=circlePos( percY );
+}
 
 function updateSmoothness()
 {
@@ -141,7 +159,7 @@ var onmousemove = function(event)
 
 function onMouseDown(event)
 {
-    cgl.canvas.style.cursor='none';
+    // cgl.canvas.style.cursor='none';
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
     mouseDown=true;
@@ -150,12 +168,12 @@ function onMouseDown(event)
 function onMouseUp()
 {
     mouseDown=false;
-    cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
+    // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
 }
 
 function onMouseEnter(e)
 {
-    cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
+    // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
 }
 
 initialX.onValueChange(function()
@@ -172,7 +190,6 @@ initialAxis.onValueChange(function()
 
 var onMouseWheel=function(event)
 {
-
     var delta=CGL.getWheelSpeed(event)*0.06;
     radius+=(parseFloat(delta))*1.2;
 
@@ -180,16 +197,44 @@ var onMouseWheel=function(event)
     event.preventDefault();
 };
 
+var ontouchstart=function(event)
+{
+    if(event.touches && event.touches.length>0) onMouseDown(event.touches[0]);
+};
 
-cgl.canvas.addEventListener('mousemove', onmousemove);
-cgl.canvas.addEventListener('mousedown', onMouseDown);
-cgl.canvas.addEventListener('mouseup', onMouseUp);
-cgl.canvas.addEventListener('mouseleave', onMouseUp);
-cgl.canvas.addEventListener('mouseenter', onMouseEnter);
-cgl.canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
-cgl.canvas.addEventListener('wheel', onMouseWheel);
+var ontouchend=function(event)
+{
+    onMouseUp();
+};
 
-op.onDelete=function()
+var ontouchmove=function(event)
+{
+    if(event.touches && event.touches.length>0) onmousemove(event.touches[0]);
+};
+
+active.onChange=function()
+{
+    if(active.get())bind();
+        else unbind();
+}
+
+function bind()
+{
+    cgl.canvas.addEventListener('mousemove', onmousemove);
+    cgl.canvas.addEventListener('mousedown', onMouseDown);
+    cgl.canvas.addEventListener('mouseup', onMouseUp);
+    cgl.canvas.addEventListener('mouseleave', onMouseUp);
+    cgl.canvas.addEventListener('mouseenter', onMouseEnter);
+    cgl.canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
+    cgl.canvas.addEventListener('wheel', onMouseWheel);
+
+    cgl.canvas.addEventListener('touchmove', ontouchmove);
+    cgl.canvas.addEventListener('touchstart', ontouchstart);
+    cgl.canvas.addEventListener('touchend', ontouchend);
+
+}
+
+function unbind()
 {
     cgl.canvas.removeEventListener('mousemove', onmousemove);
     cgl.canvas.removeEventListener('mousedown', onMouseDown);
@@ -197,9 +242,15 @@ op.onDelete=function()
     cgl.canvas.removeEventListener('mouseleave', onMouseUp);
     cgl.canvas.removeEventListener('mouseenter', onMouseUp);
     cgl.canvas.removeEventListener('wheel', onMouseWheel);
-    cgl.canvas.style.cursor='auto';
-};
+
+    cgl.canvas.removeEventListener('touchmove', ontouchmove);
+    cgl.canvas.removeEventListener('touchstart', ontouchstart);
+    cgl.canvas.removeEventListener('touchend', ontouchend);
+}
+
+
 
 eye=circlePos(0);
 
 
+bind();

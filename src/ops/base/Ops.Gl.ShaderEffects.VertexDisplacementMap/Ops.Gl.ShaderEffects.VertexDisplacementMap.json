@@ -1,1 +1,57 @@
-{}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "extrude"
+            },
+            {
+                "type": "0",
+                "name": "flip"
+            },
+            {
+                "type": "0",
+                "name": "Ignore Zero Values"
+            },
+            {
+                "type": "0",
+                "name": "invert"
+            },
+            {
+                "type": "0",
+                "name": "offset X"
+            },
+            {
+                "type": "0",
+                "name": "offset Y"
+            },
+            {
+                "type": "0",
+                "name": "colorize"
+            },
+            {
+                "type": "0",
+                "name": "colorize add"
+            },
+            {
+                "type": "0",
+                "name": "mode"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap"
+    }
+}

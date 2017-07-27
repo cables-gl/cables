@@ -24,16 +24,15 @@ cursor.set('pointer');
 
 var index=op.outValue("Picked Index");
 
+// var wasPicked=false;
 
 function doRender()
 {
-    
-    
     var currentPickingColor=cgl.frameStore.pickingpassNum*2;
 
     if(cgl.frameStore.pickingpass)
     {
-        isPicked.set(false);
+        // isPicked.set( false );
 
         pickColorUniformR.setValue(currentPickingColor/255);
         cgl.setShader(shader);
@@ -42,13 +41,12 @@ function doRender()
     }
     else
     {
-        isPicked.set( cgl.frameStore.pickedColor==currentPickingColor );
-        
-        
+        isPicked.set( (cgl.frameStore.pickedColor==currentPickingColor) );
+
         if(cgl.frameStore.pickedColor==currentPickingColor)
         {
             index.set(currentPickingColor/2);
-            
+
             if(cursor.get().length>0 && cgl.canvas.style.cursor!=cursor.get())
             {
                 cgl.canvas.style.cursor=cursor.get();
@@ -61,6 +59,8 @@ function doRender()
 
         next.trigger();
     }
+    
+
     cgl.frameStore.pickingpassNum+=1;
 }
 
