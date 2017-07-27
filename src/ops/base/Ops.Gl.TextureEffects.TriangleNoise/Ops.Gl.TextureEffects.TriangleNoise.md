@@ -2,7 +2,7 @@
 
 *Ops.Gl.TextureEffects.TriangleNoise*
 
-![TriangleNoise](img/trianglenoise.jpg)
+![TriangleNoise](img/triangleoise.jpg)
 
 
 
