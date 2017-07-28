@@ -1,1 +1,66 @@
-{"summary":"Get the state of mouse buttons"}
+{
+    "summary": "Get the state of mouse buttons",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Area"
+            },
+            {
+                "type": "0",
+                "name": "Active"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Click Left"
+            },
+            {
+                "type": "1",
+                "name": "Click Right"
+            },
+            {
+                "type": "1",
+                "name": "Double Click"
+            },
+            {
+                "type": "0",
+                "name": "Button pressed Left"
+            },
+            {
+                "type": "0",
+                "name": "Button pressed Middle"
+            },
+            {
+                "type": "0",
+                "name": "Button pressed Right"
+            },
+            {
+                "type": "1",
+                "name": "Mouse Down Left"
+            },
+            {
+                "type": "1",
+                "name": "Mouse Down Middle"
+            },
+            {
+                "type": "1",
+                "name": "Mouse Down Right"
+            },
+            {
+                "type": "1",
+                "name": "Mouse Up Left"
+            },
+            {
+                "type": "1",
+                "name": "Mouse Up Middle"
+            },
+            {
+                "type": "1",
+                "name": "Mouse Up Right"
+            }
+        ],
+        "name": "Ops.Devices.Mouse.MouseButtons"
+    }
+}

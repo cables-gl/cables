@@ -18,6 +18,7 @@ var triggerMouseUpMiddle=op.outFunction("Mouse Up Middle");
 var triggerMouseUpRight=op.outFunction("Mouse Up Right");
 
 var area=op.addInPort(new Port(op,"Area",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
+var active=op.inValueBool("Active",true);
 
 area.set("Canvas");
 
@@ -80,7 +81,7 @@ function onmouseclick(e)
     mouseClickLeft.trigger();
 }
 
-function removeLiseteners()
+function removeListeners()
 {
     
     listenerElement.removeEventListener('dblclick', onDoubleClick);
@@ -93,7 +94,7 @@ function removeLiseteners()
 
 function addListeners()
 {
-    if(listenerElement)removeLiseteners();
+    if(listenerElement)removeListeners();
     
     listenerElement=cgl.canvas;
     if(area.get()=='Document') listenerElement=document.body;
@@ -105,11 +106,17 @@ function addListeners()
     listenerElement.addEventListener('contextmenu', onClickRight);
 }
 
+active.onChange=function()
+{
+    if(listenerElement) removeListeners();
+    if(active.get()) addListeners();
+    
+};
 
 op.onDelete=function()
 {
     console.log("remove mouse op...");
-    removeLiseteners();
+    removeListeners();
 };
 
 addListeners();
