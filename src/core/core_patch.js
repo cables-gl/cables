@@ -261,7 +261,14 @@ CABLES.Patch.prototype.addOnAnimFrame=function(op)
 CABLES.Patch.prototype.removeOnAnimFrame=function(op)
 {
     for(var i=0;i<this.animFrameOps.length;i++)
-        this.animFrameOps.splice(i,1);
+    {
+        if(this.animFrameOps[i]==op)
+        {
+            this.animFrameOps.splice(i,1);
+            return;
+        }
+    }
+
 };
 
 CABLES.Patch.prototype.deleteOp=function(opid,tryRelink)
