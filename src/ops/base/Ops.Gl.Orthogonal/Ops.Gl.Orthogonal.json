@@ -1,5 +1,5 @@
 {
-    "summary": "Adjust FOV, field of view, and frustum clipping",
+    "summary": "orthogonal projection / objects in distance don't appear smaller (isometric)",
     "layout": {
         "portsIn": [
             {
@@ -8,7 +8,19 @@
             },
             {
                 "type": "0",
-                "name": "fov y"
+                "name": "left"
+            },
+            {
+                "type": "0",
+                "name": "right"
+            },
+            {
+                "type": "0",
+                "name": "bottom"
+            },
+            {
+                "type": "0",
+                "name": "top"
             },
             {
                 "type": "0",
@@ -17,14 +29,6 @@
             {
                 "type": "0",
                 "name": "frustum far"
-            },
-            {
-                "type": "0",
-                "name": "Auto Aspect Ratio"
-            },
-            {
-                "type": "0",
-                "name": "Aspect Ratio"
             }
         ],
         "portsOut": [
@@ -33,6 +37,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Perspective"
+        "name": "Ops.Gl.Orthogonal"
     }
 }

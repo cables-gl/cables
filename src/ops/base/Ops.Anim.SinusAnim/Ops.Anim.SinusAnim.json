@@ -1,1 +1,0 @@
-{"layout":{"portsIn":[{"type":"1","name":"exe"},{"type":"0","name":"phase"},{"type":"0","name":"frequency"},{"type":"0","name":"amplitude"}],"portsOut":[{"type":"0","name":"result"}],"name":"Ops.Anim.SinusAnim"},"summary":"Sine anim"}
