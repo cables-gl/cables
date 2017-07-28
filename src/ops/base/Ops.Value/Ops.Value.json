@@ -1,10 +1,7 @@
 {
+    "summary": "helper op to use the same value for different inputs",
     "layout": {
         "portsIn": [
-            {
-                "type": "1",
-                "name": "exe"
-            },
             {
                 "type": "0",
                 "name": "value"

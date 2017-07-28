@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Input String"
+            },
+            {
+                "type": "0",
+                "name": "Separator"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.Split"
+    },
+    "summary": "splits a String object into an array of strings  "
+}

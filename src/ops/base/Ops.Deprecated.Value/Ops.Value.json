@@ -3,19 +3,19 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "exe"
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "value"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
-                "name": "trigger"
+                "type": "0",
+                "name": "result"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.BarrelDistortian"
+        "name": "Ops.Value"
     }
 }
