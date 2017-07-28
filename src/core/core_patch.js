@@ -8,6 +8,7 @@ CABLES.Patch = function(cfg)
     this.timer=new CABLES.Timer();
     this.freeTimer=new CABLES.Timer();
     this.animFrameOps=[];
+    this.animFrameCallbacks=[];
     this.gui=false;
     this.silent=false;
     this.profiler=null;
@@ -271,6 +272,25 @@ CABLES.Patch.prototype.removeOnAnimFrame=function(op)
 
 };
 
+
+CABLES.Patch.prototype.addOnAnimFrameCallback=function(cb)
+{
+    this.animFrameCallbacks.push(cb);
+};
+
+CABLES.Patch.prototype.removeOnAnimCallback=function(cb)
+{
+
+    for(var i=0;i<this.animFrameCallbacks.length;i++)
+    {
+        if(this.animFrameCallbacks[i]==cb)
+        {
+            this.animFrameCallbacks.splice(i,1);
+            return;
+        }
+    }
+};
+
 CABLES.Patch.prototype.deleteOp=function(opid,tryRelink)
 {
     for(var i in this.ops)
@@ -336,6 +356,12 @@ CABLES.Patch.prototype.renderFrame=function(e)
     this.freeTimer.update();
 
     var time=this.timer.getTime();
+
+
+    for (var i = 0; i < this.animFrameCallbacks.length; ++i)
+    {
+        if(this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time,this._frameNum);
+    }
 
     for (var i = 0; i < this.animFrameOps.length; ++i)
     {
