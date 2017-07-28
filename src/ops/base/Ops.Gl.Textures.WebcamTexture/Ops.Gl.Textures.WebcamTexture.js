@@ -14,6 +14,10 @@ flip.set(true);
 
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
+videoElement.setAttribute("id", "webcam");
+
+    var canvas = op.patch.cgl.canvas.parentElement;
+    canvas.appendChild(videoElement);
 
 var tex=new CGL.Texture(cgl);
 tex.setSize(8,8);

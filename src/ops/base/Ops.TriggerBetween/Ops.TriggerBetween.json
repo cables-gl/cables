@@ -1,0 +1,33 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exe"
+            },
+            {
+                "type": "0",
+                "name": "Index"
+            },
+            {
+                "type": "0",
+                "name": "Number 1"
+            },
+            {
+                "type": "0",
+                "name": "Number 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "Fract"
+            }
+        ],
+        "name": "Ops.TriggerBetween"
+    }
+}

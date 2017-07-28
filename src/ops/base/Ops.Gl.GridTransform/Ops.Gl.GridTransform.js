@@ -53,9 +53,11 @@ render.onTriggered=function()
             outX.set(x);
 
             mat4.translate(cgl.mvMatrix,matOrig, vec);
-            i++;
+            
             
             outIndex.set(i);
+            i++;
+            
             next.trigger();
         }
     }

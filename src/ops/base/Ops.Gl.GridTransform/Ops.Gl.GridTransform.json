@@ -33,11 +33,11 @@
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x index"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y index"
             }
         ],
         "name": "Ops.Gl.GridTransform"
