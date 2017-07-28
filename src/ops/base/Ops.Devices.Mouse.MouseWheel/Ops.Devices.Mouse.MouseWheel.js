@@ -12,13 +12,16 @@ var smooth=op.inValueBool("smooth");
 var smoothSpeed=op.inValue("delay",0.3);
 var preventScroll=op.inValueBool("prevent scroll");
 var flip=op.inValueBool("Flip Direction");
+
+var active=op.inValueBool("active",true);
+
 var reset=op.inFunctionButton("Reset");
 
 var absVal=op.outValue("absolute value",0);
 var delta=op.outValue("delta",0);
 
 var cgl=op.patch.cgl;
-cgl.canvas.addEventListener('wheel', onMouseWheel);
+
 
 var value=0;
 
@@ -33,6 +36,8 @@ anim.clear();
 anim.setValue(Date.now()/1000.0-startTime,absVal.get());
 var dir=1;
 var isWindows=navigator.appVersion.indexOf("Win")!=-1;
+
+addListener();
 
 min.onChange=function()
 {
@@ -127,3 +132,20 @@ function onMouseWheel(e)
     
     if(preventScroll.get()) e.preventDefault();
 }
+
+function addListener()
+{
+    cgl.canvas.addEventListener('wheel', onMouseWheel);
+}
+
+function removeListener()
+{
+    cgl.canvas.removeEventListener('wheel', onMouseWheel);
+}
+
+
+active.onChange=function()
+{
+    removeListener();
+    if(active.get())addListener();
+};

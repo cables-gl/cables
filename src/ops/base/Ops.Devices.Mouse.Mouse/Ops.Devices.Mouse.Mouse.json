@@ -1,1 +1,74 @@
-{"summary":"Get mouse coordinates and events","layout":{"portsIn":[{"type":"0","name":"relative"},{"type":"0","name":"normalize"},{"type":"0","name":"smooth"},{"type":"0","name":"smoothSpeed"},{"type":"0","name":"Area"},{"type":"0","name":"multiply"},{"type":"0","name":"flip y"}],"portsOut":[{"type":"0","name":"x"},{"type":"0","name":"y"},{"type":"0","name":"button down"},{"type":"1","name":"click"},{"type":"1","name":"Button Up"},{"type":"1","name":"click right"},{"type":"0","name":"mouseOver"},{"type":"0","name":"button"}],"name":"Ops.Devices.Mouse.Mouse"}}
+{
+    "summary": "Get mouse coordinates and events",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "relative"
+            },
+            {
+                "type": "0",
+                "name": "normalize"
+            },
+            {
+                "type": "0",
+                "name": "Active"
+            },
+            {
+                "type": "0",
+                "name": "smooth"
+            },
+            {
+                "type": "0",
+                "name": "smoothSpeed"
+            },
+            {
+                "type": "0",
+                "name": "Area"
+            },
+            {
+                "type": "0",
+                "name": "multiply"
+            },
+            {
+                "type": "0",
+                "name": "flip y"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "button down"
+            },
+            {
+                "type": "1",
+                "name": "click"
+            },
+            {
+                "type": "1",
+                "name": "Button Up"
+            },
+            {
+                "type": "1",
+                "name": "click right"
+            },
+            {
+                "type": "0",
+                "name": "mouseOver"
+            },
+            {
+                "type": "0",
+                "name": "button"
+            }
+        ],
+        "name": "Ops.Devices.Mouse.Mouse"
+    }
+}

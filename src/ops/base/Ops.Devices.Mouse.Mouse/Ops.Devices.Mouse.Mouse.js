@@ -13,6 +13,8 @@ this.mouseOver=this.addOutPort(new Port(this,"mouseOver",OP_PORT_TYPE_VALUE));
 this.relative=this.addInPort(new Port(this,"relative",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
+var active=op.inValueBool("Active",true);
+
 this.smooth=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.smoothSpeed=this.addInPort(new Port(this,"smoothSpeed",OP_PORT_TYPE_VALUE));
 
@@ -251,6 +253,12 @@ function addListeners()
     listenerElement.addEventListener('contextmenu', onClickRight);
 }
 
+active.onChange=function()
+{
+    if(listenerElement)removeLiseteners();
+    if(active.get())addListeners();
+
+}
 
 this.onDelete=function()
 {
