@@ -115,7 +115,7 @@ function setupPorts()
 {
     if(!op.patchId.get())return;
     var ports=data.ports||[];
-    var portsOut=data.portsOut;
+    var portsOut=data.portsOut||[];
     var i=0;
 
     for(i=0;i<ports.length;i++)

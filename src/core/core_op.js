@@ -40,6 +40,13 @@ CABLES.Op = function()
         this.uiAttrib(obj);
     };
 
+
+    CABLES.Op.prototype.setTitle=function(name)
+    {
+        this.name=name;
+        this.uiAttr({title:name});
+    };
+
     CABLES.Op.prototype.setUiAttrib=CABLES.Op.prototype.uiAttr=function(newAttribs)
     {
         if(newAttribs && newAttribs.error)
