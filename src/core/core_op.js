@@ -49,10 +49,10 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.setUiAttrib=CABLES.Op.prototype.uiAttr=function(newAttribs)
     {
-        if(newAttribs && newAttribs.error)
-        {
-            console.error('error:',this.name,newAttribs.error);
-        }
+        // if(newAttribs && newAttribs.error)
+        // {
+        //     console.error('error:',this.name,newAttribs.error);
+        // }
 
         if(!this.uiAttribs)this.uiAttribs={};
         for(var p in newAttribs)

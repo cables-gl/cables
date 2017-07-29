@@ -31,7 +31,6 @@ opacity.onValueChanged=function(){ uniformOpacity.setValue(opacity.get()); };
 
 if(cgl.glVersion==1 && !cgl.gl.getExtension('OES_standard_derivatives') )
 {
-    console.log(123);
     op.uiAttr( { 'error': 'no oes standart derivatives!' } );
 }
 else
@@ -132,7 +131,7 @@ srcFrag+=''
 .endl();
 
 // if(cgl.glVersion==1)srcFrag+='gl_FragColor=col;';
-// else 
+// else
 srcFrag+='outColor=col;';
 
 srcFrag+=''.endl()+'}';

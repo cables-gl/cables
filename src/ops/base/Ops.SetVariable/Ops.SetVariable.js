@@ -31,13 +31,11 @@ function updateName()
     {
         if(op.varName.get()=='+ create new one')
         {
-            gui.variables.createNew(op);
+            CABLES.CMD.PATCH.createVariable(op);
             return;
         }
 
-        console.log("setting new title,",op.varName.get());
         op.setTitle('#'+op.varName.get());
-
     }
     update();
 }
@@ -47,4 +45,3 @@ function update()
     op.patch.setVarValue(op.varName.get(),val.get());
     outVal.set(val.get());
 }
-

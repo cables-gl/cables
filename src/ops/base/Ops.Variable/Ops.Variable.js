@@ -25,7 +25,7 @@ function updateVarNamesDropdown()
 
 op.varName.onChange=function()
 {
-    init();    
+    init();
 };
 
 function init()
@@ -36,11 +36,11 @@ function init()
     {
         if(op.varName.get()=='+ create new one')
         {
-            gui.variables.createNew(op);
+            CABLES.CMD.PATCH.createVariable(op);
             return;
         }
     }
-    
+
     if(variable)
     {
         variable.removeListener(onChange);
@@ -53,16 +53,13 @@ function init()
         variable.addListener(onChange);
         op.uiAttr({error:null,});
         op.setTitle('#'+op.varName.get());
-        op.log("found var"+op.varName.get());
+
     }
     else
     {
-        op.log("not found var "+op.varName.get());
-        op.uiAttr(
-            {
-                error:"unknown variable! - there is no setVariable with this name"
-            });
-        op.setTitle('?'+op.varName.get());
+
+        op.uiAttr({error:"unknown variable! - there is no setVariable with this name"});
+        op.setTitle('#invalid');
 
     }
 }
