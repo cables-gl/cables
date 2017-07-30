@@ -1,0 +1,12 @@
+{
+    "summary": "current frame number of timeline",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "time"
+            }
+        ],
+        "name": "Ops.TimeLineFrame"
+    }
+}
