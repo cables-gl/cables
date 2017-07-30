@@ -36,6 +36,8 @@ CABLES.Patch = function(cfg)
     if(!this.config.prefixAssetPath)this.config.prefixAssetPath='';
     if(!this.config.masterVolume)this.config.masterVolume=1.0;
 
+    this._variables={};
+    this._variableListeners=[];
     this.vars={};
     if(cfg && cfg.vars)this.vars=cfg.vars;
 
@@ -756,4 +758,100 @@ CABLES.Patch.prototype.profile=function(enable)
 
 };
 
-var Scene=CABLES.Patch;
+
+
+
+// ----------------------
+
+
+CABLES.Patch.Variable=function(name,val)
+{
+    this._name=name;
+    this._changeListeners=[];
+    this.setValue(val);
+};
+
+CABLES.Patch.Variable.prototype.getValue=function()
+{
+    return this._v;
+};
+
+CABLES.Patch.Variable.prototype.getName=function()
+{
+    return this._name;
+};
+
+CABLES.Patch.Variable.prototype.setValue=function(v)
+{
+    this._v=v;
+    for(var i=0;i<this._changeListeners.length;i++)
+    {
+        this._changeListeners[i](v);
+    }
+};
+
+CABLES.Patch.Variable.prototype.addListener=function(cb)
+{
+    this._changeListeners.push(cb);
+};
+
+CABLES.Patch.Variable.prototype.removeListener=function(cb)
+{
+    var ind=this._changeListeners.indexOf(cb);
+    this._changeListeners.splice(ind,1);
+};
+
+// ------------------
+
+CABLES.Patch.prototype.addVariableListener=function(cb)
+{
+    this._variableListeners.push(cb);
+};
+
+CABLES.Patch.prototype._callVariableListener=function(cb)
+{
+    for(var i=0;i<this._variableListeners.length;i++)
+    {
+        this._variableListeners[i]();
+    }
+};
+
+CABLES.Patch.prototype.setVarValue=function(name,val)
+{
+    if(this._variables.hasOwnProperty(name))
+    {
+        this._variables[name].setValue(val);
+    }
+    else
+    {
+        this._variables[name]=new CABLES.Patch.Variable(name,val);
+        this._callVariableListener();
+
+    }
+    return this._variables[name];
+};
+
+CABLES.Patch.prototype.getVarValue=function(name,val)
+{
+    if(this._variables.hasOwnProperty(name))
+    {
+        return this._variables[name].getValue();
+    }
+};
+
+CABLES.Patch.prototype.getVar=function(name,val)
+{
+    if(this._variables.hasOwnProperty(name))
+        return this._variables[name];
+};
+
+CABLES.Patch.prototype.getVars=function()
+{
+    return this._variables;
+};
+
+
+
+
+
+// var Scene=CABLES.Patch;

@@ -1,4 +1,4 @@
-op.name="BarrelDistortian";
+op.name="BarrelDistortion";
 
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));

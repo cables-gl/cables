@@ -7,15 +7,23 @@
             },
             {
                 "type": "0",
-                "name": "amountX"
+                "name": "amount"
             },
             {
                 "type": "0",
-                "name": "amountY"
+                "name": "Lumi Scale"
             },
             {
-                "type": "2",
-                "name": "displaceTex"
+                "type": "0",
+                "name": "Line Size"
+            },
+            {
+                "type": "0",
+                "name": "Displacement"
+            },
+            {
+                "type": "0",
+                "name": "Add"
             }
         ],
         "portsOut": [
@@ -24,7 +32,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.PixelDisplacement"
-    },
-    "summary": "Changes color lookup for every pixel using a displacement map"
+        "name": "Ops.Gl.TextureEffects.Interlace"
+    }
 }

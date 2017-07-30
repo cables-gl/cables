@@ -1,7 +1,7 @@
 op.name="ChromaticAberrationNew";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var pixel=op.inValue("Pixel");
+var pixel=op.inValue("Pixel",5);
 var lensDistort=op.inValueSlider("Lens Distort",0);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));

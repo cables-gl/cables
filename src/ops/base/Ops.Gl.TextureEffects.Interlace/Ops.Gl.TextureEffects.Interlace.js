@@ -3,7 +3,8 @@ op.name="Interlace";
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var amount=op.inValueSlider("amount",0.5);//op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{display:'range'}));
 var lum=op.inValueSlider("Lumi Scale",0.9);
-var lineSize=op.inValue("Line Size",2);
+var lineSize=op.inValue("Line Size",4);
+var displace=op.inValueSlider("Displacement",0);
 
 var add=op.inValue("Add",0.02);
 
@@ -23,6 +24,7 @@ var srcFrag=''
     .endl()+'uniform float lum;'
     .endl()+'uniform float add;'
     .endl()+'uniform float lineSize;'
+    .endl()+'uniform float displace;'
     .endl()+''
 
     .endl()+'void main()'
@@ -30,9 +32,10 @@ var srcFrag=''
     .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
 
     .endl()+'   col=texture2D(tex,texCoord);'
-    .endl()+'   col=clamp(col,0.0,1.0);'
+    // .endl()+'   col=clamp(col,0.0,1.0);'
     .endl()+'   if( mod(gl_FragCoord.y,lineSize)>=lineSize*0.5)'
     .endl()+'   {'
+    .endl()+'       col=texture2D(tex,vec2(texCoord.x+displace*0.05,texCoord.y));'
     .endl()+'       float gray = vec3(dot(vec3(0.2126,0.7152,0.0722), col.rgb)).r;'
     .endl()+'       col.rgb=col.rgb*(1.0-amount) + (col.rgb*gray*gray*lum)*amount;'
     .endl()+'   }'
@@ -49,6 +52,7 @@ var uniAmount=new CGL.Uniform(shader,'f','amount',amount);
 var uniLum=new CGL.Uniform(shader,'f','lum',lum);
 var uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
 var uniAdd=new CGL.Uniform(shader,'f','add',add);
+var uniDisplace=new CGL.Uniform(shader,'f','displace',displace);
 
 
 

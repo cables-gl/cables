@@ -1,0 +1,18 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Boolean.isZero"
+    },
+    "summary": "result is true if value is 0"
+}

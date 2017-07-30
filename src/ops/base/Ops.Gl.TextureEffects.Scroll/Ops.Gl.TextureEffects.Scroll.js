@@ -28,8 +28,8 @@ var srcFrag=''
     .endl()+'   #ifdef HAS_TEXTURES'
     
     
-    .endl()+'   float x=mod(texCoord.x+amountX*0.1,1.0);'
-    .endl()+'   float y=mod(texCoord.y+amountY*0.1,1.0);'
+    .endl()+'   float x=mod(texCoord.x+amountX,1.0);'
+    .endl()+'   float y=mod(texCoord.y+amountY,1.0);'
     
     .endl()+'   #ifdef NO_REPEAT'
     
