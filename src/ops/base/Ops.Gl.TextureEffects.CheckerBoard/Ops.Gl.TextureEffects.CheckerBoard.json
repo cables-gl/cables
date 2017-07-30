@@ -17,5 +17,6 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.CheckerBoard"
-    }
+    },
+    "summary": "draw a checkerboard pattern"
 }

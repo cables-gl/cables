@@ -13,17 +13,15 @@ var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'uniform float lineSize;'
     .endl()+'varying vec2 texCoord;'
-    .endl()+''
 
     .endl()+'void main()'
     .endl()+'{'
 
-    .endl()+'   vec4 col=vec4(0.0,0.0,0.0,1.0);'
-    .endl()+'   float total = floor(texCoord.x*float(lineSize)) +floor(texCoord.y*float(lineSize));'
-    .endl()+'   bool isEven = mod(total,2.0)==0.0;'
+    .endl()+'   float total = floor(texCoord.x*lineSize) +floor(texCoord.y*lineSize);'
+    .endl()+'   float r = mod(total,2.0);'
 
-    .endl()+'   if( isEven) col=vec4(1.0,1.0,1.0,1.0);'
-
+    .endl()+'   vec4 col=vec4(r,r,r,1.0);'
+    
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
