@@ -2,9 +2,7 @@ op.name="CSS";
 
 var code=op.addInPort(new Port(op,"css code",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'css'}));
 
-
 code.onChange=update;
-
 update();
 
 var styleEle=null;
@@ -13,7 +11,6 @@ function getCssContent()
 {
     return code.get();
 }
-
 
 function update()
 {
@@ -24,11 +21,9 @@ function update()
     if(styleEle)
     {
         styleEle.textContent=getCssContent();
-        
     }
     else
     {
-
         styleEle  = document.createElement('style');
         styleEle.type = 'text/css';
         styleEle.id = 'mystyle';
@@ -39,6 +34,5 @@ function update()
         head.appendChild(styleEle);
     }
 
-    
 }
 
