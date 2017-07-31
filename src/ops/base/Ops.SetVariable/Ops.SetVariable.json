@@ -3,14 +3,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "name"
+                "name": "Variable"
             },
-            {
-                "type": "0",
-                "name": "Value"
-            }
-        ],
-        "portsOut": [
             {
                 "type": "0",
                 "name": "Value"

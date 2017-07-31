@@ -2,7 +2,6 @@ op.name="SetVariable";
 
 op.varName=op.inValueSelect("Variable");
 var val=op.inValue("Value");
-var outVal=op.outValue("Value");
 
 op.varName.onChange=updateName;
 val.onChange=update;
@@ -43,5 +42,5 @@ function updateName()
 function update()
 {
     op.patch.setVarValue(op.varName.get(),val.get());
-    outVal.set(val.get());
+
 }

@@ -7,6 +7,10 @@
             },
             {
                 "type": "0",
+                "name": "id"
+            },
+            {
+                "type": "0",
                 "name": "Size Point"
             },
             {

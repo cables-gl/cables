@@ -3,6 +3,9 @@ op.name="HoverPoint";
 var exec=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
 
+
+var inId=op.inValueString("id");
+
 var pPointSize=op.inValue("Size Point",10);
 
 // var show=op.inValueBool("show");
@@ -105,6 +108,7 @@ function onMouseLeave(e)
 
 function init()
 {
+    var id=inId.get()+'_';
     //  document.getElementById("cablescanvas") || document.body; 
     var canvas = op.patch.cgl.canvas.parentElement;
     
@@ -114,6 +118,9 @@ function init()
     // elements[currentIndex].style.display="block";
     elements[currentIndex].classList.add("hoverpoint");
     
+    id+=currentIndex;
+    
+    elements[currentIndex].id=id;
     elements[currentIndex].style.width=pointSize+"px";
     elements[currentIndex].style.height=pointSize+"px";
     elements[currentIndex].style['border-radius']=2*pointSize+"px";
@@ -129,7 +136,7 @@ function init()
     if(!elementOver)
     {
         elementOver = document.createElement('div');
-        elementOver.id="elementOver";
+        elementOver.id=inId.get()+"_hover";
         elementOver.style.position="absolute";
         elementOver.style.display="inline-block";
         elementOver.style.opacity="0";
@@ -144,7 +151,7 @@ function init()
         elementOver.style.color="white";
         elementOver.style['background-color']="rgba(0,0,0,0.7)";
 
-        textContent = document.createTextNode('cdscdscds');
+        textContent = document.createTextNode('');
         elementOver.appendChild(textContent);
 
         canvas.appendChild(elementOver);

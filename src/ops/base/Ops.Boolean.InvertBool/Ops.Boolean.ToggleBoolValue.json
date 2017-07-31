@@ -1,0 +1,18 @@
+{
+    "summary": "invert a boolean value (negate, flip)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "in bool"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "out bool"
+            }
+        ],
+        "name": "Ops.Boolean.ToggleBoolValue"
+    }
+}
