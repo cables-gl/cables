@@ -1,0 +1,33 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "contrast"
+            },
+            {
+                "type": "0",
+                "name": "brightness"
+            },
+            {
+                "type": "0",
+                "name": "Radius Inner"
+            },
+            {
+                "type": "0",
+                "name": "Radius Outer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.PolarCoords"
+    }
+}
