@@ -1,0 +1,34 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Scale"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "offset X"
+            },
+            {
+                "type": "0",
+                "name": "offset Y"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.MeshPixelNoise"
+    },
+    "summary": "3d space noise for mesh materials"
+}

@@ -184,6 +184,7 @@ this.textureSpecMatCap.onValueChanged=changeSpec;
 
 function bindTextures()
 {
+    
     if(self.texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
@@ -220,11 +221,10 @@ function bindTextures()
 
 this.doRender=function()
 {
-    bindTextures();
+    shader.bindTextures=bindTextures;
+    
     cgl.setShader(shader);
-
     self.trigger.trigger();
-
     cgl.setPreviousShader();
 
 

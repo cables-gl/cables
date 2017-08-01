@@ -5,7 +5,6 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
 
-
 var x=op.inValue("X",0);
 var y=op.inValue("Y",0);
 var z=op.inValue("Z",0);
