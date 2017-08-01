@@ -12,14 +12,6 @@
             {
                 "type": "0",
                 "name": "Amount"
-            },
-            {
-                "type": "0",
-                "name": "offset X"
-            },
-            {
-                "type": "0",
-                "name": "offset Y"
             }
         ],
         "portsOut": [

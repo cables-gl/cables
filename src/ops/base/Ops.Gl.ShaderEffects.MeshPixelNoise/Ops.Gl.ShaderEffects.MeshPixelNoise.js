@@ -30,7 +30,8 @@ var srcHeadFrag=attachments.pixelnoise_frag
     .endl();
 
 var srcBodyFrag=''
-    .endl()+'   col.rgb-=meshPixelNoise(meshPixelNoise_pos.xyz*{{mod}}_scale)*{{mod}}_amount;'
+    // .endl()+'   col.rgb=mix(col.rgb,vec3(meshPixelNoise(meshPixelNoise_pos.xyz*{{mod}}_scale)),{{mod}}_amount);'
+    .endl()+'   col.rgb-=meshPixelNoise(meshPixelNoise_pos.xyz*{{mod}}_scale)*{{mod}}_amount/4.0;'
 
     .endl();
 
