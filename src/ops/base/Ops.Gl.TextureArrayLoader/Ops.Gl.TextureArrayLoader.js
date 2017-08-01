@@ -59,9 +59,9 @@ function loadImage(i,nocache)
 {
     var url=filename.get();
     if(!url)return;
-    url=url.replace("?",i);
+    url=url.replace("XXX",i);
     
-    console.log(url);
+    // console.log(url);
     
     url=op.patch.getFilePath(url);
     if(nocache)url+='?rnd='+CABLES.generateUUID();

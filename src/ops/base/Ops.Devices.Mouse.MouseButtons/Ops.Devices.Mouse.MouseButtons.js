@@ -81,9 +81,26 @@ function onmouseclick(e)
     mouseClickLeft.trigger();
 }
 
+var ontouchstart=function(event)
+{
+    if(event.touches && event.touches.length>0) 
+    {
+        event.touches[0].which=1;
+        onMouseDown(event.touches[0]);
+    }
+};
+
+var ontouchend=function(event)
+{
+    onMouseUp({which:1});
+};
+
+
 function removeListeners()
 {
     
+    listenerElement.removeEventListener('touchend', ontouchend);
+    listenerElement.removeEventListener('touchstart', ontouchstart);
     listenerElement.removeEventListener('dblclick', onDoubleClick);
     listenerElement.removeEventListener('click', onmouseclick);
     listenerElement.removeEventListener('mousedown', onMouseDown);
@@ -99,6 +116,8 @@ function addListeners()
     listenerElement=cgl.canvas;
     if(area.get()=='Document') listenerElement=document.body;
     
+    listenerElement.addEventListener('touchend', ontouchend);
+    listenerElement.addEventListener('touchstart', ontouchstart);
     listenerElement.addEventListener('dblclick', onDoubleClick);
     listenerElement.addEventListener('click', onmouseclick);
     listenerElement.addEventListener('mousedown', onMouseDown);

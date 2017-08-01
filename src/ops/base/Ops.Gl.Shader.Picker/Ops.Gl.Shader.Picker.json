@@ -33,6 +33,10 @@
                 "name": "trigger"
             },
             {
+                "type": "0",
+                "name": "Something Picked"
+            },
+            {
                 "type": "2",
                 "name": "pick texture"
             }

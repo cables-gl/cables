@@ -64,6 +64,10 @@ mouseOver.set(false);
 var element=null;
 
 
+text.onValueChanged=updateText;
+updateText();
+
+
 width.onValueChanged=updateSize;
 height.onValueChanged=updateSize;
 autoSize.onValueChanged=updateSize;
@@ -168,8 +172,9 @@ function updateIgnoreMouse()
         else element.style['pointer-events']="default";
 };
 
-text.onValueChanged=function()
+function updateText()
 {
+    if(!element)return;
     var str=String(text.get()||'').replace(/(?:\r\n|\r|\n)/g, '<br />');
 
 
@@ -222,6 +227,8 @@ function init()
     {
         mouseOver.set(false);
     };
+    
+    updateText();
 }
 
 op.onDelete=function()

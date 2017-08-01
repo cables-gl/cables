@@ -2,11 +2,11 @@
 
 *Ops.Gl.TextureArrayLoader*
 
-use url with `?` as wildcard
+use url with `XXX` as wildcard
 
 for example:
 
-url: `cat_?.jpg`
+url: `cat_XXX.jpg`
 Index Start: `1`
 Index End: `5`
 

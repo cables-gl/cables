@@ -1,0 +1,31 @@
+{
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Touched"
+            },
+            {
+                "type": "0",
+                "name": "Fingers"
+            },
+            {
+                "type": "0",
+                "name": "Finger 1 X"
+            },
+            {
+                "type": "0",
+                "name": "Finger 1 Y"
+            },
+            {
+                "type": "0",
+                "name": "Finger 2 X"
+            },
+            {
+                "type": "0",
+                "name": "Finger 2 Y"
+            }
+        ],
+        "name": "Ops.Devices.TouchScreen"
+    }
+}

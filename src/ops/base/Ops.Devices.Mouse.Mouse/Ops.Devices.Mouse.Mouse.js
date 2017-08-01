@@ -164,7 +164,7 @@ this.relative.onValueChanged=function()
     offsetY=0;
 };
 
-var onmousemove = function(e)
+function onmousemove(e)
 {
     self.mouseOver.set(true);
     
@@ -223,10 +223,27 @@ var onmousemove = function(e)
     
 };
 
+function ontouchstart(event)
+{
+    self.mouseDown.set(true);
+    
+    if(event.touches && event.touches.length>0) onMouseDown(event.touches[0]);
+};
+
+function ontouchend(event)
+{
+    self.mouseDown.set(false);
+
+    onMouseUp();
+};
+
 
 function removeLiseteners()
 {
     
+    listenerElement.removeEventListener('touchend', ontouchend);
+    listenerElement.removeEventListener('touchstart', ontouchstart);
+
     listenerElement.removeEventListener('click', onmouseclick);
     listenerElement.removeEventListener('mousemove', onmousemove);
     listenerElement.removeEventListener('mouseleave', onMouseLeave);
@@ -244,6 +261,9 @@ function addListeners()
     listenerElement=cgl.canvas;
     if(area.get()=='Document') listenerElement=document.body;
     
+    listenerElement.addEventListener('touchend', ontouchend);
+    listenerElement.addEventListener('touchstart', ontouchstart);
+
     listenerElement.addEventListener('click', onmouseclick);
     listenerElement.addEventListener('mousemove', onmousemove);
     listenerElement.addEventListener('mouseleave', onMouseLeave);

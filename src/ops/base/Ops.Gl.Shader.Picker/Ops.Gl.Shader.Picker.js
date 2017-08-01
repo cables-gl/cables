@@ -15,21 +15,20 @@ op.enabled.set(true);
 // op.showPass.set(false);
 
 op.trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
+var somethingPicked=op.outValue("Something Picked");
 
 var cursor=this.addInPort(new Port(this,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 cursor.set('default');
 
 var pixelRGB = new Uint8Array(4);
 var fb=null;
+
 if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
 else 
 {
     console.log("new framebuffer...");
     fb=new CGL.Framebuffer2(cgl,4,4,{multisampling:false});
 }
-
-
 
 // var tex=op.addOutPort(new Port(op,"pick texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var tex=op.outTexture("pick texture");
@@ -49,28 +48,72 @@ function renderPickingPass()
 
 function mouseMove(e)
 {
-    op.x.set(e.offsetX);
-    op.y.set(e.offsetY);
+    if(e && e.hasOwnProperty('offsetX')>=0)
+    {
+        op.x.set(e.offsetX);
+        op.y.set(e.offsetY);
+    }
+
 }
 
 function updateListeners()
 {
     cgl.canvas.removeEventListener('mousemove', mouseMove);
-    if(useMouseCoords.get()) cgl.canvas.addEventListener('mousemove', mouseMove);
+    cgl.canvas.removeEventListener('touchmove', ontouchmove);
+    cgl.canvas.removeEventListener('touchstart', ontouchstart);
+    cgl.canvas.removeEventListener('touchend', ontouchend);
+
+    if(useMouseCoords.get()) 
+    {
+        cgl.canvas.addEventListener('mousemove', mouseMove);
+        cgl.canvas.addEventListener('touchmove', ontouchmove);
+        cgl.canvas.addEventListener('touchstart', ontouchstart);
+        cgl.canvas.addEventListener('touchend', ontouchend);
+    }
 }
+
+function fixTouchEvent(touchEvent)
+{
+    if(touchEvent)
+    {
+        touchEvent.offsetX = touchEvent.pageX - touchEvent.target.offsetLeft;     
+        touchEvent.offsetY = touchEvent.pageY - touchEvent.target.offsetTop;
+
+        return touchEvent;
+    }
+}
+
+function ontouchstart(event)
+{
+    if(event.touches && event.touches.length>0) mouseMove(fixTouchEvent(event.touches[0]));
+}
+
+function ontouchend(event)
+{
+    op.x.set(-1000);
+    op.y.set(-1000);
+}
+
+function ontouchmove(event)
+{
+    if(event.touches && event.touches.length>0) 
+    {
+        mouseMove(fixTouchEvent(event.touches[0]));
+    }
+}
+
 
 
 var lastReadPixel=0;
 
 var doRender=function()
 {
-    
     if(cursor.get()!=cgl.canvas.style.cursor)
     {
         cgl.canvas.style.cursor=cursor.get();
     }
 
-    if(op.enabled.get())
+    if(op.enabled.get() && op.x.get()>=0)
     {
         if(CABLES.now()-lastReadPixel>=100)
         {
@@ -114,8 +157,14 @@ var doRender=function()
     
         cgl.frameStore.pickedColor=pixelRGB[0];
         // console.log(cgl.frameStore.pickedColor);
+        
+        if(cgl.frameStore.pickedColor)somethingPicked.set(true);
+        else somethingPicked.set(false);
+        
         cgl.frameStore.pickingpassNum=0;
         op.trigger.trigger();
+        
+        
     
         // if(op.showPass.get())
         // {
