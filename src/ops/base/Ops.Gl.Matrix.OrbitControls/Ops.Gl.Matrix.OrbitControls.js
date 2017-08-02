@@ -18,6 +18,12 @@ var inReset=op.inFunctionButton("Reset");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
+
+var allowPanning=op.inValueBool("Allow Panning",true);
+var allowZooming=op.inValueBool("Allow Zooming",true);
+
+
+
 restricted.set(true);
 mul.set(1);
 minDist.set(0.05);
@@ -96,7 +102,6 @@ render.onTriggered=function()
     cgl.popViewMatrix();
 };
 
-
 function circlePos(perc)
 {
     if(radius<minDist.get()*mul.get())radius=minDist.get()*mul.get();
@@ -114,21 +119,21 @@ function circlePos(perc)
     return vec;
 }
 
-var onmousemove = function(event)
+function onmousemove(event)
 {
     if(!mouseDown) return;
 
     var x = event.clientX;
     var y = event.clientY;
     
-    if(event.which==3)
+    if(event.which==3 && allowPanning.get())
     {
         vOffset[2]+=(x-lastMouseX)*0.01*mul.get();
         vOffset[1]+=(y-lastMouseY)*0.01*mul.get();
-        eye=circlePos(percY);
+        // eye=circlePos(percY);
     }
     else
-    if(event.which==2)
+    if(event.which==2 && allowZooming.get())
     {
         radius+=(y-lastMouseY)*0.05;
 
@@ -146,20 +151,16 @@ var onmousemove = function(event)
         }
         else
         {
-            // perxY=percY+1;
-            // perxY=percY%2;
-            // perxY=percY-1;
         }
         eye=circlePos(percY);
     }
 
     lastMouseX=x;
     lastMouseY=y;
-};
+}
 
 function onMouseDown(event)
 {
-    // cgl.canvas.style.cursor='none';
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
     mouseDown=true;
@@ -190,11 +191,14 @@ initialAxis.onValueChange(function()
 
 var onMouseWheel=function(event)
 {
-    var delta=CGL.getWheelSpeed(event)*0.06;
-    radius+=(parseFloat(delta))*1.2;
-
-    eye=circlePos(percY);
-    event.preventDefault();
+    if(allowZooming.get())
+    {
+        var delta=CGL.getWheelSpeed(event)*0.06;
+        radius+=(parseFloat(delta))*1.2;
+    
+        eye=circlePos(percY);
+        event.preventDefault();
+    }
 };
 
 var ontouchstart=function(event)

@@ -1,22 +1,3 @@
 {
-    "summary": "the size of the canvas in pixels",
-    "layout": {
-        "portsIn": [
-            {
-                "type": "1",
-                "name": "exe"
-            }
-        ],
-        "portsOut": [
-            {
-                "type": "0",
-                "name": "width"
-            },
-            {
-                "type": "0",
-                "name": "height"
-            }
-        ],
-        "name": "Ops.Gl.CanvasSize"
-    }
+    "summary": "the size of the canvas in pixels  "
 }

@@ -1,0 +1,26 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Found"
+            },
+            {
+                "type": "0",
+                "name": "Index"
+            }
+        ],
+        "name": "Ops.Array.ArrayContains"
+    },
+    "summary": "check if array contains a string or number (find,search,indexOf)"
+}

@@ -29,6 +29,9 @@ var pointSize=10;
 var currentIndex=0;
 var pos=[0,0,0];
 
+show.onChange=updateVisibility;
+
+
 pPointSize.onChange=function()
 {
     pointSize=pPointSize.get();
@@ -41,7 +44,8 @@ pPointSize.onChange=function()
 
 };
 
-show.onChange=function()
+
+function updateVisibility()
 {
     var i=0;
 
@@ -67,7 +71,7 @@ show.onChange=function()
             }
         }
     }
-};
+}
 
 index.onChange=function()
 {
@@ -109,13 +113,10 @@ function onMouseLeave(e)
 function init()
 {
     var id=inId.get()+'_';
-    //  document.getElementById("cablescanvas") || document.body; 
     var canvas = op.patch.cgl.canvas.parentElement;
     
     elements[currentIndex] = document.createElement('div');
     elements[currentIndex].style.position="absolute";
-    
-    // elements[currentIndex].style.display="block";
     elements[currentIndex].classList.add("hoverpoint");
     
     id+=currentIndex;
@@ -160,6 +161,8 @@ function init()
     elements[currentIndex].addEventListener('mouseleave', onMouseLeave);
     elements[currentIndex].addEventListener('mouseenter', onMouseEnter);
 
+    updateVisibility();
+
     canvas.appendChild(elements[currentIndex]);
 }
 
@@ -173,12 +176,6 @@ op.onDelete=function()
         if(elementOver)elementOver.remove();
     }
 }
-
-
-
-
-
-
 
 var x=0;
 var y=0;
