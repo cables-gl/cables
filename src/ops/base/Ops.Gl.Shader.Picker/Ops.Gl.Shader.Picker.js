@@ -1,6 +1,3 @@
-
-var cgl=op.patch.cgl;
-
 op.name='Picker';
 op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
@@ -11,9 +8,6 @@ op.y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
 op.enabled=op.addInPort(new Port(op,"enabled",OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.enabled.set(true);
 
-// op.showPass=op.addInPort(new Port(op,"show picking pass",OP_PORT_TYPE_VALUE,{display:'bool'}));
-// op.showPass.set(false);
-
 op.trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var somethingPicked=op.outValue("Something Picked");
 
@@ -22,6 +16,8 @@ cursor.set('default');
 
 var pixelRGB = new Uint8Array(4);
 var fb=null;
+var cgl=op.patch.cgl;
+var lastReadPixel=0;
 
 if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
 else 
@@ -30,7 +26,6 @@ else
     fb=new CGL.Framebuffer2(cgl,4,4,{multisampling:false});
 }
 
-// var tex=op.addOutPort(new Port(op,"pick texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var tex=op.outTexture("pick texture");
 tex.set( fb.getTextureColor() );
 useMouseCoords.onChange=updateListeners;
@@ -53,11 +48,11 @@ function mouseMove(e)
         op.x.set(e.offsetX);
         op.y.set(e.offsetY);
     }
-
 }
 
 function updateListeners()
 {
+    cgl.canvas.removeEventListener('mouseleave', ontouchend);
     cgl.canvas.removeEventListener('mousemove', mouseMove);
     cgl.canvas.removeEventListener('touchmove', ontouchmove);
     cgl.canvas.removeEventListener('touchstart', ontouchstart);
@@ -65,6 +60,7 @@ function updateListeners()
 
     if(useMouseCoords.get()) 
     {
+        cgl.canvas.addEventListener('mouseleave', ontouchend);
         cgl.canvas.addEventListener('mousemove', mouseMove);
         cgl.canvas.addEventListener('touchmove', ontouchmove);
         cgl.canvas.addEventListener('touchstart', ontouchstart);
@@ -103,9 +99,6 @@ function ontouchmove(event)
 }
 
 
-
-var lastReadPixel=0;
-
 var doRender=function()
 {
     if(cursor.get()!=cgl.canvas.style.cursor)
@@ -115,7 +108,7 @@ var doRender=function()
 
     if(op.enabled.get() && op.x.get()>=0)
     {
-        if(CABLES.now()-lastReadPixel>=100)
+        if(CABLES.now()-lastReadPixel>=50)
         {
             var minimizeFB=8;
             cgl.resetViewPort();
@@ -163,17 +156,6 @@ var doRender=function()
         
         cgl.frameStore.pickingpassNum=0;
         op.trigger.trigger();
-        
-        
-    
-        // if(op.showPass.get())
-        // {
-        //     cgl.frameStore.pickingpassNum=2;
-        //     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
-        //     renderPickingPass();
-        // }
-      
-
     }
     else
     {

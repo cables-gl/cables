@@ -1,0 +1,26 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "SearchValue"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Found"
+            },
+            {
+                "type": "0",
+                "name": "Index"
+            }
+        ],
+        "name": "Ops.String.StringContains"
+    },
+    "summary": "check if string contains another string (find,search,indexOf)"
+}

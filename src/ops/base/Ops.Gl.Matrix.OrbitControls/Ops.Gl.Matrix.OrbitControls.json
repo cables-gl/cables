@@ -44,6 +44,14 @@
             {
                 "type": "1",
                 "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Allow Panning"
+            },
+            {
+                "type": "0",
+                "name": "Allow Zooming"
             }
         ],
         "portsOut": [
