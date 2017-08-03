@@ -1,1 +1,26 @@
-{"summary":"Convert 2d screen position to a 3d position"}
+{
+    "summary": "Convert 2d screen position to a 3d position",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result X"
+            },
+            {
+                "type": "0",
+                "name": "Result Y"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.ScreenPosTo3d"
+    }
+}
