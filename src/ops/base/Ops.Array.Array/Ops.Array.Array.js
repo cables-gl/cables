@@ -8,6 +8,7 @@ var outArr=op.outArray("Array");
 var arr=[];
 reset();
 inReset.onTriggered=reset;
+inLength.onChange=reset;
 
 function reset()
 {

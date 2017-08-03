@@ -24,6 +24,10 @@
             {
                 "type": "0",
                 "name": "Title"
+            },
+            {
+                "type": "0",
+                "name": "Ignore Mouse"
             }
         ],
         "portsOut": [
@@ -38,8 +42,13 @@
             {
                 "type": "0",
                 "name": "Hover Index"
+            },
+            {
+                "type": "1",
+                "name": "Clicked"
             }
         ],
         "name": "Ops.Gl.HoverPoint"
-    }
+    },
+    "summary": "create a html element at the current coordinates and use mouse events"
 }

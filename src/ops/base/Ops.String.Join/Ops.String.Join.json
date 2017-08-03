@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Seperator"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.Join"
+    },
+    "summary": "join array values to a string (concat)"
+}

@@ -1,7 +1,12 @@
 op.name="Div";
 
-var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+// var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
+
 var id=op.addInPort(new Port(op,"Id",OP_PORT_TYPE_VALUE,{type:'string'}));
+// var classes=op.addInPort(new Port(op,"Class",OP_PORT_TYPE_VALUE,{type:'string'}));
+var classes=op.inValueString("Class");
+
 
 var visible=op.addInPort(new Port(op,"Visible",OP_PORT_TYPE_VALUE,{display:"bool"}));
 visible.set(true);
@@ -65,6 +70,8 @@ var element=null;
 
 
 text.onValueChanged=updateText;
+
+classes.onChange=updateClasses;
 updateText();
 
 
@@ -187,6 +194,15 @@ id.onValueChanged=function()
     element.id=id.get();
 };
 
+function updateClasses()
+{
+    if(element)
+    {
+        element.className = classes.get();
+    }
+    
+}
+
 
 
 function init()
@@ -196,6 +212,7 @@ function init()
     element.style.position="absolute";
     element.style.overflow="hidden";
     element.style["z-index"]="9999";
+    
     // element.style["background-color"]="#f00";
     
 
@@ -229,6 +246,7 @@ function init()
     };
     
     updateText();
+    updateClasses();
 }
 
 op.onDelete=function()

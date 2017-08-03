@@ -1,0 +1,117 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Id"
+            },
+            {
+                "type": "0",
+                "name": "Visible"
+            },
+            {
+                "type": "0",
+                "name": "Center X"
+            },
+            {
+                "type": "0",
+                "name": "Center Y"
+            },
+            {
+                "type": "0",
+                "name": "Left"
+            },
+            {
+                "type": "0",
+                "name": "Top"
+            },
+            {
+                "type": "0",
+                "name": "Border radius"
+            },
+            {
+                "type": "0",
+                "name": "Font size"
+            },
+            {
+                "type": "0",
+                "name": "Font Family"
+            },
+            {
+                "type": "0",
+                "name": "cursor"
+            },
+            {
+                "type": "0",
+                "name": "Text Red"
+            },
+            {
+                "type": "0",
+                "name": "Text Green"
+            },
+            {
+                "type": "0",
+                "name": "Text Blue"
+            },
+            {
+                "type": "0",
+                "name": "Text Opacity"
+            },
+            {
+                "type": "0",
+                "name": "Background Red"
+            },
+            {
+                "type": "0",
+                "name": "Background Green"
+            },
+            {
+                "type": "0",
+                "name": "Background Blue"
+            },
+            {
+                "type": "0",
+                "name": "Background Opacity"
+            },
+            {
+                "type": "0",
+                "name": "Ignore Mouse"
+            },
+            {
+                "type": "0",
+                "name": "Auto width/height"
+            },
+            {
+                "type": "0",
+                "name": "Width"
+            },
+            {
+                "type": "0",
+                "name": "Height"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "OnClick"
+            },
+            {
+                "type": "0",
+                "name": "MouseOver"
+            },
+            {
+                "type": "0",
+                "name": "Client Width"
+            },
+            {
+                "type": "0",
+                "name": "Client Height"
+            }
+        ],
+        "name": "Ops.Html.Elements.Div"
+    }
+}

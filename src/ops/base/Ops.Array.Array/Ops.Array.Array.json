@@ -1,1 +1,26 @@
-{"summary":"Create an Array"}
+{
+    "summary": "Create an Array",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Length"
+            },
+            {
+                "type": "0",
+                "name": "DefaultValue"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.Array.Array"
+    }
+}

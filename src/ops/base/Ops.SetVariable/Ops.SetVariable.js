@@ -1,7 +1,7 @@
 op.name="SetVariable";
 
-op.varName=op.inValueSelect("Variable");
 var val=op.inValue("Value");
+op.varName=op.inValueSelect("Variable");
 
 op.varName.onChange=updateName;
 val.onChange=update;
