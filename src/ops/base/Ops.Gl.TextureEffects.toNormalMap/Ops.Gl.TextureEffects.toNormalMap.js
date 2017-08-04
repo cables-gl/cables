@@ -8,6 +8,9 @@ var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
 
+// from: https://forum.openframeworks.cc/t/compute-normal-map-from-image/1400/11
+
+
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'

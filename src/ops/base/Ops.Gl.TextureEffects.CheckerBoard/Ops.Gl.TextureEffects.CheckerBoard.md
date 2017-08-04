@@ -2,5 +2,5 @@
 
 *Ops.Gl.TextureEffects.CheckerBoard*
 
-![checkerboard](img/checkerboard.jpg)
+![checkerboard](img/checkerboard.png)
 

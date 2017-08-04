@@ -25,5 +25,6 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Noise.Noise"
-    }
+    },
+    "summary": "multiply every pixel with a random value (noise, color)"
 }
