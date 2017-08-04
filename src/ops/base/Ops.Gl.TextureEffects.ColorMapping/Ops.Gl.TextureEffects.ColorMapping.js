@@ -20,7 +20,14 @@ var srcFrag=''
 
     .endl()+'   float gray = dot(vec3(0.2126,0.7152,0.0722), colOrig.rgb );'
 
+    .endl()+'   #ifdef VERT'
     .endl()+'   gl_FragColor = texture2D(image,vec2(texCoord.x,gray));'
+    .endl()+'   #endif'
+
+    .endl()+'   #ifdef HORI'
+    .endl()+'   gl_FragColor = texture2D(image,vec2(gray,texCoord.x));'
+    .endl()+'   #endif'
+
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);

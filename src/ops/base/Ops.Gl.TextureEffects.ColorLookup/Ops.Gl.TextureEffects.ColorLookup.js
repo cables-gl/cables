@@ -3,9 +3,12 @@ op.name='ColorLookup';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var posy=op.addInPort(new Port(op,"posy",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var posy=op.addInPort(new Port(op,"pos",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+
+// var vert=op.addOutPort(new Port(op,"vertical",OP_PORT_TYPE_FUNCTION));
+var vert=op.inValueBool("vertical",true);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -17,7 +20,7 @@ var srcFrag=''
     .endl()+'  varying vec2 texCoord;'
     .endl()+'  uniform sampler2D tex;'
     .endl()+'  uniform sampler2D image;'
-    .endl()+'  uniform float posy;'
+    .endl()+'  uniform float pos;'
     .endl()+'uniform float amount;'
     .endl()+''
     .endl()+''
@@ -25,9 +28,20 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 col=vec4(0.0,0.0,0.0,1.0);'
     .endl()+'   vec4 colOrig=texture2D(tex,texCoord);'
-    .endl()+'   col.r=texture2D(image,vec2(colOrig.r,posy)).r;'
-    .endl()+'   col.g=texture2D(image,vec2(colOrig.g,posy)).g;'
-    .endl()+'   col.b=texture2D(image,vec2(colOrig.b,posy)).b;'
+    
+    
+    .endl()+'#ifdef VERT'
+    .endl()+'   col.r=texture2D(image,vec2(colOrig.r,pos)).r;'
+    .endl()+'   col.g=texture2D(image,vec2(colOrig.g,pos)).g;'
+    .endl()+'   col.b=texture2D(image,vec2(colOrig.b,pos)).b;'
+    .endl()+'#endif'
+    
+    .endl()+'#ifdef HORI'
+    .endl()+'   col.r=texture2D(image,vec2(pos,colOrig.r)).r;'
+    .endl()+'   col.g=texture2D(image,vec2(pos,colOrig.g)).g;'
+    .endl()+'   col.b=texture2D(image,vec2(pos,colOrig.b)).b;'
+    .endl()+'#endif'
+
     .endl()+'   col.a=1.0;'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
@@ -35,15 +49,27 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
-
+updateDir();
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount.get());
+
+vert.onChange=updateDir;
+
+function updateDir()
+{
+    shader.removeDefine('VERT');
+    shader.removeDefine('HORI');
+    
+    if(vert.get())shader.define('VERT');
+        else shader.define('HORI');
+
+};
 
 amount.onValueChanged=function()
 {
     amountUniform.setValue(amount.get());
 };
 
-var posyUniform=new CGL.Uniform(shader,'f','posy',posy.get());
+var posyUniform=new CGL.Uniform(shader,'f','pos',posy.get());
 
 posy.onValueChanged=function()
 {
