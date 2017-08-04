@@ -127,6 +127,14 @@ CGL.State=function()
 
     this.beginFrame=function()
     {
+
+if(CABLES.UI)
+{
+    gui.preview.render();
+    if(CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
+
+}
+
         self.setShader(simpleShader);
     };
 
@@ -169,6 +177,16 @@ CGL.State=function()
             oldCanvasWidth=self.canvasWidth;
             oldCanvasHeight=self.canvasHeight;
         }
+
+
+        if(CABLES.UI)
+        {
+
+        }
+
+
+
+
     };
 
     // shader stack

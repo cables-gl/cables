@@ -17,8 +17,6 @@ var shader=new CGL.Shader(cgl,'MinimalMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
-op.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 
-doRender();

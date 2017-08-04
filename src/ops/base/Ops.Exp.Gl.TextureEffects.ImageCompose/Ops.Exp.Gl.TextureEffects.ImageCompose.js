@@ -4,7 +4,8 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
+var tfilter=op.inValueSelect("filter",['nearest','linear']);//,'mipmap'
+var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
 
 var fpTexture=op.inValueBool("HDR");
 var clear=op.inValueBool("Clear",true);
@@ -24,11 +25,12 @@ var reInitEffect=true;
 
 var bgFrag=''
     .endl()+'precision highp float;'
-    .endl()+'uniform float a;'
+
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   gl_FragColor = vec4(0.0,0.0,0.0,1.0);'
+    .endl()+'   gl_FragColor = vec4(0.0,0.0,0.0,0.0);'
     .endl()+'}';
+
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');
 bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);
 
@@ -63,6 +65,8 @@ fpTexture.onChange=function()
 };
 
 
+
+
 function updateResolution()
 {
     if(!effect)initEffect();
@@ -78,15 +82,27 @@ function updateResolution()
         h=(height.get());
     }
 
-    if((w!=tex.width || h!= tex.height) && (w!==0 && h!==0))
+    newFilter=tex.filter;
+    newWrap=tex.wrap;
+
+    if(tfilter.get()=='nearest') newFilter=CGL.Texture.FILTER_NEAREST;
+    if(tfilter.get()=='linear')  newFilter=CGL.Texture.FILTER_LINEAR;
+    // if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
+    
+    if(wrap.get()=='repeat') newWrap=CGL.Texture.WRAP_REPEAT;
+    if(wrap.get()=='mirrored repeat') newWrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if(wrap.get()=='clamp to edge') newWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+    if((w!=tex.width || h!= tex.height || tex.wrap!=newWrap || tex.filter!=newFilter) && (w!==0 && h!==0))
     {
         height.set(h);
         width.set(w);
-        tex.filter=CGL.Texture.FILTER_LINEAR;
+        tex.wrap=newWrap;
+        tex.filter=newFilter;
+
         tex.setSize(w,h);
         
         effect.setSourceTexture(tex);
-        // texOut.set(effect.getCurrentSourceTexture());
     }
 
     if(texOut.get())
@@ -114,6 +130,7 @@ useVPSize.onValueChanged=function()
 
 var doRender=function()
 {
+    
     if(!effect || reInitEffect)
     {
         initEffect();
@@ -134,10 +151,17 @@ var doRender=function()
         effect.setSourceTexture(tex);
         effect.startEffect();
 
+    cgl.gl.disable( cgl.gl.BLEND );
+
+
         cgl.setShader(bgShader);
         cgl.currentTextureEffect.bind();
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        
+        cgl.gl.clearColor(0,0,0,0);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT );
+
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
     }
@@ -145,7 +169,6 @@ var doRender=function()
     {
         effect.setSourceTexture(tex);
         effect.startEffect();
-
     }
 
     trigger.trigger();
@@ -161,14 +184,6 @@ var doRender=function()
 
 function onFilterChange()
 {
-    var newFilter=CGL.Texture.FILTER_LINEAR;
-    // if(tfilter.get()=='nearest') newFilter=CGL.Texture.FILTER_NEAREST;
-    // if(tfilter.get()=='linear')  newFilter=CGL.Texture.FILTER_LINEAR;
-    // if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
-    // if(newFilter!=tex.filter)tex.width=0;
-    tex.filter=newFilter;
-
-    effect.setSourceTexture(tex);
     updateResolution();
 }
 
