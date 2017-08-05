@@ -1,1 +1,22 @@
-{"summary":"Multiply every number in an array"}
+{
+    "summary": "Multiply every number in an array",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayMultiply"
+    }
+}
