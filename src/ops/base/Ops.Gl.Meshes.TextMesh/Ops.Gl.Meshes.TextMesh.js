@@ -223,7 +223,7 @@ function generateMesh()
     if(!mesh)mesh=new CGL.Mesh(cgl,font.geom);
 
     var strings=str.get().split('\n');
-    console.log(strings);
+
     var transformations=[];
     var tcOffsets=[];//new Float32Array(str.get().length*2);
     var tcSize=[];//new Float32Array(str.get().length*2);
@@ -256,19 +256,14 @@ function generateMesh()
         else if(align.get()=='right') offX=width;
         else if(align.get()=='center') offX=width/2;
 
-        console.log(s,txt,numChars,width);
-
-    
         for(var i=0;i<numChars;i++)
         {
             var chStr=txt.substring(i,i+1);
             var char=font.chars[chStr];
 
-            // console.log(char);
             if(!char)
             {
                 createTexture=true;
-                console.log('abort');
                 return;
             }
             else
@@ -295,9 +290,6 @@ function generateMesh()
     mesh.setAttribute('attrTexSize',new Float32Array(tcSize),2,{"instanced":true});
 
     createMesh=false;
-    
-    console.log(mesh.numInstances);
-
 
     if(createTexture) generateTexture();
     
