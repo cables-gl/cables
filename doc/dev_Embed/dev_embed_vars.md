@@ -31,7 +31,7 @@ if(v)
 
 ### listening to variable change
 
-you can add a listener to a variable to have a callback called every time a variable value was changed
+you can add a listener to a variable to have a callback called every time a variable value was changed.
 
 ```javascript
 var v=CABLES.patch.getVar("IsInteracting");
