@@ -1,0 +1,26 @@
+{
+    "summary": "get simple statistics about a number array",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Min"
+            },
+            {
+                "type": "0",
+                "name": "Max"
+            },
+            {
+                "type": "0",
+                "name": "Average"
+            }
+        ],
+        "name": "Ops.Array.ArrayAnalyze"
+    }
+}

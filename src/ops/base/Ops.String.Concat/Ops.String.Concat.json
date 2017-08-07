@@ -8,6 +8,10 @@
             {
                 "type": "0",
                 "name": "string2"
+            },
+            {
+                "type": "0",
+                "name": "New Line"
             }
         ],
         "portsOut": [

@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Num"
+            },
+            {
+                "type": "0",
+                "name": "Deviation"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.Math.GaussianRandom"
+    },
+    "summary": "random numbers fitting a Gaussian, or normal, distribution"
+}

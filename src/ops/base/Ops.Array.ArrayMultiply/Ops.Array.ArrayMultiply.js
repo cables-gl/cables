@@ -8,7 +8,7 @@ var outArray=op.outArray("Result");
 var newArr=[];
 outArray.set(newArr);
 
-inArray.onChange=function()
+inValue.onChange=inArray.onChange=function()
 {
     var arr=inArray.get();
     if(!arr)return;

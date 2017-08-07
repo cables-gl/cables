@@ -6,23 +6,23 @@ var textureOut=op.outTexture("texture");
 var str=op.inValueString("Text","cables");
 var scale=op.inValue("Scale",1);
 var inFont=op.inValueString("Font","Arial");
-var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
+var align=op.inValueSelect("align",['left','center','right'],'center');
 
 var cgl=op.patch.cgl;
 
 var textureSize=2048;
 
 
+align.onChange=generateMesh;
 str.onChange=generateMesh;
 
 
 var cgl=op.patch.cgl;
 var geom=null;
 var mesh=null;
-var transformations=[];
+
 var createMesh=true;
 var createTexture=true;
-
 
 textureOut.set(null);
 inFont.onChange=function(){ createTexture=true;createMesh=true; };
@@ -52,7 +52,6 @@ function getFont()
             chars:{},
             characters:'?',
             fontSize:320
-
         };
     return CABLES.OpTextureMeshCanvas[canvasid];
 
@@ -83,10 +82,12 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
     .endl()+'   col.a=col.r;'
+    // .endl()+'   col.a=1.0;'
     .endl()+'   col.r*=r;'
     .endl()+'   col.g*=g;'
     .endl()+'   col.b*=b;'
     .endl()+'   col*=a;'
+
     .endl()+'   gl_FragColor=col;'
     .endl()+'}'
     .endl();
@@ -191,7 +192,6 @@ render.onTriggered=function()
 
 function generateMesh()
 {
-
     if(!str.get())return;
     if(!textureOut.get())return;
 
@@ -218,70 +218,81 @@ function generateMesh()
             0, 1, 2,
             3, 1, 2
         ];
-
-
     }
-    if(!mesh)
-        mesh=new CGL.Mesh(cgl,font.geom);
 
+    if(!mesh)mesh=new CGL.Mesh(cgl,font.geom);
 
+    var strings=str.get().split('\n');
 
-
-
-    var numChars=str.get().length;
-    var m=mat4.create();
-    var txt=str.get();
-    var tcOffsets=new Float32Array(numChars*2);
-    var tcSize=new Float32Array(numChars*2);
-    var pos=0;
+    var transformations=[];
+    var tcOffsets=[];//new Float32Array(str.get().length*2);
+    var tcSize=[];//new Float32Array(str.get().length*2);
+    var charCounter=0;
     createTexture=false;
+    var m=mat4.create();
 
-    var offX=0;
-    var width=0;
-    for(var i=0;i<numChars;i++)
+
+    for(var s=0;s<strings.length;s++)
     {
-        var chStr=txt.substring(i,i+1);
-        var char=font.chars[chStr];
-        if(char) width+=(char.texCoordWidth/char.texCoordHeight);
+        var txt=strings[s];
+
+        var numChars=txt.length;
+        
+        
+        var pos=0;
+        var offX=0;
+        var width=0;
+
+        for(var i=0;i<numChars;i++)
+        {
+            var chStr=txt.substring(i,i+1);
+            var char=font.chars[chStr];
+            if(char) width+=(char.texCoordWidth/char.texCoordHeight);
+        }
+
+
+    
+        if(align.get()=='left') offX=0;
+        else if(align.get()=='right') offX=width;
+        else if(align.get()=='center') offX=width/2;
+
+        for(var i=0;i<numChars;i++)
+        {
+            var chStr=txt.substring(i,i+1);
+            var char=font.chars[chStr];
+
+            if(!char)
+            {
+                createTexture=true;
+                return;
+            }
+            else
+            {
+                tcOffsets.push(char.texCoordX,1-char.texCoordY-char.texCoordHeight);
+                tcSize.push(char.texCoordWidth,char.texCoordHeight);
+
+                mat4.identity(m);
+                mat4.translate(m,m,[pos-offX,0-s,0]);
+
+                pos+=(char.texCoordWidth/char.texCoordHeight);
+                transformations.push(Array.prototype.slice.call(m));
+    
+                charCounter++;
+            }
+        }
     }
 
-    if(align.get()=='left') offX=0;
-    else if(align.get()=='right') offX=width;
-    else if(align.get()=='center') offX=width/2;
+    var transMats = [].concat.apply([], transformations);
 
-    for(var i=0;i<numChars;i++)
-    {
-        var chStr=txt.substring(i,i+1);
-        var char=font.chars[chStr];
-        if(!char)
-        {
-            createTexture=true;
-            return;
-        }
-        else
-        {
-            tcOffsets[i*2+0]=char.texCoordX;
-            tcOffsets[i*2+1]=1-char.texCoordY-char.texCoordHeight;
+    mesh.numInstances=transMats.length/16;
+    mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
+    mesh.setAttribute('attrTexOffsets',new Float32Array(tcOffsets),2,{"instanced":true});
+    mesh.setAttribute('attrTexSize',new Float32Array(tcSize),2,{"instanced":true});
 
-            tcSize[i*2+0]=char.texCoordWidth;
-            tcSize[i*2+1]=char.texCoordHeight;
-
-            mat4.identity(m);
-            mat4.translate(m,m,[pos-offX,0,0]);
-            pos+=(char.texCoordWidth/char.texCoordHeight);
-            transformations[i]=Array.prototype.slice.call(m);
-        }
-    }
-
-    var arrs = [].concat.apply([], transformations);
-    var matrices = new Float32Array(arrs);
-
-    mesh.numInstances=numChars;
-    mesh.setAttribute('instMat',matrices,16,{"instanced":true});
-    mesh.setAttribute('attrTexOffsets',tcOffsets,2,{"instanced":true});
-    mesh.setAttribute('attrTexSize',tcSize,2,{"instanced":true});
+    createMesh=false;
 
     if(createTexture) generateTexture();
+    
 }
 
 
@@ -308,7 +319,7 @@ function printChars(fontSize,simulate)
             "fits":true
         };
 
-    for(i=0;i<font.characters.length;i++)
+    for(var i=0;i<font.characters.length;i++)
     {
         var chStr=font.characters.substring(i,i+1);
         var chWidth=(ctx.measureText(chStr).width);
@@ -366,11 +377,10 @@ function generateTexture()
     font.canvas.width=font.canvas.height=textureSize;
 
     if(!font.texture)
-
-    font.texture=CGL.Texture.createFromImage(cgl,font.canvas,
-        {
-            filter:CGL.Texture.FILTER_MIPMAP
-        });
+        font.texture=CGL.Texture.createFromImage(cgl,font.canvas,
+            {
+                filter:CGL.Texture.FILTER_MIPMAP
+            });
 
     font.texture.setSize(textureSize,textureSize);
 
