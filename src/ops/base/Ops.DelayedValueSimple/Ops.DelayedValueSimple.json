@@ -17,5 +17,6 @@
             }
         ],
         "name": "Ops.DelayedValueSimple"
-    }
+    },
+    "summary": "delay the value data flow by x seconds"
 }

@@ -18,5 +18,5 @@
         ],
         "name": "Ops.Gl.CanvasInBrowserViewport"
     },
-    "summary": "result is true or false, if canvas is in current browser viewport"
+    "summary": "check if webgl canvas element is in the current browser viewport"
 }
