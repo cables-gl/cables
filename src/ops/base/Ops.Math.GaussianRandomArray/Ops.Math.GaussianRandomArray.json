@@ -16,7 +16,7 @@
                 "name": "Array"
             }
         ],
-        "name": "Ops.Math.GaussianRandom"
+        "name": "Ops.Math.GaussianRandomArray"
     },
     "summary": "random numbers fitting a Gaussian, or normal, distribution"
 }

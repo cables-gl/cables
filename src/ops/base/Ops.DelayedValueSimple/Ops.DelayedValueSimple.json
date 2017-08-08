@@ -1,0 +1,21 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Delay"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Out Value"
+            }
+        ],
+        "name": "Ops.DelayedValueSimple"
+    }
+}

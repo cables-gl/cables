@@ -27,6 +27,10 @@
             },
             {
                 "type": "0",
+                "name": "Text"
+            },
+            {
+                "type": "0",
                 "name": "Ignore Mouse"
             }
         ],

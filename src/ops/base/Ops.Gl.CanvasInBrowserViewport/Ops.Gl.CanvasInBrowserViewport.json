@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Fully Visible"
+            },
+            {
+                "type": "0",
+                "name": "Partly Visible"
+            }
+        ],
+        "name": "Ops.Gl.CanvasInBrowserViewport"
+    },
+    "summary": "result is true or false, if canvas is in current browser viewport"
+}

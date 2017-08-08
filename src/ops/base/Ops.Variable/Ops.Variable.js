@@ -53,14 +53,13 @@ function init()
         variable.addListener(onChange);
         op.uiAttr({error:null,});
         op.setTitle('#'+op.varName.get());
-
+        onChange(variable.getValue());
+        // console.log("var value ",variable.getName(),variable.getValue());
     }
     else
     {
-
         op.uiAttr({error:"unknown variable! - there is no setVariable with this name"});
         op.setTitle('#invalid');
-
     }
 }
 

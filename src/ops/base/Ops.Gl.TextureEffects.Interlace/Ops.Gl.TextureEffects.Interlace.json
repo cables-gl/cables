@@ -24,6 +24,10 @@
             {
                 "type": "0",
                 "name": "Add"
+            },
+            {
+                "type": "0",
+                "name": "scroll"
             }
         ],
         "portsOut": [
