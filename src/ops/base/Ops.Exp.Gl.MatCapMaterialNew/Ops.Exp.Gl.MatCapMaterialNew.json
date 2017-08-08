@@ -1,0 +1,69 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "MatCap"
+            },
+            {
+                "type": "2",
+                "name": "Diffuse"
+            },
+            {
+                "type": "2",
+                "name": "Normal"
+            },
+            {
+                "type": "2",
+                "name": "Specular"
+            },
+            {
+                "type": "2",
+                "name": "Specular MatCap"
+            },
+            {
+                "type": "2",
+                "name": "AO Texture"
+            },
+            {
+                "type": "0",
+                "name": "AO Intensity"
+            },
+            {
+                "type": "0",
+                "name": "Repeat X"
+            },
+            {
+                "type": "0",
+                "name": "Repeat Y"
+            },
+            {
+                "type": "0",
+                "name": "Opacity"
+            },
+            {
+                "type": "0",
+                "name": "calc normal tangents"
+            },
+            {
+                "type": "0",
+                "name": "projectCoords"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Exp.Gl.MatCapMaterialNew"
+    }
+}
