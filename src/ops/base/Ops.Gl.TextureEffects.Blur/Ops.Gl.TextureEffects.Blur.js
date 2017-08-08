@@ -133,6 +133,7 @@ mask.onValueChanged=function()
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+
     cgl.setShader(shader);
 
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);

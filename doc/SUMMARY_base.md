@@ -16,6 +16,7 @@
     * [Post-processing 3D scenes](post-processing_3d_scenes/post-processing_3d_scenes.md)
   * [Export / Embedding](chapter_readmes/export/Readme.md)
     * [Embedding](dev_embed/dev_embed.md)
+    * [Setting Variables](dev_embed_vars/dev_embed_vars.md)
   * [Writing Ops](chapter_readmes/writing_ops/Readme.md)
     * [Hello Op](dev_hello_op/dev_hello_op.md)
     * [Namespaces](namespaces/namespaces.md)
