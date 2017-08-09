@@ -8,13 +8,14 @@ var arr=[];
 var stdDev=1;
 
 var nextGaussian=null;
-
+inDev.onChange=inNum.onChange=update;
+update();
 
 // from https://github.com/processing/p5.js/blob/master/src/math/random.js
 
 var previous=false;
 
-randomGaussian = function(mean, sd)  {
+function randomGaussian(mean, sd)  {
   var y1,x1,x2,w;
   if (previous) {
     y1 = y2;
@@ -34,9 +35,10 @@ randomGaussian = function(mean, sd)  {
   var m = mean || 0;
   var s = sd || 1;
   return y1*s + m;
-};
+}
 
-inDev.onChange=inNum.onChange=function()
+
+function update()
 {
     stdDev=inDev.get();
 
@@ -47,7 +49,7 @@ inDev.onChange=inNum.onChange=function()
     }
 
     outArr.set(arr);
-};
+}
 
 
 

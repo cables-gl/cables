@@ -1,22 +1,21 @@
 {
-    "summary": "Difference between two numbers",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "Number A"
+                "name": "number1"
             },
             {
                 "type": "0",
-                "name": "Number B"
+                "name": "number2"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "result"
             }
         ],
-        "name": "Ops.Math.Difference"
+        "name": "Ops.Math.Compare.Greater"
     }
 }

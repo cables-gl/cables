@@ -10,6 +10,8 @@ var show=op.inValueBool("show",true);
 var index=op.inValue("index");
 var title=op.inValueString("Title");
 
+var inText=op.inValueString("Text");
+
 var ignore=op.inValueBool("Ignore Mouse");
 
 var outHovering=op.outValue("Hovering",false);
@@ -22,7 +24,7 @@ var triggerClicked=op.outFunction("Clicked");
 var cgl=op.patch.cgl;
 var trans=vec3.create();
 var m=mat4.create();
-
+op
 var elements=[];
 var elementOver=null;
 var textContent=false;
@@ -33,6 +35,7 @@ var pos=[0,0,0];
 
 show.onChange=updateVisibility;
 ignore.onChange=updateListeners;
+inText.onChange=updateText;
 
 pPointSize.onChange=function()
 {
@@ -47,6 +50,11 @@ pPointSize.onChange=function()
 };
 
 
+function updateText()
+{
+    if(elements[currentIndex]) elements[currentIndex].innerHTML='<span>'+inText.get()+'</span>';
+}
+
 function updateVisibility()
 {
     var i=0;
@@ -57,7 +65,7 @@ function updateVisibility()
         {
             if(elements[i])
             {
-                elements[i].style.opacity=0.6;
+                elements[i].style.opacity=1;
                 elements[i].style["pointer-events"]="all";
             }
         }
@@ -169,24 +177,32 @@ function init()
     updateListeners()
 
     updateVisibility();
+    updateText();
 
     canvas.appendChild(elements[currentIndex]);
 }
 
 function addListeners()
 {
-    elements[currentIndex].style["pointer-events"]="all";
-    elements[currentIndex].addEventListener('mouseleave', onMouseLeave);
-    elements[currentIndex].addEventListener('mouseenter', onMouseEnter);
-    elements[currentIndex].addEventListener('click', onMouseClick);
+    if(elements[currentIndex])
+    {
+        elements[currentIndex].style["pointer-events"]="all";
+        elements[currentIndex].addEventListener('mouseleave', onMouseLeave);
+        elements[currentIndex].addEventListener('mouseenter', onMouseEnter);
+        elements[currentIndex].addEventListener('click', onMouseClick);
+    }
 }
 
 function removeListeners()
 {
-    elements[currentIndex].style["pointer-events"]="none";
-    elements[currentIndex].removeEventListener('mouseleave', onMouseLeave);
-    elements[currentIndex].removeEventListener('mouseenter', onMouseEnter);
-    elements[currentIndex].removeEventListener('click', onMouseClick);
+    if(elements[currentIndex])
+    {
+        elements[currentIndex].style["pointer-events"]="none";
+        elements[currentIndex].removeEventListener('mouseleave', onMouseLeave);
+        elements[currentIndex].removeEventListener('mouseenter', onMouseEnter);
+        elements[currentIndex].removeEventListener('click', onMouseClick);
+        
+    }
 }
 
 function updateListeners()
@@ -211,6 +227,7 @@ var y=0;
 function getScreenCoord()
 {
     mat4.multiply(m,cgl.vMatrix,cgl.mvMatrix);
+
     vec3.transformMat4(pos, [0,0,0], m);
     
     vec3.transformMat4(trans, pos, cgl.pMatrix);
@@ -236,7 +253,7 @@ exec.onTriggered=function()
 
     if(elements[currentIndex] && (elements[currentIndex].y!=y || elements[currentIndex].x!=x))
     {
-        elements[currentIndex].title=title.get();
+        // elements[currentIndex].title=title.get();
         elements[currentIndex].style.top=offsetTop+y+'px';
         elements[currentIndex].style.left=x+'px';
         elements[currentIndex].y=y;

@@ -9,13 +9,11 @@ var next=op.outFunction("Next");
 var shader=null;
 show.onTriggered=function()
 {
-
     if(CABLES.UI && shader)
     {
         console.log('shader', shader );
-        CABLES.UI.MODAL.showCode('shader ',shader.finalShaderVert);
+        CABLES.UI.MODAL.showCode('shader ',shader.finalShaderFrag);
     }
-    
 };
 
 exec.onTriggered=function()

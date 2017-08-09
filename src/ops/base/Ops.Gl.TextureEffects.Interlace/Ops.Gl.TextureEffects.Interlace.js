@@ -7,6 +7,7 @@ var lineSize=op.inValue("Line Size",4);
 var displace=op.inValueSlider("Displacement",0);
 
 var add=op.inValue("Add",0.02);
+var inScroll=op.inValue("scroll",0);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -24,6 +25,7 @@ var srcFrag=''
     .endl()+'uniform float lum;'
     .endl()+'uniform float add;'
     .endl()+'uniform float lineSize;'
+    .endl()+'uniform float scroll;'
     .endl()+'uniform float displace;'
     .endl()+''
 
@@ -33,7 +35,7 @@ var srcFrag=''
 
     .endl()+'   col=texture2D(tex,texCoord);'
     // .endl()+'   col=clamp(col,0.0,1.0);'
-    .endl()+'   if( mod(gl_FragCoord.y,lineSize)>=lineSize*0.5)'
+    .endl()+'   if( mod(gl_FragCoord.y+scroll,lineSize)>=lineSize*0.5)'
     .endl()+'   {'
     .endl()+'       col=texture2D(tex,vec2(texCoord.x+displace*0.05,texCoord.y));'
     .endl()+'       float gray = vec3(dot(vec3(0.2126,0.7152,0.0722), col.rgb)).r;'
@@ -53,7 +55,7 @@ var uniLum=new CGL.Uniform(shader,'f','lum',lum);
 var uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
 var uniAdd=new CGL.Uniform(shader,'f','add',add);
 var uniDisplace=new CGL.Uniform(shader,'f','displace',displace);
-
+var uniScroll=new CGL.Uniform(shader,'f','scroll',inScroll);
 
 
 render.onTriggered=function()

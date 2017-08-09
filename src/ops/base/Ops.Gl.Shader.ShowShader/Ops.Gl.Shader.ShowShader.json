@@ -1,0 +1,21 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "1",
+                "name": "Show"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.Shader.ShowShader"
+    }
+}

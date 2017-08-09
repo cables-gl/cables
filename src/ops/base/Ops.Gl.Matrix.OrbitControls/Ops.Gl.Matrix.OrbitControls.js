@@ -18,9 +18,9 @@ var inReset=op.inFunctionButton("Reset");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
-
 var allowPanning=op.inValueBool("Allow Panning",true);
 var allowZooming=op.inValueBool("Allow Zooming",true);
+var pointerLock=op.inValueBool("Pointerlock",false);
 
 
 
@@ -54,13 +54,20 @@ var finalEye=vec3.create();
 var tempCenter=vec3.create();
 
 var px=0;
+var py=0;
 
 var divisor=1;
 updateSmoothness();
 
 op.onDelete=unbind;
 
+var doLockPointer=false;
 
+pointerLock.onChange=function()
+{
+    doLockPointer=pointerLock.get();
+    console.log("doLockPointer",doLockPointer);
+};
 
 function reset()
 {
@@ -86,14 +93,18 @@ render.onTriggered=function()
 {
     cgl.pushViewMatrix();
 
+    px=ip(px,percX);
+    py=ip(py,percY);
+
+    eye=circlePos(py);
+
     vec3.add(tempEye, eye, vOffset);
     vec3.add(tempCenter, vCenter, vOffset);
 
-    px=ip(px,percX);
     finalEye[0]=ip(finalEye[0],tempEye[0]);
     finalEye[1]=ip(finalEye[1],tempEye[1]);
     finalEye[2]=ip(finalEye[2],tempEye[2]);
-
+    
     mat4.lookAt(viewMatrix, finalEye, tempCenter, vUp);
     mat4.rotate(viewMatrix, viewMatrix, px, vUp);
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,viewMatrix);
@@ -126,33 +137,36 @@ function onmousemove(event)
     var x = event.clientX;
     var y = event.clientY;
     
+    var movementX=x-lastMouseX;
+    var movementY=y-lastMouseY;
+    
+    if(doLockPointer)
+    {
+        movementX=event.movementX*mul.get();
+        movementY=event.movementY*mul.get();
+    }
+
     if(event.which==3 && allowPanning.get())
     {
-        vOffset[2]+=(x-lastMouseX)*0.01*mul.get();
-        vOffset[1]+=(y-lastMouseY)*0.01*mul.get();
-        // eye=circlePos(percY);
+        vOffset[2]+=(movementX)*0.01*mul.get();
+        vOffset[1]+=(movementY)*0.01*mul.get();
     }
     else
     if(event.which==2 && allowZooming.get())
     {
-        radius+=(y-lastMouseY)*0.05;
-
+        radius+=(movementY)*0.05;
         eye=circlePos(percY);
     }
     else
     {
-        percX+=(x-lastMouseX)*0.002;
-        percY+=(y-lastMouseY)*0.002;
+        percX+=(movementX)*0.003;
+        percY+=(movementY)*0.002;
         
         if(restricted.get())
         {
             if(percY>0.5)percY=0.5;
             if(percY<-0.5)percY=-0.5;
         }
-        else
-        {
-        }
-        eye=circlePos(percY);
     }
 
     lastMouseX=x;
@@ -164,12 +178,50 @@ function onMouseDown(event)
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
     mouseDown=true;
+    
+    if(doLockPointer)
+    {
+        var el=op.patch.cgl.canvas;
+        el.requestPointerLock = el.requestPointerLock || el.mozRequestPointerLock || el.webkitRequestPointerLock;
+        if(el.requestPointerLock) el.requestPointerLock();
+        else console.log("no t found");
+        // document.addEventListener("mousemove", onmousemove, false);
+
+        document.addEventListener('pointerlockchange', lockChange, false);
+        document.addEventListener('mozpointerlockchange', lockChange, false);
+        document.addEventListener('webkitpointerlockchange', lockChange, false);
+
+    }
 }
 
 function onMouseUp()
 {
     mouseDown=false;
     // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
+            
+    if(doLockPointer)
+    {
+        document.removeEventListener('pointerlockchange', lockChange, false);
+        document.removeEventListener('mozpointerlockchange', lockChange, false);
+        document.removeEventListener('webkitpointerlockchange', lockChange, false);
+
+        if(document.exitPointerLock) document.exitPointerLock();
+        document.removeEventListener("mousemove", onmousemove, false);
+    }
+
+}
+
+function lockChange()
+{
+    var el=op.patch.cgl.canvas;
+
+    if (document.pointerLockElement === el || document.mozPointerLockElement === el || document.webkitPointerLockElement === el)
+    {
+        document.addEventListener("mousemove", onmousemove, false);
+        console.log("listening...");
+    }
+    
+
 }
 
 function onMouseEnter(e)

@@ -1,0 +1,17 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.Variable"
+    }
+}

@@ -1,22 +1,22 @@
 {
-    "summary": "Difference between two numbers",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "Number A"
+                "name": "Value"
             },
             {
                 "type": "0",
-                "name": "Number B"
+                "name": "Delay"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Out Value"
             }
         ],
-        "name": "Ops.Math.Difference"
-    }
+        "name": "Ops.DelayedValueSimple"
+    },
+    "summary": "delay the value data flow by x seconds"
 }

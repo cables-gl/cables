@@ -42,5 +42,4 @@ function updateName()
 function update()
 {
     op.patch.setVarValue(op.varName.get(),val.get());
-
 }
