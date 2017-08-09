@@ -1,6 +1,8 @@
 
 CABLES=CABLES||{};
 CABLES.EMBED=CABLES.EMBED||{};
+
+
 CABLES.EMBED.addPatch=function(_element,options)
 {
     var el=_element;
@@ -33,7 +35,12 @@ CABLES.EMBED.addPatch=function(_element,options)
 
     options=options||{};
     options.glCanvasId=canvEl.id;
-    options.onError=alert;
+
+    if(!options.onError) options.onError=
+        function(err)
+        {
+            console.log(err);
+        };
 
     CABLES.patch=new CABLES.Patch(options);
     return canvEl;

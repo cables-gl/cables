@@ -49,8 +49,7 @@ CABLES.Link.prototype._setValue=function()
         }
         else
         {
-            if(this.portIn.changeAlways)
-            this.portIn.set(v);
+            if(this.portIn.changeAlways) this.portIn.set(v);
         }
     }
 };

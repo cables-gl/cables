@@ -117,7 +117,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     {
         if(this._animated)
         {
-            this.value=this.get();//this.anim.getValue(parent.patch.timer.getTime());
+            this.value=this.get();
 
             if(oldAnimVal!=this.value || this.changeAlways)
             {
