@@ -56,6 +56,14 @@
             {
                 "type": "0",
                 "name": "Pointerlock"
+            },
+            {
+                "type": "0",
+                "name": "Speed X"
+            },
+            {
+                "type": "0",
+                "name": "Speed Y"
             }
         ],
         "portsOut": [
@@ -66,6 +74,14 @@
             {
                 "type": "0",
                 "name": "radius"
+            },
+            {
+                "type": "0",
+                "name": "Rot Y"
+            },
+            {
+                "type": "0",
+                "name": "Rot X"
             }
         ],
         "name": "Ops.Gl.Matrix.OrbitControls"

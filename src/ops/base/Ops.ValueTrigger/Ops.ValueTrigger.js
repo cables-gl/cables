@@ -1,14 +1,16 @@
 op.name="ValueTrigger";
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.inFunctionButton("exe");
 var v=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
 
 var result=op.addOutPort(new Port(op,"result"));
 
+exe.onTriggered=exec;
 
-var exec=function()
+result.changeAlways=true;
+
+function exec()
 {
     result.set(v.get());
-};
+}
 
-exe.onTriggered=exec;

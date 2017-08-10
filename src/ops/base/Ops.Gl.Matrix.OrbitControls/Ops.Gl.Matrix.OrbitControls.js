@@ -15,14 +15,19 @@ var restricted=op.addInPort(new Port(op,"restricted",OP_PORT_TYPE_VALUE,{display
 var active=op.inValueBool("Active",true);
 
 var inReset=op.inFunctionButton("Reset");
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
 var allowPanning=op.inValueBool("Allow Panning",true);
 var allowZooming=op.inValueBool("Allow Zooming",true);
 var pointerLock=op.inValueBool("Pointerlock",false);
 
+var speedX=op.inValue("Speed X",1);
+var speedY=op.inValue("Speed Y",1);
 
+
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
+var outYDeg=op.addOutPort(new Port(op,"Rot Y",OP_PORT_TYPE_VALUE));
+var outXDeg=op.addOutPort(new Port(op,"Rot X",OP_PORT_TYPE_VALUE));
 
 restricted.set(true);
 mul.set(1);
@@ -57,6 +62,7 @@ var px=0;
 var py=0;
 
 var divisor=1;
+var element=null;
 updateSmoothness();
 
 op.onDelete=unbind;
@@ -71,6 +77,9 @@ pointerLock.onChange=function()
 
 function reset()
 {
+    px=px%(Math.PI*2);
+    py=py%(Math.PI*2);
+    
     percX=(initialX.get()*Math.PI*2);
     percY=(initialAxis.get()-0.5);
     radius=initialRadius.get();
@@ -95,6 +104,9 @@ render.onTriggered=function()
 
     px=ip(px,percX);
     py=ip(py,percY);
+    
+    outYDeg.set( (py+0.5)*180 );
+    outXDeg.set( (px)*180 );
 
     eye=circlePos(py);
 
@@ -137,8 +149,12 @@ function onmousemove(event)
     var x = event.clientX;
     var y = event.clientY;
     
-    var movementX=x-lastMouseX;
-    var movementY=y-lastMouseY;
+    var movementX=(x-lastMouseX)*speedX.get();
+    var movementY=(y-lastMouseY)*speedY.get();
+    
+
+
+
     
     if(doLockPointer)
     {
@@ -148,8 +164,8 @@ function onmousemove(event)
 
     if(event.which==3 && allowPanning.get())
     {
-        vOffset[2]+=(movementX)*0.01*mul.get();
-        vOffset[1]+=(movementY)*0.01*mul.get();
+        vOffset[2]+=movementX*0.01*mul.get();
+        vOffset[1]+=movementY*0.01*mul.get();
     }
     else
     if(event.which==2 && allowZooming.get())
@@ -190,7 +206,6 @@ function onMouseDown(event)
         document.addEventListener('pointerlockchange', lockChange, false);
         document.addEventListener('mozpointerlockchange', lockChange, false);
         document.addEventListener('webkitpointerlockchange', lockChange, false);
-
     }
 }
 
@@ -208,7 +223,6 @@ function onMouseUp()
         if(document.exitPointerLock) document.exitPointerLock();
         document.removeEventListener("mousemove", onmousemove, false);
     }
-
 }
 
 function lockChange()
@@ -220,8 +234,6 @@ function lockChange()
         document.addEventListener("mousemove", onmousemove, false);
         console.log("listening...");
     }
-    
-
 }
 
 function onMouseEnter(e)
@@ -247,7 +259,7 @@ var onMouseWheel=function(event)
     {
         var delta=CGL.getWheelSpeed(event)*0.06;
         radius+=(parseFloat(delta))*1.2;
-    
+
         eye=circlePos(percY);
         event.preventDefault();
     }
@@ -255,16 +267,19 @@ var onMouseWheel=function(event)
 
 var ontouchstart=function(event)
 {
+    doLockPointer=false;
     if(event.touches && event.touches.length>0) onMouseDown(event.touches[0]);
 };
 
 var ontouchend=function(event)
 {
+    doLockPointer=false;
     onMouseUp();
 };
 
 var ontouchmove=function(event)
 {
+    doLockPointer=false;
     if(event.touches && event.touches.length>0) onmousemove(event.touches[0]);
 };
 
@@ -274,39 +289,49 @@ active.onChange=function()
         else unbind();
 }
 
+
+this.setElement=function(ele)
+{
+    unbind();
+    element=ele;
+    bind();
+}
+
 function bind()
 {
-    cgl.canvas.addEventListener('mousemove', onmousemove);
-    cgl.canvas.addEventListener('mousedown', onMouseDown);
-    cgl.canvas.addEventListener('mouseup', onMouseUp);
-    cgl.canvas.addEventListener('mouseleave', onMouseUp);
-    cgl.canvas.addEventListener('mouseenter', onMouseEnter);
-    cgl.canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
-    cgl.canvas.addEventListener('wheel', onMouseWheel);
+    element.addEventListener('mousemove', onmousemove);
+    element.addEventListener('mousedown', onMouseDown);
+    element.addEventListener('mouseup', onMouseUp);
+    element.addEventListener('mouseleave', onMouseUp);
+    element.addEventListener('mouseenter', onMouseEnter);
+    element.addEventListener('contextmenu', function(e){e.preventDefault();});
+    element.addEventListener('wheel', onMouseWheel);
 
-    cgl.canvas.addEventListener('touchmove', ontouchmove);
-    cgl.canvas.addEventListener('touchstart', ontouchstart);
-    cgl.canvas.addEventListener('touchend', ontouchend);
+    element.addEventListener('touchmove', ontouchmove);
+    element.addEventListener('touchstart', ontouchstart);
+    element.addEventListener('touchend', ontouchend);
 
 }
 
 function unbind()
 {
-    cgl.canvas.removeEventListener('mousemove', onmousemove);
-    cgl.canvas.removeEventListener('mousedown', onMouseDown);
-    cgl.canvas.removeEventListener('mouseup', onMouseUp);
-    cgl.canvas.removeEventListener('mouseleave', onMouseUp);
-    cgl.canvas.removeEventListener('mouseenter', onMouseUp);
-    cgl.canvas.removeEventListener('wheel', onMouseWheel);
+    if(!element)return;
+    
+    element.removeEventListener('mousemove', onmousemove);
+    element.removeEventListener('mousedown', onMouseDown);
+    element.removeEventListener('mouseup', onMouseUp);
+    element.removeEventListener('mouseleave', onMouseUp);
+    element.removeEventListener('mouseenter', onMouseUp);
+    element.removeEventListener('wheel', onMouseWheel);
 
-    cgl.canvas.removeEventListener('touchmove', ontouchmove);
-    cgl.canvas.removeEventListener('touchstart', ontouchstart);
-    cgl.canvas.removeEventListener('touchend', ontouchend);
+    element.removeEventListener('touchmove', ontouchmove);
+    element.removeEventListener('touchstart', ontouchstart);
+    element.removeEventListener('touchend', ontouchend);
 }
 
 
 
 eye=circlePos(0);
-
+this.setElement(cgl.canvas);
 
 bind();

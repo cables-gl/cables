@@ -18,5 +18,5 @@
         ],
         "name": "Ops.Patch.Function"
     },
-    "summary": "trigger an external function when embedded into a website"
+    "summary": "trigger from external function when embedded into a website"
 }

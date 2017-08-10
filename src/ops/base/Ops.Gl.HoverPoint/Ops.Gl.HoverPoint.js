@@ -24,7 +24,6 @@ var triggerClicked=op.outFunction("Clicked");
 var cgl=op.patch.cgl;
 var trans=vec3.create();
 var m=mat4.create();
-op
 var elements=[];
 var elementOver=null;
 var textContent=false;
@@ -42,9 +41,13 @@ pPointSize.onChange=function()
     pointSize=pPointSize.get();
     for(i=0;i<elements.length;i++) 
     {
-        elements[i].style.width=pointSize+"px";
-        elements[i].style.height=pointSize+"px";
-        elements[i].style['border-radius']=2*pointSize+"px";
+        if(elements[i])
+        {
+            elements[i].style.width=pointSize+"px";
+            elements[i].style.height=pointSize+"px";
+            elements[i].style['border-radius']=2*pointSize+"px";
+            
+        }
     }
 
 };
@@ -83,6 +86,7 @@ function updateVisibility()
     }
 }
 
+
 index.onChange=function()
 {
     currentIndex=Math.round(index.get());
@@ -90,6 +94,9 @@ index.onChange=function()
     {
         elements.length=currentIndex+1;
     }
+    
+    if(elements[currentIndex]) elements[currentIndex].dataset.index=currentIndex;
+
 };
 
 var textContent=null;
@@ -146,6 +153,8 @@ function init()
     elements[currentIndex].style.transition="opacity 0.3s ease "+Math.random()*0.2+"s";
     elements[currentIndex].style.opacity=0;
     elements[currentIndex].index=currentIndex;
+    
+    elements[currentIndex].dataset.index=currentIndex;
     
     elements[currentIndex].style.opacity="0.5";
 
