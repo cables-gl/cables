@@ -17,21 +17,21 @@ inAmount=op.inValueSlider("Amount",0.3);
 var shader=null;
 
 var srcHeadVert=''
-    .endl()+'varying vec4 meshPixelNoise_pos;'
+    .endl()+'varying vec4 MOD_pos;'
     .endl();
 
 var srcBodyVert=''
-    .endl()+'meshPixelNoise_pos=pos;'
+    .endl()+'MOD_pos=pos;'
     .endl();
 
 var srcHeadFrag=attachments.pixelnoise_frag
-    .endl()+'uniform float {{mod}}_scale;'
-    .endl()+'uniform float {{mod}}_amount;'
+    .endl()+'uniform float MOD_scale;'
+    .endl()+'uniform float MOD_amount;'
     .endl();
 
 var srcBodyFrag=''
-    // .endl()+'   col.rgb=mix(col.rgb,vec3(meshPixelNoise(meshPixelNoise_pos.xyz*{{mod}}_scale)),{{mod}}_amount);'
-    .endl()+'   col.rgb-=meshPixelNoise(meshPixelNoise_pos.xyz*{{mod}}_scale)*{{mod}}_amount/4.0;'
+    // .endl()+'   col.rgb=mix(col.rgb,vec3(meshPixelNoise(meshPixelNoise_pos.xyz*MOD_scale)),MOD_amount);'
+    .endl()+'   col.rgb-=MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
 
     .endl();
 
@@ -45,10 +45,6 @@ function removeModule()
     if(shader && moduleVert) shader.removeModule(moduleVert);
     shader=null;
 }
-
-
-// var uniOffsetX=null;
-// var uniOffsetY=null;
 
 op.render.onLinkChanged=removeModule;
 
@@ -72,22 +68,17 @@ op.render.onTriggered=function()
                 srcBodyVert:srcBodyVert
             });
 
-        // uniOffsetX=new CGL.Uniform(shader,'f',moduleVert.prefix+'_offsetX',offsetX);
-        // uniOffsetY=new CGL.Uniform(shader,'f',moduleVert.prefix+'_offsetY',offsetY);
-
-
         moduleFrag=shader.addModule(
             {
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
                 srcBodyFrag:srcBodyFrag
-            });
-        scale=new CGL.Uniform(shader,'f',moduleFrag.prefix+'_scale',inScale);
-        amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'_amount',inAmount);
+            },moduleVert);
 
+        scale=new CGL.Uniform(shader,'f',moduleFrag.prefix+'scale',inScale);
+        amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
     }
-    
-    
+
     if(!shader)return;
     var texSlot=moduleVert.num+5;
 

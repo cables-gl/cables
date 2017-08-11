@@ -30,27 +30,27 @@ var inAmount=op.inValueSlider("Amount",0.5);
 var shader=null;
 
 var srcHeadVert=''
-    .endl()+'varying vec4 fog_pos;'
+    .endl()+'varying vec4 MOD_fogPos;'
     .endl();
 
 var srcBodyVert=''
-    .endl()+'fog_pos=mvMatrix*pos;'
+    .endl()+'MOD_fogPos=mvMatrix*pos;'
     .endl();
 
 var srcHeadFrag=''
-    .endl()+'varying vec4 fog_pos;'
-    .endl()+'uniform float {{mod}}_start;'
-    .endl()+'uniform float {{mod}}_end;'
-    .endl()+'uniform float {{mod}}_amount;'
+    .endl()+'varying vec4 MOD_fogPos;'
+    .endl()+'uniform float MOD_start;'
+    .endl()+'uniform float MOD_end;'
+    .endl()+'uniform float MOD_amount;'
     
-    .endl()+'uniform float {{mod}}_r;'
-    .endl()+'uniform float {{mod}}_g;'
-    .endl()+'uniform float {{mod}}_b;'
+    .endl()+'uniform float MOD_r;'
+    .endl()+'uniform float MOD_g;'
+    .endl()+'uniform float MOD_b;'
     .endl();
 
 var srcBodyFrag=''
-    .endl()+'   float de=(fog_pos.z+{{mod}}_start)/(-1.0*{{mod}}_end);'
-    .endl()+'   col.rgb=mix(col.rgb,vec3({{mod}}_r,{{mod}}_g,{{mod}}_b), de*{{mod}}_amount);'
+    .endl()+'   float MOD_de=(MOD_fogPos.z+MOD_start)/(-1.0*MOD_end);'
+    .endl()+'   col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);'
     .endl();
 
 
@@ -97,13 +97,13 @@ op.render.onTriggered=function()
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
                 srcBodyFrag:srcBodyFrag
-            });
-        start=new CGL.Uniform(shader,'f',moduleFrag.prefix+'_start',inStart);
-        end=new CGL.Uniform(shader,'f',moduleFrag.prefix+'_end',inEnd);
-        amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'_amount',inAmount);
-        r.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'_r',r);
-        g.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'_g',g);
-        b.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'_b',b);
+            },moduleVert);
+        start=new CGL.Uniform(shader,'f',moduleFrag.prefix+'start',inStart);
+        end=new CGL.Uniform(shader,'f',moduleFrag.prefix+'end',inEnd);
+        amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
+        r.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'r',r);
+        g.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'g',g);
+        b.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'b',b);
 
 
     }
