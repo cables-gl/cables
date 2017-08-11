@@ -1,0 +1,11 @@
+{
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "has focus"
+            }
+        ],
+        "name": "Ops.Gl.CanvasFocus"
+    }
+}

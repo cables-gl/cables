@@ -47,7 +47,8 @@ CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
         }
     }
 };
-
+CGL.Mesh.prototype.addAttribute=
+CGL.Mesh.prototype.updateAttribute=
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 {
     var floatArray=null;
@@ -144,8 +145,6 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, null);
 };
 
-CGL.Mesh.prototype.addAttribute=CGL.Mesh.prototype.setAttribute;
-CGL.Mesh.prototype.updateAttribute=CGL.Mesh.prototype.setAttribute;
 
 CGL.Mesh.prototype.getAttributes=function()
 {

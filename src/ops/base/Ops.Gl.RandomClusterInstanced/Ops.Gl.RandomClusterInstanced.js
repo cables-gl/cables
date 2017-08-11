@@ -9,7 +9,7 @@ var num=op.addInPort(new Port(op,"num"));
 var size=op.addInPort(new Port(op,"size"));
 var seed=op.addInPort(new Port(op,"random seed"));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
+// var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 var idx=op.addOutPort(new Port(op,"index")) ;
 var rnd=op.addOutPort(new Port(op,"rnd")) ;
 var positions=op.inArray("Positions");
@@ -44,11 +44,11 @@ var srcHeadVert=''
     
     .endl()+'float osci(float v)'
     .endl()+'{'
-    .endl()+'   v=smoothstep(0.0,1.0,mod(v,1.0));'
+    .endl()+'   v=mod(v,1.0);'
     .endl()+'   if(v>0.5)v=1.0-v;'
     // .endl()+'   else if(v<0.5)v=0.5*v;'
     // 
-    .endl()+'   return v*2.0;'
+    .endl()+'   return smoothstep(0.0,1.0,v*2.0);'
     .endl()+'}'
     
     .endl();
@@ -70,11 +70,7 @@ var srcBodyVert=''
     .endl()+'#endif'
     .endl();
 
-positions.onChange=function()
-{
-    reset();
 
-};
 
 function prepare()
 {
@@ -90,12 +86,23 @@ function prepare()
     
         mesh=new CGL.Mesh(cgl,geom.get());
         mesh.numInstances=num;
-        mesh.addAttribute('instMat',matrices,16);
+        mesh.setAttribute('instMat',matrices,16);
     }
 }
 
 var uniTime=null;
 
+function removeModule()
+{
+    if(shader)
+    {
+        shader.removeModule(mod);
+        shader.removeDefine('INSTANCING');
+    }
+    shader=null;
+}
+
+exe.onLinkChanged=removeModule;
 
 function doRender()
 {
@@ -106,31 +113,34 @@ function doRender()
         {
             if(shader && mod)
             {
-                shader.removeModule(mod);
+                removeModule();
                 shader=null;
             }
     
             shader=cgl.getShader();
-            if(!shader.hasDefine('INSTANCING'))
+            // if(!shader.hasDefine('INSTANCING'))
             {
                 mod=shader.addModule(
                     {
+                        title:op.objName,
                         name: 'MODULE_VERTEX_POSITION',
                         srcHeadVert: srcHeadVert,
                         srcBodyVert: srcBodyVert
                     });
         
-                shader.define('INSTANCING');    
+                shader.define('INSTANCING');
                 uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
                 
             }
-            else
-            {
-                uniDoInstancing=shader.getUniform('do_instancing');
-            }
+            // else
+            // {
+            //     uniDoInstancing=shader.getUniform('do_instancing');
+            // }
             if(mod)uniTime=new CGL.Uniform(shader,'f',mod.prefix+'_time',anim);
         }
-
+        
+        if(!uniDoInstancing)return;
+console.log('getNumModules',shader.getNumModules());
         uniDoInstancing.setValue(1);
         mesh.render(shader);
         uniDoInstancing.setValue(0);
@@ -219,6 +229,7 @@ function reset()
 
 size.set(40);
 seed.set(1);
+positions.onChange=prepare;
 seed.onChange=prepare;
 num.onChange=prepare;
 size.onChange=prepare;

@@ -268,10 +268,24 @@ CGL.Shader = function(_cgl, _name) {
 
             for (var j = 0; j < modules.length; j++) {
                 if (modules[j].name == moduleNames[i]) {
+
+                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- MOD: '+modules[j].title+' ------\n\n';
+                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- MOD: '+modules[j].title+' ------\n\n';
+
+                    if(modules[j].srcHeadVert)srcVert+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+                    if(modules[j].srcHeadFrag)srcFrag+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+
                     srcVert += modules[j].srcBodyVert || '';
                     srcFrag += modules[j].srcBodyFrag || '';
                     srcHeadVert += modules[j].srcHeadVert || '';
                     srcHeadFrag += modules[j].srcHeadFrag || '';
+
+                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- end mod ------\n';;
+                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- end mod ------\n';;
+
+                    if(modules[j].srcHeadVert)srcVert+='\n//---- end mod ------\n';
+                    if(modules[j].srcHeadFrag)srcFrag+='\n//---- end mod ------\n';
+
 
                     srcVert = srcVert.replace(/{{mod}}/g, modules[j].prefix);
                     srcFrag = srcFrag.replace(/{{mod}}/g, modules[j].prefix);
@@ -282,6 +296,8 @@ CGL.Shader = function(_cgl, _name) {
                     srcFrag = srcFrag.replace(/MOD_/g, modules[j].prefix);
                     srcHeadVert = srcHeadVert.replace(/MOD_/g, modules[j].prefix);
                     srcHeadFrag = srcHeadFrag.replace(/MOD_/g, modules[j].prefix);
+
+
                 }
             }
 
@@ -427,8 +443,6 @@ CGL.Shader = function(_cgl, _name) {
     };
 
     var createProgram = function(vstr, fstr) {
-
-
         var program = cgl.gl.createProgram();
         self.vshader = CGL.Shader.createShader(cgl, vstr, cgl.gl.VERTEX_SHADER, self);
         self.fshader = CGL.Shader.createShader(cgl, fstr, cgl.gl.FRAGMENT_SHADER, self);
@@ -442,7 +456,7 @@ CGL.Shader = function(_cgl, _name) {
 
     this.removeModule = function(mod) {
         for (var i = 0; i < modules.length; i++) {
-            if (modules[i].id == mod.id) {
+            if (modules[i].id == mod.id || !modules[i]) {
                 modules.splice(i, 1);
                 break;
             }
@@ -453,11 +467,10 @@ CGL.Shader = function(_cgl, _name) {
     this.addModule = function(mod, sibling) {
         mod.id = CABLES.generateUUID();
         mod.numId = moduleNumId;
-
         mod.num = modules.length;
 
         if (sibling) mod.group = sibling.group;
-        else mod.group = this._modGroupCount++;
+            else mod.group = this._modGroupCount++;
 
         mod.prefix = 'mod' + mod.group;
 

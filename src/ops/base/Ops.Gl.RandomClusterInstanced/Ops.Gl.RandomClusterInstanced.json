@@ -1,0 +1,61 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "0",
+                "name": "num"
+            },
+            {
+                "type": "0",
+                "name": "size"
+            },
+            {
+                "type": "0",
+                "name": "random seed"
+            },
+            {
+                "type": "3",
+                "name": "Positions"
+            },
+            {
+                "type": "0",
+                "name": "scaleX"
+            },
+            {
+                "type": "0",
+                "name": "scaleY"
+            },
+            {
+                "type": "0",
+                "name": "scaleZ"
+            },
+            {
+                "type": "0",
+                "name": "time"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "0",
+                "name": "rnd"
+            }
+        ],
+        "name": "Ops.Gl.RandomClusterInstanced"
+    }
+}

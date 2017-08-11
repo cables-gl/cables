@@ -63,6 +63,7 @@ op.render.onTriggered=function()
 
         moduleVert=shader.addModule(
             {
+                title:op.objName,
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
                 srcBodyVert:srcBodyVert
@@ -70,6 +71,7 @@ op.render.onTriggered=function()
 
         moduleFrag=shader.addModule(
             {
+                title:op.objName,
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
                 srcBodyFrag:srcBodyFrag
