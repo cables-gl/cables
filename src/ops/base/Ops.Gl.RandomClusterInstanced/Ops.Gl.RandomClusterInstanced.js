@@ -12,6 +12,7 @@ var seed=op.addInPort(new Port(op,"random seed"));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
 var idx=op.addOutPort(new Port(op,"index")) ;
 var rnd=op.addOutPort(new Port(op,"rnd")) ;
+var positions=op.inArray("Positions");
 var randoms=[];
 var randomsRot=[];
 var randomsFloats=[];
@@ -23,6 +24,8 @@ scaleX.set(1);
 scaleY.set(1);
 scaleZ.set(1);
 
+var anim=op.inValue("time");
+
 var transVec=vec3.create();
 
 var transformations=[];
@@ -33,22 +36,45 @@ var uniDoInstancing=null;
 
 var srcHeadVert=''
     .endl()+'uniform float do_instancing;'
+    .endl()+'uniform float {{mod}}_time;'
     .endl()+'#ifdef INSTANCING'
     .endl()+'   attribute mat4 instMat;'
-    .endl()+'   varying mat4 instModelMat;'
+    // .endl()+'   varying mat4 instModelMat;'
     .endl()+'#endif'
+    
+    .endl()+'float osci(float v)'
+    .endl()+'{'
+    .endl()+'   v=smoothstep(0.0,1.0,mod(v,1.0));'
+    .endl()+'   if(v>0.5)v=1.0-v;'
+    // .endl()+'   else if(v<0.5)v=0.5*v;'
+    // 
+    .endl()+'   return v*2.0;'
+    .endl()+'}'
+    
     .endl();
 
 var srcBodyVert=''
+
+    
+
     .endl()+'#ifdef INSTANCING'
     .endl()+'   if( do_instancing==1.0 )'
     .endl()+'   {'
-    .endl()+'       instModelMat=instMat;'
-    .endl()+'       mvMatrix=viewMatrix * instModelMat;;'
+    // .endl()+'       instModelMat=instMat;'
+    .endl()+'   pos.x*=osci( mod( {{mod}}_time+instMat[0].x*instMat[0].x ,1.0))*0.8+0.23;'
+    .endl()+'   pos.y*=osci( mod( {{mod}}_time+instMat[0].x*instMat[0].x ,1.0))*0.8+0.23;'
+    .endl()+'   pos.z*=osci( mod( {{mod}}_time+instMat[0].x*instMat[0].x ,1.0))*0.8+0.23;'
+    .endl()+'       mvMatrix=viewMatrix*modelMatrix*instMat;'
+    // .endl()+'       mvMatrix=instModelMat;'
     .endl()+'   }'
     .endl()+'#endif'
     .endl();
 
+positions.onChange=function()
+{
+    reset();
+
+};
 
 function prepare()
 {
@@ -67,6 +93,8 @@ function prepare()
         mesh.addAttribute('instMat',matrices,16);
     }
 }
+
+var uniTime=null;
 
 
 function doRender()
@@ -94,11 +122,13 @@ function doRender()
         
                 shader.define('INSTANCING');    
                 uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
+                
             }
             else
             {
                 uniDoInstancing=shader.getUniform('do_instancing');
             }
+            if(mod)uniTime=new CGL.Uniform(shader,'f',mod.prefix+'_time',anim);
         }
 
         uniDoInstancing.setValue(1);
@@ -121,15 +151,39 @@ function reset()
     randomsFloats.length=0;
 
     Math.randomSeed=seed.get();
+    
+    var posArr=positions.get();
+    if(posArr) num.set(posArr.length/3);
+    
 
     for(i=0;i<num.get();i++)
     {
         randomsFloats.push(Math.seededRandom());
-        randoms.push(vec3.fromValues(
-            scaleX.get()*((Math.seededRandom()-0.5)*size.get()),
-            scaleY.get()*((Math.seededRandom()-0.5)*size.get()),
-            scaleZ.get()*((Math.seededRandom()-0.5)*size.get())
-            ));
+
+        if(posArr)
+        {
+            if(posArr.length>i*3)
+            {
+                randoms.push(vec3.fromValues(
+                    posArr[i*3+0],
+                    posArr[i*3+1],
+                    posArr[i*3+2]));
+            }
+            else
+            {
+                randoms.push(vec3.fromValues(0,0,0));
+            }
+        }
+        else
+        {
+            randoms.push(vec3.fromValues(
+                scaleX.get()*((Math.seededRandom())*size.get()),
+                scaleY.get()*((Math.seededRandom())*size.get()),
+                scaleZ.get()*((Math.seededRandom())*size.get())
+                ));
+            
+        }
+
         randomsRot.push(vec3.fromValues(
             Math.seededRandom()*360*CGL.DEG2RAD,
             Math.seededRandom()*360*CGL.DEG2RAD,
@@ -145,16 +199,17 @@ function reset()
         mat4.identity(m);
         
         mat4.translate(m,m, randoms[i]);
-
-        mat4.rotateX(m,m, randomsRot[i][0]);
-        mat4.rotateY(m,m, randomsRot[i][1]);
-        mat4.rotateZ(m,m, randomsRot[i][2]);
         
         var vScale=vec3.create();
-        var sc=0.25+0.75*Math.seededRandom();
+        // var sc=0.25+0.75*Math.seededRandom();
+        var sc=Math.seededRandom();
         vec3.set(vScale,sc,sc,sc);
-
         mat4.scale(m,m, vScale);
+
+        // mat4.rotateX(m,m, randomsRot[i][0]);
+        // mat4.rotateY(m,m, randomsRot[i][1]);
+        // mat4.rotateZ(m,m, randomsRot[i][2]);
+        
 
         transformations.push( Array.prototype.slice.call(m) );
 

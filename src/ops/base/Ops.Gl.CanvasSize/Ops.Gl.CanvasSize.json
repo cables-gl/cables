@@ -1,3 +1,20 @@
 {
-    "summary": "the size of the canvas in pixels  "
+    "summary": "the size of the canvas in pixels  ",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "Focussed"
+            }
+        ],
+        "name": "Ops.Gl.CanvasSize"
+    }
 }

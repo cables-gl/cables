@@ -1,0 +1,50 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Size"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.ColorArea"
+    },
+    "summary": "colorize all meshes around x,y,z"
+}
