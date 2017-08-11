@@ -7,7 +7,11 @@
             },
             {
                 "type": "1",
-                "name": "Show"
+                "name": "Show Fragment"
+            },
+            {
+                "type": "1",
+                "name": "Show Vertex"
             }
         ],
         "portsOut": [
@@ -17,5 +21,6 @@
             }
         ],
         "name": "Ops.Gl.Shader.ShowShader"
-    }
+    },
+    "summary": "view current shader source code"
 }

@@ -140,7 +140,7 @@ function doRender()
         }
         
         if(!uniDoInstancing)return;
-console.log('getNumModules',shader.getNumModules());
+
         uniDoInstancing.setValue(1);
         mesh.render(shader);
         uniDoInstancing.setValue(0);

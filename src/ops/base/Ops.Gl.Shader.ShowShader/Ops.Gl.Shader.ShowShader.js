@@ -1,18 +1,25 @@
 op.name="ShowShader";
 
-
 var exec=op.inFunction("Exec");
-var show=op.inFunctionButton("Show");
+var showFrag=op.inFunctionButton("Show Fragment");
+var showVert=op.inFunctionButton("Show Vertex");
 
 var next=op.outFunction("Next");
 
 var shader=null;
-show.onTriggered=function()
+showFrag.onTriggered=function()
 {
     if(CABLES.UI && shader)
     {
-        console.log('shader', shader );
-        CABLES.UI.MODAL.showCode('shader ',shader.finalShaderFrag);
+        CABLES.UI.MODAL.showCode('fragment shader',shader.finalShaderFrag);
+    }
+};
+
+showVert.onTriggered=function()
+{
+    if(CABLES.UI && shader)
+    {
+        CABLES.UI.MODAL.showCode('vertex shader',shader.finalShaderVert);
     }
 };
 
@@ -20,5 +27,6 @@ exec.onTriggered=function()
 {
     shader=op.patch.cgl.getShader();
     next.trigger();
+
     
 };
