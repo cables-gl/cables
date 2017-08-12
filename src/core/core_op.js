@@ -348,57 +348,57 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.unLinkTemporary=function()
     {
-        // var tryRelink=true;
-        // var i=0;
-        //
-        // this.shakeLink=null;
-        // this.oldLinks=[];
-        //
-        // if(tryRelink)
-        // {
-        //     if(
-        //         (this.portsIn.length>0 && this.portsIn[0].isLinked()) &&
-        //         (this.portsOut.length>0 && this.portsOut[0].isLinked()))
-        //     {
-        //         if(this.portsIn[0].getType()==this.portsOut[0].getType())
-        //         {
-        //             unLinkTempReLinkP1=this.portsIn[0].links[0].getOtherPort(this.portsIn[0]);
-        //             unLinkTempReLinkP2=this.portsOut[0].links[0].getOtherPort(this.portsOut[0]);
-        //         }
-        //     }
-        // }
-        //
-        // for(var ipi in this.portsIn)
-        // {
-        //     for(i=0;i<this.portsIn[ipi].links.length;i++)
-        //         this.oldLinks.push(
-        //             {
-        //                 in:this.portsIn[ipi].links[i].portIn,
-        //                 out:this.portsIn[ipi].links[i].portOut
-        //             });
-        // }
-        //
-        // for(var ipo in this.portsOut)
-        // {
-        //     for(i=0;i<this.portsOut[ipo].links.length;i++)
-        //         this.oldLinks.push(
-        //             {
-        //                 in:this.portsOut[ipo].links[i].portIn,
-        //                 out:this.portsOut[ipo].links[i].portOut
-        //             });
-        // }
-        //
+        var tryRelink=true;
+        var i=0;
+
+        this.shakeLink=null;
+        this.oldLinks=[];
+
+        if(tryRelink)
+        {
+            if(
+                (this.portsIn.length>0 && this.portsIn[0].isLinked()) &&
+                (this.portsOut.length>0 && this.portsOut[0].isLinked()))
+            {
+                if(this.portsIn[0].getType()==this.portsOut[0].getType())
+                {
+                    unLinkTempReLinkP1=this.portsIn[0].links[0].getOtherPort(this.portsIn[0]);
+                    unLinkTempReLinkP2=this.portsOut[0].links[0].getOtherPort(this.portsOut[0]);
+                }
+            }
+        }
+
+        for(var ipi in this.portsIn)
+        {
+            for(i=0;i<this.portsIn[ipi].links.length;i++)
+                this.oldLinks.push(
+                    {
+                        in:this.portsIn[ipi].links[i].portIn,
+                        out:this.portsIn[ipi].links[i].portOut
+                    });
+        }
+
+        for(var ipo in this.portsOut)
+        {
+            for(i=0;i<this.portsOut[ipo].links.length;i++)
+                this.oldLinks.push(
+                    {
+                        in:this.portsOut[ipo].links[i].portIn,
+                        out:this.portsOut[ipo].links[i].portOut
+                    });
+        }
+
         this.unLink();
-        //
-        // if(unLinkTempReLinkP1 && unLinkTempReLinkP2)
-        // {
-        //     this.shakeLink=this.patch.link(
-        //         unLinkTempReLinkP1.parent,
-        //         unLinkTempReLinkP1.getName(),
-        //         unLinkTempReLinkP2.parent,
-        //         unLinkTempReLinkP2.getName()
-        //         );
-        // }
+
+        if(unLinkTempReLinkP1 && unLinkTempReLinkP2)
+        {
+            this.shakeLink=this.patch.link(
+                unLinkTempReLinkP1.parent,
+                unLinkTempReLinkP1.getName(),
+                unLinkTempReLinkP2.parent,
+                unLinkTempReLinkP2.getName()
+                );
+        }
     };
 
     CABLES.Op.prototype.profile=function(enable)
