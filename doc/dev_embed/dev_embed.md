@@ -95,3 +95,10 @@ For performance Reasons, you should pause the patch, when its not visible using`
 - `silent` (bool): Enable / disable all logging to console.
 - `glCanvasResizeToWindow` Resize the Canvas to the size of the window
 
+## Settings variables programmatically
+
+In your cables patch you can use `Ops.Vars.GetVar` to use Values, that can be easily set from outside:
+
+`patch.vars['color_r']=1.0;`
+
+The Parameter "name" of GetVar is the `vars` Index, in this case "color_r".
