@@ -255,6 +255,10 @@ CGL.Shader = function(_cgl, _name) {
         var srcHeadVert = '';
         var srcHeadFrag = '';
 
+        modules.sort(function(a, b) {
+            return a.group - b.group;
+        });
+
 
         modules.sort(function(a, b) {
             return a.priority - b.priority;
@@ -269,8 +273,8 @@ CGL.Shader = function(_cgl, _name) {
             for (var j = 0; j < modules.length; j++) {
                 if (modules[j].name == moduleNames[i]) {
 
-                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- MOD: '+modules[j].title+' ------\n\n';
-                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- MOD: '+modules[j].title+' ------\n\n';
+                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- MOD: '+modules[j].group+': '+modules[j].title+' ------\n\n';
+                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- MOD: '+modules[j].group+': '+modules[j].title+' ------\n\n';
 
                     if(modules[j].srcHeadVert)srcVert+='\n\n//---- MOD: '+modules[j].title+' ------\n';
                     if(modules[j].srcHeadFrag)srcFrag+='\n\n//---- MOD: '+modules[j].title+' ------\n';
