@@ -1,6 +1,8 @@
 // #extension GL_OES_standard_derivatives : enable
 // precision highp float;
 
+{{MODULES_HEAD}}
+
 
 //some settings for the look and feel of the material
 const float specularScale = 0.65;
@@ -267,7 +269,10 @@ void main()
     color*=diffuseColor;
     color+=specular;
     // color=toGamma_3_9(color);
+    vec4 col=vec4(color,a);
+    {{MODULE_COLOR}}
 
-    gl_FragColor.rgb = color;
-    gl_FragColor.a =a;
+
+    gl_FragColor = col;
+    // gl_FragColor.a =a;
 }

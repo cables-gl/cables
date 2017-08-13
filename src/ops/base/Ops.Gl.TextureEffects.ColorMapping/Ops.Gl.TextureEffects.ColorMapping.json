@@ -9,6 +9,14 @@
             {
                 "type": "2",
                 "name": "image"
+            },
+            {
+                "type": "0",
+                "name": "Axis"
+            },
+            {
+                "type": "0",
+                "name": "Position"
             }
         ],
         "portsOut": [
