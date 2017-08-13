@@ -1,13 +1,6 @@
 {
-    "summary": "Get current date and time",
     "layout": {
         "portsIn": [
-            {
-                "type": "0",
-                "name": "Update Rate"
-            }
-        ],
-        "portsOut": [
             {
                 "type": "0",
                 "name": "Year"
@@ -22,21 +15,19 @@
             },
             {
                 "type": "0",
-                "name": "Hours"
+                "name": "Hour"
             },
             {
                 "type": "0",
-                "name": "Minutes"
-            },
-            {
-                "type": "0",
-                "name": "Seconds"
-            },
+                "name": "Minute"
+            }
+        ],
+        "portsOut": [
             {
                 "type": "0",
                 "name": "Timestamp"
             }
         ],
-        "name": "Ops.DateAndTime"
+        "name": "Ops.Date.Date"
     }
 }

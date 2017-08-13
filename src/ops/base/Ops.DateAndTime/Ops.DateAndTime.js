@@ -10,6 +10,7 @@ var outDay=op.outValue("Day");
 var outHours=op.outValue("Hours");
 var outMinutes=op.outValue("Minutes");
 var outSeconds=op.outValue("Seconds");
+var outTimestemp=op.outValue("Timestamp");
 var d = new Date();
 var updateRatePort = op.inValue("Update Rate", UPDATE_RATE_DEFAULT);
 
@@ -28,6 +29,8 @@ function update()
     outYear.set( d.getFullYear() );
     
     timeout=setTimeout(update, updateRate);
+    
+    outTimestemp.set(Date.now());
 }
 
 updateRatePort.onChange = function() {

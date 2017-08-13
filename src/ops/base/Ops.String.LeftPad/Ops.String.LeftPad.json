@@ -1,0 +1,25 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Char"
+            },
+            {
+                "type": "0",
+                "name": "Num"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "String"
+            }
+        ],
+        "name": "Ops.String.LeftPad"
+    }
+}

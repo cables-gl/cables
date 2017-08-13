@@ -1,10 +1,17 @@
 {
-    "summary": "Get current date and time",
     "layout": {
         "portsIn": [
             {
+                "type": "1",
+                "name": "Force update"
+            },
+            {
                 "type": "0",
-                "name": "Update Rate"
+                "name": "Timestamp 1"
+            },
+            {
+                "type": "0",
+                "name": "Timestamp 2"
             }
         ],
         "portsOut": [
@@ -34,9 +41,9 @@
             },
             {
                 "type": "0",
-                "name": "Timestamp"
+                "name": "Milliseconds"
             }
         ],
-        "name": "Ops.DateAndTime"
+        "name": "Ops.Date.DateDifference"
     }
 }
