@@ -603,6 +603,48 @@ CABLES.TL.Anim.prototype.addKey=function(k)
     }
 };
 
+
+CABLES.TL.Anim.prototype.easingFromString=function(str)
+{
+    if(str=='linear') return CABLES.TL.EASING_LINEAR;
+    if(str=='absolute') return CABLES.TL.EASING_ABSOLUTE;
+    if(str=='smoothstep') return CABLES.TL.EASING_SMOOTHSTEP;
+    if(str=='smootherstep') return CABLES.TL.EASING_SMOOTHERSTEP;
+
+    if(str=='Cubic In') return CABLES.TL.EASING_CUBIC_IN;
+    if(str=='Cubic Out') return CABLES.TL.EASING_CUBIC_OUT;
+    if(str=='Cubic In Out') return CABLES.TL.EASING_CUBIC_INOUT;
+
+    if(str=='Expo In') return CABLES.TL.EASING_EXPO_IN;
+    if(str=='Expo Out') return CABLES.TL.EASING_EXPO_OUT;
+    if(str=='Expo In Out') return CABLES.TL.EASING_EXPO_INOUT;
+
+    if(str=='Sin In') return CABLES.TL.EASING_SIN_IN;
+    if(str=='Sin Out') return CABLES.TL.EASING_SIN_OUT;
+    if(str=='Sin In Out') return CABLES.TL.EASING_SIN_INOUT;
+
+    if(str=='Back In') return CABLES.TL.EASING_BACK_IN;
+    if(str=='Back Out') return CABLES.TL.EASING_BACK_OUT;
+    if(str=='Back In Out') return CABLES.TL.EASING_BACK_INOUT;
+
+    if(str=='Elastic In') return CABLES.TL.EASING_ELASTIC_IN;
+    if(str=='Elastic Out') return CABLES.TL.EASING_ELASTIC_OUT;
+
+    if(str=='Bounce In') return CABLES.TL.EASING_BOUNCE_IN;
+    if(str=='Bounce Out') return CABLES.TL.EASING_BOUNCE_OUT;
+
+    if(str=='Quart Out') return CABLES.TL.EASING_QUART_OUT;
+    if(str=='Quart In') return CABLES.TL.EASING_QUART_IN;
+    if(str=='Quart In Out') return CABLES.TL.EASING_QUART_INOUT;
+
+    if(str=='Quint Out') return CABLES.TL.EASING_QUINT_OUT;
+    if(str=='Quint In') return CABLES.TL.EASING_QUINT_IN;
+    if(str=='Quint In Out') return CABLES.TL.EASING_QUINT_INOUT;
+
+
+
+};
+
 CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
 {
     var port=op.addInPort(new Port(op,title,OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
@@ -635,42 +677,12 @@ CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
         "Bounce Out",
         ]} ));
 
+    port.set('linear');
+    port.defaultValue='linear';
+
     port.onChange=function()
     {
-        if(port.get()=='linear') this.defaultEasing=CABLES.TL.EASING_LINEAR;
-        if(port.get()=='absolute') this.defaultEasing=CABLES.TL.EASING_ABSOLUTE;
-        if(port.get()=='smoothstep') this.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
-        if(port.get()=='smootherstep') this.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
-
-        if(port.get()=='Cubic In') this.defaultEasing=CABLES.TL.EASING_CUBIC_IN;
-        if(port.get()=='Cubic Out') this.defaultEasing=CABLES.TL.EASING_CUBIC_OUT;
-        if(port.get()=='Cubic In Out') this.defaultEasing=CABLES.TL.EASING_CUBIC_INOUT;
-
-        if(port.get()=='Expo In') this.defaultEasing=CABLES.TL.EASING_EXPO_IN;
-        if(port.get()=='Expo Out') this.defaultEasing=CABLES.TL.EASING_EXPO_OUT;
-        if(port.get()=='Expo In Out') this.defaultEasing=CABLES.TL.EASING_EXPO_INOUT;
-
-        if(port.get()=='Sin In') this.defaultEasing=CABLES.TL.EASING_SIN_IN;
-        if(port.get()=='Sin Out') this.defaultEasing=CABLES.TL.EASING_SIN_OUT;
-        if(port.get()=='Sin In Out') this.defaultEasing=CABLES.TL.EASING_SIN_INOUT;
-
-        if(port.get()=='Back In') this.defaultEasing=CABLES.TL.EASING_BACK_IN;
-        if(port.get()=='Back Out') this.defaultEasing=CABLES.TL.EASING_BACK_OUT;
-        if(port.get()=='Back In Out') this.defaultEasing=CABLES.TL.EASING_BACK_INOUT;
-
-        if(port.get()=='Elastic In') this.defaultEasing=CABLES.TL.EASING_ELASTIC_IN;
-        if(port.get()=='Elastic Out') this.defaultEasing=CABLES.TL.EASING_ELASTIC_OUT;
-
-        if(port.get()=='Bounce In') this.defaultEasing=CABLES.TL.EASING_BOUNCE_IN;
-        if(port.get()=='Bounce Out') this.defaultEasing=CABLES.TL.EASING_BOUNCE_OUT;
-
-        if(port.get()=='Quart Out') this.defaultEasing=CABLES.TL.EASING_QUART_OUT;
-        if(port.get()=='Quart In') this.defaultEasing=CABLES.TL.EASING_QUART_IN;
-        if(port.get()=='Quart In Out') this.defaultEasing=CABLES.TL.EASING_QUART_INOUT;
-
-        if(port.get()=='Quint Out') this.defaultEasing=CABLES.TL.EASING_QUINT_OUT;
-        if(port.get()=='Quint In') this.defaultEasing=CABLES.TL.EASING_QUINT_IN;
-        if(port.get()=='Quint In Out') this.defaultEasing=CABLES.TL.EASING_QUINT_INOUT;
+this.defaultEasing=this.easingFromString(port.get());
 
 
         if(cb)cb();
