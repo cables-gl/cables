@@ -23,6 +23,8 @@ function loadTexture(url)
 
         },
         {
+            wrap:CGL.Texture.WRAP_CLAMP_TO_EDGE,
+            filter:CGL.Texture.FILTER_MIPMAP,
             flip:false
         });
     return tex;

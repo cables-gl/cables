@@ -10,7 +10,7 @@ var valign=op.addInPort(new Port(op,"vertical align",OP_PORT_TYPE_VALUE,{display
 var font=op.addInPort(new Port(op,"font",OP_PORT_TYPE_VALUE,{type:'string'}));
 var lineDistance=op.addInPort(new Port(op,"line distance"));
 var border=op.addInPort(new Port(op,"border"));
-var doRefresh=op.inFunction("Refresh");
+var doRefresh=op.inFunctionButton("Refresh");
 
 // var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");
@@ -106,7 +106,7 @@ function refresh()
             posy=ctx.canvas.height / 2-maxy/2;
         }
         else if(valign.get()=='top') posy=fontSize;
-        else if(valign.get()=='bottom')  posy=ctx.canvas.height -(strings.length)*(parseFloat(fontSize.get())+parseFloat(lineDistance.get()));
+        else if(valign.get()=='bottom')  posy=ctx.canvas.height -(strings.length)*(parseFloat(inFontSize.get())+parseFloat(lineDistance.get()));
 
         for(i=0;i<strings.length;i++)
         {
@@ -118,12 +118,11 @@ function refresh()
     }
 
     ctx.restore();
-    
     outRatio.set(ctx.canvas.height/ctx.canvas.width);
 
     if(textureOut.get()) textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
-        else textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { "filter":CGL.Texture.FILTER_MIPMAP } ));
-        
+        else textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
+
     textureOut.get().unpackAlpha=false;
 }
 

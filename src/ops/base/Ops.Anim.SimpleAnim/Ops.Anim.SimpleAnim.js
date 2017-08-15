@@ -22,8 +22,6 @@ var anim=new CABLES.TL.Anim();
 
 anim.createPort(op,"easing",init);
 
-
-
 function init()
 {
     anim.clear();

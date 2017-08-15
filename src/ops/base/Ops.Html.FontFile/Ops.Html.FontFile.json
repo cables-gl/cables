@@ -1,1 +1,15 @@
-{}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "family"
+            }
+        ],
+        "name": "Ops.Html.FontFile"
+    }
+}

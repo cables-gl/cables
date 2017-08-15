@@ -24,6 +24,22 @@
             },
             {
                 "type": "0",
+                "name": "vertical align"
+            },
+            {
+                "type": "0",
+                "name": "Line Height"
+            },
+            {
+                "type": "0",
+                "name": "Kerning"
+            },
+            {
+                "type": "0",
+                "name": "Font Available"
+            },
+            {
+                "type": "0",
                 "name": "r"
             },
             {

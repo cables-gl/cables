@@ -2,16 +2,16 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
-                "name": "Force update"
-            },
-            {
                 "type": "0",
                 "name": "Timestamp 1"
             },
             {
                 "type": "0",
                 "name": "Timestamp 2"
+            },
+            {
+                "type": "0",
+                "name": "Stop at 0"
             }
         ],
         "portsOut": [
@@ -42,6 +42,10 @@
             {
                 "type": "0",
                 "name": "Milliseconds"
+            },
+            {
+                "type": "0",
+                "name": "Diff"
             }
         ],
         "name": "Ops.Date.DateDifference"

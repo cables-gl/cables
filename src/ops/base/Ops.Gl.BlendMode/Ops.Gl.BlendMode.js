@@ -8,7 +8,7 @@ var inBlend=op.inValueSelect("Blendmode",
         'Add',
         'Subtract',
         'Multiply'
-    ]);
+    ],'Normal');
 var inPremul=op.inValueBool("Premultiplied");
 
 var next=op.outFunction("Next");
@@ -23,7 +23,10 @@ var BLEND_MUL=4;
 
 var blendMode=0;
 
-inBlend.onChange=function()
+inBlend.onChange=update;
+update();
+
+function update()
 {
     if(inBlend.get()=="Normal")blendMode=BLEND_NORMAL;
     else if(inBlend.get()=="Add")blendMode=BLEND_ADD;

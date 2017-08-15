@@ -7,16 +7,20 @@ var str=op.inValueString("Text","cables");
 var scale=op.inValue("Scale",1);
 var inFont=op.inValueString("Font","Arial");
 var align=op.inValueSelect("align",['left','center','right'],'center');
+var valign=op.inValueSelect("vertical align",['Top','Middle','Bottom'],'Middle');
+var lineHeight=op.inValue("Line Height",1);
+var kerning=op.inValue("Kerning",0);
+var loaded=op.inValue("Font Available",0);
 
 var cgl=op.patch.cgl;
 
 var textureSize=2048;
-
+var fontLoaded=false;
 
 align.onChange=generateMesh;
 str.onChange=generateMesh;
 
-
+lineHeight.onChange=generateMesh;
 var cgl=op.patch.cgl;
 var geom=null;
 var mesh=null;
@@ -25,11 +29,41 @@ var createMesh=true;
 var createTexture=true;
 
 textureOut.set(null);
-inFont.onChange=function(){ createTexture=true;createMesh=true; };
+inFont.onChange=function()
+    {
+        createTexture=true;
+        createMesh=true;
+        checkFont();
+    };
+
+function checkFont()
+{
+    var oldFontLoaded=fontLoaded;
+    fontLoaded=document.fonts.check('20px '+inFont.get());
+
+    if(!oldFontLoaded && fontLoaded)
+    {
+        loade=true;
+        createTexture=true;
+        createMesh=true;
+    }
+    
+    if(!fontLoaded) setTimeout(checkFont,250);
+}
+
 var canvasid=null;
 
 
 CABLES.OpTextureMeshCanvas={};
+
+var valignMode=0;
+
+valign.onChange=function()
+{
+    if(valign.get()=='Middle')valignMode=0;
+    if(valign.get()=='Top')valignMode=1;
+    if(valign.get()=='Bottom')valignMode=2;
+};
 
 function getFont()
 {
@@ -40,6 +74,7 @@ function getFont()
     }
 
     var fontImage = document.createElement('canvas');
+    fontImage.dataset.font=inFont.get();
     fontImage.id = "texturetext_"+CABLES.generateUUID();
     fontImage.style.display = "none";
     var body = document.getElementsByTagName("body")[0];
@@ -113,8 +148,6 @@ var srcVert=''
     .endl()+'   mat4 instModelMat=instMat;'
     .endl()+'   instModelMat[3][0]*=scale;'
 
-
-
     .endl()+'   vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );'
 
     .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
@@ -166,10 +199,21 @@ var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range'}));
 a.uniform=new CGL.Uniform(shader,'f','a',a);
 a.set(1.0);
 
+var height=0;
+
+var vec=vec3.create();
+var lastTextureChange=-1;
 
 render.onTriggered=function()
 {
     if(op.instanced(render))return;
+
+    var font=getFont();
+    if(font.lastChange!=lastTextureChange)
+    {
+        createMesh=true;
+        lastTextureChange=font.lastChange;
+    }
 
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
@@ -180,7 +224,16 @@ render.onTriggered=function()
 
     cgl.setTexture(0,textureOut.get().tex);
 
+    if(valignMode==2) vec3.set(vec, 0,height,0);
+    if(valignMode==1) vec3.set(vec, 0,0,0);
+    if(valignMode==0) vec3.set(vec, 0,height/2,0);
+    vec[1]-=lineHeight.get();
+    cgl.pushMvMatrix();
+    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
     if(mesh)mesh.render(cgl.getShader());
+
+    cgl.popMvMatrix();
+
 
     cgl.setTexture(0,null);
     cgl.setPreviousShader();
@@ -192,7 +245,8 @@ render.onTriggered=function()
 
 function generateMesh()
 {
-    if(!str.get())return;
+    var theString=String(str.get());
+    // if(!(''+))return;
     if(!textureOut.get())return;
 
     var font=getFont();
@@ -208,10 +262,10 @@ function generateMesh()
         ];
 
         font.geom.texCoords = new Float32Array([
-             1.0, 1.0,
-             0.0, 1.0,
-             1.0, 0.0,
-             0.0, 0.0
+            1.0, 1.0,
+            0.0, 1.0,
+            1.0, 0.0,
+            0.0, 0.0
         ]);
 
         font.geom.verticesIndices = [
@@ -222,7 +276,7 @@ function generateMesh()
 
     if(!mesh)mesh=new CGL.Mesh(cgl,font.geom);
 
-    var strings=str.get().split('\n');
+    var strings=(theString).split('\n');
 
     var transformations=[];
     var tcOffsets=[];//new Float32Array(str.get().length*2);
@@ -235,10 +289,8 @@ function generateMesh()
     for(var s=0;s<strings.length;s++)
     {
         var txt=strings[s];
-
         var numChars=txt.length;
-        
-        
+
         var pos=0;
         var offX=0;
         var width=0;
@@ -250,11 +302,13 @@ function generateMesh()
             if(char) width+=(char.texCoordWidth/char.texCoordHeight);
         }
 
-
+        height=0;
     
         if(align.get()=='left') offX=0;
         else if(align.get()=='right') offX=width;
         else if(align.get()=='center') offX=width/2;
+
+        height=(s+1)*lineHeight.get();
 
         for(var i=0;i<numChars;i++)
         {
@@ -272,7 +326,7 @@ function generateMesh()
                 tcSize.push(char.texCoordWidth,char.texCoordHeight);
 
                 mat4.identity(m);
-                mat4.translate(m,m,[pos-offX,0-s,0]);
+                mat4.translate(m,m,[pos-offX,0-s*lineHeight.get(),0]);
 
                 pos+=(char.texCoordWidth/char.texCoordHeight);
                 transformations.push(Array.prototype.slice.call(m));
@@ -292,20 +346,13 @@ function generateMesh()
     createMesh=false;
 
     if(createTexture) generateTexture();
-    
 }
-
-
 
 function printChars(fontSize,simulate)
 {
     var font=getFont();
-    if(!simulate)
-    {
-        font.chars={};
-    }
+    if(!simulate) font.chars={};
 
-    var font=getFont();
     var ctx=font.ctx;
 
     ctx.font = fontSize+'px '+inFont.get();
@@ -344,7 +391,7 @@ function printChars(fontSize,simulate)
             ctx.fillText(chStr, posx, posy+fontSize);
         }
 
-        posx+=chWidth+2;
+        posx+=chWidth+12;
     }
 
     if(posy>textureSize-lineHeight)
@@ -357,12 +404,11 @@ function printChars(fontSize,simulate)
     return result;
 }
 
-
-
 function generateTexture()
 {
     var font=getFont();
     var string=str.get();
+    if(string==null || string==undefined)string='';
     for(var i=0;i<string.length;i++)
     {
         var ch=string.substring(i,i+1);
@@ -405,7 +451,7 @@ function generateTexture()
     font.texture.unpackAlpha=true;
     textureOut.set(font.texture);
 
-
+    font.lastChange=CABLES.now();
 
     createMesh=true;
     createTexture=false;
