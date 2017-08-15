@@ -1,0 +1,33 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Year"
+            },
+            {
+                "type": "0",
+                "name": "Month"
+            },
+            {
+                "type": "0",
+                "name": "Day"
+            },
+            {
+                "type": "0",
+                "name": "Hour"
+            },
+            {
+                "type": "0",
+                "name": "Minute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Timestamp"
+            }
+        ],
+        "name": "Ops.Date.Date"
+    }
+}

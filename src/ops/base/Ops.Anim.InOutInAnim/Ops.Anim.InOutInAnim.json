@@ -1,0 +1,46 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "0",
+                "name": "Duration Out"
+            },
+            {
+                "type": "0",
+                "name": "Easing Out"
+            },
+            {
+                "type": "0",
+                "name": "Duration In"
+            },
+            {
+                "type": "0",
+                "name": "Easing In"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Result"
+            },
+            {
+                "type": "1",
+                "name": "Middle"
+            }
+        ],
+        "name": "Ops.Anim.InOutInAnim"
+    },
+    "summary": "animates after a trigger from 1 to 0 to 1"
+}

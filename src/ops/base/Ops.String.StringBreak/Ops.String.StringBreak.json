@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Max Line Chars"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringBreak"
+    },
+    "summary": "insert linebreaks into a string after [num] chars"
+}
