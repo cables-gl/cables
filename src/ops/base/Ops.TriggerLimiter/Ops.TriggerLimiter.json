@@ -15,6 +15,10 @@
             {
                 "type": "1",
                 "name": "Out Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Progress"
             }
         ],
         "name": "Ops.TriggerLimiter"

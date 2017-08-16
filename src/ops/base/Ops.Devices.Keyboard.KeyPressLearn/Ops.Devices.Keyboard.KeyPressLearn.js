@@ -9,6 +9,8 @@ var canvasOnly=op.addInPort(new Port(op,"canvas only",OP_PORT_TYPE_VALUE, {"disp
 var outPressed=op.outValue("Pressed",false);
 var modKey=op.addInPort(new Port(op,"Mod Key",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['none','alt']} ));
 
+var preventDefault=op.inValueBool("Prevent Default");
+
 var cgl=op.patch.cgl;
 var learning = false;
 
@@ -32,12 +34,14 @@ function onKeyDown(e)
                 {
                     onPress.trigger();
                     outPressed.set(true);
+                    if(preventDefault.get())e.preventDefault();
                 }
             }
             else 
             {
                 onPress.trigger();
                 outPressed.set(true);
+                if(preventDefault.get())e.preventDefault();
             }
 
         }

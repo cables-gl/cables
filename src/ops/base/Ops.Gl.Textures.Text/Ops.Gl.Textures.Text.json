@@ -43,6 +43,10 @@
                 "name": "border"
             },
             {
+                "type": "0",
+                "name": "Letter Spacing"
+            },
+            {
                 "type": "1",
                 "name": "Refresh"
             }

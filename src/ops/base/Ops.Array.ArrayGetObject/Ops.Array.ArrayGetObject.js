@@ -11,14 +11,13 @@ value.ignoreValueSerialize=true;
 function update()
 {
     if(index.get()<0)return;
-    
-    
+
     var arr=array.get();
     if(!arr)return;
     var ind=index.get();
     if(ind>=arr.length)return;
+    // value.set( null);
     if(arr[ind]) value.set( arr[ind]);
-    
 }
 
 index.onValueChanged=update;

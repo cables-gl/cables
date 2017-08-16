@@ -1,4 +1,3 @@
-
 op.name='TextMesh';
 
 var render=op.inFunction("Render");
@@ -9,8 +8,9 @@ var inFont=op.inValueString("Font","Arial");
 var align=op.inValueSelect("align",['left','center','right'],'center');
 var valign=op.inValueSelect("vertical align",['Top','Middle','Bottom'],'Middle');
 var lineHeight=op.inValue("Line Height",1);
-var kerning=op.inValue("Kerning",0);
-var loaded=op.inValue("Font Available",0);
+var letterSpace=op.addInPort(new Port(op,"Letter Spacing"));
+
+var loaded=op.outValue("Font Available",0);
 
 var cgl=op.patch.cgl;
 
@@ -203,6 +203,7 @@ var height=0;
 
 var vec=vec3.create();
 var lastTextureChange=-1;
+var disabled=false;
 
 render.onTriggered=function()
 {
@@ -230,7 +231,7 @@ render.onTriggered=function()
     vec[1]-=lineHeight.get();
     cgl.pushMvMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
-    if(mesh)mesh.render(cgl.getShader());
+    if(mesh && !disabled)mesh.render(cgl.getShader());
 
     cgl.popMvMatrix();
 
@@ -241,6 +242,10 @@ render.onTriggered=function()
     cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 };
 
+letterSpace.onChange=function()
+{
+    createMesh=true;
+};
 
 
 function generateMesh()
@@ -328,7 +333,7 @@ function generateMesh()
                 mat4.identity(m);
                 mat4.translate(m,m,[pos-offX,0-s*lineHeight.get(),0]);
 
-                pos+=(char.texCoordWidth/char.texCoordHeight);
+                pos+=(char.texCoordWidth/char.texCoordHeight)+letterSpace.get();
                 transformations.push(Array.prototype.slice.call(m));
     
                 charCounter++;
@@ -337,8 +342,19 @@ function generateMesh()
     }
 
     var transMats = [].concat.apply([], transformations);
+    
+    disabled=false;
+    if(transMats.length==0)disabled=true;
 
     mesh.numInstances=transMats.length/16;
+    
+    if(mesh.numInstances==0)
+    {
+        disabled=true;
+        return;
+    }
+    
+    
     mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
     mesh.setAttribute('attrTexOffsets',new Float32Array(tcOffsets),2,{"instanced":true});
     mesh.setAttribute('attrTexSize',new Float32Array(tcSize),2,{"instanced":true});

@@ -33,14 +33,11 @@ function update()
         }
         else
         {
-            // console.log(currentString);
             string+=currentString+'\n';
-            currentString='';//strings[i];
+            currentString=strings[i];//strings[i];
         }
-        
     }
 
-    
     result.set(string+currentString);
-    
+
 }

@@ -1,4 +1,4 @@
-op.name="ValueSwitcher";
+op.name="ValueSwitcherTrigger";
 
 var triggers=[];
 
@@ -36,4 +36,5 @@ defaultVal.onChange = function(){
     oldVal.set(currentVal.get());
     currentVal.set(defaultVal.get());  
 };
+
 

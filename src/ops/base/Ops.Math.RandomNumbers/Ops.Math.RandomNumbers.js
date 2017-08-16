@@ -23,7 +23,7 @@ init();
 index.onChange=function()
 {
     var idx=Math.floor(index.get())||0;
-    if(index>=arr.length)
+    if(idx*3>=arr.length)
     {
         numValues=idx+100;
         init();

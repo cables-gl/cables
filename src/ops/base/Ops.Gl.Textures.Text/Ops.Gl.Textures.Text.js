@@ -15,6 +15,10 @@ var doRefresh=op.inFunctionButton("Refresh");
 // var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");
 var outRatio=op.addOutPort(new Port(op,"Ratio",OP_PORT_TYPE_VALUE));
+
+
+
+
 var cgl=op.patch.cgl;
 
 doRefresh.onTriggered=refresh;
@@ -35,6 +39,7 @@ var body = document.getElementsByTagName("body")[0];
 body.appendChild(fontImage);
 
 var ctx = fontImage.getContext('2d');
+
 
 function reSize()
 {
