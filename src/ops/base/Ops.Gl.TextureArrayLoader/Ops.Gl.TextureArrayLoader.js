@@ -163,13 +163,13 @@ function onWrapChange()
 
 op.onFileUploaded=function(fn)
 {
-    if(filename.get() && filename.get().indexOf(fn)>-1)
-    {
-        textureOut.set(null);
-        textureOut.set(CGL.Texture.getTempTexture(cgl));
+    // if(filename.get() && filename.get().indexOf(fn)>-1)
+    // {
+    //     textureOut.set(null);
+    //     textureOut.set(CGL.Texture.getTempTexture(cgl));
 
-        realReload(true);
-    }
+    //     realReload(true);
+    // }
 };
 
 

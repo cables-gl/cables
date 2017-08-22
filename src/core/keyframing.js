@@ -545,6 +545,7 @@ CABLES.TL.Anim.prototype.isFinished=function(time)
     if(this.keys.length<=0)return true;
     return time>this.keys[this.keys.length-1].time;
 };
+
 CABLES.TL.Anim.prototype.isStarted=function(time)
 {
     if(this.keys.length<=0)return false;
