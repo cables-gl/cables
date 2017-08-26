@@ -1,0 +1,25 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Iterations"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Num Vertices"
+            }
+        ],
+        "name": "Ops.Gl.TesselateGeometry"
+    }
+}
