@@ -1,6 +1,6 @@
 precision highp float;
 
-varying vec2 texCoord;
+IN vec2 texCoord;
 uniform float amount;
 uniform float pos;
 

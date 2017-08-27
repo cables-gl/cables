@@ -43,6 +43,12 @@ CGL.Geometry.prototype.setVertices=function(arr)
         else this._vertices=new Float32Array(arr);
 };
 
+CGL.Geometry.prototype.setTexCoords=function(arr)
+{
+    if(arr instanceof Float32Array)this.texCoords=arr;
+        else this.texCoords=new Float32Array(arr);
+};
+
 
 
 // deprecated
@@ -207,10 +213,6 @@ CGL.Geometry.prototype.calculateNormals=function(options)
         this.vertexNormals[this.verticesIndices[i+2]*3+1]+=faceNormals[i/3][1];
         this.vertexNormals[this.verticesIndices[i+2]*3+2]+=faceNormals[i/3][2];
     }
-
-    // console.log('this.vertices',this.vertices.length);
-    // console.log('this.vertexNormals',this.vertexNormals.length);
-    // console.log('calc vertexnormals');
 
     for(i=0;i<this.verticesIndices.length;i+=3) // faces
     {

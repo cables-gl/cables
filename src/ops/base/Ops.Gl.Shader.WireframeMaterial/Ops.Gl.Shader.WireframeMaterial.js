@@ -43,28 +43,28 @@ if(cgl.glVersion==1)
 {
     var srcVert=''
         .endl()+'{{MODULES_HEAD}}'
-        .endl()+'attribute vec3 vPosition;'
-        .endl()+'attribute vec3 attrBaycentric;'
-        .endl()+'uniform mat4 projMatrix;'
-        .endl()+'uniform mat4 modelMatrix;'
-        .endl()+'uniform mat4 viewMatrix;'
-        .endl()+'varying vec3 baycentric;'
-        .endl()+'attribute vec2 attrTexCoord;'
-        .endl()+'varying vec2 texCoord;'
+        .endl()+'IN vec3 vPosition;'
+        .endl()+'IN vec3 attrBaycentric;'
+        .endl()+'UNI mat4 projMatrix;'
+        .endl()+'UNI mat4 modelMatrix;'
+        .endl()+'UNI mat4 viewMatrix;'
+        .endl()+'OUT vec3 baycentric;'
+        .endl()+'IN vec2 attrTexCoord;'
+        .endl()+'OUT vec2 texCoord;'
         .endl();
 }
 else
 {
     var srcVert=''
         .endl()+'{{MODULES_HEAD}}'
-        .endl()+'in vec3 vPosition;'
-        .endl()+'in vec3 attrBaycentric;'
-        .endl()+'uniform mat4 projMatrix;'
-        .endl()+'uniform mat4 modelMatrix;'
-        .endl()+'uniform mat4 viewMatrix;'
-        .endl()+'out vec3 baycentric;'
-        .endl()+'in vec2 attrTexCoord;'
-        .endl()+'out vec2 texCoord;'
+        .endl()+'IN vec3 vPosition;'
+        .endl()+'IN vec3 attrBaycentric;'
+        .endl()+'UNI mat4 projMatrix;'
+        .endl()+'UNI mat4 modelMatrix;'
+        .endl()+'UNI mat4 viewMatrix;'
+        .endl()+'OUT vec3 baycentric;'
+        .endl()+'IN vec2 attrTexCoord;'
+        .endl()+'OUT vec2 texCoord;'
         .endl();
 }
 
@@ -86,24 +86,24 @@ if(cgl.glVersion==1)
 {
     srcFrag='#extension GL_OES_standard_derivatives : enable'
     .endl()+'precision highp float;'
-    .endl()+'varying vec3 baycentric;'
+    .endl()+'IN vec3 baycentric;'
     .endl();
 }
 else
 {
     srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'in vec3 baycentric;'
+    .endl()+'IN vec3 baycentric;'
     // .endl()+'out vec4 fragColor;'
 
     .endl();
 }
 
 srcFrag+=''
-.endl()+'uniform float width;'
-.endl()+'uniform float opacity;'
-.endl()+'uniform float r,g,b;'
-.endl()+'uniform float fr,fg,fb;'
+.endl()+'UNI float width;'
+.endl()+'UNI float opacity;'
+.endl()+'UNI float r,g,b;'
+.endl()+'UNI float fr,fg,fb;'
 .endl()+''
 .endl()+'float edgeFactor()'
 .endl()+'{'

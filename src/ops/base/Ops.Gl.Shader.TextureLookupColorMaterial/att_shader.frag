@@ -3,7 +3,7 @@ precision highp float;
 {{MODULES_HEAD}}
 
 #ifdef HAS_TEXTURES
-   varying vec2 texCoord;
+   IN vec2 texCoord;
    #ifdef HAS_TEXTURE_DIFFUSE
        uniform sampler2D tex;
    #endif

@@ -1,5 +1,5 @@
-
 op.name='ShowNormalsMaterial';
+
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -13,8 +13,8 @@ function doRender()
 }
 
 var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'varying vec3 norm;'
+    // .endl()+'precision highp float;'
+    .endl()+'IN vec3 norm;'
     .endl()+''
     .endl()+'void main()'
     .endl()+'{'

@@ -14,14 +14,14 @@ var cgl=op.patch.cgl;
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'   varying vec2 texCoord;'
-    .endl()+'   uniform sampler2D tex0;'
-    .endl()+'   uniform sampler2D tex1;'
+    .endl()+'   IN vec2 texCoord;'
+    .endl()+'   UNI sampler2D tex0;'
+    .endl()+'   UNI sampler2D tex1;'
     .endl()+'#endif'
 
     .endl()+'vec2 HmdWarp(vec2 in01)'
     .endl()+'{'
-    
+
     .endl()+'   vec2 LensCentre=vec2(0.5,0.5);'
     .endl()+'   vec2 Scale=vec2(0.3,0.3);'
     .endl()+'   vec2 ScaleIn=vec2(2.0,2.0);'

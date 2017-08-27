@@ -8,9 +8,53 @@ var outVertices=op.outValue("Num Vertices");
 inGeom.onChange=update;
 inTimes.onChange=update;
 
+function tesselateTC(tc, x1,y1, x2,y2,  x3,y3)
+{
+    tc.push( x1 );
+    tc.push( y1 );
+
+    tc.push( (x1+x2)/2 );
+    tc.push( (y1+y2)/2 );
+
+    tc.push( (x1+x3)/2 );
+    tc.push( (y1+y3)/2 );
+
+    // --
+
+    tc.push( (x1+x2)/2 );
+    tc.push( (y1+y2)/2 );
+
+    tc.push( x2 );
+    tc.push( y2 );
+
+    tc.push( (x2+x3)/2 );
+    tc.push( (y2+y3)/2 );
+
+    // --
+    
+    tc.push( (x2+x3)/2 );
+    tc.push( (y2+y3)/2 );
+
+    tc.push( x3 );
+    tc.push( y3 );
+
+    tc.push( (x1+x3)/2 );
+    tc.push( (y1+y3)/2 );
+
+    // --
+
+    tc.push( (x1+x2)/2 );
+    tc.push( (y1+y2)/2 );
+
+    tc.push( (x2+x3)/2 );
+    tc.push( (y2+y3)/2 );
+
+    tc.push( (x1+x3)/2 );
+    tc.push( (y1+y3)/2 );
+}
+
 function tesselate(vertices, x1,y1,z1, x2,y2,z2,  x3,y3,z3)
 {
-
     vertices.push( x1 );
     vertices.push( y1 );
     vertices.push( z1 );
@@ -64,57 +108,6 @@ function tesselate(vertices, x1,y1,z1, x2,y2,z2,  x3,y3,z3)
     vertices.push( (x1+x3)/2 );
     vertices.push( (y1+y3)/2 );
     vertices.push( (z1+z3)/2 );
-
-
-
-
-
-
-    // var cx=(x1 + x2 + x3) / 3;
-    // var cy=(y1 + y2 + y3) / 3;
-    // var cz=(z1 + z2 + z3) / 3;
-
-    // vertices.push( x1 );
-    // vertices.push( y1 );
-    // vertices.push( z1 );
-    
-    // vertices.push( x2 );
-    // vertices.push( y2 );
-    // vertices.push( z2 );
-
-    // vertices.push( cx );
-    // vertices.push( cy );
-    // vertices.push( cz );
-
-    // // --
-
-    // vertices.push( x2 );
-    // vertices.push( y2 );
-    // vertices.push( z2 );
-    
-    // vertices.push( x3 );
-    // vertices.push( y3 );
-    // vertices.push( z3 );
-
-    // vertices.push( cx );
-    // vertices.push( cy );
-    // vertices.push( cz );
-
-
-    // // --
-
-    // vertices.push( x3 );
-    // vertices.push( y3 );
-    // vertices.push( z3 );
-
-    // vertices.push( x1 );
-    // vertices.push( y1 );
-    // vertices.push( z1 );
-
-    // vertices.push( cx );
-    // vertices.push( cy );
-    // vertices.push( cz );
-
 }
 
 
@@ -122,24 +115,38 @@ function tesselateGeom(oldGeom)
 {
     var geom=new CGL.Geometry();
     var vertices=[];
+    var tc=[];
     
     if(oldGeom.verticesIndices.length>0)
     {
         for(var i=0;i<oldGeom.verticesIndices.length;i+=3)
         {
-            var x1=oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+0];
-            var y1=oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+1];
-            var z1=oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+2];
-    
-            var x2=oldGeom.vertices[oldGeom.verticesIndices[i+1]*3+0];
-            var y2=oldGeom.vertices[oldGeom.verticesIndices[i+1]*3+1];
-            var z2=oldGeom.vertices[oldGeom.verticesIndices[i+1]*3+2];
-    
-            var x3=oldGeom.vertices[oldGeom.verticesIndices[i+2]*3+0];
-            var y3=oldGeom.vertices[oldGeom.verticesIndices[i+2]*3+1];
-            var z3=oldGeom.vertices[oldGeom.verticesIndices[i+2]*3+2];
-    
-            tesselate(vertices, x1,y1,z1, x2,y2,z2, x3,y3,z3);
+
+            tesselate(vertices, 
+                oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+0],
+                oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+1],
+                oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+2],
+        
+                oldGeom.vertices[oldGeom.verticesIndices[i+1]*3+0],
+                oldGeom.vertices[oldGeom.verticesIndices[i+1]*3+1],
+                oldGeom.vertices[oldGeom.verticesIndices[i+1]*3+2],
+        
+                oldGeom.vertices[oldGeom.verticesIndices[i+2]*3+0],
+                oldGeom.vertices[oldGeom.verticesIndices[i+2]*3+1],
+                oldGeom.vertices[oldGeom.verticesIndices[i+2]*3+2]
+                );
+
+
+            tesselateTC(tc, 
+                oldGeom.texCoords[oldGeom.verticesIndices[i+0]*2+0],
+                oldGeom.texCoords[oldGeom.verticesIndices[i+0]*2+1],
+
+                oldGeom.texCoords[oldGeom.verticesIndices[i+1]*2+0],
+                oldGeom.texCoords[oldGeom.verticesIndices[i+1]*2+1],
+
+                oldGeom.texCoords[oldGeom.verticesIndices[i+2]*2+0],
+                oldGeom.texCoords[oldGeom.verticesIndices[i+2]*2+1]
+                );
         }
     }
     else
@@ -162,11 +169,24 @@ function tesselateGeom(oldGeom)
                     oldGeom.vertices[i+8]
                 );
 
+                tesselateTC(tc, 
+                    oldGeom.texCoords[i/9*6+0],
+                    oldGeom.texCoords[i/9*6+1],
+    
+                    oldGeom.texCoords[i/9*6+2],
+                    oldGeom.texCoords[i/9*6+3],
+    
+                    oldGeom.texCoords[i/9*6+4],
+                    oldGeom.texCoords[i/9*6+5]
+    
+                    );
+
             }
         }
     }
     
     geom.setVertices(vertices);
+    geom.setTexCoords(tc);
     return geom;
     
 }

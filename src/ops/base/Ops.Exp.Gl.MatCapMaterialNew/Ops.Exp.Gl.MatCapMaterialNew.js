@@ -13,6 +13,7 @@ var repeatY=op.inValue("Repeat Y",1);
 var pOpacity=op.inValueSlider("Opacity",1);
 var calcTangents = op.inValueBool("calc normal tangents",true);
 var projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
+var ssNormals=op.inValueBool("Screen Space Normals");
 
 var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var shaderOut=op.outObject("Shader");
@@ -20,6 +21,7 @@ var shaderOut=op.outObject("Shader");
 var cgl=op.patch.cgl;
 
 var shader=new CGL.Shader(cgl,'MatCapMaterial');
+
 var uniOpacity=new CGL.Uniform(shader,'f','opacity',pOpacity);
 
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
@@ -45,7 +47,19 @@ function updateCalcTangent()
 {
     if(calcTangents.get()) shader.define('CALC_TANGENT');
         else shader.removeDefine('CALC_TANGENT');
+}
+
+ssNormals.onChange=function()
+{
+    if(ssNormals.get())
+    {
+        shader.define('CALC_SSNORMALS');
+        // shader.enableExtension('OES_standard_derivatives');
+    }
+    else shader.removeDefine('CALC_SSNORMALS');
+    
 };
+
 
 
 projectCoords.onChange=function()

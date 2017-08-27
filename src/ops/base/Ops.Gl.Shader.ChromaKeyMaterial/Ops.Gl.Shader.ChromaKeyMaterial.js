@@ -31,17 +31,17 @@ var shader=new CGL.Shader(cgl,'MinimalMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
 var shader_vert='{{MODULES_HEAD}}'
-.endl()+'attribute vec3 vPosition;'
-.endl()+'uniform mat4 projMatrix;'
-.endl()+'uniform mat4 mvMatrix;'
-.endl()+'attribute vec2 attrTexCoord;'
-.endl()+'varying mediump vec2 texCoord;'
+.endl()+'IN vec3 vPosition;'
+.endl()+'UNI mat4 projMatrix;'
+.endl()+'UNI mat4 mvMatrix;'
+.endl()+'IN vec2 attrTexCoord;'
+.endl()+'OUT mediump vec2 texCoord;'
 
 .endl()+'#ifdef TEXTURE_REPEAT'
-.endl()+'   uniform float diffuseRepeatX;'
-.endl()+'   uniform float diffuseRepeatY;'
-.endl()+'   uniform float texOffsetX;'
-.endl()+'   uniform float texOffsetY;'
+.endl()+'   UNI float diffuseRepeatX;'
+.endl()+'   UNI float diffuseRepeatY;'
+.endl()+'   UNI float texOffsetX;'
+.endl()+'   UNI float texOffsetY;'
 .endl()+'#endif'
 
 
@@ -63,15 +63,15 @@ var shader_vert='{{MODULES_HEAD}}'
 
 var shader_frag='{{MODULE_BEGIN_FRAG}}'
 .endl()+'precision highp float;'
-.endl()+'uniform sampler2D tex;'
-.endl()+'uniform float r;'
-.endl()+'uniform float g;'
-.endl()+'uniform float b;'
-.endl()+'uniform float weightMul;'
-.endl()+'uniform float white;'
-.endl()+'uniform float time;'
+.endl()+'UNI sampler2D tex;'
+.endl()+'UNI float r;'
+.endl()+'UNI float g;'
+.endl()+'UNI float b;'
+.endl()+'UNI float weightMul;'
+.endl()+'UNI float white;'
+.endl()+'UNI float time;'
 
-.endl()+'varying mediump vec2 texCoord;'
+.endl()+'IN mediump vec2 texCoord;'
 
 .endl()+'vec3 rgb2hsv(vec4 rgb)'
 .endl()+'{'
@@ -178,8 +178,8 @@ var uniTime=new CGL.Uniform(shader,'f','time',0);
 
 inMode.onChange=function()
 {
-    
-    
+
+
     if(inMode.get()=="R")
     {
         shader.removeDefine('MODE_G');
@@ -259,10 +259,10 @@ var diffuseOffsetYUniform=null;
 
 function updateTexRepeat()
 {
-    if(diffuseRepeatY.get()!=1 || 
-        diffuseRepeatX.get()!=1 || 
-        diffuseOffsetY.get()!==0 || 
-        diffuseOffsetX.get()!==0)  
+    if(diffuseRepeatY.get()!=1 ||
+        diffuseRepeatX.get()!=1 ||
+        diffuseOffsetY.get()!==0 ||
+        diffuseOffsetX.get()!==0)
         {
             shader.define('TEXTURE_REPEAT');
 

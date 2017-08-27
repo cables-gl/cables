@@ -23,7 +23,7 @@ var uniOutMax=new CGL.Uniform(shader,'f','outMax',outMax);
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
 
     .endl()+'uniform float inMin;'

@@ -1,16 +1,16 @@
 {{MODULES_HEAD}}
-varying mediump vec3 norm;
-varying mediump vec3 vert;
+IN mediump vec3 norm;
+IN mediump vec3 vert;
 uniform mat4 normalMatrix;
-varying mat4 mvMatrix;
+IN mat4 mvMatrix;
 uniform mat4 modelMatrix;
 
 #ifdef INSTANCING
-varying mat4 instModelMat;
+IN mat4 instModelMat;
 #endif
 
-// varying vec3 vTangent;
-// varying vec3 vBiTangent;
+// IN vec3 vTangent;
+// IN vec3 vBiTangent;
 
 
 uniform float r;
@@ -28,7 +28,7 @@ uniform float diffuseRepeatX;
 uniform float diffuseRepeatY;
 
 #ifdef HAS_TEXTURES
-    varying mediump vec2 texCoord;
+    IN mediump vec2 texCoord;
     #ifdef HAS_TEXTURE_DIFFUSE
         uniform sampler2D tex;
     #endif

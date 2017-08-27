@@ -21,16 +21,16 @@
     var srcFrag=''
         .endl()+'precision mediump float;'
         .endl()+'#ifdef HAS_TEXTURES'
-        .endl()+'  varying vec2 texCoord;'
-        .endl()+'  uniform sampler2D tex;'
-        .endl()+'  uniform sampler2D depthTex;'
-        .endl()+'  uniform float dirX;'
-        // .endl()+'  uniform float dirY;'
-        .endl()+'  uniform float width;'
-        .endl()+'  uniform float height;'
+        .endl()+'  IN vec2 texCoord;'
+        .endl()+'  UNI sampler2D tex;'
+        .endl()+'  UNI sampler2D depthTex;'
+        .endl()+'  UNI float dirX;'
+        // .endl()+'  UNI float dirY;'
+        .endl()+'  UNI float width;'
+        .endl()+'  UNI float height;'
 
-        .endl()+'  uniform float f;'
-        .endl()+'  uniform float n;'
+        .endl()+'  UNI float f;'
+        .endl()+'  UNI float n;'
 
         .endl()+'#endif'
         .endl()+''
@@ -64,7 +64,7 @@
         .endl()+'   float dirY=0.0;'
         .endl()+'   if(dirX==0.0)dirY=1.0;'
 
-        
+
         .endl()+'   vec4 baseCol=texture2D(tex, texCoord);'
 
 
@@ -80,7 +80,7 @@
         .endl()+'       #endif'
 
         .endl()+'   #endif'
-        .endl()+'   gl_FragColor = col;'
+        .endl()+'   outColor = col;'
         .endl()+'}';
 
     shader.setSource(shader.getDefaultVertexShader(),srcFrag);

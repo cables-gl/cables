@@ -219,35 +219,69 @@ CGL.Shader = function(_cgl, _name) {
 
         var vs = '';
         var fs = '';
-        if (self.glslVersion == 300) {
+
+        if(cgl.glVersion>1)self.glslVersion=300;
+        else self.glslVersion=0;
+
+        if (self.glslVersion == 300)
+        {
             vs = '#version 300 es'
+                .endl() + '// '
+                .endl() + '// vertex shader '+name
+                .endl() + '// '
                 .endl() + 'precision highp float;'
                 .endl() + ''
-                .endl() + '#define attribute in'
-                .endl() + '#define varying out'
+                // .endl() + '#define attribute in'
+                // .endl() + '#define varying out'
+                .endl() + '#define texture2D texture'
+
+                .endl() + '#define UNI uniform'
+                .endl() + '#define IN in'
+                .endl() + '#define OUT out'
+
                 .endl() + '';
 
 
             fs = '#version 300 es'
+                .endl() + '// '
+                .endl() + '// fragment shader '+name
+                .endl() + '// '
                 .endl() + 'precision highp float;'
                 .endl() + ''
-                .endl() + '#define varying in'
                 .endl() + '#define texture2D texture'
+                .endl() + '#define IN in'
+                .endl() + '#define UNI uniform'
                 .endl() + 'out vec4 outColor;'
+                .endl() + '#define gl_FragColor outColor'
 
                 .endl() + '';
         } else {
             fs = ''
-                .endl() + ''
+                .endl() + '// '
+                .endl() + '// fragment shader '+name
+                .endl() + '// '
+
                 .endl() + '#define outColor gl_FragColor'
+                .endl() + '#define IN varying'
+                .endl() + '#define UNI uniform'
+
                 .endl() + '';
-        }
+            vs = ''
+                .endl() + '// '
+                .endl() + '// vertex shader '+name
+                .endl() + '// '
+                .endl() + '#define OUT varying'
+                .endl() + '#define IN attribute'
+                .endl() + '#define UNI uniform'
+
+                .endl() + '';
+            }
 
         if (fs.indexOf("precision") == -1) fs = 'precision highp float;'.endl() + fs;
         if (vs.indexOf("precision") == -1) vs = 'precision highp float;'.endl() + fs;
 
-        vs += extensionString + definesStr + self.srcVert;
-        fs += extensionString + definesStr + self.srcFrag;
+        vs = extensionString +vs+ definesStr + self.srcVert;
+        fs = extensionString+fs + definesStr + self.srcFrag;
 
         // console.log(name);
         // console.log(fs);
@@ -506,13 +540,13 @@ CGL.Shader.prototype.setFeedbackNames = function(names) {
 CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader = function() {
     return ''
         // .endl()+'{{MODULES_HEAD}}'
-        .endl() + 'attribute vec3 vPosition;'
-        .endl() + 'attribute vec2 attrTexCoord;'
-        .endl() + 'attribute vec3 attrVertNormal;'
-        .endl() + 'varying vec2 texCoord;'
-        .endl() + 'varying vec3 norm;'
-        .endl() + 'uniform mat4 projMatrix;'
-        .endl() + 'uniform mat4 mvMatrix;'
+        .endl() + 'IN vec3 vPosition;'
+        .endl() + 'IN vec2 attrTexCoord;'
+        .endl() + 'IN vec3 attrVertNormal;'
+        .endl() + 'OUT vec2 texCoord;'
+        .endl() + 'OUT vec3 norm;'
+        .endl() + 'UNI mat4 projMatrix;'
+        .endl() + 'UNI mat4 mvMatrix;'
         // .endl()+'uniform mat4 normalMatrix;'
 
         .endl() + 'void main()'
@@ -540,7 +574,7 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
 CGL.Shader.getErrorFragmentShader = function() {
     return ''
         // .endl()+'precision mediump float;'
-        .endl() + 'varying vec3 norm;'
+        .endl() + 'IN vec3 norm;'
         .endl() + 'void main()'
         .endl() + '{'
         .endl() + '   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'

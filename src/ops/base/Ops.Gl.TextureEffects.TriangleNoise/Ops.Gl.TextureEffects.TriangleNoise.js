@@ -16,7 +16,7 @@ var shader=new CGL.Shader(cgl);
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform float scale;'
     .endl()+'uniform float angle;'
     .endl()+'uniform float ratio;'

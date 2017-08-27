@@ -26,8 +26,8 @@ var srcHeadVert=''
     .endl()+'uniform float do_instancing;'
 
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   attribute mat4 instMat;'
-    .endl()+'   varying mat4 instModelMat;'
+    .endl()+'   IN mat4 instMat;'
+    .endl()+'   OUT mat4 instModelMat;'
     .endl()+'#endif';
 
 
@@ -55,8 +55,8 @@ geom.onChange=function()
         return;
     }
     mesh=new CGL.Mesh(cgl,geom.get());
-    
-    
+
+
 };
 
 
@@ -96,7 +96,7 @@ function setupArray()
     {
         mat4.identity(m);
         mat4.translate(m,m,
-            [   
+            [
                 transforms[i*3],
                 transforms[i*3+1],
                 transforms[i*3+2]
@@ -136,8 +136,8 @@ function doRender()
                     srcHeadVert: srcHeadVert,
                     srcBodyVert: srcBodyVert
                 });
-    
-            shader.define('INSTANCING');    
+
+            shader.define('INSTANCING');
             uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
 
             // updateTransforms();
@@ -154,6 +154,3 @@ function doRender()
 
 
 }
-
-
-

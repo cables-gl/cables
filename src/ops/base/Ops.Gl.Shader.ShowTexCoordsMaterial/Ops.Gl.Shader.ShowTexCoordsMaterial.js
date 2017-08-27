@@ -13,7 +13,7 @@ function doRender()
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+''
     .endl()+'void main()'
     .endl()+'{'
@@ -29,4 +29,3 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 render.onTriggered=doRender;
 doRender();
-

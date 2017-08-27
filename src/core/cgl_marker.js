@@ -19,19 +19,19 @@ CGL.Marker=function(cgl)
 
     var frag=''
         .endl()+'precision highp float;'
-        .endl()+'varying vec3 axisColor;'
+        .endl()+'IN vec3 axisColor;'
 
         .endl()+'void main()'
         .endl()+'{'
         .endl()+'    vec4 col=vec4(axisColor,1.0);'
-        .endl()+'    gl_FragColor = col;'
+        .endl()+'    outColor = col;'
         .endl()+'}';
 
     var vert=''
-        .endl()+'attribute vec3 vPosition;'
-        .endl()+'uniform mat4 projMatrix;'
-        .endl()+'uniform mat4 mvMatrix;'
-        .endl()+'varying vec3 axisColor;'
+        .endl()+'IN vec3 vPosition;'
+        .endl()+'UNI mat4 projMatrix;'
+        .endl()+'UNI mat4 mvMatrix;'
+        .endl()+'OUT vec3 axisColor;'
 
         .endl()+'void main()'
         .endl()+'{'

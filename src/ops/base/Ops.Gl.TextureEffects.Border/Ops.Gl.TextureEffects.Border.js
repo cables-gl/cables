@@ -11,20 +11,21 @@ op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'uniform float width;'
-    .endl()+'uniform sampler2D tex;'
-    .endl()+'uniform float r;'
-    .endl()+'uniform float g;'
-    .endl()+'uniform float b;'
-    .endl()+'uniform float aspect;'
-    .endl()+'uniform bool smooth;'
-    .endl()+''
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI float width;'
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'UNI float r;'
+    .endl()+'UNI float g;'
+    .endl()+'UNI float b;'
+    .endl()+'UNI float aspect;'
+
+    .endl()+'UNI bool smoothed;'
+
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
 
-    .endl()+'if(!smooth)'
+    .endl()+'if(!smoothed)'
     .endl()+'{'
 
     .endl()+'   if( texCoord.x>1.0-width/3.0 || texCoord.y>1.0-width/aspect/3.0 || texCoord.y<width/aspect/3.0 || texCoord.x<width/3.0 ) col = vec4(r,g,b, 1.0);'
@@ -41,7 +42,7 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var aspectUniform=new CGL.Uniform(shader,'f','aspect',0);
-var uniSmooth=new CGL.Uniform(shader,'b','smooth',smooth);
+var uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
 
 {
     var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));

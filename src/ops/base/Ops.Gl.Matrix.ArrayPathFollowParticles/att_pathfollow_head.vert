@@ -7,5 +7,5 @@ uniform bool MOD_randomSpeed;
 
 uniform float MOD_maxIndex;
 
-attribute vec3 rndPos;
+IN vec3 rndPos;
 attribute float rndOffset;

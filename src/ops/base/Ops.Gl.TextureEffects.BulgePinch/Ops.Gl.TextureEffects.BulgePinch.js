@@ -30,17 +30,18 @@ centerY.onValueChanged=function() { uniCenterY.setValue(centerY.get()); };
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'uniform sampler2D tex;'
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI sampler2D tex;'
 
-    .endl()+'uniform float radius;'
-    .endl()+'uniform float strength;'
-    .endl()+'uniform float centerX;'
-    .endl()+'uniform float centerY;'
-    .endl()+'vec2 center=vec2(centerX,centerY);'
+    .endl()+'UNI float radius;'
+    .endl()+'UNI float strength;'
+    .endl()+'UNI float centerX;'
+    .endl()+'UNI float centerY;'
+
 
     .endl()+'void main()'
     .endl()+'{'
+    .endl()+'   vec2 center=vec2(centerX,centerY);'
     .endl()+'   vec2 coord=texCoord;'
     .endl()+'   coord -= center;'
     .endl()+'   float distance = length(coord);'

@@ -17,7 +17,7 @@ var shader=null;
 var uniFade;
 
 var srcHeadVert=''
-    .endl()+'attribute vec3 attrMorphTargetA;'
+    .endl()+'IN vec3 attrMorphTargetA;'
     .endl()+'uniform float {{mod}}_fade;'
     .endl();
 

@@ -21,5 +21,6 @@
             }
         ],
         "name": "Ops.Gl.TesselateGeometry"
-    }
+    },
+    "summary": "create new triangles in a mesh (subdivide)"
 }

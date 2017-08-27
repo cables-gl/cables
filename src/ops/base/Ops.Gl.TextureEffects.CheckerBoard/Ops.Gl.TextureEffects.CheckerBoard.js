@@ -12,7 +12,7 @@ op.onLoaded=shader.compile;
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'uniform float lineSize;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
 
     .endl()+'void main()'
     .endl()+'{'

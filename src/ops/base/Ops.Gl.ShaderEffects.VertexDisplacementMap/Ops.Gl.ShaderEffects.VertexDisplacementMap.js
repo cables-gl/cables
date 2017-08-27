@@ -80,14 +80,13 @@ var shader=null;
 var uniExtrude,uniTexture;
 
 
-
 var srcHeadVert=''
-    .endl()+'uniform float {{mod}}_extrude;'
-    .endl()+'uniform sampler2D {{mod}}_texture;'
-    .endl()+'uniform float {{mod}}_offsetX;'
-    .endl()+'uniform float {{mod}}_offsetY;'
+    .endl()+'UNI float {{mod}}_extrude;'
+    .endl()+'UNI sampler2D {{mod}}_texture;'
+    .endl()+'UNI float {{mod}}_offsetX;'
+    .endl()+'UNI float {{mod}}_offsetY;'
 
-    .endl()+'varying float '+id+'displHeightMapColor;'
+    .endl()+'OUT float '+id+'displHeightMapColor;'
     .endl();
 
 var srcBodyVert=''
@@ -130,10 +129,10 @@ var srcBodyVert=''
     .endl();
 
 var srcHeadFrag=''
-    .endl()+'uniform float {{mod}}_colorizeAdd;'
-    .endl()+'varying float '+id+'displHeightMapColor;'
-    .endl()+'uniform sampler2D {{mod}}_texture;'
-    // .endl()+'varying vec3 vViewPosition;'
+    .endl()+'UNI float {{mod}}_colorizeAdd;'
+    .endl()+'IN float '+id+'displHeightMapColor;'
+    .endl()+'UNI sampler2D {{mod}}_texture;'
+    // .endl()+'IN vec3 vViewPosition;'
 
     .endl();
 
@@ -178,11 +177,11 @@ op.render.onTriggered=function()
          return;
     }
 
-    
+
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
-        
+
 
         // console.log('re init shader module vertexdisplacement');
 
@@ -191,6 +190,7 @@ op.render.onTriggered=function()
 
         moduleVert=shader.addModule(
             {
+                title:op.objName,
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
                 srcBodyVert:srcBodyVert
@@ -203,6 +203,7 @@ op.render.onTriggered=function()
 
         moduleFrag=shader.addModule(
             {
+                title:op.objName,
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
                 srcBodyFrag:srcBodyFrag
@@ -214,8 +215,8 @@ op.render.onTriggered=function()
         updateInvert();
         updateColorize();
     }
-    
-    
+
+
     if(!shader)return;
     var texSlot=moduleVert.num+5;
 

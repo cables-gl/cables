@@ -1,6 +1,6 @@
 // adapted from https://thebookofshaders.com/12/
 
-varying vec2 texCoord;
+IN vec2 texCoord;
 // uniform vec2 u_resolution;
 // uniform float mouseX;
 // uniform float mouseY;

@@ -19,7 +19,7 @@ this.onLoaded=shader.compile;
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  varying vec2 texCoord;'
+    .endl()+'  IN vec2 texCoord;'
     .endl()+'  uniform sampler2D image;'
     .endl()+'  uniform sampler2D colTex;'
     .endl()+'#endif'

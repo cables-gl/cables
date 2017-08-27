@@ -24,7 +24,7 @@ this.doRender=function()
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'   varying vec2 texCoord;'
+    .endl()+'   IN vec2 texCoord;'
     .endl()+'   #ifdef HAS_TEXTURE_DIFFUSE'
     .endl()+'       uniform sampler2D tex;'
     .endl()+'   #endif'

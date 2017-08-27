@@ -57,7 +57,7 @@ function doRender()
 }
 
 var srcVert=''
-    .endl()+'attribute vec3 vPosition;'
+    .endl()+'IN vec3 vPosition;'
     .endl()+'uniform mat4 projMatrix;'
     .endl()+'uniform mat4 mvMatrix;'
 

@@ -27,7 +27,7 @@ var srcFrag=''
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform sampler2D texField;'
     .endl()+'uniform float time;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
 
     .endl()+'float random(vec2 co)'
     .endl()+'{'
@@ -60,7 +60,7 @@ var srcFrag=''
 
 var simTexture=new CGL.Texture(cgl,{isFloatingPointTexture:true});
 simTexture.setSize(1024,1024);
-   
+
 
 var shaderSim=new CGL.Shader(cgl);
 shaderSim.setSource(shaderSim.getDefaultVertexShader(),srcFrag);
@@ -108,10 +108,10 @@ var srcBodyVert=''
 
 render.onTriggered=function()
 {
-    
+
     // if(!textureField.get())return;
     // simulation shader
-    
+
     var t=effect.getCurrentSourceTexture().tex;
     cgl.setShader(shaderSim);
     effect.bind();
@@ -123,8 +123,8 @@ render.onTriggered=function()
     cgl.setPreviousShader();
 
     cgl.resetViewPort();
-    
-    
+
+
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
@@ -151,15 +151,3 @@ render.onTriggered=function()
     uniTime.setValue(op.patch.freeTimer.get());
     next.trigger();
 };
-
-
-
-
-
-
-
-
-
-
-
-

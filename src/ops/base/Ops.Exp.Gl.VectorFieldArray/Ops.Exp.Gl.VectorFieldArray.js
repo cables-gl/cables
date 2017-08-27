@@ -50,17 +50,17 @@ exe.onTriggered=doRender;
 exe.onLinkChanged=removeModule;
 
 var srcHeadVert=''
-    .endl()+'uniform float do_instancing;'
-    .endl()+'uniform sampler2D {{mod}}_field;'
+    .endl()+'UNI float do_instancing;'
+    .endl()+'UNI sampler2D {{mod}}_field;'
     
-    .endl()+'uniform float {{mod}}_spaceX;'
-    .endl()+'uniform float {{mod}}_spaceY;'
-    .endl()+'uniform float {{mod}}_rows;'
-    .endl()+'uniform float {{mod}}_cols;'
+    .endl()+'UNI float {{mod}}_spaceX;'
+    .endl()+'UNI float {{mod}}_spaceY;'
+    .endl()+'UNI float {{mod}}_rows;'
+    .endl()+'UNI float {{mod}}_cols;'
     
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   attribute mat4 instMat;'
-    .endl()+'   varying mat4 instModelMat;'
+    .endl()+'   IN mat4 instMat;'
+    .endl()+'   OUT mat4 instModelMat;'
     .endl()+'#endif'
 
     .endl()+'mat4 rotationMatrix(vec3 axis, float angle)'

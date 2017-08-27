@@ -19,7 +19,7 @@ var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform float strength;'
     .endl()+'uniform float amount;'
@@ -30,20 +30,14 @@ var srcFrag=''
 
     .endl()+'const vec4 lumcoeff = vec4(0.299,0.587,0.114, 0.);'
 
-    
-    .endl()+'   mat4 adjustments = (mat4('
-    .endl()+'       1, 13, 4, 16,'
-    .endl()+'       9, 5, 12, 8,'
-    .endl()+'       3, 15, 2, 14,'
-    .endl()+'       11, 7, 10, 6'
-    .endl()+'   ) - 8.) *  1.0 / strength;'
-    
+
+
     .endl()+'   float getLuminance( vec4 color ) {'
     .endl()+'       return (0.2126*color.r + 0.7152*color.g + 0.0722*color.b);'
     .endl()+'   }'
     +CGL.TextureEffect.getBlendCode()
 
-    .endl()+'   float adjustFrag( float val, vec2 coord ) {'
+    .endl()+'   float adjustFrag( mat4 adjustments,float val, vec2 coord ) {'
     .endl()+'       vec2 coordMod = mod(vec2(coord.x*width,coord.y*height), 4.0);'
     .endl()+'       int xMod = int(coordMod.x);'
     .endl()+'       int yMod = int(coordMod.y);'
@@ -66,11 +60,18 @@ var srcFrag=''
     .endl()+'void main()'
     .endl()+'{'
 
+    .endl()+'   mat4 adjustments = ((mat4('
+    .endl()+'       1, 13, 4, 16,'
+    .endl()+'       9, 5, 12, 8,'
+    .endl()+'       3, 15, 2, 14,'
+    .endl()+'       11, 7, 10, 6'
+    .endl()+'   ) - 8.) *  1.0 / strength);'
+
     .endl()+'   vec4 base=texture2D(tex,texCoord);'
     .endl()+'   vec4 color;'
 
     .endl()+'    float lum = getLuminance(base);'
-    .endl()+'    lum = adjustFrag(lum, texCoord.xy);'
+    .endl()+'    lum = adjustFrag(adjustments,lum, texCoord.xy);'
 
 
 
@@ -118,8 +119,8 @@ render.onTriggered=function()
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
-    
-    
+
+
 
     trigger.trigger();
 };

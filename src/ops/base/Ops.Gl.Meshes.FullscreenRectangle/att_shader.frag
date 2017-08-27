@@ -1,6 +1,6 @@
 
 uniform sampler2D tex;
-varying vec2 texCoord;
+IN vec2 texCoord;
 
 precision highp float;
 

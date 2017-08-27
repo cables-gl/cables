@@ -64,6 +64,10 @@ CGL.State = function() {
             this.aborted = true;
             return;
         } else {
+
+            var derivativeExt = this.gl.getExtension("GL_OES_standard_derivatives");
+console.log('GL_OES_standard_derivatives',derivativeExt);
+
             var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
 
             if (instancingExt.vertexAttribDivisorANGLE) {

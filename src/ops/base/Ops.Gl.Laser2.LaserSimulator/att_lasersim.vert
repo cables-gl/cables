@@ -1,8 +1,8 @@
 
 
-attribute vec3 vPosition;
+IN vec3 vPosition;
 
-attribute vec2 pos;
+IN vec2 pos;
 
 uniform mat4 projMatrix;
 uniform mat4 mvMatrix;

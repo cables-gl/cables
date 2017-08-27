@@ -18,7 +18,7 @@ var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  varying vec2 texCoord;'
+    .endl()+'  IN vec2 texCoord;'
     .endl()+'  uniform sampler2D tex;'
     .endl()+'#endif'
 

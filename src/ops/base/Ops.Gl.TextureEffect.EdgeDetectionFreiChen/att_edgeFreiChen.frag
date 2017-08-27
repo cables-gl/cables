@@ -12,7 +12,7 @@ uniform float texHeight;
 uniform float amount;
 
 uniform sampler2D tex;
-varying vec2 texCoord;
+IN vec2 texCoord;
 
 mat3 G[9];
 // hard coded matrix values!!!! as suggested in https://github.com/neilmendoza/ofxPostProcessing/blob/master/src/EdgePass.cpp#L45

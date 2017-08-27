@@ -4,7 +4,7 @@ uniform float z;
 uniform float x;
 uniform float y;
 uniform float scale;
-varying vec2 texCoord;
+IN vec2 texCoord;
 uniform sampler2D tex;
 
 

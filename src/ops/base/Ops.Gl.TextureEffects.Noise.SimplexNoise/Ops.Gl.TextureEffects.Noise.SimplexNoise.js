@@ -22,7 +22,7 @@ var shader=new CGL.Shader(cgl);
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform float smoothness;'
     .endl()+'uniform float scale;'

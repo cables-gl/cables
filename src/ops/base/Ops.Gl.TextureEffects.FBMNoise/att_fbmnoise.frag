@@ -15,7 +15,7 @@ uniform bool layer3;
 uniform bool layer4;
 
 
-varying vec2 texCoord;
+IN vec2 texCoord;
 
 
 {{BLENDCODE}}

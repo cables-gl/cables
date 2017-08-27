@@ -26,7 +26,7 @@ method.onChange=function()
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform sampler2D texture;'
     .endl()+'uniform float exposure;'

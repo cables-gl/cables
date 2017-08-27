@@ -13,9 +13,9 @@ var texture1Uniform=null;
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'   varying vec2 texCoord;'
-    .endl()+'   uniform sampler2D tex0;'
-    .endl()+'   uniform sampler2D tex1;'
+    .endl()+'   IN vec2 texCoord;'
+    .endl()+'   UNI sampler2D tex0;'
+    .endl()+'   UNI sampler2D tex1;'
     .endl()+'#endif'
 
     .endl()+'void main()'

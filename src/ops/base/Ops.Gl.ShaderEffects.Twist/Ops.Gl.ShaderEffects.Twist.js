@@ -1,7 +1,3 @@
-var cgl=op.patch.cgl;
-
-var shader=null;
-
 op.name='Twist';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -15,17 +11,16 @@ var centerX=op.addInPort(new Port(op,"Center X",OP_PORT_TYPE_VALUE));
 var centerY=op.addInPort(new Port(op,"Center Y",OP_PORT_TYPE_VALUE));
 var centerZ=op.addInPort(new Port(op,"Center Z",OP_PORT_TYPE_VALUE));
 
-
 var srcHeadVert=''
-    .endl()+'uniform float {{mod}}_amount;'
-    .endl()+'uniform float {{mod}}_axis_x;'
-    .endl()+'uniform float {{mod}}_axis_y;'
-    .endl()+'uniform float {{mod}}_axis_z;'
-    .endl()+'uniform float {{mod}}_center_x;'
-    .endl()+'uniform float {{mod}}_center_y;'
-    .endl()+'uniform float {{mod}}_center_z;'
+    .endl()+'UNI float MOD_amount;'
+    .endl()+'UNI float MOD_axis_x;'
+    .endl()+'UNI float MOD_axis_y;'
+    .endl()+'UNI float MOD_axis_z;'
+    .endl()+'UNI float MOD_center_x;'
+    .endl()+'UNI float MOD_center_y;'
+    .endl()+'UNI float MOD_center_z;'
     
-    .endl()+'mat4 rotationMatrix(vec3 axis, float angle)'
+    .endl()+'mat4 MOD_rotationMatrix(vec3 axis, float angle)'
     .endl()+'{'
     .endl()+'    axis = normalize(axis);'
     .endl()+'    float s = sin(angle);'
@@ -38,32 +33,30 @@ var srcHeadVert=''
     .endl()+'                0.0,                                0.0,                                0.0,                                1.0);'
     .endl()+'}';
 
-    var srcBodyVert=''
-    
-    .endl()+'   pos.x-={{mod}}_center_x;'
-    .endl()+'   pos.y-={{mod}}_center_y;'
-    .endl()+'   pos.z-={{mod}}_center_z;'
-    .endl()+'   float an=( (pos.y) * (pos.x));'
+var srcBodyVert=''
+    .endl()+'   pos.x-=MOD_center_x;'
+    .endl()+'   pos.y-=MOD_center_y;'
+    .endl()+'   pos.z-=MOD_center_z;'
+    .endl()+'   float MOD_an=( (pos.y) * (pos.x));'
 
-    
+    .endl()+'   pos=pos*MOD_rotationMatrix(vec3(MOD_axis_x,MOD_axis_y,MOD_axis_z),MOD_an * MOD_amount/100.0 );'
 
-    .endl()+'   pos=pos*rotationMatrix(vec3({{mod}}_axis_x,{{mod}}_axis_y,{{mod}}_axis_z),an * {{mod}}_amount/100.0 );'
-
-    .endl()+'   pos.x+={{mod}}_center_x;'
-    .endl()+'   pos.y+={{mod}}_center_y;'
-    .endl()+'   pos.z+={{mod}}_center_z;'
-
+    .endl()+'   pos.x+=MOD_center_x;'
+    .endl()+'   pos.y+=MOD_center_y;'
+    .endl()+'   pos.z+=MOD_center_z;'
     .endl();
 
 
-
 var uniAmount=null;
+var cgl=op.patch.cgl;
+var shader=null;
+var mod=null;
 
 function removeModule()
 {
-    if(shader && module)
+    if(shader && mod)
     {
-        shader.removeModule(module);
+        shader.removeModule(mod);
         shader=null;
     }
 }
@@ -75,21 +68,21 @@ render.onTriggered=function()
     {
         if(shader) removeModule();
         shader=cgl.getShader();
-        module=shader.addModule(
+        mod=shader.addModule(
             {
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
                 srcBodyVert:srcBodyVert
             });
 
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_amount',amount);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_axis_x',axisX);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_axis_y',axisY);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_axis_z',axisZ);
+        uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'amount',amount);
+        uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'axis_x',axisX);
+        uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'axis_y',axisY);
+        uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'axis_z',axisZ);
 
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_center_x',centerX);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_center_y',centerY);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_center_z',centerZ);
+        uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'center_x',centerX);
+        uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'center_y',centerY);
+        uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'center_z',centerZ);
     }
 
     trigger.trigger();

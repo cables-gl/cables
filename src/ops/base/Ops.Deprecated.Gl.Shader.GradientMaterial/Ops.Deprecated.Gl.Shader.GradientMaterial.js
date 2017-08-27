@@ -63,12 +63,11 @@ var doRender=function()
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    // .endl()+'varying vec3 norm;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'uniform vec4 colA;'
-    .endl()+'uniform vec4 colB;'
-    .endl()+'uniform vec4 colC;'
-    .endl()+'uniform float width,height;'
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI vec4 colA;'
+    .endl()+'UNI vec4 colB;'
+    .endl()+'UNI vec4 colC;'
+    .endl()+'UNI float width,height;'
 
     .endl()+''
     .endl()+'void main()'
@@ -97,7 +96,7 @@ var srcFrag=''
     .endl()+'       else'
     .endl()+'           gl_FragColor = vec4(mix(colB, colC, (coords.x-0.5)*2.0));'
     .endl()+'   #endif'
-    
+
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl,'GradientMaterial');

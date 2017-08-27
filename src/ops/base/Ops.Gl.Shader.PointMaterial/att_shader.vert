@@ -1,26 +1,26 @@
 {{MODULES_HEAD}}
-attribute vec3 vPosition;
-attribute vec2 attrTexCoord;
+IN vec3 vPosition;
+IN vec2 attrTexCoord;
 
-varying vec3 norm;
+OUT vec3 norm;
 #ifdef HAS_TEXTURES
-    varying vec2 texCoord;
+    OUT vec2 texCoord;
 #endif
 
-uniform mat4 projMatrix;
-uniform mat4 modelMatrix;
-uniform mat4 viewMatrix;
+UNI mat4 projMatrix;
+UNI mat4 modelMatrix;
+UNI mat4 viewMatrix;
 
-uniform float pointSize;
-uniform vec3 camPos;
+UNI float pointSize;
+UNI vec3 camPos;
 
-uniform float canvasWidth;
-uniform float canvasHeight;
-uniform float camDistMul;
+UNI float canvasWidth;
+UNI float canvasHeight;
+UNI float camDistMul;
 
-uniform float randomSize;
+UNI float randomSize;
 
-attribute float attrVertIndex;
+IN float attrVertIndex;
 
 float rand(float n){return fract(sin(n) * 43758.5453123);}
 

@@ -1,6 +1,6 @@
 {{MODULES_HEAD}}
 
-attribute vec3 vPosition;
+IN vec3 vPosition;
 uniform mat4 projMatrix;
 uniform mat4 mvMatrix;
 

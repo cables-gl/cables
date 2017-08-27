@@ -13,7 +13,7 @@ var shader=new CGL.Shader(cgl);
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  varying vec2 texCoord;'
+    .endl()+'  IN vec2 texCoord;'
     .endl()+'  uniform sampler2D tex;'
     .endl()+'#endif'
     .endl()+'uniform float amount;'

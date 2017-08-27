@@ -30,7 +30,7 @@ var inAmount=op.inValueSlider("Amount",0.5);
 var shader=null;
 
 var srcHeadVert=''
-    .endl()+'varying vec4 MOD_fogPos;'
+    .endl()+'OUT vec4 MOD_fogPos;'
     .endl();
 
 var srcBodyVert=''
@@ -38,14 +38,14 @@ var srcBodyVert=''
     .endl();
 
 var srcHeadFrag=''
-    .endl()+'varying vec4 MOD_fogPos;'
-    .endl()+'uniform float MOD_start;'
-    .endl()+'uniform float MOD_end;'
-    .endl()+'uniform float MOD_amount;'
+    .endl()+'IN vec4 MOD_fogPos;'
+    .endl()+'UNI float MOD_start;'
+    .endl()+'UNI float MOD_end;'
+    .endl()+'UNI float MOD_amount;'
     
-    .endl()+'uniform float MOD_r;'
-    .endl()+'uniform float MOD_g;'
-    .endl()+'uniform float MOD_b;'
+    .endl()+'UNI float MOD_r;'
+    .endl()+'UNI float MOD_g;'
+    .endl()+'UNI float MOD_b;'
     .endl();
 
 var srcBodyFrag=''
