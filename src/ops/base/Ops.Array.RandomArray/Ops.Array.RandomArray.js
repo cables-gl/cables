@@ -1,6 +1,8 @@
 op.name='RandomArray';
 
-var numValues=op.addInPort(new Port(op, "numValues",OP_PORT_TYPE_VALUE));
+// var numValues=op.addInPort(new Port(op, "numValues",OP_PORT_TYPE_VALUE));
+var numValues=op.inValueInt("numValues");
+
 var seed=op.addInPort(new Port(op,"random seed"));
 var min=op.addInPort(new Port(op,"Min"));
 var max=op.addInPort(new Port(op,"Max"));

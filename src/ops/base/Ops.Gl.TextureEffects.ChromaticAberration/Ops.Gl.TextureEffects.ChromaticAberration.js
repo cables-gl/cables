@@ -1,4 +1,4 @@
-op.name="ChromaticAberrationNew";
+op.name="ChromaticAberration";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var pixel=op.inValue("Pixel",5);

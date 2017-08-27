@@ -1,4 +1,5 @@
-CABLES.Op.apply(this, arguments);
+// use this: https://dl.dropboxusercontent.com/u/11542084/ssao_nohalo_1.2
+
 var self=this;
 var cgl=this.patch.cgl;
 
@@ -30,26 +31,26 @@ var srcFrag=''
     .endl()+'uniform float far;'
     .endl()+''
 
-.endl()+'#define samples 8.0'
-.endl()+'#define rings 4.0'
-.endl()+'#define PI    3.14159265'
-.endl()+''
-
-.endl()+'float readDepth(vec2 coord)'
-.endl()+'{'
-.endl()+'    return (2.0 * near) / (far + near - texture2D(image, coord ).x * (far-near));'
-.endl()+'}'
-
-.endl()+'float compareDepths( in float depth1, in float depth2 )'
-.endl()+'{'
-.endl()+'    float aoCap = 1.9;'
-.endl()+'    float aoMultiplier =20.0;'
-.endl()+'    float depthTolerance = 0.001;'
-.endl()+'    float aorange = 100.0;'// units in space the AO effect extends to (this gets divided by the camera far range
-.endl()+'    float diff = sqrt(clamp(1.0-(depth1-depth2) / (aorange/(far-near)),0.0,1.0));'
-.endl()+'    float ao = min(aoCap,max(0.0,depth1-depth2-depthTolerance) * aoMultiplier) * diff;'
-.endl()+'    return ao;'
-.endl()+'}'
+    .endl()+'#define samples 8.0'
+    .endl()+'#define rings 4.0'
+    .endl()+'#define PI    3.14159265'
+    .endl()+''
+    
+    .endl()+'float readDepth(vec2 coord)'
+    .endl()+'{'
+    .endl()+'    return (2.0 * near) / (far + near - texture2D(image, coord ).x * (far-near));'
+    .endl()+'}'
+    
+    .endl()+'float compareDepths( in float depth1, in float depth2 )'
+    .endl()+'{'
+    .endl()+'    float aoCap = 1.9;'
+    .endl()+'    float aoMultiplier =20.0;'
+    .endl()+'    float depthTolerance = 0.001;'
+    .endl()+'    float aorange = 100.0;'// units in space the AO effect extends to (this gets divided by the camera far range
+    .endl()+'    float diff = sqrt(clamp(1.0-(depth1-depth2) / (aorange/(far-near)),0.0,1.0));'
+    .endl()+'    float ao = min(aoCap,max(0.0,depth1-depth2-depthTolerance) * aoMultiplier) * diff;'
+    .endl()+'    return ao;'
+    .endl()+'}'
 
     .endl()+'void main()'
     .endl()+'{'

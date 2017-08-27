@@ -126,7 +126,7 @@ CABLES.Op = function()
 	CABLES.Op.prototype.inValueText=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string","display":"text"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
     CABLES.Op.prototype.inValueSelect=function(name,values,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
-    CABLES.Op.prototype.inValueInt=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueInt=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
 
     CABLES.Op.prototype.inFile=function(name,filter,v){var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"file","filter":filter})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -141,7 +141,7 @@ CABLES.Op = function()
         var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT,options)); if(v!==undefined)p.set(v); return p;
     };
     CABLES.Op.prototype.inArray=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); return p; };
-    CABLES.Op.prototype.inValueSlider=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{display:'range'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueSlider=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{'display':'range'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
 
     CABLES.Op.prototype.outFunction=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };

@@ -1,7 +1,8 @@
 
 op.name='ArrayGetValue';
 var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
-var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
+var index=op.inValueInt("index");
+
 var value=op.addOutPort(new Port(op, "value",OP_PORT_TYPE_VALUE));
 array.ignoreValueSerialize=true;
 

@@ -526,6 +526,9 @@ CGL.Shader = function(_cgl, _name) {
     this.setModules = function(names) {
         moduleNames = names;
     };
+
+    this.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
 };
 
 CGL.Shader.prototype.getProgram = function() {
@@ -539,7 +542,7 @@ CGL.Shader.prototype.setFeedbackNames = function(names) {
 
 CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader = function() {
     return ''
-        // .endl()+'{{MODULES_HEAD}}'
+        .endl()+'{{MODULES_HEAD}}'
         .endl() + 'IN vec3 vPosition;'
         .endl() + 'IN vec2 attrTexCoord;'
         .endl() + 'IN vec3 attrVertNormal;'
@@ -553,9 +556,10 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + '{'
         .endl() + '   texCoord=attrTexCoord;'
         .endl() + '   norm=attrVertNormal;'
-        // .endl()+'   {{MODULE_VERTEX_POSITION}}'
+        .endl() + '   vec4 pos=vec4(vPosition,  1.0);'
+        .endl() + '   {{MODULE_VERTEX_POSITION}}'
 
-        .endl() + '   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
+        .endl() + '   gl_Position = projMatrix * mvMatrix * pos;'
         .endl() + '}';
 };
 
@@ -563,10 +567,12 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
     return ''
         // .endl()+'precision highp float;'
         // .endl()+'varying vec3 norm;'
+        .endl()+'{{MODULES_HEAD}}'
         .endl() + 'void main()'
         .endl() + '{'
-
-        .endl() + '   outColor = vec4(0.5,0.5,0.5,1.0);'
+        .endl() + '    vec4 col=vec4(0.5,0.5,0.5,1.0);'
+        .endl() + '    {{MODULE_COLOR}}'
+        .endl() + '    outColor = col;'
         // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
         .endl() + '}';
 };
