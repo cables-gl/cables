@@ -238,7 +238,8 @@ CGL.Shader = function(_cgl, _name) {
 
                 .endl() + '#define UNI uniform'
                 .endl() + '#define IN in'
-                .endl() + '#define OUT out';
+                .endl() + '#define OUT out'
+                .endl();
 
 
             fs = '#version 300 es'
@@ -251,7 +252,8 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '#define IN in'
                 .endl() + '#define UNI uniform'
                 .endl() + 'out vec4 outColor;'
-                .endl() + '#define gl_FragColor outColor';
+                .endl() + '#define gl_FragColor outColor'
+                .endl();
         } else {
             fs = ''
                 .endl() + '// '
@@ -259,7 +261,8 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '// '
                 .endl() + '#define outColor gl_FragColor'
                 .endl() + '#define IN varying'
-                .endl() + '#define UNI uniform';
+                .endl() + '#define UNI uniform'
+                .endl();
 
             vs = ''
                 .endl() + '// '
@@ -268,8 +271,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '#define OUT varying'
                 .endl() + '#define IN attribute'
                 .endl() + '#define UNI uniform'
-
-                .endl() + '';
+                .endl();
             }
 
         if (fs.indexOf("precision") == -1) fs = 'precision highp float;'.endl() + fs;
