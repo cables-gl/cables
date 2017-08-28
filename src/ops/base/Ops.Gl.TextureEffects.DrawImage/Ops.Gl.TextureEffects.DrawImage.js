@@ -35,7 +35,7 @@ var srcVert=''
     .endl()+'UNI float scale;'
     .endl()+'UNI float rotate;'
 
-    .endl()+'IN mat3 transform;'
+    .endl()+'OUT mat3 transform;'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -69,7 +69,6 @@ var srcFrag=''
 
     .endl()+'IN mat3 transform;'
     .endl()+'UNI float rotate;'
-
     +CGL.TextureEffect.getBlendCode()
 
     .endl()+'#ifdef HAS_TEXTUREALPHA'
