@@ -22,7 +22,7 @@ render.onTriggered=doRender;
 
 function doRender()
 {
-    cgl.setShader(shader);
+    cgl.setShader(shader,'shaderMaterial');
     bindTextures();
     trigger.trigger();
     cgl.setPreviousShader();
@@ -48,7 +48,9 @@ function hasUniformInput(name)
 function updateShader()
 {
     op.log('shader update!');
+    shader.glslVersion=0;
     shader.setSource(vertexShader.get(),fragmentShader.get());
+    
     shader.compile();
 
     var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
