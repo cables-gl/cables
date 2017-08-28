@@ -1,8 +1,8 @@
 {{MODULES_HEAD}}
 
 IN vec3 vPosition;
-uniform mat4 projMatrix;
-uniform mat4 mvMatrix;
+UNI mat4 projMatrix;
+UNI mat4 mvMatrix;
 
 void main()
 {
