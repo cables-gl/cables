@@ -41,7 +41,7 @@ function updateMapping()
 var srcVert=''
     // .endl()+'uniform mat4 projection;'
     // .endl()+'uniform mat4 modelview;'
-
+.endl()+'precision highp float;'
     .endl()+'UNI mat4 projMatrix;'
     .endl()+'UNI mat4 modelMatrix;'
     .endl()+'UNI mat4 viewMatrix;'
@@ -75,7 +75,7 @@ var srcVert=''
 
 
 var srcFrag=''
-    // .endl()+'precision mediump float;'
+    .endl()+'precision highp float;'
     .endl()+'IN vec3 vCoords;'
     .endl()+'IN vec3 v_normal;'
     .endl()+'IN vec3 v_eyeCoords;'
@@ -94,10 +94,10 @@ var srcFrag=''
 
 
     .endl()+'#ifdef DO_REFLECTION'
-    .endl()+'    gl_FragColor = textureCube(skybox, T);'
+    .endl()+'    outColor = texture(skybox, T);'
     .endl()+'#endif'
     .endl()+'#ifndef DO_REFLECTION'
-    .endl()+'    gl_FragColor = textureCube(skybox, v_pos);'
+    .endl()+'    outColor = texture(skybox, v_pos);'
     .endl()+'#endif'
 
 

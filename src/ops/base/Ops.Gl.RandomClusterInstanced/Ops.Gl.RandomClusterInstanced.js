@@ -35,10 +35,10 @@ var shader=null;
 var uniDoInstancing=null;
 
 var srcHeadVert=''
-    .endl()+'uniform float do_instancing;'
-    .endl()+'uniform float {{mod}}_time;'
+    .endl()+'UNI float do_instancing;'
+    .endl()+'UNI float {{mod}}_time;'
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   attribute mat4 instMat;'
+    .endl()+'   IN mat4 instMat;'
     // .endl()+'   OUT mat4 instModelMat;'
     .endl()+'#endif'
 

@@ -15,10 +15,12 @@ CGL.SHADERVAR_VERTEX_TEXCOORD = 'attrTexCoord';
 
 CGL.Shader = function(_cgl, _name) {
     if (!_cgl) throw "shader constructed without cgl";
+    var self = this;
     var name = _name || 'unknown';
 
-    this.glslVersion = "";
-    var self = this;
+    this.glslVersion = 0;
+    if(_cgl.glVersion>1)this.glslVersion=300;
+
     this._program = null;
     var uniforms = [];
     var defines = [];
@@ -41,8 +43,8 @@ CGL.Shader = function(_cgl, _name) {
     this.glPrimitive = null;
     this.offScreenPass = false;
     this._extensions = [];
-    this.srcVert = CGL.Shader.getDefaultVertexShader();
-    this.srcFrag = CGL.Shader.getDefaultFragmentShader();
+    this.srcVert = this.getDefaultVertexShader();
+    this.srcFrag = this.getDefaultFragmentShader();
     this.lastCompile = 0;
 
     var moduleNames = [];
@@ -56,6 +58,7 @@ CGL.Shader = function(_cgl, _name) {
     this.setSource = function(srcVert, srcFrag) {
         this.srcVert = srcVert;
         this.srcFrag = srcFrag;
+        this._needsRecompile = true;
     };
 
     this.enableExtension = function(name) {
@@ -220,8 +223,6 @@ CGL.Shader = function(_cgl, _name) {
         var vs = '';
         var fs = '';
 
-        if(cgl.glVersion>1)self.glslVersion=300;
-        else self.glslVersion=0;
 
         if (self.glslVersion == 300)
         {
@@ -238,8 +239,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '#define UNI uniform'
                 .endl() + '#define IN in'
                 .endl() + '#define OUT out'
-
-                .endl() + '';
+                .endl();
 
 
             fs = '#version 300 es'
@@ -253,19 +253,17 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '#define UNI uniform'
                 .endl() + 'out vec4 outColor;'
                 .endl() + '#define gl_FragColor outColor'
-
-                .endl() + '';
+                .endl();
         } else {
             fs = ''
                 .endl() + '// '
                 .endl() + '// fragment shader '+name
                 .endl() + '// '
-
                 .endl() + '#define outColor gl_FragColor'
                 .endl() + '#define IN varying'
                 .endl() + '#define UNI uniform'
+                .endl();
 
-                .endl() + '';
             vs = ''
                 .endl() + '// '
                 .endl() + '// vertex shader '+name
@@ -273,15 +271,14 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '#define OUT varying'
                 .endl() + '#define IN attribute'
                 .endl() + '#define UNI uniform'
-
-                .endl() + '';
+                .endl();
             }
 
         if (fs.indexOf("precision") == -1) fs = 'precision highp float;'.endl() + fs;
-        if (vs.indexOf("precision") == -1) vs = 'precision highp float;'.endl() + fs;
+        if (vs.indexOf("precision") == -1) vs = 'precision highp float;'.endl() + vs;
 
-        vs = extensionString +vs+ definesStr + self.srcVert;
-        fs = extensionString+fs + definesStr + self.srcFrag;
+        vs = extensionString + vs + definesStr + self.srcVert;
+        fs = extensionString + fs + definesStr + self.srcFrag;
 
         // console.log(name);
         // console.log(fs);
@@ -318,8 +315,8 @@ CGL.Shader = function(_cgl, _name) {
                     srcHeadVert += modules[j].srcHeadVert || '';
                     srcHeadFrag += modules[j].srcHeadFrag || '';
 
-                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- end mod ------\n';;
-                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- end mod ------\n';;
+                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- end mod ------\n';
+                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- end mod ------\n';
 
                     if(modules[j].srcHeadVert)srcVert+='\n//---- end mod ------\n';
                     if(modules[j].srcHeadFrag)srcFrag+='\n//---- end mod ------\n';
@@ -459,7 +456,8 @@ CGL.Shader = function(_cgl, _name) {
 
         if (!cgl.gl.getProgramParameter(program, cgl.gl.LINK_STATUS)) {
             console.error(name + " shader linking fail...");
-            console.log(this.srcFrag);
+            console.log('srcFrag',self.srcFrag);
+            console.log('srcVert',self.srcVert);
             console.log(name + ' programinfo: ', cgl.gl.getProgramInfoLog(program));
 
             console.log('--------------------------------------');
@@ -580,7 +578,7 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
 CGL.Shader.getErrorFragmentShader = function() {
     return ''
         // .endl()+'precision mediump float;'
-        .endl() + 'IN vec3 norm;'
+        // .endl() + 'IN vec3 norm;'
         .endl() + 'void main()'
         .endl() + '{'
         .endl() + '   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'

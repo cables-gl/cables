@@ -28,13 +28,13 @@ var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
-    .endl()+'uniform sampler2D texture;'
+    .endl()+'uniform sampler2D text;'
     .endl()+'uniform float exposure;'
 
     .endl()+'#ifdef METHOD_LINEAR'
     .endl()+'   void main()'
     .endl()+'   {'
-    .endl()+'      vec4 col = texture2D(texture, texCoord );'
+    .endl()+'      vec4 col = texture2D(text, texCoord );'
     .endl()+'     gl_FragColor = vec4( pow(col.rgb*exposure,vec3(1.0/2.2)) ,col.a);'
     .endl()+'   }'
     .endl()+'#endif'
@@ -42,7 +42,7 @@ var srcFrag=''
     .endl()+'#ifdef METHOD_REINHARD'
     .endl()+'   void main()'
     .endl()+'   {'
-    .endl()+'      vec4 col = texture2D(texture, texCoord );'
+    .endl()+'      vec4 col = texture2D(text, texCoord );'
     .endl()+'      col.rgb*=exposure;'
     .endl()+'      col.rgb = col.rgb/(1.0+col.rgb);'
     .endl()+'      gl_FragColor = vec4( pow(col.rgb,vec3(1.0/2.2)) ,col.a);'
@@ -52,7 +52,7 @@ var srcFrag=''
     .endl()+'#ifdef METHOD_HEJLDAWSON'
     .endl()+'   void main()'
     .endl()+'   {'
-    .endl()+'       vec4 col = texture2D(texture, texCoord );'
+    .endl()+'       vec4 col = texture2D(text, texCoord );'
     .endl()+'       col.rgb*=exposure;'
     .endl()+'       vec3 x=max(vec3(0.0),col.rgb-0.004);'
     .endl()+'       gl_FragColor = vec4( (x*(6.2*x+.5))/(x*(6.2*x+1.7)+0.06) ,col.a);'
@@ -67,23 +67,23 @@ var srcFrag=''
     .endl()+'   float E = 0.02;'
     .endl()+'   float F = 0.30;'
     .endl()+'   float W = 11.2;'
-    
+
     .endl()+'   vec3 uncharted2Tonemap(vec3 x)'
     .endl()+'   {'
     .endl()+'     return ((x*(A*x+C*B)+D*E)/(x*(A*x+B)+D*F))-E/F;'
     .endl()+'   }'
-    
+
     .endl()+'   void main()'
     .endl()+'   {'
-    .endl()+'      vec4 col = texture2D(texture, texCoord );'
+    .endl()+'      vec4 col = texture2D(text, texCoord );'
     .endl()+'      col.rgb*=exposure;'
-    
+
     .endl()+'     float exposureBias = 2.0;'
     .endl()+'     vec3 curr = uncharted2Tonemap(exposureBias*col.rgb);'
-    
+
     .endl()+'     vec3 whiteScale = 1.0/uncharted2Tonemap(vec3(W));'
     .endl()+'     vec3 color = curr*whiteScale;'
-    
+
     .endl()+'     vec3 retColor = pow(color,vec3(1.0/2.2));'
     .endl()+'     gl_FragColor = vec4(retColor,col.a);'
     .endl()+'   }'
@@ -111,4 +111,3 @@ render.onTriggered=function()
     cgl.setPreviousShader();
     trigger.trigger();
 };
-

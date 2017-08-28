@@ -20,9 +20,9 @@ simTexPosOut.set(simTexPos);
 // position
 
 var srcHeadVert=''
-    .endl()+'attribute float attrVertIndex;'
+    .endl()+'IN float attrVertIndex;'
 
-    .endl()+'uniform sampler2D {{mod}}_texturePos;'
+    .endl()+'UNI sampler2D {{mod}}_texturePos;'
     .endl();
 
 var srcBodyVert=''

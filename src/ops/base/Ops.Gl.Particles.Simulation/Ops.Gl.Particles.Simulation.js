@@ -82,9 +82,8 @@ var outTex=op.outObject("simtex",simTexture);
 // draw
 
 var srcHeadVert=''
-    .endl()+'uniform float {{mod}}_time;'
-    .endl()+'uniform sampler2D {{mod}}_texture;'
-    // .endl()+'attribute float attrVertIndex;'
+    .endl()+'UNI float {{mod}}_time;'
+    .endl()+'UNI sampler2D {{mod}}_texture;'
 
     .endl();
 
