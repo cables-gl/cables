@@ -15,10 +15,13 @@ CGL.SHADERVAR_VERTEX_TEXCOORD = 'attrTexCoord';
 
 CGL.Shader = function(_cgl, _name) {
     if (!_cgl) throw "shader constructed without cgl";
+    var self = this;
     var name = _name || 'unknown';
 
     this.glslVersion = "";
-    var self = this;
+    if(cgl.glVersion>1)this.glslVersion=300;
+    else this.glslVersion=0;
+
     this._program = null;
     var uniforms = [];
     var defines = [];
@@ -220,8 +223,6 @@ CGL.Shader = function(_cgl, _name) {
         var vs = '';
         var fs = '';
 
-        if(cgl.glVersion>1)self.glslVersion=300;
-        else self.glslVersion=0;
 
         if (self.glslVersion == 300)
         {
