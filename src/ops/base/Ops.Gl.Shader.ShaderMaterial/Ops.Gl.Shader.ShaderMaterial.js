@@ -26,6 +26,7 @@ var needsUpdate=true;
 function updateLater()
 {
     needsUpdate=true;
+    updateShader();
 }
 
 
