@@ -6,7 +6,7 @@ var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 
 var srcVert=''
-    .endl()+'attribute float attrVertIndex;'
+    .endl()+'IN float attrVertIndex;'
     .endl()+'IN vec2 attrTexCoord;'
     .endl()+'UNI mat4 projMatrix;'
     .endl()+'UNI mat4 mvMatrix;'
