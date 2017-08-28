@@ -50,5 +50,14 @@
         ],
         "name": "Ops.Gl.TextureEffects.ImageCompose"
     },
-    "summary": "Compose Images and effects as layers to generate new Images"
+    "summary": "Compose Images and effects as layers to generate new Images",
+    "credits": [
+        {
+            "title": "Photoshop math GLSL shaders",
+            "author": "Romain Dura",
+            "url": "https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/"
+        }
+    ]
+
+
 }
