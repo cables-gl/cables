@@ -18,9 +18,8 @@ CGL.Shader = function(_cgl, _name) {
     var self = this;
     var name = _name || 'unknown';
 
-    this.glslVersion = "";
-    if(cgl.glVersion>1)this.glslVersion=300;
-    else this.glslVersion=0;
+    this.glslVersion = 0;
+    if(_cgl.glVersion>1)this.glslVersion=300;
 
     this._program = null;
     var uniforms = [];
