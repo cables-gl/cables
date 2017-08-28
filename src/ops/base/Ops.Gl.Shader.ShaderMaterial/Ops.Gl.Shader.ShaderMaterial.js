@@ -9,7 +9,8 @@ var outShader=op.outObject("Shader");
 var cgl=op.patch.cgl;
 var uniformInputs=[];
 var uniformTextures=[];
-var shader=new CGL.Shader(cgl);
+var shader=new CGL.Shader(cgl,"shaderMaterial");
+shader.glslVersion=0;
 fragmentShader.set(shader.getDefaultFragmentShader());
 vertexShader.set(shader.getDefaultVertexShader());
 updateShader();
@@ -22,7 +23,7 @@ render.onTriggered=doRender;
 
 function doRender()
 {
-    cgl.setShader(shader,'shaderMaterial');
+    cgl.setShader(shader);
     bindTextures();
     trigger.trigger();
     cgl.setPreviousShader();
@@ -48,7 +49,7 @@ function hasUniformInput(name)
 function updateShader()
 {
     op.log('shader update!');
-    shader.glslVersion=0;
+    
     shader.setSource(vertexShader.get(),fragmentShader.get());
     
     shader.compile();
@@ -75,7 +76,6 @@ function updateShader()
                 newInputTex.uniform=new CGL.Uniform(shader,'f',uniform.name,uniformTextures.length);
                 uniformTextures.push(newInputTex);
             }
-
         }
     }
     
