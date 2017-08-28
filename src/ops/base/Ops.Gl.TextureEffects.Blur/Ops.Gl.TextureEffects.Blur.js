@@ -35,9 +35,6 @@ var srcFrag=''
     .endl()+'    uniform sampler2D imageMask;'
     .endl()+'  #endif'
 
-    // .endl()+'uniform sampler2D texture;'
-
-
 
     .endl()+''
     .endl()+'float random(vec3 scale, float seed)'

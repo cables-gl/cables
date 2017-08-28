@@ -19,11 +19,11 @@ var srcFrag=''
     .endl()+'uniform float threshhold;'
     .endl()+'uniform float mul;'
 
-    .endl()+'uniform sampler2D texture;'
+    .endl()+'uniform sampler2D text;'
 
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   vec4 col = texture2D(texture, texCoord );'
+    .endl()+'   vec4 col = texture2D(text, texCoord );'
 
     .endl()+'   float gray = dot(vec3(0.2126,0.7152,0.0722), col.rgb );'
     .endl()+'   if(gray < threshhold) col=col-(threshhold-gray)*mul;'
