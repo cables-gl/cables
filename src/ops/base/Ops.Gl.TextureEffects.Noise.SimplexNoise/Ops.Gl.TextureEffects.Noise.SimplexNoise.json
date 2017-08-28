@@ -33,5 +33,14 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Noise.SimplexNoise"
-    }
+    },
+    "credits": [
+        {
+            "title": "GPU-Noise-Lib",
+            "author": "Brian Sharpe",
+            "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
+            "license": "Public Domain"
+        }
+    ]
+
 }

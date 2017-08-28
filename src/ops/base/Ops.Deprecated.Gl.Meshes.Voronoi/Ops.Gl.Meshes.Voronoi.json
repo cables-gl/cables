@@ -1,1 +1,11 @@
-{"libs":["rhill-voronoi-core.js"]}
+{
+    "libs":["rhill-voronoi-core.js"],
+    "credits": [
+        {
+            "title": "Voronoi Library",
+            "author": "Raymond Hill",
+            "url": "https://github.com/gorhill/Javascript-Voronoi",
+            "license":"MIT"
+        }
+    ]
+}

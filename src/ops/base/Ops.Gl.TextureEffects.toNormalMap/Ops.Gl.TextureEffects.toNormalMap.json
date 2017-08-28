@@ -17,5 +17,13 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.toNormalMap"
-    }
+    },
+    "credits": [
+        {
+            "title": "NormalMap Shader",
+            "author": "moka",
+            "url": "https://forum.openframeworks.cc/t/compute-normal-map-from-image/1400/11"
+        }
+    ]
+
 }

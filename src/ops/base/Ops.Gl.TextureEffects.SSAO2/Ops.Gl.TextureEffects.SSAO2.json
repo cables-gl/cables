@@ -41,5 +41,14 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.SSAO2"
-    }
+    },
+    "summary": "screen space ambient occlusion",
+    "credits": [
+        {
+            "title": "SSAO Shader",
+            "author": "Martins Upitis",
+            "url": "http://devlog-martinsh.blogspot.com"
+        }
+    ]
+
 }

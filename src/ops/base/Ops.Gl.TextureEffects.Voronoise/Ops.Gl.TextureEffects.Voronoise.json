@@ -54,5 +54,12 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Voronoise"
-    }
+    },
+    "credits": [
+        {
+            "title": "Voronoise Shader",
+            "author": "Patricio Gonzalez Vivo & Jen Lowe",
+            "url": "https://thebookofshaders.com/12/"
+        }
+    ]
 }

@@ -38,5 +38,14 @@
         ],
         "name": "Ops.Gl.TextureEffects.Noise.PerlinNoise"
     },
-    "summary": "draw perlin noise into an image"
+    "summary": "draw perlin noise into an image",
+    "credits": [
+        {
+            "title": "GPU-Noise-Lib",
+            "author": "Brian Sharpe",
+            "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
+            "license": "Public Domain"
+        }
+    ]
+
 }

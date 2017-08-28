@@ -21,5 +21,14 @@
         ],
         "name": "Ops.Math.PerlinNoise"
     },
-    "summary": "outputs a perlin noise value  like random"
+    "summary": "outputs a perlin noise value like random",
+    "credits": [
+        {
+            "title": "Perlin Noise Library",
+            "author": "Stefan Gustavson / josephg",
+            "url": "https://github.com/josephg/noisejs/blob/master/perlin.js",
+            "license": "Public Domain"
+        }
+    ]
+
 }
