@@ -1,3 +1,26 @@
 {
-    "summary": "request a json file from another server (ajax, url, json)"
+    "summary": "request a json file from another server (ajax, url, json)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "JsonP"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "data"
+            },
+            {
+                "type": "0",
+                "name": "Is Loading"
+            }
+        ],
+        "name": "Ops.Json.AjaxRequest"
+    }
 }

@@ -64,6 +64,10 @@ element.onkeyup = function(e)
     }
 };
 
+op.onDelete=function()
+{
+    element.remove();    
+};
 
 inFocus.onTriggered=function()
 {

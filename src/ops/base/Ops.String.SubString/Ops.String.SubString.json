@@ -1,0 +1,26 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "End"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.SubString"
+    },
+    "summary": "subset of a string between one index and another"
+}

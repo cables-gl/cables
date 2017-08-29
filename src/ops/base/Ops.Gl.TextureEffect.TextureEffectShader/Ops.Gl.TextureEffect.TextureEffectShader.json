@@ -7,23 +7,15 @@
             },
             {
                 "type": "2",
-                "name": "Geometry"
+                "name": "Shader"
             },
             {
                 "type": "0",
-                "name": "Update All"
+                "name": "Blend Mode"
             },
             {
                 "type": "0",
-                "name": "Update Vertices"
-            },
-            {
-                "type": "0",
-                "name": "Update Texcoords"
-            },
-            {
-                "type": "0",
-                "name": "Vertex Numbers"
+                "name": "Amount"
             }
         ],
         "portsOut": [
@@ -32,7 +24,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.RenderGeometry"
-    },
-    "summary": "render a geometry as mesh"
+        "name": "Ops.Gl.TextureEffect.TextureEffectShader"
+    }
 }

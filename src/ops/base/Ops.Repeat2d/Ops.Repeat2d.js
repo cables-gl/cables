@@ -1,7 +1,6 @@
 op.name='Repeat 2d';
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-// var numx=op.addInPort(new Port(op,"num x"));
-// var numy=op.addInPort(new Port(op,"num y"));
+
 var numx=op.inValueInt("num x");
 var numy=op.inValueInt("num y");
 var mul=op.addInPort(new Port(op,"mul"));
