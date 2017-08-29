@@ -1,0 +1,18 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Delta"
+            }
+        ],
+        "name": "Ops.Math.Delta"
+    },
+    "summary": "difference to the last value"
+}
