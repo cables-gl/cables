@@ -13,5 +13,6 @@
             }
         ],
         "name": "Ops.String.Uppercase"
-    }
+    },
+    "summary": "removes whitespace from both ends of a string"
 }

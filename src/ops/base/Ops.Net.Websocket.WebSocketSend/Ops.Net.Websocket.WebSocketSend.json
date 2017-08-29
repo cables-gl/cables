@@ -1,0 +1,19 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Connection"
+            },
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "1",
+                "name": "Send"
+            }
+        ],
+        "name": "Ops.Net.Websocket.WebSocketSend"
+    }
+}
