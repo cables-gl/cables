@@ -1,10 +1,17 @@
 {
-    "summary": "Returns the absolute, positive value",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
                 "name": "number"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "max"
             }
         ],
         "portsOut": [
@@ -13,6 +20,6 @@
                 "name": "result"
             }
         ],
-        "name": "Ops.Math.Abs"
+        "name": "Ops.Math.SmoothStep"
     }
 }

@@ -1,1 +1,18 @@
-{"summary":"returns the fractional part of a number"}
+{
+    "summary": "returns the fractional part of a number",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.Fract"
+    }
+}

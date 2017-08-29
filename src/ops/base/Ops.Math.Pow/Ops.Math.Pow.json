@@ -1,18 +1,21 @@
 {
-    "summary": "Returns the absolute, positive value",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "number"
+                "name": "Base"
+            },
+            {
+                "type": "0",
+                "name": "Exponent"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "Result"
             }
         ],
-        "name": "Ops.Math.Abs"
+        "name": "Ops.Math.Pow"
     }
 }

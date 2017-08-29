@@ -1,1 +1,30 @@
-{"summary":"Calculates the Distance between two 2d points"}
+{
+    "summary": "Calculates the Distance between two 2d points",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "x1"
+            },
+            {
+                "type": "0",
+                "name": "y1"
+            },
+            {
+                "type": "0",
+                "name": "x2"
+            },
+            {
+                "type": "0",
+                "name": "y2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "distance"
+            }
+        ],
+        "name": "Ops.Math.Distance2d"
+    }
+}

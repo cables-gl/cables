@@ -1,10 +1,14 @@
 {
-    "summary": "Returns the absolute, positive value",
+    "summary": "is n1 smaller than n2 ?",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "number"
+                "name": "number1"
+            },
+            {
+                "type": "0",
+                "name": "number2"
             }
         ],
         "portsOut": [
@@ -13,6 +17,6 @@
                 "name": "result"
             }
         ],
-        "name": "Ops.Math.Abs"
+        "name": "Ops.Math.Compare.Lesser"
     }
 }

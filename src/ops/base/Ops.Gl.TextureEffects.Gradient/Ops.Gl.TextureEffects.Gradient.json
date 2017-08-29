@@ -1,0 +1,73 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "Type"
+            },
+            {
+                "type": "0",
+                "name": "Pos"
+            },
+            {
+                "type": "0",
+                "name": "Smoothstep"
+            },
+            {
+                "type": "0",
+                "name": "r1"
+            },
+            {
+                "type": "0",
+                "name": "g1"
+            },
+            {
+                "type": "0",
+                "name": "b1"
+            },
+            {
+                "type": "0",
+                "name": "r2"
+            },
+            {
+                "type": "0",
+                "name": "g2"
+            },
+            {
+                "type": "0",
+                "name": "b2"
+            },
+            {
+                "type": "0",
+                "name": "r3"
+            },
+            {
+                "type": "0",
+                "name": "g3"
+            },
+            {
+                "type": "0",
+                "name": "b3"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Gradient"
+    }
+}
