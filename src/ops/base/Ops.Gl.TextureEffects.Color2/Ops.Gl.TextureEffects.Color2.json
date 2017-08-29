@@ -33,5 +33,6 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Color2"
-    }
+    },
+    "summary": "fill image using a color (overlay)"
 }
