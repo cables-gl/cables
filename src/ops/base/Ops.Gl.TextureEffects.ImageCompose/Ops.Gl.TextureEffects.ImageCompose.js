@@ -1,9 +1,10 @@
 op.name='image compose';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-// var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+
+var width=op.inValueInt("width");
+var height=op.inValueInt("height");
+
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
 var bgAlpha=op.inValueSlider("Background Alpha",1);
@@ -190,9 +191,6 @@ function onWrapChange()
 
 twrap.set('clamp to edge');
 twrap.onValueChanged=onWrapChange;
-
-
-
 
 function onFilterChange()
 {

@@ -21,19 +21,16 @@ var shader=null;
 
 inTexture.onChange=function()
 {
-    console.log("TEXTURE!!!");
     var tex=inTexture.get();
     shader=null;
     if(tex)
     {
         shader=new CGL.Shader(cgl,'MinimalMaterial');
         shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-        
+
         shader.setSource(attachments.shader_vert,attachments.shader_frag);
         new CGL.Uniform(shader,'t','tex',0);
-
     }
-
 };
 
 
@@ -91,10 +88,10 @@ render.onTriggered=function()
 
 function rebuild()
 {
-    
+
     var currentViewPort=cgl.getViewPort().slice();
     if(currentViewPort[2]==w && currentViewPort[3]==h)return;
-    
+
     var xx=0,xy=0;
 
     w=currentViewPort[2];
@@ -114,7 +111,7 @@ function rebuild()
              1.0, 1.0,
              0.0, 1.0
         ]);
-    
+
     else
         geom.texCoords = new Float32Array([
              1.0, 1.0,

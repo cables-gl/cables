@@ -11,7 +11,6 @@ var ratio=op.inValue("Ratio",1);
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 
-
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
@@ -29,7 +28,6 @@ var srcFrag=''
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'       col=texture2D(tex,texCoord);'
     .endl()+'       vec2 tcPos=vec2(texCoord.x,(texCoord.y-0.5)*ratio+0.5);'
-
     .endl()+'       float dist = distance(tcPos, vec2(0.5,0.5))*amount;'
     .endl()+'       col.rgb *= smoothstep(lensRadius1, lensRadius2, dist);'
     .endl()+'   #endif'

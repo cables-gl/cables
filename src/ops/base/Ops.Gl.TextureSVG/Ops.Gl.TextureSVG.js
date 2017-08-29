@@ -1,15 +1,13 @@
 op.name='SVG Texture';
 
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-var texWidth=op.addInPort(new Port(op,"texture width"));
-var texHeight=op.addInPort(new Port(op,"texture height"));
 
+var texWidth=op.inValueInt("texture width");
+var texHeight=op.inValueInt("texture height");
 
 var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
 var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 
-
-// var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");
 
 
@@ -37,7 +35,6 @@ function createCanvas()
     canvas = document.createElement('canvas');
     ctx = canvas.getContext('2d');
 
-    // textureOut.get().setSize(texWidth.get(),texHeight.get());
     ctx.canvas.width=canvas.width=texWidth.get();
     ctx.canvas.height=canvas.height=texHeight.get();
 

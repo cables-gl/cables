@@ -2,33 +2,36 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "file"
+                "type": "1",
+                "name": "render"
             },
             {
                 "type": "0",
-                "name": "texture width"
+                "name": "r"
             },
             {
                 "type": "0",
-                "name": "texture height"
+                "name": "g"
             },
             {
                 "type": "0",
-                "name": "wrap"
+                "name": "b"
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "Blend Mode"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "texture"
+                "type": "1",
+                "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureSVG"
-    },
-    "summary": "Load a SVG image and convert to pixel texture"
+        "name": "Ops.Gl.TextureEffects.Color2"
+    }
 }

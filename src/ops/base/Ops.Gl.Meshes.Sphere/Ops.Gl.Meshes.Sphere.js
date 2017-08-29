@@ -2,15 +2,13 @@
 op.name='Sphere';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var inStacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
-var inSlices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
+var inStacks=op.inValueInt("stacks",32);
+var inSlices=op.inValueInt("slices",32);
 var inRadius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
-inStacks.set(32);
-inSlices.set(32);
 inRadius.set(1);
 geomOut.ignoreValueSerialize=true;
 
