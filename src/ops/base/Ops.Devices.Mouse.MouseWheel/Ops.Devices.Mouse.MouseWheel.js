@@ -28,12 +28,12 @@ var value=0;
 var anim=new CABLES.TL.Anim();
 anim.defaultEasing=CABLES.TL.EASING_EXPO_OUT;
 
-var startTime=Date.now()/1000.0;
+var startTime=CABLES.now()/1000.0;
 var v=0;
 var smoothTimer=0;
 
 anim.clear();
-anim.setValue(Date.now()/1000.0-startTime,absVal.get());
+anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
 var dir=1;
 var isWindows=navigator.appVersion.indexOf("Win")!=-1;
 
@@ -55,7 +55,7 @@ max.onChange=function()
 reset.onTriggered=function()
 {
     anim.clear();
-    anim.setValue(Date.now()/1000.0-startTime,valIn.get());
+    anim.setValue(CABLES.now()/1000.0-startTime,valIn.get());
 
     absVal.set(valIn.get());
 };
@@ -69,13 +69,13 @@ valIn.onChange=function()
     absVal.set( v );
     
     anim.clear();
-    anim.setValue(Date.now()/1000.0-startTime,absVal.get());
+    anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
 
 };
 
 function updateSmooth()
 {
-    var v=anim.getValue( Date.now()/1000.0-startTime );
+    var v=anim.getValue( CABLES.now()/1000.0-startTime );
     
     absVal.set( v );
 }
@@ -126,8 +126,8 @@ function onMouseWheel(e)
     else
     {
         anim.clear();
-        anim.setValue(Date.now()/1000.0-startTime,absVal.get());
-        anim.setValue(Date.now()/1000.0-startTime+smoothSpeed.get(),v);
+        anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
+        anim.setValue(CABLES.now()/1000.0-startTime+smoothSpeed.get(),v);
     }
     
     if(preventScroll.get()) e.preventDefault();

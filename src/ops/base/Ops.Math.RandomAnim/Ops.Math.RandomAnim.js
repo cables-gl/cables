@@ -9,18 +9,17 @@ var seed=op.inValue("random seed",0);
 
 var duration=op.inValue("duration",0.5);
 
-// var offset=op.inValue("offset",0);
-
 var result=op.outValue("result");
 
 var anim=new CABLES.TL.Anim();
-anim.createPort(op,"easing",init);
+anim.createPort(op,"easing",reinit);
 
-init();
+reinit();
 
-min.onChange=init;
-max.onChange=init;
-duration.onChange=init;
+min.onChange=reinit;
+max.onChange=reinit;
+pause.onChange=reinit;
+duration.onChange=reinit;
 
 function getRandom()
 {
@@ -29,10 +28,15 @@ function getRandom()
     return Math.seededRandom() * ( maxVal - minVal ) + minVal;
 }
 
+function reinit()
+{
+    init(getRandom());
+}
+
 function init(v)
 {
     anim.clear();
-    if(v===undefined) v=getRandom();
+    
     anim.setValue(op.patch.freeTimer.get(), v);
     if(pause.get()!=0.0)anim.setValue(op.patch.freeTimer.get()+pause.get(), v);
     

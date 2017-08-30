@@ -1,27 +1,26 @@
-op.name="ValueSwitcher";
+op.name = "ValueSwitcher";
 
-var idx=op.inValueInt("Index");
+var indexPort = op.inValueInt("Index");
+var resultPort = op.outValue("Result");
 
-var valuePorts=[];
+var NUM_PORTS = 10;
+var valuePorts = [];
 
-var result=op.outValue("Result");
-
-for(var i=0;i<10;i++)
-{
-    var p=op.inValue("Value "+i);
-    valuePorts.push( p );
-    p.onChange=update;
-    
+for(var i=0; i<NUM_PORTS; i++) {
+    var p = op.inValue("Value " + i);
+    valuePorts.push(p);
+    p.onChange = update;
 }
 
+indexPort.onChange = update;
 
-idx.onChange=update;
-
-function update()
-{
-    if(idx.get()>=0 && idx.get()<valuePorts.length)
-    {
-        result.set( valuePorts[idx.get()].get() );
+function update() {
+    var index = indexPort.get();
+    var indexNumber = Number(index); // make sure it really is a number
+    op.log("index: ", index);
+    if(!isNaN(indexNumber) && indexNumber >= 0 && indexNumber < NUM_PORTS) {
+        op.log("valuePorts[index]", valuePorts[indexNumber]);
+        resultPort.set(valuePorts[indexNumber].get());
     }
     
 }

@@ -17,13 +17,6 @@ var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var triggerLookat=this.addOutPort(new Port(this,"transform lookat",OP_PORT_TYPE_FUNCTION));
 var idx=this.addOutPort(new Port(this,"index"));
 
-var doAlign=this.addInPort(new Port(this,"align to path",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-doAlign.set(true);
-
-var size=this.addInPort(new Port(this,"size",OP_PORT_TYPE_VALUE));
-size.set(1);
-
-
 var vec=vec3.create();
 var vecn=vec3.create();
 var cgl=this.patch.cgl;
@@ -54,25 +47,21 @@ function setup()
 
     var i=0;
     var arr=arrayIn.get();
-    if(!arr)return;
     timeStep=parseFloat(duration.get());
 
     for(i=0;i<arr.length;i+=3)
     {
-        animX.setValue(i/3*timeStep,arr[i+0]*size.get());
-        animY.setValue(i/3*timeStep,arr[i+1]*size.get());
-        animZ.setValue(i/3*timeStep,arr[i+2]*size.get());
-        animLength=i/3*timeStep+lookAhead.get();
+        animX.setValue(i/3*timeStep,arr[i+0]);
+        animY.setValue(i/3*timeStep,arr[i+1]);
+        animZ.setValue(i/3*timeStep,arr[i+2]);
+        animLength=i/3*timeStep;
     }
     
     for(i=0;i<arr.length/3;i++)
     {
         var t = i*timeStep;
-        // var nt = (i*timeStep+timeStep*lookAhead.get())%animLength;
-        var nt = (t+lookAhead.get()+offset.get())%(animLength);
-        // var nt = i+timeStep+ ( (i+timeStep)+(timeStep*lookAhead.get())+parseFloat(timeStep*offset.get()))%animLength;
-
-
+        var nt = (i*timeStep+timeStep)%animLength;
+        
         vec3.set(vec, 
             animX.getValue(t),
             animY.getValue(t),
@@ -83,35 +72,34 @@ function setup()
             animY.getValue(nt),
             animZ.getValue(nt)
         );
-
-        // vec3.set(vec,vecn[0]-vec[0],vecn[1]-vec[1],vecn[2]-vec[2]);
-        // vec3.normalize(vec,vec);
-        // vec3.set(vecn,0,0,1);
-
-        vec3.set(vec,vec[0],vec[1],vec[2]);
-        vec3.normalize(vec,vec);
-
-        vec3.set(vecn,vecn[0],vecn[1],vecn[2]);
-        vec3.normalize(vecn,vecn);
-
-
     
-        if(doAlign.get())
-        {
-            quat.rotationTo(q,vecn,vec);
+    // console.log( nt,animLength,vecn );
+    
+    
+        vec3.set(vec,vecn[0]-vec[0],vecn[1]-vec[1],vecn[2]-vec[2]);
+        vec3.normalize(vec,vec);
+        vec3.set(vecn,0,0,1);
+    
+        quat.rotationTo(q,vecn,vec);
+        
+        
+        
+        
+        animQX.setValue(i*timeStep,q[0]);
+        animQY.setValue(i*timeStep,q[1]);
+        animQZ.setValue(i*timeStep,q[2]);
+        animQW.setValue(i*timeStep,q[3]);
 
-            animQX.setValue(i*timeStep,q[0]);
-            animQY.setValue(i*timeStep,q[1]);
-            animQZ.setValue(i*timeStep,q[2]);
-            animQW.setValue(i*timeStep,q[3]);
-        }
+
+        // t,nt);
+
+
     }
+
 }
 
-size.onValueChange(setup);
 arrayIn.onValueChange(setup);
 duration.onValueChange(setup);
-doAlign.onValueChange(setup);
 
 var q=quat.create();
 var qMat=mat4.create();
@@ -146,12 +134,9 @@ function render()
     cgl.pushMvMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
 
-    if(doAlign.get())
-    {
-        CABLES.TL.Anim.slerpQuaternion(t,q,animQX,animQY,animQZ,animQW);
-        mat4.fromQuat(qMat, q);
-        mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
-    }
+    CABLES.TL.Anim.slerpQuaternion(t,q,animQX,animQY,animQZ,animQW);
+    mat4.fromQuat(qMat, q);
+    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
 
     trigger.trigger();
     cgl.popMvMatrix();
