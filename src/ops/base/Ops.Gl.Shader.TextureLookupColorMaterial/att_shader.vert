@@ -1,10 +1,10 @@
 {{MODULES_HEAD}}
-attribute vec3 vPosition;
-attribute vec2 attrTexCoord;
+IN vec3 vPosition;
+IN vec2 attrTexCoord;
 
-varying vec3 norm;
+OUT vec3 norm;
 #ifdef HAS_TEXTURES
-    varying vec2 texCoord;
+    OUT vec2 texCoord;
 #endif
 
 uniform mat4 projMatrix;

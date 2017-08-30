@@ -9,11 +9,11 @@ opacity.set(1);
 var srcVert=''
     .endl()+'{{MODULES_HEAD}}'
 
-    .endl()+'attribute vec3 vPosition;'
-    .endl()+'attribute vec4 attrVertColor;'
-    .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 mvMatrix;'
-    .endl()+'varying vec4 color;'
+    .endl()+'IN vec3 vPosition;'
+    .endl()+'IN vec4 attrVertColor;'
+    .endl()+'UNI mat4 projMatrix;'
+    .endl()+'UNI mat4 mvMatrix;'
+    .endl()+'OUT vec4 color;'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -29,8 +29,9 @@ var srcVert=''
     .endl()+'precision highp float;'
     .endl()+'{{MODULES_HEAD}}'
 
-    .endl()+'varying vec4 color;'
-    .endl()+'uniform float opacity;'
+    .endl()+'IN vec4 color;'
+    .endl()+'UNI float opacity;'
+
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'{{MODULE_BEGIN_FRAG}}'
@@ -40,7 +41,7 @@ var srcVert=''
     .endl()+'   col.a*=opacity;'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
-    
+
 var doRender=function()
 {
     cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);

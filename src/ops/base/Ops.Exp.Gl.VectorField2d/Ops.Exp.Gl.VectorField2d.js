@@ -33,15 +33,15 @@ reset.onTriggered=function()
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'uniform sampler2D tex;'
-    .endl()+'uniform sampler2D texField;'
-    .endl()+'uniform float time;'
-    .endl()+'varying vec2 texCoord;'
-    
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'UNI sampler2D texField;'
+    .endl()+'UNI float time;'
+    .endl()+'IN vec2 texCoord;'
+
     .endl()+'float c;'
     .endl()+'float c1;'
     .endl()+'float c2;'
-    
+
 
     .endl()+'float random(vec2 co)'
     .endl()+'{'
@@ -73,13 +73,13 @@ var srcFrag=''
     .endl()+'   float x=( c+field.r );'
     .endl()+'   float y=( c1+field.g );'
     .endl()+'   float z=( (field.b)*31.1+0.5 );'
-    
+
     .endl()+'   if(y>=1.0 || y<=0.0 || x>=1.0 || x<=0.0)'
     .endl()+'   {'
     .endl()+'       x=random(time*gl_FragCoord.xy);'
     .endl()+'       y=random(x*gl_FragCoord.xy);'
     .endl()+'   }'
-    
+
     .endl()+'   gl_FragColor = vec4( x, y , z, 1.0);'
     .endl()+'}';
 
@@ -111,9 +111,8 @@ simTexture.printInfo();
 // draw
 
 var srcHeadVert=''
-    .endl()+'uniform float {{mod}}_time;'
-    .endl()+'uniform sampler2D {{mod}}_texture;'
-    // .endl()+'attribute float attrVertIndex;'
+    .endl()+'UNI float {{mod}}_time;'
+    .endl()+'UNI sampler2D {{mod}}_texture;'
 
     .endl();
 
@@ -136,19 +135,19 @@ var srcBodyVert=''
 var t=null;
 render.onTriggered=function()
 {
-    
+
     if(!textureField.get())return;
     // simulation shader
-    
+
     if(doReset && uniTime)
     {
         doReset=false;
         uniTime2.setValue(0);
         uniTime.setValue(0);
     }
-    
 
-    
+
+
 
     effect.startEffect();
     t=effect.getCurrentSourceTexture().tex;
@@ -161,15 +160,15 @@ render.onTriggered=function()
 
     effect.finish();
     t=effect.getCurrentSourceTexture().tex;
-    
+
     outSimTex.set(effect.getCurrentSourceTexture());
     cgl.setPreviousShader();
     effect.endEffect();
 
 
     cgl.resetViewPort();
-    
-    
+
+
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
@@ -197,17 +196,3 @@ render.onTriggered=function()
     // console.log(op.patch.freeTimer.get());
     next.trigger();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-

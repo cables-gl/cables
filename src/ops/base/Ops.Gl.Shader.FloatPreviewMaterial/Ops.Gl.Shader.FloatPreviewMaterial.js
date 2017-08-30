@@ -6,14 +6,14 @@ var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 
 var srcVert=''
-    .endl()+'attribute float attrVertIndex;'
-    .endl()+'attribute vec2 attrTexCoord;'
-    .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 mvMatrix;'
-    .endl()+'attribute vec3 vPosition;'
-    .endl()+'varying float num;'
-    .endl()+'    varying vec2 texCoord;'
-    
+    .endl()+'IN float attrVertIndex;'
+    .endl()+'IN vec2 attrTexCoord;'
+    .endl()+'UNI mat4 projMatrix;'
+    .endl()+'UNI mat4 mvMatrix;'
+    .endl()+'IN vec3 vPosition;'
+    .endl()+'OUT float num;'
+    .endl()+'OUT vec2 texCoord;'
+
 
     .endl()+'void main()'
     .endl()+'{'
@@ -24,12 +24,12 @@ var srcVert=''
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'uniform sampler2D tex;'
-    .endl()+'varying float num;'
-    .endl()+'uniform float numVertices;'
-    
+
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'IN float num;'
+    .endl()+'UNI float numVertices;'
+
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(tex,vec2(texCoord.x,(1.0-texCoord.y)))/2.0;'
@@ -43,7 +43,7 @@ shader.setSource(srcVert,srcFrag);
 var doRender=function()
 {
     cgl.setShader(shader);
-    
+
     if(texture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);

@@ -24,10 +24,10 @@ var reInitEffect=true;
 
 var bgFrag=''
     .endl()+'precision highp float;'
-    .endl()+'uniform float a;'
+    .endl()+'UNI float a;'
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   gl_FragColor = vec4(0.0,0.0,0.0,1.0);'
+    .endl()+'   outColor = vec4(0.0,0.0,0.0,1.0);'
     .endl()+'}';
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');
 bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);
@@ -84,7 +84,7 @@ function updateResolution()
         width.set(w);
         tex.filter=CGL.Texture.FILTER_LINEAR;
         tex.setSize(w,h);
-        
+
         effect.setSourceTexture(tex);
         // texOut.set(effect.getCurrentSourceTexture());
     }
@@ -149,7 +149,7 @@ var doRender=function()
 
     trigger.trigger();
     texOut.set(effect.getCurrentSourceTexture());
-    
+
     effect.endEffect();
 
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);

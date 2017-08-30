@@ -15,24 +15,24 @@ this.onLoaded=shader.compile;
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  varying vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
-    .endl()+'  uniform float dirX;'
-    .endl()+'  uniform float dirY;'
-    .endl()+'  uniform float width;'
-    .endl()+'  uniform float height;'
+    .endl()+'  IN vec2 texCoord;'
+    .endl()+'  UNI sampler2D tex;'
+    .endl()+'  UNI float dirX;'
+    .endl()+'  UNI float dirY;'
+    .endl()+'  UNI float width;'
+    .endl()+'  UNI float height;'
     .endl()+'#endif'
     .endl()+''
-    .endl()+'vec4 blur9(sampler2D texture, vec2 uv, vec2 red, vec2 dir)'
+    .endl()+'vec4 blur9(sampler2D text, vec2 uv, vec2 red, vec2 dir)'
     .endl()+'{'
     .endl()+'   vec4 color = vec4(0.0);'
     .endl()+'   vec2 offset1 = vec2(1.3846153846) * dir;'
     .endl()+'   vec2 offset2 = vec2(3.2307692308) * dir;'
-    .endl()+'   color += texture2D(texture, uv) * 0.2270270270;'
-    .endl()+'   color += texture2D(texture, uv + (offset1 / red)) * 0.3162162162;'
-    .endl()+'   color += texture2D(texture, uv - (offset1 / red)) * 0.3162162162;'
-    .endl()+'   color += texture2D(texture, uv + (offset2 / red)) * 0.0702702703;'
-    .endl()+'   color += texture2D(texture, uv - (offset2 / red)) * 0.0702702703;'
+    .endl()+'   color += texture2D(text, uv) * 0.2270270270;'
+    .endl()+'   color += texture2D(text, uv + (offset1 / red)) * 0.3162162162;'
+    .endl()+'   color += texture2D(text, uv - (offset1 / red)) * 0.3162162162;'
+    .endl()+'   color += texture2D(text, uv + (offset2 / red)) * 0.0702702703;'
+    .endl()+'   color += texture2D(text, uv - (offset2 / red)) * 0.0702702703;'
     .endl()+'   return color;'
     .endl()+'}'
     .endl()+''
@@ -42,7 +42,7 @@ var srcFrag=''
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'       col=blur9(tex,texCoord,vec2(width,height),vec2(dirX,dirY));'
     .endl()+'   #endif'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor = col;'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
@@ -76,14 +76,14 @@ this.render.onTriggered=function()
         // first pass
         if(dir===0 || dir==2)
         {
-            
+
             cgl.currentTextureEffect.bind();
             cgl.gl.activeTexture(cgl.gl.TEXTURE0);
             cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
             uniDirX.setValue(0.0);
             uniDirY.setValue(1.0);
-    
+
             cgl.currentTextureEffect.finish();
         }
 
@@ -94,10 +94,10 @@ this.render.onTriggered=function()
             cgl.currentTextureEffect.bind();
             cgl.gl.activeTexture(cgl.gl.TEXTURE0);
             cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
             uniDirX.setValue(1.0);
             uniDirY.setValue(0.0);
-    
+
             cgl.currentTextureEffect.finish();
         }
     }

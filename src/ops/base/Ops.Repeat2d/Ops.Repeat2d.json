@@ -41,5 +41,6 @@
             }
         ],
         "name": "Ops.Repeat2d"
-    }
+    },
+    "summary": "Triggers all ops underneath numX * numY times"
 }

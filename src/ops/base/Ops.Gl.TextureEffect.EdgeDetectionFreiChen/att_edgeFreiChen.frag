@@ -12,7 +12,7 @@ uniform float texHeight;
 uniform float amount;
 
 uniform sampler2D tex;
-varying vec2 texCoord;
+IN vec2 texCoord;
 
 mat3 G[9];
 // hard coded matrix values!!!! as suggested in https://github.com/neilmendoza/ofxPostProcessing/blob/master/src/EdgePass.cpp#L45
@@ -42,13 +42,13 @@ void main(void)
 
 	mat3 I;
 	float cnv[9];
-	vec3 sample;
+	vec3 smpl;
 
 	/* fetch the 3x3 neighbourhood and use the RGB vector's length as intensity value */
 	for (float i=0.0; i<3.0; i++) {
 		for (float j=0.0; j<3.0; j++) {
-			sample = texture2D(tex, texCoord + texel * vec2(i-1.0,j-1.0) ).rgb;
-			I[int(i)][int(j)] = length(sample);
+			smpl = texture2D(tex, texCoord + texel * vec2(i-1.0,j-1.0) ).rgb;
+			I[int(i)][int(j)] = length(smpl);
 		}
 	}
 

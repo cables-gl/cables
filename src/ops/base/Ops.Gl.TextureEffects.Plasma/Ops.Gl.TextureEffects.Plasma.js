@@ -26,7 +26,7 @@ var srcFrag=''
     .endl()+'uniform float amount;'
     .endl()+'uniform sampler2D tex;'
 
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
 
     +CGL.TextureEffect.getBlendCode()
 

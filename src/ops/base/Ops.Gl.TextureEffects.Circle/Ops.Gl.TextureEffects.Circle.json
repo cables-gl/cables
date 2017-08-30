@@ -1,0 +1,61 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "size"
+            },
+            {
+                "type": "0",
+                "name": "Inner"
+            },
+            {
+                "type": "0",
+                "name": "fade Out"
+            },
+            {
+                "type": "0",
+                "name": "warn overflow"
+            },
+            {
+                "type": "0",
+                "name": "fallOff"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "a"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Circle"
+    }
+}

@@ -15,8 +15,8 @@ function doRender()
 {
     if(!inCubemap.get() || !inCubemap.get().cubemap)return;
     cgl.setShader(shader);
-    
-    
+
+
     if(inCubemap.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
@@ -24,7 +24,7 @@ function doRender()
 
     }
 
-    
+
     trigger.trigger();
     cgl.setPreviousShader();
 }
@@ -41,29 +41,29 @@ function updateMapping()
 var srcVert=''
     // .endl()+'uniform mat4 projection;'
     // .endl()+'uniform mat4 modelview;'
-    
-    .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 modelMatrix;'
-    .endl()+'uniform mat4 viewMatrix;'
+.endl()+'precision highp float;'
+    .endl()+'UNI mat4 projMatrix;'
+    .endl()+'UNI mat4 modelMatrix;'
+    .endl()+'UNI mat4 viewMatrix;'
     // .endl()+'uniform mat4 normalMatrix;'
 
-    
-    // .endl()+'attribute vec3 a_coords;'
-    // .endl()+'attribute vec3 a_normal;'
-    .endl()+'varying vec3 v_eyeCoords;'
-    .endl()+'varying vec3 v_normal;'
-    .endl()+'varying vec3 v_pos;'
 
-    .endl()+'attribute vec3 vPosition;'
-    
+    // .endl()+'IN vec3 a_coords;'
+    // .endl()+'IN vec3 a_normal;'
+    .endl()+'OUT vec3 v_eyeCoords;'
+    .endl()+'OUT vec3 v_normal;'
+    .endl()+'OUT vec3 v_pos;'
 
-    // .endl()+'attribute vec2 attrTexCoord;'
-    .endl()+'attribute vec3 attrVertNormal;'
+    .endl()+'IN vec3 vPosition;'
+
+
+    // .endl()+'IN vec2 attrTexCoord;'
+    .endl()+'IN vec3 attrVertNormal;'
 
     .endl()+'void main() {'
-    
+
     .endl()+'    mat4 modelview= viewMatrix * modelMatrix;'
-    
+
     .endl()+'    v_pos= vPosition;'
 
 
@@ -75,31 +75,31 @@ var srcVert=''
 
 
 var srcFrag=''
-    // .endl()+'precision mediump float;'
-    .endl()+'varying vec3 vCoords;'
-    .endl()+'varying vec3 v_normal;'
-    .endl()+'varying vec3 v_eyeCoords;'
-    .endl()+'varying vec3 v_pos;'
-    .endl()+'uniform samplerCube skybox;'
-    .endl()+'uniform mat4 normalMatrix;'
-    .endl()+'uniform mat4 inverseViewMatrix;'
-    .endl()+'uniform mat4 modelMatrix;'
+    .endl()+'precision highp float;'
+    .endl()+'IN vec3 vCoords;'
+    .endl()+'IN vec3 v_normal;'
+    .endl()+'IN vec3 v_eyeCoords;'
+    .endl()+'IN vec3 v_pos;'
+    .endl()+'UNI samplerCube skybox;'
+    .endl()+'UNI mat4 normalMatrix;'
+    .endl()+'UNI mat4 inverseViewMatrix;'
+    .endl()+'UNI mat4 modelMatrix;'
 
     .endl()+'void main() {'
     .endl()+'    vec3 N = normalize( mat3(normalMatrix) * v_normal).xyz;'
     .endl()+'    vec3 V = -v_eyeCoords;'
     .endl()+'    vec3 R = -reflect(V,N);'
     .endl()+'    vec3 T = ( mat3( inverseViewMatrix ) * R ).xyz;' // Transform by inverse of the view transform that was applied to the skybox
-    
-    
-    
+
+
+
     .endl()+'#ifdef DO_REFLECTION'
-    .endl()+'    gl_FragColor = textureCube(skybox, T);'
+    .endl()+'    outColor = texture(skybox, T);'
     .endl()+'#endif'
     .endl()+'#ifndef DO_REFLECTION'
-    .endl()+'    gl_FragColor = textureCube(skybox, v_pos);'
+    .endl()+'    outColor = texture(skybox, v_pos);'
     .endl()+'#endif'
-            
+
 
     .endl()+'}';
 

@@ -25,7 +25,7 @@ fast.onChange=function()
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'  varying vec2 texCoord;'
+    .endl()+'  IN vec2 texCoord;'
     .endl()+'  uniform sampler2D tex;'
     .endl()+'  uniform float dirX;'
     .endl()+'  uniform float dirY;'
@@ -34,9 +34,6 @@ var srcFrag=''
     .endl()+'  #ifdef HAS_MASK'
     .endl()+'    uniform sampler2D imageMask;'
     .endl()+'  #endif'
-
-    .endl()+'uniform sampler2D texture;'
-
 
 
     .endl()+''
@@ -55,7 +52,7 @@ var srcFrag=''
     .endl()+'       am=amount*texture2D(imageMask,texCoord).r;'
     .endl()+'       if(am<=0.02)'
     .endl()+'       {'
-    .endl()+'           gl_FragColor=texture2D(texture, texCoord);'
+    .endl()+'           gl_FragColor=texture2D(tex, texCoord);'
     // .endl()+'           gl_FragColor.r=1.0;'
 
     .endl()+'           return;'
@@ -80,12 +77,12 @@ var srcFrag=''
     .endl()+'    for (float t = -range; t <= range; t++) {'
     .endl()+'        float percent = (t + offset - 0.5) / range;'
     .endl()+'        float weight = 1.0 - abs(percent);'
-    .endl()+'        vec4 sample = texture2D(texture, texCoord + delta * percent);'
+    .endl()+'        vec4 smpl = texture2D(tex, texCoord + delta * percent);'
     .endl()+'        '
     // .endl()+'        /* switch to pre-multiplied alpha to correctly blur transparent images */'
-    .endl()+'        sample.rgb *= sample.a;'
+    .endl()+'        smpl.rgb *= smpl.a;'
 
-    .endl()+'        color += sample * weight;'
+    .endl()+'        color += smpl * weight;'
     .endl()+'        total += weight;'
     .endl()+'    }'
 
@@ -98,6 +95,7 @@ var srcFrag=''
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+
 var uniDirX=new CGL.Uniform(shader,'f','dirX',0);
 var uniDirY=new CGL.Uniform(shader,'f','dirY',0);
 

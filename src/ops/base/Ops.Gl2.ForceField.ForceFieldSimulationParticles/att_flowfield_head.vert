@@ -1,28 +1,28 @@
 #define NUM_FORCES 80
 
-in vec3 rndpos;
-out vec3 col;
+IN vec3 rndpos;
+OUT vec3 col;
 
-uniform vec3 MOD_emitterPos;
+UNI vec3 MOD_emitterPos;
 
-uniform float MOD_time;
-uniform float MOD_sizeX;
-uniform float MOD_sizeY;
-uniform float MOD_sizeZ;
-uniform float MOD_timeDiff;
-uniform float MOD_lifeTime;
-uniform float MOD_fadeinout;
-uniform float MOD_spawnTo;
-uniform float MOD_spawnFrom;
+UNI float MOD_time;
+UNI float MOD_sizeX;
+UNI float MOD_sizeY;
+UNI float MOD_sizeZ;
+UNI float MOD_timeDiff;
+UNI float MOD_lifeTime;
+UNI float MOD_fadeinout;
+UNI float MOD_spawnTo;
+UNI float MOD_spawnFrom;
 
 
-attribute float timeOffset;
+IN float timeOffset;
 
-in vec3 life;
-out vec3 outLife;
+IN vec3 life;
+OUT vec3 outLife;
 
-in vec3 inPos;
-out vec3 outPos;
+IN vec3 inPos;
+OUT vec3 outPos;
 
 struct force
 {
@@ -34,10 +34,10 @@ struct force
 };
 
 
-uniform force forces[NUM_FORCES];
+UNI force forces[NUM_FORCES];
 
-uniform vec3 MOD_spawnPositions[32];
-uniform float MOD_numSpawns;
+UNI vec3 MOD_spawnPositions[32];
+UNI float MOD_numSpawns;
 
 
 

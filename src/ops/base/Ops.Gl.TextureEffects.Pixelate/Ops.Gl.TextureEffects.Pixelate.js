@@ -11,7 +11,7 @@ op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform float amountX;'
     .endl()+'uniform float amountY;'

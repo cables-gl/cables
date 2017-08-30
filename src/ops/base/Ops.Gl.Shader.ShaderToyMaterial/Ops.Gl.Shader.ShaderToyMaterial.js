@@ -40,13 +40,13 @@ function setId()
         {
             var data=JSON.parse(_data);
             console.log(data);
-            
+
             if(data.Shader && data.Shader.renderpass)
             {
                 var code=''
                 .endl()+'precision highp float;'
-                .endl()+'varying vec2 texCoord;'
-                
+                .endl()+'IN vec2 texCoord;'
+
                 .endl()+'uniform float iGlobalTime;'
                 .endl()+'vec2 iResolution=vec2(1.0,1.0);'
                 .endl();
@@ -71,7 +71,3 @@ function setId()
         });
 
 }
-
-
-
-

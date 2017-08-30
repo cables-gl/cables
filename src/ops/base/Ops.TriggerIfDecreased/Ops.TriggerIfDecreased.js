@@ -11,7 +11,6 @@ value.onChange=function()
     if(v<lastValue)
     {
         trigger.trigger();
-        console.log('less');
     }
     lastValue=v;
 };

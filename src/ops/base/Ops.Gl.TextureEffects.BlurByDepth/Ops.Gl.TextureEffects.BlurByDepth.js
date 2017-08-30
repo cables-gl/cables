@@ -23,39 +23,39 @@ this.onLoaded=shader.compile;
 var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  varying vec2 texCoord;'
+    .endl()+'  IN vec2 texCoord;'
     .endl()+'  uniform sampler2D tex;'
     .endl()+'  uniform sampler2D texDepth;'
     .endl()+'  uniform float dirX;'
     .endl()+'  uniform float dirY;'
     .endl()+'  uniform float width;'
     .endl()+'  uniform float height;'
-    
+
     .endl()+'  uniform float depthStart;'
     .endl()+'  uniform float depthEnd;'
-    
+
     .endl()+'#endif'
     .endl()+'uniform float n;'
     .endl()+'uniform float f;'
 
     .endl()+''
-    .endl()+'vec4 blur9(sampler2D texture, vec2 uv, vec2 red, vec2 dir)'
+    .endl()+'vec4 blur9(sampler2D text, vec2 uv, vec2 red, vec2 dir)'
     .endl()+'{'
     .endl()+'   vec4 color = vec4(0.0);'
     .endl()+'   vec2 offset1 = vec2(1.3846153846) * dir;'
     .endl()+'   vec2 offset2 = vec2(3.2307692308) * dir;'
-    
+
     .endl()+'   float z = texture2D(texDepth, uv).r;'
     .endl()+'   float c=(2.0*n)/(f+n-z*(f-n));'
     .endl()+'   if(!(c>=depthStart && c<=depthEnd)) return vec4( texture2D(tex, uv).rgb ,1.0);'
     // .endl()+'   if(!(c>depthStart && c<depthEnd)) return vec4( 1.0,0.0,0.0 ,1.0);'
 
 
-    .endl()+'   color += texture2D(texture, uv) * 0.2270270270;'
-    .endl()+'   color += texture2D(texture, uv + (offset1 / red)) * 0.3162162162;'
-    .endl()+'   color += texture2D(texture, uv - (offset1 / red)) * 0.3162162162;'
-    .endl()+'   color += texture2D(texture, uv + (offset2 / red)) * 0.0702702703;'
-    .endl()+'   color += texture2D(texture, uv - (offset2 / red)) * 0.0702702703;'
+    .endl()+'   color += texture2D(text, uv) * 0.2270270270;'
+    .endl()+'   color += texture2D(text, uv + (offset1 / red)) * 0.3162162162;'
+    .endl()+'   color += texture2D(text, uv - (offset1 / red)) * 0.3162162162;'
+    .endl()+'   color += texture2D(text, uv + (offset2 / red)) * 0.0702702703;'
+    .endl()+'   color += texture2D(text, uv - (offset2 / red)) * 0.0702702703;'
     .endl()+'   return color;'
     .endl()+'}'
     .endl()+''
@@ -65,7 +65,7 @@ var srcFrag=''
     .endl()+'   #ifdef HAS_TEXTURES'
     .endl()+'       col=blur9(tex,texCoord,vec2(width,height),vec2(dirX,dirY));'
     .endl()+'   #endif'
-    
+
     // .endl()+'   float z = texture2D(texDepth, texCoord).r;'
     // .endl()+'   float c=(2.0*n)/(f+n-z*(f-n));'
     // .endl()+'   col = vec4(c,c,c,1.0);'
@@ -89,7 +89,7 @@ var srcFrag=''
         uniNearplane.setValue(self.nearPlane.get());
     };
     self.nearPlane.val=0.1;
-    
+
     depthStart.onValueChanged=function()
     {
         uniDepthStart.setValue(depthStart.get());
@@ -140,7 +140,7 @@ this.render.onTriggered=function()
         // first pass
         if(dir==0 || dir==2)
         {
-            
+
             cgl.currentTextureEffect.bind();
             cgl.gl.activeTexture(cgl.gl.TEXTURE0);
             cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
@@ -148,10 +148,10 @@ this.render.onTriggered=function()
             cgl.gl.activeTexture(cgl.gl.TEXTURE1);
             cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, depthTex.get().tex );
 
-    
+
             uniDirX.setValue(0.0);
             uniDirY.setValue(1.0);
-    
+
             cgl.currentTextureEffect.finish();
         }
 
@@ -165,10 +165,10 @@ this.render.onTriggered=function()
 
             cgl.gl.activeTexture(cgl.gl.TEXTURE1);
             cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, depthTex.get().tex );
-    
+
             uniDirX.setValue(1.0);
             uniDirY.setValue(0.0);
-    
+
             cgl.currentTextureEffect.finish();
         }
     }

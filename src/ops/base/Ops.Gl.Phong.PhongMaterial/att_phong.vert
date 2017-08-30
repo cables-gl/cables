@@ -1,36 +1,36 @@
 
 {{MODULES_HEAD}}
 
-attribute vec3 vPosition;
-uniform mat4 projMatrix;
-uniform mat4 modelMatrix;
-uniform mat4 viewMatrix;
-attribute vec3 attrVertNormal;
-attribute vec2 attrTexCoord;
+IN vec3 vPosition;
+UNI mat4 projMatrix;
+UNI mat4 modelMatrix;
+UNI mat4 viewMatrix;
+IN vec3 attrVertNormal;
+IN vec2 attrTexCoord;
 
-// attribute vec3 attrTangent;
-// attribute vec3 attrBiTangent;
-varying vec3 vTangent;
-varying vec3 vBiTangent;
+// IN vec3 attrTangent;
+// IN vec3 attrBiTangent;
+OUT vec3 vTangent;
+OUT vec3 vBiTangent;
 
 
-varying mediump vec3 norm;
-varying mediump vec3 vert;
-varying mat4 mvMatrix;
-// uniform mat4 normalMatrix;
+OUT mediump vec3 norm;
+OUT mediump vec3 vert;
+OUT mat4 mvMatrix;
+// UNI mat4 normalMatrix;
 
-varying vec3 vViewPosition;
-varying vec3 vNormal;
+OUT vec3 vViewPosition;
+OUT vec3 vNormal;
 
 
 #ifdef HAS_TEXTURES
-    varying  vec2 texCoord;
+    OUT  vec2 texCoord;
 #endif
 
 
 
-varying mat3 normalMatrix;
-varying vec4 modelPos;
+OUT mat3 normalMatrix;
+OUT vec4 modelPos;
 
 
 
@@ -107,11 +107,11 @@ void main()
     vec4 pos = vec4( vPosition, 1. );
     modelPos=modelMatrix*pos;
     mvMatrix=viewMatrix * modelMatrix;
-    
-    
-    
+
+
+
     {{MODULE_VERTEX_POSITION}}
-    
+
     vec4 viewModelPosition = mvMatrix * pos;
     vViewPosition = viewModelPosition.xyz;
 
@@ -176,4 +176,3 @@ void main()
 //       a31 * b01 - a30 * b03 - a32 * b00,
 //       a20 * b03 - a21 * b01 + a22 * b00) / det;
 // }
-

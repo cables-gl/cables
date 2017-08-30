@@ -1,0 +1,54 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "depth texture"
+            },
+            {
+                "type": "0",
+                "name": "Frustum Near"
+            },
+            {
+                "type": "0",
+                "name": "Frustum Far"
+            },
+            {
+                "type": "0",
+                "name": "Samples"
+            },
+            {
+                "type": "0",
+                "name": "Ao Radius"
+            },
+            {
+                "type": "0",
+                "name": "Ao Clamp"
+            },
+            {
+                "type": "0",
+                "name": "Luminance Influence"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.SSAO2"
+    },
+    "summary": "screen space ambient occlusion",
+    "credits": [
+        {
+            "title": "SSAO Shader",
+            "author": "Martins Upitis",
+            "url": "http://devlog-martinsh.blogspot.com"
+        }
+    ]
+
+}

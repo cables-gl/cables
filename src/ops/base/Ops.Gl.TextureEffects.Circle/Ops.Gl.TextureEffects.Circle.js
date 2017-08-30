@@ -27,18 +27,18 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'uniform sampler2D tex;'
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI sampler2D tex;'
 
-    .endl()+'uniform float amount;'
-    .endl()+'uniform float size;'
-    .endl()+'uniform float inner;'
-    .endl()+'uniform float fadeOut;'
+    .endl()+'UNI float amount;'
+    .endl()+'UNI float size;'
+    .endl()+'UNI float inner;'
+    .endl()+'UNI float fadeOut;'
 
-    .endl()+'uniform float r;'
-    .endl()+'uniform float g;'
-    .endl()+'uniform float b;'
-    .endl()+'uniform float a;'
+    .endl()+'UNI float r;'
+    .endl()+'UNI float g;'
+    .endl()+'UNI float b;'
+    .endl()+'UNI float a;'
 
     +CGL.TextureEffect.getBlendCode()
 
@@ -108,7 +108,7 @@ function setFallOf()
 {
     shader.removeDefine('FALLOFF_LINEAR');
     shader.removeDefine('FALLOFF_SMOOTHSTEP');
-    
+
     if(fallOff.get()=='Linear') shader.define('FALLOFF_LINEAR');
     if(fallOff.get()=='SmoothStep') shader.define('FALLOFF_SMOOTHSTEP');
     shader.compile();

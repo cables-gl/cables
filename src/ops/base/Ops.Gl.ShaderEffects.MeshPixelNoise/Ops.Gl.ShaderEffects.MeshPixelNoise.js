@@ -17,7 +17,7 @@ inAmount=op.inValueSlider("Amount",0.3);
 var shader=null;
 
 var srcHeadVert=''
-    .endl()+'varying vec4 MOD_pos;'
+    .endl()+'OUT vec4 MOD_pos;'
     .endl();
 
 var srcBodyVert=''
@@ -25,8 +25,8 @@ var srcBodyVert=''
     .endl();
 
 var srcHeadFrag=attachments.pixelnoise_frag
-    .endl()+'uniform float MOD_scale;'
-    .endl()+'uniform float MOD_amount;'
+    .endl()+'UNI float MOD_scale;'
+    .endl()+'UNI float MOD_amount;'
     .endl();
 
 var srcBodyFrag=''
@@ -86,16 +86,3 @@ op.render.onTriggered=function()
 
     op.trigger.trigger();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,38 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Update All"
+            },
+            {
+                "type": "0",
+                "name": "Update Vertices"
+            },
+            {
+                "type": "0",
+                "name": "Update Texcoords"
+            },
+            {
+                "type": "0",
+                "name": "Vertex Numbers"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.RenderGeometry"
+    },
+    "summary": "render a geometry as mesh"
+}

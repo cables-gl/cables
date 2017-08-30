@@ -9,8 +9,6 @@ var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
-
-
 shader.setSource(shader.getDefaultVertexShader(),attachments.posterize_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var levelsUniform=new CGL.Uniform(shader,'f','levels',levels);
@@ -26,10 +24,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-
-uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
-uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
-
+    uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
+    uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );

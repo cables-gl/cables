@@ -39,5 +39,12 @@
             }
         ],
         "name": "Ops.Gl.MainLoop"
-    }
+    },
+    "credits": [
+        {
+            "title": "cables",
+            "author": "undefined development",
+            "url": "http://undev.studio"
+        }
+    ]
 }

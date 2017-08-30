@@ -1,6 +1,7 @@
 op.name='Websocket';
 // ws://192.168.1.235
-var inUrl=this.addInPort(new Port(this,"url",OP_PORT_TYPE_VALUE,{type:'string'}));
+
+var inUrl=op.inValueString("url");
 
 var outResult=op.outObject("result");
 var outConnected=op.outValue("connected");

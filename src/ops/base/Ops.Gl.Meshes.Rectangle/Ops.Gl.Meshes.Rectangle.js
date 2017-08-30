@@ -8,8 +8,10 @@ var height=op.inValue("height",1);
 var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
 var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
 
-var nColumns=op.inValue("num columns",1);
-var nRows=op.inValue("num rows",1);
+var nColumns=op.inValueInt("num columns",1);
+var nRows=op.inValueInt("num rows",1);
+
+
 
 var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
 

@@ -47,7 +47,7 @@ function checkFont()
         createTexture=true;
         createMesh=true;
     }
-    
+
     if(!fontLoaded) setTimeout(checkFont,250);
 }
 
@@ -105,12 +105,12 @@ op.onDelete=function()
 
 var srcFrag=''
     .endl()+'precision mediump float;'
-    .endl()+'uniform sampler2D tex;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'uniform float r;'
-    .endl()+'uniform float g;'
-    .endl()+'uniform float b;'
-    .endl()+'uniform float a;'
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI float r;'
+    .endl()+'UNI float g;'
+    .endl()+'UNI float b;'
+    .endl()+'UNI float a;'
 
     .endl()+''
     .endl()+'void main()'
@@ -129,18 +129,18 @@ var srcFrag=''
 
 var srcVert=''
     .endl()+'precision mediump float;'
-    .endl()+'uniform sampler2D tex;'
-    .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 modelMatrix;'
-    .endl()+'uniform mat4 viewMatrix;'
-    .endl()+'uniform float scale;'
-    .endl()+'attribute vec3 vPosition;'
-    .endl()+'attribute vec2 attrTexCoord;'
-    .endl()+'attribute mat4 instMat;'
-    .endl()+'attribute vec2 attrTexOffsets;'
-    .endl()+'attribute vec2 attrTexSize;'
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'UNI mat4 projMatrix;'
+    .endl()+'UNI mat4 modelMatrix;'
+    .endl()+'UNI mat4 viewMatrix;'
+    .endl()+'UNI float scale;'
+    .endl()+'IN vec3 vPosition;'
+    .endl()+'IN vec2 attrTexCoord;'
+    .endl()+'IN mat4 instMat;'
+    .endl()+'IN vec2 attrTexOffsets;'
+    .endl()+'IN vec2 attrTexSize;'
 
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'OUT vec2 texCoord;'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -308,7 +308,7 @@ function generateMesh()
         }
 
         height=0;
-    
+
         if(align.get()=='left') offX=0;
         else if(align.get()=='right') offX=width;
         else if(align.get()=='center') offX=width/2;
@@ -335,26 +335,26 @@ function generateMesh()
 
                 pos+=(char.texCoordWidth/char.texCoordHeight)+letterSpace.get();
                 transformations.push(Array.prototype.slice.call(m));
-    
+
                 charCounter++;
             }
         }
     }
 
     var transMats = [].concat.apply([], transformations);
-    
+
     disabled=false;
     if(transMats.length==0)disabled=true;
 
     mesh.numInstances=transMats.length/16;
-    
+
     if(mesh.numInstances==0)
     {
         disabled=true;
         return;
     }
-    
-    
+
+
     mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
     mesh.setAttribute('attrTexOffsets',new Float32Array(tcOffsets),2,{"instanced":true});
     mesh.setAttribute('attrTexSize',new Float32Array(tcSize),2,{"instanced":true});

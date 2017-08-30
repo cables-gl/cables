@@ -45,7 +45,7 @@ function updateFFT()
     if(line>=height) line=0;
 
     fftPosition=line/height;
-    
+
     for(var i=0;i<width;i++)
     {
         data[i*4+0]=arr[i];
@@ -74,9 +74,9 @@ function updateFFT()
 
 var scrollShader=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
-    .endl()+'uniform sampler2D texFFT;'
-    .endl()+'uniform float posY;'
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI sampler2D texFFT;'
+    .endl()+'UNI float posY;'
 
     .endl()+''
     .endl()+'void main()'
@@ -117,7 +117,7 @@ function scrollTexture()
     cgl.setPreviousShader();
 
     texOut.set(effect.getCurrentSourceTexture());
-    
+
     effect.endEffect();
 
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
@@ -129,20 +129,20 @@ var shaderBlur=new CGL.Shader(cgl);
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'  varying vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
-    .endl()+'  uniform float dirX;'
-    .endl()+'  uniform float dirY;'
-    .endl()+'  uniform float amount;'
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'UNI float dirX;'
+    .endl()+'UNI float dirY;'
+    .endl()+'UNI float amount;'
+    .endl()+'UNI sampler2D texture;'
 
-    .endl()+'uniform sampler2D texture;'
     .endl()+'vec2 delta=vec2(dirX*amount*0.2,dirY*amount*0.2);'
-    .endl()+''
+
     .endl()+'float random(vec3 scale, float seed)'
     .endl()+'{'
     .endl()+'    return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);'
     .endl()+'}'
-    .endl()+''
+
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'    vec4 color = vec4(0.0);'
@@ -158,13 +158,13 @@ var srcFrag=''
 
     // .endl()+'        /* switch to pre-multiplied alpha to correctly blur transparent images */'
     .endl()+'        sample.rgb *= sample.a;'
-    
+
     .endl()+'        color += sample * weight;'
     .endl()+'        total += weight;'
     .endl()+'    }'
-    
+
     .endl()+'    gl_FragColor = color / total;'
-    
+
     // .endl()+'    /* switch back from pre-multiplied alpha */'
     .endl()+'    gl_FragColor.rgb /= gl_FragColor.a + 0.00001;'
     .endl()+'}';
@@ -184,7 +184,7 @@ amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
 function blurTexture()
 {
     cgl.setShader(shaderBlur);
-    
+
     if(!effect.getCurrentSourceTexture())return;
 
     uniWidth.setValue(effect.getCurrentSourceTexture().width);
@@ -240,28 +240,26 @@ mirrorFlip.set(true);
 mirrorWidth.set(1);
 var srcFragMirror=''
     .endl()+'precision highp float;'
-    .endl()+'  varying vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
+    .endl()+'IN vec2 texCoord;'
 
-    .endl()+'uniform float width;'
-    .endl()+'uniform float flip;'
-    .endl()+'uniform float offset;'
-    .endl()+''
-    .endl()+''
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'UNI float width;'
+    .endl()+'UNI float flip;'
+    .endl()+'UNI float offset;'
+
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'float axis=0.0;'
+    .endl()+'   float axis=0.0;'
     .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
-    .endl()+''
 
-    .endl()+'       float x=(texCoord.x);'
-    .endl()+'       if(texCoord.x>=0.5)x=1.0-texCoord.x;'
-    
-    .endl()+'       x*=width*2.0;'
-    .endl()+'       if(flip==1.0)x=1.0-x;'
-    .endl()+'       x*=1.0-offset;'
-    
-    .endl()+'       col=texture2D(tex,vec2(x,texCoord.y) );'
+    .endl()+'   float x=(texCoord.x);'
+    .endl()+'   if(texCoord.x>=0.5)x=1.0-texCoord.x;'
+
+    .endl()+'   x*=width*2.0;'
+    .endl()+'   if(flip==1.0)x=1.0-x;'
+    .endl()+'   x*=1.0-offset;'
+
+    .endl()+'   col=texture2D(tex,vec2(x,texCoord.y) );'
 
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
@@ -307,4 +305,3 @@ refresh.onTriggered=function()
     // blurTexture();
     texOut.set(texFFT);
 };
-

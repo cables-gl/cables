@@ -20,10 +20,10 @@ var prfx=String.fromCharCode(97 + window.meshsequencecounter);
 var needsUpdateFrame=false;
 
 var srcHeadVert=''
-    .endl()+'attribute vec3 '+prfx+'_attrMorphTargetA;'
-    .endl()+'attribute vec3 '+prfx+'_attrMorphTargetB;'
-    // .endl()+'attribute vec3 attrMorphTargetAN;'
-    // .endl()+'attribute vec3 attrMorphTargetBN;'
+    .endl()+'IN vec3 '+prfx+'_attrMorphTargetA;'
+    .endl()+'IN vec3 '+prfx+'_attrMorphTargetB;'
+    // .endl()+'IN vec3 attrMorphTargetAN;'
+    // .endl()+'IN vec3 attrMorphTargetBN;'
     .endl()+'uniform float {{mod}}_fade;'
     .endl()+'uniform float {{mod}}_doMorph;'
     .endl();

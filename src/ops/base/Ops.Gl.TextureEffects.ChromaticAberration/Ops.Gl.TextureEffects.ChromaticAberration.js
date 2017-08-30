@@ -1,4 +1,4 @@
-op.name="ChromaticAberrationNew";
+op.name="ChromaticAberration";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var pixel=op.inValue("Pixel",5);
@@ -12,7 +12,7 @@ op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform float pixel;'
     .endl()+'uniform float onePixel;'

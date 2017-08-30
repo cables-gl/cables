@@ -57,5 +57,12 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.FBMNoise"
-    }
+    },
+    "credits": [
+        {
+            "title": "Domain Warping Shader",
+            "author": "inigo quilez",
+            "url": "http://iquilezles.org/www/articles/warp/warp.htm"
+        }
+    ]
 }

@@ -52,6 +52,10 @@
             {
                 "type": "0",
                 "name": "projectCoords"
+            },
+            {
+                "type": "0",
+                "name": "Screen Space Normals"
             }
         ],
         "portsOut": [

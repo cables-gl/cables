@@ -17,15 +17,15 @@ op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform float threshhold;'
 
-    .endl()+'uniform sampler2D texture;'
+    .endl()+'uniform sampler2D text;'
 
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   vec4 col = texture2D(texture, texCoord );'
+    .endl()+'   vec4 col = texture2D(text, texCoord );'
 
     .endl()+'   float gray = dot(vec3(0.2126,0.7152,0.0722), col.rgb );'
 
@@ -34,7 +34,7 @@ var srcFrag=''
     .endl()+'   #ifdef BLACKWHITE'
     .endl()+'       else col.r=col.g=col.b=col.a=1.0;'
     .endl()+'   #endif'
-    
+
     .endl()+'   #endif'
     .endl()+'   #ifdef INVERT'
     .endl()+'       if(gray > threshhold) col.r=col.g=col.b=col.a=0.0;'

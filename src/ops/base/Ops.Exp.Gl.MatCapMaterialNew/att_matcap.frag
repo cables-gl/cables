@@ -1,40 +1,49 @@
+
 precision highp float;
 
 {{MODULES_HEAD}}
 
-varying vec3 norm;
-varying vec2 texCoord;
-uniform sampler2D tex;
-varying vec2 vNorm;
-uniform mat4 viewMatrix;
+IN vec3 norm;
+IN vec2 texCoord;
+UNI sampler2D tex;
+IN vec2 vNorm;
+UNI mat4 viewMatrix;
 
-uniform float repeatX;
-uniform float repeatY;
-uniform float opacity;
+UNI float repeatX;
+UNI float repeatY;
+UNI float opacity;
+
+IN vec3 e;
 
 #ifdef HAS_DIFFUSE_TEXTURE
-   uniform sampler2D texDiffuse;
+   UNI sampler2D texDiffuse;
 #endif
 
 #ifdef USE_SPECULAR_TEXTURE
-   uniform sampler2D texSpec;
-   uniform sampler2D texSpecMatCap;
+   UNI sampler2D texSpec;
+   UNI sampler2D texSpecMatCap;
 #endif
 
 #ifdef HAS_AO_TEXTURE
-    uniform sampler2D texAo;
-    uniform float aoIntensity;
+    UNI sampler2D texAo;
+    UNI float aoIntensity;
 #endif
 
 #ifdef HAS_NORMAL_TEXTURE
-   varying vec3 vBiTangent;
-   varying vec3 vTangent;
+   IN vec3 vBiTangent;
+   IN vec3 vTangent;
 
-   uniform sampler2D texNormal;
-   uniform mat4 normalMatrix;
-   varying vec3 e;
+   UNI sampler2D texNormal;
+   UNI mat4 normalMatrix;
+   
    vec2 vNormt;
 #endif
+
+#ifdef CALC_SSNORMALS
+    // from https://www.enkisoftware.com/devlogpost-20150131-1-Normal_generation_in_the_pixel_shader
+    IN vec3 eye_relative_pos;
+#endif
+
 
 const float normalScale=0.4;
 
@@ -48,6 +57,28 @@ void main()
         {{MODULE_BEGIN_FRAG}}
    #endif
 
+    #ifdef CALC_SSNORMALS
+    	vec3 dFdxPos = dFdx( eye_relative_pos );
+    	vec3 dFdyPos = dFdy( eye_relative_pos );
+    	vec3 n = normalize( cross(dFdxPos,dFdyPos ));
+    	
+        vec3 r = reflect( e, n );
+        float m = 2. * sqrt( 
+            pow(r.x, 2.0)+
+            pow(r.y, 2.0)+
+            pow(r.z + 1.0, 2.0)
+        );
+        
+        vn = (r.xy / m + 0.5);
+        
+        vn.t=clamp(vn.t, 0.0, 1.0);
+        vn.s=clamp(vn.s, 0.0, 1.0);
+        
+        // float dst = dot(abs(coord-center), vec2(1.0));
+        // float aaf = fwidth(dst);
+        // float alpha = smoothstep(radius - aaf, radius, dst);
+
+    #endif
 
    #ifdef HAS_NORMAL_TEXTURE
         vec3 tnorm=texture2D( texNormal, vec2(texCoord.x*repeatX,texCoord.y*repeatY) ).xyz * 2.0 - 1.0;
@@ -121,6 +152,6 @@ void main()
 
     {{MODULE_COLOR}}
 
-    gl_FragColor = col;
+    outColor = col;
 
 }

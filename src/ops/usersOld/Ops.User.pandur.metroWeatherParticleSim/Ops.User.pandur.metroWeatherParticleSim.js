@@ -10,7 +10,7 @@ var tex=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
 
 var texture=new CGL.Texture(cgl,{isFloatingPointTexture:true});
 texture.setSize(1024,1024);
-   
+
 var shaderSim=new CGL.Shader(cgl);
 this.onLoaded=shaderSim.compile;
 
@@ -19,9 +19,9 @@ this.onLoaded=shaderSim.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'uniform sampler2D tex;'
-    .endl()+'uniform float time;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'UNI float time;'
+    .endl()+'IN vec2 texCoord;'
 
     .endl()+'float random(vec2 co)'
     .endl()+'{'
@@ -42,9 +42,9 @@ var srcFrag=''
     .endl()+'       c1=old.g;'
     .endl()+'       c2=old.b;'
     .endl()+'   }'
-    
+
     .endl()+'   if(c>15.0)c=random((0.2323)*gl_FragCoord.xy)*0.5;'
-    
+
     .endl()+'   gl_FragColor = vec4(c,c1,c2,1.0);'
     .endl()+'}';
 
@@ -60,10 +60,10 @@ var srcGetPos=''
     .endl()+'}';
 
 var srcPosHeadVert=''
-    .endl()+'uniform float numVertices;'
-    .endl()+'uniform float time;'
-    .endl()+'attribute float attrVertIndex;'
-    .endl()+'uniform sampler2D texPositions;'
+    .endl()+'UNI float numVertices;'
+    .endl()+'UNI float time;'
+    .endl()+'IN float attrVertIndex;'
+    .endl()+'UNI sampler2D texPositions;'
     .endl()+''
     .endl()+srcGetPos
     .endl();
@@ -98,9 +98,9 @@ var firstTime=true;
 function doRender()
 {
     if(!firstTime) uniTime.setValue(Date.now()/1000-startTime);
-    
+
     // simulation shader
-    
+
     var t=effect.getCurrentSourceTexture().tex;
     cgl.setShader(shaderSim);
     effect.bind();
@@ -113,7 +113,7 @@ function doRender()
     cgl.resetViewPort();
 
     // positioning shader
-    
+
     if(cgl.getShader()!=shaderPos)
     {
         if(shaderPos) removeModule();
@@ -138,5 +138,3 @@ function doRender()
 
 
 render.onTriggered=doRender;
-
-

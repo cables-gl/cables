@@ -39,7 +39,7 @@ var inAmount=op.inValueSlider("Amount",0.5);
 var shader=null;
 
 var srcHeadVert=''
-    .endl()+'varying vec4 MOD_areaPos;'
+    .endl()+'OUT vec4 MOD_areaPos;'
     .endl();
 
 var srcBodyVert=''
@@ -47,17 +47,17 @@ var srcBodyVert=''
     .endl();
 
 var srcHeadFrag=''
-    .endl()+'varying vec4 MOD_areaPos;'
-    .endl()+'uniform float MOD_size;'
-    .endl()+'uniform float MOD_amount;'
+    .endl()+'IN vec4 MOD_areaPos;'
+    .endl()+'UNI float MOD_size;'
+    .endl()+'UNI float MOD_amount;'
     
-    .endl()+'uniform float MOD_r;'
-    .endl()+'uniform float MOD_g;'
-    .endl()+'uniform float MOD_b;'
+    .endl()+'UNI float MOD_r;'
+    .endl()+'UNI float MOD_g;'
+    .endl()+'UNI float MOD_b;'
 
-    .endl()+'uniform float MOD_x;'
-    .endl()+'uniform float MOD_y;'
-    .endl()+'uniform float MOD_z;'
+    .endl()+'UNI float MOD_x;'
+    .endl()+'UNI float MOD_y;'
+    .endl()+'UNI float MOD_z;'
 
     .endl();
 

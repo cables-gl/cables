@@ -23,7 +23,7 @@ var uniCenterY=new CGL.Uniform(shader,'f','centerY',centerY);
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
 
     .endl()+'uniform float sides;'

@@ -1,0 +1,18 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringLength"
+    },
+    "summary": "number of characters in a string"
+}

@@ -1,15 +1,15 @@
-attribute vec3 aPos;
-attribute vec3 aPrevPos;
-attribute vec3 aNextPos;
+IN vec3 aPos;
+IN vec3 aPrevPos;
+IN vec3 aNextPos;
 
-attribute float aOffset;
+IN float aOffset;
 
-uniform mat4 projMatrix;
-uniform mat4 modelMatrix;
-uniform mat4 viewMatrix;
-uniform vec4 u_linewidth;
-varying float v_alpha;
-uniform float u_shift;
+UNI mat4 projMatrix;
+UNI mat4 modelMatrix;
+UNI mat4 viewMatrix;
+UNI vec4 u_linewidth;
+OUT float v_alpha;
+UNI float u_shift;
 
 
 void main()
@@ -21,8 +21,8 @@ void main()
     vec4 posPrev = projMatrix * viewMatrix * modelMatrix * vec4(aPrevPos.xyz, 1.0);
     vec4 posNext = projMatrix * viewMatrix * modelMatrix * vec4(aNextPos.xyz, 1.0);
     v_alpha = 1.0;
-    
-    
+
+
     // vec4 u_linewidth=vec4(aOffset*0.2,
     //     aOffset*0.2,
     //     aOffset*0.2,
@@ -52,11 +52,9 @@ void main()
             v_alpha = u_linewidth.q;
         }
         v_alpha=aOffset;
-        
+
     }
 
-    
-// pos.z=0.0;
     gl_Position =  pos;
 
 }

@@ -9,34 +9,30 @@ const float specularScale = 0.65;
 const float roughness = 1110.0;
 const float albedo = 0.9;
 
-uniform float shininess;
-uniform float specularStrength;
-uniform float fresnel;
+UNI float shininess;
+UNI float specularStrength;
+UNI float fresnel;
 
 #ifdef HAS_TEXTURE_DIFFUSE
-    uniform sampler2D texDiffuse;
+    UNI sampler2D texDiffuse;
 #endif
 #ifdef HAS_TEXTURE_SPECULAR
-    uniform sampler2D texSpecular;
+    UNI sampler2D texSpecular;
 #endif
 
 #ifdef HAS_TEXTURE_NORMAL
-    uniform sampler2D texNormal;
+    UNI sampler2D texNormal;
 #endif
 
-#ifdef HAS_TEXTURE_AO
-    uniform sampler2D texAo;
-#endif
+UNI float r,g,b,a;
 
-uniform float r,g,b,a;
+UNI float diffuseRepeatX;
+UNI float diffuseRepeatY;
 
-uniform float diffuseRepeatX;
-uniform float diffuseRepeatY;
-
-uniform int flatShading;
-uniform mat4 modelMatrix;
-uniform mat4 viewMatrix;
-varying  vec2 texCoord;
+UNI int flatShading;
+UNI mat4 modelMatrix;
+UNI mat4 viewMatrix;
+IN  vec2 texCoord;
 
 struct Light {
   vec3 pos;
@@ -48,13 +44,13 @@ struct Light {
   float mul;
 };
 
-varying mat3 normalMatrix;
+IN mat3 normalMatrix;
 
 
-uniform Light lights[4];
+UNI Light lights[4];
 
-varying vec3 vViewPosition;
-varying vec3 vNormal;
+IN vec3 vViewPosition;
+IN vec3 vNormal;
 
 //import some common functions
 // vec3 normals_4_0(vec3 pos) {
@@ -78,7 +74,7 @@ varying vec3 vNormal;
 //   vec3 T = dp2perp * duv1.x + dp1perp * duv2.x;
 //   vec3 B = dp2perp * duv1.y + dp1perp * duv2.y;
 
-//   // construct a scale-invariant frame 
+//   // construct a scale-invariant frame
 //   float invmax = 1.0 / sqrt(max(dot(T,T), dot(B,B)));
 //   return mat3(T * invmax, B * invmax, N);
 // }
@@ -97,7 +93,7 @@ float orenNayarDiffuse_5_3(
   vec3 surfaceNormal,
   float roughness,
   float albedo) {
-  
+
   float LdotV = dot(lightDirection, viewDirection);
   float NdotL = dot(lightDirection, surfaceNormal);
   float NdotV = dot(surfaceNormal, viewDirection);
@@ -128,7 +124,7 @@ float phongSpecular_7_4(
 // by Tom Madams
 // Simple:
 // https://imdoingitwrong.wordpress.com/2011/01/31/light-attenuation/
-// 
+//
 // Improved
 // https://imdoingitwrong.wordpress.com/2011/02/10/improved-light-attenuation/
 float attenuation_1_5(float r, float f, float d) {
@@ -188,11 +184,11 @@ float calcFresnel(vec3 direction, vec3 normal)
     vec3 nDirection = normalize( direction );
     vec3 nNormal = normalize( normal );
     vec3 halfDirection = normalize( nNormal + nDirection );
-    
+
     float cosine = dot( halfDirection, nDirection );
     float product = max( cosine, 0.0 );
     float factor = pow( product, 5.0 );
-    
+
     return factor;
 }
 
@@ -214,7 +210,7 @@ void main()
         vec3 normalMap = texture2D(texNormal, uv).rgb * 2.0 - 1.0;
         normalMap=normalize(normalMatrix * normalMap);
     #endif
-    
+
     float specStrength = specularStrength;
     #ifdef HAS_TEXTURE_SPECULAR
         specStrength = specularStrength*texture2D(texSpecular, uv).r;
@@ -225,7 +221,7 @@ void main()
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         Light light=lights[l];
-    
+
         //determine the type of normals for lighting
         vec3 normal = vec3(0.0);
         //   if (flatShading == 1) {
@@ -246,12 +242,12 @@ void main()
         //assume its in sRGB, so we need to correct for gamma
 
         //our normal map has an inverted green channel
-        
+
         vec3 L = normalize(lightVector);              //light direction
         vec3 V = normalize(vViewPosition);            //eye direction
-        
+
         vec3 N = normal;//perturb_6_2(normalMap, normal, -V, vUv); //surface normal
-        
+
         #ifdef HAS_TEXTURE_NORMAL
             N = normalize( (normalMap+normal) );
         #endif
@@ -263,19 +259,13 @@ void main()
 
         //add the lighting
         color += (diffuse + ambient);
-        
+
         if(fresnel!=0.0) color+=calcFresnel(V,normal)*fresnel*5.0;
-        
+
 
         //re-apply gamma to output buffer
     }
- 
- #ifdef HAS_TEXTURE_AO
-    color *= texture2D(texAo, uv).r;
 
-#endif
-
-    
     color*=diffuseColor;
     color+=specular;
     // color=toGamma_3_9(color);
@@ -286,3 +276,4 @@ void main()
     gl_FragColor = col;
     // gl_FragColor.a =a;
 }
+

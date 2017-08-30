@@ -1,0 +1,29 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "url"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "result"
+            },
+            {
+                "type": "0",
+                "name": "connected"
+            },
+            {
+                "type": "2",
+                "name": "Connection"
+            },
+            {
+                "type": "1",
+                "name": "Received Data"
+            }
+        ],
+        "name": "Ops.Net.WebSocket.WebSocket"
+    }
+}

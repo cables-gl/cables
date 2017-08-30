@@ -21,29 +21,29 @@
     var srcFrag=''
         .endl()+'precision mediump float;'
         .endl()+'#ifdef HAS_TEXTURES'
-        .endl()+'  varying vec2 texCoord;'
-        .endl()+'  uniform sampler2D tex;'
-        .endl()+'  uniform sampler2D depthTex;'
-        .endl()+'  uniform float dirX;'
-        // .endl()+'  uniform float dirY;'
-        .endl()+'  uniform float width;'
-        .endl()+'  uniform float height;'
+        .endl()+'  IN vec2 texCoord;'
+        .endl()+'  UNI sampler2D tex;'
+        .endl()+'  UNI sampler2D depthTex;'
+        .endl()+'  UNI float dirX;'
+        // .endl()+'  UNI float dirY;'
+        .endl()+'  UNI float width;'
+        .endl()+'  UNI float height;'
 
-        .endl()+'  uniform float f;'
-        .endl()+'  uniform float n;'
+        .endl()+'  UNI float f;'
+        .endl()+'  UNI float n;'
 
         .endl()+'#endif'
         .endl()+''
-        .endl()+'vec4 blur9(sampler2D texture, vec2 uv, vec2 red, vec2 dir)'
+        .endl()+'vec4 blur9(sampler2D text, vec2 uv, vec2 red, vec2 dir)'
         .endl()+'{'
         .endl()+'   vec4 color = vec4(0.0);'
         .endl()+'   vec2 offset1 = vec2(1.3846153846) * dir*1.5;'
         .endl()+'   vec2 offset2 = vec2(3.2307692308) * dir*1.5;'
-        .endl()+'   color += texture2D(texture, uv) * 0.2270270270;'
-        .endl()+'   color += texture2D(texture, uv + (offset1 / red)) * 0.3162162162;'
-        .endl()+'   color += texture2D(texture, uv - (offset1 / red)) * 0.3162162162;'
-        .endl()+'   color += texture2D(texture, uv + (offset2 / red)) * 0.0702702703;'
-        .endl()+'   color += texture2D(texture, uv - (offset2 / red)) * 0.0702702703;'
+        .endl()+'   color += texture2D(text, uv) * 0.2270270270;'
+        .endl()+'   color += texture2D(text, uv + (offset1 / red)) * 0.3162162162;'
+        .endl()+'   color += texture2D(text, uv - (offset1 / red)) * 0.3162162162;'
+        .endl()+'   color += texture2D(text, uv + (offset2 / red)) * 0.0702702703;'
+        .endl()+'   color += texture2D(text, uv - (offset2 / red)) * 0.0702702703;'
         .endl()+'   return color;'
         .endl()+'}'
         .endl()+''
@@ -64,7 +64,7 @@
         .endl()+'   float dirY=0.0;'
         .endl()+'   if(dirX==0.0)dirY=1.0;'
 
-        
+
         .endl()+'   vec4 baseCol=texture2D(tex, texCoord);'
 
 
@@ -80,7 +80,7 @@
         .endl()+'       #endif'
 
         .endl()+'   #endif'
-        .endl()+'   gl_FragColor = col;'
+        .endl()+'   outColor = col;'
         .endl()+'}';
 
     shader.setSource(shader.getDefaultVertexShader(),srcFrag);

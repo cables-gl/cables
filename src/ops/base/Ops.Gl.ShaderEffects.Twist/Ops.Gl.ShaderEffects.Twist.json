@@ -1,0 +1,46 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "amount"
+            },
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            },
+            {
+                "type": "0",
+                "name": "Z"
+            },
+            {
+                "type": "0",
+                "name": "Center X"
+            },
+            {
+                "type": "0",
+                "name": "Center Y"
+            },
+            {
+                "type": "0",
+                "name": "Center Z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.Twist"
+    },
+    "summary": "twist a mesh around an axis"
+}

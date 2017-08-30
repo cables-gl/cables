@@ -20,15 +20,15 @@ simTexPosOut.set(simTexPos);
 // position
 
 var srcHeadVert=''
-    .endl()+'attribute float attrVertIndex;'
+    .endl()+'IN float attrVertIndex;'
 
-    .endl()+'uniform sampler2D {{mod}}_texturePos;'
+    .endl()+'UNI sampler2D {{mod}}_texturePos;'
     .endl();
 
 var srcBodyVert=''
     .endl()+'pos.rgb=texture2D( {{mod}}_texturePos, vec2(pos.r,pos.g)).rgb;'
     .endl()+'psMul*=pos.a;'
-    
+
     // .endl()+'pos.g+=random(texCoord);'
     .endl();
 
@@ -37,18 +37,18 @@ var srcBodyVert=''
 
 var simSrc=''
     .endl()+'precision highp float;'
-    .endl()+'uniform sampler2D texPosition;'
-    .endl()+'uniform float time;'
-    .endl()+'uniform float sizeZ;'
-    .endl()+'uniform float sinZ;'
-    .endl()+'uniform float sizeY;'
-    .endl()+'uniform float sinY;'
-    .endl()+'uniform float lifeTime;'
-    .endl()+'uniform float speed;'
-    
-    .endl()+'uniform sampler2D simTexPos;'
+    .endl()+'UNI sampler2D texPosition;'
+    .endl()+'UNI float time;'
+    .endl()+'UNI float sizeZ;'
+    .endl()+'UNI float sinZ;'
+    .endl()+'UNI float sizeY;'
+    .endl()+'UNI float sinY;'
+    .endl()+'UNI float lifeTime;'
+    .endl()+'UNI float speed;'
 
-    .endl()+'varying vec2 texCoord;'
+    .endl()+'UNI sampler2D simTexPos;'
+
+    .endl()+'IN vec2 texCoord;'
 
     .endl()+'float random(vec2 co)'
     .endl()+'{'
@@ -59,10 +59,10 @@ var simSrc=''
     .endl()+'{'
     .endl()+'   vec4 old = texture2D( simTexPos, texCoord );'
     .endl()+'   float rand=random(gl_FragCoord.xy)*3.0;'
-    
+
     .endl()+' float pLifeTime=(random(texCoord*1.12320)*lifeTime);'
     .endl()+' float rndOffset=(4.0 * random(texCoord));'
-    
+
 
     .endl()+'   float x=-1.0*mod(time*speed + rndOffset , pLifeTime);'
     .endl()+'   float y=random(texCoord*3.32123)*sizeY-sizeY/2.0+sinY*random(texCoord*2.223)*sizeY*sin(time+16.0*random(texCoord*1.12123));'
@@ -112,10 +112,10 @@ function setPoints()
             geom.vertices[index*3+0]=i/1024;
             geom.vertices[index*3+1]=j/1024;
             geom.vertices[index*3+2]=0;
-            
+
             geom.texCoords[index*2]=0;
             geom.texCoords[index*2+1]=0;
-            
+
         }
     }
 
@@ -145,11 +145,11 @@ render.onTriggered=function()
 {
 
     // set position shader...
-    
+
     if(cgl.getShader()!=posShader)
     {
         if(posShader) removeModule();
-        
+
         posShader=cgl.getShader();
 
         posModule=posShader.addModule(
@@ -164,7 +164,7 @@ render.onTriggered=function()
 
 
 
-    // do simulation 
+    // do simulation
     var t=effect.getCurrentSourceTexture().tex;
     cgl.setShader(simShader);
     effect.bind();
@@ -175,8 +175,8 @@ render.onTriggered=function()
     cgl.setPreviousShader();
 
     uniTime.setValue(timeIn.get());
-    
-    
+
+
     if(simTexPos)
     {
         // cgl.setTexture(0,t);
@@ -188,4 +188,3 @@ render.onTriggered=function()
     if(mesh) mesh.render(cgl.getShader());
 
 };
-

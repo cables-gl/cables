@@ -35,27 +35,27 @@ var shader=null;
 var uniDoInstancing=null;
 
 var srcHeadVert=''
-    .endl()+'uniform float do_instancing;'
-    .endl()+'uniform float {{mod}}_time;'
+    .endl()+'UNI float do_instancing;'
+    .endl()+'UNI float {{mod}}_time;'
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   attribute mat4 instMat;'
-    // .endl()+'   varying mat4 instModelMat;'
+    .endl()+'   IN mat4 instMat;'
+    // .endl()+'   OUT mat4 instModelMat;'
     .endl()+'#endif'
-    
+
     .endl()+'float osci(float v)'
     .endl()+'{'
     .endl()+'   v=mod(v,1.0);'
     .endl()+'   if(v>0.5)v=1.0-v;'
     // .endl()+'   else if(v<0.5)v=0.5*v;'
-    // 
+    //
     .endl()+'   return smoothstep(0.0,1.0,v*2.0);'
     .endl()+'}'
-    
+
     .endl();
 
 var srcBodyVert=''
 
-    
+
 
     .endl()+'#ifdef INSTANCING'
     .endl()+'   if( do_instancing==1.0 )'
@@ -83,7 +83,7 @@ function prepare()
         var num=transformations.length;
         var arrs = [].concat.apply([], transformations);
         var matrices = new Float32Array(arrs);
-    
+
         mesh=new CGL.Mesh(cgl,geom.get());
         mesh.numInstances=num;
         mesh.setAttribute('instMat',matrices,16);
@@ -106,7 +106,7 @@ exe.onLinkChanged=removeModule;
 
 function doRender()
 {
-    
+
     if(mesh)
     {
         if(cgl.getShader() && cgl.getShader()!=shader)
@@ -116,7 +116,7 @@ function doRender()
                 removeModule();
                 shader=null;
             }
-    
+
             shader=cgl.getShader();
             // if(!shader.hasDefine('INSTANCING'))
             {
@@ -127,10 +127,10 @@ function doRender()
                         srcHeadVert: srcHeadVert,
                         srcBodyVert: srcBodyVert
                     });
-        
+
                 shader.define('INSTANCING');
                 uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
-                
+
             }
             // else
             // {
@@ -138,7 +138,7 @@ function doRender()
             // }
             if(mod)uniTime=new CGL.Uniform(shader,'f',mod.prefix+'_time',anim);
         }
-        
+
         if(!uniDoInstancing)return;
 
         uniDoInstancing.setValue(1);
@@ -147,7 +147,7 @@ function doRender()
     }
     else
     {
-        prepare();    
+        prepare();
     }
 }
 
@@ -161,10 +161,10 @@ function reset()
     randomsFloats.length=0;
 
     Math.randomSeed=seed.get();
-    
+
     var posArr=positions.get();
     if(posArr) num.set(posArr.length/3);
-    
+
 
     for(i=0;i<num.get();i++)
     {
@@ -191,7 +191,7 @@ function reset()
                 scaleY.get()*((Math.seededRandom())*size.get()),
                 scaleZ.get()*((Math.seededRandom())*size.get())
                 ));
-            
+
         }
 
         randomsRot.push(vec3.fromValues(
@@ -200,16 +200,16 @@ function reset()
             Math.seededRandom()*360*CGL.DEG2RAD
             ));
     }
-    
+
     transformations.length=0;
-    
+
     var m=mat4.create();
     for(i=0;i<randoms.length;i++)
     {
         mat4.identity(m);
-        
+
         mat4.translate(m,m, randoms[i]);
-        
+
         var vScale=vec3.create();
         // var sc=0.25+0.75*Math.seededRandom();
         var sc=Math.seededRandom();
@@ -219,7 +219,7 @@ function reset()
         // mat4.rotateX(m,m, randomsRot[i][0]);
         // mat4.rotateY(m,m, randomsRot[i][1]);
         // mat4.rotateZ(m,m, randomsRot[i][2]);
-        
+
 
         transformations.push( Array.prototype.slice.call(m) );
 

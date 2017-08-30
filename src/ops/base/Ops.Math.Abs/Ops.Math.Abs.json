@@ -1,1 +1,18 @@
-{"summary":"Returns the absolute, positive value"}
+{
+    "summary": "Returns the absolute, positive value",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Abs"
+    }
+}

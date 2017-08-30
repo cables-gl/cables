@@ -29,5 +29,6 @@
             }
         ],
         "name": "Ops.Gl.TextureSVG"
-    }
+    },
+    "summary": "Load a SVG image and convert to pixel texture"
 }

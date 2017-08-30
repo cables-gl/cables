@@ -1,4 +1,4 @@
-varying vec4 MOD_pos;
+IN vec4 MOD_pos;
 
 float MOD_mod289(float x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
 vec4 MOD_mod289(vec4 x){return x - floor(x * (1.0 / 289.0)) * 289.0;}

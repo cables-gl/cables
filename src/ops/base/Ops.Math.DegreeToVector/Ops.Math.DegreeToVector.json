@@ -1,0 +1,26 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "degree"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            }
+        ],
+        "name": "Ops.Math.DegreeToVector"
+    },
+    "summary": "Calculates a vector (x and y) based on an angle in degrees"
+}

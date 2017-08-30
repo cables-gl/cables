@@ -1,14 +1,4 @@
-## videos
+# Video Tutorials
 
-the password is 5711
-- intro
+Be sure to watch our [Video Tutorials on Youtube](https://www.youtube.com/watch?v=KPTGFM177HU&list=PLYimpE2xWgBveaPOiV_2_42kZEl_1ExB0).
 
-[](https://player.vimeo.com/video/139844037)
-
-- example repeat op
-
-[](https://player.vimeo.com/video/139855880)
-
-- sub patches
-
-[](https://player.vimeo.com/video/139954403)
