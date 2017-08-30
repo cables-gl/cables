@@ -10,9 +10,16 @@ var anim=new CABLES.TL.Anim();
 anim.setValue(1, 1);
 anim.setValue(2, 2);
 anim.loop=true;
+var lastLoop=-1;
 anim.onLooped=function()
 {
-    trigger.trigger();
+    // console.log('loop',CABLES.now()-lastLoop);
+    // if(CABLES.now()-lastLoop>interval.get()*1000)
+    // {
+        trigger.trigger();
+    // }
+    // lastLoop=CABLES.now();
+    
 };
 
 delay.set(0);

@@ -24,6 +24,10 @@ uniform float fresnel;
     uniform sampler2D texNormal;
 #endif
 
+#ifdef HAS_TEXTURE_AO
+    uniform sampler2D texAo;
+#endif
+
 uniform float r,g,b,a;
 
 uniform float diffuseRepeatX;
@@ -265,6 +269,12 @@ void main()
 
         //re-apply gamma to output buffer
     }
+ 
+ #ifdef HAS_TEXTURE_AO
+    color *= texture2D(texAo, uv).r;
+
+#endif
+
     
     color*=diffuseColor;
     color+=specular;

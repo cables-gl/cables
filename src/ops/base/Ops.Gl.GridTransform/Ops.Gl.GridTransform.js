@@ -53,8 +53,7 @@ render.onTriggered=function()
             outX.set(x);
 
             mat4.translate(cgl.mvMatrix,matOrig, vec);
-            
-            
+
             outIndex.set(i);
             i++;
             

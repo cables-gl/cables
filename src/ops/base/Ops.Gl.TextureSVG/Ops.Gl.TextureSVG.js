@@ -37,7 +37,6 @@ function createCanvas()
     canvas = document.createElement('canvas');
     ctx = canvas.getContext('2d');
 
-    // textureOut.get().setSize(texWidth.get(),texHeight.get());
     ctx.canvas.width=canvas.width=texWidth.get();
     ctx.canvas.height=canvas.height=texHeight.get();
 
@@ -49,11 +48,8 @@ function createCanvas()
 
 textureOut.set(new CGL.Texture(cgl));
 
-
 function reSize()
 {
-
-
     update();
 }
 
@@ -68,9 +64,6 @@ var data = "data:image/svg+xml," +
            '</foreignObject>' +
            '</svg>';
 
-
-
-    
 var cgl_filter=CGL.Texture.FILTER_LINEAR;
 var cgl_wrap=CGL.Texture.WRAP_REPEAT;
 
@@ -101,6 +94,10 @@ function reload()
         function(err,_data,xhr)
         {
             data="data:image/svg+xml,"+_data;
+            
+            data=data.replace( /#/g, '%23' );
+            // console.log(data);
+            
             op.patch.loading.finished(loadingId);
             update();
         }
@@ -114,10 +111,13 @@ function update()
     var img = new Image();
     var loadingId=op.patch.loading.start('svg2texture',filename.get());
 
-    img.onerror = function()
+    img.onerror = function(e)
     {
         op.patch.loading.finished(loadingId);
         op.uiAttr( { 'error': 'Could not load SVG file!' } );
+        console.log('Could not load SVG file');
+        console.log(e);
+        
     };
     
     img.onload = function()

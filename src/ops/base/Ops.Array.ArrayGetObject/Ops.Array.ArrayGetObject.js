@@ -16,7 +16,6 @@ function update()
     if(!arr)return;
     var ind=index.get();
     if(ind>=arr.length)return;
-    // value.set( null);
     if(arr[ind]) value.set( arr[ind]);
 }
 

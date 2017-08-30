@@ -94,6 +94,7 @@ var srcBodyVert=''
 
 
     .endl()+'vec2 {{mod}}tc=texCoord;'
+    // .endl()+'vec2 {{mod}}tc=vec2(pos.x,pos.y);'
 
     .endl()+'#ifdef '+id+'FLIPY'
     .endl()+'    {{mod}}tc.y=1.0-{{mod}}tc.y;'
@@ -124,6 +125,7 @@ var srcBodyVert=''
     .endl()+'   pos.y+=(({{mod}}_texVal-0.5) * {{mod}}_extrude);'
     .endl()+'#endif'
 
+    
 
     .endl()+''+id+'displHeightMapColor={{mod}}_texVal;'
 
