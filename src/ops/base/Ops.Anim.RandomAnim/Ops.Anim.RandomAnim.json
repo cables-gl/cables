@@ -1,0 +1,42 @@
+{
+    "summary": "Animatie a value between random values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "pause between"
+            },
+            {
+                "type": "0",
+                "name": "random seed"
+            },
+            {
+                "type": "0",
+                "name": "duration"
+            },
+            {
+                "type": "0",
+                "name": "easing"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.RandomAnim"
+    }
+}

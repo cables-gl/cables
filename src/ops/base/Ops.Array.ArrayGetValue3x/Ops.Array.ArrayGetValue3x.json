@@ -1,0 +1,29 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Index"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            },
+            {
+                "type": "0",
+                "name": "Z"
+            }
+        ],
+        "name": "Ops.Array.ArrayGet3Values"
+    }
+}

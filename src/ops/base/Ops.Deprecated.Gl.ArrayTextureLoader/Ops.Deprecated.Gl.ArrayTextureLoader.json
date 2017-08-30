@@ -1,0 +1,17 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "URLs"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Textures"
+            }
+        ],
+        "name": "Ops.Deprecated.Gl.ArrayTextureLoader"
+    }
+}
