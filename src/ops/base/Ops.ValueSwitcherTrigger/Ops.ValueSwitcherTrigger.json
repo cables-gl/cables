@@ -1,0 +1,57 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Index"
+            },
+            {
+                "type": "0",
+                "name": "Value 0"
+            },
+            {
+                "type": "0",
+                "name": "Value 1"
+            },
+            {
+                "type": "0",
+                "name": "Value 2"
+            },
+            {
+                "type": "0",
+                "name": "Value 3"
+            },
+            {
+                "type": "0",
+                "name": "Value 4"
+            },
+            {
+                "type": "0",
+                "name": "Value 5"
+            },
+            {
+                "type": "0",
+                "name": "Value 6"
+            },
+            {
+                "type": "0",
+                "name": "Value 7"
+            },
+            {
+                "type": "0",
+                "name": "Value 8"
+            },
+            {
+                "type": "0",
+                "name": "Value 9"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.ValueSwitcherTrigger"
+    }
+}
