@@ -1,46 +1,35 @@
 
-var self=this;
-var cgl=op.patch.cgl;
-
-this.name='mouse';
-this.mouseX=this.addOutPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
-this.mouseY=this.addOutPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-this.mouseDown=this.addOutPort(new Port(this,"button down",OP_PORT_TYPE_VALUE));
-this.mouseClick=this.addOutPort(new Port(this,"click",OP_PORT_TYPE_FUNCTION));
-var mouseUp=this.addOutPort(new Port(this,"Button Up",OP_PORT_TYPE_FUNCTION));
-this.mouseClickRight=this.addOutPort(new Port(this,"click right",OP_PORT_TYPE_FUNCTION));
-this.mouseOver=this.addOutPort(new Port(this,"mouseOver",OP_PORT_TYPE_VALUE));
-this.relative=this.addInPort(new Port(this,"relative",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
-
+op.name='mouse';
+var outMouseX=op.addOutPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
+var outMouseY=op.addOutPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
+var mouseDown=op.addOutPort(new Port(op,"button down",OP_PORT_TYPE_VALUE));
+var mouseClick=op.addOutPort(new Port(op,"click",OP_PORT_TYPE_FUNCTION));
+var mouseUp=op.addOutPort(new Port(op,"Button Up",OP_PORT_TYPE_FUNCTION));
+var mouseClickRight=op.addOutPort(new Port(op,"click right",OP_PORT_TYPE_FUNCTION));
+var mouseOver=op.addOutPort(new Port(op,"mouseOver",OP_PORT_TYPE_VALUE));
+var relative=op.addInPort(new Port(op,"relative",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var normalize=op.addInPort(new Port(op,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var active=op.inValueBool("Active",true);
-
-this.smooth=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.smoothSpeed=this.addInPort(new Port(this,"smoothSpeed",OP_PORT_TYPE_VALUE));
-
-
+var smooth=op.addInPort(new Port(op,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var smoothSpeed=op.addInPort(new Port(op,"smoothSpeed",OP_PORT_TYPE_VALUE));
 var area=op.addInPort(new Port(op,"Area",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
+var outButton=op.addOutPort(new Port(op,"button",OP_PORT_TYPE_VALUE));
+var multiply=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE));
+var flipY=op.addInPort(new Port(op,"flip y",OP_PORT_TYPE_VALUE,{display:'bool'}));
+
 
 area.set("Canvas");
-var outButton=this.addOutPort(new Port(this,"button",OP_PORT_TYPE_VALUE));
 
-
-
-
-this.multiply=this.addInPort(new Port(this,"multiply",OP_PORT_TYPE_VALUE));
-this.flipY=this.addInPort(new Port(this,"flip y",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.multiply.set(1.0);
-
+multiply.set(1.0);
 var smoothTimer=0;
-this.smoothSpeed.set(20);
+smoothSpeed.set(20);
 
+var cgl=op.patch.cgl;
 var listenerElement=null;
-
-
 
 function setValue(x,y)
 {
-    if(self.normalize.get())
+    if(normalize.get())
     {
         var w=cgl.canvas.width;
         var h=cgl.canvas.height;
@@ -49,19 +38,19 @@ function setValue(x,y)
             w=listenerElement.clientWidth;
             h=listenerElement.clientHeight;
         }
-        self.mouseX.set( (x/w*2.0-1.0)*self.multiply.get() );
-        self.mouseY.set( (y/h*2.0-1.0)*self.multiply.get() );
+        outMouseX.set( (x/w*2.0-1.0)*multiply.get() );
+        outMouseY.set( (y/h*2.0-1.0)*multiply.get() );
     }
     else
     {
-        self.mouseX.set( x*self.multiply.get() );
-        self.mouseY.set( y*self.multiply.get() );
+        outMouseX.set( x*multiply.get() );
+        outMouseY.set( y*multiply.get() );
     }
 }
 
-this.smooth.onValueChanged=function()
+smooth.onValueChanged=function()
 {
-    if(self.smooth.get()) smoothTimer = setInterval(updateSmooth, 5);
+    if(smooth.get()) smoothTimer = setInterval(updateSmooth, 5);
         else if(smoothTimer)clearTimeout(smoothTimer);
 };
 
@@ -73,8 +62,8 @@ var mouseY=cgl.canvas.height/2;
 lineX=mouseX;
 lineY=mouseY;
 
-this.mouseX.set(mouseX);
-this.mouseY.set(mouseY);
+outMouseX.set(mouseX);
+outMouseY.set(mouseY);
 
 
 var relLastX=0;
@@ -89,7 +78,7 @@ var speed=0;
 
 function updateSmooth()
 {
-    speed=self.smoothSpeed.get();
+    speed=smoothSpeed.get();
     if(speed<=0)speed=0.01;
     var distanceX = Math.abs(mouseX - lineX);
     var speedX = Math.round( distanceX / speed, 0 );
@@ -104,36 +93,33 @@ function updateSmooth()
 
 var onMouseEnter = function(e)
 {
-    self.mouseDown.set(false);
-    self.mouseOver.set(true);
-    speed=self.smoothSpeed.get();
+    mouseDown.set(false);
+    mouseOver.set(true);
+    speed=smoothSpeed.get();
 };
 
 var onMouseDown = function(e)
 {
     outButton.set(e.which);
-    self.mouseDown.set(true);
+    mouseDown.set(true);
 };
 
 var onMouseUp = function(e)
 {
-    
     outButton.set(0);
-    self.mouseDown.set(false);
-    self.mouseClick.set(false);
+    mouseDown.set(false);
     mouseUp.trigger();
 };
 
 var onClickRight= function(e)
 {
-    self.mouseClickRight.trigger();
+    mouseClickRight.trigger();
     e.preventDefault();
 };
 
 function onmouseclick(e)
 {
-    // console.log('click');
-    self.mouseClick.trigger();
+    mouseClick.trigger();
 }
 
 
@@ -147,30 +133,28 @@ function onMouseLeave(e)
     if(area.get()=='Canvas')
     {
         // leave anim
-        if(self.smooth.get())
+        if(smooth.get())
         {
             mouseX=cgl.canvas.width/2;
             mouseY=cgl.canvas.height/2;
         }
         
     }
-    self.mouseOver.set(false);
-    self.mouseDown.set(false);
+    mouseOver.set(false);
+    mouseDown.set(false);
 }
 
-this.relative.onValueChanged=function()
+relative.onChange=function()
 {
     offsetX=0;
     offsetY=0;
-};
+}
 
 function onmousemove(e)
 {
-    self.mouseOver.set(true);
+    mouseOver.set(true);
     
-    // console.log(e);
-    
-    if(!self.relative.get())
+    if(!relative.get())
     {
         if(area.get()=="Canvas")
         {
@@ -183,31 +167,29 @@ function onmousemove(e)
             offsetY=e.clientY;
         }
 
-        if(self.smooth.get())
+        if(smooth.get())
         {
             mouseX=offsetX;
             
-            if(self.flipY.get()) mouseY=listenerElement.clientHeight-offsetY;
+            if(flipY.get()) mouseY=listenerElement.clientHeight-offsetY;
                 else mouseY=offsetY;
         }
         else
         {
-            if(self.flipY.get()) setValue(offsetX,listenerElement.clientHeight-offsetY);
+            if(flipY.get()) setValue(offsetX,listenerElement.clientHeight-offsetY);
                 else setValue(offsetX,offsetY);
         }
-
     }
     else
     {
         if(relLastX!=0 && relLastY!=0)
         {
-            // console.log('diff',offsetX);
             offsetX=e.offsetX-relLastX;
             offsetY=e.offsetY-relLastY;
         }
         else
         {
-            // console.log('reset');
+
         }
 
         relLastX=e.offsetX;
@@ -217,22 +199,20 @@ function onmousemove(e)
         mouseY+=offsetY;
         
         if(mouseY>460)mouseY=460;
-
-        // console.log(mouseX,mouseY);
     }
     
 };
 
 function ontouchstart(event)
 {
-    self.mouseDown.set(true);
+    mouseDown.set(true);
     
     if(event.touches && event.touches.length>0) onMouseDown(event.touches[0]);
 };
 
 function ontouchend(event)
 {
-    self.mouseDown.set(false);
+    mouseDown.set(false);
 
     onMouseUp();
 };
@@ -280,9 +260,8 @@ active.onChange=function()
 
 }
 
-this.onDelete=function()
+op.onDelete=function()
 {
-    console.log("remove mouse op...");
     removeLiseteners();
 };
 

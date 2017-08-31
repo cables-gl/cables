@@ -1,1 +1,46 @@
-{"summary":"Transform objects in 3d space.","layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"posX"},{"type":"0","name":"posY"},{"type":"0","name":"posZ"},{"type":"0","name":"scale"},{"type":"0","name":"rotX"},{"type":"0","name":"rotY"},{"type":"0","name":"rotZ"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.Matrix.Transform"}}
+{
+    "summary": "Transform objects in 3d space.",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "posX"
+            },
+            {
+                "type": "0",
+                "name": "posY"
+            },
+            {
+                "type": "0",
+                "name": "posZ"
+            },
+            {
+                "type": "0",
+                "name": "scale"
+            },
+            {
+                "type": "0",
+                "name": "rotX"
+            },
+            {
+                "type": "0",
+                "name": "rotY"
+            },
+            {
+                "type": "0",
+                "name": "rotZ"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.Transform"
+    }
+}

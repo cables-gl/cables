@@ -47,6 +47,7 @@ function setup()
 
     var i=0;
     var arr=arrayIn.get();
+    if(!arr)return;
     timeStep=parseFloat(duration.get());
 
     for(i=0;i<arr.length;i+=3)

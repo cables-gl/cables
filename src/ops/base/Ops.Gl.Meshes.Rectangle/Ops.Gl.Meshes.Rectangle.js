@@ -10,10 +10,9 @@ var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropd
 
 var nColumns=op.inValueInt("num columns",1);
 var nRows=op.inValueInt("num rows",1);
-
-
-
 var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+
+var active=op.inValueBool('Active',true);
 
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
@@ -37,9 +36,7 @@ rebuild();
 
 render.onTriggered=function()
 {
-    // if(op.instanced(render))return;
-    
-    mesh.render(cgl.getShader());
+    if(active.get() && mesh) mesh.render(cgl.getShader());
     
     trigger.trigger();
 };
