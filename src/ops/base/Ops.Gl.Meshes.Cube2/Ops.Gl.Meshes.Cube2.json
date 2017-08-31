@@ -1,0 +1,42 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "length"
+            },
+            {
+                "type": "0",
+                "name": "center"
+            },
+            {
+                "type": "0",
+                "name": "Active"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.Cube2"
+    },
+    "summary": "draw a cube"
+}
