@@ -26,7 +26,9 @@ var srcHeadVert=''
 var srcBodyVert=''
         // mat4 mvMatrix=viewMatrix * modelMatrix;
 
-    .endl()+'MOD_positionFromLight=MOD_lightMVP * (modelMatrix  * pos);'
+    // .endl()+"const mat4 depthScaleMatrix = mat4(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);"
+// depthScaleMatrix
+    .endl()+'MOD_positionFromLight=MOD_lightMVP*( modelMatrix*pos);'
     // .endl()+'MOD_positionFromLight=projMatrix * mvMatrix * pos;'
             
 

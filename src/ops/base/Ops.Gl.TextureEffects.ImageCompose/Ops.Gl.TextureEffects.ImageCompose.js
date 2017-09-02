@@ -11,7 +11,7 @@ var bgAlpha=op.inValueSlider("Background Alpha",1);
 var fpTexture=op.inValueBool("HDR");
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var texOut=op.outTexture("texture_out");csdcds
+var texOut=op.outTexture("texture_out");
 
 var outRatio=op.outValue("Aspect Ratio");
 

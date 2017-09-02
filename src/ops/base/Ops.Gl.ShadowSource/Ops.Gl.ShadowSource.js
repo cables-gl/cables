@@ -9,11 +9,11 @@ var cgl=op.patch.cgl;
 var lightMVP=mat4.create();
 
 
-if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,1024,1024);
+if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,512,512);
 else 
 {
     console.log("new framebuffer...");
-    fb=new CGL.Framebuffer2(cgl,1024,1024,{multisampling:false});
+    fb=new CGL.Framebuffer2(cgl,512,512,{multisampling:true});
 }
 
 var tex=op.outTexture("shadow texture");
@@ -30,34 +30,34 @@ function renderPickingPass()
     cgl.pushPMatrix();
 
     vec3.set(vUp, 0,1,0);
-    vec3.set(vEye, 1,14,0);
-    vec3.set(vCenter, -2,0,0);
+    vec3.set(vEye, 1,44,0);
+    vec3.set(vCenter, 1,0,1);
 
-    var ratio=100.0;
-    mat4.perspective(cgl.pMatrix,45, 1, 0.1, 100.0);
-    // mat4.ortho(cgl.pMatrix,
-    //     1*ratio, 
-    //     -1*ratio,  
-    //     1*ratio, 
-    //     -1*ratio, 
-    //     0.1, 
-    //     100
-    //     );
+    var ratio=15.0;
+    // mat4.perspective(cgl.pMatrix,45, 1, 0.1, 100.0);
+    mat4.ortho(cgl.pMatrix,
+        1*ratio, 
+        -1*ratio,  
+        1*ratio, 
+        -1*ratio, 
+        0.01,
+        100
+        );
 
     mat4.lookAt(cgl.vMatrix, vEye, vCenter, vUp);
 
     // =lightViewMatrix;
     
     // mat4.mul(lightMVP,lightViewMatrix,cgl.pMatrix);
-    mat4.mul(lightMVP,cgl.vMatrix,cgl.pMatrix);
+    mat4.mul(lightMVP,cgl.pMatrix,cgl.vMatrix);
 
     
-    // var biasMatrix=mat4.fromValues(
-    //     0.5, 0.0, 0.0, 0.0,
-    //     0.0, 0.5, 0.0, 0.0,
-    //     0.0, 0.0, 0.5, 0.0,
-    //     0.5, 0.5, 0.5, 1.0);
-    // mat4.mul(lightMVP,biasMatrix,lightMVP);
+    var biasMatrix=mat4.fromValues(
+        0.5, 0.0, 0.0, 0.0,
+        0.0, 0.5, 0.0, 0.0,
+        0.0, 0.0, 0.5, 0.0,
+        0.5, 0.5, 0.5, 1.0);
+    mat4.mul(lightMVP,biasMatrix,lightMVP);
     // mat4.mul(lightMVP,lightMVP,biasMatrix);
 
     
@@ -95,11 +95,23 @@ var doRender=function()
 {
     var minimizeFB=8;
 
+    cgl.gl.enable(cgl.gl.CULL_FACE);
+    cgl.gl.cullFace(cgl.gl.FRONT);
+
+
     renderPickingPass();
 
+
+
     cgl.frameStore.shadowMap=fb.getTextureDepth();
+    
+    cgl.gl.cullFace(cgl.gl.BACK);
+
     next.trigger();
     cgl.frameStore.shadowMap=null;
+
+    cgl.gl.disable(cgl.gl.CULL_FACE);
+
 };
 
 

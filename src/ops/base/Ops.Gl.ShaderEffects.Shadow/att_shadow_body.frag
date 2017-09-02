@@ -1,43 +1,72 @@
 
 // vec3 shadowCoord = (MOD_positionFromLight.xyz/MOD_positionFromLight.w)/2.0 + 0.5;
-// vec4 rgbaDepth = texture2D(MOD_shadowMap, shadowCoord.xy);
-// float depth = unpackDepth(rgbaDepth);
+// vec4 texDepth = texture2D(MOD_shadowMap, shadowCoord.xy);
+// float depth = unpackDepth(texDepth);
 // float visibility = (shadowCoord.z > depth + 0.0015) ? 0.3 : 1.0;
 // // col = vec4(vec3(1.0, 0.0, 0.0) * visibility, 1.0);
 // col *= visibility;
 
 
-vec2 coord=MOD_positionFromLight.xy/512.0;
-vec4 rgbaDepth = texture2D(MOD_shadowMap, coord);
+// vec2 coord=MOD_positionFromLight.xy/140.0-vec2(0.5,0.5);
 
+vec3 coords = MOD_positionFromLight.xyz / MOD_positionFromLight.w;
+// coords.x = (0.5 * coords.x) + 0.5;
+// coords.y = (0.5 * coords.y) + 0.5;
 
+vec4 texDepth = texture2D(MOD_shadowMap, coords.xy);
 
 // col.r=MOD_positionFromLight.x;
 
 // col.b=1.0;
-// col.rg=coord;
+// col.rgb=coords;
 
-float bias = 0.1005;
-// if( rgbaDepth.z < MOD_positionFromLight.z/256.0+bias) col.rgb*=0.5;
+float shadow=1.0;
+float bias = 0.001;
+
+// if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
+// {
+//     if( texDepth.r < (MOD_positionFromLight.z+bias) ) shadow=0.5;
+//         else shadow=1.0;
+// }
+
+if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
+{
+
+    vec2 texelSize = vec2(1.0) / 512.0;
+    bias=0.001;
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture2D(MOD_shadowMap, coords.xy + vec2(x, y) * texelSize).r; 
+            shadow += MOD_positionFromLight.z + bias > pcfDepth ? 0.5 : 0.0;
+        }    
+    }
+    shadow /= 9.0;
+    shadow=1.0-shadow+0.1;
+}
+
+
+
+col.rgb*=shadow;
+
+
+// if( texDepth.x <0.0) col.rgb*=0.2;
 //     else col.rgb*=1.0;
 
-// if( rgbaDepth.z ==0.0) col.rgb*=0.5;
-//     else col.rgb*=1.0;
 
-
-// col.rgb=rgbaDepth.rgb/100.0;//vec3(rgbaDepth,rgbaDepth,rgbaDepth);
+// col.rgb=texDepth.rgb/100.0;//vec3(texDepth,texDepth,texDepth);
 
 
 
-float f=100.0;
-float n=0.1;
-float z=rgbaDepth.r;
-// float z=MOD_positionFromLight.z;
-float c=(2.0*n)/(f+n-z*(f-n));
-
-// // c=MOD_positionFromLight.z/100.0;
-col=vec4(c,c,c,1.0);
+// float f=50.0;
+// float n=0.1;
+// float z=texDepth.r;
+// float c=(2.0*n)/(f+n-z*(f-n));
+// col=vec4(c,c,c,1.0);
 
 
+// from lightpos
+// col.xyz=vec3(MOD_positionFromLight.z/50.0);
 
-// // col.xyz=vec3(rgbaDepth.z);
+
