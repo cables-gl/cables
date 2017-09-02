@@ -1,0 +1,41 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "learn"
+            },
+            {
+                "type": "0",
+                "name": "key code"
+            },
+            {
+                "type": "0",
+                "name": "canvas only"
+            },
+            {
+                "type": "0",
+                "name": "Mod Key"
+            },
+            {
+                "type": "0",
+                "name": "Prevent Default"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "on press"
+            },
+            {
+                "type": "1",
+                "name": "on release"
+            },
+            {
+                "type": "0",
+                "name": "Pressed"
+            }
+        ],
+        "name": "Ops.Devices.Keyboard.KeyPressLearn"
+    }
+}

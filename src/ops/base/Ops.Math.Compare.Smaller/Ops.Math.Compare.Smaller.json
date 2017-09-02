@@ -1,0 +1,22 @@
+{
+    "summary": "is n1 smaller than n2 ? (was: lesser,less)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number1"
+            },
+            {
+                "type": "0",
+                "name": "number2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Compare.Lesser"
+    }
+}

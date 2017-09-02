@@ -19,7 +19,11 @@
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "Blend Mode"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
             }
         ],
         "portsOut": [
@@ -28,7 +32,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Color"
+        "name": "Ops.Gl.TextureEffects.Color2"
     },
-    "summary": "Fill the current ImageCompose with a color"
+    "summary": "fill image using a color (overlay)"
 }

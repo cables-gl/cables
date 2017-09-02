@@ -1,0 +1,37 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Max Circles"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "radius"
+            }
+        ],
+        "name": "Ops.Gl.CirclePack"
+    }
+}

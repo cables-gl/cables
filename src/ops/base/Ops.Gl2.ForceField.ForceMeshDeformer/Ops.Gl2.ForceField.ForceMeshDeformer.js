@@ -83,8 +83,7 @@ render.onTriggered=function()
         }
     }
 
-
-mat4.copy(mmat,cgl.modelMatrix());
+    mat4.copy(mmat,cgl.modelMatrix());
     uniModelMatrix.setValue(mmat);
     // op.log(cgl.modelMatrix());
 

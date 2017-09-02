@@ -24,6 +24,8 @@ var fontFamily=op.addInPort(new Port(op,"Font Family",OP_PORT_TYPE_VALUE,{type:'
 
 var cursor=op.addInPort(new Port(op,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 
+var opacity=op.inValueSlider("Opacity",1.0);
+
 var r=op.addInPort(new Port(op,"Text Red",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=op.addInPort(new Port(op,"Text Green",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=op.addInPort(new Port(op,"Text Blue",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -93,6 +95,8 @@ g.onValueChanged=updateColor;
 b.onValueChanged=updateColor;
 a.onValueChanged=updateColor;
 
+opacity.onChange=updateOpacity;
+
 fontSize.onValueChanged=updateFont;
 fontFamily.onValueChanged=updateFont;
 borderRadius.onValueChanged=updateBorder;
@@ -147,6 +151,12 @@ function updateBgColor()
 {
     if(!element) return;
     element.style["background-color"]='rgba('+Math.round(bgR.get()*255)+','+Math.round(bgG.get()*255)+','+Math.round(bgB.get()*255)+','+(bgA.get())+')';
+}
+
+function updateOpacity()
+{
+    if(!element) return;
+    element.style.opacity=opacity.get();
 }
 
 function updateColor()
@@ -229,10 +239,18 @@ function init()
     updateClientSize();
     updateCursor();
     updateIgnoreMouse();
+    updateOpacity();
     
-    element.onclick=function()
+    element.onclick=function(e)
     {
         clickTrigger.trigger();
+        e.preventDefault();
+    };
+
+    element.ontouchstart=function(e)
+    {
+        clickTrigger.trigger();
+        e.preventDefault();
     };
 
     element.onmouseover=function()

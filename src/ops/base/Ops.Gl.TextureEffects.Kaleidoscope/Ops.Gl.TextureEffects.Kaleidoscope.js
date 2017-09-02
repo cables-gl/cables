@@ -62,15 +62,20 @@ var srcFrag=''
 
 	.endl()+'loc = (center + loc) *2.1;'
 
+// 	.endl()+'loc.y = (loc.y-0.5)*3.7777+0.5;'
+// 	.endl()+'loc = (center + loc) *3.97777;'
+
 	.endl()+'loc.x = mod(loc.x + slidex, 1.0);'
 	.endl()+'loc.y = mod(loc.y + slidey, 1.0);'
 
 	// sample the image
-	.endl()+'if (loc.x < 0.0)loc.x = mod(abs(loc.x), 1.0);'
-	.endl()+'if (loc.y < 0.0)loc.y = mod(abs(loc.y),1.0);'
+	.endl()+'if(loc.x < 0.0)loc.x = mod(abs(loc.x),1.0);'
+	.endl()+'if(loc.y < 0.0)loc.y = mod(abs(loc.y),1.0);'
 
-	.endl()+'if (loc.x > 1.0) loc.x = mod(abs(1.0-loc.x),1.0);'
-	.endl()+'if(loc.y > 1.0)	loc.y = mod(abs(1.0-loc.y),1.0);'
+	.endl()+'if(loc.x > 1.0) loc.x = mod(abs(1.0-loc.x),1.0);'
+	.endl()+'if(loc.y > 1.0) loc.y = mod(abs(1.0-loc.y),1.0);'
+	
+
 
 // 	.endl()+'gl_FragColor = IMG_NORM_PIXEL(inputImage, loc);'
 	.endl()+'gl_FragColor = texture2D(tex,loc);'

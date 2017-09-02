@@ -25,7 +25,7 @@ render.onTriggered=function()
 function generate()
 {
     var t = Math.sqrt(5.0) / 2;
-    
+    var tc=[];
     var verts=[];
     verts.push(-1,  t,  0);
     verts.push( 1,  t,  0);
@@ -74,6 +74,10 @@ function generate()
     geom.verticesIndices.push(6, 2, 10);
     geom.verticesIndices.push(8, 6, 7);
     geom.verticesIndices.push(9, 8, 1);
+    
+
+    
+    geom.texCoords=tc;
     
     geom.calcNormals(smooth.get());
     mesh=new CGL.Mesh(cgl,geom);

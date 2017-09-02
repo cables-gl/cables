@@ -1,1 +1,42 @@
-{"summary":"Combine multiple Values to a new String"}
+{
+    "summary": "Combine multiple Values to a new String",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Format"
+            },
+            {
+                "type": "0",
+                "name": "String A"
+            },
+            {
+                "type": "0",
+                "name": "String B"
+            },
+            {
+                "type": "0",
+                "name": "String C"
+            },
+            {
+                "type": "0",
+                "name": "String D"
+            },
+            {
+                "type": "0",
+                "name": "String E"
+            },
+            {
+                "type": "0",
+                "name": "String F"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringCompose"
+    }
+}

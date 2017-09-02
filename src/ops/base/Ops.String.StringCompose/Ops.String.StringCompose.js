@@ -10,6 +10,7 @@ var e=op.inValueString('String E');
 var f=op.inValueString('String F');
 var result=op.outValue("Result");
 
+format.onChange=update;
 a.onChange=update;
 b.onChange=update;
 c.onChange=update;
@@ -17,6 +18,8 @@ d.onChange=update;
 d.onChange=update;
 d.onChange=update;
 f.onChange=update;
+
+update();
 
 function update()
 {
