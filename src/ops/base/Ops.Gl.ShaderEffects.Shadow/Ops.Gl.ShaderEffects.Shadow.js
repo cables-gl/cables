@@ -97,7 +97,10 @@ op.render.onTriggered=function()
         cgl.gl.activeTexture(cgl.gl.TEXTURE5);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, shadow.shadowMap.tex);
         
+        
+
     }
 
     op.trigger.trigger();
+    
 };

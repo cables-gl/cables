@@ -162,6 +162,22 @@ op.doBillboard.onChange=function()
 
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
+function updateTexRepeat()
+{
+    if(!diffuseRepeatXUniform)
+    {
+        diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX);
+        diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY);
+        diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
+        diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
+    }
+
+    diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
+    diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
+    diffuseOffsetXUniform.setValue(diffuseOffsetX.get());
+    diffuseOffsetYUniform.setValue(diffuseOffsetY.get());
+}
+
 
 {
     // texture coords
@@ -183,22 +199,7 @@ var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TY
     
     shader.define('TEXTURE_REPEAT');
     
-    function updateTexRepeat()
-    {
-        if(!diffuseRepeatXUniform)
-        {
-            diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX);
-            diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY);
-            diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
-            diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
-        }
-    
-        diffuseRepeatXUniform.setValue(diffuseRepeatX.get());
-        diffuseRepeatYUniform.setValue(diffuseRepeatY.get());
-        diffuseOffsetXUniform.setValue(diffuseOffsetX.get());
-        diffuseOffsetYUniform.setValue(diffuseOffsetY.get());
-    }
-    
+
     diffuseOffsetX.set(0);
     diffuseOffsetY.set(0);
     diffuseRepeatX.set(1);

@@ -7,11 +7,7 @@
             },
             {
                 "type": "0",
-                "name": "Scale"
-            },
-            {
-                "type": "0",
-                "name": "Amount"
+                "name": "Strength"
             }
         ],
         "portsOut": [

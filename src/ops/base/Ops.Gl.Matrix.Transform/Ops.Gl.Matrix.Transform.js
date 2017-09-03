@@ -30,6 +30,41 @@ render.onTriggered=function()
 {
     
     
+
+    
+    
+    var updateMatrix=false;
+    if(translationChanged)
+    {
+        updateTranslation();
+        updateMatrix=true;
+    }
+    if(scaleChanged)
+    {
+        updateScale();
+        updateMatrix=true;
+    }
+    if(rotChanged)
+    {
+        updateMatrix=true;
+    }
+    if(updateMatrix)doUpdateMatrix();
+
+    cgl.pushMvMatrix();
+    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
+
+
+
+
+
+
+
+
+
+
+    trigger.trigger();
+    cgl.popMvMatrix();
+    
     if(CABLES.UI && gui.patch().isCurrentOp(op))
     {
         cgl.pushMvMatrix();
@@ -96,39 +131,6 @@ render.onTriggered=function()
 
     }
     
-    
-    
-    var updateMatrix=false;
-    if(translationChanged)
-    {
-        updateTranslation();
-        updateMatrix=true;
-    }
-    if(scaleChanged)
-    {
-        updateScale();
-        updateMatrix=true;
-    }
-    if(rotChanged)
-    {
-        updateMatrix=true;
-    }
-    if(updateMatrix)doUpdateMatrix();
-
-    cgl.pushMvMatrix();
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
-
-
-
-
-
-
-
-
-
-
-    trigger.trigger();
-    cgl.popMvMatrix();
     
 };
 

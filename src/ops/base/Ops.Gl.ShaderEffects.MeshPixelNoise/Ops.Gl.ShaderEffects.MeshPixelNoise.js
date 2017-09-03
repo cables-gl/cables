@@ -8,7 +8,7 @@ op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var inScale=op.inValue("Scale",10);
 
-inAmount=op.inValueSlider("Amount",0.3);
+var inAmount=op.inValueSlider("Amount",0.3);
 
 // var offsetX=op.addInPort(new Port(this,"offset X",OP_PORT_TYPE_VALUE));
 // var offsetY=op.addInPort(new Port(this,"offset Y",OP_PORT_TYPE_VALUE));
@@ -77,12 +77,11 @@ op.render.onTriggered=function()
                 srcBodyFrag:srcBodyFrag
             },moduleVert);
 
-        scale=new CGL.Uniform(shader,'f',moduleFrag.prefix+'scale',inScale);
-        amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
+        inScale.scale=new CGL.Uniform(shader,'f',moduleFrag.prefix+'scale',inScale);
+        inAmount.amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
     }
 
     if(!shader)return;
-    var texSlot=moduleVert.num+5;
 
     op.trigger.trigger();
 };

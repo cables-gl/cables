@@ -19,7 +19,7 @@ var next=op.outFunction("Next");
 
 var cgl=op.patch.cgl;
 var lightMVP=mat4.create();
-
+var fb=null;
 mapSize.onChange=setSize;
 
 
@@ -139,8 +139,9 @@ var doRender=function()
 cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
 cgl.gl.polygonOffset(polyOff.get(),polyOff.get());
 
-
+    cgl.gl.colorMask(false,false,false,false);
     renderPickingPass();
+    cgl.gl.colorMask(true,true,true,true);
 
 
 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);

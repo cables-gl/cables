@@ -36,7 +36,7 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
     // bias=0.001;
     float smpmax=MOD_smpls/2.0;
     float count=0.0;
-    
+
     for(float x = -smpmax; x <= smpmax; ++x)
     {
         for(float y = -smpmax; y <= smpmax; ++y)
@@ -44,12 +44,11 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
             float pcfDepth = texture2D(MOD_shadowMap, coords.xy + vec2(x, y) * texelSize).r; 
             shadow += MOD_positionFromLight.z + MOD_bias > pcfDepth ? 1.0 : 0.0;
             count+=1.0;
-        }    
+        }
     }
     shadow /= count;
     shadow=1.0-(shadow*MOD_strength*MOD_amount);
 }
-
 
 
 col.rgb*=shadow;
