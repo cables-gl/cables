@@ -548,6 +548,7 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + 'OUT vec3 norm;'
         .endl() + 'UNI mat4 projMatrix;'
         .endl() + 'UNI mat4 mvMatrix;'
+        .endl() + 'UNI mat4 modelMatrix;'
         // .endl()+'uniform mat4 normalMatrix;'
 
         .endl() + 'void main()'

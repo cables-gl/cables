@@ -33,17 +33,21 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
 {
 
     vec2 texelSize = vec2(1.0) / 512.0;
-    bias=0.001;
-    for(int x = -1; x <= 1; ++x)
+    // bias=0.001;
+    float smpmax=MOD_smpls/2.0;
+    float count=0.0;
+    
+    for(float x = -smpmax; x <= smpmax; ++x)
     {
-        for(int y = -1; y <= 1; ++y)
+        for(float y = -smpmax; y <= smpmax; ++y)
         {
             float pcfDepth = texture2D(MOD_shadowMap, coords.xy + vec2(x, y) * texelSize).r; 
-            shadow += MOD_positionFromLight.z + bias > pcfDepth ? 0.5 : 0.0;
+            shadow += MOD_positionFromLight.z + MOD_bias > pcfDepth ? 1.0 : 0.0;
+            count+=1.0;
         }    
     }
-    shadow /= 9.0;
-    shadow=1.0-shadow+0.1;
+    shadow /= count;
+    shadow=1.0-(shadow*MOD_strength*MOD_amount);
 }
 
 

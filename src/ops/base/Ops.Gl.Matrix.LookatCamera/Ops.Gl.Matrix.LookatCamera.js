@@ -4,17 +4,19 @@ op.name='LookatCamera';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var centerX=op.addInPort(new Port(op,"centerX"));
-var centerY=op.addInPort(new Port(op,"centerY"));
-var centerZ=op.addInPort(new Port(op,"centerZ"));
-
 var eyeX=op.addInPort(new Port(op,"eyeX"));
 var eyeY=op.addInPort(new Port(op,"eyeY"));
 var eyeZ=op.addInPort(new Port(op,"eyeZ"));
 
+var centerX=op.addInPort(new Port(op,"centerX"));
+var centerY=op.addInPort(new Port(op,"centerY"));
+var centerZ=op.addInPort(new Port(op,"centerZ"));
+
 var vecUpX=op.addInPort(new Port(op,"upX"));
 var vecUpY=op.addInPort(new Port(op,"upY"));
 var vecUpZ=op.addInPort(new Port(op,"upZ"));
+
+var outArr=op.outArray("Array");
 
 centerX.set(0);
 centerY.set(0);
@@ -35,10 +37,25 @@ var vCenter=vec3.create();
 var transMatrix = mat4.create();
 mat4.identity(transMatrix);
 
+var arr=[];
+
 
 render.onTriggered=function()
 {
     cgl.pushViewMatrix();
+    
+    arr[0]=eyeX.get();
+    arr[1]=eyeY.get();
+    arr[2]=eyeZ.get();
+
+    arr[3]=centerX.get();
+    arr[4]=centerY.get();
+    arr[5]=centerZ.get();
+
+    arr[6]=vecUpX.get();
+    arr[7]=vecUpY.get();
+    arr[8]=vecUpZ.get();
+    outArr.set(arr);
 
     vec3.set(vUp, vecUpX.get(),vecUpY.get(),vecUpZ.get());
     vec3.set(vEye, eyeX.get(),eyeY.get(),eyeZ.get());

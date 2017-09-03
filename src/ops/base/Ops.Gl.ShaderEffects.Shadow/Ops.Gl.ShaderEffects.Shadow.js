@@ -6,34 +6,17 @@ var id='mod'+Math.floor(Math.random()*10000);
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var inScale=op.inValue("Scale",10);
-
-inAmount=op.inValueSlider("Amount",0.3);
-
-
+var inAmount=op.inValueSlider("Strength",1.0);
 
 var shader=null;
 
 var srcHeadVert=''
     .endl()+'OUT vec4 MOD_positionFromLight;'
     .endl()+'UNI mat4 MOD_lightMVP;'
-
-    // .endl()+'UNI mat4 projMatrix;'
-    // .endl()+'UNI mat4 modelMatrix;'
-    // .endl()+'UNI mat4 viewMatrix;'
     .endl();
 
 var srcBodyVert=''
-        // mat4 mvMatrix=viewMatrix * modelMatrix;
-
-    // .endl()+"const mat4 depthScaleMatrix = mat4(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);"
-// depthScaleMatrix
     .endl()+'MOD_positionFromLight=MOD_lightMVP*( modelMatrix*pos);'
-    // .endl()+'MOD_positionFromLight=projMatrix * mvMatrix * pos;'
-            
-
-    // .endl()+'MOD_positionFromLight=vec4(MOD_lightMVP[0][2]);'
-
     .endl();
 
 var srcHeadFrag=attachments.shadow_head_frag;
@@ -55,7 +38,7 @@ op.render.onLinkChanged=removeModule;
 
 op.render.onTriggered=function()
 {
-    if(cgl.frameStore.shadowMap)
+    if(cgl.frameStore.shadow)
     {
 
         if(!cgl.getShader())
@@ -86,9 +69,12 @@ op.render.onTriggered=function()
                 },moduleVert);
     
             // moduleFrag.scale=new CGL.Uniform(shader,'f',moduleFrag.prefix+'scale',inScale);
-            // moduleFrag.amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
+            moduleFrag.amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
             moduleVert.lightMVP=new CGL.Uniform(shader,'m4',moduleVert.prefix+'lightMVP',mat4.create());
             moduleFrag.shadowMap=new CGL.Uniform(shader,'t',moduleFrag.prefix+'shadowMap',5);
+            moduleFrag.strength=new CGL.Uniform(shader,'f',moduleFrag.prefix+'strength',0.5);
+            moduleFrag.samples=new CGL.Uniform(shader,'f',moduleFrag.prefix+'smpls',4);
+            moduleFrag.bias=new CGL.Uniform(shader,'f',moduleFrag.prefix+'bias',0);
         }
     
     
@@ -97,13 +83,19 @@ op.render.onTriggered=function()
         
         
         moduleVert.lightMVP.setValue(cgl.frameStore.lightMVP);
+        
     
     
         if(!shader)return;
         var texSlot=moduleVert.num+5;
+        
+        var shadow=cgl.frameStore.shadow;
+        moduleFrag.strength.setValue(shadow.strength);
+        moduleFrag.samples.setValue(shadow.samples);
+        moduleFrag.bias.setValue(shadow.bias);
 
         cgl.gl.activeTexture(cgl.gl.TEXTURE5);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.frameStore.shadowMap.tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, shadow.shadowMap.tex);
         
     }
 

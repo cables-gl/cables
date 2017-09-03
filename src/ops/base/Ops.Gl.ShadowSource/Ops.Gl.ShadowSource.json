@@ -4,6 +4,34 @@
             {
                 "type": "1",
                 "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Strength"
+            },
+            {
+                "type": "0",
+                "name": "Area Size"
+            },
+            {
+                "type": "0",
+                "name": "Map Size"
+            },
+            {
+                "type": "0",
+                "name": "Samples"
+            },
+            {
+                "type": "0",
+                "name": "Poly Offset"
+            },
+            {
+                "type": "0",
+                "name": "Bias"
+            },
+            {
+                "type": "3",
+                "name": "Look at"
             }
         ],
         "portsOut": [
