@@ -28,7 +28,76 @@ var rotChanged=true;
 
 render.onTriggered=function()
 {
+    
+    
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
+    {
+        cgl.pushMvMatrix();
+        function toScreen(trans)
+        {
+            var vp=cgl.getViewPort();
+            
+            var x=( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
+            var y=( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
+            
+            return {x:x,y:y};
+        }
+        
+        var m=mat4.create();
+        var pos=vec3.create();
+        var trans=vec3.create();
+        var transX=vec3.create();
+        var transY=vec3.create();
+        var transZ=vec3.create();
+        
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, [posX.get(),posY.get(),posZ.get()]);
+        mat4.multiply(m,cgl.vMatrix,cgl.mvMatrix);
 
+        vec3.transformMat4(pos, [0,0,0], m);
+        vec3.transformMat4(trans, pos, cgl.pMatrix);
+        var w=2;
+        vec3.transformMat4(pos, [w,0,0], m);
+        vec3.transformMat4(transX, pos, cgl.pMatrix);
+
+        vec3.transformMat4(pos, [0,w,0], m);
+        vec3.transformMat4(transY, pos, cgl.pMatrix);
+
+        vec3.transformMat4(pos, [0,0,w], m);
+        vec3.transformMat4(transZ, pos, cgl.pMatrix);
+
+
+        var zero=toScreen(trans);
+        var screenX=toScreen(transX);
+        var screenY=toScreen(transY);
+        var screenZ=toScreen(transZ);
+        
+        cgl.popMvMatrix();
+        
+        gui.setTransformGizmo(
+            {
+                x:zero.x,
+                y:zero.y,
+                xx:screenX.x,
+                xy:screenX.y,
+                yx:screenY.x,
+                yy:screenY.y,
+                zx:screenZ.x,
+                zy:screenZ.y,
+                
+                coord:trans,
+                coordX:transX,
+                coordY:transY,
+                coordZ:transZ,
+
+                posX:posX,
+                posY:posY,
+                posZ:posZ,
+            });
+
+    }
+    
+    
+    
     var updateMatrix=false;
     if(translationChanged)
     {
@@ -46,12 +115,29 @@ render.onTriggered=function()
     }
     if(updateMatrix)doUpdateMatrix();
 
-
     cgl.pushMvMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
+
+
+
+
+
+
+
+
+
     trigger.trigger();
     cgl.popMvMatrix();
+    
+};
+
+op.transform3d=function()
+{
+    return {
+            pos:[posX,posY,posZ]
+        };
+    
 };
 
 var doUpdateMatrix=function()

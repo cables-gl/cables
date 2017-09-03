@@ -29,7 +29,6 @@ y2.onChange=function(){ geom.vertices[4]=y2.get(); changed=true; };
 z2.onChange=function(){ geom.vertices[5]=z2.get(); changed=true; };
 
 
-
 render.onTriggered=function()
 {
     if(op.instanced(render))return;
