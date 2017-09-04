@@ -7,6 +7,10 @@
             },
             {
                 "type": "0",
+                "name": "Cast Shadow"
+            },
+            {
+                "type": "0",
                 "name": "Strength"
             }
         ],

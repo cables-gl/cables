@@ -42,6 +42,16 @@ var arr=[];
 
 render.onTriggered=function()
 {
+    
+    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+        gui.setTransformGizmo(
+            {
+                posX:eyeX,
+                posY:eyeY,
+                posZ:eyeZ
+            });
+
+
     cgl.pushViewMatrix();
     
     arr[0]=eyeX.get();

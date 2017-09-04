@@ -8,6 +8,8 @@ op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var inAmount=op.inValueSlider("Strength",1.0);
 
+var castShadows=op.inValueBool("Cast Shadow",true);
+
 var shader=null;
 
 var srcHeadVert=''
@@ -96,11 +98,9 @@ op.render.onTriggered=function()
 
         cgl.gl.activeTexture(cgl.gl.TEXTURE5);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, shadow.shadowMap.tex);
-        
-        
-
+        op.trigger.trigger();
     }
 
-    op.trigger.trigger();
+    if(castShadows.get()) op.trigger.trigger();
     
 };

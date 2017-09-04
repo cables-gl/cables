@@ -159,7 +159,7 @@ textureSpec.onChange=textureSpecMatCap.onChange=function()
         textureSpecUniform=null;
         textureSpecMatCapUniform=null;
     }
-}
+};
 
 function bindTextures()
 {
