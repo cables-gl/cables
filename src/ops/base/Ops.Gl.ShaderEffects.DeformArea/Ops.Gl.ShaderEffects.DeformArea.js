@@ -64,6 +64,16 @@ op.render.onLinkChanged=removeModule;
 
 op.render.onTriggered=function()
 {
+    
+    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+        gui.setTransformGizmo(
+            {
+                posX:x,
+                posY:y,
+                posZ:z
+            });
+
+
     if(!cgl.getShader())
     {
          op.trigger.trigger();

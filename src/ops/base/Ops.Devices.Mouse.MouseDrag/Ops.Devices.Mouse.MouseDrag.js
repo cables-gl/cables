@@ -8,7 +8,6 @@ var flipY=op.inValueBool("Flip Y",true);
 var kinetic=op.inValueBool("Inertia Movement",true);
 var limit=op.inValueBool("Limit");
 
-
 var doReset=op.inFunctionButton("Reset");
 
 var mul=op.inValue("mul",0.1);
@@ -87,14 +86,12 @@ function seMoving()
 {
     isMoving.set(true);
     clearTimeout(movingTimeout);
-    draggingTimeout=setTimeout(
+    movingTimeout=setTimeout(
         function()
         {
             isMoving.set(false);
         },60);
 }
-
-
 
 function onmousemove(e)
 {
@@ -168,8 +165,6 @@ function onMouseDown(e)
     isPressed.set(true);
 }
 
-
-
 function onMouseUp(e)
 {
     if(kinetic.get())
@@ -198,11 +193,11 @@ function bind()
     canvas.addEventListener('mouseenter', onMouseEnter);
     canvas.addEventListener('mouseleave', onMouseLeave);
 
-canvas.addEventListener("touchmove", onmousemove);
-canvas.addEventListener("touchstart", onMouseDown);
-canvas.addEventListener("touchend", onMouseUp);
-    
+    canvas.addEventListener("touchmove", onmousemove);
+    canvas.addEventListener("touchstart", onMouseDown);
+    canvas.addEventListener("touchend", onMouseUp);
 }
+
 function unbind()
 {
     console.log("remove mouse op...");
@@ -212,17 +207,13 @@ function unbind()
     canvas.removeEventListener('mouseup', onMouseUp);
     canvas.removeEventListener('mouseenter', onMouseEnter);
     canvas.removeEventListener('mouseleave', onMouseLeave);
-
-
 }
-
 
 active.onChange=function()
 {
     if(active.get())bind();
     else unbind();
 }
-
 
 bind();
 
