@@ -276,7 +276,10 @@ CGL.State = function() {
         mat4.translate(cgl.vMatrix, cgl.vMatrix, identTranslateView);
 
         cgl.gl.enable(cgl.gl.BLEND);
-        cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+        // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+        cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
+        cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
+
 
         cgl.beginFrame();
     };

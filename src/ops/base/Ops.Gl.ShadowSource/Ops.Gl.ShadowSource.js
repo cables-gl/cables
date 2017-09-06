@@ -135,16 +135,15 @@ var doRender=function()
     cgl.gl.enable(cgl.gl.CULL_FACE);
     cgl.gl.cullFace(cgl.gl.FRONT);
 
-
-cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-cgl.gl.polygonOffset(polyOff.get(),polyOff.get());
+    
+    cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+    cgl.gl.polygonOffset(polyOff.get(),polyOff.get());
 
     cgl.gl.colorMask(false,false,false,false);
     renderPickingPass();
     cgl.gl.colorMask(true,true,true,true);
-
-
-cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
+    
+    cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
 
     shadowObj.strength=strength.get();
