@@ -34,11 +34,16 @@ function create()
     var l=sizeL.get();
     
     geom.vertices = [
-        -w,-l,0,
-        w,-l,0,
-        w,l,0,
-        -w,l,0,
-        0,0,h,
+        // -w,-l,0,
+        // w,-l,0,
+        // w,l,0,
+        // -w,l,0,
+        // 0,0,h,
+        -w,0,-l,
+        w,0,-l,
+        w,0,l,
+        -w,0,l,
+        0,h,0
     ];
 
     geom.vertexNormals = [
@@ -58,14 +63,11 @@ function create()
     ];
 
     geom.verticesIndices = [
-        0, 1, 2,
-        0,2, 3,
-        
-        0,1, 4,
-        2,3, 4,
-        0,3, 4,
-        1,2, 4,
-        
+        2,1,0, 3,2,0, // bottom
+        0,1,4,
+        2,3,4,
+        4,3,0,
+        1,2,4,
     ];
 
 
