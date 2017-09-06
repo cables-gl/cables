@@ -44,10 +44,6 @@
         ],
         "portsOut": [
             {
-                "type": "1",
-                "name": "trigger"
-            },
-            {
                 "type": "0",
                 "name": "index"
             },
