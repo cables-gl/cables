@@ -33,7 +33,7 @@ function update()
     else if(inBlend.get()=="Subtract")blendMode=BLEND_SUB;
     else if(inBlend.get()=="Multiply")blendMode=BLEND_MUL;
     else blendMode=BLEND_NONE;
-};
+}
 
 exec.onTriggered=function()
 {
