@@ -34,6 +34,19 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.changeAlways=false;
 
     this._warnedDeprecated=false;
+
+
+    Object.defineProperty(this, 'val', {
+        get: function() {
+            this._warnedDeprecated=true;
+            return this.get();
+        },
+        set: function(v) {
+            this.setValue(v);
+            // if(!this._warnedDeprecated)console.log('deprecated .val set used',this.parent.name);
+            this._warnedDeprecated=true;
+        }
+      });
 };
 {
     CABLES.Port.prototype.onAnimToggle=function(){};
@@ -53,17 +66,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     //     this._warnedDeprecated=true;
     // });
 
-    Object.defineProperty(this, 'val', {
-      get: function() {
-          this._warnedDeprecated=true;
-          return this.get();
-      },
-      set: function(v) {
-          this.setValue(v);
-          // if(!this._warnedDeprecated)console.log('deprecated .val set used',this.parent.name);
-          this._warnedDeprecated=true;
-      }
-    });
 
 
     CABLES.Port.prototype.get=function()
