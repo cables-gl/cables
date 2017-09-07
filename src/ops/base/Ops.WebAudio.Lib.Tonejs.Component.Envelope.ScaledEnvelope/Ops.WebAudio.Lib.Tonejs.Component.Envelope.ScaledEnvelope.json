@@ -1,1 +1,57 @@
-{"libs":["tone.min.js"],"summary":"ScaledEnvelop is an envelope which can be scaled to any range"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "ScaledEnvelop is an envelope which can be scaled to any range",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Attack"
+            },
+            {
+                "type": "0",
+                "name": "Decay"
+            },
+            {
+                "type": "0",
+                "name": "Sustain"
+            },
+            {
+                "type": "0",
+                "name": "Release"
+            },
+            {
+                "type": "0",
+                "name": "Attack Curve"
+            },
+            {
+                "type": "0",
+                "name": "Release Curve"
+            },
+            {
+                "type": "0",
+                "name": "Min"
+            },
+            {
+                "type": "0",
+                "name": "Max"
+            },
+            {
+                "type": "0",
+                "name": "Exponent"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.ScaledEnvelope"
+    }
+}

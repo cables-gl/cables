@@ -1,1 +1,27 @@
-{"libs":["tone.min.js"],"summary":"Triggers the Attack-part of an Envelope"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Triggers the Attack-part of an Envelope",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Velocity"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Attack"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.TriggerEnvelopeAttack"
+    }
+}

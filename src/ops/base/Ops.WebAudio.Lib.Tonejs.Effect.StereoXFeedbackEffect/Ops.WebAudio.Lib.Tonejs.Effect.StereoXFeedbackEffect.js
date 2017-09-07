@@ -6,8 +6,8 @@ CABLES.WebAudio.createAudioContext(op);
 var node = new Tone.StereoXFeedbackEffect();
 
 // default values
-var FEEDBACK_MIN = 0.0 // ?
-var FEEDBACK_MAX = 1.0 // ?
+var FEEDBACK_MIN = 0.0; // ?
+var FEEDBACK_MAX = 1.0; // ?
 var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 

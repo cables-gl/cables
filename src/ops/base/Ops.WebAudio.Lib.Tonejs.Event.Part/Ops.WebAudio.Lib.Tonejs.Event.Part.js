@@ -214,7 +214,7 @@ loopPort.onChange = function() {
         if(iterations >= 0) {
             node.set("loop", iterations);    
         } else {
-            op.log("Warning: Part will not trigger because loop is set and loop-iterations <= 0")
+            op.log("Warning: Part will not trigger because loop is set and loop-iterations <= 0");
         }
     } else {
         node.set("loop", false);    

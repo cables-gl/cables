@@ -1,1 +1,57 @@
-{"libs":["tone.min.js"],"summary":"Granular Synthesis, plays back parts of a sample repeatedly"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Granular Synthesis, plays back parts of a sample repeatedly",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Play"
+            },
+            {
+                "type": "2",
+                "name": "Sample (AudioBuffer)"
+            },
+            {
+                "type": "0",
+                "name": "Detune"
+            },
+            {
+                "type": "0",
+                "name": "Drift"
+            },
+            {
+                "type": "0",
+                "name": "Playback Rate"
+            },
+            {
+                "type": "0",
+                "name": "Overlap"
+            },
+            {
+                "type": "0",
+                "name": "Grain Size"
+            },
+            {
+                "type": "0",
+                "name": "Loop"
+            },
+            {
+                "type": "0",
+                "name": "Loop Start"
+            },
+            {
+                "type": "0",
+                "name": "Loop End"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Source.GrainPlayer"
+    }
+}

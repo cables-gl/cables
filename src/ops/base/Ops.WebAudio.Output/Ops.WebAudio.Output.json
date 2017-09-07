@@ -1,1 +1,20 @@
-{"summary":"Sends an audio signal to your speakers"}
+{
+    "summary": "Sends an audio signal to your speakers",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "Mute"
+            }
+        ],
+        "name": "Ops.WebAudio.Output"
+    }
+}

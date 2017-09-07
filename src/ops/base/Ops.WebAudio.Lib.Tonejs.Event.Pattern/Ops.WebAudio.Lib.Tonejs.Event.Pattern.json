@@ -1,1 +1,72 @@
-{"libs":["tone.min.js"],"summary":"Arpeggiates between the given notes in a number of patterns"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Arpeggiates between the given notes in a number of patterns",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "cd9f569b-ce18-46b5-8415-7098b8768cc3",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Interval"
+            },
+            {
+                "type": "3",
+                "name": "Note Values"
+            },
+            {
+                "type": "0",
+                "name": "Pattern Type"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Start Time"
+            },
+            {
+                "type": "1",
+                "name": "Stop"
+            },
+            {
+                "type": "0",
+                "name": "Stop Time"
+            },
+            {
+                "type": "0",
+                "name": "Humanize"
+            },
+            {
+                "type": "0",
+                "name": "Humanize Time"
+            },
+            {
+                "type": "0",
+                "name": "Mute"
+            },
+            {
+                "type": "0",
+                "name": "Probability"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Event Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Note"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Event.Pattern"
+    }
+}

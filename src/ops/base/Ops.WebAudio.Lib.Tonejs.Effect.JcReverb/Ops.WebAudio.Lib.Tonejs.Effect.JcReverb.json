@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Simple Schroeder Reverberator (Reverb)"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Simple Schroeder Reverberator (Reverb)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Room Size"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.JcReverb"
+    }
+}

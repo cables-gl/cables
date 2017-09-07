@@ -30,7 +30,7 @@ function getImpulse() {
 
     audioContext.decodeAudioData(impulseData, function(buffer) {
         if(buffer.sampleRate != audioContext.sampleRate) {
-            op.log('[impulse response] Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate)
+            op.log('[impulse response] Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate);
             op.uiAttr( { 'warning': 'Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate } );
             return;
         }
@@ -47,7 +47,7 @@ function getImpulse() {
         op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
       },
       function(e){ op.log("[impulse response] Error decoding audio data" + e.err); });
-  }
+  };
 
   ajaxRequest.send();
 }

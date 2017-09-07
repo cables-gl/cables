@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Makes it convenient to create Tone.js time-strings (e.g. \"C4\")"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Makes it convenient to create Tone.js time-strings (e.g. \"C4\")",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Time Type"
+            },
+            {
+                "type": "0",
+                "name": "Relative To Now"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Tone Time"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Type.ToneTime"
+    }
+}

@@ -1,1 +1,25 @@
-{"libs":["tone.min.js"],"summary":"Subtracts one audio signal from another"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Subtracts one audio signal from another",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Signal 1"
+            },
+            {
+                "type": "2",
+                "name": "Signal 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Signal.SubtractSignals"
+    }
+}

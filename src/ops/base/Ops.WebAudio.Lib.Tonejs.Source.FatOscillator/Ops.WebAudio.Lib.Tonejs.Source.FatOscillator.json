@@ -1,1 +1,73 @@
-{"libs":["tone.min.js"],"summary":"Fat sounding oscillator"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Fat sounding oscillator",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Detune"
+            },
+            {
+                "type": "0",
+                "name": "Type"
+            },
+            {
+                "type": "0",
+                "name": "Spread"
+            },
+            {
+                "type": "0",
+                "name": "Count"
+            },
+            {
+                "type": "0",
+                "name": "Phase"
+            },
+            {
+                "type": "0",
+                "name": "Sync Frequency"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Start Time"
+            },
+            {
+                "type": "1",
+                "name": "Stop"
+            },
+            {
+                "type": "0",
+                "name": "Stop Time"
+            },
+            {
+                "type": "0",
+                "name": "Auto Start"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "Mute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Source.FatOscillator"
+    }
+}

@@ -1,1 +1,21 @@
-{"libs":["tone.min.js"],"summary":"An audio signal"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "An audio signal",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Signal.Signal"
+    }
+}

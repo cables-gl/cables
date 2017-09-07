@@ -1,1 +1,45 @@
-{"libs":["tone.min.js"],"summary":"Like an Envelope with an Audio Input"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Like an Envelope with an Audio Input",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Attack"
+            },
+            {
+                "type": "0",
+                "name": "Decay"
+            },
+            {
+                "type": "0",
+                "name": "Sustain"
+            },
+            {
+                "type": "0",
+                "name": "Release"
+            },
+            {
+                "type": "0",
+                "name": "Attack Curve"
+            },
+            {
+                "type": "0",
+                "name": "Release Curve"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.AmplitudeEnvelope"
+    }
+}

@@ -1,1 +1,93 @@
-{"libs":["tone.min.js"],"summary":"Transport for timing musical events on the (virtual) audio timeline"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Transport for timing musical events on the (virtual) audio timeline",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "0",
+                "name": "BPM"
+            },
+            {
+                "type": "0",
+                "name": "Swing"
+            },
+            {
+                "type": "0",
+                "name": "Swing Subdivision"
+            },
+            {
+                "type": "0",
+                "name": "Time Division"
+            },
+            {
+                "type": "0",
+                "name": "Loop"
+            },
+            {
+                "type": "0",
+                "name": "Loop Start"
+            },
+            {
+                "type": "0",
+                "name": "Loop End"
+            },
+            {
+                "type": "0",
+                "name": "Pulses Per Quarter Note"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Start Time"
+            },
+            {
+                "type": "0",
+                "name": "Start Offset"
+            },
+            {
+                "type": "0",
+                "name": "Auto Start"
+            },
+            {
+                "type": "1",
+                "name": "Stop"
+            },
+            {
+                "type": "0",
+                "name": "Stop Time"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "State"
+            },
+            {
+                "type": "0",
+                "name": "Position (BarsBeatsSixteenth)"
+            },
+            {
+                "type": "0",
+                "name": "Seconds"
+            },
+            {
+                "type": "0",
+                "name": "Progress"
+            },
+            {
+                "type": "0",
+                "name": "Ticks"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Core.Transport.Transport"
+    }
+}

@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Bitcrusher downsamples the incoming signal to a different bitdepth"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Bitcrusher downsamples the incoming signal to a different bitdepth",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Bits"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.BitCrusher"
+    }
+}

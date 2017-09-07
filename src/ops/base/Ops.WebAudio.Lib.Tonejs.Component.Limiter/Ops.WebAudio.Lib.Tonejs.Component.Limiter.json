@@ -1,1 +1,25 @@
-{"libs":["tone.min.js"],"summary":"Limits the loudness of an incoming signal"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Limits the loudness of an incoming signal",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Threshold"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Limiter"
+    }
+}

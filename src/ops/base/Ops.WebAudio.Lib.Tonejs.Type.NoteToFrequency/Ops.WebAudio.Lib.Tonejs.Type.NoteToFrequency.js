@@ -11,9 +11,10 @@ var notePort = op.inValueString("Note");
 // change listeners
 notePort.onChange = function() {
     var note = notePort.get();
+    op.log(CABLES.WebAudio.isValidToneNote(note));
     if(CABLES.WebAudio.isValidToneNote(note)) {
         var freqObj = new Tone.Frequency(note);    
-        freqPort.set(freqObj.eval());
+        freqPort.set(freqObj.toFrequency());
     } else {
         freqPort.set(FREQ_DEFAULT);
     }

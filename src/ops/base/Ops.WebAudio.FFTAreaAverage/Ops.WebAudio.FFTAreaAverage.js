@@ -1,4 +1,4 @@
-top.name="FFTAreaAverage";
+op.name="FFTAreaAverage";
 
 var fftArr=this.addInPort(new Port(this, "FFT Array",OP_PORT_TYPE_ARRAY));
 var refresh=this.addInPort(new Port(this,"refresh",OP_PORT_TYPE_FUNCTION));

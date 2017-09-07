@@ -1,1 +1,30 @@
-{"summary":"Position in audio timeline, connect this to the Position-port of a Transport-op"}
+{
+    "summary": "Position in audio timeline, connect this to the Position-port of a Transport-op",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Bars:Beats:Sixteenth"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Bars"
+            },
+            {
+                "type": "0",
+                "name": "Beats"
+            },
+            {
+                "type": "0",
+                "name": "Sixteenth"
+            },
+            {
+                "type": "0",
+                "name": "Sixteenth (Precise)"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Type.BarsBeatsSixteenthResolver"
+    }
+}

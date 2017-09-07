@@ -60,7 +60,7 @@ valuesPort.onChange = function() {
     op.log("Setting values to: ", valuesPort.get());
     setNodeValue("values", valuesPort.get());
     op.log("Values set to: ", node.values);
-}
+};
 patternTypePort.onChange = function() {
     if(PATTERN_TYPES.indexOf(patternTypePort.get()) > -1) {
         setNodeValue("pattern", patternTypePort.get());    

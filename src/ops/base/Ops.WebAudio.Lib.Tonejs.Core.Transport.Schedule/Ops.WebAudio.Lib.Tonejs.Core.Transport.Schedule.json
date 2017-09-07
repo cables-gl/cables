@@ -1,1 +1,25 @@
-{"libs":["tone.min.js"],"summary":"Schedule an event along the (virtual) audio timeline"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Schedule an event along the (virtual) audio timeline",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Time"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Event Time"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Core.Transport.Schedule"
+    }
+}

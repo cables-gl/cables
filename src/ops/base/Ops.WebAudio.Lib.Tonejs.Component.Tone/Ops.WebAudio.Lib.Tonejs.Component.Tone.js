@@ -7,7 +7,7 @@ var OCTAVE_MIN = -1;
 var OCTAVE_MAX = 10;
 
 // constants
-var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 // inputs
 var notePort = op.addInPort( new Port( op, "Note", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: NOTES } ) );

@@ -1,1 +1,37 @@
-{"libs":["tone.min.js"],"summary":"Gets the RMS of an input signal with some averaging applied. It can also get the raw value of the input signal."}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Gets the RMS of an input signal with some averaging applied. It can also get the raw value of the input signal.",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "1",
+                "name": "Update Value"
+            },
+            {
+                "type": "0",
+                "name": "Type"
+            },
+            {
+                "type": "0",
+                "name": "Smoothing"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Meter"
+    }
+}

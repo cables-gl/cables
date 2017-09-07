@@ -1,1 +1,33 @@
-{"libs":["tone.min.js"],"summary":"Panner with an LFO connected to the pan amount"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Panner with an LFO connected to the pan amount",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Depth"
+            },
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.AutoPanner"
+    }
+}

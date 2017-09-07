@@ -25,7 +25,7 @@ function httpGetAsync(theUrl, callback) {
                 op.log("ThingSpeak Error! Status: " + xmlHttp.status + ', ' + xmlHttp.statusText + ", see https://de.mathworks.com/help/thingspeak/error-codes.html");
             }
         }
-    }
+    };
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
     xmlHttp.send(null);
 }

@@ -53,7 +53,7 @@ var MemoryStats = function (){
 		child.style.height = height + 'px';
 		if( color ) child.style.backgroundColor = color;
 
-	}
+	};
 
 	// polyfill usedJSHeapSize
 	if (window.performance && !performance.memory){
@@ -62,7 +62,7 @@ var MemoryStats = function (){
 
 	// support of the API?
 	if( performance.memory.totalJSHeapSize === 0 ){
-		console.warn('totalJSHeapSize === 0... performance.memory is only available in Chrome .')
+		console.warn('totalJSHeapSize === 0... performance.memory is only available in Chrome .');
 	}
 
 	// TODO, add a sanity check to see if values are bucketed.
@@ -78,7 +78,7 @@ var MemoryStats = function (){
 
 			// refresh only 30time per second
 			if( CABLES.now() - lastTime < 1000/30 )	return;
-			lastTime	= CABLES.now()
+			lastTime	= CABLES.now();
 
 			var delta	= performance.memory.usedJSHeapSize - lastUsedHeap;
 			lastUsedHeap	= performance.memory.usedJSHeapSize;
@@ -103,7 +103,7 @@ var MemoryStats = function (){
 			};
 		}
 
-	}
+	};
 
 };
 

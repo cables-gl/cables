@@ -37,5 +37,6 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Interlace"
-    }
+    },
+    "summary": "Tv scanlines effect"
 }

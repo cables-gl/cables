@@ -1,1 +1,32 @@
-{"libs":["tone.min.js"],"summary":"Just like a stereo feedback effect, but the feedback is routed from left to right and right to left"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Just like a stereo feedback effect, but the feedback is routed from left to right and right to left",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "31dde449-0c30-4312-9ac4-f829d8f22600",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Feedback"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.StereoXFeedbackEffect"
+    }
+}

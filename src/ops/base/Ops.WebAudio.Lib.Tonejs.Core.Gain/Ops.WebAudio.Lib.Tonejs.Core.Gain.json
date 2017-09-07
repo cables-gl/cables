@@ -1,1 +1,25 @@
-{"libs":["tone.min.js"],"summary":"Multiplier, makes a signal bigger or smaller"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Multiplier, makes a signal bigger or smaller",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Gain"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Core.Gain"
+    }
+}

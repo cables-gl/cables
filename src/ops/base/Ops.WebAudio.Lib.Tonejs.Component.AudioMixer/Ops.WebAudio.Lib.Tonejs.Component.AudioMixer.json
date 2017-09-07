@@ -1,1 +1,217 @@
-{"libs":["tone.min.js"]}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Channel 1 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 1 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 1 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 1 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 1 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 2 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 2 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 2 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 2 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 2 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 3 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 3 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 3 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 3 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 3 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 4 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 4 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 4 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 4 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 4 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 5 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 5 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 5 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 5 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 5 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 6 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 6 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 6 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 6 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 6 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 7 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 7 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 7 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 7 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 7 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 8 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 8 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 8 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 8 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 8 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 9 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 9 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 9 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 9 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 9 Solo"
+            },
+            {
+                "type": "0",
+                "name": "Channel 10 Name"
+            },
+            {
+                "type": "2",
+                "name": "Channel 10 Audio"
+            },
+            {
+                "type": "0",
+                "name": "Channel 10 Volume"
+            },
+            {
+                "type": "0",
+                "name": "Channel 10 Mute"
+            },
+            {
+                "type": "0",
+                "name": "Channel 10 Solo"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.AudioMixer"
+    },
+    "summary": "Mixes different audio signals together"
+}

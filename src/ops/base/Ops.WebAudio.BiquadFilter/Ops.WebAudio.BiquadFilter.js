@@ -1,4 +1,4 @@
-this.name="Ops.WebAudio.BiquadFilter";
+this.name="BiquadFilter";
 
 var audioContext = CABLES.WebAudio.createAudioContext(op);
 
@@ -47,11 +47,11 @@ var updateDetune = function(){
 
 var updateQ = function(){
     biquadFilter.Q.value = q.get();
-}
+};
 
 var updateGain = function(){
     biquadFilter.gain.value = gain.get();
-}
+};
 
 type.onValueChange( updateType );
 frequency.onValueChange(updateFrequency);

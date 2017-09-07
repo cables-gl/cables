@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Fades two audio signals"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Fades two audio signals",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In 1"
+            },
+            {
+                "type": "2",
+                "name": "Audio In 2"
+            },
+            {
+                "type": "4",
+                "name": "Fade"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.CrossFade"
+    }
+}
