@@ -257,7 +257,6 @@ active.onChange=function()
 {
     if(listenerElement)removeLiseteners();
     if(active.get())addListeners();
-
 }
 
 op.onDelete=function()

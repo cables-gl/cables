@@ -548,6 +548,7 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + 'OUT vec3 norm;'
         .endl() + 'UNI mat4 projMatrix;'
         .endl() + 'UNI mat4 mvMatrix;'
+        .endl() + 'UNI mat4 modelMatrix;'
         // .endl()+'uniform mat4 normalMatrix;'
 
         .endl() + 'void main()'
@@ -561,14 +562,21 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + '}';
 };
 
-CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentShader = function() {
+CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentShader = function(r,g,b) {
+
+    if(r==undefined)
+    {
+        r=0.5;
+        g=0.5;
+        b=0.5;
+    }
     return ''
         // .endl()+'precision highp float;'
         // .endl()+'varying vec3 norm;'
         .endl()+'{{MODULES_HEAD}}'
         .endl() + 'void main()'
         .endl() + '{'
-        .endl() + '    vec4 col=vec4(0.5,0.5,0.5,1.0);'
+        .endl() + '    vec4 col=vec4('+r+','+g+','+b+',1.0);'
         .endl() + '    {{MODULE_COLOR}}'
         .endl() + '    outColor = col;'
         // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+

@@ -10,6 +10,24 @@ CABLES.PACO_OP_CREATE=6;
 CABLES.PACO_OP_ENABLE=7;
 CABLES.PACO_OP_DISABLE=8;
 
+CABLES.togglePacoRenderer=function()
+{
+    var show=CABLES.UI.userSettings.get("pacoRenderer") || false;
+    CABLES.UI.userSettings.set("pacoRenderer",!show);
+    document.location.reload();
+};
+
+CABLES.showPacoRenderer=function()
+{
+    // if(CABLES.UI.userSettings.get("pacoRenderer"))
+    // {
+    //     $('body').append('<iframe class="paco-iframe" style="z-index:9999999;" src="/renderer/"></iframe>');
+    // }
+    
+}
+
+
+
 CABLES.PatchConnectionReceiver=function(patch,options,connector)
 {
     this._patch=patch;
@@ -23,7 +41,7 @@ CABLES.PatchConnectionReceiver=function(patch,options,connector)
         this.connector=new CABLES.PatchConnectorBroadcastChannel();
     }
     this.connector.receive(this);
-}
+};
 
 CABLES.PatchConnectionReceiver.prototype._receive=function(ev)
 {

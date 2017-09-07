@@ -187,9 +187,9 @@ function reset()
         else
         {
             randoms.push(vec3.fromValues(
-                scaleX.get()*((Math.seededRandom())*size.get()),
-                scaleY.get()*((Math.seededRandom())*size.get()),
-                scaleZ.get()*((Math.seededRandom())*size.get())
+                scaleX.get()*((Math.seededRandom())*size.get()-(size.get()/2)),
+                scaleY.get()*((Math.seededRandom())*size.get()-(size.get()/2)),
+                scaleZ.get()*((Math.seededRandom())*size.get()-(size.get()/2))
                 ));
 
         }
@@ -216,9 +216,9 @@ function reset()
         vec3.set(vScale,sc,sc,sc);
         mat4.scale(m,m, vScale);
 
-        // mat4.rotateX(m,m, randomsRot[i][0]);
-        // mat4.rotateY(m,m, randomsRot[i][1]);
-        // mat4.rotateZ(m,m, randomsRot[i][2]);
+        mat4.rotateX(m,m, randomsRot[i][0]);
+        mat4.rotateY(m,m, randomsRot[i][1]);
+        mat4.rotateZ(m,m, randomsRot[i][2]);
 
 
         transformations.push( Array.prototype.slice.call(m) );

@@ -1,5 +1,4 @@
 {
-    "summary": "Transform objects in 3d space.",
     "layout": {
         "portsIn": [
             {
@@ -8,44 +7,51 @@
             },
             {
                 "type": "0",
-                "name": "posX"
+                "name": "eyeX"
             },
             {
                 "type": "0",
-                "name": "posY"
+                "name": "eyeY"
             },
             {
                 "type": "0",
-                "name": "posZ"
+                "name": "eyeZ"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "centerX"
             },
             {
                 "type": "0",
-                "name": "rotX"
+                "name": "centerY"
             },
             {
                 "type": "0",
-                "name": "rotY"
+                "name": "centerZ"
             },
             {
                 "type": "0",
-                "name": "rotZ"
+                "name": "upX"
+            },
+            {
+                "type": "0",
+                "name": "upY"
+            },
+            {
+                "type": "0",
+                "name": "upZ"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "3",
+                "name": "Array"
             }
         ],
-        "name": "Ops.Gl.Matrix.Transform"
-    },
-    "updated": 1504813928557,
-    "author": "58dabd06a0d7ec8d1a982e66",
-    "authorName": "cables",
-    "id": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
-    "created": 1504813928558
+        "name": "Ops.Gl.Matrix.LookatCamera"
+    }
 }

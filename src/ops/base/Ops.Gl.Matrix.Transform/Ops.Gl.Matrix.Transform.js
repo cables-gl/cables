@@ -28,7 +28,11 @@ var rotChanged=true;
 
 render.onTriggered=function()
 {
+    
+    
 
+    
+    
     var updateMatrix=false;
     if(translationChanged)
     {
@@ -46,12 +50,38 @@ render.onTriggered=function()
     }
     if(updateMatrix)doUpdateMatrix();
 
-
     cgl.pushMvMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
+
+
+
+
+
+
+
+
+
     trigger.trigger();
     cgl.popMvMatrix();
+    
+    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+        gui.setTransformGizmo(
+            {
+                posX:posX,
+                posY:posY,
+                posZ:posZ,
+            });
+
+    
+};
+
+op.transform3d=function()
+{
+    return {
+            pos:[posX,posY,posZ]
+        };
+    
 };
 
 var doUpdateMatrix=function()

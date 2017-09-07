@@ -20,9 +20,9 @@ var cgl=op.patch.cgl;
 var lastReadPixel=0;
 
 if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
-else 
+else
 {
-    console.log("new framebuffer...");
+    // console.log("new framebuffer...");
     fb=new CGL.Framebuffer2(cgl,4,4,{multisampling:false});
 }
 
@@ -30,7 +30,7 @@ var tex=op.outTexture("pick texture");
 tex.set( fb.getTextureColor() );
 useMouseCoords.onChange=updateListeners;
 updateListeners();
- 
+
 function renderPickingPass()
 {
     cgl.frameStore.renderOffscreen=true;
@@ -58,7 +58,7 @@ function updateListeners()
     cgl.canvas.removeEventListener('touchstart', ontouchstart);
     cgl.canvas.removeEventListener('touchend', ontouchend);
 
-    if(useMouseCoords.get()) 
+    if(useMouseCoords.get())
     {
         cgl.canvas.addEventListener('mouseleave', ontouchend);
         cgl.canvas.addEventListener('mousemove', mouseMove);
@@ -72,7 +72,7 @@ function fixTouchEvent(touchEvent)
 {
     if(touchEvent)
     {
-        touchEvent.offsetX = touchEvent.pageX - touchEvent.target.offsetLeft;     
+        touchEvent.offsetX = touchEvent.pageX - touchEvent.target.offsetLeft;
         touchEvent.offsetY = touchEvent.pageY - touchEvent.target.offsetTop;
 
         return touchEvent;
@@ -92,7 +92,7 @@ function ontouchend(event)
 
 function ontouchmove(event)
 {
-    if(event.touches && event.touches.length>0) 
+    if(event.touches && event.touches.length>0)
     {
         mouseMove(fixTouchEvent(event.touches[0]));
     }
@@ -130,7 +130,7 @@ var doRender=function()
             var y=Math.floor( vpH-op.y.get()/minimizeFB);
             if(x<0)x=0;
             if(y<0)y=0;
-            
+
             // console.log('',x,y,vpW,vpH);
             // if(CABLES.now()-lastReadPixel>=50)
             {
@@ -147,13 +147,13 @@ var doRender=function()
         }
 
         // cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
-    
+
         cgl.frameStore.pickedColor=pixelRGB[0];
         // console.log(cgl.frameStore.pickedColor);
-        
+
         if(cgl.frameStore.pickedColor)somethingPicked.set(true);
         else somethingPicked.set(false);
-        
+
         cgl.frameStore.pickingpassNum=0;
         op.trigger.trigger();
     }

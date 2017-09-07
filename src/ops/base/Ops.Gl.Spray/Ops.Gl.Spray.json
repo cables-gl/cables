@@ -1,0 +1,77 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "time"
+            },
+            {
+                "type": "0",
+                "name": "num"
+            },
+            {
+                "type": "0",
+                "name": "Size X"
+            },
+            {
+                "type": "0",
+                "name": "Size Y"
+            },
+            {
+                "type": "0",
+                "name": "Size Z"
+            },
+            {
+                "type": "0",
+                "name": "movement x"
+            },
+            {
+                "type": "0",
+                "name": "movement y"
+            },
+            {
+                "type": "0",
+                "name": "movement z"
+            },
+            {
+                "type": "0",
+                "name": "lifetime"
+            },
+            {
+                "type": "0",
+                "name": "Lifetime Minimum"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "0",
+                "name": "lifeTimePercent"
+            },
+            {
+                "type": "0",
+                "name": "Random 1"
+            },
+            {
+                "type": "0",
+                "name": "Random 2"
+            },
+            {
+                "type": "0",
+                "name": "Random 3"
+            }
+        ],
+        "name": "Ops.Gl.Spray"
+    }
+}

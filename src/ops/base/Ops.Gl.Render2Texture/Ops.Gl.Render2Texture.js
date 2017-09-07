@@ -113,6 +113,8 @@ function doRender()
 
     fb.renderStart(cgl);
     // mesh.render(cgl.getShader());
+
+
     trigger.trigger();
     // cgl.printError("start r2t");
     fb.renderEnd(cgl);

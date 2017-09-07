@@ -69,6 +69,9 @@ void main()
             pow(r.z + 1.0, 2.0)
         );
         
+        
+
+        
         vn = (r.xy / m + 0.5);
         
         vn.t=clamp(vn.t, 0.0, 1.0);

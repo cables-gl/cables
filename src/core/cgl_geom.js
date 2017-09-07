@@ -14,18 +14,19 @@ CGL.Geometry=function(name)
 
     this._indexed=true;
 
+
+    Object.defineProperty(this, 'vertices', {
+      get: function() {
+        return this._vertices;
+      },
+      set: function(v) {
+        this.setVertices(v);
+      }
+    });
+
 };
 
 
-CGL.Geometry.prototype.__defineGetter__("vertices", function()
-{
-    return this._vertices;
-});
-
-CGL.Geometry.prototype.__defineSetter__("vertices", function(v)
-{
-    this.setVertices(v);
-});
 
 CGL.Geometry.prototype.clear=function()
 {

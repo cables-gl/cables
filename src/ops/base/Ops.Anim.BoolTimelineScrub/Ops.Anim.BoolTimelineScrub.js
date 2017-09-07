@@ -31,13 +31,10 @@ var toggle=function()
     }
 };
 
-
-
-
 var exec=function()
 {
     var va=0;
-    
+
     if(CABLES.UI)
     {
         if(!v.isAnimated())
@@ -50,7 +47,7 @@ var exec=function()
             op.uiAttr({'error':null});
         }
     }
-    
+
     var t=Date.now()/1000;
     va=v.anim.getValue(animTime.getValue(t));
 
@@ -62,7 +59,7 @@ var exec=function()
         outPerc.set( perc );
     }
 
-    
+
     if(result.get()!=va) result.set(va);
 
 };
