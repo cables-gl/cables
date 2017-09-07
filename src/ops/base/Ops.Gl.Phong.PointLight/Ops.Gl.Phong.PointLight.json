@@ -1,1 +1,87 @@
-{"summary":"point light for phongmaterial shading","layout":{"portsIn":[{"type":"1","name":"exe"},{"type":"0","name":"Radius"},{"type":"0","name":"Intensity"},{"type":"0","name":"x"},{"type":"0","name":"y"},{"type":"0","name":"z"},{"type":"0","name":"r"},{"type":"0","name":"g"},{"type":"0","name":"b"},{"type":"0","name":"Ambient R"},{"type":"0","name":"Ambient G"},{"type":"0","name":"Ambient B"},{"type":"0","name":"Specular R"},{"type":"0","name":"Specular G"},{"type":"0","name":"Specular B"},{"type":"0","name":"Fall Off"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"1","name":"attachment"}],"name":"Ops.Gl.Phong.PointLight"}}
+{
+    "summary": "point light for phongmaterial shading",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "Radius"
+            },
+            {
+                "type": "0",
+                "name": "Intensity"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "Ambient R"
+            },
+            {
+                "type": "0",
+                "name": "Ambient G"
+            },
+            {
+                "type": "0",
+                "name": "Ambient B"
+            },
+            {
+                "type": "0",
+                "name": "Specular R"
+            },
+            {
+                "type": "0",
+                "name": "Specular G"
+            },
+            {
+                "type": "0",
+                "name": "Specular B"
+            },
+            {
+                "type": "0",
+                "name": "Fall Off"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "1",
+                "name": "attachment"
+            }
+        ],
+        "name": "Ops.Gl.Phong.PointLight"
+    },
+    "updated": 1504813785673,
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "cables",
+    "id": "72fcfa7e-daaa-4c10-a8a9-a79087bde31a",
+    "created": 1504813757613
+}
