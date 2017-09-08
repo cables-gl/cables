@@ -1,1 +1,60 @@
-{"libs":["tone.min.js"],"summary":"Composed of two Synths where one Synth modulates the frequency of a second Synth"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Composed of two Synths where one Synth modulates the frequency of a second Synth",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "88f1cf47-1545-4162-bdcf-f89fb2bf9093",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Oscillator Type"
+            },
+            {
+                "type": "2",
+                "name": "Envelope"
+            },
+            {
+                "type": "0",
+                "name": "Modulation Oscillator Type"
+            },
+            {
+                "type": "4",
+                "name": "Modulation Index"
+            },
+            {
+                "type": "2",
+                "name": "Modulation Envelope"
+            },
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Detune"
+            },
+            {
+                "type": "4",
+                "name": "Harmonicity"
+            },
+            {
+                "type": "0",
+                "name": "Partamento"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.FmSynth"
+    }
+}

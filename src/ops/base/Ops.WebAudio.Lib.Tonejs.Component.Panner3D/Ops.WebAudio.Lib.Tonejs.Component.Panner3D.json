@@ -1,1 +1,77 @@
-{"libs":["tone.min.js"],"summary":"Positions sounds in 3D space"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Positions sounds in 3D space",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Position X"
+            },
+            {
+                "type": "0",
+                "name": "Position Y"
+            },
+            {
+                "type": "0",
+                "name": "Position Z"
+            },
+            {
+                "type": "0",
+                "name": "Orientation X"
+            },
+            {
+                "type": "0",
+                "name": "Orientation Y"
+            },
+            {
+                "type": "0",
+                "name": "Orientation Z"
+            },
+            {
+                "type": "0",
+                "name": "Panning Model"
+            },
+            {
+                "type": "0",
+                "name": "Reference Distance"
+            },
+            {
+                "type": "0",
+                "name": "Roll Off Factor"
+            },
+            {
+                "type": "0",
+                "name": "Distance Model"
+            },
+            {
+                "type": "0",
+                "name": "Cone Inner Angle"
+            },
+            {
+                "type": "0",
+                "name": "Cone Outer Angle"
+            },
+            {
+                "type": "0",
+                "name": "Cone Outer Gain"
+            },
+            {
+                "type": "0",
+                "name": "Maximum Distance"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Panner3D"
+    }
+}

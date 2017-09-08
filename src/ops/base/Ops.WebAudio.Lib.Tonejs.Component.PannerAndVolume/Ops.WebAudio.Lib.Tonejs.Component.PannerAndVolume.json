@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Left-right panner + volume"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Left-right panner + volume",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Panning"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.PannerAndVolume"
+    }
+}

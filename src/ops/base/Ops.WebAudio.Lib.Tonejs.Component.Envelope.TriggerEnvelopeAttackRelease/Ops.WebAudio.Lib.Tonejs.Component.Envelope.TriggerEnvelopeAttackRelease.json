@@ -1,1 +1,34 @@
-{"libs":["tone.min.js"],"summary":"Triggers the Attack- and Release-part of an Envelope"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Triggers the Attack- and Release-part of an Envelope",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "90b9d9b0-31b1-4292-a8a3-1ba84991d688",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Duration"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Velocity"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Attack Release"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.TriggerEnvelopeAttackRelease"
+    }
+}

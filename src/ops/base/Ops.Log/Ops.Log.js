@@ -58,7 +58,7 @@ var printObject = function(){
             op.log("[Array] " + JSON.stringify(objectInput.get()));
         }
     }
-}
+};
 
 exe.onTriggered = function(){
     printValue();

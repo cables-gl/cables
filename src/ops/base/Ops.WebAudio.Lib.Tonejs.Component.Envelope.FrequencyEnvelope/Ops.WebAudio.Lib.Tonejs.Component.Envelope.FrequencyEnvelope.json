@@ -1,1 +1,53 @@
-{"libs":["tone.min.js"],"summary":"Like a ScaledEnvelope, but instead of min and max it's got a baseFrequency and octaves parameter"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Like a ScaledEnvelope, but instead of min and max it's got a baseFrequency and octaves parameter",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Base Frequency"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "0",
+                "name": "Attack"
+            },
+            {
+                "type": "0",
+                "name": "Decay"
+            },
+            {
+                "type": "0",
+                "name": "Sustain"
+            },
+            {
+                "type": "0",
+                "name": "Release"
+            },
+            {
+                "type": "0",
+                "name": "Attack Curve"
+            },
+            {
+                "type": "0",
+                "name": "Release Curve"
+            },
+            {
+                "type": "0",
+                "name": "Exponent"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.FrequencyEnvelope"
+    }
+}

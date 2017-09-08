@@ -1,1 +1,56 @@
-{"libs":["tone.min.js"],"summary":"Uses the output of one Synth to modulate the amplitude of another Synth"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Uses the output of one Synth to modulate the amplitude of another Synth",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "5b00bac9-1223-46dd-a96d-c2967993aaac",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Oscillator Type"
+            },
+            {
+                "type": "2",
+                "name": "Envelope"
+            },
+            {
+                "type": "0",
+                "name": "Modulation Oscillator Type"
+            },
+            {
+                "type": "2",
+                "name": "Modulation Envelope"
+            },
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Detune"
+            },
+            {
+                "type": "4",
+                "name": "Harmonicity"
+            },
+            {
+                "type": "0",
+                "name": "Partamento"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.AmSynth"
+    }
+}

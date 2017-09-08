@@ -1,1 +1,33 @@
-{"libs":["tone.min.js"],"summary":"Composed of one oscillator, one filter, and two envelopes"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Composed of one oscillator, one filter, and two envelopes",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Detune"
+            },
+            {
+                "type": "0",
+                "name": "Portamento (Time)"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.MonoSynth"
+    }
+}

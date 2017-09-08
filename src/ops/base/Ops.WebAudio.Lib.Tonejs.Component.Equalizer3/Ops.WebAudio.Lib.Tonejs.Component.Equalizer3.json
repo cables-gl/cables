@@ -1,1 +1,45 @@
-{"libs":["tone.min.js"],"summary":"Three band EQ with control over low, mid, and high"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Three band EQ with control over low, mid, and high",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Low"
+            },
+            {
+                "type": "4",
+                "name": "Mid"
+            },
+            {
+                "type": "4",
+                "name": "High"
+            },
+            {
+                "type": "4",
+                "name": "Q"
+            },
+            {
+                "type": "4",
+                "name": "Low Frequency"
+            },
+            {
+                "type": "4",
+                "name": "High Frequency"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Equalizer3"
+    }
+}

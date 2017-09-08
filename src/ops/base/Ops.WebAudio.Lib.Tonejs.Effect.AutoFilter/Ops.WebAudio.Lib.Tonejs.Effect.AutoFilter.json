@@ -1,1 +1,41 @@
-{"libs":["tone.min.js"],"summary":"Filter with a Lfo connected to the filter cutoff frequency"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Filter with a Lfo connected to the filter cutoff frequency",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Depth"
+            },
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "0",
+                "name": "Type"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.AutoFilter"
+    }
+}

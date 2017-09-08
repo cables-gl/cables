@@ -1,1 +1,25 @@
-{"summary":"Converts a midi value to a frequency"}
+{
+    "summary": "Converts a midi value to a frequency",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "751c0067-e015-4f73-90b1-2d265b6e6d72",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "MIDI Value"
+            },
+            {
+                "type": "0",
+                "name": "Tuning"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Frequency"
+            }
+        ],
+        "name": "Ops.WebAudio.MidiValueToFrequency"
+    }
+}

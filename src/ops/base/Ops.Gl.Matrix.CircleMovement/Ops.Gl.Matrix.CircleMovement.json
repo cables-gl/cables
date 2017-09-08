@@ -1,1 +1,61 @@
-{"summary":"Animate objects to move along a circle","layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"segments"},{"type":"0","name":"radius"},{"type":"0","name":"mulX"},{"type":"0","name":"mulY"},{"type":"0","name":"percent"},{"type":"0","name":"offset"},{"type":"0","name":"speed"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"0","name":"index"}],"name":"Ops.Gl.Matrix.CircleMovement"}}
+{
+    "summary": "Animate objects to move along a circle",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "segments"
+            },
+            {
+                "type": "0",
+                "name": "radius"
+            },
+            {
+                "type": "0",
+                "name": "mulX"
+            },
+            {
+                "type": "0",
+                "name": "mulY"
+            },
+            {
+                "type": "0",
+                "name": "percent"
+            },
+            {
+                "type": "0",
+                "name": "offset"
+            },
+            {
+                "type": "0",
+                "name": "speed"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.CircleMovement"
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "0dfae74d-cb5b-4214-b7da-bb42204041ba"
+}

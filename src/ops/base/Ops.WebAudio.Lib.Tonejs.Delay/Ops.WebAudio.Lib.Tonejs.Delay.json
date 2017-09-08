@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"]}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Delay Time"
+            },
+            {
+                "type": "0",
+                "name": "Max Delay Time"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Delay"
+    },
+    "summary": "Audio delay effect"
+}

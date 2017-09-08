@@ -1,1 +1,12 @@
-{"summary":"Access to the microphone"}
+{
+    "summary": "Access to the microphone",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            }
+        ],
+        "name": "Ops.WebAudio.MicrophoneIn"
+    }
+}

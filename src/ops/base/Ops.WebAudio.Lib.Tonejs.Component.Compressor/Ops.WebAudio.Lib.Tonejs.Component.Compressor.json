@@ -1,1 +1,41 @@
-{"libs":["tone.min.js"],"summary":"Compression reduces the volume of loud sounds"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Compression reduces the volume of loud sounds",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Threshold"
+            },
+            {
+                "type": "4",
+                "name": "Attack"
+            },
+            {
+                "type": "4",
+                "name": "Release"
+            },
+            {
+                "type": "4",
+                "name": "Knee"
+            },
+            {
+                "type": "4",
+                "name": "Ratio"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Compressor"
+    }
+}

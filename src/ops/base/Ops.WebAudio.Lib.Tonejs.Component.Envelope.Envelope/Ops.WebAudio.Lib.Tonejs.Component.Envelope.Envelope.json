@@ -1,1 +1,57 @@
-{"libs":["tone.min.js"],"summary":"ADSR envelope generator, can be connected to an Audio Port"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "ADSR envelope generator, can be connected to an Audio Port",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Attack"
+            },
+            {
+                "type": "0",
+                "name": "Decay"
+            },
+            {
+                "type": "0",
+                "name": "Sustain"
+            },
+            {
+                "type": "0",
+                "name": "Release"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Attack"
+            },
+            {
+                "type": "0",
+                "name": "Velocity"
+            },
+            {
+                "type": "0",
+                "name": "Attack Time"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Release"
+            },
+            {
+                "type": "0",
+                "name": "Release Time"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Signal"
+            },
+            {
+                "type": "2",
+                "name": "Envelope Object"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.Envelope"
+    }
+}

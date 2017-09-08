@@ -1,1 +1,45 @@
-{"libs":["tone.min.js"],"summary":"Multiple audio filters in one"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Multiple audio filters in one",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Detune"
+            },
+            {
+                "type": "4",
+                "name": "Gain"
+            },
+            {
+                "type": "4",
+                "name": "Q"
+            },
+            {
+                "type": "0",
+                "name": "Type"
+            },
+            {
+                "type": "0",
+                "name": "Rolloff"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Filter"
+    }
+}

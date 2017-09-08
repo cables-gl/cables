@@ -1,1 +1,25 @@
-{"libs":["tone.min.js"],"summary":"Splits a stereo-signal into two mono-signals"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Splits a stereo-signal into two mono-signals",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Stereo"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Left"
+            },
+            {
+                "type": "2",
+                "name": "Right"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.StereoToMono"
+    }
+}

@@ -1,1 +1,37 @@
-{"libs":["tone.min.js"],"summary":"Makes kick and tom sounds using a single oscillator"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Makes kick and tom sounds using a single oscillator",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Oscillator Type"
+            },
+            {
+                "type": "2",
+                "name": "Envelope"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "0",
+                "name": "Pitch Decay"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.MembraneSynth"
+    }
+}

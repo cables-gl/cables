@@ -75,7 +75,7 @@ notePort.onChange = function() {
 timePort.onChange = function() {
   var val = timePort.get();
   if(!val) {
-    timePort.set(DEFAULT_TIME)
+    timePort.set(DEFAULT_TIME);
   }
 };
 

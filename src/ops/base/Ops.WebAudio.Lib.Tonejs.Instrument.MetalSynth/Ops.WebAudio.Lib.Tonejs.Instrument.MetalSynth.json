@@ -1,1 +1,45 @@
-{"libs":["tone.min.js"],"summary":"Good for making metalophone sounds"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Good for making metalophone sounds",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "2",
+                "name": "Envelope"
+            },
+            {
+                "type": "0",
+                "name": "Modulation Index"
+            },
+            {
+                "type": "0",
+                "name": "Harmonicity"
+            },
+            {
+                "type": "0",
+                "name": "Resonance"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.MetalSynth"
+    }
+}

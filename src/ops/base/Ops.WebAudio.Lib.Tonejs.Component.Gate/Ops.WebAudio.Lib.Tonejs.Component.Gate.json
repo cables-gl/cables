@@ -1,1 +1,33 @@
-{"libs":["tone.min.js"],"summary":"Only passes a signal through when the incoming signal exceeds a specified threshold"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Only passes a signal through when the incoming signal exceeds a specified threshold",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Threshold"
+            },
+            {
+                "type": "0",
+                "name": "Attack"
+            },
+            {
+                "type": "0",
+                "name": "Release"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Gate"
+    }
+}

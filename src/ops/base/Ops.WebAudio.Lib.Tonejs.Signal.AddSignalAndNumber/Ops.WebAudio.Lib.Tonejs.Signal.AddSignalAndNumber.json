@@ -1,1 +1,25 @@
-{"libs":["tone.min.js"],"summary":"Sum of an audio signal and a number"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Sum of an audio signal and a number",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Signal 1"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Signal.AddSignalAndNumber"
+    }
+}

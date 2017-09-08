@@ -1,1 +1,46 @@
-{"summary":"Connect multiple audio signals to one output"}
+{
+    "summary": "Connect multiple audio signals to one output",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "audio in 0"
+            },
+            {
+                "type": "2",
+                "name": "audio in 1"
+            },
+            {
+                "type": "2",
+                "name": "audio in 2"
+            },
+            {
+                "type": "2",
+                "name": "audio in 3"
+            },
+            {
+                "type": "2",
+                "name": "audio in 4"
+            },
+            {
+                "type": "2",
+                "name": "audio in 5"
+            },
+            {
+                "type": "2",
+                "name": "audio in 6"
+            },
+            {
+                "type": "2",
+                "name": "audio in 7"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            }
+        ],
+        "name": "Ops.WebAudio.MultiIn"
+    }
+}

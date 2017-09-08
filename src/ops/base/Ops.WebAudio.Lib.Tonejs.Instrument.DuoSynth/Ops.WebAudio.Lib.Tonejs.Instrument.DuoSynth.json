@@ -1,1 +1,41 @@
-{"libs":["tone.min.js"],"summary":"Monophonic synth composed of two MonoSynths run in parallel"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Monophonic synth composed of two MonoSynths run in parallel",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Vibrato Amount"
+            },
+            {
+                "type": "4",
+                "name": "Vibrato Rate"
+            },
+            {
+                "type": "4",
+                "name": "Harmonicity"
+            },
+            {
+                "type": "0",
+                "name": "Portamento"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.DuoSynth"
+    }
+}

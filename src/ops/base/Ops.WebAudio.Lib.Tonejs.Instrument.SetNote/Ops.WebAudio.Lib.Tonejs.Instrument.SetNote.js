@@ -18,7 +18,7 @@ function setNote() {
         
         // check time
         try {
-            new Tone.TimeBase(time)
+            new Tone.TimeBase(time);
         } catch(e) {
             op.log("Warning: Invalid time, using '+0'");
             time = "+0";

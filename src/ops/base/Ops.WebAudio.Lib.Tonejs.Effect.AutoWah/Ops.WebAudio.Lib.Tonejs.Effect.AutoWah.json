@@ -1,1 +1,45 @@
-{"libs":["tone.min.js"],"summary":"AutoWah connects a Follower to a bandpass filter (Filter)"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "AutoWah connects a Follower to a bandpass filter (Filter)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Gain"
+            },
+            {
+                "type": "4",
+                "name": "Quality"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "0",
+                "name": "Base Frequency"
+            },
+            {
+                "type": "0",
+                "name": "Sensitivity"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.AutoWah"
+    }
+}

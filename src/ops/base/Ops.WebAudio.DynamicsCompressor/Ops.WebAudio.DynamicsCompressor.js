@@ -1,4 +1,4 @@
-this.name="Ops.WebAudio.DynamicsCompressor";
+this.name="DynamicsCompressor";
 
 if(!window.audioContext)
     if('webkitAudioContext' in window) audioContext = new webkitAudioContext();

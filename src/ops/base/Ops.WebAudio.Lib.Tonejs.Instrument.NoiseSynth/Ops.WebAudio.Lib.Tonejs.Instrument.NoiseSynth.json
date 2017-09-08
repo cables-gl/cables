@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Composed of a noise generators, a Filter and two Envelopes"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Composed of a noise generators, a Filter and two Envelopes",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Noise Type"
+            },
+            {
+                "type": "2",
+                "name": "Envelope"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.NoiseSynth"
+    }
+}

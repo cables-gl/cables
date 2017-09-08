@@ -8,6 +8,10 @@
             {
                 "type": "0",
                 "name": "Deviation"
+            },
+            {
+                "type": "0",
+                "name": "Random Seed"
             }
         ],
         "portsOut": [
