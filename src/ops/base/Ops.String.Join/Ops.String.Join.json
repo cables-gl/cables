@@ -18,5 +18,10 @@
         ],
         "name": "Ops.String.Join"
     },
-    "summary": "join array values to a string (concat)"
+    "summary": "join array values to a string (concat)",
+    "updated": 1504871929306,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "b457416c-705a-4147-934e-155a23d68675",
+    "created": 1504871929308
 }

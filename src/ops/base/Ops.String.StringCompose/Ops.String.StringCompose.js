@@ -23,7 +23,7 @@ update();
 
 function update()
 {
-    var str=format.get();
+    var str=format.get()||'';
     
     str = str.replace(/\$a/g, a.get());
     str = str.replace(/\$b/g, b.get());
