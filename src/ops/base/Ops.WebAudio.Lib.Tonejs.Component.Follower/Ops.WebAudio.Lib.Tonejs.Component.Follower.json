@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Follows the amplitude of an incoming signal, can be used as a signal"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Follows the amplitude of an incoming signal, can be used as a signal",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Attack"
+            },
+            {
+                "type": "0",
+                "name": "Release"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Follower"
+    }
+}

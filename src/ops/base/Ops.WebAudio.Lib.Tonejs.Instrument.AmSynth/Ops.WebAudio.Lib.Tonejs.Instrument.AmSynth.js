@@ -98,7 +98,7 @@ function setNodeValue(key, val) {
 
 function isValidTime(time) {
     try {
-        new Tone.TimeBase(time)
+        new Tone.TimeBase(time);
         return true;
     } catch(e) {
         return false;

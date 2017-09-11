@@ -1,1 +1,33 @@
-{"libs":["tone.min.js"],"summary":"Karplus-String string synthesis. Often out of tune."}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Karplus-String string synthesis. Often out of tune.",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Attack Noise"
+            },
+            {
+                "type": "4",
+                "name": "Resonance"
+            },
+            {
+                "type": "4",
+                "name": "Dampening"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.PluckSynth"
+    }
+}

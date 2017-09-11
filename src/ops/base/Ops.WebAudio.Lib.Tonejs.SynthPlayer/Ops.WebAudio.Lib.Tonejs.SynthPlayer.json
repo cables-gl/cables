@@ -1,1 +1,44 @@
-{"libs":["tone.min.js"],"summary":"Old. do not use"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Old. do not use",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "a02c6d5a-523f-4508-8f53-6d6d7fe4bae5",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Synth"
+            },
+            {
+                "type": "1",
+                "name": "Play Tone"
+            },
+            {
+                "type": "0",
+                "name": "Note"
+            },
+            {
+                "type": "2",
+                "name": "Velocity"
+            },
+            {
+                "type": "0",
+                "name": "Duration"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.SynthPlayer"
+    }
+}

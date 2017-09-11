@@ -129,5 +129,13 @@ exe.onTriggered=function()
     cgl.frameStore.phong.lights.push(light);
     trigger.trigger();
     cgl.frameStore.phong.lights.pop();
+    
+    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+        gui.setTransformGizmo(
+            {
+                posX:x,
+                posY:y,
+                posZ:z
+            });
 };
 

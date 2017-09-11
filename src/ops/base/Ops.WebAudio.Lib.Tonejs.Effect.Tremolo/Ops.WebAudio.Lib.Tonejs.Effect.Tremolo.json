@@ -1,1 +1,25 @@
-{"libs":["tone.min.js"],"summary":"Modulates the amplitude of an incoming signal using a LFO"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Modulates the amplitude of an incoming signal using a LFO",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Tremolo"
+    }
+}

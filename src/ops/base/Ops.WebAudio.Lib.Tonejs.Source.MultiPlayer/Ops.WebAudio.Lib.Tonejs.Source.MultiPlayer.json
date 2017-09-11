@@ -1,1 +1,113 @@
-{"libs":["tone.min.js"]}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "AudioBuffer 0"
+            },
+            {
+                "type": "2",
+                "name": "AudioBuffer 1"
+            },
+            {
+                "type": "2",
+                "name": "AudioBuffer 2"
+            },
+            {
+                "type": "2",
+                "name": "AudioBuffer 3"
+            },
+            {
+                "type": "2",
+                "name": "AudioBuffer 4"
+            },
+            {
+                "type": "2",
+                "name": "AudioBuffer 5"
+            },
+            {
+                "type": "2",
+                "name": "AudioBuffer 6"
+            },
+            {
+                "type": "2",
+                "name": "AudioBuffer 7"
+            },
+            {
+                "type": "1",
+                "name": "Start Buffer"
+            },
+            {
+                "type": "0",
+                "name": "Buffer Index"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Fade In Time"
+            },
+            {
+                "type": "0",
+                "name": "Offset"
+            },
+            {
+                "type": "0",
+                "name": "Duration"
+            },
+            {
+                "type": "0",
+                "name": "Pitch"
+            },
+            {
+                "type": "0",
+                "name": "Gain"
+            },
+            {
+                "type": "1",
+                "name": "Start Buffer (Loop)"
+            },
+            {
+                "type": "0",
+                "name": "Loop Start Time"
+            },
+            {
+                "type": "0",
+                "name": "Loop End Time"
+            },
+            {
+                "type": "1",
+                "name": "Stop Buffer"
+            },
+            {
+                "type": "1",
+                "name": "Stop All Buffers"
+            },
+            {
+                "type": "0",
+                "name": "Fade Out Time"
+            },
+            {
+                "type": "0",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "Mute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Source.MultiPlayer"
+    },
+    "summary": "Plays back multiple one-shot samples"
+}

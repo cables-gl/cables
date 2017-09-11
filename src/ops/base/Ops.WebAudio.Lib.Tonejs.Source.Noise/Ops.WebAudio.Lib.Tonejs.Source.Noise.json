@@ -1,1 +1,53 @@
-{"libs":["tone.min.js"],"summary":"Audio noise generator, supports white, pink and brown noise"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Audio noise generator, supports white, pink and brown noise",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Playback Rate"
+            },
+            {
+                "type": "0",
+                "name": "Type"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Start Time"
+            },
+            {
+                "type": "1",
+                "name": "Stop"
+            },
+            {
+                "type": "0",
+                "name": "Stop Time"
+            },
+            {
+                "type": "0",
+                "name": "Auto Start"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "Mute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Source.Noise"
+    }
+}

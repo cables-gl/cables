@@ -1,1 +1,26 @@
-{"libs":["tone.min.js"]}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "581eadc6-2ac6-49b4-a574-5d6e57e1a6c8",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Synth"
+            },
+            {
+                "type": "0",
+                "name": "Note"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.SetNote"
+    },
+    "summary": "Change current note of connected instrument"
+}

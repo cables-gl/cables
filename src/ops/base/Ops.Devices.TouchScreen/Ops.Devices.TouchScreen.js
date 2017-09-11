@@ -1,17 +1,22 @@
 op.name="TouchScreen";
 
 
+var disableScaleWeb=op.inValueBool("Disable Scaling",true);
+
 var outTouched=op.outValue("Touched");
 
 var numFingers=op.outValue("Fingers");
 
-var f1y=op.outValue("Finger 1 X");
-var f1x=op.outValue("Finger 1 Y");
+var f1x=op.outValue("Finger 1 X");
+var f1y=op.outValue("Finger 1 Y");
 
-var f2y=op.outValue("Finger 2 X");
-var f2x=op.outValue("Finger 2 Y");
+var f2x=op.outValue("Finger 2 X");
+var f2y=op.outValue("Finger 2 Y");
 
 var outEvents=op.outArray("Events");
+
+
+
 
 function setPos(event)
 {
@@ -48,8 +53,14 @@ var ontouchend=function(event)
 
 var ontouchmove=function(event)
 {
+    
     setPos(event);
     numFingers.set(event.touches.length);
+    if(disableScaleWeb.get() && event.scale !== 1)
+    { 
+        event.preventDefault();
+        
+    }
     // if(event.touches && event.touches.length>0) onmousemove(event.touches[0]);
 };
 

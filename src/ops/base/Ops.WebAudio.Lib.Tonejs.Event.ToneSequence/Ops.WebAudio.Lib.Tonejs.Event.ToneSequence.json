@@ -1,1 +1,72 @@
-{"libs":["tone.min.js"],"summary":"Triggers for every item in the note array"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Triggers for every item in the note array",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "4dfad3d3-088e-47d0-b122-fd8383d415dc",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Subdivision"
+            },
+            {
+                "type": "3",
+                "name": "Note Sequence"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Start Time"
+            },
+            {
+                "type": "0",
+                "name": "Start Offset"
+            },
+            {
+                "type": "1",
+                "name": "Stop"
+            },
+            {
+                "type": "0",
+                "name": "Stop Time"
+            },
+            {
+                "type": "0",
+                "name": "Humanize"
+            },
+            {
+                "type": "0",
+                "name": "Humanize Time"
+            },
+            {
+                "type": "0",
+                "name": "Mute"
+            },
+            {
+                "type": "0",
+                "name": "Probability"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Event Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Note"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Event.ToneSequence"
+    }
+}

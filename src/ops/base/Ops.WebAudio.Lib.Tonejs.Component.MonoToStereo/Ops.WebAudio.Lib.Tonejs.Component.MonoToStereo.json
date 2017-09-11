@@ -1,1 +1,25 @@
-{"summary":"Merges two signals into the left and right channels of a single stereo channel","libs":["tone.min.js"]}
+{
+    "summary": "Merges two signals into the left and right channels of a single stereo channel",
+    "libs": [
+        "tone.min.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Left"
+            },
+            {
+                "type": "2",
+                "name": "Right"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Stereo"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.MonoToStereo"
+    }
+}

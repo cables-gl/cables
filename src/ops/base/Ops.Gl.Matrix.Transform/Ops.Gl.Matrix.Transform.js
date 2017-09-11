@@ -70,7 +70,7 @@ render.onTriggered=function()
             {
                 posX:posX,
                 posY:posY,
-                posZ:posZ
+                posZ:posZ,
             });
 
     

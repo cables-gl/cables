@@ -1,1 +1,36 @@
-{"libs":["tone.min.js"],"summary":"Feedback delay effect (stereo)"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Feedback delay effect (stereo)",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "361a010f-995b-4475-b8a5-7ac231a174c5",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Delay Time"
+            },
+            {
+                "type": "4",
+                "name": "Feedback"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.PingPongDelay"
+    }
+}

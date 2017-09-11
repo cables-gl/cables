@@ -16,7 +16,7 @@ function exec()
     var arr=inArr.get();
     var result='';
     
-    if(arr)
+    if(arr && arr.join)
     {
         result=arr.join(inSeperator.get());
     }

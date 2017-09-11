@@ -1,1 +1,33 @@
-{"libs":["tone.min.js"],"summary":"Simple distortion effect"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Simple distortion effect",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Distortion"
+            },
+            {
+                "type": "0",
+                "name": "Oversample"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Distortion"
+    }
+}

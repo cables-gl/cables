@@ -13,6 +13,10 @@ var offset=op.addInPort(new Port(op,"offset"));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var index=op.addOutPort(new Port(op,"index"));
 
+var outX=op.addOutPort(new Port(op,"X"));
+var outY=op.addOutPort(new Port(op,"Y"));
+
+
 var speed=op.inValue("speed",1);
 
 var startTime=Date.now()/1000;
@@ -36,10 +40,18 @@ render.onTriggered=function()
 {
     cgl.pushMvMatrix();
 
+
     var time=(Date.now()/1000-startTime)*speed.get()+Math.round(segments.get())*0.1*percent.get();
+
+    var x=animX.getValue(time+offset.get())*mulX.get()*radius.get();
+    var y=animY.getValue(time+offset.get())*mulY.get()*radius.get();
+
+    outX.set(x);
+    outY.set(y);
+
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, [
-        animX.getValue(time+offset.get())*mulX.get()*radius.get(),
-        animY.getValue(time+offset.get())*mulY.get()*radius.get(),
+        x,
+        y,
         0] );
 
     trigger.trigger();

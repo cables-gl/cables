@@ -1,1 +1,26 @@
-{"libs":["tone.min.js"],"summary":"Triggers the Release-part of a Synth ADSR"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Triggers the Release-part of a Synth ADSR",
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "1dd44592-b4fe-4503-b469-2f5ecf81dcd5",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Synth"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Arrack"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.TriggerSynthRelease"
+    }
+}

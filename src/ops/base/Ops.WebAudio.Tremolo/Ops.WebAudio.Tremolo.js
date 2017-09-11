@@ -1,6 +1,4 @@
-var self=this;
-Op.apply(this, arguments);
-this.name="Ops.tim.WebAudio.Tremolo";
+op.name="Tremolo";
 
 var audioIn=this.addInPort(new Port(this,"audio in",OP_PORT_TYPE_OBJECT));
 var min=this.addInPort(new Port(this,"min",OP_PORT_TYPE_VALUE));
@@ -20,10 +18,9 @@ function updateGain(){
 }
 
 
-this.oldAudioIn=null;
+var oldAudioIn = null;
 
-audioIn.onValueChanged = function()
-{
+audioIn.onValueChanged = function() {
     if (!audioIn.get()) {
         if (oldAudioIn !== null) {
             try{
@@ -36,7 +33,7 @@ audioIn.onValueChanged = function()
         //audioIn.val.connect(audioContext.destination);
         audioIn.val.connect(gainNode);
     }
-    oldAudioIn=audioIn.val;
+    oldAudioIn = audioIn.val;
 };
 
 audioOut.set( gainNode );

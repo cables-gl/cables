@@ -1,1 +1,46 @@
-{"summary":"Plays back audio files"}
+{
+    "summary": "Plays back audio files",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "File"
+            },
+            {
+                "type": "1",
+                "name": "Play"
+            },
+            {
+                "type": "1",
+                "name": "Pause"
+            },
+            {
+                "type": "1",
+                "name": "Rewind"
+            },
+            {
+                "type": "0",
+                "name": "Seek Position (Seconds)"
+            },
+            {
+                "type": "1",
+                "name": "Jump To Seek Position"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            },
+            {
+                "type": "0",
+                "name": "Duration"
+            }
+        ],
+        "name": "Ops.WebAudio.MediaPlayer"
+    }
+}

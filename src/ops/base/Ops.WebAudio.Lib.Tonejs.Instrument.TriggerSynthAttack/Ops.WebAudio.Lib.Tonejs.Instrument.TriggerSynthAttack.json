@@ -1,1 +1,31 @@
-{"libs":["tone.min.js"],"summary":"Triggers the Attack-part of a Synth ADSR"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Triggers the Attack-part of a Synth ADSR",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Synth"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Arrack"
+            },
+            {
+                "type": "0",
+                "name": "Note"
+            },
+            {
+                "type": "0",
+                "name": "Velocity"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.TriggerSynthAttack"
+    }
+}

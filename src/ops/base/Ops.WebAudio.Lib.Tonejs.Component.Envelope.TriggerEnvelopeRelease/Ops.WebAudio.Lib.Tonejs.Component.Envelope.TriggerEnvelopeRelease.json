@@ -1,1 +1,23 @@
-{"libs":["tone.min.js"],"summary":"Triggers the Release-part of an Envelope"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Triggers the Release-part of an Envelope",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Release"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.TriggerEnvelopeRelease"
+    }
+}

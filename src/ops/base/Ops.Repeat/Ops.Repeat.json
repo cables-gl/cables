@@ -1,5 +1,5 @@
 {
-    "summary": "repeat triggers all childs x times",
+    "summary": "repeat triggers all childs x times (for loop/while)",
     "layout": {
         "portsIn": [
             {

@@ -1,1 +1,22 @@
-{"summary":"Pans an audio signal between left and right"}
+{
+    "summary": "Pans an audio signal between left and right",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Panning"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Panner"
+    }
+}

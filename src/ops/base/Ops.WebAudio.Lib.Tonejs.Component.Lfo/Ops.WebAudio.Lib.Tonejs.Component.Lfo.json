@@ -1,1 +1,49 @@
-{"libs":["tone.min.js"],"summary":"Low frequency oscillator, can be connected to an audio parameter"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Low frequency oscillator, can be connected to an audio parameter",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Amplitude"
+            },
+            {
+                "type": "0",
+                "name": "Min"
+            },
+            {
+                "type": "0",
+                "name": "Max"
+            },
+            {
+                "type": "0",
+                "name": "Type"
+            },
+            {
+                "type": "0",
+                "name": "Phase"
+            },
+            {
+                "type": "0",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "Mute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.Lfo"
+    }
+}

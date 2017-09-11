@@ -1,5 +1,5 @@
 {
-    "summary": "invert a boolean value (negate, flip)",
+    "summary": "invert a boolean value (negate, flip,not)",
     "layout": {
         "portsIn": [
             {

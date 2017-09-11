@@ -3,7 +3,7 @@ op.name="TriggerEnvelopeAttackRelease";
 CABLES.WebAudio.createAudioContext(op);
 
 // default values
-var DURATION_DEFAULT = "4n"
+var DURATION_DEFAULT = "4n";
 var TIME_DEFAULT = "+0";
 var VELOCITY_DEFAULT = 1;
 

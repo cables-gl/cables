@@ -79,20 +79,20 @@ notePort.onChange = function() {
 durationPort.onChange = function() {
   var val = durationPort.get();
   if(!val) {
-    durationPort.set(DEFAULT_DURATION)
+    durationPort.set(DEFAULT_DURATION);
   }
 };
 
 timePort.onChange = function() {
   var val = timePort.get();
   if(!val) {
-    timePort.set(DEFAULT_TIME)
+    timePort.set(DEFAULT_TIME);
   }
 };
 
 velocityPort.onChange = function() {
   var val = velocityPort.get();
   if(!val) {
-    velocityPort.set(DEFAULT_VELOCITY)
+    velocityPort.set(DEFAULT_VELOCITY);
   }
 };

@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Comb filters are basic building blocks for physical modeling"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Comb filters are basic building blocks for physical modeling",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Delay Time"
+            },
+            {
+                "type": "4",
+                "name": "Resonance"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Component.FeedbackCombFilter"
+    }
+}

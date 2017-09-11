@@ -1,1 +1,46 @@
-{}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "play"
+            },
+            {
+                "type": "0",
+                "name": "Autoplay"
+            },
+            {
+                "type": "0",
+                "name": "volume"
+            },
+            {
+                "type": "0",
+                "name": "Synchronized Player"
+            },
+            {
+                "type": "0",
+                "name": "Loop"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            },
+            {
+                "type": "0",
+                "name": "playing"
+            },
+            {
+                "type": "1",
+                "name": "ended"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioPlayer"
+    },
+    "summary": "Plays an audio file, linked to timeline"
+}

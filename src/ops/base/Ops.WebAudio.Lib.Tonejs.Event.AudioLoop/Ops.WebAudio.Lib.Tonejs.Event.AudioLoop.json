@@ -1,1 +1,89 @@
-{"libs":["tone.min.js"]}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update State Ports"
+            },
+            {
+                "type": "0",
+                "name": "Interval"
+            },
+            {
+                "type": "0",
+                "name": "Iterations"
+            },
+            {
+                "type": "0",
+                "name": "Playback Rate"
+            },
+            {
+                "type": "0",
+                "name": "Humanize"
+            },
+            {
+                "type": "0",
+                "name": "Humanize Time"
+            },
+            {
+                "type": "0",
+                "name": "Probability"
+            },
+            {
+                "type": "0",
+                "name": "Start Time"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Auto Start"
+            },
+            {
+                "type": "0",
+                "name": "Stop Time"
+            },
+            {
+                "type": "1",
+                "name": "Stop"
+            },
+            {
+                "type": "0",
+                "name": "Cancel Time"
+            },
+            {
+                "type": "1",
+                "name": "Cancel"
+            },
+            {
+                "type": "0",
+                "name": "Mute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Started"
+            },
+            {
+                "type": "0",
+                "name": "Progress"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Event.AudioLoop"
+    },
+    "summary": "Repeating trigger for audio"
+}

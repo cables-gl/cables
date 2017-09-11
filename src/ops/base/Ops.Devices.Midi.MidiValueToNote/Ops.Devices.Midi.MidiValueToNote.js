@@ -23,12 +23,12 @@ var SHARPS = 'C C# D D# E F F# G G# A A# B'.split(' ');
  * midi.note(61.7) // => 'D4'
  */
 function note (num, sharps) {
-  if (num === true || num === false) return function (m) { return note(m, num) }
-  num = Math.round(num)
-  var pcs = sharps === true ? SHARPS : FLATS
-  var pc = pcs[num % 12]
-  var o = Math.floor(num / 12) - 1
-  return pc + o
+  if (num === true || num === false) return function (m) { return note(m, num); };
+  num = Math.round(num);
+  var pcs = sharps === true ? SHARPS : FLATS;
+  var pc = pcs[num % 12];
+  var o = Math.floor(num / 12) - 1;
+  return pc + o;
 }
 
 midiValuePort.onValueChanged = function(){

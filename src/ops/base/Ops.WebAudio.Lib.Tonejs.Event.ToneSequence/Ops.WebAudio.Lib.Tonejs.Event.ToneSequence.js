@@ -46,7 +46,7 @@ subdivisionPort.onChange = function() {
 };
 sequencePort.onChange = function() {
     createNewSequenceObject();
-}
+};
 startPort.onTriggered = start;
 stopPort.onTriggered = function() {
     var stopTime = CABLES.WebAudio.isValidToneTime(stopTimePort.get()) ? stopTimePort.get() : STOP_TIME_DEFAULT;

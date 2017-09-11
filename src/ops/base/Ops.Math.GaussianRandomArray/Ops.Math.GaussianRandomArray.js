@@ -3,18 +3,21 @@ op.name="GaussianRandomArray";
 var inNum=op.inValueInt("Num",100);
 var outArr=op.outArray("Array");
 var inDev=op.inValue("Deviation",1);
+var seed=op.addInPort(new Port(op,"Random Seed"));
+
 
 var arr=[];
 var stdDev=1;
 
 var nextGaussian=null;
-inDev.onChange=inNum.onChange=update;
+seed.onChange=inDev.onChange=inNum.onChange=update;
 update();
 
 // from https://github.com/processing/p5.js/blob/master/src/math/random.js
 
 var previous=false;
 
+var y2;
 function randomGaussian(mean, sd)  {
   var y1,x1,x2,w;
   if (previous) {
@@ -22,8 +25,8 @@ function randomGaussian(mean, sd)  {
     previous = false;
   } else {
     do {
-      x1 = Math.random()*2 - 1;
-      x2 = Math.random()*2 - 1;
+      x1 = Math.seededRandom()*2 - 1;
+      x2 = Math.seededRandom()*2 - 1;
       w = x1 * x1 + x2 * x2;
     } while (w >= 1);
     w = Math.sqrt((-2 * Math.log(w))/w);
@@ -41,6 +44,7 @@ function randomGaussian(mean, sd)  {
 function update()
 {
     stdDev=inDev.get();
+    Math.randomSeed=seed.get();
 
     arr.length=Math.floor(inNum.get())||0;
     for(var i=0;i<arr.length;i++)
@@ -48,6 +52,7 @@ function update()
         arr[i]=randomGaussian(0,stdDev);
     }
 
+    outArr.set(null);
     outArr.set(arr);
 }
 

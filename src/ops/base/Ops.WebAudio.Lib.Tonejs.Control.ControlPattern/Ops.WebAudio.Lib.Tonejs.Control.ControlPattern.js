@@ -18,7 +18,7 @@ var VALUES_DEFAULT = [];
 var TYPE_DEFAULT = "up";
 
 
-var node = new Tone.CtrlPattern(VALUES_DEFAULT, TYPE_DEFAULT)
+var node = new Tone.CtrlPattern(VALUES_DEFAULT, TYPE_DEFAULT);
 
 // inputs
 var triggerPort = op.inFunction("Trigger");

@@ -1,1 +1,29 @@
-{"libs":["tone.min.js"],"summary":"Applies a width factor to the mid side seperation"}
+{
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Applies a width factor to the mid side seperation",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Width"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.StereoWidener"
+    }
+}
