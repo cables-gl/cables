@@ -47,7 +47,7 @@ struct Light {
 IN mat3 normalMatrix;
 IN vec4 modelPos;
 
-UNI Light lights[4];
+UNI Light lights[NUM_LIGHTS];
 
 IN vec3 vViewPosition;
 IN vec3 norm;

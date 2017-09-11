@@ -5,7 +5,7 @@ var result=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_VALUE,{type:'string'}
 
 function update()
 {
-    result.set( ''+String(val.get()));
+    result.set( ''+String(val.get()||0));
 }
 
 val.onChange=update;

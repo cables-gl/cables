@@ -15,8 +15,7 @@ a.onChange=update;
 b.onChange=update;
 c.onChange=update;
 d.onChange=update;
-d.onChange=update;
-d.onChange=update;
+e.onChange=update;
 f.onChange=update;
 
 update();

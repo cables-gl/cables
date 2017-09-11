@@ -14,12 +14,16 @@ var shininess=op.inValueSlider("Shininess",0.5);
 var fresnel=op.inValueSlider("Fresnel",0);
 
 
+// diffuse color
+var inSpecular=op.inValueSlider("Specular",0.5);
 
 
 shaderOut.ignoreValueSerialize=true;
 var MAX_LIGHTS=16;
 
 
+var cgl=op.patch.cgl;
+var shader=new CGL.Shader(cgl,'lambertmaterial');
 
 
 var shader=new CGL.Shader(cgl,'PhongMaterial');
