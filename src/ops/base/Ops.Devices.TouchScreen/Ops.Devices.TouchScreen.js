@@ -59,7 +59,6 @@ var ontouchmove=function(event)
     if(disableScaleWeb.get() && event.scale !== 1)
     { 
         event.preventDefault();
-        
     }
     // if(event.touches && event.touches.length>0) onmousemove(event.touches[0]);
 };

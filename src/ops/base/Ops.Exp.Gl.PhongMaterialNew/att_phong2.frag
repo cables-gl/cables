@@ -12,7 +12,7 @@ struct Light {
   float radius;
   float mul;
 };
-UNI Light lights[4];
+UNI Light lights[NUM_LIGHTS];
 
 UNI float inSpecular;
 UNI float r,g,b,a;

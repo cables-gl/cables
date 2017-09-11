@@ -1,1 +1,23 @@
-{"summary":"Convert a number to a string"}
+{
+    "summary": "Convert a number to a string",
+    "updated": 1504977094540,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "da57104c-9411-4400-868d-3771fc792ad0",
+    "created": 1504977085843,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.NumberToString"
+    }
+}

@@ -1,25 +1,21 @@
-op.name="PhongMaterialNew";
+op.name="PhongMaterial";
 
 var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
 
-var inSpecular=op.inValueSlider("Specular",0.5);
-
-
-
-    // diffuse color
+// diffuse color
 
 var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var inSpecular=op.inValueSlider("Specular",0.5);
 
 
 
 var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl,'PhongMaterial2');
-// shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_NORMAL','MODULE_BEGIN_FRAG']);
+var shader=new CGL.Shader(cgl,'lambertmaterial');
 
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 g.uniform=new CGL.Uniform(shader,'f','g',g);

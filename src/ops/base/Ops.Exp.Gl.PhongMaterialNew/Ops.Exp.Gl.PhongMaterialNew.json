@@ -1,5 +1,5 @@
 {
-    "updated": 1504884151663,
+    "updated": 1505136205358,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "57cdefe7-cff4-4e02-b588-538f0ce099d5",
@@ -9,10 +9,6 @@
             {
                 "type": "1",
                 "name": "execute"
-            },
-            {
-                "type": "0",
-                "name": "Specular"
             },
             {
                 "type": "0",
@@ -29,6 +25,10 @@
             {
                 "type": "0",
                 "name": "diffuse a"
+            },
+            {
+                "type": "0",
+                "name": "Specular"
             }
         ],
         "portsOut": [
