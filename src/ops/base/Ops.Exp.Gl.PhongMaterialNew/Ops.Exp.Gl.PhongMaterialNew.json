@@ -1,5 +1,5 @@
 {
-    "updated": 1504884151663,
+    "updated": 1504901125401,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "57cdefe7-cff4-4e02-b588-538f0ce099d5",
@@ -8,11 +8,19 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "execute"
+                "name": "render"
             },
             {
                 "type": "0",
-                "name": "Specular"
+                "name": "Shininess"
+            },
+            {
+                "type": "0",
+                "name": "Fresnel"
+            },
+            {
+                "type": "0",
+                "name": "Normal Texture Intensity"
             },
             {
                 "type": "0",
@@ -29,12 +37,44 @@
             {
                 "type": "0",
                 "name": "diffuse a"
+            },
+            {
+                "type": "0",
+                "name": "colorize texture"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "2",
+                "name": "AO Texture"
+            },
+            {
+                "type": "2",
+                "name": "Specular Texture"
+            },
+            {
+                "type": "2",
+                "name": "Normal Texture"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatX"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatY"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "next"
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "shader"
             }
         ],
         "name": "Ops.Exp.Gl.PhongMaterialNew"
