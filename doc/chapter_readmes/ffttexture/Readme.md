@@ -1,3 +1,0 @@
-#FftTexture
-
-TODO

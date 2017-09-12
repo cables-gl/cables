@@ -1,3 +1,0 @@
-#FullscreenRectangle
-
-TODO

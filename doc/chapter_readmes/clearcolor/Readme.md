@@ -1,3 +1,0 @@
-#ClearColor
-
-TODO

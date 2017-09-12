@@ -1,3 +1,0 @@
-#ArrayIterator3x
-
-TODO

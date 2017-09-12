@@ -1,3 +1,0 @@
-#ColorPalettes
-
-TODO

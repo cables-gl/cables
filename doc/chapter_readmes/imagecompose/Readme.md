@@ -1,3 +1,0 @@
-#ImageCompose
-
-TODO

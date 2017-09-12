@@ -1,3 +1,0 @@
-#FrequencyEnvelope
-
-TODO

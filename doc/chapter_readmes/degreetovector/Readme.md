@@ -1,3 +1,0 @@
-#DegreeToVector
-
-TODO

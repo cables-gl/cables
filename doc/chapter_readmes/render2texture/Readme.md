@@ -1,3 +1,0 @@
-#Render2Texture
-
-TODO

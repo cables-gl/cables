@@ -1,3 +1,0 @@
-#TextureSVG
-
-TODO
