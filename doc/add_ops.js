@@ -9,7 +9,7 @@ var path = require("path");
  * TODO: Create categories for e.g. "WebAudio".
  */
 
-var OP_DIR = "../src/ops/base"; // a symlink to the ops/base directory should be in the same folder as the script
+var OP_DIR = "../src/ops/base"; // should point to /ops/base
 var OPS_TMP_DIR = "ops";
 var CATEGORY_DESCRIPTION_FOLDER = "chapter_readmes"
 
@@ -190,7 +190,6 @@ function createOpEntries() {
     }
     return 0; //default return value (no sorting)
   });
-  console.log("Creating entry for each .md-file in " + "SUMMARY.md");
   mdFiles.forEach(createOpEntry);
 }
 
