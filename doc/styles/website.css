@@ -2,6 +2,16 @@
   display: none;
 }
 
+.book-summary .chapter > span {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.book-summary .chapter > a {
+  opacity: 1;
+  font-weight: normal;
+}
+
 .book-summary ul.summary li ul {
   padding-left: 4px;
 }
