@@ -1,0 +1,25 @@
+.chapter b {
+  display: none;
+}
+
+.book .book-summary ul.summary li a{
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.book .book-header h1 a, .book .book-header h1 a:hover {
+  transition: none;
+}
+
+.book .book-header h1 {
+  opacity: 1;
+}
+
+.book.color-theme-2 .book-summary ul.summary li a, .book.color-theme-2 .book-summary ul.summary li span {
+  font-weight: 400;
+}
+
+li.chapter > a[href*="chapter"], .book.color-theme-2 .book-summary ul.summary li a[href*="chapter"] {
+  color: #f1f1f1;
+  font-weight: 600;
+}
