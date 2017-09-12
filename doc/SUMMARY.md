@@ -4,7 +4,6 @@
   * [How to use cables](chapter_readmes/how_to_use_cables/readme.md)
     * [User Interface Walktrough](ui_walkthrough/ui_walkthrough.md)
     * [Keyboard Shortcuts](keys/keys.md)
-    * [Videos](videos/videos.md)
 
   * [Beginner](chapter_readmes/beginner/readme.md)
     * [Beginner I – Circle](beginner1_circle/beginner1_circle.md)
