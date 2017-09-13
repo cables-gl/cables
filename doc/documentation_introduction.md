@@ -2,7 +2,7 @@
 
 <iframe width="640" height="360"  src="https://www.youtube.com/embed/videoseries?list=PLYimpE2xWgBveaPOiV_2_42kZEl_1ExB0&showinfo=1" frameborder="0" allowfullscreen></iframe>  
 
-[Tutorial-Videos on Youtube](https://www.youtube.com/watch?v=ogjW801357c&list=PLqsYJ2DvUMOCcJen1ETW9DxD7_4N-Adw9) 
+[Tutorial-Videos on Youtube](https://www.youtube.com/watch?v=KPTGFM177HU&feature=youtu.be&list=PLYimpE2xWgBveaPOiV_2_42kZEl_1ExB0) 
 
 This is the official [cables](https://cables.gl) documentation.
 
