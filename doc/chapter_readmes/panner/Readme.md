@@ -1,3 +1,0 @@
-#Panner
-
-TODO

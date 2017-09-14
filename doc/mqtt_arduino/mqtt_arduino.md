@@ -28,7 +28,7 @@ shiftr.io also offers a test-account (without the need to register) with *userna
 
 Before we can get started, we have to install some libraries. Klick on *Sketch* —> *Import Library* —> *Manage Libraries* and install the libraries `Adafruit BNO055`, `Adafruit NeoPixel`, `WiFi101` and `MQTT` (the one by Joel Gaehwiler).
 
-![Arduino_Lib_MQTT.png](img/Arduino_Lib_MQTT.png)
+![arduino_lib_mqtt.png](img/arduino_lib_mqtt.png)
 
 ## Testing the components
 
@@ -89,7 +89,7 @@ connected!
 
 Now go to [shiftr.io/try](https://shiftr.io/try) and you will see something like this:
 
-![Shiftr Hello](img/Shiftr_Hello.jpg)
+![Shiftr Hello](img/shiftr_hello.jpg)
 
 Here we see the device `arduino` sending data to the channel `hellofromarduinoooo` – so it worked.   
 
@@ -115,7 +115,7 @@ For the communication with MQTT in cables you need three ops – `Mqtt` (for aut
 
  Let’s create a new project on [cables.gl](https://cables.gl) and insert these three ops: 
 
-![MQTT ops](img/MQTT_ops.jpg)
+![MQTT ops](img/mqtt_ops.jpg)
 
 Connect the `Mqtt` out port `MQTT Object` to the `MQTT Object` in ports of `MqttReceive` and `MqttSend`.  
 
@@ -516,7 +516,7 @@ Connect the Adafruit Neopixel ring:
 | VCC             | 5V DC Power            |
 | Data Input      | 6                      |
 
-![Fritzing](img/wiring_Steckplatine_with_neopixel.jpg)
+![Fritzing](img/wiring_steckplatine_with_neopixel.jpg)
 
 
 

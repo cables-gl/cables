@@ -1,23 +1,22 @@
 # Summary
 
-* [Tutorials](chapter_readmes/tutorials/Readme.md)
-  * [How to use cables](chapter_readmes/how_to_use_cables/Readme.md)
+* [Tutorials](chapter_readmes/tutorials/readme.md)
+  * [How to use cables](chapter_readmes/how_to_use_cables/readme.md)
     * [User Interface Walktrough](ui_walkthrough/ui_walkthrough.md)
     * [Keyboard Shortcuts](keys/keys.md)
-    * [Videos](videos/videos.md)
 
-  * [Beginner](chapter_readmes/beginner/Readme.md)
+  * [Beginner](chapter_readmes/beginner/readme.md)
     * [Beginner I – Circle](beginner1_circle/beginner1_circle.md)
     * [Beginner II – Transformations](beginner2_transformations/beginner2_transformations.md)
     * [Beginner III – Color](beginner3_color/beginner3_color.md)
     * [Beginner IV – More Transformations](beginner4_more_transformations/beginner4_more_transformations.md)
-  * [Intermediate](chapter_readmes/intermediate/Readme.md)
+  * [Intermediate](chapter_readmes/intermediate/readme.md)
     * [Image Compositions](image_composition/image_composition.md)
     * [Post-processing 3D scenes](post-processing_3d_scenes/post-processing_3d_scenes.md)
-  * [Export / Embedding](chapter_readmes/export/Readme.md)
+  * [Export / Embedding](chapter_readmes/export/readme.md)
     * [Embedding](dev_embed/dev_embed.md)
     * [Setting Variables](dev_embed_vars/dev_embed_vars.md)
-  * [Writing Ops](chapter_readmes/writing_ops/Readme.md)
+  * [Writing Ops](chapter_readmes/writing_ops/readme.md)
     * [Hello Op](dev_hello_op/dev_hello_op.md)
     * [Namespaces](namespaces/namespaces.md)
     * [Op Development](dev_ops/dev_ops.md)
@@ -27,5 +26,5 @@
     * [Callbacks](dev_callbacks/dev_callbacks.md)
     * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
 
-* [Ops](chapter_readmes/ops/Readme.md)
+* [Ops](chapter_readmes/ops/readme.md)
 

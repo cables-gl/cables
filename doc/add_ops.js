@@ -9,7 +9,7 @@ var path = require("path");
  * TODO: Create categories for e.g. "WebAudio".
  */
 
-var OP_DIR = "../src/ops/base"; // a symlink to the ops/base directory should be in the same folder as the script
+var OP_DIR = "../src/ops/base"; // should point to /ops/base
 var OPS_TMP_DIR = "ops";
 var CATEGORY_DESCRIPTION_FOLDER = "chapter_readmes"
 
@@ -86,14 +86,14 @@ function createOpCategory(category, indents) {
       for (var i=0; i<indents; i++) {
         text += "\t";
       }
-      text += "* [" + category + "](" + "chapter_readmes" + "/" + category.toLowerCase() + "/Readme.md" + ")\n"; // e.g. "* [WebAudio](chapter_readmes/webaudio/Readme.md)"
+      text += "* [" + category + "](" + "chapter_readmes" + "/" + category.toLowerCase() + "/readme.md" + ")\n"; // e.g. "* [WebAudio](chapter_readmes/webaudio/Readme.md)"
       fs.appendFileSync('SUMMARY.md', text);
       opCategories.push(category);
       // create category markdown file
       var folder = CATEGORY_DESCRIPTION_FOLDER + "/" + category.toLowerCase().replace(' ', '_');
-      var filename =  "Readme.md";
+      var filename =  "readme.md";
       var relFilename = folder + "/" + filename;
-      var defaultReadmeText = "#" + category + "\n\nTODO";
+      var defaultReadmeText = "#" + category;
       if(!fs.existsSync(relFilename)) {
           if( !fs.existsSync(folder) ) { fs.mkdirSync(folder); }
           fs.writeFileSync(folder + "/" + filename, defaultReadmeText);
@@ -190,7 +190,6 @@ function createOpEntries() {
     }
     return 0; //default return value (no sorting)
   });
-  console.log("Creating entry for each .md-file in " + "SUMMARY.md");
   mdFiles.forEach(createOpEntry);
 }
 

@@ -1,7 +1,7 @@
 { 
 	"title": "cables Documentation",
 	"styles": {
-		"website": "css/website.css"
+		"website": "styles/website.css"
     },
 	"plugins": [
 	  "ga"
@@ -12,6 +12,6 @@
         }
     },
     "structure": {
-        "readme": "Documentation_Introduction.md"
+        "readme": "documentation_introduction.md"
     }
 }

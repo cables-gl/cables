@@ -1,3 +1,0 @@
-#ColorTexture
-
-TODO

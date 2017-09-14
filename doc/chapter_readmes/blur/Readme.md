@@ -1,3 +1,0 @@
-#Blur
-
-TODO

@@ -1,3 +1,0 @@
-#DuoSynth
-
-TODO

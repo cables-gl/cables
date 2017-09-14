@@ -1,3 +1,0 @@
-#BarsBeatsSixteenthResolver
-
-TODO

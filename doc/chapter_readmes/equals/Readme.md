@@ -1,3 +1,0 @@
-#Equals
-
-TODO

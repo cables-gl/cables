@@ -1,3 +1,0 @@
-#ObjectGetArray
-
-TODO

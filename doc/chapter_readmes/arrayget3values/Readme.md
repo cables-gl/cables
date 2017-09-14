@@ -1,3 +1,0 @@
-#ArrayGet3Values
-
-TODO

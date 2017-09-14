@@ -1,3 +1,0 @@
-#TextureEffects
-
-TODO

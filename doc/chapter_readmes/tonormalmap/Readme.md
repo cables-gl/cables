@@ -1,3 +1,0 @@
-#toNormalMap
-
-TODO

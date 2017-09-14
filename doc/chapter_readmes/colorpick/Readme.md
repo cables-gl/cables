@@ -1,3 +1,0 @@
-#ColorPick
-
-TODO

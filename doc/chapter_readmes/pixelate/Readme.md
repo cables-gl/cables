@@ -1,3 +1,0 @@
-#Pixelate
-
-TODO

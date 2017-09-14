@@ -1,3 +1,0 @@
-#PannerAndVolume
-
-TODO

@@ -1,3 +1,0 @@
-#getVarArray
-
-TODO
