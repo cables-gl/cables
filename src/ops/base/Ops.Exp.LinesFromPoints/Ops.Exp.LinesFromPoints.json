@@ -1,0 +1,18 @@
+{
+    "summary": "Connects all points to lines",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Points"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Lines"
+            }
+        ],
+        "name": "Ops.Exp.LinesFromPoints"
+    }
+}

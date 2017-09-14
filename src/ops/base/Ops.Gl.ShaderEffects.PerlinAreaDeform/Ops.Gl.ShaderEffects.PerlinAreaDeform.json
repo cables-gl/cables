@@ -1,0 +1,61 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Scale"
+            },
+            {
+                "type": "0",
+                "name": "Size"
+            },
+            {
+                "type": "0",
+                "name": "Strength"
+            },
+            {
+                "type": "0",
+                "name": "Smooth"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
+            },
+            {
+                "type": "0",
+                "name": "Scroll X"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Y"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.PerlinAreaDeform"
+    },
+    "summary": "perlin noise vertex wobble deformer",
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "8118b7a9-2ba7-4607-8fd1-8525d6fcf0d6"
+}
