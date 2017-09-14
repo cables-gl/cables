@@ -6,8 +6,8 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
 
 
-var radius=op.inValue("Radius",10);
-
+var radius=op.inValue("Radius",100);
+var fallOff=op.inValueSlider("Fall Off",0.1);
 var intensity=op.inValue("Intensity",1);
 
 var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
@@ -26,7 +26,6 @@ var specularR=op.addInPort(new Port(op,"Specular R",OP_PORT_TYPE_VALUE,{ display
 var specularG=op.addInPort(new Port(op,"Specular G",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var specularB=op.addInPort(new Port(op,"Specular B",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var fallOff=op.inValueSlider("Fall Off",0.1);
 
 ambientR.set(0);
 ambientG.set(0);

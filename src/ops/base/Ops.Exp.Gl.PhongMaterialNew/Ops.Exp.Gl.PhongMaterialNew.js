@@ -4,9 +4,9 @@ var cgl=this.patch.cgl;
 // adapted from:
 // http://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION) );
+var render=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
 var shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
 
 // var specularStrength=op.inValue("Specular Strength",1);
@@ -15,7 +15,6 @@ var fresnel=op.inValueSlider("Fresnel",0);
 
 
 // diffuse color
-var inSpecular=op.inValueSlider("Specular",0.5);
 
 
 shaderOut.ignoreValueSerialize=true;
@@ -32,7 +31,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_NORMAL','MODU
 shader.setSource(attachments.phong2_vert,attachments.phong2_frag);
 shaderOut.set(shader);
 
-// var uniSpecStrngth=new CGL.Uniform(shader,'f','specularStrength',specularStrength);
+// var unishininess=new CGL.Uniform(shader,'f','shininess',shininess);
 var uniShininess=new CGL.Uniform(shader,'f','shininess',0);
 var uniFresnel=new CGL.Uniform(shader,'f','fresnel',fresnel);
 shininess.onChange=updateShininess;

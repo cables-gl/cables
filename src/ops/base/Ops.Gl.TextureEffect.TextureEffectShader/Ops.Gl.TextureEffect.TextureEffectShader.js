@@ -35,6 +35,7 @@ blendMode.onChange=function()
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
 
+
 render.onTriggered=function()
 {
     if(!shader)return;
@@ -43,8 +44,12 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
+
+
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
+shader.bindTextures();
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

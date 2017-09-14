@@ -1,1 +1,38 @@
-{}
+{
+    "updated": 1505223400723,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "f6fd7e38-171b-4c53-b215-c198de19c20e",
+    "created": 1505223383770,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "mesh index"
+            },
+            {
+                "type": "0",
+                "name": "center pivot"
+            },
+            {
+                "type": "0",
+                "name": "draw"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Json3d.Mesh"
+    }
+}

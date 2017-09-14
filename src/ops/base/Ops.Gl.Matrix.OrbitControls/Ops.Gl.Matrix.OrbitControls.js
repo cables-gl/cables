@@ -35,6 +35,7 @@ minDist.set(0.05);
 maxDist.set(99999);
 initialAxis.set(0.5);
 initialX.set(0.0);
+
 inReset.onTriggered=reset;
 
 var cgl=op.patch.cgl;
@@ -240,6 +241,12 @@ function onMouseEnter(e)
 {
     // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
 }
+
+initialRadius.onValueChange(function()
+{
+    // percX=(initialX.get()*Math.PI*2);
+    radius=initialRadius.get();
+});
 
 initialX.onValueChange(function()
 {

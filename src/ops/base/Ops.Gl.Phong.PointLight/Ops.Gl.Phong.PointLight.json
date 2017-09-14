@@ -12,6 +12,10 @@
             },
             {
                 "type": "0",
+                "name": "Fall Off"
+            },
+            {
+                "type": "0",
                 "name": "Intensity"
             },
             {
@@ -61,10 +65,6 @@
             {
                 "type": "0",
                 "name": "Specular B"
-            },
-            {
-                "type": "0",
-                "name": "Fall Off"
             }
         ],
         "portsOut": [
@@ -79,8 +79,7 @@
         ],
         "name": "Ops.Gl.Phong.PointLight"
     },
-
-    "updated": 1504698942759,
+    "updated": 1505382372229,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "1d2cf105-f66d-4a31-949e-b1887d582080",

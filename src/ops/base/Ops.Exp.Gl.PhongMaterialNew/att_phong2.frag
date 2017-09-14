@@ -54,49 +54,8 @@ IN vec3 norm;
 UNI vec3 camPos;
 IN vec3 vNormal;
 
+IN mat3 TBN;
 
-// const float gamma_2_6 = 2.2;
-
-// float toLinear_2_7(float v) {
-//   return pow(v, gamma_2_6);
-// }
-
-// vec2 toLinear_2_7(vec2 v) {
-//   return pow(v, vec2(gamma_2_6));
-// }
-
-// vec3 toLinear_2_7(vec3 v) {
-//   return pow(v, vec3(gamma_2_6));
-// }
-
-// vec4 toLinear_2_7(vec4 v) {
-//   return vec4(toLinear_2_7(v.rgb), v.a);
-// }
-
-
-
-// const float gamma_3_8 = 2.2;
-
-// float toGamma_3_9(float v) {
-//   return pow(v, 1.0 / gamma_3_8);
-// }
-
-// vec2 toGamma_3_9(vec2 v) {
-//   return pow(v, vec2(1.0 / gamma_3_8));
-// }
-
-// vec3 toGamma_3_9(vec3 v) {
-//   return pow(v, vec3(1.0 / gamma_3_8));
-// }
-
-// vec4 toGamma_3_9(vec4 v) {
-//   return vec4(toGamma_3_9(v.rgb), v.a);
-// }
-
-// //account for gamma-corrected images
-// vec4 textureLinear(sampler2D uTex, vec2 uv) {
-//   return toLinear_2_7(texture2D(uTex, uv));
-// }
 
 
 float calcFresnel(vec3 direction, vec3 normal)
@@ -118,6 +77,27 @@ void main()
 
     vec3 color = vec3(0.0);
     vec2 uv = texCoord * UV_SCALE;
+    vec3 N = norm;
+    vec3 normTrans=TBN*N;
+
+    // vec3 tangent;
+    // vec3 binormal;
+    
+    // // #ifdef CALC_TANGENT
+    //     tangent = cross(norm, vec3(0.0, 0.0, 1.0));
+    //     tangent = normalize(tangent);
+    //     binormal = cross(norm, tangent);
+    //     binormal = normalize(binormal);
+        
+    //     tangent=normalize(vec3(modelMatrix * vec4(tangent,1.0)));
+    // // #endif
+    // // vec3 T = normalize(vec3(modelMatrix * vec4(attrTangent,   0.0)));
+    // // vec3 B = normalize(vec3(modelMatrix * vec4(attrBiTangent, 0.0)));
+    // // vec3 N = normalize(vec3(modelMatrix * vec4(vNormal,    0.0)));
+
+    // N=normalize(tangent*norm.x + binormal*norm.y + norm*norm.z);
+
+
 
     #ifdef HAS_TEXTURE_DIFFUSE
         vec3 diffuseColor = texture2D(texDiffuse, uv).rgb;
@@ -128,7 +108,15 @@ void main()
 
     #ifdef HAS_TEXTURE_NORMAL
         vec3 normalMap = texture2D(texNormal, uv).rgb * 2.0 - 1.0;
-        normalMap=normalize(normalMatrix * normalMap);
+        // normalMap=normalize(normalMap);
+
+        N=normalize(normalMatrix * normalMap);
+
+        // N=normalize( (normalMap));
+        // N = normalize( (normalMap) );
+
+        // N = normalize(normalMap); 
+        normTrans=normalize(TBN * normalMap);
     #endif
 
     float specStrength = specularStrength;
@@ -138,23 +126,18 @@ void main()
 
     vec3 specularColors=vec3(0.0);
 
-    vec3 N = norm;
-    #ifdef HAS_TEXTURE_NORMAL
-        N = normalize( (normalMap+N) );
-    #endif
 
 
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         Light light=lights[l];
 
-
-
         vec3 lightDir = normalize(light.pos - modelPos.xyz);
-        
-        float lambertian = max(dot(lightDir,N), 0.0);
+    
+        float lambertian = max(dot(lightDir,normalize(norm)), 0.0);
         float specular = 0.0;
-        
+
+
         if(lambertian > 0.0)
         {
             vec3 viewDir = normalize(camPos.xyz-modelPos.xyz);
@@ -173,8 +156,6 @@ void main()
             
             color+= light.mul*falloff*vec3(light.ambient + lambertian * light.color );
             specularColors+=light.mul*falloff*vec3(specular * light.specular);
-
-
         }
         else
         {

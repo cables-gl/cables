@@ -86,6 +86,8 @@ function reload()
         nfo += geom.verticesIndices.length+' faces <br/>';
         nfo += geom.vertices.length+' vertices <br/>';
         nfo += geom.texCoords.length+' texturecoords <br/>';
+        nfo += geom.tangents.length+' tangents <br/>';
+        nfo += geom.biTangents.length+' biTangents <br/>';
         if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
         
         op.uiAttr({"info":nfo});

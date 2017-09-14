@@ -8,8 +8,8 @@ UNI mat4 viewMatrix;
 IN vec3 attrVertNormal;
 IN vec2 attrTexCoord;
 
-// IN vec3 attrTangent;
-// IN vec3 attrBiTangent;
+IN vec3 attrTangent;
+IN vec3 attrBiTangent;
 OUT vec3 vTangent;
 OUT vec3 vBiTangent;
 
@@ -32,6 +32,7 @@ OUT mat3 normalMatrix;
 OUT vec4 modelPos;
 
 
+OUT mat3 TBN;
 
 
 
@@ -90,8 +91,6 @@ void main()
     modelPos=modelMatrix*pos;
     mvMatrix=viewMatrix * modelMatrix;
 
-
-
     {{MODULE_VERTEX_POSITION}}
 
     vec4 viewModelPosition = mvMatrix * pos;
@@ -103,6 +102,11 @@ void main()
     // We could also do this CPU-side to avoid doing it per-vertex
     normalMatrix = transpose_1_0(inverse_2_1(mat3(mvMatrix)));
     vNormal = normalize(normalMatrix * norm);
+
+    vec3 T = normalize(vec3(modelMatrix * vec4(attrTangent,   0.0)));
+    vec3 B = normalize(vec3(modelMatrix * vec4(attrBiTangent, 0.0)));
+    vec3 N = normalize(vec3(modelMatrix * vec4(vNormal,    0.0)));
+    TBN = transpose_1_0(mat3(T, B, N));
 
     gl_Position = projMatrix * mvMatrix * pos;
 }

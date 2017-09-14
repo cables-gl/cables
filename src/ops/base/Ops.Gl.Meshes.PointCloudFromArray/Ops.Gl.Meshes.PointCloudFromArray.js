@@ -27,7 +27,7 @@ function reset()
     if(!verts)return;
 
     var num=verts.length/3;
-    num=Math.round(num);
+    num=Math.floor(num);
 
     if(!texCoords || texCoords.length!=num*2)
     texCoords=new Float32Array(num*2);
@@ -47,7 +47,6 @@ function reset()
             {
                 texCoords[i*2]=Math.seededRandom();
                 texCoords[i*2+1]=Math.seededRandom();
-
             }
             else
             {

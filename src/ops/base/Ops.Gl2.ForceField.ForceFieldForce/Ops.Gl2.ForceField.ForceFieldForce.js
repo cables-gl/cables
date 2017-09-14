@@ -64,4 +64,12 @@ exec.onTriggered=function()
     next.trigger();
     
     CABLES.forceFieldForces.pop();
+    
+    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+        gui.setTransformGizmo(
+            {
+                posX:posX,
+                posY:posY,
+                posZ:posZ,
+            });
 };

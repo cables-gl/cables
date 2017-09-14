@@ -1,5 +1,5 @@
 {
-    "updated": 1504901125401,
+    "updated": 1505216006542,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "57cdefe7-cff4-4e02-b588-538f0ce099d5",
@@ -8,7 +8,7 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "execute"
             },
             {
                 "type": "0",
@@ -70,7 +70,7 @@
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "next"
             },
             {
                 "type": "2",

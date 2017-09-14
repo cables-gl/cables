@@ -10,6 +10,7 @@ var cgl=op.patch.cgl;
 var uniformInputs=[];
 var uniformTextures=[];
 
+
 var shader=new CGL.Shader(cgl,"shaderMaterial");
 shader.glslVersion=0;
 
@@ -29,10 +30,8 @@ function updateLater()
     updateShader();
 }
 
-
 function doRender()
 {
-
     if(needsUpdate)updateShader();
     cgl.setShader(shader);
 
@@ -45,7 +44,7 @@ function bindTextures()
 {
     for(var i=0;i<uniformTextures.length;i++)
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0+i);
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0+i+3);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
     }
 }
@@ -63,21 +62,16 @@ function updateShader()
     needsUpdate=false;
     op.log('shader update!');
 
-    shader.glslVersion=0;
-    
-    // console.log('vertexSHADER',vertexShader.get());
-    // console.log('fragmentSHADER',fragmentShader.get());
-    
-    
-    
-    
+    // shader.glslVersion=0;
+    shader.bindTextures=bindTextures;
+
     shader.setSource(vertexShader.get(),fragmentShader.get());
-    
     shader.compile();
 
     var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
 
     var i=0;
+    var countTexture=0;
     for (i=0; i < activeUniforms; i++)
     {
         var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
@@ -86,21 +80,37 @@ function updateShader()
         {
             if(uniform.type==0x1406)
             {
-                var newInput=op.inValue(uniform.name,0);
-                newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
+                var newInput=op.inValue(uniform.name,newInput,0);
+                newInput.onChange=function(p)
+                {
+                    console.log('change',p.get());
+
+                    p.uniform.needsUpdate=true;
+                    p.uniform.setValue(p.get());
+
+                };
+                
                 uniformInputs.push(newInput);
+                newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
             }
             else
             if(uniform.type==0x8B5E)
             {
                 var newInputTex=op.inObject(uniform.name);
-                newInputTex.uniform=new CGL.Uniform(shader,'f',uniform.name,uniformTextures.length);
+                newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
                 uniformTextures.push(newInputTex);
+                countTexture++;
             }
         }
     }
-    
+
+    for(i=0;i<uniformInputs.length;i++)
+    {
+        uniformInputs[i].uniform.needsUpdate=true;
+    }
+
     if(CABLES.UI) gui.patch().showOpParams(op);
+    console.log(2);
     outShader.set(null);
     outShader.set(shader);
 
@@ -130,3 +140,5 @@ function updateShader()
 // 0x1405: 'UNSIGNED_INT',
 // 0x1406: 'FLOAT'
 
+
+updateShader();
