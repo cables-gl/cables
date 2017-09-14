@@ -1,0 +1,24 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Note"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Frequency"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Type.NoteToFrequency"
+    },
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "5edcd890-b257-4b05-8f68-4b0910dda903",
+    "libs": [
+        "tone.min.js"
+    ],
+    "summary": "Converts a note to a frequency (e.g. C4 to 440)"
+}

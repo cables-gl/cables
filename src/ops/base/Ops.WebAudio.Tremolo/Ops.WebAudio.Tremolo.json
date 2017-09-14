@@ -1,0 +1,33 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "10411412-183e-4db4-9b50-2a501e95f64c",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "audio in"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "frequency"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            }
+        ],
+        "name": "Ops.WebAudio.Tremolo"
+    },
+    "summary": "Creates a tremolo-effect. Better use the other one."
+}

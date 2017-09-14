@@ -1,0 +1,28 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "e3cf4ccd-e318-48f0-acd0-5bd911090023",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "audio in"
+            },
+            {
+                "type": "0",
+                "name": "impulse response"
+            },
+            {
+                "type": "0",
+                "name": "normalize"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            }
+        ],
+        "name": "Ops.WebAudio.Convolver"
+    }
+}

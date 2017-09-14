@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Scale"
+            },
+            {
+                "type": "0",
+                "name": "Base Note"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Chord"
+            }
+        ],
+        "name": "Ops.WebAudio.Scale.ChordTriad"
+    },
+    "summary": "Creates a triad chord"
+}

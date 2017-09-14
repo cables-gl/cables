@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "parameter"
+            },
+            {
+                "type": "0",
+                "name": "Default"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Net.UrlQueryParams"
+    },
+    "summary": "get URL parameters"
+}

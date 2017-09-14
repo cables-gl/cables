@@ -1,0 +1,42 @@
+{
+    "updated": 1505379553147,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "eae9a731-3712-4891-9c22-dc7f4d80ce66",
+    "created": 1504901445752,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "execute"
+            },
+            {
+                "type": "0",
+                "name": "Specular"
+            },
+            {
+                "type": "0",
+                "name": "diffuse r"
+            },
+            {
+                "type": "0",
+                "name": "diffuse g"
+            },
+            {
+                "type": "0",
+                "name": "diffuse b"
+            },
+            {
+                "type": "0",
+                "name": "diffuse a"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            }
+        ],
+        "name": "Ops.Gl.Phong.LambertMaterial"
+    }
+}

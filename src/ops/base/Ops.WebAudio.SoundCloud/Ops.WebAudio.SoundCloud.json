@@ -1,0 +1,30 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "SoundCloud URL"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Stream URL"
+            },
+            {
+                "type": "0",
+                "name": "Artwork URL"
+            },
+            {
+                "type": "0",
+                "name": "Title"
+            },
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.WebAudio.SoundCloud"
+    },
+    "summary": "Get infos / stream URL from a regular Soundcloud-track URL"
+}
