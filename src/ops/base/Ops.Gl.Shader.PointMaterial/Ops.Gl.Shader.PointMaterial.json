@@ -1,1 +1,79 @@
-{"summary":"Draw all vertices as points, like particles","layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"PointSize"},{"type":"0","name":"Random Size"},{"type":"0","name":"Round"},{"type":"0","name":"Scale by Distance"},{"type":"0","name":"r"},{"type":"0","name":"g"},{"type":"0","name":"b"},{"type":"0","name":"a"},{"type":"0","name":"preMultiplied alpha"},{"type":"2","name":"texture"},{"type":"2","name":"Texture Mask"},{"type":"0","name":"colorizeTexture"},{"type":"0","name":"texture Lookup"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"2","name":"shader"}],"name":"Ops.Gl.Shader.PointMaterial"}}
+{
+    "summary": "Draw all vertices as points, like particles",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "PointSize"
+            },
+            {
+                "type": "0",
+                "name": "Random Size"
+            },
+            {
+                "type": "0",
+                "name": "Round"
+            },
+            {
+                "type": "0",
+                "name": "Scale by Distance"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "a"
+            },
+            {
+                "type": "0",
+                "name": "preMultiplied alpha"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "2",
+                "name": "Texture Mask"
+            },
+            {
+                "type": "0",
+                "name": "colorizeTexture"
+            },
+            {
+                "type": "0",
+                "name": "texture Lookup"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.PointMaterial"
+    },
+    "updated": 1505470009235,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "f86a4a07-00ee-4f68-8839-e02d51d1cd2f",
+    "created": 1505469976045
+}

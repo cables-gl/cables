@@ -109,9 +109,7 @@ exe.onTriggered=function()
     vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
     light=light||{};
     
-    // console.log(mpos);
     light.pos=mpos;
-    // light.mul=1.0;//mul.get();
     light.type=0;
 
     if(attachment.isLinked())

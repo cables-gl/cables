@@ -85,7 +85,10 @@ var updateLights=function()
     {
         lights[count].pos.setValue([5,5,5]);
         lights[count].color.setValue([1,1,1]);
-        lights[count].ambient.setValue([0,0,0]);
+        lights[count].ambient.setValue([0.1,0.1,0.1]);
+        lights[count].mul.setValue(1);
+        lights[count].fallOff.setValue(0.5);
+
 
     }
     else

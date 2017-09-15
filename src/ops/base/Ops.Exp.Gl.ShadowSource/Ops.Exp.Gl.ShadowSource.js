@@ -32,9 +32,11 @@ if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,32,32);
 else 
 {
     console.log("new framebuffer...");
-    fb=new CGL.Framebuffer2(cgl,32,32,{multisampling:false});
+    fb=new CGL.Framebuffer2(cgl,32,32,{multisampling:true,isFloatingPointTexture:true});
 }
 setSize();
+
+
 
 var tex=op.outTexture("shadow texture");
 tex.set( fb.getTextureDepth() );

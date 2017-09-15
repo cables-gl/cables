@@ -10,6 +10,8 @@ var inScale=op.inValue("Scale",10);
 
 var inAmount=op.inValueSlider("Amount",0.3);
 
+var inWorldSpace=op.inValueBool("WorldSpace");
+
 // var offsetX=op.addInPort(new Port(this,"offset X",OP_PORT_TYPE_VALUE));
 // var offsetY=op.addInPort(new Port(this,"offset Y",OP_PORT_TYPE_VALUE));
 
@@ -21,7 +23,14 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'MOD_pos=pos;'
+    .endl()+'#ifndef WORLDSPACE'
+    .endl()+'   MOD_pos=pos;'
+    .endl()+'#endif'
+    .endl()+'#ifdef WORLDSPACE'
+    .endl()+'   MOD_pos=pos*modelMatrix;'
+    .endl()+'#endif'
+
+    // .endl()+'MOD_pos=pos;'
     .endl();
 
 var srcHeadFrag=attachments.pixelnoise_frag
@@ -38,6 +47,15 @@ var srcBodyFrag=''
 
 var moduleFrag=null;
 var moduleVert=null;
+
+inWorldSpace.onChange=updateWorldspace;
+function updateWorldspace()
+{
+    if(!shader)return;
+    if(inWorldSpace.get()) shader.define("WORLDSPACE");
+        else shader.removeDefine("WORLDSPACE");
+}
+
 
 function removeModule()
 {
@@ -79,6 +97,7 @@ op.render.onTriggered=function()
 
         inScale.scale=new CGL.Uniform(shader,'f',moduleFrag.prefix+'scale',inScale);
         inAmount.amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
+        updateWorldspace();
     }
 
     if(!shader)return;

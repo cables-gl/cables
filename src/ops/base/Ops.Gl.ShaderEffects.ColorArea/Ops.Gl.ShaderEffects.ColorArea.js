@@ -7,10 +7,7 @@ op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var inSize=op.inValue("Size",1);
-
-
 var inAmount=op.inValueSlider("Amount",0.5);
-
 
 {
     // rgba colors
@@ -23,7 +20,6 @@ var inAmount=op.inValueSlider("Amount",0.5);
     
     var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.set(Math.random());
-
 }
 
 {
@@ -32,8 +28,10 @@ var inAmount=op.inValueSlider("Amount",0.5);
     var x=op.inValue("x");
     var y=op.inValue("y");
     var z=op.inValue("z");
-
 }
+
+
+var inWorldSpace=op.inValueBool("WorldSpace");
 
 
 var shader=null;
@@ -43,14 +41,19 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'MOD_areaPos=modelMatrix*pos;'
+    .endl()+'#ifndef MOD_WORLDSPACE'
+    .endl()+'   MOD_areaPos=pos;'
+    .endl()+'#endif'
+    .endl()+'#ifdef MOD_WORLDSPACE'
+    .endl()+'   MOD_areaPos*=modelMatrix;'
+    .endl()+'#endif'
     .endl();
 
 var srcHeadFrag=''
     .endl()+'IN vec4 MOD_areaPos;'
     .endl()+'UNI float MOD_size;'
     .endl()+'UNI float MOD_amount;'
-    
+
     .endl()+'UNI float MOD_r;'
     .endl()+'UNI float MOD_g;'
     .endl()+'UNI float MOD_b;'
@@ -62,14 +65,23 @@ var srcHeadFrag=''
     .endl();
 
 var srcBodyFrag=''
-    .endl()+'   float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),MOD_areaPos.xyz);'
-    .endl()+'   MOD_de=1.0-smoothstep(0.0,MOD_size,MOD_de);'
-    .endl()+'   col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);'
+    .endl()+'float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),MOD_areaPos.xyz);'
+    .endl()+'MOD_de=1.0-smoothstep(0.0,MOD_size,MOD_de);'
+    .endl()+'col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);'
     .endl();
 
 
 var moduleFrag=null;
 var moduleVert=null;
+
+inWorldSpace.onChange=updateWorldspace;
+
+function updateWorldspace()
+{
+    if(!shader)return;
+    if(inWorldSpace.get()) shader.define(moduleVert.prefix+"WORLDSPACE");
+        else shader.removeDefine(moduleVert.prefix+"WORLDSPACE");
+}
 
 function removeModule()
 {
@@ -130,7 +142,7 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'z',z);
-
+        updateWorldspace();
 
     }
     

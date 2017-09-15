@@ -42,11 +42,13 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
         for(float y = -smpmax; y <= smpmax; ++y)
         {
             float pcfDepth = texture2D(MOD_shadowMap, coords.xy + vec2(x, y) * texelSize).r; 
+            
             shadow += MOD_positionFromLight.z + MOD_bias > pcfDepth ? 1.0 : 0.0;
             count+=1.0;
         }
     }
     shadow /= count;
+    shadow-=0.3;
     shadow=1.0-(shadow*MOD_strength*MOD_amount);
 }
 

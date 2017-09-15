@@ -80,10 +80,10 @@ if(respawn)
     int ind=int( random(vec2(MOD_time+rndpos.y,rndpos.x+MOD_time))*MOD_numSpawns );
     outPos=MOD_spawnPositions[ind];
 
-    float spawnAreaSize=66.3;
-    outPos.x+=spawnAreaSize*random(vec2(MOD_time+rndpos.y,rndpos.x+MOD_time))-spawnAreaSize/2.0;
-    outPos.y+=spawnAreaSize*random(vec2(rndpos.y,rndpos.x+MOD_time))-spawnAreaSize/2.0;
-    outPos.z+=spawnAreaSize*random(vec2(MOD_time+rndpos.y,rndpos.x))-spawnAreaSize/2.0;
+    float spawnAreaSize=1.3;
+    outPos.x+=MOD_sizeX*random(vec2(MOD_time+rndpos.y,rndpos.x+MOD_time))-MOD_sizeX/2.0;
+    outPos.y+=MOD_sizeY*random(vec2(rndpos.y,rndpos.x+MOD_time))-MOD_sizeY/2.0;
+    outPos.z+=MOD_sizeZ*random(vec2(MOD_time+rndpos.y,rndpos.x))-MOD_sizeZ/2.0;
 
 
 

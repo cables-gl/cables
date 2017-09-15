@@ -51,8 +51,8 @@ function initEffect()
             "isFloatingPointTexture":fpTexture.get(),
             "filter":selectedFilter,
             "wrap":selectedWrap,
-            "width": width.get(),
-            "height": height.get(),
+            "width": Math.floor(width.get()),
+            "height": Math.floor(height.get()),
         });
 
     effect.setSourceTexture(tex);
@@ -82,8 +82,8 @@ function updateResolution()
     }
     else
     {
-        w=(width.get());
-        h=(height.get());
+        w=Math.floor(width.get());
+        h=Math.floor(height.get());
     }
 
     if((w!=tex.width || h!= tex.height) && (w!==0 && h!==0))

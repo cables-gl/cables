@@ -1,19 +1,19 @@
 op.name="ForceFieldParticleEmitter";
 
-var render=op.inFunction("render");
-var resetButton=op.inFunctionButton("Reset");
-var inSizeX=op.inValue("Size Area X",3);
-var inSizeY=op.inValue("Size Area Y",3);
-var inSizeZ=op.inValue("Size Area Z",3);
-var numPoints=op.inValue("Particles",300);
-var speed=op.inValue("Speed",0.2);
-var lifetime=op.inValue("Lifetime",5);
-var fadeInOut=op.inValueSlider("Fade Birth Death",0.2);
-var show=op.inValueBool("Show");
-var posX=op.inValue("Pos X");
-var posY=op.inValue("Pos Y");
-var posZ=op.inValue("Pos Z");
-var spawns=op.inArray("Spawn Positions");
+const render=op.inFunction("render");
+const resetButton=op.inFunctionButton("Reset");
+const inSizeX=op.inValue("Size Area X",3);
+const inSizeY=op.inValue("Size Area Y",3);
+const inSizeZ=op.inValue("Size Area Z",3);
+const numPoints=op.inValue("Particles",300);
+const speed=op.inValue("Speed",0.2);
+const lifetime=op.inValue("Lifetime",5);
+const fadeInOut=op.inValueSlider("Fade Birth Death",0.2);
+const show=op.inValueBool("Show");
+const posX=op.inValue("Pos X");
+const posY=op.inValue("Pos Y");
+const posZ=op.inValue("Pos Z");
+const spawns=op.inArray("Spawn Positions");
 
 var cgl=op.patch.cgl;
 var shaderModule=null;
@@ -29,11 +29,12 @@ inSizeY.onChange=reset;
 inSizeZ.onChange=reset;
 resetButton.onTriggered=reset;
 
-var id=CABLES.generateUUID();
+const id=CABLES.generateUUID();
 
 var lastTime=0;
 var mark=new CGL.Marker(cgl);
 var needsRebuild=false;
+var life;
 
 function reset()
 {
@@ -42,6 +43,7 @@ function reset()
 
 function doReset()
 {
+    // var stopwatch=new CABLES.StopWatch();
     mesh=null;
     needsRebuild=false;
     var i=0;
@@ -49,31 +51,44 @@ function doReset()
     if(!verts || verts.length!=num) verts=new Float32Array(num);
     if(!bufferB || bufferB.length!=num)bufferB=new Float32Array(num);
 
+    // stopwatch.stop('init');
 
     var sizeX=inSizeX.get();
     var sizeY=inSizeY.get();
     var sizeZ=inSizeZ.get();
-    for(i=0;i<verts.length;i+=3)
+    
+    var pX=posX.get();
+    var pY=posY.get();
+    var pZ=posZ.get();
+    var vl=verts.length;
+    for(i=0;i<vl;i+=3)
     {
-        verts[i+0]=(Math.random()-0.5)*sizeX+posX.get();
-        verts[i+1]=(Math.random()-0.5)*sizeY+posY.get();
-        verts[i+2]=(Math.random()-0.5)*sizeZ+posZ.get();
+        verts[i+0]=(Math.random()-0.5)*sizeX+pX;
+        verts[i+1]=(Math.random()-0.5)*sizeY+pY;
+        verts[i+2]=(Math.random()-0.5)*sizeZ+pZ;
         // verts[i+2]=0.0;
 
-        bufferB[i+0]=(Math.random()-0.5)*sizeX+posX.get();
-        bufferB[i+1]=(Math.random()-0.5)*sizeY+posY.get();
-        bufferB[i+2]=(Math.random()-0.5)*sizeZ+posZ.get();
+        bufferB[i+0]=(Math.random()-0.5)*sizeX+pX;
+        bufferB[i+1]=(Math.random()-0.5)*sizeY+pY;
+        bufferB[i+2]=(Math.random()-0.5)*sizeZ+pZ;
         // bufferB[i+2]=0.0;
     }
+    
+    // stopwatch.stop('randoms');
 
     if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
+    
+    // stopwatch.stop('geom');
 
-    for(i=0;i<(verts.length/3)*2;i+=2)
+    vl=(verts.length/3)*2;
+    for(i=0;i<vl;i+=2)
     {
         geom.texCoords[i]=Math.random();
         geom.texCoords[i+1]=Math.random();
     }
+    
+    // stopwatch.stop('tc');
 
     if(!mesh)
     {
@@ -91,6 +106,8 @@ function doReset()
     }
     mesh.addVertexNumbers=true;
     mesh.setGeom(geom);
+    
+    // stopwatch.stop('mesh');
 
     // mesh.updateVertices(geom);
 
@@ -110,16 +127,21 @@ function doReset()
     op.log("Reset particles",num,numPoints.get());
 
     mesh.removeFeedbacks();
+// stopwatch.stop('attribfeedbacks');
 
 
+    if(!life || life.length!=num) life=new Float32Array(num);
+    var lt=lifetime.get();
+    var time=op.patch.freeTimer.get();
 
-    var life=new Float32Array(num);
     for(i=0;i<num;i+=3)
     {
-        life[i]=op.patch.freeTimer.get()-Math.random()*lifetime.get();
-        life[i+1]=op.patch.freeTimer.get();
-        life[i+2]=op.patch.freeTimer.get();
+        life[i]=op.patch.freeTimer.get()-Math.random()*lt;
+        life[i+1]=time;
+        life[i+2]=time;
     }
+    
+    // stopwatch.stop('life');
 
     // console.log(op.patch.freeTimer.get(),life[0],bufferB[0]);
 

@@ -26,6 +26,7 @@ var cgl=op.patch.cgl;
 
 var shader=new CGL.Shader(cgl,'PointMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
 shader.define('MAKE_ROUND');
 
 var uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize);

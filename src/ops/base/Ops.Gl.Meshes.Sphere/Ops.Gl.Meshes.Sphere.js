@@ -115,13 +115,13 @@ function uvSphere(radius, slices, stacks)
 
             vertices[indexV] = radius*x;
             normals[indexV++] = x;
-            
+
             vertices[indexV] = radius*y;
             normals[indexV++] = y;
-            
+
             vertices[indexV] = radius*z;
             normals[indexV++] = z;
-            
+
             texCoords[indexT++] = j/slices;
             texCoords[indexT++] = i/stacks;
         } 
@@ -134,13 +134,13 @@ function uvSphere(radius, slices, stacks)
         for (i = 0; i < slices; i++)
         {
             indices[k++] = row1 + i;
-            indices[k++] = row2 + i + 1;
             indices[k++] = row2 + i;
-            
+            indices[k++] = row2 + i + 1;
+         
             indices[k++] = row1 + i;
-            
             indices[k++] = row2 + i + 1;
             indices[k++] = row1 + i + 1;
+
         }
     }
 

@@ -7,11 +7,11 @@
             },
             {
                 "type": "0",
-                "name": "Cast Shadow"
+                "name": "Strength"
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Cast Shadow"
             }
         ],
         "portsOut": [
@@ -20,6 +20,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.Shadow"
+        "name": "Ops.Exp.Gl.ShaderEffects.Shadow"
     }
 }

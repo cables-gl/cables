@@ -131,6 +131,7 @@ function linesToGeom(points,options)
     {
         geom.vertices=new Float32Array( (numPoints/3*18 ) );
         geom.texCoords=new Float32Array( (numPoints/3*12) );
+        console.log('resize');
     }
 
     index=0;
@@ -149,6 +150,8 @@ function linesToGeom(points,options)
     var it=3;
     if(!strip)it=6;
     // it*=2;
+
+var vv=vec3.create();
 
     for(var p=0;p<numPoints;p+=it)
     {
@@ -169,7 +172,7 @@ function linesToGeom(points,options)
         // vec3.normalize(vEnd,vEnd);
         // vec3.normalize(vStart,vStart);
 
-        var vv=vec3.create();
+        
         
         
         vv[0]=vStart[0]-vEnd[0];

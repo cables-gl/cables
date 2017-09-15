@@ -1,3 +1,5 @@
+{{MODULES_HEAD}}
+
 IN vec3 norm;
 IN vec4 modelPos;
 IN mat3 normalMatrix;
@@ -29,7 +31,9 @@ float getfallOff(Light light,float distLight)
 
 void main()
 {
-    vec3 color=vec3(0.0);
+    {{MODULE_BEGIN_FRAG}}
+
+    vec3 col=vec3(0.0);
     vec3 normal = normalize(normalMatrix*norm);
   
     for(int l=0;l<NUM_LIGHTS;l++)
@@ -40,12 +44,17 @@ void main()
         vec3 lightDir = normalize(lightModelDiff);
         vec3 lambert = vec3( max(dot(lightDir,normal), 0.0) );
 
-        color.rgb+=lambert * light.color.rgb * light.mul;
-        color.rgb*=getfallOff(light, length(lightModelDiff));
+        vec3 newColor=lambert * light.color.rgb * light.mul;
+        newColor*=getfallOff(light, length(lightModelDiff));
 
-        color+=vec3(light.ambient);
+        col+=vec3(light.ambient);
+        col+=newColor;
     }
     
-    color*=vec3(r,g,b);
-    outColor=vec4(color,a);
+    col*=vec3(r,g,b);
+    
+    {{MODULE_COLOR}}
+
+
+    outColor=vec4(col,a);
 }
