@@ -220,6 +220,7 @@ render.onTriggered=function()
         shader.glslVersion=300;
         shaderModule=shader.addModule(
             {
+                title:op.objName,
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:attachments.flowfield_head_vert,
                 srcBodyVert:attachments.flowfield_vert

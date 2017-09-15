@@ -292,8 +292,14 @@ CGL.Shader = function(_cgl, _name) {
 
 
         modules.sort(function(a, b) {
-            return a.priority - b.priority;
+            return a.priority||0 - b.priority||0;
         });
+
+
+
+        for (var j = 0; j < modules.length; j++) {
+            console.log(j,modules[j].title);
+        }
 
 
         for (i = 0; i < moduleNames.length; i++) {
@@ -526,6 +532,8 @@ CGL.Shader = function(_cgl, _name) {
     };
 
     this.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
+    this.getCurrentModules=function(){return modules;};
 
 };
 

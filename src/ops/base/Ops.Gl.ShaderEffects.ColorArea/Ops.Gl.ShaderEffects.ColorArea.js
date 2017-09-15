@@ -45,7 +45,7 @@ var srcBodyVert=''
     .endl()+'   MOD_areaPos=pos;'
     .endl()+'#endif'
     .endl()+'#ifdef MOD_WORLDSPACE'
-    .endl()+'   MOD_areaPos*=modelMatrix;'
+    .endl()+'   MOD_areaPos=pos*modelMatrix;'
     .endl()+'#endif'
     .endl();
 
@@ -118,6 +118,7 @@ op.render.onTriggered=function()
 
         moduleVert=shader.addModule(
             {
+                priority:2,
                 title:op.objName,
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
@@ -126,6 +127,8 @@ op.render.onTriggered=function()
 
         moduleFrag=shader.addModule(
             {
+                priority:2,
+
                 title:op.objName,
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
