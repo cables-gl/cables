@@ -138,17 +138,21 @@ CABLES.PatchConnectionSender.prototype.send=function(event,vars)
 
 CABLES.PatchConnectorBroadcastChannel=function()
 {
+    if(!window.BroadcastChannel)return;
+    
     this.bc = new BroadcastChannel('test_channel');
 };
 
 CABLES.PatchConnectorBroadcastChannel.prototype.receive=function(paco)
 {
+    if(!this.bc)return;
     console.log('init');
     this.bc.onmessage = paco._receive.bind(paco);
 };
 
 CABLES.PatchConnectorBroadcastChannel.prototype.send=function(event,vars)
 {
+    if(!this.bc)return;
     var data={};
     data.event=event;
     data.vars=vars;
