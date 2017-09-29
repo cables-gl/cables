@@ -15,7 +15,7 @@ CABLES.now=CABLES.milliSeconds=function() { return window.performance.now(); };
 
 CABLES.Timer=function()
 {
-    this._timeStart=CABLES.milliSeconds();
+    this._timeStart=CABLES.now();
     this._timeOffset=0;
 
     this._currentTime=0;
@@ -31,7 +31,7 @@ CABLES.Timer=function()
 
 CABLES.Timer.prototype._getTime=function()
 {
-    this._lastTime=(CABLES.milliSeconds()-this._timeStart)/1000;
+    this._lastTime=(CABLES.now()-this._timeStart)/1000;
     return this._lastTime+this._timeOffset;
 };
 
@@ -87,7 +87,7 @@ CABLES.Timer.prototype.togglePlay=function()
 CABLES.Timer.prototype.setTime=function(t)
 {
     if(t<0)t=0;
-    this._timeStart=CABLES.milliSeconds();
+    this._timeStart=CABLES.now();
     this._timeOffset=t;
     this._currentTime=t;
     this._eventTimeChange();
@@ -97,7 +97,7 @@ CABLES.Timer.prototype.setOffset=function(val)
 {
     if(this._currentTime+val<0)
     {
-        this._timeStart=CABLES.milliSeconds();
+        this._timeStart=CABLES.now();
         this._timeOffset=0;
         this._currentTime=0;
     }
@@ -111,7 +111,7 @@ CABLES.Timer.prototype.setOffset=function(val)
 
 CABLES.Timer.prototype.play=function()
 {
-    this._timeStart=CABLES.milliSeconds();
+    this._timeStart=CABLES.now();
     this._paused=false;
     this._eventPlayPause();
 };
