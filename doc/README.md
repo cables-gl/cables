@@ -8,6 +8,7 @@
 
 
 - `npm install gitbook-cli -g` (see [gitbook docu ](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md))
+- `gitbook fetch latest` – install the latest stable release
 - `npm install`
 
 ## Build
@@ -23,6 +24,11 @@
 - A script will generate `SUMMARY.md`, which consists of `SUMMARY_base.md` (all articles / tutorials) and appends the documentation for the ops
 - After the build is finished the temporary foldr `ops` is deleted
 - In `_book` you can now start a http-server to view the book
+
+## Rebuild on Server
+
+- Using a webhook from Github we inform the cables-server on every commit to rebuild the docs
+- The docs live in `/var/www/doc_cables`
 
 ## Testing
 
