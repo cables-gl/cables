@@ -1,19 +1,28 @@
 # cables Documentation / Gitbook
 
 - Uses [Gitbook](https://github.com/GitbookIO/gitbook)
-- Can produce `.pdf` and `.epub`-files
-- The `ops`-folder currently contains a copy of the ops-documentation, because gitbook uses the same `.gitignore` file Github does, so we cannot ignore the `ops` folder for now… :/
 
 ## Installation
+
+- `nvm use 6` – switch to node.js v6
+
 
 - `npm install gitbook-cli -g` (see [gitbook docu ](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md))
 - `npm install`
 
 ## Build
 
-- Run `npm run build` to generate op-doc and clean up after itself
+- Run `npm run build` to generate op-doc and clean up after itself, the directory `_book` contains the static-html-pages then
 
-- When everything looks good, build static files with `gitbook build`
+
+### Build in Detail
+
+- Copies all op-documentations with images from the `src` folder to the temp folder `ops`
+- A script generates the op-summary with indentation for every namespace
+- `SUMMARY_base.md` defines the basic book structure, here you can add tutorials / articles
+- A script will generate `SUMMARY.md`, which consists of `SUMMARY_base.md` (all articles / tutorials) and appends the documentation for the ops
+- After the build is finished the temporary foldr `ops` is deleted
+- In `_book` you can now start a http-server to view the book
 
 ## Testing
 
@@ -35,14 +44,14 @@ Make sure to have a newline on the end!
 - Gifs can be recorded e.g. with the free tool `GifGrabber`
 - Keyboard Shortcuts can be shown with [keycastr](https://github.com/keycastr/keycastr)
 
-## Exporting PDF / Epub
+## Problems / To-Do
 
->You must have the Calibre eBook reader/manager installed AND the command-line tools installed. To install the Calibre command-line tools from the Mac version, from the menu select: calibre - Preferences - Miscellaneous - Install command line tools
+- Currently non-unique namespace-parts lead to problems, e.g. `Ops.Math.Compare.xxx` will have a wrong indentation, because another namespace `Ops.Compare.xxx` exists
 
 ## Checking for broken links
 
 - Install [broken-link-checker](https://github.com/stevenvachon/broken-link-checker):
-	- `npm install broken-link-checker -g`
+  - `npm install broken-link-checker -g`
 - Check with `blc https://docs.cables.gl -ro`
-	- Error 401: Not logged in
-	- Mozilla Web Audio Error: Can be ignored
+  - Error 401: Not logged in
+  - Mozilla Web Audio Error: Can be ignored

@@ -5,3 +5,6 @@ _int_writing_docs.md
 add_ops.js
 package.json
 ops_base/
+!chapter_readmes
+!ops
+!SUMMARY.md
