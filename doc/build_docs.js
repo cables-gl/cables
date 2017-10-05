@@ -14,7 +14,8 @@ const child = exec('node add_ops.js',
     }
     // success
     else {
-      console.log("Op doc generation finished.");
+      console.log("Summary generation / op-markdown copy finished. Now generating the gitbook");
+      console.log("This may take a few minutes...");
       generateGitbook();
     }
 });

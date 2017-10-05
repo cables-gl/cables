@@ -2,47 +2,44 @@
 
 ## Variables
 
-To work with variables in cables you can use the ops "SetVariable" and "Variable".
-Variables are handy if you need the same values in many locations in your patch.
+To work with variables in cables you can use the ops `SetVariable` / `SetVariableString` and `Variable`.
+Variables are handy if you need the same values in many locations in your patch and don’t neet to see the connections or if you want to set a variable from outside cables.
 
 ![Button](img/vars.png)
 
-- "SetVariable" - Set the value of the variable
-- "Variable" - Read variable value
+- `SetVariable` – Set the value of the variable (for Number / Boolean)
+- `SetVariableString` – Set the value of the variable (for String)
+- `Variable` - Read the variable value (for Number / Boolean / String)
 
-In a typical Situations you have one SetVariable op and multiple Variable ops.
+In a typical Situations you have one `SetVariable` / `SetVariableString` op and multiple `Variable` ops.
 
-## Settings variables programmatically
+## Settings variables from outside cables
 
-when embedded into a website you can programmatically change the values of variables:
+When you embed a patch into your website (see [Docs: Embedding](https://docs.cables.gl/dev_embed/dev_embed.html)) you can set cables-variables in your JavaScript-code:
 
 ```javascript
-var v=CABLES.patch.getVar("IsInteracting");
+var myVar = CABLES.patch.getVar("IsInteracting");
 
-if(v)
-{
+if(myVar) {
     // get the current value
-    v.getValue(); 
+    var currentValue = myVar.getValue(); 
 
-    // change value
-    v.setValue(true);    
+    // change the value
+    myVar.setValue(true);    
 }
 ```
 
-### listening to variable change
+### Listening to variable changes
 
-you can add a listener to a variable to have a callback called every time a variable value was changed.
+You can add a listener to a variable which gets called every time the variable changes:
 
 ```javascript
-var v=CABLES.patch.getVar("IsInteracting");
+var myVar = CABLES.patch.getVar("IsInteracting");
 
-if(v)
-{
-    // get the current value
-    v.addListener(function(val)
-    {
-        // will be called every time value changes
-        console.log(val);
+if(myVar) {
+	// will be called every time value changes
+    myVar.addListener(function(newValue) {
+        console.log(newValue);
     });
 }
 ```
