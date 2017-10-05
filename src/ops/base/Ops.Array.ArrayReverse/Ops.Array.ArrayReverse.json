@@ -1,0 +1,22 @@
+{
+    "updated": 1506588849826,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "88d8662f-2c01-42e6-943d-4d3cf90657b0",
+    "created": 1506588523258,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayReverse"
+    }
+}

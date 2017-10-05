@@ -1,0 +1,38 @@
+{
+    "updated": 1506555518765,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "a7d383d1-ca47-4f54-86e6-b9b9c979918e",
+    "created": 1506555397390,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "0",
+                "name": "Max LinePoints"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Each"
+            },
+            {
+                "type": "3",
+                "name": "Points"
+            },
+            {
+                "type": "0",
+                "name": "Num Points"
+            },
+            {
+                "type": "0",
+                "name": "Canceled lines"
+            }
+        ],
+        "name": "Ops.Gl2.ForceField.FieldLines"
+    }
+}

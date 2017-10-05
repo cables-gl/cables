@@ -1,0 +1,21 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "type"
+            },
+            {
+                "type": "0",
+                "name": "frequency"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            }
+        ],
+        "name": "Ops.WebAudio.Oscillator"
+    }
+}
