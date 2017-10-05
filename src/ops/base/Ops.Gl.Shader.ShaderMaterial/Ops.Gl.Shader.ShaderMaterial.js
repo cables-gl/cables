@@ -83,11 +83,9 @@ function updateShader()
                 var newInput=op.inValue(uniform.name,newInput,0);
                 newInput.onChange=function(p)
                 {
-                    console.log('change',p.get());
-
+                    // console.log('change',p.get());
                     p.uniform.needsUpdate=true;
                     p.uniform.setValue(p.get());
-
                 };
                 
                 uniformInputs.push(newInput);

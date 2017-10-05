@@ -1,0 +1,34 @@
+{
+    "updated": 1506603393742,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "9ba52457-5f0d-4b20-a97c-4ec4856b8e29",
+    "created": 1506603360839,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.ScaleXYZ"
+    }
+}

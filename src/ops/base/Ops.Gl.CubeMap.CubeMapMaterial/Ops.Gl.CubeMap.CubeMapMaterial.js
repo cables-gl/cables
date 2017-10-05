@@ -21,7 +21,6 @@ function doRender()
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
-
     }
 
 
@@ -40,8 +39,8 @@ function updateMapping()
 
 var srcVert=''
     // .endl()+'uniform mat4 projection;'
-    // .endl()+'uniform mat4 modelview;'
-.endl()+'precision highp float;'
+    .endl()+'{{MODULES_HEAD}}'
+    .endl()+'precision highp float;'
     .endl()+'UNI mat4 projMatrix;'
     .endl()+'UNI mat4 modelMatrix;'
     .endl()+'UNI mat4 viewMatrix;'
@@ -65,9 +64,14 @@ var srcVert=''
     .endl()+'    mat4 modelview= viewMatrix * modelMatrix;'
 
     .endl()+'    v_pos= vPosition;'
+    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
 
+    .endl()+'{{MODULE_VERTEX_POSITION}}'
 
-    .endl()+'   vec4 eyeCoords = modelview * vec4(vPosition,1.0);'
+    .endl()+'   vec4 eyeCoords = modelview * pos;'
+    
+    
+    
     .endl()+'   gl_Position = projMatrix * eyeCoords;'
     .endl()+'   v_eyeCoords = eyeCoords.xyz;'
     .endl()+'   v_normal = normalize(attrVertNormal);'
@@ -75,7 +79,8 @@ var srcVert=''
 
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+.endl()+'precision highp float;'
+    .endl()+'{{MODULES_HEAD}}'
     .endl()+'IN vec3 vCoords;'
     .endl()+'IN vec3 v_normal;'
     .endl()+'IN vec3 v_eyeCoords;'
@@ -86,25 +91,34 @@ var srcFrag=''
     .endl()+'UNI mat4 modelMatrix;'
 
     .endl()+'void main() {'
+    .endl()+'{{MODULE_BEGIN_FRAG}}'
+    
     .endl()+'    vec3 N = normalize( mat3(normalMatrix) * v_normal).xyz;'
     .endl()+'    vec3 V = -v_eyeCoords;'
     .endl()+'    vec3 R = -reflect(V,N);'
     .endl()+'    vec3 T = ( mat3( inverseViewMatrix ) * R ).xyz;' // Transform by inverse of the view transform that was applied to the skybox
 
-
+    .endl()+'vec4 col = vec4(1.0,1.0,1.0,1.0);'
 
     .endl()+'#ifdef DO_REFLECTION'
-    .endl()+'    outColor = texture(skybox, T);'
+    .endl()+'    col = texture(skybox, T);'
     .endl()+'#endif'
     .endl()+'#ifndef DO_REFLECTION'
-    .endl()+'    outColor = texture(skybox, v_pos);'
+    .endl()+'    col = texture(skybox, v_pos);'
     .endl()+'#endif'
+    
+    .endl()+'{{MODULE_COLOR}};'
+    
+    .endl()+'outColor=col;'
+    
 
 
     .endl()+'}';
 
 
 var shader=new CGL.Shader(cgl);
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
 op.onLoaded=shader.compile;
 
 shader.setSource(srcVert,srcFrag);

@@ -19,9 +19,11 @@ uniform sampler2D tex;
 
 {{BLENDCODE}}
 
+float rand(float n){return fract(sin(n) * 43758.5453123);}
+
 vec2 random2( vec2 p )
 {
-    return fract(sin(vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))))*43758.5453);
+    return vec2(rand(p.x),rand(p.x+p.y));
 }
 
 void main() {
@@ -63,7 +65,7 @@ void main() {
 
             // Kepp the position of the closer point
             m_point = pos;
-            indexColor=float(i)/NUM;
+            indexColor=(i)/NUM;
         }
     }
 

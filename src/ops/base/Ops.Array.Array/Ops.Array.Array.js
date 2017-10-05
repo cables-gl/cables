@@ -22,6 +22,7 @@ function reset()
     {
         arr[i]=inDefaultValue.get();
     }
+    outArr.set(null);
     outArr.set(arr);
 }
 

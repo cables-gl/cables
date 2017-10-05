@@ -7,6 +7,7 @@ array.ignoreValueSerialize=true;
 value.ignoreValueSerialize=true;
 
 
+var last=null;
 
 function update()
 {
@@ -16,7 +17,16 @@ function update()
     if(!arr)return;
     var ind=index.get();
     if(ind>=arr.length)return;
-    if(arr[ind]) value.set( arr[ind]);
+    if(arr[ind])
+    {
+        if(arr[ind]!=last)
+        {
+            value.set( null);
+        }
+
+        value.set( arr[ind]);
+        last=arr[ind];
+    }
 }
 
 index.onValueChanged=update;

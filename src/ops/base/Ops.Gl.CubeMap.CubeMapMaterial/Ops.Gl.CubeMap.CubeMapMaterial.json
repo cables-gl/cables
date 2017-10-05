@@ -22,5 +22,10 @@
         ],
         "name": "Ops.Gl.CubeMap.CubeMapMaterial"
     },
-    "summary": "cubemap as material "
+    "summary": "cubemap as material ",
+    "updated": 1507135539529,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "17f73be5-401b-46f1-ace7-fd203bf1aa94",
+    "created": 1507134982544
 }

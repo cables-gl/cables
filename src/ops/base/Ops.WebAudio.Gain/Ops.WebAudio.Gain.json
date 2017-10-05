@@ -1,0 +1,22 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "audio in"
+            },
+            {
+                "type": "0",
+                "name": "gain"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            }
+        ],
+        "name": "Ops.WebAudio.Gain"
+    },
+    "summary": "Changes the gain / volume"
+}

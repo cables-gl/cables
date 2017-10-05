@@ -33,6 +33,13 @@ var tcx4=op.inValue("tc x 4",1);
 var tcy4=op.inValue("tc y 4",0);
 
 
+var arrverts=[];
+arrverts.length=12;
+verts=new Float32Array(arrverts);
+var indices=[0,1,2,1,2,3];
+var tc=new Float32Array([0,0,0,0,0,0,0,0]);
+// var tc=[];
+// tc.length=8;
 
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
@@ -82,6 +89,7 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
+
 function rebuild()
 {
     // var w=width.get();
@@ -113,39 +121,39 @@ function rebuild()
 
     // var c,r;
 
-    var verts=[];
-    verts.push(x1.get());
-    verts.push(y1.get());
-    verts.push(z1.get());
+    // var verts=[];
+    verts[0]=x1.get();
+    verts[1]=y1.get();
+    verts[2]=z1.get();
 
-    verts.push(x2.get());
-    verts.push(y2.get());
-    verts.push(z2.get());
+    verts[3]=x2.get();
+    verts[4]=y2.get();
+    verts[5]=z2.get();
 
-    verts.push(x3.get());
-    verts.push(y3.get());
-    verts.push(z3.get());
+    verts[6]=x3.get();
+    verts[7]=y3.get();
+    verts[8]=z3.get();
 
-    verts.push(x4.get());
-    verts.push(y4.get());
-    verts.push(z4.get());
+    verts[9]=x4.get();
+    verts[10]=y4.get();
+    verts[11]=z4.get();
 
 
-    var indices=[0,1,2,1,2,3];
+    
     // var tc=[0,0, 1,0, 0,1,  1,1];
-    var tc=[
-        tcx1.get(),
-        tcy1.get(),
+
+    tc[0]=tcx1.get();
+    tc[1]=tcy1.get();
         
-        tcx2.get(),
-        tcy2.get(),
+    tc[2]=tcx2.get();
+    tc[3]=tcy2.get();
         
-        tcx3.get(),
-        tcy3.get(),
+    tc[4]=tcx3.get();
+    tc[5]=tcy3.get();
         
-        tcx4.get(),
-        tcy4.get(),
-        ];
+    tc[6]=tcx4.get();
+    tc[7]=tcy4.get();
+
 
     geom.vertices=verts;
     geom.texCoords=tc;

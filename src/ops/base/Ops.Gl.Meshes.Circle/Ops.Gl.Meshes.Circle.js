@@ -148,9 +148,7 @@ function calc()
     }
     else
     {
-
         var count=0;
-        
         var numSteps=segs*percent.get();
         var pos=0;
 

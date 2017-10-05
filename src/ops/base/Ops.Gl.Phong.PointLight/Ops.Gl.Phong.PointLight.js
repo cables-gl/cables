@@ -68,16 +68,28 @@ var light={};
 
 var posVec=vec3.create();
 var mpos=vec3.create();
-
+var needsUpdate=true;
 
 updateAll();
 
 
 function updateColor()
 {
-    light.color=[ r.get(), g.get(), b.get() ];
-    light.ambient=[ ambientR.get(), ambientG.get(), ambientB.get() ];
-    light.specular=[ specularR.get(), specularG.get(), specularB.get() ];
+    light.color=light.color||[];
+    light.color[0]=r.get();
+    light.color[1]=g.get();
+    light.color[2]=b.get();
+
+    light.ambient=light.ambient||[];
+    light.ambient[0]=ambientR.get();
+    light.ambient[1]=ambientG.get();
+    light.ambient[2]=ambientB.get();
+    
+    light.specular=light.specular||[];
+    light.specular[0]=specularR.get();
+    light.specular[1]=specularG.get();
+    light.specular[2]=specularB.get();
+    
     light.changed=true;
 }
 
@@ -88,25 +100,34 @@ function updatePos()
 
 function updateAll()
 {
-    if(!cgl.frameStore.phong)cgl.frameStore.phong={};
-    if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights=[];
-    light=light||{};
-    light.id=id;
-    light.type=0;
-    light.changed=true;
-    light.radius=radius.get();
-    light.fallOff=fallOff.get();
-    light.mul=intensity.get();
-
-    updatePos();
-    updateColor();
+needsUpdate=true;
 }
+
+var transVec=vec3.create();
 
 exe.onTriggered=function()
 {
+    if(needsUpdate)
+    {
+        if(!cgl.frameStore.phong)cgl.frameStore.phong={};
+        if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights=[];
+        light=light||{};
+        light.id=id;
+        light.type=0;
+        light.changed=true;
+        light.radius=radius.get();
+        light.fallOff=fallOff.get();
+        light.mul=intensity.get();
+    
+        updatePos();
+        updateColor();
+        needsUpdate=false;
+    }
+    
     cgl.frameStore.phong.lights=cgl.frameStore.phong.lights||[];
 
-    vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
+    vec3.set(transVec,x.get(),y.get(),z.get());
+    vec3.transformMat4(mpos, transVec, cgl.mvMatrix);
     light=light||{};
     
     light.pos=mpos;
@@ -115,10 +136,7 @@ exe.onTriggered=function()
     if(attachment.isLinked())
     {
         cgl.pushMvMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,
-            [x.get(),
-            y.get(),
-            z.get()]);
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
         attachment.trigger();
         cgl.popMvMatrix();
     }

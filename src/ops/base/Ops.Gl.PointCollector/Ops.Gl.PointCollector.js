@@ -16,6 +16,8 @@ var pos=vec3.create();
 var empty=vec3.create();
 var m=mat4.create();
 
+var mySplinePoints=[];
+
 render.onTriggered=function()
 {
     if(cgl.frameStore.SplinePoints) 
@@ -26,7 +28,7 @@ render.onTriggered=function()
 
     cgl.frameStore.SplinePointCounter=0;
     
-    cgl.frameStore.SplinePoints=cgl.frameStore.SplinePoints||[];
+    cgl.frameStore.SplinePoints=mySplinePoints;//cgl.frameStore.SplinePoints||[];
     
     if(cgl.frameStore.SplinePointCounter!=cgl.frameStore.SplinePoints.length)
     cgl.frameStore.SplinePoints.length=cgl.frameStore.SplinePointCounter;
