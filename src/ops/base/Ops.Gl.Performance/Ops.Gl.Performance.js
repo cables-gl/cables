@@ -170,7 +170,7 @@ function updateText()
         avgMsChilds/=count;
 
 
-        element.innerHTML+='<br/> '+cgl.canvas.clientWidth+' x '+cgl.canvas.clientHeight;
+        element.innerHTML+='<br/> '+cgl.canvasWidth+' x '+cgl.canvasHeight;
         element.innerHTML+='<br/>frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         element.innerHTML+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         

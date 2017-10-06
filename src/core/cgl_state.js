@@ -78,9 +78,16 @@ CGL.State = function() {
 
     this.updateSize=function()
     {
-        this.canvasWidth = this.canvas.clientWidth*this.pixelDensity;
-        this.canvasHeight = this.canvas.clientHeight*this.pixelDensity;
+        this.canvas.width = this.canvasWidth = this.canvas.clientWidth*this.pixelDensity;
+        this.canvas.height = this.canvasHeight = this.canvas.clientHeight*this.pixelDensity;
+
+        console.log('this.canvas.clientWidth',this.canvas.clientWidth);
+        console.log('this.canvas.width',this.canvas.width);
+        console.log('this.canvasWidth',this.canvasWidth);
+        console.log('-----------');
+
     };
+
     this.canvasWidth = -1;
     this.canvasHeight = -1;
     var oldCanvasWidth = -1;
@@ -310,11 +317,15 @@ CGL.State = function() {
     };
 
     this._resizeToWindowSize = function() {
-        this.canvas.style.width = window.innerWidth;
-        this.canvas.style.height = window.innerHeight;
-        this.pixelDensity=window.devicePixelRatio;
+        console.log('width',window.innerWidth);
+
+        this.canvas.style.width = window.innerWidth+"px";
+        this.canvas.style.height = window.innerHeight+"px";
+
         this.canvas.width = window.innerWidth*this.pixelDensity;
         this.canvas.height = window.innerHeight*this.pixelDensity;
+
+        self.updateSize();
     };
 
     this.setAutoResizeToWindow = function(resize) {

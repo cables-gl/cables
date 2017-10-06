@@ -11,6 +11,17 @@ var reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
 var clear=op.inValueBool("Clear",true);
 var fullscreen=op.inValueBool("Fullscreen Button",false);
 var active=op.inValueBool("Active",true);
+var hdpi=op.inValueBool("Hires Displays",false);
+
+hdpi.onChange=function()
+{
+    if(hdpi.get()) op.patch.cgl.pixelDensity=window.devicePixelRatio;
+        else op.patch.cgl.pixelDensity=1;
+        
+    op.patch.cgl.updateSize();
+    if(CABLES.UI) gui.setLayout();
+};
+
 
 
 var cgl=op.patch.cgl;
