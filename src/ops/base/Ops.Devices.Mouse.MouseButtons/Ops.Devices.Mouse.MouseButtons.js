@@ -100,6 +100,7 @@ function removeListeners()
 {
     
     listenerElement.removeEventListener('touchend', ontouchend);
+    listenerElement.removeEventListener('touchcancel', ontouchend);
     listenerElement.removeEventListener('touchstart', ontouchstart);
     listenerElement.removeEventListener('dblclick', onDoubleClick);
     listenerElement.removeEventListener('click', onmouseclick);
@@ -117,6 +118,7 @@ function addListeners()
     if(area.get()=='Document') listenerElement=document.body;
     
     listenerElement.addEventListener('touchend', ontouchend);
+    listenerElement.addEventListener('touchcancel', ontouchend);
     listenerElement.addEventListener('touchstart', ontouchstart);
     listenerElement.addEventListener('dblclick', onDoubleClick);
     listenerElement.addEventListener('click', onmouseclick);
