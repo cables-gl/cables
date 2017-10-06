@@ -50,6 +50,22 @@ CGL.Geometry.prototype.setTexCoords=function(arr)
         else this.texCoords=new Float32Array(arr);
 };
 
+CGL.Geometry.prototype.testIndices=function()
+{
+    var foundError=false;
+    for(var i=0;i<this.verticesIndices.length;i++)
+    {
+        if(this.verticesIndices[i*3+0]>=this._vertices.length/3 ||
+            this.verticesIndices[i*3+1]>=this._vertices.length/3 ||
+            this.verticesIndices[i*3+2]>=this._vertices.length/3)
+        {
+            foundError=true;
+            console.log("index error!");
+        }
+
+    }
+};
+
 
 
 // deprecated
