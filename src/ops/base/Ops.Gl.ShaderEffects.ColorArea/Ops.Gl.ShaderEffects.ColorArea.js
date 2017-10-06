@@ -32,6 +32,7 @@ var inAmount=op.inValueSlider("Amount",0.5);
 
 
 var inWorldSpace=op.inValueBool("WorldSpace");
+var inFalloff=op.inValueSlider("Falloff",0);
 
 
 var shader=null;
@@ -53,6 +54,8 @@ var srcHeadFrag=''
     .endl()+'IN vec4 MOD_areaPos;'
     .endl()+'UNI float MOD_size;'
     .endl()+'UNI float MOD_amount;'
+    .endl()+'UNI float MOD_falloff;'
+    
 
     .endl()+'UNI float MOD_r;'
     .endl()+'UNI float MOD_g;'
@@ -66,7 +69,8 @@ var srcHeadFrag=''
 
 var srcBodyFrag=''
     .endl()+'float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),MOD_areaPos.xyz);'
-    .endl()+'MOD_de=1.0-smoothstep(0.0,MOD_size,MOD_de);'
+    .endl()+'MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);'
+
     .endl()+'col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);'
     .endl();
 
@@ -127,8 +131,6 @@ op.render.onTriggered=function()
 
         moduleFrag=shader.addModule(
             {
-                priority:2,
-
                 title:op.objName,
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
@@ -145,6 +147,8 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'z',z);
+        inFalloff.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'falloff',inFalloff);
+        
         updateWorldspace();
 
     }

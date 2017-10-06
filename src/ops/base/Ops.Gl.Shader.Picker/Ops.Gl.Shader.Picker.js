@@ -110,7 +110,7 @@ var doRender=function()
     {
         if(CABLES.now()-lastReadPixel>=50)
         {
-            var minimizeFB=8;
+            var minimizeFB=2;
             cgl.resetViewPort();
 
             var vpW=Math.floor(cgl.canvas.width/minimizeFB);

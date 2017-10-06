@@ -36,8 +36,6 @@ render.onTriggered=function()
     var alX=((maxX-1)*mx)/2;
     var alY=((maxY-1)*my)/2;
 
-
-
     var i=0;
     for(var y=0;y<maxY;y++)
     {

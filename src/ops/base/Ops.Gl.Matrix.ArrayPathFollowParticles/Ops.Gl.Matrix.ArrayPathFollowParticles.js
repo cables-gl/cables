@@ -161,7 +161,7 @@ exec.onTriggered=function()
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:attachments.pathfollow_head_vert,
                 srcBodyVert:attachments.pathfollow_vert,
-                priority:0
+                priority:-2
             });
 
         shaderModule.offset=new CGL.Uniform(shader,'f',shaderModule.prefix+'offset',0);

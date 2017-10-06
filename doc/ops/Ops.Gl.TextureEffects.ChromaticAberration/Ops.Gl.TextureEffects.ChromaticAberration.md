@@ -1,5 +1,0 @@
-# ChromaticAberration
-
-*Ops.Gl.TextureEffects.ChromaticAberration*
-
-![ChromaticAberration](img/chromatic.jpg)

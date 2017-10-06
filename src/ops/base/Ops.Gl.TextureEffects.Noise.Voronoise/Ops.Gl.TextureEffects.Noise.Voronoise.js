@@ -65,6 +65,7 @@ render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
+
     uniPx.setValue(1/cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniPy.setValue(1/cgl.currentTextureEffect.getCurrentSourceTexture().height);
 

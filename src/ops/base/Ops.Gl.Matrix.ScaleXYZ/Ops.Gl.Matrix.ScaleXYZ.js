@@ -12,8 +12,17 @@ var vScale=vec3.create();
 var transMatrix = mat4.create();
 mat4.identity(transMatrix);
 
+var hasChanged=true;
+
 render.onTriggered=function()
 {
+    if(hasChanged)
+    {
+        vec3.set(vScale, scaleX.get(),scaleY.get(),scaleZ.get());
+        mat4.identity(transMatrix);
+        mat4.scale(transMatrix,transMatrix, vScale);
+    }
+
     cgl.pushMvMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
     trigger.trigger();
@@ -22,9 +31,7 @@ render.onTriggered=function()
 
 var scaleChanged=function()
 {
-    vec3.set(vScale, scaleX.get(),scaleY.get(),scaleZ.get());
-    mat4.identity(transMatrix);
-    mat4.scale(transMatrix,transMatrix, vScale);
+    hasChanged=true;
 };
 
 scaleX.set(1.0);
@@ -35,4 +42,3 @@ scaleX.onValueChange(scaleChanged);
 scaleY.onValueChange(scaleChanged);
 scaleZ.onValueChange(scaleChanged);
 
-scaleChanged();

@@ -1,0 +1,54 @@
+{
+    "updated": 1506588035095,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "febd6cdf-e049-4aed-be34-d7e370b90e03",
+    "created": 1506586461270,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "urls"
+            },
+            {
+                "type": "0",
+                "name": "filter"
+            },
+            {
+                "type": "0",
+                "name": "wrap"
+            },
+            {
+                "type": "0",
+                "name": "flip"
+            },
+            {
+                "type": "0",
+                "name": "unpackPreMultipliedAlpha"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "TextureArray"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "loading"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio"
+            }
+        ],
+        "name": "Ops.Gl.TextureArrayLoaderFromArray"
+    }
+}

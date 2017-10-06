@@ -107,7 +107,7 @@ exec.onTriggered=function()
                     var yd = dots[dotCount*3-5] - curY;
                     var theDist= xd*xd + yd*yd ;
                     
-                    if(theDist< 0.03*0.03 )
+                    if(theDist< 0.12*0.12 )
                     {
                         canceled++;
                         times=0;

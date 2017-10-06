@@ -3,6 +3,8 @@ op.name="Performance";
 var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 var next=this.addOutPort(new Port(this,"childs",OP_PORT_TYPE_FUNCTION)) ;
 
+var inShow=op.inValueBool("Visible",true);
+
 var outFPS=op.outValue("FPS");
 var element = document.createElement('div');
 var ctx=null;
@@ -50,8 +52,16 @@ op.onDelete=function()
     element.remove();
 };
 
+inShow.onChange=function()
+{
+    if(!inShow.get())element.style.opacity=0;
+        else element.style.opacity=1;
+    
+};
+
 function toggleOpened()
 {
+    element.style.opacity=1;
     opened=!opened;
     updateText();
     if(!canvas)createCanvas();
@@ -86,7 +96,7 @@ function updateCanvas()
     ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
-        if(queueChilds[k]>30)ctx.fillStyle="#ff9900";
+        if(queueChilds[k]>30)ctx.fillStyle="#ff00ff";
         ctx.fillRect(numBars-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
         if(queueChilds[k]>30)ctx.fillStyle="#aaaaaa";
     }
@@ -208,12 +218,14 @@ exe.onTriggered=function()
    
     if(opened)
     {
-        queue.push(performance.now()-lastTime);
+        var timeUsed=performance.now()-lastTime;
+        // if(timeUsed>30)console.log("peak ",performance.now()-lastTime);
+        queue.push(timeUsed);
         queue.shift();
     
         queueChilds.push(childsTime);
         queueChilds.shift();
-        
+
         updateCanvas();
     }
     

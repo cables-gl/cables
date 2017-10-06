@@ -50,5 +50,10 @@
         ],
         "name": "Ops.Anim.SimpleAnim"
     },
-    "summary": "simple animation between two values"
+    "summary": "simple animation between two values",
+    "updated": 1506696980224,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "5b244b6e-c505-4743-b2cc-8119ef720028",
+    "created": 1506695249414
 }

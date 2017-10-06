@@ -24,6 +24,21 @@ CABLES.Profiler=function()
                 {
                     // console.log(currentStart);
                     items[currentId].timeUsed+=(performance.now()-currentStart);
+                    
+                    if(!items[currentId].peakTime || CABLES.now()-items[currentId].peakTime>1000)
+                    {
+                        if(items[currentId].peak>1 && object)
+                        {
+                            console.log("PEAK ",object.parent.objName);
+                        }
+
+                        items[currentId].peak=0;
+                        items[currentId].peakTime=CABLES.now();
+                    }
+                    items[currentId].peak=Math.max( items[currentId].peak,(performance.now()-currentStart) );
+                    
+                    
+                    
                 }
             }
 
@@ -41,7 +56,6 @@ CABLES.Profiler=function()
 
             currentId=object.id;
             currentStart=performance.now();
-
         }
         else
         {
@@ -58,10 +72,5 @@ CABLES.Profiler=function()
             console.log(items[i].title+': '+items[i].numTriggers+' / '+items[i].timeUsed);
         }
     };
-
-
-
-
-
 
 };

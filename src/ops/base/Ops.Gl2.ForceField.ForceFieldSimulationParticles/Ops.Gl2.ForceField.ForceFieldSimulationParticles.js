@@ -44,7 +44,7 @@ function reset()
 function doReset()
 {
     // var stopwatch=new CABLES.StopWatch();
-    mesh=null;
+    // mesh=null;
     needsRebuild=false;
     var i=0;
     var num=Math.floor(numPoints.get())*3;
@@ -95,7 +95,7 @@ function doReset()
         mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
         mesh.addVertexNumbers=true;
-        mesh._verticesNumbers=null;
+        
 
 
         op.log("NEW MESH");
@@ -105,6 +105,7 @@ function doReset()
         mesh.unBind();
     }
     mesh.addVertexNumbers=true;
+    mesh._verticesNumbers=null;
     mesh.setGeom(geom);
     
     // stopwatch.stop('mesh');
@@ -223,7 +224,9 @@ render.onTriggered=function()
                 title:op.objName,
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:attachments.flowfield_head_vert,
-                srcBodyVert:attachments.flowfield_vert
+                srcBodyVert:attachments.flowfield_vert,
+                priority:-2,
+
             });
 
         uniTime=new CGL.Uniform(shader,'f',shaderModule.prefix+'time',0);
