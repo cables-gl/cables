@@ -17,6 +17,7 @@ CGL.State = function() {
     this.mvMatrix = mat4.create(); // this is only modelmatrix not modelviewmatrix!!
     this.vMatrix = mat4.create();
     this.canvas = null;
+    this.pixelDensity=1;
     mat4.identity(self.mvMatrix);
     mat4.identity(self.vMatrix);
 
@@ -71,12 +72,15 @@ CGL.State = function() {
                 this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
                 this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
             }
-
-            this.canvasWidth = this.canvas.clientWidth;
-            this.canvasHeight = this.canvas.clientHeight;
+            self.updateSize();
         }
     };
 
+    this.updateSize=function()
+    {
+        this.canvasWidth = this.canvas.clientWidth*this.pixelDensity;
+        this.canvasHeight = this.canvas.clientHeight*this.pixelDensity;
+    };
     this.canvasWidth = -1;
     this.canvasHeight = -1;
     var oldCanvasWidth = -1;
@@ -261,7 +265,8 @@ CGL.State = function() {
         cgl.gl.clearColor(0, 0, 0, 0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
-        cgl.setViewPort(0, 0, cgl.canvas.clientWidth, cgl.canvas.clientHeight);
+        // cgl.setViewPort(0, 0, cgl.canvas.clientWidth*this.pixelDensity, cgl.canvas.clientHeight*this.pixelDensity);
+        cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
 
@@ -307,8 +312,9 @@ CGL.State = function() {
     this._resizeToWindowSize = function() {
         this.canvas.style.width = window.innerWidth;
         this.canvas.style.height = window.innerHeight;
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.pixelDensity=window.devicePixelRatio;
+        this.canvas.width = window.innerWidth*this.pixelDensity;
+        this.canvas.height = window.innerHeight*this.pixelDensity;
     };
 
     this.setAutoResizeToWindow = function(resize) {

@@ -132,11 +132,11 @@ op.onAnimFrame=function(time)
         return;
     }
 
-    if(cgl.canvasWidth!=cgl.canvas.clientWidth || cgl.canvasHeight!=cgl.canvas.clientHeight)
+    if(cgl.canvasWidth!=width.get() || cgl.canvasHeight!=height.get())
     {
-        cgl.canvasWidth=cgl.canvas.clientWidth;
+        // cgl.canvasWidth=cgl.canvas.clientWidth;
         width.set(cgl.canvasWidth);
-        cgl.canvasHeight=cgl.canvas.clientHeight;
+        // cgl.canvasHeight=cgl.canvas.clientHeight;
         height.set(cgl.canvasHeight);
     }
 
