@@ -6,14 +6,18 @@ var trigger=op.outFunction("trigger");
 var width=op.outValue("width");
 var height=op.outValue("height");
 var reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
-
-
 var clear=op.inValueBool("Clear",true);
 var fullscreen=op.inValueBool("Fullscreen Button",false);
 var active=op.inValueBool("Active",true);
 
-
 var cgl=op.patch.cgl;
+
+cgl.addEventListener("resize",function()
+{
+    console.log(cgl.canvasWidth);
+});
+
+
 
 var rframes=0;
 var rframeStart=0;
@@ -109,6 +113,8 @@ op.patch.loading.setOnFinishedLoading(function(cb)
 {
     op.patch.config.fpsLimit=fpsLimit.get();
 });
+
+
 
 op.onAnimFrame=function(time)
 {

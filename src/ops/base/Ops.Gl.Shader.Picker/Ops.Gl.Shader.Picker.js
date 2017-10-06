@@ -57,6 +57,8 @@ function updateListeners()
     cgl.canvas.removeEventListener('touchmove', ontouchmove);
     cgl.canvas.removeEventListener('touchstart', ontouchstart);
     cgl.canvas.removeEventListener('touchend', ontouchend);
+    cgl.canvas.removeEventListener('touchcancel', ontouchend);
+    
 
     if(useMouseCoords.get())
     {
@@ -65,6 +67,8 @@ function updateListeners()
         cgl.canvas.addEventListener('touchmove', ontouchmove);
         cgl.canvas.addEventListener('touchstart', ontouchstart);
         cgl.canvas.addEventListener('touchend', ontouchend);
+        cgl.canvas.addEventListener('touchcancel', ontouchend);
+        
     }
 }
 
@@ -113,16 +117,19 @@ var doRender=function()
             var minimizeFB=2;
             cgl.resetViewPort();
 
-            var vpW=Math.floor(cgl.canvas.width/minimizeFB);
-            var vpH=Math.floor(cgl.canvas.height/minimizeFB);
+            var vpW=Math.floor(cgl.canvasWidth/minimizeFB);
+            var vpH=Math.floor(cgl.canvasHeight/minimizeFB);
+
             if(vpW!=fb.getWidth() || vpH!=fb.getHeight() )
             {
+                tex.set( null);
                 fb.setSize( vpW,vpH );
+                tex.set( fb.getTextureColor() );
             }
 
             cgl.pushMvMatrix();
             fb.renderStart();
-            cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
+            // cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
 
             renderPickingPass();
 
@@ -152,7 +159,7 @@ var doRender=function()
         // console.log(cgl.frameStore.pickedColor);
 
         if(cgl.frameStore.pickedColor)somethingPicked.set(true);
-        else somethingPicked.set(false);
+            else somethingPicked.set(false);
 
         cgl.frameStore.pickingpassNum=0;
         op.trigger.trigger();

@@ -12,9 +12,14 @@
             },
             {
                 "type": "0",
-                "name": "Focussed"
+                "name": "Pixel Ratio"
             }
         ],
         "name": "Ops.Gl.CanvasSize"
-    }
+    },
+    "updated": 1507289135134,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "94e499e5-b4ee-4861-ab48-6ab5098b2cc3",
+    "created": 1507289041073
 }

@@ -58,8 +58,8 @@ function doRender()
 
 var srcVert=''
     .endl()+'IN vec3 vPosition;'
-    .endl()+'uniform mat4 projMatrix;'
-    .endl()+'uniform mat4 mvMatrix;'
+    .endl()+'UNI mat4 projMatrix;'
+    .endl()+'UNI mat4 mvMatrix;'
 
     .endl()+'void main()'
     .endl()+'{'
@@ -78,13 +78,13 @@ var srcVert=''
 
     .endl()+"   #ifndef BILLBOARD"
     .endl()+"       gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);"
-    .endl()+"   #endif "
+    .endl()+"   #endif"
     
     .endl()+"}";
 
 var srcFrag=''
     .endl()+'precision highp float;'
-    .endl()+'uniform float r;'
+    .endl()+'UNI float r;'
     .endl()+''
     .endl()+'void main()'
     .endl()+'{'
