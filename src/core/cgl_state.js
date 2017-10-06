@@ -312,8 +312,9 @@ CGL.State = function() {
     this._resizeToWindowSize = function() {
         this.canvas.style.width = window.innerWidth;
         this.canvas.style.height = window.innerHeight;
-        this.canvas.width = window.innerWidth*window.devicePixelRatio;
-        this.canvas.height = window.innerHeight*window.devicePixelRatio;
+        this.pixelDensity=window.devicePixelRatio;
+        this.canvas.width = window.innerWidth*this.pixelDensity;
+        this.canvas.height = window.innerHeight*this.pixelDensity;
     };
 
     this.setAutoResizeToWindow = function(resize) {
