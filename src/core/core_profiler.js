@@ -25,7 +25,7 @@ CABLES.Profiler=function()
                     // console.log(currentStart);
                     items[currentId].timeUsed+=(performance.now()-currentStart);
                     
-                    if(!items[currentId].peakTime || CABLES.now()-items[currentId].peakTime>1000)
+                    if(!items[currentId].peakTime || CABLES.now()-items[currentId].peakTime>5000)
                     {
                         if(items[currentId].peak>1 && object)
                         {

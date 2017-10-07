@@ -28,14 +28,11 @@ function doResetLights()
 {
     if(outputDevice && resetLights.get())
     {
-        
         for(var i=0;i<128;i++)
         {
             outputDevice.send( [0x90, i, 0] );
             outputDevice.send( [0xb0, i, 0] );
-            
         }
-
     }
 }
 
