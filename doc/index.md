@@ -17,6 +17,7 @@
 
 - [Image Compositions](image_composition/image_composition.md)
 - [Post-Processing 3D Scenes](post-processing_3d_scenes/post-processing_3d_scenes.md)
+- [Writing Shaders](shader/shader.md)
 
 ### Developing Ops
 
