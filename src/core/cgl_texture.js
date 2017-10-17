@@ -170,7 +170,7 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 CGL.Texture.prototype.initTexture=function(img,filter)
 {
     this._fromData=false;
-    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
+    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha||filter.unpackAlpha);
     if(img.width)this.width=img.width;
     if(img.height)this.height=img.height;
     if(filter)this.filter=filter;
