@@ -1,1 +1,38 @@
-{"layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"Tone"},{"type":"0","name":"r"},{"type":"0","name":"g"},{"type":"0","name":"b"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.TextureEffects.ColorBalance"}}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Tone"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.ColorBalance"
+    },
+    "updated": 1508233630506,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "24fc08e4-9a66-4fb9-9ebd-f72f6a986b24",
+    "created": 1508233630508
+}

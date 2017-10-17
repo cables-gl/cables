@@ -1,0 +1,26 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Tone"
+            },
+            {
+                "type": "0",
+                "name": "Append Octave"
+            },
+            {
+                "type": "0",
+                "name": "Octave"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Note Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Note"
+    },
+    "summary": "Constructs a tone.js-compliant note (base-tone + octave)"
+}

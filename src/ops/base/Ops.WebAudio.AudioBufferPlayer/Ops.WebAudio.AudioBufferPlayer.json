@@ -1,0 +1,55 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "05385277-92fc-4d49-b730-11f9ed5e5c0d",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio Buffer"
+            },
+            {
+                "type": "0",
+                "name": "Start / Stop"
+            },
+            {
+                "type": "0",
+                "name": "Start Time"
+            },
+            {
+                "type": "0",
+                "name": "Stop Time"
+            },
+            {
+                "type": "0",
+                "name": "Offset"
+            },
+            {
+                "type": "0",
+                "name": "Autoplay"
+            },
+            {
+                "type": "0",
+                "name": "Loop"
+            },
+            {
+                "type": "0",
+                "name": "Detune"
+            },
+            {
+                "type": "0",
+                "name": "Playback Rate"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioBufferPlayer"
+    },
+    "summary": "Plays back audio data stored in an AudioBuffer",
+    "updated": 1506598843483,
+    "created": 1506598843485
+}

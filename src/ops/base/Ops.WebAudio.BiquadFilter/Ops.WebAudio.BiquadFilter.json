@@ -1,0 +1,41 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "3e28f86a-4f74-49a2-a1a6-f8943c00352d",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "type"
+            },
+            {
+                "type": "0",
+                "name": "frequency"
+            },
+            {
+                "type": "0",
+                "name": "detune"
+            },
+            {
+                "type": "0",
+                "name": "q"
+            },
+            {
+                "type": "0",
+                "name": "gain"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.BiquadFilter"
+    },
+    "summary": "Reverb audio effect"
+}

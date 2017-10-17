@@ -38,5 +38,10 @@
         ],
         "name": "Ops.Devices.MotionSensor"
     },
-    "summary": "get values from the device motion sensor  mobile"
+    "summary": "get values from the device motion sensor  mobile",
+    "updated": 1507296025357,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "3b15ad33-0117-4a33-975e-bca154a7f298",
+    "created": 1507296025359
 }

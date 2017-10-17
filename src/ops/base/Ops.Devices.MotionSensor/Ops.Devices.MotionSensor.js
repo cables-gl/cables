@@ -9,7 +9,7 @@ var axis3=op.outValue("Orientation Gamme");
 
 var accX=op.outValue("Acceleration X");
 var accY=op.outValue("Acceleration Y");
-var accZ=op.outValue("Acceleration X");
+var accZ=op.outValue("Acceleration Z");
 
 var outObj=op.outObject("Object");
 
