@@ -1,1 +1,54 @@
-{}
+{
+    "updated": 1507741471192,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "59e19126-9017-48bf-baf6-ba0181b75c93",
+    "created": 1507741470404,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "a"
+            },
+            {
+                "type": "0",
+                "name": "pos X"
+            },
+            {
+                "type": "0",
+                "name": "pos Y"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "2",
+                "name": "textureOpacity"
+            },
+            {
+                "type": "0",
+                "name": "billboard"
+            },
+            {
+                "type": "0",
+                "name": "preMultiplied alpha"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.TextureLookupColorMaterial"
+    }
+}
