@@ -33,7 +33,7 @@ function createCanvas()
 {
     if(canvas)removeCanvas();
     canvas = document.createElement('canvas');
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d',{alpha:true});
 
     ctx.canvas.width=canvas.width=texWidth.get();
     ctx.canvas.height=canvas.height=texHeight.get();
@@ -131,7 +131,8 @@ function update()
             wrap:cgl_wrap,
             filter:cgl_filter,
             width: canvas.width, 
-            height: canvas.height
+            height: canvas.height,
+            unpackAlpha:true
         }));
         removeCanvas();
     };

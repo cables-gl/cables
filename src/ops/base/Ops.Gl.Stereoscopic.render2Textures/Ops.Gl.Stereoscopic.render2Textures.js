@@ -14,7 +14,7 @@ var cgl=op.patch.cgl;
 var w=1025;
 var h=1025;
 
-var fb=[new CGL.Framebuffer(cgl,w,h),new CGL.Framebuffer(cgl,w,h)];
+var fb=[new CGL.Framebuffer2(cgl,w,h),new CGL.Framebuffer2(cgl,w,h)];
 tex0.set( fb[0].getTextureColor() );
 tex1.set( fb[1].getTextureColor() );
 
@@ -34,11 +34,10 @@ function renderEye(eye)
         mat4.translate(cgl.vMatrix, cgl.vMatrix, eye.offset);
         mat4.invert(cgl.vMatrix, cgl.vMatrix);
     }
-// console.log(eye.renderWidth);
 
+    // console.log(eye.renderWidth);
     // if(pose.get())mat4.multiply(cgl.vMatrix,cgl.vMatrix,poseMat.get());
 
-    
     trigger.trigger();
     cgl.popViewMatrix();
     cgl.popPMatrix();
