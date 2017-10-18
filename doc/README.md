@@ -1,6 +1,26 @@
 # cables Documentation / Gitbook
 
 - Uses [Gitbook](https://github.com/GitbookIO/gitbook)
+- All text written in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), a good editor is [Typora](https://typora.io/)
+
+## How to add an article / tutorial
+
+- Create a new file / folder in `doc`, e.g. `/how-to-write-shader-ops/how-to-write-shader-ops.md`
+- Write your text 
+- Include a link to your new article in `SUMMARY_base.md`
+- Generate the gitbook by running `npm run build` (be patient, that takes a bit)
+- Run `git push`,  [docs.cables.gl](https://docs.cables.gl) will automatically update
+
+## How to add the docs of an op
+
+- All op-documentations are in the folder  `cables/src/ops/base/`, next to the op-code (JavaScript-file).
+- If you want to add a documentation for an op, create a new markdown file in the op-folder, e.g. `cables/src/ops/base/Ops.Anim.Frequency/Ops.Anim.Frequency.md`
+- When you are done writing the doc generate the gitbook by running `npm run build` (be patient, that takes a bit)
+- Run `git push`  [docs.cables.gl](https://docs.cables.gl) will automatically update
+
+## Using Images in an Article / Op Doc
+
+- Create a folder `img` in your article / op documantation and place all article-relevant-images in there, e.g. `/how-to-write-shader-ops/img/shader.jpg`
 
 ## Installation
 
