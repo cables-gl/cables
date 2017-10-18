@@ -81,11 +81,10 @@ CGL.State = function() {
         this.canvas.width = this.canvasWidth = this.canvas.clientWidth*this.pixelDensity;
         this.canvas.height = this.canvasHeight = this.canvas.clientHeight*this.pixelDensity;
 
-        console.log('this.canvas.clientWidth',this.canvas.clientWidth);
-        console.log('this.canvas.width',this.canvas.width);
-        console.log('this.canvasWidth',this.canvasWidth);
-        console.log('-----------');
-
+        // console.log('this.canvas.clientWidth',this.canvas.clientWidth);cd
+        // console.log('this.canvas.width',this.canvas.width);
+        // console.log('this.canvasWidth',this.canvasWidth);
+        // console.log('-----------');
     };
 
     this.canvasWidth = -1;
@@ -291,7 +290,6 @@ CGL.State = function() {
         // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
         cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
         cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
-
 
         cgl.beginFrame();
     };
