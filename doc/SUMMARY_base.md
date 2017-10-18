@@ -16,6 +16,7 @@
   * [Export / Embedding](chapter_readmes/export/readme.md)
     * [Embedding](dev_embed/dev_embed.md)
     * [Setting Variables](dev_embed_vars/dev_embed_vars.md)
+    * [Calling Functions from Outside](dev_embed_functions/dev_embed_functions.md)
   * [Writing Ops](chapter_readmes/writing_ops/readme.md)
     * [Hello Op](dev_hello_op/dev_hello_op.md)
     * [Namespaces](namespaces/namespaces.md)
