@@ -86,22 +86,6 @@ app.on('ready', function()
     createWindow();
 
 
-    electron.globalShortcut.register(
-        'Escape',
-        function()
-        {
-          config.fullscreen=!config.fullscreen;
-          mainWindow.setFullScreen(config.fullscreen);
-        });
-
-    electron.globalShortcut.register(
-        'Enter',
-        function()
-        {
-           mainWindow.webContents.openDevTools();
-        });
-
-
 
 //   let externalDisplay = displays.find((display) => {
 //     return display.bounds.x !== 0 || display.bounds.y !== 0
