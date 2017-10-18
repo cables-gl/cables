@@ -1,0 +1,29 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Bars Beats Sixteenth"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Bars"
+            },
+            {
+                "type": "0",
+                "name": "Beats"
+            },
+            {
+                "type": "0",
+                "name": "Sixteenth"
+            },
+            {
+                "type": "0",
+                "name": "Sixteenth Precise"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Type.BarsBeatsSixteenthsResolver"
+    }
+}

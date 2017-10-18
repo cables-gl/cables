@@ -1,1 +1,39 @@
-{"summary":"Blur the pixels of an image","layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"Fast"},{"type":"0","name":"amount"},{"type":"0","name":"direction"},{"type":"2","name":"mask"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.TextureEffects.Blur"}}
+{
+    "summary": "Blur the pixels of an image",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Fast"
+            },
+            {
+                "type": "0",
+                "name": "amount"
+            },
+            {
+                "type": "0",
+                "name": "direction"
+            },
+            {
+                "type": "2",
+                "name": "mask"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Blur"
+    },
+    "updated": 1508233793335,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "54f26f53-f637-44c1-9bfb-a2f2b722e998",
+    "created": 1508233703583
+}
