@@ -1,4 +1,3 @@
-
 op.name='Desaturate';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
@@ -8,40 +7,10 @@ var amount=op.inValueSlider("amount",1);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
-    .endl()+'#endif'
-    .endl()+'uniform float amount;'
-    .endl()+''
-    .endl()+'vec3 desaturate(vec3 color, float amount)'
-    .endl()+'{'
-    .endl()+'   vec3 gray = vec3(dot(vec3(0.2126,0.7152,0.0722), color));'
-    .endl()+'   return vec3(mix(color, gray, amount));'
-    .endl()+'}'
-    .endl()+''
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
-    .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'       col=texture2D(tex,texCoord);'
-    .endl()+'       col.rgb=desaturate(col.rgb,amount);'
-    .endl()+'   #endif'
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.desaturate_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount.get());
-
-amount.onValueChanged=function()
-{
-    amountUniform.setValue(amount.get());
-};
+var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 render.onTriggered=function()
 {

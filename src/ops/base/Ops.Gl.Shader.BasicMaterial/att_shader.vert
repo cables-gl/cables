@@ -1,10 +1,8 @@
 {{MODULES_HEAD}}
 
 IN vec3 vPosition;
-
 OUT vec3 norm;
-
-    OUT vec2 texCoord;
+OUT vec2 texCoord;
 
 #ifdef HAS_TEXTURES
     IN vec2 attrTexCoord;
