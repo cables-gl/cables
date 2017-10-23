@@ -52,5 +52,7 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Analyser"
-    }
+    },
+    "updated": 1508579502036,
+    "created": 1508578804935
 }

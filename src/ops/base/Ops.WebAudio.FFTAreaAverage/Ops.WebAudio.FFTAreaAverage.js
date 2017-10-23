@@ -105,4 +105,3 @@ refresh.onTriggered=function()
         else texOut.set(new CGL.Texture.createFromImage( cgl, canvImage, { "filter":CGL.Texture.FILTER_MIPMAP } ));
 
 };
-
