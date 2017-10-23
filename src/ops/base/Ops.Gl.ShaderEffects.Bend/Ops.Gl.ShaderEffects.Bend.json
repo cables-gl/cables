@@ -1,8 +1,51 @@
 {
-    "updated": 1508772658369,
+    "updated": 1508773230380,
     "author": "599c49d0bd5c13002aac8617",
     "authorName": "kusma",
     "id": "8d4941a9-388d-40da-8574-266070235251",
     "created": 1508772658372,
-    "summary": "bend objects along an axis"
+    "summary": "bend objects along an axis",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "RotX"
+            },
+            {
+                "type": "0",
+                "name": "RotY"
+            },
+            {
+                "type": "0",
+                "name": "RotZ"
+            },
+            {
+                "type": "0",
+                "name": "Scale"
+            },
+            {
+                "type": "0",
+                "name": "Offset"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "Limited"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.Bend"
+    }
 }
