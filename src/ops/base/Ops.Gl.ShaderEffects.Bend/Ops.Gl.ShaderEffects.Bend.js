@@ -87,7 +87,7 @@ render.onTriggered=function()
         mod=shader.addModule(
             {
                 name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:attachments.test_vert,
+                srcHeadVert:attachments.bend_vert,
                 srcBodyVert:srcBodyVert
             });
 
