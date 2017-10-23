@@ -635,18 +635,11 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             for (var ili=0;ili< obj.ops[iop].portsIn[ipi2].links.length;ili++) {
                 if (obj.ops[iop].portsIn[ipi2].links[ili])
                 {
-
-
                     addLink(
                         obj.ops[iop].portsIn[ipi2].links[ili].objIn,
                         obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                         obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                         obj.ops[iop].portsIn[ipi2].links[ili].portOut);
-
-
-                    // var timeused=Math.round(100*(CABLES.now()-start))/100;
-                    // if(timeused>10)console.warn('long op init ',obj.ops[iop].objName,timeused);
-                
                 }
             }
         }
