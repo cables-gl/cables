@@ -1,0 +1,49 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "audio in"
+            },
+            {
+                "type": "0",
+                "name": "threshold"
+            },
+            {
+                "type": "0",
+                "name": "knee"
+            },
+            {
+                "type": "0",
+                "name": "ratio"
+            },
+            {
+                "type": "0",
+                "name": "attack"
+            },
+            {
+                "type": "0",
+                "name": "release"
+            },
+            {
+                "type": "1",
+                "name": "exe"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            },
+            {
+                "type": "0",
+                "name": "reduction"
+            }
+        ],
+        "name": "Ops.WebAudio.DynamicsCompressor"
+    },
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "aad4a714-8e77-4b85-8c69-cb7e564016a8",
+    "summary": "Compressor audio effect"
+}

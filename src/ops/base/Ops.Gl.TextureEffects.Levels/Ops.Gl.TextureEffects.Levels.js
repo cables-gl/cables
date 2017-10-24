@@ -21,30 +21,10 @@ var uniInMax=new CGL.Uniform(shader,'f','inMax',inMax);
 var uniOutMin=new CGL.Uniform(shader,'f','outMin',outMin);
 var uniOutMax=new CGL.Uniform(shader,'f','outMax',outMax);
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'uniform sampler2D tex;'
-
-    .endl()+'uniform float inMin;'
-    .endl()+'uniform float inMax;'
-    .endl()+'uniform float midPoint;'
-    .endl()+'uniform float outMax;'
-    .endl()+'uniform float outMin;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 base=texture2D(tex,texCoord);'
-
-	.endl()+'   vec4 inputRange = min(max(base - vec4(inMin), vec4(0.0)) / (vec4(inMax) - vec4(inMin)), vec4(outMax));'
-	.endl()+'   inputRange = pow(inputRange, vec4(1.0 / (1.5 - midPoint)));'
-
-	.endl()+'   gl_FragColor = mix(vec4(outMin), vec4(1.0), inputRange);'
-
-    .endl()+'}';
 
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+
+shader.setSource(shader.getDefaultVertexShader(),attachments.levels_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 render.onTriggered=function()

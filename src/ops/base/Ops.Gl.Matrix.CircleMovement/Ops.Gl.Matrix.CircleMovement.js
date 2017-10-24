@@ -19,7 +19,7 @@ var outY=op.addOutPort(new Port(op,"Y"));
 
 var speed=op.inValue("speed",1);
 
-var startTime=Date.now()/1000;
+var startTime=CABLES.now()/1000;
 var cgl=op.patch.cgl;
 var animX=new CABLES.TL.Anim();
 var animY=new CABLES.TL.Anim();
@@ -41,7 +41,7 @@ render.onTriggered=function()
     cgl.pushMvMatrix();
 
 
-    var time=(Date.now()/1000-startTime)*speed.get()+Math.round(segments.get())*0.1*percent.get();
+    var time=(CABLES.now()/1000-startTime)*speed.get()+Math.round(segments.get())*0.1*percent.get();
 
     var x=animX.getValue(time+offset.get())*mulX.get()*radius.get();
     var y=animY.getValue(time+offset.get())*mulY.get()*radius.get();

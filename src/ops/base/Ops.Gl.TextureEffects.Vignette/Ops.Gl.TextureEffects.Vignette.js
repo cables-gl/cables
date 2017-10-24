@@ -11,30 +11,8 @@ var ratio=op.inValue("Ratio",1);
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
-    .endl()+'#endif'
-    .endl()+'uniform float lensRadius1;'
-    .endl()+'uniform float lensRadius2;'
-    .endl()+'uniform float ratio;'
-    .endl()+'uniform float amount;'
 
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
-    .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'       col=texture2D(tex,texCoord);'
-    .endl()+'       vec2 tcPos=vec2(texCoord.x,(texCoord.y-0.5)*ratio+0.5);'
-    .endl()+'       float dist = distance(tcPos, vec2(0.5,0.5))*amount;'
-    .endl()+'       col.rgb *= smoothstep(lensRadius1, lensRadius2, dist);'
-    .endl()+'   #endif'
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.vignette_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniLensRadius1=new CGL.Uniform(shader,'f','lensRadius1',lensRadius1);
 var uniLensRadius2=new CGL.Uniform(shader,'f','lensRadius2',lensRadius2);

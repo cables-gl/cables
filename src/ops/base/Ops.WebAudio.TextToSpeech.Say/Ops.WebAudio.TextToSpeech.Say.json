@@ -1,0 +1,73 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "ced391af-61cc-43aa-80b2-39b894dd79ed",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update State"
+            },
+            {
+                "type": "0",
+                "name": "Text"
+            },
+            {
+                "type": "1",
+                "name": "Say"
+            },
+            {
+                "type": "0",
+                "name": "Voice"
+            },
+            {
+                "type": "0",
+                "name": "Pitch"
+            },
+            {
+                "type": "0",
+                "name": "Rate"
+            },
+            {
+                "type": "0",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "Say on Text Change"
+            },
+            {
+                "type": "1",
+                "name": "Pause"
+            },
+            {
+                "type": "1",
+                "name": "Resume"
+            },
+            {
+                "type": "1",
+                "name": "Cancel"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Speaking"
+            },
+            {
+                "type": "0",
+                "name": "Pending"
+            },
+            {
+                "type": "0",
+                "name": "Paused"
+            }
+        ],
+        "name": "Ops.WebAudio.TextToSpeech.Say"
+    },
+    "summary": "Text-to-Speech, speaks different languages (speech synthesis)"
+}

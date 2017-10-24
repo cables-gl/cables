@@ -1,0 +1,26 @@
+{
+    "updated": 1508184617989,
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "2846e136-3c59-4c4a-81f6-d2c983418a28",
+    "created": 1507225992090,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "data"
+            },
+            {
+                "type": "0",
+                "name": "key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetObject"
+    }
+}

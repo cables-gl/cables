@@ -1,0 +1,41 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "2cf4b0a1-b657-405b-8bf9-8555dbd5c231",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "URL"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Buffer"
+            },
+            {
+                "type": "0",
+                "name": "Finished Loading"
+            },
+            {
+                "type": "0",
+                "name": "Sample Rate"
+            },
+            {
+                "type": "0",
+                "name": "Length"
+            },
+            {
+                "type": "0",
+                "name": "Duration"
+            },
+            {
+                "type": "0",
+                "name": "Number of Channels"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioBuffer"
+    },
+    "summary": "Stores an audio file / sample"
+}

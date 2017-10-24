@@ -18,31 +18,8 @@ var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'UNI sampler2D tex;'
-    .endl()+'UNI float lensRadius1;'
-    .endl()+'UNI float aspect;'
-    .endl()+'UNI float amount;'
-    .endl()+'UNI float sharp;'
-    
-    .endl()+'UNI float r,g,b;'
 
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 vcol=vec4(r,g,b,1.0);'
-    .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    .endl()+'   vec2 tcPos=vec2(texCoord.x,(texCoord.y-0.5)*aspect+0.5);'
-    .endl()+'   float dist = distance(tcPos, vec2(0.5,0.5));'
-    .endl()+'   float am = (1.0-smoothstep( (lensRadius1+0.5), (lensRadius1*0.99+0.5)*sharp, dist));'
-    
-    .endl()+'   col=mix(col,vcol,am*amount);'
-    
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.vignette_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniLensRadius1=new CGL.Uniform(shader,'f','lensRadius1',lensRadius1);
 var uniaspect=new CGL.Uniform(shader,'f','aspect',aspect);

@@ -1,4 +1,9 @@
 {
+    "updated": 1508481096468,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "8de665f1-0fc5-466c-8819-b73e17560ccf",
+    "created": 1508480885510,
     "layout": {
         "portsIn": [
             {
@@ -7,31 +12,27 @@
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Size"
             },
             {
                 "type": "0",
-                "name": "Radius"
+                "name": "Strength"
             },
             {
                 "type": "0",
-                "name": "sharp"
+                "name": "Smooth"
             },
             {
                 "type": "0",
-                "name": "Aspect"
+                "name": "x"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "y"
             },
             {
                 "type": "0",
-                "name": "g"
-            },
-            {
-                "type": "0",
-                "name": "b"
+                "name": "z"
             }
         ],
         "portsOut": [
@@ -40,11 +41,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Vignette2"
-    },
-    "updated": 1508866208691,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "358e95af-bab4-4ef2-8b47-bb482577ca9b",
-    "created": 1508866208695
+        "name": "Ops.Gl.ShaderEffects.AreaRotate"
+    }
 }

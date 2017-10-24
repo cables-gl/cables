@@ -1,1 +1,31 @@
-{"summary":"A timer that can be started, paused and reset by triggering","layout":{"portsIn":[{"type":"0","name":"Play"},{"type":"1","name":"Reset"},{"type":"0","name":"Speed"}],"portsOut":[{"type":"0","name":"Time"}],"name":"Ops.Anim.Timer"}}
+{
+    "summary": "A timer that can be started, paused and reset by triggering",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Play"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Speed"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Time"
+            }
+        ],
+        "name": "Ops.Anim.Timer"
+    },
+    "updated": 1508774162070,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "65ae3c2e-90d7-48fe-93df-30245f0bcf34",
+    "created": 1508774161484
+}

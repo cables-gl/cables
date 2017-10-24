@@ -155,7 +155,7 @@ exec.onTriggered=function()
 
         shader=cgl.getShader();
 
-        shader.glslVersion=300;
+        // shader.glslVersion=300;
         shaderModule=shader.addModule(
             {
                 name:'MODULE_VERTEX_POSITION',

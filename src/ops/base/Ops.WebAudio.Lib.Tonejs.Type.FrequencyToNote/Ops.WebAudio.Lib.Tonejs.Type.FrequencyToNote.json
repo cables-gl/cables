@@ -1,0 +1,22 @@
+{
+    "updated": 1505381214169,
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "3c285ab4-6b7a-499b-81bd-912e8f501e31",
+    "created": 1505379882197,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Frequency"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Note"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Type.FrequencyToNote"
+    }
+}

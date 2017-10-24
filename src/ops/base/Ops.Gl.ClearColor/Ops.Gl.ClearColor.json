@@ -1,1 +1,39 @@
-{"summary":"set all pixels with to one color","layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"r"},{"type":"0","name":"g"},{"type":"0","name":"b"},{"type":"0","name":"a"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.ClearColor"}}
+{
+    "summary": "set all pixels with to one color",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "a"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ClearColor"
+    },
+    "updated": 1508774180677,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "19b441eb-9f63-4f35-ba08-b87841517c4d",
+    "created": 1508774179924
+}
