@@ -1,5 +1,10 @@
 {
-    "summary": "Transform objects in 3d space.",
+    "updated": 1508773230380,
+    "author": "599c49d0bd5c13002aac8617",
+    "authorName": "kusma",
+    "id": "8d4941a9-388d-40da-8574-266070235251",
+    "created": 1508772658372,
+    "summary": "bend objects along an axis",
     "layout": {
         "portsIn": [
             {
@@ -8,31 +13,31 @@
             },
             {
                 "type": "0",
-                "name": "posX"
+                "name": "RotX"
             },
             {
                 "type": "0",
-                "name": "posY"
+                "name": "RotY"
             },
             {
                 "type": "0",
-                "name": "posZ"
+                "name": "RotZ"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "Scale"
             },
             {
                 "type": "0",
-                "name": "rotX"
+                "name": "Offset"
             },
             {
                 "type": "0",
-                "name": "rotY"
+                "name": "Amount"
             },
             {
                 "type": "0",
-                "name": "rotZ"
+                "name": "Limited"
             }
         ],
         "portsOut": [
@@ -41,11 +46,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Matrix.Transform"
-    },
-    "updated": 1508319615065,
-    "author": "58dabd06a0d7ec8d1a982e66",
-    "authorName": "cables",
-    "id": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
-    "created": 1504813928558
+        "name": "Ops.Gl.ShaderEffects.Bend"
+    }
 }

@@ -14,26 +14,27 @@ var index=op.addOutPort(new Port(op,"index",OP_PORT_TYPE_VALUE));
 geometry.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;
-var vec=[0,0,0];
+var vec=vec3.create();
 
 render.onTriggered=function()
 {
-    if(geometry.get())
+    var geom=geometry.get();
+    if(geom)
     {
-        for(var i=0;i<geometry.get().vertices.length;i+=3)
+        var leng=geom.vertices.length;
+        for(var i=0;i<leng;i+=3)
         {
             if(i/3 % modulo.get()==0)
             {
-            vec3.set(vec, geometry.get().vertices[i+0],geometry.get().vertices[i+1],geometry.get().vertices[i+2]);
-            x.set(geometry.get().vertices[i+0]);
-            y.set(geometry.get().vertices[i+1]);
-            z.set(geometry.get().vertices[i+2]);
-            index.set(i);
-            cgl.pushMvMatrix();
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
-            trigger.trigger();
-            cgl.popMvMatrix();
-                
+                vec3.set(vec, geom.vertices[i+0],geom.vertices[i+1],geom.vertices[i+2]);
+                x.set(geom.vertices[i+0]);
+                y.set(geom.vertices[i+1]);
+                z.set(geom.vertices[i+2]);
+                index.set(i);
+                cgl.pushMvMatrix();
+                mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+                trigger.trigger();
+                cgl.popMvMatrix();
             }
         }
     }

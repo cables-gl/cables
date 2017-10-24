@@ -60,7 +60,7 @@ var srcVert=''
 
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+    // .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'  IN vec2 texCoord;'
     .endl()+'  UNI sampler2D tex;'

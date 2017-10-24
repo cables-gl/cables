@@ -46,7 +46,7 @@ var srcBodyVert=''
     .endl()+'   MOD_areaPos=pos;'
     .endl()+'#endif'
     .endl()+'#ifdef MOD_WORLDSPACE'
-    .endl()+'   MOD_areaPos=pos*modelMatrix;'
+    .endl()+'   MOD_areaPos=modelMatrix*pos;'
     .endl()+'#endif'
     .endl();
 

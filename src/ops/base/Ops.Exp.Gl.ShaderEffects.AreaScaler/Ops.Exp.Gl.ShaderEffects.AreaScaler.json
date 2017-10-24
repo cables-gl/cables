@@ -1,4 +1,9 @@
 {
+    "updated": 1508480913956,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "a6c64e98-d3b2-4dd5-abb6-5dd913880d2d",
+    "created": 1508448027429,
     "layout": {
         "portsIn": [
             {
@@ -7,23 +12,19 @@
             },
             {
                 "type": "0",
+                "name": "Scale"
+            },
+            {
+                "type": "0",
                 "name": "Size"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Strength"
             },
             {
                 "type": "0",
-                "name": "r"
-            },
-            {
-                "type": "0",
-                "name": "g"
-            },
-            {
-                "type": "0",
-                "name": "b"
+                "name": "Smooth"
             },
             {
                 "type": "0",
@@ -39,11 +40,15 @@
             },
             {
                 "type": "0",
-                "name": "WorldSpace"
+                "name": "Scroll X"
             },
             {
                 "type": "0",
-                "name": "Falloff"
+                "name": "Scroll Y"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Z"
             }
         ],
         "portsOut": [
@@ -52,12 +57,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.ColorArea"
-    },
-    "summary": "colorize all meshes around x,y,z",
-    "updated": 1508449447580,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "cac6a739-c2ad-440c-99b2-33e2c459e8b1",
-    "created": 1505483732513
+        "name": "Ops.Gl.ShaderEffects.AreaScaler"
+    }
 }

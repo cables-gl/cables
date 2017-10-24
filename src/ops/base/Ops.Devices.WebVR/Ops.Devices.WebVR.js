@@ -36,8 +36,6 @@ var firstQuat=null;
 var gp1Matrix=mat4.create();
 var qMat=mat4.create();
 var frameData = new VRFrameData();
-;
-
 
 var hasDisplay=op.outValue('hasDisplay');
 var hasPose=op.outValue('hasPose');

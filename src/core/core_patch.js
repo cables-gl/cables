@@ -635,11 +635,14 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             for (var ili=0;ili< obj.ops[iop].portsIn[ipi2].links.length;ili++) {
                 if (obj.ops[iop].portsIn[ipi2].links[ili])
                 {
+
                     addLink(
                         obj.ops[iop].portsIn[ipi2].links[ili].objIn,
                         obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                         obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                         obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+
+
                 }
             }
         }
