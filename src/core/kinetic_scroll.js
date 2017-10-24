@@ -55,13 +55,13 @@ CABLES.InertiaAnim.prototype.set=function(_value)
     {
         clearInterval(this._smoothInterval);
         this.value=_value;
-        this._lastTime=CABLES.milliSeconds();
+        this._lastTime=CABLES.now();
         this._firstTime=false;
     }
 
     var dist=(_value-this.value);
     // console.log('dist',dist,_value);
-    this._inVelocity = dist / (CABLES.milliSeconds()-this._lastTime+0.0000001);
+    this._inVelocity = dist / (CABLES.now()-this._lastTime+0.0000001);
 
 
     this.value=_value;
@@ -70,6 +70,6 @@ CABLES.InertiaAnim.prototype.set=function(_value)
 
 
     // console.log('this._inVelocity ',this._inVelocity);
-    this._lastTime=CABLES.milliSeconds();
+    this._lastTime=CABLES.now();
 
 };
