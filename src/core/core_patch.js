@@ -331,7 +331,7 @@ CABLES.Patch.prototype.exec = function(e) {
         frameInterval = 1000 / this.config.fpsLimit;
     }
 
-    var now = CABLES.milliSeconds();
+    var now = CABLES.now();
     var frameDelta = now - frameNext;
 
     if (CABLES.UI) {
@@ -361,7 +361,7 @@ CABLES.Patch.prototype.exec = function(e) {
 
         if (frameInterval) frameNext = now - (frameDelta % frameInterval);
 
-        lastFrameTime = CABLES.milliSeconds();
+        lastFrameTime = CABLES.now();
     }
 
     if (wasdelayed) {
