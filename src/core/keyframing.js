@@ -683,11 +683,8 @@ CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
 
     port.onChange=function()
     {
-this.defaultEasing=this.easingFromString(port.get());
-
-
+        this.defaultEasing=this.easingFromString(port.get());
         if(cb)cb();
-
     }.bind(this);
 
     return port;

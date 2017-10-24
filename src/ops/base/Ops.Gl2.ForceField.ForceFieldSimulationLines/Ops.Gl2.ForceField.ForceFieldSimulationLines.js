@@ -150,10 +150,10 @@ Particle.prototype.spawn=function()
     
     var lt=(maxLifetime.get()-minLifetime.get())*Math.random();
     
-    this.startTime=Date.now()+(lt*1000);
+    this.startTime=CABLES.now()+(lt*1000);
 
     this.endTime=
-        Date.now()+
+        CABLES.now()+
         (
             (
                 (maxLifetime.get()-minLifetime.get()) + minLifetime.get()
@@ -184,13 +184,13 @@ Particle.prototype.update=function(forces)
     this.velocity[2]=0;
     // Update position
     vec3.copy(this.oldPos,this.pos);
-    if(Date.now()<this.startTime)return;
-    if(Date.now()>this.endTime)
+    if(CABLES.now()<this.startTime)return;
+    if(CABLES.now()>this.endTime)
     {
         this.spawn();
         return;
     }
-    this.lifetime=Date.now()-this.startTime;
+    this.lifetime=CABLES.now()-this.startTime;
     
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
     {

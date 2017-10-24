@@ -68,7 +68,7 @@ shaderSim.setSource(shaderSim.getDefaultVertexShader(),srcFrag);
 var texSimUni=new CGL.Uniform(shaderSim,'t','tex',0);
 var texFieldUni=new CGL.Uniform(shaderSim,'t','texField',1);
 var uniTime2=new CGL.Uniform(shaderSim,'f','time',0);
-var startTime=Date.now()/1000;
+var startTime=CABLES.now()/1000;
 
 var effect=new CGL.TextureEffect(cgl,{fp:true});
 
