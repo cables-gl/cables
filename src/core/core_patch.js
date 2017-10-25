@@ -331,7 +331,7 @@ CABLES.Patch.prototype.exec = function(e) {
         frameInterval = 1000 / this.config.fpsLimit;
     }
 
-    var now = CABLES.milliSeconds();
+    var now = CABLES.now();
     var frameDelta = now - frameNext;
 
     if (CABLES.UI) {
@@ -361,7 +361,7 @@ CABLES.Patch.prototype.exec = function(e) {
 
         if (frameInterval) frameNext = now - (frameDelta % frameInterval);
 
-        lastFrameTime = CABLES.milliSeconds();
+        lastFrameTime = CABLES.now();
     }
 
     if (wasdelayed) {
@@ -541,9 +541,14 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     var loadingId = this.loading.start('core', 'deserialize');
     if (this.onLoadStart) this.onLoadStart();
 
+    var stopwatch=null;
+    if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('deserialize');
 
+    
     if (typeof obj === "string") obj = JSON.parse(obj);
     var self = this;
+
+    if(stopwatch)stopwatch.stop('jsonparse');
 
     this.settings = obj.settings;
 
@@ -559,9 +564,12 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
+    if(stopwatch)stopwatch.stop('add ops..');
     // console.log('add ops ',self.config.glCanvasId);
     // add ops...
     for (var iop in obj.ops) {
+
+        var start=CABLES.now();
         var op = this.addOp(obj.ops[iop].objName, obj.ops[iop].uiAttribs);
 
         if (op) {
@@ -600,7 +608,13 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                 }
             }
         }
+
+        var timeused=Math.round(100*(CABLES.now()-start))/100;
+        if(timeused>10)console.warn('long op init ',obj.ops[iop].objName,timeused);
+        // else console.log('op time',obj.ops[iop].objName,timeused);
     }
+
+    if(stopwatch)stopwatch.stop('onloaded valueset');
 
     for (var i in this.ops) {
         if (this.ops[i].onLoadedValueSet) {
@@ -610,20 +624,31 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
 
+    if(stopwatch)stopwatch.stop('create links');
 
     // create links...
-    for (iop in obj.ops) {
-        for (var ipi2 in obj.ops[iop].portsIn) {
-            for (var ili in obj.ops[iop].portsIn[ipi2].links) {
+    if(obj.ops)
+    for (iop =0;iop< obj.ops.length;iop++) {
+        if(obj.ops[iop].portsIn)
+        for (var ipi2 =0;ipi2< obj.ops[iop].portsIn.length;ipi2++) {
+            if(obj.ops[iop].portsIn[ipi2].links)
+            for (var ili=0;ili< obj.ops[iop].portsIn[ipi2].links.length;ili++) {
                 if (obj.ops[iop].portsIn[ipi2].links[ili])
+                {
+
                     addLink(
                         obj.ops[iop].portsIn[ipi2].links[ili].objIn,
                         obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                         obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                         obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+
+
+                }
             }
         }
     }
+
+    if(stopwatch)stopwatch.stop('onloaded');
 
     for (var i in this.ops) {
         if (this.ops[i].onLoaded) {
@@ -631,6 +656,8 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             this.ops[i].onLoaded = null;
         }
     }
+
+    if(stopwatch)stopwatch.stop('finished');
 
     this.loading.finished(loadingId);
 

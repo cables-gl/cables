@@ -297,9 +297,9 @@ CGL.Shader = function(_cgl, _name) {
 
 
 
-        for (var j = 0; j < modules.length; j++) {
-            console.log(j,modules[j].title);
-        }
+        // for (var j = 0; j < modules.length; j++) {
+        //     console.log(j,modules[j].title);
+        // }
 
 
         for (i = 0; i < moduleNames.length; i++) {

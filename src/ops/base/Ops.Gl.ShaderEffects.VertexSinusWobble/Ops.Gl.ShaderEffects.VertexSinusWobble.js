@@ -129,7 +129,7 @@ var srcBodyVert=''
 
 
 
-var startTime=Date.now()/1000.0;
+var startTime=CABLES.now()/1000.0;
 
 function removeModule()
 {
@@ -163,6 +163,6 @@ this.render.onTriggered=function()
         setDefines();
     }
 
-    uniTime.setValue(Date.now()/1000.0-startTime);
+    uniTime.setValue(CABLES.now()/1000.0-startTime);
     self.trigger.trigger();
 };

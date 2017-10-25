@@ -20,7 +20,7 @@ delay.onValueChanged=setAnim;
 interval.onValueChanged=setAnim;
 interval.set(1);
 
-var startTime=CABLES.milliSeconds();
+var startTime=CABLES.now();
 
 function setAnim()
 {
@@ -28,13 +28,13 @@ function setAnim()
     anim.keys[0].value=0;
     anim.keys[1].time=delay.get()+interval.get();
     anim.keys[1].value=1;
-    startTime=CABLES.milliSeconds();
+    startTime=CABLES.now();
 }
 
 
 exe.onTriggered=function()
 {
-    var now=(CABLES.milliSeconds()-startTime)/1000;
+    var now=(CABLES.now()-startTime)/1000;
     var perc=anim.getValue(now);
 
     percent.set( perc );

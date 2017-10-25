@@ -126,7 +126,6 @@ function doRender()
         if(shader) removeModule();
 
         shader=cgl.getShader();
-
         module=shader.addModule(
             {
                 name: 'MODULE_VERTEX_POSITION',

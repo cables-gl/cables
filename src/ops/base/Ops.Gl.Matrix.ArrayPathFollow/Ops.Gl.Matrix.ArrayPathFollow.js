@@ -21,7 +21,7 @@ var vec=vec3.create();
 var vecn=vec3.create();
 var cgl=this.patch.cgl;
 
-var startTime=Date.now();
+var startTime=CABLES.now();
 
 var animX=new CABLES.TL.Anim();
 var animY=new CABLES.TL.Anim();

@@ -22,14 +22,6 @@ hdpi.onChange=function()
 
 
 var cgl=op.patch.cgl;
-
-cgl.addEventListener("resize",function()
-{
-    console.log(cgl.canvasWidth);
-});
-
-
-
 var rframes=0;
 var rframeStart=0;
 
@@ -151,12 +143,12 @@ op.onAnimFrame=function(time)
         height.set(cgl.canvasHeight);
     }
 
-    if(CABLES.milliSeconds()-rframeStart>1000)
+    if(CABLES.now()-rframeStart>1000)
     {
         CGL.fpsReport=CGL.fpsReport||[];
         if(op.patch.loading.getProgress()>=1.0 && rframeStart!==0)CGL.fpsReport.push(rframes);
         rframes=0;
-        rframeStart=CABLES.milliSeconds();
+        rframeStart=CABLES.now();
     }
     CGL.MESH.lastShader=null;
     CGL.MESH.lastMesh=null;
