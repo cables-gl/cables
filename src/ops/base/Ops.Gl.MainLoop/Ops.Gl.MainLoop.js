@@ -22,14 +22,6 @@ hdpi.onChange=function()
 
 
 var cgl=op.patch.cgl;
-
-cgl.addEventListener("resize",function()
-{
-    console.log(cgl.canvasWidth);
-});
-
-
-
 var rframes=0;
 var rframeStart=0;
 
