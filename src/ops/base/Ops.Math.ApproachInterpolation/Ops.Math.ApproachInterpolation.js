@@ -25,7 +25,7 @@ exec.onTriggered=function()
 {
     if(divisor<=0)divisor=0.0001;
     val=val+(goal-val)/divisor;
-    
+
     if(val>0 && val<0.000000001)val=0;
     if(divisor!=divisor)val=0;
     result.set(val);
