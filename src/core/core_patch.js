@@ -186,7 +186,11 @@ CABLES.Patch.prototype.createOp = function(objName) {
         if (CABLES.UI)
             CABLES.UI.MODAL.showOpException(e, objName);
         else
-        if (CABLES.api) CABLES.api.sendErrorReport(e);
+        {
+            if (CABLES.api) CABLES.api.sendErrorReport(e);
+            console.log(e);
+            console.log(e.stacktrace);
+        }
 
         // return;
     }
