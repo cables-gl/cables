@@ -40,13 +40,17 @@ mat3 inverseMat3(mat3 m)
 void main()
 {
     vec4 pos = vec4( vPosition, 1. );
+    mat4 mMatrix=modelMatrix;
 
-    modelPos=modelMatrix*pos;
-    mvMatrix=viewMatrix*modelMatrix;
     norm=attrVertNormal;
-    normalMatrix = transposeMat3(inverseMat3(mat3(modelMatrix)));
 
     {{MODULE_VERTEX_POSITION}}
+
+    modelPos=mMatrix*pos;
+    normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
+
+
+    mvMatrix=viewMatrix*mMatrix;
 
     gl_Position = projMatrix * mvMatrix * pos;
 }

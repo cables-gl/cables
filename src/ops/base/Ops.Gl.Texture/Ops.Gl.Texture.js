@@ -45,7 +45,7 @@ function reload(nocache)
 
 function realReload(nocache)
 {
-    var url=op.patch.getFilePath(filename.get());
+    var url=op.patch.getFilePath(String(filename.get()));
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 
     if((filename.get() && filename.get().length>1))

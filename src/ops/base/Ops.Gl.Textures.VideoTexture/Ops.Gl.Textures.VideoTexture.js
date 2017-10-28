@@ -9,6 +9,10 @@ var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{ display:'bool' } )
 var volume=op.addInPort(new Port(op,"Volume",OP_PORT_TYPE_VALUE,{ display:'range' } ));
 var muted=op.addInPort(new Port(op,"mute",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var speed=op.addInPort(new Port(op,"speed",OP_PORT_TYPE_VALUE ));
+
+var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
+var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
+
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var fps=op.addInPort(new Port(op,"fps",OP_PORT_TYPE_VALUE ));
 var time=op.addInPort(new Port(op,"set time",OP_PORT_TYPE_VALUE ));
@@ -33,16 +37,26 @@ fps.set(25);
 speed.set(1);
 volume.set(1);
 flip.set(true);
+var cgl_filter=0;
+var cgl_wrap=0;
 
 var emptyTexture=CGL.Texture.getEmptyTexture(cgl);
 
-var tex=new CGL.Texture(cgl,
-{
-    filter:CGL.Texture.FILTER_LINEAR
-});
-tex.setSize(32,33);
+var tex=null;
 textureOut.set(tex);
 var timeout=null;
+
+function reInitTexture()
+{
+    if(tex)tex.delete();
+    tex=new CGL.Texture(cgl,
+    {
+        wrap:cgl_wrap,
+        filter:cgl_filter
+    });
+    
+}
+
 
 rewind.onTriggered=function()
 {
@@ -98,10 +112,28 @@ muted.onValueChanged=function()
     videoElement.muted = muted.get();
 };
 
+tfilter.onChange=function()
+{
+    if(tfilter.get()=='nearest') cgl_filter=CGL.Texture.FILTER_NEAREST;
+    if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
+    if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
+    tex=null;
+};
+
+wrap.onChange=function()
+{
+    if(wrap.get()=='repeat') cgl_wrap=CGL.Texture.WRAP_REPEAT;
+    if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    tex=null;
+    // reload();
+};
+
+
 function updateTexture()
 {
     // console.log('videoElement.currentTime',videoElement.currentTime);
-
+    if(!tex)reInitTexture();
 
     if(!videoElementPlaying)return;
     var perc=(videoElement.currentTime)/videoElement.duration;
@@ -109,6 +141,7 @@ function updateTexture()
     outTime.set(videoElement.currentTime);
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);
+    tex._setFilter();
     cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     textureOut.set(tex);
