@@ -1,0 +1,34 @@
+{
+    "updated": 1509136993167,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "1bcf3542-856b-4bde-a345-c0f26088ba0b",
+    "created": 1509135552760,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Cubemap"
+            },
+            {
+                "type": "0",
+                "name": "Scale"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.CubeMapReflection"
+    }
+}
