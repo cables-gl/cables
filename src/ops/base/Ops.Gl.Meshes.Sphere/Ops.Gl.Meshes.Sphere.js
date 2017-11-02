@@ -122,7 +122,7 @@ function uvSphere(radius, slices, stacks)
             vertices[indexV] = radius*z;
             normals[indexV++] = z;
 
-            texCoords[indexT++] = j/slices;
+            texCoords[indexT++] = j/slices*2.0;
             texCoords[indexT++] = i/stacks;
         } 
     }

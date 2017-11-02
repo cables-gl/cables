@@ -87,6 +87,7 @@ CGL.Marker=function(cgl)
 CGL.WirePoint=function(cgl,size)
 {
     var buffer = cgl.gl.createBuffer();
+    var vScale=vec3.create();
 
     function bufferData()
     {
@@ -128,7 +129,7 @@ CGL.WirePoint=function(cgl,size)
 
     this.render=function(cgl,size)
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
         vec3.set(vScale, size,size,size);
         mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
@@ -143,7 +144,7 @@ CGL.WirePoint=function(cgl,size)
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
         cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
 
     };
 
