@@ -4,7 +4,6 @@
   * [How to use cables](chapter_readmes/how_to_use_cables/readme.md)
     * [User Interface Walktrough](ui_walkthrough/ui_walkthrough.md)
     * [Keyboard Shortcuts](keys/keys.md)
-
   * [Beginner](chapter_readmes/beginner/readme.md)
     * [Beginner I – Circle](beginner1_circle/beginner1_circle.md)
     * [Beginner II – Transformations](beginner2_transformations/beginner2_transformations.md)
@@ -14,6 +13,7 @@
     * [Image Compositions](image_composition/image_composition.md)
     * [Post-processing 3D scenes](post-processing_3d_scenes/post-processing_3d_scenes.md)
   * [Export / Embedding](chapter_readmes/export/readme.md)
+    * [Export / Local Previewing / Uploading to your Server](dev_embed_webservers/dev_embed_webservers.md)
     * [Embedding](dev_embed/dev_embed.md)
     * [Setting Variables](dev_embed_vars/dev_embed_vars.md)
     * [Calling Functions from Outside](dev_embed_functions/dev_embed_functions.md)
