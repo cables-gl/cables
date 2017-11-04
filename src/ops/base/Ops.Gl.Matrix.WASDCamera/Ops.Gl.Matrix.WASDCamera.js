@@ -42,16 +42,16 @@ render.onTriggered=function()
         outPosZ.set(-posZ.get());
     }
 
-    cgl.pushMvMatrix();
+    cgl.pushViewMatrix();
 
     vec3.set(vPos, -posX.get(),-posY.get(),-posZ.get());
 
-    mat4.rotateX( cgl.mvMatrix ,cgl.mvMatrix,DEG2RAD*rotX.get());
-    mat4.rotateY( cgl.mvMatrix ,cgl.mvMatrix,DEG2RAD*rotY.get());
-    mat4.translate( cgl.mvMatrix ,cgl.mvMatrix,vPos);
+    mat4.rotateX( cgl.vMatrix ,cgl.vMatrix,DEG2RAD*rotX.get());
+    mat4.rotateY( cgl.vMatrix ,cgl.vMatrix,DEG2RAD*rotY.get());
+    mat4.translate( cgl.vMatrix ,cgl.vMatrix,vPos);
 
     trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popViewMatrix();
 };
 
 //--------------

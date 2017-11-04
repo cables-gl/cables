@@ -82,7 +82,6 @@ CGL.Marker=function(cgl)
 
 
 
-// remove this!!!
 
 CGL.WirePoint=function(cgl,size)
 {
@@ -132,6 +131,76 @@ CGL.WirePoint=function(cgl,size)
         cgl.pushModelMatrix();
 
         vec3.set(vScale, size,size,size);
+        mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
+
+        var shader=cgl.getDefaultShader();
+        shader.bind();
+        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
+
+        cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(),buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
+        cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
+
+        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
+        cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
+
+        cgl.popModelMatrix();
+
+    };
+
+    bufferData();
+
+};
+
+
+CGL.WireCube=function(cgl)
+{
+    var buffer = cgl.gl.createBuffer();
+    var vScale=vec3.create();
+
+    function bufferData()
+    {
+        var points=[];
+        var segments=24;
+        var i=0,degInRad=0;
+        var radius=0.5;
+
+
+        points.push(-1,-1, 1);
+        points.push( 1,-1, 1);
+        points.push( 1, 1, 1);
+        points.push(-1, 1, 1);
+        points.push(-1,-1, 1);
+
+        points.push(-1,-1,-1);
+        points.push( 1,-1,-1);
+        points.push( 1, 1,-1);
+        points.push(-1, 1,-1);
+        points.push(-1,-1,-1);
+
+        points.push(-1,-1,-1);
+        points.push(-1, 1,-1);
+        points.push(-1, 1, 1);
+        points.push(-1,-1, 1);
+        points.push(-1,-1,-1);
+
+        points.push(1,-1,-1);
+        points.push(1, 1,-1);
+        points.push(1, 1, 1);
+        points.push(1,-1, 1);
+        points.push(1,-1,-1);
+
+        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
+        cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(points), cgl.gl.STATIC_DRAW);
+        buffer.itemSize = 3;
+        buffer.numItems = points.length/buffer.itemSize;
+    }
+
+
+    this.render=function(cgl,sizeX,sizeY,sizeZ)
+    {
+        cgl.pushModelMatrix();
+
+        vec3.set(vScale, sizeX||1,sizeY||1,sizeZ||1);
         mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
 
         var shader=cgl.getDefaultShader();

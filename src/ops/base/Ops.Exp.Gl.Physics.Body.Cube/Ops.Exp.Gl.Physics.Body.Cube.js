@@ -3,6 +3,9 @@ op.name="BodyCube";
 var exec=op.inFunction("Exec");
 var inMass=op.inValue("Mass");
 
+var doRender=op.inValueBool("Render",true);
+
+
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
@@ -20,8 +23,7 @@ var outZ=op.outValue("Z");
 var outCollision=op.outFunction("Collision");
 
 var cgl=op.patch.cgl;
-
-var m=new CGL.WirePoint(cgl,1);
+var m=null;
 
 exec.onTriggered=render;
 
@@ -33,15 +35,11 @@ posX.onChange=setup;
 posY.onChange=setup;
 posZ.onChange=setup;
 
-
 sizeX.onChange=setup;
 sizeY.onChange=setup;
 sizeZ.onChange=setup;
 
-
-
 var lastWorld=null;
-
 var collided=false;
 
 function setup()
@@ -54,15 +52,12 @@ function setup()
     body = new CANNON.Body(
         {
             mass: inMass.get(), // kg
-            // position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
-            // shape: new CANNON.Box(new CANNON.Vec3(sizeX,sizeY,sizeZ))
-            // shape: new CANNON.Sphere(sizeX.get())
         });
 
+    m=new CGL.WireCube(cgl);
 
     body.addShape( new CANNON.Box(new CANNON.Vec3(sizeX.get(),sizeY.get(),sizeZ.get()) ));
     body.position.set(posX.get(), posY.get(), posZ.get());
-
 
     world.addBody(body);
 
@@ -101,14 +96,14 @@ function render()
         
     quat.invert(q,q);
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     mat4.fromRotationTranslation(trMat,q,vec);
     
     mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
     
     
-    // m.render(cgl,inRadius.get()*2);
+    if(doRender.get() && m)m.render(cgl,sizeX.get(),sizeY.get(),sizeZ.get());
     
     outX.set(body.position.x);
     outY.set(body.position.y);
@@ -122,5 +117,5 @@ function render()
     
     next.trigger();
     
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 }

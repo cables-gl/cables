@@ -50,5 +50,10 @@
         ],
         "name": "Ops.Gl.Matrix.WASDCamera"
     },
-    "summary": "camera controller like in a FPS game  move with WASD keys"
+    "summary": "camera controller like in a FPS game  move with WASD keys",
+    "updated": 1509796056363,
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "cables",
+    "id": "977aa8eb-ec74-4821-b976-50829de2a2cf",
+    "created": 1509795315530
 }
