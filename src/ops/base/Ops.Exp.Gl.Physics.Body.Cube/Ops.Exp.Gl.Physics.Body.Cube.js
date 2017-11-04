@@ -14,6 +14,8 @@ var sizeX=op.inValue("sizeX");
 var sizeY=op.inValue("sizeY");
 var sizeZ=op.inValue("sizeZ");
 
+var inReset=op.inFunctionButton("Reset");
+
 
 var next=op.outFunction("Next");
 var outX=op.outValue("X");
@@ -41,6 +43,11 @@ sizeZ.onChange=setup;
 
 var lastWorld=null;
 var collided=false;
+
+inReset.onTriggered=function()
+{
+    needSetup=true;
+};
 
 function setup()
 {
@@ -115,7 +122,13 @@ function render()
         outCollision.trigger();
     }
     
+    
+    CABLES.physicsCurrentBody=body;
+    
     next.trigger();
+    
+    CABLES.physicsCurrentBody=null;
+
     
     cgl.popModelMatrix();
 }

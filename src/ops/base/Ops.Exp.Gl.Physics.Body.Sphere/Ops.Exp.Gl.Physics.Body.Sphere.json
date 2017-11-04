@@ -1,5 +1,5 @@
 {
-    "updated": 1509793034661,
+    "updated": 1509816941514,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
     "id": "70e756bf-4e2c-4478-8c38-9a7b68b616d6",
@@ -33,6 +33,10 @@
             {
                 "type": "0",
                 "name": "Pos Z"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             }
         ],
         "portsOut": [

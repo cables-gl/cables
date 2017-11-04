@@ -10,6 +10,9 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
+var inReset=op.inFunctionButton("Reset");
+
+
 var next=op.outFunction("Next");
 var outRadius=op.outValue("Out Radius");
 var outX=op.outValue("X");
@@ -37,7 +40,10 @@ var lastWorld=null;
 
 var collided=false;
 
-
+inReset.onTriggered=function()
+{
+    needSetup=true;
+};
 
 function createTetra()
 {
@@ -104,6 +110,7 @@ function render()
 
     if(!body)return; 
 
+
     vec3.set(vec, 
         body.position.x,
         body.position.z,
@@ -134,7 +141,10 @@ function render()
         outCollision.trigger();
     }
     
+    CABLES.physicsCurrentBody=body;
+    
     next.trigger();
     
+    CABLES.physicsCurrentBody=null;
     cgl.popMvMatrix();
 }
