@@ -4,6 +4,8 @@ var exec=op.inFunction("Exec");
 var inMass=op.inValue("Mass");
 var inRadius=op.inValue("Radius");
 
+var doRender=op.inValueBool("Render",true);
+
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
@@ -120,7 +122,7 @@ function render()
     mat4.fromRotationTranslation(trMat,q,vec);
     mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
 
-    m.render(cgl,inRadius.get()*2);
+    if(doRender.get())m.render(cgl,inRadius.get()*2);
     
     outX.set(body.position.x);
     outY.set(body.position.y);

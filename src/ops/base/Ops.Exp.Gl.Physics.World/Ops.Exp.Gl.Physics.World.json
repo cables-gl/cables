@@ -1,5 +1,5 @@
 {
-    "updated": 1509782174250,
+    "updated": 1509782883258,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
     "id": "78989530-a0cd-49e4-bf54-83ce3220c4b5",
@@ -16,6 +16,10 @@
             {
                 "type": "1",
                 "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Default Relaxation"
             }
         ],
         "portsOut": [
