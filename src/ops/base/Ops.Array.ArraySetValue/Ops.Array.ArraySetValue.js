@@ -13,6 +13,7 @@ function updateIndex()
     if(exe.isLinked())return;    
     update();
 }
+
 function update()
 {
     if(!array.get())return;

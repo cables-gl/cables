@@ -11,5 +11,5 @@ function update()
     if(array.get()) value.set( array.get()[index.get()]);
 }
 
-index.onValueChanged=update;
-array.onValueChanged=update;
+index.onChange=update;
+array.onChange=update;

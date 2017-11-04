@@ -26,10 +26,10 @@ function doRender()
 {
     cgl.frameStore.pickingpassNum+=2;
     var currentPickingColor=cgl.frameStore.pickingpassNum;
-
+    
     if(cgl.frameStore.pickingpass)
     {
-        isPicked.set(false);
+        // isPicked.set(false);
 
         pickColorUniformR.setValue(currentPickingColor/255);
         cgl.setShader(shader);
@@ -51,6 +51,8 @@ function doRender()
         else
         {
         }
+        
+        // console.log(cgl.frameStore.pickedColor,currentPickingColor);
 
         next.trigger();
     }

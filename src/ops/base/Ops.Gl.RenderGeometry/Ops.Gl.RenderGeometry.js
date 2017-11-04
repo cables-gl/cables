@@ -12,7 +12,8 @@ var vertNums=op.inValueBool('Vertex Numbers',false);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-vertNums.onChange=geometry.onChange=update;
+vertNums.onChange=
+    geometry.onChange=update;
 
 var mesh=null;
 

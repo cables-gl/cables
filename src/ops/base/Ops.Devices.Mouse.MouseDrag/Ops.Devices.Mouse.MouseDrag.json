@@ -10,6 +10,10 @@
                 "name": "Inertia Movement"
             },
             {
+                "type": "0",
+                "name": "Limit"
+            },
+            {
                 "type": "1",
                 "name": "Reset"
             },
@@ -32,6 +36,10 @@
             {
                 "type": "0",
                 "name": "maxY"
+            },
+            {
+                "type": "0",
+                "name": "Active"
             }
         ],
         "portsOut": [
@@ -54,5 +62,10 @@
         ],
         "name": "Ops.Devices.Mouse.MouseDrag"
     },
-    "summary": "get values by dragging the mouse"
+    "summary": "get values by dragging the mouse",
+    "updated": 1509707866272,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "4aead64d-e909-4500-b7f0-4f4cbb705489",
+    "created": 1509704709217
 }
