@@ -1,0 +1,42 @@
+{
+    "updated": 1509798014549,
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "cables",
+    "id": "af6c3fe2-58a9-4f81-be41-4c21aabffde9",
+    "created": 1509796773993,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Allow Flying"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "isLocked"
+            },
+            {
+                "type": "0",
+                "name": "posX"
+            },
+            {
+                "type": "0",
+                "name": "posY"
+            },
+            {
+                "type": "0",
+                "name": "posZ"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.WASDCamera2"
+    }
+}
