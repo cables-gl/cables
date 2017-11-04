@@ -23,7 +23,7 @@ function setup()
     console.log("world setup");
     world = new CANNON.World();
 
-    world.gravity.set(0,0, -9.82 ); // m/s²
+    world.gravity.set(0,0,-9.82 ); // m/s²
     
     
     // Create a plane
@@ -42,7 +42,7 @@ function setup()
 
 
 var fixedTimeStep = 1.0 / 60.0; // seconds
-var maxSubSteps = 3;
+var maxSubSteps = 13;
 var lastTime;
 
 exec.onTriggered=function()

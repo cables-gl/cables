@@ -1,7 +1,6 @@
 op.name="PhysicsObject";
 
 var exec=op.inFunction("Exec");
-
 var inMass=op.inValue("Mass");
 var inRadius=op.inValue("Radius");
 
@@ -9,22 +8,19 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
-
 var next=op.outFunction("Next");
+var outRadius=op.outValue("Out Radius");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
-
 
 var cgl=op.patch.cgl;
 
 var m=new CGL.WirePoint(cgl,1);
 
-
 exec.onTriggered=render;
 
 var needSetup=true;
-
 var body=null;
 
 inMass.onChange=setup;
@@ -51,10 +47,13 @@ function setup()
 
     lastWorld=world;
     needSetup=false;
+    outRadius.set(inRadius.get());
 }
 
 var vec=vec3.create();
+var q=quat.create();
 
+var trMat=mat4.create();
 function render()
 {
     if(needSetup)setup();
@@ -69,17 +68,27 @@ function render()
         
         );
     
+    quat.set(q,
+        body.quaternion.x,
+        body.quaternion.y,
+        body.quaternion.z,
+        body.quaternion.w);
+    quat.invert(q,q);
+
     cgl.pushMvMatrix();
-    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+
+    mat4.fromRotationTranslation(trMat,q,vec);
+    
+    mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
+    
+    
     m.render(cgl,inRadius.get()*2);
     
-    cgl.popMvMatrix();
-
-
-    // console.log(body.position);
     outX.set(body.position.x);
     outY.set(body.position.y);
     outZ.set(body.position.z);
     
     next.trigger();
+    
+    cgl.popMvMatrix();
 }

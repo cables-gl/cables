@@ -39,9 +39,9 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
 
 float x=1.0;
 float y=1.0;
-    // for(float x = -smpmax; x <= smpmax; ++x)
+    for(float x = -smpmax; x <= smpmax; ++x)
     {
-        // for(float y = -smpmax; y <= smpmax; ++y)
+        for(float y = -smpmax; y <= smpmax; ++y)
         {
             float pcfDepth = texture2D(MOD_shadowMap, coords.xy + vec2(x, y) * texelSize).r; 
             
