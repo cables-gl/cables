@@ -26,8 +26,6 @@ spread.onChange=
     geom.onChange=
     seed.onChange=prepareLater;
 
-
-
 var randoms=[];
 var randomsRot=[];
 

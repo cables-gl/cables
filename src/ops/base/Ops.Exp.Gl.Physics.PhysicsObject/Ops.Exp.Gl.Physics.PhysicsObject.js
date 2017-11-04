@@ -15,6 +15,8 @@ var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
 
+var outCollision=op.outFunction("Collision");
+
 
 var cgl=op.patch.cgl;
 
@@ -35,6 +37,8 @@ posZ.onChange=setup;
 
 var lastWorld=null;
 
+var collided=false;
+
 function setup()
 {
     var world=cgl.frameStore.world;
@@ -48,6 +52,15 @@ function setup()
       shape: new CANNON.Sphere(inRadius.get())
     });
     world.addBody(body);
+
+    body.addEventListener("collide",function(e){
+        collided=true;
+        // collision.trigger();
+        console.log("The sphere just collided with the ground!");
+        console.log("Collided with body:",e.body);
+        console.log("Contact between bodies:",e.contact);
+    });
+
 
     lastWorld=world;
     needSetup=false;
@@ -80,6 +93,12 @@ function render()
     outX.set(body.position.x);
     outY.set(body.position.y);
     outZ.set(body.position.z);
+ 
+     if(collided)
+     {
+        collided=false;
+        outCollision.trigger();
+     }
     
     next.trigger();
 }

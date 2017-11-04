@@ -106,7 +106,6 @@ function onmousemove(e)
         {
             if(kinetic.get())
             {
-
                 var deltaX=(e.clientX-lastX);
                 var deltaY=(clientY-lastY);
 
@@ -184,6 +183,17 @@ function onMouseEnter()
     
 }
 
+
+function ontouchstart(event)
+{
+
+    pressed=true;
+    isPressed.set(true);
+// console.log('touchmove',event);
+    if(event.touches && event.touches.length>0) onmousemove(event.touches[0]);
+};
+
+
 function bind()
 {
     canvas.addEventListener('click', onmouseclick);
@@ -193,9 +203,11 @@ function bind()
     canvas.addEventListener('mouseenter', onMouseEnter);
     canvas.addEventListener('mouseleave', onMouseLeave);
 
-    canvas.addEventListener("touchmove", onmousemove);
-    canvas.addEventListener("touchstart", onMouseDown);
+    canvas.addEventListener("touchmove", ontouchstart);
+    // canvas.addEventListener("touchstart", onMouseDown);
     canvas.addEventListener("touchend", onMouseUp);
+    canvas.addEventListener('touchstart', ontouchstart);
+
 }
 
 function unbind()
@@ -207,6 +219,7 @@ function unbind()
     canvas.removeEventListener('mouseup', onMouseUp);
     canvas.removeEventListener('mouseenter', onMouseEnter);
     canvas.removeEventListener('mouseleave', onMouseLeave);
+    canvas.removeEventListener('touchstart', ontouchstart);
 }
 
 active.onChange=function()

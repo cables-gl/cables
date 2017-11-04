@@ -18,7 +18,7 @@ var pixelRGB = new Uint8Array(4);
 var fb=null;
 var cgl=op.patch.cgl;
 var lastReadPixel=0;
-
+var canceledTouch=false;
 if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
 else
 {
@@ -43,6 +43,7 @@ function renderPickingPass()
 
 function mouseMove(e)
 {
+    
     if(e && e.hasOwnProperty('offsetX')>=0)
     {
         op.x.set(e.offsetX);
@@ -52,7 +53,7 @@ function mouseMove(e)
 
 function updateListeners()
 {
-    cgl.canvas.removeEventListener('mouseleave', ontouchend);
+    cgl.canvas.removeEventListener('mouseleave', mouseleave);
     cgl.canvas.removeEventListener('mousemove', mouseMove);
     cgl.canvas.removeEventListener('touchmove', ontouchmove);
     cgl.canvas.removeEventListener('touchstart', ontouchstart);
@@ -62,7 +63,7 @@ function updateListeners()
 
     if(useMouseCoords.get())
     {
-        cgl.canvas.addEventListener('mouseleave', ontouchend);
+        cgl.canvas.addEventListener('mouseleave', mouseleave);
         cgl.canvas.addEventListener('mousemove', mouseMove);
         cgl.canvas.addEventListener('touchmove', ontouchmove);
         cgl.canvas.addEventListener('touchstart', ontouchstart);
@@ -85,17 +86,33 @@ function fixTouchEvent(touchEvent)
 
 function ontouchstart(event)
 {
-    if(event.touches && event.touches.length>0) mouseMove(fixTouchEvent(event.touches[0]));
+    canceledTouch=false;
+    // console.log("touch START");
+    if(event.touches && event.touches.length>0)
+    {
+        ontouchmove(event);
+        // mouseMove(fixTouchEvent(event.touches[0]));
+    }
 }
 
-function ontouchend(event)
+function mouseleave(event)
 {
     op.x.set(-1000);
     op.y.set(-1000);
 }
 
+function ontouchend(event)
+{
+    canceledTouch=true;
+    op.x.set(-1000);
+    op.y.set(-1000);
+    // console.log("touch END");
+}
+
 function ontouchmove(event)
 {
+    // console.log("touchmove");
+
     if(event.touches && event.touches.length>0)
     {
         mouseMove(fixTouchEvent(event.touches[0]));
@@ -110,10 +127,12 @@ var doRender=function()
         cgl.canvas.style.cursor=cursor.get();
     }
 
-    if(op.enabled.get() && op.x.get()>=0)
+    if(op.enabled.get() && op.x.get()>=0 && !canceledTouch)
     {
         if(CABLES.now()-lastReadPixel>=50)
         {
+            // console.log(op.x.get());
+            
             var minimizeFB=2;
             cgl.resetViewPort();
 
@@ -166,7 +185,9 @@ var doRender=function()
     }
     else
     {
+        cgl.frameStore.pickedColor=-1000;
         op.trigger.trigger();
+        somethingPicked.set(false);
     }
 
 };

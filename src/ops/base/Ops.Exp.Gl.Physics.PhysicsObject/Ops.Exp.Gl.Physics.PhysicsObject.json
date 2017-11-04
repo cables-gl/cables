@@ -1,5 +1,5 @@
 {
-    "updated": 1509664068177,
+    "updated": 1509723085915,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
     "id": "70e756bf-4e2c-4478-8c38-9a7b68b616d6",
@@ -47,6 +47,10 @@
             {
                 "type": "0",
                 "name": "Z"
+            },
+            {
+                "type": "1",
+                "name": "Collision"
             }
         ],
         "name": "Ops.Exp.Gl.Physics.PhysicsObject"

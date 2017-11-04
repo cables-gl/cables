@@ -27,15 +27,11 @@
             {
                 "type": "1",
                 "name": "On Picked"
-            },
-            {
-                "type": "0",
-                "name": "Picked Index"
             }
         ],
         "name": "Ops.Gl.Shader.PickingMaterial"
     },
-    "updated": 1507287182760,
+    "updated": 1509640824599,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "2b58daad-4dde-4edb-af22-03ac55ab06ab",
