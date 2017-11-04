@@ -22,6 +22,11 @@ function setup()
 {
     console.log("world setup");
     world = new CANNON.World();
+    world.broadphase = new CANNON.NaiveBroadphase();
+    world.solver.iterations = 20;
+
+    world.defaultContactMaterial.contactEquationStiffness = 1e7;
+    world.defaultContactMaterial.contactEquationRelaxation = 4;
 
     world.gravity.set(0,0,-9.82 ); // m/s²
     
@@ -42,7 +47,7 @@ function setup()
 
 
 var fixedTimeStep = 1.0 / 60.0; // seconds
-var maxSubSteps = 13;
+var maxSubSteps = 11;
 var lastTime;
 
 exec.onTriggered=function()

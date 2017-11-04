@@ -1,9 +1,9 @@
 {
-    "updated": 1509723085915,
+    "updated": 1509781695974,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
-    "id": "70e756bf-4e2c-4478-8c38-9a7b68b616d6",
-    "created": 1509660444804,
+    "id": "303f6984-6eb5-42a4-ae05-ad561f232a64",
+    "created": 1509779140150,
     "layout": {
         "portsIn": [
             {
@@ -16,10 +16,6 @@
             },
             {
                 "type": "0",
-                "name": "Radius"
-            },
-            {
-                "type": "0",
                 "name": "Pos X"
             },
             {
@@ -29,16 +25,24 @@
             {
                 "type": "0",
                 "name": "Pos Z"
+            },
+            {
+                "type": "0",
+                "name": "sizeX"
+            },
+            {
+                "type": "0",
+                "name": "sizeY"
+            },
+            {
+                "type": "0",
+                "name": "sizeZ"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "Next"
-            },
-            {
-                "type": "0",
-                "name": "Out Radius"
             },
             {
                 "type": "0",
@@ -57,9 +61,6 @@
                 "name": "Collision"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.PhysicsObject"
-    },
-    "libs": [
-        "cannon.js"
-    ]
+        "name": "Ops.Exp.Gl.Physics.Body.Cube"
+    }
 }

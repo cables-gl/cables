@@ -1,4 +1,4 @@
-op.name="PhysicsObject";
+op.name="BodySphere";
 
 var exec=op.inFunction("Exec");
 var inMass=op.inValue("Mass");
@@ -35,6 +35,32 @@ var lastWorld=null;
 
 var collided=false;
 
+
+
+function createTetra()
+{
+    var verts = [new CANNON.Vec3(0,0,0),
+        new CANNON.Vec3(2,0,0),
+        new CANNON.Vec3(0,2,0),
+        new CANNON.Vec3(0,0,2)];
+    var offset = -0.35;
+    for(var i=0; i<verts.length; i++){
+        var v = verts[i];
+        v.x += offset;
+        v.y += offset;
+        v.z += offset;
+    }
+    
+    return new CANNON.ConvexPolyhedron(verts,
+        [
+            [0,3,2], // -x
+            [0,1,3], // -y
+            [0,2,1], // -z
+            [1,2,3], // +xyz
+        ]);
+}
+
+
 function setup()
 {
     var world=cgl.frameStore.world;
@@ -47,14 +73,16 @@ function setup()
       position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
       shape: new CANNON.Sphere(inRadius.get())
     });
+    
+
     world.addBody(body);
 
     body.addEventListener("collide",function(e){
         collided=true;
         // collision.trigger();
-        console.log("The sphere just collided with the ground!");
-        console.log("Collided with body:",e.body);
-        console.log("Contact between bodies:",e.contact);
+        // console.log("The sphere just collided with the ground!");
+        // console.log("Collided with body:",e.body);
+        // console.log("Contact between bodies:",e.contact);
     });
 
 
@@ -78,7 +106,6 @@ function render()
         body.position.x,
         body.position.z,
         body.position.y
-        
         );
     
     quat.set(q,
@@ -91,21 +118,19 @@ function render()
     cgl.pushMvMatrix();
 
     mat4.fromRotationTranslation(trMat,q,vec);
-    
     mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
-    
-    
+
     m.render(cgl,inRadius.get()*2);
     
     outX.set(body.position.x);
     outY.set(body.position.y);
     outZ.set(body.position.z);
  
-     if(collided)
-     {
+    if(collided)
+    {
         collided=false;
         outCollision.trigger();
-     }
+    }
     
     next.trigger();
     

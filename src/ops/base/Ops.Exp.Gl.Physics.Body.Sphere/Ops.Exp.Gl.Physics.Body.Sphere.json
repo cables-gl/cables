@@ -1,0 +1,65 @@
+{
+    "updated": 1509780927596,
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "cables",
+    "id": "70e756bf-4e2c-4478-8c38-9a7b68b616d6",
+    "created": 1509660444804,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "0",
+                "name": "Mass"
+            },
+            {
+                "type": "0",
+                "name": "Radius"
+            },
+            {
+                "type": "0",
+                "name": "Pos X"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y"
+            },
+            {
+                "type": "0",
+                "name": "Pos Z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Out Radius"
+            },
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            },
+            {
+                "type": "0",
+                "name": "Z"
+            },
+            {
+                "type": "1",
+                "name": "Collision"
+            }
+        ],
+        "name": "Ops.Exp.Gl.Physics.Body.Sphere"
+    },
+    "libs": [
+        "cannon.js"
+    ]
+}
