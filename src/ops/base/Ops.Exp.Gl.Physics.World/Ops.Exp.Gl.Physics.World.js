@@ -26,7 +26,7 @@ function setup()
     world.solver.iterations = 20;
 
     world.defaultContactMaterial.contactEquationStiffness = 1e7;
-    world.defaultContactMaterial.contactEquationRelaxation = 15;
+    world.defaultContactMaterial.contactEquationRelaxation = 5;
 
     world.gravity.set(0,0,-9.82 ); // m/s²
     
