@@ -17,5 +17,6 @@
             }
         ],
         "name": "Ops.ValueTrigger"
-    }
+    },
+    "summary": "Sets the output value on trigger (SetValueOnTrigger, change)"
 }
