@@ -1,5 +1,5 @@
 {
-    "updated": 1509816626910,
+    "updated": 1509871101026,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
     "id": "c88e1ca8-df02-42c1-b4fd-ec1892277141",
@@ -21,6 +21,10 @@
             {
                 "type": "0",
                 "name": "Velocity Z"
+            },
+            {
+                "type": "1",
+                "name": "Set"
             }
         ],
         "portsOut": [

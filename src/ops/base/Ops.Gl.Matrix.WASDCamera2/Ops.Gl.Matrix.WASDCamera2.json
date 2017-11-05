@@ -1,5 +1,5 @@
 {
-    "updated": 1509798014549,
+    "updated": 1509872131491,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
     "id": "af6c3fe2-58a9-4f81-be41-4c21aabffde9",
@@ -35,6 +35,26 @@
             {
                 "type": "0",
                 "name": "posZ"
+            },
+            {
+                "type": "1",
+                "name": "Mouse Left"
+            },
+            {
+                "type": "1",
+                "name": "Mouse Right"
+            },
+            {
+                "type": "0",
+                "name": "Dir X"
+            },
+            {
+                "type": "0",
+                "name": "Dir Y"
+            },
+            {
+                "type": "0",
+                "name": "Dir Z"
             }
         ],
         "name": "Ops.Gl.Matrix.WASDCamera2"

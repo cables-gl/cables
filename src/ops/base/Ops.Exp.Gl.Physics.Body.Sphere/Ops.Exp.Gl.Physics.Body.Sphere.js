@@ -32,9 +32,9 @@ var body=null;
 
 inMass.onChange=setup;
 inRadius.onChange=setup;
-posX.onChange=setup;
-posY.onChange=setup;
-posZ.onChange=setup;
+// posX.onChange=setup;
+// posY.onChange=setup;
+// posZ.onChange=setup;
 
 var lastWorld=null;
 

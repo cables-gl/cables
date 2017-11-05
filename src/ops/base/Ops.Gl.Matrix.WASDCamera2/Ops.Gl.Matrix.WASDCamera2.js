@@ -15,6 +15,14 @@ var outPosX=op.addOutPort(new Port(op,"posX",OP_PORT_TYPE_VALUE));
 var outPosY=op.addOutPort(new Port(op,"posY",OP_PORT_TYPE_VALUE));
 var outPosZ=op.addOutPort(new Port(op,"posZ",OP_PORT_TYPE_VALUE));
 
+var outMouseDown=op.outFunction("Mouse Left");
+var outMouseDownRight=op.outFunction("Mouse Right");
+
+var outDirX=op.outValue("Dir X");
+var outDirY=op.outValue("Dir Y");
+var outDirZ=op.outValue("Dir Z");
+
+
 var rotX=0;
 var rotY=0;
 
@@ -25,6 +33,9 @@ var posZ=0;
 var cgl=op.patch.cgl;
 var DEG2RAD=3.14159/180.0;
 var viewMatrix = mat4.create();
+
+
+
 
 
 render.onTriggered=function()
@@ -47,10 +58,26 @@ render.onTriggered=function()
 
     mat4.rotateX( cgl.vMatrix ,cgl.vMatrix,DEG2RAD*rotX);
     mat4.rotateY( cgl.vMatrix ,cgl.vMatrix,DEG2RAD*rotY);
+    
     mat4.translate( cgl.vMatrix ,cgl.vMatrix,vPos);
 
     trigger.trigger();
     cgl.popViewMatrix();
+    
+    // for dir vec
+    mat4.identity(viewMatrix);
+    mat4.rotateX( viewMatrix ,viewMatrix,DEG2RAD*rotX);
+    mat4.rotateY( viewMatrix ,viewMatrix,DEG2RAD*rotY);
+    mat4.transpose(viewMatrix,viewMatrix);
+    
+    var dir=vec4.create();
+    vec4.transformMat4(dir,[0,0,1,1],viewMatrix);
+    
+    vec4.normalize(dir,dir);
+    outDirX.set(-dir[0]);
+    outDirY.set(-dir[1]);
+    outDirZ.set(-dir[2]);
+
 };
 
 //--------------
@@ -112,9 +139,13 @@ function calcCameraMovement()
 
 var mulSpeed=0.5;
 
+
     speedx = camMovementXComponent*mulSpeed;
     speedy = camMovementYComponent*mulSpeed;
     speedz = camMovementZComponent*mulSpeed;
+    
+
+
 
     if (speedx > movementSpeedFactor) speedx = movementSpeedFactor;
     if (speedx < -movementSpeedFactor) speedx = -movementSpeedFactor;
@@ -140,12 +171,21 @@ function moveCallback(e)
 
 var canvas = document.getElementById("glcanvas");
 
+function mouseDown(e)
+{
+    if(e.which==3) outMouseDownRight.trigger();
+        else outMouseDown.trigger();
+    
+}
+
+
 function lockChangeCallback(e)
 {
     if (document.pointerLockElement === canvas ||
             document.mozPointerLockElement === canvas ||
             document.webkitPointerLockElement === canvas)
     {
+        document.addEventListener("mousedown", mouseDown, false);
         document.addEventListener("mousemove", moveCallback, false);
         document.addEventListener("keydown", keyDown, false);
         document.addEventListener("keyup", keyUp, false);
@@ -154,6 +194,7 @@ function lockChangeCallback(e)
     }
     else
     {
+        document.removeEventListener("mousedown", mouseDown, false);
         document.removeEventListener("mousemove", moveCallback, false);
         document.removeEventListener("keydown", keyDown, false);
         document.removeEventListener("keyup", keyUp, false);
@@ -187,6 +228,7 @@ function move()
     posX=posX+speedx;
     posY=posY+speedy;
     posZ=posZ+speedz;
+    
 
     lastMove = window.performance.now();
 }
