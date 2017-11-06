@@ -33,26 +33,67 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
 {
 
     vec2 texelSize = vec2(1.0) / 512.0;
-    // bias=0.001;
-    float smpmax=MOD_smpls/2.0;
-    float count=0.0;
+    // float smpmax=MOD_smpls/4.0;
+    // float count=0.0;
+    // float x=1.0;
+    // float y=1.0;
 
-float x=1.0;
-float y=1.0;
-    for(float x = -smpmax; x <= smpmax; ++x)
-    {
-        for(float y = -smpmax; y <= smpmax; ++y)
-        {
-            float pcfDepth = texture2D(MOD_shadowMap, coords.xy + vec2(x, y) * texelSize).r; 
+    // for(float x = -smpmax; x <= smpmax; ++x)
+    // {
+    //     for(float y = -smpmax; y <= smpmax; ++y)
+    //     {
+    //         float pcfDepth = texture2D(MOD_shadowMap, coords.xy + vec2(x, y) * texelSize).r; 
+
+    //         shadow += MOD_positionFromLight.z + MOD_bias > pcfDepth ? 1.0 : 0.0;
+
+
+    //         shadow/=1.0;
             
-            shadow += MOD_positionFromLight.z + MOD_bias > pcfDepth ? 1.0 : 0.0;
-            count+=1.0;
-        }
+    //         count+=1.0;
+    //     }
+    // }
+    // shadow /= count;
+    // shadow-=0.3;
+    // shadow=1.0-(shadow*MOD_strength*MOD_amount);
+    
+    shadow=0.0;
+    for(float x = 0.0; x < 8.0; ++x)
+    {
+
+        int index = int(21.0* 
+            MOD_random(
+                floor(MOD_positionFromLight.xyz*110.0),
+                int(x)))%16;
+
+        float pcfDepth = texture2D(
+            MOD_shadowMap, 
+            coords.xy + (poissonDisk[index]/1710.0)
+            ).r; 
+        float shadowPixel = MOD_positionFromLight.z + MOD_bias > pcfDepth ? 1.0 : 0.0;
+
+        // float intensity = (1.0-
+        //     texture2D( 
+        //         MOD_shadowMap, 
+        //         vec2(
+        //             coords.xy + poissonDisk[index]/120.0
+        //              )).r);
+        
+        shadow+=((1.0/(MOD_smpls+1.0))*shadowPixel);
+        
     }
-    shadow /= count;
-    shadow-=0.3;
     shadow=1.0-(shadow*MOD_strength*MOD_amount);
+    
+    
+    
+    
+    
+    
 }
+
+
+
+
+
 
 
 col.rgb*=shadow;

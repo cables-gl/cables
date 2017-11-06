@@ -18,7 +18,7 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'MOD_positionFromLight=MOD_lightMVP*( modelMatrix*pos);'
+    .endl()+'MOD_positionFromLight=MOD_lightMVP*(modelMatrix*pos);'
     .endl();
 
 var srcHeadFrag=attachments.shadow_head_frag;
@@ -75,6 +75,7 @@ op.render.onTriggered=function()
             moduleVert.lightMVP=new CGL.Uniform(shader,'m4',moduleVert.prefix+'lightMVP',mat4.create());
             moduleFrag.shadowMap=new CGL.Uniform(shader,'t',moduleFrag.prefix+'shadowMap',5);
             moduleFrag.strength=new CGL.Uniform(shader,'f',moduleFrag.prefix+'strength',0.5);
+            moduleFrag.noise=new CGL.Uniform(shader,'i',moduleFrag.prefix+'noise',1);
             moduleFrag.samples=new CGL.Uniform(shader,'f',moduleFrag.prefix+'smpls',4);
             moduleFrag.bias=new CGL.Uniform(shader,'f',moduleFrag.prefix+'bias',0);
         }
@@ -92,6 +93,7 @@ op.render.onTriggered=function()
         var texSlot=moduleVert.num+5;
         
         var shadow=cgl.frameStore.shadow;
+        moduleFrag.noise.setValue(shadow.noise||0);
         moduleFrag.strength.setValue(shadow.strength);
         moduleFrag.samples.setValue(shadow.samples);
         moduleFrag.bias.setValue(shadow.bias);

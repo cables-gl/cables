@@ -11,8 +11,10 @@ var samples=op.inValueInt("Samples",4);
 var polyOff=op.inValueInt("Poly Offset",0);
 
 var bias=op.inValueInt("Bias",0.001);
-
 var lookat=op.inArray("Look at");
+
+var noise=op.inValueBool("Noisy",true);
+
 
 var next=op.outFunction("Next");
 
@@ -102,7 +104,7 @@ function renderPickingPass()
 
     // mat4.mul(cgl.pMatrix);
     
-    // g_mvpMatrix.set(viewProjMatrix);
+    // g_mvpMatrix.set(viewProjMatrix);cu
     // g_mvpMatrix.multiply(g_modelMatrix);
 
 
@@ -148,6 +150,7 @@ var doRender=function()
     cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
 
+    shadowObj.noise=noise.get();
     shadowObj.strength=strength.get();
     shadowObj.samples=Math.max(1,samples.get());
     shadowObj.bias=bias.get();

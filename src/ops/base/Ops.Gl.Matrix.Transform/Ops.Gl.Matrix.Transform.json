@@ -1,5 +1,5 @@
 {
-    "summary": "Transform objects in 3d space.",
+    "summary": "Transform (rotate) objects in 3d space.",
     "layout": {
         "portsIn": [
             {
