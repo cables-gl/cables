@@ -11,6 +11,8 @@ var samples=op.inValueInt("Samples",4);
 var polyOff=op.inValueInt("Poly Offset",0);
 
 var bias=op.inValueInt("Bias",0.001);
+var znear=op.inValueInt("Z Near",0.1);
+var zfar=op.inValueInt("Z Far",300);
 var lookat=op.inArray("Look at");
 
 var showMapArea=op.inValueBool("Show Map Area",false);
@@ -75,15 +77,15 @@ function renderPickingPass()
 
     
 
-    var ratio=areaSize.get();
+    var size=areaSize.get();
     // mat4.perspective(cgl.pMatrix,45, 1, 0.1, 100.0);
     mat4.ortho(cgl.pMatrix,
-        1*ratio, 
-        -1*ratio,  
-        1*ratio, 
-        -1*ratio, 
-        0.01,
-        100
+        1*size, 
+        -1*size,  
+        1*size, 
+        -1*size, 
+        znear.get(),
+        zfar.get()
         );
 
     mat4.lookAt(cgl.vMatrix, vEye, vCenter, vUp);
