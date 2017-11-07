@@ -12,6 +12,7 @@ CGL.Texture=function(__cgl,options)
     this.width = 0;
     this.height = 0;
     this.flip = true;
+    this.shadowMap=false;
     this.filter = CGL.Texture.FILTER_NEAREST;
     this.wrap = CGL.Texture.CLAMP_TO_EDGE;
     this.texTarget= this._cgl.gl.TEXTURE_2D;
@@ -32,6 +33,7 @@ CGL.Texture=function(__cgl,options)
         if("wrap" in options) this.wrap=options.wrap;
         if("unpackAlpha" in options) this.unpackAlpha=options.unpackAlpha;
         if("flip" in options) this.flip=options.flip;
+        if("shadowMap" in options) this.shadowMap=options.shadowMap;
     }
     else
     {
@@ -257,6 +259,15 @@ CGL.Texture.prototype._setFilter=function()
     {
         this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     }
+
+    if(this.shadowMap)
+    {
+        console.log("shadowmap tex");
+        this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_MODE, this._cgl.gl.COMPARE_REF_TO_TEXTURE);
+        this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_FUNC, this._cgl.gl.LEQUAL);
+    
+    }
+    
 
     if( this._cgl.glVersion==1 && !this.isPowerOfTwo() )
     {

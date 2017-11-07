@@ -29,16 +29,21 @@ CGL.Framebuffer2=function(cgl,w,h,options)
         this._options.multisamplingSamples=2;
     }
 
-
     this._texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":this._options.isFloatingPointTexture,
             "filter":CGL.Texture.FILTER_LINEAR
+            
         });
+
+console.log('fb shadowm ',this._options.shadowMap||false);
+
 
     this._textureDepth=new CGL.Texture(cgl,
         {
-            "isDepthTexture":true
+            "isDepthTexture":true,
+            "filter":CGL.Texture.FILTER_LINEAR,
+            "shadowMap":this._options.shadowMap||false
         });
 
     this.setSize(w||512 ,h||512);
