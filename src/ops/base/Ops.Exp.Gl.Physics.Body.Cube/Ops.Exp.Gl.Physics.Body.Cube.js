@@ -10,9 +10,9 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
-var sizeX=op.inValue("sizeX");
-var sizeY=op.inValue("sizeY");
-var sizeZ=op.inValue("sizeZ");
+var sizeX=op.inValue("sizeX",1);
+var sizeY=op.inValue("sizeY",1);
+var sizeZ=op.inValue("sizeZ",1);
 
 var inReset=op.inFunctionButton("Reset");
 
@@ -110,7 +110,7 @@ function render()
     mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
     
     
-    if(doRender.get() && m)m.render(cgl,sizeX.get(),sizeY.get(),sizeZ.get());
+    if(doRender.get() && m)m.render(cgl,sizeX.get(),sizeZ.get(),sizeY.get());
     
     outX.set(body.position.x);
     outY.set(body.position.y);

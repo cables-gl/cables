@@ -84,9 +84,19 @@ function rebuild()
             tc.push( c/numColumns );
             tc.push( 1.0-r/numRows );
 
-            norms.push(0);
-            norms.push(0);
-            norms.push(-1);
+            if(axis.get()=='xz')
+            {
+                norms.push(0);
+                norms.push(1);
+                norms.push(0);
+            }
+
+            if(axis.get()=='xy')
+            {
+                norms.push(0);
+                norms.push(0);
+                norms.push(-1);
+            }
         }
     }
     
@@ -115,7 +125,7 @@ function rebuild()
     geom.texCoords=tc;
     geom.verticesIndices=indices;
     geom.vertexNormals=norms;
-    geom.calculateNormals({"forceZUp":true});
+    // geom.calculateNormals({"forceZUp":true});
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);

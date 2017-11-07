@@ -18,13 +18,11 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'MOD_positionFromLight=MOD_lightMVP*( modelMatrix*pos);'
+    .endl()+'MOD_positionFromLight=MOD_lightMVP*(modelMatrix*pos);'
     .endl();
 
 var srcHeadFrag=attachments.shadow_head_frag;
 var srcBodyFrag=attachments.shadow_body_frag;
-
-
 
 var moduleFrag=null;
 var moduleVert=null;
@@ -75,8 +73,10 @@ op.render.onTriggered=function()
             moduleVert.lightMVP=new CGL.Uniform(shader,'m4',moduleVert.prefix+'lightMVP',mat4.create());
             moduleFrag.shadowMap=new CGL.Uniform(shader,'t',moduleFrag.prefix+'shadowMap',5);
             moduleFrag.strength=new CGL.Uniform(shader,'f',moduleFrag.prefix+'strength',0.5);
+            moduleFrag.showMapArea=new CGL.Uniform(shader,'f',moduleFrag.prefix+'showMapArea',1);
             moduleFrag.samples=new CGL.Uniform(shader,'f',moduleFrag.prefix+'smpls',4);
             moduleFrag.bias=new CGL.Uniform(shader,'f',moduleFrag.prefix+'bias',0);
+            moduleFrag.mapsize=new CGL.Uniform(shader,'f',moduleFrag.prefix+'mapsize',512);
         }
     
     
@@ -92,6 +92,8 @@ op.render.onTriggered=function()
         var texSlot=moduleVert.num+5;
         
         var shadow=cgl.frameStore.shadow;
+        moduleFrag.mapsize.setValue(shadow.mapsize);
+        moduleFrag.showMapArea.setValue(shadow.showMapArea?0.7:0);
         moduleFrag.strength.setValue(shadow.strength);
         moduleFrag.samples.setValue(shadow.samples);
         moduleFrag.bias.setValue(shadow.bias);

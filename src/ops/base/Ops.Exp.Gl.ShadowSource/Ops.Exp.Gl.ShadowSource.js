@@ -11,8 +11,12 @@ var samples=op.inValueInt("Samples",4);
 var polyOff=op.inValueInt("Poly Offset",0);
 
 var bias=op.inValueInt("Bias",0.001);
-
+var znear=op.inValueInt("Z Near",0.1);
+var zfar=op.inValueInt("Z Far",300);
 var lookat=op.inArray("Look at");
+
+var showMapArea=op.inValueBool("Show Map Area",false);
+
 
 var next=op.outFunction("Next");
 
@@ -32,7 +36,12 @@ if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,32,32);
 else 
 {
     console.log("new framebuffer...");
-    fb=new CGL.Framebuffer2(cgl,32,32,{multisampling:true,isFloatingPointTexture:true});
+    fb=new CGL.Framebuffer2(cgl,32,32,{
+        multisampling:true,
+        isFloatingPointTexture:true,
+        shadowMap:true
+        
+    });
 }
 setSize();
 
@@ -64,20 +73,19 @@ function renderPickingPass()
         vec3.set(vEye, la[0],la[1],la[2]);
         vec3.set(vCenter, la[3],la[4],la[5]+0.00001);
         vec3.set(vUp, la[6],la[7],la[8]);
-        
     }
 
     
 
-    var ratio=areaSize.get();
+    var size=areaSize.get();
     // mat4.perspective(cgl.pMatrix,45, 1, 0.1, 100.0);
     mat4.ortho(cgl.pMatrix,
-        1*ratio, 
-        -1*ratio,  
-        1*ratio, 
-        -1*ratio, 
-        0.01,
-        100
+        1*size, 
+        -1*size,  
+        1*size, 
+        -1*size, 
+        znear.get(),
+        zfar.get()
         );
 
     mat4.lookAt(cgl.vMatrix, vEye, vCenter, vUp);
@@ -102,7 +110,7 @@ function renderPickingPass()
 
     // mat4.mul(cgl.pMatrix);
     
-    // g_mvpMatrix.set(viewProjMatrix);
+    // g_mvpMatrix.set(viewProjMatrix);cu
     // g_mvpMatrix.multiply(g_modelMatrix);
 
 
@@ -148,6 +156,9 @@ var doRender=function()
     cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
 
+
+    shadowObj.mapsize=mapSize.get();
+    shadowObj.showMapArea=showMapArea.get();
     shadowObj.strength=strength.get();
     shadowObj.samples=Math.max(1,samples.get());
     shadowObj.bias=bias.get();
