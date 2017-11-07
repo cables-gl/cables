@@ -569,12 +569,17 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
     if(stopwatch)stopwatch.stop('add ops..');
+
+    var reqs=new CABLES.Requirements(this);
+    
+
     // console.log('add ops ',self.config.glCanvasId);
     // add ops...
     for (var iop in obj.ops) {
 
         var start=CABLES.now();
         var op = this.addOp(obj.ops[iop].objName, obj.ops[iop].uiAttribs);
+        reqs.checkOp(op);
 
         if (op) {
             op.id = obj.ops[iop].id;
@@ -662,6 +667,9 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
     if(stopwatch)stopwatch.stop('finished');
+
+
+
 
     this.loading.finished(loadingId);
 
