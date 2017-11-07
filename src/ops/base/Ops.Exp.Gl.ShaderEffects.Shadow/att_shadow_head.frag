@@ -1,4 +1,9 @@
+
+// precision lowp sampler2DShadow;
+// UNI sampler2DShadow MOD_shadowMap;
+
 UNI sampler2D MOD_shadowMap;
+
 IN vec4 MOD_positionFromLight;
 UNI float MOD_strength;
 UNI float MOD_smpls;
@@ -11,6 +16,12 @@ float MOD_random(vec3 seed, int i){
 	float dot_product = dot(seed4, vec4(12.9898,78.233,45.164,94.673));
 	return fract(sin(dot_product) * 43758.5453);
 }
+
+float MOD_random2(vec2 co)
+{
+   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 437511.5453);
+}
+
 
 vec2 poissonDisk[16] = vec2[]( 
    vec2( -0.94201624, -0.39906216 ), 

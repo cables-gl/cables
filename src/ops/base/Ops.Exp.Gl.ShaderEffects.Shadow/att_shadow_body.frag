@@ -1,3 +1,5 @@
+//http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/
+
 
 // vec3 shadowCoord = (MOD_positionFromLight.xyz/MOD_positionFromLight.w)/2.0 + 0.5;
 // vec4 texDepth = texture2D(MOD_shadowMap, shadowCoord.xy);
@@ -13,7 +15,7 @@ vec3 coords = MOD_positionFromLight.xyz / MOD_positionFromLight.w;
 // coords.x = (0.5 * coords.x) + 0.5;
 // coords.y = (0.5 * coords.y) + 0.5;
 
-vec4 texDepth = texture2D(MOD_shadowMap, coords.xy);
+// vec4 texDepth = texture2D(MOD_shadowMap, coords.xy);
 
 // col.r=MOD_positionFromLight.x;
 
@@ -32,7 +34,7 @@ float bias = 0.001;
 if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
 {
 
-    vec2 texelSize = vec2(1.0) / 512.0;
+    vec2 texelSize = vec2(1.0) / 1024.0;
     // float smpmax=MOD_smpls/4.0;
     // float count=0.0;
     // float x=1.0;
@@ -56,19 +58,22 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
     // shadow-=0.3;
     // shadow=1.0-(shadow*MOD_strength*MOD_amount);
     
+    
+    
     shadow=0.0;
     for(float x = 0.0; x < 8.0; ++x)
     {
 
-        int index = int(21.0* 
+        int index = int(abs(16.0*
             MOD_random(
-                floor(MOD_positionFromLight.xyz*110.0),
-                int(x)))%16;
+                floor(MOD_positionFromLight.xyz*510.0),
+                int(x))))%16;
 
         float pcfDepth = texture2D(
             MOD_shadowMap, 
-            coords.xy + (poissonDisk[index]/1710.0)
+            coords.xy + (poissonDisk[index]/400.0)
             ).r; 
+            
         float shadowPixel = MOD_positionFromLight.z + MOD_bias > pcfDepth ? 1.0 : 0.0;
 
         // float intensity = (1.0-
@@ -78,10 +83,15 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
         //             coords.xy + poissonDisk[index]/120.0
         //              )).r);
         
-        shadow+=((1.0/(MOD_smpls+1.0))*shadowPixel);
-        
+        shadow+=( (1.0/8.0)*shadowPixel);
     }
+    
     shadow=1.0-(shadow*MOD_strength*MOD_amount);
+
+
+    // float shadowPixel=texture2D(MOD_shadowMap,MOD_positionFromLight.xyz);
+
+    // shadow=shadowPixel;//(1.0-(shadow*MOD_strength*MOD_amount));
     
     
     
