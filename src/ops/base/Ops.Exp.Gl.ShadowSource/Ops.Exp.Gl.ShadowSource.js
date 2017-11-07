@@ -13,7 +13,7 @@ var polyOff=op.inValueInt("Poly Offset",0);
 var bias=op.inValueInt("Bias",0.001);
 var lookat=op.inArray("Look at");
 
-var noise=op.inValueBool("Noisy",true);
+var showMapArea=op.inValueBool("Show Map Area",false);
 
 
 var next=op.outFunction("Next");
@@ -156,7 +156,7 @@ var doRender=function()
 
 
     shadowObj.mapsize=mapSize.get();
-    shadowObj.noise=noise.get();
+    shadowObj.showMapArea=showMapArea.get();
     shadowObj.strength=strength.get();
     shadowObj.samples=Math.max(1,samples.get());
     shadowObj.bias=bias.get();
