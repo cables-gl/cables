@@ -78,6 +78,7 @@ op.render.onTriggered=function()
             moduleFrag.noise=new CGL.Uniform(shader,'i',moduleFrag.prefix+'noise',1);
             moduleFrag.samples=new CGL.Uniform(shader,'f',moduleFrag.prefix+'smpls',4);
             moduleFrag.bias=new CGL.Uniform(shader,'f',moduleFrag.prefix+'bias',0);
+            moduleFrag.mapsize=new CGL.Uniform(shader,'f',moduleFrag.prefix+'mapsize',512);
         }
     
     
@@ -93,6 +94,7 @@ op.render.onTriggered=function()
         var texSlot=moduleVert.num+5;
         
         var shadow=cgl.frameStore.shadow;
+        moduleFrag.mapsize.setValue(shadow.mapsize);
         moduleFrag.noise.setValue(shadow.noise||0);
         moduleFrag.strength.setValue(shadow.strength);
         moduleFrag.samples.setValue(shadow.samples);

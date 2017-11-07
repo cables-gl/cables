@@ -8,7 +8,7 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
 
     for(float x = 0.0; x < MOD_smpls; ++x)
     {
-        vec3 shadowCoord=vec3(coords.xy+(poissonDisk[int(x)]/1000.0), (coords.z-MOD_bias)/MOD_positionFromLight.w);
+        vec3 shadowCoord=vec3(coords.xy+( samples[int(x)]/(MOD_mapsize*2.0) ), (coords.z-MOD_bias)/MOD_positionFromLight.w);
 
         float shadowPixel=texture2D(MOD_shadowMap,shadowCoord);
 

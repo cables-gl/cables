@@ -71,7 +71,6 @@ function renderPickingPass()
         vec3.set(vEye, la[0],la[1],la[2]);
         vec3.set(vCenter, la[3],la[4],la[5]+0.00001);
         vec3.set(vUp, la[6],la[7],la[8]);
-        
     }
 
     
@@ -155,6 +154,8 @@ var doRender=function()
     cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
 
+
+    shadowObj.mapsize=mapSize.get();
     shadowObj.noise=noise.get();
     shadowObj.strength=strength.get();
     shadowObj.samples=Math.max(1,samples.get());
