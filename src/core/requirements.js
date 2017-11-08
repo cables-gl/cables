@@ -11,17 +11,23 @@ CABLES.Requirements=function(patch)
 CABLES.Requirements.MIDI=0;
 CABLES.Requirements.POINTERLOCK=1;
 CABLES.Requirements.WEBAUDIO=2;
+CABLES.Requirements.WEBGL2=3;
 
 CABLES.Requirements.infos=[];
 CABLES.Requirements.infos[CABLES.Requirements.POINTERLOCK]={ title:"pointerLock",caniuse:"https://caniuse.com/#search=pointerlock" }
-CABLES.Requirements.infos[CABLES.Requirements.MIDI]={ title:"midi api",caniuse:"https://caniuse.com/#search=midi" }
+CABLES.Requirements.infos[CABLES.Requirements.MIDI]={ title:"midi API",caniuse:"https://caniuse.com/#search=midi" }
 CABLES.Requirements.infos[CABLES.Requirements.WEBAUDIO]={ title:"web audio",caniuse:"https://caniuse.com/#search=webaudio" }
+CABLES.Requirements.infos[CABLES.Requirements.WEBGL2]={ title:"WebGL 2" }
 
-CABLES.Requirements.prototype.checkRequirement=function(which)
+CABLES.Requirements.prototype.checkRequirement=function(which,op)
 {
     this.result=[];
     switch(which)
     {
+        
+        case CABLES.Requirements.WEBGL2:
+            return op.patch.cgl.glVersion>=2;
+        break;
         case CABLES.Requirements.POINTERLOCK:
             return "exitPointerLock" in document;
         break;
@@ -48,12 +54,14 @@ CABLES.Requirements.prototype.checkOp=function(op)
             var reqId=op.requirements[j];
             if(!this.result[reqId])
             {
-                var success=this.checkRequirement(reqId);
+                var success=this.checkRequirement(reqId,op);
                 
                 if(!success)
                 {
                     if(CABLES.patch.cgl && CABLES.patch.cgl.canvas)CABLES.patch.cgl.canvas.remove();
-                    document.writeln('<pre>browser does not meet requirement: <a href="'+CABLES.Requirements.infos[reqId].caniuse+'" target="_blank">'+CABLES.Requirements.infos[reqId].title+'</a></pre>');
+                    var title=CABLES.Requirements.infos[reqId].title;
+                    if(CABLES.Requirements.infos[reqId].caniuse) title='<a href="'+CABLES.Requirements.infos[reqId].caniuse+'" target="_blank">'+CABLES.Requirements.infos[reqId].title+'</a>';
+                    document.writeln('<pre>browser does not meet requirement: '+title+'</pre>');
                     console.error("browser does not meet requirement: "+CABLES.Requirements.infos[reqId].title);
                     throw 'this browser does not meet requirement: '+CABLES.Requirements.infos[reqId].title;
                 }
