@@ -74,7 +74,7 @@ op.render.onTriggered=function()
             moduleFrag.shadowMap=new CGL.Uniform(shader,'t',moduleFrag.prefix+'shadowMap',5);
             moduleFrag.strength=new CGL.Uniform(shader,'f',moduleFrag.prefix+'strength',0.5);
             moduleFrag.showMapArea=new CGL.Uniform(shader,'f',moduleFrag.prefix+'showMapArea',1);
-            moduleFrag.samples=new CGL.Uniform(shader,'f',moduleFrag.prefix+'smpls',4);
+            // moduleFrag.samples=new CGL.Uniform(shader,'f',moduleFrag.prefix+'smpls',4);
             moduleFrag.bias=new CGL.Uniform(shader,'f',moduleFrag.prefix+'bias',0);
             moduleFrag.mapsize=new CGL.Uniform(shader,'f',moduleFrag.prefix+'mapsize',512);
         }
@@ -95,7 +95,13 @@ op.render.onTriggered=function()
         moduleFrag.mapsize.setValue(shadow.mapsize);
         moduleFrag.showMapArea.setValue(shadow.showMapArea?0.7:0);
         moduleFrag.strength.setValue(shadow.strength);
-        moduleFrag.samples.setValue(shadow.samples);
+        // moduleFrag.samples.setValue(shadow.samples);
+        if(shadow.samples!=moduleFrag.samples)
+        {
+            moduleFrag.samples=shadow.samples;
+            shader.define("SHADOW_NUM_SAMPLES",shadow.samples+0.01);
+            
+        }
         moduleFrag.bias.setValue(shadow.bias);
 
         cgl.gl.activeTexture(cgl.gl.TEXTURE5);

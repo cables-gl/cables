@@ -10,6 +10,12 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
+var dirX=op.inValue("dir X");
+var dirY=op.inValue("dir Y");
+var dirZ=op.inValue("dir Z");
+
+var speed=op.inValue("Speed");
+
 var inReset=op.inFunctionButton("Reset");
 var inSpawn=op.inFunctionButton("Spawn");
 
@@ -64,8 +70,12 @@ function spawn()
     });
 
 
-    var velo=3;
-    body.velocity.set(Math.random()*velo,Math.random()*velo,Math.random()*velo);
+    var velo=speed.get();
+    // body.velocity.set(Math.random()*velo,Math.random()*velo,Math.random()*velo);
+    body.velocity.set(
+        dirX.get()*velo,
+        dirY.get()*velo,
+        dirZ.get()*velo);
 
     bodies.push(body);
     world.addBody(body);

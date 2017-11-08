@@ -32,8 +32,6 @@ function reload()
     var f=CABLES.ajax;
     if(jsonp.get())f=CABLES.jsonp;
 
-
-
     f(
         op.patch.getFilePath(filename.get()),
         function(err,_data,xhr)

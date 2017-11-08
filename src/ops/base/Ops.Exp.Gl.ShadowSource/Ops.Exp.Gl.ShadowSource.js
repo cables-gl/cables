@@ -140,38 +140,45 @@ var shadowObj={};
 
 var doRender=function()
 {
-    var minimizeFB=8;
-
-    cgl.gl.enable(cgl.gl.CULL_FACE);
-    cgl.gl.cullFace(cgl.gl.FRONT);
-
+    if(cgl.glVersion==2)
+    {
+        var minimizeFB=8;
     
-    cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-    cgl.gl.polygonOffset(polyOff.get(),polyOff.get());
-
-    cgl.gl.colorMask(false,false,false,false);
-    renderPickingPass();
-    cgl.gl.colorMask(true,true,true,true);
+        cgl.gl.enable(cgl.gl.CULL_FACE);
+        cgl.gl.cullFace(cgl.gl.FRONT);
     
-    cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
-
-
-
-    shadowObj.mapsize=mapSize.get();
-    shadowObj.showMapArea=showMapArea.get();
-    shadowObj.strength=strength.get();
-    shadowObj.samples=Math.max(1,samples.get());
-    shadowObj.bias=bias.get();
-    shadowObj.shadowMap=fb.getTextureDepth();
-    cgl.frameStore.shadow=shadowObj;
+        
+        cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+        cgl.gl.polygonOffset(polyOff.get(),polyOff.get());
     
-    cgl.gl.cullFace(cgl.gl.BACK);
-
-    next.trigger();
-    cgl.frameStore.shadow=null;
-
-    cgl.gl.disable(cgl.gl.CULL_FACE);
-
+        cgl.gl.colorMask(false,false,false,false);
+        renderPickingPass();
+        cgl.gl.colorMask(true,true,true,true);
+        
+        cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
+    
+    
+    
+        shadowObj.mapsize=mapSize.get();
+        shadowObj.showMapArea=showMapArea.get();
+        shadowObj.strength=strength.get();
+        shadowObj.samples=Math.max(1,samples.get());
+        shadowObj.bias=bias.get();
+        shadowObj.shadowMap=fb.getTextureDepth();
+        cgl.frameStore.shadow=shadowObj;
+        
+        cgl.gl.cullFace(cgl.gl.BACK);
+    
+        next.trigger();
+        cgl.frameStore.shadow=null;
+    
+        cgl.gl.disable(cgl.gl.CULL_FACE);
+        
+    }
+    else
+    {
+        next.trigger();
+    }
 };
 
 
