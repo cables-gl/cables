@@ -91,8 +91,8 @@ function render()
 
     vec3.set(vec,
         body.position.x,
-        body.position.z,
-        body.position.y
+        body.position.y,
+        body.position.z
         );
     
     quat.set(q,
@@ -110,7 +110,7 @@ function render()
     mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
     
     
-    if(doRender.get() && m)m.render(cgl,sizeX.get(),sizeZ.get(),sizeY.get());
+    if(doRender.get() && m)m.render(cgl,sizeX.get(),sizeY.get(),sizeZ.get());
     
     outX.set(body.position.x);
     outY.set(body.position.y);

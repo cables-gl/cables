@@ -110,8 +110,8 @@ function render()
     
         vec3.set(vec, 
             body.position.x,
-            body.position.z,
-            body.position.y
+            body.position.y,
+            body.position.z
             );
         
         quat.set(q,
