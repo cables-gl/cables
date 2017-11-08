@@ -1,9 +1,9 @@
 {
-    "updated": 1510070537929,
-    "author": "58dabd06a0d7ec8d1a982e66",
+    "updated": 1510074294357,
+    "author": "59d794f763898eb73bd67a7e",
     "authorName": "cables",
-    "id": "70e756bf-4e2c-4478-8c38-9a7b68b616d6",
-    "created": 1509660444804,
+    "id": "c529ee2b-87cb-4631-82c6-a84a61271d17",
+    "created": 1510070485832,
     "layout": {
         "portsIn": [
             {
@@ -35,8 +35,28 @@
                 "name": "Pos Z"
             },
             {
+                "type": "0",
+                "name": "dir X"
+            },
+            {
+                "type": "0",
+                "name": "dir Y"
+            },
+            {
+                "type": "0",
+                "name": "dir Z"
+            },
+            {
+                "type": "0",
+                "name": "Speed"
+            },
+            {
                 "type": "1",
                 "name": "Reset"
+            },
+            {
+                "type": "1",
+                "name": "Spawn"
             }
         ],
         "portsOut": [
@@ -65,9 +85,6 @@
                 "name": "Collision"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.Body.Sphere"
-    },
-    "libs": [
-        "cannon.js"
-    ]
+        "name": "Ops.Exp.Gl.Physics.Cannon"
+    }
 }

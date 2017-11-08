@@ -54,6 +54,7 @@ CGL.Marker=function(cgl)
         cgl.pushMvMatrix();
 
 
+        
         cgl.setShader(shader);
 
 
@@ -133,7 +134,9 @@ CGL.WirePoint=function(cgl,size)
         vec3.set(vScale, size,size,size);
         mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
 
-        var shader=cgl.getDefaultShader();
+        // var shader=cgl.getDefaultShader();
+        var shader=cgl.getShader();
+        
         shader.bind();
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
 
@@ -203,7 +206,7 @@ CGL.WireCube=function(cgl)
         vec3.set(vScale, sizeX||1,sizeY||1,sizeZ||1);
         mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
 
-        var shader=cgl.getDefaultShader();
+        var shader=cgl.getShader();
         shader.bind();
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
 

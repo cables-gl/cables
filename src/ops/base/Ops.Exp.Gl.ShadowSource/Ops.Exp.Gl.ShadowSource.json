@@ -30,12 +30,20 @@
                 "name": "Bias"
             },
             {
+                "type": "0",
+                "name": "Z Near"
+            },
+            {
+                "type": "0",
+                "name": "Z Far"
+            },
+            {
                 "type": "3",
                 "name": "Look at"
             },
             {
                 "type": "0",
-                "name": "Noisy"
+                "name": "Show Map Area"
             }
         ],
         "portsOut": [
@@ -50,9 +58,9 @@
         ],
         "name": "Ops.Exp.Gl.ShadowSource"
     },
-    "updated": 1510009085329,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f76a0866-6d65-4ec4-acfe-faca8ca66468",
-    "created": 1504701786034
+    "created": 1504701786034,
+    "updated": 1510089619545
 }
