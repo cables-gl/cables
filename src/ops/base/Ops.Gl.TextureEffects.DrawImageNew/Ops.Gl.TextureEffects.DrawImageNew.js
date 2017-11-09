@@ -133,6 +133,7 @@ blendMode.onValueChanged=function()
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 
+
 imageAlpha.onValueChanged=function()
 {
     if(imageAlpha.get() && imageAlpha.get().tex)

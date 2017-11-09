@@ -67,6 +67,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     //     this._warnedDeprecated=true;
     // });
 
+    CABLES.Port.prototype.hidePort=function()
+    {
+        this.setUiAttribs({hidePort:true});
+    };
+
     CABLES.Port.prototype.setUiAttribs=function(newAttribs)
     {
         if(!this.uiAttribs)this.uiAttribs={};
@@ -74,7 +79,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         {
             this.uiAttribs[p]=newAttribs[p];
         }
-        if(this.onUiAttrChange) this.onUiAttrChange(this.uiAttribs);
+        if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
     };
 
     CABLES.Port.prototype.get=function()
