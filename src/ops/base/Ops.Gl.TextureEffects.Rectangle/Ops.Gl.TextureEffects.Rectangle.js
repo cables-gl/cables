@@ -15,43 +15,15 @@ var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'uniform sampler2D tex;'
-
-    .endl()+'uniform float width;'
-    .endl()+'uniform float height;'
-    .endl()+'uniform float x;'
-    .endl()+'uniform float y;'
-
-    .endl()+'uniform float r;'
-    .endl()+'uniform float g;'
-    .endl()+'uniform float b;'
-    .endl()+'uniform float a;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    
-    
-    .endl()+'   if(texCoord.x > x && texCoord.x < x+width && 1.0-texCoord.y < y+height && 1.0-texCoord.y > y) col.rgba=vec4(r,g,b,1.0);'
-    .endl()+'   gl_FragColor=col;'
-
-    .endl()+'}';
-
-
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'textureeffect rectangle');
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.rectangle_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-op.onLoaded=shader.compile;
 var uniHeight=new CGL.Uniform(shader,'f','height',inHeight);
 var unWidth=new CGL.Uniform(shader,'f','width',inWidth);
 var uniX=new CGL.Uniform(shader,'f','x',inPosX);
 var uniY=new CGL.Uniform(shader,'f','y',inPosY);
-
 
 r.set(1.0);
 g.set(1.0);

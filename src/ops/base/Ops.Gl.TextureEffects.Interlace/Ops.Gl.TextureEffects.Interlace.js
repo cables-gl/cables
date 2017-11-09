@@ -15,39 +15,9 @@ var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
-    .endl()+'#endif'
-    .endl()+'uniform float amount;'
-    .endl()+'uniform float lum;'
-    .endl()+'uniform float add;'
-    .endl()+'uniform float lineSize;'
-    .endl()+'uniform float scroll;'
-    .endl()+'uniform float displace;'
-    .endl()+''
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
-
-    .endl()+'   col=texture2D(tex,texCoord);'
-    // .endl()+'   col=clamp(col,0.0,1.0);'
-    .endl()+'   if( mod(gl_FragCoord.y+scroll,lineSize)>=lineSize*0.5)'
-    .endl()+'   {'
-    .endl()+'       col=texture2D(tex,vec2(texCoord.x+displace*0.05,texCoord.y));'
-    .endl()+'       float gray = vec3(dot(vec3(0.2126,0.7152,0.0722), col.rgb)).r;'
-    .endl()+'       col.rgb=col.rgb*(1.0-amount) + (col.rgb*gray*gray*lum)*amount;'
-    .endl()+'   }'
-    .endl()+'   else col+=add;'
 
 
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.interlace_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniAmount=new CGL.Uniform(shader,'f','amount',amount);
 
