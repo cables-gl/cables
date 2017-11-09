@@ -7,6 +7,14 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
                 "name": "X"
             },
             {
@@ -37,5 +45,10 @@
             "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
             "license": "Public Domain"
         }
-    ]
+    ],
+    "updated": 1510247927451,
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "cables",
+    "id": "3523aaba-d00c-4226-add1-bbfd8bf5fe9f",
+    "created": 1510247879417
 }
