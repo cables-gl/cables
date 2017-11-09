@@ -573,6 +573,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     var reqs=new CABLES.Requirements(this);
     
 
+
     // console.log('add ops ',self.config.glCanvasId);
     // add ops...
     for (var iop in obj.ops) {
@@ -650,8 +651,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                         obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                         obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                         obj.ops[iop].portsIn[ipi2].links[ili].portOut);
-
-
                 }
             }
         }

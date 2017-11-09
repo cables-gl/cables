@@ -7,8 +7,16 @@ var reset=op.inFunctionButton("Reset");
 var groundPlane=op.inValueBool("Groundplane",true);
 
 
+var gravX=op.inValue("Gravity X");
+var gravY=op.inValue("Gravity Y",-9.82);
+var gravZ=op.inValue("Gravity Z");
+
 var next=op.outFunction("next");
 
+
+gravX.onChange=setup;
+gravY.onChange=setup;
+gravZ.onChange=setup;
 
 groundPlane.onChange=setup;
 
@@ -32,7 +40,8 @@ function setup()
     world.defaultContactMaterial.contactEquationRelaxation = 5;
 
     // world.gravity.set(0,-9.82,0 ); // m/s²
-    world.gravity.set(0,-9.82,0 ); // m/s²
+    // world.gravity.set(0,-9.82,0 ); // m/s²
+    world.gravity.set(gravX.get(),gravY.get(),gravZ.get() ); // m/s²
     
     
     if(groundPlane.get())
