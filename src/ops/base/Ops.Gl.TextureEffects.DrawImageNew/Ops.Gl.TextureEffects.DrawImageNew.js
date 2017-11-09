@@ -76,7 +76,7 @@ alphaSrc.set("alpha channel");
     // texture transform
     //
     
-    var doTransform=op.inValueBool("Transform",false);
+    var doTransform=op.inValueBool("Transform");
     
     var scaleX=op.inValueSlider("Scale X",1);
     var scaleY=op.inValueSlider("Scale Y",1);
@@ -93,13 +93,36 @@ alphaSrc.set("alpha channel");
     var uniPosY=new CGL.Uniform(shader,'f','posY',posY);
     var uniRotate=new CGL.Uniform(shader,'f','rotate',rotate);
 
-    doTransform.onChange=function()
-    {
-        if(doTransform.get())shader.define('TEX_TRANSFORM');
-        else shader.removeDefine('TEX_TRANSFORM');
-    };
+    doTransform.onChange=updateTransformPorts;
+    
 
 }
+
+
+
+function updateTransformPorts()
+{
+    if(doTransform.get())
+    {
+        shader.define('TEX_TRANSFORM');
+        scaleX.setUiAttribs({hidePort:false,greyout:false});
+        scaleY.setUiAttribs({hidePort:false,greyout:false});
+        posX.setUiAttribs({hidePort:false,greyout:false});
+        posY.setUiAttribs({hidePort:false,greyout:false});
+        rotate.setUiAttribs({hidePort:false,greyout:false});
+    }
+    else
+    {
+        shader.removeDefine('TEX_TRANSFORM');
+        scaleX.setUiAttribs({hidePort:true,greyout:true});
+        scaleY.setUiAttribs({hidePort:true,greyout:true});
+        posX.setUiAttribs({hidePort:true,greyout:true});
+        posY.setUiAttribs({hidePort:true,greyout:true});
+        rotate.setUiAttribs({hidePort:true,greyout:true});
+    }
+}
+
+
 
 blendMode.onValueChanged=function()
 {
@@ -112,8 +135,14 @@ var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 imageAlpha.onValueChanged=function()
 {
-    if(imageAlpha.get() && imageAlpha.get().tex) shader.define('HAS_TEXTUREALPHA');
-        else shader.removeDefine('HAS_TEXTUREALPHA');
+    if(imageAlpha.get() && imageAlpha.get().tex)
+    {
+        shader.define('HAS_TEXTUREALPHA');
+    }
+    else
+    {
+        shader.removeDefine('HAS_TEXTUREALPHA');
+    }
 };
 
 
@@ -149,3 +178,4 @@ function doRender()
 }
 
 render.onTriggered=doRender;
+updateTransformPorts();

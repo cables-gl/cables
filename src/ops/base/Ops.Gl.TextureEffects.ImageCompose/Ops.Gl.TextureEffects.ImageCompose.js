@@ -115,8 +115,24 @@ function updateResolution()
 }
 
 
+function updateSizePorts()
+{
+    if(useVPSize.get())
+    {
+        width.setUiAttribs({hidePort:true,greyout:true});
+        height.setUiAttribs({hidePort:true,greyout:true});
+    }
+    else
+    {
+        width.setUiAttribs({hidePort:false,greyout:false});
+        height.setUiAttribs({hidePort:false,greyout:false});
+    }
+}
+
+
 useVPSize.onValueChanged=function()
 {
+    updateSizePorts();
     if(useVPSize.get())
     {
         width.onValueChanged=null;
@@ -128,6 +144,7 @@ useVPSize.onValueChanged=function()
         height.onValueChanged=updateResolution;
     }
     updateResolution();
+    
 };
 
 
@@ -212,3 +229,4 @@ render.onTriggered=doRender;
 
 width.set(640);
 height.set(360);
+updateSizePorts();
