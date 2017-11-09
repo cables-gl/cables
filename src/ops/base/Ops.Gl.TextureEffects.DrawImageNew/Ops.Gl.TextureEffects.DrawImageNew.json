@@ -1,0 +1,82 @@
+{
+    "updated": 1510249995207,
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "cables",
+    "id": "f94b5136-61fd-4558-8348-e7c8db5a6348",
+    "created": 1510248525000,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "blendMode"
+            },
+            {
+                "type": "0",
+                "name": "amount"
+            },
+            {
+                "type": "2",
+                "name": "image"
+            },
+            {
+                "type": "2",
+                "name": "imageAlpha"
+            },
+            {
+                "type": "0",
+                "name": "alphaSrc"
+            },
+            {
+                "type": "0",
+                "name": "removeAlphaSrc"
+            },
+            {
+                "type": "0",
+                "name": "invert alpha channel"
+            },
+            {
+                "type": "0",
+                "name": "flip x"
+            },
+            {
+                "type": "0",
+                "name": "flip y"
+            },
+            {
+                "type": "0",
+                "name": "Transform"
+            },
+            {
+                "type": "0",
+                "name": "Scale X"
+            },
+            {
+                "type": "0",
+                "name": "Scale Y"
+            },
+            {
+                "type": "0",
+                "name": "Position X"
+            },
+            {
+                "type": "0",
+                "name": "Position Y"
+            },
+            {
+                "type": "0",
+                "name": "Rotation"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.DrawImageNew"
+    }
+}
