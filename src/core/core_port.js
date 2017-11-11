@@ -34,7 +34,8 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.changeAlways=false;
 
     this._warnedDeprecated=false;
-
+    
+    this.onUiAttrChange=null;
 
     Object.defineProperty(this, 'val', {
         get: function() {
@@ -66,7 +67,20 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     //     this._warnedDeprecated=true;
     // });
 
+    CABLES.Port.prototype.hidePort=function()
+    {
+        this.setUiAttribs({hidePort:true});
+    };
 
+    CABLES.Port.prototype.setUiAttribs=function(newAttribs)
+    {
+        if(!this.uiAttribs)this.uiAttribs={};
+        for(var p in newAttribs)
+        {
+            this.uiAttribs[p]=newAttribs[p];
+        }
+        if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+    };
 
     CABLES.Port.prototype.get=function()
     {
