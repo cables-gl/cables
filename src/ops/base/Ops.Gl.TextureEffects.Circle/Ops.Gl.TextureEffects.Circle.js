@@ -10,6 +10,9 @@ var inSize=op.addInPort(new Port(op,"size",OP_PORT_TYPE_VALUE,{display:'range'})
 
 var inInner=op.addInPort(new Port(op,"Inner",OP_PORT_TYPE_VALUE,{display:'range'}));
 
+var inX=op.inValue("Pos X",0.5);
+var inY=op.inValue("Pos Y",0.5);
+
 
 var inFadeOut=op.addInPort(new Port(op,"fade Out",OP_PORT_TYPE_VALUE,{display:'range'}));
 
@@ -39,6 +42,9 @@ var srcFrag=''
     .endl()+'UNI float g;'
     .endl()+'UNI float b;'
     .endl()+'UNI float a;'
+    
+    .endl()+'UNI float x;'
+    .endl()+'UNI float y;'
 
     +CGL.TextureEffect.getBlendCode()
 
@@ -46,7 +52,7 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 base=texture2D(tex,texCoord);'
     .endl()+'   vec4 col=vec4(0.0,0.0,0.0,1.0);'
-    .endl()+'   float dist = distance(vec2(0.5,0.5),texCoord);'
+    .endl()+'   float dist = distance(vec2(x,y),texCoord);'
 
     .endl()+'   float sz=size*0.5;'
     .endl()+'   float v=0.0;'
@@ -98,6 +104,9 @@ var uniformR=new CGL.Uniform(shader,'f','r',r);
 var uniformG=new CGL.Uniform(shader,'f','g',g);
 var uniformB=new CGL.Uniform(shader,'f','b',b);
 var uniformA=new CGL.Uniform(shader,'f','a',a);
+
+var uniformX=new CGL.Uniform(shader,'f','x',inX);
+var uniformY=new CGL.Uniform(shader,'f','y',inY);
 
 blendMode.onValueChanged=function()
 {
