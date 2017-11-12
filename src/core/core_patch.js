@@ -33,6 +33,8 @@ CABLES.Patch = function(cfg) {
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
+    
+
     this._variables = {};
     this._variableListeners = [];
     this.vars = {};
@@ -103,9 +105,12 @@ CABLES.Patch.prototype.getFilePath = function(filename) {
     if (!filename) return filename;
     if (filename.indexOf('https:') === 0 || filename.indexOf('http:') === 0) return filename;
 
+    filename = filename.replace('//', '/');
+
     var finalFilename = this.config.prefixAssetPath + filename;
 
-    finalFilename = finalFilename.replace('//', '/');
+    
+    console.log('finalFilename',finalFilename);
 
     return finalFilename;
 };
