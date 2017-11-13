@@ -39,6 +39,7 @@ var srcFrag=''
     .endl()+'UNI float g;'
     .endl()+'UNI float b;'
     .endl()+'UNI float a;'
+    .endl()+'UNI float aspect;'
 
     +CGL.TextureEffect.getBlendCode()
 
@@ -46,7 +47,7 @@ var srcFrag=''
     .endl()+'{'
     .endl()+'   vec4 base=texture2D(tex,texCoord);'
     .endl()+'   vec4 col=vec4(0.0,0.0,0.0,1.0);'
-    .endl()+'   float dist = distance(vec2(0.5,0.5),texCoord);'
+    .endl()+'   float dist = distance(vec2(0.5,0.5),vec2(texCoord.x,texCoord.y/aspect));'
 
     .endl()+'   float sz=size*0.5;'
     .endl()+'   float v=0.0;'
@@ -85,6 +86,7 @@ op.onLoaded=shader.compile;
 var uniSize=new CGL.Uniform(shader,'f','size',inSize);
 var uniFadeOut=new CGL.Uniform(shader,'f','fadeOut',inFadeOut);
 var uniInner=new CGL.Uniform(shader,'f','inner',inInner);
+var aspect=new CGL.Uniform(shader,'f','aspect',1);
 
 
 r.set(1.0);
@@ -131,6 +133,10 @@ render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
+
+var a=cgl.currentTextureEffect.getCurrentSourceTexture().width/cgl.currentTextureEffect.getCurrentSourceTexture().height;
+aspect.set(a);
+
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
@@ -139,6 +145,8 @@ render.onTriggered=function()
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
+
+
 
     trigger.trigger();
 };
