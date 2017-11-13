@@ -36,13 +36,13 @@ CGL.Framebuffer2=function(cgl,w,h,options)
             
         });
 
-console.log('fb shadowm ',this._options.shadowMap||false);
-
+    var fil=CGL.Texture.FILTER_NEAREST;
+    if(this._options.shadowMap)fil=CGL.Texture.FILTER_LINEAR;
 
     this._textureDepth=new CGL.Texture(cgl,
         {
             "isDepthTexture":true,
-            "filter":CGL.Texture.FILTER_LINEAR,
+            "filter":fil,
             "shadowMap":this._options.shadowMap||false
         });
 

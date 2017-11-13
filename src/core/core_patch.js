@@ -173,6 +173,7 @@ CABLES.Patch.prototype.createOp = function(objName) {
                 CABLES.UI.MODAL.showError('unknown op', 'unknown op: ' + objName);
             }
             console.error('unknown op: ' + objName);
+            throw('unknown op: ' + objName);
         } else {
             if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName);
             else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName);
@@ -186,7 +187,8 @@ CABLES.Patch.prototype.createOp = function(objName) {
             else console.log('parts.length', parts.length);
         }
     } catch (e) {
-        console.error('!instancing error ' + objName);
+        console.error('instancing error ' + objName);
+        throw 'instancing error ' + objName
 
         if (CABLES.UI)
             CABLES.UI.MODAL.showOpException(e, objName);
@@ -203,8 +205,6 @@ CABLES.Patch.prototype.createOp = function(objName) {
     if (op) {
         op.objName = objName;
         op.patch = this;
-
-
     }
     return op;
 };
