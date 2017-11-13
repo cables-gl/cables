@@ -158,6 +158,8 @@ void main()
 
    p=vec2(p.x+0.5-x,p.y+0.5-y);
 
+    float aa=texture2D(tex,texCoord).r;
+
    float v=Perlin3D(vec3(p.x,p.y,z))*0.5+0.5;
    vec4 col=vec4(v,v,v,1.0);
 

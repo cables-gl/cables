@@ -23,6 +23,14 @@
             },
             {
                 "type": "0",
+                "name": "Pos X"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y"
+            },
+            {
+                "type": "0",
                 "name": "fade Out"
             },
             {
@@ -58,9 +66,9 @@
         ],
         "name": "Ops.Gl.TextureEffects.Circle"
     },
-    "updated": 1510555621614,
-    "author": "59d794f763898eb73bd67a7e",
-    "authorName": "cables",
-    "id": "f9698a2a-d354-4194-9be9-009eae2c0b4f",
-    "created": 1510555447089
+    "updated": 1510557236082,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "c260d839-065c-4101-8943-c4680b771343",
+    "created": 1510231462298
 }
