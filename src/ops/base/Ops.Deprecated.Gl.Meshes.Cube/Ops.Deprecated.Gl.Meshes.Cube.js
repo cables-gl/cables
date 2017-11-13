@@ -6,10 +6,10 @@ var height=op.inValue('height');
 var lengt=op.inValue('length');
 var center=op.inValueBool('center');
 
-var active=op.inValueBool('Active',true);
-
 var trigger=op.outFunction('trigger');
 var geomOut=op.outObject("geometry");
+
+geomOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;
 var geom=null;
@@ -21,69 +21,66 @@ center.set(true);
 
 render.onTriggered=function()
 {
-    if(active.get() && mesh) mesh.render(cgl.getShader());
+    if(mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
+
 
 function buildMesh()
 {
     if(!geom)geom=new CGL.Geometry("cube");
     geom.clear();
 
-    var x=width.get();
-    var nx=-1*width.get();
-    var y=lengt.get();
-    var ny=-1*lengt.get();
-    var z=height.get();
-    var nz=-1*height.get();
+    var w=parseFloat(width.get());
+    var nw=-1*parseFloat(width.get());
+    var h=parseFloat(height.get());
+    var nh=-1*parseFloat(height.get());
+    var l=parseFloat(lengt.get());
+    var nl=-1*parseFloat(lengt.get());
 
     if(!center.get())
     {
-        nx=0;
-        ny=0;
-        nz=0;
+        nw=0;
+        nh=0;
+        nl=0;
     }
     else
     {
-        x*=0.5;
-        nx*=0.5;
-        y*=0.5;
-        ny*=0.5;
-        z*=0.5;
-        nz*=0.5;
+        // sides should be *0.5, but this is not done because of backward compatibility... 
+        // should build cube.v2...
     }
 
     geom.vertices = [
         // Front face
-        nx, ny,  z,
-        x, ny,  z,
-        x,  y,  z,
-        nx,  y,  z,
+        nw, nh,  l,
+        w, nh,  l,
+        w,  h,  l,
+        nw,  h,  l,
         // Back face
-        nx, ny, nz,
-        nx,  y, nz,
-        x,  y, nz,
-        x, ny, nz,
+        nw, nh, nl,
+        nw,  h, nl,
+        w,  h, nl,
+        w, nh, nl,
         // Top face
-        nx,  y, nz,
-        nx,  y,  z,
-        x,  y,  z,
-        x,  y, nz,
+        nw,  h, nl,
+        nw,  h,  l,
+        w,  h,  l,
+        w,  h, nl,
         // Bottom face
-        nx, ny, nz,
-        x, ny, nz,
-        x, ny,  z,
-        nx, ny,  z,
+        nw, nh, nl,
+        w, nh, nl,
+        w, nh,  l,
+        nw, nh,  l,
         // Right face
-        x, ny, nz,
-        x,  y, nz,
-        x,  y,  z,
-        x, ny,  z,
-        // zeft face
-        nx, ny, nz,
-        nx, ny,  z,
-        nx,  y,  z,
-        nx,  y, nz
+        w, nh, nl,
+        w,  h, nl,
+        w,  h,  l,
+        w, nh,  l,
+        // Left face
+        nw, nh, nl,
+        nw, nh,  l,
+        nw,  h,  l,
+        nw,  h, nl
         ];
 
     geom.texCoords = [

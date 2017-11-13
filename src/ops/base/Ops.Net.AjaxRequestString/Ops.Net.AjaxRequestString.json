@@ -1,0 +1,30 @@
+{
+    "updated": 1510041670844,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "2e26a7c9-3306-4ef3-af10-a0741a36286e",
+    "created": 1510041483907,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "JsonP"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Is Loading"
+            }
+        ],
+        "name": "Ops.Net.AjaxRequestString"
+    }
+}

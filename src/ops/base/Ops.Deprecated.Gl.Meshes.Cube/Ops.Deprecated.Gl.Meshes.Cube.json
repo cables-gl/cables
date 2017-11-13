@@ -1,4 +1,5 @@
 {
+    "summary": "draw a cube",
     "layout": {
         "portsIn": [
             {
@@ -20,10 +21,6 @@
             {
                 "type": "0",
                 "name": "center"
-            },
-            {
-                "type": "0",
-                "name": "Active"
             }
         ],
         "portsOut": [
@@ -36,7 +33,6 @@
                 "name": "geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.Cube2"
-    },
-    "summary": "draw a cube"
+        "name": "Ops.Gl.Meshes.Cube"
+    }
 }

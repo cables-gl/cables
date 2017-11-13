@@ -13,10 +13,9 @@ var gravZ=op.inValue("Gravity Z");
 
 var next=op.outFunction("next");
 
-
-gravX.onChange=setup;
-gravY.onChange=setup;
-gravZ.onChange=setup;
+gravX.onChange=setGravity;
+gravY.onChange=setGravity;
+gravZ.onChange=setGravity;
 
 groundPlane.onChange=setup;
 
@@ -29,19 +28,25 @@ reset.onTriggered=function()
     world=null;
 };
 
+function setGravity()
+{
+    if(world) world.gravity.set(gravX.get(),gravY.get(),gravZ.get() ); // m/s²
+}
+
 function setup()
 {
     console.log("world setup");
     world = new CANNON.World();
     world.broadphase = new CANNON.NaiveBroadphase();
-    world.solver.iterations = 20;
+    world.solver.iterations = 13;
 
     world.defaultContactMaterial.contactEquationStiffness = 1e10;
-    world.defaultContactMaterial.contactEquationRelaxation = 5;
+    world.defaultContactMaterial.contactEquationRelaxation = 4;
 
     // world.gravity.set(0,-9.82,0 ); // m/s²
     // world.gravity.set(0,-9.82,0 ); // m/s²
-    world.gravity.set(gravX.get(),gravY.get(),gravZ.get() ); // m/s²
+    // world.gravity.set(gravX.get(),gravY.get(),gravZ.get() ); // m/s²
+    setGravity();
     
     
     if(groundPlane.get())
