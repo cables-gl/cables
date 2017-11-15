@@ -95,6 +95,21 @@ inUrlPort.onChange = function() {
 };
 ```
 
+If your op uses a default file, you need to make sure you set the port after all ports have been initialized and there is not other value entered into the port:
+
+```javascript
+// called when all ports have been initialized
+op.onLoaded = function() {
+  	// if there is no file selected
+    if(filePort.get().length === 0) {
+      	// use default file
+        filePort.set("/assets/library/audio/default-audio-file.mp3");
+    }
+};
+```
+
+Have a look at the code of the op `Ops.WebAudio.Lib.Tonejs.Effect.Convolver` for a full example.
+
 ##### Display: Range
 
 Displays a slider in the range `[min..max]` along with a text input field. The value of the input field can be out of range, so if your op cannot handle these values you need to manually check and reset the port by calling `inPort.set(...)`.
