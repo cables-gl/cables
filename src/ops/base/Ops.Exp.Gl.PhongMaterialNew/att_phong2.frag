@@ -133,10 +133,8 @@ void main()
         Light light=lights[l];
 
         vec3 lightDir = normalize(light.pos - modelPos.xyz);
-    
         float lambertian = max(dot(lightDir,normalize(norm)), 0.0);
         float specular = 0.0;
-
 
         if(lambertian > 0.0)
         {

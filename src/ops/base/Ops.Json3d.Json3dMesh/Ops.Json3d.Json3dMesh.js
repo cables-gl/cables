@@ -15,11 +15,8 @@ var draw=op.inValueBool("Draw",true);
 var centerPivot=op.inValueBool("Center Mesh",true);
 var inSize=op.inValue("Size",1);
 
-
 var next=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.outObject("Geometry");
-
-
 
 var data=null;
 var mesh=null;
@@ -72,7 +69,6 @@ function updateScale()
 
     mat4.identity(transMatrix);
     mat4.scale(transMatrix,transMatrix, vScale);
-
 }
 
 function updateInfo(geom)
@@ -89,10 +85,12 @@ function updateInfo(geom)
 
     if(geom)
     {
-        nfo += geom.verticesIndices.length/3+' faces <br/>';
-        nfo += geom.vertices.length/3+' vertices <br/>';
-        nfo += geom.texCoords.length/2+' texturecoords <br/>';
-        if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
+        nfo += (geom.verticesIndices||[]).length/3+' faces <br/>';
+        nfo += (geom.vertices||[]).length/3+' vertices <br/>';
+        nfo += (geom.texCoords||[]).length/2+' texturecoords <br/>';
+        nfo += (geom.vertexNormals||[]).length/3+' normals <br/>';
+        nfo += (geom.tangents||[]).length/3+' tangents <br/>';
+        nfo += (geom.biTangents||[]).length/3+' bitangents <br/>';
     }
 
     nfo+="</div>";
@@ -142,6 +140,7 @@ function setMesh()
     if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
     geom.verticesIndices=[];
     geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
+
 
     bounds=geom.getBounds();
     updateScale();
