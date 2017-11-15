@@ -1,1 +1,43 @@
-{"summary":"Draws a Border around the current ImageCompose","layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"Smooth"},{"type":"0","name":"width"},{"type":"0","name":"diffuse r"},{"type":"0","name":"diffuse g"},{"type":"0","name":"diffuse b"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.TextureEffects.Border"}}
+{
+    "summary": "Draws a Border around the current ImageCompose",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Smooth"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "diffuse r"
+            },
+            {
+                "type": "0",
+                "name": "diffuse g"
+            },
+            {
+                "type": "0",
+                "name": "diffuse b"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Border"
+    },
+    "updated": 1510740112720,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "e6aae62c-1620-465d-94de-049148b530e6",
+    "created": 1510740112722
+}

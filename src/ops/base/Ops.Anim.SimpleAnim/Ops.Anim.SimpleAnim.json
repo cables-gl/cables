@@ -50,8 +50,20 @@
         ],
         "name": "Ops.Anim.SimpleAnim"
     },
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "execute jaja dies ist die doc"
+            },
+            {
+                "name": "start",
+                "text": "sssss"
+            }
+        ]
+    },
     "summary": "simple animation between two values",
-    "updated": 1506696980224,
+    "updated": 1510735520872,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "5b244b6e-c505-4743-b2cc-8119ef720028",

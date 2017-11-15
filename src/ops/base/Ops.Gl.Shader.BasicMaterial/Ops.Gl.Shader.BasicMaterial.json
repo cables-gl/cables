@@ -75,5 +75,13 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "85ae5cfa-5eca-4dd8-8b30-850ac34f7cd5",
-    "created": 1505310811893
+    "created": 1505310811893,
+    "docs": {
+        "ports": [
+            {
+                "name": "a",
+                "text": "Opacity"
+            }
+        ]
+    }
 }
