@@ -6,6 +6,7 @@ var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"c
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
+
 var textureOut=op.outTexture("texture");
 var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
@@ -14,6 +15,7 @@ var ratio=op.outValue("Aspect Ratio");
 
 flip.set(false);
 unpackAlpha.set(false);
+unpackAlpha.hidePort();
 
 var cgl=op.patch.cgl;
 var cgl_filter=0;

@@ -1,5 +1,5 @@
 {
-    "updated": 1509832081598,
+    "updated": 1510390321850,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "78989530-a0cd-49e4-bf54-83ce3220c4b5",
@@ -16,6 +16,22 @@
             {
                 "type": "1",
                 "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Groundplane"
+            },
+            {
+                "type": "0",
+                "name": "Gravity X"
+            },
+            {
+                "type": "0",
+                "name": "Gravity Y"
+            },
+            {
+                "type": "0",
+                "name": "Gravity Z"
             }
         ],
         "portsOut": [

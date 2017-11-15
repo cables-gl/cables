@@ -10,9 +10,9 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
-var sizeX=op.inValue("sizeX");
-var sizeY=op.inValue("sizeY");
-var sizeZ=op.inValue("sizeZ");
+var sizeX=op.inValue("sizeX",1);
+var sizeY=op.inValue("sizeY",1);
+var sizeZ=op.inValue("sizeZ",1);
 
 var inReset=op.inFunctionButton("Reset");
 
@@ -91,8 +91,8 @@ function render()
 
     vec3.set(vec,
         body.position.x,
-        body.position.z,
-        body.position.y
+        body.position.y,
+        body.position.z
         );
     
     quat.set(q,

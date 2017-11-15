@@ -16,54 +16,12 @@ var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'uniform sampler2D tex;'
-
-    .endl()+'uniform float num;'
-    .endl()+'uniform float width;'
-    .endl()+'uniform float axis;'
-    .endl()+'uniform float offset;'
-
-    .endl()+'uniform float r;'
-    .endl()+'uniform float g;'
-    .endl()+'uniform float b;'
-    .endl()+'uniform float a;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    
-    .endl()+'   float v=0.0;'
-    .endl()+'   float c=1.0;'
-    .endl()+'   if(axis==0.0) v=texCoord.y;'
-    .endl()+'   if(axis==1.0) v=texCoord.x;'
-    .endl()+'   if(axis==2.0) v=texCoord.x+texCoord.y;'
-    .endl()+'   if(axis==3.0) v=texCoord.x-texCoord.y;'
-    .endl()+'   v+=offset;'
-    
-
-    .endl()+'   float m=mod(v,1.0/num);'
-    .endl()+'   float rm=width*2.0*1.0/num/2.0;'
-    
-    .endl()+'   if(m>rm)'
-    .endl()+'       col.rgb=mix(col.rgb,vec3( r,g,b ),a);'
-
-    .endl()+'   #ifdef STRIPES_SMOOTHED    '
-    .endl()+'       m*=2.0;'
-    .endl()+'       col.rgb=vec3(  smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));'
-    .endl()+'   #endif'
-    
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-    
 smoothed.onChange=function()
 {
     
     if(smoothed.get())shader.define("STRIPES_SMOOTHED");
     else shader.removeDefine("STRIPES_SMOOTHED");
-}
+};
 
 axis.onValueChanged=function()
 {
@@ -75,7 +33,7 @@ axis.onValueChanged=function()
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'textureeffect stripes');
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.stripes_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 op.onLoaded=shader.compile;

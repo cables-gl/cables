@@ -2,6 +2,8 @@
 // http://www.keithmcmillen.com/blog/making-music-in-the-browser-web-midi-api/
 
 op.name='midiInput';
+op.requirements=[CABLES.Requirements.MIDI];
+
 
 var normalize=op.addInPort(new Port(op,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var deviceSelect=op.addInPort(new Port(op,"device",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["none"]} ));

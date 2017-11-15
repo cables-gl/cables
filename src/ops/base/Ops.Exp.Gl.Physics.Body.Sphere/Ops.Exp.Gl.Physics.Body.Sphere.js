@@ -45,28 +45,28 @@ inReset.onTriggered=function()
     needSetup=true;
 };
 
-function createTetra()
-{
-    var verts = [new CANNON.Vec3(0,0,0),
-        new CANNON.Vec3(2,0,0),
-        new CANNON.Vec3(0,2,0),
-        new CANNON.Vec3(0,0,2)];
-    var offset = -0.35;
-    for(var i=0; i<verts.length; i++){
-        var v = verts[i];
-        v.x += offset;
-        v.y += offset;
-        v.z += offset;
-    }
+// function createTetra()
+// {
+//     var verts = [new CANNON.Vec3(0,0,0),
+//         new CANNON.Vec3(2,0,0),
+//         new CANNON.Vec3(0,2,0),
+//         new CANNON.Vec3(0,0,2)];
+//     var offset = -0.35;
+//     for(var i=0; i<verts.length; i++){
+//         var v = verts[i];
+//         v.x += offset;
+//         v.y += offset;
+//         v.z += offset;
+//     }
     
-    return new CANNON.ConvexPolyhedron(verts,
-        [
-            [0,3,2], // -x
-            [0,1,3], // -y
-            [0,2,1], // -z
-            [1,2,3], // +xyz
-        ]);
-}
+//     return new CANNON.ConvexPolyhedron(verts,
+//         [
+//             [0,3,2], // -x
+//             [0,1,3], // -y
+//             [0,2,1], // -z
+//             [1,2,3], // +xyz
+//         ]);
+// }
 
 
 function setup()
@@ -113,8 +113,8 @@ function render()
 
     vec3.set(vec, 
         body.position.x,
-        body.position.z,
-        body.position.y
+        body.position.y,
+        body.position.z
         );
     
     quat.set(q,

@@ -34,6 +34,20 @@ var reInitFb=true;
 // todo why does it only work when we render a mesh before>?>?????
 // only happens with matcap material with normal map....
 
+useVPSize.onChange=updateVpSize;
+function updateVpSize()
+{
+    if(useVPSize.get())
+    {
+        width.setUiAttribs({hidePort:true,greyout:true});
+        height.setUiAttribs({hidePort:true,greyout:true});
+    }
+    else
+    {
+        width.setUiAttribs({hidePort:false,greyout:false});
+        height.setUiAttribs({hidePort:false,greyout:false});
+    }
+}
 
 
 fpTexture.onChange=function()
@@ -127,3 +141,4 @@ render.onTriggered=doRender;
 
 
 tfilter.onValueChange(onFilterChange);
+updateVpSize();

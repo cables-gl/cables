@@ -1,4 +1,5 @@
 op.name="ShadowSource";
+op.requirements=[CABLES.Requirements.WEBGL2];
 
 var render=op.inFunction("Render");
 var strength=op.inValueSlider("Strength",0.5);
@@ -11,9 +12,11 @@ var samples=op.inValueInt("Samples",4);
 var polyOff=op.inValueInt("Poly Offset",0);
 
 var bias=op.inValueInt("Bias",0.001);
+var znear=op.inValueInt("Z Near",0.1);
+var zfar=op.inValueInt("Z Far",300);
 var lookat=op.inArray("Look at");
 
-var noise=op.inValueBool("Noisy",true);
+var showMapArea=op.inValueBool("Show Map Area",false);
 
 
 var next=op.outFunction("Next");
@@ -75,15 +78,15 @@ function renderPickingPass()
 
     
 
-    var ratio=areaSize.get();
+    var size=areaSize.get();
     // mat4.perspective(cgl.pMatrix,45, 1, 0.1, 100.0);
     mat4.ortho(cgl.pMatrix,
-        1*ratio, 
-        -1*ratio,  
-        1*ratio, 
-        -1*ratio, 
-        0.01,
-        100
+        1*size, 
+        -1*size,  
+        1*size, 
+        -1*size, 
+        znear.get(),
+        zfar.get()
         );
 
     mat4.lookAt(cgl.vMatrix, vEye, vCenter, vUp);
@@ -138,38 +141,45 @@ var shadowObj={};
 
 var doRender=function()
 {
-    var minimizeFB=8;
-
-    cgl.gl.enable(cgl.gl.CULL_FACE);
-    cgl.gl.cullFace(cgl.gl.FRONT);
-
+    if(cgl.glVersion==2)
+    {
+        var minimizeFB=8;
     
-    cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-    cgl.gl.polygonOffset(polyOff.get(),polyOff.get());
-
-    cgl.gl.colorMask(false,false,false,false);
-    renderPickingPass();
-    cgl.gl.colorMask(true,true,true,true);
+        cgl.gl.enable(cgl.gl.CULL_FACE);
+        cgl.gl.cullFace(cgl.gl.FRONT);
     
-    cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
-
-
-
-    shadowObj.mapsize=mapSize.get();
-    shadowObj.noise=noise.get();
-    shadowObj.strength=strength.get();
-    shadowObj.samples=Math.max(1,samples.get());
-    shadowObj.bias=bias.get();
-    shadowObj.shadowMap=fb.getTextureDepth();
-    cgl.frameStore.shadow=shadowObj;
+        
+        cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+        cgl.gl.polygonOffset(polyOff.get(),polyOff.get());
     
-    cgl.gl.cullFace(cgl.gl.BACK);
-
-    next.trigger();
-    cgl.frameStore.shadow=null;
-
-    cgl.gl.disable(cgl.gl.CULL_FACE);
-
+        cgl.gl.colorMask(false,false,false,false);
+        renderPickingPass();
+        cgl.gl.colorMask(true,true,true,true);
+        
+        cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
+    
+    
+    
+        shadowObj.mapsize=mapSize.get();
+        shadowObj.showMapArea=showMapArea.get();
+        shadowObj.strength=strength.get();
+        shadowObj.samples=Math.max(1,samples.get());
+        shadowObj.bias=bias.get();
+        shadowObj.shadowMap=fb.getTextureDepth();
+        cgl.frameStore.shadow=shadowObj;
+        
+        cgl.gl.cullFace(cgl.gl.BACK);
+    
+        next.trigger();
+        cgl.frameStore.shadow=null;
+    
+        cgl.gl.disable(cgl.gl.CULL_FACE);
+        
+    }
+    else
+    {
+        next.trigger();
+    }
 };
 
 

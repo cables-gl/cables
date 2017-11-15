@@ -7,7 +7,7 @@ UNI float MOD_strength;
 UNI float MOD_smpls;
 UNI float MOD_bias;
 UNI float MOD_amount;
-UNI float MOD_noise;
+UNI float MOD_showMapArea;
 UNI float MOD_mapsize;
 
 

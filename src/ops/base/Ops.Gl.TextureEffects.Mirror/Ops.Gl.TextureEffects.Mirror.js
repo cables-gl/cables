@@ -13,41 +13,9 @@ var offset=op.addInPort(new Port(op,"offset",OP_PORT_TYPE_VALUE,{display:'range'
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 width.set(0.5);
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
-    .endl()+'#endif'
-    .endl()+'uniform float axis;'
-    .endl()+'uniform float width;'
-    .endl()+'uniform float flip;'
-    .endl()+'uniform float offset;'
-    .endl()+''
-    .endl()+''
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
-    .endl()+'   #ifdef HAS_TEXTURES'
 
-    .endl()+'       float tc=texCoord.x;'
-    .endl()+'       if(axis==1.0) tc=(texCoord.y);'
 
-    .endl()+'       float x=(tc);'
-    .endl()+'       if(tc>=0.5)x=1.0-tc;'
-
-    .endl()+'       x*=width*2.0;'
-    .endl()+'       if(flip==1.0)x=1.0-x;'
-    .endl()+'       x*=1.0-offset;'
-
-    .endl()+'       if(axis==1.0) col=texture2D(tex,vec2(texCoord.x,x) );'
-    .endl()+'           else col=texture2D(tex,vec2(x,texCoord.y) );'
-
-    .endl()+'   #endif'
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.mirror_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniAxis=new CGL.Uniform(shader,'f','axis',0);
 var uniWidth=new CGL.Uniform(shader,'f','width',width);

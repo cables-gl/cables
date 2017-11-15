@@ -1,7 +1,6 @@
 op.name='image compose';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-
 var width=op.inValueInt("width");
 var height=op.inValueInt("height");
 
@@ -115,8 +114,24 @@ function updateResolution()
 }
 
 
+function updateSizePorts()
+{
+    if(useVPSize.get())
+    {
+        width.setUiAttribs({hidePort:true,greyout:true});
+        height.setUiAttribs({hidePort:true,greyout:true});
+    }
+    else
+    {
+        width.setUiAttribs({hidePort:false,greyout:false});
+        height.setUiAttribs({hidePort:false,greyout:false});
+    }
+}
+
+
 useVPSize.onValueChanged=function()
 {
+    updateSizePorts();
     if(useVPSize.get())
     {
         width.onValueChanged=null;
@@ -128,6 +143,7 @@ useVPSize.onValueChanged=function()
         height.onValueChanged=updateResolution;
     }
     updateResolution();
+    
 };
 
 
@@ -212,3 +228,4 @@ render.onTriggered=doRender;
 
 width.set(640);
 height.set(360);
+updateSizePorts();

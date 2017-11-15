@@ -33,6 +33,8 @@ CABLES.Patch = function(cfg) {
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
+    
+
     this._variables = {};
     this._variableListeners = [];
     this.vars = {};
@@ -103,9 +105,12 @@ CABLES.Patch.prototype.getFilePath = function(filename) {
     if (!filename) return filename;
     if (filename.indexOf('https:') === 0 || filename.indexOf('http:') === 0) return filename;
 
+    filename = filename.replace('//', '/');
+
     var finalFilename = this.config.prefixAssetPath + filename;
 
-    finalFilename = finalFilename.replace('//', '/');
+    
+    console.log('finalFilename',finalFilename);
 
     return finalFilename;
 };
@@ -168,6 +173,7 @@ CABLES.Patch.prototype.createOp = function(objName) {
                 CABLES.UI.MODAL.showError('unknown op', 'unknown op: ' + objName);
             }
             console.error('unknown op: ' + objName);
+            throw('unknown op: ' + objName);
         } else {
             if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName);
             else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName);
@@ -181,7 +187,8 @@ CABLES.Patch.prototype.createOp = function(objName) {
             else console.log('parts.length', parts.length);
         }
     } catch (e) {
-        console.error('!instancing error ' + objName);
+        console.error('instancing error ' + objName);
+        throw 'instancing error ' + objName
 
         if (CABLES.UI)
             CABLES.UI.MODAL.showOpException(e, objName);
@@ -198,8 +205,6 @@ CABLES.Patch.prototype.createOp = function(objName) {
     if (op) {
         op.objName = objName;
         op.patch = this;
-
-
     }
     return op;
 };
@@ -569,12 +574,18 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
     if(stopwatch)stopwatch.stop('add ops..');
+
+    var reqs=new CABLES.Requirements(this);
+    
+
+
     // console.log('add ops ',self.config.glCanvasId);
     // add ops...
     for (var iop in obj.ops) {
 
         var start=CABLES.now();
         var op = this.addOp(obj.ops[iop].objName, obj.ops[iop].uiAttribs);
+        reqs.checkOp(op);
 
         if (op) {
             op.id = obj.ops[iop].id;
@@ -645,8 +656,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                         obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                         obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                         obj.ops[iop].portsIn[ipi2].links[ili].portOut);
-
-
                 }
             }
         }
@@ -662,6 +671,9 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
     if(stopwatch)stopwatch.stop('finished');
+
+
+
 
     this.loading.finished(loadingId);
 
