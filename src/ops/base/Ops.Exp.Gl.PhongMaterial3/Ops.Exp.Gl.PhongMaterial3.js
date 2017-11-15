@@ -31,6 +31,8 @@ g.set(Math.random());
 b.set(Math.random());
 a.set(1.0);
 
+inSpecular.uniform=new CGL.Uniform(shader,'f','specular',inSpecular);
+
 
 
 
@@ -121,12 +123,6 @@ var updateLights=function()
             }
     }
 };
-
-function updateSpecular()
-{
-    if(inSpecular.get()==1)inSpecular.uniform.setValue(99999);
-        else inSpecular.uniform.setValue(Math.exp(inSpecular.get()*8,2));
-}
 
 
 

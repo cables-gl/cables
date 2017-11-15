@@ -28,6 +28,7 @@ IN vec3 norm;
 IN vec4 modelPos;
 IN mat3 normalMatrix;
 
+UNI float specular;
 UNI float r,g,b,a;
 
 struct Light {
@@ -97,7 +98,7 @@ void main()
         
         
         	// Eye vector (towards the camera)
-        	vec3 E = normalize(lightDir);
+        	vec3 E = normalize( TBN*(camPos-modelPos.xyz));
         	// Direction in which the triangle reflects the light
         	vec3 R = reflect(-ll,TextureNormal_tangentspace);
         	// Cosine of the angle between the Eye vector and the Reflect vector,
@@ -128,7 +129,7 @@ void main()
             col+= light.color.rgb * light.mul*((cosTheta));// (distance*distance));
             
             // col+=(cosAlpha);
-            col+=0.8*pow(cosAlpha,5.0)/ (distance*distance);
+            col+=specular*pow(cosAlpha,5.0);// (distance*distance);
             
             
             
