@@ -22,10 +22,11 @@ UNI float fresnel;
     IN vec3 EyeDirection_tangentspace;
     IN mat3 TBN;
     IN mat4 vMatrix;
-    IN vec3 mvPos;
+    
 
 #endif
 
+IN vec3 mvPos;
 
 IN vec2 texCoord;
 
@@ -84,6 +85,7 @@ void main()
         vec3 TextureNormal_tangentspace = normalize(texture2D(texNormal, texCoord).rgb*2.0-1.0);
     #endif
 
+float falloff=1.0;
   
     for(int l=0;l<NUM_LIGHTS;l++)
     {
@@ -169,10 +171,9 @@ void main()
         #ifndef SHOW_NORMAL
             col=vec3(r,g,b);
         #endif
+        
+        falloff*=getfallOff(light, length(lightModelDiff));
 
-        #ifdef SHOW_FALLOFF
-            col*=getfallOff(light, length(lightModelDiff));
-        #endif
 
     }
     
@@ -199,6 +200,9 @@ void main()
     vec3 vNormal = normalize(normalMatrix * norm);
     col+=vec3(r,g,b)*(calcFresnel(normalize(mvPos.xyz),vNormal)*fresnel*5.0);
 
+    #ifdef SHOW_FALLOFF
+        col*=falloff;
+    #endif
 
 
     {{MODULE_COLOR}}

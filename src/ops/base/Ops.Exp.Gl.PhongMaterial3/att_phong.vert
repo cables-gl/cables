@@ -16,6 +16,7 @@ OUT mat4 mvMatrix;
 OUT mat3 normalMatrix;
 OUT vec4 modelPos;
 OUT vec2 texCoord;
+OUT vec3 mvPos;
 
 
 #ifdef HAS_TEXTURE_NORMAL
@@ -25,9 +26,8 @@ OUT vec2 texCoord;
     UNI vec3 camPos;
     OUT vec3 EyeDirection_cameraspace;
     OUT mat4 vMatrix;
-    OUT vec3 mvPos;
-
 #endif
+
 
 mat3 transposeMat3(mat3 m)
 {
@@ -64,13 +64,15 @@ void main()
     
     norm=attrVertNormal;
 
-    {{MODULE_VERTEX_POSITION}}
+    
 
     modelPos=mMatrix*pos;
     normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
 
 
     mvMatrix=viewMatrix*mMatrix;
+    
+    {{MODULE_VERTEX_POSITION}}
 
 
     #ifdef HAS_TEXTURE_NORMAL
