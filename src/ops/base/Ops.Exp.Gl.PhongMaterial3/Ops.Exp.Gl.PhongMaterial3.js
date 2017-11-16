@@ -13,6 +13,7 @@ var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'ran
 var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
+var inFesnel=op.inValueSlider("Fesnel",0);
 
 
 var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
@@ -32,7 +33,7 @@ b.set(Math.random());
 a.set(1.0);
 
 inSpecular.uniform=new CGL.Uniform(shader,'f','specular',inSpecular);
-
+inFesnel.uniform=new CGL.Uniform(shader,'f','fresnel',inFesnel);
 
 
 
@@ -131,7 +132,7 @@ var updateLights=function()
 
 function texturingChanged()
 {
-    if(diffuseTexture.get() || normalTexture.get())
+    if(diffuseTexture.get() || normalTexture.get() || specTexture.get())
     {
         shader.define('HAS_TEXTURES');
     }
@@ -143,7 +144,7 @@ function texturingChanged()
 
 
 // diffuse texture
-var diffuseTexture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var diffuseTexture=this.addInPort(new Port(this,"Diffuse Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var diffuseTextureUniform=null;
 shader.bindTextures=bindTextures;
 
@@ -190,6 +191,49 @@ normalTexture.onChange=function()
     }
 };
 
+// specular texture
+var specTexture=this.addInPort(new Port(this,"Specular Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var specTextureUniform=null;
+
+specTexture.onChange=function()
+{
+    if(specTexture.get())
+    {
+        if(specTextureUniform!==null)return;
+        shader.removeUniform('texSpecular');
+        shader.define('HAS_TEXTURE_SPECULAR');
+        specTextureUniform=new CGL.Uniform(shader,'t','texSpecular',2);
+    }
+    else
+    {
+        shader.removeUniform('texSpecular');
+        shader.removeDefine('HAS_TEXTURE_SPECULAR');
+        specTextureUniform=null;
+    }
+};
+
+// ao texture
+var aoTexture=this.addInPort(new Port(this,"AO Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var aoTextureUniform=null;
+aoTexture.ignoreValueSerialize=true;
+shader.bindTextures=bindTextures;
+
+aoTexture.onChange=function()
+{
+    if(aoTexture.get())
+    {
+        if(aoTextureUniform!==null)return;
+        shader.removeUniform('texAo');
+        shader.define('HAS_TEXTURE_AO');
+        aoTextureUniform=new CGL.Uniform(shader,'t','texAo',1);
+    }
+    else
+    {
+        shader.removeUniform('texAo');
+        shader.removeDefine('HAS_TEXTURE_AO');
+        aoTextureUniform=null;
+    }
+};
 
 
 function bindTextures()
@@ -200,17 +244,17 @@ function bindTextures()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
 
-    // if(aoTexture.get())
-    // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, aoTexture.get().tex);
-    // }
+    if(aoTexture.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, aoTexture.get().tex);
+    }
 
-    // if(specTexture.get())
-    // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, specTexture.get().tex);
-    // }
+    if(specTexture.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE2);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, specTexture.get().tex);
+    }
 
     if(normalTexture.get())
     {
@@ -218,15 +262,58 @@ function bindTextures()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, normalTexture.get().tex);
     }
 
-    // uniShadowPass.setValue(0);
-    // if(cgl.frameStore.phong && cgl.frameStore.phong.lights)
-    //     for(i in cgl.frameStore.phong.lights)
-    //     {
-    //         if(cgl.frameStore.phong.lights[i].shadowPass==1.0)uniShadowPass.setValue(1);
-    //     }
 }
 
 
+var toggleLambert=op.inValueBool("Toggle Light Shading",true);
+toggleLambert.setUiAttribs({"hidePort":true});
+toggleLambert.onChange=updateToggles;
+
+var toggleDiffuse=op.inValueBool("Toggle Diffuse Texture",true);
+toggleDiffuse.setUiAttribs({"hidePort":true});
+toggleDiffuse.onChange=updateToggles;
+
+var toggleNormal=op.inValueBool("Toggle Normal Texture",true);
+toggleNormal.setUiAttribs({"hidePort":true});
+toggleNormal.onChange=updateToggles;
+
+
+var toggleSpecular=op.inValueBool("Toggle Specular",true);
+toggleSpecular.setUiAttribs({"hidePort":true});
+toggleSpecular.onChange=updateToggles;
+
+var toggleAo=op.inValueBool("Toggle Ao Texture",true);
+toggleAo.setUiAttribs({"hidePort":true});
+toggleAo.onChange=updateToggles;
+
+var toggleFalloff=op.inValueBool("Toggle Falloff",true);
+toggleFalloff.setUiAttribs({"hidePort":true});
+toggleFalloff.onChange=updateToggles;
+
+function updateToggles()
+{
+    if(toggleLambert.get())shader.define("SHOW_LAMBERT");
+        else shader.removeDefine("SHOW_LAMBERT");
+
+    if(toggleDiffuse.get())shader.define("SHOW_DIFFUSE");
+        else shader.removeDefine("SHOW_DIFFUSE");
+
+    if(toggleSpecular.get())shader.define("SHOW_SPECULAR");
+        else shader.removeDefine("SHOW_SPECULAR");
+
+    if(toggleNormal.get())shader.define("SHOW_NORMAL");
+        else shader.removeDefine("SHOW_NORMAL");
+
+    if(toggleAo.get())shader.define("SHOW_AO");
+        else shader.removeDefine("SHOW_AO");
+
+    if(toggleFalloff.get())shader.define("SHOW_FALLOFF");
+        else shader.removeDefine("SHOW_FALLOFF");
+
+}
+
+
+updateToggles();
 
 execute.onTriggered=function()
 {

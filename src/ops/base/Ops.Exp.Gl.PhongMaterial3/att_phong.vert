@@ -58,9 +58,9 @@ void main()
     vec4 pos = vec4( vPosition, 1. );
     mat4 mMatrix=modelMatrix;
 
-    // #ifdef HAS_TEXTURES
-        texCoord=attrTexCoord;
-    // #endif
+    #ifdef HAS_TEXTURES
+        texCoord=vec2(attrTexCoord.x,1.0-attrTexCoord.y);
+    #endif
     
     norm=attrVertNormal;
 
@@ -77,7 +77,7 @@ void main()
         mvPos=(mvMatrix * pos).xyz;
         EyeDirection_cameraspace = vec3(0.0,0.0,0.0) - mvPos;
 
-vMatrix=viewMatrix;
+        vMatrix=viewMatrix;
 
 
     	vec3 vertexTangent_cameraspace = ( vec4(normalize(attrTangent),1.0)).xyz;

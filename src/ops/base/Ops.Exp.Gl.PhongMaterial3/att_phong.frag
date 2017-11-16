@@ -6,6 +6,11 @@
 #ifdef HAS_TEXTURE_SPECULAR
     UNI sampler2D texSpecular;
 #endif
+#ifdef HAS_TEXTURE_AO
+    UNI sampler2D texAo;
+#endif
+
+UNI float fresnel;
 
 #ifdef HAS_TEXTURE_NORMAL
     UNI sampler2D texNormal;
@@ -53,6 +58,19 @@ float getfallOff(Light light,float distLight)
     t=t* (20.0*light.falloff*20.0*light.falloff);
 
     return min(1.0,max(t, 0.0));
+}
+
+float calcFresnel(vec3 direction, vec3 normal)
+{
+    vec3 nDirection = normalize( direction );
+    vec3 nNormal = normalize( normal );
+    vec3 halfDirection = normalize( nNormal + nDirection );
+
+    float cosine = dot( halfDirection, nDirection );
+    float product = max( cosine, 0.0 );
+    float factor = pow( product, 5.0 );
+
+    return factor;
 }
 
 void main()
@@ -111,41 +129,75 @@ void main()
 
 
         #ifndef HAS_TEXTURE_NORMAL
-            vec3 lambert = vec3( max(dot(lightDir,normal), 0.0) );
-            vec3 lambertColor=lambert * light.color.rgb * light.mul;
-            lambertColor*=getfallOff(light, length(lightModelDiff));
-    
-            col+=lambertColor;
+        
+            #ifdef SHOW_LAMBERT
+                vec3 lambert = vec3( max(dot(lightDir,normal), 0.0) );
+                vec3 lambertColor=lambert * light.color.rgb * light.mul;
+                lambertColor*=getfallOff(light, length(lightModelDiff));
+        
+                col+=lambertColor;
+            #endif
+
         #endif
 
+        #ifndef SHOW_LAMBERT
+            col=vec3(r,g,b);
+        #endif
 
 
         col+=vec3(light.ambient);
 
-        // col=vec3(1.0,1.0,1.0);
         
         #ifdef HAS_TEXTURE_NORMAL
-        
-            col+= light.color.rgb * light.mul*((cosTheta));// (distance*distance));
+        #ifdef SHOW_NORMAL
+            #ifdef SHOW_LAMBERT
+                col+= light.color.rgb * light.mul*((cosTheta));// (distance*distance));
+            #endif
             
-            // col+=(cosAlpha);
-            col+=specular*pow(cosAlpha,5.0);// (distance*distance);
-            
-            
-            
-            // col=vec3(distance/.0);
-        
+            #ifdef SHOW_SPECULAR
+                float specMul=specular;
+                #ifdef HAS_TEXTURE_SPECULAR
+                    specMul*=texture2D(texSpecular, texCoord).r;
+                #endif
+                
+                col+=specMul*pow(cosAlpha,5.0);// (distance*distance);
+            #endif
+
         #endif
-        
+        #endif
+
+        #ifndef SHOW_NORMAL
+            col=vec3(r,g,b);
+        #endif
+
+        #ifdef SHOW_FALLOFF
+            col*=getfallOff(light, length(lightModelDiff));
+        #endif
+
     }
     
-    #ifdef HAS_TEXTURE_DIFFUSE
-        col*= texture2D(texDiffuse, texCoord).rgb;
-    #endif
-    #ifndef HAS_TEXTURE_DIFFUSE
-        col*= vec3(r,g,b);
+    
+    #ifdef SHOW_DIFFUSE
+        #ifdef HAS_TEXTURE_DIFFUSE
+            col*= texture2D(texDiffuse, texCoord).rgb;
+        #endif
+        #ifndef HAS_TEXTURE_DIFFUSE
+            col*= vec3(r,g,b);
+        #endif
     #endif
     
+    #ifndef SHOW_DIFFUSE
+        col*=vec3(0.5);
+    #endif
+    
+    #ifdef SHOW_AO
+    #ifdef HAS_TEXTURE_AO
+        col*= texture2D(texAo, texCoord).rgb;
+    #endif
+    #endif
+
+    vec3 vNormal = normalize(normalMatrix * norm);
+    col+=vec3(r,g,b)*(calcFresnel(normalize(mvPos.xyz),vNormal)*fresnel*5.0);
 
 
 
