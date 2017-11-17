@@ -60,10 +60,10 @@ CABLES.Requirements.prototype.checkOp=function(op)
                 {
                     if(op.patch.cgl && op.patch.cgl.canvas)op.patch.cgl.canvas.remove();
                     var title=CABLES.Requirements.infos[reqId].title;
-                    if(CABLES.Requirements.infos[reqId].caniuse) title='<a href="'+CABLES.Requirements.infos[reqId].caniuse+'" target="_blank">'+CABLES.Requirements.infos[reqId].title+'</a>';
+                    if(CABLES.Requirements.infos[reqId].caniuse) title='<a href="'+CABLES.Requirements.infos[reqId].caniuse+'" target="_blank">'+CABLES.Requirements.infos[reqId].title+' ('+op.objName+')</a>';
                     // document.writeln('<pre>browser does not meet requirement: '+title+'</pre>');
                     // console.error("browser does not meet requirement: "+CABLES.Requirements.infos[reqId].title);
-                    throw 'this browser does not meet requirement: '+CABLES.Requirements.infos[reqId].title;
+                    throw 'this browser does not meet requirement: '+CABLES.Requirements.infos[reqId].title+' ('+op.objName+')';
                 }
 
                 this.result[reqId]=
