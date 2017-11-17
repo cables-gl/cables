@@ -108,8 +108,6 @@ function bufferData(spline,pointArr)
         
 
     }
-    console.log("spline.geom.length",spline.geom.vertices.length);
-    
     spline.mesh.updateVertices(spline.geom);
 
 }

@@ -10,6 +10,10 @@
     UNI sampler2D texAo;
 #endif
 
+#ifdef HAS_TEXTURE_EMISSIVE
+    UNI sampler2D texEmissive;
+#endif
+
 UNI float fresnel;
 
 #ifdef HAS_TEXTURE_NORMAL
@@ -85,7 +89,7 @@ void main()
         vec3 TextureNormal_tangentspace = normalize(texture2D(texNormal, texCoord).rgb*2.0-1.0);
     #endif
 
-float falloff=1.0;
+// float falloff=0.0;
   
     for(int l=0;l<NUM_LIGHTS;l++)
     {
@@ -95,6 +99,12 @@ float falloff=1.0;
         vec3 lightDir = normalize(lightModelDiff);
   
       	float distance = length( lightModelDiff );
+        float falloff=getfallOff(light, distance);
+        #ifndef SHOW_FALLOFF
+            falloff=1.0;
+        #endif
+
+
 
         #ifdef HAS_TEXTURE_NORMAL
 
@@ -153,7 +163,7 @@ float falloff=1.0;
         #ifdef HAS_TEXTURE_NORMAL
         #ifdef SHOW_NORMAL
             #ifdef SHOW_LAMBERT
-                col+= light.color.rgb * light.mul*((cosTheta));// (distance*distance));
+                col+= falloff*(light.color.rgb * light.mul*((cosTheta)))*1.0;
             #endif
             
             #ifdef SHOW_SPECULAR
@@ -162,7 +172,7 @@ float falloff=1.0;
                     specMul*=texture2D(texSpecular, texCoord).r;
                 #endif
                 
-                col+=specMul*pow(cosAlpha,5.0);// (distance*distance);
+                col+=light.mul*specMul*pow(cosAlpha,5.0);// (distance*distance);
             #endif
 
         #endif
@@ -172,7 +182,6 @@ float falloff=1.0;
             col=vec3(r,g,b);
         #endif
         
-        falloff*=getfallOff(light, length(lightModelDiff));
 
 
     }
@@ -199,10 +208,15 @@ float falloff=1.0;
 
     vec3 vNormal = normalize(normalMatrix * norm);
     col+=vec3(r,g,b)*(calcFresnel(normalize(mvPos.xyz),vNormal)*fresnel*5.0);
+    
+    #ifdef SHOW_EMISSIVE
+    #ifdef HAS_TEXTURE_EMISSIVE
+        col+= 25.0*texture2D(texEmissive, texCoord).rgb;
 
-    #ifdef SHOW_FALLOFF
-        col*=falloff;
     #endif
+    #endif
+
+    
 
 
     {{MODULE_COLOR}}

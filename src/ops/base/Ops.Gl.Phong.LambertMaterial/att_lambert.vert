@@ -3,6 +3,10 @@
 
 IN vec3 vPosition;
 IN vec3 attrVertNormal;
+IN vec2 attrTexCoord;
+
+IN vec3 attrTangent;
+IN vec3 attrBiTangent;
 
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
@@ -12,6 +16,8 @@ OUT vec3 norm;
 OUT mat4 mvMatrix;
 OUT mat3 normalMatrix;
 OUT vec4 modelPos;
+OUT vec2 texCoord;
+
 
 mat3 transposeMat3(mat3 m)
 {
@@ -42,6 +48,9 @@ void main()
     vec4 pos = vec4( vPosition, 1. );
     mat4 mMatrix=modelMatrix;
 
+    texCoord=attrTexCoord;
+
+
     norm=attrVertNormal;
 
     {{MODULE_VERTEX_POSITION}}
@@ -51,6 +60,8 @@ void main()
 
 
     mvMatrix=viewMatrix*mMatrix;
+
+
 
     gl_Position = projMatrix * mvMatrix * pos;
 }

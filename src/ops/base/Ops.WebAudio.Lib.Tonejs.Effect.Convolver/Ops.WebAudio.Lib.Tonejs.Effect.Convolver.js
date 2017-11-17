@@ -26,13 +26,18 @@ function loadAudioFile() {
     var file = filePort.get();
     fileLoadedPort.set(false);
     if(file) {
-        node.load(file, function() {
+        var url = op.patch.getFilePath(String(file));
+        node.load(url, function() {
             fileLoadedPort.set(true);
         });
     }
 }
 
 // init
-filePort.set("/assets/library/audio/impulse_responses/IR_Drainage_Tunnel.mp3"); // default IR
+
 fileLoadedPort.set(false);
-loadAudioFile();
+op.onLoaded = function() {
+    if(filePort.get().length === 0) {
+        filePort.set("/assets/library/audio/impulse_responses/IR_Drainage_Tunnel.mp3"); // default IR
+    }
+};

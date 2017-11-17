@@ -14,23 +14,27 @@ var value2=op.inValue("Value In",1);
 var trigger=op.inFunctionButton("Start");
 var next=op.outFunction("Next");
 
-var outVal=op.outValue("Result",1);
+var outVal=op.outValue("Result",0);
 
 var middle=op.outFunction("Middle");
 
 trigger.onTriggered=setupAnim;
 
 
-outVal.set(1);
+// outVal.set(1);
 
 
 update.onTriggered=function()
 {
     var time=CABLES.now()/1000.0;
     if(anim.isStarted(time)) outVal.set(anim.getValue(time));
-        else outVal.set(1);
+        else outVal.set(value2.get());
 };
 
+value2.onChange=function()
+{
+    outVal.set(value2.get());
+};
 
 function setupAnim()
 {

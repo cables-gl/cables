@@ -61,7 +61,8 @@ function loadMediaFile(){
     if(!file.get()){ return; }
     audio = new Audio();
     audio.crossOrigin = "anonymous";
-    audio.src = file.get();
+    var url = op.patch.getFilePath(String(file.get()));
+    audio.src = url;
     media = audioContext.createMediaElementSource(audio);
     audio.addEventListener('loadedmetadata', function(){
         duration.set(audio.duration);

@@ -4,9 +4,7 @@ var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
 
 var inSpecular=op.inValueSlider("Specular",0.5);
 
-
-
-    // diffuse color
+// diffuse color
 
 var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -30,6 +28,8 @@ r.set(Math.random());
 g.set(Math.random());
 b.set(Math.random());
 a.set(1.0);
+
+
 
 
 
@@ -139,3 +139,5 @@ execute.onTriggered=function()
     next.trigger();
     cgl.setPreviousShader();
 };
+
+

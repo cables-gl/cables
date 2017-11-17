@@ -19,6 +19,10 @@
             },
             {
                 "type": "0",
+                "name": "Enable"
+            },
+            {
+                "type": "0",
                 "name": "Prevent Default"
             }
         ],
@@ -37,5 +41,10 @@
             }
         ],
         "name": "Ops.Devices.Keyboard.KeyPressLearn"
-    }
+    },
+    "updated": 1510680466751,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "f069c0db-4051-4eae-989e-6ef7953787fd",
+    "created": 1510680311876
 }

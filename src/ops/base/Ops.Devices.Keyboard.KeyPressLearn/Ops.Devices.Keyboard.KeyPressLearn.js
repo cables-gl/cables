@@ -9,6 +9,8 @@ var canvasOnly=op.addInPort(new Port(op,"canvas only",OP_PORT_TYPE_VALUE, {"disp
 var outPressed=op.outValue("Pressed",false);
 var modKey=op.addInPort(new Port(op,"Mod Key",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['none','alt']} ));
 
+var inEnable=op.inValueBool("Enabled",true);
+
 var preventDefault=op.inValueBool("Prevent Default");
 
 var cgl=op.patch.cgl;
@@ -100,6 +102,18 @@ function addCanvasListener() {
 function addDocumentListener() {
     document.addEventListener("keydown", onKeyDown, false);
     document.addEventListener("keyup", onKeyUp, false);
+}
+
+inEnable.onChange=function()
+{
+    if(!inEnable.get())
+    {
+        removeListeners();
+    }
+    else
+    {
+        addListener();
+    }
 }
 
 canvasOnly.onValueChange(function(){

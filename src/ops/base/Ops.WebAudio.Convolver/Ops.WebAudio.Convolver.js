@@ -19,37 +19,39 @@ var myImpulseBuffer;
 
 function getImpulse() {
     var impulseUrl = impulseResponse.get();
-    op.log("[impulse response] Loading impulse response: " + impulseUrl);
-  var ajaxRequest = new XMLHttpRequest();
-  ajaxRequest.open('GET', impulseUrl, true);
-  ajaxRequest.responseType = 'arraybuffer';
-
-    ajaxRequest.onload = function() {
-
-    var impulseData = ajaxRequest.response;
-
-    audioContext.decodeAudioData(impulseData, function(buffer) {
-        if(buffer.sampleRate != audioContext.sampleRate) {
-            op.log('[impulse response] Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate);
-            op.uiAttr( { 'warning': 'Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate } );
-            return;
-        }
-        myImpulseBuffer = buffer;
-        convolver.buffer = myImpulseBuffer;
-        convolver.loop = false;
-		convolver.normalize = normalize.get();
-		try{
-		    audioIn.get().connect(convolver);
-		} catch(e){
-		    op.log("[audio in] Could not connect audio in to convolver" + e);
-		}
-        audioOut.set(convolver);
-        op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
-      },
-      function(e){ op.log("[impulse response] Error decoding audio data" + e.err); });
-  };
-
-  ajaxRequest.send();
+    var ajaxRequest = new XMLHttpRequest();
+    var url = op.patch.getFilePath(impulseUrl);
+    if(typeof url === 'string' && url.length > 1) {
+        ajaxRequest.open('GET', url, true);
+        ajaxRequest.responseType = 'arraybuffer';    
+        ajaxRequest.onload = function() {
+            var impulseData = ajaxRequest.response;
+        
+            audioContext.decodeAudioData(impulseData, function(buffer) {
+                if(buffer.sampleRate != audioContext.sampleRate) {
+                    op.log('[impulse response] Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate);
+                    op.uiAttr( { 'warning': 'Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate } );
+                    return;
+                }
+                myImpulseBuffer = buffer;
+                convolver.buffer = myImpulseBuffer;
+                convolver.loop = false;
+        		convolver.normalize = normalize.get();
+        		try{
+        		    audioIn.get().connect(convolver);
+        		} catch(e){
+        		    op.log("[audio in] Could not connect audio in to convolver" + e);
+        		}
+                audioOut.set(convolver);
+                op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
+            }, function(e){
+              op.log("[impulse response] Error decoding audio data" + e.err);
+              
+            });
+        };
+    
+      ajaxRequest.send();
+    }
 }
 
 impulseResponse.onValueChange( getImpulse );

@@ -18,9 +18,15 @@ var inFesnel=op.inValueSlider("Fesnel",0);
 
 var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
 
+
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'PhongMaterial3');
 // shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_NORMAL','MODULE_BEGIN_FRAG']);
+shader.define('NUM_LIGHTS','1');
+
+var shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
+shaderOut.set(shader);
+shaderOut.ignoreValueSerialize=true;
 
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 g.uniform=new CGL.Uniform(shader,'f','g',g);
@@ -132,7 +138,7 @@ var updateLights=function()
 
 function texturingChanged()
 {
-    if(diffuseTexture.get() || normalTexture.get() || specTexture.get())
+    if(diffuseTexture.get() || normalTexture.get() || specTexture.get()|| aoTexture.get()|| emissiveTexture.get())
     {
         shader.define('HAS_TEXTURES');
     }
@@ -235,6 +241,29 @@ aoTexture.onChange=function()
     }
 };
 
+// emissive texture
+var emissiveTexture=this.addInPort(new Port(this,"Emissive Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+emissiveTexture.uniform=new CGL.Uniform(shader,'t','texEmissive',4);
+emissiveTexture.ignoreValueSerialize=true;
+shader.bindTextures=bindTextures;
+
+emissiveTexture.onChange=function()
+{
+    if(emissiveTexture.get())
+    {
+        // if(aoTextureUniform!==null)return;
+        // shader.removeUniform('texEmissive');
+        shader.define('HAS_TEXTURE_EMISSIVE');
+        
+    }
+    else
+    {
+        // shader.removeUniform('texAo');
+        shader.removeDefine('HAS_TEXTURE_EMISSIVE');
+        // aoTextureUniform=null;
+    }
+};
+
 
 function bindTextures()
 {
@@ -260,6 +289,12 @@ function bindTextures()
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE3);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, normalTexture.get().tex);
+    }
+
+    if(emissiveTexture.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE4);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, emissiveTexture.get().tex);
     }
 
 }
@@ -290,6 +325,10 @@ var toggleFalloff=op.inValueBool("Toggle Falloff",true);
 toggleFalloff.setUiAttribs({"hidePort":true});
 toggleFalloff.onChange=updateToggles;
 
+var toggleEmissive=op.inValueBool("Toggle Emissive",true);
+toggleEmissive.setUiAttribs({"hidePort":true});
+toggleEmissive.onChange=updateToggles;
+
 function updateToggles()
 {
     if(toggleLambert.get())shader.define("SHOW_LAMBERT");
@@ -309,6 +348,9 @@ function updateToggles()
 
     if(toggleFalloff.get())shader.define("SHOW_FALLOFF");
         else shader.removeDefine("SHOW_FALLOFF");
+
+    if(toggleEmissive.get())shader.define("SHOW_EMISSIVE");
+        else shader.removeDefine("SHOW_EMISSIVE");
 
 }
 

@@ -113,7 +113,6 @@ function updateShininess()
 
 {
     // diffuse texture
-
     var diffuseTexture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var diffuseTextureUniform=null;
     shader.bindTextures=bindTextures;
