@@ -1,0 +1,86 @@
+{
+    "updated": 1510907723973,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "4698b1c4-859e-463c-97d1-9179e70ee674",
+    "created": 1510753963538,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "execute"
+            },
+            {
+                "type": "0",
+                "name": "Specular"
+            },
+            {
+                "type": "0",
+                "name": "diffuse r"
+            },
+            {
+                "type": "0",
+                "name": "diffuse g"
+            },
+            {
+                "type": "0",
+                "name": "diffuse b"
+            },
+            {
+                "type": "0",
+                "name": "diffuse a"
+            },
+            {
+                "type": "0",
+                "name": "Fesnel"
+            },
+            {
+                "type": "2",
+                "name": "Diffuse Texture"
+            },
+            {
+                "type": "2",
+                "name": "Normal Texture"
+            },
+            {
+                "type": "2",
+                "name": "Specular Texture"
+            },
+            {
+                "type": "2",
+                "name": "AO Texture"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Light Shading"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Diffuse Texture"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Normal Texture"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Specular"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Ao Texture"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Falloff"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            }
+        ],
+        "name": "Ops.Exp.Gl.PhongMaterial3"
+    }
+}

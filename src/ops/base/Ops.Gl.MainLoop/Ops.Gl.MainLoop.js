@@ -1,5 +1,4 @@
 
-op.name='MainLoop';
 
 var fpsLimit=op.inValue("FPS Limit",0);
 var trigger=op.outFunction("trigger");

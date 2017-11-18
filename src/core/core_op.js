@@ -21,7 +21,13 @@ CABLES.Op = function()
     this.uiAttribs={};
     this.enabled=true;
     this.patch=arguments[0];
-    this.name=arguments[1] || 'unknown';
+    this.name=arguments[1];
+    
+    if(this.name)
+    {
+        this.name=this.name.split('.')[this.name.split('.').length-1]
+    }
+
     this.id=CABLES.generateUUID();
     this.onAddPort=null;
     this.onCreate=null;

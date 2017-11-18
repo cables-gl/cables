@@ -7,39 +7,9 @@ var smooth=op.inValueBool("Smooth",false);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'UNI float width;'
-    .endl()+'UNI sampler2D tex;'
-    .endl()+'UNI float r;'
-    .endl()+'UNI float g;'
-    .endl()+'UNI float b;'
-    .endl()+'UNI float aspect;'
 
-    .endl()+'UNI bool smoothed;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=texture2D(tex,texCoord);'
-
-    .endl()+'if(!smoothed)'
-    .endl()+'{'
-
-    .endl()+'   if( texCoord.x>1.0-width/3.0 || texCoord.y>1.0-width/aspect/3.0 || texCoord.y<width/aspect/3.0 || texCoord.x<width/3.0 ) col = vec4(r,g,b, 1.0);'
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'} else {'
-    .endl()+'   float f=smoothstep(0.0,width,texCoord.x)-smoothstep(1.0-width,1.0,texCoord.x);'
-    .endl()+'   f*=smoothstep(0.0,width/aspect,texCoord.y);'
-    .endl()+'   f*=smoothstep(1.0,1.0-width/aspect,texCoord.y);'
-
-    .endl()+'   gl_FragColor = mix(col,vec4(r,g,b, 1.0),1.0-f);'
-    .endl()+'}'
-    .endl()+'}';
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.border_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var aspectUniform=new CGL.Uniform(shader,'f','aspect',0);
 var uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
