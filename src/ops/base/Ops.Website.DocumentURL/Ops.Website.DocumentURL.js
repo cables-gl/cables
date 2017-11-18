@@ -1,5 +1,3 @@
-op.name="DocumentURL";
-
 var outUrl=op.outValue("URL");
 var outHost=op.outValue("Host");
 var outHash=op.outValue("Hash");

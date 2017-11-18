@@ -8,7 +8,6 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
 
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.chromatic_frag);

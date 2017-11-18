@@ -1,4 +1,3 @@
-op.name="NumberArray";
 
 var numValues=op.inValueInt("numValues");
 

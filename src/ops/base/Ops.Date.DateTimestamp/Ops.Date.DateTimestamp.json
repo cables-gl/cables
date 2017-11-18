@@ -29,5 +29,6 @@
             }
         ],
         "name": "Ops.Date.Date"
-    }
+    },
+    "summary": "calculates the timestamp of a date by year/month/day/hour/minute"
 }
