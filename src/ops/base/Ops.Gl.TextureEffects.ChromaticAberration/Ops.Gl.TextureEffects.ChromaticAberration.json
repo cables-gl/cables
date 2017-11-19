@@ -12,6 +12,14 @@
             {
                 "type": "0",
                 "name": "Lens Distort"
+            },
+            {
+                "type": "2",
+                "name": "Mask"
+            },
+            {
+                "type": "0",
+                "name": "Smooth"
             }
         ],
         "portsOut": [
@@ -22,7 +30,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.ChromaticAberration"
     },
-    "updated": 1510696358046,
+    "updated": 1511079260824,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "38ac43a1-1757-48f4-9450-29f07ac0d376",
