@@ -27,7 +27,8 @@ void main()
    }
 
     #ifdef MASK
-        pix*=texture2D(texMask,texCoord).r;
+        vec4 m=texture2D(texMask,texCoord);
+        pix*=m.r*m.a;
     #endif
 
     #ifdef SMOOTH
