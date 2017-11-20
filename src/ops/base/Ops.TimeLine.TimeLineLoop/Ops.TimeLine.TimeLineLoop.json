@@ -1,1 +1,27 @@
-{}
+{
+    "updated": 1511161203160,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "e450a850-7311-48b5-abfc-07ec1fea3b8e",
+    "created": 1511161201893,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Execute"
+            },
+            {
+                "type": "0",
+                "name": "duration"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.TimeLine.TimeLineLoop"
+    },
+    "summary": "automatic rewind of timeline at a certain time"
+}
