@@ -1,0 +1,26 @@
+{
+    "updated": 1509545843731,
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "1143b9b7-9c4e-479d-bc6c-b010ee3ab2a2",
+    "created": 1509543528606,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "1",
+                "name": "Set Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Out Value"
+            }
+        ],
+        "name": "Ops.SetValueOnTrigger"
+    }
+}

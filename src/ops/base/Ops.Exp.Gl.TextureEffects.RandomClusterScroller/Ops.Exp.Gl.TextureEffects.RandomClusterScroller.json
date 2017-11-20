@@ -1,5 +1,9 @@
 {
-    "summary": "Transform objects in 3d space (rotate translate scale)",
+    "updated": 1507027000912,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "49a054c4-5b30-4158-8d10-f9d941e6c71c",
+    "created": 1507026031571,
     "layout": {
         "portsIn": [
             {
@@ -8,31 +12,31 @@
             },
             {
                 "type": "0",
-                "name": "posX"
+                "name": "Time"
             },
             {
                 "type": "0",
-                "name": "posY"
+                "name": "num"
             },
             {
                 "type": "0",
-                "name": "posZ"
+                "name": "blur"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "Min Size"
             },
             {
                 "type": "0",
-                "name": "rotX"
+                "name": "Max Size"
             },
             {
                 "type": "0",
-                "name": "rotY"
+                "name": "Opacity"
             },
             {
                 "type": "0",
-                "name": "rotZ"
+                "name": "Primitive"
             }
         ],
         "portsOut": [
@@ -41,11 +45,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Matrix.Transform"
-    },
-    "updated": 1508319615065,
-    "author": "58dabd06a0d7ec8d1a982e66",
-    "authorName": "cables",
-    "id": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
-    "created": 1504813928558
+        "name": "Ops.Gl.TextureEffects.RandomClusterScroller"
+    }
 }

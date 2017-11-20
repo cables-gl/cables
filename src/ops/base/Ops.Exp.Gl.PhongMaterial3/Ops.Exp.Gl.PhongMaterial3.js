@@ -1,4 +1,4 @@
-op.name="PhongMaterial3";
+
 
 var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
 

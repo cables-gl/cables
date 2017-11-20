@@ -107,7 +107,7 @@ CABLES.Patch.prototype.getFilePath = function(filename) {
 
     filename = filename.replace('//', '/');
 
-    var finalFilename = this.config.prefixAssetPath + filename;
+    var finalFilename = this.config.prefixAssetPath + filename + (this.config.suffixAssetPath||'');
 
     
     console.log('finalFilename',finalFilename);
@@ -199,8 +199,11 @@ CABLES.Patch.prototype.createOp = function(objName) {
             console.log(e.stacktrace);
         }
 
+        
         // return;
     }
+
+
 
     if (op) {
         op.objName = objName;

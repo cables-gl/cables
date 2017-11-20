@@ -1,3 +1,35 @@
 {
-    "summary": "Outputs a changing value based on a sinus operation, which can be used for animations."
+    "summary": "Outputs a changing value based on a sinus operation, which can be used for animations.",
+    "updated": 1510907095589,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "736d3d0e-c920-449e-ade0-f5ca6018fb5c",
+    "created": 1510907095194,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "phase"
+            },
+            {
+                "type": "0",
+                "name": "frequency"
+            },
+            {
+                "type": "0",
+                "name": "amplitude"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Anim.SineAnim"
+    }
 }
