@@ -1,7 +1,37 @@
 {
-    "updated": 1504894542650,
+    "updated": 1511019503168,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
     "id": "b23f64d2-8374-4dfd-8f02-ddda748a95be",
-    "created": 1504894330603
+    "created": 1504894330603,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "URL"
+            },
+            {
+                "type": "0",
+                "name": "Host"
+            },
+            {
+                "type": "0",
+                "name": "Hash"
+            },
+            {
+                "type": "0",
+                "name": "Pathname"
+            },
+            {
+                "type": "0",
+                "name": "Protocol"
+            },
+            {
+                "type": "0",
+                "name": "Port"
+            }
+        ],
+        "name": "Ops.Website.DocumentURL"
+    },
+    "summary": "information about the current URL"
 }

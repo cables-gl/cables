@@ -1,0 +1,23 @@
+{
+    "updated": 1511012667950,
+    "author": "5a0fe67d9641cedb39929853",
+    "authorName": "pandur",
+    "id": "e150fd12-d0ab-4b3f-b3a8-2bbd9a64452b",
+    "created": 1511012653499,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Number"
+            }
+        ],
+        "name": "Ops.String.ParseInt"
+    },
+    "summary": "parse a string to a integer number"
+}

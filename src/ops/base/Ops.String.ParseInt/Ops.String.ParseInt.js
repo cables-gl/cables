@@ -1,4 +1,3 @@
-op.name="ParseInt";
 
 var str=op.inValueString("String");
 var outNum=op.outValue("Number");

@@ -1,4 +1,3 @@
-op.name="TimeLinePlay";
 
 var play=op.inFunctionButton("Play");
 

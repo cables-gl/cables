@@ -1,4 +1,3 @@
-op.name="TypeOf";
 
 var input=op.addInPort(new Port(op,"input"));
 var result=op.addOutPort(new Port(op,"result"));

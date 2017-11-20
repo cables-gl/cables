@@ -1,0 +1,23 @@
+{
+    "updated": 1511019396142,
+    "author": "5a0fe67d9641cedb39929853",
+    "authorName": "pandur",
+    "id": "41f8cea2-139b-43ef-91a2-3fd77557b9af",
+    "created": 1511019379047,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Type.TypeOf"
+    },
+    "summary": "type of the input-port (e.g. bool, number, string)"
+}
