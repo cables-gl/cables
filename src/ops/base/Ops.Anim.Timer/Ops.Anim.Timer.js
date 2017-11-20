@@ -1,5 +1,3 @@
-op.name="Timer";
-
 var playPause=op.inValueBool("Play",true);
 var reset=op.inFunctionButton("Reset");
 var outTime=op.outValue("Time");

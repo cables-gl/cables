@@ -1,1 +1,31 @@
-{"summary":"Get the time since last trigger"}
+{
+    "summary": "Get the time since last trigger",
+    "updated": 1511163009496,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "df54103f-5ef6-4a4f-adcf-dddc005132f8",
+    "created": 1511163009162,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "time"
+            }
+        ],
+        "name": "Ops.Time.TimeSinceTrigger"
+    }
+}

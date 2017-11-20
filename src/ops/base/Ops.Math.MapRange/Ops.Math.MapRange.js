@@ -1,4 +1,4 @@
-op.name='map value range';
+
 var result=op.addOutPort(new Port(op,"result"));
 var v=op.addInPort(new Port(op,"value"));
 var old_min=op.addInPort(new Port(op,"old min"));

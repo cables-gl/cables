@@ -1,1 +1,27 @@
-{"summary":"Divides a number by another","layout":{"portsIn":[{"type":"0","name":"number1"},{"type":"0","name":"number2"}],"portsOut":[{"type":"0","name":"result"}],"name":"Ops.Math.Divide"}}
+{
+    "summary": "Divides a number by another",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number1"
+            },
+            {
+                "type": "0",
+                "name": "number2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Divide"
+    },
+    "updated": 1511163245221,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "86fcfd8c-038d-4b91-9820-a08114f6b7eb",
+    "created": 1511163171260
+}

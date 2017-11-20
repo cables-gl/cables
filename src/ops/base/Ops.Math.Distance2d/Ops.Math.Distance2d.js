@@ -1,4 +1,3 @@
-op.name="Distance2d";
 
 var x1=op.addInPort(new Port(op,"x1"));
 var y1=op.addInPort(new Port(op,"y1"));

@@ -1,4 +1,3 @@
-op.name="TimeSinceTrigger";
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addInPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));

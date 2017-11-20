@@ -1,4 +1,4 @@
-op.name='scale';
+
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var scale=op.addInPort(new Port(op,"scale"));

@@ -14,5 +14,10 @@
         ],
         "name": "Ops.Math.Compare.IsEven"
     },
-    "summary": "Checks if Value is even or not"
+    "summary": "Checks if Value is even or not",
+    "updated": 1511163194071,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "f462c64a-3e17-4de8-a77d-6735725fc9cc",
+    "created": 1511163194086
 }

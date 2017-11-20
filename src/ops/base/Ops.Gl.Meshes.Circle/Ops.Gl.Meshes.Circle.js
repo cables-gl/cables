@@ -1,6 +1,3 @@
-op.name='Circle';
-
-
 var render=op.inFunction("render");
 var segments=op.inValue('segments',40);
 var radius=op.inValue('radius',1);

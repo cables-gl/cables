@@ -1,4 +1,4 @@
-op.name='Repeat 2d';
+
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
 var numx=op.inValueInt("num x");
