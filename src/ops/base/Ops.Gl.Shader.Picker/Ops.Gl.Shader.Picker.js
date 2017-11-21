@@ -79,6 +79,8 @@ function fixTouchEvent(touchEvent)
     {
         touchEvent.offsetX = touchEvent.pageX - touchEvent.target.offsetLeft;
         touchEvent.offsetY = touchEvent.pageY - touchEvent.target.offsetTop;
+        touchEvent.offsetX*=(window.devicePixelRatio||1);
+        touchEvent.offsetY*=(window.devicePixelRatio||1);
 
         return touchEvent;
     }

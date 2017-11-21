@@ -1,0 +1,30 @@
+{
+    "updated": 1511298205972,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "486d5713-5292-47af-bbd3-df81fb7cd3ca",
+    "created": 1511297702633,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Portrait"
+            },
+            {
+                "type": "0",
+                "name": "Landscape"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Supported"
+            },
+            {
+                "type": "0",
+                "name": "Locked"
+            }
+        ],
+        "name": "Ops.Devices.Mobile.LockOrientation"
+    }
+}
