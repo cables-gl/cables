@@ -5,6 +5,11 @@ var geometry=op.addInPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 var seed=op.addInPort(new Port(op,"random seed",OP_PORT_TYPE_VALUE));
 var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
 
+var rotX=op.inValueBool("Rotate X",true);
+var rotY=op.inValueBool("Rotate Y",true);
+var rotZ=op.inValueBool("Rotate Z",true);
+
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var index=op.addOutPort(new Port(op,"index",OP_PORT_TYPE_VALUE));
 
@@ -41,15 +46,14 @@ function initRandom()
         var obj={};
         var geom=geometry.get();
         var faceIndex=Math.floor(geom.verticesIndices.length/3*Math.seededRandom())*3;
-        
+
         obj.pos=vec3.create();
         obj.norm=vec3.create();
-        
+
         points.push( geom.vertices[geom.verticesIndices[faceIndex+0]*3+0] );
         points.push( geom.vertices[geom.verticesIndices[faceIndex+0]*3+1] );
         points.push( geom.vertices[geom.verticesIndices[faceIndex+0]*3+2] );
-        
-        
+
         vec3.set(obj.pos,
             geom.vertices[geom.verticesIndices[faceIndex+0]*3+0],
             geom.vertices[geom.verticesIndices[faceIndex+0]*3+1],
@@ -61,6 +65,10 @@ function initRandom()
             geom.vertexNormals[geom.verticesIndices[faceIndex+0]*3+1],
             geom.vertexNormals[geom.verticesIndices[faceIndex+0]*3+2]
             );
+
+        if(!rotX.get())obj.norm[0]=0;
+        if(!rotY.get())obj.norm[1]=0;
+        if(!rotZ.get())obj.norm[2]=0;
 
         obj.q=quat.create();
 
@@ -79,6 +87,9 @@ function initRandom()
 geometry.onValueChanged=initRandom;
 num.onValueChanged=initRandom;
 seed.onValueChanged=initRandom;
+rotX.onChange==initRandom;
+rotY.onChange==initRandom;
+rotZ.onChange==initRandom;
 
 op.render.onTriggered=function()
 {

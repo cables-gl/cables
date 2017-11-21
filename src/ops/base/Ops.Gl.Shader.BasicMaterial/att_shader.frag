@@ -3,6 +3,7 @@
 
 #ifdef HAS_TEXTURES
     IN vec2 texCoord;
+    IN vec2 texCoordOrig;
     #ifdef HAS_TEXTURE_DIFFUSE
         uniform sampler2D tex;
     #endif
@@ -34,7 +35,13 @@ void main()
       #endif
       col.a*=a;
       #ifdef HAS_TEXTURE_OPACITY
-          col.a*=texture2D(texOpacity,vec2(texCoord.s,1.0-texCoord.t)).g;
+      
+            #ifdef TRANSFORMALPHATEXCOORDS
+                col.a*=texture2D(texOpacity,vec2(texCoordOrig.s,1.0-texCoordOrig.t)).g;
+            #endif
+            #ifndef TRANSFORMALPHATEXCOORDS
+                col.a*=texture2D(texOpacity,vec2(texCoord.s,1.0-texCoord.t)).g;
+            #endif
        #endif
        
    #endif

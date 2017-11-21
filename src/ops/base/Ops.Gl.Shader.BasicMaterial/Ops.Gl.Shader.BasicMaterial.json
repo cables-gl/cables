@@ -40,6 +40,10 @@
             },
             {
                 "type": "0",
+                "name": "Opacity TexCoords Transform"
+            },
+            {
+                "type": "0",
                 "name": "preMultiplied alpha"
             },
             {
@@ -71,7 +75,7 @@
         ],
         "name": "Ops.Gl.Shader.BasicMaterial"
     },
-    "updated": 1511163176736,
+    "updated": 1511200825199,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "85ae5cfa-5eca-4dd8-8b30-850ac34f7cd5",

@@ -44,6 +44,10 @@
             {
                 "type": "0",
                 "name": "Scroll Z"
+            },
+            {
+                "type": "0",
+                "name": "WorldSpace"
             }
         ],
         "portsOut": [
@@ -58,6 +62,6 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8118b7a9-2ba7-4607-8fd1-8525d6fcf0d6",
-    "updated": 1508449255322,
+    "updated": 1511191713769,
     "created": 1505491754109
 }
