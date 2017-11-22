@@ -14,10 +14,11 @@ op.facing.set('back');
 var whichFace=cgl.gl.BACK;
 op.render.onTriggered=function()
 {
-    cgl.gl.cullFace(whichFace);
 
     if(op.enable.get()) cgl.gl.enable(cgl.gl.CULL_FACE);
     else cgl.gl.disable(cgl.gl.CULL_FACE);
+    
+    cgl.gl.cullFace(whichFace);
 
     op.trigger.trigger();
 

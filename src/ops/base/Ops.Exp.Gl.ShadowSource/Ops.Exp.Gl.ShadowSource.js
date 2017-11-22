@@ -153,11 +153,13 @@ var doRender=function()
         cgl.gl.polygonOffset(polyOff.get(),polyOff.get());
     
         cgl.gl.colorMask(false,false,false,false);
+        cgl.frameStore.shadowPass=true;
         renderPickingPass();
         cgl.gl.colorMask(true,true,true,true);
         
         cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
     
+        
     
     
         shadowObj.mapsize=mapSize.get();
@@ -169,6 +171,7 @@ var doRender=function()
         cgl.frameStore.shadow=shadowObj;
         
         cgl.gl.cullFace(cgl.gl.BACK);
+        cgl.frameStore.shadowPass=false;
     
         next.trigger();
         cgl.frameStore.shadow=null;

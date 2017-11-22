@@ -1,0 +1,23 @@
+{
+    "updated": 1511341175017,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "7d8cc30c-2172-404a-a96c-3f15191baa9a",
+    "created": 1511341106418,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exec"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.IgnoreInShadowPass"
+    },
+    "summary": "do not trigger next when rendering the shadow pass"
+}
