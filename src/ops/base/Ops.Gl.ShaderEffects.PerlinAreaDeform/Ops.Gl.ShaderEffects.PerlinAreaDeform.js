@@ -20,12 +20,23 @@ var scrollz=op.inValue("Scroll Z");
 
 var shader=null;
 
+var inWorldSpace=op.inValueBool("WorldSpace");
+
+
 var srcHeadVert=attachments.perlin_deformer_vert;
 
+// var srcBodyVert=''
+//     .endl()+'pos=MOD_deform(pos);' //modelMatrix*
+//     .endl();
 var srcBodyVert=''
-    .endl()+'pos=MOD_deform(pos);' //modelMatrix*
+    .endl()+'#ifndef MOD_WORLDSPACE'
+    .endl()+'   pos=MOD_deform(pos);'
+    .endl()+'#endif'
+    .endl()+'#ifdef MOD_WORLDSPACE'
+    .endl()+'   pos=MOD_deform(modelMatrix*pos);'
+    .endl()+'#endif'
     .endl();
-    
+
 var moduleVert=null;
 
 function removeModule()
@@ -37,6 +48,17 @@ function removeModule()
 
 op.render.onLinkChanged=removeModule;
 
+
+inWorldSpace.onChange=updateWorldspace;
+
+function updateWorldspace()
+{
+    if(!shader)return;
+    if(inWorldSpace.get()) shader.define(moduleVert.prefix+"WORLDSPACE");
+        else shader.removeDefine(moduleVert.prefix+"WORLDSPACE");
+}
+
+
 op.render.onTriggered=function()
 {
     if(!cgl.getShader())
@@ -44,6 +66,14 @@ op.render.onTriggered=function()
          op.trigger.trigger();
          return;
     }
+
+    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+        gui.setTransformGizmo(
+            {
+                posX:x,
+                posY:y,
+                posZ:z
+            });
 
     if(cgl.getShader()!=shader)
     {
@@ -70,6 +100,8 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
+        
+        updateWorldspace();
     }
     
     

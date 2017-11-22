@@ -3,6 +3,7 @@
 IN vec3 vPosition;
 OUT vec3 norm;
 OUT vec2 texCoord;
+OUT vec2 texCoordOrig;
 
 #ifdef HAS_TEXTURES
     IN vec2 attrTexCoord;
@@ -22,6 +23,7 @@ uniform mat4 viewMatrix;
 void main()
 {
     #ifdef HAS_TEXTURES
+        texCoordOrig=attrTexCoord;
         texCoord=attrTexCoord;
         #ifdef TEXTURE_REPEAT
             texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;

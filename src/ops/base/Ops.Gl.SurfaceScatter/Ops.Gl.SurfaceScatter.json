@@ -1,5 +1,9 @@
 {
-    "summary": "Test if the mouse hovers over drawn elements",
+    "updated": 1511174198559,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "1511ba6a-6600-4c36-bfce-6c9abd5b70e5",
+    "created": 1511174004814,
     "layout": {
         "portsIn": [
             {
@@ -7,24 +11,28 @@
                 "name": "render"
             },
             {
-                "type": "0",
-                "name": "Use Mouse Coordinates"
+                "type": "2",
+                "name": "geometry"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "random seed"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "num"
             },
             {
                 "type": "0",
-                "name": "enabled"
+                "name": "Rotate X"
             },
             {
                 "type": "0",
-                "name": "cursor"
+                "name": "Rotate Y"
+            },
+            {
+                "type": "0",
+                "name": "Rotate Z"
             }
         ],
         "portsOut": [
@@ -34,18 +42,13 @@
             },
             {
                 "type": "0",
-                "name": "Something Picked"
+                "name": "index"
             },
             {
-                "type": "2",
-                "name": "pick texture"
+                "type": "3",
+                "name": "Points"
             }
         ],
-        "name": "Ops.Gl.Shader.Picker"
-    },
-    "updated": 1511297592373,
-    "author": "56cdab144f85abfb36c6c089",
-    "authorName": "tim",
-    "id": "09122fbf-3b6b-4a05-ac76-fca031b505b9",
-    "created": 1507128313171
+        "name": "Ops.Gl.SurfaceScatter"
+    }
 }

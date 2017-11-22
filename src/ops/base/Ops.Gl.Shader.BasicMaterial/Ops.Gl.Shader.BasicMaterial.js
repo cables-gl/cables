@@ -160,6 +160,15 @@ op.doBillboard.onChange=function()
         else shader.removeDefine('BILLBOARD');
 };
 
+var texCoordAlpha=op.inValueBool("Opacity TexCoords Transform",false);
+
+texCoordAlpha.onChange=function()
+{
+    if(texCoordAlpha.get()) shader.define('TRANSFORMALPHATEXCOORDS');
+        else shader.removeDefine('TRANSFORMALPHATEXCOORDS');
+    
+};
+
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 function updateTexRepeat()
