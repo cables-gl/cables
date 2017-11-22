@@ -202,7 +202,7 @@ CGL.TextureEffect.prototype.createMesh=function()
 
     geom.verticesIndices = [
         0, 1, 2,
-        3, 1, 2
+        2, 1, 3
     ];
 
     this._cgl.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);

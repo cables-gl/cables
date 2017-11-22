@@ -216,7 +216,6 @@ CABLES.TL.Key.easeInElastic=function(t,key2)
                 t= -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
             }
 
-
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
@@ -242,10 +241,6 @@ CABLES.TL.Key.easeOutElastic=function(t,key2)
 
     return CABLES.TL.Key.linear(t,this,key2);
 };
-
-
-
-
 
 CABLES.TL.Key.easeInBack=function(t,key2)
 {
