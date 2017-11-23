@@ -6,8 +6,12 @@ var stacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
 var radius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 
+
+var startSlice=op.inValueInt("Start Slice",0);
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+
 
 height.set(2);
 slices.set(32);
@@ -25,6 +29,7 @@ stacks.onValueChanged=updateMesh;
 slices.onValueChanged=updateMesh;
 radius.onValueChanged=updateMesh;
 height.onValueChanged=updateMesh;
+startSlice.onValueChanged=updateMesh;
 
 render.onTriggered=function()
 {
@@ -61,7 +66,11 @@ function circleTable(n,halfCircle)
     sint[0] = 0.0;
     cost[0] = 1.0;
 
-    for (i=1; i<size; i++)
+    var ss=startSlice.get();
+    if(ss<0.0)ss=0;
+    if(ss>size-1)ss=size-1;
+
+    for (i=ss; i<size; i++)
     {
         sint[i] = Math.sin(angle*i);
         cost[i] = Math.cos(angle*i);
