@@ -116,9 +116,7 @@ CABLES.Patch.prototype.getFilePath = function(filename) {
     filename = filename.replace('//', '/');
 
     var finalFilename = this.config.prefixAssetPath + filename + (this.config.suffixAssetPath||'');
-
-    
-    console.log('finalFilename',finalFilename);
+    // console.log('finalFilename',finalFilename);
 
     return finalFilename;
 };
