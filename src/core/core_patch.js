@@ -19,6 +19,7 @@ CABLES.Patch = function(cfg) {
     this._paused = false;
     this._frameNum = 0;
     this.instancing = new CABLES.Instancing();
+    this.onOneFrameRendered=null;
 
     this.config = cfg || {
         glCanvasResizeToWindow: false,
@@ -81,6 +82,13 @@ CABLES.Patch = function(cfg) {
 CABLES.Patch.prototype.isPlaying = function() {
     return !this._paused;
 };
+
+CABLES.Patch.prototype.renderOneFrame = function() {
+    this._paused=true;
+    this._renderOneFrame=true;
+    this.exec();
+    this._renderOneFrame=false;
+}
 
 CABLES.Patch.prototype.pause = function() {
     this._paused = true;
@@ -247,9 +255,7 @@ CABLES.Patch.prototype.removeOnAnimFrame = function(op) {
             return;
         }
     }
-
 };
-
 
 CABLES.Patch.prototype.addOnAnimFrameCallback = function(cb) {
     this.animFrameCallbacks.push(cb);
@@ -336,7 +342,9 @@ CABLES.Patch.prototype.renderFrame = function(e) {
 };
 
 CABLES.Patch.prototype.exec = function(e) {
-    if (this._paused || this.aborted) return;
+    
+    if(!this._renderOneFrame && ( this._paused || this.aborted )) return;
+
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
     if (this.config.fpsLimit) {
@@ -348,13 +356,18 @@ CABLES.Patch.prototype.exec = function(e) {
 
     if (CABLES.UI) {
         if (CABLES.UI.capturer) CABLES.UI.capturer.capture(this.cgl.canvas);
-        if (now - lastFrameTime > 500 && lastFrameTime !== 0 && !wasdelayed) {
-            lastFrameTime = 0;
-            setTimeout(this.exec.bind(this), 500);
 
-            if (CABLES.UI) $('#delayed').show();
-            wasdelayed = true;
-            return;
+        if(!this._renderOneFrame)
+        {
+            if (now - lastFrameTime > 500 && lastFrameTime !== 0 && !wasdelayed) {
+                lastFrameTime = 0;
+                setTimeout(this.exec.bind(this), 500);
+    
+                if (CABLES.UI) $('#delayed').show();
+                wasdelayed = true;
+                return;
+            }
+    
         }
 
         // if(now-lastFrameTime>300 && lastFrameTime!==0  && !wasdelayed)
@@ -368,7 +381,7 @@ CABLES.Patch.prototype.exec = function(e) {
         // }
     }
 
-    if (this.config.fpsLimit === 0 || frameDelta > frameInterval || wasdelayed) {
+    if(this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > frameInterval || wasdelayed) {
         this.renderFrame();
 
         if (frameInterval) frameNext = now - (frameDelta % frameInterval);
@@ -380,8 +393,14 @@ CABLES.Patch.prototype.exec = function(e) {
         if (CABLES.UI) $('#delayed').hide();
         wasdelayed = false;
     }
-    requestAnimationFrame(this.exec.bind(this));
 
+    if(this._renderOneFrame && this.onOneFrameRendered)
+    {
+        this.onOneFrameRendered();
+        this._renderOneFrame=false;
+    }
+    
+    requestAnimationFrame(this.exec.bind(this));
 };
 
 

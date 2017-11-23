@@ -91,10 +91,10 @@ CGL.State = function() {
     this.canvasHeight = -1;
     var oldCanvasWidth = -1;
     var oldCanvasHeight = -1;
-    this.doScreenshot = false;
-    this.doScreenshotClearAlpha = false;
+    // this.doScreenshot = false;
+    // this.doScreenshotClearAlpha = false;
     // this.screenShotDataURL=null;
-    this.screenShotCallBack = null;
+    // this.screenShotCallBack = null;
 
     this.getViewPort = function() {
         return viewPort;
@@ -131,6 +131,25 @@ CGL.State = function() {
         self.setShader(simpleShader);
     };
 
+    this.screenShot=function(cb,doScreenshotClearAlpha)
+    {
+        if(doScreenshotClearAlpha) {
+            this.gl.clearColor(1, 1, 1, 1);
+            this.gl.colorMask(false, false, false, true);
+            this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+            this.gl.colorMask(true, true, true, true);
+        }
+
+        // this.doScreenshot = false;
+        // this.screenShotDataURL =
+        this.canvas.toBlob(
+            function(blob) {
+                if (cb) cb(blob);
+                else console.log("no screenshot callback...");
+            }.bind(this));
+
+    }
+
     this.endFrame = function() {
         self.setPreviousShader();
         if (vMatrixStack.length > 0) console.warn('view matrix stack length !=0 at end of rendering...');
@@ -142,22 +161,6 @@ CGL.State = function() {
         pMatrixStack.length = 0;
         shaderStack.length = 0;
 
-        if (this.doScreenshot) {
-            // clear alpha channel
-            if (this.doScreenshotClearAlpha) {
-                this.gl.clearColor(1, 1, 1, 1);
-                this.gl.colorMask(false, false, false, true);
-                this.gl.clear(this.gl.COLOR_BUFFER_BIT);
-                this.gl.colorMask(true, true, true, true);
-            }
-
-            this.doScreenshot = false;
-            // this.screenShotDataURL =
-            this.canvas.toBlob(
-                function(blob) {
-                    if (this.onScreenShot) this.onScreenShot(blob);
-                }.bind(this));
-        }
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
             for (var i = 0; i < cbResize.length; i++) cbResize[i]();
@@ -351,6 +354,71 @@ CGL.State = function() {
 
         }
 
+    };
+
+
+    this.saveScreenshot = function(filename, cb, pw, ph) {
+        // console.log(pw,ph);
+        this.patch.renderOneFrame();
+
+        var w = $('#glcanvas').attr('width');
+        var h = $('#glcanvas').attr('height');
+
+        if (pw) {
+            $('#glcanvas').attr('width', pw);
+            w = pw;
+        }
+        if (ph) {
+            $('#glcanvas').attr('height', ph);
+            h = ph;
+        }
+
+        function padLeft(nr, n, str) {
+            return Array(n - String(nr).length + 1).join(str || '0') + nr;
+        }
+
+        var d = new Date();
+
+        var dateStr = String(d.getFullYear()) +
+            String(d.getMonth() + 1) +
+            String(d.getDate()) + '_' +
+            padLeft(d.getHours(), 2) +
+            padLeft(d.getMinutes(), 2) +
+            padLeft(d.getSeconds(), 2);
+
+        // var projectStr = this.patch.name;
+        // projectStr = projectStr.split(' ').join('_');
+
+        if (!filename) filename = 'cables_'+ dateStr + '.png';
+        else filename += '.png';
+
+        this.patch.cgl.doScreenshotClearAlpha = $('#render_removeAlpha').is(':checked');
+
+        // console.log('this.patch.cgl.doScreenshotClearAlpha ',this.patch.cgl.doScreenshotClearAlpha);
+        // this.patch.cgl.doScreenshot = true;
+
+        // this.patch.cgl.screenShot = function(blob) {
+        this.patch.cgl.screenShot(function(blob)
+        {
+console.log("CALLBACK");
+// ) = function(blob) {
+            $('#glcanvas').attr('width', w);
+            $('#glcanvas').attr('height', h);
+            this.onScreenShot = null;
+
+            var anchor = document.createElement('a');
+
+            anchor.setAttribute('download', filename);
+            anchor.setAttribute('href', URL.createObjectURL(blob));
+            document.body.appendChild(anchor);
+
+            // setTimeout(
+                // function() {
+                    anchor.click();
+                    if (cb) cb(blob);
+
+                // }, 33);
+        }.bind(this),true);
     };
 
 
