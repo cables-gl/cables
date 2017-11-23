@@ -139,7 +139,16 @@ function setMesh()
 
     if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
     geom.verticesIndices=[];
-    geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
+    
+    // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
+    geom.verticesIndices.length=jsonMesh.faces.length*3;
+    for(var i=0;i<jsonMesh.faces.length;i++)
+    {
+        geom.verticesIndices[i*3]=jsonMesh.faces[i][0];
+        geom.verticesIndices[i*3+1]=jsonMesh.faces[i][1];
+        geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
+    }
+    
 
 
     bounds=geom.getBounds();

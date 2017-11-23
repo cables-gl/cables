@@ -9,7 +9,7 @@ var depth=op.inTexture("depth texture");
 var zNear=op.inValue("Frustum Near",0.1);
 var zFar=op.inValue("Frustum Far",20);
 
-var samples=op.inValueInt("Samples",8);
+var samples=op.inValueInt("Samples",4);
 
 var aoRadius=op.inValue("Ao Radius",3);
 var aoClamp=op.inValueSlider("Ao Clamp",0.25);
@@ -36,17 +36,21 @@ var textureAlpha=new CGL.Uniform(shader,'t','texDepth',1);
 aoRadius.uniform=new CGL.Uniform(shader,'f','radius',aoRadius);
 aoClamp.uniform=new CGL.Uniform(shader,'f','aoclamp',aoClamp);
 lumInfluence.uniform=new CGL.Uniform(shader,'f','lumInfluence',lumInfluence);
-samples.uniform=new CGL.Uniform(shader,'i','samples',samples);
+// samples.uniform=new CGL.Uniform(shader,'i','samples',samples);
 
 zNear.uniform=new CGL.Uniform(shader,'f','znear',zNear);
 zFar.uniform=new CGL.Uniform(shader,'f','zfar',zFar);
 
 
+samples.onChange=function()
+{
+    shader.define('SAMPLES',samples.get());
+};
 
 var uniWidth=new CGL.Uniform(shader,'f','width',1024);
 var uniHeight=new CGL.Uniform(shader,'f','height',512);
 
-
+shader.define('SAMPLES',samples.get());
 aoClamp.uniform=new CGL.Uniform(shader,'f','aoclamp',aoClamp);
 
 render.onTriggered=function()

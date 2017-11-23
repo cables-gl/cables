@@ -203,6 +203,7 @@ function embedVideo(force)
         videoElement.preload = 'true';
         var url=op.patch.getFilePath(filename.get());
         videoElement.setAttribute('src',url);
+        videoElement.setAttribute('crossOrigin','anonymous');
         if(!addedListeners)
         {
             addedListeners=true;

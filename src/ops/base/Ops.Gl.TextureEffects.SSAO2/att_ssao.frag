@@ -36,8 +36,8 @@ UNI float znear;
 UNI float zfar;
 
 //user variables
-// const int samples = 16; //ao sample count
-UNI int samples;
+// const int SAMPLES = 16; //ao sample count
+// UNI int SAMPLES;
 
 // const float radius = 3.0; //ao radius
 // const float aoclamp = 0.25; //depth clamp - reduces haloing at screen edges
@@ -142,11 +142,11 @@ void main(void)
 	float ao;
 	
 	float dl = PI*(3.0-sqrt(5.0));
-	float dz = 1.0/float(samples);
+	float dz = 1.0/float(SAMPLES);
 	float l = 0.0;
 	float z = 1.0 - dz/2.0;
 	
-	for (int i = 0; i <= samples; i ++)
+	for (int i = 0; i <= SAMPLES; i ++)
 	{     
 		float r = sqrt(1.0-z);
 		
@@ -157,7 +157,7 @@ void main(void)
 		l = l + dl;
 	}
 	
-	ao /= float(samples);
+	ao /= float(SAMPLES);
 	ao = 1.0-ao;	
 	
 	if (mist)
