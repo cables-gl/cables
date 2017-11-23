@@ -1,4 +1,4 @@
-op.name='CanvasSize';
+
 
 var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
@@ -10,8 +10,12 @@ update();
 
 function update()
 {
+    
+    
     height.set(cgl.canvasHeight);
     width.set(cgl.canvasWidth);
     pixelRatio.set(window.devicePixelRatio);
 }
+
+
 

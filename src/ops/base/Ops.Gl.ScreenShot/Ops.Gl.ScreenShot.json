@@ -1,5 +1,5 @@
 {
-    "updated": 1511447883880,
+    "updated": 1511457026693,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "7eb9a1ec-daf2-445c-a364-0bffa626a84b",
@@ -13,6 +13,18 @@
             {
                 "type": "0",
                 "name": "Filename"
+            },
+            {
+                "type": "0",
+                "name": "Use Canvas Size"
+            },
+            {
+                "type": "0",
+                "name": "Width"
+            },
+            {
+                "type": "0",
+                "name": "Height"
             }
         ],
         "name": "Ops.Gl.ScreenShot"

@@ -76,6 +76,7 @@ CGL.State = function() {
         }
     };
 
+
     this.updateSize=function()
     {
         this.canvas.width = this.canvasWidth = this.canvas.clientWidth*this.pixelDensity;
@@ -317,14 +318,23 @@ CGL.State = function() {
         else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     };
 
+
+    this.setSize=function(w,h)
+    {
+
+        this.canvas.style.width = w+"px";
+        this.canvas.style.height = h+"px";
+
+        this.canvas.width = w*this.pixelDensity;
+        this.canvas.height = h*this.pixelDensity;
+
+        this.updateSize();
+    }
+
     this._resizeToWindowSize = function() {
         console.log('width',window.innerWidth);
 
-        this.canvas.style.width = window.innerWidth+"px";
-        this.canvas.style.height = window.innerHeight+"px";
-
-        this.canvas.width = window.innerWidth*this.pixelDensity;
-        this.canvas.height = window.innerHeight*this.pixelDensity;
+        this.setSize(window.innerWidth,window.innerHeight);
 
         self.updateSize();
     };
@@ -400,8 +410,6 @@ CGL.State = function() {
         // this.patch.cgl.screenShot = function(blob) {
         this.patch.cgl.screenShot(function(blob)
         {
-console.log("CALLBACK");
-// ) = function(blob) {
             $('#glcanvas').attr('width', w);
             $('#glcanvas').attr('height', h);
             this.onScreenShot = null;
@@ -412,12 +420,9 @@ console.log("CALLBACK");
             anchor.setAttribute('href', URL.createObjectURL(blob));
             document.body.appendChild(anchor);
 
-            // setTimeout(
-                // function() {
-                    anchor.click();
-                    if (cb) cb(blob);
+            anchor.click();
+            if (cb) cb(blob);
 
-                // }, 33);
         }.bind(this),true);
     };
 
