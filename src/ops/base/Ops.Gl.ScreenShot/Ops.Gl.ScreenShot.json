@@ -28,5 +28,6 @@
             }
         ],
         "name": "Ops.Gl.ScreenShot"
-    }
+    },
+    "summary": "download the current screen content as png file"
 }
