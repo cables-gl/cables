@@ -168,6 +168,7 @@ CGL.State = function() {
 
             oldCanvasWidth = self.canvasWidth;
             oldCanvasHeight = self.canvasHeight;
+            this.updateSize();
         }
 
 
