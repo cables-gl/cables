@@ -164,11 +164,13 @@ CGL.State = function() {
 
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
-            for (var i = 0; i < cbResize.length; i++) cbResize[i]();
-
+            
             oldCanvasWidth = self.canvasWidth;
             oldCanvasHeight = self.canvasHeight;
+            this.setSize(self.canvasWidth,self.canvasHeight);
             this.updateSize();
+            
+            for (var i = 0; i < cbResize.length; i++) cbResize[i]();
         }
 
 
