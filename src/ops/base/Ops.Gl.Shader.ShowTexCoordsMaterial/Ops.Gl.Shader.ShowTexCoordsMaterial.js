@@ -1,4 +1,3 @@
-op.name='ShowTexCoordsMaterial';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -12,7 +11,6 @@ function doRender()
 }
 
 var srcFrag=''
-    .endl()+'precision highp float;'
     .endl()+'IN vec2 texCoord;'
     .endl()+''
     .endl()+'void main()'
@@ -23,7 +21,6 @@ var srcFrag=''
 
 
 var shader=new CGL.Shader(cgl,'showtexcoords material');
-op.onLoaded=shader.compile;
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 

@@ -7,6 +7,7 @@ IN vec2 attrTexCoord;
 
 IN vec3 attrTangent;
 IN vec3 attrBiTangent;
+IN float attrVertIndex;
 
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;

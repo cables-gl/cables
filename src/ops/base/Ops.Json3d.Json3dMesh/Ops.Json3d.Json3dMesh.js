@@ -103,6 +103,7 @@ function setMesh()
 {
     mesh=null;
     var index=Math.floor(meshIndex.get());
+    
     if(meshes[index])
     {
         mesh=meshes[index];
@@ -149,7 +150,6 @@ function setMesh()
         geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
     }
     
-
 
     bounds=geom.getBounds();
     updateScale();

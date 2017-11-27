@@ -1,7 +1,4 @@
 
-op.name="SplineMesh";
-
-
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
 var thick=op.inValue("Thickness");
@@ -57,7 +54,7 @@ render.onTriggered=function()
 
         mesh._bufVertexAttrib.startItem=Math.floor(
             inStart.get()*(numItems/3))*3;
-        mesh._bufVertexAttrib.numItems=
+        numDrawnPoints=mesh._bufVertexAttrib.numItems=
             Math.floor(
                 Math.min(1,inLength.get()+inStart.get()) * (numItems)
             );
@@ -82,8 +79,6 @@ var vStart=vec3.create();
 var vEnd=vec3.create();
 var q=quat.create();
 var vecRotation=vec3.create();
-//vec3.set(vecRotation, 1,1,0);
-//var vecX=[0,0,0];
 vec3.set(vecRotation, 1,0,0);
 var vecX=[1,0,0];
 var vv=vec3.create();
@@ -93,9 +88,7 @@ var index=0;
 function linesToGeom(points,options)
 {
     if(!geom)
-    {
         geom=new CGL.Geometry();
-    }
 
     var i=0;
 
@@ -149,9 +142,7 @@ function linesToGeom(points,options)
 
     var it=3;
     if(!strip)it=6;
-    // it*=2;
-
-var vv=vec3.create();
+    var vv=vec3.create();
 
     for(var p=0;p<numPoints;p+=it)
     {
@@ -160,21 +151,11 @@ var vv=vec3.create();
             points[p+1],
             points[p+2]);
 
-        // vec3.set(vEnd,
-        //     points[p+3]-points[p+0],
-        //     points[p+4]-points[p+1],
-        //     points[p+5]-points[p+2]);
         vec3.set(vEnd,
             points[p+3],
             points[p+4],
             points[p+5]);
 
-        // vec3.normalize(vEnd,vEnd);
-        // vec3.normalize(vStart,vStart);
-
-        
-        
-        
         vv[0]=vStart[0]-vEnd[0];
         vv[1]=vStart[1]-vEnd[1];
         vv[2]=vStart[2]-vEnd[2];
@@ -232,16 +213,20 @@ var vv=vec3.create();
 //    |     |
 //    B-----D
 //
-
-
-
 // var xd = vecC[0]-vecA[0];
 // var yd = vecC[1]-vecA[1];
 // var zd = vecC[2]-vecA[2];
 // var dist = 3*Math.sqrt(xd*xd + yd*yd + zd*zd);
 
+var repx0=0;
+var repy0=0;
 var repx=1;
 var repy=1;
+
+repx0=p/(numPoints);
+repx=repx0+1/(numPoints/3);
+
+
 
         // a
         geom.vertices[index++]=vecA[0];
@@ -249,7 +234,7 @@ var repy=1;
         geom.vertices[index++]=vecA[2];
 
         geom.texCoords[indexTc++]=repx;
-        geom.texCoords[indexTc++]=0;
+        geom.texCoords[indexTc++]=repy0;
 
         // b
         geom.vertices[index++]=vecB[0];
@@ -264,15 +249,15 @@ var repy=1;
         geom.vertices[index++]=vecC[1];
         geom.vertices[index++]=vecC[2];
 
-        geom.texCoords[indexTc++]=0;
-        geom.texCoords[indexTc++]=0;
+        geom.texCoords[indexTc++]=repx0;
+        geom.texCoords[indexTc++]=repy0;
 
         // d
         geom.vertices[index++]=vecD[0];
         geom.vertices[index++]=vecD[1];
         geom.vertices[index++]=vecD[2];
 
-        geom.texCoords[indexTc++]=0;
+        geom.texCoords[indexTc++]=repx0;
         geom.texCoords[indexTc++]=repy;
 
         // c
@@ -280,8 +265,8 @@ var repy=1;
         geom.vertices[index++]=vecC[1];
         geom.vertices[index++]=vecC[2];
 
-        geom.texCoords[indexTc++]=0;
-        geom.texCoords[indexTc++]=0;
+        geom.texCoords[indexTc++]=repx0;
+        geom.texCoords[indexTc++]=repy0;
 
         // b
         geom.vertices[index++]=vecB[0];
@@ -306,18 +291,8 @@ var repy=1;
             lastD[0]=vecD[0];
             lastD[1]=vecD[1];
             lastD[2]=vecD[2];
-            // vec3.copy(lastC,vecC);
-            // vec3.copy(lastD,vecD);
         }
     }
-
-    // geom.vertices=geom.vertices;
-
-    // for(i=0;i<indices.length;i++) indices[i]=i;
-
-    // geom.vertices=geom.vertices;
-    // geom.texCoords=tc;
-    // geom.verticesIndices=indices;
 }
 
 function doRebuild()
@@ -329,20 +304,13 @@ function doRebuild()
     linesToGeom(points);
 
     if(!mesh)
-    {
         mesh=new CGL.Mesh(cgl,geom);
-
-    }
 
     geomOut.set(null);
     geomOut.set(geom);
 
-
     if(!draw)
-    {
-        // op.log("!DRAWrebuild");
         return;
-    }
 
     // mesh.addVertexNumbers=true;
 

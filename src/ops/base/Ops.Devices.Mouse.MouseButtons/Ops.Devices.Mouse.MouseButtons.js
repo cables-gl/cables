@@ -107,6 +107,7 @@ function removeListeners()
     listenerElement.removeEventListener('mousedown', onMouseDown);
     listenerElement.removeEventListener('mouseup', onMouseUp);
     listenerElement.removeEventListener('contextmenu', onClickRight);
+    listenerElement.removeEventListener('mouseleave', onMouseUp);
     listenerElement=null;
 }
 
@@ -125,6 +126,7 @@ function addListeners()
     listenerElement.addEventListener('mousedown', onMouseDown);
     listenerElement.addEventListener('mouseup', onMouseUp);
     listenerElement.addEventListener('contextmenu', onClickRight);
+    listenerElement.addEventListener('mouseleave', onMouseUp);
 }
 
 active.onChange=function()

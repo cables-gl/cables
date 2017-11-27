@@ -14,6 +14,7 @@ function setOutarray() {
         outArrayPort.set([]);
         return;
     }
+    outArrayPort.set(null);
     outArrayPort.set(inArr.slice(begin, end));
 }
 

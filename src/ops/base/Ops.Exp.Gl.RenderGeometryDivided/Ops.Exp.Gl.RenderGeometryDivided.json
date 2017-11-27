@@ -1,26 +1,26 @@
 {
-    "updated": 1511818911697,
+    "updated": 1511817491049,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "34f8a78c-7648-4431-97c9-1ad681dd3ae1",
-    "created": 1506697987362,
+    "id": "ab0c768e-e684-47ba-b11f-f95d86532df2",
+    "created": 1511815465623,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
             },
             {
-                "type": "0",
-                "name": "Max"
+                "type": "2",
+                "name": "Geometry"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Next"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.VertexNumberLimit"
+        "name": "Ops.Exp.Gl.RenderGeometryDivided"
     }
 }

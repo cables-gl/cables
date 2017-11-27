@@ -1,4 +1,9 @@
 {
+    "updated": 1511818010826,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "b6d933cf-1ef8-41d6-95c1-593be0b4be90",
+    "created": 1511816789809,
     "layout": {
         "portsIn": [
             {
@@ -6,24 +11,28 @@
                 "name": "render"
             },
             {
-                "type": "2",
-                "name": "Geometry"
+                "type": "0",
+                "name": "Distance"
             },
             {
                 "type": "0",
-                "name": "Update All"
+                "name": "Strength"
             },
             {
                 "type": "0",
-                "name": "Update Vertices"
+                "name": "Smooth"
             },
             {
                 "type": "0",
-                "name": "Update Texcoords"
+                "name": "x"
             },
             {
                 "type": "0",
-                "name": "Vertex Numbers"
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
             }
         ],
         "portsOut": [
@@ -32,12 +41,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.RenderGeometry"
-    },
-    "summary": "render a geometry as mesh",
-    "updated": 1511815475149,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "40fa6f13-ee0e-4386-a86b-711e1fbcf1bc",
-    "created": 1509725147147
+        "name": "Ops.Exp.Gl.ExplodeDividedMesh"
+    }
 }

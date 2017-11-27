@@ -1,18 +1,14 @@
 {
-    "updated": 1511818911697,
+    "updated": 1511782490566,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "34f8a78c-7648-4431-97c9-1ad681dd3ae1",
-    "created": 1506697987362,
+    "id": "d01a0ac2-a457-416a-8a45-7db92fb46316",
+    "created": 1511782368102,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
                 "name": "render"
-            },
-            {
-                "type": "0",
-                "name": "Max"
             }
         ],
         "portsOut": [
@@ -21,6 +17,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.VertexNumberLimit"
-    }
+        "name": "Ops.Gl.Shader.ShowTexCoordsMaterial"
+    },
+    "summary": "visualize texturecoordinates of a mesh "
 }

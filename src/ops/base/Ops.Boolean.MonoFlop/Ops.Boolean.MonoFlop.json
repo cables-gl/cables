@@ -1,0 +1,31 @@
+{
+    "updated": 1511644657898,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "3a4b0a78-4172-41c7-8248-95cb0856ecc8",
+    "created": 1511644281921,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Duration"
+            },
+            {
+                "type": "0",
+                "name": "Retriggerable"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Boolean.MonoFlop"
+    },
+    "summary": "trigger switches bool to true, turns back to false automatically"
+}

@@ -10,8 +10,6 @@ update();
 
 function update()
 {
-    
-    
     height.set(cgl.canvasHeight);
     width.set(cgl.canvasWidth);
     pixelRatio.set(window.devicePixelRatio);

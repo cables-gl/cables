@@ -250,9 +250,10 @@ letterSpace.onChange=function()
 
 function generateMesh()
 {
-    var theString=String(str.get());
+    var theString=String(str.get()+'');
     // if(!(''+))return;
     if(!textureOut.get())return;
+
 
     var font=getFont();
     if(!font.geom)
@@ -291,6 +292,7 @@ function generateMesh()
     var m=mat4.create();
 
 
+
     for(var s=0;s<strings.length;s++)
     {
         var txt=strings[s];
@@ -303,7 +305,7 @@ function generateMesh()
         for(var i=0;i<numChars;i++)
         {
             var chStr=txt.substring(i,i+1);
-            var char=font.chars[chStr];
+            var char=font.chars[String(chStr)];
             if(char) width+=(char.texCoordWidth/char.texCoordHeight);
         }
 
@@ -318,7 +320,8 @@ function generateMesh()
         for(var i=0;i<numChars;i++)
         {
             var chStr=txt.substring(i,i+1);
-            var char=font.chars[chStr];
+            var char=font.chars[String(chStr)];
+
 
             if(!char)
             {
@@ -384,7 +387,7 @@ function printChars(fontSize,simulate)
 
     for(var i=0;i<font.characters.length;i++)
     {
-        var chStr=font.characters.substring(i,i+1);
+        var chStr=String(font.characters.substring(i,i+1));
         var chWidth=(ctx.measureText(chStr).width);
 
         if(posx+chWidth>=textureSize)
@@ -423,7 +426,7 @@ function printChars(fontSize,simulate)
 function generateTexture()
 {
     var font=getFont();
-    var string=str.get();
+    var string=String(str.get());
     if(string==null || string==undefined)string='';
     for(var i=0;i<string.length;i++)
     {
