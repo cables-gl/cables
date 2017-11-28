@@ -1,5 +1,5 @@
 {
-    "updated": 1511818010826,
+    "updated": 1511875187868,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "b6d933cf-1ef8-41d6-95c1-593be0b4be90",
@@ -16,11 +16,31 @@
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Absolute"
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "add x"
+            },
+            {
+                "type": "0",
+                "name": "add y"
+            },
+            {
+                "type": "0",
+                "name": "add z"
+            },
+            {
+                "type": "0",
+                "name": "mul x"
+            },
+            {
+                "type": "0",
+                "name": "mul y"
+            },
+            {
+                "type": "0",
+                "name": "mul z"
             },
             {
                 "type": "0",
@@ -33,6 +53,10 @@
             {
                 "type": "0",
                 "name": "z"
+            },
+            {
+                "type": "0",
+                "name": "Size"
             }
         ],
         "portsOut": [
@@ -41,6 +65,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Exp.Gl.ExplodeDividedMesh"
+        "name": "Ops.Gl.ShaderEffects.ExplodeDividedMesh"
     }
 }

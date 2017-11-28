@@ -1,5 +1,5 @@
 {
-    "updated": 1511817491049,
+    "updated": 1511865886234,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ab0c768e-e684-47ba-b11f-f95d86532df2",
@@ -7,20 +7,16 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
-                "name": "Render"
-            },
-            {
                 "type": "2",
                 "name": "Geometry"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
-                "name": "Next"
+                "type": "2",
+                "name": "Result"
             }
         ],
-        "name": "Ops.Exp.Gl.RenderGeometryDivided"
+        "name": "Ops.Gl.Geometry.DivideGeometry"
     }
 }

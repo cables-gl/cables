@@ -1,0 +1,46 @@
+{
+    "updated": 1511864760410,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "a9208e84-e957-43ac-9a79-9c719eff95eb",
+    "created": 1511863096901,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Faces"
+            },
+            {
+                "type": "0",
+                "name": "Vertices"
+            },
+            {
+                "type": "0",
+                "name": "Normals"
+            },
+            {
+                "type": "0",
+                "name": "TexCoords"
+            },
+            {
+                "type": "0",
+                "name": "Tangents"
+            },
+            {
+                "type": "0",
+                "name": "BiTangents"
+            },
+            {
+                "type": "0",
+                "name": "VertexColors"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryInfo"
+    }
+}

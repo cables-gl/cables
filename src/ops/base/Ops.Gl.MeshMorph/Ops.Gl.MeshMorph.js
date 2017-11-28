@@ -94,8 +94,8 @@ render.onTriggered=doRender;
 var srcHeadVert=''
     .endl()+'IN vec3 '+prfx+'_attrMorphTargetA;'
     .endl()+'IN vec3 '+prfx+'_attrMorphTargetB;'
-    .endl()+'uniform float {{mod}}_fade;'
-    .endl()+'uniform float {{mod}}_doMorph;'
+    .endl()+'UNI float {{mod}}_fade;'
+    .endl()+'UNI float {{mod}}_doMorph;'
     .endl();
 
 var srcBodyVert=''

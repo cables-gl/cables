@@ -7,7 +7,7 @@ geometry.ignoreValueSerialize=true;
 var updateAll=op.inValueBool('Update All',true);
 var updateVerts=op.inValueBool('Update Vertices',false);
 var updateTexcoords=op.inValueBool('Update Texcoords',false);
-var vertNums=op.inValueBool('Vertex Numbers',false);
+var vertNums=op.inValueBool('Vertex Numbers',true);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
