@@ -1,0 +1,34 @@
+{
+    "updated": 1511881414029,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "6bf26be8-8735-46ff-ac1e-fce304ac07b1",
+    "created": 1511867976490,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "2",
+                "name": "Geometry 1"
+            },
+            {
+                "type": "2",
+                "name": "Geometry 2"
+            },
+            {
+                "type": "0",
+                "name": "Fade"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.MorphGeometries"
+    }
+}
