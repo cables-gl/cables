@@ -1,0 +1,30 @@
+{
+    "updated": 1511790384420,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "dbfd66dd-048e-4b36-a388-502fd36627cb",
+    "created": 1511790221448,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Input Array"
+            },
+            {
+                "type": "0",
+                "name": "Begin Index"
+            },
+            {
+                "type": "0",
+                "name": "End Index"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Output Array"
+            }
+        ],
+        "name": "Ops.Array.ArraySlice"
+    }
+}

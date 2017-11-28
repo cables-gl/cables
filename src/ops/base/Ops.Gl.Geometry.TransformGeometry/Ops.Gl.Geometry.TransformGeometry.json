@@ -1,0 +1,46 @@
+{
+    "updated": 1511866579360,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "9678fee2-5436-499c-b94d-2603cdbeb380",
+    "created": 1511866169522,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Translate X"
+            },
+            {
+                "type": "0",
+                "name": "Translate Y"
+            },
+            {
+                "type": "0",
+                "name": "Translate Z"
+            },
+            {
+                "type": "0",
+                "name": "Scale X"
+            },
+            {
+                "type": "0",
+                "name": "Scale Y"
+            },
+            {
+                "type": "0",
+                "name": "Scale Z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.TransformGeometry"
+    }
+}

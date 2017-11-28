@@ -1,0 +1,28 @@
+{
+    "updated": 1511867644556,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "04cd9c2e-1318-4be9-8ed8-ddb1903ac6f5",
+    "created": 1511866604790,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "geometry 0"
+            },
+            {
+                "type": "2",
+                "name": "geometry 1"
+            },
+            {
+                "type": "0",
+                "name": "fade"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.MeshMorphTargets"
+    }
+}
