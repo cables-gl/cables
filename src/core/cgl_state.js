@@ -92,10 +92,6 @@ CGL.State = function() {
     this.canvasHeight = -1;
     var oldCanvasWidth = -1;
     var oldCanvasHeight = -1;
-    // this.doScreenshot = false;
-    // this.doScreenshotClearAlpha = false;
-    // this.screenShotDataURL=null;
-    // this.screenShotCallBack = null;
 
     this.getViewPort = function() {
         return viewPort;
@@ -126,7 +122,6 @@ CGL.State = function() {
         if (CABLES.UI) {
             gui.preview.render();
             if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
-
         }
 
         self.setShader(simpleShader);
@@ -141,14 +136,11 @@ CGL.State = function() {
             this.gl.colorMask(true, true, true, true);
         }
 
-        // this.doScreenshot = false;
-        // this.screenShotDataURL =
         this.canvas.toBlob(
             function(blob) {
                 if (cb) cb(blob);
                 else console.log("no screenshot callback...");
             }.bind(this));
-
     }
 
     this.endFrame = function() {
@@ -162,7 +154,6 @@ CGL.State = function() {
         pMatrixStack.length = 0;
         shaderStack.length = 0;
 
-
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
             
             oldCanvasWidth = self.canvasWidth;
@@ -172,14 +163,6 @@ CGL.State = function() {
             
             for (var i = 0; i < cbResize.length; i++) cbResize[i]();
         }
-
-
-        if (CABLES.UI) {
-
-        }
-
-
-
 
     };
 

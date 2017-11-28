@@ -159,6 +159,8 @@ function setMesh()
     mesh=new CGL.Mesh(cgl,geom);
     needSetMesh=false;
     meshes[index]=mesh;
+    
+    console.log(geom);
 
     op.uiAttr({'warning':null});
 }

@@ -13,7 +13,7 @@ geometry.onChange=function()
     var geom=geometry.get();
     if(geom)
     {
-        outFaces.set(geom.verticesIndices.length);
+        outFaces.set(geom.verticesIndices.length/3);
         
         if(geom.vertices) outVertices.set(geom.vertices.length/3);
             else outVertices.set(0);
