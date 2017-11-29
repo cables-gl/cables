@@ -25,6 +25,10 @@
             {
                 "type": "0",
                 "name": "Size"
+            },
+            {
+                "type": "0",
+                "name": "Calculate Normals"
             }
         ],
         "portsOut": [
@@ -39,7 +43,7 @@
         ],
         "name": "Ops.Json3d.Json3dMesh"
     },
-    "updated": 1511895301141,
+    "updated": 1511937322762,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "29bf91a9-504d-4de7-bba6-bae67ee76c77",

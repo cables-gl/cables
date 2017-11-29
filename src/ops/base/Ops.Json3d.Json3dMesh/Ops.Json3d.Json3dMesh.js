@@ -18,6 +18,11 @@ var inSize=op.inValue("Size",1);
 var next=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.outObject("Geometry");
 
+var inNormals=op.inValueSelect("Calculate Normals",["no","smooth","flat"],"no");
+
+
+
+var geom=null;
 var data=null;
 var mesh=null;
 var meshes=[];
@@ -30,8 +35,29 @@ exe.onTriggered=render;
 filename.onChange=reload;
 centerPivot.onChange=setMeshLater;
 meshIndex.onChange=setMeshLater;
+inNormals.onChange=setMeshLater;
+
 inSize.onChange=updateScale;
 var needSetMesh=true;
+
+function calcNormals()
+{
+    if(!geom)
+    {
+        console.log('calc normals: no geom!')
+        return;
+    }
+
+    if(inNormals.get()=='no')return;
+    if(inNormals.get()=='smooth')geom.calculateNormals();
+    if(inNormals.get()=='flat')
+    {
+        geom.unIndex();
+        geom.calculateNormals();
+    }
+    console.log("normals!");
+    
+}
 
 function render()
 {
@@ -103,12 +129,13 @@ function setMesh()
 {
     mesh=null;
     var index=Math.floor(meshIndex.get());
+
     
-    if(meshes[index])
-    {
-        mesh=meshes[index];
-        return;
-    }
+    // if(meshes[index])
+    // {
+    //     mesh=meshes[index];
+    //     return;
+    // }
 
     if(!data || index!=index || !isNumeric(index) || index<0 || index>=data.meshes.length)
     {
@@ -130,7 +157,7 @@ function setMesh()
     
     var i=0;
 
-    var geom=new CGL.Geometry();
+    geom=new CGL.Geometry();
     geom.vertices=JSON.parse(JSON.stringify(jsonMesh.vertices));
     geom.vertexNormals=jsonMesh.normals||[];
     geom.tangents=jsonMesh.tangents||[];
@@ -155,12 +182,14 @@ function setMesh()
     updateScale();
     updateInfo(geom);
 
+    calcNormals();
     geometryOut.set(geom);
     mesh=new CGL.Mesh(cgl,geom);
     needSetMesh=false;
     meshes[index]=mesh;
     
-    console.log(geom);
+    console.log("set mesh done");
+    // console.log(geom);
 
     op.uiAttr({'warning':null});
 }
