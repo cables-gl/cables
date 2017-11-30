@@ -1,5 +1,4 @@
 
-op.name="Json3dMesh";
 var cgl=this.patch.cgl;
 
 var scene=new CABLES.Variable();
@@ -157,26 +156,8 @@ function setMesh()
     
     var i=0;
 
-    geom=new CGL.Geometry();
-    geom.vertices=JSON.parse(JSON.stringify(jsonMesh.vertices));
-    geom.vertexNormals=jsonMesh.normals||[];
-    geom.tangents=jsonMesh.tangents||[];
-    geom.biTangents=jsonMesh.bitangents||[];
-    
+    geom=CGL.Geometry.json2geom(jsonMesh);
     if(centerPivot.get())geom.center();
-
-    if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
-    geom.verticesIndices=[];
-    
-    // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
-    geom.verticesIndices.length=jsonMesh.faces.length*3;
-    for(var i=0;i<jsonMesh.faces.length;i++)
-    {
-        geom.verticesIndices[i*3]=jsonMesh.faces[i][0];
-        geom.verticesIndices[i*3+1]=jsonMesh.faces[i][1];
-        geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
-    }
-    
 
     bounds=geom.getBounds();
     updateScale();
@@ -225,6 +206,7 @@ function reload()
                 catch(ex)
                 {
                     if(CABLES.UI)op.uiAttr({'error':'could not load file...'});
+                    op.patch.loading.finished(loadingId);
                     return;
                 }
 

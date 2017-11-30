@@ -36,7 +36,6 @@ var preRenderAnimFrame=function(t)
     self.patch.timer.setTime(time);
     console.log('prerender',time,prerenderCount,preRenderTimeFrames.anim.keys.length);
     
-
     // cgl.renderStart(cgl,identTranslate);
     cgl.renderStart(cgl,identTranslate,identTranslateView);
     
