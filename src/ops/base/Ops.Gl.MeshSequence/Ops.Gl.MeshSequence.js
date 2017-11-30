@@ -1,8 +1,6 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-this.name='Mesh Sequence';
-
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION ));
 var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 var frame=this.addInPort(new Port(this,"frame",OP_PORT_TYPE_VALUE ));

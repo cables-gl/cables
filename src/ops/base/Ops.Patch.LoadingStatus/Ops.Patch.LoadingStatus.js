@@ -2,7 +2,6 @@ var self=this;
 var cgl=this.patch.cgl;
 var patch=this.patch;
 
-this.name='loadingStatus';
 this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 this.finished=this.addOutPort(new Port(this,"finished",OP_PORT_TYPE_FUNCTION));
 var result=this.addOutPort(new Port(this,"status",OP_PORT_TYPE_VALUE));

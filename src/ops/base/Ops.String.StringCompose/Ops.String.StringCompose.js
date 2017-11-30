@@ -1,6 +1,3 @@
-op.name="StringCompose";
-
-
 var format=op.inValueString('Format',"hello $a, $b $c und $d");
 var a=op.inValueString('String A','world');
 var b=op.inValueString('String B',1);
