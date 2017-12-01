@@ -11,7 +11,7 @@ var calcVertexNormals=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{
 calcVertexNormals.set(true);
 
 var outNumFrames=op.outValue("Num Frames");
-
+var outName=op.outValue("Frame Name");
 
 var geoms=[];
 var mesh=null;
@@ -110,10 +110,14 @@ function updateFrame()
             // mesh.updateAttribute('attrMorphTargetAN',geoms[n+1].vertexNormals);
             
             mesh.updateAttribute(prfx+'_attrMorphTargetB',geoms[n].verticesTyped);
+            
+            
+            
             // mesh.updateAttribute('attrMorphTargetBN',geoms[n].vertexNormals);
 
             lastFrame=n;
         }
+        outName.set(geoms[n].name);
     }
     needsUpdateFrame=false;
 }
@@ -186,6 +190,8 @@ function reload()
                     geom.calculateNormals();
                 }
                 
+                geom.name=data.meshes[i].name;
+                
                 geom.verticesTyped=new Float32Array( geom.vertices );
 
                 geoms.push(geom);
@@ -193,6 +199,7 @@ function reload()
 
             rebuildMesh();
             outNumFrames.set(geoms.length);
+            needsUpdateFrame=true;
 
             self.uiAttribs.info='num frames: '+data.meshes.length;
 
@@ -210,10 +217,8 @@ function rebuildMesh()
     
         mesh=new CGL.Mesh(cgl,geoms[0]);
         mesh.addAttribute(prfx+'_attrMorphTargetA',geoms[0].vertices,3);
-        mesh.addAttribute(prfx+'_attrMorphTargetB',geoms[0].vertices, 3);
-        
+        mesh.addAttribute(prfx+'_attrMorphTargetB',geoms[0].vertices,3);
     }
-    
 }
 
 
