@@ -1,0 +1,30 @@
+{
+    "updated": 1512154282400,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "008c6b04-31b8-4fe0-a6d7-08ce9cd74490",
+    "created": 1512131129205,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Strength"
+            },
+            {
+                "type": "0",
+                "name": "Modulo"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.ScaleByNormal"
+    }
+}

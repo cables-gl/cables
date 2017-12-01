@@ -1,5 +1,5 @@
 {
-    "updated": 1508480913956,
+    "updated": 1512120069853,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a6c64e98-d3b2-4dd5-abb6-5dd913880d2d",
@@ -9,10 +9,6 @@
             {
                 "type": "1",
                 "name": "render"
-            },
-            {
-                "type": "0",
-                "name": "Scale"
             },
             {
                 "type": "0",
@@ -37,18 +33,6 @@
             {
                 "type": "0",
                 "name": "z"
-            },
-            {
-                "type": "0",
-                "name": "Scroll X"
-            },
-            {
-                "type": "0",
-                "name": "Scroll Y"
-            },
-            {
-                "type": "0",
-                "name": "Scroll Z"
             }
         ],
         "portsOut": [
@@ -57,6 +41,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.AreaScaler"
+        "name": "Ops.Exp.Gl.ShaderEffects.AreaScaler"
     }
 }

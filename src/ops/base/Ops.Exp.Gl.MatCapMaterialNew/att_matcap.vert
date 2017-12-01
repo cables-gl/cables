@@ -1,9 +1,10 @@
-{{MODULES_HEAD}}
+
 
 precision highp float;
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
+IN float attrVertIndex;
 
 #ifdef HAS_NORMAL_TEXTURE
    IN vec3 attrTangent;
@@ -22,6 +23,8 @@ UNI mat4 normalMatrix;
 OUT vec2 vNorm;
 
 OUT vec3 e;
+
+{{MODULES_HEAD}}
 
 #ifdef CALC_SSNORMALS
     // from https://www.enkisoftware.com/devlogpost-20150131-1-Normal_generation_in_the_pixel_shader

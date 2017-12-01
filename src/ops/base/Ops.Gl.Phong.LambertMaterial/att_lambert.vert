@@ -1,5 +1,5 @@
 
-{{MODULES_HEAD}}
+
 
 IN vec3 vPosition;
 IN vec3 attrVertNormal;
@@ -18,7 +18,7 @@ OUT mat4 mvMatrix;
 OUT mat3 normalMatrix;
 OUT vec4 modelPos;
 OUT vec2 texCoord;
-
+{{MODULES_HEAD}}
 
 mat3 transposeMat3(mat3 m)
 {

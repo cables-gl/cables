@@ -31,7 +31,6 @@ UNI float fresnel;
 #endif
 
 IN vec3 mvPos;
-
 IN vec2 texCoord;
 
 IN vec3 norm;
@@ -81,6 +80,9 @@ float calcFresnel(vec3 direction, vec3 normal)
 void main()
 {
     {{MODULE_BEGIN_FRAG}}
+
+
+float alpha=a;
 
     vec3 col=vec3(0.0);
     vec3 normal = normalize(normalMatrix*norm);
@@ -189,10 +191,13 @@ void main()
     
     #ifdef SHOW_DIFFUSE
         #ifdef HAS_TEXTURE_DIFFUSE
-            col*= texture2D(texDiffuse, texCoord).rgb;
+            vec4 texCol=texture2D(texDiffuse, texCoord);
+            col*=texCol.rgb;
+            alpha*=texCol.a;
         #endif
         #ifndef HAS_TEXTURE_DIFFUSE
             col*= vec3(r,g,b);
+            
         #endif
     #endif
     
@@ -216,10 +221,10 @@ void main()
     #endif
     #endif
 
-    
+
 
 
     {{MODULE_COLOR}}
 
-    outColor=vec4(col,a);
+    outColor=vec4(col,alpha);
 }
