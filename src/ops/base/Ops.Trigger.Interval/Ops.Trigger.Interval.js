@@ -1,5 +1,3 @@
-op.name='Interval';
-
 var interval=op.inValue('interval');
 var trigger=op.outFunction('trigger');
 var active=op.inValueBool("Active",true);

@@ -1,0 +1,31 @@
+{
+    "updated": 1512035589693,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "76fdea4d-1653-46d6-80f3-af34018f043d",
+    "created": 1512035138842,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Position"
+            },
+            {
+                "type": "0",
+                "name": "Radius"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            }
+        ],
+        "name": "Ops.Math.CircleCoordinates"
+    },
+    "summary": "x and y coordinates of a circle"
+}

@@ -1,6 +1,0 @@
-{
-    "summary": "plays the timeline when opening patch",
-    "layout": {
-        "name": "Ops.AutoPlay"
-    }
-}

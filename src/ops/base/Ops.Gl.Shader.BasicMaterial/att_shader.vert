@@ -1,6 +1,7 @@
 {{MODULES_HEAD}}
 
 IN vec3 vPosition;
+IN vec3 attrVertNormal;
 OUT vec3 norm;
 OUT vec2 texCoord;
 OUT vec2 texCoordOrig;

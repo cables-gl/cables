@@ -1,7 +1,30 @@
 {
-    "updated": 1511934301686,
-    "author": "5a0fe67d9641cedb39929853",
+    "updated": 1512154722412,
+    "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "0be2cc8a-9b6b-4fdf-8759-db44de20dc37",
-    "created": 1511933682410
+    "id": "c90c70e5-59eb-4b19-9c15-962e3e2f236b",
+    "created": 1512154593972,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Smooth"
+            },
+            {
+                "type": "0",
+                "name": "Force Z Up"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Geometry Out"
+            }
+        ],
+        "name": "Ops.Gl.CalculateNormals"
+    }
 }

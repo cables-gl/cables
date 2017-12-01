@@ -1,26 +1,21 @@
-op.name="AreaScaler";
 
 var cgl=op.patch.cgl;
 
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var inSize=op.inValue("Size",1);
 var inStrength=op.inValue("Strength",1);
-var inSmooth=op.inValueBool("Smooth",true);
+var inModulo=op.inValue("Modulo",1);
 
-var x=op.inValue("x");
-var y=op.inValue("y");
-var z=op.inValue("z");
 
 
 
 var shader=null;
 
-var srcHeadVert=attachments.areascale_vert;
+var srcHeadVert=attachments.scalebynormal_vert;
 
 var srcBodyVert=''
-    .endl()+'pos=MOD_scaler(pos,modelMatrix*pos,attrVertNormal);' //modelMatrix*
+    .endl()+'pos=MOD_scaler(pos,attrVertIndex,attrVertNormal);' //modelMatrix*
     .endl();
     
 var moduleVert=null;
@@ -42,14 +37,6 @@ op.render.onTriggered=function()
          return;
     }
     
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
-        gui.setTransformGizmo(
-            {
-                posX:x,
-                posY:y,
-                posZ:z
-            });
-
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
@@ -63,13 +50,9 @@ op.render.onTriggered=function()
                 srcBodyVert:srcBodyVert
             });
 
-        inSize.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'size',inSize);
         inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
-        inSmooth.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'smooth',inSmooth);
+        inModulo.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'mod',inModulo);
 
-        x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
-        y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
-        z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
     }
     
     
