@@ -1,4 +1,4 @@
-op.name="LambertMaterial";
+
 
 var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
 

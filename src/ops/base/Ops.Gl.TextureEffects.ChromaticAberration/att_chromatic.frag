@@ -14,7 +14,6 @@ void main()
 {
 
    vec4 col=texture2D(tex,texCoord);
-//   vec4 colOrig=texture2D(tex,texCoord);
 
    vec2 tc=texCoord;;
    float pix = pixel;

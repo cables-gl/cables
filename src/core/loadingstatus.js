@@ -17,7 +17,7 @@ CABLES.LoadingStatus=function()
 
     this.checkStatus=function()
     {
-        // console.log('--------');
+        console.log('--------');
         var countFinished=0;
         var count=0;
         for(var i in loadingAssets)
@@ -26,7 +26,7 @@ CABLES.LoadingStatus=function()
             if(!loadingAssets[i].finished)
             {
                 countFinished++;
-                // console.log(loadingAssets[i].type+': '+loadingAssets[i].finished+': '+loadingAssets[i].name );
+                console.log(loadingAssets[i].type+': '+loadingAssets[i].finished+': '+loadingAssets[i].name );
             }
         }
 
@@ -60,6 +60,8 @@ CABLES.LoadingStatus=function()
     this.start=function(type,name)
     {
         var id=CABLES.generateUUID();
+
+        console.log('start loading',name);
         loadingAssets[id]=({id:id,type:type,name:name,finished:false});
         // console.log('LOAD: '+loadingAssets[id].type+': '+loadingAssets[id].finished+': '+loadingAssets[id].name );
 

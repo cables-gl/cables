@@ -1,0 +1,30 @@
+{
+    "updated": 1511948857803,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "f61e47de-9156-4243-9a83-79002aeaf7be",
+    "created": 1511946146997,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Num Points"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.DrawTextureMapping"
+    }
+}

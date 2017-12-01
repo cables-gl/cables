@@ -1,6 +1,3 @@
-
-op.name='Sphere';
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var inStacks=op.inValueInt("stacks",32);
 var inSlices=op.inValueInt("slices",32);

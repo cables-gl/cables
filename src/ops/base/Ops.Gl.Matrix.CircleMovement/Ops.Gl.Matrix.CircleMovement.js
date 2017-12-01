@@ -1,5 +1,4 @@
 
-op.name='Circle Movement';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
 var segments=op.addInPort(new Port(op,"segments"));

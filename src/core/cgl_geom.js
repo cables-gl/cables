@@ -14,7 +14,6 @@ CGL.Geometry=function(name)
 
     this._indexed=true;
 
-
     Object.defineProperty(this, 'vertices', {
       get: function() {
         return this._vertices;
@@ -487,4 +486,33 @@ CGL.Geometry.buildFromFaces=function(arr)
     geom.verticesIndices=verticesIndices;
 
     return geom;
+};
+
+
+CGL.Geometry.json2geom=function(jsonMesh)
+{
+    var geom=new CGL.Geometry();
+    geom.verticesIndices=[];
+    geom.vertices=JSON.parse(JSON.stringify(jsonMesh.vertices));
+    geom.vertexNormals=jsonMesh.normals||[];
+    geom.tangents=jsonMesh.tangents||[];
+    geom.biTangents=jsonMesh.bitangents||[];
+        
+    // console.log(jsonMesh.texturecoords);
+
+    if(jsonMesh.texturecoords) geom.setTexCoords( jsonMesh.texturecoords[0] );
+    
+    console.log(geom.texCoords);
+    // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
+
+    geom.verticesIndices.length=jsonMesh.faces.length*3;
+    for(var i=0;i<jsonMesh.faces.length;i++)
+    {
+        geom.verticesIndices[i*3]=jsonMesh.faces[i][0];
+        geom.verticesIndices[i*3+1]=jsonMesh.faces[i][1];
+        geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
+    }
+    
+    return geom;
+
 };

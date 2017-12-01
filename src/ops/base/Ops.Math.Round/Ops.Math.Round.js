@@ -1,4 +1,3 @@
-op.name='Round';
 var result=op.addOutPort(new Port(op,"result"));
 var number1=op.addInPort(new Port(op,"number"));
 var decPlaces=op.addInPort(new Port(op,"Decimal Places"));

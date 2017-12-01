@@ -1,5 +1,4 @@
 
-op.name="Json3dMesh";
 var cgl=this.patch.cgl;
 
 var scene=new CABLES.Variable();
@@ -18,6 +17,11 @@ var inSize=op.inValue("Size",1);
 var next=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.outObject("Geometry");
 
+var inNormals=op.inValueSelect("Calculate Normals",["no","smooth","flat"],"no");
+
+
+
+var geom=null;
 var data=null;
 var mesh=null;
 var meshes=[];
@@ -30,8 +34,29 @@ exe.onTriggered=render;
 filename.onChange=reload;
 centerPivot.onChange=setMeshLater;
 meshIndex.onChange=setMeshLater;
+inNormals.onChange=setMeshLater;
+
 inSize.onChange=updateScale;
 var needSetMesh=true;
+
+function calcNormals()
+{
+    if(!geom)
+    {
+        console.log('calc normals: no geom!')
+        return;
+    }
+
+    if(inNormals.get()=='no')return;
+    if(inNormals.get()=='smooth')geom.calculateNormals();
+    if(inNormals.get()=='flat')
+    {
+        geom.unIndex();
+        geom.calculateNormals();
+    }
+    console.log("normals!");
+    
+}
 
 function render()
 {
@@ -103,12 +128,13 @@ function setMesh()
 {
     mesh=null;
     var index=Math.floor(meshIndex.get());
+
     
-    if(meshes[index])
-    {
-        mesh=meshes[index];
-        return;
-    }
+    // if(meshes[index])
+    // {
+    //     mesh=meshes[index];
+    //     return;
+    // }
 
     if(!data || index!=index || !isNumeric(index) || index<0 || index>=data.meshes.length)
     {
@@ -130,35 +156,21 @@ function setMesh()
     
     var i=0;
 
-    var geom=new CGL.Geometry();
-    geom.vertices=JSON.parse(JSON.stringify(jsonMesh.vertices));
-    geom.vertexNormals=jsonMesh.normals||[];
-    geom.tangents=jsonMesh.tangents||[];
-    geom.biTangents=jsonMesh.bitangents||[];
-    
+    geom=CGL.Geometry.json2geom(jsonMesh);
     if(centerPivot.get())geom.center();
-
-    if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
-    geom.verticesIndices=[];
-    
-    // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
-    geom.verticesIndices.length=jsonMesh.faces.length*3;
-    for(var i=0;i<jsonMesh.faces.length;i++)
-    {
-        geom.verticesIndices[i*3]=jsonMesh.faces[i][0];
-        geom.verticesIndices[i*3+1]=jsonMesh.faces[i][1];
-        geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
-    }
-    
 
     bounds=geom.getBounds();
     updateScale();
     updateInfo(geom);
 
+    calcNormals();
     geometryOut.set(geom);
     mesh=new CGL.Mesh(cgl,geom);
     needSetMesh=false;
     meshes[index]=mesh;
+    
+    console.log("set mesh done");
+    // console.log(geom);
 
     op.uiAttr({'warning':null});
 }
@@ -194,6 +206,7 @@ function reload()
                 catch(ex)
                 {
                     if(CABLES.UI)op.uiAttr({'error':'could not load file...'});
+                    op.patch.loading.finished(loadingId);
                     return;
                 }
 

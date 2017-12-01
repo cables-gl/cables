@@ -1,8 +1,6 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-this.name='Mesh Sequence';
-
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION ));
 var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 var frame=this.addInPort(new Port(this,"frame",OP_PORT_TYPE_VALUE ));
@@ -11,6 +9,9 @@ var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var calcVertexNormals=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{'display':'bool'} ));
 calcVertexNormals.set(true);
+
+var outNumFrames=op.outValue("Num Frames");
+var outName=op.outValue("Frame Name");
 
 var geoms=[];
 var mesh=null;
@@ -43,7 +44,7 @@ var uniFade=null;
 var module=null;
 var shader=null;
 var lastFrame=0;
-
+var needsReload=false;
 function removeModule()
 {
     if(shader && module)
@@ -55,6 +56,7 @@ function removeModule()
 
 function doRender()
 {
+    if(needsReload)reload();
     if(needsUpdateFrame)updateFrame();
     var fade=frame.get()%1;
     if(cgl.getShader() && cgl.getShader()!=shader)
@@ -76,15 +78,12 @@ function doRender()
 
     if(uniDoMorph)
     {
-            // updateFrame();
-
         uniFade.setValue(fade);
         uniDoMorph.setValue(1.0);
         if(mesh!==null) mesh.render(cgl.getShader());
         uniDoMorph.setValue(0);
         trigger.trigger();
     }
-
 }
 
 
@@ -105,40 +104,48 @@ function updateFrame()
 
         if(n+1>geoms.length-1) n=0;
 
-        if(n!=lastFrame && module)
+        if(n!=lastFrame && module && geoms[n+1])
         {
             mesh.updateAttribute(prfx+'_attrMorphTargetA',geoms[n+1].verticesTyped);
             // mesh.updateAttribute('attrMorphTargetAN',geoms[n+1].vertexNormals);
             
             mesh.updateAttribute(prfx+'_attrMorphTargetB',geoms[n].verticesTyped);
+            
+            
+            
             // mesh.updateAttribute('attrMorphTargetBN',geoms[n].vertexNormals);
 
             lastFrame=n;
         }
+        outName.set(geoms[n].name);
     }
     needsUpdateFrame=false;
 }
 
 var uniDoMorph=null;
+var loadingId=-1;
+
+
 
 function reload()
 {
-    if(!filename.get())return;
+    if(!filename.get() || filename.get()=='')return;
 
-    var loadingId=self.patch.loading.start('json mesh sequence',filename.get());
+    needsReload=false;
 
-    
+    loadingId=op.patch.loading.start('json mesh sequence',filename.get());
+
     lastFrame=0;
     
     CABLES.ajax(
-        self.patch.getFilePath(filename.get()),
+        op.patch.getFilePath(filename.get()),
         function(err,_data,xhr)
         {
             if(err)
             {
                 if(CABLES.UI)self.uiAttr({"error":"file not found"});
                 console.log('ajax error:',err);
-                self.patch.loading.finished(loadingId);
+                op.patch.loading.finished(loadingId);
                 return;
             }
             else if(CABLES.UI)self.uiAttr({"error":null});
@@ -148,7 +155,6 @@ function reload()
             try
             {
                 data=JSON.parse(_data);
-                
             }
             catch(e)
             {
@@ -156,7 +162,6 @@ function reload()
                 console.log("meshsequence could not load file..."+filename.get());
                 return;
             }
-
 
             geoms.length=0;
 
@@ -168,38 +173,62 @@ function reload()
                 geom.verticesIndices=[].concat.apply([], data.meshes[0].faces);
                 geom.vertices=data.meshes[i].vertices;
                 
+                // console.log('seq verts:',geom.vertices.length);
+                
                 geom.texCoords=data.meshes[0].texturecoords;
+
+                // console.log('seq texcoords:',geom.texCoords.length);
+                // console.log('first texcoord:',data.meshes[0].texturecoords.length);
 
                 if(calcVertexNormals.get())
                 {
-                    geom.calcNormals(true);
+                    geom.calculateNormals();
                 }
                 else
                 {
                     geom.unIndex();
-                    geom.calcNormals(false);
+                    geom.calculateNormals();
                 }
+                
+                geom.name=data.meshes[i].name;
                 
                 geom.verticesTyped=new Float32Array( geom.vertices );
 
                 geoms.push(geom);
             }
 
-            mesh=new CGL.Mesh(cgl,geoms[0]);
-            
-            mesh.addAttribute(prfx+'_attrMorphTargetA',geoms[0].vertices,3);
-            mesh.addAttribute(prfx+'_attrMorphTargetB',geoms[0].vertices, 3);
-            
+            rebuildMesh();
+            outNumFrames.set(geoms.length);
+            needsUpdateFrame=true;
 
             self.uiAttribs.info='num frames: '+data.meshes.length;
 
-            self.patch.loading.finished(loadingId);
+            op.patch.loading.finished(loadingId);
+            loadingId=-1;
 
         });
+}
+
+function rebuildMesh()
+{
+    if(geoms.length>0)
+    {
+        geoms[0].calculateNormals();
+    
+        mesh=new CGL.Mesh(cgl,geoms[0]);
+        mesh.addAttribute(prfx+'_attrMorphTargetA',geoms[0].vertices,3);
+        mesh.addAttribute(prfx+'_attrMorphTargetB',geoms[0].vertices,3);
+    }
+}
+
+
+function reloadLater()
+{
+    needsReload=true;    
 }
 
 
 frame.onValueChange(updateFrameLater);
 filename.onValueChange(reload);
 render.onTriggered=doRender;
-calcVertexNormals.onValueChange(reload);
+calcVertexNormals.onValueChange(rebuildMesh);
