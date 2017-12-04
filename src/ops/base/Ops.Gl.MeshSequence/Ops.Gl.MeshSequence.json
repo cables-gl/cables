@@ -1,5 +1,5 @@
 {
-    "updated": 1512039396631,
+    "updated": 1512393583264,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "a9ba3a67-233e-46cb-9c29-fc7b38956b45",
@@ -21,6 +21,10 @@
             {
                 "type": "0",
                 "name": "smooth"
+            },
+            {
+                "type": "0",
+                "name": "Render"
             }
         ],
         "portsOut": [
@@ -35,6 +39,14 @@
             {
                 "type": "0",
                 "name": "Frame Name"
+            },
+            {
+                "type": "2",
+                "name": "Geometry A"
+            },
+            {
+                "type": "2",
+                "name": "Geometry B"
             }
         ],
         "name": "Ops.Gl.MeshSequence"
