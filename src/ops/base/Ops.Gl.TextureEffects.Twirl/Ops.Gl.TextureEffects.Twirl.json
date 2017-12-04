@@ -1,0 +1,25 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "amount"
+            },
+            {
+                "type": "0",
+                "name": "times"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Twirl"
+    }
+}

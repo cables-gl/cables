@@ -8,6 +8,7 @@ var posZ=op.addInPort(new Port(op,"posZ"),0);
 
 var scale=op.addInPort(new Port(op,"scale"));
 
+
 var rotX=op.addInPort(new Port(op,"rotX"));
 var rotY=op.addInPort(new Port(op,"rotY"));
 var rotZ=op.addInPort(new Port(op,"rotZ"));
@@ -24,6 +25,8 @@ var doTranslate=false;
 var translationChanged=true;
 var scaleChanged=true;
 var rotChanged=true;
+
+scale.setUiAttribs({"divider":true});
 
 render.onTriggered=function()
 {
