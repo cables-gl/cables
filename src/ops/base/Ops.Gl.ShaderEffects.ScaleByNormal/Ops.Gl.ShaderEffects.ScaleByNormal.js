@@ -33,8 +33,8 @@ op.render.onTriggered=function()
 {
     if(!cgl.getShader())
     {
-         op.trigger.trigger();
-         return;
+        op.trigger.trigger();
+        return;
     }
     
     if(cgl.getShader()!=shader)

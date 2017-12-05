@@ -10,9 +10,13 @@ var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var calcVertexNormals=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{'display':'bool'} ));
 calcVertexNormals.set(true);
 
+var doDraw=op.inValueBool("Render",true);
+
 var outNumFrames=op.outValue("Num Frames");
 var outName=op.outValue("Frame Name");
 
+var outGeomA=op.outObject("Geometry A");
+var outGeomB=op.outObject("Geometry B");
 var geoms=[];
 var mesh=null;
 window.meshsequencecounter=window.meshsequencecounter||1;
@@ -80,7 +84,7 @@ function doRender()
     {
         uniFade.setValue(fade);
         uniDoMorph.setValue(1.0);
-        if(mesh!==null) mesh.render(cgl.getShader());
+        if(doDraw.get() && mesh!==null) mesh.render(cgl.getShader());
         uniDoMorph.setValue(0);
         trigger.trigger();
     }
@@ -106,13 +110,14 @@ function updateFrame()
 
         if(n!=lastFrame && module && geoms[n+1])
         {
-            mesh.updateAttribute(prfx+'_attrMorphTargetA',geoms[n+1].verticesTyped);
-            // mesh.updateAttribute('attrMorphTargetAN',geoms[n+1].vertexNormals);
-            
-            mesh.updateAttribute(prfx+'_attrMorphTargetB',geoms[n].verticesTyped);
-            
-            
-            
+            if(doDraw.get())
+            {
+                mesh.updateAttribute(prfx+'_attrMorphTargetA',geoms[n+1].verticesTyped);
+                mesh.updateAttribute(prfx+'_attrMorphTargetB',geoms[n].verticesTyped);
+            }
+
+            outGeomA.set(geoms[n]);
+            outGeomB.set(geoms[n+1]);
             // mesh.updateAttribute('attrMorphTargetBN',geoms[n].vertexNormals);
 
             lastFrame=n;
@@ -216,8 +221,11 @@ function rebuildMesh()
         geoms[0].calculateNormals();
     
         mesh=new CGL.Mesh(cgl,geoms[0]);
+        mesh.addVertexNumbers=true;
+        mesh.setGeom(geoms[0]);
         mesh.addAttribute(prfx+'_attrMorphTargetA',geoms[0].vertices,3);
         mesh.addAttribute(prfx+'_attrMorphTargetB',geoms[0].vertices,3);
+        
     }
 }
 
