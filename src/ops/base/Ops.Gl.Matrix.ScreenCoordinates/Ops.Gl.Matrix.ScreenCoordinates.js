@@ -20,9 +20,11 @@ exec.onTriggered=function()
 
     var vp=cgl.getViewPort();
     
-    x.set( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
-    y.set( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
+    // x.set( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
+    // y.set( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
     
+   x.set(  (trans[0] * vp[2]/2) + vp[2]/2 );
+   y.set(  (trans[1] * vp[3]/2) + vp[3]/2 );
 
     trigger.trigger();
 };

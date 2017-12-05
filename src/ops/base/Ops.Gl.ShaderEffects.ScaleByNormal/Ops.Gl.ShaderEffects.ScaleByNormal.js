@@ -5,9 +5,6 @@ op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var inStrength=op.inValue("Strength",1);
-var inModulo=op.inValue("Modulo",1);
-
-
 
 
 var shader=null;
@@ -33,8 +30,8 @@ op.render.onTriggered=function()
 {
     if(!cgl.getShader())
     {
-         op.trigger.trigger();
-         return;
+        op.trigger.trigger();
+        return;
     }
     
     if(cgl.getShader()!=shader)
@@ -51,11 +48,8 @@ op.render.onTriggered=function()
             });
 
         inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
-        inModulo.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'mod',inModulo);
-
     }
-    
-    
+
     if(!shader)return;
 
     op.trigger.trigger();

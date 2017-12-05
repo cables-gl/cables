@@ -1,4 +1,3 @@
-op.name='RectangleFrame';
 
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 var width=op.addInPort(new Port(op,"Width",OP_PORT_TYPE_VALUE));

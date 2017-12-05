@@ -1,4 +1,3 @@
-op.name='Rectangle';
 var render=op.inFunction("render");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
