@@ -1,0 +1,50 @@
+{
+    "updated": 1512400097192,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "d373059b-2668-42bf-80e9-0499ea0082d3",
+    "created": 1512143453690,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Layer"
+            },
+            {
+                "type": "0",
+                "name": "Num Layers"
+            },
+            {
+                "type": "0",
+                "name": "Strength"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "2",
+                "name": "Tex Structure"
+            },
+            {
+                "type": "2",
+                "name": "Tex Color"
+            },
+            {
+                "type": "2",
+                "name": "Tex Length"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Exp.Gl.ShaderEffects.Fur"
+    }
+}

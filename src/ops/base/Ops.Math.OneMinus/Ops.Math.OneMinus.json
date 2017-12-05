@@ -1,0 +1,22 @@
+{
+    "updated": 1512506349981,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "f34d019d-59ae-40d6-a55d-a7691bbc40e0",
+    "created": 1512423370795,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.OneMinus"
+    }
+}
