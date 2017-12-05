@@ -125,33 +125,28 @@ function buildMesh()
     vertices=[];
     vertexColors=[];
     var geom=new CGL.Geometry();
-    
-try
-{
-    obj=conwayhart(String(notation.get()));
-}
-catch(ex)
-{
-    console.log(ex);
-    return;
-}
-    console.log(obj);
 
-    
+    try
+    {
+        obj=conwayhart(String(notation.get()));
+    }
+    catch(ex)
+    {
+        console.log(ex);
+        return;
+    }
 
     for(var i=0;i<obj.cells.length;i++)
     {
         var verts=getCellVertices(obj.cells[i]);
         addFace(verts,geom);
     }
-    
-    
+
     geom.vertices=vertices;
     geom.verticesIndices=faces;
     geom.vertexColors=vertexColors;
     geom.calculateNormals();
-    // var verts=[].concat.apply([], obj.positions);
-    
+
     outGeom.set(null);
     outGeom.set(geom);
     

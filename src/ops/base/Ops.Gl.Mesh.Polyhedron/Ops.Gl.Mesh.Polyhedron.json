@@ -1,5 +1,5 @@
 {
-    "updated": 1512247929686,
+    "updated": 1512514022215,
     "author": "5a0fe67d9641cedb39929853",
     "authorName": "pandur",
     "id": "8db7e954-81f4-4b34-a938-0155097410de",
@@ -20,6 +20,6 @@
                 "name": "Geometry"
             }
         ],
-        "name": "Ops.User.pandur.conway"
+        "name": "Ops.Gl.Mesh.Polyhedron"
     }
 }
