@@ -1,0 +1,30 @@
+{
+    "updated": 1512513187846,
+    "author": "5a0fe67d9641cedb39929853",
+    "authorName": "pandur",
+    "id": "d0b2d550-1a80-49b9-a77d-6aa2f53c0f0e",
+    "created": 1512512927473,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "chars"
+            },
+            {
+                "type": "0",
+                "name": "Length"
+            },
+            {
+                "type": "1",
+                "name": "Generate"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.RandomString"
+    }
+}

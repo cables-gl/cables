@@ -1,0 +1,25 @@
+{
+    "updated": 1512247929686,
+    "author": "5a0fe67d9641cedb39929853",
+    "authorName": "pandur",
+    "id": "8db7e954-81f4-4b34-a938-0155097410de",
+    "created": 1512215895683,
+    "libs": [
+        "conway-hart.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Receipt"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.User.pandur.conway"
+    }
+}
