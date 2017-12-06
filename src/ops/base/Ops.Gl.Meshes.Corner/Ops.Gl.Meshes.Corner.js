@@ -9,10 +9,6 @@ var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropd
 var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
 var geomOut=op.addOutPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
 
-var drawTop=op.inValueBool("Draw Top",true);
-var drawBottom=op.inValueBool("Draw Bottom",true);
-var drawLeft=op.inValueBool("Draw Left",true);
-var drawRight=op.inValueBool("Draw Right",true);
 
 
 var cgl=op.patch.cgl;
@@ -33,7 +29,6 @@ pivotY.onChange=create;
 height.onChange=create;
 thickness.onChange=create;
 
-drawTop.onChange=drawBottom.onChange=drawLeft.onChange=drawRight.onChange=create;
 
 create();
 
@@ -78,14 +73,14 @@ function create()
     geom.vertices[c++]=0;
 
     geom.vertices[c++]=x-th; 
-    geom.vertices[c++]=y-th;
+    geom.vertices[c++]=y;
     geom.vertices[c++]=0;
 
     geom.vertices[c++]=x+w+th;
     geom.vertices[c++]=y-th;
     geom.vertices[c++]=0;
 
-    geom.vertices[c++]=x+w+th;
+    geom.vertices[c++]=x+w;
     geom.vertices[c++]=y+h+th;
     geom.vertices[c++]=0;
 
@@ -105,13 +100,11 @@ function create()
              0.0,  0.0,  1.0,
              0.0,  0.0,  1.0,
         ];
-        
+
     geom.verticesIndices = [];
 
-    if(drawBottom.get()) geom.verticesIndices.push( 0, 1, 4 ,  1, 5, 4);
-    if(drawRight.get())geom.verticesIndices.push( 1, 2, 5,  5, 2, 6);
-    if(drawTop.get())geom.verticesIndices.push( 7, 6, 3,  6, 2, 3);
-    if(drawLeft.get())geom.verticesIndices.push( 0, 4, 3,  4, 7, 3);
+    geom.verticesIndices.push( 7, 6, 3,  6, 2, 3);
+    geom.verticesIndices.push( 0, 4, 3,  4, 7, 3);
 
 
     if(geom.texCoords.length===0)

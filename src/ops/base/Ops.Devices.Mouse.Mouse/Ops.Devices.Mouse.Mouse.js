@@ -1,5 +1,4 @@
 
-op.name='mouse';
 var outMouseX=op.addOutPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
 var outMouseY=op.addOutPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
 var mouseDown=op.addOutPort(new Port(op,"button down",OP_PORT_TYPE_VALUE));
@@ -15,8 +14,7 @@ var smoothSpeed=op.addInPort(new Port(op,"smoothSpeed",OP_PORT_TYPE_VALUE));
 var area=op.addInPort(new Port(op,"Area",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
 var outButton=op.addOutPort(new Port(op,"button",OP_PORT_TYPE_VALUE));
 var multiply=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE));
-var flipY=op.addInPort(new Port(op,"flip y",OP_PORT_TYPE_VALUE,{display:'bool'}));
-
+var flipY=op.inValueBool("flip y",true);
 
 area.set("Canvas");
 

@@ -1,0 +1,50 @@
+{
+    "updated": 1512578110832,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "6d722288-0fec-43da-bf41-0372426fb685",
+    "created": 1512577086504,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "rect top"
+            },
+            {
+                "type": "0",
+                "name": "rect left"
+            },
+            {
+                "type": "0",
+                "name": "rect right"
+            },
+            {
+                "type": "0",
+                "name": "rect bottom"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Pos x"
+            },
+            {
+                "type": "0",
+                "name": "Pos y"
+            }
+        ],
+        "name": "Ops.Math.PointInRectangle2d"
+    }
+}

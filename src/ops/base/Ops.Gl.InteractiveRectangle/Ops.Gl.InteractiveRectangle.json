@@ -1,5 +1,5 @@
 {
-    "updated": 1512508767536,
+    "updated": 1512577470597,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eeebdb51-9d8c-404d-a538-f5d9cf409200",
@@ -32,11 +32,19 @@
             },
             {
                 "type": "0",
+                "name": "Is Interactive"
+            },
+            {
+                "type": "0",
                 "name": "Render"
             },
             {
                 "type": "0",
-                "name": "Show HTML"
+                "name": "Show Boundings"
+            },
+            {
+                "type": "0",
+                "name": "Cursor"
             }
         ],
         "portsOut": [
@@ -54,11 +62,35 @@
             },
             {
                 "type": "0",
+                "name": "Pointer Down"
+            },
+            {
+                "type": "0",
                 "name": "Pointer X"
             },
             {
                 "type": "0",
                 "name": "Pointer Y"
+            },
+            {
+                "type": "0",
+                "name": "Top"
+            },
+            {
+                "type": "0",
+                "name": "Left"
+            },
+            {
+                "type": "0",
+                "name": "Right"
+            },
+            {
+                "type": "0",
+                "name": "Bottom"
+            },
+            {
+                "type": "1",
+                "name": "Left Click"
             }
         ],
         "name": "Ops.Gl.InteractiveRectangle"

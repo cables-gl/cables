@@ -1,5 +1,9 @@
 {
-    "summary": "Draws a rectangle frame",
+    "updated": 1512551290223,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "7624c3bb-d22f-47f3-8581-2ecca73bb12f",
+    "created": 1512549598302,
     "layout": {
         "portsIn": [
             {
@@ -25,22 +29,6 @@
             {
                 "type": "0",
                 "name": "pivot y"
-            },
-            {
-                "type": "0",
-                "name": "Draw Top"
-            },
-            {
-                "type": "0",
-                "name": "Draw Bottom"
-            },
-            {
-                "type": "0",
-                "name": "Draw Left"
-            },
-            {
-                "type": "0",
-                "name": "Draw Right"
             }
         ],
         "portsOut": [
@@ -53,11 +41,6 @@
                 "name": "Geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.RectangleFrame"
-    },
-    "updated": 1512549540328,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "e3a24a1a-a74b-4c38-b492-63abca68f6d1",
-    "created": 1512461632157
+        "name": "Ops.Gl.Meshes.Corner"
+    }
 }

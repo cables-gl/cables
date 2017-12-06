@@ -10,17 +10,30 @@ var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropd
 
 var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
 
+var isInteractive=op.inValueBool('Is Interactive',true);
 var active=op.inValueBool('Render',true);
 var divVisible=op.inValueBool('Show Boundings',true);
+
+
+var cursorPort=op.inValueSelect("Cursor",["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help", "none"],"pointer");
+
 
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
 
 var mouseOver=op.outValue("Pointer Hover",false);
+var mouseDown=op.outValue("Pointer Down",false);
 var outX=op.outValue("Pointer X");
 var outY=op.outValue("Pointer Y");
 
+var outTop=op.outValue("Top");
+var outLeft=op.outValue("Left");
+var outRight=op.outValue("Right");
+var outBottom=op.outValue("Bottom");
+
+
+var mouseClick=op.outFunction("Left Click");
 
 var cgl=op.patch.cgl;
 axis.set('xy');
@@ -41,6 +54,7 @@ pivotX.onChange=rebuild;
 pivotY.onChange=rebuild;
 width.onChange=rebuild;
 height.onChange=rebuild;
+cursorPort.onChange=updateCursor;
 rebuild();
 
 
@@ -55,6 +69,7 @@ render.onTriggered=function()
         setUpDiv();
         addListeners();
         updateDivVisibility();
+        updateIsInteractive();
     }
     updateDivSize();
 
@@ -182,10 +197,14 @@ function updateDivVisibility()
 {
     if(div)
     {
-        if(divVisible.get()) div.style.display='block';
-            else div.style.display='none';
+        if(divVisible.get()) div.style.border='1px solid red';
+            else div.style.border='none';
     }
-    
+}
+
+function updateCursor()
+{
+    div.style.cursor = cursorPort.get();
 }
 
 function updateDivSize()
@@ -243,6 +262,13 @@ function updateDivSize()
     var xb=Math.max(x1,x2,x3,x4);
     var yb=Math.max(vp[3]-y1,vp[3]-y2,vp[3]-y3,vp[3]-y4);
 
+outTop.set(divY);//=op.outValue("Top");
+outLeft.set(divX);//=op.outValue("Left");
+outRight.set(xb);//=op.outValue("Right");
+outBottom.set(yb);//=op.outValue("Bottom");
+
+
+
     divWidth=Math.abs(xb-divX);
     divHeight=Math.abs(yb-divY);
     
@@ -274,26 +300,26 @@ function setUpDiv()
         
         var canvas = op.patch.cgl.canvas.parentElement;
         canvas.appendChild(div);
-        
+        updateCursor();
+        updateIsInteractive
     }
     updateDivSize();
 }
 
 var listenerElement=null;
 
-
-
-function onmousemove(e)
+function onMouseMove(e)
 {
     var offsetX=-width.get()/2;
     var offsetY=-height.get()/2;
-    
-    outX.set(e.offsetX/divWidth*width.get()+offsetX);
-    outY.set( (divHeight-e.offsetY)/divHeight*height.get()+offsetY);
+
+    outX.set( Math.max(0.0,Math.min(1.0,e.offsetX/divWidth)));
+    outY.set( Math.max(0.0,Math.min(1.0,1.0-e.offsetY/divHeight)));
 }
 
 function onMouseLeave(e)
 {
+    mouseDown.set(false);
     mouseOver.set(false);
 }
 
@@ -302,37 +328,110 @@ function onMouseEnter(e)
     mouseOver.set(true);
 }
 
-
-function removeLiseteners()
+function onMouseDown(e)
 {
-    
-    // listenerElement.removeEventListener('touchend', ontouchend);
-    // listenerElement.removeEventListener('touchstart', ontouchstart);
+    mouseDown.set(true);
+}
 
-    // listenerElement.removeEventListener('click', onmouseclick);
-    listenerElement.removeEventListener('mousemove', onmousemove);
-    listenerElement.removeEventListener('mouseleave', onMouseLeave);
-    // listenerElement.removeEventListener('mousedown', onMouseDown);
-    // listenerElement.removeEventListener('mouseup', onMouseUp);
-    listenerElement.removeEventListener('mouseenter', onMouseEnter);
-    // listenerElement.removeEventListener('contextmenu', onClickRight);
-    listenerElement=null;
+function onMouseUp(e)
+{
+    mouseDown.set(false);
+}
+
+function onmouseclick(e)
+{
+    mouseClick.trigger();
+}
+
+function onTouchMove(e)
+{
+    console.log('touchmoveevent',e);
+
+    var targetEle=document.elementFromPoint(
+        e.targetTouches[0].pageX,e.targetTouches[0].pageY);
+
+    if(targetEle==div)
+    {
+        mouseOver.set(true);
+        if(e.touches && e.touches.length>0) 
+        {
+
+            var rect = div.getBoundingClientRect(); //e.target
+            var x = e.targetTouches[0].pageX - rect.left;
+            var y = e.targetTouches[0].pageY - rect.top;
+    
+    
+            var touch=e.touches[0];
+            
+            
+            // console.log(e);
+    
+            // touch.offsetX=x;
+            // touch.offsetY=y;
+
+            // console.log(touch);
+    
+            // console.log('ox',touch.offsetX);
+            onMouseMove(touch);
+        }
+    }
+    else
+    {
+        mouseOver.set(false);
+    }
+}
+
+
+isInteractive.onChange=updateIsInteractive;
+
+function updateIsInteractive()
+{
+    if(isInteractive.get()) 
+    {
+        addListeners();
+        if(div)div.style['pointer-events']='initial';
+    }
+    else
+    {
+        removeListeners();
+        if(div)div.style['pointer-events']='none';
+    }
+}
+
+function removeListeners()
+{
+    if(listenerElement)
+    {
+        document.removeEventListener('touchmove', onTouchMove);
+        // listenerElement.removeEventListener('touchend', onMouseLeave);
+        // listenerElement.removeEventListener('touchstart', onMouseEnter);
+    
+        listenerElement.removeEventListener('click', onmouseclick);
+        listenerElement.removeEventListener('mousemove', onMouseMove);
+        listenerElement.removeEventListener('mouseleave', onMouseLeave);
+        listenerElement.removeEventListener('mousedown', onMouseDown);
+        listenerElement.removeEventListener('mouseup', onMouseUp);
+        listenerElement.removeEventListener('mouseenter', onMouseEnter);
+        // listenerElement.removeEventListener('contextmenu', onClickRight);
+        listenerElement=null;
+    }
 }
 
 function addListeners()
 {
-    if(listenerElement)removeLiseteners();
+    if(listenerElement)removeListeners();
     
     listenerElement=div;
 
-    // listenerElement.addEventListener('touchend', ontouchend);
-    // listenerElement.addEventListener('touchstart', ontouchstart);
+    document.addEventListener('touchmove', onTouchMove);
+    // listenerElement.addEventListener('touchend', onMouseLeave);
+    // listenerElement.addEventListener('touchstart', onMouseEnter);
 
-    // listenerElement.addEventListener('click', onmouseclick);
-    listenerElement.addEventListener('mousemove', onmousemove);
+    listenerElement.addEventListener('click', onmouseclick);
+    listenerElement.addEventListener('mousemove', onMouseMove);
     listenerElement.addEventListener('mouseleave', onMouseLeave);
-    // listenerElement.addEventListener('mousedown', onMouseDown);
-    // listenerElement.addEventListener('mouseup', onMouseUp);
+    listenerElement.addEventListener('mousedown', onMouseDown);
+    listenerElement.addEventListener('mouseup', onMouseUp);
     listenerElement.addEventListener('mouseenter', onMouseEnter);
     // listenerElement.addEventListener('contextmenu', onClickRight);
 }
