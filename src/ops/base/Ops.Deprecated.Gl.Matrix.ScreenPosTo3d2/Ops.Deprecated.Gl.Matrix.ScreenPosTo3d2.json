@@ -1,5 +1,9 @@
 {
-    "summary": "Convert 2d screen position to a 3d position",
+    "updated": 1512581392497,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "77233ea8-9c72-4075-a270-0b5f3c966bbd",
+    "created": 1512580058677,
     "layout": {
         "portsIn": [
             {
@@ -12,7 +16,7 @@
             },
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "update"
             }
         ],
         "portsOut": [
@@ -25,11 +29,6 @@
                 "name": "Result Y"
             }
         ],
-        "name": "Ops.Gl.Matrix.ScreenPosTo3d"
-    },
-    "updated": 1512585063928,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "21d8f89a-2717-41ae-b99c-f379a71be6e6",
-    "created": 1512579443860
+        "name": "Ops.Gl.Matrix.ScreenPosTo3d2"
+    }
 }

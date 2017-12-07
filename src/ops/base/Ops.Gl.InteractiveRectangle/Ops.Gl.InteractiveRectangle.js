@@ -345,7 +345,7 @@ function onmouseclick(e)
 
 function onTouchMove(e)
 {
-    console.log('touchmoveevent',e);
+    // console.log('touchmoveevent',e);
 
     var targetEle=document.elementFromPoint(
         e.targetTouches[0].pageX,e.targetTouches[0].pageY);

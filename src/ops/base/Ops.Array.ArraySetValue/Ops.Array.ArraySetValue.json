@@ -1,8 +1,35 @@
 {
     "summary": "Change the value of an array at an index",
-    "updated": 1509640177203,
+    "updated": 1512599740308,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ed39fd33-1b8d-4d04-a44d-4a22e4477a0a",
-    "created": 1509640177213
+    "created": 1509640177213,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "0",
+                "name": "value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            }
+        ],
+        "name": "Ops.Array.ArraySetValue"
+    }
 }
