@@ -117,6 +117,7 @@ function update()
         var newVerts=[];
         var newFaces=[];
         var newNormals=[];
+        var newTexCoords=[];
 
         faces=[].concat.apply([], faces);
 
@@ -133,6 +134,8 @@ function update()
             newNormals.push( geom.vertexNormals[ faces[i+0]*3+0] );
             newNormals.push( geom.vertexNormals[ faces[i+0]*3+1] );
             newNormals.push( geom.vertexNormals[ faces[i+0]*3+2] );
+            // newTexCoords.push( geom.texCoords[ faces[i+0]*2+0] );
+            // newTexCoords.push( geom.texCoords[ faces[i+0]*2+1] );
 
             newFaces.push( newVerts.length/3 );
             newVerts.push( geom.vertices[ faces[i+1]*3+0] );
@@ -154,6 +157,7 @@ function update()
         newGeom.vertices=newVerts;
         newGeom.vertexNormals=newNormals;
         newGeom.verticesIndices=newFaces;
+        // newGeom.texCoords=newTexCoords;
         outGeom.set(newGeom);
     }
 }

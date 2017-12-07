@@ -1,4 +1,3 @@
-op.name="vertex color material";
 var cgl=op.patch.cgl;
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
