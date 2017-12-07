@@ -337,8 +337,6 @@ CGL.Shader = function(_cgl, _name) {
                     srcFrag = srcFrag.replace(/MOD_/g, modules[j].prefix);
                     srcHeadVert = srcHeadVert.replace(/MOD_/g, modules[j].prefix);
                     srcHeadFrag = srcHeadFrag.replace(/MOD_/g, modules[j].prefix);
-
-
                 }
             }
 
