@@ -18,5 +18,5 @@
         ],
         "name": "Ops.NthTrigger"
     },
-    "summary": "trigger childs every x times exe was triggered"
+    "summary": "trigger children every x times exe was triggered"
 }
