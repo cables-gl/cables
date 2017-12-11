@@ -1,5 +1,4 @@
-ONFLICT (content): Merge conflict in src/ops/base/Ops.Devices.Mouse.Mouse/Ops.Devices.Mouse.Mouse.json
-
+{
     "summary": "Get mouse coordinates and events",
     "layout": {
         "portsIn": [

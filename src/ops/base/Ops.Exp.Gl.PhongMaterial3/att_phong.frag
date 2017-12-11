@@ -194,6 +194,11 @@ float alpha=a;
             vec4 texCol=texture2D(texDiffuse, texCoord);
             col*=texCol.rgb;
             alpha*=texCol.a;
+            // if(texCol.a<=0.1)
+            // {
+                // discard;
+                // return;
+            // }
         #endif
         #ifndef HAS_TEXTURE_DIFFUSE
             col*= vec3(r,g,b);

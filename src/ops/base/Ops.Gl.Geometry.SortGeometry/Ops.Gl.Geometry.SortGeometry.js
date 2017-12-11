@@ -8,8 +8,11 @@ var SORT_NONE="None";
 var geometry=op.addInPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
 var sorting=op.inValueSelect("Sort",[SORT_RANDOM,SORT_X,SORT_Y,SORT_Z,SORT_NONE],SORT_X);
 
+var reverse=op.inValueBool("Reverse",false);
+
 var outGeom=op.outObject("Result");
 
+reverse.onChange=update;
 geometry.onChange=update;
 sorting.onChange=update;
 
@@ -68,7 +71,7 @@ function update()
             });
         }
         else
-        if(sorting.get()==SORT_X)
+        if(sorting.get()==SORT_X )
         {
             faces.sort(function(a,b)
             {
@@ -86,6 +89,7 @@ function update()
 
                 return avgA-avgB;
             });
+            
         }
         else
         if(sorting.get()==SORT_Z)
@@ -119,6 +123,12 @@ function update()
         var newNormals=[];
         var newTexCoords=[];
 
+        if(reverse.get())
+        {
+            faces=faces.reverse(); 
+        }
+
+
         faces=[].concat.apply([], faces);
 
         console.log('old faces',geom.verticesIndices.length);
@@ -134,8 +144,8 @@ function update()
             newNormals.push( geom.vertexNormals[ faces[i+0]*3+0] );
             newNormals.push( geom.vertexNormals[ faces[i+0]*3+1] );
             newNormals.push( geom.vertexNormals[ faces[i+0]*3+2] );
-            // newTexCoords.push( geom.texCoords[ faces[i+0]*2+0] );
-            // newTexCoords.push( geom.texCoords[ faces[i+0]*2+1] );
+            newTexCoords.push( geom.texCoords[ faces[i+0]*2+0] );
+            newTexCoords.push( geom.texCoords[ faces[i+0]*2+1] );
 
             newFaces.push( newVerts.length/3 );
             newVerts.push( geom.vertices[ faces[i+1]*3+0] );
@@ -144,6 +154,8 @@ function update()
             newNormals.push( geom.vertexNormals[ faces[i+1]*3+0] );
             newNormals.push( geom.vertexNormals[ faces[i+1]*3+1] );
             newNormals.push( geom.vertexNormals[ faces[i+1]*3+2] );
+            newTexCoords.push( geom.texCoords[ faces[i+1]*2+0] );
+            newTexCoords.push( geom.texCoords[ faces[i+1]*2+1] );
 
             newFaces.push( newVerts.length/3 );
             newVerts.push( geom.vertices[ faces[i+2]*3+0] );
@@ -152,12 +164,15 @@ function update()
             newNormals.push( geom.vertexNormals[ faces[i+2]*3+0] );
             newNormals.push( geom.vertexNormals[ faces[i+2]*3+1] );
             newNormals.push( geom.vertexNormals[ faces[i+2]*3+2] );
+            newTexCoords.push( geom.texCoords[ faces[i+2]*2+0] );
+            newTexCoords.push( geom.texCoords[ faces[i+2]*2+1] );
+
         }
         
         newGeom.vertices=newVerts;
         newGeom.vertexNormals=newNormals;
         newGeom.verticesIndices=newFaces;
-        // newGeom.texCoords=newTexCoords;
+        newGeom.texCoords=newTexCoords;
         outGeom.set(newGeom);
     }
 }

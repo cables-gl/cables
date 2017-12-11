@@ -381,8 +381,14 @@ CGL.Geometry.prototype.getBounds=function()
     return bounds;
 };
 
-CGL.Geometry.prototype.center=function()
+CGL.Geometry.prototype.center=function(x,y,z)
 {
+    if(x===undefined)
+    {
+        x=true;
+        y=true;
+        z=true;
+    }
 
     var bounds=this.getBounds();
 
@@ -397,9 +403,9 @@ CGL.Geometry.prototype.center=function()
     {
         if(this.vertices[i+0]==this.vertices[i+0])
         {
-            this.vertices[i+0]-=offset[0];
-            this.vertices[i+1]-=offset[1];
-            this.vertices[i+2]-=offset[2];
+            if(x)this.vertices[i+0]-=offset[0];
+            if(y)this.vertices[i+1]-=offset[1];
+            if(z)this.vertices[i+2]-=offset[2];
         }
     }
 

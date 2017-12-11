@@ -1,5 +1,5 @@
 {
-    "updated": 1512394076689,
+    "updated": 1513017895338,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8b0a635c-83f0-4d95-9b9c-1b5ca55c6724",
@@ -13,6 +13,10 @@
             {
                 "type": "0",
                 "name": "Sort"
+            },
+            {
+                "type": "0",
+                "name": "Reverse"
             }
         ],
         "portsOut": [

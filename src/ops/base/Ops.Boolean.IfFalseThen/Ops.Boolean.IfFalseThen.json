@@ -1,0 +1,30 @@
+{
+    "updated": 1512653496543,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "91cf65f1-94ac-423f-a536-af71eed08440",
+    "created": 1512653307685,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exe"
+            },
+            {
+                "type": "0",
+                "name": "Boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "then"
+            },
+            {
+                "type": "1",
+                "name": "else"
+            }
+        ],
+        "name": "Ops.Boolean.IfFalseThen"
+    }
+}
