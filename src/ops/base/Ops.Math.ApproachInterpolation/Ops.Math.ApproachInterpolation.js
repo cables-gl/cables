@@ -21,6 +21,8 @@ inDivisor.onChange=function()
     divisor=inDivisor.get();
 };
 
+var oldVal=0;
+
 exec.onTriggered=function()
 {
     if(divisor<=0)divisor=0.0001;
@@ -28,7 +30,12 @@ exec.onTriggered=function()
 
     if(val>0 && val<0.000000001)val=0;
     if(divisor!=divisor)val=0;
-    result.set(val);
+    
+    if(oldVal!=val)
+    {
+        result.set(val);
+        oldVal=val;
+    }
     
     next.trigger();
 };

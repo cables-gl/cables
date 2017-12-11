@@ -1,6 +1,5 @@
 var cgl=op.patch.cgl;
 
-op.name='TransformMul';
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var mul=this.addInPort(new Port(this,"mul"));
 
