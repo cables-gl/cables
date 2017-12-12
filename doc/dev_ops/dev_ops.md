@@ -199,21 +199,6 @@ var innerRadius = op.addInPort( new Port( this, "Inner Radius", OP_PORT_TYPE_VAL
 
 Every op should have an example on how to use it. Just link to public patches / examples which use your new op. It is a good practice to include a minimal example at first which demonstrates the basic usage without all the bells and whistles. In a second one you could show a more advanced use-case.
 
-### Pull Requests / Public Ops
+### Publishing Ops
 
-If you think one of your ops should be part of the *cables*-core, feel free to make a pull request via Github. Your op should be tested and working of course. Put your newly created op into a folder with the op-name, e.g. `Ops.Namespace.MyOp` and put it into the `src/ops/base`-folder. Every op must have a description (see above). The folder structure should look like this:
-
-```
-src/ops/base/
-    ...
-    Ops.Namespace.MyOp/
-        Ops.Namespace.MyOp.js
-        Ops.Namespace.MyOp.md
-        img/
-            anImage.jpg
-            anotherImage.jpg
-```
-
-The image folder is optional, only use it if you want to add images to your op-description.
-
-We don’t want to bloat the cables-core, so most ops are better off in the public ops directory (you can make an op public from within *cables*.
+If you made an op and think it would be useful for other users get in touch with the cables-staff (via Slack or the [cables forum](https://forum.cables.gl/)).
