@@ -31,10 +31,13 @@ function updateFunc()
 
 render.onTriggered=function()
 {
-    if(true===clear.get()) cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
-    if(true!==enable.get()) cgl.gl.disable(cgl.gl.DEPTH_TEST);
+    if(clear.get()) cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
+
+    if(!enable.get()) cgl.gl.disable(cgl.gl.DEPTH_TEST);
         else cgl.gl.enable(cgl.gl.DEPTH_TEST);
-    if(true!==write.get()) cgl.gl.depthMask(false);
+
+    if(!write.get()) cgl.gl.depthMask(false);
+        else cgl.gl.depthMask(true);
 
     cgl.gl.depthFunc(theDepthFunc);
 

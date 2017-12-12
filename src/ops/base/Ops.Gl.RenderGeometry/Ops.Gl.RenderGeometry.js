@@ -39,7 +39,6 @@ function update()
             mesh.setGeom(geom);
         }
 
-
         if(updateFaces.get() || updateAll.get())
         {
             mesh.setVertexIndices(geom.verticesIndices);
@@ -57,6 +56,10 @@ function update()
 
         mesh.addVertexNumbers=vertNums.get();
         
+    }
+    else
+    {
+        mesh=null;
     }
 }
 

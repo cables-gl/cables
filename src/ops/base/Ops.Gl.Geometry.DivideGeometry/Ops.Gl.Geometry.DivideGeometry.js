@@ -50,7 +50,6 @@ function update()
             newTexCoords.push( geom.texCoords[ geom.verticesIndices[i+2]*2+0] );
             newTexCoords.push( geom.texCoords[ geom.verticesIndices[i+2]*2+1] );
         }
-        console.log("hallo");
         
         newGeom.vertices=newVerts;
         newGeom.vertexNormals=newNormals;

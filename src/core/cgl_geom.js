@@ -116,10 +116,6 @@ CGL.Geometry.prototype.merge=function(geom)
         this.verticesIndices[oldIndizesLength+i]=geom.verticesIndices[i]+vertLength;
     }
 
-    // this.vertices=this.vertices.concat(geom.vertices);
-    // this.texCoords=this.texCoords.concat(geom.texCoords);
-    // this.vertexNormals=this.vertexNormals.concat(geom.vertexNormals);
-
     this.vertices=float32Concat(this.vertices,geom.vertices);
     this.texCoords=float32Concat(this.texCoords,geom.texCoords);
     this.vertexNormals=float32Concat(this.vertexNormals,geom.vertexNormals);
@@ -132,9 +128,10 @@ CGL.Geometry.prototype.copy=function()
     var geom=new CGL.Geometry();
     geom.faceVertCount=this.faceVertCount;
 
-    geom.vertices.length=this.vertices.length;
-    for(i=0;i<this.vertices.length;i++) geom.vertices[i]=this.vertices[i];
-
+    // geom.vertices.length=this.vertices.length;
+    // for(i=0;i<this.vertices.length;i++) geom.vertices[i]=this.vertices[i];
+    geom.setVertices(this._vertices.slice(0));
+    
     geom.verticesIndices.length=this.verticesIndices.length;
     for(i=0;i<this.verticesIndices.length;i++) geom.verticesIndices[i]=this.verticesIndices[i];
 

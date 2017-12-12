@@ -18,6 +18,9 @@ function update()
 {
     var oldGeom=geometry.get();
 
+
+
+
     if(oldGeom)
     {
         var geom=oldGeom.copy();
@@ -25,7 +28,5 @@ function update()
        
         outGeom.set(geom);
     }
-    
-    
-    
+
 }

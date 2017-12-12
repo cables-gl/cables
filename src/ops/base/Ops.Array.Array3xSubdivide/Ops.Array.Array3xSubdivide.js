@@ -20,7 +20,11 @@ var arr=[];
 
 function calc()
 {
-    if(!inArr.get())return;
+    if(!inArr.get())
+    {
+        result.set(null);
+        return;
+    }
     var subd=Math.floor(subDivs.get());
     var inPoints=inArr.get();
     
