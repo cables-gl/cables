@@ -116,7 +116,8 @@ function update()
             if(sorting.get()!=SORT_NONE) console.error("No sorting found",sorting.get());
         }
 
-        var newGeom=new CGL.Geometry();
+        // var newGeom=new CGL.Geometry();
+        var newGeom=geom.copy();
 
         var newVerts=[];
         var newFaces=[];
@@ -131,48 +132,49 @@ function update()
 
         faces=[].concat.apply([], faces);
 
-        console.log('old faces',geom.verticesIndices.length);
-        console.log('new faces',faces.length);
+        // console.log('old faces',geom.verticesIndices.length);
+        // console.log('new faces',faces.length);
 
 
-        for(var i=0;i<faces.length;i+=3)
-        {
-            newFaces.push( newVerts.length/3 );
-            newVerts.push( geom.vertices[ faces[i+0]*3+0] );
-            newVerts.push( geom.vertices[ faces[i+0]*3+1] );
-            newVerts.push( geom.vertices[ faces[i+0]*3+2] );
-            newNormals.push( geom.vertexNormals[ faces[i+0]*3+0] );
-            newNormals.push( geom.vertexNormals[ faces[i+0]*3+1] );
-            newNormals.push( geom.vertexNormals[ faces[i+0]*3+2] );
-            newTexCoords.push( geom.texCoords[ faces[i+0]*2+0] );
-            newTexCoords.push( geom.texCoords[ faces[i+0]*2+1] );
+        // for(var i=0;i<faces.length;i+=3)
+        // {
+        //     newFaces.push( newVerts.length/3 );
+        //     newVerts.push( geom.vertices[ faces[i+0]*3+0] );
+        //     newVerts.push( geom.vertices[ faces[i+0]*3+1] );
+        //     newVerts.push( geom.vertices[ faces[i+0]*3+2] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+0]*3+0] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+0]*3+1] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+0]*3+2] );
+        //     newTexCoords.push( geom.texCoords[ faces[i+0]*2+0] );
+        //     newTexCoords.push( geom.texCoords[ faces[i+0]*2+1] );
 
-            newFaces.push( newVerts.length/3 );
-            newVerts.push( geom.vertices[ faces[i+1]*3+0] );
-            newVerts.push( geom.vertices[ faces[i+1]*3+1] );
-            newVerts.push( geom.vertices[ faces[i+1]*3+2] );
-            newNormals.push( geom.vertexNormals[ faces[i+1]*3+0] );
-            newNormals.push( geom.vertexNormals[ faces[i+1]*3+1] );
-            newNormals.push( geom.vertexNormals[ faces[i+1]*3+2] );
-            newTexCoords.push( geom.texCoords[ faces[i+1]*2+0] );
-            newTexCoords.push( geom.texCoords[ faces[i+1]*2+1] );
+        //     newFaces.push( newVerts.length/3 );
+        //     newVerts.push( geom.vertices[ faces[i+1]*3+0] );
+        //     newVerts.push( geom.vertices[ faces[i+1]*3+1] );
+        //     newVerts.push( geom.vertices[ faces[i+1]*3+2] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+1]*3+0] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+1]*3+1] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+1]*3+2] );
+        //     newTexCoords.push( geom.texCoords[ faces[i+1]*2+0] );
+        //     newTexCoords.push( geom.texCoords[ faces[i+1]*2+1] );
 
-            newFaces.push( newVerts.length/3 );
-            newVerts.push( geom.vertices[ faces[i+2]*3+0] );
-            newVerts.push( geom.vertices[ faces[i+2]*3+1] );
-            newVerts.push( geom.vertices[ faces[i+2]*3+2] );
-            newNormals.push( geom.vertexNormals[ faces[i+2]*3+0] );
-            newNormals.push( geom.vertexNormals[ faces[i+2]*3+1] );
-            newNormals.push( geom.vertexNormals[ faces[i+2]*3+2] );
-            newTexCoords.push( geom.texCoords[ faces[i+2]*2+0] );
-            newTexCoords.push( geom.texCoords[ faces[i+2]*2+1] );
-
-        }
+        //     newFaces.push( newVerts.length/3 );
+        //     newVerts.push( geom.vertices[ faces[i+2]*3+0] );
+        //     newVerts.push( geom.vertices[ faces[i+2]*3+1] );
+        //     newVerts.push( geom.vertices[ faces[i+2]*3+2] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+2]*3+0] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+2]*3+1] );
+        //     newNormals.push( geom.vertexNormals[ faces[i+2]*3+2] );
+        //     newTexCoords.push( geom.texCoords[ faces[i+2]*2+0] );
+        //     newTexCoords.push( geom.texCoords[ faces[i+2]*2+1] );
+        // }
         
-        newGeom.vertices=newVerts;
-        newGeom.vertexNormals=newNormals;
-        newGeom.verticesIndices=newFaces;
-        newGeom.texCoords=newTexCoords;
+        // newGeom.vertices=newVerts;
+        // newGeom.vertexNormals=newNormals;
+        // newGeom.verticesIndices=newFaces;
+        // newGeom.texCoords=newTexCoords;
+        
+        newGeom.verticesIndices=faces;
         outGeom.set(newGeom);
     }
 }

@@ -1,0 +1,31 @@
+{
+    "updated": 1513070283306,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "b215118b-de1f-4be9-8890-d07a2ecff010",
+    "created": 1513068797756,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Vertices"
+            },
+            {
+                "type": "3",
+                "name": "Faces"
+            },
+            {
+                "type": "3",
+                "name": "TexCoords"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryPoints"
+    },
+    "summary": "get vertices of a geometry as array3x"
+}

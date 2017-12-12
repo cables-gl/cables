@@ -1,9 +1,9 @@
 {
-    "updated": 1513074198004,
-    "author": "55d744634cdc152216eb9aad",
+    "updated": 1513004544762,
+    "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
-    "id": "8b0a635c-83f0-4d95-9b9c-1b5ca55c6724",
-    "created": 1511860038889,
+    "id": "fe7b3638-4507-4548-a428-499d9ec6ce23",
+    "created": 1513004270075,
     "layout": {
         "portsIn": [
             {
@@ -12,11 +12,15 @@
             },
             {
                 "type": "0",
-                "name": "Sort"
+                "name": "x"
             },
             {
                 "type": "0",
-                "name": "Reverse"
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
             }
         ],
         "portsOut": [
@@ -25,6 +29,6 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Gl.Geometry.SortGeometry"
+        "name": "Ops.Gl.Geometry.CenterGeometry"
     }
 }

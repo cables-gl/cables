@@ -1,0 +1,22 @@
+{
+    "updated": 1513069795027,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "b0b2430c-5206-4d1f-a0a6-bc5d79a29027",
+    "created": 1513069070278,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryUnIndex"
+    }
+}

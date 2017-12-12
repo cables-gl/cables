@@ -138,7 +138,7 @@ CGL.Geometry.prototype.copy=function()
     geom.verticesIndices.length=this.verticesIndices.length;
     for(i=0;i<this.verticesIndices.length;i++) geom.verticesIndices[i]=this.verticesIndices[i];
 
-    geom.texCoords.length=this.texCoords.length;
+    geom.texCoords=new Float32Array(this.texCoords.length);
     for(i=0;i<this.texCoords.length;i++) geom.texCoords[i]=this.texCoords[i];
 
     geom.texCoordsIndices.length=this.texCoordsIndices.length;

@@ -1,5 +1,6 @@
 var geometry=op.inObject("Geometry");
 
+var outIndexed=op.outValue("Indexed",false);
 var outFaces=op.outValue("Faces");
 var outVertices=op.outValue("Vertices");
 var outNormals=op.outValue("Normals");
@@ -36,6 +37,7 @@ geometry.onChange=function()
         if(geom.vertexColors) outVertexColors.set(geom.vertexColors.length/3);
             else outVertexColors.set(0);
 
+        outIndexed.set(geom.isIndexed());
     }
 
 };
