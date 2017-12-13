@@ -1,0 +1,71 @@
+{
+    "updated": 1513160622816,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "3711150e-a02f-4455-b376-f31ae30c9301",
+    "created": 1513152495153,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "1",
+                "name": "Render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Min X"
+            },
+            {
+                "type": "0",
+                "name": "Max X"
+            },
+            {
+                "type": "0",
+                "name": "Min Y"
+            },
+            {
+                "type": "0",
+                "name": "Max Y"
+            },
+            {
+                "type": "0",
+                "name": "Min Z"
+            },
+            {
+                "type": "0",
+                "name": "Max Z"
+            },
+            {
+                "type": "0",
+                "name": "Center X"
+            },
+            {
+                "type": "0",
+                "name": "Center Y"
+            },
+            {
+                "type": "0",
+                "name": "Center Z"
+            },
+            {
+                "type": "0",
+                "name": "Width"
+            },
+            {
+                "type": "0",
+                "name": "Height"
+            },
+            {
+                "type": "0",
+                "name": "Length"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryBounds"
+    },
+    "summary": "boundings of a geometry / draw a bounding box"
+}

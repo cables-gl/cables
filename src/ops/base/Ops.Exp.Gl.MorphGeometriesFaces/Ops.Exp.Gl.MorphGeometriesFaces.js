@@ -123,7 +123,7 @@ function rebuild()
     }
     else
     {
-        console.log('no rebuild');
+        // console.log('no rebuild');
         mesh=null;
     }
 }

@@ -34,11 +34,19 @@
             {
                 "type": "3",
                 "name": "Events"
+            },
+            {
+                "type": "1",
+                "name": "Touch Start"
+            },
+            {
+                "type": "1",
+                "name": "Touch End"
             }
         ],
         "name": "Ops.Devices.TouchScreen"
     },
-    "updated": 1511433726242,
+    "updated": 1513159073539,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "cedffacf-0f09-4342-bd21-540bd9c8037d",

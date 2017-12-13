@@ -3,13 +3,22 @@ op.name="Array2xTo3x";
 var inArr=op.inArray("Array2x");
 var outArr=op.outArray("Array3x");
 
-
 var arr=[];
 
 inArr.onChange=function()
 {
     var theArray=inArr.get();
-    if(!theArray)return;
+    if(!theArray)
+    {
+        outArr.set(null);
+        return;
+    }
+
+    if(theArray.length%2!=0)
+    {
+        outArr.set(null);
+        return;
+    }
     
     if((theArray.length/2)*3!=arr.length)
     {

@@ -5,6 +5,7 @@ var geometry=op.addInPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
 geometry.ignoreValueSerialize=true;
 
 var updateAll=op.inValueBool('Update All',true);
+var updateFaces=op.inValueBool('Update Face Indices',false);
 var updateVerts=op.inValueBool('Update Vertices',false);
 var updateTexcoords=op.inValueBool('Update Texcoords',false);
 var vertNums=op.inValueBool('Vertex Numbers',true);
@@ -25,25 +26,40 @@ render.onTriggered=function()
 
 function update()
 {
-    mesh=null;
-    
-    if(geometry.get())
-    {
-        if(mesh)mesh.dispose();
-        mesh=new CGL.Mesh(op.patch.cgl,geometry.get());
 
-        if(updateTexcoords.get())
+    var geom=geometry.get();
+    
+    if(geom)
+    {
+        // if(mesh)mesh.dispose();
+        if(!mesh)
         {
-            mesh.updateTexCoords(geometry.get());
+            mesh=new CGL.Mesh(op.patch.cgl,geom);
+            mesh.addVertexNumbers=vertNums.get();
+            mesh.setGeom(geom);
         }
 
-        if(updateVerts.get())
+        if(updateFaces.get() || updateAll.get())
         {
-            mesh.updateVertices(geometry.get());
+            mesh.setVertexIndices(geom.verticesIndices);
+        }
+
+        if(updateTexcoords.get() || updateAll.get())
+        {
+            mesh.updateTexCoords(geom);
+        }
+
+        if(updateVerts.get() || updateAll.get())
+        {
+            mesh.updateVertices(geom);
         }
 
         mesh.addVertexNumbers=vertNums.get();
-        mesh.setGeom(geometry.get());
+        
+    }
+    else
+    {
+        mesh=null;
     }
 }
 

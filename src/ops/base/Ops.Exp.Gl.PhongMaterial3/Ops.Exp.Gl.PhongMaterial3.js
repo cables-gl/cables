@@ -1,12 +1,6 @@
 
-
 var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
-
 var inSpecular=op.inValueSlider("Specular",0.5);
-
-
-
-    // diffuse color
 
 var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -37,6 +31,7 @@ r.set(Math.random());
 g.set(Math.random());
 b.set(Math.random());
 a.set(1.0);
+var inColorize=op.inValueBool("Colorize Texture",false);
 
 inSpecular.uniform=new CGL.Uniform(shader,'f','specular',inSpecular);
 inFesnel.uniform=new CGL.Uniform(shader,'f','fresnel',inFesnel);
@@ -133,7 +128,11 @@ var updateLights=function()
 
 
 
-
+inColorize.onChange=function()
+{
+    if(inColorize.get()) shader.define('COLORIZE_TEXTURE');
+        else shader.removeDefine('COLORIZE_TEXTURE');
+}
 
 
 function texturingChanged()

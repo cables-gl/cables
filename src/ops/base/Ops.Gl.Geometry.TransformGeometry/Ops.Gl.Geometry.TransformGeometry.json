@@ -1,5 +1,5 @@
 {
-    "updated": 1511866579360,
+    "updated": 1512981890368,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9678fee2-5436-499c-b94d-2603cdbeb380",
@@ -33,6 +33,18 @@
             {
                 "type": "0",
                 "name": "Scale Z"
+            },
+            {
+                "type": "0",
+                "name": "Rotation X"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Y"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Z"
             }
         ],
         "portsOut": [

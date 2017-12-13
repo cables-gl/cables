@@ -106,8 +106,6 @@ float alpha=a;
             falloff=1.0;
         #endif
 
-
-
         #ifdef HAS_TEXTURE_NORMAL
 
             // 	vec3 LightDirection_tangentspace =  ( ( TBN*(vec4(light.pos,1.0)).xyz  ) ).xyz+modelPos.xyz;
@@ -194,10 +192,17 @@ float alpha=a;
             vec4 texCol=texture2D(texDiffuse, texCoord);
             col*=texCol.rgb;
             alpha*=texCol.a;
+            // if(texCol.a<=0.1)
+            // {
+                // discard;
+                // return;
+            // }
+            #ifdef COLORIZE_TEXTURE
+                col*= vec3(r,g,b);
+            #endif
         #endif
         #ifndef HAS_TEXTURE_DIFFUSE
             col*= vec3(r,g,b);
-            
         #endif
     #endif
     
@@ -222,7 +227,8 @@ float alpha=a;
     #endif
 
 
-
+// if(alpha>0.1)alpha=1.0;
+// else discard;
 
     {{MODULE_COLOR}}
 

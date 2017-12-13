@@ -116,10 +116,6 @@ CGL.Geometry.prototype.merge=function(geom)
         this.verticesIndices[oldIndizesLength+i]=geom.verticesIndices[i]+vertLength;
     }
 
-    // this.vertices=this.vertices.concat(geom.vertices);
-    // this.texCoords=this.texCoords.concat(geom.texCoords);
-    // this.vertexNormals=this.vertexNormals.concat(geom.vertexNormals);
-
     this.vertices=float32Concat(this.vertices,geom.vertices);
     this.texCoords=float32Concat(this.texCoords,geom.texCoords);
     this.vertexNormals=float32Concat(this.vertexNormals,geom.vertexNormals);
@@ -132,13 +128,14 @@ CGL.Geometry.prototype.copy=function()
     var geom=new CGL.Geometry();
     geom.faceVertCount=this.faceVertCount;
 
-    geom.vertices.length=this.vertices.length;
-    for(i=0;i<this.vertices.length;i++) geom.vertices[i]=this.vertices[i];
-
+    // geom.vertices.length=this.vertices.length;
+    // for(i=0;i<this.vertices.length;i++) geom.vertices[i]=this.vertices[i];
+    geom.setVertices(this._vertices.slice(0));
+    
     geom.verticesIndices.length=this.verticesIndices.length;
     for(i=0;i<this.verticesIndices.length;i++) geom.verticesIndices[i]=this.verticesIndices[i];
 
-    geom.texCoords.length=this.texCoords.length;
+    geom.texCoords=new Float32Array(this.texCoords.length);
     for(i=0;i<this.texCoords.length;i++) geom.texCoords[i]=this.texCoords[i];
 
     geom.texCoordsIndices.length=this.texCoordsIndices.length;
@@ -381,8 +378,14 @@ CGL.Geometry.prototype.getBounds=function()
     return bounds;
 };
 
-CGL.Geometry.prototype.center=function()
+CGL.Geometry.prototype.center=function(x,y,z)
 {
+    if(x===undefined)
+    {
+        x=true;
+        y=true;
+        z=true;
+    }
 
     var bounds=this.getBounds();
 
@@ -397,9 +400,9 @@ CGL.Geometry.prototype.center=function()
     {
         if(this.vertices[i+0]==this.vertices[i+0])
         {
-            this.vertices[i+0]-=offset[0];
-            this.vertices[i+1]-=offset[1];
-            this.vertices[i+2]-=offset[2];
+            if(x)this.vertices[i+0]-=offset[0];
+            if(y)this.vertices[i+1]-=offset[1];
+            if(z)this.vertices[i+2]-=offset[2];
         }
     }
 

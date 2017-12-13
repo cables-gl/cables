@@ -26,7 +26,11 @@ function sliceArray()
 
 inArr.onChange=function()
 {
-    if(!inArr.get())return;
+    if(!inArr.get())
+    {
+        outArr.set(null);
+        return;
+    }
     if(!comparator)
     {
         outArr.set(null);

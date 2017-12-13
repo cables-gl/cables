@@ -1,14 +1,22 @@
 {
-    "updated": 1513090666325,
+    "updated": 1513094512869,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "ab0c768e-e684-47ba-b11f-f95d86532df2",
-    "created": 1511815465623,
+    "id": "8b0a635c-83f0-4d95-9b9c-1b5ca55c6724",
+    "created": 1511860038889,
     "layout": {
         "portsIn": [
             {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Sort"
+            },
+            {
+                "type": "0",
+                "name": "Reverse"
             }
         ],
         "portsOut": [
@@ -17,6 +25,6 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Gl.Geometry.DivideGeometry"
+        "name": "Ops.Gl.Geometry.SortGeometryAxis"
     }
 }
