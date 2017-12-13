@@ -39,8 +39,6 @@ function update() {
     // op.log("unusedConnections", unusedConnections);
     var flatConnections = getFlatPoinsConnectionArray(points, unusedConnections);
     linesPort.set(flatConnections);
-    
-    console.log("time used",(CABLES.now()-startTime)/1000);
 }
 
 /**
@@ -194,7 +192,6 @@ function getTrianglesForPointConnection(ia, iaCons, allCons) {
         var ibCons = getConnectionsForPoint(ib, allCons);
         ibCons.forEach(function(ic) {
             if(hasConnection(allCons, ic, ia)) {
-                //op.log("FOOOOOOOOUND!!1!");
                 pointTriangles.push([
                     ia, 
                     ib, 
@@ -213,8 +210,7 @@ function getTrianglesForPointConnection(ia, iaCons, allCons) {
         if(ibCons.length <= 3 && Math.random() < probability) {
             if(ia && ib && ia !== ib && !hasConnection(unusedConnections, ia, ib)) {
                 if(Math.random() < probability * 7) { // increase chances for loose ends
-                        unusedConnections.push([ia, ib]);   
-                        op.log("added one-line-connection");
+                        unusedConnections.push([ia, ib]);
                    } 
             }
         }

@@ -21,5 +21,6 @@
             }
         ],
         "name": "Ops.Gl.Mesh.Polyhedron"
-    }
+    },
+    "summary": "See https://github.com/mikolalysenko/conway-hart"
 }
