@@ -20,7 +20,7 @@ exe.onTriggered=function()
     
     if(!arr1 || !arr2 || arr1.length<arr2.length)
     {
-        
+        outArr.set(null);
     }
     else
     {

@@ -15,6 +15,8 @@ var f2y=op.outValue("Finger 2 Y");
 
 var outEvents=op.outArray("Events");
 
+var outTouchStart=op.outFunction("Touch Start");
+var outTouchEnd=op.outFunction("Touch End");
 
 
 
@@ -37,9 +39,11 @@ function setPos(event)
 
 var ontouchstart=function(event)
 {
+    
     outTouched.set(true);
     setPos(event);
     numFingers.set(event.touches.length);
+    outTouchStart.trigger();
 };
 
 var ontouchend=function(event)
@@ -48,7 +52,7 @@ var ontouchend=function(event)
     setPos(event);
 
     numFingers.set(event.touches.length);
-
+    outTouchEnd.trigger();
 };
 
 var ontouchmove=function(event)

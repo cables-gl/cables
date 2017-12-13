@@ -1,0 +1,58 @@
+{
+    "updated": 1513172083205,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "e2ace702-eed6-4b40-86f6-cea716ba8579",
+    "created": 1513154928260,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Num Items"
+            },
+            {
+                "type": "0",
+                "name": "Min X"
+            },
+            {
+                "type": "0",
+                "name": "Max X"
+            },
+            {
+                "type": "0",
+                "name": "Average X"
+            },
+            {
+                "type": "0",
+                "name": "Min Y"
+            },
+            {
+                "type": "0",
+                "name": "Max Y"
+            },
+            {
+                "type": "0",
+                "name": "Average Y"
+            },
+            {
+                "type": "0",
+                "name": "Min Z"
+            },
+            {
+                "type": "0",
+                "name": "Max Z"
+            },
+            {
+                "type": "0",
+                "name": "Average Z"
+            }
+        ],
+        "name": "Ops.Array.Array3xAnalyze"
+    }
+}

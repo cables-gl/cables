@@ -20,8 +20,6 @@ var outHeight=op.outValue("Height");
 var outLength=op.outValue("Length");
 
 
-
-
 var wireMesh=null;
 var bounds=null;
 var cgl=op.patch.cgl;
@@ -31,7 +29,7 @@ inGeom.onChange=function()
     if(geom)
     {
         bounds=geom.getBounds();
-        console.log('bounds ',bounds);
+        // console.log('bounds ',bounds);
         
         outMinX.set(bounds.minX);
         outMaxX.set(bounds.maxX);
@@ -69,12 +67,8 @@ var vec=vec3.create();
 
 render.onTriggered=function()
 {
-    if(!wireMesh)
-    {
-        wireMesh=new CGL.WireCube(cgl);
-    }
+    if(!wireMesh) wireMesh=new CGL.WireCube(cgl);
 
-    
     if(bounds)
     {
         vec3.set(vec, 
