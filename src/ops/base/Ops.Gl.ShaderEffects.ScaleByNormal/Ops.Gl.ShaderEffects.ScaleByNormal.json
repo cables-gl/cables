@@ -22,5 +22,6 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.ScaleByNormal"
-    }
+    },
+    "summary": "scale an object in the direction of face normals"
 }

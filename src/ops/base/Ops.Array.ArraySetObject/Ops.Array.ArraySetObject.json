@@ -3,5 +3,6 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "5cccb9a4-3653-4c58-b54e-932c4c585b5f",
-    "created": 1512599726484
+    "created": 1512599726484,
+    "summary": "put an object at index in an array"
 }

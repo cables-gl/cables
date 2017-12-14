@@ -54,5 +54,6 @@
             }
         ],
         "name": "Ops.Array.Array3xAnalyze"
-    }
+    },
+    "summary": "min,max and average values of an array3x"
 }

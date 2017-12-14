@@ -18,5 +18,6 @@
             }
         ],
         "name": "Ops.Gl.Geometry.DivideGeometry"
-    }
+    },
+    "summary": "disconnect faces/polygons of a mesh "
 }

@@ -54,5 +54,6 @@
             }
         ],
         "name": "Ops.Gl.Geometry.TransformGeometry"
-    }
+    },
+    "summary": "transform vertices of geometry"
 }

@@ -26,5 +26,6 @@
             }
         ],
         "name": "Ops.String.RandomString"
-    }
+    },
+    "summary": "generate a random string of given characters"
 }

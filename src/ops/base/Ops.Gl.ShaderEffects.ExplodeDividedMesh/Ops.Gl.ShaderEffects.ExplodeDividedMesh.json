@@ -66,5 +66,6 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.ExplodeDividedMesh"
-    }
+    },
+    "summary": "explode a (divided) mesh in the direction of faces normals"
 }

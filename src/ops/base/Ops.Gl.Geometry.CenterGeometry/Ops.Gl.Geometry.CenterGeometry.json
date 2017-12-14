@@ -30,5 +30,6 @@
             }
         ],
         "name": "Ops.Gl.Geometry.CenterGeometry"
-    }
+    },
+    "summary": "center an object to the average x,y,z position of its vertices"
 }

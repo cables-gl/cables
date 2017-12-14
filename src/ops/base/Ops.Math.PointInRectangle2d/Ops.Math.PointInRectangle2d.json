@@ -46,5 +46,6 @@
             }
         ],
         "name": "Ops.Math.PointInRectangle2d"
-    }
+    },
+    "summary": "test if a point is in or outside of a rectangle"
 }
