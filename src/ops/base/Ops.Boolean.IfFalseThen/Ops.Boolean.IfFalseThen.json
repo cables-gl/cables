@@ -27,5 +27,5 @@
         ],
         "name": "Ops.Boolean.IfFalseThen"
     },
-    "summary": "trigger childs if value is false"
+    "summary": "triggers children if value is false"
 }
