@@ -12,5 +12,6 @@
             }
         ],
         "name": "Ops.Debug.Console"
-    }
+    },
+    "summary": "show console log output on the screen"
 }

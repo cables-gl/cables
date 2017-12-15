@@ -1,6 +1,6 @@
-# SinusAnim
+# SineAnim
 
-*Ops.Anim.SinusAnim*    
+*Ops.Anim.SineAnim*    
 
 Outputs a changing value based on a sinus operation, which can be used for animations.
 

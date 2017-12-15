@@ -1,9 +1,9 @@
 {
-    "updated": 1512155731577,
+    "updated": 1512669367715,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "008c6b04-31b8-4fe0-a6d7-08ce9cd74490",
-    "created": 1512131129205,
+    "id": "2a83f565-7c5c-4cce-862f-d38481eb3726",
+    "created": 1512669363610,
     "layout": {
         "portsIn": [
             {
@@ -12,7 +12,7 @@
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "mul"
             }
         ],
         "portsOut": [
@@ -21,7 +21,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.ScaleByNormal"
-    },
-    "summary": "scale an object in the direction of face normals"
+        "name": "Ops.Gl.Matrix.TransformMul"
+    }
 }

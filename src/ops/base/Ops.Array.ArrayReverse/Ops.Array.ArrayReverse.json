@@ -1,5 +1,5 @@
 {
-    "updated": 1506588849826,
+    "updated": 1513014259542,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "88d8662f-2c01-42e6-943d-4d3cf90657b0",
@@ -18,5 +18,6 @@
             }
         ],
         "name": "Ops.Array.ArrayReverse"
-    }
+    },
+    "summary": "Reverses an array (creates a copy of the array before), shallow copy"
 }

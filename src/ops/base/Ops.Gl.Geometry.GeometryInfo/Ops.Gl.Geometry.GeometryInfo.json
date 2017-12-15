@@ -46,5 +46,6 @@
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryInfo"
-    }
+    },
+    "summary": "information about a geometry"
 }

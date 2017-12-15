@@ -7,7 +7,8 @@ var outArr=op.outArray("Result");
 inArr.onChange=function()
 {
     var arr=inArr.get();
-    if(arr)
-        outArr.set(arr.reverse());
-    
+    if(arr) {
+        var arrCopy = arr.slice();
+        outArr.set(arrCopy.reverse());
+    }
 };

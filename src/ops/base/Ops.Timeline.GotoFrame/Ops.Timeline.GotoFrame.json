@@ -12,5 +12,6 @@
             }
         ],
         "name": "Ops.Timeline.GotoFrame"
-    }
+    },
+    "summary": "jump to a key in the timeline"
 }

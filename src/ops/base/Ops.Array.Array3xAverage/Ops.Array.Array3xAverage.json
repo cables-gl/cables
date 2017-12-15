@@ -26,5 +26,6 @@
             }
         ],
         "name": "Ops.Array.Array3xAverage"
-    }
+    },
+    "summary": "average x,y,z values of an array3d"
 }
