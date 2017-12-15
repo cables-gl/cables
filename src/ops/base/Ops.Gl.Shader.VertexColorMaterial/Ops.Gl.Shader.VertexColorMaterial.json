@@ -1,0 +1,26 @@
+{
+    "updated": 1513332084423,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "a01d592b-0e5e-48f3-a9fd-54b87ffd623b",
+    "created": 1513331905182,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "opacity"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Shader.VertexColorMaterial"
+    }
+}

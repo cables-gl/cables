@@ -9,14 +9,14 @@ var srcVert=''
     .endl()+'{{MODULES_HEAD}}'
 
     .endl()+'IN vec3 vPosition;'
-    .endl()+'IN vec4 attrVertColor;'
+    .endl()+'IN vec3 attrVertColor;'
     .endl()+'UNI mat4 projMatrix;'
     .endl()+'UNI mat4 mvMatrix;'
     .endl()+'OUT vec4 color;'
 
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   color=attrVertColor;'
+    .endl()+'   color.rgb=attrVertColor;'
     .endl()+'    vec4 pos = vec4( vPosition, 1. );'
 
     .endl()+'{{MODULE_VERTEX_POSITION}}'
@@ -37,7 +37,7 @@ var srcVert=''
     .endl()+'   vec4 col=color;'
     .endl()+'{{MODULE_COLOR}}'
 
-    .endl()+'   col.a*=opacity;'
+    .endl()+'   col.a=opacity;'
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 

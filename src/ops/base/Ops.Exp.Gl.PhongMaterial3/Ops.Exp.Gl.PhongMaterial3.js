@@ -32,6 +32,8 @@ g.set(Math.random());
 b.set(Math.random());
 a.set(1.0);
 var inColorize=op.inValueBool("Colorize Texture",false);
+var inDoubleSided=op.inValueBool("Double Sided",false);
+
 
 inSpecular.uniform=new CGL.Uniform(shader,'f','specular',inSpecular);
 inFesnel.uniform=new CGL.Uniform(shader,'f','fresnel',inFesnel);
@@ -132,7 +134,13 @@ inColorize.onChange=function()
 {
     if(inColorize.get()) shader.define('COLORIZE_TEXTURE');
         else shader.removeDefine('COLORIZE_TEXTURE');
-}
+};
+
+inDoubleSided.onChange=function()
+{
+    if(inDoubleSided.get()) shader.define('DOUBLESIDED');
+        else shader.removeDefine('DOUBLESIDED');
+};
 
 
 function texturingChanged()
