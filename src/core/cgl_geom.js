@@ -498,6 +498,7 @@ CGL.Geometry.json2geom=function(jsonMesh)
     geom.verticesIndices=[];
     geom.vertices=JSON.parse(JSON.stringify(jsonMesh.vertices));
     geom.vertexNormals=jsonMesh.normals||[];
+    geom.vertexColors=jsonMesh.colors||[];
     geom.tangents=jsonMesh.tangents||[];
     geom.biTangents=jsonMesh.bitangents||[];
         

@@ -94,6 +94,8 @@ void main()
     	)); // You can use dot products instead of building this matrix and transposing it. See References for details.
     
     	EyeDirection_tangentspace =  TBN * EyeDirection_cameraspace;
+    	
+
     #endif
 
 

@@ -87,12 +87,14 @@ float alpha=a;
     vec3 col=vec3(0.0);
     vec3 normal = normalize(normalMatrix*norm);
   
+    #ifdef DOUBLESIDED
+        if(!gl_FrontFacing)normal*=vec3(-1);
+    #endif
+  
     #ifdef HAS_TEXTURE_NORMAL
         vec3 TextureNormal_tangentspace = normalize(texture2D(texNormal, texCoord).rgb*2.0-1.0);
     #endif
 
-// float falloff=0.0;
-  
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         Light light=lights[l];
@@ -218,12 +220,11 @@ float alpha=a;
 
     vec3 vNormal = normalize(normalMatrix * norm);
     col+=vec3(r,g,b)*(calcFresnel(normalize(mvPos.xyz),vNormal)*fresnel*5.0);
-    
-    #ifdef SHOW_EMISSIVE
-    #ifdef HAS_TEXTURE_EMISSIVE
-        col+= 25.0*texture2D(texEmissive, texCoord).rgb;
 
-    #endif
+    #ifdef SHOW_EMISSIVE
+        #ifdef HAS_TEXTURE_EMISSIVE
+            col+= 25.0*texture2D(texEmissive, texCoord).rgb;
+        #endif
     #endif
 
 
@@ -231,6 +232,17 @@ float alpha=a;
 // else discard;
 
     {{MODULE_COLOR}}
+
+    if( dot(vNormal,vec3(0.0,0.0,0.0))>0.0 )
+    {
+        col.r=1.0;
+        col.g=0.0;
+        col.b=0.0;
+    }
+    //  o.Normal = dot(IN.viewDir, float3(0, 0, 1)) > 0 ? n : -n;
+
+    // if(!gl_FrontFacing)col.r=1.0;
+
 
     outColor=vec4(col,alpha);
 }

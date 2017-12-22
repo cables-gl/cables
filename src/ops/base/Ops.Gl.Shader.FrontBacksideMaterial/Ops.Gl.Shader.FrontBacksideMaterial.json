@@ -1,0 +1,23 @@
+{
+    "updated": 1513338186945,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "beb92b81-8fe8-4871-b790-efb71bfeefc4",
+    "created": 1513338032368,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            }
+        ],
+        "name": "Ops.Gl.Shader.FrontBacksideMaterial"
+    },
+    "summary": "see which faces are facing the camera"
+}

@@ -1,5 +1,5 @@
 {
-    "updated": 1513085463472,
+    "updated": 1513337882062,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "4698b1c4-859e-463c-97d1-9179e70ee674",
@@ -37,6 +37,10 @@
             {
                 "type": "0",
                 "name": "Colorize Texture"
+            },
+            {
+                "type": "0",
+                "name": "Double Sided"
             },
             {
                 "type": "2",
