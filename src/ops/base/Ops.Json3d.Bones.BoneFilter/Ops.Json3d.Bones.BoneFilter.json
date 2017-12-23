@@ -1,0 +1,26 @@
+{
+    "updated": 1514025342089,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "c7d25c25-accb-45da-ba6a-a1d634f89e6f",
+    "created": 1514024096775,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "0",
+                "name": "Joint"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Json3d.Bones.BoneFilter"
+    }
+}

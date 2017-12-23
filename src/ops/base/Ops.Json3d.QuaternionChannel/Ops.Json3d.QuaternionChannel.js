@@ -1,4 +1,4 @@
-this.name='quaternion anim channel';
+
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -27,7 +27,8 @@ var animW=null;
 function readAnim()
 {
     var an=dataGetAnimation(cgl.frameStore.currentScene.getValue(),channel.get());
-    
+
+
     if(an)
     {
         animX=new CABLES.TL.Anim();
