@@ -1,1 +1,21 @@
-{"layout":{"portsIn":[{"type":"0","name":"title"},{"type":"0","name":"text"}],"name":"Ops.Ui.Comment"},"summary":"add comments to the patch"}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "title"
+            },
+            {
+                "type": "0",
+                "name": "text"
+            }
+        ],
+        "name": "Ops.Ui.Comment"
+    },
+    "summary": "add comments to the patch",
+    "updated": 1514558159388,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "9de0c04f-666b-47cd-9722-a8cf36ab4720",
+    "created": 1514548240987
+}
