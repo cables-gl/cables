@@ -1,0 +1,22 @@
+{
+    "updated": 1513607212191,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "0d67fdf1-8e60-465e-9897-6aae6676e4c9",
+    "created": 1513607081124,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array2x"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array3x"
+            }
+        ],
+        "name": "Ops.Array.Array1xTo3x"
+    }
+}
