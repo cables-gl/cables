@@ -30,9 +30,9 @@ CGL.Geometry=function(name)
 CGL.Geometry.prototype.clear=function()
 {
     this._indexed=true;
-    this.vertices.length=0;
+    this.vertices=new Float32Array([]);
     this.verticesIndices.length=0;
-    this.texCoords.length=0;
+    this.texCoords=new Float32Array([]);
     this.texCoordsIndices.length=0;
     this.vertexNormals.length=0;
 };
@@ -107,6 +107,7 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 
 CGL.Geometry.prototype.merge=function(geom)
 {
+    if(!geom)return;
     var oldIndizesLength=this.verticesIndices.length;
     var vertLength=this.vertices.length/3;
 
