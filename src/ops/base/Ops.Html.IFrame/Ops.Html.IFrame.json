@@ -1,0 +1,28 @@
+{
+    "updated": 1513838951662,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "d50ef8f6-e706-48ac-94e1-35be3c69a713",
+    "created": 1513838366915,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "URL"
+            },
+            {
+                "type": "0",
+                "name": "ID"
+            }
+        ],
+        "name": "Ops.Html.IFrame"
+    }
+}

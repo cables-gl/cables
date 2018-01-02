@@ -1,26 +1,26 @@
 {
-    "updated": 1513758130561,
+    "updated": 1514025342089,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "49f66ac2-9d65-4fc6-9b2f-bb1476073587",
-    "created": 1513758079500,
+    "id": "c7d25c25-accb-45da-ba6a-a1d634f89e6f",
+    "created": 1514024096775,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Exec"
             },
             {
                 "type": "0",
-                "name": "matrix"
+                "name": "Joint"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Next"
             }
         ],
-        "name": "Ops.Gl.Matrix.MatrixMul"
+        "name": "Ops.Json3d.Bones.BoneFilter"
     }
 }

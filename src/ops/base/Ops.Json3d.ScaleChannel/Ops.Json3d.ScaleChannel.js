@@ -27,7 +27,8 @@ var animZ=null;
 function readAnim()
 {
     var an=dataGetAnimation(cgl.frameStore.currentScene.getValue(),channel.get());
-    
+
+
     if(an)
     {
         animX=new CABLES.TL.Anim();
@@ -45,6 +46,7 @@ function readAnim()
 }
 
 
+var vec=vec3.create();
 
 
 render.onTriggered=function()
@@ -56,7 +58,11 @@ render.onTriggered=function()
     if(animX)
     {
         var time=op.patch.timer.getTime();
-        mat4.scale(cgl.mvMatrix,cgl.mvMatrix,[animX.getValue(time),animY.getValue(time),animZ.getValue(time)]);
+        vec[0]=animX.getValue(time);
+        vec[1]=animY.getValue(time);
+        vec[2]=animZ.getValue(time);
+
+        mat4.scale(cgl.mvMatrix,cgl.mvMatrix,vec);
     }
     else readAnim();
 

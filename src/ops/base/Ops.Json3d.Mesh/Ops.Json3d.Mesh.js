@@ -25,7 +25,7 @@ function doRender()
     if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=op.index.get()) reload();
     if(draw.get())
     {
-        if(mesh!==null) mesh.render(cgl.getShader());
+        if(mesh) mesh.render(cgl.getShader());
         next.trigger();
     }
 }
@@ -64,10 +64,7 @@ function reload()
         op.uiAttribs.warning='';
 
         var i=0;
-
         var verts=JSON.parse(JSON.stringify(jsonMesh.vertices));
-
-
 
         var geom=new CGL.Geometry();
         geom.vertices=verts;
@@ -76,7 +73,6 @@ function reload()
         geom.biTangents=jsonMesh.bitangents||[];
         
         if(centerPivot.get())geom.center();
-
 
         if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
         geom.verticesIndices=[];

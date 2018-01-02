@@ -1,0 +1,26 @@
+{
+    "updated": 1513581449799,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "c56ef6cc-4952-4994-9baf-da502e563ae1",
+    "created": 1513581213773,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Column Name"
+            },
+            {
+                "type": "3",
+                "name": "CSV Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Json.CsvColumnArray"
+    }
+}

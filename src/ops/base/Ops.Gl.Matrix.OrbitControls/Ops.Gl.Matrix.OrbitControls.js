@@ -58,6 +58,7 @@ vec3.set(vUp, 0,1,0);
 var tempEye=vec3.create();
 var finalEye=vec3.create();
 var tempCenter=vec3.create();
+var finalCenter=vec3.create();
 
 var px=0;
 var py=0;
@@ -89,7 +90,7 @@ function reset()
 
 function updateSmoothness()
 {
-    divisor=smoothness.get()*10;
+    divisor=smoothness.get()*10+1.0;
 }
 
 smoothness.onChange=updateSmoothness;
@@ -118,7 +119,11 @@ render.onTriggered=function()
     finalEye[1]=ip(finalEye[1],tempEye[1]);
     finalEye[2]=ip(finalEye[2],tempEye[2]);
     
-    mat4.lookAt(viewMatrix, finalEye, tempCenter, vUp);
+    finalCenter[0]=ip(finalCenter[0],tempCenter[0]);
+    finalCenter[1]=ip(finalCenter[1],tempCenter[1]);
+    finalCenter[2]=ip(finalCenter[2],tempCenter[2]);
+    
+    mat4.lookAt(viewMatrix, finalEye, finalCenter, vUp);
     mat4.rotate(viewMatrix, viewMatrix, px, vUp);
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,viewMatrix);
 
@@ -152,11 +157,7 @@ function onmousemove(event)
     
     var movementX=(x-lastMouseX)*speedX.get();
     var movementY=(y-lastMouseY)*speedY.get();
-    
 
-
-
-    
     if(doLockPointer)
     {
         movementX=event.movementX*mul.get();

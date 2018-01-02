@@ -13,7 +13,7 @@ inArrPort.onChange = function() {
         // e.g. length = 31 -> ignore the last value
         //      length = 30 -> perfect fit for [x, y, z, ...]
         var iStart = (Math.floor(inArr.length / 3) * 3) - 3;
-        for(var i=iStart; i>=2; i-=3) {
+        for(var i=iStart; i>=0; i-=3) {
             reversedArr.push(inArr[i], inArr[i+1], inArr[i+2]);
         }
     }
