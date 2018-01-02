@@ -16,6 +16,8 @@ var srcFrag=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=vec4(texCoord.x,texCoord.y,1.0,1.0);'
+    // .endl()+' if(texCoord.y==0.0)col.r=1.0;'
+    
     .endl()+'   gl_FragColor = col;'
     .endl()+'}';
 
