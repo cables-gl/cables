@@ -16,27 +16,11 @@ var shader=new CGL.Shader(cgl,'textureeffect color');
 
 op.onLoaded=shader.compile;
 
-var srcFrag=''
-    .endl()+'precision highp float;'
+var srcFrag=attachments.color_frag;
 
-    .endl()+CGL.TextureEffect.getBlendCode()
-    
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'UNI sampler2D tex;'
-    .endl()+'UNI float r;'
-    .endl()+'UNI float g;'
-    .endl()+'UNI float b;'
-    .endl()+'UNI float amount;'
 
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=vec4(r,g,b,1.0);'
-    .endl()+'   vec4 base=texture2D(tex,texCoord);'
+srcFrag=srcFrag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 
-    .endl()+'   col=vec4( _blend(base.rgb,col.rgb) ,1.0);'
-    .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
