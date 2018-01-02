@@ -1,5 +1,5 @@
 {
-    "updated": 1514891176937,
+    "updated": 1514931699244,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "1e6e9533-7a75-4994-ba5f-9ba5c92b4d43",
@@ -12,6 +12,18 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "Fill"
+            },
+            {
+                "type": "0",
                 "name": "offset"
             },
             {
@@ -21,6 +33,10 @@
             {
                 "type": "0",
                 "name": "amplitude"
+            },
+            {
+                "type": "0",
+                "name": "Thickness"
             },
             {
                 "type": "0",
