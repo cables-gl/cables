@@ -40,7 +40,7 @@ void main()
 
     #ifdef BILLBOARD
        vec3 position=vPosition;
-       mat4 mvMatrix=viewMatrix*modelMatrix;
+       mvMatrix=viewMatrix*modelMatrix;
 
        gl_Position = projMatrix * mvMatrix * vec4((
            position.x * vec3(
