@@ -51,18 +51,13 @@ void main()
 
     texCoord=attrTexCoord;
 
-
     norm=attrVertNormal;
 
     {{MODULE_VERTEX_POSITION}}
 
+    mvMatrix=viewMatrix*mMatrix;
     modelPos=mMatrix*pos;
     normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
-
-
-    mvMatrix=viewMatrix*mMatrix;
-
-
 
     gl_Position = projMatrix * mvMatrix * pos;
 }

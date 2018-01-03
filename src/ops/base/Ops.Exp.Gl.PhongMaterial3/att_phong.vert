@@ -71,9 +71,10 @@ void main()
     normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
 
 
-    mvMatrix=viewMatrix*mMatrix;
     
     {{MODULE_VERTEX_POSITION}}
+    
+    mvMatrix=viewMatrix*mMatrix;
 
 
     #ifdef HAS_TEXTURE_NORMAL

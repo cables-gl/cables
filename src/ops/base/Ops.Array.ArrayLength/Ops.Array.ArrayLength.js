@@ -8,7 +8,7 @@ function update()
 {
     var l=0;
     if(array.get()) l=array.get().length;
-
+    else l=-1;
     outLength.set(l);
 }
 

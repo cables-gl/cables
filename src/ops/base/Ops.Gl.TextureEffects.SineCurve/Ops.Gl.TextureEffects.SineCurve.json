@@ -1,4 +1,9 @@
 {
+    "updated": 1514931699244,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "1e6e9533-7a75-4994-ba5f-9ba5c92b4d43",
+    "created": 1514886948306,
     "layout": {
         "portsIn": [
             {
@@ -7,7 +12,7 @@
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Blend Mode"
             },
             {
                 "type": "0",
@@ -15,35 +20,27 @@
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "Fill"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "offset"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "frequency"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "amplitude"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "Thickness"
             },
             {
                 "type": "0",
-                "name": "z"
-            },
-            {
-                "type": "0",
-                "name": "WorldSpace"
-            },
-            {
-                "type": "0",
-                "name": "Falloff"
+                "name": "Flip"
             }
         ],
         "portsOut": [
@@ -52,12 +49,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.ColorArea"
-    },
-    "summary": "colorize all meshes around x,y,z",
-    "updated": 1514973007747,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "cac6a739-c2ad-440c-99b2-33e2c459e8b1",
-    "created": 1505483732513
+        "name": "Ops.Gl.TextureEffects.SineCurve"
+    }
 }

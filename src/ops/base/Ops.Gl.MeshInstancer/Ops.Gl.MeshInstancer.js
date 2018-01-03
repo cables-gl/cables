@@ -1,11 +1,12 @@
+// TODO: remove array3xtransformedinstanced....
+
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
-var transformations=op.inArray("array 3x");
-var geom=op.addInPort(new Port(op,"geom",OP_PORT_TYPE_OBJECT));
+var inTransformations=op.inArray("positions");
+var inScales=op.inArray("Scale Array");
+var inScale=op.inValue("Scale",1);
+var geom=op.inObject("geom");
 geom.ignoreValueSerialize=true;
-
-
-var matrices=[];
 
 var mod=null;
 var mesh=null;
@@ -14,36 +15,37 @@ var uniDoInstancing=null;
 var recalc=true;
 var cgl=op.patch.cgl;
 
-geom.onChange=reset;
 exe.onTriggered=doRender;
 exe.onLinkChanged=removeModule;
 
+var matrixArray= new Float32Array(1);
+var m=mat4.create();
+inTransformations.onChange=reset;
+inScales.onChange=reset;
 
 
 var srcHeadVert=''
-    .endl()+'uniform float do_instancing;'
-
+    .endl()+'UNI float do_instancing;'
+    .endl()+'UNI float MOD_scale;'
+    
     .endl()+'#ifdef INSTANCING'
     .endl()+'   IN mat4 instMat;'
     .endl()+'   OUT mat4 instModelMat;'
     .endl()+'#endif';
 
-
 var srcBodyVert=''
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   if( do_instancing==1.0 )'
+    .endl()+'   if(do_instancing==1.0)'
     .endl()+'   {'
-    .endl()+'       instModelMat=instMat;'
-    .endl()+'       mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+    .endl()+'       mMatrix*=instMat;'
+    .endl()+'       mMatrix[0][0]*=MOD_scale;'
+    .endl()+'       mMatrix[1][1]*=MOD_scale;'
+    .endl()+'       mMatrix[2][2]*=MOD_scale;'
     .endl()+'   }'
     .endl()+'#endif'
     .endl();
 
 
-function reset()
-{
-
-}
 
 geom.onChange=function()
 {
@@ -53,37 +55,39 @@ geom.onChange=function()
         return;
     }
     mesh=new CGL.Mesh(cgl,geom.get());
-
-
+    reset();
 };
-
 
 function removeModule()
 {
     if(shader && mod)
     {
+        shader.removeDefine('INSTANCING');
         shader.removeModule(mod);
         shader=null;
     }
 }
 
-
-
-var matrixArray= new Float32Array(1);
-var m=mat4.create();
-
-
-transformations.onChange=function()
+function reset()
 {
     recalc=true;
-};
+}
 
 function setupArray()
 {
-
-    var transforms=transformations.get();
-    if(!transforms)return;
+    if(!mesh)return;
+    
+    var transforms=inTransformations.get();
+    if(!transforms)
+    {
+        transforms=[0,0,0];
+    }
     var num=Math.floor(transforms.length/3);
+    
+    
+    var scales=inScales.get();
+    console.log('scales',scales);
+    console.log('setup array!');
 
     if(matrixArray.length!=num*16)
     {
@@ -99,6 +103,16 @@ function setupArray()
                 transforms[i*3+1],
                 transforms[i*3+2]
             ]);
+        
+        if(scales && scales.length>i)
+        {
+            mat4.scale(m,m,[scales[i],scales[i],scales[i]]);
+            // console.log('scale',scales[i]);
+        }
+        else
+        {
+            mat4.scale(m,m,[1,1,1]);
+        }
 
         for(var a=0;a<16;a++)
         {
@@ -109,13 +123,13 @@ function setupArray()
     mesh.numInstances=num;
     mesh.addAttribute('instMat',matrixArray,16);
     recalc=false;
-};
+}
 
 function doRender()
 {
-    if(!mesh) return;
     if(recalc)setupArray();
     if(matrixArray.length<=1)return;
+    if(!mesh) return;
 
     if(cgl.getShader() && cgl.getShader()!=shader)
     {
@@ -137,8 +151,7 @@ function doRender()
 
             shader.define('INSTANCING');
             uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
-
-            // updateTransforms();
+            uniScale=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
         }
         else
         {

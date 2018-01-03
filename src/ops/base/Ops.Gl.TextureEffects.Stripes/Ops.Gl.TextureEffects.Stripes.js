@@ -1,4 +1,3 @@
-op.name="Stripes";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));

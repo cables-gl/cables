@@ -23,8 +23,15 @@ var inArray8 = op.inArray("Array 8");
 // output ports
 var outArray = op.outArray("Out Array");
 
+
+inArray1.onChange=function()
+{
+    console.log('inArray1 CHANGE!',inArray1.get());
+};
+
 // change listeners
 inTrigger1.onTriggered = function() {
+    console.log( inArray1.get() );
     outArray.set(inArray1.get());
 };
 inTrigger2.onTriggered = function() {
