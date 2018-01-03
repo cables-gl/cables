@@ -10,8 +10,10 @@ function setOutarray() {
     var inArr = inArrayPort.get();
     var begin = beginPort.get();
     var end = endPort.get();
-    if(!inArr) {
-        outArrayPort.set([]);
+    
+    console.log('out arr',inArr);
+    if(!Array.isArray(inArr)) {
+        outArrayPort.set(null);
         return;
     }
     outArrayPort.set(null);

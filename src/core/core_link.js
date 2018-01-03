@@ -43,7 +43,7 @@ CABLES.Link.prototype._setValue=function()
     {
         if(this.portIn.type!=OP_PORT_TYPE_FUNCTION)this.activity();
 
-        if ( this.portIn.get()!=v )
+        if( this.portIn.get()!==v )
         {
             this.portIn.set(v);
         }

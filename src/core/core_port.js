@@ -211,7 +211,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.removeLink=function(link)
     {
-
         for(var i in this.links)
             if(this.links[i]==link)
             {
