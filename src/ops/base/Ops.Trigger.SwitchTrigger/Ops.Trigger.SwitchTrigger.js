@@ -1,9 +1,6 @@
 // constants
 var NUM_PORTS = 10;
 
-// vars
-var cases = [];
-
 // inputs
 var exePort = op.inFunctionButton('Execute');
 var switchPort = op.inValue('Switch Value');

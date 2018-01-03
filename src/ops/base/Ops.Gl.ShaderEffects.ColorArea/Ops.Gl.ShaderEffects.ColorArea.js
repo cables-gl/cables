@@ -1,4 +1,3 @@
-op.name="ColorArea";
 
 var cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
@@ -31,7 +30,7 @@ var inAmount=op.inValueSlider("Amount",0.5);
 }
 
 
-var inWorldSpace=op.inValueBool("WorldSpace");
+var inWorldSpace=op.inValueBool("WorldSpace",true);
 var inFalloff=op.inValueSlider("Falloff",0);
 
 
@@ -46,7 +45,7 @@ var srcBodyVert=''
     .endl()+'   MOD_areaPos=pos;'
     .endl()+'#endif'
     .endl()+'#ifdef MOD_WORLDSPACE'
-    .endl()+'   MOD_areaPos=modelMatrix*pos;'
+    .endl()+'   MOD_areaPos=mMatrix*pos;'
     .endl()+'#endif'
     .endl();
 
@@ -107,7 +106,6 @@ op.render.onTriggered=function()
                 posY:y,
                 posZ:z
             });
-
 
     if(!cgl.getShader())
     {

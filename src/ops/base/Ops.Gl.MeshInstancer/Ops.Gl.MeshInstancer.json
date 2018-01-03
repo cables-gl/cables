@@ -1,5 +1,5 @@
 {
-    "updated": 1514900797978,
+    "updated": 1514973884658,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ec3699a1-5154-44dd-a4fe-447031fea4ad",
@@ -16,7 +16,11 @@
             },
             {
                 "type": "3",
-                "name": "scale"
+                "name": "Scale Array"
+            },
+            {
+                "type": "0",
+                "name": "Scale"
             },
             {
                 "type": "2",
