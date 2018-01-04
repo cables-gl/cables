@@ -29,6 +29,8 @@ if(myVar) {
 }
 ```
 
+*Please Note: Variable names are case sensitive, so a variable with name `My Variable` is different to one with name `my variable`.*
+
 ### Listening to variable changes
 
 You can add a listener to a variable which gets called every time the variable changes:
@@ -43,3 +45,19 @@ if(myVar) {
     });
 }
 ```
+
+
+
+### Test setting / getting variables without leaving cables
+
+If you want to test certain aspects of your patch which involve getting / setting variables from outside cables you can do so from the terminal:  
+
+Open the browser terminal by hitting `cmd + alt + i`, then enter:
+
+```javascript
+var myCablesVar = gui.patch().scene.getVar('name of your variable');
+myCablesVar.setValue(123);
+console.log(myCablesVar.getValue()); // prints 123
+```
+
+*Summarising*: If you want to access a variable from outside cables use `CABLES.patch.getVar…`, if you want to test getting / setting variables without leaving cables, use `gui.patch().scene.getVar…`.  
