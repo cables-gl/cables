@@ -38,7 +38,9 @@ void main()
 {
     texCoord=attrTexCoord;
     norm=attrVertNormal;
-
+    mat4 mMatrix=modelMatrix;
+    mat4 mvMatrix;
+    
     #ifdef HAS_NORMAL_TEXTURE
         vTangent=attrTangent;
         vBiTangent=attrBiTangent;
@@ -46,8 +48,10 @@ void main()
 
     vec4 pos = vec4( vPosition, 1. );
 
-    mat4 mvMatrix= viewMatrix * modelMatrix;
     {{MODULE_VERTEX_POSITION}}
+    
+    mvMatrix= viewMatrix * mMatrix;
+    
     e = normalize( vec3( mvMatrix * pos ) );
     vec3 n = normalize( mat3(normalMatrix) * norm );
 

@@ -26,7 +26,7 @@ function sliceArray()
 
 inArr.onChange=function()
 {
-    if(!inArr.get())
+    if(!Array.isArray(inArr.get()))
     {
         outArr.set(null);
         return;

@@ -193,8 +193,15 @@ function calc()
                           [oldPosXIn,oldPosYIn,0]
                           );
 
-                texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
-                texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
+                texCoords.push(
+                    posxTexCoord,0,
+                    oldPosXTexCoord,0,
+                    posxTexCoordIn,1);
+
+                texCoords.push(
+                    posxTexCoord,1,
+                    oldPosXTexCoord,0,
+                    oldPosXTexCoordIn,1);
 
                 vertexNormals.push(0,0,1,0,0,1,0,0,1);
                 vertexNormals.push(0,0,1,0,0,1,0,0,1);

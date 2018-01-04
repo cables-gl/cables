@@ -1,0 +1,26 @@
+{
+    "updated": 1513973747666,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "03b8e546-8408-4ddd-b5e8-9605e786c3b9",
+    "created": 1513973520989,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "channel"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Json3d.TranslateChannel"
+    }
+}

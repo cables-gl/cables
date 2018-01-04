@@ -14,7 +14,7 @@ function reset()
 {
     outArr.set(arr);
     var l=parseInt(inLength.get(),10);
-    if(l<=0)return;
+    if(l<0)return;
     
     arr.length=l;
     

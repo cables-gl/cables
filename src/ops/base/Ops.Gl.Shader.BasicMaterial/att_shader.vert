@@ -23,6 +23,9 @@ uniform mat4 viewMatrix;
 
 void main()
 {
+    mat4 mMatrix=modelMatrix;
+    mat4 mvMatrix;
+    
     #ifdef HAS_TEXTURES
         texCoordOrig=attrTexCoord;
         texCoord=attrTexCoord;
@@ -37,7 +40,7 @@ void main()
 
     #ifdef BILLBOARD
        vec3 position=vPosition;
-       mat4 mvMatrix=viewMatrix*modelMatrix;
+       mvMatrix=viewMatrix*modelMatrix;
 
        gl_Position = projMatrix * mvMatrix * vec4((
            position.x * vec3(
@@ -49,11 +52,13 @@ void main()
                mvMatrix[1][1],
                mvMatrix[2][1]) ), 1.0);
     #endif
-    #ifndef BILLBOARD
-        mat4 mvMatrix=viewMatrix * modelMatrix;
-    #endif
 
     {{MODULE_VERTEX_POSITION}}
+
+    #ifndef BILLBOARD
+        mvMatrix=viewMatrix * mMatrix;
+    #endif
+
 
     #ifndef BILLBOARD
         // gl_Position = projMatrix * viewMatrix * modelMatrix * pos;

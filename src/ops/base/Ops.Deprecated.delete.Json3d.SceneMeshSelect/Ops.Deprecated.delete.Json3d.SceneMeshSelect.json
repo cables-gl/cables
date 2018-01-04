@@ -1,0 +1,16 @@
+{
+    "updated": 1513715060027,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "b38c5665-8372-482e-bd45-ab91942a21fb",
+    "created": 1513710786112,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            }
+        ],
+        "name": "Ops.Json3d.SceneMeshSelect"
+    }
+}

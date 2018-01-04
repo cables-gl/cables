@@ -1,6 +1,3 @@
-
-op.name='ArrayIterator Objects';
-
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var arr=op.addInPort(new Port(op,"array",OP_PORT_TYPE_ARRAY));
 

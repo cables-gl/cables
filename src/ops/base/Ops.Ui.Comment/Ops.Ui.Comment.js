@@ -1,9 +1,9 @@
-op.name='Comment';
-op.inTitle=op.inValueString("title");
+op.name=" ";
+op.inTitle=op.inValueString("title",' ');
 op.text=op.inValueText("text");
 
-op.inTitle.set('comment');
-op.text.set('');
+// op.inTitle.set('.');
+op.text.set('...');
 
 function update()
 {
@@ -19,4 +19,4 @@ function update()
 
 op.inTitle.onChange=update;
 op.text.onChange=update;
-
+op.onLoaded=update;

@@ -1,6 +1,3 @@
-op.name="Array3xTransformInstanced";
-var cgl=op.patch.cgl;
-
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
 var transformations=op.inArray("array 3x");
@@ -15,6 +12,7 @@ var mesh=null;
 var shader=null;
 var uniDoInstancing=null;
 var recalc=true;
+var cgl=op.patch.cgl;
 
 geom.onChange=reset;
 exe.onTriggered=doRender;

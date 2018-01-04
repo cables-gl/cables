@@ -27,6 +27,7 @@
       * [Dynamic Ports](dynamic_ports/dynamic_ports.md)
     * [Callbacks](dev_callbacks/dev_callbacks.md)
     * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
+    * [Writing Shaders](shader/shader.md)
 
 * [Ops](chapter_readmes/ops/readme.md)
 

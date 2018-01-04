@@ -1,0 +1,30 @@
+{
+    "updated": 1513612397385,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "bb5b9953-c89f-49ba-940e-d005d6525c45",
+    "created": 1513580585344,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "JsonP"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Is Loading"
+            }
+        ],
+        "name": "Ops.Json.CsvJsonFile"
+    }
+}

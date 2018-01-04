@@ -1,0 +1,30 @@
+{
+    "updated": 1514903126617,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "f915eaab-92df-495e-84ed-500ec301b6f7",
+    "created": 1514901298206,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "1",
+                "name": "Merge"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Geometry Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryMerge"
+    }
+}

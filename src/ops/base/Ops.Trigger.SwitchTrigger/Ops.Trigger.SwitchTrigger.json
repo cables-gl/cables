@@ -1,0 +1,75 @@
+{
+    "updated": 1514966043128,
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "44ceb5d8-b040-4722-b189-a6fb8172517d",
+    "created": 1514899883548,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Execute"
+            },
+            {
+                "type": "0",
+                "name": "Switch Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Switched Value"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 0"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 1"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 2"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 3"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 4"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 5"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 6"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 7"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 8"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 9"
+            },
+            {
+                "type": "1",
+                "name": "Default Trigger"
+            }
+        ],
+        "name": "Ops.Trigger.SwitchTrigger"
+    },
+    "summary": "Triggers one of the out ports (value index switch case)"
+}

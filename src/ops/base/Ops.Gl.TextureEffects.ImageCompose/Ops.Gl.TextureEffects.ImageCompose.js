@@ -1,4 +1,4 @@
-op.name='image compose';
+
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var width=op.inValueInt("width");
