@@ -17,7 +17,7 @@
     * [Export / Local Previewing / Uploading to your Server](dev_embed_webservers/dev_embed_webservers.md)
     * [Embedding](dev_embed/dev_embed.md)
     * [Setting Variables](dev_embed_vars/dev_embed_vars.md)
-    * [Calling Functions from Outside](dev_embed_functions/dev_embed_functions.md)
+    * [Calling External Functions / Triggering Ops from Outside](dev_embed_functions/dev_embed_functions.md)
   * [Writing Ops](chapter_readmes/writing_ops/readme.md)
     * [Hello Op](dev_hello_op/dev_hello_op.md)
     * [Namespaces](namespaces/namespaces.md)
