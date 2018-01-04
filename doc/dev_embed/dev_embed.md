@@ -92,6 +92,7 @@ For performance Reasons, you should pause the patch, when its not visible using`
 - `glCanvasId` (string): The element ID of your canvas object
 - `prefixAssetPath` (string): Path where to find the assets folder 
 - `onError` (function): Function to be called if a critical error occurs (e.g. browser has no WebGL / Web Audio)
+- `onFinishedLoading`: Function to be called when cables is done loading the patch and all assets
 - `silent` (bool): Enable / disable all logging to console.
 - `glCanvasResizeToWindow` Resize the Canvas to the size of the window
 
