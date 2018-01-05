@@ -1,4 +1,3 @@
-op.name='Pow';
 
 var base=op.addInPort(new Port(op,"Base"));
 var exponent=op.addInPort(new Port(op,"Exponent"));
