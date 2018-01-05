@@ -1,4 +1,4 @@
-
+// https://www.khronos.org/opengl/wiki/Skeletal_Animation
 // http://ogldev.atspace.co.uk/www/tutorial38/tutorial38.html
 
 var render=op.inFunction("Render");
@@ -7,6 +7,9 @@ var next=op.outFunction("Next");
 var outNumBounes=op.outValue("Num Bones");
 var outSpline=op.outArray("Spline");
 var outJoint=op.outFunction("Joint Trigger");
+
+
+
 
 var cgl=op.patch.cgl;
 
