@@ -1,4 +1,4 @@
-
+// https://www.khronos.org/opengl/wiki/Skeletal_Animation
 // http://ogldev.atspace.co.uk/www/tutorial38/tutorial38.html
 
 var render=op.inFunction("Render");
@@ -7,6 +7,9 @@ var next=op.outFunction("Next");
 var outNumBounes=op.outValue("Num Bones");
 var outSpline=op.outArray("Spline");
 var outJoint=op.outFunction("Joint Trigger");
+
+
+
 
 var cgl=op.patch.cgl;
 
@@ -38,7 +41,6 @@ function findAnimation(name)
     {
         if(scene.animations[an].channels[i].name==name)
         {
-            // console.log("found animation!",name);
             return scene.animations[an].channels[i];
         }
     }
@@ -54,8 +56,7 @@ function findBoneChilds(n,parent)
     {
         var time=op.patch.timer.getTime();
         var anim=findAnimation(n.name);
-        
-    
+
         if(anim && !n.quatAnimX && anim.rotationkeys)
         {
             n.quatAnimX=new CABLES.TL.Anim();
@@ -156,7 +157,6 @@ render.onTriggered=function()
         fillBoneList=true;
         boneList.length=0;        
         oldScene=scene;
-        
     }
 
     bones=0;
@@ -171,9 +171,6 @@ render.onTriggered=function()
     next.trigger();
 
     fillBoneList=false;
-
-
-
 };
 
 

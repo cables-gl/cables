@@ -1,9 +1,9 @@
 {
-    "updated": 1515102393372,
+    "updated": 1515060367435,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "8de665f1-0fc5-466c-8819-b73e17560ccf",
-    "created": 1508480885510,
+    "id": "0346b2d4-fbf3-421e-972b-9cb3429583c5",
+    "created": 1515058505589,
     "layout": {
         "portsIn": [
             {
@@ -12,27 +12,19 @@
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Axis"
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "min"
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "max"
             },
             {
                 "type": "0",
-                "name": "x"
-            },
-            {
-                "type": "0",
-                "name": "y"
-            },
-            {
-                "type": "0",
-                "name": "z"
+                "name": "Update Normals"
             }
         ],
         "portsOut": [
@@ -41,6 +33,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Exp.Gl.ShaderEffects.AreaRotate"
+        "name": "Ops.Gl.ShaderEffects.RestrictVertexPosition"
     }
 }

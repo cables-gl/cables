@@ -20,7 +20,7 @@ var shader=null;
 var srcHeadVert=attachments.areascale_vert;
 
 var srcBodyVert=''
-    .endl()+'pos=MOD_scaler(pos,modelMatrix*pos,attrVertNormal);' //modelMatrix*
+    .endl()+'pos=MOD_scaler(pos,mMatrix*pos,attrVertNormal);' //modelMatrix*
     .endl();
     
 var moduleVert=null;

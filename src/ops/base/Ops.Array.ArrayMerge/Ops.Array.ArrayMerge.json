@@ -1,0 +1,26 @@
+{
+    "updated": 1514997380335,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "c2bbf5a7-0e98-416b-aadf-49d09242821c",
+    "created": 1514997061949,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Join"
+            },
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayMerge"
+    }
+}

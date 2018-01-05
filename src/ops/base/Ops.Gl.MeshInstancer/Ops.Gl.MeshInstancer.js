@@ -145,6 +145,7 @@ function doRender()
             mod=shader.addModule(
                 {
                     name: 'MODULE_VERTEX_POSITION',
+                    priority:-2,
                     srcHeadVert: srcHeadVert,
                     srcBodyVert: srcBodyVert
                 });

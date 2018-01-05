@@ -1,0 +1,46 @@
+{
+    "updated": 1515015863751,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "329c458d-e8fe-4226-9d76-4b696f761fc8",
+    "created": 1515015863752,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event Output"
+            },
+            {
+                "type": "1",
+                "name": "Key Pressed"
+            },
+            {
+                "type": "1",
+                "name": "Key Released"
+            },
+            {
+                "type": "0",
+                "name": "Note"
+            },
+            {
+                "type": "0",
+                "name": "Velocity"
+            },
+            {
+                "type": "0",
+                "name": "Channel"
+            },
+            {
+                "type": "0",
+                "name": "Device"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiKeyPressed"
+    }
+}

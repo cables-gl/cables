@@ -1,14 +1,14 @@
-
-
 var inArr=op.inArray("Points");
 var subDivs=op.inValue("Num Subdivs",5);
 var bezier=op.inValueBool("Smooth",true);
+var bezierEndPoints=op.inValueBool("Bezier Start/End Points",true);
 
 var result=op.outArray("Result");
 
 subDivs.onChange=calc;
 bezier.onChange=calc;
 inArr.onChange=calc;
+bezierEndPoints.onChange=calc;
 
 function ip(x0,x1,x2,t)//Bezier 
 {
@@ -36,7 +36,7 @@ function calc()
 
     if(subd>0 && !bezier.get())
     {
-        var newLen=(inPoints.length-3)*(subd);
+        var newLen=(inPoints.length)*(subd);
         if(newLen!=arr.length)
         {
             op.log("resize subdiv arr");
@@ -63,11 +63,21 @@ function calc()
     else
     if(subd>0 && bezier.get() )
     {
-        var newLen=(inPoints.length-3)*(subd-1);
+        var newLen=(inPoints.length-6)*(subd-1);
+        if(bezierEndPoints.get())newLen+=6;
+        
         if(newLen!=arr.length)  arr.length=newLen;
         var count=0;
+        
+        if(bezierEndPoints.get())
+        {
+            arr[0]=inPoints[0];
+            arr[1]=inPoints[1];
+            arr[2]=inPoints[2];
+            count=3;
+        }
 
-        for(i=3;i<inPoints.length-6;i+=3)
+        for(i=3;i<inPoints.length-3;i+=3)
         {
             for(j=0;j<subd;j++)
             {
@@ -79,17 +89,20 @@ function calc()
                             (inPoints[i+k+3]+inPoints[i+k+0])/2,
                             j/subd
                             );
-
-                    // points.push(p);
                     arr[count]=p;
                     count++;
                 }
             }
         }
+        
+        if(bezierEndPoints.get())
+        {
+            arr[count-0]=inPoints[inPoints.length-3];
+            arr[count+1]=inPoints[inPoints.length-2];
+            arr[count+2]=inPoints[inPoints.length-1];
+        }
     }
-    
-    // op.log('subdiv ',inPoints.length,arr.length);
-    // op.log(arr);
+
     result.set(null);
     result.set(arr);
 }

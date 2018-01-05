@@ -125,7 +125,7 @@ var lasttime=-1;
 function updateTime()
 {
     
-    if(gui)
+    if(CABLES.GUI && window.gui)
     {
         var p=op.patch.timer.getTime()/gui.timeLine().getTimeLineLength();
         timeline.style.width=(p*100)+'%';

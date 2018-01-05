@@ -1,0 +1,34 @@
+{
+    "updated": 1515015827118,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "badd2c4e-c9bb-45d4-89dd-779ff4d88b11",
+    "created": 1515015827119,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            },
+            {
+                "type": "0",
+                "name": "note"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event Output"
+            },
+            {
+                "type": "0",
+                "name": "value"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiValue"
+    }
+}

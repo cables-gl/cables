@@ -1,0 +1,42 @@
+{
+    "updated": 1515015855825,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "62b1d1bc-6fb9-4293-97e8-3f05646348a5",
+    "created": 1515015855827,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            },
+            {
+                "type": "0",
+                "name": "note"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            },
+            {
+                "type": "0",
+                "name": "Light"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event Output"
+            },
+            {
+                "type": "0",
+                "name": "pressed"
+            },
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiButton"
+    }
+}

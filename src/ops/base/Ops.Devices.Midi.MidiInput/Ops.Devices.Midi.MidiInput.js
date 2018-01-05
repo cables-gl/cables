@@ -98,7 +98,8 @@ function onMIDIMessage(_event)
             "channel":data[0] & 0xf,
             "type":data[0] & 0xf0,
             "note":data[1],
-            "velocity": data[2]
+            "velocity": data[2],
+            "data":data
         };
 
     if(normalize.get())event.velocity/=127;
