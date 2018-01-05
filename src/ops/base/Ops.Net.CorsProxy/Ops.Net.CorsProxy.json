@@ -1,6 +1,21 @@
 {
-    "updated": 1514575906611,
+    "updated": 1515148706714,
     "authorName": "stephan",
     "id": "497ba8ff-7d93-44cb-94b2-39e9d5b47d71",
-    "created": 1514575845109
+    "created": 1514575845109,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "url"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Net.CorsProxy"
+    }
 }

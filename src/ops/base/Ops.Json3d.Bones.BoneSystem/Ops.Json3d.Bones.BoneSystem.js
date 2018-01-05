@@ -38,7 +38,6 @@ function findAnimation(name)
     {
         if(scene.animations[an].channels[i].name==name)
         {
-            // console.log("found animation!",name);
             return scene.animations[an].channels[i];
         }
     }
@@ -54,8 +53,7 @@ function findBoneChilds(n,parent)
     {
         var time=op.patch.timer.getTime();
         var anim=findAnimation(n.name);
-        
-    
+
         if(anim && !n.quatAnimX && anim.rotationkeys)
         {
             n.quatAnimX=new CABLES.TL.Anim();
@@ -156,7 +154,6 @@ render.onTriggered=function()
         fillBoneList=true;
         boneList.length=0;        
         oldScene=scene;
-        
     }
 
     bones=0;

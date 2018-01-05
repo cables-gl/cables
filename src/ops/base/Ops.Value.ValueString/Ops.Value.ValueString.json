@@ -1,1 +1,22 @@
-{}
+{
+    "updated": 1515149180598,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "5bf57cac-68e1-4356-94b2-c43d75925b4d",
+    "created": 1515149180605,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Value.ValueString"
+    }
+}
