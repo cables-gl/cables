@@ -171,9 +171,6 @@ render.onTriggered=function()
     next.trigger();
 
     fillBoneList=false;
-
-
-
 };
 
 

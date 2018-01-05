@@ -1,0 +1,34 @@
+{
+    "updated": 1515162860185,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "44f0aa70-e97d-41cf-9560-369bffa0d21c",
+    "created": 1513887420723,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "1",
+                "name": "Create Nodes"
+            },
+            {
+                "type": "0",
+                "name": "Create Non Mesh Nodes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Json3d.Json3dScene2"
+    }
+}

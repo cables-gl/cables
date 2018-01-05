@@ -1,0 +1,30 @@
+{
+    "updated": 1515142938288,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "9056b704-b8f5-4fda-8df6-0738fa75d301",
+    "created": 1515100298538,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Beat"
+            },
+            {
+                "type": "0",
+                "name": "Sub Tick"
+            },
+            {
+                "type": "1",
+                "name": "Sub Beat"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiClockBeat"
+    }
+}
