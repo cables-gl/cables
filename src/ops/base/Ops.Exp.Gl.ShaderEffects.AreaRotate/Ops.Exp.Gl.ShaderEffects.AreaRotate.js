@@ -20,7 +20,7 @@ var shader=null;
 var srcHeadVert=attachments.area_rotate_vert;
 
 var srcBodyVert=''
-    .endl()+'pos=MOD_scaler(pos,modelMatrix);'
+    .endl()+'pos=MOD_scaler(pos,mMatrix);'
     .endl();
     
 var moduleVert=null;

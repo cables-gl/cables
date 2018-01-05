@@ -1,4 +1,3 @@
-op.name='MidiEvent';
 var eventIn=op.addInPort(new Port(this,"Event Input",OP_PORT_TYPE_OBJECT));
 
 var eventOut=op.addOutPort(new Port(this,"Event Output",OP_PORT_TYPE_OBJECT));

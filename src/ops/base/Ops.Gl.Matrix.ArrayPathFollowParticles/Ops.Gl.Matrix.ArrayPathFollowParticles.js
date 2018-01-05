@@ -6,6 +6,9 @@ var inParticles=op.inValue("Num Particles",500);
 var inLength=op.inValue("Length",20);
 var inSpread=op.inValue("Spread",0.2);
 var inOffset=op.inValue("Offset");
+
+var inMaxDistance=op.inValue("Max Distance",0);
+
 var inRandomSpeed=op.inValueBool("RandomSpeed");
 
 var next=op.outFunction("Next");
@@ -99,8 +102,6 @@ function rebuild()
 
     for(i=0;i<num/3;i++)
     {
-        
-        
         var v=getRandomVec(spread);
         while(vec3.len(v)>spread/2) v=getRandomVec(spread);
         
@@ -142,10 +143,35 @@ function removeModule()
     }
 }
 
+inMaxDistance.onChange=updateCheckDistance;
+
+function updateCheckDistance()
+{
+    
+    if(shader)
+    {
+        shaderModule.maxDistance.setValue(inMaxDistance.get());
+
+
+        if(inMaxDistance.get()==0)
+        {
+            shader.removeDefine("CHECK_DISTANCE");
+        }
+        else
+        {
+            shader.define("CHECK_DISTANCE");
+            console.log("JAJA CHECK DISTANCE");
+        }
+
+
+    }
+}
+
+
 exec.onTriggered=function()
 {
     // if(op.instanced(exec))return;
-    if(!inPoints.get())return;
+    if(!inPoints.get() || inPoints.get().length===0)return;
     if(needsRebuild)rebuild();
 
     if(cgl.getShader()!=shader)
@@ -169,22 +195,25 @@ exec.onTriggered=function()
         shaderModule.uniPoints=new CGL.Uniform(shader,'3f[]',shaderModule.prefix+'points',new Float32Array([0,0,0,0,0,0]));
         shaderModule.randomSpeed=new CGL.Uniform(shader,'b',shaderModule.prefix+'randomSpeed',false);
         shaderModule.maxIndex=new CGL.Uniform(shader,'i',shaderModule.prefix+'maxIndex',0);
+        shaderModule.maxDistance=new CGL.Uniform(shader,'f',shaderModule.prefix+'maxDistance',inMaxDistance.get());
+        updateCheckDistance();
     }
 
     if(updateUniformPoints && pointArray)
     {
         // if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
-        if(shader.getDefine("PATHFOLLOW_POINTS")<pointArray.length/3)
+        if(shader.getDefine("PATHFOLLOW_POINTS")<Math.floor(pointArray.length/3))
         {
                 console.log(shader.getDefine("PATHFOLLOW_POINTS"));
-                shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
-                console.log('pointArray.length/3',pointArray.length/3);
+                shader.define('PATHFOLLOW_POINTS',Math.floor(pointArray.length/3));
+                // console.log('pointArray.length/3',pointArray.length/3);
         }
         // shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
 
         // shaderModule.uniNumPoints.setValue(pointArray.length/3);
         shaderModule.uniPoints.setValue(pointArray);
         updateUniformPoints=false;
+        
         // console.log("update uniforms");
     }
 

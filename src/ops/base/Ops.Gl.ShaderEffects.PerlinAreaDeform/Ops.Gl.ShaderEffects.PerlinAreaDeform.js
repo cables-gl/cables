@@ -1,4 +1,3 @@
-op.name="PerlinDeformer";
 
 var cgl=op.patch.cgl;
 
@@ -33,7 +32,7 @@ var srcBodyVert=''
     .endl()+'   pos=MOD_deform(pos);'
     .endl()+'#endif'
     .endl()+'#ifdef MOD_WORLDSPACE'
-    .endl()+'   pos=MOD_deform(modelMatrix*pos);'
+    .endl()+'   pos=MOD_deform(mMatrix*pos);'
     .endl()+'#endif'
     .endl();
 

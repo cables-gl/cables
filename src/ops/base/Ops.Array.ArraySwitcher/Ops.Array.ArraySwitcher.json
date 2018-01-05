@@ -1,0 +1,82 @@
+{
+    "updated": 1514987826556,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "08e0cc91-8fda-48c1-a98e-2bf7265d6683",
+    "created": 1514985074946,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger 1"
+            },
+            {
+                "type": "3",
+                "name": "Array 1"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 2"
+            },
+            {
+                "type": "3",
+                "name": "Array 2"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 3"
+            },
+            {
+                "type": "3",
+                "name": "Array 3"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 4"
+            },
+            {
+                "type": "3",
+                "name": "Array 4"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 5"
+            },
+            {
+                "type": "3",
+                "name": "Array 5"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 6"
+            },
+            {
+                "type": "3",
+                "name": "Array 6"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 7"
+            },
+            {
+                "type": "3",
+                "name": "Array 7"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 8"
+            },
+            {
+                "type": "3",
+                "name": "Array 8"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Out Array"
+            }
+        ],
+        "name": "Ops.Array.ArraySwitcher"
+    }
+}

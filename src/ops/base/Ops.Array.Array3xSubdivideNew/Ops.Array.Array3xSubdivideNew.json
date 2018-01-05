@@ -1,5 +1,9 @@
 {
-    "summary": "Insert new Vertices into an Array3x to make it to tesselate it and make it smoother",
+    "updated": 1515000855513,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "d8bb5727-35e4-4e2a-999b-112ebc659720",
+    "created": 1514999086269,
     "layout": {
         "portsIn": [
             {
@@ -13,6 +17,10 @@
             {
                 "type": "0",
                 "name": "Smooth"
+            },
+            {
+                "type": "0",
+                "name": "Bezier Start/End Points"
             }
         ],
         "portsOut": [
@@ -21,11 +29,6 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.Array3xSubdivide"
-    },
-    "updated": 1514999071122,
-    "author": "59db805b08bab26e1ab7a0f2",
-    "authorName": "pandur",
-    "id": "7a0844a7-42f9-4346-8481-0ffd13152ee8",
-    "created": 1513098751552
+        "name": "Ops.Array.Array3xSubdivideNew"
+    }
 }

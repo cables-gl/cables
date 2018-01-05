@@ -5,6 +5,8 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var width=op.inValue("width",1);
 var height=op.inValue("height",1);
 
+var inId=op.inValueString("id");
+
 var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
 var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
 
@@ -192,6 +194,7 @@ var divHeight=0;
 
 var mvMatrix=mat4.create();
 divVisible.onChange=updateDivVisibility;
+inId.onChange=updateId;
 
 function updateDivVisibility()
 {
@@ -205,6 +208,15 @@ function updateDivVisibility()
 function updateCursor()
 {
     div.style.cursor = cursorPort.get();
+}
+
+function updateId()
+{
+    if(div)
+    {
+        div.setAttribute('id',inId.get());
+        
+    }
 }
 
 function updateDivSize()
@@ -272,6 +284,8 @@ outBottom.set(yb);//=op.outValue("Bottom");
     divWidth=Math.abs(xb-divX);
     divHeight=Math.abs(yb-divY);
     
+    
+
 
     div.style.left=divX+'px';
     div.style.top=divY+'px';
@@ -301,7 +315,8 @@ function setUpDiv()
         var canvas = op.patch.cgl.canvas.parentElement;
         canvas.appendChild(div);
         updateCursor();
-        updateIsInteractive
+        updateIsInteractive();
+        updateId();
     }
     updateDivSize();
 }

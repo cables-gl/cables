@@ -1,5 +1,5 @@
 {
-    "updated": 1508481096468,
+    "updated": 1515102393372,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8de665f1-0fc5-466c-8819-b73e17560ccf",
@@ -41,6 +41,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.AreaRotate"
+        "name": "Ops.Exp.Gl.ShaderEffects.AreaRotate"
     }
 }

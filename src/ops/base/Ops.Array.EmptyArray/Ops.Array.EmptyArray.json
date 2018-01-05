@@ -1,0 +1,16 @@
+{
+    "updated": 1514988426352,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "e2b3dd1c-c0d4-405a-b92c-a9355103939a",
+    "created": 1514985113816,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.Array.EmptyArray"
+    }
+}

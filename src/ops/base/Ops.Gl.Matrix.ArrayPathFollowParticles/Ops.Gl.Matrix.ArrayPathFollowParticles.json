@@ -30,6 +30,10 @@
             },
             {
                 "type": "0",
+                "name": "Max Distance"
+            },
+            {
+                "type": "0",
                 "name": "RandomSpeed"
             }
         ],
@@ -41,7 +45,7 @@
         ],
         "name": "Ops.Gl.Matrix.ArrayPathFollowParticles"
     },
-    "updated": 1508864919226,
+    "updated": 1514998269347,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f4f3a54b-4e3b-46b1-ad8d-731fb88ac920",
