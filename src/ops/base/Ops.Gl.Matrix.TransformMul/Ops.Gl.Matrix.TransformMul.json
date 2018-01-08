@@ -1,5 +1,5 @@
 {
-    "updated": 1512669367715,
+    "updated": 1515421191545,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "2a83f565-7c5c-4cce-862f-d38481eb3726",
@@ -22,5 +22,6 @@
             }
         ],
         "name": "Ops.Gl.Matrix.TransformMul"
-    }
+    },
+    "summary": "multiply current modelmatrix"
 }

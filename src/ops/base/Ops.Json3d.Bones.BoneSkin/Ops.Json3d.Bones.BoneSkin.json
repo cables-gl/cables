@@ -1,0 +1,37 @@
+{
+    "updated": 1515424740320,
+    "authorName": "pandur",
+    "id": "aef4eb37-53ca-43b4-a9db-3bbd8aa00906",
+    "created": 1515411727085,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "MeshIndex"
+            },
+            {
+                "type": "0",
+                "name": "draw"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "1",
+                "name": "Joint"
+            }
+        ],
+        "name": "Ops.Json3d.Bones.BoneSkin"
+    }
+}

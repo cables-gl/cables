@@ -22,6 +22,7 @@ CABLES.Op = function()
     this.enabled=true;
     this.patch=arguments[0];
     this.name=arguments[1];
+    this.errors={};
     
     if(this.name)
     {
@@ -572,6 +573,19 @@ CABLES.Op = function()
 
 
 
+    CABLES.Op.prototype.error=function(id,txt)
+    {
+        this.errors[id]=txt;
+        if(txt==null) delete this.errors[id];
+
+        var errorHtml='';
+        for(var i in this.errors)
+        {
+            errorHtml+='- '+this.errors[i]+'<br/>';
+        }
+        this.uiAttr({'error':errorHtml});
+
+    }
 
 
 
