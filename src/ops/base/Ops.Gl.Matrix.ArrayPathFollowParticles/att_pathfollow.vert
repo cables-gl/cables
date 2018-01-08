@@ -21,7 +21,7 @@ if(index2!=0)
 
     // pos.xyz = MOD_points[index];
     #ifdef CHECK_DISTANCE
-        if( distance(MOD_points[index] ,MOD_points[index2]) > MOD_maxDistance ) pos.xyz=vec3(11110.0,111110.0,111110.0);
+        if( distance(MOD_points[index] ,MOD_points[index2]) > MOD_maxDistance ) pos.xyz=vec3(9999999.0,9999999.0,9999999.0);
     #endif
 
     

@@ -53,11 +53,14 @@ function tesselateTC(tc, x1,y1, x2,y2,  x3,y3)
     tc.push( (y1+y3)/2 );
 }
 
-function tesselate(vertices, x1,y1,z1, x2,y2,z2,  x3,y3,z3)
+function tesselate(vertices, x1,y1,z1, x2,y2,z2, x3,y3,z3)
 {
+    
     vertices.push( x1 );
     vertices.push( y1 );
     vertices.push( z1 );
+    
+    
 
     vertices.push( (x1+x2)/2 );
     vertices.push( (y1+y2)/2 );
@@ -115,12 +118,25 @@ function tesselateGeom(oldGeom)
 {
     var geom=new CGL.Geometry();
     var vertices=[];
+    var norms=[];
     var tc=[];
+    
+    var i,j,k;
     
     if(oldGeom.verticesIndices.length>0)
     {
-        for(var i=0;i<oldGeom.verticesIndices.length;i+=3)
+        for(i=0;i<oldGeom.verticesIndices.length;i+=3)
         {
+            
+            for(j=0;j<4;j++)
+            for(k=0;k<3;k++)
+            {
+                norms.push(
+                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+0],
+                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+1],
+                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+2]
+                    );
+            }
 
             tesselate(vertices, 
                 oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+0],
@@ -153,8 +169,16 @@ function tesselateGeom(oldGeom)
     {
         if(oldGeom.vertices.length>0)
         {
-            for(var i=0;i<oldGeom.vertices.length;i+=9)
+            for(i=0;i<oldGeom.vertices.length;i+=9)
             {
+                for(j=0;j<4;j++)
+                for(k=0;k<9;k++)
+                {
+                    norms.push(
+                        oldGeom.vertexNormals[i+k]
+                    );
+                }
+
                 tesselate(vertices,
                     oldGeom.vertices[i+0],
                     oldGeom.vertices[i+1],
@@ -185,6 +209,8 @@ function tesselateGeom(oldGeom)
         }
     }
     
+    console.log('norms',norms);
+    geom.vertexNormals=norms;
     geom.setVertices(vertices);
     geom.setTexCoords(tc);
     return geom;

@@ -1,6 +1,4 @@
 
-
-
 IN vec3 vPosition;
 IN vec3 attrVertNormal;
 IN vec2 attrTexCoord;
@@ -55,9 +53,9 @@ void main()
 
     {{MODULE_VERTEX_POSITION}}
 
+    normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
     mvMatrix=viewMatrix*mMatrix;
     modelPos=mMatrix*pos;
-    normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
 
     gl_Position = projMatrix * mvMatrix * pos;
 }

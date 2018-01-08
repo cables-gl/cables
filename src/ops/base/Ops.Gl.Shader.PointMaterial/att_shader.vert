@@ -34,12 +34,14 @@ void main()
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
     #endif
+    
+    mat4 mMatrix=modelMatrix;
 
     vec4 pos = vec4( vPosition, 1. );
 
     {{MODULE_VERTEX_POSITION}}
 
-    vec4 model=modelMatrix * pos;
+    vec4 model=mMatrix * pos;
 
     if(randomSize>0.0) psMul+=rand(attrVertIndex)*randomSize;
 

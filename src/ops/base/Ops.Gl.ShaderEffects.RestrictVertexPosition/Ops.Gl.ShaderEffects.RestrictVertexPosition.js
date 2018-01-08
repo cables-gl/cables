@@ -6,8 +6,8 @@ op.trigger=op.outFunction("trigger");
 
 var axis=op.inValueSelect("Axis",["X","Y","Z"],"X");
 
-var min=op.inValue("min",1);
-var max=op.inValue("max",0);
+var min=op.inValue("min",0);
+var max=op.inValue("max",1);
 
 var inUpdateNormals=op.inValueBool("Update Normals");
 

@@ -23,11 +23,15 @@
         if(pos.x>MOD_max)
         {
             pos.x=MOD_max;
+            pos.y=0.0;
+            pos.z=0.0;
             norm=vec3(0.0,1.0,0.0);
         }
         if(pos.x<MOD_min)
         {
             pos.x=MOD_min;
+            pos.y=0.0;
+            pos.z=0.0;
             norm=vec3(0.0,-1.0,0.0);
         }
     #endif
@@ -36,11 +40,15 @@
         if(pos.y>MOD_max)
         {
             pos.y=MOD_max;
+            pos.x=0.0;
+            pos.z=0.0;
             norm=vec3(0.0,0.0,1.0);
         }
         if(pos.y<MOD_min)
         {
             pos.y=MOD_min;
+            pos.x=0.0;
+            pos.z=0.0;
             norm=vec3(0.0,0.0,-1.0);
         }
     #endif
@@ -49,11 +57,15 @@
         if(pos.z>MOD_max)
         {
             pos.z=MOD_max;
+            pos.y=0.0;
+            pos.x=0.0;
             norm=vec3(1.0,0.0,0.0);
         }
         if(pos.z<MOD_min)
         {
             pos.z=MOD_min;
+            pos.y=0.0;
+            pos.x=0.0;
             norm=vec3(-1.0,0.0,0.0);
         }
         

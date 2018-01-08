@@ -42,5 +42,9 @@
         ],
         "name": "Ops.Gl.ShaderEffects.Twist"
     },
-    "summary": "twist a mesh around an axis"
+    "summary": "twist a mesh around an axis",
+    "updated": 1515176072374,
+    "authorName": "pandur",
+    "id": "4c5eed58-07f0-497f-bdd3-3b2f1c80b7df",
+    "created": 1515175921198
 }

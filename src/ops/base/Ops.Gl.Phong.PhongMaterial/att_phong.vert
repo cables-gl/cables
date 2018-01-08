@@ -27,14 +27,8 @@ OUT vec3 vNormal;
     OUT  vec2 texCoord;
 #endif
 
-
-
 OUT mat3 normalMatrix;
 OUT vec4 modelPos;
-
-
-
-
 
 
 // import some common functions not supported by GLSL ES
@@ -104,13 +98,15 @@ void main()
         texCoord=attrTexCoord;
     #endif
 
+    mat4 mMatrix=modelMatrix;
     vec4 pos = vec4( vPosition, 1. );
     modelPos=modelMatrix*pos;
-    mvMatrix=viewMatrix * modelMatrix;
 
 
 
     {{MODULE_VERTEX_POSITION}}
+    
+    mvMatrix=viewMatrix * mMatrix;
 
     vec4 viewModelPosition = mvMatrix * pos;
     vViewPosition = viewModelPosition.xyz;

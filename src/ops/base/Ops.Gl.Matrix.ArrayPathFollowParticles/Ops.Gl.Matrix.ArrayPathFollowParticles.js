@@ -184,6 +184,7 @@ exec.onTriggered=function()
         // shader.glslVersion=300;
         shaderModule=shader.addModule(
             {
+                title:op.objName,
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:attachments.pathfollow_head_vert,
                 srcBodyVert:attachments.pathfollow_vert,
