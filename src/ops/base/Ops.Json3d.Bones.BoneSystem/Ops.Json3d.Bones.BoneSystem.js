@@ -26,6 +26,8 @@ var qMat=mat4.create();
 
 var meshIndex=0;
 
+var boneMatrix=mat4.create();
+
 inMeshIndex.onChange=function()
 {
     meshIndex=inMeshIndex.get();
@@ -99,8 +101,12 @@ function findBoneChilds(n,parent)
             }
         }
 
-        mat4.copy( tempMat, n.transformation );
-        mat4.transpose( tempMat, n.transformation );
+        // mat4.copy( tempMat, n.transformation );
+        // mat4.transpose( tempMat, n.transformation );
+
+
+
+
         
         if(n.posAnimX)
         {
@@ -118,18 +124,24 @@ function findBoneChilds(n,parent)
                 n.quatAnimZ,
                 n.quatAnimW);
             mat4.fromQuat(qMat, q);
+            // mat4.transpose(qMat,qMat);
             mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
         }
 
         vec3.transformMat4( tempVec, [0,0,0], cgl.mvMatrix );
         n.transformed=tempVec.slice(0);
+
+
         bone.matrix=cgl.mvMatrix.slice();
+        mat4.transpose( tempMat, bone.offsetmatrix ); //todo: cache this...
+        mat4.mul(bone.matrix,bone.matrix,tempMat);
         
-        
+        // mat4.mul(bone.matrix,bone.matrix,bone.offsetmatrix);
+
         if(parent && parent.transformed)
         {
-            points.push( parent.transformed[0], parent.transformed[1], parent.transformed[2] );    
-            points.push( tempVec[0], tempVec[1], tempVec[2] );    
+            points.push( parent.transformed[0], parent.transformed[1], parent.transformed[2] );
+            points.push( tempVec[0], tempVec[1], tempVec[2] );
         }
         
         if(fillBoneList) boneList.push(n);
@@ -176,7 +188,13 @@ render.onTriggered=function()
 
     bones=0;
 
+    cgl.pushModelMatrix();
+
+    mat4.identity(cgl.mvMatrix);
     findBoneChilds(scene.rootnode,null);
+
+    cgl.popModelMatrix();
+
     
 
     outSpline.set(points);
