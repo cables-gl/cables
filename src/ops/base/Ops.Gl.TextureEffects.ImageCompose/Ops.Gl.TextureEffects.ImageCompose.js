@@ -183,6 +183,7 @@ var doRender=function()
     trigger.trigger();
 
     texOut.set(effect.getCurrentSourceTexture());
+    // texOut.set(effect.getCurrentTargetTexture());
 
     effect.endEffect();
 

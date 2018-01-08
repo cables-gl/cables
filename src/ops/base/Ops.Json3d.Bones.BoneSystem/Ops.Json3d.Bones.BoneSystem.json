@@ -9,6 +9,10 @@
             {
                 "type": "1",
                 "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Mesh Index"
             }
         ],
         "portsOut": [

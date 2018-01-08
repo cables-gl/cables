@@ -24,7 +24,7 @@ exec.onTriggered=function()
         
         for(var i=0;i<bones.length;i++)
         {
-            console.log( bones[i].name );
+            // console.log(i,bones[i].name );
             values.push(bones[i].name);
         }
         
