@@ -1,16 +1,13 @@
 
 // https://www.khronos.org/opengl/wiki/Skeletal_Animation
 
-
 var render=op.inFunction("Render");
 var inMeshIndex=op.inValueInt("MeshIndex");
+var inGeom=op.inObject("Geometry");
 var draw=op.inValueBool("draw",true);
 
 var next=op.outFunction("Next");
 var triggerJoint=op.outFunction("Joint");
-
-
-var inGeom=op.inObject("Geometry");
 
 
 var geom=null;
@@ -143,7 +140,6 @@ render.onTriggered=function()
 {
     if(!cgl.getShader()) return;
 
-
     if(cgl.getShader()!=shader)
     {
         if(shader)removeModule();
@@ -156,15 +152,10 @@ render.onTriggered=function()
                 srcHeadVert:attachments.skin_head_vert||'',
                 srcBodyVert:attachments.skin_vert||''
             });
-            shader.define("SKIN_NUM_BONES",1);
-
+        shader.define("SKIN_NUM_BONES",1);
 
         boneMatricesUniform=new CGL.Uniform(shader,'m4','bone',[]);
     }
-    
-    
-    if(!shader)return;
-
 
     var scene=cgl.frameStore.currentScene.getValue();
     
@@ -185,34 +176,31 @@ render.onTriggered=function()
                 {
                     boneMatrices.length=bones.length*16;
                 }
-                
-                
+
                 for(var mi=0;mi<16;mi++)
                 {
+                    // var a=[0,0,0];
+                    // mat4.getScaling(a,bones[i].matrix);
+                    // console.log(bones[i].matrix[0],bones[i].matrix[5],bones[i].matrix[10]);
+                    // bones[i].matrix[0]=1;
+                    // bones[i].matrix[5]=1;
+                    // bones[i].matrix[10]=1;
                     boneMatrices[i*16+mi]=bones[i].matrix[mi];
                 }
-                
-                
-                
-                // console.log(bones[i].transformed);
-                
+
                 cgl.pushModelMatrix();
-                // transformed
-                // mat4.translate(cgl.mvMatrix,cgl.mvMatrix,bones[i].transformed);
-                
-                // mat4.identity(cgl.mvMatrix);
-                // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,bones[i].matrix);
-                
-                
+
                 triggerJoint.trigger();
                 cgl.popModelMatrix();
             }
+            else
+            {
+                console.log('no bone matrix',i);
+            }
         }
+        // console.log(boneMatrices);
         boneMatricesUniform.setValue(boneMatrices);
-        // console.log(boneMatrices.length/16);
-        
     }
-
 
     if(draw.get() && mesh)
     {

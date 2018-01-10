@@ -2,112 +2,113 @@
 // http://ogldev.atspace.co.uk/www/tutorial38/tutorial38.html
 
 var render=op.inFunction("Render");
+var inMeshIndex=op.inValueInt("Mesh Index");
 
 var next=op.outFunction("Next");
 var outNumBounes=op.outValue("Num Bones");
 var outSpline=op.outArray("Spline");
 var outJoint=op.outFunction("Joint Trigger");
 
-var inMeshIndex=op.inValueInt("Mesh Index");
-
-
-var cgl=op.patch.cgl;
-
-var scene=null;
-
 var points=[];
 var tempMat=mat4.create();
 var tempVec=vec3.create();
 var emptyVec=vec3.create();
 var transVec=vec3.create();
-
 var q=quat.create();
 var qMat=mat4.create();
-
-var meshIndex=0;
-
 var boneMatrix=mat4.create();
+
+var cgl=op.patch.cgl;
+var scene=null;
+var meshIndex=0;
+var bones=0;
+var oldScene=null;
+var boneList=[];
+var fillBoneList=true;
 
 inMeshIndex.onChange=function()
 {
     meshIndex=inMeshIndex.get();
 };
 
-function isBone(name)
+function findBoneChilds(n,parent,foundBone)
 {
-    for(var j=0;j<scene.meshes.length;j++)
-        if(scene.meshes[j].bones)
-            for(var i=0;i<scene.meshes[j].bones.length;i++)
-                if(scene.meshes[j].bones[i].name==name)
-                    return scene.meshes[j].bones[i];
-    return false;
-}
-
-function findAnimation(name)
-{
-    var an=0;
-    for(var i=0;i<scene.animations[an].channels.length;i++)
+    function isBone(name)
     {
-        if(scene.animations[an].channels[i].name==name)
-        {
-            return scene.animations[an].channels[i];
-        }
+        if(scene.meshes[meshIndex].bones)
+            for(var i=0;i<scene.meshes[meshIndex].bones.length;i++)
+                if(scene.meshes[meshIndex].bones[i].name==name)
+                    return scene.meshes[meshIndex].bones[i];
+        return false;
     }
-    return null;
-}
 
+    function findAnimation(name)
+    {
+        var an=0;
+        for(var i=0;i<scene.animations[an].channels.length;i++)
+            if(scene.animations[an].channels[i].name==name)
+                return scene.animations[an].channels[i];
 
-function findBoneChilds(n,parent)
-{
+        return null;
+    }
+
+    var time=op.patch.timer.getTime();
+
     cgl.pushModelMatrix();
 
     var bone=isBone(n.name);
-    if(bone && n!=scene.rootnode)
+    if(!bone)
     {
-        var time=op.patch.timer.getTime();
+        // console.log("not bone",n.name);
+    }
+    if( (bone||foundBone) && n!=scene.rootnode)
+    {
+        foundBone=true;
         
         if(!n.anim)
         {
+            // create anim objects for translation/rotation
             var anim=findAnimation(n.name);
-            n.anim=anim;
-    
-            if(anim && !n.quatAnimX && anim.rotationkeys)
+            if(anim)
             {
-                n.quatAnimX=new CABLES.TL.Anim();
-                n.quatAnimY=new CABLES.TL.Anim();
-                n.quatAnimZ=new CABLES.TL.Anim();
-                n.quatAnimW=new CABLES.TL.Anim();
+                n.anim=anim;
         
-                for(var k in anim.rotationkeys)
+                if(anim && !n.quatAnimX && anim.rotationkeys)
                 {
-                    n.quatAnimX.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][1] );
-                    n.quatAnimY.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][2] );
-                    n.quatAnimZ.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][3] );
-                    n.quatAnimW.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][0] );
+                    n.quatAnimX=new CABLES.TL.Anim();
+                    n.quatAnimY=new CABLES.TL.Anim();
+                    n.quatAnimZ=new CABLES.TL.Anim();
+                    n.quatAnimW=new CABLES.TL.Anim();
+            
+                    for(var k in anim.rotationkeys)
+                    {
+                        n.quatAnimX.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][1] );
+                        n.quatAnimY.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][2] );
+                        n.quatAnimZ.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][3] );
+                        n.quatAnimW.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][0] );
+                    }
+                }
+                if(anim && !n.posAnimX && anim.positionkeys)
+                {
+                    n.posAnimX=new CABLES.TL.Anim();
+                    n.posAnimY=new CABLES.TL.Anim();
+                    n.posAnimZ=new CABLES.TL.Anim();
+            
+                    for(var k in anim.positionkeys)
+                    {
+                        n.posAnimX.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][0] );
+                        n.posAnimY.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][1] );
+                        n.posAnimZ.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][2] );
+                    }
                 }
             }
-            if(anim && !n.posAnimX && anim.positionkeys)
+            else
             {
-                n.posAnimX=new CABLES.TL.Anim();
-                n.posAnimY=new CABLES.TL.Anim();
-                n.posAnimZ=new CABLES.TL.Anim();
-        
-                for(var k in anim.positionkeys)
-                {
-                    n.posAnimX.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][0] );
-                    n.posAnimY.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][1] );
-                    n.posAnimZ.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][2] );
-                }
+                // console.log('no anim',n.name);
             }
+
         }
 
-        // mat4.copy( tempMat, n.transformation );
-        // mat4.transpose( tempMat, n.transformation );
-
-
-
-
-        
         if(n.posAnimX)
         {
             transVec[0]=n.posAnimX.getValue(time);
@@ -115,7 +116,7 @@ function findBoneChilds(n,parent)
             transVec[2]=n.posAnimZ.getValue(time);
             mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
         }
-        
+
         if(n.quatAnimX)
         {
             CABLES.TL.Anim.slerpQuaternion(time,q,
@@ -124,40 +125,44 @@ function findBoneChilds(n,parent)
                 n.quatAnimZ,
                 n.quatAnimW);
             mat4.fromQuat(qMat, q);
-            // mat4.transpose(qMat,qMat);
             mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
         }
 
+        // get position
         vec3.transformMat4( tempVec, [0,0,0], cgl.mvMatrix );
         n.transformed=tempVec.slice(0);
 
-
-        bone.matrix=cgl.mvMatrix.slice();
-        mat4.transpose( tempMat, bone.offsetmatrix ); //todo: cache this...
-        mat4.mul(bone.matrix,bone.matrix,tempMat);
+        // store absolute bone matrix
+        if(bone)
+        {
+            bone.matrix=cgl.mvMatrix.slice();
+            mat4.transpose( tempMat, bone.offsetmatrix ); //todo: cache this...
+            mat4.mul(bone.matrix,bone.matrix,tempMat);
+        }
         
-        // mat4.mul(bone.matrix,bone.matrix,bone.offsetmatrix);
 
         if(parent && parent.transformed)
         {
             points.push( parent.transformed[0], parent.transformed[1], parent.transformed[2] );
             points.push( tempVec[0], tempVec[1], tempVec[2] );
         }
-        
-        if(fillBoneList) boneList.push(n);
+        else
+        {
+            // console.log("no parent",n.name);
+        }
 
+        if(fillBoneList) boneList.push(n);
         cgl.frameStore.bone=n;
-        
         outJoint.trigger();
     }
 
-    for(var i=0;i<n.children.length;i++)
+    if(n.children)
     {
-        if(isBone(n.children[i].name))
+        for(var i=0;i<n.children.length;i++)
         {
-            bones++;
+            if(isBone(n.children[i].name)) bones++;
+            findBoneChilds(n.children[i],n,foundBone);
         }
-        if(n.children[i].children)findBoneChilds(n.children[i],n);
     }
     
     cgl.popModelMatrix();
@@ -165,20 +170,13 @@ function findBoneChilds(n,parent)
     return bones;
 }
 
-var bones=0;
-var oldScene=null;
-var boneList=[];
-var fillBoneList=true;
-
 render.onTriggered=function()
 {
-    points.length=0;
+    points.length=bones=0;
     scene=cgl.frameStore.currentScene.getValue();
-
     cgl.frameStore.bones=boneList;
 
     if(!scene)return;
-    
     if(scene!=oldScene)
     {
         fillBoneList=true;
@@ -186,24 +184,17 @@ render.onTriggered=function()
         oldScene=scene;
     }
 
-    bones=0;
-
     cgl.pushModelMatrix();
-
     mat4.identity(cgl.mvMatrix);
-    findBoneChilds(scene.rootnode,null);
-
+    findBoneChilds(scene.rootnode,null,false);
     cgl.popModelMatrix();
 
-    
-
     outSpline.set(points);
-
     outNumBounes.set(bones);
+    fillBoneList=false;
 
     next.trigger();
-
-    fillBoneList=false;
+    cgl.frameStore.bones=null;
 };
 
 

@@ -1,5 +1,5 @@
 {
-    "updated": 1515450596766,
+    "updated": 1515596950273,
     "authorName": "pandur",
     "id": "aef4eb37-53ca-43b4-a9db-3bbd8aa00906",
     "created": 1515411727085,
@@ -14,12 +14,12 @@
                 "name": "MeshIndex"
             },
             {
-                "type": "0",
-                "name": "draw"
-            },
-            {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "draw"
             }
         ],
         "portsOut": [
