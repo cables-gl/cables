@@ -1,0 +1,29 @@
+{
+    "updated": 1515176600454,
+    "authorName": "pandur",
+    "id": "92aee475-63e8-45cc-902f-2a84154e0a93",
+    "created": 1515176075838,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "Height"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.Twist2"
+    }
+}
