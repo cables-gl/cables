@@ -1,0 +1,43 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "1",
+                "name": "Show Fragment"
+            },
+            {
+                "type": "1",
+                "name": "Show Vertex"
+            },
+            {
+                "type": "1",
+                "name": "Show Modules"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Num Uniforms"
+            },
+            {
+                "type": "0",
+                "name": "Num Attributes"
+            }
+        ],
+        "name": "Ops.Gl.Shader.ShaderInfo"
+    },
+    "summary": "view current shader source code",
+    "updated": 1515480834003,
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "cables",
+    "id": "7afaa77e-a976-4e65-8eb1-a6302b91c0d3",
+    "created": 1505487731611
+}
