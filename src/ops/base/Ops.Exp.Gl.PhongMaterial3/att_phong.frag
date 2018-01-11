@@ -15,20 +15,21 @@
 #endif
 
 UNI float fresnel;
+UNI float specShininess;
+UNI float specAmount;
 
-#ifdef HAS_TEXTURE_NORMAL
+
+// #ifdef HAS_TEXTURE_NORMAL
     UNI sampler2D texNormal;
     UNI vec3 camPos;
     IN vec3 EyeDirection_cameraspace;
     IN vec3 vertexPos;
 
-    // IN vec3 LightDirection_tangentspace;
     IN vec3 EyeDirection_tangentspace;
+    // IN vec3 LightDirection_tangentspace;
     IN mat3 TBN;
     IN mat4 vMatrix;
-    
-
-#endif
+// #endif
 
 IN vec3 mvPos;
 IN vec2 texCoord;
@@ -77,12 +78,21 @@ float calcFresnel(vec3 direction, vec3 normal)
     return factor;
 }
 
+
+float phongSpecular( vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, float shininess)
+{
+    vec3 R = reflect(lightDirection, surfaceNormal);
+    float r= pow(max(0.0, dot(viewDirection, R)), shininess);
+
+    return r;
+}
+
 void main()
 {
     {{MODULE_BEGIN_FRAG}}
 
-
-float alpha=a;
+    float alpha=a;
+    float specular=0.0;
 
     vec3 col=vec3(0.0);
     vec3 normal = normalize(normalMatrix*norm);
@@ -98,6 +108,10 @@ float alpha=a;
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         Light light=lights[l];
+
+        vec3 lightVector = normalize( light.pos);
+        vec3 eyevector = normalize( camPos);
+
 
         vec3 lightModelDiff=light.pos - modelPos.xyz;
         vec3 lightDir = normalize(lightModelDiff);
@@ -158,6 +172,7 @@ float alpha=a;
             col=vec3(r,g,b);
         #endif
 
+        specular+=specAmount*phongSpecular(lightVector,-eyevector,normal, pow(1.0-(specShininess+0.1)*0.7,5.0)*1000.0);
 
         col+=vec3(light.ambient);
 
@@ -226,6 +241,9 @@ float alpha=a;
             col+= 25.0*texture2D(texEmissive, texCoord).rgb;
         #endif
     #endif
+
+
+col+=vec3(specular);
 
 
 // if(alpha>0.1)alpha=1.0;

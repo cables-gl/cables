@@ -1,5 +1,5 @@
 {
-    "updated": 1513337882062,
+    "updated": 1515668678665,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "4698b1c4-859e-463c-97d1-9179e70ee674",
@@ -33,6 +33,14 @@
             {
                 "type": "0",
                 "name": "Fesnel"
+            },
+            {
+                "type": "0",
+                "name": "Specular Shininess"
+            },
+            {
+                "type": "0",
+                "name": "Specular Amount"
             },
             {
                 "type": "0",

@@ -8,6 +8,8 @@ var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'ran
 var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var inFesnel=op.inValueSlider("Fesnel",0);
+var inShininess=op.inValueSlider("Specular Shininess",0.75);
+var inSpecAmount=op.inValueSlider("Specular Amount",0.5);
 
 
 var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
@@ -37,6 +39,9 @@ var inDoubleSided=op.inValueBool("Double Sided",false);
 
 inSpecular.uniform=new CGL.Uniform(shader,'f','specular',inSpecular);
 inFesnel.uniform=new CGL.Uniform(shader,'f','fresnel',inFesnel);
+inShininess.uniform=new CGL.Uniform(shader,'f','specShininess',inShininess);
+inSpecAmount.uniform=new CGL.Uniform(shader,'f','specAmount',inSpecAmount);
+
 
 
 

@@ -20,14 +20,14 @@ OUT vec2 texCoord;
 OUT vec3 mvPos;
 
 
-#ifdef HAS_TEXTURE_NORMAL
+// #ifdef HAS_TEXTURE_NORMAL
     OUT vec3 EyeDirection_tangentspace;
     // OUT vec3 LightDirection_tangentspace;
     OUT mat3 TBN;
     UNI vec3 camPos;
     OUT vec3 EyeDirection_cameraspace;
     OUT mat4 vMatrix;
-#endif
+// #endif
 
 
 mat3 transposeMat3(mat3 m)
@@ -77,7 +77,7 @@ void main()
     mvMatrix=viewMatrix*mMatrix;
 
 
-    #ifdef HAS_TEXTURE_NORMAL
+    // #ifdef HAS_TEXTURE_NORMAL
         mvPos=(mvMatrix * pos).xyz;
         EyeDirection_cameraspace = vec3(0.0,0.0,0.0) - mvPos;
 
@@ -97,7 +97,7 @@ void main()
     	EyeDirection_tangentspace =  TBN * EyeDirection_cameraspace;
     	
 
-    #endif
+    // #endif
 
 
 
