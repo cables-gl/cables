@@ -20,13 +20,14 @@ OUT vec2 texCoord;
 OUT vec3 mvPos;
 
 
+
 // #ifdef HAS_TEXTURE_NORMAL
     OUT vec3 EyeDirection_tangentspace;
     // OUT vec3 LightDirection_tangentspace;
     OUT mat3 TBN;
     UNI vec3 camPos;
     OUT vec3 EyeDirection_cameraspace;
-    OUT mat4 vMatrix;
+    // OUT mat4 vMatrix;
 // #endif
 
 
@@ -78,24 +79,24 @@ void main()
 
 
     // #ifdef HAS_TEXTURE_NORMAL
-        mvPos=(mvMatrix * pos).xyz;
-        EyeDirection_cameraspace = vec3(0.0,0.0,0.0) - mvPos;
+    mvPos=(mvMatrix * pos).xyz;
+    EyeDirection_cameraspace = vec3(0.0,0.0,0.0) - mvPos;
 
-        vMatrix=viewMatrix;
+    // vMatrix=viewMatrix;
 
 
-    	vec3 vertexTangent_cameraspace = ( vec4(normalize(attrTangent),1.0)).xyz;
-    	vec3 vertexBitangent_cameraspace = ( vec4(normalize(attrBiTangent),1.0)).xyz;
-    	vec3 vertexNormal_cameraspace = ( vec4(normalize(attrVertNormal),1.0)).xyz;
+	vec3 vertexTangent_cameraspace = ( vec4(normalize(attrTangent),1.0)).xyz;
+	vec3 vertexBitangent_cameraspace = ( vec4(normalize(attrBiTangent),1.0)).xyz;
+	vec3 vertexNormal_cameraspace = ( vec4(normalize(attrVertNormal),1.0)).xyz;
 
-    	TBN = transpose(mat3(
-    		vertexTangent_cameraspace,
-    		vertexBitangent_cameraspace,
-    		vertexNormal_cameraspace	
-    	)); // You can use dot products instead of building this matrix and transposing it. See References for details.
-    
-    	EyeDirection_tangentspace =  TBN * EyeDirection_cameraspace;
-    	
+	TBN = transpose(mat3(
+		vertexTangent_cameraspace,
+		vertexBitangent_cameraspace,
+		vertexNormal_cameraspace	
+	)); // You can use dot products instead of building this matrix and transposing it. See References for details.
+
+	EyeDirection_tangentspace =  TBN * EyeDirection_cameraspace;
+	
 
     // #endif
 

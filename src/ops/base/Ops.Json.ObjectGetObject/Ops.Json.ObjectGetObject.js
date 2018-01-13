@@ -10,8 +10,13 @@ data.ignoreValueSerialize=true;
 
 data.onValueChange(function()
 {
+
     if(data.get() && data.get().hasOwnProperty(key.get()))
     {
-        result.set(data.val[key.get()]);
+        result.set(data.get()[key.get()]);
+    }
+    else
+    {
+        result.set(null);
     }
 });

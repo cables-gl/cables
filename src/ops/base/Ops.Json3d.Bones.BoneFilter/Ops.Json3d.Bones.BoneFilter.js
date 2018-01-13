@@ -1,15 +1,27 @@
-
-
 var exec=op.inFunction("Exec");
-
 var joint=op.inValueSelect("Joint");
-
 var next=op.outFunction("Next");
 
 var cgl=op.patch.cgl;
 
 var oldBones=null;
 var oldBonesNum=0;
+var boneIndex=-1;
+
+
+joint.onChange=function()
+{
+    if(oldBones)
+    {
+        for(var i=0;i<oldBones.length;i++)
+        {
+            if(joint.get()==oldBones[i].name)boneIndex=i;
+        }
+        
+    }
+    
+};
+
 
 exec.onTriggered=function()
 {
@@ -26,15 +38,36 @@ exec.onTriggered=function()
         {
             // console.log(i,bones[i].name );
             values.push(bones[i].name);
+            
+            if(joint.get()==bones[i].name)boneIndex=i;
+            
         }
         
         // joint=op.inValueSelect("Joint",values,oldValue);
         joint.setUiAttribs({"values":values});
     }
+
     
-    if(joint.get()==cgl.frameStore.bone.name)
+    if(cgl.frameStore.bones)
     {
-        next.trigger();
+        
+        // for(var i=0;i<cgl.frameStore.bones.length;i++)
+        
+        var bone=cgl.frameStore.bones[boneIndex];
+        {
+            // if(i)
+            cgl.pushModelMatrix();
+    
+            mat4.mul(cgl.mvMatrix,cgl.mvMatrix,bone.boneMatrix);
+            // mat4.translate()
+            // cgl.frameStore.bones.transformed
+            next.trigger();
+            cgl.popModelMatrix();
+
+            
+        }
+        
     }
     
 };
+

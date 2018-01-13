@@ -36,6 +36,7 @@ render.onTriggered=function()
 
         uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'amount',amount);
         uniHeight=new CGL.Uniform(shader,'f',mod.prefix+'height',height);
+        
     }
 
     trigger.trigger();

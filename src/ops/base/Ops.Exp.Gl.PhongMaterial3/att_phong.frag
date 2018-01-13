@@ -23,12 +23,12 @@ UNI float specAmount;
     UNI sampler2D texNormal;
     UNI vec3 camPos;
     IN vec3 EyeDirection_cameraspace;
-    IN vec3 vertexPos;
+    // IN vec3 vertexPos;
 
     IN vec3 EyeDirection_tangentspace;
     // IN vec3 LightDirection_tangentspace;
     IN mat3 TBN;
-    IN mat4 vMatrix;
+    // IN mat4 vMatrix;
 // #endif
 
 IN vec3 mvPos;
@@ -78,7 +78,6 @@ float calcFresnel(vec3 direction, vec3 normal)
     return factor;
 }
 
-
 float phongSpecular( vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, float shininess)
 {
     vec3 R = reflect(lightDirection, surfaceNormal);
@@ -104,13 +103,14 @@ void main()
     #ifdef HAS_TEXTURE_NORMAL
         vec3 TextureNormal_tangentspace = normalize(texture2D(texNormal, texCoord).rgb*2.0-1.0);
     #endif
+    
+    vec3 eyevector = normalize( camPos);
 
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         Light light=lights[l];
 
         vec3 lightVector = normalize( light.pos);
-        vec3 eyevector = normalize( camPos);
 
 
         vec3 lightModelDiff=light.pos - modelPos.xyz;
@@ -176,7 +176,7 @@ void main()
 
         col+=vec3(light.ambient);
 
-        
+
         #ifdef HAS_TEXTURE_NORMAL
         #ifdef SHOW_NORMAL
             #ifdef SHOW_LAMBERT
@@ -198,12 +198,8 @@ void main()
         #ifndef SHOW_NORMAL
             col=vec3(r,g,b);
         #endif
-        
-
-
     }
-    
-    
+
     #ifdef SHOW_DIFFUSE
         #ifdef HAS_TEXTURE_DIFFUSE
             vec4 texCol=texture2D(texDiffuse, texCoord);
@@ -228,13 +224,13 @@ void main()
     #endif
     
     #ifdef SHOW_AO
-    #ifdef HAS_TEXTURE_AO
-        col*= texture2D(texAo, texCoord).rgb;
-    #endif
+        #ifdef HAS_TEXTURE_AO
+            col*= texture2D(texAo, texCoord).rgb;
+        #endif
     #endif
 
-    vec3 vNormal = normalize(normalMatrix * norm);
-    col+=vec3(r,g,b)*(calcFresnel(normalize(mvPos.xyz),vNormal)*fresnel*5.0);
+    vec3 vNormal = normalize(normalMatrix * normal);
+    col+=vec3(r,g,b)*(calcFresnel(mvPos,vNormal)*fresnel*5.0);
 
     #ifdef SHOW_EMISSIVE
         #ifdef HAS_TEXTURE_EMISSIVE
@@ -243,7 +239,7 @@ void main()
     #endif
 
 
-col+=vec3(specular);
+    col+=vec3(specular);
 
 
 // if(alpha>0.1)alpha=1.0;
@@ -251,12 +247,12 @@ col+=vec3(specular);
 
     {{MODULE_COLOR}}
 
-    if( dot(vNormal,vec3(0.0,0.0,0.0))>0.0 )
-    {
-        col.r=1.0;
-        col.g=0.0;
-        col.b=0.0;
-    }
+    // if( dot(vNormal,vec3(0.0,0.0,0.0))>0.0 )
+    // {
+    //     col.r=1.0;
+    //     col.g=0.0;
+    //     col.b=0.0;
+    // }
     //  o.Normal = dot(IN.viewDir, float3(0, 0, 1)) > 0 ? n : -n;
 
     // if(!gl_FrontFacing)col.r=1.0;

@@ -2,6 +2,7 @@
 
 UNI float MOD_amount;
 UNI float MOD_height;
+UNI float MOD_offset;
 
 vec4 MOD_twist(vec4 pos, float t)
 {

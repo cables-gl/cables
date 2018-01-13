@@ -1,5 +1,5 @@
 {
-    "updated": 1515596950273,
+    "updated": 1515681863009,
     "authorName": "pandur",
     "id": "aef4eb37-53ca-43b4-a9db-3bbd8aa00906",
     "created": 1515411727085,
@@ -26,10 +26,6 @@
             {
                 "type": "1",
                 "name": "Next"
-            },
-            {
-                "type": "1",
-                "name": "Joint"
             }
         ],
         "name": "Ops.Json3d.Bones.BoneSkin"

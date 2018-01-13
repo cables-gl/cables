@@ -1,4 +1,4 @@
-op.name="SplineFromArray";
+
 
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 
@@ -52,7 +52,7 @@ render.onTriggered=function()
     var oldPrim=shader.glPrimitive;
     shader.glPrimitive=cgl.gl.LINE_STRIP;
     // shader.glPrimitive=cgl.gl.POINTS;
-    cgl.gl.lineWidth(14);
+    // cgl.gl.lineWidth(14);
         
     // for(var i=0;i<splines.length;i++)
         splines[indx].mesh.render(shader);

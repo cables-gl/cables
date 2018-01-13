@@ -7,7 +7,7 @@ var inGeom=op.inObject("Geometry");
 var draw=op.inValueBool("draw",true);
 
 var next=op.outFunction("Next");
-var triggerJoint=op.outFunction("Joint");
+
 
 
 var geom=null;
@@ -17,6 +17,8 @@ var shader=null;
 var cgl=op.patch.cgl;
 var meshIndex=0;
 render.onLinkChanged=removeModule;
+op.onDelete=removeModule;
+
 var boneMatrices=[];
 var boneMatricesUniform=null;
 var vertWeights=null;
@@ -29,6 +31,8 @@ function removeModule()
     shader=null;
     reset();
 }
+
+
 
 function reset()
 {
@@ -59,6 +63,8 @@ inGeom.onChange=function()
         op.error('geom','no/invalid geometry');
     }
 };
+
+
 
 
 function setupIndexWeights(jsonMesh)
@@ -188,10 +194,10 @@ render.onTriggered=function()
                     boneMatrices[i*16+mi]=bones[i].matrix[mi];
                 }
 
-                cgl.pushModelMatrix();
+                // cgl.pushModelMatrix();
 
-                triggerJoint.trigger();
-                cgl.popModelMatrix();
+                // triggerJoint.trigger();
+                // cgl.popModelMatrix();
             }
             else
             {
