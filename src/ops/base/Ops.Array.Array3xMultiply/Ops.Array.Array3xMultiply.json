@@ -1,0 +1,33 @@
+{
+    "updated": 1515878828523,
+    "authorName": "pandur",
+    "id": "a1e4d85f-0955-4ada-819c-c597cec40365",
+    "created": 1515878597720,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array3x"
+            },
+            {
+                "type": "0",
+                "name": "Mul X"
+            },
+            {
+                "type": "0",
+                "name": "Mul Y"
+            },
+            {
+                "type": "0",
+                "name": "Mul Z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.Array3xMultiply"
+    }
+}
