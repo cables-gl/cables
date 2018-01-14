@@ -40,10 +40,10 @@
                 "name": "index"
             }
         ],
-        "name": "Ops.Repeat2d"
+        "name": "Ops.Trigger.Repeat2d"
     },
     "summary": "Triggers all ops underneath numX * numY times",
-    "updated": 1511163188762,
+    "updated": 1515961362946,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "79934693-5887-4173-8b48-3e3a18fcf225",

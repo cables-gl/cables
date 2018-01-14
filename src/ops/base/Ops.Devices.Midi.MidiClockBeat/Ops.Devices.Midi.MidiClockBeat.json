@@ -1,5 +1,5 @@
 {
-    "updated": 1515142938288,
+    "updated": 1515966486380,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9056b704-b8f5-4fda-8df6-0738fa75d301",
@@ -17,12 +17,20 @@
                 "name": "Beat"
             },
             {
+                "type": "1",
+                "name": "Start"
+            },
+            {
                 "type": "0",
                 "name": "Sub Tick"
             },
             {
                 "type": "1",
                 "name": "Sub Beat"
+            },
+            {
+                "type": "0",
+                "name": "BPM"
             }
         ],
         "name": "Ops.Devices.Midi.MidiClockBeat"

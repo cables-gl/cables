@@ -4,11 +4,12 @@ var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var numx=op.inValueInt("num x");
 var numy=op.inValueInt("num y");
 var mul=op.addInPort(new Port(op,"mul"));
-var center=op.addInPort(new Port(op,"center",OP_PORT_TYPE_VALUE,{"display":"bool"}));
+// var center=op.addInPort(new Port(op,"center",OP_PORT_TYPE_VALUE,{"display":"bool"}));
+var center=op.inValueBool("center");
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var idxx=op.addOutPort(new Port(op,"x"));
-var idxy=op.addOutPort(new Port(op,"y"));
+var outX=op.addOutPort(new Port(op,"x"));
+var outY=op.addOutPort(new Port(op,"y"));
 var idx=op.addOutPort(new Port(op,"index"));
 
 
@@ -24,18 +25,19 @@ exe.onTriggered=function()
     var subY=0;
     if(center.get())
     {
-        subX=(numx.get()*mul.get())/2;
-        subY=(numy.get()*mul.get())/2;
+        subX=( (numx.get()-1)*mul.get())/2.0;
+        subY=( (numy.get()-1)*mul.get())/2.0;
     }
+
     var m=mul.get();
     // for(var y=numy.get()-1;y>-1;y--)
-    for(var y=0;y<numy.get()-1;y++)
+    for(var y=0;y<numy.get();y++)
     {
-        idxy.set(y*m - subY);
+        outY.set( (y*m) - subY);
         // for(var x=numx.get()-1;x>-1;x--)
-        for(var x=0;x<numx.get()-1;x++)
+        for(var x=0;x<numx.get();x++)
         {
-            idxx.set(x*m - subX);
+            outX.set( (x*m) - subX);
             idx.set(x+y*numx.get());
             trigger.trigger();
             op.patch.instancing.increment();
