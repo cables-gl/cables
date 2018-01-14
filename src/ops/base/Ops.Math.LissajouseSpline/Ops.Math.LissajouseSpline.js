@@ -17,10 +17,9 @@ function calc()
     var step=40;
     
     var arr=[];
-    arr.length=numPoints/step*3;
-    
     var x=0,y=0,z=0;
     var form=parseInt(inForm.get());
+    var th=0.03;
 
     for(var i = 0; i < numPoints; i+=step)
     {
@@ -32,15 +31,13 @@ function calc()
             y=Math.cos( (i * inB.get()) * 0.001 );
             z=Math.sin( (i * inC.get()) * 0.001 );
         }
-        
-        if(form==2)
+        else if(form==2)
         {
             x=(Math.cos( (i * inA.get()) * 0.001 )+Math.cos( (i * inB.get()) * 0.001 ) )/2;
             y=(Math.sin( (i * inA.get()) * 0.001 )+Math.sin( (i * inC.get()) * 0.001 ) )/2;
             z=(Math.sin( (i * inD.get()) * 0.001 ));
         }
-        
-        if(form==3)
+        else if(form==3)
         {
             x=(Math.sin( (i * inA.get()) * 0.001 )*(1+Math.cos( (i * inB.get()) * 0.001 ) ))/2;
             y=(Math.sin( (i * inA.get()) * 0.001 )*(1+Math.sin( (i * inC.get()) * 0.001 ) ))/2;
@@ -51,11 +48,9 @@ function calc()
         arr[index*3+1] = y;
         arr[index*3+2] = z;
 
-        var th=0.03;
         if(index>10 && Math.abs(x-arr[0])<th && Math.abs(y-arr[1])<th && Math.abs(z-arr[2])<th)
         {
             // this method sucks but kinda works....
-            // console.log('stop after',i);
             break;
         }
     }
