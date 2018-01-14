@@ -1,0 +1,37 @@
+{
+    "updated": 1515950490797,
+    "authorName": "pandur",
+    "id": "f7e5d8c3-6f49-4769-a863-fbff2c466ce8",
+    "created": 1515950218939,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "radius"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.RoundCorners"
+    }
+}
