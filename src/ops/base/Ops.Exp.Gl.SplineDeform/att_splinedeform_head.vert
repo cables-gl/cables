@@ -1,19 +1,13 @@
 
 UNI vec3 MOD_points[SPLINE_POINTS];
-
 UNI float MOD_offset;
 UNI float MOD_size;
-
-
-// interpolate function
-// get index func: get index and fract for mix()
 
 vec3 ip(float v)
 {
     int index0=int(abs(mod(v,max(0.0,float(SPLINE_POINTS)))));
     int index1=int(abs(mod(v+1.0,max(0.0,float(SPLINE_POINTS)))));
     float fr=fract(abs(mod(v,max(0.0,float(SPLINE_POINTS)))));
-    
     return mix( MOD_points[index0] ,MOD_points[index1] ,fr);
 }
 
@@ -25,13 +19,6 @@ vec3 MOD_splineDeform(vec4 pos, int isNormal)
     vec3 bezierPoint=ip(off);
     vec3 bezierPointNext=ip(off+1.0);
 
-// if(isNormal==1)
-// {
-//     bezierPointPrevious=normalize(bezierPointPrevious);
-//     bezierPoint=normalize(bezierPoint);
-//     bezierPointNext=normalize(bezierPointNext);
-// }
-
     vec3 _Up=vec3(0.0,1.0,0.0);
     vec3 _Forward=vec3(1.0,0.0,0.0);
     vec3 _Right=vec3(0.0,0.0,1.0);
@@ -40,7 +27,7 @@ vec3 MOD_splineDeform(vec4 pos, int isNormal)
 	float vertexRight = pos.x * _Right.x + pos.y * _Right.y + pos.z * _Right.z;
 	float vertexUp = pos.x * _Up.x + pos.y * _Up.y + pos.z * _Up.z;
 
-	float angle = atan(vertexRight,vertexUp);
+	float angle = atan(vertexUp,vertexRight);
 	float radius = length(vec2(vertexRight, vertexUp));
 
 	vec3 forward = normalize(bezierPointNext - bezierPoint);

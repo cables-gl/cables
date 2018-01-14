@@ -35,19 +35,6 @@ function removeModule()
 }
 
 
-inPoints.onChange=function()
-{
-    if(inPoints.get())
-    {
-        pointArray=inPoints.get();//new Float32Array(inPoints.get());
-        updateUniformPoints=true;
-
-
-                
-        // console.log(inPoints.get().length,"points");
-        // resetLater();
-    }
-};
 
 
 inPoints.onChange=function()
@@ -59,7 +46,7 @@ inPoints.onChange=function()
 
 
                 
-        // console.log(inPoints.get().length,"points");
+        console.log(inPoints.get().length,"points");
         // resetLater();
     }
 };
@@ -102,7 +89,7 @@ op.render.onTriggered=function()
     if(updateUniformPoints && pointArray)
     {
         // if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
-        if(shader.getDefine("SPLINE_POINTS")<Math.floor(pointArray.length/3))
+        if(shader.getDefine("SPLINE_POINTS")!=Math.floor(pointArray.length/3))
         {
             console.log(shader.getDefine("SPLINE_POINTS"));
             shader.define('SPLINE_POINTS',Math.floor(pointArray.length/3));

@@ -16,6 +16,10 @@
             {
                 "type": "0",
                 "name": "Max"
+            },
+            {
+                "type": "0",
+                "name": "Last == First"
             }
         ],
         "portsOut": [
@@ -26,5 +30,9 @@
         ],
         "name": "Ops.Array.RandomArray3x"
     },
-    "summary": "a random array of numbers"
+    "summary": "a random array of numbers",
+    "updated": 1515884240410,
+    "authorName": "pandur",
+    "id": "7f981578-542e-417b-b304-8fbe41258772",
+    "created": 1515883841358
 }
