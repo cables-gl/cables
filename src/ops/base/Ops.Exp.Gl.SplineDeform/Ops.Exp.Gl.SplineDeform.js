@@ -58,9 +58,10 @@ op.render.onTriggered=function()
 
         op.uniPoints=new CGL.Uniform(shader,'3f[]',moduleVert.prefix+'points',new Float32Array([0,0,0,0,0,0]));
         ready=false;
+        updateUniformPoints=true;
     }
     
-    if(updateUniformPoints && pointArray && pointArray.length>=3)
+    if(shader && updateUniformPoints && pointArray && pointArray.length>=3)
     {
         if(shader.getDefine("SPLINE_POINTS")!=Math.floor(pointArray.length/3))
         {

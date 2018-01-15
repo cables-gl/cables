@@ -1,5 +1,5 @@
 {
-    "updated": 1516003406587,
+    "updated": 1516015259123,
     "authorName": "pandur",
     "id": "a9464e80-6958-4846-8cae-9cdae608a2ad",
     "created": 1515604228291,
@@ -12,14 +12,6 @@
             {
                 "type": "0",
                 "name": "Size"
-            },
-            {
-                "type": "0",
-                "name": "Strength"
-            },
-            {
-                "type": "0",
-                "name": "Smooth"
             },
             {
                 "type": "0",
