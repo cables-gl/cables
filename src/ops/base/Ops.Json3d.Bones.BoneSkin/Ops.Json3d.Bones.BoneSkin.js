@@ -32,27 +32,24 @@ function removeModule()
     reset();
 }
 
-
-
 function reset()
 {
     meshIndex=inMeshIndex.get();
     attribWeightsScene=null;
-    // shader=null;
     if(shader)removeModule();
-    scene=null;
     mesh=null;
     vertWeights=null;
-
 }
 
 inMeshIndex.onChange=reset;
 
-inGeom.onChange=function()
+inGeom.onChange=setGeom;
+
+function setGeom()
 {
     vertWeights=null;
     geom=inGeom.get();
-    
+
     if(geom)
     {
         mesh=new CGL.Mesh(cgl,geom);
@@ -70,7 +67,7 @@ inGeom.onChange=function()
 function setupIndexWeights(jsonMesh)
 {
     if(!mesh)return;
-    console.log('vert length',geom.vertices.length);
+    console.log('setupIndexWeights',geom.vertices.length);
     
     
     if(!vertWeights || vertWeights.length!=geom.vertices.length/3)
@@ -161,14 +158,20 @@ render.onTriggered=function()
         shader.define("SKIN_NUM_BONES",1);
 
         boneMatricesUniform=new CGL.Uniform(shader,'m4','bone',[]);
+        attribWeightsScene=null;
+        console.log("reset skin shader...");
     }
 
     var scene=cgl.frameStore.currentScene.getValue();
     
-    if(scene && scene.meshes && scene.meshes.length>meshIndex )
+    if(scene && scene.meshes && scene.meshes.length>meshIndex) // || attribWeightsScene!=scene
     {
+        
         if(attribWeightsScene!=scene)
         {
+            vertWeights=null;
+            setGeom();
+            console.log('attribWeightsScene!=scene');
             attribWeightsScene=scene;
             setupIndexWeights(scene.meshes[meshIndex]);
         }
