@@ -42,13 +42,13 @@ function updateAxis()
 {
     if(shader)
     {
-        shader.removeDefine("RESTRICT_AXIS_X");
-        shader.removeDefine("RESTRICT_AXIS_Y");
-        shader.removeDefine("RESTRICT_AXIS_Z");
+        shader.removeDefine(moduleVert.prefix+"RESTRICT_AXIS_X");
+        shader.removeDefine(moduleVert.prefix+"RESTRICT_AXIS_Y");
+        shader.removeDefine(moduleVert.prefix+"RESTRICT_AXIS_Z");
         
-        if(axis.get()=="X") shader.define("RESTRICT_AXIS_X");
-        if(axis.get()=="Y") shader.define("RESTRICT_AXIS_Y");
-        if(axis.get()=="Z") shader.define("RESTRICT_AXIS_Z");
+        if(axis.get()=="X") shader.define(moduleVert.prefix+"RESTRICT_AXIS_X");
+        if(axis.get()=="Y") shader.define(moduleVert.prefix+"RESTRICT_AXIS_Y");
+        if(axis.get()=="Z") shader.define(moduleVert.prefix+"RESTRICT_AXIS_Z");
     }
 }
 

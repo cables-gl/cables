@@ -1,1 +1,37 @@
-{"layout":{"portsIn":[{"type":"2","name":"Event Input"},{"type":"0","name":"note"},{"type":"1","name":"learn"}],"portsOut":[{"type":"2","name":"Event Output"},{"type":"0","name":"pressed"}],"name":"Ops.Devices.Midi.MidiToggle"}}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            },
+            {
+                "type": "0",
+                "name": "note"
+            },
+            {
+                "type": "0",
+                "name": "Channel"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event Output"
+            },
+            {
+                "type": "0",
+                "name": "pressed"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiToggle"
+    },
+    "updated": 1516046933119,
+    "authorName": "pandur",
+    "id": "b2aed468-d249-4e30-ad26-7902b15fe21c",
+    "created": 1516046806684
+}

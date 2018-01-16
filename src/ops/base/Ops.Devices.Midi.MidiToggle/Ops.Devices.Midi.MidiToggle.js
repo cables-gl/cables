@@ -2,6 +2,7 @@ op.name='Midi Toggle';
 var eventIn=op.addInPort(new Port(op,"Event Input",OP_PORT_TYPE_OBJECT));
 
 var note=op.addInPort(new Port(op,"note"));
+var channel=op.inValueInt("Channel",0);
 
 var learn=op.addInPort(new Port(op,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 var eventOut=op.addOutPort(new Port(op,"Event Output",OP_PORT_TYPE_OBJECT));
@@ -19,11 +20,13 @@ var lastValue=-1;
 eventIn.onValueChanged=function()
 {
     var event=eventIn.get();
+    if(!event)return;
     if(learning)
     {
         note.set(event.note);
+        channel.set(event.channel);
         learning=false;
-        
+
         if(CABLES.UI)
         {
             op.uiAttr({info:'Bound to note: ' + note.get()});
@@ -31,7 +34,7 @@ eventIn.onValueChanged=function()
         }
     }
 
-    if(note.get()==event.note)
+    if(note.get()==event.note && event.channel==channel.get())
     {
         var v=event.velocity;
 

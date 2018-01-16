@@ -108,7 +108,8 @@ var srcBodyVert=''
 
     .endl()+'#ifdef '+id+'DISPLACE_METH_MULXYZ'
     .endl()+'   {{mod}}_texVal+=1.0;'
-    .endl()+'   pos.xyz*={{mod}}_texVal * {{mod}}_extrude;'
+    .endl()+'   pos.xyz *= {{mod}}_texVal * {{mod}}_extrude;'
+    // .endl()+'   norm=normalize(norm+normalize(pos.xyz+vec3({{mod}}_texVal)* {{mod}}_extrude));'
     .endl()+'#endif'
 
     .endl()+'#ifdef '+id+'DISPLACE_METH_ADDZ'
@@ -117,6 +118,7 @@ var srcBodyVert=''
 
     .endl()+'#ifdef '+id+'DISPLACE_METH_ADDY'
     .endl()+'   pos.y+=({{mod}}_texVal * {{mod}}_extrude);'
+    // .endl()+'norm=normalize(norm+normalize(vec3(0.0,0.0+({{mod}}_texVal ),0.0)));'
     .endl()+'#endif'
 
 
@@ -124,6 +126,9 @@ var srcBodyVert=''
     .endl()+'   pos.y+=(({{mod}}_texVal-0.5) * {{mod}}_extrude);'
     .endl()+'#endif'
 
+    
+    
+    // .endl()+'   norm=vec3(1.0,0.0,0.0);'
     
 
     .endl()+''+id+'displHeightMapColor={{mod}}_texVal;'

@@ -1,7 +1,7 @@
-op.name='MidiValue';
 var eventIn=op.addInPort(new Port(this,"Event Input",OP_PORT_TYPE_OBJECT));
 
 var note=op.addInPort(new Port(this,"note"));
+var channel=op.inValueInt("Channel",0);
 var learn=op.addInPort(new Port(this,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
 var eventOut=op.addOutPort(new Port(this,"Event Output",OP_PORT_TYPE_OBJECT));
@@ -35,9 +35,11 @@ function initMidiValue()
 eventIn.onValueChanged=function()
 {
     var event=eventIn.get();
+    if(!event)return;
     if(learning)
     {
         note.set(event.note);
+        channel.set(event.channel);
         learning=false;
         
         if(CABLES.UI)
@@ -47,7 +49,10 @@ eventIn.onValueChanged=function()
         }
     }
 
-    if(event.note==note.get()) value.set(event.velocity);
+    if(event.note==note.get() && event.channel==channel.get())
+    {
+        value.set(event.velocity);
+    }
     
     eventOut.set(event);
     lastEvent=event;

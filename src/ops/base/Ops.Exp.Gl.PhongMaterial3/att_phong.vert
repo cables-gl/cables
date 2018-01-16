@@ -64,9 +64,9 @@ void main()
         texCoord=vec2(attrTexCoord.x,1.0-attrTexCoord.y);
     #endif
     
-    norm=attrVertNormal;
 
     
+    norm=attrVertNormal;
 
 
 
@@ -89,7 +89,7 @@ void main()
 	vec3 vertexBitangent_cameraspace = ( vec4(normalize(attrBiTangent),1.0)).xyz;
 	vec3 vertexNormal_cameraspace = ( vec4(normalize(attrVertNormal),1.0)).xyz;
 
-	TBN = transpose(mat3(
+	TBN = transposeMat3(mat3(
 		vertexTangent_cameraspace,
 		vertexBitangent_cameraspace,
 		vertexNormal_cameraspace	

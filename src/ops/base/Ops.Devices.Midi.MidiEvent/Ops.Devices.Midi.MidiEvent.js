@@ -14,6 +14,7 @@ var outTrigger = op.outFunction("Event Received");
 eventIn.onValueChanged=function()
 {
     var event=eventIn.get();
+    if(!event)return;
 
     outDevice.set(event.deviceName);
     outNote.set(event.note);

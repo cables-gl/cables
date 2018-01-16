@@ -1,5 +1,5 @@
 {
-    "updated": 1515015827118,
+    "updated": 1516046846727,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "badd2c4e-c9bb-45d4-89dd-779ff4d88b11",
@@ -13,6 +13,10 @@
             {
                 "type": "0",
                 "name": "note"
+            },
+            {
+                "type": "0",
+                "name": "Channel"
             },
             {
                 "type": "1",

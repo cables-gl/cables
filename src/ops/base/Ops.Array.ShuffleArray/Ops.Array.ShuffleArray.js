@@ -5,7 +5,6 @@ var arr=[];
 
 // inputs
 var exePort = op.inFunctionButton('Execute');
-var shuffleOnChangePort = op.inValueBool('Shuffle on Change', true);
 var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
 
 // outputs
@@ -18,19 +17,19 @@ arrayOut.ignoreValueSerialize=true;
  * Taken from https://www.frankmitchell.org/2015/01/fisher-yates/
  */
 function fisherYatesShuffle(array) {
-  var i = 0
-    , j = 0
-    , temp = null
+  var i = 0;
+  var j = 0;
+  var temp = null;
 
   for (i = array.length - 1; i > 0; i -= 1) {
-    j = Math.floor(Math.random() * (i + 1))
-    temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
+    j = Math.floor(Math.random() * (i + 1));
+    temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
 }
 
-function update(port, newValue, forceShuffle) {
+function update() {
     var a=array.get();
     
     if(!a)return;
@@ -45,25 +44,15 @@ function update(port, newValue, forceShuffle) {
         arr[i]=a[i];
     }
     
-    if(forceShuffle || shuffleOnChangePort.get()) {
-        /*
-        for (i=0;i<a.length;i++) {
-            j = Math.floor(Math.random() * i);
-            x = a[i - 1];
-            arr[i - 1] = arr[j];
-            arr[j] = x;
-        }
-        */
-        fisherYatesShuffle(arr);
-    }
+    fisherYatesShuffle(arr);
     
     arrayOut.set(null);
     arrayOut.set(arr);
 }
 
-array.onValueChanged = update;
-
 exePort.onTriggered = function() {
-    update(null, null, true); // force shuffle
+    update();
     nextPort.trigger();
 };
+
+array.onChange = update;

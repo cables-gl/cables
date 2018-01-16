@@ -1,6 +1,8 @@
 
 // http://www.keithmcmillen.com/blog/making-music-in-the-browser-web-midi-api/
 
+//https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
+
 op.name='midiInput';
 op.requirements=[CABLES.Requirements.MIDI];
 
