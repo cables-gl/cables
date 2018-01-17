@@ -230,6 +230,8 @@ void main()
         normal = vNormal;
         //   }
 
+        // if(!gl_FrontFacing) normal*=vec3(-1);
+
         //determine surface to light direction
         vec4 lightPosition = viewMatrix * vec4(light.pos, 1.0);
         vec3 lightVector = lightPosition.xyz - vViewPosition;
@@ -240,7 +242,6 @@ void main()
 
         //now sample from our repeating brick texture
         //assume its in sRGB, so we need to correct for gamma
-
         //our normal map has an inverted green channel
 
         vec3 L = normalize(lightVector);              //light direction
@@ -261,9 +262,6 @@ void main()
         color += (diffuse + ambient);
 
         if(fresnel!=0.0) color+=calcFresnel(V,normal)*fresnel*5.0;
-
-
-        //re-apply gamma to output buffer
     }
 
     color*=diffuseColor;

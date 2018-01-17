@@ -108,6 +108,7 @@ void main()
     
     mvMatrix=viewMatrix * mMatrix;
 
+
     vec4 viewModelPosition = mvMatrix * pos;
     vViewPosition = viewModelPosition.xyz;
 

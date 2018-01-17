@@ -11,6 +11,10 @@
             },
             {
                 "type": "0",
+                "name": "Class"
+            },
+            {
+                "type": "0",
                 "name": "Visible"
             },
             {
@@ -44,6 +48,10 @@
             {
                 "type": "0",
                 "name": "cursor"
+            },
+            {
+                "type": "0",
+                "name": "Opacity"
             },
             {
                 "type": "0",
@@ -113,5 +121,9 @@
             }
         ],
         "name": "Ops.Html.Elements.Div"
-    }
+    },
+    "updated": 1516122450876,
+    "authorName": "pandur",
+    "id": "4b7c6c44-54a6-4ac6-82ac-3de2450cbc80",
+    "created": 1516122448028
 }

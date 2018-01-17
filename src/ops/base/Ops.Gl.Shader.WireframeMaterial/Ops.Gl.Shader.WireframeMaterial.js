@@ -1,4 +1,3 @@
-op.name="WireframeMaterial";
 var cgl=op.patch.cgl;
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
@@ -84,15 +83,15 @@ var srcFrag='';
 
 if(cgl.glVersion==1)
 {
-    srcFrag='#extension GL_OES_standard_derivatives : enable'
-    .endl()+'precision highp float;'
+    srcFrag=''//#extension GL_OES_standard_derivatives : enable'
+    // .endl()+'precision highp float;'
     .endl()+'IN vec3 baycentric;'
     .endl();
 }
 else
 {
     srcFrag=''
-    .endl()+'precision highp float;'
+    // .endl()+'precision highp float;'
     .endl()+'IN vec3 baycentric;'
     // .endl()+'out vec4 fragColor;'
 
@@ -153,9 +152,12 @@ var doRender=function()
 
 var shader=new CGL.Shader(cgl,'Wireframe Material');
 
-if(cgl.glVersion)shader.glslVersion=300;
+if(cgl.glVersion>1)shader.glslVersion=300;
 var uniformWidth=new CGL.Uniform(shader,'f','width',w.get());
 var uniformOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
+
+if(cgl.glVersion==1)shader.enableExtension('OES_standard_derivatives');
+
 shader.setSource(srcVert,srcFrag);
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.wireframe=true;

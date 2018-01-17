@@ -42,7 +42,7 @@ function setButtonState(i,v)
     {
         if(v==1)
         {
-            if(buttons[i]==0) buttons[i]=1;
+            if(!buttons[i]) buttons[i]=1;
                 else buttons[i]=0;
         }
     }
@@ -59,7 +59,7 @@ function setButtonState(i,v)
     if(lights.get())
     {
         var noteOnMessage = [0x90, note.get()+i, 0];
-        if(v>0) noteOnMessage = [0x90, note.get()+i, 120];
+        if(buttons[i]>0) noteOnMessage = [0x90, note.get()+i, 120];
         
         if(lastEvent && lastEvent.output) lastEvent.output.send( noteOnMessage );
     }
@@ -80,6 +80,7 @@ function initArray()
 eventIn.onValueChanged=function()
 {
     var event=eventIn.get();
+    if(!event)return;
     if(learning)
     {
         note.set(event.note);

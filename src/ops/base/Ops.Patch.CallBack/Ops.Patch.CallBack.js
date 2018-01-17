@@ -20,6 +20,6 @@ exe.onTriggered=function()
     }
     else
     {
-        op.log('callback not found!',callbackname.get());
+        op.log('callback ', callbackname.get(), ' not found! Parameters: ', values);
     }
 };

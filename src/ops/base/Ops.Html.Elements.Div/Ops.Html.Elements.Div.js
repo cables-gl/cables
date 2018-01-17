@@ -175,6 +175,7 @@ function updatePos()
 
     element.style['margin-left']=l+"px";
     element.style['margin-top']=t+"px";
+    updateClientSize();
 }
 
 function updateCursor()

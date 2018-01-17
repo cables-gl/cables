@@ -16,10 +16,6 @@
             {
                 "type": "0",
                 "name": "Height"
-            },
-            {
-                "type": "0",
-                "name": "offset"
             }
         ],
         "portsOut": [
