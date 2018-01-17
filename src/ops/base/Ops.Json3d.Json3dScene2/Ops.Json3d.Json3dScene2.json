@@ -1,5 +1,5 @@
 {
-    "updated": 1516189130829,
+    "updated": 1516189365516,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "44f0aa70-e97d-41cf-9560-369bffa0d21c",
@@ -21,6 +21,14 @@
             {
                 "type": "0",
                 "name": "Create Non Mesh Nodes"
+            },
+            {
+                "type": "0",
+                "name": "Create Materials"
+            },
+            {
+                "type": "0",
+                "name": "Detect Clones"
             }
         ],
         "portsOut": [

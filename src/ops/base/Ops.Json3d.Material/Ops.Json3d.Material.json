@@ -1,6 +1,25 @@
 {
-    "updated": 1516185473737,
+    "updated": 1516189403005,
     "authorName": "pandur",
     "id": "f2630ed5-f8aa-4e6e-9ec0-f9488aea39a1",
-    "created": 1516185450298
+    "created": 1516185450298,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Json3d.Material"
+    }
 }
