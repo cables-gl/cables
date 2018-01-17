@@ -6,13 +6,8 @@ op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var inScale=op.inValue("Scale",10);
-
 var inAmount=op.inValueSlider("Amount",0.3);
-
 var inWorldSpace=op.inValueBool("WorldSpace");
-
-// var offsetX=op.addInPort(new Port(this,"offset X",OP_PORT_TYPE_VALUE));
-// var offsetY=op.addInPort(new Port(this,"offset Y",OP_PORT_TYPE_VALUE));
 
 
 var shader=null;
@@ -28,8 +23,6 @@ var srcBodyVert=''
     .endl()+'#ifdef WORLDSPACE'
     .endl()+'   MOD_pos=pos*mMatrix;'
     .endl()+'#endif'
-
-    // .endl()+'MOD_pos=pos;'
     .endl();
 
 var srcHeadFrag=attachments.pixelnoise_frag
@@ -38,8 +31,7 @@ var srcHeadFrag=attachments.pixelnoise_frag
     .endl();
 
 var srcBodyFrag=''
-    // .endl()+'   col.rgb=mix(col.rgb,vec3(meshPixelNoise(meshPixelNoise_pos.xyz*MOD_scale)),MOD_amount);'
-    .endl()+'   col.rgb-=MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
+    .endl()+'   col.rgb -= MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
 
     .endl();
 

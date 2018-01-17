@@ -21,6 +21,14 @@
             {
                 "type": "0",
                 "name": "Create Non Mesh Nodes"
+            },
+            {
+                "type": "0",
+                "name": "Create Materials"
+            },
+            {
+                "type": "0",
+                "name": "Detect Clones"
             }
         ],
         "portsOut": [

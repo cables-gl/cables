@@ -1,5 +1,5 @@
 {
-    "updated": 1513979739117,
+    "updated": 1516016702821,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "11a31a88-eae5-4af1-9c29-991e78d07ce2",
@@ -34,11 +34,19 @@
             },
             {
                 "type": "0",
+                "name": "Num Bones"
+            },
+            {
+                "type": "0",
                 "name": "Num Animations"
             },
             {
                 "type": "0",
-                "name": "Num Bones"
+                "name": "Num Anim Channels"
+            },
+            {
+                "type": "0",
+                "name": "Anim Duration"
             }
         ],
         "name": "Ops.Json3d.SceneInfo"

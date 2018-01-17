@@ -1,6 +1,6 @@
 
 var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
-var inSpecular=op.inValueSlider("Specular",0.5);
+
 
 var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -37,7 +37,7 @@ var inColorize=op.inValueBool("Colorize Texture",false);
 var inDoubleSided=op.inValueBool("Double Sided",false);
 
 
-inSpecular.uniform=new CGL.Uniform(shader,'f','specular',inSpecular);
+
 inFesnel.uniform=new CGL.Uniform(shader,'f','fresnel',inFesnel);
 inShininess.uniform=new CGL.Uniform(shader,'f','specShininess',inShininess);
 inSpecAmount.uniform=new CGL.Uniform(shader,'f','specAmount',inSpecAmount);
@@ -341,6 +341,16 @@ var toggleEmissive=op.inValueBool("Toggle Emissive",true);
 toggleEmissive.setUiAttribs({"hidePort":true});
 toggleEmissive.onChange=updateToggles;
 
+
+var toggleSpecular=op.inValueBool("Toggle Specular",true);
+toggleSpecular.setUiAttribs({"hidePort":true});
+toggleSpecular.onChange=updateToggles;
+
+var toggleFresnel=op.inValueBool("Toggle Fresnel",true);
+toggleFresnel.setUiAttribs({"hidePort":true});
+toggleFresnel.onChange=updateToggles;
+
+
 function updateToggles()
 {
     if(toggleLambert.get())shader.define("SHOW_LAMBERT");
@@ -363,6 +373,13 @@ function updateToggles()
 
     if(toggleEmissive.get())shader.define("SHOW_EMISSIVE");
         else shader.removeDefine("SHOW_EMISSIVE");
+
+    if(toggleFresnel.get())shader.define("ENABLE_FRESNEL");
+        else shader.removeDefine("ENABLE_FRESNEL");
+
+    if(toggleSpecular.get())shader.define("ENABLE_SPECULAR");
+        else shader.removeDefine("ENABLE_SPECULAR");
+
 
 }
 

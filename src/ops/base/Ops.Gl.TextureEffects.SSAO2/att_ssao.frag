@@ -9,6 +9,8 @@ changelog:
 (http://www.cgafaq.info/wiki/Evenly_distributed_points_on_sphere)
 
 */
+precision highp float;
+
 IN vec2 texCoord;
 
 UNI sampler2D texDepth;
@@ -50,11 +52,11 @@ const float noiseamount = 0.0002; //dithering amount
 const float diffarea = 0.4; //self-shadowing reduction
 const float gdisplace = 0.4; //gauss bell center
 
-const bool mist = false; //use mist?
-const float miststart = 0.0; //mist start
-const float mistend = 16.0; //mist end
+// const bool mist = false; //use mist?
+// const float miststart = 0.0; //mist start
+// const float mistend = 16.0; //mist end
 
-const bool onlyAO = false; //use only ambient occlusion pass?
+// const bool onlyAO = false; //use only ambient occlusion pass?
 // const float lumInfluence = 0.7; //how much luminance affects occlusion
 UNI float lumInfluence;
 
@@ -73,12 +75,12 @@ vec2 rand(vec2 coord) //generating noise/pattern texture for dithering
 	return vec2(noiseX,noiseY)*noiseamount;
 }
 
-float doMist()
-{
-	float zdepth = texture2D(texDepth,texCoord.xy).x;
-	float depth = -zfar * znear / (zdepth * (zfar - znear) - zfar);
-	return clamp((depth-miststart)/mistend,0.0,1.0);
-}
+// float doMist()
+// {
+// 	float zdepth = texture2D(texDepth,texCoord.xy).x;
+// 	float depth = -zfar * znear / (zdepth * (zfar - znear) - zfar);
+// 	return clamp((depth-miststart)/mistend,0.0,1.0);
+// }
 
 float readDepth(in vec2 coord) 
 {
@@ -100,7 +102,7 @@ float compareDepths(in float depth1, in float depth2,inout int far)
 	
 	float gauss = pow(2.7182,-2.0*(diff-gdisplace)*(diff-gdisplace)/(garea*garea));
 	return gauss;
-}   
+}
 
 float calAO(float depth,float dw, float dh)
 {   
@@ -130,7 +132,7 @@ float calAO(float depth,float dw, float dh)
 
 void main(void)
 {
-	vec2 noise = rand(texCoord); 
+	vec2 noise = rand(texCoord);
 	float depth = readDepth(texCoord);
 	
 	float w = (1.0 / width)/clamp(depth,aoclamp,1.0)+(noise.x*(1.0-noise.x));
@@ -160,10 +162,10 @@ void main(void)
 	ao /= float(SAMPLES);
 	ao = 1.0-ao;	
 	
-	if (mist)
-	{
-	ao = mix(ao, 1.0,doMist());
-	}
+// 	if (mist)
+// 	{
+// 	ao = mix(ao, 1.0,doMist());
+// 	}
 	
 	vec3 color = texture2D(tex,texCoord).rgb;
 	
@@ -173,10 +175,10 @@ void main(void)
 	
 	vec3 final = vec3(color*mix(vec3(ao),vec3(1.0),luminance*lumInfluence));//mix(color*ao, white, luminance)
 	
-	if (onlyAO)
-	{
-	final = vec3(mix(vec3(ao),vec3(1.0),luminance*lumInfluence)); //ambient occlusion only
-	}
+// 	if (onlyAO)
+// 	{
+// 	final = vec3(mix(vec3(ao),vec3(1.0),luminance*lumInfluence)); //ambient occlusion only
+// 	}
 	
 	
 	gl_FragColor = vec4(final,1.0); 

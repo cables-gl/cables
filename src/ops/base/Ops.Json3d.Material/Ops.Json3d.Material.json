@@ -1,18 +1,17 @@
 {
-    "updated": 1516189608627,
-    "author": "55d744634cdc152216eb9aad",
+    "updated": 1516189403005,
     "authorName": "pandur",
-    "id": "49f66ac2-9d65-4fc6-9b2f-bb1476073587",
-    "created": 1513758079500,
+    "id": "f2630ed5-f8aa-4e6e-9ec0-f9488aea39a1",
+    "created": 1516185450298,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "exe"
             },
             {
                 "type": "0",
-                "name": "matrix"
+                "name": "name"
             }
         ],
         "portsOut": [
@@ -21,6 +20,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Matrix.MatrixMul"
+        "name": "Ops.Json3d.Material"
     }
 }

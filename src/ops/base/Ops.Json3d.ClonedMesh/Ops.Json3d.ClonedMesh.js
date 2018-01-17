@@ -1,12 +1,11 @@
-var cgl=this.patch.cgl;
-this.name='clonedmesh';
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-// var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var geom=this.addInPort(new Port(this,"geom",OP_PORT_TYPE_OBJECT));
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var geom=op.addInPort(new Port(op,"geom",OP_PORT_TYPE_OBJECT));
+var transformations=op.addInPort(new Port(op,"transformations",OP_PORT_TYPE_VALUE));
+
+var cgl=op.patch.cgl;
 geom.ignoreValueSerialize=true;
 
-var transformations=this.addInPort(new Port(this,"transformations",OP_PORT_TYPE_VALUE));
 
 var mesh=null;
 var shader=null;

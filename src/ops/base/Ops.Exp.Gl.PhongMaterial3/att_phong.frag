@@ -9,18 +9,23 @@
 #ifdef HAS_TEXTURE_AO
     UNI sampler2D texAo;
 #endif
-
 #ifdef HAS_TEXTURE_EMISSIVE
     UNI sampler2D texEmissive;
 #endif
 
-UNI float fresnel;
-UNI float specShininess;
-UNI float specAmount;
+#ifdef ENABLE_FRESNEL
+    UNI float fresnel;
+#endif
+
+#ifdef ENABLE_SPECULAR
+    UNI float specShininess;
+    UNI float specAmount;
+#endif
 
 
-// #ifdef HAS_TEXTURE_NORMAL
+#ifdef HAS_TEXTURE_NORMAL
     UNI sampler2D texNormal;
+#endif
     UNI vec3 camPos;
     IN vec3 EyeDirection_cameraspace;
     // IN vec3 vertexPos;
@@ -38,7 +43,6 @@ IN vec3 norm;
 IN vec4 modelPos;
 IN mat3 normalMatrix;
 
-UNI float specular;
 UNI float r,g,b,a;
 
 struct Light {
@@ -65,6 +69,7 @@ float getfallOff(Light light,float distLight)
     return min(1.0,max(t, 0.0));
 }
 
+#ifdef ENABLE_FRESNEL
 float calcFresnel(vec3 direction, vec3 normal)
 {
     vec3 nDirection = normalize( direction );
@@ -77,14 +82,17 @@ float calcFresnel(vec3 direction, vec3 normal)
 
     return factor;
 }
+#endif
 
-float phongSpecular( vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, float shininess)
-{
-    vec3 R = reflect(lightDirection, surfaceNormal);
-    float r= pow(max(0.0, dot(viewDirection, R)), shininess);
-
-    return r;
-}
+#ifdef ENABLE_SPECULAR
+    float phongSpecular( vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, float shininess)
+    {
+        vec3 R = reflect(lightDirection, surfaceNormal);
+        float r= pow(max(0.0, dot(viewDirection, R)), shininess);
+    
+        return r;
+    }
+#endif
 
 void main()
 {
@@ -111,7 +119,6 @@ void main()
         Light light=lights[l];
 
         vec3 lightVector = normalize( light.pos);
-
 
         vec3 lightModelDiff=light.pos - modelPos.xyz;
         vec3 lightDir = normalize(lightModelDiff);
@@ -172,7 +179,9 @@ void main()
             col=vec3(r,g,b);
         #endif
 
-        specular+=specAmount*phongSpecular(lightVector,-eyevector,normal, pow(1.0-(specShininess+0.1)*0.7,5.0)*1000.0);
+        #ifdef ENABLE_SPECULAR
+            specular+=specAmount*phongSpecular(lightVector,-eyevector,normal, pow(1.0-(specShininess+0.1)*0.7,5.0)*1000.0);
+        #endif
 
         col+=vec3(light.ambient);
 
@@ -230,7 +239,10 @@ void main()
     #endif
 
     vec3 vNormal = normalize(normalMatrix * normal);
+    
+    #ifdef ENABLE_FRESNEL
     col+=vec3(r,g,b)*(calcFresnel(mvPos,vNormal)*fresnel*5.0);
+    #endif
 
     #ifdef SHOW_EMISSIVE
         #ifdef HAS_TEXTURE_EMISSIVE
@@ -238,8 +250,9 @@ void main()
         #endif
     #endif
 
-
+    #ifdef ENABLE_SPECULAR
     col+=vec3(specular);
+    #endif
 
 
 // if(alpha>0.1)alpha=1.0;

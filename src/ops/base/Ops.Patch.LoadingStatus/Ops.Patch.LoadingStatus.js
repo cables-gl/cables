@@ -33,7 +33,7 @@ var preRenderAnimFrame=function(t)
     preRenderStatus.set(prerenderCount/(preRenderTimeFrames.anim.keys.length-1));
     
     self.patch.timer.setTime(time);
-    console.log('prerender',time,prerenderCount,preRenderTimeFrames.anim.keys.length);
+    // console.log('prerender',time,prerenderCount,preRenderTimeFrames.anim.keys.length);
     
     // cgl.renderStart(cgl,identTranslate);
     cgl.renderStart(cgl,identTranslate,identTranslateView);
@@ -68,7 +68,7 @@ this.onLoaded=function()
 
     preRenderTimes.push(1);
     
-    console.log('prerender steps:',preRenderTimes);
+    // console.log('prerender steps:',preRenderTimes);
 };
 
 function checkPreRender()
@@ -76,7 +76,7 @@ function checkPreRender()
     if(patch.loading.getProgress()>=1.0)
     {
         
-        console.log(' checkprerender ',preRenderTimes.length);
+        // console.log(' checkprerender ',preRenderTimes.length);
 
         if(preRenderTimeFrames.anim && prerenderCount>=preRenderTimeFrames.anim.keys.length)
         {

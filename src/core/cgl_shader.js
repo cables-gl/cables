@@ -452,11 +452,12 @@ CGL.Shader = function(_cgl, _name) {
         }
 
         cgl.gl.linkProgram(program);
+        cgl.gl.validateProgram(program);
 
-        var infoLog = cgl.gl.getProgramInfoLog(program);
-        if (infoLog) {
-            // console.log(name+' link programinfo: ',cgl.gl.getProgramInfoLog(program));
-        }
+        // var infoLog = cgl.gl.getProgramInfoLog(program);
+        // if (infoLog) {
+        //     // console.log(name+' link programinfo: ',cgl.gl.getProgramInfoLog(program));
+        // }
 
         if (!cgl.gl.getProgramParameter(program, cgl.gl.LINK_STATUS)) {
             console.error(name + " shader linking fail...");

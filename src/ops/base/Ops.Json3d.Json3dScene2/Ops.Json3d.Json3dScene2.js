@@ -1,48 +1,45 @@
 
-var cgl=this.patch.cgl;
-
-var scene=new CABLES.Variable();
-
-cgl.frameStore.currentScene=null;
-
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
+var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var doCreate=op.inFunctionButton("Create Nodes");
 
 var createNonMesh=op.inValueBool("Create Non Mesh Nodes");
 var createMaterials=op.inValueBool("Create Materials",true);
+var detectClones=op.inValueBool("Detect Clones",true);
+
+var cgl=op.patch.cgl;
+
+var scene=new CABLES.Variable();
+
+cgl.frameStore.currentScene=null;
 
 doCreate.onTriggered=createNodes;
 
 var defaultEasing=CABLES.TL.EASING_LINEAR;
-// var rootMatrix=mat4.create();
 
 var skipFrames=1;
 var frameNum=0;
 var cloneTransformStore=[];
 var data=null;
 filename.onChange=reload;
+op.exe.onTriggered=render;
 
 function render()
 {
     var oldScene=cgl.frameStore.currentScene;
     cgl.frameStore.currentScene=scene;
-    if(cgl.frameStore.currentScene.materials)cgl.frameStore.currentScene.materials.length=0;// cgl.frameStore.currentScene.materials=[];
+    if(cgl.frameStore.currentScene.materials)cgl.frameStore.currentScene.materials.length=0;
 
     cgl.frameStore.cloneTransforms=cloneTransformStore;
     
     cgl.pushModelMatrix();
-    // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,rootMatrix);
-    // mat4.scale(cgl.mvMatrix,cgl.mvMatrix,[0.01,0.01,0.01]);
     trigger.trigger();
     cgl.popModelMatrix();
     
     cgl.frameStore.currentScene=oldScene;
 }
-
-this.exe.onTriggered=render;
 
 var setPortAnimated=function(p, doLerp)
 {
@@ -52,10 +49,9 @@ var setPortAnimated=function(p, doLerp)
 
 function loadMaterials(data,root)
 {
-    var posyAdd=op.uiAttribs.translate.y+200;
-
     if(data.materials)
     {
+        var lastSetMatop=null;
         for(var i in data.materials)
         {
             var jsonMat=data.materials[i];
@@ -69,32 +65,31 @@ function loadMaterials(data,root)
                 }
             }
 
-
             for(var j in jsonMat.properties)
             {
                 if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
                 {
-                    posyAdd+=100;
-                    setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch,"translate":{x:op.uiAttribs.translate.x+300,y:posyAdd+50}});
-                    
+                    setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch});
+
                     setMatOp.getPort('name').set(matName);
                     setMatOp.name='Set Material '+matName;
-                    op.patch.link(root,'trigger 0',setMatOp,'exe');
 
-                    var matOp=op.patch.addOp('Ops.Gl.Phong.PhongMaterial',{"subPatch":op.uiAttribs.subPatch,"translate":{x:op.uiAttribs.translate.x+350,y:posyAdd}});
+                    var matOp=op.patch.addOp('Ops.Gl.Phong.PhongMaterial',{"subPatch":op.uiAttribs.subPatch});
                     matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
                     matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
                     matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
-                    matOp.uiAttribs.title=matOp.name='Material '+matName;
+                    matOp.uiAttribs.title=matOp.name=''+matName;
 
                     op.patch.link(setMatOp,'material',matOp,'shader');
-                    op.patch.link(root,'trigger 0',matOp,'render');
+                    op.patch.link(setMatOp,'exe',matOp,'trigger');
 
+                    if(lastSetMatop) op.patch.link(lastSetMatop,'trigger',matOp,'render');
+                        else  op.patch.link(root,'trigger 0',matOp,'render');
+
+                    lastSetMatop=setMatOp;
                     prevOp=matOp;
-
                 }
             }
-
         }
     }
 }
@@ -118,12 +113,11 @@ var loadCameras=function(data,seq)
                 mat4.transpose(cam.transformation,cam.transformation);
 
                 // guess camera target (...)
-            
                 for(var j=0;j<root.children.length;j++)
                 {
                     if(root.children[j].name == root.children[i].name+'_Target')
                     {
-                        console.log("FOund cameratarget!");
+                        console.log("Found cameratarget!");
                         cam.target=root.children[i];
                         root.children.splice(j,1);
                         root.children.splice(i,1);
@@ -307,10 +301,7 @@ var row=0;
 function hasMeshChildNode(n)
 {
     if(createNonMesh.get())return true;
-    
     if(n.meshes && n.meshes.length>0)return true;
-    
-    // if(n.children[0].meshes && n.children[0].meshes.length>0)return true;
     if(n.hasOwnProperty('children'))
     {
         for(var i=0;i<n.children.length;i++)
@@ -327,151 +318,96 @@ function hasMeshChildNode(n)
     return false;
 }
 
-
-
 function addChild(data,x,y,parentOp,parentPort,ch)
 {
     if(ch.hasOwnProperty('transformation'))
     {
         maxx=Math.max(x,maxx)+1;
-
-        var posx=op.uiAttribs.translate.x+x*130;
-        // if(ch.children && ch.children.length>1) posx=posx+(ch.children.length+1)*130/2;// center
-        var posy=op.uiAttribs.translate.y+y*50;
-
-        // if(ch.children)console.log('ch ',ch.name,ch.children.length);
-
         var prevOp=null;
-        var posyAdd=0;
 
+        if(data.hasOwnProperty('animations'))
         {
-            // animation
-
-            if(data.hasOwnProperty('animations'))
+            var an=dataGetAnimation(data,ch.name);
+            if(an)
             {
-                var an=dataGetAnimation(data,ch.name);
-                if(an)
+                if(an.positionkeys && an.positionkeys.length>0)
                 {
+                    var anTransOp=op.patch.addOp('Ops.Json3d.TranslateChannel',{"subPatch":op.uiAttribs.subPatch});
+                    anTransOp.uiAttribs.title=anTransOp.name=ch.name+' trans anim';
+                    anTransOp.getPort('channel').set( ch.name );
+                    op.patch.link(prevOp,'trigger',anTransOp,'render');
 
+                    if(!prevOp)op.patch.link(parentOp,parentPort,anTransOp,'render');
+                    prevOp=anTransOp;
+                }
 
-                    if(an.positionkeys && an.positionkeys.length>0)
-                    {
-                        posyAdd+=50;
-                        var anTransOp=op.patch.addOp('Ops.Json3d.TranslateChannel',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
-                        anTransOp.uiAttribs.title=anTransOp.name=ch.name+' trans anim';
-                        anTransOp.getPort('channel').set( ch.name );
-                        op.patch.link(prevOp,'trigger',anTransOp,'render');
+                if(an.scalingkeys && an.scalingkeys.length>0)
+                {
+                    var anScaleOp=op.patch.addOp('Ops.Json3d.ScaleChannel',{"subPatch":op.uiAttribs.subPatch});
+                    anScaleOp.uiAttribs.title=anScaleOp.name=ch.name+' scale anim';
+                    anScaleOp.getPort('channel').set( ch.name );
+                    op.patch.link(prevOp,'trigger',anScaleOp,'render');
 
-                        if(!prevOp)op.patch.link(parentOp,parentPort,anTransOp,'render');
-                        prevOp=anTransOp;
+                    if(!prevOp)op.patch.link(parentOp,parentPort,anScaleOp,'render');
+                    prevOp=anScaleOp;
+                }
 
-                        // setPortAnimated(anTransOp.getPort('posX'),true);
-                        // setPortAnimated(anTransOp.getPort('posY'),true);
-                        // setPortAnimated(anTransOp.getPort('posZ'),true);
+                if(an.rotationkeys && an.rotationkeys.length>0)
+                {
+                    var anRotOp=op.patch.addOp('Ops.Json3d.QuaternionChannel',{"subPatch":op.uiAttribs.subPatch});
+                    anRotOp.uiAttribs.title=anRotOp.name=ch.name+' quat rot anim';
+                    anRotOp.getPort('channel').set( ch.name );
+                    op.patch.link(prevOp,'trigger',anRotOp,'render');
 
-                        // frameNum=skipFrames;
-                        // for(var k in an.positionkeys)
-                        // {
-                        //     if(frameNum%skipFrames==0)
-                        //     {
-                        //         anTransOp.getPort('posX').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][0] );
-                        //         anTransOp.getPort('posY').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][1] );
-                        //         anTransOp.getPort('posZ').anim.setValue( an.positionkeys[k][0],an.positionkeys[k][1][2] );
-                        //     }
-                        //     frameNum++;
-                        // }
-                    }
-
-
-                    if(an.scalingkeys && an.scalingkeys.length>0)
-                    {
-                        posyAdd+=50;
-                        var anScaleOp=op.patch.addOp('Ops.Json3d.ScaleChannel',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
-                        anScaleOp.uiAttribs.title=anScaleOp.name=ch.name+' scale anim';
-                        anScaleOp.getPort('channel').set( ch.name );
-                        op.patch.link(prevOp,'trigger',anScaleOp,'render');
-
-                        if(!prevOp)op.patch.link(parentOp,parentPort,anScaleOp,'render');
-                        prevOp=anScaleOp;
-                    }
-
-                    if(an.rotationkeys && an.rotationkeys.length>0)
-                    {
-                        // posyAdd+=50;
-                        // var anRotOp=op.patch.addOp('Ops.Gl.Matrix.Quaternion',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
-                        // anRotOp.uiAttribs.title=anRotOp.name=ch.name+' quat rot anim';
-                        // op.patch.link(prevOp,'trigger',anRotOp,'render');
-
-                        // if(!prevOp)op.patch.link(parentOp,parentPort,anRotOp,'render');
-                        // prevOp=anRotOp;
-
-                        // anRotOp.getPort('x').setAnimated(true);
-                        // anRotOp.getPort('y').setAnimated(true);
-                        // anRotOp.getPort('z').setAnimated(true);
-                        // anRotOp.getPort('w').setAnimated(true);
-
-                        // frameNum=skipFrames;
-                        // for(var k in an.rotationkeys)
-                        // {
-                        //     if(frameNum%skipFrames==0)
-                        //     {
-                        //         anRotOp.getPort('x').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][1] );
-                        //         anRotOp.getPort('y').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][2] );
-                        //         anRotOp.getPort('z').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][3] );
-                        //         anRotOp.getPort('w').anim.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
-                        //     }
-                        //     frameNum++;
-                        // }
-                        posyAdd+=50;
-                        var anRotOp=op.patch.addOp('Ops.Json3d.QuaternionChannel',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
-                        anRotOp.uiAttribs.title=anRotOp.name=ch.name+' quat rot anim';
-                        anRotOp.getPort('channel').set( ch.name );
-                        op.patch.link(prevOp,'trigger',anRotOp,'render');
-
-                        if(!prevOp)op.patch.link(parentOp,parentPort,anRotOp,'render');
-                        prevOp=anRotOp;
-                    }
+                    if(!prevOp)op.patch.link(parentOp,parentPort,anRotOp,'render');
+                    prevOp=anRotOp;
                 }
             }
         }
 
-        var sameMesh=true;
-        if(ch.hasOwnProperty('children'))
+        var sameMesh=false;
+        
+        if(detectClones.get())
         {
-            // test if children are all same mesh...
-
-            var cloneTransforms=[];
-            if(ch.children.length>1 && ch.children[0].meshes && ch.children[0].meshes.length>0)
+            sameMesh=true;
+            
+            if(ch.hasOwnProperty('children'))
             {
-                for(i=0;i<ch.children.length;i++)
+                // test if children are all same mesh...
+    
+                var cloneTransforms=[];
+                if(ch.children.length>1 && ch.children[0].meshes && ch.children[0].meshes.length>0)
                 {
-                    if(i>0 && ch.children[i].meshes)
+                    for(i=0;i<ch.children.length;i++)
                     {
-                        if(ch.children[0].meshes && ch.children[i].meshes && ch.children[i].meshes.length==ch.children[0].meshes.length)
+                        if(i>0 && ch.children[i].meshes)
                         {
-                            if(ch.children[i].meshes[0]==ch.children[0].meshes[0])
+                            if(ch.children[0].meshes && ch.children[i].meshes && ch.children[i].meshes.length==ch.children[0].meshes.length)
                             {
-
+                                if(ch.children[i].meshes[0]==ch.children[0].meshes[0])
+                                {
+    
+                                } else { sameMesh=false; }
                             } else { sameMesh=false; }
-                        } else { sameMesh=false; }
-                    } //else { console.log(3); sameMesh=false; }
-
-                    if(sameMesh)
-                    {
-                        if(!ch.children[i].transposed)
-                        {
-                            mat4.transpose(ch.children[i].transformation,ch.children[i].transformation);
-                            ch.children[i].transposed=true;
                         }
-                        cloneTransforms.push(ch.children[i].transformation);
+    
+                        if(sameMesh)
+                        {
+                            if(!ch.children[i].transposed)
+                            {
+                                mat4.transpose(ch.children[i].transformation,ch.children[i].transformation);
+                                ch.children[i].transposed=true;
+                            }
+                            cloneTransforms.push(ch.children[i].transformation);
+                        }
                     }
-                }
+                } else { sameMesh=false; }
             } else { sameMesh=false; }
-        } else { sameMesh=false; }
+        }
 
         if(!prevOp )
         {
-            var transOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy}});
+            var transOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":op.uiAttribs.subPatch});
 
             if(!ch.transposed)
             {
@@ -483,7 +419,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
             prevOp=transOp;
 
             op.patch.link(parentOp,parentPort,prevOp,'render');
-            if(ch.name) transOp.uiAttribs.title=transOp.name=ch.name+' transform';
+            if(ch.name) transOp.uiAttribs.title=transOp.name=ch.name+'';
         }
 
 
@@ -522,8 +458,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
                     if(createMaterials.get())
                     {
-                        posyAdd+=50;
-                        var matOp=op.patch.addOp('Ops.Json3d.Material',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
+                        var matOp=op.patch.addOp('Ops.Json3d.Material',{"subPatch":op.uiAttribs.subPatch});
                         op.patch.link(prevOp,'trigger',matOp,'exe');
                         prevOp=matOp;
     
@@ -536,10 +471,9 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 if(!sameMesh)
                 {
                     // mesh
-                    posyAdd+=50;
-                    var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
+                    var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":op.uiAttribs.subPatch});
                     meshOp.index.val=index;
-                    meshOp.uiAttribs.title=meshOp.name=ch.name+' Mesh';
+                    meshOp.uiAttribs.title=meshOp.name=ch.name+'';
 
                     op.patch.link(prevOp,'trigger',meshOp,'render');
                 }
@@ -553,9 +487,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
             if(sameMesh)
             {
-                posyAdd+=50;
-
-                var clonedOp=op.patch.addOp('Ops.Json3d.ClonedMesh',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
+                var clonedOp=op.patch.addOp('Ops.Json3d.ClonedMesh',{"subPatch":op.uiAttribs.subPatch});
 
                 clonedOp.getPort('transformations').set(cloneTransforms);
 
@@ -563,11 +495,8 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 console.log(cloneTransformStore.length+' cloneTransformStore !!!');
 
                 op.patch.link(prevOp,'trigger',clonedOp,'render');
-                // op.patch.link(parentOp,parentPort,prevOp,'render');
 
-                posyAdd+=50;
-
-                var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":op.uiAttribs.subPatch,"translate":{x:posx,y:posy+posyAdd}});
+                var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":op.uiAttribs.subPatch});
                 meshOp.index.val=ch.children[0].meshes[0];
                 meshOp.uiAttribs.title=meshOp.name='clone '+ch.name+' Mesh';
                 meshOp.getPort('draw').set(false);
@@ -628,7 +557,6 @@ function reload()
                 }
                 scene.setValue(data);
 
-                // render();
                 op.patch.loading.finished(loadingId);
                 if(CABLES.UI) gui.jobs().finish('loading3d'+loadingId);
             });
@@ -652,14 +580,11 @@ function createNodes()
 
         op.patch.link(op,'trigger',rootMatrixOp,'render');
 
-
-
         var root=op.patch.addOp('Ops.Sequence',{"subPatch":op.uiAttribs.subPatch,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+150}});
         var camOp=loadCameras(data,root);
     
         if(camOp) op.patch.link(camOp,'trigger',root,'exe');
             else op.patch.link(rootMatrixOp,'trigger',root,'exe');
-    
 
         if(createMaterials.get()) loadMaterials(data,root);
     
@@ -667,12 +592,22 @@ function createNodes()
         {
             if(data.rootnode.children[i])
             {
-                var ntrigger=i+1;
+                var ntrigger=i+2;
                 if(ntrigger>9)ntrigger=9;
                 
                 if( hasMeshChildNode( data.rootnode.children[i] ))
                     addChild( data,maxx-2,3,root,'trigger '+ntrigger,data.rootnode.children[i] );
             }
+        }
+        
+        if(CABLES.UI)
+        {
+            setTimeout(function()
+            {
+                gui.patch().setSelectedOpById(op.id);
+                CABLES.CMD.PATCH.tidyChildOps();
+            },100);
+            
         }
     }
 }

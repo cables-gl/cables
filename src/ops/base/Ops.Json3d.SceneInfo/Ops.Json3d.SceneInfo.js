@@ -4,15 +4,16 @@ var next=op.outFunction("Next");
 var numNodes=op.outValue("Num Nodes");
 var numMaterials=op.outValue("Num Materials");
 var numMeshes=op.outValue("Num Meshes");
-var numAnims=op.outValue("Num Animations");
 var numBones=op.outValue("Num Bones");
+
+var numAnims=op.outValue("Num Animations");
+var numAnimsChannels=op.outValue("Num Anim Channels");
+var outDuration=op.outValue("Anim Duration");
 
 
 var inDump=op.inFunctionButton("Dump Console");
 
 var cgl=op.patch.cgl;
-
-
 
 inDump.onTriggered=function()
 {
@@ -57,23 +58,31 @@ render.onTriggered=function()
 {
     if(cgl.frameStore.currentScene)
     {
-    scene=cgl.frameStore.currentScene.getValue();
+        scene=cgl.frameStore.currentScene.getValue();
 
-    if(scene)
-    {
-        // console.log(scene);
-        if(scene.animations)numAnims.set(scene.animations.length);
-        if(scene.materials)numMaterials.set(scene.materials.length);
-        if(scene.meshes)numMeshes.set(scene.meshes.length);
-
-        var bones=findBoneChilds(scene.rootnode,0);
-        numBones.set(bones);
-        
-        numNodes.set( countNodes(scene.rootnode,0) );
-    }
+        if(scene)
+        {
+            if(scene.animations)numAnims.set(scene.animations.length);
+            if(scene.animations)
+            {
+                var num=0;
+                for(var i=0;i<scene.animations.length;i++)
+                {
+                    num+=scene.animations[i].channels.length||0;
+                }
+                numAnimsChannels.set(num);
+            }
+            if(scene.materials)numMaterials.set(scene.materials.length);
+            if(scene.meshes)numMeshes.set(scene.meshes.length);
     
-          
+            if(scene.animations && scene.animations[0].duration)outDuration.set(scene.animations[0].duration);
+    
+            var bones=findBoneChilds(scene.rootnode,0);
+            numBones.set(bones);
+            
+            numNodes.set( countNodes(scene.rootnode,0) );
+        }
     }
-  next.trigger();
-
+    next.trigger();
 };
+
