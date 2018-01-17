@@ -13,6 +13,10 @@ UNI float repeatX;
 UNI float repeatY;
 UNI float opacity;
 
+UNI float r;
+UNI float g;
+UNI float b;
+
 IN vec3 e;
 
 #ifdef HAS_DIFFUSE_TEXTURE
@@ -135,6 +139,9 @@ void main()
     #ifdef HAS_DIFFUSE_TEXTURE
         col = col*texture2D( texDiffuse, vec2(texCoords.x*repeatX,texCoords.y*repeatY));
     #endif
+        col.r*=r;
+        col.g*=g;
+        col.b*=b;
 
     #ifdef HAS_AO_TEXTURE
         col = col*

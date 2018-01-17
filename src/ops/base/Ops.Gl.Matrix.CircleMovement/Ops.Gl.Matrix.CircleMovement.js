@@ -67,6 +67,7 @@ function calc()
 
     for (i=0; i <= Math.round(segments.get()); i++)
     {
+        index.set(i);
         degInRad = (360/Math.round(segments.get()))*i*CGL.DEG2RAD;
         animX.setValue(i*0.1,Math.cos(degInRad));
         animY.setValue(i*0.1,Math.sin(degInRad));

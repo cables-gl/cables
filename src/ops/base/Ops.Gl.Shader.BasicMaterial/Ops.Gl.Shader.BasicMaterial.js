@@ -84,7 +84,7 @@ function doRender()
     
     var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.set(Math.random());
-    r.uniform=new CGL.Uniform(shader,'f','b',b);
+    b.uniform=new CGL.Uniform(shader,'f','b',b);
     
     var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range'}));
     a.uniform=new CGL.Uniform(shader,'f','a',a);

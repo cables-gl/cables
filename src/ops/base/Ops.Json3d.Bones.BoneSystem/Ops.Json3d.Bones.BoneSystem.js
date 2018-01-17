@@ -57,7 +57,8 @@ function findBoneChilds(n,parent,foundBone)
     }
 
     var time=op.patch.timer.getTime();
-    if(inTime.isLinked())time=inTime.get();
+    if(inTime.get()!==0)time=inTime.get();
+    
 
     cgl.pushModelMatrix();
 

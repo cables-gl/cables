@@ -7,6 +7,16 @@ var textureNormal=op.inTexture('Normal');
 var textureSpec=op.inTexture('Specular');
 var textureSpecMatCap=op.inTexture('Specular MatCap');
 var textureAo=op.inTexture('AO Texture');
+
+
+
+{
+    // rgba colors
+    var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' })); r.set(1);
+    var g=op.inValueSlider('g',1);
+    var b=op.inValueSlider('b',1);
+}
+
 var aoIntensity=op.inValueSlider("AO Intensity",1.0);
 var repeatX=op.inValue("Repeat X",1);
 var repeatY=op.inValue("Repeat Y",1);
@@ -38,6 +48,10 @@ var textureAoUniform=null;
 var repeatXUniform=new CGL.Uniform(shader,'f','repeatX',repeatX);
 var repeatYUniform=new CGL.Uniform(shader,'f','repeatY',repeatY);
 var aoIntensityUniform=new CGL.Uniform(shader,'f','aoIntensity',aoIntensity);
+b.uniform=new CGL.Uniform(shader,'f','b',b);
+g.uniform=new CGL.Uniform(shader,'f','g',g);
+r.uniform=new CGL.Uniform(shader,'f','r',r);
+
 
 
 calcTangents.onChange=updateCalcTangent;
