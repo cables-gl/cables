@@ -134,6 +134,7 @@ render.onTriggered=function()
         moduleVert=shader.addModule(
             {
                 title:op.objName,
+                priority:-1,
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:attachments.skin_head_vert||'',
                 srcBodyVert:attachments.skin_vert||''

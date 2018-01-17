@@ -199,6 +199,21 @@ CABLES.Op = function()
              console.log('out: '+this.portsOut[ipo].getName());
     };
 
+    CABLES.Op.prototype.getOutChilds=function()
+    {
+        var childs=[];
+        for(var ipo in this.portsOut)
+        {
+            for(var l in this.portsOut[ipo].links)
+            {
+                if(this.portsOut[ipo].type==OP_PORT_TYPE_FUNCTION)
+                    childs.push(this.portsOut[ipo].links[l].portIn.parent);
+            }
+        }
+        return childs;
+
+    };
+
     CABLES.Op.prototype.markChilds=function()
     {
         this.marked=true;

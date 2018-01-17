@@ -11,8 +11,6 @@ var m=mat4.create();
 matrix.onChange=function()
 {
     m.set(matrix.get());
-    console.log(matrix.get());
-    
 };
 
 render.onTriggered=function()

@@ -18,7 +18,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     var texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":options.isFloatingPointTexture,
-            "filter":CGL.Texture.FILTER_LINEAR,
+            "filter":CGL.Texture.FILTER_NEAREST,
             "wrap":CGL.Texture.CLAMP_TO_EDGE
         });
 
@@ -74,10 +74,16 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
         if(depthTextureExt)
         {
+
+
+            // if(this._cgl.gl.getExtension('OES_texture_half_float'))
+            // {
+            //     console.log("halt float");HALF_FLOAT_OES
+            // }
             cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
             cgl.gl.framebufferTexture2D(
                 cgl.gl.FRAMEBUFFER,
-                cgl.gl.DEPTH_ATTACHMENT16,
+                cgl.gl.DEPTH_ATTACHMENT, // safari needs DEPTH_ATTACHMENT NOT DEPTH_ATTACHMENT16
                 //cgl.gl.DEPTH_COMPONENT16,
                 cgl.gl.TEXTURE_2D,
                 textureDepth.tex,

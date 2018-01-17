@@ -38,12 +38,11 @@ CGL.Texture=function(__cgl,options)
     else
     {
         options=
-        {
-            width:CGL.DEFAULT_TEXTURE_SIZE,
-            height:CGL.DEFAULT_TEXTURE_SIZE
-        };
+            {
+                width:CGL.DEFAULT_TEXTURE_SIZE,
+                height:CGL.DEFAULT_TEXTURE_SIZE
+            };
     }
-
 
     this.setSize(options.width, options.height);
         // else this.setSize(CGL.DEFAULT_TEXTURE_SIZE,CGL.DEFAULT_TEXTURE_SIZE);
@@ -86,8 +85,6 @@ CGL.Texture.prototype.clone=function()
     return newTex;
 };
 
-
-
 CGL.Texture.prototype.setSize=function(w,h)
 {
     if(w!=w || w<=0 || !w)w=CGL.DEFAULT_TEXTURE_SIZE;
@@ -102,7 +99,6 @@ CGL.Texture.prototype.setSize=function(w,h)
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     CGL.profileTextureResize++;
 
-
     var uarr=null;
 
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
@@ -112,23 +108,39 @@ CGL.Texture.prototype.setSize=function(w,h)
 
     this._setFilter();
 
-
-
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
     {
         if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no floating point texture extension";
 
         if(this._cgl.glVersion==1)
-            this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+            this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_SHORT, null);
         else
             this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
     }
     else
     if(this.textureType==CGL.Texture.TYPE_DEPTH)
     {
-        var tcomp=this._cgl.gl.DEPTH_COMPONENT;
-        if(this._cgl.glVersion!=1) tcomp=this._cgl.gl.DEPTH_COMPONENT32F;
-        this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
+
+        if(this._cgl.glVersion==1)
+        {
+            // if(this._cgl.gl.getExtension('OES_texture_half_float'))
+            // {
+            //     console.log("is half float");
+            //     var tcomp=this._cgl.gl.DEPTH_COMPONENT;
+            //     this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.HALD_FLOAT_OES, null);
+            // }
+            // else
+            {
+                var tcomp=this._cgl.gl.DEPTH_COMPONENT;
+                this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
+            }
+        }
+        else
+        {
+            var tcomp=this._cgl.gl.DEPTH_COMPONENT32F;
+            this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
+        }
+        
     }
     else
     {
@@ -141,22 +153,16 @@ CGL.Texture.prototype.setSize=function(w,h)
     }
     this._cgl.gl.bindTexture(this.texTarget, null);
 
-
-    // this._cgl.printError("tex create");
 };
 
 CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 {
-    // this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     this.filter=filter;
     this.wrap=wrap;
     this.width=w;
     this.height=h;
     this._fromData=true;
-
-
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
-    // this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
 
     this._setFilter();
@@ -265,9 +271,7 @@ CGL.Texture.prototype._setFilter=function()
         console.log("shadowmap tex");
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_MODE, this._cgl.gl.COMPARE_REF_TO_TEXTURE);
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_FUNC, this._cgl.gl.LEQUAL);
-    
     }
-    
 
     if( this._cgl.glVersion==1 && !this.isPowerOfTwo() )
     {

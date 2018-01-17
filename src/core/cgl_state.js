@@ -163,7 +163,6 @@ CGL.State = function() {
             
             for (var i = 0; i < cbResize.length; i++) cbResize[i]();
         }
-
     };
 
     // shader stack
@@ -347,9 +346,7 @@ CGL.State = function() {
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
             console.log("gl error: ", str, error, errStr);
-
         }
-
     };
 
 

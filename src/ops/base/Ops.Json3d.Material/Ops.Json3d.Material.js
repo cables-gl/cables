@@ -1,4 +1,4 @@
-op.name="Ops.Json3d.Material";
+op.name="Material";
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 // var matName=op.addInPort(new Port(op,"name",OP_PORT_TYPE_VALUE,{'type':'string'}));

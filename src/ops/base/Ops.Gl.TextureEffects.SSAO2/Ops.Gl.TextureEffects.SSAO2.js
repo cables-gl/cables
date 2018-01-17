@@ -1,4 +1,3 @@
-op.name="SSAO2";
 
 var render=op.inFunction("render");
 var trigger=op.outFunction("trigger");
@@ -21,17 +20,12 @@ var lumInfluence=op.inValueSlider("Luminance Influence",0.7);
 // UNI float aoClamp;
 // const float aoclamp = 0.25; //depth clamp - reduces haloing at screen edges
 
-
-
-
-
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.ssao_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureAlpha=new CGL.Uniform(shader,'t','texDepth',1);
-
 
 aoRadius.uniform=new CGL.Uniform(shader,'f','radius',aoRadius);
 aoClamp.uniform=new CGL.Uniform(shader,'f','aoclamp',aoClamp);
@@ -56,7 +50,8 @@ aoClamp.uniform=new CGL.Uniform(shader,'f','aoclamp',aoClamp);
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
-
+    if(!depth.get())return;
+    
     uniWidth.setValue( depth.get().width );
     uniHeight.setValue( depth.get().height );
 

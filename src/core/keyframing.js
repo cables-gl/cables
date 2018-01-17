@@ -701,7 +701,7 @@ CABLES.TL.Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
     }
 
     var i1=animx.getKeyIndex(time);
-    var i2=parseInt(animx.getKeyIndex(time))+1;
+    var i2=i1+1;
     if(i2>=animx.keys.length)i2=animx.keys.length-1;
 
     if(i1==i2)
