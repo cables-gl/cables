@@ -1,4 +1,8 @@
 {
+    "updated": 1516277058715,
+    "authorName": "pandur",
+    "id": "85846539-6ef7-46ba-aaf5-156bb6f49b87",
+    "created": 1516276730775,
     "layout": {
         "portsIn": [
             {
@@ -15,31 +19,7 @@
             },
             {
                 "type": "0",
-                "name": "Amount"
-            },
-            {
-                "type": "0",
-                "name": "Falloff"
-            },
-            {
-                "type": "0",
                 "name": "Invert"
-            },
-            {
-                "type": "0",
-                "name": "r"
-            },
-            {
-                "type": "0",
-                "name": "g"
-            },
-            {
-                "type": "0",
-                "name": "b"
-            },
-            {
-                "type": "0",
-                "name": "Blend "
             },
             {
                 "type": "0",
@@ -64,12 +44,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.ColorArea"
-    },
-    "summary": "colorize all meshes around x,y,z",
-    "updated": 1516275541584,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "cac6a739-c2ad-440c-99b2-33e2c459e8b1",
-    "created": 1505483732513
+        "name": "Ops.Gl.ShaderEffects.AreaDiscardPixel"
+    }
 }

@@ -7,24 +7,8 @@ op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
 
 var inSize=op.inValue("Size",1);
-var inAmount=op.inValueSlider("Amount",0.5);
 
-var inFalloff=op.inValueSlider("Falloff",0);
 var inInvert=op.inValueBool("Invert");
-
-{
-    // rgba colors
-    var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-    r.set(Math.random());
-    
-    var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range'}));
-    g.set(Math.random());
-    
-    var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.set(Math.random());
-}
-
-var inBlend=op.inValueSelect("Blend ",["Normal","Multiply"],"Normal");
 
 
 {
@@ -58,18 +42,7 @@ op.render.onLinkChanged=removeModule;
 inWorldSpace.onChange=updateWorldspace;
 inArea.onChange=updateArea;
 inInvert.onChange=updateInvert;
-inBlend.onChange=updateBlend;
 
-function updateBlend()
-{
-    if(!shader)return;
-    
-    shader.removeDefine(moduleVert.prefix+"BLEND_NORMAL");
-    shader.removeDefine(moduleVert.prefix+"BLEND_MULTIPLY");
-    
-    if(inBlend.get()=="Normal") shader.define(moduleVert.prefix+"BLEND_NORMAL");
-        else shader.define(moduleVert.prefix+"BLEND_MULTIPLY");
-}
 
 
 function updateInvert()
@@ -154,26 +127,19 @@ op.render.onTriggered=function()
             {
                 title:op.objName,
                 name:'MODULE_COLOR',
-                srcHeadFrag:attachments.colorarea_head_frag,
-                srcBodyFrag:attachments.colorarea_frag
+                srcHeadFrag:attachments.areadiscard_head_frag||'',
+                srcBodyFrag:attachments.areadiscard_frag||''
             },moduleVert);
             
         inSize.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'size',inSize);
-        inAmount.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
-
-        r.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'r',r);
-        g.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'g',g);
-        b.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'b',b);
 
         x.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'z',z);
-        inFalloff.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'falloff',inFalloff);
-        
+
         updateWorldspace();
         updateArea();
         updateInvert();
-        updateBlend();
     }
 
     if(!shader)return;

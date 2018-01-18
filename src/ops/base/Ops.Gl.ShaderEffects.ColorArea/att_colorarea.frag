@@ -1,5 +1,4 @@
 
-#define AREA_PLANE_X
 
 #ifdef MOD_AREA_SPHERE
     float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),MOD_areaPos.xyz);
