@@ -4,7 +4,7 @@ var cgl=op.patch.cgl;
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z"],"Sphere");
+var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
 
 var inSize=op.inValue("Size",1);
 var inAmount=op.inValueSlider("Amount",0.5);
@@ -31,10 +31,8 @@ var inInvert=op.inValueBool("Invert");
     var z=op.inValue("z");
 }
 
-
 var inWorldSpace=op.inValueBool("WorldSpace",true);
 var inFalloff=op.inValueSlider("Falloff",0);
-
 
 var shader=null;
 
@@ -51,13 +49,10 @@ var srcBodyVert=''
     .endl()+'#endif'
     .endl();
 
-
-
-
-
 var moduleFrag=null;
 var moduleVert=null;
 
+op.render.onLinkChanged=removeModule;
 inWorldSpace.onChange=updateWorldspace;
 inArea.onChange=updateArea;
 inInvert.onChange=updateInvert;
@@ -75,15 +70,20 @@ function updateArea()
     
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_X");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y");
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Z");
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_X_INFINITE");
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y_INFINITE");
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Z_INFINITE");
     shader.removeDefine(moduleVert.prefix+"AREA_SPHERE");
-    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y");
     if(inArea.get()=="Axis X")shader.define(moduleVert.prefix+"AREA_AXIS_X");
     else if(inArea.get()=="Axis Y")shader.define(moduleVert.prefix+"AREA_AXIS_Y");
-    else if(inArea.get()=="Axis X")shader.define(moduleVert.prefix+"AREA_AXIS_Z");
+    else if(inArea.get()=="Axis Z")shader.define(moduleVert.prefix+"AREA_AXIS_Z");
+
+    else if(inArea.get()=="Axis X Infinite")shader.define(moduleVert.prefix+"AREA_AXIS_X_INFINITE");
+    else if(inArea.get()=="Axis Y Infinite")shader.define(moduleVert.prefix+"AREA_AXIS_Y_INFINITE");
+    else if(inArea.get()=="Axis Z Infinite")shader.define(moduleVert.prefix+"AREA_AXIS_Z_INFINITE");
     else shader.define(moduleVert.prefix+"AREA_SPHERE");
-
 }
-
 
 function updateWorldspace()
 {
@@ -100,11 +100,10 @@ function removeModule()
 }
 
 
-op.render.onLinkChanged=removeModule;
 
 op.render.onTriggered=function()
 {
-    
+
     if(CABLES.UI && gui.patch().isCurrentOp(op)) 
         gui.setTransformGizmo(
             {
@@ -117,8 +116,6 @@ op.render.onTriggered=function()
     {
         CABLES.GL_MARKER.drawSphere(cgl,inSize.get());
     }
-
-
 
     if(!cgl.getShader())
     {
@@ -163,10 +160,8 @@ op.render.onTriggered=function()
         updateWorldspace();
         updateArea();
         updateInvert();
-
     }
-    
-    
+
     if(!shader)return;
     var texSlot=moduleVert.num+5;
 

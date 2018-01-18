@@ -4,6 +4,7 @@
 #ifdef MOD_AREA_SPHERE
     float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),MOD_areaPos.xyz);
 #endif
+
 #ifdef MOD_AREA_AXIS_X
     float MOD_de=abs(MOD_x-MOD_areaPos.x);
 #endif
@@ -12,6 +13,16 @@
 #endif
 #ifdef MOD_AREA_AXIS_Z
     float MOD_de=abs(MOD_z-MOD_areaPos.z);
+#endif
+
+#ifdef MOD_AREA_AXIS_X_INFINITE
+    float MOD_de=MOD_x-MOD_areaPos.x;
+#endif
+#ifdef MOD_AREA_AXIS_Y_INFINITE
+    float MOD_de=MOD_y-MOD_areaPos.y;
+#endif
+#ifdef MOD_AREA_AXIS_Z_INFINITE
+    float MOD_de=MOD_z-MOD_areaPos.z;
 #endif
 
 MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);
