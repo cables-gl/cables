@@ -1,6 +1,57 @@
 {
-    "updated": 1516267539303,
+    "updated": 1516286449086,
     "authorName": "pandur",
     "id": "2b0abd00-6845-49c1-bebf-90cbf3e69640",
-    "created": 1516266890871
+    "created": 1516266890871,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Area"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "Size"
+            },
+            {
+                "type": "0",
+                "name": "Falloff"
+            },
+            {
+                "type": "0",
+                "name": "Scale"
+            },
+            {
+                "type": "0",
+                "name": "Invert"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Exp.Gl.ShaderEffects.SubMeshFracture"
+    }
 }

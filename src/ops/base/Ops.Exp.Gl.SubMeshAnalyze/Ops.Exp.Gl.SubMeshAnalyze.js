@@ -94,13 +94,13 @@ inGeom.onChange=function()
             console.log("tcy ",tcY,faceGroups[i]);
         }
         
-        tc[faces[i*3+0]*2+0]=0.0;
+        tc[faces[i*3+0]*2+0]=verts[faces[i*3+0]];
         tc[faces[i*3+0]*2+1]=tcY;
 
-        tc[faces[i*3+1]*2+0]=0.0;
+        tc[faces[i*3+1]*2+0]=verts[faces[i*3+0]];
         tc[faces[i*3+1]*2+1]=tcY;
 
-        tc[faces[i*3+2]*2+0]=0.0;
+        tc[faces[i*3+2]*2+0]=verts[faces[i*3+0]];
         tc[faces[i*3+2]*2+1]=tcY;
     }
 

@@ -1,8 +1,8 @@
 {{MODULES_HEAD}}
 
 
+IN vec2 texCoord;
 #ifdef HAS_TEXTURES
-    IN vec2 texCoord;
     IN vec2 texCoordOrig;
     #ifdef HAS_TEXTURE_DIFFUSE
         uniform sampler2D tex;

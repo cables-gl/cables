@@ -1,5 +1,5 @@
 {
-    "updated": 1516267185050,
+    "updated": 1516292730466,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "b7482d75-913d-4564-92ae-81f8dbead3ce",
@@ -12,7 +12,11 @@
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Axis"
+            },
+            {
+                "type": "0",
+                "name": "treshhold"
             }
         ],
         "portsOut": [
@@ -21,6 +25,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.LimitMeshByTexCoord"
+        "name": "Ops.Exp.Gl.ShaderEffects.LimitMeshByTexCoord"
     }
 }

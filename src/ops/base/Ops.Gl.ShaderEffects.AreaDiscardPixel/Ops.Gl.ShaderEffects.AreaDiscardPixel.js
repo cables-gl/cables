@@ -8,6 +8,7 @@ var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X 
 
 var inSize=op.inValue("Size",1);
 
+
 var inInvert=op.inValueBool("Invert");
 
 
