@@ -1,4 +1,3 @@
-op.name='DepthTexture';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
@@ -15,7 +14,6 @@ var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
 var srcFrag=''
-    .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'  IN vec2 texCoord;'
     .endl()+'  uniform sampler2D image;'
@@ -41,12 +39,9 @@ var srcFrag=''
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','image',0);
 
-var uniFarplane=new CGL.Uniform(shader,'f','f',1.0);
-var uniNearplane=new CGL.Uniform(shader,'f','n',1.0);
+var uniFarplane=new CGL.Uniform(shader,'f','f',farPlane);
+var uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
 
-farPlane.onValueChanged=function(){ uniFarplane.setValue(farPlane.get()); };
-
-nearPlane.onValueChanged=function(){ uniNearplane.setValue(nearPlane.get()); };
 
 render.onTriggered=function()
 {

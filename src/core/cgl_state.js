@@ -321,10 +321,7 @@ CGL.State = function() {
     }
 
     this._resizeToWindowSize = function() {
-        console.log('width',window.innerWidth);
-
         this.setSize(window.innerWidth,window.innerHeight);
-
         self.updateSize();
     };
 

@@ -645,7 +645,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
 
         var timeused=Math.round(100*(CABLES.now()-start))/100;
-        if(timeused>10)console.warn('long op init ',obj.ops[iop].objName,timeused);
+        if(!this.silent && timeused>10)console.warn('long op init ',obj.ops[iop].objName,timeused);
         // else console.log('op time',obj.ops[iop].objName,timeused);
     }
 
