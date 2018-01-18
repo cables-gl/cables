@@ -19,6 +19,10 @@
             },
             {
                 "type": "0",
+                "name": "Falloff"
+            },
+            {
+                "type": "0",
                 "name": "Invert"
             },
             {
@@ -35,6 +39,10 @@
             },
             {
                 "type": "0",
+                "name": "Blend "
+            },
+            {
+                "type": "0",
                 "name": "x"
             },
             {
@@ -48,10 +56,6 @@
             {
                 "type": "0",
                 "name": "WorldSpace"
-            },
-            {
-                "type": "0",
-                "name": "Falloff"
             }
         ],
         "portsOut": [
@@ -63,7 +67,7 @@
         "name": "Ops.Gl.ShaderEffects.ColorArea"
     },
     "summary": "colorize all meshes around x,y,z",
-    "updated": 1516274928871,
+    "updated": 1516275501641,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "cac6a739-c2ad-440c-99b2-33e2c459e8b1",

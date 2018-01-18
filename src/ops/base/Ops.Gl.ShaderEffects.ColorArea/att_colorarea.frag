@@ -31,4 +31,11 @@ MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);
     MOD_de=1.0-MOD_de;
 #endif
 
-col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);
+
+#ifdef MOD_BLEND_NORMAL
+    col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);
+#endif
+
+#ifdef MOD_BLEND_MULTIPLY
+    col.rgb=mix(col.rgb,col.rgb*vec3(MOD_r,MOD_g,MOD_b),MOD_de*MOD_amount);
+#endif

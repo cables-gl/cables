@@ -9,11 +9,11 @@ var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X 
 var inSize=op.inValue("Size",1);
 var inAmount=op.inValueSlider("Amount",0.5);
 
+var inFalloff=op.inValueSlider("Falloff",0);
 var inInvert=op.inValueBool("Invert");
 
 {
     // rgba colors
-    
     var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
     r.set(Math.random());
     
@@ -24,6 +24,9 @@ var inInvert=op.inValueBool("Invert");
     b.set(Math.random());
 }
 
+var inBlend=op.inValueSelect("Blend ",["Normal","Multiply"],"Normal");
+
+
 {
     // position
     var x=op.inValue("x");
@@ -32,7 +35,6 @@ var inInvert=op.inValueBool("Invert");
 }
 
 var inWorldSpace=op.inValueBool("WorldSpace",true);
-var inFalloff=op.inValueSlider("Falloff",0);
 
 var shader=null;
 
@@ -56,6 +58,19 @@ op.render.onLinkChanged=removeModule;
 inWorldSpace.onChange=updateWorldspace;
 inArea.onChange=updateArea;
 inInvert.onChange=updateInvert;
+inBlend.onChange=updateBlend;
+
+function updateBlend()
+{
+    if(!shader)return;
+    
+    shader.removeDefine(moduleVert.prefix+"BLEND_NORMAL");
+    shader.removeDefine(moduleVert.prefix+"BLEND_MULTIPLY");
+    
+    if(inBlend.get()=="Normal") shader.define(moduleVert.prefix+"BLEND_NORMAL");
+        else shader.define(moduleVert.prefix+"BLEND_MULTIPLY");
+}
+
 
 function updateInvert()
 {
@@ -160,6 +175,7 @@ op.render.onTriggered=function()
         updateWorldspace();
         updateArea();
         updateInvert();
+        updateBlend();
     }
 
     if(!shader)return;
