@@ -30,11 +30,6 @@ scale.setUiAttribs({"divider":true});
 
 render.onTriggered=function()
 {
-    
-    
-
-    
-    
     var updateMatrix=false;
     if(translationChanged)
     {
@@ -54,15 +49,6 @@ render.onTriggered=function()
 
     cgl.pushMvMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
-
-
-
-
-
-
-
-
-
 
     trigger.trigger();
     cgl.popMvMatrix();

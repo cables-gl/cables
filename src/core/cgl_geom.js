@@ -22,9 +22,7 @@ CGL.Geometry=function(name)
         this.setVertices(v);
       }
     });
-
 };
-
 
 
 CGL.Geometry.prototype.clear=function()
@@ -61,7 +59,6 @@ CGL.Geometry.prototype.testIndices=function()
             foundError=true;
             console.log("index error!");
         }
-
     }
 };
 
@@ -101,10 +98,6 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 };
 
 
-
-
-
-
 CGL.Geometry.prototype.merge=function(geom)
 {
     if(!geom)return;
@@ -120,7 +113,6 @@ CGL.Geometry.prototype.merge=function(geom)
     this.vertices=float32Concat(this.vertices,geom.vertices);
     this.texCoords=float32Concat(this.texCoords,geom.texCoords);
     this.vertexNormals=float32Concat(this.vertexNormals,geom.vertexNormals);
-
 };
 
 CGL.Geometry.prototype.copy=function()

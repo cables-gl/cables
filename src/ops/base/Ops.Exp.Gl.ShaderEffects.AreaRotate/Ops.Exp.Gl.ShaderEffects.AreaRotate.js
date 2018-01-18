@@ -1,4 +1,3 @@
-op.name="AreaRotate";
 
 var cgl=op.patch.cgl;
 
@@ -12,8 +11,6 @@ var inSmooth=op.inValueBool("Smooth",true);
 var x=op.inValue("x");
 var y=op.inValue("y");
 var z=op.inValue("z");
-
-
 
 var shader=null;
 

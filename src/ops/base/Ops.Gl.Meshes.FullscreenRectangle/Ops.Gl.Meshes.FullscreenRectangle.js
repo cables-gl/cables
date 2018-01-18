@@ -25,11 +25,11 @@ inTexture.onChange=function()
     shader=null;
     if(tex)
     {
-        shader=new CGL.Shader(cgl,'MinimalMaterial');
+        shader=new CGL.Shader(cgl,'fullscreenrectangle');
         shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
         shader.setSource(attachments.shader_vert,attachments.shader_frag);
-        new CGL.Uniform(shader,'t','tex',0);
+        shader.fullscreenRectUniform=new CGL.Uniform(shader,'t','tex',0);
     }
 };
 
@@ -89,7 +89,7 @@ render.onTriggered=function()
 function rebuild()
 {
 
-    var currentViewPort=cgl.getViewPort().slice();
+    var currentViewPort=cgl.getViewPort();
     if(currentViewPort[2]==w && currentViewPort[3]==h)return;
 
     var xx=0,xy=0;

@@ -18,10 +18,6 @@ var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPi
 var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-// var ambientR=op.addInPort(new Port(op,"Ambient R",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-// var ambientG=op.addInPort(new Port(op,"Ambient G",OP_PORT_TYPE_VALUE,{ display:'range' }));
-// var ambientB=op.addInPort(new Port(op,"Ambient B",OP_PORT_TYPE_VALUE,{ display:'range' }));
-
 var ambientR=op.inValue("Ambient R",0.1);
 var ambientG=op.inValue("Ambient G",0.1);
 var ambientB=op.inValue("Ambient B",0.1);
@@ -104,7 +100,7 @@ function updatePos()
 
 function updateAll()
 {
-needsUpdate=true;
+    needsUpdate=true;
 }
 
 var transVec=vec3.create();
@@ -127,6 +123,14 @@ exe.onTriggered=function()
         updateColor();
         needsUpdate=false;
     }
+    
+    if(CABLES.UI && CABLES.UI.renderHelper)
+    {
+        
+        CABLES.GL_MARKER.drawSphere(cgl,radius.get());
+
+    }
+    
     
     cgl.frameStore.phong.lights=cgl.frameStore.phong.lights||[];
 

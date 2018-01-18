@@ -1,0 +1,26 @@
+{
+    "updated": 1516267185050,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "b7482d75-913d-4564-92ae-81f8dbead3ce",
+    "created": 1513777600653,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.LimitMeshByTexCoord"
+    }
+}

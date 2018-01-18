@@ -144,6 +144,12 @@ CGL.State = function() {
     }
 
     this.endFrame = function() {
+
+        if(CABLES.UI && CABLES.UI.renderHelper)
+        {
+            CABLES.GL_MARKER.drawMarkerLayer(this);
+        }
+
         self.setPreviousShader();
         if (vMatrixStack.length > 0) console.warn('view matrix stack length !=0 at end of rendering...');
         if (mvMatrixStack.length > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
