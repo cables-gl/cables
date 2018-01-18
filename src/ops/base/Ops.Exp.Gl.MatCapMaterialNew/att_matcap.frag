@@ -66,17 +66,17 @@ void main()
     	vec3 dFdyPos = dFdy( eye_relative_pos );
     	vec3 n = normalize( cross(dFdxPos,dFdyPos ));
     	
-        vec3 r = reflect( e, n );
+        vec3 rr = reflect( e, n );
         float m = 2. * sqrt( 
-            pow(r.x, 2.0)+
-            pow(r.y, 2.0)+
-            pow(r.z + 1.0, 2.0)
+            pow(rr.x, 2.0)+
+            pow(rr.y, 2.0)+
+            pow(rr.z + 1.0, 2.0)
         );
         
         
 
         
-        vn = (r.xy / m + 0.5);
+        vn = (rr.xy / m + 0.5);
         
         vn.t=clamp(vn.t, 0.0, 1.0);
         vn.s=clamp(vn.s, 0.0, 1.0);

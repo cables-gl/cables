@@ -209,7 +209,7 @@ function tesselateGeom(oldGeom)
         }
     }
     
-    console.log('norms',norms);
+    // console.log('norms',norms);
     geom.vertexNormals=norms;
     geom.setVertices(vertices);
     geom.setTexCoords(tc);

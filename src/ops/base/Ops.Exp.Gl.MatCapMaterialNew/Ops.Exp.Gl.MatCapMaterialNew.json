@@ -31,6 +31,18 @@
             },
             {
                 "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
                 "name": "AO Intensity"
             },
             {

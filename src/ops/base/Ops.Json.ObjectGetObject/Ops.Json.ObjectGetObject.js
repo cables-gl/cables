@@ -12,7 +12,6 @@ function update() {
     if(data.get() && data.get().hasOwnProperty(key.get()))
     {
         result.set(data.get()[key.get()]);
-        op.log('data.get()[key.get()]: ', data.get()[key.get()]);
     }
     else
     {

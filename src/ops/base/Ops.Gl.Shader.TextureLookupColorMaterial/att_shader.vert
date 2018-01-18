@@ -16,6 +16,8 @@ void main()
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
    #endif
+   
+   mat4 mMatrix=modelMatrix;
 
    vec4 pos = vec4( vPosition, 1. );
 
@@ -23,7 +25,7 @@ void main()
 
     #ifdef BILLBOARD
        vec3 position=vPosition;
-       mat4 mvMatrix=viewMatrix*modelMatrix;
+       mat4 mvMatrix=viewMatrix*mMatrix;
 
        gl_Position = projMatrix * mvMatrix * vec4((
            position.x * vec3(
@@ -37,6 +39,6 @@ void main()
     #endif
 
     #ifndef BILLBOARD
-        gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
+        gl_Position = projMatrix * viewMatrix * mMatrix * pos;
     #endif
 }

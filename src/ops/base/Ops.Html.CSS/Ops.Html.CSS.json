@@ -7,5 +7,6 @@
             }
         ],
         "name": "Ops.Html.CSS"
-    }
+    },
+    "summary": "Define a custom stylesheet, ID is the ID of the created stylesheet"
 }

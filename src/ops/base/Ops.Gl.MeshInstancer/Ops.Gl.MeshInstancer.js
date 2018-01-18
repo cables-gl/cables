@@ -86,8 +86,8 @@ function setupArray()
     
     
     var scales=inScales.get();
-    console.log('scales',scales);
-    console.log('setup array!');
+    // console.log('scales',scales);
+    // console.log('setup array!');
 
     if(matrixArray.length!=num*16)
     {
