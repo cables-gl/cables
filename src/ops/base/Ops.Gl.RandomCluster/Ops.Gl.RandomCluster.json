@@ -1,1 +1,74 @@
-{"summary":"Transforms objects randomly in space"}
+{
+    "summary": "Transforms objects randomly in space",
+    "updated": 1516273013425,
+    "authorName": "pandur",
+    "id": "ca3bc984-e596-48fb-b53d-502eb13979b0",
+    "created": 1516269330315,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "num"
+            },
+            {
+                "type": "0",
+                "name": "size"
+            },
+            {
+                "type": "0",
+                "name": "random seed"
+            },
+            {
+                "type": "0",
+                "name": "scaleX"
+            },
+            {
+                "type": "0",
+                "name": "scaleY"
+            },
+            {
+                "type": "0",
+                "name": "scaleZ"
+            },
+            {
+                "type": "0",
+                "name": "round"
+            },
+            {
+                "type": "0",
+                "name": "Rotate X"
+            },
+            {
+                "type": "0",
+                "name": "Rotate Y"
+            },
+            {
+                "type": "0",
+                "name": "Rotate Z"
+            },
+            {
+                "type": "0",
+                "name": "Scroll X"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "0",
+                "name": "rnd"
+            }
+        ],
+        "name": "Ops.Gl.RandomCluster"
+    }
+}

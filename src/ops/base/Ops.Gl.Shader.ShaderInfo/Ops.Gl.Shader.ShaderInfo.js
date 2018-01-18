@@ -1,5 +1,3 @@
-op.name="ShowShader";
-
 var exec=op.inFunction("Exec");
 var showFrag=op.inFunctionButton("Show Fragment");
 var showVert=op.inFunctionButton("Show Vertex");
@@ -10,6 +8,7 @@ var next=op.outFunction("Next");
 
 var outNumUniforms=op.outValue("Num Uniforms");
 var outNumAttributes=op.outValue("Num Attributes");
+var outAttributeNames=op.outArray("Arributes Names");
 
 var cgl=op.patch.cgl;
 
@@ -35,16 +34,31 @@ exec.onTriggered=function()
     shader=cgl.getShader();
     next.trigger();
 
-    if(shader)
+
+    if(shader && shader.getProgram())
     {
-        if(shader.getProgram()!=null)outNumUniforms.set(cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS));
-            else outNumUniforms.set(0);
-        if(shader.getProgram()!=null)outNumAttributes.set(cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_ATTRIBUTES));
-            else outNumAttributes.set(0);
+        outNumUniforms.set(cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS));
+        outNumAttributes.set(cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_ATTRIBUTES));
 
-        if(shader.getProgram()==null)op.error("programnull",'shader program is null');
-            else op.error("programnull",null);
+        var i=0;
+        var attribNames=[];
+        for (i=0;i<cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_ATTRIBUTES);i++)
+        {
+            var name = cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
+            attribNames.push(name);
+        }
+        outAttributeNames.set(attribNames);
 
+
+
+        op.error("programnull",null);
+    }
+    else
+    {
+        op.error("programnull",'shader program is null');
+        outNumUniforms.set(0);
+        outNumAttributes.set(0);
+        outAttributeNames.set(null);
     }
 
 };

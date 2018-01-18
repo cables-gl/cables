@@ -309,10 +309,8 @@ CGL.State = function() {
         else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     };
 
-
     this.setSize=function(w,h)
     {
-
         this.canvas.style.width = w+"px";
         this.canvas.style.height = h+"px";
 

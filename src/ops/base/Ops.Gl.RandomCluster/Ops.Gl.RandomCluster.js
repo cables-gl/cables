@@ -1,4 +1,3 @@
-op.name='random cluster';
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var num=op.addInPort(new Port(op,"num"));
@@ -32,13 +31,18 @@ scaleZ.set(1);
 var transVec=vec3.create();
 var mat=mat4.create();
 
-
-
-
 function doRender()
 {
     // console.log(doRender);
     if(op.instanced(exe))return;
+
+    if(CABLES.UI && CABLES.UI.renderHelper)
+    {
+        CABLES.GL_MARKER.drawCube(cgl,
+            size.get()/2*scaleX.get(),
+            size.get()/2*scaleY.get(),
+            size.get()/2*scaleZ.get());
+    }
 
     op.patch.instancing.pushLoop(randoms.length);
     
@@ -50,8 +54,6 @@ function doRender()
             randoms[i][0]=(randoms[i][0]%size.get())-(size.get()/2);
         }
     }
-    
-    
 
     for(var i=0;i<randoms.length;i++)
     {
@@ -117,7 +119,6 @@ function reset()
             Math.seededRandom()*360*CGL.DEG2RAD*rotZ.get()
             ));
     }
-
 }
 
 size.set(20);

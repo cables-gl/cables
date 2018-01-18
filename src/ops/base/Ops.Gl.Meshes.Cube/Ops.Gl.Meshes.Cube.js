@@ -27,7 +27,7 @@ render.onTriggered=function()
 
 function buildMesh()
 {
-    if(!geom)geom=new CGL.Geometry("cube");
+    if(!geom)geom=new CGL.Geometry("cubemesh");
     geom.clear();
 
     var x=width.get();
@@ -86,7 +86,7 @@ function buildMesh()
         nx,  y, nz
         ];
 
-    geom.texCoords = [
+    geom.setTexCoords( [
           // Front face
           0.0, 1.0,
           1.0, 1.0,
@@ -117,7 +117,7 @@ function buildMesh()
           1.0, 1.0,
           1.0, 0.0,
           0.0, 0.0,
-        ];
+        ]);
 
     geom.vertexNormals = [
         // Front face

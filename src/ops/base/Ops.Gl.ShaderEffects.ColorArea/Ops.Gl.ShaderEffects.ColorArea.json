@@ -7,11 +7,19 @@
             },
             {
                 "type": "0",
+                "name": "Area"
+            },
+            {
+                "type": "0",
                 "name": "Size"
             },
             {
                 "type": "0",
                 "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "Invert"
             },
             {
                 "type": "0",
@@ -55,7 +63,7 @@
         "name": "Ops.Gl.ShaderEffects.ColorArea"
     },
     "summary": "colorize all meshes around x,y,z",
-    "updated": 1516016981427,
+    "updated": 1516273471372,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "cac6a739-c2ad-440c-99b2-33e2c459e8b1",

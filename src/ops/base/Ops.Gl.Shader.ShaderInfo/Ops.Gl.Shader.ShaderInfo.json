@@ -30,12 +30,16 @@
             {
                 "type": "0",
                 "name": "Num Attributes"
+            },
+            {
+                "type": "3",
+                "name": "Arributes Names"
             }
         ],
         "name": "Ops.Gl.Shader.ShaderInfo"
     },
     "summary": "view current shader source code",
-    "updated": 1515480834003,
+    "updated": 1516268673042,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
     "id": "7afaa77e-a976-4e65-8eb1-a6302b91c0d3",

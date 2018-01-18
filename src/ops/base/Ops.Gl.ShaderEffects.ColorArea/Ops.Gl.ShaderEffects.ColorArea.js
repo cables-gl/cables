@@ -1,12 +1,15 @@
 
 var cgl=op.patch.cgl;
-var id='mod'+Math.floor(Math.random()*10000);
 
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z"],"Sphere");
+
 var inSize=op.inValue("Size",1);
 var inAmount=op.inValueSlider("Amount",0.5);
+
+var inInvert=op.inValueBool("Invert");
 
 {
     // rgba colors
@@ -23,7 +26,6 @@ var inAmount=op.inValueSlider("Amount",0.5);
 
 {
     // position
-
     var x=op.inValue("x");
     var y=op.inValue("y");
     var z=op.inValue("z");
@@ -49,35 +51,39 @@ var srcBodyVert=''
     .endl()+'#endif'
     .endl();
 
-var srcHeadFrag=''
-    .endl()+'IN vec4 MOD_areaPos;'
-    .endl()+'UNI float MOD_size;'
-    .endl()+'UNI float MOD_amount;'
-    .endl()+'UNI float MOD_falloff;'
-    
 
-    .endl()+'UNI float MOD_r;'
-    .endl()+'UNI float MOD_g;'
-    .endl()+'UNI float MOD_b;'
 
-    .endl()+'UNI float MOD_x;'
-    .endl()+'UNI float MOD_y;'
-    .endl()+'UNI float MOD_z;'
-
-    .endl();
-
-var srcBodyFrag=''
-    .endl()+'float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),MOD_areaPos.xyz);'
-    .endl()+'MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);'
-
-    .endl()+'col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);'
-    .endl();
 
 
 var moduleFrag=null;
 var moduleVert=null;
 
 inWorldSpace.onChange=updateWorldspace;
+inArea.onChange=updateArea;
+inInvert.onChange=updateInvert;
+
+function updateInvert()
+{
+    if(!shader)return;
+    if(inInvert.get()) shader.define(moduleVert.prefix+"AREA_INVERT");
+        else shader.removeDefine(moduleVert.prefix+"AREA_INVERT");
+}
+
+function updateArea()
+{
+    if(!shader)return;
+    
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_X");
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y");
+    shader.removeDefine(moduleVert.prefix+"AREA_SPHERE");
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y");
+    if(inArea.get()=="Axis X")shader.define(moduleVert.prefix+"AREA_AXIS_X");
+    else if(inArea.get()=="Axis Y")shader.define(moduleVert.prefix+"AREA_AXIS_Y");
+    else if(inArea.get()=="Axis X")shader.define(moduleVert.prefix+"AREA_AXIS_Z");
+    else shader.define(moduleVert.prefix+"AREA_SPHERE");
+
+}
+
 
 function updateWorldspace()
 {
@@ -107,6 +113,13 @@ op.render.onTriggered=function()
                 posZ:z
             });
 
+    if(CABLES.UI && CABLES.UI.renderHelper)
+    {
+        CABLES.GL_MARKER.drawSphere(cgl,inSize.get());
+    }
+
+
+
     if(!cgl.getShader())
     {
          op.trigger.trigger();
@@ -131,8 +144,8 @@ op.render.onTriggered=function()
             {
                 title:op.objName,
                 name:'MODULE_COLOR',
-                srcHeadFrag:srcHeadFrag,
-                srcBodyFrag:srcBodyFrag
+                srcHeadFrag:attachments.colorarea_head_frag,
+                srcBodyFrag:attachments.colorarea_frag
             },moduleVert);
             
         inSize.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'size',inSize);
@@ -148,6 +161,8 @@ op.render.onTriggered=function()
         inFalloff.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'falloff',inFalloff);
         
         updateWorldspace();
+        updateArea();
+        updateInvert();
 
     }
     

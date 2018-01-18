@@ -127,7 +127,7 @@ exe.onTriggered=function()
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
         
-        CABLES.GL_MARKER.drawSphere(cgl,radius.get());
+        CABLES.GL_MARKER.drawCube(cgl,radius.get());
 
     }
     

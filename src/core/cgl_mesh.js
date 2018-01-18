@@ -469,6 +469,8 @@ if(shader.bindTextures)shader.bindTextures();
         {
             this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
             // if(this._bufVerticesIndizes.numItems>100)console.log(this._bufVerticesIndizes.numItems);
+
+            // this._cgl.printError('drawele '+this._geom.name+'  /  '+shader.getName());
         }
         else
         {
@@ -477,6 +479,7 @@ if(shader.bindTextures)shader.bindTextures();
 
         // this.printDebug(shader);
     }
+    
 
     // this.unBind(shader);
 

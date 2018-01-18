@@ -55,6 +55,11 @@ CGL.Shader = function(_cgl, _name) {
         return cgl;
     };
 
+    this.getName=function()
+    {
+        return name;
+    }
+
     this.setSource = function(srcVert, srcFrag) {
         this.srcVert = srcVert;
         this.srcFrag = srcFrag;
