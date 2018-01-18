@@ -67,5 +67,5 @@
         ],
         "name": "Ops.Gl.Geometry.GeometryBounds"
     },
-    "summary": "boundings of a geometry / draw a bounding box"
+    "summary": "boundings of a geometry / draw a bounding box / (width,height,length,size)"
 }

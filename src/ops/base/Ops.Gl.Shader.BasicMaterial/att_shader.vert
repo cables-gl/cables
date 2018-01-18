@@ -6,8 +6,8 @@ OUT vec3 norm;
 OUT vec2 texCoord;
 OUT vec2 texCoordOrig;
 
-#ifdef HAS_TEXTURES
     IN vec2 attrTexCoord;
+#ifdef HAS_TEXTURES
     #ifdef TEXTURE_REPEAT
         uniform float diffuseRepeatX;
         uniform float diffuseRepeatY;
@@ -26,9 +26,9 @@ void main()
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix;
     
+    texCoordOrig=attrTexCoord;
+    texCoord=attrTexCoord;
     #ifdef HAS_TEXTURES
-        texCoordOrig=attrTexCoord;
-        texCoord=attrTexCoord;
         #ifdef TEXTURE_REPEAT
             texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
             texCoord.y=texCoord.y*diffuseRepeatY+texOffsetY;

@@ -5,26 +5,35 @@ var cgl=op.patch.cgl;
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var inAmount=op.inValueSlider("Amount",0.3);
+var axis=op.inValueSelect("Axis",["X","Y"],"X");
+
+var inTreshhold=op.inValueSlider("treshhold",0.3);
 var shader=null;
 
-var srcHeadVert=''
-    .endl()+'UNI float MOD_amount;'
+var srcHeadFrag=''
+    .endl()+'UNI float MOD_treshhold;'
 
     .endl();
 
-var srcBodyVert=''
 
-    // .endl()+'pos.xyz=pos.xyz*(1.0-MOD_amount)+(vec3(MOD_x,MOD_y,MOD_z)*90.0*MOD_amount);'
-    .endl()+'if(texCoord.y>=MOD_amount)pos.xyz*=0.0;'
-    
-    .endl();
+var moduleFrag=null;
 
-var moduleVert=null;
+
+axis.onChange=updateAxis;
+
+function updateAxis()
+{
+    if(!shader)return;
+    if(axis.get()=='X') shader.define(moduleFrag.prefix+"AXIS_X");
+        else shader.removeDefine(moduleFrag.prefix+"AXIS_X");
+    if(axis.get()=='Y') shader.define(moduleFrag.prefix+"AXIS_Y");
+        else shader.removeDefine(moduleFrag.prefix+"AXIS_Y");
+}
+
 
 function removeModule()
 {
-    if(shader && moduleVert) shader.removeModule(moduleVert);
+    if(shader && moduleFrag) shader.removeModule(moduleFrag);
     shader=null;
 }
 
@@ -43,15 +52,16 @@ op.render.onTriggered=function()
         if(shader) removeModule();
         shader=cgl.getShader();
 
-        moduleVert=shader.addModule(
+        moduleFrag=shader.addModule(
             {
                 title:op.objName,
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
+                name:'MODULE_COLOR',
+                srcHeadFrag:srcHeadFrag,
+                srcBodyFrag:attachments.limitByTexCoords_frag||''
             });
 
-        inAmount.amount=new CGL.Uniform(shader,'f',moduleVert.prefix+'amount',inAmount);
+        inTreshhold.treshhold=new CGL.Uniform(shader,'f',moduleFrag.prefix+'treshhold',inTreshhold);
+        updateAxis();
     }
 
     if(!shader)return;
