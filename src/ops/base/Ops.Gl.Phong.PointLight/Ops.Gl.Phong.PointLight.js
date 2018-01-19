@@ -140,7 +140,7 @@ exe.onTriggered=function()
     {
         cgl.pushMvMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
-        CABLES.GL_MARKER.drawCube(op,radius.get());
+        CABLES.GL_MARKER.drawSphere(op,radius.get()*2);
         cgl.popMvMatrix();
     }
 
