@@ -124,12 +124,6 @@ exe.onTriggered=function()
         needsUpdate=false;
     }
     
-    if(CABLES.UI && CABLES.UI.renderHelper)
-    {
-        
-        CABLES.GL_MARKER.drawCube(cgl,radius.get());
-
-    }
     
     
     cgl.frameStore.phong.lights=cgl.frameStore.phong.lights||[];
@@ -140,6 +134,15 @@ exe.onTriggered=function()
     
     light.pos=mpos;
     light.type=0;
+
+
+    if(CABLES.UI && CABLES.UI.renderHelper)
+    {
+        cgl.pushMvMatrix();
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
+        CABLES.GL_MARKER.drawCube(op,radius.get());
+        cgl.popMvMatrix();
+    }
 
     if(attachment.isLinked())
     {

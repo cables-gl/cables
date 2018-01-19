@@ -409,6 +409,10 @@ CGL.State = function() {
 
         }.bind(this),true);
     };
-
-
 };
+
+
+
+
+
+

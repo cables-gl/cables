@@ -25,8 +25,8 @@ CGL.Framebuffer2=function(cgl,w,h,options)
 
     if(!this._options.hasOwnProperty("multisampling"))
     {
-        this._options.multisampling=true;
-        this._options.multisamplingSamples=2;
+        this._options.multisampling=false;
+        this._options.multisamplingSamples=0;
     }
 
     this._texture=new CGL.Texture(cgl,
@@ -210,7 +210,7 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
 
 CGL.Framebuffer2.prototype.renderStart=function()
 {
-    this._cgl.pushMvMatrix();
+    this._cgl.pushModelMatrix();
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
 
@@ -219,9 +219,13 @@ CGL.Framebuffer2.prototype.renderStart=function()
     this._cgl.pushPMatrix();
     this._cgl.gl.viewport(0, 0, this._width,this._height );
 
-    this._cgl.gl.clearColor(0,0,0,0);
-    this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+    if(this._options.clear)
+    {
+        this._cgl.gl.clearColor(0,0,0,0);
+        this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+    }
 };
+
 
 CGL.Framebuffer2.prototype.renderEnd=function()
 {
@@ -230,7 +234,7 @@ CGL.Framebuffer2.prototype.renderEnd=function()
     // Blit framebuffers, no Multisample texture 2d in WebGL 2
     this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._frameBuffer);
     this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this._colorBuffer);
-    this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
+    // this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
     this._cgl.gl.blitFramebuffer(
         0, 0, this._width, this._height,
         0, 0, this._width, this._height,
@@ -249,6 +253,6 @@ CGL.Framebuffer2.prototype.renderEnd=function()
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer() );
 
 
-    this._cgl.popMvMatrix();
+    this._cgl.popModelMatrix();
     this._cgl.resetViewPort();
 };

@@ -38,7 +38,7 @@ function doRender()
 
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
-        CABLES.GL_MARKER.drawCube(cgl,
+        CABLES.GL_MARKER.drawCube(op,
             size.get()/2*scaleX.get(),
             size.get()/2*scaleY.get(),
             size.get()/2*scaleZ.get());

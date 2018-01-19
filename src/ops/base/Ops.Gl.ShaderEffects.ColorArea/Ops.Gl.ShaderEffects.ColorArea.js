@@ -127,7 +127,7 @@ op.render.onTriggered=function()
 
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
-        CABLES.GL_MARKER.drawSphere(cgl,inSize.get());
+        CABLES.GL_MARKER.drawSphere(op,inSize.get());
     }
 
     if(!cgl.getShader())

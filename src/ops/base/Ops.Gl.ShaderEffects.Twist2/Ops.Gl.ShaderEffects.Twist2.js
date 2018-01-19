@@ -1,7 +1,7 @@
 
 var render=op.inFunction("render");
 var trigger=op.outFunction("Trigger");
-var amount=op.inValue("Amount",300);
+var amount=op.inValue("Degree",180);
 var height=op.inValue("Height",2);
 
 var axis=op.inValueSelect("Axis",["X","Y","Z"],"Y");
@@ -53,6 +53,13 @@ render.onTriggered=function()
         uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'amount',amount);
         uniHeight=new CGL.Uniform(shader,'f',mod.prefix+'height',height);
         updateAxis();
+    }
+
+    if(!shader)return;
+
+    if(CABLES.UI && CABLES.UI.renderHelper)
+    {
+        CABLES.GL_MARKER.drawCube(op,1,height.get()/2,1);
     }
 
     trigger.trigger();
