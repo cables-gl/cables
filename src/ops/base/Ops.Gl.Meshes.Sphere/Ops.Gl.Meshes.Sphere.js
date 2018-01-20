@@ -2,6 +2,8 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var inStacks=op.inValueInt("stacks",32);
 var inSlices=op.inValueInt("slices",32);
 var inRadius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
+var inRender=op.inValueBool("Render",true);
+
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
@@ -26,7 +28,7 @@ render.onTriggered=function()
 {
     if(!mesh) updateMesh();
 
-    mesh.render(cgl.getShader());
+    if(inRender.get()) mesh.render(cgl.getShader());
     
     trigger.trigger();
 };

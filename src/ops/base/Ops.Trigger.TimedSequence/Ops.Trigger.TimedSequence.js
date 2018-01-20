@@ -11,13 +11,36 @@ this.ignoreInSubPatch=this.addInPort(new Port(this,"ignoreInSubPatch",OP_PORT_TY
 this.ignoreInSubPatch.val=false;
 
 this.triggerAlways=this.addOutPort(new Port(this,"triggerAlways",OP_PORT_TYPE_FUNCTION));
+var outNames=op.outArray("Names",[]);
 this.currentKeyTime=this.addOutPort(new Port(this,"currentKeyTime",OP_PORT_TYPE_VALUE));
 
 var triggers=[];
 
 for(var i=0;i<32;i++)
 {
-    triggers.push( this.addOutPort(new Port(this,"trigger "+i,OP_PORT_TYPE_FUNCTION)) );
+    var p=this.addOutPort(new Port(this,"trigger "+i,OP_PORT_TYPE_FUNCTION));
+    p.onLinkChanged=updateNames;
+    triggers.push( p );
+}
+
+function updateNames()
+{
+    console.log("updatenames");
+    var names=[];
+    for(var i=0;i<triggers.length;i++)
+    {
+        if(triggers[i].isLinked())
+        {
+            names.push(triggers[i].links[0].getOtherPort(triggers[i]).parent.getName());
+
+        }
+        else
+        {
+            names.push("none");
+        }
+        
+    }
+    outNames.set(names);
 }
 
 this.onLoaded=function()

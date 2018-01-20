@@ -1,5 +1,5 @@
 {
-    "updated": 1516129125197,
+    "updated": 1516375939289,
     "authorName": "pandur",
     "id": "6afe0f08-0f09-4a57-b43c-414db478dcf4",
     "created": 1516049339061,
@@ -32,6 +32,18 @@
             {
                 "type": "0",
                 "name": "Toggle"
+            },
+            {
+                "type": "0",
+                "name": "Button Value"
+            },
+            {
+                "type": "1",
+                "name": "Clear"
+            },
+            {
+                "type": "0",
+                "name": "enabled"
             }
         ],
         "portsOut": [

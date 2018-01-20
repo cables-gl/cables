@@ -15,6 +15,7 @@ var lastBeat=0;
 // var beatCountStart=0;
 
 var outBPM=op.outValue("BPM");
+var outBeatDuration=op.outValue("Tick Duration");
 
 
 eventIn.onValueChanged=function()
@@ -41,6 +42,7 @@ eventIn.onValueChanged=function()
                 var diff=CABLES.now()-lastBeat;
                 var bpm=60*1000/diff;
                 outBPM.set(Math.round(bpm));
+                outBeatDuration.set(60/bpm/4);
             }
 
             lastBeat=CABLES.now();

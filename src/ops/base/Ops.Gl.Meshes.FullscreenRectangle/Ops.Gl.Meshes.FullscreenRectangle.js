@@ -22,8 +22,8 @@ var shader=null;
 inTexture.onChange=function()
 {
     var tex=inTexture.get();
-    shader=null;
-    if(tex)
+    // shader=null;
+    if(tex && !shader)
     {
         shader=new CGL.Shader(cgl,'fullscreenrectangle');
         shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
