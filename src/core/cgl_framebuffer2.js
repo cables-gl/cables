@@ -22,6 +22,7 @@ CGL.Framebuffer2=function(cgl,w,h,options)
         };
 
     if(!this._options.hasOwnProperty("depth"))this._options.depth=true;
+    if(!this._options.hasOwnProperty("clear"))this._options.clear=true;
 
     if(!this._options.hasOwnProperty("multisampling"))
     {
@@ -218,6 +219,7 @@ CGL.Framebuffer2.prototype.renderStart=function()
 
     this._cgl.pushPMatrix();
     this._cgl.gl.viewport(0, 0, this._width,this._height );
+
 
     if(this._options.clear)
     {
