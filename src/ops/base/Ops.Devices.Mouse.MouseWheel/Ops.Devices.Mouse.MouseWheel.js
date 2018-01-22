@@ -5,7 +5,11 @@ var valIn=op.inValue("Value",0);
 
 var mul=op.inValue("Multiply",1);
 
+var minUnlimitedPort = op.inValueBool('Min Unlimited', false);
+minUnlimitedPort.setUiAttribs({ hidePort: true });
 var min=op.inValue("min",-100);
+var maxUnlimitedPort = op.inValueBool('Max Unlimited', false);
+maxUnlimitedPort.setUiAttribs({ hidePort: true });
 var max=op.inValue("max", 100);
 
 var smooth=op.inValueBool("smooth");
@@ -51,6 +55,21 @@ max.onChange=function()
     absVal.set( v );
 };
 
+minUnlimitedPort.onChange = function() {
+    var minUnlimited = minUnlimitedPort.get();
+    min.setUiAttribs({
+        hidePort: minUnlimited,
+        greyout: minUnlimited
+    });
+};
+
+maxUnlimitedPort.onChange = function() {
+    var maxUnlimited = maxUnlimitedPort.get();
+    max.setUiAttribs({
+        hidePort: maxUnlimited,
+        greyout: maxUnlimited
+    });
+};
 
 reset.onTriggered=function()
 {
@@ -91,12 +110,12 @@ smooth.onChange=function()
 
 function checkValue()
 {
-    if(min.get()!==0 && max.get()!==0)
-    {
-        if(v<min.get())v=min.get();
-        if(v>max.get())v=max.get();
+    if(!maxUnlimitedPort.get()) {
+        v=Math.min(max.get(),v);    
     }
-
+    if(!minUnlimitedPort.get()) {
+        v=Math.max(min.get(),v);    
+    }
 }
 
 flip.onChange=function()
