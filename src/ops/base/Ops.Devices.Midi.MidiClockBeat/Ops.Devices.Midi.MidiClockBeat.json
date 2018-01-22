@@ -1,5 +1,5 @@
 {
-    "updated": 1515966486380,
+    "updated": 1516371717798,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9056b704-b8f5-4fda-8df6-0738fa75d301",
@@ -31,6 +31,10 @@
             {
                 "type": "0",
                 "name": "BPM"
+            },
+            {
+                "type": "0",
+                "name": "Tick Duration"
             }
         ],
         "name": "Ops.Devices.Midi.MidiClockBeat"

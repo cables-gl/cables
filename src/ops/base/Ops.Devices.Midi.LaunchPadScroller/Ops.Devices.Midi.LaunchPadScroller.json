@@ -1,0 +1,23 @@
+{
+    "updated": 1516129416605,
+    "authorName": "pandur",
+    "id": "13acd08f-fbd6-4cea-b577-53a76d7d8bed",
+    "created": 1516129311279,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            },
+            {
+                "type": "1",
+                "name": "exec"
+            },
+            {
+                "type": "0",
+                "name": "Offset X"
+            }
+        ],
+        "name": "Ops.Devices.Midi.LaunchPadScroller"
+    }
+}

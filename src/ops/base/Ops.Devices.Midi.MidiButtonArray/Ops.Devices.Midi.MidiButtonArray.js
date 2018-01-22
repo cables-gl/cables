@@ -11,12 +11,19 @@ var learnEnd=op.addInPort(new Port(op,"Learn End",OP_PORT_TYPE_FUNCTION,{display
 var lights=op.addInPort(new Port(op,"Light",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var toggle=op.inValueBool("Toggle");
 
+var inValue=op.inValue("Button Value",1);
+
 var eventOut=op.addOutPort(new Port(op,"Event Output",OP_PORT_TYPE_OBJECT));
 
 var lastIndex=op.addOutPort(new Port(op,"Last Index"));
 var numButtons=op.addOutPort(new Port(op,"Num Buttons"));
 
 var values=op.addOutPort(new Port(op, "Buttons",OP_PORT_TYPE_ARRAY));
+
+var inClear=op.inFunctionButton("Clear");
+
+var inEnabled=op.inValueBool("enabled",true);
+
 values.ignoreValueSerialize=true;
 
 note.set(60);
@@ -36,24 +43,19 @@ var lastEvent=null;
 
 function setButtonState(i,v)
 {
-    
-    
     if(toggle.get())
     {
-        if(v==1)
+        if(v!=0)
         {
-            if(!buttons[i]) buttons[i]=1;
+            if(!buttons[i]) buttons[i]=inValue.get();
                 else buttons[i]=0;
         }
     }
     else
     {
         buttons[i]=v;
-        
     }
-    
-    
-    
+
     values.set(buttons);
     lastIndex.set(i);
     if(lights.get())
@@ -63,22 +65,27 @@ function setButtonState(i,v)
         
         if(lastEvent && lastEvent.output) lastEvent.output.send( noteOnMessage );
     }
-
 }
 
 function initArray()
 {
-    if(!noteEnd.get() || !note.get())return;
+    // if(!noteEnd.get() || !note.get())return;
     var num=noteEnd.get()-note.get();
     if(num<0)return;
     buttons.length=num;
     numButtons.set(num);
-    for(var i=0;i<num;i++) setButtonState(i,0);
+    for(var i=0;i<num;i++)
+    {
+        setButtonState(i,0);
+        buttons[i]=0;
+    }
+
     values.set(buttons);
 }
 
 eventIn.onValueChanged=function()
 {
+    if(!inEnabled.get())return;
     var event=eventIn.get();
     if(!event)return;
     if(learning)
@@ -117,4 +124,7 @@ eventIn.onValueChanged=function()
     eventOut.set(event);
 };
 
-
+inClear.onTriggered=function()
+{
+    initArray();
+};

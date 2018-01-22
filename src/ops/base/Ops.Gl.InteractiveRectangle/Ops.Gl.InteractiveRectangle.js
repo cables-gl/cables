@@ -438,16 +438,20 @@ function addListeners()
     
     listenerElement=div;
 
-    document.addEventListener('touchmove', onTouchMove);
-    // listenerElement.addEventListener('touchend', onMouseLeave);
-    // listenerElement.addEventListener('touchstart', onMouseEnter);
-
-    listenerElement.addEventListener('click', onmouseclick);
-    listenerElement.addEventListener('mousemove', onMouseMove);
-    listenerElement.addEventListener('mouseleave', onMouseLeave);
-    listenerElement.addEventListener('mousedown', onMouseDown);
-    listenerElement.addEventListener('mouseup', onMouseUp);
-    listenerElement.addEventListener('mouseenter', onMouseEnter);
-    // listenerElement.addEventListener('contextmenu', onClickRight);
+    if(listenerElement)
+    {
+        document.addEventListener('touchmove', onTouchMove);
+        // listenerElement.addEventListener('touchend', onMouseLeave);
+        // listenerElement.addEventListener('touchstart', onMouseEnter);
+    
+        listenerElement.addEventListener('click', onmouseclick);
+        listenerElement.addEventListener('mousemove', onMouseMove);
+        listenerElement.addEventListener('mouseleave', onMouseLeave);
+        listenerElement.addEventListener('mousedown', onMouseDown);
+        listenerElement.addEventListener('mouseup', onMouseUp);
+        listenerElement.addEventListener('mouseenter', onMouseEnter);
+        // listenerElement.addEventListener('contextmenu', onClickRight);
+        
+    }
 }
 

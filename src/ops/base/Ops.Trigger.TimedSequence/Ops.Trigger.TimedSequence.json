@@ -1,3 +1,170 @@
 {
-    "summary": "Switch Trigger"
+    "summary": "Switch Trigger",
+    "updated": 1516308806427,
+    "authorName": "pandur",
+    "id": "73c892c9-3e81-4ddc-952a-fbe6bf00ef2c",
+    "created": 1516308627269,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "current"
+            },
+            {
+                "type": "0",
+                "name": "overwriteTime"
+            },
+            {
+                "type": "0",
+                "name": "ignoreInSubPatch"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "triggerAlways"
+            },
+            {
+                "type": "3",
+                "name": "Names"
+            },
+            {
+                "type": "0",
+                "name": "currentKeyTime"
+            },
+            {
+                "type": "1",
+                "name": "trigger 0"
+            },
+            {
+                "type": "1",
+                "name": "trigger 1"
+            },
+            {
+                "type": "1",
+                "name": "trigger 2"
+            },
+            {
+                "type": "1",
+                "name": "trigger 3"
+            },
+            {
+                "type": "1",
+                "name": "trigger 4"
+            },
+            {
+                "type": "1",
+                "name": "trigger 5"
+            },
+            {
+                "type": "1",
+                "name": "trigger 6"
+            },
+            {
+                "type": "1",
+                "name": "trigger 7"
+            },
+            {
+                "type": "1",
+                "name": "trigger 8"
+            },
+            {
+                "type": "1",
+                "name": "trigger 9"
+            },
+            {
+                "type": "1",
+                "name": "trigger 10"
+            },
+            {
+                "type": "1",
+                "name": "trigger 11"
+            },
+            {
+                "type": "1",
+                "name": "trigger 12"
+            },
+            {
+                "type": "1",
+                "name": "trigger 13"
+            },
+            {
+                "type": "1",
+                "name": "trigger 14"
+            },
+            {
+                "type": "1",
+                "name": "trigger 15"
+            },
+            {
+                "type": "1",
+                "name": "trigger 16"
+            },
+            {
+                "type": "1",
+                "name": "trigger 17"
+            },
+            {
+                "type": "1",
+                "name": "trigger 18"
+            },
+            {
+                "type": "1",
+                "name": "trigger 19"
+            },
+            {
+                "type": "1",
+                "name": "trigger 20"
+            },
+            {
+                "type": "1",
+                "name": "trigger 21"
+            },
+            {
+                "type": "1",
+                "name": "trigger 22"
+            },
+            {
+                "type": "1",
+                "name": "trigger 23"
+            },
+            {
+                "type": "1",
+                "name": "trigger 24"
+            },
+            {
+                "type": "1",
+                "name": "trigger 25"
+            },
+            {
+                "type": "1",
+                "name": "trigger 26"
+            },
+            {
+                "type": "1",
+                "name": "trigger 27"
+            },
+            {
+                "type": "1",
+                "name": "trigger 28"
+            },
+            {
+                "type": "1",
+                "name": "trigger 29"
+            },
+            {
+                "type": "1",
+                "name": "trigger 30"
+            },
+            {
+                "type": "1",
+                "name": "trigger 31"
+            }
+        ],
+        "name": "Ops.Trigger.TimedSequence"
+    }
 }
