@@ -1,4 +1,3 @@
-op.name="Random Points";
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var num=op.addInPort(new Port(op,"num"));
@@ -17,7 +16,21 @@ scaleZ.set(1);
 
 function doRender()
 {
-    if(mesh) mesh.render(cgl.getShader());
+
+
+
+    if(mesh)
+    {
+        mesh.render(cgl.getShader());
+        
+        if(CABLES.UI && CABLES.UI.renderHelper)
+        {
+            CABLES.GL_MARKER.drawCube(op,
+                size.get()/2*scaleX.get(),
+                size.get()/2*scaleY.get(),
+                size.get()/2*scaleZ.get());
+        }
+    }
 }
 
 exe.onTriggered=doRender;
