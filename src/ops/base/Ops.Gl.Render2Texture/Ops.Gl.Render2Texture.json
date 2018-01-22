@@ -33,6 +33,10 @@
             {
                 "type": "0",
                 "name": "Depth"
+            },
+            {
+                "type": "0",
+                "name": "Clear"
             }
         ],
         "portsOut": [
@@ -51,7 +55,7 @@
         ],
         "name": "Ops.Gl.Render2Texture"
     },
-    "updated": 1516102950678,
+    "updated": 1516552555694,
     "authorName": "pandur",
     "id": "d01fa820-396c-4cb5-9d78-6b14762852af",
     "created": 1510268440125
