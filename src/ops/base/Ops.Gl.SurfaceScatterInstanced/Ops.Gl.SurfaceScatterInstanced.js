@@ -4,7 +4,6 @@ var geom=op.inObject("Geometry");
 
 var inNum=op.inValue("Num",100);
 
-
 var mod=null;
 var mesh=null;
 var shader=null;
@@ -17,43 +16,11 @@ var m=mat4.create();
 
 var scaleArr=op.inArray("Scaling");
 
-
 inNum.onChange=reset;
 scaleArr.onChange=reset;
 inGeomSurface.onChange=reset;
 render.onTriggered=doRender;
 render.onLinkChanged=removeModule;
-
-
-// public static bool PointInTriangle(ref Vector3 A, ref Vector3 B, ref Vector3 C, ref Vector3 P)
-// {
-//     // Prepare our barycentric variables
-//     Vector3 u = B - A;
-//     Vector3 v = C - A;
-//     Vector3 w = P - A;
-
-//     Vector3 vCrossW = Vector3.Cross(v, w);
-//     Vector3 vCrossU = Vector3.Cross(v, u);
-
-//     // Test sign of r
-//     if (Vector3.Dot(vCrossW, vCrossU) < 0)
-//         return false;
-
-//     Vector3 uCrossW = Vector3.Cross(u, w);
-//     Vector3 uCrossV = Vector3.Cross(u, v);
-
-//     // Test sign of t
-//     if (Vector3.Dot(uCrossW, uCrossV) < 0)
-//         return false;
-
-//     // At this point, we know that r and t and both > 0.
-//     // Therefore, as long as their sum is <= 1, each must be less <= 1
-//     float denom = uCrossV.Length();
-//     float r = vCrossW.Length() / denom;
-//     float t = uCrossW.Length() / denom;
-
-//     return (r + t <= 1);
-// }
 
 
 
@@ -87,12 +54,8 @@ function setup()
                     geom.vertices[faces[index+0]*3+1],
                     geom.vertices[faces[index+0]*3+2]
                 ]);
-    
-
-    
 
             // rotate
-    
             vec3.set(norm,
                 geom.vertexNormals[geom.verticesIndices[index+0]*3+0],
                 geom.vertexNormals[geom.verticesIndices[index+0]*3+1],
@@ -136,7 +99,6 @@ function setup()
     console.log(matrixArray);
 }
 
-
 // // TODO: remove array3xtransformedinstanced....
 
 // var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
@@ -165,9 +127,6 @@ var srcBodyVert=''
     .endl()+'   if(do_instancing==1.0)'
     .endl()+'   {'
     .endl()+'       mMatrix*=instMat;'
-    // .endl()+'       mMatrix[0][0]*=MOD_scale;'
-    // .endl()+'       mMatrix[1][1]*=MOD_scale;'
-    // .endl()+'       mMatrix[2][2]*=MOD_scale;'
     .endl()+'   }'
     .endl()+'#endif'
     .endl();
@@ -195,63 +154,10 @@ function removeModule()
     }
 }
 
-
 function reset()
 {
     recalc=true;
 }
-
-// function setupArray()
-// {
-//     if(!mesh)return;
-    
-//     var transforms=inTransformations.get();
-//     if(!transforms)
-//     {
-//         transforms=[0,0,0];
-//     }
-//     var num=Math.floor(transforms.length/3);
-    
-    
-//     var scales=inScales.get();
-//     // console.log('scales',scales);
-//     // console.log('setup array!');
-
-//     if(matrixArray.length!=num*16)
-//     {
-//         matrixArray=new Float32Array(num*16);
-//     }
-
-//     for(var i=0;i<num;i++)
-//     {
-//         mat4.identity(m);
-//         mat4.translate(m,m,
-//             [
-//                 transforms[i*3],
-//                 transforms[i*3+1],
-//                 transforms[i*3+2]
-//             ]);
-        
-//         if(scales && scales.length>i)
-//         {
-//             mat4.scale(m,m,[scales[i],scales[i],scales[i]]);
-//             // console.log('scale',scales[i]);
-//         }
-//         else
-//         {
-//             mat4.scale(m,m,[1,1,1]);
-//         }
-
-//         for(var a=0;a<16;a++)
-//         {
-//             matrixArray[i*16+a]=m[a];
-//         }
-//     }
-
-//     mesh.numInstances=num;
-//     mesh.addAttribute('instMat',matrixArray,16);
-//     recalc=false;
-// }
 
 function doRender()
 {
@@ -292,6 +198,4 @@ function doRender()
     uniDoInstancing.setValue(1);
     mesh.render(shader);
     uniDoInstancing.setValue(0);
-
-
 }
