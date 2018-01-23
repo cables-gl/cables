@@ -1,1 +1,70 @@
-{"summary":"outputs a absolute value controlled by the mousewheel","layout":{"portsIn":[{"type":"0","name":"Value"},{"type":"0","name":"Multiply"},{"type":"0","name":"min"},{"type":"0","name":"max"},{"type":"0","name":"smooth"},{"type":"0","name":"delay"},{"type":"0","name":"prevent scroll"},{"type":"0","name":"Flip Direction"},{"type":"1","name":"Reset"}],"portsOut":[{"type":"0","name":"absolute value"},{"type":"0","name":"delta"}],"name":"Ops.Devices.Mouse.MouseWheel"}}
+{
+    "summary": "outputs a absolute value controlled by the mousewheel",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Multiply"
+            },
+            {
+                "type": "0",
+                "name": "Min Unlimited"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "Max Unlimited"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "smooth"
+            },
+            {
+                "type": "0",
+                "name": "delay"
+            },
+            {
+                "type": "0",
+                "name": "prevent scroll"
+            },
+            {
+                "type": "0",
+                "name": "Flip Direction"
+            },
+            {
+                "type": "0",
+                "name": "active"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "absolute value"
+            },
+            {
+                "type": "0",
+                "name": "delta"
+            }
+        ],
+        "name": "Ops.Devices.Mouse.MouseWheel"
+    },
+    "updated": 1516634209656,
+    "authorName": "pandur",
+    "id": "40331e99-d2c6-4a0a-b5dd-385045aecd18",
+    "created": 1516633142096
+}

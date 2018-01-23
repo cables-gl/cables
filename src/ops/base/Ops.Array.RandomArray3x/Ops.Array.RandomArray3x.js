@@ -25,13 +25,13 @@ init();
 function init()
 {
     Math.randomSeed=seed.get();
-    
+
     arr.length=Math.floor(numValues.get()*3) || 300;
     for(var i=0;i<arr.length;i+=3)
     {
-        arr[i+0]=Math.seededRandom()* ( max.get() - min.get() ) + min.get() ;
-        arr[i+1]=Math.seededRandom()* ( max.get() - min.get() ) + min.get() ;
-        arr[i+2]=Math.seededRandom()* ( max.get() - min.get() ) + min.get() ;
+        arr[i+0]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
+        arr[i+1]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
+        arr[i+2]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
     }
 
     if(closed.get())
