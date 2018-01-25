@@ -1,4 +1,3 @@
-op.name="ImageSequenceAnim";
 
 var exe=op.addInPort(new Port(op,"Exe",OP_PORT_TYPE_FUNCTION));
 var next=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
@@ -27,8 +26,6 @@ var posX=0;
 var posY=0;
 var lastSwitch=0;
 var frame=0;
-
-
 
 function setRepeat()
 {

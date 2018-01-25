@@ -19,6 +19,7 @@ var boneMatricesUniform=null;
 var vertWeights=null;
 var vertIndex=null;
 var attribWeightsScene=-1;
+var moduleVert=null;
 
 render.onLinkChanged=removeModule;
 op.onDelete=removeModule;
@@ -59,7 +60,10 @@ function setGeom()
 
 function setupIndexWeights(jsonMesh)
 {
-    if(!mesh)return;
+    if(!mesh)
+    {
+        return;
+    }
 
     if(!vertWeights || vertWeights.length!=geom.vertices.length/3)
     {
@@ -67,7 +71,7 @@ function setupIndexWeights(jsonMesh)
         vertIndex=[];
         vertWeights.length=geom.vertices.length/3;
         vertIndex.length=geom.vertices.length/3;
-        
+
         for(var i=0;i<vertWeights.length;i++)
         {
             vertWeights[i]=[-1,-1,-1,-1];
@@ -114,7 +118,7 @@ function setupIndexWeights(jsonMesh)
     }
     
     shader.define("SKIN_NUM_BONES",bones.length);
-
+    
     var vi=[].concat.apply([], vertIndex);
     var vw=[].concat.apply([], vertWeights);
 
@@ -125,41 +129,38 @@ function setupIndexWeights(jsonMesh)
 render.onTriggered=function()
 {
     if(!cgl.getShader()) return;
-
-    if(cgl.getShader()!=shader)
-    {
-        if(shader)removeModule();
-        shader=cgl.getShader();
-
-        moduleVert=shader.addModule(
-            {
-                title:op.objName,
-                priority:-1,
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:attachments.skin_head_vert||'',
-                srcBodyVert:attachments.skin_vert||''
-            });
-        shader.define("SKIN_NUM_BONES",1);
-
-        boneMatricesUniform=new CGL.Uniform(shader,'m4','bone',[]);
-        attribWeightsScene=null;
-        console.log("reset skin shader...");
-    }
-
     var scene=cgl.frameStore.currentScene.getValue();
-    
-    if(scene && scene.meshes && scene.meshes.length>meshIndex)
+
+    if(mesh && scene && scene.meshes && scene.meshes.length>meshIndex)
     {
+        if(cgl.getShader()!=shader)
+        {
+            if(shader)removeModule();
+            shader=cgl.getShader();
+    
+            moduleVert=shader.addModule(
+                {
+                    title:op.objName,
+                    priority:-1,
+                    name:'MODULE_VERTEX_POSITION',
+                    srcHeadVert:attachments.skin_head_vert||'',
+                    srcBodyVert:attachments.skin_vert||''
+                });
+            shader.define("SKIN_NUM_BONES",1);
+            boneMatricesUniform=new CGL.Uniform(shader,'m4','bone',[]);
+            attribWeightsScene=null;
+        }
+
         if(attribWeightsScene!=scene)
         {
             vertWeights=null;
             setGeom();
-            console.log('attribWeightsScene!=scene');
             attribWeightsScene=scene;
-            setupIndexWeights(scene.meshes[meshIndex]);
+            setupIndexWeights( scene.meshes[meshIndex] );
         }
-    
+
         var bones=scene.meshes[meshIndex].bones;
+
         for(var i=0;i<bones.length;i++)
         {
             if(bones[i].matrix)
@@ -175,6 +176,8 @@ render.onTriggered=function()
                 console.log('no bone matrix',i);
             }
         }
+        // console.log(boneMatrices);
+        
         boneMatricesUniform.setValue(boneMatrices);
     }
 

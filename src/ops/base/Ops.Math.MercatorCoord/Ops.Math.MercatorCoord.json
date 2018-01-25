@@ -1,0 +1,37 @@
+{
+    "updated": 1516872415643,
+    "authorName": "pandur",
+    "id": "d95c5ba8-ed6e-4147-bf5f-8e44be3ef6cf",
+    "created": 1516871184749,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Latitude"
+            },
+            {
+                "type": "0",
+                "name": "Longitude"
+            },
+            {
+                "type": "0",
+                "name": "MapWidth"
+            },
+            {
+                "type": "0",
+                "name": "MapHeight"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            }
+        ],
+        "name": "Ops.Math.MercatorCoord"
+    }
+}

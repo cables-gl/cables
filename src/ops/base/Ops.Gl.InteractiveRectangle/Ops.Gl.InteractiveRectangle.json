@@ -1,5 +1,5 @@
 {
-    "updated": 1516615337861,
+    "updated": 1516810803337,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eeebdb51-9d8c-404d-a538-f5d9cf409200",
@@ -17,6 +17,10 @@
             {
                 "type": "0",
                 "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "id"
             },
             {
                 "type": "0",

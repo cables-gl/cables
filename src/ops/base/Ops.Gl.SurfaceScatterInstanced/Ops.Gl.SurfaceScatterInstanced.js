@@ -22,8 +22,6 @@ inGeomSurface.onChange=reset;
 render.onTriggered=doRender;
 render.onLinkChanged=removeModule;
 
-
-
 function setup()
 {
     var geom=inGeomSurface.get();
@@ -162,7 +160,6 @@ function reset()
 function doRender()
 {
     if(recalc)setup();
-    // if(matrixArray.length<=1)return;
     if(!mesh) return;
 
     if(cgl.getShader() && cgl.getShader()!=shader)

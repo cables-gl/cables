@@ -370,23 +370,15 @@ function onTouchMove(e)
         mouseOver.set(true);
         if(e.touches && e.touches.length>0) 
         {
-
             var rect = div.getBoundingClientRect(); //e.target
             var x = e.targetTouches[0].pageX - rect.left;
             var y = e.targetTouches[0].pageY - rect.top;
-    
-    
-            var touch=e.touches[0];
-            
-            
-            // console.log(e);
-    
-            // touch.offsetX=x;
-            // touch.offsetY=y;
 
-            // console.log(touch);
-    
-            // console.log('ox',touch.offsetX);
+            var touch=e.touches[0];
+        
+            outX.set( Math.max(0.0,Math.min(1.0,x/divWidth)));
+            outY.set( Math.max(0.0,Math.min(1.0,1.0-y/divHeight)));
+
             onMouseMove(touch);
         }
     }
