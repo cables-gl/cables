@@ -34,8 +34,6 @@ CABLES.Patch = function(cfg) {
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
-    
-
     this._variables = {};
     this._variableListeners = [];
     this.vars = {};
@@ -762,7 +760,6 @@ CABLES.Patch.prototype.setVarValue = function(name, val) {
     } else {
         this._variables[name] = new CABLES.Patch.Variable(name, val);
         this._callVariableListener();
-
     }
     return this._variables[name];
 };
@@ -773,7 +770,7 @@ CABLES.Patch.prototype.getVarValue = function(name, val) {
     }
 };
 
-CABLES.Patch.prototype.getVar = function(name, val) {
+CABLES.Patch.prototype.getVar = function(name) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name];
 };
