@@ -1,4 +1,3 @@
-op.name="Increment";
 
 var increment=op.addInPort(new Port(op,"Increment",OP_PORT_TYPE_FUNCTION));
 var decrement=op.addInPort(new Port(op,"Decrement",OP_PORT_TYPE_FUNCTION));
@@ -10,6 +9,8 @@ var reset=op.inFunctionButton("Reset");
 var inMode=op.inValueSelect("Mode",["Rewind","Stop at Max"]);
 
 var value=op.addOutPort(new Port(op,"Value",OP_PORT_TYPE_VALUE));
+
+var outRestarted=op.outFunction("Restarted");
 
 value.ignoreValueSerialize=true;
 inLength.set(10);
@@ -43,6 +44,7 @@ function doReset()
     value.set(null);
     val=0;
     value.set(val);
+    outRestarted.trigger();
 }
 
 decrement.onTriggered=function()
@@ -57,7 +59,11 @@ decrement.onTriggered=function()
 increment.onTriggered=function()
 {
     val++;
-    if(mode==MODE_REWIND && val>=inLength.get())val=0;
+    if(mode==MODE_REWIND && val>=inLength.get())
+    {
+        val=0;
+        outRestarted.trigger();
+    }
     if(mode==MODE_STOP && val>=inLength.get())val=inLength.get()-1;
     
     value.set(val);
