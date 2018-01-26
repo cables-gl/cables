@@ -16,9 +16,10 @@ exe.onTriggered=function()
     for(var i=0;i<arr.get().length;i++)
     {
         idx.set(i);
+        val.set(null);
         val.set(arr.val[i]);
         trigger.trigger();
-                op.patch.instancing.increment();
+        op.patch.instancing.increment();
 
     }
         op.patch.instancing.popLoop();

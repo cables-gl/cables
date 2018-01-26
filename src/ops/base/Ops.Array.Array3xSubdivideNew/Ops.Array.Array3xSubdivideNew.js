@@ -66,7 +66,8 @@ function calc()
         var newLen=(inPoints.length-6)*(subd-1);
         if(bezierEndPoints.get())newLen+=6;
         
-        if(newLen!=arr.length)  arr.length=newLen;
+        console.log('new length',newLen);
+        if(newLen!=arr.length)  arr.length=Math.floor(Math.abs(newLen));
         var count=0;
         
         if(bezierEndPoints.get())
