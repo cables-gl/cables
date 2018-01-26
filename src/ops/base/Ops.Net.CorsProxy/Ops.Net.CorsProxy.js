@@ -1,5 +1,6 @@
 var a=op.inValueString('url','');
 var result=op.outValue("Result");
+var CORS_CABLES_PROXY = 'https://cors.cables.gl/';
 
 a.onChange=update;
 
@@ -7,7 +8,5 @@ update();
 
 function update()
 {
-    var str='https://cors.cables.gl/';
-
-    result.set(str + a.get());
+    result.set(CORS_CABLES_PROXY + a.get());
 }
