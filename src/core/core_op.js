@@ -513,8 +513,8 @@ CABLES.Op = function()
 // console.log(this.patch.instancing.index());
 // console.log(this._instances.length);
 
-                if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
-                    theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
+                // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
+                    // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
             }
         }
 

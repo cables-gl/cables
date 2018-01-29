@@ -397,15 +397,22 @@ CGL.State = function() {
             $('#glcanvas').attr('width', w);
             $('#glcanvas').attr('height', h);
             this.onScreenShot = null;
+            if(blob)
+            {
+                var anchor = document.createElement('a');
 
-            var anchor = document.createElement('a');
+                anchor.setAttribute('download', filename);
+                anchor.setAttribute('href', URL.createObjectURL(blob));
+                document.body.appendChild(anchor);
+    
+                anchor.click();
+                if (cb) cb(blob);
+            }
+            else
+            {
+                console.log("screenshot: no blob");
+            }
 
-            anchor.setAttribute('download', filename);
-            anchor.setAttribute('href', URL.createObjectURL(blob));
-            document.body.appendChild(anchor);
-
-            anchor.click();
-            if (cb) cb(blob);
 
         }.bind(this),true);
     };

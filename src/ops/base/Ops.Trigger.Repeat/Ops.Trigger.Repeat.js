@@ -10,15 +10,15 @@ num.set(5);
 
 exe.onTriggered=function()
 {
-    op.patch.instancing.pushLoop(num.get());
+    // op.patch.instancing.pushLoop(num.get());
 
     for(var i=Math.round(num.get())-1;i>-1;i--)
     {
         idx.set(i);
         trigger.trigger();
-        op.patch.instancing.increment();
+        // op.patch.instancing.increment();
     }
 
-    op.patch.instancing.popLoop();
+    // op.patch.instancing.popLoop();
 };
 
