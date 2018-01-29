@@ -1,4 +1,3 @@
-op.name="RandomGridPlacement";
 
 var exe=op.inFunction("Exe");
 var maxDepth=op.inValue("max Depth",4);

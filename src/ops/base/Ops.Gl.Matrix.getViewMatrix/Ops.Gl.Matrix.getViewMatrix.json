@@ -1,4 +1,8 @@
 {
+    "updated": 1517222037201,
+    "authorName": "pandur",
+    "id": "a58406ae-79b5-4dab-99fa-0a66c2325aab",
+    "created": 1517222036539,
     "layout": {
         "portsIn": [
             {
@@ -16,10 +20,6 @@
                 "name": "matrix"
             }
         ],
-        "name": "Ops.Gl.Matrix.GetProjectonMatrix"
-    },
-    "updated": 1517222068806,
-    "authorName": "pandur",
-    "id": "3f048006-89e9-4e3f-a7d3-42aaa77ed630",
-    "created": 1517222067170
+        "name": "Ops.Gl.Matrix.getViewMatrix"
+    }
 }

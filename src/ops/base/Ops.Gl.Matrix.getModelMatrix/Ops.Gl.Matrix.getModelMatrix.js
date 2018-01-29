@@ -1,4 +1,3 @@
-op.name='ModelMatrix';
 var cgl=op.patch.cgl;
 var render=op.inFunction('render');
 var trigger=op.outFunction('trigger');

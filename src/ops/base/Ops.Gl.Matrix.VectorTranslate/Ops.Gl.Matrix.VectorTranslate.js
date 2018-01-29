@@ -1,9 +1,6 @@
-op.name="VectorTranslate";
 
 var exec=op.inFunction("Exec");
-
 var speed=op.inValue("Speed");
-
 var vecX=op.inValue("Vector X");
 var vecY=op.inValue("Vector Y");
 var vecZ=op.inValue("Vector Z");

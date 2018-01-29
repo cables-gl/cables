@@ -1,9 +1,8 @@
 {
-    "updated": 1517222284230,
-    "author": "55d744634cdc152216eb9aad",
+    "updated": 1517221904554,
     "authorName": "pandur",
-    "id": "9ba52457-5f0d-4b20-a97c-4ec4856b8e29",
-    "created": 1506603360839,
+    "id": "e256892f-7f68-4113-9eb8-cd981026ea8b",
+    "created": 1517221902725,
     "layout": {
         "portsIn": [
             {
@@ -21,6 +20,10 @@
             {
                 "type": "0",
                 "name": "z"
+            },
+            {
+                "type": "0",
+                "name": "w"
             }
         ],
         "portsOut": [
@@ -29,7 +32,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Matrix.ScaleXYZ"
-    },
-    "summary": "enlarge or shrink objects by a scale factor for every axis"
+        "name": "Ops.Gl.Matrix.Quaternion"
+    }
 }
