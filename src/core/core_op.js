@@ -518,7 +518,7 @@ CABLES.Op = function()
             }
         }
 
-        theTriggerPort.onTriggered();
+        if(theTriggerPort)theTriggerPort.onTriggered();
 
         for(ipi=0;ipi<this.portsOut.length;ipi++)
         {
