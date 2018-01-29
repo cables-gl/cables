@@ -58,7 +58,6 @@ function findBoneChilds(n,parent,foundBone)
 
     var time=op.patch.timer.getTime();
     if(inTime.isLinked() || inTime.get()!==0)time=inTime.get();
-    
 
     cgl.pushModelMatrix();
 
@@ -156,7 +155,7 @@ function findBoneChilds(n,parent,foundBone)
             points[pointCounter++]=parent.transformed[0];
             points[pointCounter++]=parent.transformed[1];
             points[pointCounter++]=parent.transformed[2];
-            
+
             points[pointCounter++]=tempVec[0];
             points[pointCounter++]=tempVec[1];
             points[pointCounter++]=tempVec[2];
@@ -200,6 +199,7 @@ render.onTriggered=function()
     findBoneChilds(scene.rootnode,null,false);
     cgl.popModelMatrix();
 
+outSpline.set(null);
     outSpline.set(points);
     outNumBounes.set(bones);
     fillBoneList=false;

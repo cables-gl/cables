@@ -389,8 +389,23 @@ function onTouchMove(e)
 }
 
 
-isInteractive.onChange=updateIsInteractive;
+active.onChange=updateActiveRender;
+function updateActiveRender()
+{
+    if(active.get()) 
+    {
+        addListeners();
+        if(div) div.style['display']='block';
+    }
+    else
+    {
+        removeListeners();
+        if(div) div.style['display']='none';
+    }
+    
+}
 
+isInteractive.onChange=updateIsInteractive;
 function updateIsInteractive()
 {
     if(isInteractive.get()) 
