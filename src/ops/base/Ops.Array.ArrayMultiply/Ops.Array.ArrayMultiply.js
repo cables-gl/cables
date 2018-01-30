@@ -1,4 +1,3 @@
-op.name="ArrayMultiply";
 
 var inArray=op.inArray("In");
 var inValue=op.inValue("Value");
@@ -7,7 +6,7 @@ var outArray=op.outArray("Result");
 
 var newArr=[];
 outArray.set(newArr);
-
+inArray.onChange=
 inValue.onChange=inArray.onChange=function()
 {
     var arr=inArray.get();
@@ -24,7 +23,6 @@ inValue.onChange=inArray.onChange=function()
     
     
     outArray.set(null);
-
     outArray.set(newArr);
 
     

@@ -130,6 +130,9 @@ render.onTriggered=function()
 {
     if(!cgl.getShader()) return;
     var scene=cgl.frameStore.currentScene.getValue();
+    // if(!scene)return;
+
+// if(!mesh)setGeom();
 
     if(mesh && scene && scene.meshes && scene.meshes.length>meshIndex)
     {

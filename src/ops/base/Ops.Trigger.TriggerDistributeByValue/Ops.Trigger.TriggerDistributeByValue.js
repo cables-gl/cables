@@ -16,7 +16,7 @@ var numTriggers=20;
 var trigger=function()
 {
     var s=max.get()/numOut.get();
-    var index=Math.floor(number.get()/s);
+    var index=Math.abs(Math.floor(number.get()/s));
     
     num.set(index);
     

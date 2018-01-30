@@ -6,6 +6,7 @@ var width=op.inValue("width",1);
 var height=op.inValue("height",1);
 
 var inId=op.inValueString("id");
+var classPort = op.inValueString("Class");
 
 var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
 var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
@@ -195,6 +196,7 @@ var divHeight=0;
 var mvMatrix=mat4.create();
 divVisible.onChange=updateDivVisibility;
 inId.onChange=updateId;
+classPort.onChange = updateClassNames;
 
 function updateDivVisibility()
 {
@@ -207,7 +209,10 @@ function updateDivVisibility()
 
 function updateCursor()
 {
-    div.style.cursor = cursorPort.get();
+    if(div)
+    {
+        div.style.cursor = cursorPort.get();
+    }
 }
 
 function updateId()
@@ -293,6 +298,12 @@ outBottom.set(yb);//=op.outValue("Bottom");
     div.style.height=divHeight+'px';
 }
 
+function updateClassNames() {
+    if(div) {
+        div.className = classPort.get(); 
+    }
+}
+
 op.onDelete=function()
 {
     if(div)div.remove();    
@@ -305,7 +316,7 @@ function setUpDiv()
         div = document.createElement('div');
         div.style.padding="0px";
         div.style.position="absolute";
-        div.style.overflow="hidden";
+        // div.style.overflow="hidden";
         div.style['box-sizing']="border-box";
         div.style.border="1px solid red";
         div.style['border-left']="1px solid blue";
@@ -317,6 +328,7 @@ function setUpDiv()
         updateCursor();
         updateIsInteractive();
         updateId();
+        updateClassNames();
     }
     updateDivSize();
 }

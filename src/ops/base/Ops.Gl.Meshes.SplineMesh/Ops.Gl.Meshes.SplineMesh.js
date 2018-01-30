@@ -124,7 +124,7 @@ function linesToGeom(points,options)
     {
         geom.vertices=new Float32Array( (numPoints/3*18 ) );
         geom.texCoords=new Float32Array( (numPoints/3*12) );
-        console.log('resize');
+        // console.log('resize');
     }
 
     index=0;

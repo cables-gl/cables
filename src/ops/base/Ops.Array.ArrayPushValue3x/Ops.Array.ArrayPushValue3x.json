@@ -1,5 +1,5 @@
 {
-    "updated": 1516711144592,
+    "updated": 1517312263585,
     "authorName": "tim",
     "id": "67323640-c377-4949-aa5f-3e2b54278fa4",
     "created": 1516711143659,
@@ -30,6 +30,10 @@
             {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "3",
+                "name": "Result Array"
             }
         ],
         "name": "Ops.Array.ArrayPushValue3x"
