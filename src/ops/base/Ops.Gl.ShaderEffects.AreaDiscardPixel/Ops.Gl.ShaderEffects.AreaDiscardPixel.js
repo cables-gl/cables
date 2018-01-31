@@ -106,6 +106,7 @@ op.render.onTriggered=function()
 
     if(!cgl.getShader())
     {
+        console.log("no shader")
          op.trigger.trigger();
          return;
     }

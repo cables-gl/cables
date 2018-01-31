@@ -1,0 +1,40 @@
+{
+    "updated": 1516729857480,
+    "authorName": "tim",
+    "id": "98e19e37-88ca-4c07-bed7-a050dac31e3a",
+    "created": 1516706915825,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Enabled"
+            },
+            {
+                "type": "0",
+                "name": "Min Scale"
+            },
+            {
+                "type": "0",
+                "name": "Max Scale"
+            },
+            {
+                "type": "1",
+                "name": "Reset Scale"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Scale"
+            },
+            {
+                "type": "2",
+                "name": "Event Details"
+            }
+        ],
+        "name": "Ops.Devices.Mobile.Pinch"
+    },
+    "libs": [
+        "hammer.js"
+    ]
+}

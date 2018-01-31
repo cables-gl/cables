@@ -65,6 +65,9 @@ function setupIndexWeights(jsonMesh)
         return;
     }
 
+    if(!vertWeights) console.log('no vertWeights');
+        else if(vertWeights.length!=geom.vertices.length/3) console.log('wrong length');
+
     if(!vertWeights || vertWeights.length!=geom.vertices.length/3)
     {
         vertWeights=[];
@@ -78,7 +81,7 @@ function setupIndexWeights(jsonMesh)
             vertIndex[i]=[-1,-1,-1,-1];
         }
     }
-    
+
     var maxBone=-1;
     var maxindex=-1;
     var bones=jsonMesh.bones;
@@ -92,7 +95,7 @@ function setupIndexWeights(jsonMesh)
             var index=bone.weights[w][0];
             var weight=bone.weights[w][1];
             maxindex=Math.max(maxindex,index);
-            
+
             if(vertWeights[index][0]==-1)
             {
                 vertWeights[index][0]=weight;
@@ -130,9 +133,11 @@ render.onTriggered=function()
 {
     if(!cgl.getShader()) return;
     var scene=cgl.frameStore.currentScene.getValue();
-    // if(!scene)return;
 
-// if(!mesh)setGeom();
+    if(cgl.getShader()!=shader)
+    {
+        console.log("NEW SHADER!");
+    }
 
     if(mesh && scene && scene.meshes && scene.meshes.length>meshIndex)
     {
@@ -140,7 +145,7 @@ render.onTriggered=function()
         {
             if(shader)removeModule();
             shader=cgl.getShader();
-    
+
             moduleVert=shader.addModule(
                 {
                     title:op.objName,
@@ -156,6 +161,7 @@ render.onTriggered=function()
 
         if(attribWeightsScene!=scene)
         {
+            console.log("diff scene!~!!");
             vertWeights=null;
             setGeom();
             attribWeightsScene=scene;
@@ -170,6 +176,8 @@ render.onTriggered=function()
             {
                 if(boneMatrices.length!=bones.length*16)
                     boneMatrices.length=bones.length*16;
+
+                // console.log('.');
 
                 for(var mi=0;mi<16;mi++)
                     boneMatrices[i*16+mi]=bones[i].matrix[mi];
