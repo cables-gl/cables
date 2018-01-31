@@ -1,14 +1,21 @@
 {
-    "updated": 1517406878651,
-    "author": "55d744634cdc152216eb9aad",
+    "updated": 1517411842090,
     "authorName": "pandur",
-    "id": "34f8a78c-7648-4431-97c9-1ad681dd3ae1",
-    "created": 1506697987362,
+    "id": "77f53ec6-058f-4ffe-9de7-b9282ea07532",
+    "created": 1517405944131,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
                 "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Attribute"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
             },
             {
                 "type": "0",
@@ -21,6 +28,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.VertexNumberLimit"
+        "name": "Ops.Exp.Gl.ShaderEffects.LimitMeshByAttribute"
     }
 }

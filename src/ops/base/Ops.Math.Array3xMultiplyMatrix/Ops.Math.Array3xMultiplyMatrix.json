@@ -1,5 +1,5 @@
 {
-    "updated": 1517322044170,
+    "updated": 1517395202592,
     "authorName": "pandur",
     "id": "a83aca4c-48ab-41ad-9943-3f4d03777ae8",
     "created": 1517319361414,
@@ -24,6 +24,6 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Math.Array3xMultiplyModelMatrix"
+        "name": "Ops.Math.Array3xMultiplyMatrix"
     }
 }

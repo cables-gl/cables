@@ -9,6 +9,7 @@ var next=op.outFunction("Next");
 var outNumUniforms=op.outValue("Num Uniforms");
 var outNumAttributes=op.outValue("Num Attributes");
 var outAttributeNames=op.outArray("Arributes Names");
+var outDefines=op.outArray("Num Defines");
 
 var cgl=op.patch.cgl;
 
@@ -34,7 +35,6 @@ exec.onTriggered=function()
     shader=cgl.getShader();
     next.trigger();
 
-
     if(shader && shader.getProgram())
     {
         outNumUniforms.set(cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS));
@@ -48,8 +48,8 @@ exec.onTriggered=function()
             attribNames.push(name);
         }
         outAttributeNames.set(attribNames);
-
-
+        
+        outDefines.set(shader.getDefines());
 
         op.error("programnull",null);
     }
@@ -58,6 +58,7 @@ exec.onTriggered=function()
         op.error("programnull",'shader program is null');
         outNumUniforms.set(0);
         outNumAttributes.set(0);
+        outDefines.set(0);
         outAttributeNames.set(null);
     }
 

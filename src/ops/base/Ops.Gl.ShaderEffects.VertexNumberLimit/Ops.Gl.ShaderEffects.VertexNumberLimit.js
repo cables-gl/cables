@@ -53,6 +53,7 @@ render.onTriggered=function()
         shader=cgl.getShader();
         module=shader.addModule(
             {
+                title:op.objName,
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
                 srcBodyVert:srcBodyVert
@@ -60,6 +61,7 @@ render.onTriggered=function()
 
         moduleFrag=shader.addModule(
             {
+                title:op.objName,
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
                 srcBodyFrag:srcBodyFrag

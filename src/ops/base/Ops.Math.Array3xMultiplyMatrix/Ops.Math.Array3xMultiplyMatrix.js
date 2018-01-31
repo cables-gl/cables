@@ -8,6 +8,11 @@ var theArr=[];
 exec.onTriggered=function()
 {
     var arr=inArr.get();
+    if(!arr)
+    {
+        outArr.set(null);
+        return;
+    }
     theArr.length=arr.length;
     var mMat=inMat.get();
     var vec=vec4.create();

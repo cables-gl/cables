@@ -1,6 +1,7 @@
 
 var inGeom=op.inObject("geometry");
 var outtest=op.outValue("test");
+var outGroups=op.outValue("Groups");
 
 var outGeom=op.outObject("Result");
 
@@ -80,37 +81,37 @@ inGeom.onChange=function()
         }
     }
 
-    var tc=[];
-    tc.length=verts.length/3*2;
+    var arrSubmesh=[];
+    arrSubmesh.length=verts.length/3;
     groupCounter-=1;
 
     for(var i=0;i<faceGroups.length;i++)
     {
-        var tcY=faceGroups[i] / groupCounter;
+        var tcY=faceGroups[i];// / groupCounter;
         // if(tcY==0)tcY=1;
         
-        if(tcY!=tcY)
-        {
-            console.log("tcy ",tcY,faceGroups[i]);
-        }
+        // if(tcY!=tcY)
+        // {
+        //     console.log("tcy ",tcY,faceGroups[i]);
+        // }
         
-        tc[faces[i*3+0]*2+0]=verts[faces[i*3+0]];
-        tc[faces[i*3+0]*2+1]=tcY;
+        arrSubmesh[faces[i*3+0]]=tcY;
+        arrSubmesh[faces[i*3+1]]=tcY;
+        arrSubmesh[faces[i*3+2]]=tcY;
 
-        tc[faces[i*3+1]*2+0]=verts[faces[i*3+0]];
-        tc[faces[i*3+1]*2+1]=tcY;
-
-        tc[faces[i*3+2]*2+0]=verts[faces[i*3+0]];
-        tc[faces[i*3+2]*2+1]=tcY;
+        // arrSubmesh[faces[i*3+0]*2+0]=verts[faces[i*3+0]];
+        // arrSubmesh[faces[i*3+1]*2+0]=verts[faces[i*3+0]];
+        // arrSubmesh[faces[i*3+2]*2+0]=verts[faces[i*3+0]];
     }
 
-    console.log(tc);
-    geom.setTexCoords(tc);
+    console.log(arrSubmesh);
+    geom.setAttribute("attrSubmesh",arrSubmesh,1);
 
     console.log('groups',groupCounter);
     console.log('faces',faces.length/3);
 
     outGeom.set(geom);
+    outGroups.set(groupCounter);
 
     outtest.set(geom.vertices.length);
 };
