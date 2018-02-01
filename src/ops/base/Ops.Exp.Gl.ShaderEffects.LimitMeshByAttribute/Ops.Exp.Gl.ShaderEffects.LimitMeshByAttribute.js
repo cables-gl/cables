@@ -75,7 +75,7 @@ function updateCode()
         .endl()+'if('+attrName+'Frag>MOD_max)discard;'
         .endl();
     
-    shader.dispose();
+    if(shader)shader.dispose();
     shader=null;
     
     needsCodeUpdate=false;

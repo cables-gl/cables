@@ -46,6 +46,8 @@ inGeom.onChange=function()
 
     var groupCounter=0;
     faceGroups.length=faces.length/3;
+    faceGroupPosY.length=faces.length/3;
+    faceGroupPosCount=0;
 
     for(var i=0;i<faceGroups.length;i++)
     {
@@ -87,7 +89,7 @@ inGeom.onChange=function()
 
     for(var i=0;i<faceGroups.length;i++)
     {
-        var tcY=faceGroups[i];// / groupCounter;
+        var tcY=faceGroups[i] / groupCounter;
         // if(tcY==0)tcY=1;
         
         // if(tcY!=tcY)
