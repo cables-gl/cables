@@ -1,0 +1,25 @@
+{
+    "updated": 1517222037201,
+    "authorName": "pandur",
+    "id": "a58406ae-79b5-4dab-99fa-0a66c2325aab",
+    "created": 1517222036539,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "3",
+                "name": "matrix"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.getViewMatrix"
+    }
+}

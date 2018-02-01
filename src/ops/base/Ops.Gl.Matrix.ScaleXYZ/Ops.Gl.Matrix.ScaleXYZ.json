@@ -1,5 +1,5 @@
 {
-    "updated": 1506603393742,
+    "updated": 1517222284230,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9ba52457-5f0d-4b20-a97c-4ec4856b8e29",
@@ -30,5 +30,6 @@
             }
         ],
         "name": "Ops.Gl.Matrix.ScaleXYZ"
-    }
+    },
+    "summary": "enlarge or shrink objects by a scale factor for every axis"
 }

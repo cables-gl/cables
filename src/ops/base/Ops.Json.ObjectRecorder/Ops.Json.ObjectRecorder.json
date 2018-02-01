@@ -1,0 +1,33 @@
+{
+    "updated": 1515777743224,
+    "authorName": "pandur",
+    "id": "5a6c7435-34ee-4897-9fda-548db54aff02",
+    "created": 1515776236771,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "1",
+                "name": "reset"
+            },
+            {
+                "type": "1",
+                "name": "download"
+            },
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Num Objects"
+            }
+        ],
+        "name": "Ops.Json.ObjectRecorder"
+    }
+}

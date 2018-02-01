@@ -1,0 +1,38 @@
+{
+    "updated": 1515097750397,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "86d6e6ec-55ca-4dcc-bf78-5393dd9498d6",
+    "created": 1515097725666,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Axis"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "Update Normals"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.Stretch"
+    }
+}

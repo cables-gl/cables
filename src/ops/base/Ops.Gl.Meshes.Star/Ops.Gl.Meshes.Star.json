@@ -1,0 +1,53 @@
+{
+    "updated": 1517141651675,
+    "authorName": "pandur",
+    "id": "25feb18a-8df6-473f-b548-59c514c6f949",
+    "created": 1517139637740,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "segments"
+            },
+            {
+                "type": "0",
+                "name": "radius"
+            },
+            {
+                "type": "0",
+                "name": "Shape"
+            },
+            {
+                "type": "0",
+                "name": "Length"
+            },
+            {
+                "type": "0",
+                "name": "percent"
+            },
+            {
+                "type": "0",
+                "name": "Fill"
+            },
+            {
+                "type": "0",
+                "name": "mapping"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.Star"
+    }
+}

@@ -1,0 +1,57 @@
+{
+    "updated": 1516725838205,
+    "authorName": "pandur",
+    "id": "282203ae-8e8c-4ff7-a0a6-f0cb0ec1ca25",
+    "created": 1516721369528,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "FPS"
+            },
+            {
+                "type": "0",
+                "name": "Num X"
+            },
+            {
+                "type": "0",
+                "name": "Num Y"
+            },
+            {
+                "type": "0",
+                "name": "Play"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Repeat X"
+            },
+            {
+                "type": "0",
+                "name": "Repeat Y"
+            },
+            {
+                "type": "0",
+                "name": "Offset X"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y"
+            },
+            {
+                "type": "0",
+                "name": "Frame"
+            },
+            {
+                "type": "0",
+                "name": "Progress"
+            }
+        ],
+        "name": "Ops.Gl.ImageSequenceAnim2"
+    }
+}

@@ -1,4 +1,3 @@
-op.name="GetProjectonMatrix";
 
 var cgl=op.patch.cgl;
 var render=op.inFunction('render');

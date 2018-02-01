@@ -60,13 +60,21 @@ CGL.Shader = function(_cgl, _name) {
         return name;
     }
 
+    this.setWhyCompile=function(why)
+    {
+        // console.log('recompile because '+why);
+    }
+
     this.setSource = function(srcVert, srcFrag) {
         this.srcVert = srcVert;
         this.srcFrag = srcFrag;
+
+        this.setWhyCompile("Source changed");
         this._needsRecompile = true;
     };
 
     this.enableExtension = function(name) {
+        this.setWhyCompile("enable extension "+name);
         this._needsRecompile = true;
         this._extensions.push(name);
     };
@@ -84,6 +92,12 @@ CGL.Shader = function(_cgl, _name) {
         }
         defines.push([name, value]);
         this._needsRecompile = true;
+        this.setWhyCompile("define "+name+" "+value);
+    };
+
+    this.getDefines=function()
+    {
+        return defines;
     };
 
     this.getDefine = function(name) {
@@ -124,10 +138,12 @@ CGL.Shader = function(_cgl, _name) {
             }
         }
         this._needsRecompile = true;
+        this.setWhyCompile("remove uniform "+name);
     };
 
     this.addUniform = function(uni) {
         uniforms.push(uni);
+        this.setWhyCompile("add uniform "+name);
         this._needsRecompile = true;
     };
 
@@ -377,6 +393,11 @@ CGL.Shader = function(_cgl, _name) {
         self.lastCompile = CABLES.now();
     };
 
+    this.dispose=function()
+    {
+        cgl.gl.deleteProgram(this._program);
+    };
+
     this.bind = function() {
         var i = 0;
         CGL.MESH.lastShader = this;
@@ -508,6 +529,7 @@ CGL.Shader = function(_cgl, _name) {
             }
         }
         this._needsRecompile = true;
+        this.setWhyCompile("remove module "+mod.title);
     };
 
     this.addModule = function(mod, sibling) {
@@ -522,7 +544,9 @@ CGL.Shader = function(_cgl, _name) {
 
         modules.push(mod);
         this._needsRecompile = true;
+        this.setWhyCompile("add module "+mod.title);
         moduleNumId++;
+
 
         return mod;
     };

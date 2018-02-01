@@ -30,14 +30,14 @@ function doRender()
     if(needsCalc)calc();
     for(var i=0;i<pos.length;i++)
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos[i] );
+        index.set(i);
         trigger.trigger();
 
-        index.set(i);
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 }
 
@@ -54,7 +54,7 @@ function calc()
     var segs=segments.get();
     if(segs<1)segs=1;
     
-    for (i=0; i < Math.round(segs)*percent.get(); i++)
+    for (i=0; i < Math.round(segs*percent.get()); i++)
     {
         degInRad = (360/Math.round(segs))*i*CGL.DEG2RAD;
         pos.push(

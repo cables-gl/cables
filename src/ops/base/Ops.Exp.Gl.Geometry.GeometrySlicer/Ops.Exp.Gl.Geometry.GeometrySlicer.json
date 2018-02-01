@@ -1,0 +1,29 @@
+{
+    "updated": 1516446202429,
+    "authorName": "pandur",
+    "id": "870a1c44-6842-4f8c-b255-ab0c8b279a12",
+    "created": 1516443418793,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Slices"
+            },
+            {
+                "type": "0",
+                "name": "Distance"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometrySlicer"
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "updated": 1517221885657,
+    "authorName": "pandur",
+    "id": "b15472e2-b895-4dde-95c3-239fa5e08afc",
+    "created": 1517221883316,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.TranslateView"
+    }
+}

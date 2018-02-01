@@ -30,7 +30,7 @@ var shaderOut=op.outObject("Shader");
 
 var cgl=op.patch.cgl;
 
-var shader=new CGL.Shader(cgl,'MatCapMaterial');
+var shader=new CGL.Shader(cgl,'MatCapMaterialNew');
 
 var uniOpacity=new CGL.Uniform(shader,'f','opacity',pOpacity);
 

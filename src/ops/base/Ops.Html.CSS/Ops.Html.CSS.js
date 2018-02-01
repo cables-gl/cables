@@ -1,20 +1,12 @@
-op.name="CSS";
 
-var inId=op.inValueString("Id","myStyle");
 var code=op.addInPort(new Port(op,"css code",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'css'}));
+
+var styleEle=null;
+var eleId='css_'+CABLES.uuid();
 
 code.onChange=update;
 update();
 
-var styleEle=null;
-
-
-inId.onChange=function()
-{
-    if(styleEle)styleEle.remove();
-    update();
-    
-};
 
 function getCssContent()
 {
@@ -23,7 +15,7 @@ function getCssContent()
 
 function update()
 {
-    styleEle=document.getElementById(inId.get());
+    styleEle=document.getElementById(eleId);
 
     if(styleEle)
     {
@@ -33,7 +25,7 @@ function update()
     {
         styleEle  = document.createElement('style');
         styleEle.type = 'text/css';
-        styleEle.id = inId.get();
+        styleEle.id = eleId;
         styleEle.textContent=getCssContent();
 
         var head  = document.getElementsByTagName('body')[0];
@@ -43,7 +35,7 @@ function update()
 
 op.onDelete=function()
 {
-    styleEle=document.getElementById(inId.get());
+    styleEle=document.getElementById(eleId);
     if(styleEle)styleEle.remove();
 };
 

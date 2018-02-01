@@ -1,0 +1,37 @@
+{
+    "updated": 1517221904554,
+    "authorName": "pandur",
+    "id": "e256892f-7f68-4113-9eb8-cd981026ea8b",
+    "created": 1517221902725,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            },
+            {
+                "type": "0",
+                "name": "z"
+            },
+            {
+                "type": "0",
+                "name": "w"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.Quaternion"
+    }
+}

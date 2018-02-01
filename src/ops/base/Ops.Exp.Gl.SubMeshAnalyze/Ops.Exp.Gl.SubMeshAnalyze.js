@@ -1,18 +1,29 @@
 
 var inGeom=op.inObject("geometry");
-var outtest=op.outValue("test");
+
+var inSort=op.inValueSelect("Sort",["None","Z"],"None");
+
+
+
+var outMin=op.outValue("Min Value");
+var outMax=op.outValue("Max Value");
 
 var outGeom=op.outObject("Result");
+var outValues=op.outArray("Values");
 
 var faceGroups=[];
 
-inGeom.onChange=function()
+inSort.onChange=analyze;
+inGeom.onChange=analyze;
+
+function analyze()
 {
     var geom=inGeom.get();
     if(!geom)return;
 
     var verts=geom.vertices;
     var faces=geom.verticesIndices;
+    var i=0;
 
     function changeVertIndex(from,to)
     {
@@ -26,16 +37,13 @@ inGeom.onChange=function()
     }
 
     // find dupes
-    for(var i=0;i<verts.length/3;i++)
+    for(i=0;i<verts.length/3;i++)
     {
         for(var j=0;j<verts.length/3;j++)
         {
             if(i!=j)
             {
-                if(
-                    verts[i*3+0]==verts[j*3+0] && 
-                    verts[i*3+1]==verts[j*3+1] && 
-                    verts[i*3+2]==verts[j*3+2] )
+                if(verts[i*3+0]==verts[j*3+0] && verts[i*3+1]==verts[j*3+1] && verts[i*3+2]==verts[j*3+2] )
                 {
                     changeVertIndex(j,i);
                 }
@@ -46,20 +54,35 @@ inGeom.onChange=function()
     var groupCounter=0;
     faceGroups.length=faces.length/3;
 
-    for(var i=0;i<faceGroups.length;i++)
+    var faceGroupPosCount=[];
+    var faceGroupPos=[];
+    faceGroupPos.length=faces.length/3;
+    faceGroupPosCount.length=faces.length/3;
+
+    for(i=0;i<faceGroups.length;i++)
     {
         faceGroups[i]=-1;
     }
 
     function setFaceGroupByVertIndex(idx,group)
     {
-        for(var i=0;i<faces.length/3;i++)
+        var i=0;
+        for(i=0;i<faces.length/3;i++)
         {
             if(faceGroups[i]!=group)
             {
                 if(faces[i*3+0]==idx || faces[i*3+1]==idx || faces[i*3+2]==idx )
                 {
                     faceGroups[i]=group;
+
+                    faceGroupPos[group]=faceGroupPos[group]||0;
+                    faceGroupPosCount[group]=faceGroupPosCount[group]||0;
+
+                    if(inSort.get()=="Z")
+                    {
+                        faceGroupPos[group]+=(verts[faces[i*3+0]*3+2]+verts[faces[i*3+1]*3+2]+verts[faces[i*3+2]*3+2])/3;
+                        faceGroupPosCount[group]++;
+                    }
 
                     if( faces[i*3+0]!=idx ) setFaceGroupByVertIndex( faces[i*3+0], group);
                     if( faces[i*3+1]!=idx ) setFaceGroupByVertIndex( faces[i*3+1], group);
@@ -69,7 +92,7 @@ inGeom.onChange=function()
         }
     }
 
-    for(var i=0;i<faces.length/3;i++)
+    for(i=0;i<faces.length/3;i++)
     {
         if( faceGroups[i] == -1 )
         {
@@ -80,39 +103,53 @@ inGeom.onChange=function()
         }
     }
 
-    var tc=[];
-    tc.length=verts.length/3*2;
+    var arrSubmesh=[];
+    arrSubmesh.length=verts.length/3;
     groupCounter-=1;
+    
+    var maxGroupValue=-999999;
+    var minGroupValue=999999;
 
-    for(var i=0;i<faceGroups.length;i++)
+
+    if(inSort.get()=="Z")
     {
-        var tcY=faceGroups[i] / groupCounter;
-        // if(tcY==0)tcY=1;
-        
-        if(tcY!=tcY)
+        for(i=0;i<faceGroups.length;i++)
         {
-            console.log("tcy ",tcY,faceGroups[i]);
+            var group = faceGroups[i];
+            if(group!=null && faceGroupPosCount[group]!=0)faceGroupPos[group] = faceGroupPos[group] / faceGroupPosCount[group];
+            faceGroupPosCount[group]=0;
         }
-        
-        tc[faces[i*3+0]*2+0]=verts[faces[i*3+0]];
-        tc[faces[i*3+0]*2+1]=tcY;
-
-        tc[faces[i*3+1]*2+0]=verts[faces[i*3+0]];
-        tc[faces[i*3+1]*2+1]=tcY;
-
-        tc[faces[i*3+2]*2+0]=verts[faces[i*3+0]];
-        tc[faces[i*3+2]*2+1]=tcY;
     }
 
-    console.log(tc);
-    geom.setTexCoords(tc);
+    for(i=0;i<faceGroups.length;i++)
+    {
+        var group=faceGroups[i];// / groupCounter;
+
+        if(inSort.get()=="Z") group=faceGroupPos[group];
+        
+        maxGroupValue=Math.max(maxGroupValue,group);
+        minGroupValue=Math.min(minGroupValue,group);
+
+        arrSubmesh[faces[i*3+0]]=group;
+        arrSubmesh[faces[i*3+1]]=group;
+        arrSubmesh[faces[i*3+2]]=group;
+    }
+
+    console.log(arrSubmesh);
+    geom.setAttribute("attrSubmesh",arrSubmesh,1);
 
     console.log('groups',groupCounter);
     console.log('faces',faces.length/3);
 
-    outGeom.set(geom);
+    outValues.set(null);
+    outValues.set(arrSubmesh);
 
-    outtest.set(geom.vertices.length);
+    outGeom.set(geom);
+    outMax.set(maxGroupValue);
+    outMin.set(minGroupValue);
+    
+
+
 };
 
 

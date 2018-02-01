@@ -106,12 +106,15 @@ op.render.onTriggered=function()
 
     if(!cgl.getShader())
     {
+        console.log("no shader")
          op.trigger.trigger();
          return;
     }
 
     if(cgl.getShader()!=shader)
     {
+        
+        console.log("Areapixeldiscard shader change!");
         if(shader) removeModule();
         shader=cgl.getShader();
 
@@ -144,7 +147,6 @@ op.render.onTriggered=function()
     }
 
     if(!shader)return;
-    var texSlot=moduleVert.num+5;
 
     op.trigger.trigger();
 };

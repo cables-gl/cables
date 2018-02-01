@@ -19,7 +19,7 @@ var oldPrim=0;
 var shader=null;
 render.onTriggered=function()
 {
-    if(op.instanced(render))return;
+    // if(op.instanced(render))return;
     
     shader=cgl.getShader();
     if(!shader)return;

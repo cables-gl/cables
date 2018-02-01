@@ -132,8 +132,13 @@ CABLES.Op = function()
 
 
 
+
 	CABLES.Op.prototype.inValueString=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
-	CABLES.Op.prototype.inValueText=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string","display":"text"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueText=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string","display":"text"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    
+    CABLES.Op.prototype.inValueEditor=function(name,v,syntax){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string",display:'editor',editorSyntax:syntax})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    
+
     CABLES.Op.prototype.inValueSelect=function(name,values,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     CABLES.Op.prototype.inValueInt=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -513,12 +518,12 @@ CABLES.Op = function()
 // console.log(this.patch.instancing.index());
 // console.log(this._instances.length);
 
-                if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
-                    theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
+                // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
+                    // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
             }
         }
 
-        theTriggerPort.onTriggered();
+        if(theTriggerPort)theTriggerPort.onTriggered();
 
         for(ipi=0;ipi<this.portsOut.length;ipi++)
         {

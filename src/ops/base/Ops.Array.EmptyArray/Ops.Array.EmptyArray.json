@@ -1,10 +1,16 @@
 {
-    "updated": 1514988426352,
+    "updated": 1517241475894,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "e2b3dd1c-c0d4-405a-b92c-a9355103939a",
     "created": 1514985113816,
     "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Reset"
+            }
+        ],
         "portsOut": [
             {
                 "type": "3",

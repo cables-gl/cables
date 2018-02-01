@@ -12,6 +12,8 @@ CGL.Geometry=function(name)
     this.morphTargets=[];
     this.vertexColors=[];
 
+    this._attributes={};
+
     this._indexed=true;
 
     Object.defineProperty(this, 'vertices', {
@@ -33,6 +35,21 @@ CGL.Geometry.prototype.clear=function()
     this.texCoords=new Float32Array([]);
     this.texCoordsIndices.length=0;
     this.vertexNormals.length=0;
+};
+CGL.Geometry.prototype.getAttributes=function()
+{
+    return this._attributes;
+};
+
+CGL.Geometry.prototype.setAttribute=function(name,arr,itemSize)
+{
+    var attr={
+        name:name,
+        data:arr,
+        itemSize:itemSize
+    };
+
+    this._attributes[name]=attr;
 };
 
 CGL.Geometry.prototype.setVertices=function(arr)
@@ -61,8 +78,6 @@ CGL.Geometry.prototype.testIndices=function()
         }
     }
 };
-
-
 
 // deprecated
 CGL.Geometry.prototype.calcNormals=function(smooth)

@@ -1,5 +1,4 @@
 var cgl=op.patch.cgl;
-op.name='set MV Matrix';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var inIdentity=op.inValueBool("Identity",false);
 var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
