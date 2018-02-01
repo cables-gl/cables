@@ -1,0 +1,45 @@
+{
+    "updated": 1517496189634,
+    "authorName": "pandur",
+    "id": "cd1742e1-058a-48d3-ac53-0e53d4984c47",
+    "created": 1517490083701,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Id"
+            },
+            {
+                "type": "0",
+                "name": "Class"
+            },
+            {
+                "type": "0",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Style"
+            },
+            {
+                "type": "0",
+                "name": "Interactive"
+            },
+            {
+                "type": "0",
+                "name": "Visible"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Hover"
+            },
+            {
+                "type": "1",
+                "name": "Clicked"
+            }
+        ],
+        "name": "Ops.Html.DivElement"
+    }
+}
