@@ -8,5 +8,9 @@
         ],
         "name": "Ops.Html.CSS"
     },
-    "summary": "Define a custom stylesheet, ID is the ID of the created stylesheet"
+    "summary": "Define a custom stylesheet, ID is the ID of the created stylesheet",
+    "updated": 1517495748523,
+    "authorName": "pandur",
+    "id": "0cf06684-c5cd-4ab1-b9aa-f3fad93a32dc",
+    "created": 1517495641208
 }
