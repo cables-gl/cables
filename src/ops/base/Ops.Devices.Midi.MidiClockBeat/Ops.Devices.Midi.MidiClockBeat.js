@@ -7,8 +7,8 @@ var triggerStart=op.outFunction("Start");
 var outSubTick=op.outValue("Sub Tick");
 var triggerSub=op.outFunction("Sub Beat");
 
-var clockStart = 0x0b11111010;
-var clockTick = 0x0b11111000;
+var clockStart = 0xFA;//0b11111010;
+var clockTick = 0xF8;//0b11111000;
 var tickCount = 0;
 
 var lastBeat=0;

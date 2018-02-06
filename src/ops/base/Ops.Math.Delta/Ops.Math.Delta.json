@@ -4,6 +4,10 @@
             {
                 "type": "0",
                 "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Change Always"
             }
         ],
         "portsOut": [
@@ -14,5 +18,9 @@
         ],
         "name": "Ops.Math.Delta"
     },
-    "summary": "difference to the last value"
+    "summary": "difference to the last value",
+    "updated": 1517650832487,
+    "authorName": "tim",
+    "id": "0f203337-e13c-47ec-a09f-b309212540b0",
+    "created": 1517650300323
 }

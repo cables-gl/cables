@@ -17,13 +17,10 @@ var isInteractive=op.inValueBool('Is Interactive',true);
 var active=op.inValueBool('Render',true);
 var divVisible=op.inValueBool('Show Boundings',true);
 
-
 var cursorPort=op.inValueSelect("Cursor",["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help", "none"],"pointer");
-
 
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
-
 
 var mouseOver=op.outValue("Pointer Hover",false);
 var mouseDown=op.outValue("Pointer Down",false);
@@ -37,6 +34,8 @@ var outBottom=op.outValue("Bottom");
 
 
 var mouseClick=op.outFunction("Left Click");
+
+var elementPort = op.outObject('Dom Element');
 
 var cgl=op.patch.cgl;
 axis.set('xy');
@@ -331,6 +330,8 @@ function setUpDiv()
         updateClassNames();
     }
     updateDivSize();
+    elementPort.set(div);
+    op.log('div', div);
 }
 
 var listenerElement=null;

@@ -1,5 +1,5 @@
 {
-    "updated": 1517319821498,
+    "updated": 1517501094893,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eeebdb51-9d8c-404d-a538-f5d9cf409200",
@@ -99,6 +99,10 @@
             {
                 "type": "1",
                 "name": "Left Click"
+            },
+            {
+                "type": "2",
+                "name": "Dom Element"
             }
         ],
         "name": "Ops.Gl.InteractiveRectangle"

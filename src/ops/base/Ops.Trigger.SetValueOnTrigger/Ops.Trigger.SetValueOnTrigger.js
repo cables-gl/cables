@@ -6,6 +6,7 @@ var setValuePort = op.inFunction("Set Value");
 
 // outputs
 var outValuePort = op.outValue("Out Value");
+outValuePort.changeAlways = true;
 
 // change listeners
 setValuePort.onTriggered = function() {
