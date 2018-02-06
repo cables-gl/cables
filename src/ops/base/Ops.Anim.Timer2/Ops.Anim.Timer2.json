@@ -1,0 +1,30 @@
+{
+    "updated": 1517953949751,
+    "authorName": "pandur",
+    "id": "aac7f721-208f-411a-adb3-79adae2e471a",
+    "created": 1517953593075,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Play"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Speed"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Time"
+            }
+        ],
+        "name": "Ops.Anim.Timer2"
+    },
+    "summary": "A timer that can be started, paused and reset by triggering"
+}
