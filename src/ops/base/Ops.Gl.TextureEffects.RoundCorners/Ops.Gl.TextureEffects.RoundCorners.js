@@ -35,5 +35,5 @@ render.onTriggered=function()
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
-    trigger.trigger();
+    next.trigger();
 };

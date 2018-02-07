@@ -26,5 +26,6 @@
             }
         ],
         "name": "Ops.Gl.DrawTextureMapping"
-    }
+    },
+    "summary": "draw texture mapping coordinates"
 }

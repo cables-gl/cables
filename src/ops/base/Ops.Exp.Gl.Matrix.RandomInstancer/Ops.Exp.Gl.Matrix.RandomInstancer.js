@@ -1,4 +1,3 @@
-op.name="Instancer";
 
 var exe=op.inFunction("Render");
 var geom=op.inObject("Geometry");

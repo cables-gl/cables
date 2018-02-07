@@ -26,5 +26,6 @@
             }
         ],
         "name": "Ops.User.pandur.MatrixToCssTransform"
-    }
+    },
+    "summary": "convert webgl modelmatrix to css transform matrix"
 }

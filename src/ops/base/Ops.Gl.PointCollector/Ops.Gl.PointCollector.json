@@ -26,5 +26,6 @@
             }
         ],
         "name": "Ops.Gl.PointCollector"
-    }
+    },
+    "summary": "collect points/coordinates below with pointCollectorCollect"
 }

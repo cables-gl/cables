@@ -21,5 +21,6 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Twirl"
-    }
+    },
+    "summary": "twirl image effect"
 }

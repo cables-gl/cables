@@ -1,5 +1,5 @@
 {
-    "updated": 1515950490797,
+    "updated": 1517958183522,
     "authorName": "pandur",
     "id": "f7e5d8c3-6f49-4769-a863-fbff2c466ce8",
     "created": 1515950218939,
@@ -33,5 +33,6 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.RoundCorners"
-    }
+    },
+    "summary": "draw round corners around image (border)"
 }

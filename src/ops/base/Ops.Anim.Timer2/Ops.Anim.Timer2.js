@@ -5,10 +5,10 @@ var inSpeed=op.inValue("Speed",1);
 
 var timer=new CABLES.Timer();
 var lastTime=0;
+var time=0;
+
 playPause.onChange=setState;
 setState();
-
-var time=0;
 
 function setState()
 {
@@ -26,21 +26,25 @@ function setState()
 
 reset.onTriggered=function()
 {
+    time=0;
+    lastTime=0;
     timer.setTime(0);
 };
 
 op.onAnimFrame=function()
 {
-    timer.update();
-    if(lastTime===0)
+    if(timer.isPlaying())
     {
-        lastTime=timer.get();
-        return;
-    }
-    
-    var t=timer.get()-lastTime;
-    lastTime=timer.get();
-    time+=t*inSpeed.get();
-    outTime.set(time);
+        timer.update();
+        if(lastTime===0)
+        {
+            lastTime=timer.get();
+            return;
+        }
 
+        var t=timer.get()-lastTime;
+        lastTime=timer.get();
+        time+=t*inSpeed.get();
+        outTime.set(time);
+    }
 };

@@ -1,6 +1,26 @@
 {
-    "updated": 1515963825657,
+    "updated": 1517958775254,
     "authorName": "pandur",
     "id": "4059e4ee-da93-490a-a00c-6fe0f0ee8efc",
-    "created": 1515962918465
+    "created": 1515962918465,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number"
+            },
+            {
+                "type": "0",
+                "name": "Divisor"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.NumberDivisible"
+    },
+    "summary": "is a number capable of being divided."
 }
