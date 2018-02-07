@@ -18,11 +18,13 @@ function addStyle()
         
         console.log('FONT ',filename.get() , fontname.get());
         
+        var fileUrl=op.patch.getFilePath(String(filename.get()));
+        
         var styleStr=''
             .endl()+'@font-face'
             .endl()+'{'
             .endl()+'  font-family: "'+fontname.get()+'";'
-            .endl()+'  src: url("'+filename.get()+'") format("truetype");'
+            .endl()+'  src: url("'+fileUrl+'") format("truetype");'
             .endl()+'}';
     
         
@@ -30,10 +32,7 @@ function addStyle()
         style.type = 'text/css';
         style.innerHTML = styleStr;
         document.getElementsByTagName('head')[document.getElementsByTagName('head').length-1].appendChild(style);
-
     }
-        
-
 }
 
 
