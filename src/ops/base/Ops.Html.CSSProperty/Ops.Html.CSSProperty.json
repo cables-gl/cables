@@ -1,0 +1,33 @@
+{
+    "updated": 1517923408711,
+    "authorName": "pandur",
+    "id": "16aaf067-a92d-4e8d-9746-117e0ccc52bf",
+    "created": 1517922958904,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Style"
+            },
+            {
+                "type": "0",
+                "name": "Property"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Value Suffix"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Style Result"
+            }
+        ],
+        "name": "Ops.Html.CSSProperty"
+    }
+}
