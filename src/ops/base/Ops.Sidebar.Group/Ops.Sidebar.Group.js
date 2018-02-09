@@ -31,9 +31,11 @@ function updateText()
 
 function init(params)
 {
+    if(!params)return;
     initialized=true;
     element = document.createElement('div');
     element.style.color="#eee";
+    element.style['font-family']="monospace";
 
     element.appendChild(textContent);
 
@@ -64,6 +66,7 @@ function updateSidebar()
 function updateParams()
 {
     var params=link.get();
+    if(!params)return;
 
     if(!initialized) init(params);
 

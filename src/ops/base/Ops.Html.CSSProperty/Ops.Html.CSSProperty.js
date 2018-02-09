@@ -1,7 +1,7 @@
 var inStyle=op.inValueString("Style");
 var inProperty=op.inValueString("Property");
 var inValue=op.inValue("Value");
-var inValueSuffix=op.inValue("Value Suffix",'px');
+var inValueSuffix=op.inValueString("Value Suffix",'px');
 
 var outStyle=op.outValue("Style Result");
 

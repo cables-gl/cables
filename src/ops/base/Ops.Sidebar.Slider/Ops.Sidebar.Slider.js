@@ -1,13 +1,11 @@
-op.name="Toggle";
-
 var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
 var child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
 
-var value=op.addOutPort(new Port(op,"Value",OP_PORT_TYPE_VALUE,{type:'bool'}));
+var value=op.outValue("Result");
 var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
 
 value.set(false);
-text.set('Sidebar toggle');
+text.set('Slider');
 
 var textContent = document.createTextNode(text.get()); 
 var textContentValue= document.createTextNode(text.get()); 
@@ -31,7 +29,6 @@ function updateText()
         else elementCheckBox.style.color="#444";
 
     textContent.nodeValue=text.get();
-    textContentValue.nodeValue='●';
 }
 
 function init(params)
@@ -40,30 +37,33 @@ function init(params)
     element = document.createElement('div');
 
     var size=(params.height-params.padding*2);
-    elementCheckBox = document.createElement('div');
-    elementCheckBox.style.float="right";
-    elementCheckBox.style.width=size+"px";
-    elementCheckBox.style['font-size']="25px";
-    elementCheckBox.style.height=size+"px";
-    elementCheckBox.style['margin-top']="-7px";
+    elementCheckBox = document.createElement('input');
+    elementCheckBox.setAttribute("type","range");
+    elementCheckBox.style.display="block";
+    elementCheckBox.style.width="100%";
+    // elementCheckBox.style['font-size']="25px";
+    // elementCheckBox.style.height=size+"px";
+    // elementCheckBox.style['margin-top']="20px";
 
 
     element.style['font-family']="monospace";
     element.style['user-select']="none";
 
     element.appendChild(textContent);
-    elementCheckBox.appendChild(textContentValue);
+    element.appendChild(document.createElement('br'));
+    // elementCheckBox.appendChild(textContentValue);
     element.appendChild(elementCheckBox);
 
     updateText();
     
     params.parent.appendChild(element);
 
-    element.onclick=function()
+    element.addEventListener("input",function(e)
     {
-        value.set(!value.get());
+        // console.log(e.target.value);
+        value.set(e.target.value/100);
         updateText();
-    };
+    });
 }
 
 function remove()

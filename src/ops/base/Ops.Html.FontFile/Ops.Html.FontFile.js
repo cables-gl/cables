@@ -1,5 +1,3 @@
-op.name="FontFile";
-
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 var fontname=op.addInPort(new Port(op,"family",OP_PORT_TYPE_VALUE,{ type:'string' } ));
 
@@ -15,11 +13,7 @@ function addStyle()
 
     if(filename.get() && fontname.get())
     {
-        
-        console.log('FONT ',filename.get() , fontname.get());
-        
         var fileUrl=op.patch.getFilePath(String(filename.get()));
-        
         var styleStr=''
             .endl()+'@font-face'
             .endl()+'{'
@@ -27,7 +21,6 @@ function addStyle()
             .endl()+'  src: url("'+fileUrl+'") format("truetype");'
             .endl()+'}';
     
-        
         var style = document.createElement('style');
         style.type = 'text/css';
         style.innerHTML = styleStr;

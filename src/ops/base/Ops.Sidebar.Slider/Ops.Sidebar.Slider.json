@@ -1,8 +1,8 @@
 {
-    "updated": 1518204056460,
+    "updated": 1518205462804,
     "authorName": "pandur",
-    "id": "334bcf18-e2d0-46ad-bf7a-0d36c3d29af9",
-    "created": 1518203702644,
+    "id": "eb3232e5-e947-4683-a17f-27a72d464b2c",
+    "created": 1518204108335,
     "layout": {
         "portsIn": [
             {
@@ -21,9 +21,9 @@
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Result"
             }
         ],
-        "name": "Ops.Sidebar.Toggle"
+        "name": "Ops.Sidebar.Slider"
     }
 }
