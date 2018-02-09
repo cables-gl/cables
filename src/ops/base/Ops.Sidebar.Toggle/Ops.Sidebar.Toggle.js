@@ -47,6 +47,10 @@ function init(params)
     elementCheckBox.style.height=size+"px";
     elementCheckBox.style['margin-top']="-7px";
 
+
+    element.style['font-family']="monospace";
+    element.style['user-select']="none";
+
     element.appendChild(textContent);
     elementCheckBox.appendChild(textContentValue);
     element.appendChild(elementCheckBox);
@@ -78,6 +82,7 @@ function updateSidebar()
 function updateParams()
 {
     var params=link.get();
+    if(!params)return;
 
     if(params.hide) remove(); 
     else

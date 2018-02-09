@@ -1,5 +1,3 @@
-op.name="ApproachInterpolation";
-
 var exec=op.inFunction("Update");
 var inVal=op.inValue("Value");
 
@@ -10,6 +8,7 @@ var next=op.outFunction("Next");
 var val=0;
 var goal=0;
 var divisor=5;
+var lastTrigger=0;
 
 inVal.onChange=function()
 {
@@ -25,6 +24,11 @@ var oldVal=0;
 
 exec.onTriggered=function()
 {
+    
+    if(CABLES.now()-lastTrigger>500)val=inVal.get();
+    lastTrigger=CABLES.now();
+
+
     if(divisor<=0)divisor=0.0001;
     val=val+(goal-val)/divisor;
 

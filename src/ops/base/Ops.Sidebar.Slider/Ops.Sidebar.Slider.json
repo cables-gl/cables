@@ -1,0 +1,29 @@
+{
+    "updated": 1518205462804,
+    "authorName": "pandur",
+    "id": "eb3232e5-e947-4683-a17f-27a72d464b2c",
+    "created": 1518204108335,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "0",
+                "name": "Text"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "childs"
+            },
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Sidebar.Slider"
+    }
+}

@@ -1,1 +1,30 @@
-{"summary":"Trigger the following childs once"}
+{
+    "summary": "Trigger the following childs once",
+    "updated": 1518003036149,
+    "authorName": "pandur",
+    "id": "cf3544e4-e392-432b-89fd-fcfb5c974388",
+    "created": 1518003035091,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Was Triggered"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerOnce"
+    }
+}

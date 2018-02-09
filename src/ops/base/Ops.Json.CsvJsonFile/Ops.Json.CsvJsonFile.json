@@ -26,5 +26,6 @@
             }
         ],
         "name": "Ops.Json.CsvJsonFile"
-    }
+    },
+    "summary": "load a csv json file as array"
 }

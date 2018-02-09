@@ -1,5 +1,5 @@
 {
-    "updated": 1517496293257,
+    "updated": 1517924027833,
     "authorName": "pandur",
     "id": "cd1742e1-058a-48d3-ac53-0e53d4984c47",
     "created": 1517490083701,
@@ -31,6 +31,10 @@
             }
         ],
         "portsOut": [
+            {
+                "type": "2",
+                "name": "DOM Element"
+            },
             {
                 "type": "0",
                 "name": "Hover"

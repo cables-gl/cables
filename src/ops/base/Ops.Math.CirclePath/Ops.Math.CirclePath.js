@@ -1,4 +1,3 @@
-op.name="CirclePath";
 
 var outArr=op.outArray("Points");
 var percent=op.inValueSlider('percent',1);

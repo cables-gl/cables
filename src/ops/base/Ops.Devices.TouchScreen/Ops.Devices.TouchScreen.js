@@ -24,14 +24,24 @@ function setPos(event)
 {
     if(event.touches && event.touches.length>0) 
     {
-        f1x.set(event.touches[0].clientX);
-        f1y.set(event.touches[0].clientY);
+        
+        var rect = event.target.getBoundingClientRect();
+        var x = event.touches[0].clientX - event.touches[0].target.offsetLeft;
+        var y = event.touches[0].clientY - event.touches[0].target.offsetTop;
+
+        f1x.set(x);
+        f1y.set(y);
     }
 
     if(event.touches && event.touches.length>1) 
     {
-        f2x.set(event.touches[1].clientX);
-        f2y.set(event.touches[1].clientY);
+
+        var rect = event.target.getBoundingClientRect();
+        var x = event.touches[1].clientX - event.touches[1].target.offsetLeft;
+        var y = event.touches[1].clientY - event.touches[1].target.offsetTop;
+
+        f2x.set(x);
+        f2y.set(y);
     }
     outEvents.set(event.touches);
 

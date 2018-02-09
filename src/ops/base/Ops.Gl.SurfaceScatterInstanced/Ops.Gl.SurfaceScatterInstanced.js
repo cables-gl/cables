@@ -24,6 +24,7 @@ render.onLinkChanged=removeModule;
 
 function setup()
 {
+    if(!mesh)return;
     var geom=inGeomSurface.get();
     var num=inNum.get();
     var m=mat4.create();
@@ -161,6 +162,8 @@ function doRender()
 {
     if(recalc)setup();
     if(!mesh) return;
+    if(!inGeomSurface.get())return;
+    if(!geom.get())return;
 
     if(cgl.getShader() && cgl.getShader()!=shader)
     {

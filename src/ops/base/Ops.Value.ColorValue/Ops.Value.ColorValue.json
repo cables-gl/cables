@@ -1,0 +1,53 @@
+{
+    "updated": 1517408910688,
+    "authorName": "tim",
+    "id": "7caa37c8-f2a7-49f2-a29c-96af362abca0",
+    "created": 1517408692744,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "a"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "outr"
+            },
+            {
+                "type": "0",
+                "name": "outg"
+            },
+            {
+                "type": "0",
+                "name": "outb"
+            },
+            {
+                "type": "0",
+                "name": "outa"
+            },
+            {
+                "type": "0",
+                "name": "Hex"
+            },
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.Value.ColorValue"
+    }
+}

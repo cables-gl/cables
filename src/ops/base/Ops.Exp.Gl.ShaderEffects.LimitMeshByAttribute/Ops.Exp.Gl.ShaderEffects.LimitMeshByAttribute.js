@@ -54,8 +54,7 @@ function updateCode()
         }
     }
     
-    if(attrName=='')return;
-
+    if(attrName==='')return;
 
     srcHeadVert=''
         .endl()+'OUT '+attrType+' '+attrName+'Frag;'
@@ -72,7 +71,7 @@ function updateCode()
         .endl();
 
     srcBodyFrag=''
-        .endl()+'if('+attrName+'Frag>MOD_max)discard;'
+        .endl()+'if('+attrName+'Frag>=MOD_max)discard;'
         .endl();
     
     if(shader)shader.dispose();

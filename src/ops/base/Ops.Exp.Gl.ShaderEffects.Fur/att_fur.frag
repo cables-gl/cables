@@ -27,12 +27,6 @@ void main()
 		discard;
 	}
 
-    // col.a=col.r*(1.0-layerPerc);
-    // col.a=0.8   -layerPerc*1.2;
-    
-    // col.a=col.r*(1.0-layerPerc)*0.9;
-    // col.a*=alpha*0.8;
-    // col.a*=col.r;
 
 // col.rgb=vec3(1.0,1.0,1.0);
 // col.rgb*=0.7;
@@ -60,6 +54,13 @@ void main()
     
 
 // col.rgb=vec3(layerPerc);
+
+    // col.a=col.r*(1.0-layerPerc);
+    
+    col.a=(1.0-layerPerc)*0.5;
+    // col.a=col.r*(1.0-layerPerc)*0.9;
+    // col.a*=alpha*0.8;
+    // col.a*=col.r;
 
 
    {{MODULE_COLOR}}

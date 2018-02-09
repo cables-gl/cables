@@ -1,10 +1,9 @@
-op.name="ParseArray";
-
 var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var separator=op.inValueString("separator",",");
 
 var toNumber=op.inValueBool("Numbers",false);
 
+var parsed=op.outFunction("Parsed");
 var arr=op.addOutPort(new Port(op,"array",OP_PORT_TYPE_ARRAY));
 var len=op.addOutPort(new Port(op,"length",OP_PORT_TYPE_VALUE));
 
@@ -32,5 +31,7 @@ function parse()
         }
     }
     
+    arr.set(null);
     arr.set(r);
+    parsed.trigger();
 }

@@ -1,5 +1,4 @@
 
-
 var inId=op.inValueString("Id");
 var inClass=op.inValueString("Class");
 var inText=op.inValueString("Text");
@@ -8,6 +7,7 @@ var inStyle=op.inValueEditor("Style","position:absolute;","css");
 var inInteractive=op.inValueBool("Interactive",false);
 var inVisible=op.inValueBool("Visible",true);
 
+var outElement=op.outObject("DOM Element");
 var outHover=op.outValue("Hover");
 var outClicked=op.outFunction("Clicked");
 
@@ -16,7 +16,9 @@ var listenerElement=null;
 
 div = document.createElement('div');
 var canvas = op.patch.cgl.canvas.parentElement;
+// var canvas = op.patch.cgl.canvas;
 canvas.appendChild(div);
+outElement.set(div);
 
 inClass.onChange=updateClass;
 inText.onChange=updateText;

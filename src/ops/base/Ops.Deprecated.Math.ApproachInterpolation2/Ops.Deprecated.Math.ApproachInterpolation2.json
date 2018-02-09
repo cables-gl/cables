@@ -1,0 +1,33 @@
+{
+    "updated": 1517523504541,
+    "authorName": "pandur",
+    "id": "a9ef9f9e-b890-4afc-92ea-90e287ade3bd",
+    "created": 1517522836289,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Divisor"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            },
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Math.ApproachInterpolation2"
+    }
+}

@@ -1,7 +1,5 @@
 
-op.name='random';
-
-var exe=op.inFunction('exe');
+var exe=op.inFunctionButton('exe');
 var minusPlusOne=op.addInPort(new Port(op,"0 to x / -x to x ",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var max=op.inValue("max",1);
 var seed=op.inValue("random seed",0);

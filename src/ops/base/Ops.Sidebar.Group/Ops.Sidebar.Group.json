@@ -1,1 +1,29 @@
-{}
+{
+    "updated": 1518205112606,
+    "authorName": "pandur",
+    "id": "86ea2333-b51c-48ed-94c2-8b7b6e9ff34c",
+    "created": 1518205018582,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "0",
+                "name": "Text"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "childs"
+            }
+        ],
+        "name": "Ops.Sidebar.Group"
+    }
+}

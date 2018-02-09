@@ -29,5 +29,6 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.Twist2"
-    }
+    },
+    "summary": "twist a mesh around an axis"
 }

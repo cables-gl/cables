@@ -5,6 +5,9 @@ var childs=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
 
 var element = document.createElement('div');
 element.style["background-color"]="#000";
+element.style["z-index"]="99999";
+element.style["position"]="absolute";
+element.style["width"]="200px";
 
 var canvas = document.getElementById('cablescanvas'); 
 if(!canvas)canvas=document.body;
@@ -18,22 +21,30 @@ op.childsChanged=function()
             "parent":element,
             "pos":0,
             "level":0,
-            "height":25,
+            // "min-height":'25px',
             "width":200,
             "padding":5
         });
 };
 
+
+
 op.setupDiv=function(element,params)
 {
-    
+    if(!element || !params)return;
     var levelSpace=10;
     
+    
+    // var h=element.offsetHeight;
+    
     element.style.padding=params.padding+'px';
-    element.style.position="absolute";
+    // element.style.position="absolute";
     element.style.overflow="hidden";
     element.style.cursor="pointer";
-    element.style["z-index"]="99999";
+    element.style.float="left";
+    element.style.clear="both";
+    
+    element.style["min-height"]="25px";
     element.style["background-color"]="#222";
     
     element.style['padding-left']=(10+params.level*levelSpace)+"px";
@@ -41,7 +52,7 @@ op.setupDiv=function(element,params)
     element.style["border-bottom"]="1px solid #444";
     element.style.width=(params.width-params.level*levelSpace)+"px";
 
-    element.style['margin-top']=(params.pos*params.height+params.pos)+"px";
+    // element.style['margin-top']=(params.pos*h+params.pos)+"px";
 
 };
 
