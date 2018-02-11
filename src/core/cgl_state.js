@@ -76,7 +76,6 @@ CGL.State = function() {
         }
     };
 
-
     this.updateSize=function()
     {
         this.canvas.width = this.canvasWidth = this.canvas.clientWidth*this.pixelDensity;
@@ -104,14 +103,6 @@ CGL.State = function() {
             viewPort[2],
             viewPort[3]);
     };
-
-    this.forceViewPortSize=function(x,y,w,h)
-    {
-        viewPort[0] = Math.round(x);
-        viewPort[1] = Math.round(y);
-        viewPort[2] = Math.round(w);
-        viewPort[3] = Math.round(h);
-    }
 
     this.setViewPort = function(x, y, w, h) {
         viewPort[0] = Math.round(x);

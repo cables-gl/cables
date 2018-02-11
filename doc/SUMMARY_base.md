@@ -30,4 +30,6 @@
     * [Writing Shaders](shader/shader.md)
 
 * [Ops](chapter_readmes/ops/readme.md)
+* [API](api/api.md)
+
 
