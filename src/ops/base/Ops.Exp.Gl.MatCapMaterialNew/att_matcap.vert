@@ -15,7 +15,7 @@ IN float attrVertIndex;
 #endif
 
 OUT vec2 texCoord;
-OUT vec3 norm;
+OUT vec3 inNorm;
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
@@ -37,7 +37,7 @@ OUT vec3 e;
 void main()
 {
     texCoord=attrTexCoord;
-    norm=attrVertNormal;
+    inNorm=attrVertNormal;
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix;
     
@@ -53,7 +53,7 @@ void main()
     mvMatrix= viewMatrix * mMatrix;
     
     e = normalize( vec3( mvMatrix * pos ) );
-    vec3 n = normalize( mat3(normalMatrix) * norm );
+    vec3 n = normalize( mat3(normalMatrix) * inNorm );
 
     vec3 r = reflect( e, n );
     float m = 2. * sqrt(

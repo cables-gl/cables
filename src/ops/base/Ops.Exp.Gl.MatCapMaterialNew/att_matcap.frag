@@ -3,7 +3,7 @@ precision highp float;
 
 {{MODULES_HEAD}}
 
-IN vec3 norm;
+IN vec3 inNorm;
 IN vec2 texCoord;
 UNI sampler2D tex;
 IN vec2 vNorm;
@@ -53,13 +53,14 @@ const float normalScale=0.4;
 
 void main()
 {
-   vec2 vnOrig=vNorm;
-   vec2 vn=vNorm;
+    vec2 vnOrig=vNorm;
+    vec2 vn=vNorm;
+    vec3 norm=inNorm;
 
-   #ifdef HAS_TEXTURES
+    #ifdef HAS_TEXTURES
         vec2 texCoords=texCoord;
         {{MODULE_BEGIN_FRAG}}
-   #endif
+    #endif
 
     #ifdef CALC_SSNORMALS
     	vec3 dFdxPos = dFdx( eye_relative_pos );
@@ -139,9 +140,12 @@ void main()
     #ifdef HAS_DIFFUSE_TEXTURE
         col = col*texture2D( texDiffuse, vec2(texCoords.x*repeatX,texCoords.y*repeatY));
     #endif
-        col.r*=r;
-        col.g*=g;
-        col.b*=b;
+
+    col.r*=r;
+    col.g*=g;
+    col.b*=b;
+
+
 
     #ifdef HAS_AO_TEXTURE
         col = col*

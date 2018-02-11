@@ -1,4 +1,3 @@
-op.name='Hue';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var hue=op.addInPort(new Port(op,"hue",OP_PORT_TYPE_VALUE,{display:'range'}));

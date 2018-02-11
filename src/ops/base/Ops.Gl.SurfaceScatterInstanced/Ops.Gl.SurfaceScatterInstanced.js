@@ -3,6 +3,7 @@ var inGeomSurface=op.inObject("Geom Surface");
 var geom=op.inObject("Geometry");
 
 var inNum=op.inValue("Num",100);
+var inSizeMin=op.inValueSlider("Size min",1.0);
 
 var mod=null;
 var mesh=null;
@@ -14,10 +15,10 @@ var cgl=op.patch.cgl;
 var matrixArray= new Float32Array(1);
 var m=mat4.create();
 
-var scaleArr=op.inArray("Scaling");
+// var scaleArr=op.inArray("Scaling");
 
 inNum.onChange=reset;
-scaleArr.onChange=reset;
+inSizeMin.onChange=reset;
 inGeomSurface.onChange=reset;
 render.onTriggered=doRender;
 render.onLinkChanged=removeModule;
@@ -54,7 +55,7 @@ function setup()
                     geom.vertices[faces[index+0]*3+2]
                 ]);
 
-            // rotate
+            // rotate to normal direction
             vec3.set(norm,
                 geom.vertexNormals[geom.verticesIndices[index+0]*3+0],
                 geom.vertexNormals[geom.verticesIndices[index+0]*3+1],
@@ -68,23 +69,22 @@ function setup()
             mat4.fromQuat(qMat, q);
             mat4.mul(m,m,qMat);
         
-    
-            if(scaleArr.get())
+
+            // random rotate around up axis
+            var mr=mat4.create();
+            var qbase=quat.create();
+            quat.rotateX(qbase,qbase,Math.random()*2*3.14,0,0);
+            mat4.fromQuat(mr,qbase);
+            mat4.mul(m,m,mr);
+
+            // scale
+            if(inSizeMin.get()!=1.0)
             {
-                var arr=scaleArr.get();
-                if(arr.length>index*3)
-                {
-                    mat4.scale(m,m,[
-                        arr[ index*3+0 ],
-                        arr[ index*3+1 ],
-                        arr[ index*3+2 ]
-                        ]);
-                    // console.log("scalearray");
-                }
+                var sc=inSizeMin.get()+ ( Math.random()*(1.0-inSizeMin.get()) );
+                mat4.scale(m,m,[sc,sc,sc]);
             }
-    
+
             // save
-    
             for(var a=0;a<16;a++)
             {
                 matrixArray[i*16+a]=m[a];

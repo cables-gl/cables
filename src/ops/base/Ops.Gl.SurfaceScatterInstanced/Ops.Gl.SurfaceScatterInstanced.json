@@ -1,5 +1,5 @@
 {
-    "updated": 1518184678404,
+    "updated": 1518344055542,
     "authorName": "pandur",
     "id": "01305694-f1b9-485e-8bbd-9daa0a7be996",
     "created": 1516622763169,
@@ -22,8 +22,8 @@
                 "name": "Num"
             },
             {
-                "type": "3",
-                "name": "Scaling"
+                "type": "0",
+                "name": "Size min"
             }
         ],
         "name": "Ops.Gl.SurfaceScatterInstanced"

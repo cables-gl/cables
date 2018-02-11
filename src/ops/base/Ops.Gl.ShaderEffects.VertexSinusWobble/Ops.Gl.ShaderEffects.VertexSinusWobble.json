@@ -1,1 +1,57 @@
-{}
+{
+    "updated": 1518344467412,
+    "authorName": "pandur",
+    "id": "bb76bc8e-9d92-47d8-af16-e135a6575284",
+    "created": 1518344117257,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "frequency"
+            },
+            {
+                "type": "0",
+                "name": "amount"
+            },
+            {
+                "type": "0",
+                "name": "phase"
+            },
+            {
+                "type": "0",
+                "name": "mul"
+            },
+            {
+                "type": "0",
+                "name": "add"
+            },
+            {
+                "type": "0",
+                "name": "axisX"
+            },
+            {
+                "type": "0",
+                "name": "axisY"
+            },
+            {
+                "type": "0",
+                "name": "axisZ"
+            },
+            {
+                "type": "0",
+                "name": "Source"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.VertexSinusWobble"
+    }
+}

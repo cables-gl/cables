@@ -58,70 +58,74 @@ function setDefines()
 {
     if(!shader)return;
 
-    if(self.toAxisX.val)shader.define(module.prefix+'_TO_AXIS_X');
-        else shader.removeDefine(module.prefix+'_TO_AXIS_X');
+    if(self.toAxisX.val)shader.define(module.prefix+'TO_AXIS_X');
+        else shader.removeDefine(module.prefix+'TO_AXIS_X');
 
-    if(self.toAxisY.val)shader.define(module.prefix+'_TO_AXIS_Y');
-        else shader.removeDefine(module.prefix+'_TO_AXIS_Y');
+    if(self.toAxisY.val)shader.define(module.prefix+'TO_AXIS_Y');
+        else shader.removeDefine(module.prefix+'TO_AXIS_Y');
 
-    if(self.toAxisZ.val)shader.define(module.prefix+'_TO_AXIS_Z');
-        else shader.removeDefine(module.prefix+'_TO_AXIS_Z');
+    if(self.toAxisZ.val)shader.define(module.prefix+'TO_AXIS_Z');
+        else shader.removeDefine(module.prefix+'TO_AXIS_Z');
     
-    if(!src.get() || src.get()=='X * Z + Time' || src.get()==='') shader.define(module.prefix+'_SRC_XZ');
-        else shader.removeDefine(module.prefix+'_SRC_XZ');
+    if(!src.get() || src.get()=='X * Z + Time' || src.get()==='') shader.define(module.prefix+'SRC_XZ');
+        else shader.removeDefine(module.prefix+'SRC_XZ');
 
-    if(src.get()=='X * Y + Time')shader.define(module.prefix+'_SRC_XY');
-        else shader.removeDefine(module.prefix+'_SRC_XY');
+    if(src.get()=='X * Y + Time')shader.define(module.prefix+'SRC_XY');
+        else shader.removeDefine(module.prefix+'SRC_XY');
 
-    if(src.get()=='X + Time')shader.define(module.prefix+'_SRC_X');
-        else shader.removeDefine(module.prefix+'_SRC_X');
+    if(src.get()=='X + Time')shader.define(module.prefix+'SRC_X');
+        else shader.removeDefine(module.prefix+'SRC_X');
 
-    if(src.get()=='Y + Time')shader.define(module.prefix+'_SRC_Y');
-        else shader.removeDefine(module.prefix+'_SRC_Y');
+    if(src.get()=='Y + Time')shader.define(module.prefix+'SRC_Y');
+        else shader.removeDefine(module.prefix+'SRC_Y');
 
-    if(src.get()=='Z + Time')shader.define(module.prefix+'_SRC_Z');
-        else shader.removeDefine(module.prefix+'_SRC_Z');
+    if(src.get()=='Z + Time')shader.define(module.prefix+'SRC_Z');
+        else shader.removeDefine(module.prefix+'SRC_Z');
 }
 
 var srcHeadVert=''
-    .endl()+'uniform float {{mod}}_time;'
-    .endl()+'uniform float {{mod}}_frequency;'
-    .endl()+'uniform float {{mod}}_amount;'
-    .endl()+'uniform float {{mod}}_phase;'
-    .endl()+'uniform float {{mod}}_mul;'
-    .endl()+'uniform float {{mod}}_add;'
+    .endl()+'UNI float MOD_time;'
+    .endl()+'UNI float MOD_frequency;'
+    .endl()+'UNI float MOD_amount;'
+    .endl()+'UNI float MOD_phase;'
+    .endl()+'UNI float MOD_mul;'
+    .endl()+'UNI float MOD_add;'
     .endl();
 
 var srcBodyVert=''
-    .endl()+'#ifdef {{mod}}_SRC_XZ'
-    .endl()+'   float {{mod}}_v=(pos.x*pos.z)+{{mod}}_add;'
+
+    .endl()+'vec3 MOD_pos=(pos*mMatrix).xyz;'
+    .endl()+'float MOD_v=0.0;'
+    
+    .endl()+'#ifdef MOD_SRC_XZ'
+    .endl()+'   MOD_v=(MOD_pos.x*MOD_pos.z)+MOD_add;'
     .endl()+'#endif'
-    .endl()+'#ifdef {{mod}}_SRC_XY'
-    .endl()+'   float {{mod}}_v=(pos.x*pos.y)+{{mod}}_add;'
+    .endl()+'#ifdef MOD_SRC_XY'
+    .endl()+'   MOD_v=(MOD_pos.x*MOD_pos.y)+MOD_add;'
     .endl()+'#endif'
-    .endl()+'#ifdef {{mod}}_SRC_X'
-    .endl()+'   float {{mod}}_v=pos.x+{{mod}}_add;'
+    .endl()+'#ifdef MOD_SRC_X'
+    .endl()+'   MOD_v=MOD_pos.x+MOD_add;'
     .endl()+'#endif'
-    .endl()+'#ifdef {{mod}}_SRC_Y'
-    .endl()+'   float {{mod}}_v=pos.y+{{mod}}_add;'
+    .endl()+'#ifdef MOD_SRC_Y'
+    .endl()+'   MOD_v=MOD_pos.y+MOD_add;'
     .endl()+'#endif'
-    .endl()+'#ifdef {{mod}}_SRC_Z'
-    .endl()+'   float {{mod}}_v=pos.z+{{mod}}_add;'
+    .endl()+'#ifdef MOD_SRC_Z'
+    .endl()+'   MOD_v=MOD_pos.z+MOD_add;'
     .endl()+'#endif'
 
 
-    .endl()+'{{mod}}_v=sin( {{mod}}_time+( {{mod}}_v*{{mod}}_mul  )* {{mod}}_frequency + {{mod}}_phase ) * {{mod}}_amount;'
+    .endl()+'MOD_v=sin( MOD_time+( MOD_v*MOD_mul  )* MOD_frequency + MOD_phase ) * MOD_amount;'
 
-    .endl()+'#ifdef {{mod}}_TO_AXIS_X'
-    .endl()+'   pos.x+={{mod}}_v;'
+    .endl()+'#ifdef MOD_TO_AXIS_X'
+    .endl()+'   pos.x+=MOD_v;'
     .endl()+'#endif'
 
-    .endl()+'#ifdef {{mod}}_TO_AXIS_Y'
-    .endl()+'   pos.y+={{mod}}_v;'
+    .endl()+'#ifdef MOD_TO_AXIS_Y'
+    .endl()+'   pos.y+=MOD_v;'
     .endl()+'#endif'
 
-    .endl()+'#ifdef {{mod}}_TO_AXIS_Z'
-    .endl()+'   pos.z+={{mod}}_v;'
+    .endl()+'#ifdef MOD_TO_AXIS_Z'
+    .endl()+'   pos.z+=MOD_v;'
     .endl()+'#endif'
 
     .endl();
@@ -154,12 +158,12 @@ this.render.onTriggered=function()
                 srcBodyVert:srcBodyVert
             });
 
-        uniTime=new CGL.Uniform(shader,'f',module.prefix+'_time',0);
-        uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'_frequency',self.frequency);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'_amount',self.amount);
-        uniPhase=new CGL.Uniform(shader,'f',module.prefix+'_phase',self.phase);
-        uniMul=new CGL.Uniform(shader,'f',module.prefix+'_mul',mul);
-        uniAdd=new CGL.Uniform(shader,'f',module.prefix+'_add',add);
+        uniTime=new CGL.Uniform(shader,'f',module.prefix+'time',0);
+        uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'frequency',self.frequency);
+        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'amount',self.amount);
+        uniPhase=new CGL.Uniform(shader,'f',module.prefix+'phase',self.phase);
+        uniMul=new CGL.Uniform(shader,'f',module.prefix+'mul',mul);
+        uniAdd=new CGL.Uniform(shader,'f',module.prefix+'add',add);
         setDefines();
     }
 

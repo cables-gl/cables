@@ -222,18 +222,30 @@ blendMode.onValueChanged=function()
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
-
-imageAlpha.onValueChanged=function()
-{
-    if(imageAlpha.get() && imageAlpha.get().tex) shader.define('HAS_TEXTUREALPHA');
-        else shader.removeDefine('HAS_TEXTUREALPHA');
-};
-
+var oldHadImageAlpha=false;
 
 
 function doRender()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+
+
+    if(imageAlpha.get() && !oldHadImageAlpha || !imageAlpha.get() && oldHadImageAlpha)
+    {
+        if(imageAlpha.get() && imageAlpha.get().tex)
+        {
+            shader.define('HAS_TEXTUREALPHA');
+            oldHadImageAlpha=true;
+        }
+        else
+        {
+            shader.removeDefine('HAS_TEXTUREALPHA');
+            oldHadImageAlpha=false;
+        }
+        
+    }
+
+
 
     if(image.get() && image.get().tex && amount.get()>0.0)
     {
