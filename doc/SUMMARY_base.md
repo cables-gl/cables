@@ -28,7 +28,10 @@
     * [Callbacks](dev_callbacks/dev_callbacks.md)
     * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
     * [Writing Shaders](shader/shader.md)
-
+* [FAQ](chapter_readmes/faq/readme.md)
+  - [Disable page scrolling on mobile](faq/page_scrolling_on_mobile.md)
+  - [Remove grey rectangles on touch (iOS)](faq/grey_rectangles_on_ios.md)
+  - [Video on Mobile](faq/video_on_mobile.md)
 * [Ops](chapter_readmes/ops/readme.md)
 * [API](api/api.md)
 
