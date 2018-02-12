@@ -1,4 +1,3 @@
-op.name='RandomArray';
 
 var numValues=op.addInPort(new Port(op, "numValues",OP_PORT_TYPE_VALUE));
 var seed=op.addInPort(new Port(op,"random seed"));

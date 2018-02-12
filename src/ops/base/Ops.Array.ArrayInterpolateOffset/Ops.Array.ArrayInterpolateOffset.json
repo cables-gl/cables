@@ -1,4 +1,8 @@
 {
+    "updated": 1518454984460,
+    "authorName": "pandur",
+    "id": "f89f5664-7cfa-4598-b09c-e4320b588b45",
+    "created": 1518451074145,
     "layout": {
         "portsIn": [
             {
@@ -11,11 +15,19 @@
             },
             {
                 "type": "0",
-                "name": "perc"
+                "name": "Pos"
+            },
+            {
+                "type": "0",
+                "name": "Width"
             },
             {
                 "type": "1",
                 "name": "Exe"
+            },
+            {
+                "type": "0",
+                "name": "Easing"
             }
         ],
         "portsOut": [
@@ -28,12 +40,6 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.ArrayInterpolate"
-    },
-    "summary": "interpolate between two arrays (lerp)",
-    "updated": 1518453692350,
-    "author": "59db805b08bab26e1ab7a0f2",
-    "authorName": "pandur",
-    "id": "09296117-7312-4f80-982b-7b4a81d22cf8",
-    "created": 1513177459868
+        "name": "Ops.Array.ArrayInterpolateOffset"
+    }
 }

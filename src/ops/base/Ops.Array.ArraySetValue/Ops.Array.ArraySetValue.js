@@ -1,17 +1,11 @@
-
 var exe=op.inFunctionButton("exe");
 
 var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
 var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
 var value=op.addInPort(new Port(op, "value",OP_PORT_TYPE_VALUE));
 var values=op.addOutPort(new Port(op, "values",OP_PORT_TYPE_ARRAY));
-// values.ignoreValueSerialize=true;
 
-// function updateIndex()
-// {
-//     if(exe.isLinked())return;    
-//     update();
-// }
+exe.onTriggered=update;
 
 function update()
 {
@@ -27,7 +21,3 @@ function update()
     values.set(arr);
 }
 
-// index.onChange=updateIndex;
-// array.onChange=updateIndex;
-// value.onChange=update;
-exe.onTriggered=update;

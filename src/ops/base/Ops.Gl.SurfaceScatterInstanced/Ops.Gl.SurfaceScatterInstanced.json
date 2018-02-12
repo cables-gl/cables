@@ -1,5 +1,5 @@
 {
-    "updated": 1518442535625,
+    "updated": 1518445937065,
     "authorName": "pandur",
     "id": "01305694-f1b9-485e-8bbd-9daa0a7be996",
     "created": 1516622763169,
@@ -16,6 +16,10 @@
             {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Distribution"
             },
             {
                 "type": "0",

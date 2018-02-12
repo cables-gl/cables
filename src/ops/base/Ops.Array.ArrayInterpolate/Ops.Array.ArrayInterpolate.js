@@ -1,5 +1,3 @@
-op.name="ArrayInterpolate";
-
 var inArr1=op.inArray('Array 1');
 var inArr2=op.inArray('Array 2');
 
@@ -24,15 +22,15 @@ exe.onTriggered=function()
     }
     else
     {
-        if(resultArr.length!=arr1.length)
-            resultArr.length=arr1.length;
+        if(resultArr.length!=arr1.length) resultArr.length=arr1.length;
 
         var perc=inPerc.get();
 
         for(var i=0;i<arr1.length;i++)
         {
-            val1=arr1[i];
-            val2=arr2[i];
+            var val1=arr1[i];
+            var val2=arr2[i];
+            
             
             var m=( (val2-val1)*perc+val1 );
         

@@ -2,6 +2,9 @@ var render=op.inFunction("Render");
 var inGeomSurface=op.inObject("Geom Surface");
 var geom=op.inObject("Geometry");
 
+var inDistribution=op.inValueSelect("Distribution",['Vertex','Triangle Center','Triangle Side'],'Vertex');
+
+
 var inNum=op.inValue("Num",100);
 var inSizeMin=op.inValueSlider("Size min",1.0);
 var inSizeMax=op.inValueSlider("Size max",1.0);
@@ -18,6 +21,7 @@ var cgl=op.patch.cgl;
 var matrixArray= new Float32Array(1);
 var m=mat4.create();
 
+inDistribution.onChange=reset;
 seed.onChange=reset;
 inNum.onChange=reset;
 inRotateRandom.onChange=reset;
@@ -41,6 +45,10 @@ function setup()
     if(!geom) return;
 
     Math.randomSeed=seed.get();
+    
+    var distMode=0;
+    if(inDistribution.get()=='Triangle Center')distMode=1;
+    if(inDistribution.get()=='Triangle Side')distMode=2;
 
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
 
@@ -54,13 +62,40 @@ function setup()
             index=Math.floor(index)*3.0;
 
             mat4.identity(m);
-            mat4.translate(m,m,
-                [
-                    geom.vertices[faces[index+0]*3+0],
-                    geom.vertices[faces[index+0]*3+1],
-                    geom.vertices[faces[index+0]*3+2]
-                ]);
+            
+            if(distMode==0)
+            {
+                mat4.translate(m,m,
+                    [
+                        geom.vertices[faces[index+0]*3+0],
+                        geom.vertices[faces[index+0]*3+1],
+                        geom.vertices[faces[index+0]*3+2]
+                    ]);
+            }
+            else if(distMode==1)
+            {
+                mat4.translate(m,m,
+                    [
+                        (geom.vertices[faces[index+0]*3+0]+geom.vertices[faces[index+1]*3+0]+geom.vertices[faces[index+2]*3+0])/3,
+                        (geom.vertices[faces[index+0]*3+1]+geom.vertices[faces[index+1]*3+1]+geom.vertices[faces[index+2]*3+1])/3,
+                        (geom.vertices[faces[index+0]*3+2]+geom.vertices[faces[index+1]*3+2]+geom.vertices[faces[index+2]*3+2])/3,
 
+                    ]);
+            } else if(distMode==2)
+            {
+                var which=Math.round(Math.seededRandom()*3.0);
+                
+                var whichA=which;
+                var whichB=which+1;
+                if(whichB>2)whichB=0;
+
+                mat4.translate(m,m,
+                    [
+                        ( geom.vertices[faces[index+whichA]*3+0]+geom.vertices[faces[index+whichB]*3+0] )/2,
+                        ( geom.vertices[faces[index+whichA]*3+1]+geom.vertices[faces[index+whichB]*3+1] )/2,
+                        ( geom.vertices[faces[index+whichA]*3+2]+geom.vertices[faces[index+whichB]*3+2] )/2,
+                    ]);
+            }
 
             // rotate to normal direction
             vec3.set(norm,
@@ -107,6 +142,10 @@ function setup()
                 matrixArray[i*16+a]=m[a];
             }
         }
+    }
+    else
+    {
+        console.error("geom is not indexed");
     }
 
     mesh.numInstances=num;
