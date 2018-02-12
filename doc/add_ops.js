@@ -78,6 +78,9 @@ var opCategories = [];
 
 /**
  * Checks if there is already an op-category in SUMMARY.md, if not creates one
+ * @param category e.g. "WebAudio"
+ * @param categoryFull e.g. Ops.WebAudio (this should not contain any sub-categories beyond this category)
+ * @param indents number of indents for the list rendering
  */
 function createOpCategory(category, indents) {
   if(!arrayContains(opCategories, category)) {
@@ -156,6 +159,11 @@ function createOpEntry(filename) {
   var text = "";
   if(parts.length > 2) { // 0 = no name, 1 = bad name
     for(var j=1; j<parts.length-1; j++) {
+      // category string including parts[j], e.g. "Ops.WebAudio"
+      var categoryFull = parts.splice(0, j + 1).reduce(function(acc, val, index, arr) { 
+        return index < arr.length-1 ? acc + val + ".": acc + val;
+      }, "");
+      //createOpCategory(parts[j], categoryFull, j);
       createOpCategory(parts[j], j);
     }
     for(var i=0; i<parts.length-1; i++) {
