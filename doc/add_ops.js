@@ -205,5 +205,5 @@ function createOpEntries() {
 //copyFile("SUMMARY_base.md", "SUMMARY.md", createOpEntries);
 fsSync.remove("SUMMARY.md");
 fsSync.copy("SUMMARY_base.md", "SUMMARY.md");
-createOpEntries();
+// createOpEntries(); /* we display the op docs on the cables main page now... */
 console.log("Done.");
