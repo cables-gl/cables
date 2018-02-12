@@ -83,7 +83,7 @@ var opCategories = [];
  * @param indents number of indents for the list rendering
  */
 function createOpCategory(category, indents) {
-  if(!arrayContains(opCategories, category)) {
+  if(!arrayContains(opCategories, category) && category) {
       console.log("Creating op category: " + category);
       var text = "";
       for (var i=0; i<indents; i++) {
