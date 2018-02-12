@@ -1,5 +1,5 @@
 {
-    "updated": 1518344055542,
+    "updated": 1518442535625,
     "authorName": "pandur",
     "id": "01305694-f1b9-485e-8bbd-9daa0a7be996",
     "created": 1516622763169,
@@ -24,6 +24,18 @@
             {
                 "type": "0",
                 "name": "Size min"
+            },
+            {
+                "type": "0",
+                "name": "Size max"
+            },
+            {
+                "type": "0",
+                "name": "Random Rotate"
+            },
+            {
+                "type": "0",
+                "name": "Random Seed"
             }
         ],
         "name": "Ops.Gl.SurfaceScatterInstanced"

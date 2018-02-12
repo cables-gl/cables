@@ -4,6 +4,9 @@ var geom=op.inObject("Geometry");
 
 var inNum=op.inValue("Num",100);
 var inSizeMin=op.inValueSlider("Size min",1.0);
+var inSizeMax=op.inValueSlider("Size max",1.0);
+var inRotateRandom=op.inValueBool("Random Rotate",true);
+var seed=op.addInPort(new Port(op,"Random Seed"));
 
 var mod=null;
 var mesh=null;
@@ -15,10 +18,11 @@ var cgl=op.patch.cgl;
 var matrixArray= new Float32Array(1);
 var m=mat4.create();
 
-// var scaleArr=op.inArray("Scaling");
-
+seed.onChange=reset;
 inNum.onChange=reset;
+inRotateRandom.onChange=reset;
 inSizeMin.onChange=reset;
+inSizeMax.onChange=reset;
 inGeomSurface.onChange=reset;
 render.onTriggered=doRender;
 render.onLinkChanged=removeModule;
@@ -36,6 +40,8 @@ function setup()
 
     if(!geom) return;
 
+    Math.randomSeed=seed.get();
+
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
 
     if(geom.isIndexed())
@@ -44,7 +50,7 @@ function setup()
 
         for(var i=0;i<num;i++)
         {
-            var index=Math.random()*(faces.length/3);
+            var index=Math.seededRandom()*(faces.length/3);
             index=Math.floor(index)*3.0;
 
             mat4.identity(m);
@@ -55,32 +61,43 @@ function setup()
                     geom.vertices[faces[index+0]*3+2]
                 ]);
 
+
             // rotate to normal direction
             vec3.set(norm,
                 geom.vertexNormals[geom.verticesIndices[index+0]*3+0],
                 geom.vertexNormals[geom.verticesIndices[index+0]*3+1],
                 geom.vertexNormals[geom.verticesIndices[index+0]*3+2]
                 );
-    
+
             var vm2=vec3.create();
             vec3.set(vm2,1,0,0);
             quat.rotationTo(q,vm2,norm);
-    
+
             mat4.fromQuat(qMat, q);
             mat4.mul(m,m,qMat);
-        
+
 
             // random rotate around up axis
-            var mr=mat4.create();
-            var qbase=quat.create();
-            quat.rotateX(qbase,qbase,Math.random()*2*3.14,0,0);
-            mat4.fromQuat(mr,qbase);
-            mat4.mul(m,m,mr);
+            if(inRotateRandom.get())
+            {
+                var mr=mat4.create();
+                var qbase=quat.create();
+                quat.rotateX(qbase,qbase,Math.seededRandom()*360*CGL.DEG2RAD);
+                mat4.fromQuat(mr,qbase);
+                mat4.mul(m,m,mr);
+            }
+
+            // rotate -90 degree
+            var mr2=mat4.create();
+            var qbase2=quat.create();
+            quat.rotateZ(qbase2,qbase2,-90*CGL.DEG2RAD);
+            mat4.fromQuat(mr2,qbase2);
+            mat4.mul(m,m,mr2);
 
             // scale
-            if(inSizeMin.get()!=1.0)
+            if(inSizeMin.get()!=1.0 || inSizeMax!=1.0)
             {
-                var sc=inSizeMin.get()+ ( Math.random()*(1.0-inSizeMin.get()) );
+                var sc=inSizeMin.get()+ ( Math.seededRandom()*(inSizeMax.get()-inSizeMin.get()) );
                 mat4.scale(m,m,[sc,sc,sc]);
             }
 
@@ -95,7 +112,7 @@ function setup()
     mesh.numInstances=num;
     mesh.addAttribute('instMat',matrixArray,16);
     recalc=false;
-    console.log(matrixArray);
+    // console.log(matrixArray);
 }
 
 // // TODO: remove array3xtransformedinstanced....

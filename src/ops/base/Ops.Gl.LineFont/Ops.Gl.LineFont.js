@@ -1,4 +1,3 @@
-op.name="LineFont";
 
 var render=op.inFunction('render');
 var string=op.inValueString('Text','cables');

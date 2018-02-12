@@ -1,1 +1,31 @@
-{}
+{
+    "updated": 1518352091524,
+    "authorName": "pandur",
+    "id": "580146e1-eb24-451f-b05d-0c7cfec8d8e6",
+    "created": 1518352089459,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Letter Spacing"
+            },
+            {
+                "type": "0",
+                "name": "Line Width"
+            },
+            {
+                "type": "0",
+                "name": "align"
+            }
+        ],
+        "name": "Ops.Gl.LineFont"
+    }
+}

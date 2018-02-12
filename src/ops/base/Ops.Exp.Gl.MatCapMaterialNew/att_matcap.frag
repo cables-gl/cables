@@ -3,7 +3,7 @@ precision highp float;
 
 {{MODULES_HEAD}}
 
-IN vec3 inNorm;
+IN vec3 norm;
 IN vec2 texCoord;
 UNI sampler2D tex;
 IN vec2 vNorm;
@@ -55,7 +55,7 @@ void main()
 {
     vec2 vnOrig=vNorm;
     vec2 vn=vNorm;
-    vec3 norm=inNorm;
+
 
     #ifdef HAS_TEXTURES
         vec2 texCoords=texCoord;
