@@ -1,4 +1,3 @@
-op.name="ArraySlice";
 
 // inputs
 var inArrayPort = op.inArray("Input Array");

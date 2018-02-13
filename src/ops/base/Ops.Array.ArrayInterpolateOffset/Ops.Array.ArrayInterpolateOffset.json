@@ -28,6 +28,10 @@
             {
                 "type": "0",
                 "name": "Easing"
+            },
+            {
+                "type": "0",
+                "name": "Reverse"
             }
         ],
         "portsOut": [
