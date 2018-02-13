@@ -1,1 +1,29 @@
-{}
+{
+    "updated": 1518542271123,
+    "authorName": "pandur",
+    "id": "1371bc89-b4ac-4032-86e1-70ff2506665b",
+    "created": 1518542269087,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.ArrayTranslate"
+    }
+}

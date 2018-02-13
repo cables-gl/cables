@@ -1,4 +1,3 @@
-this.name="ArrayTranslate";
 
 var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 // var arrayIn=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
