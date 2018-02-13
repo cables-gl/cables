@@ -1,5 +1,3 @@
-op.name="RandomNumbers";
-
 var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE));
 var seed=op.addInPort(new Port(op,"random seed"));
 var min=op.addInPort(new Port(op,"Min"));
@@ -12,6 +10,7 @@ var outZ=op.outValue("Z");
 var numValues=100;
 min.set(-1);
 max.set(1);
+seed.set(Math.round(Math.random()*99999));
 
 max.onValueChanged=init;
 min.onValueChanged=init;

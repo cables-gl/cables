@@ -1,4 +1,4 @@
-op.name="CopyArray";
+
 
 // input ports
 var srcArrayPort = op.inArray("Source Array");
@@ -11,7 +11,8 @@ var arrayCopyPort = op.outArray("Array Copy");
 srcArrayPort.onChange = function() {
     var srcArray = srcArrayPort.get();
     if(srcArray) {
-        var arrCopy = JSON.parse(JSON.stringify(srcArray));    
+        // var arrCopy = JSON.parse(JSON.stringify(srcArray));    
+        var arrCopy = srcArray.slice();
         srcArrayOutPort.set(srcArray);
         arrayCopyPort.set(arrCopy);
         op.log(arrCopy);

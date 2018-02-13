@@ -1,5 +1,5 @@
 {
-    "updated": 1518454984460,
+    "updated": 1518521808057,
     "authorName": "pandur",
     "id": "f89f5664-7cfa-4598-b09c-e4320b588b45",
     "created": 1518451074145,
@@ -28,6 +28,10 @@
             {
                 "type": "0",
                 "name": "Easing"
+            },
+            {
+                "type": "0",
+                "name": "Reverse"
             }
         ],
         "portsOut": [

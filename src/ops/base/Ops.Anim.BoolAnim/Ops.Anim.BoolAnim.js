@@ -1,5 +1,3 @@
-op.name="BoolAnim";
-
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var bool=op.addInPort(new Port(op,"bool",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var valueFalse=op.addInPort(new Port(op,"value false",OP_PORT_TYPE_VALUE));
@@ -22,24 +20,20 @@ var startTime=CABLES.now();
 
 function setAnim()
 {
-
     var now=(CABLES.now()-startTime)/1000;
-    
     var oldValue=anim.getValue(now);
     anim.clear();
-    
+
     anim.setValue(now,oldValue);
-    
+
     if(!bool.get()) anim.setValue(now+duration.get(),valueFalse.get());
         else anim.setValue(now+duration.get(),valueTrue.get());
-
 }
 
 bool.onValueChanged=setAnim;
 valueFalse.onValueChanged=setAnim;
 valueTrue.onValueChanged=setAnim;
 duration.onValueChanged=setAnim;
-
 
 exe.onTriggered=function()
 {

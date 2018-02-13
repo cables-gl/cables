@@ -80,7 +80,11 @@ function analyze()
 
                     if(inSort.get()=="Z")
                     {
-                        faceGroupPos[group]+=(verts[faces[i*3+0]*3+2]+verts[faces[i*3+1]*3+2]+verts[faces[i*3+2]*3+2])/3;
+                        faceGroupPos[group]+=(
+                            verts[faces[i*3+0]*3+2]+
+                            verts[faces[i*3+1]*3+2]+
+                            verts[faces[i*3+2]*3+2]
+                            )/3;
                         faceGroupPosCount[group]++;
                     }
 
@@ -116,7 +120,8 @@ function analyze()
         for(i=0;i<faceGroups.length;i++)
         {
             var group = faceGroups[i];
-            if(group!=null && faceGroupPosCount[group]!=0)faceGroupPos[group] = faceGroupPos[group] / faceGroupPosCount[group];
+            if(group!=null && faceGroupPosCount[group]!=0)
+                faceGroupPos[group] = (faceGroupPosCount[group]-faceGroupPos[group]) / faceGroupPosCount[group];
             faceGroupPosCount[group]=0;
         }
     }
