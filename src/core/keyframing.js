@@ -75,19 +75,30 @@ CABLES.TL.Key.easeAbsolute=function(perc,key2)
     return this.value;
 };
 
+CABLES.easeExpoIn=function(t)
+{
+    return t= Math.pow( 2, 10 * (t - 1) );
+}
+
 CABLES.TL.Key.easeExpoIn=function( t,  key2)
 {
-    t= Math.pow( 2, 10 * (t - 1) );
+    t=CABLES.easeExpoIn(t);
     return CABLES.TL.Key.linear(t,this,key2);
 };
+
+CABLES.easeExpoOut=function(t)
+{
+    t= ( -Math.pow( 2, -10 * t ) + 1 );
+    return t;
+}
 
 CABLES.TL.Key.easeExpoOut=function( t,  key2)
 {
-    t= ( -Math.pow( 2, -10 * t ) + 1 );
+    t=CABLES.easeExpoOut(t);
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
-CABLES.TL.Key.easeExpoInOut=function( t,  key2)
+CABLES.easeExpoInOut=function(t)
 {
     t*=2;
     if (t < 1)
@@ -99,6 +110,12 @@ CABLES.TL.Key.easeExpoInOut=function( t,  key2)
         t--;
         t= 0.5 * ( -Math.pow( 2, -10 * t) + 2 );
     }
+    return t;
+}
+
+CABLES.TL.Key.easeExpoInOut=function( t,  key2)
+{
+    t=CABLES.easeExpoInOut(t);
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
@@ -120,9 +137,15 @@ CABLES.TL.Key.easeSinInOut=function( t,key2)
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
-CABLES.TL.Key.easeCubicIn=function(t,key2)
+CABLES.easeCubicIn=function(t)
 {
     t=t*t*t;
+    return t;
+}
+
+CABLES.TL.Key.easeCubicIn=function(t,key2)
+{
+    t=CABLES.easeCubicIn(t);
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
@@ -268,14 +291,20 @@ CABLES.TL.Key.easeInOutBack=function(t, key2)
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
-CABLES.TL.Key.easeCubicOut=function(t,key2)
+CABLES.easeCubicOut=function(t)
 {
     t--;
     t=(t*t*t + 1) ;
+    return t;
+}
+
+CABLES.TL.Key.easeCubicOut=function(t,key2)
+{
+    t=CABLES.easeCubicOut(t);
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
-CABLES.TL.Key.easeCubicInOut=function(t,key2)
+CABLES.easeCubicInOut=function(t)
 {
     t*=2;
     if (t < 1) t= 0.5*t*t*t;
@@ -284,6 +313,12 @@ CABLES.TL.Key.easeCubicInOut=function(t,key2)
         t -= 2;
         t= 0.5*(t*t*t + 2);
     }
+    return t;
+}
+
+CABLES.TL.Key.easeCubicInOut=function(t,key2)
+{
+    t=CABLES.easeCubicInOut(t);
     return CABLES.TL.Key.linear(t,this,key2);
 };
 
