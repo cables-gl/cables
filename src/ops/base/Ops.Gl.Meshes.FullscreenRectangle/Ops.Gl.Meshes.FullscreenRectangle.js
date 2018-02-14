@@ -105,25 +105,25 @@ function rebuild()
     ]);
 
     if(flipY.get())
-        geom.texCoords = new Float32Array([
+        geom.setTexCoords( new Float32Array([
              1.0, 0.0,
              0.0, 0.0,
              1.0, 1.0,
              0.0, 1.0
-        ]);
-
+        ]));
     else
-        geom.texCoords = new Float32Array([
+        geom.setTexCoords(new Float32Array([
              1.0, 1.0,
              0.0, 1.0,
              1.0, 0.0,
              0.0, 0.0
-        ]);
+        ]));
 
     geom.verticesIndices = new Float32Array([
         0, 1, 2,
         3, 1, 2
     ]);
+
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);

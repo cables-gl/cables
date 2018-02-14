@@ -2,5 +2,9 @@
     "summary": "plays the timeline when opening patch",
     "layout": {
         "name": "Ops.AutoPlay"
-    }
+    },
+    "updated": 1518592471921,
+    "authorName": "pandur",
+    "id": "6069e8fe-6cf5-4be6-be38-4d46056ec9f7",
+    "created": 1518592471557
 }

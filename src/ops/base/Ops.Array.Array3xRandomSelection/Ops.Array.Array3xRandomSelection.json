@@ -1,0 +1,26 @@
+{
+    "updated": 1518459769396,
+    "authorName": "pandur",
+    "id": "c6967443-9d2a-4d3a-8d8c-eab529f52518",
+    "created": 1518457012267,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Elements"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Deprecated.Array.Array3xRandomSelection"
+    },
+    "summary": "get x random elements from an array"
+}

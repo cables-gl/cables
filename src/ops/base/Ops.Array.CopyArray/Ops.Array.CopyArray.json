@@ -1,0 +1,25 @@
+{
+    "updated": 1518520515524,
+    "authorName": "pandur",
+    "id": "c16a5510-a920-4db3-8005-415c3c0b4a2c",
+    "created": 1518520440221,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Source Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Source Array Out"
+            },
+            {
+                "type": "3",
+                "name": "Array Copy"
+            }
+        ],
+        "name": "Ops.Array.CopyArray"
+    }
+}

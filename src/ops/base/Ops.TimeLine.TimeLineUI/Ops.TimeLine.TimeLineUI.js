@@ -59,7 +59,7 @@ timelineContainer.style.background='rgba(0,0,0,0.4)';
 timelineContainer.style['border-radius']='4px';
 
 var timeline = document.createElement('div');
-timeline.style.width='50%';
+// timeline.style.width='50%';
 timeline.style.height='100%';
 timeline.style.background='rgba(110,110,110,0.7)';
 

@@ -1,6 +1,61 @@
 {
-    "updated": 1516102060987,
+    "updated": 1518591723973,
     "authorName": "pandur",
     "id": "e5d64a7d-b161-4f85-907e-e10a34691733",
-    "created": 1516101816037
+    "created": 1516101816037,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "enable depth testing"
+            },
+            {
+                "type": "0",
+                "name": "fill"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "opacity"
+            },
+            {
+                "type": "0",
+                "name": "diffuse r"
+            },
+            {
+                "type": "0",
+                "name": "diffuse g"
+            },
+            {
+                "type": "0",
+                "name": "diffuse b"
+            },
+            {
+                "type": "0",
+                "name": "Fill R"
+            },
+            {
+                "type": "0",
+                "name": "Fill G"
+            },
+            {
+                "type": "0",
+                "name": "Fill B"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Shader.WireframeMaterial"
+    }
 }
