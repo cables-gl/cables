@@ -18,5 +18,6 @@
             }
         ],
         "name": "Ops.Array.EmptyArray"
-    }
+    },
+    "summary": "create an empty array"
 }

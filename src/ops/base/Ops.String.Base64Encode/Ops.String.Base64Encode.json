@@ -17,5 +17,6 @@
             }
         ],
         "name": "Ops.String.Base64Encode"
-    }
+    },
+    "summary": "encode a string to base64"
 }

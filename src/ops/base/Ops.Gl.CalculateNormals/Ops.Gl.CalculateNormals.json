@@ -26,5 +26,6 @@
             }
         ],
         "name": "Ops.Gl.CalculateNormals"
-    }
+    },
+    "summary": "calculate normals of a geometry"
 }

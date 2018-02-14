@@ -22,5 +22,6 @@
             }
         ],
         "name": "Ops.Array.ArrayMerge"
-    }
+    },
+    "summary": "merge two arrays"
 }

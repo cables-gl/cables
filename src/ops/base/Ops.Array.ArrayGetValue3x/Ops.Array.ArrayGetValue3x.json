@@ -25,5 +25,6 @@
             }
         ],
         "name": "Ops.Array.ArrayGet3Values"
-    }
+    },
+    "summary": "get 3 values from an array"
 }

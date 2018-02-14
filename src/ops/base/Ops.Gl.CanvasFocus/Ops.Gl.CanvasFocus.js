@@ -1,4 +1,3 @@
-op.name="CanvasFocus";
 
 var hasFocus=op.outValue("has focus");
 

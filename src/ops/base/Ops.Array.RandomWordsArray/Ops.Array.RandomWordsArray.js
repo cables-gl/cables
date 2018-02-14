@@ -1,5 +1,3 @@
-op.name="RandomWords";
-
 
 var arr=["apple", "baby", "back", "ball", "bear", "bed", "bell", "bird",
 "birthday", "boat", "box", "boy", "bread", "brother", "cake", "car",

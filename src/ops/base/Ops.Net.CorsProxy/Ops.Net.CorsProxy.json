@@ -17,5 +17,6 @@
             }
         ],
         "name": "Ops.Net.CorsProxy"
-    }
+    },
+    "summary": "create a cables.gl CORS proxy URL"
 }

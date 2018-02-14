@@ -1,6 +1,22 @@
 {
-    "updated": 1516815881964,
+    "updated": 1518602901179,
     "authorName": "pandur",
     "id": "c35c0637-c37e-4d2d-8648-f1534aedd9d0",
-    "created": 1516815881311
+    "created": 1516815881311,
+    "summary": "decode a string to base64",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.Base64Decode"
+    }
 }

@@ -1,6 +1,7 @@
 op.name='TextMesh';
 
 var render=op.inFunction("Render");
+var next=op.outFunction("Next");
 var textureOut=op.outTexture("texture");
 var str=op.inValueString("Text","cables");
 var scale=op.inValue("Scale",1);
@@ -240,6 +241,8 @@ render.onTriggered=function()
     cgl.setPreviousShader();
 
     cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
+    
+    next.trigger();
 };
 
 letterSpace.onChange=function()

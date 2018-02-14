@@ -7,7 +7,7 @@ var result=op.outValue("Result");
 
 inString.onChange=function()
 {
-result.set(b64DecodeUnicode(inString.get()));
+    result.set(b64DecodeUnicode(inString.get()||''));
 };
 
 

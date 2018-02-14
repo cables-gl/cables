@@ -50,5 +50,6 @@
             }
         ],
         "name": "Ops.Gl.MeshSequence"
-    }
+    },
+    "summary": "morph between a series of meshes"
 }

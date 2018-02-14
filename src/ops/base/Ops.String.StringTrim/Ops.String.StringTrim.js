@@ -1,5 +1,3 @@
-op.name="StringTrim";
-
 var inStr=op.inValueString("String");
 var outStr=op.outValue("Result");
 

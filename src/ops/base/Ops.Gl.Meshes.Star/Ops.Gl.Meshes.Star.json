@@ -49,5 +49,6 @@
             }
         ],
         "name": "Ops.Gl.Meshes.Star"
-    }
+    },
+    "summary": "draw a star mesh (saw,gear)"
 }

@@ -7,5 +7,10 @@
             }
         ],
         "name": "Ops.Gl.CanvasFocus"
-    }
+    },
+    "summary": "is canvas focussed ?",
+    "updated": 1518602044948,
+    "authorName": "pandur",
+    "id": "e235ea77-f697-475a-8799-d5e4deed7204",
+    "created": 1518602044950
 }
