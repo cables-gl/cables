@@ -149,7 +149,9 @@ function analyze()
     outValues.set(null);
     outValues.set(arrSubmesh);
 
+    outGeom.set(null);
     outGeom.set(geom);
+    console.log(geom.getAttributes());
     outMax.set(maxGroupValue);
     outMin.set(minGroupValue);
     

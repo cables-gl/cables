@@ -36,8 +36,9 @@ function update()
         {
             mesh=new CGL.Mesh(op.patch.cgl,geom);
             mesh.addVertexNumbers=vertNums.get();
-            mesh.setGeom(geom);
+            mesh.setGeom(geom); 
         }
+        
 
         if(updateFaces.get() || updateAll.get())
         {

@@ -8,9 +8,11 @@ UNI float MOD_x;
 UNI float MOD_y;
 UNI float MOD_z;
 
+IN float attrSubmesh;
+
 float MOD_random(vec2 co)
 {
-   float rnd= fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 437511.5453);
+   float rnd= fract(sin(dot(co,vec2(12.9898,78.233))) * 437511.5453);
    return (rnd-0.5)*2.0;
 }
 

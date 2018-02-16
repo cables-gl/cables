@@ -8,6 +8,7 @@ var outTexCoords=op.outValue("TexCoords");
 var outTangents=op.outValue("Tangents");
 var outBiTangents=op.outValue("BiTangents");
 var outVertexColors=op.outValue("VertexColors");
+var outAttribs=op.outValue("Other Attributes");
 
 geometry.onChange=function()
 {
@@ -36,6 +37,9 @@ geometry.onChange=function()
 
         if(geom.vertexColors) outVertexColors.set(geom.vertexColors.length/3);
             else outVertexColors.set(0);
+
+        if(geom.getAttributes()) outAttribs.set(Object.keys(geom.getAttributes()).length);
+            else outAttribs.set(0);
 
         outIndexed.set(geom.isIndexed());
     }

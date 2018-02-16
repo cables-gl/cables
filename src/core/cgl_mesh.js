@@ -10,7 +10,6 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
     this._attributes=[];
-    this._attributes=[];
     this._geom=null;
     this.numInstances=0;
     this._glPrimitive=glPrimitive;
@@ -66,7 +65,6 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
         if(options.cb)cb=options.cb;
         if(options.instanced)instanced=options.instanced;
     }
-
 
     if(!(array instanceof Float32Array))
     {
@@ -225,9 +223,13 @@ CGL.Mesh.prototype.setGeom=function(geom)
     for(var index in geomAttribs)
     {
         this.setAttribute(index,geomAttribs[index].data,geomAttribs[index].itemSize);
-        console.log("NEW GEOM ATTRIB!!!",index);
+        console.log("NEW GEOM ATTRIB!!!",index,geomAttribs[index].data);
     }
 
+    for(i=0;i<this._attributes.length;i++) 
+    {
+        console.log('_a___',this._attributes[i].name);
+    }
 };
 
 
@@ -248,14 +250,23 @@ CGL.Mesh.prototype._bind=function(shader)
     if(shader.lastCompile>this._lastAttrUpdate)
     {
         this._lastAttrUpdate=shader.lastCompile;
-        for(i=0;i<this._attributes.length;i++) this._attributes[i].loc=-1;
+        for(i=0;i<this._attributes.length;i++) 
+        {
+            this._attributes[i].loc=-1;
+            this._attributes[i].loc = this._cgl.gl.getAttribLocation(shader.getProgram(), this._attributes[i].name);
+        }
     }
-
+    
     for(i=0;i<this._attributes.length;i++)
     {
+        
+        // console.log('___',this._attributes[i].name);
+
         var attribute=this._attributes[i];
-        if(attribute.loc==-1)
-            attribute.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), attribute.name);
+        // if(attribute.loc==-1) // TODO: way too many times
+                // attribute.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), attribute.name);        
+
+        
 
         if(attribute.loc!=-1)
         {
@@ -295,6 +306,8 @@ CGL.Mesh.prototype._bind=function(shader)
                     false,
                     attribute.itemSize*4, 0);
 
+                    // console.log(attribute);
+
                 if(attribute.pointer)
                 {
                     for(var ip=0;ip<attribute.pointer.length;ip++)
@@ -312,6 +325,12 @@ CGL.Mesh.prototype._bind=function(shader)
                 this.bindFeedback(attribute);
 
             }
+        }
+        else
+        {
+            
+            // console.log('arrtib loc -1',attribute);
+
         }
     }
 
@@ -431,7 +450,7 @@ CGL.Mesh.prototype.render=function(shader)
 
     shader.bind();
 
-if(shader.bindTextures)shader.bindTextures();
+    if(shader.bindTextures)shader.bindTextures();
 
     if(needsBind) this._bind(shader);
     if(this.addVertexNumbers)this._setVertexNumbers();

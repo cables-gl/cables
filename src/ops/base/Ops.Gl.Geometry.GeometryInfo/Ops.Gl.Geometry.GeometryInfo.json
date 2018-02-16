@@ -1,5 +1,5 @@
 {
-    "updated": 1513068576675,
+    "updated": 1518770913593,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a9208e84-e957-43ac-9a79-9c719eff95eb",
@@ -43,6 +43,10 @@
             {
                 "type": "0",
                 "name": "VertexColors"
+            },
+            {
+                "type": "0",
+                "name": "Other Attributes"
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryInfo"

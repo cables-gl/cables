@@ -3,7 +3,7 @@ var next=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
 
-var inAmount=op.inValueSlider("Amount",0.3);
+var inAmount=op.inValue("Amount",1);
 var inSize=op.inValue("Size",20);
 var inFalloff=op.inValueSlider("Falloff",0.5);
 var inScale=op.inValueSlider("Scale",1);

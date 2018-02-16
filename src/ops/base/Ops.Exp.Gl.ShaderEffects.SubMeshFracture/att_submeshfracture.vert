@@ -33,14 +33,16 @@ MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);
 #endif
 
 
-float MOD_x=MOD_random(texCoord.yy*2.0);
-float MOD_y=MOD_random(texCoord.yy);
-float MOD_z=MOD_random(texCoord.yy*3.0);
+float MOD_x=MOD_random(vec2(attrSubmesh*2.0,attrSubmesh));
+float MOD_y=MOD_random(vec2(attrSubmesh,attrSubmesh));
+float MOD_z=MOD_random(vec2(attrSubmesh*3.0,attrSubmesh));
 
 
 
 vec3 pp=pos.xyz;
-pos.xyz=pos.xyz+(vec3(MOD_x,MOD_y,MOD_z)*MOD_size*(MOD_amount*MOD_de));
+// pos.xyz=pos.xyz+(vec3(MOD_x,MOD_y,MOD_z)*MOD_size*(MOD_amount*MOD_de));
+
+pos.xyz+=vec3(MOD_x,MOD_y,MOD_z)*(MOD_amount*MOD_de);
 
 // pos.xyz-=pp*(MOD_scale);//+(vec3(MOD_x,MOD_y,MOD_z)*90.0*MOD_amount);
 
