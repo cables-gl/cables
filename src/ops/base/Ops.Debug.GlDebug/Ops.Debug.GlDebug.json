@@ -1,5 +1,5 @@
 {
-    "updated": 1518858388357,
+    "updated": 1518860130411,
     "authorName": "pandur",
     "id": "3e2bc72c-8af4-4fdb-a998-555aaf62cc9d",
     "created": 1518855898265,
@@ -21,6 +21,10 @@
             },
             {
                 "type": "0",
+                "name": "Depthtest"
+            },
+            {
+                "type": "0",
                 "name": "Stack Depthtest"
             },
             {
@@ -38,6 +42,22 @@
             {
                 "type": "0",
                 "name": "Stack DepthFunc"
+            },
+            {
+                "type": "0",
+                "name": "Blend"
+            },
+            {
+                "type": "0",
+                "name": "Blend Stack"
+            },
+            {
+                "type": "0",
+                "name": "Cull Mode"
+            },
+            {
+                "type": "0",
+                "name": "Face Culling"
             }
         ],
         "name": "Ops.Debug.GlDebug"

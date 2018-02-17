@@ -72,7 +72,9 @@ function mainloopVr()
 
     // cgl.gl.enable(cgl.gl.DEPTH_TEST);
 
-    cgl.gl.enable(cgl.gl.BLEND);
+
+    cgl.pushBlend(true);
+    // cgl.gl.enable(cgl.gl.BLEND);
     cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
     cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
 
@@ -112,6 +114,7 @@ function mainloopVr()
 
     cgl.popViewMatrix();
     cgl.popPMatrix();
+    cgl.popBlend(true);
 
 
     
