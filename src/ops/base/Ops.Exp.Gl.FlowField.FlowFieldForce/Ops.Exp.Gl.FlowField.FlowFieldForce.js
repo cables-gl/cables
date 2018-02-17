@@ -25,13 +25,13 @@ exe.onTriggered=function()
 
     if(attachment.isLinked())
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix,
             [x.get(),
             y.get(),
             z.get()]);
         attachment.trigger();
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
     trigger.trigger();

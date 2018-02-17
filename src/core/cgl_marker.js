@@ -51,7 +51,7 @@ CGL.Marker=function(cgl)
     this.draw=function(cgl)
     {
         var size=2;
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
 
         
@@ -74,7 +74,7 @@ CGL.Marker=function(cgl)
         cgl.setPreviousShader();
 
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     };
 };
 

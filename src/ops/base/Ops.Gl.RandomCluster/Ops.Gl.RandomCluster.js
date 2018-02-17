@@ -57,7 +57,7 @@ function doRender()
 
     for(var i=0;i<randoms.length;i++)
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, randoms[i]);
 
@@ -71,7 +71,7 @@ function doRender()
         trigger.trigger();
         op.patch.instancing.increment();
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
     op.patch.instancing.popLoop();
 

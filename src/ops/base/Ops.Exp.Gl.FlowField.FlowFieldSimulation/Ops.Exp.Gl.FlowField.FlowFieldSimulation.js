@@ -268,14 +268,14 @@ exec.onTriggered=function()
 
     for(var j=0;j<forces.length;j++)
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         vec3.set(vec, forces[j].pos[0],forces[j].pos[1],forces[j].pos[2]);
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
 
         // outSpeed.set(p.speed/maxSpeed);
 
         triggerForce.trigger();
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
     for(var i=0;i<particles.length;i++)

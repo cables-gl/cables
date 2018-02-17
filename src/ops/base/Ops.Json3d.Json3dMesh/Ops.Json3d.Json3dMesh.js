@@ -64,12 +64,12 @@ function render()
 
     if(draw.get())
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
         if(mesh) mesh.render(cgl.getShader());
         
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
         next.trigger();
     }
 }

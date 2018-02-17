@@ -117,7 +117,7 @@ exe.onTriggered=function()
 
         particles[i].update(time);
 
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, particles[i].pos);
 
@@ -130,7 +130,7 @@ exe.onTriggered=function()
         
         trigger.trigger();
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 };
 

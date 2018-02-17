@@ -4,7 +4,6 @@ var next=op.outFunction("Next");
 
 var outError=op.outValue("glGetError");
 
-
 var depth=op.outValue("Depthtest");
 var depthStack=op.outValue("Stack Depthtest");
 

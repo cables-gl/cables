@@ -114,7 +114,7 @@ exe.onTriggered=function()
 
         //             outIndex.set(i);
 
-        // cgl.pushMvMatrix();
+        // cgl.pushModelMatrix();
         // vec3.set(tempVec,
         //     anims[i].posX.getValue(t),
         //     0,
@@ -127,7 +127,7 @@ exe.onTriggered=function()
 
         // mat4.translate(cgl.mvMatrix,cgl.mvMatrix, tempVec);
         // trigger.trigger();
-        // cgl.popMvMatrix();
+        // cgl.popModelMatrix();
 
     
 

@@ -124,7 +124,7 @@ function render()
         body.quaternion.w);
     quat.invert(q,q);
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     mat4.fromRotationTranslation(trMat,q,vec);
     mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
@@ -146,5 +146,5 @@ function render()
     next.trigger();
     
     CABLES.physicsCurrentBody=null;
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 }

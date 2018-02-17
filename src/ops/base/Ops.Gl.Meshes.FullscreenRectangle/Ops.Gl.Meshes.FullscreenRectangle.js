@@ -45,7 +45,7 @@ render.onTriggered=function()
     mat4.identity(cgl.pMatrix);
     mat4.ortho(cgl.pMatrix, 0, w,h, 0, -10.0, 1000);
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.identity(cgl.mvMatrix);
 
     cgl.pushViewMatrix();
@@ -79,7 +79,7 @@ render.onTriggered=function()
     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
 
     cgl.popPMatrix();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
     cgl.popViewMatrix();
 
     trigger.trigger();

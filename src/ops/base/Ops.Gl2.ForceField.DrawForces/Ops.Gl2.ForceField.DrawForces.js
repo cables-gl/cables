@@ -16,7 +16,7 @@ exec.onTriggered=function()
 {
     for(var j=0;j<CABLES.forceFieldForces.length;j++)
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         vec3.set(vec, CABLES.forceFieldForces[j].pos[0],CABLES.forceFieldForces[j].pos[1],CABLES.forceFieldForces[j].pos[2]);
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
         
@@ -25,7 +25,7 @@ exec.onTriggered=function()
         outAttraction.set(CABLES.forceFieldForces[j].attraction);
 
         next.trigger();
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
 };

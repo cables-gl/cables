@@ -55,12 +55,12 @@ var n=(laserArray.get().length )/stride*3;
 
         var vec=vec3.create();
         vec3.set(vec,laserArray.get()[i+0],laserArray.get()[i+1],0);
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec );
         trigger.trigger();
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
     geom.vertices=verts;

@@ -44,13 +44,13 @@ exec.onTriggered=function()
 {
     if(show.get())
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
         // if(!mesh)mesh=new CGL.WirePoint(cgl);
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[posX.get(),posY.get(),posZ.get()]);
         // mesh.render(cgl,range.get()*2);
         mark.draw(cgl);
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
     // vec3.transformMat4(pos, [posX.get(),posY.get(),posZ.get()], cgl.mvMatrix);

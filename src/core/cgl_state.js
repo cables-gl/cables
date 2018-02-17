@@ -231,17 +231,17 @@ CGL.State = function() {
 
     // model matrix stack
 
-    this.pushMvMatrix = function() {
+    this.pushMvMatrix =
+    this.pushModelMatrix = function() {
         var copy = mat4.clone(self.mvMatrix);
         mvMatrixStack.push(copy);
     };
 
-    this.popMvMatrix = function() {
+    this.popMvMatrix =
+    this.popModelMatrix = function() {
         if (mvMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
         self.mvMatrix = mvMatrixStack.pop();
     };
-    this.popModelMatrix = this.popMvMatrix;
-    this.pushModelMatrix = this.pushMvMatrix;
     this.modelMatrix = function() {
         return self.mvMatrix;
     };
@@ -281,7 +281,7 @@ CGL.State = function() {
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
 
         cgl.pushPMatrix();
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         cgl.pushViewMatrix();
 
         mat4.identity(cgl.mvMatrix);
@@ -301,7 +301,7 @@ CGL.State = function() {
 
     this.renderEnd = function(cgl, identTranslate) {
         cgl.popViewMatrix();
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
         cgl.popPMatrix();
 
         this.popDepthTest();

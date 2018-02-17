@@ -48,7 +48,7 @@ render.onTriggered=function()
     if(!splines[indx] || !splines[indx].mesh)return;
     var shader=cgl.getShader();
     if(!shader)return;
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     var oldPrim=shader.glPrimitive;
     shader.glPrimitive=cgl.gl.LINE_STRIP;
     // shader.glPrimitive=cgl.gl.POINTS;
@@ -59,7 +59,7 @@ render.onTriggered=function()
 
     shader.glPrimitive=oldPrim;
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
     
     trigger.trigger();
 

@@ -11,7 +11,7 @@ var v=vec3.create();
 
 exe.onTriggered=function()
 {
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
 var x=cgl.mvMatrix[12];
 var y=cgl.mvMatrix[13];
@@ -33,5 +33,5 @@ scale.set(y);
     
     trigger.trigger();
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };

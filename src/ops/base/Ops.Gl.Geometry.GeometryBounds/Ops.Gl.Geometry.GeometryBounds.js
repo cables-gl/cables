@@ -76,7 +76,7 @@ render.onTriggered=function()
             outCenterY.get(),
             outCenterZ.get()
             );
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
 
         wireMesh.render(cgl,
@@ -85,7 +85,7 @@ render.onTriggered=function()
             outHeight.get()/2
             );
         
-        cgl.popMvMatrix();    
+        cgl.popModelMatrix();    
     }
 
 };

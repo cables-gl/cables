@@ -62,7 +62,7 @@ function renderConrollers()
             var gamepad=gamePads[gp];
             if (gamepad && gamepad.pose)
             {
-                cgl.pushMvMatrix();
+                cgl.pushModelMatrix();
                 
                 mat4.identity(gp1Matrix);
                 mat4.translate(gp1Matrix,gp1Matrix,gamepad.pose.position);
@@ -74,7 +74,7 @@ function renderConrollers()
                 
                 triggerGamePad.trigger();
                 
-                cgl.popMvMatrix();
+                cgl.popModelMatrix();
             }
             count++;
         }

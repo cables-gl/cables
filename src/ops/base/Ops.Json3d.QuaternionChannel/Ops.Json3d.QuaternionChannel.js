@@ -59,10 +59,10 @@ render.onTriggered=function()
     }
     else readAnim();
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
 
     trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };

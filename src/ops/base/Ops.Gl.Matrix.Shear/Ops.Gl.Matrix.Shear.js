@@ -24,11 +24,11 @@ function update()
 
 render.onTriggered=function()
 {
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,shearMatrix);
     trigger.trigger();
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };
 

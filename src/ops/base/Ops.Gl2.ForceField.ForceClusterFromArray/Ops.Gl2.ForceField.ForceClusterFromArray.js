@@ -91,13 +91,13 @@ exec.onTriggered=function()
         {
             if(forces[i])
             {
-                cgl.pushMvMatrix();
+                cgl.pushModelMatrix();
         
                 // if(!mesh)mesh=new CGL.WirePoint(cgl);
                 mat4.translate(cgl.mvMatrix,cgl.mvMatrix,forces[i].pos);
                 // mesh.render(cgl,range.get()*2);
                 mark.draw(cgl);
-                cgl.popMvMatrix();
+                cgl.popModelMatrix();
                 
             }
         }

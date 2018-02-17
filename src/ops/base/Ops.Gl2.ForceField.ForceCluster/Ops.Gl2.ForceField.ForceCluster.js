@@ -83,12 +83,12 @@ exec.onTriggered=function()
 {
     // if(show.get())
     // {
-    //     cgl.pushMvMatrix();
+    //     cgl.pushModelMatrix();
 
     //     if(!mesh)mesh=new CGL.WirePoint(cgl);
     //     mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[posX.get(),posY.get(),posZ.get()]);
     //     mesh.render(cgl,range.get()*2);
-    //     cgl.popMvMatrix();
+    //     cgl.popModelMatrix();
     // }
     if(show.get())
     {
@@ -98,13 +98,13 @@ exec.onTriggered=function()
             // vec3.transformMat4(forces[i].pos, forces[i].posOrig, cgl.mvMatrix);
             // CABLES.forceFieldForces.push( forces[i] );
 
-            cgl.pushMvMatrix();
+            cgl.pushModelMatrix();
     
             // if(!mesh)mesh=new CGL.WirePoint(cgl);
             mat4.translate(cgl.mvMatrix,cgl.mvMatrix,forces[i].pos);
             // mesh.render(cgl,range.get()*2);
             mark.draw(cgl);
-            cgl.popMvMatrix();
+            cgl.popModelMatrix();
         }
     }
 

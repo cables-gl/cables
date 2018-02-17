@@ -114,10 +114,10 @@ render.onTriggered=function()
                 if(cells[index(x,y,z)])
                 {
                     vec3.set(vec, (x-size/2)*0.1,(y-size/2)*0.1,(z-size/2)*0.1);
-                    cgl.pushMvMatrix();
+                    cgl.pushModelMatrix();
                     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
                     next.trigger();
-                    cgl.popMvMatrix();
+                    cgl.popModelMatrix();
                 }
             }
         }

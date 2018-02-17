@@ -67,7 +67,7 @@ this.render.onTriggered=function()
     if(!shader)return;
     bufferData();
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.identity(cgl.mvMatrix);
 
     if(mesh) mesh.render(cgl.getShader());
@@ -112,10 +112,10 @@ this.render.onTriggered=function()
         var vec=[0,0,0];
         vec3.set(vec, cgl.frameStore.laserPoints[i].x, cgl.frameStore.laserPoints[i].y, cgl.frameStore.laserPoints[i].z);
 
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
         self.triggerPoints.trigger();
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
 
         var point=[
             cgl.frameStore.laserPoints[i].x,
@@ -243,7 +243,7 @@ this.render.onTriggered=function()
     // console.log('minmax',minX,maxX,minY,maxY);
 
     outNumPoints.set(ind);
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
     cgl.frameStore.laserPoints.length=0;
     outObj.set(null);
     outObj.set(laserObj);

@@ -40,12 +40,12 @@ function doRender()
             mulZ.get() * Math.sin( (i * z.get()) * 0.001 )
             );
 
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec );
         trigger.trigger();
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 }
 

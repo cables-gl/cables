@@ -572,7 +572,7 @@ function drawLine(arr)
 
 function draw(p)
 {
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
     var shader=cgl.getShader();
@@ -610,7 +610,7 @@ function draw(p)
 
 
     shader.glPrimitive=oldPrim;
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 
     
 }

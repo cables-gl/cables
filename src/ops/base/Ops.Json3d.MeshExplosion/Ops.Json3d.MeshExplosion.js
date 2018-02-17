@@ -33,7 +33,7 @@ function doRender()
         
         if(objects[i].transformation) 
         {
-            cgl.pushMvMatrix();
+            cgl.pushModelMatrix();
             // tempMat4 = objects[i].transformation;
             // tempMat4.set(objects[i].transformation);
             tempMat4=mat4.clone(objects[i].transformation);
@@ -54,7 +54,7 @@ function doRender()
 
             objects[i].mesh.render(cgl.getShader());
             next.trigger();        
-            cgl.popMvMatrix();
+            cgl.popModelMatrix();
         }
     }
 

@@ -127,10 +127,10 @@ op.render.onTriggered=function()
 
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
         CABLES.GL_MARKER.drawSphere(op,inSize.get());
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
     if(!cgl.getShader())

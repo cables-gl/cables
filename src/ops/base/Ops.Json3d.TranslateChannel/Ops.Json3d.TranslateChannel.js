@@ -50,7 +50,7 @@ render.onTriggered=function()
 {
     if(!cgl.frameStore.currentScene)return;
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     if(animX)
     {
@@ -63,5 +63,5 @@ render.onTriggered=function()
     else readAnim();
 
     trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };

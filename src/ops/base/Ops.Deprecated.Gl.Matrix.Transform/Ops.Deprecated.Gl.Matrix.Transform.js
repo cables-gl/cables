@@ -49,11 +49,11 @@ this.render.onTriggered=function()
     if(updateMatrix)doUpdateMatrix();
 
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
     self.trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };
 
 var doUpdateMatrix=function()
