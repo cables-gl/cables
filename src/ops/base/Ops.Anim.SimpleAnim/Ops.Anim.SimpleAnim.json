@@ -40,12 +40,20 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Next"
+            },
+            {
                 "type": "0",
                 "name": "result"
             },
             {
                 "type": "0",
                 "name": "finished"
+            },
+            {
+                "type": "1",
+                "name": "Finished Trigger"
             }
         ],
         "name": "Ops.Anim.SimpleAnim"
@@ -63,7 +71,7 @@
         ]
     },
     "summary": "simple animation between two values",
-    "updated": 1510735520872,
+    "updated": 1518685748296,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "5b244b6e-c505-4743-b2cc-8119ef720028",

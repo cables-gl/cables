@@ -77,6 +77,7 @@ reset.onTriggered=function()
     anim.setValue(CABLES.now()/1000.0-startTime,valIn.get());
 
     absVal.set(valIn.get());
+    v=0;
 };
 
 valIn.onChange=function()

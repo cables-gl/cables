@@ -1,16 +1,8 @@
-
-
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
-
 var inIndex=op.inValue("index");
-
 var inPoints=op.inArray("points");
-
 var dimensions=op.inValueSelect("Dimensions",["1","3"],3);
-
-
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
-
 
 var cgl=op.patch.cgl;
 var splines=[];
@@ -32,6 +24,7 @@ inPoints.onChange=function()
     if(!pointArr)return;
     if(indx<0)return;
     
+
     if(!splines[indx])
     {
         splines[indx]=new Spline();
@@ -55,6 +48,8 @@ render.onTriggered=function()
     // cgl.gl.lineWidth(14);
         
     // for(var i=0;i<splines.length;i++)
+    
+    if(inPoints.get() && inPoints.get().length>0)
         splines[indx].mesh.render(shader);
 
     shader.glPrimitive=oldPrim;
@@ -105,7 +100,6 @@ function bufferData(spline,pointArr)
         }
 
         spline.geom.vertices=dataBuffer;
-        
 
     }
     spline.mesh.updateVertices(spline.geom);

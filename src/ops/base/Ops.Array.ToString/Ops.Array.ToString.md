@@ -1,7 +1,3 @@
-# ToString
-
-*Ops.Array.ToString*  
-
 Converts an array to a string
 
 ## Input

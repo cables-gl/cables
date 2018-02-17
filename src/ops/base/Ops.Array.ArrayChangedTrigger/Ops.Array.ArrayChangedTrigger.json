@@ -1,0 +1,22 @@
+{
+    "updated": 1518601696094,
+    "authorName": "pandur",
+    "id": "bb55860d-a186-4e39-9542-8d21185e7e12",
+    "created": 1518601693732,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Changed Trigger"
+            }
+        ],
+        "name": "Ops.Array.ArrayChangedTrigger"
+    },
+    "summary": "triggers when array was changed"
+}

@@ -34,5 +34,6 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "24fc08e4-9a66-4fb9-9ebd-f72f6a986b24",
-    "created": 1508233630508
+    "created": 1508233630508,
+    "summary": "change intensity of r,g,b channels"
 }

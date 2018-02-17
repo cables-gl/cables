@@ -1,4 +1,3 @@
-op.name="SimpleAnim";
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 
@@ -10,12 +9,15 @@ var inEnd=op.addInPort(new Port(op,"end"));
 var duration=op.addInPort(new Port(op,"duration"));
 
 var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{display:"bool"}));
+var waitForReset=op.inValueBool("Wait for Reset",true);
 
+var next=op.outFunction("Next");
 var result=op.addOutPort(new Port(op,"result"));
 var finished=op.addOutPort(new Port(op,"finished",OP_PORT_TYPE_VALUE));
+var finishedTrigger=op.outFunction("Finished Trigger");
 
 var resetted=false;
-var waitForReset=op.inValueBool("Wait for Reset",false);
+
 
 
 var anim=new CABLES.TL.Anim();
@@ -39,6 +41,7 @@ function init()
 
     anim.keys[1].time=duration.get()+CABLES.now()/1000.0;
     anim.keys[1].value=inEnd.get();
+    
     if(anim.defaultEasing!=currentEasing) anim.keys[1].setEasing(anim.defaultEasing);
 
     anim.loop=loop.get();
@@ -101,11 +104,14 @@ exe.onTriggered=function()
     }
     var t=CABLES.now()/1000;
     var v=anim.getValue(t);
+    result.set(v);
     if(anim.hasEnded(t))
     {
+        if(!finished.get()) finishedTrigger.trigger();
         finished.set(true);
     }
-    result.set(v);
+    
+    next.trigger();
 };
 
 inStart.set(0.0);

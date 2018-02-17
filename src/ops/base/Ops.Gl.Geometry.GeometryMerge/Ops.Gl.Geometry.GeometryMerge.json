@@ -1,5 +1,5 @@
 {
-    "updated": 1514903126617,
+    "updated": 1518868766555,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f915eaab-92df-495e-84ed-500ec301b6f7",
@@ -9,6 +9,10 @@
             {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "2",
+                "name": "Geometry 2"
             },
             {
                 "type": "1",
@@ -26,5 +30,6 @@
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryMerge"
-    }
+    },
+    "summary": "merge two geometries to one"
 }

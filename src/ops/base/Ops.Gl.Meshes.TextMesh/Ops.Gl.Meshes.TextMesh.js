@@ -1,5 +1,3 @@
-op.name='TextMesh';
-
 var render=op.inFunction("Render");
 var next=op.outFunction("Next");
 var textureOut=op.outTexture("texture");
@@ -185,15 +183,15 @@ var uniTex=new CGL.Uniform(shader,'t','tex',0);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
 var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-r.set(Math.random());
+r.set(1.0);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 
 var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range'}));
-g.set(Math.random());
+g.set(1.0);
 g.uniform=new CGL.Uniform(shader,'f','g',g);
 
 var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-b.set(Math.random());
+b.set(1.0);
 r.uniform=new CGL.Uniform(shader,'f','b',b);
 
 var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range'}));

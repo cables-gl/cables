@@ -20,6 +20,10 @@ update();
 function update()
 {
     var str=format.get()||'';
+    if(typeof str!='string')
+    {
+        str='';
+    }
     
     str = str.replace(/\$a/g, a.get());
     str = str.replace(/\$b/g, b.get());

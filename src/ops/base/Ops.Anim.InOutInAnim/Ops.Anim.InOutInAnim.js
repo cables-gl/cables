@@ -1,4 +1,4 @@
-op.name="InOutInAnim";
+
 var anim=new CABLES.TL.Anim();
 
 var update=op.inFunction("Update");

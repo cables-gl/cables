@@ -549,6 +549,7 @@ function reload()
                 try
                 {
                     data=JSON.parse(_data);
+                    console.log(data);
                 }
                 catch(ex)
                 {

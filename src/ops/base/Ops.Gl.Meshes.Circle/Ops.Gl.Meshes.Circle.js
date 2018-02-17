@@ -1,6 +1,6 @@
 var render=op.inFunction("render");
 var segments=op.inValue('segments',40);
-var radius=op.inValue('radius',1);
+var radius=op.inValue('radius',0.5);
 var innerRadius=op.inValueSlider('innerRadius',0);
 var percent=op.inValueSlider('percent');
 var steps=op.inValue('steps',0);
