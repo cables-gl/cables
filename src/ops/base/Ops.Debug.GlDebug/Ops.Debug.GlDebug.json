@@ -41,5 +41,6 @@
             }
         ],
         "name": "Ops.Debug.GlDebug"
-    }
+    },
+    "summary": "see current gl states and error message"
 }

@@ -29,5 +29,6 @@
             }
         ],
         "name": "Ops.Gl.Depth2"
-    }
+    },
+    "summary": "change depth testing method (depthMask,depthWrite,depthFunc)"
 }
