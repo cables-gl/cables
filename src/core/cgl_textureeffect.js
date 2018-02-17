@@ -92,7 +92,8 @@ CGL.TextureEffect.prototype.startEffect=function()
     }
 
     this.switched=false;
-    this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
+    // this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
+    this._cgl.pushDepthTest(false);
 
     // this._cgl.gl.clearColor(0,0,0,0);
     // this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
@@ -115,7 +116,8 @@ CGL.TextureEffect.prototype.startEffect=function()
 
 CGL.TextureEffect.prototype.endEffect=function()
 {
-    this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
+    this._cgl.popDepthTest(false);
+    // this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
     this._cgl.popMvMatrix();
 
     this._cgl.popPMatrix();

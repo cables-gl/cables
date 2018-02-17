@@ -1,0 +1,45 @@
+{
+    "updated": 1518858388357,
+    "authorName": "pandur",
+    "id": "3e2bc72c-8af4-4fdb-a998-555aaf62cc9d",
+    "created": 1518855898265,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "glGetError"
+            },
+            {
+                "type": "0",
+                "name": "Stack Depthtest"
+            },
+            {
+                "type": "0",
+                "name": "Depth Writing"
+            },
+            {
+                "type": "0",
+                "name": "Stack Depth Writing"
+            },
+            {
+                "type": "0",
+                "name": "DepthFunc"
+            },
+            {
+                "type": "0",
+                "name": "Stack DepthFunc"
+            }
+        ],
+        "name": "Ops.Debug.GlDebug"
+    }
+}

@@ -137,16 +137,16 @@ srcFrag+=''.endl()+'}';
 
 var doRender=function()
 {
-    if(true!==enableDepth.get()) cgl.gl.disable(cgl.gl.DEPTH_TEST);
-        else cgl.gl.enable(cgl.gl.DEPTH_TEST);
+    // if(true!==enableDepth.get()) cgl.gl.disable(cgl.gl.DEPTH_TEST);
+        // else cgl.gl.enable(cgl.gl.DEPTH_TEST);
+    cgl.pushDepthTest(enableDepth.get());
 
     cgl.setShader(shader);
     trigger.trigger();
     cgl.setPreviousShader();
 
-    if(true!==enableDepth.get()) cgl.gl.enable(cgl.gl.DEPTH_TEST);
-
-
+    // if(true!==enableDepth.get()) cgl.gl.enable(cgl.gl.DEPTH_TEST);
+    cgl.popDepthTest();
 
 };
 

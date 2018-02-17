@@ -154,6 +154,11 @@ CGL.State = function() {
         if (mvMatrixStack.length > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
         if (pMatrixStack.length > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
         if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
+
+        if (this._stackDepthTest.length > 0) console.warn('depthtest stack length !=0 at end of rendering...');
+        if (this._stackDepthWrite.length > 0) console.warn('depthwrite stack length !=0 at end of rendering...');
+        if (this._stackDepthFunc.length > 0) console.warn('depthfunc stack length !=0 at end of rendering...');
+
         mvMatrixStack.length = 0;
         vMatrixStack.length = 0;
         pMatrixStack.length = 0;
@@ -261,7 +266,11 @@ CGL.State = function() {
     this.renderStart = function(cgl, identTranslate, identTranslateView) {
         if (!identTranslate) identTranslate = ident;
         if (!identTranslateView) identTranslateView = identView;
-        cgl.gl.enable(cgl.gl.DEPTH_TEST);
+        // cgl.gl.enable(cgl.gl.DEPTH_TEST);
+        this.pushDepthTest(true);
+        this.pushDepthWrite(true);
+        this.pushDepthFunc(cgl.gl.LEQUAL);
+
         cgl.gl.clearColor(0, 0, 0, 0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
@@ -292,6 +301,10 @@ CGL.State = function() {
         cgl.popViewMatrix();
         cgl.popMvMatrix();
         cgl.popPMatrix();
+
+        this.popDepthTest();
+        this.popDepthWrite();
+        this.popDepthFunc();
 
         cgl.endFrame();
     };
@@ -418,7 +431,69 @@ CGL.State = function() {
 };
 
 
+// state depthtest
+
+CGL.State.prototype._stackDepthTest=[];
+CGL.State.prototype.pushDepthTest=function(b)
+{
+    this._stackDepthTest.push(b);
+    if(!b) this.gl.disable(this.gl.DEPTH_TEST);
+        else this.gl.enable(this.gl.DEPTH_TEST);
+};
+
+CGL.State.prototype.stateDepthTest=function()
+{
+    return this._stackDepthTest[this._stackDepthTest.length-1];
+}
+
+CGL.State.prototype.popDepthTest=function()
+{
+    this._stackDepthTest.pop();
+
+    if(!this._stackDepthTest[this._stackDepthTest.length-1])  this.gl.disable(this.gl.DEPTH_TEST);
+        else this.gl.enable(this.gl.DEPTH_TEST);
+};
+
+// state depthwrite
+
+CGL.State.prototype._stackDepthWrite=[];
+CGL.State.prototype.pushDepthWrite=function(b)
+{
+    this._stackDepthWrite.push(b);
+    this.gl.depthMask(b);
+};
+
+CGL.State.prototype.stateDepthWrite=function()
+{
+    return this._stackDepthWrite[this._stackDepthWrite.length-1];
+}
+
+CGL.State.prototype.popDepthWrite=function()
+{
+    this._stackDepthWrite.pop();
+    this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length-1]);
+};
 
 
+// state depthfunc
+
+CGL.State.prototype._stackDepthFunc=[];
+CGL.State.prototype.pushDepthFunc=function(f)
+{
+    this._stackDepthFunc.push(f);
+    this.gl.depthFunc(f);
+};
+
+CGL.State.prototype.stateDepthFunc=function()
+{
+    if(this._stackDepthFunc.length>0) return this._stackDepthFunc[this._stackDepthFunc.length-1];
+    return false;
+}
+
+CGL.State.prototype.popDepthFunc=function()
+{
+    this._stackDepthFunc.pop();
+    if(this._stackDepthFunc.length>0) this.gl.depthFunc(this._stackDepthFunc[this._stackDepthFunc.length-1]);
+};
 
 
