@@ -37,7 +37,7 @@ this.render.onTriggered=function()
     if(!cgl.frameStore.SplinePoints)return;
     
     vec3.set(vec, x.get(),y.get(),z.get());
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
 
 
@@ -57,7 +57,7 @@ this.render.onTriggered=function()
 
     self.trigger.trigger();
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 
     
 };

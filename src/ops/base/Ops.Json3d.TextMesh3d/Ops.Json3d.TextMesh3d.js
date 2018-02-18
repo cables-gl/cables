@@ -25,14 +25,14 @@ var cgl=this.patch.cgl;
 
 function render()
 {
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
     var txt=text.get()||'';
     var lastWidth=0;
     var width=0;
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     for(var i=0;i<txt.length;i++)
     {
         if(txt[i]==' ')
@@ -48,11 +48,11 @@ function render()
                 vec[0]=lastWidth;
                 mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
                 
-                // cgl.pushMvMatrix();
+                // cgl.pushModelMatrix();
                 // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,m.charTrans);
                 
                 m.render(cgl.getShader());
-                // cgl.popMvMatrix();
+                // cgl.popModelMatrix();
                 
                 width+=lastWidth;
                 lastWidth=m.charWidth+inSpace.get();
@@ -65,8 +65,8 @@ function render()
 
     outWidth.set(width);
     
-    cgl.popMvMatrix();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
+    cgl.popModelMatrix();
     next.trigger();
 }
 

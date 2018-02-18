@@ -17,8 +17,8 @@ var vec=vec3.create();
 render.onTriggered=function()
 {
     vec3.set(vec, x.get(),y.get(),z.get());
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
     trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };

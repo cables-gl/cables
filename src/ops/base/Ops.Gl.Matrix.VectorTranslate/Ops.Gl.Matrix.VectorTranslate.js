@@ -90,12 +90,12 @@ exec.onTriggered=function()
 
     vec3.add(pos,pos,vec);
     
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos);
 
     next.trigger();
     
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 
 };

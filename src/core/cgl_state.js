@@ -154,6 +154,12 @@ CGL.State = function() {
         if (mvMatrixStack.length > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
         if (pMatrixStack.length > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
         if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
+
+        if (this._stackDepthTest.length > 0) console.warn('depthtest stack length !=0 at end of rendering...');
+        if (this._stackDepthWrite.length > 0) console.warn('depthwrite stack length !=0 at end of rendering...');
+        if (this._stackDepthFunc.length > 0) console.warn('depthfunc stack length !=0 at end of rendering...');
+        if (this._stackBlend.length > 0) console.warn('blend stack length !=0 at end of rendering...');
+
         mvMatrixStack.length = 0;
         vMatrixStack.length = 0;
         pMatrixStack.length = 0;
@@ -225,17 +231,17 @@ CGL.State = function() {
 
     // model matrix stack
 
-    this.pushMvMatrix = function() {
+    this.pushMvMatrix =
+    this.pushModelMatrix = function() {
         var copy = mat4.clone(self.mvMatrix);
         mvMatrixStack.push(copy);
     };
 
-    this.popMvMatrix = function() {
+    this.popMvMatrix =
+    this.popModelMatrix = function() {
         if (mvMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
         self.mvMatrix = mvMatrixStack.pop();
     };
-    this.popModelMatrix = this.popMvMatrix;
-    this.pushModelMatrix = this.pushMvMatrix;
     this.modelMatrix = function() {
         return self.mvMatrix;
     };
@@ -261,7 +267,11 @@ CGL.State = function() {
     this.renderStart = function(cgl, identTranslate, identTranslateView) {
         if (!identTranslate) identTranslate = ident;
         if (!identTranslateView) identTranslateView = identView;
-        cgl.gl.enable(cgl.gl.DEPTH_TEST);
+        // cgl.gl.enable(cgl.gl.DEPTH_TEST);
+        this.pushDepthTest(true);
+        this.pushDepthWrite(true);
+        this.pushDepthFunc(cgl.gl.LEQUAL);
+
         cgl.gl.clearColor(0, 0, 0, 0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
@@ -271,7 +281,7 @@ CGL.State = function() {
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
 
         cgl.pushPMatrix();
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         cgl.pushViewMatrix();
 
         mat4.identity(cgl.mvMatrix);
@@ -280,7 +290,8 @@ CGL.State = function() {
         // mat4.translate(cgl.mvMatrix,cgl.mvMatrix, identTranslate);
         mat4.translate(cgl.vMatrix, cgl.vMatrix, identTranslateView);
 
-        cgl.gl.enable(cgl.gl.BLEND);
+        cgl.pushBlend(true);
+
         // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
         cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
         cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
@@ -290,8 +301,13 @@ CGL.State = function() {
 
     this.renderEnd = function(cgl, identTranslate) {
         cgl.popViewMatrix();
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
         cgl.popPMatrix();
+
+        this.popDepthTest();
+        this.popDepthWrite();
+        this.popDepthFunc();
+        this.popBlend();
 
         cgl.endFrame();
     };
@@ -418,7 +434,93 @@ CGL.State = function() {
 };
 
 
+// state depthtest
+
+CGL.State.prototype._stackDepthTest=[];
+CGL.State.prototype.pushDepthTest=function(b)
+{
+    this._stackDepthTest.push(b);
+    if(!b) this.gl.disable(this.gl.DEPTH_TEST);
+        else this.gl.enable(this.gl.DEPTH_TEST);
+};
+
+CGL.State.prototype.stateDepthTest=function()
+{
+    return this._stackDepthTest[this._stackDepthTest.length-1];
+}
+
+CGL.State.prototype.popDepthTest=function()
+{
+    this._stackDepthTest.pop();
+
+    if(!this._stackDepthTest[this._stackDepthTest.length-1])  this.gl.disable(this.gl.DEPTH_TEST);
+        else this.gl.enable(this.gl.DEPTH_TEST);
+};
+
+// state depthwrite
+
+CGL.State.prototype._stackDepthWrite=[];
+CGL.State.prototype.pushDepthWrite=function(b)
+{
+    this._stackDepthWrite.push(b);
+    this.gl.depthMask(b);
+};
+
+CGL.State.prototype.stateDepthWrite=function()
+{
+    return this._stackDepthWrite[this._stackDepthWrite.length-1];
+}
+
+CGL.State.prototype.popDepthWrite=function()
+{
+    this._stackDepthWrite.pop();
+    this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length-1]);
+};
+
+
+// state depthfunc
+
+CGL.State.prototype._stackDepthFunc=[];
+CGL.State.prototype.pushDepthFunc=function(f)
+{
+    this._stackDepthFunc.push(f);
+    this.gl.depthFunc(f);
+};
+
+CGL.State.prototype.stateDepthFunc=function()
+{
+    if(this._stackDepthFunc.length>0) return this._stackDepthFunc[this._stackDepthFunc.length-1];
+    return false;
+}
+
+CGL.State.prototype.popDepthFunc=function()
+{
+    this._stackDepthFunc.pop();
+    if(this._stackDepthFunc.length>0) this.gl.depthFunc(this._stackDepthFunc[this._stackDepthFunc.length-1]);
+};
 
 
 
 
+// state blend
+
+CGL.State.prototype._stackBlend=[];
+CGL.State.prototype.pushBlend=function(b)
+{
+    this._stackBlend.push(b);
+    if(!b) this.gl.disable(this.gl.BLEND);
+        else this.gl.enable(this.gl.BLEND);
+};
+
+CGL.State.prototype.stateBlend=function()
+{
+    return this._stackBlend[this._stackBlend.length-1];
+}
+
+CGL.State.prototype.popBlend=function()
+{
+    this._stackBlend.pop();
+
+    if(!this._stackBlend[this._stackBlend.length-1])  this.gl.disable(this.gl.BLEND);
+        else this.gl.enable(this.gl.BLEND);
+};

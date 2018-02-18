@@ -228,11 +228,11 @@ render.onTriggered=function()
     if(valignMode==1) vec3.set(vec, 0,0,0);
     if(valignMode==0) vec3.set(vec, 0,height/2,0);
     vec[1]-=lineHeight.get();
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
     if(mesh && !disabled)mesh.render(cgl.getShader());
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 
 
     cgl.setTexture(0,null);

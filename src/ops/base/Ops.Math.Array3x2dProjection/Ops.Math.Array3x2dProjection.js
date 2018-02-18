@@ -97,10 +97,10 @@ function update()
             points3d[i*3+2]
             );
 
-        // cgl.pushMvMatrix();
+        // cgl.pushModelMatrix();
         // mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
         // self.triggerPoints.trigger();
-        // cgl.popMvMatrix();
+        // cgl.popModelMatrix();
 
         // var point=[
         //     points3d[i].x, 

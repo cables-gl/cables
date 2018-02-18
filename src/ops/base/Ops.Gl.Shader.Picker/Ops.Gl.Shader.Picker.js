@@ -148,7 +148,7 @@ var doRender=function()
                 tex.set( fb.getTextureColor() );
             }
 
-            cgl.pushMvMatrix();
+            cgl.pushModelMatrix();
             fb.renderStart();
             // cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
 
@@ -168,7 +168,7 @@ var doRender=function()
             // cgl.gl.readPixels(op.x.get(), op.y.get(), 1,1,  cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE ,pixelRGB);
 
             fb.renderEnd();
-            cgl.popMvMatrix();
+            cgl.popModelMatrix();
             //   console.log(cgl.getViewPort()[2],cgl.getViewPort()[3],op.x.get(), op.y.get(),pixelRGB[0]);
 
             // cgl.gl.enable(cgl.gl.SCISSOR_TEST);

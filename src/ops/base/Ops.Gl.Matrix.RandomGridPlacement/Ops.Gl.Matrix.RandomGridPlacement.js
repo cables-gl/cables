@@ -52,7 +52,7 @@ function drawSquare(x,y,depth,scale)
     }
     else
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         vec3.set(vScale,scale,scale,scale);
         vec3.set(vPos,x-whalf+0.5,y-hhalf+0.5,0);
         index++;
@@ -63,7 +63,7 @@ function drawSquare(x,y,depth,scale)
         mat4.scale(cgl.mvMatrix,cgl.mvMatrix,vScale);
         next.trigger();
     
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
 }

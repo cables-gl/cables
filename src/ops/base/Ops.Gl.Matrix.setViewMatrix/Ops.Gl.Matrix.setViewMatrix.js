@@ -8,11 +8,11 @@ var matrix=this.addInPort(new Port(this,"matrix",OP_PORT_TYPE_ARRAY));
 
 render.onTriggered=function()
 {
-    cgl.pushMvMatrix();
+    cgl.pushViewMatrix();
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,matrix.get());
 
     trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popViewMatrix();
 };
 
 matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );

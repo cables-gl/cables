@@ -258,10 +258,10 @@ render.onTriggered=function()
     
     if(show.get())
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[posX.get(),posY.get(),posZ.get()]);
         mark.draw(cgl);
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
     if(particleSpawnStart>numPoints.get())particleSpawnStart=0;

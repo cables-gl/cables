@@ -17,10 +17,10 @@ render.onTriggered=function()
         mat4.scale(transMatrix,transMatrix, vScale);
     }
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
     trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };
 
 var scaleChanged=function()

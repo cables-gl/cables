@@ -121,7 +121,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
     this.renderStart=function()
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
         cgl.pushFrameBuffer(frameBuf);
 
@@ -137,7 +137,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         cgl.popPMatrix();
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer() );
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
         cgl.resetViewPort();
     };
 

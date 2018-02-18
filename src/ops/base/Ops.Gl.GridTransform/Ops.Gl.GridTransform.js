@@ -23,7 +23,7 @@ var cgl=op.patch.cgl;
 
 render.onTriggered=function()
 {
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     
     mat4.copy(matOrig, cgl.modelMatrix());
 
@@ -59,6 +59,6 @@ render.onTriggered=function()
         }
     }
     
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 
 };

@@ -51,7 +51,7 @@ CGL.Marker=function(cgl)
     this.draw=function(cgl)
     {
         var size=2;
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
 
 
         
@@ -63,16 +63,18 @@ CGL.Marker=function(cgl)
         vec3.set(this._vScale, size,size,size);
         mat4.scale(cgl.mvMatrix,cgl.mvMatrix, this._vScale);
 
-        cgl.gl.disable(cgl.gl.DEPTH_TEST);
+        // cgl.gl.disable(cgl.gl.DEPTH_TEST);
+        cgl.pushDepthTest(false);
 
         mesh.render(cgl.getShader());
 
-        cgl.gl.enable(cgl.gl.DEPTH_TEST);
+        // cgl.gl.enable(cgl.gl.DEPTH_TEST);
+        cgl.popDepthTest();
 
         cgl.setPreviousShader();
 
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     };
 };
 

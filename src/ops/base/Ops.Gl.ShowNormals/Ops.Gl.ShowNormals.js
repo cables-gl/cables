@@ -49,7 +49,7 @@ render.onTriggered=function()
         var shader=cgl.getShader();
         if(!shader)return;
     
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
     
         shader.bind();
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
@@ -60,7 +60,7 @@ render.onTriggered=function()
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
         cgl.gl.drawArrays(cgl.gl.LINES, 0, buffer.numItems);
     
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
         trigger.trigger();
 
     }

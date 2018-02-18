@@ -41,7 +41,7 @@ render.onTriggered=function()
     if(!shader)return;
     bufferData();
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     mat4.identity(cgl.mvMatrix);
     
     if(renderLines.get() && mesh)
@@ -62,17 +62,17 @@ render.onTriggered=function()
         {
             var vec=[0,0,0];
             vec3.set(vec, cgl.frameStore.SplinePoints[i+0], cgl.frameStore.SplinePoints[i+1], cgl.frameStore.SplinePoints[i+2]);
-            cgl.pushMvMatrix();
+            cgl.pushModelMatrix();
             mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
             triggerPoints.trigger();
-            cgl.popMvMatrix();
+            cgl.popModelMatrix();
         }
     }
 
     outPoints.set(null);
     outPoints.set(points);
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
     // cgl.frameStore.SplinePoints.length=0;
     mySplinePoints.length=0;
     

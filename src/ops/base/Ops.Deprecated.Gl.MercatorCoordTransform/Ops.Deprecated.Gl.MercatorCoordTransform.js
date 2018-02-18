@@ -74,11 +74,11 @@ exe.onTriggered=function()
     for(var i=0;i<points.length;i++)
     {
         indexOut.set(i);
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, points[i].vec);
         trigger.trigger();
         // mat4.translate(cgl.mvMatrix,cgl.mvMatrix, points[i].vecMin);
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
     

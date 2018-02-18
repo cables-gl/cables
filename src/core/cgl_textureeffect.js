@@ -92,12 +92,13 @@ CGL.TextureEffect.prototype.startEffect=function()
     }
 
     this.switched=false;
-    this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
+    // this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
+    this._cgl.pushDepthTest(false);
 
     // this._cgl.gl.clearColor(0,0,0,0);
     // this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
 
-    this._cgl.pushMvMatrix();
+    this._cgl.pushModelMatrix();
 
     this._cgl.pushPMatrix();
     this._cgl.gl.viewport(0, 0, this.getCurrentTargetTexture().width,this.getCurrentTargetTexture().height);
@@ -109,17 +110,18 @@ CGL.TextureEffect.prototype.startEffect=function()
     this._cgl.pushViewMatrix();
     mat4.identity(this._cgl.vMatrix);
 
-    this._cgl.pushMvMatrix();
+    this._cgl.pushModelMatrix();
     mat4.identity(this._cgl.mvMatrix);
 };
 
 CGL.TextureEffect.prototype.endEffect=function()
 {
-    this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
-    this._cgl.popMvMatrix();
+    this._cgl.popDepthTest(false);
+    // this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
+    this._cgl.popModelMatrix();
 
     this._cgl.popPMatrix();
-    this._cgl.popMvMatrix();
+    this._cgl.popModelMatrix();
     this._cgl.popViewMatrix();
 
     this._cgl.popPMatrix();

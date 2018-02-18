@@ -37,7 +37,7 @@ calc();
 
 render.onTriggered=function()
 {
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
 
     var time=(CABLES.now()/1000-startTime)*speed.get()+Math.round(segments.get())*0.1*percent.get();
@@ -55,7 +55,7 @@ render.onTriggered=function()
 
     trigger.trigger();
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };
 
 function calc()

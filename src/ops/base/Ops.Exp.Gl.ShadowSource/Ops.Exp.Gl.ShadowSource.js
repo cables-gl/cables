@@ -55,7 +55,7 @@ function renderPickingPass()
 {
     fb.renderStart();
 
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
     cgl.pushViewMatrix();
     // cgl.resetViewPort();
 
@@ -123,7 +123,7 @@ function renderPickingPass()
 
     cgl.popPMatrix();
     
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
     cgl.popViewMatrix();
     
 

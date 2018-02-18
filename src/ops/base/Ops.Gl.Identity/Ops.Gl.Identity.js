@@ -6,10 +6,10 @@ var cgl=op.patch.cgl;
 
 exe.onTriggered=function()
 {
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     mat4.identity(cgl.mvMatrix);
     trigger.trigger();
 
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };

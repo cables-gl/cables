@@ -97,14 +97,14 @@ op.render.onTriggered=function()
     {
         for(var j=0;j<objects.length;j++)
         {
-            cgl.pushMvMatrix();
+            cgl.pushModelMatrix();
             mat4.translate(cgl.mvMatrix,cgl.mvMatrix, objects[j].pos);
 
             mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, objects[j].qMat);
 
             index.set(j);
             trigger.trigger();
-            cgl.popMvMatrix();
+            cgl.popModelMatrix();
         }
     }
 };

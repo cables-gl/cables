@@ -138,15 +138,15 @@ exe.onTriggered=function()
 
     if(attachment.isLinked())
     {
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vecEye);
         attachment.trigger();
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
 
-        cgl.pushMvMatrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix,vecTarget);
         attachment.trigger();
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 
     trigger.trigger();

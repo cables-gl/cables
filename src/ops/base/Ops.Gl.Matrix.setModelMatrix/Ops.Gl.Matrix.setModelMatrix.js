@@ -8,7 +8,7 @@ var matrix=op.addInPort(new Port(op,"matrix",OP_PORT_TYPE_ARRAY));
 
 render.onTriggered=function()
 {
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     if(inIdentity.get())    
         mat4.identity(cgl.mvMatrix);
@@ -16,7 +16,7 @@ render.onTriggered=function()
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,matrix.get());
 
     next.trigger();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };
 
 matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );

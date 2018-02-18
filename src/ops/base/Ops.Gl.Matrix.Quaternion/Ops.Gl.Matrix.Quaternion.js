@@ -25,11 +25,11 @@ render.onTriggered=function()
     {
         quat.set(q, x.get(),y.get(),z.get(),w.get());
     }
-    cgl.pushMvMatrix();
+    cgl.pushModelMatrix();
 
     mat4.fromQuat(qMat, q);
     mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
 
     trigger.trigger();
-    cgl.popMvMatrix();
+    cgl.popModelMatrix();
 };

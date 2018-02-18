@@ -151,7 +151,8 @@ var doRender=function()
         effect.setSourceTexture(tex);
         effect.startEffect();
 
-    cgl.gl.disable( cgl.gl.BLEND );
+    // cgl.gl.disable( cgl.gl.BLEND );
+        cgl.pushBlend(false);
 
 
         cgl.setShader(bgShader);
@@ -179,6 +180,7 @@ var doRender=function()
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 
     cgl.currentTextureEffect=null;
+    cgl.popBlend();
 
 };
 
