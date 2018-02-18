@@ -1,4 +1,3 @@
-op.name="StringTyper";
 
 var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var inRestart=op.inFunctionButton("Restart");

@@ -18,5 +18,6 @@
             }
         ],
         "name": "Ops.Gl.RandomizeTriangles"
-    }
+    },
+    "summary": "randomize order of triangles in a geometry"
 }

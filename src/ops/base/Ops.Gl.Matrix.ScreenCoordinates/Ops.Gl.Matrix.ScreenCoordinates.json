@@ -26,5 +26,6 @@
             }
         ],
         "name": "Ops.Gl.Matrix.ScreenCoordinates"
-    }
+    },
+    "summary": "screen/pixel coordinates of the current transform"
 }

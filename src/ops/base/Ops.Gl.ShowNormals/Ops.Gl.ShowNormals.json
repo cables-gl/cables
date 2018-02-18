@@ -1,0 +1,30 @@
+{
+    "summary": "visualize normals of a geometry",
+    "updated": 1518895053595,
+    "authorName": "pandur",
+    "id": "3e0e2c25-036e-4aeb-8803-9e07a9076da0",
+    "created": 1518895052920,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            },
+            {
+                "type": "0",
+                "name": "Length"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShowNormals"
+    }
+}

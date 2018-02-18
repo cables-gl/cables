@@ -1,0 +1,30 @@
+{
+    "updated": 1518187803562,
+    "authorName": "tim",
+    "id": "ad6d77b7-d81d-4115-a2f2-5160adaaef3a",
+    "created": 1518102453401,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array 1"
+            },
+            {
+                "type": "3",
+                "name": "Array 2"
+            },
+            {
+                "type": "0",
+                "name": "Chunk Size"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Combined Array"
+            }
+        ],
+        "name": "Ops.Array.CombineArrays"
+    },
+    "summary": "Weaves two arrays together (combine, join, merge)"
+}

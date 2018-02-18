@@ -1,0 +1,41 @@
+{
+    "updated": 1518116846357,
+    "authorName": "tim",
+    "id": "2c99d3b4-6863-4cd5-b1bd-72c2cbba4495",
+    "created": 1518112527750,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Element Type"
+            },
+            {
+                "type": "0",
+                "name": "Id"
+            },
+            {
+                "type": "0",
+                "name": "Class"
+            },
+            {
+                "type": "0",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Inline Style"
+            },
+            {
+                "type": "0",
+                "name": "Visible"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "DOM Element"
+            }
+        ],
+        "name": "Ops.Html.CustomElement"
+    }
+}

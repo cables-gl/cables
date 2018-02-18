@@ -1,0 +1,22 @@
+{
+    "summary": "trigger next only after value has changed to false",
+    "updated": 1518604071595,
+    "authorName": "pandur",
+    "id": "6387bcb0-6091-4199-8ab7-f96ad4aa3c7d",
+    "created": 1518604069266,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Boolean.TriggerChangedFalse"
+    }
+}
