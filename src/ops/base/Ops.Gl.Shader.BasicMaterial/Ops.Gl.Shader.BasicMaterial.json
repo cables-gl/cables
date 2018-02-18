@@ -85,6 +85,10 @@
             {
                 "name": "a",
                 "text": "Opacity"
+            },
+            {
+                "name": "colorizeTexture",
+                "text": "aaaa"
             }
         ]
     }

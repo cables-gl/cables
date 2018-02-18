@@ -18,6 +18,7 @@ CABLES.Op = function()
     this.objName='';
     this.portsOut=[];
     this.portsIn=[];
+    this.opId='';
     this.uiAttribs={};
     this.enabled=true;
     this.patch=arguments[0];
@@ -288,7 +289,12 @@ CABLES.Op = function()
     {
         var op={};
         op.name=this.getName();
+
+        var nameParts=this.objName.split('.');
+        if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
+
         op.objName=this.objName;
+        op.opId=this.opId;
         op.id=this.id;
         op.uiAttribs=this.uiAttribs;
         op.portsIn=[];

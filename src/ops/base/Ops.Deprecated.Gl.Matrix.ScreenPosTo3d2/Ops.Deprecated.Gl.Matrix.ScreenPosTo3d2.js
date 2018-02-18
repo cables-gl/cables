@@ -29,7 +29,7 @@ function calc()
     
     // mat4.invert(ivm,cgl.vMatrix);
     
-    mat=cgl.mvMatrix;
+    mat=cgl.modelMatrix();
     // mat4.mul(pm,cgl.mvMatrix,ivm);
     
     mat4.invert(ipm,pm);

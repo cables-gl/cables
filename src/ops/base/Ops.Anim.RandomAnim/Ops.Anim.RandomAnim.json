@@ -1,5 +1,4 @@
 {
-    "summary": "Animatie a value between random values",
     "layout": {
         "portsIn": [
             {
@@ -38,5 +37,14 @@
             }
         ],
         "name": "Ops.Math.RandomAnim"
+    },
+    "summary": "ddddd",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "eeee"
+            }
+        ]
     }
 }

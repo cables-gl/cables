@@ -2,7 +2,7 @@ var CGL = CGL || {};
 
 CGL.State = function() {
     var self = this;
-    var mvMatrixStack = [];
+
     var vMatrixStack = [];
     var pMatrixStack = [];
     var shaderStack = [];
@@ -18,8 +18,8 @@ CGL.State = function() {
     this.vMatrix = mat4.create();
     this.canvas = null;
     this.pixelDensity=1;
-    mat4.identity(self.mvMatrix);
-    mat4.identity(self.vMatrix);
+    mat4.identity(this.mvMatrix);
+    mat4.identity(this.vMatrix);
 
     var simpleShader = new CGL.Shader(this, "simpleshader");
     var currentShader = simpleShader;
@@ -80,11 +80,6 @@ CGL.State = function() {
     {
         this.canvas.width = this.canvasWidth = this.canvas.clientWidth*this.pixelDensity;
         this.canvas.height = this.canvasHeight = this.canvas.clientHeight*this.pixelDensity;
-
-        // console.log('this.canvas.clientWidth',this.canvas.clientWidth);cd
-        // console.log('this.canvas.width',this.canvas.width);
-        // console.log('this.canvasWidth',this.canvasWidth);
-        // console.log('-----------');
     };
 
     this.canvasWidth = -1;
@@ -151,7 +146,7 @@ CGL.State = function() {
 
         self.setPreviousShader();
         if (vMatrixStack.length > 0) console.warn('view matrix stack length !=0 at end of rendering...');
-        if (mvMatrixStack.length > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
+        if (this._stackModelMatrix.length > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
         if (pMatrixStack.length > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
         if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
 
@@ -160,7 +155,7 @@ CGL.State = function() {
         if (this._stackDepthFunc.length > 0) console.warn('depthfunc stack length !=0 at end of rendering...');
         if (this._stackBlend.length > 0) console.warn('blend stack length !=0 at end of rendering...');
 
-        mvMatrixStack.length = 0;
+        this._stackModelMatrix.length = 0;
         vMatrixStack.length = 0;
         pMatrixStack.length = 0;
         shaderStack.length = 0;
@@ -229,22 +224,6 @@ CGL.State = function() {
         self.vMatrix = vMatrixStack.pop();
     };
 
-    // model matrix stack
-
-    this.pushMvMatrix =
-    this.pushModelMatrix = function() {
-        var copy = mat4.clone(self.mvMatrix);
-        mvMatrixStack.push(copy);
-    };
-
-    this.popMvMatrix =
-    this.popModelMatrix = function() {
-        if (mvMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
-        self.mvMatrix = mvMatrixStack.pop();
-    };
-    this.modelMatrix = function() {
-        return self.mvMatrix;
-    };
 
     // projection matrix stack
 
@@ -431,6 +410,26 @@ CGL.State = function() {
 
         }.bind(this),true);
     };
+};
+
+
+// model matrix stack
+
+CGL.State.prototype._stackModelMatrix=[];
+CGL.State.prototype.pushMvMatrix = // deprecated
+CGL.State.prototype.pushModelMatrix = function()
+{
+    var copy = mat4.clone(this.mvMatrix);
+    this._stackModelMatrix.push(copy);
+};
+
+CGL.State.prototype.popMvMatrix =
+CGL.State.prototype.popModelMatrix = function() {
+    if (this._stackModelMatrix.length === 0) throw "Invalid modelview popMatrix!";
+    this.mvMatrix = this._stackModelMatrix.pop();
+};
+CGL.State.prototype.modelMatrix = function() {
+    return this.mvMatrix;
 };
 
 

@@ -26,7 +26,7 @@ var cgl=this.patch.cgl;
 function render()
 {
     cgl.pushModelMatrix();
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
+    mat4.multiply(cgl.modelMatrix(),cgl.modelMatrix(),transMatrix);
 
     var txt=text.get()||'';
     var lastWidth=0;
@@ -38,7 +38,7 @@ function render()
         if(txt[i]==' ')
         {
             vec[0]=0.4;
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+            mat4.translate(cgl.modelMatrix(),cgl.modelMatrix(), vec);
         }
         else if(meshes[txt[i]])
         {
@@ -46,10 +46,10 @@ function render()
             if(m)
             {
                 vec[0]=lastWidth;
-                mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+                mat4.translate(cgl.modelMatrix(),cgl.modelMatrix(), vec);
                 
                 // cgl.pushModelMatrix();
-                // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,m.charTrans);
+                // mat4.multiply(cgl.modelMatrix(),cgl.modelMatrix(),m.charTrans);
                 
                 m.render(cgl.getShader());
                 // cgl.popModelMatrix();
