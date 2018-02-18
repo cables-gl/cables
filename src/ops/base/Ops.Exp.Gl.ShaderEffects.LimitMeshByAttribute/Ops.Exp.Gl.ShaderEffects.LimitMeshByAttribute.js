@@ -58,7 +58,12 @@ function updateCode()
 
     srcHeadVert=''
         .endl()+'OUT '+attrType+' '+attrName+'Frag;'
+        
+        
+        .endl()+'#ifndef ATTRIB_'+attrName+''
+        .endl()+'#define ATTRIB_attrSubmesh'
         .endl()+'IN '+attrType+' '+attrName+';'
+        .endl()+'#endif'
         .endl();
 
     srcBodyVert=''

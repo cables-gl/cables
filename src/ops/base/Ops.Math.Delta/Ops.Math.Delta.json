@@ -18,7 +18,7 @@
         ],
         "name": "Ops.Math.Delta"
     },
-    "summary": "difference to the last value",
+    "summary": "difference to the last value (previous, store)",
     "updated": 1517650832487,
     "authorName": "tim",
     "id": "0f203337-e13c-47ec-a09f-b309212540b0",

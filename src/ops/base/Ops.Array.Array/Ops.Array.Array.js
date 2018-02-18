@@ -1,14 +1,13 @@
-op.name="Array";
-
 var inLength=op.inValueInt("Length",100);
 var inDefaultValue=op.inValueInt("DefaultValue");
 var inReset=op.inFunctionButton("Reset");
 var outArr=op.outArray("Array");
 
 var arr=[];
-reset();
 inReset.onTriggered=reset;
 inLength.onChange=reset;
+inDefaultValue.onChange=reset;
+reset();
 
 function reset()
 {

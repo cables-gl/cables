@@ -8,7 +8,12 @@ UNI float MOD_x;
 UNI float MOD_y;
 UNI float MOD_z;
 
-IN float attrSubmesh;
+#ifndef ATTRIB_attrSubmesh
+    #define ATTRIB_attrSubmesh
+    IN float attrSubmesh;
+#endif
+
+
 
 float MOD_random(vec2 co)
 {

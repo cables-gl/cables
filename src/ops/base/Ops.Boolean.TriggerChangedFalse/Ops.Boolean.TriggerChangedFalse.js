@@ -1,4 +1,3 @@
-op.name="TriggerChangedFalse";
 
 var val=op.inValueBool("Value",false);
 

@@ -1,4 +1,3 @@
-op.name='ShowNormals';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var geometry=op.addInPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));

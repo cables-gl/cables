@@ -25,5 +25,6 @@
             }
         ],
         "name": "Ops.Sidebar.Slider"
-    }
+    },
+    "summary": "sidebar slider element (range)"
 }

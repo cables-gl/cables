@@ -1,0 +1,29 @@
+{
+    "updated": 1517483728262,
+    "authorName": "tim",
+    "id": "20637fe6-6567-4396-bc22-fa14bcbb853b",
+    "created": 1517431313197,
+    "libs": [
+        "start-audio-context.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Use Custom Selector"
+            },
+            {
+                "type": "0",
+                "name": "Selectors"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Is Ready"
+            }
+        ],
+        "name": "Ops.WebAudio.StartAudioContext"
+    },
+    "summary": "Starts the web audio context on iOS"
+}

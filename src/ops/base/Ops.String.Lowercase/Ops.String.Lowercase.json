@@ -1,0 +1,22 @@
+{
+    "summary": "convert all characters to small letters",
+    "updated": 1518873479380,
+    "authorName": "pandur",
+    "id": "faf1f821-ec22-44db-8b9e-c4b032c58ad4",
+    "created": 1518873479060,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.Lowercase"
+    }
+}

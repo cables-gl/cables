@@ -11,5 +11,6 @@
             }
         ],
         "name": "Ops.Sidebar.Sidebar"
-    }
+    },
+    "summary": "sidebar overlay to control values"
 }

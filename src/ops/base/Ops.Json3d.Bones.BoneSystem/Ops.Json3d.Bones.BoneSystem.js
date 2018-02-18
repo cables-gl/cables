@@ -56,6 +56,8 @@ function findBoneChilds(n,parent,foundBone)
         return null;
     }
 
+// if(parent)console.log(parent.name+'  -  '+n.name);
+
     var time=op.patch.timer.getTime();
     if(inTime.isLinked() || inTime.get()!==0)time=inTime.get();
 

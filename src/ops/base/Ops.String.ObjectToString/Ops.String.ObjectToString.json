@@ -1,0 +1,21 @@
+{
+    "updated": 1518873207247,
+    "authorName": "pandur",
+    "id": "34c559f3-05bb-475b-b6b6-2cab66da3f9b",
+    "created": 1518873206835,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.ObjectToString"
+    }
+}

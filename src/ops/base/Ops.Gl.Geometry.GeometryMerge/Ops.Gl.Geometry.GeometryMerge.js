@@ -1,4 +1,5 @@
 var inGeom=op.inObject("Geometry");
+var inGeom2=op.inObject("Geometry 2");
 var inMerge=op.inFunctionButton("Merge");
 var inReset=op.inFunctionButton("Reset");
 
@@ -17,10 +18,11 @@ inReset.onTriggered=function()
 
 inMerge.onTriggered=function()
 {
-    if(inGeom.get())
+    if(inGeom.get() || inGeom2.get())
     {
         console.log("merge geom!");
-        geom.merge(inGeom.get());
+        if(inGeom.get())geom.merge(inGeom.get());
+        if(inGeom2.get())geom.merge(inGeom2.get());
         outGeom.set(null);
         outGeom.set(geom);
     }

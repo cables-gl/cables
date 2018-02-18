@@ -1,1 +1,24 @@
-{}
+{
+    "updated": 1518868429004,
+    "authorName": "pandur",
+    "id": "023d1e35-1231-4c50-a044-4a0e63609ba5",
+    "created": 1518868364510,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "on press"
+            },
+            {
+                "type": "0",
+                "name": "key code"
+            },
+            {
+                "type": "0",
+                "name": "Char"
+            }
+        ],
+        "name": "Ops.Devices.Keyboard.KeyPress"
+    },
+    "summary": "triggers when a key is pressed"
+}

@@ -42,5 +42,6 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "3f7db864-7409-418f-8c03-b2c966c050b3",
-    "created": 1513865904150
+    "created": 1513865904150,
+    "summary": "Iterates over an array in steps of three and outputs three values"
 }

@@ -1,4 +1,3 @@
-op.name='Torus';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var sides=op.addInPort(new Port(op,"sides",OP_PORT_TYPE_VALUE));
@@ -88,7 +87,9 @@ function generateTorus(iradius,oradius,nRings,nSides)
     var table1=circleTable( nRings,false);
     var table2=circleTable(-nSides,false);
 
-    if(!geom)geom=new CGL.Geometry();
+    // if(!geom)
+    geom=new CGL.Geometry();
+    // geom.clear();
 
     for( j=0; j<nRings; j++ )
     {
@@ -129,6 +130,7 @@ function generateTorus(iradius,oradius,nRings,nSides)
     }
     
     //geom.calcNormals({smooth:rue});
+    geomOut.set(null);
     geomOut.set(geom);
 
     if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);

@@ -1,4 +1,3 @@
-op.name='SmoothStep';
 var result=op.addOutPort(new Port(op,"result"));
 var number=op.addInPort(new Port(op,"number"));
 var min=op.addInPort(new Port(op,"min"));

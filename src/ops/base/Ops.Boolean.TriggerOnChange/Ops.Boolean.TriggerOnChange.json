@@ -22,5 +22,6 @@
             }
         ],
         "name": "Ops.Boolean.TriggerOnChange"
-    }
+    },
+    "summary": "trigger when boolean value has changed"
 }

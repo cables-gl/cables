@@ -54,9 +54,10 @@
         ],
         "name": "Ops.Gl.Matrix.LookatCamera"
     },
-    "updated": 1512983636467,
+    "updated": 1518869551898,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "e0f1bad6-7dfb-4665-b458-ca50a1bfe7fa",
-    "created": 1512035659193
+    "created": 1512035659193,
+    "summary": "transforms view to look from eye to center "
 }

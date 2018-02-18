@@ -1,4 +1,3 @@
-op.name="Uppercase";
 
 var inStr=op.inValueString("String");
 var outStr=op.outValue("Result");

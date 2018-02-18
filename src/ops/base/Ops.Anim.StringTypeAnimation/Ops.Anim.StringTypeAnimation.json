@@ -1,1 +1,42 @@
-{"summary":"Animates a string, like it is being written by a person"}
+{
+    "summary": "Animates a string, like it is being written by a person",
+    "updated": 1518872140509,
+    "authorName": "pandur",
+    "id": "61b0db65-814c-403f-b4d1-2b58e6311454",
+    "created": 1518872140148,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "text"
+            },
+            {
+                "type": "1",
+                "name": "Restart"
+            },
+            {
+                "type": "0",
+                "name": "Speed"
+            },
+            {
+                "type": "0",
+                "name": "Speed Variation"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            },
+            {
+                "type": "1",
+                "name": "Changed"
+            },
+            {
+                "type": "1",
+                "name": "Finished"
+            }
+        ],
+        "name": "Ops.Anim.StringTypeAnimation"
+    }
+}

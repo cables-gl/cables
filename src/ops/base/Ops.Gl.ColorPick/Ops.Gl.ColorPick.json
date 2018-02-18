@@ -1,1 +1,42 @@
-{}
+{
+    "summary": "pick a color at x,y coordinates of canvas",
+    "updated": 1518872255392,
+    "authorName": "pandur",
+    "id": "12de35ad-3f76-496c-9585-b77a87530de3",
+    "created": 1518872255395,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "x"
+            },
+            {
+                "type": "0",
+                "name": "y"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "a"
+            }
+        ],
+        "name": "Ops.Gl.ColorPick"
+    }
+}

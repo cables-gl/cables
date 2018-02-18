@@ -1,4 +1,3 @@
-op.name="ObjectToString";
 
 var obj=op.inObject("Object");
 var result=op.outValue("Result");
