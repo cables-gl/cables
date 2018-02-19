@@ -1,1 +1,57 @@
-{}
+{
+    "updated": 1519025141738,
+    "authorName": "pandur",
+    "id": "6b344add-6c4d-4365-858f-a365e4adb183",
+    "created": 1519025139408,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Calc"
+            },
+            {
+                "type": "0",
+                "name": "Min"
+            },
+            {
+                "type": "0",
+                "name": "x1"
+            },
+            {
+                "type": "0",
+                "name": "y1"
+            },
+            {
+                "type": "0",
+                "name": "z1"
+            },
+            {
+                "type": "0",
+                "name": "x2"
+            },
+            {
+                "type": "0",
+                "name": "y2"
+            },
+            {
+                "type": "0",
+                "name": "z2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "distance"
+            }
+        ],
+        "name": "Ops.Math.Distance3dNew"
+    },
+    "summary": "distance between two 3d points, calculated when triggered",
+    "docs": {
+        "ports": []
+    }
+}

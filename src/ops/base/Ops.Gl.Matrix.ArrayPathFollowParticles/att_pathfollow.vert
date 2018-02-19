@@ -1,11 +1,9 @@
-// pathfollow body vert
-
 
 float off=MOD_offset;
 if(MOD_randomSpeed)
 {
-    off*=rndPos.x;
-    
+    // off*=rndPos.x;
+    off*=MOD_rand(pos.xy);
 }
 
 float fr=fract(abs(mod(off+rndOffset,float(PATHFOLLOW_POINTS))));

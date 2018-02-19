@@ -1,5 +1,3 @@
-op.name="Toggle";
-
 var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
 var child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
 

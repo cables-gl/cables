@@ -21,5 +21,9 @@
     "updated": 1515148826821,
     "authorName": "pandur",
     "id": "3bb3f98f-27d6-44c4-b4e5-186e10f0809d",
-    "created": 1515148823503
+    "created": 1515148823503,
+    "summary": "value of x to the power of y",
+    "docs": {
+        "ports": []
+    }
 }

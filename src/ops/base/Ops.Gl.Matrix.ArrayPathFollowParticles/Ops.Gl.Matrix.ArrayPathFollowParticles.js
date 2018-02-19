@@ -1,4 +1,3 @@
-op.name="ArrayPathFollowParticles";
 
 var exec=op.inFunction("Exec");
 var inPoints=op.inArray("Points");

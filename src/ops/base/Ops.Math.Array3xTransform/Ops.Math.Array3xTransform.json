@@ -57,5 +57,9 @@
             }
         ],
         "name": "Ops.Math.Array3xTransform"
+    },
+    "summary": "transform (translate,rotate,scale) positions in an array3x ",
+    "docs": {
+        "ports": []
     }
 }

@@ -1,5 +1,3 @@
-op.name="ButterflyCurve";
-
 var inVal=op.inValue("Value");
 
 var outX=op.outValue("X");

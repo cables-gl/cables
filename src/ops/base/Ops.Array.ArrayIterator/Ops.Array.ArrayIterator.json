@@ -26,5 +26,29 @@
         ],
         "name": "Ops.Array.ArrayIterator"
     },
-    "summary": "loop over every element of an array"
+    "summary": "loop over every element of an array",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Start the iteration"
+            },
+            {
+                "name": "array",
+                "text": "The array to iterate"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers all child ops array.length times"
+            },
+            {
+                "name": "index",
+                "text": "index of the array (0-array.length)"
+            },
+            {
+                "name": "value",
+                "text": "Value of the current index in the array"
+            }
+        ]
+    }
 }

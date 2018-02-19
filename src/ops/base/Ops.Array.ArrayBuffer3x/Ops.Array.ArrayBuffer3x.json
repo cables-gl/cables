@@ -38,5 +38,9 @@
             }
         ],
         "name": "Ops.Array.ArrayBuffer3x"
+    },
+    "summary": "circular buffer for xyz values",
+    "docs": {
+        "ports": []
     }
 }

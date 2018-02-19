@@ -17,5 +17,22 @@
             }
         ],
         "name": "Ops.Math.Compare.Greater"
+    },
+    "summary": "result is true if number1 is greater than number2",
+    "docs": {
+        "ports": [
+            {
+                "name": "number1",
+                "text": "The number you want to check"
+            },
+            {
+                "name": "number2",
+                "text": "The value you want to check against"
+            },
+            {
+                "name": "result",
+                "text": "`true` if `Value` is in greater than `Reference Value`, `false` otherwise"
+            }
+        ]
     }
 }

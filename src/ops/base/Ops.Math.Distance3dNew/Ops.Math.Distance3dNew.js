@@ -1,4 +1,3 @@
-op.name="Distance3d";
 
 var calc=op.inFunction("Calc");
 var next=op.outFunction("Next");

@@ -17,5 +17,9 @@
             }
         ],
         "name": "Ops.Math.Compare.Equals"
+    },
+    "summary": "result is true if number1 and number2 are equal",
+    "docs": {
+        "ports": []
     }
 }

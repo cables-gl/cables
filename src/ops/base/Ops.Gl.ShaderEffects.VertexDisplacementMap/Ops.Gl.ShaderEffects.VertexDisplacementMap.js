@@ -40,7 +40,7 @@ colorize.onValueChanged=updateColorize;
 invert.onValueChanged=updateInvert;
 
 var meth=op.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
-    values:['mul xyz','add z','add y','mul y','sub z']}));
+    values:['normal','mul xyz','add z','add y','mul y','sub z']}));
 
 
 removeZero.onValueChanged=updateRemoveZero;
@@ -62,11 +62,13 @@ var updateMethod=function()
         shader.removeDefine(id+'DISPLACE_METH_MULXYZ');
         shader.removeDefine(id+'DISPLACE_METH_ADDZ');
         shader.removeDefine(id+'DISPLACE_METH_ADDY');
+        shader.removeDefine(id+'DISPLACE_METH_NORMAL');
 
         if(meth.get()=='mul xyz') shader.define(id+'DISPLACE_METH_MULXYZ');
         if(meth.get()=='add z') shader.define(id+'DISPLACE_METH_ADDZ');
         if(meth.get()=='add y') shader.define(id+'DISPLACE_METH_ADDY');
         if(meth.get()=='mul y') shader.define(id+'DISPLACE_METH_MULY');
+        if(meth.get()=='normal') shader.define(id+'DISPLACE_METH_NORMAL');
 
         updateRemoveZero();
     }
@@ -74,7 +76,7 @@ var updateMethod=function()
 
 flip.onValueChanged=updateMethod;
 meth.onValueChanged=updateMethod;
-meth.set('mul xyz');
+meth.set('normal');
 
 var shader=null;
 var uniExtrude,uniTexture;
@@ -126,10 +128,10 @@ var srcBodyVert=''
     .endl()+'   pos.y+=(({{mod}}_texVal-0.5) * {{mod}}_extrude);'
     .endl()+'#endif'
 
-    
-    
-    // .endl()+'   norm=vec3(1.0,0.0,0.0);'
-    
+    .endl()+'#ifdef '+id+'DISPLACE_METH_NORMAL'
+    .endl()+'   pos.xyz+=norm*{{mod}}_texVal*{{mod}}_extrude;'
+    .endl()+'#endif'
+
 
     .endl()+''+id+'displHeightMapColor={{mod}}_texVal;'
 

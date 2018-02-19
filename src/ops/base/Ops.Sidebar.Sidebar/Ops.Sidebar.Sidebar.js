@@ -1,8 +1,7 @@
-op.name="Sidebar";
 
 var childs=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
-
-
+var inVisible=op.inValueBool("Visible",true);
+var inOpacity=op.inValueSlider("Opacity",1);
 var element = document.createElement('div');
 element.style["background-color"]="#000";
 element.style["z-index"]="99999";
@@ -13,6 +12,17 @@ var canvas = document.getElementById('cablescanvas');
 if(!canvas)canvas=document.body;
 
 canvas.appendChild(element);
+
+inOpacity.onChange=function()
+{
+    element.style.opacity=inOpacity.get();
+};
+
+inVisible.onChange=function()
+{
+    if(inVisible.get())element.style.display="block";
+        else element.style.display="none";
+};
 
 op.childsChanged=function()
 {
@@ -26,8 +36,6 @@ op.childsChanged=function()
             "padding":5
         });
 };
-
-
 
 op.setupDiv=function(element,params)
 {

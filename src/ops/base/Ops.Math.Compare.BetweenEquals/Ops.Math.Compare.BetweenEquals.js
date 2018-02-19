@@ -1,5 +1,3 @@
-op.name="BetweenEquals";
-
 var number = op.addInPort(new Port(this,"Value"));
 var range1 = op.addInPort(new Port(this,"Range 1"));
 var range2 = op.addInPort(new Port(this,"Range 2"));

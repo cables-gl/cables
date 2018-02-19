@@ -1,1 +1,45 @@
-{"summary":"post processing antialiasing","layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"span"},{"type":"0","name":"reduceMin"},{"type":"0","name":"reduceMul"},{"type":"0","name":"use viewport size"},{"type":"0","name":"width"},{"type":"0","name":"height"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.TextureEffects.FXAA"}}
+{
+    "summary": "post processing antialiasing",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "span"
+            },
+            {
+                "type": "0",
+                "name": "reduceMin"
+            },
+            {
+                "type": "0",
+                "name": "reduceMul"
+            },
+            {
+                "type": "0",
+                "name": "use viewport size"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.FXAA"
+    },
+    "docs": {
+        "ports": []
+    }
+}

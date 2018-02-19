@@ -1,14 +1,7 @@
-op.name="Dither";
-
 var render=op.inFunction("Render");
-
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
-
-
 var trigger=op.outFunction("Trigger");
-
-
 var strength=op.inValue("strength",2);
 var threshold=op.inValueSlider("threshold",0.35);
 
@@ -18,14 +11,13 @@ op.onLoaded=shader.compile;
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 var srcFrag=''
-    .endl()+'precision highp float;'
     .endl()+'IN vec2 texCoord;'
-    .endl()+'uniform sampler2D tex;'
-    .endl()+'uniform float strength;'
-    .endl()+'uniform float amount;'
-    .endl()+'uniform float width;'
-    .endl()+'uniform float height;'
-    .endl()+'uniform float threshold;'
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'UNI float strength;'
+    .endl()+'UNI float amount;'
+    .endl()+'UNI float width;'
+    .endl()+'UNI float height;'
+    .endl()+'UNI float threshold;'
     .endl()+''
 
     .endl()+'const vec4 lumcoeff = vec4(0.299,0.587,0.114, 0.);'

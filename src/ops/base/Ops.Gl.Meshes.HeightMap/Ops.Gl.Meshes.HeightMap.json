@@ -1,1 +1,57 @@
-{}
+{
+    "updated": 1519026735625,
+    "authorName": "pandur",
+    "id": "81264799-d92b-4b71-a3f1-ad1da8331e62",
+    "created": 1519026735626,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "extrude"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "rows"
+            },
+            {
+                "type": "0",
+                "name": "columns"
+            },
+            {
+                "type": "0",
+                "name": "texCoords slice"
+            },
+            {
+                "type": "0",
+                "name": "flat"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.HeightMap"
+    }
+}

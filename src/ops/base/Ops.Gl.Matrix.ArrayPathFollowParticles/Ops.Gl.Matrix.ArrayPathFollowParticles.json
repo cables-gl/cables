@@ -45,9 +45,13 @@
         ],
         "name": "Ops.Gl.Matrix.ArrayPathFollowParticles"
     },
-    "updated": 1515241088286,
+    "updated": 1519026480177,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f4f3a54b-4e3b-46b1-ad8d-731fb88ac920",
-    "created": 1505491782569
+    "created": 1505491782569,
+    "summary": "render lots of particles following a path/spline/array3x",
+    "docs": {
+        "ports": []
+    }
 }

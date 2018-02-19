@@ -1,3 +1,5 @@
+//look at http://sol.gfxile.net/interpolation/
+
 var exec=op.inFunction("Update");
 var inVal=op.inValue("Value");
 

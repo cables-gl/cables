@@ -1,4 +1,3 @@
-op.name='Between';
 
 var result=op.addOutPort(new Port(op,"result"));
 var number=op.addInPort(new Port(op,"value"));
