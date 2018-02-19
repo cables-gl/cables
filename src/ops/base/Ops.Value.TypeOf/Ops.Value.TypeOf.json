@@ -1,0 +1,30 @@
+{
+    "updated": 1519028297167,
+    "authorName": "pandur",
+    "id": "f503913b-9162-4784-90a6-23e6a5b6f16a",
+    "created": 1519028297170,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Value.TypeOf"
+    },
+    "summary": "Outputs the type of the input-port (boolean, number, string).  ",
+    "docs": {
+        "ports": [
+            {
+                "name": "result",
+                "text": "type of input (string,number,boolean)"
+            }
+        ]
+    }
+}

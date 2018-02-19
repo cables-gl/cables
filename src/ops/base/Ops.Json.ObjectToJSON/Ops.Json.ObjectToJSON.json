@@ -1,0 +1,29 @@
+{
+    "updated": 1519028076261,
+    "authorName": "pandur",
+    "id": "c8c84e44-9f18-44f8-89fd-39e58cc77d4e",
+    "created": 1519028073803,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Pretty Print"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.ObjectToJSON"
+    },
+    "summary": "convert an object to a JSON string (stringify)",
+    "docs": {
+        "ports": []
+    }
+}

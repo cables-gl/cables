@@ -1,0 +1,25 @@
+{
+    "updated": 1519023943254,
+    "authorName": "pandur",
+    "id": "12a93cd3-348b-460a-aa02-f66690062322",
+    "created": 1519023942732,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number"
+            },
+            {
+                "type": "0",
+                "name": "Influence"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Average"
+    }
+}

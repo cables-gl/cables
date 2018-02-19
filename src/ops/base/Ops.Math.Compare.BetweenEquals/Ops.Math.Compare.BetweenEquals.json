@@ -1,0 +1,42 @@
+{
+    "updated": 1519023820429,
+    "authorName": "pandur",
+    "id": "e2d6d6c4-84c7-42d7-a1b2-e9c5d4c5c13e",
+    "created": 1519023820432,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Range 1"
+            },
+            {
+                "type": "0",
+                "name": "Range 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.Compare.BetweenEquals"
+    },
+    "summary": "result is true if value is between or equal number1 and number2 ",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The number you want to check"
+            },
+            {
+                "name": "Range 2",
+                "text": "`true` if `Value` is in range, `false` otherwise"
+            }
+        ]
+    }
+}

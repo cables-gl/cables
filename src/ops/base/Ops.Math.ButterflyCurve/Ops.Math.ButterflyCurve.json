@@ -1,0 +1,29 @@
+{
+    "updated": 1519024015317,
+    "authorName": "pandur",
+    "id": "d9023bba-8122-4eed-8d61-32461cad8aba",
+    "created": 1519024012236,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            }
+        ],
+        "name": "Ops.Math.ButterflyCurve"
+    },
+    "summary": "generate coordinates of a butterfly curve",
+    "docs": {
+        "ports": []
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "updated": 1519021878930,
+    "authorName": "pandur",
+    "id": "118df748-16d1-46f4-b8fc-38d7cc5a0aab",
+    "created": 1519021507418,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "0",
+                "name": "Text"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "childs"
+            },
+            {
+                "type": "1",
+                "name": "Pressed Trigger"
+            }
+        ],
+        "name": "Ops.Sidebar.Button"
+    },
+    "summary": "sidebar push button/trigger element",
+    "docs": {
+        "ports": []
+    }
+}

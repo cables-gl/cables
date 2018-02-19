@@ -1,0 +1,29 @@
+{
+    "updated": 1519029957405,
+    "authorName": "pandur",
+    "id": "a150e057-1482-4050-b316-86367f9a01e5",
+    "created": 1519029954674,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "data"
+            },
+            {
+                "type": "0",
+                "name": "key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "result"
+            },
+            {
+                "type": "0",
+                "name": "Length"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetArray"
+    }
+}

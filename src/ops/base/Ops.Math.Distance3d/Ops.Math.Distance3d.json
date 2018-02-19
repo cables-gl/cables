@@ -1,0 +1,45 @@
+{
+    "updated": 1519025104859,
+    "authorName": "pandur",
+    "id": "6c5772d8-c6f4-4cad-a8e7-f669c0186964",
+    "created": 1519025101521,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "x1"
+            },
+            {
+                "type": "0",
+                "name": "y1"
+            },
+            {
+                "type": "0",
+                "name": "z1"
+            },
+            {
+                "type": "0",
+                "name": "x2"
+            },
+            {
+                "type": "0",
+                "name": "y2"
+            },
+            {
+                "type": "0",
+                "name": "z2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "distance"
+            }
+        ],
+        "name": "Ops.Math.Distance3d"
+    },
+    "summary": "distance between two 3d points",
+    "docs": {
+        "ports": []
+    }
+}
