@@ -1,4 +1,9 @@
+/** @memberof CGL */
 
+/**
+ * CGL.Geometry
+ * @class
+ */
 CGL.Geometry=function(name)
 {
     this.name=name;
@@ -514,7 +519,7 @@ CGL.Geometry.json2geom=function(jsonMesh)
 
     if(jsonMesh.texturecoords) geom.setTexCoords( jsonMesh.texturecoords[0] );
     
-    console.log(geom.texCoords);
+    // console.log(geom.texCoords);
     // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 
     geom.verticesIndices.length=jsonMesh.faces.length*3;

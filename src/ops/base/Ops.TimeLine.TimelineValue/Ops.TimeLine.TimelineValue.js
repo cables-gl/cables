@@ -1,15 +1,14 @@
-
 var inTime=op.inValue("Time");
 var animVal=op.inValue("Value");
 var outVal=op.outValue("Result");
+var outArr=op.outArray("Anim Array");
+
 inTime.onChange=update;
 var hasError=false;
 
-var outArr=op.outArray("Anim Array");
-
-// animVal.hidePort();
 animVal.setAnimated(true);
 animVal.anim.onChange=animChange;
+op.onLoaded=animChange;
 
 function update()
 {
@@ -23,7 +22,7 @@ function update()
         {
             op.error('noanim',null);
             hasError=false;
-            
+
             animVal.anim.onChange=animChange;
         }
     }
@@ -32,10 +31,7 @@ function update()
         op.error('noanim','animVal should be animated');
         hasError=true;
     }
-    
 }
-
-op.onLoaded=animChange;
 
 function animChange()
 {
@@ -43,7 +39,7 @@ function animChange()
     if(animVal.anim.keys && animVal.anim.keys.length>0)
     {
         arr.length=animVal.anim.keys.length*2;
-        console.log('anim change!');
+        // console.log('anim change!');
         for(var i=0;i<animVal.anim.keys.length;i++)
         {
             arr[i*2+0]=animVal.anim.keys[i].time;

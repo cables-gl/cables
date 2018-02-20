@@ -1,8 +1,13 @@
+/** @memberof CGL */
 
 var CGL=CGL || {};
 
 CGL.DEFAULT_TEXTURE_SIZE=8;
-
+/**
+ * A Texture
+ * @namespace CGL.Texture
+ * @class
+ */
 CGL.Texture=function(__cgl,options)
 {
     if(!__cgl) throw "no cgl";
@@ -112,10 +117,8 @@ CGL.Texture.prototype.setSize=function(w,h)
     {
         if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no floating point texture extension";
 
-        if(this._cgl.glVersion==1)
-            this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_SHORT, null);
-        else
-            this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+        if(this._cgl.glVersion==1) this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_SHORT, null);
+            else this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
     }
     else
     if(this.textureType==CGL.Texture.TYPE_DEPTH)
@@ -140,7 +143,6 @@ CGL.Texture.prototype.setSize=function(w,h)
             var tcomp=this._cgl.gl.DEPTH_COMPONENT32F;
             this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
         }
-        
     }
     else
     {
@@ -458,5 +460,3 @@ CGL.Texture.WRAP_CLAMP_TO_EDGE=2;
 CGL.Texture.TYPE_DEFAULT=0;
 CGL.Texture.TYPE_DEPTH=1;
 CGL.Texture.TYPE_FLOAT=2;
-
-// ---------------------------------------------------------------------------

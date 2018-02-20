@@ -1,3 +1,4 @@
+/** @memberof CGL */
 var CGL = CGL || {};
 
 // ---------------------------------------------------------------------------
@@ -13,6 +14,10 @@ CGL.SHADERVAR_VERTEX_TEXCOORD = 'attrTexCoord';
 
 // ---------------------------------------------------------------------------
 
+/**
+ * CGL.Shader
+ * @class
+ */
 CGL.Shader = function(_cgl, _name) {
     if (!_cgl) throw "shader constructed without cgl";
     var self = this;
@@ -521,6 +526,11 @@ CGL.Shader = function(_cgl, _name) {
         return program;
     };
 
+    /**
+     * remove a module from shader
+     * @param {shaderModule} module the module to be removed
+     * @function
+     */
     this.removeModule = function(mod) {
         for (var i = 0; i < modules.length; i++) {
             if (modules[i].id == mod.id || !modules[i]) {
@@ -532,6 +542,12 @@ CGL.Shader = function(_cgl, _name) {
         this.setWhyCompile("remove module "+mod.title);
     };
 
+    /**
+     * add a module
+     * @param {shaderModule} module the module to be added
+     * @param {shaderModule} [sibling] sibling module, new module will share the same group
+     * @function
+     */
     this.addModule = function(mod, sibling) {
         mod.id = CABLES.generateUUID();
         mod.numId = moduleNumId;

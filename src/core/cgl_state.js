@@ -1,6 +1,12 @@
+/** @memberof CGL */
+
 var CGL = CGL || {};
 
-CGL.State = function() {
+/**
+ * CGL.Context
+ * @class
+ */
+CGL.Context = function() {
     var self = this;
 
     var vMatrixStack = [];
@@ -239,7 +245,7 @@ CGL.State = function() {
     };
 
     var identView = vec3.create();
-    vec3.set(identView, 0, 0, 02);
+    vec3.set(identView, 0, 0, 2);
     var ident = vec3.create();
     vec3.set(ident, 0, 0, 0);
 
@@ -415,40 +421,40 @@ CGL.State = function() {
 
 // model matrix stack
 
-CGL.State.prototype._stackModelMatrix=[];
-CGL.State.prototype.pushMvMatrix = // deprecated
-CGL.State.prototype.pushModelMatrix = function()
+CGL.Context.prototype._stackModelMatrix=[];
+CGL.Context.prototype.pushMvMatrix = // deprecated
+CGL.Context.prototype.pushModelMatrix = function()
 {
     var copy = mat4.clone(this.mvMatrix);
     this._stackModelMatrix.push(copy);
 };
 
-CGL.State.prototype.popMvMatrix =
-CGL.State.prototype.popModelMatrix = function() {
+CGL.Context.prototype.popMvMatrix =
+CGL.Context.prototype.popModelMatrix = function() {
     if (this._stackModelMatrix.length === 0) throw "Invalid modelview popMatrix!";
     this.mvMatrix = this._stackModelMatrix.pop();
 };
-CGL.State.prototype.modelMatrix = function() {
+CGL.Context.prototype.modelMatrix = function() {
     return this.mvMatrix;
 };
 
 
 // state depthtest
 
-CGL.State.prototype._stackDepthTest=[];
-CGL.State.prototype.pushDepthTest=function(b)
+CGL.Context.prototype._stackDepthTest=[];
+CGL.Context.prototype.pushDepthTest=function(b)
 {
     this._stackDepthTest.push(b);
     if(!b) this.gl.disable(this.gl.DEPTH_TEST);
         else this.gl.enable(this.gl.DEPTH_TEST);
 };
 
-CGL.State.prototype.stateDepthTest=function()
+CGL.Context.prototype.stateDepthTest=function()
 {
     return this._stackDepthTest[this._stackDepthTest.length-1];
 }
 
-CGL.State.prototype.popDepthTest=function()
+CGL.Context.prototype.popDepthTest=function()
 {
     this._stackDepthTest.pop();
 
@@ -458,19 +464,19 @@ CGL.State.prototype.popDepthTest=function()
 
 // state depthwrite
 
-CGL.State.prototype._stackDepthWrite=[];
-CGL.State.prototype.pushDepthWrite=function(b)
+CGL.Context.prototype._stackDepthWrite=[];
+CGL.Context.prototype.pushDepthWrite=function(b)
 {
     this._stackDepthWrite.push(b);
     this.gl.depthMask(b);
 };
 
-CGL.State.prototype.stateDepthWrite=function()
+CGL.Context.prototype.stateDepthWrite=function()
 {
     return this._stackDepthWrite[this._stackDepthWrite.length-1];
 }
 
-CGL.State.prototype.popDepthWrite=function()
+CGL.Context.prototype.popDepthWrite=function()
 {
     this._stackDepthWrite.pop();
     this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length-1]);
@@ -479,20 +485,34 @@ CGL.State.prototype.popDepthWrite=function()
 
 // state depthfunc
 
-CGL.State.prototype._stackDepthFunc=[];
-CGL.State.prototype.pushDepthFunc=function(f)
+CGL.Context.prototype._stackDepthFunc=[];
+
+/**
+ * enable / disable depth testing 
+ * like `gl.depthFunc(boolean);`
+ * @param {boolean} depthtesting
+ * @function
+ */
+CGL.Context.prototype.pushDepthFunc=function(f)
 {
     this._stackDepthFunc.push(f);
     this.gl.depthFunc(f);
 };
 
-CGL.State.prototype.stateDepthFunc=function()
+/**
+ * current state of blend 
+ * @returns {boolean} depth testing enabled/disabled
+ */
+CGL.Context.prototype.stateDepthFunc=function()
 {
     if(this._stackDepthFunc.length>0) return this._stackDepthFunc[this._stackDepthFunc.length-1];
     return false;
 }
 
-CGL.State.prototype.popDepthFunc=function()
+/**
+ * pop depth testing and set the previous state
+ */
+CGL.Context.prototype.popDepthFunc=function()
 {
     this._stackDepthFunc.pop();
     if(this._stackDepthFunc.length>0) this.gl.depthFunc(this._stackDepthFunc[this._stackDepthFunc.length-1]);
@@ -500,23 +520,34 @@ CGL.State.prototype.popDepthFunc=function()
 
 
 
+CGL.Context.prototype._stackBlend=[];
 
-// state blend
-
-CGL.State.prototype._stackBlend=[];
-CGL.State.prototype.pushBlend=function(b)
+/**
+ * enable / disable blend 
+ * like gl.enable(gl.BLEND); / gl.disable(gl.BLEND);
+ * @param {boolean} blending
+ * @function
+ */
+CGL.Context.prototype.pushBlend=function(b)
 {
     this._stackBlend.push(b);
     if(!b) this.gl.disable(this.gl.BLEND);
         else this.gl.enable(this.gl.BLEND);
 };
 
-CGL.State.prototype.stateBlend=function()
+/**
+ * current state of blend 
+ * @returns {boolean} depth testing enabled/disabled
+ */
+CGL.Context.prototype.stateBlend=function()
 {
     return this._stackBlend[this._stackBlend.length-1];
 }
 
-CGL.State.prototype.popBlend=function()
+/**
+ * pop blend state and set the previous state
+ */
+CGL.Context.prototype.popBlend=function()
 {
     this._stackBlend.pop();
 

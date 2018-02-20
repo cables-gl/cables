@@ -468,6 +468,11 @@ CABLES.TL.Anim=function(cfg)
     this._needsSort=false;
 };
 
+CABLES.TL.Anim.prototype.forceChangeCallback=function()
+{
+    if(this.onChange!==null)this.onChange();
+};
+
 CABLES.TL.Anim.prototype.hasEnded=function(time)
 {
     if(this.keys.length===0)return true;
@@ -490,6 +495,7 @@ CABLES.TL.Anim.prototype.clear=function(time)
     this.keys.length=0;
 
     if(time) this.setValue(time,v);
+    if(this.onChange!==null)this.onChange();
 };
 
 CABLES.TL.Anim.prototype.sortKeys=function()
@@ -631,6 +637,7 @@ CABLES.TL.Anim.prototype.addKey=function(k)
     else
     {
         this.keys.push(k);
+        if(this.onChange!==null)this.onChange();
     }
 };
 

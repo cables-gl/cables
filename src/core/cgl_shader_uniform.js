@@ -1,3 +1,9 @@
+/** @memberof CGL */
+
+/**
+ * Uniform
+ * @class
+ */
 CGL.Uniform=function(__shader,__type,__name,_value)
 {
     this._loc=-1;

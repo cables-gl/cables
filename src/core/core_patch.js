@@ -39,7 +39,7 @@ CABLES.Patch = function(cfg) {
     this.vars = {};
     if (cfg && cfg.vars) this.vars = cfg.vars;
 
-    this.cgl = new CGL.State();
+    this.cgl = new CGL.Context();
     this.cgl.patch = this;
     this.cgl.setCanvas(this.config.glCanvasId);
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResizeToWindow(true);
