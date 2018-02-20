@@ -1,5 +1,8 @@
 {
-    "summary": "random points in space",
+    "updated": 1519030581465,
+    "authorName": "pandur",
+    "id": "d56326a2-6351-4261-898a-635ca0636dd0",
+    "created": 1519030581468,
     "layout": {
         "portsIn": [
             {
@@ -8,36 +11,31 @@
             },
             {
                 "type": "0",
-                "name": "num"
+                "name": "value x"
             },
             {
                 "type": "0",
-                "name": "size"
+                "name": "value y"
             },
             {
                 "type": "0",
-                "name": "random seed"
-            },
-            {
-                "type": "0",
-                "name": "scaleX"
-            },
-            {
-                "type": "0",
-                "name": "scaleY"
-            },
-            {
-                "type": "0",
-                "name": "scaleZ"
+                "name": "value z"
             }
         ],
-        "name": "Ops.Gl.Meshes.RandomPoints"
-    },
-    "updated": 1519124074512,
-    "authorName": "pandur",
-    "id": "a8687c3b-7376-4cfa-a420-8e827eeedacc",
-    "created": 1516620100989,
-    "docs": {
-        "ports": []
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result x"
+            },
+            {
+                "type": "0",
+                "name": "result y"
+            },
+            {
+                "type": "0",
+                "name": "result z"
+            }
+        ],
+        "name": "Ops.Value.Value3x"
     }
 }

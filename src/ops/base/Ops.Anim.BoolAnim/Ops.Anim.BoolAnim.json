@@ -50,5 +50,8 @@
     "updated": 1518686046524,
     "authorName": "pandur",
     "id": "06ad9d35-ccf5-4d31-889c-e23fa062588a",
-    "created": 1518522798910
+    "created": 1518522798910,
+    "docs": {
+        "ports": []
+    }
 }

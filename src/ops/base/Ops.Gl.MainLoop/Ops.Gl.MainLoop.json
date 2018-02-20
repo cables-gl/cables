@@ -60,5 +60,13 @@
     "authorName": "pandur",
     "id": "b0472a1d-db16-4ba6-8787-f300fbdc77bb",
     "updated": 1511163254712,
-    "created": 1507291360742
+    "created": 1507291360742,
+    "docs": {
+        "ports": [
+            {
+                "name": "FPS Limit",
+                "text": "Triggers according to your framerate (mostly 60 fps)"
+            }
+        ]
+    }
 }

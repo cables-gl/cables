@@ -1,0 +1,38 @@
+{
+    "updated": 1519129934737,
+    "authorName": "pandur",
+    "id": "c5f260da-c8e3-4890-a37e-937d49b9da7d",
+    "created": 1519128795735,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            },
+            {
+                "type": "3",
+                "name": "Anim Array"
+            }
+        ],
+        "name": "Ops.TimeLine.TimelineValue"
+    },
+    "summary": "get timeline value at [time]  ",
+    "docs": {
+        "ports": [
+            {
+                "name": "Anim Array",
+                "text": "all keys in timeline as array2x [time,value,time,value,time,value]"
+            }
+        ]
+    }
+}

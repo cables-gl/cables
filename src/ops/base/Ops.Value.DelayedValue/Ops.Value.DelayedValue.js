@@ -1,4 +1,3 @@
-op.name="DelayedValue";
 
 var exe=op.inFunction("Update");
 var v=op.inValue("Value",0);

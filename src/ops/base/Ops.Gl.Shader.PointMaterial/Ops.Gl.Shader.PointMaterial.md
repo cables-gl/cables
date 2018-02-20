@@ -1,5 +1,1 @@
-# PointMaterial
-
-*Ops.Gl.Shader.PointMaterial*
-
-Draws meshes as points. 
+Draw all vertices as points, like particles

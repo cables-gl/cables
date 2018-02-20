@@ -143,6 +143,9 @@ render.onTriggered=function()
     {
         if(cgl.getShader()!=shader)
         {
+            var startInit=CABLES.now();
+            console.log("starting bone skin shader init...");
+
             if(shader)removeModule();
             shader=cgl.getShader();
 
@@ -157,15 +160,18 @@ render.onTriggered=function()
             shader.define("SKIN_NUM_BONES",1);
             boneMatricesUniform=new CGL.Uniform(shader,'m4','bone',[]);
             attribWeightsScene=null;
+            console.log("finished bone skin shader init...",(CABLES.now()-startInit));
         }
 
         if(attribWeightsScene!=scene)
         {
-            console.log("diff scene!~!!");
+            var startInit=CABLES.now();
+            console.log("starting bone skin weights init...");
             vertWeights=null;
             setGeom();
             attribWeightsScene=scene;
             setupIndexWeights( scene.meshes[meshIndex] );
+            console.log("finished bone skin  weights init...",(CABLES.now()-startInit));
         }
 
         var bones=scene.meshes[meshIndex].bones;
@@ -190,6 +196,7 @@ render.onTriggered=function()
         // console.log(boneMatrices);
         
         boneMatricesUniform.setValue(boneMatrices);
+        
     }
 
     if(draw.get() && mesh)

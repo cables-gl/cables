@@ -1,7 +1,8 @@
-op.name="TouchScreen";
 
 
 var disableScaleWeb=op.inValueBool("Disable Scaling",true);
+
+var active=op.inValueBool("Active",true);
 
 var outTouched=op.outValue("Touched");
 
@@ -79,7 +80,30 @@ var ontouchmove=function(event)
 
 
 var cgl=op.patch.cgl;
-cgl.canvas.addEventListener('touchmove', ontouchmove);
-cgl.canvas.addEventListener('touchstart', ontouchstart);
-cgl.canvas.addEventListener('touchend', ontouchend);
+var listenerElement=null;
+function addListeners()
+{
+    listenerElement=cgl.canvas;
+    listenerElement.addEventListener('touchmove', ontouchmove);
+    listenerElement.addEventListener('touchstart', ontouchstart);
+    listenerElement.addEventListener('touchend', ontouchend);
+}
 
+function removeLiseteners()
+{
+    if(listenerElement)
+    {
+    listenerElement.removeEventListener('touchmove', ontouchmove);
+    listenerElement.removeEventListener('touchstart', ontouchstart);
+    listenerElement.removeEventListener('touchend', ontouchend);
+    }
+    listenerElement=null;
+}
+
+active.onChange=function()
+{
+    if(listenerElement)removeLiseteners();
+    if(active.get())addListeners();
+};
+
+addListeners();

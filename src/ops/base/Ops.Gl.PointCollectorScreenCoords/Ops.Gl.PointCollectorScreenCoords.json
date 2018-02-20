@@ -1,1 +1,21 @@
-{}
+{
+    "updated": 1519124231615,
+    "authorName": "pandur",
+    "id": "ada03d29-07be-48f1-a428-7d0e8c52a163",
+    "created": 1519124229040,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.PointCollectorScreenCoords"
+    }
+}

@@ -1,5 +1,5 @@
 {
-    "summary": "outputs a absolute value controlled by the mousewheel",
+    "summary": "outputs a absolute value controlled by the mousewheel (scroll, zoom)",
     "layout": {
         "portsIn": [
             {
@@ -66,5 +66,8 @@
     "updated": 1518625527230,
     "authorName": "pandur",
     "id": "40331e99-d2c6-4a0a-b5dd-385045aecd18",
-    "created": 1516633142096
+    "created": 1516633142096,
+    "docs": {
+        "ports": []
+    }
 }

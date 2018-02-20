@@ -18,6 +18,10 @@ inGeom.onChange=analyze;
 
 function analyze()
 {
+    var startInit=CABLES.now();
+    console.log("start submesh analyze...");
+    var sort=inSort.get();
+
     var geom=inGeom.get();
     if(!geom)return;
 
@@ -78,7 +82,7 @@ function analyze()
                     faceGroupPos[group]=faceGroupPos[group]||0;
                     faceGroupPosCount[group]=faceGroupPosCount[group]||0;
 
-                    if(inSort.get()=="Z")
+                    if(sort=="Z")
                     {
                         faceGroupPos[group]+=(
                             verts[faces[i*3+0]*3+2]+
@@ -115,7 +119,7 @@ function analyze()
     var minGroupValue=999999;
 
 
-    if(inSort.get()=="Z")
+    if(sort=="Z")
     {
         for(i=0;i<faceGroups.length;i++)
         {
@@ -130,7 +134,7 @@ function analyze()
     {
         var group=faceGroups[i];// / groupCounter;
 
-        if(inSort.get()=="Z") group=faceGroupPos[group];
+        if(sort=="Z") group=faceGroupPos[group];
         
         maxGroupValue=Math.max(maxGroupValue,group);
         minGroupValue=Math.min(minGroupValue,group);
@@ -140,21 +144,23 @@ function analyze()
         arrSubmesh[faces[i*3+2]]=group;
     }
 
-    console.log(arrSubmesh);
+    // console.log(arrSubmesh);
     geom.setAttribute("attrSubmesh",arrSubmesh,1);
 
-    console.log('groups',groupCounter);
-    console.log('faces',faces.length/3);
+    // console.log('groups',groupCounter);
+    // console.log('faces',faces.length/3);
 
     outValues.set(null);
     outValues.set(arrSubmesh);
 
     outGeom.set(null);
     outGeom.set(geom);
-    console.log(geom.getAttributes());
+    // console.log(geom.getAttributes());
     outMax.set(maxGroupValue);
     outMin.set(minGroupValue);
     
+
+    console.log("finished submesh analyze...",(CABLES.now()-startInit));
 
 
 };

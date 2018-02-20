@@ -128,10 +128,17 @@ wrap.onChange=function()
     tex=null;
     // reload();
 };
-
+var firstTime=true;
 
 function updateTexture()
 {
+
+    if(play.get())
+    {
+        clearTimeout(timeout);
+        timeout=setTimeout( updateTexture, 1000/fps.get() );
+    }
+
     // console.log('videoElement.currentTime',videoElement.currentTime);
     if(!tex)reInitTexture();
 
@@ -141,18 +148,21 @@ function updateTexture()
     outTime.set(videoElement.currentTime);
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);
-    tex._setFilter();
-    cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
-    cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
+    
+    if(firstTime)
+    {
+        cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
+        tex._setFilter();
+        cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
+    }
+    else cgl.gl.texSubImage2D( cgl.gl.TEXTURE_2D, 0, 0, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
+    
+    firstTime=false;
+
     textureOut.set(tex);
 
     CGL.profileVideosPlaying++;
 
-    if(play.get())
-    {
-        clearTimeout(timeout);
-        timeout=setTimeout( updateTexture, 1000/fps.get() );
-    }
     
     if(videoElement.readyState==4) loading.set(false);
         else loading.set(false);

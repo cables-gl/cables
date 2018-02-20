@@ -5,6 +5,7 @@ var patch=this.patch;
 this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 this.finished=this.addOutPort(new Port(this,"finished",OP_PORT_TYPE_FUNCTION));
 var result=this.addOutPort(new Port(this,"status",OP_PORT_TYPE_VALUE));
+var isFinishedPort = op.outValue('all loaded', false);
 var preRenderStatus=this.addOutPort(new Port(this,"preRenderStatus",OP_PORT_TYPE_VALUE));
 var preRenderTimeFrames=this.addInPort(new Port(this,"preRenderTimes",OP_PORT_TYPE_VALUE));
 preRenderStatus.set(0);
@@ -81,6 +82,7 @@ function checkPreRender()
         if(preRenderTimeFrames.anim && prerenderCount>=preRenderTimeFrames.anim.keys.length)
         {
             self.onAnimFrame=function(){};
+            isFinishedPort.set(true);
             finishedAll=true;
         }
         else
@@ -122,6 +124,7 @@ this.exe.onTriggered= function()
             loadingFinished.trigger();
             self.patch.timer.setTime(0);
             self.patch.timer.play();
+            isFinishedPort.set(true);
 
             firstTime=false;
         }

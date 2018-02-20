@@ -22,6 +22,10 @@
             },
             {
                 "type": "0",
+                "name": "all loaded"
+            },
+            {
+                "type": "0",
                 "name": "preRenderStatus"
             },
             {
@@ -37,9 +41,9 @@
                 "name": "loading finished"
             }
         ],
-        "name": "Ops.LoadingStatus"
+        "name": "Ops.Patch.LoadingStatus"
     },
-    "updated": 1516114253673,
+    "updated": 1519123976242,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "30f01b6d-b234-4ebe-a2c3-ebffd96a31e9",

@@ -28,8 +28,16 @@ inVisible.onChange=updateVisibility;
 
 function updateVisibility()
 {
-    if(!inVisible.get()) div.style.visibility='hidden';
-        else div.style.visibility='visible';
+    if(!inVisible.get()) 
+    {
+        div.style.visibility='hidden';
+        div.style.display='none';
+    }
+    else
+    {
+        div.style.visibility='visible';
+        div.style.display='block';
+    }
 }
 
 function updateText()

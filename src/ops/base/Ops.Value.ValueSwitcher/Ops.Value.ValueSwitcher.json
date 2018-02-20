@@ -53,5 +53,9 @@
             }
         ],
         "name": "Ops.ValueSwitcher"
+    },
+    "summary": "switch between different values",
+    "docs": {
+        "ports": []
     }
 }

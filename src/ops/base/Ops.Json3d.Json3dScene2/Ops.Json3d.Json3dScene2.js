@@ -492,7 +492,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 clonedOp.getPort('transformations').set(cloneTransforms);
 
                 cloneTransformStore.push(cloneTransforms);
-                console.log(cloneTransformStore.length+' cloneTransformStore !!!');
+                // console.log(cloneTransformStore.length+' cloneTransformStore !!!');
 
                 op.patch.link(prevOp,'trigger',clonedOp,'render');
 
@@ -549,7 +549,7 @@ function reload()
                 try
                 {
                     data=JSON.parse(_data);
-                    console.log(data);
+                    // console.log(data);
                 }
                 catch(ex)
                 {

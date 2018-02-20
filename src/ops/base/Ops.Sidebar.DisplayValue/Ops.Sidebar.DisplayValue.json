@@ -1,0 +1,33 @@
+{
+    "updated": 1519127984868,
+    "authorName": "pandur",
+    "id": "3cdfb818-64ac-47f6-86fb-fdaf84343956",
+    "created": 1519127681136,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "0",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "childs"
+            }
+        ],
+        "name": "Ops.Sidebar.Display"
+    },
+    "summary": "display a value or string",
+    "docs": {
+        "ports": []
+    }
+}

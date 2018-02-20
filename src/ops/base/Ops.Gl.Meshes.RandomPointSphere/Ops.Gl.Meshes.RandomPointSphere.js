@@ -99,6 +99,7 @@ function reset()
     outGeom.set(null);
     outGeom.set(geom);
 
+    if(mesh) mesh.addVertexNumbers=true;
     if(mesh) mesh.setGeom(geom);
         else mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 

@@ -238,8 +238,8 @@ render.onTriggered=function()
     cgl.setTexture(0,null);
     cgl.setPreviousShader();
 
-    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
-    
+    // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
+
     next.trigger();
 };
 

@@ -76,7 +76,7 @@ function reset()
     mesh.setGeom(geom);
 }
 
-size.set(40);
+size.set(5);
 seed.set(0);
 seed.onChange=reset;
 num.onChange=reset;
