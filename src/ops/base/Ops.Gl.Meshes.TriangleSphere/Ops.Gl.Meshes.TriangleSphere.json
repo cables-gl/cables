@@ -1,1 +1,37 @@
-{"layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"Iterations"},{"type":"0","name":"Flat"}],"portsOut":[{"type":"1","name":"next"},{"type":"2","name":"Geometry"}],"name":"Ops.Gl.Meshes.TriangleSphere"},"summary":"a sphere mesh"}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Iterations"
+            },
+            {
+                "type": "0",
+                "name": "Flat"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.TriangleSphere"
+    },
+    "summary": "a sphere mesh with uniform distributed vertices",
+    "docs": {
+        "ports": []
+    },
+    "updated": 1519245806223,
+    "authorName": "pandur",
+    "id": "ad0e8831-9554-46b3-ac03-c5c166921eda",
+    "created": 1519245806225
+}

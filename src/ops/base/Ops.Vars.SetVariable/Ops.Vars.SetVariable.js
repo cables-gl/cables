@@ -1,10 +1,10 @@
-op.name="SetVariable";
 
 var val=op.inValue("Value");
 op.varName=op.inValueSelect("Variable");
 
 op.varName.onChange=updateName;
 val.onChange=update;
+val.changeAlways=true;
 
 op.patch.addVariableListener(updateVarNamesDropdown);
 

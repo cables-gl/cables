@@ -27,5 +27,21 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ebc13b25-3705-4265-8f06-5f985b6a7bb1",
-    "created": 1504983424434
+    "created": 1504983424434,
+    "docs": {
+        "ports": [
+            {
+                "name": "number1",
+                "text": "`a` in `a % b`"
+            },
+            {
+                "name": "number2",
+                "text": "`b` in `a % b`"
+            },
+            {
+                "name": "pingpong",
+                "text": "This is a handy little helper. If you e.g. use `Modulo` with the time this can be used to prevent *jumps*, the output will then alternate between smaller and bigger values instead of going up, then to zero and back up again."
+            }
+        ]
+    }
 }

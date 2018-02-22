@@ -26,5 +26,9 @@
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "c76d3d21-e6d8-4b6c-af3d-0f0a5ecbdaa8",
-    "created": 1510252784235
+    "created": 1510252784235,
+    "summary": "Pixelate an image",
+    "docs": {
+        "ports": []
+    }
 }

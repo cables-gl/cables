@@ -64,5 +64,9 @@
             "author": "inigo quilez",
             "url": "http://iquilezles.org/www/articles/warp/warp.htm"
         }
-    ]
+    ],
+    "summary": "fractional brownian motion noise ",
+    "docs": {
+        "ports": []
+    }
 }

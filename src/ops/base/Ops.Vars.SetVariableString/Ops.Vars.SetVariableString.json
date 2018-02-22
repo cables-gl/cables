@@ -16,5 +16,9 @@
             }
         ],
         "name": "Ops.Vars.SetVariableString"
+    },
+    "summary": "set variable with a string input",
+    "docs": {
+        "ports": []
     }
 }

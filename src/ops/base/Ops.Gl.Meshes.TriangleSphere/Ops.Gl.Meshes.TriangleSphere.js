@@ -4,8 +4,6 @@
 //!!!! http://paulbourke.net/geometry/circlesphere/csource2.c
 
 
-op.name="TriangleSphere";
-
 var render=op.inFunction('render');
 var next=op.outFunction("next");
 

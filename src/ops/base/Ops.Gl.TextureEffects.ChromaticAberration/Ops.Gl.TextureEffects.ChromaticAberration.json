@@ -34,5 +34,9 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "38ac43a1-1757-48f4-9450-29f07ac0d376",
-    "created": 1508766086675
+    "created": 1508766086675,
+    "summary": "simulating lens effect by shifting rgb channels",
+    "docs": {
+        "ports": []
+    }
 }

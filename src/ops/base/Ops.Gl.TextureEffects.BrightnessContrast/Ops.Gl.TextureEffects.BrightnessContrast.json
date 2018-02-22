@@ -22,10 +22,13 @@
         ],
         "name": "Ops.Gl.TextureEffects.BrightnessContrast"
     },
-    "summary": "Adjust brightness and contrast of an imagecompose",
+    "summary": "adjust image brightness and contrast",
     "updated": 1510740098916,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "54b89199-c594-4dff-bc48-82d6c7a55e8a",
-    "created": 1510740064431
+    "created": 1510740064431,
+    "docs": {
+        "ports": []
+    }
 }

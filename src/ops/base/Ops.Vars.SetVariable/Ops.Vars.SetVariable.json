@@ -11,5 +11,13 @@
             }
         ],
         "name": "Ops.SetVariable"
-    }
+    },
+    "summary": "set a variable value",
+    "docs": {
+        "ports": []
+    },
+    "updated": 1519229139519,
+    "authorName": "pandur",
+    "id": "b0190d08-82f6-45b2-bc0c-b70a3257ea92",
+    "created": 1519228504479
 }

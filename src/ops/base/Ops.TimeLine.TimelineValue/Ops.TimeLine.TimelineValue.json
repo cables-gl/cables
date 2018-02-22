@@ -1,5 +1,5 @@
 {
-    "updated": 1519135696432,
+    "updated": 1519218501013,
     "authorName": "pandur",
     "id": "c5f260da-c8e3-4890-a37e-937d49b9da7d",
     "created": 1519128795735,
@@ -12,6 +12,10 @@
             {
                 "type": "0",
                 "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Unit"
             }
         ],
         "portsOut": [
@@ -29,6 +33,10 @@
     "summary": "get timeline value at [time]  ",
     "docs": {
         "ports": [
+            {
+                "name": "Unit",
+                "text": "interpret Time parameter as Seconds or Frames"
+            },
             {
                 "name": "Anim Array",
                 "text": "all keys in timeline as array2x [time,value,time,value,time,value]"

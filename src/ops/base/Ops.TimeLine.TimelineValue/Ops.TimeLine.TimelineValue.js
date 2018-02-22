@@ -1,5 +1,8 @@
 var inTime=op.inValue("Time");
 var animVal=op.inValue("Value");
+
+var timeUnit=op.inValueSelect("Unit",['Seconds','Frames'],'Seconds');
+
 var outVal=op.outValue("Result");
 var outArr=op.outArray("Anim Array");
 
@@ -10,13 +13,22 @@ animVal.setAnimated(true);
 animVal.anim.onChange=animChange;
 op.onLoaded=animChange;
 
+var useFrames=false;
+
+timeUnit.onChange=function()
+{
+    useFrames=(timeUnit.get()=='Frames');
+};
+
 function update()
 {
     inTime.get();
 
     if(animVal.isAnimated())
     {
-        var v=animVal.anim.getValue(inTime.get());
+        var t=inTime.get();
+        if(useFrames) t=(t/30.0);
+        var v=animVal.anim.getValue(t);
         outVal.set(v);
         if(hasError)
         {

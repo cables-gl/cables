@@ -22,5 +22,8 @@
         ],
         "name": "Ops.Gl.Mesh.Polyhedron"
     },
-    "summary": "generate polyhedron meshes "
+    "summary": "generate polyhedron meshes ",
+    "docs": {
+        "ports": []
+    }
 }

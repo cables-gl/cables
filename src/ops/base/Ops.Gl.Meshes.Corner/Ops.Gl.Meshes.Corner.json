@@ -42,5 +42,9 @@
             }
         ],
         "name": "Ops.Gl.Meshes.Corner"
+    },
+    "summary": "render a rectangular corner",
+    "docs": {
+        "ports": []
     }
 }

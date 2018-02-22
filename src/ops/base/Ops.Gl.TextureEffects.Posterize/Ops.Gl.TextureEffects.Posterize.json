@@ -17,5 +17,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Posterize"
+    },
+    "summary": "reduce number of colors",
+    "docs": {
+        "ports": []
     }
 }

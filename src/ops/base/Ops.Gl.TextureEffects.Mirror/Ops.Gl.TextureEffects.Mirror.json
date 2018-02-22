@@ -34,5 +34,9 @@
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "10d3c769-9a7f-4bd3-a849-7354d3e5f7f0",
-    "created": 1510252944606
+    "created": 1510252944606,
+    "summary": "mirroring image effect",
+    "docs": {
+        "ports": []
+    }
 }

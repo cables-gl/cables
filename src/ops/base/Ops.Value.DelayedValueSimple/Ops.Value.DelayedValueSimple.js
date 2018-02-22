@@ -7,7 +7,10 @@ var outVal=op.outValue("Out Value");
 
 var timeout=-1;
 
-val.onChange=function()
+val.onChange=update;
+de.onChange=update;
+
+function update()
 {
     clearTimeout(timeout);
     var v=val.get();
@@ -16,4 +19,4 @@ val.onChange=function()
         outVal.set(v);        
     },de.get()*1000);
     
-};
+}

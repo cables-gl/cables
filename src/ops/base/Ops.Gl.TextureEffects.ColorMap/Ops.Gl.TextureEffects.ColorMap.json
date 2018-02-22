@@ -4,7 +4,7 @@
     "authorName": "pandur",
     "id": "58e302d7-4b84-4077-aa13-4f3cf0885205",
     "created": 1508232660879,
-    "summary": "colorize a black and white image",
+    "summary": "colorize a black and white image using a gradient texture",
     "layout": {
         "portsIn": [
             {
@@ -27,5 +27,8 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.ColorMap"
+    },
+    "docs": {
+        "ports": []
     }
 }

@@ -27,5 +27,8 @@
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "f477746c-2699-4da5-9786-04867aeae8a6",
-    "created": 1510252477792
+    "created": 1510252477792,
+    "docs": {
+        "ports": []
+    }
 }

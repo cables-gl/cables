@@ -16,7 +16,11 @@
                 "name": "Out Value"
             }
         ],
-        "name": "Ops.DelayedValueSimple"
+        "name": "Ops.Value.DelayedValueSimple"
     },
-    "summary": "delay the value data flow by x seconds"
+    "summary": "delay the value data flow by x seconds",
+    "updated": 1519230733519,
+    "authorName": "pandur",
+    "id": "89ea7e9c-0dfb-4e1e-8e61-4e79112ee533",
+    "created": 1519230727595
 }

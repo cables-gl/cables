@@ -37,5 +37,9 @@
             "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
             "license": "Public Domain"
         }
-    ]
+    ],
+    "summary": "",
+    "docs": {
+        "ports": []
+    }
 }

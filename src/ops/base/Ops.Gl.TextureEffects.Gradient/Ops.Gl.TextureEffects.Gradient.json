@@ -69,5 +69,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Gradient"
+    },
+    "summary": "Draws a simple gradient between three colors",
+    "docs": {
+        "ports": []
     }
 }

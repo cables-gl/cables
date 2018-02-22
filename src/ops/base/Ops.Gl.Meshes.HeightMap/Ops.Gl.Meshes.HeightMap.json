@@ -53,5 +53,9 @@
             }
         ],
         "name": "Ops.Gl.Meshes.HeightMap"
+    },
+    "summary": "generate a rectangular mesh where the height is defined by the luminance of an image",
+    "docs": {
+        "ports": []
     }
 }

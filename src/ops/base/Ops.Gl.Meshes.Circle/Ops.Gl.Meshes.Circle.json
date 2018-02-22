@@ -55,5 +55,13 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "4db917cc-2cef-43f4-83d5-38c4572fe943",
-    "created": 1506436917186
+    "created": 1506436917186,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Executes the op, renders a circle to the canvas."
+            }
+        ]
+    }
 }

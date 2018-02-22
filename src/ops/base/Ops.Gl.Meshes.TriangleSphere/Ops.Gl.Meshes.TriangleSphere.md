@@ -1,5 +1,1 @@
-# Trianglesphere
-
-*Ops.Gl.Meshes.trianglesphere*
-
-![trianglesphere](img/trianglesphere.png)
+ http://paulbourke.net/geometry/circlesphere/

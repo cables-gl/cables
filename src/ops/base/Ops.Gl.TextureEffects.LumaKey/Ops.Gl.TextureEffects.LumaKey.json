@@ -1,5 +1,5 @@
 {
-    "summary": "remove darker parts of the image",
+    "summary": "remove darkest or brightest parts of the image",
     "layout": {
         "portsIn": [
             {
@@ -26,5 +26,8 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.LumaKey"
+    },
+    "docs": {
+        "ports": []
     }
 }

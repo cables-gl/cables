@@ -1,4 +1,4 @@
-op.name="TriggerLimiter";
+
 
 // input
 var inTriggerPort = op.inFunction("In Trigger");

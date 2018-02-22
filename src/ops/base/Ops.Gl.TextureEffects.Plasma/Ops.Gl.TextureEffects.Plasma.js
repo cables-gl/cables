@@ -1,7 +1,3 @@
-op.name="Plasma";
-
-
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
@@ -12,8 +8,14 @@ var mul=op.inValue("Mul",1);
 var time=op.inValue("Time",1);
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
+var greyscale=op.inValueBool("Greyscale",true);
 
+greyscale.onChange=function()
+{
+    if(greyscale.get())shader.define('GREY');
+        else shader.removeDefine('GREY');
 
+};
 
 var srcFrag=''
     .endl()+'precision mediump float;'
@@ -44,8 +46,14 @@ var srcFrag=''
 
     .endl()+'   vec4 base=texture2D(tex,texCoord);'
     
-    .endl()+'   vec4 col=vec4( _blend(base.rgb,newColor) ,1.0);'
-
+    .endl()+'   #ifndef GREY'
+    .endl()+'       vec4 col=vec4( _blend(base.rgb,newColor) ,1.0);'
+    .endl()+'   #endif'
+    .endl()+'   #ifdef GREY'
+    // .endl()+'       vec4 col=vec4( _blend(base.rgb,vec3((newColor.r+newColor.g+newColor.b)/3.0)) ,1.0);'
+        .endl()+'       vec4 col=vec4( _blend(base.rgb,vec3(newColor.g)) ,1.0);'
+    .endl()+'   #endif'
+    
     .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
 
     .endl()+'    gl_FragColor = col;'
@@ -55,6 +63,7 @@ var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.define('GREY');
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 var uniX=new CGL.Uniform(shader,'f','w',x);

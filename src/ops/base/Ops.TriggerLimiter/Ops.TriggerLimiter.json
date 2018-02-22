@@ -1,7 +1,30 @@
 {
-    "updated": 1511171708727,
+    "updated": 1519245713429,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "aacc46bf-a8b0-4e14-bd6d-513b1ec35744",
-    "created": 1511171708729
+    "created": 1511171708729,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "In Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Milliseconds"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Out Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Progress"
+            }
+        ],
+        "name": "Ops.TriggerLimiter"
+    }
 }

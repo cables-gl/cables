@@ -38,13 +38,8 @@
         ],
         "name": "Ops.Math.RandomAnim"
     },
-    "summary": "ddddd",
+    "summary": "animating between random numbers",
     "docs": {
-        "ports": [
-            {
-                "name": "exe",
-                "text": "eeee"
-            }
-        ]
+        "ports": []
     }
 }

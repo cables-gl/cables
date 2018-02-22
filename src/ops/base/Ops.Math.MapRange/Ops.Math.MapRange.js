@@ -18,16 +18,15 @@ easing.onChange=function()
 };
 
 
-
 function exec()
 {
-    if(v.get()>=old_max.get())
+    if(v.get()>=Math.max( old_max.get(),old_min.get() ))
     {
         result.set(new_max.get());
         return;
     }
     else
-    if(v.get()<=old_min.get()) 
+    if(v.get()<=Math.min( old_max.get(),old_min.get() )) 
     {
         result.set(new_min.get());
         return;

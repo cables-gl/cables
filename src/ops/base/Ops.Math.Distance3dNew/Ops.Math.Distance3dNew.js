@@ -1,5 +1,5 @@
 
-var calc=op.inFunction("Calc");
+var calc=op.inFunctionButton("Calc");
 var next=op.outFunction("Next");
 
 var inMin=op.inValue("Min",0);
@@ -36,9 +36,8 @@ calc.onTriggered=function()
 	var zd = z2.get()-z1.get();
 	if( Math.abs(zd) > min )return;
 
-	
 	dist.set(Math.sqrt(xd*xd + yd*yd + zd*zd));
-	
+
 	next.trigger();
 };
 

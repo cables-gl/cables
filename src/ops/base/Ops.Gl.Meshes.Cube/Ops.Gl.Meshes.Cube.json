@@ -42,5 +42,29 @@
     "updated": 1516271011025,
     "authorName": "pandur",
     "id": "ff0535e2-603a-4c07-9ce6-e9e0db857dfe",
-    "created": 1516270987894
+    "created": 1516270987894,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Executes the op, renders a cube to the canvas."
+            },
+            {
+                "name": "width",
+                "text": "Width of the cube"
+            },
+            {
+                "name": "height",
+                "text": "Height of the cube"
+            },
+            {
+                "name": "length",
+                "text": "Length of the cube"
+            },
+            {
+                "name": "center",
+                "text": "If set to true, rotations will be done around the cube-center, if false rotations will be done around a corner."
+            }
+        ]
+    }
 }

@@ -13,5 +13,9 @@
             }
         ],
         "name": "Ops.Variable"
+    },
+    "summary": "read a variable value",
+    "docs": {
+        "ports": []
     }
 }

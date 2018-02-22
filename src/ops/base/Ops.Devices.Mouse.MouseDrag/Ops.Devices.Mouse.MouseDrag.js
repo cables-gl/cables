@@ -204,7 +204,6 @@ function bind()
     canvas.addEventListener('mouseleave', onMouseLeave);
 
     canvas.addEventListener("touchmove", ontouchstart);
-    // canvas.addEventListener("touchstart", onMouseDown);
     canvas.addEventListener("touchend", onMouseUp);
     canvas.addEventListener('touchstart', ontouchstart);
 
@@ -219,6 +218,9 @@ function unbind()
     canvas.removeEventListener('mouseup', onMouseUp);
     canvas.removeEventListener('mouseenter', onMouseEnter);
     canvas.removeEventListener('mouseleave', onMouseLeave);
+    
+    canvas.removeEventListener("touchmove", ontouchstart);
+    canvas.removeEventListener("touchend", onMouseUp);
     canvas.removeEventListener('touchstart', ontouchstart);
 }
 

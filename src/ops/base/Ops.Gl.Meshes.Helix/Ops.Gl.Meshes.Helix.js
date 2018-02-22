@@ -1,4 +1,3 @@
-op.name="Helix";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
@@ -50,8 +49,6 @@ function calcLater()
 
 function calc()
 {
-    
-    
     needsCalc=false;
     pos.length=0;
 
@@ -69,9 +66,7 @@ function calc()
             Math.sin(degInRad*freq.get())*rad,
             Math.cos(degInRad*freq.get())*rad,
             z );
-
     }
-    
 
     if(draw.get())
     {
@@ -82,7 +77,6 @@ function calc()
         mesh=new CGL.Mesh(cgl,geom);
     }
     else mesh=null;
-
 
     outPoints.set(null);
     outPoints.set(pos);

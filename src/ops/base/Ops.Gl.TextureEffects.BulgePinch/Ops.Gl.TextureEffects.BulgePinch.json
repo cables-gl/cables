@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.BulgePinch"
+    },
+    "summary": "bulge and pinch an image (deform,stretch,distort)",
+    "docs": {
+        "ports": []
     }
 }

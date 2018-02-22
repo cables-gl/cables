@@ -1,4 +1,3 @@
-
 Generate and modify polyhedron meshes to create complex topologies.
 
 
@@ -31,3 +30,7 @@ Operations:
  - r Reflect
  - s Split
  - tn Truncate
+
+
+
+uses lib: https://github.com/mikolalysenko/conway-hart

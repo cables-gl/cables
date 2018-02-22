@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Json.ParseObject"
+    },
+    "summary": "parse a string to JSON object ",
+    "docs": {
+        "ports": []
     }
 }
