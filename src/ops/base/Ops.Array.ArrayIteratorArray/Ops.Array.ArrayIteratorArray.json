@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Array.ArrayIteratorArray"
+    },
+    "summary": "iterate over an array of arrays",
+    "docs": {
+        "ports": []
     }
 }

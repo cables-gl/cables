@@ -19,7 +19,7 @@ text.onValueChanged=updateText;
 
 function updateText()
 {
-    elementButton.setAttribute("value",text.get());
+    if(elementButton) elementButton.setAttribute("value",text.get());
 }
 
 function init(params)

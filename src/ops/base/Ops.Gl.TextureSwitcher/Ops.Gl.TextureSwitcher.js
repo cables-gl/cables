@@ -1,41 +1,14 @@
-Op.apply(this, arguments);
-var self=this;
-var cgl=self.patch.cgl;
-
-this.name='TextureSwitcher';
-
 var exec=op.inFunction("exec");
-this.num=this.addInPort(new Port(this,"num",OP_PORT_TYPE_VALUE));
+var num=this.addInPort(new Port(this,"num",OP_PORT_TYPE_VALUE));
 
+var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
-this.textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
-
+var cgl=op.patch.cgl;
 var texturePorts=[];
 var index=0;
 var lastIndex=-1;
 
-exec.onTriggered=updateTexture;
-
-function forceUpdateTexture()
-{
-    updateTexture(true);
-}
-
-
-function updateTexture(force)
-{
-    index=parseInt(self.num.get(),10);
-    if(!force)
-    {
-        if(index==lastIndex)return;
-        if(index!=index)return;
-    }
-    if(index<0)index=0;
-    if(index>texturePorts.length-1)index=0;
-
-    if(texturePorts[index]) self.textureOut.set(texturePorts[index].get());
-    lastIndex=index;
-}
+var tempTexture=CGL.Texture.getTempTexture(cgl);
 
 for(var i=0;i<16;i++)
 {
@@ -44,12 +17,28 @@ for(var i=0;i<16;i++)
     tex.onValueChanged=forceUpdateTexture;
 }
 
+exec.onTriggered=updateTexture;
+num.onChange=updateTexture;
 
 
-
-this.textureOut.onPreviewChanged=function()
+function forceUpdateTexture()
 {
-    if(self.textureOut.showPreview) CGL.Texture.previewTexture=self.textureOut.get();
-};
+    updateTexture(true);
+}
 
-this.num.onValueChanged=updateTexture;
+function updateTexture(force)
+{
+    index=parseInt(num.get(),10);
+    if(!force)
+    {
+        if(index==lastIndex)return;
+        if(index!=index)return;
+    }
+    if(index<0)index=0;
+    if(index>texturePorts.length-1)index=0;
+
+    if(texturePorts[index].get()) textureOut.set(texturePorts[index].get());
+        else textureOut.set(tempTexture);
+
+    lastIndex=index;
+}

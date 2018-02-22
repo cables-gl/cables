@@ -30,5 +30,9 @@
             }
         ],
         "name": "Ops.Array.Array3xSubdivideNew"
+    },
+    "summary": "for subdividing splines, smoothing lines using cubic bezier interpolation",
+    "docs": {
+        "ports": []
     }
 }

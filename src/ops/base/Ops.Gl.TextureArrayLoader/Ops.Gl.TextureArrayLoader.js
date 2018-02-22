@@ -1,7 +1,10 @@
-op.name="TextureArrayLoader";
+var USE_LEFT_PAD_DEFAULT = false;
 
 // var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 var filename=op.inValueString("url");
+var leftPadFilename = op.inValueBool('Left Pad', USE_LEFT_PAD_DEFAULT);
+var numberLengthPort = op.inValue('Num Digits', 3);
+numberLengthPort.setUiAttribs({ hidePort: !USE_LEFT_PAD_DEFAULT, greyout: !USE_LEFT_PAD_DEFAULT });
 
 var indexStart=op.inValueInt("Index Start");
 var indexEnd=op.inValueInt("Index End");
@@ -38,7 +41,14 @@ tfilter.onChange=onFilterChange;
 wrap.onChange=onWrapChange;
 unpackAlpha.onChange=function(){ reload(); };
 
+leftPadFilename.onChange = setNumberLengthPortVisibility;
+
 var timedLoader=0;
+
+function setNumberLengthPortVisibility() {
+    var doLeftPad = leftPadFilename.get();
+    numberLengthPort.setUiAttribs({ hidePort: !doLeftPad, greyout: !doLeftPad });
+}
 
 var setTempTexture=function()
 {
@@ -55,11 +65,26 @@ function reload(nocache)
     },30);
 }
 
+var REPLACE_CHARACTER = 'X';
+
+function pad(value, length) {
+    return (value.toString().length < length) ? pad("0"+value, length):value;
+}
+
 function loadImage(i,nocache)
 {
     var url=filename.get();
     if(!url)return;
-    url=url.replace("XXX",i);
+    var firstXIndex = url.indexOf(REPLACE_CHARACTER);
+    var lastXIndex = url.lastIndexOf(REPLACE_CHARACTER);
+    if(firstXIndex === -1) { return; }
+    var replaceString = url.substring(firstXIndex, lastXIndex+1)
+    var numberString = i;
+    if(leftPadFilename.get()) {
+        numberString = pad(i, numberLengthPort.get())
+    }
+    url=url.replace(replaceString, numberString);
+    console.log('LOAD IMAGE: ', url);
     
     // console.log(url);
     
@@ -86,7 +111,6 @@ function loadImage(i,nocache)
                 width.set(tex.width);
                 height.set(tex.height);
                 ratio.set(tex.width/tex.height);
-
 
                 arr[i-parseInt(indexStart.get())]=tex;
                 if(!tex.isPowerOfTwo()) op.uiAttr(
@@ -131,7 +155,12 @@ function loadImage(i,nocache)
 
 function realReload(nocache)
 {
-    
+    for(var i=0; i<arr.length; i++) {
+        if(arr[i]) {
+            arr[i].delete();
+        }
+    }
+    arr.length = 0;
     for(var i=Math.floor(indexStart.get());i<=Math.floor(indexEnd.get());i++)
     {
         
