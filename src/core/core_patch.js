@@ -1,5 +1,28 @@
 var CABLES = CABLES || {};
 
+/**
+ * patch-config
+ * @typedef {Object} patchConfig
+ * @memberof CABLES
+ * @property {string} [prefixAssetPath=''] path to assets
+ * @property {string} [glCanvasId='glcanvas'] dom element id of canvas element
+ * @property {function} [onError=null] called when an error occurs
+ * @property {function} [onFinishedLoading=null] called when patch finished loading all assets
+ * @property {function} [onFirstFrameRendered=null] called when patch rendered it's first frame
+ * @property {boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @property {boolean} [silent=false] 
+ * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
+ */
+
+
+
+/**
+ * @name Patch
+ * @memberof CABLES
+ * @param {patchConfig} config
+ * @constructor
+ * @class
+ */
 CABLES.Patch = function(cfg) {
     this.ops = [];
     this.settings = {};
@@ -94,11 +117,21 @@ CABLES.Patch.prototype.renderOneFrame = function() {
     this._renderOneFrame=false;
 }
 
+/**
+ * pauses patch execution
+ * @name CABLES.Patch#pause
+ * @function
+ */
 CABLES.Patch.prototype.pause = function() {
     this._paused = true;
     this.freeTimer.pause();
 };
 
+/**
+ * resumes patch execution
+ * @name CABLES.Patch#resume
+ * @function
+ */
 CABLES.Patch.prototype.resume = function() {
     if (this._paused) {
         this._paused = false;
@@ -107,6 +140,11 @@ CABLES.Patch.prototype.resume = function() {
     }
 };
 
+/**
+ * set volume [0-1]
+ * @name CABLES.Patch#setVolume
+ * @function
+ */
 CABLES.Patch.prototype.setVolume = function(v) {
     this.config.masterVolume = v;
     for (var i = 0; i < this._volumeListeners.length; i++)
@@ -738,21 +776,43 @@ CABLES.Patch.prototype.profile = function(enable) {
 
 // ----------------------
 
-
+/**
+ * @name Variable
+ * @param {String} name
+ * @param {String|Number} value
+ * @memberof CABLES.Patch
+ * @constructor
+ * @class
+ */
 CABLES.Patch.Variable = function(name, val) {
     this._name = name;
     this._changeListeners = [];
     this.setValue(val);
 };
 
+/**
+ * @name CABLES.Patch.Variable#getValue
+ * @returns {String|Number|Boolean} 
+ * @function
+ */
 CABLES.Patch.Variable.prototype.getValue = function() {
     return this._v;
 };
 
+/**
+ * @name CABLES.Patch.Variable#getName
+ * @returns {String|Number|Boolean} 
+ * @function
+ */
 CABLES.Patch.Variable.prototype.getName = function() {
     return this._name;
 };
 
+/**
+ * @name CABLES.Patch.Variable#setValue
+ * @returns {String|Number|Boolean} 
+ * @function
+ */
 CABLES.Patch.Variable.prototype.setValue = function(v) {
     this._v = v;
     for (var i = 0; i < this._changeListeners.length; i++) {
@@ -760,10 +820,22 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
     }
 };
 
+/**
+ * function will be called when value of variable is changed
+ * @name CABLES.Patch.Variable#addListener
+ * @param {Function} callback
+ * @function
+ */
 CABLES.Patch.Variable.prototype.addListener = function(cb) {
     this._changeListeners.push(cb);
 };
 
+/**
+ * remove listener
+ * @name CABLES.Patch.Variable#removeListener
+ * @param {Function} callback
+ * @function
+ */
 CABLES.Patch.Variable.prototype.removeListener = function(cb) {
     var ind = this._changeListeners.indexOf(cb);
     this._changeListeners.splice(ind, 1);
@@ -797,17 +869,23 @@ CABLES.Patch.prototype.getVarValue = function(name, val) {
     }
 };
 
+/**
+ * @name CABLES.Patch#getVar
+ * @param {String} name
+ * @return {CABLES.Patch.Variable} variable
+ * @function
+ */
 CABLES.Patch.prototype.getVar = function(name) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name];
 };
 
+/**
+ * @name CABLES.Patch#getVars
+ * @return {Array<CABLES.Patch.Variable>} variables
+ * @function
+ */
 CABLES.Patch.prototype.getVars = function() {
     return this._variables;
 };
 
-
-
-
-
-// var Scene=CABLES.Patch;

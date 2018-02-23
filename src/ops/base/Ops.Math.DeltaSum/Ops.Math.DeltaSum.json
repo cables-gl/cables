@@ -1,0 +1,41 @@
+{
+    "updated": 1519321592858,
+    "authorName": "pandur",
+    "id": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
+    "created": 1519312271232,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Delta Value"
+            },
+            {
+                "type": "0",
+                "name": "Limit"
+            },
+            {
+                "type": "0",
+                "name": "Min"
+            },
+            {
+                "type": "0",
+                "name": "Max"
+            },
+            {
+                "type": "0",
+                "name": "Multiply"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Absolute Value"
+            }
+        ],
+        "name": "Ops.Math.DeltaSum"
+    },
+    "summary": "add delta values to an clamped absolute value",
+    "docs": {
+        "ports": []
+    }
+}

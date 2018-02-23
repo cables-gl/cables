@@ -7,6 +7,14 @@
             },
             {
                 "type": "0",
+                "name": "Left Pad"
+            },
+            {
+                "type": "0",
+                "name": "Num Digits"
+            },
+            {
+                "type": "0",
                 "name": "Index Start"
             },
             {
@@ -54,5 +62,33 @@
         ],
         "name": "Ops.Gl.TextureArrayLoader"
     },
-    "summary": "load multiple images into an array"
+    "summary": "load multiple images into an array",
+    "updated": 1519315457595,
+    "authorName": "tim",
+    "id": "4ee5bc6d-fd73-4498-8378-6846e57cdd7f",
+    "created": 1519307241280,
+    "docs": {
+        "ports": [
+            {
+                "name": "url",
+                "text": "The image URL-blueprint, choose the first file using the file chooser, then replace the number with XXX"
+            },
+            {
+                "name": "Left Pad",
+                "text": "Activate when your images have preceding zeros, e.g. `my_image_001.jpg`, … `my_image_056.jpg`"
+            },
+            {
+                "name": "Num Digits",
+                "text": "How many digits the numbers have, e.g. `my_image_0001.jpg` —> `4`, `my_image_01.jpg` —> `2`"
+            },
+            {
+                "name": "Index Start",
+                "text": "The first image number, e.g. `my_image_0005.jpg` —> `5`"
+            },
+            {
+                "name": "Index End",
+                "text": "The last image number, e.g. `my_image_0143.jpg` —> `143`"
+            }
+        ]
+    }
 }

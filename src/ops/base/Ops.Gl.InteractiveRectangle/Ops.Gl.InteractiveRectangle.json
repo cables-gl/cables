@@ -106,5 +106,9 @@
             }
         ],
         "name": "Ops.Gl.InteractiveRectangle"
+    },
+    "summary": "an area which is interactive ",
+    "docs": {
+        "ports": []
     }
 }

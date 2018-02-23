@@ -1,3 +1,16 @@
+
+/**
+ * @name Port
+ * @memberof CABLES
+ * @class
+ */
+
+/**
+ * change listener for input value ports 
+ * @name CABLES.Port#onChange
+ * @type Function
+ */
+
 var PORT_DIR_IN=0;
 var PORT_DIR_OUT=1;
 
@@ -67,6 +80,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     //     this._warnedDeprecated=true;
     // });
 
+    /**
+     * @name CABLES.Port#hidePort
+     * @function
+     * @description hide port rectangle in op
+     */
     CABLES.Port.prototype.hidePort=function()
     {
         this.setUiAttribs({hidePort:true});
@@ -82,6 +100,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
     };
 
+    /**
+     * @name CABLES.Port#get
+     * @function
+     * @description get value of port
+     */
     CABLES.Port.prototype.get=function()
     {
         if(this._animated && this._lastAnimFrame!=this.parent.patch.getFrameNum())
@@ -99,7 +122,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         return this.value;
     };
 
-
+    /**
+     * @name CABLES.Port#setValue
+     * @function
+     * @description set value of port / will send value to all linked ports (only for output ports)
+     */
     CABLES.Port.prototype.set=CABLES.Port.prototype.setValue=function(v)
     {
 
@@ -267,6 +294,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         return false;
     };
 
+    /**
+     * @name CABLES.Port#trigger
+     * @function
+     * @description trigger the linked port (usually invoked on an output function port)
+     */
     CABLES.Port.prototype.trigger=function()
     {
         if(this.links.length===0)return;

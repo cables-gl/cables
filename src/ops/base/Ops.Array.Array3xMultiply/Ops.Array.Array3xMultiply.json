@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Array.Array3xMultiply"
+    },
+    "summary": "multiply every XYZ member of array3x",
+    "docs": {
+        "ports": []
     }
 }
