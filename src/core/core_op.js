@@ -1,3 +1,4 @@
+/** @memberof CABLES */
 
 var OP_PORT_TYPE_VALUE =0;
 var OP_PORT_TYPE_FUNCTION =1;
@@ -12,6 +13,10 @@ var CABLES=CABLES || {};
 CABLES.Helpers = CABLES.Helpers || {};
 CABLES.Helpers.isArray = function(v) {return Object.prototype.toString.call(v) === '[object Array]';};
 
+/**
+ * CABLES.Op
+ * @class
+ */
 CABLES.Op = function()
 {
     this.data={}; // reserved for op-specific user-data
@@ -122,12 +127,26 @@ CABLES.Op = function()
         return p;
     };
 
+    /**
+     * create input function trigger port
+     * @param {name} name
+     * @function
+     */
     CABLES.Op.prototype.inFunction=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
 
+    /**
+     * create input function trigger port showing a button which can manually be triggered
+     * @param {name} name
+     * @function
+     */
     CABLES.Op.prototype.inFunctionButton=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION,{"display":"button"})); if(v!==undefined)p.set(v); return p; };
 
-
-
+    /**
+     * create input value port for numbers
+     * @param {name} name
+     * @param {value} default value
+     * @function
+     */
     CABLES.Op.prototype.inValue=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
     CABLES.Op.prototype.inValueBool=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
@@ -597,8 +616,13 @@ CABLES.Op = function()
     };
 
 
-
-
+    /**
+     * show op error message
+     * set message to null to remove error message
+     * @param {errorid} id error identifier
+     * @param {txt} text message
+     * @function
+     */
     CABLES.Op.prototype.error=function(id,txt)
     {
         this.errors[id]=txt;
@@ -610,7 +634,6 @@ CABLES.Op = function()
             errorHtml+='- '+this.errors[i]+'<br/>';
         }
         this.uiAttr({'error':errorHtml});
-
     }
 
 
