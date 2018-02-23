@@ -1,3 +1,10 @@
+
+/**
+ * @name Port
+ * @class
+ */
+
+
 var PORT_DIR_IN=0;
 var PORT_DIR_OUT=1;
 

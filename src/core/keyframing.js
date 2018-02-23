@@ -1,3 +1,4 @@
+/** @memberof CABLES */
 
 var CABLES=CABLES || {};
 CABLES.TL=CABLES.TL || {};
@@ -455,7 +456,25 @@ CABLES.TL.Key.prototype.getEasing=function()
 // ------------------------------------------------------------------------------------------------------
 
 
-CABLES.TL.Anim=function(cfg)
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Keyframed interpolated animation. 
+ * @name Anim
+ * @constructor
+ * @class
+ */
+CABLES.Anim=function(cfg)
 {
     this.keys=[];
     this.onChange=null;
@@ -467,20 +486,29 @@ CABLES.TL.Anim=function(cfg)
     this._timesLooped=0;
     this._needsSort=false;
 };
+CABLES.TL.Anim=CABLES.Anim;
 
-CABLES.TL.Anim.prototype.forceChangeCallback=function()
+CABLES.Anim.prototype.forceChangeCallback=function()
 {
     if(this.onChange!==null)this.onChange();
 };
 
-CABLES.TL.Anim.prototype.hasEnded=function(time)
+/**
+ * returns true if animation has ended at @time
+ * checks if last key time is < time
+ * @param {Number} time
+ * @returns {Boolean} 
+ * @name Anim#hasEnded
+ * @function
+ */
+CABLES.Anim.prototype.hasEnded=function(time)
 {
     if(this.keys.length===0)return true;
     if(this.keys[this.keys.length-1].time<=time)return true;
     return false;
 };
 
-CABLES.TL.Anim.prototype.isRising=function(time)
+CABLES.Anim.prototype.isRising=function(time)
 {
     if(this.hasEnded(time))return false;
     var ki=this.getKeyIndex(time);
@@ -488,7 +516,13 @@ CABLES.TL.Anim.prototype.isRising=function(time)
     return false;
 };
 
-CABLES.TL.Anim.prototype.clear=function(time)
+/**
+ * remove all keys from animation
+ * @param {Number} [time=0] set a new key at time
+ * @name Anim#clear
+ * @function
+ */
+CABLES.Anim.prototype.clear=function(time)
 {
     var v=0;
     if(time) v=this.getValue(time);
@@ -498,7 +532,7 @@ CABLES.TL.Anim.prototype.clear=function(time)
     if(this.onChange!==null)this.onChange();
 };
 
-CABLES.TL.Anim.prototype.sortKeys=function()
+CABLES.Anim.prototype.sortKeys=function()
 {
     this.keys.sort(function(a, b)
     {
@@ -507,13 +541,13 @@ CABLES.TL.Anim.prototype.sortKeys=function()
     this._needsSort=false;
 };
 
-CABLES.TL.Anim.prototype.getLength=function()
+CABLES.Anim.prototype.getLength=function()
 {
     if(this.keys.length===0)return 0;
     return this.keys[this.keys.length-1].time;
 };
 
-CABLES.TL.Anim.prototype.getKeyIndex=function(time)
+CABLES.Anim.prototype.getKeyIndex=function(time)
 {
     var index=0;
     for(var i=0;i<this.keys.length;i++)
@@ -524,7 +558,15 @@ CABLES.TL.Anim.prototype.getKeyIndex=function(time)
     return index;
 };
 
-CABLES.TL.Anim.prototype.setValue=function(time,value,cb)
+/**
+ * set value at time
+ * @name Anim#setValue
+ * @param {Number} [time] time
+ * @param {Number} [value] value
+ * @param {Function} [callback] callback
+ * @function
+ */
+CABLES.Anim.prototype.setValue=function(time,value,cb)
 {
     var found=false;
     for(var i in this.keys)
@@ -548,7 +590,7 @@ CABLES.TL.Anim.prototype.setValue=function(time,value,cb)
 };
 
 
-CABLES.TL.Anim.prototype.getSerialized=function()
+CABLES.Anim.prototype.getSerialized=function()
 {
     var obj={};
     obj.keys=[];
@@ -562,13 +604,13 @@ CABLES.TL.Anim.prototype.getSerialized=function()
     return obj;
 };
 
-CABLES.TL.Anim.prototype.getKey=function(time)
+CABLES.Anim.prototype.getKey=function(time)
 {
     var index=this.getKeyIndex(time);
     return this.keys[index];
 };
 
-CABLES.TL.Anim.prototype.getNextKey=function(time)
+CABLES.Anim.prototype.getNextKey=function(time)
 {
     var index=this.getKeyIndex(time)+1;
     if(index>=this.keys.length)index=this.keys.length-1;
@@ -576,19 +618,26 @@ CABLES.TL.Anim.prototype.getNextKey=function(time)
     return this.keys[index];
 };
 
-CABLES.TL.Anim.prototype.isFinished=function(time)
+CABLES.Anim.prototype.isFinished=function(time)
 {
     if(this.keys.length<=0)return true;
     return time>this.keys[this.keys.length-1].time;
 };
 
-CABLES.TL.Anim.prototype.isStarted=function(time)
+CABLES.Anim.prototype.isStarted=function(time)
 {
     if(this.keys.length<=0)return false;
     return time>=this.keys[0].time;
 };
 
-CABLES.TL.Anim.prototype.getValue=function(time)
+/**
+ * get value at time
+ * @name Anim#getValue
+ * @param {Number} [time] time
+ * @returns {Number} interpolated value at time
+ * @function
+ */
+CABLES.Anim.prototype.getValue=function(time)
 {
     if(this.keys.length===0)return 0;
     if(this._needsSort)this.sortKeys();
@@ -628,7 +677,7 @@ CABLES.TL.Anim.prototype.getValue=function(time)
     return key1.ease(perc,key2);
 };
 
-CABLES.TL.Anim.prototype.addKey=function(k)
+CABLES.Anim.prototype.addKey=function(k)
 {
     if(k.time===undefined)
     {
@@ -642,7 +691,7 @@ CABLES.TL.Anim.prototype.addKey=function(k)
 };
 
 
-CABLES.TL.Anim.prototype.easingFromString=function(str)
+CABLES.Anim.prototype.easingFromString=function(str)
 {
     if(str=='linear') return CABLES.TL.EASING_LINEAR;
     if(str=='absolute') return CABLES.TL.EASING_ABSOLUTE;
@@ -683,7 +732,7 @@ CABLES.TL.Anim.prototype.easingFromString=function(str)
 
 };
 
-CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
+CABLES.Anim.prototype.createPort=function(op,title,cb)
 {
     var port=op.addInPort(new Port(op,title,OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
         "linear",
@@ -733,13 +782,13 @@ CABLES.TL.Anim.prototype.createPort=function(op,title,cb)
 
 // ------------------------------
 
-CABLES.TL.Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
+CABLES.Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
 {
 
-    if(!CABLES.TL.Anim.slerpQuaternion.q1)
+    if(!CABLES.Anim.slerpQuaternion.q1)
     {
-        CABLES.TL.Anim.slerpQuaternion.q1=quat.create();
-        CABLES.TL.Anim.slerpQuaternion.q2=quat.create();
+        CABLES.Anim.slerpQuaternion.q1=quat.create();
+        CABLES.Anim.slerpQuaternion.q2=quat.create();
     }
 
     var i1=animx.getKeyIndex(time);
@@ -761,21 +810,21 @@ CABLES.TL.Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
         var key2Time=animx.keys[i2].time;
         var perc=(time-key1Time)/(key2Time-key1Time);
 
-        quat.set(CABLES.TL.Anim.slerpQuaternion.q1,
+        quat.set(CABLES.Anim.slerpQuaternion.q1,
             animx.keys[i1].value,
             animy.keys[i1].value,
             animz.keys[i1].value,
             animw.keys[i1].value
         );
 
-        quat.set(CABLES.TL.Anim.slerpQuaternion.q2,
+        quat.set(CABLES.Anim.slerpQuaternion.q2,
             animx.keys[i2].value,
             animy.keys[i2].value,
             animz.keys[i2].value,
             animw.keys[i2].value
         );
 
-        quat.slerp(q, CABLES.TL.Anim.slerpQuaternion.q1, CABLES.TL.Anim.slerpQuaternion.q2, perc);
+        quat.slerp(q, CABLES.Anim.slerpQuaternion.q1, CABLES.Anim.slerpQuaternion.q2, perc);
     }
     return q;
 };

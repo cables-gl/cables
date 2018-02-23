@@ -1,5 +1,18 @@
 var CABLES = CABLES || {};
 
+/**
+ * patch-config
+ * @typedef {Object} patchConfig
+ * @property {function} onError
+ * @property {function} [onFinishedLoading]
+ */
+
+/**
+ * @name CABLES#Patch
+ * @param {patchConfig} config
+ * @constructor
+ * @class
+ */
 CABLES.Patch = function(cfg) {
     this.ops = [];
     this.settings = {};
@@ -708,21 +721,42 @@ CABLES.Patch.prototype.profile = function(enable) {
 
 // ----------------------
 
-
+/**
+ * @name Variable
+ * @param {String} name
+ * @param {String|Number} value
+ * @constructor
+ * @class
+ */
 CABLES.Patch.Variable = function(name, val) {
     this._name = name;
     this._changeListeners = [];
     this.setValue(val);
 };
 
+/**
+ * @name Variable#getValue
+ * @returns {String|Number|Boolean} 
+ * @function
+ */
 CABLES.Patch.Variable.prototype.getValue = function() {
     return this._v;
 };
 
+/**
+ * @name Variable#getName
+ * @returns {String|Number|Boolean} 
+ * @function
+ */
 CABLES.Patch.Variable.prototype.getName = function() {
     return this._name;
 };
 
+/**
+ * @name Variable#setValue
+ * @returns {String|Number|Boolean} 
+ * @function
+ */
 CABLES.Patch.Variable.prototype.setValue = function(v) {
     this._v = v;
     for (var i = 0; i < this._changeListeners.length; i++) {
@@ -730,10 +764,22 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
     }
 };
 
+/**
+ * function will be called when value of variable is changed
+ * @name Variable#addListener
+ * @param {Function} callback
+ * @function
+ */
 CABLES.Patch.Variable.prototype.addListener = function(cb) {
     this._changeListeners.push(cb);
 };
 
+/**
+ * remove listener
+ * @name Variable#removeListener
+ * @param {Function} callback
+ * @function
+ */
 CABLES.Patch.Variable.prototype.removeListener = function(cb) {
     var ind = this._changeListeners.indexOf(cb);
     this._changeListeners.splice(ind, 1);

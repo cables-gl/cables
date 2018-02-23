@@ -1,8 +1,18 @@
-/** @memberof CGL */
 
 /**
- * Uniform
+ * @name Uniform
  * @class
+ * @constructor
+ * @param {Shader} shader
+ * @param {String} type
+ * @param {String} name
+ * @param {Number|Port} value
+ */
+
+/**
+ * @name Uniform#setValue
+ * @param {Number|Matrix|Texture} value
+ * @function
  */
 CGL.Uniform=function(__shader,__type,__name,_value)
 {
@@ -15,8 +25,6 @@ CGL.Uniform=function(__shader,__type,__name,_value)
     this._port=null;
     this._shader.addUniform(this);
     this.needsUpdate=true;
-
-
 
     if(__type=='3f[]')
     {
@@ -122,9 +130,6 @@ CGL.Uniform.prototype.setValueF=function(v)
     }
 };
 
-
-
-
 CGL.Uniform.prototype.updateValueI=function()
 {
     if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
@@ -159,8 +164,6 @@ CGL.Uniform.prototype.setValueBool=function(v)
         this._value=v;
     }
 };
-
-
 
 CGL.Uniform.prototype.setValueArray3F=function(v)
 {

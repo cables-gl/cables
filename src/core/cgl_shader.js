@@ -15,8 +15,8 @@ CGL.SHADERVAR_VERTEX_TEXCOORD = 'attrTexCoord';
 // ---------------------------------------------------------------------------
 
 /**
- * CGL.Shader
  * @class
+ * @name Shader
  */
 CGL.Shader = function(_cgl, _name) {
     if (!_cgl) throw "shader constructed without cgl";
@@ -146,6 +146,11 @@ CGL.Shader = function(_cgl, _name) {
         this.setWhyCompile("remove uniform "+name);
     };
 
+    /**
+     * add a uniform to the shader
+     * @param {uniform} uniform
+     * @function
+     */
     this.addUniform = function(uni) {
         uniforms.push(uni);
         this.setWhyCompile("add uniform "+name);

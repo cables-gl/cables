@@ -3,7 +3,7 @@
 var CGL = CGL || {};
 
 /**
- * CGL.Context
+ * @name Context
  * @class
  */
 CGL.Context = function() {
@@ -490,6 +490,7 @@ CGL.Context.prototype._stackDepthFunc=[];
 /**
  * enable / disable depth testing 
  * like `gl.depthFunc(boolean);`
+ * @name Context#pushDepthFunc
  * @param {boolean} depthtesting
  * @function
  */
@@ -501,7 +502,9 @@ CGL.Context.prototype.pushDepthFunc=function(f)
 
 /**
  * current state of blend 
+ * @name Context#stateDepthFunc
  * @returns {boolean} depth testing enabled/disabled
+ * @function
  */
 CGL.Context.prototype.stateDepthFunc=function()
 {
@@ -511,6 +514,8 @@ CGL.Context.prototype.stateDepthFunc=function()
 
 /**
  * pop depth testing and set the previous state
+ * @name Context#popDepthFunc
+ * @function
  */
 CGL.Context.prototype.popDepthFunc=function()
 {
@@ -525,6 +530,7 @@ CGL.Context.prototype._stackBlend=[];
 /**
  * enable / disable blend 
  * like gl.enable(gl.BLEND); / gl.disable(gl.BLEND);
+ * @name Context#pushBlend
  * @param {boolean} blending
  * @function
  */
@@ -538,6 +544,7 @@ CGL.Context.prototype.pushBlend=function(b)
 /**
  * current state of blend 
  * @returns {boolean} depth testing enabled/disabled
+ * @function
  */
 CGL.Context.prototype.stateBlend=function()
 {
@@ -546,6 +553,8 @@ CGL.Context.prototype.stateBlend=function()
 
 /**
  * pop blend state and set the previous state
+ * @name Context#popBlend
+ * @function
  */
 CGL.Context.prototype.popBlend=function()
 {
