@@ -1,4 +1,3 @@
-/** @memberof CGL */
 var CGL = CGL || {};
 
 // ---------------------------------------------------------------------------
@@ -17,6 +16,7 @@ CGL.SHADERVAR_VERTEX_TEXCOORD = 'attrTexCoord';
 /**
  * @class
  * @name Shader
+ * @memberof CGL
  */
 CGL.Shader = function(_cgl, _name) {
     if (!_cgl) throw "shader constructed without cgl";

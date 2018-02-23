@@ -1,3 +1,5 @@
+
+
 window.performance = (window.performance ||
     {
         offset: Date.now(),
@@ -11,6 +13,13 @@ window.performance = (window.performance ||
 
 CABLES.internalNow=function() { return window.performance.now(); };
 
+/**
+ * current time in milliseconds
+ * @name CABLES#now
+ * @memberof CABLES
+ * @function
+ * @static
+ */
 CABLES.now=function() { return CABLES.internalNow(); };
 
 

@@ -3,12 +3,14 @@ var CABLES = CABLES || {};
 /**
  * patch-config
  * @typedef {Object} patchConfig
+ * @memberof CABLES
  * @property {function} onError
  * @property {function} [onFinishedLoading]
  */
 
 /**
- * @name CABLES#Patch
+ * @name Patch
+ * @memberof CABLES
  * @param {patchConfig} config
  * @constructor
  * @class
@@ -101,11 +103,21 @@ CABLES.Patch.prototype.renderOneFrame = function() {
     this._renderOneFrame=false;
 }
 
+/**
+ * pauses patch execution
+ * @name CABLES.Patch#pause
+ * @function
+ */
 CABLES.Patch.prototype.pause = function() {
     this._paused = true;
     this.freeTimer.pause();
 };
 
+/**
+ * resumes patch execution
+ * @name CABLES.Patch#resume
+ * @function
+ */
 CABLES.Patch.prototype.resume = function() {
     if (this._paused) {
         this._paused = false;
@@ -114,6 +126,11 @@ CABLES.Patch.prototype.resume = function() {
     }
 };
 
+/**
+ * set volume [0-1]
+ * @name CABLES.Patch#setVolume
+ * @function
+ */
 CABLES.Patch.prototype.setVolume = function(v) {
     this.config.masterVolume = v;
     for (var i = 0; i < this._volumeListeners.length; i++)
@@ -725,6 +742,7 @@ CABLES.Patch.prototype.profile = function(enable) {
  * @name Variable
  * @param {String} name
  * @param {String|Number} value
+ * @memberof CABLES.Patch
  * @constructor
  * @class
  */
@@ -735,7 +753,7 @@ CABLES.Patch.Variable = function(name, val) {
 };
 
 /**
- * @name Variable#getValue
+ * @name CABLES.Patch.Variable#getValue
  * @returns {String|Number|Boolean} 
  * @function
  */
@@ -744,7 +762,7 @@ CABLES.Patch.Variable.prototype.getValue = function() {
 };
 
 /**
- * @name Variable#getName
+ * @name CABLES.Patch.Variable#getName
  * @returns {String|Number|Boolean} 
  * @function
  */
@@ -753,7 +771,7 @@ CABLES.Patch.Variable.prototype.getName = function() {
 };
 
 /**
- * @name Variable#setValue
+ * @name CABLES.Patch.Variable#setValue
  * @returns {String|Number|Boolean} 
  * @function
  */
@@ -766,7 +784,7 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
 
 /**
  * function will be called when value of variable is changed
- * @name Variable#addListener
+ * @name CABLES.Patch.Variable#addListener
  * @param {Function} callback
  * @function
  */
@@ -776,7 +794,7 @@ CABLES.Patch.Variable.prototype.addListener = function(cb) {
 
 /**
  * remove listener
- * @name Variable#removeListener
+ * @name CABLES.Patch.Variable#removeListener
  * @param {Function} callback
  * @function
  */
@@ -813,17 +831,23 @@ CABLES.Patch.prototype.getVarValue = function(name, val) {
     }
 };
 
+/**
+ * @name CABLES.Patch#getVar
+ * @param {String} name
+ * @return {CABLES.Patch.Variable} variable
+ * @function
+ */
 CABLES.Patch.prototype.getVar = function(name) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name];
 };
 
+/**
+ * @name CABLES.Patch#getVars
+ * @return {Array<CABLES.Patch.Variable>} variables
+ * @function
+ */
 CABLES.Patch.prototype.getVars = function() {
     return this._variables;
 };
 
-
-
-
-
-// var Scene=CABLES.Patch;

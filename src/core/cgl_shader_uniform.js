@@ -3,14 +3,15 @@
  * @name Uniform
  * @class
  * @constructor
- * @param {Shader} shader
- * @param {String} type
+ * @memberof CGL
+ * @param {CGL.Shader} shader
+ * @param {String} [type=f]
  * @param {String} name
- * @param {Number|Port} value
+ * @param {Number|Port} value  can be a Number,Matrix or Port
  */
 
 /**
- * @name Uniform#setValue
+ * @name CGL.Uniform#setValue
  * @param {Number|Matrix|Texture} value
  * @function
  */

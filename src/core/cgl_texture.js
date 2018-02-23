@@ -1,4 +1,4 @@
-/** @memberof CGL */
+
 
 var CGL=CGL || {};
 
@@ -6,6 +6,10 @@ CGL.DEFAULT_TEXTURE_SIZE=8;
 /**
  * A Texture
  * @namespace CGL.Texture
+ * @memberof CGL
+ * @constructor
+ * @param {CGL.Context} cgl
+ * @param {Object} options
  * @class
  */
 CGL.Texture=function(__cgl,options)

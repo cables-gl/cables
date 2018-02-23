@@ -1,7 +1,18 @@
 /**
  * @name Op
+ * @memberof CABLES
  * @class
  */
+
+/**
+ * current CGL Context 
+ * @name CABLES.Op#cgl
+ * @type CGL.Context
+ * @readonly
+ */
+
+
+
 
 var OP_PORT_TYPE_VALUE =0;
 var OP_PORT_TYPE_FUNCTION =1;
@@ -129,7 +140,7 @@ CABLES.Op = function()
 
     /**
      * create a function/trigger port
-     * @name Op#inFunction
+     * @name CABLES.Op#inFunction
      * @param {String} name
      * @function
      */
@@ -137,7 +148,7 @@ CABLES.Op = function()
 
     /**
      * create a function port with an UI trigger button
-     * @name Op#inFunctionButton
+     * @name CABLES.Op#inFunctionButton
      * @param {String} name
      * @function
      */
@@ -145,7 +156,7 @@ CABLES.Op = function()
 
     /**
      * create a number value input port
-     * @name Op#inValue
+     * @name CABLES.Op#inValue
      * @param {String} name
      * @param {Boolean} value
      * @function
@@ -154,7 +165,7 @@ CABLES.Op = function()
 
     /**
      * create a boolean input port, displayed as a checkbox
-     * @name Op#inValueBool
+     * @name CABLES.Op#inValueBool
      * @param {String} name
      * @param {Boolean} value
      * @function
@@ -163,7 +174,7 @@ CABLES.Op = function()
 
     /**
      * create a String value input port
-     * @name Op#inValueString
+     * @name CABLES.Op#inValueString
      * @param {String} name
      * @param {String} value default value
      * @function
@@ -172,7 +183,7 @@ CABLES.Op = function()
 
     /**
      * create a String value input port displayed as TextArea
-     * @name Op#inValueText
+     * @name CABLES.Op#inValueText
      * @param {String} name
      * @param {String} value default value
      * @function
@@ -181,7 +192,7 @@ CABLES.Op = function()
     
     /**
      * create a String value input port displayed as editor
-     * @name Op#inValueEditor
+     * @name CABLES.Op#inValueEditor
      * @param {String} name
      * @param {String} value default value
      * @function
@@ -190,7 +201,7 @@ CABLES.Op = function()
     
     /**
      * create a string select box
-     * @name Op#inValueSelect
+     * @name CABLES.Op#inValueSelect
      * @param {String} name
      * @param {Array} values
      * @param {String} value default value
@@ -200,7 +211,7 @@ CABLES.Op = function()
 
     /**
      * create a integer input port
-     * @name Op#inValueInt
+     * @name CABLES.Op#inValueInt
      * @param {String} name
      * @param {Number} value default value
      * @function
@@ -209,7 +220,7 @@ CABLES.Op = function()
 
     /**
      * create a file input port
-     * @name Op#inFile
+     * @name CABLES.Op#inFile
      * @param {String} name
      * @function
      */

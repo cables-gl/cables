@@ -2,6 +2,14 @@
 
 var CABLES=CABLES || {};
 
+/**
+ * generate a UUID
+ * @name uuid
+ * @memberof CABLES
+ * @function
+ * @return {Striug} generated UUID
+ * @static
+ */
 CABLES.generateUUID=CABLES.uuid=function()
 {
     var d = new Date().getTime();
@@ -18,6 +26,15 @@ CABLES.generateUUID=CABLES.uuid=function()
 
 // ----------------------------------------------------------------
 
+/**
+ * smoothStep a value
+ * @name smoothStep
+ * @memberof CABLES
+ * @function
+ * @param value {Number} value to be smoothed [0-1]
+ * @return {Number} smoothed value
+ * @static
+ */
 CABLES.smoothStep=function(perc)
 {
     var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
@@ -25,6 +42,15 @@ CABLES.smoothStep=function(perc)
     return perc;
 };
 
+/**
+ * smootherstep a value
+ * @name smootherStep
+ * @memberof CABLES
+ * @function
+ * @param value {Number} value to be smoothed [0-1]
+ * @return {Number} smoothed value
+ * @static
+ */
 CABLES.smootherStep=function(perc)
 {
     var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
@@ -34,6 +60,19 @@ CABLES.smootherStep=function(perc)
 
 // ----------------------------------------------------------------
 
+/**
+ * map a value in a range to a value in another range
+ * @name map
+ * @memberof CABLES
+ * @function
+ * @param value {Number} value to be mapped
+ * @param oldMin {Number} old range minimum value
+ * @param oldMax {Number} old range maximum value
+ * @param newMin {Number} new range minimum value
+ * @param newMax {Number} new range maximum value
+ * @return {Number} mapped value
+ * @static
+ */
 CABLES.map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
 {
     if(x>=_oldMax) return _newMax;
@@ -77,7 +116,24 @@ CABLES.map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
 
 // ----------------------------------------------------------------
 
+/**
+ * set random seed for seededRandom()
+ * @name CABLES#randomSeed
+ * @type Number
+ * @static
+ */
 Math.randomSeed=1;
+
+/**
+ * generate a seeded random number
+ * @name seededRandom
+ * @memberof CABLES
+ * @function
+ * @param max {Number} minimum possible random number
+ * @param min {Number} maximum possible random number
+ * @return {Number} random value
+ * @static
+ */
 Math.seededRandom = function(max, min)
 {
     if(Math.randomSeed===0)Math.randomSeed=Math.random()*999;
@@ -100,10 +156,11 @@ function arrayWriteToEnd(arr,v)
 
 // ----------------------------------------------------------------
 
-
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+String.prototype.endl = function(){return this+'\n';};
 
 String.prototype.startsWith = function(prefix) {
     return this.indexOf(prefix) === 0;
@@ -210,9 +267,6 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
 
 // ----------------------------------------------------------------
 
-
-String.prototype.endl = function(){return this+'\n';};
-
 // ----------------------------------------------------------------
 
 var arrayContains = function(arr,obj)
@@ -231,7 +285,10 @@ var arrayContains = function(arr,obj)
 // ----------------------------------------------------------------
 
 CGL=CGL || {};
+
+/** @constant {number} */
 CGL.DEG2RAD=Math.PI/180.0;
+/** @constant {number} */
 CGL.RAD2DEG=180.0/Math.PI;
 
 
