@@ -118,7 +118,7 @@ CABLES.map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
 
 /**
  * set random seed for seededRandom()
- * @name CABLES#randomSeed
+ * @name Math#randomSeed
  * @type Number
  * @static
  */
@@ -127,7 +127,7 @@ Math.randomSeed=1;
 /**
  * generate a seeded random number
  * @name seededRandom
- * @memberof CABLES
+ * @memberof Math
  * @function
  * @param max {Number} minimum possible random number
  * @param min {Number} maximum possible random number
@@ -160,12 +160,35 @@ function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+/**
+ * append a linebreak to a string
+ * @name endl
+ * @memberof String
+ * @function
+ * @return {Number} string with newline break appended ('\n')
+ */
 String.prototype.endl = function(){return this+'\n';};
 
+/**
+ * return true if string starts with prefix
+ * @name startsWith
+ * @memberof String
+ * @function
+ * @param {String} prefix
+ * @return {Boolean}
+ */
 String.prototype.startsWith = function(prefix) {
     return this.indexOf(prefix) === 0;
 };
 
+/**
+ * return true if string ends with suffix
+ * @name endsWith
+ * @memberof String
+ * @function
+ * @param {String} suffix
+ * @return {Boolean}
+ */
 String.prototype.endsWith = function(suffix) {
     return this.match(suffix+"$") == suffix;
 };
@@ -286,18 +309,33 @@ var arrayContains = function(arr,obj)
 
 CGL=CGL || {};
 
-/** @constant {number} */
+/** 
+ * @constant {number} 
+ * @description multiply to get radians from degree, e.g. `360 * CGL.DEG2RAD`
+ */
 CGL.DEG2RAD=Math.PI/180.0;
-/** @constant {number} */
+/** 
+ * @constant {number} 
+ * @description to get degrees from radians, e.g. `3.14 * CGL.RAD2DEG` 
+ */
 CGL.RAD2DEG=180.0/Math.PI;
 
 
 CGL.onLoadingAssetsFinished=null; // deprecated / remove later
 
+
+
+/**
+ * get normalized mouse wheel delta (including browser specific adjustment)
+ * @name getWheelDelta
+ * @static
+ * @memberof CGL
+ * @function
+ * @param {MouseEvent} event
+ * @return {Number} normalized delta
+ */
 CGL.isWindows=window.navigator.userAgent.indexOf("Windows") != -1;
-
-
-CGL.getWheelSpeed=function(event)
+CGL.getWheelSpeed=CGL.getWheelDelta=function(event)
 {
     var normalized;
     if (event.wheelDelta)

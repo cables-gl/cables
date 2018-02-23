@@ -4,9 +4,17 @@ var CABLES = CABLES || {};
  * patch-config
  * @typedef {Object} patchConfig
  * @memberof CABLES
- * @property {function} onError
- * @property {function} [onFinishedLoading]
+ * @property {string} [prefixAssetPath=''] path to assets
+ * @property {string} [glCanvasId='glcanvas'] dom element id of canvas element
+ * @property {function} [onError=null] called when an error occurs
+ * @property {function} [onFinishedLoading=null] called when patch finished loading all assets
+ * @property {function} [onFirstFrameRendered=null] called when patch rendered it's first frame
+ * @property {boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @property {boolean} [silent=false] 
+ * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  */
+
+
 
 /**
  * @name Patch
