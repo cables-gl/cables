@@ -138,45 +138,28 @@ CABLES.Op = function()
         return p;
     };
 
-<<<<<<< HEAD
-    /**
-     * create input function trigger port
-     * @param {name} name
-=======
 
     /**
      * create a function/trigger port
      * @name CABLES.Op#inFunction
      * @param {String} name
->>>>>>> d2143ef82e06703ca9e334af241e35d5f12f23c7
      * @function
      */
     CABLES.Op.prototype.inFunction=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
 
     /**
-<<<<<<< HEAD
-     * create input function trigger port showing a button which can manually be triggered
-     * @param {name} name
-=======
      * create a function port with an UI trigger button
      * @name CABLES.Op#inFunctionButton
      * @param {String} name
->>>>>>> d2143ef82e06703ca9e334af241e35d5f12f23c7
      * @function
      */
     CABLES.Op.prototype.inFunctionButton=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION,{"display":"button"})); if(v!==undefined)p.set(v); return p; };
 
     /**
-<<<<<<< HEAD
-     * create input value port for numbers
-     * @param {name} name
-     * @param {value} default value
-=======
      * create a number value input port
      * @name CABLES.Op#inValue
      * @param {String} name
      * @param {Boolean} value
->>>>>>> d2143ef82e06703ca9e334af241e35d5f12f23c7
      * @function
      */
     CABLES.Op.prototype.inValue=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -311,7 +294,6 @@ CABLES.Op = function()
             }
         }
         return childs;
-
     };
 
     CABLES.Op.prototype.markChilds=function()

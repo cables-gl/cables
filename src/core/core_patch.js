@@ -14,8 +14,6 @@ var CABLES = CABLES || {};
  * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  */
 
-
-
 /**
  * @name Patch
  * @memberof CABLES
@@ -118,6 +116,17 @@ CABLES.Patch.prototype.renderOneFrame = function() {
 }
 
 /**
+ * current number of frames per second
+ * @name CABLES.Patch#getFPS
+ * @return {Number} fps
+ * @function
+ */
+CABLES.Patch.prototype.getFPS = function() {
+    return this._fps;
+};
+
+
+/**
  * pauses patch execution
  * @name CABLES.Patch#pause
  * @function
@@ -151,6 +160,14 @@ CABLES.Patch.prototype.setVolume = function(v) {
         this._volumeListeners[i].onMasterVolumeChanged(v);
 };
 
+/**
+ * get url/filepath for a filename 
+ * this uses prefixAssetpath in exported patches
+ * @name CABLES.Patch#getFilePath
+ * @param {String} filename
+ * @return {String} url
+ * @function
+ */
 CABLES.Patch.prototype.getFilePath = function(filename) {
     if (!filename) return filename;
     if (filename.indexOf('https:') === 0 || filename.indexOf('http:') === 0) return filename;
@@ -300,7 +317,6 @@ CABLES.Patch.prototype.addOnAnimFrameCallback = function(cb) {
 };
 
 CABLES.Patch.prototype.removeOnAnimCallback = function(cb) {
-
     for (var i = 0; i < this.animFrameCallbacks.length; i++) {
         if (this.animFrameCallbacks[i] == cb) {
             this.animFrameCallbacks.splice(i, 1);
@@ -420,15 +436,11 @@ CABLES.Patch.prototype.exec = function(e) {
     }
 
     if(this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > frameInterval || wasdelayed) {
-
-        
         var startFrameTime=CABLES.now();
         this.renderFrame();
         this._fpsMsCount+=CABLES.now()-startFrameTime;
 
         if (frameInterval) frameNext = now - (frameDelta % frameInterval);
-
-        
     }
 
     if (wasdelayed) {
@@ -442,9 +454,6 @@ CABLES.Patch.prototype.exec = function(e) {
         this._renderOneFrame=false;
     }
 
-    
-    
-    
     if(CABLES.now()-this._fpsStart>=1000)
     {
         if(this._fps!=this._fpsFrameCount)
@@ -615,7 +624,6 @@ CABLES.Patch.prototype.getSubPatchOps = function(patchId) {
             ops.push(this.ops[i]);
         }
     }
-
     return ops;
 };
 
@@ -625,7 +633,6 @@ CABLES.Patch.prototype.getSubPatchOp = function(patchId, objName) {
             return this.ops[i];
         }
     }
-
     return false;
 };
 
@@ -864,9 +871,8 @@ CABLES.Patch.prototype.setVarValue = function(name, val) {
 };
 
 CABLES.Patch.prototype.getVarValue = function(name, val) {
-    if (this._variables.hasOwnProperty(name)) {
+    if (this._variables.hasOwnProperty(name))
         return this._variables[name].getValue();
-    }
 };
 
 /**

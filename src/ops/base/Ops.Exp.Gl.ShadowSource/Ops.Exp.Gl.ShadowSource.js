@@ -17,16 +17,12 @@ var zfar=op.inValueInt("Z Far",300);
 var lookat=op.inArray("Look at");
 
 var showMapArea=op.inValueBool("Show Map Area",false);
-
-
 var next=op.outFunction("Next");
-
 
 var cgl=op.patch.cgl;
 var lightMVP=mat4.create();
 var fb=null;
 mapSize.onChange=setSize;
-
 
 function setSize()
 {
