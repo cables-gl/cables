@@ -1,0 +1,29 @@
+{
+    "updated": 1519296343689,
+    "authorName": "pandur",
+    "id": "8f6e4a08-33e6-408f-ac4a-198bd03b417b",
+    "created": 1519295219006,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Easing"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.Ease"
+    },
+    "summary": "map a value to an easing curve",
+    "docs": {
+        "ports": []
+    }
+}

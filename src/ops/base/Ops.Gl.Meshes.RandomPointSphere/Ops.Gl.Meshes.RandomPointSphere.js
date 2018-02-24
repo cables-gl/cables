@@ -1,4 +1,3 @@
-op.name="RandomPointSphere";
 
 var exe=op.inFunction("Render");
 var num=op.inValue("Num",1000);
@@ -99,11 +98,12 @@ function reset()
     outGeom.set(null);
     outGeom.set(geom);
 
-    if(mesh) mesh.addVertexNumbers=true;
-    if(mesh) mesh.setGeom(geom);
-        else mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+    // if(mesh) mesh.addVertexNumbers=true;
+    // if(mesh) mesh.setGeom(geom);
+    if(mesh)mesh.dispose();
+    mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
     mesh.addVertexNumbers=true;
-    mesh.setGeom(geom);
+    // mesh.setGeom(geom);
 }
 

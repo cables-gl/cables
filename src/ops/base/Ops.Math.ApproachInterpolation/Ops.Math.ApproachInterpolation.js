@@ -3,9 +3,9 @@
 var exec=op.inFunction("Update");
 var inVal=op.inValue("Value");
 
+var next=op.outFunction("Next");
 var inDivisor=op.inValue("Divisor",divisor);
 var result=op.outValue("Result",0);
-var next=op.outFunction("Next");
 
 var val=0;
 var goal=0;
