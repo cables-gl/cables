@@ -21,4 +21,10 @@ use this to test your apikey via command line:
 
 `curl -H 'X-apikey: YOUR_API_KEY' 'http://cables.gl/api/myprojects'`
 
+#### exporting cables projects
+
+(cables command line exporter)[https://github.com/pandrr/cables-cli]
+
+
+
 

@@ -1,3 +1,9 @@
+/**
+ * @name Link
+ * @memberof CABLES
+ * @description a link is a connection between two ops/ports -> one input and one output port
+ * @class
+ */
 
 var CABLES=CABLES || {};
 
@@ -5,10 +11,10 @@ CABLES.Link = function(scene)
 {
     this.portIn=null;
     this.portOut=null;
-    this.scene=scene;
-
+    this.scene=scene; // todo: make private and rename to patch
     this.activityCounter=0;
 };
+
 
 CABLES.Link.prototype.setValue=function(v)
 {
@@ -54,12 +60,23 @@ CABLES.Link.prototype._setValue=function()
     }
 };
 
+/**
+ * @name CABLES.Link#getOtherPort
+ * @function
+ * @param {CABLES.Port} port
+ * @description returns the port of the link, which is not port
+ */
 CABLES.Link.prototype.getOtherPort=function(p)
 {
     if(p==this.portIn)return this.portOut;
     return this.portIn;
 };
 
+/**
+ * @name CABLES.Link#remove
+ * @function
+ * @description unlink/remove this link from all ports
+ */
 CABLES.Link.prototype.remove=function()
 {
     if(this.portIn)this.portIn.removeLink(this);
@@ -74,6 +91,13 @@ CABLES.Link.prototype.remove=function()
     this.scene=null;
 };
 
+/**
+ * @function
+ * @name CABLES.Link#link
+ * @description link those two ports
+ * @param {CABLES.Port} port1
+ * @param {CABLES.Port} port2
+ */
 CABLES.Link.prototype.link=function(p1,p2)
 {
     if(!CABLES.Link.canLink(p1,p2))
@@ -116,6 +140,13 @@ CABLES.Link.prototype.getSerialized=function()
 
 // --------------------------------------------
 
+/**
+ * @function
+ * @name CABLES.Link#canLinkText
+ * @description return a text message with human readable reason if ports can not be linked, or can be
+ * @param {CABLES.Port} port1
+ * @param {CABLES.Port} port2
+ */
 CABLES.Link.canLinkText=function(p1,p2)
 {
     if(p1.direction==p2.direction)
@@ -145,6 +176,13 @@ CABLES.Link.canLinkText=function(p1,p2)
     return 'can link';
 };
 
+/**
+ * @function
+ * @name CABLES.Link#canLink
+ * @description return true if ports can be linked
+ * @param {CABLES.Port} port1
+ * @param {CABLES.Port} port2
+ */
 CABLES.Link.canLink=function(p1,p2)
 {
     if(!p1)return false;

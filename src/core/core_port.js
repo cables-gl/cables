@@ -1,3 +1,16 @@
+
+/**
+ * @name Port
+ * @memberof CABLES
+ * @class
+ */
+
+/**
+ * change listener for input value ports 
+ * @name CABLES.Port#onChange
+ * @type Function
+ */
+
 var PORT_DIR_IN=0;
 var PORT_DIR_OUT=1;
 
@@ -6,9 +19,20 @@ var CABLES=CABLES || {};
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
     this.data = {}; // reserved for port-specific user-data
+    /**
+     * @type {number}
+     * @name CABLES.Port#direction
+     * @description direction of port (input(0) or output(1))
+     */
     this.direction=PORT_DIR_IN;
     this.id=CABLES.generateUUID();
     this.parent=__parent;
+
+    /**
+     * @type {Array<CABLES.Link>}
+     * @name CABLES.Port#links
+     * @description links of port
+     */
     this.links=[];
     this.value=0.0;
     this.name=name;
@@ -53,25 +77,22 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.onAnimToggle=function(){};
     CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
 
-    // CABLES.Port.prototype.__defineGetter__("val", function()
-    // {
-    //     // if(!this._warnedDeprecated) console.log('deprecated .val get used',this.parent.name);
-    //     this._warnedDeprecated=true;
-    //     return this.get();
-    // });
-    //
-    // CABLES.Port.prototype.__defineSetter__("val", function(v)
-    // {
-    //     this.setValue(v);
-    //     // if(!this._warnedDeprecated)console.log('deprecated .val set used',this.parent.name);
-    //     this._warnedDeprecated=true;
-    // });
-
+    /**
+     * @name CABLES.Port#hidePort
+     * @function
+     * @description hide port rectangle in op
+     */
     CABLES.Port.prototype.hidePort=function()
     {
         this.setUiAttribs({hidePort:true});
     };
 
+    /**
+     * @name CABLES.Port#setUiAttribs
+     * @function
+     * @param {Object} newAttribs
+     * @description set ui attributes
+     */
     CABLES.Port.prototype.setUiAttribs=function(newAttribs)
     {
         if(!this.uiAttribs)this.uiAttribs={};
@@ -82,6 +103,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
     };
 
+    /**
+     * @name CABLES.Port#get
+     * @function
+     * @description get value of port
+     */
     CABLES.Port.prototype.get=function()
     {
         if(this._animated && this._lastAnimFrame!=this.parent.patch.getFrameNum())
@@ -99,10 +125,13 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         return this.value;
     };
 
-
+    /**
+     * @function
+     * @name CABLES.Port#setValue
+     * @description set value of port / will send value to all linked ports (only for output ports)
+     */
     CABLES.Port.prototype.set=CABLES.Port.prototype.setValue=function(v)
     {
-
         if(v===undefined)return;
 
         if(this.parent.enabled)
@@ -163,6 +192,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             else if(this.onValueChanged) this.onValueChanged(this,this.value); // deprecated
     };
 
+    /**
+     * @function
+     * @name CABLES.Port#getTypeString
+     * @description get port type as string, e.g. "Function","Value"...
+     * @return {string} type
+     */
     CABLES.Port.prototype.getTypeString=function()
     {
         if(this.type==OP_PORT_TYPE_VALUE)return 'Value';
@@ -200,15 +235,25 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.shouldLink=function(){return true;};
 
+    /**
+     * @function
+     * @name CABLES.Port#removeLinks
+     * @description remove all links from port
+     */
     CABLES.Port.prototype.removeLinks=function()
     {
         while(this.links.length>0)
         {
             this.links[0].remove();
         }
-
     };
 
+    /**
+     * @function
+     * @name CABLES.Port#removeLink
+     * @description remove all link from port
+     * @param {CABLES.Link} link
+     */
     CABLES.Port.prototype.removeLink=function(link)
     {
         for(var i in this.links)
@@ -227,6 +272,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this.onLinkChanged)this.onLinkChanged();
     };
 
+    /**
+     * @function
+     * @name CABLES.Port#getName
+     * @description return port name
+     */
     CABLES.Port.prototype.getName= function()
     {
         return this.name;
@@ -240,6 +290,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this.onLinkChanged)this.onLinkChanged();
     };
 
+    /**
+     * @function
+     * @name CABLES.Port#getLinkTo
+     * @param {CABLES.Port} otherPort
+     * @description return link, which is linked to otherPort
+     */
     CABLES.Port.prototype.getLinkTo=function(p2)
     {
         for(var i in this.links)
@@ -247,7 +303,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                 return this.links[i];
     };
 
-
+    /**
+     * @function
+     * @name CABLES.Port#removeLinkTo
+     * @param {CABLES.Port} otherPort
+     * @description removes link, which is linked to otherPort
+     */
     CABLES.Port.prototype.removeLinkTo=function(p2)
     {
         for(var i in this.links)
@@ -259,6 +320,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             }
     };
 
+    /**
+     * @function
+     * @name CABLES.Port#isLinkedTo
+     * @param {CABLES.Port} otherPort
+     * @description returns true if port is linked to otherPort
+     */
     CABLES.Port.prototype.isLinkedTo=function(p2)
     {
         for(var i in this.links)
@@ -267,6 +334,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         return false;
     };
 
+    /**
+     * @name CABLES.Port#trigger
+     * @function
+     * @description trigger the linked port (usually invoked on an output function port)
+     */
     CABLES.Port.prototype.trigger=function()
     {
         if(this.links.length===0)return;
@@ -308,6 +380,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     {
         console.log('### execute port: '+this.getName() , this.goals.length);
     };
+
     CABLES.Port.prototype.setAnimated=function(a)
     {
         if(this._animated!=a)
@@ -325,14 +398,40 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         this.setAnimated(this._animated);
         this._onAnimToggle();
     };
+
+    /**
+     * @function
+     * @name CABLES.Port#getType
+     * @return {number} type
+     * @description return type of port
+     */
     CABLES.Port.prototype.getType=function(){ return this.type; };
+
+    /**
+     * @function
+     * @name CABLES.Port#getType
+     * @return {number} 
+     * @description return true if port is linked
+     */
     CABLES.Port.prototype.isLinked=function(){ return this.links.length>0; };
 
+    /**
+     * @function
+     * @name CABLES.Port#isAnimated
+     * @return {boolean}
+     * @description return true if port is animated
+     */
     CABLES.Port.prototype.isAnimated=function()
     {
         return this._animated;
     };
 
+    /**
+     * @function
+     * @name CABLES.Port#onTriggered
+     * @param {function} callback
+     * @description set callback, which will be executed when port was triggered (usually output port)
+     */
     CABLES.Port.prototype._onTriggered=function()
     {
         this.parent.updateAnims();
