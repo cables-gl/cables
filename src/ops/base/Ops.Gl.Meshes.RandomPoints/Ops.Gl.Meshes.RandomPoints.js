@@ -71,6 +71,7 @@ function reset()
     geom.vertColors=vertColors;
     geom.texCoords=texCoords;
 
+    if(mesh)mesh.dispose();
     mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
     mesh.addVertexNumbers=true;
     mesh.setGeom(geom);

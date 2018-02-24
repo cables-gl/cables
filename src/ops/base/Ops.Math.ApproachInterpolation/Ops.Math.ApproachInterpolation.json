@@ -1,5 +1,5 @@
 {
-    "updated": 1519025612618,
+    "updated": 1519325866045,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eb4aa728-d0ee-4c53-833d-d0b086b11250",
@@ -21,12 +21,12 @@
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Result"
-            },
-            {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Result"
             }
         ],
         "name": "Ops.Math.ApproachInterpolation"
