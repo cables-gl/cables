@@ -11,9 +11,6 @@
  * @readonly
  */
 
-
-
-
 var OP_PORT_TYPE_VALUE =0;
 var OP_PORT_TYPE_FUNCTION =1;
 var OP_PORT_TYPE_OBJECT =2;
@@ -27,6 +24,10 @@ var CABLES=CABLES || {};
 CABLES.Helpers = CABLES.Helpers || {};
 CABLES.Helpers.isArray = function(v) {return Object.prototype.toString.call(v) === '[object Array]';};
 
+/**
+ * CABLES.Op
+ * @class
+ */
 CABLES.Op = function()
 {
     this.data={}; // reserved for op-specific user-data
@@ -293,7 +294,6 @@ CABLES.Op = function()
             }
         }
         return childs;
-
     };
 
     CABLES.Op.prototype.markChilds=function()
@@ -673,8 +673,13 @@ CABLES.Op = function()
     };
 
 
-
-
+    /**
+     * show op error message
+     * set message to null to remove error message
+     * @param {errorid} id error identifier
+     * @param {txt} text message
+     * @function
+     */
     CABLES.Op.prototype.error=function(id,txt)
     {
         this.errors[id]=txt;
@@ -686,7 +691,6 @@ CABLES.Op = function()
             errorHtml+='- '+this.errors[i]+'<br/>';
         }
         this.uiAttr({'error':errorHtml});
-
     }
 
 

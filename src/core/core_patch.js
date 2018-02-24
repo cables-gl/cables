@@ -14,8 +14,6 @@ var CABLES = CABLES || {};
  * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  */
 
-
-
 /**
  * @name Patch
  * @memberof CABLES
@@ -38,6 +36,11 @@ CABLES.Patch = function(cfg) {
     this.aborted = false;
     this.loading = new CABLES.LoadingStatus();
 
+    this._fps=0;
+    this._fpsFrameCount=0;
+    this._fpsMsCount=0;
+    this._fpsStart=0;
+
     this._volumeListeners = [];
     this._paused = false;
     this._frameNum = 0;
@@ -54,6 +57,7 @@ CABLES.Patch = function(cfg) {
         onFirstFrameRendered: null,
         fpsLimit: 0
     };
+
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
@@ -112,6 +116,17 @@ CABLES.Patch.prototype.renderOneFrame = function() {
 }
 
 /**
+ * current number of frames per second
+ * @name CABLES.Patch#getFPS
+ * @return {Number} fps
+ * @function
+ */
+CABLES.Patch.prototype.getFPS = function() {
+    return this._fps;
+};
+
+
+/**
  * pauses patch execution
  * @name CABLES.Patch#pause
  * @function
@@ -145,6 +160,14 @@ CABLES.Patch.prototype.setVolume = function(v) {
         this._volumeListeners[i].onMasterVolumeChanged(v);
 };
 
+/**
+ * get url/filepath for a filename 
+ * this uses prefixAssetpath in exported patches
+ * @name CABLES.Patch#getFilePath
+ * @param {String} filename
+ * @return {String} url
+ * @function
+ */
 CABLES.Patch.prototype.getFilePath = function(filename) {
     if (!filename) return filename;
     if (filename.indexOf('https:') === 0 || filename.indexOf('http:') === 0) return filename;
@@ -228,9 +251,10 @@ CABLES.Patch.prototype.createOp = function(objName) {
             else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName);
             else console.log('parts.length', parts.length);
         }
-    } catch (e) {
+    }
+    catch (e)
+    {
         console.error('instancing error ' + objName);
-        
         if (CABLES.UI)
             CABLES.UI.MODAL.showOpException(e, objName);
         else
@@ -240,9 +264,6 @@ CABLES.Patch.prototype.createOp = function(objName) {
             console.log(e.stacktrace);
             throw 'instancing error ' + objName;
         }
-
-        
-        // return;
     }
 
 
@@ -296,7 +317,6 @@ CABLES.Patch.prototype.addOnAnimFrameCallback = function(cb) {
 };
 
 CABLES.Patch.prototype.removeOnAnimCallback = function(cb) {
-
     for (var i = 0; i < this.animFrameCallbacks.length; i++) {
         if (this.animFrameCallbacks[i] == cb) {
             this.animFrameCallbacks.splice(i, 1);
@@ -376,9 +396,8 @@ CABLES.Patch.prototype.renderFrame = function(e) {
 };
 
 CABLES.Patch.prototype.exec = function(e) {
-    
-    if(!this._renderOneFrame && ( this._paused || this.aborted )) return;
 
+    if(!this._renderOneFrame && ( this._paused || this.aborted )) return;
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
     if (this.config.fpsLimit) {
@@ -387,6 +406,7 @@ CABLES.Patch.prototype.exec = function(e) {
 
     var now = CABLES.now();
     var frameDelta = now - frameNext;
+    
 
     if (CABLES.UI) {
         if (CABLES.UI.capturer) CABLES.UI.capturer.capture(this.cgl.canvas);
@@ -416,11 +436,11 @@ CABLES.Patch.prototype.exec = function(e) {
     }
 
     if(this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > frameInterval || wasdelayed) {
+        var startFrameTime=CABLES.now();
         this.renderFrame();
+        this._fpsMsCount+=CABLES.now()-startFrameTime;
 
         if (frameInterval) frameNext = now - (frameDelta % frameInterval);
-
-        lastFrameTime = CABLES.now();
     }
 
     if (wasdelayed) {
@@ -433,7 +453,26 @@ CABLES.Patch.prototype.exec = function(e) {
         this.onOneFrameRendered();
         this._renderOneFrame=false;
     }
+
+    if(CABLES.now()-this._fpsStart>=1000)
+    {
+        if(this._fps!=this._fpsFrameCount)
+        {
+            this._fps=this._fpsFrameCount;
+            if(CABLES.UI)
+            {
+                if(!CABLES.UI.fpsElement) CABLES.UI.fpsElement=$('#canvasInfoFPS');
+                CABLES.UI.fpsElement.html('| fps: '+this._fps+' | ms: '+Math.round(this._fpsMsCount/this._fpsFrameCount));
+            }
+            this._fpsFrameCount=0;
+            this._fpsMsCount=0;
+            this._fpsStart=CABLES.now();
+        }
+    }
     
+    lastFrameTime = CABLES.now();
+    this._fpsFrameCount++;
+
     requestAnimationFrame(this.exec.bind(this));
 };
 
@@ -585,7 +624,6 @@ CABLES.Patch.prototype.getSubPatchOps = function(patchId) {
             ops.push(this.ops[i]);
         }
     }
-
     return ops;
 };
 
@@ -595,7 +633,6 @@ CABLES.Patch.prototype.getSubPatchOp = function(patchId, objName) {
             return this.ops[i];
         }
     }
-
     return false;
 };
 
@@ -834,9 +871,8 @@ CABLES.Patch.prototype.setVarValue = function(name, val) {
 };
 
 CABLES.Patch.prototype.getVarValue = function(name, val) {
-    if (this._variables.hasOwnProperty(name)) {
+    if (this._variables.hasOwnProperty(name))
         return this._variables[name].getValue();
-    }
 };
 
 /**
