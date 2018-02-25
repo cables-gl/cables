@@ -50,5 +50,9 @@
             }
         ],
         "name": "Ops.Gl.TextureArrayLoaderFromArray"
+    },
+    "summary": "load multiple texture from filenames given as an array",
+    "docs": {
+        "ports": []
     }
 }

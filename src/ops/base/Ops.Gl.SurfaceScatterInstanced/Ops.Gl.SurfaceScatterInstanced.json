@@ -43,5 +43,9 @@
             }
         ],
         "name": "Ops.Gl.SurfaceScatterInstanced"
+    },
+    "summary": "render meshes randomly distributed on the surface of a geometry",
+    "docs": {
+        "ports": []
     }
 }

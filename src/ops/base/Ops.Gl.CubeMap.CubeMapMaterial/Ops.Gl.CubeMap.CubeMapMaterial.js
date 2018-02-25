@@ -1,3 +1,4 @@
+//https://jmonkeyengine.github.io/wiki/jme3/advanced/pbr_part3.html
 
 op.name='CubeMapMaterial';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
@@ -37,83 +38,8 @@ function updateMapping()
 
 
 
-var srcVert=''
-    // .endl()+'uniform mat4 projection;'
-    .endl()+'{{MODULES_HEAD}}'
-    .endl()+'precision highp float;'
-    .endl()+'UNI mat4 projMatrix;'
-    .endl()+'UNI mat4 modelMatrix;'
-    .endl()+'UNI mat4 viewMatrix;'
-    // .endl()+'uniform mat4 normalMatrix;'
-
-
-    // .endl()+'IN vec3 a_coords;'
-    // .endl()+'IN vec3 a_normal;'
-    .endl()+'OUT vec3 v_eyeCoords;'
-    .endl()+'OUT vec3 v_normal;'
-    .endl()+'OUT vec3 v_pos;'
-
-    .endl()+'IN vec3 vPosition;'
-
-
-    // .endl()+'IN vec2 attrTexCoord;'
-    .endl()+'IN vec3 attrVertNormal;'
-
-    .endl()+'void main() {'
-
-    .endl()+'    mat4 modelview= viewMatrix * modelMatrix;'
-
-    .endl()+'    v_pos= vPosition;'
-    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
-
-    .endl()+'{{MODULE_VERTEX_POSITION}}'
-
-    .endl()+'   vec4 eyeCoords = modelview * pos;'
-    
-    
-    
-    .endl()+'   gl_Position = projMatrix * eyeCoords;'
-    .endl()+'   v_eyeCoords = eyeCoords.xyz;'
-    .endl()+'   v_normal = normalize(attrVertNormal);'
-    .endl()+'}';
-
-
-var srcFrag=''
-.endl()+'precision highp float;'
-    .endl()+'{{MODULES_HEAD}}'
-    .endl()+'IN vec3 vCoords;'
-    .endl()+'IN vec3 v_normal;'
-    .endl()+'IN vec3 v_eyeCoords;'
-    .endl()+'IN vec3 v_pos;'
-    .endl()+'UNI samplerCube skybox;'
-    .endl()+'UNI mat4 normalMatrix;'
-    .endl()+'UNI mat4 inverseViewMatrix;'
-    .endl()+'UNI mat4 modelMatrix;'
-
-    .endl()+'void main() {'
-    .endl()+'{{MODULE_BEGIN_FRAG}}'
-    
-    .endl()+'    vec3 N = normalize( mat3(normalMatrix) * v_normal).xyz;'
-    .endl()+'    vec3 V = -v_eyeCoords;'
-    .endl()+'    vec3 R = -reflect(V,N);'
-    .endl()+'    vec3 T = ( mat3( inverseViewMatrix ) * R ).xyz;' // Transform by inverse of the view transform that was applied to the skybox
-
-    .endl()+'vec4 col = vec4(1.0,1.0,1.0,1.0);'
-
-    .endl()+'#ifdef DO_REFLECTION'
-    .endl()+'    col = texture(skybox, T);'
-    .endl()+'#endif'
-    .endl()+'#ifndef DO_REFLECTION'
-    .endl()+'    col = texture(skybox, v_pos);'
-    .endl()+'#endif'
-    
-    .endl()+'{{MODULE_COLOR}};'
-    
-    .endl()+'outColor=col;'
-    
-
-
-    .endl()+'}';
+var srcVert=attachments.cubemap_vert;
+var srcFrag=attachments.cubemap_frag;
 
 
 var shader=new CGL.Shader(cgl);

@@ -1,5 +1,3 @@
-op.name="CubeMapFromTextures";
-
 
 var outTex=op.outObject("cubemap");
 var numImages=6;
@@ -60,7 +58,7 @@ function load()
                 skyboxCubemap = gl.createTexture();
                 gl.bindTexture(gl.TEXTURE_CUBE_MAP, skyboxCubemap);
                 outTex.set({"cubemap":skyboxCubemap});
-                
+
                 try
                 {
                     for (var j = 0; j < 6; j++)

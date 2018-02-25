@@ -1,4 +1,3 @@
-op.name="Group";
 
 var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
 var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));

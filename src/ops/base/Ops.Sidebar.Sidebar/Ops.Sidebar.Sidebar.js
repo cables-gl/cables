@@ -7,6 +7,7 @@ element.style["background-color"]="#000";
 element.style["z-index"]="99999";
 element.style["position"]="absolute";
 element.style["width"]="200px";
+// element.style["margin-left"]="-200px";
 
 var canvas = document.getElementById('cablescanvas'); 
 if(!canvas)canvas=document.body;
