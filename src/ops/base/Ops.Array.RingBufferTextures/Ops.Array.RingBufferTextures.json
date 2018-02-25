@@ -1,0 +1,37 @@
+{
+    "updated": 1519520807149,
+    "authorName": "pandur",
+    "id": "04dc13d2-e339-4e1d-82c5-9c9ff1b175b8",
+    "created": 1519509615864,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Num"
+            },
+            {
+                "type": "1",
+                "name": "Write"
+            },
+            {
+                "type": "0",
+                "name": "Order"
+            },
+            {
+                "type": "0",
+                "name": "Clear"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.RingBufferTextures"
+    }
+}
