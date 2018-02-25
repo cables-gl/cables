@@ -1,6 +1,8 @@
 
 
 var CGL=CGL || {};
+CGL.tempTexture=null;
+CGL.tempTextureEmpty=null;
 
 CGL.DEFAULT_TEXTURE_SIZE=8;
 /**
@@ -9,7 +11,7 @@ CGL.DEFAULT_TEXTURE_SIZE=8;
  * @memberof CGL
  * @constructor
  * @param {CGL.Context} cgl
- * @param {Object} options
+ * @param {Object} [options]
  * @class
  */
 CGL.Texture=function(__cgl,options)
@@ -57,6 +59,13 @@ CGL.Texture=function(__cgl,options)
         // else this.setSize(CGL.DEFAULT_TEXTURE_SIZE,CGL.DEFAULT_TEXTURE_SIZE);
 };
 
+/**
+ * returns true if otherTexture has same options (width/height/filter/wrap etc)
+ * @name CGL.Texture#compareSettings
+ * @param {CGL.Texture} otherTexture
+ * @returns {boolean}
+ * @function
+ */
 CGL.Texture.prototype.compareSettings=function(tex)
 {
     if(!tex)return false;
@@ -71,6 +80,12 @@ CGL.Texture.prototype.compareSettings=function(tex)
     );
 };
 
+/**
+ * returns a new texturw with the same settings (does not copy texture itself)
+ * @name CGL.Texture#clone
+ * @returns {CGL.Texture}
+ * @function
+ */
 CGL.Texture.prototype.clone=function()
 {
     var newTex=new CGL.Texture(this._cgl,
@@ -94,6 +109,13 @@ CGL.Texture.prototype.clone=function()
     return newTex;
 };
 
+/**
+ * set pixel size of texture
+ * @name CGL.Texture#setSize
+ * @param {number} width
+ * @param {number} height
+ * @function
+ */
 CGL.Texture.prototype.setSize=function(w,h)
 {
     if(w!=w || w<=0 || !w)w=CGL.DEFAULT_TEXTURE_SIZE;
@@ -161,6 +183,16 @@ CGL.Texture.prototype.setSize=function(w,h)
 
 };
 
+/**
+ * @function
+ * @name CGL.Texture#initFromData
+ * @description create texturem from rgb data
+ * @param {Array<number>}data rgb color array [r,g,b,a,r,g,b,a,...]
+ * @param {number} width
+ * @param {number} height
+ * @param {number} filter
+ * @param {number} wrap
+ */
 CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 {
     this.filter=filter;
@@ -180,6 +212,7 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
+
 
 CGL.Texture.prototype.initTexture=function(img,filter)
 {
@@ -203,12 +236,23 @@ CGL.Texture.prototype.initTexture=function(img,filter)
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
 };
 
+/**
+ * delete textur. use this when texture is no longer needed
+ * @name CGL.Texture#delete
+ * @function
+ */
 CGL.Texture.prototype.delete=function()
 {
     CGL.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
 };
 
+/**
+ * @function
+ * @name CGL.Texture#isPowerOfTwo
+ * @description return true if texture width and height are both power of two
+ * @return {boolean}
+ */
 CGL.Texture.prototype.isPowerOfTwo=function()
 {
     return CGL.Texture.isPowerOfTwo(this.width) && CGL.Texture.isPowerOfTwo(this.height);
@@ -335,6 +379,18 @@ CGL.Texture.prototype._setFilter=function()
     }
 };
 
+
+/**
+ * @function
+ * @static
+ * @name CGL.Texture#load
+ * @description load an image from an url 
+ * @param {CGL.Context} cgl
+ * @param {String} url
+ * @param {Function} onFinished
+ * @param {Object} options
+ * @return {CGL.Texture}
+ */
 CGL.Texture.load=function(cgl,url,finishedCallback,settings)
 {
     var loadingId=cgl.patch.loading.start('texture',url);
@@ -372,14 +428,26 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
     return texture;
 };
 
-CGL.tempTexture=null;
-CGL.tempTextureEmpty=null;
+/**
+ * @static
+ * @function
+ * @name CGL.Texture#getTempTexture
+ * @description returns the default temporary texture (grey diagonal stipes)
+ * @param {CGL.Context} cgl
+ * @return {CGL.Texture}
+ */
 CGL.Texture.getTempTexture=function(cgl)
 {
     if(!CGL.tempTexture) CGL.tempTexture=CGL.Texture.getTemporaryTexture(cgl,256,CGL.Texture.FILTER_LINEAR,CGL.Texture.REPEAT);
     return CGL.tempTexture;
 };
 
+/**
+ * @function
+ * @name CGL.Texture#getEmptyTexture
+ * @description returns a reference to a small empty texture
+ * @return {CGL.Texture}
+ */
 CGL.Texture.getEmptyTexture=function(cgl)
 {
     if(CGL.tempTexture) return CGL.tempTexture;
@@ -391,6 +459,7 @@ CGL.Texture.getEmptyTexture=function(cgl)
 
     return temptex;
 };
+
 
 CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
 {
@@ -422,6 +491,15 @@ CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
     return temptex;
 };
 
+/**
+ * @static
+ * @function
+ * @name CGL.Texture#createFromImage
+ * @description create texturem from image data (e.g. image or canvas)
+ * @param {CGL.Context} cgl
+ * @param {object} image
+ * @param {object} options
+ */
 CGL.Texture.createFromImage=function(cgl,img,options)
 {
     var texture=new CGL.Texture(cgl,options);
@@ -448,6 +526,14 @@ CGL.Texture.fromImage=function(cgl,img,filter,wrap)
     return texture;
 };
 
+/**
+ * @static
+ * @function
+ * @name CGL.Texture#isPowerOfTwo
+ * @description returns true if x is power of two
+ * @param {number} x
+ * @return {boolean}
+ */
 CGL.Texture.isPowerOfTwo=function(x)
 {
     return ( x == 1 || x == 2 || x == 4 || x == 8 || x == 16 || x == 32 || x == 64 || x == 128 || x == 256 || x == 512 || x == 1024 || x == 2048 || x == 4096 || x == 8192 || x == 16384);

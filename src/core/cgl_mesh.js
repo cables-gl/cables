@@ -1,9 +1,21 @@
-var CGL=CGL || {};
+
+
+
+ var CGL=CGL || {};
 CGL.MESH=CGL.MESH || {};
 
 CGL.MESH.lastShader=null;
 CGL.MESH.lastMesh=null;
 
+/**
+ * @constructor
+ * @memberof CGL
+ * @name CGL.Mesh
+ * @param {CGL.Context} cgl
+ * @param {CGL.Geometry} geometry
+ * @param {number} [glPrimitive]
+ * @class
+ */
 CGL.Mesh=function(_cgl,__geom,glPrimitive)
 {
     this._cgl=_cgl;
@@ -194,6 +206,12 @@ CGL.Mesh.prototype.setVertexIndices=function(vertIndices)
     else this._bufVerticesIndizes.numItems=0;
 };
 
+/**
+ * @function
+ * @description set geometry for mesh
+ * @name CGL.Mesh#setGeom
+ * @param {CGL.Geometry} geometry
+ */
 CGL.Mesh.prototype.setGeom=function(geom)
 {
     this._geom=geom;
@@ -399,6 +417,12 @@ CGL.Mesh.prototype.setNumVertices=function(num)
 
 };
 
+/**
+ * @function
+ * @description draw mesh to screen
+ * @name CGL.Mesh#render
+ * @param {CGL.Shader} shader
+ */
 CGL.Mesh.prototype.render=function(shader)
 {
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh

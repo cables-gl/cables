@@ -3,6 +3,13 @@ CABLES=CABLES||{};
 CABLES.EMBED=CABLES.EMBED||{};
 
 
+/**
+ * add patch into html element (will create canvas and set size to fill containerElement)
+ * @name CABLES.EMBED#addPatch
+ * @param {object|string} containerElement dom element or id of element
+ * @param {options} patch options
+ * @function
+ */
 CABLES.EMBED.addPatch=function(_element,options)
 {
     var el=_element;

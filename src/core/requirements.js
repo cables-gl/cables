@@ -40,8 +40,6 @@ CABLES.Requirements.prototype.checkRequirement=function(which,op)
             if(!has && ( 'webkitAudioContext' in window || 'AudioContext' in window) )  has=true;
             return has;
         break;
-
-        
     }
 }
 

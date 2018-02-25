@@ -1,7 +1,9 @@
-/** @memberof CGL */
 
 /**
- * CGL.Geometry
+ * @constructor
+ * @name CGL.Geometry
+ * @memberof CGL
+ * @param {string} name
  * @class
  */
 CGL.Geometry=function(name)
@@ -41,11 +43,25 @@ CGL.Geometry.prototype.clear=function()
     this.texCoordsIndices.length=0;
     this.vertexNormals.length=0;
 };
+
+/**
+ * @function
+ * @name CGL.Geometry#getAttributes
+ * @return returns array of attribute objects
+ */
 CGL.Geometry.prototype.getAttributes=function()
 {
     return this._attributes;
 };
 
+/**
+ * @function
+ * @description create an attribute
+ * @name CGL.Geometry#setAttribute
+ * @param {string} name
+ * @param {array} data
+ * @param {number} itemsize
+ */
 CGL.Geometry.prototype.setAttribute=function(name,arr,itemSize)
 {
     var attr={
@@ -57,12 +73,24 @@ CGL.Geometry.prototype.setAttribute=function(name,arr,itemSize)
     this._attributes[name]=attr;
 };
 
+/**
+ * @function
+ * @description set vertices
+ * @name CGL.Geometry#setVertices
+ * @param {array|float32array} data [x,y,z,x,y,z,...]
+ */
 CGL.Geometry.prototype.setVertices=function(arr)
 {
     if(arr instanceof Float32Array)this._vertices=arr;
         else this._vertices=new Float32Array(arr);
 };
 
+/**
+ * @function
+ * @description set texcoords
+ * @name CGL.Geometry#setTexCoords
+ * @param {array|float32array} data [u,v,u,v,...]
+ */
 CGL.Geometry.prototype.setTexCoords=function(arr)
 {
     if(arr instanceof Float32Array)this.texCoords=arr;
