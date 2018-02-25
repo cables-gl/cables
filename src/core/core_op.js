@@ -140,17 +140,19 @@ CABLES.Op = function()
 
 
     /**
-     * create a function/trigger port
+     * create a function/trigger input port
      * @name CABLES.Op#inFunction
-     * @param {String} name
+     * @param {string} name
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inFunction=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
 
     /**
-     * create a function port with an UI trigger button
+     * create a function input  port with an UI trigger button
      * @name CABLES.Op#inFunctionButton
-     * @param {String} name
+     * @param {string} name
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inFunctionButton=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION,{"display":"button"})); if(v!==undefined)p.set(v); return p; };
@@ -158,8 +160,9 @@ CABLES.Op = function()
     /**
      * create a number value input port
      * @name CABLES.Op#inValue
-     * @param {String} name
+     * @param {string} name
      * @param {Boolean} value
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inValue=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -167,8 +170,9 @@ CABLES.Op = function()
     /**
      * create a boolean input port, displayed as a checkbox
      * @name CABLES.Op#inValueBool
-     * @param {String} name
+     * @param {string} name
      * @param {Boolean} value
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inValueBool=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -176,8 +180,9 @@ CABLES.Op = function()
     /**
      * create a String value input port
      * @name CABLES.Op#inValueString
-     * @param {String} name
-     * @param {String} value default value
+     * @param {string} name
+     * @param {string} value default value
+     * @return {CABLES.Port}
      * @function
      */
 	CABLES.Op.prototype.inValueString=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -185,8 +190,9 @@ CABLES.Op = function()
     /**
      * create a String value input port displayed as TextArea
      * @name CABLES.Op#inValueText
-     * @param {String} name
-     * @param {String} value default value
+     * @param {string} name
+     * @param {string} value default value
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inValueText=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string","display":"text"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -194,8 +200,9 @@ CABLES.Op = function()
     /**
      * create a String value input port displayed as editor
      * @name CABLES.Op#inValueEditor
-     * @param {String} name
-     * @param {String} value default value
+     * @param {string} name
+     * @param {string} value default value
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inValueEditor=function(name,v,syntax){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string",display:'editor',editorSyntax:syntax})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -203,9 +210,10 @@ CABLES.Op = function()
     /**
      * create a string select box
      * @name CABLES.Op#inValueSelect
-     * @param {String} name
+     * @param {string} name
      * @param {Array} values
-     * @param {String} value default value
+     * @param {string} value default value
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inValueSelect=function(name,values,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -213,8 +221,9 @@ CABLES.Op = function()
     /**
      * create a integer input port
      * @name CABLES.Op#inValueInt
-     * @param {String} name
-     * @param {Number} value default value
+     * @param {string} name
+     * @param {number} value default value
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inValueInt=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
@@ -222,27 +231,111 @@ CABLES.Op = function()
     /**
      * create a file input port
      * @name CABLES.Op#inFile
-     * @param {String} name
+     * @param {string} name
+     * @return {CABLES.Port}
      * @function
      */
     CABLES.Op.prototype.inFile=function(name,filter,v){var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"file","filter":filter})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
+    /**
+     * @function
+     * create a texture input port
+     * @name CABLES.Op#inTexture
+     * @param {string} name
+     * @return {CABLES.Port}
+     */
     CABLES.Op.prototype.inTexture=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); return p; };
-    CABLES.Op.prototype.inObject=function(name,v,options)
-    {
-        // console.log(options);
-        var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT,options)); if(v!==undefined)p.set(v); return p;
-    };
+
+    /**
+     * create a object input port
+     * @name CABLES.Op#inObject
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
+    CABLES.Op.prototype.inObject=function(name,v,options) { var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT,options)); if(v!==undefined)p.set(v); return p; };
+
+    /**
+     * create a array input port
+     * @name CABLES.Op#inObject
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.inArray=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); return p; };
+
+    /**
+     * create a value slider input port
+     * @name CABLES.Op#inValueSlider
+     * @param {string} name
+     * @param {number} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.inValueSlider=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{'display':'range'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
 
+    /**
+     * create output function port
+     * @name CABLES.Op#outFunction
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.outFunction=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+
+    /**
+     * create output value port
+     * @name CABLES.Op#outValue
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.outValue=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
+
+    /**
+     * create output boolean port
+     * @name CABLES.Op#outValueBool
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.outValueBool=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined)p.set(v);else p.set(false); return p; };
+
+    /**
+     * create output string port
+     * @name CABLES.Op#outValueString
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.outValueString=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
+
+    /**
+     * create output object port
+     * @name CABLES.Op#outObject
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.outObject=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
+
+    /**
+     * create output array port
+     * @name CABLES.Op#outArray
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.outArray=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
+
+    /**
+     * create output texture port
+     * @name CABLES.Op#outTexture
+     * @param {string} name
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.outTexture=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
 
 
@@ -395,6 +488,13 @@ CABLES.Op = function()
             if(this.portsOut[ipo].type==type)return this.portsOut[ipo];
     };
 
+    /**
+     * return port by the name portName
+     * @name CABLES.Op#getPortByName
+     * @param {string} portName
+     * @return {CABLES.Port}
+     * @function
+     */
     CABLES.Op.prototype.getPortByName=function(name)
     {
         for(var ipi in this.portsIn)
