@@ -1,0 +1,61 @@
+{
+    "updated": 1519519314937,
+    "authorName": "pandur",
+    "id": "18a6d1f4-a7f8-4a3e-ab1d-0c2d2efe3861",
+    "created": 1519293465710,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "use viewport size"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "height"
+            },
+            {
+                "type": "0",
+                "name": "filter"
+            },
+            {
+                "type": "0",
+                "name": "wrap"
+            },
+            {
+                "type": "0",
+                "name": "HDR"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "texture_out"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio"
+            }
+        ],
+        "name": "Ops.Gl.Textures.CopyTexture"
+    },
+    "summary": "copy a texture and optionally resize it",
+    "docs": {
+        "ports": []
+    }
+}
