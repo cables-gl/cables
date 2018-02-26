@@ -80,27 +80,35 @@
         "ports": [
             {
                 "name": "relative",
-                "text": "Aenean eu leo quam"
-            },
-            {
-                "name": "normalize",
-                "text": "Aenean eu leo quam pellentesque ornare sem."
-            },
-            {
-                "name": "Active",
-                "text": "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis."
+                "text": "If set the position will be relative [-1..1]"
             },
             {
                 "name": "x",
-                "text": "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis."
+                "text": "The x coordinate of the mouse"
             },
             {
                 "name": "y",
-                "text": "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis."
+                "text": "The y coordinate of the mouse"
             },
             {
                 "name": "button down",
-                "text": "Maecenas faucibus mollis interdum. Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo."
+                "text": "True if the mouse button is hold down"
+            },
+            {
+                "name": "click",
+                "text": "Triggers when mouse was clicked / a touch click event occured"
+            },
+            {
+                "name": "Button Up",
+                "text": "Triggers when the mouse was released"
+            },
+            {
+                "name": "click right",
+                "text": "Triggers when the right mouse button was clicked"
+            },
+            {
+                "name": "mouseOver",
+                "text": "True if the mouse is over the canvas"
             }
         ]
     }
