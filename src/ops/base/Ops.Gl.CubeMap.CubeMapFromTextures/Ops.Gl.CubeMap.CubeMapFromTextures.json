@@ -35,7 +35,7 @@
         "name": "Ops.Gl.CubeMap.CubeMapFromTextures"
     },
     "summary": "combine 6 textures to a cubemap",
-    "updated": 1519576900991,
+    "updated": 1519629646779,
     "authorName": "pandur",
     "id": "7b090629-e7ce-4c5f-a1d3-41525b762b36",
     "created": 1519576849237

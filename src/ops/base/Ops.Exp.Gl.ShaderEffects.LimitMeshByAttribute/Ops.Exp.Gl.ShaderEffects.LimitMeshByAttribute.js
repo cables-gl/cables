@@ -1,8 +1,4 @@
 
-var cgl=op.patch.cgl;
-var shader=null;
-var uniTime;
-
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var inAttrib=op.inValueSelect("Attribute",[]);
 var inGeom=op.inObject("Geometry");
@@ -20,6 +16,13 @@ var startTime=Date.now()/1000.0;
 render.onLinkChanged=removeModule;
 needsCodeUpdate=true;
 
+var cgl=op.patch.cgl;
+var shader=null;
+var uniTime;
+var moduleFrag=null;
+var module=null;
+
+
 function removeModule()
 {
     if(shader && module)
@@ -31,12 +34,10 @@ function removeModule()
     }
 }
 
-
 inAttrib.onChange=function()
 {
     needsCodeUpdate=true;
 };
-
 
 function updateCode()
 {
@@ -57,11 +58,9 @@ function updateCode()
     if(attrName==='')return;
 
     srcHeadVert=''
-        .endl()+'OUT '+attrType+' '+attrName+'Frag;'
-        
-        
         .endl()+'#ifndef ATTRIB_'+attrName+''
         .endl()+'#define ATTRIB_attrSubmesh'
+        .endl()+'OUT '+attrType+' '+attrName+'Frag;'
         .endl()+'IN '+attrType+' '+attrName+';'
         .endl()+'#endif'
         .endl();
@@ -72,7 +71,10 @@ function updateCode()
 
     srcHeadFrag=''
         .endl()+'UNI float MOD_max;'
+        .endl()+'#ifndef ATTRIB_'+attrName+''
+        .endl()+'#define ATTRIB_attrSubmesh'
         .endl()+'IN '+attrType+' '+attrName+'Frag;'
+        .endl()+'#endif'
         .endl();
 
     srcBodyFrag=''
@@ -84,10 +86,6 @@ function updateCode()
     
     needsCodeUpdate=false;
 }
-
-
-
-
 
 function updateAttribSelect()
 {
@@ -101,14 +99,12 @@ function updateAttribSelect()
     inAttrib.uiAttribs.values=attrNames;
 }
 
-
 inGeom.onChange=function()
 {
     var geom=inGeom.get();
     if(geom)
     {
         attribs=geom.getAttributes();
-        
     }
     else
     {
@@ -119,7 +115,6 @@ inGeom.onChange=function()
 
 render.onTriggered=function()
 {
-    
     if(needsCodeUpdate)updateCode();
     
     if(cgl.getShader()!=shader)
@@ -143,9 +138,7 @@ render.onTriggered=function()
             });
 
         uniMax=new CGL.Uniform(shader,'f',moduleFrag.prefix+'max',limitMax);
-        // setDefines();
     }
 
-    // uniTime.setValue(Date.now()/1000.0-startTime);
     trigger.trigger();
 };

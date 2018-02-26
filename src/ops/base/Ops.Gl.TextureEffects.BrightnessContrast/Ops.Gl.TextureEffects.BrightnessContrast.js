@@ -1,6 +1,5 @@
 var cgl=op.patch.cgl;
 
-op.name='BrightnessContrast';
 
 var render=op.inFunction("render");
 var amount=op.inValueSlider('contrast');

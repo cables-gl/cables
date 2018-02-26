@@ -30,7 +30,7 @@ function load()
 
     var cubemapTargets = [  // targets for use in some gl functions for working with cubemaps
        gl.TEXTURE_CUBE_MAP_POSITIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_X, 
-       gl.TEXTURE_CUBE_MAP_POSITIVE_Y, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, 
+        gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
        gl.TEXTURE_CUBE_MAP_POSITIVE_Z, gl.TEXTURE_CUBE_MAP_NEGATIVE_Z 
     ];
 
@@ -55,6 +55,8 @@ function load()
             ct++;
             if (ct == 6)
             {
+                setTimeout(function(){
+
                 skyboxCubemap = gl.createTexture();
                 gl.bindTexture(gl.TEXTURE_CUBE_MAP, skyboxCubemap);
                 outTex.set({"cubemap":skyboxCubemap});
@@ -66,6 +68,10 @@ function load()
                         gl.texImage2D(cubemapTargets[j], 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img[j]);
                         gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
                         gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+                        gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+                        gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
                     }
                 } catch(e) {  // (Could be the security exception in some browsers when reading from the local disk)
                     console.log(e);
@@ -76,6 +82,8 @@ function load()
                 }
                 gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
                 if(noerror===0) op.uiAttr({'error':null});
+                },1000);
+
             }
         };
 
