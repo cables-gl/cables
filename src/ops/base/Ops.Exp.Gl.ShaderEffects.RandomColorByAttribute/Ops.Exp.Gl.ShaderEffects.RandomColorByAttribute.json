@@ -1,0 +1,33 @@
+{
+    "updated": 1519641199421,
+    "authorName": "pandur",
+    "id": "28c8c024-3ac9-4fca-8276-77ca76f35ad8",
+    "created": 1519638909468,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Attribute"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Max"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Exp.Gl.ShaderEffects.RandomColorByAttribute"
+    }
+}
