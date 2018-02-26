@@ -1,5 +1,5 @@
 {
-    "updated": 1519641199421,
+    "updated": 1519642830494,
     "authorName": "pandur",
     "id": "28c8c024-3ac9-4fca-8276-77ca76f35ad8",
     "created": 1519638909468,
@@ -16,6 +16,14 @@
             {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Seed"
+            },
+            {
+                "type": "0",
+                "name": "Min"
             },
             {
                 "type": "0",

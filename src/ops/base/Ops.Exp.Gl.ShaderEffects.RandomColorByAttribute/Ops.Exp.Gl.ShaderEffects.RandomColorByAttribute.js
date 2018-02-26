@@ -3,7 +3,9 @@
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var inAttrib=op.inValueSelect("Attribute",[]);
 var inGeom=op.inObject("Geometry");
-var limitMax=op.inValue("Max",1000);
+var inSeed=op.inValue("Seed",1000);
+var inMin=op.inValueSlider("Min",0.0);
+var inMax=op.inValueSlider("Max",1.0);
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var srcHeadVert='';
@@ -58,9 +60,14 @@ function updateCode()
     if(attrName==='')return;
 
     srcHeadVert=''
-        .endl()+'#ifndef ATTRIB_'+attrName+''
-        .endl()+'#define ATTRIB_attrSubmesh'
+        .endl()+'#ifndef ATTRIB_'+attrName+'Frag'
+        .endl()+'#define ATTRIB_'+attrName+'Frag'
         .endl()+'OUT '+attrType+' '+attrName+'Frag;'
+        .endl()+'#endif'
+
+
+        .endl()+'#ifndef ATTRIB_'+attrName
+        .endl()+'#define ATTRIB_'+attrName
         .endl()+'IN '+attrType+' '+attrName+';'
         .endl()+'#endif'
         .endl();
@@ -70,37 +77,24 @@ function updateCode()
         .endl();
 
     srcHeadFrag=''
-        .endl()+'UNI float MOD_max;'
+        .endl()+'UNI float MOD_seed;'
         .endl()+'#ifndef ATTRIB_'+attrName+''
         .endl()+'#define ATTRIB_attrSubmesh'
         .endl()+'IN '+attrType+' '+attrName+'Frag;'
         .endl()+'#endif'
         
-        
-.endl()+'float PHI = 1.61803398874989484820459 * 00000.1; // Golden Ratio   '
-.endl()+'float PI  = 3.14159265358979323846264 * 00000.1; // PI'
-.endl()+'float SRT = 1.41421356237309504880169 * 10000.0; // Square Root of Two'
+        .endl()+'UNI float MOD_min;'
+        .endl()+'UNI float MOD_max;'
 
-
-// Gold Noise function
-//
-.endl()+'float MOD_gold_noise(in vec2 coordinate, in float seed)'
-.endl()+'{'
-.endl()+'    return fract(sin(dot(coordinate*seed, vec2(PHI, PI)))*SRT);'
-.endl()+'}'
-
-        // .endl()+'float rand(vec2 co){'
-        // .endl()+'    return fract(sin(dot(co.xy ,vec2(12.9,78.2))) * 43758.3);'
-        // .endl()+'}'
+        .endl()+'float MOD_rand(vec2 co){'
+        .endl()+'    return fract(sin(dot(co.xy ,vec2(12.9,78.2))) * 43758.3);'
+        .endl()+'}'
 
         .endl();
 
     srcBodyFrag=''
-        .endl()+'col.rgb*=MOD_gold_noise(vec2('+attrName+'Frag+MOD_max,'+attrName+'Frag),MOD_max);'
-        // .endl()+'col.rgb*=mod('+attrName+'Frag,0.1)*10.0;'
-        // .endl()+'col.g=rand(vec2(MOD_max,MOD_max));'
-        
-        // .endl()+'col.g=1.0;'
+        .endl()+'float MOD_coord=round('+attrName+'Frag*1000.0)/1000.0+MOD_seed;'
+        .endl()+'col.rgb*= (MOD_rand(vec2(MOD_coord))*(MOD_max-MOD_min))+MOD_min ;'
         .endl();
     
     if(shader)shader.dispose();
@@ -159,7 +153,9 @@ render.onTriggered=function()
                 srcBodyFrag:srcBodyFrag
             });
 
-        uniMax=new CGL.Uniform(shader,'f',moduleFrag.prefix+'max',limitMax);
+        inSeed.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'seed',inSeed);
+        inMin.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'min',inMin);
+        inMax.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'max',inMax);
     }
 
     trigger.trigger();
