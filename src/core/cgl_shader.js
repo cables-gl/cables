@@ -44,6 +44,7 @@ CGL.Shader = function(_cgl, _name) {
 
     this._modGroupCount = 0;
     this._feedBackNames = [];
+    this._attributes = [];
 
     this.glPrimitive = null;
     this.offScreenPass = false;
@@ -332,6 +333,7 @@ CGL.Shader = function(_cgl, _name) {
         //     console.log(j,modules[j].title);
         // }
 
+        var addedAttributes=false;
 
         console.log('----');
 
@@ -350,6 +352,46 @@ CGL.Shader = function(_cgl, _name) {
 
                     srcVert+='\n\n//---- MOD: '+modules[j].title+' ------\n';
                     srcFrag+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+
+                    
+                    if(!addedAttributes)
+                    {
+                        addedAttributes=true;
+
+                        for(var k=0;k<this._attributes.length;k++)
+                        {
+                            if(this._attributes[k].name && this._attributes[k].type)
+                            {
+                                srcHeadVert+=''
+                                    .endl()+'#ifndef ATTRIB_'+this._attributes[k].name
+                                    .endl()+'  #define ATTRIB_'+this._attributes[k].name
+                                    .endl()+'  IN '+this._attributes[k].type+' '+this._attributes[k].name+';'
+                                    .endl()+'#endif';
+    
+                                if(this._attributes[k].nameFrag)
+                                {
+                                    srcHeadVert+=''
+                                        .endl()+'#ifndef ATTRIB_'+this._attributes[k].nameFrag
+                                        .endl()+'  #define ATTRIB_'+this._attributes[k].nameFrag
+                                        .endl()+'  OUT '+this._attributes[k].type+' '+this._attributes[k].nameFrag+';'
+                                        .endl()+'#endif';
+    
+                                    srcVert+=''
+                                        .endl()+this._attributes[k].nameFrag+'='+this._attributes[k].name+';';
+    
+                                }
+    
+                                srcHeadFrag+=''
+                                    .endl()+'#ifndef ATTRIB_'+this._attributes[k].nameFrag
+                                    .endl()+'  #define ATTRIB_'+this._attributes[k].nameFrag
+                                    .endl()+'  IN '+this._attributes[k].type+' '+this._attributes[k].nameFrag+';'
+                                    .endl()+'#endif';
+                            }
+                        }
+    
+                    }
+
+
 
                     srcHeadVert += modules[j].srcHeadVert || '';
                     srcHeadFrag += modules[j].srcHeadFrag || '';
@@ -656,6 +698,29 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
         // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
         .endl() + '}';
 };
+
+/**
+ * @function
+ * adds attribute definition to shader header without colliding with other shader modules...
+ * when attrFrag is defined, vertex shader will output this attribute to the fragment shader
+ * @name CGL.Shader#addAttribute
+ * @param {Object} attribObject {type:x,name:x,[nameFrag:x]}
+ * @return {Object}
+ */
+CGL.Shader.prototype.addAttribute = function(attr) {
+    for(var i=0;i<this._attributes.length;i++)
+    {
+        if(this._attributes[i].name==attr.name && this._attributes[i].nameFrag==attr.nameFrag)return;
+    }
+    this._attributes.push(attr);
+    this._needsRecompile = true;
+};
+
+
+
+
+
+// --------------------------
 
 CGL.Shader.getErrorFragmentShader = function() {
     return ''
