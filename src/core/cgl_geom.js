@@ -56,6 +56,21 @@ CGL.Geometry.prototype.getAttributes=function()
 
 /**
  * @function
+ * @name CGL.Geometry#getAttribute
+ * @param {string} name
+ * @return {Object}
+ */
+CGL.Geometry.prototype.getAttribute=function(name)
+{
+    for(var i in this._attributes)
+    {
+        if(this._attributes[i].name==name)return this._attributes[i];
+    }
+    return null;
+};
+
+/**
+ * @function
  * @description create an attribute
  * @name CGL.Geometry#setAttribute
  * @param {string} name
@@ -64,10 +79,17 @@ CGL.Geometry.prototype.getAttributes=function()
  */
 CGL.Geometry.prototype.setAttribute=function(name,arr,itemSize)
 {
+    var attrType='';
+    if(itemSize==1)attrType='float';
+    else if(itemSize==2)attrType='vec2';
+    else if(itemSize==3)attrType='vec3';
+    else if(itemSize==4)attrType='vec4';
+
     var attr={
         name:name,
         data:arr,
-        itemSize:itemSize
+        itemSize:itemSize,
+        type:attrType
     };
 
     this._attributes[name]=attr;

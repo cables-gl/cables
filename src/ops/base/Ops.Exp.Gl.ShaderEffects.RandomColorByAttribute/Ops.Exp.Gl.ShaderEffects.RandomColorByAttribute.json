@@ -1,8 +1,8 @@
 {
-    "updated": 1519657139146,
+    "updated": 1519657437052,
     "authorName": "pandur",
-    "id": "77f53ec6-058f-4ffe-9de7-b9282ea07532",
-    "created": 1517405944131,
+    "id": "28c8c024-3ac9-4fca-8276-77ca76f35ad8",
+    "created": 1519638909468,
     "layout": {
         "portsIn": [
             {
@@ -19,6 +19,14 @@
             },
             {
                 "type": "0",
+                "name": "Seed"
+            },
+            {
+                "type": "0",
+                "name": "Min"
+            },
+            {
+                "type": "0",
                 "name": "Max"
             }
         ],
@@ -28,6 +36,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Exp.Gl.ShaderEffects.LimitMeshByAttribute"
+        "name": "Ops.Exp.Gl.ShaderEffects.RandomColorByAttribute"
     }
 }

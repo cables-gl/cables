@@ -44,6 +44,7 @@ CGL.Shader = function(_cgl, _name) {
 
     this._modGroupCount = 0;
     this._feedBackNames = [];
+    this._attributes = [];
 
     this.glPrimitive = null;
     this.offScreenPass = false;
@@ -201,12 +202,12 @@ CGL.Shader = function(_cgl, _name) {
             attributeCount: 0
         };
 
-        console.log("shader uniforms");
+        // console.log("shader uniforms");
         for (i = 0; i < activeUniforms; i++) {
             var uniform = cgl.gl.getActiveUniform(this._program, i);
             uniform.typeName = enums[uniform.type];
             // result.uniforms.push(uniform);
-            console.log("  ", i, uniform.name, uniform.typeName);
+            // console.log("  ", i, uniform.name, uniform.typeName);
 
             result.uniformCount += uniform.size;
         }
@@ -332,6 +333,9 @@ CGL.Shader = function(_cgl, _name) {
         //     console.log(j,modules[j].title);
         // }
 
+        var addedAttributes=false;
+
+        console.log('----');
 
         for (i = 0; i < moduleNames.length; i++) {
             // console.log('moduleName',moduleNames[i]);
@@ -341,22 +345,64 @@ CGL.Shader = function(_cgl, _name) {
             for (var j = 0; j < modules.length; j++) {
                 if (modules[j].name == moduleNames[i]) {
 
-                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- MOD: '+modules[j].group+': '+modules[j].title+' ------\n\n';
-                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- MOD: '+modules[j].group+': '+modules[j].title+' ------\n\n';
+                    console.log(modules[j].name,modules[j].title);
 
-                    if(modules[j].srcHeadVert)srcVert+='\n\n//---- MOD: '+modules[j].title+' ------\n';
-                    if(modules[j].srcHeadFrag)srcFrag+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+                    srcHeadVert+='\n//---- MOD: '+modules[j].group+': '+j+' - '+modules[j].title+' ------\n';
+                    srcHeadFrag+='\n//---- MOD: '+modules[j].group+': '+j+' - '+modules[j].title+' ------\n';
 
-                    srcVert += modules[j].srcBodyVert || '';
-                    srcFrag += modules[j].srcBodyFrag || '';
+                    srcVert+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+                    srcFrag+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+
+                    
+                    if(!addedAttributes)
+                    {
+                        addedAttributes=true;
+
+                        for(var k=0;k<this._attributes.length;k++)
+                        {
+                            if(this._attributes[k].name && this._attributes[k].type)
+                            {
+                                srcHeadVert+=''
+                                    .endl()+'#ifndef ATTRIB_'+this._attributes[k].name
+                                    .endl()+'  #define ATTRIB_'+this._attributes[k].name
+                                    .endl()+'  IN '+this._attributes[k].type+' '+this._attributes[k].name+';'
+                                    .endl()+'#endif';
+    
+                                if(this._attributes[k].nameFrag)
+                                {
+                                    srcHeadVert+=''
+                                        .endl()+'#ifndef ATTRIB_'+this._attributes[k].nameFrag
+                                        .endl()+'  #define ATTRIB_'+this._attributes[k].nameFrag
+                                        .endl()+'  OUT '+this._attributes[k].type+' '+this._attributes[k].nameFrag+';'
+                                        .endl()+'#endif';
+    
+                                    srcVert+=''
+                                        .endl()+this._attributes[k].nameFrag+'='+this._attributes[k].name+';';
+    
+                                }
+    
+                                srcHeadFrag+=''
+                                    .endl()+'#ifndef ATTRIB_'+this._attributes[k].nameFrag
+                                    .endl()+'  #define ATTRIB_'+this._attributes[k].nameFrag
+                                    .endl()+'  IN '+this._attributes[k].type+' '+this._attributes[k].nameFrag+';'
+                                    .endl()+'#endif';
+                            }
+                        }
+    
+                    }
+
+
+
                     srcHeadVert += modules[j].srcHeadVert || '';
                     srcHeadFrag += modules[j].srcHeadFrag || '';
+                    srcVert += modules[j].srcBodyVert || '';
+                    srcFrag += modules[j].srcBodyFrag || '';
 
-                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- end mod ------\n';
-                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- end mod ------\n';
+                    srcHeadVert+='\n//---- end mod ------\n';
+                    srcHeadFrag+='\n//---- end mod ------\n';
 
-                    if(modules[j].srcHeadVert)srcVert+='\n//---- end mod ------\n';
-                    if(modules[j].srcHeadFrag)srcFrag+='\n//---- end mod ------\n';
+                    srcVert+='\n//---- end mod ------\n';
+                    srcFrag+='\n//---- end mod ------\n';
 
 
                     srcVert = srcVert.replace(/{{mod}}/g, modules[j].prefix);
@@ -537,14 +583,25 @@ CGL.Shader = function(_cgl, _name) {
      * @function
      */
     this.removeModule = function(mod) {
-        for (var i = 0; i < modules.length; i++) {
-            if (modules[i].id == mod.id || !modules[i]) {
-                modules.splice(i, 1);
-                break;
+
+        for (var i = 0; i < modules.length; i++)
+        {
+            if(mod && mod.id)
+            {
+                console.log(mod.id,modules[i].id);
+
+                if (modules[i].id == mod.id || !modules[i]) {
+                    console.log("removed module");
+                    this._needsRecompile = true;
+                    this.setWhyCompile("remove module "+mod.title);
+            
+                    modules.splice(i, 1);
+                    break;
+                }
+    
             }
         }
-        this._needsRecompile = true;
-        this.setWhyCompile("remove module "+mod.title);
+        console.log("could mod find module to remove");
     };
 
     /**
@@ -554,9 +611,11 @@ CGL.Shader = function(_cgl, _name) {
      * @function
      */
     this.addModule = function(mod, sibling) {
-        mod.id = CABLES.generateUUID();
-        mod.numId = moduleNumId;
-        mod.num = modules.length;
+        if(!mod.id) mod.id = CABLES.generateUUID();
+        if(!mod.numId) mod.numId = moduleNumId;
+        if(!mod.num)mod.num = modules.length;
+
+        console.log("add module",mod.title);
 
         if (sibling) mod.group = sibling.group;
             else mod.group = this._modGroupCount++;
@@ -639,6 +698,29 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
         // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
         .endl() + '}';
 };
+
+/**
+ * @function
+ * adds attribute definition to shader header without colliding with other shader modules...
+ * when attrFrag is defined, vertex shader will output this attribute to the fragment shader
+ * @name CGL.Shader#addAttribute
+ * @param {Object} attribObject {type:x,name:x,[nameFrag:x]}
+ * @return {Object}
+ */
+CGL.Shader.prototype.addAttribute = function(attr) {
+    for(var i=0;i<this._attributes.length;i++)
+    {
+        if(this._attributes[i].name==attr.name && this._attributes[i].nameFrag==attr.nameFrag)return;
+    }
+    this._attributes.push(attr);
+    this._needsRecompile = true;
+};
+
+
+
+
+
+// --------------------------
 
 CGL.Shader.getErrorFragmentShader = function() {
     return ''
