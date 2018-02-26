@@ -43,5 +43,41 @@
     "authorName": "pandur",
     "id": "3f7db864-7409-418f-8c03-b2c966c050b3",
     "created": 1513865904150,
-    "summary": "Iterates over an array in steps of three and outputs three values"
+    "summary": "Iterates over an array in steps of three and outputs three values",
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Starts the iteration"
+            },
+            {
+                "name": "Array",
+                "text": "The array to iterate over"
+            },
+            {
+                "name": "Step",
+                "text": "If bigger then `1`, values will be skipped, e.g. when `Step` is `2` every other triplet will be skipped"
+            },
+            {
+                "name": "Trigger",
+                "text": "Triggers for every iteration step (triplet in the array)"
+            },
+            {
+                "name": "Index",
+                "text": "The index of the triplet"
+            },
+            {
+                "name": "Value 1",
+                "text": "First value of the current triplet (e.g. x)"
+            },
+            {
+                "name": "Value 2",
+                "text": "Second value of the current triplet (e.g. y)"
+            },
+            {
+                "name": "Value 3",
+                "text": "Third value of the current triplet (e.g. z)"
+            }
+        ]
+    }
 }

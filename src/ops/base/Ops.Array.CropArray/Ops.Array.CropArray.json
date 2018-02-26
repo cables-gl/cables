@@ -1,1 +1,42 @@
-{}
+{
+    "updated": 1519667584197,
+    "authorName": "tim",
+    "id": "d8deecd3-418f-43dd-8edb-dfe238b5327c",
+    "created": 1519667584199,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Source Array"
+            },
+            {
+                "type": "0",
+                "name": "New Length"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Cropped Array"
+            }
+        ],
+        "name": "Ops.Array.CropArray"
+    },
+    "summary": "Crops an array (makes a shallow copy first)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Source Array",
+                "text": "The array to crop"
+            },
+            {
+                "name": "New Length",
+                "text": "The length the new array should have"
+            },
+            {
+                "name": "Cropped Array",
+                "text": "The cropped array with new length, the source array stays untouched"
+            }
+        ]
+    }
+}
