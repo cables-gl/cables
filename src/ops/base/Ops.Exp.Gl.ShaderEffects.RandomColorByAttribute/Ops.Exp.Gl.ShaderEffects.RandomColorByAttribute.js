@@ -17,6 +17,7 @@ var attribs=null;
 
 var startTime=Date.now()/1000.0;
 render.onLinkChanged=removeModule;
+trigger.onLinkChanged=removeModule;
 needsCodeUpdate=true;
 
 var moduleFrag=null;
@@ -27,13 +28,14 @@ var uniTime;
 
 function removeModule()
 {
-    if(shader && module)
+    if(shader)
     {
         shader.removeModule(module);
         shader.removeModule(moduleFrag);
 
         shader=null;
     }
+    needsCodeUpdate=true;
 }
 
 inAttrib.onChange=function()
@@ -78,8 +80,8 @@ function updateCode()
 
     srcHeadFrag=''
         .endl()+'UNI float MOD_seed;'
-        .endl()+'#ifndef ATTRIB_'+attrName+''
-        .endl()+'#define ATTRIB_attrSubmesh'
+        .endl()+'#ifndef ATTRIB_'+attrName+'Frag'
+        .endl()+'#define ATTRIB_attrSubmeshFrag'
         .endl()+'IN '+attrType+' '+attrName+'Frag;'
         .endl()+'#endif'
         
@@ -97,8 +99,6 @@ function updateCode()
         .endl()+'col.rgb*= (MOD_rand(vec2(MOD_coord))*(MOD_max-MOD_min))+MOD_min ;'
         .endl();
     
-    if(shader)shader.dispose();
-    shader=null;
     
     needsCodeUpdate=false;
 }
@@ -131,12 +131,18 @@ inGeom.onChange=function()
 
 render.onTriggered=function()
 {
-    if(needsCodeUpdate)updateCode();
-    
-    if(cgl.getShader()!=shader)
+    if(!cgl.getShader())return;
+    if(cgl.getShader()!=shader || needsCodeUpdate  || !srcHeadVert || !srcBodyVert || !srcHeadFrag || !srcBodyFrag)
     {
-        if(shader) removeModule();
+        removeModule();
         shader=cgl.getShader();
+        if(!shader)return;
+        
+        if(needsCodeUpdate|| !srcHeadVert || !srcBodyVert || !srcHeadFrag || !srcBodyFrag)
+        {
+            updateCode();
+        }
+
         module=shader.addModule(
             {
                 title:op.objName,

@@ -14,6 +14,7 @@ var attribs=null;
 
 var startTime=Date.now()/1000.0;
 render.onLinkChanged=removeModule;
+trigger.onLinkChanged=removeModule;
 needsCodeUpdate=true;
 
 var cgl=op.patch.cgl;
@@ -25,13 +26,14 @@ var module=null;
 
 function removeModule()
 {
-    if(shader && module)
+    if(shader)
     {
         shader.removeModule(module);
         shader.removeModule(moduleFrag);
 
         shader=null;
     }
+    needsCodeUpdate=true;
 }
 
 inAttrib.onChange=function()
@@ -58,9 +60,14 @@ function updateCode()
     if(attrName==='')return;
 
     srcHeadVert=''
+
+        .endl()+'#ifndef ATTRIB_'+attrName+'Frag'
+        .endl()+'#define ATTRIB_attrSubmeshFrag'
+        .endl()+'OUT '+attrType+' '+attrName+'Frag;'
+        .endl()+'#endif'
+
         .endl()+'#ifndef ATTRIB_'+attrName+''
         .endl()+'#define ATTRIB_attrSubmesh'
-        .endl()+'OUT '+attrType+' '+attrName+'Frag;'
         .endl()+'IN '+attrType+' '+attrName+';'
         .endl()+'#endif'
         .endl();
@@ -71,8 +78,8 @@ function updateCode()
 
     srcHeadFrag=''
         .endl()+'UNI float MOD_max;'
-        .endl()+'#ifndef ATTRIB_'+attrName+''
-        .endl()+'#define ATTRIB_attrSubmesh'
+        .endl()+'#ifndef ATTRIB_'+attrName+'Frag'
+        .endl()+'#define ATTRIB_attrSubmeshFrag'
         .endl()+'IN '+attrType+' '+attrName+'Frag;'
         .endl()+'#endif'
         .endl();
@@ -81,8 +88,6 @@ function updateCode()
         .endl()+'if('+attrName+'Frag>=MOD_max)discard;'
         .endl();
     
-    if(shader)shader.dispose();
-    shader=null;
     
     needsCodeUpdate=false;
 }
@@ -111,16 +116,25 @@ inGeom.onChange=function()
         attribs=null;
     }
     updateAttribSelect();
+    
 };
 
 render.onTriggered=function()
 {
-    if(needsCodeUpdate)updateCode();
+
     
-    if(cgl.getShader()!=shader)
+    if(cgl.getShader()!=shader || needsCodeUpdate || !srcHeadVert || !srcBodyVert || !srcHeadFrag || !srcBodyFrag)
     {
         if(shader) removeModule();
         shader=cgl.getShader();
+        if(!shader)return;
+        
+        if(needsCodeUpdate|| !srcHeadVert || !srcBodyVert || !srcHeadFrag || !srcBodyFrag)
+        {
+            updateCode();
+        }
+
+        shader.removeModule(module);
         module=shader.addModule(
             {
                 title:op.objName,
@@ -129,6 +143,7 @@ render.onTriggered=function()
                 srcBodyVert:srcBodyVert
             });
 
+        shader.removeModule(moduleFrag);
         moduleFrag=shader.addModule(
             {
                 title:op.objName,

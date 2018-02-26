@@ -201,12 +201,12 @@ CGL.Shader = function(_cgl, _name) {
             attributeCount: 0
         };
 
-        console.log("shader uniforms");
+        // console.log("shader uniforms");
         for (i = 0; i < activeUniforms; i++) {
             var uniform = cgl.gl.getActiveUniform(this._program, i);
             uniform.typeName = enums[uniform.type];
             // result.uniforms.push(uniform);
-            console.log("  ", i, uniform.name, uniform.typeName);
+            // console.log("  ", i, uniform.name, uniform.typeName);
 
             result.uniformCount += uniform.size;
         }
@@ -333,6 +333,8 @@ CGL.Shader = function(_cgl, _name) {
         // }
 
 
+        console.log('----');
+
         for (i = 0; i < moduleNames.length; i++) {
             // console.log('moduleName',moduleNames[i]);
             var srcVert = '';
@@ -341,22 +343,24 @@ CGL.Shader = function(_cgl, _name) {
             for (var j = 0; j < modules.length; j++) {
                 if (modules[j].name == moduleNames[i]) {
 
-                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- MOD: '+modules[j].group+': '+modules[j].title+' ------\n\n';
-                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- MOD: '+modules[j].group+': '+modules[j].title+' ------\n\n';
+                    console.log(modules[j].name,modules[j].title);
 
-                    if(modules[j].srcHeadVert)srcVert+='\n\n//---- MOD: '+modules[j].title+' ------\n';
-                    if(modules[j].srcHeadFrag)srcFrag+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+                    srcHeadVert+='\n//---- MOD: '+modules[j].group+': '+j+' - '+modules[j].title+' ------\n';
+                    srcHeadFrag+='\n//---- MOD: '+modules[j].group+': '+j+' - '+modules[j].title+' ------\n';
 
-                    srcVert += modules[j].srcBodyVert || '';
-                    srcFrag += modules[j].srcBodyFrag || '';
+                    srcVert+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+                    srcFrag+='\n\n//---- MOD: '+modules[j].title+' ------\n';
+
                     srcHeadVert += modules[j].srcHeadVert || '';
                     srcHeadFrag += modules[j].srcHeadFrag || '';
+                    srcVert += modules[j].srcBodyVert || '';
+                    srcFrag += modules[j].srcBodyFrag || '';
 
-                    if(modules[j].srcBodyVert)srcHeadVert+='\n//---- end mod ------\n';
-                    if(modules[j].srcBodyFrag)srcHeadFrag+='\n//---- end mod ------\n';
+                    srcHeadVert+='\n//---- end mod ------\n';
+                    srcHeadFrag+='\n//---- end mod ------\n';
 
-                    if(modules[j].srcHeadVert)srcVert+='\n//---- end mod ------\n';
-                    if(modules[j].srcHeadFrag)srcFrag+='\n//---- end mod ------\n';
+                    srcVert+='\n//---- end mod ------\n';
+                    srcFrag+='\n//---- end mod ------\n';
 
 
                     srcVert = srcVert.replace(/{{mod}}/g, modules[j].prefix);
@@ -537,14 +541,25 @@ CGL.Shader = function(_cgl, _name) {
      * @function
      */
     this.removeModule = function(mod) {
-        for (var i = 0; i < modules.length; i++) {
-            if (modules[i].id == mod.id || !modules[i]) {
-                modules.splice(i, 1);
-                break;
+
+        for (var i = 0; i < modules.length; i++)
+        {
+            if(mod && mod.id)
+            {
+                console.log(mod.id,modules[i].id);
+
+                if (modules[i].id == mod.id || !modules[i]) {
+                    console.log("removed module");
+                    this._needsRecompile = true;
+                    this.setWhyCompile("remove module "+mod.title);
+            
+                    modules.splice(i, 1);
+                    break;
+                }
+    
             }
         }
-        this._needsRecompile = true;
-        this.setWhyCompile("remove module "+mod.title);
+        console.log("could mod find module to remove");
     };
 
     /**
@@ -554,9 +569,11 @@ CGL.Shader = function(_cgl, _name) {
      * @function
      */
     this.addModule = function(mod, sibling) {
-        mod.id = CABLES.generateUUID();
-        mod.numId = moduleNumId;
-        mod.num = modules.length;
+        if(!mod.id) mod.id = CABLES.generateUUID();
+        if(!mod.numId) mod.numId = moduleNumId;
+        if(!mod.num)mod.num = modules.length;
+
+        console.log("add module",mod.title);
 
         if (sibling) mod.group = sibling.group;
             else mod.group = this._modGroupCount++;
