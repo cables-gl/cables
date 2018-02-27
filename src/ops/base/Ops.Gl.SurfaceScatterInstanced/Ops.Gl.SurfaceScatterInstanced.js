@@ -221,37 +221,58 @@ function doRender()
     if(!inGeomSurface.get())return;
     if(!geom.get())return;
 
-    if(cgl.getShader() && cgl.getShader()!=shader)
+    if(op.patch.cgl.glVersion>=2) 
     {
-        if(shader && mod)
+        if(cgl.getShader() && cgl.getShader()!=shader)
         {
-            shader.removeModule(mod);
-            shader=null;
+            if(shader && mod)
+            {
+                shader.removeModule(mod);
+                shader=null;
+            }
+    
+            shader=cgl.getShader();
+            if(!shader.hasDefine('INSTANCING'))
+            {
+                mod=shader.addModule(
+                    {
+                        name: 'MODULE_VERTEX_POSITION',
+                        priority:-2,
+                        srcHeadVert: srcHeadVert,
+                        srcBodyVert: srcBodyVert
+                    });
+    
+                shader.define('INSTANCING');
+                uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
+                // uniScale=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
+            }
+            else
+            {
+                uniDoInstancing=shader.getUniform('do_instancing');
+            }
+            setup();
         }
-
-        shader=cgl.getShader();
-        if(!shader.hasDefine('INSTANCING'))
-        {
-            mod=shader.addModule(
-                {
-                    name: 'MODULE_VERTEX_POSITION',
-                    priority:-2,
-                    srcHeadVert: srcHeadVert,
-                    srcBodyVert: srcBodyVert
-                });
-
-            shader.define('INSTANCING');
-            uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
-            // uniScale=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
-        }
-        else
-        {
-            uniDoInstancing=shader.getUniform('do_instancing');
-        }
-        setup();
+    
+        uniDoInstancing.setValue(1);
+        mesh.render(shader);
+        uniDoInstancing.setValue(0);
     }
+    else
+    {
+        // fallback - SLOW
+ 
+        for(var i=0;i<matrixArray.length;i+=16)
+        {
+            op.patch.cgl.pushModelMatrix();
+            
+            for(var j=0;j<16;j++)
+                op.patch.cgl.mvMatrix[j]=matrixArray[i+j];
 
-    uniDoInstancing.setValue(1);
-    mesh.render(shader);
-    uniDoInstancing.setValue(0);
+            mesh.render(cgl.getShader());
+            op.patch.cgl.popModelMatrix();
+        }
+        
+        
+        
+    }
 }

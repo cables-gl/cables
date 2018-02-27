@@ -32,7 +32,6 @@ void main()
 
 
     
-//     /* randomize the lookup values to hide the fixed number of samples */
     float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);
 
 

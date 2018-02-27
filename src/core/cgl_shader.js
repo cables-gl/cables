@@ -226,15 +226,14 @@ CGL.Shader = function(_cgl, _name) {
 
     this.compile = function() {
 
-
-
         CGL.profileShaderCompiles++;
         CGL.profileShaderCompileName = name;
 
         var extensionString = '';
         if (this._extensions)
             for (i = 0; i < this._extensions.length; i++) {
-                extensionString += '#extension GL_OES_standard_derivatives : enable'.endl();
+                extensionString += '#extension '+this._extensions[i]+' : enable'.endl();
+                console.log("ENABLE EXTENSION"+this._extensions[i])
             }
 
         var definesStr = '';
@@ -335,7 +334,6 @@ CGL.Shader = function(_cgl, _name) {
 
         var addedAttributes=false;
 
-        console.log('----');
 
         for (i = 0; i < moduleNames.length; i++) {
             // console.log('moduleName',moduleNames[i]);
@@ -672,6 +670,8 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + '   texCoord=attrTexCoord;'
         .endl() + '   norm=attrVertNormal;'
         .endl() + '   vec4 pos=vec4(vPosition,  1.0);'
+        .endl() + '   mat4 mMatrix=modelMatrix;'
+        
         .endl() + '   {{MODULE_VERTEX_POSITION}}'
 
         .endl() + '   gl_Position = projMatrix * mvMatrix * pos;'

@@ -1,13 +1,16 @@
 //https://jmonkeyengine.github.io/wiki/jme3/advanced/pbr_part3.html
 //https://learnopengl.com/PBR/IBL/Diffuse-irradiance
 
-op.name='CubeMapMaterial';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
+var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var inMiplevel=op.inValueSlider("Mip Level",0.0);
 var inCubemap=op.inObject("Cubemap");
 
 var mapReflect=op.inValueBool("Reflection",true);
 mapReflect.onChange=updateMapping;
+
+
+
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -44,6 +47,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 op.onLoaded=shader.compile;
 
 shader.setSource(srcVert,srcFrag);
+inMiplevel.uniform=new CGL.Uniform(shader,'f','miplevel',inMiplevel);
 
 render.onTriggered=doRender;
 updateMapping();

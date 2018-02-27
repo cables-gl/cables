@@ -22,12 +22,14 @@ var uniPos=new CGL.Uniform(shader,'f','pos',inPos);
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if(!inGradient.get())return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
 
     cgl.gl.activeTexture(cgl.gl.TEXTURE1);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inGradient.get().tex );

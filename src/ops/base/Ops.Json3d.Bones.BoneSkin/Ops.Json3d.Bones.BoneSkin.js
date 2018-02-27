@@ -139,7 +139,7 @@ render.onTriggered=function()
         console.log("NEW SHADER!");
     }
 
-    if(mesh && scene && scene.meshes && scene.meshes.length>meshIndex)
+    if( (mesh && scene && scene.meshes && scene.meshes.length>meshIndex) || cgl.getShader()!=shader)
     {
         if(cgl.getShader()!=shader)
         {

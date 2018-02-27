@@ -20,6 +20,7 @@ var amountBrightUniform=new CGL.Uniform(shader,'f','amountbright',amountBright);
 
 render.onTriggered=function()
 {
+    if(!cgl.currentTextureEffect.getCurrentSourceTexture()) return;
     if(!cgl.currentTextureEffect)return;
 
     cgl.setShader(shader);

@@ -1,4 +1,3 @@
-op.name="InterpolateValueChange";
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var inValue=op.inValue("Value");
@@ -22,27 +21,21 @@ function init()
     anim.clear(CABLES.now()/1000.0);
     // anim.setValue(CABLES.now()/1000.0, inStart.get());
     anim.setValue(
-        duration.get()+CABLES.now()/1000.0, inValue.get());
-    finished.set(false);
-    
-    
+        duration.get()+CABLES.now()/1000.0, inValue.get(),triggerFinished);
 
+}
+
+function triggerFinished()
+{
+    finished.trigger();    
 }
 
 
 exe.onTriggered=function()
 {
-    // if(waitForReset.get() && !resetted) 
-    // {
-    //     result.set(inStart.get());
-    //     return;
-    // }
     var t=CABLES.now()/1000;
     var v=anim.getValue(t);
-    if(anim.hasEnded(t))
-    {
-        finished.set(true);
-    }
+
     result.set(v);
 };
 

@@ -2,7 +2,7 @@
 
 *Ops.Api.ThingSpeak.ReadEntries*  
 
-Reads the last entries from [ThingSpeak](https://thingspeak.com), it will not return all entries.
+Reads the most recent entries from [ThingSpeak](https://thingspeak.com)
 
 ## Input
 
