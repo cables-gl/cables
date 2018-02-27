@@ -3,8 +3,6 @@ var inGeom=op.inObject("geometry");
 
 var inSort=op.inValueSelect("Sort",["None","Z"],"None");
 
-
-
 var outMin=op.outValue("Min Value");
 var outMax=op.outValue("Max Value");
 

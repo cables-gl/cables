@@ -45,17 +45,20 @@ function load()
         urls.push(fn);
     }
     
+    console.log(urls);
+    
     var noerror=0;
 
     for(i = 0; i < 6; i++)
     {
         img[i] = new Image();
+        img[i].crossOrigin = '';
         img[i].onload = function()
         {
             ct++;
             if (ct == 6)
             {
-                setTimeout(function(){
+                // setTimeout(function(){
 
                 skyboxCubemap = gl.createTexture();
                 gl.bindTexture(gl.TEXTURE_CUBE_MAP, skyboxCubemap);
@@ -81,8 +84,9 @@ function load()
                     return;
                 }
                 gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
+                gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
                 if(noerror===0) op.uiAttr({'error':null});
-                },1000);
+                // },1000);
 
             }
         };
@@ -92,7 +96,9 @@ function load()
             console.log("error while loading cube texture...");
             op.uiAttr({'error':'onerr could not load cubemap texture  '});
         };
+        
         img[i].src = urls[i];
+        
     }
 
     

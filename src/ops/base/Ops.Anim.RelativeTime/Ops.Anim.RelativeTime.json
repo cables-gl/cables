@@ -18,5 +18,17 @@
             }
         ],
         "name": "Ops.Anim.RelativeTime"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Executes the op"
+            },
+            {
+                "name": "result",
+                "text": "The time the patch is running (in seconds), e.g. 22.567"
+            }
+        ]
     }
 }

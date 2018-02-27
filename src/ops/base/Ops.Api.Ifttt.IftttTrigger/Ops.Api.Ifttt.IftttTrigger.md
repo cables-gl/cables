@@ -1,7 +1,3 @@
-# IFTTTTrigger
-
-*Ops.Net.Ifttt.IftttTrigger*  
-
 With this op you can trigger an applet on [IFTTT](https://ifttt.com/maker) to send an email, post to Facebook, turn on connected light bulbs and stuff like that.  
 Create a new applet on [IFTTT](https://ifttt.com/create), search for `Maker`, then select  `Maker` as the trigger channel (the `if`-channel), select ` Receive a web request` enter an event-name (e.g. `button_pressed`) and press `Create trigger` to save the applet. Now you have to think about what should happen when the event is fired – press the `then`-button and create an action (e.g. send an email).
 

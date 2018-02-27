@@ -19,5 +19,17 @@
         ],
         "name": "Ops.Array.Array3xReverse"
     },
-    "summary": "Reverses an array with value triplets [x, y, z, ...]"
+    "summary": "Reverses an array with value triplets [x, y, z, ...]",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The Array you want to reverse (containing triplets)"
+            },
+            {
+                "name": "Reversed Array",
+                "text": "The reversed Array"
+            }
+        ]
+    }
 }

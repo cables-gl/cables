@@ -1,1 +1,0 @@
-Iterates over an array in steps of three and outputs three values
