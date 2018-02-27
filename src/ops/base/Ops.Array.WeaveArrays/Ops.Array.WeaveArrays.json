@@ -26,5 +26,25 @@
         ],
         "name": "Ops.Array.CombineArrays"
     },
-    "summary": "Weaves two arrays together (combine, join, merge)"
+    "summary": "Weaves two arrays together (combine, join, merge)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array 1",
+                "text": "The first array"
+            },
+            {
+                "name": "Array 2",
+                "text": "The second array"
+            },
+            {
+                "name": "Chunk Size",
+                "text": "How many elements will be used from each array in a chunk, e.g. when set to `1` the resulting array will contain one element from `Array 1`, one from `Array 2`, then one from `Array 1` again and so on"
+            },
+            {
+                "name": "Combined Array",
+                "text": "The combined (weaved) array"
+            }
+        ]
+    }
 }

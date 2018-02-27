@@ -1,5 +1,5 @@
 {
-    "summary": "Reduce an Array by copying only every xth value",
+    "summary": "Reduce an array by copying only every xth value",
     "layout": {
         "portsIn": [
             {
@@ -22,5 +22,25 @@
             }
         ],
         "name": "Ops.Array.ReduceArray3x"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The source array"
+            },
+            {
+                "name": "Every xth Item",
+                "text": "When set to `1` source and result array will be identical, when set to `2` result array contains half the number of items of the source array and so on"
+            },
+            {
+                "name": "Max Index",
+                "text": "If set to anything other than `0` the resulting array will contain `Max Index` value triplets at max"
+            },
+            {
+                "name": "Result Array",
+                "text": "The new array containing only a subset of elements"
+            }
+        ]
     }
 }

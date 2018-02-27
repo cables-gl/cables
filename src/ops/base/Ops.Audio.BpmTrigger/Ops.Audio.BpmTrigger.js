@@ -6,7 +6,7 @@ var trigger=op.inFunction("trigger");
 var inBpm=op.inValue("BPM",120);
 var inOffset=op.inValue("Offset",0);
 
-var next=op.outFunction("trigger");
+var next=op.outFunction("trigger out");
 var outBeat=op.outValue("beat num");
 var outPerc=op.outValue("percent");
 

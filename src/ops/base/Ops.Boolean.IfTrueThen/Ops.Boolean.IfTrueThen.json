@@ -1,5 +1,5 @@
 {
-    "summary": "Decide what to trigger if value is true or false",
+    "summary": "Switch, trigger one or the other trigger port based on the input value",
     "layout": {
         "portsIn": [
             {
@@ -22,5 +22,25 @@
             }
         ],
         "name": "Ops.Boolean.IfTrueThen"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Executes the op"
+            },
+            {
+                "name": "boolean",
+                "text": "The boolean value to check for truthyness"
+            },
+            {
+                "name": "then",
+                "text": "Triggers when the input value is `true`"
+            },
+            {
+                "name": "else",
+                "text": "Triggers when the input value is `false`"
+            }
+        ]
     }
 }

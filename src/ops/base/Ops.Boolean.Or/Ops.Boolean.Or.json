@@ -1,5 +1,5 @@
 {
-    "summary": "outputs true if one or more of the input booleans are true",
+    "summary": "Returns `true` if one or more of the input booleans are `true`",
     "layout": {
         "portsIn": [
             {
@@ -42,5 +42,13 @@
             }
         ],
         "name": "Ops.Boolean.Or"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "result",
+                "text": "`True` if one or more of the input ports is `true`, `false` otherwise"
+            }
+        ]
     }
 }

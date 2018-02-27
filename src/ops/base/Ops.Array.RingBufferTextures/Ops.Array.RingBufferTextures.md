@@ -1,0 +1,1 @@
+Similar to Ops.Array.RingBuffer but for textures.

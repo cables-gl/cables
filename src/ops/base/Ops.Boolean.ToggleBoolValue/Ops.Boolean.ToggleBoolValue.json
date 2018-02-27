@@ -1,5 +1,5 @@
 {
-    "summary": "invert a boolean value (negate, flip,not)",
+    "summary": "Inverts a boolean value (negate, flip, not)",
     "layout": {
         "portsIn": [
             {
@@ -14,5 +14,17 @@
             }
         ],
         "name": "Ops.Boolean.ToggleBoolValue"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "in bool",
+                "text": "The boolean value to invert "
+            },
+            {
+                "name": "out bool",
+                "text": "The opposite to `In Bool`"
+            }
+        ]
     }
 }

@@ -26,5 +26,29 @@
             }
         ],
         "name": "Ops.Array.RandomArray"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "numValues",
+                "text": "Number of random values and the length of the resulting array"
+            },
+            {
+                "name": "random seed",
+                "text": "A random seed always generates the same numbers. set to 0 to get random values every time"
+            },
+            {
+                "name": "Min",
+                "text": "Minimum value of generated random numbers"
+            },
+            {
+                "name": "Max",
+                "text": "Maximum value of generated random numbers"
+            },
+            {
+                "name": "values",
+                "text": "The resulting array"
+            }
+        ]
     }
 }

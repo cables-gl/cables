@@ -23,5 +23,21 @@
         ],
         "name": "Ops.Boolean.TriggerOnChange"
     },
-    "summary": "trigger when boolean value has changed"
+    "summary": "Triggers when boolean value has changed",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The boolean value to watch for change"
+            },
+            {
+                "name": "False",
+                "text": "Triggers when `Value` became `false`"
+            },
+            {
+                "name": "True",
+                "text": "Triggers when `Value` became `true`"
+            }
+        ]
+    }
 }

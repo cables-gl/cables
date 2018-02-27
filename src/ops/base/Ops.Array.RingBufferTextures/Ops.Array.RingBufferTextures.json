@@ -33,5 +33,26 @@
             }
         ],
         "name": "Ops.Array.RingBufferTextures"
+    },
+    "summary": "Stores various textures in an array, starts at the beginning again when end reached",
+    "docs": {
+        "ports": [
+            {
+                "name": "Texture",
+                "text": "The texture to add to the buffer"
+            },
+            {
+                "name": "Num",
+                "text": "The size of the ring buffer (how many textures it can hold)"
+            },
+            {
+                "name": "Write",
+                "text": "Writes the `Texture` to the buffer"
+            },
+            {
+                "name": "Result",
+                "text": "The array containing the textures"
+            }
+        ]
     }
 }

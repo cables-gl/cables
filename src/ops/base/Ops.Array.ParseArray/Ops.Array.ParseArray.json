@@ -30,9 +30,37 @@
         ],
         "name": "Ops.Array.ParseArray"
     },
-    "summary": "parse a string into an array",
+    "summary": "Parse a string into an array (create)",
     "updated": 1517954951893,
     "authorName": "pandur",
     "id": "6d6bd309-fb4b-4eed-9a05-5a1cd93f2a05",
-    "created": 1517954950220
+    "created": 1517954950220,
+    "docs": {
+        "ports": [
+            {
+                "name": "text",
+                "text": "The array-data you want to use, e.g. `100,200,300`"
+            },
+            {
+                "name": "separator",
+                "text": "The separator to use, e.g. `,` (comma) when your text is `foo,bar,baz`"
+            },
+            {
+                "name": "Numbers",
+                "text": "If set, the values inside the array will be interpreted as numbers (not strings)"
+            },
+            {
+                "name": "Parsed",
+                "text": "Triggers once the array has been parsed"
+            },
+            {
+                "name": "array",
+                "text": "The parsed array"
+            },
+            {
+                "name": "length",
+                "text": "The length of the parsed array"
+            }
+        ]
+    }
 }

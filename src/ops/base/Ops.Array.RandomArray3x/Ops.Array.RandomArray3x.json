@@ -30,9 +30,29 @@
         ],
         "name": "Ops.Array.RandomArray3x"
     },
-    "summary": "a random array of numbers",
+    "summary": "Generates a random array of numbers",
     "updated": 1518450606154,
     "authorName": "pandur",
     "id": "7f981578-542e-417b-b304-8fbe41258772",
-    "created": 1515883841358
+    "created": 1515883841358,
+    "docs": {
+        "ports": [
+            {
+                "name": "numValues",
+                "text": "The number of value triplets to generate"
+            },
+            {
+                "name": "random seed",
+                "text": "When set to `0` the array will be different every time the patch is run, set to another value to have the same output every time"
+            },
+            {
+                "name": "Min",
+                "text": "The minimum for the generated values"
+            },
+            {
+                "name": "Max",
+                "text": "The maximum for the generated values"
+            }
+        ]
+    }
 }

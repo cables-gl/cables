@@ -1,7 +1,24 @@
 {
-    "updated": 1518601905094,
+    "updated": 1519731296228,
     "authorName": "pandur",
     "id": "98057c3a-f6ec-48a6-8e8a-4b8316a0dcf1",
     "created": 1518601905096,
-    "summary": "an array filled with random english words"
+    "summary": "Generates an array filled with random english words",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Words"
+            }
+        ],
+        "name": "Ops.Array.RandomWordsArray"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Words",
+                "text": "The array with random words"
+            }
+        ]
+    }
 }

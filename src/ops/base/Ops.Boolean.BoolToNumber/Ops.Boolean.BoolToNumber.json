@@ -1,5 +1,5 @@
 {
-    "summary": "outputs 0 for false  1 for true",
+    "summary": "Outputs `0` for `false` and `1` for `true` (converter, boolean)",
     "layout": {
         "portsIn": [
             {
@@ -14,5 +14,17 @@
             }
         ],
         "name": "Ops.Boolean.BoolToNumber"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "bool",
+                "text": "The boolean value to convert"
+            },
+            {
+                "name": "number",
+                "text": "The converted boolean value as a number, either `0` or `1`"
+            }
+        ]
     }
 }

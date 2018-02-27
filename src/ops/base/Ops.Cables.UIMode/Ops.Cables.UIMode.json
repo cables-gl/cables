@@ -1,5 +1,5 @@
 {
-    "summary": "outputs true if patch is executed in the cables editor ui",
+    "summary": "Outputs `true` if patch is executed in the cables editor (UI)",
     "layout": {
         "portsOut": [
             {
@@ -8,5 +8,13 @@
             }
         ],
         "name": "Ops.Cables.UIMode"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "UI",
+                "text": "`True` is the patch is viewed inside the cables editor"
+            }
+        ]
     }
 }

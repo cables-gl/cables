@@ -30,5 +30,33 @@
         ],
         "name": "Ops.Date.Date"
     },
-    "summary": "calculates the timestamp of a date by year/month/day/hour/minute"
+    "summary": "Calculates the timestamp of a date by year / month / day / hour / minute",
+    "docs": {
+        "ports": [
+            {
+                "name": "Year",
+                "text": "The year"
+            },
+            {
+                "name": "Month",
+                "text": "The month"
+            },
+            {
+                "name": "Day",
+                "text": "The day"
+            },
+            {
+                "name": "Hour",
+                "text": "The hour"
+            },
+            {
+                "name": "Minute",
+                "text": "The minute"
+            },
+            {
+                "name": "Timestamp",
+                "text": "The timestamp"
+            }
+        ]
+    }
 }

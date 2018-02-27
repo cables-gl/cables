@@ -34,8 +34,33 @@
         ],
         "name": "Ops.Array.RingBuffer"
     },
-    "summary": "array of fixed size, index is automatically incremented and restarts after reaching the end",
+    "summary": "Array of fixed size, index is automatically incremented and restarts after reaching the end",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The value to add"
+            },
+            {
+                "name": "Write",
+                "text": "Writes the value to the array"
+            },
+            {
+                "name": "Length",
+                "text": "The length of the array"
+            },
+            {
+                "name": "Reset Index",
+                "text": "Resets the index, so the next time `Write` is triggered it will write to the beginning of the buffer"
+            },
+            {
+                "name": "Result",
+                "text": "The output array"
+            },
+            {
+                "name": "Index",
+                "text": "The index of the last element which has been written to the buffer"
+            }
+        ]
     }
 }

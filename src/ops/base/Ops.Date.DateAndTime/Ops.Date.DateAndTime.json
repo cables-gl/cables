@@ -1,5 +1,5 @@
 {
-    "summary": "Get current date and time",
+    "summary": "Returns current date and time",
     "layout": {
         "portsIn": [
             {
@@ -38,5 +38,41 @@
             }
         ],
         "name": "Ops.DateAndTime"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Update Rate",
+                "text": "How often the op should update the output (in milliseconds)"
+            },
+            {
+                "name": "Year",
+                "text": "The current year"
+            },
+            {
+                "name": "Month",
+                "text": "The current month"
+            },
+            {
+                "name": "Day",
+                "text": "The current day"
+            },
+            {
+                "name": "Hours",
+                "text": "The current hour"
+            },
+            {
+                "name": "Minutes",
+                "text": "The current minute"
+            },
+            {
+                "name": "Seconds",
+                "text": "The current second"
+            },
+            {
+                "name": "Timestamp",
+                "text": "The current timestamp"
+            }
+        ]
     }
 }

@@ -1,5 +1,5 @@
 {
-    "summary": "convert array to string, values divided by a seperator",
+    "summary": "Convert an array to a string, divided by a separator",
     "updated": 1518868113801,
     "authorName": "pandur",
     "id": "7b27f5e9-5599-48d0-bb33-bc74d53784ac",
@@ -22,5 +22,21 @@
             }
         ],
         "name": "Ops.Array.ToString"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array to convert to a string"
+            },
+            {
+                "name": "separator",
+                "text": "What character to use to separate the values, e.g. `,` (comma) – `[1, 2, 3]` —> `\"1,2,3\"`"
+            },
+            {
+                "name": "string",
+                "text": "The resulting string representation of the array"
+            }
+        ]
     }
 }
