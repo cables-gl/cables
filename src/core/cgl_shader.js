@@ -226,8 +226,6 @@ CGL.Shader = function(_cgl, _name) {
 
     this.compile = function() {
 
-
-
         CGL.profileShaderCompiles++;
         CGL.profileShaderCompileName = name;
 
@@ -235,7 +233,7 @@ CGL.Shader = function(_cgl, _name) {
         if (this._extensions)
             for (i = 0; i < this._extensions.length; i++) {
                 extensionString += '#extension '+this._extensions[i]+' : enable'.endl();
-                console.log("ENABLE EXTENSION"+name)
+                console.log("ENABLE EXTENSION"+this._extensions[i])
             }
 
         var definesStr = '';

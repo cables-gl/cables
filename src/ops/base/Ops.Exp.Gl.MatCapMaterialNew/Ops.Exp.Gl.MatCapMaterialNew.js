@@ -1,4 +1,4 @@
-op.name="MatCapMaterialNew";
+
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var textureMatcap=op.inTexture('MatCap');
@@ -8,7 +8,7 @@ var textureSpec=op.inTexture('Specular');
 var textureSpecMatCap=op.inTexture('Specular MatCap');
 var textureAo=op.inTexture('AO Texture');
 
-
+var cgl=op.patch.cgl;
 
 {
     // rgba colors
@@ -28,7 +28,7 @@ var ssNormals=op.inValueBool("Screen Space Normals");
 var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var shaderOut=op.outObject("Shader");
 
-var cgl=op.patch.cgl;
+
 
 var shader=new CGL.Shader(cgl,'MatCapMaterialNew');
 
@@ -67,10 +67,16 @@ ssNormals.onChange=function()
 {
     if(ssNormals.get())
     {
+        console.log("!!!!!!!!!!!",cgl.glVersion);
+        if(cgl.glVersion<2)
+        {
+            console.log("!!!!!!!!!!! aaaaasjlksdjklsdajlksdjlksdjlk");
+            cgl.gl.getExtension('OES_standard_derivatives');
+            shader.enableExtension('GL_OES_standard_derivatives');
+
+        }
+
         shader.define('CALC_SSNORMALS');
-        
-        if(cgl.glVersion<1)
-            shader.enableExtension('OES_standard_derivatives');
     }
     else shader.removeDefine('CALC_SSNORMALS');
     
