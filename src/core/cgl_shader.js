@@ -234,7 +234,7 @@ CGL.Shader = function(_cgl, _name) {
         var extensionString = '';
         if (this._extensions)
             for (i = 0; i < this._extensions.length; i++) {
-                extensionString += '#extension GL_OES_standard_derivatives : enable'.endl();
+                extensionString += '#extension '+name+' : enable'.endl();
             }
 
         var definesStr = '';
