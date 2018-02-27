@@ -68,7 +68,9 @@ ssNormals.onChange=function()
     if(ssNormals.get())
     {
         shader.define('CALC_SSNORMALS');
-        // shader.enableExtension('OES_standard_derivatives');
+        
+        if(cgl.glVersion<1)
+            shader.enableExtension('OES_standard_derivatives');
     }
     else shader.removeDefine('CALC_SSNORMALS');
     

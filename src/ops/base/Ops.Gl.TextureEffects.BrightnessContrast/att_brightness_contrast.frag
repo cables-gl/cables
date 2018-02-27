@@ -16,7 +16,6 @@ void main()
        // appl y contrast
       col.rgb = ((col.rgb - 0.5) * max(amount*2.0, 0.0))+0.5;
 
-
        // appl y brightness
        col.rgb *= amountbright*2.0;
 

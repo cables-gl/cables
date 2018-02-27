@@ -46,17 +46,14 @@ function updateCode()
 {
     if(attrName==='')return;
 
-    // srcHeadFrag=''
-    //     .endl()+'UNI float MOD_max;';
-
-    // srcBodyFrag=''
-    //     .endl()+'if('+attrName+'Frag>=MOD_max)discard;'
-    //     .endl();
-
     srcHeadFrag=''
         .endl()+'UNI float MOD_seed;'
         .endl()+'UNI float MOD_min;'
         .endl()+'UNI float MOD_max;'
+
+        .endl()+'float MOD_round(float user_a) {'
+        .endl()+'   return floor((user_a+0.5));'
+        .endl()+'}'
 
         .endl()+'float MOD_rand(vec2 co){'
         .endl()+'    return fract(sin(dot(co.xy ,vec2(12.9,78.2))) * 43758.3);'
@@ -64,7 +61,8 @@ function updateCode()
         .endl();
 
     srcBodyFrag=''
-        .endl()+'float MOD_coord=round('+attrName+'Frag*1000.0)/1000.0+MOD_seed;'
+
+        .endl()+'float MOD_coord=MOD_round('+attrName+'Frag*1000.0)/1000.0+MOD_seed;'
         .endl()+'col.rgb*= (MOD_rand(vec2(MOD_coord))*(MOD_max-MOD_min))+MOD_min ;'
         .endl();
 

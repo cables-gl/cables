@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Array.Array3xGetValues"
+    },
+    "summary": "get 3 values from an array3x",
+    "docs": {
+        "ports": []
     }
 }
