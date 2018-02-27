@@ -24,9 +24,7 @@ var inWorldSpace=op.inValueBool("WorldSpace");
 
 var srcHeadVert=attachments.perlin_deformer_vert;
 
-// var srcBodyVert=''
-//     .endl()+'pos=MOD_deform(pos);' //modelMatrix*
-//     .endl();
+
 var srcBodyVert=''
     .endl()+'#ifndef MOD_WORLDSPACE'
     .endl()+'   pos=MOD_deform(pos);'
@@ -65,6 +63,15 @@ op.render.onTriggered=function()
          op.trigger.trigger();
          return;
     }
+    
+    if(CABLES.UI && CABLES.UI.renderHelper)
+    {
+        cgl.pushModelMatrix();
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
+        CABLES.GL_MARKER.drawSphere(op,inSize.get());
+        cgl.popModelMatrix();
+    }
+
 
     if(CABLES.UI && gui.patch().isCurrentOp(op)) 
         gui.setTransformGizmo(

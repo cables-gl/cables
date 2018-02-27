@@ -335,7 +335,6 @@ CGL.Shader = function(_cgl, _name) {
 
         var addedAttributes=false;
 
-        console.log('----');
 
         for (i = 0; i < moduleNames.length; i++) {
             // console.log('moduleName',moduleNames[i]);
