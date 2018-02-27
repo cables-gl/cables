@@ -1,1 +1,40 @@
-{}
+{
+    "updated": 1519663276566,
+    "authorName": "tim",
+    "id": "b840be39-cb3f-4d58-8a70-51e7936e9f88",
+    "created": 1519663276569,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Key"
+            },
+            {
+                "type": "0",
+                "name": "Event Name"
+            },
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Api.Ifttt.IftttTrigger"
+    },
+    "summary": "Triggers a custom event in the maker channel of [IFTTT](https://ifttt.com/)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Key",
+                "text": "Your API key for the channel.  After you created a new applet with the maker channel go to [ifttt.com/maker](https://ifttt.com/maker) and click on `Settings` in the top right corner. You will now see some infos – here the URL part is important. Copy the last part of the URL into the `Key`-field in the `IFTTTTrigger`-op settings. E.g. `12345-12345678` for the URL `https://maker.ifttt.com/use/12345-12345678`.  "
+            },
+            {
+                "name": "Event Name",
+                "text": "When you create a new applet on IFTTT you will be asked for an event name for the trigger, use something like `button_pressed` (without spaces). This has to match the one you enter in the applet setup."
+            },
+            {
+                "name": "Trigger",
+                "text": "When pressed or triggered by another op it will trigger the recipe on IFTTT."
+            }
+        ]
+    }
+}

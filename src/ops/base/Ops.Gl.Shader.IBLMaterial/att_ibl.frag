@@ -19,13 +19,18 @@ UNI mat4 normalMatrix;
 UNI float mulReflection;
 UNI float mulRoughness;
 
+vec3 desaturate(vec3 color, float amount)
+{
+   vec3 gray = vec3(dot(vec3(0.2126,0.7152,0.0722), color));
+   return vec3(mix(color, gray, amount));
+}
 
 
 void main()
 {
     {{MODULE_BEGIN_FRAG}}
 
-vec3 theNormal=v_normal;
+    vec3 theNormal=v_normal;
 
 
     vec4 col = vec4(1.0,1.0,1.0,1.0);
@@ -55,32 +60,6 @@ vec3 theNormal=v_normal;
 
 
 
-
-
-
-
-
-    
-
-
-//     // #ifdef CALC_TANGENT
-//         vec3 c1 = cross(theNormal, vec3(0.0, 0.0, 1.0));
-// /*            vec3 c2 = cross(theNormal, vec3(0.0, 1.0, 0.0));
-//             if(length(c1)>length(c2)) tangent = c2;
-//                 else tangent = c1;
-// */  
-// vec3 tangent=c1;
-//          tangent = normalize(tangent);
-//         vec3 binormal = cross(theNormal, tangent);
-//         binormal = normalize(binormal);
-//     // #endif
-
-    // tNorm=normalize(tangent*tNorm.x + binormal*tNorm.y + theNormal*tNorm.z);
-
-
-
-
-
     vec3 N = normalize( mat3(normalMatrix) *theNormal ).xyz;
     N=normalize(N+tNorm);
 
@@ -99,43 +78,36 @@ vec3 theNormal=v_normal;
 
     // start reflection
     vec3 V = v_eyeCoords;
-    vec3 R = -reflect(V,N);
+    vec3 R = reflect(V,N);
     vec3 T = ( mat3( inverseViewMatrix ) * normalize(R) ).xyz; // Transform by inverse of the view transform that was applied to the skybo
     // vec4 colReflect = texture(skybox, T);
-    vec4 colReflect = textureLod(skybox, T,(amountRough)*10.0);
+    vec4 colReflect = textureLod(skybox, -T,(amountRough)*10.0);
     // colReflect.rgb=vec3(colReflect.r);
     
     // end reflection
 
 
-    vec3 no = ( mat3( inverseViewMatrix ) * normalize(-N) ).xyz;
+    vec3 no = ( mat3( inverseViewMatrix ) * normalize(N) ).xyz;
 
-    // col = texture(skybox, normalize(no));
-    
 
-    // vec4 colReflect = textureLod(skybox, normalize(no),0.0);
+    col= textureLod(skybox, normalize(-no),10.0)*1.0;
     
-    
+    float ctr=1.6;
+    col.r=pow(col.r / 0.18, ctr) * 0.18;
+    col.g=pow(col.g / 0.18, ctr) * 0.18;
+    col.b=pow(col.b / 0.18, ctr) * 0.18;
 
-// col=colReflect;
+    col.rgb=desaturate(col.rgb,0.65);
     
-    col= textureLod(skybox, normalize(no),10.0)*1.0;
-    col.rgb=vec3(col.r);
-col*=tCol*2.0;
-// col*=2.0;
     col=mix(col,colReflect,amountReflect);
     
     col.a=tCol.a;
 
 
-#ifdef TEX_AO
-col.rgb*=texture2D(texAo,texCoord).r;
-#endif
-// col=colReflect;
+    #ifdef TEX_AO
+    col.rgb*=texture2D(texAo,texCoord).r;
+    #endif
 
-    // col= textureLod(skybox, normalize(no),4.0);
-
-    // col=vec4(rough,rough,rough,1.0);
 
     {{MODULE_COLOR}}
 

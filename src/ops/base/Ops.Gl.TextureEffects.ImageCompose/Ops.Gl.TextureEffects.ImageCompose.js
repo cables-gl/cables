@@ -213,7 +213,7 @@ function onFilterChange()
 {
     if(tfilter.get()=='nearest') selectedFilter=CGL.Texture.FILTER_NEAREST;
     if(tfilter.get()=='linear')  selectedFilter=CGL.Texture.FILTER_LINEAR;
-    // if(tfilter.get()=='mipmap')  selectedFilter=CGL.Texture.FILTER_MIPMAP;
+    if(tfilter.get()=='mipmap')  selectedFilter=CGL.Texture.FILTER_MIPMAP;
 
     reInitEffect=true;
     updateResolution();

@@ -1,5 +1,75 @@
 {
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
-    "id": "af656186-4bce-44d7-a9b6-e9d1c341d5f2"
+    "id": "af656186-4bce-44d7-a9b6-e9d1c341d5f2",
+    "updated": 1519664661406,
+    "created": 1519664661406,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Write"
+            },
+            {
+                "type": "0",
+                "name": "Field"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Write API Key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "When Finished"
+            },
+            {
+                "type": "0",
+                "name": "Success"
+            },
+            {
+                "type": "0",
+                "name": "Rows"
+            }
+        ],
+        "name": "Ops.Api.ThingSpeak.Write"
+    },
+    "summary": "Writes a value to [ThingSpeak](https://thingspeak.com)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Write",
+                "text": "Executes the op, writes the data to ThingSpeak"
+            },
+            {
+                "name": "Field",
+                "text": "The field you want to write into – `field1`, `field2` and so on (this is not the field name!)."
+            },
+            {
+                "name": "Value",
+                "text": "The value you want to write"
+            },
+            {
+                "name": "Write API Key",
+                "text": "Your API key with write access"
+            },
+            {
+                "name": "When Finished",
+                "text": "Triggers when the write command has finished"
+            },
+            {
+                "name": "Success",
+                "text": "Whether or not the write command succeeded"
+            },
+            {
+                "name": "Rows",
+                "text": "The number of data-rows in your channel. After a successful write request this will be one bigger than before"
+            }
+        ]
+    }
 }

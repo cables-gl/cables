@@ -7,6 +7,7 @@ UNI samplerCube skybox;
 UNI mat4 modelMatrix;
 UNI mat4 inverseViewMatrix;
 UNI mat4 normalMatrix;
+UNI float miplevel;
 
 void main()
 {
@@ -20,7 +21,11 @@ void main()
         vec3 V = -v_eyeCoords;
         vec3 R = -reflect(V,N);
         vec3 T = ( mat3( inverseViewMatrix ) * R ).xyz; // Transform by inverse of the view transform that was applied to the skybo
-        col = texture(skybox, T);
+
+        if(miplevel>0.0)
+            col = textureLod(skybox, T,miplevel*10.0);
+        else 
+            col = texture(skybox, T);
     #endif
 
     #ifndef DO_REFLECTION
@@ -28,8 +33,11 @@ void main()
         // vec3 R = V*N;
         
         vec3 no = ( mat3( inverseViewMatrix ) * -N ).xyz;
-        col = texture(skybox, normalize(no));
-        // col = textureLod(skybox, normalize(no),10.0);
+        
+        if(miplevel>0.0)
+            col = textureLod(skybox, normalize(no),miplevel*10.0);
+        else 
+            col = texture(skybox, normalize(no));
     #endif
 
     {{MODULE_COLOR}}

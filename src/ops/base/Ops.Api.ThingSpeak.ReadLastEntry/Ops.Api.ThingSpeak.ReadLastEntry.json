@@ -1,5 +1,67 @@
 {
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
-    "id": "840011a8-812e-458e-973f-dbf5cb83eee5"
+    "id": "840011a8-812e-458e-973f-dbf5cb83eee5",
+    "updated": 1519664457718,
+    "created": 1519664457720,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Read"
+            },
+            {
+                "type": "0",
+                "name": "Channel ID"
+            },
+            {
+                "type": "0",
+                "name": "Read API Key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "When Finished"
+            },
+            {
+                "type": "2",
+                "name": "Last Entry"
+            },
+            {
+                "type": "0",
+                "name": "Success"
+            }
+        ],
+        "name": "Ops.Api.ThingSpeak.ReadLastEntry"
+    },
+    "summary": "Reads the last entry from a channel from [ThingSpeak](https://thingspeak.com)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Read",
+                "text": "Reads the last value from ThingSpeak"
+            },
+            {
+                "name": "Channel ID",
+                "text": "The ID of the channel you want to read data from"
+            },
+            {
+                "name": "Read API Key",
+                "text": "Put in your read API key here"
+            },
+            {
+                "name": "When Finished",
+                "text": "Triggered when the read-command finished and the API sent some data back"
+            },
+            {
+                "name": "Last Entry",
+                "text": "The last entry from your ThingSpeak channel"
+            },
+            {
+                "name": "Success",
+                "text": "Whether or not the call was successful"
+            }
+        ]
+    }
 }
