@@ -1,6 +1,6 @@
 {
     "updated": 1518520515524,
-    "authorName": "pandur",
+    "authorName": "tim",
     "id": "c16a5510-a920-4db3-8005-415c3c0b4a2c",
     "created": 1518520440221,
     "layout": {
@@ -21,5 +21,22 @@
             }
         ],
         "name": "Ops.Array.CopyArray"
+    },
+    "summary": "Makes a copy of an array (clone, duplicate)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Source Array",
+                "text": "The array to clone"
+            },
+            {
+                "name": "Source Array Out",
+                "text": "The source array"
+            },
+            {
+                "name": "Array Copy",
+                "text": "The new cloned array"
+            }
+        ]
     }
 }

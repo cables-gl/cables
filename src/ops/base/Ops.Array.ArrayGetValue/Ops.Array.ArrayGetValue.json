@@ -1,5 +1,5 @@
 {
-    "summary": "Get the Value of Array at a specific Index",
+    "summary": "Returns a value from an array",
     "layout": {
         "portsIn": [
             {
@@ -23,5 +23,21 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d1189078-70cf-437d-9a37-b2ebe89acdaf",
-    "created": 1509636003597
+    "created": 1509636003597,
+    "docs": {
+        "ports": [
+            {
+                "name": "array",
+                "text": "The array-data, e.g. `[100, 200, 300]`"
+            },
+            {
+                "name": "index",
+                "text": "The index of the array you want to get, `0` is the first element"
+            },
+            {
+                "name": "value",
+                "text": "The value of the array at position `Index`"
+            }
+        ]
+    }
 }

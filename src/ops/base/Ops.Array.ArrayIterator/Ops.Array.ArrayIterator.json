@@ -26,7 +26,7 @@
         ],
         "name": "Ops.Array.ArrayIterator"
     },
-    "summary": "loop over every element of an array",
+    "summary": "Loop over every element of an array",
     "docs": {
         "ports": [
             {
@@ -35,7 +35,7 @@
             },
             {
                 "name": "array",
-                "text": "The array to iterate"
+                "text": "The array to iterate over"
             },
             {
                 "name": "trigger",
@@ -43,7 +43,7 @@
             },
             {
                 "name": "index",
-                "text": "index of the array (0-array.length)"
+                "text": "Index of the array (0-array.length)"
             },
             {
                 "name": "value",

@@ -1,1 +1,58 @@
-{}
+{
+    "updated": 1519665635779,
+    "authorName": "tim",
+    "id": "c7ee6c6e-ca88-4c24-b289-78bb922bf5f7",
+    "created": 1519665635782,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Input Array"
+            },
+            {
+                "type": "0",
+                "name": "Begin Index"
+            },
+            {
+                "type": "0",
+                "name": "Chunk Size"
+            },
+            {
+                "type": "0",
+                "name": "Circular"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Output Array"
+            }
+        ],
+        "name": "Ops.Array.ArrayChunk"
+    },
+    "summary": "Extracts x elements from an array",
+    "docs": {
+        "ports": [
+            {
+                "name": "Input Array",
+                "text": "The array to get a chunk out of"
+            },
+            {
+                "name": "Begin Index",
+                "text": "The index where the chunk should begin"
+            },
+            {
+                "name": "Chunk Size",
+                "text": "How big the chunk should be, if there are not enough elements at the end of the `Input Array` the chunk will be smaller"
+            },
+            {
+                "name": "Circular",
+                "text": "If true, values from the beginning will be taken when end reached"
+            },
+            {
+                "name": "Output Array",
+                "text": "Included `Chunk Size` elements or less"
+            }
+        ]
+    }
+}
