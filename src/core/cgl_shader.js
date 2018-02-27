@@ -234,7 +234,8 @@ CGL.Shader = function(_cgl, _name) {
         var extensionString = '';
         if (this._extensions)
             for (i = 0; i < this._extensions.length; i++) {
-                extensionString += '#extension '+name+' : enable'.endl();
+                extensionString += '#extension '+this._extensions[i]+' : enable'.endl();
+                console.log("ENABLE EXTENSION"+name)
             }
 
         var definesStr = '';
