@@ -26,6 +26,7 @@ var distCenterPort = op.outValue('Norm Position');
 // var distEndPort = op.outValue('Item Dist End');
 var nextPort = op.outFunction('Next');
 var frontIndexPort = op.outValue('Front Index');
+var frontPercentPort = op.outValue('Front Percentage');
 
 // variables
 var positions = [];
@@ -76,25 +77,29 @@ function update() {
         }
     }
     // draw from back to front
-    var i;
-    for(i=smallestIndex; i<num; i++) {
+    var frontMostIndex = -1;
+    for(var i=smallestIndex; i<num; i++) {
+        indexPort.set(i);
+        positionPort.set(positions[i]);
+        var distCenter = map(positions[i], minPosition, maxPosition, 0, 1, true);
+        distCenterPort.set(distCenter);
+        triggerItemPort.trigger(); 
+        frontMostIndex = i;
+        console.log(i);
+    }
+    for(var i=0; i<smallestIndex; i++) {
         indexPort.set(i);
         positionPort.set(positions[i]);
         var distCenter = map(positions[i], minPosition, maxPosition, 0, 1, true);
         distCenterPort.set(distCenter);
         triggerItemPort.trigger();    
+        frontMostIndex = i;
+        console.log(i);
     }
-    for(i=0; i<smallestIndex; i++) {
-        indexPort.set(i);
-        positionPort.set(positions[i]);
-        var distCenter = map(positions[i], minPosition, maxPosition, 0, 1, true);
-        distCenterPort.set(distCenter);
-        triggerItemPort.trigger();    
-    }
-    if(positions.length > 0) {
-        frontIndexPort.set(i); // set the last index from the loop, this is the frontmost index    
-    } else {
-        frontIndexPort.set(-1);    
+    frontIndexPort.set(frontMostIndex); // set the last index from the loop, this is the frontmost index    
+    if(frontMostIndex !== -1) {
+        var percentage = 1 - (maxPosition - positions[frontMostIndex]) / step;
+        frontPercentPort.set(percentage);
     }
     nextPort.trigger();    
 }

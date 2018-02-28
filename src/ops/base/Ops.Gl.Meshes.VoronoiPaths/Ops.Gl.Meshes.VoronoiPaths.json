@@ -1,8 +1,8 @@
 {
-    "updated": 1519817247189,
+    "updated": 1519817007617,
     "authorName": "pandur",
-    "id": "5e255dde-7425-442a-a22a-b4d108803204",
-    "created": 1519817247190,
+    "id": "cb799be9-6221-4030-951e-b7513a455236",
+    "created": 1519817007618,
     "layout": {
         "portsIn": [
             {
@@ -15,23 +15,19 @@
             },
             {
                 "type": "0",
-                "name": "Extrude Cell Center"
-            },
-            {
-                "type": "0",
                 "name": "Ignore Border Cells"
-            },
-            {
-                "type": "0",
-                "name": "Calc Normals"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "3",
+                "name": "path"
             }
         ],
-        "name": "Ops.Gl.Meshes.VoronoiMesh"
+        "name": "Ops.Gl.Meshes.VoronoiPaths"
     }
 }

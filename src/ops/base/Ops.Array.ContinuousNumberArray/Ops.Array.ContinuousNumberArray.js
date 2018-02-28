@@ -1,4 +1,3 @@
-op.name="ContinuousNumberArray";
 
 var numValues=op.inValueInt("numValues");
 

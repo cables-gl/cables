@@ -1,8 +1,8 @@
 {
-    "updated": 1519816851643,
+    "updated": 1519816858045,
     "authorName": "pandur",
-    "id": "76c4f962-7afe-4884-b53c-c19af7b426e1",
-    "created": 1519816851162,
+    "id": "c635e244-5508-4481-8634-400df6869b14",
+    "created": 1519816858046,
     "layout": {
         "portsIn": [
             {
@@ -11,13 +11,15 @@
             },
             {
                 "type": "0",
-                "name": "Message"
-            },
+                "name": "Event"
+            }
+        ],
+        "portsOut": [
             {
                 "type": "1",
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.Cables.CableConnect.CableConnectSend"
+        "name": "Ops.Cables.CableConnect.CableConnectTriggerEvent"
     }
 }

@@ -1,7 +1,26 @@
 {
-    "updated": 1513887366021,
+    "updated": 1519817210377,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "e4863717-4ebe-4436-a246-378109f07365",
-    "created": 1513887278100
+    "created": 1513887278100,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "file"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Json3d.Json3dScene"
+    }
 }

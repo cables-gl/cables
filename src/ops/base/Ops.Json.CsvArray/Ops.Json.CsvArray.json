@@ -1,1 +1,25 @@
-{}
+{
+    "updated": 1519816795228,
+    "authorName": "pandur",
+    "id": "2e76c1f8-19ac-4e9d-8db8-58b2f9fbc1d3",
+    "created": 1519816793278,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "result"
+            },
+            {
+                "type": "0",
+                "name": "num items"
+            }
+        ],
+        "name": "Ops.Json.CsvArray"
+    }
+}

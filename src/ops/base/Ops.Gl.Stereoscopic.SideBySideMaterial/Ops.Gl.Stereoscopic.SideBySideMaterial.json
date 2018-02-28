@@ -1,0 +1,33 @@
+{
+    "updated": 1519816722304,
+    "authorName": "pandur",
+    "id": "fef87e25-e5aa-47d6-8708-e531ea176099",
+    "created": 1519816721540,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "texture left"
+            },
+            {
+                "type": "2",
+                "name": "texture right"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Stereoscopic.SideBySideMaterial"
+    },
+    "summary": "rendering textures next to each other for stereoscopic displays",
+    "docs": {
+        "ports": []
+    }
+}

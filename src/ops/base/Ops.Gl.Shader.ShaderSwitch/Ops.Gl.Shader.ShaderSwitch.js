@@ -1,4 +1,3 @@
-op.name='ShaderSwitchBoolean';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var value=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE,{display:'bool'}));

@@ -1,8 +1,35 @@
 {
-    "updated": 1512599764682,
+    "updated": 1519817235050,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "5cccb9a4-3653-4c58-b54e-932c4c585b5f",
     "created": 1512599726484,
-    "summary": "put an object at index in an array"
+    "summary": "put an object at index in an array",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "2",
+                "name": "object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            }
+        ],
+        "name": "Ops.Array.ArraySetObject"
+    }
 }

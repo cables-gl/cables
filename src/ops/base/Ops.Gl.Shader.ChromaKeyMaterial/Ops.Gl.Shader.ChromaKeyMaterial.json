@@ -1,11 +1,8 @@
 {
-    "libs": [
-        "rhill-voronoi-core.js"
-    ],
-    "updated": 1519816918245,
+    "updated": 1519816671060,
     "authorName": "pandur",
-    "id": "750ca250-1ac8-4fb3-bd44-1e5e702dea08",
-    "created": 1519816915531,
+    "id": "20be6064-b332-447c-a220-e70d5bc506e0",
+    "created": 1519816612579,
     "layout": {
         "portsIn": [
             {
@@ -13,64 +10,56 @@
                 "name": "render"
             },
             {
-                "type": "3",
-                "name": "Site Points"
+                "type": "2",
+                "name": "texture"
             },
             {
                 "type": "0",
-                "name": "Render"
+                "name": "Mode"
             },
             {
                 "type": "0",
-                "name": "Invert"
+                "name": "weightMul"
             },
             {
                 "type": "0",
-                "name": "Ignore Border Cells"
+                "name": "r"
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "g"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "b"
             },
             {
                 "type": "0",
-                "name": "Fill"
+                "name": "white"
             },
             {
                 "type": "0",
-                "name": "Extrude Cell Center"
+                "name": "diffuseRepeatX"
             },
             {
                 "type": "0",
-                "name": "Scale Out Size Start"
+                "name": "diffuseRepeatY"
             },
             {
                 "type": "0",
-                "name": "Scale Out Size End"
+                "name": "Tex Offset X"
             },
             {
                 "type": "0",
-                "name": "Calc Normals"
+                "name": "Tex Offset Y"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "Next"
-            },
-            {
-                "type": "3",
-                "name": "Points"
-            },
-            {
-                "type": "3",
-                "name": "Center Points"
+                "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Meshes.Voronoi"
+        "name": "Ops.Gl.Shader.ChromaKeyMaterial"
     }
 }

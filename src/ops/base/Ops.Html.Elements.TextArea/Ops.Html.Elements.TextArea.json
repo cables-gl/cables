@@ -1,1 +1,41 @@
-{}
+{
+    "updated": 1519816976718,
+    "authorName": "pandur",
+    "id": "3206e336-7edf-48c1-81f7-460c8520a0c3",
+    "created": 1519816964253,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "visible"
+            },
+            {
+                "type": "1",
+                "name": "focus"
+            },
+            {
+                "type": "1",
+                "name": "blur"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "text"
+            },
+            {
+                "type": "0",
+                "name": "cursorPos"
+            },
+            {
+                "type": "0",
+                "name": "focussed"
+            },
+            {
+                "type": "1",
+                "name": "escape pressed"
+            }
+        ],
+        "name": "Ops.Html.Elements.TextArea"
+    }
+}

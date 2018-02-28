@@ -1,4 +1,3 @@
-op.name='csv json array';
 
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_ARRAY));

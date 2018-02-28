@@ -1,4 +1,3 @@
-op.name="PersonController";
 
 var exe=op.inFunction("Exe");
 

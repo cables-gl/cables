@@ -1,18 +1,13 @@
 {
-    "updated": 1519816781955,
-    "author": "55d744634cdc152216eb9aad",
+    "updated": 1519816755505,
     "authorName": "pandur",
-    "id": "bd228c8a-96c9-4b80-bd58-b23ca0ff1677",
-    "created": 1513973576493,
+    "id": "2df1b492-6a97-4064-b939-ff926d4414d0",
+    "created": 1519816748888,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
                 "name": "render"
-            },
-            {
-                "type": "0",
-                "name": "channel"
             }
         ],
         "portsOut": [
@@ -21,6 +16,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Json3d.ScaleChannel"
+        "name": "Ops.Gl.Shader.MinimalMaterial"
     }
 }

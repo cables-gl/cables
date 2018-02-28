@@ -1,0 +1,49 @@
+{
+    "updated": 1519816391235,
+    "authorName": "pandur",
+    "id": "7b08dea1-a05b-422e-a1de-7832058bee51",
+    "created": 1519816303489,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exe"
+            },
+            {
+                "type": "0",
+                "name": "Speed"
+            },
+            {
+                "type": "0",
+                "name": "North"
+            },
+            {
+                "type": "0",
+                "name": "East"
+            },
+            {
+                "type": "0",
+                "name": "South"
+            },
+            {
+                "type": "0",
+                "name": "West"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            },
+            {
+                "type": "0",
+                "name": "Dir"
+            }
+        ],
+        "name": "Ops.Game.PersonController"
+    }
+}
