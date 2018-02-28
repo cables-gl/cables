@@ -85,7 +85,6 @@ function update() {
         distCenterPort.set(distCenter);
         triggerItemPort.trigger(); 
         frontMostIndex = i;
-        console.log(i);
     }
     for(var i=0; i<smallestIndex; i++) {
         indexPort.set(i);
@@ -94,7 +93,6 @@ function update() {
         distCenterPort.set(distCenter);
         triggerItemPort.trigger();    
         frontMostIndex = i;
-        console.log(i);
     }
     frontIndexPort.set(frontMostIndex); // set the last index from the loop, this is the frontmost index    
     if(frontMostIndex !== -1) {
