@@ -1,5 +1,5 @@
 
-var inArr=op.inArray("Array2x");
+var inArr=op.inArray("Array1x");
 var outArr=op.outArray("Array3x");
 
 var arr=[];

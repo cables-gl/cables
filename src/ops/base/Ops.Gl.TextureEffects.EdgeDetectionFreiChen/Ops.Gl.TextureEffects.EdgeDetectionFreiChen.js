@@ -1,4 +1,3 @@
-op.name="EdgeDetectionFreiChen";
 
 var render=op.inFunction("Render");
 var trigger=op.outFunction("Trigger");

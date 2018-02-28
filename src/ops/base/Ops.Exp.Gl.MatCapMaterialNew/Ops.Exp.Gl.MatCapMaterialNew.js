@@ -67,13 +67,10 @@ ssNormals.onChange=function()
 {
     if(ssNormals.get())
     {
-        console.log("!!!!!!!!!!!",cgl.glVersion);
         if(cgl.glVersion<2)
         {
-            console.log("!!!!!!!!!!! aaaaasjlksdjklsdajlksdjlksdjlk");
             cgl.gl.getExtension('OES_standard_derivatives');
             shader.enableExtension('GL_OES_standard_derivatives');
-
         }
 
         shader.define('CALC_SSNORMALS');

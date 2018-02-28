@@ -1,4 +1,3 @@
-op.name="NormalizeScreenCoordinates";
 
 
 var inX=op.inValue("X");

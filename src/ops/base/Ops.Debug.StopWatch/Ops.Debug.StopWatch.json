@@ -1,1 +1,30 @@
-{"summary":"Measure the time used to render all child nodes in milliseconds"}
+{
+    "summary": "Measure the time used to render all child nodes in milliseconds",
+    "updated": 1519811104748,
+    "authorName": "pandur",
+    "id": "5dd205e6-b475-4a3b-9a3b-d242847f4b81",
+    "created": 1519811102851,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exec"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "Time used"
+            },
+            {
+                "type": "3",
+                "name": "Times"
+            }
+        ],
+        "name": "Ops.Debug.StopWatch"
+    }
+}

@@ -1,4 +1,3 @@
-op.name="StopWatch";
 
 var exec=op.inFunction("exec");
 var next=op.outFunction("next");

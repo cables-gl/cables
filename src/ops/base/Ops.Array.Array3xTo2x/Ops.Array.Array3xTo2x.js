@@ -1,8 +1,5 @@
-op.name="Array3xTo2x";
-
 var inArr=op.inArray("Array3x");
 var outArr=op.outArray("Array2x");
-
 
 var arr=[];
 

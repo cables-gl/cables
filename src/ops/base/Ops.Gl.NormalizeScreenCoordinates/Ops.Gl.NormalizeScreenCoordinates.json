@@ -1,1 +1,37 @@
-{}
+{
+    "updated": 1519808864893,
+    "authorName": "pandur",
+    "id": "84d4f2a6-5ab7-4c97-85e0-2985bfcba70d",
+    "created": 1519808862751,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "X"
+            },
+            {
+                "type": "0",
+                "name": "Y"
+            },
+            {
+                "type": "0",
+                "name": "-1 to 1"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result X"
+            },
+            {
+                "type": "0",
+                "name": "Result Y"
+            }
+        ],
+        "name": "Ops.Gl.NormalizeScreenCoordinates"
+    },
+    "summary": "convert screen pixel coordinates to range 0-1",
+    "docs": {
+        "ports": []
+    }
+}

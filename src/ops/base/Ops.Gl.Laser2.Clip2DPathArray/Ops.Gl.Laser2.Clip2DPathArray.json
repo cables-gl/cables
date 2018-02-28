@@ -1,1 +1,35 @@
-{}
+{
+    "updated": 1519810801834,
+    "authorName": "pandur",
+    "id": "b94970eb-3d20-4501-a270-b5fb91224925",
+    "created": 1519810801836,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array2x"
+            },
+            {
+                "type": "0",
+                "name": "Left"
+            },
+            {
+                "type": "0",
+                "name": "Right"
+            },
+            {
+                "type": "0",
+                "name": "Top"
+            },
+            {
+                "type": "0",
+                "name": "Bottom"
+            },
+            {
+                "type": "3",
+                "name": "Result Array2x"
+            }
+        ],
+        "name": "Ops.Gl.Laser2.Clip2DPathArray"
+    }
+}

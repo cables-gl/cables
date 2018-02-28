@@ -1,7 +1,22 @@
 {
-    "updated": 1504863602261,
+    "updated": 1519812251099,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d046f0a0-a448-4f7b-9b53-02054c05fbcf",
-    "created": 1504863503928
+    "created": 1504863503928,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Exp.Ui.DisplayValue"
+    }
 }

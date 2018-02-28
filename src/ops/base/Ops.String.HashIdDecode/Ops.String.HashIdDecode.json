@@ -1,9 +1,24 @@
 {
-    "updated": 1516816961111,
+    "updated": 1519811655147,
     "authorName": "pandur",
     "id": "c93987a2-0be9-4740-a27f-f7c648ace1de",
     "created": 1516816838921,
     "libs": [
         "hashids.js"
-    ]
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "HashId"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.HashIdDecode"
+    }
 }

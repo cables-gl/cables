@@ -1,6 +1,37 @@
 {
-    "updated": 1516900057615,
+    "updated": 1519808229186,
     "authorName": "pandur",
     "id": "58ddcecb-3917-4118-81d3-344ee2b75469",
-    "created": 1516900023783
+    "created": 1516900023783,
+    "summary": "put an array into an array",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "3",
+                "name": "new Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            }
+        ],
+        "name": "Ops.Array.ArraySetArray"
+    }
 }

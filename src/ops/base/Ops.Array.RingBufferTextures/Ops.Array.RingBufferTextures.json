@@ -33,5 +33,9 @@
             }
         ],
         "name": "Ops.Array.RingBufferTextures"
+    },
+    "summary": "Ringbuffer of textures, input texture gets copied",
+    "docs": {
+        "ports": []
     }
 }

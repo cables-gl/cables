@@ -1,4 +1,3 @@
-op.name="ArrayBuffer";
 
 var exec=op.inFunction("exec");
 var val=op.inValue("Value");

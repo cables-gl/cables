@@ -1,1 +1,37 @@
-{}
+{
+    "updated": 1519811673010,
+    "authorName": "pandur",
+    "id": "7414db4a-1798-417a-aa01-74235b0cc67a",
+    "created": 1519811671074,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "state"
+            },
+            {
+                "type": "0",
+                "name": "anim value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            },
+            {
+                "type": "0",
+                "name": "time"
+            },
+            {
+                "type": "0",
+                "name": "Percentage"
+            }
+        ],
+        "name": "Ops.Anim.BoolTimelineScrub"
+    }
+}

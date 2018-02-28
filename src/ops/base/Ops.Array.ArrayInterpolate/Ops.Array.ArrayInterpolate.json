@@ -35,5 +35,13 @@
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "09296117-7312-4f80-982b-7b4a81d22cf8",
-    "created": 1513177459868
+    "created": 1513177459868,
+    "docs": {
+        "ports": [
+            {
+                "name": "perc",
+                "text": "progress value 0-1"
+            }
+        ]
+    }
 }

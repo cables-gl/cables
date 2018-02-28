@@ -1,7 +1,5 @@
-Op.apply(this, arguments);
 var self=this;
 
-this.name='TimeLineDelay';
 this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 
 this.theTime=this.addOutPort(new Port(this,"time"));

@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Gl.TextureInfo"
+    },
+    "summary": "Outputs information about the connected texture",
+    "docs": {
+        "ports": []
     }
 }

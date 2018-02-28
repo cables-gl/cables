@@ -1,5 +1,5 @@
 {
-    "updated": 1513607212191,
+    "updated": 1519808647212,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "0d67fdf1-8e60-465e-9897-6aae6676e4c9",
@@ -8,7 +8,7 @@
         "portsIn": [
             {
                 "type": "3",
-                "name": "Array2x"
+                "name": "Array1x"
             }
         ],
         "portsOut": [
@@ -18,5 +18,9 @@
             }
         ],
         "name": "Ops.Array.Array1xTo3x"
+    },
+    "summary": "convert array to array3x",
+    "docs": {
+        "ports": []
     }
 }

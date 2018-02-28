@@ -18,5 +18,9 @@
             }
         ],
         "name": "Ops.Array.Array2xTo3x"
+    },
+    "summary": "inserts zeroes every third item",
+    "docs": {
+        "ports": []
     }
 }

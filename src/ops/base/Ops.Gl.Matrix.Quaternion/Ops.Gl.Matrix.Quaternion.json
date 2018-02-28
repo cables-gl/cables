@@ -33,5 +33,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.Quaternion"
+    },
+    "summary": "multiplies current modelmatrix with a quaternion",
+    "docs": {
+        "ports": []
     }
 }
