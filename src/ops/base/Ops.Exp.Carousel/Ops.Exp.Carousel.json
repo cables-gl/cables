@@ -1,0 +1,53 @@
+{
+    "updated": 1519320711413,
+    "authorName": "tim",
+    "id": "595f80db-6ac9-4667-8611-142ef208395a",
+    "created": 1519237986062,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Execute"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Position"
+            },
+            {
+                "type": "0",
+                "name": "Number of Elements"
+            },
+            {
+                "type": "0",
+                "name": "Size"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Item Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Index"
+            },
+            {
+                "type": "0",
+                "name": "Position"
+            },
+            {
+                "type": "0",
+                "name": "Norm Position"
+            },
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Front Index"
+            }
+        ],
+        "name": "Ops.Exp.Carousel"
+    }
+}

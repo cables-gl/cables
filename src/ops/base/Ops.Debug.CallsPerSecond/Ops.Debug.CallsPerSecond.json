@@ -14,5 +14,13 @@
         ],
         "name": "Ops.CallsPerSecond"
     },
-    "summary": "counts how often the port is triggered per second"
+    "summary": "Counts how often the port is triggered per second",
+    "docs": {
+        "ports": [
+            {
+                "name": "cps",
+                "text": "Calls per second – how often `Exe` is being triggered by second"
+            }
+        ]
+    }
 }

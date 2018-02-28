@@ -1,5 +1,3 @@
-op.name="TimeLineControls";
-
 var plauPause=op.outValue("Play/Stop");
 var time=op.outValue("time");
 

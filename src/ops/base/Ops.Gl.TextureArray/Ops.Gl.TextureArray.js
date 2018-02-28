@@ -1,4 +1,3 @@
-op.name="TextureArray";
 
 var outArr=op.addOutPort(new Port(op,"Array",OP_PORT_TYPE_ARRAY));
 var outCount=op.addOutPort(new Port(op,"Count",OP_PORT_TYPE_VALUE));

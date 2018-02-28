@@ -1,5 +1,5 @@
 {
-    "summary": "trigger next only after value has changed to false",
+    "summary": "Triggers next only after value has changed to `false`",
     "updated": 1518604071595,
     "authorName": "pandur",
     "id": "6387bcb0-6091-4199-8ab7-f96ad4aa3c7d",
@@ -18,5 +18,17 @@
             }
         ],
         "name": "Ops.Boolean.TriggerChangedFalse"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The boolean value to watch for change"
+            },
+            {
+                "name": "Next",
+                "text": "Triggers when `Value` changed to `false`"
+            }
+        ]
     }
 }

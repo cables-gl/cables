@@ -1,0 +1,1 @@
+Only returns `true` if the input `Value` is `1`. Returns `false` in all other cases, e.g. when input value is `0`, `-1` or `2`.

@@ -14,5 +14,17 @@
         ],
         "name": "Ops.Boolean.isZero"
     },
-    "summary": "result is true if value is 0"
+    "summary": "Returns `true` if input value is `0`",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The number to check if it is `0`"
+            },
+            {
+                "name": "Result",
+                "text": "`true` if input `Value` is `0`, `false` otherwise"
+            }
+        ]
+    }
 }

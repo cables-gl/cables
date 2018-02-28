@@ -1,5 +1,5 @@
 {
-    "summary": "toggle boolean value by triggering",
+    "summary": "Toggle a boolean value by triggering",
     "layout": {
         "portsIn": [
             {
@@ -23,5 +23,21 @@
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "712a25f4-3a93-4042-b8c5-2f56169186cc",
-    "created": 1510696293583
+    "created": 1510696293583,
+    "docs": {
+        "ports": [
+            {
+                "name": "trigger",
+                "text": "When triggered the output value will be toggled from true to false and the other way around."
+            },
+            {
+                "name": "reset",
+                "text": "Resets the `Result` to `false`"
+            },
+            {
+                "name": "result",
+                "text": "Either `true` or `false`"
+            }
+        ]
+    }
 }

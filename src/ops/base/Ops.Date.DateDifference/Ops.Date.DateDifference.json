@@ -50,10 +50,54 @@
         ],
         "name": "Ops.Date.DateDifference"
     },
-    "summary": "difference between two timestamps",
+    "summary": "Calculates the difference between two timestamps",
     "updated": 1511019287733,
     "author": "5a0fe67d9641cedb39929853",
     "authorName": "pandur",
     "id": "34cd865c-cc4d-4c58-afb2-626773eb412e",
-    "created": 1511019287735
+    "created": 1511019287735,
+    "docs": {
+        "ports": [
+            {
+                "name": "Timestamp 1",
+                "text": "The first timestamp"
+            },
+            {
+                "name": "Timestamp 2",
+                "text": "The second timestamp"
+            },
+            {
+                "name": "Year",
+                "text": "Years of the difference"
+            },
+            {
+                "name": "Month",
+                "text": "Months of the difference"
+            },
+            {
+                "name": "Day",
+                "text": "Days of the difference"
+            },
+            {
+                "name": "Hours",
+                "text": "Hours of the difference"
+            },
+            {
+                "name": "Minutes",
+                "text": "Minutes of the difference"
+            },
+            {
+                "name": "Seconds",
+                "text": "Seconds of the difference"
+            },
+            {
+                "name": "Milliseconds",
+                "text": "Milliseconds of the difference"
+            },
+            {
+                "name": "Diff",
+                "text": "The difference as timestamp"
+            }
+        ]
+    }
 }

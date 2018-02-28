@@ -1,4 +1,3 @@
-op.name="ValueOrAssignment";
 
 var val=op.addInPort(new Port(op,"Value",OP_PORT_TYPE_VALUE));
 var orval=op.addInPort(new Port(op,"Default Value",OP_PORT_TYPE_VALUE));

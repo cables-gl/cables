@@ -1,6 +1,122 @@
 {
-    "updated": 1517310322708,
+    "updated": 1519814348498,
     "authorName": "pandur",
     "id": "e697380f-ac93-4d4a-9e9c-b54287773668",
-    "created": 1517310320061
+    "created": 1517310320061,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "number"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "num outputs"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "num"
+            },
+            {
+                "type": "1",
+                "name": "trigger 0"
+            },
+            {
+                "type": "1",
+                "name": "trigger 1"
+            },
+            {
+                "type": "1",
+                "name": "trigger 2"
+            },
+            {
+                "type": "1",
+                "name": "trigger 3"
+            },
+            {
+                "type": "1",
+                "name": "trigger 4"
+            },
+            {
+                "type": "1",
+                "name": "trigger 5"
+            },
+            {
+                "type": "1",
+                "name": "trigger 6"
+            },
+            {
+                "type": "1",
+                "name": "trigger 7"
+            },
+            {
+                "type": "1",
+                "name": "trigger 8"
+            },
+            {
+                "type": "1",
+                "name": "trigger 9"
+            },
+            {
+                "type": "1",
+                "name": "trigger 10"
+            },
+            {
+                "type": "1",
+                "name": "trigger 11"
+            },
+            {
+                "type": "1",
+                "name": "trigger 12"
+            },
+            {
+                "type": "1",
+                "name": "trigger 13"
+            },
+            {
+                "type": "1",
+                "name": "trigger 14"
+            },
+            {
+                "type": "1",
+                "name": "trigger 15"
+            },
+            {
+                "type": "1",
+                "name": "trigger 16"
+            },
+            {
+                "type": "1",
+                "name": "trigger 17"
+            },
+            {
+                "type": "1",
+                "name": "trigger 18"
+            },
+            {
+                "type": "1",
+                "name": "trigger 19"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerDistributeByValue"
+    },
+    "summary": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "num outputs",
+                "text": "number of output triggers to be triggered"
+            }
+        ]
+    }
 }

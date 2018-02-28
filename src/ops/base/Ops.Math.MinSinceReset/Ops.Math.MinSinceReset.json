@@ -1,0 +1,33 @@
+{
+    "updated": 1519300859555,
+    "authorName": "tim",
+    "id": "30da693f-70bd-46bf-97d5-9f31e7f76bba",
+    "created": 1519300144014,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Default Output Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Minimum"
+            }
+        ],
+        "name": "Ops.Math.MinSinceReset"
+    },
+    "summary": "Outputs the minimum value since reset has been triggered",
+    "docs": {
+        "ports": []
+    }
+}

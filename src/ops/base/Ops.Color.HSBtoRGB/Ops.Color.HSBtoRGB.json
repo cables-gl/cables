@@ -1,5 +1,5 @@
 {
-    "summary": "HSB to RGB Color Conversion (HSV, HSL)",
+    "summary": "Converts a color from HSB to RGB (conversion, HSV, HSL, colour, mode)",
     "layout": {
         "portsIn": [
             {
@@ -30,6 +30,34 @@
             }
         ],
         "name": "Ops.Color.HSBtoRGB"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Hue",
+                "text": "The hue in range `[0..1]`"
+            },
+            {
+                "name": "Saturation",
+                "text": "The saturation in range `[0..1]`"
+            },
+            {
+                "name": "Brightness",
+                "text": "The brightness in range `[0..1]`"
+            },
+            {
+                "name": "R",
+                "text": "The red amount in range `[0..1]`"
+            },
+            {
+                "name": "G",
+                "text": "The green amount in range `[0..1]`"
+            },
+            {
+                "name": "B",
+                "text": "The blue amount in range `[0..1]`"
+            }
+        ]
     },
     "updated": 1519751220219,
     "authorName": "pandur",

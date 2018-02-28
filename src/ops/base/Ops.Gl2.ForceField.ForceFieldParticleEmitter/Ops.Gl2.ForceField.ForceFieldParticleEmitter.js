@@ -1,4 +1,3 @@
-op.name="ForceFieldParticleEmitter";
 
 var render=op.inFunction("render");
 var resetButton=op.inFunctionButton("Reset");

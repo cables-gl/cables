@@ -3,9 +3,14 @@
     "authorName": "pandur",
     "id": "1bbd3b97-d8cd-4ff6-a6a4-f5121c28d29f",
     "created": 1519394197766,
-    "summary": "current frames per second",
+    "summary": "Returns the current frames per second",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "FPS",
+                "text": "The current frames per second"
+            }
+        ]
     },
     "layout": {
         "portsOut": [

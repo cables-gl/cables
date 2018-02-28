@@ -1,0 +1,21 @@
+{
+    "updated": 1519810201268,
+    "authorName": "pandur",
+    "id": "21b72adb-505b-439b-ac50-22e0877e32c3",
+    "created": 1519810198653,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.OnlyPickingPass"
+    }
+}

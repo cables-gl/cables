@@ -33,5 +33,38 @@
             }
         ],
         "name": "Ops.Audio.Bang"
+    },
+    "summary": "Outputs a number going from `1` to `0`, synced to the music (flash-effect)",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Executes the op"
+            },
+            {
+                "name": "beat",
+                "text": "Typically connect this to the `beat1` port of Ops.Audio.BPMTap. Every time a new beat comes in, the bang will start"
+            },
+            {
+                "name": "startValue",
+                "text": "The value where the animation starts when a `beat` comes in"
+            },
+            {
+                "name": "endValue",
+                "text": "The value where the animation stops, typically towards the end of a beat"
+            },
+            {
+                "name": "bpm",
+                "text": "The bpm (beats per minute) e.g. of an audio track. Used to calculate the length of the animation. Bigger value = faster, slower value = slower"
+            },
+            {
+                "name": "easing",
+                "text": "Choose between different easing methods to alter the animation – `linear`, `smoothstep`, `smootherstep`"
+            },
+            {
+                "name": "bang",
+                "text": "The output of the animation int the range [Start Value, End Value], connect this e.g. to a `translate`-operator"
+            }
+        ]
     }
 }

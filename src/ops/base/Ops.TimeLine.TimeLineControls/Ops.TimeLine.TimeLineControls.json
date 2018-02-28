@@ -1,1 +1,20 @@
-{"summary":"use position and play pause state of cables timeline"}
+{
+    "summary": "use position and play pause state of cables timeline",
+    "updated": 1519814512075,
+    "authorName": "pandur",
+    "id": "53cb7b1a-56c7-405f-b427-12db78fbfd2f",
+    "created": 1519814509715,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Play/Stop"
+            },
+            {
+                "type": "0",
+                "name": "time"
+            }
+        ],
+        "name": "Ops.TimeLine.TimeLineControls"
+    }
+}

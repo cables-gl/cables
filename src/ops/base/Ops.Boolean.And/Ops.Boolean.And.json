@@ -18,5 +18,21 @@
         ],
         "name": "Ops.Boolean.And"
     },
-    "summary": "outputs true if all input booleans are true"
+    "summary": "Outputs `true` if both input values are `true` (boolean)",
+    "docs": {
+        "ports": [
+            {
+                "name": "bool 1",
+                "text": "The first boolean value"
+            },
+            {
+                "name": "bool 2",
+                "text": "The second boolean value"
+            },
+            {
+                "name": "result",
+                "text": "The result, only `true` when both input values are `true`"
+            }
+        ]
+    }
 }

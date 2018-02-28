@@ -1,0 +1,29 @@
+{
+    "updated": 1519813441000,
+    "authorName": "pandur",
+    "id": "8798d138-7f09-4f63-96f5-d6348e088154",
+    "created": 1519813434537,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "beautify"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Json.ObjectStringify"
+    },
+    "summary": "convert object to string",
+    "docs": {
+        "ports": []
+    }
+}

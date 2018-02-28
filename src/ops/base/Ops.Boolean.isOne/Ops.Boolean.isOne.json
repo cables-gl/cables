@@ -14,5 +14,17 @@
         ],
         "name": "Ops.Boolean.isOne"
     },
-    "summary": "result is true if value is 1"
+    "summary": "Returns `true` if input value is `1`",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The value to check for if it is one"
+            },
+            {
+                "name": "Result",
+                "text": "`True` when input is `1`, false otherwise"
+            }
+        ]
+    }
 }

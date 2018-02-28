@@ -1,0 +1,21 @@
+{
+    "updated": 1519814866779,
+    "authorName": "pandur",
+    "id": "128f5b07-17f9-43fb-ab61-c170a9a9cd8d",
+    "created": 1519814860885,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Key"
+            }
+        ],
+        "name": "Ops.Json.ObjectIterate"
+    }
+}

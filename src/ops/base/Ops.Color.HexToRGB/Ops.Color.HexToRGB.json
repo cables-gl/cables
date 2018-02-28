@@ -1,5 +1,5 @@
 {
-    "summary": "convert a hex color like  fff to number values",
+    "summary": "Converts a hex color like `#ff0000` to number values",
     "layout": {
         "portsIn": [
             {
@@ -29,5 +29,29 @@
     },
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
-    "id": "45087567-c32c-4cac-b8b1-3e2f2a640938"
+    "id": "45087567-c32c-4cac-b8b1-3e2f2a640938",
+    "docs": {
+        "ports": [
+            {
+                "name": "Hex",
+                "text": "A hex color, e.g. `#ff0000` or `00ff00` (you can omit the `#` character if you want)"
+            },
+            {
+                "name": "Bytes",
+                "text": "If `true` the output will be in range `[0..255]`, otherwise `[0..1]`"
+            },
+            {
+                "name": "R",
+                "text": "The red amount"
+            },
+            {
+                "name": "G",
+                "text": "The green amount"
+            },
+            {
+                "name": "B",
+                "text": "The blue amount"
+            }
+        ]
+    }
 }

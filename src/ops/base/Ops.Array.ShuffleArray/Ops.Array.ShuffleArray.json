@@ -1,5 +1,5 @@
 {
-    "summary": "randomize the order of an array",
+    "summary": "Randomizes the order of elements inside an array",
     "layout": {
         "portsIn": [
             {
@@ -30,5 +30,29 @@
     "updated": 1516729034534,
     "authorName": "tim",
     "id": "f5a62cd4-934a-4feb-99dc-f6cd6edfe350",
-    "created": 1515843002617
+    "created": 1515843002617,
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Shuffles the array"
+            },
+            {
+                "name": "Shuffle on Change",
+                "text": "If set to `true`, the resulting array will be shuffled every time the input array changed, if set to `false` only when `Execute` is triggered"
+            },
+            {
+                "name": "array",
+                "text": "The input array to shuffle"
+            },
+            {
+                "name": "Next",
+                "text": "Triggers after the op is done shuffling"
+            },
+            {
+                "name": "shuffled array",
+                "text": "The shuffled array"
+            }
+        ]
+    }
 }

@@ -1,5 +1,4 @@
 
-op.name='fog';
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var density=op.addInPort(new Port(op,"density",OP_PORT_TYPE_VALUE));

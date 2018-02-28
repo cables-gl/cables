@@ -1,1 +1,51 @@
-{}
+{
+    "updated": 1519815115107,
+    "authorName": "pandur",
+    "id": "fba86dad-f37f-482e-a8fb-2abc76723ecf",
+    "created": 1519812602106,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Columns"
+            },
+            {
+                "type": "0",
+                "name": "Rows"
+            },
+            {
+                "type": "0",
+                "name": "Spacing Columns"
+            },
+            {
+                "type": "0",
+                "name": "Spacing Rows"
+            },
+            {
+                "type": "0",
+                "name": "Center"
+            },
+            {
+                "type": "0",
+                "name": "Rotate"
+            },
+            {
+                "type": "0",
+                "name": "Scale"
+            }
+        ],
+        "name": "Ops.Exp.Gl.VectorFieldArray"
+    }
+}

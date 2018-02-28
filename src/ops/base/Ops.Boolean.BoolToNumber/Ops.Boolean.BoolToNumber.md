@@ -1,0 +1,1 @@
+Useful if you need to convert a boolean value (`true` or `false`) to a number (`0` or `1`). This can be useful if an op only accepts a number, but you want to feed in a boolean value.

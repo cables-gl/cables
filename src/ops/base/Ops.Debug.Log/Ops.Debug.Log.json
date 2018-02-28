@@ -27,5 +27,30 @@
             }
         ],
         "name": "Ops.Debug.Log"
+    },
+    "summary": "Prints something to the developer console",
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Executes the op, needed if you want to log arrays or objects"
+            },
+            {
+                "name": "Function Input",
+                "text": "Prints a message to the browser’s developer console every time the port is triggered"
+            },
+            {
+                "name": "Value Input",
+                "text": "Prints a message every time the value changes"
+            },
+            {
+                "name": "Array Input",
+                "text": "Prints a message every time the array changes (you might need to connect the `Execute` port)"
+            },
+            {
+                "name": "Object Input",
+                "text": "Prints a message every time the object changes (you might need to connect the `Execute` port)"
+            }
+        ]
     }
 }

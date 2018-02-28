@@ -1,1 +1,63 @@
-{}
+{
+    "updated": 1519813814518,
+    "authorName": "pandur",
+    "id": "f8588593-43e5-4f5b-b89e-b2ce880d90fa",
+    "created": 1519813812816,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Size Area X"
+            },
+            {
+                "type": "0",
+                "name": "Size Area Y"
+            },
+            {
+                "type": "0",
+                "name": "Size Area Z"
+            },
+            {
+                "type": "0",
+                "name": "Particles"
+            },
+            {
+                "type": "0",
+                "name": "Speed"
+            },
+            {
+                "type": "0",
+                "name": "Lifetime"
+            },
+            {
+                "type": "0",
+                "name": "Fade Birth Death"
+            },
+            {
+                "type": "0",
+                "name": "Show"
+            },
+            {
+                "type": "0",
+                "name": "Pos X"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y"
+            },
+            {
+                "type": "0",
+                "name": "Pos Z"
+            }
+        ],
+        "name": "Ops.Gl2.ForceField.ForceFieldParticleEmitter"
+    }
+}

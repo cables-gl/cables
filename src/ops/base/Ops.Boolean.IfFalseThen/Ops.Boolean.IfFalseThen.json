@@ -27,5 +27,25 @@
         ],
         "name": "Ops.Boolean.IfFalseThen"
     },
-    "summary": "triggers children if value is false"
+    "summary": "Triggers if input value is `false`",
+    "docs": {
+        "ports": [
+            {
+                "name": "Exe",
+                "text": "Executes the op"
+            },
+            {
+                "name": "Boolean",
+                "text": "The boolean value to check for falsiness"
+            },
+            {
+                "name": "then",
+                "text": "Triggers when the input value is `false`"
+            },
+            {
+                "name": "else",
+                "text": "Triggers when the input value is `true`"
+            }
+        ]
+    }
 }

@@ -1,0 +1,1 @@
+`output array` gets `input array` after triggering `exec`

@@ -1,0 +1,58 @@
+{
+    "updated": 1519814609734,
+    "authorName": "pandur",
+    "id": "43ed1123-1312-4383-b843-27b8ec540c09",
+    "created": 1519814609448,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "0"
+            },
+            {
+                "type": "1",
+                "name": "1"
+            },
+            {
+                "type": "1",
+                "name": "2"
+            },
+            {
+                "type": "1",
+                "name": "3"
+            },
+            {
+                "type": "1",
+                "name": "4"
+            },
+            {
+                "type": "1",
+                "name": "5"
+            },
+            {
+                "type": "1",
+                "name": "6"
+            },
+            {
+                "type": "1",
+                "name": "7"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "number"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerNumber"
+    },
+    "summary": "Outputs the last number of the input port which was triggered",
+    "docs": {
+        "ports": [
+            {
+                "name": "number",
+                "text": "The input-port which was triggered last"
+            }
+        ]
+    }
+}

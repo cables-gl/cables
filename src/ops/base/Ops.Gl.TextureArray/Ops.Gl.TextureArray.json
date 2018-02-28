@@ -1,1 +1,85 @@
-{}
+{
+    "updated": 1519814245770,
+    "authorName": "pandur",
+    "id": "fac012e2-43c8-4e21-85ac-189fe85d5723",
+    "created": 1519814244088,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture 0"
+            },
+            {
+                "type": "2",
+                "name": "Texture 1"
+            },
+            {
+                "type": "2",
+                "name": "Texture 2"
+            },
+            {
+                "type": "2",
+                "name": "Texture 3"
+            },
+            {
+                "type": "2",
+                "name": "Texture 4"
+            },
+            {
+                "type": "2",
+                "name": "Texture 5"
+            },
+            {
+                "type": "2",
+                "name": "Texture 6"
+            },
+            {
+                "type": "2",
+                "name": "Texture 7"
+            },
+            {
+                "type": "2",
+                "name": "Texture 8"
+            },
+            {
+                "type": "2",
+                "name": "Texture 9"
+            },
+            {
+                "type": "2",
+                "name": "Texture 10"
+            },
+            {
+                "type": "2",
+                "name": "Texture 11"
+            },
+            {
+                "type": "2",
+                "name": "Texture 12"
+            },
+            {
+                "type": "2",
+                "name": "Texture 13"
+            },
+            {
+                "type": "2",
+                "name": "Texture 14"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Count"
+            }
+        ],
+        "name": "Ops.Gl.TextureArray"
+    },
+    "summary": "create an array of textures",
+    "docs": {
+        "ports": []
+    }
+}

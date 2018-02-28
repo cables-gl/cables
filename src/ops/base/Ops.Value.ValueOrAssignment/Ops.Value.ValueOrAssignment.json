@@ -1,0 +1,29 @@
+{
+    "updated": 1519813719743,
+    "authorName": "pandur",
+    "id": "ff9bc6a6-2cb3-4a85-8fd7-c9c61f402869",
+    "created": 1519813027619,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Default Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Value.ValueOrAssignment"
+    },
+    "summary": "outputs value or if false, default value",
+    "docs": {
+        "ports": []
+    }
+}

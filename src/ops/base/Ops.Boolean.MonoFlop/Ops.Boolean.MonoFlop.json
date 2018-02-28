@@ -31,5 +31,29 @@
         ],
         "name": "Ops.Boolean.MonoFlop"
     },
-    "summary": "trigger switches bool to true, turns back to false automatically"
+    "summary": "Sets output to `1` when triggered, turns back to `0` automatically after x seconds",
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger",
+                "text": "When triggered, `Result` is set to `Value True`"
+            },
+            {
+                "name": "Duration",
+                "text": "Duration in seconds when to automatically reset the `Result` to `Value False`"
+            },
+            {
+                "name": "Value True",
+                "text": "The value to use when `Trigger` is triggered"
+            },
+            {
+                "name": "Value False",
+                "text": "The value to use after the time is over"
+            },
+            {
+                "name": "Result",
+                "text": "Either `1` (directly after `Trigger` was triggered), or `0`"
+            }
+        ]
+    }
 }

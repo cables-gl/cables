@@ -1,0 +1,10 @@
+{
+    "updated": 1519300911209,
+    "authorName": "tim",
+    "id": "d3fdb4e1-199d-487a-a719-1315aa49fcfb",
+    "created": 1519300845608,
+    "summary": "Outputs the maximum value since reset has been triggered",
+    "docs": {
+        "ports": []
+    }
+}

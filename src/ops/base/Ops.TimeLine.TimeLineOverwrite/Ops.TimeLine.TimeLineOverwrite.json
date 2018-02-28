@@ -1,0 +1,29 @@
+{
+    "updated": 1519811208848,
+    "authorName": "pandur",
+    "id": "f0492ba2-5009-4a9a-bfd9-8a03633df31c",
+    "created": 1519811205999,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "new time"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "time"
+            }
+        ],
+        "name": "Ops.TimeLine.TimeLineOverwrite"
+    }
+}

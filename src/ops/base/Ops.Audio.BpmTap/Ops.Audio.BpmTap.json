@@ -1,0 +1,90 @@
+{
+    "updated": 1519733673022,
+    "authorName": "tim",
+    "id": "86096ee6-08f7-4463-b7c3-41cf7bc80de7",
+    "created": 1519733673023,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "1",
+                "name": "tap"
+            },
+            {
+                "type": "1",
+                "name": "sync"
+            },
+            {
+                "type": "1",
+                "name": "nudgeLeft"
+            },
+            {
+                "type": "1",
+                "name": "nudgeRight"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "beat"
+            },
+            {
+                "type": "0",
+                "name": "Bpm"
+            },
+            {
+                "type": "3",
+                "name": "States"
+            },
+            {
+                "type": "0",
+                "name": "Beat Index"
+            }
+        ],
+        "name": "Ops.Audio.BpmTap"
+    },
+    "summary": "Let’s you tap in a beat, useful to synchronise visuals to music (VJ, sync, sound)",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Executes the op"
+            },
+            {
+                "name": "tap",
+                "text": "Press the `tap`-button multiple times to tap in a beat. Once you stopped `BpmTap` will start to send out values on its own after one bar"
+            },
+            {
+                "name": "sync",
+                "text": "If `BpmTap` is out of sync with your music, press `sync` once on the start of a beat to reset the start beat"
+            },
+            {
+                "name": "nudgeLeft",
+                "text": "To fine-tune the `bpm` value press `nudgeLeft` various times, the `bpm`-value will decrease"
+            },
+            {
+                "name": "nudgeRight",
+                "text": "To fine-tune the `bpm` value press `nudgeRight` various times, the `bpm`-value will increase"
+            },
+            {
+                "name": "beat",
+                "text": "Triggers on every beat – *1, 2, 3, 4*."
+            },
+            {
+                "name": "Bpm",
+                "text": "The resulting BPM (beats per minute)"
+            },
+            {
+                "name": "States",
+                "text": "An array of length 4, e.g. `[1, 0, 0, 0]` —> first beat"
+            },
+            {
+                "name": "Beat Index",
+                "text": "Either `1`, `2`, `3` or `4`"
+            }
+        ]
+    }
+}
