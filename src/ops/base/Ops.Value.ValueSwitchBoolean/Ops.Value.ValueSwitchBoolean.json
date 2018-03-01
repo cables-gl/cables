@@ -1,0 +1,33 @@
+{
+    "updated": 1519910519968,
+    "authorName": "pandur",
+    "id": "637c5fa8-840d-4535-96ab-3d27b458a8ba",
+    "created": 1519910342752,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Boolean"
+            },
+            {
+                "type": "0",
+                "name": "Value true"
+            },
+            {
+                "type": "0",
+                "name": "Value false"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Value.ValueSwitchBoolean"
+    },
+    "summary": "switch between two values by a boolean",
+    "docs": {
+        "ports": []
+    }
+}

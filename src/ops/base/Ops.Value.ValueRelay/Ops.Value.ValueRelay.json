@@ -1,0 +1,42 @@
+{
+    "updated": 1519832810414,
+    "authorName": "tim",
+    "id": "594105c8-1fdb-4f3c-bbd5-29b9ad6b33e0",
+    "created": 1519832716109,
+    "summary": "Let’s a value through only if control bool is true",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value In",
+                "text": "The value to let through"
+            },
+            {
+                "name": "Pass Through",
+                "text": "Control bool, if `true` `Value In` will be let through to `Value Out`"
+            },
+            {
+                "name": "Value Out",
+                "text": "Same value as `Value In` if `Pass Through` is set to `true`"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value In"
+            },
+            {
+                "type": "0",
+                "name": "Pass Through"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Value Out"
+            }
+        ],
+        "name": "Ops.Value.ValueRelay"
+    }
+}

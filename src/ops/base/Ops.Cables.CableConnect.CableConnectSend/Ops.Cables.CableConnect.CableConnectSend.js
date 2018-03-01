@@ -1,4 +1,3 @@
-op.name="CableConnectSend";
 
 var connection=op.inObject("Connection");
 

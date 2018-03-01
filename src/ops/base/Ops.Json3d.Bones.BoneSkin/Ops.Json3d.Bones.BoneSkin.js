@@ -190,7 +190,7 @@ render.onTriggered=function()
             }
             else
             {
-                console.log('no bone matrix',i);
+                // console.log('no bone matrix',i);
             }
         }
         // console.log(boneMatrices);

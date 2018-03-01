@@ -1,1 +1,33 @@
-{}
+{
+    "updated": 1519837570847,
+    "authorName": "pandur",
+    "id": "98d1c79e-71ea-468b-81fc-17da2cd3da89",
+    "created": 1519837569086,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "value"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "1",
+                "name": "reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "name": "Ops.Gl.Textures.Graph"
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "updated": 1519816671060,
+    "authorName": "pandur",
+    "id": "20be6064-b332-447c-a220-e70d5bc506e0",
+    "created": 1519816612579,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Mode"
+            },
+            {
+                "type": "0",
+                "name": "weightMul"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "white"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatX"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatY"
+            },
+            {
+                "type": "0",
+                "name": "Tex Offset X"
+            },
+            {
+                "type": "0",
+                "name": "Tex Offset Y"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Shader.ChromaKeyMaterial"
+    }
+}

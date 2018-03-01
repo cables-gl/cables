@@ -1,4 +1,3 @@
-op.name="Textarea";
 
 var text=op.addOutPort(new Port(op,"text",OP_PORT_TYPE_VALUE));
 var visible=op.addInPort(new Port(op,"visible",OP_PORT_TYPE_VALUE,{display:'bool'}));

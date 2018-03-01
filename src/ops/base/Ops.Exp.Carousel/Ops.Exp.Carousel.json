@@ -1,5 +1,5 @@
 {
-    "updated": 1519320711413,
+    "updated": 1519833639554,
     "authorName": "tim",
     "id": "595f80db-6ac9-4667-8611-142ef208395a",
     "created": 1519237986062,
@@ -46,6 +46,10 @@
             {
                 "type": "0",
                 "name": "Front Index"
+            },
+            {
+                "type": "0",
+                "name": "Front Percentage"
             }
         ],
         "name": "Ops.Exp.Carousel"

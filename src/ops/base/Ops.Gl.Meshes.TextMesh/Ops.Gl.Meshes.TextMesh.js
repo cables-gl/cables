@@ -102,83 +102,11 @@ op.onDelete=function()
 
 };
 
-var srcFrag=''
-    .endl()+'precision mediump float;'
-    .endl()+'UNI sampler2D tex;'
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'UNI float r;'
-    .endl()+'UNI float g;'
-    .endl()+'UNI float b;'
-    .endl()+'UNI float a;'
 
-    .endl()+''
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    .endl()+'   col.a=col.r;'
-    // .endl()+'   col.a=1.0;'
-    .endl()+'   col.r*=r;'
-    .endl()+'   col.g*=g;'
-    .endl()+'   col.b*=b;'
-    .endl()+'   col*=a;'
-
-    .endl()+'   gl_FragColor=col;'
-    .endl()+'}'
-    .endl();
-
-var srcVert=''
-    .endl()+'precision mediump float;'
-    .endl()+'UNI sampler2D tex;'
-    .endl()+'UNI mat4 projMatrix;'
-    .endl()+'UNI mat4 modelMatrix;'
-    .endl()+'UNI mat4 viewMatrix;'
-    .endl()+'UNI float scale;'
-    .endl()+'IN vec3 vPosition;'
-    .endl()+'IN vec2 attrTexCoord;'
-    .endl()+'IN mat4 instMat;'
-    .endl()+'IN vec2 attrTexOffsets;'
-    .endl()+'IN vec2 attrTexSize;'
-
-    .endl()+'OUT vec2 texCoord;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   texCoord=(attrTexCoord*(attrTexSize)) + attrTexOffsets;'
-    .endl()+'   mat4 instModelMat=instMat;'
-    .endl()+'   instModelMat[3][0]*=scale;'
-
-    .endl()+'   vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );'
-
-    .endl()+'   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
-
-// .endl()+'    #define BILLBOARD'
-// .endl()+'    #ifdef BILLBOARD'
-// .endl()+'       vec3 position=vert.xyz;'
-// .endl()+'       mat4 mvMatrix=viewMatrix*modelMatrix;'
-
-// .endl()+'       gl_Position = projMatrix * mvMatrix * vec4(('
-// .endl()+'           position.x * vec3('
-// .endl()+'               mvMatrix[0][0],'
-// .endl()+'               mvMatrix[1][0],'
-// .endl()+'               mvMatrix[2][0] ) +'
-// .endl()+'           position.y * vec3('
-// .endl()+'               mvMatrix[0][1],'
-// .endl()+'               mvMatrix[1][1],'
-// .endl()+'               mvMatrix[2][1]) ), 1.0);'
-// .endl()+'    #endif'
-// .endl()+'    #ifndef BILLBOARD'
-// .endl()+'        mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;'
-// .endl()+'    #endif'
-
-    .endl()+'   #ifndef BILLBOARD'
-    .endl()+'       gl_Position = projMatrix * mvMatrix * vert;'
-    .endl()+'   #endif'
-    .endl()+'}'
-    .endl();
 
 
 var shader=new CGL.Shader(cgl,'TextMesh');
-shader.setSource(srcVert,srcFrag);
+shader.setSource(attachments.textmesh_vert,attachments.textmesh_frag);
 var uniTex=new CGL.Uniform(shader,'t','tex',0);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
@@ -218,7 +146,7 @@ render.onTriggered=function()
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
 
-    cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
+    // cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     cgl.setShader(shader);
 

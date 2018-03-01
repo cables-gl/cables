@@ -18,5 +18,21 @@
         ],
         "name": "Ops.Patch.Function"
     },
-    "summary": "trigger from external function when embedded into a website"
+    "summary": "trigger from external function when embedded into a website",
+    "docs": {
+        "ports": [
+            {
+                "name": "Function Name",
+                "text": "The name of the function you want to define, e.g. when you name the function `myFunction` you can trigger it from your JavaScript-Code using `CABLES.patch.config.myFunction();`"
+            },
+            {
+                "name": "trigger",
+                "text": "Execute the trigger from inside cables, for testing or to combine internal / external trigger"
+            },
+            {
+                "name": "Trigger",
+                "text": "Triggered every time the input `Trigger` is executed or the function was called from outside cables"
+            }
+        ]
+    }
 }

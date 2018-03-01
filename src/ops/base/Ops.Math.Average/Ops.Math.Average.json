@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Math.Average"
+    },
+    "summary": "average of last two values",
+    "docs": {
+        "ports": []
     }
 }

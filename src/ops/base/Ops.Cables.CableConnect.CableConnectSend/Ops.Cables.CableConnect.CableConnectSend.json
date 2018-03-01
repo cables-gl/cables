@@ -1,1 +1,23 @@
-{}
+{
+    "updated": 1519816851643,
+    "authorName": "pandur",
+    "id": "76c4f962-7afe-4884-b53c-c19af7b426e1",
+    "created": 1519816851162,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Connection"
+            },
+            {
+                "type": "0",
+                "name": "Message"
+            },
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Cables.CableConnect.CableConnectSend"
+    }
+}

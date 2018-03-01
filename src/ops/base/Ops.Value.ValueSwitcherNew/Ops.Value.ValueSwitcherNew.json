@@ -1,0 +1,61 @@
+{
+    "updated": 1519816668160,
+    "authorName": "pandur",
+    "id": "fbb89f72-f2e3-4d34-ad01-7d884a1bcdc0",
+    "created": 1519816588260,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Index"
+            },
+            {
+                "type": "0",
+                "name": "Value 0"
+            },
+            {
+                "type": "0",
+                "name": "Value 1"
+            },
+            {
+                "type": "0",
+                "name": "Value 2"
+            },
+            {
+                "type": "0",
+                "name": "Value 3"
+            },
+            {
+                "type": "0",
+                "name": "Value 4"
+            },
+            {
+                "type": "0",
+                "name": "Value 5"
+            },
+            {
+                "type": "0",
+                "name": "Value 6"
+            },
+            {
+                "type": "0",
+                "name": "Value 7"
+            },
+            {
+                "type": "0",
+                "name": "Value 8"
+            },
+            {
+                "type": "0",
+                "name": "Value 9"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Value.ValueSwitcherNew"
+    }
+}
