@@ -1,9 +1,7 @@
-op.name="CubeMapReflection";
 
 var render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 var inCubemap=op.inObject("Cubemap");
 
-var inScale=op.inValue("Scale",10);
 var inAmount=op.inValueSlider("Amount",0.3);
 
 var next=op.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));

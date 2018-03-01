@@ -12,7 +12,7 @@ var attribs=null;
 
 render.onLinkChanged=removeModule;
 trigger.onLinkChanged=removeModule;
-needsCodeUpdate=true;
+var needsCodeUpdate=true;
 
 var cgl=op.patch.cgl;
 var shader=null;
@@ -100,7 +100,7 @@ render.onTriggered=function()
                 srcBodyFrag:srcBodyFrag
             });
 
-        uniMax=new CGL.Uniform(shader,'f',moduleFrag.prefix+'max',limitMax);
+        limitMax.uniMax=new CGL.Uniform(shader,'f',moduleFrag.prefix+'max',limitMax);
     }
 
     trigger.trigger();

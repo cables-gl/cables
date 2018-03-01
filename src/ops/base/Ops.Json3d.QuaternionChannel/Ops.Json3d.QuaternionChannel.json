@@ -1,7 +1,30 @@
 {
-    "updated": 1513973670600,
+    "updated": 1519942660313,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "b9823462-7055-467a-a42e-18f9f7a7d3d3",
-    "created": 1513973575225
+    "created": 1513973575225,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "channel"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Json3d.QuaternionChannel"
+    },
+    "summary": "internal json3d op for rotation animations",
+    "docs": {
+        "ports": []
+    }
 }

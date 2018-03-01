@@ -19,7 +19,7 @@ var attribs=null;
 
 render.onLinkChanged=removeModule;
 trigger.onLinkChanged=removeModule;
-needsCodeUpdate=true;
+var needsCodeUpdate=true;
 
 var cgl=op.patch.cgl;
 var shader=null;
@@ -38,17 +38,24 @@ function removeModule()
 
         shader=null;
     }
+    console.log('randomcolor removemodule!');
+
     needsCodeUpdate=true;
 }
 
 inAttrib.onChange=function()
 {
     needsCodeUpdate=true;
+    console.log('attrib change!!!!');
 };
 
 function updateCode()
 {
-    if(attrName==='')return;
+    if(!attrName || attrName==='')
+    {
+        needsCodeUpdate=true;
+        return;
+    }
 
     srcHeadFrag=''
         .endl()+'UNI float MOD_seed;'
@@ -97,11 +104,22 @@ inGeom.onChange=function()
 render.onTriggered=function()
 {
     if(!inGeom.get())return;
+    if(needsCodeUpdate)console.log('needsCodeUpdate');
+    if(!srcBodyFrag)console.log('srcBodyFrag');
+    if(cgl.getShader()!=shader)console.log('cgl.getShader',shader);
+    
     if(cgl.getShader()!=shader || needsCodeUpdate || !srcBodyFrag)
     {
+        
+        console.log('random color RECOMPILE');
+        
         if(shader) removeModule();
         shader=cgl.getShader();
-        if(!shader)return;
+        if(!shader)
+        {
+            console.log('there is no shader');
+            return;
+        }
         if(needsCodeUpdate|| !srcHeadFrag || !srcBodyFrag) updateCode();
 
         var attr=inGeom.get().getAttribute(inAttrib.get());

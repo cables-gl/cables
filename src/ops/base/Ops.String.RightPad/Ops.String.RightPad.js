@@ -9,14 +9,11 @@ num.onChange=update;
 
 function update()
 {
-    var v=Math.floor(val.get());
-    var n=Math.floor(num.get());
-
-    var pad='';
-    for(var i=0;i<n;i++)pad+=(''+char.get());
-    
-    var str=v+'';
-    str = pad.substring(0, pad.length - str.length) + str;
-
+    var str=val.get()+'';
+    for(var i=str.length;i<num.get();i++)
+    {
+        if(i==str.length && !isNaN(parseFloat(val.get())) && str.indexOf('.')==-1) str+='.';
+        else str+=char.get();
+    }
     out.set(str);
 }

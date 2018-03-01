@@ -33,5 +33,9 @@
             }
         ],
         "name": "Ops.Value.DelayedValue"
+    },
+    "summary": "delay a value by seconds",
+    "docs": {
+        "ports": []
     }
 }

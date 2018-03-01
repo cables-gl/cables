@@ -34,5 +34,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.Physics.SetVelocity"
+    },
+    "summary": "set velocity of a physic object",
+    "docs": {
+        "ports": []
     }
 }
