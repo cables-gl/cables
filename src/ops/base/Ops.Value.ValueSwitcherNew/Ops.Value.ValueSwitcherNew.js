@@ -1,4 +1,3 @@
-op.name="ValueSwitcher";
 
 var idx=op.inValueInt("Index");
 

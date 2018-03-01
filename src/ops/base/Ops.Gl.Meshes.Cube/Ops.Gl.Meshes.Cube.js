@@ -11,6 +11,7 @@ var active=op.inValueBool('Active',true);
 var trigger=op.outFunction('trigger');
 var geomOut=op.outObject("geometry");
 
+
 var cgl=op.patch.cgl;
 var geom=null;
 var mesh=null;

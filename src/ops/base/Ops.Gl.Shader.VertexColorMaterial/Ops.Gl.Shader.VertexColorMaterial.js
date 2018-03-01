@@ -57,7 +57,7 @@ opacity.onValueChanged=function()
 
 var shader=new CGL.Shader(cgl,'vertex color material');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-uniOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
+shader.uniOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 
 shader.setSource(srcVert,srcFrag);
 op.onLoaded=shader.compile;
