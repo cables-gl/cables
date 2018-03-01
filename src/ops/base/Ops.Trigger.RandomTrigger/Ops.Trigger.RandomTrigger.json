@@ -1,0 +1,78 @@
+{
+    "updated": 1519835676900,
+    "authorName": "pandur",
+    "id": "3996175e-0424-407b-bcff-a7b4791d75df",
+    "created": 1519832323481,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Num Times"
+            },
+            {
+                "type": "0",
+                "name": "Seed"
+            },
+            {
+                "type": "0",
+                "name": "Only Once"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Index"
+            },
+            {
+                "type": "1",
+                "name": "trigger 0"
+            },
+            {
+                "type": "1",
+                "name": "trigger 1"
+            },
+            {
+                "type": "1",
+                "name": "trigger 2"
+            },
+            {
+                "type": "1",
+                "name": "trigger 3"
+            },
+            {
+                "type": "1",
+                "name": "trigger 4"
+            },
+            {
+                "type": "1",
+                "name": "trigger 5"
+            },
+            {
+                "type": "1",
+                "name": "trigger 6"
+            },
+            {
+                "type": "1",
+                "name": "trigger 7"
+            }
+        ],
+        "name": "Ops.Trigger.RandomTrigger"
+    },
+    "summary": "randomly trigger output ports",
+    "docs": {
+        "ports": [
+            {
+                "name": "Num Times",
+                "text": "how many random ports will be triggered"
+            },
+            {
+                "name": "Only Once",
+                "text": "every output is max triggered once"
+            }
+        ]
+    }
+}

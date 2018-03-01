@@ -6,6 +6,10 @@ var inSeed=op.inValue("Seed",1000);
 var inMin=op.inValueSlider("Min",0.0);
 var inMax=op.inValueSlider("Max",1.0);
 
+var inRandR=op.inValueSlider("Random R",0.0);
+var inRandG=op.inValueSlider("Random G",0.0);
+var inRandB=op.inValueSlider("Random B",0.0);
+
 var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var srcHeadFrag='';
@@ -50,6 +54,9 @@ function updateCode()
         .endl()+'UNI float MOD_seed;'
         .endl()+'UNI float MOD_min;'
         .endl()+'UNI float MOD_max;'
+        .endl()+'UNI float MOD_randR;'
+        .endl()+'UNI float MOD_randG;'
+        .endl()+'UNI float MOD_randB;'
 
         .endl()+'float MOD_round(float user_a) {'
         .endl()+'   return floor((user_a+0.5));'
@@ -61,9 +68,12 @@ function updateCode()
         .endl();
 
     srcBodyFrag=''
-
         .endl()+'float MOD_coord=MOD_round('+attrName+'Frag*1000.0)/1000.0+MOD_seed;'
         .endl()+'col.rgb*= (MOD_rand(vec2(MOD_coord))*(MOD_max-MOD_min))+MOD_min ;'
+        
+        .endl()+'col.r+=MOD_rand(vec2(MOD_coord*2.0))*MOD_randR;'
+        .endl()+'col.g+=MOD_rand(vec2(MOD_coord*3.0))*MOD_randG;'
+        .endl()+'col.b+=MOD_rand(vec2(MOD_coord*13.0))*MOD_randB;'
         .endl();
 
     needsCodeUpdate=false;
@@ -117,6 +127,10 @@ render.onTriggered=function()
         inSeed.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'seed',inSeed);
         inMin.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'min',inMin);
         inMax.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'max',inMax);
+
+        inRandR.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'randR',inRandR);
+        inRandG.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'randG',inRandG);
+        inRandB.uni=new CGL.Uniform(shader,'f',moduleFrag.prefix+'randB',inRandB);
 
     }
 
