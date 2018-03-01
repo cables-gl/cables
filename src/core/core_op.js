@@ -53,6 +53,9 @@ CABLES.Op = function()
     this.onLoaded=null;
     this.onDelete=null;
     this.onUiAttrChange=null;
+
+    this._eventCallbacks=[];
+
     this._instances=null;
 };
 {
@@ -793,8 +796,28 @@ CABLES.Op = function()
         this.uiAttr({'error':errorHtml});
     }
 
+    /**
+     * @function
+     * @description add an eventlistener ot op
+     * currently implemented:  "onEnabledChange"
+     * @param {which} name of event
+     * @param {function} callback
+     */
+    CABLES.Op.prototype.addListener=function(which,cb)
+    {
+        this._eventCallbacks[which]=cb;
+    }
 
-
+    /**
+     * @function
+     * @description enable/disable op
+     * @param {boolean} 
+     */
+    CABLES.Op.prototype.setEnabled=function(b)
+    {
+        this.enabled=b;
+        if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
+    }
 
 }
 

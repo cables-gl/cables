@@ -1,6 +1,7 @@
 
 
 var disableScaleWeb=op.inValueBool("Disable Scaling",true);
+var disableDefault=op.inValueBool("Disable Scroll",true);
 
 var active=op.inValueBool("Active",true);
 
@@ -50,7 +51,6 @@ function setPos(event)
 
 var ontouchstart=function(event)
 {
-    
     outTouched.set(true);
     setPos(event);
     numFingers.set(event.touches.length);
@@ -71,11 +71,11 @@ var ontouchmove=function(event)
     
     setPos(event);
     numFingers.set(event.touches.length);
-    if(disableScaleWeb.get() && event.scale !== 1)
+    if(disableDefault.get() || (disableScaleWeb.get() && event.scale !== 1))
     { 
         event.preventDefault();
     }
-    // if(event.touches && event.touches.length>0) onmousemove(event.touches[0]);
+    
 };
 
 
