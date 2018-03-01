@@ -1,4 +1,3 @@
-op.name="Graph";
 
 var trigger=this.addInPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 

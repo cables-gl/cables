@@ -73,14 +73,16 @@ render.onTriggered=function()
     if(!inGeom.get())return;
     if(cgl.getShader()!=shader || needsCodeUpdate || !srcBodyFrag)
     {
+        var attr=inGeom.get().getAttribute(inAttrib.get());
+        if(!attr)return;
+        attrName=inAttrib.get();
+        attrType=attr.type;
+
         if(shader) removeModule();
         shader=cgl.getShader();
         if(!shader)return;
         if(needsCodeUpdate|| !srcHeadFrag || !srcBodyFrag) updateCode();
 
-        var attr=inGeom.get().getAttribute(inAttrib.get());
-        attrName=inAttrib.get();
-        attrType=attr.type;
 
         shader.addAttribute(
             {

@@ -41,5 +41,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.Physics.World"
+    },
+    "summary": "start/configure a world with physic simulation",
+    "docs": {
+        "ports": []
     }
 }
