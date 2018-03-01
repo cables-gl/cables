@@ -26,5 +26,9 @@
             }
         ],
         "name": "Ops.Devices.Mobile.LockOrientation"
+    },
+    "summary": "locks orientation to landscape or portrait mode",
+    "docs": {
+        "ports": []
     }
 }

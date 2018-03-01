@@ -1,4 +1,3 @@
-op.name="Array3x2dProjection";
 
 var exe=op.inFunction("Exec");
 var inArr=op.inArray("Array3x");

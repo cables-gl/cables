@@ -1,1 +1,57 @@
-{}
+{
+    "updated": 1519812833810,
+    "authorName": "pandur",
+    "id": "9892b737-099d-4b33-8789-0ab9bdc40dab",
+    "created": 1519812832119,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "density"
+            },
+            {
+                "type": "2",
+                "name": "depth texture"
+            },
+            {
+                "type": "0",
+                "name": "ignore infinity"
+            },
+            {
+                "type": "0",
+                "name": "fog r"
+            },
+            {
+                "type": "0",
+                "name": "fog g"
+            },
+            {
+                "type": "0",
+                "name": "fog b"
+            },
+            {
+                "type": "0",
+                "name": "fog a"
+            },
+            {
+                "type": "0",
+                "name": "start"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Fog"
+    },
+    "summary": "objects further away are colored to enhance the perception of distance.",
+    "docs": {
+        "ports": []
+    }
+}

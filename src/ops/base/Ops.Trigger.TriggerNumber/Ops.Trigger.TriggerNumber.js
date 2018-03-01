@@ -1,4 +1,3 @@
-op.name='trigger number';
 var number=op.addOutPort(new Port(op,"number",OP_PORT_TYPE_VALUE));
 
 var exe0=op.addInPort(new Port(op,"0",OP_PORT_TYPE_FUNCTION));

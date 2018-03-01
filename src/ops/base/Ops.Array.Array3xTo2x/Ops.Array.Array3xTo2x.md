@@ -1,0 +1,1 @@
+`[xyzxyz]` becomes `[xyxyxy]`

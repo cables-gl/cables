@@ -1,4 +1,3 @@
-op.name="ArraySetValue3x";
 
 var exe=op.inFunctionButton("exe");
 

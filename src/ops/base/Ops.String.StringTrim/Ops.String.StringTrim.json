@@ -1,7 +1,22 @@
 {
-    "updated": 1518602965962,
+    "updated": 1519812727651,
     "authorName": "pandur",
     "id": "9729bf94-359d-4626-ba82-e5dec990908a",
     "created": 1518602958736,
-    "summary": "remove whitespace from both ends of a string"
+    "summary": "remove whitespace from both ends of a string",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringTrim"
+    }
 }

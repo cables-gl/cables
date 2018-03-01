@@ -1,8 +1,5 @@
-CABLES.Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
-
-this.name='AlphaMask';
 
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 // this.amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));

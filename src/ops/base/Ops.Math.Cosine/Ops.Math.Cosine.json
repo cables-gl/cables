@@ -1,0 +1,33 @@
+{
+    "updated": 1519297025375,
+    "authorName": "tim",
+    "id": "905e6cde-7eed-4c63-a849-153fc1c862f0",
+    "created": 1519297025378,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Amplitude"
+            },
+            {
+                "type": "0",
+                "name": "Frequency"
+            },
+            {
+                "type": "0",
+                "name": "Phase"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.Cosine"
+    }
+}

@@ -1,0 +1,78 @@
+{
+    "updated": 1519207671634,
+    "authorName": "tim",
+    "id": "e3b1fc2d-a813-4d9b-8cb0-595fc95af4e2",
+    "created": 1519148999110,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Index"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Default Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Index 0 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 1 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 2 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 3 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 4 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 5 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 6 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 7 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 8 Value"
+            },
+            {
+                "type": "0",
+                "name": "Index 9 Value"
+            }
+        ],
+        "name": "Ops.Value.ValueRouter"
+    },
+    "summary": "Routes the value to one of the output ports (based on index, relay)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Index",
+                "text": "Controls to which output port the value is routed"
+            },
+            {
+                "name": "Value",
+                "text": "The value to be routed to one of the output ports"
+            }
+        ]
+    }
+}

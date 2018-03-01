@@ -1,4 +1,3 @@
-op.name="MouseCursorImage";
 
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 

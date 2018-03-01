@@ -1,4 +1,3 @@
-op.name="ObjectKeyArray";
 
 var inObject=op.inObject("Object");
 var outObject=op.outObject("Result Object");

@@ -1,0 +1,41 @@
+{
+    "updated": 1519813844460,
+    "authorName": "pandur",
+    "id": "ff67d867-098e-4eb1-8b37-00ec0863ce5e",
+    "created": 1519813843868,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object1"
+            },
+            {
+                "type": "2",
+                "name": "Object2"
+            },
+            {
+                "type": "2",
+                "name": "Object3"
+            },
+            {
+                "type": "2",
+                "name": "Object4"
+            },
+            {
+                "type": "2",
+                "name": "Object5"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Out Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectFunnel"
+    },
+    "summary": "outputs the last changed object",
+    "docs": {
+        "ports": []
+    }
+}

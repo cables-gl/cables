@@ -1,9 +1,5 @@
-op.name="ObjectIterate";
-
 var inObj=op.inObject("Object");
-
 var outKey=op.outValue("Key");
-
 
 inObj.onChange=function()
 {
@@ -16,5 +12,4 @@ inObj.onChange=function()
             outKey.set(i);
         }
     }
-    
-}
+};

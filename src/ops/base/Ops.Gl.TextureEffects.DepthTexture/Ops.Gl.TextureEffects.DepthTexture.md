@@ -1,0 +1,1 @@
+white pixels are further away

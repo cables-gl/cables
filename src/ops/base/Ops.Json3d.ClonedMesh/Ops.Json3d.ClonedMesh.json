@@ -1,6 +1,23 @@
 {
-    "updated": 1516189873151,
+    "updated": 1519810492301,
     "authorName": "pandur",
     "id": "3a29d06c-77bb-4c0f-8a75-33b2188b9ab9",
-    "created": 1516189863314
+    "created": 1516189863314,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "0",
+                "name": "transformations"
+            }
+        ],
+        "name": "Ops.Json3d.ClonedMesh"
+    }
 }

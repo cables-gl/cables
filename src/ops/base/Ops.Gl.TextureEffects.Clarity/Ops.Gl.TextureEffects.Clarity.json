@@ -1,1 +1,26 @@
-{"summary":"Increase contrast in midtones"}
+{
+    "summary": "Increase contrast in midtones",
+    "updated": 1519812712349,
+    "authorName": "pandur",
+    "id": "37d66c32-5594-4509-bba0-0ba2cbb706d8",
+    "created": 1519812712350,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "amount"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Clarity"
+    }
+}

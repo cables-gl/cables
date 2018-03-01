@@ -1,1 +1,20 @@
-{"summary":"Use image as mousecursor"}
+{
+    "summary": "Use image as mousecursor",
+    "updated": 1519810495729,
+    "authorName": "pandur",
+    "id": "63554b1e-3f28-410b-b12b-c1d6d26d5459",
+    "created": 1519810406551,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "1",
+                "name": "Set Cursor"
+            }
+        ],
+        "name": "Ops.Html.MouseCursorImage"
+    }
+}

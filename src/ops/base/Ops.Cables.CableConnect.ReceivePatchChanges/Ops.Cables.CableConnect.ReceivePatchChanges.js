@@ -1,5 +1,3 @@
-op.name="ReceivePatchChanges";
-
 // var theOp=op.patch.getOpById("05a1af10-c454-46e9-bc9c-e5cae6f5a8ee");
 // theOp.getPort("r").set(1);
 

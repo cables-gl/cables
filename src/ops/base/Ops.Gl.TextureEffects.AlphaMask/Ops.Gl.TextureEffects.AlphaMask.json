@@ -1,1 +1,29 @@
-{}
+{
+    "updated": 1519816520050,
+    "authorName": "pandur",
+    "id": "da5268be-ad80-44d6-8c9b-33b1315241b0",
+    "created": 1519816515988,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "image"
+            },
+            {
+                "type": "0",
+                "name": "method"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.AlphaMask"
+    }
+}

@@ -1,4 +1,3 @@
-op.name="Voronoi";
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var pSites=op.inArray("Site Points");

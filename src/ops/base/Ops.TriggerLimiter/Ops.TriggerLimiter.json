@@ -26,5 +26,9 @@
             }
         ],
         "name": "Ops.TriggerLimiter"
+    },
+    "summary": "limits triggering to every x milliseconds",
+    "docs": {
+        "ports": []
     }
 }

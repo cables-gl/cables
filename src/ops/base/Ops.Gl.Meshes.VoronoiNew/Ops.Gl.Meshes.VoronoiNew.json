@@ -1,1 +1,40 @@
-{"libs":["rhill-voronoi-core.js"]}
+{
+    "libs": [
+        "rhill-voronoi-core.js"
+    ],
+    "updated": 1519816989480,
+    "authorName": "pandur",
+    "id": "189faf39-0bd9-4f92-b64c-4ca8ea861e12",
+    "created": 1519816989483,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "3",
+                "name": "Site Points"
+            },
+            {
+                "type": "0",
+                "name": "Width"
+            },
+            {
+                "type": "0",
+                "name": "Height"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Voronoi"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.VoronoiNew"
+    }
+}

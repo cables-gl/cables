@@ -1,0 +1,21 @@
+{
+    "updated": 1519816755505,
+    "authorName": "pandur",
+    "id": "2df1b492-6a97-4064-b939-ff926d4414d0",
+    "created": 1519816748888,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Shader.MinimalMaterial"
+    }
+}

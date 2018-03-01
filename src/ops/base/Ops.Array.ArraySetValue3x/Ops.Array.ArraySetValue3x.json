@@ -1,0 +1,41 @@
+{
+    "updated": 1519813592067,
+    "authorName": "pandur",
+    "id": "c3b2d0c9-0aa5-4605-948a-a53784fa8f1a",
+    "created": 1519813558455,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "index"
+            },
+            {
+                "type": "0",
+                "name": "Value 1"
+            },
+            {
+                "type": "0",
+                "name": "Value 2"
+            },
+            {
+                "type": "0",
+                "name": "Value 3"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            }
+        ],
+        "name": "Ops.Array.ArraySetValue3x"
+    }
+}

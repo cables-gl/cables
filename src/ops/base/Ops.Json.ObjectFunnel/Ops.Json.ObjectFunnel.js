@@ -1,4 +1,3 @@
-op.name="ObjectFunnel";
 
 var inObj1=op.inObject("Object1");
 var inObj2=op.inObject("Object2");

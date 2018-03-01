@@ -1,0 +1,1 @@
+outputs false when value equals 0,false,null,undefined

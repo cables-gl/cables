@@ -22,5 +22,14 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "44d34542-174c-47c6-b9c6-adde6fc371ac",
-    "created": 1506588207288
+    "created": 1506588207288,
+    "summary": "get an object from an array",
+    "docs": {
+        "ports": [
+            {
+                "name": "array",
+                "text": "must contain only objects"
+            }
+        ]
+    }
 }

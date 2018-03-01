@@ -1,0 +1,25 @@
+{
+    "updated": 1519814916802,
+    "authorName": "pandur",
+    "id": "f118e251-e82b-42dd-ba7f-e7e23ced07be",
+    "created": 1519743518627,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Boolean.ParseBoolean"
+    },
+    "summary": "parse boolean from string/number",
+    "docs": {
+        "ports": []
+    }
+}

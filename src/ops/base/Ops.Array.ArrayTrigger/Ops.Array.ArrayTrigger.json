@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Array.ArrayTrigger"
+    },
+    "summary": "Trigger an array",
+    "docs": {
+        "ports": []
     }
 }

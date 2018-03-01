@@ -15,12 +15,12 @@ op.onDelete=remove;
 child.onLinkChanged=updateSidebar;
 link.onLinkChanged=updateSidebar;
 link.onValueChanged=updateParams;
-var elementCheckBox=null;
+var elementValue=null;
 text.onValueChanged=updateText;
 
 inValue.onChange=function()
 {
-    elementCheckBox.innerHTML=inValue.get();
+    if(elementValue)elementValue.innerHTML=inValue.get();
 };
 
 
@@ -35,15 +35,15 @@ function init(params)
     element = document.createElement('div');
 
     var size=(params.height-params.padding*2);
-    elementCheckBox = document.createElement('div');
-    elementCheckBox.style.color="white";
+    elementValue = document.createElement('div');
+    elementValue.style.color="white";
 
 
     element.style['font-family']="monospace";
     element.style['user-select']="none";
 
     element.appendChild(textContent);
-    element.appendChild(elementCheckBox);
+    element.appendChild(elementValue);
 
     updateText();
     

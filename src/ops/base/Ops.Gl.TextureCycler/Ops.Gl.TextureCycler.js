@@ -1,7 +1,6 @@
 var self=this;
 var cgl=self.patch.cgl;
 
-this.name='TextureCycler';
 
 this.textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));

@@ -1,1 +1,9 @@
-{}
+{
+    "updated": 1519815129216,
+    "authorName": "pandur",
+    "id": "e3f68bc3-892a-4c78-9974-aca25c27025d",
+    "created": 1519815129219,
+    "layout": {
+        "name": "Ops.Ui.PatchInput"
+    }
+}

@@ -1,4 +1,3 @@
-op.name="Bool TimeLine Scrub";
 
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var state = op.addInPort(new Port(op,"state",OP_PORT_TYPE_VALUE,{display:'bool'}));

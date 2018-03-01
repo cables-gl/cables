@@ -1,1 +1,29 @@
-{}
+{
+    "updated": 1519817031979,
+    "authorName": "pandur",
+    "id": "84d9a6f0-ed7a-466d-b386-225ed9e89c60",
+    "created": 1519817031982,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "create port"
+            },
+            {
+                "type": "0",
+                "name": "dataStr"
+            },
+            {
+                "type": "0",
+                "name": "patchId"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "4",
+                "name": "create port out"
+            }
+        ],
+        "name": "Ops.Ui.SubPatch"
+    }
+}

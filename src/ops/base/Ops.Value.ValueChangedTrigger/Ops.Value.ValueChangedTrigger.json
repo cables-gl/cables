@@ -1,1 +1,25 @@
-{}
+{
+    "updated": 1519815003510,
+    "authorName": "pandur",
+    "id": "9f353fcc-da0b-4af8-ae5c-4edd256fc9e3",
+    "created": 1519814997602,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "1",
+                "name": "Execute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Value.ValueChangedTrigger"
+    }
+}

@@ -1,4 +1,3 @@
-op.name="ArrayGetArray";
 
 var inArrays=op.inArray("Array of Arrays");
 var index=op.inValueInt("Index");

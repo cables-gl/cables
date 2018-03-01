@@ -1,0 +1,33 @@
+{
+    "updated": 1519814221793,
+    "authorName": "pandur",
+    "id": "4dfc26dd-6151-4710-b68d-6c35f275df99",
+    "created": 1519814220116,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Key"
+            },
+            {
+                "type": "3",
+                "name": "Array Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectKeyArray"
+    },
+    "summary": "get array from object by key",
+    "docs": {
+        "ports": []
+    }
+}

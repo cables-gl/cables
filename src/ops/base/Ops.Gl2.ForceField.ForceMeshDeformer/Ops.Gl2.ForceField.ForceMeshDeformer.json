@@ -1,1 +1,25 @@
-{}
+{
+    "updated": 1519811228782,
+    "authorName": "pandur",
+    "id": "b140ddc3-997d-40fb-8fdb-3608b5d88169",
+    "created": 1519811228785,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Smooth"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl2.ForceField.ForceMeshDeformer"
+    }
+}

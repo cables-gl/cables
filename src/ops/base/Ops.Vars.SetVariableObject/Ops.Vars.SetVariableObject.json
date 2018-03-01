@@ -1,8 +1,21 @@
 {
-    "updated": 1513356393613,
+    "updated": 1519818195373,
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "27a8b574-ae7c-4191-a0e8-d7318f8278d8",
     "created": 1513356393616,
-    "summary": "Set a variable object"
+    "summary": "Set a variable object",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Variable"
+            }
+        ],
+        "name": "Ops.Vars.SetVariableObject"
+    }
 }

@@ -1,1 +1,49 @@
-{}
+{
+    "updated": 1519811172004,
+    "authorName": "pandur",
+    "id": "8b86a7d0-d358-4626-b92b-81c2ebe47412",
+    "created": 1519811167660,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "depth texture"
+            },
+            {
+                "type": "0",
+                "name": "nearplane"
+            },
+            {
+                "type": "0",
+                "name": "farplane"
+            },
+            {
+                "type": "0",
+                "name": "depth start"
+            },
+            {
+                "type": "0",
+                "name": "depth end"
+            },
+            {
+                "type": "0",
+                "name": "iterations"
+            },
+            {
+                "type": "0",
+                "name": "direction"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Dreprecated.Gl.TextureEffects.BlurByDepth"
+    }
+}

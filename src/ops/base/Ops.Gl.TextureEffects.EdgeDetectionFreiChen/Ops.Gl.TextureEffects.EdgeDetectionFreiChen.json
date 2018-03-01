@@ -2,5 +2,28 @@
     "summary": "draw only the edges of an image",
     "docs": {
         "ports": []
+    },
+    "updated": 1519811521164,
+    "authorName": "pandur",
+    "id": "deb29424-cebd-4003-a88a-1c375f877d86",
+    "created": 1519811312003,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "amount"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.EdgeDetectionFreiChen"
     }
 }

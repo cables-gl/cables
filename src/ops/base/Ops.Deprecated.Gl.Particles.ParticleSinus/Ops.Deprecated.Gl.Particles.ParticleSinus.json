@@ -1,0 +1,21 @@
+{
+    "updated": 1519810931608,
+    "authorName": "pandur",
+    "id": "ba4e1337-7d07-47f5-b31e-49a4f6ae47ab",
+    "created": 1519810931609,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Particles.ParticleSinus"
+    }
+}

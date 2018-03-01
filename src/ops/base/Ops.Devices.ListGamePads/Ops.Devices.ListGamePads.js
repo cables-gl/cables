@@ -1,4 +1,3 @@
-op.name='GamePads';
 var exe=op.inFunction("exe");
 var outNumPads=op.outValue("Num Gamepads");
 // var outPads=op.outArray("Pads");

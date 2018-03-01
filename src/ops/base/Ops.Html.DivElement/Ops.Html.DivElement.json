@@ -45,5 +45,9 @@
             }
         ],
         "name": "Ops.Html.DivElement"
+    },
+    "summary": "Create a html DIV element",
+    "docs": {
+        "ports": []
     }
 }

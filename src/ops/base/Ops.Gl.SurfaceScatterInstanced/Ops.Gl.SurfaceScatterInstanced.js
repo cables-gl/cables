@@ -265,8 +265,11 @@ function doRender()
         {
             op.patch.cgl.pushModelMatrix();
             
+            
             for(var j=0;j<16;j++)
-                op.patch.cgl.mvMatrix[j]=matrixArray[i+j];
+                m[j]=matrixArray[i+j];
+
+            mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,m);
 
             mesh.render(cgl.getShader());
             op.patch.cgl.popModelMatrix();
