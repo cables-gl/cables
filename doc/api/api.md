@@ -11,9 +11,15 @@ to create an API key goto your settings, select the tab "apikey" and click "crea
 
 - `/api/myprojects` 
   a list of all your projects
+
 - `/api/project/[PID]/export`
   create an export of a patch with the id PID
   the resulting json contains a field path. this is the download path for the exported zip file, relative to `https://cables.gl/`
+
+  url query parameters:
+
+  `removeIndexHtml` - remove index.html from export
+  `jsonName` - filename of resulting json file 
 
 #### accessing the API via CURL
 

@@ -65,7 +65,23 @@
         "ports": [
             {
                 "name": "FPS Limit",
-                "text": "Triggers according to your framerate (mostly 60 fps)"
+                "text": "Triggers according to your framerate (60 fps on 60hz screens)"
+            },
+            {
+                "name": "Fullscreen Button",
+                "text": "Show a html fullscreen button"
+            },
+            {
+                "name": "Hires Displays",
+                "text": "Support hires/retina displays"
+            },
+            {
+                "name": "width",
+                "text": "width of the canvas/renderer area"
+            },
+            {
+                "name": "height",
+                "text": "height of the canvas/renderer area"
             }
         ]
     }
