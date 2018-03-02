@@ -22,5 +22,9 @@
             }
         ],
         "name": "Ops.Json3d.ScaleChannel"
+    },
+    "summary": "internal json3d op for scale animations",
+    "docs": {
+        "ports": []
     }
 }

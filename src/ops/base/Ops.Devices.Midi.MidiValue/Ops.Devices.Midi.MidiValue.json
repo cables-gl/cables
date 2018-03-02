@@ -34,5 +34,9 @@
             }
         ],
         "name": "Ops.Devices.Midi.MidiValue"
+    },
+    "summary": "read a value from a midi knob",
+    "docs": {
+        "ports": []
     }
 }

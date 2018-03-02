@@ -25,5 +25,9 @@
             }
         ],
         "name": "Ops.Math.Array3xMultiplyMatrix"
+    },
+    "summary": "multiply every XYZ coordinate with a matrix",
+    "docs": {
+        "ports": []
     }
 }

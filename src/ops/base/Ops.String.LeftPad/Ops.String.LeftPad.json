@@ -22,5 +22,12 @@
         ],
         "name": "Ops.String.LeftPad"
     },
-    "summary": "create a fixed length string from a number 1 -> 0001"
+    "summary": "create a fixed length string from a number 1 -> 0001",
+    "updated": 1519940376158,
+    "authorName": "pandur",
+    "id": "9f4302de-6ae1-4fd0-8be7-c8ed0eca4deb",
+    "created": 1519940376160,
+    "docs": {
+        "ports": []
+    }
 }

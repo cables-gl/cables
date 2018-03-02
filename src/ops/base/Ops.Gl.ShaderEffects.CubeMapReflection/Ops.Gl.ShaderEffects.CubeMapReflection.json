@@ -1,5 +1,5 @@
 {
-    "updated": 1509136993167,
+    "updated": 1519942119686,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "1bcf3542-856b-4bde-a345-c0f26088ba0b",
@@ -30,5 +30,9 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.CubeMapReflection"
+    },
+    "summary": "add a reflection to any material",
+    "docs": {
+        "ports": []
     }
 }

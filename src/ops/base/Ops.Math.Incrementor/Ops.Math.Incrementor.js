@@ -1,6 +1,5 @@
-
-var increment=op.addInPort(new Port(op,"Increment",OP_PORT_TYPE_FUNCTION));
-var decrement=op.addInPort(new Port(op,"Decrement",OP_PORT_TYPE_FUNCTION));
+var increment = op.inFunctionButton("Increment");
+var decrement = op.inFunctionButton("Decrement");
 var inLength=op.addInPort(new Port(op,"Length",OP_PORT_TYPE_VALUE));
 // var reset=op.addInPort(new Port(op,"Reset",OP_PORT_TYPE_FUNCTION));
 var reset=op.inFunctionButton("Reset");

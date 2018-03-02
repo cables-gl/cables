@@ -143,6 +143,10 @@ render.onTriggered=function()
     {
         if(cgl.getShader()!=shader)
         {
+            
+            console.log('bonesys RECOMPILE');
+
+
             var startInit=CABLES.now();
             console.log("starting bone skin shader init...");
 
@@ -190,7 +194,7 @@ render.onTriggered=function()
             }
             else
             {
-                console.log('no bone matrix',i);
+                // console.log('no bone matrix',i);
             }
         }
         // console.log(boneMatrices);

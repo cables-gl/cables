@@ -5,7 +5,7 @@ var minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
 var maxDist=op.addInPort(new Port(op,"max distance",OP_PORT_TYPE_VALUE));
 var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
 var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
-var initialRadius=op.inValue("initial radius",5);
+var initialRadius=op.inValue("initial radius",0);
 
 var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
 
@@ -18,11 +18,11 @@ var inReset=op.inFunctionButton("Reset");
 
 var allowPanning=op.inValueBool("Allow Panning",true);
 var allowZooming=op.inValueBool("Allow Zooming",true);
+var allowRotation=op.inValueBool("Allow Rotation",true);
 var pointerLock=op.inValueBool("Pointerlock",false);
 
 var speedX=op.inValue("Speed X",1);
 var speedY=op.inValue("Speed Y",1);
-
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
@@ -33,8 +33,6 @@ restricted.set(true);
 mul.set(1);
 minDist.set(0.05);
 maxDist.set(99999);
-initialAxis.set(0.5);
-initialX.set(0.0);
 
 inReset.onTriggered=reset;
 
@@ -45,12 +43,16 @@ var vCenter=vec3.create();
 var viewMatrix=mat4.create();
 var vOffset=vec3.create();
 
+initialAxis.set(0.5);
+
+
 var mouseDown=false;
 var radius=5;
 outRadius.set(radius);
 
 var lastMouseX=0,lastMouseY=0;
 var percX=0,percY=0;
+
 
 vec3.set(vCenter, 0,0,0);
 vec3.set(vUp, 0,1,0);
@@ -81,7 +83,7 @@ function reset()
 {
     px=px%(Math.PI*2);
     py=py%(Math.PI*2);
-    
+
     percX=(initialX.get()*Math.PI*2);
     percY=(initialAxis.get()-0.5);
     radius=initialRadius.get();
@@ -177,13 +179,17 @@ function onmousemove(event)
     }
     else
     {
-        percX+=(movementX)*0.003;
-        percY+=(movementY)*0.002;
-        
-        if(restricted.get())
+        if(allowRotation.get())
         {
-            if(percY>0.5)percY=0.5;
-            if(percY<-0.5)percY=-0.5;
+            percX+=(movementX)*0.003;
+            percY+=(movementY)*0.002;
+            
+            if(restricted.get())
+            {
+                if(percY>0.5)percY=0.5;
+                if(percY<-0.5)percY=-0.5;
+            }
+            
         }
     }
 
@@ -246,18 +252,20 @@ function onMouseEnter(e)
 initialRadius.onValueChange(function()
 {
     // percX=(initialX.get()*Math.PI*2);
+    console.log('init radius');
     radius=initialRadius.get();
+    reset();
 });
 
 initialX.onValueChange(function()
 {
-    percX=(initialX.get()*Math.PI*2);
+    px=percX=(initialX.get()*Math.PI*2);
     
 });
 
 initialAxis.onValueChange(function()
 {
-    percY=(initialAxis.get()-0.5);
+    py=percY=(initialAxis.get()-0.5);
     eye=circlePos( percY );
 });
 
@@ -342,4 +350,8 @@ function unbind()
 eye=circlePos(0);
 this.setElement(cgl.canvas);
 
+
 bind();
+
+initialX.set(0.25);
+initialRadius.set(0.05);

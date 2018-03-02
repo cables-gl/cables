@@ -1,5 +1,5 @@
 {
-    "updated": 1519748896762,
+    "updated": 1519922235079,
     "authorName": "pandur",
     "id": "28c8c024-3ac9-4fca-8276-77ca76f35ad8",
     "created": 1519638909468,
@@ -28,6 +28,18 @@
             {
                 "type": "0",
                 "name": "Max"
+            },
+            {
+                "type": "0",
+                "name": "Random R"
+            },
+            {
+                "type": "0",
+                "name": "Random G"
+            },
+            {
+                "type": "0",
+                "name": "Random B"
             }
         ],
         "portsOut": [

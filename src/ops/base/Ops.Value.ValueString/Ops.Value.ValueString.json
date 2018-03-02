@@ -18,5 +18,18 @@
             }
         ],
         "name": "Ops.Value.ValueString"
+    },
+    "summary": "enter a string",
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "String which will be copied to the output port"
+            },
+            {
+                "name": "result",
+                "text": "Same as the input port (`Value`)"
+            }
+        ]
     }
 }

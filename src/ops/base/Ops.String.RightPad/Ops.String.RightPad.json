@@ -1,0 +1,33 @@
+{
+    "updated": 1519941196649,
+    "authorName": "pandur",
+    "id": "fb8851d1-7605-430a-bf7a-38a7bbe9b984",
+    "created": 1519940499582,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Char"
+            },
+            {
+                "type": "0",
+                "name": "Num"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "String"
+            }
+        ],
+        "name": "Ops.String.RightPad"
+    },
+    "summary": "create a string with a fixed length filling the space with a character",
+    "docs": {
+        "ports": []
+    }
+}

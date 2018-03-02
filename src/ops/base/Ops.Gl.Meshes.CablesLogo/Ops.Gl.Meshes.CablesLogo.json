@@ -1,5 +1,5 @@
 {
-    "summary": "draw the cables logo",
+    "summary": "cables logo mesh/geometry",
     "layout": {
         "portsIn": [
             {
@@ -22,5 +22,8 @@
             }
         ],
         "name": "Ops.Gl.Meshes.CablesLogo"
+    },
+    "docs": {
+        "ports": []
     }
 }

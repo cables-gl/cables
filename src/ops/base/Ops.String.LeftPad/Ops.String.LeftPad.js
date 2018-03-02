@@ -1,11 +1,7 @@
-op.name="LeftPad";
-
 var val=op.inValue("Value",1);
 var char=op.inValueString("Char",'0');
 var num=op.inValue("Num",4);
-
 var out=op.outValue("String");
-
 
 val.onChange=update;
 char.onChange=update;
