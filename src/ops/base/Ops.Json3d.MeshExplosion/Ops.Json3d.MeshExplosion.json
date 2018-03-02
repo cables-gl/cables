@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Json3d.MeshExplosion"
+    },
+    "summary": "simulating an explosion by animating multiple objects",
+    "docs": {
+        "ports": []
     }
 }

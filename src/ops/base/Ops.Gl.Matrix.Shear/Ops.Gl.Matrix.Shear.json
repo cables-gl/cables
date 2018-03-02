@@ -25,5 +25,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.Shear"
+    },
+    "summary": "displaces each point of a mesh in fixed direction",
+    "docs": {
+        "ports": []
     }
 }

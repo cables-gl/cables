@@ -1,0 +1,29 @@
+{
+    "updated": 1519917559567,
+    "authorName": "pandur",
+    "id": "cbd50d32-bfc1-45c8-ba02-a6afa1fdd0e1",
+    "created": 1519917422107,
+    "summary": "counts how often different values are set",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Value.ValueChangeCounter"
+    }
+}

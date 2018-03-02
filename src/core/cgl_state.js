@@ -53,16 +53,16 @@ CGL.Context = function() {
 
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
-        if (!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer = this.patch.config.canvas.preserveDrawingBuffer;
-        if (!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha = this.patch.config.canvas.premultipliedAlpha;
-        if (!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha = this.patch.config.canvas.alpha;
-        if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = this.patch.config.canvas.antialias;
+        if (!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer = false;
+        if (!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha = false;
+        if (!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha = false;
+        if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
 
-        this.gl = this.canvas.getContext('webgl2');
+        this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
         if (this.gl) {
             this.glVersion = 2;
         } else {
-            this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+            this.gl = this.canvas.getContext('webgl',this.patch.config.canvas) || this.canvas.getContext('experimental-webgl',this.patch.config.canvas);
             this.glVersion = 1;
         }
 

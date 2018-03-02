@@ -1,4 +1,8 @@
 {
+    "updated": 1519941196649,
+    "authorName": "pandur",
+    "id": "fb8851d1-7605-430a-bf7a-38a7bbe9b984",
+    "created": 1519940499582,
     "layout": {
         "portsIn": [
             {
@@ -20,13 +24,9 @@
                 "name": "String"
             }
         ],
-        "name": "Ops.String.LeftPad"
+        "name": "Ops.String.RightPad"
     },
-    "summary": "create a fixed length string from a number 1 -> 0001",
-    "updated": 1519940376158,
-    "authorName": "pandur",
-    "id": "9f4302de-6ae1-4fd0-8be7-c8ed0eca4deb",
-    "created": 1519940376160,
+    "summary": "create a string with a fixed length filling the space with a character",
     "docs": {
         "ports": []
     }
