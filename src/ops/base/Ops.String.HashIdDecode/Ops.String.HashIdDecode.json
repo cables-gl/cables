@@ -20,5 +20,9 @@
             }
         ],
         "name": "Ops.String.HashIdDecode"
+    },
+    "summary": "read back integers from a hashid",
+    "docs": {
+        "ports": []
     }
 }

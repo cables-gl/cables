@@ -19,5 +19,9 @@
             }
         ],
         "name": "Ops.Json3d.ClonedMesh"
+    },
+    "summary": "internal op for json3d instanced/clones meshes",
+    "docs": {
+        "ports": []
     }
 }
