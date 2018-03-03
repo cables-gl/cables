@@ -3,24 +3,48 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "string1"
+                "name": "string1",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "string2"
+                "name": "string2",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "New Line"
+                "name": "New Line",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "string"
             }
         ],
         "name": "Ops.String.Concat"
     },
-    "summary": "Joins two strings together"
+    "summary": "Joins two strings together",
+    "updated": 1520078051187,
+    "authorName": "pandur",
+    "id": "63fe337f-0509-4e6b-be40-c39973c8cca0",
+    "created": 1520077818308,
+    "docs": {
+        "ports": [
+            {
+                "name": "string1",
+                "text": "Beginning of the resulting string"
+            },
+            {
+                "name": "string2",
+                "text": "End of the resulting string"
+            },
+            {
+                "name": "result",
+                "text": "`String1` + `String2`"
+            }
+        ]
+    }
 }

@@ -1,5 +1,3 @@
-op.name='Concat';
-
 var string1=op.inValueString("string1","ABC");
 var string2=op.inValueString("string2","XYZ");
 var newLine=op.inValueBool("New Line",false);

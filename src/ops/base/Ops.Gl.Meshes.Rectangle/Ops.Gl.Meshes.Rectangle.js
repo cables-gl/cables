@@ -21,7 +21,7 @@ axis.set('xy');
 pivotX.set('center');
 pivotY.set('center');
 
-var geom=new CGL.Geometry();
+var geom=new CGL.Geometry('rectangle');
 var mesh=null;
 
 axis.onChange=rebuild;
