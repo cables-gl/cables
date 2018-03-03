@@ -141,6 +141,9 @@ function updateTexture()
 
     // console.log('videoElement.currentTime',videoElement.currentTime);
     if(!tex)reInitTexture();
+    
+    tex.height=videoElement.videoHeight;
+    tex.width=videoElement.videoWidth;
 
     if(!videoElementPlaying)return;
     var perc=(videoElement.currentTime)/videoElement.duration;

@@ -4,7 +4,7 @@ var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ 
 var width=op.inValueInt("width");
 var height=op.inValueInt("height");
 
-var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
+var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap'],"linear");
 var twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
 var bgAlpha=op.inValueSlider("Background Alpha",1);
 var fpTexture=op.inValueBool("HDR");
@@ -24,7 +24,6 @@ var prevViewPort=[0,0,0,0];
 var reInitEffect=true;
 
 var bgFrag=''
-    .endl()+'precision highp float;'
     .endl()+'uniform float a;'
     .endl()+'void main()'
     .endl()+'{'
