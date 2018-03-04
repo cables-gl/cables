@@ -216,7 +216,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(!this.ignoreValueSerialize && this.links.length===0 )
         {
             if(this.type==OP_PORT_TYPE_OBJECT && this.value.tex){}
-            else obj.value=this.value;
+                else obj.value=this.value;
         }
 
         if(this._animated) obj.animated=true;

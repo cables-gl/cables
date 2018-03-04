@@ -266,8 +266,6 @@ CABLES.Patch.prototype.createOp = function(objName) {
         }
     }
 
-
-
     if (op) {
         op.objName = objName;
         op.patch = this;
