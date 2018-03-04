@@ -213,9 +213,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         var obj={};
         obj.name=this.getName();
 
-        if(!this.ignoreValueSerialize && this.links.length===0)
+        if(!this.ignoreValueSerialize && this.links.length===0 )
         {
-            obj.value=this.value;
+            if(this.type==OP_PORT_TYPE_OBJECT && this.value.tex){}
+            else obj.value=this.value;
         }
 
         if(this._animated) obj.animated=true;

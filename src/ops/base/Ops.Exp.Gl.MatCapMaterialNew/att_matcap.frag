@@ -57,6 +57,7 @@ void main()
     vec2 vn=vNorm;
 
 
+
     #ifdef HAS_TEXTURES
         vec2 texCoords=texCoord;
         {{MODULE_BEGIN_FRAG}}
