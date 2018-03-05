@@ -1,6 +1,4 @@
 
-precision highp float;
-
 {{MODULES_HEAD}}
 
 IN vec3 norm;
@@ -131,10 +129,10 @@ void main()
         
         vn = (re.xy / m + 0.5);
         
-        vn.t=clamp(vn.t, 0.0, 1.0);
-        vn.s=clamp(vn.s, 0.0, 1.0);
     #endif
 
+    vn.t=clamp(vn.t, 0.0, 1.0);
+    vn.s=clamp(vn.s, 0.0, 1.0);
     vec4 col = texture2D( tex, vn );
 
     #ifdef HAS_DIFFUSE_TEXTURE

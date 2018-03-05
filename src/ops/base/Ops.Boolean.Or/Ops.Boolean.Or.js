@@ -1,4 +1,3 @@
-op.name='Or';
 
 var bool0=op.addInPort(new Port(op,"bool 1",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var bool1=op.addInPort(new Port(op,"bool 2",OP_PORT_TYPE_VALUE,{display:'bool'}));

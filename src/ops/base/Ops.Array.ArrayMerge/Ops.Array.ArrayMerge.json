@@ -23,5 +23,8 @@
         ],
         "name": "Ops.Array.ArrayMerge"
     },
-    "summary": "merge two arrays"
+    "summary": "merge/concat two arrays",
+    "docs": {
+        "ports": []
+    }
 }
