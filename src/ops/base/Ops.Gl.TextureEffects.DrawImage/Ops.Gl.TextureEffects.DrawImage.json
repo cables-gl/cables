@@ -8,7 +8,8 @@
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -16,7 +17,8 @@
             },
             {
                 "type": "0",
-                "name": "blendMode"
+                "name": "blendMode",
+                "subType": "string"
             },
             {
                 "type": "2",
@@ -24,39 +26,48 @@
             },
             {
                 "type": "0",
-                "name": "alphaSrc"
+                "name": "alphaSrc",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "removeAlphaSrc"
+                "name": "removeAlphaSrc",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "invert alpha channel"
+                "name": "invert alpha channel",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "flip x"
+                "name": "flip x",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "flip y"
+                "name": "flip y",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "pos x"
+                "name": "pos x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "pos y"
+                "name": "pos y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotate"
+                "name": "rotate",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -67,7 +78,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.DrawImage"
     },
-    "updated": 1520077385232,
+    "updated": 1520094289303,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8248b866-9492-48c8-897d-3097c6fe6fe8",

@@ -4,23 +4,28 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "filter",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "wrap"
+                "name": "wrap",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "flip"
+                "name": "flip",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "unpackPreMultipliedAlpha"
+                "name": "unpackPreMultipliedAlpha",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -42,14 +47,54 @@
             },
             {
                 "type": "0",
-                "name": "Ratio"
+                "name": "Aspect Ratio"
             }
         ],
         "name": "Ops.Gl.Texture"
     },
-    "updated": 1519297690340,
+    "updated": 1520077715030,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "466394d4-6c1a-4e5d-a057-0063ab0f096a",
-    "created": 1509174179363
+    "created": 1509174179363,
+    "docs": {
+        "ports": [
+            {
+                "name": "file",
+                "text": "Path and filename of the image"
+            },
+            {
+                "name": "filter",
+                "text": "Pixel interpolation filter of the image. see: (https://open.gl/textures)"
+            },
+            {
+                "name": "wrap",
+                "text": "Wrapping of the image. see: (https://open.gl/textures)"
+            },
+            {
+                "name": "flip",
+                "text": "Flip image on the Y axis"
+            },
+            {
+                "name": "unpackPreMultipliedAlpha",
+                "text": "Change rendering of images with alpha channel"
+            },
+            {
+                "name": "texture",
+                "text": "The texture object. To be used in e.g. Material ops."
+            },
+            {
+                "name": "width",
+                "text": "Width of the image"
+            },
+            {
+                "name": "height",
+                "text": "Height of the image"
+            },
+            {
+                "name": "loading",
+                "text": "true if the image ist still loading"
+            }
+        ]
+    }
 }

@@ -22,8 +22,6 @@ var srcFrag=''
 
     .endl()+'const vec4 lumcoeff = vec4(0.299,0.587,0.114, 0.);'
 
-
-
     .endl()+'   float getLuminance( vec4 color ) {'
     .endl()+'       return (0.2126*color.r + 0.7152*color.g + 0.0722*color.b);'
     .endl()+'   }'

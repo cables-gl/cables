@@ -1,0 +1,151 @@
+{
+    "updated": 1520267081362,
+    "authorName": "tim",
+    "id": "8964edbc-8cfe-4673-9ef2-3d468707431f",
+    "created": 1520266666571,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In Array"
+            },
+            {
+                "type": "0",
+                "name": "Default Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Value 0",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 3",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 4",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 5",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 6",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 7",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 8",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 9",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 10",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 11",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Rest Array"
+            }
+        ],
+        "name": "Ops.Array.ArrayBreakOut"
+    },
+    "summary": "Breaks out the values of an array (array-value converter)",
+    "docs": {
+        "ports": [
+            {
+                "name": "In Array",
+                "text": "The array you want to access"
+            },
+            {
+                "name": "Default Value",
+                "text": "The default value to use when there is no array connected, or when the connected value does not fill all ports of the op"
+            },
+            {
+                "name": "Value 0",
+                "text": "Value of array at index 0"
+            },
+            {
+                "name": "Value 1",
+                "text": "Value of array at index 1"
+            },
+            {
+                "name": "Value 2",
+                "text": "Value of array at index 2"
+            },
+            {
+                "name": "Value 3",
+                "text": "Value of array at index 3"
+            },
+            {
+                "name": "Value 4",
+                "text": "Value of array at index 4"
+            },
+            {
+                "name": "Value 5",
+                "text": "Value of array at index 5"
+            },
+            {
+                "name": "Value 6",
+                "text": "Value of array at index 6"
+            },
+            {
+                "name": "Value 7",
+                "text": "Value of array at index 7"
+            },
+            {
+                "name": "Value 8",
+                "text": "Value of array at index 8"
+            },
+            {
+                "name": "Value 9",
+                "text": "Value of array at index 9"
+            },
+            {
+                "name": "Value 10",
+                "text": "Value of array at index 10"
+            },
+            {
+                "name": "Value 11",
+                "text": "Value of array at index 11"
+            },
+            {
+                "name": "Rest Array",
+                "text": "Contains the remaining values if the input array is bigger than the available output ports, makes the op chainable"
+            }
+        ]
+    }
+}

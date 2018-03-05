@@ -312,7 +312,7 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outValueString=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outValueString=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"type":"string"})); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create output object port

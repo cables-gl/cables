@@ -1,5 +1,5 @@
 {
-    "summary": "botton states of a gamepad",
+    "summary": "Outputs the button states of a gamepad",
     "updated": 1519815830792,
     "authorName": "pandur",
     "id": "3acf39ed-53cc-45eb-8516-43319839d457",
@@ -58,5 +58,8 @@
             }
         ],
         "name": "Ops.Devices.GamePad"
+    },
+    "docs": {
+        "ports": []
     }
 }
