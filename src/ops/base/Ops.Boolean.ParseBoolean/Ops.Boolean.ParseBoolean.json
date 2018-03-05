@@ -20,6 +20,15 @@
     },
     "summary": "parse boolean from string/number",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The string / number to parse"
+            },
+            {
+                "name": "Result",
+                "text": "The input value as a boolean value"
+            }
+        ]
     }
 }
