@@ -60,16 +60,6 @@ function init()
     finished.set(false);
 
     currentEasing=anim.defaultEasing;
-
-    // anim.clear();
-    // anim.setValue(CABLES.now()/1000.0, inStart.get());
-    // anim.setValue(parseFloat(duration.get())+CABLES.now()/1000.0, inEnd.get());
-    // finished.set(false);
-    // anim.loop=loop.get();
-
-    // if(anim.loop)
-    //     anim.setValue(parseFloat(2.0*duration.get())+CABLES.now()/1000.0, inStart.get());
-
 }
 
 loop.onValueChanged=init;
@@ -81,9 +71,6 @@ reset.onTriggered=function()
 
 rewind.onTriggered=function()
 {
-    // anim.clear();
-    // anim.setValue(CABLES.now()/1000,inStart.get());
-    
     anim.keys[0].time=CABLES.now()/1000.0;
     anim.keys[0].value=inStart.get();
 
@@ -92,7 +79,8 @@ rewind.onTriggered=function()
 
     anim.keys[2].time=CABLES.now()/1000.0;
     anim.keys[2].value=inStart.get();
-
+    
+    result.set(inStart.get());
 };
 
 exe.onTriggered=function()

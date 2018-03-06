@@ -46,5 +46,9 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "358e95af-bab4-4ef2-8b47-bb482577ca9b",
-    "created": 1508866208695
+    "created": 1508866208695,
+    "summary": "simulating an old camera effect of fading away the edges of the image",
+    "docs": {
+        "ports": []
+    }
 }

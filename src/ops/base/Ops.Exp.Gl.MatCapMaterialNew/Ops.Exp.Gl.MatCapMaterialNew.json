@@ -31,43 +31,53 @@
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "AO Intensity"
+                "name": "AO Intensity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Repeat X"
+                "name": "Repeat X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Repeat Y"
+                "name": "Repeat Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Opacity"
+                "name": "Opacity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "calc normal tangents"
+                "name": "calc normal tangents",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "projectCoords"
+                "name": "projectCoords",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Screen Space Normals"
+                "name": "Screen Space Normals",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -82,7 +92,7 @@
         ],
         "name": "Ops.Exp.Gl.MatCapMaterialNew"
     },
-    "updated": 1519753278315,
+    "updated": 1520154348676,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "7857ee9e-6d60-4c30-9bc0-dfdddf2b47ad",

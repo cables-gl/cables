@@ -56,6 +56,7 @@ r.uniform=new CGL.Uniform(shader,'f','r',r);
 
 calcTangents.onChange=updateCalcTangent;
 updateCalcTangent();
+updateMatcap();
 
 function updateCalcTangent()
 {
@@ -76,10 +77,7 @@ ssNormals.onChange=function()
         shader.define('CALC_SSNORMALS');
     }
     else shader.removeDefine('CALC_SSNORMALS');
-    
 };
-
-
 
 projectCoords.onChange=function()
 {
@@ -92,8 +90,9 @@ projectCoords.onChange=function()
     else if(projectCoords.get()=='xz') shader.define('DO_PROJECT_COORDS_XZ');
 };
 
+textureMatcap.onChange=updateMatcap;
 
-textureMatcap.onChange=function()
+function updateMatcap()
 {
     if(textureMatcap.get())
     {
@@ -103,10 +102,29 @@ textureMatcap.onChange=function()
     }
     else
     {
+        if(!CABLES.defaultTextureMap)
+        {
+            var pixels=new Uint8Array(256*4);
+            for(var x=0;x<16;x++)
+            {
+                for(var y=0;y<16;y++)
+                {
+                    var c=y*16;
+                    c*=Math.min(1,(x+y/3)/9);
+                    pixels[(x+y*16)*4+0]=pixels[(x+y*16)*4+1]=pixels[(x+y*16)*4+2]=c;
+                    pixels[(x+y*16)*4+3]=255;
+                }
+            }
+
+            CABLES.defaultTextureMap=new CGL.Texture(cgl);
+            CABLES.defaultTextureMap.initFromData(pixels,16,16);
+        }
+        textureMatcap.set(CABLES.defaultTextureMap);
+
         shader.removeUniform('tex');
-        textureMatcapUniform=null;
+        textureMatcapUniform=new CGL.Uniform(shader,'t','tex',0);
     }
-};
+}
 
 textureDiffuse.onChange=function()
 {

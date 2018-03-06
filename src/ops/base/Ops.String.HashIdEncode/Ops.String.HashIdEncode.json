@@ -20,5 +20,9 @@
             }
         ],
         "name": "Ops.String.HashIdEncode"
+    },
+    "summary": "generate short unique ids from integers",
+    "docs": {
+        "ports": []
     }
 }

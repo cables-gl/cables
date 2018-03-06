@@ -1,5 +1,5 @@
 {
-    "summary": "A very simple material, without shading",
+    "summary": "A material without shading",
     "layout": {
         "portsIn": [
             {
@@ -8,19 +8,23 @@
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -32,35 +36,43 @@
             },
             {
                 "type": "0",
-                "name": "colorizeTexture"
+                "name": "colorizeTexture",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "billboard"
+                "name": "billboard",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Opacity TexCoords Transform"
+                "name": "Opacity TexCoords Transform",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "preMultiplied alpha"
+                "name": "preMultiplied alpha",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "diffuseRepeatX"
+                "name": "diffuseRepeatX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuseRepeatY"
+                "name": "diffuseRepeatY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Tex Offset X"
+                "name": "Tex Offset X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Tex Offset Y"
+                "name": "Tex Offset Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -75,7 +87,7 @@
         ],
         "name": "Ops.Gl.Shader.BasicMaterial"
     },
-    "updated": 1516354976053,
+    "updated": 1520077512854,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "85ae5cfa-5eca-4dd8-8b30-850ac34f7cd5",
@@ -83,12 +95,32 @@
     "docs": {
         "ports": [
             {
+                "name": "render",
+                "text": "When *BasicMaterial* is executed, it sets the fill color for all following objects"
+            },
+            {
+                "name": "r",
+                "text": "Red-value, between `0` and `1`"
+            },
+            {
+                "name": "g",
+                "text": "Green-value, between `0` and `1`"
+            },
+            {
+                "name": "b",
+                "text": "Blue-value, between `0` and `1`"
+            },
+            {
                 "name": "a",
-                "text": "Opacity"
+                "text": "Alpha (opacity)-value, between `0` and `1`"
             },
             {
                 "name": "colorizeTexture",
                 "text": "aaaa"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
             }
         ]
     }

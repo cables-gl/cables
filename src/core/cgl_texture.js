@@ -25,7 +25,7 @@ CGL.Texture=function(__cgl,options)
     this.flip = true;
     this.shadowMap=false;
     this.filter = CGL.Texture.FILTER_NEAREST;
-    this.wrap = CGL.Texture.CLAMP_TO_EDGE;
+    this.wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
     this.texTarget= this._cgl.gl.TEXTURE_2D;
     if(options && options.type)this.texTarget=options.type;
     this.textureType=CGL.Texture.TYPE_DEFAULT;
@@ -195,15 +195,15 @@ CGL.Texture.prototype.setSize=function(w,h)
  */
 CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 {
-    this.filter=filter;
-    this.wrap=wrap;
+    this.filter=filter||CGL.Texture.FILTER_LINEAR;
+    this.wrap=wrap||CGL.Texture.CLAMP_TO_EDGE;
     this.width=w;
     this.height=h;
     this._fromData=true;
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
-
     this._setFilter();
+
 
     if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
     {

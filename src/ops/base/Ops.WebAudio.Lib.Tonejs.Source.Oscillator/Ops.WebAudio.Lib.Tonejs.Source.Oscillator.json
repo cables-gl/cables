@@ -61,5 +61,61 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Source.Oscillator"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Frequency",
+                "text": "The frequency of the oscillator"
+            },
+            {
+                "name": "Detune",
+                "text": "Detunes the sound"
+            },
+            {
+                "name": "Type",
+                "text": "The type of the oscillator: either `sine`, `square`, `triangle`, or `sawtooth`. Also capable of setting the first x number of partials of the oscillator. For example: `sine4` would set be the first 4 partials of the sine wave and `triangle8` would set the first 8 partials of the triangle wave."
+            },
+            {
+                "name": "Phase",
+                "text": "The phase of the oscillator in degrees"
+            },
+            {
+                "name": "Sync Frequency",
+                "text": "Sync the signal to the Transport’s BPM. Any changes to the transports BPM will also affect the oscillators frequency."
+            },
+            {
+                "name": "Start",
+                "text": "Start the source at the specified time. If no time is given (`Start Time`), start the source now."
+            },
+            {
+                "name": "Start Time",
+                "text": "The time when to start after `Start` was triggered"
+            },
+            {
+                "name": "Stop",
+                "text": "Stop the source at the specified time. If no time is given (`Stop Time`), stop the source now."
+            },
+            {
+                "name": "Stop Time",
+                "text": "The time when to stop after `Stop` was triggered"
+            },
+            {
+                "name": "Auto Start",
+                "text": "Automatically starts the source when the patch is loaded"
+            },
+            {
+                "name": "Volume",
+                "text": "The volume of the output in decibels"
+            },
+            {
+                "name": "Mute",
+                "text": "Mute the output"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio signal"
+            }
+        ]
     }
 }

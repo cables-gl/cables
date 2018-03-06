@@ -1,5 +1,3 @@
-
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
@@ -21,115 +19,13 @@ var shader=new CGL.Shader(cgl,'drawimage');
 
 amount.set(1.0);
 
-var srcVert=''
-    .endl()+'IN vec3 vPosition;'
-    .endl()+'IN vec2 attrTexCoord;'
-    .endl()+'IN vec3 attrVertNormal;'
-    .endl()+'OUT vec2 texCoord;'
-    .endl()+'OUT vec3 norm;'
-    .endl()+'UNI mat4 projMatrix;'
-    .endl()+'UNI mat4 mvMatrix;'
-
-    .endl()+'UNI float posX;'
-    .endl()+'UNI float posY;'
-    .endl()+'UNI float scale;'
-    .endl()+'UNI float rotate;'
-
-    .endl()+'OUT mat3 transform;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   texCoord=attrTexCoord;'
-    .endl()+'   norm=attrVertNormal;'
-
-    .endl()+'   #ifdef TEX_TRANSFORM'
-    .endl()+'     vec3 coordinates=vec3(attrTexCoord.x, attrTexCoord.y,1.0);'
-    .endl()+'     float angle = radians( rotate );'
-    .endl()+'     vec2 scale= vec2(scale,scale);'
-    .endl()+'     vec2 translate= vec2(posX,posY);'
-
-    .endl()+'     transform = mat3(   scale.x * cos( angle ), scale.x * sin( angle ), 0.0,'
-    .endl()+'                           - scale.y * sin( angle ), scale.y * cos( angle ), 0.0,'
-    .endl()+'                          - 0.5 * scale.x * cos( angle ) + 0.5 * scale.y * sin( angle ) - 0.5 * translate.x*2.0 + 0.5,  - 0.5 * scale.x * sin( angle ) - 0.5 * scale.y * cos( angle ) - 0.5 * translate.y*2.0 + 0.5, 1.0);'
-
-    .endl()+'   #endif'
-
-    .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
-    .endl()+'}';
 
 
 
-var srcFrag=''
-    // .endl()+'precision highp float;'
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  UNI sampler2D tex;'
-    .endl()+'  UNI sampler2D image;'
-    .endl()+'#endif'
-
-    .endl()+'IN mat3 transform;'
-    .endl()+'UNI float rotate;'
-    +CGL.TextureEffect.getBlendCode()
-
-    .endl()+'#ifdef HAS_TEXTUREALPHA'
-    .endl()+'   UNI sampler2D imageAlpha;'
-    .endl()+'#endif'
-
-    .endl()+'UNI float amount;'
-    .endl()+''
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 blendRGBA=vec4(0.0,0.0,0.0,1.0);'
-    .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'       vec2 tc=texCoord;'
-
-    .endl()+'       #ifdef TEX_FLIP_X'
-    .endl()+'           tc.x=1.0-tc.x;'
-    .endl()+'       #endif'
-    .endl()+'       #ifdef TEX_FLIP_Y'
-    .endl()+'           tc.y=1.0-tc.y;'
-    .endl()+'       #endif'
-
-    .endl()+'       #ifdef TEX_TRANSFORM'
-    .endl()+'           vec3 coordinates=vec3(tc.x, tc.y,1.0);'
-    .endl()+'           tc=(transform * coordinates ).xy;'
-    .endl()+'       #endif'
-
-    .endl()+'       blendRGBA=texture2D(image,tc);'
-
-    .endl()+'       vec3 blend=blendRGBA.rgb;'
-    .endl()+'       vec4 baseRGBA=texture2D(tex,texCoord);'
-    .endl()+'       vec3 base=baseRGBA.rgb;'
-
-    .endl()+'       vec3 colNew=_blend(base,blend);'
-
-    .endl()+'       #ifdef REMOVE_ALPHA_SRC'
-    .endl()+'           blendRGBA.a=1.0;'
-    .endl()+'       #endif'
-
-    .endl()+'       #ifdef HAS_TEXTUREALPHA'
-    .endl()+'           vec4 colImgAlpha=texture2D(imageAlpha,texCoord);'
-    .endl()+'           float colImgAlphaAlpha=colImgAlpha.a;'
-
-    .endl()+'           #ifdef ALPHA_FROM_LUMINANCE'
-    .endl()+'               vec3 gray = vec3(dot(vec3(0.2126,0.7152,0.0722), colImgAlpha.rgb ));'
-    .endl()+'               colImgAlphaAlpha=(gray.r+gray.g+gray.b)/3.0;'
-    .endl()+'           #endif'
-
-    .endl()+'           blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;'
-    .endl()+'       #endif'
+var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
 
-    .endl()+'   #endif'
-
-    .endl()+'   blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);'
-    .endl()+'   blendRGBA.a=1.0;'
-
-
-    .endl()+'   gl_FragColor = blendRGBA;'
-    .endl()+'}';
-
-shader.setSource(srcVert,srcFrag);
+shader.setSource(attachments.drawimage_vert,srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
 var textureAlpha=new CGL.Uniform(shader,'t','imageAlpha',2);

@@ -4,19 +4,23 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -26,5 +30,9 @@
             }
         ],
         "name": "Ops.Gl.Textures.ColorTexture"
-    }
+    },
+    "updated": 1520152883993,
+    "authorName": "pandur",
+    "id": "59b94270-0364-4c0f-a9fc-ba2561696a23",
+    "created": 1520152882433
 }

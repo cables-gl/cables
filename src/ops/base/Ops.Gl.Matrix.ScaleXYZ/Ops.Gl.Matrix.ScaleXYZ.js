@@ -8,22 +8,23 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var vScale=vec3.create();
-var transMatrix = mat4.create();
-mat4.identity(transMatrix);
+// var transMatrix = mat4.create();
+// mat4.identity(transMatrix);
 
 var hasChanged=true;
 
 render.onTriggered=function()
 {
-    if(hasChanged)
-    {
-        vec3.set(vScale, scaleX.get(),scaleY.get(),scaleZ.get());
-        mat4.identity(transMatrix);
-        mat4.scale(transMatrix,transMatrix, vScale);
-    }
+    // if(hasChanged)
+    // {
+    //     vec3.set(vScale, scaleX.get(),scaleY.get(),scaleZ.get());
+    //     mat4.identity(transMatrix);
+    //     mat4.scale(transMatrix,transMatrix, vScale);
+    // }
 
     cgl.pushModelMatrix();
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
+    // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
+    mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
     trigger.trigger();
     cgl.popModelMatrix();
 };
@@ -31,6 +32,7 @@ render.onTriggered=function()
 var scaleChanged=function()
 {
     hasChanged=true;
+    vec3.set(vScale, scaleX.get(),scaleY.get(),scaleZ.get());
 };
 
 scaleX.set(1.0);
