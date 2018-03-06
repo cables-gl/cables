@@ -144,7 +144,7 @@ function setMesh()
 
     currentIndex=index;
 
-    jsonMesh=data.meshes[index];
+    var jsonMesh=data.meshes[index];
 
     if(!jsonMesh)
     {

@@ -1,7 +1,4 @@
-op.name="SetVelocity";
-
 var exec=op.inFunction("Exec");
-
 
 var velX=op.inValue("Velocity X");
 var velY=op.inValue("Velocity Y");
@@ -11,7 +8,7 @@ var doSet=op.inFunctionButton("Set");
 
 var next=op.outFunction("Next");
 
-doSetDelayed=false;
+var doSetDelayed=false;
 
 doSet.onTriggered=function()
 {
