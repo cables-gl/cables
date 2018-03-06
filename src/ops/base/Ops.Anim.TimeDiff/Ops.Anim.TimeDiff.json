@@ -7,11 +7,13 @@
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Seconds"
+                "name": "Seconds",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -21,10 +23,15 @@
             },
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Anim.TimeDiff"
     },
-    "summary": "measure the time between two triggers"
+    "summary": "measure the time between two triggers",
+    "updated": 1520347835079,
+    "authorName": "pandur",
+    "id": "fba0e516-b50e-4372-9a0c-dc605669ffed",
+    "created": 1520347835082
 }

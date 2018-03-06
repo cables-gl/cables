@@ -1,5 +1,5 @@
 {
-    "updated": 1519815115107,
+    "updated": 1520290861540,
     "authorName": "pandur",
     "id": "fba86dad-f37f-482e-a8fb-2abc76723ecf",
     "created": 1519812602106,
@@ -19,31 +19,38 @@
             },
             {
                 "type": "0",
-                "name": "Columns"
+                "name": "Columns",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rows"
+                "name": "Rows",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Spacing Columns"
+                "name": "Spacing Columns",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Spacing Rows"
+                "name": "Spacing Rows",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Center"
+                "name": "Center",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Rotate"
+                "name": "Rotate",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "Scale",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Exp.Gl.VectorFieldArray"

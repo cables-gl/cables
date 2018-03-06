@@ -1,5 +1,5 @@
 {
-    "updated": 1519467321802,
+    "updated": 1520270992984,
     "authorName": "pandur",
     "id": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
     "created": 1519312271232,
@@ -7,29 +7,39 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Delta Value"
+                "name": "Delta Value",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             },
             {
                 "type": "0",
-                "name": "Limit"
+                "name": "Limit",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Min"
+                "name": "Min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max"
+                "name": "Max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Multiply"
+                "name": "Multiply",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Absolute Value"
+                "name": "Absolute Value",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.DeltaSum"

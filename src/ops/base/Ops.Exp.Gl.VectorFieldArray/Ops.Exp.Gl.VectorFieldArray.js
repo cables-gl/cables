@@ -81,8 +81,8 @@ var srcBodyVert=''
     .endl()+'   if( do_instancing==1.0 )'
     .endl()+'   {'
     .endl()+'       instModelMat=instMat;'
-    .endl()+'       float tx=(instModelMat[3][0])/{{mod}}_cols;'
-    .endl()+'       float ty=(instModelMat[3][1])/{{mod}}_rows;'
+    .endl()+'       float tx=(instModelMat[3][0]) / {{mod}}_cols;'
+    .endl()+'       float ty=(instModelMat[3][1]) / {{mod}}_rows;'
     .endl()+'       instModelMat[3][0]*={{mod}}_spaceX;'
     .endl()+'       instModelMat[3][1]*={{mod}}_spaceY;'
     .endl()+'       vec4 instCol = texture2D( {{mod}}_field, vec2(tx,ty) );'
@@ -123,12 +123,11 @@ function prepare()
         mesh.numInstances=num;
         
         mesh.addAttribute('instMat',matrices,16);
+        
+        // console.log(matrices);
         recalc=false;
-
-
     }
 }
-
 
 function removeModule()
 {
@@ -138,7 +137,6 @@ function removeModule()
         shader=null;
     }
 }
-
 
 function doRender()
 {
@@ -164,7 +162,7 @@ function doRender()
                     });
         
                 shader.define('INSTANCING');    
-                uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
+                uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',1);
                 uniSpaceX=new CGL.Uniform(shader,'f',mod.prefix+'_spaceX',0);
                 uniSpaceY=new CGL.Uniform(shader,'f',mod.prefix+'_spaceY',0);
                 uniTexture=new CGL.Uniform(shader,'t',mod.prefix+'_field',5);
@@ -190,8 +188,7 @@ function doRender()
         }
 
         if(tex.get())
-        cgl.setTexture(5,tex.get().tex);
-
+            cgl.setTexture(5,tex.get().tex);
 
         uniDoInstancing.setValue(1);
         mesh.render(shader);

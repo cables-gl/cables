@@ -1,5 +1,5 @@
 {
-    "updated": 1520269137376,
+    "updated": 1520336139119,
     "authorName": "tim",
     "id": "f8c30313-4251-4d39-bff3-fb1cc9234d54",
     "created": 1520268708150,
@@ -13,6 +13,16 @@
             {
                 "type": "0",
                 "name": "Active Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Inactive Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Active Value",
                 "subType": "number"
             }
         ],

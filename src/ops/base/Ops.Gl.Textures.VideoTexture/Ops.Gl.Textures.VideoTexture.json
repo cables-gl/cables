@@ -3,47 +3,63 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "play"
+                "name": "play",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "loop"
+                "name": "loop",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Volume"
+                "name": "auto play",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "mute"
+                "name": "Volume",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "speed"
+                "name": "mute",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "speed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "wrap"
+                "name": "filter",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "flip"
+                "name": "wrap",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "fps"
+                "name": "flip",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "set time"
+                "name": "fps",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "set time",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -51,7 +67,8 @@
             },
             {
                 "type": "0",
-                "name": "Preload"
+                "name": "Preload",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -61,25 +78,29 @@
             },
             {
                 "type": "0",
-                "name": "duration"
+                "name": "duration",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "progress"
+                "name": "progress",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "CurrentTime"
+                "name": "CurrentTime",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Loading"
+                "name": "Loading",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Textures.VideoTexture"
     },
     "summary": "play a video file and use it as a texture",
-    "updated": 1520264433357,
+    "updated": 1520273322127,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "569af220-e7c5-4dde-a5d9-b63cebdc8bfd",
