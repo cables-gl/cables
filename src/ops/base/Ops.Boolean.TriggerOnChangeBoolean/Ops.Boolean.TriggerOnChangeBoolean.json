@@ -1,0 +1,43 @@
+{
+    "updated": 1512038542138,
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "dba19c07-e3c4-4971-a991-c9e6212ca1c8",
+    "created": 1512038541068,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "False"
+            },
+            {
+                "type": "1",
+                "name": "True"
+            }
+        ],
+        "name": "Ops.Boolean.TriggerOnChange"
+    },
+    "summary": "Triggers when boolean value has changed",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The boolean value to watch for change"
+            },
+            {
+                "name": "False",
+                "text": "Triggers when `Value` became `false`"
+            },
+            {
+                "name": "True",
+                "text": "Triggers when `Value` became `true`"
+            }
+        ]
+    }
+}

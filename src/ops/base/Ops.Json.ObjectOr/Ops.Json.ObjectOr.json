@@ -1,0 +1,49 @@
+{
+    "updated": 1520335853878,
+    "authorName": "pandur",
+    "id": "98c9a790-c018-466a-9c36-7afd0d2a8826",
+    "created": 1520335781652,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object 1"
+            },
+            {
+                "type": "2",
+                "name": "Object 2"
+            },
+            {
+                "type": "2",
+                "name": "Object 3"
+            },
+            {
+                "type": "2",
+                "name": "Object 4"
+            },
+            {
+                "type": "2",
+                "name": "Object 5"
+            },
+            {
+                "type": "2",
+                "name": "Object 6"
+            },
+            {
+                "type": "2",
+                "name": "Object 7"
+            },
+            {
+                "type": "2",
+                "name": "Object 8"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Json.ObjectOr"
+    }
+}
