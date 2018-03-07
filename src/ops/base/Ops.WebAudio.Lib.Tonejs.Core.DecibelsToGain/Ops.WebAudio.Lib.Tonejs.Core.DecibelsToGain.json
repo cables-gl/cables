@@ -1,0 +1,39 @@
+{
+    "updated": 1520417551257,
+    "authorName": "tim",
+    "id": "8f21729b-a37d-40d0-9d6e-b3c03d0d3f46",
+    "created": 1520417180232,
+    "libs": [
+        "tone.min.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Decibels",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Gain",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Core.DecibelsToGain"
+    },
+    "summary": "Converts decibels [~-96..0] to gain [0..1]",
+    "docs": {
+        "ports": [
+            {
+                "name": "Decibels",
+                "text": "The decibels, mostly in range [~-96..0]"
+            },
+            {
+                "name": "Gain",
+                "text": "The gain, mostly in range [0..1]"
+            }
+        ]
+    }
+}
