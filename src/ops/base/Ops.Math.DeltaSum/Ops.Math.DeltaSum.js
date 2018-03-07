@@ -1,5 +1,7 @@
 var inVal=op.inValue("Delta Value");
 
+var inReset=op.inFunctionButton("Reset");
+
 var inLimit=op.inValueBool("Limit",false);
 var inMin=op.inValue("Min",0);
 var inMax=op.inValue("Max",100);
@@ -11,6 +13,11 @@ var value=0;
 var outVal=op.outValue("Absolute Value");
 inLimit.onChange=updateLimit;
 updateLimit();
+
+inReset.onTriggered=function()
+{
+    value=0;
+};
 
 function updateLimit()
 {

@@ -1,0 +1,41 @@
+{
+    "updated": 1520351271265,
+    "authorName": "pandur",
+    "id": "baba13d7-1cc2-4ba8-b66d-05425b0e5a75",
+    "created": 1520350570285,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "LUT Image"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.LUTMap"
+    },
+    "summary": "apply color filter/effects by using a lookup texture",
+    "docs": {
+        "ports": []
+    },
+    "credits": [
+        {
+            "title": "LUT Shader",
+            "author": "Brad Larson ",
+            "url": "https://github.com/liovch/GPUImage"
+        }
+    ]
+}

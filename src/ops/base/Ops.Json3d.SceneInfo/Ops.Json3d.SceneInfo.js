@@ -14,6 +14,7 @@ var outDuration=op.outValue("Anim Duration");
 var inDump=op.inFunctionButton("Dump Console");
 
 var cgl=op.patch.cgl;
+var scene=null;
 
 inDump.onTriggered=function()
 {
@@ -22,6 +23,7 @@ inDump.onTriggered=function()
 
 function isBone(name)
 {
+    if(!scene) return false;
     for(var j=0;j<scene.meshes.length;j++)
         if(scene.meshes[j].bones)
             for(var i=0;i<scene.meshes[j].bones.length;i++)
@@ -58,7 +60,7 @@ render.onTriggered=function()
 {
     if(cgl.frameStore.currentScene)
     {
-        scene=cgl.frameStore.currentScene.getValue();
+        var scene=cgl.frameStore.currentScene.getValue();
 
         if(scene)
         {

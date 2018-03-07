@@ -36,10 +36,10 @@
                 "name": "geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.Cube2"
+        "name": "Ops.Gl.Meshes.Cube"
     },
     "summary": "draw a cube",
-    "updated": 1516271011025,
+    "updated": 1519923401294,
     "authorName": "pandur",
     "id": "ff0535e2-603a-4c07-9ce6-e9e0db857dfe",
     "created": 1516270987894,

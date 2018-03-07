@@ -54,7 +54,7 @@ render.onTriggered=function()
 
         mesh._bufVertexAttrib.startItem=Math.floor(
             inStart.get()*(numItems/3))*3;
-        numDrawnPoints=mesh._bufVertexAttrib.numItems=
+        mesh._bufVertexAttrib.numItems=
             Math.floor(
                 Math.min(1,inLength.get()+inStart.get()) * (numItems)
             );

@@ -4,7 +4,7 @@ op.name='VideoTexture';
 var filename=op.inFile("file","video");
 var play=op.addInPort(new Port(op,"play",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
-
+var autoPlay = op.inValueBool('auto play', false);
 
 var volume=op.addInPort(new Port(op,"Volume",OP_PORT_TYPE_VALUE,{ display:'range' } ));
 var muted=op.addInPort(new Port(op,"mute",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
@@ -32,6 +32,8 @@ var videoElementPlaying=false;
 var embedded=false;
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
+videoElement.setAttribute('playsinline', '');
+videoElement.setAttribute('webkit-playsinline', '');
 var intervalID=null;
 fps.set(25);
 speed.set(1);
@@ -57,6 +59,15 @@ function reInitTexture()
     
 }
 
+autoPlay.onChange = function() {
+    if(videoElement) {
+        if(autoPlay.get()) {
+            videoElement.setAttribute('autoplay', '');    
+        } else {
+            videoElement.removeAttribute('autoplay');    
+        }    
+    }
+}
 
 rewind.onTriggered=function()
 {
