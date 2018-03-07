@@ -19,7 +19,7 @@ defaultValuePort.onChange = update;
  function update() {
      var arr = inArrayPort.get();
     if(!arr) { 
-        resetOutPorts(); 
+        // resetOutPorts(); 
         return;
     } 
     for(var i=0; i<Math.min(arr.length, NUM_PORTS); i++) {

@@ -11,10 +11,9 @@ var outElement=op.outObject("DOM Element");
 var outHover=op.outValue("Hover");
 var outClicked=op.outFunction("Clicked");
 
-var div=null;
 var listenerElement=null;
 
-div = document.createElement('div');
+var div = document.createElement('div');
 var canvas = op.patch.cgl.canvas.parentElement;
 // var canvas = op.patch.cgl.canvas;
 canvas.appendChild(div);

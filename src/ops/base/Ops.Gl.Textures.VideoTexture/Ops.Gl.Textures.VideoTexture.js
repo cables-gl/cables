@@ -149,14 +149,21 @@ function updateTexture()
         clearTimeout(timeout);
         timeout=setTimeout( updateTexture, 1000/fps.get() );
     }
+    else
+    {
+        return;
+    }
+
 
     // console.log('videoElement.currentTime',videoElement.currentTime);
     if(!tex)reInitTexture();
+    if(!videoElementPlaying)return;
     
+
     tex.height=videoElement.videoHeight;
     tex.width=videoElement.videoWidth;
 
-    if(!videoElementPlaying)return;
+    
     var perc=(videoElement.currentTime)/videoElement.duration;
     if(!isNaN(perc)) outProgress.set(perc);
     outTime.set(videoElement.currentTime);

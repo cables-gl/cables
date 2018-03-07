@@ -7,35 +7,43 @@
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Area Size"
+                "name": "Area Size",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Map Size"
+                "name": "Map Size",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Samples"
+                "name": "Samples",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Poly Offset"
+                "name": "Poly Offset",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Bias"
+                "name": "Bias",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Z Near"
+                "name": "Z Near",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Z Far"
+                "name": "Z Far",
+                "subType": "integer"
             },
             {
                 "type": "3",
@@ -43,7 +51,8 @@
             },
             {
                 "type": "0",
-                "name": "Show Map Area"
+                "name": "Show Map Area",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -62,5 +71,18 @@
     "authorName": "pandur",
     "id": "f76a0866-6d65-4ec4-acfe-faca8ca66468",
     "created": 1504701786034,
-    "updated": 1511341262161
+    "updated": 1520443137596,
+    "summary": "add shadows to a 3d model",
+    "docs": {
+        "ports": [
+            {
+                "name": "Poly Offset",
+                "text": "Adjust this if you have weird artifacts on your shadow."
+            },
+            {
+                "name": "Bias",
+                "text": "Adjust this if you have weird artifacts on your shadow."
+            }
+        ]
+    }
 }

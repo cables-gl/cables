@@ -146,7 +146,7 @@ exe.onTriggered=function()
 
     if(attachment.isLinked())
     {
-        cgl.pushMvMatpushModelMatrixrix();
+        cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
         attachment.trigger();
         cgl.popModelMatrix();

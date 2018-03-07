@@ -23,14 +23,16 @@ render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    cgl.setShader(shader);
-    cgl.currentTextureEffect.bind();
-
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-
-    cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
-
+    if(strength.get()>0)
+    {
+        cgl.setShader(shader);
+        cgl.currentTextureEffect.bind();
+    
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
+        cgl.currentTextureEffect.finish();
+        cgl.setPreviousShader();
+    }
     trigger.trigger();
 };

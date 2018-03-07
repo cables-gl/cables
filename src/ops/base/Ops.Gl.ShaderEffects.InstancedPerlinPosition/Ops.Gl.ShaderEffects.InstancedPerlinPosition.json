@@ -1,0 +1,46 @@
+{
+    "updated": 1520366703484,
+    "authorName": "pandur",
+    "id": "950c1a37-a31f-4a0d-9b08-a780fbbfba73",
+    "created": 1520365713596,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "WorldSpace",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.InstancedPerlinPosition"
+    }
+}

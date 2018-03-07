@@ -45,5 +45,9 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.AreaDiscardPixel"
+    },
+    "summary": "do not draw pixels inside a 3d area",
+    "docs": {
+        "ports": []
     }
 }
