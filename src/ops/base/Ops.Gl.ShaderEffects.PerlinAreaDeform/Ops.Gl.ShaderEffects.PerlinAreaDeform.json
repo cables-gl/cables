@@ -7,47 +7,58 @@
             },
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "Scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scroll X"
+                "name": "Scroll X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scroll Y"
+                "name": "Scroll Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scroll Z"
+                "name": "Scroll Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "WorldSpace"
+                "name": "WorldSpace",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -62,6 +73,6 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8118b7a9-2ba7-4607-8fd1-8525d6fcf0d6",
-    "updated": 1519660378931,
+    "updated": 1520365660336,
     "created": 1505491754109
 }

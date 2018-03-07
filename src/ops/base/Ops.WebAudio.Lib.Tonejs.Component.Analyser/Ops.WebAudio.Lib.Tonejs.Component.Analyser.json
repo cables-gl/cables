@@ -18,27 +18,33 @@
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Type"
+                "name": "Type",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Smoothing"
+                "name": "Smoothing",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max Decibels"
+                "name": "Max Decibels",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min Decibels"
+                "name": "Min Decibels",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Return Type"
+                "name": "Return Type",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -53,6 +59,6 @@
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Analyser"
     },
-    "updated": 1508579502036,
+    "updated": 1520419488962,
     "created": 1508578804935
 }

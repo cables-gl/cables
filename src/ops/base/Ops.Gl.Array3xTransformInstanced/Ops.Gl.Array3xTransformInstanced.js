@@ -25,7 +25,7 @@ var srcHeadVert=''
 
     .endl()+'#ifdef INSTANCING'
     .endl()+'   IN mat4 instMat;'
-    .endl()+'   OUT mat4 instModelMat;'
+    // .endl()+'   OUT mat4 instModelMat;'
     .endl()+'#endif';
 
 
@@ -33,8 +33,10 @@ var srcBodyVert=''
     .endl()+'#ifdef INSTANCING'
     .endl()+'   if( do_instancing==1.0 )'
     .endl()+'   {'
-    .endl()+'       instModelMat=instMat;'
-    .endl()+'       mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+    .endl()+'       mMatrix*=instMat;'
+
+    // .endl()+'       instModelMat=instMat;'
+    // .endl()+'       mvMatrix=viewMatrix * modelMatrix * instModelMat;'
     .endl()+'   }'
     .endl()+'#endif'
     .endl();
@@ -42,26 +44,29 @@ var srcBodyVert=''
 
 function reset()
 {
-
-}
-
-geom.onChange=function()
-{
+    if(shader)shader.removeDefine('INSTANCING');
+    recalc=true;
     if(!geom.get())
     {
         mesh=null;
         return;
     }
     mesh=new CGL.Mesh(cgl,geom.get());
+    removeModule();
+}
+
+// geom.onChange=function()
+// {
 
 
-};
+// };
 
 
 function removeModule()
 {
     if(shader && mod)
     {
+        shader.removeDefine('INSTANCING');
         shader.removeModule(mod);
         shader=null;
     }
@@ -146,9 +151,13 @@ function doRender()
         }
     }
 
-    uniDoInstancing.setValue(1);
-    mesh.render(shader);
-    uniDoInstancing.setValue(0);
+    if(shader)
+    {
+        uniDoInstancing.setValue(1);
+        mesh.render(shader);
+        uniDoInstancing.setValue(0);
+        
+    }
 
 
 }

@@ -1,8 +1,8 @@
 
 var inId=op.inValueString("Id");
 var inClass=op.inValueString("Class");
-var inText=op.inValueString("Text");
-var inStyle=op.inValueEditor("Style","position:absolute;","css");
+var inText=op.inValueString("Text","Hello Div");
+var inStyle=op.inValueEditor("Style","position:absolute;z-index:9999;","css");
 
 var inInteractive=op.inValueBool("Interactive",false);
 var inVisible=op.inValueBool("Visible",true);
@@ -25,6 +25,9 @@ inText.onChange=updateText;
 inStyle.onChange=updateStyle;
 inInteractive.onChange=updateInteractive;
 inVisible.onChange=updateVisibility;
+
+updateText();
+updateStyle();
 
 function updateVisibility()
 {

@@ -54,16 +54,15 @@ smoothingPort.onChange = function(){setNodeValue("smoothing", smoothingPort.get(
 minDecibelsPort.onChange = function(){setNodeValue("minDecibels", parseInt(minDecibelsPort.get()));};
 maxDecibelsPort.onChange = function(){setNodeValue("maxDecibels", parseInt(maxDecibelsPort.get()));};
 refreshPort.onTriggered = function() {
-    var arr = node.analyse();
+    var arr = node.getValue();
+    arr = Array.prototype.slice.call(arr); // convert to regular array
     analyserArrayPort.set(null);
     analyserArrayPort.set(arr);
-    //op.log("Analyser Array: ", arr);
 };
 returnTypePort.onChange = function() {setNodeValue("returnType", returnTypePort.get());};
 
 
 function setNodeValue(key, value) {
-    op.log("change in key: ", key);
     node.set(key, value);
 }
 

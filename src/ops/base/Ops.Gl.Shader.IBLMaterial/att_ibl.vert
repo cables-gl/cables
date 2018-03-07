@@ -20,6 +20,7 @@ void main()
     mat4 mMatrix=modelMatrix;
     v_pos= vPosition;
     vec4 pos = vec4( vPosition, 1. );
+    vec3 norm=v_normal;
 
     {{MODULE_VERTEX_POSITION}}
     

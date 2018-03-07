@@ -49,11 +49,11 @@ void main()
 
     vec3 tNorm=vec3(0.0);
     #ifdef TEX_NORMAL
-        tNorm=texture2D(texNormal,texCoord).rgb*2.0-1.0;
+        theNormal=texture2D(texNormal,texCoord).rgb*2.0-1.0;
     #endif
     
     vec4 tCol=vec4(1.0);
-    #ifdef TEX_NORMAL
+    #ifdef TEX_DIFFUSE
         tCol*=texture2D(texDiffuse,texCoord);
     #endif
 
@@ -61,7 +61,7 @@ void main()
 
 
     vec3 N = normalize( mat3(normalMatrix) *theNormal ).xyz;
-    N=normalize(N+tNorm);
+    // N=normalize(N+tNorm);
 
 
 
@@ -100,8 +100,8 @@ void main()
     col.rgb=desaturate(col.rgb,0.65);
     
     col=mix(col,colReflect,amountReflect);
-    
-    col.a=tCol.a;
+    col*=tCol;
+    // col.a=tCol.a;
 
 
     #ifdef TEX_AO

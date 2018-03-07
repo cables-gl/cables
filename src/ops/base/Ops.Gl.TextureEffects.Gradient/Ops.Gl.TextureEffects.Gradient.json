@@ -7,59 +7,73 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Type"
+                "name": "Type",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Pos"
+                "name": "Pos",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smoothstep"
+                "name": "Smoothstep",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "r1"
+                "name": "r1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g1"
+                "name": "g1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b1"
+                "name": "b1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "r2"
+                "name": "r2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g2"
+                "name": "g2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b2"
+                "name": "b2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "r3"
+                "name": "r3",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g3"
+                "name": "g3",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b3"
+                "name": "b3",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -73,5 +87,9 @@
     "summary": "Draws a simple gradient between three colors",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1520431122648,
+    "authorName": "pandur",
+    "id": "5ada9bd8-227a-4a1f-87ad-0f879c7aa84d",
+    "created": 1520431091087
 }

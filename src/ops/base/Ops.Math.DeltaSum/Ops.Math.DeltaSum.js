@@ -17,6 +17,7 @@ updateLimit();
 inReset.onTriggered=function()
 {
     value=0;
+    outVal.set(value);
 };
 
 function updateLimit()

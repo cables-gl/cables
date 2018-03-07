@@ -54,6 +54,10 @@ void main()
            #endif
 
            blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;
+           
+           #ifdef INVERT_ALPHA
+           blendRGBA.a=1.0-blendRGBA.a;
+           #endif
        #endif
 
 

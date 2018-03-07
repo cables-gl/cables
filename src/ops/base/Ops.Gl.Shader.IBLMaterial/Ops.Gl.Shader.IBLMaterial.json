@@ -1,5 +1,5 @@
 {
-    "updated": 1519636827359,
+    "updated": 1520374380398,
     "authorName": "pandur",
     "id": "1eff8b0d-77d4-4675-82ae-5073ec960672",
     "created": 1519592565704,
@@ -19,7 +19,8 @@
             },
             {
                 "type": "0",
-                "name": "Roughness Amount"
+                "name": "Roughness Amount",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -27,7 +28,8 @@
             },
             {
                 "type": "0",
-                "name": "Reflection Amount"
+                "name": "Reflection Amount",
+                "subType": "number"
             },
             {
                 "type": "2",

@@ -1,10 +1,10 @@
-op.name="Gradient";
+
 var render=op.inFunction("Render");
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
 
-var gType=op.inValueSelect("Type",['X','Y','XY','Radial']);
+var gType=op.inValueSelect("Type",['X','Y','XY','Radial'],"X");
 
 var pos1=op.inValueSlider("Pos",0.5);
 
