@@ -1,0 +1,21 @@
+{
+    "updated": 1520460454762,
+    "authorName": "pandur",
+    "id": "01380a50-2dbb-4465-ae80-86349b0b717a",
+    "created": 1520454225004,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Gradient"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "name": "Ops.Gl.GradientTexture"
+    }
+}
