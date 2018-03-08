@@ -1,9 +1,35 @@
 CABLES=CABLES||{};
 CABLES.WebAudio = CABLES.WebAudio || {};
 
-// Checks if a global audio context has been created and creates
-// it if necessary.
-// Also associates the audio context with tone.js if it is being used
+/*
+ * External JSDoc definitions
+ */
+
+ /**
+ * Part of the Web Audio API, the AudioBuffer interface represents a short audio asset residing in memory.
+ * @external AudioBuffer
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer}
+ */
+
+ /**
+ * Part of the Web Audio API, the AudioNode interface is a generic interface for representing an audio processing module.
+ * @external AudioNode
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioNode}
+ */
+
+ /**
+ * The AudioContext interface represents an audio-processing graph built from audio modules linked together
+ * @external AudioContext
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioContext}
+ */
+
+/**
+ * Checks if a global audio context has been created and creates
+ * it if necessary. This audio context can be used for native Web Audio as well as Tone.js ops.
+ * Associates the audio context with Tone.js if it is being used
+ * @param {CABLES.Op} op - The operator which needs the Audio Context
+ * @returns {(external:AudioContext|undefined)} - The audio context or `undefined` if Web Audio is not supported
+ */
 CABLES.WebAudio.createAudioContext = function(op) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   if(window.AudioContext) {
@@ -18,19 +44,22 @@ CABLES.WebAudio.createAudioContext = function(op) {
     }
   } else {
     op.patch.config.onError('NO_WEBAUDIO','Web Audio is not supported in this browser.');
+    return;
   }
   return window.audioContext;
 };
 
 
-// Creates an audio in port for the op with name portName
-// When disconnected it will disconnect the previous connected audio node
-// from the op's audio node.
-// @param op: required
-// @param portName: required, The name of the port
-// @param audioNode: required: The audionode incoming connections should connect to
-// @param inputChannelIndex: optional, INT, if the audio node has multiple inputs,
-//                           "1" would be the second input, default "0"
+/**
+ * Creates an audio in port for the op with name `portName`
+ * When disconnected it will disconnect the previous connected audio node
+ * from the op's audio node.
+ * @param {CABLES.Op} op - The operator to create the audio port in
+ * @param {string} portName - The name of the port
+ * @param {AudioNode} audioNode - The audionode incoming connections should connect to
+ * @param {number} [inputChannelIndex=0] - If the audio node has multiple inputs, this is the index of the input channel to connect to
+ * @returns {CABLES.Port|undefined} - The newly created audio in port or `undefined` if there was an error
+ */
 CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChannelIndex) {
   if(!op || !portName || !audioNode) {
     op.log("ERROR: createAudioInPort needs three parameters, op, portName and audioNode");
@@ -85,11 +114,16 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
   return port;
 };
 
-// Sometimes it is necessary to replace a node of a port, if so all
-// connections to this node must be disconnected and connections to the new
-// node must be made.
-// Can be used for both Audio ports as well as AudioParam ports
-// if used with an AudioParam pass e.g. "synth.frequency" as newNode
+/**
+ * Sometimes it is necessary to replace a node of a port, if so all
+ * connections to this node must be disconnected and connections to the new
+ * node must be made.
+ * Can be used for both Audio ports as well as AudioParam ports
+ * if used with an AudioParam pass e.g. `synth.frequency` as newNode
+ * @param {CABLES.Port} port - The port where the audio node needs to be replaced
+ * @param {external:AudioNode} oldNode - The old audio node, which should be unlinked from the port
+ * @param {external:AudioNode} newNode - The new audio node, which should be linked to the port
+ */
 CABLES.WebAudio.replaceNodeInPort = function(port, oldNode, newNode) {
   var connectedNode = port.webAudio.previousAudioInNode;
   // check if connected
@@ -108,6 +142,13 @@ CABLES.WebAudio.replaceNodeInPort = function(port, oldNode, newNode) {
   }
 };
 
+/**
+ * Creates an audio out port which takes care of (dis-)connecting on it’s own
+ * @param {CABLES.op} op - The op to create an audio out port for
+ * @param {string} portName - The name of the port to be created
+ * @param {AudioNode} audioNode - The audio node to link to the port
+ * @returns {(CABLES.Port|undefined)} - The newly created audio out port or `undefined` if there was an error
+ */
 CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
   if(!op || !portName || !audioNode) {
     op.log("ERROR: createAudioOutPort needs three parameters, op, portName and audioNode");
@@ -120,13 +161,16 @@ CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
   return port;
 };
 
-// Creates an audio param in port for the op with name portName.
-// The port accepts other audio nodes as signals as well as values (numbers)
-// When the port is disconnected it will disconnect the previous connected audio node
-// from the op's audio node and restore the number value set before.
-// @param op: required
-// @param portName: required, The name of the port
-// @param audioNode: required: The audionode incoming connections should connect to
+/**
+ * Creates an audio param in port for the op with name portName.
+ * The port accepts other audio nodes as signals as well as values (numbers)
+ * When the port is disconnected it will disconnect the previous connected audio node
+ * from the op's audio node and restore the number value set before.
+ * @param {CABLES.Op} op - The operator to create an audio param input port for
+ * @param {string} portName - The name of the port to create
+ * @param {external:AudioNode} audioNode - The audionode incoming connections should connect to
+ * @returns {(CABLES.Port|undefined)} - The newly created port, which takes care of (dis-)connecting on its own, or `undefined` if there was an error
+ */
 CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, options, defaultValue) {
   if(!op || !portName || !audioNode) {
     op.log("ERROR: createAudioParamInPort needs three parameters, op, portName and audioNode");
@@ -216,6 +260,28 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
   return port;
 };
 
+/**
+ * Callback when an audio file finished loading
+ *
+ * @callback loadAudioFileFinishedCallback
+ * @param {external:AudioBuffer} buffer - The AudioBuffer holding the audio data
+ */
+
+ /**
+ * Callback when a request to load an audio file did not succeed.
+ *
+ * @callback loadAudioFileErrorCallback
+ * @param {string} err - The error which occured while loading the audio file
+ */
+
+/**
+ * Loads an audio file and updates the loading indicators when cables is run in the editor.
+ * @param {CABLES.Patch} patch - The cables patch, when called from inside an op this is `op.patch`
+ * @param {string} url - The url of the audio file to load
+ * @param {loadAudioFileFinishedCallback} onFinished - The callback to be called when the loading is finished, passes the AudioBuffer
+ * @param {loadAudioFileErrorCallback} onError - The callback when there was an error loading the file, the rror message is passed
+ * @see {@link https://developer.mozilla.org/de/docs/Web/API/AudioContext/decodeAudioData}
+ */
 CABLES.WebAudio.loadAudioFile = function(patch, url, onFinished, onError) {
   var audioContext = CABLES.WebAudio.createAudioContext();
   var loadingId = patch.loading.start('audio', url);
@@ -234,6 +300,11 @@ CABLES.WebAudio.loadAudioFile = function(patch, url, onFinished, onError) {
   request.send();
 };
 
+/**
+ * Checks if the passed time is a valid time to be used in any of the Tone.js ops.
+ * @param {(string|number)} t - The time to check
+ * @returns {boolean} - True if time is valid, false if not
+ */
 CABLES.WebAudio.isValidToneTime = function(t) {
     try{
 	    var time = new Tone.Time(t);
@@ -243,6 +314,11 @@ CABLES.WebAudio.isValidToneTime = function(t) {
     return true;
 };
 
+/**
+ * Checks if the passed note is a valid note to be used with Tone.js
+ * @param {string} note - The note to be checked, e.g. `"C4"`
+ * @returns {boolean} - True if the note is a valid note, false otherwise  
+ */
 CABLES.WebAudio.isValidToneNote = function(note) {
   try {
     Tone.Frequency(note);
