@@ -128,7 +128,6 @@ function stop() {
 }
 
 function setNodeValue(key, value) {
-    op.log("setting key: ", key, " to value: ", value);
     try{
         node.set(key, value);    
     } catch(e) {
