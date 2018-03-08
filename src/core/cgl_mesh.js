@@ -287,7 +287,7 @@ CGL.Mesh.prototype._bind=function(shader)
                 {
                     this._cgl.gl.vertexAttribPointer(attribute.loc, attribute.itemSize, attribute.type,  false, attribute.itemSize*4,0);
                     this._cgl.gl.vertexAttribDivisor(attribute.loc, 1);
-                }
+                }else
                 if(attribute.itemSize==16)
                 {
                     this._cgl.gl.vertexAttribPointer(attribute.loc, 4, attribute.type,  false, 16*4,0);
@@ -302,7 +302,7 @@ CGL.Mesh.prototype._bind=function(shader)
                     this._cgl.gl.vertexAttribDivisor(attribute.loc+1, 1);
                     this._cgl.gl.vertexAttribDivisor(attribute.loc+2, 1);
                     this._cgl.gl.vertexAttribDivisor(attribute.loc+3, 1);
-                }
+                }else{console.log('unknown instance attrib size',attribute.name)}
             }
             else
             {

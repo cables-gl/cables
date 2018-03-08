@@ -6,7 +6,7 @@ To disable this add the following rule to your stylesheet (CSS):
 
 ```css
 body {
-  -webkit-tap-highlight-color: rgba(0,0,0,0); // hide grey rectangle on iOS touch
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* hide grey rectangle on iOS touch */
 }
 ```
 
