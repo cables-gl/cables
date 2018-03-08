@@ -1,0 +1,3 @@
+Sometimes your patch depends on asynchronous tasks to finish before you show your main patch. The Ops.Patch.LoadingStatus op keeps track of files being loaded. Most of the ops which load files asynchronously (e.g. Ops.Gl.Texture) inform the LoadingStatus themselves, but if you need to build this functionality yourself you can do so by using this op.
+Internally this uses a stack, so by pressing `Start` three times you will three different jobs.
+Inside the cables editor you will notice that the cables logo in the top left corner blinks when there are open tasks. Also when you hover over it you will see a list of all open tasks.
