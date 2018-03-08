@@ -1,8 +1,8 @@
 {
-    "updated": 1520434623456,
+    "updated": 1520366703484,
     "authorName": "pandur",
-    "id": "28c8c024-3ac9-4fca-8276-77ca76f35ad8",
-    "created": 1519638909468,
+    "id": "950c1a37-a31f-4a0d-9b08-a780fbbfba73",
+    "created": 1520365713596,
     "layout": {
         "portsIn": [
             {
@@ -11,42 +11,28 @@
             },
             {
                 "type": "0",
-                "name": "Attribute",
-                "subType": "string"
-            },
-            {
-                "type": "2",
-                "name": "Geometry"
-            },
-            {
-                "type": "0",
-                "name": "Seed",
+                "name": "Strength",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min",
+                "name": "Scroll X",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max",
+                "name": "Scroll Y",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Random R",
+                "name": "Scroll Z",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Random G",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Random B",
-                "subType": "number"
+                "name": "WorldSpace",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -55,6 +41,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Exp.Gl.ShaderEffects.RandomColorByAttribute"
+        "name": "Ops.Gl.ShaderEffects.InstancedPerlinPosition"
     }
 }

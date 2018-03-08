@@ -7,47 +7,63 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "anim"
+                "name": "anim",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scrollX"
+                "name": "scrollX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scrollY"
+                "name": "scrollY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "repeat"
+                "name": "repeat",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Layer 1"
+                "name": "aspect",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Layer 2"
+                "name": "Layer 1",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Layer 3"
+                "name": "Layer 2",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Layer 4"
+                "name": "Layer 3",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Layer 4",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -68,5 +84,9 @@
     "summary": "fractional brownian motion noise ",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1520431500434,
+    "authorName": "pandur",
+    "id": "7073186c-b776-48c2-a01e-041df88ad88a",
+    "created": 1520431410269
 }

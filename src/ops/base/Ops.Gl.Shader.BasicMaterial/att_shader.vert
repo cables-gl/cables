@@ -2,24 +2,25 @@
 
 IN vec3 vPosition;
 IN vec3 attrVertNormal;
+IN vec2 attrTexCoord;
+
 OUT vec3 norm;
 OUT vec2 texCoord;
 OUT vec2 texCoordOrig;
 
-    IN vec2 attrTexCoord;
+UNI mat4 projMatrix;
+UNI mat4 modelMatrix;
+UNI mat4 viewMatrix;
+
 #ifdef HAS_TEXTURES
     #ifdef TEXTURE_REPEAT
-        uniform float diffuseRepeatX;
-        uniform float diffuseRepeatY;
-        uniform float texOffsetX;
-        uniform float texOffsetY;
-
+        UNI float diffuseRepeatX;
+        UNI float diffuseRepeatY;
+        UNI float texOffsetX;
+        UNI float texOffsetY;
     #endif
 #endif
 
-uniform mat4 projMatrix;
-uniform mat4 modelMatrix;
-uniform mat4 viewMatrix;
 
 void main()
 {
@@ -33,9 +34,9 @@ void main()
             texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
             texCoord.y=texCoord.y*diffuseRepeatY+texOffsetY;
         #endif
-   #endif
+    #endif
 
-   vec4 pos = vec4( vPosition, 1. );
+    vec4 pos = vec4( vPosition, 1. );
 
 
     #ifdef BILLBOARD

@@ -11,7 +11,7 @@ var samples=op.inValueInt("Samples",4);
 
 var polyOff=op.inValueInt("Poly Offset",0);
 
-var bias=op.inValueInt("Bias",0.001);
+var bias=op.inValueInt("Bias",0.0);
 var znear=op.inValueInt("Z Near",0.1);
 var zfar=op.inValueInt("Z Far",300);
 var lookat=op.inArray("Look at");

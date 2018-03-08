@@ -15,11 +15,8 @@
             },
             {
                 "type": "0",
-                "name": "Type"
-            },
-            {
-                "type": "0",
-                "name": "Smoothing"
+                "name": "Smoothing",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -29,9 +26,14 @@
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Meter"
-    }
+    },
+    "updated": 1520421194397,
+    "authorName": "tim",
+    "id": "ee321c83-68de-4567-bada-a317e7afca6a",
+    "created": 1520420963917
 }

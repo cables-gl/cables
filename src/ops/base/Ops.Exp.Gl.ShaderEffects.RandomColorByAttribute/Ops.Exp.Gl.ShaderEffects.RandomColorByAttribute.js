@@ -76,8 +76,9 @@ function updateCode()
 
     srcBodyFrag=''
         .endl()+'float MOD_coord=MOD_round('+attrName+'Frag*1000.0)/1000.0+MOD_seed;'
-        .endl()+'col.rgb*= (MOD_rand(vec2(MOD_coord))*(MOD_max-MOD_min))+MOD_min ;'
         
+        .endl()+'col.rgb*= (MOD_rand(vec2(MOD_coord))*(MOD_max-MOD_min))+MOD_min ;'
+
         .endl()+'col.r+=MOD_rand(vec2(MOD_coord*2.0))*MOD_randR;'
         .endl()+'col.g+=MOD_rand(vec2(MOD_coord*3.0))*MOD_randG;'
         .endl()+'col.b+=MOD_rand(vec2(MOD_coord*13.0))*MOD_randB;'

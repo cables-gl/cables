@@ -1,19 +1,20 @@
-uniform sampler2D tex;
-uniform float anim;
+UNI sampler2D tex;
+UNI float anim;
 
-uniform float scale;
-uniform float repeat;
+UNI float scale;
+UNI float repeat;
 
-uniform float scrollX;
-uniform float scrollY;
+UNI float scrollX;
+UNI float scrollY;
 
-uniform float amount;
+UNI float amount;
 
-uniform bool layer1;
-uniform bool layer2;
-uniform bool layer3;
-uniform bool layer4;
+UNI bool layer1;
+UNI bool layer2;
+UNI bool layer3;
+UNI bool layer4;
 
+UNI float aspect;
 
 IN vec2 texCoord;
 
@@ -59,6 +60,7 @@ void main()
     // vec4 col=texture2D(tex,texCoord+2.0*fbm4(texCoord+2.0*fbm6(texCoord+anim)));
 
     vec2 p=(texCoord-0.5)*scale;
+    p.y/=aspect;
     vec2 q = vec2( fbm4( p + vec2(0.3+scrollX,0.20+scrollY) ),
                    fbm4( p + vec2(3.1+scrollX,1.3+scrollY) ) );
 

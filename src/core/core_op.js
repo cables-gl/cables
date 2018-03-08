@@ -258,6 +258,8 @@ CABLES.Op = function()
      */
     CABLES.Op.prototype.inObject=function(name,v,options) { var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_OBJECT,options)); if(v!==undefined)p.set(v); return p; };
 
+    CABLES.Op.prototype.inGradient=function(name,v) { var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_VALUE,{"display":"gradient","hidePort":true})); if(v!==undefined)p.set(v); return p; };
+
     /**
      * create a array input port
      * @name CABLES.Op#inObject

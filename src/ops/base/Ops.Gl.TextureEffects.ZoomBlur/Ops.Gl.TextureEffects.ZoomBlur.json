@@ -7,15 +7,18 @@
             },
             {
                 "type": "0",
-                "name": "strength"
+                "name": "strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -25,5 +28,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.ZoomBlur"
-    }
+    },
+    "updated": 1520438083273,
+    "authorName": "pandur",
+    "id": "b60f01fc-6ea6-4720-ae33-e3d9208e99f9",
+    "created": 1520438081267
 }

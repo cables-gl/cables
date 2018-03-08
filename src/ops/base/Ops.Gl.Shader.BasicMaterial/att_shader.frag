@@ -1,6 +1,5 @@
 {{MODULES_HEAD}}
 
-
 IN vec2 texCoord;
 #ifdef HAS_TEXTURES
     IN vec2 texCoordOrig;
@@ -32,9 +31,9 @@ void main()
                col.g*=g;
                col.b*=b;
            #endif
-      #endif
-      col.a*=a;
-      #ifdef HAS_TEXTURE_OPACITY
+    #endif
+    col.a*=a;
+    #ifdef HAS_TEXTURE_OPACITY
       
             #ifdef TRANSFORMALPHATEXCOORDS
                 col.a*=texture2D(texOpacity,vec2(texCoordOrig.s,1.0-texCoordOrig.t)).g;
@@ -44,10 +43,9 @@ void main()
             #endif
        #endif
        
-   #endif
+    #endif
 
     {{MODULE_COLOR}}
 
-
-   outColor = col;
+    outColor = col;
 }

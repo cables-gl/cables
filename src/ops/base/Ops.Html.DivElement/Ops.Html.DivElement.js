@@ -1,8 +1,8 @@
 
 var inId=op.inValueString("Id");
 var inClass=op.inValueString("Class");
-var inText=op.inValueString("Text");
-var inStyle=op.inValueEditor("Style","position:absolute;","css");
+var inText=op.inValueString("Text","Hello Div");
+var inStyle=op.inValueEditor("Style","position:absolute;z-index:9999;","css");
 
 var inInteractive=op.inValueBool("Interactive",false);
 var inVisible=op.inValueBool("Visible",true);
@@ -11,10 +11,9 @@ var outElement=op.outObject("DOM Element");
 var outHover=op.outValue("Hover");
 var outClicked=op.outFunction("Clicked");
 
-var div=null;
 var listenerElement=null;
 
-div = document.createElement('div');
+var div = document.createElement('div');
 var canvas = op.patch.cgl.canvas.parentElement;
 // var canvas = op.patch.cgl.canvas;
 canvas.appendChild(div);
@@ -25,6 +24,9 @@ inText.onChange=updateText;
 inStyle.onChange=updateStyle;
 inInteractive.onChange=updateInteractive;
 inVisible.onChange=updateVisibility;
+
+updateText();
+updateStyle();
 
 function updateVisibility()
 {

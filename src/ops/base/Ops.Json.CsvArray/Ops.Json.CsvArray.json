@@ -21,5 +21,22 @@
             }
         ],
         "name": "Ops.Json.CsvArray"
+    },
+    "summary": "parse CSV files as array",
+    "docs": {
+        "ports": [
+            {
+                "name": "file",
+                "text": "The CSV-file you want to use in cables as an array"
+            },
+            {
+                "name": "result",
+                "text": "The parsed two-dimensional array containing all the rows and columns from the CSV-file"
+            },
+            {
+                "name": "num items",
+                "text": "The number of rows "
+            }
+        ]
     }
 }

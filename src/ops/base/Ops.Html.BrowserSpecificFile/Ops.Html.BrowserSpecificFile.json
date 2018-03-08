@@ -1,1 +1,54 @@
-{}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Chrome File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Firefox File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Safari File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "IE <= 11 File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Edge File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Opera File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Default File",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Browser Specific File",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Detected Browser",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Html.BrowserSpecificFile"
+    }
+}
