@@ -1,11 +1,17 @@
 var inGrad=op.inGradient("Gradient");
+var inSize=op.inValueInt("Size",256);
 var outTex=op.outObject("Texture");
+var inDir=op.inValueSelect("Direction",["X","Y"],"X");
 
 var cgl=op.patch.cgl;
+inSize.onChange=update;
+inGrad.onChange=update;
+inDir.onChange=update;
 
-inGrad.onChange=function()
+function update()
 {
-    var width=255;
+    var width=Math.round(inSize.get());
+    if(width<4)width=4;
     var grad=null;
 
     if(!inGrad.get() || inGrad.get()=='')
@@ -13,7 +19,7 @@ inGrad.onChange=function()
         console.error("gradient no data");
         return;
     }
-    
+
     try
     {
         grad=JSON.parse(inGrad.get());
@@ -30,12 +36,8 @@ inGrad.onChange=function()
     }
     
     var keys=grad.keys;
+    var pixels=new Uint8Array(width*4);
 
-
-    var pixels=new Uint8Array(256*4);
-
-    // pixels.length=256*4;
-    
     for(var i=0;i<keys.length-1;i++)
     {
         var keyA=keys[i];
@@ -54,9 +56,9 @@ inGrad.onChange=function()
     }
 
     var tex=new CGL.Texture(cgl);
-    tex.initFromData(pixels,256,1);
+    
+    if(inDir.get()=="X") tex.initFromData(pixels,width,1);
+    if(inDir.get()=="Y") tex.initFromData(pixels,1,width);
     outTex.set(null);
     outTex.set(tex);
-    
-
-};
+}
