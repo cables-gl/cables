@@ -1,0 +1,32 @@
+{
+    "updated": 1520519502460,
+    "authorName": "tim",
+    "id": "38d0f6ba-a4d8-4093-9cab-17e1b5dd52ae",
+    "created": 1520518568562,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Start Task"
+            },
+            {
+                "type": "1",
+                "name": "End Task"
+            }
+        ],
+        "name": "Ops.Patch.LoadingStatusTask"
+    },
+    "summary": "Starts / stops a loading task (async loader)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Start Task",
+                "text": "Starts a task"
+            },
+            {
+                "name": "End Task",
+                "text": "Stops the last task"
+            }
+        ]
+    }
+}
