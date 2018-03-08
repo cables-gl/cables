@@ -6,6 +6,10 @@ var inMeshIndex=op.inValueInt("Mesh Index");
 
 var inTime=op.inValue("Time");
 
+var inFade=op.inValueSlider("Fade Times");
+var inTime2=op.inValue("Time2");
+
+
 var next=op.outFunction("Next");
 var outNumBounes=op.outValue("Num Bones");
 var outSpline=op.outArray("Spline");
@@ -16,8 +20,10 @@ var tempMat=mat4.create();
 var tempVec=vec3.create();
 var emptyVec=vec3.create();
 var transVec=vec3.create();
+
 var alwaysEmptyVec=vec3.create();
 var q=quat.create();
+var q2=quat.create();
 var qMat=mat4.create();
 var boneMatrix=mat4.create();
 
@@ -60,6 +66,9 @@ function findBoneChilds(n,parent,foundBone)
 
     var time=op.patch.timer.getTime();
     if(inTime.isLinked() || inTime.get()!==0)time=inTime.get();
+    var time2=inTime2.get();
+
+    
 
     cgl.pushModelMatrix();
 
@@ -113,7 +122,19 @@ function findBoneChilds(n,parent,foundBone)
             transVec[0]=n.posAnimX.getValue(time);
             transVec[1]=n.posAnimY.getValue(time);
             transVec[2]=n.posAnimZ.getValue(time);
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
+
+            if(inFade.get()!=0)
+            {
+                transVec[0]=(transVec[0]*(1.0-inFade.get())) + (n.posAnimX.getValue(time2)*inFade.get());
+                transVec[1]=(transVec[1]*(1.0-inFade.get())) + (n.posAnimY.getValue(time2)*inFade.get());
+                transVec[2]=(transVec[2]*(1.0-inFade.get())) + (n.posAnimZ.getValue(time2)*inFade.get());
+
+                mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
+            }
+            else
+            {
+                mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
+            }
         }
 
         if(n.quatAnimX)
@@ -123,6 +144,17 @@ function findBoneChilds(n,parent,foundBone)
                 n.quatAnimY,
                 n.quatAnimZ,
                 n.quatAnimW);
+
+            if(inFade.get()!=0)
+            {
+                CABLES.TL.Anim.slerpQuaternion(time2,q2,
+                    n.quatAnimX,
+                    n.quatAnimY,
+                    n.quatAnimZ,
+                    n.quatAnimW);
+                quat.slerp(q,q,q2,inFade.get());
+            }
+
             mat4.fromQuat(qMat, q);
             mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
         }

@@ -76,9 +76,9 @@ function exec()
 }
 
 v.set(0);
-old_min.set(-1);
+old_min.set(0);
 old_max.set(1);
-new_min.set(0);
+new_min.set(-1);
 new_max.set(1);
 
 

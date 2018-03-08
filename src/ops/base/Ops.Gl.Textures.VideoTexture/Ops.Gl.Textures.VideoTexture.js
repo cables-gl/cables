@@ -26,7 +26,7 @@ var outProgress=op.addOutPort(new Port(op,"progress",OP_PORT_TYPE_VALUE));
 var outTime=op.addOutPort(new Port(op,"CurrentTime",OP_PORT_TYPE_VALUE));
 
 var loading=op.addOutPort(new Port(op,"Loading",OP_PORT_TYPE_VALUE));
-
+var canPlayThrough = op.outValueBool('Can Play Through', false)
 
 var videoElementPlaying=false;
 var embedded=false;
@@ -196,6 +196,7 @@ function initVideo()
     videoElement.loop = loop.get();
     if(play.get()) videoElement.play()
     updateTexture();
+    canPlayThrough.set(true);
 }
 
 function updateVolume()
@@ -211,7 +212,6 @@ function loadedMetaData()
 {
     outDuration.set(videoElement.duration);
 
-
     // console.log('loaded metadata...');
     // console.log('length ',videoElement.buffered.length);
     // console.log('duration ',videoElement.duration);
@@ -225,6 +225,7 @@ var addedListeners=false;
 
 function embedVideo(force)
 {
+    canPlayThrough.set(false);
     if(filename.get()!=0 && filename.get().length>1)
     if(inPreload.get()||force)
     {

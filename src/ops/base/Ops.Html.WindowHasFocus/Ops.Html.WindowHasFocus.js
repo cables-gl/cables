@@ -1,5 +1,3 @@
-op.name="WindowHasFocus";
-
 var focused = true;
 var outFocussed=op.outValue("has focus");
 
