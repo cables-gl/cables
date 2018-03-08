@@ -1,5 +1,5 @@
 {
-    "updated": 1520526703374,
+    "updated": 1520527118502,
     "authorName": "pandur",
     "id": "33cd13de-989d-4258-91ab-3f693d6c6f67",
     "created": 1520328576809,
@@ -12,7 +12,7 @@
             {
                 "type": "0",
                 "name": "Filename",
-                "subType": "number"
+                "subType": "string"
             },
             {
                 "type": "0",
@@ -40,5 +40,13 @@
     "summary": "render an animation and save as file",
     "docs": {
         "ports": []
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Progress",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Exp.RenderAnim"
     }
 }
