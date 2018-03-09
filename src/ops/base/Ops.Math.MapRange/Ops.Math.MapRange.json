@@ -4,38 +4,45 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "old min"
+                "name": "old min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "old max"
+                "name": "old max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "new min"
+                "name": "new min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "new max"
+                "name": "new max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Easing"
+                "name": "Easing",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.MapRange"
     },
-    "updated": 1519153321962,
+    "updated": 1520498947105,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "2617b407-60a0-4ff6-b4a7-18136cfa7817",

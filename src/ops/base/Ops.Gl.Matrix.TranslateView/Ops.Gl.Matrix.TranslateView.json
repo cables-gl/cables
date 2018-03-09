@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.TranslateView"
+    },
+    "summary": "translate the view/camera matrix",
+    "docs": {
+        "ports": []
     }
 }

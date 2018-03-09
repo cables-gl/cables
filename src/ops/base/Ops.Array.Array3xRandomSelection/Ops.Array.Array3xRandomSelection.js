@@ -1,11 +1,11 @@
 
 var inArray=op.inArray("Array");
-var inNum=op.inValueInt("Elements");
-
+var inNum=op.inValueInt("Elements",10);
+var inSeed=op.inValue("Seed",0);
 var result=op.outArray("Result");
 
 var arr=[];
-inArray.onChange=inNum.onChange=update;
+inSeed.onChange=inArray.onChange=inNum.onChange=update;
 
 function update()
 {
@@ -21,9 +21,11 @@ function update()
     
     // if(arr.length>oldArr.length)arr.length=oldArr.length;
     
+    Math.randomSeed=inSeed.get();
+    
     for(var i=0;i<inNum.get();i++)
     {
-        var index=Math.floor((Math.random()*oldArr.length/3))*3;
+        var index=Math.floor((Math.seededRandom()*oldArr.length/3))*3;
         arr[i*3+0]=oldArr[index+0];
         arr[i*3+1]=oldArr[index+1];
         arr[i*3+2]=oldArr[index+2];

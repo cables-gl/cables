@@ -70,5 +70,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.Physics.Body.Cube"
+    },
+    "summary": "physical body in form of a cube",
+    "docs": {
+        "ports": []
     }
 }

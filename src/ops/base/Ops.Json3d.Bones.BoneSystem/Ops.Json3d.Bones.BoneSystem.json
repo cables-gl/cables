@@ -1,5 +1,5 @@
 {
-    "updated": 1519921822363,
+    "updated": 1520499716128,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "72ed0814-2b80-48ad-90c1-2ef47eeecfe6",
@@ -12,11 +12,23 @@
             },
             {
                 "type": "0",
-                "name": "Mesh Index"
+                "name": "Mesh Index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Time"
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fade Times",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Time2",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -26,7 +38,8 @@
             },
             {
                 "type": "0",
-                "name": "Num Bones"
+                "name": "Num Bones",
+                "subType": "number"
             },
             {
                 "type": "3",

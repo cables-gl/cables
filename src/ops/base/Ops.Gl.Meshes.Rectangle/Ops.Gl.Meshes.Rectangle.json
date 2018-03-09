@@ -55,5 +55,17 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "20f3c4e7-04d1-44e0-b868-05756d1c66c6",
-    "created": 1509990258810
+    "created": 1509990258810,
+    "docs": {
+        "ports": [
+            {
+                "name": "pivot x",
+                "text": "Pivot/Anchor Point of the rectangle"
+            },
+            {
+                "name": "pivot y",
+                "text": "Pivot/Anchor Point of the rectangle"
+            }
+        ]
+    }
 }
