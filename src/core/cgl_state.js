@@ -137,11 +137,12 @@ CGL.Context = function() {
             this.gl.colorMask(true, true, true, true);
         }
 
-        this.canvas.toBlob(
-            function(blob) {
-                if (cb) cb(blob);
-                else console.log("no screenshot callback...");
-            }.bind(this));
+        if(this.canvas && this.canvas.toBlob)
+            this.canvas.toBlob(
+                function(blob) {
+                    if (cb) cb(blob);
+                    else console.log("no screenshot callback...");
+                }.bind(this));
     }
 
     this.endFrame = function() {

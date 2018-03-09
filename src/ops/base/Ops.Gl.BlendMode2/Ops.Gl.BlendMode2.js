@@ -91,11 +91,7 @@ exec.onTriggered=function()
         }
     }
 
-    // if(blendMode==BLEND_NONE)
-    // {
-    //     cgl.gl.disable( cgl.gl.BLEND );
-    // }
-    cgl.pushBlend(blendMode==BLEND_NONE);
+    cgl.pushBlend(blendMode!==BLEND_NONE);
 
     next.trigger();
     
