@@ -1,5 +1,3 @@
-op.name="DelayedValueSimple";
-
 var val=op.inValue("Value");
 var de=op.inValue("Delay",1);
 

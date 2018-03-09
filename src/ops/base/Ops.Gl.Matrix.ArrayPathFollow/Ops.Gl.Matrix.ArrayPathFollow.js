@@ -117,6 +117,8 @@ function render()
         animY.getValue(t),
         animZ.getValue(t)
     );
+    
+    idx.set(nt);
 
     if(triggerLookat.isLinked())
     {

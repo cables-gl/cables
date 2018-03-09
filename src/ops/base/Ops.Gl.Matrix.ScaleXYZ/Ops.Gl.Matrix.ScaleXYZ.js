@@ -43,3 +43,4 @@ scaleX.onValueChange(scaleChanged);
 scaleY.onValueChange(scaleChanged);
 scaleZ.onValueChange(scaleChanged);
 
+scaleChanged();

@@ -6,5 +6,9 @@
     "created": 1513971956730,
     "layout": {
         "name": "Ops.TimeLine.TimeLineUI"
+    },
+    "summary": "little ui for controlling the timeline",
+    "docs": {
+        "ports": []
     }
 }

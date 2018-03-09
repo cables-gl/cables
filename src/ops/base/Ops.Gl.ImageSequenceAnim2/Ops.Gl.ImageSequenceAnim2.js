@@ -1,18 +1,12 @@
-
 var inTime=op.inValue("Time");
-
 var fps=op.addInPort(new Port(op,"FPS",OP_PORT_TYPE_VALUE));
-// var inOffsetY=op.addInPort(new Port(op,"Row Offset Y",OP_PORT_TYPE_VALUE));
-// var numFrames=op.addInPort(new Port(op,"Num Frames",OP_PORT_TYPE_VALUE));
 var numX=op.addInPort(new Port(op,"Num X",OP_PORT_TYPE_VALUE));
 var numY=op.addInPort(new Port(op,"Num Y",OP_PORT_TYPE_VALUE));
-
 
 var texRepeatX=op.addOutPort(new Port(op,"Repeat X",OP_PORT_TYPE_VALUE));
 var texRepeatY=op.addOutPort(new Port(op,"Repeat Y",OP_PORT_TYPE_VALUE));
 var texU=op.addOutPort(new Port(op,"Offset X",OP_PORT_TYPE_VALUE));
 var texV=op.addOutPort(new Port(op,"Offset Y",OP_PORT_TYPE_VALUE));
-
 
 var outFrame=op.outValue("Frame");
 var outProgress=op.outValue("Progress");
@@ -47,7 +41,7 @@ inTime.onChange=function()
     var col=frame-(row*(numX.get()));
 
     outFrame.set(frame);
-    outProgress.set(frame/numFrames);
+    outProgress.set((frame)/(numFrames-1));
 
     texU.set(texRepeatX.get()*col);
     texV.set(texRepeatY.get()*row);

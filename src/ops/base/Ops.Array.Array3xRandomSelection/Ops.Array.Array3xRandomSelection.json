@@ -1,5 +1,5 @@
 {
-    "updated": 1518459769396,
+    "updated": 1520579058426,
     "authorName": "pandur",
     "id": "c6967443-9d2a-4d3a-8d8c-eab529f52518",
     "created": 1518457012267,
@@ -11,7 +11,13 @@
             },
             {
                 "type": "0",
-                "name": "Elements"
+                "name": "Elements",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -20,7 +26,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Deprecated.Array.Array3xRandomSelection"
+        "name": "Ops.Array.Array3xRandomSelection"
     },
     "summary": "get x random elements from an array"
 }
