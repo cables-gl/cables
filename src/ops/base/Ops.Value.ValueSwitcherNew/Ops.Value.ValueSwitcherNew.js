@@ -13,7 +13,7 @@ for(var i=0;i<10;i++)
 
 function update()
 {
-    if(idx.get()>=0 && idx.get()<valuePorts.length)
+    if(idx.get()>=0 && valuePorts[idx.get()])
     {
         result.set( valuePorts[idx.get()].get() );
     }

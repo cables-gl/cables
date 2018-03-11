@@ -28,5 +28,9 @@
             }
         ],
         "name": "Ops.Gl.GradientTexture"
+    },
+    "summary": "texture containing a color gradient",
+    "docs": {
+        "ports": []
     }
 }

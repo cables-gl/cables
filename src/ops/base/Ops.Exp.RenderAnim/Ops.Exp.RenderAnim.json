@@ -44,7 +44,7 @@
         ],
         "name": "Ops.Exp.RenderAnim"
     },
-    "summary": "render an animation and save as file",
+    "summary": "render an animation and save as file webm video or png image sequence",
     "docs": {
         "ports": [],
         "portsOut": [
