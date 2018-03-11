@@ -1,0 +1,42 @@
+{
+    "updated": 1519815842715,
+    "authorName": "pandur",
+    "id": "76b42a0b-21a4-4eef-b20c-5a969a2189f0",
+    "created": 1519815116286,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Num Gamepads"
+            },
+            {
+                "type": "2",
+                "name": "Pad 0"
+            },
+            {
+                "type": "2",
+                "name": "Pad 1"
+            },
+            {
+                "type": "2",
+                "name": "Pad 2"
+            }
+        ],
+        "name": "Ops.Devices.ListGamePads"
+    },
+    "summary": "list connected gamepads",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "trigger to update gamepad button/axis states"
+            }
+        ]
+    }
+}
