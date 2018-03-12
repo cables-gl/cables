@@ -6,6 +6,8 @@ var outValue=op.outValue("result time");
 var outArr=op.outArray("Expanded Frames");
 var finished=op.outValue("Finished",false);
 var finishedTrigger=op.outFunction("Finished Trigger");
+var outAnimLength=op.outValue("Anim Length");
+var outProgress=op.outValue("Progress");
 
 var anim=new CABLES.Anim();
 var FPS=30;
@@ -59,6 +61,7 @@ function parse()
             r[0]=parseInt(r[0],10);
             r[1]=parseInt(r[1],10);
 
+
             for(var j=Math.min(r[0],r[1]);j<=Math.max(r[0],r[1]);j++)
             {
                 frames.push(j);
@@ -68,6 +71,7 @@ function parse()
     
     outArr.set(null);
     outArr.set(frames);
+    outAnimLength.set(frames.length/FPS);
     setupAnim(frames);
 }
 
@@ -75,6 +79,14 @@ inTime.onChange=function()
 {
     var t=inTime.get()-timeOffset;
     outValue.set(anim.getValue(t));
+    
+    if(anim.keys.length>1)
+    {
+        var l=anim.keys[anim.keys.length-1].time-anim.keys[0].time;
+        var p=(t%l)/(l);
+        outProgress.set(p);
+        
+    }
     
     if(anim.hasEnded(t))
     {

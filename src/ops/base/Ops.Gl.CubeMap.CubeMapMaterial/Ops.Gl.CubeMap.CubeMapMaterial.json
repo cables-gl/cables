@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "Mip Level"
+                "name": "Mip Level",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -15,7 +16,8 @@
             },
             {
                 "type": "0",
-                "name": "Reflection"
+                "name": "Reflection",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

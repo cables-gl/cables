@@ -7,7 +7,8 @@ var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{ display:'bool' } )
 var autoPlay = op.inValueBool('auto play', false);
 
 var volume=op.addInPort(new Port(op,"Volume",OP_PORT_TYPE_VALUE,{ display:'range' } ));
-var muted=op.addInPort(new Port(op,"mute",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+// var muted=op.addInPort(new Port(op,"mute",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+var muted = op.inValueBool('mute', true);
 var speed=op.addInPort(new Port(op,"speed",OP_PORT_TYPE_VALUE ));
 
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
@@ -104,12 +105,12 @@ play.onValueChanged=function()
 
         videoElement.play();
         updateTexture();
+        videoElement.playbackRate = speed.get();
     }
     else videoElement.pause();
 };
 
-speed.onValueChanged=function()
-{
+speed.onChange = function() {
     videoElement.playbackRate = speed.get();
 };
 
@@ -236,6 +237,7 @@ function embedVideo(force)
         var url=op.patch.getFilePath(filename.get());
         videoElement.setAttribute('src',url);
         videoElement.setAttribute('crossOrigin','anonymous');
+        videoElement.playbackRate = speed.get();
         if(!addedListeners)
         {
             addedListeners=true;

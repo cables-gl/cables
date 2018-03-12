@@ -15,13 +15,15 @@ IN vec3 attrVertNormal;
 void main()
 {
 
-    mat4 modelview= viewMatrix * modelMatrix;
+    mat4 mMatrix=modelMatrix;
 
     v_pos= vPosition;
     vec4 pos = vec4( vPosition, 1. );
 
     {{MODULE_VERTEX_POSITION}}
 
+mat4 modelview= viewMatrix * mMatrix;
+    
    vec4 eyeCoords = modelview * pos;
 
 
