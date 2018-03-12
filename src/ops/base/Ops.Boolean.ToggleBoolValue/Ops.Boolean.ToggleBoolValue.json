@@ -4,13 +4,15 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "in bool"
+                "name": "in bool",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "out bool"
+                "name": "out bool",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Boolean.ToggleBoolValue"
@@ -26,5 +28,9 @@
                 "text": "The opposite to `In Bool`"
             }
         ]
-    }
+    },
+    "updated": 1520703663333,
+    "authorName": "pandur",
+    "id": "7b1abd02-3aad-4106-9848-7f4c3cfab6a9",
+    "created": 1520703662276
 }

@@ -2,56 +2,103 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Index"
+                "type": "1",
+                "name": "Trigger 0"
             },
             {
                 "type": "0",
-                "name": "Value 0"
+                "name": "Value 0",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 1"
             },
             {
                 "type": "0",
-                "name": "Value 1"
+                "name": "Value 1",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 2"
             },
             {
                 "type": "0",
-                "name": "Value 2"
+                "name": "Value 2",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 3"
             },
             {
                 "type": "0",
-                "name": "Value 3"
+                "name": "Value 3",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 4"
             },
             {
                 "type": "0",
-                "name": "Value 4"
+                "name": "Value 4",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 5"
             },
             {
                 "type": "0",
-                "name": "Value 5"
+                "name": "Value 5",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 6"
             },
             {
                 "type": "0",
-                "name": "Value 6"
+                "name": "Value 6",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 7"
             },
             {
                 "type": "0",
-                "name": "Value 7"
+                "name": "Value 7",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 8"
-            },
-            {
-                "type": "0",
-                "name": "Value 9"
+                "name": "Default Value",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Last Value",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Triggered"
             }
         ],
-        "name": "Ops.ValueSwitcherTrigger"
-    }
+        "name": "Ops.Value.ValueSwitcherTrigger"
+    },
+    "updated": 1520685565877,
+    "authorName": "pandur",
+    "id": "338032c5-bf47-454b-8ae1-cd91f17e5c5b",
+    "created": 1520685565879
 }

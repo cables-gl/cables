@@ -17,6 +17,12 @@ var pressedButton2=op.outValueBool("Button 2");
 var pressedButton3=op.outValueBool("Button 3");
 var pressedButton4=op.outValueBool("Button 4");
 
+var outLeftShoulder=op.outValue("Left Shoulder");
+var outLeftShoulderBottom=op.outValue("Left Shoulder Bottom");
+
+var outRightShoulder=op.outValue("Right Shoulder");
+var outRightShoulderBottom=op.outValue("Right Shoulder Bottom");
+
 data.onChange=function()
 {
     if(data.get())
@@ -27,11 +33,6 @@ data.onChange=function()
         var buttons=data.get().buttons;
         if(buttons)
         {
-            if(buttons[14])pressedLeft.set(buttons[14].pressed);
-            if(buttons[15])pressedRight.set(buttons[15].pressed);
-            if(buttons[13])pressedDown.set(buttons[13].pressed);
-            if(buttons[12])pressedUp.set(buttons[12].pressed);
-
             pressedButton1.set(buttons[0].pressed);
             pressedButton2.set(buttons[1].pressed);
             pressedButton3.set(buttons[2].pressed);
@@ -44,17 +45,31 @@ data.onChange=function()
             if(axes)
             {
                 if(axes[0]<-0.5)pressedLeft.set(true);
-                    else pressedLeft.set(false);
+                    else pressedLeft.set(false||buttons[14].pressed);
                 if(axes[0]>0.5)pressedRight.set(true);
-                    else pressedRight.set(false);
+                    else pressedRight.set(false||buttons[15].pressed);
                 
                 if(axes[1]<-0.5)pressedUp.set(true);
-                    else pressedUp.set(false);
+                    else pressedUp.set(false||buttons[12].pressed);
                 if(axes[1]>0.5)pressedDown.set(true);
-                    else pressedDown.set(false);
+                    else pressedDown.set(false||buttons[13].pressed);
             }
         }
+        else
+        {
+            pressedLeft.set(buttons[14].pressed);
+            pressedRight.set(buttons[15].pressed);
+            pressedDown.set(buttons[13].pressed);
+            pressedUp.set(buttons[12].pressed);
+        }
+        
+        outLeftShoulder.set(buttons[4].value);
+        outLeftShoulderBottom.set(buttons[6].value);
+        
+        outRightShoulder.set(buttons[5].value);
+        outRightShoulderBottom.set(buttons[7].value);
     }
+
 };
 
 // gamepad.BUTTONS = {

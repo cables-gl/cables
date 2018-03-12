@@ -1,0 +1,25 @@
+{
+    "updated": 1520348630182,
+    "authorName": "tim",
+    "id": "0efefbb7-461c-4a34-b7fd-28b89b0ceb3f",
+    "created": 1520347604810,
+    "summary": "Returns the maximum safe integer (number, constant)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Max Int",
+                "text": "The maximum safe integer"
+            }
+        ]
+    },
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Max Int",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Value.MaximumSafeInteger"
+    }
+}
