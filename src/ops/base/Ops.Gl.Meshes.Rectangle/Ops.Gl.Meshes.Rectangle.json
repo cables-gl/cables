@@ -8,35 +8,43 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "pivot x"
+                "name": "pivot x",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "pivot y"
+                "name": "pivot y",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "num columns"
+                "name": "num columns",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "num rows"
+                "name": "num rows",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "axis"
+                "name": "axis",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Active"
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -51,7 +59,7 @@
         ],
         "name": "Ops.Gl.Meshes.Rectangle"
     },
-    "updated": 1520032606281,
+    "updated": 1520837673709,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "20f3c4e7-04d1-44e0-b868-05756d1c66c6",
