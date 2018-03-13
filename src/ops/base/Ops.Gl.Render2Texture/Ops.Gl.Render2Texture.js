@@ -1,6 +1,5 @@
 var cgl=op.patch.cgl;
 
-op.name='render to texture';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
 var msaa=op.inValueSelect("MSAA",["none","2x","4x","8x"],"none");

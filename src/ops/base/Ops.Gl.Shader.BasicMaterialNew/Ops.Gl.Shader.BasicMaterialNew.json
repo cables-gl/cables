@@ -1,0 +1,98 @@
+{
+    "updated": 1520865511209,
+    "authorName": "pandur",
+    "id": "51f2207b-daaa-447f-bdbe-87fdd72f0c40",
+    "created": 1520863818836,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "2",
+                "name": "textureOpacity"
+            },
+            {
+                "type": "0",
+                "name": "Alpha Mask Source",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "colorizeTexture",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "billboard",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Opacity TexCoords Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "preMultiplied alpha",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Tex Offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Tex Offset Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.BasicMaterialNew"
+    }
+}
