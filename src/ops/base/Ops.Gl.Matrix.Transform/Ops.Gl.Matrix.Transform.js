@@ -8,10 +8,13 @@ var posZ=op.addInPort(new Port(op,"posZ"),0);
 
 var scale=op.addInPort(new Port(op,"scale"));
 
-
 var rotX=op.addInPort(new Port(op,"rotX"));
 var rotY=op.addInPort(new Port(op,"rotY"));
 var rotZ=op.addInPort(new Port(op,"rotZ"));
+
+op.setPortGroup([rotX,rotY,rotZ]);
+op.setPortGroup([posX,posY,posZ]);
+
 
 var cgl=op.patch.cgl;
 var vPos=vec3.create();
