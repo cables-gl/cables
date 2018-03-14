@@ -762,9 +762,6 @@ CABLES.Anim.prototype.easingFromString=function(str)
     if(str=='Quint Out') return CABLES.ANIM.EASING_QUINT_OUT;
     if(str=='Quint In') return CABLES.ANIM.EASING_QUINT_IN;
     if(str=='Quint In Out') return CABLES.ANIM.EASING_QUINT_INOUT;
-
-
-
 };
 
 CABLES.Anim.prototype.createPort=function(op,title,cb)
@@ -810,10 +807,6 @@ CABLES.Anim.prototype.createPort=function(op,title,cb)
 
     return port;
 };
-
-
-
-
 
 // ------------------------------
 
