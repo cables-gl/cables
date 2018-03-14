@@ -18,5 +18,9 @@
             }
         ],
         "name": "Ops.Value.TriggerOnChange"
+    },
+    "summary": "triggers next everytime the input value changed",
+    "docs": {
+        "ports": []
     }
 }

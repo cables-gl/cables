@@ -1,0 +1,62 @@
+{
+    "updated": 1520953350402,
+    "authorName": "tim",
+    "id": "08c5d91e-32d2-4852-ac18-d4cae543dd37",
+    "created": 1520949138517,
+    "libs": [
+        "hammer.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Vertical Swipe",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Vertical Pan",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Press"
+            },
+            {
+                "type": "1",
+                "name": "Press Up"
+            },
+            {
+                "type": "1",
+                "name": "Pan Left"
+            },
+            {
+                "type": "1",
+                "name": "Pan Right"
+            },
+            {
+                "type": "1",
+                "name": "Swipe Left"
+            },
+            {
+                "type": "1",
+                "name": "Swipe Right"
+            },
+            {
+                "type": "1",
+                "name": "Swipe Up"
+            },
+            {
+                "type": "1",
+                "name": "Swipe Down"
+            },
+            {
+                "type": "2",
+                "name": "Event"
+            }
+        ],
+        "name": "Ops.Devices.TouchGesture"
+    }
+}

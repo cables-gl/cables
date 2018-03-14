@@ -1,5 +1,5 @@
 {
-    "updated": 1519816668160,
+    "updated": 1520702112437,
     "authorName": "pandur",
     "id": "fbb89f72-f2e3-4d34-ad01-7d884a1bcdc0",
     "created": 1519816588260,
@@ -7,53 +7,65 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Value 0"
+                "name": "Value 0",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 1"
+                "name": "Value 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 2"
+                "name": "Value 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 3"
+                "name": "Value 3",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 4"
+                "name": "Value 4",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 5"
+                "name": "Value 5",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 6"
+                "name": "Value 6",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 7"
+                "name": "Value 7",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 8"
+                "name": "Value 8",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 9"
+                "name": "Value 9",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Value.ValueSwitcherNew"

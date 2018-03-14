@@ -1,0 +1,1 @@
+var outPort = op.outValue('Min Int', Number.MIN_SAFE_INTEGER);

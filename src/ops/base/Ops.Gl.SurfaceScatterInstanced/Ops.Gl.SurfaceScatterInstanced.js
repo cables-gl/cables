@@ -148,8 +148,11 @@ function setup()
         console.error("geom is not indexed");
     }
 
-    mesh.numInstances=num;
-    mesh.addAttribute('instMat',matrixArray,16);
+    if(op.patch.cgl.glVersion>=2) 
+    {
+        mesh.numInstances=num;
+        mesh.addAttribute('instMat',matrixArray,16);
+    }
     recalc=false;
     // console.log(matrixArray);
 }
@@ -221,6 +224,8 @@ function doRender()
     if(!inGeomSurface.get())return;
     if(!geom.get())return;
 
+// ANGLE_instanced_arrays
+
     if(op.patch.cgl.glVersion>=2) 
     {
         if(cgl.getShader() && cgl.getShader()!=shader)
@@ -264,8 +269,7 @@ function doRender()
         for(var i=0;i<matrixArray.length;i+=16)
         {
             op.patch.cgl.pushModelMatrix();
-            
-            
+
             for(var j=0;j<16;j++)
                 m[j]=matrixArray[i+j];
 
@@ -275,7 +279,6 @@ function doRender()
             op.patch.cgl.popModelMatrix();
         }
         
-        
-        
+        // console.log(i/16);
     }
 }

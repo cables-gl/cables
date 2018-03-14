@@ -821,7 +821,16 @@ CABLES.Op = function()
         if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
     }
 
+    CABLES.Op.prototype.setPortGroup=function(ports)
+    {
+        // ports[0].setUiAttribs({"spaceBefore":true});
+        // ports[ports.length-1].setUiAttribs({"spaceAfter":true});
+    }
+    
+
+
 }
+
 
 CABLES.Op.isSubpatchOp=function(name)
 {

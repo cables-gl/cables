@@ -1,0 +1,42 @@
+{
+    "updated": 1520688973674,
+    "authorName": "pandur",
+    "id": "05be9e0d-c6bd-42f6-9f2c-16ae5ad4db7a",
+    "created": 1520687643177,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Axis"
+            },
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "DeadZone",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Angle",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Devices.GamePad.GamePadJoystickAxis"
+    }
+}

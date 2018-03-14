@@ -29,5 +29,14 @@
             }
         ],
         "name": "Ops.Devices.ListGamePads"
+    },
+    "summary": "list connected gamepads",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "trigger to update gamepad button/axis states"
+            }
+        ]
     }
 }

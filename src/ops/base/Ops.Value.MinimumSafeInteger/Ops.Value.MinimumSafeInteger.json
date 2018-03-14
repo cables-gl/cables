@@ -1,0 +1,25 @@
+{
+    "updated": 1520348666246,
+    "authorName": "tim",
+    "id": "d74e5528-8049-4cbc-984b-1221532a2fd4",
+    "created": 1520348579776,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Min Int",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Value.MinimumSafeInteger"
+    },
+    "summary": "Returns the minimum safe integer (number, constant)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Min Int",
+                "text": "The minimum safe integer"
+            }
+        ]
+    }
+}

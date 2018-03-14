@@ -58,5 +58,9 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "94ffa0de-2926-4d02-842e-a1ad6f5846c2",
-    "created": 1508265581954
+    "created": 1508265581954,
+    "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
+    "docs": {
+        "ports": []
+    }
 }

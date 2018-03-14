@@ -46,7 +46,7 @@
         ],
         "name": "Ops.Array.Array3xSplinePositionAtDistance"
     },
-    "summary": "get position in array3x/spline at distance",
+    "summary": "get position in array3x/spline at distance from start",
     "docs": {
         "ports": [
             {

@@ -8,31 +8,38 @@
             },
             {
                 "type": "0",
-                "name": "posX"
+                "name": "posX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posY"
+                "name": "posY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posZ"
+                "name": "posZ",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotX"
+                "name": "rotX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotY"
+                "name": "rotY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotZ"
+                "name": "rotZ",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -43,7 +50,7 @@
         ],
         "name": "Ops.Gl.Matrix.Transform"
     },
-    "updated": 1516199411348,
+    "updated": 1520837284894,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
