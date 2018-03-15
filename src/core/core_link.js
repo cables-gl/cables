@@ -197,7 +197,7 @@ CABLES.Link.canLink=function(p1,p2)
 
     if(p1.direction==p2.direction)return false;
     
-    if(p1.type!=p2.type)return false;
+    if( (p1.type!=p2.type) && ( p1.type!=OP_PORT_TYPE_DYNAMIC && p2.type!=OP_PORT_TYPE_DYNAMIC )) return false;
     if(p1.type==OP_PORT_TYPE_DYNAMIC || p2.type==OP_PORT_TYPE_DYNAMIC )return true;
     
     if(p1.parent==p2.parent)return false;
