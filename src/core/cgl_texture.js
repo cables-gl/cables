@@ -450,14 +450,14 @@ CGL.Texture.getTempTexture=function(cgl)
  */
 CGL.Texture.getEmptyTexture=function(cgl)
 {
-    if(CGL.tempTexture) return CGL.tempTexture;
+    if(CGL.tempTextureEmpty) return CGL.tempTextureEmpty;
 
-    var temptex=new CGL.Texture(cgl);
+    CGL.tempTextureEmpty=new CGL.Texture(cgl);
     var data = new Uint8Array(8*8*4);//.fill(0);
 
-    temptex.initFromData(data,8,8,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
+    CGL.tempTextureEmpty.initFromData(data,8,8,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
 
-    return temptex;
+    return CGL.tempTextureEmpty;
 };
 
 

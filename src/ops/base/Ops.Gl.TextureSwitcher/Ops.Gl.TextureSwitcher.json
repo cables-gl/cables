@@ -1,5 +1,5 @@
 {
-    "updated": 1519298446105,
+    "updated": 1521095531843,
     "authorName": "pandur",
     "id": "2748c772-072f-43a9-9a3a-d717760b0e97",
     "created": 1519297709841,
@@ -11,7 +11,13 @@
             },
             {
                 "type": "0",
-                "name": "num"
+                "name": "num",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Default Texture Transparent",
+                "subType": "boolean"
             },
             {
                 "type": "2",
