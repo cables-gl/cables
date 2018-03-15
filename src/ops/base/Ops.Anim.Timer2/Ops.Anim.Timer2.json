@@ -1,5 +1,5 @@
 {
-    "updated": 1517954306675,
+    "updated": 1521123024333,
     "authorName": "pandur",
     "id": "aac7f721-208f-411a-adb3-79adae2e471a",
     "created": 1517953593075,
@@ -7,7 +7,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Play"
+                "name": "Play",
+                "subType": "boolean"
             },
             {
                 "type": "1",
@@ -15,13 +16,15 @@
             },
             {
                 "type": "0",
-                "name": "Speed"
+                "name": "Speed",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Time"
+                "name": "Time",
+                "subType": "number"
             }
         ],
         "name": "Ops.Anim.Timer2"

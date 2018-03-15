@@ -1,5 +1,5 @@
 {
-    "updated": 1516189665849,
+    "updated": 1521108754721,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f6fd7e38-171b-4c53-b215-c198de19c20e",
@@ -12,15 +12,18 @@
             },
             {
                 "type": "0",
-                "name": "mesh index"
+                "name": "mesh index",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "center pivot"
+                "name": "center pivot",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "draw"
+                "name": "draw",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

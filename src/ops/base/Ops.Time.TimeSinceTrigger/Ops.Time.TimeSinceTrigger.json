@@ -1,6 +1,6 @@
 {
     "summary": "Get the time since last trigger",
-    "updated": 1511163009496,
+    "updated": 1521122491156,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "df54103f-5ef6-4a4f-adcf-dddc005132f8",
@@ -23,7 +23,8 @@
             },
             {
                 "type": "0",
-                "name": "time"
+                "name": "time",
+                "subType": "number"
             }
         ],
         "name": "Ops.Time.TimeSinceTrigger"

@@ -7,14 +7,14 @@ var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT ));
 var draw=op.addInPort(new Port(op,"draw",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-op.index.set(-1);
+op.index.set(0);
 geometryOut.ignoreValueSerialize=true;
 centerPivot.set(false);
 draw.set(true);
 
 var cgl=op.patch.cgl;
 var mesh=null;
-var currentIndex=-1;
+var currentIndex=0;
 
 op.index.onValueChanged=reload;
 render.onTriggered=doRender;

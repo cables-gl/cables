@@ -8,23 +8,28 @@
             },
             {
                 "type": "0",
-                "name": "Thickness"
+                "name": "Thickness",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Start"
+                "name": "Start",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Length"
+                "name": "Length",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Calculate Normals"
+                "name": "Calculate Normals",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Line Strip"
+                "name": "Line Strip",
+                "subType": "boolean"
             },
             {
                 "type": "3",
@@ -32,7 +37,8 @@
             },
             {
                 "type": "0",
-                "name": "Num Points"
+                "name": "Num Points",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -47,7 +53,7 @@
         ],
         "name": "Ops.Gl.Meshes.SplineMesh"
     },
-    "updated": 1517241643485,
+    "updated": 1521121241496,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a7ef431b-3763-4873-8b0d-91643378e2b8",

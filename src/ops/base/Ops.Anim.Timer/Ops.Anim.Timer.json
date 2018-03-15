@@ -4,7 +4,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Play"
+                "name": "Play",
+                "subType": "boolean"
             },
             {
                 "type": "1",
@@ -12,18 +13,20 @@
             },
             {
                 "type": "0",
-                "name": "Speed"
+                "name": "Speed",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Time"
+                "name": "Time",
+                "subType": "number"
             }
         ],
         "name": "Ops.Anim.Timer"
     },
-    "updated": 1511163209004,
+    "updated": 1521123006659,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "65ae3c2e-90d7-48fe-93df-30245f0bcf34",

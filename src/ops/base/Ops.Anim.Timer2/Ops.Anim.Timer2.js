@@ -29,6 +29,7 @@ reset.onTriggered=function()
     time=0;
     lastTime=0;
     timer.setTime(0);
+    outTime.set(0);
 };
 
 op.onAnimFrame=function()

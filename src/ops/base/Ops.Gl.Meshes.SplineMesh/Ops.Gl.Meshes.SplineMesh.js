@@ -108,7 +108,7 @@ function linesToGeom(points,options)
     if(inNumPoints.get()!=0 &&
         inNumPoints.get()*3<points.length)numPoints=(inNumPoints.get()-1)*3;
 
-    if(numPoints<6)
+    if(numPoints<2)
     {
         draw=false;
         return;

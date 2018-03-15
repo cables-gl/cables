@@ -25,6 +25,7 @@ function setState()
 reset.onTriggered=function()
 {
     timer.setTime(0);
+    outTime.set(0);
 };
 
 op.onAnimFrame=function()
