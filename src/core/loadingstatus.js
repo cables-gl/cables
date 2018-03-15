@@ -26,7 +26,6 @@ CABLES.LoadingStatus=function()
             if(!loadingAssets[i].finished)
             {
                 countFinished++;
-                // console.log(loadingAssets[i].type+': '+loadingAssets[i].finished+': '+loadingAssets[i].name );
             }
         }
 
@@ -35,7 +34,6 @@ CABLES.LoadingStatus=function()
         if(CGL.onLoadingAssetsFinished)
         {
             console.error('CGL.onLoadingAssetsFinished is deprecated, please use config parameter onFinishedLoading with scene/patch constructor');
-            // cbFinished=CGL.onLoadingAssetsFinished;
             setTimeout(cbFinished,200);
         }
 

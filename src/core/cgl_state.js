@@ -408,7 +408,8 @@ CGL.Context = function() {
                 document.body.appendChild(anchor);
     
                 anchor.click();
-                if (cb) cb(blob);
+                if(cb) cb(blob);
+                anchor.remove(); 
             }
             else
             {

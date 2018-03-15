@@ -1,4 +1,3 @@
-op.name='ArrayGetObject';
 
 var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
 var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));

@@ -1,5 +1,8 @@
 {
-    "summary": "A material without shading",
+    "updated": 1520865511209,
+    "authorName": "pandur",
+    "id": "51f2207b-daaa-447f-bdbe-87fdd72f0c40",
+    "created": 1520863818836,
     "layout": {
         "portsIn": [
             {
@@ -33,6 +36,11 @@
             {
                 "type": "2",
                 "name": "textureOpacity"
+            },
+            {
+                "type": "0",
+                "name": "Alpha Mask Source",
+                "subType": "string"
             },
             {
                 "type": "0",
@@ -85,43 +93,6 @@
                 "name": "shader"
             }
         ],
-        "name": "Ops.Gl.Shader.BasicMaterial"
-    },
-    "updated": 1520863734078,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "85ae5cfa-5eca-4dd8-8b30-850ac34f7cd5",
-    "created": 1505310811893,
-    "docs": {
-        "ports": [
-            {
-                "name": "render",
-                "text": "When *BasicMaterial* is executed, it sets the fill color for all following objects"
-            },
-            {
-                "name": "r",
-                "text": "Red-value, between `0` and `1`"
-            },
-            {
-                "name": "g",
-                "text": "Green-value, between `0` and `1`"
-            },
-            {
-                "name": "b",
-                "text": "Blue-value, between `0` and `1`"
-            },
-            {
-                "name": "a",
-                "text": "Alpha (opacity)-value, between `0` and `1`"
-            },
-            {
-                "name": "colorizeTexture",
-                "text": "aaaa"
-            },
-            {
-                "name": "trigger",
-                "text": "Triggers the next op"
-            }
-        ]
+        "name": "Ops.Gl.Shader.BasicMaterialNew"
     }
 }

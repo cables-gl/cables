@@ -1,11 +1,10 @@
-op.name="BrowserInfo";
-
 var isIe=op.outValue("Is IE",false);
 var isIe10Plus=op.outValue("Is IE 10+",false);
 var isIe11=op.outValue("Is IE 11",false);
 var isEdge=op.outValue("Is Edge",false);
 var isChrome=op.outValue("Is Chrome",false);
 var isFirefox=op.outValue("Is Firefox",false);
+var isSafari=op.outValue("Is Safari",false);
 var isMobile=op.outValue("Is Mobile",false);
 var isWindows=op.outValue("Is Windows",false);
 var isLinux=op.outValue("Is Linux",false);
@@ -19,6 +18,10 @@ outNav.set(navigator.language || navigator.userLanguage);
 
 isFirefox.set(!!navigator.userAgent.search("Firefox"));
 
+if( /^((?!chrome|android).)*safari/i.test(navigator.userAgent) )
+{
+    isSafari.set(true);
+}
 
 if( /MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent))
 {
