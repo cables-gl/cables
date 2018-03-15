@@ -1,6 +1,6 @@
 var exec=op.inFunction("exec");
 var num=this.addInPort(new Port(this,"num",OP_PORT_TYPE_VALUE));
-
+var defaultTransparent=op.inValueBool("Default Texture Transparent",true);
 var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 
 var cgl=op.patch.cgl;
@@ -8,7 +8,16 @@ var texturePorts=[];
 var index=0;
 var lastIndex=-1;
 
-var tempTexture=CGL.Texture.getTempTexture(cgl);
+var tempTexture=CGL.Texture.getEmptyTexture(cgl);
+
+defaultTransparent.onChange=function()
+{
+    if(defaultTransparent.get()) tempTexture=CGL.Texture.getEmptyTexture(cgl);
+        else tempTexture=CGL.Texture.getTempTexture(cgl);
+
+    updateTexture(true);
+};
+
 
 for(var i=0;i<16;i++)
 {

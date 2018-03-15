@@ -427,6 +427,19 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         return this._animated;
     };
 
+
+    /**
+     * @function
+     * @name CABLES.Port#isHidden
+     * @return {boolean}
+     * @description return true if port is hidden
+     */
+    CABLES.Port.prototype.isHidden=function()
+    {
+        return this.uiAttribs.hidePort;
+    };
+    
+
     /**
      * @function
      * @name CABLES.Port#onTriggered
