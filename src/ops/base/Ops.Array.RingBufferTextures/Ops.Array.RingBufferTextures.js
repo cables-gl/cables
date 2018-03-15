@@ -69,7 +69,6 @@ function init()
     // cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
     
-    console.log('init');
     inited=true;
 }
 

@@ -55,9 +55,11 @@ function findBoneChilds(n,parent,foundBone)
     function findAnimation(name)
     {
         var an=0;
-        for(var i=0;i<scene.animations[an].channels.length;i++)
-            if(scene.animations[an].channels[i].name==name)
-                return scene.animations[an].channels[i];
+        for(var an=0;an<scene.animations.length;an++)
+        
+            for(var i=0;i<scene.animations[an].channels.length;i++)
+                if(scene.animations[an].channels[i].name==name)
+                    return scene.animations[an].channels[i];
 
         return null;
     }
