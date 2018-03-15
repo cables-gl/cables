@@ -40,6 +40,8 @@ isChrome = !!window.chrome && !!window.chrome.webstore;
 // Blink engine detection
 isBlink = (isChrome || isOpera) && !!window.CSS;
 
+checkBrowserAndSetOutput();
+
 function checkBrowserAndSetOutput() {
     if(isOpera) {
         outFile.set(operaFilePort.get() || defaultFilePort.get());

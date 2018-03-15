@@ -1,0 +1,39 @@
+{
+    "updated": 1521026287575,
+    "authorName": "pandur",
+    "id": "e8196d70-d0a6-470a-9448-a7ac0c0e956e",
+    "created": 1521025148805,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "Value 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "then"
+            },
+            {
+                "type": "1",
+                "name": "else"
+            }
+        ],
+        "name": "Ops.Trigger.IfEqualsThen"
+    },
+    "summary": "triggers if value 1+2 are equal",
+    "docs": {
+        "ports": []
+    }
+}

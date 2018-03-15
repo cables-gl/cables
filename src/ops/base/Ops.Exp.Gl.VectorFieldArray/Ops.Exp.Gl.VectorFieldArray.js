@@ -1,6 +1,5 @@
 var cgl=op.patch.cgl;
 
-op.name='VectorFieldArray';
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var geom=op.addInPort(new Port(op,"geom",OP_PORT_TYPE_OBJECT));
 geom.ignoreValueSerialize=true;
@@ -44,6 +43,8 @@ var recalc=true;
 numRows.onChange=reset;
 numColumns.onChange=reset;
 doCenter.onChange=reset;
+spacingColumns.onChange=reset;
+spacingRows.onChange=reset;
 
 geom.onChange=reset;
 exe.onTriggered=doRender;
@@ -78,7 +79,7 @@ var srcHeadVert=''
 
 var srcBodyVert=''
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   if( do_instancing==1.0 )'
+    // .endl()+'   if( do_instancing==1.0 )'
     .endl()+'   {'
     .endl()+'       instModelMat=instMat;'
     .endl()+'       float tx=(instModelMat[3][0]) / {{mod}}_cols;'
@@ -96,7 +97,7 @@ var srcBodyVert=''
     .endl()+'       #endif'
     
 // .endl()+'       pos*=instCol.r;'
-    .endl()+'       mvMatrix=viewMatrix * modelMatrix * instModelMat;'
+    .endl()+'       mMatrix=mMatrix * instModelMat;'
     .endl()+'   }'
     .endl()+'#endif'
     .endl();
@@ -162,37 +163,37 @@ function doRender()
                     });
         
                 shader.define('INSTANCING');    
-                uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',1);
-                uniSpaceX=new CGL.Uniform(shader,'f',mod.prefix+'_spaceX',0);
-                uniSpaceY=new CGL.Uniform(shader,'f',mod.prefix+'_spaceY',0);
-                uniTexture=new CGL.Uniform(shader,'t',mod.prefix+'_field',5);
-                uniCols=new CGL.Uniform(shader,'f',mod.prefix+'_cols',numColumns);
-                uniRows=new CGL.Uniform(shader,'f',mod.prefix+'_rows',numRows);
+                op.uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',1);
+                op.uniSpaceX=new CGL.Uniform(shader,'f',mod.prefix+'_spaceX',spacingColumns);
+                op.uniSpaceY=new CGL.Uniform(shader,'f',mod.prefix+'_spaceY',spacingRows);
+                op.uniTexture=new CGL.Uniform(shader,'t',mod.prefix+'_field',5);
+                op.uniCols=new CGL.Uniform(shader,'f',mod.prefix+'_cols',numColumns);
+                op.uniRows=new CGL.Uniform(shader,'f',mod.prefix+'_rows',numRows);
                 
                 updateTransforms();
             }
             else
             {
-                uniDoInstancing=shader.getUniform('do_instancing');
+                op.uniDoInstancing=shader.getUniform('do_instancing');
             }
         }
 
-        if(uniSpaceX)
-        {
-            uniSpaceX.setValue(spacingColumns.get());
-            uniSpaceY.setValue(spacingRows.get());
+        // if(uniSpaceX)
+        // {
+        //     uniSpaceY.setValue(spacingRows.get());
+        //     uniSpaceX.setValue(spacingColumns.get());
             
-            uniCols.setValue(numColumns.get());
-            uniRows.setValue(numRows.get());
+        //     uniCols.setValue(numColumns.get());
+        //     uniRows.setValue(numRows.get());
             
-        }
+        // }
 
         if(tex.get())
             cgl.setTexture(5,tex.get().tex);
 
-        uniDoInstancing.setValue(1);
+        op.uniDoInstancing.setValue(1);
         mesh.render(shader);
-        uniDoInstancing.setValue(0);
+        op.uniDoInstancing.setValue(0);
     }
     else
     {
@@ -217,12 +218,11 @@ function calc()
     var centerY=0;
     if(doCenter.get())
     {
-        centerX=cols*spacingColumns.get()/2;
-        centerY=rows*spacingRows.get()/2;
+        centerX=cols*(spacingColumns.get()/2);
+        centerY=rows*(spacingRows.get()/2);
     }
     
     transformations.length=cols*rows;
-    
 
     for(var x=0;x<cols;x++)
     {
@@ -231,7 +231,7 @@ function calc()
             mat4.identity(m);
             mat4.translate(m,m,[x-centerX,y-centerY, 0]);
             transformations[x+y*cols]= Array.prototype.slice.call(m);
-        }        
+        }
     }
     
     op.log("reset",transformations.length,cols,rows);
