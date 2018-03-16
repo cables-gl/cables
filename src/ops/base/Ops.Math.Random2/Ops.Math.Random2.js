@@ -2,14 +2,18 @@ var exe=op.inFunctionButton('Generate');
 var min=op.inValue("min",0);
 var max=op.inValue("max",1);
 var result=op.outValue("result");
+var inInteger=op.inValueBool("Integer",false);
 
 exe.onTriggered=genRandom;
 max.onChange=genRandom;
 min.onChange=genRandom;
+inInteger.onChange=genRandom;
 
 genRandom();
 
 function genRandom()
 {
-    result.set( (Math.random()*(max.get()-min.get()))+min.get());
+    var r=(Math.random()*(max.get()-min.get()))+min.get();
+    if(inInteger.get())r=Math.round(r);
+    result.set(r);
 }

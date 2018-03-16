@@ -1,1 +1,69 @@
-{"libs":["mqttws31-min.js"]}
+{
+    "libs": [
+        "mqttws31-min.js"
+    ],
+    "summary": "Receives a message via MQTT (IoT, subscribe, listen)",
+    "docs": {
+        "ports": [
+            {
+                "name": "MQTT Object",
+                "text": "Internally used in cables for inter-op-communication"
+            },
+            {
+                "name": "Channel",
+                "text": "The channel you want to subscribe and receive data from, e.g. `/data/sensor1/x`"
+            },
+            {
+                "name": "Message Type",
+                "text": "Either `String`, `Number` or `Boolean`. if the data-type you receive is a number (`123` or `123.45`) set to number. If you receive multiple numbers in one `123,124,125` you need to use `String` (default)."
+            },
+            {
+                "name": "MQTT Object",
+                "text": "Internally used in cables for inter-op-communication"
+            },
+            {
+                "name": "Message",
+                "text": "The last MQTT message which has been received, casted according to the `Message Type` set (see above)."
+            },
+            {
+                "name": "Topic",
+                "text": "Currently the same as the input port `Channel`. In MQTT you could also subscribe via wildcards, e.g. `/sensor1/#`, this will subscribe to `/sensor1/x` as well as `/sensor1/y`. Currently not supported…"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MQTT Object"
+            },
+            {
+                "type": "0",
+                "name": "Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Message Type",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MQTT Object"
+            },
+            {
+                "type": "0",
+                "name": "Message",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Topic",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Net.Mqtt.MqttReceive"
+    }
+}

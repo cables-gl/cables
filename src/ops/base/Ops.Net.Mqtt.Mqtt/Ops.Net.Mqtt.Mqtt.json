@@ -1,1 +1,96 @@
-{"libs":["mqttws31-min.js"]}
+{
+    "libs": [
+        "mqttws31-min.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Client Name",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Broker URL",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Username",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Password",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Port",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Use SSL",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Reconnect"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MQTT Object"
+            },
+            {
+                "type": "0",
+                "name": "Connected",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Net.Mqtt.Mqtt"
+    },
+    "summary": "Creates a MQTT connection (IoT, messaging)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Client Name",
+                "text": "The name of your project / your name, can be freely set."
+            },
+            {
+                "name": "Broker URL",
+                "text": "The URL of the MQTT-broker. We recommend using [shiftr.io](https://shiftr.io)"
+            },
+            {
+                "name": "Username",
+                "text": "Your username to access the MQTT broker, you need to set up a user-account for that or use the public namespace `try` / `try`."
+            },
+            {
+                "name": "Password",
+                "text": "The password fitting to your username"
+            },
+            {
+                "name": "Port",
+                "text": "The port the MQTT-server is running on. As cables runs in a HTTPS-environment only secure ports can be used to access a MQTT-broker (MQTTWSS). Only change this if you know what you are doing."
+            },
+            {
+                "name": "Use SSL",
+                "text": "See [Port](#Port [Value]). Should be checked for most use-cases"
+            },
+            {
+                "name": "Reconnect",
+                "text": "Executes a reconnect to the MQTT broker. If things don’t work out this might help. Otherwise a reload of the page can be a solution. If you enter new login-data (username / password) you also need to reconnect."
+            },
+            {
+                "name": "MQTT Object",
+                "text": "Contains MQTT-messages and general data, used for the communication between cables MQTT-ops. "
+            },
+            {
+                "name": "Connected",
+                "text": "If the MQTT-op connected successfully. Please note that a connection can time-out, but it will still show as connected."
+            }
+        ]
+    }
+}

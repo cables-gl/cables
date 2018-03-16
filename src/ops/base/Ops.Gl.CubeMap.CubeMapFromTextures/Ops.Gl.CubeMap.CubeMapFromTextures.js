@@ -1,3 +1,4 @@
+//http://codeflow.org/entries/2011/apr/18/advanced-webgl-part-3-irradiance-environment-map/
 
 var outTex=op.outObject("cubemap");
 var numImages=6;
@@ -19,87 +20,64 @@ for(var i=0;i<numImages;i++)
 
 var skyboxCubemap=null;
 var gl=op.patch.cgl.gl;
+var cgl=op.patch.cgl;
+var texCount=0;
 
+function loadCubemapTexture(target, texture, url)
+{
+    var image = new Image();
+    image.onload = function()
+    {
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, texture);
+        cgl.gl.texImage2D(target, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, image);
+
+        texCount++;
+        if(texCount==6)
+        {
+            cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP);
+            outTex.set({"cubemap":skyboxCubemap});
+        }
+        
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, null);
+    };
+    image.onerror = function()
+    {
+        console.log("error while loading cube texture...",url);
+        op.uiAttr({'error':'onerr could not load cubemap texture  '});
+    };
+
+    image.src = url;
+}
 
 function load()
 {
-    var ct = 0;
-    var img = new Array(numImages);
-    var urls = [];
-    var i=0;
-
-    var cubemapTargets = [  // targets for use in some gl functions for working with cubemaps
-       gl.TEXTURE_CUBE_MAP_POSITIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_X, 
-        gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
-       gl.TEXTURE_CUBE_MAP_POSITIVE_Z, gl.TEXTURE_CUBE_MAP_NEGATIVE_Z 
-    ];
-
-    for(i=0;i<numImages;i++)
+    for(var i=0;i<numImages;i++)
     {
         var fn=inFilenames[i].get();
         if(fn.length===0 || fn=="0")
         {
+            console.log("filename error");
             return;
         }
-        fn=op.patch.getFilePath(fn);
-        urls.push(fn);
-    }
-    
-    console.log(urls);
-    
-    var noerror=0;
-
-    for(i = 0; i < 6; i++)
-    {
-        img[i] = new Image();
-        img[i].crossOrigin = '';
-        img[i].onload = function()
-        {
-            ct++;
-            if (ct == 6)
-            {
-                // setTimeout(function(){
-
-                skyboxCubemap = gl.createTexture();
-                gl.bindTexture(gl.TEXTURE_CUBE_MAP, skyboxCubemap);
-                outTex.set({"cubemap":skyboxCubemap});
-
-                try
-                {
-                    for (var j = 0; j < 6; j++)
-                    {
-                        gl.texImage2D(cubemapTargets[j], 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img[j]);
-                        gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-                        gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-
-                        gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-                        gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-
-                    }
-                } catch(e) {  // (Could be the security exception in some browsers when reading from the local disk)
-                    console.log(e);
-                    noerror++;
-                    console.log( "could not load cubemap texture");
-                    op.uiAttr({'error':'could not load cubemap texture'});
-                    return;
-                }
-                gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
-                gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
-                if(noerror===0) op.uiAttr({'error':null});
-                // },1000);
-
-            }
-        };
-
-        img[i].onerror = function()
-        {
-            console.log("error while loading cube texture...");
-            op.uiAttr({'error':'onerr could not load cubemap texture  '});
-        };
-        
-        img[i].src = urls[i];
-        
     }
 
+
+    texCount=0;
+    skyboxCubemap = cgl.gl.createTexture();
+    cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, skyboxCubemap);
+  
+    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
+    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
+
+    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);
+    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.LINEAR);
+
+    loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X, skyboxCubemap, op.patch.getFilePath(inFilenames[1].get()));
+    loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X, skyboxCubemap, op.patch.getFilePath(inFilenames[0].get()));
     
+    loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y, skyboxCubemap, op.patch.getFilePath(inFilenames[3].get()));
+    loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, skyboxCubemap, op.patch.getFilePath(inFilenames[2].get()));
+    
+    loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z, skyboxCubemap, op.patch.getFilePath(inFilenames[4].get()));
+    loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, skyboxCubemap, op.patch.getFilePath(inFilenames[5].get()));
 }

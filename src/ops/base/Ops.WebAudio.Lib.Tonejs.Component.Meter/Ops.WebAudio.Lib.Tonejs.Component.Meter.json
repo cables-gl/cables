@@ -14,6 +14,10 @@
                 "name": "Update Value"
             },
             {
+                "type": "1",
+                "name": "Update Decibels"
+            },
+            {
                 "type": "0",
                 "name": "Smoothing",
                 "subType": "number"
@@ -28,12 +32,49 @@
                 "type": "0",
                 "name": "Value",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Decibels",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Meter"
     },
-    "updated": 1520421194397,
+    "updated": 1521132942749,
     "authorName": "tim",
     "id": "ee321c83-68de-4567-bada-a317e7afca6a",
-    "created": 1520420963917
+    "created": 1520420963917,
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal to meter"
+            },
+            {
+                "name": "Update Value",
+                "text": "Updates the `Value` port (raw)"
+            },
+            {
+                "name": "Update Decibels",
+                "text": "Updates the `Decibels` port "
+            },
+            {
+                "name": "Smoothing",
+                "text": "The amount of carryover between the current and last frame"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The untouched input signal"
+            },
+            {
+                "name": "Value",
+                "text": "The (raw) signal value, usually in range `[-1..1]`"
+            },
+            {
+                "name": "Decibels",
+                "text": "The current decibel value, usually in range `[-96..0]`"
+            }
+        ]
+    }
 }

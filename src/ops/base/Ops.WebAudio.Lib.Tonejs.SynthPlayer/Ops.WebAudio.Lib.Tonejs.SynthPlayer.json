@@ -18,7 +18,8 @@
             },
             {
                 "type": "0",
-                "name": "Note"
+                "name": "Note",
+                "subType": "string"
             },
             {
                 "type": "2",
@@ -26,11 +27,13 @@
             },
             {
                 "type": "0",
-                "name": "Duration"
+                "name": "Duration",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Time"
+                "name": "Time",
+                "subType": "string"
             }
         ],
         "portsOut": [

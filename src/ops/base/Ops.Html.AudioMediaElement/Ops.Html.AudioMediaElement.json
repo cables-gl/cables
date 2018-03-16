@@ -1,1 +1,39 @@
-{"summary":"Simple Audio Player, using HTML5 Audio, does not need WebAudio"}
+{
+    "summary": "Simple Audio Player, using HTML5 Audio, does not need WebAudio",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Play",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Volume",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Loop",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Playing",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Has Ended"
+            }
+        ],
+        "name": "Ops.Html.AudioMediaElement"
+    }
+}

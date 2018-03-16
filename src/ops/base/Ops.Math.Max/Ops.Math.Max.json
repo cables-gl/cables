@@ -3,20 +3,39 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Maximum"
+                "name": "Maximum",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Max"
     },
-    "summary": "Result will be the higher number  either Value or Maximum"
+    "summary": "Sets the output to the input value which is higher",
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "Value 1"
+            },
+            {
+                "name": "Maximum",
+                "text": "Value 2"
+            },
+            {
+                "name": "result",
+                "text": "The higher value of the two input values"
+            }
+        ]
+    }
 }

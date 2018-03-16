@@ -22,8 +22,21 @@
         ],
         "name": "Ops.Json.ParseObject"
     },
-    "summary": "parse a string to JSON object ",
+    "summary": "Parses a string to a JSON object ",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "JSON String",
+                "text": "The string to parse"
+            },
+            {
+                "name": "Result",
+                "text": "The parses object"
+            },
+            {
+                "name": "Valid",
+                "text": "`true` if the string could be successfully parsed, `false` if it is not a valid object"
+            }
+        ]
     }
 }

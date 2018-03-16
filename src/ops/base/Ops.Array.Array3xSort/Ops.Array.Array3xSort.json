@@ -22,5 +22,22 @@
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "b0fbc366-09a8-4695-87b3-5946210bf722",
-    "created": 1513100341975
+    "created": 1513100341975,
+    "summary": "Sorts an array with value triplets `[x1, y1, z1, …]`",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array3x to sort"
+            },
+            {
+                "name": "What",
+                "text": "What to sort the array by – `x` (the first element of the triplet), `y` (the second element), `z` (the third element) or `xyz` (sum of all three values together)"
+            },
+            {
+                "name": "Result",
+                "text": "The sorted array (new array)"
+            }
+        ]
+    }
 }

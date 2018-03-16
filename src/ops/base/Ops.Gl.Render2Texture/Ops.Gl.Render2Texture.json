@@ -8,35 +8,43 @@
             },
             {
                 "type": "0",
-                "name": "MSAA"
+                "name": "MSAA",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "use viewport size"
+                "name": "use viewport size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "texture width"
+                "name": "texture width",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "texture height"
+                "name": "texture height",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "filter",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "HDR"
+                "name": "HDR",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Depth"
+                "name": "Depth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Clear"
+                "name": "Clear",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

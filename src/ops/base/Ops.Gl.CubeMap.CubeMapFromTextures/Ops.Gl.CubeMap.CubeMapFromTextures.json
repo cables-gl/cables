@@ -3,27 +3,33 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "posx"
+                "name": "posx",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "negx"
+                "name": "negx",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "posy"
+                "name": "posy",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "negy"
+                "name": "negy",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "posz"
+                "name": "posz",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "negz"
+                "name": "negz",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -35,7 +41,7 @@
         "name": "Ops.Gl.CubeMap.CubeMapFromTextures"
     },
     "summary": "combine 6 textures to a cubemap",
-    "updated": 1519714226215,
+    "updated": 1521185015309,
     "authorName": "pandur",
     "id": "7b090629-e7ce-4c5f-a1d3-41525b762b36",
     "created": 1519576849237

@@ -18,5 +18,9 @@
         ],
         "name": "Ops.Gl.CubeMap.CubeMapCamera"
     },
-    "summary": "render a scene to generate a cubemap "
+    "summary": "render a scene to generate a cubemap ",
+    "updated": 1521135942041,
+    "authorName": "pandur",
+    "id": "9194ea61-0746-4343-8c97-5028768509c5",
+    "created": 1521135757341
 }

@@ -1,5 +1,5 @@
 {
-    "updated": 1520585409847,
+    "updated": 1521193990880,
     "authorName": "pandur",
     "id": "8cb69d73-3e0e-4785-b4cc-499c8372d03c",
     "created": 1520585294413,
@@ -18,6 +18,11 @@
                 "type": "0",
                 "name": "max",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
