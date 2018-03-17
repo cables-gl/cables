@@ -25,14 +25,16 @@ var inWorldSpace=op.inValueBool("WorldSpace");
 var srcHeadVert=attachments.perlin_deformer_vert;
 
 
-var srcBodyVert=''
-    .endl()+'#ifndef MOD_WORLDSPACE'
-    .endl()+'   pos=MOD_deform(pos);'
-    .endl()+'#endif'
-    .endl()+'#ifdef MOD_WORLDSPACE'
-    .endl()+'   pos=MOD_deform(mMatrix*pos);'
-    .endl()+'#endif'
-    .endl();
+
+
+var srcBodyVert=attachments.perlin_deformer_body_vert;
+    // .endl()+'#ifndef MOD_WORLDSPACE'
+    // .endl()+'   pos=MOD_deform(pos);'
+    // .endl()+'#endif'
+    // .endl()+'#ifdef MOD_WORLDSPACE'
+    // .endl()+'   pos=MOD_deform(mMatrix*pos);'
+    // .endl()+'#endif'
+    // .endl();
 
 var moduleVert=null;
 
