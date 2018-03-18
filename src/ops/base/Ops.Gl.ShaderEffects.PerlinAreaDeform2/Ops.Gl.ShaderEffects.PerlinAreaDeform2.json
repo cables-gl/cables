@@ -1,0 +1,81 @@
+{
+    "updated": 1521363248947,
+    "authorName": "pandur",
+    "id": "005fe510-e596-4985-bf17-e0c0950cea8a",
+    "created": 1521296529282,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Output",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "WorldSpace",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.PerlinAreaDeform2"
+    }
+}
