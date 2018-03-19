@@ -10,8 +10,8 @@ var operaFilePort = op.addInPort( new Port( op, "Opera File", OP_PORT_TYPE_VALUE
 var defaultFilePort = op.addInPort( new Port( op, "Default File", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
 
 // output port
-var outFile = op.outValue("Browser Specific File");
-var detectedBrowserPort = op.outValue("Detected Browser");
+var outFile = op.outValueString("Browser Specific File");
+var detectedBrowserPort = op.outValueString("Detected Browser");
 detectedBrowserPort.set("None");
 
 // change listeners
