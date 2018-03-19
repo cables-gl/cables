@@ -1,4 +1,8 @@
 {
+    "updated": 1521445498230,
+    "authorName": "pandur",
+    "id": "d8f7f98b-9e83-45c4-9cc5-e82fd35c5951",
+    "created": 1521445103210,
     "layout": {
         "portsIn": [
             {
@@ -7,17 +11,12 @@
             },
             {
                 "type": "0",
-                "name": "amount",
+                "name": "Amount",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Center X",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Center Y",
+                "name": "Radius",
                 "subType": "number"
             },
             {
@@ -32,11 +31,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Twirl"
-    },
-    "summary": "twirl image effect",
-    "updated": 1521445064658,
-    "authorName": "pandur",
-    "id": "2c321015-1af1-49da-b5a6-1664b5ad9a35",
-    "created": 1521444097779
+        "name": "Ops.Gl.TextureEffects.Twirl2"
+    }
 }
