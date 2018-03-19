@@ -32,7 +32,7 @@ void main()
         // vec3 V = -v_eyeCoords;
         // vec3 R = V*N;
         
-        vec3 no = ( mat3( inverseViewMatrix ) * -N ).xyz;
+        vec3 no = ( mat3( inverseViewMatrix ) * N ).xyz;
         
         if(miplevel>0.0)
             col = textureLod(skybox, normalize(no),miplevel*10.0);

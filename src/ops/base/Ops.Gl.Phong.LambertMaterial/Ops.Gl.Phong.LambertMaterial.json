@@ -12,23 +12,28 @@
             },
             {
                 "type": "0",
-                "name": "Specular"
+                "name": "Specular",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse r"
+                "name": "diffuse r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse g"
+                "name": "diffuse g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse b"
+                "name": "diffuse b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse a"
+                "name": "diffuse a",
+                "subType": "number"
             }
         ],
         "portsOut": [

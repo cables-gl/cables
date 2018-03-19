@@ -49,11 +49,14 @@ void main()
     vec4 pos = vec4( vPosition, 1. );
 
     {{MODULE_VERTEX_POSITION}}
-    
+
     mvMatrix= viewMatrix * mMatrix;
-    
     e = normalize( vec3( mvMatrix * pos ) );
     vec3 n = normalize( mat3(normalMatrix) * norm );
+
+    // mat3 nMatrix = transpose(inverse(mat3(mMatrix)));
+    // vec3 n = normalize( mat3(nMatrix) * norm );
+    // norm=n;
 
     vec3 r = reflect( e, n );
     float m = 2. * sqrt(

@@ -27,11 +27,11 @@ void main()
     mat4 modelview= viewMatrix * mMatrix;
     texCoord=attrTexCoord;
 
-
-   vec4 eyeCoords = modelview * pos;
-
-
-   gl_Position = projMatrix * eyeCoords;
-   v_eyeCoords = eyeCoords.xyz;
-   v_normal = normalize(attrVertNormal);
+    
+    vec4 eyeCoords = modelview * pos;
+    
+    
+    gl_Position = projMatrix * eyeCoords;
+    v_eyeCoords = eyeCoords.xyz;
+    v_normal = normalize(attrVertNormal);
 }

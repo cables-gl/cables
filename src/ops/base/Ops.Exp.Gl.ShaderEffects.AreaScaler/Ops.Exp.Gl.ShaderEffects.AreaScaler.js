@@ -1,4 +1,3 @@
-op.name="AreaScaler";
 
 var cgl=op.patch.cgl;
 
@@ -8,6 +7,8 @@ op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var inSize=op.inValue("Size",1);
 var inStrength=op.inValue("Strength",1);
 var inSmooth=op.inValueBool("Smooth",true);
+var inToZero=op.inValueBool("Keep Min Size",true);
+
 
 var x=op.inValue("x");
 var y=op.inValue("y");
@@ -30,6 +31,18 @@ function removeModule()
     if(shader && moduleVert) shader.removeModule(moduleVert);
     shader=null;
 }
+
+inToZero.onChange=updateToZero;
+
+function updateToZero()
+{
+    if(!shader)return;
+    if(inToZero.get()) shader.removeDefine(moduleVert.prefix+"TO_ZERO");
+        else shader.define(moduleVert.prefix+"TO_ZERO");
+
+}
+
+
 
 
 op.render.onLinkChanged=removeModule;
