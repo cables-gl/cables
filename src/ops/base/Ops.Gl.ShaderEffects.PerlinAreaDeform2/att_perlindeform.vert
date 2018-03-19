@@ -187,8 +187,7 @@ vec3 MOD_deform(vec3 pos)
 vec3 MOD_calcNormal(vec3 pos)
 {
     float theta = .001; 
-    vec3 vecTangent = normalize(cross(pos, vec3(1.0, 0.0, 0.0))
-     + cross(pos, vec3(0.0, 1.0, 0.0)));
+    vec3 vecTangent = normalize(cross(pos, vec3(1.0, 0.0, 0.0)) + cross(pos, vec3(0.0, 1.0, 0.0)));
     vec3 vecBitangent = normalize(cross(vecTangent, pos));
     vec3 ptTangentSample = MOD_deform(normalize(pos + theta * normalize(vecTangent)));
     vec3 ptBitangentSample = MOD_deform(normalize(pos + theta * normalize(vecBitangent)));

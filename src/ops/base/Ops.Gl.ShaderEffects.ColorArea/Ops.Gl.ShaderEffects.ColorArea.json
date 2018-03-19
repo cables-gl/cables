@@ -7,55 +7,68 @@
             },
             {
                 "type": "0",
-                "name": "Area"
+                "name": "Area",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Falloff"
+                "name": "Falloff",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Invert"
+                "name": "Invert",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Blend "
+                "name": "Blend ",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "WorldSpace"
+                "name": "WorldSpace",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -67,7 +80,7 @@
         "name": "Ops.Gl.ShaderEffects.ColorArea"
     },
     "summary": "colorize all meshes around x,y,z",
-    "updated": 1516620671673,
+    "updated": 1521409340388,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "cac6a739-c2ad-440c-99b2-33e2c459e8b1",

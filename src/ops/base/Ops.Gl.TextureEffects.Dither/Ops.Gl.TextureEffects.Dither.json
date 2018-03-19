@@ -7,19 +7,23 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "strength"
+                "name": "strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "threshold"
+                "name": "threshold",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -30,7 +34,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Dither"
     },
-    "updated": 1519027717051,
+    "updated": 1521443695541,
     "authorName": "pandur",
     "id": "4fb6167d-a9b0-4604-84c4-755b09fd8dd7",
     "created": 1519027703473,
