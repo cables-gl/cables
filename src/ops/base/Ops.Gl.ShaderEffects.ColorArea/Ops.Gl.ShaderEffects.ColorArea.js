@@ -26,13 +26,10 @@ var inInvert=op.inValueBool("Invert");
 
 var inBlend=op.inValueSelect("Blend ",["Normal","Multiply"],"Normal");
 
-
-{
-    // position
-    var x=op.inValue("x");
-    var y=op.inValue("y");
-    var z=op.inValue("z");
-}
+// position
+var x=op.inValue("x");
+var y=op.inValue("y");
+var z=op.inValue("z");
 
 var inWorldSpace=op.inValueBool("WorldSpace",true);
 
@@ -117,19 +114,23 @@ function removeModule()
 op.render.onTriggered=function()
 {
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
-        gui.setTransformGizmo(
-            {
-                posX:x,
-                posY:y,
-                posZ:z
-            });
-
-    if(CABLES.UI && CABLES.UI.renderHelper)
+    if(CABLES.UI)
     {
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
-        CABLES.GL_MARKER.drawSphere(op,inSize.get());
+        mat4.identity(cgl.mvMatrix);
+        if(gui.patch().isCurrentOp(op)) 
+            gui.setTransformGizmo(
+                {
+                    posX:x,
+                    posY:y,
+                    posZ:z
+                });
+    
+        if(CABLES.UI.renderHelper)
+        {
+            mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
+            CABLES.GL_MARKER.drawSphere(op,inSize.get());
+        }
         cgl.popModelMatrix();
     }
 

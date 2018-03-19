@@ -73,8 +73,9 @@ var srcFrag=''
 
 
     .endl()+'   vec4 col=vec4( _blend(base.rgb,color.rgb) ,1.0);'
-    .endl()+'   col=vec4( mix( color.rgb, base.rgb ,1.0-base.a*amount),1.0);'
+    .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
     .endl()+'  	gl_FragColor = col;'
+
 
 
     .endl()+'}';

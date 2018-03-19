@@ -60,26 +60,37 @@ op.render.onTriggered=function()
 {
     if(!cgl.getShader())
     {
-         op.trigger.trigger();
-         return;
+        op.trigger.trigger();
+        return;
     }
     
-    if(CABLES.UI && CABLES.UI.renderHelper)
+    if(CABLES.UI)
     {
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
-        CABLES.GL_MARKER.drawSphere(op,inSize.get());
+        mat4.identity(cgl.mvMatrix);
+
+        if(CABLES.UI.renderHelper)
+        {
+            cgl.pushModelMatrix();
+            mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
+            CABLES.GL_MARKER.drawSphere(op,inSize.get());
+            cgl.popModelMatrix();
+        }
+    
+    
+        if(gui.patch().isCurrentOp(op)) 
+            gui.setTransformGizmo(
+                {
+                    posX:x,
+                    posY:y,
+                    posZ:z
+                });
+
+
         cgl.popModelMatrix();
     }
 
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
-        gui.setTransformGizmo(
-            {
-                posX:x,
-                posY:y,
-                posZ:z
-            });
 
     if(cgl.getShader()!=shader)
     {
