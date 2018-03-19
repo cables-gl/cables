@@ -41,17 +41,17 @@
             {
                 "type": "0",
                 "name": "Browser Specific File",
-                "subType": "number"
+                "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Detected Browser",
-                "subType": "number"
+                "subType": "string"
             }
         ],
         "name": "Ops.Html.BrowserSpecificFile"
     },
-    "updated": 1521035142037,
+    "updated": 1521467561960,
     "authorName": "tim",
     "id": "3bf999bc-3433-4893-9c85-9633e096c01d",
     "created": 1521035142050
