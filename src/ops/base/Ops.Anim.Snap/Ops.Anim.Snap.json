@@ -1,0 +1,80 @@
+{
+    "updated": 1521477537914,
+    "authorName": "pandur",
+    "id": "7319d30d-bce2-4e66-8143-e4c0ff5a37a2",
+    "created": 1519211223820,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Snap at Values"
+            },
+            {
+                "type": "0",
+                "name": "Snap Distance",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Snap Distance Release",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Slowdown",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Block Input after snap",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Force Snap",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Distance",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Snapped",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "was snapped",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Exp.Snap"
+    },
+    "summary": "snap at certain points (e.g. while scrolling)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Slowdown",
+                "text": "slows down value increase while near a snappoint"
+            },
+            {
+                "name": "Block Input after snap",
+                "text": "will pause for x seconds when reached a snap point"
+            }
+        ]
+    }
+}
