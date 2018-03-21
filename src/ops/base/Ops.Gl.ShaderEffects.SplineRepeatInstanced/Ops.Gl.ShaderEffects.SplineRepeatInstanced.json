@@ -1,5 +1,5 @@
 {
-    "updated": 1521499847197,
+    "updated": 1521586728565,
     "authorName": "pandur",
     "id": "57bafcb7-5a0b-4f7c-a6f1-eadbf266bd43",
     "created": 1521494324980,
@@ -29,6 +29,11 @@
             },
             {
                 "type": "0",
+                "name": "Method",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Spacing",
                 "subType": "number"
             },
@@ -40,6 +45,21 @@
             {
                 "type": "0",
                 "name": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot Z",
                 "subType": "number"
             },
             {

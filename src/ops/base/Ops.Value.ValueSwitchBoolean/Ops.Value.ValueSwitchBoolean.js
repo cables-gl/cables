@@ -4,8 +4,11 @@ var valFalse=op.inValue("Value false",0);
 
 var outVal=op.outValue("Result");
 
-inBool.onChange=function()
-{
-    if(inBool.get())outVal.set(valTrue.get());
-        else outVal.set(valFalse.get());
-};
+inBool.onChange = update;
+valTrue.onChange = update;
+valFalse.onChange = update;
+
+function update() {
+    if(inBool.get()) outVal.set(valTrue.get());
+    else outVal.set(valFalse.get());
+}

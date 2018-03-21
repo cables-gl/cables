@@ -3,20 +3,27 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "parameter"
+                "name": "parameter",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Default"
+                "name": "Default",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "string"
             }
         ],
-        "name": "Ops.Net.UrlQueryParams"
+        "name": "Ops.Website.UrlQueryParams"
     },
-    "summary": "get URL parameters"
+    "summary": "get URL parameters",
+    "updated": 1521567522727,
+    "authorName": "pandur",
+    "id": "c6e90a0b-e3c8-40a1-9d90-fe00c3bdd341",
+    "created": 1521566315841
 }

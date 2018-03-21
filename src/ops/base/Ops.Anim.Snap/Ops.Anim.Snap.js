@@ -1,16 +1,23 @@
 
-var inVal=op.inValue("Value");
+var inVal=op.inValue("Delta");
 
 var snapVals=op.inArray("Snap at Values");
 var snapDist=op.inValue("Snap Distance");
 var snapDistRelease=op.inValue("Snap Distance Release");
 var inSlow=op.inValue("Slowdown",0.4);
 var inBlock=op.inValue("Block Input after snap");
+var inReset=op.inFunctionButton("Reset");
+var inMin=op.inValue("Min",0);
+var inMax=op.inValue("Max",0);
+
+var inMul=op.inValue("Value Mul",1);
 
 var outVal=op.outValue("Result");
 var outDist=op.outValue("Distance");
 var outSnapped=op.outValue("Snapped");
 var outWasSnapped=op.outValue("was snapped");
+
+
 
 inVal.onChange=update;
 inVal.changeAlways=true;
@@ -24,6 +31,12 @@ var lastValue=-1;
 
 snapVals.onChange=checkError;
 
+inReset.onTriggered=function()
+{
+    val=0;
+    outVal.set(val);
+    // update();
+};
 
 function checkError()
 {
@@ -65,12 +78,12 @@ function update()
     
     if(d<snapDistRelease.get())
     {
-        var vv=inVal.get()*Math.abs(((d/snapDistRelease.get())*inSlow.get()));
+        var vv=inVal.get()*Math.abs(((d/snapDistRelease.get())*inSlow.get()))*inMul.get();
         val+=vv;
 
         clearTimeout(timeout);
         
-        console.log("Snap dist release!~");
+        // console.log("Snap dist release!~");
         timeout=setTimeout(function()
             {
                 val=snapvalue;
@@ -119,6 +132,14 @@ function update()
 
     outSnapped.set(snapped);
     outWasSnapped.set(wassnapped);
+    
+    if(inMax.get()!=inMin.get()!=0)
+    {
+        if(val>inMax.get())val=inMax.get();
+        else if(val<inMin.get())val=inMin.get();
+    }
+    
+    
     outVal.set(val);
     lastValue=val;
 

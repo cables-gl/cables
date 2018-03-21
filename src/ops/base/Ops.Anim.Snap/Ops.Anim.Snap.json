@@ -1,5 +1,5 @@
 {
-    "updated": 1521477537914,
+    "updated": 1521564391047,
     "authorName": "pandur",
     "id": "7319d30d-bce2-4e66-8143-e4c0ff5a37a2",
     "created": 1519211223820,
@@ -7,7 +7,7 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value",
+                "name": "Delta",
                 "subType": "number"
             },
             {
@@ -35,9 +35,23 @@
                 "subType": "number"
             },
             {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
                 "type": "0",
-                "name": "Force Snap",
-                "subType": "boolean"
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value Mul",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -62,7 +76,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Exp.Snap"
+        "name": "Ops.Anim.Snap"
     },
     "summary": "snap at certain points (e.g. while scrolling)",
     "docs": {

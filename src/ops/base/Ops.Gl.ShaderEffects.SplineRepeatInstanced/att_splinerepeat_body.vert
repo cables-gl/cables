@@ -1,45 +1,49 @@
+highp float off=(MOD_index)+MOD_offset;
 
+#ifdef METHOD_FILL
+off=mod(off,float(PATHFOLLOW_POINTS));
+#endif
 
-float off=(MOD_delta*MOD_spacing)+MOD_offset;
-// if(MOD_randomSpeed)
-// {
-//     off*=MOD_rand(pos.xy);
-// }
+highp float fr=off-floor(off);
+highp int index=int(floor(off));
+highp int index2=index+1;
 
-float rndOffset=0.0;
+highp mat4 newMatrix;
+newMatrix[0][0]=MOD_scale;
+newMatrix[1][1]=MOD_scale;
+newMatrix[2][2]=MOD_scale;
+newMatrix[3][3]=1.0;
 
-float fr=fract(abs(mod(off+rndOffset,float(PATHFOLLOW_POINTS))));
-int index=int(abs(mod(off+rndOffset,max(0.0,float(PATHFOLLOW_POINTS))  )));
-int index2=int(abs(mod(off+1.0+rndOffset,max(0.0,float(PATHFOLLOW_POINTS)) )));
+highp vec3 mPos;
 
-vec3 mPos;
-
-if(index2!=0)
+if(index2!=0 && index>-1 && index2<PATHFOLLOW_POINTS)
 {
-    mPos = mix( MOD_points[index] ,MOD_points[index2] ,fr);
-
-    #ifdef CHECK_DISTANCE
-        // if( distance(MOD_points[index] ,MOD_points[index2]) > MOD_maxDistance ) pos.xyz=vec3(9999999.0,9999999.0,9999999.0);
-    #endif
+    mPos=mix(MOD_points[index], MOD_points[index2] ,fr);
 }
 else
 {
-    mPos=MOD_points[0];
+    newMatrix[0][0]=0.0;
+    newMatrix[1][1]=0.0;
+    newMatrix[2][2]=0.0;
+    newMatrix[3][3]=0.0;
 }
 
-// pos.xyz+=rndPos;
+newMatrix[3][0]+=mPos.x;
+newMatrix[3][1]+=mPos.y;
+newMatrix[3][2]+=mPos.z;
 
-mMatrix[3][0]+=mPos.x;
-mMatrix[3][1]+=mPos.y;
-mMatrix[3][2]+=mPos.z;
+highp float posOnSpline=(float(index)+fr)/float(PATHFOLLOW_POINTS);
 
-float scc=texture2D( MOD_texScale, vec2(MOD_delta/MOD_numInstances,0.5) ).r;
+#ifdef TEX_SCALE
+    highp float scc=texture2D( MOD_texScale, vec2(posOnSpline,0.5) ).r;
+    
+    newMatrix[0][0]*=scc;
+    newMatrix[1][1]*=scc;
+    newMatrix[2][2]*=scc;
+#endif
 
-mMatrix[0][0]*=scc*MOD_scale;
-mMatrix[1][1]*=scc*MOD_scale;
-mMatrix[2][2]*=scc*MOD_scale;
+highp mat4 rotm=rotationMatrix(vec3(MOD_rotX,MOD_rotY,MOD_rotZ),(posOnSpline)*MOD_rotation);
 
-float splinePos=float(MOD_delta)/float(MOD_numInstances);
-mat4 rotm=rotationMatrix(vec3(1.0,0.0,1.0),splinePos*MOD_rotation);
 
+mMatrix*=newMatrix;
 mMatrix*=rotm;

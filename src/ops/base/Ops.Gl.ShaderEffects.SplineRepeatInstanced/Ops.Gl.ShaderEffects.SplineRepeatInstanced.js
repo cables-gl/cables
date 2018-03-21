@@ -8,9 +8,14 @@ var geom=op.inObject("geom");
 var inNum=op.inValueInt("Num",2000);
 
 var inOffset=op.inValue("Offset");
+
+var inMeth=op.inValueSelect("Method",["Array","Fill"],"Array");
 var inSpacing=op.inValue("Spacing",0.2);
 var inScale=op.inValue("Scale",1);
 var inRot=op.inValue("Rotation",0);
+var inRotX=op.inValueSlider("Rot X",0);
+var inRotY=op.inValueSlider("Rot Y",0);
+var inRotZ=op.inValueSlider("Rot Z",1);
 
 var texScaling=op.inTexture("Texture Scaling");
 
@@ -26,13 +31,36 @@ var recalc=true;
 var cgl=op.patch.cgl;
 
 exe.onTriggered=doRender;
-exe.onLinkChanged=removeModule;
+// exe.onLinkChanged=removeModule;
+
 
 // var matrixArray= new Float32Array(1);
 var m=mat4.create();
-inTransformations.onChange=reset;
+inSpacing.onChange=inTransformations.onChange=reset;
 
 inNum.onChange=reset;
+inMeth.onChange=updateMethod;
+texScaling.onChange=updateTextureDefine;
+
+function updateMethod()
+{
+    if(inMeth.get()=='Fill')
+    {
+        inSpacing.setUiAttribs({hidePort:true,greyout:true});
+    }
+    else
+    {
+        inSpacing.setUiAttribs({hidePort:false,greyout:false});
+    }
+    recalc=true;
+}
+
+function updateTextureDefine()
+{
+    if(!shader)return;
+    if(texScaling.get())shader.define("TEX_SCALE");
+        else shader.removeDefine("TEX_SCALE");
+}
 
 
 geom.onChange=function()
@@ -54,6 +82,7 @@ function removeModule()
         shader.removeModule(mod);
         shader=null;
     }
+    reset();
 }
 
 function reset()
@@ -63,61 +92,52 @@ function reset()
 
 function setupArray()
 {
+    if(!inTransformations.get())return;
     if(!mesh)return;
     if(!shader)return;
+    if(!uniPoints)return;
     
     var pointArray=inTransformations.get();
-    // if(!transforms)
-    // {
-    //     transforms=[0,0,0];
-    // }
     var num=inNum.get();
+    if(num<=0)return;
     var numSplinePoints=Math.floor(pointArray.length/3);
     
-    console.log("NUM INSTANCES",num);
-
-    // if(matrixArray.length!=num*16)
-    // {
-    //     matrixArray=new Float32Array(num*16);
-    // }
-
-    // for(var i=0;i<num;i++)
-    // {
-    //     mat4.identity(m);
-    //     mat4.translate(m,m,
-    //         [
-    //             transforms[i*3],
-    //             transforms[i*3+1],
-    //             transforms[i*3+2]
-    //         ]);
-        
-    //     mat4.scale(m,m,[1,1,1]);
-
-    //     for(var a=0;a<16;a++)
-    //     {
-    //         matrixArray[i*16+a]=m[a];
-    //     }
-    // }
-
+    console.log("numSplinePoints",numSplinePoints);
 
     // spline...
     // if(shader.getDefine("PATHFOLLOW_POINTS")<Math.floor(pointArray.length/3))
     shader.define('PATHFOLLOW_POINTS',Math.floor(numSplinePoints));
 
-    uniPoints.setValue(pointArray);
+    uniPoints.setValue(new Float32Array(pointArray));
     updateUniformPoints=false;
 
     // delta attr per mesh
-    var deltaArr=new Float32Array(num);
-    for(var i=0;i<num;i++)deltaArr[i]=i;
-    mesh.addAttribute(mod.prefix+'delta',deltaArr,1,{instanced:true});
+    var indexArr=new Float32Array(num);
+    
+    var space=inSpacing.get();
+    if(inMeth.get()=="Fill")
+    {
+        space=numSplinePoints/num;
+        console.log(space);
+        shader.define("METHOD_FILL");
+    }
+    else shader.removeDefine("METHOD_FILL");
 
-
+    
+    for(var i=0;i<num;i++) indexArr[i]=i*space;
+    
+    mesh.addAttribute(mod.prefix+'index',indexArr,1,{instanced:true});
     mesh.numInstances=num;
     
-    console.log("SETUP FINISHED");
+
+    updateTextureDefine();
+
+    console.log("SETUP FINISHED",indexArr.length);
     // mesh.addAttribute('instMat',matrixArray,16);
+    
     recalc=false;
+    
+    
 }
 
 function doRender()
@@ -131,8 +151,7 @@ function doRender()
     {
         if(shader && mod)
         {
-            shader.removeModule(mod);
-            shader=null;
+            removeModule();
         }
 
         shader=cgl.getShader();
@@ -156,8 +175,11 @@ function doRender()
             op.numInstances=new CGL.Uniform(shader,'f',mod.prefix+'numInstances',inNum);
             
             uniPoints=new CGL.Uniform(shader,'3f[]',mod.prefix+'points',new Float32Array([0,0,0,0,0,0]));
-            op.uniTextureFrag=new CGL.Uniform(shader,'t',mod.prefix+'texScale',0);
+            op.uniTextureFrag=new CGL.Uniform(shader,'t',mod.prefix+'texScale',6);
 
+            op.uniRotX=new CGL.Uniform(shader,'f',mod.prefix+'rotX',inRotX);
+            op.uniRotY=new CGL.Uniform(shader,'f',mod.prefix+'rotY',inRotY);
+            op.uniRotZ=new CGL.Uniform(shader,'f',mod.prefix+'rotZ',inRotZ);
         }
         else
         {
@@ -166,17 +188,19 @@ function doRender()
     }
 
     if(recalc)setupArray();
+    
 
     if(texScaling.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.activeTexture(cgl.gl.TEXTURE6);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texScaling.get().tex);
-
     }
 
-
-
-    uniDoInstancing.setValue(1);
-    mesh.render(shader);
-    uniDoInstancing.setValue(0);
+    if(!recalc)
+    {
+        uniDoInstancing.setValue(1);
+        mesh.render(shader);
+        uniDoInstancing.setValue(0);
+        
+    }
 }
