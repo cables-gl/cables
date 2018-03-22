@@ -1,1 +1,44 @@
-{}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "ratio",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "black bars",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.LetterBox"
+    },
+    "summary": "Sets an aspect ratio",
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Sets the aspect ratio"
+            },
+            {
+                "name": "ratio",
+                "text": "The aspect ratio"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
+            }
+        ]
+    }
+}
