@@ -3,6 +3,11 @@
         "portsIn": [
             {
                 "type": "0",
+                "name": "Flip Y",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "posx",
                 "subType": "string"
             },
@@ -41,7 +46,7 @@
         "name": "Ops.Gl.CubeMap.CubeMapFromTextures"
     },
     "summary": "combine 6 textures to a cubemap",
-    "updated": 1521185015309,
+    "updated": 1521381807391,
     "authorName": "pandur",
     "id": "7b090629-e7ce-4c5f-a1d3-41525b762b36",
     "created": 1519576849237

@@ -1,5 +1,5 @@
 {
-    "updated": 1508184315840,
+    "updated": 1521717187941,
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "6663e59c-160a-4191-8f93-77f47c670c52",
@@ -12,13 +12,20 @@
             },
             {
                 "type": "0",
-                "name": "key"
+                "name": "key",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "defaultValue",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Json.ObjectGetValue"

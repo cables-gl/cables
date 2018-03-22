@@ -6,11 +6,13 @@ IN vec3 v_pos;
 IN vec2 texCoord;
 
 UNI samplerCube skybox;
+UNI samplerCube mapReflection;
 UNI sampler2D maskRoughness;
 UNI sampler2D maskReflection;
 UNI sampler2D texNormal;
 UNI sampler2D texDiffuse;
 UNI sampler2D texAo;
+
 
 UNI mat4 modelMatrix;
 UNI mat4 inverseViewMatrix;
@@ -77,35 +79,72 @@ void main()
 
 
     // start reflection
-    vec3 V = v_eyeCoords;
-    vec3 R = reflect(V,N);
+    vec3 V = -v_eyeCoords;
+    vec3 R = -reflect(V,N);
     vec3 T = ( mat3( inverseViewMatrix ) * normalize(R) ).xyz; // Transform by inverse of the view transform that was applied to the skybo
     // vec4 colReflect = texture(skybox, T);
-    vec4 colReflect = textureLod(skybox, -T,(amountRough)*10.0);
-    // colReflect.rgb=vec3(colReflect.r);
     
+    #ifndef FLIPX
+    T.x*=-1.0;
+    #endif
+    
+    #ifndef FLIPY
+        T.y*=-1.0;
+        // N.y*=-1.0;
+    #endif
+
+    #ifdef MAP_REFLECTION
+        vec4 colReflect = textureLod(skybox, T,7.0);
+    #endif
+    
+    #ifndef MAP_REFLECTION
+        vec4 colReflect = textureLod(skybox, T,(amountRough)*10.0);
+    #endif
+    // colReflect.rgb=vec3(colReflect.r);
+
+
     // end reflection
 
 
+
     vec3 no = ( mat3( inverseViewMatrix ) * normalize(N) ).xyz;
-
-
-    col= textureLod(skybox, normalize(-no),10.0)*1.0;
     
-    float ctr=1.6;
-    col.r=pow(col.r / 0.18, ctr) * 0.18;
-    col.g=pow(col.g / 0.18, ctr) * 0.18;
-    col.b=pow(col.b / 0.18, ctr) * 0.18;
+    #ifndef FLIPY
+        no.y*=-1.0;
+    #endif
 
-    col.rgb=desaturate(col.rgb,0.65);
+    col= textureLod(skybox, normalize(no),10.0)*1.0;
+    
+    // col.rgb=(col.rgb*vec3(3.0))-vec3(0.5);
+
+    // float ctr=1.8;
+    // col.r=pow(col.r / 0.18, ctr) * 0.18;
+    // col.g=pow(col.g / 0.18, ctr) * 0.18;
+    // col.b=pow(col.b / 0.18, ctr) * 0.18;
+
+    
+    // col.rgb=desaturate(col.rgb,0.7);
+
+
+    
+
     
     col=mix(col,colReflect,amountReflect);
     col*=tCol;
+
+
+    #ifdef MAP_REFLECTION
+        col+=amountReflect*textureLod(mapReflection, T,(amountRough)*10.0);
+        colReflect.a=1.0;
+    #endif
+
+    
+
     // col.a=tCol.a;
 
 
     #ifdef TEX_AO
-    col.rgb*=texture2D(texAo,texCoord).r;
+        col.rgb*=texture2D(texAo,texCoord).r;
     #endif
 
 

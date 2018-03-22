@@ -1,47 +1,45 @@
 {
-    "updated": 1511946272823,
-    "author": "55d744634cdc152216eb9aad",
+    "updated": 1521449822016,
     "authorName": "pandur",
-    "id": "eae9a731-3712-4891-9c22-dc7f4d80ce66",
-    "created": 1504901445752,
+    "id": "2a90bd0e-e743-475e-8e19-00793950b531",
+    "created": 1521449493456,
     "layout": {
-        "portsIn": [
-            {
-                "type": "1",
-                "name": "execute"
-            },
-            {
-                "type": "0",
-                "name": "Specular",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "diffuse r",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "diffuse g",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "diffuse b",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "diffuse a",
-                "subType": "number"
-            }
-        ],
         "portsOut": [
             {
-                "type": "1",
-                "name": "next"
+                "type": "0",
+                "name": "WebGl Version",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "GLSL Version",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Samples MSAA",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Frag uniforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Vert uniforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Texture Size",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Extensions"
             }
         ],
-        "name": "Ops.Gl.Phong.LambertMaterial"
+        "name": "Ops.Gl.GlInfo"
     }
 }

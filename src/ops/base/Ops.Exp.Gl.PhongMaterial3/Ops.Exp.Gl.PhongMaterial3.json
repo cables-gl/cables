@@ -12,39 +12,48 @@
             },
             {
                 "type": "0",
-                "name": "diffuse r"
+                "name": "diffuse r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse g"
+                "name": "diffuse g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse b"
+                "name": "diffuse b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse a"
+                "name": "diffuse a",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fesnel"
+                "name": "Fesnel",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Specular Shininess"
+                "name": "Specular Shininess",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Specular Amount"
+                "name": "Specular Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Colorize Texture"
+                "name": "Colorize Texture",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Double Sided"
+                "name": "Double Sided",
+                "subType": "boolean"
             },
             {
                 "type": "2",
@@ -68,39 +77,48 @@
             },
             {
                 "type": "0",
-                "name": "Toggle Light Shading"
+                "name": "Toggle Light Shading",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle Diffuse Texture"
+                "name": "Toggle Diffuse Texture",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle Normal Texture"
+                "name": "Toggle Normal Texture",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle Specular"
+                "name": "Toggle Specular",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle Ao Texture"
+                "name": "Toggle Ao Texture",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle Falloff"
+                "name": "Toggle Falloff",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle Emissive"
+                "name": "Toggle Emissive",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle Specular"
+                "name": "Toggle Specular",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle Fresnel"
+                "name": "Toggle Fresnel",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

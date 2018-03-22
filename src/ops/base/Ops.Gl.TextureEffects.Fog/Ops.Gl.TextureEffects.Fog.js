@@ -17,61 +17,7 @@ var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 op.onLoaded=shader.compile;
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  uniform sampler2D depthTex;'
-    .endl()+'  uniform sampler2D image;'
-    .endl()+'#endif'
-    // .endl()+'uniform float n;'
-    // .endl()+'uniform float f;'
-    .endl()+'uniform float r;'
-    .endl()+'uniform float g;'
-    .endl()+'uniform float b;'
-    .endl()+'uniform float a;'
-    .endl()+'uniform float start;'
-
-    .endl()+'uniform float density;'
-    .endl()+'const float LOG2 = 1.442695;'
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=vec4(0.0,0.0,0.0,1.0);'
-    .endl()+'   vec4 colImg=texture2D(image,texCoord);'
-    .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'       col=texture2D(depthTex,texCoord);'
-    
-    .endl()+'       float z=1.0-col.r;'
-    
-    .endl()+'       z=smoothstep(start,1.0,z);'
-    
-    
-    
-    // .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
-
-    .endl()+'       float fogFactor = a*exp2( -density * '
-    .endl()+'           density *'
-    .endl()+'           z *'
-    .endl()+'           z *'
-    .endl()+'           LOG2);'
-    
-    // .endl()+'       fogFactor=smoothstep(0.8,1.0,fogFactor);'
-    // .endl()+'       fogFactor*=2.0;'
-    
-    .endl()+'       #ifdef FOG_IGNORE_INFINITY'
-    .endl()+'           if(z<0.001)'
-    .endl()+'           {'
-    .endl()+'               col=vec4(0.0,0.0,0.0,1.0);'
-    .endl()+'           }'
-    .endl()+'           else'
-    .endl()+'       #endif'
-    .endl()+'       {'
-    .endl()+'           col=mix(colImg,vec4(r,g,b,1.0),fogFactor);'
-    .endl()+'       }'
-    .endl()+'   #endif'
-
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
+var srcFrag=attachments.fog_frag;
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','depthTex',1);

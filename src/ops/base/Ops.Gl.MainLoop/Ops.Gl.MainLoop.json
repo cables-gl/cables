@@ -5,27 +5,33 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "FPS Limit"
+                "name": "FPS Limit",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Reduce FPS loading"
+                "name": "Reduce FPS loading",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Clear"
+                "name": "Clear",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Fullscreen Button"
+                "name": "Fullscreen Button",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Active"
+                "name": "Active",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Hires Displays"
+                "name": "Hires Displays",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -35,11 +41,13 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.MainLoop"
@@ -59,7 +67,7 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "b0472a1d-db16-4ba6-8787-f300fbdc77bb",
-    "updated": 1519833014823,
+    "updated": 1521240387708,
     "created": 1507291360742,
     "docs": {
         "ports": [

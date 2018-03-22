@@ -1,5 +1,5 @@
 {
-    "updated": 1520867320417,
+    "updated": 1521704470139,
     "authorName": "pandur",
     "id": "01305694-f1b9-485e-8bbd-9daa0a7be996",
     "created": 1516622763169,
@@ -20,6 +20,11 @@
             {
                 "type": "0",
                 "name": "Distribution",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Selection",
                 "subType": "string"
             },
             {

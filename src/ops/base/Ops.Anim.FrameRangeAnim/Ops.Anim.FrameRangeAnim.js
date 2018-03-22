@@ -45,7 +45,7 @@ function setupAnim(frames)
 
 function parse()
 {
-    var str=inStr.get();
+    var str=inStr.get()+'';
     var frames=[];
     var parts=str.split(',');
     
@@ -61,11 +61,11 @@ function parse()
             r[0]=parseInt(r[0],10);
             r[1]=parseInt(r[1],10);
 
+            if(r[1]>r[0])
+                for(var j=r[0];j<=r[1];j++) frames.push(j);
+            else
+                for(var j=r[0];j>=r[1];j--) frames.push(j);
 
-            for(var j=Math.min(r[0],r[1]);j<=Math.max(r[0],r[1]);j++)
-            {
-                frames.push(j);
-            }
         }
     }
     

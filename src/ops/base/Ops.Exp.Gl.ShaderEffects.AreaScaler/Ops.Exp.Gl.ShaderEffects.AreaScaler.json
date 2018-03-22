@@ -1,5 +1,5 @@
 {
-    "updated": 1515101831087,
+    "updated": 1521364537893,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a6c64e98-d3b2-4dd5-abb6-5dd913880d2d",
@@ -12,27 +12,38 @@
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "Keep Min Size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -49,4 +49,5 @@ function setIndex()
             var now=(CABLES.now())/1000;
             anim.setValue(now,0);
         });
+    update();
 }

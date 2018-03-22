@@ -1,5 +1,5 @@
 {
-    "updated": 1519812833810,
+    "updated": 1521706073843,
     "authorName": "pandur",
     "id": "9892b737-099d-4b33-8789-0ab9bdc40dab",
     "created": 1519812832119,
@@ -11,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "density"
+                "name": "density",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -19,27 +20,33 @@
             },
             {
                 "type": "0",
-                "name": "ignore infinity"
+                "name": "ignore infinity",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "fog r"
+                "name": "fog r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "fog g"
+                "name": "fog g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "fog b"
+                "name": "fog b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "fog a"
+                "name": "fog a",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "start"
+                "name": "start",
+                "subType": "number"
             }
         ],
         "portsOut": [

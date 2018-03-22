@@ -1,4 +1,3 @@
-op.name="UrlQueryParams";
 var paramName=op.addInPort(new Port(op,"parameter",OP_PORT_TYPE_VALUE,{type:"string"}));
 var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_VALUE,{type:"string"}));
 var def=op.inValueString("Default");
@@ -15,20 +14,19 @@ for (var i = 0; i < a.length; i++)
 
 function update()
 {
-    // op.log(query);
     if(!query.hasOwnProperty(paramName.get()))
     {
-        result.set(def.get());
+        result.set(def.get()||false);
     }
     else
     {
-        result.set(query[paramName.get()]);
+        var v=query[paramName.get()];
+        if(v==='true')v=true;
+        else if(v==='false')v=false;
+        
+        result.set(v);
     }
-    
 }
-
-
 
 paramName.onValueChanged=update;
 update();
-

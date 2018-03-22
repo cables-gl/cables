@@ -1,0 +1,31 @@
+{
+    "updated": 1521546492739,
+    "authorName": "pandur",
+    "id": "ff6b8c7b-00c6-48f2-9b43-d059e52143fe",
+    "created": 1521544961995,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Speed",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Speed"
+    },
+    "summary": "measure speed of how much a value changes",
+    "docs": {
+        "ports": []
+    }
+}

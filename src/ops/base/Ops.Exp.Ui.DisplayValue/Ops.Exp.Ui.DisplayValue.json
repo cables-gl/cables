@@ -1,5 +1,5 @@
 {
-    "updated": 1519812251099,
+    "updated": 1521215337550,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d046f0a0-a448-4f7b-9b53-02054c05fbcf",
@@ -8,13 +8,15 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Exp.Ui.DisplayValue"

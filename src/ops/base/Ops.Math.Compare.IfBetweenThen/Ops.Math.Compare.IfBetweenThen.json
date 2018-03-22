@@ -7,15 +7,18 @@
             },
             {
                 "type": "0",
-                "name": "number"
+                "name": "number",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "min"
+                "name": "min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "max"
+                "name": "max",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -26,9 +29,18 @@
             {
                 "type": "1",
                 "name": "else"
+            },
+            {
+                "type": "0",
+                "name": "bs between",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Compare.IfBetweenThen"
+        "name": "Ops.Math.Compare.IfBetweenThen"
     },
-    "summary": "triggers when value is between min and max"
+    "summary": "triggers when value is between min and max",
+    "updated": 1521646740146,
+    "authorName": "pandur",
+    "id": "c80437f0-f0e1-465c-9cea-8a044aa2feaa",
+    "created": 1521646716030
 }

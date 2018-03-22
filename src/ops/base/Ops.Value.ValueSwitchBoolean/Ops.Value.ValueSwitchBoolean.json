@@ -1,5 +1,5 @@
 {
-    "updated": 1519910519968,
+    "updated": 1521643032903,
     "authorName": "pandur",
     "id": "637c5fa8-840d-4535-96ab-3d27b458a8ba",
     "created": 1519910342752,
@@ -7,21 +7,25 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Boolean"
+                "name": "Boolean",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Value true"
+                "name": "Value true",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value false"
+                "name": "Value false",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Value.ValueSwitchBoolean"

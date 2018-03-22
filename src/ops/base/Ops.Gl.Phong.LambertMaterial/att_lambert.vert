@@ -59,4 +59,3 @@ void main()
 
     gl_Position = projMatrix * mvMatrix * pos;
 }
-
