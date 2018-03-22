@@ -16,11 +16,15 @@ function update()
 {
     if(!query.hasOwnProperty(paramName.get()))
     {
-        result.set(def.get());
+        result.set(def.get()||false);
     }
     else
     {
-        result.set(query[paramName.get()]);
+        var v=query[paramName.get()];
+        if(v==='true')v=true;
+        else if(v==='false')v=false;
+        
+        result.set(v);
     }
 }
 

@@ -83,7 +83,10 @@ void main()
     vec3 R = -reflect(V,N);
     vec3 T = ( mat3( inverseViewMatrix ) * normalize(R) ).xyz; // Transform by inverse of the view transform that was applied to the skybo
     // vec4 colReflect = texture(skybox, T);
+    
+    #ifndef FLIPX
     T.x*=-1.0;
+    #endif
     
     #ifndef FLIPY
         T.y*=-1.0;

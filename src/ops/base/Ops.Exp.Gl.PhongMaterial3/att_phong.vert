@@ -73,10 +73,11 @@ void main()
     
     {{MODULE_VERTEX_POSITION}}
     modelPos=mMatrix*pos;
-    normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
-    
+
     mvMatrix=viewMatrix*mMatrix;
 
+    normalMatrix=mat3(inverse(transpose(mvMatrix)));
+    // normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
 
     // #ifdef HAS_TEXTURE_NORMAL
     mvPos=(mvMatrix * pos).xyz;

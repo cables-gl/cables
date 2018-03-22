@@ -45,7 +45,7 @@ function setupAnim(frames)
 
 function parse()
 {
-    var str=inStr.get();
+    var str=inStr.get()+'';
     var frames=[];
     var parts=str.split(',');
     

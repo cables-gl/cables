@@ -4,6 +4,7 @@ var data=op.addInPort(new Port(op,"data",OP_PORT_TYPE_OBJECT ));
 var key = op.inValueString("key");
 var result=op.addOutPort(new Port(op,"result"));
 
+
 result.ignoreValueSerialize=true;
 data.ignoreValueSerialize=true;
 
@@ -18,6 +19,6 @@ function exec()
     }
     else
     {
-        result.set( null);
+        result.set(null);
     }
 }

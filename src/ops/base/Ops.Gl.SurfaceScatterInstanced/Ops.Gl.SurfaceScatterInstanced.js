@@ -3,7 +3,7 @@ var inGeomSurface=op.inObject("Geom Surface");
 var geom=op.inObject("Geometry");
 
 var inDistribution=op.inValueSelect("Distribution",['Vertex','Triangle Center','Triangle Side'],'Vertex');
-
+var inVariety=op.inValueSelect("Selection",["Random","Sequential"],"Random");
 
 var inNum=op.inValue("Num",100);
 var inSizeMin=op.inValueSlider("Size min",1.0);
@@ -27,6 +27,7 @@ inNum.onChange=reset;
 inRotateRandom.onChange=reset;
 inSizeMin.onChange=reset;
 inSizeMax.onChange=reset;
+inVariety.onChange=reset;
 inGeomSurface.onChange=reset;
 render.onTriggered=doRender;
 render.onLinkChanged=removeModule;
@@ -55,11 +56,17 @@ function setup()
     if(geom.isIndexed())
     {
         var faces=geom.verticesIndices;
+        var doRand=inVariety.get()=="Random";
 
         for(var i=0;i<num;i++)
         {
-            var index=Math.seededRandom()*(faces.length/3);
-            index=Math.floor(index)*3.0;
+            var index=i;
+            if(i%3!=0)continue;
+            if(doRand)
+            {
+                index=Math.seededRandom()*(faces.length/3);
+                index=Math.floor(index)*3.0;
+            }
 
             mat4.identity(m);
             

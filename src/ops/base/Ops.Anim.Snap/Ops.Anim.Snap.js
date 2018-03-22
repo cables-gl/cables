@@ -11,12 +11,12 @@ var inMin=op.inValue("Min",0);
 var inMax=op.inValue("Max",0);
 
 var inMul=op.inValue("Value Mul",1);
+var inEnabled=op.inValueBool("Enabled",true);
 
 var outVal=op.outValue("Result");
 var outDist=op.outValue("Distance");
 var outSnapped=op.outValue("Snapped");
 var outWasSnapped=op.outValue("was snapped");
-
 
 
 inVal.onChange=update;
@@ -29,7 +29,11 @@ var timeout=0;
 var blocking=false;
 var lastValue=-1;
 
+var snappedArr=[];
+
 snapVals.onChange=checkError;
+
+
 
 inReset.onTriggered=function()
 {
@@ -54,6 +58,14 @@ function checkError()
         hasError=false;
         setTimeout(update,500);
     }
+    
+    
+    snappedArr=[];
+    for(var i=0;i<snapVals.length;i++)
+    {
+        snappedArr[i]=false;
+    }
+
 }
 
 function update()
@@ -63,6 +75,10 @@ function update()
 
     var d=999999999;
     var snapvalue=0;
+    var currentIndex=-1;
+    
+    
+    
     for(var i=0;i<snaps.length;i++)
     {
         var dd=Math.abs(val-snaps[i])+0.01;
@@ -70,7 +86,16 @@ function update()
         {
             d=dd;
             snapvalue=snaps[i];
+            currentIndex=i;
         }
+
+        if(val>snaps[i] && !snappedArr[i])
+        {
+            val=snaps[i];
+            d=0;
+            currentIndex=i;
+        }
+
     }
 
     if(d===0)return;
@@ -95,6 +120,12 @@ function update()
         clearTimeout(timeout);
         val+=inVal.get();
     }
+    
+    if(!inEnabled.get())
+    {
+        outVal.set(val);
+        lastValue=val;
+    }
 
     inVal.set(0);
 
@@ -109,7 +140,7 @@ function update()
 
     if(!snapped)
     {
-        if(d<snapDist.get() )
+        if(d<snapDist.get()  )
         {
             val=snapvalue;
             if(inBlock.get()>0)
@@ -121,6 +152,7 @@ function update()
                         
                     },inBlock.get()*1000);
             }
+            snappedArr[currentIndex]=true;
             snapped=true;
             wassnapped=true;
         }

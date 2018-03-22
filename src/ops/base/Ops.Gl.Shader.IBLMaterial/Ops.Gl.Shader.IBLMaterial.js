@@ -7,6 +7,7 @@ var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var inCubemap=op.inObject("Cubemap");
 var inReflectionCubemap=op.inObject("Reflection Cubemap");
 var inFlipY=op.inValueBool("Flip Y");
+var inFlipX=op.inValueBool("Flip X");
 var inRough=op.inTexture("Roughness");
 var inRoughMul=op.inValueSlider("Roughness Amount",0);
 var inReflection=op.inTexture("Reflection");
@@ -78,11 +79,14 @@ inDiffuse.onChange=updateTexturesDefines;
 inAo.onChange=updateTexturesDefines;
 inReflectionCubemap.onChange=updateTexturesDefines;
 inFlipY.onChange=updateFlip;
+inFlipX.onChange=updateFlip;
 
 function updateFlip()
 {
     if(inFlipY.get()) shader.define("FLIPY");
         else shader.removeDefine("FLIPY");
+    if(inFlipX.get()) shader.define("FLIPX");
+        else shader.removeDefine("FLIPX");
     
 }
 

@@ -113,8 +113,6 @@ function update()
         }
 
         var newGeom=new CGL.Geometry();
-        // var newGeom=geom.copy();
-
         var newVerts=[];
         var newFaces=[];
         var newNormals=[];
@@ -126,9 +124,6 @@ function update()
         }
 
         faces=[].concat.apply([], faces);
-
-        // console.log('old faces',geom.verticesIndices.length);
-        // console.log('new faces',faces.length);
 
         for(var i=0;i<faces.length;i+=3)
         {
@@ -167,8 +162,6 @@ function update()
         newGeom.vertexNormals=newNormals;
         newGeom.verticesIndices=newFaces;
         newGeom.texCoords=newTexCoords;
-
-        // newGeom.verticesIndices=faces;
 
         outGeom.set(newGeom);
     }

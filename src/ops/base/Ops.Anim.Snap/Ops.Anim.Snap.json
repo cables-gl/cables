@@ -1,5 +1,5 @@
 {
-    "updated": 1521564391047,
+    "updated": 1521729620142,
     "authorName": "pandur",
     "id": "7319d30d-bce2-4e66-8143-e4c0ff5a37a2",
     "created": 1519211223820,
@@ -52,6 +52,11 @@
                 "type": "0",
                 "name": "Value Mul",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Enabled",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
