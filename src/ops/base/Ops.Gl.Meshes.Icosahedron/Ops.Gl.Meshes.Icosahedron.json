@@ -22,5 +22,21 @@
         ],
         "name": "Ops.Gl.Meshes.Icosahedron"
     },
-    "summary": "a polyhedron with 20 faces"
+    "summary": "Renders a icosahedron (polyhedron with 20 faces)",
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Renders the icosahedron"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
+            },
+            {
+                "name": "geometry",
+                "text": "The geometry of the polyhedron"
+            }
+        ]
+    }
 }

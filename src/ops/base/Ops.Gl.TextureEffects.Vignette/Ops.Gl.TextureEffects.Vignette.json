@@ -35,5 +35,8 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "b1b03b84-e924-4308-a252-1d348ede07e6",
-    "created": 1508866133390
+    "created": 1508866133390,
+    "docs": {
+        "ports": []
+    }
 }

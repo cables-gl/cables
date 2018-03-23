@@ -27,5 +27,25 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a389f42c-7324-45c9-bb47-369e31d602f0",
-    "created": 1511341818648
+    "created": 1511341818648,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Triggers the setup of face culling"
+            },
+            {
+                "name": "enable",
+                "text": "Enable or disable face culling"
+            },
+            {
+                "name": "facing",
+                "text": "The direction that should be hidden"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op to execute"
+            }
+        ]
+    }
 }

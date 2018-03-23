@@ -8,47 +8,58 @@
             },
             {
                 "type": "0",
-                "name": "Text"
+                "name": "Text",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "Scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Font"
+                "name": "Font",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "align"
+                "name": "align",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "vertical align"
+                "name": "vertical align",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Line Height"
+                "name": "Line Height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Letter Spacing"
+                "name": "Letter Spacing",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -62,7 +73,8 @@
             },
             {
                 "type": "0",
-                "name": "Font Available"
+                "name": "Font Available",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Meshes.TextMesh"

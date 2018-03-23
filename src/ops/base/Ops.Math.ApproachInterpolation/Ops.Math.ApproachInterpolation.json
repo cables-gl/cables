@@ -1,5 +1,5 @@
 {
-    "updated": 1519325866045,
+    "updated": 1521473532564,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eb4aa728-d0ee-4c53-833d-d0b086b11250",
@@ -12,11 +12,13 @@
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Divisor"
+                "name": "Divisor",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -26,7 +28,8 @@
             },
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.ApproachInterpolation"

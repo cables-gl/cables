@@ -95,5 +95,29 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eaf4f7ce-08a3-4d1b-b9f4-ebc0b7b1cde1",
-    "created": 1505193940165
+    "created": 1505193940165,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Executes the op"
+            },
+            {
+                "name": "min distance",
+                "text": "Minimum distance to scroll in, once you hit that distance scrolling in has no effect"
+            },
+            {
+                "name": "initial axis y",
+                "text": "The starting point from where to look at the scene in the y-axis"
+            },
+            {
+                "name": "initial axis x",
+                "text": "The starting point from where to look at the scene in the x-axis"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
+            }
+        ]
+    }
 }

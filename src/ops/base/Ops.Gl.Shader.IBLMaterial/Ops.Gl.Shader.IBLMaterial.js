@@ -5,8 +5,11 @@
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
 var inCubemap=op.inObject("Cubemap");
+var inReflectionCubemap=op.inObject("Reflection Cubemap");
+var inFlipY=op.inValueBool("Flip Y");
+var inFlipX=op.inValueBool("Flip X");
 var inRough=op.inTexture("Roughness");
-var inRoughMul=op.inValueSlider("Roughness Amount",1);
+var inRoughMul=op.inValueSlider("Roughness Amount",0);
 var inReflection=op.inTexture("Reflection");
 var inReflMul=op.inValueSlider("Reflection Amount",1);
 var inNormal=op.inTexture("Normal");
@@ -58,6 +61,13 @@ function doRender()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inAo.get().tex);
     }
 
+    if(inReflectionCubemap.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE6);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inReflectionCubemap.get().cubemap);
+    }
+
+
     trigger.trigger();
     cgl.setPreviousShader();
 }
@@ -67,6 +77,18 @@ inReflection.onChange=updateTexturesDefines;
 inNormal.onChange=updateTexturesDefines;
 inDiffuse.onChange=updateTexturesDefines;
 inAo.onChange=updateTexturesDefines;
+inReflectionCubemap.onChange=updateTexturesDefines;
+inFlipY.onChange=updateFlip;
+inFlipX.onChange=updateFlip;
+
+function updateFlip()
+{
+    if(inFlipY.get()) shader.define("FLIPY");
+        else shader.removeDefine("FLIPY");
+    if(inFlipX.get()) shader.define("FLIPX");
+        else shader.removeDefine("FLIPX");
+    
+}
 
 function updateTexturesDefines()
 {
@@ -85,7 +107,12 @@ function updateTexturesDefines()
     if(inAo.get()) shader.define("TEX_AO");
         else shader.removeDefine("TEX_AO");
 
+    if(inReflectionCubemap.get()) shader.define("MAP_REFLECTION");
+        else shader.removeDefine("MAP_REFLECTION");
+    
+    updateFlip();
 }
+
 
 
 
@@ -97,12 +124,13 @@ op.onLoaded=shader.compile;
 
 shader.setSource(attachments.ibl_vert,attachments.ibl_frag);
 
-// var uniCube=new CGL.Uniform(shader,'t','skybox',0);
+var uniCube=new CGL.Uniform(shader,'t','skybox',0);
 var uniRough=new CGL.Uniform(shader,'t','maskRoughness',1);
 var uniRefl=new CGL.Uniform(shader,'t','maskReflection',2);
 var uniNormal=new CGL.Uniform(shader,'t','texNormal',3);
 var uniDiffuse=new CGL.Uniform(shader,'t','texDiffuse',4);
 var uniAo=new CGL.Uniform(shader,'t','texAo',5);
+var uniRefl=new CGL.Uniform(shader,'t','mapReflection',6);
 
 var uniMulRefl=new CGL.Uniform(shader,'f','mulReflection',inReflMul);
 var uniMulRoug=new CGL.Uniform(shader,'f','mulRoughness',inRoughMul);

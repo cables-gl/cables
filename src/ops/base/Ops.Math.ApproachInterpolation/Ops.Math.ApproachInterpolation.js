@@ -1,5 +1,7 @@
 //look at http://sol.gfxile.net/interpolation/
 
+var divisor=5;
+
 var exec=op.inFunction("Update");
 var inVal=op.inValue("Value");
 
@@ -9,7 +11,7 @@ var result=op.outValue("Result",0);
 
 var val=0;
 var goal=0;
-var divisor=5;
+
 var lastTrigger=0;
 
 inVal.onChange=function()
@@ -20,6 +22,7 @@ inVal.onChange=function()
 inDivisor.onChange=function()
 {
     divisor=inDivisor.get();
+    if(divisor==0)divisor=5;
 };
 
 var oldVal=0;

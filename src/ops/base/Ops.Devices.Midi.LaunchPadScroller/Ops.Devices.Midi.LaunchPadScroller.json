@@ -19,5 +19,22 @@
             }
         ],
         "name": "Ops.Devices.Midi.LaunchPadScroller"
+    },
+    "summary": "Scroller for Novation Launchpad Mini",
+    "docs": {
+        "ports": [
+            {
+                "name": "Event Input",
+                "text": "Midi Event Object"
+            },
+            {
+                "name": "exec",
+                "text": "Triggers the scroller"
+            },
+            {
+                "name": "Offset X",
+                "text": "Scrolling amount "
+            }
+        ]
     }
 }

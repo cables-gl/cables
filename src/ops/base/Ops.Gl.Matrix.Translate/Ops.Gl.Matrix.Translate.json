@@ -30,5 +30,30 @@
             }
         ],
         "name": "Ops.Gl.Matrix.Translate"
+    },
+    "summary": "Translate objects (move / position in 3D space)",
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger translation"
+            },
+            {
+                "name": "x",
+                "text": "X axis translation"
+            },
+            {
+                "name": "y",
+                "text": "Y axis translation"
+            },
+            {
+                "name": "z",
+                "text": "Z axis translation"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger next op"
+            }
+        ]
     }
 }

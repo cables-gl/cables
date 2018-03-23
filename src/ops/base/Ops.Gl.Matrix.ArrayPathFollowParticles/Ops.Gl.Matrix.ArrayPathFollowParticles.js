@@ -204,9 +204,9 @@ exec.onTriggered=function()
         // if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
         if(shader.getDefine("PATHFOLLOW_POINTS")<Math.floor(pointArray.length/3))
         {
-                console.log(shader.getDefine("PATHFOLLOW_POINTS"));
-                shader.define('PATHFOLLOW_POINTS',Math.floor(pointArray.length/3));
-                // console.log('pointArray.length/3',pointArray.length/3);
+            console.log(shader.getDefine("PATHFOLLOW_POINTS"));
+            shader.define('PATHFOLLOW_POINTS',Math.floor(pointArray.length/3));
+            // console.log('pointArray.length/3',pointArray.length/3);
         }
         // shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
 

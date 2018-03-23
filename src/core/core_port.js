@@ -483,4 +483,18 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
 }
 
+/**
+* Returns the port type string, e.g. "value" based on the port type number
+* @param {number} type - The port type number
+* @returns {string} - The port type as string
+*/
+CABLES.Port.portTypeNumberToString = function(type) {
+   if(type == OP_PORT_TYPE_VALUE) return 'value';
+   else if(type == OP_PORT_TYPE_FUNCTION) return 'function';
+   else if(type == OP_PORT_TYPE_OBJECT)  return 'object';
+   else if(type == OP_PORT_TYPE_ARRAY)  return 'array';
+   else if(type == OP_PORT_TYPE_DYNAMIC)  return 'dynamic';
+   else return 'unknown';
+};
+
 var Port = CABLES.Port; // TODO deprecated.. remove one day...

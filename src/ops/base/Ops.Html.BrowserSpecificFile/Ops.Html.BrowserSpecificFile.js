@@ -10,8 +10,8 @@ var operaFilePort = op.addInPort( new Port( op, "Opera File", OP_PORT_TYPE_VALUE
 var defaultFilePort = op.addInPort( new Port( op, "Default File", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
 
 // output port
-var outFile = op.outValue("Browser Specific File");
-var detectedBrowserPort = op.outValue("Detected Browser");
+var outFile = op.outValueString("Browser Specific File");
+var detectedBrowserPort = op.outValueString("Detected Browser");
 detectedBrowserPort.set("None");
 
 // change listeners
@@ -30,7 +30,7 @@ isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 // Firefox 1.0+
 isFirefox = typeof InstallTrigger !== 'undefined';
 // Safari 3.0+
-isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification) || /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent);
 // Internet Explorer 6-11
 isIE = /*@cc_on!@*/false || !!document.documentMode;
 // Edge 20+

@@ -121,7 +121,7 @@ op.onAnimFrame=function(time)
     if(!active.get())return;
     if(cgl.aborted || cgl.canvas.clientWidth===0 || cgl.canvas.clientHeight===0)return;
 
-    if(op.patch.loading.getProgress()<1.0)
+    if(op.patch.loading.getProgress()<1.0 && reduceLoadingFPS.get())
     {
         op.patch.config.fpsLimit=5;
     }

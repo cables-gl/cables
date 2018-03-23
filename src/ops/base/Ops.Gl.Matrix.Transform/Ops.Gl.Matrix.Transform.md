@@ -1,6 +1,1 @@
-# Transform
-
-*Ops.Gl.Matrix.Transform*
-
-Transform objects in 3d space.
-Following objects will be translated, rotated and scales.
+All objects which are drawn after will be affected by this (translated, rotated and scaled).

@@ -7,25 +7,30 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min"
+                "name": "Min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max"
+                "name": "Max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Easing"
+                "name": "Easing",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Ease"

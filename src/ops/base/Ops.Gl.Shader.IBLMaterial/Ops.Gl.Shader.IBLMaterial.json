@@ -1,5 +1,5 @@
 {
-    "updated": 1520374380398,
+    "updated": 1521702279114,
     "authorName": "pandur",
     "id": "1eff8b0d-77d4-4675-82ae-5073ec960672",
     "created": 1519592565704,
@@ -12,6 +12,20 @@
             {
                 "type": "2",
                 "name": "Cubemap"
+            },
+            {
+                "type": "2",
+                "name": "Reflection Cubemap"
+            },
+            {
+                "type": "0",
+                "name": "Flip Y",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip X",
+                "subType": "boolean"
             },
             {
                 "type": "2",
