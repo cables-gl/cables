@@ -20,5 +20,17 @@
         ],
         "name": "Ops.Devices.Keyboard.KeyPress"
     },
-    "summary": "triggers when a key is pressed"
+    "summary": "triggers when a key is pressed",
+    "docs": {
+        "ports": [
+            {
+                "name": "on press",
+                "text": "Triggers every time a keyboard key has been pressed (when focus is on the canvas / preview panel)."
+            },
+            {
+                "name": "key code",
+                "text": "The key code for the last pressed key  "
+            }
+        ]
+    }
 }

@@ -18,5 +18,18 @@
             }
         ],
         "name": "Ops.Devices.Midi.MidiValueToNote"
+    },
+    "summary": "Converts a MIDI value to a note string",
+    "docs": {
+        "ports": [
+            {
+                "name": "Midi Value",
+                "text": "The MIDI Value you want to convert to a note-string, e.g. `80`"
+            },
+            {
+                "name": "Note",
+                "text": "The note-string (compatible to [tone.js](https://github.com/Tonejs/Tone.js))"
+            }
+        ]
     }
 }

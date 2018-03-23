@@ -1,5 +1,5 @@
 {
-    "summary": "Transform objects in 3d space (rotate translate scale)",
+    "summary": "Transform objects in 3d space (rotate, translate, scale)",
     "layout": {
         "portsIn": [
             {
@@ -56,6 +56,15 @@
     "id": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
     "created": 1504813928558,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Executes the op"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
+            }
+        ]
     }
 }

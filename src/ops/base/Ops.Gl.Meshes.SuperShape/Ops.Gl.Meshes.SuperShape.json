@@ -81,5 +81,9 @@
             }
         ],
         "name": "Ops.Gl.Meshes.SuperShape"
+    },
+    "summary": "Renders a super shape",
+    "docs": {
+        "ports": []
     }
 }

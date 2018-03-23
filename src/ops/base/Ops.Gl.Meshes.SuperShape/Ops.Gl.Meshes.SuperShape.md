@@ -1,5 +1,1 @@
-# Supershape
-
-*Ops.Gl.Meshes.Supershape*
-
-![supershape](img/supershape.png)
+See [paulbourke.net/geometry/supershape](http://paulbourke.net/geometry/supershape/)

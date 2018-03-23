@@ -831,6 +831,22 @@ CABLES.Op = function()
 
 }
 
+/**
+ * Returns an op category for the op.
+ * @param {string} opName - The (full) name of the op, e.g. "Ops.Value"
+ * @returns {string} - The op category
+ */
+CABLES.Op.getNamespaceClassName = function(opName) {
+    if(!opName) return 'default';
+    if( opName.startsWith('Ops.Gl') ) return 'gl';
+    if( opName.startsWith('Ops.WebAudio') ) return 'audio';
+    if( opName.startsWith('Ops.Devices') ) return 'devices';
+    if( opName.startsWith('Ops.Html') ) return 'html';
+    if( opName.startsWith('Ops.Sidebar') ) return 'html';
+    if( opName.startsWith('Ops.Math') ) return 'math';
+    return 'default';
+};
+
 
 CABLES.Op.isSubpatchOp=function(name)
 {

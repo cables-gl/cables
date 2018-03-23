@@ -31,8 +31,20 @@
     "docs": {
         "ports": [
             {
+                "name": "render",
+                "text": "Triggers the setup of face culling"
+            },
+            {
+                "name": "enable",
+                "text": "Enable or disable face culling"
+            },
+            {
                 "name": "facing",
                 "text": "The direction that should be hidden"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op to execute"
             }
         ]
     }

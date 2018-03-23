@@ -169,7 +169,7 @@ function setMesh()
     needSetMesh=false;
     meshes[index]=mesh;
     
-    console.log("set mesh done");
+    // console.log("set mesh done");
     // console.log(geom);
 
     op.uiAttr({'warning':null});
