@@ -1,0 +1,52 @@
+
+var val=op.inValue("Value");
+op.varName=op.inValueSelect("Variable");
+var inExec=op.inFunctionButton("Set Variable");
+
+op.varName.onChange=updateName;
+// val.onChange=update;
+val.changeAlways=true;
+
+inExec.onTriggered=function()
+{
+    update();
+};
+
+
+op.patch.addVariableListener(updateVarNamesDropdown);
+
+updateVarNamesDropdown();
+
+function updateVarNamesDropdown()
+{
+    if(CABLES.UI)
+    {
+        var varnames=[];
+        var vars=op.patch.getVars();
+
+        for(var i in vars) varnames.push(i);
+
+        varnames.push('+ create new one');
+        op.varName.uiAttribs.values=varnames;
+    }
+}
+
+function updateName()
+{
+    if(CABLES.UI)
+    {
+        if(op.varName.get()=='+ create new one')
+        {
+            CABLES.CMD.PATCH.createVariable(op);
+            return;
+        }
+
+        op.setTitle('#'+op.varName.get());
+    }
+    update();
+}
+
+function update()
+{
+    op.patch.setVarValue(op.varName.get(),val.get());
+}
