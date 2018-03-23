@@ -233,7 +233,7 @@ CGL.Shader = function(_cgl, _name) {
         if (this._extensions)
             for (i = 0; i < this._extensions.length; i++) {
                 extensionString += '#extension '+this._extensions[i]+' : enable'.endl();
-                console.log("ENABLE EXTENSION"+this._extensions[i])
+                // console.log("ENABLE EXTENSION"+this._extensions[i])
             }
 
         var definesStr = '';
@@ -343,7 +343,7 @@ CGL.Shader = function(_cgl, _name) {
             for (var j = 0; j < modules.length; j++) {
                 if (modules[j].name == moduleNames[i]) {
 
-                    console.log(modules[j].name,modules[j].title);
+                    // console.log(modules[j].name,modules[j].title);
 
                     srcHeadVert+='\n//---- MOD: '+modules[j].group+': '+j+' - '+modules[j].title+' ------\n';
                     srcHeadFrag+='\n//---- MOD: '+modules[j].group+': '+j+' - '+modules[j].title+' ------\n';
@@ -586,10 +586,10 @@ CGL.Shader = function(_cgl, _name) {
         {
             if(mod && mod.id)
             {
-                console.log(mod.id,modules[i].id);
+                // console.log(mod.id,modules[i].id);
 
                 if (modules[i].id == mod.id || !modules[i]) {
-                    console.log("removed module");
+                    // console.log("removed module");
                     this._needsRecompile = true;
                     this.setWhyCompile("remove module "+mod.title);
             
@@ -599,7 +599,7 @@ CGL.Shader = function(_cgl, _name) {
     
             }
         }
-        console.log("could mod find module to remove");
+        // console.log("could not find module to remove");
     };
 
     /**
@@ -613,7 +613,6 @@ CGL.Shader = function(_cgl, _name) {
         if(!mod.numId) mod.numId = moduleNumId;
         if(!mod.num)mod.num = modules.length;
 
-        console.log("add module",mod.title);
 
         if (sibling) mod.group = sibling.group;
             else mod.group = this._modGroupCount++;
