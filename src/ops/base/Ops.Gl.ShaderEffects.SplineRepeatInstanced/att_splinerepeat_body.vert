@@ -1,20 +1,34 @@
-highp float off=(MOD_index)+MOD_offset;
+float off=(MOD_index)+MOD_offset;
 
 #ifdef METHOD_FILL
 off=mod(off,float(PATHFOLLOW_POINTS));
 #endif
 
-highp float fr=off-floor(off);
-highp int index=int(floor(off));
-highp int index2=index+1;
+float fr=off-floor(off);
+int index=int(floor(off));
+int index2=index+1;
+float posOnSpline=(float(index)+fr)/float(PATHFOLLOW_POINTS);
 
-highp mat4 newMatrix;
+mat4 newMatrix;
 newMatrix[0][0]=MOD_scale;
 newMatrix[1][1]=MOD_scale;
 newMatrix[2][2]=MOD_scale;
 newMatrix[3][3]=1.0;
 
-highp vec3 mPos;
+vec3 mPos;
+
+
+float mulRotPre=1.0;
+#ifdef TEX_ROT
+    // float scc=texture2D( MOD_texScale, vec2(posOnSpline,0.5) ).r;
+    mulRotPre=texture2D( MOD_texRot, vec2(posOnSpline,0.5) ).r*116.28;
+    
+#endif
+
+mat4 rotma=rotationMatrix(vec3(1.0,0.0,0.0),MOD_preRotX+mulRotPre);
+rotma=rotma*rotationMatrix(vec3(0.0,1.0,0.0),MOD_preRotY+mulRotPre);
+rotma=rotma*rotationMatrix(vec3(0.0,0.0,1.0),MOD_preRotZ+mulRotPre);
+
 
 if(index2!=0 && index>-1 && index2<PATHFOLLOW_POINTS)
 {
@@ -32,18 +46,24 @@ newMatrix[3][0]+=mPos.x;
 newMatrix[3][1]+=mPos.y;
 newMatrix[3][2]+=mPos.z;
 
-highp float posOnSpline=(float(index)+fr)/float(PATHFOLLOW_POINTS);
-
 #ifdef TEX_SCALE
-    highp float scc=texture2D( MOD_texScale, vec2(posOnSpline,0.5) ).r;
+    float scc=texture2D( MOD_texScale, vec2(posOnSpline,0.5) ).r;
     
     newMatrix[0][0]*=scc;
     newMatrix[1][1]*=scc;
     newMatrix[2][2]*=scc;
 #endif
 
-highp mat4 rotm=rotationMatrix(vec3(MOD_rotX,MOD_rotY,MOD_rotZ),(posOnSpline)*MOD_rotation);
+#ifndef ROT_BYPOSITION
+    posOnSpline=1.0
+#endif
+
+mat4 rotm=rotationMatrix(vec3(1.0,0.0,0.0),(posOnSpline)*MOD_rotX);
+rotm=rotm*rotationMatrix(vec3(0.0,1.0,0.0),(posOnSpline)*MOD_rotY);
+rotm=rotm*rotationMatrix(vec3(0.0,0.0,1.0),(posOnSpline)*MOD_rotZ);
 
 
+newMatrix*=rotma;
 mMatrix*=newMatrix;
 mMatrix*=rotm;
+

@@ -31,6 +31,10 @@ var x=op.inValue("x");
 var y=op.inValue("y");
 var z=op.inValue("z");
 
+var sizeX=op.inValueSlider("Size X",1);
+
+
+
 var inWorldSpace=op.inValueBool("WorldSpace",true);
 
 var shader=null;
@@ -172,6 +176,8 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'z',z);
+        sizeX.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'sizeX',sizeX);
+        
         inFalloff.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'falloff',inFalloff);
         
         updateWorldspace();

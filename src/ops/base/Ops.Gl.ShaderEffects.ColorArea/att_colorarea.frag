@@ -2,7 +2,7 @@
 
 
 #ifdef MOD_AREA_SPHERE
-    float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),MOD_areaPos.xyz);
+    float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),vec3(MOD_areaPos.x*MOD_sizeX,MOD_areaPos.y,MOD_areaPos.z));
 #endif
 
 #ifdef MOD_AREA_AXIS_X

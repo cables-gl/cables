@@ -11,3 +11,5 @@ UNI float MOD_b;
 UNI float MOD_x;
 UNI float MOD_y;
 UNI float MOD_z;
+
+UNI float MOD_sizeX;

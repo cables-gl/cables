@@ -61,7 +61,7 @@ function setup()
         for(var i=0;i<num;i++)
         {
             var index=i;
-            if(i%3!=0)continue;
+            // if(i%3!=0)continue;
             if(doRand)
             {
                 index=Math.seededRandom()*(faces.length/3);
@@ -158,7 +158,7 @@ function setup()
     if(op.patch.cgl.glVersion>=2) 
     {
         mesh.numInstances=num;
-        mesh.addAttribute('instMat',matrixArray,16);
+        if(num>0)mesh.addAttribute('instMat',matrixArray,16);
     }
     recalc=false;
     // console.log(matrixArray);
@@ -248,6 +248,7 @@ function doRender()
             {
                 mod=shader.addModule(
                     {
+                        title:op.objName,
                         name: 'MODULE_VERTEX_POSITION',
                         priority:-2,
                         srcHeadVert: srcHeadVert,
@@ -273,6 +274,7 @@ function doRender()
     {
         // fallback - SLOW
  
+        if(mesh.numInstances>0)
         for(var i=0;i<matrixArray.length;i+=16)
         {
             op.patch.cgl.pushModelMatrix();

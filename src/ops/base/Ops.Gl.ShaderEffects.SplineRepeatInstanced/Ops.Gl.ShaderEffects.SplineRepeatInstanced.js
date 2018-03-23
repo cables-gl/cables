@@ -9,15 +9,22 @@ var inNum=op.inValueInt("Num",2000);
 
 var inOffset=op.inValue("Offset");
 
+var rotPos=op.inValueBool("Rotate by Position",true);
+
 var inMeth=op.inValueSelect("Method",["Array","Fill"],"Array");
 var inSpacing=op.inValue("Spacing",0.2);
 var inScale=op.inValue("Scale",1);
-var inRot=op.inValue("Rotation",0);
-var inRotX=op.inValueSlider("Rot X",0);
-var inRotY=op.inValueSlider("Rot Y",0);
-var inRotZ=op.inValueSlider("Rot Z",1);
+// var inRot=op.inValue("Rotation",0);
+var inRotX=op.inValue("Rot X",0);
+var inRotY=op.inValue("Rot Y",0);
+var inRotZ=op.inValue("Rot Z",1);
+
+var inPreRotX=op.inValue("Pre Rot X",0);
+var inPreRotY=op.inValue("Pre Rot Y",0);
+var inPreRotZ=op.inValue("Pre Rot Z",1);
 
 var texScaling=op.inTexture("Texture Scaling");
+var texRotation=op.inTexture("Texture Rotation");
 
 
 geom.ignoreValueSerialize=true;
@@ -41,6 +48,7 @@ inSpacing.onChange=inTransformations.onChange=reset;
 inNum.onChange=reset;
 inMeth.onChange=updateMethod;
 texScaling.onChange=updateTextureDefine;
+rotPos.onChange=updateTextureDefine;
 
 function updateMethod()
 {
@@ -60,6 +68,13 @@ function updateTextureDefine()
     if(!shader)return;
     if(texScaling.get())shader.define("TEX_SCALE");
         else shader.removeDefine("TEX_SCALE");
+
+    if(texRotation.get())shader.define("TEX_ROT");
+        else shader.removeDefine("TEX_ROT");
+
+    if(rotPos.get()) shader.define("ROT_BYPOSITION");
+        else shader.define("ROT_BYPOSITION");
+
 }
 
 
@@ -117,7 +132,7 @@ function setupArray()
     var space=inSpacing.get();
     if(inMeth.get()=="Fill")
     {
-        space=numSplinePoints/num;
+        space=numSplinePoints/num-1;
         console.log(space);
         shader.define("METHOD_FILL");
     }
@@ -169,17 +184,22 @@ function doRender()
             uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
             uniScale=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
             
-            op.uniRot=new CGL.Uniform(shader,'f',mod.prefix+'rotation',inRot);
+            // op.uniRot=new CGL.Uniform(shader,'f',mod.prefix+'rotation',inRot);
             op.uniOffset=new CGL.Uniform(shader,'f',mod.prefix+'offset',inOffset);
             op.uniSpacing=new CGL.Uniform(shader,'f',mod.prefix+'spacing',inSpacing);
             op.numInstances=new CGL.Uniform(shader,'f',mod.prefix+'numInstances',inNum);
             
             uniPoints=new CGL.Uniform(shader,'3f[]',mod.prefix+'points',new Float32Array([0,0,0,0,0,0]));
             op.uniTextureFrag=new CGL.Uniform(shader,'t',mod.prefix+'texScale',6);
+            op.uniTextureFragRot=new CGL.Uniform(shader,'t',mod.prefix+'texRot',7);
 
             op.uniRotX=new CGL.Uniform(shader,'f',mod.prefix+'rotX',inRotX);
             op.uniRotY=new CGL.Uniform(shader,'f',mod.prefix+'rotY',inRotY);
             op.uniRotZ=new CGL.Uniform(shader,'f',mod.prefix+'rotZ',inRotZ);
+            
+            op.uniPreRotX=new CGL.Uniform(shader,'f',mod.prefix+'preRotX',inPreRotX);
+            op.uniPreRotY=new CGL.Uniform(shader,'f',mod.prefix+'preRotY',inPreRotY);
+            op.uniPreRotZ=new CGL.Uniform(shader,'f',mod.prefix+'preRotZ',inPreRotZ);
         }
         else
         {
@@ -194,6 +214,12 @@ function doRender()
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE6);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texScaling.get().tex);
+    }
+
+    if(texRotation.get())
+    {
+        cgl.gl.activeTexture(cgl.gl.TEXTURE7);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texRotation.get().tex);
     }
 
     if(!recalc)
