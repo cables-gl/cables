@@ -243,7 +243,6 @@ CGL.Mesh.prototype.setGeom=function(geom)
     for(var index in geomAttribs)
     {
         this.setAttribute(index,geomAttribs[index].data,geomAttribs[index].itemSize);
-        console.log("NEW GEOM ATTRIB!!!",index);
     }
 
 };

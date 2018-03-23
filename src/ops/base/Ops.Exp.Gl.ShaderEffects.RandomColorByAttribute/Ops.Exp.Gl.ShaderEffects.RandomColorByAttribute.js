@@ -105,9 +105,9 @@ inGeom.onChange=function()
 render.onTriggered=function()
 {
     if(!inGeom.get())return;
-    if(needsCodeUpdate)console.log('needsCodeUpdate');
-    if(!srcBodyFrag)console.log('srcBodyFrag');
-    if(cgl.getShader()!=shader)console.log('cgl.getShader',shader);
+    // if(needsCodeUpdate)console.log('needsCodeUpdate');
+    // if(!srcBodyFrag)console.log('srcBodyFrag');
+    // if(cgl.getShader()!=shader)console.log('cgl.getShader',shader);
     
     if(cgl.getShader()!=shader || needsCodeUpdate || !srcBodyFrag)
     {

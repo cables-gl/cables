@@ -65,8 +65,8 @@ function setupIndexWeights(jsonMesh)
         return;
     }
 
-    if(!vertWeights) console.log('no vertWeights');
-        else if(vertWeights.length!=geom.vertices.length/3) console.log('wrong length');
+    // if(!vertWeights) console.log('no vertWeights');
+    //     else if(vertWeights.length!=geom.vertices.length/3) console.log('wrong length');
 
     if(!vertWeights || vertWeights.length!=geom.vertices.length/3)
     {
@@ -136,7 +136,7 @@ render.onTriggered=function()
 
     if(cgl.getShader()!=shader)
     {
-        console.log("NEW SHADER!");
+        // console.log("NEW SHADER!");
     }
 
     if( (mesh && scene && scene.meshes && scene.meshes.length>meshIndex) || cgl.getShader()!=shader)
@@ -144,11 +144,11 @@ render.onTriggered=function()
         if(cgl.getShader()!=shader)
         {
             
-            console.log('bonesys RECOMPILE');
+            // console.log('bonesys RECOMPILE');
 
 
             var startInit=CABLES.now();
-            console.log("starting bone skin shader init...");
+            // console.log("starting bone skin shader init...");
 
             if(shader)removeModule();
             shader=cgl.getShader();
@@ -164,18 +164,18 @@ render.onTriggered=function()
             shader.define("SKIN_NUM_BONES",1);
             boneMatricesUniform=new CGL.Uniform(shader,'m4','bone',[]);
             attribWeightsScene=null;
-            console.log("finished bone skin shader init...",(CABLES.now()-startInit));
+            // console.log("finished bone skin shader init...",(CABLES.now()-startInit));
         }
 
         if(attribWeightsScene!=scene)
         {
             var startInit=CABLES.now();
-            console.log("starting bone skin weights init...");
+            // console.log("starting bone skin weights init...");
             vertWeights=null;
             setGeom();
             attribWeightsScene=scene;
             setupIndexWeights( scene.meshes[meshIndex] );
-            console.log("finished bone skin  weights init...",(CABLES.now()-startInit));
+            // console.log("finished bone skin  weights init...",(CABLES.now()-startInit));
         }
 
         var bones=scene.meshes[meshIndex].bones;
