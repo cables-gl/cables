@@ -38,7 +38,6 @@ function removeModule()
 
         shader=null;
     }
-    console.log('randomcolor removemodule!');
 
     needsCodeUpdate=true;
 }
