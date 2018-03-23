@@ -17,7 +17,7 @@ inGeom.onChange=analyze;
 function analyze()
 {
     var startInit=CABLES.now();
-    console.log("start submesh analyze...");
+    // console.log("start submesh analyze...");
     var sort=inSort.get();
 
     var geom=inGeom.get();
@@ -158,7 +158,7 @@ function analyze()
     outMin.set(minGroupValue);
     
 
-    console.log("finished submesh analyze...",(CABLES.now()-startInit));
+    // console.log("finished submesh analyze...",(CABLES.now()-startInit));
 
 
 };

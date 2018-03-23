@@ -102,6 +102,8 @@ CABLES.Patch = function(cfg) {
         }
     }
 
+    console.log("made with cables.gl")
+
 };
 
 CABLES.Patch.prototype.isPlaying = function() {

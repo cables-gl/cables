@@ -46,7 +46,7 @@ function removeModule()
 inAttrib.onChange=function()
 {
     needsCodeUpdate=true;
-    console.log('attrib change!!!!');
+    // console.log('attrib change!!!!');
 };
 
 function updateCode()
@@ -111,9 +111,6 @@ render.onTriggered=function()
     
     if(cgl.getShader()!=shader || needsCodeUpdate || !srcBodyFrag)
     {
-        
-        console.log('random color RECOMPILE');
-        
         if(shader) removeModule();
         shader=cgl.getShader();
         if(!shader)

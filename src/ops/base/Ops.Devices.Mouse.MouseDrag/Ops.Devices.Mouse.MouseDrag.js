@@ -211,7 +211,7 @@ function bind()
 
 function unbind()
 {
-    console.log("remove mouse op...");
+    // console.log("remove mouse op...");
     canvas.removeEventListener('click', onmouseclick);
     canvas.removeEventListener('mousemove', onmousemove);
     canvas.removeEventListener('mousedown', onMouseDown);

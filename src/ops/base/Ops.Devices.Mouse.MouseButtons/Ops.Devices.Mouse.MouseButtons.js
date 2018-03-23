@@ -138,7 +138,7 @@ active.onChange=function()
 
 op.onDelete=function()
 {
-    console.log("remove mouse op...");
+    // console.log("remove mouse op...");
     removeListeners();
 };
 
