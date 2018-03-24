@@ -1,5 +1,5 @@
 {
-    "updated": 1517517271808,
+    "updated": 1521842188236,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9056b704-b8f5-4fda-8df6-0738fa75d301",
@@ -22,7 +22,8 @@
             },
             {
                 "type": "0",
-                "name": "Sub Tick"
+                "name": "Sub Tick",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -30,11 +31,13 @@
             },
             {
                 "type": "0",
-                "name": "BPM"
+                "name": "BPM",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Tick Duration"
+                "name": "Tick Duration",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Midi.MidiClockBeat"

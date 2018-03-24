@@ -1,6 +1,29 @@
 {
-    "updated": 1521569094275,
+    "updated": 1521889701916,
     "authorName": "pandur",
     "id": "a7864596-cd4b-41a0-8bb6-76f3d4b33035",
-    "created": 1521569075357
+    "created": 1521569075357,
+    "summary": "set variable only after being triggered",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Set Variable"
+            }
+        ],
+        "name": "Ops.Vars.SetVariableByTrigger"
+    }
 }

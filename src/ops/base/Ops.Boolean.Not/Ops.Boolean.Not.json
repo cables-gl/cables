@@ -1,6 +1,27 @@
 {
-    "updated": 1521803894492,
+    "updated": 1521889935007,
     "authorName": "pandur",
     "id": "6d123c9f-7485-4fd9-a5c2-76e59dcbeb34",
-    "created": 1521803894495
+    "created": 1521803894495,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Boolean",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Boolean.Not"
+    },
+    "summary": "result is false if input is true and vice versa (negate/toggle/switch/!=)",
+    "docs": {
+        "ports": []
+    }
 }

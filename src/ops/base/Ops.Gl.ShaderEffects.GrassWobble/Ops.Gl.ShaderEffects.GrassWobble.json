@@ -32,5 +32,9 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.GrassWobble"
+    },
+    "summary": "simulate grass motion in wind",
+    "docs": {
+        "ports": []
     }
 }

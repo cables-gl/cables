@@ -14,6 +14,3 @@ function update()
     width.set(cgl.canvasWidth);
     pixelRatio.set(window.devicePixelRatio);
 }
-
-
-

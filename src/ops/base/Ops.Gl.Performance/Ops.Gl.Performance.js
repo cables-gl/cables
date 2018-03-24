@@ -37,6 +37,7 @@ element.style.opacity="0.9";
 element.style.padding="4px";
 element.style.cursor="pointer";
 element.style.background="#222";
+element.style.color="white";
 element.style["font-family"]="monospace";
 element.style["font-size"]="11px";
 element.style["z-index"]="9999";

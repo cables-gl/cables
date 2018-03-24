@@ -231,8 +231,6 @@ function doRender()
     if(!inGeomSurface.get())return;
     if(!geom.get())return;
 
-// ANGLE_instanced_arrays
-
     if(op.patch.cgl.glVersion>=2) 
     {
         if(cgl.getShader() && cgl.getShader()!=shader)
@@ -257,7 +255,6 @@ function doRender()
     
                 shader.define('INSTANCING');
                 uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
-                // uniScale=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
             }
             else
             {
@@ -266,15 +263,18 @@ function doRender()
             setup();
         }
     
-        uniDoInstancing.setValue(1);
-        mesh.render(shader);
-        uniDoInstancing.setValue(0);
+        if(mesh.numInstances>0)
+        {
+            uniDoInstancing.setValue(1);
+            mesh.render(shader);
+            uniDoInstancing.setValue(0);
+        }
     }
     else
     {
         // fallback - SLOW
  
-        if(mesh.numInstances>0)
+        
         for(var i=0;i<matrixArray.length;i+=16)
         {
             op.patch.cgl.pushModelMatrix();

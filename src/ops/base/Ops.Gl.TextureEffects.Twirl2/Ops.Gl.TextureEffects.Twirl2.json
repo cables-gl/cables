@@ -1,5 +1,5 @@
 {
-    "updated": 1521445498230,
+    "updated": 1521890103593,
     "authorName": "pandur",
     "id": "d8f7f98b-9e83-45c4-9cc5-e82fd35c5951",
     "created": 1521445103210,
@@ -7,7 +7,7 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
             },
             {
                 "type": "0",
@@ -21,16 +21,25 @@
             },
             {
                 "type": "0",
-                "name": "times",
+                "name": "Center X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Y",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Next"
             }
         ],
         "name": "Ops.Gl.TextureEffects.Twirl2"
+    },
+    "summary": "twirl image effect",
+    "docs": {
+        "ports": []
     }
 }
