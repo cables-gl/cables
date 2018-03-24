@@ -1,8 +1,8 @@
 {
-    "updated": 1521900614836,
+    "updated": 1521901719293,
     "authorName": "pandur",
-    "id": "01305694-f1b9-485e-8bbd-9daa0a7be996",
-    "created": 1516622763169,
+    "id": "7fa97980-0b5e-478c-8cfd-e77e06d0f589",
+    "created": 1521900594362,
     "layout": {
         "portsIn": [
             {
@@ -30,7 +30,7 @@
             {
                 "type": "0",
                 "name": "Num",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -53,10 +53,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.SurfaceScatterInstanced"
-    },
-    "summary": "render meshes randomly distributed on the surface of a geometry",
-    "docs": {
-        "ports": []
+        "name": "Ops.Gl.SurfaceScatterInstanced2"
     }
 }

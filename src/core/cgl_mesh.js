@@ -24,7 +24,7 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._attributes=[];
     this._attributes=[];
     this._geom=null;
-    this.numInstances=0;
+    this._numInstances=0;
     this._glPrimitive=glPrimitive;
     this.addVertexNumbers=false;
     this.feedBackAttributes=[];
@@ -34,6 +34,17 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._feedBacksChanged=false;
     this._transformFeedBackLoc=-1;
     this._lastAttrUpdate=0;
+
+    Object.defineProperty(this, 'numInstances', {
+        get: function() {
+            return this._numInstances;
+        },
+        set: function(v) {
+            this.setNumInstances(v)
+        }
+      });
+
+
 };
 
 
@@ -279,7 +290,7 @@ CGL.Mesh.prototype._bind=function(shader)
             this._cgl.gl.enableVertexAttribArray(attribute.loc);
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
 
-            if(attribute.instanced || attribute.name=='instMat')
+            if(attribute.instanced)
             {
                 // todo: easier way to fill mat4 attribs...
                 if(attribute.itemSize<=4)
@@ -344,11 +355,14 @@ CGL.Mesh.prototype.unBind=function(shader)
     {
         if(this._attributes[i].instanced || this._attributes[i].name=='instMat')
         {
+            this._attributes[i].instanced=true;
             // todo: easier way to fill mat4 attribs...
             if(this._attributes[i].itemSize<=4)
             {
-                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
-                // this._cg l.gl.disableVertexAttribArray(this._attributes[i].loc);
+
+                // why does this result in warninges???
+                // this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
+                // this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
             }
             else
             {
@@ -495,7 +509,7 @@ if(shader.bindTextures)shader.bindTextures();
     }
     else
     {
-        if(this.numInstances===0)
+        if(this._numInstances===0)
         {
             this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
             // if(this._bufVerticesIndizes.numItems>100)console.log(this._bufVerticesIndizes.numItems);
@@ -504,7 +518,7 @@ if(shader.bindTextures)shader.bindTextures();
         }
         else
         {
-            this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this.numInstances);
+            this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this._numInstances);
         }
 
         // this.printDebug(shader);
@@ -517,6 +531,19 @@ if(shader.bindTextures)shader.bindTextures();
     // cgl.lastMeshShader=shader;
 
 };
+
+CGL.Mesh.prototype.setNumInstances=function(n)
+{
+    this._numInstances=n;
+    
+
+    var indexArr=new Float32Array(n);
+    for(var i=0;i<n;i++) indexArr[i]=i;
+    this.setAttribute('instanceIndex',indexArr,1,{instanced:true});
+
+}
+
+
 
 CGL.Mesh.prototype.dispose=function()
 {
