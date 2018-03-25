@@ -361,7 +361,7 @@ CGL.Mesh.prototype.unBind=function(shader)
             {
 
                 // why does this result in warninges???
-                // this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
+                 this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
                 // this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
             }
             else

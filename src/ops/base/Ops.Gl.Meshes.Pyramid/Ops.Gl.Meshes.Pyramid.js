@@ -6,6 +6,8 @@ var sizeW=op.inValue("Width",1);
 var sizeL=op.inValue("Length",1);
 var sizeH=op.inValue("Height",2);
 
+var inDraw=op.inValueBool("Draw",true);
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var geomOut=op.outObject("geometry");
 
@@ -21,7 +23,7 @@ create();
 
 render.onTriggered=function()
 {
-    mesh.render(cgl.getShader());
+    if(inDraw.get())mesh.render(cgl.getShader());
     trigger.trigger();
 };
 

@@ -110,7 +110,7 @@ function updateMatcap()
                 for(var y=0;y<16;y++)
                 {
                     var c=y*16;
-                    c*=Math.min(1,(x+y/3)/9);
+                    c*=Math.min(1,(x+y/3)/8);
                     pixels[(x+y*16)*4+0]=pixels[(x+y*16)*4+1]=pixels[(x+y*16)*4+2]=c;
                     pixels[(x+y*16)*4+3]=255;
                 }
