@@ -898,10 +898,9 @@ CABLES.Patch.prototype.getVars = function() {
 
 CABLES.Patch.prototype.exitError=function(errorId,errorMessage)
 {
-    console.log("EXITERROR FUNCTION-----");
-    console.log(this);
-    console.log(this.config);
-    if (this.config && this.config.onError) this.patch.config.onError(errorId,errorMessage);
-    console.error(errorId,errorMessage);
-    this.aborted=true;
+    if(this && this.config && this.config.onError)
+    {
+        this.patch.config.onError(errorId,errorMessage);
+        this.aborted=true;
+    }
 }
