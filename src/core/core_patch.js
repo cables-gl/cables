@@ -900,7 +900,7 @@ CABLES.Patch.prototype.exitError=function(errorId,errorMessage)
 {
     if(this && this.config && this.config.onError)
     {
-        this.patch.config.onError(errorId,errorMessage);
+        this.config.onError(errorId,errorMessage);
         this.aborted=true;
     }
 }
