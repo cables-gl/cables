@@ -49,7 +49,7 @@ CGL.Context = function() {
 
     this.exitError=function(msgId,msg)
     {
-        if (this.patch.config.onError) this.patch.config.onError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
+        this.patch.exitError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.')
         this.aborted = true;
     }
 
@@ -74,8 +74,9 @@ CGL.Context = function() {
 
 
         if (!this.gl) {
-            if (this.patch.config.onError) this.patch.config.onError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
-            this.aborted = true;
+
+            this.exitError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
+
             return;
         } else {
             var derivativeExt = this.gl.getExtension("GL_OES_standard_derivatives");

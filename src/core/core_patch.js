@@ -264,6 +264,7 @@ CABLES.Patch.prototype.createOp = function(objName) {
             if (CABLES.api) CABLES.api.sendErrorReport(e);
             console.log(e);
             console.log(e.stacktrace);
+            this.exitError("INS_ERR",'instancing error ' + objName);
             throw 'instancing error ' + objName;
         }
     }
@@ -895,3 +896,9 @@ CABLES.Patch.prototype.getVars = function() {
     return this._variables;
 };
 
+CABLES.Patch.prototype.exitError(errorId,errorMessage)
+{
+    if (this.config.onError) this.patch.config.onError(errorId,errorMessage);
+    console.error(errorId,errorMessage)
+    this.aborted=true;
+}
