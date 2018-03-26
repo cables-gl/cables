@@ -896,9 +896,9 @@ CABLES.Patch.prototype.getVars = function() {
     return this._variables;
 };
 
-CABLES.Patch.prototype.exitError(errorId,errorMessage)
+CABLES.Patch.prototype.exitError=function(errorId,errorMessage)
 {
     if (this.config.onError) this.patch.config.onError(errorId,errorMessage);
-    console.error(errorId,errorMessage)
+    console.error(errorId,errorMessage);
     this.aborted=true;
 }
