@@ -49,7 +49,7 @@ CGL.Context = function() {
 
     this.exitError=function(msgId,msg)
     {
-        this.patch.exitError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.')
+        this.patch.exitError(msgId,msg)
         this.aborted = true;
     }
 
