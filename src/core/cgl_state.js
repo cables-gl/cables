@@ -47,6 +47,12 @@ CGL.Context = function() {
         }
     };
 
+    this.exitError=function(msgId,msg)
+    {
+        if (this.patch.config.onError) this.patch.config.onError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
+        this.aborted = true;
+    }
+
     this.setCanvas = function(id) {
         CGL.TextureEffectMesh = CGL.TextureEffectMesh || null;
         this.canvas = document.getElementById(id);
