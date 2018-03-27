@@ -1,5 +1,5 @@
 {
-    "updated": 1517483728262,
+    "updated": 1522056831503,
     "authorName": "tim",
     "id": "20637fe6-6567-4396-bc22-fa14bcbb853b",
     "created": 1517431313197,
@@ -25,5 +25,21 @@
         ],
         "name": "Ops.WebAudio.StartAudioContext"
     },
-    "summary": "Starts the web audio context on iOS"
+    "summary": "Starts the web audio context on iOS / Chrome",
+    "docs": {
+        "ports": [
+            {
+                "name": "Use Custom Selector",
+                "text": "Whether or not to to use custom selector(s), if not the canvas is used"
+            },
+            {
+                "name": "Selectors",
+                "text": "Selectors of the HTML DOM elements which start the audio context (separated by spaced, e.g. '#myButton .otherButtons'). Per default this is the whole patch – `#glcanvas`"
+            },
+            {
+                "name": "Is Ready",
+                "text": "Once the audio context has been started (and it is therefore save to play sounds) this becomes `true`"
+            }
+        ]
+    }
 }

@@ -1,5 +1,5 @@
 {
-    "updated": 1519814934953,
+    "updated": 1522140353030,
     "authorName": "pandur",
     "id": "1e71b340-b4f6-4c39-9a62-b8ac4bb10fdf",
     "created": 1519814753857,
@@ -34,7 +34,7 @@
         ],
         "name": "Ops.Gl.ViewPortSize"
     },
-    "summary": "Outputs the size of the render canvas",
+    "summary": "deprecated - use canvassize",
     "docs": {
         "ports": []
     }

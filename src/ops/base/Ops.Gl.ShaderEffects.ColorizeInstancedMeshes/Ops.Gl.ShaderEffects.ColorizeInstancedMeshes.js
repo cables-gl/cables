@@ -21,7 +21,12 @@ var srcBodyVert=''
     .endl();
 
 var srcHeadVert=''
-    .endl()+'IN float instanceIndex;'
+    .endl()+'#ifndef ATTRIB_instanceIndex'
+    .endl()+'  #define ATTRIB_instanceIndex'
+    .endl()+'  IN float instanceIndex;'
+    .endl()+'#endif'
+
+
     .endl()+'OUT float instanceIndexFrag;'
     .endl();
     
@@ -65,7 +70,7 @@ function updateLookupTexture()
     {
         if(inLookup.get())shader.define("LOOKUPTEX");
             else shader.removeDefine("LOOKUPTEX");
-        inLookup.uniform=new CGL.Uniform(shader,'t',moduleFrag.prefix+'lut',6);
+        inLookup.uniform=new CGL.Uniform(shader,'t',moduleFrag.prefix+'lut',5);
     }
     
 };
@@ -113,7 +118,7 @@ op.render.onTriggered=function()
 
     if(inLookup.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE6);
+        cgl.gl.activeTexture(cgl.gl.TEXTURE5);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLookup.get().tex);
 
     }

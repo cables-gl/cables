@@ -1,5 +1,5 @@
 {
-    "updated": 1512035653328,
+    "updated": 1522054884543,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "7eb9a1ec-daf2-445c-a364-0bffa626a84b",
@@ -12,22 +12,32 @@
             },
             {
                 "type": "0",
-                "name": "Filename"
+                "name": "Filename",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Use Canvas Size"
+                "name": "Use Canvas Size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Width",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "Height",
+                "subType": "integer"
             }
         ],
-        "name": "Ops.Gl.ScreenShot"
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Finished"
+            }
+        ],
+        "name": "Ops.Gl.SaveScreenShot"
     },
     "summary": "download the current screen content as png file"
 }
