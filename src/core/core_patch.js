@@ -264,7 +264,7 @@ CABLES.Patch.prototype.createOp = function(objName) {
             if (CABLES.api) CABLES.api.sendErrorReport(e);
             console.log(e);
             console.log(e.stacktrace);
-            this.exitError("INS_ERR",'instancing error ' + objName);
+            this.exitError("INSTANCE_ERR",'instancing error ' + objName);
             throw 'instancing error ' + objName;
         }
     }
@@ -764,8 +764,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             this.ops[i].onLoaded = null;
         }
     }
-
-    
 
     if(stopwatch)stopwatch.stop('init ops');
 

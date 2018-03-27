@@ -179,7 +179,7 @@ CGL.Context = function() {
             
             oldCanvasWidth = self.canvasWidth;
             oldCanvasHeight = self.canvasHeight;
-            this.setSize(self.canvasWidth,self.canvasHeight);
+            this.setSize(self.canvasWidth/this.pixelDensity,self.canvasHeight/this.pixelDensity);
             this.updateSize();
             
             for (var i = 0; i < cbResize.length; i++) cbResize[i]();
