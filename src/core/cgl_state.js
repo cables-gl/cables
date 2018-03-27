@@ -176,7 +176,8 @@ CGL.Context = function() {
         shaderStack.length = 0;
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
-            
+            console.log("Neu");
+
             oldCanvasWidth = self.canvasWidth;
             oldCanvasHeight = self.canvasHeight;
             this.setSize(self.canvasWidth/this.pixelDensity,self.canvasHeight/this.pixelDensity);
