@@ -1,0 +1,86 @@
+{
+    "updated": 1522165075124,
+    "authorName": "pandur",
+    "id": "045f291b-6f36-4d8a-8f78-3448436cc83e",
+    "created": 1522096052102,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Start Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Transition Distance",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.ShaderEffects.TransformInstanced"
+    }
+}
