@@ -1,0 +1,26 @@
+{
+    "updated": 1522229087310,
+    "authorName": "pandur",
+    "id": "5465280f-c547-4ba9-84b4-0219d3460ecd",
+    "created": 1521460008549,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "True"
+            },
+            {
+                "type": "1",
+                "name": "false"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Boolean.TriggerBoolean"
+    }
+}
