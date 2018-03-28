@@ -1,5 +1,3 @@
-
-op.name='PointMaterial';
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
@@ -14,9 +12,6 @@ var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-
-
-
 
 makeRound.set(true);
 doScale.set(false);
@@ -63,7 +58,8 @@ var textureMaskUniform=null;
 op.preRender=function()
 {
     if(shader)shader.bind();
-}
+    doRender();
+};
 
 function bindTextures()
 {
