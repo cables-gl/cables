@@ -3,37 +3,55 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Disable Scaling"
+                "name": "Disable Scaling",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Active"
+                "name": "Disable Scroll",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "HDPI Coordinates",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Touched"
+                "name": "Touched",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fingers"
+                "name": "Fingers",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Finger 1 X"
+                "name": "Finger 1 X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Finger 1 Y"
+                "name": "Finger 1 Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Finger 2 X"
+                "name": "Finger 2 X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Finger 2 Y"
+                "name": "Finger 2 Y",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -50,7 +68,7 @@
         ],
         "name": "Ops.Devices.TouchScreen"
     },
-    "updated": 1519889644729,
+    "updated": 1522141296669,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "cedffacf-0f09-4342-bd21-540bd9c8037d",

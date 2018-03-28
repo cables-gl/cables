@@ -1,5 +1,5 @@
 {
-    "updated": 1518205462804,
+    "updated": 1522165557614,
     "authorName": "pandur",
     "id": "eb3232e5-e947-4683-a17f-27a72d464b2c",
     "created": 1518204108335,
@@ -11,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Text"
+                "name": "Text",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -21,7 +22,8 @@
             },
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Sidebar.Slider"

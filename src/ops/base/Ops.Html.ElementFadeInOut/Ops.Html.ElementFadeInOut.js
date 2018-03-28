@@ -32,8 +32,6 @@ inVisible.onChange=function()
                     inEle.get().classList.add("CABLES_animFadedOut");
                 },inDuration.get()*1000);
             }
-
-            
         }
     }
     else
@@ -86,4 +84,3 @@ op.onDelete=function()
     styleEle=document.getElementById(eleId);
     if(styleEle)styleEle.remove();
 };
-

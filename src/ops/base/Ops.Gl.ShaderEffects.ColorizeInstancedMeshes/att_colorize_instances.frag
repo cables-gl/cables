@@ -5,10 +5,12 @@
 float MOD_rand=fract(sin(instanceIndexFrag));
 
 #ifdef LOOKUPTEX
-    col.rgb*=texture2D( MOD_lut, vec2(MOD_rand,0.5) ).rgb;
+    // col.rgb*= (texture2D( MOD_lut, vec2(MOD_rand,0.5) ).rgb-vec3(0.5))*2.0*MOD_strength;
+    col.rgb*=  ( (texture2D( MOD_lut, vec2(MOD_rand,0.5) ).rgb+0.5)*MOD_strength);
+    // col.rgb*=MOD_strength;
 #endif
 
 #ifdef MULCOLOR
-    col.rgb*=MOD_rand*2.0;
+    col.rgb*=(MOD_rand*2.0)*MOD_strength;
 #endif
 
