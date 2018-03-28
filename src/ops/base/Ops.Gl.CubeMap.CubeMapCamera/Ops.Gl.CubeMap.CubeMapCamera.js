@@ -14,6 +14,8 @@ var framebuffer=null;
 var modelview = mat4.create();
 var dynamicCubemap;
 inSize.onChange=reInit;
+render.onTriggered=doRender;
+op.preRender=doRender;
 
 var cubemapTargets=[  // targets for use in some gl functions for working with cubemaps
         gl.TEXTURE_CUBE_MAP_POSITIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_X, 
@@ -94,7 +96,8 @@ checkError(111);
     initialized=true;
 }
 
-render.onTriggered=function()
+
+function doRender()
 {
     if(!initialized) init();
     

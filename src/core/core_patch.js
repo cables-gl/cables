@@ -937,7 +937,6 @@ CABLES.Patch.prototype.preRenderOps = function() {
             count++;
         }
     }
-    console.log('prerendered '+count+' ops');
     
     if(stopwatch)stopwatch.stop('prerendering');
 };
