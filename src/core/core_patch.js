@@ -933,6 +933,7 @@ CABLES.Patch.prototype.preRenderOps = function() {
         if(this.ops[i].preRender)
         {
             this.ops[i].preRender();
+            console.log('prerender '+this.ops[i].objName);
             count++;
         }
     }

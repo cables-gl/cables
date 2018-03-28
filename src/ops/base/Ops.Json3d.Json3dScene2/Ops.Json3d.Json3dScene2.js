@@ -25,6 +25,7 @@ var cloneTransformStore=[];
 var data=null;
 filename.onChange=reload;
 op.exe.onTriggered=render;
+op.preRender=render;
 
 function render()
 {

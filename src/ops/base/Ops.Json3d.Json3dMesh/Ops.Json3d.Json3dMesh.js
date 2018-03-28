@@ -38,7 +38,7 @@ inNormals.onChange=setMeshLater;
 
 inSize.onChange=updateScale;
 var needSetMesh=true;
-op.preRender=render;
+
 
 function calcNormals()
 {
