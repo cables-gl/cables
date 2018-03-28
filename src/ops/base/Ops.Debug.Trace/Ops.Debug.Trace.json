@@ -1,0 +1,24 @@
+{
+    "updated": 1521128413392,
+    "authorName": "tim",
+    "id": "1b52e2b7-b3a4-400e-9a97-1b27ce80deed",
+    "created": 1521128413396,
+    "summary": "Outputs a stack trace to the console",
+    "docs": {
+        "ports": [
+            {
+                "name": "Trace",
+                "text": "Prints the current stack trace to the console"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trace"
+            }
+        ],
+        "name": "Ops.Debug.Trace"
+    }
+}
