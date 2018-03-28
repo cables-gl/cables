@@ -210,7 +210,7 @@ function bindTextures()
 
 op.preRender=function()
 {
-    shader.bind();    
+    shader.bind();
 };
 
 render.onTriggered=function()

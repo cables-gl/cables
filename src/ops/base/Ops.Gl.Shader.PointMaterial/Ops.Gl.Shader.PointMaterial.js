@@ -60,6 +60,11 @@ var textureUniform=null;
 var textureMask=op.inTexture("Texture Mask");
 var textureMaskUniform=null;
 
+op.preRender=function()
+{
+    if(shader)shader.bind();
+}
+
 function bindTextures()
 {
     if(texture.get())
