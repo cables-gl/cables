@@ -1,1 +1,38 @@
-{}
+{
+    "summary": "Emulates a MIDI keyboard using your regular keyboard",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "canvas only",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Note Number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Channel",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Command",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Devices.Keyboard.MidiKeyboard"
+    }
+}
