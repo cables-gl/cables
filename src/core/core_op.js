@@ -53,20 +53,31 @@ CABLES.Op = function()
     this.onLoaded=null;
     this.onDelete=null;
     this.onUiAttrChange=null;
-
     this._eventCallbacks=[];
-
     this._instances=null;
-};
-{
 
+    /**
+     * overwrite this to prerender shader and meshes / will be called by op `loadingStatus`
+     * @name CABLES.Op#preRender
+     * @function
+     */
+    this.preRender=null;
+
+    /**
+     * overwrite this to initialize your op
+     * @name CABLES.Op#init
+     * @function
+     */
+    this.init=null;
+};
+
+{
     CABLES.Op.prototype.clearUiAttrib=function(name)
     {
         var obj={};
         obj.name=null;
         this.uiAttrib(obj);
     };
-
 
     CABLES.Op.prototype.setTitle=function(name)
     {
@@ -76,11 +87,6 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.setUiAttrib=CABLES.Op.prototype.uiAttr=function(newAttribs)
     {
-        // if(newAttribs && newAttribs.error)
-        // {
-        //     console.error('error:',this.name,newAttribs.error);
-        // }
-
         if(!this.uiAttribs)this.uiAttribs={};
         for(var p in newAttribs)
         {
@@ -140,7 +146,6 @@ CABLES.Op = function()
         if(this.onAddPort)this.onAddPort(p);
         return p;
     };
-
 
     /**
      * create a function/trigger input port

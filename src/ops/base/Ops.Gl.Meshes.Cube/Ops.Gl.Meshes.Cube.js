@@ -26,6 +26,13 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
+op.preRender=function()
+{
+    buildMesh();
+    mesh.render(cgl.getShader());
+};
+
+
 function buildMesh()
 {
     if(!geom)geom=new CGL.Geometry("cubemesh");
@@ -178,6 +185,6 @@ width.onValueChanged=buildMesh;
 height.onValueChanged=buildMesh;
 lengt.onValueChanged=buildMesh;
 center.onValueChanged=buildMesh;
-buildMesh();
+
 
 

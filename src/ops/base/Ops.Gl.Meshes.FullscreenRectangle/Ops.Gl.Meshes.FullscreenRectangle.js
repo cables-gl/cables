@@ -33,7 +33,7 @@ inTexture.onChange=function()
     }
 };
 
-
+op.preRender=
 render.onTriggered=function()
 {
     if( cgl.getViewPort()[2]!=w || cgl.getViewPort()[3]!=h )

@@ -208,6 +208,11 @@ function bindTextures()
     if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
 };
 
+op.preRender=function()
+{
+    shader.bind();    
+};
+
 render.onTriggered=function()
 {
     shader.bindTextures=bindTextures;

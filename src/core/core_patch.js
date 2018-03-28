@@ -915,3 +915,24 @@ CABLES.Patch.prototype.exitError=function(errorId,errorMessage)
         this.aborted=true;
     }
 }
+
+/**
+ * @name CABLES.Patch#preRenderOps
+ * @description invoke pre rendering of ops
+ * @function
+ */
+CABLES.Patch.prototype.preRenderOps = function() {
+
+    console.log("prerendering...");
+    var stopwatch=null;
+    if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('prerendering');
+    
+    for(var i=0;i<this.ops.length;i++)
+    {
+        console.log(" - prerender "+this.ops[i].objName);
+        if(this.ops[i].preRender)this.ops[i].preRender();
+    }
+    
+    if(stopwatch)stopwatch.stop('prerendering');
+};
+

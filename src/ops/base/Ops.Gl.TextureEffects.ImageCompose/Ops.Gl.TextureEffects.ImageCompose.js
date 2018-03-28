@@ -35,7 +35,7 @@ var uniBgAlpha=new CGL.Uniform(bgShader,'f','a',bgAlpha);
 
 var selectedFilter=CGL.Texture.FILTER_LINEAR;
 var selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
-
+op.preRender=doRender;
 
 function initEffect()
 {

@@ -386,6 +386,7 @@ function updateToggles()
 
 updateToggles();
 
+op.preRender=
 execute.onTriggered=function()
 {
     if(!shader)return;
