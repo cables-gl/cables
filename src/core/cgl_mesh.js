@@ -153,6 +153,33 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 
     for(i=0;i<this._attributes.length;i++) this._attributes[i].loc=-1;
 
+
+
+    // console.log('vertIndices',this.vertIndicesTyped.length);
+    
+    // console.log('attr:',attr.name);
+    // console.log('  numItems',numItems);
+
+    // if(attr.name=='attrTexCoord')
+    // {
+    //     console.log(attr);
+    // }
+
+    // for(var i=0;i<vertIndices.length;i++)
+    // {
+    //     if(vertIndices[i]>=this._geom.vertices.length/3)
+    //     {
+    //         console.warn("invalid index in "+this._geom.name);
+    //         // console.log('this._geom.vertices length',this._geom.vertices.length/3);
+    //         // console.log('vertIndices.length',vertIndices.length);
+    //         // console.log('index',vertIndices[i]);
+    //         return;
+    //     }
+    // }
+
+
+
+
     return attr;
     // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, null);
 };
@@ -165,7 +192,15 @@ CGL.Mesh.prototype.getAttributes=function()
 
 CGL.Mesh.prototype.updateTexCoords=function(geom)
 {
-    if(geom.texCoords && geom.texCoords.length>0) this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
+    if(geom.texCoords && geom.texCoords.length>0)
+    {
+        this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
+    }
+    else 
+    {
+        var tcBuff=new Float32Array( Math.round((geom.vertices.length/3)*2) );
+        this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,tcBuff,2);
+    }
 };
 
 CGL.Mesh.prototype._setVertexNumbers=function()
@@ -191,6 +226,20 @@ CGL.Mesh.prototype.setVertexIndices=function(vertIndices)
 {
     if(vertIndices.length>0)
     {
+
+        for(var i=0;i<vertIndices.length;i++)
+        {
+            if(vertIndices[i]>=this._geom.vertices.length/3)
+            {
+                console.warn("invalid index in "+this._geom.name);
+                // console.log('this._geom.vertices length',this._geom.vertices.length/3);
+                // console.log('vertIndices.length',vertIndices.length);
+                // console.log('index',vertIndices[i]);
+                return;
+            }
+        }
+
+
         this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 
         // todo cache this ?
@@ -361,6 +410,7 @@ CGL.Mesh.prototype.unBind=function(shader)
 
         if(this._attributes[i].loc!=-1) this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
     }
+    
 };
 
 CGL.Mesh.prototype.meshChanged=function()
