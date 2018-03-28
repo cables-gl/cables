@@ -1,5 +1,3 @@
-op.name="Performance";
-
 var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 var next=this.addOutPort(new Port(this,"childs",OP_PORT_TYPE_FUNCTION)) ;
 
@@ -143,6 +141,7 @@ function updateText()
     //     CGL.profileNonTypedAttrib=0;
     // CGL.profileNonTypedAttribNames="";
 
+    if(warn && warn.length>0)console.warn(warn);
     
     if(warn.length>0)
     {
