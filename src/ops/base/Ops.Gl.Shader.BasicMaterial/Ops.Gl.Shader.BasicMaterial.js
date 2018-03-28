@@ -17,55 +17,37 @@ shaderOut.set(shader);
 render.onTriggered=doRender;
 
 
+
+
 function bindTextures()
 {
-    // if(op.texture.get())
-    // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.get().tex);
-    // }
-    // else
-    // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-    // }
-
-
     if(diffuseTexture.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
 
-
-
     if(op.textureOpacity.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.get().tex);
     }
-    // else
-    // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-    //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-    // }
 }
+
+op.preRender=function()
+{
+    shader.bind();
+    doRender();
+};
 
 function doRender()
 {
     if(!shader)return;
 
-// CGL.MESH.lastMesh=null;
-// CGL.MESH.lastShader=null;
-
     cgl.setShader(shader);
     shader.bindTextures();
-    
-    // if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
-        // else cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     trigger.trigger();
-    // if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     cgl.setPreviousShader();
 }

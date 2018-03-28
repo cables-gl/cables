@@ -4,7 +4,7 @@ var child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
 var value=op.outValue("Result");
 var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
 
-value.set(false);
+value.set(0.5);
 text.set('Slider');
 
 var textContent = document.createTextNode(text.get()); 

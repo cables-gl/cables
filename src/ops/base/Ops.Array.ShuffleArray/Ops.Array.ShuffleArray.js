@@ -1,5 +1,3 @@
-op.name="ShuffleArray";
-
 // vars
 var arr=[];
 

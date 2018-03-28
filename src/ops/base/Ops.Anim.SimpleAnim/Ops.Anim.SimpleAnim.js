@@ -29,7 +29,6 @@ function init()
 {
     if(anim.keys.length!=3)
     {
-        console.log("reinit!");
         anim.setValue(0,0);
         anim.setValue(1,0);
         anim.setValue(2,0);

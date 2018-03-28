@@ -24,7 +24,7 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._attributes=[];
     this._attributes=[];
     this._geom=null;
-    this.numInstances=0;
+    this._numInstances=0;
     this._glPrimitive=glPrimitive;
     this.addVertexNumbers=false;
     this.feedBackAttributes=[];
@@ -34,8 +34,16 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._feedBacksChanged=false;
     this._transformFeedBackLoc=-1;
     this._lastAttrUpdate=0;
-};
 
+    Object.defineProperty(this, 'numInstances', {
+        get: function() {
+            return this._numInstances;
+        },
+        set: function(v) {
+            this.setNumInstances(v)
+        }
+      });
+};
 
 CGL.Mesh.prototype.updateVertices=function(geom)
 {
@@ -67,18 +75,16 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     var cb=null;
     var instanced=false;
 
-
     if(typeof options=='function')
     {
-        // deprecated
         cb=options;
     }
+
     if(typeof options=='object')
     {
         if(options.cb)cb=options.cb;
         if(options.instanced)instanced=options.instanced;
     }
-
 
     if(!(array instanceof Float32Array))
     {
@@ -96,11 +102,8 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
         // return;
     }
 
-
     for(var i=0;i<this._attributes.length;i++)
     {
-        // console.log('  -  ',this._attributes[i].name,name);
-
         if(this._attributes[i].name==name)
         {
             // console.log('numItems',name,numItems);
@@ -117,11 +120,8 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
             // }
 
             this._attributes[i].numItems=numItems;
-
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
             this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
-
-
 
             return this._attributes[i];
         }
@@ -153,6 +153,33 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 
     for(i=0;i<this._attributes.length;i++) this._attributes[i].loc=-1;
 
+
+
+    // console.log('vertIndices',this.vertIndicesTyped.length);
+    
+    // console.log('attr:',attr.name);
+    // console.log('  numItems',numItems);
+
+    // if(attr.name=='attrTexCoord')
+    // {
+    //     console.log(attr);
+    // }
+
+    // for(var i=0;i<vertIndices.length;i++)
+    // {
+    //     if(vertIndices[i]>=this._geom.vertices.length/3)
+    //     {
+    //         console.warn("invalid index in "+this._geom.name);
+    //         // console.log('this._geom.vertices length',this._geom.vertices.length/3);
+    //         // console.log('vertIndices.length',vertIndices.length);
+    //         // console.log('index',vertIndices[i]);
+    //         return;
+    //     }
+    // }
+
+
+
+
     return attr;
     // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, null);
 };
@@ -165,7 +192,15 @@ CGL.Mesh.prototype.getAttributes=function()
 
 CGL.Mesh.prototype.updateTexCoords=function(geom)
 {
-    if(geom.texCoords && geom.texCoords.length>0) this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
+    if(geom.texCoords && geom.texCoords.length>0)
+    {
+        this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
+    }
+    else 
+    {
+        var tcBuff=new Float32Array( Math.round((geom.vertices.length/3)*2) );
+        this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,tcBuff,2);
+    }
 };
 
 CGL.Mesh.prototype._setVertexNumbers=function()
@@ -191,6 +226,20 @@ CGL.Mesh.prototype.setVertexIndices=function(vertIndices)
 {
     if(vertIndices.length>0)
     {
+
+        for(var i=0;i<vertIndices.length;i++)
+        {
+            if(vertIndices[i]>=this._geom.vertices.length/3)
+            {
+                console.warn("invalid index in "+this._geom.name);
+                // console.log('this._geom.vertices length',this._geom.vertices.length/3);
+                // console.log('vertIndices.length',vertIndices.length);
+                // console.log('index',vertIndices[i]);
+                return;
+            }
+        }
+
+
         this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 
         // todo cache this ?
@@ -243,11 +292,8 @@ CGL.Mesh.prototype.setGeom=function(geom)
     for(var index in geomAttribs)
     {
         this.setAttribute(index,geomAttribs[index].data,geomAttribs[index].itemSize);
-        console.log("NEW GEOM ATTRIB!!!",index);
     }
-
 };
-
 
 CGL.Mesh.prototype._preBind=function(shader)
 {
@@ -259,7 +305,6 @@ CGL.Mesh.prototype._preBind=function(shader)
         }
     }
 };
-
 
 CGL.Mesh.prototype._bind=function(shader)
 {
@@ -280,7 +325,7 @@ CGL.Mesh.prototype._bind=function(shader)
             this._cgl.gl.enableVertexAttribArray(attribute.loc);
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
 
-            if(attribute.instanced || attribute.name=='instMat')
+            if(attribute.instanced)
             {
                 // todo: easier way to fill mat4 attribs...
                 if(attribute.itemSize<=4)
@@ -324,11 +369,9 @@ CGL.Mesh.prototype._bind=function(shader)
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
                         // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
                         this._cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
-
                     }
                 }
                 this.bindFeedback(attribute);
-
             }
         }
     }
@@ -345,11 +388,13 @@ CGL.Mesh.prototype.unBind=function(shader)
     {
         if(this._attributes[i].instanced || this._attributes[i].name=='instMat')
         {
+            this._attributes[i].instanced=true;
             // todo: easier way to fill mat4 attribs...
             if(this._attributes[i].itemSize<=4)
             {
-                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
-                // this._cg l.gl.disableVertexAttribArray(this._attributes[i].loc);
+                // why does this result in warninges???
+                 this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
+                // this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
             }
             else
             {
@@ -365,6 +410,7 @@ CGL.Mesh.prototype.unBind=function(shader)
 
         if(this._attributes[i].loc!=-1) this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
     }
+    
 };
 
 CGL.Mesh.prototype.meshChanged=function()
@@ -388,7 +434,6 @@ CGL.Mesh.prototype.printDebug=function(shader)
         if(error==this._cgl.gl.INVALID_VALUE)console.log("INVALID_VALUE");
         if(error==this._cgl.gl.CONTEXT_LOST_WEBGL)console.log("CONTEXT_LOST_WEBGL");
         if(error==this._cgl.gl.NO_ERROR)console.log("NO_ERROR");
-
 
         console.error('mesh error');
         console.log('shader:',shader.name);
@@ -455,7 +500,7 @@ CGL.Mesh.prototype.render=function(shader)
 
     shader.bind();
 
-if(shader.bindTextures)shader.bindTextures();
+    if(shader.bindTextures)shader.bindTextures();
 
     if(needsBind) this._bind(shader);
     if(this.addVertexNumbers)this._setVertexNumbers();
@@ -496,7 +541,7 @@ if(shader.bindTextures)shader.bindTextures();
     }
     else
     {
-        if(this.numInstances===0)
+        if(this._numInstances===0)
         {
             this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
             // if(this._bufVerticesIndizes.numItems>100)console.log(this._bufVerticesIndizes.numItems);
@@ -505,22 +550,28 @@ if(shader.bindTextures)shader.bindTextures();
         }
         else
         {
-            this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this.numInstances);
+            this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this._numInstances);
         }
 
         // this.printDebug(shader);
     }
-    
-
     // this.unBind(shader);
-
     // cgl.lastMesh=this;
     // cgl.lastMeshShader=shader;
-
 };
+
+CGL.Mesh.prototype.setNumInstances=function(n)
+{
+    this._numInstances=n;
+    if(n>0)
+    {
+        var indexArr=new Float32Array(n);
+        for(var i=0;i<n;i++) indexArr[i]=i;
+        this.setAttribute('instanceIndex',indexArr,1,{instanced:true});
+    }
+}
 
 CGL.Mesh.prototype.dispose=function()
 {
-
 
 };

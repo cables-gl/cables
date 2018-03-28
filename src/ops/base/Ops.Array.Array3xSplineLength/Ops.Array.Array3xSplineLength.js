@@ -32,9 +32,9 @@ inCalc.onTriggered=function()
             l+=Math.sqrt(xd*xd + yd*yd + zd*zd);
         }
         
+        if(l!=l)l=0;
+        outValue.set(l);
+        
     }
-    
-    outValue.set(l);
-    
-    
-}
+
+};

@@ -47,6 +47,12 @@ CGL.Context = function() {
         }
     };
 
+    this.exitError=function(msgId,msg)
+    {
+        this.patch.exitError(msgId,msg);
+        this.aborted = true;
+    }
+
     this.setCanvas = function(id) {
         CGL.TextureEffectMesh = CGL.TextureEffectMesh || null;
         this.canvas = document.getElementById(id);
@@ -68,8 +74,9 @@ CGL.Context = function() {
 
 
         if (!this.gl) {
-            if (this.patch.config.onError) this.patch.config.onError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
-            this.aborted = true;
+
+            this.exitError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
+
             return;
         } else {
             var derivativeExt = this.gl.getExtension("GL_OES_standard_derivatives");
@@ -169,10 +176,9 @@ CGL.Context = function() {
         shaderStack.length = 0;
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
-            
             oldCanvasWidth = self.canvasWidth;
             oldCanvasHeight = self.canvasHeight;
-            this.setSize(self.canvasWidth,self.canvasHeight);
+            this.setSize(self.canvasWidth/this.pixelDensity,self.canvasHeight/this.pixelDensity);
             this.updateSize();
             
             for (var i = 0; i < cbResize.length; i++) cbResize[i]();

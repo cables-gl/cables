@@ -1,0 +1,40 @@
+{
+    "updated": 1521736215641,
+    "authorName": "pandur",
+    "id": "a590b203-2b56-4e25-8f49-12c0f6549972",
+    "created": 1521733468459,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "frequency",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "mul",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "add",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.GrassWobble"
+    },
+    "summary": "simulate grass motion in wind",
+    "docs": {
+        "ports": []
+    }
+}

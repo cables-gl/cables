@@ -331,7 +331,7 @@ function setUpDiv()
     }
     updateDivSize();
     elementPort.set(div);
-    op.log('div', div);
+    // op.log('div', div);
 }
 
 var listenerElement=null;

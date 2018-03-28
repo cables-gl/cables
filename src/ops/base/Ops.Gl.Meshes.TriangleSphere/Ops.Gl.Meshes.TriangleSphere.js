@@ -11,6 +11,7 @@ var inIterations=op.inValue("Iterations",4);
 var geomOut=op.outObject("Geometry");
 
 var flat=op.inValueBool("Flat",false);
+var inDraw=op.inValueBool("Draw",true);
 var geom=null;
 var mesh=null;
 var cgl=op.patch.cgl;
@@ -28,7 +29,7 @@ render.onTriggered=function()
     cgl.gl.cullFace(cgl.gl.BACK);
     cgl.gl.enable(cgl.gl.CULL_FACE);
 
-    if(mesh) mesh.render(cgl.getShader());
+    if(inDraw.get() && mesh) mesh.render(cgl.getShader());
     next.trigger();
 
     cgl.gl.disable(cgl.gl.CULL_FACE);

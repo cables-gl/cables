@@ -1,5 +1,3 @@
-op.name="Div";
-
 // var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
 var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 
@@ -35,6 +33,8 @@ var bgR=op.addInPort(new Port(op,"Background Red",OP_PORT_TYPE_VALUE,{ display:'
 var bgG=op.addInPort(new Port(op,"Background Green",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var bgB=op.addInPort(new Port(op,"Background Blue",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var bgA=op.addInPort(new Port(op,"Background Opacity",OP_PORT_TYPE_VALUE,{ display:'range' }));
+
+var outElement=op.outObject("Element");
 
 r.set(1);
 g.set(1);
@@ -219,6 +219,7 @@ function updateClasses()
 function init()
 {
     element = document.createElement('div');
+    outElement.set(element);
     element.style.padding="10px";
     element.style.position="absolute";
     element.style.overflow="hidden";

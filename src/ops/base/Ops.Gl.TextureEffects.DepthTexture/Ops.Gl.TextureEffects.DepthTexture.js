@@ -1,8 +1,8 @@
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
 var farPlane=op.addInPort(new Port(op,"farplane",OP_PORT_TYPE_VALUE));
 var nearPlane=op.addInPort(new Port(op,"nearplane",OP_PORT_TYPE_VALUE));
+var inInv=op.inValueBool("Invert",false);
 
 farPlane.set(100.0);
 nearPlane.set(0.1);
@@ -29,6 +29,10 @@ var srcFrag=''
     .endl()+'       float z=col.r;'
     .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
 
+    .endl()+'       #ifdef INVERT'
+    .endl()+'       c=1.0-c;'
+    .endl()+'       #endif'
+
     .endl()+'       col=vec4(c,c,c,1.0);'
 
     .endl()+'   #endif'
@@ -42,6 +46,11 @@ var textureUniform=new CGL.Uniform(shader,'t','image',0);
 var uniFarplane=new CGL.Uniform(shader,'f','f',farPlane);
 var uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
 
+inInv.onChange=function()
+{
+    if(inInv.get())shader.define("INVERT");
+        else shader.removeDefine("INVERT");
+}
 
 render.onTriggered=function()
 {

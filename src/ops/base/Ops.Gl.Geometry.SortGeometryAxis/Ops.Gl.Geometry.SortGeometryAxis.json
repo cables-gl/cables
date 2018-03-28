@@ -26,5 +26,9 @@
             }
         ],
         "name": "Ops.Gl.Geometry.SortGeometryAxis"
+    },
+    "summary": "sort geometry triangles by position ",
+    "docs": {
+        "ports": []
     }
 }

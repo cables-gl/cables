@@ -110,7 +110,7 @@ function updateMatcap()
                 for(var y=0;y<16;y++)
                 {
                     var c=y*16;
-                    c*=Math.min(1,(x+y/3)/9);
+                    c*=Math.min(1,(x+y/3)/8);
                     pixels[(x+y*16)*4+0]=pixels[(x+y*16)*4+1]=pixels[(x+y*16)*4+2]=c;
                     pixels[(x+y*16)*4+3]=255;
                 }
@@ -206,6 +206,11 @@ function bindTextures()
     if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
     if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
     if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
+};
+
+op.preRender=function()
+{
+    shader.bind();
 };
 
 render.onTriggered=function()

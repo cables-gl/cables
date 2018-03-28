@@ -1,0 +1,30 @@
+{
+    "updated": 1521889442646,
+    "authorName": "tim",
+    "id": "88eb7693-238c-4f2d-9209-e0fc3c298f89",
+    "created": 1521028488931,
+    "summary": "Let’s a object through only if control bool is true",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object In"
+            },
+            {
+                "type": "0",
+                "name": "Enabled",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Object Out"
+            }
+        ],
+        "name": "Ops.Json.ObjectRelay"
+    }
+}

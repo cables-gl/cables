@@ -3,126 +3,158 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Text"
+                "name": "Text",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Id"
+                "name": "Id",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Class"
+                "name": "Class",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Visible"
+                "name": "Visible",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Center X"
+                "name": "Center X",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Center Y"
+                "name": "Center Y",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Left"
+                "name": "Left",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Top"
+                "name": "Top",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Border radius"
+                "name": "Border radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Font size"
+                "name": "Font size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Font Family"
+                "name": "Font Family",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "cursor"
+                "name": "cursor",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Opacity"
+                "name": "Opacity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Text Red"
+                "name": "Text Red",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Text Green"
+                "name": "Text Green",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Text Blue"
+                "name": "Text Blue",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Text Opacity"
+                "name": "Text Opacity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Background Red"
+                "name": "Background Red",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Background Green"
+                "name": "Background Green",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Background Blue"
+                "name": "Background Blue",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Background Opacity"
+                "name": "Background Opacity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Ignore Mouse"
+                "name": "Ignore Mouse",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Auto width/height"
+                "name": "Auto width/height",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "Height",
+                "subType": "number"
             }
         ],
         "portsOut": [
+            {
+                "type": "2",
+                "name": "Element"
+            },
             {
                 "type": "1",
                 "name": "OnClick"
             },
             {
                 "type": "0",
-                "name": "MouseOver"
+                "name": "MouseOver",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Client Width"
+                "name": "Client Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Client Height"
+                "name": "Client Height",
+                "subType": "number"
             }
         ],
         "name": "Ops.Html.Elements.Div"
     },
-    "updated": 1516122450876,
+    "updated": 1521810938298,
     "authorName": "pandur",
     "id": "4b7c6c44-54a6-4ac6-82ac-3de2450cbc80",
     "created": 1516122448028

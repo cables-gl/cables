@@ -102,6 +102,8 @@ CABLES.Patch = function(cfg) {
         }
     }
 
+    console.log("made with cables.gl")
+
 };
 
 CABLES.Patch.prototype.isPlaying = function() {
@@ -262,6 +264,7 @@ CABLES.Patch.prototype.createOp = function(objName) {
             if (CABLES.api) CABLES.api.sendErrorReport(e);
             console.log(e);
             console.log(e.stacktrace);
+            this.exitError("INSTANCE_ERR",'instancing error ' + objName);
             throw 'instancing error ' + objName;
         }
     }
@@ -292,6 +295,8 @@ CABLES.Patch.prototype.addOp = function(objName, uiAttribs) {
 
         if (this.onAdd) this.onAdd(op);
     }
+
+    if(op.init)op.init();
 
     // if(next) next(op);
     return op;
@@ -754,9 +759,18 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     if(stopwatch)stopwatch.stop('onloaded');
 
     for (var i in this.ops) {
-        if (this.ops[i].onLoaded) {
+        if (this.ops[i].onLoaded) { // TODO: deprecate!!!
             this.ops[i].onLoaded();
             this.ops[i].onLoaded = null;
+        }
+    }
+
+    if(stopwatch)stopwatch.stop('init ops');
+
+    for (var i in this.ops) {
+        if (this.ops[i].init) {
+            this.ops[i].init();
+            this.ops[i].init = null;
         }
     }
 
@@ -891,5 +905,39 @@ CABLES.Patch.prototype.getVar = function(name) {
  */
 CABLES.Patch.prototype.getVars = function() {
     return this._variables;
+};
+
+CABLES.Patch.prototype.exitError=function(errorId,errorMessage)
+{
+    if(this && this.config && this.config.onError)
+    {
+        this.config.onError(errorId,errorMessage);
+        this.aborted=true;
+    }
+}
+
+/**
+ * @name CABLES.Patch#preRenderOps
+ * @description invoke pre rendering of ops
+ * @function
+ */
+CABLES.Patch.prototype.preRenderOps = function() {
+
+    console.log("prerendering...");
+    var stopwatch=null;
+    if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('prerendering');
+
+    var count=0;
+    for(var i=0;i<this.ops.length;i++)
+    {
+        if(this.ops[i].preRender)
+        {
+            this.ops[i].preRender();
+            console.log('prerender '+this.ops[i].objName);
+            count++;
+        }
+    }
+    
+    if(stopwatch)stopwatch.stop('prerendering');
 };
 

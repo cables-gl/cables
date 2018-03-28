@@ -74,9 +74,6 @@ render.onTriggered=function()
 
     if(cgl.getShader()!=shader)
     {
-        
-        console.log('fracture RECOMPILE');
-        
         if(shader) removeModule();
         shader=cgl.getShader();
 

@@ -1,5 +1,3 @@
-op.name="Performance";
-
 var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 var next=this.addOutPort(new Port(this,"childs",OP_PORT_TYPE_FUNCTION)) ;
 
@@ -22,6 +20,9 @@ var avgMs=0;
 var selfTime=0;
 var canvas=null;
 var lastTime=0;
+var loadingCounter=0;
+
+var loadingChars=['|','/','-','\\'];
 
 for(var i=0;i<numBars;i++)
 {
@@ -33,10 +34,11 @@ element.id="performance";
 element.style.position="absolute";
 element.style.left="0px";
 element.style.top="0px";
-element.style.opacity="0.9";
-element.style.padding="4px";
+element.style.opacity="0.8";
+element.style.padding="10px";
 element.style.cursor="pointer";
 element.style.background="#222";
+element.style.color="white";
 element.style["font-family"]="monospace";
 element.style["font-size"]="11px";
 element.style["z-index"]="9999";
@@ -139,6 +141,7 @@ function updateText()
     //     CGL.profileNonTypedAttrib=0;
     // CGL.profileNonTypedAttribNames="";
 
+    if(warn && warn.length>0)console.warn(warn);
     
     if(warn.length>0)
     {
@@ -146,6 +149,10 @@ function updateText()
     }
 
     element.innerHTML=fps+" fps | "+Math.round(childsTime*100)/100+"ms "+warn;
+    if(op.patch.loading.getProgress()!=1.0)
+    {
+        element.innerHTML+="<br/>loading "+op.patch.loading.getProgress()+' '+loadingChars[ (++loadingCounter)%loadingChars.length ];
+    }
     
     if(opened)
     {
@@ -169,15 +176,14 @@ function updateText()
         avgMs/=count;
         avgMsChilds/=count;
 
-
-        element.innerHTML+='<br/> '+cgl.canvasWidth+' x '+cgl.canvasHeight;
+        element.innerHTML+='<br/> '+cgl.canvasWidth+' x '+cgl.canvasHeight+' (x'+cgl.pixelDensity+') ';
         element.innerHTML+='<br/>frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         element.innerHTML+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
         
         element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+
-        ' uniforms: '+Math.ceil(CGL.profileUniformCount/fps)+
-        ' mesh.setGeom: '+CGL.profileMeshSetGeom+
-        ' videos: '+CGL.profileVideosPlaying;
+            ' uniforms: '+Math.ceil(CGL.profileUniformCount/fps)+
+            ' mesh.setGeom: '+CGL.profileMeshSetGeom+
+            ' videos: '+CGL.profileVideosPlaying;
         
     }
 

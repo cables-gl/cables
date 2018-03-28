@@ -21,6 +21,7 @@ var outBeatDuration=op.outValue("Tick Duration");
 eventIn.onValueChanged=function()
 {
     if(!eventIn.get())return;
+    
 
     var data=eventIn.get().data;
 
@@ -35,6 +36,7 @@ eventIn.onValueChanged=function()
     }
     else if (isTick)
     {
+
         if (tickCount==0)
         {
             if(lastBeat!=0)

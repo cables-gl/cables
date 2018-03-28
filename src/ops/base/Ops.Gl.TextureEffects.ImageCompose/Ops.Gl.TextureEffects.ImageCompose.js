@@ -36,7 +36,6 @@ var uniBgAlpha=new CGL.Uniform(bgShader,'f','a',bgAlpha);
 var selectedFilter=CGL.Texture.FILTER_LINEAR;
 var selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-
 function initEffect()
 {
     if(effect)effect.delete();
@@ -143,6 +142,13 @@ useVPSize.onValueChanged=function()
     }
     updateResolution();
     
+};
+
+
+op.preRender=function()
+{
+    doRender();
+    bgShader.bind();
 };
 
 

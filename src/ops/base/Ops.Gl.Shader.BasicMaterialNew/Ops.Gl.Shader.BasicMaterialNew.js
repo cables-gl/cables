@@ -8,7 +8,7 @@ shaderOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
 
 
-var shader=new CGL.Shader(cgl,'BasicMaterial');
+var shader=new CGL.Shader(cgl,'BasicMaterialNew');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=bindTextures;
 shader.setSource(attachments.basicmaterial_vert,attachments.basicmaterial_frag);
@@ -30,6 +30,12 @@ function bindTextures()
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.get().tex);
     }
+}
+
+op.preRender=function()
+{
+    shader.bind();
+    doRender();
 }
 
 function doRender()

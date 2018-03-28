@@ -24,6 +24,7 @@ inSlices.onChange=function(){ mesh=null; };
 inStacks.onChange=function(){ mesh=null; };
 inRadius.onChange=function(){ mesh=null; };
 
+op.preRender=
 render.onTriggered=function()
 {
     if(!mesh) updateMesh();

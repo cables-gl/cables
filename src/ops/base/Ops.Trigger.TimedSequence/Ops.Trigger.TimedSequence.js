@@ -25,7 +25,6 @@ for(var i=0;i<32;i++)
 
 function updateNames()
 {
-    console.log("updatenames");
     var names=[];
     for(var i=0;i<triggers.length;i++)
     {

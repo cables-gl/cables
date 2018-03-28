@@ -61,7 +61,7 @@ function setup()
         for(var i=0;i<num;i++)
         {
             var index=i;
-            if(i%3!=0)continue;
+            // if(i%3!=0)continue;
             if(doRand)
             {
                 index=Math.seededRandom()*(faces.length/3);
@@ -158,7 +158,7 @@ function setup()
     if(op.patch.cgl.glVersion>=2) 
     {
         mesh.numInstances=num;
-        mesh.addAttribute('instMat',matrixArray,16);
+        if(num>0)mesh.addAttribute('instMat',matrixArray,16);
     }
     recalc=false;
     // console.log(matrixArray);
@@ -231,8 +231,6 @@ function doRender()
     if(!inGeomSurface.get())return;
     if(!geom.get())return;
 
-// ANGLE_instanced_arrays
-
     if(op.patch.cgl.glVersion>=2) 
     {
         if(cgl.getShader() && cgl.getShader()!=shader)
@@ -248,6 +246,7 @@ function doRender()
             {
                 mod=shader.addModule(
                     {
+                        title:op.objName,
                         name: 'MODULE_VERTEX_POSITION',
                         priority:-2,
                         srcHeadVert: srcHeadVert,
@@ -256,7 +255,6 @@ function doRender()
     
                 shader.define('INSTANCING');
                 uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
-                // uniScale=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
             }
             else
             {
@@ -265,14 +263,18 @@ function doRender()
             setup();
         }
     
-        uniDoInstancing.setValue(1);
-        mesh.render(shader);
-        uniDoInstancing.setValue(0);
+        if(mesh.numInstances>0)
+        {
+            uniDoInstancing.setValue(1);
+            mesh.render(shader);
+            uniDoInstancing.setValue(0);
+        }
     }
     else
     {
         // fallback - SLOW
  
+        
         for(var i=0;i<matrixArray.length;i+=16)
         {
             op.patch.cgl.pushModelMatrix();

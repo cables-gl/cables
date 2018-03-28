@@ -1,0 +1,45 @@
+{
+    "updated": 1521136763775,
+    "authorName": "tim",
+    "id": "50cc64bf-e062-4f4c-b689-0599ddb71501",
+    "created": 1521136763776,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Maximum",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Max2"
+    },
+    "summary": "Returns the biggest number",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value 1",
+                "text": "The first number"
+            },
+            {
+                "name": "Value 2",
+                "text": "The second number"
+            },
+            {
+                "name": "Maximum",
+                "text": "The biggest number"
+            }
+        ]
+    }
+}

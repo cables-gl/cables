@@ -11,11 +11,18 @@
             },
             {
                 "type": "0",
-                "name": "farplane"
+                "name": "farplane",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "nearplane"
+                "name": "nearplane",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invert",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -27,7 +34,7 @@
         "name": "Ops.Gl.TextureEffects.DepthTexture"
     },
     "summary": "draw the content of a depth texture",
-    "updated": 1516277802555,
+    "updated": 1521754676614,
     "authorName": "pandur",
     "id": "3e58b781-e6cd-466f-afc1-8477c32025e0",
     "created": 1516277778183,

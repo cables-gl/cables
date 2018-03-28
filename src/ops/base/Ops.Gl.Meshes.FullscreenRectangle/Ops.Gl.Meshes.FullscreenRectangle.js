@@ -18,6 +18,7 @@ centerInCanvas.onChange=rebuild;
 flipY.onChange=rebuild;
 
 var shader=null;
+render.onTriggered=doRender;
 
 inTexture.onChange=function()
 {
@@ -33,8 +34,15 @@ inTexture.onChange=function()
     }
 };
 
+op.preRender=function()
+{
+    if(shader)shader.bind();
+    if(mesh)mesh.render(shader);
+    doRender();
+    
+};
 
-render.onTriggered=function()
+function doRender()
 {
     if( cgl.getViewPort()[2]!=w || cgl.getViewPort()[3]!=h )
     {

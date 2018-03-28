@@ -1,8 +1,12 @@
 {
-    "updated": 1522229087310,
+    "updated": 1521890036012,
     "authorName": "pandur",
-    "id": "5465280f-c547-4ba9-84b4-0219d3460ecd",
-    "created": 1521460008549,
+    "id": "31f65abe-9d6c-4ba6-a291-ef2de41d2087",
+    "created": 1521804228732,
+    "summary": "trigger true or false values",
+    "docs": {
+        "ports": []
+    },
     "layout": {
         "portsIn": [
             {

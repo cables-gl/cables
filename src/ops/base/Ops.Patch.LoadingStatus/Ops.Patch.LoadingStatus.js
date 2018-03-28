@@ -120,6 +120,8 @@ this.exe.onTriggered= function()
         
         if(firstTime)
         {
+            op.patch.preRenderOps();
+            
             // console.log('finished loading and prerendering...');
             loadingFinished.trigger();
             self.patch.timer.setTime(0);
@@ -139,6 +141,7 @@ this.exe.onTriggered= function()
             self.onAnimFrame=function(){};
 
         }
+        
         if(preRenderTimeFrames.anim && patch.loading.getProgress()>=1.0
             && prerenderCount<preRenderTimeFrames.anim.keys.length
         )

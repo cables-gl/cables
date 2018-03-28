@@ -3,33 +3,40 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Mul Orientation"
+                "name": "Mul Orientation",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Orientation Alpha"
+                "name": "Orientation Alpha",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Orientation Beta"
+                "name": "Orientation Beta",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Orientation Gamme"
+                "name": "Orientation Gamme",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Acceleration X"
+                "name": "Acceleration X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Acceleration Y"
+                "name": "Acceleration Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Acceleration X"
+                "name": "Acceleration Z",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -39,7 +46,7 @@
         "name": "Ops.Devices.MotionSensor"
     },
     "summary": "get values from the device motion sensor  mobile",
-    "updated": 1507296025357,
+    "updated": 1522061577045,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "3b15ad33-0117-4a33-975e-bca154a7f298",

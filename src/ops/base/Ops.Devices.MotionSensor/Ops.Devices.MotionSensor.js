@@ -1,7 +1,4 @@
-op.name='MotionSensor';
-
 var mulAxis=op.inValue("Mul Orientation",1);
-
 
 var axis1=op.outValue("Orientation Alpha");
 var axis2=op.outValue("Orientation Beta");
@@ -19,7 +16,17 @@ var lastTimeAcc=0;
 
 var obj={};
 
-window.addEventListener("devicemotion", function(event)
+setTimeout(function(){ 
+    registerEvents();
+    console.log('window.DeviceOrientationEvent: ', window.DeviceOrientationEvent);
+}, 3000);
+
+// op.onLoaded = registerEvents;
+
+
+
+function registerEvents() {
+  window.addEventListener("devicemotion", function(event)
 {
     if(CABLES.now()-lastTimeAcc>15)
     {
@@ -56,5 +63,6 @@ window.addEventListener("deviceorientation", function (event)
         outObj.set(obj);
 
     }
-}, true);
+}, true);  
+}
 

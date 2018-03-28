@@ -1,5 +1,3 @@
-op.name="Noise";
-
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");

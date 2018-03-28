@@ -39,11 +39,12 @@ inNormals.onChange=setMeshLater;
 inSize.onChange=updateScale;
 var needSetMesh=true;
 
+
 function calcNormals()
 {
     if(!geom)
     {
-        console.log('calc normals: no geom!')
+        console.log('calc normals: no geom!');
         return;
     }
 
@@ -57,6 +58,7 @@ function calcNormals()
     console.log("normals!");
     
 }
+
 
 function render()
 {
@@ -169,7 +171,7 @@ function setMesh()
     needSetMesh=false;
     meshes[index]=mesh;
     
-    console.log("set mesh done");
+    // console.log("set mesh done");
     // console.log(geom);
 
     op.uiAttr({'warning':null});

@@ -2,7 +2,7 @@
 var inTriggerTrue=op.inFunctionButton("True");
 var inTriggerFalse=op.inFunctionButton("false");
 
-var outResult=op.outValueBool("Result", false);
+var outResult=op.outValue("Result");
 
 
 

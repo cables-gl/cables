@@ -45,13 +45,13 @@ limited.onValueChange(function() {
 mat4.identity(transMatrix);
 mat4.identity(invTransMatrix);
 
+var tvec = vec3.create();
+var svec = vec4.create();
 function updateMatrices() {
     if (matricesValid) return;
 
-    var tvec = vec3.create();
     vec3.set(tvec, offset.get(), 0, 0);
 
-    var svec = vec4.create();
     var s = 1 / scale.get();
     vec3.set(svec, s, s, s);
 

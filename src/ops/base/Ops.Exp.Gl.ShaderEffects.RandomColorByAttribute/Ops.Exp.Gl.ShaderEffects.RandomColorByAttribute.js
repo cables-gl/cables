@@ -38,7 +38,6 @@ function removeModule()
 
         shader=null;
     }
-    console.log('randomcolor removemodule!');
 
     needsCodeUpdate=true;
 }
@@ -46,7 +45,7 @@ function removeModule()
 inAttrib.onChange=function()
 {
     needsCodeUpdate=true;
-    console.log('attrib change!!!!');
+    // console.log('attrib change!!!!');
 };
 
 function updateCode()
@@ -105,15 +104,12 @@ inGeom.onChange=function()
 render.onTriggered=function()
 {
     if(!inGeom.get())return;
-    if(needsCodeUpdate)console.log('needsCodeUpdate');
-    if(!srcBodyFrag)console.log('srcBodyFrag');
-    if(cgl.getShader()!=shader)console.log('cgl.getShader',shader);
+    // if(needsCodeUpdate)console.log('needsCodeUpdate');
+    // if(!srcBodyFrag)console.log('srcBodyFrag');
+    // if(cgl.getShader()!=shader)console.log('cgl.getShader',shader);
     
     if(cgl.getShader()!=shader || needsCodeUpdate || !srcBodyFrag)
     {
-        
-        console.log('random color RECOMPILE');
-        
         if(shader) removeModule();
         shader=cgl.getShader();
         if(!shader)
