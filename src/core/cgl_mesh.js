@@ -196,11 +196,11 @@ CGL.Mesh.prototype.updateTexCoords=function(geom)
     {
         this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,geom.texCoords,2);
     }
-    // else 
-    // {
-    //     var tcBuff=new Float32Array( Math.round((geom.vertices.length/3)*2) );
-    //     this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,tcBuff,2);
-    // }
+    else 
+    {
+        var tcBuff=new Float32Array( Math.round((geom.vertices.length/3)*2) );
+        this.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,tcBuff,2);
+    }
 };
 
 CGL.Mesh.prototype._setVertexNumbers=function()
