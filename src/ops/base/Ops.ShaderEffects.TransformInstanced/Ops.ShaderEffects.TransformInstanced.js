@@ -7,6 +7,7 @@ var inStrength=op.inValue("Amount",1);
 
 var inStart=op.inValue("Start Index",0);
 var inWidth=op.inValue("Width",20);
+var inHasEnd=op.inValueBool("Ending",true);
 var inTransDist=op.inValue("Transition Distance",50);
 
 var inPosX=op.inValue("Pos X",0);
@@ -20,6 +21,7 @@ var inRotZ=op.inValue("Rot Z",0);
 var inScaleX=op.inValue("Scale X",1);
 var inScaleY=op.inValue("Scale Y",1);
 var inScaleZ=op.inValue("Scale Z",1);
+
 
 
 
@@ -52,7 +54,14 @@ function removeModule()
 
 op.render.onLinkChanged=removeModule;
 
+inHasEnd.onChange=updateEnding;
 
+function updateEnding()
+{
+    if(shader)
+        if(inHasEnd.get())shader.define(moduleVert.prefix+"HAS_ENDING");
+            else shader.removeDefine(moduleVert.prefix+"HAS_ENDING");
+}
 
 
 op.render.onTriggered=function()
@@ -94,7 +103,7 @@ op.render.onTriggered=function()
         
 
         inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
-
+        updateEnding();
     }
     
 

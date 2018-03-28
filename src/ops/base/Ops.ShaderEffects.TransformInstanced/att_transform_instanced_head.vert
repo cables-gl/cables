@@ -8,7 +8,6 @@
   OUT float instanceIndexFrag;
 #endif
 
-
 UNI float MOD_rotX;
 UNI float MOD_rotY;
 UNI float MOD_rotZ;

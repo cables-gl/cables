@@ -1,9 +1,11 @@
 
-
 float MOD_mulA=smoothstep(MOD_start,MOD_start-MOD_transDist,instanceIndex);
-float MOD_mulB=smoothstep(MOD_start+MOD_width+MOD_transDist,MOD_start+MOD_width,instanceIndex);
+float MOD_mul=1.0-MOD_mulA;
 
-float MOD_mul=(MOD_mulB-MOD_mulA);
+#ifdef MOD_HAS_ENDING
+    float MOD_mulB=smoothstep(MOD_start+MOD_width+MOD_transDist,MOD_start+MOD_width,instanceIndex);
+    MOD_mul=(MOD_mulB-MOD_mulA);
+#endif
 
 mat4 MOD_rotm;
 
