@@ -926,12 +926,17 @@ CABLES.Patch.prototype.preRenderOps = function() {
     console.log("prerendering...");
     var stopwatch=null;
     if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('prerendering');
-    
+
+    var count=0;
     for(var i=0;i<this.ops.length;i++)
     {
-        console.log(" - prerender "+this.ops[i].objName);
-        if(this.ops[i].preRender)this.ops[i].preRender();
+        if(this.ops[i].preRender)
+        {
+            this.ops[i].preRender();
+            count++;
+        }
     }
+    console.log('prerendered '+count+' ops');
     
     if(stopwatch)stopwatch.stop('prerendering');
 };
