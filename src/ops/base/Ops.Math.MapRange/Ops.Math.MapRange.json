@@ -46,5 +46,33 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "2617b407-60a0-4ff6-b4a7-18136cfa7817",
-    "created": 1511163241689
+    "created": 1511163241689,
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "The value you want to map"
+            },
+            {
+                "name": "old min",
+                "text": "The minimum of the old range"
+            },
+            {
+                "name": "old max",
+                "text": "The maximum of the old range"
+            },
+            {
+                "name": "new min",
+                "text": "The minimum of the new range"
+            },
+            {
+                "name": "new max",
+                "text": "The maximum of the new range"
+            },
+            {
+                "name": "result",
+                "text": "Result of the mapping"
+            }
+        ]
+    }
 }

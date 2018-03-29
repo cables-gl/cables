@@ -1,5 +1,5 @@
 {
-    "summary": "Subtracts Number2 from Number1 (minus)",
+    "summary": "Subtracts Number2 from Number1 (minus, -)",
     "layout": {
         "portsIn": [
             {
@@ -23,5 +23,21 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a4ffe852-d200-4b96-9347-68feb01122ca",
-    "created": 1511163198003
+    "created": 1511163198003,
+    "docs": {
+        "ports": [
+            {
+                "name": "number1",
+                "text": "`a` in `a - b`"
+            },
+            {
+                "name": "number2",
+                "text": "`b` in `a - b`"
+            },
+            {
+                "name": "result",
+                "text": "Result of the division"
+            }
+        ]
+    }
 }
