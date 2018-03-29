@@ -38,5 +38,33 @@
         ],
         "name": "Ops.Html.Event.CustomEventListener"
     },
-    "summary": "Add a custom event listener"
+    "summary": "Add a custom event listener",
+    "docs": {
+        "ports": [
+            {
+                "name": "Element",
+                "text": "The HTML DOM element to add the listener to"
+            },
+            {
+                "name": "Use Capture",
+                "text": "If multiple elements register an event listener, setting `Use Capture` will make sure the listener will be called before the regular (bubble) listeners. For more infos read here: [javascript.info/bubbling-and-capturing](https://javascript.info/bubbling-and-capturing)."
+            },
+            {
+                "name": "Prevent Default",
+                "text": "If set the default browser action for the event will not be executed. See [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault)."
+            },
+            {
+                "name": "Stop Propagation",
+                "text": "Stops other elements’ event listeneres from getting called. See [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation)."
+            },
+            {
+                "name": "Event Trigger",
+                "text": "Trigger when the event occured"
+            },
+            {
+                "name": "Event Object",
+                "text": "The event object contains details about the event"
+            }
+        ]
+    }
 }

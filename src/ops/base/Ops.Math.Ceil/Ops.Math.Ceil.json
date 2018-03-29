@@ -14,5 +14,17 @@
         ],
         "name": "Ops.Math.Ceil"
     },
-    "summary": "returns the smallest integer greater than or equal to a given number"
+    "summary": "Returns the smallest integer greater than or equal to a given number",
+    "docs": {
+        "ports": [
+            {
+                "name": "Number",
+                "text": "The number to process"
+            },
+            {
+                "name": "Result",
+                "text": "Ceiled number"
+            }
+        ]
+    }
 }

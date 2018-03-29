@@ -1,7 +1,1 @@
-# Voronoise
-
-*Ops.Gl.TextureEffects.Voronoise*
-
-![voronoise](img/voronoise.jpg)
-
-from https://thebookofshaders.com/12/
+From [The Book of Shaders](https://thebookofshaders.com/12/)

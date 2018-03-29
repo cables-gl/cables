@@ -1,1 +1,50 @@
-{"layout":{"portsIn":[{"type":"0","name":"val"},{"type":"0","name":"min"},{"type":"0","name":"max"},{"type":"0","name":"ignore outside values"}],"portsOut":[{"type":"0","name":"result"}],"name":"Ops.Math.Clamp"},"summary":"Makes sure a value is within range  cuts off the rest"}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "val"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "ignore outside values"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Clamp"
+    },
+    "summary": "Makes sure a value is within range  cuts off the rest",
+    "docs": {
+        "ports": [
+            {
+                "name": "val",
+                "text": "The number you want to make sure is in range [`Minimum`, `Maximum`]"
+            },
+            {
+                "name": "min",
+                "text": "The minimum the `Result` will be"
+            },
+            {
+                "name": "max",
+                "text": "The maximum the `Result` will be"
+            },
+            {
+                "name": "result",
+                "text": "The clamped value of `Val`"
+            }
+        ]
+    }
+}

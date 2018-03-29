@@ -22,5 +22,25 @@
         ],
         "name": "Ops.Math.DegreeToVector"
     },
-    "summary": "Calculates a vector (x and y) based on an angle in degrees"
+    "summary": "Calculates a vector (x and y) based on an angle in degrees",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Executes the op"
+            },
+            {
+                "name": "degree",
+                "text": "The angle you want to convert (in degrees)"
+            },
+            {
+                "name": "x",
+                "text": "The x-vector in the range `[-1, 1]`"
+            },
+            {
+                "name": "y",
+                "text": "The y-vector in the range `[-1, 1]`"
+            }
+        ]
+    }
 }
