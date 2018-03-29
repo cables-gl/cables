@@ -57,5 +57,26 @@
             }
         ],
         "name": "Ops.Gl.Shader.WireframeMaterial"
+    },
+    "summary": "Renders following meshes as wireframes",
+    "docs": {
+        "ports": [
+            {
+                "name": "fill",
+                "text": "If set, background will be drawn (currently the color cannot be chosen)."
+            },
+            {
+                "name": "width",
+                "text": "Line thickness"
+            },
+            {
+                "name": "opacity",
+                "text": "Opacity, used for stroke and fill. `0` = invisible, `1` = fully visible"
+            },
+            {
+                "name": "trigger",
+                "text": "Executes the next op"
+            }
+        ]
     }
 }

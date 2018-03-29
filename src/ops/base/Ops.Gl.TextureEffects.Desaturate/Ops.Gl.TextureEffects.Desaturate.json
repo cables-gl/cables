@@ -23,5 +23,8 @@
     "authorName": "pandur",
     "id": "340efbd5-be53-4bd5-92ad-8f38d8eeecf1",
     "created": 1508766377767,
-    "summary": "remove colors from image / greyscale"
+    "summary": "Remove colors from image / greyscale",
+    "docs": {
+        "ports": []
+    }
 }

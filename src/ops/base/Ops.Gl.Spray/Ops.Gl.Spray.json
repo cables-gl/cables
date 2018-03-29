@@ -73,5 +73,9 @@
             }
         ],
         "name": "Ops.Gl.Spray"
+    },
+    "summary": "Spray simulation",
+    "docs": {
+        "ports": []
     }
 }
