@@ -1,5 +1,5 @@
 {
-    "updated": 1516400114817,
+    "updated": 1522317632345,
     "authorName": "pandur",
     "id": "63fd43af-e773-42a9-ae78-427b7fe8649c",
     "created": 1516130100009,
@@ -15,7 +15,8 @@
             },
             {
                 "type": "0",
-                "name": "Beat Position"
+                "name": "Beat Position",
+                "subType": "integer"
             },
             {
                 "type": "3",

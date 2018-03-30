@@ -8,6 +8,7 @@ var result=this.addOutPort(new Port(this,"status",OP_PORT_TYPE_VALUE));
 var isFinishedPort = op.outValue('all loaded', false);
 var preRenderStatus=this.addOutPort(new Port(this,"preRenderStatus",OP_PORT_TYPE_VALUE));
 var preRenderTimeFrames=this.addInPort(new Port(this,"preRenderTimes",OP_PORT_TYPE_VALUE));
+var preRenderOps=op.inValueBool("PreRender Ops");
 preRenderStatus.set(0);
 this.numAssets=this.addOutPort(new Port(this,"numAssets",OP_PORT_TYPE_VALUE));
 this.loading=this.addOutPort(new Port(this,"loading",OP_PORT_TYPE_FUNCTION));
@@ -120,7 +121,7 @@ this.exe.onTriggered= function()
         
         if(firstTime)
         {
-            op.patch.preRenderOps();
+            if(preRenderOps.get()) op.patch.preRenderOps();
             
             // console.log('finished loading and prerendering...');
             loadingFinished.trigger();

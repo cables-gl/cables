@@ -5,6 +5,8 @@ var innerRadius=op.inValueSlider('innerRadius',0);
 var percent=op.inValueSlider('percent');
 var steps=op.inValue('steps',0);
 var invertSteps=op.inValueBool('invertSteps',false);
+var doRender=op.inValueBool('Render',true);
+
 
 var trigger=op.outFunction('trigger');
 var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
@@ -29,7 +31,7 @@ render.onTriggered=function()
     
     if(drawSpline.get()) shader.glPrimitive=cgl.gl.LINE_STRIP;
 
-    mesh.render(shader);
+    if(doRender.get())mesh.render(shader);
     trigger.trigger();
 
     shader.glPrimitive=oldPrim;

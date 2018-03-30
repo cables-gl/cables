@@ -1,13 +1,12 @@
-precision highp float;
-
 IN vec2 texCoord;
-uniform float amount;
-uniform float pos;
+UNI float amount;
+UNI float pos;
+UNI float width;
 
-uniform vec3 colA;
-uniform vec3 colB;
-uniform vec3 colC;
-uniform sampler2D tex;
+UNI vec3 colA;
+UNI vec3 colB;
+UNI vec3 colC;
+UNI sampler2D tex;
 
 {{BLENDCODE}}
 
@@ -27,6 +26,9 @@ void main()
     #ifdef GRAD_RADIAL
         ax=distance(texCoord,vec2(0.5,0.5))*2.0;
     #endif
+
+    ax=((ax-0.5)*width)+0.5;
+
 
     #ifndef GRAD_SMOOTHSTEP
         if(ax<=pos) col = vec4(mix(colA, colB, ax*1.0/pos),1.0);

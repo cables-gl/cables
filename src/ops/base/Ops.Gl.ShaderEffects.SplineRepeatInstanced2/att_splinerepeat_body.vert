@@ -58,7 +58,7 @@ newMatrix[3][3]=1.0;
 #endif
 
 #ifndef ROT_BYPOSITION
-    posOnSpline=1.0
+    posOnSpline=1.0;
 #endif
 
 mat4 rotm=mat4(1.0);

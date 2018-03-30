@@ -5,7 +5,6 @@ var shader=null;
 var module=null;
 var uniTime;
 
-this.name='VertexSinusWobble';
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -92,44 +91,7 @@ var srcHeadVert=''
     .endl()+'UNI float MOD_add;'
     .endl();
 
-var srcBodyVert=''
-
-    .endl()+'vec3 MOD_pos=(pos*mMatrix).xyz;'
-    .endl()+'float MOD_v=0.0;'
-    
-    .endl()+'#ifdef MOD_SRC_XZ'
-    .endl()+'   MOD_v=(MOD_pos.x*MOD_pos.z)+MOD_add;'
-    .endl()+'#endif'
-    .endl()+'#ifdef MOD_SRC_XY'
-    .endl()+'   MOD_v=(MOD_pos.x*MOD_pos.y)+MOD_add;'
-    .endl()+'#endif'
-    .endl()+'#ifdef MOD_SRC_X'
-    .endl()+'   MOD_v=MOD_pos.x+MOD_add;'
-    .endl()+'#endif'
-    .endl()+'#ifdef MOD_SRC_Y'
-    .endl()+'   MOD_v=MOD_pos.y+MOD_add;'
-    .endl()+'#endif'
-    .endl()+'#ifdef MOD_SRC_Z'
-    .endl()+'   MOD_v=MOD_pos.z+MOD_add;'
-    .endl()+'#endif'
-
-
-    .endl()+'MOD_v=sin( MOD_time+( MOD_v*MOD_mul  )* MOD_frequency + MOD_phase ) * MOD_amount;'
-
-    .endl()+'#ifdef MOD_TO_AXIS_X'
-    .endl()+'   pos.x+=MOD_v;'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef MOD_TO_AXIS_Y'
-    .endl()+'   pos.y+=MOD_v;'
-    .endl()+'#endif'
-
-    .endl()+'#ifdef MOD_TO_AXIS_Z'
-    .endl()+'   pos.z+=MOD_v;'
-    .endl()+'#endif'
-
-    .endl();
-
+var srcBodyVert=attachments.sinewobble_vert||'';
 
 
 

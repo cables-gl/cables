@@ -36,6 +36,7 @@ var uniDoInstancing=null;
 var uniPoints=null;
 var recalc=true;
 var cgl=op.patch.cgl;
+var numSplinePoints=0;
 
 exe.onTriggered=doRender;
 // exe.onLinkChanged=removeModule;
@@ -74,9 +75,7 @@ function updateTextureDefine()
 
     if(rotPos.get()) shader.define("ROT_BYPOSITION");
         else shader.define("ROT_BYPOSITION");
-
 }
-
 
 geom.onChange=function()
 {
@@ -115,7 +114,7 @@ function setupArray()
     var pointArray=inTransformations.get();
     var num=inNum.get();
     if(num<=0)return;
-    var numSplinePoints=Math.floor(pointArray.length/3);
+    numSplinePoints=Math.floor(pointArray.length/3);
     
     console.log("numSplinePoints",numSplinePoints);
 
@@ -138,26 +137,21 @@ function setupArray()
     }
     else shader.removeDefine("METHOD_FILL");
 
-    
     for(var i=0;i<num;i++) indexArr[i]=i*space;
     
     mesh.addAttribute(mod.prefix+'index',indexArr,1,{instanced:true});
     mesh.numInstances=num;
-    
 
     updateTextureDefine();
 
     console.log("SETUP FINISHED",indexArr.length);
     // mesh.addAttribute('instMat',matrixArray,16);
-    
+
     recalc=false;
-    
-    
 }
 
 function doRender()
 {
-    
     // if(matrixArray.length<=1)return;
     if(!mesh) return;
     // if(recalc)setupArray();
@@ -183,12 +177,12 @@ function doRender()
             shader.define('INSTANCING');
             uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
             uniScale=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
-            
+
             // op.uniRot=new CGL.Uniform(shader,'f',mod.prefix+'rotation',inRot);
             op.uniOffset=new CGL.Uniform(shader,'f',mod.prefix+'offset',inOffset);
             op.uniSpacing=new CGL.Uniform(shader,'f',mod.prefix+'spacing',inSpacing);
             op.numInstances=new CGL.Uniform(shader,'f',mod.prefix+'numInstances',inNum);
-            
+
             uniPoints=new CGL.Uniform(shader,'3f[]',mod.prefix+'points',new Float32Array([0,0,0,0,0,0]));
             op.uniTextureFrag=new CGL.Uniform(shader,'t',mod.prefix+'texScale',6);
             op.uniTextureFragRot=new CGL.Uniform(shader,'t',mod.prefix+'texRot',7);
@@ -200,6 +194,9 @@ function doRender()
             op.uniPreRotX=new CGL.Uniform(shader,'f',mod.prefix+'preRotX',inPreRotX);
             op.uniPreRotY=new CGL.Uniform(shader,'f',mod.prefix+'preRotY',inPreRotY);
             op.uniPreRotZ=new CGL.Uniform(shader,'f',mod.prefix+'preRotZ',inPreRotZ);
+            
+            if(numSplinePoints) shader.define('PATHFOLLOW_POINTS',Math.floor(numSplinePoints));
+                else shader.define('PATHFOLLOW_POINTS',10);
         }
         else
         {
@@ -208,7 +205,7 @@ function doRender()
     }
 
     if(recalc)setupArray();
-    
+
 
     if(texScaling.get())
     {
@@ -222,11 +219,11 @@ function doRender()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texRotation.get().tex);
     }
 
-    if(!recalc)
+    if(!recalc && numSplinePoints)
     {
         uniDoInstancing.setValue(1);
         mesh.render(shader);
         uniDoInstancing.setValue(0);
-        
     }
+
 }

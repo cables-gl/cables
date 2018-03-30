@@ -30,8 +30,7 @@ function updateNames()
     {
         if(triggers[i].isLinked())
         {
-            names.push(triggers[i].links[0].getOtherPort(triggers[i]).parent.getName());
-
+            names.push(triggers[i].links[0].getOtherPort(triggers[i]).parent.uiAttribs.title);
         }
         else
         {
@@ -44,7 +43,7 @@ function updateNames()
 
 this.onLoaded=function()
 {
-
+    updateNames();
     var i=0;
     // console.log('TimedSequence loading---------------------------------------------');
     // for(i=0;i<triggers.length;i++)
