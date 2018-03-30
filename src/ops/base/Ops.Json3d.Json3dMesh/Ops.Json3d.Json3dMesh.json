@@ -47,5 +47,13 @@
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "29bf91a9-504d-4de7-bba6-bae67ee76c77",
-    "created": 1510754161541
+    "created": 1510754161541,
+    "docs": {
+        "ports": [
+            {
+                "name": "Size",
+                "text": "If `Size` is `0` then it will not be resized. If size is not `0`, the mesh will be scaled exactly to that size."
+            }
+        ]
+    }
 }

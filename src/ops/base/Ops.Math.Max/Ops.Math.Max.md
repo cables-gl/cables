@@ -2,4 +2,4 @@
 
 *Ops.Math.Max*
 
-```Result``` will be the higher number, either ```Value``` or ```Maximum```
+`Result` will be the higher number – either `Value` or `Maximum`.

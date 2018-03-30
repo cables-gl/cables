@@ -14,5 +14,13 @@
         ],
         "name": "Ops.Math.Floor"
     },
-    "summary": "returns the largest integer less than or equal to number"
+    "summary": "returns the largest integer less than or equal to a given number",
+    "docs": {
+        "ports": [
+            {
+                "name": "Result",
+                "text": "floored number"
+            }
+        ]
+    }
 }

@@ -1,5 +1,5 @@
 {
-    "summary": "was there mouse movement the last x [duration] seconds ?",
+    "summary": "Was there mouse movement the last x [duration] seconds?",
     "layout": {
         "portsIn": [
             {
@@ -14,5 +14,13 @@
             }
         ],
         "name": "Ops.InteractionListener"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Duration",
+                "text": "Duration in seconds"
+            }
+        ]
     }
 }

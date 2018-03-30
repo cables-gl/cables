@@ -14,5 +14,17 @@
             }
         ],
         "name": "Ops.Math.Abs"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "number",
+                "text": "The number you want to make positive."
+            },
+            {
+                "name": "result",
+                "text": "The absolute value of `Number` (always positive)"
+            }
+        ]
     }
 }

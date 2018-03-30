@@ -31,5 +31,29 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d181cc7c-adbb-467b-842b-e6a854c58bfc",
-    "created": 1511163204549
+    "created": 1511163204549,
+    "docs": {
+        "ports": [
+            {
+                "name": "x1",
+                "text": "X-coordinate of the first point"
+            },
+            {
+                "name": "y1",
+                "text": "Y-coordinate of the first point"
+            },
+            {
+                "name": "x2",
+                "text": "X-coordinate of the second point"
+            },
+            {
+                "name": "y2",
+                "text": "Y-coordinate of the second point"
+            },
+            {
+                "name": "distance",
+                "text": "The distance between point 1 and point 2"
+            }
+        ]
+    }
 }

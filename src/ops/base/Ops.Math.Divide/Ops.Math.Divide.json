@@ -23,5 +23,21 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "86fcfd8c-038d-4b91-9820-a08114f6b7eb",
-    "created": 1511163171260
+    "created": 1511163171260,
+    "docs": {
+        "ports": [
+            {
+                "name": "number1",
+                "text": "`a` in `a / b`"
+            },
+            {
+                "name": "number2",
+                "text": "`b` in `a / b`"
+            },
+            {
+                "name": "result",
+                "text": "Result of the division"
+            }
+        ]
+    }
 }

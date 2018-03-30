@@ -1,5 +1,5 @@
 {
-    "summary": "is n1 smaller than n2 ? (was: lesser,less)",
+    "summary": "Is n1 smaller than n2? (lesser, less)",
     "layout": {
         "portsIn": [
             {
@@ -18,5 +18,21 @@
             }
         ],
         "name": "Ops.Math.Compare.Lesser"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "number1",
+                "text": "The number you want to check if it is smaller than `Number 2`"
+            },
+            {
+                "name": "number2",
+                "text": "The number you want to check if it is bigger than `Number 1`"
+            },
+            {
+                "name": "result",
+                "text": "Returns `true` if `Number 1` is smaller than `Number 2`, otherwise `false`"
+            }
+        ]
     }
 }

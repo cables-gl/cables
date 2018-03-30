@@ -1,1 +1,30 @@
-{"summary":"Multiply two numbers","layout":{"portsIn":[{"type":"0","name":"number1"},{"type":"0","name":"number2"}],"portsOut":[{"type":"0","name":"result"}],"name":"Ops.Math.Multiply"}}
+{
+    "summary": "Multiplies two numbers",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number1"
+            },
+            {
+                "type": "0",
+                "name": "number2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Math.Multiply"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "result",
+                "text": "Result of the multiplication"
+            }
+        ]
+    }
+}

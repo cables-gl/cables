@@ -17,5 +17,18 @@
             }
         ],
         "name": "Ops.Gl.Shader.MinimalMaterial"
+    },
+    "summary": "Material to quickly highlight something",
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Sets the material for all subsequent objects"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
+            }
+        ]
     }
 }
