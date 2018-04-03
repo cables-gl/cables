@@ -330,6 +330,8 @@ CGL.Mesh.prototype._bind=function(shader)
                 // todo: easier way to fill mat4 attribs...
                 if(attribute.itemSize<=4)
                 {
+                    if(!attribute.itemSize || attribute.itemSize==0) console.log("instanced attrib itemsize error",this._geom.name,attribute);
+
                     this._cgl.gl.vertexAttribPointer(attribute.loc, attribute.itemSize, attribute.type,  false, attribute.itemSize*4,0);
                     this._cgl.gl.vertexAttribDivisor(attribute.loc, 1);
                 }else
@@ -351,6 +353,8 @@ CGL.Mesh.prototype._bind=function(shader)
             }
             else
             {
+                if(!attribute.itemSize || attribute.itemSize==0) console.log("attrib itemsize error",this._geom.name,attribute);
+
                 this._cgl.gl.vertexAttribPointer(
                     attribute.loc,
                     attribute.itemSize,
