@@ -14,5 +14,13 @@
             }
         ],
         "name": "Ops.Math.Sqrt"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "result",
+                "text": "square root of `Number`"
+            }
+        ]
     }
 }

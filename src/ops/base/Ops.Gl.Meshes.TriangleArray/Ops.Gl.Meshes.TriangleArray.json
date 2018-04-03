@@ -22,5 +22,25 @@
         ],
         "name": "Ops.Gl.Meshes.TriangleArray"
     },
-    "summary": "draw multiple triangles using coordinates from an array"
+    "summary": "Draws multiple triangles using coordinates from an array",
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Renders the triangles"
+            },
+            {
+                "name": "Points",
+                "text": "The points forming the triangles, one dimensional array"
+            },
+            {
+                "name": "Next",
+                "text": "Triggers the next op"
+            },
+            {
+                "name": "Geometry",
+                "text": "The geometry of the triangles"
+            }
+        ]
+    }
 }

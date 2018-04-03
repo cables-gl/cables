@@ -15,7 +15,8 @@ function setPixel(x,y,val)
     if(val==1)val=120;
     else if(val==2)val=127;
     else if(val==4)val=20;
-    eventIn.get().output.send( [0x90, x+y*16, val] );
+    if(eventIn.get() && eventIn.get().output)
+        eventIn.get().output.send( [0x90, x+y*16, val] );
 }
 
 var lastBeat=0;

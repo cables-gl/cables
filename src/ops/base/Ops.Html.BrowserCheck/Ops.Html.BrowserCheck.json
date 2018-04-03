@@ -60,5 +60,17 @@
     "updated": 1520862592753,
     "authorName": "pandur",
     "id": "6e2ff98b-1e85-4b89-b125-fb8da727ba0c",
-    "created": 1520862565547
+    "created": 1520862565547,
+    "docs": {
+        "ports": [
+            {
+                "name": "Is IE",
+                "text": "True if the browser is any of IE 9, IE 10, IE 11"
+            },
+            {
+                "name": "Is IE 10+",
+                "text": "True if browser is IE 10 or IE 11"
+            }
+        ]
+    }
 }

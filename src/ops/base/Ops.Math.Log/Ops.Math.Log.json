@@ -14,5 +14,17 @@
         ],
         "name": "Ops.Math.Log"
     },
-    "summary": "Calculates the logarithm of Number"
+    "summary": "Calculates the logarithm of Number",
+    "docs": {
+        "ports": [
+            {
+                "name": "number",
+                "text": "The value you want to know the logarithm of"
+            },
+            {
+                "name": "result",
+                "text": "Logarithm of `Number`"
+            }
+        ]
+    }
 }

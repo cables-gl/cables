@@ -1,5 +1,5 @@
 {
-    "summary": "outputs a random number",
+    "summary": "Outputs a random number",
     "layout": {
         "portsIn": [
             {
@@ -31,5 +31,8 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "168d5a88-b0dd-4b06-8dea-e669adef08dc",
-    "created": 1506626742352
+    "created": 1506626742352,
+    "docs": {
+        "ports": []
+    }
 }

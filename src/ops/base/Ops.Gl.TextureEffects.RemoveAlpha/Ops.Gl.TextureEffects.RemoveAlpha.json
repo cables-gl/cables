@@ -17,5 +17,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.RemoveAlpha"
+    },
+    "summary": "Remove alpha information from image",
+    "docs": {
+        "ports": []
     }
 }

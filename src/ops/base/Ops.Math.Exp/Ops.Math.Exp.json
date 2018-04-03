@@ -18,5 +18,17 @@
         ],
         "name": "Ops.Math.Exp"
     },
-    "summary": "input value raised to the specified power"
+    "summary": "Calculates the power of Euler’s number",
+    "docs": {
+        "ports": [
+            {
+                "name": "number",
+                "text": "Power of e, (e^x)"
+            },
+            {
+                "name": "result",
+                "text": "The result in the calculation `e^Number`"
+            }
+        ]
+    }
 }

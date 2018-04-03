@@ -26,5 +26,29 @@
             }
         ],
         "name": "Ops.Gl.Meshes.Triangle"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Renders a triangle to the canvas."
+            },
+            {
+                "name": "width",
+                "text": "Width of the triangle"
+            },
+            {
+                "name": "height",
+                "text": "Height of the triangle"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
+            },
+            {
+                "name": "geometry",
+                "text": "For advanced use cases you can output the geometry data (vertices, normals) to use in another op"
+            }
+        ]
     }
 }

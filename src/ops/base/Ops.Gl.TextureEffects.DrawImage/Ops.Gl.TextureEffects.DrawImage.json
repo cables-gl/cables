@@ -82,5 +82,53 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8248b866-9492-48c8-897d-3097c6fe6fe8",
-    "created": 1508767066242
+    "created": 1508767066242,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the rendering"
+            },
+            {
+                "name": "amount",
+                "text": "Amount/Percentage of blending the Image on to the current state of the compose"
+            },
+            {
+                "name": "image",
+                "text": "The image to be drawn"
+            },
+            {
+                "name": "blendMode",
+                "text": "How the image will be drawn/blended onto the state of image compose "
+            },
+            {
+                "name": "imageAlpha",
+                "text": "Use this image as an alpha mask"
+            },
+            {
+                "name": "removeAlphaSrc",
+                "text": "Completly ignore and remove the Alpha channel"
+            },
+            {
+                "name": "invert alpha channel",
+                "text": "invert the alpha channel"
+            },
+            {
+                "name": "flip x",
+                "text": "Flip image on the X axis"
+            },
+            {
+                "name": "flip y",
+                "text": "Flip image on the Y axis"
+            },
+            {
+                "name": "scale",
+                "text": "Scale the image"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger the rendering of the next image effect."
+            }
+        ]
+    }
 }

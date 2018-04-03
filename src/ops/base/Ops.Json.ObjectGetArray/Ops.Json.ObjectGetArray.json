@@ -25,5 +25,26 @@
             }
         ],
         "name": "Ops.Json.ObjectGetArray"
+    },
+    "summary": "Returns an array from a JSON-object",
+    "docs": {
+        "ports": [
+            {
+                "name": "data",
+                "text": "The Json-object you want to extract an array from"
+            },
+            {
+                "name": "key",
+                "text": "The key of the array"
+            },
+            {
+                "name": "result",
+                "text": "A native array"
+            },
+            {
+                "name": "Length",
+                "text": "The length of the array"
+            }
+        ]
     }
 }

@@ -3,6 +3,7 @@ var render=op.inFunction("Render");
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
+var width=op.inValue("Width",1);
 
 var gType=op.inValueSelect("Type",['X','Y','XY','Radial'],"X");
 
@@ -37,6 +38,8 @@ updateSmoothstep();
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 var uniPos=new CGL.Uniform(shader,'f','pos',pos1);
+var uniWidth=new CGL.Uniform(shader,'f','width',width);
+
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 function updateSmoothstep()

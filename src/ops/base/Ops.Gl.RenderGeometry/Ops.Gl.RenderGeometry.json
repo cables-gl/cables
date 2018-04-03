@@ -38,10 +38,13 @@
         ],
         "name": "Ops.Gl.RenderGeometry"
     },
-    "summary": "render a geometry as mesh",
+    "summary": "Render a geometry as mesh",
     "updated": 1518777612893,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "40fa6f13-ee0e-4386-a86b-711e1fbcf1bc",
-    "created": 1509725147147
+    "created": 1509725147147,
+    "docs": {
+        "ports": []
+    }
 }

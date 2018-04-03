@@ -22,5 +22,4 @@ MOD_rotm[3].x=MOD_mul*MOD_posX;
 MOD_rotm[3].y=MOD_mul*MOD_posY;
 MOD_rotm[3].z=MOD_mul*MOD_posZ;
 
-
 mMatrix*=MOD_rotm;

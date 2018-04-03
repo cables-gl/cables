@@ -17,5 +17,9 @@
             }
         ],
         "name": "Ops.Gl.Textures.EmptyTexture"
+    },
+    "summary": "A very simple empty texture",
+    "docs": {
+        "ports": []
     }
 }

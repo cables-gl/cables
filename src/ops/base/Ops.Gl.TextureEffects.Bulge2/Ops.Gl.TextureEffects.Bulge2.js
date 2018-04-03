@@ -56,13 +56,13 @@ render.onTriggered=function()
         uniAmount=new CGL.Uniform(shader,'f',mod.prefix+'amount',amount);
         uniHeight=new CGL.Uniform(shader,'f',mod.prefix+'height',height);
 
-        inTex.uniform=new CGL.Uniform(shader,'t',mod.prefix+'tex',5);
+        inTex.uniform=new CGL.Uniform(shader,'t',mod.prefix+'tex',3);
         updateAxis();
     }
 
     if(inTex.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE5);
+        cgl.gl.activeTexture(cgl.gl.TEXTURE3);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTex.get().tex);
     }
     

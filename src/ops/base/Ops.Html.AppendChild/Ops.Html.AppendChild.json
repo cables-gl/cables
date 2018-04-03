@@ -26,5 +26,21 @@
         ],
         "name": "Ops.Html.AppendChild"
     },
-    "summary": "Appends a HTML DOM Element to another"
+    "summary": "Appends a HTML DOM Element to another",
+    "docs": {
+        "ports": [
+            {
+                "name": "Parent",
+                "text": "The parent DOM element"
+            },
+            {
+                "name": "Child",
+                "text": "The child DOM element"
+            },
+            {
+                "name": "Parent Out",
+                "text": "The same element as the input"
+            }
+        ]
+    }
 }

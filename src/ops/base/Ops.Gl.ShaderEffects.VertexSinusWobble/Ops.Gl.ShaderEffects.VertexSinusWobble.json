@@ -1,5 +1,5 @@
 {
-    "updated": 1518344467412,
+    "updated": 1522248801094,
     "authorName": "pandur",
     "id": "bb76bc8e-9d92-47d8-af16-e135a6575284",
     "created": 1518344117257,
@@ -11,39 +11,48 @@
             },
             {
                 "type": "0",
-                "name": "frequency"
+                "name": "frequency",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "phase"
+                "name": "phase",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mul"
+                "name": "mul",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "add"
+                "name": "add",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "axisX"
+                "name": "axisX",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "axisY"
+                "name": "axisY",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "axisZ"
+                "name": "axisZ",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Source"
+                "name": "Source",
+                "subType": "string"
             }
         ],
         "portsOut": [

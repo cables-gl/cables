@@ -17,6 +17,11 @@
             },
             {
                 "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Type",
                 "subType": "string"
             },
@@ -88,7 +93,7 @@
     "docs": {
         "ports": []
     },
-    "updated": 1520431122648,
+    "updated": 1522250311894,
     "authorName": "pandur",
     "id": "5ada9bd8-227a-4a1f-87ad-0f879c7aa84d",
     "created": 1520431091087
