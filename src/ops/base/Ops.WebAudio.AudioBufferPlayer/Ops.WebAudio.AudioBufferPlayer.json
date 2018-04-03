@@ -10,35 +10,43 @@
             },
             {
                 "type": "0",
-                "name": "Start / Stop"
+                "name": "Start / Stop",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Start Time"
+                "name": "Start Time",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Stop Time"
+                "name": "Stop Time",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Offset"
+                "name": "Offset",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Autoplay"
+                "name": "Autoplay",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Loop"
+                "name": "Loop",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Detune"
+                "name": "Detune",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Playback Rate"
+                "name": "Playback Rate",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -50,6 +58,6 @@
         "name": "Ops.WebAudio.AudioBufferPlayer"
     },
     "summary": "Plays back audio data stored in an AudioBuffer",
-    "updated": 1506598843483,
+    "updated": 1522776025335,
     "created": 1506598843485
 }
