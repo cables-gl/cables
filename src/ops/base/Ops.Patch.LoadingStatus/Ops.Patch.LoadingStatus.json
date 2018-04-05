@@ -47,5 +47,33 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "30f01b6d-b234-4ebe-a2c3-ebffd96a31e9",
-    "created": 1508581624660
+    "created": 1508581624660,
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Executes the op"
+            },
+            {
+                "name": "finished",
+                "text": "Triggers when all assets have been loaded"
+            },
+            {
+                "name": "status",
+                "text": "Value between `0` and `1`, becomes `1` when all assets have been loaded"
+            },
+            {
+                "name": "all loaded",
+                "text": "Becomes `true` when all assets have been loaded"
+            },
+            {
+                "name": "loading",
+                "text": "Triggers while there are still assets left to load, use this for your loading animations "
+            },
+            {
+                "name": "loading finished",
+                "text": "Triggers once when loading is finished"
+            }
+        ]
+    }
 }
