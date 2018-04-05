@@ -1,5 +1,5 @@
 {
-    "updated": 1517918292622,
+    "updated": 1522933280622,
     "authorName": "pandur",
     "id": "2c1e8e5d-980a-4716-aae6-22d189646509",
     "created": 1517917981691,
@@ -7,7 +7,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "JSON String"
+                "name": "JSON String",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -17,7 +18,8 @@
             },
             {
                 "type": "0",
-                "name": "Valid"
+                "name": "Valid",
+                "subType": "number"
             }
         ],
         "name": "Ops.Json.ParseObject"

@@ -1,0 +1,29 @@
+{
+    "updated": 1522940633890,
+    "authorName": "pandur",
+    "id": "498a7c04-a1df-4318-8a60-048a7836710e",
+    "created": 1522940544501,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "1",
+                "name": "Debug one Frame"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Debug.ProfileGL"
+    },
+    "summary": "dump all gl commands of one frame to console",
+    "docs": {
+        "ports": []
+    }
+}

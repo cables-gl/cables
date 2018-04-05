@@ -1,5 +1,5 @@
 {
-    "updated": 1520438498319,
+    "updated": 1522763607753,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "f94b5136-61fd-4558-8348-e7c8db5a6348",
@@ -12,11 +12,13 @@
             },
             {
                 "type": "0",
-                "name": "blendMode"
+                "name": "blendMode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -28,47 +30,58 @@
             },
             {
                 "type": "0",
-                "name": "alphaSrc"
+                "name": "alphaSrc",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "removeAlphaSrc"
+                "name": "removeAlphaSrc",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "invert alpha channel"
+                "name": "invert alpha channel",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "flip x"
+                "name": "flip x",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "flip y"
+                "name": "flip y",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Transform"
+                "name": "Transform",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Scale X"
+                "name": "Scale X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale Y"
+                "name": "Scale Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Position X"
+                "name": "Position X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Position Y"
+                "name": "Position Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotation"
+                "name": "Rotation",
+                "subType": "number"
             }
         ],
         "portsOut": [

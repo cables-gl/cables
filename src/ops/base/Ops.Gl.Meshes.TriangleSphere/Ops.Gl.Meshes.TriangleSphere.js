@@ -89,8 +89,8 @@ function index(verts,geom)
     geom.vertices=arr;
     
     geom.texCoords=tc;
-    console.log("indexed...");
-    console.log(ind.length,arr.length);
+    // console.log("indexed...");
+    // console.log(ind.length,arr.length);
     
 }
 

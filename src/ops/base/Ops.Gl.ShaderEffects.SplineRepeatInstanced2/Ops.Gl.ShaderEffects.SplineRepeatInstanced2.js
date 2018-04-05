@@ -116,7 +116,7 @@ function setupArray()
     if(num<=0)return;
     numSplinePoints=Math.floor(pointArray.length/3);
     
-    console.log("numSplinePoints",numSplinePoints);
+    // console.log("numSplinePoints",numSplinePoints);
 
     // spline...
     // if(shader.getDefine("PATHFOLLOW_POINTS")<Math.floor(pointArray.length/3))
@@ -132,7 +132,7 @@ function setupArray()
     if(inMeth.get()=="Fill")
     {
         space=numSplinePoints/num;
-        console.log(space);
+        // console.log(space);
         shader.define("METHOD_FILL");
     }
     else shader.removeDefine("METHOD_FILL");
@@ -144,7 +144,7 @@ function setupArray()
 
     updateTextureDefine();
 
-    console.log("SETUP FINISHED",indexArr.length);
+    // console.log("SETUP FINISHED",indexArr.length);
     // mesh.addAttribute('instMat',matrixArray,16);
 
     recalc=false;

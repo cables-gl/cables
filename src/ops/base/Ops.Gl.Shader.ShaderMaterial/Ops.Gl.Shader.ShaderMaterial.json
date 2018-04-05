@@ -8,39 +8,13 @@
             },
             {
                 "type": "0",
-                "name": "fragment"
+                "name": "fragment",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "vertex"
-            },
-            {
-                "type": "0",
-                "name": "u_time"
-            },
-            {
-                "type": "0",
-                "name": "gridX"
-            },
-            {
-                "type": "0",
-                "name": "gridY"
-            },
-            {
-                "type": "0",
-                "name": "gridsize"
-            },
-            {
-                "type": "0",
-                "name": "marginX"
-            },
-            {
-                "type": "0",
-                "name": "marginY"
-            },
-            {
-                "type": "0",
-                "name": "chromatic_abr"
+                "name": "vertex",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -55,7 +29,7 @@
         ],
         "name": "Ops.Gl.Shader.ShaderMaterial"
     },
-    "updated": 1506672360711,
+    "updated": 1522763917489,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f9aacdd4-06da-4bae-bea5-52dd5e7638dd",
