@@ -49,5 +49,50 @@
             }
         ],
         "name": "Ops.Value.ColorValue"
+    },
+    "summary": "Use a color value on multiple places",
+    "docs": {
+        "ports": [
+            {
+                "name": "r",
+                "text": "Red color value, between `0.0` and `1.0`"
+            },
+            {
+                "name": "g",
+                "text": "Green color value, between `0.0` and `1.0`"
+            },
+            {
+                "name": "b",
+                "text": "Blue color value, between `0.0` and `1.0`"
+            },
+            {
+                "name": "a",
+                "text": "Alpha value (opacity), between `0.0` and `1.0`"
+            },
+            {
+                "name": "outr",
+                "text": "Red, same as input port `R`"
+            },
+            {
+                "name": "outg",
+                "text": "Green, same as input port `G`"
+            },
+            {
+                "name": "outb",
+                "text": "Blue, same as input port `B`"
+            },
+            {
+                "name": "outa",
+                "text": "Alpha, Same as input port `A`"
+            },
+            {
+                "name": "Hex",
+                "text": "The hex value of the color"
+            },
+            {
+                "name": "Array",
+                "text": "The color components as array"
+            }
+        ]
     }
 }

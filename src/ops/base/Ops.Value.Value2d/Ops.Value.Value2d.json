@@ -25,5 +25,26 @@
             }
         ],
         "name": "Ops.Value2d"
+    },
+    "summary": "Stores a 2D coordinate",
+    "docs": {
+        "ports": [
+            {
+                "name": "value x",
+                "text": "X value, will be copied to the output port"
+            },
+            {
+                "name": "value y",
+                "text": "Y value, will be copied to the output port"
+            },
+            {
+                "name": "result x",
+                "text": "Same as input `Value X`"
+            },
+            {
+                "name": "result y",
+                "text": "Same as input `Value Y`"
+            }
+        ]
     }
 }

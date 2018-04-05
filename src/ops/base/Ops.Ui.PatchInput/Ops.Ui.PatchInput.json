@@ -5,5 +5,9 @@
     "created": 1519815129219,
     "layout": {
         "name": "Ops.Ui.PatchInput"
+    },
+    "summary": "Helper op for sub-patches",
+    "docs": {
+        "ports": []
     }
 }
