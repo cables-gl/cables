@@ -49,6 +49,14 @@ CABLES.WebAudio.createAudioContext = function(op) {
   return window.audioContext;
 };
 
+/**
+ * Returns the audio context.
+ * Before `createAudioContext` must have been called at least once.
+ */
+CABLES.WebAudio.getAudioContext = function() {
+  return window.audioContext;
+};
+
 
 /**
  * Creates an audio in port for the op with name `portName`
@@ -206,6 +214,7 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
   port.onChange = function() {
     var audioInNode = port.get();
     var node = port.webAudio.audioNode;
+    var audioCtx = CABLES.WebAudio.getAudioContext();
 
     if (audioInNode != undefined) {
       if(typeof audioInNode === 'object' && audioInNode.connect) {
@@ -220,7 +229,8 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
         if(node._param && node._param.minValue && node._param.maxValue) {
             if(audioInNode >= node._param.minValue && audioInNode <= node._param.maxValue) {
                 try{
-                  node.value = audioInNode;
+                  // node.value = audioInNode;
+                  node.setValueAtTime(audioInNode, audioCtx.currentTime);
                 } catch (e) { op.log("Possible AudioParam problem: ", e); }
             } else {
               op.log("Warning: The value for an audio parameter is out of range!");
@@ -229,7 +239,8 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
         else if(node.minValue && node.maxValue) {
           if(audioInNode >= node.minValue && audioInNode <= node.maxValue) {
             try{
-              node.value = audioInNode;
+              // node.value = audioInNode;
+              node.setValueAtTime(audioInNode, audioCtx.currentTime);
             } catch (e) { op.log("Possible AudioParam problem: ", e); }
           } else {
             op.log("Warning: The value for an audio parameter is out of range!");
@@ -237,7 +248,8 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
         } // no min-max values, try anyway
         else {
           try{
-            node.value = audioInNode;
+            // node.value = audioInNode;
+            node.setValueAtTime(audioInNode, audioCtx.currentTime);
           } catch (e) { op.log("Possible AudioParam problem: ", e); }
         }
 

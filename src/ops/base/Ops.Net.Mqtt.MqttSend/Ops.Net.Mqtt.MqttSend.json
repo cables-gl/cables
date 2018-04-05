@@ -1,1 +1,56 @@
-{}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MQTT Object"
+            },
+            {
+                "type": "0",
+                "name": "Message",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Channel",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Send"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MQTT Object"
+            }
+        ],
+        "name": "Ops.Net.Mqtt.MqttSend"
+    },
+    "summary": "Sends a MQTT-message",
+    "docs": {
+        "ports": [
+            {
+                "name": "MQTT Object",
+                "text": "Internally used in cables for inter-op-communication"
+            },
+            {
+                "name": "Message",
+                "text": "The message you want to send, can be something like`123`, `123.45`, `123,124,125` or `Hello World`"
+            },
+            {
+                "name": "Channel",
+                "text": "The channel you want to send the data to, should begin with a forward slash, e.g. `/test` or `/sensordata/orientation/x`"
+            },
+            {
+                "name": "Send",
+                "text": "Sends the MQTT message"
+            },
+            {
+                "name": "MQTT Object",
+                "text": "Internally used in cables for inter-op-communication"
+            }
+        ]
+    }
+}

@@ -51,8 +51,11 @@ detunePort.onChange = setDetune;
 function setDetune() {
     if(source) {
         var detune = detunePort.get() || 0;
-        if(source.detune && source.detune.value) {
-            source.detune.value = detune;    
+        if(source.detune) {
+            source.detune.setValueAtTime(
+                detune,
+                audioCtx.currentTime    
+            );
         }
     }
 }
@@ -63,7 +66,10 @@ function setPlaybackRate() {
     if(source) {
         var playbackRate = playbackRatePort.get() || 0;
         if(playbackRate >= source.playbackRate.minValue && playbackRate <= source.playbackRate.maxValue) {
-            source.playbackRate.value = playbackRate;    
+            source.playbackRate.setValueAtTime(
+                playbackRate,
+                audioCtx.currentTime    
+            );    
         }
     }
 }
