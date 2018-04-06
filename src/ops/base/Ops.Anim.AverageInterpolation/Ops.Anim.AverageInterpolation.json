@@ -1,0 +1,40 @@
+{
+    "updated": 1522791534264,
+    "authorName": "pandur",
+    "id": "1f13c0a8-fed3-42e5-89e7-41696f3891f0",
+    "created": 1522791082710,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Divisor",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Anim.AverageInterpolation"
+    },
+    "summary": "weighted average interpolation",
+    "docs": {
+        "ports": []
+    }
+}
