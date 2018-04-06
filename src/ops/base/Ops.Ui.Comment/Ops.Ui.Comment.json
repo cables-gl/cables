@@ -12,10 +12,22 @@
         ],
         "name": "Ops.Ui.Comment"
     },
-    "summary": "add comments to the patch",
+    "summary": "Displays a comment in the patch area",
     "updated": 1514558159388,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9de0c04f-666b-47cd-9722-a8cf36ab4720",
-    "created": 1514548240987
+    "created": 1514548240987,
+    "docs": {
+        "ports": [
+            {
+                "name": "title",
+                "text": "The title of your comment"
+            },
+            {
+                "name": "text",
+                "text": "The (longer) comment"
+            }
+        ]
+    }
 }

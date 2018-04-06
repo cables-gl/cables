@@ -1,5 +1,5 @@
 {
-    "summary": "limit triggering to only every x milliseconds",
+    "summary": "Limits how often a trigger goes through to x ms",
     "layout": {
         "portsIn": [
             {
@@ -22,5 +22,21 @@
             }
         ],
         "name": "Ops.TriggerLimiter"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "In Trigger",
+                "text": "The trigger on which you want to make sure that it does not trigger too often"
+            },
+            {
+                "name": "Milliseconds",
+                "text": "The milliseconds between triggers, e.g. if `Milliseconds` is set to `1000` the out trigger port triggers maximally every 1000 milliseconds (1 second)."
+            },
+            {
+                "name": "Out Trigger",
+                "text": "The limited input trigger"
+            }
+        ]
     }
 }

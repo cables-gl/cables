@@ -1,8 +1,4 @@
-# SubPatchOutput
+Do not use in your regular patch (outside of a sub-patch)!
+Within your sub-patch drag a cable to the `Dyn`-port, it will then be accessible in your main patch for further routing, a port will be added on the Ops.Ui.SubPatch.
 
-*Ops.Ui.SubPatchOutput*    
-
-This is a helper-op to create a [SubPatch](../Ops.Ui.SubPatch/Ops.Ui.SubPatch.md), do not use in your regular patch.  
-Within your sub-patch drag a cable to the `Dyn`-port of the *SubPatchOutput*-op, it will then be accessible in your main patch for further routing.
-
-**Currently not working, will be added soon...**
+**Currently not working…**

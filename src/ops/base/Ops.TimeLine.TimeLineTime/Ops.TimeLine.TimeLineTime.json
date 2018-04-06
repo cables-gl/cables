@@ -1,5 +1,5 @@
 {
-    "summary": "the current time of the timeline",
+    "summary": "Returns the current time of the timeline",
     "layout": {
         "portsOut": [
             {
@@ -8,5 +8,13 @@
             }
         ],
         "name": "Ops.TimeLineTime"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "time",
+                "text": "The current time of the timeline (in seconds)"
+            }
+        ]
     }
 }

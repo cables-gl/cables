@@ -1,5 +1,5 @@
 {
-    "summary": "Executes an external function",
+    "summary": "Executes an external function (external javascript)",
     "updated": 1516178727515,
     "authorName": "tim",
     "id": "33475ab9-b631-4225-92fa-c678cb2e0a24",
@@ -28,5 +28,29 @@
             }
         ],
         "name": "Ops.Patch.CallBack"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Calls the external function / executes the callback"
+            },
+            {
+                "name": "callback name",
+                "text": "Name of the function to call"
+            },
+            {
+                "name": "value 1",
+                "text": "Parameter 1"
+            },
+            {
+                "name": "value 2",
+                "text": "Parameter 2"
+            },
+            {
+                "name": "value 3",
+                "text": "Parameter 3"
+            }
+        ]
     }
 }
