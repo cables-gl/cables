@@ -49,5 +49,49 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Source.Noise"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Playback Rate",
+                "text": "The playback rate of the noise. Affects the \"frequency\" of the noise."
+            },
+            {
+                "name": "Type",
+                "text": "The type of the noise. Can be \"white\", \"brown\", or \"pink\"."
+            },
+            {
+                "name": "Start",
+                "text": "Starts the noise at `Start Time` (`+0` means now)"
+            },
+            {
+                "name": "Start Time",
+                "text": "The time when to start the noise, `+0` means now"
+            },
+            {
+                "name": "Stop",
+                "text": "Stops the noise at `Stop Time` (`+0` means now)"
+            },
+            {
+                "name": "Stop Time",
+                "text": "The time when to stop the noise, `+0` means now"
+            },
+            {
+                "name": "Auto Start",
+                "text": "Automatically starts the noise"
+            },
+            {
+                "name": "Volume",
+                "text": "The volume of the output in decibels (between `-96` and `0`)."
+            },
+            {
+                "name": "Mute",
+                "text": "Mutes the output."
+            },
+            {
+                "name": "Audio Out",
+                "text": "The noise audio signal"
+            }
+        ]
     }
 }

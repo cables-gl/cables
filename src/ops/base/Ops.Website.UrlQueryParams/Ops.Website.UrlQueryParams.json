@@ -21,9 +21,25 @@
         ],
         "name": "Ops.Website.UrlQueryParams"
     },
-    "summary": "get URL parameters",
+    "summary": "Get URL query parameters",
     "updated": 1521728915231,
     "authorName": "pandur",
     "id": "c6e90a0b-e3c8-40a1-9d90-fe00c3bdd341",
-    "created": 1521566315841
+    "created": 1521566315841,
+    "docs": {
+        "ports": [
+            {
+                "name": "parameter",
+                "text": "The parameter (key) to get"
+            },
+            {
+                "name": "Default",
+                "text": "Default value if key does not exist"
+            },
+            {
+                "name": "result",
+                "text": "The value of the parameter, or default value if it could not be found in the URL"
+            }
+        ]
+    }
 }

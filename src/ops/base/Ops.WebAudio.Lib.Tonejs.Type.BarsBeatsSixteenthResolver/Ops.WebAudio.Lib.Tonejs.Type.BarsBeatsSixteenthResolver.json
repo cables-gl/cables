@@ -26,5 +26,29 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Type.BarsBeatsSixteenthResolver"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Bars:Beats:Sixteenth",
+                "text": "A string in the form Bars:Beats:Siyteenth, e.g. `14:3:2`. Mostly you will connect this to the `Position (BarsBeatsSixteenth)`-port of the `Transport`-op."
+            },
+            {
+                "name": "Bars",
+                "text": "In which bar the timeline is at right now"
+            },
+            {
+                "name": "Beats",
+                "text": "In which beat of the current bar the timeline is at right now. In 4/4 music one bar consist of 4 beats."
+            },
+            {
+                "name": "Sixteenth",
+                "text": "In which sixteenth of the current beat the timeline is at right now. In 4/4 music one beat consist of 4 sixteenth."
+            },
+            {
+                "name": "Sixteenth (Precise)",
+                "text": "Same as the `Sixteenth`-port, but more precise"
+            }
+        ]
     }
 }

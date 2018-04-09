@@ -213,5 +213,213 @@
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.AudioMixer"
     },
-    "summary": "Mixes different audio signals together"
+    "summary": "Mixes different audio signals together",
+    "docs": {
+        "ports": [
+            {
+                "name": "Channel 1 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 1 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 1 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 1 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 1 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 2 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 2 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 2 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 2 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 2 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 3 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 3 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 3 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 3 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 3 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 4 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 4 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 4 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 4 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 4 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 5 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 5 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 5 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 5 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 5 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 6 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 6 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 6 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 6 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 6 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 7 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 7 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 7 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 7 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 7 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 8 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 8 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 8 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 8 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 8 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 9 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 9 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 9 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 9 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 9 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Channel 10 Name",
+                "text": "The channel name, this does not have any logic internally, it’s just there for you to insert a name for each channel to have a better overview."
+            },
+            {
+                "name": "Channel 10 Audio",
+                "text": "The audio input of the channel"
+            },
+            {
+                "name": "Channel 10 Volume",
+                "text": "The volume of the channel"
+            },
+            {
+                "name": "Channel 10 Mute",
+                "text": "If set the channel will be muted, so you won’t hear it"
+            },
+            {
+                "name": "Channel 10 Solo",
+                "text": "If set only this channel will be heard and all others will be silent. There can only be one channel set to `solo` at a time, so if you select another channel to be soloed, the former one gets un soloed. When you uncheck a former soloed channel all channel volumes / mute states will be set according to the current state of the ports."
+            },
+            {
+                "name": "Audio Out",
+                "text": "The mixed audio"
+            }
+        ]
+    }
 }

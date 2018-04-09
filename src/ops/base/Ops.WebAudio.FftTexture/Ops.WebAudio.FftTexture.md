@@ -1,5 +1,1 @@
-# FftTexture
-
-*Ops.WebAudio.FftTexture*
-
-Generates a Texture out of Audio Information (Probably coming from an AudioAnalyser Op)
+Writes the FFT data line by line to the texture. Typically you connect this to a Ops.WebAudio.Analyser op.

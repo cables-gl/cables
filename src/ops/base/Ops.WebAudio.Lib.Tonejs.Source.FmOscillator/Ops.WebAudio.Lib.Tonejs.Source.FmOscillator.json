@@ -73,5 +73,73 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Source.FmOscillator"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Frequency",
+                "text": "The oscillator's frequency"
+            },
+            {
+                "name": "Detune",
+                "text": "How much it is detunes, `0` = not at all, `100` = one semitone up, `-100` = one semitone down, `12000` = one octave up"
+            },
+            {
+                "name": "Modulation Index",
+                "text": "The modulation index which is in essence the depth or amount of the modulation. In other terms it is the ratio of the frequency of the modulating signal (mf) to the amplitude of the modulating signal (ma) -- as in ma/mf."
+            },
+            {
+                "name": "Harmonicity",
+                "text": "Harmonicity is the frequency ratio between the carrier and the modulator oscillators. A harmonicity of 1 gives both oscillators the same frequency. Harmonicity = 2 means a change of an octave."
+            },
+            {
+                "name": "Type",
+                "text": "The type of the carrier oscillator, either `sine`, `square`, `triangle` or `sawtooth`"
+            },
+            {
+                "name": "Modulation Type",
+                "text": "The type of the modulation oscillator, either `sine`, `square`, `triangle` or `sawtooth`"
+            },
+            {
+                "name": "Phase",
+                "text": "The phase of the oscillator in degrees (between `0` and `180`)."
+            },
+            {
+                "name": "Sync Frequency",
+                "text": "Sync the signal to the Transport's bpm. Any changes to the transports bpm, will also affect the oscillators frequency."
+            },
+            {
+                "name": "Start",
+                "text": "Starts the source at the specified time (`Start Time`). `+0` = now"
+            },
+            {
+                "name": "Start Time",
+                "text": "When `Start` is triggered this is the time it when it starts. `+0` = now"
+            },
+            {
+                "name": "Stop",
+                "text": "Stops the source at the specified time (`Stop Time`). `+0` = now"
+            },
+            {
+                "name": "Stop Time",
+                "text": "When `Stop` is triggered this is the time it when it starts. `+0` = now"
+            },
+            {
+                "name": "Auto Start",
+                "text": "Automatically starts the oscillator"
+            },
+            {
+                "name": "Volume",
+                "text": "The volume in dB, between `-96` and `0`"
+            },
+            {
+                "name": "Mute",
+                "text": "Mutes the output"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio signal"
+            }
+        ]
     }
 }

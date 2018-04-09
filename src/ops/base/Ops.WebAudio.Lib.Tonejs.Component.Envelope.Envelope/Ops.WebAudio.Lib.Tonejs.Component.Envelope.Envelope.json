@@ -53,5 +53,53 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.Envelope"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Attack",
+                "text": "When triggerAttack is called, the attack time is the amount of time it takes for the envelope to reach it's maximum value."
+            },
+            {
+                "name": "Decay",
+                "text": "After the attack portion of the envelope, the value will fall over the duration of the decay time to it's sustain value."
+            },
+            {
+                "name": "Sustain",
+                "text": "The sustain value is the value which the envelope rests at after triggerAttack is called, but before triggerRelease is invoked."
+            },
+            {
+                "name": "Release",
+                "text": "After triggerRelease is called, the envelope's value will fall to it's miminum value over the duration of the release time."
+            },
+            {
+                "name": "Trigger Attack",
+                "text": "Trigger the attack/decay portion of the ADSR envelope."
+            },
+            {
+                "name": "Velocity",
+                "text": "How loud the attack will be triggered (`0` = quiet, `1` = loud)"
+            },
+            {
+                "name": "Attack Time",
+                "text": "When `Trigger Attack` is triggered this is the time when it actually happens, `+0` means *now*, `+2` means in two seconds from now"
+            },
+            {
+                "name": "Trigger Release",
+                "text": "Triggers the release of the envelope."
+            },
+            {
+                "name": "Release Time",
+                "text": "When `Trigger Release` is triggered this is the time when it actually happens, `+0` means *now*, `+2` means in two seconds from now"
+            },
+            {
+                "name": "Signal",
+                "text": "Can be connected to a dynamic audio param port"
+            },
+            {
+                "name": "Envelope Object",
+                "text": "Can be connected to an envelope-port of a synth"
+            }
+        ]
     }
 }

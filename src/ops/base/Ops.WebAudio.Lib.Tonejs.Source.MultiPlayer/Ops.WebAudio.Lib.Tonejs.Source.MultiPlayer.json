@@ -109,5 +109,109 @@
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Source.MultiPlayer"
     },
-    "summary": "Plays back multiple one-shot samples"
+    "summary": "Plays back multiple one-shot samples",
+    "docs": {
+        "ports": [
+            {
+                "name": "AudioBuffer 0",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which holds the audio-sample you want to use"
+            },
+            {
+                "name": "AudioBuffer 1",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which holds the audio-sample you want to use"
+            },
+            {
+                "name": "AudioBuffer 2",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which holds the audio-sample you want to use"
+            },
+            {
+                "name": "AudioBuffer 3",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which holds the audio-sample you want to use"
+            },
+            {
+                "name": "AudioBuffer 4",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which holds the audio-sample you want to use"
+            },
+            {
+                "name": "AudioBuffer 5",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which holds the audio-sample you want to use"
+            },
+            {
+                "name": "AudioBuffer 6",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which holds the audio-sample you want to use"
+            },
+            {
+                "name": "AudioBuffer 7",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which holds the audio-sample you want to use"
+            },
+            {
+                "name": "Start Buffer",
+                "text": "Starts the buffer at index `Buffer Index` at time `Time`, also uses `Offset` `Duration`, `Pitch`, `Gain`"
+            },
+            {
+                "name": "Buffer Index",
+                "text": "The number of the buffer to start / stop"
+            },
+            {
+                "name": "Time",
+                "text": "When to start / stop a buffer – `+0` = *now*, `+3` = *in three seconds*"
+            },
+            {
+                "name": "Fade In Time",
+                "text": "How long it takes until the sample is at full volume"
+            },
+            {
+                "name": "Offset",
+                "text": "The offset into the buffer to play from, e.g. `0.1` skips the first 0.1 seconds"
+            },
+            {
+                "name": "Duration",
+                "text": "How long to play the buffer for, can be left empty"
+            },
+            {
+                "name": "Pitch",
+                "text": "The interval to repitch the buffer, `-1` = *one semitone down*, `1` = *one semitones up*, `12` = *one octave up*"
+            },
+            {
+                "name": "Gain",
+                "text": "The gain to play the sample at, `1` = *default*"
+            },
+            {
+                "name": "Start Buffer (Loop)",
+                "text": "Same as `Start Buffer` but the playback will be looped. Starts the buffer at index `Buffer Index` at time `Time`, also uses `Offset` `Duration`, `Pitch`, `Gain`. Additionally you can specify `Loop Start` and `Loop End`"
+            },
+            {
+                "name": "Loop Start Time",
+                "text": "When to start the loop, can be left empty"
+            },
+            {
+                "name": "Loop End Time",
+                "text": "When to end the loop, can be left empty"
+            },
+            {
+                "name": "Stop Buffer",
+                "text": "Stops the buffer at index `Buffer Index` at time `Time`. If this buffer is being played multiple times, only the first one will be stopped."
+            },
+            {
+                "name": "Stop All Buffers",
+                "text": "Stops all buffers at time `Time`, will not use `Fade Out Time`"
+            },
+            {
+                "name": "Fade Out Time",
+                "text": "How long it takes until the buffer is fully stopped when `Stop Buffer` was triggered"
+            },
+            {
+                "name": "Volume",
+                "text": "The volume of the `MultiPlayer` in dB"
+            },
+            {
+                "name": "Mute",
+                "text": "Mutes the whole player"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio out"
+            }
+        ]
+    }
 }

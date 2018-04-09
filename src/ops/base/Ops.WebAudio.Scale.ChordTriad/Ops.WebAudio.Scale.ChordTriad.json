@@ -18,5 +18,21 @@
         ],
         "name": "Ops.WebAudio.Scale.ChordTriad"
     },
-    "summary": "Creates a triad chord"
+    "summary": "Creates a triad chord",
+    "docs": {
+        "ports": [
+            {
+                "name": "Scale",
+                "text": "Connect this to a `Scale-Array`-op, which has `Append Octave` checked"
+            },
+            {
+                "name": "Base Note",
+                "text": "The note you want to get the chord from, e.g. `C4`"
+            },
+            {
+                "name": "Chord",
+                "text": "The triad chord for the base tone in the scale, e.g. `[\"C3\", \"E3\", \"G3\"]`"
+            }
+        ]
+    }
 }

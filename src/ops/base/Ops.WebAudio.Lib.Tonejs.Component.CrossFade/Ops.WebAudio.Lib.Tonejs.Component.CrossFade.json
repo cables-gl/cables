@@ -2,7 +2,7 @@
     "libs": [
         "tone.min.js"
     ],
-    "summary": "Fades two audio signals",
+    "summary": "Fades two audio signals (mix)",
     "layout": {
         "portsIn": [
             {
@@ -25,5 +25,25 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.CrossFade"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In 1",
+                "text": "The first audio signal"
+            },
+            {
+                "name": "Audio In 2",
+                "text": "The second audio signal"
+            },
+            {
+                "name": "Fade",
+                "text": "`0.0` = only left 100%, `1.0` = right side 100%"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The mixed audio signal"
+            }
+        ]
     }
 }

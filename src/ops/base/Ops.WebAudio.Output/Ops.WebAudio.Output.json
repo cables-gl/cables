@@ -21,5 +21,21 @@
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "53fdbf4a-bc8d-4c5d-a698-f34fdeb53827",
-    "created": 1510091776622
+    "created": 1510091776622,
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal to send to the speakers"
+            },
+            {
+                "name": "Volume",
+                "text": "How loud"
+            },
+            {
+                "name": "Mute",
+                "text": "Mutes the input"
+            }
+        ]
+    }
 }
