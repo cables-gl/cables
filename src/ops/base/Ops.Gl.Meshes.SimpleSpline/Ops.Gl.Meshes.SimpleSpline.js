@@ -1,12 +1,8 @@
-op.name="SimpleSpline";
-
 var render=op.inFunction("Render");
 
 var inPoints=op.inArray("Points");
 var strip=op.inValueBool("Line Strip",true);
 var numPoints=op.inValue("Num Points");
-
-
 
 var next=op.outFunction("Next");
 
@@ -23,15 +19,12 @@ render.onTriggered=function()
 
     if(!points)return;
     if(points.length===0)return;
-    
     if(op.instanced(render))return;
-
 
     if(!(points instanceof Float32Array))
     {
         if(points.length!=buff.length)
         {
-            // console.log("Resize...");
             buff=new Float32Array(points.length);
             buff.set(points);
         }

@@ -34,6 +34,7 @@ inStartVr.onTriggered=function()
             var rightEye = vrDisplay.getEyeParameters('right');
 
             console.log(leftEye.renderWidth);
+            console.log(leftEye.renderHeight);
 
             // cgl.canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
             // cgl.canvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
