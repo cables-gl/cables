@@ -52,12 +52,26 @@ render.onTriggered=function()
     if(strip.get())shader.glPrimitive=cgl.gl.LINE_STRIP;
         else shader.glPrimitive=cgl.gl.LINES;
     var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
+
+    
+    var numTc=(points.length/3)*2;
+    if(mesh.getAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD).numItems!=numTc/2)
+    {
+        var bufTexCoord=new Float32Array(numTc);
+        var attrTc=mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,bufTexCoord,2);
+    }
+    
     
     if(numPoints.get()<=0)attr.numItems=buff.length/3;
         else attr.numItems=Math.min(numPoints.get(),buff.length/3);
 
-    
+
+
+
+
     mesh.render(shader);
+    
+    // mesh.printDebug();
     
     shader.glPrimitive=oldPrim;
     
