@@ -42,5 +42,41 @@
         ],
         "name": "Ops.WebAudio.AudioPlayer"
     },
-    "summary": "Plays an audio file, linked to timeline"
+    "summary": "Plays an audio file, linked to timeline",
+    "docs": {
+        "ports": [
+            {
+                "name": "file",
+                "text": "The audio file you want to play"
+            },
+            {
+                "name": "play",
+                "text": "Starts the playback when set to `true`"
+            },
+            {
+                "name": "Autoplay",
+                "text": "When `true` starts playback automatically"
+            },
+            {
+                "name": "volume",
+                "text": "How loud the audio file should be played back"
+            },
+            {
+                "name": "Loop",
+                "text": "Set to `true` to enable looping"
+            },
+            {
+                "name": "audio out",
+                "text": "The audio out object, can be connected to the Ops.WebAudio.Output op e.g."
+            },
+            {
+                "name": "playing",
+                "text": "`true` if it is currently playing"
+            },
+            {
+                "name": "ended",
+                "text": "Triggers once the playback has ended"
+            }
+        ]
+    }
 }

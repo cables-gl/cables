@@ -67,6 +67,18 @@ CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
         }
     }
 };
+
+CGL.Mesh.prototype.getAttribute=function(name)
+{
+    for(var i=0;i<this._attributes.length;i++)
+    {
+        if(this._attributes[i].name==name)
+        {
+            return this._attributes[i];
+        }
+    }
+};
+
 CGL.Mesh.prototype.addAttribute=
 CGL.Mesh.prototype.updateAttribute=
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
@@ -334,8 +346,8 @@ CGL.Mesh.prototype._bind=function(shader)
 
                     this._cgl.gl.vertexAttribPointer(attribute.loc, attribute.itemSize, attribute.type,  false, attribute.itemSize*4,0);
                     this._cgl.gl.vertexAttribDivisor(attribute.loc, 1);
-                }else
-                if(attribute.itemSize==16)
+                }
+                else if(attribute.itemSize==16)
                 {
                     this._cgl.gl.vertexAttribPointer(attribute.loc, 4, attribute.type,  false, 16*4,0);
                     this._cgl.gl.enableVertexAttribArray(attribute.loc+1);
@@ -426,37 +438,44 @@ CGL.Mesh.hadError=false;
 
 CGL.Mesh.prototype.printDebug=function(shader)
 {
-    if(CGL.Mesh.hadError)return;
-    var error = this._cgl.gl.getError();
-    if (error != this._cgl.gl.NO_ERROR )
+    // if(CGL.Mesh.hadError)return;
+    // var error = this._cgl.gl.getError();
+    // if (error != this._cgl.gl.NO_ERROR )
+    // {
+    //     CGL.Mesh.hadError=true;
+    //     if(error==this._cgl.gl.OUT_OF_MEMORY)console.log("OUT_OF_MEMORY");
+    //     if(error==this._cgl.gl.INVALID_ENUM)console.log("INVALID_ENUM");
+    //     if(error==this._cgl.gl.INVALID_OPERATION)console.log("INVALID_OPERATION");
+    //     if(error==this._cgl.gl.INVALID_FRAMEBUFFER_OPERATION)console.log("INVALID_FRAMEBUFFER_OPERATION");
+    //     if(error==this._cgl.gl.INVALID_VALUE)console.log("INVALID_VALUE");
+    //     if(error==this._cgl.gl.CONTEXT_LOST_WEBGL)console.log("CONTEXT_LOST_WEBGL");
+    //     if(error==this._cgl.gl.NO_ERROR)console.log("NO_ERROR");
+
+    //     console.error('mesh error');
+    //     console.log('shader:',shader.name);
+    //     console.log('geom:',this._geom.name);
+    //     console.log('verts:',this._geom.vertices.length);
+    //     if(this._geom.tangents)console.log('tangents:',this._geom.tangents.length);
+    //     console.log('texCoords:',this._geom.texCoords.length);
+    //     console.log('texCoords indizes:',this._geom.texCoordsIndices.length);
+    //     console.log('indizes:',this._geom.verticesIndices.length);
+
+    //     var maxIndex=0;
+    //     for(var j=0;j<this._geom.verticesIndices.length;j++)
+    //     {
+    //         maxIndex=Math.max(this._geom.verticesIndices[j],maxIndex);
+    //     }
+    //     console.log('max index',maxIndex);
+    //     console.log('get error: ',error);
+
+    //     shader.printStats();
+    // }
+
+
+    console.log("--attributes");
+    for(i=0;i<this._attributes.length;i++)
     {
-        CGL.Mesh.hadError=true;
-        if(error==this._cgl.gl.OUT_OF_MEMORY)console.log("OUT_OF_MEMORY");
-        if(error==this._cgl.gl.INVALID_ENUM)console.log("INVALID_ENUM");
-        if(error==this._cgl.gl.INVALID_OPERATION)console.log("INVALID_OPERATION");
-        if(error==this._cgl.gl.INVALID_FRAMEBUFFER_OPERATION)console.log("INVALID_FRAMEBUFFER_OPERATION");
-        if(error==this._cgl.gl.INVALID_VALUE)console.log("INVALID_VALUE");
-        if(error==this._cgl.gl.CONTEXT_LOST_WEBGL)console.log("CONTEXT_LOST_WEBGL");
-        if(error==this._cgl.gl.NO_ERROR)console.log("NO_ERROR");
-
-        console.error('mesh error');
-        console.log('shader:',shader.name);
-        console.log('geom:',this._geom.name);
-        console.log('verts:',this._geom.vertices.length);
-        if(this._geom.tangents)console.log('tangents:',this._geom.tangents.length);
-        console.log('texCoords:',this._geom.texCoords.length);
-        console.log('texCoords indizes:',this._geom.texCoordsIndices.length);
-        console.log('indizes:',this._geom.verticesIndices.length);
-
-        var maxIndex=0;
-        for(var j=0;j<this._geom.verticesIndices.length;j++)
-        {
-            maxIndex=Math.max(this._geom.verticesIndices[j],maxIndex);
-        }
-        console.log('max index',maxIndex);
-        console.log('get error: ',error);
-
-        shader.printStats();
+        console.log("attribute "+i+'  '+this._attributes[i].name);
     }
 };
 

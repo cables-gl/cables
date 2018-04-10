@@ -47,5 +47,45 @@
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "6bf8a173-a9f9-48d8-b23a-76380dfbe4c5",
-    "created": 1510742549751
+    "created": 1510742549751,
+    "docs": {
+        "ports": [
+            {
+                "name": "Volume",
+                "text": "Playback-Volume, `1.0` = normal, `0.0` = silent  "
+            },
+            {
+                "name": "File",
+                "text": "The audio-file to play back, upload one by drag’n’dropping it to the window and then select if from the project-files or pick one from the library."
+            },
+            {
+                "name": "Play",
+                "text": "Starts the audio-playback"
+            },
+            {
+                "name": "Pause",
+                "text": "Stops the audio-playback"
+            },
+            {
+                "name": "Rewind",
+                "text": "Sets the playhead to the beginning"
+            },
+            {
+                "name": "Seek Position (Seconds)",
+                "text": "Set this to the position in the audio file you want to jump to (in seconds). You need to call `Jump To Seek Position` to actually perform the jump afterwards."
+            },
+            {
+                "name": "Jump To Seek Position",
+                "text": "Jumps / Seeks to the position `Seek Position (Seconds)`"
+            },
+            {
+                "name": "Audio Out",
+                "text": "Connect this e.g. to a Ops.WebAudio.Output to hear the sound"
+            },
+            {
+                "name": "Duration",
+                "text": "The duration of the current audio file (in seconds)"
+            }
+        ]
+    }
 }

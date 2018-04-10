@@ -41,5 +41,37 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.AmplitudeEnvelope"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Attack",
+                "text": "The amount of time it takes for the envelope to reach it's maximum value"
+            },
+            {
+                "name": "Decay",
+                "text": "After the attack portion of the envelope, the value will fall over the duration of the decay time to it's sustain value"
+            },
+            {
+                "name": "Sustain",
+                "text": "The sustain value is the value which the envelope rests at after triggerAttack is called, but before triggerRelease is invoked"
+            },
+            {
+                "name": "Release",
+                "text": "After triggerRelease is called, the envelope's value will fall to it's miminum value over the duration of the release time"
+            },
+            {
+                "name": "Attack Curve",
+                "text": "The shape of the attack"
+            },
+            {
+                "name": "Release Curve",
+                "text": "The shape of the release"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The envelope signal"
+            }
+        ]
     }
 }

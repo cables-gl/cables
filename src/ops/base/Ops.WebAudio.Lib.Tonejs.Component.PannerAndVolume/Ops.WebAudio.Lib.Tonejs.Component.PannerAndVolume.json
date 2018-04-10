@@ -25,5 +25,25 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.PannerAndVolume"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal to pan"
+            },
+            {
+                "name": "Panning",
+                "text": "Where the audio signal should be heard, `-1` = fully left, `0` = center, `1` = fully right"
+            },
+            {
+                "name": "Volume",
+                "text": "How loud it should be (in dB)"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The panned audio signal"
+            }
+        ]
     }
 }

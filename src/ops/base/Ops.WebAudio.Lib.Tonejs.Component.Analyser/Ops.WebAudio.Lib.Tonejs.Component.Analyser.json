@@ -60,5 +60,49 @@
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Analyser"
     },
     "updated": 1520419488962,
-    "created": 1508578804935
+    "created": 1508578804935,
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal you want to analyse"
+            },
+            {
+                "name": "Refresh",
+                "text": "Does the analysis, mostly you want to connect this to `MainLoop`"
+            },
+            {
+                "name": "Size",
+                "text": "The size of analysis"
+            },
+            {
+                "name": "Type",
+                "text": "The analysis function to use, either \"fft\" or \"waveform\""
+            },
+            {
+                "name": "Smoothing",
+                "text": "`0` represents no time averaging with the last analysis frame. If your want smoother values increase it"
+            },
+            {
+                "name": "Max Decibels",
+                "text": "The largest decibel value which is analysed by the FFT"
+            },
+            {
+                "name": "Min Decibels",
+                "text": "The smallest decibel value which is analysed by the FFT"
+            },
+            {
+                "name": "Return Type",
+                "text": "The data type of the elements in the array, either `byte` or `float`"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The same audio signal as in `Audio In` (pass through)"
+            },
+            {
+                "name": "Analyser Array",
+                "text": "The array containing the audio analysis data"
+            }
+        ]
+    }
 }

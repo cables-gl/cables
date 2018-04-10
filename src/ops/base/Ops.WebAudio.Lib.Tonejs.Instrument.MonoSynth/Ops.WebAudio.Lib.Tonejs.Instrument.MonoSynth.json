@@ -29,5 +29,25 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Instrument.MonoSynth"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Detune",
+                "text": "The detune amount in cents – `100` = one semitone up"
+            },
+            {
+                "name": "Portamento (Time)",
+                "text": "The glide time between notes."
+            },
+            {
+                "name": "Volume",
+                "text": "The volume of the output in decibels."
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio signal"
+            }
+        ]
     }
 }

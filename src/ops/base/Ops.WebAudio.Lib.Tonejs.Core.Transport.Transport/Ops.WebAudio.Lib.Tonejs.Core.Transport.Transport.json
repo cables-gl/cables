@@ -89,5 +89,81 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Core.Transport.Transport"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Updates the output values"
+            },
+            {
+                "name": "BPM",
+                "text": "The Beats Per Minute of the Transport"
+            },
+            {
+                "name": "Swing",
+                "text": "The swing value. Between 0-1 where 1 equal to the note + half the subdivision"
+            },
+            {
+                "name": "Swing Subdivision",
+                "text": "Set the subdivision which the swing will be applied to. The default value is an 8th note. Value must be less than a quarter note."
+            },
+            {
+                "name": "Loop",
+                "text": "If the transport loops or not"
+            },
+            {
+                "name": "Loop Start",
+                "text": "When `Loop` = true, this is the starting position of the loop"
+            },
+            {
+                "name": "Loop End",
+                "text": "When `Loop` = false, this is the starting position of the loop"
+            },
+            {
+                "name": "Pulses Per Quarter Note",
+                "text": "Pulses Per Quarter note. This is the smallest resolution the Transport timing supports. Do not change this if you don’t know what you are doing."
+            },
+            {
+                "name": "Start",
+                "text": "Start the transport and all sources synced to the transport"
+            },
+            {
+                "name": "Start Time",
+                "text": "When the transport should start once `Start` was triggered"
+            },
+            {
+                "name": "Auto Start",
+                "text": "If set `Transport` will automatically start when the patch was loaded, or the `Update`-port was connected"
+            },
+            {
+                "name": "Stop",
+                "text": "Stop the transport and all sources synced to the transport"
+            },
+            {
+                "name": "Stop Time",
+                "text": "When the transport should stop once `Stop` was triggered"
+            },
+            {
+                "name": "State",
+                "text": "Either `started` or `stopped`"
+            },
+            {
+                "name": "Position (BarsBeatsSixteenth)",
+                "text": "The current (virtual) timeline-position. Format: Bars:Beats:Sixteenth"
+            },
+            {
+                "name": "Seconds",
+                "text": "The current position in seconds"
+            },
+            {
+                "name": "Progress",
+                "text": "The currrent progress from `0` to `1`"
+            },
+            {
+                "name": "Ticks",
+                "text": "The current position in ticks"
+            }
+        ]
     }
 }

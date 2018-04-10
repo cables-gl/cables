@@ -59,5 +59,49 @@
     },
     "summary": "Plays back audio data stored in an AudioBuffer",
     "updated": 1522776025335,
-    "created": 1506598843485
+    "created": 1506598843485,
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio Buffer",
+                "text": "The audio buffer (typically from an audio file) which contains the audio data. In most cases you need to create a `AudioBuffer` op to load your audio sample and connect it to this port."
+            },
+            {
+                "name": "Start / Stop",
+                "text": "When set the playback is started"
+            },
+            {
+                "name": "Start Time",
+                "text": "The time in seconds when the sound should begin to play (once `Start / Stop` has been set to `true`). A time of `0` means *play now*, `3` means at 3 seconds of the web audio time. "
+            },
+            {
+                "name": "Stop Time",
+                "text": "The time in seconds when the sound should stop to play (once `Start / Stop` has been set to `false`). A time of `0` means *stop now*."
+            },
+            {
+                "name": "Offset",
+                "text": "Shifts the playback position"
+            },
+            {
+                "name": "Autoplay",
+                "text": "When set to `true` the sound will start to play as soon as the `AudioBuffer` is loaded."
+            },
+            {
+                "name": "Loop",
+                "text": "Weather or not the playback should start from the beginning once the end has been reached. Please note that some browsers have problems doing a perfect loop with certain file types. If you e.g. use an MP3-file as `AudioBuffer` Google Chrome might produce a slight gap between the loops. Ogg-files sometimes work better."
+            },
+            {
+                "name": "Detune",
+                "text": "How much the sound should be detuned in [cents](https://en.wikipedia.org/wiki/Cent_(music)). `-100` means one semitone lower, `100` one semitone higher, `12000` is one octave higher (`12 * 100`)."
+            },
+            {
+                "name": "Playback Rate",
+                "text": "How fast / slow the audio should be played back, `1` is normal speed, `2` double speed, `0.5` half speed."
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio out object"
+            }
+        ]
+    }
 }

@@ -61,5 +61,57 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Source.PwmOscillator"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Frequency",
+                "text": "The frequency of the oscillator"
+            },
+            {
+                "name": "Detune",
+                "text": "The detune amount, `100` = one semitone up, `-100` = one semitone down, `1200` = one octave up"
+            },
+            {
+                "name": "Modulation Frequency",
+                "text": "The modulation rate of the oscillator."
+            },
+            {
+                "name": "Phase",
+                "text": "The phase of the oscillator in degrees (between `0`and `180`."
+            },
+            {
+                "name": "Sync Frequency",
+                "text": "When set the frequency is synced to the BPM (beats per minute). BPM can be set in the `Transport`-op."
+            },
+            {
+                "name": "Start",
+                "text": "Will start the oscillator at `Start Time` "
+            },
+            {
+                "name": "Start Time",
+                "text": "The time when the oscillator starts once `Start` is triggered. `+0` means now, so in the moment `Start` is triggered. "
+            },
+            {
+                "name": "Stop",
+                "text": "The time when the oscillator stops once `Stop` is triggered. `+0` means now, so in the moment `Stop` is triggered. "
+            },
+            {
+                "name": "Auto Start",
+                "text": "Automatically starts the oscillator"
+            },
+            {
+                "name": "Volume",
+                "text": "The volume of the output in decibels (between `-96` and `0`)."
+            },
+            {
+                "name": "Mute",
+                "text": "Mutes the output"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio signal"
+            }
+        ]
     }
 }

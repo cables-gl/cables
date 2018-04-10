@@ -13,6 +13,8 @@
   * [Intermediate](chapter_readmes/intermediate/readme.md)
     * [Image Compositions](image_composition/image_composition.md)
     * [Post-processing 3D scenes](post-processing_3d_scenes/post-processing_3d_scenes.md)
+  * [Communication](chapter_readmes/communication/readme.md)
+    * [Arduino Serial Communication](arduino_serial/arduino_serial.md)
   * [Export / Embedding](chapter_readmes/export/readme.md)
     * [Export / Local Previewing / Uploading to your Server](dev_embed_webservers/dev_embed_webservers.md)
     * [Embedding](dev_embed/dev_embed.md)

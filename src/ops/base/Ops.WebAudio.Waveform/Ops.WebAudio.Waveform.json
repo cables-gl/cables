@@ -53,5 +53,50 @@
             }
         ],
         "name": "Ops.WebAudio.Waveform"
+    },
+    "summary": "Outputs the waveform of an audio file.",
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Renders the waveform and triggers `Next` when done"
+            },
+            {
+                "name": "Audio Buffer",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which loads and holds an audio sample"
+            },
+            {
+                "name": "Width",
+                "text": "The width of the waveform"
+            },
+            {
+                "name": "Samples Per Pixel",
+                "text": "Controls how detailled the waveform is, the smaller the value the more detail and the wider the output. "
+            },
+            {
+                "name": "Show bottom half",
+                "text": "When enabled the top half of the waveform will be mirrored, when disabled only the upper half is drawn"
+            },
+            {
+                "name": "Center Origin",
+                "text": "When enabled the waveform will be centered around the origin, e.g. useful when using `OrbitControls` and rotating around the origin. When disabled the waveform will start at the origin."
+            },
+            {
+                "name": "Render Active",
+                "text": "If you only need the `Spline Points` or `Geometry` (not render it in the op), you can disable this to save resources."
+            },
+            {
+                "name": "Next",
+                "text": "Called after `Render` was called, triggers the next op"
+            },
+            {
+                "name": "Spline Points",
+                "text": "The single points of the Waveform, can be connected e.g. to a `SimpleSpline`-op."
+            },
+            {
+                "name": "Geometry",
+                "text": "The geometry of the waveform, can be drawn e.g. with `RenderGeometry`"
+            }
+        ]
     }
 }

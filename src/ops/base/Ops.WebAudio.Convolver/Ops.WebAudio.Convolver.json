@@ -26,5 +26,26 @@
         "name": "Ops.WebAudio.Convolver"
     },
     "updated": 1510741688553,
-    "created": 1510741688555
+    "created": 1510741688555,
+    "summary": "Audio reverb using an impulse response (sample)",
+    "docs": {
+        "ports": [
+            {
+                "name": "audio in",
+                "text": "The audio signal to apply the convolution on"
+            },
+            {
+                "name": "impulse response",
+                "text": "The audio file used for the convolution. Must use the same [sample rate](https://developer.mozilla.org/de/docs/Web/API/AudioContext/sampleRate) as the audio context (44100 in most cases)."
+            },
+            {
+                "name": "normalize",
+                "text": "When set to true, the impulse response will be normalized. "
+            },
+            {
+                "name": "audio out",
+                "text": "The convolver applied to the audio input"
+            }
+        ]
+    }
 }

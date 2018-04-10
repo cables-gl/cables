@@ -18,5 +18,18 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Type.FrequencyToNote"
+    },
+    "summary": "Converts a frequency to a note (440 -> \"A4\")",
+    "docs": {
+        "ports": [
+            {
+                "name": "Frequency",
+                "text": "The frequency to be converted to a Note-String e.g. `440` "
+            },
+            {
+                "name": "Note",
+                "text": "The note as String, e.g. `\"A4\"`"
+            }
+        ]
     }
 }

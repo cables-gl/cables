@@ -12,11 +12,13 @@
             },
             {
                 "type": "0",
-                "name": "Line Strip"
+                "name": "Line Strip",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Num Points"
+                "name": "Num Points",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -27,7 +29,7 @@
         ],
         "name": "Ops.Gl.Meshes.SimpleSpline"
     },
-    "updated": 1523356619502,
+    "updated": 1523357747060,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "af3fd0e8-ef3d-4124-a6ee-3482e9a85b45",

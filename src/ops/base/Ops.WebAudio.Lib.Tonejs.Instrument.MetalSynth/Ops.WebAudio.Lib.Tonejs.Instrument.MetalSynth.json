@@ -41,5 +41,8 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Instrument.MetalSynth"
+    },
+    "docs": {
+        "ports": []
     }
 }

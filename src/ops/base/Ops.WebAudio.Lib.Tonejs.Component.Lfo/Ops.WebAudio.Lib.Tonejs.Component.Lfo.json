@@ -45,5 +45,45 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Lfo"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Frequency",
+                "text": "The LFO’s frequency"
+            },
+            {
+                "name": "Amplitude",
+                "text": "The amplitude of the LFO, which controls the output range between the min and max output. For example if the min is -10 and the max is 10, setting the amplitude to 0.5 would make the LFO modulate between -5 and 5"
+            },
+            {
+                "name": "Min",
+                "text": "The miniumum output of the LFO"
+            },
+            {
+                "name": "Max",
+                "text": "The maximum output of the LFO"
+            },
+            {
+                "name": "Type",
+                "text": "The type of the oscillator: sine, square, sawtooth, triangle"
+            },
+            {
+                "name": "Phase",
+                "text": "The phase of the LFO"
+            },
+            {
+                "name": "Volume",
+                "text": "The volume of the output in decibels"
+            },
+            {
+                "name": "Mute",
+                "text": "Mute the output"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The signal"
+            }
+        ]
     }
 }

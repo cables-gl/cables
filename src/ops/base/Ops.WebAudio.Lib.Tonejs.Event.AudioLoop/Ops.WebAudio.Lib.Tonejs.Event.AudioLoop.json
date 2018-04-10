@@ -85,5 +85,77 @@
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Event.AudioLoop"
     },
-    "summary": "Repeating trigger for audio"
+    "summary": "Repeating trigger for audio",
+    "docs": {
+        "ports": [
+            {
+                "name": "Update State Ports",
+                "text": "Updates the output-ports `Started` and `Progress`. This is handy to find out if the loop is playing, connect it e.g. to `MainLoop`. As this is not very performant, it is best to not connect this port when you don’t need access to `State` and `Progress`."
+            },
+            {
+                "name": "Interval",
+                "text": "How often the event happens. See [Tone.js Time Docs](https://github.com/Tonejs/Tone.js/wiki/Time)"
+            },
+            {
+                "name": "Iterations",
+                "text": "How often the loop should be repeated. If set to `0` it will go on infinitely"
+            },
+            {
+                "name": "Playback Rate",
+                "text": "How fast the loop should be. `1` is default, `2` is double the speed and so on"
+            },
+            {
+                "name": "Humanize",
+                "text": "Adds a random variation to the scheduled time, so it is a bit more human (inprecise). If set `Humanize Time` will be used."
+            },
+            {
+                "name": "Humanize Time",
+                "text": "If `Humanize` is set to true, a random variation to the scheduled time is added / subtracted, so it is a bit more human (inprecise)"
+            },
+            {
+                "name": "Probability",
+                "text": "The probably of the callback being invoked. `1` = all callbacks, `0` = no callbacks at all"
+            },
+            {
+                "name": "Start Time",
+                "text": "When along the timeline the loop should start. `0` means at the beginning"
+            },
+            {
+                "name": "Start",
+                "text": "Starts the loop at `Start Time`"
+            },
+            {
+                "name": "Stop Time",
+                "text": "When along the timeline the loop should stop. `+0` means *right now*"
+            },
+            {
+                "name": "Stop",
+                "text": "Stops the loop at `Stop Time`"
+            },
+            {
+                "name": "Cancel Time",
+                "text": "The time after which events will be cancel. `+0` means *right now*"
+            },
+            {
+                "name": "Cancel",
+                "text": "Cancel all scheduled events greater than or equal to the `Cancel Time`"
+            },
+            {
+                "name": "Trigger",
+                "text": "Triggers every time the loop has an event"
+            },
+            {
+                "name": "Time",
+                "text": "The time the event occurs"
+            },
+            {
+                "name": "Started",
+                "text": "`true` when the loop is currently playing, `false` otherwise. For this value to update you need to connect `Update Stare Ports` e.g. to ´MainLoop´."
+            },
+            {
+                "name": "Progress",
+                "text": "The current progress in the loop, `0` = *at the beginning*, `1` = *at the end*. For this value to update you need to connect `Update State Ports` e.g. to ´MainLoop´."
+            }
+        ]
+    }
 }

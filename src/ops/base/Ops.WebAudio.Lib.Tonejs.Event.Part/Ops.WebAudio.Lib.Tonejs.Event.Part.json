@@ -108,5 +108,8 @@
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Event.Part"
     },
-    "summary": "Musical part"
+    "summary": "Musical part",
+    "docs": {
+        "ports": []
+    }
 }
