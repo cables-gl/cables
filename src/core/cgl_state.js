@@ -98,6 +98,7 @@ CGL.Context = function() {
 
     this.canvasWidth = -1;
     this.canvasHeight = -1;
+    this.canvasScale = 1;
     var oldCanvasWidth = -1;
     var oldCanvasHeight = -1;
 

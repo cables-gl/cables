@@ -1,12 +1,8 @@
-op.name="SimpleSpline";
-
 var render=op.inFunction("Render");
 
 var inPoints=op.inArray("Points");
 var strip=op.inValueBool("Line Strip",true);
 var numPoints=op.inValue("Num Points");
-
-
 
 var next=op.outFunction("Next");
 
