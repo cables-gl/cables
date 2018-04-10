@@ -42,5 +42,13 @@
             }
         ],
         "name": "Ops.WebAudio.MultiIn"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "audio out",
+                "text": "Audio output which contains the mixed audio signal of all connected inputs, can be connected to `AudioOutput` e.g."
+            }
+        ]
     }
 }

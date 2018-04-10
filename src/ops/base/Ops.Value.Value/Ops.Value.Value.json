@@ -1,5 +1,5 @@
 {
-    "summary": "helper op to use the same value for different inputs",
+    "summary": "Stores a value, use the same value in different places",
     "layout": {
         "portsIn": [
             {
@@ -14,5 +14,17 @@
             }
         ],
         "name": "Ops.Value"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "The value"
+            },
+            {
+                "name": "result",
+                "text": "Same as the input `Value`"
+            }
+        ]
     }
 }

@@ -21,5 +21,21 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Limiter"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal to apply the limiter to"
+            },
+            {
+                "name": "Threshold",
+                "text": "The threshold of of the limiter"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio signal withe applied limiter"
+            }
+        ]
     }
 }

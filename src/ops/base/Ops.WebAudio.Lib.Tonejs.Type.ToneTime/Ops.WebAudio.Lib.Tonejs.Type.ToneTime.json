@@ -25,5 +25,25 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Type.ToneTime"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Time",
+                "text": "The time to be converted to a tone.js-compatible time-format"
+            },
+            {
+                "name": "Time Type",
+                "text": "Either `Note`, `Triplet`, `Measure`, `Second`, `Frequency` or `Tick`.  See [Time](https://github.com/Tonejs/Tone.js/wiki/Time) for more infos."
+            },
+            {
+                "name": "Relative To Now",
+                "text": "When set the output string will be prefixed by a `+`-character – so the time will be interpreted as «the current time plus whatever expression follows»"
+            },
+            {
+                "name": "Tone Time",
+                "text": "A string representing time, to be used together with another tone.js-op"
+            }
+        ]
     }
 }

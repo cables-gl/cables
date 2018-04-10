@@ -13,5 +13,18 @@
             }
         ],
         "name": "Ops.ValueBoolean"
+    },
+    "summary": "Stores a boolean value",
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "Boolean value which will be copied to the output port"
+            },
+            {
+                "name": "result",
+                "text": "Same as the input port `Value`"
+            }
+        ]
     }
 }

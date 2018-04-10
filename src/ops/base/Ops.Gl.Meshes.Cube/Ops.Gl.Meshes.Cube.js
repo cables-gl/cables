@@ -188,3 +188,4 @@ center.onValueChanged=buildMesh;
 
 
 
+buildMesh();

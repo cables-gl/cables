@@ -92,12 +92,16 @@ function updateShader()
                 newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
             }
             else
-            if(uniform.type==0x8B5E)
+            if(uniform.type==0x8B5E )
             {
                 var newInputTex=op.inObject(uniform.name);
                 newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
                 uniformTextures.push(newInputTex);
                 countTexture++;
+            }
+            else
+            {
+                console.log('unknown uniform type',uniform.type,uniform);
             }
         }
     }

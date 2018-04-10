@@ -22,5 +22,25 @@
         ],
         "name": "Ops.WebAudio.FftTexture"
     },
-    "summary": "Generates a texture from audio information"
+    "summary": "Generates a texture from audio information",
+    "docs": {
+        "ports": [
+            {
+                "name": "refresh",
+                "text": "Executes the op, updates the texture"
+            },
+            {
+                "name": "FFT Array",
+                "text": "The array coming from a Ops.WebAudio.Analyser op"
+            },
+            {
+                "name": "texture_out",
+                "text": "Texture displaying the FFT data"
+            },
+            {
+                "name": "position",
+                "text": "The y-position the last incoming FFT data was written to"
+            }
+        ]
+    }
 }

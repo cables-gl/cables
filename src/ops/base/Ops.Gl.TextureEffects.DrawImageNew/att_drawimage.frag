@@ -44,7 +44,7 @@ void main()
             blendRGBA.a=1.0;
         #endif
 
-       #ifdef HAS_TEXTUREALPHA
+        #ifdef HAS_TEXTUREALPHA
             vec4 colImgAlpha=texture2D(imageAlpha,texCoord);
             float colImgAlphaAlpha=colImgAlpha.a;
 
@@ -54,14 +54,16 @@ void main()
             #endif
 
             blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;
-       #endif
+        #endif
 
 
-   #endif
+    #endif
+    
+    blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);
+    
+    blendRGBA.a=1.0;
+    
+    
+    gl_FragColor = blendRGBA;
 
-   blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);
-   blendRGBA.a=1.0;
-
-
-   gl_FragColor = blendRGBA;
 }

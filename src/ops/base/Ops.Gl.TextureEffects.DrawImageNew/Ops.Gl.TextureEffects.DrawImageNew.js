@@ -92,11 +92,7 @@ alphaSrc.set("alpha channel");
     var uniRotate=new CGL.Uniform(shader,'f','rotate',rotate);
 
     doTransform.onChange=updateTransformPorts;
-    
-
 }
-
-
 
 function updateTransformPorts()
 {
@@ -160,9 +156,7 @@ function doRender()
 
         cgl.gl.activeTexture(cgl.gl.TEXTURE1);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
-        // else cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
-        
         if(imageAlpha.get() && imageAlpha.get().tex)
         {
             cgl.gl.activeTexture(cgl.gl.TEXTURE2);

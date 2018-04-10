@@ -23,5 +23,21 @@
         ],
         "name": "Ops.TimeLine.TimeLineLoop"
     },
-    "summary": "automatic rewind of timeline at a certain time"
+    "summary": "Automatic rewind of timeline at a certain time",
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Executes the op"
+            },
+            {
+                "name": "duration",
+                "text": "How long the loop should be (in seconds)"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
+            }
+        ]
+    }
 }

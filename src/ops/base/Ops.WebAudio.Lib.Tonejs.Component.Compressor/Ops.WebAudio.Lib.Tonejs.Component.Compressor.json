@@ -37,5 +37,37 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Compressor"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal to compress"
+            },
+            {
+                "name": "Threshold",
+                "text": "The threshold value – at which decibel level the compression should start. If we set the threshold to `-12db`, the compressor will not affect everything quieter than that, as soon as the sound hits `-12dB` the compressor will kick in and reduce the volume. Often you want to chain a `Gain`-op after the `Compressor`-op to make it a little bit louder (makeup for the compression)."
+            },
+            {
+                "name": "Attack",
+                "text": "Attack time is how quickly the compressor engages and reduces the volume of the audio once the audio signal is louder than the threshold. If our attack is set to `20ms`, and the audio rises above our threshold of `-12db`, it will take 20 milliseconds for the compressor to fully kick in."
+            },
+            {
+                "name": "Release",
+                "text": "This is how long it takes the compressor to dis-engage."
+            },
+            {
+                "name": "Knee",
+                "text": "How hard the compressor kicks in, a low number (called *hard knee*) will kick in very hard, this is typically used for drums. A high number on the other hand (called soft knee) does not kick in fully (the transition from uncompressed to compressed is softer)."
+            },
+            {
+                "name": "Ratio",
+                "text": "The ratio determines how much the volume is reduced by."
+            },
+            {
+                "name": "Audio Out",
+                "text": "The compressed audio signal"
+            }
+        ]
     }
 }

@@ -1,14 +1,16 @@
 {
-    "summary": "trigger next op every x ms",
+    "summary": "Trigger every x ms",
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "interval"
+                "name": "interval",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Active"
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -17,11 +19,27 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Interval"
+        "name": "Ops.Trigger.Interval"
     },
     "updated": 1512035668332,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "3e9bae10-38af-4e36-9fcc-35faeeaf57f8",
-    "created": 1512035668333
+    "created": 1512035668333,
+    "docs": {
+        "ports": [
+            {
+                "name": "interval",
+                "text": "Number of milliseconds to trigger"
+            },
+            {
+                "name": "Active",
+                "text": "If the interval is active or not"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers every x milliseconds"
+            }
+        ]
+    }
 }

@@ -18,5 +18,21 @@
         ],
         "name": "Ops.String.Split"
     },
-    "summary": "splits a String object into an array of strings  "
+    "summary": "Splits a string with separator into an array of strings ",
+    "docs": {
+        "ports": [
+            {
+                "name": "Input String",
+                "text": "The string you want to split"
+            },
+            {
+                "name": "Separator",
+                "text": "The separator char, e.g. `,`"
+            },
+            {
+                "name": "Result",
+                "text": "The single parts of the string"
+            }
+        ]
+    }
 }

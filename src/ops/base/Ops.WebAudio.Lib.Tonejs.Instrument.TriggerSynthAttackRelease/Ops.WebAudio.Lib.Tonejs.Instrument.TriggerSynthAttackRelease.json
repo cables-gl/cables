@@ -31,5 +31,33 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Instrument.TriggerSynthAttackRelease"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Synth",
+                "text": "The synth to play a note on"
+            },
+            {
+                "name": "Trigger Arrack Release",
+                "text": "Triggers attack followed by release of the synth connected to the `Synth` input port"
+            },
+            {
+                "name": "Note",
+                "text": "Which note to play, e.g. `C4` (middle C). You can also put in a frequency, e.g. `440`. You can use the `Note` op to make this more convenient. "
+            },
+            {
+                "name": "Duration",
+                "text": "The time between the trigger of attack and release, so basically how long the tone is. You can use the op `ToneTime` to make this more convenient. Valid durations are e.g. `4n` (one quarter note), `1m` (one measure), `1.2` (1.2 seconds)"
+            },
+            {
+                "name": "Time",
+                "text": "When the note should be triggered, `+0` = now"
+            },
+            {
+                "name": "Velocity",
+                "text": "How loud it is, default: `1.0`"
+            }
+        ]
     }
 }

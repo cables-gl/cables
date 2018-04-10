@@ -7,7 +7,7 @@
 
 - Create a new file / folder in `doc`, e.g. `/how-to-write-shader-ops/how-to-write-shader-ops.md`
 - Write your text 
-- Include a link to your new article in `SUMMARY_base.md`
+- Include a link to your new article in `SUMMARY_base.md`, **not SUMMARY.md!**
 - Generate the gitbook by running `npm run build` (be patient, that takes a bit)
 - Run `git push`,  [docs.cables.gl](https://docs.cables.gl) will automatically update
 

@@ -45,5 +45,45 @@
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "aad4a714-8e77-4b85-8c69-cb7e564016a8",
-    "summary": "Compressor audio effect"
+    "summary": "Compressor audio effect",
+    "docs": {
+        "ports": [
+            {
+                "name": "audio in",
+                "text": "The audio signal you want to compress"
+            },
+            {
+                "name": "threshold",
+                "text": "How loud the signal has to be before compression is applied."
+            },
+            {
+                "name": "knee",
+                "text": "Sets how the compressor reacts to signals once the threshold is passed."
+            },
+            {
+                "name": "ratio",
+                "text": "How much compression is applied. For example, if the compression ratio is set for 6:1, the input signal will have to cross the threshold by 6 dB for the output level to increase by 1dB."
+            },
+            {
+                "name": "attack",
+                "text": "How quickly the compressor starts to work."
+            },
+            {
+                "name": "release",
+                "text": "How soon after the signal dips below the threshold the compressor stops."
+            },
+            {
+                "name": "exe",
+                "text": "Only needed to update the `Reduction` port, has no effect on the compression"
+            },
+            {
+                "name": "audio out",
+                "text": "Compressed audio signal"
+            },
+            {
+                "name": "reduction",
+                "text": "How much the audio input is reduced"
+            }
+        ]
+    }
 }

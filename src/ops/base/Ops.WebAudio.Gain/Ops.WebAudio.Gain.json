@@ -18,5 +18,21 @@
         ],
         "name": "Ops.WebAudio.Gain"
     },
-    "summary": "Changes the gain / volume"
+    "summary": "Changes the gain / volume",
+    "docs": {
+        "ports": [
+            {
+                "name": "audio in",
+                "text": "The audio signal you want to make more silent / louder"
+            },
+            {
+                "name": "gain",
+                "text": "Amount of gain to apply, `0` = not audible, `1` = output will be as loud as the input signal, everything bigger than `1` will make the audio signal louder."
+            },
+            {
+                "name": "audio out",
+                "text": "Audio output which contains the the input signal with the gain applied, can be connected to the Ops.WebAudio.Output op e.g."
+            }
+        ]
+    }
 }

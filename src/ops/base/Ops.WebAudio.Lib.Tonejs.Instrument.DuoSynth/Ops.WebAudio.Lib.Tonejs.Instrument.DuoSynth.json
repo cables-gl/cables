@@ -37,5 +37,37 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Instrument.DuoSynth"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Frequency",
+                "text": "The frequency control"
+            },
+            {
+                "name": "Vibrato Amount",
+                "text": "The amount of vibrato"
+            },
+            {
+                "name": "Vibrato Rate",
+                "text": "The vibrato frequency"
+            },
+            {
+                "name": "Harmonicity",
+                "text": "Harmonicity is the ratio between the two voices. A harmonicity of 1 is no change. Harmonicity = 2 means a change of an octave."
+            },
+            {
+                "name": "Portamento",
+                "text": "The glide time between notes."
+            },
+            {
+                "name": "Volume",
+                "text": "How loud"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio output"
+            }
+        ]
     }
 }

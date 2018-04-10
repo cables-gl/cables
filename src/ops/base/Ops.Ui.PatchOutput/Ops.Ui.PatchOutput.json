@@ -5,5 +5,9 @@
     "created": 1519813611671,
     "layout": {
         "name": "Ops.Ui.PatchOutput"
+    },
+    "summary": "Helper op for sub-patches",
+    "docs": {
+        "ports": []
     }
 }

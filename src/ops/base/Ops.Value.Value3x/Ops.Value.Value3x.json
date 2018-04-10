@@ -37,5 +37,34 @@
             }
         ],
         "name": "Ops.Value.Value3x"
+    },
+    "summary": "Stores a 3D coordinate",
+    "docs": {
+        "ports": [
+            {
+                "name": "value x",
+                "text": "X value, will be copied to the output port"
+            },
+            {
+                "name": "value y",
+                "text": "Y value, will be copied to the output port"
+            },
+            {
+                "name": "value z",
+                "text": "Z value, will be copied to the output port"
+            },
+            {
+                "name": "result x",
+                "text": "Same as input `Value X`"
+            },
+            {
+                "name": "result y",
+                "text": "Same as input `Value Y`"
+            },
+            {
+                "name": "result z",
+                "text": "Same as input `Value Z`"
+            }
+        ]
     }
 }

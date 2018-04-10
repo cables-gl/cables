@@ -141,7 +141,7 @@ function updateText()
     //     CGL.profileNonTypedAttrib=0;
     // CGL.profileNonTypedAttribNames="";
 
-    if(warn && warn.length>0)console.warn(warn);
+    // if(warn && warn.length>0)console.warn(warn);
     
     if(warn.length>0)
     {
