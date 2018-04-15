@@ -1,11 +1,9 @@
-op.name="Sine";
+const value=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
+const result=op.addOutPort(new Port(op,"result"));
 
-var value=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
-var result=op.addOutPort(new Port(op,"result"));
-
-var phase=op.addInPort(new Port(op,"phase",OP_PORT_TYPE_VALUE));
-var mul=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
-var amplitude=op.addInPort(new Port(op,"amplitude",OP_PORT_TYPE_VALUE));
+const phase=op.addInPort(new Port(op,"phase",OP_PORT_TYPE_VALUE));
+const mul=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
+const amplitude=op.addInPort(new Port(op,"amplitude",OP_PORT_TYPE_VALUE));
 
 
 mul.set(1.0);

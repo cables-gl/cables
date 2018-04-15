@@ -1,11 +1,9 @@
-
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
 shaderOut.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 
 var shader=new CGL.Shader(cgl,'BasicMaterial');

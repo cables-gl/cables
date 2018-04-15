@@ -1,1 +1,39 @@
-{"summary":"outputs sine of a number","layout":{"portsIn":[{"type":"0","name":"value"},{"type":"0","name":"phase"},{"type":"0","name":"frequency"},{"type":"0","name":"amplitude"}],"portsOut":[{"type":"0","name":"result"}],"name":"Ops.Math.Sinus"}}
+{
+    "summary": "outputs sine of a number",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "phase",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frequency",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "amplitude",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Sine"
+    },
+    "updated": 1523828869123,
+    "authorName": "pandur",
+    "id": "a5164007-32ad-4d3e-b734-35bacc8db5be",
+    "created": 1523828867365
+}

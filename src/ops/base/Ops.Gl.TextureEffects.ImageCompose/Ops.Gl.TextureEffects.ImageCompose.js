@@ -1,18 +1,17 @@
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+const width=op.inValueInt("width");
+const height=op.inValueInt("height");
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var width=op.inValueInt("width");
-var height=op.inValueInt("height");
+const tfilter=op.inValueSelect("filter",['nearest','linear','mipmap'],"linear");
+const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
+const bgAlpha=op.inValueSlider("Background Alpha",1);
+const fpTexture=op.inValueBool("HDR");
 
-var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap'],"linear");
-var twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
-var bgAlpha=op.inValueSlider("Background Alpha",1);
-var fpTexture=op.inValueBool("HDR");
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const texOut=op.outTexture("texture_out");
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var texOut=op.outTexture("texture_out");
-
-var outRatio=op.outValue("Aspect Ratio");
+const outRatio=op.outValue("Aspect Ratio");
 
 texOut.set(null);
 var cgl=op.patch.cgl;

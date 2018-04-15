@@ -4,19 +4,23 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "numValues"
+                "name": "numValues",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "random seed"
+                "name": "random seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min"
+                "name": "Min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max"
+                "name": "Max",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -50,5 +54,9 @@
                 "text": "The resulting array"
             }
         ]
-    }
+    },
+    "updated": 1523828761117,
+    "authorName": "pandur",
+    "id": "4620a278-2f57-48d9-bbb6-db027adfd14b",
+    "created": 1523828151005
 }

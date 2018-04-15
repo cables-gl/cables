@@ -1,15 +1,15 @@
-var render=op.inFunction("render");
-var segments=op.inValue('segments',40);
-var radius=op.inValue('radius',0.5);
-var innerRadius=op.inValueSlider('innerRadius',0);
-var percent=op.inValueSlider('percent');
-var steps=op.inValue('steps',0);
-var invertSteps=op.inValueBool('invertSteps',false);
-var doRender=op.inValueBool('Render',true);
+const render=op.inFunction("render");
+const segments=op.inValue('segments',40);
+const radius=op.inValue('radius',0.5);
+const innerRadius=op.inValueSlider('innerRadius',0);
+const percent=op.inValueSlider('percent');
+const steps=op.inValue('steps',0);
+const invertSteps=op.inValueBool('invertSteps',false);
+const doRender=op.inValueBool('Render',true);
 
 
-var trigger=op.outFunction('trigger');
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+const trigger=op.outFunction('trigger');
+const geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
