@@ -37,20 +37,24 @@ var updateType = function(){
 var updateFrequency = function(){
     var freq = frequency.get();
     if(freq && freq >= FREQUENCY_MIN && freq <= FREQUENCY_MAX) {
-        biquadFilter.frequency.value = frequency.get();    
+        // biquadFilter.frequency.value = frequency.get();    
+        biquadFilter.frequency.setValueAtTime(frequency.get(), window.audioContext.currentTime);
     }
 };
 
 var updateDetune = function(){
-    biquadFilter.detune.value = detune.get();
+    // biquadFilter.detune.value = detune.get();
+    biquadFilter.detune.setValueAtTime(detune.get(), window.audioContext.currentTime);
 };
 
 var updateQ = function(){
-    biquadFilter.Q.value = q.get();
+    // biquadFilter.Q.value = q.get();
+    biquadFilter.Q.setValueAtTime(q.get(), window.audioContext.currentTime);
 };
 
 var updateGain = function(){
-    biquadFilter.gain.value = gain.get();
+    // biquadFilter.gain.value = gain.get();
+    biquadFilter.gain.setValueAtTime(gain.get(), window.audioContext.currentTime);
 };
 
 type.onValueChange( updateType );
