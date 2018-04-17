@@ -10,8 +10,8 @@ var CGL = CGL || {};
 CGL.Context = function() {
     var self = this;
 
-    var vMatrixStack = [];
-    var pMatrixStack = [];
+    // var vMatrixStack = [];
+    // var pMatrixStack = [];
     var shaderStack = [];
     var frameBufferStack = [null];
     var viewPort = [0, 0, 0, 0];
@@ -23,6 +23,11 @@ CGL.Context = function() {
     this.pMatrix = mat4.create();
     this.mMatrix = mat4.create();
     this.vMatrix = mat4.create();
+
+    this._pMatrixStack=new CGL.MatrixStack();
+    this._mMatrixStack=new CGL.MatrixStack();
+    this._vMatrixStack=new CGL.MatrixStack();
+
 
     Object.defineProperty(this, 'mvMatrix', { get: function() { return this.mMatrix; }, set: function(m) { this.mMatrix=m; } }); // todo: deprecated
 
@@ -164,9 +169,13 @@ CGL.Context = function() {
         }
 
         self.setPreviousShader();
-        if (vMatrixStack.length > 0) console.warn('view matrix stack length !=0 at end of rendering...');
-        if (this._stackModelMatrix.length > 0) console.warn('mmatrix stack length !=0 at end of rendering...');
-        if (pMatrixStack.length > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
+        if (this._vMatrixStack.length() > 0) console.warn('view matrix stack length !=0 at end of rendering...');
+        if (this._mMatrixStack.length() > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
+        if (this._pMatrixStack.length() > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
+
+        // if (vMatrixStack.length > 0) console.warn('view matrix stack length !=0 at end of rendering...');
+        // if (this._stackModelMatrix.length > 0) console.warn('mmatrix stack length !=0 at end of rendering...');
+        // if (pMatrixStack.length > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
         if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
 
         if (this._stackDepthTest.length > 0) console.warn('depthtest stack length !=0 at end of rendering...');
@@ -174,10 +183,10 @@ CGL.Context = function() {
         if (this._stackDepthFunc.length > 0) console.warn('depthfunc stack length !=0 at end of rendering...');
         if (this._stackBlend.length > 0) console.warn('blend stack length !=0 at end of rendering...');
 
-        this._stackModelMatrix.length = 0;
-        vMatrixStack.length = 0;
-        pMatrixStack.length = 0;
-        shaderStack.length = 0;
+        // this._stackModelMatrix.length = 0;
+        // vMatrixStack.length = 0;
+        // pMatrixStack.length = 0;
+        // shaderStack.length = 0;
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
             oldCanvasWidth = self.canvasWidth;
@@ -228,33 +237,38 @@ CGL.Context = function() {
         return frameBufferStack[frameBufferStack.length - 1];
     };
 
+
+
+    
     // view matrix stack
 
+    this.getViewMatrixStateCount = function() {
+        return this._vMatrixStack.stateCounter;
+    };
+
     this.pushViewMatrix = function() {
-        var copy = mat4.clone(self.vMatrix);
-        // var copy = mat4.create();
-        // mat4.copy(copy,self.mMatrix);
-        vMatrixStack.push(copy);
+        this._vMatrixStack.push(this.vMatrix);
     };
 
     this.popViewMatrix = function() {
-        if (vMatrixStack.length === 0) throw "Invalid view popMatrix!";
-        self.vMatrix = vMatrixStack.pop();
+        this.vMatrix = this._vMatrixStack.pop();
     };
-
 
     // projection matrix stack
 
+    this.getProjectionMatrixStateCount = function() {
+        return this._pMatrixStack.stateCounter;
+    };
+
     this.pushPMatrix = function() {
-        var copy = mat4.create();
-        mat4.copy(copy, self.pMatrix);
-        pMatrixStack.push(copy);
+        this.pMatrix=this._pMatrixStack.push(this.pMatrix);
     };
 
     this.popPMatrix = function() {
-        if (pMatrixStack.length === 0) throw "Invalid projection popMatrix!";
-        self.pMatrix = pMatrixStack.pop();
+        this.pMatrix = this._pMatrixStack.pop();
     };
+
+
 
     var identView = vec3.create();
     vec3.set(identView, 0, 0, 2);
@@ -432,24 +446,29 @@ CGL.Context = function() {
 };
 
 
+
+
 // model matrix stack
 
 CGL.Context.prototype._stackModelMatrix=[];
-CGL.Context.prototype.pushMMatrix = // deprecated
+CGL.Context.prototype.pushMvMatrix = // deprecated
 CGL.Context.prototype.pushModelMatrix = function()
 {
-    var copy = mat4.clone(this.mMatrix);
-    this._stackModelMatrix.push(copy);
+    // var copy = mat4.clone(this.mMatrix);
+    this.mMatrix=this._mMatrixStack.push(this.mMatrix);
 };
 
-CGL.Context.prototype.popMMatrix =
+CGL.Context.prototype.popmMatrix =
 CGL.Context.prototype.popModelMatrix = function() {
-    if (this._stackModelMatrix.length === 0) throw "Invalid modelview popMatrix!";
-    this.mMatrix = this._stackModelMatrix.pop();
+    // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
+    this.mMatrix = this._mMatrixStack.pop();
 };
 CGL.Context.prototype.modelMatrix = function() {
     return this.mMatrix;
 };
+
+
+
 
 
 // state depthtest
