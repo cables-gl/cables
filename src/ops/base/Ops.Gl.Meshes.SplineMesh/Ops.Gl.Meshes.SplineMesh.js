@@ -1,4 +1,3 @@
-
 var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
 var thick=op.inValue("Thickness");

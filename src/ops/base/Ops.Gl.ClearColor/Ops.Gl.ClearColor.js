@@ -1,13 +1,13 @@
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+const g=op.inValueSlider("g",0.1);
+const b=op.inValueSlider("b",0.1);
+const a=op.inValueSlider("a",1);
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.inValueSlider("g",0.1);
-var b=op.inValueSlider("b",0.1);
-var a=op.inValueSlider("a",1);
 r.set(0.1);
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 render.onTriggered=function()
 {

@@ -1,5 +1,3 @@
-
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
 var maxDist=op.addInPort(new Port(op,"max distance",OP_PORT_TYPE_VALUE));

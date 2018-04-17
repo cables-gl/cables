@@ -21,11 +21,14 @@ CGL.Context = function() {
     this.frameStore = {};
     this.gl = null;
     this.pMatrix = mat4.create();
-    this.mvMatrix = mat4.create(); // this is only modelmatrix not modelviewmatrix!!
+    this.mMatrix = mat4.create();
     this.vMatrix = mat4.create();
+
+    Object.defineProperty(this, 'mvMatrix', { get: function() { return this.mMatrix; }, set: function(m) { this.mMatrix=m; } }); // todo: deprecated
+
     this.canvas = null;
     this.pixelDensity=1;
-    mat4.identity(this.mvMatrix);
+    mat4.identity(this.mMatrix);
     mat4.identity(this.vMatrix);
 
     var simpleShader = new CGL.Shader(this, "simpleshader");
@@ -162,7 +165,7 @@ CGL.Context = function() {
 
         self.setPreviousShader();
         if (vMatrixStack.length > 0) console.warn('view matrix stack length !=0 at end of rendering...');
-        if (this._stackModelMatrix.length > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
+        if (this._stackModelMatrix.length > 0) console.warn('mmatrix stack length !=0 at end of rendering...');
         if (pMatrixStack.length > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
         if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
 
@@ -230,7 +233,7 @@ CGL.Context = function() {
     this.pushViewMatrix = function() {
         var copy = mat4.clone(self.vMatrix);
         // var copy = mat4.create();
-        // mat4.copy(copy,self.mvMatrix);
+        // mat4.copy(copy,self.mMatrix);
         vMatrixStack.push(copy);
     };
 
@@ -278,10 +281,10 @@ CGL.Context = function() {
         cgl.pushModelMatrix();
         cgl.pushViewMatrix();
 
-        mat4.identity(cgl.mvMatrix);
+        mat4.identity(cgl.mMatrix);
         mat4.identity(cgl.vMatrix);
-        mat4.translate(cgl.mvMatrix, cgl.mvMatrix, identTranslate);
-        // mat4.translate(cgl.mvMatrix,cgl.mvMatrix, identTranslate);
+        mat4.translate(cgl.mMatrix, cgl.mMatrix, identTranslate);
+        // mat4.translate(cgl.mMatrix,cgl.mMatrix, identTranslate);
         mat4.translate(cgl.vMatrix, cgl.vMatrix, identTranslateView);
 
         cgl.pushBlend(true);
@@ -432,20 +435,20 @@ CGL.Context = function() {
 // model matrix stack
 
 CGL.Context.prototype._stackModelMatrix=[];
-CGL.Context.prototype.pushMvMatrix = // deprecated
+CGL.Context.prototype.pushMMatrix = // deprecated
 CGL.Context.prototype.pushModelMatrix = function()
 {
-    var copy = mat4.clone(this.mvMatrix);
+    var copy = mat4.clone(this.mMatrix);
     this._stackModelMatrix.push(copy);
 };
 
-CGL.Context.prototype.popMvMatrix =
+CGL.Context.prototype.popMMatrix =
 CGL.Context.prototype.popModelMatrix = function() {
     if (this._stackModelMatrix.length === 0) throw "Invalid modelview popMatrix!";
-    this.mvMatrix = this._stackModelMatrix.pop();
+    this.mMatrix = this._stackModelMatrix.pop();
 };
 CGL.Context.prototype.modelMatrix = function() {
-    return this.mvMatrix;
+    return this.mMatrix;
 };
 
 
