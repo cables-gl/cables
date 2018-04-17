@@ -4,7 +4,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -37,5 +38,7 @@
                 "text": "The color array containing 5 colors (15 values in total, 3 values per color – r, g and b)"
             }
         ]
-    }
+    },
+    "updated": 1523828836372,
+    "created": 1523828824965
 }

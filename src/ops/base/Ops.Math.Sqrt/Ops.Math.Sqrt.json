@@ -4,13 +4,15 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number"
+                "name": "number",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Sqrt"
@@ -22,5 +24,9 @@
                 "text": "square root of `Number`"
             }
         ]
-    }
+    },
+    "updated": 1523828815449,
+    "authorName": "pandur",
+    "id": "dec567c3-231d-4146-964d-891fde8924f1",
+    "created": 1523828801414
 }

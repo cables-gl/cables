@@ -57,6 +57,21 @@
             },
             {
                 "type": "0",
+                "name": "Deform X",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Deform Y",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Deform Z",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "WorldSpace",
                 "subType": "boolean"
             }
@@ -73,6 +88,6 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8118b7a9-2ba7-4607-8fd1-8525d6fcf0d6",
-    "updated": 1521290672734,
+    "updated": 1523638711303,
     "created": 1505491754109
 }

@@ -1,12 +1,12 @@
-var fpsLimit=op.inValue("FPS Limit",0);
-var trigger=op.outFunction("trigger");
-var width=op.outValue("width");
-var height=op.outValue("height");
-var reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
-var clear=op.inValueBool("Clear",true);
-var fullscreen=op.inValueBool("Fullscreen Button",false);
-var active=op.inValueBool("Active",true);
-var hdpi=op.inValueBool("Hires Displays",false);
+const fpsLimit=op.inValue("FPS Limit",0);
+const trigger=op.outFunction("trigger");
+const width=op.outValue("width");
+const height=op.outValue("height");
+const reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
+const clear=op.inValueBool("Clear",true);
+const fullscreen=op.inValueBool("Fullscreen Button",false);
+const active=op.inValueBool("Active",true);
+const hdpi=op.inValueBool("Hires Displays",false);
 
 hdpi.onChange=function()
 {

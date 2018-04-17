@@ -1,1 +1,1 @@
-Get the color at a position of the canvas
+Get the color at a position of the canvas (picker)

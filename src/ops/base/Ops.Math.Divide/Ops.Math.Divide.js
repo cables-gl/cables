@@ -1,8 +1,8 @@
-var number1 = op.addInPort(new Port(op, "number1"));
-var number2 = op.addInPort(new Port(op, "number2"));
-var result = op.addOutPort(new Port(op, "result"));
+const number1 = op.addInPort(new Port(op, "number1"));
+const number2 = op.addInPort(new Port(op, "number2"));
+const result = op.addOutPort(new Port(op, "result"));
 
-var exec = function() {
+const exec = function() {
     result.set( number1.get() / number2.get() );
 };
 

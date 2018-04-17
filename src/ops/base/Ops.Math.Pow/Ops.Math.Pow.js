@@ -1,8 +1,7 @@
+const base=op.addInPort(new Port(op,"Base"));
+const exponent=op.addInPort(new Port(op,"Exponent"));
 
-var base=op.addInPort(new Port(op,"Base"));
-var exponent=op.addInPort(new Port(op,"Exponent"));
-
-var result=op.addOutPort(new Port(op,"Result"));
+const result=op.addOutPort(new Port(op,"Result"));
 
 exponent.set(2);
 
@@ -11,7 +10,7 @@ exponent.onValueChanged=update;
 
 function update()
 {
-    var r=Math.pow( base.get(), exponent.get() );
+    let r=Math.pow( base.get(), exponent.get() );
     if(isNaN(r))r=0;
     result.set(r);
 }

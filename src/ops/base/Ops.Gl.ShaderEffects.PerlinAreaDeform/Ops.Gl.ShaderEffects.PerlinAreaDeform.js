@@ -17,6 +17,11 @@ var scrollx=op.inValue("Scroll X");
 var scrolly=op.inValue("Scroll Y");
 var scrollz=op.inValue("Scroll Z");
 
+var doX=op.inValueBool("Deform X",true);
+var doY=op.inValueBool("Deform Y",true);
+var doZ=op.inValueBool("Deform Z",true);
+
+
 var shader=null;
 
 var inWorldSpace=op.inValueBool("WorldSpace");
@@ -24,7 +29,9 @@ var inWorldSpace=op.inValueBool("WorldSpace");
 
 var srcHeadVert=attachments.perlin_deformer_vert;
 
-
+doX.onChange=updateAxis;
+doY.onChange=updateAxis;
+doZ.onChange=updateAxis;
 
 
 var srcBodyVert=attachments.perlin_deformer_body_vert;
@@ -55,6 +62,18 @@ function updateWorldspace()
     if(!shader)return;
     if(inWorldSpace.get()) shader.define(moduleVert.prefix+"WORLDSPACE");
         else shader.removeDefine(moduleVert.prefix+"WORLDSPACE");
+}
+
+function updateAxis()
+{
+    if(!shader)return;
+    shader.removeDefine(moduleVert.prefix+"DO_X");
+    shader.removeDefine(moduleVert.prefix+"DO_Y");
+    shader.removeDefine(moduleVert.prefix+"DO_Z");
+    if(doX.get()) shader.define(moduleVert.prefix+"DO_X");
+    if(doY.get()) shader.define(moduleVert.prefix+"DO_Y");
+    if(doZ.get()) shader.define(moduleVert.prefix+"DO_Z");
+        
 }
 
 
@@ -110,6 +129,7 @@ op.render.onTriggered=function()
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
         
         updateWorldspace();
+        updateAxis();
     }
     
     

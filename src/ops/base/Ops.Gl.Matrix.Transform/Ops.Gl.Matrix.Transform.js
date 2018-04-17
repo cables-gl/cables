@@ -1,16 +1,16 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 
-var posX=op.addInPort(new Port(op,"posX"),0);
-var posY=op.addInPort(new Port(op,"posY"),0);
-var posZ=op.addInPort(new Port(op,"posZ"),0);
+const posX=op.addInPort(new Port(op,"posX"),0);
+const posY=op.addInPort(new Port(op,"posY"),0);
+const posZ=op.addInPort(new Port(op,"posZ"),0);
 
-var scale=op.addInPort(new Port(op,"scale"));
+const scale=op.addInPort(new Port(op,"scale"));
 
-var rotX=op.addInPort(new Port(op,"rotX"));
-var rotY=op.addInPort(new Port(op,"rotY"));
-var rotZ=op.addInPort(new Port(op,"rotZ"));
+const rotX=op.addInPort(new Port(op,"rotX"));
+const rotY=op.addInPort(new Port(op,"rotY"));
+const rotZ=op.addInPort(new Port(op,"rotZ"));
 
 op.setPortGroup([rotX,rotY,rotZ]);
 op.setPortGroup([posX,posY,posZ]);

@@ -141,7 +141,8 @@ function playPause()
 
 function updateVolume()
 {
-    self.filter.gain.value=(volume.get() || 0)*op.patch.config.masterVolume;
+    // self.filter.gain.value=(volume.get() || 0)*op.patch.config.masterVolume;
+    self.filter.gain.setValueAtTime((volume.get() || 0) * op.patch.config.masterVolume, window.audioContext.currentTime);
 }
 
 volume.onValueChanged=updateVolume;

@@ -1,13 +1,11 @@
-op.name='Multiply';
-
-var number1=op.addInPort(new Port(op,"number1"));
-var number2=op.addInPort(new Port(op,"number2"));
-var result=op.addOutPort(new Port(op,"result"));
+const number1=op.addInPort(new Port(op,"number1"));
+const number2=op.addInPort(new Port(op,"number2"));
+const result=op.addOutPort(new Port(op,"result"));
 
 function update()
 {
-    var n1=number1.get();
-    var n2=number2.get();
+    const n1=number1.get();
+    const n2=number2.get();
 
     if(isNaN(n1))n1=0;
     if(isNaN(n2))n2=0;

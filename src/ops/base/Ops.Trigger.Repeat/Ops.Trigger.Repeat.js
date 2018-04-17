@@ -1,24 +1,15 @@
-op.name='Repeat';
+const exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+const num=op.inValueInt("num",5);
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var num=op.inValueInt("num");
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var idx=op.addOutPort(new Port(op,"index"));
-
-num.set(5);
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const idx=op.addOutPort(new Port(op,"index"));
 
 exe.onTriggered=function()
 {
-    // op.patch.instancing.pushLoop(num.get());
-
     for(var i=Math.round(num.get())-1;i>-1;i--)
     {
         idx.set(i);
         trigger.trigger();
-        // op.patch.instancing.increment();
     }
-
-    // op.patch.instancing.popLoop();
 };
 

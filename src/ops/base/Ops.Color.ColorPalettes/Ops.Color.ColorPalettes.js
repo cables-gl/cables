@@ -1,9 +1,7 @@
-op.name="ColorPalettes";
+const index=op.inValue("Index",0);
+const textureOut=op.outTexture("Texture");
 
-var index=op.inValue("Index",0);
-var textureOut=op.outTexture("Texture");
-
-var arrOut=op.outArray("Color Array");
+const arrOut=op.outArray("Color Array");
 
 var canvas = document.createElement('canvas');
 canvas.id = "canvas_"+CABLES.generateUUID();
@@ -81,7 +79,7 @@ op.onDelete=function()
 
 
 
-var colors=[
+const colors=[
 '#E6E2AF','#A7A37E','#EFECCA','#046380','002F2F',
 '#468966','#FFF0A5','#FFB03B','#B64926','8E2800',
 '#FCFFF5','#D1DBBD','#91AA9D','#3E606F','193441',

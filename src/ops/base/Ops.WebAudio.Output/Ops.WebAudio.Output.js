@@ -24,15 +24,18 @@ var mutePort = op.inValueBool("Mute", false);
 function setVolume() {
     var volume = volumePort.get() * masterVolume;
     if(volume >= VOLUME_MIN && volume <= VOLUME_MAX) {
-        gainNode.gain.value = volume;
+        // gainNode.gain.value = volume;
+        gainNode.gain.setValueAtTime(volume, window.audioContext.currentTime);
     } else {
-        gainNode.gain.value = VOLUME_DEFAULT * masterVolume;
+        // gainNode.gain.value = VOLUME_DEFAULT * masterVolume;
+        gainNode.gain.setValueAtTime(VOLUME_DEFAULT * masterVolume, window.audioContext.currentTime);
     }
 }
 
 function mute(b) {
     if(b) {
-        gainNode.gain.value = 0;
+        // gainNode.gain.value = 0;
+        gainNode.gain.setValueAtTime(0, window.audioContext.currentTime);
     } else {
         setVolume();
     }
