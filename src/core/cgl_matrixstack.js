@@ -45,7 +45,7 @@ CGL.MatrixStack.prototype.push=function(m)
         this._arr.push(copy);
     }
 
-    mat4.copy(this._arr[this._index],m||mat4.create());
+    mat4.copy(this._arr[this._index],m||this._arr[this._index-1]);
 
     return this._arr[this._index];
 }
