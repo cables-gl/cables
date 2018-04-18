@@ -1,0 +1,1 @@
+This op is very similar to Ops.Sequence – the ports are set in order (from left to right) once the input value changes. This is helpful sometimes when multiple ops depend on the value of another and the order of op-execution matters.
