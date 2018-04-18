@@ -240,33 +240,6 @@ CGL.Context = function() {
 
 
     
-    // view matrix stack
-
-    this.getViewMatrixStateCount = function() {
-        return this._vMatrixStack.stateCounter;
-    };
-
-    this.pushViewMatrix = function() {
-        this._vMatrixStack.push(this.vMatrix);
-    };
-
-    this.popViewMatrix = function() {
-        this.vMatrix = this._vMatrixStack.pop();
-    };
-
-    // projection matrix stack
-
-    this.getProjectionMatrixStateCount = function() {
-        return this._pMatrixStack.stateCounter;
-    };
-
-    this.pushPMatrix = function() {
-        this.pMatrix=this._pMatrixStack.push(this.pMatrix);
-    };
-
-    this.popPMatrix = function() {
-        this.pMatrix = this._pMatrixStack.pop();
-    };
 
 
 
@@ -291,7 +264,6 @@ CGL.Context = function() {
 
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
 
-
         mat4.identity(cgl.mMatrix);
         mat4.identity(cgl.vMatrix);
         mat4.translate(cgl.mMatrix, cgl.mMatrix, identTranslate);
@@ -302,7 +274,6 @@ CGL.Context = function() {
         cgl.pushModelMatrix();
         cgl.pushViewMatrix();
 
-        
         cgl.pushBlend(true);
 
         // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
@@ -449,10 +420,37 @@ CGL.Context = function() {
 
 
 
+// view matrix stack
+
+CGL.Context.prototype.getViewMatrixStateCount = function() {
+    return this._vMatrixStack.stateCounter;
+};
+
+CGL.Context.prototype.pushViewMatrix = function() {
+    this.vMatrix=this._vMatrixStack.push(this.vMatrix);
+};
+
+CGL.Context.prototype.popViewMatrix = function() {
+    this.vMatrix = this._vMatrixStack.pop();
+};
+
+// projection matrix stack
+
+CGL.Context.prototype.getProjectionMatrixStateCount = function() {
+    return this._pMatrixStack.stateCounter;
+};
+
+CGL.Context.prototype.pushPMatrix = function() {
+    this.pMatrix=this._pMatrixStack.push(this.pMatrix);
+};
+
+CGL.Context.prototype.popPMatrix = function() {
+    this.pMatrix = this._pMatrixStack.pop();
+};
 
 // model matrix stack
 
-CGL.Context.prototype._stackModelMatrix=[];
+// CGL.Context.prototype._stackModelMatrix=[];
 CGL.Context.prototype.pushMvMatrix = // deprecated
 CGL.Context.prototype.pushModelMatrix = function()
 {
