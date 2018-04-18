@@ -291,9 +291,6 @@ CGL.Context = function() {
 
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
 
-        cgl.pushPMatrix();
-        cgl.pushModelMatrix();
-        cgl.pushViewMatrix();
 
         mat4.identity(cgl.mMatrix);
         mat4.identity(cgl.vMatrix);
@@ -301,6 +298,11 @@ CGL.Context = function() {
         // mat4.translate(cgl.mMatrix,cgl.mMatrix, identTranslate);
         mat4.translate(cgl.vMatrix, cgl.vMatrix, identTranslateView);
 
+        cgl.pushPMatrix();
+        cgl.pushModelMatrix();
+        cgl.pushViewMatrix();
+
+        
         cgl.pushBlend(true);
 
         // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
