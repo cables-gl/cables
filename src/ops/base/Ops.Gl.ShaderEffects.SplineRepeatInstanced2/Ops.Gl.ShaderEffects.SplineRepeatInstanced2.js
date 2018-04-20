@@ -123,7 +123,6 @@ function setupArray()
     shader.define('PATHFOLLOW_POINTS',Math.floor(numSplinePoints));
 
     uniPoints.setValue(new Float32Array(pointArray));
-    updateUniformPoints=false;
 
     // delta attr per mesh
     var indexArr=new Float32Array(num);
