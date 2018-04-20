@@ -28,7 +28,7 @@ var hasError=false;
 var timeout=0;
 var blocking=false;
 var lastValue=-1;
-
+var wassnapped=false;
 var snappedArr=[];
 
 snapVals.onChange=checkError;
