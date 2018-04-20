@@ -182,7 +182,7 @@ function doRender()
 
             shader.define('INSTANCING');
             uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
-            uniScale=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
+            inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
             
             // op.uniRot=new CGL.Uniform(shader,'f',mod.prefix+'rotation',inRot);
             op.uniOffset=new CGL.Uniform(shader,'f',mod.prefix+'offset',inOffset);
