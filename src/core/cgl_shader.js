@@ -502,6 +502,15 @@ CGL.Shader = function(_cgl, _name) {
                 cgl.gl.uniformMatrix4fv(vMatrixUniform, false, cgl.vMatrix);
                 CGL.profileMVPMatrixCount++;
                 this._vMatrixState=cgl.getViewMatrixStateCount();
+
+                if (inverseViewMatrixUniform)
+                {
+                    var inverseViewMatrix = mat4.create();
+                    mat4.invert(inverseViewMatrix, cgl.vMatrix);
+                    cgl.gl.uniformMatrix4fv(inverseViewMatrixUniform, false, inverseViewMatrix);
+                    CGL.profileMVPMatrixCount++;
+                }
+
             }
             cgl.gl.uniformMatrix4fv(mMatrixUniform, false, cgl.mvMatrix);
             CGL.profileMVPMatrixCount++;
@@ -522,13 +531,6 @@ CGL.Shader = function(_cgl, _name) {
             CGL.profileMVPMatrixCount++;
         }
 
-        if (inverseViewMatrixUniform)
-        {
-            var inverseViewMatrix = mat4.create();
-            mat4.invert(inverseViewMatrix, cgl.vMatrix);
-            cgl.gl.uniformMatrix4fv(inverseViewMatrixUniform, false, inverseViewMatrix);
-            CGL.profileMVPMatrixCount++;
-        }
 
         if (normalMatrixUniform)
         {
