@@ -510,7 +510,6 @@ CGL.Shader = function(_cgl, _name) {
                     cgl.gl.uniformMatrix4fv(inverseViewMatrixUniform, false, inverseViewMatrix);
                     CGL.profileMVPMatrixCount++;
                 }
-
             }
             cgl.gl.uniformMatrix4fv(mMatrixUniform, false, cgl.mvMatrix);
             CGL.profileMVPMatrixCount++;
