@@ -11,7 +11,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 
 var cgl=op.patch.cgl;
-zNear.set(1);
+zNear.set(0.01);
 fovY.set(45);
 zFar.set(500.0);
 
