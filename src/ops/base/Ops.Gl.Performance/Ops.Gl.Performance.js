@@ -182,7 +182,7 @@ function updateText()
         
         element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+
             ' uniforms: '+Math.ceil(CGL.profileUniformCount/fps)+
-            ' mvp uniforms: '+Math.ceil(CGL.profileMVPMatrixCount/fps)+
+            ' mvp_uni_mat4: '+Math.ceil(CGL.profileMVPMatrixCount/fps)+
                 
 
             ' mesh.setGeom: '+CGL.profileMeshSetGeom+
