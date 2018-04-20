@@ -28,7 +28,6 @@ var hasError=false;
 var timeout=0;
 var blocking=false;
 var lastValue=-1;
-var wassnapped=false;
 var snappedArr=[];
 
 snapVals.onChange=checkError;
@@ -131,6 +130,7 @@ function update()
 
     d=Math.abs(val-snapvalue);
     outDist.set(d);
+    var wassnapped=false;
 
     if(d>snapDist.get() )
     {
