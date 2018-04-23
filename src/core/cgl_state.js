@@ -458,6 +458,8 @@ CGL.Context.prototype.pushModelMatrix = function()
     this.mMatrix=this._mMatrixStack.push(this.mMatrix);
 };
 
+
+CGL.Context.prototype.popMvMatrix = // todo: DEPRECATE
 CGL.Context.prototype.popmMatrix =
 CGL.Context.prototype.popModelMatrix = function() {
     // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";

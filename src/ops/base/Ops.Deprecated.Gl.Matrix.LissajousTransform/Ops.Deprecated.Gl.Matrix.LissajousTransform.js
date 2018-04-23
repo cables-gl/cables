@@ -45,7 +45,7 @@ function doRender()
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec );
         trigger.trigger();
 
-        cgl.popMvMatrix();
+        cgl.popModelMatrix();
     }
 }
 
