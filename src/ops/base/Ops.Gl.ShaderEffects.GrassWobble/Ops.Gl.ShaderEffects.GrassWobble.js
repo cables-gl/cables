@@ -71,7 +71,7 @@ render.onTriggered=function()
 
         uniTime=new CGL.Uniform(shader,'f',module.prefix+'time',0);
         uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'frequency',frequency);
-        uniMul=new CGL.Uniform(shader,'f',module.prefix+'mul',mul);
+        mul.uniform=new CGL.Uniform(shader,'f',module.prefix+'mul',mul);
     }
 
     uniTime.setValue(CABLES.now()/1000.0-startTime);

@@ -9,8 +9,8 @@ to create an API key goto your settings, select the tab "apikey" and click "crea
 
 #### API endpoints
 
-- `/api/myprojects` 
-  a list of all your projects
+- `/api/mypatches` 
+  a list of all your patches
 
 - `/api/project/[PID]/export`
   create an export of a patch with the id PID
@@ -25,7 +25,7 @@ to create an API key goto your settings, select the tab "apikey" and click "crea
 
 use this to test your apikey via command line:
 
-`curl -H 'X-apikey: YOUR_API_KEY' 'http://cables.gl/api/myprojects'`
+`curl -H 'X-apikey: YOUR_API_KEY' 'http://cables.gl/api/mypatches'`
 
 #### exporting cables projects
 

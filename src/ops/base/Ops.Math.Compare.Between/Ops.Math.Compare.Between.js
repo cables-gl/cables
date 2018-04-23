@@ -1,14 +1,9 @@
+const result=op.addOutPort(new Port(op,"result"));
+const number=op.addInPort(new Port(op,"value",2));
+const number1=op.addInPort(new Port(op,"number1"),1);
+const number2=op.addInPort(new Port(op,"number2"),3);
 
-var result=op.addOutPort(new Port(op,"result"));
-var number=op.addInPort(new Port(op,"value"));
-var number1=op.addInPort(new Port(op,"number1"));
-var number2=op.addInPort(new Port(op,"number2"));
-
-number.set(2.0);
-number1.set(1.0);
-number2.set(3.0);
-
-exec= function()
+var exec= function()
 {
     result.set
         (

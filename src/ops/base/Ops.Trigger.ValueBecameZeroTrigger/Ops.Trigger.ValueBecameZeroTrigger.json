@@ -1,0 +1,35 @@
+{
+    "updated": 1524055401688,
+    "authorName": "tim",
+    "id": "822f925c-33e8-4b8a-8a89-be5d2e358ed7",
+    "created": 1524055401690,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Became Zero Trigger"
+            }
+        ],
+        "name": "Ops.Trigger.ValueBecameZeroTrigger"
+    },
+    "summary": "Triggers when the input value became zero",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The value to check"
+            },
+            {
+                "name": "Became Zero Trigger",
+                "text": "Triggers when `Value` became zero"
+            }
+        ]
+    }
+}

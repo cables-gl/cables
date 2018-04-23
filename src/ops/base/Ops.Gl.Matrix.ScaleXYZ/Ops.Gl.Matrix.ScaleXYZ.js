@@ -1,30 +1,19 @@
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const scaleX=op.addInPort(new Port(op,"x"));
+const scaleY=op.addInPort(new Port(op,"y"));
+const scaleZ=op.addInPort(new Port(op,"z"));
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var scaleX=op.addInPort(new Port(op,"x"));
-var scaleY=op.addInPort(new Port(op,"y"));
-var scaleZ=op.addInPort(new Port(op,"z"));
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var cgl=op.patch.cgl;
-var vScale=vec3.create();
-// var transMatrix = mat4.create();
-// mat4.identity(transMatrix);
+const cgl=op.patch.cgl;
+const vScale=vec3.create();
 
 var hasChanged=true;
 
 render.onTriggered=function()
 {
-    // if(hasChanged)
-    // {
-    //     vec3.set(vScale, scaleX.get(),scaleY.get(),scaleZ.get());
-    //     mat4.identity(transMatrix);
-    //     mat4.scale(transMatrix,transMatrix, vScale);
-    // }
-
     cgl.pushModelMatrix();
-    // mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
-    mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
+    mat4.scale(cgl.mMatrix,cgl.mMatrix, vScale);
     trigger.trigger();
     cgl.popModelMatrix();
 };

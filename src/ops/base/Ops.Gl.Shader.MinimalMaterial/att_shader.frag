@@ -8,4 +8,3 @@ void main()
    {{MODULE_COLOR}}
    gl_FragColor = col;
 }
-//sdsdsd

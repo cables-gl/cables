@@ -1,0 +1,1 @@
+Compares the last value to the current one, triggers once when the current value is zero and the last one is something else.

@@ -11,7 +11,7 @@ scaleChanged();
 render.onTriggered=function()
 {
     cgl.pushModelMatrix();
-    mat4.scale(cgl.mvMatrix,cgl.mvMatrix, vScale);
+    mat4.scale(cgl.mMatrix,cgl.mMatrix, vScale);
     trigger.trigger();
     cgl.popModelMatrix();
 };
