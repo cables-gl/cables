@@ -55,6 +55,7 @@ CABLES.Patch = function(cfg) {
         onError: null,
         onFinishedLoading: null,
         onFirstFrameRendered: null,
+	onPatchLoaded:null,
         fpsLimit: 0
     };
 
@@ -778,6 +779,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
 
     this.loading.finished(loadingId);
+    if(this.config.onPatchLoaded)this.config.onPatchLoaded();
 
     if (this.onLoadEnd) this.onLoadEnd();
 };

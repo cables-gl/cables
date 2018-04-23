@@ -13,21 +13,24 @@
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.Coordinates"
     },
     "summary": "current xyz coordinates (modelmatrix)",
-    "updated": 1509796724116,
+    "updated": 1524351868111,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "390d0214-92a9-48e9-85b4-f3092ee9e043",

@@ -1,5 +1,3 @@
-op.name="PerlinNoise";
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");

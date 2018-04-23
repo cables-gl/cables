@@ -1,9 +1,13 @@
 {
+    "updated": 1524312169750,
+    "authorName": "pandur",
+    "id": "e35c9e38-f462-4a0b-aa98-96f7d22ea6b3",
+    "created": 1524311122515,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
             },
             {
                 "type": "0",
@@ -13,6 +17,21 @@
             {
                 "type": "0",
                 "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius Low",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius High",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
                 "subType": "number"
             },
             {
@@ -29,32 +48,14 @@
                 "type": "0",
                 "name": "Z",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Scale",
-                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Next"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Noise.PerlinNoise"
-    },
-    "summary": "draw perlin noise into an image",
-    "credits": [
-        {
-            "title": "GPU-Noise-Lib",
-            "author": "Brian Sharpe",
-            "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
-            "license": "Public Domain"
-        }
-    ],
-    "updated": 1524157681462,
-    "authorName": "pandur",
-    "id": "446442ba-1a7e-4c71-bb43-b12005aa6511",
-    "created": 1524157680368
+        "name": "Ops.Gl.TextureEffects.Noise.PolkaDotNoise"
+    }
 }

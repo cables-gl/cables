@@ -1,33 +1,31 @@
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
+const maxDist=op.addInPort(new Port(op,"max distance",OP_PORT_TYPE_VALUE));
+const initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
+const initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
+const initialRadius=op.inValue("initial radius",0);
 
+const mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
-var maxDist=op.addInPort(new Port(op,"max distance",OP_PORT_TYPE_VALUE));
-var initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
-var initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
-var initialRadius=op.inValue("initial radius",0);
+const smoothness=op.inValueSlider("Smoothness",1.0);
+const restricted=op.addInPort(new Port(op,"restricted",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
+const active=op.inValueBool("Active",true);
 
-var smoothness=op.inValueSlider("Smoothness",1.0);
-var restricted=op.addInPort(new Port(op,"restricted",OP_PORT_TYPE_VALUE,{display:'bool'}));
+const inReset=op.inFunctionButton("Reset");
 
-var active=op.inValueBool("Active",true);
+const allowPanning=op.inValueBool("Allow Panning",true);
+const allowZooming=op.inValueBool("Allow Zooming",true);
+const allowRotation=op.inValueBool("Allow Rotation",true);
+const pointerLock=op.inValueBool("Pointerlock",false);
 
-var inReset=op.inFunctionButton("Reset");
+const speedX=op.inValue("Speed X",1);
+const speedY=op.inValue("Speed Y",1);
 
-var allowPanning=op.inValueBool("Allow Panning",true);
-var allowZooming=op.inValueBool("Allow Zooming",true);
-var allowRotation=op.inValueBool("Allow Rotation",true);
-var pointerLock=op.inValueBool("Pointerlock",false);
-
-var speedX=op.inValue("Speed X",1);
-var speedY=op.inValue("Speed Y",1);
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
-var outYDeg=op.addOutPort(new Port(op,"Rot Y",OP_PORT_TYPE_VALUE));
-var outXDeg=op.addOutPort(new Port(op,"Rot X",OP_PORT_TYPE_VALUE));
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
+const outYDeg=op.addOutPort(new Port(op,"Rot Y",OP_PORT_TYPE_VALUE));
+const outXDeg=op.addOutPort(new Port(op,"Rot X",OP_PORT_TYPE_VALUE));
 
 restricted.set(true);
 mul.set(1);

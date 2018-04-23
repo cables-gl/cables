@@ -8,27 +8,38 @@
             },
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Mesh Index"
+                "name": "Mesh Index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Draw"
+                "name": "Draw",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Center Mesh"
+                "name": "Center Mesh",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Calculate Normals"
+                "name": "Merge",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Calculate Normals",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -43,7 +54,7 @@
         ],
         "name": "Ops.Json3d.Json3dMesh"
     },
-    "updated": 1522228270852,
+    "updated": 1524141156825,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "29bf91a9-504d-4de7-bba6-bae67ee76c77",
