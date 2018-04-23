@@ -1,5 +1,5 @@
 {
-    "updated": 1524236692793,
+    "updated": 1524237288582,
     "authorName": "pandur",
     "id": "d629959e-838d-4541-b12f-15e2d6ff5131",
     "created": 1519023735805,
@@ -7,21 +7,25 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number1"
+                "name": "number1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number2"
+                "name": "number2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Compare.Between"

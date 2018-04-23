@@ -47,7 +47,7 @@ inSpecAmount.uniform=new CGL.Uniform(shader,'f','specAmount',inSpecAmount);
 
 var MAX_LIGHTS=16;
 var lights=[];
-for(i=0;i<MAX_LIGHTS;i++)
+for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
     lights[count]={};
