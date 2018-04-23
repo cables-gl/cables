@@ -89,7 +89,7 @@ function updateGraph()
 
     for(var b=0;b<buff.length;b++)
     {
-        buf=buff[b];
+        var buf=buff[b];
         if(!buf)continue;
 
         ctx.lineWidth = 2;

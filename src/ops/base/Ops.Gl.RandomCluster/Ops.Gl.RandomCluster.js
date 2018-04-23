@@ -1,4 +1,3 @@
-
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var num=op.addInPort(new Port(op,"num"));
 var size=op.addInPort(new Port(op,"size"));

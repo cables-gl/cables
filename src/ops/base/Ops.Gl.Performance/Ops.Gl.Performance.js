@@ -182,6 +182,9 @@ function updateText()
         
         element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+
             ' uniforms: '+Math.ceil(CGL.profileUniformCount/fps)+
+            ' mvp_uni_mat4: '+Math.ceil(CGL.profileMVPMatrixCount/fps)+
+                
+
             ' mesh.setGeom: '+CGL.profileMeshSetGeom+
             ' videos: '+CGL.profileVideosPlaying;
         
@@ -198,6 +201,7 @@ function updateText()
     CGL.profileTextureDelete=0;
     CGL.profileMeshSetGeom=0;
     CGL.profileVideosPlaying=0;
+    CGL.profileMVPMatrixCount=0;
 
     CGL.profileNonTypedAttrib=0;
     CGL.profileNonTypedAttribNames="";

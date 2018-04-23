@@ -1,4 +1,3 @@
-
 var cgl=this.patch.cgl;
 
 var scene=new CABLES.Variable();
@@ -12,14 +11,16 @@ var meshIndex=op.inValueInt("Mesh Index",0);
 
 var draw=op.inValueBool("Draw",true);
 var centerPivot=op.inValueBool("Center Mesh",true);
+
+
 var inSize=op.inValue("Size",1);
 
 var next=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.outObject("Geometry");
 
+var merge=op.inValueBool("Merge",false);
+
 var inNormals=op.inValueSelect("Calculate Normals",["no","smooth","flat"],"no");
-
-
 
 var geom=null;
 var data=null;
@@ -35,6 +36,7 @@ filename.onChange=reload;
 centerPivot.onChange=setMeshLater;
 meshIndex.onChange=setMeshLater;
 inNormals.onChange=setMeshLater;
+merge.onChange=setMeshLater;
 
 inSize.onChange=updateScale;
 var needSetMesh=true;
@@ -129,6 +131,8 @@ function updateInfo(geom)
 function setMesh()
 {
     mesh=null;
+    
+    
     var index=Math.floor(meshIndex.get());
 
     
@@ -146,19 +150,49 @@ function setMesh()
 
     currentIndex=index;
 
-    var jsonMesh=data.meshes[index];
+    geom=new CGL.Geometry();
 
-    if(!jsonMesh)
+    if(merge.get())
     {
-        mesh=null;
-        op.uiAttr({warning:'mesh not found'});
-        return;
-    }
-    op.uiAttribs.warning='';
-    
-    var i=0;
+        
 
-    geom=CGL.Geometry.json2geom(jsonMesh);
+        for(var i=0;i<data.meshes.length;i++)
+        {
+
+            var jsonGeom=data.meshes[i];
+            if(jsonGeom)
+            {
+                var geomNew=CGL.Geometry.json2geom(jsonGeom);
+                geom.merge(geomNew);
+            }
+        }
+        
+        var bnd=geom.getBounds();
+        
+        for(var i=0;i<geom.vertices.length;i++)
+        {
+            geom.vertices[i]/=bnd.maxAxis;
+        }
+        
+
+    }
+    else
+    {
+        var jsonGeom=data.meshes[index];
+
+        if(!jsonGeom)
+        {
+            mesh=null;
+            op.uiAttr({warning:'mesh not found'});
+            return;
+        }
+
+        var i=0;
+        geom=CGL.Geometry.json2geom(jsonGeom);
+        
+        
+    }
+
     if(centerPivot.get())geom.center();
 
     bounds=geom.getBounds();

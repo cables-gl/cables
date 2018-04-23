@@ -1,29 +1,29 @@
 var CGL=CGL||{};
 
-CGL.MatrixStackOld=function()
-{
-    this._arr=[];
-    this._index=-1;
-}
+// CGL.MatrixStackOld=function()
+// {
+//     this._arr=[];
+//     this._index=-1;
+// }
 
-CGL.MatrixStackOld.prototype.push=function(m)
-{
-    var copy=mat4.create();
-    mat4.copy(copy,m);
-    this._arr.push(copy);
+// CGL.MatrixStackOld.prototype.push=function(m)
+// {
+//     var copy=mat4.create();
+//     mat4.copy(copy,m);
+//     this._arr.push(copy);
 
-    return copy;
-}
+//     return copy;
+// }
 
-CGL.MatrixStackOld.prototype.pop=function()
-{
-    return this._arr.pop();
-}
+// CGL.MatrixStackOld.prototype.pop=function()
+// {
+//     return this._arr.pop();
+// }
 
-CGL.MatrixStackOld.prototype.length=function()
-{
-    return this._arr.length;
-}
+// CGL.MatrixStackOld.prototype.length=function()
+// {
+//     return this._arr.length;
+// }
 
 // -------------------------------------------------------------
 

@@ -1,0 +1,66 @@
+{
+    "updated": 1522250801273,
+    "authorName": "pandur",
+    "id": "5c6a0a41-00c6-4917-abdd-7073f3d1dc14",
+    "created": 1522248712811,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "frequency",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "phase",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "mul",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "add",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "axisX",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "axisY",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "axisZ",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Source",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.FireflyPoints"
+    }
+}

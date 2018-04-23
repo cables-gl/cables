@@ -32,7 +32,7 @@ var lights=[];
 var depthTex=new CGL.Uniform(shader,'t','depthTex',5);
 var uniShadowPass=new CGL.Uniform(shader,'f','shadowPass',0);
 
-for(i=0;i<MAX_LIGHTS;i++)
+for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
     lights[count]={};

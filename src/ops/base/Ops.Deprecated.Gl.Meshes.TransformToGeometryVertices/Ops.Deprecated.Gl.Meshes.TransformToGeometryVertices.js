@@ -31,10 +31,10 @@ render.onTriggered=function()
                 y.set(geom.vertices[i+1]);
                 z.set(geom.vertices[i+2]);
                 index.set(i);
-                cgl.pushMvMatrix();
+                cgl.pushModelMatrix();
                 mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
                 trigger.trigger();
-                cgl.popMvMatrix();
+                cgl.popModelMatrix();
             }
         }
     }

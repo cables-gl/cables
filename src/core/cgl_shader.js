@@ -6,6 +6,7 @@ CGL.profileShaderBinds = 0;
 CGL.profileUniformCount = 0;
 CGL.profileShaderCompiles = 0;
 CGL.profileVideosPlaying = 0;
+CGL.profileMVPMatrixCount = 0;
 
 CGL.SHADERVAR_VERTEX_POSITION = 'vPosition';
 CGL.SHADERVAR_VERTEX_NUMBER = 'attrVertIndex';
@@ -41,6 +42,9 @@ CGL.Shader = function(_cgl, _name) {
     var normalMatrixUniform = null;
     var inverseViewMatrixUniform = null;
     var attrVertexPos = -1;
+
+    this._pMatrixState =-1;
+    this._vMatrixState =-1;
 
     this._modGroupCount = 0;
     this._feedBackNames = [];
@@ -455,7 +459,6 @@ CGL.Shader = function(_cgl, _name) {
     this.bind = function() {
         var i = 0;
         CGL.MESH.lastShader = this;
-
         CGL.profileShaderBinds++;
 
         if (!this._program || this._needsRecompile) self.compile();
@@ -485,42 +488,59 @@ CGL.Shader = function(_cgl, _name) {
 
         // console.log('bind',name);
 
-        cgl.gl.uniformMatrix4fv(projMatrixUniform, false, cgl.pMatrix);
-        if (vMatrixUniform) {
-            cgl.gl.uniformMatrix4fv(vMatrixUniform, false, cgl.vMatrix);
-            cgl.gl.uniformMatrix4fv(mMatrixUniform, false, cgl.mvMatrix);
+        if(this._pMatrixState!=cgl.getProjectionMatrixStateCount())
+        {
+            this._pMatrixState=cgl.getProjectionMatrixStateCount();
+            cgl.gl.uniformMatrix4fv(projMatrixUniform, false, cgl.pMatrix);
+            CGL.profileMVPMatrixCount++;
+        }
 
-            var m = mat4.create();
-            mat4.invert(m, cgl.vMatrix);
-            cgl.gl.uniform3f(camPosUniform, m[12], m[13], m[14]);
-        } else {
+        if (vMatrixUniform)
+        {
+            if(this._vMatrixState!=cgl.getViewMatrixStateCount())
+            {
+                cgl.gl.uniformMatrix4fv(vMatrixUniform, false, cgl.vMatrix);
+                CGL.profileMVPMatrixCount++;
+                this._vMatrixState=cgl.getViewMatrixStateCount();
+
+                if (inverseViewMatrixUniform)
+                {
+                    var inverseViewMatrix = mat4.create();
+                    mat4.invert(inverseViewMatrix, cgl.vMatrix);
+                    cgl.gl.uniformMatrix4fv(inverseViewMatrixUniform, false, inverseViewMatrix);
+                    CGL.profileMVPMatrixCount++;
+                }
+            }
+            cgl.gl.uniformMatrix4fv(mMatrixUniform, false, cgl.mvMatrix);
+            CGL.profileMVPMatrixCount++;
+
+            if(camPosUniform)
+            {
+                var m = mat4.create();
+                mat4.invert(m, cgl.vMatrix);
+                cgl.gl.uniform3f(camPosUniform, m[12], m[13], m[14]);
+                CGL.profileMVPMatrixCount++;
+            }
+        }
+        else
+        {
             var tempmv = mat4.create();
             mat4.mul(tempmv, cgl.vMatrix, cgl.mvMatrix);
             cgl.gl.uniformMatrix4fv(mvMatrixUniform, false, tempmv);
+            CGL.profileMVPMatrixCount++;
         }
 
-        if (inverseViewMatrixUniform) {
-            var inverseViewMatrix = mat4.create();
 
-            // mat4.mul(inverseViewMatrix,cgl.mvMatrix,cgl.vMatrix);
-            // mat4.mul(inverseViewMatrix,cgl.mvMatrix,cgl.vMatrix);
-
-            mat4.invert(inverseViewMatrix, cgl.vMatrix);
-
-
-            cgl.gl.uniformMatrix4fv(inverseViewMatrixUniform, false, inverseViewMatrix);
-        }
-
-        if (normalMatrixUniform) {
+        if (normalMatrixUniform)
+        {
             var normalMatrix = mat4.create();
 
             mat4.mul(normalMatrix, cgl.vMatrix, cgl.mvMatrix);
-            // mat4.clone(normalMatrix,cgl.mvMatrix);
-
             mat4.invert(normalMatrix, normalMatrix);
             mat4.transpose(normalMatrix, normalMatrix);
 
             cgl.gl.uniformMatrix4fv(normalMatrixUniform, false, normalMatrix);
+            CGL.profileMVPMatrixCount++;
         }
     };
 

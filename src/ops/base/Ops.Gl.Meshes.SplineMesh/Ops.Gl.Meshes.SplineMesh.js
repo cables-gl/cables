@@ -5,8 +5,6 @@ var inStart=op.inValueSlider("Start");
 var inLength=op.inValueSlider("Length",1);
 var calcNormals=op.inValueBool("Calculate Normals",false);
 var inStrip=op.inValueBool("Line Strip",true);
-
-
 var inPoints=op.inArray('points');
 var inNumPoints=op.inValue("Num Points",0);
 
@@ -38,17 +36,6 @@ render.onTriggered=function()
 
     if(mesh && draw)
     {
-        // mesh._bufVertexAttrib.startItem=Math.floor(
-        //     inStart.get()*(geom.vertices.length/18))*6;
-        // mesh._bufVertexAttrib.numItems=Math.floor(
-        //     Math.min(1,inLength.get()+inStart.get()) * (geom.vertices.length/3)
-        //     ); // OK
-
-        // mesh._bufVertexAttrib.startItem=Math.floor(
-        //     inStart.get()*(index/18))*6;
-        // mesh._bufVertexAttrib.numItems=Math.floor(
-        //     Math.min(1,inLength.get()+inStart.get()) * (index/3)
-        //     ); // OKnu
 
 
         mesh._bufVertexAttrib.startItem=Math.floor(
