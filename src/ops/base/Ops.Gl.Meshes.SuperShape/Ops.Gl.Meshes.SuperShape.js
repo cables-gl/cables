@@ -1,8 +1,7 @@
 // from https://github.com/ahoiin/supershape.js/blob/master/js/objects.js
 
-op.name="SuperShape";
+const render=op.inFunction("render");
 
-var render=op.inFunction("render");
 var pNormalizeSize=op.inValueBool("Normalize Size",true);
 var asPointCloud=op.inValueBool("Point Cloud",false);
 var pStep=op.inValue("Step",0.05);
@@ -62,7 +61,6 @@ render.onTriggered=function()
 
     trigger.trigger();
 };
-
 function update()
 {
     verts.length=0;
@@ -70,7 +68,7 @@ function update()
     // geometry=new CGL.Geometry();
     needsUpdate=false;
     // geometry.dynamic = true;
-    step = pStep.get();
+    var step = pStep.get();
     var q = parseInt(2 * Math.PI / step + 1.3462);
     var o = parseInt(Math.PI / step + 1.5);
     
