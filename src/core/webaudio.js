@@ -51,7 +51,9 @@ CABLES.WebAudio.createAudioContext = function(op) {
 
 /**
  * Returns the audio context.
- * Before `createAudioContext` must have been called at least once.
+ * Before `createAudioContext` must have been called at least once. 
+ * It most cases you should use `createAudioContext`, which just returns the audio context 
+ * when it has been created already.
  */
 CABLES.WebAudio.getAudioContext = function() {
   return window.audioContext;
@@ -70,8 +72,10 @@ CABLES.WebAudio.getAudioContext = function() {
  */
 CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChannelIndex) {
   if(!op || !portName || !audioNode) {
-    op.log("ERROR: createAudioInPort needs three parameters, op, portName and audioNode");
-    return;
+    var msg = 'ERROR: createAudioInPort needs three parameters, op, portName and audioNode'
+    op.log(msg);
+    throw new Error(msg);
+    // return;
   }
   if(!inputChannelIndex) {
     inputChannelIndex = 0;
@@ -93,15 +97,12 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
             try{
                 port.webAudio.previousAudioInNode.disconnect(port.webAudio.audioNode, 0, inputChannelIndex);
             } catch(e) {
-                console.log(e);
-                op.log("Node to call disconnect on: ", port.webAudio.previousAudioInNode);
-                op.log("its disconnect function: ", port.webAudio.previousAudioInNode.disconnect);
-                op.log("Node to disconnect: ", port.webAudio.audioNode);
-                op.log("inputChannelIndex: ", inputChannelIndex);
                 try {
                   port.webAudio.previousAudioInNode.disconnect(port.webAudio.audioNode);
                 } catch(e) {
-                  op.log("Disconnecting without in/out-port-index also did not work ", e);
+                  op.log("Disconnecting audio node with in/out port index, as well as without in/out-port-index did not work ", e);
+                  if(e.printStackTrace) { e.printStackTrace(); }
+                  throw e;
                 }
             }
         }
@@ -113,7 +114,8 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
         op.log("port.webAudio.audioNode", port.webAudio.audioNode);
         op.log("audioInNode: ", audioInNode);
         op.log("inputChannelIndex:", inputChannelIndex);
-        console.log("audioInNode.connect: ", audioInNode.connect);
+        op.log("audioInNode.connect: ", audioInNode.connect);
+        throw e;
       }
     }
     port.webAudio.previousAudioInNode = audioInNode;
@@ -139,13 +141,15 @@ CABLES.WebAudio.replaceNodeInPort = function(port, oldNode, newNode) {
     try {
       connectedNode.disconnect(oldNode);
     } catch(e) {
-        op.log("Warning: Could not disconnect");
+        if(e.printStackTrace) { e.printStackTrace(); }
+        throw new Error('replaceNodeInPort: Could not disconnect old audio node. ' + e.name + ' ' + e.message);
     }
     port.webAudio.audioNode = newNode;
     try {
       connectedNode.connect(newNode);
     } catch(e) {
-      op.log("Warning: Could not connect to new node");
+      if(e.printStackTrace) { e.printStackTrace(); }
+      throw new Error('replaceNodeInPort: Could not connect to new node. ' + e.name + ' ' + e.message);
     }
   }
 };
@@ -159,7 +163,9 @@ CABLES.WebAudio.replaceNodeInPort = function(port, oldNode, newNode) {
  */
 CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
   if(!op || !portName || !audioNode) {
-    op.log("ERROR: createAudioOutPort needs three parameters, op, portName and audioNode");
+    var msg = 'ERROR: createAudioOutPort needs three parameters, op, portName and audioNode';
+    op.log(msg);
+    throw new Error(msg);
     return;
   }
 
@@ -221,7 +227,9 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
         try {
           audioInNode.connect(node);
         } catch(e) {
-          op.log(e);
+          op.log("Could not connect audio node: ", e);
+          if(e.printStackTrace) { e.printStackTrace(); }
+          throw e;
         }
         port.webAudio.previousAudioInNode = audioInNode;
       } else {
@@ -229,9 +237,16 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
         if(node._param && node._param.minValue && node._param.maxValue) {
             if(audioInNode >= node._param.minValue && audioInNode <= node._param.maxValue) {
                 try{
-                  // node.value = audioInNode;
-                  node.setValueAtTime(audioInNode, audioCtx.currentTime);
-                } catch (e) { op.log("Possible AudioParam problem: ", e); }
+                  if(node.setValueAtTime) {
+                    node.setValueAtTime(audioInNode, audioCtx.currentTime);
+                  } else {
+                    node.value = audioInNode;
+                  }
+                } catch (e) {
+                  op.log("Possible AudioParam problem with tone.js op: ", e);
+                  if(e.printStackTrace) { e.printStackTrace(); }
+                  throw e;
+                }
             } else {
               op.log("Warning: The value for an audio parameter is out of range!");
             }
@@ -239,25 +254,40 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
         else if(node.minValue && node.maxValue) {
           if(audioInNode >= node.minValue && audioInNode <= node.maxValue) {
             try{
-              // node.value = audioInNode;
-              node.setValueAtTime(audioInNode, audioCtx.currentTime);
-            } catch (e) { op.log("Possible AudioParam problem: ", e); }
+              if(node.setValueAtTime) {
+                node.setValueAtTime(audioInNode, audioCtx.currentTime);
+              } else {
+                node.value = audioInNode;
+              }
+            } catch (e) {
+              op.log("AudioParam has minValue / maxValue defined, and value is in range, but setting the value failed! ", e);
+              if(e.printStackTrace) { e.printStackTrace(); }
+              throw e;
+            }
           } else {
             op.log("Warning: The value for an audio parameter is out of range!");
           }
         } // no min-max values, try anyway
         else {
           try{
-            // node.value = audioInNode;
-            node.setValueAtTime(audioInNode, audioCtx.currentTime);
-          } catch (e) { op.log("Possible AudioParam problem: ", e); }
+            if(node.setValueAtTime) {
+              node.setValueAtTime(audioInNode, audioCtx.currentTime);
+            } else {
+              node.value = audioInNode;
+            }
+          } catch (e) {
+            op.log("Possible AudioParam problem (without minValue / maxValue): ", e);
+            if(e.printStackTrace) { e.printStackTrace(); }
+            throw e;
+          }
         }
 
         if(port.webAudio.previousAudioInNode && port.webAudio.previousAudioInNode.disconnect) {
           try{
               port.webAudio.previousAudioInNode.disconnect(node);
           } catch(e) {
-              console.log(e);
+              op.log('Could not disconnect previous audio node: ', e);
+              throw e;
           }
           port.webAudio.previousAudioInNode = undefined;
         }
