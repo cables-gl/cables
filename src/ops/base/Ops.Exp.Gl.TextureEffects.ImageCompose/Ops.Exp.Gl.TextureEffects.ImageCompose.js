@@ -82,8 +82,8 @@ function updateResolution()
         h=(height.get());
     }
 
-    newFilter=tex.filter;
-    newWrap=tex.wrap;
+    var newFilter=tex.filter;
+    var newWrap=tex.wrap;
 
     if(tfilter.get()=='nearest') newFilter=CGL.Texture.FILTER_NEAREST;
     if(tfilter.get()=='linear')  newFilter=CGL.Texture.FILTER_LINEAR;

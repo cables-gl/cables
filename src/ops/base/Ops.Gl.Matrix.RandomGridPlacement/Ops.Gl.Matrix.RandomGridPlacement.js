@@ -15,6 +15,7 @@ var outIndex=op.outValue("Index");
 var outDepth=op.outValue("depth");
 
 
+var globalScale=1;
 var vPos=vec3.create();
 var vScale=vec3.create();
 

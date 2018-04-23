@@ -1,5 +1,3 @@
-op.name="MediaPlayer";
-
 /* ports in */
 var volume = op.addInPort(new Port(op,"Volume",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var file = op.addInPort(new Port(op,"File",OP_PORT_TYPE_VALUE,{ display:'file',filter:'audio' }));
@@ -17,18 +15,7 @@ var duration = op.addOutPort(new Port(op,"Duration",OP_PORT_TYPE_VALUE));
 volume.set(1.0);
 duration.set(0);
 
-/* audio context create */
-if(!window.audioContext) {
-    if('webkitAudioContext' in window) {
-        audioContext = new webkitAudioContext();
-    } else {
-        audioContext = new AudioContext();
-    }
-}
-/* browser check */
-if(!window.audioContext) {
-    if(op.patch.config.onError) op.patch.config.onError('sorry, could not initialize WebAudio. Please check if your Browser supports WebAudio');
-}
+var audioContext = CABLES.WebAudio.createAudioContext(op);
 
 /* vars */
 var audio = null;

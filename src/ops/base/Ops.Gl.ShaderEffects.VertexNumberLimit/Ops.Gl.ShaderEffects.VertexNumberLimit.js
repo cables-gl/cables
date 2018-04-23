@@ -1,4 +1,3 @@
-
 var cgl=op.patch.cgl;
 var shader=null;
 var uniTime;
@@ -29,6 +28,8 @@ var srcBodyFrag=''
     .endl();
 
 
+var module=null;
+var moduleFrag=null;
 
 
 var startTime=Date.now()/1000.0;
@@ -67,10 +68,8 @@ render.onTriggered=function()
                 srcBodyFrag:srcBodyFrag
             });
 
-        uniMax=new CGL.Uniform(shader,'f',module.prefix+'_max',limitMax);
-        // setDefines();
+        limitMax.uniform=new CGL.Uniform(shader,'f',module.prefix+'_max',limitMax);
     }
 
-    // uniTime.setValue(Date.now()/1000.0-startTime);
     trigger.trigger();
 };
