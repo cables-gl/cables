@@ -25,17 +25,17 @@ function setVolume() {
     var volume = volumePort.get() * masterVolume;
     if(volume >= VOLUME_MIN && volume <= VOLUME_MAX) {
         // gainNode.gain.value = volume;
-        gainNode.gain.setValueAtTime(volume, window.audioContext.currentTime);
+        gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
     } else {
         // gainNode.gain.value = VOLUME_DEFAULT * masterVolume;
-        gainNode.gain.setValueAtTime(VOLUME_DEFAULT * masterVolume, window.audioContext.currentTime);
+        gainNode.gain.setValueAtTime(VOLUME_DEFAULT * masterVolume, audioCtx.currentTime);
     }
 }
 
 function mute(b) {
     if(b) {
         // gainNode.gain.value = 0;
-        gainNode.gain.setValueAtTime(0, window.audioContext.currentTime);
+        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
     } else {
         setVolume();
     }
