@@ -40,7 +40,7 @@ vec3.set(vUp,0,1,0);
 var posVec=vec3.create();
 
 var fb=new CGL.Framebuffer(cgl);
-fb.setSize(512,512);
+// fb.setSize(512,512);
 tex.set( fb.getTextureColor() );
 texDepth.set ( fb.getTextureDepth() );
 
