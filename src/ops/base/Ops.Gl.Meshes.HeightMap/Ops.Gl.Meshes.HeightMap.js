@@ -81,9 +81,9 @@ function rebuildGeom()
 
 
 
-    for(r=0;r<=numRows;r++)
+    for(var r=0;r<=numRows;r++)
     {
-        for(c=0;c<=numColumns;c++)
+        for(var c=0;c<=numColumns;c++)
         {
             var h = ctx.getImageData(Math.round(c*rowStepX), Math.round(r*rowStepY), 1, 1).data[1]*heightMul;
             // verts.push( c*stepColumn    - meshWidth/2 );

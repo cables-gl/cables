@@ -36,7 +36,7 @@ a.set(1.0);
 
 var MAX_LIGHTS=16;
 var lights=[];
-for(i=0;i<MAX_LIGHTS;i++)
+for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
     lights[count]={};

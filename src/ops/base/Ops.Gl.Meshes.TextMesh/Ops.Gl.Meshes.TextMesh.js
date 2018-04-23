@@ -42,7 +42,7 @@ function checkFont()
 
     if(!oldFontLoaded && fontLoaded)
     {
-        loade=true;
+        loaded.set(true);
         createTexture=true;
         createMesh=true;
     }

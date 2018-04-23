@@ -100,9 +100,9 @@ op.render.onTriggered=function()
                 srcHeadFrag:srcHeadFrag,
                 srcBodyFrag:srcBodyFrag
             },moduleVert);
-        start=new CGL.Uniform(shader,'f',moduleFrag.prefix+'start',inStart);
-        end=new CGL.Uniform(shader,'f',moduleFrag.prefix+'end',inEnd);
-        amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
+        inStart.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'start',inStart);
+        inEnd.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'end',inEnd);
+        inAmount.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
         r.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'r',r);
         g.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'g',g);
         b.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'b',b);
