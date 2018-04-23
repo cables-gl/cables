@@ -1,5 +1,3 @@
-op.name="FreeFormPlane";
-
 var render=op.inFunction("render");
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -35,7 +33,7 @@ var tcy4=op.inValue("tc y 4",0);
 
 var arrverts=[];
 arrverts.length=12;
-verts=new Float32Array(arrverts);
+var verts=new Float32Array(arrverts);
 var indices=[0,1,2,1,2,3];
 var tc=new Float32Array([0,0,0,0,0,0,0,0]);
 // var tc=[];

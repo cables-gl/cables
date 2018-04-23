@@ -18,12 +18,13 @@
             },
             {
                 "type": "0",
-                "name": "timesTriggered"
+                "name": "timesTriggered",
+                "subType": "number"
             }
         ],
         "name": "Ops.Trigger.TriggerCounter"
     },
-    "updated": 1516481679687,
+    "updated": 1524489225164,
     "authorName": "pandur",
     "id": "e640619f-235c-4543-bbf8-b358e0283180",
     "created": 1516481646742,
