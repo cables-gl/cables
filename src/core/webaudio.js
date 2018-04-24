@@ -1,5 +1,6 @@
 CABLES=CABLES||{};
 CABLES.WEBAUDIO = CABLES.WEBAUDIO || {};
+CABLES.WEBAUDIO.toneJsInitialized = false;
 
 /*
  * External JSDoc definitions
