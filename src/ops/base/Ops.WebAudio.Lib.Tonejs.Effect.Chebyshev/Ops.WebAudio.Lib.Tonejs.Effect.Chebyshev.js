@@ -1,6 +1,6 @@
 op.name="Chebyshev";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var node = new Tone.Chebyshev();
@@ -16,12 +16,12 @@ var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var orderPort = op.addInPort( new Port( op, "Order", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': ORDER_MIN, 'max': ORDER_MAX } ));
 orderPort.set(ORDER_DEFAULT);
 var oversamplePort = this.addInPort( new Port( this, "align", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: OVERSAMPLE_VALUES } ) );
 oversamplePort.set(OVERSAMPLE_DEFAULT);
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 
 // change listeners
 orderPort.onChange = function() {
@@ -41,5 +41,5 @@ oversamplePort.onChange = function() {
 };
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 

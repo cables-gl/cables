@@ -1,6 +1,6 @@
 op.name="MultiPlayer";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var N_BUFFERS = 8;
@@ -74,12 +74,12 @@ starPort.onTriggered = function() {
     var index = indexPort.get();
     if(indexIsValid(index)) {
         var time = timePort.get();
-        if(!CABLES.WebAudio.isValidToneTime(time)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
             time = TIME_DEFAULT;
         }
         var offset = offsetPort.get();
         var duration = durationPort.get();
-        if(!CABLES.WebAudio.isValidToneTime(duration)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(duration)) {
             duration = DURATION_DEFAULT;
         }
         op.log("duration: ", duration);
@@ -99,22 +99,22 @@ starLoopPort.onTriggered = function() {
     var index = indexPort.get();
     if(indexIsValid(index)) {
         var time = timePort.get();
-        if(!CABLES.WebAudio.isValidToneTime(time)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
             time = TIME_DEFAULT;
         }
         var offset = offsetPort.get();
         var duration = durationPort.get();
-        if(!CABLES.WebAudio.isValidToneTime(duration)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(duration)) {
             duration = DURATION_DEFAULT;
         }
         var pitch = pitchPort.get();
         var gain = gainPort.get();
         var loopStartTime = loopStartTimePort.get();
-        if(!CABLES.WebAudio.isValidToneTime(loopStartTime)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(loopStartTime)) {
             loopStartTime = LOOP_START_TIME_DEFAULT;
         }
         var loopEndTime = loopEndTimePort.get();
-        if(!CABLES.WebAudio.isValidToneTime(loopEndTime)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(loopEndTime)) {
             loopEndTime = LOOP_END_TIME_DEFAULT;
         }
         // tone.js doc: .startLoop (bufferName, time[, offset][, loopStart][, loopEnd][, pitch][, gain])
@@ -130,7 +130,7 @@ stopPort.onTriggered = function() {
     var index = indexPort.get();
     if(indexIsValid(index)) {
         var time = timePort.get();
-        if(!CABLES.WebAudio.isValidToneTime(time)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
             time = TIME_DEFAULT;
         }
         try {
@@ -143,7 +143,7 @@ stopPort.onTriggered = function() {
 
 stopAllPort.onTriggered = function() {
     var time = timePort.get();
-    if(!CABLES.WebAudio.isValidToneTime(time)) {
+    if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
         time = TIME_DEFAULT;
     }
     try {
@@ -153,7 +153,7 @@ stopAllPort.onTriggered = function() {
 
 fadeInPort.onChange = function() {
     var fadeInTime = fadeInPort.get();
-    if(CABLES.WebAudio.isValidToneTime(fadeInTime)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(fadeInTime)) {
         node.set("fadeIn", fadeInTime);
     }
 };
@@ -161,7 +161,7 @@ fadeInPort.onChange = function() {
 // not working all the time, tone.js-bug?
 fadeOutPort.onChange = function() {
     var fadeOutTime = fadeOutPort.get();
-    if(CABLES.WebAudio.isValidToneTime(fadeOutTime)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(fadeOutTime)) {
         node.set("fadeOut", fadeOutTime);
         op.log("fadeout time", fadeOutTime);
     }
@@ -184,4 +184,4 @@ mutePort.onChange = function() {
 };
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

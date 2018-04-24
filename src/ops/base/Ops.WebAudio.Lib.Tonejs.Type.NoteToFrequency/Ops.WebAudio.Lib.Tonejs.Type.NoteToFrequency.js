@@ -1,6 +1,6 @@
 op.name="NoteToFrequency";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values
 var FREQ_DEFAULT = 0;
@@ -11,8 +11,8 @@ var notePort = op.inValueString("Note");
 // change listeners
 notePort.onChange = function() {
     var note = notePort.get();
-    op.log(CABLES.WebAudio.isValidToneNote(note));
-    if(CABLES.WebAudio.isValidToneNote(note)) {
+    op.log(CABLES.WEBAUDIO.isValidToneNote(note));
+    if(CABLES.WEBAUDIO.isValidToneNote(note)) {
         var freqObj = new Tone.Frequency(note);    
         freqPort.set(freqObj.toFrequency());
     } else {

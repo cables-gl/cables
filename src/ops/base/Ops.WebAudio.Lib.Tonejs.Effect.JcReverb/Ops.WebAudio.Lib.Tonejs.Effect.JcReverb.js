@@ -1,6 +1,6 @@
 op.name="JcReverb";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var node = new Tone.JCReverb();
@@ -14,10 +14,10 @@ var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
-var roomSizePort = CABLES.WebAudio.createAudioParamInPort(op, "Room Size", node.roomSize, {"display": "range", "min": ROOM_SIZE_MIN, "max": ROOM_SIZE_MAX}, ROOM_SIZE_DEFAULT);
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
+var roomSizePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Room Size", node.roomSize, {"display": "range", "min": ROOM_SIZE_MIN, "max": ROOM_SIZE_MAX}, ROOM_SIZE_DEFAULT);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 

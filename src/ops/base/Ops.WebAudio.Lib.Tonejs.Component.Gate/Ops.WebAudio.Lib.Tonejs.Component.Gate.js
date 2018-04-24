@@ -1,6 +1,6 @@
 op.name="Gate";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values
 var THRESHOLD_DEFAULT = -40;
@@ -13,7 +13,7 @@ var RELEASE_DEFAULT = 0.1;
 var node = new Tone.Gate(THRESHOLD_DEFAULT, ATTACK_DEFAULT, RELEASE_DEFAULT);
 
 // in ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var thresholdPort = op.addInPort( new Port( this, "Threshold", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': THRESHOLD_MIN, 'max': THRESHOLD_MAX }, THRESHOLD_DEFAULT ));
 thresholdPort.set(THRESHOLD_DEFAULT);
 var attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
@@ -31,4 +31,4 @@ function setNodeValue(key, value) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

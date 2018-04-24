@@ -1,6 +1,6 @@
 op.name="FrequencyEnvelope";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // TODO:
 // - baseFrequency can also be in the form "C3", should this be supported?
@@ -40,7 +40,7 @@ var BASE_FREQUENCY_MAX = 20000;
 var node = new Tone.FrequencyEnvelope();
 
 // in ports
-//var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+//var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var baseFrequencyPort = op.inValue("Base Frequency", BASE_FREQUENCY_DEFAULT);
 var octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
 var attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
@@ -70,4 +70,4 @@ function setNodeValue(key, value) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

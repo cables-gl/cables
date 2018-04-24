@@ -1,6 +1,6 @@
 op.name="Transport";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // in port defaults
 var BPM_DEFAULT = 120;

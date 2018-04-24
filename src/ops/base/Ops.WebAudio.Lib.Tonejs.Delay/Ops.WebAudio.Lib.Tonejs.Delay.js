@@ -1,6 +1,6 @@
 op.name="Delay";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values
 var DELAY_TIME_DEFAULT = 0.11;
@@ -14,14 +14,14 @@ var MAX_DELAY_TIME_MAX = 179;
 var node = new Tone.Delay(DELAY_TIME_DEFAULT, MAX_DELAY_TIME_DEFAULT);
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
-var delayTimePort = CABLES.WebAudio.createAudioParamInPort(op, "Delay Time", node.delayTime, {"display": "range", "min": DELAY_TIME_MIN, "max": DELAY_TIME_MAX}, DELAY_TIME_DEFAULT);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
+var delayTimePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Delay Time", node.delayTime, {"display": "range", "min": DELAY_TIME_MIN, "max": DELAY_TIME_MAX}, DELAY_TIME_DEFAULT);
 var maxDelayTimePort = op.inValueString("Max Delay Time", MAX_DELAY_TIME_DEFAULT);
 maxDelayTimePort.onChange = handleChange;
 
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 // functions
 function handleChange() {

@@ -1,6 +1,6 @@
 op.name="Part";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var PLAYBACK_RATE_DEFAULT = 1;
@@ -65,7 +65,7 @@ var mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
 function checkAutoStart() {
     var autoStart = autoStartPort.get();
     var startTime = startTimePort.get();
-    if(!CABLES.WebAudio.isValidToneTime(startTime)) {
+    if(!CABLES.WEBAUDIO.isValidToneTime(startTime)) {
         startTime = START_TIME_DEFAULT;
         op.log("Warning: Start time is not a valid tone time, using: ", START_TIME_DEFAULT);
     }
@@ -86,7 +86,7 @@ function cb(time, value) {
 
 function start(startTime) {
     if(node.state !== 'started') {
-        if(CABLES.WebAudio.isValidToneTime(startTime)) {
+        if(CABLES.WEBAUDIO.isValidToneTime(startTime)) {
             node.start(startTime);    
         } else {
             op.log("Warning: Start time is not a valid tone time, starting now");
@@ -98,7 +98,7 @@ function start(startTime) {
 
 function stop(stopTime) {
     if(node.state !== 'stopped') {
-        if(CABLES.WebAudio.isValidToneTime(stopTime)) {
+        if(CABLES.WEBAUDIO.isValidToneTime(stopTime)) {
             node.stop(stopTime);    
         } else {
             op.log("Warning: Stop time is not a valid tone time, stopping now");
@@ -128,7 +128,7 @@ timeNoteArrayPort.onChange = function() {
 
 startTriggerPort.onTriggered = function() {
     var startTime = startTimePort.get();
-    if(!CABLES.WebAudio.isValidToneTime(startTime)) {
+    if(!CABLES.WEBAUDIO.isValidToneTime(startTime)) {
         startTime = START_TIME_DEFAULT;
         op.log("Warning: Start time is not a valid tone time, using: ", START_TIME_DEFAULT);
     }
@@ -137,7 +137,7 @@ startTriggerPort.onTriggered = function() {
 
 stopTriggerPort.onTriggered = function() {
     var stopTime = stopTimePort.get();
-    if(!CABLES.WebAudio.isValidToneTime(stopTime)) {
+    if(!CABLES.WEBAUDIO.isValidToneTime(stopTime)) {
         stopTime = STOP_TIME_DEFAULT;
         op.log("Warning: Stop time is not a valid tone time, using: ", STOP_TIME_DEFAULT);
     }
@@ -146,7 +146,7 @@ stopTriggerPort.onTriggered = function() {
 
 cancelTriggerPort.onTriggered = function() {
     var cancelTime = cancelTimePort.get();
-    if(!CABLES.WebAudio.isValidToneTime(cancelTime)) {
+    if(!CABLES.WEBAUDIO.isValidToneTime(cancelTime)) {
         cancelTime = CANCEL_TIME_DEFAULT;
         op.log("Warning: Cancel time is not a valid tone time, using: ", CANCEL_TIME_DEFAULT);
     }
@@ -179,7 +179,7 @@ function handleHumanizeChange() {
     var humanizeTime = humanizeTimePort.get();
     var humanize = humanizePort.get();
     if(humanize) {
-        if(CABLES.WebAudio.isValidToneTime(humanizeTime)) {
+        if(CABLES.WEBAUDIO.isValidToneTime(humanizeTime)) {
             node.set("humanize", humanizeTime);
         } else {
             op.log("Warning: Humanize Time is not a valid tone time");
@@ -191,7 +191,7 @@ function handleHumanizeChange() {
 
 loopStartPort.onChange = function() {
     var loopStart = loopStartPort.get();
-    if(CABLES.WebAudio.isValidToneTime(loopStart)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(loopStart)) {
         node.set("loopStart", loopStart);
     } else {
         op.log("Warning: Loop Start Time is not a valid tone time: ", loopStart);
@@ -200,7 +200,7 @@ loopStartPort.onChange = function() {
 
 loopEndPort.onChange = function() {
     var loopEnd = loopEndPort.get();
-    if(CABLES.WebAudio.isValidToneTime(loopEnd)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(loopEnd)) {
         node.set("loopEnd", loopEnd);
     } else {
         op.log("Warning: Loop End Time is not a valid tone time: ", loopEnd);

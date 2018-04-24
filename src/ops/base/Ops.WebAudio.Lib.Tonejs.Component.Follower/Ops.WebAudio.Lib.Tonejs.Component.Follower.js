@@ -1,6 +1,6 @@
 op.name="Follower";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var ATTACK_DEFAULT = 0.05;
@@ -10,7 +10,7 @@ var RELEASE_DEFAULT = 0.5;
 var node = new Tone.Follower(ATTACK_DEFAULT, RELEASE_DEFAULT);
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var attackPort = op.inValueSlider("Attack", ATTACK_DEFAULT);
 var releasePort = op.inValueSlider("Release", RELEASE_DEFAULT);
 
@@ -23,4 +23,4 @@ releasePort.onChange = function() {
 };
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

@@ -1,6 +1,6 @@
 op.name="Tremolo";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var node = new Tone.Tremolo();
@@ -21,12 +21,12 @@ var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
-var widthPort = CABLES.WebAudio.createAudioParamInPort(op, "Width", node.width, {"display": "range", "min": WIDTH_MIN, "max": WIDTH_MAX}, node.get("width").width);
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, node.get("wet").wet);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
+var widthPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Width", node.width, {"display": "range", "min": WIDTH_MIN, "max": WIDTH_MAX}, node.get("width").width);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, node.get("wet").wet);
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 // clean up
 op.onDelete = function() {

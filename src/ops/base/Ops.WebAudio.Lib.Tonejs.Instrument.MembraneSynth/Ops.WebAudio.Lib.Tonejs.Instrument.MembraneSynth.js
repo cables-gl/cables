@@ -1,6 +1,6 @@
 op.name="MembraneSynth";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var FREQUENCY_DEFAULT = 440;
@@ -57,7 +57,7 @@ oscillatorPort.set(OSCILLATOR_TYPE_DEFAULT);
 var envelopePort = op.inObject("Envelope");
 var octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
 var pitchDecayPort = op.inValueSlider("Pitch Decay");
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
+var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 
 // change listeners
 oscillatorPort.onChange = function() {
@@ -90,6 +90,6 @@ function setNodeValue(key, val) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 

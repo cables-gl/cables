@@ -1,6 +1,6 @@
 op.name="Panner3D";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var POSITION_X_DEFAULT = 0;
@@ -26,7 +26,7 @@ var MAXIMUM_DISTANCE_DEFAULT = 10000;
 var node = new Tone.Panner3D(POSITION_X_DEFAULT, POSITION_Y_DEFAULT, POSITION_Z_DEFAULT);
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var positionXPort = op.inValue("Position X", POSITION_X_DEFAULT);
 var positionYPort = op.inValue("Position Y", POSITION_Y_DEFAULT);
 var positionZPort = op.inValue("Position Z", POSITION_Z_DEFAULT);
@@ -123,4 +123,4 @@ function isInArray(val, arr) {
 
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

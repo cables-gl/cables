@@ -1,6 +1,6 @@
 op.name="Convolver";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var node = new Tone.Convolver();
@@ -11,12 +11,12 @@ var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var filePort = op.addInPort( new Port( this, "File", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'audio'  } ));
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 var fileLoadedPort = op.outValue("File loaded");
 
 // change listeners

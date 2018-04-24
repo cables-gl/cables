@@ -1,6 +1,6 @@
 op.name = "SynthPlayerFixedLength";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
 var synthPort = op.inObject("Synth");

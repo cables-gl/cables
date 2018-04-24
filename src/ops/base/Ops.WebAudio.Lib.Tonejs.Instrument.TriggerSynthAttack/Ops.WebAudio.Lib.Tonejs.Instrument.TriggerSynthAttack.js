@@ -16,13 +16,13 @@ triggerPort.onTriggered = function() {
         var velocity = velocityPort.get();
         
         // check time
-        if(!CABLES.WebAudio.isValidToneTime(time)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
             op.uiAttr( { "error": "Invalid time, using '+0'" } );
             time = "+0";
         }
         
         // check tone
-        if(!CABLES.WebAudio.isValidToneNote(note)) {
+        if(!CABLES.WEBAUDIO.isValidToneNote(note)) {
             op.uiAttr( { 'error': 'Invalid note, should be either a tone, e.g. "C4" or a frequency, e.g. "440"' } );
             return;
         }

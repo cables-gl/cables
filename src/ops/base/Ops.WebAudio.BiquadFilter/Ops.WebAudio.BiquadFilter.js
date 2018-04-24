@@ -1,6 +1,6 @@
 this.name="BiquadFilter";
 
-var audioContext = CABLES.WebAudio.createAudioContext(op);
+var audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values + min and max
 var Q_MIN = 0.0001;
@@ -21,8 +21,8 @@ var TYPE_DEF = "allpass";
 
 var biquadFilter = audioContext.createBiquadFilter();
 
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", biquadFilter);
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", biquadFilter);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", biquadFilter);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", biquadFilter);
 
 var type = this.addInPort(new Port(this,"type",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['allpass','lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch']}));
 var frequency = this.addInPort(new Port(this, "frequency", OP_PORT_TYPE_VALUE, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}));

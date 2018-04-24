@@ -1,6 +1,6 @@
 op.name="Pattern";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var NOTE_SEQUENCE_DEFAULT = ["C4", "E4", "G4", "A4"];
@@ -68,7 +68,7 @@ patternTypePort.onChange = function() {
 };
 startPort.onTriggered = start;
 stopPort.onTriggered = function() {
-    var stopTime = CABLES.WebAudio.isValidToneTime(stopTimePort.get()) ? stopTimePort.get() : STOP_TIME_DEFAULT;
+    var stopTime = CABLES.WEBAUDIO.isValidToneTime(stopTimePort.get()) ? stopTimePort.get() : STOP_TIME_DEFAULT;
     node.stop(stopTime);
 };
 humanizePort.onChange = function() {
@@ -76,7 +76,7 @@ humanizePort.onChange = function() {
 };
 humanizeTimePort.onChange = function() {
     var humanizeTime = humanizeTimePort.get();    
-    if(humanizePort.get() && CABLES.WebAudio.isValidToneTime(humanizeTime)) {
+    if(humanizePort.get() && CABLES.WEBAUDIO.isValidToneTime(humanizeTime)) {
         node.humanize = humanizeTime;    
     }
 };
@@ -101,13 +101,13 @@ function createNewPatternObject() {
     var interval = intervalPort.get();
     var sequence = valuesPort.get() || [];
     
-    if(CABLES.WebAudio.isValidToneTime(interval)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(interval)) {
         var playedBefore = node.state === 'started' ? true : false;
         node.dispose(); // remove old instance
         node = new Tone.Sequence(eventCb, sequence, interval);
         if(humanizePort.get()) {
             var humanizeTime = humanizeTimePort.get();
-            if(CABLES.WebAudio.isValidToneTime(humanizeTime)) {
+            if(CABLES.WEBAUDIO.isValidToneTime(humanizeTime)) {
                 node.humanize = humanizeTime;
             } else {
                 node.humanize = true;
@@ -130,6 +130,6 @@ function eventCb(time, note) {
 }
 
 function start() {
-    var startTime = CABLES.WebAudio.isValidToneTime(startTimePort.get()) ? startTimePort.get() : START_TIME_DEFAULT;
+    var startTime = CABLES.WEBAUDIO.isValidToneTime(startTimePort.get()) ? startTimePort.get() : START_TIME_DEFAULT;
     node.start(startTime);
 }

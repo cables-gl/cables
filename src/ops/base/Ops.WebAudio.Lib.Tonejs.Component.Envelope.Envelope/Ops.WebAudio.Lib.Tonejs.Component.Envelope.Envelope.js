@@ -1,6 +1,6 @@
 op.name="Envelope";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var node = new Tone.Envelope();
@@ -55,7 +55,7 @@ releasePort.onChange = function() {
 triggerAttackPort.onTriggered = function(){
     var velocity = velocityPort.get();
     var time = attackTimePort.get();
-    if(!CABLES.WebAudio.isValidToneTime(time)) {
+    if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
         time = DEFAULT_ATTACK_TIME;
     }
     node.triggerAttack(time, velocity);
@@ -63,7 +63,7 @@ triggerAttackPort.onTriggered = function(){
 
 triggerReleasePort.onTriggered = function(){
     var time = releaseTimePort.get();
-    if(!CABLES.WebAudio.isValidToneTime(time)) {
+    if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
         time = DEFAULT_RELEASE_TIME;
     }
     node.triggerRelease(time);

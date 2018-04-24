@@ -1,4 +1,4 @@
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var SMOOTHING_DEFAULT = 0.8;
@@ -9,7 +9,7 @@ var SMOOTHING_MAX = 1.0; // ?
 var node = new Tone.Meter (SMOOTHING_DEFAULT);
 
 // inputs
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var updateValuePort = op.inFunction("Update Value");
 var updateDecibelsPort = op.inFunction("Update Decibels");
 var smoothingPort = op.inValueSlider("Smoothing");
@@ -32,7 +32,7 @@ smoothingPort.onChange = function() {
 };
 
 // outputs
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 var valuePort = op.outValue("Value");
 var decibelsPort = op.outValue("Decibels");
 valuePort.set(0);

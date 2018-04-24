@@ -1,6 +1,6 @@
 op.name="Filter";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var TYPES = ["lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "notch", "allpass", "peaking"];
@@ -28,11 +28,11 @@ var GAIN_MAX = 2; // ?
 var node = new Tone.Filter(FREQUENCY_DEFAULT, TYPE_DEFAULT, ROLLOFF_DEFAULT);
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
-var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}, FREQUENCY_DEFAULT);
-var detunePort = CABLES.WebAudio.createAudioParamInPort(op, "Detune", node.detune, {"display": "range", "min": DETUNE_MIN, "max": DETUNE_MAX}, DETUNE_DEFAULT);
-var gainPort = CABLES.WebAudio.createAudioParamInPort(op, "Gain", node.gain, {"display": "range", "min": GAIN_MIN, "max": GAIN_MAX}, GAIN_DEFAULT);
-var qPort = CABLES.WebAudio.createAudioParamInPort(op, "Q", node.Q, {"display": "range", "min": Q_MIN, "max": Q_MAX}, Q_DEFAULT);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
+var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}, FREQUENCY_DEFAULT);
+var detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, {"display": "range", "min": DETUNE_MIN, "max": DETUNE_MAX}, DETUNE_DEFAULT);
+var gainPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Gain", node.gain, {"display": "range", "min": GAIN_MIN, "max": GAIN_MAX}, GAIN_DEFAULT);
+var qPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Q", node.Q, {"display": "range", "min": Q_MIN, "max": Q_MAX}, Q_DEFAULT);
 var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES }, TYPE_DEFAULT ) );
 typePort.set(TYPE_DEFAULT);
 var rolloffPort = op.addInPort( new Port( op, "Rolloff", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: ROLLOFF_VALUES }, ROLLOFF_DEFAULT ) );
@@ -60,4 +60,4 @@ rolloffPort.onChange = function() {
 };
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

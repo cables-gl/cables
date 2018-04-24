@@ -1,6 +1,6 @@
 op.name="ScheduleRepeat";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 var INFINITE = "Infinite";
 var START_TIME_DEFAULT = "0";

@@ -1,6 +1,6 @@
 op.name="TriggerEnvelopeRelease";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values
 var TIME_DEFAULT = "+0";

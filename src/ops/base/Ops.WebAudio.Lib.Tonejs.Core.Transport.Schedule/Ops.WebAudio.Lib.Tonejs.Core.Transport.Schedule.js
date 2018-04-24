@@ -1,6 +1,6 @@
 op.name="Schedule";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 var INFINITE = "Infinite";
 var START_TIME_DEFAULT = "0";
@@ -23,7 +23,7 @@ function handleChange() {
     var time = timePort.get();
     
     // check if time is valid
-    if(!CABLES.WebAudio.isValidToneTime(time)) {
+    if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
         op.uiAttr( { 'error': 'Time not valid, Example: "0:1:0' } );
         if(window && window.gui && gui.patch) gui.patch().showOpParams(op); // update GUI    
         return;

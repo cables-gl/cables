@@ -1,6 +1,6 @@
 op.name="AudioBuffer";
 
-var audioCtx = CABLES.WebAudio.createAudioContext(op);
+var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
 var inUrlPort = op.addInPort( new Port( op, "URL", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'audio'  } ));
@@ -18,7 +18,7 @@ var numberOfChannelsPort = op.outValue("Number of Channels", 0);
 inUrlPort.onChange = function() {
     var url=op.patch.getFilePath(inUrlPort.get());
     if(typeof url === 'string' && url.length > 1) {
-        CABLES.WebAudio.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
+        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
     }
 };
 

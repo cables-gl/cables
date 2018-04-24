@@ -1,6 +1,6 @@
 op.name="FatOscillator";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var FREQUENCY_DEFAULT = 440;
@@ -33,8 +33,8 @@ var AUTO_START_DEFAULT = true;
 var node = new Tone.FatOscillator();
 
 // inputs
-var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
-var detunePort = CABLES.WebAudio.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
+var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
+var detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
 var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
 typePort.set(TYPE_DEFAULT);
 var spreadPort = op.inValue("Spread", SPREAD_DEFAULT);
@@ -47,7 +47,7 @@ var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var stopPort = op.addInPort( new Port( op, "Stop", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
+var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(MUTE_DEFAULT);
 
@@ -78,7 +78,7 @@ function unsyncFrequency() {
 function start() {
     if(node.state !== 'started') {
         var startTime = startTimePort.get();
-        if(!CABLES.WebAudio.isValidToneTime(startTime)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(startTime)) {
             startTime = START_TIME_DEFAULT;
         }
         node.start(startTime);
@@ -88,7 +88,7 @@ function start() {
 function stop() {
     if(node.state !== 'stopped') {
         var stopTime = stopTimePort.get();
-        if(!CABLES.WebAudio.isValidToneTime(stopTime)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(stopTime)) {
             stopTime = STOP_TIME_DEFAULT;
         }
         node.stop(stopTime);
@@ -152,7 +152,7 @@ autoStartPort.onChange = function() {
 };
 
 // outputs
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 audioOutPort.onLinkChanged = function() {
     //op.log("link changed");
     if(audioOutPort.isLinked()) {

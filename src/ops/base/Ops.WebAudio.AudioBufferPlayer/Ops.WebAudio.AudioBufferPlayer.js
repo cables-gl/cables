@@ -1,6 +1,6 @@
 op.name="AudioBufferPlayer";
 
-var audioCtx = CABLES.WebAudio.createAudioContext(op);
+var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
 var audioBufferPort = op.inObject("Audio Buffer");

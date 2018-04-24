@@ -1,6 +1,6 @@
 op.name="ControlPattern";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants / defaults
 var TYPES = [

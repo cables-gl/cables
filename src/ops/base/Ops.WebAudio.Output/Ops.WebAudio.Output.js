@@ -1,7 +1,7 @@
 op.name='audioOutput';
 op.requirements=[CABLES.Requirements.WEBAUDIO];
 
-var audioCtx = CABLES.WebAudio.createAudioContext(op);
+var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var VOLUME_DEFAULT = 1;
@@ -15,7 +15,7 @@ gainNode.connect(destinationNode);
 var masterVolume = 1;
 
 // inputs
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", gainNode);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", gainNode);
 var volumePort = op.inValueSlider("Volume", VOLUME_DEFAULT);
 var mutePort = op.inValueBool("Mute", false);
 

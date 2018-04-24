@@ -11,10 +11,10 @@ var VOLUME_DEFAULT = -6;
 var node = new Tone.MonoSynth();
 
 // inputs
-var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
-var detunePort = CABLES.WebAudio.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
+var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
+var detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
 var portamentoPort = op.inValueString("Portamento (Time)");
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
+var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 
 // functions
 /*
@@ -46,7 +46,7 @@ function shouldLinkFilter(p1, p2) {
 // change listeners
 portamentoPort.onChange = function() {
     var portamento = portamentoPort.get();
-    if(CABLES.WebAudio.isValidToneTime(portamento)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(portamento)) {
         node.set("portamento", portamento);
         op.uiAttr( { 'warning': null } );
         gui.patch().showOpParams(op); // update GUI
@@ -57,7 +57,7 @@ portamentoPort.onChange = function() {
 };
 
 //outputs
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 //var oscillatorPort = op.outObject("OmniOscillator");
 //oscillatorPort.shouldLink = shouldLinkOmniOscillator; 
 //var filterPort = op.outObject("Filter");

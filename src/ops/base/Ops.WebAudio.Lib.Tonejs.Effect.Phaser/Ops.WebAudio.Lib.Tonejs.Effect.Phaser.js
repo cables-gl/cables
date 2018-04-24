@@ -1,6 +1,6 @@
 op.name="Phaser";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // TODO:
 // - stages seems not to be supported - tone.js bug?
@@ -31,9 +31,9 @@ var WET_MAX = 1.0;
 var node = new Tone.Phaser();
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
-var qPort = CABLES.WebAudio.createAudioParamInPort(op, "Q", node.Q, {"display": "range", "min": Q_MIN, "max": Q_MAX}, Q_DEFAULT);
-var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}, FREQUENCY_DEFAULT);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
+var qPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Q", node.Q, {"display": "range", "min": Q_MIN, "max": Q_MAX}, Q_DEFAULT);
+var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}, FREQUENCY_DEFAULT);
 var octavesPort = op.addInPort( new Port( op, "Octaves", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVES_MIN, 'max': OCTAVES_MAX } ));
 octavesPort.set(OCTAVES_DEFAULT);
 var baseFrequencyPort = op.inValue("Base Frequency");
@@ -42,7 +42,7 @@ baseFrequencyPort.set(BASE_FREQUENCY_DEFAULT);
 var stagesPort = op.addInPort( new Port( op, "Stages", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': STAGES_MIN, 'max': STAGES_MAX } ));
 stagesPort.set(STAGES_DEFAULT);
 */
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 
 // change listeners
 octavesPort.onChange = function() {
@@ -72,7 +72,7 @@ function isInRange(val, min, max) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 op.onDelete = function() {
     node.dispose();

@@ -10,7 +10,7 @@ Create a new op and make sure to include the following line at the top of your p
 
 ```javascript
 op.name = "MyNewWebAudioOp";
-CABLES.WebAudio.createAudioContext();
+CABLES.WEBAUDIO.createAudioContext();
 // now window.audioContext is set and you can use all of the Web Audio nodes
 ```
 
@@ -33,7 +33,7 @@ In order to use tone.js there is one thing left to do: In your op-code add the f
 ```javascript
 op.name="MyNewToneJsOp";
 
-CABLES.WebAudio.createAudioContext();
+CABLES.WEBAUDIO.createAudioContext();
 Tone.setContext(window.audioContext);
 // now you can use all Web Audio nodes / tone.js functions
 ```

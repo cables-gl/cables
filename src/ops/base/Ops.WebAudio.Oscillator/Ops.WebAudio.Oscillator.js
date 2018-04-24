@@ -1,6 +1,6 @@
 this.name='Oscillator';
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 //inputs
 var type=this.addInPort(new Port(this,"type",OP_PORT_TYPE_VALUE,{display:'dropdown',values:[ 'sine','square','sawtooth','triangle' ]}));

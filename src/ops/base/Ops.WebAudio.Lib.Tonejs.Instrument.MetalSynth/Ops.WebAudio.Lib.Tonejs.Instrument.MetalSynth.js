@@ -12,7 +12,7 @@ op.webAudio = op.webAudio || {};
 var node = new Tone.MetalSynth ();
 
 // inputs
-var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, node.get("frequency").frequency);
+var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, node.get("frequency").frequency);
 var envelopePort = op.inObject("Envelope", null, {
         "linkRecommendations": {
             "ops": [ {
@@ -28,7 +28,7 @@ var modulationIndexPort = op.inValue("Modulation Index", node.get("modulationInd
 var harmonicityPort = op.inValue("Harmonicity", node.get('harmonicity').harmonicity);
 var resonancePort = op.inValue("Resonance", node.get('resonance').resonance);
 var octavesPort = op.inValue("Octaves", node.get('octaves').octaves);
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, node.get("volume").volume);
+var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, node.get("volume").volume);
 
 // functions
 op.webAudio.storeNodeSettings = function() {
@@ -95,7 +95,7 @@ octavesPort.onChange = function() {
 };
 
 //outputs
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 // clean up
 op.onDelete = function() {

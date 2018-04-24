@@ -26,13 +26,13 @@ triggerPort.onTriggered = function() {
         var velocity = velocityPort.get();
         
         // check time
-        if(!CABLES.WebAudio.isValidToneTime(time)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(time)) {
             op.log("Warning: Time " + time + " is invalid time, using " + TIME_DEFAULT);
             time = TIME_DEFAULT;
         }
 
         // check duration
-        if(!CABLES.WebAudio.isValidToneTime(duration)) {
+        if(!CABLES.WEBAUDIO.isValidToneTime(duration)) {
             op.log("Warning: Invalid duration, using " + DURATION_DEFAULT);
             duration = DURATION_DEFAULT;
         }
@@ -42,7 +42,7 @@ triggerPort.onTriggered = function() {
             velocity = VELOCITY_DEFAULT;
         }
         // check note
-        if(!CABLES.WebAudio.isValidToneNote(note)) {
+        if(!CABLES.WEBAUDIO.isValidToneNote(note)) {
             op.log("Warning: Invalid note, using " + NOTE_DEFAULT);            
             note = NOTE_DEFAULT;
         }

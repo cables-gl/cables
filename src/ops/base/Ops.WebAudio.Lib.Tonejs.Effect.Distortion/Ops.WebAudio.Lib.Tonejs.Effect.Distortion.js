@@ -1,6 +1,6 @@
 op.name="Distortion";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var node = new Tone.Distortion();
@@ -16,12 +16,12 @@ var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var distortionPort = op.addInPort( new Port( op, "Distortion", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': DISTORTION_MIN, 'max': DISTORTION_MAX } ));
 distortionPort.set(DISTORTION_DEFAULT);
 var oversamplePort = op.addInPort( new Port( op, "Oversample", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: OVERSAMPLE_VALUES } ) );
 oversamplePort.set(OVERSAMPLE_DEFAULT);
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 
 // change listeners
 distortionPort.onChange = function() {
@@ -47,5 +47,5 @@ function setNodeValue(key, val) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 

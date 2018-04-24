@@ -1,6 +1,6 @@
 op.name="ScaledEnvelope";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 var CURVE_VALUES = [
     "linear",
@@ -27,7 +27,7 @@ var EXPONENT_DEFAULT = 1;
 var node = new Tone.ScaledEnvelope();
 
 // in ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var attackPort = op.inValueSlider("Attack", ATTACK_DEFAULT);
 var decayPort = op.inValueSlider("Decay", DECAY_DEFAULT);
 var sustainPort = op.inValueSlider("Sustain", SUSTAIN_DEFAULT);
@@ -69,4 +69,4 @@ function setNodeValue(key, value) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

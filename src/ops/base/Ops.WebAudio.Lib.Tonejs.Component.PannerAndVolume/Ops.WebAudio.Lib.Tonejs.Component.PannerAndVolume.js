@@ -1,6 +1,6 @@
 op.name="PannerAndVolume";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var PANNING_DEFAULT = 0.0;
@@ -14,12 +14,12 @@ var VOLUME_MAX = 0;
 var node = new Tone.PanVol(PANNING_DEFAULT, VOLUME_DEFAULT);
 
 // inputs
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
-var panningPort = CABLES.WebAudio.createAudioParamInPort(op, "Panning", node.pan, {'display': 'range', 'min': PANNING_MIN, 'max': PANNING_MAX}, PANNING_DEFAULT);
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
+var panningPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Panning", node.pan, {'display': 'range', 'min': PANNING_MIN, 'max': PANNING_MAX}, PANNING_DEFAULT);
+var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
 
 //outputs
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 // clean up
 op.onDelete = function() {

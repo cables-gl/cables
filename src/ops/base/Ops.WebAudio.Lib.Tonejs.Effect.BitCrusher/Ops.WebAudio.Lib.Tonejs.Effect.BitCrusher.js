@@ -1,6 +1,6 @@
 op.name="BitCrusher";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var BITS_DEFAULT = 4;
@@ -14,10 +14,10 @@ var WET_MAX = 1.0;
 var node = new Tone.BitCrusher(BITS_DEFAULT);
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var bitsPort = op.addInPort( new Port( this, "Bits", OP_PORT_TYPE_VALUE, { 'display': 'range', "min": BITS_MIN, "max": BITS_MAX }, BITS_DEFAULT));
 bitsPort.set(BITS_DEFAULT);
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 
 // change listeners
 bitsPort.onChange = function() {
@@ -28,6 +28,6 @@ bitsPort.onChange = function() {
 };
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 bitsPort.set(BITS_DEFAULT);

@@ -1,6 +1,6 @@
 op.name="AudioModulo";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var VALUE_DEFAULT = 0.2;
@@ -9,7 +9,7 @@ var VALUE_DEFAULT = 0.2;
 var node = new Tone.Modulo(VALUE_DEFAULT);
 
 // input ports
-var signalPort = CABLES.WebAudio.createAudioInPort(op, "Signal", node);
+var signalPort = CABLES.WEBAUDIO.createAudioInPort(op, "Signal", node);
 var valuePort = op.inValue("Value", VALUE_DEFAULT);
 
 // listeners
@@ -21,7 +21,7 @@ valuePort.onChange = function() {
 };
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 
 

@@ -10,7 +10,7 @@ var readyPort = op.outValue('Is Ready', false);
 op.onLoaded = init; // wait for ports to be set
 
 function init() {
-    var ctx = CABLES.WebAudio.createAudioContext(op);
+    var ctx = CABLES.WEBAUDIO.createAudioContext(op);
     var selectors = splitString(selectorsPort.get()) || CANVAS_ELEMENT
     StartAudioContext(ctx, selectors, audioContextReady);
 }

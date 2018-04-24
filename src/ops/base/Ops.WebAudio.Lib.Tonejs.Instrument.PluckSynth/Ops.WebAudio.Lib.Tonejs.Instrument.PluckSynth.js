@@ -1,6 +1,6 @@
 op.name="PluckSynth";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var ATTACK_NOISE_DEFAULT = 1;
@@ -18,13 +18,13 @@ var DAMPENING_MAX = 10000;
 var node = new Tone.PluckSynth();
 
 // input ports
-var attackNoisePort = CABLES.WebAudio.createAudioParamInPort(op, "Attack Noise", node.attackNoise, {'display': 'range', 'min': ATTACK_NOISE_MIN, 'max': ATTACK_NOISE_MAX}, ATTACK_NOISE_DEFAULT);
-var resonancePort = CABLES.WebAudio.createAudioParamInPort(op, "Resonance", node.resonance, {'display': 'range', 'min': RESONANCE_MIN, 'max': RESONANCE_MAX}, RESONANCE_DEFAULT);
-var dampeningPort = CABLES.WebAudio.createAudioParamInPort(op, "Dampening", node.dampening, {'display': 'range', 'min': DAMPENING_MIN, 'max': DAMPENING_MAX}, DAMPENING_DEFAULT);
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
+var attackNoisePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Attack Noise", node.attackNoise, {'display': 'range', 'min': ATTACK_NOISE_MIN, 'max': ATTACK_NOISE_MAX}, ATTACK_NOISE_DEFAULT);
+var resonancePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Resonance", node.resonance, {'display': 'range', 'min': RESONANCE_MIN, 'max': RESONANCE_MAX}, RESONANCE_DEFAULT);
+var dampeningPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Dampening", node.dampening, {'display': 'range', 'min': DAMPENING_MIN, 'max': DAMPENING_MAX}, DAMPENING_DEFAULT);
+var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 
 // change listeners
 
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

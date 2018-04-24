@@ -1,6 +1,6 @@
 op.name="DuoSynth";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var FREQUENCY_DEFAULT = 440;
@@ -14,17 +14,17 @@ var VOLUME_DEFAULT = -6;
 var node = new Tone.DuoSynth();
 
 // inputs
-var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
-var vibratoAmountPort = CABLES.WebAudio.createAudioParamInPort(op, "Vibrato Amount", node.vibratoAmount, null, VIBRATO_AMOUNT_DEFAULT);
-var vibratoRatePort = CABLES.WebAudio.createAudioParamInPort(op, "Vibrato Rate", node.vibratoRate, null, VIBRATO_RATE_DEFAULT);
-var harmonicityPort = CABLES.WebAudio.createAudioParamInPort(op, "Harmonicity", node.harmonicity, null, HARMONICITY_DEFAULT);
+var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
+var vibratoAmountPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Vibrato Amount", node.vibratoAmount, null, VIBRATO_AMOUNT_DEFAULT);
+var vibratoRatePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Vibrato Rate", node.vibratoRate, null, VIBRATO_RATE_DEFAULT);
+var harmonicityPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Harmonicity", node.harmonicity, null, HARMONICITY_DEFAULT);
 var portamentoPort = op.inValueString("Portamento", PORTAMENTO_DEFAULT);
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
+var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 
 // change listeners
 portamentoPort.onChange = function() {
     var portamento = portamentoPort.get();
-    if(CABLES.WebAudio.isValidToneTime(portamento)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(portamento)) {
         node.set("portamento", portamento);
         op.uiAttr( { 'warning': null } ); // clear warning
         gui.patch().showOpParams(op); // update GUI
@@ -35,7 +35,7 @@ portamentoPort.onChange = function() {
 };
 
 //outputs
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 // clean up
 op.onDelete = function() {

@@ -1,5 +1,5 @@
 CABLES=CABLES||{};
-CABLES.WebAudio = CABLES.WebAudio || {};
+CABLES.WEBAUDIO = CABLES.WEBAUDIO || {};
 
 /*
  * External JSDoc definitions
@@ -30,17 +30,17 @@ CABLES.WebAudio = CABLES.WebAudio || {};
  * @param {CABLES.Op} op - The operator which needs the Audio Context
  * @returns {(external:AudioContext|undefined)} - The audio context or `undefined` if Web Audio is not supported
  */
-CABLES.WebAudio.createAudioContext = function(op) {
+CABLES.WEBAUDIO.createAudioContext = function(op) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   if(window.AudioContext) {
     if(!window.audioContext) {
       window.audioContext = new AudioContext();
     }
     // check if tone.js lib is being used
-    if(window.Tone && !CABLES.WebAudio.toneJsInitialized) {
+    if(window.Tone && !CABLES.WEBAUDIO.toneJsInitialized) {
       // set current audio context in tone.js
       Tone.setContext(window.audioContext);
-      CABLES.WebAudio.toneJsInitialized = true;
+      CABLES.WEBAUDIO.toneJsInitialized = true;
     }
   } else {
     op.patch.config.onError('NO_WEBAUDIO','Web Audio is not supported in this browser.');
@@ -55,7 +55,7 @@ CABLES.WebAudio.createAudioContext = function(op) {
  * It most cases you should use `createAudioContext`, which just returns the audio context 
  * when it has been created already.
  */
-CABLES.WebAudio.getAudioContext = function() {
+CABLES.WEBAUDIO.getAudioContext = function() {
   return window.audioContext;
 };
 
@@ -70,7 +70,7 @@ CABLES.WebAudio.getAudioContext = function() {
  * @param {number} [inputChannelIndex=0] - If the audio node has multiple inputs, this is the index of the input channel to connect to
  * @returns {CABLES.Port|undefined} - The newly created audio in port or `undefined` if there was an error
  */
-CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChannelIndex) {
+CABLES.WEBAUDIO.createAudioInPort = function(op, portName, audioNode, inputChannelIndex) {
   if(!op || !portName || !audioNode) {
     var msg = 'ERROR: createAudioInPort needs three parameters, op, portName and audioNode'
     op.log(msg);
@@ -134,7 +134,7 @@ CABLES.WebAudio.createAudioInPort = function(op, portName, audioNode, inputChann
  * @param {external:AudioNode} oldNode - The old audio node, which should be unlinked from the port
  * @param {external:AudioNode} newNode - The new audio node, which should be linked to the port
  */
-CABLES.WebAudio.replaceNodeInPort = function(port, oldNode, newNode) {
+CABLES.WEBAUDIO.replaceNodeInPort = function(port, oldNode, newNode) {
   var connectedNode = port.webAudio.previousAudioInNode;
   // check if connected
   if(connectedNode && connectedNode.disconnect) {
@@ -161,7 +161,7 @@ CABLES.WebAudio.replaceNodeInPort = function(port, oldNode, newNode) {
  * @param {AudioNode} audioNode - The audio node to link to the port
  * @returns {(CABLES.Port|undefined)} - The newly created audio out port or `undefined` if there was an error
  */
-CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
+CABLES.WEBAUDIO.createAudioOutPort = function(op, portName, audioNode) {
   if(!op || !portName || !audioNode) {
     var msg = 'ERROR: createAudioOutPort needs three parameters, op, portName and audioNode';
     op.log(msg);
@@ -185,7 +185,7 @@ CABLES.WebAudio.createAudioOutPort = function(op, portName, audioNode) {
  * @param {external:AudioNode} audioNode - The audionode incoming connections should connect to
  * @returns {(CABLES.Port|undefined)} - The newly created port, which takes care of (dis-)connecting on its own, or `undefined` if there was an error
  */
-CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, options, defaultValue) {
+CABLES.WEBAUDIO.createAudioParamInPort = function(op, portName, audioNode, options, defaultValue) {
   if(!op || !portName || !audioNode) {
     op.log("ERROR: createAudioParamInPort needs three parameters, op, portName and audioNode");
     if(op && op.name) op.log("opname: ", op.name);
@@ -220,7 +220,7 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
   port.onChange = function() {
     var audioInNode = port.get();
     var node = port.webAudio.audioNode;
-    var audioCtx = CABLES.WebAudio.getAudioContext();
+    var audioCtx = CABLES.WEBAUDIO.getAudioContext();
 
     if (audioInNode != undefined) {
       if(typeof audioInNode === 'object' && audioInNode.connect) {
@@ -324,8 +324,8 @@ CABLES.WebAudio.createAudioParamInPort = function(op, portName, audioNode, optio
  * @param {loadAudioFileErrorCallback} onError - The callback when there was an error loading the file, the rror message is passed
  * @see {@link https://developer.mozilla.org/de/docs/Web/API/AudioContext/decodeAudioData}
  */
-CABLES.WebAudio.loadAudioFile = function(patch, url, onFinished, onError) {
-  var audioContext = CABLES.WebAudio.createAudioContext();
+CABLES.WEBAUDIO.loadAudioFile = function(patch, url, onFinished, onError) {
+  var audioContext = CABLES.WEBAUDIO.createAudioContext();
   var loadingId = patch.loading.start('audio', url);
   if(CABLES.UI) gui.jobs().start({id: 'loadaudio' + loadingId, title:' loading audio (' + url + ')'});
   var request = new XMLHttpRequest();
@@ -347,7 +347,7 @@ CABLES.WebAudio.loadAudioFile = function(patch, url, onFinished, onError) {
  * @param {(string|number)} t - The time to check
  * @returns {boolean} - True if time is valid, false if not
  */
-CABLES.WebAudio.isValidToneTime = function(t) {
+CABLES.WEBAUDIO.isValidToneTime = function(t) {
     try{
 	    var time = new Tone.Time(t);
     } catch(e) {
@@ -361,7 +361,7 @@ CABLES.WebAudio.isValidToneTime = function(t) {
  * @param {string} note - The note to be checked, e.g. `"C4"`
  * @returns {boolean} - True if the note is a valid note, false otherwise  
  */
-CABLES.WebAudio.isValidToneNote = function(note) {
+CABLES.WEBAUDIO.isValidToneNote = function(note) {
   try {
     Tone.Frequency(note);
   } catch(e) {

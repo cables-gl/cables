@@ -1,6 +1,6 @@
 op.name="Analyser";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values
 var SIZE_DEFAULT = 1024;
@@ -23,7 +23,7 @@ var DECIBELS_RANGE_MAX = 0;
 var node = new Tone.Analyser(TYPE_DEFAULT, SIZE_DEFAULT);
 
 // in ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var refreshPort = op.addInPort( new Port( this, "Refresh", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 //var sizePort = op.addInPort( new Port( this, "Size", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': SIZE_MIN, 'max': SIZE_MAX }, SIZE_DEFAULT ));
 var sizePort = this.addInPort( new Port( this, "Size", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: SIZES } ) );
@@ -40,7 +40,7 @@ var returnTypePort = this.addInPort( new Port( this, "Return Type", OP_PORT_TYPE
 returnTypePort.set(RETURN_TYPE_DEFAULT);
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 var analyserArrayPort = op.outArray("Analyser Array");
 analyserArrayPort.set([]);
 

@@ -1,6 +1,6 @@
 op.name="GrainPlayer";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var PLAY_DEFAULT = true;
@@ -79,7 +79,7 @@ playbackRatePort.onChange = function(){
             // TODO: Show error
         }
     } else if(typeof playBackRate === 'string') {
-        if(CABLES.WebAudio.isValidToneTime(playBackRate)) {
+        if(CABLES.WEBAUDIO.isValidToneTime(playBackRate)) {
             setNodeValue("playbackRate", playBackRate);
         } else {
             // TODO: Show error
@@ -88,7 +88,7 @@ playbackRatePort.onChange = function(){
 };
 overlapPort.onChange = function() {
     var overlap = overlapPort.get();
-    if(CABLES.WebAudio.isValidToneTime(overlap)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(overlap)) {
         setNodeValue( "overlap", overlap );    
     } else {
         // TODO, show error
@@ -97,13 +97,13 @@ overlapPort.onChange = function() {
 loopPort.onChange = function(){ setNodeValue( "loop", loopPort.get() ); };
 loopStartPort.onChange = function(){ 
     var t = loopStartPort.get();
-    if(CABLES.WebAudio.isValidToneTime(t)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(t)) {
         setNodeValue("loopStart", t);     
     }
 };
 loopEndPort.onChange = function(){
     var t = loopEndPort.get();
-    if(CABLES.WebAudio.isValidToneTime(t)) {
+    if(CABLES.WEBAUDIO.isValidToneTime(t)) {
         setNodeValue("loopStart", t);     
     }
     
@@ -151,4 +151,4 @@ function setNodeValue(key, val) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

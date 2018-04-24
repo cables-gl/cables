@@ -1,6 +1,6 @@
 op.name="Gain";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var gainNode = new Tone.Gain();
@@ -9,11 +9,11 @@ var gainNode = new Tone.Gain();
 var DEFAULT_GAIN_GAIN = 1;
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", gainNode);
-var gainPort = CABLES.WebAudio.createAudioParamInPort(op, "Gain", gainNode.gain, {'display': 'range', 'min': 0, 'max': 1}, DEFAULT_GAIN_GAIN);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", gainNode);
+var gainPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Gain", gainNode.gain, {'display': 'range', 'min': 0, 'max': 1}, DEFAULT_GAIN_GAIN);
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", gainNode);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", gainNode);
 
 
 

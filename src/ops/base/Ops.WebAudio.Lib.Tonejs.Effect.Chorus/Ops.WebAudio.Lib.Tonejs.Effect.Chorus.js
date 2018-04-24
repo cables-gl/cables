@@ -1,6 +1,6 @@
 op.name="Chorus";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var node = new Tone.Chorus();
@@ -60,17 +60,17 @@ var WET_MIN = 0.0;
 var WET_MAX = 1.0;
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
-var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
-var depthPort = CABLES.WebAudio.createAudioParamInPort(op, "Depth", node.depth, {"display": "range", "min": DEPTH_MIN, "max": DEPTH_MAX}, DEPTH_DEFAULT);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
+var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
+var depthPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Depth", node.depth, {"display": "range", "min": DEPTH_MIN, "max": DEPTH_MAX}, DEPTH_DEFAULT);
 var delayTimePort = op.addInPort( new Port( op, "Delay Time", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': DELAY_TIME_MIN, 'max': DELAY_TIME_MAX } ));
 delayTimePort.set(DELAY_TIME_DEFAULT);
 var oscillatorTypePort = op.addInPort( new Port( op, "Oscillator Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: OSCILLATOR_TYPES } ) );
 oscillatorTypePort.set(OSCILLATOR_TYPE_DEFAULT);
 var spreadPort = op.addInPort( new Port( op, "Spread", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': SPREAD_MIN, 'max': SPREAD_MAX } ));
 spreadPort.set(SPREAD_DEFAULT);
-var feedbackPort = CABLES.WebAudio.createAudioParamInPort(op, "Feedback", node.feedback, {"display": "range", "min": FEEDBACK_MIN, "max": FEEDBACK_MAX}, FEEDBACK_DEFAULT);
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
+var feedbackPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Feedback", node.feedback, {"display": "range", "min": FEEDBACK_MIN, "max": FEEDBACK_MAX}, FEEDBACK_DEFAULT);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 
 // change listeners
 delayTimePort.onChange = function() {
@@ -104,5 +104,5 @@ function setNodeValue(key, val) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 

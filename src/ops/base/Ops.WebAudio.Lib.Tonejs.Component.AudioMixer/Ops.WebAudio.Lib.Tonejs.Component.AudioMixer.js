@@ -1,6 +1,6 @@
 op.name="AudioMixer";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var VOLUME_DEFAULT = -0.1;
@@ -98,7 +98,7 @@ function createInputPorts() {
         volumeNode.connect(gainNode);
         volumeNodes.push(volumeNode);
         // audio in port
-        var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Channel " + (i+1) + " Audio", volumeNode);
+        var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Channel " + (i+1) + " Audio", volumeNode);
         audioInPort.data.index = i;
         audioInPorts.push(audioInPort);
         // volume port
@@ -123,7 +123,7 @@ function createInputPorts() {
 createInputPorts();
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", gainNode);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", gainNode);
 
 // clean up
 op.onDelete = function() {

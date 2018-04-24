@@ -1,6 +1,6 @@
 op.name="Lfo";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // TODO:
 // - Add units?
@@ -29,8 +29,8 @@ var VOLUME_MAX = 0;
 var node = new Tone.LFO(FREQUENCY_DEFAULT, MIN_DEFAULT, MAX_DEFAULT).start();
 
 // input ports
-var frequencyPort = CABLES.WebAudio.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
-var amplitudePort = CABLES.WebAudio.createAudioParamInPort(op, "Amplitude", node.amplitude, AMPLITUDE_DEFAULT);
+var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
+var amplitudePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Amplitude", node.amplitude, AMPLITUDE_DEFAULT);
 var minPort = op.inValue("Min", MIN_DEFAULT);
 var maxPort = op.inValue("Max", MAX_DEFAULT);
 var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
@@ -38,7 +38,7 @@ typePort.set("sine");
 var phasePort = op.addInPort( new Port( op, "Phase", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX }, PHASE_DEFAULT ));
 phasePort.set(PHASE_DEFAULT);
 // TODO: volume should be a dynamic port, but must be changed like this: node.volume.value, not node.set("volume", volume);
-//var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
+//var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
 var volumePort = op.addInPort( new Port( op, "Volume", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX } ));
 volumePort.set(VOLUME_DEFAULT);
 
@@ -71,4 +71,4 @@ function setNodeValue(key, value) {
 }
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

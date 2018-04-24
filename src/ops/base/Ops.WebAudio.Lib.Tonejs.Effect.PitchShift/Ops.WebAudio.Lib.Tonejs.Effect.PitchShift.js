@@ -1,6 +1,6 @@
 op.name="PitchShift";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 var node = new Tone.PitchShift();
@@ -23,12 +23,12 @@ var WINDOW_SIZE_MAX = 0.2;
 op.log('node.get("windowSize")', node.get("windowSize").windowSize);
 
 // input ports
-var audioInPort = CABLES.WebAudio.createAudioInPort(op, "Audio In", node);
-var delayTimePort = CABLES.WebAudio.createAudioParamInPort(op, "Delay Time", node.delayTime, {"display": "range", "min": DELAY_TIME_MIN, "max": DELAY_TIME_MAX}, node.get("delayTime").delayTime);
+var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
+var delayTimePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Delay Time", node.delayTime, {"display": "range", "min": DELAY_TIME_MIN, "max": DELAY_TIME_MAX}, node.get("delayTime").delayTime);
 var pitchPort = op.inValue("Pitch", PITCH_DEFAULT);
 var windowSizePort = op.addInPort( new Port( op, "Window Size", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': WINDOW_SIZE_MIN, 'max': WINDOW_SIZE_MAX }, node.get("windowSize").windowSize ));
-var feedbackPort = CABLES.WebAudio.createAudioParamInPort(op, "Feedback", node.feedback, {"display": "range", "min": FEEDBACK_MIN, "max": FEEDBACK_MAX}, node.get("feedback").feedback);
-var wetPort = CABLES.WebAudio.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, node.get("wet").wet);
+var feedbackPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Feedback", node.feedback, {"display": "range", "min": FEEDBACK_MIN, "max": FEEDBACK_MAX}, node.get("feedback").feedback);
+var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, node.get("wet").wet);
 
 // change listeners
 pitchPort.onChange = function() {
@@ -41,7 +41,7 @@ windowSizePort.onChange = function() {
 };
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 
 // clean up
 op.onDelete = function() {

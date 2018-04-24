@@ -1,6 +1,6 @@
 op.name="NoiseSynth";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var NOISE_TYPES = [
@@ -17,7 +17,7 @@ var node = new Tone.NoiseSynth();
 var noisePort = op.addInPort( new Port( op, "Noise Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: NOISE_TYPES } ) );
 noisePort.set(NOISE_TYPE_DEFAULT);
 var envelopePort = op.inObject("Envelope");
-var volumePort = CABLES.WebAudio.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
+var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 
 // change listeners
 noisePort.onChange = function() {
@@ -38,4 +38,4 @@ envelopePort.onChange = function() {
 };
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

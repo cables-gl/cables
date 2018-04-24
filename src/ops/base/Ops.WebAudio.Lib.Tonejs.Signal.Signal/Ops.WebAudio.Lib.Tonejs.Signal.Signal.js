@@ -1,6 +1,6 @@
 op.name="Signal";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
 var VALUE_DEFAULT = 1;
@@ -17,4 +17,4 @@ valuePort.onChange = function() {
 };
 
 // input ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);

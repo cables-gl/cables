@@ -1,6 +1,6 @@
 op.name = "SynthPlayerStartStop";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values
 var DEFAULT_SYNTH = new Tone.Synth();

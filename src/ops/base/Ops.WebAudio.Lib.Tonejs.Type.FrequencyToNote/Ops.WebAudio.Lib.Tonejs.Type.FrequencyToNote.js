@@ -6,7 +6,7 @@ op.name="FrequencyToNote";
  * lowest possible note instead
  */
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values
 var FREQ_DEFAULT = 0;
@@ -22,8 +22,8 @@ frequencyPort.onChange = function() {
         notePort.set(LOWEST_NOTE);
         return;
     }
-    op.log(CABLES.WebAudio.isValidToneNote(frequency));
-    if(CABLES.WebAudio.isValidToneNote(frequency)) {
+    op.log(CABLES.WEBAUDIO.isValidToneNote(frequency));
+    if(CABLES.WEBAUDIO.isValidToneNote(frequency)) {
         var freqObj = new Tone.Frequency(frequency);    
         notePort.set(freqObj.toNote());
     } else {

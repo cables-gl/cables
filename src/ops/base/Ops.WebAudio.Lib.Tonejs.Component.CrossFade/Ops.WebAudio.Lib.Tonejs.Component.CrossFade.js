@@ -1,6 +1,6 @@
 op.name="CrossFade";
 
-CABLES.WebAudio.createAudioContext(op);
+CABLES.WEBAUDIO.createAudioContext(op);
 
 // TODO: Should this have two internal gain nodes, so users 
 // so not add two gain before?
@@ -14,9 +14,9 @@ var FADE_MAX = 1;
 var node = new Tone.CrossFade();
 
 // input ports
-var audioInPort1 = CABLES.WebAudio.createAudioInPort(op, "Audio In 1", node.input[0]);
-var audioInPort2 = CABLES.WebAudio.createAudioInPort(op, "Audio In 2", node.input[1]);
-var fadePort = CABLES.WebAudio.createAudioParamInPort(op, "Fade", node.fade, {"display": "range", "min": FADE_MIN, "max": FADE_MAX}, FADE_DEFAULT);
+var audioInPort1 = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In 1", node.input[0]);
+var audioInPort2 = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In 2", node.input[1]);
+var fadePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Fade", node.fade, {"display": "range", "min": FADE_MIN, "max": FADE_MAX}, FADE_DEFAULT);
 
 // output ports
-var audioOutPort = CABLES.WebAudio.createAudioOutPort(op, "Audio Out", node);
+var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
