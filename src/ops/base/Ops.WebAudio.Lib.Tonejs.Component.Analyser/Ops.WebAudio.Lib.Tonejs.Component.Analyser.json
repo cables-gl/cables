@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Extracts FFT or Waveform data from the incoming signal",
     "author": "56cdab144f85abfb36c6c089",

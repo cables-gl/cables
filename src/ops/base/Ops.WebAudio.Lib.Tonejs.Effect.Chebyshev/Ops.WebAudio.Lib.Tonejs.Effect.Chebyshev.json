@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Effect which is good for making different types of distortion sounds",
     "layout": {

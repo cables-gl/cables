@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Subtracts a number from a audio signal",
     "layout": {

@@ -93,6 +93,6 @@
         ]
     },
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ]
 }

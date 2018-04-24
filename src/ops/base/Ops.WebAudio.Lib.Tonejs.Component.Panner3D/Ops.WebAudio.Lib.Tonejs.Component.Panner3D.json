@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Positions sounds in 3D space",
     "layout": {

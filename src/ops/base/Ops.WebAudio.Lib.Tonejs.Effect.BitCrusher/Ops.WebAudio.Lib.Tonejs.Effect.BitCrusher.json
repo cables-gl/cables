@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Bitcrusher downsamples the incoming signal to a different bitdepth",
     "layout": {

@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Audio noise generator, supports white, pink and brown noise",
     "layout": {

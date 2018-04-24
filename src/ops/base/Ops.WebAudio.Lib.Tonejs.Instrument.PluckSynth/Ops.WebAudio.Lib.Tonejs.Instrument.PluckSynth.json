@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Karplus-String string synthesis. Often out of tune.",
     "layout": {

@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Only passes a signal through when the incoming signal exceeds a specified threshold",
     "layout": {

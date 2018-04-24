@@ -18,7 +18,7 @@
     "authorName": "tim",
     "id": "5edcd890-b257-4b05-8f68-4b0910dda903",
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Converts a note to a frequency (e.g. C4 to 440)"
 }

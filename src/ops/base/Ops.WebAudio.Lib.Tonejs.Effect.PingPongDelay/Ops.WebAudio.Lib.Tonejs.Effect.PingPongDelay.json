@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Feedback delay effect (stereo)",
     "author": "56cdab144f85abfb36c6c089",

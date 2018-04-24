@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Monophonic synth composed of two MonoSynths run in parallel",
     "layout": {

@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Convolution is useful for reverb and filter emulation",
     "layout": {

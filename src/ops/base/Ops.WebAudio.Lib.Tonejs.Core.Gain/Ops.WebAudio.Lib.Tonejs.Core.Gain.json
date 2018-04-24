@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Multiplier, makes a signal bigger or smaller",
     "layout": {

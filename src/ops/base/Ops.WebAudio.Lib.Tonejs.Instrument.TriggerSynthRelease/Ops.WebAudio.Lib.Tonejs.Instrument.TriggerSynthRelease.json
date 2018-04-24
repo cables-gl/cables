@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Triggers the Release-part of a Synth ADSR",
     "author": "56cdab144f85abfb36c6c089",

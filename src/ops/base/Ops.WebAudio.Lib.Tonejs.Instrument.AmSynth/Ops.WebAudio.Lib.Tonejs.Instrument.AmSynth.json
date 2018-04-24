@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Uses the output of one Synth to modulate the amplitude of another Synth",
     "author": "56cdab144f85abfb36c6c089",

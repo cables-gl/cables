@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Composed of a noise generators, a Filter and two Envelopes",
     "layout": {

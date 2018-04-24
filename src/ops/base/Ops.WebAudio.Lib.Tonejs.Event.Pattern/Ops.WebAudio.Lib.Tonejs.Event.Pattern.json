@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Arpeggiates between the given notes in a number of patterns",
     "author": "56cdab144f85abfb36c6c089",

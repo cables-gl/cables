@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "AutoWah connects a Follower to a bandpass filter (Filter)",
     "layout": {

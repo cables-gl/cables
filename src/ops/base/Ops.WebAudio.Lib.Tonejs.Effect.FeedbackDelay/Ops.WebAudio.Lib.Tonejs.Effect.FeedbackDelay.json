@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Delay in which part of output signal is fed back into the delay",
     "author": "56cdab144f85abfb36c6c089",

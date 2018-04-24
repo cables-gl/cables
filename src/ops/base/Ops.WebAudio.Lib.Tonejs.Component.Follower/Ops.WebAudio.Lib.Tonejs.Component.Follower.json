@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Follows the amplitude of an incoming signal, can be used as a signal",
     "layout": {

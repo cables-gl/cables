@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Gets the RMS of an input signal with some averaging applied. It can also get the raw value of the input signal.",
     "layout": {

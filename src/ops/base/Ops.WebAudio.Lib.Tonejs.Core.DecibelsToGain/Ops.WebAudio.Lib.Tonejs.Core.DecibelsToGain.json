@@ -4,7 +4,7 @@
     "id": "8f21729b-a37d-40d0-9d6e-b3c03d0d3f46",
     "created": 1520417180232,
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "layout": {
         "portsIn": [

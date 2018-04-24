@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Transport for timing musical events on the (virtual) audio timeline",
     "layout": {

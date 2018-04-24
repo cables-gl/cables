@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "ADSR envelope generator, can be connected to an Audio Port",
     "layout": {

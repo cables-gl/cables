@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Composed of one oscillator, one filter, and two envelopes",
     "layout": {

@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Schedule a repeated event along the timeline. The event will fire every interval.",
     "author": "56cdab144f85abfb36c6c089",

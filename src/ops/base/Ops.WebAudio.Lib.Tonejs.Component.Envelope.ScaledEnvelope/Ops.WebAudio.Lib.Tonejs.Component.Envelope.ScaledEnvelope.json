@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "ScaledEnvelop is an envelope which can be scaled to any range",
     "layout": {

@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Granular Synthesis, plays back parts of a sample repeatedly",
     "layout": {

@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Modulates the amplitude of an incoming signal using a LFO",
     "layout": {

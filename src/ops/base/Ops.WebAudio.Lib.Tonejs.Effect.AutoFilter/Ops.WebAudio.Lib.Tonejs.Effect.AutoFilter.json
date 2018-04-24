@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Filter with a Lfo connected to the filter cutoff frequency",
     "layout": {

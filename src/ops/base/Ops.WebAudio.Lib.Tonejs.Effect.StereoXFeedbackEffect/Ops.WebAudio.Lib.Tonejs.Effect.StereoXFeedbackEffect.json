@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Just like a stereo feedback effect, but the feedback is routed from left to right and right to left",
     "author": "56cdab144f85abfb36c6c089",

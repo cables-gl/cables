@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Low frequency oscillator, can be connected to an audio parameter",
     "layout": {

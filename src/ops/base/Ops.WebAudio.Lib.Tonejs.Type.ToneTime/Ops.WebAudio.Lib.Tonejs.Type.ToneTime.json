@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Makes it convenient to create Tone.js time-strings (e.g. \"C4\")",
     "layout": {

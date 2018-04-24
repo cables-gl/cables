@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Triggers for every item in the note array",
     "author": "56cdab144f85abfb36c6c089",

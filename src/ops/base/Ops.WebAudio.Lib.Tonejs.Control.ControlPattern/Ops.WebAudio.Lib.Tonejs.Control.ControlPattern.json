@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Generates patterns from an array of values, with arpeggiation and randomization modes",
     "author": "56cdab144f85abfb36c6c089",

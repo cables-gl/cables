@@ -1,6 +1,6 @@
 {
     "libs": [
-        "tone.min.js"
+        "tone.js"
     ],
     "summary": "Old. do not use",
     "author": "56cdab144f85abfb36c6c089",
