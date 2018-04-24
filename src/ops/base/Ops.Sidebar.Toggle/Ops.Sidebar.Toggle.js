@@ -36,11 +36,14 @@ text.onValueChanged=function()
 
 function updateText()
 {
-    if(value.get()) elementCheckBox.style.color="#bbb";
-        else elementCheckBox.style.color="#444";
-
-    textContent.nodeValue=text.get();
-    textContentValue.nodeValue='●';
+    if(elementCheckBox)
+    {
+        if(value.get()) elementCheckBox.style.color="#bbb";
+            else elementCheckBox.style.color="#444";
+    
+        textContent.nodeValue=text.get();
+        textContentValue.nodeValue='●';
+    }
 }
 
 function init(params)

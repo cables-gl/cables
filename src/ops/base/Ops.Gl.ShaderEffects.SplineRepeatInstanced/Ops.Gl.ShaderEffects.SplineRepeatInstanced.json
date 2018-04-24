@@ -1,8 +1,8 @@
 {
-    "updated": 1522101180258,
+    "updated": 1522738957612,
     "authorName": "pandur",
-    "id": "57bafcb7-5a0b-4f7c-a6f1-eadbf266bd43",
-    "created": 1521494324980,
+    "id": "5f55625d-e6e7-4924-8821-de9f81b8596e",
+    "created": 1522100864651,
     "layout": {
         "portsIn": [
             {
@@ -86,6 +86,10 @@
                 "name": "Texture Rotation"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.SplineRepeatInstanced"
+        "name": "Ops.Gl.ShaderEffects.SplineRepeatInstanced2"
+    },
+    "summary": "Repeat a mesh along a spline using instancing",
+    "docs": {
+        "ports": []
     }
 }

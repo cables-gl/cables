@@ -52,5 +52,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Noise.PixelNoise"
+    },
+    "summary": "pixelated noise ",
+    "docs": {
+        "ports": []
     }
 }

@@ -106,7 +106,7 @@ function rebuild()
     {
         // op.log(r/numRows);
         var lvx=null,lvy=null,lvz=null;
-        var ltx=null,lxy=null;
+        var ltx=null,lty=null;
         var log=0;
         var doLoga=doLog.get();
         

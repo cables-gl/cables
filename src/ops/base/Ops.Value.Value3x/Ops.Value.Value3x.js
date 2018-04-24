@@ -1,4 +1,3 @@
-op.name='Value3d';
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var x=op.addInPort(new Port(op,"value x",OP_PORT_TYPE_VALUE));
 var y=op.addInPort(new Port(op,"value y",OP_PORT_TYPE_VALUE));
@@ -13,12 +12,12 @@ function frame(time)
     exec();
 }
 
-exec=function()
+function exec()
 {
     if(resultX.get()!=x.get()) resultX.set(x.get());
     if(resultY.get()!=y.get()) resultY.set(y.get());
     if(resultZ.get()!=z.get()) resultZ.set(z.get());
-};
+}
 
 exe.onTriggered=exec;
 

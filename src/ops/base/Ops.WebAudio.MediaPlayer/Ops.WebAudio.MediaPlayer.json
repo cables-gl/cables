@@ -4,11 +4,13 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Volume"
+                "name": "Volume",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "File"
+                "name": "File",
+                "subType": "string"
             },
             {
                 "type": "1",
@@ -24,7 +26,8 @@
             },
             {
                 "type": "0",
-                "name": "Seek Position (Seconds)"
+                "name": "Seek Position (Seconds)",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -38,12 +41,13 @@
             },
             {
                 "type": "0",
-                "name": "Duration"
+                "name": "Duration",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.MediaPlayer"
     },
-    "updated": 1510742549749,
+    "updated": 1524479574854,
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "6bf8a173-a9f9-48d8-b23a-76380dfbe4c5",
@@ -87,5 +91,8 @@
                 "text": "The duration of the current audio file (in seconds)"
             }
         ]
-    }
+    },
+    "libs": [
+        "tone.min.js"
+    ]
 }
