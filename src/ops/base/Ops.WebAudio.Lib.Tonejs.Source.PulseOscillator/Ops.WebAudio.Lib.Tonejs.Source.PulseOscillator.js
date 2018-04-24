@@ -1,6 +1,15 @@
 op.name="PulseOscillator";
 
+if(Tone && Tone.context && Tone.context._context && window.audioContext) {
+    op.log('Checking audio context before: Tone.context._context === window.audioContext: ' + Tone.context._context === window.audioContext);
+}
+
 CABLES.WEBAUDIO.createAudioContext(op);
+
+
+if(Tone && Tone.context && Tone.context._context && window.audioContext) {
+    op.log('Checking audio context after: Tone.context._context === window.audioContext: ' + Tone.context._context === window.audioContext);
+}
 
 // constants
 var WIDTH_DEFAULT = 0.2;
@@ -62,11 +71,11 @@ op.onLoaded = setSyncAndAutostart;
 
 // functions
 function syncFrequency() {
-    node.syncFrequency();
+    node.sync();
 }
 
 function unsyncFrequency() {
-    node.unsyncFrequency();
+    node.unsync();
 }
 
 function start() {

@@ -19,11 +19,13 @@
             },
             {
                 "type": "0",
-                "name": "Phase"
+                "name": "Phase",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Sync Frequency"
+                "name": "Sync Frequency",
+                "subType": "boolean"
             },
             {
                 "type": "1",
@@ -31,7 +33,8 @@
             },
             {
                 "type": "0",
-                "name": "Start Time"
+                "name": "Start Time",
+                "subType": "string"
             },
             {
                 "type": "1",
@@ -39,11 +42,13 @@
             },
             {
                 "type": "0",
-                "name": "Stop Time"
+                "name": "Stop Time",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Auto Start"
+                "name": "Auto Start",
+                "subType": "boolean"
             },
             {
                 "type": "4",
@@ -51,7 +56,8 @@
             },
             {
                 "type": "0",
-                "name": "Mute"
+                "name": "Mute",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -61,5 +67,9 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Source.PulseOscillator"
-    }
+    },
+    "updated": 1524590499215,
+    "authorName": "tim",
+    "id": "065e2202-b79f-41e6-bf0b-1f2d769de872",
+    "created": 1524588539972
 }
