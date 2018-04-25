@@ -6,10 +6,6 @@ In order to get informed on port-value-changes, function-triggers (also see [Por
 
 ## Port Callbacks
 
-### onInit
-
-There is no explicit callback for initialization, all code in your op is automatically executed.
-
 ### onChange
 
 Can be implemented for `OP_PORT_TYPE_VALUE`, `OP_PORT_TYPE_ARRAY`, `OP_PORT_TYPE_OBJECT`.  
@@ -55,6 +51,23 @@ myPort.onLinkChanged = function() {
 
 ## General Op Callbacks
 
+### init
+
+In case you have some initialisation code which depends on the ports being set you can place it inside an `init` function. Here you can be sure that the input port is set correctly (when the user entered a value in the op parameters or when the port is connected to another op).
+
+When you inspect existing ops by pressing the `View Code` button in the op parameters, you will notice that most ops don’t use this function. This is because most ops don’t depend on their input ports and can be initialised without the input ports being set.
+
+
+
+```javascript
+var inPort = op.inValue('In Value');
+
+op.init = function() {
+	var value = inPort.get();
+    // your code which depends on inPort being set goes here
+}
+```
+
 ### onDelete
 
 If your op needs to clean up after itself when it is deleted from the patch you can implement `onDelete`:
@@ -67,7 +80,7 @@ op.onDelete( function() {
 
 ### onLoaded
 
-Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. You mostly don’t need this, as op-specific init-code can just be put in your op-code without a callback. `op.onLoaded` is not called when the patch has just been added to the patch, only when the patch is loaded.
+Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. You mostly don’t need this, as op-specific init-code can just be put in your op-code without a callback. `op.onLoaded` is **not** called when the patch has just been added to the patch, only when the patch is loaded, so it is better to use `init` (see on top).
 
 ```javascript
 op.onLoaded = function() {
