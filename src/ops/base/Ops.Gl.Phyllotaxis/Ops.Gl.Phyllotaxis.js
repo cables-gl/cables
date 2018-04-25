@@ -1,16 +1,11 @@
-op.name="Phyllotaxis";
+const exec=op.inFunction("Render");
+const inNum=op.inValue("Num",400);
+const inC=op.inValue("Scale",0.1);
 
-
-var exec=op.inFunction("Render");
-var inNum=op.inValue("Num",400);
-var inC=op.inValue("Scale",0.1);
-
-var next=op.outFunction("Next");
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outI=op.outValue("Index");
-
-
+const next=op.outFunction("Next");
+const outX=op.outValue("X");
+const outY=op.outValue("Y");
+const outI=op.outValue("Index");
 
 exec.onTriggered=function()
 {
@@ -23,7 +18,7 @@ exec.onTriggered=function()
         var r = c * Math.sqrt(i);
         var x = r * Math.cos(a);
         var y = r * Math.sin(a);
-        var hu = i
+        var hu = i;
         // var hu=Math.sin( i * 0.5);
         hu = i/3.0 % 360;
         // fill(hu, 255, 255);
@@ -34,5 +29,4 @@ exec.onTriggered=function()
         outI.set(i);
         next.trigger();
     }
-
-}
+};

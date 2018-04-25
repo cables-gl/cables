@@ -13,7 +13,7 @@ function calcArray()
     const points=[];
 
     let count=0;
-    for (let i=0; i <= segs*percent.get(); i++)
+    for (let i=0; i < segs*percent.get(); i++)
     {
         var degInRad = (360/segs)*i*CGL.DEG2RAD;
         var posx=Math.cos(degInRad)*radius.get();

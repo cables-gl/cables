@@ -27,6 +27,7 @@ void main()
 {
     norm=attrVertNormal;
     vert=vPosition;
+    mat4 mMatrix=modelMatrix;
 
     // vTangent=attrTangent;
     // vBiTangent=attrBiTangent;
@@ -36,7 +37,7 @@ void main()
     #endif
 
     vec4 pos = vec4( vPosition, 1. );
-    mvMatrix=viewMatrix * modelMatrix;
+    mvMatrix=viewMatrix * mMatrix;
     {{MODULE_VERTEX_POSITION}}
 
     gl_Position = projMatrix * mvMatrix * pos;

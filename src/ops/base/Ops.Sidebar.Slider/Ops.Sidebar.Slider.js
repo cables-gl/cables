@@ -1,9 +1,11 @@
 var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
 var child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
+var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
 const defaultValue=op.inValue("Default",0.5);
+const min=op.inValue("Min",0);
+const max=op.inValue("Max",1);
 
 var value=op.outValue("Result");
-var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
 
 value.set(0.5);
 text.set('Slider');
@@ -12,6 +14,9 @@ var textContent = document.createTextNode(text.get());
 var textContentValue= document.createTextNode(text.get()); 
 var element=null;
 var initialized=false;
+
+min.onChange=updateMinMax;
+max.onChange=updateMinMax;
 
 op.onDelete=remove;
 child.onLinkChanged=updateSidebar;
@@ -29,6 +34,15 @@ text.onValueChanged=function()
 {
     updateText();
 };
+
+function updateMinMax()
+{
+    if(elementSlider)
+    {
+        elementSlider.setAttribute("min",min.get()*100);
+        elementSlider.setAttribute("max",max.get()*100);
+    }
+}
 
 function updateText()
 {
@@ -70,6 +84,7 @@ function init(params)
     element.appendChild(elementSlider);
 
     updateText();
+    updateMinMax();
     
     params.parent.appendChild(element);
     

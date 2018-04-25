@@ -1,4 +1,3 @@
-op.name='Websocket';
 // ws://192.168.1.235
 
 var inUrl=op.inValueString("url");
@@ -32,6 +31,12 @@ function checkConnection()
     timeout=setTimeout(checkConnection,2000);
 }
 
+op.onDelete=function()
+{
+    if(outConnected.get()===true)connection.close();
+    connecting=false;
+    clearTimeout(timeout);
+};
 
 function connect()
 {

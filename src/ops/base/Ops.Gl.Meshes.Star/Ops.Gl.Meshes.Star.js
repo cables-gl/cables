@@ -94,8 +94,8 @@ function calc()
                     outY=(posy)*outerRadius.get();
     
                     degInRad = (360/segs)*(i-1)*CGL.DEG2RAD;
-                    ooutX=Math.cos(degInRad)*radius.get();
-                    ooutY=Math.sin(degInRad)*radius.get();
+                    var ooutX=Math.cos(degInRad)*radius.get();
+                    var ooutY=Math.sin(degInRad)*radius.get();
     
                     ooutX*=outerRadius.get();
                     ooutY*=outerRadius.get();

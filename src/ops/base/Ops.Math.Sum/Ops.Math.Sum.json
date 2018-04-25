@@ -4,22 +4,25 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "number1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number2"
+                "name": "number2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Sum"
     },
-    "updated": 1506754708489,
+    "updated": 1524498905013,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c8fb181e-0b03-4b41-9e55-06b6267bc634",
