@@ -1,0 +1,28 @@
+{
+    "updated": 1524498730246,
+    "authorName": "pandur",
+    "id": "10869c07-ecd5-47a5-b5bb-ba35276c66fd",
+    "created": 1524498730250,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "number2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Deprecated.EqualsRenamed"
+    }
+}
