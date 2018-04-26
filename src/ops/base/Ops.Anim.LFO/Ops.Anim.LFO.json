@@ -1,0 +1,43 @@
+{
+    "updated": 1524727852067,
+    "authorName": "pandur",
+    "id": "559bb980-78fb-47a7-a199-16f10808b150",
+    "created": 1524724642926,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Type",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Phase",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Amplitude",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frequency",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Anim.LFO"
+    }
+}
