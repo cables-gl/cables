@@ -1,0 +1,29 @@
+{
+    "updated": 1524913513342,
+    "authorName": "pandur",
+    "id": "966cefee-8349-4ef3-b64e-69afca0395f5",
+    "created": 1524902340627,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Histogram Data"
+            },
+            {
+                "type": "2",
+                "name": "Histogram Texture"
+            }
+        ],
+        "name": "Ops.Gl.Textures.Histogram"
+    }
+}
