@@ -1,13 +1,12 @@
-var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
-var child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
+const link=op.inObject("link");
+const child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
 
-var value=op.addOutPort(new Port(op,"Value",OP_PORT_TYPE_VALUE,{type:'bool'}));
-var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+const value=op.addOutPort(new Port(op,"Value",OP_PORT_TYPE_VALUE,{type:'bool'}));
+const text=op.inValueString("Text","");
 
 var defaultValue=op.inValueBool("Default",true);
 
 value.set(false);
-text.set('Sidebar toggle');
 
 var textContent = document.createTextNode(text.get()); 
 var textContentValue= document.createTextNode(text.get()); 
@@ -20,18 +19,16 @@ link.onLinkChanged=updateSidebar;
 link.onValueChanged=updateParams;
 var elementCheckBox=null;
 
-
 defaultValue.onChange=function()
 {
     value.set(defaultValue.get());
-    // value.set(value.get());
     updateText();
-
 };
 
-text.onValueChanged=function()
+text.onChange=function()
 {
     textContent.nodeValue=text.get();
+    updateText();
 };
 
 function updateText()
@@ -44,6 +41,8 @@ function updateText()
         textContent.nodeValue=text.get();
         textContentValue.nodeValue='●';
     }
+    if(CABLES.UI)op.setTitle('Toggle '+text.get());
+
 }
 
 function init(params)

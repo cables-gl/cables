@@ -98,13 +98,11 @@ exe.onTriggered=function()
         prevViewPort[1]=vp[1];
         prevViewPort[2]=vp[2];
         prevViewPort[3]=vp[3];
-        
-        
-        
-
 
         // setup data
         fb.renderStart(cgl);
+
+
 
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTex.get().tex);
@@ -153,6 +151,7 @@ exe.onTriggered=function()
         cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
     
         cgl.currentTextureEffect=null;
+        // cgl.popDepthTest();
 
     }
 

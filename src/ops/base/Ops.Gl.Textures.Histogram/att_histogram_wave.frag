@@ -10,6 +10,12 @@ void main()
     float strengthB=texture2D(tex,vec2(texCoord.x,0.7)).b;
     float strengthL=texture2D(tex,vec2(texCoord.x,0.8)).r;
     
+    strengthR*=strengthR;
+    strengthG*=strengthG;
+    strengthB*=strengthB;
+    strengthL*=strengthL;
+    
+    
     if(strengthR*0.5>texCoord.y) col.r=1.0;
     if(strengthG*0.5>texCoord.y) col.g=1.0;
     if(strengthB*0.5>texCoord.y) col.b=1.0;
