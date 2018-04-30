@@ -162,7 +162,9 @@
  * SIDEBAR ITEM TOGGLE
  */
 
-.sidebar__toggle {}
+.sidebar__toggle {
+    cursor: pointer;    
+}
 
 .sidebar__toggle-input {
   --sidebar-toggle-input-color: #CCCCCC;
@@ -182,7 +184,7 @@
   transition: background-color var(--sidebar-hover-transition-time);
   transition: border-color var(--sidebar-hover-transition-time);
 }
-.sidebar__toggle-input:hover {
+.sidebar__toggle:hover .sidebar__toggle-input {
   border-color: var(--sidebar-toggle-input-color-hover);
 }
 .sidebar__toggle-input::after { clear: both; }
