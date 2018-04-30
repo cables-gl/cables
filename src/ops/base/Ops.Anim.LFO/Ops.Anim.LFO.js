@@ -4,10 +4,14 @@ const phase=op.inValue("Phase",0);
 const amplitude=op.inValue("Amplitude",1);
 const result=op.outValue("Result");
 
+
 let v=0;
 type.onChange=updateType;
 
 updateType();
+
+const PI2=Math.PI/2;
+
 
 function updateType()
 {
@@ -23,9 +27,20 @@ function updateTime()
     return time.get();
 }
 
+function block()
+{
+    var t=updateTime()+0.5;
+    v=t%2.0;
+    if(v<=1.0)v=-1;
+    else v=1;
+    v*=amplitude.get();
+    result.set(v);
+}
+
 function rampUp()
 {
-    var t=updateTime();
+    var t=(updateTime()+1);
+    t*=0.5;
     v=t%1.0;
     v-=0.5;
     v*=2.0;
@@ -43,7 +58,6 @@ function rampDown()
     result.set(v);
 }
 
-
 function triangle()
 {
     var t=updateTime();
@@ -56,19 +70,9 @@ function triangle()
 }
 
 
-function block()
-{
-    var t=updateTime();
-    v=Math.round(t%1.0);
-    v-=0.5;
-    v*=2.0;
-    v*=amplitude.get();
-    result.set(v);
-}
-
 function sine()
 {
-    var t=updateTime()*Math.PI-(Math.PI/2);
+    var t=updateTime()*Math.PI-(PI2);
     v=Math.sin( (t) );
     v*=amplitude.get();
     result.set(v);
