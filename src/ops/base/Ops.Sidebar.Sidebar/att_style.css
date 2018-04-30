@@ -28,13 +28,21 @@
   --sidebar-hover-transition-time: .2s;
 }
 
+.sidebar::selection {
+    background-color: #24baa7;
+    color: #EEEEEE;
+}
+
 .sidebar--closed {
   /* max-height: 20px; */
 }
 
 .sidebar__close-button {
   background-color: #444444;
-  user-select: none;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
   transition: background-color var(--sidebar-hover-transition-time);
   color: #CCCCCC;
   height: 28px;
@@ -87,7 +95,10 @@
 
 .sidebar__group-header {
   box-sizing: border-box;
-  user-select: none;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
   height: var(--sidebar-group-header-height);
   padding-top: 7px;
   text-transform: uppercase;
@@ -116,7 +127,10 @@
 
 .sidebar__item-label {
   display: inline-block;
-  user-select: none;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
   width: 120px;
   max-height: 1em;
   text-overflow: ellipsis;
@@ -130,6 +144,11 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.sidebar__item-value-label::selection {
+    background-color: #24baa7;
+    color: #EEEEEE;
 }
 
 .sidebar__item + .sidebar__item,
@@ -186,6 +205,10 @@
 .sidebar__button {}
 
 .sidebar__button-input {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
   height: 24px;
   background-color: #444444;
   color: #CCCCCC;
@@ -263,10 +286,18 @@
 }
 
 .sidebar__slider-input::-moz-range-thumb {
-    width: var(--sidebar-slider-input-height);
+    /* width: var(--sidebar-slider-input-height); */
+    width: 0 !important;
     height: var(--sidebar-slider-input-height);
     background: #CCCCCC;
     cursor: pointer;
+    border-radius: 0;
+    border: 0;
+    outline: 0;
+}
+
+.sidebar__slider-input::-moz-range-track {
+  background-color: transparent;
 }
 
 .sidebar__slider-input::-moz-range-thumb:hover {
