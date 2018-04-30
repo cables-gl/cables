@@ -13,5 +13,9 @@
             }
         ],
         "name": "Ops.TriggerIfDecreased"
+    },
+    "summary": "trigger if a value decreases / gets smaller",
+    "docs": {
+        "ports": []
     }
 }

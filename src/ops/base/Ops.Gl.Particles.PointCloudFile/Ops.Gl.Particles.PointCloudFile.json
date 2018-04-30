@@ -25,5 +25,9 @@
             }
         ],
         "name": "Ops.Gl.Particles.PointCloudFile"
+    },
+    "summary": "load and display a pointcloud file",
+    "docs": {
+        "ports": []
     }
 }

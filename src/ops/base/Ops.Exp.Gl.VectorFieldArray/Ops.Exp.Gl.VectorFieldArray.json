@@ -54,5 +54,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.VectorFieldArray"
+    },
+    "summary": "use pixel luminance texture to rotate/scale a mesh in a grid field",
+    "docs": {
+        "ports": []
     }
 }

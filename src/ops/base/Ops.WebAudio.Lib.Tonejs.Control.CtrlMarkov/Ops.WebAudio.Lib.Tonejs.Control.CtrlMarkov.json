@@ -1,0 +1,55 @@
+{
+    "updated": 1524938095849,
+    "authorName": "tim",
+    "id": "bb4debc5-642c-4d9f-b4ea-570212e102a5",
+    "created": 1524935546806,
+    "libs": [
+        "tone.min.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Values"
+            },
+            {
+                "type": "0",
+                "name": "Start Value",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Next Value",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Control.CtrlMarkov"
+    },
+    "summary": "Represents a Markov Chain",
+    "docs": {
+        "ports": [
+            {
+                "name": "Values",
+                "text": "An object with state values, e.g. `{ \"beginning\" : [ \"end\", \"middle\"], \t\"middle\" : \"end\" }`"
+            },
+            {
+                "name": "Start Value",
+                "text": "Which value to start with (optional), e.g. `\"beginning\"`"
+            },
+            {
+                "name": "Next",
+                "text": "Sets the output port `Next Value`"
+            },
+            {
+                "name": "Next Value",
+                "text": "The next value in the chain after calling `Next`"
+            }
+        ]
+    }
+}

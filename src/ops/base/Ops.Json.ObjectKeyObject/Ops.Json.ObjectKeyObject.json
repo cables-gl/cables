@@ -25,5 +25,9 @@
             }
         ],
         "name": "Ops.Json.ObjectKeyObject"
+    },
+    "summary": "get an object from an object by key",
+    "docs": {
+        "ports": []
     }
 }

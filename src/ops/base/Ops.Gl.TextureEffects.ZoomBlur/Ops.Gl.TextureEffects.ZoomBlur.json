@@ -36,5 +36,9 @@
     "updated": 1520869409858,
     "authorName": "pandur",
     "id": "b60f01fc-6ea6-4720-ae33-e3d9208e99f9",
-    "created": 1520438081267
+    "created": 1520438081267,
+    "summary": "directional blur effect",
+    "docs": {
+        "ports": []
+    }
 }

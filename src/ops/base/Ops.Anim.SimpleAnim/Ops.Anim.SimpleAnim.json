@@ -59,16 +59,7 @@
         "name": "Ops.Anim.SimpleAnim"
     },
     "docs": {
-        "ports": [
-            {
-                "name": "exe",
-                "text": "execute jaja dies ist die doc"
-            },
-            {
-                "name": "start",
-                "text": "sssss"
-            }
-        ]
+        "ports": []
     },
     "summary": "simple animation between two values",
     "updated": 1520266832784,

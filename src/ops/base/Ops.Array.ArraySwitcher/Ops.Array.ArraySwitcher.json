@@ -78,5 +78,9 @@
             }
         ],
         "name": "Ops.Array.ArraySwitcher"
+    },
+    "summary": "switch between multiple arrays",
+    "docs": {
+        "ports": []
     }
 }
