@@ -9,6 +9,7 @@ geom.ignoreValueSerialize=true;
 
 var mesh=null;
 var shader=null;
+var module=null;
 
 var srcHeadVert=''
     .endl()+'UNI float do_instancing;'

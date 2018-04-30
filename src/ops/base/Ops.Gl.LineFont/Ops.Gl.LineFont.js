@@ -405,6 +405,7 @@ align.onValueChanged=function()
 };
 
 var oldPrim=0;
+var shader=null;
 function renderChar(charIndex,simulate)
 {
     shader=cgl.getShader();

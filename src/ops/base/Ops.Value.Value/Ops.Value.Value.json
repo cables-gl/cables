@@ -4,16 +4,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Value"
+        "name": "Ops.Value.Value"
     },
     "docs": {
         "ports": [
@@ -26,5 +28,9 @@
                 "text": "Same as the input `Value`"
             }
         ]
-    }
+    },
+    "updated": 1524498809749,
+    "authorName": "pandur",
+    "id": "8fb2bb5d-665a-4d0a-8079-12710ae453be",
+    "created": 1524498802165
 }

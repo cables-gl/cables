@@ -1,12 +1,10 @@
-
-op.name='sum';
 var result=op.addOutPort(new Port(op,"result"));
-var number1=op.addInPort(new Port(op,"number1"));
-var number2=op.addInPort(new Port(op,"number2"));
+var number1=op.inValue("number1");
+var number2=op.inValue("number2");
 
 function exec()
 {
-    var v=(number1.get())+number2.get();
+    var v=parseFloat(number1.get())+parseFloat(number2.get());
     if(!isNaN(v)) result.set( v );
 }
 

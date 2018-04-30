@@ -15,6 +15,7 @@ flip.set(true);
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
 videoElement.setAttribute("id", "webcam");
+videoElement.style.display="none";
 
     var canvas = op.patch.cgl.canvas.parentElement;
     canvas.appendChild(videoElement);

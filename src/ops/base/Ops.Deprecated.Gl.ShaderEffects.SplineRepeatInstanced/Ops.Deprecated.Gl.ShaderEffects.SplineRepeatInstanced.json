@@ -1,0 +1,91 @@
+{
+    "updated": 1522101180258,
+    "authorName": "pandur",
+    "id": "57bafcb7-5a0b-4f7c-a6f1-eadbf266bd43",
+    "created": 1521494324980,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "positions"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Offset",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate by Position",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Method",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Spacing",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pre Rot X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pre Rot Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pre Rot Z",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Texture Scaling"
+            },
+            {
+                "type": "2",
+                "name": "Texture Rotation"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.SplineRepeatInstanced"
+    }
+}

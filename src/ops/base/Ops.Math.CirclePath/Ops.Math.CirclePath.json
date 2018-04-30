@@ -4,15 +4,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "percent"
+                "name": "percent",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "segments"
+                "name": "segments",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "radius"
+                "name": "radius",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -23,7 +26,7 @@
         ],
         "name": "Ops.Math.CirclePath"
     },
-    "updated": 1524236863061,
+    "updated": 1524563150795,
     "authorName": "pandur",
     "id": "ef54ba67-8b1d-41b0-8140-bb97061eaa97",
     "created": 1518184894733
