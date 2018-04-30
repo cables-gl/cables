@@ -1,5 +1,5 @@
 {
-    "updated": 1519308158715,
+    "updated": 1525098341920,
     "authorName": "pandur",
     "id": "118df748-16d1-46f4-b8fc-38d7cc5a0aab",
     "created": 1519021507418,
@@ -11,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Text"
+                "name": "Text",
+                "subType": "string"
             }
         ],
         "portsOut": [

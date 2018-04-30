@@ -1,113 +1,106 @@
-const link=op.inObject("link");
-const child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
+const DEFAULT_VALUE_DEFAULT = true;
 
-const value=op.addOutPort(new Port(op,"Value",OP_PORT_TYPE_VALUE,{type:'bool'}));
-const text=op.inValueString("Text","");
+// inputs
+var parentPort = op.inObject('link');
+var labelPort = op.inValueString('Text', 'Toggle');
+var defaultValuePort = op.inValueBool('Default', DEFAULT_VALUE_DEFAULT);
 
-var defaultValue=op.inValueBool("Default",true);
+// outputs
+var siblingsPort = op.outObject('childs');
+var valuePort = op.outValue('Value', defaultValuePort.get());
 
-value.set(false);
+// vars
+var el = document.createElement('div');
+el.classList.add('sidebar__item');
+el.classList.add('sidebar__toggle');
+if(DEFAULT_VALUE_DEFAULT) {
+    el.classList.add('sidebar__toggle--active');
+}
+var label = document.createElement('div');
+label.classList.add('sidebar__item-label');
+var labelText = document.createTextNode(labelPort.get());
+label.appendChild(labelText);
+el.appendChild(label);
+var value = document.createElement('div');
+value.textContent = DEFAULT_VALUE_DEFAULT;
+value.classList.add('sidebar__item-value-label');
+el.appendChild(value);
+var input = document.createElement('div');
+input.classList.add('sidebar__toggle-input');
+el.appendChild(input);
+input.addEventListener('click', onInputClick);
 
-var textContent = document.createTextNode(text.get()); 
-var textContentValue= document.createTextNode(text.get()); 
-var element=null;
-var initialized=false;
+// events
+parentPort.onChange = onParentChanged;
+labelPort.onChange = onLabelTextChanged;
+defaultValuePort.onChange = onDefaultValueChanged;
+op.onDelete = onDelete;
 
-op.onDelete=remove;
-child.onLinkChanged=updateSidebar;
-link.onLinkChanged=updateSidebar;
-link.onValueChanged=updateParams;
-var elementCheckBox=null;
+// functions
 
-defaultValue.onChange=function()
-{
-    value.set(defaultValue.get());
-    updateText();
-};
-
-text.onChange=function()
-{
-    textContent.nodeValue=text.get();
-    updateText();
-};
-
-function updateText()
-{
-    if(elementCheckBox)
-    {
-        if(value.get()) elementCheckBox.style.color="#bbb";
-            else elementCheckBox.style.color="#444";
-    
-        textContent.nodeValue=text.get();
-        textContentValue.nodeValue='●';
+function onInputClick() {
+    console.log('input clicked');
+    el.classList.toggle('sidebar__toggle--active')
+    if(el.classList.contains('sidebar__toggle--active')) {
+        valuePort.set(true);
+        value.textContent = 'true';
+    } else {
+        valuePort.set(false);
+        value.textContent = 'false';
     }
-    if(CABLES.UI)op.setTitle('Toggle '+text.get());
-
-}
-
-function init(params)
-{
-    initialized=true;
-    element = document.createElement('div');
-
-    var size=(params.height-params.padding*2);
-    elementCheckBox = document.createElement('div');
-    elementCheckBox.style.float="right";
-    elementCheckBox.style.width=size+"px";
-    elementCheckBox.style['font-size']="25px";
-    elementCheckBox.style.height=size+"px";
-    elementCheckBox.style['margin-top']="-7px";
-
-
-    element.style['font-family']="monospace";
-    element.style['user-select']="none";
-
-    element.appendChild(textContent);
-    elementCheckBox.appendChild(textContentValue);
-    element.appendChild(elementCheckBox);
-
-    updateText();
     
-    params.parent.appendChild(element);
-
-    element.onclick=function()
-    {
-        value.set(!value.get());
-        updateText();
-    };
-    
-    value.set(defaultValue.get());
-    updateText();
-
 }
 
-function remove()
-{
-    initialized=false;
-    if(element) element.remove();
-}
-
-function updateSidebar()
-{
-    if(!link.isLinked()) remove();        
-    var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-    if(sidebar)sidebar.childsChanged();
-}
-
-function updateParams()
-{
-    var params=link.get();
-    if(!params)return;
-
-    if(params.hide) remove(); 
-    else
-    {
-        if(!initialized) init(params);
-        var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-        if(sidebar) sidebar.setupDiv(element,params);
-    
-        params.pos++;    
+function onDefaultValueChanged() {
+    var defaultValue = defaultValuePort.get();
+    if(defaultValue) {
+        el.classList.add('sidebar__toggle--active');
+        valuePort.set(true);
+    } else {
+        el.classList.remove('sidebar__toggle--active');
+        valuePort.set(false);
     }
-    child.set(params);
+}
 
+function onLabelTextChanged() {
+    var labelText = labelPort.get();
+    label.textContent = labelText;
+    if(CABLES.UI) {
+        op.setTitle('Toggle: ' + labelText);    
+    }
+}
+
+function onParentChanged() {
+    var parent = parentPort.get();
+    if(parent && parent.parentElement) {
+        parent.parentElement.appendChild(el);
+        siblingsPort.set(null);
+        siblingsPort.set(parent);
+    } else { // detach
+        if(el.parentElement) {
+            el.parentElement.removeChild(el);    
+        }
+    }
+}
+
+function showElement(el) {
+    if(el) {
+        el.style.display = 'block';
+    }
+}
+
+function hideElement(el) {
+    if(el) {
+        el.style.display = 'none';
+    }
+}
+
+function onDelete() {
+    removeElementFromDOM(el);
+}
+
+function removeElementFromDOM(el) {
+    if(el && el.parentNode && parentNode.removeChild) {
+        el.parentNode.removeChild(el);    
+    }
 }

@@ -1,87 +1,97 @@
+// inputs
+var parentPort = op.inObject('link');
+var labelPort = op.inValueString('Text', 'Group');
+var defaultMinimizedPort = op.inValueBool('Default Minimized');
 
-var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
-var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+// outputs
+var nextPort = op.outObject('next');
+var childrenPort = op.outObject('childs');
 
-var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_OBJECT));
-var childs=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
+// vars
+var el = document.createElement('div');
+el.classList.add('sidebar__group');
+onDefaultMinimizedPortChanged();
+var header = document.createElement('div');
+header.classList.add('sidebar__group-header');
+el.appendChild(header);
+header.addEventListener('click', onClick);
+var headerTitle = document.createElement('div');
+headerTitle.classList.add('sidebar__group-header-title');
+headerTitle.textContent = labelPort.get();
+header.appendChild(headerTitle);
+var icon = document.createElement('span');
+icon.classList.add('sidebar__group-header-icon');
+icon.classList.add('icon-chevron-up');
+headerTitle.appendChild(icon);
+var groupItems = document.createElement('div');
+groupItems.classList.add('sidebar__group-items');
+el.appendChild(groupItems);
 
-text.set('Group');
+// events
+parentPort.onChange = onParentChanged;
+labelPort.onChange = onLabelTextChanged;
+defaultMinimizedPort.onChange = onDefaultMinimizedPortChanged;
+op.onDelete = onDelete;
 
-var textContent = document.createTextNode(text.get()); 
-var opened=true;
-var element=null;
-var initialized=false;
+// functions
 
-op.onDelete=remove;
-childs.onLinkChanged=updateSidebar;
-next.onLinkChanged=updateSidebar;
-link.onLinkChanged=updateSidebar;
-link.onValueChanged=updateParams;
-
-text.onValueChanged=function()
-{
-    textContent.nodeValue=text.get();
-};
-
-function updateText()
-{
-    textContent.nodeValue=text.get();
+function onDefaultMinimizedPortChanged() {
+    if(defaultMinimizedPort.get()) {
+        el.classList.add('sidebar__group--closed');    
+    } else {
+        el.classList.remove('sidebar__group--closed');    
+    }
 }
 
-function init(params)
-{
-    if(!params)return;
-    initialized=true;
-    element = document.createElement('div');
-    element.style.color="#eee";
-    element.style['font-family']="monospace";
-
-    element.appendChild(textContent);
-
-    updateText();
-    
-    params.parent.appendChild(element);
-
-    element.onclick=function()
-    {
-        opened=!opened;
-        updateSidebar();
-    };
+function onClick(ev) {
+    console.log('group header clicked');
+    ev.stopPropagation();
+    el.classList.toggle('sidebar__group--closed');  
 }
 
-function remove()
-{
-    initialized=false;
-    if(element) element.remove();
+function onLabelTextChanged() {
+    var labelText = labelPort.get();
+    headerTitle.textContent = labelText;
+    if(CABLES.UI) {
+        op.setTitle('Group: ' + labelText);    
+    }
 }
 
-function updateSidebar()
-{
-    if(!link.isLinked()) remove();        
-    var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-    if(sidebar) sidebar.childsChanged();
+function onParentChanged() {
+    var parent = parentPort.get();
+    if(parent && parent.parentElement) {
+        parent.parentElement.appendChild(el);
+        childrenPort.set(null);
+        childrenPort.set({
+            parentElement: groupItems,
+            parentOp: op,
+        });
+        nextPort.set(parent);
+    } else { // detach
+        if(el.parentElement) {
+            el.parentElement.removeChild(el);    
+        }
+    }
 }
 
-function updateParams()
-{
-    var params=link.get();
-    if(!params)return;
+function showElement(el) {
+    if(el) {
+        el.style.display = 'block';
+    }
+}
 
-    if(!initialized) init(params);
+function hideElement(el) {
+    if(el) {
+        el.style.display = 'none';
+    }
+}
 
-    var sidebar=op.findParent('Ops.Sidebar.Sidebar');
+function onDelete() {
+    removeElementFromDOM(el);
+}
 
-    if(sidebar) sidebar.setupDiv(element,params);
-
-    if(params.hide) remove();
-        else params.pos++;
-
-    if(!params.hide) params.hide=!opened;
-    params.level++;
-    childs.set(params);
-    params.level--;
-
-    params.hide=false;
-
-    next.set(params);
+function removeElementFromDOM(el) {
+    if(el && el.parentNode && parentNode.removeChild) {
+        el.parentNode.removeChild(el);    
+    }
 }

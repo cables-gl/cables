@@ -1,73 +1,99 @@
+// vars
+const CSS_ELEMENT_ID = 'cables-sidebar-style'; /* id for the style element to be generated */
+const SIDEBAR_CLASS = 'sidebar';
+const SIDEBAR_ITEMS_CLASS = 'sidebar__items'
+const SIDEBAR_OPEN_CLOSE_BTN_CLASS = 'sidebar__close-button';
+const BTN_TEXT_OPEN = 'Close';
+const BTN_TEXT_CLOSED = 'Show Controls';
+var cssFileContent = attachments.style_css; /* the CSS style attachment */
+let openCloseBtn = null;
 
-var childs=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
-var inVisible=op.inValueBool("Visible",true);
-var inOpacity=op.inValueSlider("Opacity",1);
-var element = document.createElement('div');
-element.style["background-color"]="#000";
-element.style["z-index"]="99999";
-element.style.position="absolute";
-element.style.width="200px";
-element.style.top="0px";
-// element.style["margin-left"]="-200px";
+// inputs
+var visiblePort = op.inValueBool("Visible", true);
+var opacityPort = op.inValueSlider('Opacity', 1)
+var defaultMinimizedPort = op.inValueBool('Default Minimized');
 
-var canvas = document.getElementById('cablescanvas'); 
-if(!canvas)canvas=document.body;
+// outputs
+var childrenPort = op.outObject('childs');
 
-canvas.appendChild(element);
+var sidebarEl = document.querySelector('.' + SIDEBAR_CLASS);
+if(!sidebarEl) {
+    sidebarEl = initSidebarElement();    
+}
+var sidebarItemsEl = sidebarEl.querySelector('.' + SIDEBAR_ITEMS_CLASS);
+childrenPort.set({
+    parentElement: sidebarItemsEl,
+    parentOp: op,
+});
+onDefaultMinimizedPortChanged();
+initSidebarCss();
 
-inOpacity.onChange=function()
-{
-    element.style.opacity=inOpacity.get();
-};
+// change listeners
+visiblePort.onChange = onVisiblePortChange;
+opacityPort.onChange = onOpacityPortChange;
+defaultMinimizedPort.onChange = onDefaultMinimizedPortChanged;
 
-inVisible.onChange=function()
-{
-    if(inVisible.get())element.style.display="block";
-        else element.style.display="none";
-};
+// functions
 
-op.childsChanged=function()
-{
-    childs.set(
-        {
-            "parent":element,
-            "pos":0,
-            "level":0,
-            // "min-height":'25px',
-            "width":200,
-            "padding":5
-        });
-};
+function onDefaultMinimizedPortChanged() {
+    if(!openCloseBtn) { return; }
+    if(defaultMinimizedPort.get()) {
+        sidebarEl.classList.add('sidebar--closed');    
+        openCloseBtn.textContent = BTN_TEXT_CLOSED;
+    } else {
+        sidebarEl.classList.remove('sidebar--closed');    
+        openCloseBtn.textContent = BTN_TEXT_OPEN;
+    }
+}
 
-op.setupDiv=function(element,params)
-{
-    if(!element || !params)return;
-    var levelSpace=10;
-    
-    
-    // var h=element.offsetHeight;
-    
-    element.style.padding=params.padding+'px';
-    // element.style.position="absolute";
-    element.style.overflow="hidden";
-    element.style.cursor="pointer";
-    element.style.float="left";
-    element.style.clear="both";
-    
-    element.style["min-height"]="25px";
-    element.style["background-color"]="#222";
-    
-    element.style['padding-left']=(10+params.level*levelSpace)+"px";
-    
-    element.style["border-bottom"]="1px solid #444";
-    element.style.width=(params.width-params.level*levelSpace)+"px";
+function onOpacityPortChange() {
+    var opacity = opacityPort.get();
+    sidebarEl.style.opacity = opacity;    
+}
 
-    // element.style['margin-top']=(params.pos*h+params.pos)+"px";
+function onVisiblePortChange() {
+    if(visiblePort.get()) {
+        sidebarEl.style.display = 'block';    
+    } else {
+        sidebarEl.style.display = 'none';    
+    }
+}
 
-};
+function initSidebarElement() {
+    var element = document.createElement('div');
+    element.classList.add(SIDEBAR_CLASS);    
+    var canvasWrapper = op.patch.cgl.canvas.parentElement; /* maybe this is bad outside cables!? */
+    canvasWrapper.appendChild(element);
+    var items = document.createElement('div');
+    items.classList.add(SIDEBAR_ITEMS_CLASS);
+    element.appendChild(items);
+    openCloseBtn = document.createElement('div');
+    openCloseBtn.classList.add(SIDEBAR_OPEN_CLOSE_BTN_CLASS);
+    openCloseBtn.addEventListener('click', onOpenCloseBtnClick);
+    openCloseBtn.textContent = BTN_TEXT_OPEN;
+    element.appendChild(openCloseBtn);
+    return element;
+}
 
-childs.onLinkChanged=function()
-{
-    op.childsChanged();
-};
+function onOpenCloseBtnClick(ev) {
+  ev.stopPropagation();
+  const sidebarEl = ev.target.closest('.' + SIDEBAR_CLASS)
+  if(!sidebarEl) { console.error('Sidebar could not be closed...'); return; }
+  sidebarEl.classList.toggle('sidebar--closed');
+  const btn = ev.target;
+  let btnText = BTN_TEXT_OPEN;
+  if(sidebarEl.classList.contains('sidebar--closed')) {
+    btnText = BTN_TEXT_CLOSED;
+   }
+   btn.textContent = btnText
+}
+
+function initSidebarCss() {
+    var cssEl = document.getElementById(CSS_ELEMENT_ID);
+    if(!cssEl) {
+        cssEl = document.createElement('style')
+        cssEl.innerHTML = cssFileContent;
+        document.body.appendChild(cssEl);
+    }
+}
 

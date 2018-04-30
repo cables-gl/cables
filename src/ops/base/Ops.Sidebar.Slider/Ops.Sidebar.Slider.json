@@ -1,5 +1,5 @@
 {
-    "updated": 1524930610642,
+    "updated": 1525098667024,
     "authorName": "pandur",
     "id": "eb3232e5-e947-4683-a17f-27a72d464b2c",
     "created": 1518204108335,
@@ -16,17 +16,22 @@
             },
             {
                 "type": "0",
-                "name": "Default",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Min",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Max",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Step",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Default",
                 "subType": "number"
             }
         ],

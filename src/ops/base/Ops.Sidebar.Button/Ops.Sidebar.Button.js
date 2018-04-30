@@ -1,79 +1,73 @@
-var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
-var child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
+// inputs
+var parentPort = op.inObject('link');
+var buttonTextPort = op.inValueString('Text', 'Button');
 
-var trigger=op.outFunction("Pressed Trigger");
-var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
+// outputs
+var siblingsPort = op.outObject('childs');
+var buttonPressedPort = op.outFunction('Pressed Trigger');
 
-text.set('Sidebar Button');
+// vars
+var el = document.createElement('div');
+el.classList.add('sidebar__item');
+el.classList.add('sidebar--button');
+var input = document.createElement('div');
+input.classList.add('sidebar__button-input');
+el.appendChild(input);
+input.addEventListener('click', onButtonClick);
+var inputText = document.createTextNode(buttonTextPort.get());
+input.appendChild(inputText);
 
-var element=null;
-var initialized=false;
+// events
+parentPort.onChange = onParentChanged;
+buttonTextPort.onChange = onButtonTextChanged;
+op.onDelete = onDelete;
 
-op.onDelete=remove;
-child.onLinkChanged=updateSidebar;
-link.onLinkChanged=updateSidebar;
-link.onValueChanged=updateParams;
-var elementButton=null;
+// functions
 
-text.onValueChanged=updateText;
-
-function updateText()
-{
-    if(elementButton) elementButton.setAttribute("value",text.get());
+function onButtonClick() {
+    buttonPressedPort.trigger();
 }
 
-function init(params)
-{
-    initialized=true;
-    element = document.createElement('div');
-
-    var size=(params.height-params.padding*2);
-    elementButton = document.createElement('input');
-    elementButton.setAttribute("type","button");
-    elementButton.setAttribute("value",text.get());
-
-    element.style['font-family']="monospace";
-    element.style['user-select']="none";
-
-    element.appendChild(elementButton);
-
-    updateText();
-    
-    params.parent.appendChild(element);
-
-    element.onclick=function()
-    {
-        trigger.trigger();
-    };
-}
-
-function remove()
-{
-    initialized=false;
-    if(element) element.remove();
-}
-
-function updateSidebar()
-{
-    if(!link.isLinked()) remove();        
-    var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-    if(sidebar)sidebar.childsChanged();
-}
-
-function updateParams()
-{
-    var params=link.get();
-    if(!params)return;
-
-    if(params.hide) remove(); 
-    else
-    {
-        if(!initialized) init(params);
-        var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-        if(sidebar) sidebar.setupDiv(element,params);
-    
-        params.pos++;    
+function onButtonTextChanged() {
+    var buttonText = buttonTextPort.get();
+    input.textContent = buttonText;
+    if(CABLES.UI) {
+        op.setTitle('Button: ' + buttonText);    
     }
-    child.set(params);
+}
 
+function onParentChanged() {
+    var parent = parentPort.get();
+    console.log('parent changed: ', parent);
+    if(parent && parent.parentElement) {
+        parent.parentElement.appendChild(el);
+        siblingsPort.set(null);
+        siblingsPort.set(parent);
+    } else { // detach
+        if(el.parentElement) {
+            el.parentElement.removeChild(el);    
+        }
+    }
+}
+
+function showElement(el) {
+    if(el) {
+        el.style.display = 'block';
+    }
+}
+
+function hideElement(el) {
+    if(el) {
+        el.style.display = 'none';
+    }
+}
+
+function onDelete() {
+    removeElementFromDOM(el);
+}
+
+function removeElementFromDOM(el) {
+    if(el && el.parentNode && parentNode.removeChild) {
+        el.parentNode.removeChild(el);    
+    }
 }

@@ -1,82 +1,76 @@
-var link=op.addInPort(new Port(op,"link",OP_PORT_TYPE_OBJECT));
-var child=op.addOutPort(new Port(op,"childs",OP_PORT_TYPE_OBJECT));
+// inputs
+var parentPort = op.inObject('link');
+var labelPort = op.inValueString('Text', 'Value');
+var valuePort = op.inValueBool('Value', 0);
 
-var text=op.addInPort(new Port(op,"Text",OP_PORT_TYPE_VALUE,{type:'string'}));
-var inValue=op.inValue("Value");
+// outputs
+var siblingsPort = op.outObject('childs');
 
+// vars
+var el = document.createElement('div');
+el.classList.add('sidebar__item');
+el.classList.add('sidebar__value-display');
+var label = document.createElement('div');
+label.classList.add('sidebar__item-label');
+var labelText = document.createTextNode(labelPort.get());
+label.appendChild(labelText);
+el.appendChild(label);
+var value = document.createElement('div');
+value.textContent = valuePort.get();
+value.classList.add('sidebar__item-value-label');
+el.appendChild(value);
 
-text.set('Display value');
+// events
+parentPort.onChange = onParentChanged;
+labelPort.onChange = onLabelTextChanged;
+valuePort.onChange = onValueChanged;
+op.onDelete = onDelete;
 
-var textContent = document.createTextNode(text.get()); 
-var element=null;
-var initialized=false;
+// functions
 
-op.onDelete=remove;
-child.onLinkChanged=updateSidebar;
-link.onLinkChanged=updateSidebar;
-link.onValueChanged=updateParams;
-var elementValue=null;
-text.onValueChanged=updateText;
-
-inValue.onChange=function()
-{
-    if(elementValue)elementValue.innerHTML=inValue.get();
-};
-
-
-function updateText()
-{
-    textContent.nodeValue=text.get();
+function onValueChanged() {
+    value.textContent = valuePort.get();
 }
 
-function init(params)
-{
-    initialized=true;
-    element = document.createElement('div');
-
-    var size=(params.height-params.padding*2);
-    elementValue = document.createElement('div');
-    elementValue.style.color="white";
-
-
-    element.style['font-family']="monospace";
-    element.style['user-select']="none";
-
-    element.appendChild(textContent);
-    element.appendChild(elementValue);
-
-    updateText();
-    
-    params.parent.appendChild(element);
-}
-
-function remove()
-{
-    initialized=false;
-    if(element) element.remove();
-}
-
-function updateSidebar()
-{
-    if(!link.isLinked()) remove();        
-    var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-    if(sidebar)sidebar.childsChanged();
-}
-
-function updateParams()
-{
-    var params=link.get();
-    if(!params)return;
-
-    if(params.hide) remove(); 
-    else
-    {
-        if(!initialized) init(params);
-        var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-        if(sidebar) sidebar.setupDiv(element,params);
-    
-        params.pos++;    
+function onLabelTextChanged() {
+    var labelText = labelPort.get();
+    label.textContent = labelText;
+    if(CABLES.UI) {
+        op.setTitle('Value: ' + labelText);    
     }
-    child.set(params);
+}
 
+function onParentChanged() {
+    var parent = parentPort.get();
+    if(parent && parent.parentElement) {
+        parent.parentElement.appendChild(el);
+        siblingsPort.set(null);
+        siblingsPort.set(parent);
+    } else { // detach
+        if(el.parentElement) {
+            el.parentElement.removeChild(el);    
+        }
+    }
+}
+
+function showElement(el) {
+    if(el) {
+        el.style.display = 'block';
+    }
+}
+
+function hideElement(el) {
+    if(el) {
+        el.style.display = 'none';
+    }
+}
+
+function onDelete() {
+    removeElementFromDOM(el);
+}
+
+function removeElementFromDOM(el) {
+    if(el && el.parentNode && parentNode.removeChild) {
+        el.parentNode.removeChild(el);    
+    }
 }

@@ -1,119 +1,146 @@
-const link=op.inObject("link");
-const child=op.outObject("childs");
-const text=op.inValueString("Text",'');
-const defaultValue=op.inValue("Default",0.5);
-const min=op.inValue("Min",0);
-const max=op.inValue("Max",1);
-const value=op.outValue("Result");
+// inputs
+const parentPort = op.inObject('link');
+const labelPort = op.inValueString('Text', 'Slider');
+const minPort = op.inValue("Min", 0);
+const maxPort = op.inValue("Max", 1);
+const stepPort = op.inValue("Step", 0.01);
+const defaultValuePort = op.inValue('Default', 0.5);
 
-var textContent = document.createTextNode(text.get()); 
-var textContentValue= document.createTextNode(text.get()); 
-var element=null;
-var initialized=false;
+// outputs
+const siblingsPort = op.outObject('childs');
+const valuePort = op.outValue('Result', defaultValuePort.get());
 
-min.onChange=updateMinMax;
-max.onChange=updateMinMax;
+// vars
+var el = document.createElement('div');
+el.classList.add('sidebar__item');
+el.classList.add('sidebar__slider');
+var label = document.createElement('div');
+label.classList.add('sidebar__item-label');
+var labelText = document.createTextNode(labelPort.get());
+label.appendChild(labelText);
+el.appendChild(label);
+var value = document.createElement('div');
+value.textContent = defaultValuePort.get();
+value.classList.add('sidebar__item-value-label');
+el.appendChild(value);
+var inputWrapper = document.createElement('div');
+inputWrapper.classList.add('sidebar__slider-input-wrapper');
+el.appendChild(inputWrapper);
+var activeTrack = document.createElement('div');
+activeTrack.classList.add('sidebar__slider-input-active-track');
+inputWrapper.appendChild(activeTrack);
+var input = document.createElement('input');
+input.classList.add('sidebar__slider-input');
+input.setAttribute('min', minPort.get());
+input.setAttribute('max', maxPort.get());
+input.setAttribute('type', 'range');
+input.setAttribute('step', stepPort.get());
+input.setAttribute('value', defaultValuePort.get());
+inputWrapper.appendChild(input);
+updateActiveTrack();
+input.addEventListener('input', onSliderInput);
 
-op.onDelete=remove;
-child.onLinkChanged=updateSidebar;
-link.onLinkChanged=updateSidebar;
-link.onValueChanged=updateParams;
-var elementSlider=null;
+// events
+parentPort.onChange = onParentChanged;
+labelPort.onChange = onLabelTextChanged;
+defaultValuePort.onChange = onDefaultValueChanged;
+minPort.onChange = onMinPortChange;
+maxPort.onChange = onMaxPortChange;
+stepPort.onChange = stepPortChanged;
+op.onDelete = onDelete;
 
-defaultValue.onChange=updateValue;
+// functions
 
-updateValue();
-
-function updateValue()
-{
-    value.set(defaultValue.get());
-    if(elementSlider)elementSlider.value=defaultValue.get()*100;
+function onSliderInput(ev) {
+    value.textContent = ev.target.value;
+    valuePort.set(ev.target.value);
+    updateActiveTrack();
 }
 
-text.onValueChanged=function()
-{
-    updateText();
-};
+function stepPortChanged() {
+    var step = stepPort.get();
+    input.setAttribute('step', step);
+    updateActiveTrack();
+}
 
-function updateMinMax()
-{
-    if(elementSlider)
-    {
-        elementSlider.setAttribute("min",min.get()*100);
-        elementSlider.setAttribute("max",max.get()*100);
+function updateActiveTrack(val) {
+    let valueToUse = parseFloat(input.value);
+    if(typeof val !== 'undefined') {
+        valueToUse = val;
+    } else {
+        console.log(val + ' is undefined');
+    }
+    var percentage = CABLES.map(
+        valueToUse,
+        parseFloat(input.min), 
+        parseFloat(input.max), 
+        0, 
+        100
+    );
+    activeTrack.style.width = percentage + '%';
+}
+
+function onMinPortChange() {
+    var min = minPort.get();
+    input.setAttribute('min', min);
+    updateActiveTrack();
+}
+
+function onMaxPortChange() {
+    var max = maxPort.get();
+    input.setAttribute('max', max);
+    updateActiveTrack();
+}
+
+function onDefaultValueChanged() {
+    var defaultValue = defaultValuePort.get();
+    valuePort.set(defaultValue);
+    onMinPortChange();
+    onMaxPortChange();
+    input.setAttribute('value', defaultValue);
+    value.textContent = defaultValue;
+    updateActiveTrack(defaultValue); // needs to be passed as argument, is this async?
+}
+
+function onLabelTextChanged() {
+    var labelText = labelPort.get();
+    label.textContent = labelText;
+    if(CABLES.UI) {
+        op.setTitle('Slider: ' + labelText);    
     }
 }
 
-function updateText()
-{
-    textContent.nodeValue=text.get()+' ('+value.get()+')';
-    if(CABLES.UI)op.setTitle('Slider '+text.get());
-}
-
-function init(params)
-{
-    initialized=true;
-    element = document.createElement('div');
-
-    var size=(params.height-params.padding*2);
-    elementSlider = document.createElement('input');
-    elementSlider.setAttribute("type","range");
-    elementSlider.style.display="block";
-    elementSlider.style.width="100%";
-    elementSlider.style['-webkit-appearance']="none";
-    elementSlider.style['border-radius']="4px";
-    elementSlider.style['background-color']="#888";
-    elementSlider.style.color="#fff";
-    elementSlider.style.border="none";
-
-    element.style['font-family']="monospace";
-    element.style['user-select']="none";
-
-    element.appendChild(textContent);
-    element.appendChild(document.createElement('br'));
-    element.appendChild(elementSlider);
-
-    updateText();
-    updateMinMax();
-    
-    params.parent.appendChild(element);
-    
-    elementSlider.value=defaultValue.get()*100;
-
-    element.addEventListener("input",function(e)
-    {
-        value.set(e.target.value/100);
-        updateText();
-    });
-}
-
-function remove()
-{
-    initialized=false;
-    if(element) element.remove();
-}
-
-function updateSidebar()
-{
-    if(!link.isLinked()) remove();        
-    var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-    if(sidebar)sidebar.childsChanged();
-}
-
-function updateParams()
-{
-    var params=link.get();
-    if(!params)return;
-
-    if(params.hide) remove(); 
-    else
-    {
-        if(!initialized) init(params);
-        var sidebar=op.findParent('Ops.Sidebar.Sidebar');
-        if(sidebar) sidebar.setupDiv(element,params);
-    
-        params.pos++;    
+function onParentChanged() {
+    var parent = parentPort.get();
+    if(parent && parent.parentElement) {
+        parent.parentElement.appendChild(el);
+        siblingsPort.set(null);
+        siblingsPort.set(parent);
+    } else { // detach
+        if(el.parentElement) {
+            el.parentElement.removeChild(el);    
+        }
     }
-    child.set(params);
+}
 
+function showElement(el) {
+    if(el) {
+        el.style.display = 'block';
+    }
+}
+
+function hideElement(el) {
+    if(el) {
+        el.style.display = 'none';
+    }
+}
+
+function onDelete() {
+    removeElementFromDOM(el);
+}
+
+function removeElementFromDOM(el) {
+    if(el && el.parentNode && parentNode.removeChild) {
+        el.parentNode.removeChild(el);    
+    }
 }
