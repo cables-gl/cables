@@ -15,7 +15,7 @@
   top: 0;
   left: 0;
   z-index: 100000;
-  width: 280px;
+  width: 220px;
   box-sizing: border-box;
   overflow: hidden;
   /* max-height: 1000px; */
@@ -34,7 +34,7 @@
 }
 
 .sidebar--closed {
-  /* max-height: 20px; */
+  width: auto;
 }
 
 .sidebar__close-button {
@@ -51,6 +51,11 @@
   text-align: center;
   cursor: pointer;
   border-radius: 0 0 var(--sidebar-border-radius) var(--sidebar-border-radius);
+}
+
+.sidebar--closed .sidebar__close-button {
+  padding-left: 7px;
+  padding-right: 7px; 
 }
 
 .sidebar__close-button:hover {
@@ -122,7 +127,7 @@
 .sidebar__item {
   background-color: #222222;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 7px;
 }
 
 .sidebar__item-label {
@@ -131,7 +136,8 @@
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;          /* Likely future */ 
-  width: 120px;
+  width: 93px;
+  margin-right: 7px;
   max-height: 1em;
   text-overflow: ellipsis;
   /* overflow: hidden; */
@@ -144,6 +150,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  max-width: 102px;
 }
 
 .sidebar__item-value-label::selection {
