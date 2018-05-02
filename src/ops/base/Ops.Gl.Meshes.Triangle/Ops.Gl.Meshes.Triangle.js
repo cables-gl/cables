@@ -1,10 +1,8 @@
-op.name='Triangle';
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var sizeW=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
 var sizeH=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-
+const draw=op.inValueBool("Draw",true);
 var geom=new CGL.Geometry("triangle");
 
 
@@ -19,7 +17,7 @@ var mesh=null;
 
 render.onTriggered=function()
 {
-    mesh.render(cgl.getShader());
+    if(draw.get())mesh.render(cgl.getShader());
     trigger.trigger();
 };
 

@@ -34,7 +34,7 @@
             },
             {
                 "name": "Selectors",
-                "text": "Selectors of the HTML DOM elements which start the audio context (separated by spaced, e.g. '#myButton .otherButtons'). Per default this is the whole patch – `#glcanvas`"
+                "text": "Selectors of the HTML DOM elements which start the audio context (separated by spaces, e.g. '#myButton .otherButtons'). Per default this is the whole patch – `#glcanvas`"
             },
             {
                 "name": "Is Ready",

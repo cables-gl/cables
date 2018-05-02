@@ -25,5 +25,9 @@
             }
         ],
         "name": "Ops.Array.ArrayBuffer"
+    },
+    "summary": "stores values in an array / fifo array buffer",
+    "docs": {
+        "ports": []
     }
 }

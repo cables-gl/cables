@@ -51,5 +51,9 @@
             }
         ],
         "name": "Ops.Gl.GlInfo"
+    },
+    "summary": "information about yout webgl context",
+    "docs": {
+        "ports": []
     }
 }

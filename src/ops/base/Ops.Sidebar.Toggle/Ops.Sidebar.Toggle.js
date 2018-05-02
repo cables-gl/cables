@@ -16,6 +16,7 @@ el.classList.add('sidebar__toggle');
 if(DEFAULT_VALUE_DEFAULT) {
     el.classList.add('sidebar__toggle--active');
 }
+el.addEventListener('click', onInputClick);
 var label = document.createElement('div');
 label.classList.add('sidebar__item-label');
 var labelText = document.createTextNode(labelPort.get());
@@ -28,7 +29,6 @@ el.appendChild(value);
 var input = document.createElement('div');
 input.classList.add('sidebar__toggle-input');
 el.appendChild(input);
-input.addEventListener('click', onInputClick);
 
 // events
 parentPort.onChange = onParentChanged;

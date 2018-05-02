@@ -22,5 +22,9 @@
             }
         ],
         "name": "Ops.Json.ObjectKeys"
+    },
+    "summary": "returns an array of strings, which contain the keys of the object",
+    "docs": {
+        "ports": []
     }
 }

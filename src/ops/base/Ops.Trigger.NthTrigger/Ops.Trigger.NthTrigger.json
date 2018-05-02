@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "Nth"
+                "name": "Nth",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -16,7 +17,7 @@
                 "name": "next"
             }
         ],
-        "name": "Ops.NthTrigger"
+        "name": "Ops.Trigger.NthTrigger"
     },
     "summary": "trigger children every x times exe was triggered"
 }

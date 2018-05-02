@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Value.ValueChangedTrigger"
+    },
+    "summary": "trigger output when value has changed since last execution",
+    "docs": {
+        "ports": []
     }
 }

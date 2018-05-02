@@ -1,0 +1,1 @@
+first element that goes in will be removed first, when buffer size becomes greater than `max length`

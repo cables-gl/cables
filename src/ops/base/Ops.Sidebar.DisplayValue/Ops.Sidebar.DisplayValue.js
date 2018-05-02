@@ -1,7 +1,7 @@
 // inputs
 var parentPort = op.inObject('link');
 var labelPort = op.inValueString('Text', 'Value');
-var valuePort = op.inValueBool('Value', 0);
+var valuePort = op.inValueString('Value', '');
 
 // outputs
 var siblingsPort = op.outObject('childs');

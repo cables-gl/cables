@@ -8,11 +8,18 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -50,5 +57,9 @@
                 "text": "For advanced use cases you can output the geometry data (vertices, normals) to use in another op"
             }
         ]
-    }
+    },
+    "updated": 1524850952323,
+    "authorName": "pandur",
+    "id": "331bc9dc-d44c-43bd-be18-a2673fba124e",
+    "created": 1524850945993
 }

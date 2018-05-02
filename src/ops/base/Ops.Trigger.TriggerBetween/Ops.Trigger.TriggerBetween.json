@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.TriggerBetween"
+    },
+    "summary": "trigger if value is between number 1 and number 2",
+    "docs": {
+        "ports": []
     }
 }

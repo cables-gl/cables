@@ -27,5 +27,13 @@
         ],
         "name": "Ops.Json.CsvJsonFile"
     },
-    "summary": "load a csv json file as array"
+    "summary": "load a csv json file as array",
+    "docs": {
+        "ports": [
+            {
+                "name": "Is Loading",
+                "text": "true if the file is still being loaded from the webserver"
+            }
+        ]
+    }
 }
