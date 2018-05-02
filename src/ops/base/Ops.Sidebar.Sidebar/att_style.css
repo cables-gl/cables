@@ -19,6 +19,7 @@
   top: 0;
   left: 0;
   z-index: 100000;
+  color: #BBBBBB;
   width: 220px;
   box-sizing: border-box;
   overflow: hidden;
@@ -54,6 +55,7 @@
   padding-top: 2px;
   text-align: center;
   cursor: pointer;
+  border-top: 1px solid #272727;
   border-radius: 0 0 var(--sidebar-border-radius) var(--sidebar-border-radius);
 }
 
@@ -61,6 +63,8 @@
     display: inline-block;
     width: 21px;
     height: 20px;
+    position: relative;
+    top: -1px;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ODg4ODgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0iZmVhdGhlciBmZWF0aGVyLWNoZXZyb24tdXAiPjxwb2x5bGluZSBwb2ludHM9IjE4IDE1IDEyIDkgNiAxNSI+PC9wb2x5bGluZT48L3N2Zz4=);
     background-size: cover;
     background-repeat: no-repeat;
@@ -111,7 +115,6 @@
 
 .sidebar__group {
   background-color: #1A1A1A;
-  color: #EEEEEE;
   overflow: hidden;
   box-sizing: border-box;
   animate: height;
@@ -127,6 +130,7 @@
 
 .sidebar__group-header {
   box-sizing: border-box;
+  color: #EEEEEE;
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
@@ -163,6 +167,12 @@
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ODg4ODgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0iZmVhdGhlciBmZWF0aGVyLWNoZXZyb24tdXAiPjxwb2x5bGluZSBwb2ludHM9IjE4IDE1IDEyIDkgNiAxNSI+PC9wb2x5bGluZT48L3N2Zz4=);
     top: 4px;
     right: 5px;
+    opacity: 0.0;
+    transition: opacity 0.3;
+}
+
+.sidebar__group-header:hover .sidebar__group-header-icon {
+    opacity: 1.0;
 }
 
 /* icon closed */
