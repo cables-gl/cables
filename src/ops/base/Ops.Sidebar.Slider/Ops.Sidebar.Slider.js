@@ -67,8 +67,6 @@ function updateActiveTrack(val) {
     let valueToUse = parseFloat(input.value);
     if(typeof val !== 'undefined') {
         valueToUse = val;
-    } else {
-        console.log(val + ' is undefined');
     }
     var percentage = CABLES.map(
         valueToUse,

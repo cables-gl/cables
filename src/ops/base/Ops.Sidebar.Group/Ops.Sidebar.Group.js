@@ -44,7 +44,6 @@ function onDefaultMinimizedPortChanged() {
 }
 
 function onClick(ev) {
-    console.log('group header clicked');
     ev.stopPropagation();
     el.classList.toggle('sidebar__group--closed');  
 }

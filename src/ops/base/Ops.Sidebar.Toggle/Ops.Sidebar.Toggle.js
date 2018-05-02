@@ -39,7 +39,6 @@ op.onDelete = onDelete;
 // functions
 
 function onInputClick() {
-    console.log('input clicked');
     el.classList.toggle('sidebar__toggle--active')
     if(el.classList.contains('sidebar__toggle--active')) {
         valuePort.set(true);

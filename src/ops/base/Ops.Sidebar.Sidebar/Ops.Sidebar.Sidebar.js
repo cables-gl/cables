@@ -106,7 +106,6 @@ function initSidebarElement() {
     openCloseBtnIcon = document.createElement('span');
     openCloseBtnIcon.classList.add(SIDEBAR_OPEN_CLOSE_BTN_ICON_CLASS);
     openCloseBtn.appendChild(openCloseBtnIcon);
-    op.log('openCloseBtnIcon: ', openCloseBtnIcon);
     return element;
 }
 
