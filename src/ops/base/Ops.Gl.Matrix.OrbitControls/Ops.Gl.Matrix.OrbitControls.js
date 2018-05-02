@@ -95,8 +95,11 @@ function updateSmoothness()
 
 smoothness.onChange=updateSmoothness;
 
+var initializing=true;
+
 function ip(val,goal)
 {
+    if(initializing)return goal;
     return val+(goal-val)/divisor;
 }
 
@@ -129,6 +132,7 @@ render.onTriggered=function()
 
     trigger.trigger();
     cgl.popViewMatrix();
+    initializing=false;
 };
 
 function circlePos(perc)

@@ -57,10 +57,7 @@ function calcNormals()
         geom.unIndex();
         geom.calculateNormals();
     }
-    console.log("normals!");
-    
 }
-
 
 function render()
 {

@@ -16,9 +16,6 @@ scaleZ.set(1);
 
 function doRender()
 {
-
-
-
     if(mesh)
     {
         mesh.render(cgl.getShader());
@@ -49,7 +46,7 @@ function reset()
     texCoords.length=n*2;
     vertColors.length=n*3;
     
-    Math.randomSeed=seed.get();
+    Math.randomSeed=seed.get()+0.01;
 
     var sizeMul=size.get();
 
