@@ -57,6 +57,8 @@
   cursor: pointer;
   border-top: 1px solid #272727;
   border-radius: 0 0 var(--sidebar-border-radius) var(--sidebar-border-radius);
+  opacity: 1.0;
+  transition: opacity 0.3s;
 }
 
 .sidebar__close-button-icon {
@@ -82,6 +84,7 @@
     height: 46px;
     border-radius: 50%;
     cursor: pointer;
+    opacity: 0.3;
 }
 
 .sidebar--closed .sidebar__close-button-icon {
@@ -91,6 +94,7 @@
 
 .sidebar__close-button:hover {
   background-color: #111111;
+  opacity: 1.0 !important;
 }
 
 /*
