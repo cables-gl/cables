@@ -398,3 +398,15 @@
 .sidebar__slider-input-wrapper:hover .sidebar__slider-input::-webkit-slider-thumb {
   background-color: #EEEEEE;  
 }
+
+/*
+ * TEXT / DESCRIPTION
+ */
+ 
+.sidebar__text .sidebar__item-label {
+    width: auto;
+    display: block;
+    max-height: none;
+    margin-right: 0;
+    line-height: 1.1em;
+} 
