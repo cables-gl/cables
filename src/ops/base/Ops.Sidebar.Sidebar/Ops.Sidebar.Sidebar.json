@@ -1,5 +1,5 @@
 {
-    "updated": 1525098611886,
+    "updated": 1525265283174,
     "authorName": "pandur",
     "id": "5a681c35-78ce-4cb3-9858-bc79c34c6819",
     "created": 1518203773098,
@@ -19,6 +19,11 @@
                 "type": "0",
                 "name": "Default Minimized",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Minimized Opacity",
+                "subType": "number"
             }
         ],
         "portsOut": [

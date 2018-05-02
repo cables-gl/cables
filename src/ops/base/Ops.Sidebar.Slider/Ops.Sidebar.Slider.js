@@ -67,8 +67,6 @@ function updateActiveTrack(val) {
     let valueToUse = parseFloat(input.value);
     if(typeof val !== 'undefined') {
         valueToUse = val;
-    } else {
-        console.log(val + ' is undefined');
     }
     var percentage = CABLES.map(
         valueToUse,
@@ -140,7 +138,7 @@ function onDelete() {
 }
 
 function removeElementFromDOM(el) {
-    if(el && el.parentNode && parentNode.removeChild) {
+    if(el && el.parentNode && el.parentNode.removeChild) {
         el.parentNode.removeChild(el);    
     }
 }

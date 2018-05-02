@@ -44,7 +44,6 @@ function onDefaultMinimizedPortChanged() {
 }
 
 function onClick(ev) {
-    console.log('group header clicked');
     ev.stopPropagation();
     el.classList.toggle('sidebar__group--closed');  
 }
@@ -91,7 +90,7 @@ function onDelete() {
 }
 
 function removeElementFromDOM(el) {
-    if(el && el.parentNode && parentNode.removeChild) {
+    if(el && el.parentNode && el.parentNode.removeChild) {
         el.parentNode.removeChild(el);    
     }
 }

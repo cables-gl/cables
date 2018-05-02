@@ -38,7 +38,6 @@ function onButtonTextChanged() {
 
 function onParentChanged() {
     var parent = parentPort.get();
-    console.log('parent changed: ', parent);
     if(parent && parent.parentElement) {
         parent.parentElement.appendChild(el);
         siblingsPort.set(null);
@@ -67,7 +66,7 @@ function onDelete() {
 }
 
 function removeElementFromDOM(el) {
-    if(el && el.parentNode && parentNode.removeChild) {
+    if(el && el.parentNode && el.parentNode.removeChild) {
         el.parentNode.removeChild(el);    
     }
 }

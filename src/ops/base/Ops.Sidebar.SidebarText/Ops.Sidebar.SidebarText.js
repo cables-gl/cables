@@ -1,71 +1,36 @@
-const DEFAULT_VALUE_DEFAULT = true;
-
 // inputs
 var parentPort = op.inObject('link');
-var labelPort = op.inValueString('Text', 'Toggle');
-var defaultValuePort = op.inValueBool('Default', DEFAULT_VALUE_DEFAULT);
+var labelPort = op.inValueString('Text', 'Value');
 
 // outputs
 var siblingsPort = op.outObject('childs');
-var valuePort = op.outValue('Value', defaultValuePort.get());
 
 // vars
 var el = document.createElement('div');
 el.classList.add('sidebar__item');
-el.classList.add('sidebar__toggle');
-if(DEFAULT_VALUE_DEFAULT) {
-    el.classList.add('sidebar__toggle--active');
-}
-el.addEventListener('click', onInputClick);
+el.classList.add('sidebar__text');
 var label = document.createElement('div');
 label.classList.add('sidebar__item-label');
 var labelText = document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
-var value = document.createElement('div');
-value.textContent = DEFAULT_VALUE_DEFAULT;
-value.classList.add('sidebar__item-value-label');
-el.appendChild(value);
-var input = document.createElement('div');
-input.classList.add('sidebar__toggle-input');
-el.appendChild(input);
 
 // events
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
-defaultValuePort.onChange = onDefaultValueChanged;
 op.onDelete = onDelete;
 
 // functions
-
-function onInputClick() {
-    el.classList.toggle('sidebar__toggle--active')
-    if(el.classList.contains('sidebar__toggle--active')) {
-        valuePort.set(true);
-        value.textContent = 'true';
-    } else {
-        valuePort.set(false);
-        value.textContent = 'false';
-    }
-    
-}
-
-function onDefaultValueChanged() {
-    var defaultValue = defaultValuePort.get();
-    if(defaultValue) {
-        el.classList.add('sidebar__toggle--active');
-        valuePort.set(true);
-    } else {
-        el.classList.remove('sidebar__toggle--active');
-        valuePort.set(false);
-    }
-}
 
 function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Toggle: ' + labelText);    
+        if(labelText && typeof labelText === 'string') {
+            op.setTitle('Text: ' + labelText.substring(0, 10)); // display first 10 characters of text in op title
+        } else {
+            op.setTitle('Text');
+        }
     }
 }
 
