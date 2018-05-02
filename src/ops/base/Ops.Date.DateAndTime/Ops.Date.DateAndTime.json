@@ -4,40 +4,48 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Update Rate"
+                "name": "Update Rate",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Year"
+                "name": "Year",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Month"
+                "name": "Month",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Day"
+                "name": "Day",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Hours"
+                "name": "Hours",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Minutes"
+                "name": "Minutes",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Seconds"
+                "name": "Seconds",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Timestamp"
+                "name": "Timestamp",
+                "subType": "number"
             }
         ],
-        "name": "Ops.DateAndTime"
+        "name": "Ops.Date.DateAndTime"
     },
     "docs": {
         "ports": [
@@ -74,5 +82,9 @@
                 "text": "The current timestamp"
             }
         ]
-    }
+    },
+    "updated": 1525244145476,
+    "authorName": "pandur",
+    "id": "beff95ec-7b50-4b6e-80b8-a7e4ab97d8cc",
+    "created": 1525244144566
 }
