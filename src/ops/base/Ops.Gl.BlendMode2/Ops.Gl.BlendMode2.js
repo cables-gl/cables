@@ -96,8 +96,11 @@ exec.onTriggered=function()
     next.trigger();
     
     cgl.popBlend();
+<<<<<<< HEAD
     
 	cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
 	cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
+=======
+>>>>>>> 4ad78a6781d69c7b094ee3e7195d145885402bb0
 
 };

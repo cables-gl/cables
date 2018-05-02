@@ -34,8 +34,11 @@ var setTempTexture=function()
     textureOut.set(t);
 };
 
+var loadingId=null;
+
 function reload(nocache)
 {
+    if(!loadingId)loadingId=cgl.patch.loading.start('texture',filename.get());
     clearTimeout(timedLoader);
     timedLoader=setTimeout(function()
     {
@@ -45,6 +48,8 @@ function reload(nocache)
 
 function realReload(nocache)
 {
+    if(!loadingId)loadingId=cgl.patch.loading.start('texture',filename.get());
+    
     var url=op.patch.getFilePath(String(filename.get()));
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 
@@ -61,6 +66,7 @@ function realReload(nocache)
                 {
                     setTempTexture();
                     op.uiAttr({'error':'could not load texture "'+filename.get()+'"'});
+                    cgl.patch.loading.finished(loadingId);
                     return;
                 }
                 else op.uiAttr({'error':null});
@@ -82,6 +88,7 @@ function realReload(nocache)
 
                 textureOut.set(null);
                 textureOut.set(tex);
+                cgl.patch.loading.finished(loadingId);
                 
                 // tex.printInfo();
 
@@ -99,9 +106,11 @@ function realReload(nocache)
         {
         }
         loading.set(false);
+        cgl.patch.loading.finished(loadingId);
     }
     else
     {
+        cgl.patch.loading.finished(loadingId);
         setTempTexture();
     }
 }
