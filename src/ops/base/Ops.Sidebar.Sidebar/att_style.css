@@ -247,6 +247,13 @@
 .sidebar__toggle:hover .sidebar__toggle-input {
   border-color: var(--sidebar-toggle-input-color-hover);
 }
+
+.sidebar__toggle .sidebar__item-value-label {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
+}
 .sidebar__toggle-input::after { clear: both; }
 
 .sidebar__toggle--active .sidebar__toggle-input {
