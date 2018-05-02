@@ -138,7 +138,7 @@ function onDelete() {
 }
 
 function removeElementFromDOM(el) {
-    if(el && el.parentNode && parentNode.removeChild) {
+    if(el && el.parentNode && el.parentNode.removeChild) {
         el.parentNode.removeChild(el);    
     }
 }

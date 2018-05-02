@@ -38,6 +38,7 @@ visiblePort.onChange = onVisiblePortChange;
 opacityPort.onChange = onOpacityPortChange;
 defaultMinimizedPort.onChange = onDefaultMinimizedPortChanged;
 minimizedOpacityPort.onChange = onMinimizedOpacityPortChanged;
+op.onDelete = onDelete;
 
 // functions
 
@@ -135,5 +136,15 @@ function initSidebarCss() {
     newStyle.innerHTML = cssFileContent;
     newStyle.classList.add(CSS_ELEMENT_CLASS);
     document.body.appendChild(newStyle);
+}
+
+function onDelete() {
+    removeElementFromDOM(sidebarEl);
+}
+
+function removeElementFromDOM(el) {
+    if(el && el.parentNode && el.parentNode.removeChild) {
+        el.parentNode.removeChild(el);    
+    }
 }
 
