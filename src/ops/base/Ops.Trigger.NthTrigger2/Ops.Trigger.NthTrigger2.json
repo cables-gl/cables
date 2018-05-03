@@ -1,0 +1,43 @@
+{
+    "updated": 1525282616689,
+    "authorName": "tim",
+    "id": "ea43c184-5842-4aa1-b298-5db4515cbed0",
+    "created": 1525282533444,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Execute"
+            },
+            {
+                "type": "0",
+                "name": "Nth",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Trigger.NthTrigger2"
+    },
+    "summary": "Lets a trigger through every nth time (trigger limiter)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Executes the op"
+            },
+            {
+                "name": "Nth",
+                "text": "How often the trigger should be let through"
+            },
+            {
+                "name": "Next",
+                "text": "The limited trigger"
+            }
+        ]
+    }
+}

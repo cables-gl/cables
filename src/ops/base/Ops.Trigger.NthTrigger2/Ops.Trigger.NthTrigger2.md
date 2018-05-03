@@ -1,0 +1,1 @@
+Helpful when you want to slow things down. Makes sure only every nth trigger _gets through_. E.g. when `Nth` is `3` every 3rd trigger gets through, the others not. 
