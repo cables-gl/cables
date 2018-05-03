@@ -209,6 +209,14 @@ function bindTextures()
 };
 
 
+op.onDelete=function()
+{
+    if(CGL.defaultTextureMap)
+    {
+        CGL.defaultTextureMap.delete();
+        CGL.defaultTextureMap=null;
+    }
+};
 
 op.preRender=function()
 {
