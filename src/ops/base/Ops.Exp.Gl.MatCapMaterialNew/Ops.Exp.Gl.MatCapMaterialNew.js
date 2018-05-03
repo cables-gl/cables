@@ -102,7 +102,7 @@ function updateMatcap()
     }
     else
     {
-        if(!CABLES.defaultTextureMap)
+        if(!CGL.defaultTextureMap)
         {
             var pixels=new Uint8Array(256*4);
             for(var x=0;x<16;x++)
@@ -116,10 +116,10 @@ function updateMatcap()
                 }
             }
 
-            CABLES.defaultTextureMap=new CGL.Texture(cgl);
-            CABLES.defaultTextureMap.initFromData(pixels,16,16);
+            CGL.defaultTextureMap=new CGL.Texture(cgl);
+            CGL.defaultTextureMap.initFromData(pixels,16,16);
         }
-        textureMatcap.set(CABLES.defaultTextureMap);
+        textureMatcap.set(CGL.defaultTextureMap);
 
         shader.removeUniform('tex');
         textureMatcapUniform=new CGL.Uniform(shader,'t','tex',0);
@@ -207,6 +207,8 @@ function bindTextures()
     if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
     if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
 };
+
+
 
 op.preRender=function()
 {
