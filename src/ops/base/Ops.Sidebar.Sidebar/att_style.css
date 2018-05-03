@@ -337,6 +337,11 @@
   outline: none;
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: background-color .2s;
+  border: none;
+}
+
+.sidebar__slider-input:focus, .sidebar__slider-input:hover {
+    border: none;
 }
 
 .sidebar__slider-input-active-track {
