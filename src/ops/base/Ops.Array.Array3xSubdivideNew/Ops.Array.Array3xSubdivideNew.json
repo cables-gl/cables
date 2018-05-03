@@ -1,5 +1,5 @@
 {
-    "updated": 1517394642253,
+    "updated": 1525243553299,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d8bb5727-35e4-4e2a-999b-112ebc659720",
@@ -12,15 +12,18 @@
             },
             {
                 "type": "0",
-                "name": "Num Subdivs"
+                "name": "Num Subdivs",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Bezier Start/End Points"
+                "name": "Bezier Start/End Points",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

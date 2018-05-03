@@ -1,5 +1,3 @@
-op.name="DateAndTime";
-
 var UPDATE_RATE_DEFAULT = 500;
 var UPDATE_RATE_MIN = 50;
 var updateRate = UPDATE_RATE_DEFAULT;

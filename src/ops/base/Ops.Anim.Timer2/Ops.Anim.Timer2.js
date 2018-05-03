@@ -3,7 +3,7 @@ const reset=op.inFunctionButton("Reset");
 const outTime=op.outValue("Time");
 const inSpeed=op.inValue("Speed",1);
 
-const timer=new CABLES.Timer();
+let timer=new CABLES.Timer();
 let lastTime=0;
 let time=0;
 
@@ -46,6 +46,7 @@ op.onAnimFrame=function()
         const t=timer.get()-lastTime;
         lastTime=timer.get();
         time+=t*inSpeed.get();
+        if(time!=time)time=0;
         outTime.set(time);
     }
 };

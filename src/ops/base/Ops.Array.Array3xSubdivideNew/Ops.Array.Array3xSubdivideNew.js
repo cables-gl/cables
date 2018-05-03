@@ -25,25 +25,26 @@ function calc()
         result.set(null);
         return;
     }
-    var subd=Math.floor(subDivs.get());
+    const subd=Math.floor(subDivs.get());
     var inPoints=inArr.get();
     
     if(inPoints.length<3)return;
     
-    var i=0;
-    var j=0;
-    var k=0;
+    let i=0;
+    let j=0;
+    let k=0;
+    let count=0;
 
     if(subd>0 && !bezier.get())
     {
-        var newLen=(inPoints.length)*(subd);
+        const newLen=(inPoints.length-3)*subd+3;
         if(newLen!=arr.length)
         {
             op.log("resize subdiv arr");
             arr.length=newLen;
         }
 
-        var count=0;
+        count=0;
         for(i=0;i<inPoints.length-3;i+=3)
         {
             for(j=0;j<subd;j++)
@@ -51,14 +52,14 @@ function calc()
                 for(k=0;k<3;k++)
                 {
                     arr[count]=
-                        inPoints[i+k]+
-                            ( inPoints[i+k+3] - inPoints[i+k] ) *
-                            j/subd
-                            ;
+                        inPoints[i+k]+ ( inPoints[i+k+3] - inPoints[i+k] ) * j/subd ;
                     count++;
                 }
             }
         }
+        arr[newLen-3]=inPoints[inPoints.length-3];
+        arr[newLen-2]=inPoints[inPoints.length-2];
+        arr[newLen-1]=inPoints[inPoints.length-1];
     }
     else
     if(subd>0 && bezier.get() )
@@ -66,8 +67,8 @@ function calc()
         var newLen=(inPoints.length-6)*(subd-1);
         if(bezierEndPoints.get())newLen+=6;
         
-        if(newLen!=arr.length)  arr.length=Math.floor(Math.abs(newLen));
-        var count=0;
+        if(newLen!=arr.length) arr.length=Math.floor(Math.abs(newLen));
+        count=0;
         
         if(bezierEndPoints.get())
         {
