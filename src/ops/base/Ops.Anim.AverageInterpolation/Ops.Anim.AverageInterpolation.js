@@ -28,7 +28,7 @@ inDivisor.onChange=function()
 exec.onTriggered=function()
 {
     var tm=1;
-    if(CABLES.now()-lastTrigger>500)val=inVal.get();
+    if(CABLES.now()-lastTrigger>500 || lastTrigger==0)val=inVal.get();
     else tm=(CABLES.now()-lastTrigger)/16;
 
     lastTrigger=CABLES.now();

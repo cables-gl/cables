@@ -7,39 +7,50 @@
             },
             {
                 "type": "0",
-                "name": "min"
+                "name": "min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "max"
+                "name": "max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "pause between"
+                "name": "pause between",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "random seed"
+                "name": "random seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "duration"
+                "name": "duration",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "easing"
+                "name": "easing",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Math.RandomAnim"
+        "name": "Ops.Anim.RandomAnim"
     },
     "summary": "animating between random numbers",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1525413487148,
+    "authorName": "pandur",
+    "id": "2d2e5f0e-b69f-4789-9a48-1ee6ade5049a",
+    "created": 1525413404905
 }

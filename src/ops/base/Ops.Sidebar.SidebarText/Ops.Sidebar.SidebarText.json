@@ -1,6 +1,26 @@
 {
-    "updated": 1525265922509,
+    "updated": 1525434057455,
     "authorName": "tim",
     "id": "cf4c613e-2a99-4903-9d71-a39a739f440c",
-    "created": 1525265917547
+    "created": 1525265917547,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "0",
+                "name": "Text",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "childs"
+            }
+        ],
+        "name": "Ops.Sidebar.SidebarText"
+    }
 }
