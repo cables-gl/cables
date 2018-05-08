@@ -10,7 +10,7 @@ var commandPort = op.outValue("Command");
 var cgl=op.patch.cgl;
 
 function midiMessageReceived (msgs) {
-  for (i=0; i < msgs.length; i++) {
+  for (var i=0; i < msgs.length; i++) {
     var cmd = msgs[i].data[0] >> 4;
     var channel = msgs[i].data[0] & 0xf;
     var noteNumber = msgs[i].data[1];
