@@ -42,7 +42,7 @@ function onInput(ev) {
 function onDefaultValueChanged() {
     var defaultValue = defaultValuePort.get();
     valuePort.set(defaultValue);
-    input.setAttribute('value', defaultValue);
+    input.value = defaultValue;
 }
 
 function onLabelTextChanged() {

@@ -1,8 +1,8 @@
 {
-    "updated": 1525878387390,
+    "updated": 1525877665259,
     "authorName": "tim",
-    "id": "5eb07499-79c5-4ed9-b8dc-e904ea4d0e6a",
-    "created": 1525809996949,
+    "id": "580500eb-1f95-4e40-95f8-1ca50b044d0e",
+    "created": 1525871498923,
     "layout": {
         "portsIn": [
             {
@@ -27,10 +27,20 @@
             },
             {
                 "type": "0",
-                "name": "Result",
+                "name": "Red",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Green",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blue",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Sidebar.TextInput"
+        "name": "Ops.Sidebar.ColorPicker"
     }
 }

@@ -476,4 +476,64 @@
     background-color: #444444;
     color: #EEEEEE;
 }
+
+/*
+ * COLOR PICKER
+ */
+ 
+ .sidebar__color-picker-color-input {}
+ 
+ .sidebar__color-picker input[type=text] {
+    box-sizing: border-box;
+    background-color: #333333;
+    color: #BBBBBB;
+    display: inline-block;
+    width: 85px;
+    height: 18px;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 0 4px !important;
+    margin: 0;
+    margin-right: 7px;
+} 
+
+.sidebar__color-picker input[type=text]:active, 
+.sidebar__color-picker input[type=text]:focus,
+.sidebar__color-picker input[type=text]:hover {
+    background-color: #444444;
+    color: #EEEEEE;
+}
+
+.sidebar__color-picker input[type=color] {
+    display: inline-block;
+    border-radius: 100%;
+    height: 14px;
+    width: 14px;
+    padding: 0;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    background: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+}
+.sidebar__color-picker input[type=color]:focus{
+    outline: none;
+}
+.sidebar__color-picker input[type=color]::-moz-color-swatch {
+    border: none;
+}
+.sidebar__color-picker input[type=color]::-webkit-color-swatch-wrapper {
+    padding: 0;	
+}
+.sidebar__color-picker input[type=color]::-webkit-color-swatch {
+    border: none;
+    border-radius: 100%;
+}
+
  
