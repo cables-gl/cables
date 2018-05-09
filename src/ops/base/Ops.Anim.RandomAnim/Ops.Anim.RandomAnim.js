@@ -1,4 +1,3 @@
-op.name='random anim';
 
 var exe=op.inFunction("exe");
 var min=op.inValue("min",0);
@@ -19,6 +18,7 @@ reinit();
 min.onChange=reinit;
 max.onChange=reinit;
 pause.onChange=reinit;
+seed.onChange=reinit;
 duration.onChange=reinit;
 
 function getRandom()
@@ -30,6 +30,7 @@ function getRandom()
 
 function reinit()
 {
+    Math.randomSeed=seed.get();
     init(getRandom());
 }
 

@@ -19,5 +19,9 @@
         ],
         "name": "Ops.Trigger.NthTrigger"
     },
-    "summary": "trigger children every x times exe was triggered"
+    "summary": "trigger children every x times exe was triggered",
+    "updated": 1525282085925,
+    "authorName": "pandur",
+    "id": "c16b1d90-4436-4a7d-91b8-4199f491dfa9",
+    "created": 1525282085930
 }

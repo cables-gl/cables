@@ -15,7 +15,7 @@ var duration = op.addOutPort(new Port(op,"Duration",OP_PORT_TYPE_VALUE));
 volume.set(1.0);
 duration.set(0);
 
-var audioContext = CABLES.WebAudio.createAudioContext(op);
+var audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 /* vars */
 var audio = null;

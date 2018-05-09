@@ -62,6 +62,7 @@ function doRender()
 
 function addObject(obj)
 {
+    Math.randomSeed=5711;
     if(obj.meshes)
     {
         var object={};
@@ -83,7 +84,7 @@ function addObject(obj)
         object.mesh=new CGL.Mesh(cgl,geom);
         object.transformation=JSON.parse(JSON.stringify(obj.transformation));
         
-        object.rotation=[Math.random(),Math.random(),Math.random()];
+        object.rotation=[Math.seededRandom(),Math.seededRandom(),Math.seededRandom()];
         
         mat4.transpose(object.transformation,object.transformation);
         // console.log(object.transformation);

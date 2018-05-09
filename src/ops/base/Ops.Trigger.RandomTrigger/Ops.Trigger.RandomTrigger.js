@@ -73,5 +73,5 @@ function updateLinkedArray()
         if(triggers[i].isLinked())
             linked.push(triggers[i]);
     }
-    console.log("CGHANGE");
+    // console.log("CGHANGE");
 }

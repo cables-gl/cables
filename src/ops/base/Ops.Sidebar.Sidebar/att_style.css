@@ -372,8 +372,8 @@
     border-radius: 0 !important;
     cursor: pointer;
 }
-.sidebar__slider-input::-webkit-slider-thumb:hover {
-  /* background-color: #EEEEEE; */
+.sidebar__slider-input:hover ::-webkit-slider-thumb {
+  background-color: #EEEEEE !important;
 }
 
 .sidebar__slider-input::-moz-range-thumb {
@@ -401,7 +401,7 @@
 }
 
 .sidebar__slider-input-wrapper:hover .sidebar__slider-input::-moz-range-thumb {
-  background-color: #EEEEEE;  
+  background-color: #EEEEEE !important;  
 }
 
 .sidebar__slider-input-wrapper:hover .sidebar__slider-input::-webkit-slider-thumb {
