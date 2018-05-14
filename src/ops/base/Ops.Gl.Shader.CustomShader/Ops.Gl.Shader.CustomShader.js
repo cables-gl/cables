@@ -8,9 +8,8 @@ var cgl=op.patch.cgl;
 var uniformInputs=[];
 var uniformTextures=[];
 
-
 var shader=new CGL.Shader(cgl,"shaderMaterial");
-shader.glslVersion=0;
+// shader.glslVersion=0;
 
 
 fragmentShader.set(shader.getDefaultFragmentShader());
@@ -31,19 +30,18 @@ function updateLater()
 function doRender()
 {
     if(needsUpdate)updateShader();
-    cgl.setShader(shader);
-
-    bindTextures();
     trigger.trigger();
-    cgl.setPreviousShader();
 }
 
 function bindTextures()
 {
     for(var i=0;i<uniformTextures.length;i++)
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0+i+3);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
+        if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
+        {
+            cgl.gl.activeTexture(cgl.gl.TEXTURE0+i+3);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
+        }
     }
 }
 
@@ -57,11 +55,12 @@ function hasUniformInput(name)
 
 function updateShader()
 {
+    if(!shader)return;
     needsUpdate=false;
     op.log('shader update!');
 
     // shader.glslVersion=0;
-    shader.bindTextures=bindTextures;
+    shader.bindTextures=bindTextures.bind(this);
 
     shader.setSource(vertexShader.get(),fragmentShader.get());
     shader.compile();
@@ -81,7 +80,6 @@ function updateShader()
                 var newInput=op.inValue(uniform.name,newInput,0);
                 newInput.onChange=function(p)
                 {
-                    // console.log('change',p.get());
                     p.uniform.needsUpdate=true;
                     p.uniform.setValue(p.get());
                 };
@@ -110,7 +108,7 @@ function updateShader()
     }
 
     if(CABLES.UI) gui.patch().showOpParams(op);
-    console.log(2);
+
     outShader.set(null);
     outShader.set(shader);
 

@@ -1,5 +1,8 @@
 {
-    "summary": "write your own shader in glsl",
+    "updated": 1526301366279,
+    "authorName": "pandur",
+    "id": "86565630-2092-4d16-b177-ffb1d4040f4e",
+    "created": 1526300707715,
     "layout": {
         "portsIn": [
             {
@@ -15,6 +18,10 @@
                 "type": "0",
                 "name": "vertex",
                 "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "tex"
             }
         ],
         "portsOut": [
@@ -27,11 +34,6 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Gl.Shader.ShaderMaterial"
-    },
-    "updated": 1526298945182,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "f9aacdd4-06da-4bae-bea5-52dd5e7638dd",
-    "created": 1505309845176
+        "name": "Ops.Gl.Shader.CustomShader"
+    }
 }
