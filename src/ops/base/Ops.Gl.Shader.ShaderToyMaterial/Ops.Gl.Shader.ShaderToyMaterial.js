@@ -1,5 +1,3 @@
-op.name="ShaderToyAPI";
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
 var shaderId=op.addInPort(new Port(op,"ShaderToy ID",OP_PORT_TYPE_VALUE,{type:"string"}));
 
@@ -14,6 +12,7 @@ shaderId.set('lsGSDG');
 shaderOut.ignoreValueSerialize=true;
 shaderId.onValueChanged=setId;
 var uniTime=null;
+var uniTime2=null;
 var startTime=Date.now();
 setId();
 
@@ -22,6 +21,7 @@ render.onTriggered=function()
     if(shader && uniTime)
     {
         uniTime.setValue( (Date.now()-startTime)/1000);
+        uniTime2.setValue( (Date.now()-startTime)/1000);
         cgl.setShader(shader);
         trigger.trigger();
         cgl.setPreviousShader();
@@ -48,6 +48,7 @@ function setId()
                 .endl()+'IN vec2 texCoord;'
 
                 .endl()+'uniform float iGlobalTime;'
+                .endl()+'uniform float iTime;'
                 .endl()+'vec2 iResolution=vec2(1.0,1.0);'
                 .endl();
                 code+=data.Shader.renderpass[0].code;
@@ -62,6 +63,7 @@ function setId()
 
                 shader=new CGL.Shader(cgl,'ShaderToyMaterial');
                 uniTime=new CGL.Uniform(shader,'f','iGlobalTime',0);
+                uniTime2=new CGL.Uniform(shader,'f','iTime',0);
                 shader.setSource(shader.getDefaultVertexShader(),code);
                 shader.compile();
                 shaderOut.set(shader);

@@ -1,0 +1,44 @@
+{
+    "updated": 1525857736891,
+    "authorName": "tim",
+    "id": "9e670541-deda-4eff-89bf-b6c56a917256",
+    "created": 1525784461678,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Show Overlay",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Resume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Current State",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.WebAudio.WebAudioContextRunner"
+    },
+    "summary": "Resumes the Web Audio context (unmute on Chrome / iOS)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Show Overlay",
+                "text": "Shows a button to unblock the audio context when set to `true` (only when it is blocked)"
+            },
+            {
+                "name": "Resume",
+                "text": "If `Show Overlay` is set to `true` you don’t need to connect this. It is only needed when set to `false` and needs to be manually triggered after a user interaction."
+            },
+            {
+                "name": "Current State",
+                "text": "The current Web Audio state, updated whenever it changes (via event listener), either `running` or `suspended`"
+            }
+        ]
+    }
+}

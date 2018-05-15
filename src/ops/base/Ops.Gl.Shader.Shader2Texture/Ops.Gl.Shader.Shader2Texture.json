@@ -1,5 +1,5 @@
 {
-    "updated": 1526301003380,
+    "updated": 1526374398677,
     "authorName": "pandur",
     "id": "a3debb76-7d84-4548-9e7b-24891423dcce",
     "created": 1526299020358,
@@ -36,5 +36,9 @@
             }
         ],
         "name": "Ops.Gl.Shader.Shader2Texture"
+    },
+    "summary": "render a shader into a texture",
+    "docs": {
+        "ports": []
     }
 }

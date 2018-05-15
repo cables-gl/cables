@@ -35,5 +35,9 @@
             }
         ],
         "name": "Ops.Gl.Shader.CustomShader"
+    },
+    "summary": "write your own shader",
+    "docs": {
+        "ports": []
     }
 }

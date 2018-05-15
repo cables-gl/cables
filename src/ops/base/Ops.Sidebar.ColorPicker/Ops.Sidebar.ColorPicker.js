@@ -38,6 +38,8 @@ colorInput.addEventListener("change", onColorPickerChange, false);
 el.appendChild(colorInput);
 input.addEventListener('input', onInput);
 
+onDefaultValueChanged(); /* initialize once */
+
 // events
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
@@ -57,14 +59,12 @@ function hexToRgbNorm(hexColor) {
 }
 
 function onColorPickerChange(event) {
-    op.log('color changed to: ', event.target.value);
     setColorOutPorts(event.target.value)
     input.value = event.target.value;
 }
 
 function onInput(ev) {
     var newValue = ev.target.value;
-    op.log('newValue: ', newValue, 'newValue.length: ', newValue.length);
     if(newValue.length === 6 && newValue.charAt(0) !== '#') {
         newValue = '#' + newValue;
     }
@@ -84,7 +84,6 @@ function setColorOutPorts(hex) {
 
 function onDefaultValueChanged() {
     var defaultValue = defaultValuePort.get();
-    // valuePort.set(defaultValue);
     input.setAttribute('value', defaultValue);
     if(defaultValue) {
         if(defaultValue.length === 6 && defaultValue.charAt(0) !== '#') {

@@ -1,5 +1,5 @@
 {
-    "updated": 1525877665259,
+    "updated": 1525886789492,
     "authorName": "tim",
     "id": "580500eb-1f95-4e40-95f8-1ca50b044d0e",
     "created": 1525871498923,
@@ -42,5 +42,38 @@
             }
         ],
         "name": "Ops.Sidebar.ColorPicker"
+    },
+    "summary": "Shows a color-picker in the sidebar",
+    "docs": {
+        "ports": [
+            {
+                "name": "Link",
+                "text": "Either a link to the sidebar or sidebar group"
+            },
+            {
+                "name": "Text",
+                "text": "The label text"
+            },
+            {
+                "name": "Default",
+                "text": "The default color (as 6 or 7 digit hex color), e.g. \"#ff0000\""
+            },
+            {
+                "name": "Children",
+                "text": "Here you can connect other sidebar ops"
+            },
+            {
+                "name": "Red",
+                "text": "The red amount from the color picker, in range `[0..1]`"
+            },
+            {
+                "name": "Green",
+                "text": "The green amount from the color picker, in range `[0..1]`"
+            },
+            {
+                "name": "Blue",
+                "text": "The blue amount from the color picker, in range `[0..1]`"
+            }
+        ]
     }
 }
