@@ -32,6 +32,11 @@ inTexture.onChange=function()
         shader.setSource(attachments.shader_vert,attachments.shader_frag);
         shader.fullscreenRectUniform=new CGL.Uniform(shader,'t','tex',0);
     }
+    
+    if(!tex)
+    {
+        shader=null;
+    }
 };
 
 op.preRender=function()
@@ -91,7 +96,7 @@ function doRender()
     cgl.popViewMatrix();
 
     trigger.trigger();
-};
+}
 
 
 function rebuild()
