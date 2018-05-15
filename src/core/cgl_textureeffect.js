@@ -138,7 +138,6 @@ CGL.TextureEffect.prototype.bind=function()
     {
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
         this._cgl.pushFrameBuffer(this._frameBuf);
-
     }
     else
 	{
@@ -184,29 +183,6 @@ CGL.TextureEffect.prototype.delete=function()
 
 CGL.TextureEffect.prototype.createMesh=function()
 {
-    // var geom=new CGL.Geometry("textureEffect rect");
-
-    // geom.vertices = [
-    //      1.0,  1.0,  0.0,
-    //     -1.0,  1.0,  0.0,
-    //      1.0, -1.0,  0.0,
-    //     -1.0, -1.0,  0.0
-    // ];
-
-    // geom.texCoords = [
-    //      1.0, 1.0,
-    //      0.0, 1.0,
-    //      1.0, 0.0,
-    //      0.0, 0.0
-    // ];
-
-    // geom.verticesIndices = [
-    //     0, 1, 2,
-    //     2, 1, 3
-    // ];
-
-    // this._cgl.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
-
     this._cgl.TextureEffectMesh=CGL.MESHES.getSimpleRect(this._cgl,"textureEffect rect");
 };
 
