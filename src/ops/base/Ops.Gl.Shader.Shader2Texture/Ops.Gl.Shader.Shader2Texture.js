@@ -12,34 +12,39 @@ var cgl=op.patch.cgl;
 
 var effect=null;
 
-initEffect();
 
-inWidth.onChange=initEffect;
-inHeight.onChange=initEffect;
-inFloatingPoint.onChange=initEffect;
+inWidth.onChange=initFb;
+inHeight.onChange=initFb;
+inFloatingPoint.onChange=initFb;
 
 var tex=null;
+var fb=null;
+var mesh=CGL.MESHES.getSimpleRect(cgl,"shader2texture rect");
 
-function initEffect()
+initFb();
+
+
+function initFb()
 {
-    if(effect)effect.delete();
-    if(tex)tex.delete();
+    if(fb)fb.delete();
+    fb=null;
 
-    effect=new CGL.TextureEffect(cgl,{"isFloatingPointTexture":inFloatingPoint.get()});
-
-    tex=new CGL.Texture(cgl,
+    if(cgl.glVersion>=2) 
+    {
+        fb=new CGL.Framebuffer2(cgl,inWidth.get(),inHeight.get(),
         {
-            "isFloatingPointTexture":false,
-            "filter":CGL.Texture.FILTER_LINEAR,
-            "wrap":CGL.Texture.WRAP_CLAMP_TO_EDGE,
-            "width": inWidth.get(),
-            "height": inHeight.get(),
+            isFloatingPointTexture:inFloatingPoint.get(),
+            multisampling:false,
+            depth:true,
+            multisamplingSamples:0,
+            clear:true
         });
-
-    effect.setSourceTexture(tex);
-    outTex.set(null);
+    }
+    else
+    {
+        fb=new CGL.Framebuffer(cgl,inWidth.get(),inHeight.get(),{isFloatingPointTexture:inFloatingPoint.get()});
+    }
 }
-
 
 exec.onTriggered=function()
 {
@@ -49,40 +54,34 @@ exec.onTriggered=function()
     prevViewPort[2]=vp[2];
     prevViewPort[3]=vp[3];
 
-    cgl.pushBlend(true);
+    if(!fb)initFb();
 
+    fb.renderStart(cgl);
 
+    cgl.pushPMatrix();
+    mat4.identity(cgl.pMatrix);
 
-// 			cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
-// 			cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
+    cgl.pushViewMatrix();
+    mat4.identity(cgl.vMatrix);
 
-    // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
-    // cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
-    cgl.currentTextureEffect=effect;
-    
-    effect.startEffect();
-
-    // cgl.gl.clearColor(0,0,0,0);
-    // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
-
-    if(inShader.get().bindTextures) inShader.get().bindTextures();
+    cgl.pushModelMatrix();
+    mat4.identity(cgl.mvMatrix);
 
     cgl.setShader(inShader.get());
-    cgl.currentTextureEffect.bind();
+    if(inShader.get().bindTextures) inShader.get().bindTextures();
 
-    cgl.currentTextureEffect.finish();
+    mesh.render(inShader.get());
+
+    cgl.popPMatrix();
+    cgl.popModelMatrix();
+    cgl.popViewMatrix();
+    fb.renderEnd(cgl);
+
+    outTex.set(fb.getTextureColor());
+
     cgl.setPreviousShader();
     
-    outTex.set(effect.getCurrentSourceTexture());
-    
-    effect.endEffect();
-    
-    cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
-    
-  
-    // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
-  cgl.popBlend();
-    
-    cgl.currentTextureEffect=null;
+    cgl.gl.viewport(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3] );
+
+
 };

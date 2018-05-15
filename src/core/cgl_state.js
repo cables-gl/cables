@@ -577,7 +577,7 @@ CGL.Context.prototype.pushBlend=function(b)
 
 /**
  * current state of blend 
- * @returns {boolean} depth testing enabled/disabled
+ * @returns {boolean} blending enabled/disabled
  * @function
  */
 CGL.Context.prototype.stateBlend=function()
@@ -597,3 +597,80 @@ CGL.Context.prototype.popBlend=function()
     if(!this._stackBlend[this._stackBlend.length-1])  this.gl.disable(this.gl.BLEND);
         else this.gl.enable(this.gl.BLEND);
 };
+
+
+CGL.BLEND_NONE=0;
+CGL.BLEND_NORMAL=1;
+CGL.BLEND_ADD=2;
+CGL.BLEND_SUB=3;
+CGL.BLEND_MUL=4;
+
+
+
+CGL.Context.prototype.setBlendMode=function(blendMode,premul)
+{
+    const gl=this.gl;
+
+    this.popBlend(blendMode!==CGL.BLEND_NONE);
+
+    if(blendMode==CGL.BLEND_ADD)
+    {
+        if(premul)
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.ONE, gl.ONE, gl.ONE, gl.ONE );
+        }
+        else
+        {
+			gl.blendEquation( gl.FUNC_ADD );
+			gl.blendFunc( gl.SRC_ALPHA, gl.ONE );
+        }
+    }
+    else if(blendMode==CGL.BLEND_SUB)
+    {
+        if(premul)
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.ZERO, gl.ZERO, gl.ONE_MINUS_SRC_COLOR, gl.ONE_MINUS_SRC_ALPHA );
+        }
+        else
+        {
+			gl.blendEquation( gl.FUNC_ADD );
+			gl.blendFunc( gl.ZERO, gl.ONE_MINUS_SRC_COLOR );
+        }
+    }
+    else if(blendMode==CGL.BLEND_MUL)
+    {
+        if(premul)
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.ZERO, gl.SRC_COLOR, gl.ZERO, gl.SRC_ALPHA );
+        }
+        else
+        {
+			gl.blendEquation( gl.FUNC_ADD );
+			gl.blendFunc( gl.ZERO, gl.SRC_COLOR );
+        }
+    }
+    else if(blendMode==CGL.BLEND_NORMAL)
+    {
+        if(premul)
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.ONE, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
+        }
+        else
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
+        }
+    }
+    else
+    {
+        console.log("setblendmode: unknown blendmode");
+    }
+
+    this.pushBlend(blendMode!==CGL.BLEND_NONE);
+
+};
+

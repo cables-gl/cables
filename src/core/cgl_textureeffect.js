@@ -95,8 +95,6 @@ CGL.TextureEffect.prototype.startEffect=function()
     // this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
     this._cgl.pushDepthTest(false);
 
-    // this._cgl.gl.clearColor(0,0,0,0);
-    // this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
 
     this._cgl.pushModelMatrix();
 
@@ -186,28 +184,30 @@ CGL.TextureEffect.prototype.delete=function()
 
 CGL.TextureEffect.prototype.createMesh=function()
 {
-    var geom=new CGL.Geometry("textureEffect rect");
+    // var geom=new CGL.Geometry("textureEffect rect");
 
-    geom.vertices = [
-         1.0,  1.0,  0.0,
-        -1.0,  1.0,  0.0,
-         1.0, -1.0,  0.0,
-        -1.0, -1.0,  0.0
-    ];
+    // geom.vertices = [
+    //      1.0,  1.0,  0.0,
+    //     -1.0,  1.0,  0.0,
+    //      1.0, -1.0,  0.0,
+    //     -1.0, -1.0,  0.0
+    // ];
 
-    geom.texCoords = [
-         1.0, 1.0,
-         0.0, 1.0,
-         1.0, 0.0,
-         0.0, 0.0
-    ];
+    // geom.texCoords = [
+    //      1.0, 1.0,
+    //      0.0, 1.0,
+    //      1.0, 0.0,
+    //      0.0, 0.0
+    // ];
 
-    geom.verticesIndices = [
-        0, 1, 2,
-        2, 1, 3
-    ];
+    // geom.verticesIndices = [
+    //     0, 1, 2,
+    //     2, 1, 3
+    // ];
 
-    this._cgl.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
+    // this._cgl.TextureEffectMesh=new CGL.Mesh(this._cgl,geom);
+
+    this._cgl.TextureEffectMesh=CGL.MESHES.getSimpleRect(this._cgl,"textureEffect rect");
 };
 
 
