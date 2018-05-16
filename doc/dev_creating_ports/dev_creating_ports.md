@@ -159,6 +159,17 @@ text.onValueChange( function() {
 
 If you click the edit button, text can be edited in the editor. Used for all kinds of multiline-input.
 
+It is also possible to define the syntax highlighting for the editor-tab:
+
+```javascript
+var styleSheetPort = op.addInPort(
+    new Port(op, "Stylesheet", OP_PORT_TYPE_VALUE, {
+        display: 'editor',
+        editorSyntax: 'css'
+    })
+);
+```
+
 ##### Display: Dropdown
 
 For a fixed amount of values to choose from.
