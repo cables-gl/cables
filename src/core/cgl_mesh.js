@@ -409,8 +409,8 @@ CGL.Mesh.prototype.unBind=function(shader)
             if(this._attributes[i].itemSize<=4)
             {
                 // why does this result in warninges???
-                 this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
-                // this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
+                //  this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
+                if(this._attributes[i].loc>=0)this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
             }
             else
             {

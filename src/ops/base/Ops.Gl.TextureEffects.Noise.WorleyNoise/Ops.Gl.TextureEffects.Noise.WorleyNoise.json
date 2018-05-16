@@ -1,0 +1,74 @@
+{
+    "updated": 1526402759093,
+    "authorName": "pandur",
+    "id": "cc0e941c-6f03-4c40-8cc2-8cecaac2e059",
+    "created": 1526401949949,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "RangeA",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RangeA",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "credits": [
+            {
+                "title": "Worley Noise",
+                "author": "Stefan Gustavson",
+                "url": "https://thebookofshaders.com/edit.php#12/2d-cnoise-2x2x2.frag",
+                "license": "MIT"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Noise.WorleyNoise"
+    }
+}

@@ -104,7 +104,6 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     if(depth) this._texture.setSize(this._width,this._height);
     if(depth) this._textureDepth.setSize(this._width,this._height);
 
-
     this._colorRenderbuffer = this._cgl.gl.createRenderbuffer();
     if(depth) this._depthRenderbuffer = this._cgl.gl.createRenderbuffer();
 
@@ -112,10 +111,7 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     var ext = this._cgl.gl.getExtension('EXT_color_buffer_float');
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
-
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._colorRenderbuffer);
-
-
 
     if(this._options.isFloatingPointTexture)
     {
