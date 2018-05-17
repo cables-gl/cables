@@ -88,8 +88,12 @@ To bring some ordern into your patch you can **align ops** by making a selection
 
 To **unlink an op** hold it with the `left mouse button` and shake it.  
 
-
-
 <iframe src="//giphy.com/embed/RGNPLCLnDU3uw" width="480" height="408" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+You can also unlink ops by pressing `x`
+
+![](video/x_unlink.mp4)
+
+
 
 <br />

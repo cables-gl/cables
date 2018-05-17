@@ -61,14 +61,18 @@
                 "name": "trigger"
             }
         ],
-        "credits": [
-            {
-                "title": "Worley Noise",
-                "author": "Stefan Gustavson",
-                "url": "https://thebookofshaders.com/edit.php#12/2d-cnoise-2x2x2.frag",
-                "license": "MIT"
-            }
-        ],
         "name": "Ops.Gl.TextureEffects.Noise.WorleyNoise"
+    },
+    "credits": [
+        {
+            "title": "Worley Noise",
+            "author": "Stefan Gustavson",
+            "url": "https://thebookofshaders.com/edit.php#12/2d-cnoise-2x2x2.frag",
+            "license": "MIT"
+        }
+    ],
+    "summary": "Worley noise",
+    "docs": {
+        "ports": []
     }
 }
