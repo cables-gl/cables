@@ -74,7 +74,6 @@ function updateActiveTrack(val) {
     }
     // const availableWidth = input.offsetWidth; /* this returns 0 at the beginning, so cannot be used... */
     const availableWidth = 206;
-    // op.log('availableWidth: ', availableWidth);
     var trackWidth = CABLES.map(
         valueToUse,
         parseFloat(input.min), 
@@ -84,7 +83,6 @@ function updateActiveTrack(val) {
     );
     // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
     activeTrack.style.width = trackWidth + 'px';
-    op.log('trackWidth: ', trackWidth);
 }
 
 function onMinPortChange() {
