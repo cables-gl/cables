@@ -94,24 +94,24 @@ To **unlink an op** hold it with the `left mouse button` and shake it.
 
 You can also unlink ops by pressing `x`
 
-<video src="video/x_unlink.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/x_unlink.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 
 
 Drag cable on an op to see suggestions of fitting ports. if there is only one the link will be connected automatically.
 
-<video src="video/autolink_suggestions.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/autolink_suggestions.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 Link ops by connecting them inbetween
 
-<video src="video/snapinbetween.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/snapinbetween.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 Copy a link by pressing `alt` and `right-mouse button` and drag the cable to another port
 
-<video src="video/copylink.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/copylink.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 
@@ -119,33 +119,33 @@ Copy a link by pressing `alt` and `right-mouse button` and drag the cable to ano
 
 See data and function flow by pressing `f`
 
-<video src="video/flowvis.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/flowvis.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 
 
 Disable ops and its children by pressing `d`
 
-<video src="video/d_disable.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/d_disable.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 
 Temporarily disconnect a selected op completly by pressing `shift+d`, pressing `shift+d` again reconnects cable again
 
-<video src="video/shift_d_temp_disable.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/shift_d_temp_disable.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 
 Upload files by dragging them into the window
 
-<video src="video/file_upload.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/file_upload.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 
 
 access the command palette by pressing `CMD+P` or `CTRL+P`. 
 
-<video src="video/commandpalette.mp4" muted="true" autoplay="true" loop="true" />
+<video src="video/commandpalette.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 
