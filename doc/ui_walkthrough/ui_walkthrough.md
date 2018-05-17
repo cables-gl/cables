@@ -92,7 +92,7 @@ To **unlink an op** hold it with the `left mouse button` and shake it.
 
 You can also unlink ops by pressing `x`
 
-<video src="video/x_unlink.mp4" muted="true" autoplay />
+<video src="video/x_unlink.mp4" muted="true" autoplay="true" loop="true" />
 
 
 
