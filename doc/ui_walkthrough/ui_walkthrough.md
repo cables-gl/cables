@@ -91,6 +91,7 @@ To **unlink an op** hold it with the `left mouse button` and shake it.
 <iframe src="//giphy.com/embed/RGNPLCLnDU3uw" width="480" height="408" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 
+<br />
 
 You can also unlink ops by pressing `x`
 
@@ -98,15 +99,22 @@ You can also unlink ops by pressing `x`
 
 
 
+<br />
+
 
 Drag cable on an op to see suggestions of fitting ports. if there is only one the link will be connected automatically.
 
+
 <video src="video/autolink_suggestions.mp4" muted="true" autoplay="true" loop="true" ></video>
+
+<br />
 
 
 Link ops by connecting them inbetween
 
+
 <video src="video/snapinbetween.mp4" muted="true" autoplay="true" loop="true" ></video>
+<br />
 
 
 Copy a link by pressing `alt` and `right-mouse button` and drag the cable to another port
@@ -115,6 +123,7 @@ Copy a link by pressing `alt` and `right-mouse button` and drag the cable to ano
 
 
 
+<br />
 
 
 See data and function flow by pressing `f`
@@ -123,27 +132,39 @@ See data and function flow by pressing `f`
 
 
 
+<br />
+
 
 Disable ops and its children by pressing `d`
+
 
 <video src="video/d_disable.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
+<br />
+
 
 Temporarily disconnect a selected op completly by pressing `shift+d`, pressing `shift+d` again reconnects cable again
+
 
 <video src="video/shift_d_temp_disable.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
+<br />
+
 
 Upload files by dragging them into the window
+
 
 <video src="video/file_upload.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 
+<br />
+
 
 access the command palette by pressing `CMD+P` or `CTRL+P`. 
+
 
 <video src="video/commandpalette.mp4" muted="true" autoplay="true" loop="true" ></video>
 
