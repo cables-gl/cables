@@ -1,5 +1,3 @@
-op.name="GridTransform";
-
 var render=op.inFunction("Render");
 
 var numX=op.inValueInt("Num X",5);
@@ -7,8 +5,6 @@ var numY=op.inValueInt("Num Y",5);
 
 var spaceX=op.inValue("Space X",1);
 var spaceY=op.inValue("Space Y",1);
-
-
 
 var next=op.outFunction("Next");
 var outIndex=op.outValue("Index");

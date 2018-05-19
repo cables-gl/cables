@@ -10,7 +10,7 @@ var scale=op.inValue("Scale",22);
 var inv=op.inValueBool("Invert",true);
 
 var rangeA=op.inValueSlider("RangeA",0.4);
-var rangeB=op.inValueSlider("RangeA",0.5);
+var rangeB=op.inValueSlider("RangeB",0.5);
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 

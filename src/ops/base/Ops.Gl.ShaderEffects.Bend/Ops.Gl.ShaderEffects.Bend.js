@@ -38,9 +38,13 @@ scale.onValueChange(invalidateMatrices);
 offset.onValueChange(invalidateMatrices);
 
 amount.onValueChange(function() { amountRadians = amount.get()*CGL.DEG2RAD; });
-limited.onValueChange(function() {
-    uniRange.setValue(limited.get() ? [0, 1] : [-Infinity, Infinity]);
-});
+
+function updateRange()
+{
+    if(uniRange)uniRange.setValue(limited.get() ? [0, 1] : [-Infinity, Infinity]);
+}
+
+limited.onChange=updateRange;
 
 mat4.identity(transMatrix);
 mat4.identity(invTransMatrix);
@@ -95,6 +99,7 @@ render.onTriggered=function()
         uniRange=new CGL.Uniform(shader,'2f',mod.prefix+'range', [0, 1]);
         uniTransMatrix=new CGL.Uniform(shader,'m4',mod.prefix+'transMatrix',transMatrix);
         uniInvTransMatrix=new CGL.Uniform(shader,'m4',mod.prefix+'invTransMatrix',invTransMatrix);
+        updateRange();
     }
 
     updateMatrices();

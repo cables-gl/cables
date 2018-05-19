@@ -1,5 +1,5 @@
 {
-    "updated": 1526402759093,
+    "updated": 1526552676864,
     "authorName": "pandur",
     "id": "cc0e941c-6f03-4c40-8cc2-8cecaac2e059",
     "created": 1526401949949,
@@ -51,7 +51,7 @@
             },
             {
                 "type": "0",
-                "name": "RangeA",
+                "name": "RangeB",
                 "subType": "number"
             }
         ],
