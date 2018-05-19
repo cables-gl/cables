@@ -1,5 +1,5 @@
 const render=op.inFunction("render");
-const segments=op.inValue('segments',40);
+const segments=op.inValueInt('segments',40);
 const radius=op.inValue('radius',0.5);
 const innerRadius=op.inValueSlider('innerRadius',0);
 const percent=op.inValueSlider('percent');
@@ -86,20 +86,19 @@ function calc()
                 posxTexCoord=1.0-(i-1)/segs;
                 
                 tc.push(posxTexCoord,posyTexCoord);
-
             }
             verts.push(posx);
             verts.push(posy);
             verts.push(0);
             
-            posxTexCoord=1.0-i/segs;
-            tc.push(posxTexCoord,posyTexCoord);
+            // posxTexCoord=1.0-i/segs;
+            // tc.push(posxTexCoord,posyTexCoord);
 
             lastX=posx;
             lastY=posy;
         }
         geom.setPointVertices(verts);
-        geom.texCoords=tc;
+        // geom.texCoords=tc;
     }
     else
     if(innerRadius.get()<=0)
@@ -197,15 +196,15 @@ function calc()
                           [oldPosXIn,oldPosYIn,0]
                           );
 
-                texCoords.push(
-                    posxTexCoord,0,
-                    oldPosXTexCoord,0,
-                    posxTexCoordIn,1);
+                // texCoords.push(
+                //     posxTexCoord,0,
+                //     oldPosXTexCoord,0,
+                //     posxTexCoordIn,1);
 
-                texCoords.push(
-                    posxTexCoord,1,
-                    oldPosXTexCoord,0,
-                    oldPosXTexCoordIn,1);
+                // texCoords.push(
+                //     posxTexCoord,1,
+                //     oldPosXTexCoord,0,
+                //     oldPosXTexCoordIn,1);
 
                 vertexNormals.push(0,0,1,0,0,1,0,0,1);
                 vertexNormals.push(0,0,1,0,0,1,0,0,1);
@@ -225,7 +224,8 @@ function calc()
         }
         geom=CGL.Geometry.buildFromFaces(faces);
         geom.vertexNormals=vertexNormals;
-        geom.texCoords=texCoords;
+        // geom.texCoords=texCoords;
+        geom.mapTexCoords2d();
     }
 
     geomOut.set(null);

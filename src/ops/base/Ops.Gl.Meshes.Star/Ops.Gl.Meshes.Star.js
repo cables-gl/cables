@@ -43,7 +43,7 @@ function calc()
     geom.clear();
 
     var faces=[];
-    var texCoords=[];
+    // var texCoords=[];
     var vertexNormals=[];
 
     var i=0,degInRad=0;
@@ -112,20 +112,20 @@ function calc()
         }
 
 
-        if(mapping.get()=='flat')
-        {
-            posxTexCoord=(Math.cos(degInRad)+1.0)/2;
-            posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
-            posxTexCoordIn=0.5;
-            posyTexCoordIn=0.5;
-        }
-        else if(mapping.get()=='round')
-        {
-            posxTexCoord=1.0-i/segs;
-            posyTexCoord=0;
-            posxTexCoordIn=posxTexCoord;
-            posyTexCoordIn=1;
-        }
+        // if(mapping.get()=='flat')
+        // {
+        //     posxTexCoord=(Math.cos(degInRad)+1.0)/2;
+        //     posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
+        //     posxTexCoordIn=0.5;
+        //     posyTexCoordIn=0.5;
+        // }
+        // else if(mapping.get()=='round')
+        // {
+        //     posxTexCoord=1.0-i/segs;
+        //     posyTexCoord=0;
+        //     posxTexCoordIn=posxTexCoord;
+        //     posyTexCoordIn=1;
+        // }
 
         if(fill.get())
             faces.push(
@@ -144,8 +144,8 @@ function calc()
                     );
         }
 
-        oldPosXTexCoord=posxTexCoord;
-        oldPosYTexCoord=posyTexCoord;
+        // oldPosXTexCoord=posxTexCoord;
+        // oldPosYTexCoord=posyTexCoord;
         
         oldPosX=posx;
         oldPosY=posy;
@@ -153,7 +153,8 @@ function calc()
   
     geom=CGL.Geometry.buildFromFaces(faces);
     geom.vertexNormals=vertexNormals;
-    geom.texCoords=texCoords;
+    // geom.texCoords=texCoords;
+    geom.mapTexCoords2d();
 
     geomOut.set(null);
     geomOut.set(geom);
@@ -163,9 +164,9 @@ function calc()
     mesh.setGeom(geom);
 }
 
-var mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
-mapping.set('flat');
-mapping.onValueChange(calc);
+// var mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
+// mapping.set('flat');
+// mapping.onValueChange(calc);
 
 segments.onChange=calc;
 radius.onChange=calc;

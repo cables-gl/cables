@@ -7,31 +7,38 @@
             },
             {
                 "type": "0",
-                "name": "use viewport size"
+                "name": "use viewport size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "filter",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "wrap"
+                "name": "wrap",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Background Alpha"
+                "name": "Background Alpha",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "HDR"
+                "name": "HDR",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -45,7 +52,8 @@
             },
             {
                 "type": "0",
-                "name": "Aspect Ratio"
+                "name": "Aspect Ratio",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.TextureEffects.ImageCompose"

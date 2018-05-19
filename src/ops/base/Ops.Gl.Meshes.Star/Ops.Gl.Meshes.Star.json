@@ -1,5 +1,5 @@
 {
-    "updated": 1524497737118,
+    "updated": 1526724716862,
     "authorName": "pandur",
     "id": "25feb18a-8df6-473f-b548-59c514c6f949",
     "created": 1517139637740,
@@ -11,31 +11,38 @@
             },
             {
                 "type": "0",
-                "name": "segments"
+                "name": "segments",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "radius"
+                "name": "radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Shape"
+                "name": "Shape",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Length"
+                "name": "Length",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "percent"
+                "name": "percent",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fill"
+                "name": "Fill",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "mapping"
+                "name": "mapping",
+                "subType": "string"
             }
         ],
         "portsOut": [

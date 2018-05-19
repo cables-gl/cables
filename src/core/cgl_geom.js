@@ -477,14 +477,14 @@ CGL.Geometry.prototype.mapTexCoords2d=function()
     var bounds=this.getBounds();
     var num=this.vertices.length/3;
 
-    this.texCoords.length=num*2;
+    this.texCoords=new Float32Array(length=num*2);
 
     for(var i=0;i<num;i++)
     {
         var vertX=this.vertices[i*3+0];
         var vertY=this.vertices[i*3+1];
-        this.texCoords[i*2+0]=vertX/(bounds.maxX-bounds.minX)/2+0.5;
-        this.texCoords[i*2+1]=1.0-vertY/(bounds.maxY-bounds.minY)/2+0.5;
+        this.texCoords[i*2+0]=vertX/(bounds.maxX-bounds.minX)+0.5;
+        this.texCoords[i*2+1]=1.0-vertY/(bounds.maxY-bounds.minY)+0.5;
     }
 };
 
