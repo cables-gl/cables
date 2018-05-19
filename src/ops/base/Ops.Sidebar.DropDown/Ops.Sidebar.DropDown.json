@@ -1,0 +1,69 @@
+{
+    "updated": 1525878675933,
+    "authorName": "tim",
+    "id": "c4b8e4ff-e1a1-4e40-b0b4-4de06d25b89d",
+    "created": 1525849292203,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Link"
+            },
+            {
+                "type": "0",
+                "name": "Text",
+                "subType": "string"
+            },
+            {
+                "type": "3",
+                "name": "Values"
+            },
+            {
+                "type": "0",
+                "name": "Default",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Children"
+            },
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Sidebar.DropDown"
+    },
+    "summary": "Shows a drop-down (select) element in the sidebar",
+    "docs": {
+        "ports": [
+            {
+                "name": "Link",
+                "text": "Link to the container (Sidebar or Sidebar Group)"
+            },
+            {
+                "name": "Text",
+                "text": "Label text"
+            },
+            {
+                "name": "Values",
+                "text": "Array of options, use Ops.Array.ParseArray to enter manually"
+            },
+            {
+                "name": "Default",
+                "text": "The default value"
+            },
+            {
+                "name": "Children",
+                "text": "Connect other sidebar ops here"
+            },
+            {
+                "name": "Result",
+                "text": "The currently selected value or the default value"
+            }
+        ]
+    }
+}

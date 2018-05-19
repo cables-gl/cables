@@ -28,7 +28,6 @@ CGL.Context = function() {
     this._mMatrixStack=new CGL.MatrixStack();
     this._vMatrixStack=new CGL.MatrixStack();
 
-
     Object.defineProperty(this, 'mvMatrix', { get: function() { return this.mMatrix; }, set: function(m) { this.mMatrix=m; } }); // todo: deprecated
 
     this.canvas = null;
@@ -182,6 +181,7 @@ CGL.Context = function() {
         if (this._stackDepthWrite.length > 0) console.warn('depthwrite stack length !=0 at end of rendering...');
         if (this._stackDepthFunc.length > 0) console.warn('depthfunc stack length !=0 at end of rendering...');
         if (this._stackBlend.length > 0) console.warn('blend stack length !=0 at end of rendering...');
+        if (this._stackBlendMode.length > 0) console.warn('blendMode stack length !=0 at end of rendering...');
 
         // this._stackModelMatrix.length = 0;
         // vMatrixStack.length = 0;
@@ -274,11 +274,12 @@ CGL.Context = function() {
         cgl.pushModelMatrix();
         cgl.pushViewMatrix();
 
-        cgl.pushBlend(true);
+        // cgl.pushBlend(true);
+        cgl.pushBlendMode(CGL.BLEND_NORMAL,false);
 
         // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
-        cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
-        cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
+        // cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
+        // cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
 
         cgl.beginFrame();
     };
@@ -292,6 +293,7 @@ CGL.Context = function() {
         this.popDepthWrite();
         this.popDepthFunc();
         this.popBlend();
+        this.popBlendMode();
 
         cgl.endFrame();
     };
@@ -561,6 +563,7 @@ CGL.Context.prototype.popDepthFunc=function()
 
 CGL.Context.prototype._stackBlend=[];
 
+
 /**
  * enable / disable blend 
  * like gl.enable(gl.BLEND); / gl.disable(gl.BLEND);
@@ -577,7 +580,7 @@ CGL.Context.prototype.pushBlend=function(b)
 
 /**
  * current state of blend 
- * @returns {boolean} depth testing enabled/disabled
+ * @returns {boolean} blending enabled/disabled
  * @function
  */
 CGL.Context.prototype.stateBlend=function()
@@ -597,3 +600,105 @@ CGL.Context.prototype.popBlend=function()
     if(!this._stackBlend[this._stackBlend.length-1])  this.gl.disable(this.gl.BLEND);
         else this.gl.enable(this.gl.BLEND);
 };
+
+
+
+
+CGL.BLEND_NONE=0;
+CGL.BLEND_NORMAL=1;
+CGL.BLEND_ADD=2;
+CGL.BLEND_SUB=3;
+CGL.BLEND_MUL=4;
+
+CGL.Context.prototype._stackBlendMode=[];
+CGL.Context.prototype._stackBlendModePremul=[];
+
+CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
+{
+    this._stackBlendMode.push(blendMode);
+    this._stackBlendModePremul.push(premul);
+    
+    const n=this._stackBlendMode.length-1;
+
+    this.pushBlend(this._stackBlendMode[n]!==CGL.BLEND_NONE);
+    this._setBlendMode(this._stackBlendMode[n],this._stackBlendModePremul[n]);
+}
+
+CGL.Context.prototype.popBlendMode=function()
+{
+    this._stackBlendMode.pop();
+    this._stackBlendModePremul.pop();
+
+    const n=this._stackBlendMode.length-1;
+    
+    this.popBlend(this._stackBlendMode[n]!==CGL.BLEND_NONE);
+
+    if(n>0)
+        this._setBlendMode(this._stackBlendMode[n],this._stackBlendModePremul[n]);
+}
+
+CGL.Context.prototype._setBlendMode=function(blendMode,premul)
+{
+    const gl=this.gl;
+
+
+    if(blendMode==CGL.BLEND_ADD)
+    {
+        if(premul)
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.ONE, gl.ONE, gl.ONE, gl.ONE );
+        }
+        else
+        {
+			gl.blendEquation( gl.FUNC_ADD );
+			gl.blendFunc( gl.SRC_ALPHA, gl.ONE );
+        }
+    }
+    else if(blendMode==CGL.BLEND_SUB)
+    {
+        if(premul)
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.ZERO, gl.ZERO, gl.ONE_MINUS_SRC_COLOR, gl.ONE_MINUS_SRC_ALPHA );
+        }
+        else
+        {
+			gl.blendEquation( gl.FUNC_ADD );
+			gl.blendFunc( gl.ZERO, gl.ONE_MINUS_SRC_COLOR );
+        }
+    }
+    else if(blendMode==CGL.BLEND_MUL)
+    {
+        if(premul)
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.ZERO, gl.SRC_COLOR, gl.ZERO, gl.SRC_ALPHA );
+        }
+        else
+        {
+			gl.blendEquation( gl.FUNC_ADD );
+			gl.blendFunc( gl.ZERO, gl.SRC_COLOR );
+        }
+    }
+    else if(blendMode==CGL.BLEND_NORMAL)
+    {
+        if(premul)
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.ONE, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
+        }
+        else
+        {
+			gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+			gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
+        }
+    }
+    else
+    {
+        console.log("setblendmode: unknown blendmode");
+    }
+
+
+};
+

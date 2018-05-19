@@ -1,5 +1,3 @@
-op.name='ShaderMaterial';
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var fragmentShader=op.addInPort(new Port(op,"fragment",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
 var vertexShader=op.addInPort(new Port(op,"vertex",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));

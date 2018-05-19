@@ -18,5 +18,9 @@ function doRender()
         trigger.trigger();
         cgl.setPreviousShader();
     }
+    else 
+    {
+        trigger.trigger();
+    }
 }
 

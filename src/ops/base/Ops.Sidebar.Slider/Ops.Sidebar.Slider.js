@@ -36,6 +36,7 @@ input.setAttribute('max', maxPort.get());
 input.setAttribute('type', 'range');
 input.setAttribute('step', stepPort.get());
 input.setAttribute('value', defaultValuePort.get());
+input.style.display = 'block'; /* needed because offsetWidth returns 0 otherwise */
 inputWrapper.appendChild(input);
 updateActiveTrack();
 input.addEventListener('input', onSliderInput);
@@ -52,9 +53,12 @@ op.onDelete = onDelete;
 // functions
 
 function onSliderInput(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
     value.textContent = ev.target.value;
     valuePort.set(ev.target.value);
     updateActiveTrack();
+    return false;
 }
 
 function stepPortChanged() {
@@ -68,14 +72,17 @@ function updateActiveTrack(val) {
     if(typeof val !== 'undefined') {
         valueToUse = val;
     }
-    var percentage = CABLES.map(
+    // const availableWidth = input.offsetWidth; /* this returns 0 at the beginning, so cannot be used... */
+    const availableWidth = 206;
+    var trackWidth = CABLES.map(
         valueToUse,
         parseFloat(input.min), 
         parseFloat(input.max), 
         0, 
-        100
+        availableWidth - 16 /* subtract slider thumb width */
     );
-    activeTrack.style.width = percentage + '%';
+    // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
+    activeTrack.style.width = trackWidth + 'px';
 }
 
 function onMinPortChange() {

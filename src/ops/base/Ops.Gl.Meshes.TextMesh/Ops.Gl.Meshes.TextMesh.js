@@ -88,22 +88,14 @@ function getFont()
             fontSize:320
         };
     return CABLES.OpTextureMeshCanvas[canvasid];
-
 }
-
-
 
 op.onDelete=function()
 {
     // fontImage.remove();
     if(canvasid && CABLES.OpTextureMeshCanvas[canvasid])
         CABLES.OpTextureMeshCanvas[canvasid].canvas.remove();
-
-
 };
-
-
-
 
 var shader=new CGL.Shader(cgl,'TextMesh');
 shader.setSource(attachments.textmesh_vert,attachments.textmesh_frag);
@@ -145,28 +137,28 @@ render.onTriggered=function()
 
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
+    
+    if(mesh && mesh.numInstances>0)
+    {
+        cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
+        cgl.setShader(shader);
+    
+        cgl.setTexture(0,textureOut.get().tex);
 
-    // cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
-
-    cgl.setShader(shader);
-
-    cgl.setTexture(0,textureOut.get().tex);
-
-    if(valignMode==2) vec3.set(vec, 0,height,0);
-    if(valignMode==1) vec3.set(vec, 0,0,0);
-    if(valignMode==0) vec3.set(vec, 0,height/2,0);
-    vec[1]-=lineHeight.get();
-    cgl.pushModelMatrix();
-    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
-    if(mesh && !disabled)mesh.render(cgl.getShader());
-
-    cgl.popModelMatrix();
-
-
-    cgl.setTexture(0,null);
-    cgl.setPreviousShader();
-
-    // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
+        if(valignMode==2) vec3.set(vec, 0,height,0);
+        if(valignMode==1) vec3.set(vec, 0,0,0);
+        if(valignMode==0) vec3.set(vec, 0,height/2,0);
+        vec[1]-=lineHeight.get();
+        cgl.pushModelMatrix();
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+        if(!disabled)mesh.render(cgl.getShader());
+    
+        cgl.popModelMatrix();
+    
+        cgl.setTexture(0,null);
+        cgl.setPreviousShader();
+        cgl.popBlendMode();
+    }
 
     next.trigger();
 };
@@ -180,9 +172,7 @@ letterSpace.onChange=function()
 function generateMesh()
 {
     var theString=String(str.get()+'');
-    // if(!(''+))return;
     if(!textureOut.get())return;
-
 
     var font=getFont();
     if(!font.geom)
@@ -219,7 +209,6 @@ function generateMesh()
     var charCounter=0;
     createTexture=false;
     var m=mat4.create();
-
 
 
     for(var s=0;s<strings.length;s++)
@@ -285,7 +274,6 @@ function generateMesh()
         disabled=true;
         return;
     }
-
 
     mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
     mesh.setAttribute('attrTexOffsets',new Float32Array(tcOffsets),2,{"instanced":true});

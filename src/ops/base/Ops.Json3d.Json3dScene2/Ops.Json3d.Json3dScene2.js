@@ -1,6 +1,6 @@
 
 op.exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var doCreate=op.inFunctionButton("Create Nodes");

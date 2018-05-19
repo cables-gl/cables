@@ -13,6 +13,8 @@ var w=1000,h=1000;
 
 function resize()
 {
+    var _x=0;
+    var _y=0;
     var _w=cgl.canvasHeight*ratio.get();
     var _h=cgl.canvasHeight;
 
