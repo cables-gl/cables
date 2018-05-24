@@ -55,6 +55,10 @@ CGL.Framebuffer2=function(cgl,w,h,options)
 CGL.Framebuffer2.prototype.getWidth=function(){ return this._width; };
 CGL.Framebuffer2.prototype.getHeight=function(){ return this._height; };
 
+CGL.Framebuffer2.prototype.getDepthRenderBuffer=function()
+{
+    return this._depthRenderbuffer;
+}
 CGL.Framebuffer2.prototype.getTextureColor=function()
 {
     return this._texture;

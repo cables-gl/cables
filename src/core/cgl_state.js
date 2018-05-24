@@ -1,5 +1,3 @@
-
-
 var CGL = CGL || {};
 
 /**
@@ -9,9 +7,6 @@ var CGL = CGL || {};
  */
 CGL.Context = function() {
     var self = this;
-
-    // var vMatrixStack = [];
-    // var pMatrixStack = [];
     var shaderStack = [];
     var frameBufferStack = [null];
     var viewPort = [0, 0, 0, 0];
@@ -79,11 +74,8 @@ CGL.Context = function() {
             this.glVersion = 1;
         }
 
-
         if (!this.gl) {
-
             this.exitError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
-
             return;
         } else {
             var derivativeExt = this.gl.getExtension("GL_OES_standard_derivatives");
@@ -227,19 +219,39 @@ CGL.Context = function() {
         currentShader = shaderStack[shaderStack.length - 1];
     };
 
+    /**
+     * push a framebuffer to the framebuffer stack
+     * @name CGL.Context#pushFrameBuffer
+     * @param {CGL.Framebuffer} framebuffer
+     * @function
+     */
     this.pushFrameBuffer = function(fb) {
         frameBufferStack.push(fb);
     };
 
+    /**
+     * pop framebuffer stack
+     * @name CGL.Context#popFrameBuffer
+     * @returns {CGL.Framebuffer} current framebuffer or null
+     * @function
+     */
     this.popFrameBuffer = function() {
         if (frameBufferStack.length == 1) return null;
         frameBufferStack.pop();
         return frameBufferStack[frameBufferStack.length - 1];
     };
 
-
-
-    
+    /**
+     * get current framebuffer 
+     * @name CGL.Context#getCurrentFrameBuffer
+     * @returns {CGL.Framebuffer} current framebuffer or null
+     * @function
+     */
+    this.getCurrentFrameBuffer=function()
+    {
+        if (frameBufferStack.length === 0) return null;
+        return frameBufferStack[frameBufferStack.length - 1];
+    }
 
 
 
@@ -415,44 +427,67 @@ CGL.Context = function() {
                 console.log("screenshot: no blob");
             }
 
-
         }.bind(this),true);
     };
 };
 
 
+/**
+ * push a matrix to the view matrix stack
+ * @name CGL.Context#pushviewMatrix
+ * @param {mat4} viewmatrix
+ * @function
+ */
+CGL.Context.prototype.pushViewMatrix = function() {
+    this.vMatrix=this._vMatrixStack.push(this.vMatrix);
+};
 
-// view matrix stack
+/**
+ * pop view matrix stack
+ * @name CGL.Context#popFrameBuffer
+ * @returns {mat4} current viewmatrix 
+ * @function
+ */
+CGL.Context.prototype.popViewMatrix = function() {
+    this.vMatrix = this._vMatrixStack.pop();
+};
 
 CGL.Context.prototype.getViewMatrixStateCount = function() {
     return this._vMatrixStack.stateCounter;
 };
 
-CGL.Context.prototype.pushViewMatrix = function() {
-    this.vMatrix=this._vMatrixStack.push(this.vMatrix);
+
+/**
+ * push a matrix to the projection matrix stack
+ * @name CGL.Context#pushPMatrix
+ * @param {mat4} projectionmatrix
+ * @function
+ */
+CGL.Context.prototype.pushPMatrix = function() {
+    this.pMatrix=this._pMatrixStack.push(this.pMatrix);
 };
 
-CGL.Context.prototype.popViewMatrix = function() {
-    this.vMatrix = this._vMatrixStack.pop();
+/**
+ * pop projection matrix stack
+ * @name CGL.Context#popPMatrix
+ * @returns {mat4} current projectionmatrix 
+ * @function
+ */
+CGL.Context.prototype.popPMatrix = function() {
+    this.pMatrix = this._pMatrixStack.pop();
+    return this.pMatrix;
 };
-
-// projection matrix stack
 
 CGL.Context.prototype.getProjectionMatrixStateCount = function() {
     return this._pMatrixStack.stateCounter;
 };
 
-CGL.Context.prototype.pushPMatrix = function() {
-    this.pMatrix=this._pMatrixStack.push(this.pMatrix);
-};
-
-CGL.Context.prototype.popPMatrix = function() {
-    this.pMatrix = this._pMatrixStack.pop();
-};
-
-// model matrix stack
-
-// CGL.Context.prototype._stackModelMatrix=[];
+/**
+ * push a matrix to the model matrix stack
+ * @name CGL.Context#pushModelMatrix
+ * @param {mat4} modelmatrix
+ * @function
+ */
 CGL.Context.prototype.pushMvMatrix = // deprecated
 CGL.Context.prototype.pushModelMatrix = function()
 {
@@ -460,13 +495,26 @@ CGL.Context.prototype.pushModelMatrix = function()
     this.mMatrix=this._mMatrixStack.push(this.mMatrix);
 };
 
-
+/**
+ * pop model matrix stack
+ * @name CGL.Context#popModelMatrix
+ * @returns {mat4} current modelmatrix 
+ * @function
+ */
 CGL.Context.prototype.popMvMatrix = // todo: DEPRECATE
 CGL.Context.prototype.popmMatrix =
 CGL.Context.prototype.popModelMatrix = function() {
     // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
     this.mMatrix = this._mMatrixStack.pop();
+    return this.mMatrix;
 };
+
+/**
+ * get model matrix 
+ * @name CGL.Context#modelMatrix
+ * @returns {mat4} current modelmatrix 
+ * @function
+ */
 CGL.Context.prototype.modelMatrix = function() {
     return this.mMatrix;
 };
@@ -600,8 +648,6 @@ CGL.Context.prototype.popBlend=function()
     if(!this._stackBlend[this._stackBlend.length-1])  this.gl.disable(this.gl.BLEND);
         else this.gl.enable(this.gl.BLEND);
 };
-
-
 
 
 CGL.BLEND_NONE=0;
