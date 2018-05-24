@@ -39,7 +39,7 @@
         ],
         "name": "Ops.Api.ThingSpeak.Write"
     },
-    "summary": "Writes a value to [ThingSpeak](https://thingspeak.com)",
+    "summary": "Writes a value to ThingSpeak",
     "docs": {
         "ports": [
             {

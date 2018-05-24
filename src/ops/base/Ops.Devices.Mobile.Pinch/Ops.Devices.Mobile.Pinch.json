@@ -36,5 +36,9 @@
     },
     "libs": [
         "hammer.js"
-    ]
+    ],
+    "summary": "detect two finger pinch gestures on touchscreens",
+    "docs": {
+        "ports": []
+    }
 }
