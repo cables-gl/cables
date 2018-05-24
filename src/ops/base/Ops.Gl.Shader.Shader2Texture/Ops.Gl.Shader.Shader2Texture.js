@@ -69,13 +69,22 @@ function initFb()
 
 exec.onTriggered=function()
 {
-    if(!fb || needInit)initFb();
-    
     var vp=cgl.getViewPort();
+    
+    // console.log();
+    if(!fb || needInit )initFb();
+    if(inVPSize.get() && fb && ( vp[2]!=fb.getTextureColor().width || vp[3]!=fb.getTextureColor().height ) )
+    {
+        initFb();
+    }
+        // console.log(fb.getTextureColor().width);
+    
+    
     prevViewPort[0]=vp[0];
     prevViewPort[1]=vp[1];
     prevViewPort[2]=vp[2];
     prevViewPort[3]=vp[3];
+    
 
     fb.renderStart(cgl);
 

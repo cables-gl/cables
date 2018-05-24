@@ -1,0 +1,189 @@
+{
+    "updated": 1526996122389,
+    "authorName": "action",
+    "id": "b24dbfdc-485c-49d2-92a1-7258efd9239a",
+    "created": 1526996122408,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "projection mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "frustum near",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frustum far",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fov",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Auto Aspect Ratio",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "eye X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "eye Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "eye Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "center X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "center Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "center Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "truck",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "boom",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "dolly",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "tilt",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "pan",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "roll",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Aspect",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Look At Array"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.Camera"
+    },
+    "summary": "Transforms and projects the scene from the point of view of the camera.",
+    "docs": {
+        "ports": [
+            {
+                "name": "projection mode",
+                "text": "perspective | orthographic"
+            },
+            {
+                "name": "fov",
+                "text": "Field of view of the camera"
+            },
+            {
+                "name": "Auto Aspect Ratio",
+                "text": "Automatically calculate aspect ratio based on the viewport"
+            },
+            {
+                "name": "Aspect Ratio",
+                "text": "Custom aspect ratio"
+            },
+            {
+                "name": "eye X",
+                "text": "X Position of the camera"
+            },
+            {
+                "name": "eye Y",
+                "text": "Y Position of the camera"
+            },
+            {
+                "name": "eye Z",
+                "text": "Y Position of the camera"
+            },
+            {
+                "name": "center X",
+                "text": "Look at point in X position"
+            },
+            {
+                "name": "center Y",
+                "text": "Look at point in Y position"
+            },
+            {
+                "name": "center Z",
+                "text": "Look at point in Z position"
+            },
+            {
+                "name": "truck",
+                "text": "Move sideways (in local x axis)"
+            },
+            {
+                "name": "boom",
+                "text": "Move up+down (in local y axis)."
+            },
+            {
+                "name": "dolly",
+                "text": "Move forward+backward (in local z axis)"
+            },
+            {
+                "name": "tilt",
+                "text": "Tilt up+down relative to current orientation (around local x axis)"
+            },
+            {
+                "name": "pan",
+                "text": "Rotate left+right relative to current orientation (around local y axis)"
+            },
+            {
+                "name": "roll",
+                "text": "Roll left+right relative to current orientation (around local z axis)"
+            }
+        ]
+    }
+}
