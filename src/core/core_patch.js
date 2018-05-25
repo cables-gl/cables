@@ -797,6 +797,9 @@ CABLES.Patch.prototype.profile = function(enable) {
 
 // ----------------------
 
+
+
+
 /**
  * @name Variable
  * @param {String} name
@@ -841,6 +844,8 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
     }
 };
 
+
+
 /**
  * function will be called when value of variable is changed
  * @name CABLES.Patch.Variable#addListener
@@ -864,16 +869,38 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
 
 // ------------------
 
+// old?
 CABLES.Patch.prototype.addVariableListener = function(cb) {
     this._variableListeners.push(cb);
 };
 
+// old?
 CABLES.Patch.prototype._callVariableListener = function(cb) {
     for (var i = 0; i < this._variableListeners.length; i++) {
         this._variableListeners[i]();
     }
 };
 
+
+/**
+ * set variable value
+ * @name CABLES.Patch.Variable#setVariable
+ * @param {String} name of variable
+ * @param {Number|String|Boolena} value
+ * @function
+ */
+CABLES.Patch.prototype.setVariable = function(name, val)
+{
+    if (this._variables.hasOwnProperty(name)) {
+        this._variables[name].setValue(val);
+    } else {
+        consolr.warn("variable "+name+" not found!");
+    }
+};
+
+
+
+// used internally
 CABLES.Patch.prototype.setVarValue = function(name, val) {
     if (this._variables.hasOwnProperty(name)) {
         this._variables[name].setValue(val);
@@ -883,11 +910,13 @@ CABLES.Patch.prototype.setVarValue = function(name, val) {
     }
     return this._variables[name];
 };
-
+// old?
 CABLES.Patch.prototype.getVarValue = function(name, val) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name].getValue();
 };
+
+
 
 /**
  * @name CABLES.Patch#getVar

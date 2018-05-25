@@ -7,8 +7,6 @@ var CGL = CGL || {};
  */
 CGL.Context = function() {
     var self = this;
-    var shaderStack = [];
-    
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
 
@@ -24,6 +22,7 @@ CGL.Context = function() {
     this._vMatrixStack=new CGL.MatrixStack();
     this._glFrameBufferStack = [];
     this._frameBufferStack=[];
+    this._shaderStack = [];
 
     Object.defineProperty(this, 'mvMatrix', { get: function() { return this.mMatrix; }, set: function(m) { this.mMatrix=m; } }); // todo: deprecated
 
@@ -66,7 +65,7 @@ CGL.Context = function() {
         if (!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer = false;
         if (!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha = false;
         if (!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha = false;
-        if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
+        // if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
 
         this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
         if (this.gl) {
@@ -171,7 +170,7 @@ CGL.Context = function() {
         if (this._stackDepthFunc.length > 0) console.warn('depthfunc stack length !=0 at end of rendering...');
         if (this._stackBlend.length > 0) console.warn('blend stack length !=0 at end of rendering...');
         if (this._stackBlendMode.length > 0) console.warn('blendMode stack length !=0 at end of rendering...');
-        if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
+        if (this._shaderStack.length > 0) console.warn('this._shaderStack length !=0 at end of rendering...');
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
             oldCanvasWidth = self.canvasWidth;
@@ -189,10 +188,10 @@ CGL.Context = function() {
             if (!this.frameStore || (true === this.frameStore.renderOffscreen == currentShader.offScreenPass === true))
                 return currentShader;
 
-        for (var i = shaderStack.length - 1; i >= 0; i--)
-            if (shaderStack[i])
-                if (this.frameStore.renderOffscreen == shaderStack[i].offScreenPass)
-                    return shaderStack[i];
+        for (var i = this._shaderStack.length - 1; i >= 0; i--)
+            if (this._shaderStack[i])
+                if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass)
+                    return this._shaderStack[i];
 
         // console.log('no shader found?');
     };
@@ -202,14 +201,14 @@ CGL.Context = function() {
     };
 
     this.setShader = function(shader) {
-        shaderStack.push(shader);
+        this._shaderStack.push(shader);
         currentShader = shader;
     };
 
     this.setPreviousShader = function() {
-        if (shaderStack.length === 0) throw "Invalid shader stack pop!";
-        shaderStack.pop();
-        currentShader = shaderStack[shaderStack.length - 1];
+        if (this._shaderStack.length === 0) throw "Invalid shader stack pop!";
+        this._shaderStack.pop();
+        currentShader = this._shaderStack[this._shaderStack.length - 1];
     };
 
     /**
@@ -688,6 +687,13 @@ CGL.BLEND_MUL=4;
 CGL.Context.prototype._stackBlendMode=[];
 CGL.Context.prototype._stackBlendModePremul=[];
 
+/**
+ * push and switch to predefined blendmode (CGL.BLEND_NONE,CGL.BLEND_NORMAL,CGL.BLEND_ADD,CGL.BLEND_SUB,CGL.BLEND_MUL)
+ * @name CGL.Context#pushBlendMode
+ * @param {Number} blendmode
+ * @param {Boolean} premultiplied mode
+ * @function
+ */
 CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
 {
     this._stackBlendMode.push(blendMode);
@@ -699,6 +705,11 @@ CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
     this._setBlendMode(this._stackBlendMode[n],this._stackBlendModePremul[n]);
 }
 
+/**
+ * pop predefined blendmode / switch back to previous blendmode
+ * @name CGL.Context#pushBlendMode
+ * @function
+ */
 CGL.Context.prototype.popBlendMode=function()
 {
     this._stackBlendMode.pop();
