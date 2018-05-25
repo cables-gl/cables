@@ -107,8 +107,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         if(w<2)w=2;
         if(h<2)h=2;
 
-        width=w;
-        height=h;
+        width=Math.ceil(w);
+        height=Math.ceil(h);
 
         CGL.profileFrameBuffercreate++;
 
