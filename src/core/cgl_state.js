@@ -8,7 +8,7 @@ var CGL = CGL || {};
 CGL.Context = function() {
     var self = this;
     var shaderStack = [];
-    var frameBufferStack = [null];
+    
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
 
@@ -22,6 +22,8 @@ CGL.Context = function() {
     this._pMatrixStack=new CGL.MatrixStack();
     this._mMatrixStack=new CGL.MatrixStack();
     this._vMatrixStack=new CGL.MatrixStack();
+    this._glFrameBufferStack = [];
+    this._frameBufferStack=[];
 
     Object.defineProperty(this, 'mvMatrix', { get: function() { return this.mMatrix; }, set: function(m) { this.mMatrix=m; } }); // todo: deprecated
 
@@ -163,22 +165,13 @@ CGL.Context = function() {
         if (this._vMatrixStack.length() > 0) console.warn('view matrix stack length !=0 at end of rendering...');
         if (this._mMatrixStack.length() > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
         if (this._pMatrixStack.length() > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
-
-        // if (vMatrixStack.length > 0) console.warn('view matrix stack length !=0 at end of rendering...');
-        // if (this._stackModelMatrix.length > 0) console.warn('mmatrix stack length !=0 at end of rendering...');
-        // if (pMatrixStack.length > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
-        if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
-
+        if (this._glFrameBufferStack.length > 0) console.warn('glFrameBuffer stack length !=0 at end of rendering...');
         if (this._stackDepthTest.length > 0) console.warn('depthtest stack length !=0 at end of rendering...');
         if (this._stackDepthWrite.length > 0) console.warn('depthwrite stack length !=0 at end of rendering...');
         if (this._stackDepthFunc.length > 0) console.warn('depthfunc stack length !=0 at end of rendering...');
         if (this._stackBlend.length > 0) console.warn('blend stack length !=0 at end of rendering...');
         if (this._stackBlendMode.length > 0) console.warn('blendMode stack length !=0 at end of rendering...');
-
-        // this._stackModelMatrix.length = 0;
-        // vMatrixStack.length = 0;
-        // pMatrixStack.length = 0;
-        // shaderStack.length = 0;
+        if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
             oldCanvasWidth = self.canvasWidth;
@@ -221,36 +214,72 @@ CGL.Context = function() {
 
     /**
      * push a framebuffer to the framebuffer stack
-     * @name CGL.Context#pushFrameBuffer
-     * @param {CGL.Framebuffer} framebuffer
+     * @name CGL.Context#pushGlFrameBuffer
+     * @param {Object} framebuffer
      * @function
      */
-    this.pushFrameBuffer = function(fb) {
-        frameBufferStack.push(fb);
+    this.pushGlFrameBuffer = function(fb) {
+        this._glFrameBufferStack.push(fb);
     };
 
     /**
      * pop framebuffer stack
-     * @name CGL.Context#popFrameBuffer
-     * @returns {CGL.Framebuffer} current framebuffer or null
+     * @name CGL.Context#popGlFrameBuffer
+     * @returns {Object} current framebuffer or null
      * @function
      */
-    this.popFrameBuffer = function() {
-        if (frameBufferStack.length == 1) return null;
-        frameBufferStack.pop();
-        return frameBufferStack[frameBufferStack.length - 1];
+    this.popGlFrameBuffer = function() {
+        if (this._glFrameBufferStack.length == 0) return null;
+        this._glFrameBufferStack.pop();
+        return this._glFrameBufferStack[this._glFrameBufferStack.length - 1];
     };
 
     /**
      * get current framebuffer 
      * @name CGL.Context#getCurrentFrameBuffer
-     * @returns {CGL.Framebuffer} current framebuffer or null
+     * @returns {Object} current framebuffer or null
+     * @function
+     */
+    this.getCurrentGlFrameBuffer=function()
+    {
+        if (this._glFrameBufferStack.length === 0) return null;
+        return this._glFrameBufferStack[this._glFrameBufferStack.length - 1];
+    }
+
+
+
+    /**
+     * push a framebuffer to the framebuffer stack
+     * @name CGL.Context#pushGlFrameBuffer
+     * @param {CGL.FrameBuffer} framebuffer
+     * @function
+     */
+    this.pushFrameBuffer = function(fb) {
+        this._frameBufferStack.push(fb);
+    };
+
+    /**
+     * pop framebuffer stack
+     * @name CGL.Context#popFrameBuffer
+     * @returns {CGL.FrameBuffer} current framebuffer or null
+     * @function
+     */
+    this.popFrameBuffer = function() {
+        if (this._frameBufferStack.length == 0) return null;
+        this._frameBufferStack.pop();
+        return this._frameBufferStack[this._frameBufferStack.length - 1];
+    };
+
+    /**
+     * get current framebuffer 
+     * @name CGL.Context#getCurrentFrameBuffer
+     * @returns {CGL.FrameBuffer} current framebuffer or null
      * @function
      */
     this.getCurrentFrameBuffer=function()
     {
-        if (frameBufferStack.length === 0) return null;
-        return frameBufferStack[frameBufferStack.length - 1];
+        if (this._frameBufferStack.length === 0) return null;
+        return this._frameBufferStack[this._frameBufferStack.length - 1];
     }
 
 
@@ -444,7 +473,7 @@ CGL.Context.prototype.pushViewMatrix = function() {
 
 /**
  * pop view matrix stack
- * @name CGL.Context#popFrameBuffer
+ * @name CGL.Context#popViewMatrix
  * @returns {mat4} current viewmatrix 
  * @function
  */

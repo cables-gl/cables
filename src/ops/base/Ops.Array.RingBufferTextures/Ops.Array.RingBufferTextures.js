@@ -116,7 +116,7 @@ index=index%inNum.get();
 
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
     cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, textures[index].tex, 0);
-    cgl.pushFrameBuffer(frameBuf);
+    cgl.pushGlFrameBuffer(frameBuf);
 
 
 
@@ -148,9 +148,6 @@ index=index%inNum.get();
 
     // here be rendering
 
-
-
-
     cgl.setShader(bgShader);
     // cgl.currentTextureEffect.bind();
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
@@ -163,7 +160,7 @@ index=index%inNum.get();
 
     quadMesh.render(cgl.getShader());
 
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer());
+    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popGlFrameBuffer());
 
 
 

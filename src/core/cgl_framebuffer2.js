@@ -55,6 +55,11 @@ CGL.Framebuffer2=function(cgl,w,h,options)
 CGL.Framebuffer2.prototype.getWidth=function(){ return this._width; };
 CGL.Framebuffer2.prototype.getHeight=function(){ return this._height; };
 
+CGL.Framebuffer2.prototype.getGlFrameBuffer=function()
+{
+    return this._frameBuffer;
+}
+
 CGL.Framebuffer2.prototype.getDepthRenderBuffer=function()
 {
     return this._depthRenderbuffer;
@@ -204,8 +209,6 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     }
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
-
-
 };
 
 
@@ -215,7 +218,8 @@ CGL.Framebuffer2.prototype.renderStart=function()
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
 
-    this._cgl.pushFrameBuffer(this._frameBuffer);
+    this._cgl.pushGlFrameBuffer(this._frameBuffer);
+    this._cgl.pushFrameBuffer(this);
 
     this._cgl.pushPMatrix();
     this._cgl.gl.viewport(0, 0, this._width,this._height );
@@ -251,7 +255,8 @@ CGL.Framebuffer2.prototype.renderEnd=function()
 
     // Pass 2
 
-    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer() );
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer() );
+    this._cgl.popFrameBuffer()
 
 
     this._cgl.popModelMatrix();

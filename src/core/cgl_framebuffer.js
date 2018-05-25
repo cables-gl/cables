@@ -52,6 +52,18 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     this.getHeight=function(){ return height; };
 
     /**
+     * get native gl framebuffer
+     * @name CGL.Context#getGlFrameBuffer()
+     * @returns {Object} framebuffer
+     * @function
+     */
+    this.getGlFrameBuffer=function()
+    {
+        return frameBuf;
+    }
+
+
+    /**
      * get depth renderbuffer
      * @name CGL.Context#getDepthRenderBuffer
      * @returns {Object} renderbuffer
@@ -159,7 +171,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     {
         cgl.pushModelMatrix();
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-        cgl.pushFrameBuffer(frameBuf);
+        cgl.pushGlFrameBuffer(frameBuf);
+        cgl.pushFrameBuffer(this);
 
         cgl.pushPMatrix();
         cgl.gl.viewport(0, 0, width,height );
@@ -171,7 +184,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     this.renderEnd=function()
     {
         cgl.popPMatrix();
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer() );
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popGlFrameBuffer() );
+        cgl.popFrameBuffer();
 
         cgl.popModelMatrix();
         cgl.resetViewPort();
