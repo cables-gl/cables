@@ -1,13 +1,13 @@
 // input
-var value = op.inValue('Value');
+var value = op.inValue('value');
 
-var phase = op.inValue('Phase', 0.0);
-var mul = op.inValue('Frequency', 1.0);
-var amplitude = op.inValue('Amplitude', 1.0);
+var phase = op.inValue('phase', 0.0);
+var mul = op.inValue('frequency', 1.0);
+var amplitude = op.inValue('amplitude', 1.0);
 var invert = op.inValueBool("asine", false);
 
 // output
-var result = op.outValue('Result');
+var result = op.outValue('result');
 
 var calculate = Math.sin;
 
