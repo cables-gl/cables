@@ -1,4 +1,3 @@
-op.name="TextureInfo";
 
 var inTex=op.inObject("Texture");
 

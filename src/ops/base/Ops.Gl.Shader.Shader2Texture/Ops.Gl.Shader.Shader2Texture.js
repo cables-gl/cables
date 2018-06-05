@@ -1,5 +1,7 @@
 var exec=op.inFunction("Render");
 var inShader=op.inObject("Shader");
+var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+
 var inVPSize=op.inValueBool("Use Viewport Size",true);
 var inWidth=op.inValueInt("Width",512);
 var inHeight=op.inValueInt("Height",512);
@@ -14,11 +16,14 @@ inWidth.onChange=initFbLater;
 inHeight.onChange=initFbLater;
 inFloatingPoint.onChange=initFbLater;
 inVPSize.onChange=initFbLater;
+tfilter.onChange=initFbLater;
 
-var tex=null;
 var fb=null;
-var mesh=CGL.MESHES.getSimpleRect(cgl,"shader2texture rect");
+var tex=null;
 var needInit=true;
+var mesh=CGL.MESHES.getSimpleRect(cgl,"shader2texture rect");
+
+tfilter.set("nearest");
 
 function initFbLater()
 {
@@ -34,6 +39,7 @@ function initFb()
     var w=inWidth.get();
     var h=inHeight.get();
 
+
     if(inVPSize.get())
     {
         inWidth.setUiAttribs({hidePort:true,greyout:true});
@@ -46,8 +52,12 @@ function initFb()
     }
     else
     {
-        inWidth.setUiAttribs({hidePort:false,greyout:false});
-        inHeight.setUiAttribs({hidePort:false,greyout:false});
+        if(inWidth.uiAttribs.hidePort)
+        {
+            inWidth.setUiAttribs({hidePort:false,greyout:false});
+            inHeight.setUiAttribs({hidePort:false,greyout:false});
+
+        }
     }
 
     if(cgl.glVersion>=2) 
@@ -65,6 +75,13 @@ function initFb()
     {
         fb=new CGL.Framebuffer(cgl,inWidth.get(),inHeight.get(),{isFloatingPointTexture:inFloatingPoint.get()});
     }
+    
+
+    if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
+        else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
+        else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+
+
 }
 
 exec.onTriggered=function()
@@ -77,9 +94,7 @@ exec.onTriggered=function()
     {
         initFb();
     }
-        // console.log(fb.getTextureColor().width);
-    
-    
+
     prevViewPort[0]=vp[0];
     prevViewPort[1]=vp[1];
     prevViewPort[2]=vp[2];
