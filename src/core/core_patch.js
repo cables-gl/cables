@@ -70,7 +70,8 @@ CABLES.Patch = function(cfg) {
     this.cgl = new CGL.Context();
     this.cgl.patch = this;
     this.cgl.setCanvas(this.config.glCanvasId);
-    if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResizeToWindow(true);
+    if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize('window');
+    if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize('parent');
     this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
 
     if (this.cgl.aborted) this.aborted = true;

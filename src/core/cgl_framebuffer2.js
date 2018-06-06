@@ -30,10 +30,13 @@ CGL.Framebuffer2=function(cgl,w,h,options)
         this._options.multisamplingSamples=0;
     }
 
+
+    if(!options.hasOwnProperty('filter')) options.filter=CGL.Texture.FILTER_LINEAR;
+
     this._texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":this._options.isFloatingPointTexture,
-            "filter":CGL.Texture.FILTER_LINEAR
+            "filter":options.filter
         });
 
     var fil=CGL.Texture.FILTER_NEAREST;
@@ -80,7 +83,8 @@ CGL.Framebuffer2.prototype.setFilter=function(f)
     this._texture.setSize(this._width,this._height);
 };
 
-CGL.Framebuffer2.prototype.delete=function()
+CGL.Framebuffer2.prototype.delete=
+CGL.Framebuffer2.prototype.dispose=function()
 {
     this._texture.delete();
     this._textureDepth.delete();
@@ -246,7 +250,6 @@ CGL.Framebuffer2.prototype.renderEnd=function()
         this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST
     );
 
-
     // this._cgl.gl.blitFramebuffer(
     //     0, 0, this._width, this._height,
     //     0, 0, this._width, this._height,
@@ -261,4 +264,13 @@ CGL.Framebuffer2.prototype.renderEnd=function()
 
     this._cgl.popModelMatrix();
     this._cgl.resetViewPort();
+
+    this._cgl.gl.activeTexture(this._cgl.gl.TEXTURE0);
+    this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._texture.tex);
+    this._cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, this._cgl.gl.RGBA, this._width, this._height,0,this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null );
+
+    // this._cgl.gl.generateMipmap(this._cgl.gl.TEXTURE_2D);
+    // this._cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, this._cgl.gl.RGBA, this._width, this._height,0,this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, this._texture.tex );
+    this._cgl.gl.generateMipmap(this._cgl.gl.TEXTURE_2D);
+
 };

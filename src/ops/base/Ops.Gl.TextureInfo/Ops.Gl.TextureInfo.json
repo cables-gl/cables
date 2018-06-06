@@ -9,15 +9,33 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Name",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Ratio"
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Filter",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Wrap",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.TextureInfo"
@@ -26,7 +44,7 @@
     "docs": {
         "ports": []
     },
-    "updated": 1528209030988,
+    "updated": 1528210385093,
     "authorName": "pandur",
     "id": "71e5ee4c-3455-4c09-abb2-67abf382f35b",
     "created": 1528209030994

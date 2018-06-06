@@ -95,4 +95,5 @@ For performance Reasons, you should pause the patch, when its not visible using`
 - `onFinishedLoading`: Function to be called when cables is done loading the patch and all assets
 - `silent` (bool): Enable / disable all logging to console.
 - `glCanvasResizeToWindow` Resize the Canvas to the size of the window
+- `glCanvasResizeToParent` Resize the Canvas to the size of the parent (container) element
 

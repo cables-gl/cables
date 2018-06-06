@@ -366,12 +366,32 @@ CGL.Context = function() {
         self.updateSize();
     };
 
-    this.setAutoResizeToWindow = function(resize) {
-        if (resize) {
+    this._resizeToParentrSize = function() {
+
+        var p=this.canvas.parentElement;
+        if(!p)
+        {
+            console.error("cables: can not resize to container element");
+            return;
+        }
+        this.setSize(p.clientWidth,p.clientHeight);
+        self.updateSize();
+    };
+
+    this.setAutoResize = function(parent) {
+        
+        window.removeEventListener('resize', this._resizeToWindowSize.bind(this));
+        window.removeEventListener('resize', this._resizeToParentrSize.bind(this));
+
+        if(parent=='window')
+        {
             window.addEventListener('resize', this._resizeToWindowSize.bind(this));
             this._resizeToWindowSize();
-        } else {
-            window.removeEventListener('resize', this._resizeToWindowSize.bind(this));
+        }
+        if(parent=='parent')
+        {
+            window.addEventListener('resize', this._resizeToParentrSize.bind(this));
+            this._resizeToParentrSize();
         }
     };
 

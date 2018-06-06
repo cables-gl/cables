@@ -31,10 +31,12 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         "isFloatingPointTexture":false
     };
 
+    if(!options.hasOwnProperty('filter')) options.filter=CGL.Texture.FILTER_LINEAR;
+    
     var texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":options.isFloatingPointTexture,
-            "filter":CGL.Texture.FILTER_NEAREST,
+            "filter":options.filter,
             "wrap":CGL.Texture.CLAMP_TO_EDGE
         });
 
