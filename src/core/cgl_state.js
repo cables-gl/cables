@@ -366,8 +366,9 @@ CGL.Context = function() {
         self.updateSize();
     };
 
-    this._resizeToParentrSize = function() {
+    this._resizeToParentSize = function() {
 
+        
         var p=this.canvas.parentElement;
         if(!p)
         {
@@ -375,13 +376,15 @@ CGL.Context = function() {
             return;
         }
         this.setSize(p.clientWidth,p.clientHeight);
+        console.log("_resizeToParentSize",p.clientWidth,p.clientHeight);
+
         self.updateSize();
     };
 
     this.setAutoResize = function(parent) {
         
         window.removeEventListener('resize', this._resizeToWindowSize.bind(this));
-        window.removeEventListener('resize', this._resizeToParentrSize.bind(this));
+        window.removeEventListener('resize', this._resizeToParentSize.bind(this));
 
         if(parent=='window')
         {
@@ -390,8 +393,8 @@ CGL.Context = function() {
         }
         if(parent=='parent')
         {
-            window.addEventListener('resize', this._resizeToParentrSize.bind(this));
-            this._resizeToParentrSize();
+            window.addEventListener('resize', this._resizeToParentSize.bind(this));
+            this._resizeToParentSize();
         }
     };
 
