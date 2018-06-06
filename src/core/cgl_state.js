@@ -366,7 +366,7 @@ CGL.Context = function() {
         self.updateSize();
     };
 
-    this._resizeToContainerSize = function() {
+    this._resizeToParentrSize = function() {
 
         var p=this.canvas.parentElement;
         if(!p)
@@ -381,17 +381,17 @@ CGL.Context = function() {
     this.setAutoResize = function(parent) {
         
         window.removeEventListener('resize', this._resizeToWindowSize.bind(this));
-        window.removeEventListener('resize', this._resizeToContainerSize.bind(this));
+        window.removeEventListener('resize', this._resizeToParentrSize.bind(this));
 
         if(parent=='window')
         {
             window.addEventListener('resize', this._resizeToWindowSize.bind(this));
             this._resizeToWindowSize();
         }
-        if(parent=='container')
+        if(parent=='parent')
         {
-            window.addEventListener('resize', this._resizeToContainerSize.bind(this));
-            this._resizeToContainerSize();
+            window.addEventListener('resize', this._resizeToParentrSize.bind(this));
+            this._resizeToParentrSize();
         }
     };
 
