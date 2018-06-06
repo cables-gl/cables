@@ -89,6 +89,7 @@ For performance Reasons, you should pause the patch, when its not visible using`
 
 ## Patch Option Parameters
 
+- `canvas` canvas context attributes (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext)
 - `glCanvasId` (string): The element ID of your canvas object
 - `prefixAssetPath` (string): Path where to find the assets folder 
 - `onError` (function): Function to be called if a critical error occurs (e.g. browser has no WebGL / Web Audio)
@@ -97,3 +98,19 @@ For performance Reasons, you should pause the patch, when its not visible using`
 - `glCanvasResizeToWindow` Resize the Canvas to the size of the window
 - `glCanvasResizeToParent` Resize the Canvas to the size of the parent (container) element
 
+
+
+
+
+# Transparent Patch
+
+    make sure `clear` checkbox is NOT checked in mainloop.
+
+    then set the following canvas context attributes:
+
+    ```
+    canvas:{
+        alpha:true,
+        premultipliedAlpha:true
+    }
+    ```

@@ -349,8 +349,6 @@ CABLES.Op = function()
     CABLES.Op.prototype.outTexture=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
 
 
-
-
     CABLES.Op.prototype.inDynamic=
         function(name,filter,options,v){
             var p=new Port(this,name,OP_PORT_TYPE_DYNAMIC,options);
@@ -372,9 +370,6 @@ CABLES.Op = function()
 
             this.addInPort(p); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p;
         };
-
-
-
 
     CABLES.Op.prototype.printInfo=function()
     {
@@ -707,8 +702,8 @@ CABLES.Op = function()
             }
             if(this.portsIn[ipi].type==OP_PORT_TYPE_FUNCTION)
             {
-// console.log(this.patch.instancing.index());
-// console.log(this._instances.length);
+                // console.log(this.patch.instancing.index());
+                // console.log(this._instances.length);
 
                 // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
                     // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
