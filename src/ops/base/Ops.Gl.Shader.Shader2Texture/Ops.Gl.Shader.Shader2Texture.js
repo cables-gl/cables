@@ -39,6 +39,12 @@ function initFb()
     var w=inWidth.get();
     var h=inHeight.get();
 
+    var filter=CGL.Texture.FILTER_NEAREST;
+    if(tfilter.get()=='linear') filter=CGL.Texture.FILTER_LINEAR;
+        else if(tfilter.get()=='mipmap') filter=CGL.Texture.FILTER_MIPMAP;
+
+console.log("SET FILTER",filter);
+
 
     if(inVPSize.get())
     {
@@ -56,7 +62,6 @@ function initFb()
         {
             inWidth.setUiAttribs({hidePort:false,greyout:false});
             inHeight.setUiAttribs({hidePort:false,greyout:false});
-
         }
     }
 
@@ -66,6 +71,7 @@ function initFb()
         {
             isFloatingPointTexture:inFloatingPoint.get(),
             multisampling:false,
+            filter:filter,
             depth:true,
             multisamplingSamples:0,
             clear:true
@@ -73,13 +79,13 @@ function initFb()
     }
     else
     {
-        fb=new CGL.Framebuffer(cgl,inWidth.get(),inHeight.get(),{isFloatingPointTexture:inFloatingPoint.get()});
+        fb=new CGL.Framebuffer(cgl,inWidth.get(),inHeight.get(),
+        {
+            isFloatingPointTexture:inFloatingPoint.get(),
+            filter:filter
+        });
     }
     
-
-    if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
-        else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
-        else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
 
 }
