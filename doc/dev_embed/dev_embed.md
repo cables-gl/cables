@@ -104,13 +104,13 @@ For performance Reasons, you should pause the patch, when its not visible using`
 
 # Transparent Patch
 
-    make sure `clear` checkbox is NOT checked in mainloop.
+make sure `clear` checkbox is NOT checked in mainloop.
 
-    then set the following canvas context attributes:
+in patch options set the following canvas context attributes:
 
-    ```
-    canvas:{
-        alpha:true,
-        premultipliedAlpha:true
-    }
-    ```
+```
+canvas:{
+    alpha:true,
+    premultipliedAlpha:true
+}
+```
