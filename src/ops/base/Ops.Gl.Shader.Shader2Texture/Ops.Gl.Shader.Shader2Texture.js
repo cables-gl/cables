@@ -1,6 +1,7 @@
 var exec=op.inFunction("Render");
 var inShader=op.inObject("Shader");
-var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear']}));
+// ,'mipmap'
 
 var inVPSize=op.inValueBool("Use Viewport Size",true);
 var inWidth=op.inValueInt("Width",512);
@@ -79,7 +80,7 @@ function initFb()
 
     if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
         else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
-        else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+        // else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
 
 }
