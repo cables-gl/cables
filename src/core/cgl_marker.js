@@ -1,10 +1,8 @@
 CABLES=CABLES||{};
 CABLES.WEBAUDIO = CABLES.WEBAUDIO || {};
 
-
 CGL.Marker=function(cgl)
 {
-
     var geom=new CGL.Geometry("marker");
     geom.setPointVertices(
         [

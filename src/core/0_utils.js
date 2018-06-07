@@ -209,17 +209,13 @@ function ajaxRequest(url, callback)
 // ----------------------------------------------------------------
 
 
-
-
 CABLES.jsonp=function(url,cb)
 {
-
     CABLES.jsonpCounter=CABLES.jsonpCounter||0;
     CABLES.jsonpCounter++;
     var jsonPID=CABLES.jsonpCounter;
 
     console.log('making jsonp request...');
-
 
     CABLES["jsonpFunc"+jsonPID]=function(data)
     {
@@ -243,16 +239,34 @@ CABLES.jsonp=function(url,cb)
 
 CABLES.ajaxSync=function(url,cb,method,post,contenttype)
 {
-    CABLES.ajaxIntern(url,cb,method,post,contenttype,false);
+    CABLES.request(
+        {
+            "url":url,
+            "cb":cb,
+            "method":method,
+            "data":post,
+            "contenttype":contenttype,
+            "sync":true
+        });
 };
 
 CABLES.ajax=function(url,cb,method,post,contenttype,jsonp)
 {
-    CABLES.ajaxIntern(url,cb,method,post,contenttype,true,jsonp);
+    CABLES.request(
+        {
+            "url":url,
+            "cb":cb,
+            "method":method,
+            "data:":post,
+            "contenttype":contenttype,
+            "sync":false,
+            "jsonp":jsonp
+        });
 };
 
-CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
+CABLES.request=function(options)
 {
+    if(!options.hasOwnProperty('asynch'))options.asynch=true;
 
     var xhr;
     try{ xhr = new XMLHttpRequest(); }catch(e){}
@@ -261,13 +275,16 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
     {
         if (xhr.readyState != 4) return;
 
-        // cb( (xhr.status != 200 || xhr.status !==0 ) ?new Error(url+"server response status is "+xhr.status):false, xhr.responseText,xhr);
-        cb(false, xhr.responseText,xhr);
+        if(options.cb)
+        {
+            if(xhr.status == 200 || xhr.status == 0) options.cb(false, xhr.responseText,xhr);
+            else options.cb(true, xhr.responseText,xhr);
+        }
     };
 
     xhr.addEventListener("progress", function(ev)
     {
-        // console.log('progress',ev.loaded/1024);
+        // console.log('progress',ev.loaded/1024+' kb');
         // if (ev.lengthComputable)
         // {
         //     var percentComplete = ev.loaded / ev.total;
@@ -275,18 +292,46 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
         // }
     });
 
+    xhr.open(options.method?options.method.toUpperCase():"GET", options.url, !options.sync);
 
-    xhr.open(method?method.toUpperCase():"GET", url, asynch);
-
-
-
-    if(!post) xhr.send();
+    if(!options.post && !options.data)
+    {
+        xhr.send();
+    }
     else
     {
-        xhr.setRequestHeader('Content-type', contenttype?contenttype:'application/x-www-form-urlencoded');
-        xhr.send(post);
+        xhr.setRequestHeader('Content-type', options.contenttype?options.contenttype:'application/x-www-form-urlencoded');
+        xhr.send(options.data||options.post);
     }
 };
+
+
+// CABLES.ajaxIntern=function(options)
+// {
+//     let xhr = new XMLHttpRequest();
+//     xhr.onreadystatechange = function()
+//     {
+//         if (xhr.readyState != 4) return;
+//         // cb( (xhr.status != 200 || xhr.status !==0 ) ?new Error(url+"server response status is "+xhr.status):false, xhr.responseText,xhr);
+//         cb(false, xhr.responseText,xhr);
+//     };
+//     xhr.addEventListener("progress", function(ev)
+//     {
+//         // console.log('progress',ev.loaded/1024);
+//         // if (ev.lengthComputable)
+//         // {
+//         //     var percentComplete = ev.loaded / ev.total;
+//         //     console.log(url,percentComplete);
+//         // }
+//     });
+//     xhr.open(method?method.toUpperCase():"GET", url, asynch);
+//     if(!post) xhr.send();
+//     else
+//     {
+//         xhr.setRequestHeader('Content-type', contenttype?contenttype:'application/x-www-form-urlencoded');
+//         xhr.send(post);
+//     }
+// };
 
 // ----------------------------------------------------------------
 
@@ -374,3 +419,10 @@ function float32Concat(first, second)
 
     return result;
 }
+
+
+window.performance = (window.performance ||
+{
+    offset: Date.now(),
+    now: function now(){ return Date.now() - this.offset; }
+});

@@ -1,6 +1,5 @@
 var CGL=CGL || {};
 
-
 CGL.TextureEffect=function(cgl,options)
 {
     this._cgl=cgl;

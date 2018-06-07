@@ -1,10 +1,9 @@
-
-
 var CGL=CGL || {};
 CGL.tempTexture=null;
 CGL.tempTextureEmpty=null;
 
 CGL.DEFAULT_TEXTURE_SIZE=8;
+
 /**
  * A Texture
  * @namespace CGL.Texture

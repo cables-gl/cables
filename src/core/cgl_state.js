@@ -1,5 +1,3 @@
-
-
 var CGL = CGL || {};
 
 /**
@@ -9,9 +7,6 @@ var CGL = CGL || {};
  */
 CGL.Context = function() {
     var self = this;
-
-    // var vMatrixStack = [];
-    // var pMatrixStack = [];
     var shaderStack = [];
     var frameBufferStack = [null];
     var viewPort = [0, 0, 0, 0];
