@@ -170,6 +170,13 @@ access the command palette by pressing `CMD+P` or `CTRL+P`.
 
 
 
+<br />
+
+
+set a custom title to an op by clicking the title in the parameter panel (you can also select an op and press t)
+
+
+<video src="video/rename.mp4" muted="true" autoplay="true" loop="true" ></video>
 
 
 

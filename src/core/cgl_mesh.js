@@ -500,10 +500,10 @@ CGL.Mesh.prototype.render=function(shader)
     {
         console.log("unindex");
         this._geom.unIndex();
-        this._geom.calcBaycentric();
+        this._geom.calcBarycentric();
         this.setGeom(this._geom);
 
-        this.setAttribute('attrBaycentric',this._geom.baycentrics,3);
+        this.setAttribute('attrBarycentric',this._geom.barycentrics,3);
     }
 
     // var meshChanged=this.meshChanged();

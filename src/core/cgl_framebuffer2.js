@@ -30,10 +30,13 @@ CGL.Framebuffer2=function(cgl,w,h,options)
         this._options.multisamplingSamples=0;
     }
 
+
+    if(!this._options.hasOwnProperty('filter')) this._options.filter=CGL.Texture.FILTER_LINEAR;
+
     this._texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":this._options.isFloatingPointTexture,
-            "filter":CGL.Texture.FILTER_LINEAR
+            "filter":this._options.filter
         });
 
     var fil=CGL.Texture.FILTER_NEAREST;
@@ -55,6 +58,15 @@ CGL.Framebuffer2=function(cgl,w,h,options)
 CGL.Framebuffer2.prototype.getWidth=function(){ return this._width; };
 CGL.Framebuffer2.prototype.getHeight=function(){ return this._height; };
 
+CGL.Framebuffer2.prototype.getGlFrameBuffer=function()
+{
+    return this._frameBuffer;
+}
+
+CGL.Framebuffer2.prototype.getDepthRenderBuffer=function()
+{
+    return this._depthRenderbuffer;
+}
 CGL.Framebuffer2.prototype.getTextureColor=function()
 {
     return this._texture;
@@ -71,7 +83,8 @@ CGL.Framebuffer2.prototype.setFilter=function(f)
     this._texture.setSize(this._width,this._height);
 };
 
-CGL.Framebuffer2.prototype.delete=function()
+CGL.Framebuffer2.prototype.delete=
+CGL.Framebuffer2.prototype.dispose=function()
 {
     this._texture.delete();
     this._textureDepth.delete();
@@ -200,8 +213,6 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     }
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
-
-
 };
 
 
@@ -211,7 +222,8 @@ CGL.Framebuffer2.prototype.renderStart=function()
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
 
-    this._cgl.pushFrameBuffer(this._frameBuffer);
+    this._cgl.pushGlFrameBuffer(this._frameBuffer);
+    this._cgl.pushFrameBuffer(this);
 
     this._cgl.pushPMatrix();
     this._cgl.gl.viewport(0, 0, this._width,this._height );
@@ -238,7 +250,6 @@ CGL.Framebuffer2.prototype.renderEnd=function()
         this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST
     );
 
-
     // this._cgl.gl.blitFramebuffer(
     //     0, 0, this._width, this._height,
     //     0, 0, this._width, this._height,
@@ -247,9 +258,19 @@ CGL.Framebuffer2.prototype.renderEnd=function()
 
     // Pass 2
 
-    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer() );
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer() );
+    this._cgl.popFrameBuffer()
 
 
     this._cgl.popModelMatrix();
     this._cgl.resetViewPort();
+
+    // this._cgl.gl.activeTexture(this._cgl.gl.TEXTURE0);
+    // this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._texture.tex);
+    // this._cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, this._cgl.gl.RGBA, this._width, this._height,0,this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null );
+
+    // this._cgl.gl.generateMipmap(this._cgl.gl.TEXTURE_2D);
+    // this._cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, this._cgl.gl.RGBA, this._width, this._height,0,this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, this._texture.tex );
+    // this._cgl.gl.generateMipmap(this._cgl.gl.TEXTURE_2D);
+
 };

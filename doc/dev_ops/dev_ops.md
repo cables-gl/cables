@@ -9,7 +9,7 @@ op.name = 'MyVerySpecialOp';
 
 ## Adding Ports
 
-See [Creating Ports](../dev_Creating_Ports/dev_creating_ports.md)
+See [Ports](../dev_creating_ports/dev_creating_ports.html)
 
 ## Op Functions / Op Structure
 

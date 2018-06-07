@@ -1,3 +1,15 @@
+/**
+ * a framebuffer
+ * @namespace CGL.Framebuffer
+ * @memberof CGL
+ * @constructor
+ * @param {CGL.Context} cgl
+ * @param {Number} width
+ * @param {Number} height
+ * @param {Object} [options]
+ * @class
+ */
+
 var CGL=CGL || {};
 
 CGL.Framebuffer=function(_cgl,w,h,options)
@@ -19,10 +31,12 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         "isFloatingPointTexture":false
     };
 
+    if(!options.hasOwnProperty('filter')) options.filter=CGL.Texture.FILTER_LINEAR;
+    
     var texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":options.isFloatingPointTexture,
-            "filter":CGL.Texture.FILTER_NEAREST,
+            "filter":options.filter,
             "wrap":CGL.Texture.CLAMP_TO_EDGE
         });
 
@@ -36,15 +50,49 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     var frameBuf = cgl.gl.createFramebuffer();
     var depthBuffer = cgl.gl.createRenderbuffer();
 
-
     this.getWidth=function(){ return width; };
     this.getHeight=function(){ return height; };
 
+    /**
+     * get native gl framebuffer
+     * @name CGL.Context#getGlFrameBuffer()
+     * @returns {Object} framebuffer
+     * @function
+     */
+    this.getGlFrameBuffer=function()
+    {
+        return frameBuf;
+    }
+
+
+    /**
+     * get depth renderbuffer
+     * @name CGL.Context#getDepthRenderBuffer
+     * @returns {Object} renderbuffer
+     * @function
+     */
+    this.getDepthRenderBuffer=function()
+    {
+        return depthBuffer;
+    }
+
+    /**
+     * get color texture 
+     * @name CGL.Context#getTextureColor
+     * @returns {CGL.Texture} rgba texture
+     * @function
+     */
     this.getTextureColor=function()
     {
         return texture;
     };
 
+    /**
+     * get depth texture
+     * @name CGL.Context#getTextureDepth
+     * @returns {CGL.Texture} depth texture
+     * @function
+     */
     this.getTextureDepth=function()
     {
         return textureDepth;
@@ -61,8 +109,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         if(w<2)w=2;
         if(h<2)h=2;
 
-        width=w;
-        height=h;
+        width=Math.ceil(w);
+        height=Math.ceil(h);
 
         CGL.profileFrameBuffercreate++;
 
@@ -78,8 +126,6 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
         if(depthTextureExt)
         {
-
-
             // if(this._cgl.gl.getExtension('OES_texture_half_float'))
             // {
             //     console.log("halt float");HALF_FLOAT_OES
@@ -127,7 +173,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     {
         cgl.pushModelMatrix();
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
-        cgl.pushFrameBuffer(frameBuf);
+        cgl.pushGlFrameBuffer(frameBuf);
+        cgl.pushFrameBuffer(this);
 
         cgl.pushPMatrix();
         cgl.gl.viewport(0, 0, width,height );
@@ -139,7 +186,8 @@ CGL.Framebuffer=function(_cgl,w,h,options)
     this.renderEnd=function()
     {
         cgl.popPMatrix();
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer() );
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popGlFrameBuffer() );
+        cgl.popFrameBuffer();
 
         cgl.popModelMatrix();
         cgl.resetViewPort();

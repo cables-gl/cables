@@ -9,7 +9,7 @@ var invert = op.inValueBool("asine", false);
 // output
 var result = op.outValue('Result');
 
-var calculate = Math.cos;
+var calculate = Math.tan;
 
 value.onValueChanged = function()
 {
@@ -20,6 +20,6 @@ value.onValueChanged = function()
 
 invert.onChange = function()
 {
-    if(invert.get()) calculate = Math.acos;
-    else calculate = Math.cos;
+    if(invert.get()) calculate = Math.atan;
+    else calculate = Math.tan;
 }

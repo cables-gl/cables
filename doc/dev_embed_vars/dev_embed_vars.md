@@ -17,6 +17,14 @@ In a typical Situations you have one `SetVariable` / `SetVariableString` op and 
 
 When you embed a patch into your website (see [Docs: Embedding](https://docs.cables.gl/dev_embed/dev_embed.html)) you can set cables-variables in your JavaScript-code:
 
+short version:
+
+```
+    CABLES.patch.setVariable("IsInteracting",true);
+```
+
+long version (get the variable object)
+
 ```javascript
 var myVar = CABLES.patch.getVar("IsInteracting");
 

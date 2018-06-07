@@ -43,11 +43,11 @@ if(cgl.glVersion==1)
     var srcVert=''
         .endl()+'{{MODULES_HEAD}}'
         .endl()+'IN vec3 vPosition;'
-        .endl()+'IN vec3 attrBaycentric;'
+        .endl()+'IN vec3 attrBarycentric;'
         .endl()+'UNI mat4 projMatrix;'
         .endl()+'UNI mat4 modelMatrix;'
         .endl()+'UNI mat4 viewMatrix;'
-        .endl()+'OUT vec3 baycentric;'
+        .endl()+'OUT vec3 barycentric;'
         .endl()+'IN vec2 attrTexCoord;'
         .endl()+'OUT vec2 texCoord;'
         .endl();
@@ -57,11 +57,11 @@ else
     var srcVert=''
         .endl()+'{{MODULES_HEAD}}'
         .endl()+'IN vec3 vPosition;'
-        .endl()+'IN vec3 attrBaycentric;'
+        .endl()+'IN vec3 attrBarycentric;'
         .endl()+'UNI mat4 projMatrix;'
         .endl()+'UNI mat4 modelMatrix;'
         .endl()+'UNI mat4 viewMatrix;'
-        .endl()+'OUT vec3 baycentric;'
+        .endl()+'OUT vec3 barycentric;'
         .endl()+'IN vec2 attrTexCoord;'
         .endl()+'OUT vec2 texCoord;'
         .endl();
@@ -71,7 +71,7 @@ srcVert+=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'    texCoord=attrTexCoord;'
-    .endl()+'    baycentric=attrBaycentric;'
+    .endl()+'    barycentric=attrBarycentric;'
     .endl()+'    vec4 pos = vec4( vPosition, 1. );'
     .endl()+'    {{MODULE_VERTEX_POSITION}}'
     .endl()+'    gl_Position = projMatrix * viewMatrix * modelMatrix * pos;'
@@ -85,14 +85,14 @@ if(cgl.glVersion==1)
 {
     srcFrag=''//#extension GL_OES_standard_derivatives : enable'
     // .endl()+'precision highp float;'
-    .endl()+'IN vec3 baycentric;'
+    .endl()+'IN vec3 barycentric;'
     .endl();
 }
 else
 {
     srcFrag=''
     // .endl()+'precision highp float;'
-    .endl()+'IN vec3 baycentric;'
+    .endl()+'IN vec3 barycentric;'
     // .endl()+'out vec4 fragColor;'
 
     .endl();
@@ -106,8 +106,8 @@ srcFrag+=''
 .endl()+''
 .endl()+'float edgeFactor()'
 .endl()+'{'
-.endl()+'    vec3 d = fwidth(baycentric);'
-.endl()+'    vec3 a3 = smoothstep(vec3(0.0), d*width*4.0, baycentric);'
+.endl()+'    vec3 d = fwidth(barycentric);'
+.endl()+'    vec3 a3 = smoothstep(vec3(0.0), d*width*4.0, barycentric);'
 .endl()+'    return min(min(a3.x, a3.y), a3.z);'
 .endl()+'}'
 .endl()+'void main()'
@@ -126,7 +126,7 @@ srcFrag+=''
 .endl()+'   #ifndef WIREFRAME_FILL'
 .endl()+'       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
 .endl()+'   #endif'
-// .endl()+'col.xyz=baycentric;'
+// .endl()+'col.xyz=barycentric;'
 .endl();
 
 // if(cgl.glVersion==1)srcFrag+='gl_FragColor=col;';

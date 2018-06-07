@@ -1,5 +1,3 @@
-op.name="WebVr";
-
 var inStartVr=op.inFunctionButton("Start VR");
 
 var nextVr=op.outFunction("VR Mainloop");
@@ -12,6 +10,7 @@ var vrDisplay=null;
 var zero=vec3.create();
 var frameCount=0;
 var frameLast=0;
+var frameData=null;
 
 inStartVr.onTriggered=function()
 {
@@ -24,20 +23,17 @@ inStartVr.onTriggered=function()
         console.error("could not start vr / no vr display found");
         return;
     }
-
+    
     vrDisplay.requestPresent([{ source: cgl.canvas }]).then(
         function()
         {
             console.log('Presenting to WebVR display');
-        
+
             var leftEye = vrDisplay.getEyeParameters('left');
             var rightEye = vrDisplay.getEyeParameters('right');
 
             console.log(leftEye.renderWidth);
             console.log(leftEye.renderHeight);
-
-            // cgl.canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
-            // cgl.canvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
 
             frameData=new VRFrameData();
             
@@ -138,6 +134,7 @@ if(navigator.getVRDisplays)
             vrDisplay = displays[0];
             outDisplayName.set(vrDisplay.displayName);
             console.log('Display found',vrDisplay.displayName);
+            
             
             // Starting the presentation when the button is clicked: It can only be called in response to a user gesture
             // btn.addEventListener('click', function()

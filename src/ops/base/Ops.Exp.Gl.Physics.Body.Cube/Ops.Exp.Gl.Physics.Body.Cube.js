@@ -1,5 +1,3 @@
-op.name="BodyCube";
-
 var exec=op.inFunction("Exec");
 var inMass=op.inValue("Mass");
 

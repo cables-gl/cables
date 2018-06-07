@@ -136,12 +136,12 @@ CGL.TextureEffect.prototype.bind=function()
     if(!this.switched)
     {
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
-        this._cgl.pushFrameBuffer(this._frameBuf);
+        this._cgl.pushGlFrameBuffer(this._frameBuf);
     }
     else
 	{
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf2);
-        this._cgl.pushFrameBuffer(this._frameBuf2);
+        this._cgl.pushGlFrameBuffer(this._frameBuf2);
     }
 };
 
@@ -155,7 +155,7 @@ CGL.TextureEffect.prototype.finish=function()
 
     this._cgl.TextureEffectMesh.render(this._cgl.getShader());
 
-    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer());
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
 
     this.switched=!this.switched;
 };
