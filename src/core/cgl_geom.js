@@ -15,7 +15,7 @@ CGL.Geometry=function(name)
     this.texCoords=new Float32Array();
     this.texCoordsIndices=[];
     this.vertexNormals=[];
-    this.baycentrics=[];
+    this.barycentrics=[];
     this.morphTargets=[];
     this.vertexColors=[];
 
@@ -207,8 +207,8 @@ CGL.Geometry.prototype.copy=function()
     geom.vertexNormals.length=this.vertexNormals.length;
     for(i=0;i<this.vertexNormals.length;i++) geom.vertexNormals[i]=this.vertexNormals[i];
 
-    geom.baycentrics.length=this.baycentrics.length;
-    for(i=0;i<this.baycentrics.length;i++) geom.baycentrics[i]=this.baycentrics[i];
+    geom.barycentrics.length=this.barycentrics.length;
+    for(i=0;i<this.barycentrics.length;i++) geom.barycentrics[i]=this.barycentrics[i];
 
     geom.morphTargets.length=this.morphTargets.length;
     for(i=0;i<this.morphTargets.length;i++) geom.morphTargets[i]=this.morphTargets[i];
@@ -390,16 +390,16 @@ CGL.Geometry.prototype.unIndex=function()
     this.verticesIndices=newIndizes;
 };
 
-CGL.Geometry.prototype.calcBaycentric=function()
+CGL.Geometry.prototype.calcBarycentric=function()
 {
-    this.baycentrics.length=this.vertices.length;
+    this.barycentrics.length=this.vertices.length;
 
-    for(i=0;i<this.vertices.length;i++) this.baycentrics[i]=0;
+    for(i=0;i<this.vertices.length;i++) this.barycentrics[i]=0;
 
     var count=0;
     for(i=0;i<this.vertices.length;i+=3)
     {
-        this.baycentrics[i+count]=1;
+        this.barycentrics[i+count]=1;
         count++;
         if(count==3)count=0;
     }
