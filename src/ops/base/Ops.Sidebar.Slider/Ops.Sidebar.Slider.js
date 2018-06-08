@@ -50,13 +50,18 @@ maxPort.onChange = onMaxPortChange;
 stepPort.onChange = stepPortChanged;
 op.onDelete = onDelete;
 
+op.init=function()
+{
+    valuePort.set(parseFloat(defaultValuePort.get()));
+};
+
 // functions
 
 function onSliderInput(ev) {
     ev.preventDefault();
     ev.stopPropagation();
     value.textContent = ev.target.value;
-    valuePort.set(ev.target.value);
+    valuePort.set(parseFloat(ev.target.value));
     updateActiveTrack();
     return false;
 }
@@ -99,7 +104,7 @@ function onMaxPortChange() {
 
 function onDefaultValueChanged() {
     var defaultValue = defaultValuePort.get();
-    valuePort.set(defaultValue);
+    valuePort.set(parseFloat(defaultValue));
     onMinPortChange();
     onMaxPortChange();
     input.setAttribute('value', defaultValue);
