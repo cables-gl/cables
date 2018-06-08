@@ -537,3 +537,19 @@
 }
 
  
+ 
+.sidebar__item-presets-preset
+{
+    padding:4px;
+    cursor:pointer;
+    padding-left:8px;
+    padding-right:8px;
+    margin-right:4px;
+    background-color:#444;
+
+}
+
+.sidebar__item-presets-preset:hover
+{
+    background-color:#666;
+}

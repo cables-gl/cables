@@ -59,7 +59,7 @@ function hexToRgbNorm(hexColor) {
 }
 
 function onColorPickerChange(event) {
-    setColorOutPorts(event.target.value)
+    setColorOutPorts(event.target.value);
     input.value = event.target.value;
 }
 

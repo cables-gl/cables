@@ -1,5 +1,5 @@
 {
-    "updated": 1517957130237,
+    "updated": 1528379251248,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "10d03459-b913-4e4c-a51f-180e4bd356da",
@@ -16,42 +16,66 @@
             },
             {
                 "type": "0",
-                "name": "Count"
+                "name": "Count",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "size"
+                "name": "size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Spread"
+                "name": "Spread",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Shape"
+                "name": "Shape",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "random seed"
+                "name": "random seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale X"
+                "name": "Scale X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale Y"
+                "name": "Scale Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale Z"
+                "name": "Scale Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "time"
+                "name": "Rotate X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "time",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Exp.Gl.Matrix.RandomInstancer"
+        "name": "Ops.Gl.RandomInstancer"
     },
     "summary": "draw one mesh multiple times very fast"
 }
