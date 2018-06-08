@@ -648,14 +648,9 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     var loadingId = this.loading.start('core', 'deserialize');
     if (this.onLoadStart) this.onLoadStart();
 
-    var stopwatch=null;
-    if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('deserialize');
-
     
     if (typeof obj === "string") obj = JSON.parse(obj);
     var self = this;
-
-    if(stopwatch)stopwatch.stop('jsonparse');
 
     this.settings = obj.settings;
 
@@ -670,8 +665,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             );
         }
     }
-
-    if(stopwatch)stopwatch.stop('add ops..');
 
     var reqs=new CABLES.Requirements(this);
     
@@ -727,8 +720,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         // else console.log('op time',obj.ops[iop].objName,timeused);
     }
 
-    if(stopwatch)stopwatch.stop('onloaded valueset');
-
     for (var i in this.ops) {
         if (this.ops[i].onLoadedValueSet) {
             this.ops[i].onLoadedValueSet();
@@ -736,8 +727,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-
-    if(stopwatch)stopwatch.stop('create links');
 
     // create links...
     if(obj.ops)
@@ -758,8 +747,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-    if(stopwatch)stopwatch.stop('onloaded');
-
     for (var i in this.ops) {
         if (this.ops[i].onLoaded) { // TODO: deprecate!!!
             this.ops[i].onLoaded();
@@ -767,16 +754,12 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-    if(stopwatch)stopwatch.stop('init ops');
-
     for (var i in this.ops) {
         if (this.ops[i].init) {
             this.ops[i].init();
             this.ops[i].init = null;
         }
     }
-
-    if(stopwatch)stopwatch.stop('finished');
 
 
     this.loading.finished(loadingId);
