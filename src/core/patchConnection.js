@@ -23,10 +23,7 @@ CABLES.showPacoRenderer=function()
     // {
     //     $('body').append('<iframe class="paco-iframe" style="z-index:9999999;" src="/renderer/"></iframe>');
     // }
-    
 }
-
-
 
 CABLES.PatchConnectionReceiver=function(patch,options,connector)
 {
@@ -206,9 +203,6 @@ CABLES.PatchConnectorSocketIO.prototype.receive=function(paco)
             paco._receive(r.data);
 
     });
-
-    // console.log('init');
-
 };
 
 CABLES.PatchConnectorSocketIO.prototype.send=function(event,vars)

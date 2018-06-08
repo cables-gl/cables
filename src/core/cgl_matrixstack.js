@@ -65,13 +65,3 @@ CGL.MatrixStack.prototype.length=function()
     return this._index;
 }
 
-
-//----------------
-
-// var stack=new CGL.MatrixStack();
-// stack.push(mat4.create());
-// stack.push(mat4.create());
-// stack.pop();
-// stack.push(mat4.create());
-// stack.pop();
-// stack.pop();

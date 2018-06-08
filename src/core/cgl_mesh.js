@@ -1,7 +1,5 @@
 
-
-
- var CGL=CGL || {};
+var CGL=CGL || {};
 CGL.MESH=CGL.MESH || {};
 
 CGL.MESH.lastShader=null;
