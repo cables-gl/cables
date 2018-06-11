@@ -107,7 +107,7 @@ function onDefaultValueChanged() {
     valuePort.set(parseFloat(defaultValue));
     onMinPortChange();
     onMaxPortChange();
-    input.setAttribute('value', defaultValue);
+    input.value = defaultValue;
     value.textContent = defaultValue;
     updateActiveTrack(defaultValue); // needs to be passed as argument, is this async?
 }
