@@ -1,0 +1,1 @@
+Trigonometric functions in Javascript require their parameters to be specified in radians.
