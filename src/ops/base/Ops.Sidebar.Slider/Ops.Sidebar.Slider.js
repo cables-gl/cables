@@ -4,10 +4,10 @@ const STEP_DEFAULT = 0.01;
 // inputs
 const parentPort = op.inObject('link');
 const labelPort = op.inValueString('Text', 'Slider');
+const inputValuePort = op.inValue('Input', 0.5);
 const minPort = op.inValue("Min", 0);
 const maxPort = op.inValue("Max", 1);
 const stepPort = op.inValue("Step", STEP_DEFAULT);
-const inputValuePort = op.inValue('Input', 0.5);
 const setDefaultValueButtonPort = op.inFunctionButton('Set Default');
 const defaultValuePort = op.inValue('Default', 0.5);
 defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
