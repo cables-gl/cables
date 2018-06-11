@@ -4,7 +4,10 @@ const labelPort = op.inValueString('Text', 'Slider');
 const minPort = op.inValue("Min", 0);
 const maxPort = op.inValue("Max", 1);
 const stepPort = op.inValue("Step", 0.01);
+const inputValuePort = op.inValue('Input', 0.5);
+const setDefaultValueButtonPort = op.inFunctionButton('Set Default');
 const defaultValuePort = op.inValue('Default', 0.5);
+defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 
 // outputs
 const siblingsPort = op.outObject('childs');
@@ -44,7 +47,9 @@ input.addEventListener('input', onSliderInput);
 // events
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
+inputValuePort.onChange = onInputValuePortChanged;
 defaultValuePort.onChange = onDefaultValueChanged;
+setDefaultValueButtonPort.onTriggered = onSetDefaultValueButtonPress;
 minPort.onChange = onMinPortChange;
 maxPort.onChange = onMaxPortChange;
 stepPort.onChange = stepPortChanged;
@@ -57,11 +62,44 @@ op.init=function()
 
 // functions
 
+function onInputValuePortChanged() {
+    let newValue = parseFloat(inputValuePort.get());
+    const minValue = minPort.get();
+    const maxValue = maxPort.get();
+    if(newValue > maxValue) { newValue = maxValue; }
+    else if(newValue < minValue) { newValue = minValue; }
+    value.textContent = newValue;
+    input.value = newValue;
+    valuePort.set(newValue);
+    updateActiveTrack();
+}
+
+function onSetDefaultValueButtonPress() {
+    let newValue = parseFloat(inputValuePort.get());
+    const minValue = minPort.get();
+    const maxValue = maxPort.get();
+    if(newValue > maxValue) { newValue = maxValue; }
+    else if(newValue < minValue) { newValue = minValue; }
+    value.textContent = newValue;
+    input.value = newValue;
+    valuePort.set(newValue);
+    defaultValuePort.set(newValue);
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
+    updateActiveTrack();
+}
+
 function onSliderInput(ev) {
     ev.preventDefault();
     ev.stopPropagation();
     value.textContent = ev.target.value;
-    valuePort.set(parseFloat(ev.target.value));
+    const inputFloat = parseFloat(ev.target.value);
+    valuePort.set(inputFloat);
+    inputValuePort.set(inputFloat);
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
     updateActiveTrack();
     return false;
 }
