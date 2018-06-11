@@ -1,0 +1,53 @@
+{
+    "updated": 1519810468973,
+    "authorName": "pandur",
+    "id": "4dc5789f-e2cb-40f3-bfb3-e1ffd4f05ecc",
+    "created": 1519810468977,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "default"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "name"
+            },
+            {
+                "type": "0",
+                "name": "title"
+            },
+            {
+                "type": "0",
+                "name": "description"
+            },
+            {
+                "type": "0",
+                "name": "tab"
+            },
+            {
+                "type": "0",
+                "name": "order"
+            },
+            {
+                "type": "0",
+                "name": "display"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "value"
+            }
+        ],
+        "name": "Ops.Polyshapes.PolyValue"
+    }
+}

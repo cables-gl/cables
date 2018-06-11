@@ -1,0 +1,1 @@
+This function expects the values of the angle parameter to be provided in radians.
