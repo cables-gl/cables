@@ -14,7 +14,7 @@
     right: 9px;
 }
 
-.sidebar {
+.sidebar-cables {
   position: absolute;
   top: 0;
   left: 0;
@@ -33,12 +33,12 @@
   --sidebar-hover-transition-time: .2s;
 }
 
-.sidebar::selection {
+.sidebar-cables::selection {
     background-color: #24baa7;
     color: #EEEEEE;
 }
 
-.sidebar--closed {
+.sidebar-cables--closed {
   width: auto;
 }
 
