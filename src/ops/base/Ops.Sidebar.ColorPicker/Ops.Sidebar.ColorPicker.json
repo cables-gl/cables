@@ -1,5 +1,5 @@
 {
-    "updated": 1528378152888,
+    "updated": 1528725605046,
     "authorName": "tim",
     "id": "580500eb-1f95-4e40-95f8-1ca50b044d0e",
     "created": 1525871498923,
@@ -13,6 +13,15 @@
                 "type": "0",
                 "name": "Text",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Input",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Set Default"
             },
             {
                 "type": "0",

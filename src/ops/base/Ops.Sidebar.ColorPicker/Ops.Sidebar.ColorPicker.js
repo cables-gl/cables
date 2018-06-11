@@ -1,7 +1,10 @@
 // inputs
 const parentPort = op.inObject('Link');
 const labelPort = op.inValueString('Text', 'Hex Color');
+const inputValuePort = op.inValueString('Input', '#07F78C');
+const setDefaultValueButtonPort = op.inFunctionButton('Set Default');
 const defaultValuePort = op.inValueString('Default', '#07F78C');
+defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 
 // outputs
 const siblingsPort = op.outObject('Children');
@@ -45,8 +48,30 @@ parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
 defaultValuePort.onChange = onDefaultValueChanged;
 op.onDelete = onDelete;
+inputValuePort.onChange = onInputValuePortChange;
+setDefaultValueButtonPort.onTriggered = setDefaultColor;
 
 // functions
+
+function setDefaultColor() {
+    let hexCol = inputValuePort.get().trim();
+    defaultValuePort.set(hexCol);
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
+}
+
+function onInputValuePortChange() {
+    let hexCol = inputValuePort.get().trim();
+    if(hexCol.length === 6 && hexCol.charAt(0) !== '#') {
+        hexCol = '#' + hexCol;
+    }
+    if(hexCol.length === 7) {
+        colorInput.value = hexCol;
+        input.value = hexCol;
+        setColorOutPorts(hexCol);
+    }
+}
 
 function hexToRgbNorm(hexColor) {
     if(!hexColor || hexColor.length !== 7) { return; }
@@ -61,6 +86,10 @@ function hexToRgbNorm(hexColor) {
 function onColorPickerChange(event) {
     setColorOutPorts(event.target.value);
     input.value = event.target.value;
+    inputValuePort.set(event.target.value)
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
 }
 
 function onInput(ev) {
@@ -71,6 +100,10 @@ function onInput(ev) {
     if(newValue.length === 7) {
         colorInput.value = newValue;
         setColorOutPorts(newValue);
+        inputValuePort.set(newValue)
+        if(CABLES.UI){
+            gui.patch().showOpParams(op); /* update DOM */
+        }
     }
 }
 
