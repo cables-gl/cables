@@ -408,6 +408,27 @@
   background-color: #EEEEEE;  
 }
 
+.sidebar__slider input[type=text] {
+    box-sizing: border-box;
+    background-color: #333333;
+    color: #BBBBBB;
+    display: inline-block;
+    width: 106px;
+    height: 18px;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 0 4px !important;
+    margin: 0;
+} 
+
+.sidebar__slider input[type=text]:active, 
+.sidebar__slider input[type=text]:focus,
+.sidebar__slider input[type=text]:hover {
+    background-color: #444444;
+    color: #EEEEEE;
+}
+
 /*
  * TEXT / DESCRIPTION
  */
