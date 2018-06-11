@@ -32,6 +32,13 @@ selectList.onchange=function()
     setSidebar(selectList.options[selectList.selectedIndex].value);
 };
 
+op.init=function()
+{
+    for(var i=0;i<MAX_PRESETS;i++)
+        if(presetPorts[i].isLinked())
+            return setSidebar(0);
+};
+
 function updateSelect()
 {
     while(selectList.firstChild) selectList.removeChild(selectList.firstChild);
@@ -44,6 +51,10 @@ function updateSelect()
             option.value = i;
 
             var other=presetPorts[i].links[0].getOtherPort(presetPorts[i]);
+            
+            // other.parent.removeListener("onTitleChange",updateSelect);
+            if(!other.parent.hasEventListener("onTitleChange",updateSelect))
+                other.parent.addEventListener("onTitleChange",updateSelect);
 
             option.text = ''+other.parent.name;
             selectList.appendChild(option);
@@ -77,7 +88,7 @@ function setSidebar(idx)
     {
         var theOp=op.patch.getOpById(obj.ops[i].id);
         
-        console.log(i);
+        // console.log(i);
         
         for(var portName in obj.ops[i].ports)
         {
@@ -167,6 +178,8 @@ function serializeSidebar()
     }
     
     var r={ops:values};
+    
+    if(CABLES.UI && gui) gui.setStateUnsaved();
     return r;
 }
 
@@ -186,8 +199,6 @@ function addPreset()
     }
 
     var r=serializeSidebar();
-    
-    
     
     console.log(r);
     

@@ -289,6 +289,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + 'out vec4 outColor;'
                 .endl() + '#define gl_FragColor outColor'
                 .endl();
+
         } else {
             fs = ''
                 .endl() + '// '
