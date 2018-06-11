@@ -1,0 +1,66 @@
+{
+    "updated": 1528716574897,
+    "authorName": "pandur",
+    "id": "97a5b376-3d47-4039-8708-c8968cc29857",
+    "created": 1528301168147,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "0",
+                "name": "Text",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Add Preset"
+            },
+            {
+                "type": "1",
+                "name": "Update current Preset"
+            },
+            {
+                "type": "2",
+                "name": "Preset 0"
+            },
+            {
+                "type": "2",
+                "name": "Preset 1"
+            },
+            {
+                "type": "2",
+                "name": "Preset 2"
+            },
+            {
+                "type": "2",
+                "name": "Preset 3"
+            },
+            {
+                "type": "2",
+                "name": "Preset 4"
+            },
+            {
+                "type": "2",
+                "name": "Preset 5"
+            },
+            {
+                "type": "2",
+                "name": "Preset 6"
+            },
+            {
+                "type": "2",
+                "name": "Preset 7"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Children"
+            }
+        ],
+        "name": "Ops.Sidebar.Presets"
+    }
+}
