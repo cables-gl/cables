@@ -143,8 +143,8 @@ function updateActiveTrack(val) {
     if(typeof val !== 'undefined') {
         valueToUse = val;
     }
-    // const availableWidth = input.offsetWidth; /* this returns 0 at the beginning, so cannot be used... */
-    const availableWidth = 206;
+    let availableWidth = input.offsetWidth; /* this returns 0 at the beginning... */
+    if(availableWidth === 0) { availableWidth = 206; }
     var trackWidth = CABLES.map(
         valueToUse,
         parseFloat(input.min), 
