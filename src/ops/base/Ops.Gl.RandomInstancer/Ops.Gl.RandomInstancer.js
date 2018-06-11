@@ -88,7 +88,7 @@ function removeModule()
 
 function doRender()
 {
-    if(needsPrepare)prepare();
+    if(needsPrepare || !mesh) prepare();
     
     if(mesh)
     {
@@ -117,10 +117,7 @@ function doRender()
 
         mesh.render(shader);
     }
-    else
-    {
-        prepare();
-    }
+
 }
 
 

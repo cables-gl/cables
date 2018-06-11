@@ -1,9 +1,7 @@
 var cgl=op.patch.cgl;
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-
 var msaa=op.inValueSelect("MSAA",["none","2x","4x","8x"],"none");
-
 var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 var width=op.inValueInt("texture width");
@@ -20,7 +18,6 @@ var texDepth=op.outTexture("textureDepth");
 var fpTexture=op.inValueBool("HDR");
 var depth=op.inValueBool("Depth",true);
 var clear=op.inValueBool("Clear",true);
-
 
 var fb=null;
 
@@ -49,7 +46,6 @@ function updateVpSize()
     }
 }
 
-
 fpTexture.onChange=function()
 {
     reInitFb=true;
@@ -64,7 +60,6 @@ clear.onChange=function()
 {
     reInitFb=true;
 };
-
 
 var onFilterChange=function()
 {
