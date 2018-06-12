@@ -33,13 +33,13 @@ function addStyle()
             
             // Wait until the font has been loaded, log the current status.
             fontFaceObj.loaded.then((fontFace) => {
-                console.info('Current status', fontFace.status);
-                console.log(fontFace.family, 'loaded successfully.');
+                // console.info('Current status', fontFace.status);
+                // console.log(fontFace.family, 'loaded successfully.');
                 outLoaded.set(true);
                 
                 // Throw an error if loading wasn't successful
             }, (fontFace) => {
-            console.error('Current status', fontFaceObj.status);
+            console.error('Font loading error! Current status', fontFaceObj.status);
             });
         } else { // font loading api not supported
             var fileUrl=op.patch.getFilePath(String(filename.get()));
