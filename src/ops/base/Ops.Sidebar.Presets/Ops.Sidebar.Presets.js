@@ -104,10 +104,10 @@ function setSidebar(idx)
                 console.log('unknown p!');
             }
             
-            var def=theOp.getPortByName("Default");
+            var def=theOp.getPortByName("Input");
             if(def)
             {
-                console.log("SET DEFAULT!!!");
+                console.log("SET input!!!");
                 def.set(obj.ops[i].ports[portName]);
             }
         }
