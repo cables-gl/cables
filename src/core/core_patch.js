@@ -296,9 +296,11 @@ CABLES.Patch.prototype.addOp = function(objName, uiAttribs) {
         this.ops.push(op);
 
         if (this.onAdd) this.onAdd(op);
+        
+        if(op.init)op.init();
+        
     }
 
-    if(op.init)op.init();
 
     // if(next) next(op);
     return op;
