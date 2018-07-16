@@ -1,10 +1,16 @@
+// constants
+const STEP_DEFAULT = 0.01;
+
 // inputs
 const parentPort = op.inObject('link');
 const labelPort = op.inValueString('Text', 'Slider');
+const inputValuePort = op.inValue('Input', 0.5);
 const minPort = op.inValue("Min", 0);
 const maxPort = op.inValue("Max", 1);
-const stepPort = op.inValue("Step", 0.01);
+const stepPort = op.inValue("Step", STEP_DEFAULT);
+const setDefaultValueButtonPort = op.inFunctionButton('Set Default');
 const defaultValuePort = op.inValue('Default', 0.5);
+defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 
 // outputs
 const siblingsPort = op.outObject('childs');
@@ -19,9 +25,16 @@ label.classList.add('sidebar__item-label');
 var labelText = document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
-var value = document.createElement('div');
-value.textContent = defaultValuePort.get();
-value.classList.add('sidebar__item-value-label');
+var value = document.createElement('input');
+value.value = defaultValuePort.get();
+value.classList.add('sidebar__text-input-input');
+// value.setAttribute('type', 'number'); /* not possible to use '.' instead of ',' as separator on German computer, so not usable... */
+value.setAttribute('type', 'text');
+// value.setAttribute('lang', 'en-US'); // force '.' as decimal separator
+// value.setAttribute('pattern', '[0-9]+([\.][0-9]+)?'); // only allow '.' as separator
+// value.setAttribute('step', 'any'); /* we cannot use the slider step, as it restricts valid numbers to be entered */
+// value.setAttribute('formnovalidate', '');
+value.oninput = onTextInputChanged;
 el.appendChild(value);
 var inputWrapper = document.createElement('div');
 inputWrapper.classList.add('sidebar__slider-input-wrapper');
@@ -44,19 +57,77 @@ input.addEventListener('input', onSliderInput);
 // events
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
+inputValuePort.onChange = onInputValuePortChanged;
 defaultValuePort.onChange = onDefaultValueChanged;
+setDefaultValueButtonPort.onTriggered = onSetDefaultValueButtonPress;
 minPort.onChange = onMinPortChange;
 maxPort.onChange = onMaxPortChange;
 stepPort.onChange = stepPortChanged;
 op.onDelete = onDelete;
 
+op.init=function()
+{
+    valuePort.set(parseFloat(defaultValuePort.get()));
+};
+
 // functions
+
+function onTextInputChanged(ev) {
+    let newValue = parseFloat(ev.target.value);
+    if(isNaN(newValue)) {
+        newValue = 0;
+    }
+    const min = minPort.get();
+    const max = maxPort.get();
+    if(newValue < min) { newValue = min; }
+    else if(newValue > max) { newValue = max; }
+    // input.value = newValue;
+    valuePort.set(newValue);
+    updateActiveTrack();
+    inputValuePort.set(newValue);
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
+}
+
+function onInputValuePortChanged() {
+    let newValue = parseFloat(inputValuePort.get());
+    const minValue = minPort.get();
+    const maxValue = maxPort.get();
+    if(newValue > maxValue) { newValue = maxValue; }
+    else if(newValue < minValue) { newValue = minValue; }
+    value.value = newValue;
+    input.value = newValue;
+    valuePort.set(newValue);
+    updateActiveTrack();
+}
+
+function onSetDefaultValueButtonPress() {
+    let newValue = parseFloat(inputValuePort.get());
+    const minValue = minPort.get();
+    const maxValue = maxPort.get();
+    if(newValue > maxValue) { newValue = maxValue; }
+    else if(newValue < minValue) { newValue = minValue; }
+    value.value = newValue;
+    input.value = newValue;
+    valuePort.set(newValue);
+    defaultValuePort.set(newValue);
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
+    updateActiveTrack();
+}
 
 function onSliderInput(ev) {
     ev.preventDefault();
     ev.stopPropagation();
-    value.textContent = ev.target.value;
-    valuePort.set(ev.target.value);
+    value.value = ev.target.value;
+    const inputFloat = parseFloat(ev.target.value);
+    valuePort.set(inputFloat);
+    inputValuePort.set(inputFloat);
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
     updateActiveTrack();
     return false;
 }
@@ -72,8 +143,8 @@ function updateActiveTrack(val) {
     if(typeof val !== 'undefined') {
         valueToUse = val;
     }
-    // const availableWidth = input.offsetWidth; /* this returns 0 at the beginning, so cannot be used... */
-    const availableWidth = 206;
+    let availableWidth = input.offsetWidth; /* this returns 0 at the beginning... */
+    if(availableWidth === 0) { availableWidth = 206; }
     var trackWidth = CABLES.map(
         valueToUse,
         parseFloat(input.min), 
@@ -99,11 +170,11 @@ function onMaxPortChange() {
 
 function onDefaultValueChanged() {
     var defaultValue = defaultValuePort.get();
-    valuePort.set(defaultValue);
+    valuePort.set(parseFloat(defaultValue));
     onMinPortChange();
     onMaxPortChange();
-    input.setAttribute('value', defaultValue);
-    value.textContent = defaultValue;
+    input.value = defaultValue;
+    value.value = defaultValue;
     updateActiveTrack(defaultValue); // needs to be passed as argument, is this async?
 }
 

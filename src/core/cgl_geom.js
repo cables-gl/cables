@@ -395,7 +395,7 @@ CGL.Geometry.prototype.calcBarycentric=function()
 {
     this.barycentrics.length=this.vertices.length;
 
-    for(i=0;i<this.vertices.length;i++) this.barycentrics[i]=0;
+    for(var i=0;i<this.vertices.length;i++) this.barycentrics[i]=0;
 
     var count=0;
     for(i=0;i<this.vertices.length;i+=3)

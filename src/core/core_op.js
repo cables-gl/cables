@@ -53,7 +53,7 @@ CABLES.Op = function()
     this.onLoaded=null;
     this.onDelete=null;
     this.onUiAttrChange=null;
-    this._eventCallbacks=[];
+    this._eventCallbacks={};
     this._instances=null;
 
     /**
@@ -81,8 +81,13 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.setTitle=function(name)
     {
+        var doFireEvent=this.name!=name;
+
         this.name=name;
         this.uiAttr({title:name});
+
+        if(doFireEvent) 
+            this.fireEvent("onTitleChange",name);
     };
 
     CABLES.Op.prototype.setUiAttrib=CABLES.Op.prototype.uiAttr=function(newAttribs)
@@ -560,9 +565,6 @@ CABLES.Op = function()
     var unLinkTempReLinkP1=null;
     var unLinkTempReLinkP2=null;
 
-
-
-
     CABLES.Op.prototype.unLinkTemporary=function()
     {
         var tryRelink=true;
@@ -755,16 +757,8 @@ CABLES.Op = function()
 //
 //             }
         // };
-
-
-
-
-
         // this._instances=null;
-
     };
-
-
 
 
     CABLES.Op.prototype.setValues=function(obj)
@@ -801,14 +795,58 @@ CABLES.Op = function()
     /**
      * @function
      * @description add an eventlistener ot op
-     * currently implemented:  "onEnabledChange"
+     * currently implemented:  "onEnabledChange", "onTitleChange"
      * @param {which} name of event
      * @param {function} callback
      */
-    CABLES.Op.prototype.addListener=function(which,cb)
+    CABLES.Op.prototype.addListener=
+    CABLES.Op.prototype.addEventListener=function(which,cb)
     {
-        this._eventCallbacks[which]=cb;
+        if(!this._eventCallbacks[which]) this._eventCallbacks[which]=[cb];
+            else this._eventCallbacks[which].push(cb);
     }
+
+    CABLES.Op.prototype.hasEventListener=function(which,cb)
+    {
+        if(which && cb)
+        {
+            if(this._eventCallbacks[which])
+            {
+                var idx=this._eventCallbacks[which].indexOf(cb);
+                if(idx==-1) return false;
+                else return true;
+            }
+    
+        }
+        else
+        {
+            console.log("hasListener: missing parameters")
+        }
+    }
+
+    /**
+     * @function
+     * @description remove an eventlistener
+     * @param {which} name of event
+     * @param {function} callback
+     */
+    CABLES.Op.prototype.removeEventListener=function(which,cb)
+    {
+        if(this._eventCallbacks[which])
+        {
+            var idx=this._eventCallbacks[which].indexOf(cb);
+            if(idx==-1) console.log("eventlistener "+which+" not found...");
+            else this._eventCallbacks[which].slice(idx);
+        }
+    }
+    
+    CABLES.Op.prototype.fireEvent=function(which,params)
+    {
+        if(this._eventCallbacks[which])
+            for(var i=0;i<this._eventCallbacks[which].length;i++)
+                if(this._eventCallbacks[which])this._eventCallbacks[which][i](params);
+    }
+    
 
     /**
      * @function
@@ -818,7 +856,8 @@ CABLES.Op = function()
     CABLES.Op.prototype.setEnabled=function(b)
     {
         this.enabled=b;
-        if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
+        this.fireEvent('onEnabledChange',b);
+        // if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
     }
 
     CABLES.Op.prototype.setPortGroup=function(ports)

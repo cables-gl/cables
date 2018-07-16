@@ -1,5 +1,5 @@
 {
-    "updated": 1525265334388,
+    "updated": 1528711980408,
     "authorName": "pandur",
     "id": "334bcf18-e2d0-46ad-bf7a-0d36c3d29af9",
     "created": 1518203702644,
@@ -13,6 +13,15 @@
                 "type": "0",
                 "name": "Text",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Input",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Set Default"
             },
             {
                 "type": "0",

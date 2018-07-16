@@ -278,6 +278,13 @@ CABLES.Patch.prototype.createOp = function(objName) {
     return op;
 };
 
+/**
+ * create a new op in patch
+ * @name CABLES.Patch#addOp
+ * @param {String} objName, e.g. Ops.Math.Sum
+ * @param {Object} UI Attributes
+ * @function
+ */
 CABLES.Patch.prototype.addOp = function(objName, uiAttribs) {
     if (!objName || objName.indexOf('.') == -1) {
         CABLES.UI.MODAL.showError('could not create op', 'op unknown');
@@ -484,26 +491,44 @@ CABLES.Patch.prototype.exec = function(e) {
 };
 
 
+/**
+ * link two ops/ports
+ * @name CABLES.Patch#link
+ * @param {CABLES.Op} op1
+ * @param {String} op1 portName
+ * @param {CABLES.Op} op2
+ * @param {String} op2 portName
+ * @function
+ */
 CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
-    if (!op1 || !op2) return;
+    if(!op1)
+    {
+        console.log('link: op1 is null ');
+        return;
+    }
+    if(!op2)
+    {
+        console.log('link: op2 is null');
+        return;
+    }
     var port1 = op1.getPort(port1Name);
     var port2 = op2.getPort(port2Name);
 
-    if (!port1) {
+    if(!port1) {
         console.warn('port not found! ' + port1Name);
         return;
     }
 
-    if (!port2) {
+    if(!port2) {
         console.warn('port not found! ' + port2Name + ' of ' + op2.name);
         return;
     }
 
-    if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) {
+    if(!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) {
         return false;
     }
 
-    if (CABLES.Link.canLink(port1, port2)) {
+    if(CABLES.Link.canLink(port1, port2)) {
         var link = new CABLES.Link(this);
         link.link(port1, port2);
 

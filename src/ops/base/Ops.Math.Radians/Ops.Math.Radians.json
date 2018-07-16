@@ -1,0 +1,32 @@
+{
+    "updated": 1527697052123,
+    "authorName": "action",
+    "id": "d6daab6e-791e-4c4c-ac01-d887447de4f9",
+    "created": 1527697052132,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Degrees",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Radians"
+    },
+    "summary": "Converts a degree measurement to its corresponding value in radians.",
+    "docs": {
+        "ports": [
+            {
+                "name": "Result",
+                "text": "Output in Radians"
+            }
+        ]
+    }
+}

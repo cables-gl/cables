@@ -17,8 +17,12 @@ el.appendChild(header);
 header.addEventListener('click', onClick);
 var headerTitle = document.createElement('div');
 headerTitle.classList.add('sidebar__group-header-title');
-headerTitle.textContent = labelPort.get();
+// headerTitle.textContent = labelPort.get();
 header.appendChild(headerTitle);
+var headerTitleText = document.createElement('span');
+headerTitleText.textContent = labelPort.get();
+headerTitleText.classList.add('sidebar__group-header-title-text');
+headerTitle.appendChild(headerTitleText);
 var icon = document.createElement('span');
 icon.classList.add('sidebar__group-header-icon');
 icon.classList.add('icon-chevron-up');
@@ -50,7 +54,7 @@ function onClick(ev) {
 
 function onLabelTextChanged() {
     var labelText = labelPort.get();
-    headerTitle.textContent = labelText;
+    headerTitleText.textContent = labelText;
     if(CABLES.UI) {
         op.setTitle('Group: ' + labelText);    
     }
