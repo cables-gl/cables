@@ -1,6 +1,7 @@
 // inputs
 var parentPort = op.inObject('link');
 var labelPort = op.inValueString('Text', 'Value');
+var inId = op.inValueString('Id', '');
 
 // outputs
 var siblingsPort = op.outObject('childs');
@@ -18,9 +19,15 @@ el.appendChild(label);
 // events
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
+inId.onChange = onIdChanged;
 op.onDelete = onDelete;
 
 // functions
+
+function onIdChanged()
+{
+    el.id=inId.get();
+}
 
 function onLabelTextChanged() {
     var labelText = labelPort.get();

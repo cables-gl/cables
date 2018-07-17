@@ -58,12 +58,10 @@ function onInputClick() {
         valuePort.set(true);
         inputValuePort.set(true);
         value.textContent = 'true';
-        console.log('truee');
     } else {
         valuePort.set(false);
         inputValuePort.set(false);
         value.textContent = 'false';
-        console.log('falseee');
     }
     if(CABLES.UI){
         gui.patch().showOpParams(op); /* update DOM */

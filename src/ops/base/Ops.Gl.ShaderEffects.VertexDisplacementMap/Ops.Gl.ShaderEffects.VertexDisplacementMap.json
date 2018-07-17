@@ -11,39 +11,48 @@
             },
             {
                 "type": "0",
-                "name": "extrude"
+                "name": "extrude",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "flip"
+                "name": "flip",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Ignore Zero Values"
+                "name": "Ignore Zero Values",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "invert"
+                "name": "invert",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "offset X"
+                "name": "offset X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "offset Y"
+                "name": "offset Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "colorize"
+                "name": "colorize",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "colorize add"
+                "name": "colorize add",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mode"
+                "name": "mode",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -54,7 +63,7 @@
         ],
         "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap"
     },
-    "updated": 1518976079816,
+    "updated": 1528797981411,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "94ffa0de-2926-4d02-842e-a1ad6f5846c2",

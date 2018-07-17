@@ -27,6 +27,12 @@ function updateLater()
     updateShader();
 }
 
+op.init=function()
+{
+    console.log("scustomshader loaded!");
+    updateShader();
+};
+
 function doRender()
 {
     if(needsUpdate)updateShader();
