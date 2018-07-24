@@ -212,11 +212,17 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
 
-
+/**
+ * set texture data from an image/canvas object
+ * @name CGL.Texture#initTexture
+ * @param {object} image
+ * @param {filter} filter
+ * @function
+ */
 CGL.Texture.prototype.initTexture=function(img,filter)
 {
     this._fromData=false;
-    if(filter) this.unpackAlpha=filter.unpackAlpha||this.unpackAlpha;
+    // if(filter) this.unpackAlpha=filter.unpackAlpha||this.unpackAlpha;
 
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     if(img.width)this.width=img.width;
@@ -225,7 +231,7 @@ CGL.Texture.prototype.initTexture=function(img,filter)
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
-    this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, this.image);
+    this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
 
     this._setFilter();
 
@@ -236,7 +242,7 @@ CGL.Texture.prototype.initTexture=function(img,filter)
 };
 
 /**
- * delete textur. use this when texture is no longer needed
+ * delete texture. use this when texture is no longer needed
  * @name CGL.Texture#delete
  * @function
  */
