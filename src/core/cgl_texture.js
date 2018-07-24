@@ -373,8 +373,7 @@ CGL.Texture.prototype._setFilter=function()
         else
         {
             console.log('unknown texture filter!',this.filter);
-            var err = new Error();
-            throw err;
+            throw new Error("unknown texture filter!"+this.filter);
         }
     }
 };
