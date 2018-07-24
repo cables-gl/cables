@@ -120,6 +120,9 @@ function setupArray()
         }
     }
 
+console.log('matrixArray',matrixArray.length);
+console.log('num',num);
+
     mesh.numInstances=num;
     mesh.addAttribute('instMat',matrixArray,16);
     recalc=false;

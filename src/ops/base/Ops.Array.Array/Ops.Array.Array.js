@@ -5,9 +5,11 @@ var outArr=op.outArray("Array");
 
 var arr=[];
 inReset.onTriggered=reset;
-inLength.onChange=reset;
 inDefaultValue.onChange=reset;
-reset();
+inLength.onChange=function() {
+    if (inLength.get()!=arr.length)
+        reset();
+}
 
 function reset()
 {
@@ -25,4 +27,4 @@ function reset()
     outArr.set(arr);
 }
 
-
+reset();

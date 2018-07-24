@@ -7,6 +7,7 @@ fontname.onChange=addStyle;
 var timeOut=-1;
 
 var outLoaded=op.outValue("Loaded");
+var fontFaceObj;
 
 function addStyle()
 {
@@ -14,11 +15,11 @@ function addStyle()
     if(filename.get() && fontname.get())
     {
         if(document.fonts) {
-            const fontFaceObj = new FontFace(fontname.get(), 'url(' + filename.get() + ')');
+            fontFaceObj = new FontFace(fontname.get(), 'url(' + filename.get() + ')');
             //console.log(fontFaceObj);
             
             // Add the FontFace to the FontFaceSet
-            // document.fonts.add(fontFaceObj);
+            document.fonts.add(fontFaceObj);
             
             // Get the current status of the FontFace
             // (should be 'unloaded')

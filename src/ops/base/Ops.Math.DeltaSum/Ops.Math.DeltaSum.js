@@ -1,4 +1,5 @@
 var inVal=op.inValue("Delta Value");
+var defVal=op.inValue("Default Value",0);
 
 var inReset=op.inFunctionButton("Reset");
 
@@ -14,11 +15,15 @@ var outVal=op.outValue("Absolute Value");
 inLimit.onChange=updateLimit;
 updateLimit();
 
-inReset.onTriggered=function()
+function resetValue()
 {
-    value=0;
+    value=defVal.get();
     outVal.set(value);
-};
+    
+}
+
+defVal.onChange=resetValue;
+inReset.onTriggered=resetValue;
 
 function updateLimit()
 {

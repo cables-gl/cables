@@ -137,6 +137,7 @@ function onMouseWheel(e)
     
     v-=d;
     
+    
     checkValue();
 
     if( !smooth.get() )
