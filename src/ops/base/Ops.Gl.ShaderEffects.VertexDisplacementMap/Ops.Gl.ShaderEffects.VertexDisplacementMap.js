@@ -1,7 +1,6 @@
 var cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
-op.name='VertexDisplacement';
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -233,7 +232,6 @@ op.render.onTriggered=function()
     {
         uniTexture.setValue(texSlot);
         uniTextureFrag.setValue(texSlot);
-
 
         cgl.gl.activeTexture(cgl.gl.TEXTURE0+texSlot);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);

@@ -2,9 +2,6 @@ const parentPort = op.inObject('link');
 const labelPort = op.inValueString('Text', 'Presets');
 const siblingsPort = op.outObject('Children');
 
-var el = document.createElement('div');
-el.classList.add('sidebar__item');
-
 const inAddPreset=op.inFunctionButton("Add Preset");
 const inUpdatePreset=op.inFunctionButton("Update current Preset");
 
@@ -14,8 +11,16 @@ parentPort.onChange = onParentChanged;
 
 var presetPorts=[];
 
-var selectList = document.createElement("select");
-selectList.id = "mySelect";
+var el = document.createElement('div');
+el.classList.add('sidebar__item');
+el.classList.add('sidebar__select');
+var label = document.createElement('div');
+label.classList.add('sidebar__item-label');
+var labelText = document.createTextNode(labelPort.get());
+label.appendChild(labelText);
+el.appendChild(label);
+var selectList = document.createElement('select');
+selectList.classList.add('sidebar__select-select');
 el.appendChild(selectList);
 
 var MAX_PRESETS=8;
@@ -75,44 +80,55 @@ function onParentChanged() {
     }
 }
 
-// inSet.onTriggered=setSidebar;
-function setSidebar(idx)
+
+
+function deSerializeSidebar(obj)
 {
-    var obj=presetPorts[idx].get();
-    
-    console.log(obj);
     if(!obj)return;
     if(!obj.ops)return;
     
     for(var i=0;i<obj.ops.length;i++)
     {
         var theOp=op.patch.getOpById(obj.ops[i].id);
-        
-        // console.log(i);
-        
-        for(var portName in obj.ops[i].ports)
+        if(theOp)
         {
-            var p=theOp.getPortByName(portName);
-            if(p)
+            
+            for(var portName in obj.ops[i].ports)
             {
-                p.set(obj.ops[i].ports[portName].value);
-                console.log('set value ',portName,obj.ops[i].ports[portName]);
-                console.log(obj.ops[i].ports);
-            }
-            else
-            {
-                console.log('unknown p!');
+                var p=theOp.getPortByName(portName);
+                if(p)
+                {
+                    p.set(obj.ops[i].ports[portName].value);
+                    console.log('set value ',portName,obj.ops[i].ports[portName]);
+                    console.log(obj.ops[i].ports);
+                }
+                else
+                {
+                    console.log('unknown p!');
+                }
+                
+                var def=theOp.getPortByName("Input");
+                if(def)
+                {
+                    console.log("SET input!!!");
+                    def.set(obj.ops[i].ports[portName]);
+                }
             }
             
-            var def=theOp.getPortByName("Input");
-            if(def)
-            {
-                console.log("SET input!!!");
-                def.set(obj.ops[i].ports[portName]);
-            }
         }
-
+        
+        // console.log(i);
     }
+    
+}
+
+
+// inSet.onTriggered=setSidebar;
+function setSidebar(idx)
+{
+    var obj=presetPorts[idx].get();
+    deSerializeSidebar(obj);
+    // console.log(obj);
 }
 
 function onDelete() {
@@ -125,20 +141,16 @@ function removeElementFromDOM(el) {
     }
 }
 
-
 function updatePreset()
 {
     var r=serializeSidebar();
-    
     var idx=selectList.options[selectList.selectedIndex].value;
-    
-    
+
     var valueOp=presetPorts[idx].links[0].getOtherPort(presetPorts[idx]).parent;
     console.log(valueOp);
     valueOp.getPortByName('JSON String').set( JSON.stringify(r) );
-    
-
 }
+
 
 function serializeSidebar()
 {
@@ -153,7 +165,7 @@ function serializeSidebar()
             op.patch.ops[i].objName.indexOf('Ops.Sidebar')===0 
             )
         {
-            console.log("objname",op.patch.ops[i].objName);
+            // console.log("objname",op.patch.ops[i].objName);
 
             let foundPort=false;
 
@@ -168,7 +180,6 @@ function serializeSidebar()
                 if(theOp.portsOut[j].type==OP_PORT_TYPE_VALUE)
                 {
                     p.ports[theOp.portsOut[j].name]=theOp.portsOut[j].get();
-
                     foundPort=true;
                 }
             }
@@ -182,7 +193,6 @@ function serializeSidebar()
     if(CABLES.UI && gui) gui.setStateUnsaved();
     return r;
 }
-
 
 
 function addPreset()
@@ -211,3 +221,6 @@ function addPreset()
 
 }
 
+
+op.serializeSidebar=serializeSidebar;
+op.deSerializeSidebar=deSerializeSidebar;

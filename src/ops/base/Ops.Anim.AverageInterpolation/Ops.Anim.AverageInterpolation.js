@@ -30,14 +30,15 @@ exec.onTriggered=function()
     var tm=1;
     if(CABLES.now()-lastTrigger>500 || lastTrigger==0)val=inVal.get();
     else tm=(CABLES.now()-lastTrigger)/16;
-
     lastTrigger=CABLES.now();
+    
 
     if(divisor<=0)divisor=0.0001;
     val=val+(goal-val)/(divisor*tm);
 
     if(val>0 && val<0.000000001)val=0;
     if(divisor!=divisor)val=0;
+    if(val!=val|| val== -Infinity || val==Infinity)val=inVal.get();
     
     if(oldVal!=val)
     {
