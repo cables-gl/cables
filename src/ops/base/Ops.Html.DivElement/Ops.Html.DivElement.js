@@ -49,7 +49,7 @@ function updateText()
 
 op.onDelete=function()
 {
-    div.remove();
+    div.parentNode.removeChild(div);
 };
 
 function updateStyle()
@@ -82,6 +82,11 @@ function updateInteractive()
     removeListeners();
     if(inInteractive.get()) addListeners();
 }
+
+inId.onChange=function()
+{
+    div.id=inId.get();
+};
 
 function removeListeners()
 {

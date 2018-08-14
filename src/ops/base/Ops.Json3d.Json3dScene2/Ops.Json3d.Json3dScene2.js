@@ -26,6 +26,8 @@ var data=null;
 filename.onChange=reload;
 op.exe.onTriggered=render;
 
+var prevOp=null;
+
 function render()
 {
     var oldScene=cgl.frameStore.currentScene;
@@ -69,7 +71,7 @@ function loadMaterials(data,root)
             {
                 if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
                 {
-                    setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch});
+                    const setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch});
 
                     setMatOp.getPort('name').set(matName);
                     setMatOp.name='Set Material '+matName;

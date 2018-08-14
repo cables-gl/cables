@@ -48,7 +48,11 @@ float gn(vec3 p){
 
 void main()
 {
-    vec3 p = vec3(texCoord * 2. - 1.,0) + scroll;
+    vec2 tc=texCoord;
+	#ifdef DO_TILEABLE
+	    tc=abs(texCoord-0.5);
+	#endif
+    vec3 p = vec3(tc * 2. - 1.,0) + scroll;
     vec4 col;
     if (rgba) {
         for(int i = 0; i < 4; i++) {

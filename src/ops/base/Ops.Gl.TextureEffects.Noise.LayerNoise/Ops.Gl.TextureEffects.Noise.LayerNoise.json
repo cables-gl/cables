@@ -1,6 +1,71 @@
 {
-    "updated": 1532440988141,
+    "updated": 1534000127654,
     "authorName": "_LJ_",
     "id": "f04bbc15-04f0-4b84-9825-14eec51e1365",
-    "created": 1532440814903
+    "created": 1532440814903,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "RGBA",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "layers",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "factor",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "exponent",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scrollX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scrollY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scrollZ",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Tileable",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Noise.LayerNoise"
+    }
 }

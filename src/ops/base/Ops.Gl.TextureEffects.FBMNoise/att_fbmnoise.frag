@@ -59,7 +59,15 @@ void main()
 {
     // vec4 col=texture2D(tex,texCoord+2.0*fbm4(texCoord+2.0*fbm6(texCoord+anim)));
 
-    vec2 p=(texCoord-0.5)*scale;
+    vec2 tc=texCoord;
+	#ifdef DO_TILEABLE
+	    tc=abs(texCoord-0.5);
+	#endif
+
+
+    vec2 p=(tc-0.5)*scale;
+    
+
     p.y/=aspect;
     vec2 q = vec2( fbm4( p + vec2(0.3+scrollX,0.20+scrollY) ),
                    fbm4( p + vec2(3.1+scrollX,1.3+scrollY) ) );

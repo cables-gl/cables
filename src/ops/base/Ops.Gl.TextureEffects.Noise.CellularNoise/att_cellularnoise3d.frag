@@ -115,7 +115,13 @@ float Cellular3D(vec3 P)
 void main()
 {
 
+	
    vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
+
+    #ifdef DO_TILEABLE
+        p=abs(texCoord-0.5);
+    #endif
+
    p=p*scale;
 
    p=vec2(p.x+0.5-x,p.y+0.5-y);

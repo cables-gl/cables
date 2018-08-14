@@ -8,10 +8,10 @@ const inLayerMode = op.inValueSelect("mode",[
     "linear"
 ], "exponential");
 const inRGBA = op.inValueBool("RGBA");
-const inScale = op.inValue("scale",1);
+const inScale = op.inValue("scale",4);
 const inNumLayers = op.inValueInt("layers",3);
 const inFactor = op.inValue("factor",1);
-const inExponent = op.inValue("exponent",1);
+const inExponent = op.inValue("exponent",1.3);
 const inScrollX = op.inValue("scrollX");
 const inScrollY = op.inValue("scrollY");
 const inScrollZ = op.inValue("scrollZ");
@@ -41,6 +41,16 @@ inTrigger.onTriggered = function () {
     cgl.setPreviousShader();
     outTrigger.trigger();
 };
+
+
+var tile=op.inValueBool("Tileable",false);
+tile.onChange=updateTileable;
+function updateTileable()
+{
+    if(tile.get())shader.define("DO_TILEABLE");
+        else shader.removeDefine("DO_TILEABLE");
+}
+
 
 inScale.onChange =
 inNumLayers.onChange = 

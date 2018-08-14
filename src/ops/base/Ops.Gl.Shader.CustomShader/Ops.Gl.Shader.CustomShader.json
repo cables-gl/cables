@@ -1,5 +1,5 @@
 {
-    "updated": 1531301088187,
+    "updated": 1534005976376,
     "authorName": "pandur",
     "id": "86565630-2092-4d16-b177-ffb1d4040f4e",
     "created": 1526300707715,
@@ -18,10 +18,6 @@
                 "type": "0",
                 "name": "vertex",
                 "subType": "number"
-            },
-            {
-                "type": "2",
-                "name": "tex"
             }
         ],
         "portsOut": [

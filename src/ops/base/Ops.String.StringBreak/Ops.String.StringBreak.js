@@ -1,5 +1,3 @@
-op.name="StringBreak";
-
 var str=op.inValueString("String","a very very long default string");
 var numChars=op.inValueInt("Max Line Chars",10);
 
@@ -33,11 +31,11 @@ function update()
         }
         else
         {
-            string+=currentString+'\n';
-            currentString=strings[i];//strings[i];
+            string+=currentString.trim()+'\n';
+            currentString=strings[i]+' ';//strings[i];
         }
     }
 
-    result.set(string+currentString);
+    result.set( (string+currentString).trim() );
 
 }

@@ -40,5 +40,7 @@ updateURL();
 
 op.onDelete=function()
 {
-    element.remove();
+    // element.remove();
+    element.parentNode.removeChild(element);
+
 };

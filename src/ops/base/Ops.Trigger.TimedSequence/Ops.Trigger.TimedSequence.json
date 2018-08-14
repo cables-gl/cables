@@ -1,5 +1,5 @@
 {
-    "summary": "Switch Trigger",
+    "summary": "timed switching of trigger",
     "updated": 1522335599227,
     "authorName": "pandur",
     "id": "73c892c9-3e81-4ddc-952a-fbe6bf00ef2c",
@@ -166,5 +166,8 @@
             }
         ],
         "name": "Ops.Trigger.TimedSequence"
+    },
+    "docs": {
+        "ports": []
     }
 }

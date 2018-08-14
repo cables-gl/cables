@@ -50,7 +50,7 @@ function mainloopVr()
     
     if(CABLES.now()-frameLast>1000)
     {
-        console.log('frameCount',frameCount);
+        // console.log('frameCount',frameCount);
         outFps.set(frameCount);
         frameCount=0;
         frameLast=CABLES.now();

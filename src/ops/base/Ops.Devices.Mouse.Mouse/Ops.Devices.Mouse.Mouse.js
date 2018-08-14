@@ -11,7 +11,7 @@ var normalize=op.addInPort(new Port(op,"normalize",OP_PORT_TYPE_VALUE,{display:'
 var active=op.inValueBool("Active",true);
 var smooth=op.addInPort(new Port(op,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var smoothSpeed=op.addInPort(new Port(op,"smoothSpeed",OP_PORT_TYPE_VALUE));
-var area=op.addInPort(new Port(op,"Area",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
+var area=op.addInPort(new Port(op,"Area",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document','Parent Element']}));
 var outButton=op.addOutPort(new Port(op,"button",OP_PORT_TYPE_VALUE));
 var multiply=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE));
 var flipY=op.inValueBool("flip y",true);
@@ -62,7 +62,6 @@ lineY=mouseY;
 
 outMouseX.set(mouseX);
 outMouseY.set(mouseY);
-
 
 var relLastX=0;
 var relLastY=0;
@@ -128,7 +127,7 @@ function onMouseLeave(e)
 
     speed=100;
     
-    if(area.get()=='Canvas')
+    if(area.get()!='Document')
     {
         // leave anim
         if(smooth.get())
@@ -154,7 +153,7 @@ function onmousemove(e)
     
     if(!relative.get())
     {
-        if(area.get()=="Canvas")
+        if(area.get()!="Document")
         {
             offsetX=e.offsetX;
             offsetY=e.offsetY;
@@ -198,27 +197,23 @@ function onmousemove(e)
         
         if(mouseY>460)mouseY=460;
     }
-    
 };
 
 function ontouchstart(event)
 {
     mouseDown.set(true);
-    
+
     if(event.touches && event.touches.length>0) onMouseDown(event.touches[0]);
 };
 
 function ontouchend(event)
 {
     mouseDown.set(false);
-
     onMouseUp();
 };
 
-
 function removeLiseteners()
 {
-    
     listenerElement.removeEventListener('touchend', ontouchend);
     listenerElement.removeEventListener('touchstart', ontouchstart);
 
@@ -235,10 +230,11 @@ function removeLiseteners()
 function addListeners()
 {
     if(listenerElement)removeLiseteners();
-    
+
     listenerElement=cgl.canvas;
     if(area.get()=='Document') listenerElement=document.body;
-    
+    if(area.get()=='Parent Element') listenerElement=cgl.canvas.parentElement;
+
     listenerElement.addEventListener('touchend', ontouchend);
     listenerElement.addEventListener('touchstart', ontouchstart);
 
@@ -261,6 +257,5 @@ op.onDelete=function()
 {
     removeLiseteners();
 };
-
 
 addListeners();
