@@ -26,6 +26,8 @@ UNI mat4 modelMatrix;
 UNI mat4 inverseViewMatrix;
 UNI mat4 normalMatrix;
 
+UNI float fRotation;
+
 UNI float mulReflection;
 UNI float mulRoughness;
 
@@ -115,6 +117,8 @@ void main()
         T.y*=-1.0;
         // N.y*=-1.0;
     #endif
+    float sa=sin(fRotation),ca=cos(fRotation);
+    T.xz*=mat2(ca,sa,-sa,ca);
 
     #ifdef MAP_REFLECTION
         vec4 colReflect = SAMPLETEX(skybox, T,7.0);

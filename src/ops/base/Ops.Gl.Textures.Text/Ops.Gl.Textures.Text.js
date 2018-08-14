@@ -16,9 +16,6 @@ var doRefresh=op.inFunctionButton("Refresh");
 var textureOut=op.outTexture("texture");
 var outRatio=op.addOutPort(new Port(op,"Ratio",OP_PORT_TYPE_VALUE));
 
-
-
-
 var cgl=op.patch.cgl;
 
 doRefresh.onTriggered=refresh;
@@ -77,7 +74,7 @@ function refresh()
     // if(text.get())
     {
         var txt=(text.get()+'').replace(/<br\/>/g, '\n');
-        
+
         if(txt=='0')txt=' ';
         var strings = txt.split("\n");
         var posy=0,i=0;
@@ -128,7 +125,7 @@ function refresh()
     if(textureOut.get()) textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
         else textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
 
-    textureOut.get().unpackAlpha=false;
+    textureOut.get().unpackAlpha=true;
 }
 
 align.onValueChanged=refresh;

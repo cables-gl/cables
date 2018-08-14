@@ -4,47 +4,53 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "text"
+                "name": "text",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "fontSize"
+                "name": "fontSize",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Maximize Size"
+                "name": "Maximize Size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "texture width"
+                "name": "texture width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "texture height"
+                "name": "texture height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "align"
+                "name": "align",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "vertical align"
+                "name": "vertical align",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "font"
+                "name": "font",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "line distance"
+                "name": "line distance",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "border"
-            },
-            {
-                "type": "0",
-                "name": "Letter Spacing"
+                "name": "border",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -58,9 +64,14 @@
             },
             {
                 "type": "0",
-                "name": "Ratio"
+                "name": "Ratio",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Textures.Text"
-    }
+    },
+    "updated": 1534259551978,
+    "authorName": "pandur",
+    "id": "84a1d08e-c0c7-4f73-9e15-06dd86e854d3",
+    "created": 1534259128310
 }

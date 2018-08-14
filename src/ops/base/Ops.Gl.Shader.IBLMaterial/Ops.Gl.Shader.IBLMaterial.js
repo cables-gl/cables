@@ -15,6 +15,7 @@ var inReflMul=op.inValueSlider("Reflection Amount",1);
 var inNormal=op.inTexture("Normal");
 var inDiffuse=op.inTexture("Diffuse");
 var inAo=op.inTexture("AO");
+var inRotation=op.inValue("SampleRotation",0);
 
 
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -150,7 +151,7 @@ var uniNormal=new CGL.Uniform(shader,'t','texNormal',3);
 var uniDiffuse=new CGL.Uniform(shader,'t','texDiffuse',4);
 var uniAo=new CGL.Uniform(shader,'t','texAo',5);
 var uniRefl=new CGL.Uniform(shader,'t','mapReflection',6);
-
+var uniRotOff=new CGL.Uniform(shader,'f','fRotation',inRotation);
 var uniMulRefl=new CGL.Uniform(shader,'f','mulReflection',inReflMul);
 var uniMulRoug=new CGL.Uniform(shader,'f','mulRoughness',inRoughMul);
 
