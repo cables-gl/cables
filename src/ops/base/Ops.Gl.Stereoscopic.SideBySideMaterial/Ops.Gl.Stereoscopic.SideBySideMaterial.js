@@ -47,7 +47,7 @@ var srcFrag=''
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 texture0.onValueChanged=texture1.onValueChanged=function()

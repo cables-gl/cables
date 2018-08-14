@@ -60,7 +60,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shader.uniOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 
 shader.setSource(srcVert,srcFrag);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 

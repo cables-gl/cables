@@ -35,7 +35,7 @@ var shader=new CGL.Shader(cgl,'textureeffect stripes');
 shader.setSource(shader.getDefaultVertexShader(),attachments.stripes_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 var numUniform=new CGL.Uniform(shader,'f','num',num);
 var uniWidth=new CGL.Uniform(shader,'f','width',width);
 var uniAxis=new CGL.Uniform(shader,'f','axis',0);

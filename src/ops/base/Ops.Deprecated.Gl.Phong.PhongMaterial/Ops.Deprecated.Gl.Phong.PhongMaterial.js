@@ -422,7 +422,6 @@ var doRender=function()
 shader.bindTextures=bindTextures;
 shader.define('NUM_LIGHTS','1');
 updateGammeCorrect();
-this.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 

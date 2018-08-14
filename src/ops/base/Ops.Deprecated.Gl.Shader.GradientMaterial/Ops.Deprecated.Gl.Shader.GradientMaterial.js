@@ -100,7 +100,6 @@ var srcFrag=''
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl,'GradientMaterial');
-op.onLoaded=shader.compile;
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 shader.define("USE_TEXCOORDS");
 var uniformWidth=new CGL.Uniform(shader,'f','width',w);

@@ -38,7 +38,7 @@ var shader=new CGL.Shader(cgl,'TextureLookupColorMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=op.bindTextures;
 shaderOut.set(shader);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
 
 

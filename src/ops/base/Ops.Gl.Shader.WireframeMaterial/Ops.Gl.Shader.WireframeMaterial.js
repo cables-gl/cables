@@ -210,7 +210,7 @@ setDefines();
 }
 
 
-// op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 

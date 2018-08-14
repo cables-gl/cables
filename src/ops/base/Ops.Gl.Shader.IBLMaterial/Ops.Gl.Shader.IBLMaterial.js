@@ -120,7 +120,7 @@ function updateTexturesDefines()
 var shader=new CGL.Shader(cgl,'ibl_material');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 shader.setSource(attachments.ibl_vert,attachments.ibl_frag);
 

@@ -9,7 +9,7 @@ var mulColor=op.inValueSlider("Mul Color",0);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 
 

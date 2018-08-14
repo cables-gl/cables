@@ -97,7 +97,7 @@ var shader=new CGL.Shader(cgl,"PickingMaterial");
 shader.offScreenPass=true;
 shader.setSource(srcVert,srcFrag);
 
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 var pickColorUniformR=new CGL.Uniform(shader,'f','r',0);
 

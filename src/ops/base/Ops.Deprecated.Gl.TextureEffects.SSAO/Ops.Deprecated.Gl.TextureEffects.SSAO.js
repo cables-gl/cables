@@ -15,7 +15,7 @@ this.image=this.addInPort(new Port(this,"image",OP_PORT_TYPE_TEXTURE));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+// this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'

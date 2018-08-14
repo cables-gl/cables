@@ -7,7 +7,7 @@ var inAmount=op.inValueSlider("Amount",1.0);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.lut_frag);

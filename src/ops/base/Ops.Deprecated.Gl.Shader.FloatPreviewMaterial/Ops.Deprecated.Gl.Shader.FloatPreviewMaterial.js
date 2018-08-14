@@ -55,7 +55,6 @@ var doRender=function()
 };
 
 
-this.onLoaded=shader.compile;
 
 
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);

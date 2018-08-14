@@ -24,7 +24,7 @@ var showDistances=this.addInPort(new Port(this,"showDistances",OP_PORT_TYPE_VALU
 showDistances.set(false);
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+// this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision mediump float;'

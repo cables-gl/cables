@@ -44,7 +44,7 @@ var srcFrag=attachments.cubemap_frag;
 var shader=new CGL.Shader(cgl,'cube map material');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 shader.setSource(srcVert,srcFrag);
 inMiplevel.uniform=new CGL.Uniform(shader,'f','miplevel',inMiplevel);

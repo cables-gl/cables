@@ -7,7 +7,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',1.0);
 var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
