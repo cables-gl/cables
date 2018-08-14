@@ -16,19 +16,27 @@ var inNormal=op.inTexture("Normal");
 var inDiffuse=op.inTexture("Diffuse");
 var inAo=op.inTexture("AO");
 
+
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 
 function doRender()
 {
-    if(!inCubemap.get() || !inCubemap.get().cubemap)return;
+    if(!inCubemap.get() )return;
     cgl.setShader(shader);
 
     if(inCubemap.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
+        if(!inCubemap.get().cubemap)
+        {
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inCubemap.get().tex);
+        }
+        else
+        {
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
+        }
     }
 
     if(inRough.get())
@@ -71,7 +79,7 @@ function doRender()
     trigger.trigger();
     cgl.setPreviousShader();
 }
-
+inCubemap.onChange=updateTexturesDefines;
 inRough.onChange=updateTexturesDefines;
 inReflection.onChange=updateTexturesDefines;
 inNormal.onChange=updateTexturesDefines;
@@ -92,6 +100,17 @@ function updateFlip()
 
 function updateTexturesDefines()
 {
+    if(inCubemap.get() && !inCubemap.get().cubemap)
+    {
+        shader.define("TEX_FORMAT_EQUIRECT");
+        shader.removeDefine("TEX_FORMAT_CUBEMAP");
+    }
+    else
+    {
+        shader.define("TEX_FORMAT_CUBEMAP");
+        shader.removeDefine("TEX_FORMAT_EQUIRECT");
+    }
+
     if(inRough.get()) shader.define("TEX_ROUGHNESS");
         else shader.removeDefine("TEX_ROUGHNESS");
 

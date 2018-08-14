@@ -17,9 +17,6 @@ UNI float b;
 
 IN vec3 e;
 
-#ifdef MAP_EQUIRECTANGULAR
-    IN vec3 equir;
-#endif
 
 
 #ifdef HAS_DIFFUSE_TEXTURE
@@ -149,12 +146,7 @@ void main()
     vn.s=clamp(vn.s, 0.0, 1.0);
     
     
-    #ifdef MAP_SPHERE
-        vec4 col = texture2D( tex, vn );
-    #endif
-    #ifdef MAP_EQUIRECTANGULAR
-        vec4 col=texture2D( tex, sampleSphericalMap(equir));
-    #endif
+    vec4 col = texture2D( tex, vn );
 
     #ifdef HAS_DIFFUSE_TEXTURE
         col = col*texture2D( texDiffuse, vec2(texCoords.x*repeatX,texCoords.y*repeatY));

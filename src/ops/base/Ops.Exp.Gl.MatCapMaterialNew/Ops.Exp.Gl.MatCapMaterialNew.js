@@ -25,7 +25,6 @@ var calcTangents = op.inValueBool("calc normal tangents",true);
 var projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
 var ssNormals=op.inValueBool("Screen Space Normals");
 
-var equirMap=op.inValueBool("Equirectangular Map");
 
 
 
@@ -56,7 +55,6 @@ b.uniform=new CGL.Uniform(shader,'f','b',b);
 g.uniform=new CGL.Uniform(shader,'f','g',g);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 
-equirMap.onChange=updateDefines;
 
 calcTangents.onChange=updateDefines;
 updateDefines();
@@ -67,16 +65,6 @@ function updateDefines()
     if(calcTangents.get()) shader.define('CALC_TANGENT');
         else shader.removeDefine('CALC_TANGENT');
 
-    if(equirMap.get())
-    {
-        shader.define('MAP_EQUIRECTANGULAR');
-        shader.removeDefine('MAP_SPHERE');
-    }
-    else
-    {
-        shader.define('MAP_SPHERE');
-        shader.removeDefine('MAP_EQUIRECTANGULAR');
-    }
 }
 
 ssNormals.onChange=function()
