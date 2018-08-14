@@ -25,6 +25,7 @@ OUT vec2 vNorm;
 
 OUT vec3 e;
 
+
 {{MODULES_HEAD}}
 
 #ifdef CALC_SSNORMALS
@@ -33,6 +34,9 @@ OUT vec3 e;
     UNI vec3 camPos;
 #endif
 
+#ifdef MAP_EQUIRECTANGULAR
+    OUT vec3 equir;
+#endif
 
 
 void main()
@@ -60,12 +64,20 @@ void main()
     
     e = normalize( vec3( mvMatrix * pos ) );
     vec3 n = normalize( mat3(normalMatrix) * norm );
+    
+    #ifdef MAP_EQUIRECTANGULAR
+        equir=mat3(viewMatrix) * n;
+    #endif
 
     // mat3 nMatrix = transpose(inverse(mat3(mMatrix)));
     // vec3 n = normalize( mat3(nMatrix) * norm );
     // norm=n;
 
     vec3 r = reflect( e, n );
+    
+    
+    
+    
     float m = 2. * sqrt(
         pow(r.x, 2.0)+
         pow(r.y, 2.0)+
