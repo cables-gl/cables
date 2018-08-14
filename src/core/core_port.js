@@ -46,7 +46,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this._uiActiveState=true;
     this.ignoreValueSerialize=false;
     this.onLinkChanged=null;
-    this.crashed=true;
+    this.crashed=false;
 
     this._valueBeforeLink=null;
     this._lastAnimFrame=-1;
@@ -134,9 +134,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     {
         if(v===undefined)return;
 
-        if(this.parent.enabled)
+        if(this.parent.enabled && !this.crashed)
         {
-            if(v!=this.value || this.changeAlways || this.type==OP_PORT_TYPE_TEXTURE || this.type==OP_PORT_TYPE_ARRAY)
+            if(v!=this.value || this.changeAlways || this.type==OP_PORT_TYPE_TEXTURE || this.type==OP_PORT_TYPE_ARRAY )
             {
                 if(this._animated)
                 {
