@@ -1,0 +1,55 @@
+{
+    "updated": 1531137878464,
+    "authorName": "_LJ_",
+    "id": "2fbada6b-70fa-4b43-87db-8b0d9293990b",
+    "created": 1530791106422,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "canvas"
+            },
+            {
+                "type": "0",
+                "name": "filter",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "unpackPreMultipliedAlpha",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Canvas2Texture"
+    },
+    "summary": "convert a canvas to texture",
+    "docs": {
+        "ports": []
+    }
+}
