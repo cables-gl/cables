@@ -221,8 +221,12 @@ CGL.Shader = function(_cgl, _name) {
             definesStr += '#define ' + defines[i][0] + ' ' + defines[i][1] + ''.endl();
         }
 
-        for (i = 0; i < this._uniforms.length; i++) {
-            this._uniforms[i].resetLoc(); //needsUpdate=true;
+        if(this._uniforms)
+        {
+            for (i = 0; i < this._uniforms.length; i++) {
+                this._uniforms[i].resetLoc(); //needsUpdate=true;
+            }
+    
         }
 
         if (self.hasTextureUniforms()) definesStr += '#define HAS_TEXTURES'.endl();
