@@ -157,6 +157,8 @@ CGL.TextureEffect.prototype.finish=function()
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
 
+    // this._textureTarget.updateMipMap();
+
     this.switched=!this.switched;
 };
 
