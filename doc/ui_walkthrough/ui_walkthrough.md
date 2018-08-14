@@ -181,3 +181,16 @@ set a custom title to an op by clicking the title in the parameter panel (you ca
 
 
 <br />
+
+
+
+
+
+organize huge patches by putting ops into subpatches
+
+
+<video src="video/subpatches.mp4" muted="true" autoplay="true" loop="true" ></video>
+
+
+<br />
+
