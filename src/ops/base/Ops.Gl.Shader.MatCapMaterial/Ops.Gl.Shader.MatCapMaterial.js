@@ -469,7 +469,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 
 shader.bindTextures=bindTextures;
 this.shaderOut.set(shader);
-this.onLoaded=shader.compile;
+// this.onLoaded=shader.compile;
 shader.setSource(srcVert,srcFrag);
 this.normalScaleUniform=new CGL.Uniform(shader,'f','normalScale',self.normalScale.get());
 this.normalRepeatXUniform=new CGL.Uniform(shader,'f','normalRepeatX',self.normalRepeatX.get());
