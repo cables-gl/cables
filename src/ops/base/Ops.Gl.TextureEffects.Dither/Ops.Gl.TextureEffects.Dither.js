@@ -7,7 +7,7 @@ var threshold=op.inValueSlider("threshold",0.35);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 var srcFrag=''

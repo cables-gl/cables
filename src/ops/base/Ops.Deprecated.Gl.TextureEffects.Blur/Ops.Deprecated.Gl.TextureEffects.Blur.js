@@ -10,7 +10,7 @@ this.iterations=this.addInPort(new Port(this,"iterations",OP_PORT_TYPE_VALUE));
 this.iterations.val=10;
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+// this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'

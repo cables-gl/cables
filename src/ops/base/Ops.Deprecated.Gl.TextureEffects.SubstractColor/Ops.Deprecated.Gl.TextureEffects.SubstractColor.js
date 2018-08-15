@@ -7,7 +7,7 @@ var amount=op.inValueSlider("amount",0.1);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'

@@ -261,7 +261,6 @@ CGL.Framebuffer2.prototype.renderEnd=function()
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer() );
     this._cgl.popFrameBuffer()
 
-
     this._cgl.popModelMatrix();
     this._cgl.resetViewPort();
 
@@ -272,5 +271,12 @@ CGL.Framebuffer2.prototype.renderEnd=function()
     // this._cgl.gl.generateMipmap(this._cgl.gl.TEXTURE_2D);
     // this._cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, this._cgl.gl.RGBA, this._width, this._height,0,this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, this._texture.tex );
     // this._cgl.gl.generateMipmap(this._cgl.gl.TEXTURE_2D);
+    
+    if(this._texture.filter==CGL.Texture.FILTER_MIPMAP)
+    {
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._texture.tex);
+        this._texture.updateMipMap();
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+    }
 
 };

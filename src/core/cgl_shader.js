@@ -28,7 +28,7 @@ CGL.Shader = function(_cgl, _name) {
     if(_cgl.glVersion>1)this.glslVersion=300;
 
     this._program = null;
-    var uniforms = [];
+    this._uniforms = [];
     var defines = [];
     this._needsRecompile = true;
     var infoLog = '';
@@ -116,7 +116,6 @@ CGL.Shader = function(_cgl, _name) {
         return null;
     };
 
-
     this.hasDefine = function(name) {
         for (var i = 0; i < defines.length; i++)
             if (defines[i][0] == name)
@@ -134,41 +133,17 @@ CGL.Shader = function(_cgl, _name) {
         }
     };
 
-    this.getUniform = function(name) {
-        for (var i = 0; i < uniforms.length; i++)
-            if (uniforms[i].getName() == name)
-                return uniforms[i];
-        return null;
-    };
 
-    this.removeUniform = function(name) {
-        for (var i = 0; i < uniforms.length; i++) {
-            if (uniforms[i].getName() == name) {
-                uniforms.splice(i, 1);
-            }
-        }
-        this._needsRecompile = true;
-        this.setWhyCompile("remove uniform "+name);
-    };
 
-    /**
-     * add a uniform to the shader
-     * @param {uniform} uniform
-     * @function
-     */
-    this.addUniform = function(uni) {
-        uniforms.push(uni);
-        this.setWhyCompile("add uniform "+name);
-        this._needsRecompile = true;
-    };
+
 
     this.getAttrVertexPos = function() {
         return attrVertexPos;
     };
 
     this.hasTextureUniforms = function() {
-        for (var i = 0; i < uniforms.length; i++)
-            if (uniforms[i].getType() == 't') return true;
+        for (var i = 0; i < this._uniforms.length; i++)
+            if (this._uniforms[i].getType() == 't') return true;
         return false;
     };
 
@@ -246,8 +221,12 @@ CGL.Shader = function(_cgl, _name) {
             definesStr += '#define ' + defines[i][0] + ' ' + defines[i][1] + ''.endl();
         }
 
-        for (i = 0; i < uniforms.length; i++) {
-            uniforms[i].resetLoc(); //needsUpdate=true;
+        if(this._uniforms)
+        {
+            for (i = 0; i < this._uniforms.length; i++) {
+                this._uniforms[i].resetLoc(); //needsUpdate=true;
+            }
+    
         }
 
         if (self.hasTextureUniforms()) definesStr += '#define HAS_TEXTURES'.endl();
@@ -267,15 +246,11 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '// '
                 .endl() + 'precision highp float;'
                 .endl() + ''
-                // .endl() + '#define attribute in'
-                // .endl() + '#define varying out'
                 .endl() + '#define texture2D texture'
-
                 .endl() + '#define UNI uniform'
                 .endl() + '#define IN in'
                 .endl() + '#define OUT out'
                 .endl();
-
 
             fs = '#version 300 es'
                 .endl() + '// '
@@ -428,16 +403,16 @@ CGL.Shader = function(_cgl, _name) {
 
 
         if (!self._program) {
-            self._program = createProgram(vs, fs);
+            self._program = this._createProgram(vs, fs);
         } else {
             // self.vshader=createShader(vs, gl.VERTEX_SHADER, self.vshader );
             // self.fshader=createShader(fs, gl.FRAGMENT_SHADER, self.fshader );
             // linkProgram(program);
-            self._program = createProgram(vs, fs);
+            self._program = this._createProgram(vs, fs);
 
             projMatrixUniform = null;
 
-            for (i = 0; i < uniforms.length; i++) uniforms[i].resetLoc();
+            for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].resetLoc();
         }
 
         self.finalShaderFrag = fs;
@@ -473,7 +448,7 @@ CGL.Shader = function(_cgl, _name) {
             camPosUniform = cgl.gl.getUniformLocation(this._program, "camPos");
             normalMatrixUniform = cgl.gl.getUniformLocation(this._program, "normalMatrix");
             inverseViewMatrixUniform = cgl.gl.getUniformLocation(this._program, "inverseViewMatrix");
-            for (i = 0; i < uniforms.length; i++) uniforms[i].needsUpdate = true;
+            for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
         }
 
         if (cgl.currentProgram != this._program) {
@@ -483,8 +458,8 @@ CGL.Shader = function(_cgl, _name) {
 
         // console.log("Shaderbind");
 
-        for (i = 0; i < uniforms.length; i++) {
-            if (uniforms[i].needsUpdate) uniforms[i].updateValue();
+        for (i = 0; i < this._uniforms.length; i++) {
+            if (this._uniforms[i].needsUpdate) this._uniforms[i].updateValue();
         }
 
         // console.log('bind',name);
@@ -545,71 +520,36 @@ CGL.Shader = function(_cgl, _name) {
         }
     };
 
-    var linkProgram = function(program) {
-        if (self._feedBackNames.length > 0) {
-            cgl.gl.transformFeedbackVaryings(program, self._feedBackNames, cgl.gl.SEPARATE_ATTRIBS);
-            // INTERLEAVED_ATTRIBS
-            //SEPARATE_ATTRIBS
-        }
-
-        cgl.gl.linkProgram(program);
-        cgl.gl.validateProgram(program);
-
-        // var infoLog = cgl.gl.getProgramInfoLog(program);
-        // if (infoLog) {
-        //     // console.log(name+' link programinfo: ',cgl.gl.getProgramInfoLog(program));
-        // }
-
-        if (!cgl.gl.getProgramParameter(program, cgl.gl.LINK_STATUS)) {
-            console.error(name + " shader linking fail...");
-            console.log('srcFrag',self.srcFrag);
-            console.log('srcVert',self.srcVert);
-            console.log(name + ' programinfo: ', cgl.gl.getProgramInfoLog(program));
-
-            console.log('--------------------------------------');
-            console.log(self);
-            console.log('--------------------------------------');
-
-            name = "errorshader";
-            self.setSource(CGL.Shader.getDefaultVertexShader(), CGL.Shader.getErrorFragmentShader());
-        }
-
-        // var error = cgl.gl.getError();
-        // if (error == cgl.gl.NO_ERROR )
-        // console.log('no error: ',error);
-        // else
-        //   console.log('get error: ',error);
-        // if(self._feedBackNames.length>0)
-        //    cgl.gl.transformFeedbackVaryings( program, [], cgl.gl.SEPARATE_ATTRIBS );
-
-    };
-
-    var createProgram = function(vstr, fstr) {
-        var program = cgl.gl.createProgram();
-        self.vshader = CGL.Shader.createShader(cgl, vstr, cgl.gl.VERTEX_SHADER, self);
-        self.fshader = CGL.Shader.createShader(cgl, fstr, cgl.gl.FRAGMENT_SHADER, self);
-
-        cgl.gl.attachShader(program, self.vshader);
-        cgl.gl.attachShader(program, self.fshader);
-
-        linkProgram(program);
-        return program;
-    };
-
     /**
      * remove a module from shader
      * @param {shaderModule} module the module to be removed
      * @function
      */
     this.removeModule = function(mod) {
-
         for (var i = 0; i < modules.length; i++)
         {
             if(mod && mod.id)
             {
+                // console.log(mod.prefix);
                 // console.log(mod.id,modules[i].id);
+                if (modules[i].id == mod.id || !modules[i])
+                {
+                    var found=true;
+                    while(found)
+                    {
+                        found=false;
+                        for(var j=0;j<this._uniforms.length;j++)
+                        {
+                            if(this._uniforms[j].getName().indexOf(mod.prefix)==0)
+                            {
+                                // console.log('remove mod uniform...',this._uniforms[j].getName());
+                                this._uniforms.splice(j, 1);
+                                found=true;
+                                continue;
+                            }
+                        }
+                    }
 
-                if (modules[i].id == mod.id || !modules[i]) {
                     // console.log("removed module");
                     this._needsRecompile = true;
                     this.setWhyCompile("remove module "+mod.title);
@@ -617,7 +557,7 @@ CGL.Shader = function(_cgl, _name) {
                     modules.splice(i, 1);
                     break;
                 }
-    
+
             }
         }
         // console.log("could not find module to remove");
@@ -634,8 +574,7 @@ CGL.Shader = function(_cgl, _name) {
         if(!mod.numId) mod.numId = moduleNumId;
         if(!mod.num)mod.num = modules.length;
 
-
-        if (sibling) mod.group = sibling.group;
+        if(sibling) mod.group = sibling.group;
             else mod.group = this._modGroupCount++;
 
         mod.prefix = 'mod' + mod.group;
@@ -644,7 +583,6 @@ CGL.Shader = function(_cgl, _name) {
         this._needsRecompile = true;
         this.setWhyCompile("add module "+mod.title);
         moduleNumId++;
-
 
         return mod;
     };
@@ -660,6 +598,101 @@ CGL.Shader = function(_cgl, _name) {
     this.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
     this.getCurrentModules=function(){return modules;};
+
+};
+
+
+CGL.Shader.prototype.getUniforms = function() {
+    return this._uniforms;
+};
+
+CGL.Shader.prototype.getUniform = function(name) {
+    for (var i = 0; i < this._uniforms.length; i++)
+        if (this._uniforms[i].getName() == name)
+            return this._uniforms[i];
+    return null;
+};
+
+CGL.Shader.prototype.removeUniform = function(name) {
+    for (var i = 0; i < this._uniforms.length; i++) {
+        if (this._uniforms[i].getName() == name) {
+            this._uniforms.splice(i, 1);
+        }
+    }
+    this._needsRecompile = true;
+    this.setWhyCompile("remove uniform "+name);
+};
+
+/**
+ * add a uniform to the shader
+ * @param {uniform} uniform
+ * @function
+ */
+CGL.Shader.prototype.addUniform = function(uni) {
+    this._uniforms.push(uni);
+    this.setWhyCompile("add uniform "+name);
+    this._needsRecompile = true;
+};
+
+CGL.Shader.prototype._createProgram = function(vstr, fstr) {
+    var program = this._cgl.gl.createProgram();
+    this.vshader = CGL.Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
+    this.fshader = CGL.Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
+
+    this._cgl.gl.attachShader(program, this.vshader);
+    this._cgl.gl.attachShader(program, this.fshader);
+
+    this._linkProgram(program);
+    return program;
+};
+
+CGL.Shader.prototype.hasErrors = function()
+{
+    return this._hasErrors;
+}
+
+CGL.Shader.prototype._linkProgram = function(program)
+{
+    if (this._feedBackNames.length > 0) {
+        this._cgl.gl.transformFeedbackVaryings(program, this._feedBackNames, this._cgl.gl.SEPARATE_ATTRIBS);
+        // INTERLEAVED_ATTRIBS
+        //SEPARATE_ATTRIBS
+    }
+
+    this._cgl.gl.linkProgram(program);
+    this._cgl.gl.validateProgram(program);
+
+    // var infoLog = this._cgl.gl.getProgramInfoLog(program);
+    // if (infoLog) {
+    //     // console.log(name+' link programinfo: ',this._cgl.gl.getProgramInfoLog(program));
+    // }
+
+    if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS)) {
+        
+        console.error(name + " shader linking fail...");
+        console.log('srcFrag',this.srcFrag);
+        console.log('srcVert',this.srcVert);
+        console.log(name + ' programinfo: ', this._cgl.gl.getProgramInfoLog(program));
+
+        console.log('--------------------------------------');
+        console.log(this);
+        console.log('--------------------------------------');
+
+        name = "errorshader";
+        this.setSource(CGL.Shader.getDefaultVertexShader(), CGL.Shader.getErrorFragmentShader());
+    }
+    else
+    {
+
+    }
+
+    // var error = this._cgl.gl.getError();
+    // if (error == this._cgl.gl.NO_ERROR )
+    // console.log('no error: ',error);
+    // else
+    //   console.log('get error: ',error);
+    // if(self._feedBackNames.length>0)
+    //    this._cgl.gl.transformFeedbackVaryings( program, [], this._cgl.gl.SEPARATE_ATTRIBS );
 
 };
 
@@ -698,8 +731,8 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + '}';
 };
 
-CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentShader = function(r,g,b) {
-
+CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentShader = function(r,g,b)
+{
     if(r==undefined)
     {
         r=0.5;
@@ -735,10 +768,6 @@ CGL.Shader.prototype.addAttribute = function(attr) {
     this._attributes.push(attr);
     this._needsRecompile = true;
 };
-
-
-
-
 
 // --------------------------
 

@@ -5,18 +5,28 @@ IN vec3 v_eyeCoords;
 IN vec3 v_pos;
 IN vec2 texCoord;
 
-UNI samplerCube skybox;
-UNI samplerCube mapReflection;
+#ifdef TEX_FORMAT_CUBEMAP
+    UNI samplerCube skybox;
+    UNI samplerCube mapReflection;
+    #define SAMPLETEX textureLod 
+#endif
+#ifdef TEX_FORMAT_EQUIRECT
+    UNI sampler2D skybox;
+    UNI sampler2D mapReflection;
+    #define SAMPLETEX sampleEquirect 
+#endif
+
 UNI sampler2D maskRoughness;
 UNI sampler2D maskReflection;
 UNI sampler2D texNormal;
 UNI sampler2D texDiffuse;
 UNI sampler2D texAo;
 
-
 UNI mat4 modelMatrix;
 UNI mat4 inverseViewMatrix;
 UNI mat4 normalMatrix;
+
+UNI float fRotation;
 
 UNI float mulReflection;
 UNI float mulRoughness;
@@ -27,6 +37,21 @@ vec3 desaturate(vec3 color, float amount)
    return vec3(mix(color, gray, amount));
 }
 
+#ifdef TEX_FORMAT_EQUIRECT
+    const vec2 invAtan = vec2(0.1591, 0.3183);
+    vec2 sampleSphericalMap(vec3 direction)
+    {
+        vec2 uv = vec2(atan(direction.z, direction.x), asin(direction.y));
+        uv *= invAtan;
+        uv += 0.5;
+        return uv;
+    }
+    
+    vec4 sampleEquirect(sampler2D tex,vec3 coord,float lod)
+    {
+        return textureLod(tex,sampleSphericalMap(coord),lod);
+    }
+#endif
 
 void main()
 {
@@ -92,13 +117,15 @@ void main()
         T.y*=-1.0;
         // N.y*=-1.0;
     #endif
+    float r = fRotation * 6.2831853071, sa=sin(r),ca=cos(r);
+    T.xz*=mat2(ca,sa,-sa,ca);
 
     #ifdef MAP_REFLECTION
-        vec4 colReflect = textureLod(skybox, T,7.0);
+        vec4 colReflect = SAMPLETEX(skybox, T,7.0);
     #endif
     
     #ifndef MAP_REFLECTION
-        vec4 colReflect = textureLod(skybox, T,(amountRough)*10.0);
+        vec4 colReflect = SAMPLETEX(skybox, T,(amountRough)*10.0);
     #endif
     // colReflect.rgb=vec3(colReflect.r);
 
@@ -113,7 +140,7 @@ void main()
         no.y*=-1.0;
     #endif
 
-    col= textureLod(skybox, normalize(no),10.0)*1.0;
+    col= SAMPLETEX(skybox, normalize(no),10.0)*1.0;
     
     // col.rgb=(col.rgb*vec3(3.0))-vec3(0.5);
 
@@ -134,7 +161,7 @@ void main()
 
 
     #ifdef MAP_REFLECTION
-        col+=amountReflect*textureLod(mapReflection, T,(amountRough)*10.0);
+        col+=amountReflect*SAMPLETEX(mapReflection, T,(amountRough)*10.0);
         colReflect.a=1.0;
     #endif
 

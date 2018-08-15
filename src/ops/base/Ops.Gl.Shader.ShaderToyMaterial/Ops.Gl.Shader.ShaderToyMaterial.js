@@ -38,38 +38,45 @@ function setId()
         'https://www.shadertoy.com/api/v1/shaders/'+shaderId.get()+'?key='+appKey,
         function(err,_data,xhr)
         {
-            var data=JSON.parse(_data);
-            console.log(data);
-
-            if(data.Shader && data.Shader.renderpass)
+            try
             {
-                var code=''
-                .endl()+'precision highp float;'
-                .endl()+'IN vec2 texCoord;'
+                var data=JSON.parse(_data);
+    
+                if(data.Shader && data.Shader.renderpass)
+                {
+                    var code=''
+                    .endl()+'precision highp float;'
+                    .endl()+'IN vec2 texCoord;'
+    
+                    .endl()+'UNI float iGlobalTime;'
+                    .endl()+'UNI float iTime;'
+                    .endl()+'vec2 iResolution=vec2(1.0,1.0);'
+                    .endl();
+                    code+=data.Shader.renderpass[0].code;
+                    code.endl();
+                    code+='void main()'
+                    .endl()+'{'
+                    .endl()+'   vec4 col=vec4(0.0,0.0,1.0,1.0);'
+                    .endl()+'   mainImage(col, texCoord*1.0);'
+                    .endl()+'   gl_FragColor=col;'
+                    .endl()+'}'
+                    .endl();
+    
+                    shader=new CGL.Shader(cgl,'ShaderToyMaterial');
+                    uniTime=new CGL.Uniform(shader,'f','iGlobalTime',0);
+                    uniTime2=new CGL.Uniform(shader,'f','iTime',0);
+                    shader.setSource(shader.getDefaultVertexShader(),code);
+                    shader.compile();
+                    shaderOut.set(shader);
+                }
 
-                .endl()+'uniform float iGlobalTime;'
-                .endl()+'uniform float iTime;'
-                .endl()+'vec2 iResolution=vec2(1.0,1.0);'
-                .endl();
-                code+=data.Shader.renderpass[0].code;
-                code.endl();
-                code+='void main()'
-                .endl()+'{'
-                .endl()+'   vec4 col=vec4(0.0,0.0,1.0,1.0);'
-                .endl()+'   mainImage(col, texCoord*1.0);'
-                .endl()+'   gl_FragColor=col;'
-                .endl()+'}'
-                .endl();
-
-                shader=new CGL.Shader(cgl,'ShaderToyMaterial');
-                uniTime=new CGL.Uniform(shader,'f','iGlobalTime',0);
-                uniTime2=new CGL.Uniform(shader,'f','iTime',0);
-                shader.setSource(shader.getDefaultVertexShader(),code);
-                shader.compile();
-                shaderOut.set(shader);
+                result.set(data);
             }
-
-            result.set(data);
+            catch(e)
+            {
+                console.log("could not parse shadertoy response...");
+                console.error(e);
+            }
         });
 
 }

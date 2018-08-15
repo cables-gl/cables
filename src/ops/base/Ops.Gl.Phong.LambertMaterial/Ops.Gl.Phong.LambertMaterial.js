@@ -16,7 +16,7 @@ var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'ran
 var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl,'PhongMaterial2');
+var shader=new CGL.Shader(cgl,op.objName);
 // shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_NORMAL','MODULE_BEGIN_FRAG']);
 
 r.uniform=new CGL.Uniform(shader,'f','r',r);

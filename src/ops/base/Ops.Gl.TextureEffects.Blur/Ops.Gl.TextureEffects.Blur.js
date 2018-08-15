@@ -12,7 +12,7 @@ var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE));
 amount.set(10);
 
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 shader.define("FASTBLUR");
 

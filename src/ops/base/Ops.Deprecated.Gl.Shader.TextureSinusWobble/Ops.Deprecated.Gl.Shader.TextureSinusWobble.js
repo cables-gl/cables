@@ -58,7 +58,6 @@ var srcFrag=''
 
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 this.a=this.addInPort(new Port(this,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));

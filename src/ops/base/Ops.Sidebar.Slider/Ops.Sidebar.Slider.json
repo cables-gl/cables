@@ -1,5 +1,5 @@
 {
-    "updated": 1528735915748,
+    "updated": 1532355184643,
     "authorName": "pandur",
     "id": "eb3232e5-e947-4683-a17f-27a72d464b2c",
     "created": 1518204108335,
@@ -16,6 +16,11 @@
             },
             {
                 "type": "0",
+                "name": "Input",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Min",
                 "subType": "number"
             },
@@ -27,11 +32,6 @@
             {
                 "type": "0",
                 "name": "Step",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Input",
                 "subType": "number"
             },
             {

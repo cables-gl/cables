@@ -25,6 +25,14 @@ var uniLayer4=new CGL.Uniform(shader,'b','layer4',op.inValueBool("Layer 4",true)
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
+var tile=op.inValueBool("Tileable",false);
+tile.onChange=updateTileable;
+function updateTileable()
+{
+    if(tile.get())shader.define("DO_TILEABLE");
+        else shader.removeDefine("DO_TILEABLE");
+}
+
 
 blendMode.onChange=function()
 {

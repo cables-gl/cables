@@ -159,7 +159,7 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 
 shader.setSource(shader_vert,shader_frag);
 shader.define('MODE_G');
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 shader.bindTextures=function()
 {

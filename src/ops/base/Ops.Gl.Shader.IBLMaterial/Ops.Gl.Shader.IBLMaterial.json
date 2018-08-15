@@ -1,5 +1,5 @@
 {
-    "updated": 1521702279114,
+    "updated": 1534327500575,
     "authorName": "pandur",
     "id": "1eff8b0d-77d4-4675-82ae-5073ec960672",
     "created": 1519592565704,
@@ -56,12 +56,21 @@
             {
                 "type": "2",
                 "name": "AO"
+            },
+            {
+                "type": "0",
+                "name": "SampleRotation",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
             }
         ],
         "name": "Ops.Gl.Shader.IBLMaterial"

@@ -7,7 +7,7 @@ var levels=op.inValue("levels",2);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.posterize_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);

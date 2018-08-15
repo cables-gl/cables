@@ -28,7 +28,7 @@ function doRender()
 
 
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 shader.setSource(attachments.normalsmaterial_vert,attachments.normalsmaterial_frag);
 

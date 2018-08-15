@@ -90,6 +90,11 @@ vec2 cellular2x2x2(vec3 P) {
 
 void main(void) {
 	vec2 st = texCoord;//gl_FragCoord.xy/u_resolution.xy;
+
+	#ifdef DO_TILEABLE
+	    st=abs(texCoord-0.5);
+	#endif
+
     st.x-=0.5;
     st.y-=0.5;
 	st *= scale;
@@ -98,11 +103,11 @@ void main(void) {
 
 	st.x+=x;
 	st.y+=y;
+	
 
 	vec2 F = cellular2x2x2(vec3(st,z));
 	float n = smoothstep(rangeA,rangeB, F.x);
-	
-   
+
     #ifdef DO_INVERT
         n=1.0-n;
     #endif

@@ -160,7 +160,7 @@ CGL.Texture.prototype.setSize=function(w,h)
             // else
             {
                 var tcomp=this._cgl.gl.DEPTH_COMPONENT;
-                this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
+                this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
             }
         }
         else
@@ -174,12 +174,13 @@ CGL.Texture.prototype.setSize=function(w,h)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
 
-    if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
-    {
-        this._cgl.gl.generateMipmap(this.texTarget);
-    }
-    this._cgl.gl.bindTexture(this.texTarget, null);
+    // if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
+    // {
+    //     this._cgl.gl.generateMipmap(this.texTarget);
+    // }
+    this.updateMipMap();
 
+    this._cgl.gl.bindTexture(this.texTarget, null);
 };
 
 /**
@@ -203,20 +204,28 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
     this._setFilter();
 
-
-    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
-    {
-        this._cgl.gl.generateMipmap(this.texTarget);
-    }
+    // if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
+    // {
+    //     this._cgl.gl.generateMipmap(this.texTarget);
+    // }
+    this.updateMipMap();
 
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
+
+CGL.Texture.prototype.updateMipMap=function()
+{
+    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP) 
+    {
+        this._cgl.gl.generateMipmap(this.texTarget);
+    }
+}
 
 /**
  * set texture data from an image/canvas object
  * @name CGL.Texture#initTexture
  * @param {object} image
- * @param {filter} filter
+ * @param {number} filter
  * @function
  */
 CGL.Texture.prototype.initTexture=function(img,filter)
@@ -235,7 +244,7 @@ CGL.Texture.prototype.initTexture=function(img,filter)
 
     this._setFilter();
 
-    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
+    this.updateMipMap();
 
     this._cgl.gl.bindTexture(this.texTarget, null);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
@@ -347,19 +356,18 @@ CGL.Texture.prototype._setFilter=function()
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.CLAMP_TO_EDGE);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.CLAMP_TO_EDGE);
         }
-
-        if(this.wrap==CGL.Texture.WRAP_REPEAT)
+        else if(this.wrap==CGL.Texture.WRAP_REPEAT)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.REPEAT);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.REPEAT);
         }
-
-        if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT)
+        else if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.MIRRORED_REPEAT);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.MIRRORED_REPEAT);
         }
 
+        
         if(this.filter==CGL.Texture.FILTER_NEAREST)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
@@ -374,7 +382,6 @@ CGL.Texture.prototype._setFilter=function()
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.LINEAR);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.LINEAR_MIPMAP_LINEAR);
-            
         }
         else
         {

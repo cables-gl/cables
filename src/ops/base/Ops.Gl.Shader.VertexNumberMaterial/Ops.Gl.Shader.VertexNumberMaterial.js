@@ -45,7 +45,7 @@ var doRender=function()
 
 var shader=new CGL.Shader(cgl,'vertexnumber material');
 shader.setSource(srcVert,srcFrag);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 

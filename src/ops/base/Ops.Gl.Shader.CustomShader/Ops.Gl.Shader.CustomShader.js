@@ -83,7 +83,7 @@ function updateShader()
         {
             if(uniform.type==0x1406)
             {
-                var newInput=op.inValue(uniform.name,newInput,0);
+                var newInput=op.inValue(uniform.name,0);
                 newInput.onChange=function(p)
                 {
                     p.uniform.needsUpdate=true;

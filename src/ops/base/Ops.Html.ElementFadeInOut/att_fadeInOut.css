@@ -12,7 +12,7 @@
 
 .CABLES_animFadeIn
 {
-    display:block;
+    /*display:block;*/
     animation: CABLES_keysFadeIn $LENGTHs normal forwards ease-in-out;
 }
 

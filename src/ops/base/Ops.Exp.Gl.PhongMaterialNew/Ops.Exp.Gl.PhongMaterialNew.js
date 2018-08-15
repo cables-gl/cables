@@ -43,7 +43,7 @@ var depthTex=new CGL.Uniform(shader,'t','depthTex',5);
 
 var uniShadowPass=new CGL.Uniform(shader,'f','shadowPass',0);
 
-for(i=0;i<MAX_LIGHTS;i++)
+for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
     lights[count]={};
@@ -336,7 +336,7 @@ var doRender=function()
 shader.bindTextures=bindTextures;
 shader.define('NUM_LIGHTS','1');
 
-this.onLoaded=shader.compile;
+// this.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 

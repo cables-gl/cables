@@ -99,8 +99,8 @@ function deSerializeSidebar(obj)
                 if(p)
                 {
                     p.set(obj.ops[i].ports[portName].value);
-                    console.log('set value ',portName,obj.ops[i].ports[portName]);
-                    console.log(obj.ops[i].ports);
+                    // console.log('set value ',portName,obj.ops[i].ports[portName]);
+                    // console.log(obj.ops[i].ports);
                 }
                 else
                 {
@@ -110,7 +110,7 @@ function deSerializeSidebar(obj)
                 var def=theOp.getPortByName("Input");
                 if(def)
                 {
-                    console.log("SET input!!!");
+                    // console.log("SET input!!!");
                     def.set(obj.ops[i].ports[portName]);
                 }
             }

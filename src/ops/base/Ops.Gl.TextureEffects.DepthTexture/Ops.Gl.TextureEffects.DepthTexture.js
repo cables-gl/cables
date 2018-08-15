@@ -11,7 +11,7 @@ var cgl=op.patch.cgl;
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'#ifdef HAS_TEXTURES'

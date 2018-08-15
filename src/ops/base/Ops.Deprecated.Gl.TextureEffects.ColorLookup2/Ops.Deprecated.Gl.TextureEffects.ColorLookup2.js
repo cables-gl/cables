@@ -12,7 +12,7 @@ var vert=op.inValueBool("vertical",true);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 amount.set(1);
 
 var srcFrag=''

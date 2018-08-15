@@ -17,6 +17,8 @@ UNI float b;
 
 IN vec3 e;
 
+
+
 #ifdef HAS_DIFFUSE_TEXTURE
    UNI sampler2D texDiffuse;
 #endif
@@ -49,6 +51,16 @@ IN vec3 e;
 
 const float normalScale=0.4;
 
+const vec2 invAtan = vec2(0.1591, 0.3183);
+vec2 sampleSphericalMap(vec3 direction)
+{
+    vec2 uv = vec2(atan(direction.z, direction.x), asin(direction.y));
+    uv *= invAtan;
+    uv += 0.5;
+    return uv;
+}
+
+
 void main()
 {
     vec2 vnOrig=vNorm;
@@ -72,10 +84,8 @@ void main()
             pow(rr.y, 2.0)+
             pow(rr.z + 1.0, 2.0)
         );
-        
-        
 
-        
+
         vn = (rr.xy / ssm + 0.5);
         
         vn.t=clamp(vn.t, 0.0, 1.0);
@@ -134,6 +144,8 @@ void main()
 
     vn.t=clamp(vn.t, 0.0, 1.0);
     vn.s=clamp(vn.s, 0.0, 1.0);
+    
+    
     vec4 col = texture2D( tex, vn );
 
     #ifdef HAS_DIFFUSE_TEXTURE

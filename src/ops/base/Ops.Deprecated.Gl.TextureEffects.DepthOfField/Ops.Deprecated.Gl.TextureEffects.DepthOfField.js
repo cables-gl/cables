@@ -16,7 +16,7 @@
     this.iterations.val=10;
 
     var shader=new CGL.Shader(cgl);
-    this.onLoaded=shader.compile;
+    // this.onLoaded=shader.compile;
 
     var srcFrag=''
         .endl()+'precision mediump float;'

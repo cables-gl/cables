@@ -25,6 +25,9 @@ var calcTangents = op.inValueBool("calc normal tangents",true);
 var projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
 var ssNormals=op.inValueBool("Screen Space Normals");
 
+
+
+
 var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var shaderOut=op.outObject("Shader");
 
@@ -53,15 +56,15 @@ g.uniform=new CGL.Uniform(shader,'f','g',g);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 
 
-
-calcTangents.onChange=updateCalcTangent;
-updateCalcTangent();
+calcTangents.onChange=updateDefines;
+updateDefines();
 updateMatcap();
 
-function updateCalcTangent()
+function updateDefines()
 {
     if(calcTangents.get()) shader.define('CALC_TANGENT');
         else shader.removeDefine('CALC_TANGENT');
+
 }
 
 ssNormals.onChange=function()

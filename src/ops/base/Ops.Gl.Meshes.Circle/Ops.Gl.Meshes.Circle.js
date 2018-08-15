@@ -20,6 +20,7 @@ drawSpline.set(false);
 var oldPrim=0;
 var shader=null;
 
+
 op.preRender=
 render.onTriggered=function()
 {

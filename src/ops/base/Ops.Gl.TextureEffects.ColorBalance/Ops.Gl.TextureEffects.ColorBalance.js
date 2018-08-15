@@ -11,7 +11,7 @@ var b=op.inValue("b");
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+//op.onLoaded=shader.compile;
 
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.colorbalance_frag);

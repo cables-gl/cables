@@ -1,7 +1,7 @@
-var update=op.inFunction("Update");
-var elId=op.inValueString("Html Id");
-var persp=op.inValue("Perspective");
-var next=op.outFunction("Next");
+const update=op.inFunction("Update");
+const elId=op.inValueString("Html Id");
+const persp=op.inValue("Perspective",600);
+const next=op.outFunction("Next");
 
 function generateCSSString(matrix ){
    var str = '';
@@ -23,10 +23,19 @@ function generateCSSString(matrix ){
    str += matrix[15].toFixed(20);
 
    return 'matrix3d(' + str + ')';
-
 }
 
 var ele=null;
+
+elId.onCHange=function()
+{
+    ele=null;
+};
+
+function updatePerspective()
+{
+    if(ele) ele.style.perspective=persp.get()+'px';
+}
 
 update.onTriggered=function()
 {
@@ -34,14 +43,13 @@ update.onTriggered=function()
     {
         ele=document.getElementById(elId.get());
     }
-    
+
     if(ele)
     {
         ele.style.transform= generateCSSString(op.patch.cgl.modelMatrix());
-        ele.style.perspective=persp.get()+'px';
-        ele.style['-webkit-perspective']=persp.get()+'px';
+        updatePerspective();
+        ele.parentNode.style.perspective=persp.get()+'px';
         ele.style['perspective-origin']='50% 50%';
-     
     }
     
     
