@@ -21,6 +21,7 @@ var geometryOut=op.outObject("Geometry");
 var merge=op.inValueBool("Merge",false);
 
 var inNormals=op.inValueSelect("Calculate Normals",["no","smooth","flat"],"no");
+var outScale=op.outValue("Scaling",1.0);
 
 var geom=null;
 var data=null;
@@ -87,6 +88,7 @@ function updateScale()
     {
         var scale=inSize.get()/bounds.maxAxis;
         vec3.set(vScale,scale,scale,scale);
+        outScale.set(scale);
     }
     else
     {

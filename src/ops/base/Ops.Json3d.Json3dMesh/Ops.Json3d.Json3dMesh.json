@@ -50,11 +50,16 @@
             {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Scaling",
+                "subType": "number"
             }
         ],
         "name": "Ops.Json3d.Json3dMesh"
     },
-    "updated": 1525706086028,
+    "updated": 1534329381401,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "29bf91a9-504d-4de7-bba6-bae67ee76c77",

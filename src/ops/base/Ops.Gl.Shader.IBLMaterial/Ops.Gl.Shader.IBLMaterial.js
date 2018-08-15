@@ -2,23 +2,22 @@
 //https://learnopengl.com/PBR/IBL/Diffuse-irradiance
 // https://www.marmoset.co/posts/physically-based-rendering-and-you-can-too/
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const inCubemap=op.inObject("Cubemap");
+const inReflectionCubemap=op.inObject("Reflection Cubemap");
+const inFlipY=op.inValueBool("Flip Y");
+const inFlipX=op.inValueBool("Flip X");
+const inRough=op.inTexture("Roughness");
+const inRoughMul=op.inValueSlider("Roughness Amount",0);
+const inReflection=op.inTexture("Reflection");
+const inReflMul=op.inValueSlider("Reflection Amount",1);
+const inNormal=op.inTexture("Normal");
+const inDiffuse=op.inTexture("Diffuse");
+const inAo=op.inTexture("AO");
+const inRotation=op.inValueSlider("SampleRotation",0);
 
-var inCubemap=op.inObject("Cubemap");
-var inReflectionCubemap=op.inObject("Reflection Cubemap");
-var inFlipY=op.inValueBool("Flip Y");
-var inFlipX=op.inValueBool("Flip X");
-var inRough=op.inTexture("Roughness");
-var inRoughMul=op.inValueSlider("Roughness Amount",0);
-var inReflection=op.inTexture("Reflection");
-var inReflMul=op.inValueSlider("Reflection Amount",1);
-var inNormal=op.inTexture("Normal");
-var inDiffuse=op.inTexture("Diffuse");
-var inAo=op.inTexture("AO");
-var inRotation=op.inValue("SampleRotation",0);
-
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const outShader=op.outObject("Shader");
 
 var cgl=op.patch.cgl;
 
@@ -156,7 +155,7 @@ var uniMulRefl=new CGL.Uniform(shader,'f','mulReflection',inReflMul);
 var uniMulRoug=new CGL.Uniform(shader,'f','mulRoughness',inRoughMul);
 
 
-
+outShader.set(shader);
 
 render.onTriggered=doRender;
 
