@@ -44,7 +44,6 @@ rebuild();
 render.onTriggered=function()
 {
     if(active.get() && mesh) mesh.render(cgl.getShader());
-    
     trigger.trigger();
 };
 
