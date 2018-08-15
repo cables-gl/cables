@@ -218,7 +218,6 @@ CGL.Texture.prototype.updateMipMap=function()
     if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP) 
     {
         this._cgl.gl.generateMipmap(this.texTarget);
-        console.log('gen mipmap');
     }
 }
 

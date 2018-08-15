@@ -187,6 +187,20 @@ var doRender=function()
 
     texOut.set(effect.getCurrentSourceTexture());
     // texOut.set(effect.getCurrentTargetTexture());
+    
+    
+    // if(effect.getCurrentSourceTexture.filter==CGL.Texture.FILTER_MIPMAP)
+    // {
+    //         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture.tex);
+    //         effect.getCurrentSourceTexture.updateMipMap();
+    //     // else
+    //     // {
+    //     //     this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._textureSource.tex);;
+    //     //     this._textureSource.updateMipMap();
+    //     // }
+        
+    //     this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+    // }
 
     effect.endEffect();
 
