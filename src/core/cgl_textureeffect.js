@@ -159,6 +159,16 @@ CGL.TextureEffect.prototype.finish=function()
 
     // this._textureTarget.updateMipMap();
 
+    if(this._textureTarget.filter==CGL.Texture.FILTER_MIPMAP)
+    {
+        if(this.switched) this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._textureTarget.tex);
+            else this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._textureSource.tex);;
+    
+        this._textureTarget.updateMipMap();
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+    }
+
+
     this.switched=!this.switched;
 };
 

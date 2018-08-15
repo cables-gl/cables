@@ -179,7 +179,7 @@ CGL.Texture.prototype.setSize=function(w,h)
     //     this._cgl.gl.generateMipmap(this.texTarget);
     // }
     this.updateMipMap();
-    
+
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
 
@@ -215,7 +215,11 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 
 CGL.Texture.prototype.updateMipMap=function()
 {
-    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
+    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP) 
+    {
+        this._cgl.gl.generateMipmap(this.texTarget);
+        console.log('gen mipmap');
+    }
 }
 
 /**
