@@ -1,0 +1,78 @@
+{
+    "updated": 1534584432924,
+    "authorName": "pandur",
+    "id": "bc561659-a89f-499d-bb21-30bade34c1e7",
+    "created": 1534581433227,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Lightmap"
+            },
+            {
+                "type": "2",
+                "name": "Reflection Cubemap"
+            },
+            {
+                "type": "0",
+                "name": "Roughness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Reflection Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Flip Y",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip X",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Roughness Map"
+            },
+            {
+                "type": "2",
+                "name": "Reflection"
+            },
+            {
+                "type": "2",
+                "name": "Normal"
+            },
+            {
+                "type": "2",
+                "name": "Diffuse"
+            },
+            {
+                "type": "2",
+                "name": "AO"
+            },
+            {
+                "type": "0",
+                "name": "SampleRotation",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.IBLMaterial2"
+    }
+}
