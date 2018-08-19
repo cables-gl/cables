@@ -72,7 +72,8 @@ function doRender()
     if(inReflectionCubemap.get())
     {
         cgl.gl.activeTexture(cgl.gl.TEXTURE6);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inReflectionCubemap.get().cubemap);
+        if(!inReflectionCubemap.get().cubemap) cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inReflectionCubemap.get().tex);
+            else cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inReflectionCubemap.get().cubemap);
     }
 
 

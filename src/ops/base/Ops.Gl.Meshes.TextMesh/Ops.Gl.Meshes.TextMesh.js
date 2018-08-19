@@ -38,7 +38,14 @@ inFont.onChange=function()
 function checkFont()
 {
     var oldFontLoaded=fontLoaded;
+    try
+    {
     fontLoaded=document.fonts.check('20px '+inFont.get());
+    }
+    catch(ex)
+    {
+        console.log(ex);
+    }
 
     if(!oldFontLoaded && fontLoaded)
     {
