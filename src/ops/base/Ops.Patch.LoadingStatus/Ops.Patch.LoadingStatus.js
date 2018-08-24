@@ -1,6 +1,6 @@
 var self=this;
-var cgl=this.patch.cgl;
-var patch=this.patch;
+var cgl=op.patch.cgl;
+var patch=op.patch;
 
 this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
 this.finished=this.addOutPort(new Port(this,"finished",OP_PORT_TYPE_FUNCTION));
@@ -31,12 +31,12 @@ var prerenderCount=0;
 var preRenderAnimFrame=function(t)
 {
     var time=preRenderTimes[prerenderCount];
-    
+
     preRenderStatus.set(prerenderCount/(preRenderTimeFrames.anim.keys.length-1));
-    
+
     self.patch.timer.setTime(time);
     // console.log('prerender',time,prerenderCount,preRenderTimeFrames.anim.keys.length);
-    
+
     // cgl.renderStart(cgl,identTranslate);
     cgl.renderStart(cgl,identTranslate,identTranslateView);
     
@@ -75,8 +75,10 @@ this.onLoaded=function()
 
 function checkPreRender()
 {
+    
     if(patch.loading.getProgress()>=1.0)
     {
+        
         
         // console.log(' checkprerender ',preRenderTimes.length);
 
@@ -107,10 +109,12 @@ setTimeout(function()
 this.exe.onTriggered= function()
 {
     // console.log("PROGRESS, ",patch.loading.getProgress());
+
     result.set(patch.loading.getProgress());
-    
+
     // console.log(patch.loading);
-    self.numAssets.set(CGL.numMaxLoadingAssets||0);
+    // self.numAssets.set(CGL.numMaxLoadingAssets||0);
+    self.numAssets.set(patch.loading.getNumAssets());
 
     // if(patch.loading.getProgress()!=1.0 ) console.log( patch.loading.getProgress() );
 

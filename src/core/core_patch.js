@@ -55,7 +55,7 @@ CABLES.Patch = function(cfg) {
         onError: null,
         onFinishedLoading: null,
         onFirstFrameRendered: null,
-	onPatchLoaded:null,
+	    onPatchLoaded:null,
         fpsLimit: 0
     };
 

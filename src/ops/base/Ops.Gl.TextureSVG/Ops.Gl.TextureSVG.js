@@ -141,7 +141,7 @@ function update()
     
 }
 
-op.onFileUploaded=function(fn)
+op.onFileChanged=function(fn)
 {
     if(filename.get() && filename.get().endsWith(fn))
     {

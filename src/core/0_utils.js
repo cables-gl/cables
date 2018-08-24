@@ -208,6 +208,11 @@ function ajaxRequest(url, callback)
 
 // ----------------------------------------------------------------
 
+CABLES.cacheBust=function(url)
+{
+    if(url.indexOf('?')>-1) url+='&'; else url+='?';
+    return url+'cb='+CABLES.uuid();
+}
 
 CABLES.jsonp=function(url,cb)
 {

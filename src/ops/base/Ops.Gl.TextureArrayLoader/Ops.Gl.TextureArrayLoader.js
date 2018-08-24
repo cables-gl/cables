@@ -190,7 +190,7 @@ function onWrapChange()
     reload();
 }
 
-op.onFileUploaded=function(fn)
+op.onFileChanged=function(fn)
 {
     // if(filename.get() && filename.get().indexOf(fn)>-1)
     // {

@@ -1,5 +1,5 @@
 {
-    "updated": 1510041670844,
+    "updated": 1535094243092,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "2e26a7c9-3306-4ef3-af10-a0741a36286e",
@@ -8,21 +8,25 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "JsonP"
+                "name": "JsonP",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Loading"
+                "name": "Is Loading",
+                "subType": "number"
             }
         ],
         "name": "Ops.Net.AjaxRequestString"

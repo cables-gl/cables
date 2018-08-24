@@ -1,6 +1,4 @@
-op.name="AjaxRequestString";
-
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 var outData=op.outValue("Result");
 var isLoading=op.outValue("Is Loading",false);
 
@@ -19,6 +17,16 @@ function delayedReload()
     reloadTimeout=setTimeout(reload,100);
 }
 
+
+op.onFileChanged=function(fn)
+{
+    if(filename.get() && filename.get().indexOf(fn)>-1)
+    {
+        reload();
+    }
+};
+
+
 function reload()
 {
     if(!filename.get())return;
@@ -32,13 +40,12 @@ function reload()
     if(jsonp.get())f=CABLES.jsonp;
 
     f(
-        op.patch.getFilePath(filename.get()),
+        op.patch.getFilePath(filename.get())+'?nc='+CABLES.uuid(),
         function(err,data,xhr)
         {
             try
             {
                 outData.set(data);
-                console.log(data);
                 op.uiAttr({'error':''});
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);

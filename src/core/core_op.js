@@ -846,7 +846,7 @@ CABLES.Op = function()
             for(var i=0;i<this._eventCallbacks[which].length;i++)
                 if(this._eventCallbacks[which])this._eventCallbacks[which][i](params);
     }
-    
+
 
     /**
      * @function
