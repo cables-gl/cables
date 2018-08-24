@@ -233,7 +233,6 @@ CABLES.jsonp=function(url,cb)
 
     CABLES["jsonpFunc"+jsonPID]=function(data)
     {
-
         console.log(data);
         cb(false, data);
     };

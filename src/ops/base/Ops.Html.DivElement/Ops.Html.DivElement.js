@@ -52,7 +52,7 @@ op.onDelete=removeElement;
 function removeElement()
 {
     div.parentNode.removeChild(div);
-};
+}
 
 function updateStyle()
 {
