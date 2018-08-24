@@ -3,14 +3,15 @@
 // https://www.marmoset.co/posts/physically-based-rendering-and-you-can-too/
 
 const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-const inCubemap=op.inObject("Cubemap");
+const inLightmap=op.inObject("Lightmap");
 const inReflectionCubemap=op.inObject("Reflection Cubemap");
+const inRoughMul=op.inValueSlider("Roughness",0);
+const inReflMul=op.inValueSlider("Reflection Amount",1);
 const inFlipY=op.inValueBool("Flip Y");
 const inFlipX=op.inValueBool("Flip X");
-const inRough=op.inTexture("Roughness");
-const inRoughMul=op.inValueSlider("Roughness Amount",0);
+const inRough=op.inTexture("Roughness Map");
 const inReflection=op.inTexture("Reflection");
-const inReflMul=op.inValueSlider("Reflection Amount",1);
+
 const inNormal=op.inTexture("Normal");
 const inDiffuse=op.inTexture("Diffuse");
 const inAo=op.inTexture("AO");
@@ -21,22 +22,54 @@ const outShader=op.outObject("Shader");
 
 var cgl=op.patch.cgl;
 
+function checkMipmap()
+{
+    var hasError=false;
+    
+    if(inLightmap.get() && inLightmap.get().filter!=CGL.Texture.FILTER_MIPMAP )
+    {
+        hasError=true;
+        op.uiAttr({'error':'lightmap should have mipmap filtering!'});
+    }
+
+    if(inReflectionCubemap.get() && inReflectionCubemap.get().filter!=CGL.Texture.FILTER_MIPMAP )
+    {
+        hasError=true;
+        op.uiAttr({'error':'reflection map should be mipmap!'});
+    }
+
+    // if(!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+
+
+    if(!hasError && op.uiAttribs.error)
+    {
+        op.uiAttr({'error':null});
+        return true;
+    }
+
+}
+
 function doRender()
 {
-    if(!inCubemap.get() )return;
+    // if(!inLightmap.get() )return;
     cgl.setShader(shader);
 
-    if(inCubemap.get())
+
+    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    if(inLightmap.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        if(!inCubemap.get().cubemap)
+        if(!inLightmap.get().cubemap)
         {
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inCubemap.get().tex);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLightmap.get().tex);
         }
         else
         {
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inLightmap.get().cubemap);
         }
+    }
+    else
+    {
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
     }
 
     if(inRough.get())
@@ -80,7 +113,7 @@ function doRender()
     trigger.trigger();
     cgl.setPreviousShader();
 }
-inCubemap.onChange=updateTexturesDefines;
+inLightmap.onChange=updateTexturesDefines;
 inRough.onChange=updateTexturesDefines;
 inReflection.onChange=updateTexturesDefines;
 inNormal.onChange=updateTexturesDefines;
@@ -101,12 +134,12 @@ function updateFlip()
 
 function updateTexturesDefines()
 {
-    if(inCubemap.get() && !inCubemap.get().cubemap)
-    {
-        shader.define("TEX_FORMAT_EQUIRECT");
-        shader.removeDefine("TEX_FORMAT_CUBEMAP");
-    }
-    else
+    checkMipmap();
+
+    shader.define("TEX_FORMAT_EQUIRECT");
+    shader.removeDefine("TEX_FORMAT_CUBEMAP");
+    
+    if(inLightmap.get() && inLightmap.get().cubemap)
     {
         shader.define("TEX_FORMAT_CUBEMAP");
         shader.removeDefine("TEX_FORMAT_EQUIRECT");
@@ -132,9 +165,6 @@ function updateTexturesDefines()
     
     updateFlip();
 }
-
-
-
 
 
 var shader=new CGL.Shader(cgl,'ibl_material');

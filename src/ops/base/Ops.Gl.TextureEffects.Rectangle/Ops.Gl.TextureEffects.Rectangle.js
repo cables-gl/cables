@@ -34,6 +34,8 @@ var uniformG=new CGL.Uniform(shader,'f','g',g);
 var uniformB=new CGL.Uniform(shader,'f','b',b);
 var uniformA=new CGL.Uniform(shader,'f','a',a);
 
+
+
 render.onTriggered=function()
 {
     var w=inWidth.get();

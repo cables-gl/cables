@@ -47,7 +47,9 @@ function updateText()
     div.innerHTML=inText.get();
 }
 
-op.onDelete=function()
+op.onDelete=removeElement;
+
+function removeElement()
 {
     div.parentNode.removeChild(div);
 };

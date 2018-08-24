@@ -117,7 +117,7 @@ void main()
         T.y*=-1.0;
         // N.y*=-1.0;
     #endif
-    float sa=sin(fRotation),ca=cos(fRotation);
+    float r = fRotation * 6.2831853071, sa=sin(r),ca=cos(r);
     T.xz*=mat2(ca,sa,-sa,ca);
 
     #ifdef MAP_REFLECTION
@@ -180,5 +180,7 @@ void main()
     outColor=col;
 
 }
+
+
 
 

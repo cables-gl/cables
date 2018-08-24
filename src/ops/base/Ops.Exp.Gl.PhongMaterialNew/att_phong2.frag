@@ -116,7 +116,7 @@ void main()
         // N = normalize( (normalMap) );
 
         // N = normalize(normalMap); 
-        normTrans=normalize(TBN * normalMap);
+        N=normalize(TBN * normalMap);
     #endif
 
     float specStrength = specularStrength;
@@ -142,7 +142,7 @@ void main()
         
             // this is blinn phong
             vec3 halfDir = normalize(lightDir + viewDir);
-            float specAngle = max(dot(halfDir, N), 0.0);
+            float specAngle = max(dot(halfDir, N), 0.2);
             specular = pow(specAngle, shininess);
  
             // vec3 reflectDir = reflect(-lightDir, normal);

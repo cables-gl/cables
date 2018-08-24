@@ -83,6 +83,10 @@ function update()
         
         outGeom.set(geom);
     }
+    else
+    {
+        outGeom.set(null);
+    }
     
     
     

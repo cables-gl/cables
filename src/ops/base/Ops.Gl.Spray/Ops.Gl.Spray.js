@@ -1,4 +1,3 @@
-op.name="SprayV2";
 
 var cgl=op.patch.cgl;
 
@@ -13,9 +12,14 @@ var sizeZ=op.addInPort(new Port(this,"Size Z"));
 var movementX=op.addInPort(new Port(this,"movement x"));
 var movementY=op.addInPort(new Port(this,"movement y"));
 var movementZ=op.addInPort(new Port(this,"movement z"));
+
+const inReset=op.inFunctionButton("Reset");
+
 movementX.set(1);
 movementY.set(1);
 movementZ.set(1);
+
+inReset.onTriggered=reset;
 
 var lifetime=op.addInPort(new Port(this,"lifetime"));
 var lifetimeMin=op.addInPort(new Port(this,"Lifetime Minimum"));

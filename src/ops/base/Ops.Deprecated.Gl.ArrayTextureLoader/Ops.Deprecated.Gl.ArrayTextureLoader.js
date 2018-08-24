@@ -1,4 +1,3 @@
-op.name="ArrayTextureLoader";
 
 var inUrls=op.addInPort(new Port(op,"URLs",OP_PORT_TYPE_ARRAY));
 var outTextures=op.addOutPort(new Port(op,"Textures",OP_PORT_TYPE_ARRAY));

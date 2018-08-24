@@ -1,9 +1,8 @@
 {
-    "updated": 1534328529197,
-    "author": "55d744634cdc152216eb9aad",
+    "updated": 1534329078747,
     "authorName": "pandur",
-    "id": "c90c70e5-59eb-4b19-9c15-962e3e2f236b",
-    "created": 1512154593972,
+    "id": "0055f588-dde6-4232-958b-4c19cdc67abd",
+    "created": 1534325913498,
     "layout": {
         "portsIn": [
             {
@@ -12,22 +11,21 @@
             },
             {
                 "type": "0",
-                "name": "Smooth",
+                "name": "Flip",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Force Z Up",
+                "name": "Normalize",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "2",
-                "name": "Geometry Out"
+                "name": "Result"
             }
         ],
-        "name": "Ops.Gl.CalculateNormals"
-    },
-    "summary": "calculate normals of a geometry"
+        "name": "Ops.Gl.Geometry.FlipNormals"
+    }
 }

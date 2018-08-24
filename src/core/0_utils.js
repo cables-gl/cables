@@ -208,6 +208,15 @@ function ajaxRequest(url, callback)
 
 // ----------------------------------------------------------------
 
+/**
+ * append a unique/random parameter to a url, so the browser is forced to reload the file, even if its cached
+ * @name cacheBust
+ * @static
+ * @memberof CABLES
+ * @function
+ * @param {String} url
+ * @return {String} url with cachebuster parameter
+ */
 CABLES.cacheBust=function(url)
 {
     if(url.indexOf('?')>-1) url+='&'; else url+='?';

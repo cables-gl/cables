@@ -129,6 +129,7 @@ void main()
 
         tnorm=normalize(tangent*tnorm.x + binormal*tnorm.y + norm*tnorm.z);
 
+        // vec3 n = normalize( mat3(normalMatrix) * (norm+tnorm*normalScale) );
         vec3 n = normalize( mat3(normalMatrix) * (norm+tnorm*normalScale) );
 
         vec3 re = reflect( e, n );

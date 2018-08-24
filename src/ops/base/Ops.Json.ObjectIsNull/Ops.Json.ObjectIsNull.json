@@ -1,0 +1,22 @@
+{
+    "updated": 1534671650032,
+    "authorName": "pandur",
+    "id": "2fd858a8-3dff-43e4-bd85-a62c7d23b5a2",
+    "created": 1534671620425,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Json.ObjectIsNull"
+    }
+}

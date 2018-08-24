@@ -97,15 +97,14 @@ void main()
     vViewPosition = viewModelPosition.xyz;
 
     // vViewPosition = (viewMatrix*vec4(1.0,1.0,1.0,1.0)).xyz;
-
     // Rotate the object normals by a 3x3 normal matrix.
     // We could also do this CPU-side to avoid doing it per-vertex
     normalMatrix = transpose_1_0(inverse_2_1(mat3(mvMatrix)));
     vNormal = normalize(normalMatrix * norm);
 
-    vec3 T = normalize(vec3(mvMatrix * vec4(attrTangent,   0.0)));
-    vec3 B = normalize(vec3(mvMatrix * vec4(attrBiTangent, 0.0)));
-    vec3 N = normalize(vec3(mvMatrix * vec4(vNormal,    0.0)));
+    vec3 T = normalize(vec3(modelMatrix * vec4(attrTangent,   1.0)));
+    vec3 B = normalize(vec3(modelMatrix * vec4(attrBiTangent, 1.0)));
+    vec3 N = normalize(vec3(modelMatrix * vec4(vNormal,    1.0)));
     TBN = transpose_1_0(mat3(T, B, N));
 
     gl_Position = projMatrix * mvMatrix * pos;

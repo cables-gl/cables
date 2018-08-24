@@ -78,11 +78,6 @@
                 "type": "0",
                 "name": "Screen Space Normals",
                 "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Equirectangular Map",
-                "subType": "boolean"
             }
         ],
         "portsOut": [

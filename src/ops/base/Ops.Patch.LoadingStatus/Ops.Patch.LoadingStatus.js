@@ -108,17 +108,8 @@ setTimeout(function()
 
 this.exe.onTriggered= function()
 {
-    // console.log("PROGRESS, ",patch.loading.getProgress());
-
     result.set(patch.loading.getProgress());
-
-    // console.log(patch.loading);
-    // self.numAssets.set(CGL.numMaxLoadingAssets||0);
     self.numAssets.set(patch.loading.getNumAssets());
-
-    // if(patch.loading.getProgress()!=1.0 ) console.log( patch.loading.getProgress() );
-
-    // console.log(finishedAll,patch.loading.getProgress());
 
     if(patch.loading.getProgress()>=1.0 && finishedAll)
     {

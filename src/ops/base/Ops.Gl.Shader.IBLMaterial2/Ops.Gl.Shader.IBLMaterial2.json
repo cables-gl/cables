@@ -1,8 +1,8 @@
 {
-    "updated": 1534396655965,
+    "updated": 1534754293669,
     "authorName": "pandur",
-    "id": "1eff8b0d-77d4-4675-82ae-5073ec960672",
-    "created": 1519592565704,
+    "id": "bc561659-a89f-499d-bb21-30bade34c1e7",
+    "created": 1534581433227,
     "layout": {
         "portsIn": [
             {
@@ -11,11 +11,21 @@
             },
             {
                 "type": "2",
-                "name": "Cubemap"
+                "name": "Lightmap"
             },
             {
                 "type": "2",
                 "name": "Reflection Cubemap"
+            },
+            {
+                "type": "0",
+                "name": "Roughness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Reflection Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
@@ -29,21 +39,11 @@
             },
             {
                 "type": "2",
-                "name": "Roughness"
-            },
-            {
-                "type": "0",
-                "name": "Roughness Amount",
-                "subType": "number"
+                "name": "Roughness Map"
             },
             {
                 "type": "2",
                 "name": "Reflection"
-            },
-            {
-                "type": "0",
-                "name": "Reflection Amount",
-                "subType": "number"
             },
             {
                 "type": "2",
@@ -73,6 +73,6 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Gl.Shader.IBLMaterial"
+        "name": "Ops.Gl.Shader.IBLMaterial2"
     }
 }
