@@ -110,7 +110,7 @@ this.exe.onTriggered= function()
     result.set(patch.loading.getProgress());
     
     // console.log(patch.loading);
-    self.numAssets.set(CGL.numMaxLoadingAssets||0);
+    self.numAssets.set(cgl.numMaxLoadingAssets||0);
 
     // if(patch.loading.getProgress()!=1.0 ) console.log( patch.loading.getProgress() );
 

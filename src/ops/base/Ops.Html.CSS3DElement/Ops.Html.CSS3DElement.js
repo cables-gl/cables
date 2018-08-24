@@ -27,9 +27,16 @@ if (!elProjection) {
 	elProjection.appendChild(style);
 }
 
-op.onDelete = function() {
+op.onDelete = removeElement;
+
+function removeElement() {
 	var el = elProjection.querySelector('[data-ccs3did="'+op.uuid+'"]');
-	if (el) el.parentElement.removeChild(el);
+	if (el) 
+	{
+	    el.parentElement.removeChild(el);
+	    console.log("delete ok!",op.uuid);
+	}
+	else console.log("delete css3d failed...",op.uuid);
 }
 
 function wrap (el) {
@@ -43,7 +50,7 @@ function wrap (el) {
 inElement.onChange = function (self, el) {
 	op.onDelete();
 	if (el) elProjection.appendChild(wrap(el));
-}
+};
 
 trigger.onTriggered = function () {
 	var pxfov = 0.5 / (1 / cgl.pMatrix[5]) * cgl.gl.drawingBufferHeight;
@@ -91,5 +98,5 @@ trigger.onTriggered = function () {
 		")";
 	}
 	next.trigger();
-}
+};
 

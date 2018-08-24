@@ -78,8 +78,8 @@ function reload()
         geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 
         var nfo='';
-        nfo += geom.verticesIndices.length+' faces <br/>';
-        nfo += geom.vertices.length+' vertices <br/>';
+        nfo += (geom.verticesIndices.length/3)+' faces <br/>';
+        nfo += (geom.vertices.length/3)+' vertices <br/>';
         nfo += geom.texCoords.length+' texturecoords <br/>';
         nfo += geom.tangents.length+' tangents <br/>';
         nfo += geom.biTangents.length+' biTangents <br/>';

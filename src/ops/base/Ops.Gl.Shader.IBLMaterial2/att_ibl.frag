@@ -10,7 +10,8 @@ IN vec2 texCoord;
     UNI samplerCube mapReflection;
     #define SAMPLETEX textureLod 
 #endif
-#ifdef TEX_FORMAT_EQUIRECT
+#ifndef TEX_FORMAT_CUBEMAP
+    #define TEX_FORMAT_EQUIRECT
     UNI sampler2D skybox;
     UNI sampler2D mapReflection;
     #define SAMPLETEX sampleEquirect 
@@ -30,6 +31,52 @@ UNI float fRotation;
 
 UNI float mulReflection;
 UNI float mulRoughness;
+
+#ifdef TEX_NORMAL
+    IN vec3 N;
+    IN vec3 V;
+    IN vec3 E;
+    
+    IN vec3 B;
+    IN vec3 T;
+    
+    vec3 normalMap()
+    {
+        vec4 color = vec4(0,0,0,0);
+        // for(int i = 0; i < MAX_LIGHTS; i++)
+        // {
+            vec3 lightPos = vec3(15.0,5.0,15.0);
+            // vec3 L = lightPos.w > 0 ? lightPos.xyz - V : lightPos;
+            // vec3 L = lightPos*TBN; // Transform into tangent-space
+    
+            vec3 theNormal=texture2D(texNormal,texCoord).rgb*2.0-1.0;
+            mat3 local2World = mat3( T,B,N );
+            // Normal Direction
+            // vec3 normalDir = 
+            
+            // return normalize( theNormal * local2World ).xyz;
+            // return normalize(lightPos * normalize( theNormal * local2World ).xyz);
+            return normalize( theNormal * local2World ).xyz;
+            
+            // float dist = length(L);
+            // L = normalize(L);
+            // float NdotL = max(dot(L,N),0.0);
+            // if(NdotL > 0)
+            // {
+            //     float att = 1.0;
+            //     if(lightPos.w > 0)
+            //     {
+            //         att = 1.0/ (gl_LightSource[i].constantAttenuation +
+            //         gl_LightSource[i].linearAttenuation * dist +
+            //         gl_LightSource[i].quadraticAttenuation * dist * dist);
+            //     }
+            //     vec4 diffuse =  clamp(att*NdotL*gl_FrontLightProduct[i].diffuse,0,1);
+            //     // color += att*gl_FrontLightProduct[i].ambient + diffuse;
+            //     // return diffuse;
+            // }
+    }
+
+#endif
 
 vec3 desaturate(vec3 color, float amount)
 {
@@ -75,9 +122,6 @@ void main()
     amountReflect=smoothstep(0.0,1.0,amountReflect);
 
     vec3 tNorm=vec3(0.0);
-    #ifdef TEX_NORMAL
-        theNormal=texture2D(texNormal,texCoord).rgb*2.0-1.0;
-    #endif
     
     vec4 tCol=vec4(1.0);
     #ifdef TEX_DIFFUSE
@@ -91,11 +135,23 @@ void main()
     // N=normalize(N+tNorm);
 
 
+    #ifdef TEX_NORMAL
+        // N=texture2D(texNormal,texCoord).rgb*2.0-1.0;
+        // N = normalize( mat3(normalMatrix) * N ).xyz;
+       N=normalMap();
+        // N=normalMap();
+        
+    #endif
+
+
     // start reflection
     vec3 V = -v_eyeCoords;
     vec3 R = -reflect(V,N);
     vec3 T = ( mat3( inverseViewMatrix ) * normalize(R) ).xyz; // Transform by inverse of the view transform that was applied to the skybo
     // vec4 colReflect = texture(skybox, T);
+    
+
+    
     
     #ifndef FLIPX
         T.x*=-1.0;
@@ -165,7 +221,7 @@ void main()
 
 
     #ifdef TEX_AO
-        col.rgb*=texture2D(texAo,texCoord).r;
+        col.rgb *= texture2D(texAo,texCoord).r;
     #endif
 
 

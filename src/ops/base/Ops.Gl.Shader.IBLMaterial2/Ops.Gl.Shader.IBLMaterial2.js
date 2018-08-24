@@ -55,10 +55,9 @@ function doRender()
     cgl.setShader(shader);
 
 
-
+    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
     if(inLightmap.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
         if(!inLightmap.get().cubemap)
         {
             cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLightmap.get().tex);
@@ -67,6 +66,10 @@ function doRender()
         {
             cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inLightmap.get().cubemap);
         }
+    }
+    else
+    {
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
     }
 
     if(inRough.get())
@@ -132,13 +135,11 @@ function updateFlip()
 function updateTexturesDefines()
 {
     checkMipmap();
+
+    shader.define("TEX_FORMAT_EQUIRECT");
+    shader.removeDefine("TEX_FORMAT_CUBEMAP");
     
-    if(inLightmap.get() && !inLightmap.get().cubemap)
-    {
-        shader.define("TEX_FORMAT_EQUIRECT");
-        shader.removeDefine("TEX_FORMAT_CUBEMAP");
-    }
-    else
+    if(inLightmap.get() && inLightmap.get().cubemap)
     {
         shader.define("TEX_FORMAT_CUBEMAP");
         shader.removeDefine("TEX_FORMAT_EQUIRECT");
