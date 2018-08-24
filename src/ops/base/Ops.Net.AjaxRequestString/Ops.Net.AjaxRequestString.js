@@ -1,9 +1,7 @@
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-var outData=op.outValue("Result");
-var isLoading=op.outValue("Is Loading",false);
-
-var jsonp=op.inValueBool("JsonP",false);
-
+const filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+const jsonp=op.inValueBool("JsonP",false);
+const outData=op.outValue("Result");
+const isLoading=op.outValue("Is Loading",false);
 
 filename.onChange=delayedReload;
 jsonp.onChange=delayedReload;
@@ -17,7 +15,6 @@ function delayedReload()
     reloadTimeout=setTimeout(reload,100);
 }
 
-
 op.onFileChanged=function(fn)
 {
     if(filename.get() && filename.get().indexOf(fn)>-1)
@@ -25,7 +22,6 @@ op.onFileChanged=function(fn)
         reload();
     }
 };
-
 
 function reload()
 {
