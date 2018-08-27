@@ -160,7 +160,7 @@ CGL.Texture.prototype.setSize=function(w,h)
             // else
             {
                 var tcomp=this._cgl.gl.DEPTH_COMPONENT;
-                this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
+                this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
             }
         }
         else
