@@ -1,12 +1,10 @@
-var cgl=op.patch.cgl;
+const render=op.inFunction("render");
+const shader=op.inObject("shader");
+const trigger=op.outFunction("trigger");
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var shader=op.addInPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
+const cgl=op.patch.cgl;
 shader.ignoreValueSerialize=true;
 render.onTriggered=doRender;
-doRender();
 
 function doRender()
 {
