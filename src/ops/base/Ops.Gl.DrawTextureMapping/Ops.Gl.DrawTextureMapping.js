@@ -10,10 +10,8 @@ var next=op.outFunction("Next");
 
 var cgl=op.patch.cgl;
 
-var geom=new CGL.Geometry("simplespline");
-geom.vertices=[0,0,0,0,0,0,0,0,0];
-var mesh=new CGL.Mesh(cgl,geom);
-var buff=new Float32Array();
+var mesh=null;//new CGL.Mesh(cgl,geom);
+// var buff=new Float32Array();
 
 var attr=null;
 var points=[];
@@ -25,6 +23,8 @@ inGeom.onChange=function()
     if(!geom)return;
 
     points.length=0;
+    var newgeom=new CGL.Geometry("texturemapping");
+
 
     for(var i=0;i<geom.verticesIndices.length;i+=3)
     {
@@ -63,25 +63,29 @@ inGeom.onChange=function()
         
     }
     
-    
-    
-    if(!(points instanceof Float32Array))
-    {
-        if(points.length!=buff.length)
-        {
-            buff=new Float32Array(points.length);
-            buff.set(points);
-        }
-        else
-        {
-            buff.set(points);
-        }
-    }
-    else
-    {
-        buff=points;
-    }
-    attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
+    newgeom.vertices=points;
+
+    // if(!mesh) 
+    mesh=new CGL.Mesh(cgl,newgeom);
+
+    // else mesh.setGeom(geom );
+    // if(!(points instanceof Float32Array))
+    // {
+    //     if(points.length!=buff.length)
+    //     {
+    //         buff=new Float32Array(points.length);
+    //         buff.set(points);
+    //     }
+    //     else
+    //     {
+    //         buff.set(points);
+    //     }
+    // }
+    // else
+    // {
+    //     buff=points;
+    // }
+    // attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
     
 };
 
@@ -89,7 +93,7 @@ render.onTriggered=function()
 {
 
     if(points.length===0)return;
-    
+    if(!mesh)return;
     if(op.instanced(render))return;
 
 
@@ -99,11 +103,10 @@ render.onTriggered=function()
     var oldPrim=shader.glPrimitive;
 
     shader.glPrimitive=cgl.gl.LINES;
-    // shader.glPrimitive=cgl.gl.POINTS;
     
     
-    if(numPoints.get()<=0)attr.numItems=buff.length/3;
-        else attr.numItems=Math.min(numPoints.get(),buff.length/3);
+    // if(numPoints.get()<=0)attr.numItems=buff.length/3;
+        // else attr.numItems=Math.min(numPoints.get(),buff.length/3);
 
     mesh.render(shader);
     

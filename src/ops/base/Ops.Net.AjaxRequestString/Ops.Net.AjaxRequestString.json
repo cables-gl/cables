@@ -1,5 +1,5 @@
 {
-    "updated": 1535094243092,
+    "updated": 1535107060899,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "2e26a7c9-3306-4ef3-af10-a0741a36286e",
@@ -10,6 +10,10 @@
                 "type": "0",
                 "name": "file",
                 "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "reload"
             },
             {
                 "type": "0",

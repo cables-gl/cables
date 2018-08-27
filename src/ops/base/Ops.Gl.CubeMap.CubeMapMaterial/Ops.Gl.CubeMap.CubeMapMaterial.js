@@ -8,7 +8,7 @@ var inCubemap=op.inObject("Cubemap");
 
 var mapReflect=op.inValueBool("Reflection",true);
 mapReflect.onChange=updateMapping;
-
+inCubemap.onChange=updateMapping;
 
 
 
@@ -18,14 +18,17 @@ var cgl=op.patch.cgl;
 
 function doRender()
 {
-    if(!inCubemap.get() || !inCubemap.get().cubemap)return;
     cgl.setShader(shader);
+
+    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
 
     if(inCubemap.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
+        if(inCubemap.get().cubemap) cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
+        else cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inCubemap.get().tex);
     }
+    else
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
 
     trigger.trigger();
     cgl.setPreviousShader();
@@ -35,6 +38,19 @@ function updateMapping()
 {
     if(mapReflect.get())shader.define("DO_REFLECTION");
         else shader.removeDefine("DO_REFLECTION");
+
+
+    if(inCubemap.get() && inCubemap.get().cubemap)
+    {
+        shader.define("TEX_FORMAT_CUBEMAP");
+        shader.removeDefine("TEX_FORMAT_EQUIRECT");
+
+    }
+    else
+    {
+        shader.removeDefine("TEX_FORMAT_CUBEMAP");
+        shader.define("TEX_FORMAT_EQUIRECT");
+    }
 }
 
 var srcVert=attachments.cubemap_vert;

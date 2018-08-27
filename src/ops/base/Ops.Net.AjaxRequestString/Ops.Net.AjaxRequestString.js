@@ -1,11 +1,12 @@
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-var outData=op.outValue("Result");
-var isLoading=op.outValue("Is Loading",false);
-
-var jsonp=op.inValueBool("JsonP",false);
-
+const filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+const reloadBtn=op.inFunctionButton("reload");
+const jsonp=op.inValueBool("JsonP",false);
+const outData=op.outValue("Result");
+const isLoading=op.outValue("Is Loading",false);
 
 filename.onChange=delayedReload;
+reloadBtn.hidePort();
+reloadBtn.onTriggered=reload;
 jsonp.onChange=delayedReload;
 
 var loadingId=0;
@@ -30,9 +31,9 @@ op.onFileChanged=function(fn)
 function reload()
 {
     if(!filename.get())return;
-    
+
     op.patch.loading.finished(loadingId);
-    
+
     loadingId=op.patch.loading.start('jsonFile',''+filename.get());
     isLoading.set(true);
 
@@ -58,6 +59,5 @@ function reload()
                 isLoading.set(false);
             }
         });
-    
-}
 
+}

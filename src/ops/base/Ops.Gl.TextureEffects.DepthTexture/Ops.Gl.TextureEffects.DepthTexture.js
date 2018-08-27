@@ -50,7 +50,7 @@ inInv.onChange=function()
 {
     if(inInv.get())shader.define("INVERT");
         else shader.removeDefine("INVERT");
-}
+};
 
 render.onTriggered=function()
 {
