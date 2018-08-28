@@ -31,6 +31,5 @@ function update()
     
     outObject.set(null);
     outObject.set(obj);
-    
-    console.log(obj);
+
 }

@@ -5,10 +5,13 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var doCreate=op.inFunctionButton("Create Nodes");
 
 var createNonMesh=op.inValueBool("Create Non Mesh Nodes");
+
+
 var createMaterials=op.inValueBool("Create Materials",true);
 var detectClones=op.inValueBool("Detect Clones",true);
 
 var inReplaceMaterials=op.inObject("Mesh Materials");
+var outLoading=op.outValueBool("Loading",false);
 
 var cgl=op.patch.cgl;
 
@@ -27,6 +30,9 @@ var prevOp=null;
 filename.onChange=reload;
 op.exe.onTriggered=render;
 
+var subPatchOpStart=op;
+var subPatchId=op.uiAttribs.subPatch;
+var subPatchOp=null;
 
 function render()
 {
@@ -75,12 +81,12 @@ function loadMaterials(data,root)
 
                 if(createMaterials.get() && jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
                 {
-                    const setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch});
+                    const setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":subPatchId});
 
                     setMatOp.getPort('name').set(matName);
                     setMatOp.name='Set Material '+matName;
 
-                    var matOp=op.patch.addOp('Ops.Gl.Phong.PhongMaterial',{"subPatch":op.uiAttribs.subPatch});
+                    var matOp=op.patch.addOp('Ops.Gl.Phong.PhongMaterial',{"subPatch":subPatchId});
                     matOp.getPort('diffuse r').set( jsonMat.properties[j].value[0] );
                     matOp.getPort('diffuse g').set( jsonMat.properties[j].value[1] );
                     matOp.getPort('diffuse b').set( jsonMat.properties[j].value[2] );
@@ -140,7 +146,7 @@ var loadCameras=function(data,seq)
 
     if(data.hasOwnProperty('cameras'))
     {
-        camSeq=op.patch.addOp('Ops.TimedSequence',{"subPatch":op.uiAttribs.subPatch,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+50}});
+        camSeq=op.patch.addOp('Ops.TimedSequence',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+50}});
         op.patch.link(camSeq,'exe',op,'trigger');
 
         console.log("camera....");
@@ -154,7 +160,7 @@ var loadCameras=function(data,seq)
             {
                 if(!cam.target)
                 {
-                    var camOp=op.patch.addOp('Ops.Gl.Matrix.QuaternionCamera',{"subPatch":op.uiAttribs.subPatch,"translate":{x:op.uiAttribs.translate.x+camCount*200,y:op.uiAttribs.translate.y+100}});
+                    var camOp=op.patch.addOp('Ops.Gl.Matrix.QuaternionCamera',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x+camCount*200,y:op.uiAttribs.translate.y+100}});
                     camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
 
                     var an=dataGetAnimation(data,cam.cam.name);
@@ -217,7 +223,7 @@ var loadCameras=function(data,seq)
                 }
                 else
                 {
-                    var camOp=op.patch.addOp('Ops.Gl.Matrix.LookatCamera',{"subPatch":op.uiAttribs.subPatch,"translate":{x:op.uiAttribs.translate.x+camCount*150,y:op.uiAttribs.translate.y+100}});
+                    var camOp=op.patch.addOp('Ops.Gl.Matrix.LookatCamera',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x+camCount*150,y:op.uiAttribs.translate.y+100}});
                     camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
                     // op.patch.link(camOp,'render',self,'trigger');
 
@@ -338,7 +344,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
             {
                 if(an.positionkeys && an.positionkeys.length>0)
                 {
-                    var anTransOp=op.patch.addOp('Ops.Json3d.TranslateChannel',{"subPatch":op.uiAttribs.subPatch});
+                    var anTransOp=op.patch.addOp('Ops.Json3d.TranslateChannel',{"subPatch":subPatchId});
                     anTransOp.uiAttribs.title=anTransOp.name=ch.name+' trans anim';
                     anTransOp.getPort('channel').set( ch.name );
                     op.patch.link(prevOp,'trigger',anTransOp,'render');
@@ -349,7 +355,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
                 if(an.scalingkeys && an.scalingkeys.length>0)
                 {
-                    var anScaleOp=op.patch.addOp('Ops.Json3d.ScaleChannel',{"subPatch":op.uiAttribs.subPatch});
+                    var anScaleOp=op.patch.addOp('Ops.Json3d.ScaleChannel',{"subPatch":subPatchId});
                     anScaleOp.uiAttribs.title=anScaleOp.name=ch.name+' scale anim';
                     anScaleOp.getPort('channel').set( ch.name );
                     op.patch.link(prevOp,'trigger',anScaleOp,'render');
@@ -360,7 +366,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
                 if(an.rotationkeys && an.rotationkeys.length>0)
                 {
-                    var anRotOp=op.patch.addOp('Ops.Json3d.QuaternionChannel',{"subPatch":op.uiAttribs.subPatch});
+                    var anRotOp=op.patch.addOp('Ops.Json3d.QuaternionChannel',{"subPatch":subPatchId});
                     anRotOp.uiAttribs.title=anRotOp.name=ch.name+' quat rot anim';
                     anRotOp.getPort('channel').set( ch.name );
                     op.patch.link(prevOp,'trigger',anRotOp,'render');
@@ -413,7 +419,9 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
         if(!prevOp )
         {
-            var transOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":op.uiAttribs.subPatch});
+            
+            
+            var transOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":subPatchId});
 
             if(!ch.transposed)
             {
@@ -462,24 +470,17 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     var matIndex=data.meshes[index].materialindex;
                     var jsonMat=data.materials[matIndex];
 
-
-// console.log('chname',ch.name);
                     if(inReplaceMaterials.get() && inReplaceMaterials.get()[ch.name])
                     {
-                        // const setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch});
-                        // op.patch.link(setMatOp,'material',matOp,'shader');
-                        // op.patch.link(setMatOp,'exe',matOp,'trigger');
-    
-                        var matOp=op.patch.addOp('Ops.Json3d.SetMaterialShader',{"subPatch":op.uiAttribs.subPatch});
+                        var matOp=op.patch.addOp('Ops.Json3d.SetMaterialShader',{"subPatch":subPatchId});
                         matOp.getPort("Key").set(ch.name);
                         op.patch.link(prevOp,'trigger',matOp,'exe');
                         prevOp=matOp;
-    
                     }
                     else
                     if(createMaterials.get())
                     {
-                        var matOp=op.patch.addOp('Ops.Json3d.Material',{"subPatch":op.uiAttribs.subPatch});
+                        var matOp=op.patch.addOp('Ops.Json3d.Material',{"subPatch":subPatchId});
                         op.patch.link(prevOp,'trigger',matOp,'exe');
                         prevOp=matOp;
     
@@ -492,7 +493,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 if(!sameMesh)
                 {
                     // mesh
-                    var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":op.uiAttribs.subPatch});
+                    var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":subPatchId});
                     meshOp.index.val=index;
                     meshOp.uiAttribs.title=meshOp.name=ch.name+'';
 
@@ -508,7 +509,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
             if(sameMesh)
             {
-                var clonedOp=op.patch.addOp('Ops.Json3d.ClonedMesh',{"subPatch":op.uiAttribs.subPatch});
+                var clonedOp=op.patch.addOp('Ops.Json3d.ClonedMesh',{"subPatch":subPatchId});
 
                 clonedOp.getPort('transformations').set(cloneTransforms);
 
@@ -517,7 +518,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
                 op.patch.link(prevOp,'trigger',clonedOp,'render');
 
-                var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":op.uiAttribs.subPatch});
+                var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":subPatchId});
                 meshOp.index.val=ch.children[0].meshes[0];
                 meshOp.uiAttribs.title=meshOp.name='clone '+ch.name+' Mesh';
                 meshOp.getPort('draw').set(false);
@@ -546,6 +547,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
 function reload()
 {
+    doCreate.setUiAttribs({greyout:true});
     if(!filename.get())return;
 
     function doLoad()
@@ -554,6 +556,7 @@ function reload()
             op.patch.getFilePath(filename.get()),
             function(err,_data,xhr)
             {
+
                 if(err)
                 {
                     if(CABLES.UI)op.uiAttr({'error':'could not load file...'});
@@ -570,20 +573,30 @@ function reload()
                 try
                 {
                     data=JSON.parse(_data);
+                    // console.log("parsed data...");
                     // console.log(data);
                 }
                 catch(ex)
                 {
+                    outLoading.set(false);
+                    op.patch.loading.finished(loadingId);
                     if(CABLES.UI)op.uiAttr({'error':'could not load file...'});
                     return;
                 }
+                
+                
                 scene.setValue(data);
-
+                doCreate.setUiAttribs({greyout:false});
                 op.patch.loading.finished(loadingId);
+                
+                outLoading.set(false);
                 if(CABLES.UI) gui.jobs().finish('loading3d'+loadingId);
+                doCreate.setUiAttribs({greyout:false});
             });
     }
 
+    
+    outLoading.set(true);
     var loadingId=op.patch.loading.start('json3dScene',filename.get());
     if(CABLES.UI) gui.jobs().start({id:'loading3d'+loadingId,title:'loading 3d data'},doLoad);
         else doLoad();
@@ -592,25 +605,48 @@ function reload()
 
 function createNodes()
 {
+
     if(!trigger.isLinked())
     {
-        var rootMatrixOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":op.uiAttribs.subPatch,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+75}});
+        var subPatchOpStartPort='trigger';
+        if(!subPatchOp)
+        {
+            subPatchOp=op.patch.addOp(CABLES.UI.OPNAME_SUBPATCH,{"subPatch":subPatchId});
+            subPatchOp.setTitle("3d scene");
+            subPatchId=subPatchOp.getPort("patchId").get();
+            op.patch.link(op,'trigger',subPatchOp,'create port');
+
+            var inputs=op.patch.getOpsByObjName("Ops.Ui.PatchInput");
+            
+            for(var i=0;i<inputs.length;i++)
+            {
+                if(inputs[i].uiAttribs.subPatch==subPatchId)
+                {
+                    subPatchOpStart=inputs[i];
+                    subPatchOpStartPort=subPatchOpStart.portsOut[0].name;
+                }
+            }
+        }
+        
+
+        var rootMatrixOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+75}});
         rootMatrixOp.uiAttribs.title='rootMatrix';
 
         mat4.transpose(data.rootnode.transformation,data.rootnode.transformation);
         rootMatrixOp.getPort('matrix').set(data.rootnode.transformation);
 
-        op.patch.link(op,'trigger',rootMatrixOp,'render');
+        // op.patch.link(op,'trigger',rootMatrixOp,'render');
+        op.patch.link(subPatchOpStart,subPatchOpStartPort,rootMatrixOp,'render');
 
-        var root=op.patch.addOp('Ops.Sequence',{"subPatch":op.uiAttribs.subPatch,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+150}});
+
+        var root=op.patch.addOp('Ops.Sequence',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+150}});
         var camOp=loadCameras(data,root);
     
         if(camOp) op.patch.link(camOp,'trigger',root,'exe');
             else op.patch.link(rootMatrixOp,'trigger',root,'exe');
 
         loadMaterials(data,root);
-        
-    
+
         for(var i=0;i<data.rootnode.children.length;i++)
         {
             if(data.rootnode.children[i])
@@ -627,9 +663,23 @@ function createNodes()
         {
             setTimeout(function()
             {
-                gui.patch().setSelectedOpById(op.id);
+                // gui.patch().setSelectedOpById(op.id);
+                // CABLES.CMD.PATCH.tidyChildOps();
+
+                gui.patch().setSelectedOpById(subPatchOpStart.id);
                 CABLES.CMD.PATCH.tidyChildOps();
+                
+                gui.patch().updateSubPatches();
+
             },100);
+            gui.patch().updateSubPatches();
+        }
+    }
+    else
+    {
+        if(CABLES.UI)
+        {
+            CABLES.UI.notifyError("remove child nodes first");
             
         }
     }

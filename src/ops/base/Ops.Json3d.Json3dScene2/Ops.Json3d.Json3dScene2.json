@@ -1,5 +1,5 @@
 {
-    "updated": 1535391141600,
+    "updated": 1535446203928,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "44f0aa70-e97d-41cf-9560-369bffa0d21c",
@@ -43,6 +43,11 @@
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Loading",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Json3d.Json3dScene2"

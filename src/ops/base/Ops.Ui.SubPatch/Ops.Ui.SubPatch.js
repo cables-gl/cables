@@ -1,5 +1,3 @@
-op.name="SubPatch";
-
 op.dyn=op.addInPort(new Port(op,"create port",OP_PORT_TYPE_DYNAMIC));
 op.dynOut=op.addOutPort(new Port(op,"create port out",OP_PORT_TYPE_DYNAMIC));
 
@@ -45,6 +43,10 @@ op.onLoaded=function()
 op.onLoadedValueSet=function()
 {
     data=JSON.parse(dataStr.get());
+    if(!data)
+    {
+        data={"ports":[],"portsOut":[]};
+    }
     setupPorts();
 
 
@@ -166,6 +168,7 @@ op.dyn.onLinkChanged=function()
         var otherPort=op.dyn.links[0].getOtherPort(op.dyn);
         op.dyn.removeLinks();
         otherPort.removeLinkTo(op.dyn);
+        
 
         var newName="in"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
 

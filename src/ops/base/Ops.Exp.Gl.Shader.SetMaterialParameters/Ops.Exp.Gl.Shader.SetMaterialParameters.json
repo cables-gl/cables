@@ -1,0 +1,73 @@
+{
+    "updated": 1535385537968,
+    "authorName": "pandur",
+    "id": "f13614bc-2350-49af-bc0b-9aaf7c6fa802",
+    "created": 1535359734070,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "texOffsetX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "texOffsetY",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "texDiffuse"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Result Shader"
+            }
+        ],
+        "name": "Ops.Exp.Gl.Shader.SetMaterialParameters"
+    }
+}
