@@ -40,7 +40,7 @@ void main()
 
     vec4 modelPos=modelview * pos;
 
-    v_eyeCoords = (modelPos).xyz - camPos;
+    v_eyeCoords = (mMatrix*pos).xyz - camPos;
     // v_eyeCoords = (mMatrix * pos).xyz - camPos;
     
 

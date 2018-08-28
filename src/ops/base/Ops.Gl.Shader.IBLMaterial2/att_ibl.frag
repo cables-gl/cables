@@ -80,13 +80,13 @@ vec3 desaturate(vec3 color, float amount)
     }
 #endif
 
-vec4 reflection(vec3 N, float amountReflect, float amountRough)
+vec4 reflection(vec3 N, float amountRough)
 {
     vec3 V = (v_eyeCoords);
     vec3 R = reflect(V,N);
     
     // R.y*=-1.;
-    vec3 T = ( normalize(R) ).xyz;
+    vec3 T = ( normalize(R) );
 
     // rotate 
     // float r = fRotation * 6.2831853071, sa=sin(r),ca=cos(r);
@@ -99,7 +99,7 @@ vec4 reflection(vec3 N, float amountReflect, float amountRough)
         T.y*=-1.0;
     #endif
 
-    return amountReflect*SAMPLETEX(mapReflection, T, amountRough*10.0);
+    return SAMPLETEX(mapReflection, T, amountRough*10.0);
 }
 
 void main()
@@ -140,7 +140,9 @@ void main()
         col*=texture2D(texDiffuse,texCoord);
     #endif
     
-    col+=reflection(N,amountReflect,amountRough);
+    // col+=reflection(N,amountReflect,amountRough);
+    // col+=reflection(N,amountReflect,amountRough);
+    col.rgb=mix(col.rgb,reflection(N,amountRough).rgb,amountReflect);
     
     #ifdef TEX_AO
         float ao=texture2D(texAo,texCoord).r;

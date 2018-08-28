@@ -1,11 +1,11 @@
 IN vec2 texCoord;
-uniform sampler2D tex;
-uniform float dirX;
-uniform float dirY;
-uniform float amount;
+UNI sampler2D tex;
+UNI float dirX;
+UNI float dirY;
+UNI float amount;
 
 #ifdef HAS_MASK
-    uniform sampler2D imageMask;
+    UNI sampler2D imageMask;
 #endif
 
 float random(vec3 scale, float seed)
