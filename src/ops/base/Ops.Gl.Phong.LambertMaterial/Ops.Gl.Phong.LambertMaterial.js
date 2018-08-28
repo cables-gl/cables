@@ -1,17 +1,11 @@
-
-
 var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
-
 var inSpecular=op.inValueSlider("Specular",0.5);
 
 // diffuse color
-
 var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
 var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
-
-
 
 var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
 
@@ -29,8 +23,8 @@ g.set(Math.random());
 b.set(Math.random());
 a.set(1.0);
 
-
-
+var outShader=op.outObject("Shader");
+outShader.set(shader);
 
 
 
@@ -47,9 +41,8 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
     lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
     lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
-    
-    lights[count].ambient=new CGL.Uniform(shader,'3f','lights['+count+'].ambient',1);
 
+    lights[count].ambient=new CGL.Uniform(shader,'3f','lights['+count+'].ambient',1);
     lights[count].fallOff=new CGL.Uniform(shader,'f','lights['+count+'].falloff',0);
     lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',10);
 }

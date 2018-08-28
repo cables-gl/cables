@@ -708,6 +708,9 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             op.id = obj.ops[iop].id;
             if (genIds) op.id = CABLES.generateUUID();
 
+            // console.log(obj.ops[iop].portsIn);
+            op.portsInData=obj.ops[iop].portsIn;
+
             for (var ipi in obj.ops[iop].portsIn) {
                 var objPort = obj.ops[iop].portsIn[ipi];
                 var port = op.getPort(objPort.name);

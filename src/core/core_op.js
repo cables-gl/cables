@@ -34,6 +34,7 @@ CABLES.Op = function()
     this.objName='';
     this.portsOut=[];
     this.portsIn=[];
+    this.portsInData=[]; // original loaded patch data 
     this.opId='';
     this.uiAttribs={};
     this.enabled=true;
@@ -97,7 +98,9 @@ CABLES.Op = function()
         {
             this.uiAttribs[p]=newAttribs[p];
         }
-        if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+        
+        // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+        this.fireEvent("onUiAttribsChange",newAttribs);
     };
 
     CABLES.Op.prototype.getName=function()
@@ -379,10 +382,10 @@ CABLES.Op = function()
     CABLES.Op.prototype.printInfo=function()
     {
         for(var i=0;i<this.portsIn.length;i++)
-             console.log('in: '+this.portsIn[i].getName());
+            console.log('in: '+this.portsIn[i].getName());
 
         for(var ipo in this.portsOut)
-             console.log('out: '+this.portsOut[ipo].getName());
+            console.log('out: '+this.portsOut[ipo].getName());
     };
 
     CABLES.Op.prototype.getOutChilds=function()
@@ -795,7 +798,7 @@ CABLES.Op = function()
     /**
      * @function
      * @description add an eventlistener ot op
-     * currently implemented:  "onEnabledChange", "onTitleChange"
+     * currently implemented:  "onEnabledChange", "onTitleChange", "onUiAttribsChange"
      * @param {which} name of event
      * @param {function} callback
      */
@@ -816,7 +819,6 @@ CABLES.Op = function()
                 if(idx==-1) return false;
                 else return true;
             }
-    
         }
         else
         {
@@ -839,14 +841,17 @@ CABLES.Op = function()
             else this._eventCallbacks[which].slice(idx);
         }
     }
+
     
+
     CABLES.Op.prototype.fireEvent=function(which,params)
     {
         if(this._eventCallbacks[which])
             for(var i=0;i<this._eventCallbacks[which].length;i++)
                 if(this._eventCallbacks[which])this._eventCallbacks[which][i](params);
-    }
 
+        if(this.onUiAttrChange && which=="onUiAttribsChange") this.onUiAttrChange(params); // todo: use normal eventlistener
+    }
 
     /**
      * @function
@@ -865,7 +870,25 @@ CABLES.Op = function()
         // ports[0].setUiAttribs({"spaceBefore":true});
         // ports[ports.length-1].setUiAttribs({"spaceAfter":true});
     }
+
     
+    CABLES.Op.prototype.removePort=function(port)
+    {
+
+        console.log('portsIn length',this.portsIn.length);
+
+        for(var ipi in this.portsIn)
+        {
+            if(this.portsIn[ipi]==port)
+            {
+                this.portsIn.splice(ipi, 1);
+                this.fireEvent("onUiAttribsChange",{});
+                return;
+            }
+        }
+
+        console.log('portsIn length after',this.portsIn.length);
+    }
 
 
 }

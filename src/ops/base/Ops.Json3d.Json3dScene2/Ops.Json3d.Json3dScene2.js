@@ -1,4 +1,3 @@
-
 op.exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
@@ -9,6 +8,8 @@ var createNonMesh=op.inValueBool("Create Non Mesh Nodes");
 var createMaterials=op.inValueBool("Create Materials",true);
 var detectClones=op.inValueBool("Detect Clones",true);
 
+var inReplaceMaterials=op.inObject("Mesh Materials");
+
 var cgl=op.patch.cgl;
 
 var scene=new CABLES.Variable();
@@ -18,28 +19,28 @@ cgl.frameStore.currentScene=null;
 doCreate.onTriggered=createNodes;
 
 var defaultEasing=CABLES.TL.EASING_LINEAR;
-
 var skipFrames=1;
 var frameNum=0;
 var cloneTransformStore=[];
 var data=null;
+var prevOp=null;
 filename.onChange=reload;
 op.exe.onTriggered=render;
 
-var prevOp=null;
 
 function render()
 {
     var oldScene=cgl.frameStore.currentScene;
     cgl.frameStore.currentScene=scene;
     if(cgl.frameStore.currentScene.materials)cgl.frameStore.currentScene.materials.length=0;
+    cgl.frameStore.currentScene.replaceMaterials=inReplaceMaterials.get();
 
     cgl.frameStore.cloneTransforms=cloneTransformStore;
-    
+
     cgl.pushModelMatrix();
     trigger.trigger();
     cgl.popModelMatrix();
-    
+
     cgl.frameStore.currentScene=oldScene;
 }
 
@@ -48,6 +49,8 @@ var setPortAnimated=function(p, doLerp)
     p.setAnimated(true);
     if(doLerp)p.anim.defaultEasing=defaultEasing;
 };
+
+
 
 function loadMaterials(data,root)
 {
@@ -69,7 +72,8 @@ function loadMaterials(data,root)
 
             for(var j in jsonMat.properties)
             {
-                if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
+
+                if(createMaterials.get() && jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='$clr.diffuse')
                 {
                     const setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch});
 
@@ -458,6 +462,21 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     var matIndex=data.meshes[index].materialindex;
                     var jsonMat=data.materials[matIndex];
 
+
+// console.log('chname',ch.name);
+                    if(inReplaceMaterials.get() && inReplaceMaterials.get()[ch.name])
+                    {
+                        // const setMatOp=op.patch.addOp('Ops.Json3d.SetMaterial',{"subPatch":op.uiAttribs.subPatch});
+                        // op.patch.link(setMatOp,'material',matOp,'shader');
+                        // op.patch.link(setMatOp,'exe',matOp,'trigger');
+    
+                        var matOp=op.patch.addOp('Ops.Json3d.SetMaterialShader',{"subPatch":op.uiAttribs.subPatch});
+                        matOp.getPort("Key").set(ch.name);
+                        op.patch.link(prevOp,'trigger',matOp,'exe');
+                        prevOp=matOp;
+    
+                    }
+                    else
                     if(createMaterials.get())
                     {
                         var matOp=op.patch.addOp('Ops.Json3d.Material',{"subPatch":op.uiAttribs.subPatch});
@@ -589,7 +608,8 @@ function createNodes()
         if(camOp) op.patch.link(camOp,'trigger',root,'exe');
             else op.patch.link(rootMatrixOp,'trigger',root,'exe');
 
-        if(createMaterials.get()) loadMaterials(data,root);
+        loadMaterials(data,root);
+        
     
         for(var i=0;i<data.rootnode.children.length;i++)
         {

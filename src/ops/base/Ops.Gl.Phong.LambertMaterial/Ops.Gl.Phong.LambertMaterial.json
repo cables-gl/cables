@@ -1,5 +1,5 @@
 {
-    "updated": 1533882273434,
+    "updated": 1535387190904,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eae9a731-3712-4891-9c22-dc7f4d80ce66",
@@ -40,6 +40,10 @@
             {
                 "type": "1",
                 "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
             }
         ],
         "name": "Ops.Gl.Phong.LambertMaterial"

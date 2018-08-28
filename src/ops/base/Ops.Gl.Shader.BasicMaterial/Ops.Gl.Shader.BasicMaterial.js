@@ -96,6 +96,8 @@ function doRender()
             diffuseTextureUniform=null;
         }
     };
+
+
     
 }
 

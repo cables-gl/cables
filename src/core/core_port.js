@@ -88,6 +88,18 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
+     * @name CABLES.Port#remove
+     * @function
+     * @description remove port
+     */
+    CABLES.Port.prototype.remove=function()
+    {
+        // this.setUiAttribs({hidePort:true});
+        this.removeLinks();
+        this.parent.removePort(this);
+    };
+
+    /**
      * @name CABLES.Port#setUiAttribs
      * @function
      * @param {Object} newAttribs
