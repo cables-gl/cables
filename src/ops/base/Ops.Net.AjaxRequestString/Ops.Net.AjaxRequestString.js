@@ -29,9 +29,9 @@ op.onFileChanged=function(fn)
 function reload()
 {
     if(!filename.get())return;
-    
+
     op.patch.loading.finished(loadingId);
-    
+
     loadingId=op.patch.loading.start('jsonFile',''+filename.get());
     isLoading.set(true);
 
@@ -57,6 +57,5 @@ function reload()
                 isLoading.set(false);
             }
         });
-    
-}
 
+}

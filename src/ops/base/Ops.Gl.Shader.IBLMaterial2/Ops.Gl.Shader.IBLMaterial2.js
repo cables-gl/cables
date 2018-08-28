@@ -13,14 +13,32 @@ const inRough=op.inTexture("Roughness Map");
 const inReflection=op.inTexture("Reflection");
 
 const inNormal=op.inTexture("Normal");
+const inNormalIntensity=op.inValueSlider("Normal Intensity",1);
+
 const inDiffuse=op.inTexture("Diffuse");
 const inAo=op.inTexture("AO");
+const inAoIntensity=op.inValueSlider("AO Intensity",1);
 const inRotation=op.inValueSlider("SampleRotation",0);
+
+const inRepeatX=op.inValue("Repeat X",1);
+const inRepeatY=op.inValue("Repeat Y",1);
 
 const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 const outShader=op.outObject("Shader");
 
 var cgl=op.patch.cgl;
+
+inLightmap.onChange=updateTexturesDefines;
+inRough.onChange=updateTexturesDefines;
+inReflection.onChange=updateTexturesDefines;
+inNormal.onChange=updateTexturesDefines;
+inDiffuse.onChange=updateTexturesDefines;
+inAo.onChange=updateTexturesDefines;
+inReflectionCubemap.onChange=updateTexturesDefines;
+inFlipY.onChange=updateFlip;
+inFlipX.onChange=updateFlip;
+
+
 
 function checkMipmap()
 {
@@ -49,12 +67,8 @@ function checkMipmap()
 
 }
 
-function doRender()
+function bindTextures()
 {
-    // if(!inLightmap.get() )return;
-    cgl.setShader(shader);
-
-
     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
     if(inLightmap.get())
     {
@@ -102,26 +116,31 @@ function doRender()
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inAo.get().tex);
     }
 
+    cgl.gl.activeTexture(cgl.gl.TEXTURE6);
+
     if(inReflectionCubemap.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE6);
         if(!inReflectionCubemap.get().cubemap) cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inReflectionCubemap.get().tex);
             else cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inReflectionCubemap.get().cubemap);
     }
+    else
+    {
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
+    }
 
+}
+
+function doRender()
+{
+    // if(!inLightmap.get() )return;
+    cgl.setShader(shader);
+
+
+    bindTextures();
 
     trigger.trigger();
     cgl.setPreviousShader();
 }
-inLightmap.onChange=updateTexturesDefines;
-inRough.onChange=updateTexturesDefines;
-inReflection.onChange=updateTexturesDefines;
-inNormal.onChange=updateTexturesDefines;
-inDiffuse.onChange=updateTexturesDefines;
-inAo.onChange=updateTexturesDefines;
-inReflectionCubemap.onChange=updateTexturesDefines;
-inFlipY.onChange=updateFlip;
-inFlipX.onChange=updateFlip;
 
 function updateFlip()
 {
@@ -162,18 +181,18 @@ function updateTexturesDefines()
 
     if(inReflectionCubemap.get()) shader.define("MAP_REFLECTION");
         else shader.removeDefine("MAP_REFLECTION");
-    
+
     updateFlip();
 }
 
 
-var shader=new CGL.Shader(cgl,'ibl_material');
+var shader=new CGL.Shader(cgl,"ibl material 2");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
 //op.onLoaded=shader.compile;
 
 shader.setSource(attachments.ibl_vert,attachments.ibl_frag);
-
+shader.bindTextures=bindTextures;
 var uniCube=new CGL.Uniform(shader,'t','skybox',0);
 var uniRough=new CGL.Uniform(shader,'t','maskRoughness',1);
 var uniRefl=new CGL.Uniform(shader,'t','maskReflection',2);
@@ -184,6 +203,12 @@ var uniRefl=new CGL.Uniform(shader,'t','mapReflection',6);
 var uniRotOff=new CGL.Uniform(shader,'f','fRotation',inRotation);
 var uniMulRefl=new CGL.Uniform(shader,'f','mulReflection',inReflMul);
 var uniMulRoug=new CGL.Uniform(shader,'f','mulRoughness',inRoughMul);
+var uniAoAmount=new CGL.Uniform(shader,'f','aoIntensity',inAoIntensity);
+var uniNormalIntensity=new CGL.Uniform(shader,'f','normalIntensity',inNormalIntensity);
+var uniRepeatX=new CGL.Uniform(shader,'f','repeatX',inRepeatX);
+var uniRepeatY=new CGL.Uniform(shader,'f','repeatY',inRepeatY);
+
+
 
 
 outShader.set(shader);

@@ -5,63 +5,44 @@ UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
 OUT vec3 v_eyeCoords;
-OUT vec3 v_normal;
 OUT vec3 v_pos;
 
 IN vec3 vPosition;
 IN vec3 attrVertNormal;
+UNI vec3 camPos;
 
 OUT vec2 texCoord;
 IN vec2 attrTexCoord;
+OUT mat3 newNormalMatrix;
 
-
-#ifdef TEX_NORMAL
-
-    IN vec3 attrTangent;
-    IN vec3 attrBiTangent;
-    UNI mat4 normalMatrix;
-    OUT vec3 N;
-    OUT vec3 V;
-    OUT vec3 E;
-    OUT vec3 T;
-    OUT vec3 B;
-    
-    void normalMap(mat4 modelview)
-    {
-        N = normalize(  (normalMatrix*vec4(v_normal,1.0)).xyz );
-        V = vec3( (modelview*vec4(vPosition,1.0)) );
-        E = normalize(-V);
-    
-        T = normalize( (normalMatrix*vec4(attrTangent,1.0)).xyz);
-        B = normalize( (normalMatrix*vec4(attrBiTangent,1.0)).xyz);
-    }
-
-#endif
-
+IN vec3 attrTangent,attrBiTangent;
+UNI float repeatX,repeatY;
 
 void main()
 {
     mat4 mMatrix=modelMatrix;
     v_pos= vPosition;
     vec4 pos = vec4( vPosition, 1. );
-    vec3 norm=v_normal;
+    vec3 norm=attrVertNormal;
 
     {{MODULE_VERTEX_POSITION}}
-    
-    
-    
+
     mat4 modelview= viewMatrix * mMatrix;
-    texCoord=attrTexCoord;
+    texCoord=vec2(attrTexCoord.x*repeatX,attrTexCoord.y*repeatY);
     
-    #ifdef TEX_NORMAL
-        normalMap(mMatrix);
-    #endif
-    
+    mat3 wmMatrix=mat3(modelMatrix);
+
+    newNormalMatrix=mat3(
+        normalize( wmMatrix*attrTangent ),
+        normalize( wmMatrix*attrBiTangent ),
+        normalize( wmMatrix*attrVertNormal )
+    );
+
+    vec4 modelPos=modelview * pos;
+
+    v_eyeCoords = (modelPos).xyz - camPos;
+    // v_eyeCoords = (mMatrix * pos).xyz - camPos;
     
 
-    vec4 eyeCoords = modelview * pos;
-
-    gl_Position = projMatrix * eyeCoords;
-    v_eyeCoords = eyeCoords.xyz;
-    v_normal = normalize(attrVertNormal);
+    gl_Position = projMatrix * modelPos;
 }

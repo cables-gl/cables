@@ -1,5 +1,3 @@
-op.name="Grid";
-
 var render=op.inFunction("Render");
 var inNum=op.inValue("Num",10);
 var inSpacing=op.inValue("Spacing",1);
@@ -40,7 +38,7 @@ function init()
         geomVertical.vertices.push(0);
     }
 
-    if(!mesh)  mesh=new CGL.Mesh(cgl,geomVertical);
+    if(!mesh) mesh=new CGL.Mesh(cgl,geomVertical);
         else mesh.setGeom(geomVertical);
 }
 
