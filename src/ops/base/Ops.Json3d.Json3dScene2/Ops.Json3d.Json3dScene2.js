@@ -611,6 +611,7 @@ function createNodes()
         var subPatchOpStartPort='trigger';
         if(!subPatchOp)
         {
+            subPatchId=op.uiAttribs.subPatch;
             subPatchOp=op.patch.addOp(CABLES.UI.OPNAME_SUBPATCH,{"subPatch":subPatchId});
             subPatchOp.setTitle("3d scene");
             subPatchId=subPatchOp.getPort("patchId").get();
