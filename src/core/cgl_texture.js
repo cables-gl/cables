@@ -496,7 +496,7 @@ CGL.Texture.getTempGradientTexture=function(cgl)
         }
 
     temptex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
-
+    CGL.tempTextureGradient=temptex;
     return temptex;
 };
 
