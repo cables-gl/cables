@@ -473,6 +473,33 @@ CGL.Texture.getEmptyTexture=function(cgl)
 };
 
 
+/**
+ * @static
+ * @function
+ * @name CGL.Texture#getTempGradientTexture
+ * @description returns a gradient texture from black to white
+ * @param {CGL.Context} cgl
+ * @return {CGL.Texture}
+ */
+CGL.Texture.getTempGradientTexture=function(cgl)
+{
+    if(CGL.tempTextureGradient) return CGL.tempTextureGradient;
+    var temptex=new CGL.Texture(cgl);
+    const size=8;
+    var data = new Uint8Array(size*size*4);//.fill(0);
+
+    for(var y=0;y<size;y++)
+        for(var x=0;x<size;x++)
+        {
+            data[ (x+y*size)*4+0]=data[ (x+y*size)*4+1]=data[ (x+y*size)*4+2]=y*32;
+            data[ (x+y*size)*4+3]=255;
+        }
+
+    temptex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
+
+    return temptex;
+};
+
 CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
 {
     var temptex=new CGL.Texture(cgl);

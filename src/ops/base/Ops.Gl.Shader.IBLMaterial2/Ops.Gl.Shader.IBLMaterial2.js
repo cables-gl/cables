@@ -79,7 +79,7 @@ function bindTextures()
     }
     else
     {
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getEmptyTexture(cgl).tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempGradientTexture(cgl).tex);
     }
 
     if(inRough.get())
@@ -121,7 +121,7 @@ function bindTextures()
     }
     else
     {
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getEmptyTexture(cgl).tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
     }
 
 }
