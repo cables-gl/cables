@@ -1,7 +1,13 @@
 const
 	cgl = op.patch.cgl,
+	origins = [
+	    'top-left','top-middle','top-right',
+	    'center-left','center-middle','center-right',
+	    'bottom-left','bottom-middle','bottom-right'
+    ],
 	trigger = op.inFunction('trigger'),
 	inElement = op.inObject('DOMElement'),
+	inOrigin = op.inValueSelect("origin",origins,'center-middle'),
 	next = op.outFunction('next'),
 	sCSSMatrix = mat4.create(),
 	sScalingVector = vec3.create()
@@ -23,20 +29,25 @@ if (!elProjection) {
 
 	var style = document.createElement('style');
 	style.type="text/css";
-	style.textContent = '.cables-css3dview {position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;} .cables-css3dview > * {pointer-events:auto;transform:translate3d(-50%,-50%,0)}';
+	style.textContent = [
+	    '.cables-css3dview {position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;}',
+        '.cables-css3dview > * {pointer-events:auto;}',
+        '.cables-css3dview.origin-top-left > * {}',
+        '.cables-css3dview.origin-top-middle > * {transform:translate3d(-50%,0,0);}',
+        '.cables-css3dview.origin-top-right > * {transform:translate3d(-100%,0,0);}',
+        '.cables-css3dview.origin-center-left > * {transform:translate3d(0,-50%,0);}',
+        '.cables-css3dview.origin-center-middle > * {transform:translate3d(-50%,-50%,0);}',
+        '.cables-css3dview.origin-center-right > * {transform:translate3d(-100%,-50%,0);}',
+        '.cables-css3dview.origin-bottom-left > * {transform:translate3d(0,-100%,0);}',
+        '.cables-css3dview.origin-bottom-middle > * {transform:translate3d(-50%,-100%,0);}',
+        '.cables-css3dview.origin-bottom-right > * {transform:translate3d(-100%,-100%,0);}'
+	].join('\n');
 	elProjection.appendChild(style);
 }
 
-op.onDelete = removeElement;
-
-function removeElement() {
+op.onDelete = function() {
 	var el = elProjection.querySelector('[data-ccs3did="'+op.uuid+'"]');
-	if (el) 
-	{
-	    el.parentElement.removeChild(el);
-	    console.log("delete ok!",op.uuid);
-	}
-	else console.log("delete css3d failed...",op.uuid);
+	if (el) el.parentElement.removeChild(el);
 }
 
 function wrap (el) {
@@ -49,9 +60,16 @@ function wrap (el) {
 
 inElement.onChange = function (self, el) {
 	op.onDelete();
-	if (el) elProjection.appendChild(wrap(el));
-};
-
+	if (!el) return;
+	elProjection.appendChild(wrap(el));
+	inOrigin.onChange();
+}
+inOrigin.onChange = function () {
+    var el = inElement.get();
+    if (!el) return;
+    DOMTokenList.prototype.remove.apply(el.parentElement.classList, origins.map(function (o){return 'origin-'+o}));
+    el.parentElement.classList.add('origin-'+inOrigin.get());
+}
 trigger.onTriggered = function () {
 	var pxfov = 0.5 / (1 / cgl.pMatrix[5]) * cgl.gl.drawingBufferHeight;
 	elProjection.style.perspective = pxfov + "px";
@@ -98,5 +116,5 @@ trigger.onTriggered = function () {
 		")";
 	}
 	next.trigger();
-};
-
+}
+inOrigin.onChange();

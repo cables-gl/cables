@@ -1,11 +1,11 @@
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+const r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+const g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+const b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+const a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var texOut=op.outTexture("texture_out");
+const texOut=op.outTexture("texture_out");
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var fb=null;
 
 var render=function()
@@ -30,9 +30,7 @@ g.set(0.3);
 b.set(0.3);
 a.set(1.0);
 
-r.onValueChange(render);
-g.onValueChange(render);
-b.onValueChange(render);
-a.onValueChange(render);
-
-render();
+r.onChange=render;
+g.onChange=render;
+b.onChange=render;
+a.onChange=render;

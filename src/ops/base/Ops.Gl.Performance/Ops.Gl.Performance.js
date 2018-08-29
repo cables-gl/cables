@@ -151,7 +151,7 @@ function updateText()
     element.innerHTML=fps+" fps | "+Math.round(childsTime*100)/100+"ms "+warn;
     if(op.patch.loading.getProgress()!=1.0)
     {
-        element.innerHTML+="<br/>loading "+op.patch.loading.getProgress()+' '+loadingChars[ (++loadingCounter)%loadingChars.length ];
+        element.innerHTML+="<br/>loading "+Math.round(op.patch.loading.getProgress()*100)+'% '+loadingChars[ (++loadingCounter)%loadingChars.length ];
     }
     
     if(opened)

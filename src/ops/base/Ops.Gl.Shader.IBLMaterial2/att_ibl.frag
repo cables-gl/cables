@@ -1,20 +1,18 @@
 {{MODULES_HEAD}}
 IN vec3 vCoords;
-// IN vec3 v_normal;
-IN vec3 v_eyeCoords;
-IN vec3 v_pos;
+IN vec3 viewDirection;
 IN vec2 texCoord;
 
 IN mat3 newNormalMatrix;
 
 #ifdef TEX_FORMAT_CUBEMAP
-    UNI samplerCube skybox;
+    UNI samplerCube irradiance;
     UNI samplerCube mapReflection;
     #define SAMPLETEX textureLod 
 #endif
 #ifndef TEX_FORMAT_CUBEMAP
     #define TEX_FORMAT_EQUIRECT
-    UNI sampler2D skybox;
+    UNI sampler2D irradiance;
     UNI sampler2D mapReflection;
     #define SAMPLETEX sampleEquirect 
 #endif
@@ -40,21 +38,12 @@ UNI float mulReflection;
 UNI float mulRoughness;
 
 #ifdef TEX_NORMAL
-    IN vec3 N;
-    IN vec3 B;
-    IN vec3 T;
     UNI float normalIntensity;
     UNI sampler2D texNormal;
-
     vec3 normalMap() {
-        vec3 theNormal=texture2D(texNormal,texCoord).rgb*2.0-1.0;
-
-        theNormal=normalize(mix(vec3(0.0,0.0,1.0),theNormal,normalIntensity));
-
-        vec3 r=normalize( newNormalMatrix * theNormal );
-        r.xz*=-1.0;
-
-        return r;
+        vec3 theNormal=texture2D(texNormal,texCoord).rgb*2.-1.;
+        theNormal=normalize(mix(vec3(0,0,1),theNormal,normalIntensity));
+        return normalize( newNormalMatrix * theNormal );
     }
 #endif
 
@@ -68,7 +57,7 @@ vec3 desaturate(vec3 color, float amount)
     const vec2 invAtan = vec2(0.1591, 0.3183);
     vec2 sampleSphericalMap(vec3 direction)
     {
-        vec2 uv = vec2(atan(direction.z, direction.x), asin(direction.y));
+        vec2 uv = vec2(atan(direction.z, direction.x), asin(direction.y+1e-6));
         uv *= invAtan;
         uv += 0.5;
         return uv;
@@ -80,31 +69,12 @@ vec3 desaturate(vec3 color, float amount)
     }
 #endif
 
-vec4 reflection(vec3 N, float amountRough)
-{
-    vec3 V = (v_eyeCoords);
-    vec3 R = reflect(V,N);
-    
-    // R.y*=-1.;
-    vec3 T = ( normalize(R) );
-
-    // rotate 
-    // float r = fRotation * 6.2831853071, sa=sin(r),ca=cos(r);
-    // T.xz*=mat2(ca,sa,-sa,ca);
-
-    #ifdef FLIPX
-        T.x*=-1.0;
-    #endif
-    #ifdef FLIPY
-        T.y*=-1.0;
-    #endif
-
-    return SAMPLETEX(mapReflection, T, amountRough*10.0);
-}
-
 void main()
 {
     {{MODULE_BEGIN_FRAG}}
+
+    float rot=fRotation*6.28318531, sa=sin(rot), ca=cos(rot);
+    mat2 matRotation = mat2(ca,sa,-sa,ca);
 
     vec3 theNormal;
     vec4 col = vec4(1.0,1.0,1.0,1.0);
@@ -125,32 +95,26 @@ void main()
     #ifdef TEX_NORMAL
        N=normalMap();
     #endif
+    N=normalize(N);
 
-    // vec3 no = ( mat3( inverseViewMatrix ) * normalize(N) ).xyz;
+    vec3 RN=N;
+    RN.xz*=matRotation;
+    col=SAMPLETEX(irradiance,RN,8.0);
 
-    // #ifdef FLIPY
-    //     no.y*=-1.0;
-    // #endif
-
-    // no.xz*=mat2(ca,sa,-sa,ca);
-
-    col=SAMPLETEX(skybox, normalize(N),8.0);
+    #ifdef TEX_AO
+        col.rgb *= clamp(texture2D(texAo,texCoord).r+(1.0-aoIntensity),0.0,1.0);
+    #endif
 
     #ifdef TEX_DIFFUSE
         col*=texture2D(texDiffuse,texCoord);
     #endif
+
+
+    vec3 L = reflect(normalize(viewDirection),normalize(N));
+    L.xz*=matRotation;
     
-    // col+=reflection(N,amountReflect,amountRough);
-    // col+=reflection(N,amountReflect,amountRough);
-    col.rgb=mix(col.rgb,reflection(N,amountRough).rgb,amountReflect);
-    
-    #ifdef TEX_AO
-        float ao=texture2D(texAo,texCoord).r;
-        col.rgb *= clamp(ao+(1.0-aoIntensity),0.0,1.0);
-    #endif
-    
-    // col.rgb=N;//normalMap();
-    // col.rgb=normalize(v_eyeCoords);
+    // col.rgb=mix(col.rgb,SAMPLETEX(mapReflection, L, amountRough*10.0).rgb,amountReflect);
+    col.rgb+=SAMPLETEX(mapReflection, L, amountRough*10.0).rgb*amountReflect;
 
     {{MODULE_COLOR}}
 

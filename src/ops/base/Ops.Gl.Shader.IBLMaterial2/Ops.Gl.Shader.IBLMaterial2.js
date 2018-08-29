@@ -7,8 +7,6 @@ const inLightmap=op.inObject("Lightmap");
 const inReflectionCubemap=op.inObject("Reflection Cubemap");
 const inRoughMul=op.inValueSlider("Roughness",0);
 const inReflMul=op.inValueSlider("Reflection Amount",0.3);
-const inFlipY=op.inValueBool("Flip Y");
-const inFlipX=op.inValueBool("Flip X");
 const inRough=op.inTexture("Roughness Map");
 const inReflection=op.inTexture("Reflection");
 
@@ -35,8 +33,6 @@ inNormal.onChange=updateTexturesDefines;
 inDiffuse.onChange=updateTexturesDefines;
 inAo.onChange=updateTexturesDefines;
 inReflectionCubemap.onChange=updateTexturesDefines;
-inFlipY.onChange=updateFlip;
-inFlipX.onChange=updateFlip;
 
 
 
@@ -44,11 +40,11 @@ function checkMipmap()
 {
     var hasError=false;
     
-    if(inLightmap.get() && inLightmap.get().filter!=CGL.Texture.FILTER_MIPMAP )
-    {
-        hasError=true;
-        op.uiAttr({'error':'lightmap should have mipmap filtering!'});
-    }
+    // if(inLightmap.get() && inLightmap.get().filter!=CGL.Texture.FILTER_MIPMAP )
+    // {
+    //     hasError=true;
+    //     op.uiAttr({'error':'lightmap should have mipmap filtering!'});
+    // }
 
     if(inReflectionCubemap.get() && inReflectionCubemap.get().filter!=CGL.Texture.FILTER_MIPMAP )
     {
@@ -83,7 +79,7 @@ function bindTextures()
     }
     else
     {
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getEmptyTexture(cgl).tex);
     }
 
     if(inRough.get())
@@ -125,7 +121,7 @@ function bindTextures()
     }
     else
     {
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getEmptyTexture(cgl).tex);
     }
 
 }
@@ -142,14 +138,6 @@ function doRender()
     cgl.setPreviousShader();
 }
 
-function updateFlip()
-{
-    if(inFlipY.get()) shader.define("FLIPY");
-        else shader.removeDefine("FLIPY");
-    if(inFlipX.get()) shader.define("FLIPX");
-        else shader.removeDefine("FLIPX");
-    
-}
 
 function updateTexturesDefines()
 {
@@ -181,8 +169,6 @@ function updateTexturesDefines()
 
     if(inReflectionCubemap.get()) shader.define("MAP_REFLECTION");
         else shader.removeDefine("MAP_REFLECTION");
-
-    updateFlip();
 }
 
 
@@ -193,7 +179,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 
 shader.setSource(attachments.ibl_vert,attachments.ibl_frag);
 shader.bindTextures=bindTextures;
-var uniCube=new CGL.Uniform(shader,'t','skybox',0);
+var uniCube=new CGL.Uniform(shader,'t','irradiance',0);
 var uniRough=new CGL.Uniform(shader,'t','maskRoughness',1);
 var uniRefl=new CGL.Uniform(shader,'t','maskReflection',2);
 var uniNormal=new CGL.Uniform(shader,'t','texNormal',3);

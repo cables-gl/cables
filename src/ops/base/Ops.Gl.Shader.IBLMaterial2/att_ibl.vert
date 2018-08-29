@@ -4,8 +4,7 @@ UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
-OUT vec3 v_eyeCoords;
-OUT vec3 v_pos;
+OUT vec3 viewDirection;
 
 IN vec3 vPosition;
 IN vec3 attrVertNormal;
@@ -21,7 +20,6 @@ UNI float repeatX,repeatY;
 void main()
 {
     mat4 mMatrix=modelMatrix;
-    v_pos= vPosition;
     vec4 pos = vec4( vPosition, 1. );
     vec3 norm=attrVertNormal;
 
@@ -40,9 +38,7 @@ void main()
 
     vec4 modelPos=modelview * pos;
 
-    v_eyeCoords = (mMatrix*pos).xyz - camPos;
-    // v_eyeCoords = (mMatrix * pos).xyz - camPos;
-    
+    viewDirection = normalize((mMatrix * pos).xyz - camPos);
 
     gl_Position = projMatrix * modelPos;
 }
