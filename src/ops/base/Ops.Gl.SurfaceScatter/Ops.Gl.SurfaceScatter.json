@@ -1,5 +1,5 @@
 {
-    "updated": 1511174198559,
+    "updated": 1535555282917,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "1511ba6a-6600-4c36-bfce-6c9abd5b70e5",
@@ -16,23 +16,28 @@
             },
             {
                 "type": "0",
-                "name": "random seed"
+                "name": "random seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "num"
+                "name": "num",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotate X"
+                "name": "Rotate X",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Rotate Y"
+                "name": "Rotate Y",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Rotate Z"
+                "name": "Rotate Z",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -42,7 +47,8 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             },
             {
                 "type": "3",

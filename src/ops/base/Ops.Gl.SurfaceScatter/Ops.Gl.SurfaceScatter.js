@@ -1,5 +1,4 @@
 
-op.name='SurfaceScatter';
 op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var geometry=op.addInPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 var seed=op.addInPort(new Port(op,"random seed",OP_PORT_TYPE_VALUE));
@@ -81,6 +80,7 @@ function initRandom()
 
         objects.push(obj);
     }
+
     outPoints.set(points);
 }
 
