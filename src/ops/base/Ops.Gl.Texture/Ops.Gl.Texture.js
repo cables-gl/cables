@@ -35,7 +35,7 @@ var setTempTexture=function()
 };
 
 var loadingId=null;
-
+var tex=null;
 function reload(nocache)
 {
     if(!loadingId)loadingId=cgl.patch.loading.start('texture',filename.get());
@@ -57,11 +57,10 @@ function realReload(nocache)
     {
         loading.set(true);
 
-        var tex=CGL.Texture.load(cgl,url,
+        if(tex)tex.delete();
+        tex=CGL.Texture.load(cgl,url,
             function(err)
             {
-                // console.log('tex loaded!!');
-
                 if(err)
                 {
                     setTempTexture();
@@ -106,7 +105,7 @@ function realReload(nocache)
         {
         }
         loading.set(false);
-        cgl.patch.loading.finished(loadingId);
+        // cgl.patch.loading.finished(loadingId);
     }
     else
     {
@@ -122,7 +121,7 @@ function onFilterChange()
     if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
     if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
 
-    reload();
+    // reload();
 }
 
 function onWrapChange()

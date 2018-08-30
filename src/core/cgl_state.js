@@ -200,6 +200,7 @@ CGL.Context = function() {
         return simpleShader;
     };
 
+
     this.setShader = function(shader) {
         this._shaderStack.push(shader);
         currentShader = shader;
@@ -244,8 +245,6 @@ CGL.Context = function() {
         if (this._glFrameBufferStack.length === 0) return null;
         return this._glFrameBufferStack[this._glFrameBufferStack.length - 1];
     }
-
-
 
     /**
      * push a framebuffer to the framebuffer stack
@@ -363,12 +362,10 @@ CGL.Context = function() {
 
     this._resizeToWindowSize = function() {
         this.setSize(window.innerWidth,window.innerHeight);
-        self.updateSize();
+        this.updateSize();
     };
 
     this._resizeToParentSize = function() {
-
-        
         var p=this.canvas.parentElement;
         if(!p)
         {
@@ -378,7 +375,7 @@ CGL.Context = function() {
         this.setSize(p.clientWidth,p.clientHeight);
         console.log("_resizeToParentSize",p.clientWidth,p.clientHeight);
 
-        self.updateSize();
+        this.updateSize();
     };
 
     this.setAutoResize = function(parent) {
@@ -569,9 +566,6 @@ CGL.Context.prototype.popModelMatrix = function() {
 CGL.Context.prototype.modelMatrix = function() {
     return this.mMatrix;
 };
-
-
-
 
 
 // state depthtest

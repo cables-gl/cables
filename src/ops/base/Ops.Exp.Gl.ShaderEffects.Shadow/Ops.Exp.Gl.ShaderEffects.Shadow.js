@@ -100,7 +100,6 @@ op.render.onTriggered=function()
         {
             moduleFrag.samples=shadow.samples;
             shader.define("SHADOW_NUM_SAMPLES",shadow.samples+0.01);
-            
         }
         moduleFrag.bias.setValue(shadow.bias);
 

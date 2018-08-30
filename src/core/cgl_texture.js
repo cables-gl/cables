@@ -491,7 +491,7 @@ CGL.Texture.getTempGradientTexture=function(cgl)
     for(var y=0;y<size;y++)
         for(var x=0;x<size;x++)
         {
-            data[ (x+y*size)*4+0]=data[ (x+y*size)*4+1]=data[ (x+y*size)*4+2]=y*32;
+            data[ (x+y*size)*4+0]=data[ (x+y*size)*4+1]=data[ (x+y*size)*4+2]=255-y*32;
             data[ (x+y*size)*4+3]=255;
         }
 

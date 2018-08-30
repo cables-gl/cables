@@ -24,6 +24,8 @@ CABLES.LoadingStatus.prototype.getProgress=function()
     return this._percent;
 };
 
+
+
 CABLES.LoadingStatus.prototype.checkStatus=function()
 {
     this._countFinished=0;
