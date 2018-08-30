@@ -1,5 +1,5 @@
 {
-    "updated": 1535535580392,
+    "updated": 1535610294106,
     "authorName": "pandur",
     "id": "bc561659-a89f-499d-bb21-30bade34c1e7",
     "created": 1534581433227,
@@ -43,6 +43,11 @@
                 "type": "0",
                 "name": "Normal Intensity",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Normal Flip",
+                "subType": "boolean"
             },
             {
                 "type": "2",

@@ -69,6 +69,7 @@ function checkPreRender()
             self.onAnimFrame=function(){};
             isFinishedPort.set(true);
             finishedAll=true;
+            document.body.classList.remove("cables-loading");
         }
         else
         {
@@ -77,10 +78,12 @@ function checkPreRender()
     }
     else
     {
+        document.body.classList.add("cables-loading");
         setTimeout(checkPreRender,100);
     }
 
 }
+
 
 var loadingId=patch.loading.start('delayloading','delayloading');
 setTimeout(function()

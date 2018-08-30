@@ -12,6 +12,7 @@ const inReflection=op.inTexture("Reflection");
 
 const inNormal=op.inTexture("Normal");
 const inNormalIntensity=op.inValueSlider("Normal Intensity",1);
+const inNormalFlip=op.inValueBool("Normal Flip",false);
 
 const inDiffuse=op.inTexture("Diffuse");
 const inAo=op.inTexture("AO");
@@ -26,6 +27,7 @@ const outShader=op.outObject("Shader");
 
 var cgl=op.patch.cgl;
 
+inNormalFlip.onChange=updateTexturesDefines;
 inLightmap.onChange=updateTexturesDefines;
 inRough.onChange=updateTexturesDefines;
 inReflection.onChange=updateTexturesDefines;
@@ -34,6 +36,8 @@ inDiffuse.onChange=updateTexturesDefines;
 inAo.onChange=updateTexturesDefines;
 inReflectionCubemap.onChange=updateTexturesDefines;
 
+
+// console.log("lod:",cgl.gl.getExtension('EXT_shader_texture_lod'));
 
 
 function checkMipmap()
@@ -161,6 +165,10 @@ function updateTexturesDefines()
     if(inNormal.get()) shader.define("TEX_NORMAL");
         else shader.removeDefine("TEX_NORMAL");
 
+    if(inNormalFlip.get()) shader.define("TEX_NORMAL_FLIP");
+        else shader.removeDefine("TEX_NORMAL_FLIP");
+
+
     if(inDiffuse.get()) shader.define("TEX_DIFFUSE");
         else shader.removeDefine("TEX_DIFFUSE");
 
@@ -174,6 +182,13 @@ function updateTexturesDefines()
 
 var shader=new CGL.Shader(cgl,"ibl material 2");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
+if(cgl.glVersion==1 && !cgl.gl.getExtension('EXT_shader_texture_lod')) 
+    throw "no EXT_shader_texture_lod texture extension";
+
+if(cgl.glVersion==1) shader.enableExtension('GL_EXT_shader_texture_lod');    
+
+console.log("cgl.glVersion",cgl.glVersion);
 
 //op.onLoaded=shader.compile;
 

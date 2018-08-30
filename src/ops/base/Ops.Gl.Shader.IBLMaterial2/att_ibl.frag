@@ -1,3 +1,5 @@
+
+
 {{MODULES_HEAD}}
 IN vec3 vCoords;
 IN vec3 viewDirection;
@@ -37,11 +39,20 @@ UNI float fRotation;
 UNI float mulReflection;
 UNI float mulRoughness;
 
+
+#ifdef GL_EXT_shader_texture_lod
+    #define textureLod texture2DLodEXT
+#endif
+
+
 #ifdef TEX_NORMAL
     UNI float normalIntensity;
     UNI sampler2D texNormal;
     vec3 normalMap() {
         vec3 theNormal=texture2D(texNormal,texCoord).rgb*2.-1.;
+        #ifdef TEX_NORMAL_FLIP
+            theNormal.xy*=-1.;
+        #endif
         theNormal=normalize(mix(vec3(0,0,1),theNormal,normalIntensity));
         return normalize( newNormalMatrix * theNormal );
     }

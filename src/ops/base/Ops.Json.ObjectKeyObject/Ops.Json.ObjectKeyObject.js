@@ -15,7 +15,7 @@ function update()
     if(inKey.get().indexOf(",")>-1)
     {
         const keys=inKey.get().split(',');
-        console.log(keys);
+        // console.log(keys);
         for(var i in keys)
         {
             if(keys[i] && keys[i].length>0)
