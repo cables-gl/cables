@@ -19,5 +19,5 @@ render.onTriggered=function()
 function scaleChanged()
 {
     vec3.set(vScale, scale.get(),scale.get(),scale.get());
-};
+}
 

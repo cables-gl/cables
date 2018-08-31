@@ -20,15 +20,14 @@ function doRender()
 {
     cgl.setShader(shader);
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    
 
     if(inCubemap.get())
     {
-        if(inCubemap.get().cubemap) cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
-        else cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inCubemap.get().tex);
+        if(inCubemap.get().cubemap) cgl.setTexture(0,inCubemap.get().cubemap,cgl.gl.TEXTURE_CUBE_MAP);
+        else cgl.setTexture(0,inCubemap.get().tex);
     }
-    else
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
+    else cgl.setTexture(0,CGL.Texture.getTempTexture(cgl).tex);
 
     trigger.trigger();
     cgl.setPreviousShader();

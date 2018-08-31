@@ -38,6 +38,7 @@ CGL.TextureEffect.prototype.setSourceTexture=function(tex)
         this._textureSource=tex;
     }
 
+
     if(!this._textureSource.compareSettings(this._textureTarget))
     {
         // console.log('change effect target texture ');

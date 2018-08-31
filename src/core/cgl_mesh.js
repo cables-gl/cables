@@ -328,7 +328,14 @@ CGL.Mesh.prototype._bind=function(shader)
     {
         var attribute=this._attributes[i];
         if(attribute.loc==-1)
-            attribute.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), attribute.name);
+        {
+            if(attribute._attrLocationLastShaderTime!=shader.lastCompile)
+            {
+                attribute._attrLocationLastShaderTime=shader.lastCompile;
+                attribute.loc = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
+            }
+        }
+            
 
         if(attribute.loc!=-1)
         {
@@ -378,7 +385,7 @@ CGL.Mesh.prototype._bind=function(shader)
                     {
                         var pointer=attribute.pointer[ip];
 
-                        if(pointer.loc==-1) pointer.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), pointer.name);
+                        if(pointer.loc==-1) pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
                         // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);

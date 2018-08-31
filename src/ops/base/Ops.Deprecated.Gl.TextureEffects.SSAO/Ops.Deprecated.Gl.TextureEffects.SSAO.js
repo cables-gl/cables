@@ -147,11 +147,11 @@ this.render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
+        /* --- */cgl.setTexture(0,self.image.val.tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        /* --- */cgl.setTexture(1,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
 
         cgl.currentTextureEffect.finish();

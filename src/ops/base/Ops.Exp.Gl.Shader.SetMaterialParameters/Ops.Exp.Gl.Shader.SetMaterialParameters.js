@@ -81,8 +81,8 @@ function bindTextures()
             
             if(p.get())
             {
-                cgl.gl.activeTexture(cgl.gl.TEXTURE0+slot);
-                cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, p.get().tex);
+                /* --- */cgl.setTexture(0+slot,p.get().tex);
+                // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, p.get().tex);
             }
         }
     }

@@ -187,30 +187,30 @@ function bindTextures()
     
     if(self.texture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        /* --- */cgl.setTexture(0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.texture.get().tex);
     }
 
     if(self.textureDiffuse.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+        /* --- */cgl.setTexture(1);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureDiffuse.get().tex);
     }
 
     if(self.textureNormal.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE2);
+        /* --- */cgl.setTexture(2);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureNormal.get().tex);
     }
 
     if(self.textureSpec.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE3);
+        /* --- */cgl.setTexture(3);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpec.get().tex);
     }
     if(self.textureSpecMatCap.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE4);
+        /* --- */cgl.setTexture(4);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpecMatCap.get().tex);
     }
 
@@ -231,30 +231,30 @@ this.doRender=function()
 
     // if(self.texture.get())
     // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+    //     /* --- */cgl.setTexture(0);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
 
     // if(self.textureDiffuse.get())
     // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+    //     /* --- */cgl.setTexture(1);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
 
     // if(self.textureNormal.get())
     // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE2);
+    //     /* --- */cgl.setTexture(2);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
 
     // if(self.textureSpec.get())
     // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE3);
+    //     /* --- */cgl.setTexture(3);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
     // if(self.textureSpecMatCap.get())
     // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE4);
+    //     /* --- */cgl.setTexture(4);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
 };

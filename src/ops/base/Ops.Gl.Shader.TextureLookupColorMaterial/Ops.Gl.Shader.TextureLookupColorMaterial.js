@@ -11,13 +11,13 @@ op.bindTextures=function()
 {
     if(op.texture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        /* --- */cgl.setTexture(0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.val.tex);
     }
 
     if(op.textureOpacity.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+        /* --- */cgl.setTexture(1);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.val.tex);
     }
 };

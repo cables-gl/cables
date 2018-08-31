@@ -147,7 +147,6 @@ CGL.WirePoint=function(cgl,size)
         cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
 
         cgl.popModelMatrix();
-
     };
 
     bufferData();

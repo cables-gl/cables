@@ -180,8 +180,8 @@ render.onTriggered=function()
     if(simTexPos)
     {
         // cgl.setTexture(0,t);
-        cgl.gl.activeTexture(cgl.gl.TEXTURE4);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, simTexPos.tex);
+        /* --- */cgl.setTexture(4, simTexPos.tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, simTexPos.tex);
     }
 
     // render points...

@@ -103,8 +103,8 @@ op.render.onTriggered=function()
         }
         moduleFrag.bias.setValue(shadow.bias);
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE5);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, shadow.shadowMap.tex);
+        /* --- */cgl.setTexture(5,shadow.shadowMap.tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, shadow.shadowMap.tex);
         op.trigger.trigger();
     }
 

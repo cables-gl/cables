@@ -142,8 +142,8 @@ render.onTriggered=function()
 
     // if(texture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE4);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, t);
+        /* --- */cgl.setTexture(4,t);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, t);
     }
 
     uniTime2.setValue(op.patch.freeTimer.get());

@@ -27,15 +27,20 @@ CGL.Uniform=function(__shader,__type,__name,_value)
     this._shader.addUniform(this);
     this.needsUpdate=true;
 
-    if(__type=='3f[]')
-    {
-        this.set=this.setValue=this.setValueArray3F.bind(this);
-        this.updateValue=this.updateValueArray3F.bind(this);
-    } else
     if(__type=='f')
     {
         this.set=this.setValue=this.setValueF.bind(this);
         this.updateValue=this.updateValueF.bind(this);
+    } else
+    if(__type=='f[]')
+    {
+        this.set=this.setValue=this.setValueArrayF.bind(this);
+        this.updateValue=this.updateValueArrayF.bind(this);
+    } else
+    if(__type=='3f[]')
+    {
+        this.set=this.setValue=this.setValueArray3F.bind(this);
+        this.updateValue=this.updateValueArray3F.bind(this);
     } else
     if(__type=='i')
     {
@@ -172,6 +177,22 @@ CGL.Uniform.prototype.updateValueArray3F=function()
 
     if(!this._value)return;
     this._shader.getCgl().gl.uniform3fv(this._loc, this._value);
+    CGL.profileUniformCount++;
+};
+
+CGL.Uniform.prototype.setValueArrayF=function(v)
+{
+    this.needsUpdate=true;
+    this._value=v;
+};
+
+CGL.Uniform.prototype.updateValueArrayF=function()
+{
+    if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        else this.needsUpdate=false;
+
+    if(!this._value)return;
+    this._shader.getCgl().gl.uniformfv(this._loc, this._value);
     CGL.profileUniformCount++;
 };
 

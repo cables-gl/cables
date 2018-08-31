@@ -62,8 +62,8 @@ render.onTriggered=function()
 
     if(inTex.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE3);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTex.get().tex);
+        /* --- */cgl.setTexture(3, inTex.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTex.get().tex);
     }
     
     trigger.trigger();

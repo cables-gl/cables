@@ -180,6 +180,9 @@ CGL.Context = function() {
             
             for (var i = 0; i < cbResize.length; i++) cbResize[i]();
         }
+
+        console.log(countShaders);
+        countShaders=0
     };
 
     // shader stack
@@ -200,10 +203,12 @@ CGL.Context = function() {
         return simpleShader;
     };
 
+    var countShaders=0;
 
     this.setShader = function(shader) {
         this._shaderStack.push(shader);
         currentShader = shader;
+        countShaders++;
     };
 
     this.setPreviousShader = function() {
@@ -320,6 +325,11 @@ CGL.Context = function() {
         // cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
         // cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
 
+        for(var i=0;i<this._textureslots.length;i++)
+        {
+            this._textureslots[i]=-99;
+        }
+
         cgl.beginFrame();
     };
 
@@ -337,9 +347,16 @@ CGL.Context = function() {
         cgl.endFrame();
     };
 
-    this.setTexture = function(slot, t) {
-        this.gl.activeTexture(this.gl.TEXTURE0 + slot);
-        this.gl.bindTexture(this.gl.TEXTURE_2D, t);
+    this._textureslots=[];
+    
+    this.setTexture = function(slot, t, type)
+    {
+        if(this._textureslots[slot]!=t)
+        {
+            this.gl.activeTexture(this.gl.TEXTURE0 + slot);
+            this.gl.bindTexture(type||this.gl.TEXTURE_2D, t);
+            this._textureslots[slot]=t;
+        }
     };
 
     this.fullScreen = function() {
@@ -739,6 +756,19 @@ CGL.Context.prototype.popBlendMode=function()
     if(n>0)
         this._setBlendMode(this._stackBlendMode[n],this._stackBlendModePremul[n]);
 }
+
+CGL.Context.prototype.glGetAttribLocation=function(prog,name)
+{
+    const  l=this.gl.getAttribLocation(prog, name);
+    if(l==-1)
+    {
+        // console.log("get attr loc -1 ",name);
+        // debugger;
+    }
+    return l;
+}
+
+
 
 CGL.Context.prototype._setBlendMode=function(blendMode,premul)
 {

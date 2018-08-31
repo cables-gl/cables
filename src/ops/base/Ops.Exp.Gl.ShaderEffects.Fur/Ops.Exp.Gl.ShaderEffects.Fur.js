@@ -53,20 +53,20 @@ function bindTextures()
 {
     if(texStructure.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texStructure.get().tex);
+        /* --- */cgl.setTexture(0,texStructure.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texStructure.get().tex);
     }
 
     if(texColor.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texColor.get().tex);
+        /* --- */cgl.setTexture(1,texColor.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texColor.get().tex);
     }
 
     if(texLength.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texLength.get().tex);
+        /* --- */cgl.setTexture(2,texLength.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texLength.get().tex);
     }
 
     

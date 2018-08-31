@@ -7,7 +7,7 @@ var doCreate=op.inFunctionButton("Create Nodes");
 var createNonMesh=op.inValueBool("Create Non Mesh Nodes");
 
 
-var createMaterials=op.inValueBool("Create Materials",true);
+var createMaterials=op.inValueBool("Create Materials",false);
 var detectClones=op.inValueBool("Detect Clones",true);
 
 var inReplaceMaterials=op.inObject("Mesh Materials");
@@ -420,20 +420,29 @@ function addChild(data,x,y,parentOp,parentPort,ch)
         if(!prevOp )
         {
             
+            // console.log(ch.transformation);
+            var eq=mat4.exactEquals(ch.transformation,[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);
             
-            var transOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":subPatchId});
-
-            if(!ch.transposed)
+            if(!eq)
             {
-                ch.transposed=true;
-                mat4.transpose(ch.transformation,ch.transformation);
+                var transOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":subPatchId});
+    
+                if(!ch.transposed)
+                {
+                    ch.transposed=true;
+                    mat4.transpose(ch.transformation,ch.transformation);
+                }
+    
+                transOp.getPort('matrix').set(ch.transformation);
+                prevOp=transOp;
+    
+                op.patch.link(parentOp,parentPort,prevOp,'render');
+                if(ch.name) transOp.uiAttribs.title=transOp.name=ch.name;
+                
             }
-
-            transOp.getPort('matrix').set(ch.transformation);
-            prevOp=transOp;
-
-            op.patch.link(parentOp,parentPort,prevOp,'render');
-            if(ch.name) transOp.uiAttribs.title=transOp.name=ch.name+'';
+            else 
+                prevOp=parentOp;
+            
         }
 
 
@@ -455,7 +464,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 }
             }
 
-            console.log('useChildrenMeshes ',useChildrenMeshes);
+            // console.log('useChildrenMeshes ',useChildrenMeshes);
 
             for(i=0;i<len;i++)
             {
@@ -496,8 +505,14 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     var meshOp=op.patch.addOp('Ops.Json3d.Mesh',{"subPatch":subPatchId});
                     meshOp.index.val=index;
                     meshOp.uiAttribs.title=meshOp.name=ch.name+'';
+                    var l=op.patch.link(prevOp,'trigger',meshOp,'render');
 
-                    op.patch.link(prevOp,'trigger',meshOp,'render');
+                    if(!l)
+                    {
+                        var l=op.patch.link(parentOp,'trigger 15',meshOp,'render');
+                        console.log('prevOp link',parentOp);
+                    }
+                    
                 }
             }
         }
@@ -532,7 +547,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                 y++;
                 for(i=0;i<ch.children.length;i++)
                 {
-                    console.log('   child...'+i+'/'+ch.children.length);
+                    // console.log('   child...'+i+'/'+ch.children.length);
                     var xx=maxx;
                     if(ch.children.length>1)xx++;
                     

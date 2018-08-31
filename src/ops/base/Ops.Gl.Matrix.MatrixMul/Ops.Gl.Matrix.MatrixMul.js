@@ -1,9 +1,8 @@
-var cgl=op.patch.cgl;
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const matrix=op.addInPort(new Port(op,"matrix"),OP_PORT_TYPE_ARRAY);
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var matrix=op.addInPort(new Port(op,"matrix"),OP_PORT_TYPE_ARRAY);
-
+const cgl=op.patch.cgl;
 var m=mat4.create();
 
 matrix.onChange=function()
@@ -14,7 +13,7 @@ matrix.onChange=function()
 render.onTriggered=function()
 {
     cgl.pushModelMatrix();
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,m);
+    mat4.multiply(cgl.mMatrix,cgl.mMatrix,m);
     trigger.trigger();
     cgl.popModelMatrix();
 };

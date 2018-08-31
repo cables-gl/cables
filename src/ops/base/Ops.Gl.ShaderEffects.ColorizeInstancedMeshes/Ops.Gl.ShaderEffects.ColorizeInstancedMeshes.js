@@ -118,7 +118,7 @@ op.render.onTriggered=function()
 
     if(inLookup.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE5);
+        /* --- */cgl.setTexture(5);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLookup.get().tex);
     }
     

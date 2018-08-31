@@ -165,8 +165,8 @@ shader.bindTextures=function()
 {
     if(op.texture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.val.tex);
+        /* --- */cgl.setTexture(0, op.texture.val.tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.val.tex);
     }
 };
 

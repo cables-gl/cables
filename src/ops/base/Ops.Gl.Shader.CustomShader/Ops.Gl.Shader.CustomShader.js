@@ -45,8 +45,8 @@ function bindTextures()
     {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
         {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE0+i+3);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
+            /* --- */cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
         }
     }
 }
