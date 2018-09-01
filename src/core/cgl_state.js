@@ -180,9 +180,6 @@ CGL.Context = function() {
             
             for (var i = 0; i < cbResize.length; i++) cbResize[i]();
         }
-
-        console.log(countShaders);
-        countShaders=0
     };
 
     // shader stack
@@ -195,20 +192,15 @@ CGL.Context = function() {
             if (this._shaderStack[i])
                 if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass)
                     return this._shaderStack[i];
-
-        // console.log('no shader found?');
     };
 
     this.getDefaultShader = function() {
         return simpleShader;
     };
 
-    var countShaders=0;
-
     this.setShader = function(shader) {
         this._shaderStack.push(shader);
         currentShader = shader;
-        countShaders++;
     };
 
     this.setPreviousShader = function() {
