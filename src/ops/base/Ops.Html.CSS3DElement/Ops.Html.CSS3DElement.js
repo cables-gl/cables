@@ -30,6 +30,7 @@ if (!elProjection) {
 	var style = document.createElement('style');
 	style.type="text/css";
 	style.textContent = [
+	    '.cables-loading .cables-css3dview {visibility:hidden;pointer-events:none;}',
 	    '.cables-css3dview {position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;}',
         '.cables-css3dview > * {pointer-events:auto;}',
         '.cables-css3dview.origin-top-left > * {}',

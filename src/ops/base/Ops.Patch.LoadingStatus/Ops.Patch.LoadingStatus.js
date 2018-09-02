@@ -23,6 +23,9 @@ vec3.set(identTranslate, 0,0,0);
 var identTranslateView=vec3.create();
 vec3.set(identTranslateView, 0,0,-2);
 
+document.body.classList.add("cables-loading");
+
+
 var prerenderCount=0;
 var preRenderAnimFrame=function(t)
 {
@@ -69,7 +72,7 @@ function checkPreRender()
             self.onAnimFrame=function(){};
             isFinishedPort.set(true);
             finishedAll=true;
-            document.body.classList.remove("cables-loading");
+            
         }
         else
         {
@@ -78,16 +81,18 @@ function checkPreRender()
     }
     else
     {
-        document.body.classList.add("cables-loading");
+        
         setTimeout(checkPreRender,100);
     }
 
 }
 
 
+
 var loadingId=patch.loading.start('delayloading','delayloading');
 setTimeout(function()
 {
+    
     patch.loading.finished(loadingId);
 },100);
 
@@ -109,6 +114,8 @@ this.exe.onTriggered= function()
         }
 
         self.finished.trigger();
+        document.body.classList.remove("cables-loading");
+        document.body.classList.add("cables-loaded");
     }
     else
     {

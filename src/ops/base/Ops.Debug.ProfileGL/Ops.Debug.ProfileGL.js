@@ -16,15 +16,13 @@ exec.onTriggered=function()
         start();
         resetStats();
     }
-    
+
     next.trigger();
 
     if(dumpFrame)
     {
         end();
-        
         var rows=[];
-    
         for(var i in originals)
             if(counts[i]>0)
                 rows.push([i,counts[i],durations[i]]);
@@ -83,4 +81,5 @@ function end()
 dump.onTriggered=function()
 {
     dumpFrame=true;   
-}
+};
+

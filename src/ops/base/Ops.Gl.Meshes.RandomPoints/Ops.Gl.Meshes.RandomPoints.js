@@ -40,6 +40,7 @@ function reset()
     geom=new CGL.Geometry();
     var verts=[];
     var n=Math.round(num.get())||1;
+    if(n<0)n=1;
     var texCoords=[];
     var vertColors=[];
     verts.length=n*3;
