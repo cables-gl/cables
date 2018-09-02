@@ -1,4 +1,4 @@
-
+"use strict";
 
 var CABLES=CABLES || {};
 

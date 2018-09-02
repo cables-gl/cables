@@ -791,7 +791,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
 
-    this.loading.finished(loadingId);
+    setTimeout(function(){ this.loading.finished(loadingId); }.bind(this),100);
     if(this.config.onPatchLoaded)this.config.onPatchLoaded();
 
     if (this.onLoadEnd) this.onLoadEnd();
