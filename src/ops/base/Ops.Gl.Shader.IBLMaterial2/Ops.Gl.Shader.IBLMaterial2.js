@@ -196,10 +196,6 @@ if(cgl.glVersion==1 && !cgl.gl.getExtension('EXT_shader_texture_lod'))
 
 if(cgl.glVersion==1) shader.enableExtension('GL_EXT_shader_texture_lod');    
 
-console.log("cgl.glVersion",cgl.glVersion);
-
-//op.onLoaded=shader.compile;
-
 shader.setSource(attachments.ibl_vert,attachments.ibl_frag);
 shader.bindTextures=bindTextures;
 var uniCube=new CGL.Uniform(shader,'t','irradiance',0);

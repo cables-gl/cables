@@ -225,6 +225,7 @@ CGL.Geometry.prototype.calculateNormals=function(options)
     var u=vec3.create();
     var v=vec3.create();
     var n=vec3.create();
+    var i=0;
 
     function calcNormal(triangle)
     {
@@ -253,9 +254,6 @@ CGL.Geometry.prototype.calculateNormals=function(options)
         vec[2]=this.vertices[which*3+2];
         return vec;
     };
-
-    var i=0;
-
 
     if(!(this.vertexNormals instanceof Float32Array) || this.vertexNormals.length!=this.vertices.length) this.vertexNormals=new Float32Array(this.vertices.length);
 
@@ -326,6 +324,7 @@ CGL.Geometry.prototype.unIndex=function()
     var newTexCoords=[];
 
     var count=0;
+    var i=0;
     // console.log('unindexing');
     this.vertexNormals.length=0;
 

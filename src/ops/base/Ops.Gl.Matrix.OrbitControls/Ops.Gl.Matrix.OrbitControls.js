@@ -253,8 +253,6 @@ function onMouseEnter(e)
 
 initialRadius.onValueChange(function()
 {
-    // percX=(initialX.get()*Math.PI*2);
-    console.log('init radius');
     radius=initialRadius.get();
     reset();
 });
