@@ -18,6 +18,8 @@ var opacityPort = op.inValueSlider('Opacity', 1);
 var defaultMinimizedPort = op.inValueBool('Default Minimized');
 var minimizedOpacityPort = op.inValueSlider('Minimized Opacity', 0.5);
 
+var side = op.inValueBool('Side');
+
 // outputs
 var childrenPort = op.outObject('childs');
 
@@ -47,6 +49,13 @@ function onMinimizedOpacityPortChanged() {
     updateDynamicStyles();
 }
 
+side.onChange=function()
+{
+    if(side.get()) sidebarEl.classList.add('sidebar-cables-right');
+        else sidebarEl.classList.remove('sidebar-cables-right');
+};
+
+
 function onDefaultMinimizedPortChanged() {
     if(!openCloseBtn) { return; }
     if(defaultMinimizedPort.get()) {
@@ -71,6 +80,11 @@ function onVisiblePortChange() {
         sidebarEl.style.display = 'none';
     }
 }
+
+side.onChanged=function()
+{
+    
+};
 
 /**
  * Some styles cannot be set directly inline, so a dynamic stylesheet is needed.

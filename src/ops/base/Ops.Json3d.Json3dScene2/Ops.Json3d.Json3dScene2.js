@@ -158,68 +158,68 @@ var loadCameras=function(data,seq)
 
             if(cam)
             {
-                if(!cam.target)
+                if(!cam.target) continue;
+
+                var camOp=op.patch.addOp('Ops.Gl.Matrix.QuaternionCamera',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x+camCount*200,y:op.uiAttribs.translate.y+100}});
+                camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
+
+                var an=dataGetAnimation(data,cam.cam.name);
+                op.patch.link(camSeq,'trigger '+camCount,camOp,'render');
+                op.patch.link(camOp,'trigger',seq,'exe '+camCount);
+                camCount++;
+
+                camOp.getPort('fov').set(cam.cam.horizontalfov);
+                camOp.getPort('clip near').set(cam.cam.clipplanenear);
+                camOp.getPort('clip far' ).set(cam.cam.clipplanefar);
+
+                camOp.getPort('centerX').set(cam.cam.lookat[0]);
+                camOp.getPort('centerY').set(cam.cam.lookat[1]);
+                camOp.getPort('centerZ').set(cam.cam.lookat[2]);
+
+                camOp.getPort('matrix').set(cam.transformation);
+
+                if(an)
                 {
-                    var camOp=op.patch.addOp('Ops.Gl.Matrix.QuaternionCamera',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x+camCount*200,y:op.uiAttribs.translate.y+100}});
-                    camOp.uiAttribs.title=camOp.name='cam '+cam.cam.name;
-
-                    var an=dataGetAnimation(data,cam.cam.name);
-                    op.patch.link(camSeq,'trigger '+camCount,camOp,'render');
-                    op.patch.link(camOp,'trigger',seq,'exe '+camCount);
-                    camCount++;
-
-                    camOp.getPort('fov').set(cam.cam.horizontalfov);
-                    camOp.getPort('clip near').set(cam.cam.clipplanenear);
-                    camOp.getPort('clip far' ).set(cam.cam.clipplanefar);
-
-                    camOp.getPort('centerX').set(cam.cam.lookat[0]);
-                    camOp.getPort('centerY').set(cam.cam.lookat[1]);
-                    camOp.getPort('centerZ').set(cam.cam.lookat[2]);
-
-                    camOp.getPort('matrix').set(cam.transformation);
-
-                    if(an)
+                    if(an.positionkeys)
                     {
-                        if(an.positionkeys)
+                        setPortAnimated(camOp.getPort('EyeX'),false);
+                        setPortAnimated(camOp.getPort('EyeY'),false);
+                        setPortAnimated(camOp.getPort('EyeZ'),false);
+
+                        frameNum=skipFrames;
+                        for(var k in an.positionkeys)
                         {
-                            setPortAnimated(camOp.getPort('EyeX'),false);
-                            setPortAnimated(camOp.getPort('EyeY'),false);
-                            setPortAnimated(camOp.getPort('EyeZ'),false);
-
-                            frameNum=skipFrames;
-                            for(var k in an.positionkeys)
+                            if(frameNum%skipFrames===0)
                             {
-                                if(frameNum%skipFrames===0)
-                                {
-                                    camOp.getPort('EyeX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
-                                    camOp.getPort('EyeY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
-                                    camOp.getPort('EyeZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
-                                }
-                                frameNum++;
+                                camOp.getPort('EyeX').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][0] );
+                                camOp.getPort('EyeY').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][1] );
+                                camOp.getPort('EyeZ').anim.setValue( an.positionkeys[k][0], an.positionkeys[k][1][2] );
                             }
-                        }
-
-                        if(an.rotationkeys)
-                        {
-                            setPortAnimated(camOp.getPort('quat x'),false);
-                            setPortAnimated(camOp.getPort('quat y'),false);
-                            setPortAnimated(camOp.getPort('quat z'),false);
-                            setPortAnimated(camOp.getPort('quat w'),false);
-
-                            frameNum=skipFrames;
-                            for(var k in an.rotationkeys)
-                            {
-                                if(frameNum%skipFrames==0)
-                                {
-                                    camOp.getPort('quat x').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][0] );
-                                    camOp.getPort('quat y').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][1] );
-                                    camOp.getPort('quat z').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][2] );
-                                    camOp.getPort('quat w').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][3] );
-                                }
-                                frameNum++;
-                            }
+                            frameNum++;
                         }
                     }
+
+                    if(an.rotationkeys)
+                    {
+                        setPortAnimated(camOp.getPort('quat x'),false);
+                        setPortAnimated(camOp.getPort('quat y'),false);
+                        setPortAnimated(camOp.getPort('quat z'),false);
+                        setPortAnimated(camOp.getPort('quat w'),false);
+
+                        frameNum=skipFrames;
+                        for(var k in an.rotationkeys)
+                        {
+                            if(frameNum%skipFrames==0)
+                            {
+                                camOp.getPort('quat x').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][0] );
+                                camOp.getPort('quat y').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][1] );
+                                camOp.getPort('quat z').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][2] );
+                                camOp.getPort('quat w').anim.setValue( an.rotationkeys[k][0], an.rotationkeys[k][1][3] );
+                            }
+                            frameNum++;
+                        }
+                    }
+
                 }
                 else
                 {

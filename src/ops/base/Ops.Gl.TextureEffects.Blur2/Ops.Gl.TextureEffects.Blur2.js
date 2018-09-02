@@ -2,26 +2,14 @@ var cgl=op.patch.cgl;
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var fast=op.inValueBool("Fast",true);
-
-
-
-
 var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE));
+
 amount.set(10);
 
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
 
-shader.define("FASTBLUR");
 
-fast.onChange=function()
-{
-    if(fast.get()) shader.define("FASTBLUR");
-        else shader.removeDefine("FASTBLUR");
-};
-
-shader.setSource(shader.getDefaultVertexShader(),attachments.blur_frag);
+shader.setSource(attachments.blur_vert,attachments.blur_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 var uniDirX=new CGL.Uniform(shader,'f','dirX',0);
@@ -29,6 +17,8 @@ var uniDirY=new CGL.Uniform(shader,'f','dirY',0);
 
 var uniWidth=new CGL.Uniform(shader,'f','width',0);
 var uniHeight=new CGL.Uniform(shader,'f','height',0);
+
+var uniPass=new CGL.Uniform(shader,'f','pass',0);
 
 var uniAmount=new CGL.Uniform(shader,'f','amount',amount.get());
 amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
@@ -60,28 +50,33 @@ render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    cgl.setShader(shader);
 
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
+
+var numPasses=amount.get();;
+
+for(var i=0;i<numPasses;i++)
+{
+    cgl.setShader(shader);
+
+    uniPass.setValue(i/numPasses);
     // first pass
     if(dir===0 || dir==2)
     {
-
         cgl.currentTextureEffect.bind();
-        /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
         if(mask.get() && mask.get().tex)
         {
-            /* --- */cgl.setTexture(1, mask.get().tex );
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
+            cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
         }
 
-
         uniDirX.setValue(0.0);
-        uniDirY.setValue(1.0);
+        uniDirY.setValue(1.0+i*1.);
 
         cgl.currentTextureEffect.finish();
     }
@@ -89,23 +84,33 @@ render.onTriggered=function()
     // second pass
     if(dir===0 || dir==1)
     {
-
         cgl.currentTextureEffect.bind();
-        /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
         if(mask.get() && mask.get().tex)
         {
-            /* --- */cgl.setTexture(1, mask.get().tex );
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
+            cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
         }
 
-        uniDirX.setValue(1.0);
+        uniDirX.setValue(1.0+i*1.);
         uniDirY.setValue(0.0);
 
         cgl.currentTextureEffect.finish();
     }
 
+    
     cgl.setPreviousShader();
+
+}
+
+    
     trigger.trigger();
 };
+
+
+
+
+
+

@@ -37,6 +37,10 @@ function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
+    
+    
+// console.log(lastm4);
+
 }
 
 function bindTextures()
@@ -58,6 +62,9 @@ function hasUniformInput(name)
     for(i=0;i<uniformTextures.length;i++) if(uniformTextures[i].name==name)return true;
     return false;
 }
+
+var tempMat4=mat4.create();
+var lastm4;
 
 function updateShader()
 {
@@ -81,7 +88,7 @@ function updateShader()
 
         if(!hasUniformInput(uniform.name))
         {
-            if(uniform.type==0x1406)
+            if(uniform.type==cgl.gl.FLOAT)
             {
                 var newInput=op.inValue(uniform.name,0);
                 newInput.onChange=function(p)
@@ -94,7 +101,25 @@ function updateShader()
                 newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
             }
             else
-            if(uniform.type==0x8B5E )
+            if(uniform.type==cgl.gl.FLOAT_MAT4)
+            {
+                var newInputM4=op.inArray(uniform.name);
+                newInputM4.onChange=function(p)
+                {
+                    if(p.get())
+                    {
+                        mat4.copy(tempMat4,p.get());
+                        p.uniform.needsUpdate=true;
+                        p.uniform.setValue(tempMat4);
+                    }
+                };
+
+                uniformInputs.push(newInputM4);
+                lastm4=newInputM4;
+                newInputM4.uniform=new CGL.Uniform(shader,'m4',uniform.name,mat4.create());
+            }
+            else
+            if(uniform.type==cgl.gl.SAMPLER_2D)
             {
                 var newInputTex=op.inObject(uniform.name);
                 newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
@@ -114,6 +139,7 @@ function updateShader()
     }
 
     if(CABLES.UI) gui.patch().showOpParams(op);
+
 
     outShader.set(null);
     outShader.set(shader);

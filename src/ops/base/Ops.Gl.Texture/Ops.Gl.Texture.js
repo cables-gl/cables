@@ -93,8 +93,6 @@ function realReload(nocache)
 
                 textureOut.set(null);
                 textureOut.set(tex);
-                // cgl.patch.loading.finished(loadingId);
-                
                 // tex.printInfo();
 
             },{
@@ -110,7 +108,7 @@ function realReload(nocache)
         if(!textureOut.get() && nocache)
         {
         }
-        loading.set(false);
+        
         // cgl.patch.loading.finished(loadingId);
     }
     else

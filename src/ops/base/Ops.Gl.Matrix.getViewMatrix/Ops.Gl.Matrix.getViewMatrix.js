@@ -10,6 +10,7 @@ var cgl=op.patch.cgl;
 render.onTriggered=function()
 {
     mat4.copy(m, cgl.vMatrix);
+    matrix.set(null);
     matrix.set(m);
     trigger.trigger();
 };
