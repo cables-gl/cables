@@ -777,10 +777,9 @@ CGL.Shader.getErrorFragmentShader = function() {
         // .endl() + 'IN vec3 norm;'
         .endl() + 'void main()'
         .endl() + '{'
-        .endl() + '   float g=mod(gl_FragCoord.y+gl_FragCoord.x,0.02)*50.0;'
-        .endl() + '   if(g>0.5)g=0.4;'
-        .endl() + '       else g=0.0;'
-        .endl() + '   outColor = vec4( 1.0, g, 0.0, 1.0);'
+        .endl() + '   float g=mod((gl_FragCoord.y+gl_FragCoord.x),50.0)/50.0;'
+        .endl() + '   g= step(0.1,g);'
+        .endl() + '   outColor = vec4( g+0.5, 0.0, 0.0, 1.0);'
         .endl() + '}';
 };
 

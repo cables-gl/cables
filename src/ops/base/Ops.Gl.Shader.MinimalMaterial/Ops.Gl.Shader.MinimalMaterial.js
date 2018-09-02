@@ -1,18 +1,17 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.inFunction("render");
+const trigger=op.inFunction("trigger");
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
-var doRender=function()
+function doRender()
 {
     cgl.setShader(shader);
     trigger.trigger();
     cgl.setPreviousShader();
-};
+}
 
 var shader=new CGL.Shader(cgl,'MinimalMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
 
 render.onTriggered=doRender;
