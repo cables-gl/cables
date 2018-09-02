@@ -42,6 +42,9 @@ exec.onTriggered=function()
 
     outError.set(errorToString(cgl.gl.getError()));
 
+
+    console.log(cgl._textureslots);
+
     next.trigger();
 };
 

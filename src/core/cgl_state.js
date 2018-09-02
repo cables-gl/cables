@@ -16,6 +16,7 @@ CGL.Context = function() {
     this.pMatrix = mat4.create();
     this.mMatrix = mat4.create();
     this.vMatrix = mat4.create();
+    this._textureslots=[];
 
     this._pMatrixStack=new CGL.MatrixStack();
     this._mMatrixStack=new CGL.MatrixStack();
@@ -319,7 +320,7 @@ CGL.Context = function() {
 
         for(var i=0;i<this._textureslots.length;i++)
         {
-            this._textureslots[i]=-99;
+            this._textureslots[i]=null;
         }
 
         cgl.beginFrame();
@@ -338,8 +339,6 @@ CGL.Context = function() {
 
         cgl.endFrame();
     };
-
-    this._textureslots=[];
     
     this.setTexture = function(slot, t, type)
     {
