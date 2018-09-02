@@ -46,10 +46,10 @@ render.onTriggered=function()
 
 
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
-if(shader.bindTextures)shader.bindTextures();
+    if(shader.bindTextures)shader.bindTextures();
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

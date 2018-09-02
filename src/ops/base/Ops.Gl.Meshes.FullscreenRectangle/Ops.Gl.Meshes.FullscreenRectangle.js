@@ -78,8 +78,8 @@ function doRender()
     {
         if(inTexture.get())
         {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTexture.get().tex);
+            /* --- */cgl.setTexture(0,inTexture.get().tex);
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTexture.get().tex);
         }
 
         mesh.render(shader);

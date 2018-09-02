@@ -1,6 +1,5 @@
-
-
 {{MODULES_HEAD}}
+
 IN vec3 vCoords;
 IN vec3 viewDirection;
 IN vec2 texCoord;
@@ -39,45 +38,26 @@ UNI float fRotation;
 UNI float mulReflection;
 UNI float mulRoughness;
 
-
 #ifdef GL_EXT_shader_texture_lod
     #define textureLod texture2DLodEXT
 #endif
 
-
 #ifdef TEX_NORMAL
     UNI float normalIntensity;
     UNI sampler2D texNormal;
-    vec3 normalMap() {
-        vec3 theNormal=texture2D(texNormal,texCoord).rgb*2.-1.;
-        #ifdef TEX_NORMAL_FLIP
-            theNormal.xy*=-1.;
-        #endif
-        theNormal=normalize(mix(vec3(0,0,1),theNormal,normalIntensity));
-        return normalize( newNormalMatrix * theNormal );
-    }
 #endif
 
-vec3 desaturate(vec3 color, float amount)
-{
-   vec3 gray = vec3(dot(vec3(0.2126,0.7152,0.0722), color));
-   return vec3(mix(color, gray, amount));
-}
-
 #ifdef TEX_FORMAT_EQUIRECT
-    const vec2 invAtan = vec2(0.1591, 0.3183);
-    vec2 sampleSphericalMap(vec3 direction)
-    {
-        vec2 uv = vec2(atan(direction.z, direction.x), asin(direction.y+1e-6));
-        uv *= invAtan;
-        uv += 0.5;
-        return uv;
-    }
     
     vec4 sampleEquirect(sampler2D tex,vec3 coord,float lod)
     {
-        return textureLod(tex,sampleSphericalMap(coord),lod);
+        vec2 uv = vec2(atan(coord.z, coord.x), asin(coord.y+1e-6));
+        uv *= vec2(0.1591, 0.3183);
+        uv += 0.5;
+
+        return textureLod(tex,uv,lod);
     }
+
 #endif
 
 void main()
@@ -99,13 +79,21 @@ void main()
     #ifdef TEX_REFLECTION
         amountReflect*=texture2D(maskReflection,texCoord).r;
     #endif
-    amountReflect=smoothstep(0.0,1.0,amountReflect);
 
-    vec3 N = newNormalMatrix[2];
 
-    #ifdef TEX_NORMAL
-       N=normalMap();
+
+
+    #ifndef TEX_NORMAL
+        vec3 N = newNormalMatrix[2];
+    #else
+        vec3 theNormal=texture2D(texNormal,texCoord).rgb*2.-1.;
+        #ifdef TEX_NORMAL_FLIP
+            theNormal.xy*=-1.;
+        #endif
+        theNormal=normalize(mix(vec3(0,0,1),theNormal,normalIntensity));
+        vec3 N=newNormalMatrix * theNormal;
     #endif
+    
     N=normalize(N);
 
     vec3 RN=N;
@@ -121,7 +109,7 @@ void main()
     #endif
 
 
-    vec3 L = reflect(normalize(viewDirection),normalize(N));
+    vec3 L = reflect(normalize(viewDirection),N);
     L.xz*=matRotation;
     
     // col.rgb=mix(col.rgb,SAMPLETEX(mapReflection, L, amountRough*10.0).rgb,amountReflect);

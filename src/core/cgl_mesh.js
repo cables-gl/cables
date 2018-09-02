@@ -84,6 +84,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     var floatArray=null;
     var cb=null;
     var instanced=false;
+    var i=0;
 
     if(typeof options=='function')
     {
@@ -112,7 +113,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
         // return;
     }
 
-    for(var i=0;i<this._attributes.length;i++)
+    for(i=0;i<this._attributes.length;i++)
     {
         if(this._attributes[i].name==name)
         {
@@ -307,7 +308,7 @@ CGL.Mesh.prototype.setGeom=function(geom)
 
 CGL.Mesh.prototype._preBind=function(shader)
 {
-    for(i=0;i<this._attributes.length;i++)
+    for(var i=0;i<this._attributes.length;i++)
     {
         if(this._attributes[i].cb)
         {
@@ -318,6 +319,7 @@ CGL.Mesh.prototype._preBind=function(shader)
 
 CGL.Mesh.prototype._bind=function(shader)
 {
+    var i=0;
     if(shader.lastCompile>this._lastAttrUpdate)
     {
         this._lastAttrUpdate=shader.lastCompile;
@@ -328,7 +330,14 @@ CGL.Mesh.prototype._bind=function(shader)
     {
         var attribute=this._attributes[i];
         if(attribute.loc==-1)
-            attribute.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), attribute.name);
+        {
+            if(attribute._attrLocationLastShaderTime!=shader.lastCompile)
+            {
+                attribute._attrLocationLastShaderTime=shader.lastCompile;
+                attribute.loc = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
+            }
+        }
+            
 
         if(attribute.loc!=-1)
         {
@@ -378,7 +387,7 @@ CGL.Mesh.prototype._bind=function(shader)
                     {
                         var pointer=attribute.pointer[ip];
 
-                        if(pointer.loc==-1) pointer.loc = this._cgl.gl.getAttribLocation(shader.getProgram(), pointer.name);
+                        if(pointer.loc==-1) pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
                         // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
@@ -398,7 +407,7 @@ CGL.Mesh.prototype.unBind=function(shader)
     this._cgl.lastMesh=null;
     this._cgl.lastMeshShader=null;
 
-    for(i=0;i<this._attributes.length;i++)
+    for(var i=0;i<this._attributes.length;i++)
     {
         if(this._attributes[i].instanced || this._attributes[i].name=='instMat')
         {

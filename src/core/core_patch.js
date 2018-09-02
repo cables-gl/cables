@@ -34,7 +34,7 @@ CABLES.Patch = function(cfg) {
     this.onLoadStart = null;
     this.onLoadEnd = null;
     this.aborted = false;
-    this.loading = new CABLES.LoadingStatus();
+    this.loading = new CABLES.LoadingStatus(this);
 
     this._fps=0;
     this._fpsFrameCount=0;
@@ -104,7 +104,7 @@ CABLES.Patch = function(cfg) {
         }
     }
 
-    console.log("made with cables.gl")
+    console.log('made with https://cables.gl')
 };
 
 CABLES.Patch.prototype.isPlaying = function() {
@@ -791,7 +791,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
 
-    this.loading.finished(loadingId);
+    setTimeout(function(){ this.loading.finished(loadingId); }.bind(this),100);
     if(this.config.onPatchLoaded)this.config.onPatchLoaded();
 
     if (this.onLoadEnd) this.onLoadEnd();

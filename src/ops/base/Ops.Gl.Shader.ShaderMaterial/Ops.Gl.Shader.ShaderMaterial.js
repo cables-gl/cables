@@ -42,7 +42,7 @@ function bindTextures()
 {
     for(var i=0;i<uniformTextures.length;i++)
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0+i+3);
+        /* --- */cgl.setTexture(0+i+3);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
     }
 }

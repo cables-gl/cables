@@ -130,16 +130,7 @@ function updateInfo(geom)
 function setMesh()
 {
     mesh=null;
-    
-    
     var index=Math.floor(meshIndex.get());
-
-    
-    // if(meshes[index])
-    // {
-    //     mesh=meshes[index];
-    //     return;
-    // }
 
     if(!data || index!=index || !isNumeric(index) || index<0 || index>=data.meshes.length)
     {
@@ -153,11 +144,8 @@ function setMesh()
 
     if(merge.get())
     {
-        
-
         for(var i=0;i<data.meshes.length;i++)
         {
-
             var jsonGeom=data.meshes[i];
             if(jsonGeom)
             {
@@ -253,7 +241,7 @@ function reload()
         // setMesh();
     }
 
-    var loadingId=op.patch.loading.start('json3dFile',filename.get());
+    var loadingId=op.patch.loading.start('json3dMesh',filename.get());
 
     if(CABLES.UI) gui.jobs().start({id:'loading3d'+loadingId,title:'loading 3d data'},doLoad);
         else doLoad();

@@ -74,8 +74,8 @@ function doRender()
         uniOpacity=new CGL.Uniform(shader,'f',mod.prefix+'_opacity',pOpacity.get());
     }
     
-    cgl.gl.activeTexture(cgl.gl.TEXTURE4);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lightmap.get().tex);
+    /* --- */cgl.setTexture(4,lightmap.get().tex);
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lightmap.get().tex);
     uniCausticsTime.setValue(Date.now()/1000.0-startTime);
 
     trigger.trigger();

@@ -104,8 +104,8 @@ exe.onTriggered=function()
 
 
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTex.get().tex);
+        /* --- */cgl.setTexture(0, inTex.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTex.get().tex);
 
         meshPoints.render(shaderPointsR);
         meshPoints.render(shaderPointsG);
@@ -129,11 +129,11 @@ exe.onTriggered=function()
 
         cgl.setShader(shaderWave);
         cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
         
-        cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, fb.getTextureColor().tex);
+        /* --- */cgl.setTexture(2, fb.getTextureColor().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, fb.getTextureColor().tex);
     
     
         cgl.currentTextureEffect.finish();

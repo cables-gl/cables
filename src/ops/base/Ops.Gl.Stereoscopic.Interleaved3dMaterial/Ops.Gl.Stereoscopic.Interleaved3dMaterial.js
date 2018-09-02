@@ -57,14 +57,14 @@ render.onTriggered=function()
 
     if(texture0.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture0.get().tex);
+        /* --- */cgl.setTexture(0,texture0.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture0.get().tex);
     }
 
     if(texture1.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture1.get().tex);
+        /* --- */cgl.setTexture(1, texture1.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture1.get().tex);
     }
 
     trigger.trigger();

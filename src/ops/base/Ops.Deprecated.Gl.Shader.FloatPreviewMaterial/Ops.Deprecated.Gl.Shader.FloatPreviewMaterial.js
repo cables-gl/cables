@@ -46,8 +46,8 @@ var doRender=function()
 
     if(texture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
+        /* --- */cgl.setTexture(0,texture.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
     }
 
     trigger.trigger();

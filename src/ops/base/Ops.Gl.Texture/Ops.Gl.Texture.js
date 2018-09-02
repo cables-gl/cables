@@ -19,12 +19,12 @@ var cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
 
-flip.onChange=function(){reload();};
-filename.onChange=reload;
+flip.onChange=function(){reloadSoon();};
+filename.onChange=reloadSoon;
 
 tfilter.onChange=onFilterChange;
 wrap.onChange=onWrapChange;
-unpackAlpha.onChange=function(){ reload(); };
+unpackAlpha.onChange=function(){ reloadSoon(); };
 
 var timedLoader=0;
 
@@ -34,21 +34,27 @@ var setTempTexture=function()
     textureOut.set(t);
 };
 
-var loadingId=null;
+// var loadingId=null;
 var tex=null;
-function reload(nocache)
+function reloadSoon(nocache)
 {
-    if(!loadingId)loadingId=cgl.patch.loading.start('texture',filename.get());
+    // if(!loadingId)loadingId=cgl.patch.loading.start('textureOp',filename.get());
+    
+    // if(timedLoader!=0)
+    // {
+    //     console.log('tex load canceled...');
+    // }
     clearTimeout(timedLoader);
     timedLoader=setTimeout(function()
     {
+        // console.log('tex load yay...');
         realReload(nocache);
     },30);
 }
 
 function realReload(nocache)
 {
-    if(!loadingId)loadingId=cgl.patch.loading.start('texture',filename.get());
+    // if(!loadingId)loadingId=cgl.patch.loading.start('textureOp',filename.get());
     
     var url=op.patch.getFilePath(String(filename.get()));
     if(nocache)url+='?rnd='+CABLES.generateUUID();
@@ -65,7 +71,7 @@ function realReload(nocache)
                 {
                     setTempTexture();
                     op.uiAttr({'error':'could not load texture "'+filename.get()+'"'});
-                    cgl.patch.loading.finished(loadingId);
+                    // cgl.patch.loading.finished(loadingId);
                     return;
                 }
                 else op.uiAttr({'error':null});
@@ -87,8 +93,6 @@ function realReload(nocache)
 
                 textureOut.set(null);
                 textureOut.set(tex);
-                cgl.patch.loading.finished(loadingId);
-                loading.set(false);
                 // tex.printInfo();
 
             },{
@@ -109,7 +113,7 @@ function realReload(nocache)
     }
     else
     {
-        cgl.patch.loading.finished(loadingId);
+        // cgl.patch.loading.finished(loadingId);
         setTempTexture();
     }
 }
@@ -121,7 +125,7 @@ function onFilterChange()
     if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
     if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
 
-    // reload();
+    reloadSoon();
 }
 
 function onWrapChange()
@@ -130,7 +134,7 @@ function onWrapChange()
     if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
     if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-    reload();
+    reloadSoon();
 }
 
 op.onFileChanged=function(fn)

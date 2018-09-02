@@ -136,8 +136,8 @@ var doRender=function()
 
         cgl.setShader(bgShader);
         cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
     }

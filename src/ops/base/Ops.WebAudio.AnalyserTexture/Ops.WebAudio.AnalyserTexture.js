@@ -111,8 +111,8 @@ function scrollTexture()
     cgl.setShader(shaderScroll);
     effect.startEffect();
     effect.bind();
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texFFT.tex );
+    /* --- */cgl.setTexture(0, texFFT.tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texFFT.tex );
     effect.finish();
     cgl.setPreviousShader();
 
@@ -196,8 +196,8 @@ function blurTexture()
         effect.startEffect();
 
         effect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
+        /* --- */cgl.setTexture(0, effect.getCurrentSourceTexture().tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
 
         uniDirX.setValue(0.0);
         uniDirY.setValue(1.0);
@@ -212,8 +212,8 @@ function blurTexture()
         effect.startEffect();
 
         effect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
+        /* --- */cgl.setTexture(0, effect.getCurrentSourceTexture().tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
 
         uniDirX.setValue(1.0);
         uniDirY.setValue(0.0);
@@ -284,8 +284,8 @@ function mirrorTexture()
     effect.startEffect();
     effect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
+    /* --- */cgl.setTexture(0, effect.getCurrentSourceTexture().tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
 
     effect.finish();
     effect.endEffect();

@@ -226,7 +226,6 @@ CGL.Shader = function(_cgl, _name) {
             for (i = 0; i < this._uniforms.length; i++) {
                 this._uniforms[i].resetLoc(); //needsUpdate=true;
             }
-    
         }
 
         if (self.hasTextureUniforms()) definesStr += '#define HAS_TEXTURES'.endl();
@@ -237,6 +236,7 @@ CGL.Shader = function(_cgl, _name) {
         var vs = '';
         var fs = '';
 
+        var precision='highp';
 
         if (self.glslVersion == 300)
         {
@@ -244,7 +244,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '// '
                 .endl() + '// vertex shader '+name
                 .endl() + '// '
-                .endl() + 'precision highp float;'
+                .endl() + 'precision '+precision+' float;'
                 .endl() + ''
                 .endl() + '#define texture2D texture'
                 .endl() + '#define UNI uniform'
@@ -256,7 +256,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '// '
                 .endl() + '// fragment shader '+name
                 .endl() + '// '
-                .endl() + 'precision highp float;'
+                .endl() + 'precision '+precision+' float;'
                 .endl() + ''
                 .endl() + '#define texture2D texture'
                 .endl() + '#define IN in'
@@ -285,8 +285,8 @@ CGL.Shader = function(_cgl, _name) {
                 .endl();
             }
 
-        if (fs.indexOf("precision") == -1) fs = 'precision highp float;'.endl() + fs;
-        if (vs.indexOf("precision") == -1) vs = 'precision highp float;'.endl() + vs;
+        if (fs.indexOf("precision") == -1) fs = 'precision '+precision+' float;'.endl() + fs;
+        if (vs.indexOf("precision") == -1) vs = 'precision '+precision+' float;'.endl() + vs;
 
         vs = extensionString + vs + definesStr + self.srcVert;
         fs = extensionString + fs + definesStr + self.srcFrag;
@@ -440,7 +440,7 @@ CGL.Shader = function(_cgl, _name) {
         if (!this._program || this._needsRecompile) self.compile();
 
         if (!projMatrixUniform) {
-            attrVertexPos = cgl.gl.getAttribLocation(this._program, CGL.SHADERVAR_VERTEX_POSITION);
+            attrVertexPos = cgl.glGetAttribLocation(this._program, CGL.SHADERVAR_VERTEX_POSITION);
             projMatrixUniform = cgl.gl.getUniformLocation(this._program, "projMatrix");
             mvMatrixUniform = cgl.gl.getUniformLocation(this._program, "mvMatrix");
             vMatrixUniform = cgl.gl.getUniformLocation(this._program, "viewMatrix");

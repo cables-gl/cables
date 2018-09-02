@@ -27,14 +27,14 @@ render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
     
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
+        /* --- */cgl.setTexture(0, texture.tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
     
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture1.get().tex );
+        /* --- */cgl.setTexture(1, texture1.get().tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture1.get().tex );
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture2.get().tex );
+        /* --- */cgl.setTexture(2, texture2.get().tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture2.get().tex );
 
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();

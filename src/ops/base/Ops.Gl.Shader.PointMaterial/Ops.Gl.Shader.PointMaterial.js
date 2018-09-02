@@ -67,12 +67,12 @@ function bindTextures()
 {
     if(texture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
+        /* --- */cgl.setTexture(0);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
     }
     if(textureMask.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+        /* --- */cgl.setTexture(1);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, textureMask.get().tex);
     }
 }

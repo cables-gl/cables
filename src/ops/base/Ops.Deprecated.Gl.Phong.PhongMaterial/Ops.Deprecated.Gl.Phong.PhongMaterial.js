@@ -360,25 +360,25 @@ var bindTextures=function()
 {
     if(diffuseTexture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
+        /* --- */cgl.setTexture(0,diffuseTexture.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
 
     if(aoTexture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+        /* --- */cgl.setTexture(1,aoTexture.get().tex);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, aoTexture.get().tex);
     }
 
     if(specTexture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE2);
+        /* --- */cgl.setTexture(2,specTexture.get().tex);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, specTexture.get().tex);
     }
 
     if(normalTexture.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE3);
+        /* --- */cgl.setTexture(3,normalTexture.get().tex);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, normalTexture.get().tex);
     }
 
@@ -393,17 +393,17 @@ var bindTextures=function()
     // {
         // if(lights[i].type.getValue()==1.0)
         // {
-            // cgl.gl.activeTexture(cgl.gl.TEXTURE5);
+            // /* --- */cgl.setTexture(5);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lights[i].texDepthTex);
         // }
     // }
 
-            // cgl.gl.activeTexture(cgl.gl.TEXTURE5);
+            // /* --- */cgl.setTexture(5);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
     // if(self.textureOpacity.get())
     // {
-    //     cgl.gl.activeTexture(cgl.gl.TEXTURE1);
+    //     /* --- */cgl.setTexture(1);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureOpacity.val.tex);
     // }
 }

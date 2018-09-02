@@ -148,16 +148,13 @@ function doRender()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        
+        if(image.get() && image.get().tex) cgl.setTexture(1, image.get().tex );
+            else cgl.setTexture(1, null);
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        if(image.get() && image.get().tex) cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
-            else cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-
-        cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-        if(imageAlpha.get() && imageAlpha.get().tex) cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, imageAlpha.get().tex );
-            else cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
+        if(imageAlpha.get() && imageAlpha.get().tex) cgl.setTexture(2, imageAlpha.get().tex );
+            else cgl.setTexture(2,null);
 
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();

@@ -66,11 +66,11 @@ render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, depthTexture.get().tex );
+        /* --- */cgl.setTexture(0,depthTexture.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, depthTexture.get().tex );
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, colorTexture.get().tex );
+        /* --- */cgl.setTexture(1,colorTexture.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, colorTexture.get().tex );
 
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();

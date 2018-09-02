@@ -105,8 +105,8 @@ render.onTriggered=function()
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

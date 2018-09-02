@@ -1,6 +1,4 @@
 
-// look at this: https://github.com/WebGLSamples/WebGL2Samples/blob/master/samples/fbo_multisample.html
-
 
 var CGL=CGL || {};
 
@@ -130,7 +128,7 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     {
         if(this._options.multisampling)
             this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
-                else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA32F, this._width, this._height);
+            else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA32F, this._width, this._height);
     }
     else if(this._options.multisampling)
     {
@@ -181,13 +179,6 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
             0 );
     }
 
-
-
-
-
-
-
-
     if (!this._cgl.gl.isFramebuffer(this._colorBuffer)) throw("Invalid framebuffer");
     var status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
     switch (status)
@@ -215,13 +206,10 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
 };
 
-
 CGL.Framebuffer2.prototype.renderStart=function()
 {
     this._cgl.pushModelMatrix();
-
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
-
     this._cgl.pushGlFrameBuffer(this._frameBuffer);
     this._cgl.pushFrameBuffer(this);
 
@@ -234,7 +222,6 @@ CGL.Framebuffer2.prototype.renderStart=function()
         this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
     }
 };
-
 
 CGL.Framebuffer2.prototype.renderEnd=function()
 {
