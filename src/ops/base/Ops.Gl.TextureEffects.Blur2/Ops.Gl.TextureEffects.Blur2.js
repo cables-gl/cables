@@ -66,17 +66,17 @@ for(var i=0;i<numPasses;i++)
     if(dir===0 || dir==2)
     {
         cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0,cgl/currentTextureEffect.getCurrentSourceTexture().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
         if(mask.get() && mask.get().tex)
         {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
+            cgl.setTexture(1,mask.get().tex);
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
         }
 
         uniDirX.setValue(0.0);
-        uniDirY.setValue(1.0+i*1.);
+        uniDirY.setValue(1.0+ (i*i ) );
 
         cgl.currentTextureEffect.finish();
     }
@@ -85,16 +85,16 @@ for(var i=0;i<numPasses;i++)
     if(dir===0 || dir==1)
     {
         cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
         if(mask.get() && mask.get().tex)
         {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
+            cgl.setTexture(1,mask.get().tex);
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
         }
 
-        uniDirX.setValue(1.0+i*1.);
+        uniDirX.setValue(1.0+ (i*i ) );
         uniDirY.setValue(0.0);
 
         cgl.currentTextureEffect.finish();

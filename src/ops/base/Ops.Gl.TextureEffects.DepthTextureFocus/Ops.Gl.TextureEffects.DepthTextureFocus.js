@@ -15,7 +15,7 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
 
-var srcFrag=attachments.depth_focus_vert||'';
+var srcFrag=attachments.depth_focus_frag||'';
 
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
