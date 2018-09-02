@@ -130,16 +130,7 @@ function updateInfo(geom)
 function setMesh()
 {
     mesh=null;
-    
-    
     var index=Math.floor(meshIndex.get());
-
-    
-    // if(meshes[index])
-    // {
-    //     mesh=meshes[index];
-    //     return;
-    // }
 
     if(!data || index!=index || !isNumeric(index) || index<0 || index>=data.meshes.length)
     {
@@ -153,11 +144,8 @@ function setMesh()
 
     if(merge.get())
     {
-        
-
         for(var i=0;i<data.meshes.length;i++)
         {
-
             var jsonGeom=data.meshes[i];
             if(jsonGeom)
             {

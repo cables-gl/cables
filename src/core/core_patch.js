@@ -34,7 +34,7 @@ CABLES.Patch = function(cfg) {
     this.onLoadStart = null;
     this.onLoadEnd = null;
     this.aborted = false;
-    this.loading = new CABLES.LoadingStatus();
+    this.loading = new CABLES.LoadingStatus(this);
 
     this._fps=0;
     this._fpsFrameCount=0;

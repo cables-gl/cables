@@ -1,6 +1,6 @@
 "use strict";
 
-CABLES.LoadingStatus=function()
+CABLES.LoadingStatus=function(patch)
 {
     this._loadingAssets={};
     this._cbFinished=[];
@@ -9,6 +9,7 @@ CABLES.LoadingStatus=function()
     this._countFinished=0;
     this._order=0;
     this._startTime=0;
+    this._patch=patch;
 };
 
 CABLES.LoadingStatus.prototype.setOnFinishedLoading=function(cb)
@@ -60,6 +61,8 @@ CABLES.LoadingStatus.prototype.checkStatus=function()
 
 CABLES.LoadingStatus.prototype.print=function()
 {
+    if(this._patch.silent) return;
+
     var rows=[];
     
     for(var i in this._loadingAssets)
@@ -70,7 +73,7 @@ CABLES.LoadingStatus.prototype.print=function()
             (this._loadingAssets[i].timeEnd-this._loadingAssets[i].timeStart)/1000+'s'
         ]);
 
-    console.groupCollapsed( 'finished loading '+(this._order+1)+' assets in '+ (Date.now()-this._startTime)/1000 +'s' );
+    console.groupCollapsed( 'finished loading '+this._order+' assets in '+ (Date.now()-this._startTime)/1000 +'s' );
     console.table(rows);
     console.groupEnd();
 }
@@ -90,7 +93,7 @@ CABLES.LoadingStatus.prototype.start=function(type,name)
 {
     if(this._startTime==0)this._startTime=Date.now();
     var id=CABLES.generateUUID();
-    
+
     this._loadingAssets[id]=({id:id,type:type,name:name,finished:false,timeStart:Date.now(),order:this._order});
     this._order++;
 
