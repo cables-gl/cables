@@ -6,7 +6,7 @@ The name will be presented to the user in the patch-view, the long version exist
 
 ## Naming Conventions
 
-All namespace-segments as well as the op name must be written in upper camel case, e.g. `KeyboaordInput`, not `keyboard_input` or `keyboardInput`.
+All namespace-segments as well as the op name must be written in upper camel case, e.g. `KeyboardInput`, not `keyboard_input` or `keyboardInput`.
 
 If your op uses an abbreviation, e.g. `MIDI` only the first character should be capitalized, so if you made a MIDI-input, a good name would be `MidiInput`.
 
