@@ -6,8 +6,9 @@ Create a new op by clicking `Op` -> `Create` (in the navigation bar at the top l
 Or you can press escape to browse to the ops menu then enter your own unique op name in the search bar, then click the button with `Create Ops.User.YourUserName.YourOpsName` to create your own op.  
 
 A naming example below:
+```javascript
 `HelloOp` is the short-name of your op and `Ops.user.yourname.HelloOp` the unique name. 
-
+```
 Now add the following code:    
 
 ```javascript
