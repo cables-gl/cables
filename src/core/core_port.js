@@ -234,6 +234,8 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this._animated) obj.animated=true;
         if(this.anim) obj.anim=this.anim.getSerialized();
 
+        if(this.uiAttribs.display=='file')  obj.display=this.uiAttribs.display;
+
         if(this.direction==PORT_DIR_IN && this.links.length>0)
         {
             obj.links=[];
