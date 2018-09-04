@@ -421,18 +421,17 @@ CGL.Context = function() {
 
 
     this.saveScreenshot = function(filename, cb, pw, ph) {
-        // console.log(pw,ph);
         this.patch.renderOneFrame();
 
-        var w = $('#glcanvas').attr('width');
-        var h = $('#glcanvas').attr('height');
+        var w = this.canvas.clientWidth;
+        var h = this.canvas.clientHeight;
 
         if (pw) {
-            $('#glcanvas').attr('width', pw);
+            this.canvas.width=pw;
             w = pw;
         }
         if (ph) {
-            $('#glcanvas').attr('height', ph);
+            this.canvas.height=ph;
             h = ph;
         }
 
@@ -449,29 +448,20 @@ CGL.Context = function() {
             padLeft(d.getMinutes(), 2) +
             padLeft(d.getSeconds(), 2);
 
-        // var projectStr = this.patch.name;
-        // projectStr = projectStr.split(' ').join('_');
-
         if (!filename) filename = 'cables_'+ dateStr + '.png';
         else filename += '.png';
 
-        this.patch.cgl.doScreenshotClearAlpha = $('#render_removeAlpha').is(':checked');
-
-        // console.log('this.patch.cgl.doScreenshotClearAlpha ',this.patch.cgl.doScreenshotClearAlpha);
-        // this.patch.cgl.doScreenshot = true;
-
-        // this.patch.cgl.screenShot = function(blob) {
         this.patch.cgl.screenShot(function(blob)
         {
-            $('#glcanvas').attr('width', w);
-            $('#glcanvas').attr('height', h);
+            this.canvas.width=w;
+            this.canvas.height=h;
             this.onScreenShot = null;
             if(blob)
             {
                 var anchor = document.createElement('a');
 
-                anchor.setAttribute('download', filename);
-                anchor.setAttribute('href', URL.createObjectURL(blob));
+                anchor.download=filename;
+                anchor.href=URL.createObjectURL(blob);
                 document.body.appendChild(anchor);
     
                 anchor.click();
