@@ -2,16 +2,13 @@
 
 Let’s write our first op, which has a value input and output.
 
-Create a new patch by clicking on `Create` (in the navigation bar), or if you are already in the cables editor  `Patch` —> `New`. Now we need to create a new operator – click on `Op` —> `Create` and enter the name `HelloOp`. Click on `Create` once more.
+Create a new op by clicking `Op` -> `Create` (in the navigation bar at the top left part of the screen).
+Or you can press escape to browse to the ops menu then enter your own unique op name in the search bar, then click the button with `Create Ops.User.YourUserName.YourOpsName` to create your own op.  
 
-The editor will show the following code now:  
-
+A naming example below:
 ```javascript
-op.name="HelloOp";
-```
-
 `HelloOp` is the short-name of your op and `Ops.user.yourname.HelloOp` the unique name. 
-
+```
 Now add the following code:    
 
 ```javascript
