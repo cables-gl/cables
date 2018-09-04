@@ -674,6 +674,8 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     var loadingId = this.loading.start('core', 'deserialize');
     if (this.onLoadStart) this.onLoadStart();
 
+    this.namespace=obj.namespace||'';
+    this.name=obj.name||'';
     
     if (typeof obj === "string") obj = JSON.parse(obj);
     var self = this;
