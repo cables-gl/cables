@@ -1,9 +1,15 @@
 const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 const minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
 const maxDist=op.addInPort(new Port(op,"max distance",OP_PORT_TYPE_VALUE));
+
+const minRotY=op.inValue("min rot y",0);
+const maxRotY=op.inValue("max rot y",0);
+
 const initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
 const initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
 const initialRadius=op.inValue("initial radius",0);
+
+
 
 const mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
 
@@ -103,6 +109,8 @@ function ip(val,goal)
     return val+(goal-val)/divisor;
 }
 
+var lastPy=0;
+
 render.onTriggered=function()
 {
     cgl.pushViewMatrix();
@@ -110,10 +118,29 @@ render.onTriggered=function()
     px=ip(px,percX);
     py=ip(py,percY);
     
-    outYDeg.set( (py+0.5)*180 );
+    var degY=(py+0.5)*180;
+    
+
+    if(minRotY.get()!==0 && degY<minRotY.get()) 
+    {
+        degY=minRotY.get();
+        py=lastPy;
+    }
+    else if(maxRotY.get()!==0 && degY>maxRotY.get()) 
+    {
+        degY=maxRotY.get();
+        py=lastPy;
+    }
+    else
+    {
+        lastPy=py;
+    }
+
+    outYDeg.set( degY );
     outXDeg.set( (px)*180 );
 
-    eye=circlePos(py);
+    eye=circlePos( py );
+    
 
     vec3.add(tempEye, eye, vOffset);
     vec3.add(tempCenter, vCenter, vOffset);

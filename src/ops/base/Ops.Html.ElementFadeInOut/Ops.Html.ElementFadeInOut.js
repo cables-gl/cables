@@ -7,7 +7,8 @@ var inDuration=op.inValue("Duration",0.5);
 var theTimeout=null;
 inDuration.onChange=update;
 
-inVisible.onChange=function()
+inVisible.onChange=updateVisibility;
+function updateVisibility()
 {
     if(styleEle && inEle.get())
     {
@@ -49,6 +50,10 @@ var eleId='css_'+CABLES.uuid();
 
 update();
 
+inEle.onChange=updateVisibility;
+// {
+//     inEle.get().classList.add("CABLES_animFadedOut");
+// };
 
 function getCssContent()
 {

@@ -1,10 +1,6 @@
-op.name="ColorBalance";
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
 var tone=op.inValueSelect("Tone",["Highlights","Midtones","Shadows"],"Highlights");
-
 var r=op.inValue("r");
 var g=op.inValue("g");
 var b=op.inValue("b");
@@ -28,8 +24,6 @@ tone.onChange=function()
     if(tone.get()=="Highlights") shader.define("TONE_HIGH");
     if(tone.get()=="Midtones") shader.define("TONE_MID");
     if(tone.get()=="Shadows") shader.define("TONE_LOW");
-
-    op.log(tone.get());
 };
 
 

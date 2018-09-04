@@ -7,39 +7,58 @@
             },
             {
                 "type": "0",
-                "name": "min distance"
+                "name": "min distance",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "max distance"
+                "name": "max distance",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "initial axis y"
+                "name": "min rot y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "initial axis x"
+                "name": "max rot y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "initial radius"
+                "name": "initial axis y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mul"
+                "name": "initial axis x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smoothness"
+                "name": "initial radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "restricted"
+                "name": "mul",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Active"
+                "name": "Smoothness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "restricted",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
             },
             {
                 "type": "1",
@@ -47,27 +66,33 @@
             },
             {
                 "type": "0",
-                "name": "Allow Panning"
+                "name": "Allow Panning",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Allow Zooming"
+                "name": "Allow Zooming",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Allow Rotation"
+                "name": "Allow Rotation",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Pointerlock"
+                "name": "Pointerlock",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Speed X"
+                "name": "Speed X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Speed Y"
+                "name": "Speed Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -77,21 +102,24 @@
             },
             {
                 "type": "0",
-                "name": "radius"
+                "name": "radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rot Y"
+                "name": "Rot Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rot X"
+                "name": "Rot X",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.OrbitControls"
     },
     "summary": "rotate your object by clicking and dragging the mouse",
-    "updated": 1525255949247,
+    "updated": 1535991731947,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eaf4f7ce-08a3-4d1b-b9f4-ebc0b7b1cde1",

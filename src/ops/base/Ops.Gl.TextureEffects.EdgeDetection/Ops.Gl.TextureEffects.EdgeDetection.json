@@ -7,11 +7,13 @@
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Mul Color"
+                "name": "Mul Color",
+                "subType": "number"
             }
         ],
         "portsOut": [

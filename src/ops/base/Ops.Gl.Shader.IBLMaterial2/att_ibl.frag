@@ -86,7 +86,7 @@ void main()
     #ifndef TEX_NORMAL
         vec3 N = newNormalMatrix[2];
     #else
-        vec3 theNormal=texture2D(texNormal,texCoord).rgb*2.-1.;
+        theNormal=texture2D(texNormal,texCoord).rgb*2.-1.;
         #ifdef TEX_NORMAL_FLIP
             theNormal.xy*=-1.;
         #endif

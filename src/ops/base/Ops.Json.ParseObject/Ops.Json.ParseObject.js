@@ -10,6 +10,7 @@ function parse()
     try
     {
         var obj=JSON.parse(str.get());
+        outObj.set(null);
         outObj.set(obj);
         isValid.set(true);
         op.error("invalidjson",null);

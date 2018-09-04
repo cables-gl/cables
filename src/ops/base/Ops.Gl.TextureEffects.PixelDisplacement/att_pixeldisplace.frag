@@ -1,11 +1,11 @@
 
 #ifdef HAS_TEXTURES
     IN vec2 texCoord;
-    uniform sampler2D tex;
-    uniform sampler2D displaceTex;
+    UNI sampler2D tex;
+    UNI sampler2D displaceTex;
 #endif
-uniform float amountX;
-uniform float amountY;
+UNI float amountX;
+UNI float amountY;
 
 void main()
 {
