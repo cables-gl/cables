@@ -388,6 +388,7 @@ CGL.Geometry.prototype.unIndex=function()
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
     this.verticesIndices=newIndizes;
+    this.calculateNormals();
 };
 
 CGL.Geometry.prototype.calcBarycentric=function()
