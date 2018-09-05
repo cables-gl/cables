@@ -38,102 +38,7 @@ else
 }
 
 
-if(cgl.glVersion==1)
-{
-    var srcVert=''
-        .endl()+'{{MODULES_HEAD}}'
-        .endl()+'IN vec3 vPosition;'
-        .endl()+'IN vec3 attrBarycentric;'
-        .endl()+'UNI mat4 projMatrix;'
-        .endl()+'UNI mat4 modelMatrix;'
-        .endl()+'UNI mat4 viewMatrix;'
-        .endl()+'OUT vec3 barycentric;'
-        .endl()+'IN vec2 attrTexCoord;'
-        .endl()+'OUT vec2 texCoord;'
-        .endl();
-}
-else
-{
-    var srcVert=''
-        .endl()+'{{MODULES_HEAD}}'
-        .endl()+'IN vec3 vPosition;'
-        .endl()+'IN vec3 attrBarycentric;'
-        .endl()+'UNI mat4 projMatrix;'
-        .endl()+'UNI mat4 modelMatrix;'
-        .endl()+'UNI mat4 viewMatrix;'
-        .endl()+'OUT vec3 barycentric;'
-        .endl()+'IN vec2 attrTexCoord;'
-        .endl()+'OUT vec2 texCoord;'
-        .endl();
-}
 
-srcVert+=''
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'    texCoord=attrTexCoord;'
-    .endl()+'    barycentric=attrBarycentric;'
-    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
-    .endl()+'    {{MODULE_VERTEX_POSITION}}'
-    .endl()+'    gl_Position = projMatrix * viewMatrix * modelMatrix * pos;'
-    .endl()+'}';
-
-
-
-var srcFrag='';
-
-if(cgl.glVersion==1)
-{
-    srcFrag=''//#extension GL_OES_standard_derivatives : enable'
-    // .endl()+'precision highp float;'
-    .endl()+'IN vec3 barycentric;'
-    .endl();
-}
-else
-{
-    srcFrag=''
-    // .endl()+'precision highp float;'
-    .endl()+'IN vec3 barycentric;'
-    // .endl()+'out vec4 fragColor;'
-
-    .endl();
-}
-
-srcFrag+=''
-.endl()+'UNI float width;'
-.endl()+'UNI float opacity;'
-.endl()+'UNI float r,g,b;'
-.endl()+'UNI float fr,fg,fb;'
-.endl()+''
-.endl()+'float edgeFactor()'
-.endl()+'{'
-.endl()+'    vec3 d = fwidth(barycentric);'
-.endl()+'    vec3 a3 = smoothstep(vec3(0.0), d*width*4.0, barycentric);'
-.endl()+'    return min(min(a3.x, a3.y), a3.z);'
-.endl()+'}'
-.endl()+'void main()'
-.endl()+'{'
-.endl()+'   vec4 col;'
-
-.endl()+'   #ifdef WIREFRAME_FILL'
-.endl()+'        float v=opacity*(1.0-edgeFactor())*0.95;'
-.endl()+'       vec3 wire = vec3(fr, fg, fb);'
-.endl()+'       col.rgb = vec3(r, g, b);'
-.endl()+'       col.rgb = mix(wire,col.rgb,v);'
-.endl()+'       col.a = opacity;'
-// .endl()+'    col = wire;'
-.endl()+'   #endif'
-
-.endl()+'   #ifndef WIREFRAME_FILL'
-.endl()+'       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
-.endl()+'   #endif'
-// .endl()+'col.xyz=barycentric;'
-.endl();
-
-// if(cgl.glVersion==1)srcFrag+='gl_FragColor=col;';
-// else
-srcFrag+='outColor=col;';
-
-srcFrag+=''.endl()+'}';
 
 var doRender=function()
 {
@@ -158,7 +63,7 @@ var uniformOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 
 if(cgl.glVersion==1)shader.enableExtension('OES_standard_derivatives');
 
-shader.setSource(srcVert,srcFrag);
+shader.setSource(attachments.wireframe_vert||'',attachments.wireframe_frag||'');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.wireframe=true;
 setDefines();

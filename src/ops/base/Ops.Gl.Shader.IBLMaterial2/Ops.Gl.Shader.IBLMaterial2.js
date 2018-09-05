@@ -133,7 +133,7 @@ function bindTextures()
     }
     else
     {
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, CGL.Texture.getTempTexture(cgl).tex);
+        cgl.setTexture(6, CGL.Texture.getTempTexture(cgl).tex);
     }
 
 }

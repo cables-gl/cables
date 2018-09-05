@@ -1,6 +1,66 @@
 {
-    "updated": 1535465913680,
+    "updated": 1536134920122,
     "authorName": "pandur",
     "id": "3fab881c-c2cf-42a0-9c42-2d8edfd93f57",
-    "created": 1535465590797
+    "created": 1535465590797,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": "3",
+                "name": "Array 0"
+            },
+            {
+                "type": "3",
+                "name": "Array 1"
+            },
+            {
+                "type": "3",
+                "name": "Array 2"
+            },
+            {
+                "type": "3",
+                "name": "Array 3"
+            },
+            {
+                "type": "3",
+                "name": "Array 4"
+            },
+            {
+                "type": "3",
+                "name": "Array 5"
+            },
+            {
+                "type": "3",
+                "name": "Array 6"
+            },
+            {
+                "type": "3",
+                "name": "Array 7"
+            },
+            {
+                "type": "3",
+                "name": "Array 8"
+            },
+            {
+                "type": "3",
+                "name": "Array 9"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArraySwitch"
+    },
+    "summary": "switch between multiple arrays",
+    "docs": {
+        "ports": []
+    }
 }

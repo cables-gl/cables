@@ -1,6 +1,5 @@
-
-var exe=op.inFunctionButton("Remove");
-var inName=op.inValueString("Classname");
+const exe=op.inFunctionButton("Remove");
+const inName=op.inValueString("Classname");
 
 exe.onTriggered=function()
 {

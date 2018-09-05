@@ -56,7 +56,7 @@ this.onLoaded=function()
 
     if(preRenderTimeFrames.isAnimated())
     if(preRenderTimeFrames.anim)
-        for(i=0;i<preRenderTimeFrames.anim.keys.length;i++)
+        for(var i=0;i<preRenderTimeFrames.anim.keys.length;i++)
             preRenderTimes.push( preRenderTimeFrames.anim.keys[i].time );
 
     preRenderTimes.push(1);

@@ -22,9 +22,9 @@ function rebuild()
     var i=0;
     var geom=geometry.get();
 
-    if(geom)
+    if(geom && geom.vertices)
     {
-        for(i=0;i<geom.vertices.length;i+=3)
+        for(var i=0;i<geom.vertices.length;i+=3)
         {
             points.push(geom.vertices[i+0]);
             points.push(geom.vertices[i+1]);
@@ -40,8 +40,6 @@ function rebuild()
     cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(points), cgl.gl.STATIC_DRAW);
     buffer.itemSize = 3;
     buffer.numItems = points.length/buffer.itemSize;
-    
-    // console.log('normal; poiints',points.length);
 }
 
 render.onTriggered=function()
@@ -52,7 +50,7 @@ render.onTriggered=function()
         if(!shader)return;
     
         cgl.pushModelMatrix();
-    
+
         shader.bind();
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
     

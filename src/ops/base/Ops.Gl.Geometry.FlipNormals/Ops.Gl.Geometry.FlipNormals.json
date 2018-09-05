@@ -27,5 +27,9 @@
             }
         ],
         "name": "Ops.Gl.Geometry.FlipNormals"
+    },
+    "summary": "flip all normals of a geometry",
+    "docs": {
+        "ports": []
     }
 }
