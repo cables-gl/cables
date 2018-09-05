@@ -122,6 +122,8 @@ function bindTextures()
             else cgl.setTexture(7, inReflectionCubemap.get().cubemap);
     }
     else cgl.setTexture(7, CGL.Texture.getTempTexture(cgl).tex);
+    
+    // console.log(cgl._textureslots);
 }
 
 
