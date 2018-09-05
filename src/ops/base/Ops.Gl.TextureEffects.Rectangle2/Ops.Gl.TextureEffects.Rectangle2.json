@@ -1,0 +1,71 @@
+{
+    "updated": 1536076107074,
+    "authorName": "pandur",
+    "id": "fbe5f1c6-019b-4fa7-a65a-050a7cd7720e",
+    "created": 1536072067728,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "roundness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Rectangle2"
+    }
+}
