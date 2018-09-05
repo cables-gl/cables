@@ -23,7 +23,7 @@ void main()
     vec4 pos = vec4( vPosition, 1. );
     vec3 norm=attrVertNormal;
 
-    {{MODULE_VERTEX_POSITION}}
+    
 
     mat4 modelview= viewMatrix * mMatrix;
     texCoord=vec2(attrTexCoord.x*repeatX,attrTexCoord.y*repeatY);
@@ -39,6 +39,8 @@ void main()
     vec4 modelPos=modelview * pos;
 
     viewDirection = normalize((mMatrix * pos).xyz - camPos);
+
+    {{MODULE_VERTEX_POSITION}}
 
     gl_Position = projMatrix * modelPos;
 }

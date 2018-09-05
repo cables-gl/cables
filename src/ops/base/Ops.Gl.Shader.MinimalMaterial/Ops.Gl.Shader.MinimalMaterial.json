@@ -1,5 +1,5 @@
 {
-    "updated": 1535879172580,
+    "updated": 1536144419580,
     "authorName": "pandur",
     "id": "2df1b492-6a97-4064-b939-ff926d4414d0",
     "created": 1519816748888,
@@ -8,6 +8,11 @@
             {
                 "type": "1",
                 "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Red",
+                "subType": "number"
             }
         ],
         "portsOut": [

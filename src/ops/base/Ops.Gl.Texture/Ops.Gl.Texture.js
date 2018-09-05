@@ -28,6 +28,11 @@ unpackAlpha.onChange=function(){ reloadSoon(); };
 
 var timedLoader=0;
 
+tfilter.set('linear');
+wrap.set('repeat');
+
+textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+
 var setTempTexture=function()
 {
     var t=CGL.Texture.getTempTexture(cgl);
@@ -151,9 +156,4 @@ op.onFileChanged=function(fn)
 
 
 
-tfilter.set('linear');
-wrap.set('repeat');
-
-
-textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 

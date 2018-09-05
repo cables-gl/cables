@@ -2,6 +2,7 @@ var exec=op.inFunction("Render");
 var inShader=op.inObject("Shader");
 var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear']}));
 // ,'mipmap'
+const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat'],'clamp to edge');
 
 var inVPSize=op.inValueBool("Use Viewport Size",true);
 var inWidth=op.inValueInt("Width",512);
@@ -18,6 +19,7 @@ inHeight.onChange=initFbLater;
 inFloatingPoint.onChange=initFbLater;
 inVPSize.onChange=initFbLater;
 tfilter.onChange=initFbLater;
+twrap.onChange=initFbLater;
 
 var fb=null;
 var tex=null;
@@ -44,7 +46,11 @@ function initFb()
     if(tfilter.get()=='linear') filter=CGL.Texture.FILTER_LINEAR;
 //        else if(tfilter.get()=='mipmap') filter=CGL.Texture.FILTER_MIPMAP;
 
-console.log("SET FILTER",filter);
+
+    var selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    if(twrap.get()=='repeat') selectedWrap=CGL.Texture.WRAP_REPEAT;
+    if(twrap.get()=='mirrored repeat') selectedWrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
+
 
 
     if(inVPSize.get())
@@ -72,6 +78,7 @@ console.log("SET FILTER",filter);
         {
             isFloatingPointTexture:inFloatingPoint.get(),
             multisampling:false,
+            wrap:selectedWrap,
             filter:filter,
             depth:true,
             multisamplingSamples:0,
@@ -83,7 +90,8 @@ console.log("SET FILTER",filter);
         fb=new CGL.Framebuffer(cgl,inWidth.get(),inHeight.get(),
         {
             isFloatingPointTexture:inFloatingPoint.get(),
-            filter:filter
+            filter:filter,
+            wrap:selectedWrap
         });
     }
     

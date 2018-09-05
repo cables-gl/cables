@@ -29,6 +29,12 @@ UNI sampler2D maskReflection;
     UNI float aoIntensity;
 #endif
 
+#ifdef TEX_OPACITY
+    UNI sampler2D texOpacity;
+#endif
+
+UNI float opacity;
+
 UNI mat4 modelMatrix;
 UNI mat4 inverseViewMatrix;
 UNI mat4 normalMatrix;
@@ -97,7 +103,7 @@ void main()
     N=normalize(N);
 
     vec3 RN=N;
-    RN.xz*=matRotation;
+    RN.xz *= matRotation;
     col=SAMPLETEX(irradiance,RN,8.0);
 
     #ifdef TEX_AO
@@ -105,7 +111,7 @@ void main()
     #endif
 
     #ifdef TEX_DIFFUSE
-        col*=texture2D(texDiffuse,texCoord);
+        col.rgb *= texture2D(texDiffuse,texCoord).rgb;
     #endif
 
 
@@ -114,6 +120,15 @@ void main()
     
     // col.rgb=mix(col.rgb,SAMPLETEX(mapReflection, L, amountRough*10.0).rgb,amountReflect);
     col.rgb+=SAMPLETEX(mapReflection, L, amountRough*10.0).rgb*amountReflect;
+
+
+    col.a=1.0;
+    #ifdef TEX_OPACITY
+        col.a*=texture2D(texOpacity,texCoord).r;
+    #endif
+
+    col.a*=opacity;
+    // col.rgb=vec3(opacity);
 
     {{MODULE_COLOR}}
 
