@@ -34,7 +34,8 @@ CGL.Framebuffer2=function(cgl,w,h,options)
     this._texture=new CGL.Texture(cgl,
         {
             "isFloatingPointTexture":this._options.isFloatingPointTexture,
-            "filter":this._options.filter
+            "filter":this._options.filter,
+            "wrap":this._options.wrap
         });
 
     var fil=CGL.Texture.FILTER_NEAREST;
