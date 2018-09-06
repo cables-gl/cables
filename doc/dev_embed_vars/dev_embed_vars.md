@@ -7,6 +7,8 @@ Variables are handy if you need the same values in many locations in your patch 
 
 ![Button](img/vars.png)
 
+![Button](img/a_sending_variables_animation.gif)
+
 - `SetVariable` – Set the value of the variable (for Number / Boolean)
 - `SetVariableString` – Set the value of the variable (for String)
 - `Variable` - Read the variable value (for Number / Boolean / String)
