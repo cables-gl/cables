@@ -2,9 +2,9 @@
 
 * [Tutorials](chapter_readmes/tutorials/readme.md)
   * [How to use cables](chapter_readmes/how_to_use_cables/readme.md)
-    * [User Interface Walktrough](ui_walkthrough/ui_walkthrough.md)
+    * [User Interface Walkthrough](ui_walkthrough/ui_walkthrough.md)
     * [Keyboard Shortcuts](keys/keys.md)
-    * [Uploading files](files/files.md)
+    * [Uploading Files](files/files.md)
   * [Beginner](chapter_readmes/beginner/readme.md)
     * [Beginner I – Circle](beginner1_circle/beginner1_circle.md)
     * [Beginner II – Transformations](beginner2_transformations/beginner2_transformations.md)
