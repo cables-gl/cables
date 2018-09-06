@@ -26,7 +26,7 @@ To **add an op in between two ops** just press the circle in the middle of the c
 
 <br />
 
-To **change one of the op-parameters** first select the op by clicking on it, the you will the the op-settings in the pane on the right. To change one of the number value inputs click and drag up or down.
+To **change one of the op-parameters** first select the op by clicking on it, then you will see the the op-settings in the pane on the right. To change one of the number value inputs click and drag up or down.
 
 
 
@@ -36,11 +36,7 @@ To **change one of the op-parameters** first select the op by clicking on it, th
 
 
 
-To **access an op’s documentation** first select the op, then scroll down in the settings pane.
-
-
-
-<iframe src="//giphy.com/embed/3oEjHTwlSYo0et7ujm" width="480" height="412" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+To **access an op’s example patch** first select the op, then click **view example patches**.
 
 <br />
 
@@ -56,7 +52,7 @@ To **delete a cable** just press the `right mouse button` on one of the connecte
 
 
 
-To **connect a cable to another port** press and drag with the `right mouse button`.
+To **reconnect a cable to another port** press and drag with the `right mouse button`.
 
 
 
@@ -66,7 +62,7 @@ To **connect a cable to another port** press and drag with the `right mouse butt
 
 
 
-**Ops can be duplicated** by making a selection with your `left mouse button`, pressing `cmd + c` to copy, followed by `cmd + v` to paste.  
+**Ops can be duplicated** by making a selection with your `left mouse button`, pressing `cmd + c` or `ctrl + c` to copy, followed by `cmd + v` or `ctrl + v` to paste.  
 
 
 
@@ -76,7 +72,7 @@ To **connect a cable to another port** press and drag with the `right mouse butt
 
 
 
-To bring some ordern into your patch you can **align ops** by making a selection with your `left mouse button` and pressing `a` to horizontally align or `shift + a` to vertically align.   
+To bring some order into your patch you can **align ops** by making a selection with your `left mouse button` and pressing `a` to horizontally align or `shift + a` to vertically align.   
 
 
 
@@ -93,7 +89,7 @@ To **unlink an op** hold it with the `left mouse button` and shake it.
 
 <br />
 
-You can also unlink ops by pressing `x`
+You can also unlink ops by selecting them and pressing `x`
 
 <video src="video/x_unlink.mp4" muted="true" autoplay="true" loop="true" ></video>
 
@@ -102,7 +98,7 @@ You can also unlink ops by pressing `x`
 <br />
 
 
-Drag cable on an op to see suggestions of fitting ports. if there is only one the link will be connected automatically.
+Drag a cable to the center of an op to see suggestions of fitting ports. if there is only one the link will be connected automatically.
 
 
 <video src="video/autolink_suggestions.mp4" muted="true" autoplay="true" loop="true" ></video>
@@ -110,14 +106,14 @@ Drag cable on an op to see suggestions of fitting ports. if there is only one th
 <br />
 
 
-Link ops by connecting them inbetween
+To add an existing op between two other ops, click and drag it to the middle of the cable and release.
 
 
 <video src="video/snapinbetween.mp4" muted="true" autoplay="true" loop="true" ></video>
 <br />
 
 
-Copy a link by pressing `alt` and `right-mouse button` and drag the cable to another port
+Duplicate a link by pressing `alt` and the `right-mouse button` and dragging the cable to another port
 
 <video src="video/copylink.mp4" muted="true" autoplay="true" loop="true" ></video>
 
@@ -144,7 +140,7 @@ Disable ops and its children by pressing `d`
 <br />
 
 
-Temporarily disconnect a selected op completly by pressing `shift+d`, pressing `shift+d` again reconnects cable again
+Temporarily disconnect/bypass a selected op by pressing `shift+d`, pressing `shift+d` again reconnects the cable again
 
 
 <video src="video/shift_d_temp_disable.mp4" muted="true" autoplay="true" loop="true" ></video>
