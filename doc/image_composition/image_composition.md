@@ -28,8 +28,8 @@ In this example we compose a new image / texture out of one image and some 2d ef
 
 ![](img/example_imgcomp3.jpg)
 
-- Using the `alphaSrc` setting in the `drawImage` op you can select what defines the alpha / opacity value, in this case it's luminance of our alpha image.
-- If nothing happens try changing the `alphaSrc` setting.
+- Using the `AlphaSrc` setting in the `drawImage` op you can select what defines the alpha / opacity value, in this case it's luminance of our alpha image.
+- If nothing happens try changing the `AlphaSrc` setting to `alpha channel`.
 
 ## Object links
 - [Letterbox](https://cables.gl/op/Ops.Gl.LetterBox)
