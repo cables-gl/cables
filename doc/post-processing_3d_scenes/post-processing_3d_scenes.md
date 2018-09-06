@@ -4,6 +4,9 @@
 You can find the finished patch here: [postprocessing](https://cables.gl/p/5645f59a9a013fa25927562a).
 
 ![](img/d_post_process.png)
+
+## Basic Patch Layout
+
 ![](img/a_general_layout_full_patch.png)
 
 ## Step 1
