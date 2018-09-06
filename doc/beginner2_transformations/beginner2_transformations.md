@@ -2,13 +2,13 @@
 
 This is part 2 of the beginner tutorial series. Before you proceed you should have completed [Part 1: Circle](../beginner1_circle/beginner1_circle.md).
 
-To transform an object in 3D space we need a transformation operator.  
-To insert an operator between two existing ops you can press the circle in the middle of the cable to link them. If the circle is not showing up, you have to select one of the ops first.
+To transform an object in 3D space we need the **transform** operator.  
+To insert an operator between two existing ops you can press the **circle** in the middle of the cable. If the circle is not showing up, you have to select one of the ops first.
 
 ![](img/beginner_circle_trans1.png)
 
-When you click the circle the `Select Op`-dialog shows up. Now enter `transform` and select `Ops.Gl.Matrix.Transform` and press enter.  
-The new op should appear between the two existing once:  
+When you click the circle the `Select Op`-dialog shows up. Now type `transform` and select `Ops.Gl.Matrix.Transform` and press enter.  
+The new op should appear between the two existing ops:  
 
 ![](img/beginner_circle_trans2.png)
 
