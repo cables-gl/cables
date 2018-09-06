@@ -4,9 +4,9 @@
 
 ## Adding Color
 
-To change color and texture of things you can use materials.  
+To change the color and texture of 3d objects you can use materials.  
 
-`Basicmaterial` is the most basic one.  
+[Basicmaterial](https://cables.gl/op/Ops.Gl.Shader.BasicMaterial) is the most basic one.  
 
 ![](img/beginner_color.png)
 
