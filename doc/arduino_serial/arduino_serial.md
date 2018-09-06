@@ -85,6 +85,6 @@ If you now click on the little magnifier icon next to the `Result` port you can 
 
 To make use of the incoming data we need to extract the value. Connect a `GetValue` op to the `Result` port and enter `D` as the key:  
 
-![](img/cables4.png)From here on you can use the `Result` value howevery you like. In the [Arduino Serial Tutorial](https://cables.gl/p/5acb7afd7173b0651a826aac) patch you can see how the data from the Arduino changes the size of the circle.
+![](img/cables4.png)From here on you can use the `Result` value however you like. In the [Arduino Serial Tutorial](https://cables.gl/p/5acb7afd7173b0651a826aac) patch you can see how the data from the Arduino changes the size of the circle.
 
 Now go on and build some crazy things with Arduino + cables :)
