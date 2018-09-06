@@ -13,9 +13,9 @@ Audio: `.ogg`, `.mp3`, `.m4a`, `.aac`,`.wav`,
 
 ## File Converters
 
-cables features file convertes to convert files into a more readable web format, which can be read by ops then.
+cables automatically converts files into a more readable web format which can then be read by the ops.
 
-to convert a file upload it, then click it in the file browser. on the right you can see information about this file the converters are listed.
+To convert a file upload it, then click it in the file browser. on the right you can see information about this file the converters are listed.
 
 ![](img/fileconvertes.png)
 
