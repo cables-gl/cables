@@ -11,19 +11,19 @@ To draw a circle, we need two operators:
 ## 1.Add the WebGL-op
 
 - To create an operator press `[esc]` – the `Select Operator`-dialog shows up
-- Now enter `Main`
+- Now type `Main`
 - The first entry in the list should be [Ops.Gl.MainLoop](../ops/Ops.Gl.MainLoop/Ops.Gl.MainLoop.md)
-- Press `[enter]` to create the operator
+- Press `[enter]` or click the `+` button to create the operator
 
 ## 2. Add The Circle Operator
 
-- To create a new operator and automatically connect it to another op you can pull the blue output port on the left side with your mouse (drag it out of the operator and release your mouse button).
+- To create a new operator and automatically connect it to another op you can pull the yellow output port on the left side with your mouse (drag it out of the operator and release your mouse button).
 
 ![](img/create_op_pull.gif)
 
-- The `Select Operator`-dialog is showing again
-- Enter `circle`, now the entry [Ops.Gl.Meshes.Circle](../ops/Ops.Gl.Meshes.Circle/Ops.Gl.Meshes.Circle.md) should be selected
-- Press `[enter]` to create it
+- The `Select Operator`-dialog will appear
+- Type `circle`, now the entry [Ops.Gl.Meshes.Circle](../ops/Ops.Gl.Meshes.Circle/Ops.Gl.Meshes.Circle.md) should be selected
+- Press `[enter]` or click the `+` button to create it
 
 Now it should look like this:  
 
