@@ -140,7 +140,7 @@ Disable ops and its children by pressing `d`
 <br />
 
 
-Temporarily disconnect/bypass a selected op by pressing `shift+d`, pressing `shift+d` again reconnects the cable again
+Temporarily disconnect/bypass a selected op by pressing `shift+d`, pressing `shift+d` again reconnects the cable
 
 
 <video src="video/shift_d_temp_disable.mp4" muted="true" autoplay="true" loop="true" ></video>
@@ -169,7 +169,7 @@ access the command palette by pressing `CMD+P` or `CTRL+P`.
 <br />
 
 
-set a custom title to an op by clicking the title in the parameter panel (you can also select an op and press t)
+set a custom title to an op by clicking the title in the parameter panel (you can also select an op and press `t`)
 
 
 <video src="video/rename.mp4" muted="true" autoplay="true" loop="true" ></video>
