@@ -10,7 +10,6 @@
  * @type CGL.Context
  * @readonly
  */
-
 var OP_PORT_TYPE_VALUE =0;
 var OP_PORT_TYPE_FUNCTION =1;
 var OP_PORT_TYPE_OBJECT =2;
@@ -148,6 +147,11 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.addInPort=function(p)
     {
+        if( !(p instanceof CABLES.Port))
+        {
+            throw new Error("parameter is not a port!");
+            return;
+        }
         p.direction=PORT_DIR_IN;
         p.parent=this;
         this.portsIn.push(p);
@@ -776,11 +780,10 @@ CABLES.Op = function()
 
 
     /**
-     * show op error message
-     * set message to null to remove error message
+     * @function
+     * @description show op error message - set message to null to remove error message
      * @param {errorid} id error identifier
      * @param {txt} text message
-     * @function
      */
     CABLES.Op.prototype.error=function(id,txt)
     {
@@ -871,12 +874,13 @@ CABLES.Op = function()
         // ports[ports.length-1].setUiAttribs({"spaceAfter":true});
     }
 
-    
+    /**
+     * @function
+     * @description remove port from op
+     * @param {CABLES.Port} port to remove
+     */
     CABLES.Op.prototype.removePort=function(port)
     {
-
-        console.log('portsIn length',this.portsIn.length);
-
         for(var ipi in this.portsIn)
         {
             if(this.portsIn[ipi]==port)
@@ -886,10 +890,7 @@ CABLES.Op = function()
                 return;
             }
         }
-
-        console.log('portsIn length after',this.portsIn.length);
     }
-
 
 }
 

@@ -257,9 +257,11 @@ CABLES.Patch.prototype.createOp = function(objName) {
     }
     catch (e)
     {
-        console.error('instancing error ' + objName);
+        console.error('instancing error ' + objName,e);
         if (CABLES.UI)
+        {
             CABLES.UI.MODAL.showOpException(e, objName);
+        }
         else
         {
             if (CABLES.api) CABLES.api.sendErrorReport(e);
