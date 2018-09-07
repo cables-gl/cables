@@ -35,6 +35,7 @@ CABLES.Patch = function(cfg) {
     this.onLoadEnd = null;
     this.aborted = false;
     this.loading = new CABLES.LoadingStatus(this);
+    this._crashedOps=[];
 
     this._fps=0;
     this._fpsFrameCount=0;
@@ -257,6 +258,7 @@ CABLES.Patch.prototype.createOp = function(objName) {
     }
     catch (e)
     {
+        this._crashedOps.push(objName);
         console.error('instancing error ' + objName,e);
         if (CABLES.UI)
         {
@@ -595,10 +597,19 @@ CABLES.Patch.prototype.loadLib = function(which) {
 CABLES.Patch.prototype.reloadOp = function(objName, cb) {
     var count = 0;
     var ops = [];
+    var oldOps=[];
+
     for (var i in this.ops) {
         if (this.ops[i].objName == objName) {
+            oldOps.push(this.ops[i]);
+        }
+    }
+
+    for (var i=0;i<oldOps.length;i++)
+    {
+        // if (this.ops[i].objName == objName) {
             count++;
-            var oldOp = this.ops[i];
+            var oldOp = oldOps[i];
             oldOp.deleted = true;
             var self = this;
 
@@ -622,7 +633,8 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
                             oldOutOp,
                             oldOutName
                         );
-                        l.setValue();
+                        if(!l) console.log('relink after op reload not successfull for port '+oldOutName);
+                            else l.setValue();
                     }
             }
 
@@ -639,13 +651,14 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
                         oldInOp,
                         oldInName
                     );
-                    l.setValue();
+                    if(!l) console.log('relink after op reload not successfull for port '+oldInName);
+                        else l.setValue();
                 }
             }
 
 
             this.deleteOp(oldOp.id);
-        }
+        // }
     }
     cb(count, ops);
 };
