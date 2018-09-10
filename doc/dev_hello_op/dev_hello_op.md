@@ -123,14 +123,21 @@ multiplyValueIn.onChange = function()
 ```
 
 We are basically duplicating the code which is something we generally want to try and avoid. 
-There's a great way to get around this by using the **update** function.
+There's a great way to get around this by making our own custom function.
+We will call this code **update**, the normal syntax for making your own function is this
+```javascript
+function myFunctionName()
+{
+  //code gos here
+}
+```
 Replace the previous code with this:
 ```javascript
 //calls the update function on a change
-myInPort.onChange = update;
+myInPort.onChange = update();
 
 //calls the update function on a change
-multiplyValueIn.onChange = update;
+multiplyValueIn.onChange = update();
 
 //the function update is called whenever a port changes
 function update ()
