@@ -14,21 +14,33 @@ var outPort = op.outValue("My Output Port");
 
 ## Port types
 
-Different port types are created like this.
-value normally expects a float in:
+Different port examples below.
+
+Value ports can hold a single value, a number (e.g. -1, 2.45), a bool (true, false), a string ("foo bar"), a string with multiple lines or a certain value from a dropdown-input.
+Value ports in and out:
 ```javascript
 var inFloat = op.inValue("Value or float in");
 var outFloat = op.outValue("Value or float out");
 ```
-String data ports in and out:
+String ports in and out:
 ```javascript
 var inString = op.inValueString("String in");
 var outString = op.outValueString("String out");
 ```
-Trigger in and out:
+Trigger ports in and out:
 ```javascript
 var execute = op.inFunction("Trigger In");
 var trigger = op.outFunction("Trigger out");
+```
+Array ports in and out:
+```javascript
+var inArray = op.inArray("Array in");
+var outArray = op.outArray("Array out");
+```
+Object ports in and out:
+```javascript
+var inObject = op.inObject("Object In");
+var outObject = op.outObject("Object Out");
 ```
 
 
