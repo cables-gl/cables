@@ -1,4 +1,4 @@
-# Hello Op
+# Hello Op - Part 1
 
 Let’s write our first op, which has a value input and output.
 
@@ -14,8 +14,15 @@ Now add the following code:
 ```javascript
 var myInPort = op.inValue("Input");
 ```
+We have now created a new variable of the type port. Lets break this line of code down:
+- **var** creates a new variable
+- **myInPort** is the name of the variable, you could write anything here
+- **op** references to the operator itself **.inValue("Input")** means get the value coming into the op
 
-We have now defined a new port called `myInPort` with the visible text label `My In Port`, which can be used to enter a value in op-settings or act as input from another op. In this example we will just forward the input value to an out-port. So let’s define it below:
+Don't worry if your not following this all right now, it will all make much more sense later on :)
+
+We have now defined a new port called `myInPort` with the visible text label `My In Port`, which can be used to enter a value in op-settings or act as input from another op. 
+In this example we will just forward the input value to an out-port. So let’s define it below:
 
 ```javascript
 var myOutPort = op.outValue("Output");
@@ -45,8 +52,6 @@ myInPort.onChange = function() {
 Your op-code should look like this now:  
 
 ```javascript
-op.name="HelloOp";
-
 var myInPort = op.inValue("Input");
 var myOutPort = op.outValue("Output");
 
@@ -75,5 +80,73 @@ myOutPort.set(2*inputValue);
 That’s it for now – you created your first op which multiplies values by two!
 
 For other port-types check out [Ports Documentation](../dev_creating_ports/dev_creating_ports.md).
+
+# Hello Op - Part 2
+
+It's time to make our patch a little bit more advanced. 
+To change the multiplication amount we have to go into the code editor which is a slow way to work.
+We'll create a second input port and use this to define the multiplication amount.
+Add the following line of code below the first **myInputPort**
+```javascript
+var multiplyValueIn = op.inValue("Multiply amount");
+```
+
+This creates a second port and a new part on the object pane which allows us to set the multiplication amount.
+![](img/b-port_in_multiply_amount.PNG)
+
+Your op should now look like this :
+![](img/a_data_in_and_out.PNG)
+
+Your code should look like this
+```javascript
+var myInPort = op.inValue("Input");
+var multiplyValueIn = op.inValue("Multiply amount");
+var myOutPort = op.outValue("Output");
+```
+
+
+We learnt that we can call a function when a input port detects a change. This is a great way to make something happen with small simple ops, with larger more complicated ops this method can become hard to keep track of.
+If we'd follow this way of doing things we'd have to make two functions for each input port like this. 
+```javascript
+myInPort.onChange = function()
+{
+    var inputValue = myInPort.get() + multiplyValueIn.get() ;
+    myOutPort.set(inputValue);
+}
+
+multiplyValueIn.onChange = function()
+{
+    var inputValue = myInPort.get() + multiplyValueIn.get();
+    myOutPort.set(inputValue);
+}
+
+```
+
+We are basically duplicating the code which is something we generally want to try and avoid. 
+There's a great way to get around this by using the **update** function.
+Replace the previous code with this:
+```javascript
+//calls the update function on a change
+myInPort.onChange = update;
+
+//calls the update function on a change
+multiplyValueIn.onChange = update;
+
+//the function update is called whenever a port changes
+function update ()
+{
+    var result = myInPort.get() + multiplyValueIn.get() ;
+    myOutPort.set(result);
+}
+```
+We now have one function that is called whenever one of our input ports detects a change. This makes it far easier to keep track of what our code is doing.
+
+
+
+
+
+
+
+
 
 
