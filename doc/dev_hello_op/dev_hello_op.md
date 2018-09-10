@@ -92,12 +92,10 @@ var multiplyValueIn = op.inValue("Multiply amount");
 ```
 
 This creates a second port and a new part on the object pane which allows us to set the multiplication amount.
+Your op should now look like this
 
 ![](img/b-port_in_multiply_amount.PNG)
 
-Your op should now look like this :
-
-![](img/a_data_in_and_out.PNG)
 
 Your code should look like this
 ```javascript
