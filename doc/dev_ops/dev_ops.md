@@ -4,15 +4,7 @@
 
 `op` is a pre-defined object which bundles all the functions you need to interact with the world of cables.
 
-## Adding Ports
-
-To add an input and output port use the following code:
-```javascript
-var inPort = op.inValue("My Input Port");
-var outPort = op.outValue("My Output Port");
-```
-
-## Port types
+## Adding Ports and Port types
 
 Different port examples below.
 
