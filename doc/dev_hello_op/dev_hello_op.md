@@ -92,9 +92,11 @@ var multiplyValueIn = op.inValue("Multiply amount");
 ```
 
 This creates a second port and a new part on the object pane which allows us to set the multiplication amount.
+
 ![](img/b-port_in_multiply_amount.PNG)
 
 Your op should now look like this :
+
 ![](img/a_data_in_and_out.PNG)
 
 Your code should look like this
@@ -107,6 +109,7 @@ var myOutPort = op.outValue("Output");
 
 We learnt that we can call a function when a input port detects a change. This is a great way to make something happen with small simple ops, with larger more complicated ops this method can become hard to keep track of.
 If we'd follow this way of doing things we'd have to make two functions for each input port like this. 
+
 ```javascript
 myInPort.onChange = function()
 {
@@ -125,6 +128,7 @@ multiplyValueIn.onChange = function()
 We are basically duplicating the code which is something we generally want to try and avoid. 
 There's a great way to get around this by making our own custom function.
 We will call this code **update**, the normal syntax for making your own function is this
+
 ```javascript
 function myFunctionName()
 {
