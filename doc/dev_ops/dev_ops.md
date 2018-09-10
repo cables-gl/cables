@@ -8,7 +8,6 @@
 
 To add an input and output port use the following code:
 ```javascript
-
 var inPort = op.inValue("My Input Port");
 var outPort = op.outValue("My Output Port");
 ```
@@ -17,12 +16,10 @@ var outPort = op.outValue("My Output Port");
 
 Different port types are created like this.
 value normally expects a float in:
-
 ```javascript
 var inFloat = op.inValue("Value or float in");
 var outFloat = op.outValue("Value or float out");
 ```
-
 String data ports in and out:
 ```javascript
 var inString = op.inValueString("String in");
