@@ -136,10 +136,10 @@ function myFunctionName()
 Replace the previous code with this:
 ```javascript
 //calls the update function on a change
-myInPort.onChange = update();
+myInPort.onChange = update;
 
 //calls the update function on a change
-multiplyValueIn.onChange = update();
+multiplyValueIn.onChange = update;
 
 //the function update is called whenever a port changes
 function update ()
