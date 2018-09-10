@@ -111,13 +111,13 @@ If we'd follow this way of doing things we'd have to make two functions for each
 ```javascript
 myInPort.onChange = function()
 {
-    var inputValue = myInPort.get() + multiplyValueIn.get() ;
+    var inputValue = myInPort.get() * multiplyValueIn.get() ;
     myOutPort.set(inputValue);
 }
 
 multiplyValueIn.onChange = function()
 {
-    var inputValue = myInPort.get() + multiplyValueIn.get();
+    var inputValue = myInPort.get() * multiplyValueIn.get();
     myOutPort.set(inputValue);
 }
 
@@ -144,7 +144,7 @@ multiplyValueIn.onChange = update;
 //the function update is called whenever a port changes
 function update ()
 {
-    var result = myInPort.get() + multiplyValueIn.get() ;
+    var result = myInPort.get() * multiplyValueIn.get() ;
     myOutPort.set(result);
 }
 ```
