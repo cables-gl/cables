@@ -1,0 +1,23 @@
+{
+    "summary": "The ArraySmooth op will smooth out the data in a array with a definable amount of iterations:",
+    "docs": {
+        "ports": [
+            {
+                "name": "array 0",
+                "text": "Array in"
+            },
+            {
+                "name": "Iterations",
+                "text": "Smoothing amount"
+            },
+            {
+                "name": "Mode",
+                "text": "Wrapping mode of array lookups"
+            },
+            {
+                "name": "Array result",
+                "text": "Smoothed array"
+            }
+        ]
+    }
+}
