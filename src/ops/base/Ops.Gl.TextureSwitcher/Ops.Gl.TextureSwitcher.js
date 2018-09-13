@@ -19,6 +19,8 @@ defaultTransparent.onChange=function()
 };
 
 
+
+
 for(var i=0;i<16;i++)
 {
     var tex=this.addInPort(new Port(this,"texture"+i,OP_PORT_TYPE_TEXTURE));

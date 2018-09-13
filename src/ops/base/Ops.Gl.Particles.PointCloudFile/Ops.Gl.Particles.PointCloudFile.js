@@ -1,4 +1,3 @@
-this.name="PointCloudFile";
 var cgl=this.patch.cgl;
 
 var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));

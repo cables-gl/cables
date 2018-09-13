@@ -141,7 +141,7 @@ var loadCameras=function(data,seq)
 
     if(data.hasOwnProperty('cameras'))
     {
-        camSeq=op.patch.addOp('Ops.TimedSequence',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+50}});
+        camSeq=op.patch.addOp('Ops.Trigger.TimedSequence',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+50}});
         op.patch.link(camSeq,'exe',op,'trigger');
 
         console.log("camera....");

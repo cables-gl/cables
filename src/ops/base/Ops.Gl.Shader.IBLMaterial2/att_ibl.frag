@@ -117,7 +117,7 @@ void main()
 
     vec3 L = reflect(normalize(viewDirection),N);
     L.xz*=matRotation;
-    
+    L=normalize(L);
     // col.rgb=mix(col.rgb,SAMPLETEX(mapReflection, L, amountRough*10.0).rgb,amountReflect);
     col.rgb+=SAMPLETEX(mapReflection, L, amountRough*10.0).rgb*amountReflect;
 
@@ -128,6 +128,7 @@ void main()
     #endif
 
     col.a*=opacity;
+    // col.rgb=N.rgb;
     // col.rgb=vec3(opacity);
 
     {{MODULE_COLOR}}
