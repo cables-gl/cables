@@ -4,25 +4,21 @@
 
 There are different types of ports your op can use:  
 
-- `OP_PORT_TYPE_FUNCTION` – (blue) function port
-- `OP_PORT_TYPE_VALUE` – (orange) value port
-- `OP_PORT_TYPE_ARRAY` – (purple) array port
-- `OP_PORT_TYPE_OBJECT` – (green) object port
+- (blue) function port
+- (orange) value port
+- (purple) array port
+- (green) object port
 
 ### Function Ports
 
 **TODO: Implement onTrigger Callback**
 
-```
-OP_PORT_TYPE_FUNCTION
-```
-
 Function ports are being used to trigger another op. If you do a visual-patch the first op you need to add is the `MainLoop`-op, which has a `trigger`-port – a function port which updates all connected ports 60 times a second.
 Function ports can also be used to trigger under certain conditions – the [Op: Mouse](#)-op e.g. triggers on the `click`-port once a user clicked in the preview pane.
 
 ```javascript
-var exec = op.addInPort( new Port( op, "exec", OP_PORT_TYPE_FUNCTION ));
-var next = op.addOutPort( new Port( op, "next", OP_PORT_TYPE_FUNCTION ));
+var exec = op.addInPort("exec");
+var next = op.addOutPort("next");
 
 exec.onTrigger( function(){
 	// ...
@@ -39,14 +35,10 @@ exec.onTrigger( function(){
 By adding `{ "display": "button" }` to a port-definition a button-UI element will be added to the op settings pane to manually trigger the port.
 
 ```javascript
-var tap = op.addInPort( new Port( op, "tap", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var tap = op.addInPort( new Port("tap");
 ```
 
 ### Value Ports
-
-```javascript
-OP_PORT_TYPE_VALUE
-```
 
 Value ports can hold a single value, a number (e.g. -1, 2.45), a bool (true, false), a string ("foo bar"), a string with multiple lines or a certain value from a dropdown-input.
 
@@ -81,7 +73,7 @@ Text-input-field which can be used to enter numbers, booleans and strings.
 Used for images, audio files and so on.
 
 ```javascript
-var inUrlPort = op.addInPort( new Port( op, "file", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'image'  } ));
+var inUrlPort = op.addInPort("file");
 ```
 
 The `filter` is a file filter for the assets-browser, in the example above only images will be shown. You can currently use `image` and `audio`.  
@@ -123,7 +115,7 @@ var inPort = op.addInPort( new Port( op, "inPort", OP_PORT_TYPE_VALUE, { 'displa
 ![](img/checkbox.png)
 
 ```javascript
-var inPort = op.addInPort( new Port( op, "inPort", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var inPort = op.addInPort("inPort");
 
 inPort.onValueChange( function() {
 	if( inPort.get() === true ){
@@ -137,7 +129,7 @@ inPort.onValueChange( function() {
 ##### Display: String
 
 ```javascript
-var inPort = op.addInPort( new Port( op, "inPort", OP_PORT_TYPE_VALUE, { display: 'string' } ) );
+var inPort = op.addInPort("inPort");
 
 inPort.onValueChange( function() {
 	op.log( "Port changed to: " + inPort.get() === "foo bar" );
@@ -150,7 +142,7 @@ inPort.onValueChange( function() {
 ![Editor Button](img/editor.png)
 
 ```javascript
-var text = op.addInPort( new Port( op, "text", OP_PORT_TYPE_VALUE, { display: 'editor' } ) );
+var text = op.addInPort( new Port("text");
 
 text.onValueChange( function() {
     op.log('text changed to:' + text.get());
