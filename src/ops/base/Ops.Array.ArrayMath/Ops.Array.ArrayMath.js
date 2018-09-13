@@ -57,14 +57,12 @@ function update()
         }
         return;
     }
-    else
+    if(showingError)
     {
-        if(showingError)
-        {
-            showingError = false;
-            op.uiAttr({error:null});
-        }
+        showingError = false;
+        op.uiAttr({error:null});
     }
+
 
     mathArray.length = array0.length;
 
