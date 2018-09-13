@@ -1,6 +1,7 @@
 
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION ));
-op.index=op.addInPort(new Port(op,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
+// op.index=op.addInPort(new Port(op,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
+op.index=op.inValueInt("mesh index");
 var centerPivot=op.addInPort(new Port(op,"center pivot",OP_PORT_TYPE_VALUE,{display:'bool'} ));
 var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_FUNCTION));
 

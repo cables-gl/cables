@@ -1,5 +1,3 @@
-op.name="IntervalAnim";
-
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
 var interval=op.addInPort(new Port(op,"Interval",OP_PORT_TYPE_VALUE));

@@ -21,6 +21,8 @@ pause.onChange=reinit;
 seed.onChange=reinit;
 duration.onChange=reinit;
 
+var counter=0;
+
 function getRandom()
 {
     var minVal = parseFloat( min.get() );
@@ -30,7 +32,7 @@ function getRandom()
 
 function reinit()
 {
-    Math.randomSeed=seed.get();
+    Math.randomSeed=seed.get()+counter*100;
     init(getRandom());
 }
 
@@ -47,16 +49,11 @@ function init(v)
 
 exe.onTriggered=function()
 {
-    if(op.instanced(exe))return;
-
-
-    Math.randomSeed=seed.get();
-
-// +offset.get())%duration.get()
     var t=op.patch.freeTimer.get();
     var v=anim.getValue(t);
     if(anim.hasEnded(t))
     {
+        counter++;
         anim.clear();
         init(v);
     }

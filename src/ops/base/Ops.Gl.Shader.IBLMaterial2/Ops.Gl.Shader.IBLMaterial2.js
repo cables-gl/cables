@@ -54,13 +54,13 @@ shader.setSource(attachments.ibl_vert,attachments.ibl_frag);
 shader.bindTextures=bindTextures;
 
 var uniCube=new CGL.Uniform(shader,'t','irradiance',0);
-var uniRough=new CGL.Uniform(shader,'t','maskRoughness',1);
+var uniRough=new CGL.Uniform(shader,'t','maskRoughness',7);
 var uniRefl=new CGL.Uniform(shader,'t','maskReflection',2);
 var uniNormal=new CGL.Uniform(shader,'t','texNormal',3);
 var uniDiffuse=new CGL.Uniform(shader,'t','texDiffuse',4);
 var uniAo=new CGL.Uniform(shader,'t','texAo',5);
 var uniOpacity=new CGL.Uniform(shader,'t','texOpacity',6);
-var uniRefl=new CGL.Uniform(shader,'t','mapReflection',7);
+var uniRefl=new CGL.Uniform(shader,'t','mapReflection',1);
 var uniRotOff=new CGL.Uniform(shader,'f','fRotation',inRotation);
 var uniMulRefl=new CGL.Uniform(shader,'f','mulReflection',inReflMul);
 var uniMulRoug=new CGL.Uniform(shader,'f','mulRoughness',inRoughMul);
@@ -104,7 +104,6 @@ function bindTextures()
     }
     else cgl.setTexture(0,CGL.Texture.getTempGradientTexture(cgl).tex);
 
-    if(inRough.get()) cgl.setTexture(1,inRough.get().tex);
     
     if(inReflection.get()) cgl.setTexture(2,inReflection.get().tex);
 
@@ -118,10 +117,12 @@ function bindTextures()
 
     if(inReflectionCubemap.get())
     {
-        if(!inReflectionCubemap.get().cubemap) cgl.setTexture(7, inReflectionCubemap.get().tex);
-            else cgl.setTexture(7, inReflectionCubemap.get().cubemap);
+        if(!inReflectionCubemap.get().cubemap) cgl.setTexture(1, inReflectionCubemap.get().tex);
+            else cgl.setTexture(1, inReflectionCubemap.get().cubemap);
     }
-    else cgl.setTexture(7, CGL.Texture.getTempTexture(cgl).tex);
+    else cgl.setTexture(1, CGL.Texture.getTempTexture(cgl).tex);
+
+    if(inRough.get()) cgl.setTexture(7,inRough.get().tex);
     
     // console.log(cgl._textureslots);
 }
