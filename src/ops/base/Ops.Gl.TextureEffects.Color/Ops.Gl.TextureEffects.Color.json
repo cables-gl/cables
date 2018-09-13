@@ -7,23 +7,28 @@
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -35,7 +40,7 @@
         "name": "Ops.Gl.TextureEffects.Color"
     },
     "summary": "fill image using a color (overlay)",
-    "updated": 1514932186218,
+    "updated": 1536826572053,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c0acfc80-16f9-4f17-978d-bad650f3ed1c",

@@ -1,5 +1,3 @@
-op.name="TriggerIfDecreased";
-
 var value=op.inValue("Value");
 var trigger=op.outFunction("Trigger");
 

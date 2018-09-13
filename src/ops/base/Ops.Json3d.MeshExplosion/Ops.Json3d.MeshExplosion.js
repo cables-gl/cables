@@ -49,8 +49,6 @@ function doRender()
             
             mat4.multiply(cgl.mvMatrix,cgl.mvMatrix , tempMat4 );
 
-
-
             objects[i].mesh.render(cgl.getShader());
             next.trigger();        
             cgl.popModelMatrix();

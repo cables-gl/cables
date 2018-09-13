@@ -1,15 +1,10 @@
 op.exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
 var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
 var doCreate=op.inFunctionButton("Create Nodes");
-
 var createNonMesh=op.inValueBool("Create Non Mesh Nodes");
-
-
 var createMaterials=op.inValueBool("Create Materials",false);
 var detectClones=op.inValueBool("Detect Clones",true);
-
 var inReplaceMaterials=op.inObject("Mesh Materials");
 var outLoading=op.outValueBool("Loading",false);
 
@@ -146,7 +141,7 @@ var loadCameras=function(data,seq)
 
     if(data.hasOwnProperty('cameras'))
     {
-        camSeq=op.patch.addOp('Ops.TimedSequence',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+50}});
+        camSeq=op.patch.addOp('Ops.Trigger.TimedSequence',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+50}});
         op.patch.link(camSeq,'exe',op,'trigger');
 
         console.log("camera....");
@@ -483,7 +478,14 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     {
                         var matOp=op.patch.addOp('Ops.Json3d.SetMaterialShader',{"subPatch":subPatchId});
                         matOp.getPort("Key").set(ch.name);
-                        op.patch.link(prevOp,'trigger',matOp,'exe');
+
+                        var l=op.patch.link(prevOp,'trigger',matOp,'exe');
+
+                        if(!l)
+                        {
+                            l=op.patch.link(parentOp,'trigger 15',matOp,'exe');
+                        }
+
                         prevOp=matOp;
                     }
                     else
@@ -654,10 +656,9 @@ function createNodes()
         // op.patch.link(op,'trigger',rootMatrixOp,'render');
         op.patch.link(subPatchOpStart,subPatchOpStartPort,rootMatrixOp,'render');
 
-
         var root=op.patch.addOp('Ops.Sequence',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+150}});
         var camOp=loadCameras(data,root);
-    
+
         if(camOp) op.patch.link(camOp,'trigger',root,'exe');
             else op.patch.link(rootMatrixOp,'trigger',root,'exe');
 

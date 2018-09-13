@@ -330,7 +330,7 @@ op.onDelete=function()
     {
         if(op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch==op.patchId.get())
         {
-            console.log(op.patch.ops[i].objName);
+            // console.log(op.patch.ops[i].objName);
             op.patch.deleteOp(op.patch.ops[i].id);
         }
     }

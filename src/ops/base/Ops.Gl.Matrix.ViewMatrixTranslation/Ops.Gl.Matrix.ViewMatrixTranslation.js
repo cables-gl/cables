@@ -5,11 +5,11 @@ var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
 
-
 var cgl=op.patch.cgl;
 var pos=vec3.create();
 var identVec=vec3.create();
 var iViewMatrix=mat4.create();
+
 render.onTriggered=function()
 {
     mat4.invert(iViewMatrix,cgl.vMatrix);
