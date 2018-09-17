@@ -30,7 +30,6 @@
       * [Trigger Ports](dev_creating_ports/dev_ports_trigger/dev_ports_trigger.md)
       * [Array Ports](dev_creating_ports/dev_ports_array/dev_ports_array.md)
       * [Object Ports](dev_creating_ports/dev_ports_object/dev_ports_object.md)
-      * [Object Ports](object_ports/object_ports.md)
       * [Dynamic Ports](dynamic_ports/dynamic_ports.md)
     * [Callbacks](dev_callbacks/dev_callbacks.md)
     * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
