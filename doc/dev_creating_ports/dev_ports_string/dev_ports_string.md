@@ -10,6 +10,9 @@ The following code snippet will create one input and output port of the type `St
 The input string will be passed out of the output port
 
 ```javascript
+//strict mode allows us to write cleaner code
+"use strict";
+
 //Create a input port of the type String
 const inString  = op.inValueString("String in");
 //Create a output port of the type String
