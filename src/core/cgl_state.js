@@ -755,7 +755,11 @@ CGL.Context.prototype._setBlendMode=function(blendMode,premul)
 {
     const gl=this.gl;
 
-
+    if(blendMode==CGL.BLEND_NONE)
+    {
+        // this.gl.disable(this.gl.BLEND);
+    }
+    else
     if(blendMode==CGL.BLEND_ADD)
     {
         if(premul)

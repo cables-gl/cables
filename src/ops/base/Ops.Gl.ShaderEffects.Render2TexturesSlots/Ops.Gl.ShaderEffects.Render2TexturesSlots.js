@@ -45,6 +45,7 @@ render.onTriggered=function()
         {
             boolPorts[i]=ports[i].get();
             if(boolPorts[i]) srcFrag+='outColor'+i+'=col;'.endl();
+                else srcFrag+='outColor'+i+'=vec4(0.0,0.0,1.0,0.0);'.endl();
         }
         currentShader.setDrawBuffers(boolPorts);
 

@@ -258,12 +258,12 @@ CGL.Shader = function(_cgl, _name) {
                 for(var i=0;i<this._drawBuffers.length;i++)
                 {
                     
-                    if(this._drawBuffers[i])
+                    // if(this._drawBuffers[i])
                     {
                         if(count==0)
                         {
                             drawBufferStr+='#define gl_FragColor outColor'+i+''.endl();
-                            drawBufferStr+='#define outColor outColor'+i+''.endl();
+                            // drawBufferStr+='#define outColor outColor'+i+''.endl();
                         }
                         drawBufferStr+='layout(location = '+i+') out vec4 outColor'+i+';'.endl();
                     }

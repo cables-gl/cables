@@ -304,7 +304,7 @@ CGL.Framebuffer2.prototype.renderEnd=function()
             0, 0, this._width, this._height,
             this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST
         );
-        
+
     }
     else
     {
