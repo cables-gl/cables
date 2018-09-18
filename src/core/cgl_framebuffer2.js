@@ -301,7 +301,7 @@ CGL.Framebuffer2.prototype.renderEnd=function()
         for(var i=0;i<this._numRenderBuffers;i++)
         {
             this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex);
-            this._texture.updateMipMap();
+            this._colorTextures[i].updateMipMap();
             this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
         }
     }
