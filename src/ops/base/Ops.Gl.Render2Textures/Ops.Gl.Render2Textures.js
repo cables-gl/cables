@@ -80,6 +80,7 @@ function doRender()
             
             fb=new CGL.Framebuffer2(cgl,8,8,
             {
+                numRenderBuffers:4,
                 isFloatingPointTexture:fpTexture.get(),
                 multisampling:ms,
                 depth:depth.get(),
@@ -99,6 +100,7 @@ function doRender()
         tex0.set( fb.getTextureColorNum(0) );
         tex1.set( fb.getTextureColorNum(1) );
         tex2.set( fb.getTextureColorNum(2) );
+        tex3.set( fb.getTextureColorNum(3) );
         texDepth.set( fb.getTextureDepth() );
         reInitFb=false;
     }

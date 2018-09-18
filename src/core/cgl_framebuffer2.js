@@ -14,13 +14,16 @@ CGL.Framebuffer2=function(cgl,w,h,options)
     this._colorFrameBuffer=null;
     this._colorRenderbuffers=[];
     this._colorAttachments=[];
-    this._numRenderBuffers=3;
+    
 
     this._options=options ||
         {
             "isFloatingPointTexture":false
+
         };
 
+    
+    if(!this._options.hasOwnProperty("numRenderBuffers"))this._options.numRenderBuffers=1;
     if(!this._options.hasOwnProperty("depth"))this._options.depth=true;
     if(!this._options.hasOwnProperty("clear"))this._options.clear=true;
 
@@ -32,6 +35,7 @@ CGL.Framebuffer2=function(cgl,w,h,options)
 
     if(!this._options.hasOwnProperty('filter')) this._options.filter=CGL.Texture.FILTER_LINEAR;
 
+    this._numRenderBuffers=this._options.numRenderBuffers;
     this._colorTextures=[];
 
     for(var i=0;i<this._numRenderBuffers;i++)
