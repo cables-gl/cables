@@ -1,0 +1,81 @@
+{
+    "updated": 1537254476773,
+    "authorName": "pandur",
+    "id": "72f95dbd-7b36-4e88-9d59-1bb2d3f2144e",
+    "created": 1537202890744,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "MSAA",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "use viewport size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "texture width",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "texture height",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Filter",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "HDR",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Depth",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "texture 0"
+            },
+            {
+                "type": "2",
+                "name": "texture 1"
+            },
+            {
+                "type": "2",
+                "name": "texture 2"
+            },
+            {
+                "type": "2",
+                "name": "texture 3"
+            },
+            {
+                "type": "2",
+                "name": "textureDepth"
+            }
+        ],
+        "name": "Ops.Gl.Render2Textures"
+    }
+}
