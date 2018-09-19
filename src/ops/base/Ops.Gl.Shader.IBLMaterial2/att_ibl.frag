@@ -18,7 +18,9 @@ IN mat3 newNormalMatrix;
     #define SAMPLETEX sampleEquirect 
 #endif
 
-UNI sampler2D maskRoughness;
+#ifdef TEX_ROUGHNESS
+    UNI sampler2D maskRoughness;
+#endif
 UNI sampler2D maskReflection;
 #ifdef TEX_DIFFUSE
     UNI sampler2D texDiffuse;
@@ -79,7 +81,7 @@ void main()
     float amountReflect=mulReflection;
     
     #ifdef TEX_ROUGHNESS
-        amountRough=texture2D(maskRoughness,texCoord).r;
+        amountRough=1.0-texture2D(maskRoughness,texCoord).r;
     #endif
 
     #ifdef TEX_REFLECTION
@@ -132,6 +134,11 @@ void main()
     // col.rgb=vec3(opacity);
 
     {{MODULE_COLOR}}
+
+
+    // #ifdef TEX_ROUGHNESS
+    //     col=texture2D(maskRoughness,texCoord);
+    // #endif
 
     outColor=col;
 

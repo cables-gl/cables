@@ -40,7 +40,7 @@ maxDist.set(99999);
 
 inReset.onTriggered=reset;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var eye=vec3.create();
 var vUp=vec3.create();
 var vCenter=vec3.create();
@@ -139,9 +139,8 @@ render.onTriggered=function()
     outYDeg.set( degY );
     outXDeg.set( (px)*180 );
 
-    eye=circlePos( py );
+    circlePosi(eye, py );
     
-
     vec3.add(tempEye, eye, vOffset);
     vec3.add(tempCenter, vCenter, vOffset);
 
@@ -162,19 +161,39 @@ render.onTriggered=function()
     initializing=false;
 };
 
+function circlePosi(vec,perc)
+{
+    const mmul=mul.get();
+    if(radius<minDist.get()*mmul)radius=minDist.get()*mmul;
+    if(radius>maxDist.get()*mmul)radius=maxDist.get()*mmul;
+    
+    outRadius.set(radius*mmul);
+    
+    var i=0,degInRad=0;
+    // var vec=vec3.create();
+    degInRad = 360*perc/2*CGL.DEG2RAD;
+    vec3.set(vec,
+        Math.cos(degInRad)*radius*mmul,
+        Math.sin(degInRad)*radius*mmul,
+        0);
+    return vec;
+}
+
+
 function circlePos(perc)
 {
-    if(radius<minDist.get()*mul.get())radius=minDist.get()*mul.get();
-    if(radius>maxDist.get()*mul.get())radius=maxDist.get()*mul.get();
+    const mmul=mul.get();
+    if(radius<minDist.get()*mmul)radius=minDist.get()*mmul;
+    if(radius>maxDist.get()*mmul)radius=maxDist.get()*mmul;
     
-    outRadius.set(radius*mul.get());
+    outRadius.set(radius*mmul);
     
     var i=0,degInRad=0;
     var vec=vec3.create();
     degInRad = 360*perc/2*CGL.DEG2RAD;
     vec3.set(vec,
-        Math.cos(degInRad)*radius*mul.get(),
-        Math.sin(degInRad)*radius*mul.get(),
+        Math.cos(degInRad)*radius*mmul,
+        Math.sin(degInRad)*radius*mmul,
         0);
     return vec;
 }
@@ -203,22 +222,21 @@ function onmousemove(event)
     else
     if(event.which==2 && allowZooming.get())
     {
-        radius+=(movementY)*0.05;
+        radius+=movementY*0.05;
         eye=circlePos(percY);
     }
     else
     {
         if(allowRotation.get())
         {
-            percX+=(movementX)*0.003;
-            percY+=(movementY)*0.002;
+            percX+=movementX*0.003;
+            percY+=movementY*0.002;
             
             if(restricted.get())
             {
                 if(percY>0.5)percY=0.5;
                 if(percY<-0.5)percY=-0.5;
             }
-            
         }
     }
 
@@ -287,13 +305,12 @@ initialRadius.onValueChange(function()
 initialX.onValueChange(function()
 {
     px=percX=(initialX.get()*Math.PI*2);
-    
 });
 
 initialAxis.onValueChange(function()
 {
     py=percY=(initialAxis.get()-0.5);
-    eye=circlePos( percY );
+    eye=circlePos(percY);
 });
 
 var onMouseWheel=function(event)
@@ -353,7 +370,6 @@ function bind()
     element.addEventListener('touchmove', ontouchmove);
     element.addEventListener('touchstart', ontouchstart);
     element.addEventListener('touchend', ontouchend);
-
 }
 
 function unbind()
@@ -371,8 +387,6 @@ function unbind()
     element.removeEventListener('touchstart', ontouchstart);
     element.removeEventListener('touchend', ontouchend);
 }
-
-
 
 eye=circlePos(0);
 this.setElement(cgl.canvas);

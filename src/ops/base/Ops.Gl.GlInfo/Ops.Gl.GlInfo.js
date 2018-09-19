@@ -6,6 +6,7 @@ const outFragUnis=op.outValue("Max Frag uniforms",gl.getParameter(gl.MAX_FRAGMEN
 const outVertUnis=op.outValue("Max Vert uniforms",gl.getParameter(gl.MAX_VERTEX_UNIFORM_VECTORS));
 const outTexSize=op.outValue("Max Texture Size",gl.getParameter(gl.MAX_TEXTURE_SIZE));
 const outTexUnits=op.outValue("Max Texture Units",gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS));
+const outMSAA=op.outValue("Max MSAA Samples",gl.getParameter(gl.MAX_SAMPLES)||0);
 const outExts=op.outArray("Extensions",gl.getSupportedExtensions());
 const outVendor=op.outValue("Vendor");
 const outRenderer=op.outValue("Renderer");
