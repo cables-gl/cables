@@ -2,8 +2,6 @@
 
 ## Basic Setup
 
-`op` is a pre-defined object which bundles all the functions you need to interact with the world of cables.
-
 ## Adding Ports and Port types
 
 Different port examples below.
@@ -39,12 +37,12 @@ var outObject = op.outObject("Object Out");
 See [Ports](../dev_creating_ports/dev_creating_ports.html)
 
 
-### Op root
+### Op Constructor
 
-All the code you write inside your op will be executed once the patch is added to the patch-view, so all your initialisation-code should be in the root of your patch, e.g.
+The code you write inside your op will be executed once the op is added to the patch-view.
+All your initialisation-code should be in the root of your code, e.g.
 
 ```javascript
-
 var inPort = op.inValue("My Input Port");
 var outPort = op.outValue("My Output Port");
 
@@ -52,9 +50,12 @@ var outPort = op.outValue("My Output Port");
 ...
 ```
 
-If your op requires another library (e.g. `tone.min.js`) the library will already be loaded once your code is executed.
-
 At this state the links between ops / the port-values are not set, yet, we will come to this later…
+
+`op` is a pre-defined object which bundles all the functions you need to interact with the world of cables.
+
+
+## Callbacks and Events
 
 ### port.onChange
 
@@ -170,59 +171,8 @@ var innerRadius = op.addInPort("Inner Radius");
 
 ### Op Documentation
 
-The op documentation should be written in [markdown](https://daringfireball.net/projects/markdown/) language.
-Use the following structure:
-
-```markdown
-# MyOp
-
-*Ops.Users.Username.[OPTIONAL_NAMESPACE].MyOp*  
-
-Some general info about the op – what is it for? What would you use it for? You should make it clear in a few sentences.
-
-## Input
-
-### In Port 1
-
-*Type: Function*  
-This is the description of an input port named `In Port 1`, give a short description or maybe some links to external references.
-If the port only works in a specific range, e.g. `[0, 10]` let other users know.
-
-### In Port 2
-
-...
-
-## Output
-
-### Out Port 1
-
-*Type: Value*  
-This is the description of an output port named `Out Port 1`.
-
-### Out Port 2
-
-...
-
-## Examples
-
-- [Some Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
-- [Another Example](https://cables.gl/ui/#/project/570287b85cac100233a4f85f)
-```
-
-The optional namespace in the op-name can be used to bundle ops together, e.g. for a library – `Ops.Users.Username.MyLib.MyOp`.  `Username` should be written exactly as your registered *cables*-username, so e.g. `johanna`. No need to capitalize it.
-Don’t forget to name the port type, e.g. `In Port 2 [Value]` or `In Port 2 [Function]`. Also It is important that the headlines for the port descriptions match the ones in your code 100%, so we can extract this information and present it  e.g. when hovering over a port.  
-Also please note that behind the value definition (e.g. `*Type: Value*`) two spaces are needed to create a newline (this is default markdown behavior).
-If you want to reference another op in your documentation use links like this: `[Name](../Full.Op.Name/Full.Op.Name.md)`, e.g. `[WireframeMaterial](../Ops.Gl.Shader.WireframeMaterial/Ops.Gl.Shader.WireframeMaterial.md)`.
-
-```javascript
-var innerRadius = op.addInPort( new Port( this, "Inner Radius", OP_PORT_TYPE_VALUE ));
-```
-
-```markdown
-### Inner Radius [Value]
-```
-
-Every op should have an example on how to use it. Just link to the public patches / examples which use your new op. It is good practice to include a minimal example at first which demonstrates the basic usage without all the bells and whistles. In a second one you could show a more advanced use-case.
+- TODO: link to op doc page, e.g. https://cables.gl/op/Ops.TriggerLimiter
+- TODO: show screenshot ?
 
 ### Publishing Ops
 

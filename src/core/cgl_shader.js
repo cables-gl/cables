@@ -467,7 +467,7 @@ CGL.Shader = function(_cgl, _name) {
     this.bind = function() {
         var i = 0;
         CGL.MESH.lastShader = this;
-        CGL.profileShaderBinds++;
+        
 
         if (!this._program || this._needsRecompile) self.compile();
 
@@ -484,6 +484,7 @@ CGL.Shader = function(_cgl, _name) {
         }
 
         if (cgl.currentProgram != this._program) {
+            CGL.profileShaderBinds++;
             cgl.gl.useProgram(this._program);
             cgl.currentProgram = this._program;
         }
