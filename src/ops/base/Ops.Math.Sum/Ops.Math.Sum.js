@@ -8,8 +8,8 @@ function exec()
     if(!isNaN(v)) result.set( v );
 }
 
-number1.onValueChanged=exec;
-number2.onValueChanged=exec;
+number1.onChange=exec;
+number2.onChange=exec;
 
 number1.set(1);
 number2.set(1);

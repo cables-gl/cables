@@ -1,4 +1,3 @@
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION ));
 // op.index=op.addInPort(new Port(op,"mesh index",OP_PORT_TYPE_VALUE,{type:'string'} ));
 op.index=op.inValueInt("mesh index");
@@ -13,7 +12,7 @@ geometryOut.ignoreValueSerialize=true;
 centerPivot.set(false);
 draw.set(true);
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var mesh=null;
 var currentIndex=0;
 
@@ -22,7 +21,8 @@ render.onTriggered=doRender;
 
 function doRender()
 {
-    if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=op.index.get()) reload();
+    // if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=op.index.get()) reload();
+    if(!mesh || currentIndex!=op.index.get()) reload();
     if(draw.get())
     {
         if(mesh) mesh.render(cgl.getShader());
