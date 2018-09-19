@@ -14,10 +14,10 @@ Now add the following code:
 ```javascript
 var myInPort = op.inValue("Input");
 ```
-We have now created a new variable of the type port. Lets break this line of code down:
+We have now created a new variable of the type value. Lets break this line of code down:
 - **var** creates a new variable
 - **myInPort** is the name of the variable, you could write anything here
-- **op** references to the operator itself **.inValue("Input")** means get the value coming into the op
+- **op** references to the operator itself **.inValue("Input")** creates an input port of the type value
 
 Don't worry if your not following this all right now, it will all make much more sense later on :)
 
@@ -34,12 +34,14 @@ You now see your newly created op with one input- and one output-port:
 
 ![](img/hello-op-1.png)
 
-Let’s add some logic to the op – whenever the input-port `myInPort` changes (has a new value) we want to react on it and set the output port `myOutPort` accordingly. For now we just pass the input value through to the output port.
+Let’s add some logic to the op – whenever the input-port `myInPort` changes (has a new value) we want to  set the output port `myOutPort` accordingly. For now we just pass the input value through to the output port.
 
-To get notified when the input-port has a new value we need the function `onChange` which gets called every time there is a new value on the `myInPort` port. Add the following lines below:
+To get notified when the input-port has a new value we need the function `onChange` which gets called every time there is a new value on the `myInPort` port. 
+Add the following lines below:
 
 ```javascript
-myInPort.onChange = function() {
+myInPort.onChange = function() 
+{
   	var inputValue = myInPort.get(); // get the new value from the input port
     myOutPort.set(inputValue); // set the output value
 };
@@ -55,13 +57,14 @@ Your op-code should look like this now:
 var myInPort = op.inValue("Input");
 var myOutPort = op.outValue("Output");
 
-myInPort.onChange = function() {
+myInPort.onChange = function() 
+{
   	var inputValue = myInPort.get(); 
     myOutPort.set(inputValue);
 };
 ```
 
-Now let’s add some logic, every time the input value changes we want the output value to be two times the input value, all we have to do is to add a `2*`.
+Now let’s add some logic, every time the input value changes we want the output value to be multiplied by two, all we have to do is to add a `2*`.
 
 Change this:  
 
@@ -72,7 +75,7 @@ myOutPort.set(inputValue);
 to:  
 
 ```javascript
-myOutPort.set(2*inputValue);
+myOutPort.set(2 * inputValue);
 ```
 
 ![Op Settings (multiply by 2)](img/op-settings-mul.png)
