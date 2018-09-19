@@ -1,6 +1,6 @@
 # Array Ports
 
-This page will explain how to create an input and ouput port of the type 'Array'<br>
+This page will explain how to create an input and output port of the type 'Array'<br>
 Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
 A Javascript array can contain either simple values, arrays or objects<br>
@@ -8,7 +8,9 @@ Arrays are used to store multiple values in a single variable.
 
 E.g. `[1, 2, 3]`, `[[1, 2], [3, 4]]`, `[{"one": 2}, {"three": 4}]`
 
-## TODO - add screenshot of the INSPECT ICON to view array contents
+If you click the op and then the inspect icon ![Button](../img/creating_ports_array_inspect_icon_zoomed.png) you can see the array contents
+<br>
+![Button](../img/creating_ports_array_inspect_icon.png)
 
 ```javascript
 //strict mode allows us to write cleaner code

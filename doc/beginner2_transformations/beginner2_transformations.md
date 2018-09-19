@@ -5,16 +5,14 @@ This is part 2 of the beginner tutorial series. Before you proceed you should ha
 To transform an object in 3D space we need the **transform** operator.  
 To insert an operator between two existing ops you can press the **circle** in the middle of the cable. If the circle is not showing up, you have to select one of the ops first.
 
-![](img/beginner_circle_trans1.png)
-
 When you click the circle the `Select Op`-dialog shows up. Now type `transform` and select `Ops.Gl.Matrix.Transform` and press enter.  
 The new op should appear between the two existing ops:  
 
-![](img/beginner_circle_trans2.png)
+![](img/beginner2_transformations_insert_transform.gif)
 
 Play around with the parameters of the transform op. You can now change the position, scaling and rotation of the circle:  
 
-![](img/beginner_circle_transform.png)
+![](img/beginner2_transformations_circle_transform.gif)
 
 ## Part 3
 

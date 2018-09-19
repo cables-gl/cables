@@ -1,6 +1,6 @@
 # String ports
 
-This page will explain how to create an input and ouput port of the type 'String'<br>
+This page will explain how to create an input and output port of the type 'String'<br>
 Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
 JavaScript strings are used for storing and manipulating text

@@ -19,7 +19,7 @@ To draw a circle, we need two operators:
 
 - To create a new operator and automatically connect it to another op you can pull the yellow output port on the left side with your mouse (drag it out of the operator and release your mouse button).
 
-![](img/create_op_pull.gif)
+![](img/create_main_loop_circle.gif)
 
 - The `Select Operator`-dialog will appear
 - Type `circle`, now the entry [Ops.Gl.Meshes.Circle](../ops/Ops.Gl.Meshes.Circle/Ops.Gl.Meshes.Circle.md) should be selected
@@ -31,7 +31,7 @@ Now it should look like this:
 
 ## 3. Parameters
 
-- The renderer canvas (on the right side) should show a circle now
+- The renderer canvas (on the right side) now shows a circle
 - The parameter panel shows all parameters to tweak the circle
 - Play around with the parameters, for example drag the slider `innerradius`
 
