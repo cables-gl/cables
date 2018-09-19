@@ -1,0 +1,19 @@
+{
+    "summary": "The ArrayMath op performs the following math operations on two arrays:",
+    "docs": {
+        "ports": [
+            {
+                "name": "array 0",
+                "text": "First array input"
+            },
+            {
+                "name": "array 1",
+                "text": "2nd array input"
+            },
+            {
+                "name": "Array result",
+                "text": "Resulting array"
+            }
+        ]
+    }
+}
