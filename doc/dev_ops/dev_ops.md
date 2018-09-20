@@ -96,3 +96,21 @@ If your op has one main-port which is needed to trigger it, call it `Execute`, i
 var innerRadius = op.addInPort("Inner Radius");
 ```
 
+# Op Documentation
+
+Every op should have an example on how to use it. Just link to the public patches / examples which use your new op. It is good practice to include a minimal example at first which demonstrates the basic usage without all the bells and whistles. In a second one you could show a more advanced use-case.
+
+Click this [link](https://cables.gl/op/Ops.Trigger.TriggerLimiter) for an example of how you can write clear documentation for your new op.
+
+When you create a new op it automatically creates a documentation page for you. Click your op and then click the **view documentation** link in the UI pane to browse to the new page.<br>
+![Button](img/dev_ops_view_documentation_link.png)
+
+Scroll down the page and then click **edit this document** to create all of your documentation for your new op.<br>
+![Button](img/dev_ops_edit_this_document.png)
+
+You can now fill in all the details and documentation for your new op !
+
+### Publishing Ops
+
+If you made an op and think it would be useful for other users get in touch with the cables-staff (via Slack or the [cables forum](https://forum.cables.gl/)).
+

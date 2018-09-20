@@ -9,7 +9,54 @@ To be  informed of port-value-changes, function-triggers (also see [Ports](../de
 
 *Shortcut - click on an op and press the 'e' key*  
 <br>
+## Port Callbacks
 
+### onChange
+
+Can be implemented for the following port types:
+
+**Value
+String
+Boolean
+Array
+Object**
+
+Every time a connected op calls the `myOutPort.set(...)` method, the in-port-callback `onChange` is called.
+
+```javascript
+myPort.onChange = function() 
+{
+  op.log('value of myPort changed to: ', myPort.get());
+};
+```
+
+### onTrigger
+
+Can be implemented for the port type **trigger**.  
+
+Every time a connected op calls `myInputPort.onTriggered()` the connected in-ports’ `onTrigger` callback is called.
+
+If your op needs to update its values continuously it should have an input port of type **trigger** , which you can then connect to the [MainLoop](https://cables.gl/op/Ops.Gl.MainLoop) 
+
+
+
+### onLinkChange
+
+Gets called whenever a port is connected / disconnected. It may not have a value yet.
+
+```javascript
+myPort.onLinkChanged = function() 
+{
+	if( myPort.isLinked() ) 
+	{
+		// port connected  
+	} 
+	else 
+	{
+		// port disconnected
+	}
+};
+```
 ## General Op Callbacks
 
 ### init
@@ -91,53 +138,4 @@ op.onResize( function()
 	// adapt to the new size
 });
 ```
-<br>
 
-## Port Callbacks
-
-### onChange
-
-Can be implemented for the following port types:
-
-**Value
-String
-Boolean
-Array
-Object**
-
-Every time a connected op calls the `myOutPort.set(...)` method, the in-port-callback `onChange` is called.
-
-```javascript
-myPort.onChange = function() 
-{
-  op.log('value of myPort changed to: ', myPort.get());
-};
-```
-
-### onTrigger
-
-Can be implemented for the port type **trigger**.  
-
-Every time a connected op calls `myInputPort.onTriggered()` the connected in-ports’ `onTrigger` callback is called.
-
-If your op needs to update its values continuously it should have an input port of type **trigger** , which you can then connect to the [MainLoop](https://cables.gl/op/Ops.Gl.MainLoop) 
-
-
-
-### onLinkChange
-
-Gets called whenever a port is connected / disconnected. It may not have a value yet.
-
-```javascript
-myPort.onLinkChanged = function() 
-{
-	if( myPort.isLinked() ) 
-	{
-		// port connected  
-	} 
-	else 
-	{
-		// port disconnected
-	}
-};
-```

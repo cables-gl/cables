@@ -34,7 +34,6 @@
       * [Dynamic Ports](dev_creating_ports/dev_dynamic_ports/dev_dynamic_ports.md)
     * [Callbacks](dev_callbacks/dev_callbacks.md)
     * [Gui/UI attributes](dev_gui_ui_attributes/dev_gui_ui_attributes.md)
-    * [Op Documentation](dev_op_documentation/dev_op_documentation.md)
     * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
     * [Writing Shaders](shader/shader.md)
 * [FAQ](chapter_readmes/faq/readme.md)

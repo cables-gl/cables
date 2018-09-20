@@ -1,7 +1,7 @@
 # Trigger Ports
 
-This page will explain how to create an input and output port of the type`Trigger`and how to make a `Button` in the UI pane of the op which can be clicked with the mouse to trigger an event
-<br>
+This page will explain how to create an input and output port of the type`Trigger`and how to make a `Button` in the UI pane of the op which can be clicked with the mouse to trigger an event<br>
+![Button](../img/creating_ports_trigger_port_color.png) <br>
 
 Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 

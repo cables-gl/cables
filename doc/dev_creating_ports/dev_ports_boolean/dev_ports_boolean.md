@@ -1,6 +1,7 @@
 # Boolean ports
 
 This page will explain how to create an input and output port of the type 'Boolean'<br>
+![Button](../img/creating_ports_boolean_port_color.png) <br>
 Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
 A JavaScript Boolean represents one of two values: true or false
