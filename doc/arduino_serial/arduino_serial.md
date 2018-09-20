@@ -21,7 +21,7 @@ If you open the Arduino Serial monitor (by pressing `cmd + shift + m`) you shoul
 
 ![](img/arduino-serial-monitor.png)
 
-Okay, now we need to download _serial-port-json-server_, a little helper tool to send the Serial data to your cables patch. Go to the [release page](https://github.com/chilipeppr/serial-port-json-server/releases), find the right version for your operating system and download it. If there is none for the latest release, just pick the release prior to that.
+Now we need to download _serial-port-json-server_, a little helper tool to send the Serial data to your cables patch. Go to the [release page](https://github.com/chilipeppr/serial-port-json-server/releases), find the right version for your operating system and download it. If there is none for the latest release, just pick the release prior to that.
 
 Once downloaded extract the zip-file, go into the extracted folder and you should see a file called `serial-port-json-server` / `serial-port-json-server.exe`.  Run this file in your Terminal / command prompt. On mac you do this by opening up Terminal-app, then `cd` into the directory, e.g.:
 

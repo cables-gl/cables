@@ -5,8 +5,7 @@ This page will explain how to create an input and output port of the type`Trigge
 
 Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
-Trigger ports are used to trigger another op. If you have a patch that creates visuals then you need to add the`MainLoop op`<br>
-which has a `trigger port`. This updates all connected ports 60 times a second.
+Trigger ports are used to trigger another op. If you have a patch that creates visuals then you need to add the`MainLoop op`which has a `trigger port`. This updates all connected ports 60 times a second.
 Trigger ports can also be triggered under certain conditions <br>
 For example the `Mouse op` sends a trigger out of the `click port` once a user has clicked in the preview pane
 
@@ -34,3 +33,5 @@ function update()
     outTrigger.trigger();    
 }
 ```
+
+Follow this [link](../../dev_callbacks/dev_callbacks.md) for more information on Callbacks
