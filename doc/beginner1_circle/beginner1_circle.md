@@ -12,7 +12,7 @@ To draw a circle, we need two operators:
 
 - To create an operator press `[esc]` – the `Select Operator`-dialog shows up
 - Now type `Main`
-- The first entry in the list should be [Ops.Gl.MainLoop](../ops/Ops.Gl.MainLoop/Ops.Gl.MainLoop.md)
+- The first entry in the list should be [Ops.Gl.MainLoop](https://cables.gl/op/Ops.Gl.MainLoop)
 - Press `[enter]` or click the `+` button to create the operator
 
 ## 2. Add The Circle Operator
@@ -22,7 +22,7 @@ To draw a circle, we need two operators:
 ![](img/create_main_loop_circle.gif)
 
 - The `Select Operator`-dialog will appear
-- Type `circle`, now the entry [Ops.Gl.Meshes.Circle](../ops/Ops.Gl.Meshes.Circle/Ops.Gl.Meshes.Circle.md) should be selected
+- Type `circle`, now the entry [Ops.Gl.Meshes.Circle](https://cables.gl/op/Ops.Gl.Meshes.Circle) should be selected
 - Press `[enter]` or click the `+` button to create it
 
 Now it should look like this:  

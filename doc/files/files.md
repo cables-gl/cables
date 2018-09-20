@@ -17,7 +17,6 @@ cables automatically converts files into a more readable web format which can th
 
 To convert a file upload it, then click it in the file browser. on the right you can see information about this file the converters are listed.
 
-![](img/fileconvertes.png)
 
 
 ### automatic 3d file Format conversions:
@@ -26,7 +25,7 @@ To convert a file upload it, then click it in the file browser. on the right you
 
 this is done using [assimp2json](https://github.com/acgessler/assimp2json)
 
-### pointcloud
+### pointcloud - EXAMPLE PATCH WONT LOAD !
 
 file ending: `.pc.txt`
 
