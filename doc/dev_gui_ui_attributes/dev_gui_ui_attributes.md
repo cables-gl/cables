@@ -1,12 +1,6 @@
 # GUI/UI attributes
 
-## GUI
-
-**Tip: `op` is a reference to the op itself and may not be available yet, if you get an error add the line `var op = this;` to the top of your op-definition.**
-
-<br>
-
-### UI Attributes
+## GUI/UI Attributes
 
 Ui attributes of an op can be set to give the user warnings and give visual feedback about things that may require their attention.
 <br>
