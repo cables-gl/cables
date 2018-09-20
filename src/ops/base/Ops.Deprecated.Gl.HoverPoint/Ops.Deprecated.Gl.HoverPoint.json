@@ -54,5 +54,9 @@
         ],
         "name": "Ops.Gl.HoverPoint"
     },
-    "summary": "create a html element at the current coordinates and use mouse events"
+    "summary": "create a html element at the current coordinates and use mouse events",
+    "updated": 1537198631077,
+    "authorName": "pandur",
+    "id": "22f94d76-b597-40a6-9e32-dbe9af8e37ab",
+    "created": 1537198631081
 }

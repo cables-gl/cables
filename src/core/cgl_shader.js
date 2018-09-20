@@ -29,6 +29,7 @@ CGL.Shader = function(_cgl, _name) {
 
     this._program = null;
     this._uniforms = [];
+    this._drawBuffers=[true];
     var defines = [];
     this._needsRecompile = true;
     var infoLog = '';
@@ -240,6 +241,37 @@ CGL.Shader = function(_cgl, _name) {
 
         if (self.glslVersion == 300)
         {
+            var drawBufferStr = '';
+            var count=0;
+            
+
+            if(this._drawBuffers.length==1)
+            {
+                // drawBufferStr+='#define gl_FragColor outColor'+i+''.endl();
+                drawBufferStr='out vec4 outColor;'.endl();
+                drawBufferStr+='#define gl_FragColor outColor'.endl();
+            }
+            else
+            {
+                var count=0;
+                drawBufferStr+='vec4 outColor;'.endl();
+                for(var i=0;i<this._drawBuffers.length;i++)
+                {
+                    
+                    // if(this._drawBuffers[i])
+                    {
+                        if(count==0)
+                        {
+                            drawBufferStr+='#define gl_FragColor outColor'+i+''.endl();
+                            // drawBufferStr+='#define outColor outColor'+i+''.endl();
+                        }
+                        drawBufferStr+='layout(location = '+i+') out vec4 outColor'+i+';'.endl();
+                    }
+                    count++;
+                }
+            }
+            
+
             vs = '#version 300 es'
                 .endl() + '// '
                 .endl() + '// vertex shader '+name
@@ -261,8 +293,8 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '#define texture2D texture'
                 .endl() + '#define IN in'
                 .endl() + '#define UNI uniform'
-                .endl() + 'out vec4 outColor;'
-                .endl() + '#define gl_FragColor outColor'
+                .endl() + drawBufferStr
+                
                 .endl();
 
         } else {
@@ -435,7 +467,7 @@ CGL.Shader = function(_cgl, _name) {
     this.bind = function() {
         var i = 0;
         CGL.MESH.lastShader = this;
-        CGL.profileShaderBinds++;
+        
 
         if (!this._program || this._needsRecompile) self.compile();
 
@@ -452,6 +484,7 @@ CGL.Shader = function(_cgl, _name) {
         }
 
         if (cgl.currentProgram != this._program) {
+            CGL.profileShaderBinds++;
             cgl.gl.useProgram(this._program);
             cgl.currentProgram = this._program;
         }
@@ -601,6 +634,11 @@ CGL.Shader = function(_cgl, _name) {
 
 };
 
+
+CGL.Shader.prototype.setDrawBuffers = function(arr) {
+    this._drawBuffers=arr;
+    this._needsRecompile=true;
+};
 
 CGL.Shader.prototype.getUniforms = function() {
     return this._uniforms;

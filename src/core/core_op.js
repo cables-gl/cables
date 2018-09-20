@@ -160,22 +160,22 @@ CABLES.Op = function()
     };
 
     /**
-     * create a function/trigger input port
-     * @name CABLES.Op#inFunction
+     * create a trigger input port
+     * @name CABLES.Op#inTrigger
      * @param {string} name
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inFunction=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inFunction=CABLES.Op.prototype.inTrigger=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
 
     /**
-     * create a function input  port with an UI trigger button
-     * @name CABLES.Op#inFunctionButton
+     * create a trigger input  port with an UI trigger button
+     * @name CABLES.Op#inTriggerButton
      * @param {string} name
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inFunctionButton=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION,{"display":"button"})); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inFunctionButton=CABLES.Op.prototype.inTriggerButton=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_FUNCTION,{"display":"button"})); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create a number value input port
@@ -298,13 +298,13 @@ CABLES.Op = function()
 
 
     /**
-     * create output function port
-     * @name CABLES.Op#outFunction
+     * create output trigger port
+     * @name CABLES.Op#outTrigger
      * @param {string} name
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outFunction=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outFunction=CABLES.Op.prototype.outTrigger=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create output value port

@@ -42,7 +42,7 @@ void main()
 {
     {{MODULE_BEGIN_FRAG}}
 
-    vec3 col=vec3(0.0);
+    vec4 col=vec4(0.0);
     vec3 normal = normalize(normalMatrix*norm);
   
     #ifdef HAS_TEXTURE_NORMAL
@@ -62,13 +62,14 @@ void main()
         vec3 newColor=lambert * light.color.rgb * light.mul;
         newColor*=getfallOff(light, length(lightModelDiff));
 
-        col+=vec3(light.ambient);
-        col+=newColor;
+        col.rgb+=vec3(light.ambient);
+        col.rgb+=newColor;
     }
     
-    col*=vec3(r,g,b);
+    col.rgb*=vec3(r,g,b);
+    col.a=a;
     
     {{MODULE_COLOR}}
-
-    outColor=vec4(col,a);
+    
+    outColor=col;
 }

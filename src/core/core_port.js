@@ -230,12 +230,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             if(this.type==OP_PORT_TYPE_OBJECT && this.value && this.value.tex){}
                 else obj.value=this.value;
         }
-
         if(this._animated) obj.animated=true;
         if(this.anim) obj.anim=this.anim.getSerialized();
-
         if(this.uiAttribs.display=='file')  obj.display=this.uiAttribs.display;
-
         if(this.direction==PORT_DIR_IN && this.links.length>0)
         {
             obj.links=[];
@@ -491,10 +488,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         _uiActiveState=onoff;
         if(this.onUiActiveStateChange)this.onUiActiveStateChange();
     };
-
-
-
-
 }
 
 /**
@@ -505,9 +498,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 CABLES.Port.portTypeNumberToString = function(type) {
    if(type == OP_PORT_TYPE_VALUE) return 'value';
    else if(type == OP_PORT_TYPE_FUNCTION) return 'function';
-   else if(type == OP_PORT_TYPE_OBJECT)  return 'object';
-   else if(type == OP_PORT_TYPE_ARRAY)  return 'array';
-   else if(type == OP_PORT_TYPE_DYNAMIC)  return 'dynamic';
+   else if(type == OP_PORT_TYPE_OBJECT) return 'object';
+   else if(type == OP_PORT_TYPE_ARRAY) return 'array';
+   else if(type == OP_PORT_TYPE_DYNAMIC) return 'dynamic';
    else return 'unknown';
 };
 

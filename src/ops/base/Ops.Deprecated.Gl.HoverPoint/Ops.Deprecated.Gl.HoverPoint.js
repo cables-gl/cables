@@ -39,7 +39,7 @@ inText.onChange=updateText;
 pPointSize.onChange=function()
 {
     pointSize=pPointSize.get();
-    for(i=0;i<elements.length;i++) 
+    for(var i=0;i<elements.length;i++) 
     {
         if(elements[i])
         {

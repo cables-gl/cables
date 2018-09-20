@@ -31,10 +31,8 @@ var srcHeadFrag=attachments.pixelnoise_frag
     .endl();
 
 var srcBodyFrag=''
-    .endl()+'   col.rgb -= MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
-
+    .endl()+'col.rgb -= MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
     .endl();
-
 
 var moduleFrag=null;
 var moduleVert=null;

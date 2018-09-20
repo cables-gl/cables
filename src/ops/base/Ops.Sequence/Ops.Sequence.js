@@ -1,16 +1,13 @@
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-
-var exes=[];
-var triggers=[];
-
-var triggerAll=function()
-{
-    for(var i=0;i<triggers.length;i++) triggers[i].trigger();
-};
-
+const exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+const exes=[];
+const triggers=[];
+const num=16;
 exe.onTriggered=triggerAll;
 
-var num=16;
+function triggerAll()
+{
+    for(var i=0;i<triggers.length;i++) triggers[i].trigger();
+}
 
 for(var i=0;i<num;i++)
 {

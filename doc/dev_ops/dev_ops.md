@@ -2,8 +2,6 @@
 
 ## Basic Setup
 
-`op` is a pre-defined object which bundles all the functions you need to interact with the world of cables.
-
 ## Adding Ports and Port types
 
 Different port examples below.
@@ -46,12 +44,12 @@ var outObject = op.outObject("Object Out");
 See [Ports](../dev_creating_ports/dev_creating_ports.md)
 
 
-### Op root
+### Op Constructor
 
-All the code you write inside your op will be executed once the patch is added to the patch-view, so all your initialisation-code should be in the root of your patch, e.g.
+The code you write inside your op will be executed once the op is added to the patch-view.
+All your initialisation-code should be in the root of your code, e.g.
 
 ```javascript
-
 var inPort = op.inValue("My Input Port");
 var outPort = op.outValue("My Output Port");
 
@@ -59,9 +57,12 @@ var outPort = op.outValue("My Output Port");
 ...
 ```
 
-If your op requires another library (e.g. `tone.min.js`) the library will already be loaded once your code is executed.
-
 At this state the links between ops / the port-values are not set, yet, we will come to this later…
+
+`op` is a pre-defined object which bundles all the functions you need to interact with the world of cables.
+
+
+## Callbacks and Events
 
 ### port.onChange
 
@@ -94,5 +95,4 @@ If your op has one main-port which is needed to trigger it, call it `Execute`, i
 ```javascript
 var innerRadius = op.addInPort("Inner Radius");
 ```
-
 
