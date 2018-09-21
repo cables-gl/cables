@@ -20,5 +20,9 @@
             }
         ],
         "name": "Ops.Exp.Ui.DisplayValue"
+    },
+    "summary": "show a value in the patchfield",
+    "docs": {
+        "ports": []
     }
 }

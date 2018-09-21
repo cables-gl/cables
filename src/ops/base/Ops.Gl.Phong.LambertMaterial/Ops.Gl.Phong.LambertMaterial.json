@@ -47,5 +47,9 @@
             }
         ],
         "name": "Ops.Gl.Phong.LambertMaterial"
+    },
+    "summary": "simple shaded material",
+    "docs": {
+        "ports": []
     }
 }

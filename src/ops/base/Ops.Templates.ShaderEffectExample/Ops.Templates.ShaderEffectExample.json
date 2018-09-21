@@ -22,5 +22,9 @@
             }
         ],
         "name": "Ops.Templates.ShaderEffectExample"
+    },
+    "summary": "shader effect example template",
+    "docs": {
+        "ports": []
     }
 }
