@@ -1,0 +1,21 @@
+{
+    "updated": 1537363022644,
+    "authorName": "pandur",
+    "id": "bb61edc5-dfb5-4a7b-95b4-0b3acfe8562d",
+    "created": 1519814308885,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.Array3xOrderByDistance"
+    }
+}
