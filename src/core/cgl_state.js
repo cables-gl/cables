@@ -130,7 +130,7 @@ CGL.Context = function() {
     this.beginFrame = function() {
 
         if (CABLES.UI) {
-            gui.preview.render();
+            gui._texturePreviewer.render();
             if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
         }
 

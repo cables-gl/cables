@@ -44,6 +44,7 @@ function initEffect()
 
     tex=new CGL.Texture(cgl,
         {
+            "name":"image compose",
             "isFloatingPointTexture":fpTexture.get(),
             "filter":selectedFilter,
             "wrap":selectedWrap,

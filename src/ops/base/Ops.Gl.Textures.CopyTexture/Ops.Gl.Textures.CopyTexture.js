@@ -49,6 +49,7 @@ function initEffect()
 
     tex=new CGL.Texture(cgl,
         {
+            "name":"copytexture",
             "isFloatingPointTexture":fpTexture.get(),
             "filter":selectedFilter,
             "wrap":selectedWrap,

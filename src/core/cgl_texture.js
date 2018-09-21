@@ -19,6 +19,7 @@ CGL.Texture=function(__cgl,options)
 
     this._cgl=__cgl;
     this.tex = this._cgl.gl.createTexture();
+    this.id=CABLES.uuid();
     this.width = 0;
     this.height = 0;
     this.flip = true;
@@ -89,6 +90,7 @@ CGL.Texture.prototype.clone=function()
 {
     var newTex=new CGL.Texture(this._cgl,
         {
+            "name":this.name,
             "filter":this.filter,
             "wrap":this.wrap,
             "textureType":this.textureType,

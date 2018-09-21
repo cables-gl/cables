@@ -46,7 +46,7 @@ CABLES.Op = function()
         this.name=this.name.split('.')[this.name.split('.').length-1]
     }
 
-    this.id=CABLES.generateUUID();
+    this.id=arguments[2]||CABLES.uuid();
     this.onAddPort=null;
     this.onCreate=null;
     this.onResize=null;
@@ -652,7 +652,6 @@ CABLES.Op = function()
         return null;
     };
 
-
     CABLES.Op.prototype.cleanUp=function()
     {
         if(this._instances)
@@ -664,7 +663,6 @@ CABLES.Op = function()
             this._instances.length=0;
         }
     };
-
 
     CABLES.Op.prototype.instanced=function(triggerPort)
     {
