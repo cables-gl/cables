@@ -22,5 +22,9 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.VertexNumberLimit"
+    },
+    "summary": "only draw the first X vertices of a mesh",
+    "docs": {
+        "ports": []
     }
 }

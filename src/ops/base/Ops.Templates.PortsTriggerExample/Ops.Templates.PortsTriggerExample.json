@@ -1,0 +1,29 @@
+{
+    "updated": 1537198497518,
+    "authorName": "andro",
+    "id": "10728b97-ea46-4491-bb66-e6ad01289001",
+    "created": 1537174673069,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "1",
+                "name": "Press me"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger out"
+            }
+        ],
+        "name": "Ops.User.andro.FunctionPortExample"
+    },
+    "summary": "Is a template for creating Trigger ports",
+    "docs": {
+        "ports": []
+    }
+}

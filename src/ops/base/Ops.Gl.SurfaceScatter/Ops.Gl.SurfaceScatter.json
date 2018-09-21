@@ -56,5 +56,9 @@
             }
         ],
         "name": "Ops.Gl.SurfaceScatter"
+    },
+    "summary": "scatter object on the surface of a mesh",
+    "docs": {
+        "ports": []
     }
 }

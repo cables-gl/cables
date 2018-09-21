@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.getModelMatrix"
+    },
+    "summary": "get current modelmatrix",
+    "docs": {
+        "ports": []
     }
 }

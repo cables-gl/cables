@@ -20,5 +20,9 @@
             }
         ],
         "name": "Ops.Gl.Array3xTransformInstanced"
+    },
+    "summary": "draw many instances of a geometry at coordinates from an array",
+    "docs": {
+        "ports": []
     }
 }

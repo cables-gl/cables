@@ -1,0 +1,1 @@
+draws a gradient from white to black back to white over distance of the depth buffer
