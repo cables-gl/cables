@@ -40,7 +40,7 @@ If your op needs to update its values continuously it should have an input port 
 
 
 
-### onLinkChange
+### onLinkChanged
 
 Gets called whenever a port is connected / disconnected. It may not have a value yet.
 
