@@ -16,7 +16,7 @@ var simTexPos=new CGL.Texture(cgl,{isFloatingPointTexture:true});
 simTexPos.setSize(1024,1024);
 simTexPosOut.set(simTexPos);
 
-
+var uniTexture=null;
 // position
 
 var srcHeadVert=''
@@ -27,7 +27,7 @@ var srcHeadVert=''
 
 var srcBodyVert=''
     .endl()+'pos.rgb=texture2D( {{mod}}_texturePos, vec2(pos.r,pos.g)).rgb;'
-    .endl()+'psMul*=pos.a;'
+    // .endl()+'psMul*=pos.a;'
 
     // .endl()+'pos.g+=random(texCoord);'
     .endl();
@@ -99,7 +99,8 @@ setPoints();
 function setPoints()
 {
     geom.vertices.length=Math.round(numPoints.get())*3;
-    geom.texCoords.length=Math.round(numPoints.get())*2;
+    var texCoords=[];
+    texCoords.length=Math.round(numPoints.get())*2;
 
     var sq=Math.round( Math.sqrt(numPoints.get()) );
     if(sq>1024)sq=1024;
@@ -113,14 +114,14 @@ function setPoints()
             geom.vertices[index*3+1]=j/1024;
             geom.vertices[index*3+2]=0;
 
-            geom.texCoords[index*2]=0;
-            geom.texCoords[index*2+1]=0;
+            texCoords[index*2]=0;
+            texCoords[index*2+1]=0;
 
         }
     }
 
     geom.setPointVertices(geom.vertices);
-    geom.texCoords=geom.texCoords;
+    geom.setTexCoords(texCoords);
 
     mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
     mesh.addVertexNumbers=true;

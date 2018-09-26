@@ -26,5 +26,9 @@
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "e8d71a40-5bb9-48e5-a857-fd2585610352",
-    "created": 1509777194839
+    "created": 1509777194839,
+    "summary": "adds shadow to a material",
+    "docs": {
+        "ports": []
+    }
 }

@@ -1,9 +1,8 @@
 {
-    "updated": 1521364537893,
-    "author": "55d744634cdc152216eb9aad",
+    "updated": 1537934048184,
     "authorName": "pandur",
-    "id": "a6c64e98-d3b2-4dd5-abb6-5dd913880d2d",
-    "created": 1508448027429,
+    "id": "e9680fab-2ade-4571-801c-ce6d33de4314",
+    "created": 1519124253795,
     "layout": {
         "portsIn": [
             {
@@ -12,46 +11,51 @@
             },
             {
                 "type": "0",
-                "name": "Size",
+                "name": "time",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Strength",
+                "name": "Size Y",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smooth",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Keep Min Size",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "x",
+                "name": "Sin Y",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y",
+                "name": "Size Z",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z",
+                "name": "Sin Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Lifetime",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Points",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
-                "name": "trigger"
+                "type": "2",
+                "name": "SimPosTex"
             }
         ],
-        "name": "Ops.Exp.Gl.ShaderEffects.AreaScaler"
+        "name": "Ops.Gl.PointSpray"
     }
 }

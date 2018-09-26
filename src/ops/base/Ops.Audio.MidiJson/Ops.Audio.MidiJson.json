@@ -1,5 +1,5 @@
 {
-    "updated": 1504965785045,
+    "updated": 1537933573891,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "695aef03-8ab0-48a1-b3ee-2c6c01a21640",
@@ -12,13 +12,15 @@
             },
             {
                 "type": "0",
-                "name": "Time"
+                "name": "Time",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Num Tracks"
+                "name": "Num Tracks",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -33,6 +35,10 @@
                 "name": "Velocity"
             }
         ],
-        "name": "Ops.Exp.MidiJson"
+        "name": "Ops.Audio.MidiJson"
+    },
+    "summary": "read MIDI information at time x",
+    "docs": {
+        "ports": []
     }
 }

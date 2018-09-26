@@ -55,17 +55,8 @@ render.onTriggered=function()
 {
     cgl.setShader(shader);
 
-    if(texture0.get())
-    {
-        /* --- */cgl.setTexture(0,texture0.get().tex);
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture0.get().tex);
-    }
-
-    if(texture1.get())
-    {
-        /* --- */cgl.setTexture(1, texture1.get().tex);
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture1.get().tex);
-    }
+    if(texture0.get())cgl.setTexture(0,texture0.get().tex);
+    if(texture1.get())cgl.setTexture(1,texture1.get().tex);
 
     trigger.trigger();
 

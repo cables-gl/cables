@@ -1,5 +1,3 @@
-op.name='stereoscopic';
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var pose=op.addInPort(new Port(op,"pose matrix",OP_PORT_TYPE_OBJECT));
 var eyeLeft=op.addInPort(new Port(op,"Eye Left",OP_PORT_TYPE_OBJECT));
@@ -11,14 +9,13 @@ var tex1=op.addOutPort(new Port(op,"texture right",OP_PORT_TYPE_TEXTURE,{preview
 
 
 var cgl=op.patch.cgl;
-var w=1025;
-var h=1025;
 
 var fb=[new CGL.Framebuffer2(cgl,w,h),new CGL.Framebuffer2(cgl,w,h)];
 tex0.set( fb[0].getTextureColor() );
 tex1.set( fb[1].getTextureColor() );
 
-
+var w=1024;
+var h=1024;
 
 
 function renderEye(eye)

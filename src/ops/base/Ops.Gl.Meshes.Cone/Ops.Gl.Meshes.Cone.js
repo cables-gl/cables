@@ -115,6 +115,9 @@ function generateCone(base,height,stacks,slices)
         geom.vertexNormals[idx  ] =  0;
         geom.vertexNormals[idx+1] =  0;
         geom.vertexNormals[idx+2] = -1;
+
+
+
     }
 
     /* each stack */

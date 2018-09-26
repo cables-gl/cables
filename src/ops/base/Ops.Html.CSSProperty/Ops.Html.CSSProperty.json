@@ -1,33 +1,40 @@
 {
-    "updated": 1518039328773,
+    "updated": 1537795740138,
     "authorName": "pandur",
-    "id": "16aaf067-a92d-4e8d-9746-117e0ccc52bf",
-    "created": 1517922958904,
+    "id": "559d97d5-ea5c-44ef-92b0-cef57672f96d",
+    "created": 1537794937235,
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Style"
+                "type": "2",
+                "name": "Element"
             },
             {
                 "type": "0",
-                "name": "Property"
+                "name": "Property",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value Suffix"
+                "name": "Value Suffix",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Style Result"
+                "type": "2",
+                "name": "HTML Element"
             }
         ],
         "name": "Ops.Html.CSSProperty"
+    },
+    "summary": "set css style properties of a html element ",
+    "docs": {
+        "ports": []
     }
 }

@@ -62,5 +62,9 @@
             }
         ],
         "name": "Ops.Sidebar.Presets"
+    },
+    "summary": "manage sidebar presets",
+    "docs": {
+        "ports": []
     }
 }

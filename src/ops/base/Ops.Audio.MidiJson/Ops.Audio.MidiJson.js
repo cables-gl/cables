@@ -1,12 +1,7 @@
-op.name="MidiJson";
-
 var inObj=op.inObject("MidiJson");
-
-
 var inTime=op.inValue("Time");
 
 var outNumTracks=op.outValue("Num Tracks");
-
 var outNames=op.outArray("Names");
 var outProgress=op.outArray("Progress");
 var outVelocity=op.outArray("Velocity");

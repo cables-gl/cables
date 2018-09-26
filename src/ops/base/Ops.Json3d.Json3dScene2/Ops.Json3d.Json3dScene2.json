@@ -51,5 +51,9 @@
             }
         ],
         "name": "Ops.Json3d.Json3dScene2"
+    },
+    "summary": "load a 3d scene, .fbx, .dae, collada etc.",
+    "docs": {
+        "ports": []
     }
 }

@@ -1,15 +1,33 @@
-var inStyle=op.inValueString("Style");
-var inProperty=op.inValueString("Property");
-var inValue=op.inValue("Value");
-var inValueSuffix=op.inValueString("Value Suffix",'px');
-
-var outStyle=op.outValue("Style Result");
+const inEle=op.inObject("Element");
+const inProperty=op.inValueString("Property");
+const inValue=op.inValue("Value");
+const inValueSuffix=op.inValueString("Value Suffix",'px');
+const outEle=op.outObject("HTML Element");
 
 inProperty.onChange=update;
 inValue.onChange=update;
-inStyle.onChange=update;
+inValueSuffix.onChange=update;
+
+var ele=null;
+
+
+inEle.onChange=inEle.onLinkChanged=function()
+{
+    if(ele && ele.style)
+    {
+        ele.style[inProperty.get()]='initial';
+    }
+    update();
+};
 
 function update()
 {
-    outStyle.set(inStyle.get()+inProperty.get()+':'+inValue.get()+inValueSuffix.get());
+    ele=inEle.get();
+    if(ele && ele.style)
+    {
+        var str=inValue.get()+inValueSuffix.get();
+        ele.style[inProperty.get()]=str;
+    }
+    
+    outEle.set(inEle.get());
 }

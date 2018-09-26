@@ -17,5 +17,9 @@
             }
         ],
         "name": "Ops.Value.ValueStringEditor"
+    },
+    "summary": "edit long string values in the editor",
+    "docs": {
+        "ports": []
     }
 }
