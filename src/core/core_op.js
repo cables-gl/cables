@@ -486,15 +486,8 @@ CABLES.Op = function()
         op.portsIn=[];
         op.portsOut=[];
 
-        for(var i=0;i<this.portsIn.length;i++)
-        {
-            // if(this.portsIn[i].type!=OP_PORT_TYPE_DYNAMIC)
-                op.portsIn.push( this.portsIn[i].getSerialized() );
-        }
-
-        for(var ipo in this.portsOut)
-            // if(this.portsOut[ipo].type!=OP_PORT_TYPE_DYNAMIC)
-                op.portsOut.push( this.portsOut[ipo].getSerialized() );
+        for(var i=0;i<this.portsIn.length;i++) op.portsIn.push(this.portsIn[i].getSerialized());
+        for(var ipo in this.portsOut) op.portsOut.push(this.portsOut[ipo].getSerialized());
 
         return op;
     };

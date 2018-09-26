@@ -33,7 +33,7 @@ function removeModule()
 render.onTriggered=function()
 {
     const currentShader=cgl.getShader();
-
+// console.log("currentshader",currentShader._moduleNames);
     if(currentShader!=shader || needsReset)
     {
         if(shader) removeModule();

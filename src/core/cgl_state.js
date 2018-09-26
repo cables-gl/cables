@@ -33,6 +33,10 @@ CGL.Context = function() {
     mat4.identity(this.vMatrix);
 
     var simpleShader = new CGL.Shader(this, "simpleshader");
+    
+    simpleShader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+    simpleShader.setSource(CGL.Shader.getDefaultVertexShader(), CGL.Shader.getDefaultFragmentShader());
+
     var currentShader = simpleShader;
     var aborted = false;
     var cbResize = [];

@@ -58,7 +58,7 @@ CGL.Shader = function(_cgl, _name) {
     this.srcFrag = this.getDefaultFragmentShader();
     this.lastCompile = 0;
 
-    var moduleNames = [];
+    this._moduleNames = [];
     var modules = [];
     var moduleNumId = 0;
 
@@ -347,13 +347,13 @@ CGL.Shader = function(_cgl, _name) {
         var addedAttributes=false;
 
 
-        for (i = 0; i < moduleNames.length; i++) {
-            // console.log('moduleName',moduleNames[i]);
+        for (i = 0; i < this._moduleNames.length; i++) {
+            // console.log('moduleName',this._moduleNames[i]);
             var srcVert = '';
             var srcFrag = '';
 
             for (var j = 0; j < modules.length; j++) {
-                if (modules[j].name == moduleNames[i]) {
+                if (modules[j].name == this._moduleNames[i]) {
 
                     // console.log(modules[j].name,modules[j].title);
 
@@ -427,8 +427,8 @@ CGL.Shader = function(_cgl, _name) {
                 }
             }
 
-            vs = vs.replace('{{' + moduleNames[i] + '}}', srcVert);
-            fs = fs.replace('{{' + moduleNames[i] + '}}', srcFrag);
+            vs = vs.replace('{{' + this._moduleNames[i] + '}}', srcVert);
+            fs = fs.replace('{{' + this._moduleNames[i] + '}}', srcFrag);
         }
         vs = vs.replace('{{MODULES_HEAD}}', srcHeadVert);
         fs = fs.replace('{{MODULES_HEAD}}', srcHeadFrag);
@@ -625,7 +625,7 @@ CGL.Shader = function(_cgl, _name) {
     };
 
     this.setModules = function(names) {
-        moduleNames = names;
+        this._moduleNames = names;
     };
 
     this.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
@@ -745,7 +745,7 @@ CGL.Shader.prototype.setFeedbackNames = function(names) {
 
 CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader = function() {
     return ''
-        .endl()+'{{MODULES_HEAD}}'
+        .endl() + '{{MODULES_HEAD}}'
         .endl() + 'IN vec3 vPosition;'
         .endl() + 'IN vec2 attrTexCoord;'
         .endl() + 'IN vec3 attrVertNormal;'
@@ -754,7 +754,6 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + 'UNI mat4 projMatrix;'
         .endl() + 'UNI mat4 mvMatrix;'
         .endl() + 'UNI mat4 modelMatrix;'
-        // .endl()+'uniform mat4 normalMatrix;'
 
         .endl() + 'void main()'
         .endl() + '{'
@@ -762,9 +761,7 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + '   norm=attrVertNormal;'
         .endl() + '   vec4 pos=vec4(vPosition,  1.0);'
         .endl() + '   mat4 mMatrix=modelMatrix;'
-        
         .endl() + '   {{MODULE_VERTEX_POSITION}}'
-
         .endl() + '   gl_Position = projMatrix * mvMatrix * pos;'
         .endl() + '}';
 };
@@ -778,15 +775,12 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
         b=0.5;
     }
     return ''
-        // .endl()+'precision highp float;'
-        // .endl()+'varying vec3 norm;'
         .endl()+'{{MODULES_HEAD}}'
         .endl() + 'void main()'
         .endl() + '{'
         .endl() + '    vec4 col=vec4('+r+','+g+','+b+',1.0);'
         .endl() + '    {{MODULE_COLOR}}'
         .endl() + '    outColor = col;'
-        // '   gl_FragColor = vec4(norm.x,norm.y,1.0,1.0);\n'+
         .endl() + '}';
 };
 
