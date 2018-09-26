@@ -137,7 +137,9 @@ render.onTriggered=function()
     }
 
     outYDeg.set( degY );
-    outXDeg.set( (px)*180 );
+    // outXDeg.set( (px)*180 );
+    outXDeg.set( (px)*CGL.RAD2DEG );
+    
 
     circlePosi(eye, py );
     

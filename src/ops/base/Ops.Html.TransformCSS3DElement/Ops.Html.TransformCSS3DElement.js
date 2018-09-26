@@ -14,6 +14,7 @@ const
 ;
 
 op.uuid = CABLES.uuid();
+var oldEle=null;
 
 var elProjection = cgl.canvas.parentElement.querySelector('[data-provide="css3d"]');
 if (!elProjection) {
@@ -117,5 +118,28 @@ trigger.onTriggered = function () {
 		")";
 	}
 	next.trigger();
-}
+	oldEle=el;
+};
 inOrigin.onChange();
+
+function removeProperties(el)
+{
+    if(!el)el = inElement.get();
+    if(el)el.parentElement.style.transform='';
+}
+
+op.onDelete=function()
+{
+    removeProperties(oldEle);
+};
+
+inElement.onLinkChanged = function() 
+{
+    if(!inElement.isLinked())
+        removeProperties(oldEle);
+};
+
+op.addEventListener("onEnabledChange",function(enabled)
+{
+    if(!enabled) removeProperties();
+});

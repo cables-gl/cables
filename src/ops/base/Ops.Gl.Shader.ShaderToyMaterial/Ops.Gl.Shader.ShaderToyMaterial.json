@@ -1,6 +1,38 @@
 {
-    "updated": 1532351338392,
+    "updated": 1537955942557,
     "authorName": "pandur",
     "id": "ae295e07-68bd-474e-88e2-f6a7f56cdaa6",
-    "created": 1526308572910
+    "created": 1526308572910,
+    "summary": "load a public shadertoy shader as material",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "ShaderToy ID",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Result"
+            },
+            {
+                "type": "2",
+                "name": "shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.ShaderToyMaterial"
+    }
 }
