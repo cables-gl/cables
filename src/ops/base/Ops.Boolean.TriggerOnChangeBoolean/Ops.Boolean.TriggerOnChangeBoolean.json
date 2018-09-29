@@ -1,5 +1,5 @@
 {
-    "updated": 1512038542138,
+    "updated": 1538150139453,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "dba19c07-e3c4-4971-a991-c9e6212ca1c8",
@@ -8,20 +8,21 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "False"
+                "name": "True"
             },
             {
                 "type": "1",
-                "name": "True"
+                "name": "False"
             }
         ],
-        "name": "Ops.Boolean.TriggerOnChange"
+        "name": "Ops.Boolean.TriggerOnChangeBoolean"
     },
     "summary": "Triggers when boolean value has changed",
     "docs": {

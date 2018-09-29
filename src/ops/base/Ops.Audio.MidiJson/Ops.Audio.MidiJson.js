@@ -32,10 +32,7 @@ inObj.onChange=function()
             note.timeEnd=note.time+note.duration;
         }
     }
-
 };
-
-
 
 inTime.onChange=function()
 {

@@ -1,5 +1,5 @@
 {
-    "updated": 1535707406618,
+    "updated": 1538130622289,
     "authorName": "pandur",
     "id": "86565630-2092-4d16-b177-ffb1d4040f4e",
     "created": 1526300707715,
@@ -21,15 +21,31 @@
             },
             {
                 "type": "3",
-                "name": "mvMatrix"
-            },
-            {
-                "type": "3",
                 "name": "projMatrix"
             },
             {
                 "type": "3",
-                "name": "hund"
+                "name": "mvMatrix"
+            },
+            {
+                "type": "0",
+                "name": "uResX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "uResY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "xOffSet",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "uRotate",
+                "subType": "number"
             }
         ],
         "portsOut": [

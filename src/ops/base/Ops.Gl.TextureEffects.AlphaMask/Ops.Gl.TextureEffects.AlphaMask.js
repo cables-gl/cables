@@ -14,10 +14,9 @@ var srcFrag=''
     .endl()+'precision highp float;'
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'  IN vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
-    .endl()+'  uniform sampler2D image;'
+    .endl()+'  UNI sampler2D tex;'
+    .endl()+'  UNI sampler2D image;'
     .endl()+'#endif'
-    // .endl()+'uniform float amount;'
     .endl()+''
     .endl()+''
     .endl()+'void main()'
@@ -78,13 +77,11 @@ this.render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     if(self.image.val && self.image.val.tex)
     {
-        /* --- */cgl.setTexture(1, self.image.val.tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
+        cgl.setTexture(1, self.image.val.tex );
     }
 
     cgl.currentTextureEffect.finish();

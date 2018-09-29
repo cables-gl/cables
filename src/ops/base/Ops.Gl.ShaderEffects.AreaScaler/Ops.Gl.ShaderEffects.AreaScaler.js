@@ -1,6 +1,4 @@
 
-var cgl=op.patch.cgl;
-
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
@@ -9,11 +7,13 @@ var inStrength=op.inValue("Strength",1);
 var inSmooth=op.inValueBool("Smooth",true);
 var inToZero=op.inValueBool("Keep Min Size",true);
 
+const cgl=op.patch.cgl;
 
 var x=op.inValue("x");
 var y=op.inValue("y");
 var z=op.inValue("z");
 
+var needsUpdateToZero=true;
 
 
 var shader=null;
@@ -36,9 +36,15 @@ inToZero.onChange=updateToZero;
 
 function updateToZero()
 {
-    if(!shader)return;
+    if(!shader)
+    {
+        needsUpdateToZero=true;
+        return;
+    }
     if(inToZero.get()) shader.removeDefine(moduleVert.prefix+"TO_ZERO");
         else shader.define(moduleVert.prefix+"TO_ZERO");
+        
+    needsUpdateToZero=false;
 
 }
 
@@ -55,6 +61,7 @@ op.render.onTriggered=function()
          return;
     }
     
+    if(needsUpdateToZero)updateToZero();
     if(CABLES.UI && gui.patch().isCurrentOp(op)) 
         gui.setTransformGizmo(
             {
@@ -62,6 +69,16 @@ op.render.onTriggered=function()
                 posY:y,
                 posZ:z
             });
+
+
+    if(CABLES.UI && CABLES.UI.renderHelper)
+    {
+        cgl.pushModelMatrix();
+        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
+        CABLES.GL_MARKER.drawSphere(op,inSize.get());
+        cgl.popModelMatrix();
+    }
+
 
     if(cgl.getShader()!=shader)
     {

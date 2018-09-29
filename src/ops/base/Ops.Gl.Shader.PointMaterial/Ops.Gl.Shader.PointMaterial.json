@@ -8,39 +8,48 @@
             },
             {
                 "type": "0",
-                "name": "PointSize"
+                "name": "PointSize",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Random Size"
+                "name": "Random Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Round"
+                "name": "Round",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Scale by Distance"
+                "name": "Scale by Distance",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "preMultiplied alpha"
+                "name": "preMultiplied alpha",
+                "subType": "boolean"
             },
             {
                 "type": "2",
@@ -52,11 +61,13 @@
             },
             {
                 "type": "0",
-                "name": "colorizeTexture"
+                "name": "colorizeTexture",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "texture Lookup"
+                "name": "texture Lookup",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -71,7 +82,7 @@
         ],
         "name": "Ops.Gl.Shader.PointMaterial"
     },
-    "updated": 1522250370423,
+    "updated": 1538069627133,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f86a4a07-00ee-4f68-8839-e02d51d1cd2f",

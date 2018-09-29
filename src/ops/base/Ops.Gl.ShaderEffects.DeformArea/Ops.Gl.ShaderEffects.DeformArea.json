@@ -7,27 +7,33 @@
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -38,9 +44,13 @@
         ],
         "name": "Ops.Gl.ShaderEffects.DeformArea"
     },
-    "updated": 1505055762608,
+    "updated": 1537975976131,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "6c40cfcb-75c8-4c64-bc13-c37faaea73df",
-    "created": 1504998113882
+    "created": 1504998113882,
+    "summary": "deform a spherical area of a mesh",
+    "docs": {
+        "ports": []
+    }
 }
