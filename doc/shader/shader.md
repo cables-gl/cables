@@ -55,7 +55,7 @@ IN vec3 norm;          - normal
 `Ops.Gl.Shader.ShaderMaterial` can be used to live-edit shaders and see the results immediately. 
 You can use shaderMaterial with any kind of mesh and the mesh will be drawn using your custom shader.
 
-![shadermaterial](/Users/tom/dev/cables/cables/doc/shader/shadermaterial.png)
+![shadermaterial](shadermaterial.png)
 
 You can edit Fragment and Vertex Shader Code.
 
@@ -67,7 +67,7 @@ Uniforms are automatically added as Ports of the ShaderMaterial Op. (Currently `
 
 ### Ops.Gl.Shader.ShowShader
 
-![showshader](/Users/tom/dev/cables/cables/doc/shader/showshader.png)
+![showshader](showshader.png)
 
 You can always use `Ops.Gl.Shader.ShowShader` to view the source code of the current shader.
 This is helpful if you combine multiple shaders via modules.
