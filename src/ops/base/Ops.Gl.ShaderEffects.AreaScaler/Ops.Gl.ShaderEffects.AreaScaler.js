@@ -61,7 +61,6 @@ op.render.onTriggered=function()
          return;
     }
     
-    if(needsUpdateToZero)updateToZero();
     if(CABLES.UI && gui.patch().isCurrentOp(op)) 
         gui.setTransformGizmo(
             {
@@ -102,7 +101,9 @@ op.render.onTriggered=function()
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
     }
     
-    
+
+    if(needsUpdateToZero)updateToZero();
+
     if(!shader)return;
 
     op.trigger.trigger();

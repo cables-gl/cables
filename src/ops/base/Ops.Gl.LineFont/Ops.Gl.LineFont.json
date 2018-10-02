@@ -1,5 +1,5 @@
 {
-    "updated": 1524499242511,
+    "updated": 1538263282540,
     "authorName": "pandur",
     "id": "580146e1-eb24-451f-b05d-0c7cfec8d8e6",
     "created": 1518352089459,
@@ -11,19 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "Text"
+                "name": "Text",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Letter Spacing"
+                "name": "Letter Spacing",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Line Width"
+                "name": "Line Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "align"
+                "name": "align",
+                "subType": "string"
             }
         ],
         "name": "Ops.Gl.LineFont"

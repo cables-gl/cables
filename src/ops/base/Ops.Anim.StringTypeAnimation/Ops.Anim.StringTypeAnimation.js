@@ -1,4 +1,3 @@
-
 var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var inRestart=op.inFunctionButton("Restart");
 var speed=op.inValue("Speed",500);
@@ -9,10 +8,10 @@ var outChanged=op.outFunction("Changed");
 var outFinished=op.outFunction("Finished");
 
 outText.set('  \n  ');
-
 var pos=0;
 var updateInterval=0;
 var cursorblink=true;
+var finished=false;
 
 function setNewTimeout()
 {
@@ -24,6 +23,7 @@ function setNewTimeout()
 
 inRestart.onTriggered=function()
 {
+    finished=false;
     pos=0;
     setNewTimeout();
 };
@@ -32,21 +32,24 @@ function update()
 {
     if(!text.get() || text.get()==='' || text.get()==='0' ||text.get()=='0' )
     {
-        outText.set( ' ' );
+        outText.set(' ');
         return;
     }
-    
-    
-    
+
     var t=text.get().substring(0,pos);
     cursorblink=!cursorblink;
 
     if(pos>text.get().length && cursorblink)
     {
-
+        if(!finished)
+        {
+            outFinished.trigger();
+            finished=true;
+        }
     }
     else
     {
+        finished=false;
         t+='_';
         pos++;
     }
@@ -58,6 +61,7 @@ function update()
 
 text.onChange=function()
 {
+    finished=false;
     pos=0;
     setNewTimeout();
 };

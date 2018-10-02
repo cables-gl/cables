@@ -13,7 +13,7 @@ this.ignoreInSubPatch.val=false;
 this.triggerAlways=this.addOutPort(new Port(this,"triggerAlways",OP_PORT_TYPE_FUNCTION));
 var outNames=op.outArray("Names",[]);
 this.currentKeyTime=this.addOutPort(new Port(this,"currentKeyTime",OP_PORT_TYPE_VALUE));
-
+const outCurrent=op.outValue("Current");
 var triggers=[];
 
 for(var i=0;i<32;i++)
@@ -141,6 +141,7 @@ function doTrigger(_time)
     
     if(outIndex>=0 && outIndex<triggers.length)
     {
+        outCurrent.set(outIndex);
         triggers[outIndex].trigger();
     }
 

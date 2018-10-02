@@ -1,6 +1,6 @@
 {
     "summary": "Animates a string, like it is being written by a person",
-    "updated": 1518872140509,
+    "updated": 1538418659151,
     "authorName": "pandur",
     "id": "61b0db65-814c-403f-b4d1-2b58e6311454",
     "created": 1518872140148,
@@ -8,7 +8,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "text"
+                "name": "text",
+                "subType": "string"
             },
             {
                 "type": "1",
@@ -16,17 +17,20 @@
             },
             {
                 "type": "0",
-                "name": "Speed"
+                "name": "Speed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Speed Variation"
+                "name": "Speed Variation",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "string"
             },
             {
                 "type": "1",
