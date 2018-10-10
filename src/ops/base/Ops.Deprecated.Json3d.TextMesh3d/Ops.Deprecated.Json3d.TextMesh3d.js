@@ -72,7 +72,6 @@ function render()
 
 function updateScale()
 {
-
     vec3.set(vScale,1,1,inSize.get());
     mat4.identity(transMatrix);
     mat4.scale(transMatrix,transMatrix, vScale);
@@ -138,7 +137,7 @@ function addMesh(jsonMesh)
     var mesh=new CGL.Mesh(cgl,geom);
     mesh.charWidth=Math.abs(bounds.maxX-bounds.minX);
     mesh.charTrans=jsonMesh.charTrans;
-    console.log(index,mesh.charWidth);
+    // console.log(index,mesh.charWidth);
 
     meshes[index]=mesh;
     
@@ -187,7 +186,7 @@ function reload()
                         data.meshes[meshIndex].name=data.rootnode.children[i].name;
                         data.meshes[meshIndex].charTrans=data.rootnode.children[i].transformation;
                         mat4.transpose(data.meshes[meshIndex].charTrans,data.meshes[meshIndex].charTrans);
-                        console.log(data.meshes[meshIndex].charTrans);
+                        // console.log(data.meshes[meshIndex].charTrans);
                         
                         addMesh(data.meshes[meshIndex]);
                     }

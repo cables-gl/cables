@@ -114,6 +114,10 @@
     "docs": {
         "ports": [
             {
+                "name": "max",
+                "text": "whats the maximum value that goes into number"
+            },
+            {
                 "name": "num outputs",
                 "text": "number of output triggers to be triggered"
             }

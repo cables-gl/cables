@@ -24,7 +24,7 @@ function updateType()
 
 function updateTime()
 {
-    return time.get();
+    return time.get()+phase.get();
 }
 
 function block()

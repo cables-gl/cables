@@ -12,7 +12,7 @@ var outFinished=op.outFunction("Finished");
 inExec.onTriggered=function()
 {
     var seq=CABLES.UI.ImageSequenceExport(
-        inFilename.get()+'.'+inFormat.get(),
+        inFilename.get(),
         inStart.get(),
         inEnd.get(),
         inFps.get(),

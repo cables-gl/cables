@@ -4,6 +4,7 @@ var valueFalse=op.addInPort(new Port(op,"value false",OP_PORT_TYPE_VALUE));
 var valueTrue=op.addInPort(new Port(op,"value true",OP_PORT_TYPE_VALUE));
 var duration=op.addInPort(new Port(op,"duration",OP_PORT_TYPE_VALUE));
 
+
 var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 var value=op.addOutPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
 var finished=op.addOutPort(new Port(op,"finished",OP_PORT_TYPE_VALUE));
@@ -35,6 +36,7 @@ bool.onValueChanged=setAnim;
 valueFalse.onValueChanged=setAnim;
 valueTrue.onValueChanged=setAnim;
 duration.onValueChanged=setAnim;
+
 
 exe.onTriggered=function()
 {
