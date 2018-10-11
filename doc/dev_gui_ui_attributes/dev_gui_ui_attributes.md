@@ -46,4 +46,11 @@ inVal.onChange = function()
     }
 };
 ```
+### Hide port
+To hide a port on a op but still have a UI element use the following code
+
+```javascript
+portName.hidePort();
+```
+
 
