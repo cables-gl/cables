@@ -1,11 +1,8 @@
-op.name='Cylinder';
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 var slices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
 var stacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
 var radius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-
 
 var startSlice=op.inValueInt("Start Slice",0);
 
