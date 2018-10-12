@@ -26,7 +26,7 @@ inPoints.onChange=function()
     {
         pointArray=inPoints.get();
         updateUniformPoints=true;
-        console.log(inPoints.get().length,"points");
+        // console.log(inPoints.get().length,"points");
     }
 };
 
@@ -66,7 +66,7 @@ op.render.onTriggered=function()
         if(shader.getDefine("SPLINE_POINTS")!=Math.floor(pointArray.length/3))
         {
             shader.define('SPLINE_POINTS',Math.floor(pointArray.length/3));
-            console.log('SPLINE_POINTS',shader.getDefine("SPLINE_POINTS"));
+            // console.log('SPLINE_POINTS',shader.getDefine("SPLINE_POINTS"));
         }
 
         op.uniPoints.setValue(pointArray);
