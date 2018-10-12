@@ -1,5 +1,5 @@
 "use strict";
-const inRenderAlways = op.inValueBool("render always");
+const inRenderAlways = op.inValueBool("render continiously");
 const inExe = op.inTrigger ('Trigger');
 const inStrAxiom = op.inValueString("Axiom / seed");
 const inStrConstant1 = op.inValueString("Constant 1");
@@ -181,31 +181,43 @@ function generate()
 }
 
 
-
 var pos=vec3.create();
 var empty=vec3.create();  
 
+var regExp0 = /(([xXyYzZ])(\d+\.?\d*)*)/;
+var regExp1 = /\d+\.?\d*/;
+//create array for returned matching values from regexp
+var matchArray = [];
+var tempRotate = angle;
 
 //recreates the turtle algorithm
-
 function turtle()
 {
-    //var randAmount = Math.seededRandom()* inRandStr.get();
- 
- 
-    // Math.randomSeed=seed.get();
     //create the main transform array
     trans = mat4.create();
     transforms.length = 0;
     pointArrays.length=0;
     stack.length = 0;
     currentPointArray=[];
-;
-
-    //scale with step length could be replaced with
-    //scale(trans, trans,[0.0,0.0,0.0])
+    
+    
+    matchArray = sentence.match(/(([xXyYzZ])(\d+\.?\d*)*)/g);
+    
+    //where are we in the regexp match array
+    var counter = 0;
+    
     for(var i = 0; i < sentence.length; i++)
     {
+        if(matchArray === null) break;
+            else
+            {
+                if(counter === matchArray.length)
+                {
+                    break;    
+                }
+                var tempRotate = matchArray[counter].match(/\d+\.?\d*/);
+            }
+        
         //iterate through the final string
         var current = sentence.charAt(i);
         
@@ -240,32 +252,39 @@ function turtle()
         //turn counter counter clockwise x defined by angle
         else if (current == "x")
         {
-            mat4.rotateX(trans,trans,CGL.DEG2RAD * (-angle-Math.seededRandom()* inRandStr.get()));
+            mat4.rotateX(trans,trans,CGL.DEG2RAD * (-angle -Math.seededRandom()* inRandStr.get()));
+            counter +=1;    
         }
         //turn counter clockwise x defined by angle
         else if (current == "X")
         {
             mat4.rotateX(trans,trans,CGL.DEG2RAD * (angle + Math.seededRandom()* inRandStr.get()));
+            counter +=1;
         }
         //turn counter counter clockwise y defined by angle
         else if (current == "y")
         {
+            //console.log("y was triggered");
             mat4.rotateY(trans,trans,CGL.DEG2RAD * (-angle-Math.seededRandom()* inRandStr.get()));
+            counter +=1;
         }
         //turn counter clockwise y defined by angle
         else if (current == "Y")
         {
             mat4.rotateY(trans,trans,CGL.DEG2RAD * (angle + Math.seededRandom()* inRandStr.get()));
+            counter +=1;
         }
         //turn counter counter clockwise z defined by angle
         else if (current == "z")
         {
             mat4.rotateZ(trans,trans,CGL.DEG2RAD * (-angle-Math.seededRandom()* inRandStr.get()));
+            counter +=1;
         }
         //turn counter  clockwise z defined by angle
         else if (current == "Z")
         {
             mat4.rotateZ(trans,trans,CGL.DEG2RAD * (angle + Math.seededRandom()* inRandStr.get()));
+            counter +=1;
         }
         ////turn 180 degrees
         else if (current == "|")
@@ -305,10 +324,12 @@ function turtle()
             //     lastPointArray[lastPointArray.length-1]);
             
         }
+       
     }
-
+    
     pointArrays.push(currentPointArray);
     outArray.set(transforms);
+    //matchArray.length=0;
     //console.log("outPoints array length is " + pointArrays.length )
     //outPointsArrayLength.set(currentPointArray.length);
 }
@@ -336,75 +357,3 @@ function render ()
     //console.log("outPoints array length is " +outPoints.length )
     
 }
-
-
-
-
-
-
-
-
-//BACKUP for string tree
-// "use strict";
-// const inExe = op.inTrigger ('Trigger');
-// var resetButton = op.inFunctionButton("reset");
-// const stringOut = op.outValueString('String out');
-// var axiom = 'A';
-// var sentence = axiom;
-
-// var rules = []
-// rules[0] = 
-// {
-//     a:'A',
-//     b:'AB'
-// }
-
-// rules[1] = 
-// {
-//     a:'B',
-//     b:'A'
-// }
-
-// function generate()
-// {
-//     var nextSentence = "";
-    
-//     // resetButton.onTriggered = function (sentence)
-//     // {
-//     //     sentence = axiom;
-//     //     nextSentence = "";
-//     //     console.log(" sentence is " + sentence + " next sentence is " + nextSentence);
-        
-//     // }
-//     for (var i =0; i < sentence.length; i++)
-//     {
-//         var current = sentence.charAt(i);
-//         var found = false;
-        
-//         for (var j = 0; j < rules.length; j++)
-//         {
-//             if (current == rules[j].a)
-//             {
-//                 found = true;
-//                 nextSentence += rules[j].b;
-//                 break;
-//             }
-//         }    
-//         if(!found)
-//         {
-//             nextSentence = current;
-//         }
-
-//     }
-//     sentence = nextSentence ;
-//     console.log(" sentence is " + sentence);
-//     stringOut.set(sentence);
-// }
-
-// function resetAll()
-// {
-//     sentence = axiom;
-    
-// }
-// inExe.onTriggered = generate;
-// resetButton.onTriggered = resetAll;
