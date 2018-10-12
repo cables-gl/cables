@@ -1,17 +1,26 @@
 "use strict";
-
+const inRenderAlways = op.inValueBool("render always");
 const inExe = op.inTrigger ('Trigger');
 const inStrAxiom = op.inValueString("Axiom / seed");
 const inStrConstant1 = op.inValueString("Constant 1");
 const inStrRule1 = op.inValueString("Rule 1");
 const inStrConstant2 = op.inValueString("Constant 2");
 const inStrRule2 = op.inValueString("Rule 2");
+const inStrConstant3 = op.inValueString("Constant 3");
+const inStrRule3 = op.inValueString("Rule 3");
+const inStrConstant4 = op.inValueString("Constant 4");
+const inStrRule4 = op.inValueString("Rule 4");
 
+inRenderAlways.hidePort();
 inStrAxiom.hidePort();
 inStrConstant1.hidePort();
 inStrRule1.hidePort();
 inStrConstant2.hidePort();
 inStrRule2.hidePort();
+inStrConstant3.hidePort();
+inStrRule3.hidePort();
+inStrConstant4.hidePort();
+inStrRule4.hidePort();
 
 const inIterations = op.inValueInt("Iterations",1);
 const inStepLength = op.inValue("Step length",0.5);
@@ -57,6 +66,7 @@ var sentence = "";//axiom;
 //an array that holds the string replacment rules
 var rules = []
 
+
 //UI input 
 inRotate.onChange = generate;
 inStepLength.onChange = generate;
@@ -80,7 +90,11 @@ function defineRules()
         a : inStrConstant1.get(),
         b : inStrRule1.get(),
         c : inStrConstant2.get(),
-        d : inStrRule2.get()
+        d : inStrRule2.get(),
+        e : inStrConstant3.get(),
+        f : inStrRule3.get(),
+        g : inStrConstant4.get(),
+        h : inStrRule4.get()
     }
     generate();
 }
@@ -136,6 +150,19 @@ function generate()
                     nextSentence += rules[j].h;
                     break;
                 }
+                else if (current == rules[j].i)
+                {
+                    found = true;
+                    nextSentence += rules[j].j;
+                    break;
+                }
+                else if (current == rules[j].k)
+                {
+                    found = true;
+                    nextSentence += rules[j].l;
+                    break;
+                }
+                
             }    
             //if nothing is found continue no matter what
             if(!found)  nextSentence += current;
