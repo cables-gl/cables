@@ -1,15 +1,14 @@
 {
+    "updated": 1539329884296,
+    "authorName": "pandur",
+    "id": "c71d4b27-ebde-4c51-a88a-95a4db1a01ae",
+    "created": 1539329457443,
     "layout": {
         "portsIn": [
             {
                 "type": "0",
                 "name": "Value",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Char",
-                "subType": "string"
             },
             {
                 "type": "0",
@@ -24,13 +23,9 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.String.LeftPad"
+        "name": "Ops.String.RightPadNumber"
     },
-    "summary": "create a fixed length string from a number 1 -> 0001",
-    "updated": 1539329157039,
-    "authorName": "pandur",
-    "id": "9f4302de-6ae1-4fd0-8be7-c8ed0eca4deb",
-    "created": 1519940376160,
+    "summary": "converts a number to a string with num decimal places, adds 0's",
     "docs": {
         "ports": []
     }

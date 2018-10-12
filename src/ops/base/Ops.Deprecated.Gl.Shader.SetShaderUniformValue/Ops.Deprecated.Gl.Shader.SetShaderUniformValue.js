@@ -4,13 +4,9 @@ var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var uniformSelect=op.inValueSelect("Uniform");
 var unival=op.inValue("Value",0);
-
-
-// var outShader=op.outObject("Shader");
 var cgl=op.patch.cgl;
 var uniformInputs=[];
 var uniformTextures=[];
-
 var shader=null;
 
 render.onTriggered=doRender;
