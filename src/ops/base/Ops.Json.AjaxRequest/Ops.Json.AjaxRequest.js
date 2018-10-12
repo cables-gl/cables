@@ -1,10 +1,7 @@
-op.name="AjaxRequest";
-
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var outData=op.addOutPort(new Port(op,"data",OP_PORT_TYPE_OBJECT));
-var isLoading=op.outValue("Is Loading",false);
-
-var jsonp=op.inValueBool("JsonP",false);
+const filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+const jsonp=op.inValueBool("JsonP",false);
+const outData=op.addOutPort(new Port(op,"data",OP_PORT_TYPE_OBJECT));
+const isLoading=op.outValue("Is Loading",false);
 
 outData.ignoreValueSerialize=true;
 
@@ -49,7 +46,7 @@ function reload()
             }
             catch(e)
             {
-                console.log('exc... ',filename.get(),jsonp.get());
+                console.error('ajaxrequest: exception while loading ',filename.get());
                 op.uiAttr({'error':'error loading json'});
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
