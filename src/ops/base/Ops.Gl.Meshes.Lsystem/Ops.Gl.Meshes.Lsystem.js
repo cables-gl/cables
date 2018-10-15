@@ -178,6 +178,8 @@ function generate()
     }
     //draw everything with the turtle function
     turtle();
+    console.log("sentence is " + sentence);
+    resetAll();
 }
 
 
@@ -188,7 +190,43 @@ var regExp0 = /(([xXyYzZ])(\d+\.?\d*)*)/;
 var regExp1 = /\d+\.?\d*/;
 //create array for returned matching values from regexp
 var matchArray = [];
+
 var tempRotate = angle;
+
+//where are we in the regexp match array
+var counter = 0;
+
+//
+function extract(str,pos)
+{
+    var slicedSent = str.slice(pos);
+    console.log("sliced sentence is " + slicedSent);
+    var current = "";
+    var output =  "";
+    
+    for (var i = 1; i < str.length;i++)
+    {
+        var number =  "";
+        
+        current = slicedSent.charAt(i);
+        output = slicedSent.slice(i);
+        
+        for (var j = 0; j < output.length; j++)
+        {
+            var lookup = output.charAt(j);
+            if (isNaN(lookup) === true )
+            {
+                break;
+            }
+            else (isNaN(lookup) === false  )
+            {
+                number += lookup;   
+                //console.log("number is " + number);
+            }
+        }
+        return parseInt(number);
+    }
+}
 
 //recreates the turtle algorithm
 function turtle()
@@ -199,28 +237,29 @@ function turtle()
     pointArrays.length=0;
     stack.length = 0;
     currentPointArray=[];
-    
-    
-    matchArray = sentence.match(/(([xXyYzZ])(\d+\.?\d*)*)/g);
-    
-    //where are we in the regexp match array
-    var counter = 0;
+    var angleUi = "";
+    //find all rotations
+    //matchArray = sentence.match(/(([xXyYzZ])(\d+\.?\d*)*)/g);
+    //console.log("match array is " + matchArray);
     
     for(var i = 0; i < sentence.length; i++)
     {
-        if(matchArray === null) break;
-            else
-            {
-                if(counter === matchArray.length)
-                {
-                    break;    
-                }
-                var tempRotate = matchArray[counter].match(/\d+\.?\d*/);
-            }
-        
+        // if(matchArray === null) ;
+        //     else
+        //     {
+        //         if(counter === matchArray.length)
+        //         {
+        //           matchArray.length = 0 ;    
+        //         }
+        //         //extract rotation from matchArray
+        //       var tempRotate = matchArray[counter].match(/\d+\.?\d*/);
+        //     }
+        //console.log("temp rotate is " + tempRotate);
         //iterate through the final string
         var current = sentence.charAt(i);
         
+        
+        //console.log("current char is " + current);
         //step forward, create point
         if(current == "F")
         {
@@ -252,39 +291,45 @@ function turtle()
         //turn counter counter clockwise x defined by angle
         else if (current == "x")
         {
-            mat4.rotateX(trans,trans,CGL.DEG2RAD * (-angle -Math.seededRandom()* inRandStr.get()));
-            counter +=1;    
+            // console.log("sentence in x is " + sentence);
+            // console.log("extract on x is "+ extract(sentence,i));
+            angleUi = -extract(sentence,i);
+            console.log("angleUi in x is " + angleUi);
+            mat4.rotateX(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
-        //turn counter clockwise x defined by angle
+        //turn counter clockwise x defined by angleUi
         else if (current == "X")
         {
-            mat4.rotateX(trans,trans,CGL.DEG2RAD * (angle + Math.seededRandom()* inRandStr.get()));
-            counter +=1;
+            angleUi = extract(sentence,i);
+            console.log("angleUi in X is " + angleUi);
+            mat4.rotateX(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
-        //turn counter counter clockwise y defined by angle
+        //turn counter counter clockwise y defined by angleUi
         else if (current == "y")
         {
-            //console.log("y was triggered");
-            mat4.rotateY(trans,trans,CGL.DEG2RAD * (-angle-Math.seededRandom()* inRandStr.get()));
-            counter +=1;
+            console.log("current letter is " + current);
+            angleUi = -extract(sentence,i);
+            console.log("angleUi in y is " + angleUi);
+            mat4.rotateY(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
-        //turn counter clockwise y defined by angle
+        //turn counter clockwise y defined by angleUi
         else if (current == "Y")
         {
-            mat4.rotateY(trans,trans,CGL.DEG2RAD * (angle + Math.seededRandom()* inRandStr.get()));
-            counter +=1;
+            angleUi = extract(sentence,i);
+            console.log("angleUi in Y is " + angleUi);
+            mat4.rotateY(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
-        //turn counter counter clockwise z defined by angle
+        //turn counter counter clockwise z defined by angleUi
         else if (current == "z")
         {
-            mat4.rotateZ(trans,trans,CGL.DEG2RAD * (-angle-Math.seededRandom()* inRandStr.get()));
-            counter +=1;
+            angleUi = -extract(sentence,i);
+            mat4.rotateZ(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
-        //turn counter  clockwise z defined by angle
+        //turn counter  clockwise z defined by angleUi
         else if (current == "Z")
         {
-            mat4.rotateZ(trans,trans,CGL.DEG2RAD * (angle + Math.seededRandom()* inRandStr.get()));
-            counter +=1;
+            angleUi = extract(sentence,i);
+            mat4.rotateZ(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
         ////turn 180 degrees
         else if (current == "|")
@@ -326,9 +371,11 @@ function turtle()
         }
        
     }
-    
+
     pointArrays.push(currentPointArray);
     outArray.set(transforms);
+    
+   
     //matchArray.length=0;
     //console.log("outPoints array length is " + pointArrays.length )
     //outPointsArrayLength.set(currentPointArray.length);
