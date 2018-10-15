@@ -25,7 +25,8 @@ inStrRule4.hidePort();
 const inIterations = op.inValueInt("Iterations",1);
 const inStepLength = op.inValue("Step length",0.5);
 const inStepScale = op.inValue("Step scale multiplier",0.995);
-const inRotate = op.inValue("rotation");
+const inDefaultAngle = op.inValue("Default angle");
+const inRotateMutliplier = op.inValue("Rotation multiplier");
 
 var needsCalc = true;
 
@@ -34,12 +35,14 @@ const lineTrigger = op.outTrigger("line trigger");
 const stringOut = op.outValueString('String out');
 const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
+const outIterationNumber = op.outValue("iteration number");
+const outBranchNumber = op.outValue("iteration number");
 
 
 const seed = op.inValue("random seed");
 const inRandStr = op.inValue("random strength");
 
-var angle = inRotate.get();
+var angleMultiplier = inRotateMutliplier.get();
 var len = inStepLength.get();
 var lenScale = inStepScale.get();
 
@@ -68,13 +71,14 @@ var rules = []
 
 
 //UI input 
-inRotate.onChange = generate;
+inRotateMutliplier.onChange = generate;
 inStepLength.onChange = generate;
 inStepScale.onChange = generate;
 inIterations.onChange = generate;
 inExe.onTriggered = render;
 seed.onChange = generate;
 inRandStr.onChange = generate;
+inDefaultAngle.onChange = generate;
 
 inStrAxiom.onChange = defineRules;
 inStrConstant1.onChange = defineRules;
@@ -103,7 +107,7 @@ function resetAll()
 {
     //define axiom here
     sentence = inStrAxiom.get();
-    angle = inRotate.get();
+    angleMultiplier = inRotateMutliplier.get();
     len = inStepLength.get();
     lenScale = inStepScale.get();
 }
@@ -118,7 +122,7 @@ function generate()
     var iterationsLimit = Math.min(4,inIterations.get());
     for (var iter = 0; iter < iterationsLimit ; iter++)
     {
-        
+        outIterationNumber.set(iter+1);
         for (var i =0; i < sentence.length; i++)
         {
             var current = sentence.charAt(i);
@@ -184,39 +188,44 @@ function generate()
 var pos=vec3.create();
 var empty=vec3.create();  
 
-function percentage (p, t, mod) 
+
+function percentage(num, per)
 {
-    return parseInt((p / t) * mod);
+  return (num/100)*per;
 }
-console.log("percent is "  + percentage(25,100,360));
+
 //extracts the user defined angle
-//FfFx45yFF30 returns 45
+//FfFx45yFF30 returns 45 on the x axis
 function extract(str,pos)
 {
     var slicedSent = str.slice(pos);
+
     var current = "";
     var output =  "";
-    
     for (var i = 1; i < str.length;i++)
     {
-        var number =  "";
-        
-        current = slicedSent.charAt(i);
+        var number = "";
+        //current = slicedSent.charAt(i);
         output = slicedSent.slice(i);
+
         
         for (var j = 0; j < output.length; j++)
         {
+
             var lookup = output.charAt(j);
-            if (isNaN(lookup) === true )
-            {
-                break;
-            }
-            else (isNaN(lookup) === false  )
+
+            if (Number.isNaN(lookup) === false  )
             {
                 number += lookup;   
             }
+            else if (Number.isNaN(lookup) === true)
+            {
+                break;
+            }
+            
+            
         }
-        return parseInt(number);
+        return parseFloat(number);
     }
 }
 
@@ -231,9 +240,10 @@ function turtle()
     currentPointArray=[];
     var angleUi = "";
 
-    
+    var currentBranch = 0;
     for(var i = 0; i < sentence.length; i++)
     {
+        //console.log("extract in turtle is " + extract(sentence,i));
         var current = sentence.charAt(i);
         //step forward, create point
         if(current == "F")
@@ -266,37 +276,39 @@ function turtle()
         //turn counter counter clockwise x defined by angle
         else if (current == "x")
         {
-            angleUi = -extract(sentence,i);
+            
+            //console.log("in x extract is " + extract(sentence,i))
+            angleUi = -extract(sentence,i) * angleMultiplier ;
             mat4.rotateX(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
         //turn counter clockwise x defined by angleUi
         else if (current == "X")
         {
-            angleUi = extract(sentence,i);
+            angleUi = extract(sentence,i) * angleMultiplier;
             mat4.rotateX(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
         //turn counter counter clockwise y defined by angleUi
         else if (current == "y")
         {
-            angleUi = -extract(sentence,i);
+            angleUi = -extract(sentence,i) ;
             mat4.rotateY(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
         //turn counter clockwise y defined by angleUi
         else if (current == "Y")
         {
-            angleUi = extract(sentence,i);
+            angleUi = extract(sentence,i) ;
             mat4.rotateY(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
         //turn counter counter clockwise z defined by angleUi
         else if (current == "z")
         {
-            angleUi = -extract(sentence,i);
+            angleUi = -extract(sentence,i) ;
             mat4.rotateZ(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
         //turn counter  clockwise z defined by angleUi
         else if (current == "Z")
         {
-            angleUi = extract(sentence,i);
+            angleUi = extract(sentence,i) ;
             mat4.rotateZ(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
         ////turn 180 degrees
@@ -308,6 +320,7 @@ function turtle()
         {
             //get current transform matrix push into stack, branch start
             stack.push(mat4.clone(trans));
+            currentBranch +=1;
         }
         //
         else if (current == "]")
@@ -320,7 +333,7 @@ function turtle()
             {
                 break;
             }
-            
+            outBranchNumber.set(currentBranch);
             trans = stack[stack.length-1];
             stack.pop();
             // lastPointArray=currentPointArray;
