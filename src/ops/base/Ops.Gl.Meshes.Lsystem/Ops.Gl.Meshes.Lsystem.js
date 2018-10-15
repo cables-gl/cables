@@ -59,10 +59,10 @@ var lastPointArray=[0,0,0];
 
 
 
-//axiom, the string that starts it all
-//var axiom = inStrAxiom.get();
-//create a copy to iterate through
+
+//this becomes the axiom after the resetAll() is called 
 var sentence = "";//axiom;
+
 //an array that holds the string replacment rules
 var rules = []
 
@@ -115,8 +115,8 @@ function generate()
     //reset the state of everything   
     resetAll();
     var nextSentence = "";
-
-    for (var iter = 0; iter < inIterations.get() ; iter++)
+    var iterationsLimit = Math.min(4,inIterations.get());
+    for (var iter = 0; iter < iterationsLimit ; iter++)
     {
         
         for (var i =0; i < sentence.length; i++)
@@ -178,29 +178,22 @@ function generate()
     }
     //draw everything with the turtle function
     turtle();
-    console.log("sentence is " + sentence);
-    resetAll();
 }
 
 
 var pos=vec3.create();
 var empty=vec3.create();  
 
-var regExp0 = /(([xXyYzZ])(\d+\.?\d*)*)/;
-var regExp1 = /\d+\.?\d*/;
-//create array for returned matching values from regexp
-var matchArray = [];
-
-var tempRotate = angle;
-
-//where are we in the regexp match array
-var counter = 0;
-
-//
+function percentage (p, t, mod) 
+{
+    return parseInt((p / t) * mod);
+}
+console.log("percent is "  + percentage(25,100,360));
+//extracts the user defined angle
+//FfFx45yFF30 returns 45
 function extract(str,pos)
 {
     var slicedSent = str.slice(pos);
-    console.log("sliced sentence is " + slicedSent);
     var current = "";
     var output =  "";
     
@@ -221,7 +214,6 @@ function extract(str,pos)
             else (isNaN(lookup) === false  )
             {
                 number += lookup;   
-                //console.log("number is " + number);
             }
         }
         return parseInt(number);
@@ -238,28 +230,11 @@ function turtle()
     stack.length = 0;
     currentPointArray=[];
     var angleUi = "";
-    //find all rotations
-    //matchArray = sentence.match(/(([xXyYzZ])(\d+\.?\d*)*)/g);
-    //console.log("match array is " + matchArray);
+
     
     for(var i = 0; i < sentence.length; i++)
     {
-        // if(matchArray === null) ;
-        //     else
-        //     {
-        //         if(counter === matchArray.length)
-        //         {
-        //           matchArray.length = 0 ;    
-        //         }
-        //         //extract rotation from matchArray
-        //       var tempRotate = matchArray[counter].match(/\d+\.?\d*/);
-        //     }
-        //console.log("temp rotate is " + tempRotate);
-        //iterate through the final string
         var current = sentence.charAt(i);
-        
-        
-        //console.log("current char is " + current);
         //step forward, create point
         if(current == "F")
         {
@@ -291,32 +266,25 @@ function turtle()
         //turn counter counter clockwise x defined by angle
         else if (current == "x")
         {
-            // console.log("sentence in x is " + sentence);
-            // console.log("extract on x is "+ extract(sentence,i));
             angleUi = -extract(sentence,i);
-            console.log("angleUi in x is " + angleUi);
             mat4.rotateX(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
         //turn counter clockwise x defined by angleUi
         else if (current == "X")
         {
             angleUi = extract(sentence,i);
-            console.log("angleUi in X is " + angleUi);
             mat4.rotateX(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
         //turn counter counter clockwise y defined by angleUi
         else if (current == "y")
         {
-            console.log("current letter is " + current);
             angleUi = -extract(sentence,i);
-            console.log("angleUi in y is " + angleUi);
             mat4.rotateY(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
         //turn counter clockwise y defined by angleUi
         else if (current == "Y")
         {
             angleUi = extract(sentence,i);
-            console.log("angleUi in Y is " + angleUi);
             mat4.rotateY(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
         //turn counter counter clockwise z defined by angleUi
@@ -352,17 +320,15 @@ function turtle()
             {
                 break;
             }
-            // //clear the stack/branch
-            else 
-            {
-                trans = stack[stack.length-1];
-                stack.pop();
-            }
-
+            
+            trans = stack[stack.length-1];
+            stack.pop();
             // lastPointArray=currentPointArray;
             pointArrays.push(currentPointArray);
             //comment out to see branch start end
             currentPointArray=[];
+            
+            
             // currentPointArray.push(
             //     lastPointArray[lastPointArray.length-3],
             //     lastPointArray[lastPointArray.length-2],
@@ -375,8 +341,6 @@ function turtle()
     pointArrays.push(currentPointArray);
     outArray.set(transforms);
     
-   
-    //matchArray.length=0;
     //console.log("outPoints array length is " + pointArrays.length )
     //outPointsArrayLength.set(currentPointArray.length);
 }
@@ -392,11 +356,11 @@ function render ()
         outTrigger.trigger();
         cgl.popModelMatrix();
     }
+    
     //console.log("pointsArray array length is " + pointArrays.length )
     //iterate through points array for spline xyz data
     for(var i = 0; i < pointArrays.length ; i++)
     {
-        //outPoints.set(pointArrays[i]);
         outPoints.set(pointArrays[i]);
         lineTrigger.trigger();
     }
