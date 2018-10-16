@@ -36,7 +36,7 @@ const stringOut = op.outValueString('String out');
 const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
 const outIterationNumber = op.outValue("iteration number");
-const outBranchNumber = op.outValue("iteration number");
+const outBranchNumber = op.outValue("branch number");
 
 
 const seed = op.inValue("random seed");
@@ -177,10 +177,10 @@ function generate()
         //can be removed later
         stringOut.set(sentence);
        
-        //removing will add everything on top of each other recursively
+        //removing thiswill add everything on top of each other recursively
         nextSentence="";
     }
-    //draw everything with the turtle function
+    //draw everything once with the turtle function
     turtle();
 }
 
@@ -205,26 +205,29 @@ function extract(str,pos)
     for (var i = 1; i < str.length;i++)
     {
         var number = "";
-        //current = slicedSent.charAt(i);
         output = slicedSent.slice(i);
 
-        
         for (var j = 0; j < output.length; j++)
         {
 
             var lookup = output.charAt(j);
-
-            if (Number.isNaN(lookup) === false  )
+            
+            if (isNaN(lookup) && isNaN(output.charAt(j+1)))
+            {
+                return inDefaultAngle.get();
+            }
+            else if (!Number.isNaN(lookup)  )
             {
                 number += lookup;   
             }
-            else if (Number.isNaN(lookup) === true)
+            else if (Number.isNaN(lookup))
             {
                 break;
             }
             
             
         }
+        console.log("final number is " + number);
         return parseFloat(number);
     }
 }
@@ -333,7 +336,9 @@ function turtle()
             {
                 break;
             }
+            //send out current branch number
             outBranchNumber.set(currentBranch);
+            
             trans = stack[stack.length-1];
             stack.pop();
             // lastPointArray=currentPointArray;
@@ -348,7 +353,6 @@ function turtle()
             //     lastPointArray[lastPointArray.length-1]);
             
         }
-       
     }
 
     pointArrays.push(currentPointArray);
