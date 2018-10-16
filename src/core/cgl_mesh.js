@@ -1,7 +1,6 @@
 
 var CGL=CGL || {};
 CGL.MESH=CGL.MESH || {};
-CGL.MESH.lastShader=null;
 CGL.MESH.lastMesh=null;
 
 /**
@@ -21,6 +20,7 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._attributes=[];
     this._attribLocs={};
     this._geom=null;
+    this._lastShader=null;
     this._numInstances=0;
     this._glPrimitive=glPrimitive;
     this.addVertexNumbers=false;
@@ -223,11 +223,11 @@ CGL.Mesh.prototype.setVertexIndices=function(vertIndices)
 CGL.Mesh.prototype.setGeom=function(geom)
 {
     this._geom=geom;
-    CGL.MESH.lastShader=null;
+
     CGL.MESH.lastMesh=null;
     CGL.profileMeshSetGeom++;
 
-    // if(!this.meshChanged()) this.unBind();
+    
 
     this._disposeAttributes();
     this.updateVertices(this._geom);
@@ -263,10 +263,12 @@ CGL.Mesh.prototype._preBind=function(shader)
 
 CGL.Mesh.prototype._bind=function(shader)
 {
+    if(shader!=this._lastShader)this.unBind();
     var attrLocs=[];
     if(this._attribLocs[shader.id]) attrLocs=this._attribLocs[shader.id];
         else this._attribLocs[shader.id]=attrLocs;
 
+    this._lastShader=shader;
     var i=0;
     if(shader.lastCompile>this._lastAttrUpdate || attrLocs.length!=this._attributes.length)
     {
@@ -283,6 +285,7 @@ CGL.Mesh.prototype._bind=function(shader)
             {
                 attribute._attrLocationLastShaderTime=shader.lastCompile;
                 attrLocs[i] = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
+                CGL.profileAttrLoc++;
             }
         }
             
@@ -335,6 +338,7 @@ CGL.Mesh.prototype._bind=function(shader)
                         var pointer=attribute.pointer[ip];
 
                         if(pointer.loc==-1) pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
+                        CGL.profileAttrLoc++;
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
                         // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
@@ -349,15 +353,17 @@ CGL.Mesh.prototype._bind=function(shader)
     if(this._bufVerticesIndizes.numItems!==0) this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 };
 
-CGL.Mesh.prototype.unBind=function(shader)
+CGL.Mesh.prototype.unBind=function()
 {
+    shader=this._lastShader;
+    this._lastShader=null;
     if(!shader) return;
+    
     var attrLocs=[];
     if(this._attribLocs[shader.id]) attrLocs=this._attribLocs[shader.id];
         else this._attribLocs[shader.id]=attrLocs;
 
-    CGL.MESH.lastShader=null;
-    CGL.MESH.lastMesh=null;
+        CGL.MESH.lastMesh=null;
     
     for(var i=0;i<this._attributes.length;i++)
     {
@@ -429,24 +435,28 @@ CGL.Mesh.prototype.render=function(shader)
     }
 
     var needsBind=false;
-    if(CGL.MESH.lastMesh!=this || CGL.MESH.lastShader!=shader)
+    if(CGL.MESH.lastMesh!=this )
     {
+        if(CGL.MESH.lastMesh) CGL.MESH.lastMesh.unBind();
         needsBind=true;
-        if(CGL.MESH.lastMesh && CGL.MESH.lastShader) CGL.MESH.lastMesh.unBind(CGL.MESH.lastShader);
     }
-    if(!CGL.MESH.lastMesh || !CGL.MESH.lastShader) needsBind=true;
+
+    // var needsBind=false;
+    //     {
+    //     needsBind=true;
+    //         }
     if(needsBind) this._preBind(shader);
 
     shader.bind();
 
     if(shader.bindTextures)shader.bindTextures();
 
-    if(needsBind) this._bind(shader);
+    // if(needsBind) 
+    this._bind(shader);
     if(this.addVertexNumbers)this._setVertexNumbers();
 
     CGL.MESH.lastMesh=this;
-    CGL.MESH.lastShader=shader;
-
+    
     var prim=this._cgl.gl.TRIANGLES;
     if(this._glPrimitive!==undefined) prim=this._glPrimitive;
     if(shader.glPrimitive!==null) prim=shader.glPrimitive;
@@ -483,6 +493,9 @@ CGL.Mesh.prototype.render=function(shader)
         }
         // this.printDebug(shader);
     }
+
+    
+    
 };
 
 CGL.Mesh.prototype.setNumInstances=function(n)
