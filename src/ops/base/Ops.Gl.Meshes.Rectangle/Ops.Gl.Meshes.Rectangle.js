@@ -138,3 +138,8 @@ function rebuild()
     geomOut.set(geom);
 
 }
+
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}
