@@ -250,3 +250,7 @@ invertSteps.onChange=calc;
 drawSpline.onChange=calc;
 calc();
 
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}

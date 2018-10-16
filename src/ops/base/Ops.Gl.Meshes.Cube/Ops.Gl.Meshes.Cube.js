@@ -189,3 +189,10 @@ center.onValueChanged=buildMesh;
 
 
 buildMesh();
+
+
+
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}

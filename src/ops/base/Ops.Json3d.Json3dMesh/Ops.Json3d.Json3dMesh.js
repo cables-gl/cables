@@ -129,7 +129,11 @@ function updateInfo(geom)
 
 function setMesh()
 {
-    mesh=null;
+    if(mesh)
+    {
+        mesh.dispose();
+        mesh=null;
+    }
     var index=Math.floor(meshIndex.get());
 
     if(!data || index!=index || !isNumeric(index) || index<0 || index>=data.meshes.length)
@@ -188,6 +192,9 @@ function setMesh()
 
     calcNormals();
     geometryOut.set(geom);
+  
+    if(mesh)mesh.dispose();
+
     mesh=new CGL.Mesh(cgl,geom);
     needSetMesh=false;
     meshes[index]=mesh;

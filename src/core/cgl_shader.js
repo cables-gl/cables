@@ -27,6 +27,7 @@ CGL.Shader = function(_cgl, _name) {
     this.glslVersion = 0;
     if(_cgl.glVersion>1)this.glslVersion=300;
 
+    this.id=CABLES.simpleId();
     this._program = null;
     this._uniforms = [];
     this._drawBuffers=[true];
@@ -133,10 +134,6 @@ CGL.Shader = function(_cgl, _name) {
             }
         }
     };
-
-
-
-
 
     this.getAttrVertexPos = function() {
         return attrVertexPos;
@@ -338,8 +335,6 @@ CGL.Shader = function(_cgl, _name) {
             return a.priority||0 - b.priority||0;
         });
 
-
-
         // for (var j = 0; j < modules.length; j++) {
         //     console.log(j,modules[j].title);
         // }
@@ -363,7 +358,6 @@ CGL.Shader = function(_cgl, _name) {
                     srcVert+='\n\n//---- MOD: '+modules[j].title+' ------\n';
                     srcFrag+='\n\n//---- MOD: '+modules[j].title+' ------\n';
 
-                    
                     if(!addedAttributes)
                     {
                         addedAttributes=true;
@@ -398,10 +392,7 @@ CGL.Shader = function(_cgl, _name) {
                                     .endl()+'#endif';
                             }
                         }
-    
                     }
-
-
 
                     srcHeadVert += modules[j].srcHeadVert || '';
                     srcHeadFrag += modules[j].srcHeadFrag || '';
@@ -413,7 +404,6 @@ CGL.Shader = function(_cgl, _name) {
 
                     srcVert+='\n//---- end mod ------\n';
                     srcFrag+='\n//---- end mod ------\n';
-
 
                     srcVert = srcVert.replace(/{{mod}}/g, modules[j].prefix);
                     srcFrag = srcFrag.replace(/{{mod}}/g, modules[j].prefix);
@@ -539,7 +529,6 @@ CGL.Shader = function(_cgl, _name) {
             CGL.profileMVPMatrixCount++;
         }
 
-
         if (normalMatrixUniform)
         {
             var normalMatrix = mat4.create();
@@ -631,9 +620,7 @@ CGL.Shader = function(_cgl, _name) {
     this.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
     this.getCurrentModules=function(){return modules;};
-
 };
-
 
 CGL.Shader.prototype.setDrawBuffers = function(arr) {
     this._drawBuffers=arr;
@@ -864,9 +851,7 @@ CGL.Shader.createShader = function(cgl, str, type, cglShader) {
         htmlWarning = infoLog + '<br/>' + htmlWarning + '<br/><br/>';
 
         if (CABLES.UI) CABLES.UI.MODAL.showError('shader error ' + name, htmlWarning);
-        else {
-            console.log('shader error ' + name, htmlWarning);
-        }
+            else console.log('shader error ' + name, htmlWarning);
 
         htmlWarning += '</div>';
 

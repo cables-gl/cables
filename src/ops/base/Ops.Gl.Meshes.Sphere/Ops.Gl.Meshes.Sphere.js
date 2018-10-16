@@ -156,3 +156,9 @@ function uvSphere(radius, slices, stacks)
 
 }
 
+
+
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}
