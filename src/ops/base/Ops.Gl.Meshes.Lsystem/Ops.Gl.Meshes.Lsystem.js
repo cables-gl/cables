@@ -202,21 +202,17 @@ function extract(str,pos)
 
     var current = "";
     var output =  "";
+    var number = "";
+    //starts i at 1 to drop character which is actaully the identifying key !
+    //starting at 0 gives key but needs a rewrite 
     for (var i = 1; i < str.length;i++)
     {
-        var number = "";
         output = slicedSent.slice(i);
 
         for (var j = 0; j < output.length; j++)
         {
-
             var lookup = output.charAt(j);
-            
-            if (isNaN(lookup) && isNaN(output.charAt(j+1)))
-            {
-                return inDefaultAngle.get();
-            }
-            else if (!Number.isNaN(lookup)  )
+            if (!Number.isNaN(lookup)  )
             {
                 number += lookup;   
             }
@@ -224,13 +220,14 @@ function extract(str,pos)
             {
                 break;
             }
-            
-            
         }
-        console.log("final number is " + number);
+        //return number;
         return parseFloat(number);
+        
     }
+    
 }
+
 
 //recreates the turtle algorithm
 function turtle()
@@ -246,8 +243,8 @@ function turtle()
     var currentBranch = 0;
     for(var i = 0; i < sentence.length; i++)
     {
-        //console.log("extract in turtle is " + extract(sentence,i));
         var current = sentence.charAt(i);
+
         //step forward, create point
         if(current == "F")
         {
@@ -279,33 +276,46 @@ function turtle()
         //turn counter counter clockwise x defined by angle
         else if (current == "x")
         {
-            
-            //console.log("in x extract is " + extract(sentence,i))
-            angleUi = -extract(sentence,i) * angleMultiplier ;
+            if(isNaN(sentence.charAt(i+1)) )
+                angleUi = -inDefaultAngle.get() * angleMultiplier;
+            else
+                angleUi = -extract(sentence,i) * angleMultiplier ;
             mat4.rotateX(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
         //turn counter clockwise x defined by angleUi
         else if (current == "X")
         {
-            angleUi = extract(sentence,i) * angleMultiplier;
+            if(isNaN(sentence.charAt(i+1)) )
+                angleUi = inDefaultAngle.get() * angleMultiplier;
+            else
+                angleUi = extract(sentence,i) * angleMultiplier;
             mat4.rotateX(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
         //turn counter counter clockwise y defined by angleUi
         else if (current == "y")
         {
-            angleUi = -extract(sentence,i) ;
+            if(isNaN(sentence.charAt(i+1)) )
+                angleUi = -inDefaultAngle.get() * angleMultiplier;
+            else
+                angleUi = -extract(sentence,i) * angleMultiplier ;
             mat4.rotateY(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
         //turn counter clockwise y defined by angleUi
         else if (current == "Y")
         {
-            angleUi = extract(sentence,i) ;
+            if(isNaN(sentence.charAt(i+1)) )
+                angleUi = inDefaultAngle.get() * angleMultiplier;
+            else
+                angleUi = extract(sentence,i) * angleMultiplier;
             mat4.rotateY(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
         }
         //turn counter counter clockwise z defined by angleUi
         else if (current == "z")
         {
-            angleUi = -extract(sentence,i) ;
+            if(isNaN(sentence.charAt(i+1)) )
+                angleUi = -inDefaultAngle.get() * angleMultiplier;
+            else
+                angleUi = -extract(sentence,i) * angleMultiplier ;
             mat4.rotateZ(trans,trans,CGL.DEG2RAD * (angleUi -Math.seededRandom()* inRandStr.get()));
         }
         //turn counter  clockwise z defined by angleUi
