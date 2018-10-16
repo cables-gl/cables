@@ -19,6 +19,7 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
     this._attributes=[];
+    this._attribLocs={};
     this._geom=null;
     this._numInstances=0;
     this._glPrimitive=glPrimitive;
@@ -123,7 +124,6 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     if(options && options.type)type=options.type;
     var attr=
         {
-            loc:-1,
             buffer:buffer,
             name:name,
             cb:cb,
@@ -137,7 +137,14 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     if(name==CGL.SHADERVAR_VERTEX_POSITION) this._bufVertexAttrib=attr;
     this._attributes.push(attr);
 
-    for(i=0;i<this._attributes.length;i++) this._attributes[i].loc=-1;
+
+    this._attribLocs={};
+    // for(var at in this._attribLocs)
+    //     for(i=0;i<this._attributes.length;i++)
+    //     {
+    //         this._attribLocs[at].length=0;
+    //         // this._attributes[i].loc=-1;
+    //     }
 
     return attr;
 };
@@ -220,7 +227,7 @@ CGL.Mesh.prototype.setGeom=function(geom)
     CGL.MESH.lastMesh=null;
     CGL.profileMeshSetGeom++;
 
-    if(!this.meshChanged()) this.unBind();
+    // if(!this.meshChanged()) this.unBind();
 
     this._disposeAttributes();
     this.updateVertices(this._geom);
@@ -256,28 +263,32 @@ CGL.Mesh.prototype._preBind=function(shader)
 
 CGL.Mesh.prototype._bind=function(shader)
 {
+    var attrLocs=[];
+    if(this._attribLocs[shader.id]) attrLocs=this._attribLocs[shader.id];
+        else this._attribLocs[shader.id]=attrLocs;
+
     var i=0;
-    if(shader.lastCompile>this._lastAttrUpdate)
+    if(shader.lastCompile>this._lastAttrUpdate || attrLocs.length!=this._attributes.length)
     {
         this._lastAttrUpdate=shader.lastCompile;
-        for(i=0;i<this._attributes.length;i++) this._attributes[i].loc=-1;
+        for(i=0;i<this._attributes.length;i++) attrLocs[i]=-1;
     }
 
     for(i=0;i<this._attributes.length;i++)
     {
         var attribute=this._attributes[i];
-        if(attribute.loc==-1)
+        if(attrLocs[i]==-1)
         {
             if(attribute._attrLocationLastShaderTime!=shader.lastCompile)
             {
                 attribute._attrLocationLastShaderTime=shader.lastCompile;
-                attribute.loc = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
+                attrLocs[i] = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
             }
         }
             
-        if(attribute.loc!=-1)
+        if(attrLocs[i]!=-1)
         {
-            this._cgl.gl.enableVertexAttribArray(attribute.loc);
+            this._cgl.gl.enableVertexAttribArray(attrLocs[i]);
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
 
             if(attribute.instanced)
@@ -287,23 +298,23 @@ CGL.Mesh.prototype._bind=function(shader)
                 {
                     if(!attribute.itemSize || attribute.itemSize==0) console.log("instanced attrib itemsize error",this._geom.name,attribute);
 
-                    this._cgl.gl.vertexAttribPointer(attribute.loc, attribute.itemSize, attribute.type,  false, attribute.itemSize*4,0);
-                    this._cgl.gl.vertexAttribDivisor(attribute.loc, 1);
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type,  false, attribute.itemSize*4,0);
+                    this._cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
                 }
                 else if(attribute.itemSize==16)
                 {
-                    this._cgl.gl.vertexAttribPointer(attribute.loc, 4, attribute.type,  false, 16*4,0);
-                    this._cgl.gl.enableVertexAttribArray(attribute.loc+1);
-                    this._cgl.gl.vertexAttribPointer(attribute.loc+1, 4, attribute.type,  false, 16*4, 4*4*1);
-                    this._cgl.gl.enableVertexAttribArray(attribute.loc+2);
-                    this._cgl.gl.vertexAttribPointer(attribute.loc+2, 4, attribute.type,  false, 16*4, 4*4*2);
-                    this._cgl.gl.enableVertexAttribArray(attribute.loc+3);
-                    this._cgl.gl.vertexAttribPointer(attribute.loc+3, 4, attribute.type,  false, 16*4, 4*4*3);
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i], 4, attribute.type,  false, 16*4,0);
+                    this._cgl.gl.enableVertexAttribArray(attrLocs[i]+1);
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+1, 4, attribute.type,  false, 16*4, 4*4*1);
+                    this._cgl.gl.enableVertexAttribArray(attrLocs[i]+2);
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+2, 4, attribute.type,  false, 16*4, 4*4*2);
+                    this._cgl.gl.enableVertexAttribArray(attrLocs[i]+3);
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+3, 4, attribute.type,  false, 16*4, 4*4*3);
 
-                    this._cgl.gl.vertexAttribDivisor(attribute.loc, 1);
-                    this._cgl.gl.vertexAttribDivisor(attribute.loc+1, 1);
-                    this._cgl.gl.vertexAttribDivisor(attribute.loc+2, 1);
-                    this._cgl.gl.vertexAttribDivisor(attribute.loc+3, 1);
+                    this._cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
+                    this._cgl.gl.vertexAttribDivisor(attrLocs[i]+1, 1);
+                    this._cgl.gl.vertexAttribDivisor(attrLocs[i]+2, 1);
+                    this._cgl.gl.vertexAttribDivisor(attrLocs[i]+3, 1);
                 }else{console.log('unknown instance attrib size',attribute.name)}
             }
             else
@@ -311,7 +322,7 @@ CGL.Mesh.prototype._bind=function(shader)
                 if(!attribute.itemSize || attribute.itemSize==0) console.log("attrib itemsize error",this._geom.name,attribute);
 
                 this._cgl.gl.vertexAttribPointer(
-                    attribute.loc,
+                    attrLocs[i],
                     attribute.itemSize,
                     attribute.type,
                     false,
@@ -340,6 +351,11 @@ CGL.Mesh.prototype._bind=function(shader)
 
 CGL.Mesh.prototype.unBind=function(shader)
 {
+    if(!shader) return;
+    var attrLocs=[];
+    if(this._attribLocs[shader.id]) attrLocs=this._attribLocs[shader.id];
+        else this._attribLocs[shader.id]=attrLocs;
+
     CGL.MESH.lastShader=null;
     CGL.MESH.lastMesh=null;
     
@@ -352,22 +368,22 @@ CGL.Mesh.prototype.unBind=function(shader)
             // todo: easier way to fill mat4 attribs...
             if(this._attributes[i].itemSize<=4)
             {
-                if(this._attributes[i].loc!=-1)this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
-                 if(this._attributes[i].loc>=0)this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
+                if(attrLocs[i]!=-1)this._cgl.gl.vertexAttribDivisor(attrLocs[i], 0);
+                 if(attrLocs[i]>=0)this._cgl.gl.disableVertexAttribArray(attrLocs[i]);
             }
             else
             {
-                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc, 0);
-                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+1, 0);
-                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+2, 0);
-                this._cgl.gl.vertexAttribDivisor(this._attributes[i].loc+3, 0);
-                this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc+1);
-                this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc+2);
-                this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc+3);
+                this._cgl.gl.vertexAttribDivisor(attrLocs[i], 0);
+                this._cgl.gl.vertexAttribDivisor(attrLocs[i]+1, 0);
+                this._cgl.gl.vertexAttribDivisor(attrLocs[i]+2, 0);
+                this._cgl.gl.vertexAttribDivisor(attrLocs[i]+3, 0);
+                this._cgl.gl.disableVertexAttribArray(attrLocs[i]+1);
+                this._cgl.gl.disableVertexAttribArray(attrLocs[i]+2);
+                this._cgl.gl.disableVertexAttribArray(attrLocs[i]+3);
             }
         }
 
-        if(this._attributes[i].loc!=-1) this._cgl.gl.disableVertexAttribArray(this._attributes[i].loc);
+        if(attrLocs[i]!=-1) this._cgl.gl.disableVertexAttribArray(attrLocs[i]);
     }
 };
 
