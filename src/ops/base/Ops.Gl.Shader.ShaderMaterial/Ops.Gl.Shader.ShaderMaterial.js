@@ -110,7 +110,6 @@ function updateShader()
     }
 
     if(CABLES.UI) gui.patch().showOpParams(op);
-    console.log(2);
     outShader.set(null);
     outShader.set(shader);
 

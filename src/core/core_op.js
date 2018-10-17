@@ -527,9 +527,19 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.log=function()
     {
-        if(!this.patch.silent)
-            Function.prototype.apply.apply(console.log, [console, arguments]);
+        if(!this.patch.silent) Function.prototype.apply.apply(console.log, [console, arguments]);
     };
+
+    CABLES.Op.prototype.error=function()
+    {
+        if(!this.patch.silent) Function.prototype.apply.apply(console.error, [console, arguments]);
+    };
+
+    CABLES.Op.prototype.warn=function()
+    {
+        if(!this.patch.silent) Function.prototype.apply.apply(console.warn, [console, arguments]);
+    };
+
 
     CABLES.Op.prototype.undoUnLinkTemporary=function()
     {

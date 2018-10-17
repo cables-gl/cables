@@ -8,19 +8,23 @@
             },
             {
                 "type": "0",
-                "name": "stacks"
+                "name": "stacks",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "slices"
+                "name": "slices",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "radius"
+                "name": "radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Render"
+                "name": "Render",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -35,7 +39,7 @@
         ],
         "name": "Ops.Gl.Meshes.Sphere"
     },
-    "updated": 1539674988844,
+    "updated": 1539785612986,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f12b6515-4432-4a78-8194-556b09154b84",
