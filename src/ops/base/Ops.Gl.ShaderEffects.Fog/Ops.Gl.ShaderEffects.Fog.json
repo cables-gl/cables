@@ -7,27 +7,33 @@
             },
             {
                 "type": "0",
-                "name": "Start"
+                "name": "Start",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "End"
+                "name": "End",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -38,8 +44,12 @@
         ],
         "name": "Ops.Gl.ShaderEffects.Fog"
     },
-    "updated": 1524478605082,
+    "updated": 1539760144064,
     "authorName": "pandur",
     "id": "ad61e198-f178-42d0-8be9-cc776365cd3b",
-    "created": 1524478605086
+    "created": 1524478605086,
+    "summary": "Fog as a shadereffect applied to a material",
+    "docs": {
+        "ports": []
+    }
 }
