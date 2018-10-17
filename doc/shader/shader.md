@@ -55,35 +55,77 @@ IN vec3 norm;          - normal
 `Ops.Gl.Shader.ShaderMaterial` can be used to live-edit shaders and see the results immediately. 
 You can use shaderMaterial with any kind of mesh and the mesh will be drawn using your custom shader.
 
-![shadermaterial](/Users/tom/dev/cables/cables/doc/shader/shadermaterial.png)
+![shadermaterial](shadermaterial.png)
 
 You can edit Fragment and Vertex Shader Code.
 
 Uniforms are automatically added as Ports of the ShaderMaterial Op. (Currently `float` and `sampler2D`)
-
 
 ------
 
 
 ### Ops.Gl.Shader.ShowShader
 
-![showshader](/Users/tom/dev/cables/cables/doc/shader/showshader.png)
+![showshader](showshader.png)
 
 You can always use `Ops.Gl.Shader.ShowShader` to view the source code of the current shader.
 This is helpful if you combine multiple shaders via modules.
-
 
 ------
 
 
 
+## Programming shader ops 
 
-### programming shader ops 
+### Attachments
 
-- attachments
+Attachments are files that can be created and read as a string in the op they are attached to.  
+
+An attachment file can be created by clicking on an op and then clicking the create button
+
+<br/>
+
+
+
+![create_attachment](create_attachment.png)
+
+<br/>
+
+Fill in the name of your attachment file
+
+<br/>
+
+![name_attachment](name_attachment.png)
+
+
+
+You can edit the attachment file by clicking on the edit button
+
+![edit_attachment](edit_attachment.png)
+
+
+
+This will open the editor allowing you to add your own script
+
+![hello_world_img](hello_world_attachment.png)
+
+
+
+The attachment can now be accessed inside of your op, select the op and press 'e' to enter edit mode.
+
+ ![read_attachment_img](read_attachment.png)
+
+<br/>
+
+
+
+![output_attachment_img](output_attachment.png)
+
+
+
 - binding ports to uniforms
 - adding attributes?
-  ​
+
 
 ### shader modules
 
