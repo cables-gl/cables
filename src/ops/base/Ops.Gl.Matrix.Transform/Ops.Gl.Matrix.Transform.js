@@ -57,7 +57,7 @@ render.onTriggered=function()
     trigger.trigger();
     cgl.popModelMatrix();
     
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:posX,
