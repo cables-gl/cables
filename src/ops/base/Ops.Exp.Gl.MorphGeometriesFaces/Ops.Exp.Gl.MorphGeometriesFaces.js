@@ -1,4 +1,3 @@
-
 var render=op.inFunction("Render");
 var next=op.outFunction("Next");
 
@@ -16,7 +15,7 @@ var shader=null;
 var mesh=null;
 var module=null;
 var needsRebuild=true;
-
+var uniFade=null;
 inGeomA.onChange=rebuildLater;
 inGeomB.onChange=rebuildLater;
 
@@ -79,10 +78,7 @@ render.onTriggered=function()
     mesh.render(cgl.getShader());
     
     next.trigger();
-
 };
-
-
 
 inStart.onChange=updateStart;
 inEnd.onChange=updateEnd;

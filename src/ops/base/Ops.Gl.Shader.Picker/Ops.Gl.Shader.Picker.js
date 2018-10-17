@@ -1,4 +1,3 @@
-op.name='Picker';
 op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
 var useMouseCoords=op.inValueBool("Use Mouse Coordinates",true);

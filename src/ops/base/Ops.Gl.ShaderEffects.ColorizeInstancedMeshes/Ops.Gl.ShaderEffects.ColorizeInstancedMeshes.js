@@ -118,8 +118,8 @@ op.render.onTriggered=function()
 
     if(inLookup.get())
     {
-        /* --- */cgl.setTexture(5);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLookup.get().tex);
+        cgl.setTexture(5,inLookup.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLookup.get().tex);
     }
     
     if(!shader)return;

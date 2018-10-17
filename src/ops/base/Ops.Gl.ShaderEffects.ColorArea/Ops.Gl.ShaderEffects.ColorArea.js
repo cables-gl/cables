@@ -1,4 +1,3 @@
-
 var cgl=op.patch.cgl;
 
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));

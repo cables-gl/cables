@@ -23,6 +23,9 @@
             }
         ],
         "name": "Ops.Trigger.Past"
+    },
+    "summary": "Triggers only once when threshold is crossed",
+    "docs": {
+        "ports": []
     }
 }
-

@@ -21,13 +21,13 @@ function bindTextures()
 {
     if(diffuseTexture.get())
     {
-        /* --- */cgl.setTexture(0, diffuseTexture.get().tex);
+        cgl.setTexture(0, diffuseTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
 
     if(op.textureOpacity.get())
     {
-        /* --- */cgl.setTexture(1, op.textureOpacity.get().tex);
+        cgl.setTexture(1, op.textureOpacity.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.get().tex);
     }
 }
