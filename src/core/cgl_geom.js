@@ -323,7 +323,7 @@ CGL.Geometry.prototype.unIndex=function()
     var newNormals=[];
     var count=0;
     var i=0;
-    // this.vertexNormals.length=0;
+    this.vertexNormals.length=0;
 
     for(i=0;i<this.verticesIndices.length;i+=3)
     {
@@ -402,8 +402,8 @@ CGL.Geometry.prototype.unIndex=function()
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
     this.vertexNormals=newNormals;
-    this.verticesIndices=[];
-    // this.calculateNormals();
+    this.verticesIndices=newIndizes;
+    this.calculateNormals();
 };
 
 CGL.Geometry.prototype.calcBarycentric=function()
