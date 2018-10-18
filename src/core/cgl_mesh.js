@@ -324,6 +324,7 @@ CGL.Mesh.prototype._bind=function(shader)
             {
                 if(!attribute.itemSize || attribute.itemSize==0) console.log("attrib itemsize error",this._geom.name,attribute);
 
+
                 this._cgl.gl.vertexAttribPointer(
                     attrLocs[i],
                     attribute.itemSize,
