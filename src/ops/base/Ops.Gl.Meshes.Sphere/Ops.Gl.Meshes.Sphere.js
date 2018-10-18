@@ -17,10 +17,11 @@ var geomVertexNormals=[];
 var geomTexCoords=[];
 var geomVerticesIndices=[];
 
-
-inSlices.onChange=function(){ mesh=null; };
-inStacks.onChange=function(){ mesh=null; };
-inRadius.onChange=function(){ mesh=null; };
+inSlices.onChange=inStacks.onChange=inRadius.onChange=function()
+    {
+        if(mesh)mesh.dispose();
+        mesh=null;
+    };
 
 op.preRender=
 render.onTriggered=function()
@@ -138,7 +139,6 @@ function uvSphere(radius, slices, stacks)
             indices[k++] = row1 + i;
             indices[k++] = row2 + i + 1;
             indices[k++] = row1 + i + 1;
-
         }
     }
 
@@ -152,10 +152,7 @@ function uvSphere(radius, slices, stacks)
 
     if(!mesh)mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
-
 }
-
-
 
 op.onDelete=function()
 {

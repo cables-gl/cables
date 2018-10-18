@@ -11,20 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "Seed"
+                "name": "Seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Num Points"
+                "name": "Num Points",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scramble Texcoords"
+                "name": "Scramble Texcoords",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.Meshes.PointCloudFromArray"
     },
-    "updated": 1505232190495,
+    "updated": 1539785001135,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "0a6d9c6f-6459-45ca-88ad-268a1f7304db",

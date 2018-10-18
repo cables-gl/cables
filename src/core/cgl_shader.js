@@ -736,6 +736,8 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + 'IN vec3 vPosition;'
         .endl() + 'IN vec2 attrTexCoord;'
         .endl() + 'IN vec3 attrVertNormal;'
+        .endl() + 'IN float attrVertIndex;'
+        
         .endl() + 'OUT vec2 texCoord;'
         .endl() + 'OUT vec3 norm;'
         .endl() + 'UNI mat4 projMatrix;'

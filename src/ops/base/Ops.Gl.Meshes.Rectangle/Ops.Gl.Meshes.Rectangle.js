@@ -128,6 +128,8 @@ function rebuild()
     geom.verticesIndices=indices;
     geom.vertexNormals=norms;
     geom.calculateNormals();
+    
+    if(numColumns*numRows>64000)geom.unIndex();
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);
