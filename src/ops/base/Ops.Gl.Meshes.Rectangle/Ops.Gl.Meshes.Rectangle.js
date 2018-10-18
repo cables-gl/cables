@@ -25,8 +25,6 @@ op.setPortGroup([pivotX,pivotY]);
 op.setPortGroup([width,height]);
 op.setPortGroup([nColumns,nRows]);
 
-
-
 var geom=new CGL.Geometry('rectangle');
 var mesh=null;
 

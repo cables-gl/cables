@@ -26,5 +26,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.ShaderEffects.LimitMeshByTexCoord"
+    },
+    "summary": "discard pixel if texture coordinate is below threshold",
+    "docs": {
+        "ports": []
     }
 }

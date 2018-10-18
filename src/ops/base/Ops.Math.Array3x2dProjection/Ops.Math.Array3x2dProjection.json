@@ -45,5 +45,9 @@
             }
         ],
         "name": "Ops.Math.Array3x2dProjection"
+    },
+    "summary": "calculate 2d positions of an array3x",
+    "docs": {
+        "ports": []
     }
 }
