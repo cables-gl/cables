@@ -86,6 +86,11 @@ function setupArray()
                 transforms[i*3+2]
             ]);
         
+        
+        // mat4.rotateX(m,m,33*CGL.DEG2RAD);
+        // mat4.rotateY(m,m,33*CGL.DEG2RAD);
+        // mat4.rotateZ(m,m,33*CGL.DEG2RAD);
+        
         if(scales && scales.length>i) mat4.scale(m,m,[scales[i],scales[i],scales[i]]);
             else mat4.scale(m,m,[1,1,1]);
 
@@ -113,6 +118,7 @@ function doRender()
             mod=shader.addModule(
                 {
                     name: 'MODULE_VERTEX_POSITION',
+                    title: op.objName,
                     priority:-2,
                     srcHeadVert: srcHeadVert,
                     srcBodyVert: srcBodyVert
