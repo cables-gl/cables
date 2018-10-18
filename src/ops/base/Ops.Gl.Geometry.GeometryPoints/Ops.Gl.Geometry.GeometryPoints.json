@@ -31,5 +31,8 @@
         ],
         "name": "Ops.Gl.Geometry.GeometryPoints"
     },
-    "summary": "get vertices of a geometry as array3x"
+    "summary": "get vertices of a geometry as array3x (vertex vertices)",
+    "docs": {
+        "ports": []
+    }
 }

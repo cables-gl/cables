@@ -1,16 +1,15 @@
-var cgl=this.patch.cgl;
+const render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+const trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+const points=this.addInPort(new Port(this,"points",OP_PORT_TYPE_ARRAY));
+const doCenter=this.addInPort(new Port(this,"center",OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var points=this.addInPort(new Port(this,"points",OP_PORT_TYPE_ARRAY));
-var doCenter=this.addInPort(new Port(this,"center",OP_PORT_TYPE_VALUE,{display:'bool'}));
+const cgl=this.patch.cgl;
 
 points.ignoreValueSerialize=true;
 
 var meshes=[];
 
 doCenter.onValueChanged=create;
-
 
 var cycle=0;
 render.onTriggered=function()

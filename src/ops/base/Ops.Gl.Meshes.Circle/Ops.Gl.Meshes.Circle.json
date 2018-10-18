@@ -43,13 +43,13 @@
             },
             {
                 "type": "0",
-                "name": "Spline",
-                "subType": "boolean"
+                "name": "mapping",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "mapping",
-                "subType": "string"
+                "name": "Spline",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -64,7 +64,7 @@
         ],
         "name": "Ops.Gl.Meshes.Circle"
     },
-    "updated": 1539674888193,
+    "updated": 1539782206855,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "4db917cc-2cef-43f4-83d5-38c4572fe943",

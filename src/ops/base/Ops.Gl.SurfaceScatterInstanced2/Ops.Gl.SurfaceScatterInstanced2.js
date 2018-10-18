@@ -33,7 +33,7 @@ render.onTriggered=doRender;
 render.onLinkChanged=removeModule;
 
 
-function uniqueIndeces(oldCount,newCount,randomize)
+function uniqueIndices(oldCount,newCount,randomize)
 {
     function fisherYatesShuffle(array) {
       var i = 0;
@@ -61,7 +61,7 @@ function setup()
 {
     if(!mesh)return;
     var geom=inGeomSurface.get();
-    var num=inNum.get();
+    var num=Math.abs(Math.floor(inNum.get()));
     var m=mat4.create();
     var q=quat.create();
     var vm2=vec3.create();
@@ -85,7 +85,7 @@ function setup()
     if(geom.isIndexed())
     {
         var faces=geom.verticesIndices;
-        var indices=uniqueIndeces(faces.length/3,num,inVariety.get()=="Random");
+        var indices=uniqueIndices(faces.length/3,num,inVariety.get()=="Random");
         
         for(var i=0;i<num;i++)
         {

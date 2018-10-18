@@ -51,7 +51,7 @@ var doRender=function()
 
 opacity.onValueChanged=function()
 {
-    uniOpacity.setValue(opacity.get());
+    shader.uniOpacity.setValue(opacity.get());
 };
 
 

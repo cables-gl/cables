@@ -146,10 +146,11 @@ function uvSphere(radius, slices, stacks)
     geom.vertexNormals=normals;
     geom.texCoords=texCoords;
     geom.verticesIndices=indices;
+    geom.glPrimitive=cgl.gl.TRIANGLE_STRIP;
 
     geomOut.set(geom);
 
-    if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.D);
+    if(!mesh)mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
 }
 

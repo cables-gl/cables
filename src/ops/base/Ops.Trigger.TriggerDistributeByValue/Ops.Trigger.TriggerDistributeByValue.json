@@ -110,7 +110,7 @@
         ],
         "name": "Ops.Trigger.TriggerDistributeByValue"
     },
-    "summary": "",
+    "summary": "triggers evenly distributed by value",
     "docs": {
         "ports": [
             {
