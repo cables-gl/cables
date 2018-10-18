@@ -28,7 +28,6 @@ const inStepScale = op.inValue("Step scale multiplier",0.995);
 const inDefaultAngle = op.inValue("Default angle");
 const inRotateMutliplier = op.inValue("Rotation multiplier");
 
-var needsCalc = true;
 
 const outTrigger = op.outTrigger("out trigger");
 const lineTrigger = op.outTrigger("line trigger");
@@ -37,7 +36,6 @@ const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
 const outIterationNumber = op.outValue("iteration number");
 const outBranchNumber = op.outValue("branch number");
-
 
 const seed = op.inValue("random seed");
 const inRandStr = op.inValue("random strength");
@@ -61,30 +59,33 @@ var currentPointArray=[];
 var lastPointArray=[0,0,0];
 
 
-
-
 //this becomes the axiom after the resetAll() is called 
 var sentence = "";//axiom;
 
 //an array that holds the string replacment rules
 var rules = []
 
-
+var needsCalc = true;
 //UI input 
-inRotateMutliplier.onChange = generate;
-inStepLength.onChange = generate;
-inStepScale.onChange = generate;
-inIterations.onChange = generate;
+inRotateMutliplier.onChange = calcLater;
+inStepLength.onChange = calcLater;
+inStepScale.onChange = calcLater;
+inIterations.onChange = calcLater;
 inExe.onTriggered = render;
-seed.onChange = generate;
-inRandStr.onChange = generate;
-inDefaultAngle.onChange = generate;
+seed.onChange = calcLater;
+inRandStr.onChange = calcLater;
+inDefaultAngle.onChange = calcLater;
 
+//if user changes rules or contants the the definesRules is updated
 inStrAxiom.onChange = defineRules;
 inStrConstant1.onChange = defineRules;
 inStrRule1.onChange = defineRules;
 inStrConstant2.onChange = defineRules;
 inStrRule2.onChange = defineRules;
+inStrConstant3.onChange = defineRules;
+inStrRule3.onChange = defineRules;
+inStrConstant4.onChange = defineRules;
+inStrRule4.onChange = defineRules;
 
 //creates the constants and the rule sets
 function defineRules()
@@ -100,6 +101,7 @@ function defineRules()
         g : inStrConstant4.get(),
         h : inStrRule4.get()
     }
+
     generate();
 }
 //reset everything
@@ -112,17 +114,21 @@ function resetAll()
     lenScale = inStepScale.get();
 }
 
+
 //generates the string from the ruleset
 function generate()
 {
-   
     //reset the state of everything   
     resetAll();
+
+    var iterationOutput = 0;
     var nextSentence = "";
-    var iterationsLimit = Math.min(4,inIterations.get());
-    for (var iter = 0; iter < iterationsLimit ; iter++)
+    var iterationsLimit = Math.min(6,inIterations.get());
+    var iter;
+    for (iter = 0; iter < iterationsLimit ; iter++)
     {
-        outIterationNumber.set(iter+1);
+        // outIterationNumber.set(iter+1);
+        iterationOutput = iter+1;
         for (var i =0; i < sentence.length; i++)
         {
             var current = sentence.charAt(i);
@@ -169,19 +175,21 @@ function generate()
                 
             }    
             //if nothing is found continue no matter what
-            if(!found)  nextSentence += current;
+            if(!found)nextSentence += current;
         }
         //final result
         sentence = nextSentence ;
         //used to debug the sentence as a string
         //can be removed later
-        stringOut.set(sentence);
+        //stringOut.set(sentence);
        
-        //removing thiswill add everything on top of each other recursively
+        //removing this will add everything on top of each other recursively
         nextSentence="";
     }
+
     //draw everything once with the turtle function
     turtle();
+    needsCalc=false;
 }
 
 
@@ -189,43 +197,33 @@ var pos=vec3.create();
 var empty=vec3.create();  
 
 
-function percentage(num, per)
-{
-  return (num/100)*per;
-}
-
 //extracts the user defined angle
 //FfFx45yFF30 returns 45 on the x axis
 function extract(str,pos)
 {
-    var slicedSent = str.slice(pos);
-
-    var current = "";
+    var slicedSentence = str.slice(pos);
     var output =  "";
-    var number = "";
-    //starts i at 1 to drop character which is actaully the identifying key !
-    //starting at 0 gives key but needs a rewrite 
+    var parsedNumber = "";
+    var currentChar = ""
+    //starts i at 1 to drop character which is actually the identifying key!
     for (var i = 1; i < str.length;i++)
     {
-        output = slicedSent.slice(i);
+        output = slicedSentence.slice(i);
 
         for (var j = 0; j < output.length; j++)
         {
-            var lookup = output.charAt(j);
-            if (!Number.isNaN(lookup)  )
+            currentChar = output.charAt(j);
+            if (!Number.isNaN(currentChar))
             {
-                number += lookup;   
+                parsedNumber += currentChar;
             }
-            else if (Number.isNaN(lookup))
+            else if (Number.isNaN(currentChar))
             {
                 break;
             }
         }
-        //return number;
-        return parseFloat(number);
-        
     }
-    
+    return parseFloat(parsedNumber);
 }
 
 
@@ -321,77 +319,73 @@ function turtle()
         //turn counter  clockwise z defined by angleUi
         else if (current == "Z")
         {
-            angleUi = extract(sentence,i) ;
+            if(isNaN(sentence.charAt(i+1)) )
+                angleUi = inDefaultAngle.get() * angleMultiplier;
+            else
+                angleUi = extract(sentence,i) * angleMultiplier ;
             mat4.rotateZ(trans,trans,CGL.DEG2RAD * (angleUi + Math.seededRandom()* inRandStr.get()));
-        }
-        ////turn 180 degrees
-        else if (current == "|")
-        {
-            mat4.rotateZ(trans,trans,CGL.DEG2RAD * 180.0);
         }
         else if (current == "[")
         {
             //get current transform matrix push into stack, branch start
             stack.push(mat4.clone(trans));
+            //output current branch number
             currentBranch +=1;
         }
-        //
         else if (current == "]")
         {
             //stack.pop();//with tree this pop destroys the branching
             //get the current branch push into the transform matrix
 
-            // //check if branch has a start to avoid error
+            //check if branch has a start to avoid error
             if(stack.length === 0) 
             {
                 break;
             }
             //send out current branch number
             outBranchNumber.set(currentBranch);
-            
+
             trans = stack[stack.length-1];
             stack.pop();
             // lastPointArray=currentPointArray;
             pointArrays.push(currentPointArray);
             //comment out to see branch start end
             currentPointArray=[];
-            
-            
+
             // currentPointArray.push(
             //     lastPointArray[lastPointArray.length-3],
             //     lastPointArray[lastPointArray.length-2],
             //     lastPointArray[lastPointArray.length-1]);
-            
         }
     }
-
+    needsCalc = false;
     pointArrays.push(currentPointArray);
     outArray.set(transforms);
-    
-    //console.log("outPoints array length is " + pointArrays.length )
-    //outPointsArrayLength.set(currentPointArray.length);
+}
+
+function calcLater()
+{
+    needsCalc=true;
 }
 
 function render ()
 {
-    
-    //iterate through transforms array trigger all geometry
+    if(needsCalc)generate();
+    needsCalc = false;
+
+    //iterate through transforms array and trigger all geometry
     for(var i = 0; i < transforms.length; i++)
     {
         cgl.pushModelMatrix();
         mat4.multiply(cgl.mMatrix,cgl.mMatrix,transforms[i]);
         outTrigger.trigger();
         cgl.popModelMatrix();
+
     }
-    
-    //console.log("pointsArray array length is " + pointArrays.length )
     //iterate through points array for spline xyz data
     for(var i = 0; i < pointArrays.length ; i++)
     {
         outPoints.set(pointArrays[i]);
         lineTrigger.trigger();
     }
-    //outPoints.set(pointArrays);
-    //console.log("outPoints array length is " +outPoints.length )
-    
 }
