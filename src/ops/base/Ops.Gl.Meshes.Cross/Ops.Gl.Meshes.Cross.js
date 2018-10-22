@@ -5,10 +5,10 @@ var target = op.inValueBool('Crosshair');
 var active = op.inValueBool('Active',true);
 
 var trigger = op.outFunction('trigger');
-var outGeometry = op.outObject("geometry");
+var geomOut = op.outObject("geometry");
 
 
-var cgl = op.patch.cgl;
+var cgl= op.patch.cgl;
 var geom = null;
 var mesh = null;
 
@@ -17,25 +17,20 @@ thick.set(0.25);
 
 render.onTriggered=function()
 {
+    if(!mesh)buildMesh();
     if(active.get() && mesh) mesh.render(cgl.getShader());
     trigger.trigger();
-};
-
-op.preRender=function()
-{
-    buildMesh();
-    mesh.render(cgl.getShader());
 };
 
 
 function buildMesh()
 {
-    if(!geom)geom = new CGL.Geometry("cubemesh");
+    if(!geom)geom=new CGL.Geometry("cubemesh");
     geom.clear();
     
     var ext = extend.get();
     var thi = thick.get();
-    
+
     if (thi < 0.0) 
     {
         thi = 0.0;
@@ -44,17 +39,17 @@ function buildMesh()
     {
         thi = ext;
     }
-    
+
     if (ext < 0.0) 
     {
         ext = 0.0;
         thi = 0.0;
     }
-    
+
     //center verts
     var cx = thi;
     var cy = thi ;
-    
+
     //o is outer verts from center
     var ox = ext ;
     var oy = ext ;
@@ -90,20 +85,22 @@ function buildMesh()
         -cx,-cy,0,          //13
         cx, -cy,0,          //14
         cx,-oy,0            //15
-        
+
         ];
-    
+
     var texCoords = [];
-    for (var i = 0; i < geom.vertices.length; i += 3)
+    texCoords.length = (geom.vertices.length / 3.0) * 2.0;
+
+    for (var i = 0; i < geom.vertices.length;i += 3)
     {
         var vx = (geom.vertices[i] / (ox) + 1) / 2;
         var vy = (geom.vertices[i+1] / (oy) + 1) / 2;
-        
-        // var index = (i / 3.0) * 2.0;
-        texCoords.push(vx);
-        texCoords.push(vy);
+        var index = (i / 3.0) * 2.0;
+
+        texCoords[index] = vx;
+        texCoords[index+1] = vy;
     }
-    
+
     geom.setTexCoords(texCoords);
 
     geom.vertexNormals = [
@@ -133,51 +130,51 @@ function buildMesh()
         0.0,0.0,1.0,
         0.0,0.0,1.0,
         0.0,0.0,1.0
-        
-        
-    ];
-    //draws a solid cross
-    var solidCross =[
-        //center
-        0,1,2,      0,2,3,
-        //left
-        4,5,6,      4,6,7,
-        //right
-        8,9,10,     8,10,11,
-        //top
-        12,13,14,   12,14,15,
-        //bottom
-        16,17,18,   16,18,19
-        ];
-    //removes center quad to make a crosshair
-    var crossHair =[
-        //left
-        4,5,6,      4,6,7,
-        //right
-        8,9,10,     8,10,11,
-        //top
-        12,13,14,   12,14,15,
-        //bottom
-        16,17,18,   16,18,19
         ];
 
     if(target.get() == true )
     {
-        geom.verticesIndices = crossHair;
+        //draws a crosshair
+        geom.verticesIndices = [
+        //left
+        4,5,6,      4,6,7,
+        //right
+        8,9,10,     8,10,11,
+        //top
+        12,13,14,   12,14,15,
+        //bottom
+        16,17,18,   16,18,19
+        ];
     }
     else
     {
-        geom.verticesIndices = solidCross;
+        //draws a solid cross
+        geom.verticesIndices = [
+        //center
+        0,1,2, 0,2,3,
+        //left
+        4,5,6,      4,6,7,
+        //right
+        8,9,10,     8,10,11,
+        //top
+        12,13,14,   12,14,15,
+        //bottom
+        16,17,18,   16,18,19
+        ];
     }
-    
-    mesh = new CGL.Mesh(cgl,geom);
-    outGeometry.set(null);
-    outGeometry.set(geom);
+
+    mesh=new CGL.Mesh(cgl,geom);
+    geomOut.set(null);
+    geomOut.set(geom);
 
 }
 
-extend.onValueChanged = buildMesh;
-thick.onValueChanged = buildMesh;
-target.onChange = buildMesh;
+function buildMeshLater()
+{
+    if(mesh)mesh.dispose();
+    mesh = null;
+}
 
-buildMesh();
+extend.onChange = buildMeshLater;
+thick.onChange = buildMeshLater;
+target.onChange = buildMeshLater;
