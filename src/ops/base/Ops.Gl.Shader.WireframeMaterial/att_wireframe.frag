@@ -21,12 +21,14 @@ void main()
         vec3 wire = vec3(fr, fg, fb);
         col.rgb = vec3(r, g, b);
         col.rgb = mix(wire,col.rgb,v);
-       col.a = opacity;
+        col.a = opacity;
     #endif
 
     #ifndef WIREFRAME_FILL
        col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);
     #endif
+    
+    // col=vec4(barycentric,1.0);
     
     outColor=col;
 

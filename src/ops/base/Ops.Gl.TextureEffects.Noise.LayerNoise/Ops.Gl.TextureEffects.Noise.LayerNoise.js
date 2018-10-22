@@ -32,9 +32,34 @@ const uniRGBA = new CGL.Uniform(shader, "b", "rgba", false);
 const scroll = [inScrollX.get(),inScrollY.get(),inScrollZ.get()];
 const uniScroll = new CGL.Uniform(shader, "3f", "scroll", scroll);
 
+var needsUpdate=false;
 // events
 inTrigger.onTriggered = function () {
     if(!cgl.currentTextureEffect)return;
+    
+    if(needsUpdate)
+    {
+        attribs[0] = inScale.get();
+        attribs[1] = inNumLayers.get();
+        
+        var layerMode = inLayerMode.get();
+        if (layerMode == "linear")
+            uniMode.set(0);
+        else if (layerMode == "exponential")
+            uniMode.set(1);
+        else 
+            uniMode.set(2);
+    
+        attribs[2] = inFactor.get();
+        attribs[3] = inExponent.get();
+        uniRGBA.set(inRGBA.get());
+        scroll[0] = inScrollX.get();
+        scroll[1] = inScrollY.get();
+        scroll[2] = inScrollZ.get();
+        uniScroll.set(scroll);
+        needsUpdate=false;
+    }
+
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
     cgl.currentTextureEffect.finish();
@@ -62,23 +87,6 @@ inScrollX.onChange =
 inScrollY.onChange =
 inScrollZ.onChange =
 function () {
-    attribs[0] = inScale.get();
-    attribs[1] = inNumLayers.get();
-    
-    var layerMode = inLayerMode.get();
-    if (layerMode == "linear")
-        uniMode.set(0);
-    else if (layerMode == "exponential")
-        uniMode.set(1);
-    else 
-        uniMode.set(2);
-
-    attribs[2] = inFactor.get();
-    attribs[3] = inExponent.get();
-    uniRGBA.set(inRGBA.get());
-    scroll[0] = inScrollX.get();
-    scroll[1] = inScrollY.get();
-    scroll[2] = inScrollZ.get();
-    uniScroll.set(scroll);
+    needsUpdate=true;
 };
 

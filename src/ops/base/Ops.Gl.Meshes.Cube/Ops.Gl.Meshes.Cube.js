@@ -1,5 +1,3 @@
-op.name='Cube';
-
 var render=op.inFunction('render');
 var width=op.inValue('width');
 var height=op.inValue('height');
@@ -10,7 +8,6 @@ var active=op.inValueBool('Active',true);
 
 var trigger=op.outFunction('trigger');
 var geomOut=op.outObject("geometry");
-
 
 var cgl=op.patch.cgl;
 var geom=null;
@@ -31,7 +28,6 @@ op.preRender=function()
     buildMesh();
     mesh.render(cgl.getShader());
 };
-
 
 function buildMesh()
 {
@@ -175,10 +171,10 @@ function buildMesh()
         20, 21, 22,   20, 22, 23  // Left face
     ];
 
+    if(mesh)mesh.dispose();
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);
     geomOut.set(geom);
-
 }
 
 width.onValueChanged=buildMesh;
@@ -186,6 +182,9 @@ height.onValueChanged=buildMesh;
 lengt.onValueChanged=buildMesh;
 center.onValueChanged=buildMesh;
 
-
-
 buildMesh();
+
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}

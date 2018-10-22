@@ -1,4 +1,3 @@
-
 var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 
 var geometry=op.addInPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
@@ -31,7 +30,7 @@ function update()
     
     if(geom)
     {
-        // if(mesh)mesh.dispose();
+        if(mesh)mesh.dispose();
         if(!mesh)
         {
             mesh=new CGL.Mesh(op.patch.cgl,geom);

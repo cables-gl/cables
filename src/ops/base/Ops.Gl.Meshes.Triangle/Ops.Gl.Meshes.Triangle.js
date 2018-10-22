@@ -5,7 +5,6 @@ var sizeH=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
 const draw=op.inValueBool("Draw",true);
 var geom=new CGL.Geometry("triangle");
 
-
 sizeW.set(1);
 sizeH.set(1);
 
@@ -20,7 +19,6 @@ render.onTriggered=function()
     if(draw.get())mesh.render(cgl.getShader());
     trigger.trigger();
 };
-
 
 function create()
 {
@@ -42,16 +40,13 @@ function create()
          0.0,  1.0,
     ];
 
-    
     geom.verticesIndices = [
         0, 1, 2
     ];
 
-
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);
     geomOut.set(geom);
-
 }
 
 sizeW.onValueChange(create);

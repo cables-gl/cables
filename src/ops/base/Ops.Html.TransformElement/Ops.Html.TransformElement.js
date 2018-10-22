@@ -9,6 +9,26 @@ var m=mat4.create();
 var pos=vec3.create();
 var trans=vec3.create();
 
+exec.onTriggered=setProperties;
+op.onDelete=removeProperties;
+
+var oldEle=null;
+
+inEle.onLinkChanged = function() 
+{
+    if(!inEle.isLinked())
+    {
+        if(oldEle)
+        {
+            removeProperties(oldEle);
+        }
+    }
+    else
+    {
+        oldEle=inEle.get();
+    }
+};
+
 function getScreenCoord()
 {
     mat4.multiply(m,cgl.vMatrix,cgl.mMatrix);
@@ -20,9 +40,10 @@ function getScreenCoord()
     y=( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
 }
 
-exec.onTriggered=function()
+function setProperties()
 {
     var ele=inEle.get();
+    oldEle=ele;
     if(ele)
     {
         getScreenCoord();
@@ -32,4 +53,20 @@ exec.onTriggered=function()
     }
 
     next.trigger();
-};
+}
+
+function removeProperties(ele)
+{
+    if(!ele) ele=inEle.get();
+    if(ele)
+    {
+        ele.style.top='initial';
+        ele.style.left='initial';
+    }
+}
+
+op.addEventListener("onEnabledChange",function(enabled)
+{
+    if(enabled) setProperties();
+        else removeProperties();
+});

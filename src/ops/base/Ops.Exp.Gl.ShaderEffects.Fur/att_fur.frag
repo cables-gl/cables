@@ -57,7 +57,7 @@ void main()
 
     // col.a=col.r*(1.0-layerPerc);
     
-    col.a=(1.0-layerPerc)*0.5;
+    col.a=(1.0-layerPerc);
     // col.a=col.r*(1.0-layerPerc)*0.9;
     // col.a*=alpha*0.8;
     // col.a*=col.r;

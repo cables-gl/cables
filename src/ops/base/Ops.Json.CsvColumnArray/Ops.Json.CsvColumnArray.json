@@ -1,5 +1,5 @@
 {
-    "updated": 1513581449799,
+    "updated": 1537779277473,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c56ef6cc-4952-4994-9baf-da502e563ae1",
@@ -22,5 +22,9 @@
             }
         ],
         "name": "Ops.Json.CsvColumnArray"
+    },
+    "summary": "get all values of a CSV column as array of strings",
+    "docs": {
+        "ports": []
     }
 }

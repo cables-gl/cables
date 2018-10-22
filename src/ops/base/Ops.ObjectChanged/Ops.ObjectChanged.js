@@ -1,4 +1,3 @@
-op.name="ObjectChanged";
 
 var inObj=op.inObject("Object");
 

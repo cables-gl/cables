@@ -62,5 +62,7 @@ void main()
     } else
         col = vec4(vec3(gn(p*attribs.r)),1);
 
-    outColor = pow(col,vec4(abs(attribs.a)));
+    //outColor = col;
+    //outColor = pow(col,vec4(abs(attribs.a)));
+    outColor = vec4(col.rgb,1.0);
 }

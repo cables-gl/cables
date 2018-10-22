@@ -1,10 +1,9 @@
-op.name="vertexnumber material";
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
-var srcVert=''
+const srcVert=''
     .endl()+'IN float attrVertIndex;'
     .endl()+'UNI mat4 projMatrix;'
     .endl()+'UNI mat4 mvMatrix;'
@@ -17,7 +16,7 @@ var srcVert=''
     .endl()+'   gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);'
     .endl()+'}';
 
-var srcFrag=''
+const srcFrag=''
     // .endl()+'precision highp float;'
     .endl()+'IN float num;'
     .endl()+'UNI float numVertices;'
@@ -43,9 +42,8 @@ var doRender=function()
     cgl.setPreviousShader();
 };
 
-var shader=new CGL.Shader(cgl,'vertexnumber material');
+const shader=new CGL.Shader(cgl,'vertexnumber material');
 shader.setSource(srcVert,srcFrag);
-//op.onLoaded=shader.compile;
 
 render.onTriggered=doRender;
 

@@ -1,4 +1,3 @@
-op.name="DeformArea";
 
 var cgl=op.patch.cgl;
 
@@ -6,7 +5,7 @@ op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var inSize=op.inValue("Size",1);
-var inStrength=op.inValueSlider("Strength",0.5);
+var inStrength=op.inValue("Strength",0.5);
 var inSmooth=op.inValueBool("Smooth",true);
 
 {

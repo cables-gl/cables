@@ -46,5 +46,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.DepthTextureFocus"
+    },
+    "summary": "draw a gradient mapped to depth buffer values",
+    "docs": {
+        "ports": []
     }
 }

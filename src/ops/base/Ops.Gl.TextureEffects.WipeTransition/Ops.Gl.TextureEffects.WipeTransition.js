@@ -1,8 +1,6 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-this.name='WipeTransition';
-
 this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
 this.fade=this.addInPort(new Port(this,"fade",OP_PORT_TYPE_VALUE,{ display:'range' }));
 this.fadeWidth=this.addInPort(new Port(this,"fadeWidth",OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -10,7 +8,6 @@ this.image=this.addInPort(new Port(this,"image",OP_PORT_TYPE_TEXTURE));
 this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -70,11 +67,9 @@ this.render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
-        /* --- */cgl.setTexture(1, self.image.val.tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
+        cgl.setTexture(1, self.image.val.tex );
 
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();

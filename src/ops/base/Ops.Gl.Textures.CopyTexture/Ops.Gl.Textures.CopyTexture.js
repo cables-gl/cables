@@ -49,6 +49,7 @@ function initEffect()
 
     tex=new CGL.Texture(cgl,
         {
+            "name":"copytexture",
             "isFloatingPointTexture":fpTexture.get(),
             "filter":selectedFilter,
             "wrap":selectedWrap,
@@ -144,6 +145,7 @@ useVPSize.onValueChanged=function()
 
 var doRender=function()
 {
+    
     if(!effect || reInitEffect)
     {
         initEffect();
@@ -156,16 +158,20 @@ var doRender=function()
 
     updateResolution();
 
+    if(!inTexture.get())return;
+
     cgl.currentTextureEffect=effect;
     effect.setSourceTexture(tex);
 
     effect.startEffect();
 
+
+
     // render background color...
     cgl.setShader(bgShader);
     cgl.currentTextureEffect.bind();
-    /* --- */cgl.setTexture(0, inTexture.get().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTexture.get().tex );
+    cgl.setTexture(0, inTexture.get().tex );
+    
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 

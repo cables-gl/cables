@@ -1,5 +1,3 @@
-op.name="TesselateGeometry";
-
 var inGeom=op.inObject("Geometry");
 var inTimes=op.inValueInt("Iterations");
 var outGeom=op.outObject("Result");

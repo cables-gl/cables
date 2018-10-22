@@ -325,9 +325,9 @@ toggleNormal.setUiAttribs({"hidePort":true});
 toggleNormal.onChange=updateToggles;
 
 
-var toggleSpecular=op.inValueBool("Toggle Specular",true);
-toggleSpecular.setUiAttribs({"hidePort":true});
-toggleSpecular.onChange=updateToggles;
+// var toggleSpecular=op.inValueBool("Toggle Specular",true);
+// toggleSpecular.setUiAttribs({"hidePort":true});
+// toggleSpecular.onChange=updateToggles;
 
 var toggleAo=op.inValueBool("Toggle Ao Texture",true);
 toggleAo.setUiAttribs({"hidePort":true});

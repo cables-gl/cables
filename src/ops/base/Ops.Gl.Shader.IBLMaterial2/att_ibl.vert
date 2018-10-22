@@ -25,7 +25,6 @@ void main()
 
     
 
-    mat4 modelview= viewMatrix * mMatrix;
     texCoord=vec2(attrTexCoord.x*repeatX,attrTexCoord.y*repeatY);
     
     mat3 wmMatrix=mat3(modelMatrix);
@@ -36,11 +35,14 @@ void main()
         normalize( wmMatrix*attrVertNormal )
     );
 
+
+    {{MODULE_VERTEX_POSITION}}
+
+    mat4 modelview= viewMatrix * mMatrix;
     vec4 modelPos=modelview * pos;
 
     viewDirection = normalize((mMatrix * pos).xyz - camPos);
 
-    {{MODULE_VERTEX_POSITION}}
 
     gl_Position = projMatrix * modelPos;
 }

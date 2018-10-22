@@ -1,0 +1,42 @@
+{
+    "updated": 1537933167705,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "8740be79-e23d-4b82-9685-a5eeb4cfc7c2",
+    "created": 1508237422983,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "pose matrix"
+            },
+            {
+                "type": "2",
+                "name": "Eye Left"
+            },
+            {
+                "type": "2",
+                "name": "Eye Right"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "texture left"
+            },
+            {
+                "type": "2",
+                "name": "texture right"
+            }
+        ],
+        "name": "Ops.Gl.Stereoscopic.render2Textures"
+    }
+}

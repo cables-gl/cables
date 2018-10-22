@@ -1,0 +1,1 @@
+a shaderEffect extends the current shader/material by its own functions

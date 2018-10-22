@@ -108,7 +108,9 @@ function doRender()
             else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
             else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
-        tex.set( fb.getTextureColor() );
+
+
+        
         texDepth.set( fb.getTextureDepth() );
         reInitFb=false;
     }
@@ -135,6 +137,8 @@ function doRender()
     fb.renderEnd(cgl);
 
     cgl.resetViewPort();
+
+    tex.set( fb.getTextureColor() );
 }
 
 

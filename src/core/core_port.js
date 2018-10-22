@@ -174,6 +174,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
                         if(CABLES.UI) CABLES.UI.MODAL.showException(ex,this.parent);
                     }
+
+                    if(CABLES.UI && this.type==OP_PORT_TYPE_TEXTURE )
+                    {
+                        gui.texturePreview().updateTexturePort(this);
+
+                    }
                 }
 
                 if(this.direction==PORT_DIR_OUT)
@@ -365,8 +371,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                     this.links[i].portIn._onTriggered();
                 }
                 this.links[i].activity();
-                // console.log(1);
-
             }
         }
         catch(ex)

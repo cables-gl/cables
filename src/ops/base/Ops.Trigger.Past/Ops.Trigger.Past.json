@@ -1,0 +1,31 @@
+{
+    "updated": 1537454323288,
+    "authorName": "andro",
+    "id": "ef0891db-6053-42ba-b7d5-29c7cf6d8208",
+    "created": 1536324321936,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Threshold",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Input",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Output"
+            }
+        ],
+        "name": "Ops.Trigger.Past"
+    },
+    "summary": "Triggers only once when threshold is crossed",
+    "docs": {
+        "ports": []
+    }
+}

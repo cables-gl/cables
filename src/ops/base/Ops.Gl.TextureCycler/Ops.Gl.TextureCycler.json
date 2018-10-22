@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Gl.TextureCycler"
+    },
+    "summary": "cycle between multiple textures",
+    "docs": {
+        "ports": []
     }
 }

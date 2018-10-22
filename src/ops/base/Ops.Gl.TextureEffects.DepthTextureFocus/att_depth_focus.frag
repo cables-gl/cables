@@ -20,7 +20,7 @@ void main()
     
     
     #ifndef INVERT
-    c=1.0-c;
+        c=1.0-c;
     #endif
     
     col=vec4(c,c,c,1.0);

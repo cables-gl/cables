@@ -1,6 +1,4 @@
-op.name="Fog";
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
@@ -34,7 +32,7 @@ var srcHeadVert=''
     .endl();
 
 var srcBodyVert=''
-    .endl()+'MOD_fogPos=mvMatrix*pos;'
+    .endl()+'MOD_fogPos=viewMatrix*modelMatrix*pos;'
     .endl();
 
 var srcHeadFrag=''
@@ -50,7 +48,7 @@ var srcHeadFrag=''
 
 var srcBodyFrag=''
     .endl()+'   float MOD_de=(MOD_fogPos.z+MOD_start)/(-1.0*MOD_end);'
-    .endl()+'   col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);'
+    .endl()+'   col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), clamp(MOD_de*MOD_amount,0.0,1.0));'
     .endl();
 
 

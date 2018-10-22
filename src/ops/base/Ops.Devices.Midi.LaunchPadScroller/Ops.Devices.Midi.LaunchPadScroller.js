@@ -1,4 +1,3 @@
-op.name="LaunchPadScroller";
 var eventIn=op.addInPort(new Port(op,"Event Input",OP_PORT_TYPE_OBJECT));
 
 var exec=this.addInPort(new Port(this,"exec",OP_PORT_TYPE_FUNCTION));

@@ -36,7 +36,7 @@ function setup()
 {
     if(!mesh)return;
     var geom=inGeomSurface.get();
-    var num=inNum.get();
+    var num=Math.abs(Math.floor(inNum.get()));
     var m=mat4.create();
     var q=quat.create();
     var vm2=vec3.create();

@@ -26,5 +26,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.DirectionalMultiplyPosition"
+    },
+    "summary": "translate away from a point in space ",
+    "docs": {
+        "ports": []
     }
 }

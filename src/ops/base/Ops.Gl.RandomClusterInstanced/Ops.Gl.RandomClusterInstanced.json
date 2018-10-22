@@ -11,15 +11,18 @@
             },
             {
                 "type": "0",
-                "name": "num"
+                "name": "num",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "size"
+                "name": "size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "random seed"
+                "name": "random seed",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -27,34 +30,40 @@
             },
             {
                 "type": "0",
-                "name": "scaleX"
+                "name": "scaleX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scaleY"
+                "name": "scaleY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scaleZ"
+                "name": "scaleZ",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "time"
+                "name": "time",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rnd"
+                "name": "rnd",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.RandomClusterInstanced"
     },
-    "updated": 1509187097061,
+    "updated": 1539856384909,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "91fd2f98-d32a-475b-a418-eb1d76b71bf2",

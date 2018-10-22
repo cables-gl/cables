@@ -230,7 +230,7 @@ CABLES.Patch.getOpClass = function(objName) {
 //     return this.doAddOp(objName,uiAttribs,next);
 // };
 
-CABLES.Patch.prototype.createOp = function(objName) {
+CABLES.Patch.prototype.createOp = function(objName,id) {
     var parts = objName.split('.');
     var op = null;
 
@@ -244,15 +244,15 @@ CABLES.Patch.prototype.createOp = function(objName) {
             console.error('unknown op: ' + objName);
             throw('unknown op: ' + objName);
         } else {
-            if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName);
-            else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName);
-            else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName);
-            else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName);
-            else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName);
-            else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName);
-            else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName);
-            else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName);
-            else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName);
+            if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName,id);
+            else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName,id);
+            else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName,id);
+            else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName,id);
+            else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName,id);
+            else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName,id);
+            else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName,id);
+            else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName,id);
+            else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName,id);
             else console.log('parts.length', parts.length);
         }
     }
@@ -288,13 +288,13 @@ CABLES.Patch.prototype.createOp = function(objName) {
  * @param {Object} UI Attributes
  * @function
  */
-CABLES.Patch.prototype.addOp = function(objName, uiAttribs) {
+CABLES.Patch.prototype.addOp = function(objName, uiAttribs,id) {
     if (!objName || objName.indexOf('.') == -1) {
         CABLES.UI.MODAL.showError('could not create op', 'op unknown');
         return;
     }
 
-    var op = this.createOp(objName);
+    var op = this.createOp(objName,id);
 
     if (op) {
         op.uiAttr(uiAttribs);
@@ -364,7 +364,6 @@ CABLES.Patch.prototype.deleteOp = function(opid, tryRelink) {
                 var opToDelete = this.ops[i];
                 opToDelete.removeLinks();
                 this.onDelete(opToDelete);
-                // opToDelete.id=generateUUID();
                 this.ops.splice(i, 1);
 
                 if (opToDelete.onDelete) opToDelete.onDelete();
@@ -718,12 +717,12 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     for (var iop in obj.ops) {
 
         var start=CABLES.now();
-        var op = this.addOp(obj.ops[iop].objName, obj.ops[iop].uiAttribs);
+        var op = this.addOp(obj.ops[iop].objName, obj.ops[iop].uiAttribs, obj.ops[iop].id);
         reqs.checkOp(op);
 
         if (op) {
-            op.id = obj.ops[iop].id;
-            if (genIds) op.id = CABLES.generateUUID();
+            // op.id = obj.ops[iop].id;
+            if (genIds) op.id = CABLES.uuid();
 
             // console.log(obj.ops[iop].portsIn);
             op.portsInData=obj.ops[iop].portsIn;

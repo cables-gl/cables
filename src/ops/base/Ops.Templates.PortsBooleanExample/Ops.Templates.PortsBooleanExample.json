@@ -1,0 +1,27 @@
+{
+    "updated": 1537272895282,
+    "authorName": "andro",
+    "id": "a21cd004-5cdf-4da2-8866-d1372497c3ff",
+    "created": 1537272426333,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Boolean in",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Boolean out",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.andro.PortsBooleanExample"
+    },
+    "summary": "Is a template for creating Boolean ports",
+    "docs": {
+        "ports": []
+    }
+}

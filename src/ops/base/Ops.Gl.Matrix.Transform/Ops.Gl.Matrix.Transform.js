@@ -2,15 +2,16 @@ const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
 const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
 
 
-const posX=op.addInPort(new Port(op,"posX"),0);
-const posY=op.addInPort(new Port(op,"posY"),0);
-const posZ=op.addInPort(new Port(op,"posZ"),0);
+const posX=op.inValue("posX",0);
+const posY=op.inValue("posY",0);
+const posZ=op.inValue("posZ",0);
 
-const scale=op.addInPort(new Port(op,"scale"));
+const scale=op.inValue("scale",0);
 
-const rotX=op.addInPort(new Port(op,"rotX"));
-const rotY=op.addInPort(new Port(op,"rotY"));
-const rotZ=op.addInPort(new Port(op,"rotZ"));
+const rotX=op.inValue("rotX",0);
+const rotY=op.inValue("rotY",0);
+const rotZ=op.inValue("rotZ",0);
+
 
 op.setPortGroup([rotX,rotY,rotZ]);
 op.setPortGroup([posX,posY,posZ]);
@@ -56,7 +57,7 @@ render.onTriggered=function()
     trigger.trigger();
     cgl.popModelMatrix();
     
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:posX,

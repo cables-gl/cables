@@ -1,5 +1,3 @@
-
-op.name='ArrayGetValue';
 var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
 var index=op.inValueInt("index");
 

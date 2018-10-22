@@ -69,4 +69,3 @@ Uniforms are automatically added as Ports of the ShaderMaterial Op. (Currently `
 ![showshader](img/showshader.png)
 
 You can always use `Ops.Gl.Shader.ShowShader` to view the source code of the current shader.
-This is helpful if you combine multiple shaders via modules.

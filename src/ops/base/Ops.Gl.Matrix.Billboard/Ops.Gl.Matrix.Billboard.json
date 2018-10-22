@@ -1,0 +1,21 @@
+{
+    "updated": 1540203144605,
+    "authorName": "pandur",
+    "id": "d41e676e-d8a7-4a1e-8abf-f1bddfc982d5",
+    "created": 1540199776157,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.Billboard"
+    }
+}

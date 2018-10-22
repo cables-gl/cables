@@ -1,11 +1,10 @@
-// TODO: remove array3xtransformedinstanced....
+const exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+const inTransformations=op.inArray("positions");
+const inScales=op.inArray("Scale Array");
+const inScale=op.inValue("Scale",1);
+const geom=op.inObject("geom");
+const cgl=op.patch.cgl;
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-
-var inTransformations=op.inArray("positions");
-var inScales=op.inArray("Scale Array");
-var inScale=op.inValue("Scale",1);
-var geom=op.inObject("geom");
 geom.ignoreValueSerialize=true;
 
 var mod=null;
@@ -13,7 +12,6 @@ var mesh=null;
 var shader=null;
 var uniDoInstancing=null;
 var recalc=true;
-var cgl=op.patch.cgl;
 
 exe.onTriggered=doRender;
 exe.onLinkChanged=removeModule;
@@ -22,7 +20,6 @@ var matrixArray= new Float32Array(1);
 var m=mat4.create();
 inTransformations.onChange=reset;
 inScales.onChange=reset;
-
 
 var srcHeadVert=''
     .endl()+'UNI float do_instancing;'
@@ -35,20 +32,14 @@ var srcHeadVert=''
 
 var srcBodyVert=''
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   if(do_instancing==1.0)'
-    .endl()+'   {'
-    .endl()+'       mMatrix*=instMat;'
-    .endl()+'       mMatrix[0][0]*=MOD_scale;'
-    .endl()+'       mMatrix[1][1]*=MOD_scale;'
-    .endl()+'       mMatrix[2][2]*=MOD_scale;'
-    .endl()+'   }'
+    .endl()+'    mMatrix*=instMat;'
+    .endl()+'    pos.xyz*=MOD_scale;'
     .endl()+'#endif'
     .endl();
 
-
-
 geom.onChange=function()
 {
+    if(mesh)mesh.dispose();
     if(!geom.get())
     {
         mesh=null;
@@ -78,21 +69,12 @@ function setupArray()
     if(!mesh)return;
     
     var transforms=inTransformations.get();
-    if(!transforms)
-    {
-        transforms=[0,0,0];
-    }
-    var num=Math.floor(transforms.length/3);
-    
-    
-    var scales=inScales.get();
-    // console.log('scales',scales);
-    // console.log('setup array!');
+    if(!transforms)transforms=[0,0,0];
 
-    if(matrixArray.length!=num*16)
-    {
-        matrixArray=new Float32Array(num*16);
-    }
+    var num=Math.floor(transforms.length/3);
+    var scales=inScales.get();
+
+    if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
 
     for(var i=0;i<num;i++)
     {
@@ -104,24 +86,16 @@ function setupArray()
                 transforms[i*3+2]
             ]);
         
-        if(scales && scales.length>i)
-        {
-            mat4.scale(m,m,[scales[i],scales[i],scales[i]]);
-            // console.log('scale',scales[i]);
-        }
-        else
-        {
-            mat4.scale(m,m,[1,1,1]);
-        }
+        
+        // mat4.rotateX(m,m,33*CGL.DEG2RAD);
+        // mat4.rotateY(m,m,33*CGL.DEG2RAD);
+        // mat4.rotateZ(m,m,33*CGL.DEG2RAD);
+        
+        if(scales && scales.length>i) mat4.scale(m,m,[scales[i],scales[i],scales[i]]);
+            else mat4.scale(m,m,[1,1,1]);
 
-        for(var a=0;a<16;a++)
-        {
-            matrixArray[i*16+a]=m[a];
-        }
+        for(var a=0;a<16;a++) matrixArray[i*16+a]=m[a];
     }
-
-// console.log('matrixArray',matrixArray.length);
-// console.log('num',num);
 
     mesh.numInstances=num;
     mesh.addAttribute('instMat',matrixArray,16);
@@ -130,17 +104,13 @@ function setupArray()
 
 function doRender()
 {
+    if(!mesh) return;
     if(recalc)setupArray();
     if(matrixArray.length<=1)return;
-    if(!mesh) return;
 
     if(cgl.getShader() && cgl.getShader()!=shader)
     {
-        if(shader && mod)
-        {
-            shader.removeModule(mod);
-            shader=null;
-        }
+        removeModule();
 
         shader=cgl.getShader();
         if(!shader.hasDefine('INSTANCING'))
@@ -148,24 +118,16 @@ function doRender()
             mod=shader.addModule(
                 {
                     name: 'MODULE_VERTEX_POSITION',
+                    title: op.objName,
                     priority:-2,
                     srcHeadVert: srcHeadVert,
                     srcBodyVert: srcBodyVert
                 });
 
             shader.define('INSTANCING');
-            uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
             inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
-        }
-        else
-        {
-            uniDoInstancing=shader.getUniform('do_instancing');
         }
     }
 
-    uniDoInstancing.setValue(1);
     mesh.render(shader);
-    uniDoInstancing.setValue(0);
-
-
 }

@@ -7,6 +7,7 @@ var outHeight=op.outValue("Height");
 var outRatio=op.outValue("Ratio");
 var outFilter=op.outValue("Filter");
 var outWrap=op.outValue("Wrap");
+var outId=op.outValue("Id");
 
 inTex.onChange=function()
 {
@@ -26,5 +27,6 @@ inTex.onChange=function()
 
         outFilter.set(inTex.get().filter+' '+strFilter);
         outWrap.set(inTex.get().wrap);
+        outId.set(inTex.get().id);
     }
 };
