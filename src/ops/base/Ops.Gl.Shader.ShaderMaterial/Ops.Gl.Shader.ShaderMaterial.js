@@ -58,7 +58,6 @@ function hasUniformInput(name)
 function updateShader()
 {
     needsUpdate=false;
-    op.log('shader update!');
 
     // shader.glslVersion=0;
     shader.bindTextures=bindTextures;
