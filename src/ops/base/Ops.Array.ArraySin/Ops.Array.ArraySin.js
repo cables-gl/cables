@@ -10,17 +10,17 @@ const mul=op.inValue("Frequency");
 const amplitude=op.inValue("Amplitude");
 
 mathSelect.set('Sin');
-mul.set(1.0);
-amplitude.set(1.0);
+mul.set(1);
+amplitude.set(1);
 phase.set(0);
 
-var showingError = false;
 
 var mathArray = [];
 var selectIndex = 0;
 
 const MATH_FUNC_SIN = 0;
 const MATH_FUNC_COS = 1;
+
 
 inArray.onChange = update;
 mul.onChange = update;
@@ -42,11 +42,6 @@ function update()
     mathArray.length = 0;
 
     if(!arrayOut) return;
-    if(showingError)
-    {
-        showingError = false;
-        op.uiAttr({error:null});
-    }
 
     mathArray.length = arrayOut.length;
 
@@ -54,12 +49,12 @@ function update()
     if(selectIndex === MATH_FUNC_SIN)
     {
         for(i = 0; i < arrayOut.length; i++)
-            mathArray[i] = amplitude.get() * Math.sin((arrayOut[i]) * mul.get() + phase.get());
+            mathArray[i] = amplitude.get() * Math.sin((arrayOut[i]) *  mul.get() + phase.get())  ;
     }
     else if(selectIndex === MATH_FUNC_COS)
     {
         for(i = 0; i < arrayOut.length; i++)
-            mathArray[i] = amplitude.get() * (Math.cos(arrayOut[i] * mul.get() + phase.get()));
+            mathArray[i] = amplitude.get() * (Math.cos(arrayOut[i] * mul.get() + phase.get()) );
     }
     outArray.set(null);
     outArray.set(mathArray);
