@@ -38,23 +38,23 @@ function onFilterChange()
 
 function update()
 {
-    var arrayOut = inArray.get();
+    var arrayIn = inArray.get();
     mathArray.length = 0;
 
-    if(!arrayOut) return;
+    if(!arrayIn) return;
 
-    mathArray.length = arrayOut.length;
+    mathArray.length = arrayIn.length;
 
     var i = 0;
     if(selectIndex === MATH_FUNC_SIN)
     {
-        for(i = 0; i < arrayOut.length; i++)
-            mathArray[i] = amplitude.get() * Math.sin((arrayOut[i]) *  mul.get() + phase.get())  ;
+        for(i = 0; i < arrayIn.length; i++)
+            mathArray[i] = amplitude.get() * Math.sin((arrayIn[i]) *  mul.get() + phase.get())  ;
     }
     else if(selectIndex === MATH_FUNC_COS)
     {
-        for(i = 0; i < arrayOut.length; i++)
-            mathArray[i] = amplitude.get() * (Math.cos(arrayOut[i] * mul.get() + phase.get()) );
+        for(i = 0; i < arrayIn.length; i++)
+            mathArray[i] = amplitude.get() * (Math.cos(arrayIn[i] * mul.get() + phase.get()) );
     }
     outArray.set(null);
     outArray.set(mathArray);
