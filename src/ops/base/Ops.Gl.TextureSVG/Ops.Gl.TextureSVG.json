@@ -3,23 +3,28 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "texture width"
+                "name": "texture width",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "texture height"
+                "name": "texture height",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "wrap"
+                "name": "wrap",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "filter",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -31,7 +36,7 @@
         "name": "Ops.Gl.TextureSVG"
     },
     "summary": "Load a SVG image and convert to pixel texture",
-    "updated": 1508248225660,
+    "updated": 1539868793843,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ecd162d1-615e-4d97-8376-9edbbc51aee1",

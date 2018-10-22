@@ -1,6 +1,4 @@
-op.name="Fog";
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
 op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
