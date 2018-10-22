@@ -119,7 +119,7 @@ The attachment can now be accessed inside of your op, select the op and press 'e
 
 
 
-![output_attachment_img](output_attachment.png)
+![output_attachment_img](output_attachment.PNG)
 
 
 
