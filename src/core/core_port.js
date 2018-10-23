@@ -11,8 +11,8 @@
  * @type Function
  */
 
-var PORT_DIR_IN=0;
-var PORT_DIR_OUT=1;
+CABLES.PORT_DIR_IN=0;
+CABLES.PORT_DIR_OUT=1;
 
 var CABLES=CABLES || {};
 
@@ -24,7 +24,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @name CABLES.Port#direction
      * @description direction of port (input(0) or output(1))
      */
-    this.direction=PORT_DIR_IN;
+    this.direction=CABLES.PORT_DIR_IN;
     this.id=CABLES.generateUUID();
     this.parent=__parent;
 
@@ -182,7 +182,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                     }
                 }
 
-                if(this.direction==PORT_DIR_OUT)
+                if(this.direction==CABLES.PORT_DIR_OUT)
                     for (var i = 0; i < this.links.length; ++i)
                         this.links[i].setValue();
             }
@@ -239,7 +239,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this._animated) obj.animated=true;
         if(this.anim) obj.anim=this.anim.getSerialized();
         if(this.uiAttribs.display=='file')  obj.display=this.uiAttribs.display;
-        if(this.direction==PORT_DIR_IN && this.links.length>0)
+        if(this.direction==CABLES.PORT_DIR_IN && this.links.length>0)
         {
             obj.links=[];
             for(var i in this.links)
@@ -281,7 +281,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             }
 
 
-        if(this.direction==PORT_DIR_IN)
+        if(this.direction==CABLES.PORT_DIR_IN)
         {
             if(this.type==OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
                 else this.setValue(this._valueBeforeLink || null);

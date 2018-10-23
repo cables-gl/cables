@@ -106,7 +106,7 @@ CABLES.Link.prototype.link=function(p1,p2)
         return false;
     }
 
-    if(p1.direction==PORT_DIR_IN)
+    if(p1.direction==CABLES.PORT_DIR_IN)
     {
         this.portIn=p1;
         this.portOut=p2;
@@ -152,7 +152,7 @@ CABLES.Link.canLinkText=function(p1,p2)
     if(p1.direction==p2.direction)
     {
         var txt='(out)';
-        if(p2.direction==PORT_DIR_IN)txt="(in)";
+        if(p2.direction==CABLES.PORT_DIR_IN)txt="(in)";
         return 'can not link: same direction'+txt;
     }
     if(p1.parent==p2.parent)return 'can not link: same op';
@@ -165,11 +165,11 @@ CABLES.Link.canLinkText=function(p1,p2)
     if(!p2)return 'can not link: port 2 invalid';
 
 
-    if(p1.direction==PORT_DIR_IN && p1.isAnimated())return 'can not link: is animated';
-    if(p2.direction==PORT_DIR_IN && p2.isAnimated())return 'can not link: is animated';
+    if(p1.direction==CABLES.PORT_DIR_IN && p1.isAnimated())return 'can not link: is animated';
+    if(p2.direction==CABLES.PORT_DIR_IN && p2.isAnimated())return 'can not link: is animated';
 
-    // if(p1.direction==PORT_DIR_IN && p1.links.length>0)return 'input port already busy';
-    // if(p2.direction==PORT_DIR_IN && p2.links.length>0)return 'input port already busy';
+    // if(p1.direction==CABLES.PORT_DIR_IN && p1.links.length>0)return 'input port already busy';
+    // if(p2.direction==CABLES.PORT_DIR_IN && p2.links.length>0)return 'input port already busy';
     if(p1.isLinkedTo(p2))return 'ports already linked';
 
     if( (p1.canLink && !p1.canLink(p2)) || p2.canLink && !p2.canLink(p1) )return 'Incompatible';
@@ -188,8 +188,8 @@ CABLES.Link.canLink=function(p1,p2)
 {
     if(!p1)return false;
     if(!p2)return false;
-    if(p1.direction==PORT_DIR_IN && p1.isAnimated())return false;
-    if(p2.direction==PORT_DIR_IN && p2.isAnimated())return false;
+    if(p1.direction==CABLES.PORT_DIR_IN && p1.isAnimated())return false;
+    if(p2.direction==CABLES.PORT_DIR_IN && p2.isAnimated())return false;
 
     if(p1.isHidden() || p2.isHidden())return false;
 

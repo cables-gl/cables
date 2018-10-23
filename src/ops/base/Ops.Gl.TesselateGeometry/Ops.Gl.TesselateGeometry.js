@@ -1,5 +1,3 @@
-op.name="TesselateGeometry";
-
 var inGeom=op.inObject("Geometry");
 var inTimes=op.inValueInt("Iterations");
 var outGeom=op.outObject("Result");
@@ -221,14 +219,16 @@ function update()
 {
     var geom=inGeom.get();
     if(!geom)return;
-    
+        var startTime=CABLES.now();
+
     for(var i=0;i<inTimes.get();i++)
     {
         geom=tesselateGeom(geom);
     }
 
     outVertices.set(geom.vertices.length/3);
-    
+        console.log('tesselate time',CABLES.now()-startTime);
+
     outGeom.set(null);
     outGeom.set(geom);
 

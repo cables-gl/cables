@@ -19,10 +19,7 @@ CGL.Geometry=function(name)
     this.barycentrics=[];
     this.morphTargets=[];
     this.vertexColors=[];
-
     this._attributes={};
-
-    this._indexed=true;
 
     Object.defineProperty(this, 'vertices', {
       get: function() {
@@ -37,7 +34,6 @@ CGL.Geometry=function(name)
 
 CGL.Geometry.prototype.clear=function()
 {
-    this._indexed=true;
     this.vertices=new Float32Array([]);
     this.verticesIndices.length=0;
     this.texCoords=new Float32Array([]);
@@ -312,13 +308,12 @@ CGL.Geometry.prototype.calculateNormals=function(options)
 
 CGL.Geometry.prototype.isIndexed=function()
 {
-    return this._indexed;
+    return this.verticesIndices.length!=0;
 };
 
 
 CGL.Geometry.prototype.unIndex=function()
 {
-    this._indexed=false;
     var newVerts=[];
     var newIndizes=[];
     var newTexCoords=[];

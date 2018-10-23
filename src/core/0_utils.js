@@ -1,7 +1,7 @@
-// "use strict";
+"use strict";
 
 var CABLES=CABLES || {};
-
+CABLES.UTIILS={};
 /**
  * generate a UUID
  * @name uuid
@@ -159,6 +159,13 @@ function arrayWriteToEnd(arr,v)
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+
+CABLES.UTILS.isArray = function(v)
+{
+    return Object.prototype.toString.call(v) === '[object Array]';
+};
+
 
 /**
  * append a linebreak to a string

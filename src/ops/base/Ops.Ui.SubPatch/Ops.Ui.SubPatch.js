@@ -93,7 +93,7 @@ function saveData()
 function addPortListener(newPort,newPortInPatch)
 {
     //console.log('newPort',newPort.name);
-    if(newPort.direction==PORT_DIR_IN)
+    if(newPort.direction==CABLES.PORT_DIR_IN)
     {
         if(newPort.type==OP_PORT_TYPE_FUNCTION)
         {
@@ -278,7 +278,7 @@ op.addSubLink=function(p,p2)
     console.log('sublink! ',p.getName(), (num-1)+" "+p2.parent.name+" "+p2.name);
 
 
-    if(p.direction==PORT_DIR_IN)
+    if(p.direction==CABLES.PORT_DIR_IN)
     {
         var l=gui.scene().link(
             p.parent,
