@@ -17,5 +17,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.Billboard"
+    },
+    "summary": "rotate an object to always face the camera",
+    "docs": {
+        "ports": []
     }
 }

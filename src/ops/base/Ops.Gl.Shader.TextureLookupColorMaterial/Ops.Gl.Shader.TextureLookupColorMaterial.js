@@ -1,25 +1,17 @@
-op.name="TextureLookupColorMaterial";
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
+const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
 shaderOut.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 op.bindTextures=function()
 {
     if(op.texture.get())
-    {
-        /* --- */cgl.setTexture(0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.val.tex);
-    }
+        cgl.setTexture(0,op.texture.val.tex);
 
     if(op.textureOpacity.get())
-    {
-        /* --- */cgl.setTexture(1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.val.tex);
-    }
+        cgl.setTexture(1,op.textureOpacity.val.tex);
 };
 
 function doRender()

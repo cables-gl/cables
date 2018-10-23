@@ -29,6 +29,7 @@ function updateLater()
 
 op.init=function()
 {
+    console.log("scustomshader loaded!");
     updateShader();
 };
 
@@ -36,6 +37,10 @@ function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
+    
+    
+// console.log(lastm4);
+
 }
 
 function bindTextures()
@@ -44,7 +49,8 @@ function bindTextures()
     {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
         {
-            cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
+            /* --- */cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
         }
     }
 }
@@ -64,6 +70,7 @@ function updateShader()
 {
     if(!shader)return;
     needsUpdate=false;
+    op.log('shader update!');
 
     // shader.glslVersion=0;
     shader.bindTextures=bindTextures.bind(this);
@@ -139,7 +146,7 @@ function updateShader()
 
 }
 
-//test andro
+
 // 0x8B50: 'FLOAT_VEC2',
 // 0x8B51: 'FLOAT_VEC3',
 // 0x8B52: 'FLOAT_VEC4',

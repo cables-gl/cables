@@ -1,6 +1,6 @@
 
 var inArray=op.inArray("In");
-var inValue=op.inValue("Value");
+var inValue=op.inValue("Value",1.0);
 var outArray=op.outArray("Result");
 
 
