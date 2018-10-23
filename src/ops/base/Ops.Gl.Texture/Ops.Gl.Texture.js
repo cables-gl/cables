@@ -1,5 +1,5 @@
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
-var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap'],'mipmap');
+var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
 var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
 var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -28,7 +28,7 @@ unpackAlpha.onChange=function(){ reloadSoon(); };
 
 var timedLoader=0;
 
-tfilter.set('linear');
+tfilter.set('mipmap');
 wrap.set('repeat');
 
 textureOut.set(CGL.Texture.getEmptyTexture(cgl));

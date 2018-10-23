@@ -2,30 +2,42 @@ const render=op.inFunction("render");
 const segments=op.inValueInt('segments',40);
 const radius=op.inValue('radius',0.5);
 const innerRadius=op.inValueSlider('innerRadius',0);
-const percent=op.inValueSlider('percent');
+const percent=op.inValueSlider('percent',1);
 const steps=op.inValue('steps',0);
 const invertSteps=op.inValueBool('invertSteps',false);
 const doRender=op.inValueBool('Render',true);
-
+const mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
+const drawSpline=op.inValueBool("Spline",false);
 
 const trigger=op.outFunction('trigger');
 const geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
 
-geomOut.ignoreValueSerialize=true;
-var cgl=op.patch.cgl;
+mapping.set('flat');
 
-var drawSpline=op.addInPort(new Port(op,"Spline",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-drawSpline.set(false);
+mapping.onChange=
+    segments.onChange=
+    radius.onChange=
+    innerRadius.onChange=
+    percent.onChange=
+    steps.onChange=
+    invertSteps.onChange=
+    drawSpline.onChange=calcLater;
+
+geomOut.ignoreValueSerialize=true;
+const cgl=op.patch.cgl;
+
+var geom=new CGL.Geometry("circle");
+var mesh=null;
+var lastSegs=-1;
 
 var oldPrim=0;
 var shader=null;
-
+var needsCalc=true;
 
 op.preRender=
 render.onTriggered=function()
 {
-    // if(op.instanced(render))return;
-    
+    if(needsCalc)calc();
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
@@ -38,11 +50,6 @@ render.onTriggered=function()
     shader.glPrimitive=oldPrim;
 };
 
-percent.set(1);
-
-var geom=new CGL.Geometry("circle");
-var mesh=null;
-var lastSegs=-1;
 function calc()
 {
     var segs=Math.max(3,Math.floor(segments.get()));
@@ -91,15 +98,11 @@ function calc()
             verts.push(posx);
             verts.push(posy);
             verts.push(0);
-            
-            // posxTexCoord=1.0-i/segs;
-            // tc.push(posxTexCoord,posyTexCoord);
 
             lastX=posx;
             lastY=posy;
         }
         geom.setPointVertices(verts);
-        // geom.texCoords=tc;
     }
     else
     if(innerRadius.get()<=0)
@@ -145,7 +148,6 @@ function calc()
         geom=CGL.Geometry.buildFromFaces(faces);
         geom.vertexNormals=vertexNormals;
         geom.texCoords=texCoords;
-
     }
     else
     {
@@ -164,48 +166,38 @@ function calc()
             var posxIn=Math.cos(degInRad)*innerRadius.get()*radius.get();
             var posyIn=Math.sin(degInRad)*innerRadius.get()*radius.get();
 
-
-            if(mapping.get()=='flat')
-            {
-                posxTexCoord=(Math.cos(degInRad)+1.0)/2;
-                posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
-                posxTexCoordIn=((posxTexCoord-0.5)*innerRadius.get())+0.5;
-                posyTexCoordIn=((posyTexCoord-0.5)*innerRadius.get())+0.5;
-            }
-            else if(mapping.get()=='round')
+            if(mapping.get()=='round')
             {
                 posxTexCoord=1.0-i/segs;
                 posyTexCoord=0;
                 posxTexCoordIn=posxTexCoord;
                 posyTexCoordIn=1;
             }
-            
 
             if(steps.get()===0.0 ||
                 (count%parseInt(steps.get(),10)===0 && !invertSteps.get()) ||
                 (count%parseInt(steps.get(),10)!==0 && invertSteps.get()) )
             {
                 faces.push(
-                          [posx,posy,0],
-                          [oldPosX,oldPosY,0],
-                          [posxIn,posyIn,0]
-                          );
+                        [posx,posy,0],
+                        [oldPosX,oldPosY,0],
+                        [posxIn,posyIn,0]
+                        );
 
                 faces.push(
-                          [posxIn,posyIn,0],
-                          [oldPosX,oldPosY,0],
-                          [oldPosXIn,oldPosYIn,0]
-                          );
+                        [posxIn,posyIn,0],
+                        [oldPosX,oldPosY,0],
+                        [oldPosXIn,oldPosYIn,0]
+                        );
 
-                // texCoords.push(
-                //     posxTexCoord,0,
-                //     oldPosXTexCoord,0,
-                //     posxTexCoordIn,1);
+                texCoords.push(
+                    posxTexCoord,0,
+                    oldPosXTexCoord,0,
+                    posxTexCoordIn,1,
 
-                // texCoords.push(
-                //     posxTexCoord,1,
-                //     oldPosXTexCoord,0,
-                //     oldPosXTexCoordIn,1);
+                    posxTexCoord,1,
+                    oldPosXTexCoord,0,
+                    oldPosXTexCoordIn,1);
 
                 vertexNormals.push(0,0,1,0,0,1,0,0,1);
                 vertexNormals.push(0,0,1,0,0,1,0,0,1);
@@ -223,30 +215,30 @@ function calc()
             oldPosXIn=posxIn;
             oldPosYIn=posyIn;
         }
+
         geom=CGL.Geometry.buildFromFaces(faces);
         geom.vertexNormals=vertexNormals;
-        // geom.texCoords=texCoords;
-        geom.mapTexCoords2d();
+        
+        if(mapping.get()=='flat') geom.mapTexCoords2d();
+            else geom.texCoords=texCoords;
     }
 
     geomOut.set(null);
     geomOut.set(geom);
     
     if(geom.vertices.length==0)return;
-    if(!mesh)mesh=new CGL.Mesh(cgl,geom);
-    mesh.setGeom(geom);
+    if(mesh) mesh.dispose();
+    mesh=null;
+    mesh=new CGL.Mesh(cgl,geom);
+    needsCalc=false;
 }
 
-var mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
-mapping.set('flat');
-mapping.onValueChange(calc);
+function calcLater()
+{
+    needsCalc=true;
+}
 
-segments.onChange=calc;
-radius.onChange=calc;
-innerRadius.onChange=calc;
-percent.onChange=calc;
-steps.onChange=calc;
-invertSteps.onChange=calc;
-drawSpline.onChange=calc;
-calc();
-
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}

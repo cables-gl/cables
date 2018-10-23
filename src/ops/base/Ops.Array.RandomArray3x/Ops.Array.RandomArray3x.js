@@ -25,7 +25,7 @@ function init()
 {
     Math.randomSeed=seed.get();
 
-    arr.length=Math.floor(numValues.get()*3) || 300;
+    arr.length=Math.floor(Math.abs(numValues.get()*3)) || 300;
     for(var i=0;i<arr.length;i+=3)
     {
         arr[i+0]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;

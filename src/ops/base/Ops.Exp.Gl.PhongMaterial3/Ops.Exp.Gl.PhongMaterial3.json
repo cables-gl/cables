@@ -92,11 +92,6 @@
             },
             {
                 "type": "0",
-                "name": "Toggle Specular",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
                 "name": "Toggle Ao Texture",
                 "subType": "boolean"
             },

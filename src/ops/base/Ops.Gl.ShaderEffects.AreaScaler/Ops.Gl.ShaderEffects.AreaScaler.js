@@ -61,7 +61,6 @@ op.render.onTriggered=function()
          return;
     }
     
-    if(needsUpdateToZero)updateToZero();
     if(CABLES.UI && gui.patch().isCurrentOp(op)) 
         gui.setTransformGizmo(
             {
@@ -74,7 +73,7 @@ op.render.onTriggered=function()
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
         CABLES.GL_MARKER.drawSphere(op,inSize.get());
         cgl.popModelMatrix();
     }
@@ -102,7 +101,9 @@ op.render.onTriggered=function()
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
     }
     
-    
+
+    if(needsUpdateToZero)updateToZero();
+
     if(!shader)return;
 
     op.trigger.trigger();

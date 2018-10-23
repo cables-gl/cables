@@ -493,6 +493,10 @@ render.onTriggered=function()
                 if(simulate)stringWidth+=spaceWidth;
                 else translateX(spaceWidth);
             }
+            else
+            {
+                renderChar(48,simulate);
+            }
         }
     }
 

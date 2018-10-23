@@ -11,11 +11,13 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -24,9 +26,9 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffect.TextureEffectShader"
+        "name": "Ops.Gl.TextureEffect.CustomTextureEffectShader"
     },
-    "updated": 1522763734741,
+    "updated": 1539764906373,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "474d4806-ef96-4898-84f7-1d062684dfd0",

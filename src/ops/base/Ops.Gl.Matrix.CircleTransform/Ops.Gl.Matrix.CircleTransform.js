@@ -28,8 +28,8 @@ function doRender()
     {
         cgl.pushModelMatrix();
 
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos[i] );
-        if(doRot)mat4.rotateZ(cgl.mvMatrix,cgl.mvMatrix, i/pos.length*CGL.DEG2RAD*-360);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, pos[i] );
+        if(doRot)mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, i/pos.length*CGL.DEG2RAD*-360);
 
         index.set(i);
         trigger.trigger();

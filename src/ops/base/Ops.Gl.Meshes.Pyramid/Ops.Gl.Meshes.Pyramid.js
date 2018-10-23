@@ -1,10 +1,10 @@
-op.name="Pyramid";
-
 var render=op.inFunction("Render");
 
 var sizeW=op.inValue("Width",1);
 var sizeL=op.inValue("Length",1);
 var sizeH=op.inValue("Height",2);
+
+var inSmooth=op.inValueBool("Smooth",false);
 
 var inDraw=op.inValueBool("Draw",true);
 
@@ -18,7 +18,7 @@ var mesh=null;
 sizeW.onChange=create;
 sizeH.onChange=create;
 sizeL.onChange=create;
-
+inSmooth.onChange=create;
 create();
 
 render.onTriggered=function()
@@ -75,7 +75,7 @@ function create()
     ];
 
 
-geom.unIndex();
+    if(!inSmooth.get())geom.unIndex();
     geom.calculateNormals({forceZUp:false});
     
 

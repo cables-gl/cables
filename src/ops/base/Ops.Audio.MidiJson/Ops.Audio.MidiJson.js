@@ -1,15 +1,29 @@
 var inObj=op.inObject("MidiJson");
 var inTime=op.inValue("Time");
 
-var outNumTracks=op.outValue("Num Tracks");
+const outBeat=op.outValue("Beat");
+
 var outNames=op.outArray("Names");
 var outProgress=op.outArray("Progress");
 var outVelocity=op.outArray("Velocity");
+
+var outNumTracks=op.outValue("Num Tracks");
+const outBPM=op.outValue("BPM");
+const outData=op.outObject("Data");
 
 var midi=null;
 var arrNames=[];
 var arrProgress=[];
 var arrVelocity=[];
+var data=
+    {
+        beat:0,
+        names:arrNames,
+        progress:arrProgress,
+        velocity:arrVelocity,
+    };
+
+var bpm=0;
 
 inObj.onChange=function()
 {
@@ -23,6 +37,10 @@ inObj.onChange=function()
     outNumTracks.set(midi.tracks.length);
     
     arrNames.length=midi.tracks.length;
+
+    bpm=midi.header.bpm;
+    outBPM.set(midi.header.bpm);
+
 
     for(var t=0;t<midi.tracks.length;t++)
     {
@@ -43,7 +61,8 @@ inTime.onChange=function()
     outNames.set(null);
     outProgress.set(null);
     outVelocity.set(null);
-
+    outData.set(null);
+    
     for(var t=0;t<midi.tracks.length;t++)
     {
         arrNames[t]='';
@@ -69,4 +88,9 @@ inTime.onChange=function()
     outProgress.set(arrProgress);
     outVelocity.set(arrVelocity);
     
+    var beat=Math.round(inTime.get()/60*(bpm));
+    data.beat=beat;
+    outData.set(data);
+    
+    outBeat.set( beat);
 };

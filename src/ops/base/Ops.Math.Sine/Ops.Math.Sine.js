@@ -11,7 +11,8 @@ var result = op.outValue('result');
 
 var calculate = Math.sin;
 
-value.onValueChanged = function()
+phase.onChange = 
+value.onChange = function()
 {
     result.set(
         amplitude.get() * calculate( ( value.get()*mul.get() ) + phase.get() )

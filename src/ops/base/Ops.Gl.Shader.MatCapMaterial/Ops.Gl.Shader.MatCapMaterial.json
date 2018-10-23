@@ -20,7 +20,8 @@
             },
             {
                 "type": "0",
-                "name": "normalScale"
+                "name": "normalScale",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -32,31 +33,38 @@
             },
             {
                 "type": "0",
-                "name": "diffuseRepeatX"
+                "name": "diffuseRepeatX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuseRepeatY"
+                "name": "diffuseRepeatY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Opacity"
+                "name": "Opacity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "calc normal tangents"
+                "name": "calc normal tangents",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "projectCoords"
+                "name": "projectCoords",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "normalRepeatX"
+                "name": "normalRepeatX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "normalRepeatY"
+                "name": "normalRepeatY",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -71,7 +79,7 @@
         ],
         "name": "Ops.Gl.Shader.MatCapMaterial"
     },
-    "updated": 1516227225173,
+    "updated": 1539848456194,
     "authorName": "pandur",
     "id": "06d1d014-7de0-4d95-b80f-c3e4b583b25f",
     "created": 1516227223965

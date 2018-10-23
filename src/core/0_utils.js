@@ -22,7 +22,22 @@ CABLES.generateUUID=CABLES.uuid=function()
     return uuid;
 };
 
-// generateUUID=CABLES.generateUUID;
+
+/**
+ * generate a simple ID 
+ * @name simpleId
+ * @memberof CABLES
+ * @function
+ * @return {Number} new id
+ * @static
+ */
+CABLES.simpleIdCounter=0;
+CABLES.simpleId=function()
+{
+    CABLES.simpleIdCounter++;
+    return CABLES.simpleIdCounter;
+};
+
 
 // ----------------------------------------------------------------
 

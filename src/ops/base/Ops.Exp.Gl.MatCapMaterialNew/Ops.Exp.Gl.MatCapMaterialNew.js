@@ -1,14 +1,11 @@
-
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var textureMatcap=op.inTexture('MatCap');
-var textureDiffuse=op.inTexture('Diffuse');
-var textureNormal=op.inTexture('Normal');
-var textureSpec=op.inTexture('Specular');
-var textureSpecMatCap=op.inTexture('Specular MatCap');
-var textureAo=op.inTexture('AO Texture');
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
+const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const textureMatcap=op.inTexture('MatCap');
+const textureDiffuse=op.inTexture('Diffuse');
+const textureNormal=op.inTexture('Normal');
+const textureSpec=op.inTexture('Specular');
+const textureSpecMatCap=op.inTexture('Specular MatCap');
+const textureAo=op.inTexture('AO Texture');
 
 {
     // rgba colors
@@ -17,24 +14,18 @@ var cgl=op.patch.cgl;
     var b=op.inValueSlider('b',1);
 }
 
-var aoIntensity=op.inValueSlider("AO Intensity",1.0);
-var repeatX=op.inValue("Repeat X",1);
-var repeatY=op.inValue("Repeat Y",1);
-var pOpacity=op.inValueSlider("Opacity",1);
-var calcTangents = op.inValueBool("calc normal tangents",true);
-var projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
-var ssNormals=op.inValueBool("Screen Space Normals");
+const aoIntensity=op.inValueSlider("AO Intensity",1.0);
+const repeatX=op.inValue("Repeat X",1);
+const repeatY=op.inValue("Repeat Y",1);
+const pOpacity=op.inValueSlider("Opacity",1);
+const calcTangents = op.inValueBool("calc normal tangents",true);
+const projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
+const ssNormals=op.inValueBool("Screen Space Normals");
 
+const next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const shaderOut=op.outObject("Shader");
 
-
-
-var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var shaderOut=op.outObject("Shader");
-
-
-
-var shader=new CGL.Shader(cgl,'MatCapMaterialNew');
-
+const shader=new CGL.Shader(cgl,'MatCapMaterialNew');
 var uniOpacity=new CGL.Uniform(shader,'f','opacity',pOpacity);
 
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
@@ -210,7 +201,6 @@ function bindTextures()
     if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
     if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
 };
-
 
 op.onDelete=function()
 {

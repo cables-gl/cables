@@ -2,6 +2,9 @@ var inGeom=op.inObject("Geometry");
 var outGeom=op.outObject("Result");
 const inSeed=op.inValue("Seed",0);
 
+inGeom.ignoreValueSerialize=true;
+outGeom.ignoreValueSerialize=true;
+
 function shuffleArray(array)
 {
     Math.randomSeed=inSeed.get();
@@ -32,7 +35,6 @@ inGeom.onChange=function()
     order.length=geom.vertices.length/9;
     for(i=0;i<order.length;i++)order[i]=i;
     order=shuffleArray(order);
-    console.log(order);
 
     var verts=[];
     verts.length=geom.vertices.length;
@@ -48,6 +50,4 @@ inGeom.onChange=function()
 
     outGeom.set(null);
     outGeom.set(newGeom);
-
-
 };

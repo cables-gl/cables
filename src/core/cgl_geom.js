@@ -155,6 +155,7 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 
     // this.texCoords.length=verts.length/3*2;
     this.verticesIndices.length=verts.length/3;
+    // this.verticesIndices=[];
 
     for(i=0;i<verts.length/3;i++)
     {
@@ -303,9 +304,6 @@ CGL.Geometry.prototype.calculateNormals=function(options)
 };
 
 
-
-
-
 CGL.Geometry.prototype.isIndexed=function()
 {
     return this.verticesIndices.length!=0;
@@ -317,10 +315,9 @@ CGL.Geometry.prototype.unIndex=function()
     var newVerts=[];
     var newIndizes=[];
     var newTexCoords=[];
-
+    var newNormals=[];
     var count=0;
     var i=0;
-    // console.log('unindexing');
     this.vertexNormals.length=0;
 
     for(i=0;i<this.verticesIndices.length;i+=3)
@@ -328,6 +325,10 @@ CGL.Geometry.prototype.unIndex=function()
         newVerts.push(this.vertices[this.verticesIndices[i+0]*3+0]);
         newVerts.push(this.vertices[this.verticesIndices[i+0]*3+1]);
         newVerts.push(this.vertices[this.verticesIndices[i+0]*3+2]);
+
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+0]*3+0]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+0]*3+1]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+0]*3+2]);
 
         if(!this.texCoords)
         {
@@ -340,12 +341,19 @@ CGL.Geometry.prototype.unIndex=function()
             newTexCoords.push(this.texCoords[this.verticesIndices[i+0]*2+1]);
         }
 
+
+
         newIndizes.push(count);
         count++;
 
         newVerts.push(this.vertices[this.verticesIndices[i+1]*3+0]);
         newVerts.push(this.vertices[this.verticesIndices[i+1]*3+1]);
         newVerts.push(this.vertices[this.verticesIndices[i+1]*3+2]);
+
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+1]*3+0]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+1]*3+1]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+1]*3+2]);
+
 
         if(!this.texCoords)
         {
@@ -358,12 +366,18 @@ CGL.Geometry.prototype.unIndex=function()
             newTexCoords.push(this.texCoords[this.verticesIndices[i+1]*2+1]);
         }
 
+        
         newIndizes.push(count);
         count++;
 
         newVerts.push(this.vertices[this.verticesIndices[i+2]*3+0]);
         newVerts.push(this.vertices[this.verticesIndices[i+2]*3+1]);
         newVerts.push(this.vertices[this.verticesIndices[i+2]*3+2]);
+
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+2]*3+0]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+2]*3+1]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+2]*3+2]);
+
 
         if(!this.texCoords)
         {
@@ -382,6 +396,7 @@ CGL.Geometry.prototype.unIndex=function()
 
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
+    this.vertexNormals=newNormals;
     this.verticesIndices=newIndizes;
     this.calculateNormals();
 };
@@ -486,14 +501,10 @@ CGL.Geometry.prototype.mapTexCoords2d=function()
 
 // -----------------
 
-
-
-
 CGL.Geometry.buildFromFaces=function(arr)
 {
     var vertices=[];
     var verticesIndices=[];
-
 
     for(var i=0;i<arr.length;i+=3)
     {
@@ -577,5 +588,4 @@ CGL.Geometry.json2geom=function(jsonMesh)
     }
     
     return geom;
-
 };

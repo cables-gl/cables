@@ -64,7 +64,7 @@ function reset()
         geom.setPointVertices(verts);
         geom.texCoords=texCoords;
         
-        if(!mesh)mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+        if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
             // else mesh.setGeom(geom);
         mesh.addVertexNumbers=true;
         mesh.setGeom(geom);

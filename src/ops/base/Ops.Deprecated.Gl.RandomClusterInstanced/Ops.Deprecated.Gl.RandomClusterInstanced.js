@@ -1,11 +1,11 @@
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
-op.name='random cluster instanced';
 var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
 var geom=op.addInPort(new Port(op,"geom",OP_PORT_TYPE_OBJECT));
 geom.ignoreValueSerialize=true;
 
-var num=op.addInPort(new Port(op,"num"));
+// var num=op.addInPort(new Port(op,"num"));
+var num=op.inValueInt("num");
 var size=op.addInPort(new Port(op,"size"));
 var seed=op.addInPort(new Port(op,"random seed"));
 
@@ -34,6 +34,22 @@ var mesh=null;
 var shader=null;
 var uniDoInstancing=null;
 
+
+size.set(40);
+seed.set(1);
+positions.onChange=prepare;
+seed.onChange=prepare;
+num.onChange=prepare;
+size.onChange=prepare;
+scaleX.onChange=prepare;
+scaleZ.onChange=prepare;
+scaleY.onChange=prepare;
+geom.onChange=prepare;
+
+num.set(100);
+
+
+
 var srcHeadVert=''
     .endl()+'UNI float do_instancing;'
     .endl()+'UNI float {{mod}}_time;'
@@ -53,11 +69,7 @@ var srcHeadVert=''
 
 var srcBodyVert=''
 
-
-
     .endl()+'#ifdef INSTANCING'
-    .endl()+'   if( do_instancing==1.0 )'
-    .endl()+'   {'
     // .endl()+'       instModelMat=instMat;'
     .endl()+'   pos.x*=osci( mod( {{mod}}_time+instMat[0].x*instMat[0].x ,1.0))*0.8+0.23;'
     .endl()+'   pos.y*=osci( mod( {{mod}}_time+instMat[0].x*instMat[0].x ,1.0))*0.8+0.23;'
@@ -65,7 +77,6 @@ var srcBodyVert=''
     // .endl()+'       mvMatrix=viewMatrix*modelMatrix*instMat;'
     // .endl()+'       mat4 instModelMat=instMat;'
     .endl()+'       mvMatrix*=instMat;'
-    .endl()+'   }'
     .endl()+'#endif'
     .endl();
 
@@ -83,6 +94,7 @@ function prepare()
         var arrs = [].concat.apply([], transformations);
         var matrices = new Float32Array(arrs);
 
+        if(mesh)mesh.dispose();
         mesh=new CGL.Mesh(cgl,geom.get());
         mesh.numInstances=num;
         mesh.setAttribute('instMat',matrices,16);
@@ -110,11 +122,7 @@ function doRender()
     {
         if(cgl.getShader() && cgl.getShader()!=shader)
         {
-            if(shader && mod)
-            {
-                removeModule();
-                shader=null;
-            }
+            removeModule();
 
             shader=cgl.getShader();
             // if(!shader.hasDefine('INSTANCING'))
@@ -128,7 +136,7 @@ function doRender()
                     });
 
                 shader.define('INSTANCING');
-                uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
+                // uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
 
             }
             // else
@@ -140,9 +148,9 @@ function doRender()
 
         if(!uniDoInstancing)return;
 
-        uniDoInstancing.setValue(1);
+        // uniDoInstancing.setValue(1);
         mesh.render(shader);
-        uniDoInstancing.setValue(0);
+        // uniDoInstancing.setValue(0);
     }
     else
     {
@@ -206,11 +214,9 @@ function reset()
     for(i=0;i<randoms.length;i++)
     {
         mat4.identity(m);
-
         mat4.translate(m,m, randoms[i]);
 
         var vScale=vec3.create();
-        // var sc=0.25+0.75*Math.seededRandom();
         var sc=Math.seededRandom();
         vec3.set(vScale,sc,sc,sc);
         mat4.scale(m,m, vScale);
@@ -225,16 +231,3 @@ function reset()
     }
 
 }
-
-size.set(40);
-seed.set(1);
-positions.onChange=prepare;
-seed.onChange=prepare;
-num.onChange=prepare;
-size.onChange=prepare;
-scaleX.onChange=prepare;
-scaleZ.onChange=prepare;
-scaleY.onChange=prepare;
-geom.onChange=prepare;
-
-num.set(100);

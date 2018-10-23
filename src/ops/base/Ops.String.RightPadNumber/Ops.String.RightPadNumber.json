@@ -1,0 +1,32 @@
+{
+    "updated": 1539329884296,
+    "authorName": "pandur",
+    "id": "c71d4b27-ebde-4c51-a88a-95a4db1a01ae",
+    "created": 1539329457443,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "String",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.String.RightPadNumber"
+    },
+    "summary": "converts a number to a string with num decimal places, adds 0's",
+    "docs": {
+        "ports": []
+    }
+}

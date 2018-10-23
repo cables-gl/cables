@@ -58,7 +58,6 @@ function hasUniformInput(name)
 function updateShader()
 {
     needsUpdate=false;
-    op.log('shader update!');
 
     // shader.glslVersion=0;
     shader.bindTextures=bindTextures;
@@ -110,7 +109,6 @@ function updateShader()
     }
 
     if(CABLES.UI) gui.patch().showOpParams(op);
-    console.log(2);
     outShader.set(null);
     outShader.set(shader);
 

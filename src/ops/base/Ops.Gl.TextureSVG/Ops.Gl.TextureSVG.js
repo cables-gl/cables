@@ -1,5 +1,3 @@
-op.name='SVG Texture';
-
 var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 
 var texWidth=op.inValueInt("texture width");
@@ -62,7 +60,7 @@ var data = "data:image/svg+xml," +
            '</foreignObject>' +
            '</svg>';
 
-var cgl_filter=CGL.Texture.FILTER_LINEAR;
+var cgl_filter=CGL.Texture.FILTER_MIPMAP;
 var cgl_wrap=CGL.Texture.WRAP_REPEAT;
 
 function onFilterChange()
@@ -156,3 +154,5 @@ texHeight.onValueChanged=reSize;
 
 createCanvas();
 reSize();
+
+tfilter.set("mipmap");
