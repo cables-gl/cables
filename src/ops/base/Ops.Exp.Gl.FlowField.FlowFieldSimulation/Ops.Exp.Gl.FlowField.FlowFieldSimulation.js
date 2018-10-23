@@ -259,7 +259,6 @@ var vec=vec3.create();
 
 exec.onTriggered=function()
 {
-    
     outDieSlow.set(dieSlow);
     
     dieOffArea=0;
@@ -290,9 +289,7 @@ exec.onTriggered=function()
 
         CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[0])
         CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[1])
-
         CABLES.UTILS.arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
-        
         
         col.set(ppos);
         outIndex.set(i);

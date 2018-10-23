@@ -19,6 +19,22 @@
         self.trigger.trigger();
     };
 
+
+    // ----------------------------------------------------------------
+
+    function ajaxRequest(url, callback)
+    {
+        console.log("deptecated? ajaxrequest!");
+        var request = new XMLHttpRequest();
+        request.open("GET", url, true);
+        request.responseType = "arraybuffer";
+        request.onload = function(e)
+        {
+            callback(e.target.response);
+        };
+        request.send();
+    }
+
     var reloadObj=function()
     {
       var loadingId=cgl.patch.loading.start('obj mesh',self.filename.get());
