@@ -50,7 +50,7 @@ var cgl = op.patch.cgl;
 var trans = mat4.create();
 //array to put trans into
 var transforms = [];
-//pop in and out matrix for branch transforms
+//pop in and out matrix for branch transforms can be nested
 var stack = [];
 
 //used for splines array
