@@ -12,8 +12,8 @@ var shader=new CGL.Shader(cgl,"shaderMaterial");
 // shader.glslVersion=0;
 
 
-fragmentShader.set(shader.getDefaultFragmentShader());
-vertexShader.set(shader.getDefaultVertexShader());
+fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
+vertexShader.set(CGL.Shader.getDefaultVertexShader());
 
 fragmentShader.onChange=updateLater;
 vertexShader.onChange=updateLater;
@@ -49,8 +49,7 @@ function bindTextures()
     {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
         {
-            /* --- */cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
+            cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
         }
     }
 }

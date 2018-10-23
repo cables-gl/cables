@@ -18,12 +18,12 @@ UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
+OUT vec2 vNorm;
+OUT vec3 e;
+
 #ifndef INSTANCING
     UNI mat4 normalMatrix;
 #endif
-OUT vec2 vNorm;
-
-OUT vec3 e;
 
 
 {{MODULES_HEAD}}
