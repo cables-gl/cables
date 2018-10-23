@@ -2,18 +2,12 @@
 //math functions on an array
 "use strict";
 const inArray = op.inArray("array in");
-const mathSelect = op.inValueSelect("Math function",['Sin','Cos']);
+const mathSelect = op.inValueSelect("Math function",["Sin","Cos"],"Sin");
 const outArray = op.outArray("Array result");
 
-const phase=op.inValue("Phase");
-const mul=op.inValue("Frequency");
-const amplitude=op.inValue("Amplitude");
-
-mathSelect.set('Sin');
-mul.set(1);
-amplitude.set(1);
-phase.set(0);
-
+const phase=op.inValue("Phase",0.0);
+const mul=op.inValue("Frequency",1.0);
+const amplitude=op.inValue("Amplitude",1.0);
 
 var mathArray = [];
 var selectIndex = 0;
@@ -31,8 +25,8 @@ mathSelect.onChange = onFilterChange;
 function onFilterChange()
 {
     var mathSelectValue = mathSelect.get();
-    if(mathSelectValue === 'Sin') selectIndex = MATH_FUNC_SIN;
-    else if(mathSelectValue === 'Cos') selectIndex = MATH_FUNC_COS;
+    if(mathSelectValue === "Sin") selectIndex = MATH_FUNC_SIN;
+    else if(mathSelectValue === "Cos") selectIndex = MATH_FUNC_COS;
     update();
 }
 
@@ -49,15 +43,13 @@ function update()
     if(selectIndex === MATH_FUNC_SIN)
     {
         for(i = 0; i < arrayIn.length; i++)
-            mathArray[i] = amplitude.get() * Math.sin((arrayIn[i]) *  mul.get() + phase.get())  ;
+            mathArray[i] = amplitude.get() * Math.sin((arrayIn[i]) *  mul.get() + phase.get());
     }
     else if(selectIndex === MATH_FUNC_COS)
     {
         for(i = 0; i < arrayIn.length; i++)
-            mathArray[i] = amplitude.get() * (Math.cos(arrayIn[i] * mul.get() + phase.get()) );
+            mathArray[i] = amplitude.get() * (Math.cos(arrayIn[i] * mul.get() + phase.get()));
     }
     outArray.set(null);
     outArray.set(mathArray);
 }
-
-
