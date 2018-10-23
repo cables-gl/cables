@@ -1,29 +1,29 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 
 this.name='laserpoint';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE,{ }));
-var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE,{ }));
-var z=this.addInPort(new Port(this,"z",OP_PORT_TYPE_VALUE,{ }));
+var x=this.addInPort(new Port(this,"x",CABLES.OP_PORT_TYPE_VALUE,{ }));
+var y=this.addInPort(new Port(this,"y",CABLES.OP_PORT_TYPE_VALUE,{ }));
+var z=this.addInPort(new Port(this,"z",CABLES.OP_PORT_TYPE_VALUE,{ }));
 
 
-var doSetColor=this.addInPort(new Port(this,"set color",OP_PORT_TYPE_VALUE,{'display':'bool'}));
+var doSetColor=this.addInPort(new Port(this,"set color",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'}));
 doSetColor.set(true);
 
-var numPoints=this.addInPort(new Port(this,"num points",OP_PORT_TYPE_VALUE));
+var numPoints=this.addInPort(new Port(this,"num points",CABLES.OP_PORT_TYPE_VALUE));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 numPoints.set(1);
 {
     // diffuse color
 
-    var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var r=this.addInPort(new Port(this,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var g=this.addInPort(new Port(this,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=this.addInPort(new Port(this,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var a=this.addInPort(new Port(this,"diffuse a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
     r.set(Math.random());
     g.set(Math.random());

@@ -1,11 +1,11 @@
 op.name='ArrayIterator 3x';
-var exe=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
-var arr=op.addInPort(new Port(op,"Array",OP_PORT_TYPE_ARRAY));
+var exe=op.addInPort(new Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
+var arr=op.addInPort(new Port(op,"Array",CABLES.OP_PORT_TYPE_ARRAY));
 var mod=op.inValue("Modulo",1);
 arr.ignoreValueSerialize=true;
 
 
-var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var idx=op.addOutPort(new Port(op,"Index"));
 var valX=op.addOutPort(new Port(op,"Value 1"));
 var valY=op.addOutPort(new Port(op,"Value 2"));

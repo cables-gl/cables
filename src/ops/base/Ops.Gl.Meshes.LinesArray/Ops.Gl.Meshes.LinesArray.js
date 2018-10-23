@@ -1,15 +1,15 @@
 
 op.name='LineArray';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var width=op.addInPort(new Port(op,"width"));
 var height=op.addInPort(new Port(op,"height"));
 var doLog=op.inValueBool("Logarithmic",false);
-var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var pivotX=op.addInPort(new Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
+var pivotY=op.addInPort(new Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
 var nColumns=op.addInPort(new Port(op,"num columns"));
 var nRows=op.addInPort(new Port(op,"num rows"));
-var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var axis=op.addInPort(new Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var outPointArrays=op.outArray("Point Arrays");
 
 var cgl=op.patch.cgl;

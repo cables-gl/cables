@@ -4,6 +4,10 @@
  * @class
  */
 
+var Ops = {};
+var CABLES=CABLES || {};
+
+
 /**
  * current CGL Context 
  * @name CABLES.Op#cgl
@@ -12,16 +16,10 @@
  */
 CABLES.OP_PORT_TYPE_VALUE =0;
 CABLES.OP_PORT_TYPE_FUNCTION =1;
-var CABLES.OP_PORT_TYPE_OBJECT =2;
-var OP_PORT_TYPE_TEXTURE =2;
-var OP_PORT_TYPE_ARRAY =3;
-var OP_PORT_TYPE_DYNAMIC=4;
-
-var Ops = {};
-var CABLES=CABLES || {};
-
-CABLES.Helpers = CABLES.Helpers || {};
-CABLES.Helpers.isArray = function(v) {return Object.prototype.toString.call(v) === '[object Array]';};
+CABLES.OP_PORT_TYPE_OBJECT =2;
+CABLES.OP_PORT_TYPE_TEXTURE =2;
+CABLES.OP_PORT_TYPE_ARRAY =3;
+CABLES.OP_PORT_TYPE_DYNAMIC=4;
 
 /**
  * CABLES.Op
@@ -135,12 +133,12 @@ CABLES.Op = function()
         // for(i in this.portsIn)
         for(i=0;i<this.portsIn.length;i++)
         {
-            if(this.portsIn[i].type==OP_PORT_TYPE_DYNAMIC) return true;
+            if(this.portsIn[i].type==CABLES.OP_PORT_TYPE_DYNAMIC) return true;
             if(this.portsIn[i].getName()=='dyn') return true;
         }
         for(i=0;i<this.portsOut.length;i++)
         {
-            if(this.portsOut[i].type==OP_PORT_TYPE_DYNAMIC) return true;
+            if(this.portsOut[i].type==CABLES.OP_PORT_TYPE_DYNAMIC) return true;
             if(this.portsOut[i].getName()=='dyn') return true;
         }
 
@@ -286,7 +284,7 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inArray=function(name,v){ var p=this.addInPort(new Port(this,name,OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inArray=function(name,v){ var p=this.addInPort(new Port(this,name,CABLES.OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create a value slider input port
@@ -351,7 +349,7 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outArray=function(name,v){ var p=this.addOutPort(new Port(this,name,OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
+    CABLES.Op.prototype.outArray=function(name,v){ var p=this.addOutPort(new Port(this,name,CABLES.OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
 
     /**
      * create output texture port
@@ -365,7 +363,7 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.inDynamic=
         function(name,filter,options,v){
-            var p=new Port(this,name,OP_PORT_TYPE_DYNAMIC,options);
+            var p=new Port(this,name,CABLES.OP_PORT_TYPE_DYNAMIC,options);
 
             p.shouldLink=function(p1,p2)
             {
@@ -708,7 +706,7 @@ CABLES.Op = function()
         var theTriggerPort=null;
         for(ipi=0;ipi<this.portsIn.length;ipi++)
         {
-            if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_VALUE || this.portsIn[ipi].type==OP_PORT_TYPE_ARRAY)
+            if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_VALUE || this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_ARRAY)
             {
                 this._instances[ this.patch.instancing.index() ].portsIn[ipi].set(this.portsIn[ipi].get());
             }
@@ -920,4 +918,4 @@ CABLES.Op.isSubpatchOp=function(name)
     return (name=='Ops.Ui.Patch' || name=='Ops.Ui.SubPatch');
 };
 
-var Op=CABLES.Op; // deprecated!
+// var Op=CABLES.Op; 

@@ -1,8 +1,8 @@
 op.name="GetVarString";
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var varname=op.addInPort(new Port(op,"name",OP_PORT_TYPE_VALUE,{type:'string'}));
+var varname=op.addInPort(new Port(op,"name",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 
 
 var defaultValue=op.inValueString("Default Value",'');

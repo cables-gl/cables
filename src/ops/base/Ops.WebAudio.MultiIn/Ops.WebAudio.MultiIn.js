@@ -4,7 +4,7 @@ var op = this;
 
 if(!window.audioContext){ audioContext = new AudioContext(); }
 
-var audioOut=this.addOutPort(new Port(this,"audio out",OP_PORT_TYPE_OBJECT));
+var audioOut=this.addOutPort(new Port(this,"audio out",CABLES.OP_PORT_TYPE_OBJECT));
 
 var gain = audioContext.createGain();
 audioOut.set(gain);

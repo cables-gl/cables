@@ -1,9 +1,9 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var segments=op.addInPort(new Port(op,"segments"));
 var radius=op.addInPort(new Port(op,"radius"));
-var percent=op.addInPort(new Port(op,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
+var percent=op.addInPort(new Port(op,"percent",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 var inRotate=op.inValueBool("Rotate");
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var index=op.addOutPort(new Port(op,"index"));
 
 var cgl=op.patch.cgl;

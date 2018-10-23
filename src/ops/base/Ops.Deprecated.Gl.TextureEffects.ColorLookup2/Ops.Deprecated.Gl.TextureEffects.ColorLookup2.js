@@ -1,13 +1,13 @@
 
 op.name='ColorLookup';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var posy=op.addInPort(new Port(op,"pos",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var amount=op.addInPort(new Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var posy=op.addInPort(new Port(op,"pos",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var image=op.addInPort(new Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-// var vert=op.addOutPort(new Port(op,"vertical",OP_PORT_TYPE_FUNCTION));
+// var vert=op.addOutPort(new Port(op,"vertical",CABLES.OP_PORT_TYPE_FUNCTION));
 var vert=op.inValueBool("vertical",true);
 
 var cgl=op.patch.cgl;

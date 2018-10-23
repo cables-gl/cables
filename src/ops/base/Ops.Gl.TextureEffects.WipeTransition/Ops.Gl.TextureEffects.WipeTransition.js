@@ -1,11 +1,11 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.fade=this.addInPort(new Port(this,"fade",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.fadeWidth=this.addInPort(new Port(this,"fadeWidth",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.image=this.addInPort(new Port(this,"image",OP_PORT_TYPE_TEXTURE));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.fade=this.addInPort(new Port(this,"fade",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+this.fadeWidth=this.addInPort(new Port(this,"fadeWidth",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+this.image=this.addInPort(new Port(this,"image",CABLES.OP_PORT_TYPE_TEXTURE));
+this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
 

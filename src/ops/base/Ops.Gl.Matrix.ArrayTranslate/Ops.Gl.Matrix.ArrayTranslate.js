@@ -1,9 +1,9 @@
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-// var arrayIn=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
-var arrayIn=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
+var exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+// var arrayIn=this.addInPort(new Port(this,"array",CABLES.OP_PORT_TYPE_ARRAY));
+var arrayIn=this.addInPort(new Port(this,"array",CABLES.OP_PORT_TYPE_ARRAY));
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var idx=this.addOutPort(new Port(this,"index"));
 
 var vec=vec3.create();

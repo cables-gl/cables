@@ -1,8 +1,8 @@
 
 
 var exe=op.inFunctionButton("exe");
-// op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+// op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var result=op.addOutPort(new Port(op,"result"));
 
 var smooth=op.inValueBool("Smooth",false);

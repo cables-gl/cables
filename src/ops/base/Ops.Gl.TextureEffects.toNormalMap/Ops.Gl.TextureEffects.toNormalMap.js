@@ -1,7 +1,7 @@
 op.name="toNormalMap";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var strength=op.inValue("Strength",4);
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

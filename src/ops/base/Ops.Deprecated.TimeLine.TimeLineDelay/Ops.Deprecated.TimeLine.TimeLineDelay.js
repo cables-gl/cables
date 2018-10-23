@@ -1,12 +1,12 @@
 var self=this;
 
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+this.exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 this.theTime=this.addOutPort(new Port(this,"time"));
 this.delay=this.addInPort(new Port(this,"delay"));
 this.delay.val=0.0;
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 this.exe.onTriggered=function()
 {

@@ -1,6 +1,6 @@
 op.name="getValue";
 
-var data=op.addInPort(new Port(op,"data",OP_PORT_TYPE_OBJECT ));
+var data=op.addInPort(new Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT ));
 var key = op.inValueString("key");
 var result=op.addOutPort(new Port(op,"result"));
 

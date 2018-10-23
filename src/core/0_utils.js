@@ -1,7 +1,36 @@
-"use strict";
+// "use strict";
 
 var CABLES=CABLES || {};
-CABLES.UTIILS={};
+CABLES.UTILS={};
+CGL=CGL || {};
+
+
+
+/**
+ * merge two float32Arrays
+ * @name float32Concat
+ * @memberof CABLES.UTILS
+ * @function
+ * @return {Float32Array} 
+ * @static
+ */
+CABLES.UTILS.float32Concat=function(first, second)
+{
+    if(!(first instanceof Float32Array))first=new Float32Array(first);
+    if(!(second instanceof Float32Array))second=new Float32Array(second);
+
+    var firstLength = first.length,
+        result = new Float32Array(firstLength + second.length);
+
+    result.set(first);
+    result.set(second, firstLength);
+
+    return result;
+}
+
+
+
+
 /**
  * generate a UUID
  * @name uuid
@@ -163,7 +192,7 @@ Math.seededRandom = function(max, min)
 
 // ----------------------------------------------------------------
 
-function arrayWriteToEnd(arr,v)
+CABLES.UTILS.arrayWriteToEnd=function(arr,v)
 {
     for(var i=1;i<arr.length;i++)arr[i-1]=arr[i];
     arr[arr.length-1]=v;
@@ -171,11 +200,27 @@ function arrayWriteToEnd(arr,v)
 
 // ----------------------------------------------------------------
 
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
+/**
+ * returns true if parameter is a number
+ * @name isNumeric
+ * @memberof CABLES.UTILS
+ * @function
+ * @return {Boolean} 
+ * @static
+ */
+CABLES.UTILS.isNumeric=function(n)
+{
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-
+/**
+ * returns true if parameter is array
+ * @name isArray
+ * @memberof CABLES.UTILS
+ * @function
+ * @return {Boolean} 
+ * @static
+ */
 CABLES.UTILS.isArray = function(v)
 {
     return Object.prototype.toString.call(v) === '[object Array]';
@@ -218,6 +263,7 @@ String.prototype.endsWith = function(suffix) {
 
 function ajaxRequest(url, callback)
 {
+    console.log("deptecated? ajaxrequest!");
     var request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.responseType = "arraybuffer";
@@ -372,22 +418,9 @@ CABLES.request=function(options)
 
 // ----------------------------------------------------------------
 
-var arrayContains = function(arr,obj)
-{
-    var i = arr.length;
-    while (i--)
-    {
-        if (arr[i] === obj)
-        {
-            return true;
-        }
-    }
-    return false;
-};
-
 // ----------------------------------------------------------------
 
-CGL=CGL || {};
+
 
 /** 
  * @constant {number} 
@@ -441,19 +474,8 @@ CGL.getWheelSpeed=CGL.getWheelDelta=function(event)
 
 // ----------------------------------------------------------------
 
-function float32Concat(first, second)
-{
-    if(!(first instanceof Float32Array))first=new Float32Array(first);
-    if(!(second instanceof Float32Array))second=new Float32Array(second);
 
-    var firstLength = first.length,
-        result = new Float32Array(firstLength + second.length);
 
-    result.set(first);
-    result.set(second, firstLength);
-
-    return result;
-}
 
 
 window.performance = (window.performance ||

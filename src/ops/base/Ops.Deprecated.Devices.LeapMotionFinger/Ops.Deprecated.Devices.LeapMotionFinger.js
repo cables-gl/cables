@@ -1,10 +1,10 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 
 this.name='leap finger';
 
 this.patch.loadLib('leap-motion');
 
-var leapFrame=this.addInPort(new Port(this,"leap frame",OP_PORT_TYPE_OBJECT));
+var leapFrame=this.addInPort(new Port(this,"leap frame",CABLES.OP_PORT_TYPE_OBJECT));
 leapFrame.ignoreValueSerialize=true;
 
 var handIndex=this.addInPort(new Port(this,"hand index"));

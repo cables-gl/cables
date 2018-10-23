@@ -1,37 +1,37 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-op.frequency=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
+op.frequency=op.addInPort(new Port(op,"frequency",CABLES.OP_PORT_TYPE_VALUE));
 var uniFrequency=null;
 op.frequency.val=1.0;
 
-op.amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE));
+op.amount=op.addInPort(new Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE));
 var uniAmount=null;
 op.amount.val=1.0;
 
-op.phase=op.addInPort(new Port(op,"phase",OP_PORT_TYPE_VALUE));
+op.phase=op.addInPort(new Port(op,"phase",CABLES.OP_PORT_TYPE_VALUE));
 var uniPhase=null;
 op.phase.val=1.0;
 
-var mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
+var mul=op.addInPort(new Port(op,"mul",CABLES.OP_PORT_TYPE_VALUE));
 var uniMul=null;
 mul.set(3.0);
 
-var add=op.addInPort(new Port(op,"add",OP_PORT_TYPE_VALUE));
+var add=op.addInPort(new Port(op,"add",CABLES.OP_PORT_TYPE_VALUE));
 var uniAdd=null;
 add.set(0);
 
 
-op.toAxisX=op.addInPort(new Port(op,"axisX",OP_PORT_TYPE_VALUE,{display:'bool'}));
+op.toAxisX=op.addInPort(new Port(op,"axisX",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.toAxisX.val=true;
 op.toAxisX.onValueChanged=setDefines;
 
-op.toAxisY=op.addInPort(new Port(op,"axisY",OP_PORT_TYPE_VALUE,{display:'bool'}));
+op.toAxisY=op.addInPort(new Port(op,"axisY",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.toAxisY.val=true;
 op.toAxisY.onValueChanged=setDefines;
 
-op.toAxisZ=op.addInPort(new Port(op,"axisZ",OP_PORT_TYPE_VALUE,{display:'bool'}));
+op.toAxisZ=op.addInPort(new Port(op,"axisZ",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.toAxisZ.val=true;
 op.toAxisZ.onValueChanged=setDefines;
 
@@ -43,7 +43,7 @@ var uniTime;
 
 
 
-var src=op.addInPort(new Port(op,"Source",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[
+var src=op.addInPort(new Port(op,"Source",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[
     "X * Z + Time",
     "X * Y + Time",
     "X + Time",

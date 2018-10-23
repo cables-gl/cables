@@ -1,9 +1,9 @@
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addInPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addInPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_FUNCTION));
-var time=op.addOutPort(new Port(op,"time",OP_PORT_TYPE_VALUE));
+var next=op.addOutPort(new Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+var time=op.addOutPort(new Port(op,"time",CABLES.OP_PORT_TYPE_VALUE));
 
 var lastTrigger=op.patch.freeTimer.get();
 time.set(-1);

@@ -1,10 +1,10 @@
 this.name="Ops.Audio.Bang";
 
 var self=this;
-Op.apply(this, arguments);
+// //Op.apply(this, arguments);
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var beat=this.addInPort(new Port(this,"beat",OP_PORT_TYPE_FUNCTION));
+var exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var beat=this.addInPort(new Port(this,"beat",CABLES.OP_PORT_TYPE_FUNCTION));
 var bang=this.addOutPort(new Port(this,"bang"));
 
 var startValue=this.addInPort(new Port(this,"startValue"));
@@ -14,7 +14,7 @@ var bpm=this.addInPort(new Port(this,"bpm"));
 
 var anim=new CABLES.TL.Anim();
 
-var easing=this.addInPort(new Port(this,"easing",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
+var easing=this.addInPort(new Port(this,"easing",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
 easing.set('linear');
 
 var lastBeat = 0;

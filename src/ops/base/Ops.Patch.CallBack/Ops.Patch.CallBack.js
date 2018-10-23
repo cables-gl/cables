@@ -1,9 +1,9 @@
 op.name='callback';
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var callbackname=op.addInPort(new Port(op,"callback name",OP_PORT_TYPE_VALUE,{type:'string'}));
-var val0=op.addInPort(new Port(op,"value 1",OP_PORT_TYPE_VALUE,{type:'string'}));
-var val1=op.addInPort(new Port(op,"value 2",OP_PORT_TYPE_VALUE,{type:'string'}));
-var val2=op.addInPort(new Port(op,"value 3",OP_PORT_TYPE_VALUE,{type:'string'}));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var callbackname=op.addInPort(new Port(op,"callback name",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var val0=op.addInPort(new Port(op,"value 1",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var val1=op.addInPort(new Port(op,"value 2",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var val2=op.addInPort(new Port(op,"value 3",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 
 var values=[0,0,0];
 

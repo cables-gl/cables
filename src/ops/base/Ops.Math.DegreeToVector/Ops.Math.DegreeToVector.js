@@ -1,6 +1,6 @@
 op.name="Degree To Vector";
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var deg=op.addInPort(new Port(op,"degree"));
 var x=op.addOutPort(new Port(op,"x"));

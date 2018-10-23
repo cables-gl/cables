@@ -1,7 +1,7 @@
 
 var numValues=op.inValueInt("numValues");
 
-var values=op.addOutPort(new Port(op, "values",OP_PORT_TYPE_ARRAY));
+var values=op.addOutPort(new Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
 values.ignoreValueSerialize=true;
 
 numValues.set(100);

@@ -1,6 +1,6 @@
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var channel=this.addInPort(new Port(this,"channel"));
 

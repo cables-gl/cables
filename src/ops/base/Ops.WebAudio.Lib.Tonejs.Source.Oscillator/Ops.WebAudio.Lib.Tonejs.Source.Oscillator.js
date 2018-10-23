@@ -61,9 +61,9 @@ var node = new Tone.Oscillator(FREQUENCY_DEFAULT, TYPE_DEFAULT);
 // input ports
 var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 var detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
-var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
+var typePort = op.addInPort( new Port( op, "Type", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: TYPES } ) );
 typePort.set("sine");
-var phasePort = op.addInPort( new Port( op, "Phase", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX }, PHASE_DEFAULT ));
+var phasePort = op.addInPort( new Port( op, "Phase", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX }, PHASE_DEFAULT ));
 phasePort.set(PHASE_DEFAULT);
 var syncFrequencyPort = op.inValueBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
 var startPort = op.addInPort( new Port( op, "Start", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
@@ -74,7 +74,7 @@ var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
 var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
 //volumePort.set(VOLUME_DEFAULT);
 
-var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var mutePort = op.addInPort( new Port( op, "Mute", CABLES.OP_PORT_TYPE_, { display: 'bool' } ) );
 mutePort.set(false);
 
 function setSyncAndAutostart() {

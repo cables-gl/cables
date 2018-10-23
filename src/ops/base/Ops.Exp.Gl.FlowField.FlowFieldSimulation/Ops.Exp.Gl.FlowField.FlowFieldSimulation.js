@@ -288,10 +288,10 @@ exec.onTriggered=function()
         var ppos=Math.abs( (p.pos[0]) );
         var lifetimeMul=Math.min(p.lifetime/3000,1);
 
-        arrayWriteToEnd(p.buff,p.pos[0])
-        arrayWriteToEnd(p.buff,p.pos[1])
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[0])
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[1])
 
-        arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
+        CABLES.UTILS.arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
         
         
         col.set(ppos);

@@ -1,9 +1,9 @@
 op.name='Pixelate';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var amountX=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{  }));
-var amountY=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE,{  }));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var amountX=op.addInPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{  }));
+var amountY=op.addInPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE,{  }));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

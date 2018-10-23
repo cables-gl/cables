@@ -16,9 +16,6 @@ var timeOffset=0;
 inStr.onChange=
 inLoop.onChange=parse;
 
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
 
 inRewind.onTriggered=function()
 {
@@ -51,7 +48,7 @@ function parse()
     
     for(var i=0;i<parts.length;i++)
     {
-        if(isNumeric(parts[i]))
+        if(CABLES.UTILS.isNumeric(parts[i]))
         {
             frames.push(parseInt(parts[i],10));
         }

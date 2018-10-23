@@ -1,20 +1,20 @@
 this.name="Ops.Audio.BPMTap";
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var tap=this.addInPort(new Port(this,"tap",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
-var nudgeLeft=this.addInPort(new Port(this,"nudgeLeft",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
-var nudgeRight=this.addInPort(new Port(this,"nudgeRight",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
-var sync=this.addInPort(new Port(this,"sync",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var tap=this.addInPort(new Port(this,"tap",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var nudgeLeft=this.addInPort(new Port(this,"nudgeLeft",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var nudgeRight=this.addInPort(new Port(this,"nudgeRight",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var sync=this.addInPort(new Port(this,"sync",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
 
-var beat=this.addOutPort(new Port(this,"beat",OP_PORT_TYPE_FUNCTION));
-var beat1=this.addOutPort(new Port(this,"beat1",OP_PORT_TYPE_FUNCTION));
-var beat2=this.addOutPort(new Port(this,"beat2",OP_PORT_TYPE_FUNCTION));
-var beat3=this.addOutPort(new Port(this,"beat3",OP_PORT_TYPE_FUNCTION));
-var beat4=this.addOutPort(new Port(this,"beat4",OP_PORT_TYPE_FUNCTION));
-var offbeat=this.addOutPort(new Port(this,"offbeat",OP_PORT_TYPE_FUNCTION));
+var beat=this.addOutPort(new Port(this,"beat",CABLES.OP_PORT_TYPE_FUNCTION));
+var beat1=this.addOutPort(new Port(this,"beat1",CABLES.OP_PORT_TYPE_FUNCTION));
+var beat2=this.addOutPort(new Port(this,"beat2",CABLES.OP_PORT_TYPE_FUNCTION));
+var beat3=this.addOutPort(new Port(this,"beat3",CABLES.OP_PORT_TYPE_FUNCTION));
+var beat4=this.addOutPort(new Port(this,"beat4",CABLES.OP_PORT_TYPE_FUNCTION));
+var offbeat=this.addOutPort(new Port(this,"offbeat",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var bpm=this.addOutPort(new Port(this,"bpm",OP_PORT_TYPE_VALUE,{display:'editor'}));
+var bpm=this.addOutPort(new Port(this,"bpm",CABLES.OP_PORT_TYPE_VALUE,{display:'editor'}));
 
 
 var lastTap=0;

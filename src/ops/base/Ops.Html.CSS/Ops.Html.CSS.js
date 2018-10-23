@@ -1,5 +1,5 @@
 
-var code=op.addInPort(new Port(op,"css code",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'css'}));
+var code=op.addInPort(new Port(op,"css code",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'css'}));
 
 var styleEle=null;
 var eleId='css_'+CABLES.uuid();

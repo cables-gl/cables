@@ -1,13 +1,13 @@
 
-var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
-var width=op.addInPort(new Port(op,"Width",OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"Height",OP_PORT_TYPE_VALUE));
-var thickness=op.addInPort(new Port(op,"Thickness",OP_PORT_TYPE_VALUE));
-var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var render=op.addInPort(new Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
+var width=op.addInPort(new Port(op,"Width",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new Port(op,"Height",CABLES.OP_PORT_TYPE_VALUE));
+var thickness=op.addInPort(new Port(op,"Thickness",CABLES.OP_PORT_TYPE_VALUE));
+var pivotX=op.addInPort(new Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
+var pivotY=op.addInPort(new Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
 
-var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
-var geomOut=op.addOutPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
+var trigger=op.addOutPort(new Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var geomOut=op.addOutPort(new Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 var drawTop=op.inValueBool("Draw Top",true);
 var drawBottom=op.inValueBool("Draw Bottom",true);

@@ -1,11 +1,11 @@
 op.name='Lines';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var pointSize=op.addInPort(new Port(op,"pointSize"));
-var mode=op.addInPort(new Port(op,"Draw Mode",OP_PORT_TYPE_VALUE ,{
+var mode=op.addInPort(new Port(op,"Draw Mode",CABLES.OP_PORT_TYPE_VALUE ,{
     display:'dropdown',values:['Line Strip','Line Loop','Lines']} ));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 pointSize.set(2);
 

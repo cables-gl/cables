@@ -1,10 +1,10 @@
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+var filename=op.addInPort(new Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 
 var texWidth=op.inValueInt("texture width");
 var texHeight=op.inValueInt("texture height");
 
-var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
-var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+var wrap=op.addInPort(new Port(op,"wrap",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
+var tfilter=op.addInPort(new Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
 
 var textureOut=op.outTexture("texture");
 

@@ -1,9 +1,9 @@
 op.name='Points';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var pointSize=op.addInPort(new Port(op,"pointSize"));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 pointSize.set(2);
 

@@ -1,6 +1,6 @@
 
 var render=op.inFunction("render");
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var width=op.inValue("width",1);
 var height=op.inValue("height",1);
@@ -8,10 +8,10 @@ var height=op.inValue("height",1);
 var inId=op.inValueString("id");
 var classPort = op.inValueString("Class");
 
-var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var pivotX=op.addInPort(new Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
+var pivotY=op.addInPort(new Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
 
-var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var axis=op.addInPort(new Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
 
 var isInteractive=op.inValueBool('Is Interactive',true);
 var active=op.inValueBool('Render',true);
@@ -19,7 +19,7 @@ var divVisible=op.inValueBool('Show Boundings',true);
 
 var cursorPort=op.inValueSelect("Cursor",["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help", "none"],"pointer");
 
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
 var mouseOver=op.outValue("Pointer Hover",false);

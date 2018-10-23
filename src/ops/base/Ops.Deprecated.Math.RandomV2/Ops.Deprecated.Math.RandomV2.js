@@ -1,8 +1,8 @@
 var self=this;
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 
 this.name='random';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+this.exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 this.result=this.addOutPort(new Port(this,"result"));
 
 var min=this.addInPort(new Port(this,"min"));

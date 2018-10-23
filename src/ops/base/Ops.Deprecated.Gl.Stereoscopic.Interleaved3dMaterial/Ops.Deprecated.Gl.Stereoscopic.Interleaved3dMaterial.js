@@ -1,12 +1,12 @@
 
 var cgl=op.patch.cgl;
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var texture0=op.addInPort(new Port(op,"texture left",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texture0=op.addInPort(new Port(op,"texture left",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texture0Uniform=null;
 
-var texture1=op.addInPort(new Port(op,"texture right",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var texture1=op.addInPort(new Port(op,"texture right",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texture1Uniform=null;
 
 var srcFrag=''

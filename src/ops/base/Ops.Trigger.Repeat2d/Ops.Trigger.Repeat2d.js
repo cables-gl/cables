@@ -1,13 +1,13 @@
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var numx=op.inValueInt("num x");
 var numy=op.inValueInt("num y");
 var mul=op.addInPort(new Port(op,"mul"));
-// var center=op.addInPort(new Port(op,"center",OP_PORT_TYPE_VALUE,{"display":"bool"}));
+// var center=op.addInPort(new Port(op,"center",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
 var center=op.inValueBool("center");
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var outX=op.addOutPort(new Port(op,"x"));
 var outY=op.addOutPort(new Port(op,"y"));
 var idx=op.addOutPort(new Port(op,"index"));

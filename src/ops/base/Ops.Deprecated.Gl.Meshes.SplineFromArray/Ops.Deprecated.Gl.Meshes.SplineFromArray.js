@@ -1,8 +1,8 @@
-var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
 var inIndex=op.inValue("index");
 var inPoints=op.inArray("points");
 var dimensions=op.inValueSelect("Dimensions",["1","3"],3);
-var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var splines=[];

@@ -1,6 +1,6 @@
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var x=op.addInPort(new Port(op,"value x",OP_PORT_TYPE_VALUE));
-var y=op.addInPort(new Port(op,"value y",OP_PORT_TYPE_VALUE));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var x=op.addInPort(new Port(op,"value x",CABLES.OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new Port(op,"value y",CABLES.OP_PORT_TYPE_VALUE));
 
 var resultX=op.addOutPort(new Port(op,"result x"));
 var resultY=op.addOutPort(new Port(op,"result y"));

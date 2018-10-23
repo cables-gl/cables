@@ -7,7 +7,7 @@ var vecZ=op.inValue("Vector Z");
 
 var next=op.outFunction("Next");
 
-var reset=this.addInPort(new Port(this,"reset",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var reset=this.addInPort(new Port(this,"reset",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
 
 var max=op.inValue("max");
 

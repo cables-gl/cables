@@ -2,14 +2,14 @@
 
 op.name='Cone';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var slices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
-var stacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
-var radius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var slices=op.addInPort(new Port(op,"slices",CABLES.OP_PORT_TYPE_VALUE));
+var stacks=op.addInPort(new Port(op,"stacks",CABLES.OP_PORT_TYPE_VALUE));
+var radius=op.addInPort(new Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var geomOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 slices.set(32);
 stacks.set(5);

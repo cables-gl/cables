@@ -1,12 +1,12 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.geometry0=this.addInPort(new Port(this,"geometry 0",OP_PORT_TYPE_OBJECT));
-this.geometry1=this.addInPort(new Port(this,"geometry 1",OP_PORT_TYPE_OBJECT));
+this.geometry0=this.addInPort(new Port(this,"geometry 0",CABLES.OP_PORT_TYPE_OBJECT));
+this.geometry1=this.addInPort(new Port(this,"geometry 1",CABLES.OP_PORT_TYPE_OBJECT));
 
-this.fade=this.addInPort(new Port(this,"fade",OP_PORT_TYPE_VALUE,{display:'range'}));
+this.fade=this.addInPort(new Port(this,"fade",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 this.fade.onValueChanged=function(){ if(uniFade)uniFade.setValue(self.fade.val); };
 
 var geom=null;

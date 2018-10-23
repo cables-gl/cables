@@ -7,12 +7,12 @@ op.name='midiInput';
 op.requirements=[CABLES.Requirements.MIDI];
 
 
-var normalize=op.addInPort(new Port(op,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var deviceSelect=op.addInPort(new Port(op,"device",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["none"]} ));
+var normalize=op.addInPort(new Port(op,"normalize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var deviceSelect=op.addInPort(new Port(op,"device",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["none"]} ));
 
-var resetLights=op.addInPort(new Port(op,"Reset Lights",OP_PORT_TYPE_VALUE,{display:'bool'} ));
+var resetLights=op.addInPort(new Port(op,"Reset Lights",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'} ));
 
-var outEvent=op.addOutPort(new Port(op,"Event",OP_PORT_TYPE_OBJECT));
+var outEvent=op.addOutPort(new Port(op,"Event",CABLES.OP_PORT_TYPE_OBJECT));
 
 resetLights.set(false);
 normalize.set(true);

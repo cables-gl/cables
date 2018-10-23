@@ -1,9 +1,9 @@
 op.name="PolyColor";
 
-var pDefaultR=op.addInPort(new Port(op,"default r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var pDefaultG=op.addInPort(new Port(op,"default g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var pDefaultB=op.addInPort(new Port(op,"default b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var pDefaultA=op.addInPort(new Port(op,"default a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var pDefaultR=op.addInPort(new Port(op,"default r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var pDefaultG=op.addInPort(new Port(op,"default g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var pDefaultB=op.addInPort(new Port(op,"default b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var pDefaultA=op.addInPort(new Port(op,"default a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 var pName=op.inValueString("name","paramname");
 var pTitle=op.inValueString("title","something readable");
 var pDescription=op.inValueString("description","");

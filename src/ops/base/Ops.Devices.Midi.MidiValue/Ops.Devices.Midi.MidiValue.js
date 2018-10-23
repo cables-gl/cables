@@ -1,10 +1,10 @@
-var eventIn=op.addInPort(new Port(this,"Event Input",OP_PORT_TYPE_OBJECT));
+var eventIn=op.addInPort(new Port(this,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
 
 var note=op.addInPort(new Port(this,"note"));
 var channel=op.inValueInt("Channel",0);
-var learn=op.addInPort(new Port(this,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var learn=op.addInPort(new Port(this,"learn",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var eventOut=op.addOutPort(new Port(this,"Event Output",OP_PORT_TYPE_OBJECT));
+var eventOut=op.addOutPort(new Port(this,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
 var value=op.addOutPort(new Port(this,"value"));
 
 note.set(60);

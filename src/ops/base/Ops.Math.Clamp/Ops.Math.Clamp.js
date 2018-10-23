@@ -2,7 +2,7 @@ op.name='Clamp';
 var val=op.addInPort(new Port(op,"val"));
 var min=op.addInPort(new Port(op,"min"));
 var max=op.addInPort(new Port(op,"max"));
-var ignore=op.addInPort(new Port(op,"ignore outside values",OP_PORT_TYPE_VALUE,{'display':'bool'}));
+var ignore=op.addInPort(new Port(op,"ignore outside values",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'}));
 var result=op.addOutPort(new Port(op,"result"));
 
 function clamp()

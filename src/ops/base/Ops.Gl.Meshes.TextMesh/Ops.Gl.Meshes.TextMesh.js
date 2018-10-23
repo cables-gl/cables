@@ -109,19 +109,19 @@ shader.setSource(attachments.textmesh_vert,attachments.textmesh_frag);
 var uniTex=new CGL.Uniform(shader,'t','tex',0);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
+var r=op.addInPort(new Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
 r.set(1.0);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var g=op.addInPort(new Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 g.set(1.0);
 g.uniform=new CGL.Uniform(shader,'f','g',g);
 
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 b.set(1.0);
 r.uniform=new CGL.Uniform(shader,'f','b',b);
 
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var a=op.addInPort(new Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 a.uniform=new CGL.Uniform(shader,'f','a',a);
 a.set(1.0);
 

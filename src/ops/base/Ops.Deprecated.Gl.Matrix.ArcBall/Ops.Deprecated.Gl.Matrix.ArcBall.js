@@ -1,18 +1,18 @@
 op.name="ArcBall";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var mulRotate=op.addInPort(new Port(op,"Mul Rotate",OP_PORT_TYPE_VALUE));
-var mulScale=op.addInPort(new Port(op,"Mul Scale",OP_PORT_TYPE_VALUE));
+var mulRotate=op.addInPort(new Port(op,"Mul Rotate",CABLES.OP_PORT_TYPE_VALUE));
+var mulScale=op.addInPort(new Port(op,"Mul Scale",CABLES.OP_PORT_TYPE_VALUE));
 
-var minScale=op.addInPort(new Port(op,"Min Scale",OP_PORT_TYPE_VALUE));
-var maxScale=op.addInPort(new Port(op,"Max Scale",OP_PORT_TYPE_VALUE));
+var minScale=op.addInPort(new Port(op,"Min Scale",CABLES.OP_PORT_TYPE_VALUE));
+var maxScale=op.addInPort(new Port(op,"Max Scale",CABLES.OP_PORT_TYPE_VALUE));
 
 var useWheel=op.inValueBool('Use Mouse Wheel',true);
 
 var inRadius=op.inValue("Radius",1);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 mulRotate.set(1);
 mulScale.set(1);

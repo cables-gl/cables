@@ -2,10 +2,10 @@ var cgl=op.patch.cgl;
 var shader=null;
 var uniTime;
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var limitMax=op.inValue("Max",1000);
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var srcHeadVert=''
     .endl()+'UNI float {{mod}}_max;'

@@ -1,5 +1,5 @@
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var inAttrib=op.inValueSelect("Attribute",[]);
 var inGeom=op.inObject("Geometry");
 var inSeed=op.inValue("Seed",1000);
@@ -10,7 +10,7 @@ var inRandR=op.inValueSlider("Random R",0.0);
 var inRandG=op.inValueSlider("Random G",0.0);
 var inRandB=op.inValueSlider("Random B",0.0);
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var srcHeadFrag='';
 var srcBodyFrag='';

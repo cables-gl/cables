@@ -1,16 +1,16 @@
 op.name="lissajous transform";
 
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
-var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
-var z=op.addInPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
-var pointSkip=op.addInPort(new Port(op,"skip",OP_PORT_TYPE_VALUE));
-var numPoints=op.addInPort(new Port(op,"num points",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var x=op.addInPort(new Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+var z=op.addInPort(new Port(op,"z",CABLES.OP_PORT_TYPE_VALUE));
+var pointSkip=op.addInPort(new Port(op,"skip",CABLES.OP_PORT_TYPE_VALUE));
+var numPoints=op.addInPort(new Port(op,"num points",CABLES.OP_PORT_TYPE_VALUE));
 
-var mulX=op.addInPort(new Port(op,"mul x",OP_PORT_TYPE_VALUE));
-var mulY=op.addInPort(new Port(op,"mul y",OP_PORT_TYPE_VALUE));
-var mulZ=op.addInPort(new Port(op,"mul z",OP_PORT_TYPE_VALUE));
+var mulX=op.addInPort(new Port(op,"mul x",CABLES.OP_PORT_TYPE_VALUE));
+var mulY=op.addInPort(new Port(op,"mul y",CABLES.OP_PORT_TYPE_VALUE));
+var mulZ=op.addInPort(new Port(op,"mul z",CABLES.OP_PORT_TYPE_VALUE));
 
 x.set(2);
 y.set(4);
@@ -23,7 +23,7 @@ pointSkip.set(40);
 numPoints.set(3200);
 
 var cgl=op.patch.cgl;
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var vec=vec3.create();
 
 function doRender()

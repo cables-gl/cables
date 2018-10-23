@@ -1,7 +1,7 @@
 
 var inTexture=op.inTexture("Texture");
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var useVPSize=op.addInPort(new Port(op,"use original size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var useVPSize=op.addInPort(new Port(op,"use original size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var width=op.inValueInt("width");
 var height=op.inValueInt("height");
 
@@ -9,7 +9,7 @@ var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
 var fpTexture=op.inValueBool("HDR");
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var texOut=op.outTexture("texture_out");
 
 var outRatio=op.outValue("Aspect Ratio");

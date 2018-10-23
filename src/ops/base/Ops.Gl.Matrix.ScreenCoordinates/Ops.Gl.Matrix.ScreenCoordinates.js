@@ -1,5 +1,5 @@
-var exec=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
+var exec=op.addInPort(new Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var x=op.addOutPort(new Port(op,"X"));
 var y=op.addOutPort(new Port(op,"Y"));

@@ -1,11 +1,11 @@
 
-var text=op.addOutPort(new Port(op,"text",OP_PORT_TYPE_VALUE));
-var visible=op.addInPort(new Port(op,"visible",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var inFocus=op.addInPort(new Port(op,"focus",OP_PORT_TYPE_FUNCTION,{display:'button'}));
-var inBlur=op.addInPort(new Port(op,"blur",OP_PORT_TYPE_FUNCTION,{display:'button'}));
-var cursorPos=op.addOutPort(new Port(op,"cursorPos",OP_PORT_TYPE_VALUE));
-var focussed=op.addOutPort(new Port(op,"focussed",OP_PORT_TYPE_VALUE));
-var escapeButton=op.addOutPort(new Port(op,"escape pressed",OP_PORT_TYPE_FUNCTION));
+var text=op.addOutPort(new Port(op,"text",CABLES.OP_PORT_TYPE_VALUE));
+var visible=op.addInPort(new Port(op,"visible",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var inFocus=op.addInPort(new Port(op,"focus",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var inBlur=op.addInPort(new Port(op,"blur",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var cursorPos=op.addOutPort(new Port(op,"cursorPos",CABLES.OP_PORT_TYPE_VALUE));
+var focussed=op.addOutPort(new Port(op,"focussed",CABLES.OP_PORT_TYPE_VALUE));
+var escapeButton=op.addOutPort(new Port(op,"escape pressed",CABLES.OP_PORT_TYPE_FUNCTION));
 var outEle=op.outObject("Element");
 
 visible.set(true);

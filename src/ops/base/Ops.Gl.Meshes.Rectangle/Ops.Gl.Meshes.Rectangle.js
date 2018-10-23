@@ -1,19 +1,19 @@
 var render=op.inFunction("render");
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var width=op.inValue("width",1);
 var height=op.inValue("height",1);
 
-var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var pivotX=op.addInPort(new Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
+var pivotY=op.addInPort(new Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
 
 var nColumns=op.inValueInt("num columns",1);
 var nRows=op.inValueInt("num rows",1);
-var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var axis=op.addInPort(new Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
 
 var active=op.inValueBool('Active',true);
 
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;

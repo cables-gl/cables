@@ -4,7 +4,7 @@ const seed=op.addInPort(new Port(op,"random seed"));
 const min=op.addInPort(new Port(op,"Min"));
 const max=op.addInPort(new Port(op,"Max"));
 
-const values=op.addOutPort(new Port(op, "values",OP_PORT_TYPE_ARRAY));
+const values=op.addOutPort(new Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
 values.ignoreValueSerialize=true;
 
 numValues.set(100);

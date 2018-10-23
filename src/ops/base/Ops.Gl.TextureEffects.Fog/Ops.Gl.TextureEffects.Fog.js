@@ -1,11 +1,11 @@
 
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var density=op.addInPort(new Port(op,"density",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var density=op.addInPort(new Port(op,"density",CABLES.OP_PORT_TYPE_VALUE));
 var image=op.inTexture("depth texture");
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var ignoreInf=op.addInPort(new Port(op,"ignore infinity",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var ignoreInf=op.addInPort(new Port(op,"ignore infinity",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 ignoreInf.set(false);
 ignoreInf.onValueChanged=function()
 {
@@ -33,28 +33,28 @@ density.set(5.0);
 {
     // fog color
 
-    var r=op.addInPort(new Port(op,"fog r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var r=op.addInPort(new Port(op,"fog r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     r.onValueChanged=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
 
-    var g=op.addInPort(new Port(op,"fog g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var g=op.addInPort(new Port(op,"fog g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     g.onValueChanged=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
 
-    var b=op.addInPort(new Port(op,"fog b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=op.addInPort(new Port(op,"fog b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.onValueChanged=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
     };
 
-    var a=op.addInPort(new Port(op,"fog a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var a=op.addInPort(new Port(op,"fog a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     a.onValueChanged=function()
     {
         if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
@@ -68,7 +68,7 @@ density.set(5.0);
 }
 
 
-var start=op.addInPort(new Port(op,"start",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var start=op.addInPort(new Port(op,"start",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 start.onValueChanged=function()
 {
     if(!start.uniform) start.uniform=new CGL.Uniform(shader,'f','start',start.get());

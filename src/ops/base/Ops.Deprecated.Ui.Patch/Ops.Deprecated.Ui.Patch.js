@@ -2,7 +2,7 @@
 // if(!Ops.Ui.Patch.maxPatchId)Ops.Ui.Patch.maxPatchId=0;
 
 op.name='Patch';
-op.patchId=op.addInPort(new Port(op,"patchId",OP_PORT_TYPE_VALUE,{ display:'readonly' }));
+op.patchId=op.addInPort(new Port(op,"patchId",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 
 
 var getNewDynamicPort=function(name)
@@ -10,14 +10,14 @@ var getNewDynamicPort=function(name)
 
     for(var i in op.portsIn)
     {
-        if(op.portsIn[i].type==OP_PORT_TYPE_DYNAMIC)
+        if(op.portsIn[i].type==CABLES.OP_PORT_TYPE_DYNAMIC)
         {
             op.portsIn[i].name=name;
             return op.portsIn[i];
         }
     }
 
-    var p=op.addInPort(new Port(op,name,OP_PORT_TYPE_DYNAMIC));
+    var p=op.addInPort(new Port(op,name,CABLES.OP_PORT_TYPE_DYNAMIC));
     p.shouldLink=op.shouldLink;
     return p;
 };
@@ -140,7 +140,7 @@ function createPatchInputPort(dynPort,name)
         pOut = patchInputOP.addOutPort(new Port(op,"out_"+name,dynPort.type));
     }
 
-    if(dynPort.type==OP_PORT_TYPE_FUNCTION)
+    if(dynPort.type==CABLES.OP_PORT_TYPE_FUNCTION)
     {
         dynPort.onTriggered=function()
         {
@@ -162,7 +162,7 @@ function createPatchInputPort(dynPort,name)
 
 op.shouldLink=function(p1,p2)
 {
-    if(p1.type!=OP_PORT_TYPE_DYNAMIC && p2.type!=OP_PORT_TYPE_DYNAMIC)
+    if(p1.type!=CABLES.OP_PORT_TYPE_DYNAMIC && p2.type!=CABLES.OP_PORT_TYPE_DYNAMIC)
     {
         console.log('shouldlink?');
         console.log(p1.name);
@@ -173,7 +173,7 @@ op.shouldLink=function(p1,p2)
     var dynPort=p2;
     var otherPort=p1;
 
-    if(p1.type==OP_PORT_TYPE_DYNAMIC)
+    if(p1.type==CABLES.OP_PORT_TYPE_DYNAMIC)
     {
         dynPort=p1;
         otherPort=p2;

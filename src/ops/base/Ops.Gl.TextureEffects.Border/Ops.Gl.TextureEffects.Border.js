@@ -1,8 +1,8 @@
 op.name='border';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var smooth=op.inValueBool("Smooth",false);
 
 var cgl=op.patch.cgl;
@@ -15,7 +15,7 @@ var aspectUniform=new CGL.Uniform(shader,'f','aspect',0);
 var uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
 
 {
-    var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
+    var width=op.addInPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
     width.set(0.1);
 
     var uniWidth=new CGL.Uniform(shader,'f','width',width.get());
@@ -29,21 +29,21 @@ var uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
 {
     // diffuse color
 
-    var r=op.addInPort(new Port(op,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var r=op.addInPort(new Port(op,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     r.onValueChanged=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
             else r.uniform.setValue(r.get());
     };
 
-    var g=op.addInPort(new Port(op,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var g=op.addInPort(new Port(op,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     g.onValueChanged=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
             else g.uniform.setValue(g.get());
     };
 
-    var b=op.addInPort(new Port(op,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=op.addInPort(new Port(op,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.onValueChanged=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());

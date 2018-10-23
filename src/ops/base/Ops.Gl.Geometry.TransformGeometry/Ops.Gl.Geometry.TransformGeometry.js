@@ -1,4 +1,4 @@
-var geometry=op.addInPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
+var geometry=op.addInPort(new Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
 var transX=op.inValue("Translate X");
 var transY=op.inValue("Translate Y");
 var transZ=op.inValue("Translate Z");

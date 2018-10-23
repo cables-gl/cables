@@ -1,9 +1,9 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
 this.name='spray';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+this.exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 this.timer=this.addInPort(new Port(this,"time"));
 this.num=this.addInPort(new Port(this,"num"));
@@ -18,7 +18,7 @@ movementZ.set(1);
 
 this.lifetime=this.addInPort(new Port(this,"lifetime"));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
+this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION)) ;
 this.idx=this.addOutPort(new Port(this,"index")) ;
 this.lifeTimePercent=this.addOutPort(new Port(this,"lifeTimePercent")) ;
 var particles=[];

@@ -1,19 +1,19 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
-var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
-var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['X','Y','Diagonal','Diagonal Flip']}));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var num=op.addInPort(new Port(op,"num",CABLES.OP_PORT_TYPE_VALUE));
+var width=op.addInPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var axis=op.addInPort(new Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['X','Y','Diagonal','Diagonal Flip']}));
 
-var offset=op.addInPort(new Port(op,"offset",OP_PORT_TYPE_VALUE));
+var offset=op.addInPort(new Port(op,"offset",CABLES.OP_PORT_TYPE_VALUE));
 
 var smoothed=op.inValueBool("Gradients");
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+var g=op.addInPort(new Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 smoothed.onChange=function()
 {

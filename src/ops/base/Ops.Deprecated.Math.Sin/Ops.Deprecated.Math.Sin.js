@@ -1,4 +1,4 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 this.name='Sinus';
 this.number=this.addInPort(new Port(this,"number"));

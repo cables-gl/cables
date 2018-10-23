@@ -1,8 +1,8 @@
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var m=mat4.create();
-var matrix=this.addInPort(new Port(this,"matrix",OP_PORT_TYPE_ARRAY));
+var matrix=this.addInPort(new Port(this,"matrix",CABLES.OP_PORT_TYPE_ARRAY));
 
 var cgl=this.patch.cgl;
 matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );

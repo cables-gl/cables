@@ -1,5 +1,5 @@
-const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 const x=op.inValue("x");
 const y=op.inValue("y");
 const z=op.inValue("z");

@@ -736,7 +736,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                     objPort.value = true === objPort.value;
                 }
 
-                if (port && objPort.value !== undefined && port.type != OP_PORT_TYPE_TEXTURE) {
+                if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) {
                     port.set(objPort.value);
                 }
                 if (objPort.animated) port.setAnimated(objPort.animated);
@@ -754,7 +754,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
             for (var ipo in obj.ops[iop].portsOut) {
                 var port2 = op.getPort(obj.ops[iop].portsOut[ipo].name);
-                if (port2 && port2.type != OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value')) {
+                if (port2 && port2.type != CABLES.OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value')) {
                     port2.set(obj.ops[iop].portsOut[ipo].value);
                 }
             }

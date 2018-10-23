@@ -2,7 +2,7 @@
 var result=op.addOutPort(new Port(op,"result"));
 var number1=op.addInPort(new Port(op,"number1"));
 var number2=op.addInPort(new Port(op,"number2"));
-var pingpong=op.addInPort(new Port(op,"pingpong",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var pingpong=op.addInPort(new Port(op,"pingpong",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 
 var doPingPong=false;

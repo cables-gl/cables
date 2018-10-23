@@ -43,15 +43,15 @@ var SCALE_TYPES = {
 };
 
 // input
-var baseTonePort = op.addInPort( new Port( op, "Base Tone", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: BASE_TONES } ) );
+var baseTonePort = op.addInPort( new Port( op, "Base Tone", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: BASE_TONES } ) );
 baseTonePort.set(BASE_TONE_DEFAULT);
-var scaleTypePort = op.addInPort( new Port( op, "Scale Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: Object.keys(SCALE_TYPES) } ) );
+var scaleTypePort = op.addInPort( new Port( op, "Scale Type", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: Object.keys(SCALE_TYPES) } ) );
 scaleTypePort.set(SCALE_TYPE_DEFAULT);
-var appendOctavePort = op.addInPort( new Port( op, "Append Octave", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var appendOctavePort = op.addInPort( new Port( op, "Append Octave", CABLES.OP_PORT_TYPE_, { display: 'bool' } ) );
 appendOctavePort.set(APPEND_OCTAVE_DEFAULT);
-var octavePort = op.addInPort( new Port( op, "Octave", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVE_MIN, 'max': OCTAVE_MAX } ));
+var octavePort = op.addInPort( new Port( op, "Octave", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': OCTAVE_MIN, 'max': OCTAVE_MAX } ));
 octavePort.set(OCTAVE_DEFAULT);
-var includeHighBaseTonePort = op.addInPort( new Port( op, "Include High Base Tone", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var includeHighBaseTonePort = op.addInPort( new Port( op, "Include High Base Tone", CABLES.OP_PORT_TYPE_, { display: 'bool' } ) );
 includeHighBaseTonePort.set(INCLUDE_HIGH_BASE_TONE_DEFAULT);
 
 // output

@@ -1,16 +1,16 @@
 op.name="DepthStripes";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var depthTexture=op.addInPort(new Port(op,"Depth Texture",OP_PORT_TYPE_TEXTURE));
-var colorTexture=op.addInPort(new Port(op,"Color Texture",OP_PORT_TYPE_TEXTURE));
-var farPlane=op.addInPort(new Port(op,"farplane",OP_PORT_TYPE_VALUE));
-var nearPlane=op.addInPort(new Port(op,"nearplane",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var depthTexture=op.addInPort(new Port(op,"Depth Texture",CABLES.OP_PORT_TYPE_TEXTURE));
+var colorTexture=op.addInPort(new Port(op,"Color Texture",CABLES.OP_PORT_TYPE_TEXTURE));
+var farPlane=op.addInPort(new Port(op,"farplane",CABLES.OP_PORT_TYPE_VALUE));
+var nearPlane=op.addInPort(new Port(op,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
 
 farPlane.set(100.0);
 nearPlane.set(0.1);
 
 var cgl=op.patch.cgl;
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
 //op.onLoaded=shader.compile;

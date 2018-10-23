@@ -1,5 +1,5 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
@@ -12,7 +12,7 @@ var thick=op.inValueSlider("Thickness",0.1);
 
 var flip=op.inValueBool("Flip",false);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

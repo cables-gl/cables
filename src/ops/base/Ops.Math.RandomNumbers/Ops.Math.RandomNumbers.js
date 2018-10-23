@@ -1,4 +1,4 @@
-var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE));
+var index=op.addInPort(new Port(op, "index",CABLES.OP_PORT_TYPE_VALUE));
 var seed=op.addInPort(new Port(op,"random seed"));
 var min=op.addInPort(new Port(op,"Min"));
 var max=op.addInPort(new Port(op,"Max"));

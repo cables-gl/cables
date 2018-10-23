@@ -766,7 +766,7 @@ CABLES.Anim.prototype.easingFromString=function(str)
 
 CABLES.Anim.prototype.createPort=function(op,title,cb)
 {
-    var port=op.addInPort(new Port(op,title,OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
+    var port=op.addInPort(new Port(op,title,CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
         "linear",
         "absolute",
         "smoothstep",

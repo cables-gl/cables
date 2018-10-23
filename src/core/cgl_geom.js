@@ -166,6 +166,7 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 };
 
 
+
 CGL.Geometry.prototype.merge=function(geom)
 {
     if(!geom)return;
@@ -178,9 +179,9 @@ CGL.Geometry.prototype.merge=function(geom)
         this.verticesIndices[oldIndizesLength+i]=geom.verticesIndices[i]+vertLength;
     }
 
-    this.vertices=float32Concat(this.vertices,geom.vertices);
-    this.texCoords=float32Concat(this.texCoords,geom.texCoords);
-    this.vertexNormals=float32Concat(this.vertexNormals,geom.vertexNormals);
+    this.vertices=CABLES.UTILS.float32Concat(this.vertices,geom.vertices);
+    this.texCoords=CABLES.UTILS.float32Concat(this.texCoords,geom.texCoords);
+    this.vertexNormals=CABLES.UTILS.float32Concat(this.vertexNormals,geom.vertexNormals);
 };
 
 CGL.Geometry.prototype.copy=function()

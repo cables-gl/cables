@@ -1,7 +1,7 @@
 op.name='ColorChannel';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -65,7 +65,7 @@ render.onTriggered=function()
 };
 
 
-var channelR=op.addInPort(new Port(op,"channelR",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var channelR=op.addInPort(new Port(op,"channelR",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 channelR.onValueChanged=function()
 {
     if(channelR.get()) shader.define('CHANNEL_R');
@@ -73,7 +73,7 @@ channelR.onValueChanged=function()
 };
 channelR.set(true);
 
-var channelG=op.addInPort(new Port(op,"channelG",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var channelG=op.addInPort(new Port(op,"channelG",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 channelG.set(false);
 channelG.onValueChanged=function()
 {
@@ -82,7 +82,7 @@ channelG.onValueChanged=function()
 };
 
 
-var channelB=op.addInPort(new Port(op,"channelB",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var channelB=op.addInPort(new Port(op,"channelB",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 channelB.set(false);
 channelB.onValueChanged=function()
 {
@@ -90,7 +90,7 @@ channelB.onValueChanged=function()
         else shader.removeDefine('CHANNEL_B');
 };
 
-var mono=op.addInPort(new Port(op,"mono",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var mono=op.addInPort(new Port(op,"mono",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 mono.set(false);
 mono.onValueChanged=function()
 {

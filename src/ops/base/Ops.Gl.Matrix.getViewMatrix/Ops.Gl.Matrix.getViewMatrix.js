@@ -1,9 +1,9 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var m=mat4.create();
-var matrix=op.addOutPort(new Port(op,"matrix",OP_PORT_TYPE_ARRAY));
+var matrix=op.addOutPort(new Port(op,"matrix",CABLES.OP_PORT_TYPE_ARRAY));
 
 var cgl=op.patch.cgl;
 

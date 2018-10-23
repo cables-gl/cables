@@ -1,14 +1,14 @@
 var cgl=op.patch.cgl;
 
 op.name='PickingMaterial';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var isPicked=op.addOutPort(new Port(op,"is picked",OP_PORT_TYPE_VALUE));
+var isPicked=op.addOutPort(new Port(op,"is picked",CABLES.OP_PORT_TYPE_VALUE));
 
 var pickedTrigger=op.outFunction("On Picked");
 
-var doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var doBillboard=op.addInPort(new Port(op,"billboard",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 doBillboard.set(false);
 
 doBillboard.onChange=function()
@@ -19,7 +19,7 @@ doBillboard.onChange=function()
         shader.removeDefine('BILLBOARD');
 };
 
-var cursor=op.addInPort(new Port(op,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
+var cursor=op.addInPort(new Port(op,"cursor",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 cursor.set('pointer');
 
 function doRender()

@@ -1,16 +1,16 @@
-CABLES.Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
 this.name='ColorOverlay';
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.r=this.addInPort(new Port(this,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-this.g=this.addInPort(new Port(this,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.b=this.addInPort(new Port(this,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.a=this.addInPort(new Port(this,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+this.r=this.addInPort(new Port(this,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+this.g=this.addInPort(new Port(this,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+this.b=this.addInPort(new Port(this,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+this.a=this.addInPort(new Port(this,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var shader=new CGL.Shader(cgl);
 // this.onLoaded=shader.compile;

@@ -1,13 +1,13 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 /* Inputs */
 // projection | prespective & ortogonal
-var projectionMode=op.addInPort(new Port(op,"projection mode",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['prespective','ortogonal']}));
-var zNear=op.addInPort(new Port(op,"frustum near",OP_PORT_TYPE_VALUE ));
-var zFar=op.addInPort(new Port(op,"frustum far",OP_PORT_TYPE_VALUE ));
+var projectionMode=op.addInPort(new Port(op,"projection mode",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['prespective','ortogonal']}));
+var zNear=op.addInPort(new Port(op,"frustum near",CABLES.OP_PORT_TYPE_VALUE ));
+var zFar=op.addInPort(new Port(op,"frustum far",CABLES.OP_PORT_TYPE_VALUE ));
 
-var fov=op.addInPort(new Port(op,"fov",OP_PORT_TYPE_VALUE ));
+var fov=op.addInPort(new Port(op,"fov",CABLES.OP_PORT_TYPE_VALUE ));
 
 var autoAspect=op.inValueBool("Auto Aspect Ratio",true);
 var aspect=op.inValue("Aspect Ratio");
@@ -32,7 +32,7 @@ var rotZ=op.addInPort(new Port(op,"roll"),0);
 
 
 /* Outputs */
-var outAsp=op.addOutPort(new Port(op,"Aspect",OP_PORT_TYPE_VALUE));
+var outAsp=op.addOutPort(new Port(op,"Aspect",CABLES.OP_PORT_TYPE_VALUE));
 var outArr=op.outArray("Look At Array");
 
 

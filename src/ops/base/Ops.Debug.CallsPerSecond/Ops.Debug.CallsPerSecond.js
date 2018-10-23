@@ -1,7 +1,7 @@
 op.name='CallsPerSecond';
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var cps=op.addOutPort(new Port(op,"cps",OP_PORT_TYPE_VALUE));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var cps=op.addOutPort(new Port(op,"cps",CABLES.OP_PORT_TYPE_VALUE));
 
 var timeStart=0;
 var cpsCount=0;

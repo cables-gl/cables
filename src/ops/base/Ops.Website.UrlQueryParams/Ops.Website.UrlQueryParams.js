@@ -1,5 +1,5 @@
-var paramName=op.addInPort(new Port(op,"parameter",OP_PORT_TYPE_VALUE,{type:"string"}));
-var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_VALUE,{type:"string"}));
+var paramName=op.addInPort(new Port(op,"parameter",CABLES.OP_PORT_TYPE_VALUE,{type:"string"}));
+var result=op.addOutPort(new Port(op,"result",CABLES.OP_PORT_TYPE_VALUE,{type:"string"}));
 var def=op.inValueString("Default");
 
 def.onChange=update;

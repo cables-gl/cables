@@ -1,7 +1,7 @@
 op.name="JsonFile2";
 
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var outData=op.addOutPort(new Port(op,"data",OP_PORT_TYPE_OBJECT));
+var filename=op.addInPort(new Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var outData=op.addOutPort(new Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT));
 var isLoading=op.outValue("Is Loading",false);
 
 var jsonp=op.inValueBool("JsonP",false);

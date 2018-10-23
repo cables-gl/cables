@@ -201,9 +201,9 @@ CABLES.WEBAUDIO.createAudioParamInPort = function(op, portName, audioNode, optio
   //   op.log("onLinkChanged");
   //   if(port.isLinked()) {
   //
-  //       if(port.links[0].portOut.type === OP_PORT_TYPE_VALUE) { // value
+  //       if(port.links[0].portOut.type === CABLES.OP_PORT_TYPE_) { // value
   //
-  //       } else if(port.links[0].portOut.type === OP_PORT_TYPE_OBJECT) { // object
+  //       } else if(port.links[0].portOut.type === CABLES.OP_PORT_TYPE_OBJECT) { // object
   //
   //       }
   //   } else { // unlinked

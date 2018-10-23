@@ -1,33 +1,33 @@
 var self=this;
 var cgl=self.patch.cgl;
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
+this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+this.shaderOut=this.addOutPort(new Port(this,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 this.shaderOut.ignoreValueSerialize=true;
 
-this.texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.texture=this.addInPort(new Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureUniform=null;
 
-this.textureDiffuse=this.addInPort(new Port(this,"diffuse",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.textureDiffuse=this.addInPort(new Port(this,"diffuse",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureDiffuseUniform=null;
 
-this.textureNormal=this.addInPort(new Port(this,"normal",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.textureNormal=this.addInPort(new Port(this,"normal",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureNormalUniform=null;
 
-this.normalScale=this.addInPort(new Port(this,"normalScale",OP_PORT_TYPE_VALUE,{display:'range'}));
+this.normalScale=this.addInPort(new Port(this,"normalScale",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 this.normalScale.set(0.4);
 this.normalScaleUniform=null;
 
-this.textureSpec=this.addInPort(new Port(this,"specular",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.textureSpec=this.addInPort(new Port(this,"specular",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureSpecUniform=null;
 
-this.textureSpecMatCap=this.addInPort(new Port(this,"specular matcap",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.textureSpecMatCap=this.addInPort(new Port(this,"specular matcap",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureSpecMatCapUniform=null;
 
 
-this.diffuseRepeatX=this.addInPort(new Port(this,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
-this.diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
+this.diffuseRepeatX=this.addInPort(new Port(this,"diffuseRepeatX",CABLES.OP_PORT_TYPE_VALUE));
+this.diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
 this.diffuseRepeatX.set(1.0);
 this.diffuseRepeatY.set(1.0);
 
@@ -45,14 +45,14 @@ this.diffuseRepeatY.onValueChanged=function()
 };
 
 
-this.calcTangents=this.addInPort(new Port(this,"calc normal tangents",OP_PORT_TYPE_VALUE,{display:'bool'}));
+this.calcTangents=this.addInPort(new Port(this,"calc normal tangents",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.calcTangents.onValueChanged=function()
 {
     if(self.calcTangents.get()) shader.define('CALC_TANGENT');
         else shader.removeDefine('CALC_TANGENT');
 };
 
-this.projectCoords=this.addInPort(new Port(this,"projectCoords",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','xy','yz','xz']}));
+this.projectCoords=this.addInPort(new Port(this,"projectCoords",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','xy','yz','xz']}));
 this.projectCoords.set('no');
 this.projectCoords.onValueChanged=function()
 {
@@ -65,8 +65,8 @@ this.projectCoords.onValueChanged=function()
     if(self.projectCoords.get()=='xz') shader.define('DO_PROJECT_COORDS_XZ');
 };
 
-this.normalRepeatX=this.addInPort(new Port(this,"normalRepeatX",OP_PORT_TYPE_VALUE));
-this.normalRepeatY=this.addInPort(new Port(this,"normalRepeatY",OP_PORT_TYPE_VALUE));
+this.normalRepeatX=this.addInPort(new Port(this,"normalRepeatX",CABLES.OP_PORT_TYPE_VALUE));
+this.normalRepeatY=this.addInPort(new Port(this,"normalRepeatY",CABLES.OP_PORT_TYPE_VALUE));
 this.normalRepeatX.set(1.0);
 this.normalRepeatY.set(1.0);
 

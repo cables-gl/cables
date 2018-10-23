@@ -1,9 +1,9 @@
 var cgl=op.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var mul=this.addInPort(new Port(this,"mul"));
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 render.onTriggered=function()
 {

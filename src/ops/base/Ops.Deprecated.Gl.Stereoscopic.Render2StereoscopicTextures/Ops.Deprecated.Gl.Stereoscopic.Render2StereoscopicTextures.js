@@ -1,11 +1,11 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var pose=op.addInPort(new Port(op,"pose matrix",OP_PORT_TYPE_OBJECT));
-var eyeLeft=op.addInPort(new Port(op,"Eye Left",OP_PORT_TYPE_OBJECT));
-var eyeRight=op.addInPort(new Port(op,"Eye Right",OP_PORT_TYPE_OBJECT));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var pose=op.addInPort(new Port(op,"pose matrix",CABLES.OP_PORT_TYPE_OBJECT));
+var eyeLeft=op.addInPort(new Port(op,"Eye Left",CABLES.OP_PORT_TYPE_OBJECT));
+var eyeRight=op.addInPort(new Port(op,"Eye Right",CABLES.OP_PORT_TYPE_OBJECT));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var tex0=op.addOutPort(new Port(op,"texture left",OP_PORT_TYPE_TEXTURE,{preview:true}));
-var tex1=op.addOutPort(new Port(op,"texture right",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var tex0=op.addOutPort(new Port(op,"texture left",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
+var tex1=op.addOutPort(new Port(op,"texture right",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 
 
 var cgl=op.patch.cgl;

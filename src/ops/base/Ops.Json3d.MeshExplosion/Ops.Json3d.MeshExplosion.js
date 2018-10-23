@@ -1,9 +1,9 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION ));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
 
-var expansion=op.addInPort(new Port(op,"expansion",OP_PORT_TYPE_VALUE ));
+var expansion=op.addInPort(new Port(op,"expansion",CABLES.OP_PORT_TYPE_VALUE ));
 
-var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 

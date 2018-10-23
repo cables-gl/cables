@@ -1,8 +1,8 @@
 var cgl=op.patch.cgl;
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var opacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE,{display:'range'}));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var opacity=op.addInPort(new Port(op,"opacity",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 opacity.set(1);
 
 var srcVert=''

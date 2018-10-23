@@ -1,5 +1,5 @@
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 var inValue=op.inValue("Value");
 var duration=op.addInPort(new Port(op,"duration"));
 var result=op.addOutPort(new Port(op,"result"));

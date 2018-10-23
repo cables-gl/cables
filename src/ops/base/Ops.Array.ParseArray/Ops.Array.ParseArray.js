@@ -1,11 +1,11 @@
-var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
+var text=op.addInPort(new Port(op,"text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var separator=op.inValueString("separator",",");
 
 var toNumber=op.inValueBool("Numbers",false);
 
 var parsed=op.outFunction("Parsed");
-var arr=op.addOutPort(new Port(op,"array",OP_PORT_TYPE_ARRAY));
-var len=op.addOutPort(new Port(op,"length",OP_PORT_TYPE_VALUE));
+var arr=op.addOutPort(new Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
+var len=op.addOutPort(new Port(op,"length",CABLES.OP_PORT_TYPE_VALUE));
 
 separator.set(',');
 text.set('1,2,3');

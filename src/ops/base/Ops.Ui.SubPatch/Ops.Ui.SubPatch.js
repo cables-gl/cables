@@ -1,8 +1,8 @@
-op.dyn=op.addInPort(new Port(op,"create port",OP_PORT_TYPE_DYNAMIC));
-op.dynOut=op.addOutPort(new Port(op,"create port out",OP_PORT_TYPE_DYNAMIC));
+op.dyn=op.addInPort(new Port(op,"create port",CABLES.OP_PORT_TYPE_DYNAMIC));
+op.dynOut=op.addOutPort(new Port(op,"create port out",CABLES.OP_PORT_TYPE_DYNAMIC));
 
-var dataStr=op.addInPort(new Port(op,"dataStr",OP_PORT_TYPE_VALUE,{ display:'readonly' }));
-op.patchId=op.addInPort(new Port(op,"patchId",OP_PORT_TYPE_VALUE,{ display:'readonly' }));
+var dataStr=op.addInPort(new Port(op,"dataStr",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
+op.patchId=op.addInPort(new Port(op,"patchId",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 
 var data={"ports":[],"portsOut":[]};
 
@@ -95,7 +95,7 @@ function addPortListener(newPort,newPortInPatch)
     //console.log('newPort',newPort.name);
     if(newPort.direction==CABLES.PORT_DIR_IN)
     {
-        if(newPort.type==OP_PORT_TYPE_FUNCTION)
+        if(newPort.type==CABLES.OP_PORT_TYPE_FUNCTION)
         {
             newPort.onTriggered=function()
             {

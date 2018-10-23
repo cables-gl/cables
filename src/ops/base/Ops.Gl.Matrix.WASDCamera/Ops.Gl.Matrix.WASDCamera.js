@@ -1,8 +1,8 @@
 op.name='WASDCamera';
 
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var isLocked=op.outValue("isLocked",false);
 
@@ -10,16 +10,16 @@ var vPos=vec3.create();
 var speedx=0,speedy=0,speedz=0;
 var movementSpeedFactor = 0.5;
 
-var posX=op.addInPort(new Port(op,"posX",OP_PORT_TYPE_VALUE));
-var posY=op.addInPort(new Port(op,"posY",OP_PORT_TYPE_VALUE));
-var posZ=op.addInPort(new Port(op,"posZ",OP_PORT_TYPE_VALUE));
+var posX=op.addInPort(new Port(op,"posX",CABLES.OP_PORT_TYPE_VALUE));
+var posY=op.addInPort(new Port(op,"posY",CABLES.OP_PORT_TYPE_VALUE));
+var posZ=op.addInPort(new Port(op,"posZ",CABLES.OP_PORT_TYPE_VALUE));
 
-var rotX=op.addInPort(new Port(op,"rotX",OP_PORT_TYPE_VALUE));
-var rotY=op.addInPort(new Port(op,"rotY",OP_PORT_TYPE_VALUE));
+var rotX=op.addInPort(new Port(op,"rotX",CABLES.OP_PORT_TYPE_VALUE));
+var rotY=op.addInPort(new Port(op,"rotY",CABLES.OP_PORT_TYPE_VALUE));
 
-var outPosX=op.addOutPort(new Port(op,"posX",OP_PORT_TYPE_VALUE));
-var outPosY=op.addOutPort(new Port(op,"posY",OP_PORT_TYPE_VALUE));
-var outPosZ=op.addOutPort(new Port(op,"posZ",OP_PORT_TYPE_VALUE));
+var outPosX=op.addOutPort(new Port(op,"posX",CABLES.OP_PORT_TYPE_VALUE));
+var outPosY=op.addOutPort(new Port(op,"posY",CABLES.OP_PORT_TYPE_VALUE));
+var outPosZ=op.addOutPort(new Port(op,"posZ",CABLES.OP_PORT_TYPE_VALUE));
 outPosX.set(-posX.get());
 outPosY.set(-posY.get());
 outPosZ.set(-posZ.get());

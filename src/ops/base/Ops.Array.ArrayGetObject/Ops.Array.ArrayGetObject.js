@@ -1,7 +1,7 @@
 
-var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
-var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
-var value=op.addOutPort(new Port(op, "value",OP_PORT_TYPE_OBJECT));
+var array=op.addInPort(new Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
+var index=op.addInPort(new Port(op, "index",CABLES.OP_PORT_TYPE_VALUE,{type:'int'}));
+var value=op.addOutPort(new Port(op, "value",CABLES.OP_PORT_TYPE_OBJECT));
 array.ignoreValueSerialize=true;
 value.ignoreValueSerialize=true;
 

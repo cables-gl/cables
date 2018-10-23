@@ -1,9 +1,9 @@
 
 op.name='ColorLookup';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var image=op.addInPort(new Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE));
+var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var axis=op.inValueSelect("Axis",['hotizontal','vertical'],'horizontal');
 var pos=op.inValueSlider("Position");

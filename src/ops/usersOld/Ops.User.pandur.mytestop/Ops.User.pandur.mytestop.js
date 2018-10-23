@@ -1,7 +1,7 @@
 op.name="mytestop";
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var testOut=op.addOutPort(new Port(op,"testout",OP_PORT_TYPE_VALUE));
+var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var testOut=op.addOutPort(new Port(op,"testout",CABLES.OP_PORT_TYPE_VALUE));
 
 var anim=null;
 

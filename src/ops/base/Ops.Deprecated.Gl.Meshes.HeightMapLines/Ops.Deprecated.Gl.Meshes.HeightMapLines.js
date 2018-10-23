@@ -1,21 +1,21 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 this.name="HeightMap";
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var filename=this.addInPort(new Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 
 
-var extrude=this.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
+var extrude=this.addInPort(new Port(this,"extrude",CABLES.OP_PORT_TYPE_VALUE));
 extrude.set(1);
 
-var mWidth=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-var mHeight=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
+var mWidth=this.addInPort(new Port(this,"width",CABLES.OP_PORT_TYPE_VALUE));
+var mHeight=this.addInPort(new Port(this,"height",CABLES.OP_PORT_TYPE_VALUE));
 
-var nRows=this.addInPort(new Port(this,"rows",OP_PORT_TYPE_VALUE));
-var nColumns=this.addInPort(new Port(this,"columns",OP_PORT_TYPE_VALUE));
+var nRows=this.addInPort(new Port(this,"rows",CABLES.OP_PORT_TYPE_VALUE));
+var nColumns=this.addInPort(new Port(this,"columns",CABLES.OP_PORT_TYPE_VALUE));
 
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 mHeight.set(3.0);
 mWidth.set(3.0);

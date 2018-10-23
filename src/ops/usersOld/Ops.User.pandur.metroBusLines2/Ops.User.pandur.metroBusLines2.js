@@ -1,26 +1,26 @@
 var patch=this.patch;
 var cgl=this.patch.cgl;
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 
 this.name='metroBusLines';
 var self=this;
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
-filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new Port(this,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+filename=this.addInPort(new Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 
-var time=this.addInPort(new Port(this,"time",OP_PORT_TYPE_VALUE));
+var time=this.addInPort(new Port(this,"time",CABLES.OP_PORT_TYPE_VALUE));
 
-var speed=this.addInPort(new Port(this,"speed",OP_PORT_TYPE_VALUE));
+var speed=this.addInPort(new Port(this,"speed",CABLES.OP_PORT_TYPE_VALUE));
 speed.set(0.08);
 
 
 
-var outR=this.addOutPort(new Port(this,"r",OP_PORT_TYPE_VALUE));
-var outG=this.addOutPort(new Port(this,"g",OP_PORT_TYPE_VALUE));
-var outB=this.addOutPort(new Port(this,"b",OP_PORT_TYPE_VALUE));
+var outR=this.addOutPort(new Port(this,"r",CABLES.OP_PORT_TYPE_VALUE));
+var outG=this.addOutPort(new Port(this,"g",CABLES.OP_PORT_TYPE_VALUE));
+var outB=this.addOutPort(new Port(this,"b",CABLES.OP_PORT_TYPE_VALUE));
 
-var outIndex=this.addOutPort(new Port(this,"index",OP_PORT_TYPE_VALUE));
+var outIndex=this.addOutPort(new Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
 
 
 var data=null;

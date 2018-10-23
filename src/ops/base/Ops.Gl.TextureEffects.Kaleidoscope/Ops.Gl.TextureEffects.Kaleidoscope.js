@@ -1,6 +1,6 @@
 op.name="Kaleidoscope";
 
-var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var sides=op.inValue("Sides",10);
 var angle=op.inValueSlider("Angle",0);
@@ -9,7 +9,7 @@ var slidey=op.inValueSlider("Slide Y",0);
 var centerX=op.inValueSlider("Center X",0.5);
 var centerY=op.inValueSlider("Center Y",0.5);
 
-var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

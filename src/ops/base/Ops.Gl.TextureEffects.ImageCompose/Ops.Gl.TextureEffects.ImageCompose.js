@@ -1,5 +1,5 @@
-const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-const useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+const render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const useVPSize=op.addInPort(new Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 const width=op.inValueInt("width");
 const height=op.inValueInt("height");
 
@@ -8,7 +8,7 @@ const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']
 const bgAlpha=op.inValueSlider("Background Alpha",1);
 const fpTexture=op.inValueBool("HDR");
 
-const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 const texOut=op.outTexture("texture_out");
 
 const outRatio=op.outValue("Aspect Ratio");

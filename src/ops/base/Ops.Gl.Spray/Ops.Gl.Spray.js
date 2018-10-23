@@ -1,7 +1,7 @@
 
 var cgl=op.patch.cgl;
 
-var exe=op.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var timer=op.addInPort(new Port(this,"time"));
 var num=op.addInPort(new Port(this,"num"));
@@ -24,7 +24,7 @@ inReset.onTriggered=reset;
 var lifetime=op.addInPort(new Port(this,"lifetime"));
 var lifetimeMin=op.addInPort(new Port(this,"Lifetime Minimum"));
 
-var trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
+var trigger=op.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION)) ;
 var idx=op.addOutPort(new Port(this,"index")) ;
 var lifeTimePercent=op.addOutPort(new Port(this,"lifeTimePercent")) ;
 

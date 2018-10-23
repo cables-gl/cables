@@ -1,7 +1,7 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var geom=op.addInPort(new Port(op,"geom",OP_PORT_TYPE_OBJECT));
-var transformations=op.addInPort(new Port(op,"transformations",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var geom=op.addInPort(new Port(op,"geom",CABLES.OP_PORT_TYPE_OBJECT));
+var transformations=op.addInPort(new Port(op,"transformations",CABLES.OP_PORT_TYPE_VALUE));
 
 var cgl=op.patch.cgl;
 geom.ignoreValueSerialize=true;

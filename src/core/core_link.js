@@ -47,7 +47,7 @@ CABLES.Link.prototype._setValue=function()
 
     if(v==v)  // NaN is the only JavaScript value that is treated as unequal to itself
     {
-        if(this.portIn.type!=OP_PORT_TYPE_FUNCTION)this.activity();
+        if(this.portIn.type!=CABLES.OP_PORT_TYPE_FUNCTION)this.activity();
 
         if( this.portIn.get()!==v )
         {
@@ -83,7 +83,7 @@ CABLES.Link.prototype.remove=function()
     if(this.portOut)this.portOut.removeLink(this);
     if(this.scene)this.scene.onUnLink(this.portIn,this.portOut);
 
-    if(this.portIn && this.portIn.type==OP_PORT_TYPE_OBJECT)
+    if(this.portIn && this.portIn.type==CABLES.OP_PORT_TYPE_OBJECT)
         this.portIn.set(null);
 
     this.portIn=null;
@@ -156,7 +156,7 @@ CABLES.Link.canLinkText=function(p1,p2)
         return 'can not link: same direction'+txt;
     }
     if(p1.parent==p2.parent)return 'can not link: same op';
-    if( p1.type!=OP_PORT_TYPE_DYNAMIC && p2.type!=OP_PORT_TYPE_DYNAMIC )
+    if( p1.type!=CABLES.OP_PORT_TYPE_DYNAMIC && p2.type!=CABLES.OP_PORT_TYPE_DYNAMIC )
     {
         if(p1.type!=p2.type)return 'can not link: different type';
     }
@@ -197,8 +197,8 @@ CABLES.Link.canLink=function(p1,p2)
 
     if(p1.direction==p2.direction)return false;
     
-    if( (p1.type!=p2.type) && ( p1.type!=OP_PORT_TYPE_DYNAMIC && p2.type!=OP_PORT_TYPE_DYNAMIC )) return false;
-    if(p1.type==OP_PORT_TYPE_DYNAMIC || p2.type==OP_PORT_TYPE_DYNAMIC )return true;
+    if( (p1.type!=p2.type) && ( p1.type!=CABLES.OP_PORT_TYPE_DYNAMIC && p2.type!=CABLES.OP_PORT_TYPE_DYNAMIC )) return false;
+    if(p1.type==CABLES.OP_PORT_TYPE_DYNAMIC || p2.type==CABLES.OP_PORT_TYPE_DYNAMIC )return true;
     
     if(p1.parent==p2.parent)return false;
 

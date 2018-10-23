@@ -1,5 +1,5 @@
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-var fontname=op.addInPort(new Port(op,"family",OP_PORT_TYPE_VALUE,{ type:'string' } ));
+var filename=op.addInPort(new Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+var fontname=op.addInPort(new Port(op,"family",CABLES.OP_PORT_TYPE_VALUE,{ type:'string' } ));
 
 filename.onChange=addStyle;
 fontname.onChange=addStyle;
