@@ -1,38 +1,38 @@
-// var text=op.addInPort(new Port(op,"Text",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
-var text=op.addInPort(new Port(op,"Text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
+// var text=op.addInPort(new CABLES.Port(op,"Text",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var text=op.addInPort(new CABLES.Port(op,"Text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 
-var id=op.addInPort(new Port(op,"Id",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
-// var classes=op.addInPort(new Port(op,"Class",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var id=op.addInPort(new CABLES.Port(op,"Id",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+// var classes=op.addInPort(new CABLES.Port(op,"Class",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 var classes=op.inValueString("Class");
 
 
-var visible=op.addInPort(new Port(op,"Visible",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
+var visible=op.addInPort(new CABLES.Port(op,"Visible",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
 visible.set(true);
 
 
 var doCenterX=op.inValueBool("Center X",false);
 var doCenterY=op.inValueBool("Center Y",false);
 
-var posLeft=op.addInPort(new Port(op,"Left",CABLES.OP_PORT_TYPE_VALUE));
-var posTop=op.addInPort(new Port(op,"Top",CABLES.OP_PORT_TYPE_VALUE));
+var posLeft=op.addInPort(new CABLES.Port(op,"Left",CABLES.OP_PORT_TYPE_VALUE));
+var posTop=op.addInPort(new CABLES.Port(op,"Top",CABLES.OP_PORT_TYPE_VALUE));
 
-var borderRadius=op.addInPort(new Port(op,"Border radius",CABLES.OP_PORT_TYPE_VALUE));
-var fontSize=op.addInPort(new Port(op,"Font size",CABLES.OP_PORT_TYPE_VALUE));
-var fontFamily=op.addInPort(new Port(op,"Font Family",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var borderRadius=op.addInPort(new CABLES.Port(op,"Border radius",CABLES.OP_PORT_TYPE_VALUE));
+var fontSize=op.addInPort(new CABLES.Port(op,"Font size",CABLES.OP_PORT_TYPE_VALUE));
+var fontFamily=op.addInPort(new CABLES.Port(op,"Font Family",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 
-var cursor=op.addInPort(new Port(op,"cursor",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
+var cursor=op.addInPort(new CABLES.Port(op,"cursor",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 
 var opacity=op.inValueSlider("Opacity",1.0);
 
-var r=op.addInPort(new Port(op,"Text Red",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new Port(op,"Text Green",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"Text Blue",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"Text Opacity",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"Text Red",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new CABLES.Port(op,"Text Green",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"Text Blue",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new CABLES.Port(op,"Text Opacity",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var bgR=op.addInPort(new Port(op,"Background Red",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var bgG=op.addInPort(new Port(op,"Background Green",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var bgB=op.addInPort(new Port(op,"Background Blue",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var bgA=op.addInPort(new Port(op,"Background Opacity",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var bgR=op.addInPort(new CABLES.Port(op,"Background Red",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var bgG=op.addInPort(new CABLES.Port(op,"Background Green",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var bgB=op.addInPort(new CABLES.Port(op,"Background Blue",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var bgA=op.addInPort(new CABLES.Port(op,"Background Opacity",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var outElement=op.outObject("Element");
 
@@ -46,17 +46,17 @@ bgG.set(0.5);
 bgB.set(0.5);
 bgA.set(1);
 
-var ignoreMouse=op.addInPort(new Port(op,"Ignore Mouse",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var ignoreMouse=op.addInPort(new CABLES.Port(op,"Ignore Mouse",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 ignoreMouse.set(false);
 
-var autoSize=op.addInPort(new Port(op,"Auto width/height",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var width=op.addInPort(new Port(op,"Width",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"Height",CABLES.OP_PORT_TYPE_VALUE));
+var autoSize=op.addInPort(new CABLES.Port(op,"Auto width/height",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var width=op.addInPort(new CABLES.Port(op,"Width",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new CABLES.Port(op,"Height",CABLES.OP_PORT_TYPE_VALUE));
 
-var clickTrigger=op.addOutPort(new Port(op,"OnClick",CABLES.OP_PORT_TYPE_FUNCTION));
-var mouseOver=op.addOutPort(new Port(op,"MouseOver",CABLES.OP_PORT_TYPE_VALUE,{type:'bool'}));
-var clientWidth=op.addOutPort(new Port(op,"Client Width",CABLES.OP_PORT_TYPE_VALUE));
-var clientHeight=op.addOutPort(new Port(op,"Client Height",CABLES.OP_PORT_TYPE_VALUE));
+var clickTrigger=op.addOutPort(new CABLES.Port(op,"OnClick",CABLES.OP_PORT_TYPE_FUNCTION));
+var mouseOver=op.addOutPort(new CABLES.Port(op,"MouseOver",CABLES.OP_PORT_TYPE_VALUE,{type:'bool'}));
+var clientWidth=op.addOutPort(new CABLES.Port(op,"Client Width",CABLES.OP_PORT_TYPE_VALUE));
+var clientHeight=op.addOutPort(new CABLES.Port(op,"Client Height",CABLES.OP_PORT_TYPE_VALUE));
 
 
 text.set('This is a HTML element');

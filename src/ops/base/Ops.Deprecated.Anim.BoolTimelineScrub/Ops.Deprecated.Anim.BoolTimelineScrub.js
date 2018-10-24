@@ -1,11 +1,11 @@
 
-var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var state = op.addInPort(new Port(op,"state",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var v=op.addInPort(new Port(op,"anim value",CABLES.OP_PORT_TYPE_VALUE));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var state = op.addInPort(new CABLES.Port(op,"state",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var v=op.addInPort(new CABLES.Port(op,"anim value",CABLES.OP_PORT_TYPE_VALUE));
 
-var result=op.addOutPort(new Port(op,"result"));
-var outTime=op.addOutPort(new Port(op,"time",CABLES.OP_PORT_TYPE_VALUE));
-var outPerc=op.addOutPort(new Port(op,"Percentage",CABLES.OP_PORT_TYPE_VALUE));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
+var outTime=op.addOutPort(new CABLES.Port(op,"time",CABLES.OP_PORT_TYPE_VALUE));
+var outPerc=op.addOutPort(new CABLES.Port(op,"Percentage",CABLES.OP_PORT_TYPE_VALUE));
 
 var animTime=new CABLES.TL.Anim();
 

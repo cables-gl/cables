@@ -1,14 +1,14 @@
 var cgl=op.patch.cgl;
 
 op.name='ColorPick';
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var x=op.addInPort(new Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
-var y=op.addInPort(new Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var x=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
 
-var r=op.addOutPort(new Port(op,"r",CABLES.OP_PORT_TYPE_VALUE));
-var g=op.addOutPort(new Port(op,"g",CABLES.OP_PORT_TYPE_VALUE));
-var b=op.addOutPort(new Port(op,"b",CABLES.OP_PORT_TYPE_VALUE));
-var a=op.addOutPort(new Port(op,"a",CABLES.OP_PORT_TYPE_VALUE));
+var r=op.addOutPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE));
+var g=op.addOutPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE));
+var b=op.addOutPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE));
+var a=op.addOutPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE));
 
 var pixelValues = new Uint8Array(4);
 

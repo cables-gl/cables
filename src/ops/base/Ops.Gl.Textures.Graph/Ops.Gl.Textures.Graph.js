@@ -1,7 +1,7 @@
-var trigger=this.addInPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var value=this.addInPort(new Port(this,"value",CABLES.OP_PORT_TYPE_VALUE));
-var index=this.addInPort(new Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
-var inReset=this.addInPort(new Port(this,"reset",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var trigger=this.addInPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var value=this.addInPort(new CABLES.Port(this,"value",CABLES.OP_PORT_TYPE_VALUE));
+var index=this.addInPort(new CABLES.Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
+var inReset=this.addInPort(new CABLES.Port(this,"reset",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
 var texOut=op.outTexture("Texture");
 

@@ -1,8 +1,8 @@
 
-var data=op.addInPort(new Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT ));
-var key=op.addInPort(new Port(op,"key",CABLES.OP_PORT_TYPE_VALUE,{type:'string'} ));
-var result=op.addOutPort(new Port(op,"result",CABLES.OP_PORT_TYPE_ARRAY));
-var arrLength=op.addOutPort(new Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
+var data=op.addInPort(new CABLES.Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT ));
+var key=op.addInPort(new CABLES.Port(op,"key",CABLES.OP_PORT_TYPE_VALUE,{type:'string'} ));
+var result=op.addOutPort(new CABLES.Port(op,"result",CABLES.OP_PORT_TYPE_ARRAY));
+var arrLength=op.addOutPort(new CABLES.Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
 
 result.ignoreValueSerialize=true;
 data.ignoreValueSerialize=true;

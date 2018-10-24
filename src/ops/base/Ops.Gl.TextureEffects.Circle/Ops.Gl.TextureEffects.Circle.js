@@ -1,32 +1,32 @@
 op.name="Circle";
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
 
 
-var inSize=op.addInPort(new Port(op,"size",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var inSize=op.addInPort(new CABLES.Port(op,"size",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var inInner=op.addInPort(new Port(op,"Inner",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var inInner=op.addInPort(new CABLES.Port(op,"Inner",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
 var inX=op.inValue("Pos X",0.5);
 var inY=op.inValue("Pos Y",0.5);
 
 
-var inFadeOut=op.addInPort(new Port(op,"fade Out",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var inFadeOut=op.addInPort(new CABLES.Port(op,"fade Out",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var warnOverflow=op.addInPort(new Port(op,"warn overflow",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var fallOff=op.addInPort(new Port(op,"fallOff",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Linear','SmoothStep']}));
+var warnOverflow=op.addInPort(new CABLES.Port(op,"warn overflow",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var fallOff=op.addInPort(new CABLES.Port(op,"fallOff",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Linear','SmoothStep']}));
 
 warnOverflow.set(true);
 
-var r=op.addInPort(new Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var srcFrag=attachments.circle_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 

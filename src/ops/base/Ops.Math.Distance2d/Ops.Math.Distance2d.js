@@ -1,11 +1,11 @@
 
-var x1=op.addInPort(new Port(op,"x1"));
-var y1=op.addInPort(new Port(op,"y1"));
+var x1=op.addInPort(new CABLES.Port(op,"x1"));
+var y1=op.addInPort(new CABLES.Port(op,"y1"));
 
-var x2=op.addInPort(new Port(op,"x2"));
-var y2=op.addInPort(new Port(op,"y2"));
+var x2=op.addInPort(new CABLES.Port(op,"x2"));
+var y2=op.addInPort(new CABLES.Port(op,"y2"));
 
-var dist=op.addOutPort(new Port(op,"distance"));
+var dist=op.addOutPort(new CABLES.Port(op,"distance"));
 
 function calc()
 {

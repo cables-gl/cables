@@ -1,13 +1,13 @@
 op.name='MidiSendBool';
 
-var eventIn=op.addInPort(new Port(this,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
-var value=op.addInPort(new Port(this,"Value",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
-var velocity=op.addInPort(new Port(this,"Velocity",CABLES.OP_PORT_TYPE_VALUE));
-var note=op.addInPort(new Port(op,"note"));
-var learn=op.addInPort(new Port(op,"learn",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
-var isControllCMd=op.addInPort(new Port(this,"Controll Value",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
+var eventIn=op.addInPort(new CABLES.Port(this,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
+var value=op.addInPort(new CABLES.Port(this,"Value",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
+var velocity=op.addInPort(new CABLES.Port(this,"Velocity",CABLES.OP_PORT_TYPE_VALUE));
+var note=op.addInPort(new CABLES.Port(op,"note"));
+var learn=op.addInPort(new CABLES.Port(op,"learn",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var isControllCMd=op.addInPort(new CABLES.Port(this,"Controll Value",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
 
-var eventOut=op.addOutPort(new Port(this,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
+var eventOut=op.addOutPort(new CABLES.Port(this,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
 
 velocity.set(127);
 note.set(1);

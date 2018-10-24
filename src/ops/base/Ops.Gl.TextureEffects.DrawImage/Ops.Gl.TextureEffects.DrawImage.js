@@ -1,17 +1,17 @@
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var amount=op.addInPort(new Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var image=op.addInPort(new Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var image=op.addInPort(new CABLES.Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
 
-var imageAlpha=op.addInPort(new Port(op,"imageAlpha",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var imageAlpha=op.addInPort(new CABLES.Port(op,"imageAlpha",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
 var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
-var removeAlphaSrc=op.addInPort(new Port(op,"removeAlphaSrc",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var removeAlphaSrc=op.addInPort(new CABLES.Port(op,"removeAlphaSrc",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-var invAlphaChannel=op.addInPort(new Port(op,"invert alpha channel",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 blendMode.set('normal');
 var cgl=op.patch.cgl;
@@ -56,8 +56,8 @@ alphaSrc.set("alpha channel");
     //
     // texture flip
     //
-    var flipX=op.addInPort(new Port(op,"flip x",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-    var flipY=op.addInPort(new Port(op,"flip y",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipX=op.addInPort(new CABLES.Port(op,"flip x",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipY=op.addInPort(new CABLES.Port(op,"flip y",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
     flipX.onValueChanged=function()
     {
@@ -76,10 +76,10 @@ alphaSrc.set("alpha channel");
     //
     // texture transform
     //
-    var scale=op.addInPort(new Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var posX=op.addInPort(new Port(op,"pos x",CABLES.OP_PORT_TYPE_VALUE, {}));
-    var posY=op.addInPort(new Port(op,"pos y",CABLES.OP_PORT_TYPE_VALUE, {}));
-    var rotate=op.addInPort(new Port(op,"rotate",CABLES.OP_PORT_TYPE_VALUE, {}));
+    var scale=op.addInPort(new CABLES.Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var posX=op.addInPort(new CABLES.Port(op,"pos x",CABLES.OP_PORT_TYPE_VALUE, {}));
+    var posY=op.addInPort(new CABLES.Port(op,"pos y",CABLES.OP_PORT_TYPE_VALUE, {}));
+    var rotate=op.addInPort(new CABLES.Port(op,"rotate",CABLES.OP_PORT_TYPE_VALUE, {}));
 
     scale.set(1.0);
 

@@ -2,11 +2,11 @@ var self=this;
 // //Op.apply(this, arguments);
 
 this.name='random';
-this.exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-this.result=this.addOutPort(new Port(this,"result"));
+this.exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+this.result=this.addOutPort(new CABLES.Port(this,"result"));
 
-var min=this.addInPort(new Port(this,"min"));
-var max=this.addInPort(new Port(this,"max"));
+var min=this.addInPort(new CABLES.Port(this,"min"));
+var max=this.addInPort(new CABLES.Port(this,"max"));
 
 this.exe.onTriggered=function()
 {

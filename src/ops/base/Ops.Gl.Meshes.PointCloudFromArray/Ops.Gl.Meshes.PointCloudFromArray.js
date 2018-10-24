@@ -1,6 +1,6 @@
 op.name="PointCloudFromArray";
 
-var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 var arr=op.inArray("Array");
 var seed=op.inValue("Seed");
 var numPoints=op.inValue("Num Points");

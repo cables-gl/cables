@@ -1,5 +1,5 @@
-var exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var next=this.addOutPort(new Port(this,"childs",CABLES.OP_PORT_TYPE_FUNCTION)) ;
+var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var next=this.addOutPort(new CABLES.Port(this,"childs",CABLES.OP_PORT_TYPE_FUNCTION)) ;
 
 var inShow=op.inValueBool("Visible",true);
 

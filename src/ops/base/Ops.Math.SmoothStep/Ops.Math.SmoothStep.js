@@ -1,7 +1,7 @@
-var result=op.addOutPort(new Port(op,"result"));
-var number=op.addInPort(new Port(op,"number"));
-var min=op.addInPort(new Port(op,"min"));
-var max=op.addInPort(new Port(op,"max"));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
+var number=op.addInPort(new CABLES.Port(op,"number"));
+var min=op.addInPort(new CABLES.Port(op,"min"));
+var max=op.addInPort(new CABLES.Port(op,"max"));
 
 var subAdd=0;
 

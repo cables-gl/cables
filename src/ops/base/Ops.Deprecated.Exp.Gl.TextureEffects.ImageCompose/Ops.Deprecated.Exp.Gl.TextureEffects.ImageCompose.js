@@ -1,15 +1,15 @@
 op.name="ImageCompose";
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var useVPSize=op.addInPort(new Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var width=op.addInPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var width=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 
 var fpTexture=op.inValueBool("HDR");
 var clear=op.inValueBool("Clear",true);
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var texOut=op.outTexture("texture_out");
 
 texOut.set(null);

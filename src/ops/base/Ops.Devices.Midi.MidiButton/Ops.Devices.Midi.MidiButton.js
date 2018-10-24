@@ -1,15 +1,15 @@
 
-var eventIn=op.addInPort(new Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
-var note=op.addInPort(new Port(op,"note"));
+var eventIn=op.addInPort(new CABLES.Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
+var note=op.addInPort(new CABLES.Port(op,"note"));
 var channel=op.inValueInt("Channel",0);
-var learn=op.addInPort(new Port(op,"learn",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var learn=op.addInPort(new CABLES.Port(op,"learn",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var eventOut=op.addOutPort(new Port(op,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
-var outPressed=op.addOutPort(new Port(op,"pressed"));
+var eventOut=op.addOutPort(new CABLES.Port(op,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
+var outPressed=op.addOutPort(new CABLES.Port(op,"pressed"));
 
-var trigger=op.addOutPort(new Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var lights=op.addInPort(new Port(op,"Light",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var lights=op.addInPort(new CABLES.Port(op,"Light",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 note.set(1);
 var learning=false;

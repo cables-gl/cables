@@ -1,6 +1,6 @@
 
 op.name='TimeLineTime';
-var theTime=op.addOutPort(new Port(this,"time"));
+var theTime=op.addOutPort(new CABLES.Port(this,"time"));
 
 theTime.set(0);
 

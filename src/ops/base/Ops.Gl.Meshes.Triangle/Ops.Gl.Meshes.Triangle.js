@@ -1,14 +1,14 @@
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var sizeW=op.addInPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var sizeH=op.addInPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var sizeW=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var sizeH=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 const draw=op.inValueBool("Draw",true);
 var geom=new CGL.Geometry("triangle");
 
 sizeW.set(1);
 sizeH.set(1);
 
-var geomOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;

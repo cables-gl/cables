@@ -1,5 +1,5 @@
 var render=op.inFunction("render");
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var x1=op.inValue("x 1",-1);
 var y1=op.inValue("y 1",1);
@@ -39,7 +39,7 @@ var tc=new Float32Array([0,0,0,0,0,0,0,0]);
 // var tc=[];
 // tc.length=8;
 
-var geomOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;

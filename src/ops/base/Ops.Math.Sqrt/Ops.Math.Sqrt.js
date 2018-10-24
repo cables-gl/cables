@@ -1,5 +1,5 @@
-const number=op.addInPort(new Port(op,"number"));
-const result=op.addOutPort(new Port(op,"result"));
+const number=op.addInPort(new CABLES.Port(op,"number"));
+const result=op.addOutPort(new CABLES.Port(op,"result"));
 
 number.onValueChanged=function()
 {

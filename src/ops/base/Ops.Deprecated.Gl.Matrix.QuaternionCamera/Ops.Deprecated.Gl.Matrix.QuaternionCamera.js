@@ -1,29 +1,29 @@
 op.name="QuaternionCamera";
 var cgl=op.patch.cgl;
 var patch=op.patch;
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
-var posX=op.addInPort(new Port(op,"posX"));
-var posY=op.addInPort(new Port(op,"posY"));
-var posZ=op.addInPort(new Port(op,"posZ"));
+var posX=op.addInPort(new CABLES.Port(op,"posX"));
+var posY=op.addInPort(new CABLES.Port(op,"posY"));
+var posZ=op.addInPort(new CABLES.Port(op,"posZ"));
 
-var qx=op.addInPort(new Port(op,"quat x"));
-var qy=op.addInPort(new Port(op,"quat y"));
-var qz=op.addInPort(new Port(op,"quat z"));
-var qw=op.addInPort(new Port(op,"quat w"));
+var qx=op.addInPort(new CABLES.Port(op,"quat x"));
+var qy=op.addInPort(new CABLES.Port(op,"quat y"));
+var qz=op.addInPort(new CABLES.Port(op,"quat z"));
+var qw=op.addInPort(new CABLES.Port(op,"quat w"));
 
-var fov=op.addInPort(new Port(op,"fov"));
+var fov=op.addInPort(new CABLES.Port(op,"fov"));
 
-var clipNear=op.addInPort(new Port(op,"clip near"));
-var clipFar=op.addInPort(new Port(op,"clip far"));
+var clipNear=op.addInPort(new CABLES.Port(op,"clip near"));
+var clipFar=op.addInPort(new CABLES.Port(op,"clip far"));
 
-var lax=op.addInPort(new Port(op,"lookat x"));
-var lay=op.addInPort(new Port(op,"lookat y"));
-var laz=op.addInPort(new Port(op,"lookat z"));
+var lax=op.addInPort(new CABLES.Port(op,"lookat x"));
+var lay=op.addInPort(new CABLES.Port(op,"lookat y"));
+var laz=op.addInPort(new CABLES.Port(op,"lookat z"));
 
-var matrix=op.addInPort(new Port(op,"matrix")); //OP_PORT_TYPE_ARRAY
+var matrix=op.addInPort(new CABLES.Port(op,"matrix")); //OP_PORT_TYPE_ARRAY
 
 
 qx.set(0.0);

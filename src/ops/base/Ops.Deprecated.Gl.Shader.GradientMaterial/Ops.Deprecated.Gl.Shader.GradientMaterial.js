@@ -1,28 +1,28 @@
 var cgl=op.patch.cgl;
 
 op.name='GradientMaterial';
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var screenSpace=op.addInPort(new Port(op,"screen space",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var direction=op.addInPort(new Port(op,"direction",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var screenSpace=op.addInPort(new CABLES.Port(op,"screen space",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var direction=op.addInPort(new CABLES.Port(op,"direction",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 screenSpace.set(false);
 direction.set(true);
 
-var r=op.addInPort(new Port(op,"r1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new Port(op,"g1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"r1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new CABLES.Port(op,"g1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new CABLES.Port(op,"a1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var r2=op.addInPort(new Port(op,"r2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g2=op.addInPort(new Port(op,"g2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b2=op.addInPort(new Port(op,"b2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a2=op.addInPort(new Port(op,"a2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r2=op.addInPort(new CABLES.Port(op,"r2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g2=op.addInPort(new CABLES.Port(op,"g2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b2=op.addInPort(new CABLES.Port(op,"b2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a2=op.addInPort(new CABLES.Port(op,"a2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var r3=op.addInPort(new Port(op,"r3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g3=op.addInPort(new Port(op,"g3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b3=op.addInPort(new Port(op,"b3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a3=op.addInPort(new Port(op,"a3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r3=op.addInPort(new CABLES.Port(op,"r3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g3=op.addInPort(new CABLES.Port(op,"g3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b3=op.addInPort(new CABLES.Port(op,"b3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a3=op.addInPort(new CABLES.Port(op,"a3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 r.set(0.2);
 g.set(0.2);

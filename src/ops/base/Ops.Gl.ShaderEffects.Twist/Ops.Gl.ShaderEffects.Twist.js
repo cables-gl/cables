@@ -1,15 +1,15 @@
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var amount=op.addInPort(new Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE));
 
-var axisX=op.addInPort(new Port(op,"X",CABLES.OP_PORT_TYPE_VALUE));
-var axisY=op.addInPort(new Port(op,"Y",CABLES.OP_PORT_TYPE_VALUE));
-var axisZ=op.addInPort(new Port(op,"Z",CABLES.OP_PORT_TYPE_VALUE));
+var axisX=op.addInPort(new CABLES.Port(op,"X",CABLES.OP_PORT_TYPE_VALUE));
+var axisY=op.addInPort(new CABLES.Port(op,"Y",CABLES.OP_PORT_TYPE_VALUE));
+var axisZ=op.addInPort(new CABLES.Port(op,"Z",CABLES.OP_PORT_TYPE_VALUE));
 
-var centerX=op.addInPort(new Port(op,"Center X",CABLES.OP_PORT_TYPE_VALUE));
-var centerY=op.addInPort(new Port(op,"Center Y",CABLES.OP_PORT_TYPE_VALUE));
-var centerZ=op.addInPort(new Port(op,"Center Z",CABLES.OP_PORT_TYPE_VALUE));
+var centerX=op.addInPort(new CABLES.Port(op,"Center X",CABLES.OP_PORT_TYPE_VALUE));
+var centerY=op.addInPort(new CABLES.Port(op,"Center Y",CABLES.OP_PORT_TYPE_VALUE));
+var centerZ=op.addInPort(new CABLES.Port(op,"Center Z",CABLES.OP_PORT_TYPE_VALUE));
 
 var srcHeadVert=''
     .endl()+'UNI float MOD_amount;'

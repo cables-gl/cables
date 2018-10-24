@@ -1,9 +1,9 @@
 
-var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var inAttrib=op.inValueSelect("Attribute",[]);
 var inGeom=op.inObject("Geometry");
 var limitMax=op.inValue("Max",1000);
-var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var srcHeadFrag='';
 var srcBodyFrag='';

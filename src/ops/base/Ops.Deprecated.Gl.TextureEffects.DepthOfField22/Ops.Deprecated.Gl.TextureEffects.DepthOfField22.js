@@ -3,24 +3,24 @@ var self=this;
 var cgl=this.patch.cgl;
 
 this.name='DepthOfField';
-this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-this.depthTex=this.addInPort(new Port(this,"depth map",CABLES.OP_PORT_TYPE_TEXTURE));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+this.depthTex=this.addInPort(new CABLES.Port(this,"depth map",CABLES.OP_PORT_TYPE_TEXTURE));
 
-var tex1=this.addInPort(new Port(this,"tex",CABLES.OP_PORT_TYPE_TEXTURE));
-var tex2=this.addInPort(new Port(this,"tex 1",CABLES.OP_PORT_TYPE_TEXTURE));
-var tex3=this.addInPort(new Port(this,"tex 2",CABLES.OP_PORT_TYPE_TEXTURE));
-var tex4=this.addInPort(new Port(this,"tex 3",CABLES.OP_PORT_TYPE_TEXTURE));
+var tex1=this.addInPort(new CABLES.Port(this,"tex",CABLES.OP_PORT_TYPE_TEXTURE));
+var tex2=this.addInPort(new CABLES.Port(this,"tex 1",CABLES.OP_PORT_TYPE_TEXTURE));
+var tex3=this.addInPort(new CABLES.Port(this,"tex 2",CABLES.OP_PORT_TYPE_TEXTURE));
+var tex4=this.addInPort(new CABLES.Port(this,"tex 3",CABLES.OP_PORT_TYPE_TEXTURE));
 
-this.farPlane=this.addInPort(new Port(this,"farplane",CABLES.OP_PORT_TYPE_VALUE));
-this.nearPlane=this.addInPort(new Port(this,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
+this.farPlane=this.addInPort(new CABLES.Port(this,"farplane",CABLES.OP_PORT_TYPE_VALUE));
+this.nearPlane=this.addInPort(new CABLES.Port(this,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
 
-// var distNear=this.addInPort(new Port(this,"distance near",CABLES.OP_PORT_TYPE_VALUE,{'display':'range'}));
-var distFar=this.addInPort(new Port(this,"distance far",CABLES.OP_PORT_TYPE_VALUE,{'display':'range'}));
+// var distNear=this.addInPort(new CABLES.Port(this,"distance near",CABLES.OP_PORT_TYPE_VALUE,{'display':'range'}));
+var distFar=this.addInPort(new CABLES.Port(this,"distance far",CABLES.OP_PORT_TYPE_VALUE,{'display':'range'}));
 
-var stepWidth=this.addInPort(new Port(this,"step width",CABLES.OP_PORT_TYPE_VALUE,{}));
+var stepWidth=this.addInPort(new CABLES.Port(this,"step width",CABLES.OP_PORT_TYPE_VALUE,{}));
 
-var showDistances=this.addInPort(new Port(this,"showDistances",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var showDistances=this.addInPort(new CABLES.Port(this,"showDistances",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 showDistances.set(false);
 
 var shader=new CGL.Shader(cgl);

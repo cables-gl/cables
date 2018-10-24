@@ -2,15 +2,15 @@ var filenames=op.inArray("urls");
 
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
-var flip=op.addInPort(new Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var unpackAlpha=op.addInPort(new CABLES.Port(op,"unpackPreMultipliedAlpha",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 var arrOut=op.outArray('TextureArray');
 
 // var textureOut=op.outTexture("texture");
-var width=op.addOutPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addOutPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
-var loading=op.addOutPort(new Port(op,"loading",CABLES.OP_PORT_TYPE_VALUE));
+var width=op.addOutPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addOutPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var loading=op.addOutPort(new CABLES.Port(op,"loading",CABLES.OP_PORT_TYPE_VALUE));
 var ratio=op.outValue("Aspect Ratio");
 
 flip.set(false);

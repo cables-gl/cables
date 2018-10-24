@@ -1,9 +1,9 @@
 
 op.name='MidiDeviceList';
 
-var outNumDevices=op.addOutPort(new Port(op,"Num Devices"));
-var outSupport=op.addOutPort(new Port(op,"Midi Support"));
-var outNames=op.addOutPort(new Port(op,"Device Names",CABLES.OP_PORT_TYPE_ARRAY));
+var outNumDevices=op.addOutPort(new CABLES.Port(op,"Num Devices"));
+var outSupport=op.addOutPort(new CABLES.Port(op,"Midi Support"));
+var outNames=op.addOutPort(new CABLES.Port(op,"Device Names",CABLES.OP_PORT_TYPE_ARRAY));
 
 var midi=null;
 

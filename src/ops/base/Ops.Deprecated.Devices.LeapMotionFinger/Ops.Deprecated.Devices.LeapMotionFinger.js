@@ -4,35 +4,35 @@ this.name='leap finger';
 
 this.patch.loadLib('leap-motion');
 
-var leapFrame=this.addInPort(new Port(this,"leap frame",CABLES.OP_PORT_TYPE_OBJECT));
+var leapFrame=this.addInPort(new CABLES.Port(this,"leap frame",CABLES.OP_PORT_TYPE_OBJECT));
 leapFrame.ignoreValueSerialize=true;
 
-var handIndex=this.addInPort(new Port(this,"hand index"));
-var fingerIndex=this.addInPort(new Port(this,"finger index"));
+var handIndex=this.addInPort(new CABLES.Port(this,"hand index"));
+var fingerIndex=this.addInPort(new CABLES.Port(this,"finger index"));
 
 handIndex.set(0);
 fingerIndex.set(0);
 
-var btipX=this.addOutPort(new Port(this,"btip x"));
-var btipY=this.addOutPort(new Port(this,"btip y"));
-var btipZ=this.addOutPort(new Port(this,"btip z"));
+var btipX=this.addOutPort(new CABLES.Port(this,"btip x"));
+var btipY=this.addOutPort(new CABLES.Port(this,"btip y"));
+var btipZ=this.addOutPort(new CABLES.Port(this,"btip z"));
 
 
-var tipX=this.addOutPort(new Port(this,"tip x"));
-var tipY=this.addOutPort(new Port(this,"tip y"));
-var tipZ=this.addOutPort(new Port(this,"tip z"));
+var tipX=this.addOutPort(new CABLES.Port(this,"tip x"));
+var tipY=this.addOutPort(new CABLES.Port(this,"tip y"));
+var tipZ=this.addOutPort(new CABLES.Port(this,"tip z"));
 
-var pipX=this.addOutPort(new Port(this,"pip x"));
-var pipY=this.addOutPort(new Port(this,"pip y"));
-var pipZ=this.addOutPort(new Port(this,"pip z"));
+var pipX=this.addOutPort(new CABLES.Port(this,"pip x"));
+var pipY=this.addOutPort(new CABLES.Port(this,"pip y"));
+var pipZ=this.addOutPort(new CABLES.Port(this,"pip z"));
 
-var jointX=this.addOutPort(new Port(this,"joint x"));
-var jointY=this.addOutPort(new Port(this,"joint y"));
-var jointZ=this.addOutPort(new Port(this,"joint z"));
+var jointX=this.addOutPort(new CABLES.Port(this,"joint x"));
+var jointY=this.addOutPort(new CABLES.Port(this,"joint y"));
+var jointZ=this.addOutPort(new CABLES.Port(this,"joint z"));
 
-var carpX=this.addOutPort(new Port(this,"carpal x"));
-var carpY=this.addOutPort(new Port(this,"carpal y"));
-var carpZ=this.addOutPort(new Port(this,"carpal z"));
+var carpX=this.addOutPort(new CABLES.Port(this,"carpal x"));
+var carpY=this.addOutPort(new CABLES.Port(this,"carpal y"));
+var carpZ=this.addOutPort(new CABLES.Port(this,"carpal z"));
 
 leapFrame.onValueChange(function()
 {

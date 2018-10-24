@@ -3,16 +3,16 @@ var self=this;
 var cgl=self.patch.cgl;
 
 this.name='Laser Black';
-this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 
-var doSetColor=this.addInPort(new Port(this,"set color",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'}));
+var doSetColor=this.addInPort(new CABLES.Port(this,"set color",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'}));
 doSetColor.set(true);
 
-// var numPoints=this.addInPort(new Port(this,"num points",CABLES.OP_PORT_TYPE_VALUE));
+// var numPoints=this.addInPort(new CABLES.Port(this,"num points",CABLES.OP_PORT_TYPE_VALUE));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 

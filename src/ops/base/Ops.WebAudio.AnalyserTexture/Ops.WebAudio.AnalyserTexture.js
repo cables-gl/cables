@@ -1,7 +1,7 @@
 op.name="AnalyserTexture";
 
-var refresh=op.addInPort(new Port(op,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
-var fftArr=op.addInPort(new Port(op, "FFT Array",CABLES.OP_PORT_TYPE_ARRAY));
+var refresh=op.addInPort(new CABLES.Port(op,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
+var fftArr=op.addInPort(new CABLES.Port(op, "FFT Array",CABLES.OP_PORT_TYPE_ARRAY));
 
 
 var amount=op.inValueSlider("Blur Amount");
@@ -232,9 +232,9 @@ function blurTexture()
 var shaderMirror=new CGL.Shader(cgl);
 
 var doMirror=op.inValueBool("Mirror");
-var mirrorWidth=op.addInPort(new Port(op,"mirror width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var mirrorOffset=op.addInPort(new Port(op,"mirror offset",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var mirrorFlip=op.addInPort(new Port(op,"mirror flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var mirrorWidth=op.addInPort(new CABLES.Port(op,"mirror width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var mirrorOffset=op.addInPort(new CABLES.Port(op,"mirror offset",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var mirrorFlip=op.addInPort(new CABLES.Port(op,"mirror flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 mirrorFlip.set(true);
 mirrorWidth.set(1);

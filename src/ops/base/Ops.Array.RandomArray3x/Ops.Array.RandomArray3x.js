@@ -1,11 +1,11 @@
 
-var numValues=op.addInPort(new Port(op, "numValues",CABLES.OP_PORT_TYPE_VALUE));
-var seed=op.addInPort(new Port(op,"random seed"));
-var min=op.addInPort(new Port(op,"Min"));
-var max=op.addInPort(new Port(op,"Max"));
+var numValues=op.addInPort(new CABLES.Port(op, "numValues",CABLES.OP_PORT_TYPE_VALUE));
+var seed=op.addInPort(new CABLES.Port(op,"random seed"));
+var min=op.addInPort(new CABLES.Port(op,"Min"));
+var max=op.addInPort(new CABLES.Port(op,"Max"));
 var closed=op.inValueBool("Last == First");
 
-var values=op.addOutPort(new Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
+var values=op.addOutPort(new CABLES.Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
 values.ignoreValueSerialize=true;
 
 numValues.set(100);

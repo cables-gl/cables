@@ -1,24 +1,24 @@
 
 op.name='MidiButtonArray';
-var eventIn=op.addInPort(new Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
+var eventIn=op.addInPort(new CABLES.Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
 
-var note=op.addInPort(new Port(op,"Note Start"));
-var learn=op.addInPort(new Port(op,"Learn Start",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var note=op.addInPort(new CABLES.Port(op,"Note Start"));
+var learn=op.addInPort(new CABLES.Port(op,"Learn Start",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var noteEnd=op.addInPort(new Port(op,"Note End"));
-var learnEnd=op.addInPort(new Port(op,"Learn End",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var noteEnd=op.addInPort(new CABLES.Port(op,"Note End"));
+var learnEnd=op.addInPort(new CABLES.Port(op,"Learn End",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var lights=op.addInPort(new Port(op,"Light",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var lights=op.addInPort(new CABLES.Port(op,"Light",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 var toggle=op.inValueBool("Toggle");
 
 var inValue=op.inValue("Button Value",1);
 
-var eventOut=op.addOutPort(new Port(op,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
+var eventOut=op.addOutPort(new CABLES.Port(op,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
 
-var lastIndex=op.addOutPort(new Port(op,"Last Index"));
-var numButtons=op.addOutPort(new Port(op,"Num Buttons"));
+var lastIndex=op.addOutPort(new CABLES.Port(op,"Last Index"));
+var numButtons=op.addOutPort(new CABLES.Port(op,"Num Buttons"));
 
-var values=op.addOutPort(new Port(op, "Buttons",CABLES.OP_PORT_TYPE_ARRAY));
+var values=op.addOutPort(new CABLES.Port(op, "Buttons",CABLES.OP_PORT_TYPE_ARRAY));
 
 var inClear=op.inFunctionButton("Clear");
 

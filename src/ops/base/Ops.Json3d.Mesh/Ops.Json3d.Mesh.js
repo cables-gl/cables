@@ -1,11 +1,11 @@
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
-// op.index=op.addInPort(new Port(op,"mesh index",CABLES.OP_PORT_TYPE_VALUE,{type:'string'} ));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
+// op.index=op.addInPort(new CABLES.Port(op,"mesh index",CABLES.OP_PORT_TYPE_VALUE,{type:'string'} ));
 op.index=op.inValueInt("mesh index");
-var centerPivot=op.addInPort(new Port(op,"center pivot",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'} ));
-var next=op.addOutPort(new Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+var centerPivot=op.addInPort(new CABLES.Port(op,"center pivot",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'} ));
+var next=op.addOutPort(new CABLES.Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var geometryOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT ));
-var draw=op.addInPort(new Port(op,"draw",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var geometryOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT ));
+var draw=op.addInPort(new CABLES.Port(op,"draw",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 op.index.set(0);
 geometryOut.ignoreValueSerialize=true;

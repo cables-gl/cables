@@ -2,9 +2,9 @@ var self=this;
 //Op.apply(this, arguments);
 
 this.name='Websocket';
-this.url=this.addInPort(new Port(this,"url",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
-this.result=this.addOutPort(new Port(this,"result", OP_PORT_TYPE_OBJECT));
-this.connected=this.addOutPort(new Port(this,"connected"));
+this.url=this.addInPort(new CABLES.Port(this,"url",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+this.result=this.addOutPort(new CABLES.Port(this,"result", OP_PORT_TYPE_OBJECT));
+this.connected=this.addOutPort(new CABLES.Port(this,"connected"));
 
 var outSocket=op.outObject("Socket");
 

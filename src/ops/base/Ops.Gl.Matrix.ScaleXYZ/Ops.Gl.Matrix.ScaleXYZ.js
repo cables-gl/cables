@@ -1,9 +1,9 @@
-const render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-const scaleX=op.addInPort(new Port(op,"x"));
-const scaleY=op.addInPort(new Port(op,"y"));
-const scaleZ=op.addInPort(new Port(op,"z"));
+const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const scaleX=op.addInPort(new CABLES.Port(op,"x"));
+const scaleY=op.addInPort(new CABLES.Port(op,"y"));
+const scaleZ=op.addInPort(new CABLES.Port(op,"z"));
 
-const trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 const cgl=op.patch.cgl;
 const vScale=vec3.create();

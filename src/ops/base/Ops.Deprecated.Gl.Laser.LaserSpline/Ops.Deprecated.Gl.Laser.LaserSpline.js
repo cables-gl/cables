@@ -5,40 +5,40 @@ var cgl=this.patch.cgl;
 cgl.frameStore.SplinePoints=[];
 
 this.name='LaserSpline';
-this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.thickness=this.addInPort(new Port(this,"thickness",CABLES.OP_PORT_TYPE_VALUE));
+this.thickness=this.addInPort(new CABLES.Port(this,"thickness",CABLES.OP_PORT_TYPE_VALUE));
 this.thickness.val=1.0;
 
-this.centerpoint=this.addInPort(new Port(this,"centerpoint",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+this.centerpoint=this.addInPort(new CABLES.Port(this,"centerpoint",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.centerpoint.val=false;
 
-this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-this.triggerPoints=this.addOutPort(new Port(this,"triggerPoints",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+this.triggerPoints=this.addOutPort(new CABLES.Port(this,"triggerPoints",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var outObj=this.addOutPort(new Port(this,"json",CABLES.OP_PORT_TYPE_ARRAY));
+var outObj=this.addOutPort(new CABLES.Port(this,"json",CABLES.OP_PORT_TYPE_ARRAY));
 
-var outNumPoints=this.addOutPort(new Port(this,"numPoints",CABLES.OP_PORT_TYPE_VALUE));
+var outNumPoints=this.addOutPort(new CABLES.Port(this,"numPoints",CABLES.OP_PORT_TYPE_VALUE));
 
-var fov=this.addInPort(new Port(this,"fov",CABLES.OP_PORT_TYPE_VALUE));
-var w=this.addInPort(new Port(this,"w",CABLES.OP_PORT_TYPE_VALUE));
-var h=this.addInPort(new Port(this,"h",CABLES.OP_PORT_TYPE_VALUE));
+var fov=this.addInPort(new CABLES.Port(this,"fov",CABLES.OP_PORT_TYPE_VALUE));
+var w=this.addInPort(new CABLES.Port(this,"w",CABLES.OP_PORT_TYPE_VALUE));
+var h=this.addInPort(new CABLES.Port(this,"h",CABLES.OP_PORT_TYPE_VALUE));
 
-var coordmul=this.addInPort(new Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
-var coordClamp=this.addInPort(new Port(this,"clamp",CABLES.OP_PORT_TYPE_VALUE));
+var coordmul=this.addInPort(new CABLES.Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
+var coordClamp=this.addInPort(new CABLES.Port(this,"clamp",CABLES.OP_PORT_TYPE_VALUE));
 
-var colorMul=this.addInPort(new Port(this,"color intensity",CABLES.OP_PORT_TYPE_VALUE));
+var colorMul=this.addInPort(new CABLES.Port(this,"color intensity",CABLES.OP_PORT_TYPE_VALUE));
 colorMul.set(1.0);
 var buffer = cgl.gl.createBuffer();
 
 
-var hue=this.addInPort(new Port(this,"hue",CABLES.OP_PORT_TYPE_VALUE));
+var hue=this.addInPort(new CABLES.Port(this,"hue",CABLES.OP_PORT_TYPE_VALUE));
 colorMul.set(1.0);
 
 
-var showR=this.addInPort(new Port(this,"show r",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var showG=this.addInPort(new Port(this,"show g",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var showB=this.addInPort(new Port(this,"show b",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var showR=this.addInPort(new CABLES.Port(this,"show r",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var showG=this.addInPort(new CABLES.Port(this,"show g",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var showB=this.addInPort(new CABLES.Port(this,"show b",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 
 function easeSmoothStep(perc)

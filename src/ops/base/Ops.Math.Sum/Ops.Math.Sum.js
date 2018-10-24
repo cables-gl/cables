@@ -1,4 +1,4 @@
-var result=op.addOutPort(new Port(op,"result"));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
 var number1=op.inValue("number1");
 var number2=op.inValue("number2");
 

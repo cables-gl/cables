@@ -1,24 +1,24 @@
 var cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
-op.render=op.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var texture=this.addInPort(new Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
+var texture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 
-var extrude=op.inValue("extrude",0.5);//addInPort(new Port(this,"extrude",CABLES.OP_PORT_TYPE_VALUE));
+var extrude=op.inValue("extrude",0.5);//addInPort(new CABLES.Port(this,"extrude",CABLES.OP_PORT_TYPE_VALUE));
 
 var flip=op.inValueBool("flip",true);
 
-var removeZero=op.addInPort(new Port(this,"Ignore Zero Values",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var removeZero=op.addInPort(new CABLES.Port(this,"Ignore Zero Values",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var invert=op.addInPort(new Port(this,"invert",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var invert=op.addInPort(new CABLES.Port(this,"invert",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 invert.set(false);
-var offsetX=op.addInPort(new Port(this,"offset X",CABLES.OP_PORT_TYPE_VALUE));
-var offsetY=op.addInPort(new Port(this,"offset Y",CABLES.OP_PORT_TYPE_VALUE));
+var offsetX=op.addInPort(new CABLES.Port(this,"offset X",CABLES.OP_PORT_TYPE_VALUE));
+var offsetY=op.addInPort(new CABLES.Port(this,"offset Y",CABLES.OP_PORT_TYPE_VALUE));
 
-var colorize=op.addInPort(new Port(this,"colorize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var colorizeAdd=op.addInPort(new Port(this,"colorize add",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var colorize=op.addInPort(new CABLES.Port(this,"colorize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var colorizeAdd=op.addInPort(new CABLES.Port(this,"colorize add",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 colorize.set(false);
 
 function updateColorize()
@@ -38,7 +38,7 @@ function updateInvert()
 colorize.onValueChanged=updateColorize;
 invert.onValueChanged=updateInvert;
 
-var meth=op.addInPort(new Port(this,"mode",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',
+var meth=op.addInPort(new CABLES.Port(this,"mode",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',
     values:['normal','mul xyz','add z','add y','mul y','sub z']}));
 
 

@@ -5,10 +5,10 @@
 
     this.name='LeapMotion';
     
-    var leapFrame=this.addOutPort(new Port(this,"leapFrame",CABLES.OP_PORT_TYPE_OBJECT));
+    var leapFrame=this.addOutPort(new CABLES.Port(this,"leapFrame",CABLES.OP_PORT_TYPE_OBJECT));
     leapFrame.ignoreValueSerialize=true;
     
-    var numHands=this.addOutPort(new Port(this,"num Hands"));
+    var numHands=this.addOutPort(new CABLES.Port(this,"num Hands"));
     
     
 

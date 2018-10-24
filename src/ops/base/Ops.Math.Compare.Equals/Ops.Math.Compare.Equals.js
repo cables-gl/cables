@@ -1,8 +1,8 @@
 op.name='Equals';
 
-var result = op.addOutPort(new Port(op,"result"));
-var number1 = op.addInPort(new Port(op,"number1"));
-var number2 = op.addInPort(new Port(op,"number2"));
+var result = op.addOutPort(new CABLES.Port(op,"result"));
+var number1 = op.addInPort(new CABLES.Port(op,"number1"));
+var number2 = op.addInPort(new CABLES.Port(op,"number2"));
 
 number1.set(1);
 number2.set(1);

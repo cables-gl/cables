@@ -1,12 +1,12 @@
 this.name="weather Simulation";
 var cgl=this.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var width=this.addInPort(new Port(this,"texture width"));
-var height=this.addInPort(new Port(this,"texture height"));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var width=this.addInPort(new CABLES.Port(this,"texture width"));
+var height=this.addInPort(new CABLES.Port(this,"texture height"));
 
-var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var tex=this.addOutPort(new Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var tex=this.addOutPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 
 var texture=new CGL.Texture(cgl,{isFloatingPointTexture:true});
 texture.setSize(1024,1024);

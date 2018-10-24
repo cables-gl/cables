@@ -1,7 +1,7 @@
 const render=op.inTrigger("Render");
 const trigger=op.outTrigger("Next");
 const msaa=op.inValueSelect("MSAA",["none","2x","4x","8x"],"none");
-const useVPSize=op.addInPort(new Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+const useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 const width=op.inValueInt("texture width");
 const height=op.inValueInt("texture height");

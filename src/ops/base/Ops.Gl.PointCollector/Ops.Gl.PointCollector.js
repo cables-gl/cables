@@ -1,8 +1,8 @@
 op.name="PointCollector";
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var outPoints=op.addOutPort(new Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY));
 outPoints.ignoreValueSerialize=true;
 
 var inAbsolute=op.inValueBool("Absolute",true);

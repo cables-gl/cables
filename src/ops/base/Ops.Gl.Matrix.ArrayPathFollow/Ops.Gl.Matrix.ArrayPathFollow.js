@@ -1,21 +1,21 @@
 this.name="Array Path Follow";
 
-var exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var arrayIn=this.addInPort(new Port(this,"array",CABLES.OP_PORT_TYPE_ARRAY));
-var time=this.addInPort(new Port(this,"time",CABLES.OP_PORT_TYPE_VALUE));
+var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var arrayIn=this.addInPort(new CABLES.Port(this,"array",CABLES.OP_PORT_TYPE_ARRAY));
+var time=this.addInPort(new CABLES.Port(this,"time",CABLES.OP_PORT_TYPE_VALUE));
 
-var duration=this.addInPort(new Port(this,"duration",CABLES.OP_PORT_TYPE_VALUE));
+var duration=this.addInPort(new CABLES.Port(this,"duration",CABLES.OP_PORT_TYPE_VALUE));
 duration.set(0.1);
 
-var offset=this.addInPort(new Port(this,"offset",CABLES.OP_PORT_TYPE_VALUE));
+var offset=this.addInPort(new CABLES.Port(this,"offset",CABLES.OP_PORT_TYPE_VALUE));
 offset.set(0.0);
 
-var lookAhead=this.addInPort(new Port(this,"look ahead",CABLES.OP_PORT_TYPE_VALUE));
+var lookAhead=this.addInPort(new CABLES.Port(this,"look ahead",CABLES.OP_PORT_TYPE_VALUE));
 lookAhead.set(3.0);
 
-var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var triggerLookat=this.addOutPort(new Port(this,"transform lookat",CABLES.OP_PORT_TYPE_FUNCTION));
-var idx=this.addOutPort(new Port(this,"index"));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var triggerLookat=this.addOutPort(new CABLES.Port(this,"transform lookat",CABLES.OP_PORT_TYPE_FUNCTION));
+var idx=this.addOutPort(new CABLES.Port(this,"index"));
 
 var vec=vec3.create();
 var vecn=vec3.create();

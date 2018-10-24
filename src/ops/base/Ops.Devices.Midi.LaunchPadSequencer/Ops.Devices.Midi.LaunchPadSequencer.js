@@ -1,6 +1,6 @@
-var eventIn=op.addInPort(new Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
+var eventIn=op.addInPort(new CABLES.Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
 
-var exec=this.addInPort(new Port(this,"exec",CABLES.OP_PORT_TYPE_FUNCTION));
+var exec=this.addInPort(new CABLES.Port(this,"exec",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var beatPos=op.inValueInt("Beat Position");
 var seqArr=op.inArray("Seq");

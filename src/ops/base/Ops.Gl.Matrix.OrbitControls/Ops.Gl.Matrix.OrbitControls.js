@@ -1,20 +1,20 @@
-const render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-const minDist=op.addInPort(new Port(op,"min distance",CABLES.OP_PORT_TYPE_VALUE));
-const maxDist=op.addInPort(new Port(op,"max distance",CABLES.OP_PORT_TYPE_VALUE));
+const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const minDist=op.addInPort(new CABLES.Port(op,"min distance",CABLES.OP_PORT_TYPE_VALUE));
+const maxDist=op.addInPort(new CABLES.Port(op,"max distance",CABLES.OP_PORT_TYPE_VALUE));
 
 const minRotY=op.inValue("min rot y",0);
 const maxRotY=op.inValue("max rot y",0);
 
-const initialAxis=op.addInPort(new Port(op,"initial axis y",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-const initialX=op.addInPort(new Port(op,"initial axis x",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+const initialAxis=op.addInPort(new CABLES.Port(op,"initial axis y",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+const initialX=op.addInPort(new CABLES.Port(op,"initial axis x",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 const initialRadius=op.inValue("initial radius",0);
 
 
 
-const mul=op.addInPort(new Port(op,"mul",CABLES.OP_PORT_TYPE_VALUE));
+const mul=op.addInPort(new CABLES.Port(op,"mul",CABLES.OP_PORT_TYPE_VALUE));
 
 const smoothness=op.inValueSlider("Smoothness",1.0);
-const restricted=op.addInPort(new Port(op,"restricted",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+const restricted=op.addInPort(new CABLES.Port(op,"restricted",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 const active=op.inValueBool("Active",true);
 
@@ -28,10 +28,10 @@ const pointerLock=op.inValueBool("Pointerlock",false);
 const speedX=op.inValue("Speed X",1);
 const speedY=op.inValue("Speed Y",1);
 
-const trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-const outRadius=op.addOutPort(new Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
-const outYDeg=op.addOutPort(new Port(op,"Rot Y",CABLES.OP_PORT_TYPE_VALUE));
-const outXDeg=op.addOutPort(new Port(op,"Rot X",CABLES.OP_PORT_TYPE_VALUE));
+const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const outRadius=op.addOutPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
+const outYDeg=op.addOutPort(new CABLES.Port(op,"Rot Y",CABLES.OP_PORT_TYPE_VALUE));
+const outXDeg=op.addOutPort(new CABLES.Port(op,"Rot X",CABLES.OP_PORT_TYPE_VALUE));
 
 restricted.set(true);
 mul.set(1);

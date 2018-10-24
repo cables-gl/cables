@@ -8,7 +8,7 @@ var percent=op.inValueSlider('percent');
 var fill=op.inValueBool("Fill");
 
 var trigger=op.outFunction('trigger');
-var geomOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize=true;
 var cgl=op.patch.cgl;
@@ -164,7 +164,7 @@ function calc()
     mesh.setGeom(geom);
 }
 
-// var mapping=op.addInPort(new Port(op,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
+// var mapping=op.addInPort(new CABLES.Port(op,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
 // mapping.set('flat');
 // mapping.onValueChange(calc);
 

@@ -1,14 +1,14 @@
 op.name='ColorValue';
 
-var r=op.addInPort(new Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var outR=op.addOutPort(new Port(op,"outr",CABLES.OP_PORT_TYPE_VALUE));
-var outG=op.addOutPort(new Port(op,"outg",CABLES.OP_PORT_TYPE_VALUE));
-var outB=op.addOutPort(new Port(op,"outb",CABLES.OP_PORT_TYPE_VALUE));
-var outA=op.addOutPort(new Port(op,"outa",CABLES.OP_PORT_TYPE_VALUE));
+var outR=op.addOutPort(new CABLES.Port(op,"outr",CABLES.OP_PORT_TYPE_VALUE));
+var outG=op.addOutPort(new CABLES.Port(op,"outg",CABLES.OP_PORT_TYPE_VALUE));
+var outB=op.addOutPort(new CABLES.Port(op,"outb",CABLES.OP_PORT_TYPE_VALUE));
+var outA=op.addOutPort(new CABLES.Port(op,"outa",CABLES.OP_PORT_TYPE_VALUE));
 var outHex = op.outValue('Hex', '000000');
 var arrOut=op.outArray("Array");
 

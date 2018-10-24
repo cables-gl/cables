@@ -1,11 +1,11 @@
 
 var exe=op.inFunction("Render");
-var filename=this.addInPort(new Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
+var filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
 var text=op.inValueString("Text","cables");
 var inSize=op.inValue("Depth",0.2);
 var inSpace=op.inValue("Spacing",0.1);
 
-var next=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var next=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.outObject("Geometry");
 var outWidth=op.outValue("Width");
 

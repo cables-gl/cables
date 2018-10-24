@@ -1,9 +1,9 @@
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var geometry=op.addInPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var geometry=op.addInPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
-var mul=op.addInPort(new Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var mul=op.addInPort(new CABLES.Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 mul.set(0.1);
 

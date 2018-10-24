@@ -5,7 +5,7 @@ if(!window.audioContext)
         else audioContext = new AudioContext();
 
 // In Ports
-var audioIn=this.addInPort(new Port(this,"audio in",CABLES.OP_PORT_TYPE_OBJECT));
+var audioIn=this.addInPort(new CABLES.Port(this,"audio in",CABLES.OP_PORT_TYPE_OBJECT));
 
 // Constants - see http://webaudio.github.io/web-audio-api/#idl-def-DynamicsCompressorNode
 var ATTACK_MIN = 0.0;
@@ -24,17 +24,17 @@ var THRESHOLD_MIN = -100;
 var THRESHOLD_MAX = 0;
 var THRESHOLD_DEF = -24;
 
-var threshold=this.addInPort(new Port(this,"threshold",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": THRESHOLD_MIN, "max": THRESHOLD_MAX}));
-var knee=this.addInPort(new Port(this,"knee",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": KNEE_MIN, "max": KNEE_MAX}));
-var ratio=this.addInPort(new Port(this,"ratio",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": RATIO_MIN, "max": RATIO_MAX}));
-var attack=this.addInPort(new Port(this,"attack",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": ATTACK_MIN, "max": ATTACK_MAX}));
-var release=this.addInPort(new Port(this,"release",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": RELEASE_MIN, "max": RELEASE_MAX}));
+var threshold=this.addInPort(new CABLES.Port(this,"threshold",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": THRESHOLD_MIN, "max": THRESHOLD_MAX}));
+var knee=this.addInPort(new CABLES.Port(this,"knee",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": KNEE_MIN, "max": KNEE_MAX}));
+var ratio=this.addInPort(new CABLES.Port(this,"ratio",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": RATIO_MIN, "max": RATIO_MAX}));
+var attack=this.addInPort(new CABLES.Port(this,"attack",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": ATTACK_MIN, "max": ATTACK_MAX}));
+var release=this.addInPort(new CABLES.Port(this,"release",CABLES.OP_PORT_TYPE_VALUE, {"display": "range", "min": RELEASE_MIN, "max": RELEASE_MAX}));
 
-this.exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+this.exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 // Out Ports
-var audioOut=this.addOutPort(new Port(this,"audio out",CABLES.OP_PORT_TYPE_OBJECT));
-var reduction=this.addOutPort(new Port(this,"reduction",CABLES.OP_PORT_TYPE_VALUE));
+var audioOut=this.addOutPort(new CABLES.Port(this,"audio out",CABLES.OP_PORT_TYPE_OBJECT));
+var reduction=this.addOutPort(new CABLES.Port(this,"reduction",CABLES.OP_PORT_TYPE_VALUE));
 
 // Reference needed to disconnect
 var oldAudioIn = null;
