@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.SplineDeform"
+    },
+    "summary": "Deform a mesh along a spline",
+    "docs": {
+        "ports": []
     }
 }

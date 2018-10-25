@@ -1,5 +1,5 @@
 {
-    "updated": 1517955212901,
+    "updated": 1540457848276,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "5593ea29-19d3-4161-af0c-b8d62079487d",
@@ -14,10 +14,11 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Sum"
+                "name": "Sum",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Array.ArraySum"
+        "name": "Ops.Array.ArraySumUp"
     },
     "summary": "sum of every number in an array"
 }
