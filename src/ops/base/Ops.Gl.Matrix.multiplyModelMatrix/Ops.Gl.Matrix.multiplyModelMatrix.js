@@ -1,10 +1,10 @@
 var cgl=op.patch.cgl;
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var inIdentity=op.inValueBool("Identity",false);
-var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var m=mat4.create();
-var matrix=op.addInPort(new Port(op,"matrix",OP_PORT_TYPE_ARRAY));
+var matrix=op.addInPort(new CABLES.Port(op,"matrix",CABLES.OP_PORT_TYPE_ARRAY));
 
 render.onTriggered=function()
 {

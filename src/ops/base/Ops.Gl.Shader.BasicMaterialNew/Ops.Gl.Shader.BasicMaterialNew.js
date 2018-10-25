@@ -1,8 +1,8 @@
 
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 shaderOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;
@@ -52,19 +52,19 @@ function doRender()
 {
     // rgba colors
     
-    var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
+    var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
     r.set(Math.random());
     r.uniform=new CGL.Uniform(shader,'f','r',r);
     
-    var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range'}));
+    var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
     g.set(Math.random());
     g.uniform=new CGL.Uniform(shader,'f','g',g);
     
-    var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.set(Math.random());
     b.uniform=new CGL.Uniform(shader,'f','b',b);
     
-    var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range'}));
+    var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
     a.uniform=new CGL.Uniform(shader,'f','a',a);
     a.set(1.0);
     
@@ -73,7 +73,7 @@ function doRender()
 {
     // diffuse outTexture
     
-    var diffuseTexture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var diffuseTexture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var diffuseTextureUniform=null;
     shader.bindTextures=bindTextures;
     
@@ -97,7 +97,7 @@ function doRender()
 
 {
     // opacity texture 
-    op.textureOpacity=op.addInPort(new Port(op,"textureOpacity",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    op.textureOpacity=op.addInPort(new CABLES.Port(op,"textureOpacity",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     op.textureOpacityUniform=null;
     
     op.alphaMaskSource=op.inValueSelect("Alpha Mask Source",["Alpha Channel","Luminance","R","G","B"],"Luminance");
@@ -145,7 +145,7 @@ function doRender()
 
 
 
-op.colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+op.colorizeTexture=op.addInPort(new CABLES.Port(op,"colorizeTexture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 op.colorizeTexture.set(false);
 op.colorizeTexture.onChange=function()
 {
@@ -154,7 +154,7 @@ op.colorizeTexture.onChange=function()
 };
 
 
-op.doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+op.doBillboard=op.addInPort(new CABLES.Port(op,"billboard",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 op.doBillboard.set(false);
 op.doBillboard.onChange=function()
 {
@@ -170,7 +170,7 @@ texCoordAlpha.onChange=function()
         else shader.removeDefine('TRANSFORMALPHATEXCOORDS');
 };
 
-var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var preMultipliedAlpha=op.addInPort(new CABLES.Port(op,"preMultiplied alpha",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 function updateTexRepeat()
 {
@@ -192,10 +192,10 @@ function updateTexRepeat()
 {
     // texture coords
     
-    var diffuseRepeatX=op.addInPort(new Port(op,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
-    var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
-    var diffuseOffsetX=op.addInPort(new Port(op,"Tex Offset X",OP_PORT_TYPE_VALUE));
-    var diffuseOffsetY=op.addInPort(new Port(op,"Tex Offset Y",OP_PORT_TYPE_VALUE));
+    var diffuseRepeatX=op.addInPort(new CABLES.Port(op,"diffuseRepeatX",CABLES.OP_PORT_TYPE_VALUE));
+    var diffuseRepeatY=op.addInPort(new CABLES.Port(op,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
+    var diffuseOffsetX=op.addInPort(new CABLES.Port(op,"Tex Offset X",CABLES.OP_PORT_TYPE_VALUE));
+    var diffuseOffsetY=op.addInPort(new CABLES.Port(op,"Tex Offset Y",CABLES.OP_PORT_TYPE_VALUE));
     
     diffuseRepeatX.onChange=updateTexRepeat;
     diffuseRepeatY.onChange=updateTexRepeat;

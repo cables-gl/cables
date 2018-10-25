@@ -1,13 +1,13 @@
 var increment = op.inFunctionButton("Increment");
 var decrement = op.inFunctionButton("Decrement");
-var inLength=op.addInPort(new Port(op,"Length",OP_PORT_TYPE_VALUE));
-// var reset=op.addInPort(new Port(op,"Reset",OP_PORT_TYPE_FUNCTION));
+var inLength=op.addInPort(new CABLES.Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
+// var reset=op.addInPort(new CABLES.Port(op,"Reset",CABLES.OP_PORT_TYPE_FUNCTION));
 var reset=op.inFunctionButton("Reset");
 
 
 var inMode=op.inValueSelect("Mode",["Rewind","Stop at Max"]);
 
-var value=op.addOutPort(new Port(op,"Value",OP_PORT_TYPE_VALUE));
+var value=op.addOutPort(new CABLES.Port(op,"Value",CABLES.OP_PORT_TYPE_VALUE));
 
 var outRestarted=op.outFunction("Restarted");
 

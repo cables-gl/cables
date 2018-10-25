@@ -17,7 +17,7 @@ const uniPass=new CGL.Uniform(shader,'f','pass',0);
 const uniAmount=new CGL.Uniform(shader,'f','amount',amount.get());
 amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
 
-var direction=op.addInPort(new Port(op,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+var direction=op.addInPort(new CABLES.Port(op,"direction",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
 var dir=0;
 direction.set('both');
 direction.onValueChange(function()

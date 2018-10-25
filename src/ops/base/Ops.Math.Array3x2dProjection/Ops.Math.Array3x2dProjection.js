@@ -2,15 +2,15 @@
 var exe=op.inFunction("Exec");
 var inArr=op.inArray("Array3x");
 
-var fov=this.addInPort(new Port(this,"fov",OP_PORT_TYPE_VALUE));
-var w=this.addInPort(new Port(this,"w",OP_PORT_TYPE_VALUE));
-var h=this.addInPort(new Port(this,"h",OP_PORT_TYPE_VALUE));
+var fov=this.addInPort(new CABLES.Port(this,"fov",CABLES.OP_PORT_TYPE_VALUE));
+var w=this.addInPort(new CABLES.Port(this,"w",CABLES.OP_PORT_TYPE_VALUE));
+var h=this.addInPort(new CABLES.Port(this,"h",CABLES.OP_PORT_TYPE_VALUE));
 
-var px=this.addInPort(new Port(this,"Pos X",OP_PORT_TYPE_VALUE));
-var py=this.addInPort(new Port(this,"Pos Y",OP_PORT_TYPE_VALUE));
+var px=this.addInPort(new CABLES.Port(this,"Pos X",CABLES.OP_PORT_TYPE_VALUE));
+var py=this.addInPort(new CABLES.Port(this,"Pos Y",CABLES.OP_PORT_TYPE_VALUE));
 
-var coordmul=this.addInPort(new Port(this,"mul",OP_PORT_TYPE_VALUE));
-// var coordClamp=this.addInPort(new Port(this,"clamp",OP_PORT_TYPE_VALUE));
+var coordmul=this.addInPort(new CABLES.Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
+// var coordClamp=this.addInPort(new CABLES.Port(this,"clamp",CABLES.OP_PORT_TYPE_VALUE));
 
 exe.onTriggered=function()
 {

@@ -52,7 +52,7 @@ var node = new Tone.MembraneSynth();
 
 // inputs
 //var oscillatorPort = op.inObject("Oscillator");
-var oscillatorPort = op.addInPort( new Port( op, "Oscillator Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: OSCILLATOR_TYPES } ) );
+var oscillatorPort = op.addInPort( new Port( op, "Oscillator Type", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: OSCILLATOR_TYPES } ) );
 oscillatorPort.set(OSCILLATOR_TYPE_DEFAULT);
 var envelopePort = op.inObject("Envelope");
 var octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);

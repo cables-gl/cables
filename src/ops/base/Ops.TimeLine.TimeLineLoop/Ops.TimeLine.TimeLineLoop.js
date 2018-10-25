@@ -1,6 +1,6 @@
-var execute=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
-var duration=op.addInPort(new Port(this,"duration"));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var execute=op.addInPort(new CABLES.Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
+var duration=op.addInPort(new CABLES.Port(this,"duration"));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 duration.set(2);
 execute.onTriggered=function()
 {

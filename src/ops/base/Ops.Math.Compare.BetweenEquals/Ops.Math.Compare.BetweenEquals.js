@@ -1,8 +1,8 @@
-var number = op.addInPort(new Port(this,"Value"));
-var range1 = op.addInPort(new Port(this,"Range 1"));
-var range2 = op.addInPort(new Port(this,"Range 2"));
+var number = op.addInPort(new CABLES.Port(this,"Value"));
+var range1 = op.addInPort(new CABLES.Port(this,"Range 1"));
+var range2 = op.addInPort(new CABLES.Port(this,"Range 2"));
 
-var result = op.addOutPort(new Port(this,"Result"));
+var result = op.addOutPort(new CABLES.Port(this,"Result"));
 
 number.set(2.0);
 range1.set(1.0);

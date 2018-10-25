@@ -102,7 +102,7 @@ It is also possible to define the syntax highlighting for the editor-tab:
 
 ```javascript
 var styleSheetPort = op.addInPort(
-    new Port(op, "Stylesheet", OP_PORT_TYPE_VALUE, {
+    new CABLES.Port(op, "Stylesheet", OP_PORT_TYPE_VALUE, {
         display: 'editor',
         editorSyntax: 'css'
     })
@@ -159,7 +159,7 @@ myPort.data.someValue = 1;
 Additionally you can create a **read-only** port, which is visible, but cannot be edited.
 
 ```javascript
-op.patchId = op.addInPort(new Port(op, "Patch ID", OP_PORT_TYPE_VALUE, { display: 'readonly' }));
+op.patchId = op.addInPort(new CABLES.Port(op, "Patch ID", OP_PORT_TYPE_VALUE, { display: 'readonly' }));
 ```
 
 ## Port linking

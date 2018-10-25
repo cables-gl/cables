@@ -33,9 +33,9 @@ var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node
 var detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, {"display": "range", "min": DETUNE_MIN, "max": DETUNE_MAX}, DETUNE_DEFAULT);
 var gainPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Gain", node.gain, {"display": "range", "min": GAIN_MIN, "max": GAIN_MAX}, GAIN_DEFAULT);
 var qPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Q", node.Q, {"display": "range", "min": Q_MIN, "max": Q_MAX}, Q_DEFAULT);
-var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES }, TYPE_DEFAULT ) );
+var typePort = op.addInPort( new Port( op, "Type", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: TYPES }, TYPE_DEFAULT ) );
 typePort.set(TYPE_DEFAULT);
-var rolloffPort = op.addInPort( new Port( op, "Rolloff", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: ROLLOFF_VALUES }, ROLLOFF_DEFAULT ) );
+var rolloffPort = op.addInPort( new Port( op, "Rolloff", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: ROLLOFF_VALUES }, ROLLOFF_DEFAULT ) );
 rolloffPort.set(ROLLOFF_DEFAULT);
 
 // change listeneers

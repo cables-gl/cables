@@ -1,13 +1,13 @@
 
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var centerInCanvas=op.addInPort(new Port(op,"Center in Canvas",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var centerInCanvas=op.addInPort(new CABLES.Port(op,"Center in Canvas",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 var flipY=op.inValueBool("Flip Y");
 
 var inTexture=op.inTexture("Texture");
 
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var mesh=null;

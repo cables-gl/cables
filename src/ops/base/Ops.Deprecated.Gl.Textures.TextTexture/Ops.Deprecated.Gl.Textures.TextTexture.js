@@ -1,20 +1,20 @@
 
 op.name='TextureText';
-var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
-var inFontSize=op.addInPort(new Port(op,"fontSize"));
-var maximize=op.addInPort(new Port(op,"Maximize Size",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var texWidth=op.addInPort(new Port(op,"texture width"));
-var texHeight=op.addInPort(new Port(op,"texture height"));
-var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
-var valign=op.addInPort(new Port(op,"vertical align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['top','center','bottom']}));
-var font=op.addInPort(new Port(op,"font",OP_PORT_TYPE_VALUE,{type:'string'}));
-var lineDistance=op.addInPort(new Port(op,"line distance"));
-var border=op.addInPort(new Port(op,"border"));
+var text=op.addInPort(new CABLES.Port(op,"text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
+var inFontSize=op.addInPort(new CABLES.Port(op,"fontSize"));
+var maximize=op.addInPort(new CABLES.Port(op,"Maximize Size",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var texWidth=op.addInPort(new CABLES.Port(op,"texture width"));
+var texHeight=op.addInPort(new CABLES.Port(op,"texture height"));
+var align=op.addInPort(new CABLES.Port(op,"align",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
+var valign=op.addInPort(new CABLES.Port(op,"vertical align",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['top','center','bottom']}));
+var font=op.addInPort(new CABLES.Port(op,"font",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var lineDistance=op.addInPort(new CABLES.Port(op,"line distance"));
+var border=op.addInPort(new CABLES.Port(op,"border"));
 var doRefresh=op.inFunction("Refresh");
 
-// var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
+// var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");
-var outRatio=op.addOutPort(new Port(op,"Ratio",OP_PORT_TYPE_VALUE));
+var outRatio=op.addOutPort(new CABLES.Port(op,"Ratio",CABLES.OP_PORT_TYPE_VALUE));
 var cgl=op.patch.cgl;
 
 doRefresh.onTriggered=refresh;

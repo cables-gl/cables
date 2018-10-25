@@ -2,18 +2,18 @@ var self=this;
 var cgl=this.patch.cgl;
 
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var depthTex=this.addInPort(new Port(this,"depth texture",OP_PORT_TYPE_TEXTURE));
+var depthTex=this.addInPort(new CABLES.Port(this,"depth texture",CABLES.OP_PORT_TYPE_TEXTURE));
 
-this.nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
-this.farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
+this.nearPlane=this.addInPort(new CABLES.Port(this,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
+this.farPlane=this.addInPort(new CABLES.Port(this,"farplane",CABLES.OP_PORT_TYPE_VALUE));
 
-var depthStart=this.addInPort(new Port(this,"depth start",OP_PORT_TYPE_VALUE,{"display":"range"}));
-var depthEnd=this.addInPort(new Port(this,"depth end",OP_PORT_TYPE_VALUE,{"display":"range"}));
+var depthStart=this.addInPort(new CABLES.Port(this,"depth start",CABLES.OP_PORT_TYPE_VALUE,{"display":"range"}));
+var depthEnd=this.addInPort(new CABLES.Port(this,"depth end",CABLES.OP_PORT_TYPE_VALUE,{"display":"range"}));
 
-this.iterations=this.addInPort(new Port(this,"iterations",OP_PORT_TYPE_VALUE));
+this.iterations=this.addInPort(new CABLES.Port(this,"iterations",CABLES.OP_PORT_TYPE_VALUE));
 this.iterations.val=10;
 
 var shader=new CGL.Shader(cgl);
@@ -115,7 +115,7 @@ var uniHeight=new CGL.Uniform(shader,'f','height',0);
 var uniDepthStart=new CGL.Uniform(shader,'f','depthStart',0);
 var uniDepthEnd=new CGL.Uniform(shader,'f','depthEnd',50);
 
-var direction=this.addInPort(new Port(this,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+var direction=this.addInPort(new CABLES.Port(this,"direction",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
 var dir=0;
 direction.set('both');
 direction.onValueChange(function()

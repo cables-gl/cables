@@ -1,14 +1,14 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
 
 
-op.texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+op.texture=op.addInPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 op.textureUniform=null;
 
 var inMode=op.inValueSelect("Mode",["G","R"]);
 
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var startTime=Date.now()/1000;
@@ -209,23 +209,23 @@ op.texture.onValueChanged=function()
     }
 };
 
-var w=op.addInPort(new Port(op,"weightMul",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var w=op.addInPort(new CABLES.Port(op,"weightMul",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 w.set(0.6);
 w.uniform=new CGL.Uniform(shader,'f','weightMul',w);
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
 r.set(0.467);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 g.set(0.836);
 g.uniform=new CGL.Uniform(shader,'f','g',g);
 
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 b.set(0.098);
 b.uniform=new CGL.Uniform(shader,'f','b',b);
 
-var white=op.addInPort(new Port(op,"white",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var white=op.addInPort(new CABLES.Port(op,"white",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 white.set(0.0);
 white.uniform=new CGL.Uniform(shader,'f','white',white);
 
@@ -233,8 +233,8 @@ white.uniform=new CGL.Uniform(shader,'f','white',white);
 
 
 
-var diffuseRepeatX=op.addInPort(new Port(op,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
-var diffuseRepeatY=op.addInPort(new Port(op,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
+var diffuseRepeatX=op.addInPort(new CABLES.Port(op,"diffuseRepeatX",CABLES.OP_PORT_TYPE_VALUE));
+var diffuseRepeatY=op.addInPort(new CABLES.Port(op,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
 diffuseRepeatX.set(1);
 diffuseRepeatY.set(1);
 
@@ -242,8 +242,8 @@ diffuseRepeatX.onValueChanged=updateTexRepeat;
 diffuseRepeatY.onValueChanged=updateTexRepeat;
 
 
-var diffuseOffsetX=op.addInPort(new Port(op,"Tex Offset X",OP_PORT_TYPE_VALUE));
-var diffuseOffsetY=op.addInPort(new Port(op,"Tex Offset Y",OP_PORT_TYPE_VALUE));
+var diffuseOffsetX=op.addInPort(new CABLES.Port(op,"Tex Offset X",CABLES.OP_PORT_TYPE_VALUE));
+var diffuseOffsetY=op.addInPort(new CABLES.Port(op,"Tex Offset Y",CABLES.OP_PORT_TYPE_VALUE));
 diffuseOffsetX.set(0);
 diffuseOffsetY.set(0);
 

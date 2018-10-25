@@ -20,11 +20,11 @@ var STOP_TIME_DEFAULT = "+0";
 
 // in ports
 var updatePort = op.inFunction("Update");
-var bpmPort = op.addInPort( new Port( this, "BPM", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 300 } ));
-var swingPort = op.addInPort( new Port( this, "Swing", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
+var bpmPort = op.addInPort( new Port( this, "BPM", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': 1, 'max': 300 } ));
+var swingPort = op.addInPort( new Port( this, "Swing", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': 0, 'max': 1 } ));
 var swingSubdivisionPort = op.inValueString("Swing Subdivision");
 var timeSignaturePort = op.inValue("Time Division");
-var loopPort = op.addInPort( new Port( op, "Loop", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var loopPort = op.addInPort( new Port( op, "Loop", CABLES.OP_PORT_TYPE_, { display: 'bool' } ) );
 var loopStartPort = op.inValueString("Loop Start");
 var loopEndPort = op.inValueString("Loop End");
 var ppqPort = op.inValue("Pulses Per Quarter Note");

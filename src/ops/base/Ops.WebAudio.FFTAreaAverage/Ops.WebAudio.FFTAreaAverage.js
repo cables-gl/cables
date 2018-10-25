@@ -1,15 +1,15 @@
 op.name="FFTAreaAverage";
 
-var fftArr=this.addInPort(new Port(this, "FFT Array",OP_PORT_TYPE_ARRAY));
-var refresh=this.addInPort(new Port(this,"refresh",OP_PORT_TYPE_FUNCTION));
-var x=this.addInPort(new Port(this,"x",OP_PORT_TYPE_VALUE,{display:'range'}));
-var y=this.addInPort(new Port(this,"y",OP_PORT_TYPE_VALUE,{display:'range'}));
-var w=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
-var h=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE,{display:'range'}));
+var fftArr=this.addInPort(new CABLES.Port(this, "FFT Array",CABLES.OP_PORT_TYPE_ARRAY));
+var refresh=this.addInPort(new CABLES.Port(this,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
+var x=this.addInPort(new CABLES.Port(this,"x",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var y=this.addInPort(new CABLES.Port(this,"y",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var w=this.addInPort(new CABLES.Port(this,"width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var h=this.addInPort(new CABLES.Port(this,"height",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
-// var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
+// var texOut=op.addOutPort(new CABLES.Port(op,"texture_out",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texOut=op.outTexture("texture_out");
-var value=op.addOutPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
+var value=op.addOutPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE));
 
 w.set(0.2);
 h.set(0.2);

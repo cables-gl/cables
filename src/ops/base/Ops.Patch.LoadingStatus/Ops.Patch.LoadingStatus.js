@@ -2,17 +2,17 @@ var self=this;
 var cgl=op.patch.cgl;
 var patch=op.patch;
 
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.finished=this.addOutPort(new Port(this,"finished",OP_PORT_TYPE_FUNCTION));
-var result=this.addOutPort(new Port(this,"status",OP_PORT_TYPE_VALUE));
+this.exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+this.finished=this.addOutPort(new CABLES.Port(this,"finished",CABLES.OP_PORT_TYPE_FUNCTION));
+var result=this.addOutPort(new CABLES.Port(this,"status",CABLES.OP_PORT_TYPE_VALUE));
 var isFinishedPort = op.outValue('all loaded', false);
-var preRenderStatus=this.addOutPort(new Port(this,"preRenderStatus",OP_PORT_TYPE_VALUE));
-var preRenderTimeFrames=this.addInPort(new Port(this,"preRenderTimes",OP_PORT_TYPE_VALUE));
+var preRenderStatus=this.addOutPort(new CABLES.Port(this,"preRenderStatus",CABLES.OP_PORT_TYPE_VALUE));
+var preRenderTimeFrames=this.addInPort(new CABLES.Port(this,"preRenderTimes",CABLES.OP_PORT_TYPE_VALUE));
 var preRenderOps=op.inValueBool("PreRender Ops");
 preRenderStatus.set(0);
-this.numAssets=this.addOutPort(new Port(this,"numAssets",OP_PORT_TYPE_VALUE));
-this.loading=this.addOutPort(new Port(this,"loading",OP_PORT_TYPE_FUNCTION));
-var loadingFinished=op.outFunction("loading finished");//this.addOutPort(new Port(this,"loading finished",OP_PORT_TYPE_FUNCTION));
+this.numAssets=this.addOutPort(new CABLES.Port(this,"numAssets",CABLES.OP_PORT_TYPE_VALUE));
+this.loading=this.addOutPort(new CABLES.Port(this,"loading",CABLES.OP_PORT_TYPE_FUNCTION));
+var loadingFinished=op.outFunction("loading finished");//this.addOutPort(new CABLES.Port(this,"loading finished",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var finishedAll=false;
 var preRenderTimes=[];

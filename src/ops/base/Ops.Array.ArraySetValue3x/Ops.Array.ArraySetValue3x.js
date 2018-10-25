@@ -1,12 +1,12 @@
 
 var exe=op.inFunctionButton("exe");
 
-var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
-var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
-var value1=op.addInPort(new Port(op, "Value 1",OP_PORT_TYPE_VALUE));
-var value2=op.addInPort(new Port(op, "Value 2",OP_PORT_TYPE_VALUE));
-var value3=op.addInPort(new Port(op, "Value 3",OP_PORT_TYPE_VALUE));
-var values=op.addOutPort(new Port(op, "values",OP_PORT_TYPE_ARRAY));
+var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
+var index=op.addInPort(new CABLES.Port(op, "index",CABLES.OP_PORT_TYPE_VALUE,{type:'int'}));
+var value1=op.addInPort(new CABLES.Port(op, "Value 1",CABLES.OP_PORT_TYPE_VALUE));
+var value2=op.addInPort(new CABLES.Port(op, "Value 2",CABLES.OP_PORT_TYPE_VALUE));
+var value3=op.addInPort(new CABLES.Port(op, "Value 3",CABLES.OP_PORT_TYPE_VALUE));
+var values=op.addOutPort(new CABLES.Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
 
 function updateIndex()
 {

@@ -1,16 +1,16 @@
 
-op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var geometry=op.addInPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
-var seed=op.addInPort(new Port(op,"random seed",OP_PORT_TYPE_VALUE));
-var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
+op.render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var geometry=op.addInPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var seed=op.addInPort(new CABLES.Port(op,"random seed",CABLES.OP_PORT_TYPE_VALUE));
+var num=op.addInPort(new CABLES.Port(op,"num",CABLES.OP_PORT_TYPE_VALUE));
 
 var rotX=op.inValueBool("Rotate X",true);
 var rotY=op.inValueBool("Rotate Y",true);
 var rotZ=op.inValueBool("Rotate Z",true);
 
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var index=op.addOutPort(new Port(op,"index",OP_PORT_TYPE_VALUE));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var index=op.addOutPort(new CABLES.Port(op,"index",CABLES.OP_PORT_TYPE_VALUE));
 
 var outPoints=op.outArray("Points");
 

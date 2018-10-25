@@ -4,7 +4,7 @@ var render=op.inFunction('render');
 var trigger=op.outFunction('trigger');
 
 var m=mat4.create();
-var matrix=op.addOutPort(new Port(this,"matrix",OP_PORT_TYPE_ARRAY));
+var matrix=op.addOutPort(new CABLES.Port(this,"matrix",CABLES.OP_PORT_TYPE_ARRAY));
 
 render.onTriggered=function()
 {

@@ -79,8 +79,8 @@ CABLES.InertiaAnim.prototype.set=function(_value)
 
 var canvas=op.patch.cgl.canvas;
 
-var outX=op.addOutPort(new Port(op,"x"));
-var outY=op.addOutPort(new Port(op,"y"));
+var outX=op.addOutPort(new CABLES.Port(op,"x"));
+var outY=op.addOutPort(new CABLES.Port(op,"y"));
 var flipY=op.inValueBool("Flip Y",true);
 var kinetic=op.inValueBool("Inertia Movement",true);
 var limit=op.inValueBool("Limit");

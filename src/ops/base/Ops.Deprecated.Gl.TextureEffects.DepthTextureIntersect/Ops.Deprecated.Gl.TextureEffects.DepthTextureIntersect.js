@@ -2,15 +2,15 @@ var cgl=this.patch.cgl;
 
 this.name='DepthTexture';
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var image=this.addInPort(new Port(this,"image",OP_PORT_TYPE_TEXTURE));
-var farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
-var nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var image=this.addInPort(new CABLES.Port(this,"image",CABLES.OP_PORT_TYPE_TEXTURE));
+var farPlane=this.addInPort(new CABLES.Port(this,"farplane",CABLES.OP_PORT_TYPE_VALUE));
+var nearPlane=this.addInPort(new CABLES.Port(this,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
 
 farPlane.set(100.0);
 nearPlane.set(0.1);
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
 // this.onLoaded=shader.compile;

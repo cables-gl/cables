@@ -1,12 +1,12 @@
-CABLES.Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
 this.name='Blur';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.iterations=this.addInPort(new Port(this,"iterations",OP_PORT_TYPE_VALUE));
+this.iterations=this.addInPort(new CABLES.Port(this,"iterations",CABLES.OP_PORT_TYPE_VALUE));
 this.iterations.val=10;
 
 var shader=new CGL.Shader(cgl);
@@ -53,7 +53,7 @@ var uniDirY=new CGL.Uniform(shader,'f','dirY',0);
 var uniWidth=new CGL.Uniform(shader,'f','width',0);
 var uniHeight=new CGL.Uniform(shader,'f','height',0);
 
-var direction=this.addInPort(new Port(this,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+var direction=this.addInPort(new CABLES.Port(this,"direction",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
 var dir=0;
 direction.set('both');
 direction.onValueChange(function()

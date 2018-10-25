@@ -1,32 +1,32 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 
 this.name='mouse';
-this.mouseX=this.addOutPort(new Port(this,"x",OP_PORT_TYPE_VALUE));
-this.mouseY=this.addOutPort(new Port(this,"y",OP_PORT_TYPE_VALUE));
-this.mouseDown=this.addOutPort(new Port(this,"button down",OP_PORT_TYPE_VALUE));
-this.mouseClick=this.addOutPort(new Port(this,"click",OP_PORT_TYPE_VALUE));
-this.mouseOver=this.addOutPort(new Port(this,"mouseOver",OP_PORT_TYPE_VALUE));
-this.normalize=this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
+this.mouseX=this.addOutPort(new CABLES.Port(this,"x",CABLES.OP_PORT_TYPE_VALUE));
+this.mouseY=this.addOutPort(new CABLES.Port(this,"y",CABLES.OP_PORT_TYPE_VALUE));
+this.mouseDown=this.addOutPort(new CABLES.Port(this,"button down",CABLES.OP_PORT_TYPE_VALUE));
+this.mouseClick=this.addOutPort(new CABLES.Port(this,"click",CABLES.OP_PORT_TYPE_VALUE));
+this.mouseOver=this.addOutPort(new CABLES.Port(this,"mouseOver",CABLES.OP_PORT_TYPE_VALUE));
+this.normalize=this.addInPort(new CABLES.Port(this,"normalize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-this.smooth=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.smoothSpeed=this.addInPort(new Port(this,"smoothSpeed",OP_PORT_TYPE_VALUE));
+this.smooth=this.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+this.smoothSpeed=this.addInPort(new CABLES.Port(this,"smoothSpeed",CABLES.OP_PORT_TYPE_VALUE));
 
-this.multiplyX=this.addInPort(new Port(this,"multiply x",OP_PORT_TYPE_VALUE));
+this.multiplyX=this.addInPort(new CABLES.Port(this,"multiply x",CABLES.OP_PORT_TYPE_VALUE));
 this.multiplyX.set(1.0);
 
-this.multiplyY=this.addInPort(new Port(this,"multiply y",OP_PORT_TYPE_VALUE));
+this.multiplyY=this.addInPort(new CABLES.Port(this,"multiply y",CABLES.OP_PORT_TYPE_VALUE));
 this.multiplyY.set(1.0);
 
 
-this.minY=this.addInPort(new Port(this,"minY",OP_PORT_TYPE_VALUE));
-this.maxY=this.addInPort(new Port(this,"maxY",OP_PORT_TYPE_VALUE));
+this.minY=this.addInPort(new CABLES.Port(this,"minY",CABLES.OP_PORT_TYPE_VALUE));
+this.maxY=this.addInPort(new CABLES.Port(this,"maxY",CABLES.OP_PORT_TYPE_VALUE));
 this.minY.set(-100);
 this.maxY.set( 100);
 
-this.minX=this.addInPort(new Port(this,"minX",OP_PORT_TYPE_VALUE));
-this.maxX=this.addInPort(new Port(this,"maxX",OP_PORT_TYPE_VALUE));
+this.minX=this.addInPort(new CABLES.Port(this,"minX",CABLES.OP_PORT_TYPE_VALUE));
+this.maxX=this.addInPort(new CABLES.Port(this,"maxX",CABLES.OP_PORT_TYPE_VALUE));
 this.minX.set(-100);
 this.maxX.set( 100);
 

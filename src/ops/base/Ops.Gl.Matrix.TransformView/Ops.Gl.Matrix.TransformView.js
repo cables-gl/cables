@@ -1,17 +1,17 @@
 op.name="TransformView";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var posX=op.addInPort(new Port(op,"posX"),0);
-var posY=op.addInPort(new Port(op,"posY"),0);
-var posZ=op.addInPort(new Port(op,"posZ"),0);
+var posX=op.addInPort(new CABLES.Port(op,"posX"),0);
+var posY=op.addInPort(new CABLES.Port(op,"posY"),0);
+var posZ=op.addInPort(new CABLES.Port(op,"posZ"),0);
 
-var scale=op.addInPort(new Port(op,"scale"));
+var scale=op.addInPort(new CABLES.Port(op,"scale"));
 
-var rotX=op.addInPort(new Port(op,"rotX"));
-var rotY=op.addInPort(new Port(op,"rotY"));
-var rotZ=op.addInPort(new Port(op,"rotZ"));
+var rotX=op.addInPort(new CABLES.Port(op,"rotX"));
+var rotY=op.addInPort(new CABLES.Port(op,"rotY"));
+var rotZ=op.addInPort(new CABLES.Port(op,"rotZ"));
 
 var cgl=op.patch.cgl;
 var vPos=vec3.create();

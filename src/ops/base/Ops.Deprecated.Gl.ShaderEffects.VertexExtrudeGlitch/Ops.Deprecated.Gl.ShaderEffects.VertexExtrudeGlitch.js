@@ -1,15 +1,15 @@
-CABLES.Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 
 this.name='VertexExtrudeGlitch';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.min=this.addInPort(new Port(this,"min",OP_PORT_TYPE_VALUE,{display:'range'}));
-this.max=this.addInPort(new Port(this,"max",OP_PORT_TYPE_VALUE,{display:'range'}));
-this.width=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
-this.extrude=this.addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
+this.min=this.addInPort(new CABLES.Port(this,"min",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+this.max=this.addInPort(new CABLES.Port(this,"max",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+this.width=this.addInPort(new CABLES.Port(this,"width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+this.extrude=this.addInPort(new CABLES.Port(this,"extrude",CABLES.OP_PORT_TYPE_VALUE));
 
 this.min.onValueChanged=function(){ if(uniMin)uniMin.setValue(self.min.val); };
 this.max.onValueChanged=function(){ if(uniMax)uniMax.setValue(self.max.val); };

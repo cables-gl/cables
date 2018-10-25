@@ -1,5 +1,5 @@
 var self = this;
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 this.microphone = null;
 
 this.name='microphone';
@@ -8,7 +8,7 @@ this.name='microphone';
 this.userMediaAvailable = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-this.audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
+this.audioOut=this.addOutPort(new CABLES.Port(this, "audio out",CABLES.OP_PORT_TYPE_OBJECT));
 
 if (this.userMediaAvailable){
     if(!window.audioContext) {

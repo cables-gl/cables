@@ -1,10 +1,10 @@
-op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+op.render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+op.trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-op.enable=op.addInPort(new Port(op,"enable",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+op.enable=op.addInPort(new CABLES.Port(op,"enable",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 op.enable.set(true);
 
-op.facing=op.addInPort(new Port(op,"facing",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['back','front','both']} ));
+op.facing=op.addInPort(new CABLES.Port(op,"facing",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['back','front','both']} ));
 op.facing.set('back');
 
 var cgl=op.patch.cgl;

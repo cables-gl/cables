@@ -27,8 +27,8 @@ var ais_off = this.addInPort( new Port( this, "ais note off", OP_PORT_TYPE_FUNCT
 var b_on = this.addInPort( new Port( this, "b note on", OP_PORT_TYPE_FUNCTION ));
 var b_off = this.addInPort( new Port( this, "b note off", OP_PORT_TYPE_FUNCTION ));
 
-var frequency = this.addOutPort( new Port( this, "frequency", OP_PORT_TYPE_VALUE ));
-var isPressed = this.addOutPort( new Port( this, "is pressed", OP_PORT_TYPE_VALUE ));
+var frequency = this.addOutPort( new Port( this, "frequency", CABLES.OP_PORT_TYPE_VALUE ));
+var isPressed = this.addOutPort( new Port( this, "is pressed", CABLES.OP_PORT_TYPE_VALUE ));
 
 var OCTAVE_MIN = 1;
 var OCTAVE_MAX = 7;
@@ -181,7 +181,7 @@ a_off.onTriggered = function(){ handleNoteOff('a'); };
 ais_off.onTriggered = function(){ handleNoteOff('ais'); };
 b_off.onTriggered = function(){ handleNoteOff('b'); };
 
-var octave = this.addInPort( new Port( this, "octave", OP_PORT_TYPE_VALUE));
+var octave = this.addInPort( new Port( this, "octave", CABLES.OP_PORT_TYPE_));
 
 octave.set(4);
 frequency.set(0);

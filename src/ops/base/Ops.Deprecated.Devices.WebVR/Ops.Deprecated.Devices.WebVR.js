@@ -1,14 +1,14 @@
 var cgl=op.patch.cgl;
 op.name='WebVR';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var smallRender=op.inValueBool("Small Renderer");
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var triggerGamePad=op.addOutPort(new Port(op,"Controller Matrix",OP_PORT_TYPE_FUNCTION));
-var numGamepads=op.addOutPort(new Port(op,"Num Controller",OP_PORT_TYPE_VALUE));
-// var tex0=op.addOutPort(new Port(op,"texture left",OP_PORT_TYPE_TEXTURE,{preview:true}));
-// var tex1=op.addOutPort(new Port(op,"texture right",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var triggerGamePad=op.addOutPort(new CABLES.Port(op,"Controller Matrix",CABLES.OP_PORT_TYPE_FUNCTION));
+var numGamepads=op.addOutPort(new CABLES.Port(op,"Num Controller",CABLES.OP_PORT_TYPE_VALUE));
+// var tex0=op.addOutPort(new CABLES.Port(op,"texture left",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
+// var tex1=op.addOutPort(new CABLES.Port(op,"texture right",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 var tex0=op.outTexture("texture left");
 var tex1=op.outTexture("texture right");
 
@@ -42,7 +42,7 @@ var hasPose=op.outValue('hasPose');
 var hasOrientation=op.outValue('hasorientation');
 var isPresenting=op.outValue('is presenting');
 
-var triggerAfter=op.addOutPort(new Port(op,"trigger After",OP_PORT_TYPE_FUNCTION));
+var triggerAfter=op.addOutPort(new CABLES.Port(op,"trigger After",CABLES.OP_PORT_TYPE_FUNCTION));
 var outDeviceString=op.outValue("Device");
 
 var pose=null;

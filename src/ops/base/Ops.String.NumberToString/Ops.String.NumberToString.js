@@ -1,7 +1,7 @@
 op.name="NumberToString";
 
-var val=op.addInPort(new Port(op,"Number",OP_PORT_TYPE_VALUE));
-var result=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_VALUE,{type:'string'}));
+var val=op.addInPort(new CABLES.Port(op,"Number",CABLES.OP_PORT_TYPE_VALUE));
+var result=op.addOutPort(new CABLES.Port(op,"Result",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 
 function update()
 {

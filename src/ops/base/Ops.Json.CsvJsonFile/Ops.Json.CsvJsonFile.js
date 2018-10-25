@@ -1,8 +1,8 @@
 
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 
 
-// var outData=op.addOutPort(new Port(op,"data",OP_PORT_TYPE_OBJECT));
+// var outData=op.addOutPort(new CABLES.Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT));
 
 var result=op.outArray("Result");
 var isLoading=op.outValue("Is Loading",false);

@@ -7,7 +7,7 @@ var scale=op.inValue('Scale', 1);
 var offset=op.inValue('Offset');
 var amount=op.inValue('Amount');
 var limited=op.inValueBool('Limited', true);
-var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var srcHeadVert=attachments.bend_vert;
 var srcBodyVert=''

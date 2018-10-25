@@ -1,24 +1,24 @@
 var self=this;
 
 this.name='TimedSequence';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.current=this.addInPort(new Port(this,"current",OP_PORT_TYPE_VALUE));
+this.exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+this.current=this.addInPort(new CABLES.Port(this,"current",CABLES.OP_PORT_TYPE_VALUE));
 this.current.val=0;
 
-this.overwriteTime=this.addInPort(new Port(this,"overwriteTime",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+this.overwriteTime=this.addInPort(new CABLES.Port(this,"overwriteTime",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 this.overwriteTime.val=false;
-this.ignoreInSubPatch=this.addInPort(new Port(this,"ignoreInSubPatch",OP_PORT_TYPE_VALUE,{display:"bool"}));
+this.ignoreInSubPatch=this.addInPort(new CABLES.Port(this,"ignoreInSubPatch",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
 this.ignoreInSubPatch.val=false;
 
-this.triggerAlways=this.addOutPort(new Port(this,"triggerAlways",OP_PORT_TYPE_FUNCTION));
+this.triggerAlways=this.addOutPort(new CABLES.Port(this,"triggerAlways",CABLES.OP_PORT_TYPE_FUNCTION));
 var outNames=op.outArray("Names",[]);
-this.currentKeyTime=this.addOutPort(new Port(this,"currentKeyTime",OP_PORT_TYPE_VALUE));
+this.currentKeyTime=this.addOutPort(new CABLES.Port(this,"currentKeyTime",CABLES.OP_PORT_TYPE_VALUE));
 const outCurrent=op.outValue("Current");
 var triggers=[];
 
 for(var i=0;i<32;i++)
 {
-    var p=this.addOutPort(new Port(this,"trigger "+i,OP_PORT_TYPE_FUNCTION));
+    var p=this.addOutPort(new CABLES.Port(this,"trigger "+i,CABLES.OP_PORT_TYPE_FUNCTION));
     p.onLinkChanged=updateNames;
     triggers.push( p );
 }

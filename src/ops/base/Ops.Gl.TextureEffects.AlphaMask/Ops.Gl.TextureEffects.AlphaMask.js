@@ -1,10 +1,10 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-// this.amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.image=this.addInPort(new Port(this,"image",OP_PORT_TYPE_TEXTURE));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+// this.amount=this.addInPort(new CABLES.Port(this,"amount",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+this.image=this.addInPort(new CABLES.Port(this,"image",CABLES.OP_PORT_TYPE_TEXTURE));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 var shader=new CGL.Shader(cgl);
@@ -54,7 +54,7 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
 
-this.method=this.addInPort(new Port(this,"method",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:["luminance","image alpha","red","green","blue"]} ));
+this.method=this.addInPort(new CABLES.Port(this,"method",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:["luminance","image alpha","red","green","blue"]} ));
 
 this.method.onValueChanged=function()
 {

@@ -1,14 +1,14 @@
 op.name='SimplexNoise';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var smoothness=op.addInPort(new Port(op,"smoothness",OP_PORT_TYPE_VALUE,{  }));
-var scale=op.addInPort(new Port(op,"scale",OP_PORT_TYPE_VALUE,{  }));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var smoothness=op.addInPort(new CABLES.Port(op,"smoothness",CABLES.OP_PORT_TYPE_VALUE,{  }));
+var scale=op.addInPort(new CABLES.Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{  }));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE,{  }));
-var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE,{  }));
-var time=op.addInPort(new Port(op,"time",OP_PORT_TYPE_VALUE,{  }));
+var x=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE,{  }));
+var y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE,{  }));
+var time=op.addInPort(new CABLES.Port(op,"time",CABLES.OP_PORT_TYPE_VALUE,{  }));
 
 var cgl=op.patch.cgl;
 

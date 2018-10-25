@@ -15,18 +15,18 @@ var patch=this.patch;
 this.name='AudioPlayer';
 
 this.file=op.inFile("file","audio");
-var play=op.addInPort(new Port(this,"play",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var autoPlay=op.addInPort(new Port(this,"Autoplay",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var play=op.addInPort(new CABLES.Port(this,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var autoPlay=op.addInPort(new CABLES.Port(this,"Autoplay",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-var volume=this.addInPort(new Port(this,"volume",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var synchronizedPlayer=this.addInPort(new Port(this,"Synchronized Player",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var volume=this.addInPort(new CABLES.Port(this,"volume",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var synchronizedPlayer=this.addInPort(new CABLES.Port(this,"Synchronized Player",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-this.audioOut=this.addOutPort(new Port(this, "audio out",OP_PORT_TYPE_OBJECT));
-var outPlaying=this.addOutPort(new Port(this, "playing",OP_PORT_TYPE_VALUE));
-var outEnded=this.addOutPort(new Port(this, "ended",OP_PORT_TYPE_FUNCTION));
+this.audioOut=this.addOutPort(new CABLES.Port(this, "audio out",CABLES.OP_PORT_TYPE_OBJECT));
+var outPlaying=this.addOutPort(new CABLES.Port(this, "playing",CABLES.OP_PORT_TYPE_VALUE));
+var outEnded=this.addOutPort(new CABLES.Port(this, "ended",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
-var doLoop=op.addInPort(new Port(this,"Loop",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var doLoop=op.addInPort(new CABLES.Port(this,"Loop",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 autoPlay.set(true);
 volume.set(1.0);

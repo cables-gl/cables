@@ -1,6 +1,6 @@
 
-var outArr=op.addOutPort(new Port(op,"Array",OP_PORT_TYPE_ARRAY));
-var outCount=op.addOutPort(new Port(op,"Count",OP_PORT_TYPE_VALUE));
+var outArr=op.addOutPort(new CABLES.Port(op,"Array",CABLES.OP_PORT_TYPE_ARRAY));
+var outCount=op.addOutPort(new CABLES.Port(op,"Count",CABLES.OP_PORT_TYPE_VALUE));
 
 var num=15;
 var texturePorts=[];
@@ -34,7 +34,7 @@ function rebuild()
 
 for(var i=0;i<num;i++)
 {
-    var p=op.addInPort(new Port(op,"Texture "+(i),OP_PORT_TYPE_OBJECT)) ;
+    var p=op.addInPort(new CABLES.Port(op,"Texture "+(i),CABLES.OP_PORT_TYPE_OBJECT)) ;
     p.onLinkChanged=rebuild;
     p.onValueChanged=rebuild;
     texturePorts.push(p);

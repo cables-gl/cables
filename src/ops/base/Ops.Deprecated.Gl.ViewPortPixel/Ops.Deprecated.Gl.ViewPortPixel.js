@@ -1,10 +1,10 @@
 op.name="ViewPortPixel";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
-var ratio=op.addInPort(new Port(op,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[0.5,1,1.25,1.3333333333,1.777777777778,2.33333333333333,3,4]} ));
+var ratio=op.addInPort(new CABLES.Port(op,"ratio",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[0.5,1,1.25,1.3333333333,1.777777777778,2.33333333333333,3,4]} ));
 ratio.set(1.777777777778);
 
 var posX=op.inValueSelect("Pos X",["Left","Right","Center"]);

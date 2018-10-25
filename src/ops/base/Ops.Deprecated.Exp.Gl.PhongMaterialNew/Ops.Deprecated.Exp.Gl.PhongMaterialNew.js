@@ -4,10 +4,10 @@ var cgl=this.patch.cgl;
 // adapted from:
 // http://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
 
-var render=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
+var render=this.addInPort(new CABLES.Port(this,"execute",CABLES.OP_PORT_TYPE_FUNCTION) );
 
-var trigger=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
-var shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
+var trigger=this.addOutPort(new CABLES.Port(this,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+var shaderOut=this.addOutPort(new CABLES.Port(this,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 
 // var specularStrength=op.inValue("Specular Strength",1);
 var shininess=op.inValueSlider("Shininess",0.5);
@@ -83,10 +83,10 @@ function updateShininess()
 {
     // diffuse color
 
-    var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var r=this.addInPort(new CABLES.Port(this,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var g=this.addInPort(new CABLES.Port(this,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=this.addInPort(new CABLES.Port(this,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var a=this.addInPort(new CABLES.Port(this,"diffuse a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
     r.uniform=new CGL.Uniform(shader,'f','r',r);
     g.uniform=new CGL.Uniform(shader,'f','g',g);
@@ -102,7 +102,7 @@ function updateShininess()
 
 
 {
-    var colorizeTex=this.addInPort(new Port(this,"colorize texture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var colorizeTex=this.addInPort(new CABLES.Port(this,"colorize texture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
     colorizeTex.onChange=function()
     {
         if(colorizeTex.get()) shader.define('COLORIZE_TEXTURE');
@@ -112,7 +112,7 @@ function updateShininess()
 
 {
     // diffuse texture
-    var diffuseTexture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var diffuseTexture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var diffuseTextureUniform=null;
     shader.bindTextures=bindTextures;
 
@@ -133,7 +133,7 @@ function updateShininess()
         }
     };
 
-    var aoTexture=this.addInPort(new Port(this,"AO Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var aoTexture=this.addInPort(new CABLES.Port(this,"AO Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var aoTextureUniform=null;
     aoTexture.ignoreValueSerialize=true;
     shader.bindTextures=bindTextures;
@@ -156,7 +156,7 @@ function updateShininess()
     };
 
 
-    var specTexture=this.addInPort(new Port(this,"Specular Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var specTexture=this.addInPort(new CABLES.Port(this,"Specular Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var specTextureUniform=null;
 
     specTexture.onChange=function()
@@ -177,7 +177,7 @@ function updateShininess()
     };
 
 
-    var normalTexture=this.addInPort(new Port(this,"Normal Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var normalTexture=this.addInPort(new CABLES.Port(this,"Normal Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var normalTextureUniform=null;
 
     normalTexture.onChange=function()
@@ -199,8 +199,8 @@ function updateShininess()
 
 
 
-    var diffuseRepeatX=this.addInPort(new Port(this,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
-    var diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
+    var diffuseRepeatX=this.addInPort(new CABLES.Port(this,"diffuseRepeatX",CABLES.OP_PORT_TYPE_VALUE));
+    var diffuseRepeatY=this.addInPort(new CABLES.Port(this,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
     diffuseRepeatX.set(1);
     diffuseRepeatY.set(1);
 

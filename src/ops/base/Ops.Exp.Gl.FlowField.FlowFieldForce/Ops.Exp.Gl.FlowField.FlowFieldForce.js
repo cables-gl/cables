@@ -2,12 +2,12 @@ op.name="FlowFieldForce";
 
 op.name='PointLight';
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
-var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
-var z=op.addInPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
+var x=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+var z=op.addInPort(new CABLES.Port(op,"z",CABLES.OP_PORT_TYPE_VALUE));
 
 
 var forceObject={};

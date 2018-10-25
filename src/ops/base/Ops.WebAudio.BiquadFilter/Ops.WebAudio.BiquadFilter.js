@@ -24,11 +24,11 @@ var biquadFilter = audioContext.createBiquadFilter();
 var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", biquadFilter);
 var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", biquadFilter);
 
-var type = this.addInPort(new Port(this,"type",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['allpass','lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch']}));
-var frequency = this.addInPort(new Port(this, "frequency", OP_PORT_TYPE_VALUE, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}));
-var detune = this.addInPort(new Port(this, "detune", OP_PORT_TYPE_VALUE, {"display": "range", "min": DETUNE_MIN, "max": DETUNE_MAX}));
-var q = this.addInPort(new Port(this, "q", OP_PORT_TYPE_VALUE, {"display": "range", "min": Q_MIN, "max": Q_MAX}));
-var gain = this.addInPort(new Port(this, "gain", OP_PORT_TYPE_VALUE, {"display": "range", "min": GAIN_MIN, "max": GAIN_MAX}));
+var type = this.addInPort(new CABLES.Port(this,"type",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['allpass','lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch']}));
+var frequency = this.addInPort(new CABLES.Port(this, "frequency", CABLES.OP_PORT_TYPE_, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}));
+var detune = this.addInPort(new CABLES.Port(this, "detune", CABLES.OP_PORT_TYPE_, {"display": "range", "min": DETUNE_MIN, "max": DETUNE_MAX}));
+var q = this.addInPort(new CABLES.Port(this, "q", CABLES.OP_PORT_TYPE_, {"display": "range", "min": Q_MIN, "max": Q_MAX}));
+var gain = this.addInPort(new CABLES.Port(this, "gain", CABLES.OP_PORT_TYPE_, {"display": "range", "min": GAIN_MIN, "max": GAIN_MAX}));
 
 var updateType = function(){
     biquadFilter.type = type.get();

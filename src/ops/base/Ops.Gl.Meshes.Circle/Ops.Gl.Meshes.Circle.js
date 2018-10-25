@@ -6,11 +6,11 @@ const percent=op.inValueSlider('percent',1);
 const steps=op.inValue('steps',0);
 const invertSteps=op.inValueBool('invertSteps',false);
 const doRender=op.inValueBool('Render',true);
-const mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
+const mapping=op.addInPort(new CABLES.Port(op,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
 const drawSpline=op.inValueBool("Spline",false);
 
 const trigger=op.outFunction('trigger');
-const geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+const geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 mapping.set('flat');
 

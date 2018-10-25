@@ -11,7 +11,7 @@ var triggers=[];
 
 for(var i=0;i<8;i++)
 {
-    var newIn=op.addOutPort(new Port(op,"trigger "+i,OP_PORT_TYPE_FUNCTION));
+    var newIn=op.addOutPort(new CABLES.Port(op,"trigger "+i,CABLES.OP_PORT_TYPE_FUNCTION));
     triggers.push( newIn );
     newIn.onLinkChanged=updateLinkedArray;
 }

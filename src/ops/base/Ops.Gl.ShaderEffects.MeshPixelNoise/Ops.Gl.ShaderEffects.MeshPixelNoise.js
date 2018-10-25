@@ -1,8 +1,8 @@
 var cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
-op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var inScale=op.inValue("Scale",10);
 var inAmount=op.inValueSlider("Amount",0.3);

@@ -1,8 +1,8 @@
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 var inValue=op.inValue("Value");
-var duration=op.addInPort(new Port(op,"duration"));
-var result=op.addOutPort(new Port(op,"result"));
+var duration=op.addInPort(new CABLES.Port(op,"duration"));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
 var finished=op.outFunction("Finished");
 
 var anim=new CABLES.TL.Anim();

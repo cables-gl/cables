@@ -356,7 +356,7 @@ CGL.Mesh.prototype._bind=function(shader)
 
 CGL.Mesh.prototype.unBind=function()
 {
-    shader=this._lastShader;
+    var shader=this._lastShader;
     this._lastShader=null;
     if(!shader) return;
     

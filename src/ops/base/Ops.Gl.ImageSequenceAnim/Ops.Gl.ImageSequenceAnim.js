@@ -1,18 +1,18 @@
 
-var exe=op.addInPort(new Port(op,"Exe",OP_PORT_TYPE_FUNCTION));
-var next=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
-var fps=op.addInPort(new Port(op,"FPS",OP_PORT_TYPE_VALUE));
-var inOffsetY=op.addInPort(new Port(op,"Row Offset Y",OP_PORT_TYPE_VALUE));
-var numFrames=op.addInPort(new Port(op,"Num Frames",OP_PORT_TYPE_VALUE));
-var numX=op.addInPort(new Port(op,"Num X",OP_PORT_TYPE_VALUE));
-var numY=op.addInPort(new Port(op,"Num Y",OP_PORT_TYPE_VALUE));
+var exe=op.addInPort(new CABLES.Port(op,"Exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
+var fps=op.addInPort(new CABLES.Port(op,"FPS",CABLES.OP_PORT_TYPE_VALUE));
+var inOffsetY=op.addInPort(new CABLES.Port(op,"Row Offset Y",CABLES.OP_PORT_TYPE_VALUE));
+var numFrames=op.addInPort(new CABLES.Port(op,"Num Frames",CABLES.OP_PORT_TYPE_VALUE));
+var numX=op.addInPort(new CABLES.Port(op,"Num X",CABLES.OP_PORT_TYPE_VALUE));
+var numY=op.addInPort(new CABLES.Port(op,"Num Y",CABLES.OP_PORT_TYPE_VALUE));
 
 var play=op.inValueBool("Play",true);
 
-var texRepeatX=op.addOutPort(new Port(op,"Repeat X",OP_PORT_TYPE_VALUE));
-var texRepeatY=op.addOutPort(new Port(op,"Repeat Y",OP_PORT_TYPE_VALUE));
-var texU=op.addOutPort(new Port(op,"Offset X",OP_PORT_TYPE_VALUE));
-var texV=op.addOutPort(new Port(op,"Offset Y",OP_PORT_TYPE_VALUE));
+var texRepeatX=op.addOutPort(new CABLES.Port(op,"Repeat X",CABLES.OP_PORT_TYPE_VALUE));
+var texRepeatY=op.addOutPort(new CABLES.Port(op,"Repeat Y",CABLES.OP_PORT_TYPE_VALUE));
+var texU=op.addOutPort(new CABLES.Port(op,"Offset X",CABLES.OP_PORT_TYPE_VALUE));
+var texV=op.addOutPort(new CABLES.Port(op,"Offset Y",CABLES.OP_PORT_TYPE_VALUE));
 
 numX.onValueChanged=setRepeat;
 numY.onValueChanged=setRepeat;

@@ -2,9 +2,9 @@ this.name="Ops.user.tim.Equals";
 
 op.name='Equals';
 
-var result = this.addOutPort(new Port(this,"result"));
-var number1 = this.addInPort(new Port(this,"number1"));
-var number2 =this.addInPort(new Port(this,"number2"));
+var result = this.addOutPort(new CABLES.Port(this,"result"));
+var number1 = this.addInPort(new CABLES.Port(this,"number1"));
+var number2 =this.addInPort(new CABLES.Port(this,"number2"));
 
 number1.set(1);
 number2.set(1);

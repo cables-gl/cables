@@ -1,4 +1,4 @@
-const exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+const exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 const inTransformations=op.inArray("positions");
 const inScales=op.inArray("Scale Array");
 const inScale=op.inValue("Scale",1);

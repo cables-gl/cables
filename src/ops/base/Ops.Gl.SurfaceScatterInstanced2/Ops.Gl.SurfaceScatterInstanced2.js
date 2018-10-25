@@ -9,7 +9,7 @@ var inNum=op.inValueInt("Num",100);
 var inSizeMin=op.inValueSlider("Size min",1.0);
 var inSizeMax=op.inValueSlider("Size max",1.0);
 var inRotateRandom=op.inValueBool("Random Rotate",true);
-var seed=op.addInPort(new Port(op,"Random Seed"));
+var seed=op.addInPort(new CABLES.Port(op,"Random Seed"));
 
 var mod=null;
 var mesh=null;
@@ -189,7 +189,7 @@ function setup()
 
 // // TODO: remove array3xtransformedinstanced....
 
-// var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+// var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 // var inTransformations=op.inArray("positions");
 // var inScales=op.inArray("Scale Array");

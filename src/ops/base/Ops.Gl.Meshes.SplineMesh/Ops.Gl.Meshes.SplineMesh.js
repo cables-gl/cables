@@ -1,5 +1,5 @@
-var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 var thick=op.inValue("Thickness");
 var inStart=op.inValueSlider("Start");
 var inLength=op.inValueSlider("Length",1);
@@ -8,7 +8,7 @@ var inStrip=op.inValueBool("Line Strip",true);
 var inPoints=op.inArray('points');
 var inNumPoints=op.inValue("Num Points",0);
 
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize=true;
 

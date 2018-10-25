@@ -48,6 +48,12 @@ CABLES.Patch = function(cfg) {
     this.instancing = new CABLES.Instancing();
     this.onOneFrameRendered=null;
 
+
+    this._frameNext = 0;
+    this._frameInterval = 0;
+    this._lastFrameTime = 0;
+    this._frameWasdelayed = true;
+
     this.config = cfg || {
         glCanvasResizeToWindow: false,
         glCanvasId: 'glcanvas',
@@ -386,10 +392,6 @@ CABLES.Patch.prototype.getFrameNum = function() {
     return this._frameNum;
 };
 
-var frameNext = 0;
-var frameInterval = 0;
-var lastFrameTime = 0;
-var wasdelayed = true;
 
 CABLES.Patch.prototype.renderFrame = function(e) {
     this.timer.update();
@@ -417,11 +419,11 @@ CABLES.Patch.prototype.exec = function(e) {
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
     if (this.config.fpsLimit) {
-        frameInterval = 1000 / this.config.fpsLimit;
+        this._frameInterval = 1000 / this.config.fpsLimit;
     }
 
     var now = CABLES.now();
-    var frameDelta = now - frameNext;
+    var frameDelta = now - this._frameNext;
     
 
     if (CABLES.UI) {
@@ -429,39 +431,39 @@ CABLES.Patch.prototype.exec = function(e) {
 
         if(!this._renderOneFrame)
         {
-            if (now - lastFrameTime > 500 && lastFrameTime !== 0 && !wasdelayed) {
-                lastFrameTime = 0;
+            if (now - this._lastFrameTime > 500 && this._lastFrameTime !== 0 && !this._frameWasdelayed) {
+                this._lastFrameTime = 0;
                 setTimeout(this.exec.bind(this), 500);
     
                 if (CABLES.UI) $('#delayed').show();
-                wasdelayed = true;
+                this._frameWasdelayed = true;
                 return;
             }
     
         }
 
-        // if(now-lastFrameTime>300 && lastFrameTime!==0  && !wasdelayed)
+        // if(now-this._lastFrameTime>300 && this._lastFrameTime!==0  && !this._frameWasdelayed)
         // {
-        //     lastFrameTime=0;
+        //     this._lastFrameTime=0;
         //     setTimeout(this.exec.bind(this),300);
         //
         //     if(CABLES.UI)$('#delayed').show();
-        //     wasdelayed=true;
+        //     this._frameWasdelayed=true;
         //     return;
         // }
     }
 
-    if(this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > frameInterval || wasdelayed) {
+    if(this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed) {
         var startFrameTime=CABLES.now();
         this.renderFrame();
         this._fpsMsCount+=CABLES.now()-startFrameTime;
 
-        if (frameInterval) frameNext = now - (frameDelta % frameInterval);
+        if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
     }
 
-    if (wasdelayed) {
+    if (this._frameWasdelayed) {
         if (CABLES.UI) $('#delayed').hide();
-        wasdelayed = false;
+        this._frameWasdelayed = false;
     }
 
     if(this._renderOneFrame && this.onOneFrameRendered)
@@ -486,7 +488,7 @@ CABLES.Patch.prototype.exec = function(e) {
         }
     }
     
-    lastFrameTime = CABLES.now();
+    this._lastFrameTime = CABLES.now();
     this._fpsFrameCount++;
 
     requestAnimationFrame(this.exec.bind(this));
@@ -736,7 +738,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                     objPort.value = true === objPort.value;
                 }
 
-                if (port && objPort.value !== undefined && port.type != OP_PORT_TYPE_TEXTURE) {
+                if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) {
                     port.set(objPort.value);
                 }
                 if (objPort.animated) port.setAnimated(objPort.animated);
@@ -754,7 +756,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
             for (var ipo in obj.ops[iop].portsOut) {
                 var port2 = op.getPort(obj.ops[iop].portsOut[ipo].name);
-                if (port2 && port2.type != OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value')) {
+                if (port2 && port2.type != CABLES.OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value')) {
                     port2.set(obj.ops[iop].portsOut[ipo].value);
                 }
             }

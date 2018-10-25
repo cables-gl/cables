@@ -1,30 +1,30 @@
 
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var attachment=op.addOutPort(new Port(op,"attachment",OP_PORT_TYPE_FUNCTION));
+var attachment=op.addOutPort(new CABLES.Port(op,"attachment",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 var radius=op.inValue("Radius",100);
 var fallOff=op.inValueSlider("Fall Off",0.1);
 var intensity=op.inValue("Intensity",1);
 
-var x=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
-var y=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
-var z=op.addInPort(new Port(op,"z",OP_PORT_TYPE_VALUE));
+var x=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+var z=op.addInPort(new CABLES.Port(op,"z",CABLES.OP_PORT_TYPE_VALUE));
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var ambientR=op.inValue("Ambient R",0.1);
 var ambientG=op.inValue("Ambient G",0.1);
 var ambientB=op.inValue("Ambient B",0.1);
 
-var specularR=op.addInPort(new Port(op,"Specular R",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var specularG=op.addInPort(new Port(op,"Specular G",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var specularB=op.addInPort(new Port(op,"Specular B",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var specularR=op.addInPort(new CABLES.Port(op,"Specular R",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var specularG=op.addInPort(new CABLES.Port(op,"Specular G",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var specularB=op.addInPort(new CABLES.Port(op,"Specular B",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 
 ambientR.set(0);

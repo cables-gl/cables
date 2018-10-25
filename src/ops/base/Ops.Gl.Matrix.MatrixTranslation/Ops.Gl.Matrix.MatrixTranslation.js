@@ -1,6 +1,6 @@
-const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 const inArr=op.inArray('Matrix');
-const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 const outX=op.outValue("X");
 const outY=op.outValue("Y");

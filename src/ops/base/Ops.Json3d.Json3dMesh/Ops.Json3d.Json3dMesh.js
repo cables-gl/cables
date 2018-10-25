@@ -5,7 +5,7 @@ var scene=new CABLES.Variable();
 cgl.frameStore.currentScene=null;
 
 var exe=op.inFunction("Render");
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
+var filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
 var meshIndex=op.inValueInt("Mesh Index",0);
 
 
@@ -15,7 +15,7 @@ var centerPivot=op.inValueBool("Center Mesh",true);
 
 var inSize=op.inValue("Size",1);
 
-var next=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var next=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var geometryOut=op.outObject("Geometry");
 
 var merge=op.inValueBool("Merge",false);
@@ -136,7 +136,7 @@ function setMesh()
     }
     var index=Math.floor(meshIndex.get());
 
-    if(!data || index!=index || !isNumeric(index) || index<0 || index>=data.meshes.length)
+    if(!data || index!=index || !CABLES.UTILS.isNumeric(index) || index<0 || index>=data.meshes.length)
     {
         op.uiAttr({warning:'mesh not found - index out of range '});
         return;

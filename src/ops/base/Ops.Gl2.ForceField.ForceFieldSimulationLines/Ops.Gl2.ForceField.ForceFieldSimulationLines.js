@@ -326,10 +326,10 @@ exec.onTriggered=function()
         // p.buff[i*3+0]=p.pos[0];
         // buffLineStart
 
-        arrayWriteToEnd(p.buff,p.pos[0])
-        arrayWriteToEnd(p.buff,p.pos[1])
-        arrayWriteToEnd(p.buff,p.pos[2])
-        // arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[0])
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[1])
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[2])
+        // CABLES.UTILS.arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
 
         col.set(ppos);
         outIndex.set(i);

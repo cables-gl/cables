@@ -1,13 +1,13 @@
 op.name='Orthogonal';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var boundsLeft=op.addInPort(new Port(op,"left",OP_PORT_TYPE_VALUE ));
-var boundsRight=op.addInPort(new Port(op,"right",OP_PORT_TYPE_VALUE ));
-var boundsBottom=op.addInPort(new Port(op,"bottom",OP_PORT_TYPE_VALUE ));
-var boundsTop=op.addInPort(new Port(op,"top",OP_PORT_TYPE_VALUE ));
-var zNear=op.addInPort(new Port(op,"frustum near",OP_PORT_TYPE_VALUE ));
-var zFar=op.addInPort(new Port(op,"frustum far",OP_PORT_TYPE_VALUE ));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var boundsLeft=op.addInPort(new CABLES.Port(op,"left",CABLES.OP_PORT_TYPE_VALUE ));
+var boundsRight=op.addInPort(new CABLES.Port(op,"right",CABLES.OP_PORT_TYPE_VALUE ));
+var boundsBottom=op.addInPort(new CABLES.Port(op,"bottom",CABLES.OP_PORT_TYPE_VALUE ));
+var boundsTop=op.addInPort(new CABLES.Port(op,"top",CABLES.OP_PORT_TYPE_VALUE ));
+var zNear=op.addInPort(new CABLES.Port(op,"frustum near",CABLES.OP_PORT_TYPE_VALUE ));
+var zFar=op.addInPort(new CABLES.Port(op,"frustum far",CABLES.OP_PORT_TYPE_VALUE ));
 
 boundsLeft.set(-1);
 boundsRight.set(1);

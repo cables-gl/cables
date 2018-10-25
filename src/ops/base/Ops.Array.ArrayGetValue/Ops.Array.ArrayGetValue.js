@@ -1,7 +1,7 @@
-var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
+var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
 var index=op.inValueInt("index");
 
-var value=op.addOutPort(new Port(op, "value",OP_PORT_TYPE_VALUE));
+var value=op.addOutPort(new CABLES.Port(op, "value",CABLES.OP_PORT_TYPE_VALUE));
 array.ignoreValueSerialize=true;
 
 function update()

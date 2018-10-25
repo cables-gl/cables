@@ -1,5 +1,5 @@
 op.name="voronoi";
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var pSites=op.inArray("Site Points");
 
 var pRender=op.inValueBool("Render",true);

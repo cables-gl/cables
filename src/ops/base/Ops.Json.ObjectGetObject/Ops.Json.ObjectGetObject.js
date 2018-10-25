@@ -1,5 +1,5 @@
-var data=op.addInPort(new Port(op,"data",OP_PORT_TYPE_OBJECT ));
-// var key=op.addInPort(new Port(op,"key",OP_PORT_TYPE_VALUE,{type:'string'} ));
+var data=op.addInPort(new CABLES.Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT ));
+// var key=op.addInPort(new CABLES.Port(op,"key",CABLES.OP_PORT_TYPE_VALUE,{type:'string'} ));
 var key = op.inValueString("key");
 var result=op.outObject("Result");
 

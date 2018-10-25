@@ -1,7 +1,7 @@
 op.name='WASDCamera';
 op.requirements=[CABLES.Requirements.POINTERLOCK];
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var isLocked=op.outValue("isLocked",false);
 
@@ -11,9 +11,9 @@ var movementSpeedFactor = 0.5;
 
 var fly=op.inValueBool("Allow Flying");
 
-var outPosX=op.addOutPort(new Port(op,"posX",OP_PORT_TYPE_VALUE));
-var outPosY=op.addOutPort(new Port(op,"posY",OP_PORT_TYPE_VALUE));
-var outPosZ=op.addOutPort(new Port(op,"posZ",OP_PORT_TYPE_VALUE));
+var outPosX=op.addOutPort(new CABLES.Port(op,"posX",CABLES.OP_PORT_TYPE_VALUE));
+var outPosY=op.addOutPort(new CABLES.Port(op,"posY",CABLES.OP_PORT_TYPE_VALUE));
+var outPosZ=op.addOutPort(new CABLES.Port(op,"posZ",CABLES.OP_PORT_TYPE_VALUE));
 
 var outMouseDown=op.outFunction("Mouse Left");
 var outMouseDownRight=op.outFunction("Mouse Right");

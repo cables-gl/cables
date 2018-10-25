@@ -1,7 +1,7 @@
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var transformations=op.inArray("array 3x");
-var geom=op.addInPort(new Port(op,"geom",OP_PORT_TYPE_OBJECT));
+var geom=op.addInPort(new CABLES.Port(op,"geom",CABLES.OP_PORT_TYPE_OBJECT));
 geom.ignoreValueSerialize=true;
 
 

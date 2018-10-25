@@ -1,38 +1,38 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 /* Inputs */
 // projection | prespective & ortogonal
-var projectionMode=op.addInPort(new Port(op,"projection mode",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['prespective','ortogonal']}));
-var zNear=op.addInPort(new Port(op,"frustum near",OP_PORT_TYPE_VALUE ));
-var zFar=op.addInPort(new Port(op,"frustum far",OP_PORT_TYPE_VALUE ));
+var projectionMode=op.addInPort(new CABLES.Port(op,"projection mode",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['prespective','ortogonal']}));
+var zNear=op.addInPort(new CABLES.Port(op,"frustum near",CABLES.OP_PORT_TYPE_VALUE ));
+var zFar=op.addInPort(new CABLES.Port(op,"frustum far",CABLES.OP_PORT_TYPE_VALUE ));
 
-var fov=op.addInPort(new Port(op,"fov",OP_PORT_TYPE_VALUE ));
+var fov=op.addInPort(new CABLES.Port(op,"fov",CABLES.OP_PORT_TYPE_VALUE ));
 
 var autoAspect=op.inValueBool("Auto Aspect Ratio",true);
 var aspect=op.inValue("Aspect Ratio");
 
 // look at camera
-var eyeX=op.addInPort(new Port(op,"eye X"));
-var eyeY=op.addInPort(new Port(op,"eye Y"));
-var eyeZ=op.addInPort(new Port(op,"eye Z"));
+var eyeX=op.addInPort(new CABLES.Port(op,"eye X"));
+var eyeY=op.addInPort(new CABLES.Port(op,"eye Y"));
+var eyeZ=op.addInPort(new CABLES.Port(op,"eye Z"));
 
-var centerX=op.addInPort(new Port(op,"center X"));
-var centerY=op.addInPort(new Port(op,"center Y"));
-var centerZ=op.addInPort(new Port(op,"center Z"));
+var centerX=op.addInPort(new CABLES.Port(op,"center X"));
+var centerY=op.addInPort(new CABLES.Port(op,"center Y"));
+var centerZ=op.addInPort(new CABLES.Port(op,"center Z"));
 
 // camera transform and movements
-var posX=op.addInPort(new Port(op,"truck"),0);
-var posY=op.addInPort(new Port(op,"boom"),0);
-var posZ=op.addInPort(new Port(op,"dolly"),0);
+var posX=op.addInPort(new CABLES.Port(op,"truck"),0);
+var posY=op.addInPort(new CABLES.Port(op,"boom"),0);
+var posZ=op.addInPort(new CABLES.Port(op,"dolly"),0);
 
-var rotX=op.addInPort(new Port(op,"tilt"),0);
-var rotY=op.addInPort(new Port(op,"pan"),0);
-var rotZ=op.addInPort(new Port(op,"roll"),0);
+var rotX=op.addInPort(new CABLES.Port(op,"tilt"),0);
+var rotY=op.addInPort(new CABLES.Port(op,"pan"),0);
+var rotZ=op.addInPort(new CABLES.Port(op,"roll"),0);
 
 
 /* Outputs */
-var outAsp=op.addOutPort(new Port(op,"Aspect",OP_PORT_TYPE_VALUE));
+var outAsp=op.addOutPort(new CABLES.Port(op,"Aspect",CABLES.OP_PORT_TYPE_VALUE));
 var outArr=op.outArray("Look At Array");
 
 

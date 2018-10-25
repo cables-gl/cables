@@ -1,17 +1,17 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var eyeX=op.addInPort(new Port(op,"eyeX"));
-var eyeY=op.addInPort(new Port(op,"eyeY"));
-var eyeZ=op.addInPort(new Port(op,"eyeZ"));
+var eyeX=op.addInPort(new CABLES.Port(op,"eyeX"));
+var eyeY=op.addInPort(new CABLES.Port(op,"eyeY"));
+var eyeZ=op.addInPort(new CABLES.Port(op,"eyeZ"));
 
-var centerX=op.addInPort(new Port(op,"centerX"));
-var centerY=op.addInPort(new Port(op,"centerY"));
-var centerZ=op.addInPort(new Port(op,"centerZ"));
+var centerX=op.addInPort(new CABLES.Port(op,"centerX"));
+var centerY=op.addInPort(new CABLES.Port(op,"centerY"));
+var centerZ=op.addInPort(new CABLES.Port(op,"centerZ"));
 
-var vecUpX=op.addInPort(new Port(op,"upX"));
-var vecUpY=op.addInPort(new Port(op,"upY"));
-var vecUpZ=op.addInPort(new Port(op,"upZ"));
+var vecUpX=op.addInPort(new CABLES.Port(op,"upX"));
+var vecUpY=op.addInPort(new CABLES.Port(op,"upY"));
+var vecUpZ=op.addInPort(new CABLES.Port(op,"upZ"));
 
 var outArr=op.outArray("Array");
 

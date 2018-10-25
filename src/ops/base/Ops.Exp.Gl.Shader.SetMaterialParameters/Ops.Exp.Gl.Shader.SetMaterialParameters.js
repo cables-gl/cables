@@ -74,7 +74,7 @@ function bindTextures()
     {
         var p=uniformPorts[i];
         if(!p)continue;
-        if(p.type==OP_PORT_TYPE_TEXTURE)
+        if(p.type==CABLES.OP_PORT_TYPE_TEXTURE)
         {
             const slot=p.uniform.getValue();
             p.oldValue=p.uniform.getValue();
@@ -96,7 +96,7 @@ function setUniforms()
     {
         var p=uniformPorts[i];
         if(!p)continue;
-        if(p.type!=OP_PORT_TYPE_TEXTURE)
+        if(p.type!=CABLES.OP_PORT_TYPE_TEXTURE)
         {
             p.oldValue=p.uniform.getValue();
             p.uniform.setValue(p.get());

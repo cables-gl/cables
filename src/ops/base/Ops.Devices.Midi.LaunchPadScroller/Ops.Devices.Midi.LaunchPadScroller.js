@@ -1,7 +1,7 @@
-var eventIn=op.addInPort(new Port(op,"Event Input",OP_PORT_TYPE_OBJECT));
+var eventIn=op.addInPort(new CABLES.Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
 
-var exec=this.addInPort(new Port(this,"exec",OP_PORT_TYPE_FUNCTION));
-var offsetX=this.addInPort(new Port(this,"Offset X",OP_PORT_TYPE_VALUE));
+var exec=this.addInPort(new CABLES.Port(this,"exec",CABLES.OP_PORT_TYPE_FUNCTION));
+var offsetX=this.addInPort(new CABLES.Port(this,"Offset X",CABLES.OP_PORT_TYPE_VALUE));
 
 var img=[
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

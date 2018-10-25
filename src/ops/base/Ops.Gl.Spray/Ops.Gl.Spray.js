@@ -1,17 +1,17 @@
 
 var cgl=op.patch.cgl;
 
-var exe=op.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var timer=op.addInPort(new Port(this,"time"));
-var num=op.addInPort(new Port(this,"num"));
-var sizeX=op.addInPort(new Port(this,"Size X"));
-var sizeY=op.addInPort(new Port(this,"Size Y"));
-var sizeZ=op.addInPort(new Port(this,"Size Z"));
+var timer=op.addInPort(new CABLES.Port(this,"time"));
+var num=op.addInPort(new CABLES.Port(this,"num"));
+var sizeX=op.addInPort(new CABLES.Port(this,"Size X"));
+var sizeY=op.addInPort(new CABLES.Port(this,"Size Y"));
+var sizeZ=op.addInPort(new CABLES.Port(this,"Size Z"));
 
-var movementX=op.addInPort(new Port(this,"movement x"));
-var movementY=op.addInPort(new Port(this,"movement y"));
-var movementZ=op.addInPort(new Port(this,"movement z"));
+var movementX=op.addInPort(new CABLES.Port(this,"movement x"));
+var movementY=op.addInPort(new CABLES.Port(this,"movement y"));
+var movementZ=op.addInPort(new CABLES.Port(this,"movement z"));
 
 const inReset=op.inFunctionButton("Reset");
 
@@ -21,16 +21,16 @@ movementZ.set(1);
 
 inReset.onTriggered=reset;
 
-var lifetime=op.addInPort(new Port(this,"lifetime"));
-var lifetimeMin=op.addInPort(new Port(this,"Lifetime Minimum"));
+var lifetime=op.addInPort(new CABLES.Port(this,"lifetime"));
+var lifetimeMin=op.addInPort(new CABLES.Port(this,"Lifetime Minimum"));
 
-var trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
-var idx=op.addOutPort(new Port(this,"index")) ;
-var lifeTimePercent=op.addOutPort(new Port(this,"lifeTimePercent")) ;
+var trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION)) ;
+var idx=op.addOutPort(new CABLES.Port(this,"index")) ;
+var lifeTimePercent=op.addOutPort(new CABLES.Port(this,"lifeTimePercent")) ;
 
-var outRandom1=op.addOutPort(new Port(this,"Random 1")) ;
-var outRandom2=op.addOutPort(new Port(this,"Random 2")) ;
-var outRandom3=op.addOutPort(new Port(this,"Random 3")) ;
+var outRandom1=op.addOutPort(new CABLES.Port(this,"Random 1")) ;
+var outRandom2=op.addOutPort(new CABLES.Port(this,"Random 2")) ;
+var outRandom3=op.addOutPort(new CABLES.Port(this,"Random 3")) ;
 
 var particles=[];
 

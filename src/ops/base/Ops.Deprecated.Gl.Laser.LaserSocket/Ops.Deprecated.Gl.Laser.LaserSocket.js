@@ -1,19 +1,19 @@
 var self=this;
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 
 this.name='laser socket';
-this.url=this.addInPort(new Port(this,"url",OP_PORT_TYPE_VALUE,{type:'string'}));
+this.url=this.addInPort(new CABLES.Port(this,"url",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 
-var speed=this.addInPort(new Port(this,"speed",OP_PORT_TYPE_VALUE));
+var speed=this.addInPort(new CABLES.Port(this,"speed",CABLES.OP_PORT_TYPE_VALUE));
 speed.set(5000);
-this.result=this.addOutPort(new Port(this,"result", OP_PORT_TYPE_OBJECT));
-var outConnected=this.addOutPort(new Port(this,"connected"));
+this.result=this.addOutPort(new CABLES.Port(this,"result", OP_PORT_TYPE_OBJECT));
+var outConnected=this.addOutPort(new CABLES.Port(this,"connected"));
 outConnected.set(false);
 
 var connected=false;
 
-var laserArray=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+var laserArray=this.addInPort(new CABLES.Port(this,"array",CABLES.OP_PORT_TYPE_ARRAY));
+var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var connection=null;
 var timeout=null;

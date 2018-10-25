@@ -3,11 +3,11 @@ var cgl=op.patch.cgl;
 
 op.name='Performance';
 
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
+var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION)) ;
 
-var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
-var outFPS=this.addOutPort(new Port(this,"fps",OP_PORT_TYPE_VALUE));
+var textureOut=this.addOutPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
+var outFPS=this.addOutPort(new CABLES.Port(this,"fps",CABLES.OP_PORT_TYPE_VALUE));
 
 var drawGraph=op.inValueBool("Draw Graph",true);
 var enabled=op.inValueBool("enabled",true);

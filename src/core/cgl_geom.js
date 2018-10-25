@@ -19,10 +19,7 @@ CGL.Geometry=function(name)
     this.barycentrics=[];
     this.morphTargets=[];
     this.vertexColors=[];
-
     this._attributes={};
-
-    this._indexed=true;
 
     Object.defineProperty(this, 'vertices', {
       get: function() {
@@ -37,7 +34,6 @@ CGL.Geometry=function(name)
 
 CGL.Geometry.prototype.clear=function()
 {
-    this._indexed=true;
     this.vertices=new Float32Array([]);
     this.verticesIndices.length=0;
     this.texCoords=new Float32Array([]);
@@ -170,6 +166,7 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 };
 
 
+
 CGL.Geometry.prototype.merge=function(geom)
 {
     if(!geom)return;
@@ -182,9 +179,9 @@ CGL.Geometry.prototype.merge=function(geom)
         this.verticesIndices[oldIndizesLength+i]=geom.verticesIndices[i]+vertLength;
     }
 
-    this.vertices=float32Concat(this.vertices,geom.vertices);
-    this.texCoords=float32Concat(this.texCoords,geom.texCoords);
-    this.vertexNormals=float32Concat(this.vertexNormals,geom.vertexNormals);
+    this.vertices=CABLES.UTILS.float32Concat(this.vertices,geom.vertices);
+    this.texCoords=CABLES.UTILS.float32Concat(this.texCoords,geom.texCoords);
+    this.vertexNormals=CABLES.UTILS.float32Concat(this.vertexNormals,geom.vertexNormals);
 };
 
 CGL.Geometry.prototype.copy=function()
@@ -310,13 +307,12 @@ CGL.Geometry.prototype.calculateNormals=function(options)
 
 CGL.Geometry.prototype.isIndexed=function()
 {
-    return this._indexed;
+    return this.verticesIndices.length!=0;
 };
 
 
 CGL.Geometry.prototype.unIndex=function()
 {
-    this._indexed=false;
     var newVerts=[];
     var newIndizes=[];
     var newTexCoords=[];

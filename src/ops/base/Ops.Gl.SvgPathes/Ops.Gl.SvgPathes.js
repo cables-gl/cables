@@ -1,9 +1,9 @@
 op.name="SvgPathes";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var svgFile=op.addInPort(new Port(op,"object",OP_PORT_TYPE_OBJECT));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var svgFile=op.addInPort(new CABLES.Port(op,"object",CABLES.OP_PORT_TYPE_OBJECT));
 
-var thickness=op.addInPort(new Port(op,"thickness",OP_PORT_TYPE_VALUE));
+var thickness=op.addInPort(new CABLES.Port(op,"thickness",CABLES.OP_PORT_TYPE_VALUE));
 
 var outEach=op.outFunction("Each");
 var outPoints=op.outArray("Points");

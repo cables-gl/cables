@@ -1,14 +1,14 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
-var farPlane=op.addInPort(new Port(op,"farplane",OP_PORT_TYPE_VALUE));
-var nearPlane=op.addInPort(new Port(op,"nearplane",OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var image=op.addInPort(new CABLES.Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE));
+var farPlane=op.addInPort(new CABLES.Port(op,"farplane",CABLES.OP_PORT_TYPE_VALUE));
+var nearPlane=op.addInPort(new CABLES.Port(op,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
 var inInv=op.inValueBool("Invert",false);
 
 farPlane.set(100.0);
 nearPlane.set(0.1);
 
 var cgl=op.patch.cgl;
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
 //op.onLoaded=shader.compile;

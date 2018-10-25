@@ -1,13 +1,13 @@
-var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
+var execute=this.addInPort(new CABLES.Port(this,"execute",CABLES.OP_PORT_TYPE_FUNCTION) );
 var inSpecular=op.inValueSlider("Specular",0.5);
 
 // diffuse color
-var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=this.addInPort(new CABLES.Port(this,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=this.addInPort(new CABLES.Port(this,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=this.addInPort(new CABLES.Port(this,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=this.addInPort(new CABLES.Port(this,"diffuse a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
+var next=this.addOutPort(new CABLES.Port(this,"next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,"LambertMaterial");
