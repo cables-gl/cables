@@ -24,7 +24,7 @@ var node = new Tone.Analyser(TYPE_DEFAULT, SIZE_DEFAULT);
 
 // in ports
 var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-var refreshPort = op.addInPort( new CABLES.Port( this, "Refresh", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var refreshPort = op.addInPort( new CABLES.Port( this, "Refresh",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 //var sizePort = op.addInPort( new CABLES.Port( this, "Size", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': SIZE_MIN, 'max': SIZE_MAX }, SIZE_DEFAULT ));
 var sizePort = this.addInPort( new CABLES.Port( this, "Size", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: SIZES } ) );
 sizePort.set(SIZE_DEFAULT);

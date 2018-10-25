@@ -9,8 +9,8 @@ var DEFAULT_TIME = "+0";
 
 // input ports
 var synthPort = op.inObject("Synth");
-var startPort = op.addInPort( new CABLES.Port( this, "Start Play", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
-var stopPort = op.addInPort( new CABLES.Port( this, "Stop Play", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var startPort = op.addInPort( new CABLES.Port( this, "Start Play",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var stopPort = op.addInPort( new CABLES.Port( this, "Stop Play",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var notePort = op.inValueString("Note", "C5");
 var velocityPort = op.inValue("Velocity", DEFAULT_VELOCITY);
 var timePort = op.inValueString("Time");

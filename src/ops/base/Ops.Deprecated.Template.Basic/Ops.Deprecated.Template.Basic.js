@@ -2,11 +2,11 @@
 op.name="My New Op";
 
 // Input ports
-var execute = op.addInPort( new CABLES.Port( this, "Execute", OP_PORT_TYPE_FUNCTION) );
+var execute = op.addInPort( new CABLES.Port( this, "Execute",CABLES.OP_PORT_TYPE_FUNCTION) );
 var number1 = op.addInPort( new CABLES.Port(op, "Number 1", CABLES.OP_PORT_TYPE_) );
 var number2 = op.addInPort( new CABLES.Port(op, "Number 2", CABLES.OP_PORT_TYPE_) );
 // Output ports
-var next = op.addOutPort( new CABLES.Port( this, "Next", OP_PORT_TYPE_FUNCTION) );
+var next = op.addOutPort( new CABLES.Port( this, "Next",CABLES.OP_PORT_TYPE_FUNCTION) );
 var result = op.addOutPort( new CABLES.Port(op, "Result", CABLES.OP_PORT_TYPE_) );
 
 // Define callback functions when the value of the input ports changed

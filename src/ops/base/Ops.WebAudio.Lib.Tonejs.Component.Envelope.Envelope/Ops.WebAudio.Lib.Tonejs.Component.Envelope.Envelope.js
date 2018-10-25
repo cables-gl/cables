@@ -20,10 +20,10 @@ var attackPort = op.addInPort( new CABLES.Port( this, "Attack", CABLES.OP_PORT_T
 var decayPort = op.addInPort( new CABLES.Port( this, "Decay", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
 var sustainPort = op.addInPort( new CABLES.Port( this, "Sustain", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
 var releasePort = op.addInPort( new CABLES.Port( this, "Release", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
-var triggerAttackPort = op.addInPort( new CABLES.Port( this, "Trigger Attack", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var triggerAttackPort = op.addInPort( new CABLES.Port( this, "Trigger Attack",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var velocityPort = op.addInPort( new CABLES.Port( this, "Velocity", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
 var attackTimePort = op.inValueString("Attack Time");
-var triggerReleasePort = op.addInPort( new CABLES.Port( this, "Trigger Release", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var triggerReleasePort = op.addInPort( new CABLES.Port( this, "Trigger Release",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var releaseTimePort = op.inValueString("Release Time");
 
 // output port
