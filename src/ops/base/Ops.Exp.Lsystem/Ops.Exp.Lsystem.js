@@ -131,9 +131,9 @@ function generate()
     {
         var sentenceArrayLength = sentence.length;
         var rulesArrayLength = rules.length;
+        iterationOutput += 1;
+        outIterationNumber.set(iterationOutput);
         
-        outIterationNumber.set(iter+1);
-        iterationOutput = iter+1;
         for (i =0; i < sentenceArrayLength; i++)
         {
             var current = sentence.charAt(i);

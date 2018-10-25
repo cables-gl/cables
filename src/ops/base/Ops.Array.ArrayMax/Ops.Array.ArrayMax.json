@@ -22,5 +22,9 @@
             }
         ],
         "name": "Ops.Array.ArrayMax"
+    },
+    "summary": " Applies a max operation to all values in an array",
+    "docs": {
+        "ports": []
     }
 }
