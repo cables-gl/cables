@@ -1,5 +1,5 @@
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
-const inUrlPort = op.addInPort( new CABLES.Port( op, "URL", CABLES.OP_PORT_TYPE_, { display: 'file', type: 'string', filter: 'audio'  } ));
+const inUrlPort = op.addInPort( new CABLES.Port( op, "URL", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'audio'  } ));
 const audioBufferPort = op.outObject("Audio Buffer");
 const finishedLoadingPort = op.outValue("Finished Loading", false);
 const sampleRatePort = op.outValue("Sample Rate", 0);

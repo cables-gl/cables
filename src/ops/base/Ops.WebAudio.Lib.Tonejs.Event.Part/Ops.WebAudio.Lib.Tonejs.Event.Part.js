@@ -39,7 +39,7 @@ var node = new Tone.Part(cb, TIME_NOTE_ARRAY_DEFAULT);
 // input ports
 var updateStatePorts = op.inFunction("Update State Ports");
 updateStatePorts.onLinkChanged = checkAutoStart;
-var timeNoteArrayPort = op.addInPort( new Port( op, "Time & Note Array", OP_PORT_TYPE_ARRAY, { type: 'string', display:'editor' } ));
+var timeNoteArrayPort = op.addInPort( new CABLES.Port( op, "Time & Note Array", OP_PORT_TYPE_ARRAY, { type: 'string', display:'editor' } ));
 timeNoteArrayPort.set(JSON.stringify(TIME_NOTE_ARRAY_DEFAULT, null, 4));
 var loopPort = op.inValueBool("Loop", LOOP_DEFAULT);
 var iterationsPort = op.inValue("Loop Iterations", ITERATIONS_DEFAULT);

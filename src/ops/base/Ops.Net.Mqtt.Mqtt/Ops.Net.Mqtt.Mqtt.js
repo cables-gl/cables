@@ -6,7 +6,7 @@ var mqttUsername = op.inValueString("Username", "try");
 var mqttPassword = op.inValueString("Password", "try");
 var mqttPort = op.inValue("Port", 443);
 var useSsl = op.inValueBool("Use SSL", true);
-var reconnect = op.addInPort( new Port( this, "Reconnect", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var reconnect = op.addInPort( new CABLES.Port( this, "Reconnect", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 
 var outObj = op.outObject("MQTT Object");
 var connectedPort = op.outValue("Connected", false);

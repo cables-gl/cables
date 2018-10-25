@@ -9,11 +9,11 @@ var OCTAVE_MIN = 0;
 var OCTAVE_MAX = 7;
 
 // input
-var notePort = op.addInPort( new Port( op, "Tone", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: NOTES } ) );
+var notePort = op.addInPort( new CABLES.Port( op, "Tone", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: NOTES } ) );
 notePort.set(NOTE_DEFAULT);
-var appendOctavePort = op.addInPort( new Port( op, "Append Octave", CABLES.OP_PORT_TYPE_, { display: 'bool' } ) );
+var appendOctavePort = op.addInPort( new CABLES.Port( op, "Append Octave", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 appendOctavePort.set(APPEND_OCTAVE_DEFAULT);
-var octavePort = op.addInPort( new Port( op, "Octave", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': OCTAVE_MIN, 'max': OCTAVE_MAX } ));
+var octavePort = op.addInPort( new CABLES.Port( op, "Octave", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVE_MIN, 'max': OCTAVE_MAX } ));
 octavePort.set(OCTAVE_DEFAULT);
 
 // output

@@ -14,7 +14,7 @@ var node = new Tone.Gate(THRESHOLD_DEFAULT, ATTACK_DEFAULT, RELEASE_DEFAULT);
 
 // in ports
 var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-var thresholdPort = op.addInPort( new Port( this, "Threshold", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': THRESHOLD_MIN, 'max': THRESHOLD_MAX }, THRESHOLD_DEFAULT ));
+var thresholdPort = op.addInPort( new CABLES.Port( this, "Threshold", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': THRESHOLD_MIN, 'max': THRESHOLD_MAX }, THRESHOLD_DEFAULT ));
 thresholdPort.set(THRESHOLD_DEFAULT);
 var attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
 thresholdPort.set(ATTACK_DEFAULT);

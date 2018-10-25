@@ -1,13 +1,13 @@
 op.name="BrowserSpecificFile";
 
 // input ports
-var chromeFilePort = op.addInPort( new Port( op, "Chrome File", CABLES.OP_PORT_TYPE_, { display: 'file', type: 'string', filter: null  } ));
-var firefoxFilePort = op.addInPort( new Port( op, "Firefox File", CABLES.OP_PORT_TYPE_, { display: 'file', type: 'string', filter: null  } ));
-var safariFilePort = op.addInPort( new Port( op, "Safari File", CABLES.OP_PORT_TYPE_, { display: 'file', type: 'string', filter: null  } ));
-var ieFilePort = op.addInPort( new Port( op, "IE <= 11 File", CABLES.OP_PORT_TYPE_, { display: 'file', type: 'string', filter: null  } ));
-var edgeFilePort = op.addInPort( new Port( op, "Edge File", CABLES.OP_PORT_TYPE_, { display: 'file', type: 'string', filter: null  } ));
-var operaFilePort = op.addInPort( new Port( op, "Opera File", CABLES.OP_PORT_TYPE_, { display: 'file', type: 'string', filter: null  } ));
-var defaultFilePort = op.addInPort( new Port( op, "Default File", CABLES.OP_PORT_TYPE_, { display: 'file', type: 'string', filter: null  } ));
+var chromeFilePort = op.addInPort( new CABLES.Port( op, "Chrome File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
+var firefoxFilePort = op.addInPort( new CABLES.Port( op, "Firefox File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
+var safariFilePort = op.addInPort( new CABLES.Port( op, "Safari File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
+var ieFilePort = op.addInPort( new CABLES.Port( op, "IE <= 11 File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
+var edgeFilePort = op.addInPort( new CABLES.Port( op, "Edge File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
+var operaFilePort = op.addInPort( new CABLES.Port( op, "Opera File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
+var defaultFilePort = op.addInPort( new CABLES.Port( op, "Default File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
 
 // output port
 var outFile = op.outValueString("Browser Specific File");

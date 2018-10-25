@@ -2,33 +2,33 @@ this.name="Ops.WebAudio.KeyPiano";
 
 var op = this;
 
-var c_on = this.addInPort( new Port( this, "c note on", OP_PORT_TYPE_FUNCTION ));
-var c_off = this.addInPort( new Port( this, "c note off", OP_PORT_TYPE_FUNCTION ));
-var cis_on = this.addInPort( new Port( this, "cis note on", OP_PORT_TYPE_FUNCTION ));
-var cis_off = this.addInPort( new Port( this, "cis note off", OP_PORT_TYPE_FUNCTION ));
-var d_on = this.addInPort( new Port( this, "d note on", OP_PORT_TYPE_FUNCTION ));
-var d_off = this.addInPort( new Port( this, "d note off", OP_PORT_TYPE_FUNCTION ));
-var dis_on = this.addInPort( new Port( this, "dis note on", OP_PORT_TYPE_FUNCTION ));
-var dis_off = this.addInPort( new Port( this, "dis note off", OP_PORT_TYPE_FUNCTION ));
-var e_on = this.addInPort( new Port( this, "e note on", OP_PORT_TYPE_FUNCTION ));
-var e_off = this.addInPort( new Port( this, "e note off", OP_PORT_TYPE_FUNCTION ));
-var f_on = this.addInPort( new Port( this, "f note on", OP_PORT_TYPE_FUNCTION ));
-var f_off = this.addInPort( new Port( this, "f note off", OP_PORT_TYPE_FUNCTION ));
-var fis_on = this.addInPort( new Port( this, "fis note on", OP_PORT_TYPE_FUNCTION ));
-var fis_off = this.addInPort( new Port( this, "fis note off", OP_PORT_TYPE_FUNCTION ));
-var g_on = this.addInPort( new Port( this, "g note on", OP_PORT_TYPE_FUNCTION ));
-var g_off = this.addInPort( new Port( this, "g note off", OP_PORT_TYPE_FUNCTION ));
-var gis_on = this.addInPort( new Port( this, "gis note ons", OP_PORT_TYPE_FUNCTION ));
-var gis_off = this.addInPort( new Port( this, "gis note off", OP_PORT_TYPE_FUNCTION ));
-var a_on = this.addInPort( new Port( this, "a note on", OP_PORT_TYPE_FUNCTION ));
-var a_off = this.addInPort( new Port( this, "a note off", OP_PORT_TYPE_FUNCTION ));
-var ais_on = this.addInPort( new Port( this, "ais note on", OP_PORT_TYPE_FUNCTION ));
-var ais_off = this.addInPort( new Port( this, "ais note off", OP_PORT_TYPE_FUNCTION ));
-var b_on = this.addInPort( new Port( this, "b note on", OP_PORT_TYPE_FUNCTION ));
-var b_off = this.addInPort( new Port( this, "b note off", OP_PORT_TYPE_FUNCTION ));
+var c_on = this.addInPort( new CABLES.Port( this, "c note on", OP_PORT_TYPE_FUNCTION ));
+var c_off = this.addInPort( new CABLES.Port( this, "c note off", OP_PORT_TYPE_FUNCTION ));
+var cis_on = this.addInPort( new CABLES.Port( this, "cis note on", OP_PORT_TYPE_FUNCTION ));
+var cis_off = this.addInPort( new CABLES.Port( this, "cis note off", OP_PORT_TYPE_FUNCTION ));
+var d_on = this.addInPort( new CABLES.Port( this, "d note on", OP_PORT_TYPE_FUNCTION ));
+var d_off = this.addInPort( new CABLES.Port( this, "d note off", OP_PORT_TYPE_FUNCTION ));
+var dis_on = this.addInPort( new CABLES.Port( this, "dis note on", OP_PORT_TYPE_FUNCTION ));
+var dis_off = this.addInPort( new CABLES.Port( this, "dis note off", OP_PORT_TYPE_FUNCTION ));
+var e_on = this.addInPort( new CABLES.Port( this, "e note on", OP_PORT_TYPE_FUNCTION ));
+var e_off = this.addInPort( new CABLES.Port( this, "e note off", OP_PORT_TYPE_FUNCTION ));
+var f_on = this.addInPort( new CABLES.Port( this, "f note on", OP_PORT_TYPE_FUNCTION ));
+var f_off = this.addInPort( new CABLES.Port( this, "f note off", OP_PORT_TYPE_FUNCTION ));
+var fis_on = this.addInPort( new CABLES.Port( this, "fis note on", OP_PORT_TYPE_FUNCTION ));
+var fis_off = this.addInPort( new CABLES.Port( this, "fis note off", OP_PORT_TYPE_FUNCTION ));
+var g_on = this.addInPort( new CABLES.Port( this, "g note on", OP_PORT_TYPE_FUNCTION ));
+var g_off = this.addInPort( new CABLES.Port( this, "g note off", OP_PORT_TYPE_FUNCTION ));
+var gis_on = this.addInPort( new CABLES.Port( this, "gis note ons", OP_PORT_TYPE_FUNCTION ));
+var gis_off = this.addInPort( new CABLES.Port( this, "gis note off", OP_PORT_TYPE_FUNCTION ));
+var a_on = this.addInPort( new CABLES.Port( this, "a note on", OP_PORT_TYPE_FUNCTION ));
+var a_off = this.addInPort( new CABLES.Port( this, "a note off", OP_PORT_TYPE_FUNCTION ));
+var ais_on = this.addInPort( new CABLES.Port( this, "ais note on", OP_PORT_TYPE_FUNCTION ));
+var ais_off = this.addInPort( new CABLES.Port( this, "ais note off", OP_PORT_TYPE_FUNCTION ));
+var b_on = this.addInPort( new CABLES.Port( this, "b note on", OP_PORT_TYPE_FUNCTION ));
+var b_off = this.addInPort( new CABLES.Port( this, "b note off", OP_PORT_TYPE_FUNCTION ));
 
-var frequency = this.addOutPort( new Port( this, "frequency", CABLES.OP_PORT_TYPE_VALUE ));
-var isPressed = this.addOutPort( new Port( this, "is pressed", CABLES.OP_PORT_TYPE_VALUE ));
+var frequency = this.addOutPort( new CABLES.Port( this, "frequency", CABLES.OP_PORT_TYPE_VALUE ));
+var isPressed = this.addOutPort( new CABLES.Port( this, "is pressed", CABLES.OP_PORT_TYPE_VALUE ));
 
 var OCTAVE_MIN = 1;
 var OCTAVE_MAX = 7;
@@ -181,7 +181,7 @@ a_off.onTriggered = function(){ handleNoteOff('a'); };
 ais_off.onTriggered = function(){ handleNoteOff('ais'); };
 b_off.onTriggered = function(){ handleNoteOff('b'); };
 
-var octave = this.addInPort( new Port( this, "octave", CABLES.OP_PORT_TYPE_));
+var octave = this.addInPort( new CABLES.Port( this, "octave", CABLES.OP_PORT_TYPE_));
 
 octave.set(4);
 frequency.set(0);
