@@ -1,9 +1,8 @@
 "use strict";
-const inRenderAlways = op.inValueBool("render continiously");
 const inExe = op.inTrigger ('Trigger');
-const inStrAxiom = op.inValueString("Axiom / seed");
-const inStrConstant1 = op.inValueString("Constant 1");
-const inStrRule1 = op.inValueString("Rule 1");
+const inStrAxiom = op.inValueString("Axiom / seed","F");
+const inStrConstant1 = op.inValueString("Constant 1","F");
+const inStrRule1 = op.inValueString("Rule 1","Fx5y2.2F[yxFF]fF[yXFFfzFZF]fF[yXzFFfzFZF]");
 const inStrConstant2 = op.inValueString("Constant 2");
 const inStrRule2 = op.inValueString("Rule 2");
 const inStrConstant3 = op.inValueString("Constant 3");
@@ -11,7 +10,6 @@ const inStrRule3 = op.inValueString("Rule 3");
 const inStrConstant4 = op.inValueString("Constant 4");
 const inStrRule4 = op.inValueString("Rule 4");
 
-inRenderAlways.hidePort();
 inStrAxiom.hidePort();
 inStrConstant1.hidePort();
 inStrRule1.hidePort();
@@ -23,20 +21,19 @@ inStrConstant4.hidePort();
 inStrRule4.hidePort();
 
 const inIterations = op.inValueInt("Iterations",1);
-const inStepLength = op.inValue("Step length",0.5);
-const inStepScale = op.inValue("Step scale multiplier",0.995);
-const inDefaultAngle = op.inValue("Default angle");
-const inRotateMutliplier = op.inValue("Rotation multiplier");
+const inStepLength = op.inValue("Step length",1.0);
+const inStepScale = op.inValue("Step scale multiplier",1.0);
+const inDefaultAngle = op.inValue("Default angle",45.0);
+const inRotateMutliplier = op.inValue("Rotation multiplier",1.0);
 
-
-const outTrigger = op.outTrigger("out trigger");
-const lineTrigger = op.outTrigger("line trigger");
-const stringOut = op.outValueString('String out');
-const outArray = op.outArray("Matrix Array out");
+const outTrigger = op.outTrigger("Out trigger geometry");
+const lineTrigger = op.outTrigger("Line/point trigger");
+//const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
-const outIterationNumber = op.outValue("iteration number");
-const outBranchNumber = op.outValue("branch number");
+const outIterationNumber = op.outValue("Current iteration number");
+const outBranchNumber = op.outValue("Current branch number");
 const outMax=op.outValue("Max Size");
+const stringOut = op.outValueString('Final generated string');
 
 const seed = op.inValue("random seed");
 const inRandStr = op.inValue("random strength");
@@ -54,18 +51,16 @@ var transforms = [];
 //pop in and out matrix for branch transforms
 var stack = [];
 
-
 //used for splines array
 var pointArrays = [];
 var currentPointArray=[];
 var lastPointArray=[0,0,0];
 
-
 //this becomes the axiom after the resetAll() is called 
 var sentence = "";//axiom;
 
 //an array that holds the string replacment rules
-var rules = []
+var rules = [];
 
 var needsCalc = true;
 //UI input 
@@ -89,6 +84,10 @@ inStrRule3.onChange = defineRules;
 inStrConstant4.onChange = defineRules;
 inStrRule4.onChange = defineRules;
 
+op.init = function()
+{
+    defineRules();
+}
 //creates the constants and the rule sets
 function defineRules()
 {
@@ -103,7 +102,6 @@ function defineRules()
         g : inStrConstant4.get(),
         h : inStrRule4.get()
     }
-
     generate();
 }
 //reset everything
@@ -116,8 +114,7 @@ function resetAll()
     lenScale = inStepScale.get();
 }
 
-
-//generates the string from the ruleset
+//generates the string from the ruleset array
 function generate()
 {
     //reset the state of everything
@@ -127,48 +124,54 @@ function generate()
     var nextSentence = "";
     var iterationsLimit = Math.min(6,inIterations.get());
     var iter;
+    var i;
+    var j;
+
     for (iter = 0; iter < iterationsLimit ; iter++)
     {
-        // outIterationNumber.set(iter+1);
-        iterationOutput = iter+1;
-        for (var i =0; i < sentence.length; i++)
+        var sentenceArrayLength = sentence.length;
+        var rulesArrayLength = rules.length;
+        iterationOutput += 1;
+        outIterationNumber.set(iterationOutput);
+
+        for (i =0; i < sentenceArrayLength; i++)
         {
             var current = sentence.charAt(i);
             var found = false;
 
-            for (var j = 0; j < rules.length; j++)
+            for (j = 0; j < rulesArrayLength; j++)
             {
-                if (current == rules[j].a)
+                if (current === rules[j].a)
                 {
                     found = true;
                     nextSentence += rules[j].b;
                     break;
                 }
-                else if (current == rules[j].c)
+                else if (current === rules[j].c)
                 {
                     found = true;
                     nextSentence += rules[j].d;
                     break;
                 }
-                else if (current == rules[j].e)
+                else if (current === rules[j].e)
                 {
                     found = true;
                     nextSentence += rules[j].f;
                     break;
                 }
-                else if (current == rules[j].g)
+                else if (current === rules[j].g)
                 {
                     found = true;
                     nextSentence += rules[j].h;
                     break;
                 }
-                else if (current == rules[j].i)
+                else if (current === rules[j].i)
                 {
                     found = true;
                     nextSentence += rules[j].j;
                     break;
                 }
-                else if (current == rules[j].k)
+                else if (current === rules[j].k)
                 {
                     found = true;
                     nextSentence += rules[j].l;
@@ -180,23 +183,18 @@ function generate()
         }
         //final result
         sentence = nextSentence ;
-        //used to debug the sentence as a string
-        //can be removed later
-        //stringOut.set(sentence);
-       
         //removing this will add everything on top of each other recursively
-        nextSentence="";
+        //nextSentence="";
     }
-
+    stringOut.set(sentence);
     //draw everything once with the turtle function
     turtle();
     needsCalc=false;
 }
 
-
+//used to connect start and end of branches together correctly
 var pos=vec3.create();
 var empty=vec3.create();  
-
 
 //extracts the user defined angle
 //FfFx45FF returns 45 on the x axis
@@ -208,10 +206,12 @@ function extract(str,pos)
     var output =  "";
     var parsedNumber = "";
     var currentChar = "";
+    var canceled=true;
     //starts i at 1 to drop character which is actually the identifying key!
-    for (var i = 1; i < str.length;i++)
+    for (var i = 1; i < slicedSentence.length;i++)
     {
-        output = slicedSentence.slice(i);
+        // output = slicedSentence.slice(i);
+        output = slicedSentence.substr(i, 8);
         for (var j = 0; j < output.length; j++)
         {
             currentChar = output.charAt(j);
@@ -221,17 +221,19 @@ function extract(str,pos)
             }
             else if (Number.isNaN(currentChar))
             {
+                canceled=true;
                 break;
             }
         }
+        if(canceled)break;
     }
     return parseFloat(parsedNumber);
 }
 
-
 //recreates the turtle algorithm
 function turtle()
 {
+    //used to find max distance from starting point
     var max=0;
     //create the main transform array
     trans = mat4.create();
@@ -346,9 +348,7 @@ function turtle()
         }
         else if (current == "]")
         {
-            //stack.pop();//with tree this pop destroys the branching
             //get the current branch push into the transform matrix
-
             //check if branch has a start to avoid error
             if(stack.length === 0) 
             {
@@ -360,12 +360,12 @@ function turtle()
             trans = stack[stack.length-1];
             stack.pop();
 
+            //this code section is used to correctly connect the branches together with spline
             var branchStartCoord = branchCoordStack[branchCoordStack.length-1];
 
             branchCoordStack.pop();
-            //cool line bro
+
             pointArrays.push(currentPointArray);
-            //comment out to see branch start end
 
             if(branchStartCoord) currentPointArray=[branchStartCoord[0],branchStartCoord[1],branchStartCoord[2]];
                 else currentPointArray=[];
@@ -373,16 +373,25 @@ function turtle()
     }
     needsCalc = false;
     pointArrays.push(currentPointArray);
-    outArray.set(transforms);
+    //outArray.set(transforms);
     outMax.set(max);
 }
+
 function calcLater()
 {
     needsCalc=true;
 }
+
 function render ()
 {
-    if(needsCalc)generate();
+    if(needsCalc)
+    {
+        //used to time performance, don't remove for now
+        //console.time("lsys");
+        generate();
+        //console.timeEnd('lsys');
+    }
+
     needsCalc = false;
 
     //iterate through transforms array and trigger all geometry
@@ -392,7 +401,6 @@ function render ()
         mat4.multiply(cgl.mMatrix,cgl.mMatrix,transforms[i]);
         outTrigger.trigger();
         cgl.popModelMatrix();
-
     }
     //iterate through points array for spline xyz data
     for(var i = 0; i < pointArrays.length ; i++)
