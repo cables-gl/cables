@@ -184,6 +184,8 @@ to find documentation and examples for an op, click on the op and then click the
 
 <br />
 
+
+
 set colors for ops for easier identification
 
 ![alt text ](video/colormarker.gif)
