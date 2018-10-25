@@ -17,9 +17,9 @@ var WET_MAX = 1.0;
 
 // input ports
 var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-var distortionPort = op.addInPort( new Port( op, "Distortion", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': DISTORTION_MIN, 'max': DISTORTION_MAX } ));
+var distortionPort = op.addInPort( new CABLES.Port( op, "Distortion", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': DISTORTION_MIN, 'max': DISTORTION_MAX } ));
 distortionPort.set(DISTORTION_DEFAULT);
-var oversamplePort = op.addInPort( new Port( op, "Oversample", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: OVERSAMPLE_VALUES } ) );
+var oversamplePort = op.addInPort( new CABLES.Port( op, "Oversample", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: OVERSAMPLE_VALUES } ) );
 oversamplePort.set(OVERSAMPLE_DEFAULT);
 var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);
 

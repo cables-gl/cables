@@ -171,6 +171,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                         console.error('onvaluechanged exception cought',ex);
                         console.log(ex.stack);
                         console.log('exception in: '+this.parent.name);
+                        gui.showOpCrash(this.parent);
 
                         if(CABLES.UI) CABLES.UI.MODAL.showException(ex,this.parent);
                     }
@@ -362,13 +363,15 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this.links.length===0)return;
         if(!this.parent.enabled)return;
 
+        var portTriggered=null;
         try
         {
             for (var i = 0; i < this.links.length; ++i)
             {
                 if(this.links[i].portIn)
                 {
-                    this.links[i].portIn._onTriggered();
+                    portTriggered=this.links[i].portIn;
+                    portTriggered._onTriggered();
                 }
                 this.links[i].activity();
             }
@@ -377,12 +380,15 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         {
             this.parent.enabled=false;
 
-            if(CABLES.UI) CABLES.UI.MODAL.showException(ex,this.parent);
+            if(CABLES.UI) CABLES.UI.MODAL.showException(ex,portTriggered.parent);
+
+            
+            gui.showOpCrash(portTriggered.parent);
 
             console.log('exception!');
             console.error('ontriggered exception cought',ex);
             console.log(ex.stack);
-            console.log('exception in: '+this.parent.name);
+            console.log('exception in: '+portTriggered.parent.name);
         }
     };
 

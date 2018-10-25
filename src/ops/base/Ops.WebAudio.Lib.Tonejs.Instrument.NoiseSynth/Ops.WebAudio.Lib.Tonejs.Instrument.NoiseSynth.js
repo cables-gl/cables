@@ -14,7 +14,7 @@ var VOLUME_DEFAULT = -6;
 var node = new Tone.NoiseSynth();
 
 // input ports
-var noisePort = op.addInPort( new Port( op, "Noise Type", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: NOISE_TYPES } ) );
+var noisePort = op.addInPort( new CABLES.Port( op, "Noise Type", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: NOISE_TYPES } ) );
 noisePort.set(NOISE_TYPE_DEFAULT);
 var envelopePort = op.inObject("Envelope");
 var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
