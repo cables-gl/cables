@@ -1,5 +1,5 @@
 {
-    "updated": 1540456889005,
+    "updated": 1540470943026,
     "authorName": "andro",
     "id": "7ea4d7b4-9771-4542-9601-af2698a060db",
     "created": 1540377719854,
@@ -105,16 +105,6 @@
             },
             {
                 "type": "0",
-                "name": "Current iteration number",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Current branch number",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Max Size",
                 "subType": "number"
             },
@@ -143,7 +133,7 @@
             },
             {
                 "name": "Rule 1",
-                "text": "Movement rules "
+                "text": "String to add"
             },
             {
                 "name": "Constant 2",
@@ -151,7 +141,7 @@
             },
             {
                 "name": "Rule 2",
-                "text": "Movement rules "
+                "text": "String to add"
             },
             {
                 "name": "Constant 3",
@@ -159,7 +149,7 @@
             },
             {
                 "name": "Rule 3",
-                "text": "Movement rules "
+                "text": "String to add"
             },
             {
                 "name": "Constant 4",
@@ -167,7 +157,7 @@
             },
             {
                 "name": "Rule 4",
-                "text": "Movement rules "
+                "text": "String to add"
             },
             {
                 "name": "Iterations",
@@ -218,5 +208,6 @@
                 "text": "The final string used to create the Lsystem"
             }
         ]
-    }
+    },
+    "youtubeid": "UnnFrRX1QEc"
 }

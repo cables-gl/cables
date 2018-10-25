@@ -1,5 +1,5 @@
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
@@ -7,6 +7,10 @@ op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNC
 var inSize=op.inValue("Size",1);
 var inStrength=op.inValue("Strength",0.5);
 var inSmooth=op.inValueBool("Smooth",true);
+var inWorldSpace=op.inValueBool("WorldSpace",false);
+
+
+inWorldSpace.onChange=updateWorldspace;
 
 {
     // position
@@ -22,7 +26,7 @@ var shader=null;
 var srcHeadVert=attachments.deformarea_vert;
 
 var srcBodyVert=''
-    .endl()+'pos=MOD_deform(pos);'
+    .endl()+'pos=MOD_deform(pos,mMatrix);'
     .endl();
     
 var moduleVert=null;
@@ -74,6 +78,7 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
+        updateWorldspace()
     }
     
     
@@ -89,6 +94,12 @@ op.render.onTriggered=function()
 
 
 
+function updateWorldspace()
+{
+    if(!shader)return;
+    if(inWorldSpace.get()) shader.define(moduleVert.prefix+"WORLDSPACE");
+        else shader.removeDefine(moduleVert.prefix+"WORLDSPACE");
+}
 
 
 

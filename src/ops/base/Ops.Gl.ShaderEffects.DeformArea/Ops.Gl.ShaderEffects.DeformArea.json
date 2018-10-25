@@ -22,6 +22,11 @@
             },
             {
                 "type": "0",
+                "name": "WorldSpace",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "x",
                 "subType": "number"
             },
@@ -44,7 +49,7 @@
         ],
         "name": "Ops.Gl.ShaderEffects.DeformArea"
     },
-    "updated": 1537975976131,
+    "updated": 1540479102384,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "6c40cfcb-75c8-4c64-bc13-c37faaea73df",
