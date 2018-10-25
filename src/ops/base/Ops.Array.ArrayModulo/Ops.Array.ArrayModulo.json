@@ -1,0 +1,6 @@
+{
+    "summary": "Applies a modulo operation to all values in an array",
+    "docs": {
+        "ports": []
+    }
+}
