@@ -1,4 +1,3 @@
-op.name="BrowserSpecificFile";
 
 // input ports
 var chromeFilePort = op.addInPort( new CABLES.Port( op, "Chrome File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));

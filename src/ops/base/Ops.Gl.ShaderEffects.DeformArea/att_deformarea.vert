@@ -4,10 +4,15 @@ UNI float MOD_x,MOD_y,MOD_z;
 UNI float MOD_strength;
 UNI float MOD_size;
 
-vec4 MOD_deform(vec4 pos)
+vec4 MOD_deform(vec4 pos,mat4 mMatrix)
 {
     // vec3 MOD_pos=vec3();
     vec4 modelPos=pos;
+
+#ifdef MOD_WORLDSPACE
+   modelPos=mMatrix*pos;
+#endif
+
     vec3 forcePos=vec3(MOD_x,MOD_y,MOD_z);
     vec3 vecToOrigin=modelPos.xyz-forcePos;
     float dist=abs(length(vecToOrigin));

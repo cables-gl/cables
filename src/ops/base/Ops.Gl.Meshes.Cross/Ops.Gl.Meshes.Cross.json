@@ -41,5 +41,9 @@
             }
         ],
         "name": "Ops.Gl.Meshes.Cross"
+    },
+    "summary": "Draws a cross with controllable thickness and length. ",
+    "docs": {
+        "ports": []
     }
 }
