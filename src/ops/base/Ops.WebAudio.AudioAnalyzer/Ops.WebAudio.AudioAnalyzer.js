@@ -4,14 +4,14 @@ const analyser = audioContext.createAnalyser();
 analyser.smoothingTimeConstant = 0.3;
 analyser.fftSize = 256;
 
-const refresh=op.addInPort(new Port(op,"refresh",OP_PORT_TYPE_FUNCTION));
+const refresh=op.addInPort(new CABLES.Port(op,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
 const audioIn = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", analyser);
 const anData=op.inValueSelect("Data",["Frequency","Time Domain"],"Frequency");
 
 const next=op.outFunction("Next");
 const audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", analyser);
-const avgVolume=op.addOutPort(new Port(op, "average volume",OP_PORT_TYPE_VALUE));
-const fftOut=op.addOutPort(new Port(op, "fft",OP_PORT_TYPE_ARRAY));
+const avgVolume=op.addOutPort(new CABLES.Port(op, "average volume",CABLES.OP_PORT_TYPE_VALUE));
+const fftOut=op.addOutPort(new CABLES.Port(op, "fft",CABLES.OP_PORT_TYPE_ARRAY));
 
 var fftBufferLength = analyser.frequencyBinCount;
 var fftDataArray = new Uint8Array(fftBufferLength);
