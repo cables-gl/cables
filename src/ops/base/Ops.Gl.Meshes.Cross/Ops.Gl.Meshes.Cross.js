@@ -1,19 +1,15 @@
-var render = op.inFunction('render');
-var extend = op.inValue('extend');
-var thick = op.inValue('thicker');
-var target = op.inValueBool('Crosshair');
-var active = op.inValueBool('Active',true);
+const render = op.inFunction('render');
+const extend = op.inValue('extend',1.0);
+const thick = op.inValue('thicker',0.25);
+const target = op.inValueBool('Crosshair');
+const active = op.inValueBool('Draw',true);
 
-var trigger = op.outFunction('trigger');
-var geomOut = op.outObject("geometry");
+const trigger = op.outFunction('trigger');
+const geomOut = op.outObject("geometry");
 
-
-var cgl= op.patch.cgl;
+const cgl= op.patch.cgl;
 var geom = null;
 var mesh = null;
-
-extend.set(1.0);
-thick.set(0.25);
 
 render.onTriggered=function()
 {
@@ -166,7 +162,6 @@ function buildMesh()
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);
     geomOut.set(geom);
-
 }
 
 function buildMeshLater()
@@ -175,6 +170,6 @@ function buildMeshLater()
     mesh = null;
 }
 
-extend.onChange = buildMeshLater;
-thick.onChange = buildMeshLater;
-target.onChange = buildMeshLater;
+extend.onChange =
+    thick.onChange = 
+    target.onChange = buildMeshLater;
