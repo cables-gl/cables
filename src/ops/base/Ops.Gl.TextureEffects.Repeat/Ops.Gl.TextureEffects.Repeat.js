@@ -1,10 +1,10 @@
 op.name='Repeat';
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var amountX=op.addInPort(new Port(op,"x",CABLES.OP_PORT_TYPE_VALUE,{  }));
-var amountY=op.addInPort(new Port(op,"y",CABLES.OP_PORT_TYPE_VALUE,{  }));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var amountX=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE,{  }));
+var amountY=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE,{  }));
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 

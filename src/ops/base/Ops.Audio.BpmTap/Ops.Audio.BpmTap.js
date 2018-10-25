@@ -1,14 +1,14 @@
-var exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var tap=this.addInPort(new Port(this,"tap",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
-var sync=this.addInPort(new Port(this,"sync",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
-var nudgeLeft=this.addInPort(new Port(this,"nudgeLeft",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
-var nudgeRight=this.addInPort(new Port(this,"nudgeRight",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var tap=this.addInPort(new CABLES.Port(this,"tap",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var sync=this.addInPort(new CABLES.Port(this,"sync",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var nudgeLeft=this.addInPort(new CABLES.Port(this,"nudgeLeft",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var nudgeRight=this.addInPort(new CABLES.Port(this,"nudgeRight",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
 
-var beat=this.addOutPort(new Port(this,"beat",CABLES.OP_PORT_TYPE_FUNCTION));
-var bpm=this.addOutPort(new Port(this,"Bpm",CABLES.OP_PORT_TYPE_VALUE,{display:'editor'}));
-var outStates=this.addOutPort(new Port(this,"States",CABLES.OP_PORT_TYPE_ARRAY));
+var beat=this.addOutPort(new CABLES.Port(this,"beat",CABLES.OP_PORT_TYPE_FUNCTION));
+var bpm=this.addOutPort(new CABLES.Port(this,"Bpm",CABLES.OP_PORT_TYPE_VALUE,{display:'editor'}));
+var outStates=this.addOutPort(new CABLES.Port(this,"States",CABLES.OP_PORT_TYPE_ARRAY));
 
-var beatNum=this.addOutPort(new Port(this,"Beat Index",CABLES.OP_PORT_TYPE_VALUE));
+var beatNum=this.addOutPort(new CABLES.Port(this,"Beat Index",CABLES.OP_PORT_TYPE_VALUE));
 
 var DEFAULT_BPM = 127;
 var DEFAULT_MILLIS = bpmToMillis(DEFAULT_BPM);

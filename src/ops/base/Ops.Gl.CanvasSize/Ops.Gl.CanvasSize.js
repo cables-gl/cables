@@ -1,7 +1,7 @@
 
 
-var width=op.addOutPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addOutPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var width=op.addOutPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addOutPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 var pixelRatio=op.outValue("Pixel Ratio");
 var aspect=op.outValue("Aspect Ratio");
 

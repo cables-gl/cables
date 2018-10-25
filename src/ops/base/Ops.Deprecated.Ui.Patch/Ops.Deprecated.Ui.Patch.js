@@ -2,7 +2,7 @@
 // if(!Ops.Ui.Patch.maxPatchId)Ops.Ui.Patch.maxPatchId=0;
 
 op.name='Patch';
-op.patchId=op.addInPort(new Port(op,"patchId",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
+op.patchId=op.addInPort(new CABLES.Port(op,"patchId",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 
 
 var getNewDynamicPort=function(name)
@@ -17,7 +17,7 @@ var getNewDynamicPort=function(name)
         }
     }
 
-    var p=op.addInPort(new Port(op,name,CABLES.OP_PORT_TYPE_DYNAMIC));
+    var p=op.addInPort(new CABLES.Port(op,name,CABLES.OP_PORT_TYPE_DYNAMIC));
     p.shouldLink=op.shouldLink;
     return p;
 };
@@ -137,7 +137,7 @@ function createPatchInputPort(dynPort,name)
     }
     else
     {
-        pOut = patchInputOP.addOutPort(new Port(op,"out_"+name,dynPort.type));
+        pOut = patchInputOP.addOutPort(new CABLES.Port(op,"out_"+name,dynPort.type));
     }
 
     if(dynPort.type==CABLES.OP_PORT_TYPE_FUNCTION)

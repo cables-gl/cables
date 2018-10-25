@@ -1,7 +1,7 @@
 op.name='Boolean';
 
-var v=op.addInPort(new Port(op,"value",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var result=op.addOutPort(new Port(op,"result"));
+var v=op.addInPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
 v.set(false);
 v.onValueChanged=exec;
 result.set(v.get());

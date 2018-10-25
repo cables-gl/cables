@@ -1,13 +1,13 @@
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var slices=op.addInPort(new Port(op,"slices",CABLES.OP_PORT_TYPE_VALUE));
-var stacks=op.addInPort(new Port(op,"stacks",CABLES.OP_PORT_TYPE_VALUE));
-var radius=op.addInPort(new Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var slices=op.addInPort(new CABLES.Port(op,"slices",CABLES.OP_PORT_TYPE_VALUE));
+var stacks=op.addInPort(new CABLES.Port(op,"stacks",CABLES.OP_PORT_TYPE_VALUE));
+var radius=op.addInPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 
 var startSlice=op.inValueInt("Start Slice",0);
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var geomOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 
 height.set(2);

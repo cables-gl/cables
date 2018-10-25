@@ -5,46 +5,46 @@ var shader=null;
 var module=null;
 var uniTime;
 
-this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.frequency=this.addInPort(new Port(this,"frequency",CABLES.OP_PORT_TYPE_VALUE));
+this.frequency=this.addInPort(new CABLES.Port(this,"frequency",CABLES.OP_PORT_TYPE_VALUE));
 var uniFrequency=null;
 this.frequency.val=1.0;
 // this.frequency.onValueChanged=function(){ if(uniFrequency)uniFrequency.setValue(self.frequency.val); };
 
-this.amount=this.addInPort(new Port(this,"amount",CABLES.OP_PORT_TYPE_VALUE));
+this.amount=this.addInPort(new CABLES.Port(this,"amount",CABLES.OP_PORT_TYPE_VALUE));
 var uniAmount=null;
 this.amount.val=1.0;
 // this.amount.onValueChanged=function(){ if(uniAmount)uniAmount.setValue(self.amount.val); };
 
 
-this.phase=this.addInPort(new Port(this,"phase",CABLES.OP_PORT_TYPE_VALUE));
+this.phase=this.addInPort(new CABLES.Port(this,"phase",CABLES.OP_PORT_TYPE_VALUE));
 var uniPhase=null;
 this.phase.val=1.0;
 
-var mul=this.addInPort(new Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
+var mul=this.addInPort(new CABLES.Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
 var uniMul=null;
 mul.set(3.0);
 
-var add=this.addInPort(new Port(this,"add",CABLES.OP_PORT_TYPE_VALUE));
+var add=this.addInPort(new CABLES.Port(this,"add",CABLES.OP_PORT_TYPE_VALUE));
 var uniAdd=null;
 add.set(0);
 
 
-this.toAxisX=this.addInPort(new Port(this,"axisX",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+this.toAxisX=this.addInPort(new CABLES.Port(this,"axisX",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.toAxisX.val=true;
 this.toAxisX.onValueChanged=setDefines;
 
-this.toAxisY=this.addInPort(new Port(this,"axisY",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+this.toAxisY=this.addInPort(new CABLES.Port(this,"axisY",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.toAxisY.val=true;
 this.toAxisY.onValueChanged=setDefines;
 
-this.toAxisZ=this.addInPort(new Port(this,"axisZ",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+this.toAxisZ=this.addInPort(new CABLES.Port(this,"axisZ",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 this.toAxisZ.val=true;
 this.toAxisZ.onValueChanged=setDefines;
 
-var src=op.addInPort(new Port(op,"Source",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[
+var src=op.addInPort(new CABLES.Port(op,"Source",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[
     "X * Z + Time",
     "X * Y + Time",
     "X + Time",

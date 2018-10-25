@@ -1,19 +1,19 @@
 op.name="HeightMap";
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var filename=op.addInPort(new Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 
-var extrude=op.addInPort(new Port(op,"extrude",CABLES.OP_PORT_TYPE_VALUE));
-var mWidth=op.addInPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var mHeight=op.addInPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
-var nRows=op.addInPort(new Port(op,"rows",CABLES.OP_PORT_TYPE_VALUE));
-var nColumns=op.addInPort(new Port(op,"columns",CABLES.OP_PORT_TYPE_VALUE));
-var sliceTex=op.addInPort(new Port(op,"texCoords slice",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var flat=op.addInPort(new Port(op,"flat",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var extrude=op.addInPort(new CABLES.Port(op,"extrude",CABLES.OP_PORT_TYPE_VALUE));
+var mWidth=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var mHeight=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var nRows=op.addInPort(new CABLES.Port(op,"rows",CABLES.OP_PORT_TYPE_VALUE));
+var nColumns=op.addInPort(new CABLES.Port(op,"columns",CABLES.OP_PORT_TYPE_VALUE));
+var sliceTex=op.addInPort(new CABLES.Port(op,"texCoords slice",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var flat=op.addInPort(new CABLES.Port(op,"flat",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var outGeom=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var outGeom=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 outGeom.ignoreValueSerialize=true;
 
 

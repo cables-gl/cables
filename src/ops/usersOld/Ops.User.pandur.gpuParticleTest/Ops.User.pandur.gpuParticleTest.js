@@ -1,8 +1,8 @@
 this.name='particletest';
 var cgl=this.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var num=this.addInPort(new Port(this,"count",CABLES.OP_PORT_TYPE_VALUE));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var num=this.addInPort(new CABLES.Port(this,"count",CABLES.OP_PORT_TYPE_VALUE));
 num.set(100000);
 
 var mesh=null;

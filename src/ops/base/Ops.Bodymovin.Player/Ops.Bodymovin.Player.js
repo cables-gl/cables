@@ -1,24 +1,24 @@
 op.name="bodymovin";
 
-var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var filename=op.addInPort(new Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 
-var play=op.addInPort(new Port(op,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+var play=op.addInPort(new CABLES.Port(op,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 
 
 
-var tfilter=op.addInPort(new Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
-var wrap=op.addInPort(new Port(op,"wrap",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
-var flip=op.addInPort(new Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+var wrap=op.addInPort(new CABLES.Port(op,"wrap",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
+var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var width=op.addInPort(new Port(op,"texture width"));
-var height=op.addInPort(new Port(op,"texture height"));
+var width=op.addInPort(new CABLES.Port(op,"texture width"));
+var height=op.addInPort(new CABLES.Port(op,"texture height"));
 
-var bmScale=op.addInPort(new Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['fit','nofit']}));
+var bmScale=op.addInPort(new CABLES.Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['fit','nofit']}));
 
-var rewind=op.addInPort(new Port(op,"rewind",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
-var speed=op.addInPort(new Port(op,"speed"));
-var frame=op.addInPort(new Port(op,"frame"));
+var rewind=op.addInPort(new CABLES.Port(op,"rewind",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var speed=op.addInPort(new CABLES.Port(op,"speed"));
+var frame=op.addInPort(new CABLES.Port(op,"frame"));
 
 var textureOut=op.outTexture("texture");
 

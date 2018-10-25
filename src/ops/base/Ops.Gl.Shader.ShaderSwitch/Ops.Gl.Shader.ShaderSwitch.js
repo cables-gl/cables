@@ -1,10 +1,10 @@
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var value=op.addInPort(new Port(op,"value",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var shader=op.addInPort(new Port(op,"shader true",CABLES.OP_PORT_TYPE_OBJECT));
-var shader2=op.addInPort(new Port(op,"shader false",CABLES.OP_PORT_TYPE_OBJECT));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var shaderOut=op.addOutPort(new Port(op,"shaderOut",CABLES.OP_PORT_TYPE_OBJECT));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var value=op.addInPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var shader=op.addInPort(new CABLES.Port(op,"shader true",CABLES.OP_PORT_TYPE_OBJECT));
+var shader2=op.addInPort(new CABLES.Port(op,"shader false",CABLES.OP_PORT_TYPE_OBJECT));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var shaderOut=op.addOutPort(new CABLES.Port(op,"shaderOut",CABLES.OP_PORT_TYPE_OBJECT));
 
 var cgl=op.patch.cgl;
 

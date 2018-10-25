@@ -3,7 +3,7 @@ op.name="GaussianRandomArray";
 var inNum=op.inValueInt("Num",100);
 var outArr=op.outArray("Array");
 var inDev=op.inValue("Deviation",1);
-var seed=op.addInPort(new Port(op,"Random Seed"));
+var seed=op.addInPort(new CABLES.Port(op,"Random Seed"));
 
 
 var arr=[];

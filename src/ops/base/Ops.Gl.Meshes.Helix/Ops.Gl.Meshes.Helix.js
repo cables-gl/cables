@@ -1,5 +1,5 @@
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var draw=op.inValueBool("Draw",true);
 var segments=op.inValue("Segments",40);

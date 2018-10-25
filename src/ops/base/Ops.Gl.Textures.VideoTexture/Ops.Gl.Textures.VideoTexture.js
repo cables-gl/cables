@@ -1,32 +1,32 @@
 op.name='VideoTexture';
 
-// var filename=op.addInPort(new Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'video' } ));
+// var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'video' } ));
 var filename=op.inFile("file","video");
-var play=op.addInPort(new Port(op,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
-var loop=op.addInPort(new Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+var play=op.addInPort(new CABLES.Port(op,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+var loop=op.addInPort(new CABLES.Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var autoPlay = op.inValueBool('auto play', false);
 
-var volume=op.addInPort(new Port(op,"Volume",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' } ));
-// var muted=op.addInPort(new Port(op,"mute",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+var volume=op.addInPort(new CABLES.Port(op,"Volume",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' } ));
+// var muted=op.addInPort(new CABLES.Port(op,"mute",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var muted = op.inValueBool('mute', true);
-var speed=op.addInPort(new Port(op,"speed",CABLES.OP_PORT_TYPE_VALUE ));
+var speed=op.addInPort(new CABLES.Port(op,"speed",CABLES.OP_PORT_TYPE_VALUE ));
 
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
 
-var flip=op.addInPort(new Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
-var fps=op.addInPort(new Port(op,"fps",CABLES.OP_PORT_TYPE_VALUE ));
-var time=op.addInPort(new Port(op,"set time",CABLES.OP_PORT_TYPE_VALUE ));
-var rewind=op.addInPort(new Port(op,"rewind",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'} ));
+var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+var fps=op.addInPort(new CABLES.Port(op,"fps",CABLES.OP_PORT_TYPE_VALUE ));
+var time=op.addInPort(new CABLES.Port(op,"set time",CABLES.OP_PORT_TYPE_VALUE ));
+var rewind=op.addInPort(new CABLES.Port(op,"rewind",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'} ));
 
 var inPreload=op.inValueBool("Preload",true);
 
-var textureOut=op.addOutPort(new Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
-var outDuration=op.addOutPort(new Port(op,"duration",CABLES.OP_PORT_TYPE_VALUE));
-var outProgress=op.addOutPort(new Port(op,"progress",CABLES.OP_PORT_TYPE_VALUE));
-var outTime=op.addOutPort(new Port(op,"CurrentTime",CABLES.OP_PORT_TYPE_VALUE));
+var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
+var outDuration=op.addOutPort(new CABLES.Port(op,"duration",CABLES.OP_PORT_TYPE_VALUE));
+var outProgress=op.addOutPort(new CABLES.Port(op,"progress",CABLES.OP_PORT_TYPE_VALUE));
+var outTime=op.addOutPort(new CABLES.Port(op,"CurrentTime",CABLES.OP_PORT_TYPE_VALUE));
 
-var loading=op.addOutPort(new Port(op,"Loading",CABLES.OP_PORT_TYPE_VALUE));
+var loading=op.addOutPort(new CABLES.Port(op,"Loading",CABLES.OP_PORT_TYPE_VALUE));
 var canPlayThrough = op.outValueBool('Can Play Through', false)
 
 var videoElementPlaying=false;

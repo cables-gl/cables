@@ -1,10 +1,10 @@
 var exe=op.inFunction("exe");
 var trigger=op.outFunction("trigger");
 
-var outX=op.addOutPort(new Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
-var outY=op.addOutPort(new Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
-var outWidth=op.addOutPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var outHeight=op.addOutPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var outX=op.addOutPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
+var outY=op.addOutPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+var outWidth=op.addOutPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var outHeight=op.addOutPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 
 var cgl=op.patch.cgl;
 var w=0,h=0,x=0,y=0;

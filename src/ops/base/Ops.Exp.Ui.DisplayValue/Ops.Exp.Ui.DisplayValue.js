@@ -1,6 +1,6 @@
 
-var v=op.addInPort(new Port(op,"value",CABLES.OP_PORT_TYPE_VALUE));
-var result=op.addOutPort(new Port(op,"result"));
+var v=op.addInPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
 
 var exec=function()
 {

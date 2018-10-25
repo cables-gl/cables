@@ -2,18 +2,18 @@
 // var self=this;
 var cgl=this.patch.cgl;
 this.name='MercatorCoordTransform';
-var exe=this.addInPort(new Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var arr=this.addInPort(new Port(this,"array",CABLES.OP_PORT_TYPE_ARRAY));
+var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var arr=this.addInPort(new CABLES.Port(this,"array",CABLES.OP_PORT_TYPE_ARRAY));
 
-var centerLon=this.addInPort(new Port(this,"center lon",CABLES.OP_PORT_TYPE_VALUE));
-var centerLat=this.addInPort(new Port(this,"center lat",CABLES.OP_PORT_TYPE_VALUE));
+var centerLon=this.addInPort(new CABLES.Port(this,"center lon",CABLES.OP_PORT_TYPE_VALUE));
+var centerLat=this.addInPort(new CABLES.Port(this,"center lat",CABLES.OP_PORT_TYPE_VALUE));
 
-var mul=this.addInPort(new Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
+var mul=this.addInPort(new CABLES.Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
 
 
 
-var indexOut=this.addOutPort(new Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
-var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var indexOut=this.addOutPort(new CABLES.Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 var vecMin=vec3.create();

@@ -1,8 +1,8 @@
-const render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 const inShader=op.inObject("Shader");
 const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 const amount=op.inValueSlider("Amount",0.25);
-const trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 const cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

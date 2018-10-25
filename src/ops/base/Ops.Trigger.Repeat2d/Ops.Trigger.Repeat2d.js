@@ -1,16 +1,16 @@
 
-var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var numx=op.inValueInt("num x");
 var numy=op.inValueInt("num y");
-var mul=op.addInPort(new Port(op,"mul"));
-// var center=op.addInPort(new Port(op,"center",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
+var mul=op.addInPort(new CABLES.Port(op,"mul"));
+// var center=op.addInPort(new CABLES.Port(op,"center",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
 var center=op.inValueBool("center");
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var outX=op.addOutPort(new Port(op,"x"));
-var outY=op.addOutPort(new Port(op,"y"));
-var idx=op.addOutPort(new Port(op,"index"));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var outX=op.addOutPort(new CABLES.Port(op,"x"));
+var outY=op.addOutPort(new CABLES.Port(op,"y"));
+var idx=op.addOutPort(new CABLES.Port(op,"index"));
 
 
 mul.set(1);

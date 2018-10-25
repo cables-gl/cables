@@ -1,9 +1,9 @@
 this.name="fp material";
 var cgl=this.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
-var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var texture=this.addInPort(new Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var texture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 
 var srcVert=''
     .endl()+'IN float attrVertIndex;'

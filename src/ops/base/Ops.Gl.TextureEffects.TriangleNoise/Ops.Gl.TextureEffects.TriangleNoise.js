@@ -9,7 +9,7 @@ var scale=op.inValue("scale",10);
 var angle=op.inValue("angle");
 var add=op.inValue("Add");
 
-var trigger=op.addOutPort(new Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

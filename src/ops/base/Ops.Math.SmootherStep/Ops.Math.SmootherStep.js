@@ -1,8 +1,8 @@
 
-var result=op.addOutPort(new Port(op,"result"));
-var val=op.addInPort(new Port(op,"val"));
-var min=op.addInPort(new Port(op,"min"));
-var max=op.addInPort(new Port(op,"max"));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
+var val=op.addInPort(new CABLES.Port(op,"val"));
+var min=op.addInPort(new CABLES.Port(op,"min"));
+var max=op.addInPort(new CABLES.Port(op,"max"));
 
 min.set(0);
 max.set(1);

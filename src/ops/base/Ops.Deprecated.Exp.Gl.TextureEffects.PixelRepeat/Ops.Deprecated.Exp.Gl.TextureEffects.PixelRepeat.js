@@ -1,8 +1,8 @@
 op.name="PixelRepeat";
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -17,7 +17,7 @@ var unTex=new CGL.Uniform(shader,'t','tex',0);
 var time=op.inValue("Time");
 var uniTime=new CGL.Uniform(shader,'f','time',time);
 
-var mask=op.addInPort(new Port(op,"mask",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var mask=op.addInPort(new CABLES.Port(op,"mask",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
 
 
 var prim=op.inValueSelect("Primitive",["Rectangle","Circle"],"Rectangle");

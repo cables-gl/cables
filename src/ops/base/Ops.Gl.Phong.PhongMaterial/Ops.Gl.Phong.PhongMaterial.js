@@ -4,10 +4,10 @@ var cgl=this.patch.cgl;
 // adapted from:
 // http://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
 
-var render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
 
-var trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var shaderOut=this.addOutPort(new Port(this,"shader",CABLES.OP_PORT_TYPE_OBJECT));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var shaderOut=this.addOutPort(new CABLES.Port(this,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 
 var specularStrength=op.inValue("Specular Strength",1);
 var shininess=op.inValue("Shininess",20);
@@ -76,28 +76,28 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
 {
     // diffuse color
 
-    var r=this.addInPort(new Port(this,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var r=this.addInPort(new CABLES.Port(this,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     r.onChange=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
 
-    var g=this.addInPort(new Port(this,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var g=this.addInPort(new CABLES.Port(this,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     g.onChange=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
 
-    var b=this.addInPort(new Port(this,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=this.addInPort(new CABLES.Port(this,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     b.onChange=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
     };
 
-    var a=this.addInPort(new Port(this,"diffuse a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var a=this.addInPort(new CABLES.Port(this,"diffuse a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     a.onChange=function()
     {
         if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
@@ -113,7 +113,7 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
 
 
 {
-    var colorizeTex=this.addInPort(new Port(this,"colorize texture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var colorizeTex=this.addInPort(new CABLES.Port(this,"colorize texture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
     colorizeTex.onChange=function()
     {
         if(colorizeTex.get()) shader.define('COLORIZE_TEXTURE');
@@ -124,7 +124,7 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
 {
     // diffuse texture
 
-    var diffuseTexture=this.addInPort(new Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var diffuseTexture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var diffuseTextureUniform=null;
     shader.bindTextures=bindTextures;
 
@@ -145,7 +145,7 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
         }
     };
 
-    var aoTexture=this.addInPort(new Port(this,"AO Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var aoTexture=this.addInPort(new CABLES.Port(this,"AO Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var aoTextureUniform=null;
     aoTexture.ignoreValueSerialize=true;
     shader.bindTextures=bindTextures;
@@ -168,7 +168,7 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
     };
 
 
-    var specTexture=this.addInPort(new Port(this,"Specular Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var specTexture=this.addInPort(new CABLES.Port(this,"Specular Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var specTextureUniform=null;
 
     specTexture.onChange=function()
@@ -189,7 +189,7 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
     };
 
 
-    var normalTexture=this.addInPort(new Port(this,"Normal Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+    var normalTexture=this.addInPort(new CABLES.Port(this,"Normal Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
     var normalTextureUniform=null;
 
     normalTexture.onChange=function()
@@ -211,8 +211,8 @@ var uniNormIntensity=new CGL.Uniform(shader,'f','normalTexIntensity',normIntensi
 
 
 
-    var diffuseRepeatX=this.addInPort(new Port(this,"diffuseRepeatX",CABLES.OP_PORT_TYPE_VALUE));
-    var diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
+    var diffuseRepeatX=this.addInPort(new CABLES.Port(this,"diffuseRepeatX",CABLES.OP_PORT_TYPE_VALUE));
+    var diffuseRepeatY=this.addInPort(new CABLES.Port(this,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
     diffuseRepeatX.set(1);
     diffuseRepeatY.set(1);
 

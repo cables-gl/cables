@@ -1,17 +1,17 @@
 // shader from: https://github.com/mattdesl/glsl-fxaa
 
 op.name='FXAA';
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var fxaa_span=op.addInPort(new Port(op,"span",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:[0,2,4,8,16,32,64]}));
-var fxaa_reduceMin=op.addInPort(new Port(op,"reduceMin",CABLES.OP_PORT_TYPE_VALUE));
-var fxaa_reduceMul=op.addInPort(new Port(op,"reduceMul",CABLES.OP_PORT_TYPE_VALUE));
+var fxaa_span=op.addInPort(new CABLES.Port(op,"span",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:[0,2,4,8,16,32,64]}));
+var fxaa_reduceMin=op.addInPort(new CABLES.Port(op,"reduceMin",CABLES.OP_PORT_TYPE_VALUE));
+var fxaa_reduceMul=op.addInPort(new CABLES.Port(op,"reduceMul",CABLES.OP_PORT_TYPE_VALUE));
 
 var useVPSize=op.inValueBool("use viewport size",true);
 
-var texWidth=op.addInPort(new Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var texHeight=op.addInPort(new Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var texWidth=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var texHeight=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

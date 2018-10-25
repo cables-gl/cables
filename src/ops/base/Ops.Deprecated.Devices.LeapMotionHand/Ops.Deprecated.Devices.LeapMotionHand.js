@@ -4,23 +4,23 @@
 
     this.patch.loadLib('leap-motion');
 
-    var leapFrame=this.addInPort(new Port(this,"leap frame",CABLES.OP_PORT_TYPE_OBJECT));
+    var leapFrame=this.addInPort(new CABLES.Port(this,"leap frame",CABLES.OP_PORT_TYPE_OBJECT));
     leapFrame.ignoreValueSerialize=true;
 
-    var handIndex=this.addInPort(new Port(this,"hand index"));
+    var handIndex=this.addInPort(new CABLES.Port(this,"hand index"));
 
 
-    var valid=this.addOutPort(new Port(this,"valid"));
+    var valid=this.addOutPort(new CABLES.Port(this,"valid"));
 
-    // var sphereCenterX=this.addOutPort(new Port(this,"sphereCenter x"));
-    // var sphereCenterY=this.addOutPort(new Port(this,"sphereCenter y"));
-    // var sphereCenterZ=this.addOutPort(new Port(this,"sphereCenter z"));
-    // var sphereRadius=this.addOutPort(new Port(this,"sphereRadius"));
+    // var sphereCenterX=this.addOutPort(new CABLES.Port(this,"sphereCenter x"));
+    // var sphereCenterY=this.addOutPort(new CABLES.Port(this,"sphereCenter y"));
+    // var sphereCenterZ=this.addOutPort(new CABLES.Port(this,"sphereCenter z"));
+    // var sphereRadius=this.addOutPort(new CABLES.Port(this,"sphereRadius"));
 
 
-    var palmX=this.addOutPort(new Port(this,"palm x"));
-    var palmY=this.addOutPort(new Port(this,"palm y"));
-    var palmZ=this.addOutPort(new Port(this,"palm z"));
+    var palmX=this.addOutPort(new CABLES.Port(this,"palm x"));
+    var palmY=this.addOutPort(new CABLES.Port(this,"palm y"));
+    var palmZ=this.addOutPort(new CABLES.Port(this,"palm z"));
 
     handIndex.set(0);
 

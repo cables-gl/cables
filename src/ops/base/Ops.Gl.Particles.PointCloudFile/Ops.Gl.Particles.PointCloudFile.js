@@ -1,7 +1,7 @@
-const render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-const trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-const points=this.addInPort(new Port(this,"points",CABLES.OP_PORT_TYPE_ARRAY));
-const doCenter=this.addInPort(new Port(this,"center",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+const render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const points=this.addInPort(new CABLES.Port(this,"points",CABLES.OP_PORT_TYPE_ARRAY));
+const doCenter=this.addInPort(new CABLES.Port(this,"center",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 const cgl=this.patch.cgl;
 

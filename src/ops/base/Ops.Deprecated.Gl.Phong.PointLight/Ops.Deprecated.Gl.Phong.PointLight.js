@@ -1,20 +1,20 @@
 op.name='PointLight';
 
-var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var attachment=op.addOutPort(new Port(op,"attachment",CABLES.OP_PORT_TYPE_FUNCTION));
-var attenuation=op.addInPort(new Port(op,"attenuation",CABLES.OP_PORT_TYPE_VALUE));
+var attachment=op.addOutPort(new CABLES.Port(op,"attachment",CABLES.OP_PORT_TYPE_FUNCTION));
+var attenuation=op.addInPort(new CABLES.Port(op,"attenuation",CABLES.OP_PORT_TYPE_VALUE));
 
-var r=op.addInPort(new Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var x=op.addInPort(new Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
-var y=op.addInPort(new Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
-var z=op.addInPort(new Port(op,"z",CABLES.OP_PORT_TYPE_VALUE));
+var x=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
+var y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+var z=op.addInPort(new CABLES.Port(op,"z",CABLES.OP_PORT_TYPE_VALUE));
 
-var mul=op.addInPort(new Port(op,"multiply",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var mul=op.addInPort(new CABLES.Port(op,"multiply",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
 var cgl=op.patch.cgl;
 mul.set(1);

@@ -13,7 +13,7 @@ var titles=[
 
 for(var i=0;i<numImages;i++)
 {
-    var file=op.addInPort(new Port(op,titles[i],CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+    var file=op.addInPort(new CABLES.Port(op,titles[i],CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
     file.onChange=load;
     inFilenames.push(file);
 }

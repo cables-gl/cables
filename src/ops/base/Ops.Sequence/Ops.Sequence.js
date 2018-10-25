@@ -1,4 +1,4 @@
-const exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 const exes=[];
 const triggers=[];
 const num=16;
@@ -11,11 +11,11 @@ function triggerAll()
 
 for(var i=0;i<num;i++)
 {
-    triggers.push( op.addOutPort(new Port(op,"trigger "+i,CABLES.OP_PORT_TYPE_FUNCTION)) );
+    triggers.push( op.addOutPort(new CABLES.Port(op,"trigger "+i,CABLES.OP_PORT_TYPE_FUNCTION)) );
     
     if(i<num-1)
     {
-        var newExe=op.addInPort(new Port(op,"exe "+i,CABLES.OP_PORT_TYPE_FUNCTION));
+        var newExe=op.addInPort(new CABLES.Port(op,"exe "+i,CABLES.OP_PORT_TYPE_FUNCTION));
         newExe.onTriggered=triggerAll;
         exes.push( newExe );
     }

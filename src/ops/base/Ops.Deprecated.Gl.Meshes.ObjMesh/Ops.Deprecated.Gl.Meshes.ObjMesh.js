@@ -3,12 +3,12 @@
     var cgl=this.patch.cgl;
 
     this.name='OBJ Mesh';
-    this.render=this.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-    this.trigger=this.addOutPort(new Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-    this.calcNormals=this.addInPort(new Port(this,"calcNormals",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','face','vertex']}));
+    this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+    this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+    this.calcNormals=this.addInPort(new CABLES.Port(this,"calcNormals",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','face','vertex']}));
     this.calcNormals.val='no';
 
-    this.filename=this.addInPort(new Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{display:'file',type:'string',filter:'mesh'}));
+    this.filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{display:'file',type:'string',filter:'mesh'}));
 
     this.mesh=null;
 

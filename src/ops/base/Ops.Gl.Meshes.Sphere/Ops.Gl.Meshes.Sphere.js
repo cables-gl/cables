@@ -1,10 +1,10 @@
-const render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 const inStacks=op.inValueInt("stacks",32);
 const inSlices=op.inValueInt("slices",32);
-const inRadius=op.addInPort(new Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
+const inRadius=op.addInPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
 const inRender=op.inValueBool("Render",true);
-const trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-const geomOut=op.addOutPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 inRadius.set(1);
 geomOut.ignoreValueSerialize=true;

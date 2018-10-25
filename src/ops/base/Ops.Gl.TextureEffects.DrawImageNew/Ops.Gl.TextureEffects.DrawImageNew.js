@@ -1,16 +1,16 @@
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
 var amount=op.inValueSlider("amount",1);
 
-var image=op.addInPort(new Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
-var imageAlpha=op.addInPort(new Port(op,"imageAlpha",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var image=op.addInPort(new CABLES.Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var imageAlpha=op.addInPort(new CABLES.Port(op,"imageAlpha",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
 
 var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
-var removeAlphaSrc=op.addInPort(new Port(op,"removeAlphaSrc",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var invAlphaChannel=op.addInPort(new Port(op,"invert alpha channel",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var removeAlphaSrc=op.addInPort(new CABLES.Port(op,"removeAlphaSrc",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 blendMode.set('normal');
 var cgl=op.patch.cgl;
@@ -53,8 +53,8 @@ alphaSrc.set("alpha channel");
     //
     // texture flip
     //
-    var flipX=op.addInPort(new Port(op,"flip x",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-    var flipY=op.addInPort(new Port(op,"flip y",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipX=op.addInPort(new CABLES.Port(op,"flip x",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipY=op.addInPort(new CABLES.Port(op,"flip y",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
     flipX.onValueChanged=function()
     {

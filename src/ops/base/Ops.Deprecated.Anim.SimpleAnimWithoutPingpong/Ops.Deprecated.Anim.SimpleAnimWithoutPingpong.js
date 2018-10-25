@@ -1,19 +1,19 @@
 op.name="SimpleAnimWithoutPingpong";
 
-var exe=op.addInPort(new Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var reset=op.inFunctionButton("reset");
 var rewind=op.inFunctionButton("rewind");
 
-var inStart=op.addInPort(new Port(op,"start"));
-var inEnd=op.addInPort(new Port(op,"end"));
-var duration=op.addInPort(new Port(op,"duration"));
+var inStart=op.addInPort(new CABLES.Port(op,"start"));
+var inEnd=op.addInPort(new CABLES.Port(op,"end"));
+var duration=op.addInPort(new CABLES.Port(op,"duration"));
 
-var loop=op.addInPort(new Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
+var loop=op.addInPort(new CABLES.Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
 var pingpong=op.inValueBool("Ping Pong",true);
 
-var result=op.addOutPort(new Port(op,"result"));
-var finished=op.addOutPort(new Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
+var finished=op.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
 
 var resetted=false;
 var waitForReset=op.inValueBool("Wait for Reset",false);

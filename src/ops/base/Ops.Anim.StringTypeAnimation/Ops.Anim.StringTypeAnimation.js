@@ -1,4 +1,4 @@
-var text=op.addInPort(new Port(op,"text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
+var text=op.addInPort(new CABLES.Port(op,"text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var inRestart=op.inFunctionButton("Restart");
 var speed=op.inValue("Speed",500);
 var speedVariation=op.inValueSlider("Speed Variation");

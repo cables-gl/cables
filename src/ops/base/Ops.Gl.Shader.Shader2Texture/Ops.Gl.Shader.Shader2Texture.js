@@ -1,6 +1,6 @@
 var exec=op.inFunction("Render");
 var inShader=op.inObject("Shader");
-var tfilter=op.addInPort(new Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear']}));
+var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear']}));
 // ,'mipmap'
 const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat'],'clamp to edge');
 

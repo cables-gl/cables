@@ -1,4 +1,4 @@
-var render=op.addInPort(new Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
@@ -11,7 +11,7 @@ var addY=op.inValue("Y",0);
 
 var addZ=op.inValue("Z",0);
 
-var trigger=op.addOutPort(new Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 var cgl=op.patch.cgl;

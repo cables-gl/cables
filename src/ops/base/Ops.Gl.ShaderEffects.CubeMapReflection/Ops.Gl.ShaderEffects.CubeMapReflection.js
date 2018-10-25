@@ -1,10 +1,10 @@
 
-var render=op.addInPort(new Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var inCubemap=op.inObject("Cubemap");
 
 var inAmount=op.inValueSlider("Amount",0.3);
 
-var next=op.addOutPort(new Port(this,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new CABLES.Port(this,"next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var shader=null;
 var moduleFrag=null;

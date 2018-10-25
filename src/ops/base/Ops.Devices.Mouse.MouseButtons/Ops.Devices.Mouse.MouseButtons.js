@@ -17,7 +17,7 @@ var triggerMouseUpLeft=op.outFunction("Mouse Up Left");
 var triggerMouseUpMiddle=op.outFunction("Mouse Up Middle");
 var triggerMouseUpRight=op.outFunction("Mouse Up Right");
 
-var area=op.addInPort(new Port(op,"Area",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
+var area=op.addInPort(new CABLES.Port(op,"Area",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
 var active=op.inValueBool("Active",true);
 
 area.set("Canvas");

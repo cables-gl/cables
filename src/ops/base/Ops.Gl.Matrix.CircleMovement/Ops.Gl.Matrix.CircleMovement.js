@@ -1,19 +1,19 @@
 
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var segments=op.addInPort(new Port(op,"segments"));
-var radius=op.addInPort(new Port(op,"radius"));
-var mulX=op.addInPort(new Port(op,"mulX"));
-var mulY=op.addInPort(new Port(op,"mulY"));
-var percent=op.addInPort(new Port(op,"percent",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var segments=op.addInPort(new CABLES.Port(op,"segments"));
+var radius=op.addInPort(new CABLES.Port(op,"radius"));
+var mulX=op.addInPort(new CABLES.Port(op,"mulX"));
+var mulY=op.addInPort(new CABLES.Port(op,"mulY"));
+var percent=op.addInPort(new CABLES.Port(op,"percent",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var offset=op.addInPort(new Port(op,"offset"));
+var offset=op.addInPort(new CABLES.Port(op,"offset"));
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var index=op.addOutPort(new Port(op,"index"));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var index=op.addOutPort(new CABLES.Port(op,"index"));
 
-var outX=op.addOutPort(new Port(op,"X"));
-var outY=op.addOutPort(new Port(op,"Y"));
+var outX=op.addOutPort(new CABLES.Port(op,"X"));
+var outY=op.addOutPort(new CABLES.Port(op,"Y"));
 
 
 var speed=op.inValue("speed",1);

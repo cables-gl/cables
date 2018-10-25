@@ -1,8 +1,8 @@
-op.dyn=op.addInPort(new Port(op,"create port",CABLES.OP_PORT_TYPE_DYNAMIC));
-op.dynOut=op.addOutPort(new Port(op,"create port out",CABLES.OP_PORT_TYPE_DYNAMIC));
+op.dyn=op.addInPort(new CABLES.Port(op,"create port",CABLES.OP_PORT_TYPE_DYNAMIC));
+op.dynOut=op.addOutPort(new CABLES.Port(op,"create port out",CABLES.OP_PORT_TYPE_DYNAMIC));
 
-var dataStr=op.addInPort(new Port(op,"dataStr",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
-op.patchId=op.addInPort(new Port(op,"patchId",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
+var dataStr=op.addInPort(new CABLES.Port(op,"dataStr",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
+op.patchId=op.addInPort(new CABLES.Port(op,"patchId",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 
 var data={"ports":[],"portsOut":[]};
 
@@ -126,12 +126,12 @@ function setupPorts()
         {
             // console.log("ports[i].name",ports[i].name);
 
-            var newPort=op.addInPort(new Port(op,ports[i].name,ports[i].type));
+            var newPort=op.addInPort(new CABLES.Port(op,ports[i].name,ports[i].type));
             var patchInputOp=getSubPatchInputOp();
 
             // console.log(patchInputOp);
 
-            var newPortInPatch=patchInputOp.addOutPort(new Port(patchInputOp,ports[i].name,ports[i].type));
+            var newPortInPatch=patchInputOp.addOutPort(new CABLES.Port(patchInputOp,ports[i].name,ports[i].type));
 
 // console.log('newPortInPatch',newPortInPatch);
 
@@ -145,9 +145,9 @@ function setupPorts()
     {
         if(!op.getPortByName(portsOut[i].name))
         {
-            var newPortOut=op.addOutPort(new Port(op,portsOut[i].name,portsOut[i].type));
+            var newPortOut=op.addOutPort(new CABLES.Port(op,portsOut[i].name,portsOut[i].type));
             var patchOutputOp=getSubPatchOutputOp();
-            var newPortOutPatch=patchOutputOp.addInPort(new Port(patchOutputOp,portsOut[i].name,portsOut[i].type));
+            var newPortOutPatch=patchOutputOp.addInPort(new CABLES.Port(patchOutputOp,portsOut[i].name,portsOut[i].type));
 
             newPortOut.ignoreValueSerialize=true;
 

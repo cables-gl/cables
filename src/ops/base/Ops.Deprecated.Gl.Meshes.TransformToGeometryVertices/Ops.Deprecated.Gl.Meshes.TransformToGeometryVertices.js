@@ -1,15 +1,15 @@
 op.name='TransformToGeometryVertices';
-var render=op.addInPort(new Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var geometry=op.addInPort(new Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var geometry=op.addInPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 
 var modulo=op.inValue("modulo",1);
 
-var trigger=op.addOutPort(new Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var x=op.addOutPort(new Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
-var y=op.addOutPort(new Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
-var z=op.addOutPort(new Port(op,"z",CABLES.OP_PORT_TYPE_VALUE));
-var index=op.addOutPort(new Port(op,"index",CABLES.OP_PORT_TYPE_VALUE));
+var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var x=op.addOutPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
+var y=op.addOutPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+var z=op.addOutPort(new CABLES.Port(op,"z",CABLES.OP_PORT_TYPE_VALUE));
+var index=op.addOutPort(new CABLES.Port(op,"index",CABLES.OP_PORT_TYPE_VALUE));
 
 geometry.ignoreValueSerialize=true;
 

@@ -1,6 +1,6 @@
 op.name="CursorKeys";
 
-var canvasOnly=op.addInPort(new Port(op,"canvas only",CABLES.OP_PORT_TYPE_VALUE, {"display": "bool"}));
+var canvasOnly=op.addInPort(new CABLES.Port(op,"canvas only",CABLES.OP_PORT_TYPE_VALUE, {"display": "bool"}));
 
 var pressedUp=op.outValue("Up");
 var pressedDown=op.outValue("Down");
