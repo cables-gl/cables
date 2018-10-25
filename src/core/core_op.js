@@ -367,7 +367,7 @@ CABLES.Op = function()
 
             p.shouldLink=function(p1,p2)
             {
-              if(filter && CABLES.Helpers.isArray(filter))
+              if(filter && CABLES.UTILS.isArray(filter))
               {
                 for(var i=0; i<filter.length; i++)
                 {
