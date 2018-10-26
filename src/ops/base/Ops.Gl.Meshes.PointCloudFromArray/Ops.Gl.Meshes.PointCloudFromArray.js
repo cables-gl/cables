@@ -12,25 +12,45 @@ seed.onChange=reset;
 arr.onChange=reset;
 numPoints.onChange=updateNumVerts;
 
-function updateNumVerts()
-{
-    if(mesh)
-    {
-        mesh.setNumVertices(numPoints.get());
-    }
-}
-
-
-function doRender()
-{
-    if(mesh) mesh.render(cgl.getShader());
-}
+var hasError=false;
 
 exe.onTriggered=doRender;
 
 var mesh=null;
 var geom=new CGL.Geometry("pointcloudfromarray");
 var texCoords=[];
+
+
+
+function doRender()
+{
+    if(CABLES.UI)
+    {
+        var shader=cgl.getShader();
+        if(shader && shader.glPrimitive!=cgl.gl.POINTS)
+        {
+            if(!hasError)
+            {
+                op.uiAttr( { 'warning': 'using a Material not made for point rendering. maybe use pointMaterial.' } );
+                hasError=true;
+            }
+            return;
+        }
+        if(hasError)
+        {
+            op.uiAttr({'warning':null});
+            hasError=false;
+        }
+    }
+    
+    if(mesh) mesh.render(cgl.getShader());
+}
+
+
+function updateNumVerts()
+{
+    if(mesh) mesh.setNumVertices(numPoints.get());
+}
 
 function reset()
 {
@@ -77,7 +97,8 @@ function reset()
     {
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);
-        
+
+
         
         if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
@@ -93,7 +114,8 @@ function reset()
         // var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,verts,3);
         // attr.numItems=numPoints.get();
     }
-updateNumVerts();
+    
+    updateNumVerts();
 
 }
 
