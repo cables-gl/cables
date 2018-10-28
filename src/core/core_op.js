@@ -363,11 +363,11 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.inDynamic=
         function(name,filter,options,v){
-            var p=new Port(this,name,CABLES.OP_PORT_TYPE_DYNAMIC,options);
+            var p=new CABLES.Port( this,name,CABLES.OP_PORT_TYPE_DYNAMIC,options);
 
             p.shouldLink=function(p1,p2)
             {
-              if(filter && CABLES.Helpers.isArray(filter))
+              if(filter && CABLES.UTILS.isArray(filter))
               {
                 for(var i=0; i<filter.length; i++)
                 {
@@ -909,6 +909,7 @@ CABLES.Op.getNamespaceClassName = function(opName) {
     if( opName.startsWith('Ops.Html') ) return 'html';
     if( opName.startsWith('Ops.Sidebar') ) return 'html';
     if( opName.startsWith('Ops.Math') ) return 'math';
+    if( opName.startsWith('Ops.User') ) return 'user';
     return 'default';
 };
 

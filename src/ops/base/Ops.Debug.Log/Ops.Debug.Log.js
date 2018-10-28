@@ -4,7 +4,7 @@ var functionInput=op.addInPort(new CABLES.Port(op,"Function Input",CABLES.OP_POR
 // var valueInput=op.addInPort(new CABLES.Port(op,"Value Input"));
 var valueInput=op.inValueString('Value Input');
 valueInput.set('');
-var arrayInput=op.addInPort(new CABLES.Port(op,"Array Input", OP_PORT_TYPE_ARRAY));
+var arrayInput=op.addInPort(new CABLES.Port(op,"Array Input",CABLES.OP_PORT_TYPE_ARRAY));
 arrayInput.set('');
 var objectInput = op.inObject('Object Input');
 objectInput.onChange = printObject;

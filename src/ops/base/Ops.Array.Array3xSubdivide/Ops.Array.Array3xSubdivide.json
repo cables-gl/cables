@@ -8,11 +8,13 @@
             },
             {
                 "type": "0",
-                "name": "Num Subdivs"
+                "name": "Num Subdivs",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Smooth",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -23,7 +25,7 @@
         ],
         "name": "Ops.Array.Array3xSubdivide"
     },
-    "updated": 1514999071122,
+    "updated": 1540463569442,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "7a0844a7-42f9-4346-8481-0ffd13152ee8",

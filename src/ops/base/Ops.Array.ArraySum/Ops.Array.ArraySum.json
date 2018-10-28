@@ -1,23 +1,30 @@
 {
-    "updated": 1517955212901,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "5593ea29-19d3-4161-af0c-b8d62079487d",
-    "created": 1513581508546,
+    "updated": 1540461266168,
+    "authorName": "andro",
+    "id": "c6b5bf63-0be8-4eea-acc0-9d32973e665a",
+    "created": 1540461245768,
     "layout": {
         "portsIn": [
             {
                 "type": "3",
-                "name": "Array"
+                "name": "In"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Sum"
+                "type": "3",
+                "name": "Result"
             }
         ],
         "name": "Ops.Array.ArraySum"
     },
-    "summary": "sum of every number in an array"
+    "summary": "Adds one number to all values in an array",
+    "docs": {
+        "ports": []
+    }
 }

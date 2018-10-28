@@ -11,7 +11,6 @@ function update() {
     var event = eventInPort.get();
     if(event && event.preventDefault) {
         event.preventDefault();
-        op.log('prevent default', event);
     }
     eventOutPort.set(event);
     nextPort.trigger();

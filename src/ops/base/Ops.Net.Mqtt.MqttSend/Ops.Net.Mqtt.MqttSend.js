@@ -3,7 +3,7 @@ op.name="MqttSend";
 var mqttObj = op.inObject("MQTT Object");
 var message = op.inValue("Message", "Hello Cables");
 var channel = op.inValueString("Channel", "/test");
-var send = op.addInPort( new Port( this, "Send", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var send = op.addInPort( new CABLES.Port( this, "Send",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 
 var mqttOutObj = op.outObject("MQTT Object");
 

@@ -33,16 +33,16 @@ var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node
 var amplitudePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Amplitude", node.amplitude, AMPLITUDE_DEFAULT);
 var minPort = op.inValue("Min", MIN_DEFAULT);
 var maxPort = op.inValue("Max", MAX_DEFAULT);
-var typePort = op.addInPort( new Port( op, "Type", CABLES.OP_PORT_TYPE_, { display: 'dropdown', values: TYPES } ) );
+var typePort = op.addInPort( new CABLES.Port( op, "Type", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
 typePort.set("sine");
-var phasePort = op.addInPort( new Port( op, "Phase", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX }, PHASE_DEFAULT ));
+var phasePort = op.addInPort( new CABLES.Port( op, "Phase", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX }, PHASE_DEFAULT ));
 phasePort.set(PHASE_DEFAULT);
 // TODO: volume should be a dynamic port, but must be changed like this: node.volume.value, not node.set("volume", volume);
 //var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
-var volumePort = op.addInPort( new Port( op, "Volume", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX } ));
+var volumePort = op.addInPort( new CABLES.Port( op, "Volume", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX } ));
 volumePort.set(VOLUME_DEFAULT);
 
-var mutePort = op.addInPort( new Port( op, "Mute", CABLES.OP_PORT_TYPE_, { display: 'bool' } ) );
+var mutePort = op.addInPort( new CABLES.Port( op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(false);
 
 // change listeners

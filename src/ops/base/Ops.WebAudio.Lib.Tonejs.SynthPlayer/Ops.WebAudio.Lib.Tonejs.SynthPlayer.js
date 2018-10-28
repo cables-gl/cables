@@ -4,7 +4,7 @@ CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
 var synthPort = op.inObject("Synth");
-var playTonePort = op.addInPort( new Port( this, "Play Tone", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var playTonePort = op.addInPort( new CABLES.Port( this, "Play Tone",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var notePort = op.inValueString("Note");
 var velocityPort = op.inObject("Velocity");
 var durationPort = op.inValueString("Duration");

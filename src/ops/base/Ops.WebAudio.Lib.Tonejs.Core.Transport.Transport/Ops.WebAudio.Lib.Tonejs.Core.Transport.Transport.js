@@ -20,19 +20,19 @@ var STOP_TIME_DEFAULT = "+0";
 
 // in ports
 var updatePort = op.inFunction("Update");
-var bpmPort = op.addInPort( new Port( this, "BPM", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': 1, 'max': 300 } ));
-var swingPort = op.addInPort( new Port( this, "Swing", CABLES.OP_PORT_TYPE_, { 'display': 'range', 'min': 0, 'max': 1 } ));
+var bpmPort = op.addInPort( new CABLES.Port( this, "BPM", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 300 } ));
+var swingPort = op.addInPort( new CABLES.Port( this, "Swing", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
 var swingSubdivisionPort = op.inValueString("Swing Subdivision");
 var timeSignaturePort = op.inValue("Time Division");
-var loopPort = op.addInPort( new Port( op, "Loop", CABLES.OP_PORT_TYPE_, { display: 'bool' } ) );
+var loopPort = op.addInPort( new CABLES.Port( op, "Loop", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 var loopStartPort = op.inValueString("Loop Start");
 var loopEndPort = op.inValueString("Loop End");
 var ppqPort = op.inValue("Pulses Per Quarter Note");
-var startPort = op.addInPort( new Port( this, "Start", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var startPort = op.addInPort( new CABLES.Port( this, "Start",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var startOffsetPort = op.inValueString("Start Offset", START_OFFSET_DEFAULT);
 var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
-var stopPort = op.addInPort( new Port( this, "Stop", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var stopPort = op.addInPort( new CABLES.Port( this, "Stop",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 
 // out ports

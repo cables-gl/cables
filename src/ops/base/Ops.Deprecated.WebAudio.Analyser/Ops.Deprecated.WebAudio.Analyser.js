@@ -1,5 +1,3 @@
-op.name='Audio Analyser';
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
@@ -47,10 +45,11 @@ refresh.onTriggered = function() {
     var values = 0;
 
     for (var i = 0; i < array.length; i++)
-        values += array[i];
-
-    var average = values / array.length;
     
+        values += array[i];
+    
+    var average = values / array.length;
+
     
     avgVolume.set(average/128);
     try{

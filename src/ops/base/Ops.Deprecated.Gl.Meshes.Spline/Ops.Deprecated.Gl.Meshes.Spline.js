@@ -198,7 +198,7 @@ function bufferData()
         if(oldLength!=geom.vertices.length)
         {
             oldLength=geom.vertices.length;
-            if(geom.vertices.length*2!=geom.texCoords.length)geom.texCoords.length=geom.vertices.length*2;
+            // if(geom.vertices.length*2!=geom.texCoords.length)geom.texCoords.length=geom.vertices.length*2;
             geom.verticesIndices.length=geom.vertices.length;
             for(i=0;i<geom.vertices.length;i+=3)
             {

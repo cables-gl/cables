@@ -764,14 +764,7 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
         b=0.5;
     }
     return ''
-        .endl()+'//allows you to pass a uniform value into this shader HUND'
-        .endl()+'uniform float uValueIn;'
-        // .endl()+'//Allows a texture lookup'
-        // .endl()+'uniform sampler2d textureIn;'
-        // .endl()+'//uv co-ordinates'
-
-        // .endl()+'IN vec2 texCoord;'
-        // .endl()+'//used to inject this code into another shader'
+        .endl()+'IN vec2 texCoord;'
         .endl()+'{{MODULES_HEAD}}'
         .endl()+'void main()'
         .endl()+'{'

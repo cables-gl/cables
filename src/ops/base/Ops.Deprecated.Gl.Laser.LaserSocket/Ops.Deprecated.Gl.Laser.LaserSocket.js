@@ -6,7 +6,7 @@ this.url=this.addInPort(new CABLES.Port(this,"url",CABLES.OP_PORT_TYPE_VALUE,{ty
 
 var speed=this.addInPort(new CABLES.Port(this,"speed",CABLES.OP_PORT_TYPE_VALUE));
 speed.set(5000);
-this.result=this.addOutPort(new CABLES.Port(this,"result", OP_PORT_TYPE_OBJECT));
+this.result=this.addOutPort(new CABLES.Port(this,"result",CABLES.OP_PORT_TYPE_OBJECT));
 var outConnected=this.addOutPort(new CABLES.Port(this,"connected"));
 outConnected.set(false);
 

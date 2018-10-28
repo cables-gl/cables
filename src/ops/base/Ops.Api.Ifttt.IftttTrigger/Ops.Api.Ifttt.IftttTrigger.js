@@ -5,7 +5,7 @@ var dummyEventName = "your_event_name";
 
 var key = op.inValueString("Key", dummyKey);
 var eventName = op.inValueString("Event Name", dummyEventName);
-var trigger = op.addInPort( new Port( this, "Trigger", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var trigger = op.addInPort( new CABLES.Port( this, "Trigger",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 
 // Complete URL looks like this:
 // https://maker.ifttt.com/trigger/button_pressed/with/key/1234567-12345678901234

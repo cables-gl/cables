@@ -1,0 +1,24 @@
+{
+    "updated": 1540457848276,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "5593ea29-19d3-4161-af0c-b8d62079487d",
+    "created": 1513581508546,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Sum",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.ArraySumUp"
+    },
+    "summary": "sum of every number in an array"
+}

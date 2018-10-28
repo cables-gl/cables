@@ -1,6 +1,6 @@
-var inArray = op.inArray("Array In");
-var inValue = op.inValue("Value",1.0);
-var outArray = op.outArray("Array Out");
+const inArray = op.inArray("Array In");
+const inValue = op.inValue("Value",1.0);
+const outArray = op.outArray("Array Out");
 
 var newArr = [];
 outArray.set(newArr);

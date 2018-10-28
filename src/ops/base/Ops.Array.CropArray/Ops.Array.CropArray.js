@@ -3,7 +3,7 @@ op.name="CropArray";
 // input
 var srcArrayPort = op.inArray("Source Array");
 // non shallow copy untested
-//var makeShallowCopyPort = op.addInPort( new Port( op, "Make Shallow Copy", CABLES.OP_PORT_TYPE_, { display: 'bool' } ) );
+//var makeShallowCopyPort = op.addInPort( new CABLES.Port( op, "Make Shallow Copy", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 //makeShallowCopyPort.set(true);
 var newLengthPort = op.inValue("New Length");
 

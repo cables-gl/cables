@@ -3,7 +3,7 @@ var shader=null;
 var uniTime;
 
 var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var limitMax=op.inValue("Max",1000);
+var limitMax=op.inValueInt("Max",1000);
 
 var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 

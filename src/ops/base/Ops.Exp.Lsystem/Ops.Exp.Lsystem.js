@@ -30,8 +30,6 @@ const outTrigger = op.outTrigger("Out trigger geometry");
 const lineTrigger = op.outTrigger("Line/point trigger");
 //const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
-const outIterationNumber = op.outValue("Current iteration number");
-const outBranchNumber = op.outValue("Current branch number");
 const outMax=op.outValue("Max Size");
 const stringOut = op.outValueString('Final generated string');
 
@@ -120,7 +118,6 @@ function generate()
     //reset the state of everything
     resetAll();
 
-    var iterationOutput = 0;
     var nextSentence = "";
     var iterationsLimit = Math.min(6,inIterations.get());
     var iter;
@@ -130,10 +127,8 @@ function generate()
     for (iter = 0; iter < iterationsLimit ; iter++)
     {
         var sentenceArrayLength = sentence.length;
-        var rulesArrayLength = rules.length;
+        var rulesArrayLength = rules.length;//
         
-        outIterationNumber.set(iter+1);
-        iterationOutput = iter+1;
         for (i =0; i < sentenceArrayLength; i++)
         {
             var current = sentence.charAt(i);
@@ -355,8 +350,6 @@ function turtle()
             {
                 break;
             }
-            //send out current branch number
-            outBranchNumber.set(currentBranch);
             
             trans = stack[stack.length-1];
             stack.pop();
@@ -408,3 +401,23 @@ function render ()
         lineTrigger.trigger();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -29,7 +29,6 @@ function updateLater()
 
 op.init=function()
 {
-    console.log("scustomshader loaded!");
     updateShader();
 };
 
@@ -69,7 +68,6 @@ function updateShader()
 {
     if(!shader)return;
     needsUpdate=false;
-    op.log('shader update!');
 
     // shader.glslVersion=0;
     shader.bindTextures=bindTextures.bind(this);
