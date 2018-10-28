@@ -119,7 +119,7 @@ function generate()
     resetAll();
 
     var nextSentence = "";
-    var iterationsLimit = Math.min(4,inIterations.get());
+    var iterationsLimit = Math.min(6,inIterations.get());
     var iter;
     var i;
     var j;

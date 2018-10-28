@@ -22,8 +22,7 @@ function update()
         numChars=num.get()-parts[1].length;
     }
 
-    for(var i=0;i<numChars;i++)
-        str+="0";
+    for(var i=0;i<numChars;i++) str+="0";
 
     out.set(str);
 }

@@ -1,0 +1,30 @@
+{
+    "updated": 1540461266168,
+    "authorName": "andro",
+    "id": "c6b5bf63-0be8-4eea-acc0-9d32973e665a",
+    "created": 1540461245768,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArraySum"
+    },
+    "summary": "Adds one number to all values in an array",
+    "docs": {
+        "ports": []
+    }
+}
