@@ -1,0 +1,54 @@
+{
+    "updated": 1540733469070,
+    "authorName": "pandur",
+    "id": "9e4a5694-ed59-4401-9f7b-123a627924c5",
+    "created": 1540724212659,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Input"
+            },
+            {
+                "type": "0",
+                "name": "Ghosts",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Ghosts",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Dispersal",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Halo",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Halo Width",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Color Lookup"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.LensFlares"
+    }
+}

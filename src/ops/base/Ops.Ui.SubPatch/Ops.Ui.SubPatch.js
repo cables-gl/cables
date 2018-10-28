@@ -275,8 +275,8 @@ op.addSubLink=function(p,p2)
 {
     var num=data.ports.length;
 
-    console.log('sublink! ',p.getName(), (num-1)+" "+p2.parent.name+" "+p2.name);
-
+    var sublPortname="in"+(num-1)+" "+p2.parent.name+" "+p2.name;
+    console.log('sublink! ',sublPortname);
 
     if(p.direction==CABLES.PORT_DIR_IN)
     {
@@ -284,7 +284,7 @@ op.addSubLink=function(p,p2)
             p.parent,
             p.getName(),
             getSubPatchInputOp(),
-            "in"+(num-1)+" "+p2.parent.name+" "+p2.name
+            sublPortname
             );
 
         // console.log('- ----=====EEE ',p.getName(),p.get() );
@@ -320,6 +320,7 @@ op.addSubLink=function(p,p2)
             }
         });
     saveData();
+    return sublPortname;
 };
 
 
