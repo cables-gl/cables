@@ -1,5 +1,5 @@
 {
-    "updated": 1540733469070,
+    "updated": 1540745167922,
     "authorName": "pandur",
     "id": "9e4a5694-ed59-4401-9f7b-123a627924c5",
     "created": 1540724212659,
@@ -8,10 +8,6 @@
             {
                 "type": "1",
                 "name": "render"
-            },
-            {
-                "type": "2",
-                "name": "Input"
             },
             {
                 "type": "0",
@@ -49,6 +45,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.LensFlares"
+        "name": "Ops.Gl.TextureEffects.PseudoLensFlares"
     }
 }

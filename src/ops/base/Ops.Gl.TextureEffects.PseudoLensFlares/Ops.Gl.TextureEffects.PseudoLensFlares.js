@@ -1,7 +1,7 @@
 // http://john-chapman-graphics.blogspot.com/2013/02/pseudo-lens-flare.html
 
 const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-const textureFlare=op.inTexture("Input");
+// const textureFlare=op.inTexture("Input");
 const inAmountGhosts=op.inValueSlider("Ghosts",1.0);
 const inNumGhosts=op.inValueInt("Num Ghosts",3);
 const inDispersal=op.inValueSlider("Dispersal",0.5);
@@ -21,8 +21,8 @@ textureLookup.onChange=function()
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.lensflares_frag||'');
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var textureUniformIn=new CGL.Uniform(shader,'t','texInput',1);
-var textureLookupUni=new CGL.Uniform(shader,'t','texLookup',2);
+// var textureUniformIn=new CGL.Uniform(shader,'t','texInput',1);
+var textureLookupUni=new CGL.Uniform(shader,'t','texLookup',1);
 
 const uniHaloWidth=new CGL.Uniform(shader,'f','haloWidth',inHaloWidth);
 const uniNumGhosts=new CGL.Uniform(shader,'i','numGhosts',inNumGhosts);
@@ -41,8 +41,8 @@ render.onTriggered=function()
 
     cgl.setTexture(0, texture.tex );
 
-    if(textureFlare.get()) cgl.setTexture(1, textureFlare.get().tex );
-    if(textureLookup.get()) cgl.setTexture(2, textureLookup.get().tex );
+    // if(textureFlare.get()) cgl.setTexture(1, textureFlare.get().tex );
+    if(textureLookup.get()) cgl.setTexture(1, textureLookup.get().tex );
 
 
     cgl.currentTextureEffect.finish();

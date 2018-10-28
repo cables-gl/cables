@@ -1,5 +1,5 @@
 UNI sampler2D tex;
-UNI sampler2D texInput;
+// UNI sampler2D texInput;
 UNI float haloWidth;
 UNI int numGhosts;
 UNI float dispersal;
@@ -26,7 +26,9 @@ void main()
     vec2 texcoord = -texCoord + vec2(1.0);
     // vec2 texelSize = 1.0 / vec2(textureSize(texInput, 0));
     vec2 ghostVec = (vec2(0.5) - texcoord) * (0.5*dispersal);
-    vec4 result = texture(tex,texCoord);
+    vec4 result = vec4(0.0,0.0,0.0,1.0);//texture(tex,texCoord);
+    
+
     
     // ghosts
     for (int i = 0; i < numGhosts; ++i)
@@ -34,7 +36,7 @@ void main()
         vec2 offset = fract(texcoord + ghostVec * float(i));
         float weightA = length(vec2(0.5) - offset) / length(vec2(0.5));
         weightA = pow(1. - weightA, 10.0);
-        result += myTexture(texInput, offset)*weightA*amountGhosts;
+        result += myTexture(tex, offset)*weightA*amountGhosts;
     }
 
     // halo
@@ -42,7 +44,7 @@ void main()
     float weight = length(vec2(0.5) - fract(texcoord + haloVec)) / length(vec2(0.5));
     
     weight = pow(1.0 - weight, 5.0);
-    result += myTexture(texInput, texcoord + haloVec) * weight * amountHalo;
+    result += myTexture(tex, texcoord + haloVec) * weight * amountHalo;
 
     #ifdef TEX_LOOPUP
         result *= texture(texLookup, vec2(length(vec2(0.5) - texcoord) / length(vec2(0.5)),0.5));
