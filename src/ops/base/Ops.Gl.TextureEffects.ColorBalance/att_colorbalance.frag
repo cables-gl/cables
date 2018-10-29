@@ -1,4 +1,3 @@
-
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI float r;

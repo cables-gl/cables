@@ -1,28 +1,15 @@
-op.name='Repeat';
+const render=op.inTrigger("render");
+const amountX=op.inValue("x",3);
+const amountY=op.inValue("y",3);
+const trigger=op.outTrigger("trigger");
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var amountX=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE,{  }));
-var amountY=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE,{  }));
-
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.repeat_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-
-var amountXUniform=new CGL.Uniform(shader,'f','amountX',0.0);
-var amountYUniform=new CGL.Uniform(shader,'f','amountY',0.0);
-
-amountX.onValueChanged=function()
-{
-    amountXUniform.setValue(amountX.get());
-};
-
-amountY.onValueChanged=function()
-{
-    amountYUniform.setValue(amountY.get());
-};
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountXUniform=new CGL.Uniform(shader,'f','amountX',amountX);
+const amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY);
 
 render.onTriggered=function()
 {
@@ -31,8 +18,7 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
@@ -40,5 +26,3 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
-amountX.set(320.0);
-amountY.set(180.0);

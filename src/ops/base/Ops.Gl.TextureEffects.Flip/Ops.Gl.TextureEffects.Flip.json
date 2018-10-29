@@ -8,11 +8,13 @@
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -22,5 +24,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Flip"
-    }
+    },
+    "updated": 1540822034854,
+    "authorName": "pandur",
+    "id": "ce36ad01-411a-412f-affa-1959aa23f93b",
+    "created": 1540821837396
 }
