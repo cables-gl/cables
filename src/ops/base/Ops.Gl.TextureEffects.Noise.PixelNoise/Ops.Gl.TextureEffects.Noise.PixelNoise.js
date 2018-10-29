@@ -1,30 +1,22 @@
-var render=op.addInPort(new CABLES.Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new CABLES.Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const numX=op.inValue("Num X",10);
+const numY=op.inValue("Num Y",10);
+const addX=op.inValue("X",0);
+const addY=op.inValue("Y",0);
+const addZ=op.inValue("Z",0);
+const trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var numX=op.inValue("Num X",10);
-var numY=op.inValue("Num Y",10);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 
-var addX=op.inValue("X",0);
-var addY=op.inValue("Y",0);
-
-var addZ=op.inValue("Z",0);
-
-var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
-
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
-
-var srcFrag=''
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  UNI sampler2D tex;'
-    .endl()+'#endif'
+const srcFrag=''
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI sampler2D tex;'
 
     .endl()+'UNI float amount;'
     .endl()+'UNI float numX;'
@@ -33,7 +25,6 @@ var srcFrag=''
     .endl()+'UNI float addY;'
     .endl()+'UNI float addZ;'
     
-
     .endl()+'float random(vec2 co)'
     .endl()+'{'
     .endl()+'   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * (437511.5453+addZ));'
@@ -57,7 +48,7 @@ var srcFrag=''
 
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 numX.uniform==new CGL.Uniform(shader,'f','numX',numX);
 numY.uniform==new CGL.Uniform(shader,'f','numY',numY);
 addX.uniform==new CGL.Uniform(shader,'f','addX',addX);
@@ -73,12 +64,10 @@ render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
-
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
