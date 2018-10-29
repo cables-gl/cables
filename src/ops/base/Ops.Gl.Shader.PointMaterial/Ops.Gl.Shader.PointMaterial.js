@@ -1,4 +1,4 @@
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
 var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
@@ -65,24 +65,15 @@ op.preRender=function()
 
 function bindTextures()
 {
-    if(texture.get())
-    {
-        cgl.setTexture(0,texture.get().tex);
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
-    }
-    if(textureMask.get())
-    {
-        cgl.setTexture(1,textureMask.get().tex);
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, textureMask.get().tex);
-    }
+    if(texture.get()) cgl.setTexture(0,texture.get().tex);
+    if(textureMask.get()) cgl.setTexture(1,textureMask.get().tex);
 }
 
 function doRender()
 {
     uniWidth.setValue(cgl.canvasWidth);
     uniHeight.setValue(cgl.canvasHeight);
-    
-    
+
     cgl.setShader(shader);
     bindTextures();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
@@ -92,7 +83,6 @@ function doRender()
 
     cgl.setPreviousShader();
 }
-
 
 doScale.onValueChanged=function()
 {
@@ -139,8 +129,6 @@ textureMask.onValueChanged=function()
         textureMaskUniform=null;
     }
 };
-
-
 
 var colorizeTexture=op.addInPort(new CABLES.Port(op,"colorizeTexture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 colorizeTexture.set(false);
