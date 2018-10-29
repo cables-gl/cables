@@ -87,7 +87,6 @@ function index(verts,geom)
     // console.log(JSON.stringify(verts));
     geom.verticesIndices=ind;
     geom.vertices=arr;
-    
     geom.texCoords=tc;
     // console.log("indexed...");
     // console.log(ind.length,arr.length);

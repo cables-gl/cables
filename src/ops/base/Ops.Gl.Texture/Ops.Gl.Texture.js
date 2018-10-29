@@ -4,7 +4,6 @@ var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"c
 var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 var unpackAlpha=op.addInPort(new CABLES.Port(op,"unpackPreMultipliedAlpha",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-
 var textureOut=op.outTexture("texture");
 var width=op.addOutPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
 var height=op.addOutPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
