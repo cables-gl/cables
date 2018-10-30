@@ -87,7 +87,7 @@ warnOverflow.onValueChanged=setWarnOverflow;
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var a=cgl.currentTextureEffect.getCurrentSourceTexture().height/cgl.currentTextureEffect.getCurrentSourceTexture().width;
     aspect.set(a);

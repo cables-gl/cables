@@ -17,11 +17,13 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayIterator"
@@ -50,5 +52,9 @@
                 "text": "Value of the current index in the array"
             }
         ]
-    }
+    },
+    "updated": 1540826808561,
+    "authorName": "pandur",
+    "id": "ec280011-1190-4333-9a68-adb4904fca1a",
+    "created": 1540826805478
 }

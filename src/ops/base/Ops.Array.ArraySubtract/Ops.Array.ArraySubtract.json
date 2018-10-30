@@ -2,5 +2,29 @@
     "summary": " Subtracts one number from all values in an array",
     "docs": {
         "ports": []
+    },
+    "updated": 1540902068739,
+    "authorName": "andro",
+    "id": "af78ab59-75d5-4ead-9a8d-27a63e1cbf3f",
+    "created": 1540902068741,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array In"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array Out"
+            }
+        ],
+        "name": "Ops.Array.ArraySubtract"
     }
 }

@@ -1,19 +1,16 @@
-op.name="Sharpen";
+const render=op.inFunction("Render");
+const trigger=op.outFunction("Trigger");
+const amount=op.inValueSlider("amount",0.5);
 
-var render=op.inFunction("Render");
-var trigger=op.outFunction("Trigger");
-var amount=op.inValueSlider("amount",0.5);
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.sharpen_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
-var uniPx=new CGL.Uniform(shader,'f','pX',1/1024);
-var uniPy=new CGL.Uniform(shader,'f','pY',1/1024);
+const uniPx=new CGL.Uniform(shader,'f','pX',1/1024);
+const uniPy=new CGL.Uniform(shader,'f','pY',1/1024);
 
 render.onTriggered=function()
 {
@@ -25,8 +22,7 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

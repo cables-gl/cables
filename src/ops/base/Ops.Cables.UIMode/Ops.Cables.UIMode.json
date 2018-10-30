@@ -4,7 +4,8 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "UI"
+                "name": "UI",
+                "subType": "number"
             }
         ],
         "name": "Ops.Cables.UIMode"
@@ -16,5 +17,9 @@
                 "text": "`True` is the patch is viewed inside the cables editor"
             }
         ]
-    }
+    },
+    "updated": 1540834918650,
+    "authorName": "pandur",
+    "id": "7c110d60-829f-4b06-b3e4-0af911550570",
+    "created": 1540834918658
 }

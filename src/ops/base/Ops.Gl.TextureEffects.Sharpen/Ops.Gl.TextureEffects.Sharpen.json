@@ -8,7 +8,8 @@
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -18,5 +19,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Sharpen"
-    }
+    },
+    "updated": 1540825751100,
+    "authorName": "pandur",
+    "id": "55647083-131d-4c70-b667-21fecf311ea5",
+    "created": 1540825724831
 }

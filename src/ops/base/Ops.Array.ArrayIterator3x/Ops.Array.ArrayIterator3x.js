@@ -1,4 +1,3 @@
-op.name='ArrayIterator 3x';
 var exe=op.addInPort(new CABLES.Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
 var arr=op.addInPort(new CABLES.Port(op,"Array",CABLES.OP_PORT_TYPE_ARRAY));
 
