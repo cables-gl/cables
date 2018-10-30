@@ -1,4 +1,4 @@
-var render=op.addInPort(new CABLES.Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var inIndex=op.inValue("index");
 var inPoints=op.inArray("points");
 var dimensions=op.inValueSelect("Dimensions",["1","3"],3);

@@ -1,4 +1,3 @@
-op.name='logger';
 var exe=op.addInPort(new CABLES.Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
 var functionInput=op.addInPort(new CABLES.Port(op,"Function Input",CABLES.OP_PORT_TYPE_FUNCTION));
 // var valueInput=op.addInPort(new CABLES.Port(op,"Value Input"));

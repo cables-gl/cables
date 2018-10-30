@@ -1,5 +1,3 @@
-op.name="ReadEntries";
-
 // see https://de.mathworks.com/help/thingspeak/get-a-channel-feed.html
 
 var dummyKey = "12345";

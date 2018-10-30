@@ -1,7 +1,7 @@
 var cgl=op.patch.cgl;
 
 var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var opacity=op.addInPort(new CABLES.Port(op,"opacity",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 opacity.set(1);
 
@@ -60,7 +60,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shader.uniOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 
 shader.setSource(srcVert,srcFrag);
-//op.onLoaded=shader.compile;
+
 
 render.onTriggered=doRender;
 

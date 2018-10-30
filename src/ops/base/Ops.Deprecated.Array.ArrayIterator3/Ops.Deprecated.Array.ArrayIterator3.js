@@ -5,7 +5,7 @@ var mod=op.inValue("Modulo",1);
 arr.ignoreValueSerialize=true;
 
 
-var trigger=op.addOutPort(new CABLES.Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var idx=op.addOutPort(new CABLES.Port(op,"Index"));
 var valX=op.addOutPort(new CABLES.Port(op,"Value 1"));
 var valY=op.addOutPort(new CABLES.Port(op,"Value 2"));

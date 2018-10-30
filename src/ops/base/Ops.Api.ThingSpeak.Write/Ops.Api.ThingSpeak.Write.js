@@ -1,5 +1,3 @@
-op.name="ThingSpeakWrite";
-
 var dummyKey = "12345";
 
 var write = op.addInPort( new CABLES.Port( this, "Write",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));

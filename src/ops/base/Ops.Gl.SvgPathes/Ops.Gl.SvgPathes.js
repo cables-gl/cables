@@ -1,6 +1,6 @@
 op.name="SvgPathes";
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var svgFile=op.addInPort(new CABLES.Port(op,"object",CABLES.OP_PORT_TYPE_OBJECT));
 
 var thickness=op.addInPort(new CABLES.Port(op,"thickness",CABLES.OP_PORT_TYPE_VALUE));

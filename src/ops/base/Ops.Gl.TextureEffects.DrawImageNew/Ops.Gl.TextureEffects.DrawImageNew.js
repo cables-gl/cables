@@ -1,4 +1,4 @@
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
 var amount=op.inValueSlider("amount",1);
@@ -10,7 +10,7 @@ var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
 var removeAlphaSrc=op.addInPort(new CABLES.Port(op,"removeAlphaSrc",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 blendMode.set('normal');
 var cgl=op.patch.cgl;
@@ -151,15 +151,15 @@ function doRender()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        
 
-        /* --- */cgl.setTexture(1, image.get().tex );
+        cgl.setTexture(1, image.get().tex );
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 
         if(imageAlpha.get() && imageAlpha.get().tex)
         {
-            /* --- */cgl.setTexture(2, imageAlpha.get().tex );
+            cgl.setTexture(2, imageAlpha.get().tex );
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, imageAlpha.get().tex );
         }
 

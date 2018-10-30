@@ -8,7 +8,7 @@ var inSmooth=op.inValueBool("Smooth",false);
 
 var inDraw=op.inValueBool("Draw",true);
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var geomOut=op.outObject("geometry");
 
 var geom=null;

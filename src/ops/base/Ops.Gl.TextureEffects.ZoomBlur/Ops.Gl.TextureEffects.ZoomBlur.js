@@ -1,6 +1,6 @@
 op.name="ZoomBlur";
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var strength=op.inValueSlider("strength",0.5);
 var x=op.inValue("X",0.5);
 var y=op.inValue("Y",0.5);
@@ -13,7 +13,7 @@ mask.onChange=function()
         else shader.removeDefine('HAS_MASK');
 };
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -37,12 +37,12 @@ render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
     
-        /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        
 
         if(mask.get() && mask.get().tex)
         {
-            /* --- */cgl.setTexture(1, mask.get().tex );
+            cgl.setTexture(1, mask.get().tex );
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
         }
 

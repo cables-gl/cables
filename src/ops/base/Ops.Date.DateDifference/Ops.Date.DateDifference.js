@@ -1,5 +1,3 @@
-op.name="DateDifference";
-
 var ts1=op.inValue("Timestamp 1");
 var ts2=op.inValue("Timestamp 2");
 var stopAtZero=op.inValueBool("Stop at 0");

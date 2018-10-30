@@ -1,7 +1,7 @@
 op.name='Orthogonal';
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 var boundsLeft=op.addInPort(new CABLES.Port(op,"left",CABLES.OP_PORT_TYPE_VALUE ));
 var boundsRight=op.addInPort(new CABLES.Port(op,"right",CABLES.OP_PORT_TYPE_VALUE ));
 var boundsBottom=op.addInPort(new CABLES.Port(op,"bottom",CABLES.OP_PORT_TYPE_VALUE ));

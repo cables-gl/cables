@@ -1,5 +1,5 @@
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var texture0=op.addInPort(new CABLES.Port(op,"texture left",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texture0Uniform=null;
@@ -47,7 +47,7 @@ var srcFrag=''
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 texture0.onChange=texture1.onChange=function()
@@ -75,13 +75,13 @@ render.onTriggered=function()
 
     if(texture0.get())
     {
-        /* --- */cgl.setTexture(0, texture0.get().tex);
+        cgl.setTexture(0, texture0.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture0.get().tex);
     }
 
     if(texture1.get())
     {
-        /* --- */cgl.setTexture(1, texture1.get().tex);
+        cgl.setTexture(1, texture1.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture1.get().tex);
     }
 

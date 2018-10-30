@@ -1,6 +1,6 @@
 op.name='Spline';
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var thickness=op.addInPort(new CABLES.Port(op,"thickness",CABLES.OP_PORT_TYPE_VALUE));
 var subDivs=op.addInPort(new CABLES.Port(op,"subDivs",CABLES.OP_PORT_TYPE_VALUE));
 var bezier=op.addInPort(new CABLES.Port(op,"Bezier",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -8,7 +8,7 @@ var centerpoint=op.addInPort(new CABLES.Port(op,"centerpoint",CABLES.OP_PORT_TYP
 var doClose=op.addInPort(new CABLES.Port(op,"Closed",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 var renderLines=op.addInPort(new CABLES.Port(op,"Render",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var triggerPoints=op.addOutPort(new CABLES.Port(op,"triggerPoints",CABLES.OP_PORT_TYPE_FUNCTION));
 var outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY));
 

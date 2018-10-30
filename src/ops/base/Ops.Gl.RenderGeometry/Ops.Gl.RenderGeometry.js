@@ -1,4 +1,4 @@
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
 var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
 geometry.ignoreValueSerialize=true;
@@ -9,7 +9,7 @@ var updateVerts=op.inValueBool('Update Vertices',false);
 var updateTexcoords=op.inValueBool('Update Texcoords',false);
 var vertNums=op.inValueBool('Vertex Numbers',true);
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 vertNums.onChange=
     geometry.onChange=update;

@@ -2,7 +2,7 @@
 var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 var materialName=op.inValueString("name");
 var material=op.addInPort(new CABLES.Port(op,"material",CABLES.OP_PORT_TYPE_OBJECT));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 

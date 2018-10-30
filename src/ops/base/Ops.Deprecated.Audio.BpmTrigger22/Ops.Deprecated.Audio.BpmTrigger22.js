@@ -1,6 +1,3 @@
-op.name="BpmTrigger";
-
-
 var trigger=op.inTrigger("trigger");
 
 var inBpm=op.inValue("BPM",120);

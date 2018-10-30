@@ -1,6 +1,6 @@
 op.name="DepthStripes";
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var depthTexture=op.addInPort(new CABLES.Port(op,"Depth Texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var colorTexture=op.addInPort(new CABLES.Port(op,"Color Texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var farPlane=op.addInPort(new CABLES.Port(op,"farplane",CABLES.OP_PORT_TYPE_VALUE));
@@ -10,10 +10,10 @@ farPlane.set(100.0);
 nearPlane.set(0.1);
 
 var cgl=op.patch.cgl;
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -66,10 +66,10 @@ render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        /* --- */cgl.setTexture(0,depthTexture.get().tex);
+        cgl.setTexture(0,depthTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, depthTexture.get().tex );
 
-        /* --- */cgl.setTexture(1,colorTexture.get().tex);
+        cgl.setTexture(1,colorTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, colorTexture.get().tex );
 
         cgl.currentTextureEffect.finish();

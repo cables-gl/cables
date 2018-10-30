@@ -1,6 +1,6 @@
 
 var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 
@@ -53,19 +53,19 @@ function bindTextures()
 {
     if(texStructure.get())
     {
-        /* --- */cgl.setTexture(0,texStructure.get().tex);
+        cgl.setTexture(0,texStructure.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texStructure.get().tex);
     }
 
     if(texColor.get())
     {
-        /* --- */cgl.setTexture(1,texColor.get().tex);
+        cgl.setTexture(1,texColor.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texColor.get().tex);
     }
 
     if(texLength.get())
     {
-        /* --- */cgl.setTexture(2,texLength.get().tex);
+        cgl.setTexture(2,texLength.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texLength.get().tex);
     }
 

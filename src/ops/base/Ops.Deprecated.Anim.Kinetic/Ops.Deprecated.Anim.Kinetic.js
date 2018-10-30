@@ -1,5 +1,3 @@
-op.name="Kinetic";
-
 var value=op.inValue("Value",0);
 var result=op.outValue("Result");
 

@@ -1,5 +1,3 @@
-op.name="CableConnectTriggerEvent";
-
 var connection=op.inObject("Connection");
 var evnt=op.inValueString("Event");
 

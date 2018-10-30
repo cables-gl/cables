@@ -211,13 +211,13 @@ function doRender()
 
     if(texScaling.get())
     {
-        /* --- */cgl.setTexture(6,texScaling.get().tex);
+        cgl.setTexture(6,texScaling.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texScaling.get().tex);
     }
 
     if(texRotation.get())
     {
-        /* --- */cgl.setTexture(7,texRotation.get().tex);
+        cgl.setTexture(7,texRotation.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texRotation.get().tex);
     }
 

@@ -1,5 +1,3 @@
-op.name="ArrayBuffer3x";
-
 var exec=op.inTrigger("exec");
 var maxLength=op.inValue("Max Num Elements",100);
 

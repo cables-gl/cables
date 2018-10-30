@@ -6,7 +6,7 @@ var reset=op.inTriggerButton("reset");//op.addInPort(new CABLES.Port(op,"reset",
 
 
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var num=op.addOutPort(new CABLES.Port(op,"timesTriggered",CABLES.OP_PORT_TYPE_VALUE));
 
 var n=0;

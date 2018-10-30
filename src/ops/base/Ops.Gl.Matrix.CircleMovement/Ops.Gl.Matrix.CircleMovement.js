@@ -1,5 +1,5 @@
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
 var segments=op.addInPort(new CABLES.Port(op,"segments"));
 var radius=op.addInPort(new CABLES.Port(op,"radius"));
@@ -9,7 +9,7 @@ var percent=op.addInPort(new CABLES.Port(op,"percent",CABLES.OP_PORT_TYPE_VALUE,
 
 var offset=op.addInPort(new CABLES.Port(op,"offset"));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var index=op.addOutPort(new CABLES.Port(op,"index"));
 
 var outX=op.addOutPort(new CABLES.Port(op,"X"));

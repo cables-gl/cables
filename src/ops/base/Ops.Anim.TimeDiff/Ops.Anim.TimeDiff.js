@@ -2,7 +2,7 @@
 
 var exe=op.inTriggerButton("exe");
 // op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var result=op.addOutPort(new CABLES.Port(op,"result"));
 
 var smooth=op.inValueBool("Smooth",false);

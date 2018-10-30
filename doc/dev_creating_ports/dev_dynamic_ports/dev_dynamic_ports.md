@@ -25,7 +25,6 @@ Dynamic Ports accept various types.
 This is an op with one dynamic port which can be linked to a value or object port. If it is not linked it will display a range-slider. When the value on the dynamic port changes it will print the value to the developer console.
 
 ```javascript
-op.name="TestDynOp";
 
 var dynPort = op.inDynamic(
   "My Dynamic Port", 

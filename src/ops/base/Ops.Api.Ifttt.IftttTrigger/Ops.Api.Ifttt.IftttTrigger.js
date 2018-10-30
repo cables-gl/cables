@@ -1,5 +1,3 @@
-op.name="IFTTTTrigger";
-
 var dummyKey = "1234567890";
 var dummyEventName = "your_event_name";
 

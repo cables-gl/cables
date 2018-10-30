@@ -1,8 +1,8 @@
 // shader from: https://github.com/mattdesl/glsl-fxaa
 
 op.name='FXAA';
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var fxaa_span=op.addInPort(new CABLES.Port(op,"span",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:[0,2,4,8,16,32,64]}));
 var fxaa_reduceMin=op.addInPort(new CABLES.Port(op,"reduceMin",CABLES.OP_PORT_TYPE_VALUE));
@@ -15,7 +15,7 @@ var texHeight=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -101,8 +101,8 @@ render.onTriggered=function()
     }
 
     cgl.currentTextureEffect.bind();
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     cgl.currentTextureEffect.finish();
 

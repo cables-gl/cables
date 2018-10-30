@@ -1,4 +1,4 @@
-var render=op.addInPort(new CABLES.Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 var thick=op.inValue("Thickness");
 var inStart=op.inValueSlider("Start");

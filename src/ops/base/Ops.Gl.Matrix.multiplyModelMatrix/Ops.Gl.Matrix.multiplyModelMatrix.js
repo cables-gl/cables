@@ -1,5 +1,5 @@
 var cgl=op.patch.cgl;
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var inIdentity=op.inValueBool("Identity",false);
 var next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 

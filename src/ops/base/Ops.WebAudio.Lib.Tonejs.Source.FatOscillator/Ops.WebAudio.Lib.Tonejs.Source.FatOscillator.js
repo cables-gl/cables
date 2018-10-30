@@ -1,5 +1,3 @@
-op.name="FatOscillator";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults

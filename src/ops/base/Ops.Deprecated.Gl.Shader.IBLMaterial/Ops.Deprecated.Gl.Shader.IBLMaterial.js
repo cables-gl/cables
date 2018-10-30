@@ -31,43 +31,43 @@ function doRender()
         
         if(!inCubemap.get().cubemap)
         {
-            /* --- */cgl.setTexture(0,inCubemap.get().tex);
+            cgl.setTexture(0,inCubemap.get().tex);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inCubemap.get().tex);
         }
         else
         {
-            /* --- */cgl.setTexture(0,inCubemap.get().cubemap,cgl.gl.TEXTURE_CUBE_MAP);
+            cgl.setTexture(0,inCubemap.get().cubemap,cgl.gl.TEXTURE_CUBE_MAP);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
         }
     }
 
     if(inRough.get())
     {
-        /* --- */cgl.setTexture(1, inRough.get().tex);
+        cgl.setTexture(1, inRough.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inRough.get().tex);
     }
 
     if(inReflection.get())
     {
-        /* --- */cgl.setTexture(2, inReflection.get().tex);
+        cgl.setTexture(2, inReflection.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inReflection.get().tex);
     }
     
     if(inNormal.get())
     {
-        /* --- */cgl.setTexture(3, inNormal.get().tex);
+        cgl.setTexture(3, inNormal.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inNormal.get().tex);
     }
 
     if(inDiffuse.get())
     {
-        /* --- */cgl.setTexture(4, inDiffuse.get().tex);
+        cgl.setTexture(4, inDiffuse.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inDiffuse.get().tex);
     }
 
     if(inAo.get())
     {
-        /* --- */cgl.setTexture(5, inAo.get().tex);
+        cgl.setTexture(5, inAo.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inAo.get().tex);
     }
 
@@ -141,7 +141,7 @@ function updateTexturesDefines()
 var shader=new CGL.Shader(cgl,'ibl_material');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
-//op.onLoaded=shader.compile;
+
 
 shader.setSource(attachments.ibl_vert,attachments.ibl_frag);
 

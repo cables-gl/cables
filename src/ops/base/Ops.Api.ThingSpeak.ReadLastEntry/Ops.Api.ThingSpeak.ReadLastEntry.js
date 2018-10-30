@@ -1,5 +1,3 @@
-op.name="ReadLastEntry";
-
 var dummyKey = "12345";
 var dummyChannelId = "12345";
 

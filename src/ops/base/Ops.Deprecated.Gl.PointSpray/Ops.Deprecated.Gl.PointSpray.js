@@ -181,7 +181,7 @@ render.onTriggered=function()
     if(simTexPos)
     {
         // cgl.setTexture(0,t);
-        /* --- */cgl.setTexture(4, simTexPos.tex);
+        cgl.setTexture(4, simTexPos.tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, simTexPos.tex);
     }
 

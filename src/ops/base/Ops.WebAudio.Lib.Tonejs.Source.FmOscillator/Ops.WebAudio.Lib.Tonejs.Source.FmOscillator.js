@@ -1,5 +1,3 @@
-op.name="FmOscillator";
-
 // constants
 var FREQUENCY_DEFAULT = 440;
 var DETUNE_DEFAULT = 0;

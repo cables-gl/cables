@@ -1,5 +1,5 @@
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var num=op.addInPort(new CABLES.Port(op,"num",CABLES.OP_PORT_TYPE_VALUE));
 var width=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 var axis=op.addInPort(new CABLES.Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['X','Y','Diagonal','Diagonal Flip']}));
@@ -13,7 +13,7 @@ var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'r
 var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 smoothed.onChange=function()
 {
@@ -35,7 +35,7 @@ var shader=new CGL.Shader(cgl,'textureeffect stripes');
 shader.setSource(shader.getDefaultVertexShader(),attachments.stripes_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-//op.onLoaded=shader.compile;
+
 var numUniform=new CGL.Uniform(shader,'f','num',num);
 var uniWidth=new CGL.Uniform(shader,'f','width',width);
 var uniAxis=new CGL.Uniform(shader,'f','axis',0);

@@ -1,6 +1,6 @@
 
 op.name='LineArray';
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var width=op.addInPort(new CABLES.Port(op,"width"));
 var height=op.addInPort(new CABLES.Port(op,"height"));
 var doLog=op.inValueBool("Logarithmic",false);
@@ -9,7 +9,7 @@ var pivotY=op.addInPort(new CABLES.Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{
 var nColumns=op.addInPort(new CABLES.Port(op,"num columns"));
 var nRows=op.addInPort(new CABLES.Port(op,"num rows"));
 var axis=op.addInPort(new CABLES.Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var outPointArrays=op.outArray("Point Arrays");
 
 var cgl=op.patch.cgl;

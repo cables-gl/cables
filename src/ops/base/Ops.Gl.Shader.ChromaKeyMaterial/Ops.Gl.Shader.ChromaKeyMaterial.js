@@ -8,7 +8,7 @@ op.textureUniform=null;
 var inMode=op.inValueSelect("Mode",["G","R"]);
 
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var startTime=Date.now()/1000;
@@ -159,13 +159,13 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 
 shader.setSource(shader_vert,shader_frag);
 shader.define('MODE_G');
-//op.onLoaded=shader.compile;
+
 
 shader.bindTextures=function()
 {
     if(op.texture.get())
     {
-        /* --- */cgl.setTexture(0, op.texture.val.tex);
+        cgl.setTexture(0, op.texture.val.tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.val.tex);
     }
 };

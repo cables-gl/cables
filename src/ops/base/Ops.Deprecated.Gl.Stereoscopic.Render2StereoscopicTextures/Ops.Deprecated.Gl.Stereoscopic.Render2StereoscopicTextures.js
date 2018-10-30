@@ -1,9 +1,9 @@
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var pose=op.addInPort(new CABLES.Port(op,"pose matrix",CABLES.OP_PORT_TYPE_OBJECT));
 var eyeLeft=op.addInPort(new CABLES.Port(op,"Eye Left",CABLES.OP_PORT_TYPE_OBJECT));
 var eyeRight=op.addInPort(new CABLES.Port(op,"Eye Right",CABLES.OP_PORT_TYPE_OBJECT));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var tex0=op.addOutPort(new CABLES.Port(op,"texture left",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 var tex1=op.addOutPort(new CABLES.Port(op,"texture right",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 

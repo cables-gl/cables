@@ -2,7 +2,7 @@
 //https://learnopengl.com/PBR/IBL/Diffuse-irradiance
 
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var inMiplevel=op.inValueSlider("Mip Level",0.0);
 var inCubemap=op.inObject("Cubemap");
 
@@ -12,7 +12,7 @@ inCubemap.onChange=updateMapping;
 
 
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 
@@ -59,7 +59,7 @@ var srcFrag=attachments.cubemap_frag;
 var shader=new CGL.Shader(cgl,'cube map material');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
-//op.onLoaded=shader.compile;
+
 
 shader.setSource(srcVert,srcFrag);
 inMiplevel.uniform=new CGL.Uniform(shader,'f','miplevel',inMiplevel);

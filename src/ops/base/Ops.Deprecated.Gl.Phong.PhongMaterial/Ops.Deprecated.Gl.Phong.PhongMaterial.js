@@ -360,25 +360,25 @@ var bindTextures=function()
 {
     if(diffuseTexture.get())
     {
-        /* --- */cgl.setTexture(0,diffuseTexture.get().tex);
+        cgl.setTexture(0,diffuseTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
 
     if(aoTexture.get())
     {
-        /* --- */cgl.setTexture(1,aoTexture.get().tex);
+        cgl.setTexture(1,aoTexture.get().tex);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, aoTexture.get().tex);
     }
 
     if(specTexture.get())
     {
-        /* --- */cgl.setTexture(2,specTexture.get().tex);
+        cgl.setTexture(2,specTexture.get().tex);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, specTexture.get().tex);
     }
 
     if(normalTexture.get())
     {
-        /* --- */cgl.setTexture(3,normalTexture.get().tex);
+        cgl.setTexture(3,normalTexture.get().tex);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, normalTexture.get().tex);
     }
 
@@ -393,17 +393,17 @@ var bindTextures=function()
     // {
         // if(lights[i].type.getValue()==1.0)
         // {
-            // /* --- */cgl.setTexture(5);
+            // cgl.setTexture(5);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lights[i].texDepthTex);
         // }
     // }
 
-            // /* --- */cgl.setTexture(5);
+            // cgl.setTexture(5);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
     // if(self.textureOpacity.get())
     // {
-    //     /* --- */cgl.setTexture(1);
+    //     cgl.setTexture(1);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureOpacity.val.tex);
     // }
 }

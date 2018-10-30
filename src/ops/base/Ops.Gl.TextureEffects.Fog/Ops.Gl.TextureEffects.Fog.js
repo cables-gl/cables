@@ -1,9 +1,9 @@
 
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var density=op.addInPort(new CABLES.Port(op,"density",CABLES.OP_PORT_TYPE_VALUE));
 var image=op.inTexture("depth texture");
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var ignoreInf=op.addInPort(new CABLES.Port(op,"ignore infinity",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 ignoreInf.set(false);
@@ -15,7 +15,7 @@ ignoreInf.onChange=function()
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 
 var srcFrag=attachments.fog_frag;
 
@@ -85,10 +85,10 @@ render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        
 
-        /* --- */cgl.setTexture(1, image.get().tex );
+        cgl.setTexture(1, image.get().tex );
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 
         cgl.currentTextureEffect.finish();

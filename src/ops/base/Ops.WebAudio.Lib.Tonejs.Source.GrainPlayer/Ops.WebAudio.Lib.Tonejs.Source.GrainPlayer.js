@@ -1,4 +1,3 @@
-op.name="GrainPlayer";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

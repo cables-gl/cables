@@ -1,13 +1,6 @@
-op.name="SendPatchChanges";
-
 var connection=op.inObject("Connection");
-
 var start=op.inTriggerButton("Start");
-
 var reloadOnSave=op.inValueBool("Reload listeners on Save");
-
-
-
 
 var conn=null;
 

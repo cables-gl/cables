@@ -55,10 +55,10 @@ this.render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+        
 
-        /* --- */cgl.setTexture(1,self.image.val.tex);
+        cgl.setTexture(1,self.image.val.tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
 
         cgl.currentTextureEffect.finish();

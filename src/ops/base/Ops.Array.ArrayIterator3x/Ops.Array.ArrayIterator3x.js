@@ -3,7 +3,7 @@ var arr=op.addInPort(new CABLES.Port(op,"Array",CABLES.OP_PORT_TYPE_ARRAY));
 
 var pStep=op.inValue("Step");
 
-var trigger=op.addOutPort(new CABLES.Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var idx=op.addOutPort(new CABLES.Port(op,"Index"));
 
 var valX=op.addOutPort(new CABLES.Port(op,"Value 1"));

@@ -1,5 +1,3 @@
-op.name="ArraySwitcher";
-
 var N_PORTS = 8;
 
 // input ports

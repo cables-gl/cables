@@ -58,12 +58,12 @@ render.onTriggered=function()
     cgl.setShader(shader);
 
     cgl.currentTextureEffect.bind();
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     if(depth.get() && depth.get().tex)
     {
-        /* --- */cgl.setTexture(1, depth.get().tex );
+        cgl.setTexture(1, depth.get().tex );
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, depth.get().tex );
     }
 

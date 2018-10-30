@@ -1,6 +1,6 @@
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var m=mat4.create();
 var matrix=op.addOutPort(new CABLES.Port(op,"matrix",CABLES.OP_PORT_TYPE_ARRAY));

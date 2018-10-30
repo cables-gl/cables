@@ -1,9 +1,9 @@
 
 op.name='ColorLookup';
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var image=op.addInPort(new CABLES.Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var axis=op.inValueSelect("Axis",['hotizontal','vertical'],'horizontal');
 var pos=op.inValueSlider("Position");
@@ -64,12 +64,12 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    
 
     if(image.get() && image.get().tex)
     {
-        /* --- */cgl.setTexture(1,image.get().tex);
+        cgl.setTexture(1,image.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
     }
 

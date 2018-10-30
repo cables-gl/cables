@@ -1,7 +1,7 @@
 op.name="IntervalAnim";
 
 var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var interval=op.addInPort(new CABLES.Port(op,"Interval",CABLES.OP_PORT_TYPE_VALUE));
 var delay=op.addInPort(new CABLES.Port(op,"Delay",CABLES.OP_PORT_TYPE_VALUE));
 var percent=op.addOutPort(new CABLES.Port(op,"percent"));

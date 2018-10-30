@@ -1,13 +1,9 @@
-op.name="ArrayGetValue3x";
-
 var pArr=op.inArray("Array");
-// var pIndex=op.inValue("Index");
 var pIndex=op.inValueInt("Index");
 
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
-
 
 pArr.onChange=update;
 pIndex.onChange=update;

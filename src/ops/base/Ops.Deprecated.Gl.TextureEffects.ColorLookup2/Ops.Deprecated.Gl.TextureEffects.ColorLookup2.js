@@ -1,18 +1,18 @@
 
 op.name='ColorLookup';
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 var posy=op.addInPort(new CABLES.Port(op,"pos",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 var image=op.addInPort(new CABLES.Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 // var vert=op.addOutPort(new CABLES.Port(op,"vertical",CABLES.OP_PORT_TYPE_FUNCTION));
 var vert=op.inValueBool("vertical",true);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 amount.set(1);
 
 var srcFrag=''
@@ -85,12 +85,12 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    
 
     if(image.get() && image.get().tex)
     {
-        /* --- */cgl.setTexture(1,image.get().tex);
+        cgl.setTexture(1,image.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
     }
 

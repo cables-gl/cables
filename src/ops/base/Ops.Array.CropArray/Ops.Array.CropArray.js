@@ -1,5 +1,3 @@
-op.name="CropArray";
-
 // input
 var srcArrayPort = op.inArray("Source Array");
 // non shallow copy untested

@@ -55,7 +55,7 @@ render.onTriggered=function()
         inCubemap.uni=new CGL.Uniform(shader,'i',moduleFrag.prefix+'cubemap',4);
     }
 
-    /* --- */cgl.setTexture(4,inCubemap.get().cubemap,cgl.gl.TEXTURE_CUBE_MAP);
+    cgl.setTexture(4,inCubemap.get().cubemap,cgl.gl.TEXTURE_CUBE_MAP);
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
     
     if(!shader)return;

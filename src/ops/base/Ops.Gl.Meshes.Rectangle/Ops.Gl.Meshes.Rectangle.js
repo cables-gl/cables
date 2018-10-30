@@ -1,5 +1,5 @@
 var render=op.inTrigger("render");
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var width=op.inValue("width",1);
 var height=op.inValue("height",1);

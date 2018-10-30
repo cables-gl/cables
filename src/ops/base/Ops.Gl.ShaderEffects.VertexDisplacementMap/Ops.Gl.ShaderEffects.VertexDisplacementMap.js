@@ -233,7 +233,7 @@ op.render.onTriggered=function()
         uniTexture.setValue(texSlot);
         uniTextureFrag.setValue(texSlot);
 
-        /* --- */cgl.setTexture(0+texSlot,texture.get().tex);
+        cgl.setTexture(0+texSlot,texture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
     }
 

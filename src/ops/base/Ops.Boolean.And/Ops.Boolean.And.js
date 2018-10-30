@@ -1,5 +1,3 @@
-op.name='And';
-
 var bool0=op.addInPort(new CABLES.Port(op,"bool 1",CABLES.OP_PORT_TYPE_VALUE));
 var bool1=op.addInPort(new CABLES.Port(op,"bool 2",CABLES.OP_PORT_TYPE_VALUE));
 

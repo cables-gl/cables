@@ -127,12 +127,12 @@
             // first pass
 
             cgl.currentTextureEffect.bind();
-            /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+            
             if(i===0)
             {
 
-            /* --- */cgl.setTexture(1,self.depthTex.get().tex);
+            cgl.setTexture(1,self.depthTex.get().tex);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.depthTex.get().tex );
 
             }
@@ -146,10 +146,10 @@
             // second pass
 
             cgl.currentTextureEffect.bind();
-            /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+            
 
-            // /* --- */cgl.setTexture(1,self.depthTex.get().tex);
+            // cgl.setTexture(1,self.depthTex.get().tex);
             // // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.depthTex.get().tex );
 
             uniDirX.setValue(1.0);

@@ -1,10 +1,9 @@
 var cgl=op.patch.cgl;
-op.name='WebVR';
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var smallRender=op.inValueBool("Small Renderer");
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var triggerGamePad=op.addOutPort(new CABLES.Port(op,"Controller Matrix",CABLES.OP_PORT_TYPE_FUNCTION));
 var numGamepads=op.addOutPort(new CABLES.Port(op,"Num Controller",CABLES.OP_PORT_TYPE_VALUE));
 // var tex0=op.addOutPort(new CABLES.Port(op,"texture left",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));

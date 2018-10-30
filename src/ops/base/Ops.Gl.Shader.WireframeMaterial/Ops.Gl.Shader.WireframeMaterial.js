@@ -1,7 +1,7 @@
 var cgl=op.patch.cgl;
 
 var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var enableDepth=op.addInPort(new CABLES.Port(op,"enable depth testing",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 enableDepth.set(true);
@@ -115,7 +115,7 @@ setDefines();
 }
 
 
-//op.onLoaded=shader.compile;
+
 
 render.onTriggered=doRender;
 

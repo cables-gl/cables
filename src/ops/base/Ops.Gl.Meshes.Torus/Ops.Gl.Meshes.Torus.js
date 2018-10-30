@@ -1,11 +1,11 @@
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var sides=op.addInPort(new CABLES.Port(op,"sides",CABLES.OP_PORT_TYPE_VALUE));
 var rings=op.addInPort(new CABLES.Port(op,"rings",CABLES.OP_PORT_TYPE_VALUE));
 var innerRadius=op.addInPort(new CABLES.Port(op,"innerRadius",CABLES.OP_PORT_TYPE_VALUE));
 var outerRadius=op.addInPort(new CABLES.Port(op,"outerRadius",CABLES.OP_PORT_TYPE_VALUE));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 sides.set(32);

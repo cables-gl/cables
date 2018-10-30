@@ -142,7 +142,7 @@ render.onTriggered=function()
 
     // if(texture.get())
     {
-        /* --- */cgl.setTexture(4,t);
+        cgl.setTexture(4,t);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, t);
     }
 

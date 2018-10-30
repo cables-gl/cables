@@ -1,5 +1,3 @@
-op.name="HexToRGB";
-
 var hex=op.inValueString("Hex");
 
 var asBytes=op.inValueBool("Bytes");

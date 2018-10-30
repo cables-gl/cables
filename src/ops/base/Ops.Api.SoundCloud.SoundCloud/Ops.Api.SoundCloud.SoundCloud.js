@@ -1,5 +1,3 @@
-op.name="SoundCloud Resolve";
-
 var clientId="6f693b837b47b59a17403e79bcff3626";
 
 var soundCloudUrl=op.addInPort(new CABLES.Port(op,"SoundCloud URL",CABLES.OP_PORT_TYPE_VALUE,{type:"string"}));

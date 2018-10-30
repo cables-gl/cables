@@ -1,5 +1,3 @@
-op.name='ToggleBool';
-
 var trigger=op.inTriggerButton("trigger");
 var reset=op.inTriggerButton("reset");
 var outBool=op.addOutPort(new CABLES.Port(op,"result",CABLES.OP_PORT_TYPE_VALUE));

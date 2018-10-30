@@ -1,6 +1,6 @@
 op.name="HeightMap";
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 
 var extrude=op.addInPort(new CABLES.Port(op,"extrude",CABLES.OP_PORT_TYPE_VALUE));
@@ -11,7 +11,7 @@ var nColumns=op.addInPort(new CABLES.Port(op,"columns",CABLES.OP_PORT_TYPE_VALUE
 var sliceTex=op.addInPort(new CABLES.Port(op,"texCoords slice",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 var flat=op.addInPort(new CABLES.Port(op,"flat",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var outGeom=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 outGeom.ignoreValueSerialize=true;

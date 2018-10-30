@@ -1,8 +1,8 @@
 op.name="LumaKeySoft";
 var cgl=op.patch.cgl;
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var threshold=op.addInPort(new CABLES.Port(op,"amthresholdount",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 var mul=op.inValue("Amount",2.0);
@@ -10,7 +10,7 @@ threshold.set(0.5);
 
 
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -50,8 +50,8 @@ render.onTriggered=function()
 
 
     cgl.currentTextureEffect.bind();
-    /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    
 
     cgl.currentTextureEffect.finish();
 

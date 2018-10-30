@@ -1,5 +1,3 @@
-op.name="ArrayContains";
-
 var inArr=op.inArray("Array");
 var inValue=op.inValueString("SearchValue");
 

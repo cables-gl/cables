@@ -1,5 +1,3 @@
-op.name="CableConnectReceive";
-
 var connection=op.inObject("Connection");
 
 var outMsg=op.outValue("Message");

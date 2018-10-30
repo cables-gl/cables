@@ -1,7 +1,7 @@
 
 var cgl=op.patch.cgl;
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var texture0=op.addInPort(new CABLES.Port(op,"texture left",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texture0Uniform=null;
@@ -30,7 +30,7 @@ var srcFrag=''
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 texture0.onChange=texture1.onChange=function()

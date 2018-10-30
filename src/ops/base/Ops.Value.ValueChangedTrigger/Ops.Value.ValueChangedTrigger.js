@@ -1,6 +1,6 @@
 var val=op.addInPort(new CABLES.Port(op,"Value"));
 var exe=op.inTrigger("Execute");
-var trigger=op.addOutPort(new CABLES.Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var changed=false;
 

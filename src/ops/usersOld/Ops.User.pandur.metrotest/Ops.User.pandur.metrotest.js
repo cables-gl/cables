@@ -1,5 +1,3 @@
-op.name='API Pointcloud';
-
 var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 var geomOut=op.addOutPort(new CABLES.Port(op,"geom",CABLES.OP_PORT_TYPE_OBJECT));
 

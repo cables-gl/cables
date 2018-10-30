@@ -1,8 +1,8 @@
 op.name="Ops.Gl.Shader.Caustics";
 
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var lightmap=op.addInPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var lightmapUniform=null;
@@ -74,7 +74,7 @@ function doRender()
         uniOpacity=new CGL.Uniform(shader,'f',mod.prefix+'_opacity',pOpacity.get());
     }
     
-    /* --- */cgl.setTexture(4,lightmap.get().tex);
+    cgl.setTexture(4,lightmap.get().tex);
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lightmap.get().tex);
     uniCausticsTime.setValue(Date.now()/1000.0-startTime);
 

@@ -46,7 +46,7 @@ render.onTriggered=function()
         {
             cgl.currentTextureEffect.bind();
             cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            
     
             // if(mask.get() && mask.get().tex)
             // {
@@ -65,7 +65,7 @@ render.onTriggered=function()
         {
             cgl.currentTextureEffect.bind();
             cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            
     
             // if(mask.get() && mask.get().tex)
             // {

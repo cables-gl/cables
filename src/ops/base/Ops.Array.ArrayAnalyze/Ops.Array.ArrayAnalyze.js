@@ -1,7 +1,4 @@
-op.name="ArrayAnalyze";
-
 var inArr=op.inArray("Array");
-
 var outMin=op.outValue("Min");
 var outMax=op.outValue("Max");
 var outAvg=op.outValue("Average");

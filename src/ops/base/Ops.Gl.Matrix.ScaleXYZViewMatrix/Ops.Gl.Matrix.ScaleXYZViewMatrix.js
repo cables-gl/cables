@@ -1,11 +1,11 @@
 
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var scaleX=op.addInPort(new CABLES.Port(op,"x"));
 var scaleY=op.addInPort(new CABLES.Port(op,"y"));
 var scaleZ=op.addInPort(new CABLES.Port(op,"z"));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var vScale=vec3.create();

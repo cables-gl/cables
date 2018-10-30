@@ -9,7 +9,7 @@ var rotY=op.inValueBool("Rotate Y",true);
 var rotZ=op.inValueBool("Rotate Z",true);
 
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var index=op.addOutPort(new CABLES.Port(op,"index",CABLES.OP_PORT_TYPE_VALUE));
 
 var outPoints=op.outArray("Points");

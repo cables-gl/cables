@@ -7,7 +7,7 @@ var learn=op.addInPort(new CABLES.Port(op,"learn",CABLES.OP_PORT_TYPE_FUNCTION,{
 var eventOut=op.addOutPort(new CABLES.Port(op,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
 var outPressed=op.addOutPort(new CABLES.Port(op,"pressed"));
 
-var trigger=op.addOutPort(new CABLES.Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var lights=op.addInPort(new CABLES.Port(op,"Light",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 

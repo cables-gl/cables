@@ -1,7 +1,7 @@
 op.name="HoverPoint";
 
 var exec=op.addInPort(new CABLES.Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new CABLES.Port(op,"Trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var inId=op.inValueString("id");
 var pPointSize=op.inValue("Size Point",10);

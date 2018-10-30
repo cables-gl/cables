@@ -1,6 +1,6 @@
 op.name="ImageCompose";
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var width=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
@@ -10,7 +10,7 @@ var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"c
 var fpTexture=op.inValueBool("HDR");
 var clear=op.inValueBool("Clear",true);
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var texOut=op.outTexture("texture_out");
 
 texOut.set(null);
@@ -157,8 +157,8 @@ var doRender=function()
 
         cgl.setShader(bgShader);
         cgl.currentTextureEffect.bind();
-        /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        
         
         cgl.gl.clearColor(0,0,0,0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT );

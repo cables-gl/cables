@@ -25,8 +25,8 @@ var outBoolean = op.outValueBool("Boolean out");
 
 Trigger ports in and out:
 ```javascript
-var execute = op.inFunction("Trigger In");
-var trigger = op.outFunction("Trigger out");
+var execute = op.inTrigger("Trigger In");
+var trigger = op.outTrigger("Trigger out");
 ```
 Array ports in and out:
 ```javascript
@@ -66,7 +66,7 @@ At this state the links between ops / the port-values are not set, yet, we will 
 
 ### port.onChange
 
-For every input-port (except `inFunction` and `inFunctionButton`) you can implement the `onChange`-method which gets called every time the value on the port changes. This means that it is being called when:
+For every input-port (except `inTrigger` and `inTriggerButton`) you can implement the `onChange`-method which gets called every time the value on the port changes. This means that it is being called when:
 
 - the user entered a new value in the GUI (input field / moved a slider / checkbox / …)
 - Another op linked to this port

@@ -1,5 +1,3 @@
-op.name="Array1xTo3x";
-
 var inArr=op.inArray("Array2x");
 var outArr=op.outArray("Array3x");
 
