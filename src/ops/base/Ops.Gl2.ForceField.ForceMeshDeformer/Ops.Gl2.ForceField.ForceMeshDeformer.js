@@ -1,5 +1,3 @@
-op.name="ForceMeshDeformer";
-
 var render=op.inTrigger("Render");
 
 var inSmooth=op.inValueBool("Smooth",true);

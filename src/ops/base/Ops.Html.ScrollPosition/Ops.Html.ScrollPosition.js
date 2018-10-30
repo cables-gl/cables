@@ -1,5 +1,3 @@
-op.name="ScrollPosition";
-
 var sleft=op.addOutPort(new CABLES.Port(op,"left"));
 var stop=op.addOutPort(new CABLES.Port(op,"top"));
 

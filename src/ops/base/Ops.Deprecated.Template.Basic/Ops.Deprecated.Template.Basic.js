@@ -10,8 +10,8 @@ var next = op.addOutPort( new CABLES.Port( this, "Next",CABLES.OP_PORT_TYPE_FUNC
 var result = op.addOutPort( new CABLES.Port(op, "Result", CABLES.OP_PORT_TYPE_) );
 
 // Define callback functions when the value of the input ports changed
-number1.onValueChanged = update;
-number2.onValueChanged = update;
+number1.onChange=update;
+number2.onChange=update;
 
 // Define callback when op is executed
 execute.onTriggered = update;

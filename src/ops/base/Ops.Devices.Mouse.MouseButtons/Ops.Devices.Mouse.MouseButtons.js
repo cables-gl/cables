@@ -1,5 +1,4 @@
-op.name="MouseButtons";
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 var mouseClickLeft=op.outTrigger("Click Left");
 var mouseClickRight=op.outTrigger("Click Right");

@@ -1,5 +1,3 @@
-op.name="PolarCoords";
-
 var render=op.inTrigger("render");
 
 var inner=op.inValueSlider("Radius Inner",0.25);

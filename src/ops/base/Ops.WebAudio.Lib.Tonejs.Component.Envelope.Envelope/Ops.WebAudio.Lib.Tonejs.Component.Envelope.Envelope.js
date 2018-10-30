@@ -1,5 +1,3 @@
-op.name="Envelope";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars

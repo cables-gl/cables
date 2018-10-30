@@ -18,7 +18,7 @@ function updateGain(){
 
 var oldAudioIn = null;
 
-audioIn.onValueChanged = function()
+audioIn.onChange=function()
 {
     if (!audioIn.get()) {
         if (oldAudioIn) {

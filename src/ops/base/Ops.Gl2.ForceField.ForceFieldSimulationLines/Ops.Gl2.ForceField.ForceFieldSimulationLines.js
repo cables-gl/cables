@@ -1,5 +1,3 @@
-op.name="ForceFieldSimulationLines";
-
 var exec=op.inTrigger("exec");
 var next=op.outTrigger("next");
 

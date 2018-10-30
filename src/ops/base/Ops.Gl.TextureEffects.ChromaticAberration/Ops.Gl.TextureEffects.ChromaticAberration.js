@@ -1,5 +1,3 @@
-op.name="ChromaticAberration";
-
 var render=op.inTrigger('render');
 var pixel=op.inValue("Pixel",5);
 var lensDistort=op.inValueSlider("Lens Distort",0);

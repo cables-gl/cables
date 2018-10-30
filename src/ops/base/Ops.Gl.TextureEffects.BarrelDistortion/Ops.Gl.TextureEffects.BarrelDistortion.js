@@ -1,5 +1,3 @@
-op.name="BarrelDistortion";
-
 var render=op.inTrigger('render');
 var amount=op.inValue("amount");
 

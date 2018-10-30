@@ -1,5 +1,3 @@
-op.name="Voronoise";
-
 var render=op.inTrigger("Render");
 var trigger=op.outTrigger("Trigger");
 

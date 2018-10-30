@@ -1,5 +1,3 @@
-op.name="Max";
-
 var result=op.addOutPort(new CABLES.Port(op,"result"));
 var value=op.addInPort(new CABLES.Port(op,"value"));
 var max=op.addInPort(new CABLES.Port(op,"Maximum"));

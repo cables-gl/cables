@@ -1,6 +1,3 @@
-op.name="FlowFieldForce";
-
-op.name='PointLight';
 
 var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 var trigger=op.outTrigger('trigger');

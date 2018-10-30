@@ -1,5 +1,3 @@
-op.name="AnalyserTexture";
-
 var refresh=op.addInPort(new CABLES.Port(op,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
 var fftArr=op.addInPort(new CABLES.Port(op, "FFT Array",CABLES.OP_PORT_TYPE_ARRAY));
 

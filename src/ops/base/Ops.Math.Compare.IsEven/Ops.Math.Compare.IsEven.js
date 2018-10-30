@@ -6,5 +6,5 @@ var exec= function() {
     result.set(!( number.get() & 1 ));
 };
 
-number.onValueChanged = exec;
+number.onChange=exec;
 exec();

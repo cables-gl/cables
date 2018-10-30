@@ -11,6 +11,6 @@ var exec = function() {
     result.set( number1.get() == number2.get() );
 };
 
-number1.onValueChanged = exec;
-number2.onValueChanged = exec;
+number1.onChange=exec;
+number2.onChange=exec;
 exec();

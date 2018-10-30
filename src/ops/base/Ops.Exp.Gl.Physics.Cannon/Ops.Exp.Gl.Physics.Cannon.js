@@ -1,5 +1,3 @@
-op.name="Cannon";
-
 var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
 var inRadius=op.inValue("Radius");

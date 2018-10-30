@@ -1,5 +1,3 @@
-op.name="FFTAreaAverage";
-
 var fftArr=this.addInPort(new CABLES.Port(this, "FFT Array",CABLES.OP_PORT_TYPE_ARRAY));
 var refresh=this.addInPort(new CABLES.Port(this,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
 var x=this.addInPort(new CABLES.Port(this,"x",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));

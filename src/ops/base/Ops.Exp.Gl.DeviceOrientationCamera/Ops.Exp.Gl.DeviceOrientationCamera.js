@@ -1,4 +1,3 @@
-op.name="DeviceOrientationCamera";
 
 var render=op.inTrigger("Render");
 var next=op.outTrigger("Next");

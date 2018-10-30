@@ -75,7 +75,7 @@ function handleVolumeChange() {
 play.onTriggered = startPlayback;
 pause.onTriggered = pausePlayback;
 rewind.onTriggered = rewindPlayback;
-seekPosition.onValueChanged = handleSeek;
+seekPosition.onChange=handleSeek;
 jumpToSeekPosition.onTriggered = handleSeek;
-file.onValueChanged = handleFileChange;
-volume.onValueChanged = handleVolumeChange;
+file.onChange=handleFileChange;
+volume.onChange=handleVolumeChange;

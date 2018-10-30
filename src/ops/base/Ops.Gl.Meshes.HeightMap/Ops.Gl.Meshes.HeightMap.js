@@ -1,5 +1,3 @@
-op.name="HeightMap";
-
 var render=op.inTrigger('render');
 var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 

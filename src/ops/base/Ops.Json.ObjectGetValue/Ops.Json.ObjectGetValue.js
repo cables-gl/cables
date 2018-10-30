@@ -1,5 +1,3 @@
-op.name="getValue";
-
 var data=op.addInPort(new CABLES.Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT ));
 var key = op.inValueString("key");
 var result=op.addOutPort(new CABLES.Port(op,"result"));

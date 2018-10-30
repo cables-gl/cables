@@ -1,5 +1,3 @@
-op.name="StringLength";
-
 var inStr=op.inValueString("String");
 var result=op.outValue("Result");
 

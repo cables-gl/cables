@@ -1,5 +1,3 @@
-op.name="ForceClusterFromArray";
-
 var exec=op.inTrigger("Exec");
 var doreset=op.inTriggerButton("reset");
 

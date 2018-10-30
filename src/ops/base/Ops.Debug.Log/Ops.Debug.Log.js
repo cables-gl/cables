@@ -75,11 +75,11 @@ functionInput.onTriggered = function(){
         }
 };
 
-valueInput.onValueChanged = printValue;
-arrayInput.onValueChanged = printArray;
-/*objectInput.onValueChanged = printObject;*/
+valueInput.onChange=printValue;
+arrayInput.onChange=printArray;
+/*objectInput.onChange=printObject;*/
 
-/*objectInput.onValueChanged = function(){
+/*objectInput.onChange=function(){
     if(objectInput.links && objectInput.links.length > 0) {
         op.log("[" + objectInput.links[0].portOut.parent.name + ": " + objectInput.links[0].portOut.name + "] " + JSON.stringify(objectInput.get()));
     }

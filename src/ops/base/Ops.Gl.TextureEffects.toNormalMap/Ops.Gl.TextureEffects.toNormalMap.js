@@ -1,5 +1,3 @@
-op.name="toNormalMap";
-
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
 var strength=op.inValue("Strength",4);

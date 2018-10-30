@@ -1,5 +1,3 @@
-op.name="Icosahedron";
-
 // from: http://blog.andreaskahler.com/search/label/3D
 
 var render=op.inTrigger('render');

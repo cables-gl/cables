@@ -1,5 +1,3 @@
-op.name="VoronoiNew";
-
 var render=op.inTrigger("Render");
 var pSites=op.inArray("Site Points");
 

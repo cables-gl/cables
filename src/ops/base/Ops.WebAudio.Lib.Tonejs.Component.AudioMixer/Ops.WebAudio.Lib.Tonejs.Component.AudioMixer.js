@@ -1,5 +1,3 @@
-op.name="AudioMixer";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants

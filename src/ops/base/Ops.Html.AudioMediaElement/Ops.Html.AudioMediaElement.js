@@ -66,7 +66,7 @@ function updateVolume()
 op.onMasterVolumeChanged=updateVolume;
 
 
-fileName.onValueChanged = function()
+fileName.onChange=function()
 {
     if(!fileName.get())return;
 

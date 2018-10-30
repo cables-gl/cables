@@ -1,5 +1,3 @@
-op.name="Clarity";
-
 var render=op.inTrigger("Render");
 var trigger=op.outTrigger("Trigger");
 var amount=op.inValueSlider("amount",0.5);

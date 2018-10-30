@@ -1,5 +1,3 @@
-op.name="ForceFieldForce";
-
 var exec=op.inTrigger("Exec");
 
 var range=op.inValue("Range Radius",1);

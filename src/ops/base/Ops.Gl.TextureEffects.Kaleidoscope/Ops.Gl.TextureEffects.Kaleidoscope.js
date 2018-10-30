@@ -1,5 +1,3 @@
-op.name="Kaleidoscope";
-
 var render=op.inTrigger('render');
 
 var sides=op.inValue("Sides",10);

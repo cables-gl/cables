@@ -1,5 +1,3 @@
-op.name="ValueSwitcherTrigger";
-
 var triggers=[];
 
 var currentVal=op.outValue("Value");

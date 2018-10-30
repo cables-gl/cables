@@ -1,5 +1,3 @@
-op.name="TriggerBetween";
-
 var exe=op.inTrigger("Exe");
 
 var inIndex=op.inValueInt("Index");

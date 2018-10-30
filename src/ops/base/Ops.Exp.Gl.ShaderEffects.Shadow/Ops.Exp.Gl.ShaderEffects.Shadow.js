@@ -1,5 +1,3 @@
-op.name="Shadow";
-
 var cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 

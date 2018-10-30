@@ -15,7 +15,7 @@ var exec = function() {
   );
 };
 
-number.onValueChanged = exec;
-range1.onValueChanged = exec;
-range2.onValueChanged = exec;
+number.onChange=exec;
+range1.onChange=exec;
+range2.onChange=exec;
 exec();

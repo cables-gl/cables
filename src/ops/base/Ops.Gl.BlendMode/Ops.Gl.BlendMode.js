@@ -1,5 +1,3 @@
-op.name="BlendMode";
-
 var exec=op.inTrigger("Render");
 var inBlend=op.inValueSelect("Blendmode",
     [

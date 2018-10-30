@@ -1,5 +1,3 @@
-op.name="PointCollector";
-
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
 var outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY));

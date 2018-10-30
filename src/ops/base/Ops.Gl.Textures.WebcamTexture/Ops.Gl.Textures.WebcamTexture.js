@@ -1,5 +1,3 @@
-op.name="WebcamTexture";
-
 var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 var fps=op.addInPort(new CABLES.Port(op,"fps",CABLES.OP_PORT_TYPE_VALUE ));
 var inActive=op.inValueBool("Active",true);

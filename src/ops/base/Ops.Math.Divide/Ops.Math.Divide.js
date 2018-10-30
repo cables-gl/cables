@@ -9,6 +9,6 @@ const exec = function() {
 number1.set(1);
 number2.set(1);
 
-number1.onValueChanged = exec;
-number2.onValueChanged = exec;
+number1.onChange=exec;
+number2.onChange=exec;
 exec();

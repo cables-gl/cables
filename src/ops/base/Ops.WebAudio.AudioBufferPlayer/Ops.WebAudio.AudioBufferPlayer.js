@@ -1,5 +1,3 @@
-op.name="AudioBufferPlayer";
-
 var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports

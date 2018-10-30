@@ -1,5 +1,3 @@
-op.name="VectorLength";
-
 var x=op.inValue("X");
 var y=op.inValue("Y");
 var z=op.inValue("Z");

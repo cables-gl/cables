@@ -1,5 +1,3 @@
-op.name="ZoomBlur";
-
 var render=op.inTrigger('render');
 var strength=op.inValueSlider("strength",0.5);
 var x=op.inValue("X",0.5);

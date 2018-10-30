@@ -35,6 +35,6 @@ var createValueChangedFunction = function( port ) {
 for(var i=0; i<N_PORTS; i++) {
     var audioIn = this.addInPort(new CABLES.Port(this, "audio in " + i,CABLES.OP_PORT_TYPE_OBJECT));
     audioIn.audioInPortNr = i;
-    audioIn.onValueChanged = createValueChangedFunction(i);
+    audioIn.onChange=createValueChangedFunction(i);
     audioIns.push( audioIn );
 }

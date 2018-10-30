@@ -1,4 +1,3 @@
-op.name="FieldLines";
 
 // http://hsilomedus.me/wp-content/uploads/d3electricField/electricField.html
 

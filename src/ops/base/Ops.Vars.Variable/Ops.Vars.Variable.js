@@ -1,5 +1,3 @@
-op.name="Variable";
-
 op.varName=op.inValueSelect("Variable");
 var val=op.outValue("Value");
 

@@ -1,5 +1,3 @@
-op.name="Line";
-
 var render=op.inTrigger("Render");
 var x1=op.inValue("X 1");
 var y1=op.inValue("Y 1");

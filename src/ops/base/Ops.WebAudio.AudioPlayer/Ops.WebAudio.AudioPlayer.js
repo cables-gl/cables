@@ -150,7 +150,7 @@ op.onMasterVolumeChanged=updateVolume;
 
 var firstTime=true;
 var loadingFilename='';
-this.file.onValueChanged = function()
+this.file.onChange=function()
 {
     if(!self.file.get())return;
     loadingFilename=op.patch.getFilePath(self.file.get());

@@ -1,5 +1,3 @@
-op.name="PointCollectorCollect";
-
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
 

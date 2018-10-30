@@ -1,5 +1,3 @@
-op.name="Posterize";
-
 var render=op.inTrigger("Render");
 var trigger=op.outTrigger("Trigger");
 

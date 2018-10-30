@@ -1,5 +1,3 @@
-op.name="VoronoiMesh";
-
 var render=op.inTrigger("Render");
 var inDiagram=op.inObject("Diagram");
 var next=op.outTrigger("Next");

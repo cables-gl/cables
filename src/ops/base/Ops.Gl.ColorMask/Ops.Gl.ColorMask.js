@@ -1,4 +1,3 @@
-op.name="ColorMask";
 
 var exec=op.inTrigger("Execute");
 

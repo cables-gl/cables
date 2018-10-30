@@ -1,5 +1,3 @@
-op.name="SimpleMovingAverage";
-
 var val=op.inValue("Value");
 var num=op.inValueInt("Number of Values",10);
 

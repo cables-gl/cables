@@ -1,5 +1,3 @@
-op.name="Degree To Vector";
-
 var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var deg=op.addInPort(new CABLES.Port(op,"degree"));

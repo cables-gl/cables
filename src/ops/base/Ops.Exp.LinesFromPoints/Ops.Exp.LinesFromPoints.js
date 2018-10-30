@@ -1,4 +1,4 @@
-op.name="LinesFromPoints";
+LinesFromPoints";
 
 // in ports
 var pointsPort = op.inArray("Points");

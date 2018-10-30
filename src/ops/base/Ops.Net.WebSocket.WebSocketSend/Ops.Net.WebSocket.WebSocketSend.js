@@ -1,5 +1,3 @@
-op.name="WebSocketSend";
-
 var inConnection=op.inObject("Connection");
 var inObject=op.inObject("Object");
 var inSend=op.inTriggerButton("Send");

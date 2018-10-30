@@ -1,5 +1,3 @@
-op.name="MqttReceive";
-
 var mqttObj = op.inObject("MQTT Object");
 var receiveChannel = op.inValueString("Channel", "/test");
 var messageType = op.inValueSelect("Message Type", ["String", "Number", "Boolean"], "String");
@@ -26,7 +24,7 @@ function resubscribe() {
     }
 }
 
-receiveChannel.onValueChanged = function(){
+receiveChannel.onChange=function(){
     var now = Date.now();
 
     if(lastValueChange + TYPE_DELAY < now) {
@@ -36,7 +34,7 @@ receiveChannel.onValueChanged = function(){
     }
 };
 
-mqttObj.onValueChanged = function(){
+mqttObj.onChange=function(){
     var o = mqttObj.get();
     if(o) {
         if(o.message){

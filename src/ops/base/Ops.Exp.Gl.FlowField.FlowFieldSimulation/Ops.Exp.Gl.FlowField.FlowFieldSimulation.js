@@ -1,5 +1,3 @@
-op.name="FluidSimTest";
-
 var exec=op.inTrigger("exec");
 var next=op.outTrigger("next");
 

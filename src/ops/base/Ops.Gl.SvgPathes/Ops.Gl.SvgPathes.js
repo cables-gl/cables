@@ -1,5 +1,3 @@
-op.name="SvgPathes";
-
 var render=op.inTrigger('render');
 var svgFile=op.addInPort(new CABLES.Port(op,"object",CABLES.OP_PORT_TYPE_OBJECT));
 

@@ -1,4 +1,3 @@
-op.name="MeshMorph";
 var cgl=op.patch.cgl;
 
 

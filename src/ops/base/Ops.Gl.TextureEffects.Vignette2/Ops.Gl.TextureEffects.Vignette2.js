@@ -1,5 +1,3 @@
-op.name="Vignette";
-
 var render=op.inTrigger("render");
 var trigger=op.outTrigger("trigger");
 

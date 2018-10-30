@@ -1,5 +1,3 @@
-op.name="SetValueOnTrigger";
-
 // inputs
 var valuePort = op.inValueString("Value");
 var setValuePort = op.inTrigger("Set Value");

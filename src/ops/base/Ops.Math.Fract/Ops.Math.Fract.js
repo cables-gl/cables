@@ -1,5 +1,3 @@
-op.name="Fract";
-
 var value=op.inValue("Value");
 var result=op.outValue("Result");
 

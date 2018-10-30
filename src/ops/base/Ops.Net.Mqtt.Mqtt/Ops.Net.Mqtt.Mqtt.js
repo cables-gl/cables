@@ -1,5 +1,3 @@
-op.name="Mqtt";
-
 var mqttClientName = op.inValueString("Client Name", "Carolin Cable");
 var mqttServer = op.inValueString("Broker URL", "broker.shiftr.io");
 var mqttUsername = op.inValueString("Username", "try");

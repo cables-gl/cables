@@ -1,5 +1,3 @@
-op.name="Min";
-
 var result=op.addOutPort(new CABLES.Port(op,"result"));
 var value=op.addInPort(new CABLES.Port(op,"value"));
 var min=op.addInPort(new CABLES.Port(op,"Minimum"));

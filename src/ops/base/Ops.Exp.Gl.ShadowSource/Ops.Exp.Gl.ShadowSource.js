@@ -1,4 +1,3 @@
-op.name="ShadowSource";
 op.requirements=[CABLES.Requirements.WEBGL2];
 
 var render=op.inTrigger("Render");

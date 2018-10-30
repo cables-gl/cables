@@ -1,5 +1,3 @@
-op.name="Denoise";
-
 var render=op.inTrigger('render');
 var strength=op.inValueSlider("Exponent",0.6);
 

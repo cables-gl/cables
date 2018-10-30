@@ -1,5 +1,3 @@
-op.name="DeviceVibrate";
-
 var inVibrate=op.inTriggerButton("Vibrate");
 var outSupported=op.outValue("Supported");
 

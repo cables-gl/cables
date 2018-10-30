@@ -31,7 +31,7 @@ function note (num, sharps) {
   return pc + o;
 }
 
-midiValuePort.onValueChanged = function(){
+midiValuePort.onChange=function(){
   var val = midiValuePort.get();
   if(val) {
     var n = note(val, true);

@@ -1,5 +1,3 @@
-op.name="Analyser";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values

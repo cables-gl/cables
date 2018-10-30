@@ -1,5 +1,3 @@
-op.name="World";
-
 var exec=op.inTrigger("Exec");
 
 var reset=op.inTriggerButton("Reset");

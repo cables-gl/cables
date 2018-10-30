@@ -1,6 +1,3 @@
-op.name="KeyPressLearn";
-
-
 var onPress=op.addOutPort(new CABLES.Port(op,"on press",CABLES.OP_PORT_TYPE_FUNCTION));
 var onRelease=op.addOutPort(new CABLES.Port(op,"on release",CABLES.OP_PORT_TYPE_FUNCTION));
 var learn = op.addInPort( new CABLES.Port( op, "learn",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));

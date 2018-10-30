@@ -1,5 +1,3 @@
-op.name="Split";
-
 var inString = op.inValueString("Input String","1,2,3");
 var separator = op.inValueString("Separator", ",");
 

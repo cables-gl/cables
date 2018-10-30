@@ -1,5 +1,3 @@
-op.name="TriangleArray";
-
 var render=op.inTrigger("Render");
 var inArr=op.inArray("Points");
 var next=op.outTrigger("Next");

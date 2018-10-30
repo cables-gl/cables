@@ -1,5 +1,3 @@
-op.name="MqttSend";
-
 var mqttObj = op.inObject("MQTT Object");
 var message = op.inValue("Message", "Hello Cables");
 var channel = op.inValueString("Channel", "/test");

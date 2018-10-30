@@ -1,10 +1,5 @@
-op.name="ResetForces";
-
 var exec=op.inTrigger("Exec");
-
-
 var next=op.outTrigger("next");
-
 
 exec.onTriggered=function()
 {

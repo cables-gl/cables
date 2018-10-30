@@ -7,7 +7,7 @@ var result = op.outValue('Result');
 var calculate = Math.cos;
 
 // convert degrees into radians
-value.onValueChanged = function()
+value.onChange=function()
 {
     result.set(
         value.get() * Math.PI / 180

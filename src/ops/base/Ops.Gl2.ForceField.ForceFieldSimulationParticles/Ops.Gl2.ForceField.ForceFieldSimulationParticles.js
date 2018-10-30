@@ -1,5 +1,3 @@
-op.name="ForceFieldParticleEmitter";
-
 const render=op.inTrigger("render");
 const resetButton=op.inTriggerButton("Reset");
 const inSizeX=op.inValue("Size Area X",3);

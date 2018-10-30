@@ -1,4 +1,3 @@
-op.name="PhongMaterial";
 var cgl=this.patch.cgl;
 
 // adapted from:
