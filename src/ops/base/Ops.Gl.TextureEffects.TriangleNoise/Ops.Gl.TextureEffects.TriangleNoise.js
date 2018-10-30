@@ -1,26 +1,19 @@
-op.name="TriangleNoise";
+const render=op.inFunction("Render");
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const scale=op.inValue("scale",10);
+const angle=op.inValue("angle");
+const add=op.inValue("Add");
+const trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var render=op.inFunction("Render");
-
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
-
-var scale=op.inValue("scale",10);
-var angle=op.inValue("angle");
-var add=op.inValue("Add");
-
-var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-
-var srcFrag=''
-    .endl()+'precision highp float;'
+const srcFrag=''
     .endl()+'IN vec2 texCoord;'
-    .endl()+'uniform float scale;'
-    .endl()+'uniform float angle;'
-    .endl()+'uniform float ratio;'
-    .endl()+'uniform float add;'
+    .endl()+'UNI float scale;'
+    .endl()+'UNI float angle;'
+    .endl()+'UNI float ratio;'
+    .endl()+'UNI float add;'
     
     .endl()+'float rand(vec2 co)'
     .endl()+'{'
@@ -60,13 +53,13 @@ var srcFrag=''
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-var addUniform=new CGL.Uniform(shader,'f','add',add);
-var scaleUniform=new CGL.Uniform(shader,'f','scale',scale);
-var angleUniform=new CGL.Uniform(shader,'f','angle',angle);
-var ratioUniform=new CGL.Uniform(shader,'f','ratio',0.57);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const addUniform=new CGL.Uniform(shader,'f','add',add);
+const scaleUniform=new CGL.Uniform(shader,'f','scale',scale);
+const angleUniform=new CGL.Uniform(shader,'f','angle',angle);
+const ratioUniform=new CGL.Uniform(shader,'f','ratio',0.57);
 
 var oldRatio=-1;
 
@@ -79,9 +72,6 @@ render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
 
-    // if(animated.get()) timeUniform.setValue(op.patch.freeTimer.get()/1000%100);
-        // else timeUniform.setValue(0);
-
     var ratio=cgl.canvasHeight/cgl.canvasWidth;
     if(ratio!=oldRatio)
     {
@@ -89,12 +79,10 @@ render.onTriggered=function()
         oldRatio=ratio;
     }
 
-
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

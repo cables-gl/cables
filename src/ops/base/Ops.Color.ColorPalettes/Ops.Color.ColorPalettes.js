@@ -1,4 +1,4 @@
-const index=op.inValue("Index",0);
+const index=op.inValueInt("Index",0);
 const textureOut=op.outTexture("Texture");
 
 const arrOut=op.outArray("Color Array");

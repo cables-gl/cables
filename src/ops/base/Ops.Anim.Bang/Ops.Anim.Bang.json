@@ -1,5 +1,5 @@
 {
-    "updated": 1505194112169,
+    "updated": 1540827016833,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "92ca45a7-5b4b-4238-956e-23d79bdc659f",
@@ -16,13 +16,15 @@
             },
             {
                 "type": "0",
-                "name": "Duration"
+                "name": "Duration",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             }
         ],
         "name": "Ops.Anim.Bang"

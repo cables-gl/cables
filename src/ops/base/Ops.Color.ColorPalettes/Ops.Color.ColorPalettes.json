@@ -5,7 +5,7 @@
             {
                 "type": "0",
                 "name": "Index",
-                "subType": "number"
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -39,6 +39,6 @@
             }
         ]
     },
-    "updated": 1523828836372,
+    "updated": 1540732064747,
     "created": 1523828824965
 }

@@ -7,23 +7,28 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "angle"
+                "name": "angle",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Add"
+                "name": "Add",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -37,5 +42,9 @@
     "summary": "noise made from triangles",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1540824342341,
+    "authorName": "pandur",
+    "id": "2f0a3a6a-58e2-4517-8f7e-319e271c71aa",
+    "created": 1540824312194
 }
