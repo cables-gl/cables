@@ -48,6 +48,13 @@
     "docs": {
         "ports": []
     },
+    "credits": [
+        {
+            "title": "FXAA WebGL implementation",
+            "author": "mattdesl",
+            "url": "https://github.com/mattdesl/glsl-fxaa"
+        }
+    ],
     "updated": 1540922800187,
     "authorName": "pandur",
     "id": "3e679c17-f050-4bc8-bfe5-5b9190e7ce40",
