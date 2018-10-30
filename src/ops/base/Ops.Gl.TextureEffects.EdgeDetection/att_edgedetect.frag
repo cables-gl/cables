@@ -1,5 +1,4 @@
 
-precision highp float;
 IN vec2 texCoord;
 uniform sampler2D tex;
 uniform float amount;

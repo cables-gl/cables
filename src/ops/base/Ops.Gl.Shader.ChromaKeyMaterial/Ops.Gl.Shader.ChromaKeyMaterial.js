@@ -61,7 +61,6 @@ var shader_vert='{{MODULES_HEAD}}'
 
 
 var shader_frag='{{MODULE_BEGIN_FRAG}}'
-.endl()+'precision highp float;'
 .endl()+'UNI sampler2D tex;'
 .endl()+'UNI float r;'
 .endl()+'UNI float g;'

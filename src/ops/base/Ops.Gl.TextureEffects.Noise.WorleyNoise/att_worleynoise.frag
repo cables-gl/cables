@@ -3,10 +3,6 @@
 
 IN vec2 texCoord;
 
-#ifdef GL_ES
-precision mediump float;
-#endif
-
 UNI float amount;
 UNI float x;
 UNI float y;

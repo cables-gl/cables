@@ -9,7 +9,6 @@ changelog:
 (http://www.cgafaq.info/wiki/Evenly_distributed_points_on_sphere)
 
 */
-precision highp float;
 
 IN vec2 texCoord;
 

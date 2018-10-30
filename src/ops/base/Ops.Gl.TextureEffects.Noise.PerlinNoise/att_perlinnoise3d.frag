@@ -1,5 +1,3 @@
-precision highp float;
-
 UNI float z;
 UNI float x;
 UNI float y;

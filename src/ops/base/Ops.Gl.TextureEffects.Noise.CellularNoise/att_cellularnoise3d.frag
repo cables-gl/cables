@@ -1,11 +1,9 @@
-precision highp float;
-
-uniform float z;
-uniform float x;
-uniform float y;
-uniform float scale;
+UNI float z;
+UNI float x;
+UNI float y;
+UNI float scale;
 IN vec2 texCoord;
-uniform sampler2D tex;
+UNI sampler2D tex;
 
 
 void FAST32_hash_3D( 	vec3 gridcell,

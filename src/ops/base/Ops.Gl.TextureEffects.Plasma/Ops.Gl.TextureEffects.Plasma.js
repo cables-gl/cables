@@ -18,7 +18,6 @@ greyscale.onChange=function()
 };
 
 var srcFrag=''
-    .endl()+'precision mediump float;'
     .endl()+'#define PI 3.1415926535897932384626433832795'
      
     .endl()+'uniform float time;'
