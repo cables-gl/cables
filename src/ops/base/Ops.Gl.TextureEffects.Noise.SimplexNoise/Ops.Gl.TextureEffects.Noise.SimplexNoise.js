@@ -1,4 +1,4 @@
-var render=op.inTrigger('render');
+var render=op.inTrigger('Render');
 
 var smoothness=op.addInPort(new CABLES.Port(op,"smoothness",CABLES.OP_PORT_TYPE_VALUE,{  }));
 var scale=op.addInPort(new CABLES.Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{  }));

@@ -1,5 +1,5 @@
 
-var render=op.inTrigger('render');
+var render=op.inTrigger('Render');
 var width=op.addInPort(new CABLES.Port(op,"Width",CABLES.OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new CABLES.Port(op,"Height",CABLES.OP_PORT_TYPE_VALUE));
 var thickness=op.addInPort(new CABLES.Port(op,"Thickness",CABLES.OP_PORT_TYPE_VALUE));

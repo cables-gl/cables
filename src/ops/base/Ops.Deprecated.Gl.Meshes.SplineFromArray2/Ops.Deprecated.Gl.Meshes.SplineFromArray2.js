@@ -1,6 +1,6 @@
 
 
-var render=op.inTrigger('render');
+var render=op.inTrigger('Render');
 
 var inIndex=op.inValue("index");
 
