@@ -1,12 +1,8 @@
-var cgl=op.patch.cgl;
+const render=op.inTrigger('render');
+const trigger=op.outTrigger('trigger');
 
-op.name='BulgePinch';
-
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
-
-var shader=new CGL.Shader(cgl);
-
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 var radius=op.addInPort(new CABLES.Port(op,"Radius",CABLES.OP_PORT_TYPE_VALUE,{  }));
 radius.set(0.5);
@@ -28,32 +24,7 @@ centerY.set(0.5);
 var uniCenterY=new CGL.Uniform(shader,'f','centerY',centerY.get());
 centerY.onChange=function() { uniCenterY.setValue(centerY.get()); };
 
-var srcFrag=''
-
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'UNI sampler2D tex;'
-
-    .endl()+'UNI float radius;'
-    .endl()+'UNI float strength;'
-    .endl()+'UNI float centerX;'
-    .endl()+'UNI float centerY;'
-
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec2 center=vec2(centerX,centerY);'
-    .endl()+'   vec2 coord=texCoord;'
-    .endl()+'   coord -= center;'
-    .endl()+'   float distance = length(coord);'
-    .endl()+'   float percent = distance / radius;'
-    .endl()+'   if (strength > 0.0) coord *= mix(1.0, smoothstep(0.0, radius / distance, percent), strength * 0.75);'
-    .endl()+'   else coord *= mix(1.0, pow(percent, 1.0 + strength * 0.75) * radius / distance, 1.0 - percent);'
-    .endl()+'   coord += center;'
-    .endl()+'   vec4 col=texture2D(tex,coord);'
-    .endl()+'   outColor= col;'
-    .endl()+'}';
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.bulgepinch_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 
@@ -65,7 +36,6 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
