@@ -6,7 +6,7 @@ var exePort = op.inFunctionButton('Execute');
 var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
 
 // outputs
-var nextPort = op.outFunction('Next');
+var nextPort = op.outTrigger('Next');
 var arrayOut=op.addOutPort(new CABLES.Port(op, "shuffled array",CABLES.OP_PORT_TYPE_ARRAY));
 array.ignoreValueSerialize=true;
 arrayOut.ignoreValueSerialize=true;

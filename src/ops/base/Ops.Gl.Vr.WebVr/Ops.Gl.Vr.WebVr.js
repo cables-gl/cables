@@ -1,6 +1,6 @@
 var inStartVr=op.inFunctionButton("Start VR");
 
-var nextVr=op.outFunction("VR Mainloop");
+var nextVr=op.outTrigger("VR Mainloop");
 var outSupported=op.outValue("Supported");
 var outDisplayName=op.outValue("VR Display");
 var outFps=op.outValue("FPS");

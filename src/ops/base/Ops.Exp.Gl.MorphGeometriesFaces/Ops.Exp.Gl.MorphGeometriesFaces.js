@@ -1,5 +1,5 @@
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 
 var inGeomA=op.inObject("Geometry 1");
 var inGeomB=op.inObject("Geometry 2");

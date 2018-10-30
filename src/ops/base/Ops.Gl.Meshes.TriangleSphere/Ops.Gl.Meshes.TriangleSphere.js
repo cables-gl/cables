@@ -4,8 +4,8 @@
 //!!!! http://paulbourke.net/geometry/circlesphere/csource2.c
 
 
-var render=op.inFunction('render');
-var next=op.outFunction("next");
+var render=op.inTrigger('render');
+var next=op.outTrigger("next");
 
 var inIterations=op.inValue("Iterations",4);
 var geomOut=op.outObject("Geometry");

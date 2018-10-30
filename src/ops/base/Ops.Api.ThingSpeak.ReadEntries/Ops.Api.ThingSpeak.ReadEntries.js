@@ -13,7 +13,7 @@ var readApiKey = op.inValueString("Read API Key", dummyKey);
 var apiUrlPart1 = "https://api.thingspeak.com/channels/";
 var apiUrlPart2 = "/feeds.json";
 
-var finished = op.outFunction("When Finished");
+var finished = op.outTrigger("When Finished");
 var entries = op.outArray("Entries");
 var channelInfos = op.outObject("Channel Infos");
 var success = op.outValue("Success", false);

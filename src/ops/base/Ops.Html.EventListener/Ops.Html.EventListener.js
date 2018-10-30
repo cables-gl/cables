@@ -76,7 +76,7 @@ function toggleHandlerFactory(event) {
  */ 
 function createPorts() {
     events.forEach(function(event) {
-        event.port = op.outFunction(event.displayName);
+        event.port = op.outTrigger(event.displayName);
         event.handler = handlerFactory(event);
         event.togglePort = op.inValueBool(event.displayName + ' Active', true);
         event.togglePort.onChange = toggleHandlerFactory(event);

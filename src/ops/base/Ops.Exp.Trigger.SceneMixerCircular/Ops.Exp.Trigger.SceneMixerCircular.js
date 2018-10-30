@@ -12,12 +12,12 @@ var selectPort = op.inValue('Select');
 var overlapPort = op.inValueSlider('Overlap', 0.5);
 
 // outputs
-// var triggerBeforePort = op.outFunction('Trigger Before');
+// var triggerBeforePort = op.outTrigger('Trigger Before');
 var triggerPorts = [];
 createOutPorts();
 // the percentage of the next trigger coming in, can be used for fading
 // var percentPort = op.outValue('Percent', 0); // needs to be further tested
-// var triggerAfterPort = op.outFunction('Trigger After');
+// var triggerAfterPort = op.outTrigger('Trigger After');
 
 // listeners
 exePort.onTriggered = setOutPorts;
@@ -100,7 +100,7 @@ function getNextIndex(index) {
 
 function createOutPorts() {
     for(var i=0; i<NUM_PORTS; i++) {
-        var port = op.outFunction('Trigger ' + i);
+        var port = op.outTrigger('Trigger ' + i);
         port.onLinkChanged = reCheckNumPortsActive;
         triggerPorts.push(port);
     }

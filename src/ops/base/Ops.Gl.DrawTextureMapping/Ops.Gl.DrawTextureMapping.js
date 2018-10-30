@@ -1,12 +1,12 @@
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var inGeom=op.inObject("Geometry");
 
 
 var numPoints=op.inValue("Num Points");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 

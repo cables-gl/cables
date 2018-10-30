@@ -1,5 +1,5 @@
-var exe=op.inFunction("exe");
-var trigger=op.outFunction("trigger");
+var exe=op.inTrigger("exe");
+var trigger=op.outTrigger("trigger");
 
 var outX=op.addOutPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
 var outY=op.addOutPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));

@@ -1,4 +1,4 @@
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var inGeomSurface=op.inObject("Geom Surface");
 var geom=op.inObject("Geometry");
 

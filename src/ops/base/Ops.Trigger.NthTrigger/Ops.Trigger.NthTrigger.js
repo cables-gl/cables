@@ -1,6 +1,6 @@
 var exe=op.inFunctionButton("Exe");
 var nth=op.inValue("Nth");
-var next=op.outFunction("next");
+var next=op.outTrigger("next");
 
 var count=0;
 var lastFrame=-1;

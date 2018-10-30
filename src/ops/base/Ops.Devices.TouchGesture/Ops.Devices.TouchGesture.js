@@ -3,14 +3,14 @@ var enableVerticalSwipePort = op.inValueBool('Vertical Swipe', true);
 var enableVerticalPanPort = op.inValueBool('Vertical Pan', true);
 
 // outputs
-var pressPort = op.outFunction('Press');
-var pressUpPort = op.outFunction('Press Up');
-var panLeftPort = op.outFunction('Pan Left');
-var panRightPort = op.outFunction('Pan Right');
-var swipeLeftPort = op.outFunction('Swipe Left');
-var swipeRightPort = op.outFunction('Swipe Right');
-var swipeUpPort = op.outFunction('Swipe Up');
-var swipeDownPort = op.outFunction('Swipe Down');
+var pressPort = op.outTrigger('Press');
+var pressUpPort = op.outTrigger('Press Up');
+var panLeftPort = op.outTrigger('Pan Left');
+var panRightPort = op.outTrigger('Pan Right');
+var swipeLeftPort = op.outTrigger('Swipe Left');
+var swipeRightPort = op.outTrigger('Swipe Right');
+var swipeUpPort = op.outTrigger('Swipe Up');
+var swipeDownPort = op.outTrigger('Swipe Down');
 var eventPort = op.outObject('Event');
 
 var canvas = op.patch.cgl.canvas;

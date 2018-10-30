@@ -1,7 +1,7 @@
 
 var inval=op.inValue("Value");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 inval.onChange=function()
 {

@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("exe");
+var exe=op.inTrigger("exe");
 var min=op.inValue("min",0);
 var max=op.inValue("max",1);
 

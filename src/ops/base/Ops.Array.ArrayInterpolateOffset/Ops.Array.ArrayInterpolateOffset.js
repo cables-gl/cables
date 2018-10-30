@@ -4,7 +4,7 @@ var inArr2=op.inArray('Array 2');
 var inPos=op.inValueSlider("Pos");
 var inWidth=op.inValueSlider("Width");
 
-var exe=op.inFunction("Exe");
+var exe=op.inTrigger("Exe");
 
 var easing=op.inValueSelect("Easing",[
     'Linear',
@@ -14,7 +14,7 @@ var easing=op.inValueSelect("Easing",[
     
 var reverse=op.inValueBool("Reverse");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outArr=op.outArray("Result");
 var resultArr=[];
 var easingFunction=null;

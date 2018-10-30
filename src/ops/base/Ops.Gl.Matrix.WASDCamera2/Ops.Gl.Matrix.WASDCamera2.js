@@ -15,8 +15,8 @@ var outPosX=op.addOutPort(new CABLES.Port(op,"posX",CABLES.OP_PORT_TYPE_VALUE));
 var outPosY=op.addOutPort(new CABLES.Port(op,"posY",CABLES.OP_PORT_TYPE_VALUE));
 var outPosZ=op.addOutPort(new CABLES.Port(op,"posZ",CABLES.OP_PORT_TYPE_VALUE));
 
-var outMouseDown=op.outFunction("Mouse Left");
-var outMouseDownRight=op.outFunction("Mouse Right");
+var outMouseDown=op.outTrigger("Mouse Left");
+var outMouseDownRight=op.outTrigger("Mouse Right");
 
 var outDirX=op.outValue("Dir X");
 var outDirY=op.outValue("Dir Y");

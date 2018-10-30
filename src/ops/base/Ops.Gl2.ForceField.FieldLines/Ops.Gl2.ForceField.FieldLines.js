@@ -2,8 +2,8 @@ op.name="FieldLines";
 
 // http://hsilomedus.me/wp-content/uploads/d3electricField/electricField.html
 
-var exec=op.inFunction("Exec");
-var each=op.outFunction("Each");
+var exec=op.inTrigger("Exec");
+var each=op.outTrigger("Each");
 
 
 

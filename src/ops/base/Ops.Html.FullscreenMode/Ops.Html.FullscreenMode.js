@@ -1,7 +1,7 @@
 op.name="FullscreenMode";
 
-var doRequest=op.inFunction("Request Fullscreen");
-var doExit=op.inFunction("Exit Fullscreen");
+var doRequest=op.inTrigger("Request Fullscreen");
+var doExit=op.inTrigger("Exit Fullscreen");
 var isFullscreen=op.outValueBool("Is Fullscreen");
 
 function setState()

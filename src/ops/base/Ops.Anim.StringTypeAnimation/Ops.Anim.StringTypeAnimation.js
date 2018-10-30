@@ -4,8 +4,8 @@ var speed=op.inValue("Speed",500);
 var speedVariation=op.inValueSlider("Speed Variation");
 
 var outText=op.outValueString("Result");
-var outChanged=op.outFunction("Changed");
-var outFinished=op.outFunction("Finished");
+var outChanged=op.outTrigger("Changed");
+var outFinished=op.outTrigger("Finished");
 
 outText.set('  \n  ');
 var pos=0;

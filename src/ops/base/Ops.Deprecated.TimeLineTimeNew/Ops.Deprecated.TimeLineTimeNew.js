@@ -1,6 +1,6 @@
 op.name="TimeLineTimeNew";
 
-var exe=op.inFunction("Exec");
+var exe=op.inTrigger("Exec");
 var theTime=op.addOutPort(new CABLES.Port(this,"time"));
 
 

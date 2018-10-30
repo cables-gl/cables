@@ -10,7 +10,7 @@ var valign=op.addInPort(new CABLES.Port(op,"vertical align",CABLES.OP_PORT_TYPE_
 var font=op.addInPort(new CABLES.Port(op,"font",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 var lineDistance=op.addInPort(new CABLES.Port(op,"line distance"));
 var border=op.addInPort(new CABLES.Port(op,"border"));
-var doRefresh=op.inFunction("Refresh");
+var doRefresh=op.inTrigger("Refresh");
 
 // var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");

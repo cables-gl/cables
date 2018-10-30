@@ -1,4 +1,4 @@
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var x1=op.inValue("x 1",-1);

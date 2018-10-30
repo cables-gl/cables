@@ -1,8 +1,8 @@
 
 var cgl=op.patch.cgl;
 
-op.render=op.inFunction("render");
-op.trigger=op.outFunction("trigger");
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var axis=op.inValueSelect("Axis",["X","Y","Z"],"X");
 

@@ -1,4 +1,4 @@
-const render=op.inFunction("render");
+const render=op.inTrigger("render");
 const segments=op.inValueInt('segments',40);
 const radius=op.inValue('radius',0.5);
 const innerRadius=op.inValueSlider('innerRadius',0);
@@ -9,7 +9,7 @@ const doRender=op.inValueBool('Render',true);
 const mapping=op.addInPort(new CABLES.Port(op,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
 const drawSpline=op.inValueBool("Spline",false);
 
-const trigger=op.outFunction('trigger');
+const trigger=op.outTrigger('trigger');
 const geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 mapping.set('flat');

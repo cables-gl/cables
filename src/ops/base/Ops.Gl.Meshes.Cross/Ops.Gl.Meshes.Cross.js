@@ -1,10 +1,10 @@
-const render = op.inFunction('render');
+const render = op.inTrigger('render');
 const extend = op.inValue('extend',1.0);
 const thick = op.inValue('thicker',0.25);
 const target = op.inValueBool('Crosshair');
 const active = op.inValueBool('Draw',true);
 
-const trigger = op.outFunction('trigger');
+const trigger = op.outTrigger('trigger');
 const geomOut = op.outObject("geometry");
 
 const cgl= op.patch.cgl;

@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("Exec");
+var exe=op.inTrigger("Exec");
 var inArr=op.inArray("Array3x");
 
 var fov=this.addInPort(new CABLES.Port(this,"fov",CABLES.OP_PORT_TYPE_VALUE));

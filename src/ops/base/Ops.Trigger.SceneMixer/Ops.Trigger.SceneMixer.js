@@ -7,10 +7,10 @@ var enablePorts = [];
 createInPorts();
 
 // outputs
-var triggerBeforePort = op.outFunction('Trigger Before');
+var triggerBeforePort = op.outTrigger('Trigger Before');
 var triggerPorts = [];
 createOutPorts();
-var triggerAfterPort = op.outFunction('Trigger After');
+var triggerAfterPort = op.outTrigger('Trigger After');
 
 // listeners
 exePort.onTriggered = setOutPorts;
@@ -36,7 +36,7 @@ function createInPorts() {
 
 function createOutPorts() {
     for(var i=0; i<NUM_PORTS; i++) {
-        var port = op.outFunction('Trigger ' + i);
+        var port = op.outTrigger('Trigger ' + i);
         triggerPorts.push(port);
     }
 }

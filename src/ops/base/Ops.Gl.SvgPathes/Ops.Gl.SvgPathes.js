@@ -5,7 +5,7 @@ var svgFile=op.addInPort(new CABLES.Port(op,"object",CABLES.OP_PORT_TYPE_OBJECT)
 
 var thickness=op.addInPort(new CABLES.Port(op,"thickness",CABLES.OP_PORT_TYPE_VALUE));
 
-var outEach=op.outFunction("Each");
+var outEach=op.outTrigger("Each");
 var outPoints=op.outArray("Points");
 
 

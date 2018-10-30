@@ -1,5 +1,5 @@
 
-var render=op.inFunction('render');
+var render=op.inTrigger('render');
 var string=op.inValueString('Text','cables');
 
 var letterSpacing=op.inValue('Letter Spacing',1);

@@ -1,6 +1,6 @@
 op.name="MemoryStats";
 
-var exec=op.inFunction("update");
+var exec=op.inTrigger("update");
 
 exec.onTriggered=function()
 {

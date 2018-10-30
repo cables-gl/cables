@@ -1,7 +1,7 @@
-var inTriggerPort = op.inFunction("In Trigger");
+var inTriggerPort = op.inTrigger("In Trigger");
 var timePort = op.inValue("Milliseconds", 300);
 
-var outTriggerPort = op.outFunction("Out Trigger");
+var outTriggerPort = op.outTrigger("Out Trigger");
 var progress=op.outValue("Progress");
 
 var lastTriggerTime = 0;

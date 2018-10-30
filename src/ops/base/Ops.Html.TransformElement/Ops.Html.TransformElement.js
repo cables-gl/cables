@@ -1,6 +1,6 @@
-const exec=op.inFunction("Exec");
+const exec=op.inTrigger("Exec");
 const inEle=op.inObject("Element");
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
 var x=0;

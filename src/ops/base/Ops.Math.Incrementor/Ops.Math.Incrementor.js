@@ -9,7 +9,7 @@ var inMode=op.inValueSelect("Mode",["Rewind","Stop at Max"]);
 
 var value=op.addOutPort(new CABLES.Port(op,"Value",CABLES.OP_PORT_TYPE_VALUE));
 
-var outRestarted=op.outFunction("Restarted");
+var outRestarted=op.outTrigger("Restarted");
 
 value.ignoreValueSerialize=true;
 inLength.set(10);

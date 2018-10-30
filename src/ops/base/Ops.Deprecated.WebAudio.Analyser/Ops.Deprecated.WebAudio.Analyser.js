@@ -15,7 +15,7 @@ var audioIn = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", analyser);
 var anData=op.inValueSelect("Data",["Frequency","Time Domain"],"Frequency");
 
 // output ports
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", analyser);
 var avgVolume=op.addOutPort(new CABLES.Port(op, "average volume",CABLES.OP_PORT_TYPE_VALUE));
 var fftOut=op.addOutPort(new CABLES.Port(op, "fft",CABLES.OP_PORT_TYPE_ARRAY));

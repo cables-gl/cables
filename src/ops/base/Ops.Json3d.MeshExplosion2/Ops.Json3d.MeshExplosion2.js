@@ -1,6 +1,6 @@
-const render=op.inFunction("Render");
+const render=op.inTrigger("Render");
 const expansion=op.inValue("Expansion");
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 
 const inRotX=op.inValueSlider("Rotation X",1);
 const inRotY=op.inValueSlider("Rotation Y",1);

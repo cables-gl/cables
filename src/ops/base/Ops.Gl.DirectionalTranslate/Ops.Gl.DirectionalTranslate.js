@@ -1,7 +1,7 @@
-const exec=op.inFunction("Exec");
+const exec=op.inTrigger("Exec");
 const inMatrix=op.inArray("Center Model Matrix");
 const inAmount=op.inValue("Amount");
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
 

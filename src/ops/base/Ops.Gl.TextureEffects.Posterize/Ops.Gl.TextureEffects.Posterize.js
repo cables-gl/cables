@@ -1,7 +1,7 @@
 op.name="Posterize";
 
-var render=op.inFunction("Render");
-var trigger=op.outFunction("Trigger");
+var render=op.inTrigger("Render");
+var trigger=op.outTrigger("Trigger");
 
 var levels=op.inValue("levels",2);
 

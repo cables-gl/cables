@@ -5,7 +5,7 @@ var triggers=[];
 var currentVal=op.outValue("Value");
 var oldVal=op.outValue("Last Value");
 
-var triggered=op.outFunction("Triggered");
+var triggered=op.outTrigger("Triggered");
 
 var inVals=[];
 var inExes=[];

@@ -1,7 +1,7 @@
 op.name='Vignette';
 
-var render=op.inFunction("render");
-var trigger=op.outFunction("trigger");
+var render=op.inTrigger("render");
+var trigger=op.outTrigger("trigger");
 
 var amount=op.inValueSlider("Amount",1);
 var lensRadius1=op.inValue("lensRadius1",0.8);

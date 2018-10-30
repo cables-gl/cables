@@ -1,5 +1,5 @@
-var exec=op.inFunction("Execute");
-var next=op.outFunction("Next");
+var exec=op.inTrigger("Execute");
+var next=op.outTrigger("Next");
 
 var prim=op.inValueSelect("Primitive",['LINES','LINE_STRIP','LINE_LOOP','POINTS','TRIANGLES','TRIANGLE_FAN','TRIANGLE_STRIP']);
 var cgl=op.patch.cgl;

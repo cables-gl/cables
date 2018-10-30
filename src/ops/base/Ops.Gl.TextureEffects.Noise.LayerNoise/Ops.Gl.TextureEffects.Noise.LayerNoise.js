@@ -1,7 +1,7 @@
 const cgl = op.patch.cgl;
 
 // inputs
-const inTrigger = op.inFunction("render");
+const inTrigger = op.inTrigger("render");
 const inLayerMode = op.inValueSelect("mode",[
     "exponential",
     "logarithmic",
@@ -17,7 +17,7 @@ const inScrollY = op.inValue("scrollY");
 const inScrollZ = op.inValue("scrollZ");
 
 // outputs
-const outTrigger = op.outFunction("trigger");
+const outTrigger = op.outTrigger("trigger");
 
 // locals
 const shader = new CGL.Shader(cgl);

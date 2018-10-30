@@ -1,5 +1,5 @@
 op.name='Bend';
-var render=op.inFunction('render');
+var render=op.inTrigger('render');
 var rotX=op.inValue('RotX');
 var rotY=op.inValue('RotY');
 var rotZ=op.inValue('RotZ');

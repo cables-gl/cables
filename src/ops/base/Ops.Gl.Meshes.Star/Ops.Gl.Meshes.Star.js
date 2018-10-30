@@ -1,4 +1,4 @@
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var segments=op.inValue('segments',40);
 var radius=op.inValue('radius',1);
 var shape=op.inValueSelect('Shape',['Star','Saw','Gear'],'Star');
@@ -7,7 +7,7 @@ var percent=op.inValueSlider('percent');
 
 var fill=op.inValueBool("Fill");
 
-var trigger=op.outFunction('trigger');
+var trigger=op.outTrigger('trigger');
 var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize=true;

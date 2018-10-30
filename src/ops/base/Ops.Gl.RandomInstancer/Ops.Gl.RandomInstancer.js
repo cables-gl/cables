@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("Render");
+var exe=op.inTrigger("Render");
 var geom=op.inObject("Geometry");
 
 var num=op.inValueInt("Count",1000);

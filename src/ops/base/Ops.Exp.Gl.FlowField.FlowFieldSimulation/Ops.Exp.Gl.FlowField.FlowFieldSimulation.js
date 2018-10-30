@@ -1,16 +1,16 @@
 op.name="FluidSimTest";
 
-var exec=op.inFunction("exec");
-var next=op.outFunction("next");
+var exec=op.inTrigger("exec");
+var next=op.outTrigger("next");
 
-var inReset=op.inFunction("Reset");
-var inRespawn=op.inFunction("Respawn all");
+var inReset=op.inTrigger("Reset");
+var inRespawn=op.inTrigger("Respawn all");
 var inDamping=op.inValue("Damping");
 
 var outSpeed=op.outValue("Speed");
 var col=op.outValue("color");
 
-var triggerForce=op.outFunction("force");
+var triggerForce=op.outTrigger("force");
 
 
 var outOffset=op.outValue("offset");

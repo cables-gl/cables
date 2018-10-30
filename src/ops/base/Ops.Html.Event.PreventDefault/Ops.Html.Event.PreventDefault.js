@@ -4,7 +4,7 @@ executePort.onTriggered = update;
 var eventInPort = op.inObject('Event In');
 
 //outputs
-var nextPort = op.outFunction('Next');
+var nextPort = op.outTrigger('Next');
 var eventOutPort = op.outObject('Event Out');
 
 function update() {

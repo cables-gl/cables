@@ -5,10 +5,10 @@ const
 	    'center-left','center-middle','center-right',
 	    'bottom-left','bottom-middle','bottom-right'
     ],
-	trigger = op.inFunction('trigger'),
+	trigger = op.inTrigger('trigger'),
 	inElement = op.inObject('DOMElement'),
 	inOrigin = op.inValueSelect("origin",origins,'center-middle'),
-	next = op.outFunction('next'),
+	next = op.outTrigger('next'),
 	sCSSMatrix = mat4.create(),
 	sScalingVector = vec3.create()
 ;

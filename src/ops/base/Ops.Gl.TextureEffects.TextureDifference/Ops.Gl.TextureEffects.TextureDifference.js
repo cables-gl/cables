@@ -2,7 +2,7 @@ const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTI
 const texture1=op.inTexture("Texture 1");
 const texture2=op.inTexture("Texture 2");
 
-const trigger=op.outFunction("Next");
+const trigger=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);

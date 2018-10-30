@@ -1,7 +1,7 @@
-const render=op.inFunction("Render");
+const render=op.inTrigger("Render");
 const inNum=op.inValue("Num",10);
 const inSpacing=op.inValue("Spacing",1);
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
 var mesh=null;

@@ -1,5 +1,5 @@
 
-var exec=op.inFunction("Render");
+var exec=op.inTrigger("Render");
 
 var inNum=op.inValue("Num Times",3);
 var inSeed=op.inValue("Seed",1);

@@ -1,4 +1,4 @@
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var numX=op.inValueInt("Num X",5);
 var numY=op.inValueInt("Num Y",5);
@@ -6,7 +6,7 @@ var numY=op.inValueInt("Num Y",5);
 var spaceX=op.inValue("Space X",1);
 var spaceY=op.inValue("Space Y",1);
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outIndex=op.outValue("Index");
 
 var outX=op.outValue("x index");

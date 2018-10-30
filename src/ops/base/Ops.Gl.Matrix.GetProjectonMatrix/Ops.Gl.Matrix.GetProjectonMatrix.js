@@ -1,7 +1,7 @@
 
 var cgl=op.patch.cgl;
-var render=op.inFunction('render');
-var trigger=op.outFunction('trigger');
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var m=mat4.create();
 var matrix=op.addOutPort(new CABLES.Port(this,"matrix",CABLES.OP_PORT_TYPE_ARRAY));

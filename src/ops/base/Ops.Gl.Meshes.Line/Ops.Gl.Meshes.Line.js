@@ -1,6 +1,6 @@
 op.name="Line";
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var x1=op.inValue("X 1");
 var y1=op.inValue("Y 1");
 var z1=op.inValue("Z 1");
@@ -9,7 +9,7 @@ var x2=op.inValue("X 2",1);
 var y2=op.inValue("Y 2",1);
 var z2=op.inValue("Z 2",1);
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 

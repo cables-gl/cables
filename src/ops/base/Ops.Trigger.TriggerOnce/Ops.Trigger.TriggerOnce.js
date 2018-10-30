@@ -1,7 +1,7 @@
 
 var exe=op.inFunctionButton("Exec");
 var reset=op.inFunctionButton("Reset");
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outTriggered=op.outValue("Was Triggered");
 var triggered=false;
 

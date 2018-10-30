@@ -1,4 +1,4 @@
-var exec=op.inFunction("Render");
+var exec=op.inTrigger("Render");
 var inShader=op.inObject("Shader");
 var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear']}));
 // ,'mipmap'

@@ -12,7 +12,7 @@ var preRenderOps=op.inValueBool("PreRender Ops");
 preRenderStatus.set(0);
 this.numAssets=this.addOutPort(new CABLES.Port(this,"numAssets",CABLES.OP_PORT_TYPE_VALUE));
 this.loading=this.addOutPort(new CABLES.Port(this,"loading",CABLES.OP_PORT_TYPE_FUNCTION));
-var loadingFinished=op.outFunction("loading finished");//this.addOutPort(new CABLES.Port(this,"loading finished",CABLES.OP_PORT_TYPE_FUNCTION));
+var loadingFinished=op.outTrigger("loading finished");//this.addOutPort(new CABLES.Port(this,"loading finished",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var finishedAll=false;
 var preRenderTimes=[];

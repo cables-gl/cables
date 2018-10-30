@@ -4,7 +4,7 @@ var inNum=op.inValueInt("Num",8);
 
 var outArr=op.outArray("Result");
 
-var inExec=op.inFunction("Write");
+var inExec=op.inTrigger("Write");
 var inSort=op.inValueBool("Order");
 var inClear=op.inValueBool("Clear",true);
 

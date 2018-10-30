@@ -19,4 +19,4 @@ for(var i=0; i<N_PORTS; i++) {
 }
 
 // outpus
-var outTriggerPort = op.outFunction("Trigger");
+var outTriggerPort = op.outTrigger("Trigger");

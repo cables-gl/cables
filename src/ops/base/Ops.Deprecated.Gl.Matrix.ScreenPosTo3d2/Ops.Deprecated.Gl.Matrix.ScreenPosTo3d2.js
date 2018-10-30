@@ -19,7 +19,7 @@ var ipm=mat4.create();
 var mat=mat4.create();
 var dir=vec4.create();
 
-var update=op.inFunction("update");
+var update=op.inTrigger("update");
 update.onTriggered=calc;
 
 function calc()

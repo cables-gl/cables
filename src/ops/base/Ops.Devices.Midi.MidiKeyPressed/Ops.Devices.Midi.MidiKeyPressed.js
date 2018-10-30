@@ -5,8 +5,8 @@ var eventIn = op.inObject("Event Input");
 
 // output ports
 var eventOut = op.outObject("Event Output");
-var outPressed = op.outFunction("Key Pressed");
-var outReleased = op.outFunction("Key Released");
+var outPressed = op.outTrigger("Key Pressed");
+var outReleased = op.outTrigger("Key Released");
 
 var outNote = op.outValue("Note");
 var outVelocity = op.outValue("Velocity");

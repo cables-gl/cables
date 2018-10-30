@@ -1,8 +1,8 @@
 const
     cgl = op.patch.cgl,
-    pUpdate = op.inFunction("update"),
+    pUpdate = op.inTrigger("update"),
     tex = op.inObject("texture"),
-    outTrigger = op.outFunction("trigger"),
+    outTrigger = op.outTrigger("trigger"),
     outColors = op.outArray("Colors")
 ;
 

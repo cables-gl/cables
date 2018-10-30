@@ -1,7 +1,7 @@
-const exec=op.inFunction("Trigger");
+const exec=op.inTrigger("Trigger");
 const inShader=op.inObject("Shader");
 
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 const outShader=op.outObject("Result Shader");
 
 var cgl=op.patch.cgl;

@@ -1,4 +1,4 @@
-var exec=op.inFunction("Render");
+var exec=op.inTrigger("Render");
 var inBlend=op.inValueSelect("Blendmode",
     [
         'None',
@@ -8,7 +8,7 @@ var inBlend=op.inValueSelect("Blendmode",
         'Multiply'
     ],'Normal');
 var inPremul=op.inValueBool("Premultiplied");
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 var blendMode=0;

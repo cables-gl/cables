@@ -1,6 +1,6 @@
 
-var render=op.inFunction("render");
-var trigger=op.outFunction("trigger");
+var render=op.inTrigger("render");
+var trigger=op.outTrigger("trigger");
 
 var depth=op.inTexture("depth texture");
 

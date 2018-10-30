@@ -1,5 +1,5 @@
 
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var resetButton=op.inFunctionButton("Reset");
 var inSizeX=op.inValue("Size Area X",3);
 var inSizeY=op.inValue("Size Area Y",3);

@@ -3,7 +3,7 @@ op.name="CableConnectTriggerEvent";
 var connection=op.inObject("Connection");
 var evnt=op.inValueString("Event");
 
-var next=op.outFunction("Trigger");
+var next=op.outTrigger("Trigger");
 
 connection.onChange=function()
 {

@@ -1,7 +1,7 @@
 const inNormalX = op.inValue("Normal X");
 const inNormalY = op.inValue("Normal Y");
 const inNormalZ = op.inValue("Normal Z");
-const inRecalculate = op.inFunction("recalculate");
+const inRecalculate = op.inTrigger("recalculate");
 
 const outRotation = op.outValue("RotationMatrix");
 

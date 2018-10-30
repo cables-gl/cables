@@ -7,7 +7,7 @@ var inFps=op.inValue("FPS",30);
 var inFormat=op.inValueSelect("Fileformat",["webm","png"],"webm");
 
 var outProgress=op.outValue("Progress");
-var outFinished=op.outFunction("Finished");
+var outFinished=op.outTrigger("Finished");
 
 inExec.onTriggered=function()
 {

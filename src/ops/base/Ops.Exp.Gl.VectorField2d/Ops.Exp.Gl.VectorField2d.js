@@ -1,8 +1,8 @@
 op.name="VectorField2d";
 
-var render=op.inFunction("Render");
-var reset=op.inFunction("Reset");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var reset=op.inTrigger("Reset");
+var next=op.outTrigger("Next");
 var textureField=op.inTexture("textureField");
 var shader=null;
 var outSimTex=op.outTexture("sim tex");

@@ -1,6 +1,6 @@
 op.name='RelativeTime';
 
-var exe=op.inFunction("exe");
+var exe=op.inTrigger("exe");
 var mul=op.inValue("Multiply",1);
 var result=op.outValue("result");
 

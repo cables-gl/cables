@@ -1,5 +1,5 @@
 
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var width=op.inValue("width",1);
@@ -33,7 +33,7 @@ var outRight=op.outValue("Right");
 var outBottom=op.outValue("Bottom");
 
 
-var mouseClick=op.outFunction("Left Click");
+var mouseClick=op.outTrigger("Left Click");
 
 var elementPort = op.outObject('Dom Element');
 

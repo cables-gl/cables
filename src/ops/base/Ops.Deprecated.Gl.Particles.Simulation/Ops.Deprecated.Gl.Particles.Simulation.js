@@ -1,7 +1,7 @@
 op.name="VectorField";
 
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 var shader=null;
 
 function removeModule()

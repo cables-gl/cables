@@ -8,7 +8,7 @@ var duration=op.addInPort(new CABLES.Port(op,"duration",CABLES.OP_PORT_TYPE_VALU
 var next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 var value=op.addOutPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE));
 var finished=op.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
-var finishedTrigger=op.outFunction("Finished Trigger");
+var finishedTrigger=op.outTrigger("Finished Trigger");
 
 valueFalse.set(0);
 valueTrue.set(1);

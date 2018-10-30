@@ -1,5 +1,5 @@
-const render=op.inFunction("render");
-const trigger=op.outFunction("trigger");
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger");
 const amount=op.inValue("amount");
 
 const cgl=op.patch.cgl;

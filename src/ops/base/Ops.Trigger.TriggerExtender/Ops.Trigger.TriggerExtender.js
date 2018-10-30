@@ -2,7 +2,7 @@
 var inTriggerPort = op.inFunctionButton('Execute');
 
 // outputs
-var outTriggerPort = op.outFunction('Next');
+var outTriggerPort = op.outTrigger('Next');
 
 // trigger listener
 inTriggerPort.onTriggered = function() {

@@ -1,5 +1,5 @@
 
-var exec=op.inFunction("exec");
+var exec=op.inTrigger("exec");
 var val=op.inValue("Value");
 var arrOut=op.outArray("Result");
 

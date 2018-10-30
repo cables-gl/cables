@@ -1,4 +1,4 @@
-var render=op.inFunction('render');
+var render=op.inTrigger('render');
 var width=op.inValue('width');
 var height=op.inValue('height');
 var lengt=op.inValue('length');
@@ -6,7 +6,7 @@ var center=op.inValueBool('center');
 
 var active=op.inValueBool('Active',true);
 
-var trigger=op.outFunction('trigger');
+var trigger=op.outTrigger('trigger');
 var geomOut=op.outObject("geometry");
 
 var cgl=op.patch.cgl;

@@ -1,7 +1,7 @@
 
 var inGeom=op.inObject("Geometry");
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var outMinX=op.outValue("Min X");
 var outMaxX=op.outValue("Max X");

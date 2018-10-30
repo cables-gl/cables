@@ -11,10 +11,10 @@ var duration=op.addInPort(new CABLES.Port(op,"duration"));
 var loop=op.addInPort(new CABLES.Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
 var waitForReset=op.inValueBool("Wait for Reset",true);
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var result=op.addOutPort(new CABLES.Port(op,"result"));
 var finished=op.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
-var finishedTrigger=op.outFunction("Finished Trigger");
+var finishedTrigger=op.outTrigger("Finished Trigger");
 
 var resetted=false;
 

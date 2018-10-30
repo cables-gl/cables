@@ -1,5 +1,5 @@
-const render=op.inFunction("render");
-const trigger=op.outFunction("trigger");
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger");
 const inRed=op.inValueSlider("Red");
 
 const cgl=op.patch.cgl;

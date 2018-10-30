@@ -1,5 +1,5 @@
-var render=op.inFunction("render");
-var next=op.outFunction("next");
+var render=op.inTrigger("render");
+var next=op.outTrigger("next");
 var cgl=op.patch.cgl;
 
 function doRender()

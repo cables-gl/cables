@@ -6,7 +6,7 @@ var next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION
 
 var isPicked=op.addOutPort(new CABLES.Port(op,"is picked",CABLES.OP_PORT_TYPE_VALUE));
 
-var pickedTrigger=op.outFunction("On Picked");
+var pickedTrigger=op.outTrigger("On Picked");
 
 var doBillboard=op.addInPort(new CABLES.Port(op,"billboard",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 doBillboard.set(false);

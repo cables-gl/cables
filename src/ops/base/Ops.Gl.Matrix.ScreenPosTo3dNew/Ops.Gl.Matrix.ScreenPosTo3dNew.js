@@ -1,4 +1,4 @@
-const exec=op.inFunction("Exec");
+const exec=op.inTrigger("Exec");
 const inX=op.inValue("X");
 const inY=op.inValue("Y");
 const outX=op.outValue("Result X");

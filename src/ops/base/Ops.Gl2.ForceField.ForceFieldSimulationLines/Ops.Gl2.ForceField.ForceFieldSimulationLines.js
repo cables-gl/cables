@@ -1,7 +1,7 @@
 op.name="ForceFieldSimulationLines";
 
-var exec=op.inFunction("exec");
-var next=op.outFunction("next");
+var exec=op.inTrigger("exec");
+var next=op.outTrigger("next");
 
 var numParticles=op.inValueInt("Num Particles",100);
 
@@ -12,7 +12,7 @@ var inDamping=op.inValue("Damping");
 
 var col=op.outValue("color");
 
-var triggerForce=op.outFunction("force");
+var triggerForce=op.outTrigger("force");
 var inSize=op.inValue("Size Area");
 
 var outOffset=op.outValue("offset");

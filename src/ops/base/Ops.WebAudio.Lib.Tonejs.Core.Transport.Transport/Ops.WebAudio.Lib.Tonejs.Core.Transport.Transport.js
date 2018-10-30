@@ -19,7 +19,7 @@ var AUTO_START_DEFAULT = true;
 var STOP_TIME_DEFAULT = "+0";
 
 // in ports
-var updatePort = op.inFunction("Update");
+var updatePort = op.inTrigger("Update");
 var bpmPort = op.addInPort( new CABLES.Port( this, "BPM", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 1, 'max': 300 } ));
 var swingPort = op.addInPort( new CABLES.Port( this, "Swing", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
 var swingSubdivisionPort = op.inValueString("Swing Subdivision");

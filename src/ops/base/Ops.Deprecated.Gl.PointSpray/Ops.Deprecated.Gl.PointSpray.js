@@ -1,6 +1,6 @@
 op.name="PointSpray";
 
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var timeIn=op.inValue("time");
 var sizeY=op.inValue("Size Y");
 var sinY=op.inValue("Sin Y");

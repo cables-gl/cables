@@ -9,7 +9,7 @@ var writeApiKey = op.inValueString("Write API Key", dummyKey);
 
 var apiUrl = "https://api.thingspeak.com/update?";
 
-var finished = op.outFunction("When Finished");
+var finished = op.outTrigger("When Finished");
 var success = op.outValue("Success", false);
 var rows = op.outValue("Rows", 0);
 

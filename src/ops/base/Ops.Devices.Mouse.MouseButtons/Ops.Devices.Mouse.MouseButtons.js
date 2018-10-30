@@ -1,21 +1,21 @@
 op.name="MouseButtons";
 var cgl=op.patch.cgl;
 
-var mouseClickLeft=op.outFunction("Click Left");
-var mouseClickRight=op.outFunction("Click Right");
-var mouseDoubleClick=op.outFunction("Double Click");
+var mouseClickLeft=op.outTrigger("Click Left");
+var mouseClickRight=op.outTrigger("Click Right");
+var mouseDoubleClick=op.outTrigger("Double Click");
 
 var mouseDownLeft=op.outValue("Button pressed Left",false);
 var mouseDownMiddle=op.outValue("Button pressed Middle",false);
 var mouseDownRight=op.outValue("Button pressed Right",false);
 
-var triggerMouseDownLeft=op.outFunction("Mouse Down Left");
-var triggerMouseDownMiddle=op.outFunction("Mouse Down Middle");
-var triggerMouseDownRight=op.outFunction("Mouse Down Right");
+var triggerMouseDownLeft=op.outTrigger("Mouse Down Left");
+var triggerMouseDownMiddle=op.outTrigger("Mouse Down Middle");
+var triggerMouseDownRight=op.outTrigger("Mouse Down Right");
 
-var triggerMouseUpLeft=op.outFunction("Mouse Up Left");
-var triggerMouseUpMiddle=op.outFunction("Mouse Up Middle");
-var triggerMouseUpRight=op.outFunction("Mouse Up Right");
+var triggerMouseUpLeft=op.outTrigger("Mouse Up Left");
+var triggerMouseUpMiddle=op.outTrigger("Mouse Up Middle");
+var triggerMouseUpRight=op.outTrigger("Mouse Up Right");
 
 var area=op.addInPort(new CABLES.Port(op,"Area",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
 var active=op.inValueBool("Active",true);

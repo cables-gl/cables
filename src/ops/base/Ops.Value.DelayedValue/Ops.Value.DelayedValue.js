@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("Update");
+var exe=op.inTrigger("Update");
 var v=op.inValue("Value",0);
 var delay=op.inValue("Delay",0.5);
 var result=op.outValue("Result",0);

@@ -1,6 +1,6 @@
 
 var calc=op.inFunctionButton("Calc");
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var inMin=op.inValue("Min",0);
 

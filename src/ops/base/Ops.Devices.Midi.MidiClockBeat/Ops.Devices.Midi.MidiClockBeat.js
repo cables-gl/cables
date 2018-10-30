@@ -1,11 +1,11 @@
 var eventIn=op.inObject("Event Input");
 
-var triggerTick=op.outFunction("Beat");
+var triggerTick=op.outTrigger("Beat");
 
-var triggerStart=op.outFunction("Start");
+var triggerStart=op.outTrigger("Start");
 
 var outSubTick=op.outValue("Sub Tick");
-var triggerSub=op.outFunction("Sub Beat");
+var triggerSub=op.outTrigger("Sub Beat");
 
 var clockStart = 0xFA;//0b11111010;
 var clockTick = 0xF8;//0b11111000;

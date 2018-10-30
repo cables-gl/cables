@@ -5,7 +5,7 @@ var inRewind=op.inFunctionButton("Rewind");
 var outValue=op.outValue("result time");
 var outArr=op.outArray("Expanded Frames");
 var finished=op.outValue("Finished",false);
-var finishedTrigger=op.outFunction("Finished Trigger");
+var finishedTrigger=op.outTrigger("Finished Trigger");
 var outAnimLength=op.outValue("Anim Length");
 var outProgress=op.outValue("Progress");
 

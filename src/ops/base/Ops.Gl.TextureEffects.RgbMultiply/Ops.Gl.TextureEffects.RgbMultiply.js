@@ -1,12 +1,12 @@
 
 op.name='RgbMultiply';
 
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var r=op.inValue('r',1);
 var g=op.inValue('g',1);
 var b=op.inValue('b',1);
 
-var trigger=op.outFunction('trigger');
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

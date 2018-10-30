@@ -8,7 +8,7 @@ const refresh=op.addInPort(new CABLES.Port(op,"refresh",CABLES.OP_PORT_TYPE_FUNC
 const audioIn = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", analyser);
 const anData=op.inValueSelect("Data",["Frequency","Time Domain"],"Frequency");
 
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 const audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", analyser);
 const avgVolume=op.addOutPort(new CABLES.Port(op, "average volume",CABLES.OP_PORT_TYPE_VALUE));
 const fftOut=op.addOutPort(new CABLES.Port(op, "fft",CABLES.OP_PORT_TYPE_ARRAY));

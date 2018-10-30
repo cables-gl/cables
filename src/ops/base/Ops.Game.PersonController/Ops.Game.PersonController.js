@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("Exe");
+var exe=op.inTrigger("Exe");
 
 var speed=op.inValue("Speed",1);
 

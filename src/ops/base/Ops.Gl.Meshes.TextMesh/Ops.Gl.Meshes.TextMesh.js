@@ -1,5 +1,5 @@
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 var textureOut=op.outTexture("texture");
 var str=op.inValueString("Text","cables");
 var scale=op.inValue("Scale",1);

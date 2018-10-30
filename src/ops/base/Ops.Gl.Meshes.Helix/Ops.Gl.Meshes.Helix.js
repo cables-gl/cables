@@ -8,7 +8,7 @@ var radius=op.inValue("Radius",1);
 var radiusEnd=op.inValue("Radius End",1);
 var height=op.inValue("Height");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outPoints=op.outArray("Points");
 
 var cgl=op.patch.cgl;

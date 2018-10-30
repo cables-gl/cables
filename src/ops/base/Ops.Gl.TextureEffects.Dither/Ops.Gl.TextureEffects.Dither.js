@@ -1,7 +1,7 @@
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
-var trigger=op.outFunction("Trigger");
+var trigger=op.outTrigger("Trigger");
 var strength=op.inValue("strength",2);
 var threshold=op.inValueSlider("threshold",0.35);
 

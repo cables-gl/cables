@@ -17,7 +17,7 @@ var ignore=op.inValueBool("Ignore Mouse");
 var outHovering=op.outValue("Hovering",false);
 var outHoverIndex=op.outValue("Hover Index",-1);
 
-var triggerClicked=op.outFunction("Clicked");
+var triggerClicked=op.outTrigger("Clicked");
 
 
 

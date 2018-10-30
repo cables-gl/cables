@@ -1,7 +1,7 @@
 op.name="ToneMap";
 
-var render=op.inFunction("Render");
-var trigger=op.outFunction("Trigger");
+var render=op.inTrigger("Render");
+var trigger=op.outTrigger("Trigger");
 var method=op.inValueSelect("Method",["Linear","Reinhard","Hejl Dawson","Uncharted"],"Linear");
 var exposure=op.inValue("Exposure",3);
 var cgl=op.patch.cgl;

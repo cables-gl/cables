@@ -1,7 +1,7 @@
 op.name="ShaderSetTextureHack";
 
-var exec=op.inFunction("Exec");
-var next=op.outFunction("Next");
+var exec=op.inTrigger("Exec");
+var next=op.outTrigger("Next");
 
 var iindex=op.inValueInt("index");
 var texture=op.inTexture("texture");

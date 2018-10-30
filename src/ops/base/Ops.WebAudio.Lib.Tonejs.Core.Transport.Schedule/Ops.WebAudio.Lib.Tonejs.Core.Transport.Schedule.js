@@ -9,7 +9,7 @@ var START_TIME_DEFAULT = "0";
 var timePort = op.inValueString("Time", "0:0:0");
 
 // output ports
-var triggerPort = op.outFunction("Trigger");
+var triggerPort = op.outTrigger("Trigger");
 var timeOutPort = op.outValue("Event Time");
 
 // vars

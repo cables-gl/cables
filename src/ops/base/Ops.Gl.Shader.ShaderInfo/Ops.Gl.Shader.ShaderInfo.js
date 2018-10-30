@@ -1,10 +1,10 @@
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var showFrag=op.inFunctionButton("Show Fragment");
 var showVert=op.inFunctionButton("Show Vertex");
 var showModules=op.inFunctionButton("Show Modules");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var outName=op.outValueString("Name");
 var outNumUniforms=op.outValue("Num Uniforms");

@@ -36,7 +36,7 @@ var probabilityPort = op.inValueSlider("Probability");
 probabilityPort.set(PROBABILITY_DEFAULT);
 
 // output ports
-var eventTriggerPort = op.outFunction("Event Trigger");
+var eventTriggerPort = op.outTrigger("Event Trigger");
 var timePort = op.outValue("Time");
 var notePort = op.outValue("Note");
 

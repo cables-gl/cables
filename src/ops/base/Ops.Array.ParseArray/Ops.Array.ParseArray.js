@@ -3,7 +3,7 @@ var separator=op.inValueString("separator",",");
 
 var toNumber=op.inValueBool("Numbers",false);
 
-var parsed=op.outFunction("Parsed");
+var parsed=op.outTrigger("Parsed");
 var arr=op.addOutPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
 var len=op.addOutPort(new CABLES.Port(op,"length",CABLES.OP_PORT_TYPE_VALUE));
 

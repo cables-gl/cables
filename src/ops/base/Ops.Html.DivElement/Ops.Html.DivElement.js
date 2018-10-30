@@ -8,7 +8,7 @@ const inVisible=op.inValueBool("Visible",true);
 
 const outElement=op.outObject("DOM Element");
 const outHover=op.outValue("Hover");
-const outClicked=op.outFunction("Clicked");
+const outClicked=op.outTrigger("Clicked");
 
 var listenerElement=null;
 

@@ -1,12 +1,12 @@
 "use strict";
 
 //Create a input port of the type Trigger
-const inExecute  = op.inFunction("Trigger In",{"display": "button"});
+const inExecute  = op.inTrigger("Trigger In",{"display": "button"});
 //create a button in UI panel of the op which can be clicked
 const inButton   = op.inFunctionButton("Press me");
 
 //Create a output port of the type Trigger
-const outTrigger = op.outFunction("Trigger out");
+const outTrigger = op.outTrigger("Trigger out");
 
 //when input port is triggered call the function 'update'
 inExecute.onTriggered = update;

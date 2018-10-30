@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("Render");
+var exe=op.inTrigger("Render");
 var num=op.inValue("Num",1000);
 var size=op.inValue("Size",1);
 var seed=op.inValue("Seed",0);

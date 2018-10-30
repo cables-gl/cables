@@ -1,12 +1,12 @@
 op.name="VoronoiNew";
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var pSites=op.inArray("Site Points");
 
 var pWidth=op.inValue("Width",2);
 var pHeight=op.inValue("Height",2);
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outVoronoi=op.outObject("Voronoi");
 
 var needsUpdate=true;

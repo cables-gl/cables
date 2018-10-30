@@ -1,8 +1,8 @@
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var amount=op.inValue("Amount",300);
 var height=op.inValue("Height",2);
 var inTex=op.inTexture("Texture");
-var trigger=op.outFunction("Trigger");
+var trigger=op.outTrigger("Trigger");
 var axis=op.inValueSelect("Axis",["XZ","XY","YZ","X","Y","Z"],"XZ");
 
 var uniAmount=null,uniHeight=null,uniPoints=null;

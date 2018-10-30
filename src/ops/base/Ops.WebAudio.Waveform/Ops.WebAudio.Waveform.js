@@ -12,7 +12,7 @@ var mesh = null;
 var cgl = op.patch.cgl;
 
 // input
-var renderPort = op.inFunction("Render");
+var renderPort = op.inTrigger("Render");
 var audioBufferPort = op.inObject("Audio Buffer");
 var widthPort = op.inValue("Width", 30);
 var samplesPerPixelPort = op.inValue("Samples Per Pixel", 10000);
@@ -21,7 +21,7 @@ var centerPort = op.inValueBool("Center Origin", true);
 var renderActivePort = op.inValueBool("Render Active", true);
 
 // output
-var nextPort = op.outFunction("Next");
+var nextPort = op.outTrigger("Next");
 var splinePointsPort = op.outArray("Spline Points");
 var geometryPort = op.outObject("Geometry");
 

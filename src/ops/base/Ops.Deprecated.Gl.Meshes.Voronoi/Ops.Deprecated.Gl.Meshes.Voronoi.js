@@ -10,7 +10,7 @@ var pHeight=op.inValue("Height",2);
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 pExtrCenter.onChange=queueUpdate;
 

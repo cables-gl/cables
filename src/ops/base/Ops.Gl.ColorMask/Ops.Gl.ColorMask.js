@@ -1,13 +1,13 @@
 op.name="ColorMask";
 
-var exec=op.inFunction("Execute");
+var exec=op.inTrigger("Execute");
 
 var inR=op.inValueBool("Red",true);
 var inG=op.inValueBool("Green",true);
 var inB=op.inValueBool("Blue",true);
 var inA=op.inValueBool("Alpha",true);
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 
 var cgl=op.patch.cgl;

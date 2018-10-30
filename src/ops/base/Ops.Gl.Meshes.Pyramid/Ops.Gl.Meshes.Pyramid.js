@@ -1,4 +1,4 @@
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var sizeW=op.inValue("Width",1);
 var sizeL=op.inValue("Length",1);

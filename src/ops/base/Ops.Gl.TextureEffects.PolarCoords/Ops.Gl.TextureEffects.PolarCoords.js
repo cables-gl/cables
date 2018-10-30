@@ -1,11 +1,11 @@
 op.name="PolarCoords";
 
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 
 var inner=op.inValueSlider("Radius Inner",0.25);
 var outer=op.inValueSlider("Radius Outer",0.5);
 
-var trigger=op.outFunction('trigger');
+var trigger=op.outTrigger('trigger');
 var cgl=op.patch.cgl;
 
 var shader=new CGL.Shader(cgl);

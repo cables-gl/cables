@@ -8,7 +8,7 @@ var outVelocity=op.addOutPort(new CABLES.Port(this,"Velocity",CABLES.OP_PORT_TYP
 var outChannel=op.addOutPort(new CABLES.Port(this,"Channel",CABLES.OP_PORT_TYPE_VALUE));
 var outCmd=op.addOutPort(new CABLES.Port(this,"Cmd",CABLES.OP_PORT_TYPE_VALUE));
 var outType=op.addOutPort(new CABLES.Port(this,"Type",CABLES.OP_PORT_TYPE_VALUE));
-var outTrigger = op.outFunction("Event Received");
+var outTrigger = op.outTrigger("Event Received");
 
 
 eventIn.onValueChanged=function()

@@ -54,7 +54,7 @@ inTrigger8.onTriggered = function() {
 var inTriggers = [];
 var inArrays = [];
 for(var i=0; i<N_PORTS; i++) {
-    var triggerPort = op.inFunction("Trigger " + i);
+    var triggerPort = op.inTrigger("Trigger " + i);
     inTriggers.push(triggerPort);
     var arrPort = op.inArray("Array " + i);
     inArrays.push(arrPort);

@@ -17,7 +17,7 @@ var maxSizeEnd=op.inValue("Scale Out Size End",0);
 
 
 var inCalcNormals=op.inValueBool("Calc Normals",true);
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outVerts=op.outArray("Points");
 var outCenter=op.outArray("Center Points");
 

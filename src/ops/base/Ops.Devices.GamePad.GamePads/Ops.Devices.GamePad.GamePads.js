@@ -1,4 +1,4 @@
-var exe=op.inFunction("exe");
+var exe=op.inTrigger("exe");
 var outNumPads=op.outValue("Num Gamepads");
 // var outPads=op.outArray("Pads");
 

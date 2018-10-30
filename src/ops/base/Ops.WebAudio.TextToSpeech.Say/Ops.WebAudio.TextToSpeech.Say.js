@@ -17,7 +17,7 @@ var voiceMap = getVoiceMap(synth.getVoices());
 var voiceMapKeys = Object.keys(voiceMap);
 
 // inputs
-var updateStatePort = op.inFunction("Update State");
+var updateStatePort = op.inTrigger("Update State");
 var textPort = op.inValueString("Text", "Wazzup");
 var triggerPort = op.inFunctionButton("Say");
 var voicePort = op.addInPort( new CABLES.Port( op, "Voice", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: voiceMapKeys } ) );
@@ -33,7 +33,7 @@ var resumePort = op.inFunctionButton("Resume");
 var cancelPort = op.inFunctionButton("Cancel");
 
 // outputs
-var nextPort = op.outFunction("Next");
+var nextPort = op.outTrigger("Next");
 var speakingPort = op.outValue("Speaking", false);
 var pendingPort = op.outValue("Pending", false);
 var pausedPort = op.outValue("Paused", false);

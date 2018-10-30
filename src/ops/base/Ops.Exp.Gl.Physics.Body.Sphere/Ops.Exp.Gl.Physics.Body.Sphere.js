@@ -1,6 +1,6 @@
 op.name="BodySphere";
 
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
 var inRadius=op.inValue("Radius");
 
@@ -13,13 +13,13 @@ var posZ=op.inValue("Pos Z");
 var inReset=op.inFunctionButton("Reset");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outRadius=op.outValue("Out Radius");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
 
-var outCollision=op.outFunction("Collision");
+var outCollision=op.outTrigger("Collision");
 
 var cgl=op.patch.cgl;
 

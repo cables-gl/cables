@@ -1,4 +1,4 @@
-var exec=op.inFunction("exec");
+var exec=op.inTrigger("exec");
 var num=this.addInPort(new CABLES.Port(this,"num",CABLES.OP_PORT_TYPE_VALUE));
 var defaultTransparent=op.inValueBool("Default Texture Transparent",true);
 var textureOut=this.addOutPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));

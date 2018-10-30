@@ -22,7 +22,7 @@ var node = new Tone.Loop(cb, INTERVAL_DEFAULT);
 op.log("iterations: ", node.get("iterations"));
 
 // input ports
-var updateStatePorts = op.inFunction("Update State Ports");
+var updateStatePorts = op.inTrigger("Update State Ports");
 updateStatePorts.onLinkChanged = checkAutoStart;
 var intervalPort = op.inValueString("Interval", INTERVAL_DEFAULT);
 var iterationsPort = op.inValue("Iterations", ITERATIONS_DEFAULT);
@@ -178,7 +178,7 @@ updateStatePorts.onTriggered = function() {
 };
 
 // output ports
-var triggerPort = op.outFunction("Trigger");
+var triggerPort = op.outTrigger("Trigger");
 triggerPort.onLinkChanged = checkAutoStart;
 var timePort = op.outValue("Time");
 timePort.onLinkChanged = checkAutoStart;

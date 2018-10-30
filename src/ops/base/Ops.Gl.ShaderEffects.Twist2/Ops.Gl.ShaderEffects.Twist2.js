@@ -1,6 +1,6 @@
 
-var render=op.inFunction("render");
-var trigger=op.outFunction("Trigger");
+var render=op.inTrigger("render");
+var trigger=op.outTrigger("Trigger");
 var amount=op.inValue("Degree",180);
 var height=op.inValue("Height",2);
 

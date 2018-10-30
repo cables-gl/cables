@@ -4,7 +4,7 @@ var buttonTextPort = op.inValueString('Text', 'Button');
 
 // outputs
 var siblingsPort = op.outObject('childs');
-var buttonPressedPort = op.outFunction('Pressed Trigger');
+var buttonPressedPort = op.outTrigger('Pressed Trigger');
 
 // vars
 var el = document.createElement('div');

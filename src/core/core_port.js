@@ -179,7 +179,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                     if(CABLES.UI && this.type==CABLES.OP_PORT_TYPE_TEXTURE )
                     {
                         gui.texturePreview().updateTexturePort(this);
-
                     }
                 }
 

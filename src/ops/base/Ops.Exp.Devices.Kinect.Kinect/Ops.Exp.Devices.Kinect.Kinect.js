@@ -1,6 +1,6 @@
 
 
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 
 var inData=op.inObject("Kinect Data");
 var outPoints=op.outArray("Points");

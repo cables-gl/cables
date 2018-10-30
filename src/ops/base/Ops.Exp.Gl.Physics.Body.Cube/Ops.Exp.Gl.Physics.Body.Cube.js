@@ -1,4 +1,4 @@
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
 
 var doRender=op.inValueBool("Render",true);
@@ -15,12 +15,12 @@ var sizeZ=op.inValue("sizeZ",1);
 var inReset=op.inFunctionButton("Reset");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
 
-var outCollision=op.outFunction("Collision");
+var outCollision=op.outTrigger("Collision");
 
 var cgl=op.patch.cgl;
 var m=null;

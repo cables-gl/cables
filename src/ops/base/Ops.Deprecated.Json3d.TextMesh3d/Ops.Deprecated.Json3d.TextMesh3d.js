@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("Render");
+var exe=op.inTrigger("Render");
 var filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
 var text=op.inValueString("Text","cables");
 var inSize=op.inValue("Depth",0.2);

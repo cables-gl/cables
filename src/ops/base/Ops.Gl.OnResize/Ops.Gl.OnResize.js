@@ -1,4 +1,4 @@
-const onResize=op.outFunction("Resized");
+const onResize=op.outTrigger("Resized");
 
 op.patch.cgl.addEventListener("resize",resize);
 
