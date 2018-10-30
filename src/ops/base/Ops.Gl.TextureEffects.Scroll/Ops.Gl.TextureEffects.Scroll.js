@@ -1,4 +1,3 @@
-op.name='Scroll';
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
 
@@ -29,12 +28,12 @@ function updateRepeat()
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
-    
+
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

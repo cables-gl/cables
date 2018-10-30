@@ -1,4 +1,4 @@
-var render=op.inTrigger('render');
+var render=op.inTrigger('Render');
 
 var sides=op.inValue("Sides",10);
 var angle=op.inValueSlider("Angle",0);
@@ -72,7 +72,7 @@ var srcFrag=''
 
 	.endl()+'if(loc.x > 1.0) loc.x = mod(abs(1.0-loc.x),1.0);'
 	.endl()+'if(loc.y > 1.0) loc.y = mod(abs(1.0-loc.y),1.0);'
-	
+
 
 
 // 	.endl()+'outColor= IMG_NORM_PIXEL(inputImage, loc);'
@@ -92,7 +92,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
