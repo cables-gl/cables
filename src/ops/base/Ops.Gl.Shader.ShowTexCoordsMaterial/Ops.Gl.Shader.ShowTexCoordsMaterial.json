@@ -1,5 +1,5 @@
 {
-    "updated": 1513780232596,
+    "updated": 1540922547014,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d01a0ac2-a457-416a-8a45-7db92fb46316",
@@ -19,5 +19,9 @@
         ],
         "name": "Ops.Gl.Shader.ShowTexCoordsMaterial"
     },
-    "summary": "visualize texturecoordinates of a mesh "
+    "summary": "visualize texturecoordinates/UV mapping of a mesh ",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
 }

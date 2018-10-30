@@ -8,27 +8,33 @@
             },
             {
                 "type": "0",
-                "name": "span"
+                "name": "span",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "reduceMin"
+                "name": "reducemin",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "reduceMul"
+                "name": "reducemul",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "use viewport size"
+                "name": "use viewport size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -41,5 +47,9 @@
     },
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1540922800187,
+    "authorName": "pandur",
+    "id": "3e679c17-f050-4bc8-bfe5-5b9190e7ce40",
+    "created": 1540922733116
 }
