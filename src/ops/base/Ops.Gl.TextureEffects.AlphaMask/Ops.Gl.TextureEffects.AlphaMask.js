@@ -55,7 +55,7 @@ var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
 
 this.method=this.addInPort(new CABLES.Port(this,"method",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:["luminance","image alpha","red","green","blue"]} ));
 
-this.method.onValueChanged=function()
+this.method.onChange=function()
 {
     if(self.method.val=='luminance') shader.define('FROM_LUMINANCE');
         else shader.removeDefine('FROM_LUMINANCE');

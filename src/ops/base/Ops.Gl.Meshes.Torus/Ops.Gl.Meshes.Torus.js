@@ -19,10 +19,10 @@ var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 var j=0,i=0,idx=0;
-rings.onValueChanged=updateMesh;
-sides.onValueChanged=updateMesh;
-innerRadius.onValueChanged=updateMesh;
-outerRadius.onValueChanged=updateMesh;
+rings.onChange=updateMesh;
+sides.onChange=updateMesh;
+innerRadius.onChange=updateMesh;
+outerRadius.onChange=updateMesh;
 
 render.onTriggered=function()
 {

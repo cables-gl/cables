@@ -107,28 +107,28 @@ var uniformHeight=new CGL.Uniform(shader,'f','height',h);
 
 
 
-r.onValueChanged=g.onValueChanged=b.onValueChanged=a.onValueChanged=function()
+r.onChange=g.onChange=b.onChange=a.onChange=function()
 {
     colA=[r.get(),g.get(),b.get(),a.get()];
     if(!r.uniform) r.uniform=new CGL.Uniform(shader,'4f','colA',colA);
     else r.uniform.setValue(colA);
 };
 
-r2.onValueChanged=g2.onValueChanged=b2.onValueChanged=a2.onValueChanged=function()
+r2.onChange=g2.onChange=b2.onChange=a2.onChange=function()
 {
     colB=[r2.get(),g2.get(),b2.get(),a2.get()];
     if(!r2.uniform) r2.uniform=new CGL.Uniform(shader,'4f','colB',colB);
     else r2.uniform.setValue(colB);
 };
 
-r3.onValueChanged=g3.onValueChanged=b3.onValueChanged=a3.onValueChanged=function()
+r3.onChange=g3.onChange=b3.onChange=a3.onChange=function()
 {
     colC=[r3.get(),g3.get(),b3.get(),a3.get()];
     if(!r3.uniform) r3.uniform=new CGL.Uniform(shader,'4f','colC',colC);
     else r3.uniform.setValue(colC);
 };
 
-screenSpace.onValueChanged=function()
+screenSpace.onChange=function()
 {
     if(screenSpace.get())
     {
@@ -143,7 +143,7 @@ screenSpace.onValueChanged=function()
 
 };
 
-direction.onValueChanged=function()
+direction.onChange=function()
 {
     if(direction.get()) shader.removeDefine("DIRECTION_VERTICAL");
         else shader.define("DIRECTION_VERTICAL");

@@ -2,7 +2,7 @@
 var arr=[];
 
 // inputs
-var exePort = op.inFunctionButton('Execute');
+var exePort = op.inTriggerButton('Execute');
 var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
 
 // outputs

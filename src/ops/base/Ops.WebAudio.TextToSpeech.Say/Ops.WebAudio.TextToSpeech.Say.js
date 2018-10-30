@@ -19,7 +19,7 @@ var voiceMapKeys = Object.keys(voiceMap);
 // inputs
 var updateStatePort = op.inTrigger("Update State");
 var textPort = op.inValueString("Text", "Wazzup");
-var triggerPort = op.inFunctionButton("Say");
+var triggerPort = op.inTriggerButton("Say");
 var voicePort = op.addInPort( new CABLES.Port( op, "Voice", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: voiceMapKeys } ) );
 var pitchPort = op.addInPort( new CABLES.Port( op, "Pitch", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PITCH_MIN, 'max': PITCH_MAX } ));
 pitchPort.set(PITCH_DEFAULT);
@@ -28,9 +28,9 @@ ratePort.set(RATE_DEFAULT);
 var volumePort = op.addInPort( new CABLES.Port( op, "Volume", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX } ));
 volumePort.set(VOLUME_DEFAULT);
 var sayOnTextChangePort = op.inValueBool("Say on Text Change", false);
-var pausePort = op.inFunctionButton("Pause");
-var resumePort = op.inFunctionButton("Resume");
-var cancelPort = op.inFunctionButton("Cancel");
+var pausePort = op.inTriggerButton("Pause");
+var resumePort = op.inTriggerButton("Resume");
+var cancelPort = op.inTriggerButton("Cancel");
 
 // outputs
 var nextPort = op.outTrigger("Next");

@@ -46,7 +46,7 @@ function setValue(x,y)
     }
 }
 
-smooth.onValueChanged=function()
+smooth.onChange=function()
 {
     if(smooth.get()) smoothTimer = setInterval(updateSmooth, 5);
         else if(smoothTimer)clearTimeout(smoothTimer);
@@ -69,7 +69,7 @@ var offsetX=0;
 var offsetY=0;
 addListeners();
 
-area.onValueChanged=addListeners;
+area.onChange=addListeners;
 
 var speed=0;
 

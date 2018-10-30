@@ -11,8 +11,8 @@ var texV=op.addOutPort(new CABLES.Port(op,"Offset Y",CABLES.OP_PORT_TYPE_VALUE))
 var outFrame=op.outValue("Frame");
 var outProgress=op.outValue("Progress");
 
-numX.onValueChanged=setRepeat;
-numY.onValueChanged=setRepeat;
+numX.onChange=setRepeat;
+numY.onChange=setRepeat;
 texU.set(0);
 texV.set(0);
 fps.set(10);

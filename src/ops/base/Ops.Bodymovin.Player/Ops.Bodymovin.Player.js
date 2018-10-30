@@ -27,12 +27,12 @@ var canvasId="bodymovin_"+CABLES.generateUUID();
 bmScale.set('fit');
 
 tfilter.set('linear');
-tfilter.onValueChanged=onFilterChange;
-filename.onValueChanged=reload;
+tfilter.onChange=onFilterChange;
+filename.onChange=reload;
 
-bmScale.onValueChanged=reloadForce;
-width.onValueChanged=reloadForce;
-height.onValueChanged=reloadForce;
+bmScale.onChange=reloadForce;
+width.onChange=reloadForce;
+height.onChange=reloadForce;
 
 var canvasImage=null;
 var cgl=op.patch.cgl;
@@ -49,7 +49,7 @@ height.set(720);
 var createTexture=false;
 
 
-play.onValueChanged=function()
+play.onChange=function()
 {
     if(play.get()) 
     {
@@ -65,17 +65,17 @@ rewind.onTriggered=function()
     anim.goToAndPlay(0, true);  
 };
 
-speed.onValueChanged=function()
+speed.onChange=function()
 {
     if(anim) anim.setSpeed(speed.get());
 };
 
-flip.onValueChanged=function()
+flip.onChange=function()
 {
     createTexture=true;
 };
 
-wrap.onValueChanged=function()
+wrap.onChange=function()
 {
     // op.log(wrap.get());
     if(wrap.get()=='repeat') cgl_wrap=CGL.Texture.WRAP_REPEAT;

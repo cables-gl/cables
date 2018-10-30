@@ -18,8 +18,8 @@ function clamp()
 min.set(0);
 max.set(1);
 
-val.onValueChanged=clamp;
-min.onValueChanged=clamp;
-max.onValueChanged=clamp;
+val.onChange=clamp;
+min.onChange=clamp;
+max.onChange=clamp;
 
 val.set(0.5);

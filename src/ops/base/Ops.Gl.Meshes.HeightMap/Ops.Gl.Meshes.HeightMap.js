@@ -34,14 +34,14 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
-extrude.onValueChanged=rebuildGeom;
-mHeight.onValueChanged=rebuildGeom;
-mWidth.onValueChanged=rebuildGeom;
-nRows.onValueChanged=rebuildGeom;
-nColumns.onValueChanged=rebuildGeom;
-flat.onValueChanged=rebuildGeom;
+extrude.onChange=rebuildGeom;
+mHeight.onChange=rebuildGeom;
+mWidth.onChange=rebuildGeom;
+nRows.onChange=rebuildGeom;
+nColumns.onChange=rebuildGeom;
+flat.onChange=rebuildGeom;
 
-filename.onValueChanged=reload;
+filename.onChange=reload;
 
 function rebuildGeom()
 {

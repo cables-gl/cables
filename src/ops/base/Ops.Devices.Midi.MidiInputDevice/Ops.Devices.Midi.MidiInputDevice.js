@@ -21,13 +21,13 @@ var midi=null;
 var outputDevice=null;
 var inputDevice=null;
 
-deviceSelect.onValueChanged=setDevice;
+deviceSelect.onChange=setDevice;
 
 if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
     else onMIDIFailure();
 
 
-resetLights.onValueChanged=doResetLights;
+resetLights.onChange=doResetLights;
 function doResetLights()
 {
     if(outputDevice && resetLights.get())

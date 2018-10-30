@@ -1,6 +1,6 @@
 op.name="DeviceVibrate";
 
-var inVibrate=op.inFunctionButton("Vibrate");
+var inVibrate=op.inTriggerButton("Vibrate");
 var outSupported=op.outValue("Supported");
 
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || 

@@ -16,7 +16,7 @@ var learning=false;
 var lastValue=-1;
 learn.onTriggered=function(){learning=true;};
 
-eventIn.onValueChanged=function()
+eventIn.onChange=function()
 {
     var event=eventIn.get();
     if(!event)return;

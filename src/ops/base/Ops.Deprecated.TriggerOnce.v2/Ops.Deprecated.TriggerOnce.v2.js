@@ -3,7 +3,7 @@ op.name="TriggerOnce";
 
 var exe=op.inTrigger("Exec");
 var reset=op.outTrigger("Reset");
-var next=op.inFunctionButton("Next");
+var next=op.inTriggerButton("Next");
 
 var triggered=false;
 

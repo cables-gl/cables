@@ -4,7 +4,7 @@ var velX=op.inValue("Velocity X");
 var velY=op.inValue("Velocity Y");
 var velZ=op.inValue("Velocity Z");
 
-var doSet=op.inFunctionButton("Set");
+var doSet=op.inTriggerButton("Set");
 
 var next=op.outTrigger("Next");
 

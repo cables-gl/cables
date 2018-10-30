@@ -8,9 +8,9 @@ min.set(0);
 max.set(1);
 val.set(0);
 
-val.onValueChanged=exec;
-max.onValueChanged=exec;
-min.onValueChanged=exec;
+val.onChange=exec;
+max.onChange=exec;
+min.onChange=exec;
 
 exec();
 

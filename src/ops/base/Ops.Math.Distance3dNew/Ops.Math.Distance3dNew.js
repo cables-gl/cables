@@ -1,5 +1,5 @@
 
-var calc=op.inFunctionButton("Calc");
+var calc=op.inTriggerButton("Calc");
 var next=op.outTrigger("Next");
 
 var inMin=op.inValue("Min",0);

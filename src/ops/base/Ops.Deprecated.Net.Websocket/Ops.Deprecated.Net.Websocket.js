@@ -77,7 +77,7 @@ function connect()
     
 }
 
-this.url.onValueChanged=connect;
+this.url.onChange=connect;
 timeout=setTimeout(checkConnection,1000);
 
 this.url.val='ws://127.0.0.1:1337';

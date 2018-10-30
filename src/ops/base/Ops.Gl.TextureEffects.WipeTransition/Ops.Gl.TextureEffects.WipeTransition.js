@@ -45,12 +45,12 @@ var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
 var fadeUniform=new CGL.Uniform(shader,'f','fade',0);
 var fadeWidthUniform=new CGL.Uniform(shader,'f','fadeWidth',0);
 
-this.fade.onValueChanged=function()
+this.fade.onChange=function()
 {
     fadeUniform.setValue(self.fade.val);
 };
 
-this.fadeWidth.onValueChanged=function()
+this.fadeWidth.onChange=function()
 {
     fadeWidthUniform.setValue(self.fadeWidth.val);
 };

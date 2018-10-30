@@ -12,7 +12,7 @@ var sizeX=op.inValue("sizeX",1);
 var sizeY=op.inValue("sizeY",1);
 var sizeZ=op.inValue("sizeZ",1);
 
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 
 
 var next=op.outTrigger("Next");

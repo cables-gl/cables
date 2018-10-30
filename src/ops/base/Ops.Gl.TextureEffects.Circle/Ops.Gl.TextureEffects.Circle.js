@@ -47,10 +47,10 @@ var uniformA=new CGL.Uniform(shader,'f','a',a);
 var uniformX=new CGL.Uniform(shader,'f','x',inX);
 var uniformY=new CGL.Uniform(shader,'f','y',inY);
 
-fallOff.onValueChanged=setFallOf;
-warnOverflow.onValueChanged=setWarnOverflow;
+fallOff.onChange=setFallOf;
+warnOverflow.onChange=setWarnOverflow;
 
-blendMode.onValueChanged=function()
+blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };

@@ -58,7 +58,7 @@ var doRender=function()
 
 
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-texture.onValueChanged=function()
+texture.onChange=function()
 {
     if(texture.get())
     {

@@ -2,8 +2,8 @@ op.name="SimpleAnimWithoutPingpong";
 
 var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var reset=op.inFunctionButton("reset");
-var rewind=op.inFunctionButton("rewind");
+var reset=op.inTriggerButton("reset");
+var rewind=op.inTriggerButton("rewind");
 
 var inStart=op.addInPort(new CABLES.Port(op,"start"));
 var inEnd=op.addInPort(new CABLES.Port(op,"end"));
@@ -86,7 +86,7 @@ function init()
 
 }
 
-loop.onValueChanged=init;
+loop.onChange=init;
 reset.onTriggered=function()
 {
     resetted=true;

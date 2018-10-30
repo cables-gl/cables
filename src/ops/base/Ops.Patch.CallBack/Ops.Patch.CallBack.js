@@ -7,9 +7,9 @@ var val2=op.addInPort(new CABLES.Port(op,"value 3",CABLES.OP_PORT_TYPE_VALUE,{ty
 
 var values=[0,0,0];
 
-val0.onValueChanged=function(){ values[0]=val0.get(); };
-val1.onValueChanged=function(){ values[1]=val1.get(); };
-val2.onValueChanged=function(){ values[2]=val2.get(); };
+val0.onChange=function(){ values[0]=val0.get(); };
+val1.onChange=function(){ values[1]=val1.get(); };
+val2.onChange=function(){ values[2]=val2.get(); };
 
 exe.onTriggered=function()
 {

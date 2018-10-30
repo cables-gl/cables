@@ -1,5 +1,5 @@
 // inputs
-var executePort = op.inFunctionButton('Execute');
+var executePort = op.inTriggerButton('Execute');
 executePort.onTriggered = update;
 var eventInPort = op.inObject('Event In');
 

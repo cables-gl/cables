@@ -10,7 +10,7 @@ var write=op.addInPort(new CABLES.Port(op,"write to depth buffer",CABLES.OP_PORT
 var depthFunc=op.addInPort(new CABLES.Port(op,"ratio",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['never','always','less','less or equal','greater', 'greater or equal','equal','not equal']} ));
 var theDepthFunc=cgl.gl.LEQUAL;
 
-depthFunc.onValueChanged=updateFunc;
+depthFunc.onChange=updateFunc;
 depthFunc.set('less or equal');
 clear.set(false);
 enable.set(true);

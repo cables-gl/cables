@@ -30,7 +30,7 @@ function loadTexture(url)
 }
 
 
-inUrls.onValueChanged=function()
+inUrls.onChange=function()
 {
     if(!inUrls.get())return;
 

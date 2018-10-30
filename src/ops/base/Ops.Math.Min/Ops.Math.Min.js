@@ -10,8 +10,8 @@ function exec()
     if(v==v) result.set( v );
 }
 
-min.onValueChanged=exec;
-value.onValueChanged=exec;
+min.onChange=exec;
+value.onChange=exec;
 
 value.set(1);
 min.set(1);

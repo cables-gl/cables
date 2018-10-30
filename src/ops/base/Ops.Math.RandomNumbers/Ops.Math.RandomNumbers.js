@@ -12,9 +12,9 @@ min.set(-1);
 max.set(1);
 seed.set(Math.round(Math.random()*99999));
 
-max.onValueChanged=init;
-min.onValueChanged=init;
-seed.onValueChanged=init;
+max.onChange=init;
+min.onChange=init;
+seed.onChange=init;
 
 var arr=[];
 init();

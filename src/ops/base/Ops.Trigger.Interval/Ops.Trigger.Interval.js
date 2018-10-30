@@ -29,6 +29,6 @@ function exec()
     interval.get() );
 }
 
-interval.onValueChanged=exec;
+interval.onChange=exec;
 
 exec();

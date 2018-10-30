@@ -37,5 +37,5 @@ function update()
     }
 }
 
-index.onValueChanged=update;
-array.onValueChanged=update;
+index.onChange=update;
+array.onChange=update;

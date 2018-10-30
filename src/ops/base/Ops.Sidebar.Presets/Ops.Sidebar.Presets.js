@@ -2,8 +2,8 @@ const parentPort = op.inObject('link');
 const labelPort = op.inValueString('Text', 'Presets');
 const siblingsPort = op.outObject('Children');
 
-const inAddPreset=op.inFunctionButton("Add Preset");
-const inUpdatePreset=op.inFunctionButton("Update current Preset");
+const inAddPreset=op.inTriggerButton("Add Preset");
+const inUpdatePreset=op.inTriggerButton("Update current Preset");
 
 inAddPreset.onTriggered=addPreset;
 inUpdatePreset.onTriggered=updatePreset;

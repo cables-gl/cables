@@ -7,7 +7,7 @@ this.geometry0=this.addInPort(new CABLES.Port(this,"geometry 0",CABLES.OP_PORT_T
 this.geometry1=this.addInPort(new CABLES.Port(this,"geometry 1",CABLES.OP_PORT_TYPE_OBJECT));
 
 this.fade=this.addInPort(new CABLES.Port(this,"fade",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-this.fade.onValueChanged=function(){ if(uniFade)uniFade.setValue(self.fade.val); };
+this.fade.onChange=function(){ if(uniFade)uniFade.setValue(self.fade.val); };
 
 var geom=null;
 var mesh=null;
@@ -83,5 +83,5 @@ function rebuild()
     }
 }
 
-this.geometry0.onValueChanged=rebuild;
-this.geometry1.onValueChanged=rebuild;
+this.geometry0.onChange=rebuild;
+this.geometry1.onChange=rebuild;

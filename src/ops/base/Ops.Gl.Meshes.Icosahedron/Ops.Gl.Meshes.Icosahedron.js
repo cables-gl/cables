@@ -10,7 +10,7 @@ var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJE
 
 geomOut.ignoreValueSerialize=true;
 
-smooth.onValueChanged=generate;
+smooth.onChange=generate;
 
 var mesh=null;
 var cgl=op.patch.cgl;

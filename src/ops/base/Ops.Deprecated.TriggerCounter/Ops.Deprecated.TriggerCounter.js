@@ -1,8 +1,8 @@
 op.name='TriggerCounter';
 // var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 // var reset=op.addInPort(new CABLES.Port(op,"reset",CABLES.OP_PORT_TYPE_FUNCTION));
-var exe=op.inFunctionButton("exe");
-var reset=op.inFunctionButton("reset");//op.addInPort(new CABLES.Port(op,"reset",CABLES.OP_PORT_TYPE_FUNCTION));
+var exe=op.inTriggerButton("exe");
+var reset=op.inTriggerButton("reset");//op.addInPort(new CABLES.Port(op,"reset",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 

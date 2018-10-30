@@ -25,7 +25,7 @@ for(var i=0;i<16;i++)
 {
     var tex=this.addInPort(new CABLES.Port(this,"texture"+i,CABLES.OP_PORT_TYPE_TEXTURE));
     texturePorts.push(tex);
-    tex.onValueChanged=forceUpdateTexture;
+    tex.onChange=forceUpdateTexture;
 }
 
 exec.onTriggered=updateTexture;

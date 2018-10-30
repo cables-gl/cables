@@ -30,7 +30,7 @@ canvas.appendChild(element);
 element.addEventListener("input", update);
 element.onkeydown=update;
 
-visible.onValueChanged=function()
+visible.onChange=function()
 {
     if(!visible.get()) 
     {

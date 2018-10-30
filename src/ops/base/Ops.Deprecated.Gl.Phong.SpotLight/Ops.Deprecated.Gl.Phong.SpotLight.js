@@ -157,19 +157,19 @@
 // b.set(1);
 // attenuation.set(0);
 
-// x.onValueChanged=updateEye;
-// y.onValueChanged=updateEye;
-// z.onValueChanged=updateEye;
+// x.onChange=updateEye;
+// y.onChange=updateEye;
+// z.onChange=updateEye;
 
-// tx.onValueChanged=updateTarget;
-// ty.onValueChanged=updateTarget;
-// tz.onValueChanged=updateTarget;
+// tx.onChange=updateTarget;
+// ty.onChange=updateTarget;
+// tz.onChange=updateTarget;
 
-// r.onValueChanged=updateColor;
-// g.onValueChanged=updateColor;
-// b.onValueChanged=updateColor;
-// cone.onValueChanged=updateColor;
+// r.onChange=updateColor;
+// g.onChange=updateColor;
+// b.onChange=updateColor;
+// cone.onChange=updateColor;
 
-// attenuation.onValueChanged=updateAttenuation;
+// attenuation.onChange=updateAttenuation;
 
 // updateAll();

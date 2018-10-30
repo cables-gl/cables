@@ -56,7 +56,7 @@ function addPort(n)
 
     // newPort.onLink=checkPorts;
     newPort.onLinkChanged=checkPorts;
-    newPort.onValueChanged=checkPorts;
+    newPort.onChange=checkPorts;
 
     texturePorts.push(newPort);
     checkPorts();

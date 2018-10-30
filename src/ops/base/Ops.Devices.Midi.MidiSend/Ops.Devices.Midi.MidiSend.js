@@ -14,7 +14,7 @@ note.set(1);
 var learning=false;
 learn.onTriggered=function(){learning=true;};
 
-value.onValueChanged=setValue;
+value.onChange=setValue;
 
 function setValue()
 {
@@ -42,7 +42,7 @@ event.output.send( [0x30, note.get(), 0.60] );
     }
 }
 
-eventIn.onValueChanged=function()
+eventIn.onChange=function()
 {
     var event=eventIn.get();
     if(learning)

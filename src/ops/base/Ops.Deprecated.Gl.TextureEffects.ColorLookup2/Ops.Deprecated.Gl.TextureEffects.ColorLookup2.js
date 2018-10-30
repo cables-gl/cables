@@ -64,14 +64,14 @@ function updateDir()
 
 };
 
-amount.onValueChanged=function()
+amount.onChange=function()
 {
     amountUniform.setValue(amount.get());
 };
 
 var posyUniform=new CGL.Uniform(shader,'f','pos',posy.get());
 
-posy.onValueChanged=function()
+posy.onChange=function()
 {
     posyUniform.setValue(posy.get());
 };

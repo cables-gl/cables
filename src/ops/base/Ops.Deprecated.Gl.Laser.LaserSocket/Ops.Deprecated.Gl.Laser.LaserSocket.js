@@ -138,6 +138,6 @@ function connect()
 }
 
 this.url.val='ws://192.168.1.174:9000/';
-this.url.onValueChanged=reconnect;
+this.url.onChange=reconnect;
 timeout=setTimeout(checkConnection,1000);
 

@@ -15,9 +15,9 @@ function calc()
 }
 
 
-x1.onValueChanged=calc;
-y1.onValueChanged=calc;
-x2.onValueChanged=calc;
-y2.onValueChanged=calc;
+x1.onChange=calc;
+y1.onChange=calc;
+x2.onChange=calc;
+y2.onChange=calc;
 
 

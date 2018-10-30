@@ -7,4 +7,4 @@ function exec()
     result.set(Math.ceil(number1.get()));
 }
 
-number1.onValueChanged=exec;
+number1.onChange=exec;

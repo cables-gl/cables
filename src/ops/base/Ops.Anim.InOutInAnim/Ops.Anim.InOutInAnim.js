@@ -11,7 +11,7 @@ var duration2=op.inValue("Duration In",0.25);
 var easing2=anim.createPort(op,"Easing In");
 var value2=op.inValue("Value In",1);
 
-var trigger=op.inFunctionButton("Start");
+var trigger=op.inTriggerButton("Start");
 var next=op.outTrigger("Next");
 
 var outVal=op.outValue("Result",0);

@@ -78,20 +78,20 @@ rewind.onTriggered=function()
 
 };
 
-time.onValueChanged=function()
+time.onChange=function()
 {
     videoElement.currentTime=time.get() || 0;
     updateTexture();
 };
 
-fps.onValueChanged=function()
+fps.onChange=function()
 {
     if(fps.get()<0.1)fps.set(1);
     clearTimeout(timeout);
     timeout=setTimeout(updateTexture, 1000/fps.get());
 };
 
-play.onValueChanged=function()
+play.onChange=function()
 {
     
     if(!embedded)
@@ -114,12 +114,12 @@ speed.onChange = function() {
     videoElement.playbackRate = speed.get();
 };
 
-loop.onValueChanged=function()
+loop.onChange=function()
 {
     videoElement.loop = loop.get();
 };
 
-muted.onValueChanged=function()
+muted.onChange=function()
 {
     videoElement.muted = muted.get();
 };
@@ -205,7 +205,7 @@ function updateVolume()
     videoElement.volume=(volume.get() || 0)*op.patch.config.masterVolume;
 }
 
-volume.onValueChanged=updateVolume;
+volume.onChange=updateVolume;
 op.onMasterVolumeChanged=updateVolume;
 
 

@@ -10,7 +10,7 @@ var appKey="Nt8KwM";
 shaderId.set('lsGSDG');
 // ldtGDr
 shaderOut.ignoreValueSerialize=true;
-shaderId.onValueChanged=setId;
+shaderId.onChange=setId;
 var uniTime=null;
 var uniTime2=null;
 var startTime=Date.now();

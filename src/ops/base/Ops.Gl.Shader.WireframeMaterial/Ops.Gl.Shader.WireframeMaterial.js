@@ -22,11 +22,11 @@ fill.onChange=function()
 
 var w=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 w.set(0.25);
-w.onValueChanged=function(){ uniformWidth.setValue(w.get()); };
+w.onChange=function(){ uniformWidth.setValue(w.get()); };
 
 var opacity=op.addInPort(new CABLES.Port(op,"opacity",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 opacity.set(1.0);
-opacity.onValueChanged=function(){ uniformOpacity.setValue(opacity.get()); };
+opacity.onChange=function(){ uniformOpacity.setValue(opacity.get()); };
 
 if(cgl.glVersion==1 && !cgl.gl.getExtension('OES_standard_derivatives') )
 {
@@ -72,21 +72,21 @@ setDefines();
     // diffuse color
 
     var r=op.addInPort(new CABLES.Port(op,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    r.onValueChanged=function()
+    r.onChange=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
 
     var g=op.addInPort(new CABLES.Port(op,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    g.onValueChanged=function()
+    g.onChange=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
 
     var b=op.addInPort(new CABLES.Port(op,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.onValueChanged=function()
+    b.onChange=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());

@@ -64,4 +64,4 @@ var exec=function()
 };
 
 exe.onTriggered=exec;
-state.onValueChanged=toggle;
+state.onChange=toggle;

@@ -6,7 +6,7 @@ let overlay = null;
 let button = null;
 
 // inputs
-const inTrigger = op.inFunctionButton('Resume');
+const inTrigger = op.inTriggerButton('Resume');
 
 // outputs
 const currentStatePort = op.outValueString('Current State');

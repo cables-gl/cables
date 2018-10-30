@@ -17,7 +17,7 @@ var learning=false;
 var lastValue=-1;
 
 
-eventIn.onValueChanged=function()
+eventIn.onChange=function()
 {
     var event=eventIn.get();
     if(!event)return;

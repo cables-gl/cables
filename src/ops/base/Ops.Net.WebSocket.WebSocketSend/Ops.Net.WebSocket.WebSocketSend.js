@@ -2,7 +2,7 @@ op.name="WebSocketSend";
 
 var inConnection=op.inObject("Connection");
 var inObject=op.inObject("Object");
-var inSend=op.inFunctionButton("Send");
+var inSend=op.inTriggerButton("Send");
 var connection=null;
 
 inConnection.onChange=function()

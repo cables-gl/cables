@@ -76,25 +76,25 @@ var srcFrag=''
     var uniFarplane=new CGL.Uniform(shader,'f','f',1.0);
     var uniNearplane=new CGL.Uniform(shader,'f','n',1.0);
 
-    this.farPlane.onValueChanged=function()
+    this.farPlane.onChange=function()
     {
         uniFarplane.setValue(self.farPlane.get());
     };
     self.farPlane.val=100.0;
 
-    this.nearPlane.onValueChanged=function()
+    this.nearPlane.onChange=function()
     {
         uniNearplane.setValue(self.nearPlane.get());
     };
     self.nearPlane.val=0.1;
 
-    depthStart.onValueChanged=function()
+    depthStart.onChange=function()
     {
         uniDepthStart.setValue(depthStart.get());
     };
     depthStart.val=0.0;
 
-    depthEnd.onValueChanged=function()
+    depthEnd.onChange=function()
     {
         uniDepthEnd.setValue(depthEnd.get());
     };

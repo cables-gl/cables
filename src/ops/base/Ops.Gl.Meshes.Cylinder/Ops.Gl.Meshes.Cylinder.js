@@ -22,11 +22,11 @@ var geom=null;
 var i=0,j=0;
 var offset=0;
 
-stacks.onValueChanged=updateMesh;
-slices.onValueChanged=updateMesh;
-radius.onValueChanged=updateMesh;
-height.onValueChanged=updateMesh;
-startSlice.onValueChanged=updateMesh;
+stacks.onChange=updateMesh;
+slices.onChange=updateMesh;
+radius.onChange=updateMesh;
+height.onChange=updateMesh;
+startSlice.onChange=updateMesh;
 
 render.onTriggered=function()
 {

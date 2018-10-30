@@ -10,5 +10,5 @@ function exec()
     result.set(Math.round(number1.get()*decm)/decm);
 }
 
-number1.onValueChanged=exec;
-decPlaces.onValueChanged=exec;
+number1.onChange=exec;
+decPlaces.onChange=exec;

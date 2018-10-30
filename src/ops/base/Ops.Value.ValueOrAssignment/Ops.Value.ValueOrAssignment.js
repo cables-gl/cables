@@ -17,5 +17,5 @@ function updateVar()
     }
 }
 
-val.onValueChanged=updateVar;
-orval.onValueChanged=updateVar;
+val.onChange=updateVar;
+orval.onChange=updateVar;

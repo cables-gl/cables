@@ -24,14 +24,14 @@ nColumns.set(10);
 
 var meshes=[];
 
-axis.onValueChanged=rebuildDelayed;
-pivotX.onValueChanged=rebuildDelayed;
-pivotY.onValueChanged=rebuildDelayed;
-width.onValueChanged=rebuildDelayed;
-height.onValueChanged=rebuildDelayed;
-nRows.onValueChanged=rebuildDelayed;
-nColumns.onValueChanged=rebuildDelayed;
-doLog.onValueChanged=rebuildDelayed;
+axis.onChange=rebuildDelayed;
+pivotX.onChange=rebuildDelayed;
+pivotY.onChange=rebuildDelayed;
+width.onChange=rebuildDelayed;
+height.onChange=rebuildDelayed;
+nRows.onChange=rebuildDelayed;
+nColumns.onChange=rebuildDelayed;
+doLog.onChange=rebuildDelayed;
 
 
 

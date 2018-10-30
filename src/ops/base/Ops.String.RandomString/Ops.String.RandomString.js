@@ -2,7 +2,7 @@
 var chars=op.inValueString("chars","cables");
 var len=op.inValueInt("Length",10);
 
-var generate=op.inFunctionButton("Generate");
+var generate=op.inTriggerButton("Generate");
 
 var result=op.outValue("Result");
 

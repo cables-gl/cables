@@ -11,10 +11,10 @@ numValues.set(100);
 min.set(0);
 max.set(1);
 
-max.onValueChanged=init;
-min.onValueChanged=init;
-numValues.onValueChanged=init;
-seed.onValueChanged=init;
+max.onChange=init;
+min.onChange=init;
+numValues.onChange=init;
+seed.onChange=init;
 values.onLinkChanged=init;
 
 var arr=[];

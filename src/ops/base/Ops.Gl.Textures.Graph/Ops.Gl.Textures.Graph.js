@@ -30,7 +30,7 @@ value.onLinkChanged=reset;
 index.onLinkChanged=reset;
 inReset.onTriggered=reset;
 
-value.onValueChanged=function()
+value.onChange=function()
 {
     addValue(value.get(),Math.round(index.get()));
 };

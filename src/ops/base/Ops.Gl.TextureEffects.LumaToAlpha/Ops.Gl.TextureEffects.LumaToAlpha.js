@@ -36,7 +36,7 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount.get());
 
-amount.onValueChanged=function()
+amount.onChange=function()
 {
     amountUniform.setValue(amount.get());
 };

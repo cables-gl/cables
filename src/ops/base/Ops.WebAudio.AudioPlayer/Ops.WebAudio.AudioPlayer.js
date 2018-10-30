@@ -48,7 +48,7 @@ var playing=false;
 outPlaying.set(false);
 
 
-play.onValueChanged=function()
+play.onChange=function()
 {
     
     if(!self.audio) 
@@ -80,7 +80,7 @@ this.onDelete=function()
 };
 
 
-doLoop.onValueChanged=function()
+doLoop.onChange=function()
 {
     if(self.audio) self.audio.loop=doLoop.get();
     else if(self.media) self.media.loop=doLoop.get();
@@ -145,7 +145,7 @@ function updateVolume()
     self.filter.gain.setValueAtTime((volume.get() || 0) * op.patch.config.masterVolume, window.audioContext.currentTime);
 }
 
-volume.onValueChanged=updateVolume;
+volume.onChange=updateVolume;
 op.onMasterVolumeChanged=updateVolume;
 
 var firstTime=true;

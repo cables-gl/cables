@@ -271,7 +271,7 @@ var uniWidthMirror=new CGL.Uniform(shaderMirror,'f','width',mirrorWidth);
 var uniOffsetMirror=new CGL.Uniform(shaderMirror,'f','offset',mirrorOffset);
 var uniFlipMirror=new CGL.Uniform(shaderMirror,'f','flip',0);
 
-mirrorFlip.onValueChanged=function()
+mirrorFlip.onChange=function()
 {
     if(mirrorFlip.get())uniFlipMirror.setValue(1);
         else uniFlipMirror.setValue(0);

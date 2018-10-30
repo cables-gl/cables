@@ -21,4 +21,4 @@ var exec=function()
 };
 
 exe.onTriggered=exec;
-v.onValueChanged=exec;
+v.onChange=exec;

@@ -14,8 +14,8 @@ var texRepeatY=op.addOutPort(new CABLES.Port(op,"Repeat Y",CABLES.OP_PORT_TYPE_V
 var texU=op.addOutPort(new CABLES.Port(op,"Offset X",CABLES.OP_PORT_TYPE_VALUE));
 var texV=op.addOutPort(new CABLES.Port(op,"Offset Y",CABLES.OP_PORT_TYPE_VALUE));
 
-numX.onValueChanged=setRepeat;
-numY.onValueChanged=setRepeat;
+numX.onChange=setRepeat;
+numY.onChange=setRepeat;
 texU.set(0);
 texV.set(0);
 fps.set(10);

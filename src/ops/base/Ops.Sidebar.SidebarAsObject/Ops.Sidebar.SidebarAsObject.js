@@ -1,4 +1,4 @@
-const exec=op.inFunctionButton("Update");
+const exec=op.inTriggerButton("Update");
 const outResult=op.outObject("Result");
 
 exec.onTriggered=function()

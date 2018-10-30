@@ -150,7 +150,7 @@ function createPatchInputPort(dynPort,name)
     }
     else
     {
-        dynPort.onValueChanged=function()
+        dynPort.onChange=function()
         {
             pOut.set(dynPort.get());
         };
@@ -190,7 +190,7 @@ op.shouldLink=function(p1,p2)
     return true;
 };
 
-op.patchId.onValueChanged=function()
+op.patchId.onChange=function()
 {
     // Ops.Ui.Patch.maxPatchId=Math.max(Ops.Ui.Patch.maxPatchId,op.patchId.get());
 };

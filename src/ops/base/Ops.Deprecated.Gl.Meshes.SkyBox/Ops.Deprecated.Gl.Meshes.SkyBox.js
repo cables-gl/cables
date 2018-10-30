@@ -193,5 +193,5 @@
         mesh=new CGL.Mesh(cgl,geom);
     }
 
-    this.mapping.onValueChanged=build;
+    this.mapping.onChange=build;
     build();

@@ -1,7 +1,7 @@
 var inTime=op.inValue("Time");
 var inStr=op.inValueString("Frames");
 var inLoop=op.inValueBool("Loop");
-var inRewind=op.inFunctionButton("Rewind");
+var inRewind=op.inTriggerButton("Rewind");
 var outValue=op.outValue("result time");
 var outArr=op.outArray("Expanded Frames");
 var finished=op.outValue("Finished",false);

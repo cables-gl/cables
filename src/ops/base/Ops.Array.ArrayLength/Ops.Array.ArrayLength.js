@@ -12,4 +12,4 @@ function update()
     outLength.set(l);
 }
 
-array.onValueChanged=update;
+array.onChange=update;

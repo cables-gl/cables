@@ -13,7 +13,7 @@ var uniPointSize=null;
 
 var cgl=op.patch.cgl;
 
-pointSize.onValueChanged=setPointSize;
+pointSize.onChange=setPointSize;
 
 function setPointSize()
 {

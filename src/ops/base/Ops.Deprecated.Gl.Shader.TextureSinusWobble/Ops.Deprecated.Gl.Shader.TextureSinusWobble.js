@@ -61,7 +61,7 @@ var shader=new CGL.Shader(cgl);
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 this.a=this.addInPort(new CABLES.Port(this,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-this.a.onValueChanged=function()
+this.a.onChange=function()
 {
     if(!self.a.uniform) self.a.uniform=new CGL.Uniform(shader,'f','a',self.a.val);
     else self.a.uniform.setValue(self.a.val);
@@ -70,7 +70,7 @@ this.a.onValueChanged=function()
 this.a.val=1.0;
 
 this.time=this.addInPort(new CABLES.Port(this,"time",CABLES.OP_PORT_TYPE_VALUE,{  }));
-this.time.onValueChanged=function()
+this.time.onChange=function()
 {
     if(!self.time.uniform) self.time.uniform=new CGL.Uniform(shader,'f','time',self.a.val);
     else self.time.uniform.setValue(self.time.val);
@@ -83,7 +83,7 @@ this.render.onTriggered=this.doRender;
 this.texture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 this.textureUniform=null;
 
-this.texture.onValueChanged=function()
+this.texture.onChange=function()
 {
 
     if(self.texture.get())

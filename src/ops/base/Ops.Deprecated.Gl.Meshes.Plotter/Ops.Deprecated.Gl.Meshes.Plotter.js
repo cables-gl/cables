@@ -41,7 +41,7 @@ function bufferData()
 }
 
 
-v.onValueChanged=function()
+v.onChange=function()
 {
     vertices.splice(0,3);
     vertices.push(1);

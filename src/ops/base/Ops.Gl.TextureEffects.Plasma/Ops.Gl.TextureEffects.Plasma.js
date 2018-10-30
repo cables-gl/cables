@@ -91,7 +91,7 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
-blendMode.onValueChanged=function()
+blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };

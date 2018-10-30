@@ -1,11 +1,11 @@
 var DEFAULT_LENGTH=10;
 
 var inVal=op.inValue("Value");
-var inWrite=op.inFunctionButton("Write");
+var inWrite=op.inTriggerButton("Write");
 
 var inNum=op.inValueInt("Length",DEFAULT_LENGTH);
 
-var inReset=op.inFunctionButton("Reset Index");
+var inReset=op.inTriggerButton("Reset Index");
 
 var outArr=op.outArray("Result");
 var outIndex=op.outValue("Index");

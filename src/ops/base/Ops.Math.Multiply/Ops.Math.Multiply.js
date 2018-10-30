@@ -13,8 +13,8 @@ function update()
     result.set( n1*n2 );
 }
 
-number1.onValueChanged=update;
-number2.onValueChanged=update;
+number1.onChange=update;
+number2.onChange=update;
 
 number1.set(1);
 number2.set(2);

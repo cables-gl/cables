@@ -22,7 +22,7 @@ op.render.onTriggered=function()
     cgl.gl.disable(cgl.gl.CULL_FACE);
 };
 
-op.facing.onValueChanged=function()
+op.facing.onChange=function()
 {
     whichFace=cgl.gl.BACK;
     if(op.facing.get()=='front')whichFace=cgl.gl.FRONT;

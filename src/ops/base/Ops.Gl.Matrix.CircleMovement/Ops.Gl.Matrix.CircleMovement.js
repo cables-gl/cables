@@ -31,7 +31,7 @@ radius.set(1);
 mulX.set(1);
 mulY.set(1);
 
-segments.onValueChanged=calc;
+segments.onChange=calc;
 
 calc();
 

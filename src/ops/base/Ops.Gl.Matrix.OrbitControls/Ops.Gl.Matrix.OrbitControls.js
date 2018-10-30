@@ -18,7 +18,7 @@ const restricted=op.addInPort(new CABLES.Port(op,"restricted",CABLES.OP_PORT_TYP
 
 const active=op.inValueBool("Active",true);
 
-const inReset=op.inFunctionButton("Reset");
+const inReset=op.inTriggerButton("Reset");
 
 const allowPanning=op.inValueBool("Allow Panning",true);
 const allowZooming=op.inValueBool("Allow Zooming",true);

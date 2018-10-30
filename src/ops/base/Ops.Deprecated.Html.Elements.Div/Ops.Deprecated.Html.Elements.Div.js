@@ -71,40 +71,40 @@ mouseOver.set(false);
 var element=null;
 
 
-text.onValueChanged=updateText;
+text.onChange=updateText;
 
 classes.onChange=updateClasses;
 updateText();
 
 
-width.onValueChanged=updateSize;
-height.onValueChanged=updateSize;
-autoSize.onValueChanged=updateSize;
-posLeft.onValueChanged=updatePos;
-posTop.onValueChanged=updatePos;
-doCenterX.onValueChanged=updatePos;
-doCenterY.onValueChanged=updatePos;
+width.onChange=updateSize;
+height.onChange=updateSize;
+autoSize.onChange=updateSize;
+posLeft.onChange=updatePos;
+posTop.onChange=updatePos;
+doCenterX.onChange=updatePos;
+doCenterY.onChange=updatePos;
 
-bgR.onValueChanged=updateBgColor;
-bgG.onValueChanged=updateBgColor;
-bgB.onValueChanged=updateBgColor;
-bgA.onValueChanged=updateBgColor;
+bgR.onChange=updateBgColor;
+bgG.onChange=updateBgColor;
+bgB.onChange=updateBgColor;
+bgA.onChange=updateBgColor;
 
-r.onValueChanged=updateColor;
-g.onValueChanged=updateColor;
-b.onValueChanged=updateColor;
-a.onValueChanged=updateColor;
+r.onChange=updateColor;
+g.onChange=updateColor;
+b.onChange=updateColor;
+a.onChange=updateColor;
 
 opacity.onChange=updateOpacity;
 
-fontSize.onValueChanged=updateFont;
-fontFamily.onValueChanged=updateFont;
-borderRadius.onValueChanged=updateBorder;
-cursor.onValueChanged=updateCursor;
-ignoreMouse.onValueChanged=updateIgnoreMouse;
+fontSize.onChange=updateFont;
+fontFamily.onChange=updateFont;
+borderRadius.onChange=updateBorder;
+cursor.onChange=updateCursor;
+ignoreMouse.onChange=updateIgnoreMouse;
 init();
 
-visible.onValueChanged=function()
+visible.onChange=function()
 {
     if(visible.get()) element.style.display="block";
     else element.style.display="none";
@@ -200,7 +200,7 @@ function updateText()
     updateClientSize();
 };
 
-id.onValueChanged=function()
+id.onChange=function()
 {
     element.id=id.get();
 };

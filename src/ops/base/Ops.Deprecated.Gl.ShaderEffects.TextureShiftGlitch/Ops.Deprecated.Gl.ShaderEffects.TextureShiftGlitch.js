@@ -11,9 +11,9 @@ this.height=this.addInPort(new CABLES.Port(this,"height",CABLES.OP_PORT_TYPE_VAL
 this.width=this.addInPort(new CABLES.Port(this,"width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 this.extrude=this.addInPort(new CABLES.Port(this,"extrude",CABLES.OP_PORT_TYPE_VALUE));
 
-this.pos.onValueChanged=function(){ if(unipos)unipos.setValue(self.pos.val); };
-this.height.onValueChanged=function(){ if(uniheight)uniheight.setValue(self.height.val); };
-this.width.onValueChanged=function(){ if(uniWidth)uniWidth.setValue(self.width.val); };
+this.pos.onChange=function(){ if(unipos)unipos.setValue(self.pos.val); };
+this.height.onChange=function(){ if(uniheight)uniheight.setValue(self.height.val); };
+this.width.onChange=function(){ if(uniWidth)uniWidth.setValue(self.width.val); };
 
 var shader=null;
 var unipos;

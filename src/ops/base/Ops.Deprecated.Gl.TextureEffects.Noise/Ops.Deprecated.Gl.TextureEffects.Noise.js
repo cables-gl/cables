@@ -12,7 +12,7 @@ var shader=new CGL.Shader(cgl);
 var amountUniform=new CGL.Uniform(shader,'f','amount',1.0);
 var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 
-amount.onValueChanged=function(){amountUniform.setValue(amount.get());};
+amount.onChange=function(){amountUniform.setValue(amount.get());};
 
 amount.set(0.3);
 

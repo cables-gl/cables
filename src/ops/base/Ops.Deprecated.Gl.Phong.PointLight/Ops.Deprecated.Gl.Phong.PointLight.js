@@ -23,13 +23,13 @@ g.set(1);
 b.set(1);
 attenuation.set(0);
 
-r.onValueChanged=updateAll;
-g.onValueChanged=updateAll;
-b.onValueChanged=updateAll;
-x.onValueChanged=updateAll;
-y.onValueChanged=updateAll;
-z.onValueChanged=updateAll;
-attenuation.onValueChanged=updateAttenuation;
+r.onChange=updateAll;
+g.onChange=updateAll;
+b.onChange=updateAll;
+x.onChange=updateAll;
+y.onChange=updateAll;
+z.onChange=updateAll;
+attenuation.onChange=updateAttenuation;
 
 
 var id=CABLES.generateUUID();

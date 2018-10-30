@@ -4,7 +4,7 @@ const DEFAULT_VALUE_DEFAULT = true;
 var parentPort = op.inObject('link');
 var labelPort = op.inValueString('Text', 'Toggle');
 const inputValuePort = op.inValueBool('Input', DEFAULT_VALUE_DEFAULT);
-const setDefaultValueButtonPort = op.inFunctionButton('Set Default');
+const setDefaultValueButtonPort = op.inTriggerButton('Set Default');
 var defaultValuePort = op.inValueBool('Default', DEFAULT_VALUE_DEFAULT);
 defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 

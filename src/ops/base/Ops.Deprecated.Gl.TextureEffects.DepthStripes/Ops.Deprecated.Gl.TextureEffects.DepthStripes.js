@@ -53,9 +53,9 @@ var textureUniform=new CGL.Uniform(shader,'t','colorTex',1);
 var uniFarplane=new CGL.Uniform(shader,'f','f',1.0);
 var uniNearplane=new CGL.Uniform(shader,'f','n',1.0);
 
-farPlane.onValueChanged=function(){ uniFarplane.setValue(farPlane.get()); };
+farPlane.onChange=function(){ uniFarplane.setValue(farPlane.get()); };
 
-nearPlane.onValueChanged=function(){ uniNearplane.setValue(nearPlane.get()); };
+nearPlane.onChange=function(){ uniNearplane.setValue(nearPlane.get()); };
 
 render.onTriggered=function()
 {

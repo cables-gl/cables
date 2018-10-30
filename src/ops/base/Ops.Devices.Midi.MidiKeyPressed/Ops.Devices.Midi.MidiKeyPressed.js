@@ -16,7 +16,7 @@ var outDevice = op.outValue("Device");
 var CMD_NOTE_ON = 9;
 var CMD_NOTE_OFF = 8;
 
-eventIn.onValueChanged=function() {
+eventIn.onChange=function() {
   var event=eventIn.get();
   if(event && event.cmd == 9 || event.cmd == 8) {
     outDevice.set(event.deviceName);

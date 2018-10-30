@@ -24,7 +24,7 @@ area.set("Canvas");
 
 var listenerElement=null;
 
-area.onValueChanged=addListeners;
+area.onChange=addListeners;
 
 
 var onMouseDown = function(e)

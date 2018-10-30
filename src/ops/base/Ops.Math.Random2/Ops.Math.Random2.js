@@ -1,4 +1,4 @@
-var exe=op.inFunctionButton('Generate');
+var exe=op.inTriggerButton('Generate');
 var min=op.inValue("min",0);
 var max=op.inValue("max",1);
 var result=op.outValue("result");

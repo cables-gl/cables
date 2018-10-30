@@ -9,7 +9,7 @@ points.ignoreValueSerialize=true;
 
 var meshes=[];
 
-doCenter.onValueChanged=create;
+doCenter.onChange=create;
 
 var cycle=0;
 render.onTriggered=function()

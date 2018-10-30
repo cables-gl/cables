@@ -12,7 +12,7 @@ var connection=null;
 var timeout=null;
 var connectedTo='';
 
-inUrl.onValueChanged=connect;
+inUrl.onChange=connect;
 timeout=setTimeout(checkConnection,2000);
 
 inUrl.set();

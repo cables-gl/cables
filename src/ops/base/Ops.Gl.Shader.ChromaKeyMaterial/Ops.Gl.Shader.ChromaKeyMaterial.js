@@ -192,7 +192,7 @@ inMode.onChange=function()
 };
 
 
-op.texture.onValueChanged=function()
+op.texture.onChange=function()
 {
     if(op.texture.get())
     {
@@ -238,8 +238,8 @@ var diffuseRepeatY=op.addInPort(new CABLES.Port(op,"diffuseRepeatY",CABLES.OP_PO
 diffuseRepeatX.set(1);
 diffuseRepeatY.set(1);
 
-diffuseRepeatX.onValueChanged=updateTexRepeat;
-diffuseRepeatY.onValueChanged=updateTexRepeat;
+diffuseRepeatX.onChange=updateTexRepeat;
+diffuseRepeatY.onChange=updateTexRepeat;
 
 
 var diffuseOffsetX=op.addInPort(new CABLES.Port(op,"Tex Offset X",CABLES.OP_PORT_TYPE_VALUE));
@@ -247,8 +247,8 @@ var diffuseOffsetY=op.addInPort(new CABLES.Port(op,"Tex Offset Y",CABLES.OP_PORT
 diffuseOffsetX.set(0);
 diffuseOffsetY.set(0);
 
-diffuseOffsetY.onValueChanged=updateTexRepeat;
-diffuseOffsetX.onValueChanged=updateTexRepeat;
+diffuseOffsetY.onChange=updateTexRepeat;
+diffuseOffsetX.onChange=updateTexRepeat;
 
 var diffuseRepeatXUniform=null;
 var diffuseRepeatYUniform=null;

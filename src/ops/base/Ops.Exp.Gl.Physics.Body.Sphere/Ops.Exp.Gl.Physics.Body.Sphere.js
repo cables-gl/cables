@@ -10,7 +10,7 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 
 
 var next=op.outTrigger("Next");

@@ -2,7 +2,7 @@ op.name="World";
 
 var exec=op.inTrigger("Exec");
 
-var reset=op.inFunctionButton("Reset");
+var reset=op.inTriggerButton("Reset");
 
 var groundPlane=op.inValueBool("Groundplane",true);
 

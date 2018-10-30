@@ -12,10 +12,10 @@ var outA=op.addOutPort(new CABLES.Port(op,"outa",CABLES.OP_PORT_TYPE_VALUE));
 var outHex = op.outValue('Hex', '000000');
 var arrOut=op.outArray("Array");
 
-r.onValueChanged=exec;
-g.onValueChanged=exec;
-b.onValueChanged=exec;
-a.onValueChanged=exec;
+r.onChange=exec;
+g.onChange=exec;
+b.onChange=exec;
+a.onChange=exec;
 
 /**
  * Float [0..1] -> Hex String [00..FF]

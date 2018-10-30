@@ -82,11 +82,11 @@ new_min.set(-1);
 new_max.set(1);
 
 
-v.onValueChanged=exec;
-old_min.onValueChanged=exec;
-old_max.onValueChanged=exec;
-new_min.onValueChanged=exec;
-new_max.onValueChanged=exec;
+v.onChange=exec;
+old_min.onChange=exec;
+old_max.onChange=exec;
+new_min.onChange=exec;
+new_max.onChange=exec;
 
 result.set(0);
 

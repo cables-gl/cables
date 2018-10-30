@@ -1,5 +1,5 @@
 const playPause=op.inValueBool("Play",true);
-const reset=op.inFunctionButton("Reset");
+const reset=op.inTriggerButton("Reset");
 const outTime=op.outValue("Time");
 const inSpeed=op.inValue("Speed",1);
 

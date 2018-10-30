@@ -6,7 +6,7 @@ values.ignoreValueSerialize=true;
 
 numValues.set(100);
 
-numValues.onValueChanged=init;
+numValues.onChange=init;
 
 var arr=[];
 init();

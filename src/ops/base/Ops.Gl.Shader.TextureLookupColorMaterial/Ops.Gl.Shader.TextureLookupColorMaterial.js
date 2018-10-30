@@ -59,7 +59,7 @@ op.textureUniform=null;
 // };
 
 
-op.texture.onValueChanged=function()
+op.texture.onChange=function()
 {
     if(op.texture.get())
     {
@@ -87,7 +87,7 @@ op.textureOpacity.onPreviewChanged=function()
     console.log('show preview!');
 };
 
-op.textureOpacity.onValueChanged=function()
+op.textureOpacity.onChange=function()
 {
     if(op.textureOpacity.get())
     {
@@ -109,7 +109,7 @@ op.textureOpacity.onValueChanged=function()
 
 op.doBillboard=op.addInPort(new CABLES.Port(op,"billboard",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 op.doBillboard.val=false;
-op.doBillboard.onValueChanged=function()
+op.doBillboard.onChange=function()
 {
     if(op.doBillboard.val)
         shader.define('BILLBOARD');

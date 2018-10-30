@@ -27,20 +27,20 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureImaghe=new CGL.Uniform(shader,'t','image',1);
 var textureAlpha=new CGL.Uniform(shader,'t','imageAlpha',2);
 
-invAlphaChannel.onValueChanged=function()
+invAlphaChannel.onChange=function()
 {
     if(invAlphaChannel.get()) shader.define('INVERT_ALPHA');
         else shader.removeDefine('INVERT_ALPHA');
 };
 
-removeAlphaSrc.onValueChanged=function()
+removeAlphaSrc.onChange=function()
 {
     if(removeAlphaSrc.get()) shader.define('REMOVE_ALPHA_SRC');
         else shader.removeDefine('REMOVE_ALPHA_SRC');
 };
 removeAlphaSrc.set(true);
 
-alphaSrc.onValueChanged=function()
+alphaSrc.onChange=function()
 {
     if(alphaSrc.get()=='luminance') shader.define('ALPHA_FROM_LUMINANCE');
         else shader.removeDefine('ALPHA_FROM_LUMINANCE');
@@ -56,13 +56,13 @@ alphaSrc.set("alpha channel");
     var flipX=op.addInPort(new CABLES.Port(op,"flip x",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
     var flipY=op.addInPort(new CABLES.Port(op,"flip y",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-    flipX.onValueChanged=function()
+    flipX.onChange=function()
     {
         if(flipX.get()) shader.define('TEX_FLIP_X');
             else shader.removeDefine('TEX_FLIP_X');
     };
 
-    flipY.onValueChanged=function()
+    flipY.onChange=function()
     {
         if(flipY.get()) shader.define('TEX_FLIP_Y');
             else shader.removeDefine('TEX_FLIP_Y');
@@ -118,7 +118,7 @@ function updateTransformPorts()
 
 
 
-blendMode.onValueChanged=function()
+blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
@@ -128,7 +128,7 @@ var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 
 
-imageAlpha.onValueChanged=function()
+imageAlpha.onChange=function()
 {
     if(imageAlpha.get() && imageAlpha.get().tex)
     {

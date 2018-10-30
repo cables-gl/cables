@@ -5,8 +5,8 @@ const result=op.addOutPort(new CABLES.Port(op,"Result"));
 
 exponent.set(2);
 
-base.onValueChanged=update;
-exponent.onValueChanged=update;
+base.onChange=update;
+exponent.onChange=update;
 
 function update()
 {

@@ -32,7 +32,7 @@ function initMidiValue()
     if(!setMidiValue()) setTimeout(initMidiValue,300);
 }
 
-eventIn.onValueChanged=function()
+eventIn.onChange=function()
 {
     var event=eventIn.get();
     if(!event)return;

@@ -84,19 +84,19 @@ function doRender()
     cgl.setPreviousShader();
 }
 
-doScale.onValueChanged=function()
+doScale.onChange=function()
 {
     if(doScale.get()) shader.define('SCALE_BY_DISTANCE');
         else shader.removeDefine('SCALE_BY_DISTANCE');
 };
 
-makeRound.onValueChanged=function()
+makeRound.onChange=function()
 {
     if(makeRound.get()) shader.define('MAKE_ROUND');
         else shader.removeDefine('MAKE_ROUND');
 };
 
-texture.onValueChanged=function()
+texture.onChange=function()
 {
     if(texture.get())
     {
@@ -113,7 +113,7 @@ texture.onValueChanged=function()
     }
 };
 
-textureMask.onValueChanged=function()
+textureMask.onChange=function()
 {
     if(textureMask.get())
     {
@@ -132,7 +132,7 @@ textureMask.onValueChanged=function()
 
 var colorizeTexture=op.addInPort(new CABLES.Port(op,"colorizeTexture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 colorizeTexture.set(false);
-colorizeTexture.onValueChanged=function()
+colorizeTexture.onChange=function()
 {
     if(colorizeTexture.get()) shader.define('COLORIZE_TEXTURE');
         else shader.removeDefine('COLORIZE_TEXTURE');
@@ -140,7 +140,7 @@ colorizeTexture.onValueChanged=function()
 
 var textureLookup=op.addInPort(new CABLES.Port(op,"texture Lookup",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 textureLookup.set(false);
-textureLookup.onValueChanged=function()
+textureLookup.onChange=function()
 {
     if(textureLookup.get()) shader.define('LOOKUP_TEXTURE');
         else shader.removeDefine('LOOKUP_TEXTURE');

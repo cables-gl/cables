@@ -38,10 +38,10 @@ function updateMesh()
     generateCone(r,height.get(), nstacks, nslices);
 }
 
-stacks.onValueChanged=updateMesh;
-slices.onValueChanged=updateMesh;
-radius.onValueChanged=updateMesh;
-height.onValueChanged=updateMesh;
+stacks.onChange=updateMesh;
+slices.onChange=updateMesh;
+radius.onChange=updateMesh;
+height.onChange=updateMesh;
 
 updateMesh();
 

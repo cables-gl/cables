@@ -1,6 +1,6 @@
-var exec=op.inFunctionButton("Join");
+var exec=op.inTriggerButton("Join");
 var inArr=op.inArray("Array");
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 
 var outArr=op.outArray("Result");
 

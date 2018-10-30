@@ -8,9 +8,9 @@ var geomOut=op.addOutPort(new CABLES.Port(op,"Geometry Out",CABLES.OP_PORT_TYPE_
 geomOut.ignoreValueSerialize=true;
 geometry.ignoreValueSerialize=true;
 
-geometry.onValueChanged=calc;
-smoothNormals.onValueChanged=calc;
-forceZUp.onValueChanged=calc;
+geometry.onChange=calc;
+smoothNormals.onChange=calc;
+forceZUp.onChange=calc;
 
 var geom=null;
 

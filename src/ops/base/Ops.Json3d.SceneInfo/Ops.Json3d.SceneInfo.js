@@ -11,7 +11,7 @@ var numAnimsChannels=op.outValue("Num Anim Channels");
 var outDuration=op.outValue("Anim Duration");
 
 
-var inDump=op.inFunctionButton("Dump Console");
+var inDump=op.inTriggerButton("Dump Console");
 
 var cgl=op.patch.cgl;
 var scene=null;

@@ -26,5 +26,5 @@ function exec()
     }
 }
 
-boolean.onValueChanged=execBool;
+boolean.onChange=execBool;
 exe.onTriggered=exec;

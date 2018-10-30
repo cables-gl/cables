@@ -3,8 +3,8 @@ var stack = [];
 var uuid = CABLES.uuid();
 
 // inputs
-var startPort = op.inFunctionButton('Start Task');
-var stopPort = op.inFunctionButton('End Task');
+var startPort = op.inTriggerButton('Start Task');
+var stopPort = op.inTriggerButton('End Task');
 
 // listeners
 startPort.onTriggered = startTask;

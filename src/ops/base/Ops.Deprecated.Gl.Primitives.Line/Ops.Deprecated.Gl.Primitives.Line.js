@@ -15,7 +15,7 @@ var mod=null;
 var uniPointSize=null;
 var drawMode=cgl.gl.LINE_STRIP;
 
-mode.onValueChanged=function()
+mode.onChange=function()
 {
     drawMode=cgl.gl.LINES;
     if(mode.get()=='Line Loop')drawMode=cgl.gl.LINE_LOOP;
@@ -23,7 +23,7 @@ mode.onValueChanged=function()
         else drawMode=cgl.gl.LINE_STRIP;
 };
 
-pointSize.onValueChanged=function()
+pointSize.onChange=function()
 {
     if(uniPointSize)uniPointSize.setValue(pointSize.get());
 };

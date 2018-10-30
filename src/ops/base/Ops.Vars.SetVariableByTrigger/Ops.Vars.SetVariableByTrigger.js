@@ -1,7 +1,7 @@
 
 var val=op.inValue("Value");
 op.varName=op.inValueSelect("Variable");
-var inExec=op.inFunctionButton("Set Variable");
+var inExec=op.inTriggerButton("Set Variable");
 
 op.varName.onChange=updateName;
 // val.onChange=update;

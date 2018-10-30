@@ -177,10 +177,10 @@ function buildMesh()
     geomOut.set(geom);
 }
 
-width.onValueChanged=buildMesh;
-height.onValueChanged=buildMesh;
-lengt.onValueChanged=buildMesh;
-center.onValueChanged=buildMesh;
+width.onChange=buildMesh;
+height.onChange=buildMesh;
+lengt.onChange=buildMesh;
+center.onChange=buildMesh;
 
 buildMesh();
 

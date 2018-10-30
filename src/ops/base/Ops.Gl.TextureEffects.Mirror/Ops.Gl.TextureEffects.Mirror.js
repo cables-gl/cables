@@ -18,13 +18,13 @@ var uniWidth=new CGL.Uniform(shader,'f','width',width);
 var uniOffset=new CGL.Uniform(shader,'f','offset',offset);
 var uniFlip=new CGL.Uniform(shader,'f','flip',0);
 
-flip.onValueChanged=function()
+flip.onChange=function()
 {
     if(flip.get())uniFlip.setValue(1);
     else uniFlip.setValue(0);
 };
 
-axis.onValueChanged=function()
+axis.onChange=function()
 {
     if(axis.get()=='X')uniAxis.setValue(0);
     if(axis.get()=='Y')uniAxis.setValue(1);

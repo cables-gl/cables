@@ -58,4 +58,4 @@ var reload=function()
     
 };
 
-filename.onValueChanged=reload;
+filename.onChange=reload;

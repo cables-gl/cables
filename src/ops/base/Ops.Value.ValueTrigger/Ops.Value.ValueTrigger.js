@@ -1,5 +1,5 @@
 
-var exe=op.inFunctionButton("exe");
+var exe=op.inTriggerButton("exe");
 var v=op.addInPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE));
 
 var next=op.outTrigger("Next");

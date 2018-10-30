@@ -2,7 +2,7 @@
 var NUM_PORTS = 10;
 
 // inputs
-var exePort = op.inFunctionButton('Execute');
+var exePort = op.inTriggerButton('Execute');
 var enablePorts = [];
 createInPorts();
 

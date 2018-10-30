@@ -71,9 +71,9 @@ var uniNearplane=new CGL.Uniform(shader,'f','n',1.0);
 var uniWidth=new CGL.Uniform(shader,'f','width',1.0);
 var uniHeight=new CGL.Uniform(shader,'f','height',1.0);
 
-farPlane.onValueChanged=function(){ uniFarplane.setValue(farPlane.get()); };
+farPlane.onChange=function(){ uniFarplane.setValue(farPlane.get()); };
 
-nearPlane.onValueChanged=function(){ uniNearplane.setValue(nearPlane.get()); };
+nearPlane.onChange=function(){ uniNearplane.setValue(nearPlane.get()); };
 
 render.onTriggered=function()
 {

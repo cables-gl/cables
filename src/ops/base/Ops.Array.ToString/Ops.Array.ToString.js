@@ -6,8 +6,8 @@ arr.ignoreValueSerialize=true;
 result.ignoreValueSerialize=true;
 
 separator.set(',');
-arr.onValueChanged=parse;
-separator.onValueChanged=parse;
+arr.onChange=parse;
+separator.onChange=parse;
 
 parse();
 

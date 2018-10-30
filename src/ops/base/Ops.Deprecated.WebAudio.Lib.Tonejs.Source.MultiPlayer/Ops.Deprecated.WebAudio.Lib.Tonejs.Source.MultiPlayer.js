@@ -52,7 +52,7 @@ function indexIsValid(i) {
 
 // input ports
 createBufferInputs();
-var starPort = op.inFunctionButton("Start Buffer");
+var starPort = op.inTriggerButton("Start Buffer");
 var indexPort = op.inValue("Buffer Index", 0);
 var timePort = op.inValueString("Time", TIME_DEFAULT);
 var fadeInPort = op.inValueString("Fade In Time", FADE_IN_TIME_DEFAULT);
@@ -60,11 +60,11 @@ var offsetPort = op.inValueString("Offset", OFFSET_DEFAULT);
 var durationPort = op.inValueString("Duration");
 var pitchPort = op.addInPort( new CABLES.Port( op, "Pitch", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PITCH_UI_MIN, 'max': PITCH_UI_MAX }, PITCH_DEFAULT ));
 var gainPort = op.inValueSlider("Gain", GAIN_DEFAULT);
-var starLoopPort = op.inFunctionButton("Start Buffer (Loop)");
+var starLoopPort = op.inTriggerButton("Start Buffer (Loop)");
 var loopStartTimePort = op.inValueString("Loop Start Time");
 var loopEndTimePort = op.inValueString("Loop End Time");
-var stopPort = op.inFunctionButton("Stop Buffer");
-var stopAllPort = op.inFunctionButton("Stop All Buffers");
+var stopPort = op.inTriggerButton("Stop Buffer");
+var stopAllPort = op.inTriggerButton("Stop All Buffers");
 var fadeOutPort = op.inValueString("Fade Out Time", FADE_OUT_TIME_DEFAULT);
 var volumePort = op.addInPort( new CABLES.Port( op, "Volume", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX }, VOLUME_DEFAULT ));
 var mutePort = op.inValueBool("Mute", MUTE_DEFAULT);

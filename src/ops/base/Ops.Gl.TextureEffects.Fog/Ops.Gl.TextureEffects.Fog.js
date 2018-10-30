@@ -7,7 +7,7 @@ var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCT
 
 var ignoreInf=op.addInPort(new CABLES.Port(op,"ignore infinity",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 ignoreInf.set(false);
-ignoreInf.onValueChanged=function()
+ignoreInf.onChange=function()
 {
     if(ignoreInf.get()) shader.define('FOG_IGNORE_INFINITY');
         else shader.removeDefine('FOG_IGNORE_INFINITY');
@@ -24,7 +24,7 @@ var textureUniform=new CGL.Uniform(shader,'t','depthTex',1);
 var textureUniform=new CGL.Uniform(shader,'t','image',0);
 
 var uniDensity=new CGL.Uniform(shader,'f','density',1.0);
-density.onValueChanged=function()
+density.onChange=function()
 {
     uniDensity.setValue(density.get());
 };
@@ -34,28 +34,28 @@ density.set(5.0);
     // fog color
 
     var r=op.addInPort(new CABLES.Port(op,"fog r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    r.onValueChanged=function()
+    r.onChange=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
 
     var g=op.addInPort(new CABLES.Port(op,"fog g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    g.onValueChanged=function()
+    g.onChange=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
 
     var b=op.addInPort(new CABLES.Port(op,"fog b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.onValueChanged=function()
+    b.onChange=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
     };
 
     var a=op.addInPort(new CABLES.Port(op,"fog a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    a.onValueChanged=function()
+    a.onChange=function()
     {
         if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
         else a.uniform.setValue(a.get());
@@ -69,7 +69,7 @@ density.set(5.0);
 
 
 var start=op.addInPort(new CABLES.Port(op,"start",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-start.onValueChanged=function()
+start.onChange=function()
 {
     if(!start.uniform) start.uniform=new CGL.Uniform(shader,'f','start',start.get());
     else start.uniform.setValue(start.get());

@@ -21,6 +21,6 @@ function exec()
 
 exe.onTriggered=exec;
 
-x.onValueChanged=exec;
-y.onValueChanged=exec;
-z.onValueChanged=exec;
+x.onChange=exec;
+y.onChange=exec;
+z.onChange=exec;

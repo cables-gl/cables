@@ -8,8 +8,8 @@ var shearY=op.addInPort(new CABLES.Port(op,"shearY"));
 var cgl=op.patch.cgl;
 var shearMatrix = mat4.create();
 
-shearY.onValueChanged=update;
-shearX.onValueChanged=update;
+shearY.onChange=update;
+shearX.onChange=update;
 shearX.set(0.0);
 shearY.set(0.0);
 

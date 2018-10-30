@@ -15,9 +15,9 @@ zNear.set(0.01);
 fovY.set(45);
 zFar.set(500.0);
 
-fovY.onValueChanged=changed;
-zFar.onValueChanged=changed;
-zNear.onValueChanged=changed;
+fovY.onChange=changed;
+zFar.onChange=changed;
+zNear.onChange=changed;
 changed();
 
 var asp=0;

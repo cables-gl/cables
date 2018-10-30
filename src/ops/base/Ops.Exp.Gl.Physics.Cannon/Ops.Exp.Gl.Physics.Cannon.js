@@ -16,8 +16,8 @@ var dirZ=op.inValue("dir Z");
 
 var speed=op.inValue("Speed");
 
-var inReset=op.inFunctionButton("Reset");
-var inSpawn=op.inFunctionButton("Spawn");
+var inReset=op.inTriggerButton("Reset");
+var inSpawn=op.inTriggerButton("Spawn");
 
 
 var next=op.outTrigger("Next");

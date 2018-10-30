@@ -11,7 +11,7 @@ var outType=op.addOutPort(new CABLES.Port(this,"Type",CABLES.OP_PORT_TYPE_VALUE)
 var outTrigger = op.outTrigger("Event Received");
 
 
-eventIn.onValueChanged=function()
+eventIn.onChange=function()
 {
     var event=eventIn.get();
     if(!event)return;

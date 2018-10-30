@@ -1,7 +1,7 @@
 var inVal=op.inValue("Delta Value");
 var defVal=op.inValue("Default Value",0);
 
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 
 var inLimit=op.inValueBool("Limit",false);
 var inMin=op.inValue("Min",0);

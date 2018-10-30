@@ -84,9 +84,9 @@ function initRandom()
     outPoints.set(points);
 }
 
-geometry.onValueChanged=initRandom;
-num.onValueChanged=initRandom;
-seed.onValueChanged=initRandom;
+geometry.onChange=initRandom;
+num.onChange=initRandom;
+seed.onChange=initRandom;
 rotX.onChange==initRandom;
 rotY.onChange==initRandom;
 rotZ.onChange==initRandom;

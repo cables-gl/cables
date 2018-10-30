@@ -100,17 +100,17 @@ this.rotChanged=function()
     rotChanged=true;
 };
 
-this.rotX.onValueChanged=this.rotChanged;
-this.rotY.onValueChanged=this.rotChanged;
-this.rotZ.onValueChanged=this.rotChanged;
+this.rotX.onChange=this.rotChanged;
+this.rotY.onChange=this.rotChanged;
+this.rotZ.onChange=this.rotChanged;
 
-this.scaleX.onValueChanged=this.scaleChanged;
-this.scaleY.onValueChanged=this.scaleChanged;
-this.scaleZ.onValueChanged=this.scaleChanged;
+this.scaleX.onChange=this.scaleChanged;
+this.scaleY.onChange=this.scaleChanged;
+this.scaleZ.onChange=this.scaleChanged;
 
-this.posX.onValueChanged=this.translateChanged;
-this.posY.onValueChanged=this.translateChanged;
-this.posZ.onValueChanged=this.translateChanged;
+this.posX.onChange=this.translateChanged;
+this.posY.onChange=this.translateChanged;
+this.posZ.onChange=this.translateChanged;
 
 this.rotX.set(0.0);
 this.rotY.set(0.0);

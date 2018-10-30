@@ -10,6 +10,6 @@ function exec()
     result.set( bool1.get() && bool0.get() );
 }
 
-bool0.onValueChanged=exec;
-bool1.onValueChanged=exec;
+bool0.onChange=exec;
+bool1.onChange=exec;
 

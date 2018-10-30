@@ -25,7 +25,7 @@ function play()
     }
 }
 
-inPlay.onValueChanged=function()
+inPlay.onChange=function()
 {
     if(inPlay.get())
     {
@@ -44,7 +44,7 @@ this.onDelete=function()
     if(audio) audio.pause();
 };
 
-doLoop.onValueChanged=function()
+doLoop.onChange=function()
 {
     if(audio) audio.loop=doLoop.get();
 };

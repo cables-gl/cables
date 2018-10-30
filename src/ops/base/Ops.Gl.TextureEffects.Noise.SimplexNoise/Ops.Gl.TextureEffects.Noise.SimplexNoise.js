@@ -201,12 +201,12 @@ var uniX=new CGL.Uniform(shader,'f','x',x.get());
 var uniY=new CGL.Uniform(shader,'f','y',y.get());
 var uniTime=new CGL.Uniform(shader,'f','time',time.get());
 
-x.onValueChanged=function() { uniX.setValue(x.get()/100); };
-y.onValueChanged=function(){ uniY.setValue(y.get()/100); };
-time.onValueChanged=function(){ uniTime.setValue(time.get()/100); };
+x.onChange=function() { uniX.setValue(x.get()/100); };
+y.onChange=function(){ uniY.setValue(y.get()/100); };
+time.onChange=function(){ uniTime.setValue(time.get()/100); };
 
-smoothness.onValueChanged=function(){ uniSmoothness.setValue(smoothness.get());};
-scale.onValueChanged=function(){ uniScale.setValue(scale.get()); };
+smoothness.onChange=function(){ uniSmoothness.setValue(smoothness.get());};
+scale.onChange=function(){ uniScale.setValue(scale.get()); };
 
 render.onTriggered=function()
 {

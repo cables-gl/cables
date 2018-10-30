@@ -34,19 +34,19 @@ this.diffuseRepeatY.set(1.0);
 var pOpacity=op.inValueSlider("Opacity",1);
 
 
-this.diffuseRepeatX.onValueChanged=function()
+this.diffuseRepeatX.onChange=function()
 {
     self.diffuseRepeatXUniform.setValue(self.diffuseRepeatX.get());
 };
 
-this.diffuseRepeatY.onValueChanged=function()
+this.diffuseRepeatY.onChange=function()
 {
     self.diffuseRepeatYUniform.setValue(self.diffuseRepeatY.get());
 };
 
 
 this.calcTangents=this.addInPort(new CABLES.Port(this,"calc normal tangents",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.calcTangents.onValueChanged=function()
+this.calcTangents.onChange=function()
 {
     if(self.calcTangents.get()) shader.define('CALC_TANGENT');
         else shader.removeDefine('CALC_TANGENT');
@@ -54,7 +54,7 @@ this.calcTangents.onValueChanged=function()
 
 this.projectCoords=this.addInPort(new CABLES.Port(this,"projectCoords",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','xy','yz','xz']}));
 this.projectCoords.set('no');
-this.projectCoords.onValueChanged=function()
+this.projectCoords.onChange=function()
 {
     shader.removeDefine('DO_PROJECT_COORDS_XY');
     shader.removeDefine('DO_PROJECT_COORDS_YZ');
@@ -70,17 +70,17 @@ this.normalRepeatY=this.addInPort(new CABLES.Port(this,"normalRepeatY",CABLES.OP
 this.normalRepeatX.set(1.0);
 this.normalRepeatY.set(1.0);
 
-this.normalRepeatX.onValueChanged=function()
+this.normalRepeatX.onChange=function()
 {
     self.normalRepeatXUniform.setValue(self.normalRepeatX.get());
 };
 
-this.normalRepeatY.onValueChanged=function()
+this.normalRepeatY.onChange=function()
 {
     self.normalRepeatYUniform.setValue(self.normalRepeatY.get());
 };
 
-this.normalScale.onValueChanged=function()
+this.normalScale.onChange=function()
 {
     self.normalScaleUniform.setValue(self.normalScale.get()*2.0);
 };
@@ -103,7 +103,7 @@ this.textureNormal.onPreviewChanged=function()
         else self.render.onTriggered=self.doRender;
 };
 
-this.texture.onValueChanged=function()
+this.texture.onChange=function()
 {
     if(self.texture.get())
     {
@@ -118,7 +118,7 @@ this.texture.onValueChanged=function()
     }
 };
 
-this.textureDiffuse.onValueChanged=function()
+this.textureDiffuse.onChange=function()
 {
     if(self.textureDiffuse.get())
     {
@@ -137,7 +137,7 @@ this.textureDiffuse.onValueChanged=function()
 
 
 
-this.textureNormal.onValueChanged=function()
+this.textureNormal.onChange=function()
 {
     if(self.textureNormal.get())
     {
@@ -177,8 +177,8 @@ function changeSpec()
 
 }
 
-this.textureSpec.onValueChanged=changeSpec;
-this.textureSpecMatCap.onValueChanged=changeSpec;
+this.textureSpec.onChange=changeSpec;
+this.textureSpecMatCap.onChange=changeSpec;
 
 
 function bindTextures()

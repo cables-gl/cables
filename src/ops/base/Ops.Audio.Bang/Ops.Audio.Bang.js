@@ -1,7 +1,7 @@
 this.name="Ops.Audio.Bang";
 
 var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var beat=op.inFunctionButton("beat");
+var beat=op.inTriggerButton("beat");
 var bang=this.addOutPort(new CABLES.Port(this,"bang"));
 
 var startValue=this.addInPort(new CABLES.Port(this,"startValue"));

@@ -10,8 +10,8 @@ var len=op.addOutPort(new CABLES.Port(op,"length",CABLES.OP_PORT_TYPE_VALUE));
 separator.set(',');
 text.set('1,2,3');
 
-text.onValueChanged=parse;
-separator.onValueChanged=parse;
+text.onChange=parse;
+separator.onChange=parse;
 toNumber.onChange=parse;
 
 parse();

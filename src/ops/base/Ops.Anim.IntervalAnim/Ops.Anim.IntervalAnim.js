@@ -12,7 +12,7 @@ anim.loop=true;
 
 delay.set(0);
 interval.set(1);
-delay.onValueChanged=setAnim;
+delay.onChange=setAnim;
 interval.onChange=setAnim;
 
 var startTime=CABLES.now();

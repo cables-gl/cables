@@ -13,7 +13,7 @@ exe.onTriggered=function()
     }
 };
 
-val.onValueChanged=function()
+val.onChange=function()
 {
     changed=true;
 };

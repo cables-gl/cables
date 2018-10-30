@@ -1,5 +1,5 @@
 
-var trigger=op.inFunctionButton("Trigger");
+var trigger=op.inTriggerButton("Trigger");
 var duration=op.inValue("Duration",1);
 var valueTrue=op.inValue("Value True",1);
 var valueFalse=op.inValue("Value False",0);

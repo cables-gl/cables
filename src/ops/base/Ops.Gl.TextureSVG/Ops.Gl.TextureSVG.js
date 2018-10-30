@@ -9,8 +9,8 @@ var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{
 var textureOut=op.outTexture("texture");
 
 
-tfilter.onValueChanged=onFilterChange;
-wrap.onValueChanged=onWrapChange;
+tfilter.onChange=onFilterChange;
+wrap.onChange=onWrapChange;
 
 
 texWidth.set(1024);
@@ -149,8 +149,8 @@ op.onFileChanged=function(fn)
 
 filename.onValueChange(reload);
 
-texWidth.onValueChanged=reSize;
-texHeight.onValueChanged=reSize;
+texWidth.onChange=reSize;
+texHeight.onChange=reSize;
 
 createCanvas();
 reSize();

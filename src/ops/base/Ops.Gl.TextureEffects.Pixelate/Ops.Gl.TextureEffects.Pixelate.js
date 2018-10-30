@@ -14,12 +14,12 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var amountXUniform=new CGL.Uniform(shader,'f','amountX',0.0);
 var amountYUniform=new CGL.Uniform(shader,'f','amountY',0.0);
 
-amountX.onValueChanged=function()
+amountX.onChange=function()
 {
     amountXUniform.setValue(amountX.get());
 };
 
-amountY.onValueChanged=function()
+amountY.onChange=function()
 {
     amountYUniform.setValue(amountY.get());
 };

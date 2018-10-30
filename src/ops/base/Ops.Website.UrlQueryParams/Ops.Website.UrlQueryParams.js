@@ -28,5 +28,5 @@ function update()
     }
 }
 
-paramName.onValueChanged=update;
+paramName.onChange=update;
 update();

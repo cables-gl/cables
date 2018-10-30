@@ -10,8 +10,8 @@ function exec()
     if(v==v) result.set( v );
 }
 
-max.onValueChanged=exec;
-value.onValueChanged=exec;
+max.onChange=exec;
+value.onChange=exec;
 
 value.set(1);
 max.set(1);

@@ -1,4 +1,4 @@
-var inExec=op.inFunctionButton("Calculate");
+var inExec=op.inTriggerButton("Calculate");
 var inArr=op.inArray("Array3x");
 var inDist=op.inValue("Distance");
 var inNormalized=op.inValueBool("Normalized");

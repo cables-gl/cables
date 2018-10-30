@@ -35,14 +35,14 @@ function updateInvert()
             else shader.removeDefine(id+'HEIGHTMAP_INVERT');
 }
 
-colorize.onValueChanged=updateColorize;
-invert.onValueChanged=updateInvert;
+colorize.onChange=updateColorize;
+invert.onChange=updateInvert;
 
 var meth=op.addInPort(new CABLES.Port(this,"mode",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',
     values:['normal','mul xyz','add z','add y','mul y','sub z']}));
 
 
-removeZero.onValueChanged=updateRemoveZero;
+removeZero.onChange=updateRemoveZero;
 
 function updateRemoveZero()
 {
@@ -73,8 +73,8 @@ var updateMethod=function()
     }
 };
 
-flip.onValueChanged=updateMethod;
-meth.onValueChanged=updateMethod;
+flip.onChange=updateMethod;
+meth.onChange=updateMethod;
 meth.set('normal');
 
 var shader=null;

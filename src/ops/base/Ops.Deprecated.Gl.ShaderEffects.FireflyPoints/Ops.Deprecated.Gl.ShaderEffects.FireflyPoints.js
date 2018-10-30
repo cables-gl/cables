@@ -25,15 +25,15 @@ add.set(0);
 
 op.toAxisX=op.addInPort(new CABLES.Port(op,"axisX",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.toAxisX.val=true;
-op.toAxisX.onValueChanged=setDefines;
+op.toAxisX.onChange=setDefines;
 
 op.toAxisY=op.addInPort(new CABLES.Port(op,"axisY",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.toAxisY.val=true;
-op.toAxisY.onValueChanged=setDefines;
+op.toAxisY.onChange=setDefines;
 
 op.toAxisZ=op.addInPort(new CABLES.Port(op,"axisZ",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.toAxisZ.val=true;
-op.toAxisZ.onValueChanged=setDefines;
+op.toAxisZ.onChange=setDefines;
 
 var cgl=op.patch.cgl;
 
@@ -49,7 +49,7 @@ var src=op.addInPort(new CABLES.Port(op,"Source",CABLES.OP_PORT_TYPE_VALUE ,{dis
     "X + Time",
     "Y + Time",
     "Z + Time"]} ));
-src.onValueChanged=setDefines;
+src.onChange=setDefines;
 
 
 function setDefines()

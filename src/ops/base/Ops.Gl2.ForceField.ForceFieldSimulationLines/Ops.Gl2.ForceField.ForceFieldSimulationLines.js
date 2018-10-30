@@ -5,8 +5,8 @@ var next=op.outTrigger("next");
 
 var numParticles=op.inValueInt("Num Particles",100);
 
-var inReset=op.inFunctionButton("Reset");
-var inRespawn=op.inFunctionButton("Respawn all");
+var inReset=op.inTriggerButton("Reset");
+var inRespawn=op.inTriggerButton("Respawn all");
 var inSpeed=op.inValue("Speed",1);
 var inDamping=op.inValue("Damping");
 

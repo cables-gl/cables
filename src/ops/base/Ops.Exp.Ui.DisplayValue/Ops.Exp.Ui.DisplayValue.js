@@ -8,4 +8,4 @@ var exec=function()
     result.set(v.get());
 };
 
-v.onValueChanged=exec;
+v.onChange=exec;

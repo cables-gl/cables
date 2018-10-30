@@ -1,5 +1,5 @@
 // inputs
-var exePort = op.inFunctionButton('Execute');
+var exePort = op.inTriggerButton('Execute');
 var inArrayPort = op.inArray('Array');
 var value1Port = op.inValue('Value 1');
 var value2Port = op.inValue('Value 2');

@@ -1,6 +1,6 @@
 var inLength=op.inValueInt("Length",100);
 var inDefaultValue=op.inValueInt("DefaultValue");
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 var outArr=op.outArray("Array");
 
 var arr=[];

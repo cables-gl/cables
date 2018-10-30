@@ -1,7 +1,7 @@
 op.name="ForceClusterFromArray";
 
 var exec=op.inTrigger("Exec");
-var doreset=op.inFunctionButton("reset");
+var doreset=op.inTriggerButton("reset");
 
 // var num=op.inValue("num",20);
 var inPoints=op.inArray("Positions");

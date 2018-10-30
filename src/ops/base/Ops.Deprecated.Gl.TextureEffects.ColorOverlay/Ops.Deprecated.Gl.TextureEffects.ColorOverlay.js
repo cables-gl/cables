@@ -66,22 +66,22 @@ var uniformG=new CGL.Uniform(shader,'f','g',1.0);
 var uniformB=new CGL.Uniform(shader,'f','b',1.0);
 var uniformA=new CGL.Uniform(shader,'f','a',1.0);
 
-this.r.onValueChanged=function()
+this.r.onChange=function()
 {
     uniformR.setValue(self.r.val);
 };
 
-this.g.onValueChanged=function()
+this.g.onChange=function()
 {
     uniformG.setValue(self.g.val);
 };
 
-this.b.onValueChanged=function()
+this.b.onChange=function()
 {
     uniformB.setValue(self.b.val);
 };
 
-this.a.onValueChanged=function()
+this.a.onChange=function()
 {
     uniformA.setValue(self.a.val);
 };

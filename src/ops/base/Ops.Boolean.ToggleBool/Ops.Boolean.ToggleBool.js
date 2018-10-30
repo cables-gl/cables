@@ -1,7 +1,7 @@
 op.name='ToggleBool';
 
-var trigger=op.inFunctionButton("trigger");
-var reset=op.inFunctionButton("reset");
+var trigger=op.inTriggerButton("trigger");
+var reset=op.inTriggerButton("reset");
 var outBool=op.addOutPort(new CABLES.Port(op,"result",CABLES.OP_PORT_TYPE_VALUE));
 var theBool=false;
 outBool.set(theBool);

@@ -1,5 +1,5 @@
 
-var download=op.inFunctionButton("download");
+var download=op.inTriggerButton("download");
 var filename=op.inValueString("Filename","jsonexport");
 var inObject=op.inObject("Object");
 

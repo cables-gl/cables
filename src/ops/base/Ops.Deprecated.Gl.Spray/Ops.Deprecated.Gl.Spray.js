@@ -115,9 +115,9 @@ function reset()
     }
 }
 
-this.num.onValueChanged=reset;
-this.size.onValueChanged=reset;
-this.lifetime.onValueChanged=reset;
+this.num.onChange=reset;
+this.size.onChange=reset;
+this.lifetime.onChange=reset;
 
 this.num.val=100;
 reset();

@@ -11,7 +11,7 @@ shader.setSource(shader.getDefaultVertexShader(),attachments.hue_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniformHue=new CGL.Uniform(shader,'f','hue',1.0);
 
-hue.onValueChanged=function(){ uniformHue.setValue(hue.get()); };
+hue.onChange=function(){ uniformHue.setValue(hue.get()); };
 
 render.onTriggered=function()
 {

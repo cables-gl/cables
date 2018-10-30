@@ -1,6 +1,6 @@
 
 var render=op.inTrigger("render");
-var resetButton=op.inFunctionButton("Reset");
+var resetButton=op.inTriggerButton("Reset");
 var inSizeX=op.inValue("Size Area X",3);
 var inSizeY=op.inValue("Size Area Y",3);
 var inSizeZ=op.inValue("Size Area Z",3);

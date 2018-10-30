@@ -96,17 +96,17 @@ function updateResolution()
 }
 
 
-useVPSize.onValueChanged=function()
+useVPSize.onChange=function()
 {
     if(useVPSize.get())
     {
-        width.onValueChanged=null;
-        height.onValueChanged=null;
+        width.onChange=null;
+        height.onChange=null;
     }
     else
     {
-        width.onValueChanged=updateResolution;
-        height.onValueChanged=updateResolution;
+        width.onChange=updateResolution;
+        height.onChange=updateResolution;
     }
     updateResolution();
 };
@@ -172,7 +172,7 @@ function onFilterChange()
 }
 
 tfilter.set('linear');
-tfilter.onValueChanged=onFilterChange;
+tfilter.onChange=onFilterChange;
 
 useVPSize.set(true);
 render.onTriggered=doRender;

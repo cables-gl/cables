@@ -19,7 +19,7 @@ var flip=op.inValueBool("Flip Direction");
 
 var active=op.inValueBool("active",true);
 
-var reset=op.inFunctionButton("Reset");
+var reset=op.inTriggerButton("Reset");
 
 var absVal=op.outValue("absolute value",0);
 var delta=op.outValue("delta",0);

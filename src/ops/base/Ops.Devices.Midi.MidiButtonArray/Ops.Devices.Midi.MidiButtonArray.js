@@ -20,7 +20,7 @@ var numButtons=op.addOutPort(new CABLES.Port(op,"Num Buttons"));
 
 var values=op.addOutPort(new CABLES.Port(op, "Buttons",CABLES.OP_PORT_TYPE_ARRAY));
 
-var inClear=op.inFunctionButton("Clear");
+var inClear=op.inTriggerButton("Clear");
 
 var inEnabled=op.inValueBool("enabled",true);
 
@@ -29,8 +29,8 @@ values.ignoreValueSerialize=true;
 note.set(60);
 noteEnd.set(68);
 lastIndex.set(false);
-note.onValueChanged=initArray;
-noteEnd.onValueChanged=initArray;
+note.onChange=initArray;
+noteEnd.onChange=initArray;
 
 learn.onTriggered=function(){learning=true;};
 learnEnd.onTriggered=function(){learningEnd=true;};
@@ -83,7 +83,7 @@ function initArray()
     values.set(buttons);
 }
 
-eventIn.onValueChanged=function()
+eventIn.onChange=function()
 {
     if(!inEnabled.get())return;
     var event=eventIn.get();

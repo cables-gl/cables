@@ -13,7 +13,7 @@ var movementX=op.addInPort(new CABLES.Port(this,"movement x"));
 var movementY=op.addInPort(new CABLES.Port(this,"movement y"));
 var movementZ=op.addInPort(new CABLES.Port(this,"movement z"));
 
-const inReset=op.inFunctionButton("Reset");
+const inReset=op.inTriggerButton("Reset");
 
 movementX.set(1);
 movementY.set(1);
@@ -37,12 +37,12 @@ var particles=[];
 var transVec=vec3.create();
 
 
-num.onValueChanged=reset;
-sizeX.onValueChanged=reset;
-sizeY.onValueChanged=reset;
-sizeZ.onValueChanged=reset;
-lifetime.onValueChanged=reset;
-lifetimeMin.onValueChanged=reset;
+num.onChange=reset;
+sizeX.onChange=reset;
+sizeY.onChange=reset;
+sizeZ.onChange=reset;
+lifetime.onChange=reset;
+lifetimeMin.onChange=reset;
 
 lifetime.set(10);
 lifetimeMin.set(7);

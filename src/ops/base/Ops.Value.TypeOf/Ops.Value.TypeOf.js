@@ -8,5 +8,5 @@ function update()
 }
 
 
-input.onValueChanged=update;
+input.onChange=update;
 

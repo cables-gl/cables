@@ -93,7 +93,7 @@ var reload=function()
 
 };
 
-filename.onValueChanged=reload;
+filename.onChange=reload;
 var tempVec=vec3.create();
 var index=0;
 

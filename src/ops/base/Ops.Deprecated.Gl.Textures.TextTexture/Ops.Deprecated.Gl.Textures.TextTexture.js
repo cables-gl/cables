@@ -159,18 +159,18 @@ function refresh()
     textureOut.get().unpackAlpha=false;
 }
 
-align.onValueChanged=refresh;
-valign.onValueChanged=refresh;
-text.onValueChanged=refresh;
-inFontSize.onValueChanged=refresh;
-font.onValueChanged=refresh;
-lineDistance.onValueChanged=refresh;
-maximize.onValueChanged=refresh;
+align.onChange=refresh;
+valign.onChange=refresh;
+text.onChange=refresh;
+inFontSize.onChange=refresh;
+font.onChange=refresh;
+lineDistance.onChange=refresh;
+maximize.onChange=refresh;
 
-texWidth.onValueChanged=reSize;
-texHeight.onValueChanged=reSize;
+texWidth.onChange=reSize;
+texHeight.onChange=reSize;
 
-border.onValueChanged=refresh;
+border.onChange=refresh;
 
 text.set('cables');
 reSize();

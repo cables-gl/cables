@@ -1,5 +1,5 @@
 
-var play=op.inFunctionButton("Play");
+var play=op.inTriggerButton("Play");
 
 play.onTriggered=function()
 {

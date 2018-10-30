@@ -633,4 +633,4 @@ var reload=function()
 
 };
 
-this.filename.onValueChanged=reload;
+this.filename.onChange=reload;

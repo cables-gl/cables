@@ -10,7 +10,7 @@ mul.set(1.0);
 amplitude.set(1.0);
 phase.set(1);
 
-value.onValueChanged=function()
+value.onChange=function()
 {
     result.set(
         amplitude.get() * 

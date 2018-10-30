@@ -16,7 +16,7 @@ const cgl=op.patch.cgl;
 var mesh=null;
 var currentIndex=0;
 
-op.index.onValueChanged=reload;
+op.index.onChange=reload;
 render.onTriggered=doRender;
 
 function doRender()
@@ -94,7 +94,7 @@ function reload()
     }
 }
 
-centerPivot.onValueChanged=function()
+centerPivot.onChange=function()
 {
     mesh=null;
 };

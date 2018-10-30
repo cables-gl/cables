@@ -10,7 +10,7 @@ var valign=op.addInPort(new CABLES.Port(op,"vertical align",CABLES.OP_PORT_TYPE_
 var font=op.addInPort(new CABLES.Port(op,"font",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 var lineDistance=op.addInPort(new CABLES.Port(op,"line distance"));
 var border=op.addInPort(new CABLES.Port(op,"border"));
-var doRefresh=op.inFunctionButton("Refresh");
+var doRefresh=op.inTriggerButton("Refresh");
 
 // var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");
@@ -128,18 +128,18 @@ function refresh()
     textureOut.get().unpackAlpha=true;
 }
 
-align.onValueChanged=refresh;
-valign.onValueChanged=refresh;
-text.onValueChanged=refresh;
-inFontSize.onValueChanged=refresh;
-font.onValueChanged=refresh;
-lineDistance.onValueChanged=refresh;
-maximize.onValueChanged=refresh;
+align.onChange=refresh;
+valign.onChange=refresh;
+text.onChange=refresh;
+inFontSize.onChange=refresh;
+font.onChange=refresh;
+lineDistance.onChange=refresh;
+maximize.onChange=refresh;
 
-texWidth.onValueChanged=reSize;
-texHeight.onValueChanged=reSize;
+texWidth.onChange=reSize;
+texHeight.onChange=reSize;
 
-border.onValueChanged=refresh;
+border.onChange=refresh;
 
 text.set('cables');
 reSize();

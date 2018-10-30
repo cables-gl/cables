@@ -50,7 +50,7 @@ var shader=new CGL.Shader(cgl);
 //op.onLoaded=shader.compile;
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
-texture0.onValueChanged=texture1.onValueChanged=function()
+texture0.onChange=texture1.onChange=function()
 {
 
     if(texture0.get() && texture1.get())

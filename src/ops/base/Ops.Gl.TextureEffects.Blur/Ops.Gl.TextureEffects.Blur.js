@@ -48,7 +48,7 @@ direction.onValueChange(function()
 
 var mask=op.addInPort(new CABLES.Port(op,"mask",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
 
-mask.onValueChanged=function()
+mask.onChange=function()
 {
     if(mask.get() && mask.get().tex) shader.define('HAS_MASK');
         else shader.removeDefine('HAS_MASK');

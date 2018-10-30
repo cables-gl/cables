@@ -39,7 +39,7 @@ var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',1.0);
 
-this.amount.onValueChanged=function()
+this.amount.onChange=function()
 {
     amountUniform.setValue(self.amount.val);
 };

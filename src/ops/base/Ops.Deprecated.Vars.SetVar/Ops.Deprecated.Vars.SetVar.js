@@ -8,5 +8,5 @@ function exec()
     op.patch.vars[varname.get()]=v.get();
 }
 
-varname.onValueChanged=exec;
-v.onValueChanged=exec;
+varname.onChange=exec;
+v.onChange=exec;

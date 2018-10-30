@@ -62,7 +62,7 @@ gType.onChange=function()
     
 };
 
-blendMode.onValueChanged=function()
+blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };

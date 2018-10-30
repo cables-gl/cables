@@ -85,7 +85,7 @@ var flipY=op.inValueBool("Flip Y",true);
 var kinetic=op.inValueBool("Inertia Movement",true);
 var limit=op.inValueBool("Limit");
 
-var doReset=op.inFunctionButton("Reset");
+var doReset=op.inTriggerButton("Reset");
 
 var mul=op.inValue("mul",0.1);
 

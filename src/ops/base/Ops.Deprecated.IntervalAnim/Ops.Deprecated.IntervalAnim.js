@@ -16,8 +16,8 @@ anim.onLooped=function()
 };
 
 delay.set(0);
-delay.onValueChanged=setAnim;
-interval.onValueChanged=setAnim;
+delay.onChange=setAnim;
+interval.onChange=setAnim;
 interval.set(1);
 
 var startTime=CABLES.now();

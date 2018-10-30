@@ -75,7 +75,7 @@ this.onLoaded=function()
 var lastUiValue=-1;
 
 this.exe.onTriggered=doTrigger;
-// this.current.onValueChanged=doTrigger;
+// this.current.onChange=doTrigger;
 
 
 function doTrigger(_time)

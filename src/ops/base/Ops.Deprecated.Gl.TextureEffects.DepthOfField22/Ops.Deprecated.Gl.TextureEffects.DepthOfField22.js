@@ -126,13 +126,13 @@ var uniDistFar=new CGL.Uniform(shader,'f','distFar',distFar.get());
 var uniStepWidth=new CGL.Uniform(shader,'f','stepWidth',stepWidth.get());
 
 
-this.farPlane.onValueChanged=function()
+this.farPlane.onChange=function()
 {
     uniFarplane.setValue(self.farPlane.val);
 };
 self.farPlane.val=5.0;
 
-this.nearPlane.onValueChanged=function()
+this.nearPlane.onChange=function()
 {
     uniNearplane.setValue(self.nearPlane.val);
 };

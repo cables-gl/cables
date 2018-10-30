@@ -42,7 +42,7 @@ function setValue(x,y)
     self.mouseY.set( y );
 }
 
-this.smooth.onValueChanged=function()
+this.smooth.onChange=function()
 {
     if(self.smooth.get()) smoothTimer = setInterval(updateSmooth, 15);
         else clearTimeout(smoothTimer);

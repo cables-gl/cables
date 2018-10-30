@@ -63,7 +63,7 @@ const ratioUniform=new CGL.Uniform(shader,'f','ratio',0.57);
 
 var oldRatio=-1;
 
-blendMode.onValueChanged=function()
+blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };

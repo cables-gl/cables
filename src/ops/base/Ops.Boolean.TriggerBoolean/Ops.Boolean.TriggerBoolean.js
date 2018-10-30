@@ -1,6 +1,6 @@
 
-var inTriggerTrue=op.inFunctionButton("True");
-var inTriggerFalse=op.inFunctionButton("false");
+var inTriggerTrue=op.inTriggerButton("True");
+var inTriggerFalse=op.inTriggerButton("false");
 
 var outResult=op.outValueBool("Result");
 

@@ -22,7 +22,7 @@ smoothed.onChange=function()
     else shader.removeDefine("STRIPES_SMOOTHED");
 };
 
-axis.onValueChanged=function()
+axis.onChange=function()
 {
     if(axis.get()=='X')uniAxis.setValue(0);
     if(axis.get()=='Y')uniAxis.setValue(1);

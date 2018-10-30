@@ -1,7 +1,7 @@
 var exec=op.inTrigger("Exec");
-var showFrag=op.inFunctionButton("Show Fragment");
-var showVert=op.inFunctionButton("Show Vertex");
-var showModules=op.inFunctionButton("Show Modules");
+var showFrag=op.inTriggerButton("Show Fragment");
+var showVert=op.inTriggerButton("Show Vertex");
+var showModules=op.inTriggerButton("Show Modules");
 
 
 var next=op.outTrigger("Next");

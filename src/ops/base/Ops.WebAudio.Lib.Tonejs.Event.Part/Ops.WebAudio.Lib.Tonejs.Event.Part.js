@@ -50,12 +50,12 @@ var humanizePort = op.inValueBool("Humanize", false);
 var humanizeTimePort = op.inValueString("Humanize Time", HUMANIZE_TIME_DEFAULT);
 var probabilityPort = op.inValueSlider("Probability", PROBABILITY_DEFAULT);
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
-var startTriggerPort = op.inFunctionButton("Start");
+var startTriggerPort = op.inTriggerButton("Start");
 var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
-var stopTriggerPort = op.inFunctionButton("Stop");
+var stopTriggerPort = op.inTriggerButton("Stop");
 var cancelTimePort = op.inValueString("Cancel Time", CANCEL_TIME_DEFAULT);
-var cancelTriggerPort = op.inFunctionButton("Cancel");
+var cancelTriggerPort = op.inTriggerButton("Cancel");
 var mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
 
 // functions

@@ -116,7 +116,7 @@ var uniformSpan=new CGL.Uniform(shader,'f','FXAA_SPAN_MAX',0);
 var uniformMul=new CGL.Uniform(shader,'f','FXAA_REDUCE_MUL',0);
 var uniformMin=new CGL.Uniform(shader,'f','FXAA_REDUCE_MIN',0);
 
-fxaa_span.onValueChanged=function()
+fxaa_span.onChange=function()
 {
     uniformSpan.setValue(parseInt(fxaa_span.get(),10));
 };
@@ -142,21 +142,21 @@ function changeRes()
     }
 }
 
-texWidth.onValueChanged=changeRes;
-texHeight.onValueChanged=changeRes;
-useVPSize.onValueChanged=changeRes;
+texWidth.onChange=changeRes;
+texHeight.onChange=changeRes;
+useVPSize.onChange=changeRes;
 op.onResize=changeRes;
 
 fxaa_span.set(8);
 // texWidth.set(1920);
 // texHeight.set(1080);
 
-fxaa_reduceMul.onValueChanged=function()
+fxaa_reduceMul.onChange=function()
 {
     uniformMul.setValue(1.0/fxaa_reduceMul.get());
 };
 
-fxaa_reduceMin.onValueChanged=function()
+fxaa_reduceMin.onChange=function()
 {
     uniformMin.setValue(1.0/fxaa_reduceMin.get());
 };

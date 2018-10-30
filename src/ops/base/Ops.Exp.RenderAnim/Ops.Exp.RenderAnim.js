@@ -1,5 +1,5 @@
 
-var inExec=op.inFunctionButton("Render");
+var inExec=op.inTriggerButton("Render");
 var inFilename=op.inValueString("Filename","cables");
 var inStart=op.inValue("Start Time",0);
 var inEnd=op.inValue("End Time",1);

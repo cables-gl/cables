@@ -32,10 +32,10 @@ function setAnim()
         else anim.setValue(now+duration.get(),valueTrue.get());
 }
 
-bool.onValueChanged=setAnim;
-valueFalse.onValueChanged=setAnim;
-valueTrue.onValueChanged=setAnim;
-duration.onValueChanged=setAnim;
+bool.onChange=setAnim;
+valueFalse.onChange=setAnim;
+valueTrue.onChange=setAnim;
+duration.onChange=setAnim;
 
 
 exe.onTriggered=function()

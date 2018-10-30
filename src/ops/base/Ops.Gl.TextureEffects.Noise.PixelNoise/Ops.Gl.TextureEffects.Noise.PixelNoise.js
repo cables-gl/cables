@@ -55,7 +55,7 @@ addX.uniform==new CGL.Uniform(shader,'f','addX',addX);
 addY.uniform==new CGL.Uniform(shader,'f','addY',addY);
 addZ.uniform==new CGL.Uniform(shader,'f','addZ',addZ);
 
-blendMode.onValueChanged=function()
+blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };

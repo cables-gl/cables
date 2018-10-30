@@ -114,25 +114,25 @@ var uniDist=new CGL.Uniform(shader,'f','dist',1.0);
 
 
 
-this.dist.onValueChanged=function()
+this.dist.onChange=function()
 {
     uniDist.setValue(self.dist.val*5);
 };
 self.dist.val=0.2;
 
-this.amount.onValueChanged=function()
+this.amount.onChange=function()
 {
     uniAmount.setValue(self.amount.val);
 };
 self.amount.val=1.0;
 
-this.farPlane.onValueChanged=function()
+this.farPlane.onChange=function()
 {
     uniFarplane.setValue(self.farPlane.val);
 };
 self.farPlane.val=5.0;
 
-this.nearPlane.onValueChanged=function()
+this.nearPlane.onChange=function()
 {
     uniNearplane.setValue(self.nearPlane.val);
 };

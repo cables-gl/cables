@@ -83,8 +83,8 @@
 
     };
 
-    this.filename.onValueChanged=reloadObj;
-    this.calcNormals.onValueChanged=function()
+    this.filename.onChange=reloadObj;
+    this.calcNormals.onChange=function()
     {
         reloadObj();
     };

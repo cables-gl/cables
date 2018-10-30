@@ -96,19 +96,19 @@
     var uniFarplane=new CGL.Uniform(shader,'f','f',self.farPlane.get());
     var uniNearplane=new CGL.Uniform(shader,'f','n',self.nearPlane.get());
 
-    this.showIntensity.onValueChanged=function()
+    this.showIntensity.onChange=function()
     {
         if(self.showIntensity.get()) shader.define('SHOW_INTENSITY');
         else shader.removeDefine('SHOW_INTENSITY');
     };
 
-    this.farPlane.onValueChanged=function()
+    this.farPlane.onChange=function()
     {
         uniFarplane.setValue(self.farPlane.val);
     };
     self.farPlane.val=5.0;
 
-    this.nearPlane.onValueChanged=function()
+    this.nearPlane.onChange=function()
     {
         uniNearplane.setValue(self.nearPlane.val);
     };

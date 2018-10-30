@@ -14,7 +14,7 @@ streamUrl.ignoreValueSerialize=true;
 artworkUrl.ignoreValueSerialize=true;
 streamUrl.ignoreValueSerialize=true;
 title.ignoreValueSerialize=true;
-soundCloudUrl.onValueChanged=resolve;
+soundCloudUrl.onChange=resolve;
 
 function resolve()
 {

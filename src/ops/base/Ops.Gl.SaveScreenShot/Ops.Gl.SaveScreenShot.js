@@ -1,5 +1,5 @@
 
-var exe=op.inFunctionButton("Screenshot");
+var exe=op.inTriggerButton("Screenshot");
 var filename=op.inValueString("Filename","cables");
 
 var useSize=op.inValueBool("Use Canvas Size",true);

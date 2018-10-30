@@ -1,8 +1,8 @@
-var increment = op.inFunctionButton("Increment");
-var decrement = op.inFunctionButton("Decrement");
+var increment = op.inTriggerButton("Increment");
+var decrement = op.inTriggerButton("Decrement");
 var inLength=op.addInPort(new CABLES.Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
 // var reset=op.addInPort(new CABLES.Port(op,"Reset",CABLES.OP_PORT_TYPE_FUNCTION));
-var reset=op.inFunctionButton("Reset");
+var reset=op.inTriggerButton("Reset");
 
 
 var inMode=op.inValueSelect("Mode",["Rewind","Stop at Max"]);

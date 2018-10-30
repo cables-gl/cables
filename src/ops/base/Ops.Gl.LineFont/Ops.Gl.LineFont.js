@@ -397,7 +397,7 @@ function translateX(w)
 }
 
 var alignMode=0;
-align.onValueChanged=function()
+align.onChange=function()
 {
     if(align.get()=="left")alignMode=0;
     if(align.get()=="center")alignMode=1;

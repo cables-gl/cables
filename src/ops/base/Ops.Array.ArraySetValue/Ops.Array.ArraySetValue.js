@@ -1,4 +1,4 @@
-var exe=op.inFunctionButton("exe");
+var exe=op.inTriggerButton("exe");
 
 var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
 var index=op.addInPort(new CABLES.Port(op, "index",CABLES.OP_PORT_TYPE_VALUE,{type:'int'}));

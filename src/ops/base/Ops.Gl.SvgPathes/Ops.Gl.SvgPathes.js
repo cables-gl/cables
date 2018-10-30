@@ -27,8 +27,8 @@ render.onTriggered=function()
 
 };
 
-svgFile.onValueChanged=parse;
-thickness.onValueChanged=parse;
+svgFile.onChange=parse;
+thickness.onChange=parse;
 var doCenter=parse;
 
 function parse()

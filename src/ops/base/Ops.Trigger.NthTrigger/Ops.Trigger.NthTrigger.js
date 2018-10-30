@@ -1,4 +1,4 @@
-var exe=op.inFunctionButton("Exe");
+var exe=op.inTriggerButton("Exe");
 var nth=op.inValue("Nth");
 var next=op.outTrigger("next");
 

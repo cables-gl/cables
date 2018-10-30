@@ -49,7 +49,7 @@ var doRender=function()
     cgl.setPreviousShader();
 };
 
-opacity.onValueChanged=function()
+opacity.onChange=function()
 {
     shader.uniOpacity.setValue(opacity.get());
 };

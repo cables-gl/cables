@@ -6,4 +6,4 @@ var exec=function()
     result.set(parseFloat(v.get()));
 };
 
-v.onValueChanged=exec;
+v.onChange=exec;
