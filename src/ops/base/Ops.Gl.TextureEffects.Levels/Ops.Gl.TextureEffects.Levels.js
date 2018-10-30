@@ -1,4 +1,4 @@
-var render=op.inTrigger('render');
+var render=op.inTrigger('Render');
 
 var inMin=op.inValueSlider("In Min",0);
 var inMid=op.inValueSlider("Midpoint",0.5);

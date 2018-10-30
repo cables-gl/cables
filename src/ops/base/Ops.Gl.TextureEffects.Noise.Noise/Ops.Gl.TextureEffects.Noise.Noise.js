@@ -1,4 +1,4 @@
-var render=op.inTrigger('render');
+var render=op.inTrigger('Render');
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);

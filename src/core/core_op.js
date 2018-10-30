@@ -509,6 +509,7 @@ CABLES.Op = function()
      */
     CABLES.Op.prototype.getPortByName=function(name)
     {
+        name=name.toLowerCase();
         // for(var ipi in this.portsIn)
         for(var ipi=0;ipi<this.portsIn.length;ipi++)
             if(this.portsIn[ipi].getName()==name)return this.portsIn[ipi];
