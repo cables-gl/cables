@@ -22,11 +22,11 @@ var prevViewPort=[0,0,0,0];
 var reInitEffect=true;
 
 var bgFrag=''
-    .endl()+'precision highp float;'
+
 
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   gl_FragColor = vec4(0.0,0.0,0.0,0.0);'
+    .endl()+'   outColor= vec4(0.0,0.0,0.0,0.0);'
     .endl()+'}';
 
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');

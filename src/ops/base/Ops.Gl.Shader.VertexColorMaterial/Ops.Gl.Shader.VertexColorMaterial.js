@@ -25,7 +25,7 @@ var srcVert=''
     .endl()+'}';
 
     var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'{{MODULES_HEAD}}'
 
     .endl()+'IN vec4 color;'
@@ -38,7 +38,7 @@ var srcVert=''
     .endl()+'{{MODULE_COLOR}}'
 
     .endl()+'   col.a=opacity;'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 var doRender=function()

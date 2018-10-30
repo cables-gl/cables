@@ -22,7 +22,7 @@ var uniHeight=new CGL.Uniform(shader,'f','texHeight',128);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

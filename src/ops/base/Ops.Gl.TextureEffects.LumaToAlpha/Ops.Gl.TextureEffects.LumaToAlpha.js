@@ -9,7 +9,7 @@ var shader=new CGL.Shader(cgl);
 
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform float amount;'
@@ -27,7 +27,7 @@ var srcFrag=''
     .endl()+'   col.a=luma(col.rgb);'
     .endl()+'   col.rgb=vec3(1.0,1.0,1.0);'
 
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
@@ -41,7 +41,7 @@ amount.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

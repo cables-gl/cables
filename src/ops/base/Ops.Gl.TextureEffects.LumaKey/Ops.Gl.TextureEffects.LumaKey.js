@@ -15,7 +15,7 @@ var shader=new CGL.Shader(cgl);
 
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform float threshhold;'
@@ -42,7 +42,7 @@ var srcFrag=''
     .endl()+'   #endif'
     .endl()+'   #endif'
 
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 
@@ -66,7 +66,7 @@ inInvert.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
 
 // unThreshold.setValue( threshold.get() );

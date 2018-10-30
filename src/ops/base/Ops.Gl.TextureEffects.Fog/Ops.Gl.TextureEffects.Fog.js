@@ -78,7 +78,7 @@ start.set(0);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(image.get() && image.get().tex)
     {

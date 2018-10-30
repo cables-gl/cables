@@ -12,5 +12,5 @@ void main()
    vec2 coord = vec2(x*floor(texCoord.x/x), y*floor(texCoord.y/y));
    col=texture2D(tex,coord);
 
-   gl_FragColor = col;
+   outColor= col;
 }

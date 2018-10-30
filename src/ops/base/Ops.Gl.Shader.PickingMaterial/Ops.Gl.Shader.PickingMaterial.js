@@ -85,12 +85,12 @@ var srcVert=''
     .endl()+"}";
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'UNI float r;'
     .endl()+''
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   gl_FragColor = vec4(r,1.0,0.0,1.0);'
+    .endl()+'   outColor= vec4(r,1.0,0.0,1.0);'
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl,"PickingMaterial");

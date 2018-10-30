@@ -181,6 +181,6 @@ void main(void)
 // 	}
 	
 	
-	gl_FragColor = vec4(final,1.0); 
+	outColor= vec4(final,1.0); 
 	
 }

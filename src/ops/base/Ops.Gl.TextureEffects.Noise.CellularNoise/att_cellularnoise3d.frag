@@ -128,5 +128,5 @@ void main()
 
    float v=Cellular3D(vec3(p.x,p.y,z));
    vec4 col=vec4(v,v,v,1.0);
-   gl_FragColor = col;
+   outColor= col;
 }

@@ -12,7 +12,7 @@ var uniStrength=new CGL.Uniform(shader,'f','strength',strength);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

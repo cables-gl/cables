@@ -29,7 +29,7 @@ var srcFrag=''
     .endl()+'   vec2 shifted = radius*vec2(cos(angle), sin(angle));'
     .endl()+'   vec4 col = texture2D(tex, (shifted+0.5));'
 
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
@@ -42,7 +42,7 @@ var unitimes=new CGL.Uniform(shader,'f','times',times);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 

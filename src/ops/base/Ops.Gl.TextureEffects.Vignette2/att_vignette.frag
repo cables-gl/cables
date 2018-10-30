@@ -17,5 +17,5 @@ void main()
 
    col=mix(col,vcol,am*amount);
 
-   gl_FragColor = col;
+   outColor= col;
 }

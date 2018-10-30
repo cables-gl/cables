@@ -16,7 +16,7 @@ render.onTriggered=function()
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(!cgl.currentTextureEffect.getCurrentSourceTexture()) return;
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
     
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

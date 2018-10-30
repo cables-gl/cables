@@ -45,7 +45,7 @@ function setId()
                 if(data.Shader && data.Shader.renderpass)
                 {
                     var code=''
-                    .endl()+'precision highp float;'
+                
                     .endl()+'IN vec2 texCoord;'
     
                     .endl()+'UNI float iGlobalTime;'

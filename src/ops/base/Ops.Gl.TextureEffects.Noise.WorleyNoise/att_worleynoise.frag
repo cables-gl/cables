@@ -119,7 +119,7 @@ void main(void) {
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
 
-    gl_FragColor = col;
+    outColor= col;
 
-// 	gl_FragColor = vec4(n, n, n, 1.0);
+// 	outColor= vec4(n, n, n, 1.0);
 }

@@ -26,5 +26,5 @@ void main()
    else col+=add;
 
 
-   gl_FragColor = col;
+   outColor= col;
 }

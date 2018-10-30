@@ -37,7 +37,7 @@ var srcFrag=''
 
     .endl()+'   #endif'
 
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
@@ -54,7 +54,7 @@ inInv.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(image.val && image.val.tex)
     {

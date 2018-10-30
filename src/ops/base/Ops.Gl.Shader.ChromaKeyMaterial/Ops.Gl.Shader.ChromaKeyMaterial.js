@@ -152,7 +152,7 @@ var shader_frag='{{MODULE_BEGIN_FRAG}}'
 
 
 
-.endl()+'   gl_FragColor = col;'
+.endl()+'   outColor= col;'
 .endl()+'}'
 .endl()+'';
 

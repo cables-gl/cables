@@ -43,7 +43,7 @@ const srcFrag=''
     .endl()+'   vec4 col=vec4( _blend(base.rgb,rnd.rgb) ,1.0);'
     .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
 
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 
@@ -62,7 +62,7 @@ blendMode.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

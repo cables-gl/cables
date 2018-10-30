@@ -71,7 +71,7 @@ function updateFFT()
 // ----------
 
 var scrollShader=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'UNI sampler2D texFFT;'
     .endl()+'UNI float posY;'
@@ -81,7 +81,7 @@ var scrollShader=''
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(texFFT,vec2(texCoord.x,texCoord.y-posY));'
     // .endl()+'   col.r=1.0;'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 var shaderScroll=new CGL.Shader(cgl,'AnalyserTexture');
@@ -126,7 +126,7 @@ function scrollTexture()
 var shaderBlur=new CGL.Shader(cgl);
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'UNI sampler2D tex;'
     .endl()+'UNI float dirX;'
@@ -161,7 +161,7 @@ var srcFrag=''
     .endl()+'        total += weight;'
     .endl()+'    }'
 
-    .endl()+'    gl_FragColor = color / total;'
+    .endl()+'    outColor= color / total;'
 
     // .endl()+'    /* switch back from pre-multiplied alpha */'
     .endl()+'    gl_FragColor.rgb /= gl_FragColor.a + 0.00001;'
@@ -237,7 +237,7 @@ var mirrorFlip=op.addInPort(new CABLES.Port(op,"mirror flip",CABLES.OP_PORT_TYPE
 mirrorFlip.set(true);
 mirrorWidth.set(1);
 var srcFragMirror=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
 
     .endl()+'UNI sampler2D tex;'
@@ -259,7 +259,7 @@ var srcFragMirror=''
 
     .endl()+'   col=texture2D(tex,vec2(x,texCoord.y) );'
 
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 shaderMirror.setSource(shaderMirror.getDefaultVertexShader(),srcFragMirror);

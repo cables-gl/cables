@@ -14,7 +14,7 @@ var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'  IN vec2 texCoord;'
     .endl()+'  uniform sampler2D tex;'
@@ -39,7 +39,7 @@ var srcFrag=''
     .endl()+'   vec4 col=vec4( _blend(base.rgb,rnd.rgb) ,1.0);'
     .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
 
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 
@@ -53,7 +53,7 @@ blendMode.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(animated.get()) timeUniform.setValue(op.patch.freeTimer.get()/1000%100);
         else timeUniform.setValue(0);

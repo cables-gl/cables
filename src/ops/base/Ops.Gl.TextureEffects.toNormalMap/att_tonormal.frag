@@ -38,5 +38,5 @@ void main()
     //     //convert (-1.0 , 1.0) to (0.0 , 1.0), if needed
     N= N * 0.5 + 0.5;
 
-   gl_FragColor = N;
+   outColor= N;
 }

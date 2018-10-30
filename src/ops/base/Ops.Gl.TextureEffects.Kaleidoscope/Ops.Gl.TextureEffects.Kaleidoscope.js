@@ -20,7 +20,7 @@ var uniCenterX=new CGL.Uniform(shader,'f','centerX',centerX);
 var uniCenterY=new CGL.Uniform(shader,'f','centerY',centerY);
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
 
@@ -41,7 +41,7 @@ var srcFrag=''
 // 	.endl()+'   vec4 inputRange = min(max(base - vec4(inMin), vec4(0.0)) / (vec4(inMax) - vec4(inMin)), vec4(1.0));'
 // 	.endl()+'   inputRange = pow(inputRange, vec4(1.0 / (1.5 - midPoint)));'
 
-// 	.endl()+'   gl_FragColor = mix(vec4(outMin), vec4(outMax), inputRange);'
+// 	.endl()+'   outColor= mix(vec4(outMin), vec4(outMax), inputRange);'
 
 
     .endl()+'vec2 center=vec2(centerX,centerY);'
@@ -75,8 +75,8 @@ var srcFrag=''
 	
 
 
-// 	.endl()+'gl_FragColor = IMG_NORM_PIXEL(inputImage, loc);'
-	.endl()+'gl_FragColor = texture2D(tex,loc);'
+// 	.endl()+'outColor= IMG_NORM_PIXEL(inputImage, loc);'
+	.endl()+'outColor= texture2D(tex,loc);'
 
     .endl()+'}';
 

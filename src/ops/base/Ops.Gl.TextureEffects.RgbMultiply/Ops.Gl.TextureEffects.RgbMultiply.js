@@ -13,7 +13,7 @@ var shader=new CGL.Shader(cgl);
 
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'#ifdef HAS_TEXTURES'
     .endl()+'  IN vec2 texCoord;'
     .endl()+'  uniform sampler2D tex;'
@@ -32,7 +32,7 @@ var srcFrag=''
     .endl()+'       col.g*=g;'
     .endl()+'       col.b*=b;'
     .endl()+'   #endif'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
@@ -43,7 +43,7 @@ var uniformB=new CGL.Uniform(shader,'f','b',b);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

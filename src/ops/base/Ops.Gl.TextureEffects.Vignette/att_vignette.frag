@@ -17,5 +17,5 @@ void main()
        float dist = distance(tcPos, vec2(0.5,0.5))*amount;
        col.rgb *= smoothstep(lensRadius1, lensRadius2, dist);
    #endif
-   gl_FragColor = col;
+   outColor= col;
 }

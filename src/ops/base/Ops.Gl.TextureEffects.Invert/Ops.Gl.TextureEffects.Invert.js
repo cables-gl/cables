@@ -14,7 +14,7 @@ var srcFrag=''
     .endl()+'   vec4 col=vec4(1.0,0.0,0.0,1.0);'
     .endl()+'       col=texture2D(tex,texCoord);'
     .endl()+'       col.rgb=1.0-col.rgb;'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}\n';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);

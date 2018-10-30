@@ -19,7 +19,7 @@ y.set(0);
 var shader=new CGL.Shader(cgl);
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'uniform sampler2D tex;'
     .endl()+'uniform float smoothness;'
@@ -187,7 +187,7 @@ var srcFrag=''
     
     .endl()+'   float v=SimplexPerlin3D(vec3(p.x,p.y,time))*0.5+0.5;'
     .endl()+'   vec4 col=vec4(v,v,v,1.0);'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
@@ -208,7 +208,7 @@ scale.onChange=function(){ uniScale.setValue(scale.get()); };
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

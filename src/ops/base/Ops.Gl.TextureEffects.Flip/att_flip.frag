@@ -7,5 +7,5 @@ void main()
 {
    vec4 col=vec4(1.0,0.0,0.0,1.0);
    col=texture2D(tex,vec2(abs(x-texCoord.x),abs(y-texCoord.y)));
-   gl_FragColor = col;
+   outColor= col;
 }

@@ -32,7 +32,7 @@ reset.onTriggered=function()
 // simulation...
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'UNI sampler2D tex;'
     .endl()+'UNI sampler2D texField;'
     .endl()+'UNI float time;'
@@ -80,7 +80,7 @@ var srcFrag=''
     .endl()+'       y=random(x*gl_FragCoord.xy);'
     .endl()+'   }'
 
-    .endl()+'   gl_FragColor = vec4( x, y , z, 1.0);'
+    .endl()+'   outColor= vec4( x, y , z, 1.0);'
     .endl()+'}';
 
 

@@ -34,7 +34,7 @@ inInv.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(image.val && image.val.tex)
     {

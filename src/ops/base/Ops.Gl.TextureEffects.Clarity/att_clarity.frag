@@ -26,7 +26,7 @@ void main()
 
     col2.rgb = ((col.rgb - 0.5) * max(( vec3(amount)*m+0.5)*2.0, 0.0))+0.5;
 
-    gl_FragColor = col2;
+    outColor= col2;
 }
 
 

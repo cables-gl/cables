@@ -15,7 +15,7 @@ var srcFrag=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=vec4(texCoord.x,texCoord.y,1.0,1.0);'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl,'showtexcoords material');

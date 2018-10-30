@@ -35,6 +35,6 @@ void main()
     
     vec4 final = col + col * amount * (8.0*desaturate(col) - colorL - colorR - colorA - colorB - colorLA - colorRA - colorLB - colorRB);
 
-    gl_FragColor = final;
+    outColor= final;
 
 }

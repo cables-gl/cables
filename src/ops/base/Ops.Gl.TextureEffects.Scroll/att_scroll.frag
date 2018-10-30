@@ -24,5 +24,5 @@ void main()
        if(x>1.0 || x<0.0 || y>1.0 || y<0.0) col=vec4(0.0,0.0,0.0,1.0);
        #endif
    #endif
-   gl_FragColor = col;
+   outColor= col;
 }

@@ -15,5 +15,5 @@ void main()
    float lumaMask = dot(lumcoeff, mask);
    lumaMask = 1.0 - lumaMask;
    vec4 vibrance = mix(vec4(luma), col, 1.0 + amount * lumaMask);
-   gl_FragColor = vibrance;
+   outColor= vibrance;
 }

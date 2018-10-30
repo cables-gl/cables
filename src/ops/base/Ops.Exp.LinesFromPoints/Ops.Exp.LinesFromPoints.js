@@ -1,8 +1,5 @@
 
-// in ports
 var pointsPort = op.inArray("Points");
-
-// out ports
 var linesPort = op.outArray("Lines");
 
 pointsPort.onChange = update;

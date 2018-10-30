@@ -35,7 +35,7 @@ const uniScroll = new CGL.Uniform(shader, "3f", "scroll", scroll);
 var needsUpdate=false;
 // events
 inTrigger.onTriggered = function () {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
     
     if(needsUpdate)
     {

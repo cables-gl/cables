@@ -58,5 +58,5 @@ void main()
 
     color.a=1.0;
     
-    gl_FragColor = color;
+    outColor= color;
 }

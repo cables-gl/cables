@@ -32,7 +32,7 @@ const uniAmounthalo=new CGL.Uniform(shader,'f','amountHalo',inAmountHalo);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 

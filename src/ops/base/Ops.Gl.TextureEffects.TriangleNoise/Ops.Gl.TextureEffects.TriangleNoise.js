@@ -49,7 +49,7 @@ const srcFrag=''
     .endl()+'    coord = vec2((coord.x - 0.5) , coord.y - ratio/2.0) * mat2(cos_factor, sin_factor, -sin_factor, cos_factor);'
     
     .endl()+'    float a=GetLocation(coord,scale);'
-    .endl()+'    gl_FragColor = vec4(a,a,a,1.);'
+    .endl()+'    outColor= vec4(a,a,a,1.);'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
@@ -70,7 +70,7 @@ blendMode.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var ratio=cgl.canvasHeight/cgl.canvasWidth;
     if(ratio!=oldRatio)

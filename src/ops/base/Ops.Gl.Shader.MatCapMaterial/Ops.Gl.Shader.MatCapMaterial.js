@@ -260,7 +260,7 @@ this.doRender=function()
 
 var srcVert=''
     .endl()+'{{MODULES_HEAD}}'
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec3 vPosition;'
     .endl()+'IN float attrVertIndex;'
     
@@ -329,7 +329,7 @@ var srcVert=''
 
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
 
     .endl()+'{{MODULES_HEAD}}'
 
@@ -459,7 +459,7 @@ var srcFrag=''
     // .endl()+'    col.rgb=vec3(length(vn),0.0,0.0);'
 
 
-    .endl()+'    gl_FragColor = col;'
+    .endl()+'    outColor= col;'
     .endl()+''
     .endl()+'}';
 

@@ -17,7 +17,7 @@ var unicenterY=new CGL.Uniform(shader,'f','centerY',centerY);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 

@@ -29,7 +29,7 @@ var uniCenterY=new CGL.Uniform(shader,'f','centerY',centerY.get());
 centerY.onChange=function() { uniCenterY.setValue(centerY.get()); };
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'UNI sampler2D tex;'
 
@@ -50,7 +50,7 @@ var srcFrag=''
     .endl()+'   else coord *= mix(1.0, pow(percent, 1.0 + strength * 0.75) * radius / distance, 1.0 - percent);'
     .endl()+'   coord += center;'
     .endl()+'   vec4 col=texture2D(tex,coord);'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);

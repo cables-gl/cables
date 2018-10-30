@@ -17,13 +17,13 @@ void main()
     if(!smoothed)
     {
        if( texCoord.x>1.0-width/3.0 || texCoord.y>1.0-width/aspect/3.0 || texCoord.y<width/aspect/3.0 || texCoord.x<width/3.0 ) col = vec4(r,g,b, 1.0);
-       gl_FragColor = col;
+       outColor= col;
     }
     else
     {
        float f=smoothstep(0.0,width,texCoord.x)-smoothstep(1.0-width,1.0,texCoord.x);
        f*=smoothstep(0.0,width/aspect,texCoord.y);
        f*=smoothstep(1.0,1.0-width/aspect,texCoord.y);
-       gl_FragColor = mix(col,vec4(r,g,b, 1.0),1.0-f);
+       outColor= mix(col,vec4(r,g,b, 1.0),1.0-f);
     }
 }

@@ -59,7 +59,7 @@ edge=desaturate(edge);
     if(mulColor>0.0)
         edge*=texture2D( tex, texCoord ).rgb*mulColor*4.0;
     edge=max(min(edge,1.0),0.0);
-    gl_FragColor = vec4(edge,1.0);
+    outColor= vec4(edge,1.0);
 
 }
     

@@ -18,7 +18,7 @@ this.onLoaded=shaderSim.compile;
 // simulation...
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'UNI sampler2D tex;'
     .endl()+'UNI float time;'
     .endl()+'IN vec2 texCoord;'
@@ -45,7 +45,7 @@ var srcFrag=''
 
     .endl()+'   if(c>15.0)c=random((0.2323)*gl_FragCoord.xy)*0.5;'
 
-    .endl()+'   gl_FragColor = vec4(c,c1,c2,1.0);'
+    .endl()+'   outColor= vec4(c,c1,c2,1.0);'
     .endl()+'}';
 
 // positioning,..

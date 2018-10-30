@@ -56,7 +56,7 @@ var srcFrag=''
     
     .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
 
-    .endl()+'    gl_FragColor = col;'
+    .endl()+'    outColor= col;'
     .endl()+'}';
 
 var cgl=op.patch.cgl;
@@ -77,7 +77,7 @@ var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

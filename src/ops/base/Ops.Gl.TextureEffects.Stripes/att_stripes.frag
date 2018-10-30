@@ -35,5 +35,5 @@ void main()
        col.rgb=vec3(  smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));
    #endif
     
-   gl_FragColor = col;
+   outColor= col;
 }

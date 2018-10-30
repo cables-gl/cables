@@ -61,7 +61,7 @@ blendMode.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
 
     uniPx.setValue(1/cgl.currentTextureEffect.getCurrentSourceTexture().width);

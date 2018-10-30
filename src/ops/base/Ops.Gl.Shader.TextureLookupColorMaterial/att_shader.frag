@@ -36,5 +36,5 @@ void main()
    #endif
 {{MODULE_COLOR}}
 
-   gl_FragColor = col;
+   outColor= col;
 }

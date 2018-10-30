@@ -22,5 +22,5 @@ void main()
 // col.g=y;
 
 // col.xy=texCoord;
-   gl_FragColor = col;
+   outColor= col;
 }

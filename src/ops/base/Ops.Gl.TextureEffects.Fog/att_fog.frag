@@ -40,5 +40,5 @@ void main()
         col=mix(colImg,vec4(r,g,b,1.0),fogFactor);
     }
 
-   gl_FragColor = col;
+   outColor= col;
 }

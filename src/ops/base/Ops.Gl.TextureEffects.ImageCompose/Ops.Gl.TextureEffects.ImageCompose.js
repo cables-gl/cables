@@ -26,7 +26,7 @@ var bgFrag=''
     .endl()+'uniform float a;'
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   gl_FragColor = vec4(0.0,0.0,0.0,a);'
+    .endl()+'   outColor= vec4(0.0,0.0,0.0,a);'
     .endl()+'}';
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');
 bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);

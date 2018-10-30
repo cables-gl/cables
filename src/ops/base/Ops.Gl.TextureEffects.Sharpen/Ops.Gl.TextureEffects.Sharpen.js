@@ -14,7 +14,7 @@ const uniPy=new CGL.Uniform(shader,'f','pY',1/1024);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     uniPx.setValue(1/cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniPy.setValue(1/cgl.currentTextureEffect.getCurrentSourceTexture().height);
