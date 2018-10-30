@@ -15,13 +15,10 @@ var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 
 var srcFrag=''
 
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  uniform sampler2D tex;'
-    .endl()+'#endif'
-
-    .endl()+'uniform float amount;'
-    .endl()+'uniform float time;'
+    .endl()+'IN vec2 texCoord;'
+    .endl()+'UNI sampler2D tex;'
+    .endl()+'UNI float amount;'
+    .endl()+'UNI float time;'
 
     .endl()+'float random(vec2 co)'
     .endl()+'{'
@@ -35,7 +32,7 @@ var srcFrag=''
     .endl()+'   float r=random((time+0.232323)*texCoord.xy);'
     .endl()+'   vec4 rnd=vec4( r,r,r,1.0 );'
     .endl()+'   vec4 base=texture2D(tex,texCoord);'
-    
+
     .endl()+'   vec4 col=vec4( _blend(base.rgb,rnd.rgb) ,1.0);'
     .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
 
@@ -62,7 +59,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

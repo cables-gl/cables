@@ -1,5 +1,5 @@
-const render=op.inTrigger('render');
-const trigger=op.outTrigger('trigger');
+const render=op.inTrigger('Render');
+const trigger=op.outTrigger('Trigger');
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);

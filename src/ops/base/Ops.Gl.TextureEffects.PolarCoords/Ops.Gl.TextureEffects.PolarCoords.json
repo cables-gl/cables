@@ -7,19 +7,13 @@
             },
             {
                 "type": "0",
-                "name": "contrast"
+                "name": "radius inner",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "brightness"
-            },
-            {
-                "type": "0",
-                "name": "Radius Inner"
-            },
-            {
-                "type": "0",
-                "name": "Radius Outer"
+                "name": "radius outer",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -29,5 +23,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.PolarCoords"
-    }
+    },
+    "updated": 1540921913297,
+    "authorName": "pandur",
+    "id": "1555fefe-4eb4-4aed-84c0-ad54e0dae1c1",
+    "created": 1540921849064
 }

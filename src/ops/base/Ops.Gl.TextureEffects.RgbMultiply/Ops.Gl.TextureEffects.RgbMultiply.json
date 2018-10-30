@@ -8,15 +8,18 @@
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -26,5 +29,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.RgbMultiply"
-    }
+    },
+    "updated": 1540922021355,
+    "authorName": "pandur",
+    "id": "00f30153-f656-4701-9b93-244b033b2eaa",
+    "created": 1540921975846
 }

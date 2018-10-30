@@ -3,31 +3,34 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "Render"
+                "name": "render"
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "blend mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Animated"
+                "name": "animated",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "Next"
+                "name": "next"
             }
         ],
         "name": "Ops.Gl.TextureEffects.Noise.Noise"
     },
     "summary": "white noise pixel effect",
-    "updated": 1521899681448,
+    "updated": 1540921762302,
     "authorName": "pandur",
     "id": "81253441-cc73-42fa-b903-6d23806873d9",
     "created": 1515151849116,
