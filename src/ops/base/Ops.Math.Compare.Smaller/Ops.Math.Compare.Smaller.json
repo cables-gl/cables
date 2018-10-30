@@ -4,20 +4,23 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "number1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number2"
+                "name": "number2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Math.Compare.Lesser"
+        "name": "Ops.Math.Compare.Smaller"
     },
     "docs": {
         "ports": [
@@ -34,5 +37,9 @@
                 "text": "Returns `true` if `Number 1` is smaller than `Number 2`, otherwise `false`"
             }
         ]
-    }
+    },
+    "updated": 1540919866847,
+    "authorName": "pandur",
+    "id": "04fd113f-ade1-43fb-99fa-f8825f8814c0",
+    "created": 1540919866860
 }

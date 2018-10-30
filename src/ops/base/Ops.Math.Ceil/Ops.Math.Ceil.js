@@ -1,6 +1,5 @@
-op.name='Ceil';
-var number1=op.addInPort(new CABLES.Port(op,"Number"));
-var result=op.addOutPort(new CABLES.Port(op,"Result"));
+const number1=op.inValue("Number");
+const result=op.outValue("Result");
 
 function exec()
 {

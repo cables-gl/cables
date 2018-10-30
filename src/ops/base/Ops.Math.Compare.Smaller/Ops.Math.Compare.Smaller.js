@@ -1,13 +1,13 @@
-op.name='Smaller';
-
-var number1 = op.addInPort(new CABLES.Port(this, "number1"));
-var number2 = op.addInPort(new CABLES.Port(this,"number2"));
-var result = op.addOutPort(new CABLES.Port(this, "result"));
-
-var exec= function() {
-    result.set( number1.get() < number2.get() );
-};
+const number1 = op.inValue("number1");
+const number2 = op.inValue("number2");
+const result = op.outValue("result");
 
 number1.onChange=exec;
 number2.onChange=exec;
 exec();
+
+function exec()
+{
+    result.set( number1.get() < number2.get() );
+}
+

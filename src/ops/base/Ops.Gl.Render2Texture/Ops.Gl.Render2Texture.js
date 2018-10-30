@@ -76,11 +76,11 @@ function doRender()
     if(!fb || reInitFb)
     {
         if(fb) fb.delete();
-        if(cgl.glVersion>=2) 
+        if(cgl.glVersion>=2)
         {
             var ms=true;
             var msSamples=4;
-            
+
             if(msaa.get()=="none")
             {
                 msSamples=0;
@@ -89,7 +89,7 @@ function doRender()
             if(msaa.get()=="2x")msSamples=2;
             if(msaa.get()=="4x")msSamples=4;
             if(msaa.get()=="8x")msSamples=8;
-            
+
             fb=new CGL.Framebuffer2(cgl,8,8,
             {
                 isFloatingPointTexture:fpTexture.get(),
@@ -110,7 +110,7 @@ function doRender()
 
 
 
-        
+
         texDepth.set( fb.getTextureDepth() );
         reInitFb=false;
     }
@@ -123,17 +123,14 @@ function doRender()
 
     if(fb.getWidth()!=Math.ceil(width.get()) || fb.getHeight()!=Math.ceil(height.get()) )
     {
-        fb.setSize( width.get(),height.get() );
+        fb.setSize(
+            Math.max(1,Math.ceil(width.get())),
+            Math.max(1,Math.ceil(height.get())) );
     }
 
-
-
     fb.renderStart(cgl);
-    // mesh.render(cgl.getShader());
-
 
     trigger.trigger();
-    // cgl.printError("start r2t");
     fb.renderEnd(cgl);
 
     cgl.resetViewPort();

@@ -3,17 +3,20 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "number1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number2"
+                "name": "number2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Compare.Greater"
@@ -34,5 +37,9 @@
                 "text": "`true` if `Value` is in greater than `Reference Value`, `false` otherwise"
             }
         ]
-    }
+    },
+    "updated": 1540919893886,
+    "authorName": "pandur",
+    "id": "b250d606-f7f8-44d3-b099-c29efff2608a",
+    "created": 1540919889895
 }

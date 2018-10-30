@@ -3,17 +3,20 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "number1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number2"
+                "name": "number2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Compare.Equals"
@@ -21,5 +24,9 @@
     "summary": "result is true if number1 and number2 are equal",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1540919932003,
+    "authorName": "pandur",
+    "id": "4dd3cc55-eebc-4187-9d4e-2e053a956fab",
+    "created": 1540919909532
 }
