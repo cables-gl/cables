@@ -344,6 +344,11 @@ CGL.Context = function() {
         cgl.endFrame();
     };
     
+    this.getTexture= function(slot)
+    {
+        return this._textureslots[slot];
+    }
+    
     this.setTexture = function(slot, t, type)
     {
         if(this._textureslots[slot]!=t)
