@@ -18,6 +18,8 @@ var drawRight=op.inValueBool("Draw Right",true);
 var cgl=op.patch.cgl;
 var mesh=null;
 var geom=new CGL.Geometry();
+geom.tangents = [];
+geom.biTangents = [];
 
 width.set(1);
 height.set(1);
@@ -53,79 +55,50 @@ function create()
     var th=thickness.get();//*Math.min(height.get(),width.get())*-0.5;
  
     if(pivotX.get()=='right') x=-w;
-    if(pivotX.get()=='left') x=0;
+    else if(pivotX.get()=='left') x=0;
 
     if(pivotY.get()=='top') y=-w;
-    if(pivotY.get()=='bottom') y=0;
+    else if(pivotY.get()=='bottom') y=0;
 
-    if(geom.vertices.length!=8*3) geom.vertices.length=8*3;
-
-    var c=0;
-    geom.vertices[c++]=x;
-    geom.vertices[c++]=y;
-    geom.vertices[c++]=0;
-
-    geom.vertices[c++]=x+w;
-    geom.vertices[c++]=y;
-    geom.vertices[c++]=0;
-
-    geom.vertices[c++]=x+w;
-    geom.vertices[c++]=y+h;
-    geom.vertices[c++]=0;
-
-    geom.vertices[c++]=x;
-    geom.vertices[c++]=y+h;
-    geom.vertices[c++]=0;
-
-    geom.vertices[c++]=x-th; 
-    geom.vertices[c++]=y-th;
-    geom.vertices[c++]=0;
-
-    geom.vertices[c++]=x+w+th;
-    geom.vertices[c++]=y-th;
-    geom.vertices[c++]=0;
-
-    geom.vertices[c++]=x+w+th;
-    geom.vertices[c++]=y+h+th;
-    geom.vertices[c++]=0;
-
-    geom.vertices[c++]=x-th;
-    geom.vertices[c++]=y+h+th;
-    geom.vertices[c++]=0;
+    geom.vertices.length=0;
+    geom.vertices.push(
+        x,y,0,
+        x+w,y,0,
+        x+w,y+h,0,
+        x,y+h,0,
+        x-th,y-th,0,
+        x+w+th,y-th,0,
+        x+w+th,y+h+th,0,
+        x-th,y+h+th,0
+    );
 
     if(geom.vertexNormals.length===0)
-        geom.vertexNormals = [
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-             0.0,  0.0,  1.0,
-        ];
-        
-    geom.verticesIndices = [];
+        geom.vertexNormals.push(0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1);
+    if(geom.tangents.length===0)
+        geom.tangents.push(1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0);
+    if(geom.biTangents.length===0)
+        geom.biTangents.push(0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0);
+
+    if (geom.verticesIndices)geom.verticesIndices.length=0;
+    else geom.verticesIndices = [];
 
     if(drawBottom.get()) geom.verticesIndices.push( 0, 1, 4 ,  1, 5, 4);
     if(drawRight.get())geom.verticesIndices.push( 1, 2, 5,  5, 2, 6);
     if(drawTop.get())geom.verticesIndices.push( 7, 6, 3,  6, 2, 3);
     if(drawLeft.get())geom.verticesIndices.push( 0, 4, 3,  4, 7, 3);
 
-
     if(geom.texCoords.length===0)
     {
         geom.texCoords=new Float32Array();
-        for(var i=0;i<geom.vertices.length;i+=3)
+        for(var i=0, j=0;i<geom.vertices.length;i+=3, j+=2)
         {
-            geom.texCoords[i/3*2]=geom.vertices[i+0]/width.get()-0.5;
-            geom.texCoords[i/3*2]=geom.vertices[i+1]/height.get()-0.5;
+            geom.texCoords[j]=geom.vertices[i+0]/w-0.5;
+            geom.texCoords[j]=geom.vertices[i+1]/h-0.5;
         }
     }
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
-        else mesh.setGeom(geom);
+    else mesh.setGeom(geom);
 
     geomOut.set(null);
     geomOut.set(geom);
