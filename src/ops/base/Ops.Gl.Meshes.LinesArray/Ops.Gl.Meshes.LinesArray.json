@@ -1,6 +1,6 @@
 {
     "summary": "an array of lines",
-    "updated": 1519814033277,
+    "updated": 1540924243549,
     "authorName": "pandur",
     "id": "a75265c2-957b-4719-9d03-7bbf00ace364",
     "created": 1519814033280,
@@ -12,35 +12,43 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Logarithmic"
+                "name": "logarithmic",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "pivot x"
+                "name": "pivot x",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "pivot y"
+                "name": "pivot y",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "num columns"
+                "name": "num columns",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "num rows"
+                "name": "num rows",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "axis"
+                "name": "axis",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -50,7 +58,7 @@
             },
             {
                 "type": "3",
-                "name": "Point Arrays"
+                "name": "point arrays"
             }
         ],
         "name": "Ops.Gl.Meshes.LinesArray"

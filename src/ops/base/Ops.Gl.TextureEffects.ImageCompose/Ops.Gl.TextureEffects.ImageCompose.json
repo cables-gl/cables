@@ -32,12 +32,12 @@
             },
             {
                 "type": "0",
-                "name": "Background Alpha",
+                "name": "background alpha",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "HDR",
+                "name": "hdr",
                 "subType": "boolean"
             }
         ],
@@ -52,7 +52,7 @@
             },
             {
                 "type": "0",
-                "name": "Aspect Ratio",
+                "name": "aspect ratio",
                 "subType": "number"
             }
         ],
@@ -66,7 +66,7 @@
             "url": "https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/"
         }
     ],
-    "updated": 1540812321919,
+    "updated": 1540978399309,
     "authorName": "pandur",
     "id": "5c04608d-1e42-4e36-be00-1be4a81fc309",
     "created": 1505424175620

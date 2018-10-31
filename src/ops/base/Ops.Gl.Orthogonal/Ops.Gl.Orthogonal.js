@@ -1,34 +1,25 @@
-op.name='Orthogonal';
+const render=op.inTrigger('render');
+const trigger=op.outTrigger('trigger');
+const boundsLeft=op.inValue("left",-2);
+const boundsRight=op.inValue("right",2);
+const boundsBottom=op.inValue("bottom",-2);
+const boundsTop=op.inValue("top",2);
+const zNear=op.inValue("frustum near",0.01);
+const zFar=op.inValue("frustum far",100);
 
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
-var boundsLeft=op.addInPort(new CABLES.Port(op,"left",CABLES.OP_PORT_TYPE_VALUE ));
-var boundsRight=op.addInPort(new CABLES.Port(op,"right",CABLES.OP_PORT_TYPE_VALUE ));
-var boundsBottom=op.addInPort(new CABLES.Port(op,"bottom",CABLES.OP_PORT_TYPE_VALUE ));
-var boundsTop=op.addInPort(new CABLES.Port(op,"top",CABLES.OP_PORT_TYPE_VALUE ));
-var zNear=op.addInPort(new CABLES.Port(op,"frustum near",CABLES.OP_PORT_TYPE_VALUE ));
-var zFar=op.addInPort(new CABLES.Port(op,"frustum far",CABLES.OP_PORT_TYPE_VALUE ));
-
-boundsLeft.set(-1);
-boundsRight.set(1);
-boundsBottom.set(-1);
-boundsTop.set(1);
-zNear.set(0.01);
-zFar.set(2000.0);
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 render.onTriggered=function()
 {
     var ratio=1;
 
     cgl.pushPMatrix();
-    mat4.ortho(cgl.pMatrix, 
-        boundsLeft.get()*ratio, 
-        boundsRight.get()*ratio,  
-        boundsBottom.get()*ratio, 
-        boundsTop.get()*ratio, 
-        parseFloat(zNear.get()), 
+    mat4.ortho(cgl.pMatrix,
+        boundsLeft.get()*ratio,
+        boundsRight.get()*ratio,
+        boundsBottom.get()*ratio,
+        boundsTop.get()*ratio,
+        parseFloat(zNear.get()),
         parseFloat(zFar.get())
         );
 
