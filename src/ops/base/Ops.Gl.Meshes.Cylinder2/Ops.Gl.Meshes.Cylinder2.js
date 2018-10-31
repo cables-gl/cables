@@ -33,6 +33,8 @@ function buildMesh () {
     var
         positions = [],
         normals = [],
+        tangents = [],
+        biTangents = [],
         texcoords = [],
         indices = [],
         x, y, z, i, j,
@@ -60,11 +62,11 @@ function buildMesh () {
                 z
             );
             d = Math.sqrt(x*x+y*y);
-            normals.push(
-                x / d,
-                y / d,
-                0
-            );
+            x /= d;
+            y /= d;
+            normals.push(x,y,0);
+            tangents.push(-y,x,0);
+            biTangents.push(0,0,1);
             texcoords.push(
                 (z / length + 0.5) * o,
                 j / segments
@@ -101,6 +103,16 @@ function buildMesh () {
                 -normals[i+1],
                 0
             );
+            tangents.push(
+                -tangents[i],
+                -tangents[i+1],
+                0
+            );
+            biTangents.push(
+                0
+                -biTangents[i+1],
+                -biTangents[i+2]
+            );
             texcoords.push(
                 texcoords[j],
                 1-texcoords[j+1]
@@ -131,8 +143,8 @@ function buildMesh () {
 
         // cap normals
         d = segments * 2;
-        for (i = 0; i < d; i++) normals.push(0,0,-1);
-        for (i = 0; i < d; i++) normals.push(0,0,1);
+        for (i = 0; i < d; i++) normals.push(0,0,-1), tangents.push(-1,0,0), biTangents.push(0,-1,0);
+        for (i = 0; i < d; i++) normals.push(0,0,1), tangents.push(1,0,0), biTangents.push(0,1,0);
 
         // cap uvs
         if (uvMode == "atlas") {
@@ -189,11 +201,11 @@ function buildMesh () {
 
         positions.push(0,0,-length/2);
         Array.prototype.push.apply(positions, positions.slice(0,segments*3));
-        for (i = 0; i <= segments; i++) normals.push(0,0,-1);
+        for (i = 0; i <= segments; i++) normals.push(0,0,-1), tangents.push(-1,0,0), biTangents.push(0,-1,0);
 
         positions.push(0,0,length/2);
         Array.prototype.push.apply(positions, positions.slice(a-segments*3,a));
-        for (i = 0; i <= segments; i++) normals.push(0,0,1);
+        for (i = 0; i <= segments; i++) normals.push(0,0,1), tangents.push(1,0,0), biTangents.push(0,1,0);
 
         if (uvMode == "atlas") {
             texcoords.push(.75,.25);
@@ -216,10 +228,12 @@ function buildMesh () {
 
     // set geometry
     geom.clear();
-    geom.vertices=positions;
-    geom.texCoords=texcoords;
-    geom.vertexNormals=normals;
-    geom.verticesIndices=indices;
+    geom.vertices = positions;
+    geom.texCoords = texcoords;
+    geom.vertexNormals = normals;
+    geom.tangents = tangents;
+    geom.biTangents = biTangents;
+    geom.verticesIndices = indices;
 
     outGeometry.set(null);
     outGeometry.set(geom);
