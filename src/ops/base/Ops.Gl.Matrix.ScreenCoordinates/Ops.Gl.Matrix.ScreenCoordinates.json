@@ -1,5 +1,5 @@
 {
-    "updated": 1513162882145,
+    "updated": 1540986639705,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "75cadc63-62bb-4ddd-b519-aa99568a1e6b",
@@ -18,11 +18,13 @@
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.ScreenCoordinates"

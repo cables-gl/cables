@@ -1,9 +1,8 @@
-op.name='callback';
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var callbackname=op.addInPort(new CABLES.Port(op,"callback name",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
-var val0=op.addInPort(new CABLES.Port(op,"value 1",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
-var val1=op.addInPort(new CABLES.Port(op,"value 2",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
-var val2=op.addInPort(new CABLES.Port(op,"value 3",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+const exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const callbackname=op.addInPort(new CABLES.Port(op,"callback name",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+const val0=op.addInPort(new CABLES.Port(op,"value 1",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+const val1=op.addInPort(new CABLES.Port(op,"value 2",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+const val2=op.addInPort(new CABLES.Port(op,"value 3",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
 
 var values=[0,0,0];
 
@@ -15,7 +14,6 @@ exe.onTriggered=function()
 {
     if(op.patch.config.hasOwnProperty(callbackname.get()))
     {
-        // op.log('has callback!',callbackname.get());
         op.patch.config[callbackname.get()](values);
     }
     else

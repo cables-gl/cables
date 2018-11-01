@@ -3,25 +3,30 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "val"
+                "name": "val",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "min"
+                "name": "min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "max"
+                "name": "max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "ignore outside values"
+                "name": "ignore outside values",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Clamp"
@@ -46,5 +51,9 @@
                 "text": "The clamped value of `Val`"
             }
         ]
-    }
+    },
+    "updated": 1541052219730,
+    "authorName": "pandur",
+    "id": "cda1a98e-5e16-40bd-9b18-a67e9eaad5a1",
+    "created": 1541052219739
 }

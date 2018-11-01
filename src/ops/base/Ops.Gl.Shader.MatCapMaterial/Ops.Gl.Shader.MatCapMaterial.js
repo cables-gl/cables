@@ -183,45 +183,17 @@ this.textureSpecMatCap.onChange=changeSpec;
 
 function bindTextures()
 {
-    
-    if(self.texture.get())
-    {
-        cgl.setTexture(0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.texture.get().tex);
-    }
-
-    if(self.textureDiffuse.get())
-    {
-        cgl.setTexture(1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureDiffuse.get().tex);
-    }
-
-    if(self.textureNormal.get())
-    {
-        cgl.setTexture(2);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureNormal.get().tex);
-    }
-
-    if(self.textureSpec.get())
-    {
-        cgl.setTexture(3);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpec.get().tex);
-    }
-    if(self.textureSpecMatCap.get())
-    {
-        cgl.setTexture(4);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpecMatCap.get().tex);
-    }
-
+    if(self.texture.get())cgl.setTexture(0,self.texture.get().tex);
+    if(self.textureDiffuse.get()) cgl.setTexture(1,self.textureDiffuse.get().tex);
+    if(self.textureNormal.get()) cgl.setTexture(2,self.textureNormal.get().tex);
+    if(self.textureSpec.get()) cgl.setTexture(3,self.textureSpec.get().tex);
+    if(self.textureSpecMatCap.get()) cgl.setTexture(4,self.textureSpecMatCap.get().tex);
 };
-
-
-
 
 this.doRender=function()
 {
     shader.bindTextures=bindTextures;
-    
+
     cgl.setShader(shader);
     self.trigger.trigger();
     cgl.setPreviousShader();
@@ -263,7 +235,7 @@ var srcVert=''
 
     .endl()+'IN vec3 vPosition;'
     .endl()+'IN float attrVertIndex;'
-    
+
     .endl()+'IN vec2 attrTexCoord;'
     .endl()+'IN vec3 attrVertNormal;'
 

@@ -1,8 +1,4 @@
-
-op.name='TimeLineTime';
-var theTime=op.addOutPort(new CABLES.Port(this,"time"));
-
-theTime.set(0);
+var theTime=op.outValue("time");
 
 op.onAnimFrame=function(time)
 {

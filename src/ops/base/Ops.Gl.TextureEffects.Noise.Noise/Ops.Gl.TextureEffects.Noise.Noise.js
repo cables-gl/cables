@@ -1,47 +1,17 @@
-var render=op.inTrigger('Render');
+const render=op.inTrigger('Render');
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const animated=op.inValueBool("Animated",true);
+const trigger=op.outTrigger("Next");
 
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
-
-var animated=op.inValueBool("Animated",true);
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
-
-var srcFrag=''
-
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'UNI sampler2D tex;'
-    .endl()+'UNI float amount;'
-    .endl()+'UNI float time;'
-
-    .endl()+'float random(vec2 co)'
-    .endl()+'{'
-    .endl()+'   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 437511.5453);'
-    .endl()+'}'
-
-    +CGL.TextureEffect.getBlendCode()
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   float r=random((time+0.232323)*texCoord.xy);'
-    .endl()+'   vec4 rnd=vec4( r,r,r,1.0 );'
-    .endl()+'   vec4 base=texture2D(tex,texCoord);'
-
-    .endl()+'   vec4 col=vec4( _blend(base.rgb,rnd.rgb) ,1.0);'
-    .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
-
-    .endl()+'   outColor= col;'
-    .endl()+'}';
-
-
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const timeUniform=new CGL.Uniform(shader,'f','time',1.0);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const srcFrag=attachments.noise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 blendMode.onChange=function()
 {
@@ -59,7 +29,6 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

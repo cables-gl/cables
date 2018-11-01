@@ -1,10 +1,8 @@
-op.name='Boolean';
+const v=op.inValueBool("value",false);
+const result=op.addOutPort(new CABLES.Port(op,"result"));
 
-var v=op.addInPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var result=op.addOutPort(new CABLES.Port(op,"result"));
-v.set(false);
+result.set(false);
 v.onChange=exec;
-result.set(v.get());
 
 function exec()
 {
