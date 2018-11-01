@@ -30,6 +30,11 @@ greyscale.onChange=function()
         else shader.removeDefine('GREY');
 };
 
+blendMode.onChange=function()
+{
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};
+
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
@@ -43,9 +48,4 @@ render.onTriggered=function()
     cgl.setPreviousShader();
 
     trigger.trigger();
-};
-
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
