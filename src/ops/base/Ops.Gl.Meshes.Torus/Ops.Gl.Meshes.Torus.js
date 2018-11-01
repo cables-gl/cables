@@ -8,6 +8,9 @@ var outerRadius=op.addInPort(new CABLES.Port(op,"outerRadius",CABLES.OP_PORT_TYP
 var trigger=op.outTrigger('trigger');
 var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
+const UP=vec3.fromValues(0,1,0),RIGHT=vec3.fromValues(1,0,0);
+var tmpNormal = vec3.create(), tmpVec = vec3.create();
+
 sides.set(32);
 rings.set(32);
 innerRadius.set(0.5);
@@ -66,7 +69,7 @@ function circleTable(n,halfCircle)
         sint[i] = Math.sin(angle*i);
         cost[i] = Math.cos(angle*i);
     }
-    
+
     if (halfCircle)
     {
         sint[size] =  0.0;  /* sin PI */
@@ -81,15 +84,15 @@ function circleTable(n,halfCircle)
     return {cost:cost,sint:sint};
 }
 
-
 function generateTorus(iradius,oradius,nRings,nSides)
 {
     var table1=circleTable( nRings,false);
     var table2=circleTable(-nSides,false);
+    var t;
 
-    // if(!geom)
     geom=new CGL.Geometry();
-    // geom.clear();
+    geom.tangents = [];
+    geom.biTangents = [];
 
     for( j=0; j<nRings; j++ )
     {
@@ -101,10 +104,22 @@ function generateTorus(iradius,oradius,nRings,nSides)
             geom.vertices[offset  ] = table1.cost[j] * ( oradius + table2.cost[i] * iradius );
             geom.vertices[offset+1] = table1.sint[j] * ( oradius + table2.cost[i] * iradius );
             geom.vertices[offset+2] = table2.sint[i] * iradius;
-            geom.vertexNormals[offset  ] = table1.cost[j] * table2.cost[i];
-            geom.vertexNormals[offset+1] = table1.sint[j] * table2.cost[i];
-            geom.vertexNormals[offset+2] = table2.sint[i];
-            
+            geom.vertexNormals[offset  ] = tmpNormal[0] = table1.cost[j] * table2.cost[i];
+            geom.vertexNormals[offset+1] = tmpNormal[1] = table1.sint[j] * table2.cost[i];
+            geom.vertexNormals[offset+2] = tmpNormal[2] = table2.sint[i];
+
+            if (Math.abs(tmpNormal[1])==1) t = RIGHT;
+            else t = UP;
+            vec3.cross(tmpVec, tmpNormal, t);
+            vec3.normalize(tmpVec,tmpVec);
+            geom.tangents[offset  ] = tmpVec[0];
+            geom.tangents[offset+1] = tmpVec[1];
+            geom.tangents[offset+2] = tmpVec[2];
+            vec3.cross(tmpVec, tmpVec, tmpNormal);
+            geom.biTangents[offset  ] = tmpVec[0];
+            geom.biTangents[offset+1] = tmpVec[1];
+            geom.biTangents[offset+2] = tmpVec[2];
+
             geom.texCoords[offset2] = 0;
             geom.texCoords[offset2+1] = 0;
 
@@ -128,8 +143,7 @@ function generateTorus(iradius,oradius,nRings,nSides)
         geom.verticesIndices[idx+1] = i + ioff;
         idx +=2;
     }
-    
-    //geom.calcNormals({smooth:rue});
+
     geomOut.set(null);
     geomOut.set(geom);
 
