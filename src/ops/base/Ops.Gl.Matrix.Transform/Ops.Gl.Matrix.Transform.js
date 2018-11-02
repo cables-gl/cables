@@ -56,7 +56,7 @@ render.onTriggered=function()
 
     trigger.trigger();
     cgl.popModelMatrix();
-    
+
     if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
@@ -65,7 +65,7 @@ render.onTriggered=function()
                 posZ:posZ,
             });
 
-    
+
 };
 
 op.transform3d=function()
@@ -73,7 +73,7 @@ op.transform3d=function()
     return {
             pos:[posX,posY,posZ]
         };
-    
+
 };
 
 var doUpdateMatrix=function()
@@ -142,4 +142,5 @@ posY.set(0.0);
 posZ.set(0.0);
 
 doUpdateMatrix();
+
 

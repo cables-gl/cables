@@ -38,7 +38,7 @@
             },
             {
                 "type": "2",
-                "name": "shader"
+                "name": "Shader"
             }
         ],
         "name": "Ops.Gl.Phong.LambertMaterial"
