@@ -1,17 +1,13 @@
-var cgl=op.patch.cgl;
+const render=op.inTrigger('render');
+const trigger=op.outTrigger('trigger');
+const fast=op.inValueBool("Fast",true);
 
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
-var fast=op.inValueBool("Fast",true);
+const cgl=op.patch.cgl;
 
-
-
-
-var amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE));
+const amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE));
 amount.set(10);
 
 var shader=new CGL.Shader(cgl);
-
 
 shader.define("FASTBLUR");
 
@@ -46,7 +42,7 @@ direction.onValueChange(function()
     if(direction.get()=='vertical')dir=2;
 });
 
-var mask=op.addInPort(new CABLES.Port(op,"mask",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var mask=op.inTexture("mask");
 
 mask.onChange=function()
 {
@@ -71,7 +67,7 @@ render.onTriggered=function()
 
         cgl.currentTextureEffect.bind();
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        
+
 
         if(mask.get() && mask.get().tex)
         {
@@ -92,7 +88,7 @@ render.onTriggered=function()
 
         cgl.currentTextureEffect.bind();
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        
+
 
         if(mask.get() && mask.get().tex)
         {

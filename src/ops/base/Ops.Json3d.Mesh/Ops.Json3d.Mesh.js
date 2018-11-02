@@ -1,5 +1,4 @@
 var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
-// op.index=op.addInPort(new CABLES.Port(op,"mesh index",CABLES.OP_PORT_TYPE_VALUE,{type:'string'} ));
 op.index=op.inValueInt("mesh index");
 var centerPivot=op.addInPort(new CABLES.Port(op,"center pivot",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'} ));
 var next=op.addOutPort(new CABLES.Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
@@ -13,7 +12,8 @@ centerPivot.set(false);
 draw.set(true);
 
 const cgl=op.patch.cgl;
-var mesh=null;
+// var mesh=null;
+var meshesCache={};
 var currentIndex=0;
 
 op.index.onChange=reload;
@@ -21,8 +21,11 @@ render.onTriggered=doRender;
 
 function doRender()
 {
-    // if(!mesh && cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() || currentIndex!=op.index.get()) reload();
-    if(!mesh || currentIndex!=op.index.get()) reload();
+    var idx=op.index.get();
+    var mesh=meshesCache[idx];
+    // if(!mesh || currentIndex!=idx) reload();
+    if(!mesh) reload();
+
     if(draw.get())
     {
         if(mesh) mesh.render(cgl.getShader());
@@ -35,24 +38,28 @@ function reload()
     if(!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.getValue())return;
     var meshes=cgl.frameStore.currentScene.getValue().meshes;
 
-    if(cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() && op.index.get()>=0)
+    var mesh=null;
+
+    const indx=op.index.get();
+
+    if(cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() && indx>=0)
     {
         op.uiAttr({warning:''});
         op.uiAttr({info:''});
 
         var jsonMesh=null;
 
-        currentIndex=op.index.get();
+        currentIndex=indx;
 
-        if(CABLES.UTILS.isNumeric(op.index.get()))
+        if(CABLES.UTILS.isNumeric(indx))
         {
-            if(op.index.get()<0 || op.index.get()>=cgl.frameStore.currentScene.getValue().meshes.length)
+            if(indx<0 || indx>=cgl.frameStore.currentScene.getValue().meshes.length)
             {
                 op.uiAttr({warning:'mesh not found - index out of range '});
                 return;
             }
 
-            jsonMesh=cgl.frameStore.currentScene.getValue().meshes[parseInt(op.index.get(),10) ];
+            jsonMesh=cgl.frameStore.currentScene.getValue().meshes[parseInt(indx,10) ];
         }
 
         if(!jsonMesh)
@@ -71,7 +78,7 @@ function reload()
         geom.vertexNormals=jsonMesh.normals||[];
         geom.tangents=jsonMesh.tangents||[];
         geom.biTangents=jsonMesh.bitangents||[];
-        
+
         if(centerPivot.get())geom.center();
 
         if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
@@ -85,16 +92,19 @@ function reload()
         nfo += geom.tangents.length+' tangents <br/>';
         nfo += geom.biTangents.length+' biTangents <br/>';
         if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
-        
+
         op.uiAttr({"info":nfo});
 
         geometryOut.set(null);
         geometryOut.set(geom);
         mesh=new CGL.Mesh(cgl,geom);
+        meshesCache[indx]=mesh;
     }
 }
 
 centerPivot.onChange=function()
 {
-    mesh=null;
+    // todo: dispose meshes
+    meshesCache={};
+
 };

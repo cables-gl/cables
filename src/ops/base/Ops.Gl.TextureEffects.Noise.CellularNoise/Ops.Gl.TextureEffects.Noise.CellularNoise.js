@@ -2,7 +2,7 @@ var render=op.inTrigger('render');
 var x=op.inValue("X",0);
 var y=op.inValue("Y",0);
 var z=op.inValue("Z",0);
-var scale=op.inValue("Scale",22);
+var scale=op.inValue("Scale",3);
 var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
@@ -31,7 +31,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

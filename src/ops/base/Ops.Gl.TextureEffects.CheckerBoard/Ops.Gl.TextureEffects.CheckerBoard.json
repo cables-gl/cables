@@ -7,7 +7,18 @@
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -19,7 +30,7 @@
         "name": "Ops.Gl.TextureEffects.CheckerBoard"
     },
     "summary": "draw a checkerboard pattern",
-    "updated": 1517176203883,
+    "updated": 1541165373372,
     "author": "5a0fe67d9641cedb39929853",
     "authorName": "pandur",
     "id": "9a183b68-f62c-4ba5-aad6-c7976de5a51f",

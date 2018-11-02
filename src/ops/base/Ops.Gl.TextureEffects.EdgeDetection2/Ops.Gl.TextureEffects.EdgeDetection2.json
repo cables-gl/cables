@@ -1,0 +1,41 @@
+{
+    "updated": 1541166651484,
+    "authorName": "andro",
+    "id": "ca2e8b01-77b8-4838-ba03-d93437e7bfc0",
+    "created": 1541165802237,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mul Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.EdgeDetection2"
+    }
+}

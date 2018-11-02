@@ -1,0 +1,56 @@
+{
+    "updated": 1541168679239,
+    "authorName": "andro",
+    "id": "fa089064-dce9-47b2-85b7-3fc64c784988",
+    "created": 1541166754440,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "smoothness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.SimplexNoise2"
+    }
+}

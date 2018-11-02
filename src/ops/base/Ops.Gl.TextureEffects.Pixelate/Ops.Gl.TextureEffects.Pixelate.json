@@ -7,11 +7,13 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -22,7 +24,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Pixelate"
     },
-    "updated": 1510252811304,
+    "updated": 1541052274617,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "c76d3d21-e6d8-4b6c-af3d-0f0a5ecbdaa8",

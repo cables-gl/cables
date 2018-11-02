@@ -3,16 +3,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
-        "name": "Ops.ValueBoolean"
+        "name": "Ops.Value.ValueBoolean"
     },
     "summary": "Stores a boolean value",
     "docs": {
@@ -26,5 +28,9 @@
                 "text": "Same as the input port `Value`"
             }
         ]
-    }
+    },
+    "updated": 1541052021738,
+    "authorName": "pandur",
+    "id": "83e2d74c-9741-41aa-a4d7-1bda4ef55fb3",
+    "created": 1541052012961
 }
