@@ -1,6 +1,5 @@
 var currentVal=op.outValue("Value");
 var oldVal=op.outValue("Last Value");
-
 var triggered=op.outTrigger("Triggered");
 
 var triggers=[];
@@ -31,7 +30,7 @@ oldVal.set(defaultVal.get());
 
 defaultVal.onChange = function(){
     oldVal.set(currentVal.get());
-    currentVal.set(defaultVal.get());  
+    currentVal.set(defaultVal.get());
 };
 
 

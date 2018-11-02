@@ -531,5 +531,5 @@ CGL.Mesh.prototype.dispose=function()
     if(this._bufVerticesIndizes) this._cgl.gl.deleteBuffer( this._bufVerticesIndizes );
 
     this._disposeAttributes();
-    console.log('mesh dispose');
+
 };

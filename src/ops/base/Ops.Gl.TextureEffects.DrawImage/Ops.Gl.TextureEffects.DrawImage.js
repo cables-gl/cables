@@ -19,11 +19,9 @@ var shader=new CGL.Shader(cgl,'drawimage');
 
 amount.set(1.0);
 
-
-
+render.onTriggered=doRender;
 
 var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
-
 
 shader.setSource(attachments.drawimage_vert,srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
@@ -117,14 +115,11 @@ blendMode.onChange=function()
 
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-
 var oldHadImageAlpha=false;
-
 
 function doRender()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
-
 
     if(imageAlpha.get() && !oldHadImageAlpha || !imageAlpha.get() && oldHadImageAlpha)
     {
@@ -138,10 +133,7 @@ function doRender()
             shader.removeDefine('HAS_TEXTUREALPHA');
             oldHadImageAlpha=false;
         }
-        
     }
-
-
 
     if(image.get() && image.get().tex && amount.get()>0.0)
     {
@@ -149,7 +141,7 @@ function doRender()
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        
+
         if(image.get() && image.get().tex) cgl.setTexture(1, image.get().tex );
             else cgl.setTexture(1, null);
 
@@ -163,4 +155,3 @@ function doRender()
     trigger.trigger();
 }
 
-render.onTriggered=doRender;

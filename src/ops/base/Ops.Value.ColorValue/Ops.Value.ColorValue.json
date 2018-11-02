@@ -1,5 +1,5 @@
 {
-    "updated": 1517408910688,
+    "updated": 1541051928298,
     "authorName": "tim",
     "id": "7caa37c8-f2a7-49f2-a29c-96af362abca0",
     "created": 1517408692744,
@@ -7,41 +7,50 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "outr"
+                "name": "outr",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "outg"
+                "name": "outg",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "outb"
+                "name": "outb",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "outa"
+                "name": "outa",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Hex"
+                "name": "Hex",
+                "subType": "number"
             },
             {
                 "type": "3",

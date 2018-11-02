@@ -1,7 +1,5 @@
 const
-    TAU = Math.PI * 2,
-    cgl = op.patch.cgl,
-    inRender = op.inFunction("render"),
+    inRender = op.inTrigger("render"),
     inSegments = op.inValue("segments", 40),
     inStacks = op.inValue("stacks", 1),
     inLength = op.inValue("length", 1),
@@ -9,10 +7,14 @@ const
     inInnerRadius = op.inValue("inner radius", 0),
     inUVMode = op.inValueSelect("UV mode", ["simple","atlas"],"simple"),
     inDraw = op.inValueBool("Draw",true),
-    outTrigger = op.outFunction("next"),
+    outTrigger = op.outTrigger("next"),
     outGeometry = op.outObject("geometry"),
-    geom = new CGL.Geometry("cylinder")
-;
+    geom = new CGL.Geometry("cylinder");
+
+const
+    TAU = Math.PI * 2,
+    cgl = op.patch.cgl;
+
 var needsRebuild = true;
 var mesh = null;
 inUVMode.hidePort();

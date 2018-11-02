@@ -1,5 +1,5 @@
 {
-    "updated": 1540382300862,
+    "updated": 1540979932806,
     "authorName": "pandur",
     "id": "93e45490-d5ec-421a-8f3e-d3c76a220b74",
     "created": 1540382300865,
@@ -16,12 +16,12 @@
             },
             {
                 "type": "0",
-                "name": "subDivs",
+                "name": "subdivs",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Bezier",
+                "name": "bezier",
                 "subType": "boolean"
             },
             {
@@ -31,12 +31,12 @@
             },
             {
                 "type": "0",
-                "name": "Closed",
+                "name": "closed",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Render",
+                "name": "draw",
                 "subType": "boolean"
             }
         ],
@@ -47,11 +47,11 @@
             },
             {
                 "type": "1",
-                "name": "triggerPoints"
+                "name": "triggerpoints"
             },
             {
                 "type": "3",
-                "name": "Points"
+                "name": "points"
             }
         ],
         "name": "Ops.Deprecated.Gl.Meshes.Spline"

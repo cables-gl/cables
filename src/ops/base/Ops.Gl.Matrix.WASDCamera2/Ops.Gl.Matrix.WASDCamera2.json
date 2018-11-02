@@ -1,5 +1,5 @@
 {
-    "updated": 1510090845923,
+    "updated": 1540980234710,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "af6c3fe2-58a9-4f81-be41-4c21aabffde9",
@@ -12,7 +12,8 @@
             },
             {
                 "type": "0",
-                "name": "Allow Flying"
+                "name": "allow flying",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -22,39 +23,46 @@
             },
             {
                 "type": "0",
-                "name": "isLocked"
+                "name": "islocked",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posX"
+                "name": "posx",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posY"
+                "name": "posy",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posZ"
+                "name": "posz",
+                "subType": "number"
             },
             {
                 "type": "1",
-                "name": "Mouse Left"
+                "name": "mouse left"
             },
             {
                 "type": "1",
-                "name": "Mouse Right"
+                "name": "mouse right"
             },
             {
                 "type": "0",
-                "name": "Dir X"
+                "name": "dir x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Dir Y"
+                "name": "dir y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Dir Z"
+                "name": "dir z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.WASDCamera2"

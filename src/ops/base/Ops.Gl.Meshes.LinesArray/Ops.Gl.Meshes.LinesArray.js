@@ -1,5 +1,3 @@
-
-op.name='LineArray';
 var render=op.inTrigger('render');
 var width=op.addInPort(new CABLES.Port(op,"width"));
 var height=op.addInPort(new CABLES.Port(op,"height"));
@@ -84,7 +82,7 @@ function rebuild()
         geom.vertices=verts;
         geom.texCoords=tc;
         geom.verticesIndices=indices;
-        
+
         var mesh=new CGL.Mesh(cgl, geom, cgl.gl.LINES);
         mesh.setGeom(geom);
         meshes.push(mesh);
@@ -109,10 +107,10 @@ function rebuild()
         var ltx=null,lty=null;
         var log=0;
         var doLoga=doLog.get();
-        
+
         var linePoints=[];
         lines.push(linePoints);
-        
+
 
         for(c=numColumns;c>=0;c--)
         {
@@ -121,14 +119,14 @@ function rebuild()
                 vy=(Math.log((r/numRows) )/min)*height.get() - height.get() /2+y;
             else
                 vy = r * stepRow    - height.get() / 2 + y;
-            
+
             var tx = c/numColumns;
             var ty = 1.0-r/numRows;
             if(doLoga) ty = (Math.log((r/numRows) )/min);
-            
+
             vz=0.0;
 
-            if(axis.get()=='xz') 
+            if(axis.get()=='xz')
             {
                 vz=vy;
                 vy= 0.0 ;
@@ -140,25 +138,25 @@ function rebuild()
                 verts.push( lvx );
                 verts.push( lvy );
                 verts.push( lvz );
-                
+
                 linePoints.push(lvx,lvy,lvz);
-    
+
                 verts.push( vx );
                 verts.push( vy );
                 verts.push( vz );
-    
+
                 tc.push( ltx );
                 tc.push( lty );
 
                 tc.push( tx );
                 tc.push( ty );
-    
+
                 indices.push(count);
                 count++;
                 indices.push(count);
                 count++;
             }
-            
+
             if(count>64000)
             {
                 addMesh();
@@ -172,7 +170,7 @@ function rebuild()
             lvz=vz;
         }
     }
-    
+
     outPointArrays.set(lines);
 
     addMesh();

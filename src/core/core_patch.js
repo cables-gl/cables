@@ -519,12 +519,12 @@ CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
     var port2 = op2.getPort(port2Name);
 
     if(!port1) {
-        console.warn('port not found! ' + port1Name);
+        console.warn('port not found! ' + port1Name+' ('+op1.objName+')');
         return;
     }
 
     if(!port2) {
-        console.warn('port not found! ' + port2Name + ' of ' + op2.name);
+        console.warn('port not found! ' + port2Name + ' of ' + op2.name+' ('+op2.objName+')');
         return;
     }
 

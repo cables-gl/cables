@@ -1,10 +1,9 @@
-op.name='Floor';
-var result=op.addOutPort(new CABLES.Port(op,"Result"));
-var number1=op.addInPort(new CABLES.Port(op,"Number"));
+const number1=op.inValue("Number");
+const result=op.outValue("Result");
+number1.onChange=exec;
 
 function exec()
 {
     result.set(Math.floor(number1.get()));
 }
 
-number1.onChange=exec;

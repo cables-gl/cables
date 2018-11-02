@@ -35,7 +35,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      */
     this.links=[];
     this.value=0.0;
-    this.name=name.toLowerCase();
+    this.name=name;
     this.type=type || CABLES.OP_PORT_TYPE_VALUE;
     this.uiAttribs=uiAttribs || {};
     this.anim=null;

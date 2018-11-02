@@ -5,7 +5,7 @@ const innerRadius=op.inValueSlider('innerRadius',0);
 const percent=op.inValueSlider('percent',1);
 const steps=op.inValue('steps',0);
 const invertSteps=op.inValueBool('invertSteps',false);
-const doRender=op.inValueBool('Render',true);
+const inDraw=op.inValueBool('Draw',true);
 const mapping=op.addInPort(new CABLES.Port(op,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
 const drawSpline=op.inValueBool("Spline",false);
 
@@ -41,10 +41,10 @@ render.onTriggered=function()
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
-    
+
     if(drawSpline.get()) shader.glPrimitive=cgl.gl.LINE_STRIP;
 
-    if(doRender.get())mesh.render(shader);
+    if(inDraw.get())mesh.render(shader);
     trigger.trigger();
 
     shader.glPrimitive=oldPrim;
@@ -53,7 +53,7 @@ render.onTriggered=function()
 function calc()
 {
     var segs=Math.max(3,Math.floor(segments.get()));
-    
+
     geom.clear();
 
     var faces=[];
@@ -85,7 +85,7 @@ function calc()
             degInRad = (360/segs)*i*CGL.DEG2RAD;
             posx=Math.cos(degInRad)*radius.get();
             posy=Math.sin(degInRad)*radius.get();
-            
+
             posyTexCoord=0.5;
 
             if(i>0)
@@ -94,7 +94,7 @@ function calc()
                 verts.push(lastY);
                 verts.push(0);
                 posxTexCoord=1.0-(i-1)/segs;
-                
+
                 tc.push(posxTexCoord,posyTexCoord);
             }
             verts.push(posx);
@@ -141,14 +141,14 @@ function calc()
             vertexNormals.push(0,0,1,0,0,1,0,0,1);
             tangents.push(1,0,0,1,0,0,1,0,0);
             biTangents.push(0,1,0,0,1,0,0,1,0);
-            
+
             oldPosXTexCoord=posxTexCoord;
             oldPosYTexCoord=posyTexCoord;
-            
+
             oldPosX=posx;
             oldPosY=posy;
         }
-      
+
         geom=CGL.Geometry.buildFromFaces(faces);
         geom.vertexNormals=vertexNormals;
         geom.tangents=tangents;
@@ -164,11 +164,11 @@ function calc()
         for (i=0; i <= numSteps; i++)
         {
             count++;
-            
+
             degInRad = (360/segs)*i*CGL.DEG2RAD;
             posx=Math.cos(degInRad)*radius.get();
             posy=Math.sin(degInRad)*radius.get();
-            
+
             var posxIn=Math.cos(degInRad)*innerRadius.get()*radius.get();
             var posyIn=Math.sin(degInRad)*innerRadius.get()*radius.get();
 
@@ -221,13 +221,13 @@ function calc()
 
             oldPosXTexCoordIn=posxTexCoordIn;
             oldPosYTexCoordIn=posyTexCoordIn;
-            
+
             oldPosXTexCoord=posxTexCoord;
             oldPosYTexCoord=posyTexCoord;
-            
+
             oldPosX=posx;
             oldPosY=posy;
-            
+
             oldPosXIn=posxIn;
             oldPosYIn=posyIn;
         }
@@ -243,7 +243,7 @@ function calc()
 
     geomOut.set(null);
     geomOut.set(geom);
-    
+
     if(geom.vertices.length==0)return;
     if(mesh) mesh.dispose();
     mesh=null;

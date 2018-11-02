@@ -1,30 +1,37 @@
 // adapted from the FreeGLUT project
 
-op.name='Cone';
+const render=op.inTrigger('render');
+const slices=op.inValue("slices",32);
+const stacks=op.inValue("stacks",5);
+const radius=op.inValue("radius",1);
+const height=op.inValue("height",2);
+const trigger=op.outTrigger('trigger');
+const geomOut=op.outObject("geometry");
 
-var render=op.inTrigger('render');
-var slices=op.addInPort(new CABLES.Port(op,"slices",CABLES.OP_PORT_TYPE_VALUE));
-var stacks=op.addInPort(new CABLES.Port(op,"stacks",CABLES.OP_PORT_TYPE_VALUE));
-var radius=op.addInPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
-
-var trigger=op.outTrigger('trigger');
-var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
-
-slices.set(32);
-stacks.set(5);
-radius.set(1);
-height.set(2);
 geomOut.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 var i=0,j=0,idx=0,offset=0;
 
+
+var needsRebuild=true;
+
+stacks.onChange=updateMeshLater;
+slices.onChange=updateMeshLater;
+radius.onChange=updateMeshLater;
+height.onChange=updateMeshLater;
+
+function updateMeshLater()
+{
+    needsRebuild=true;
+}
+
 render.onTriggered=function()
 {
-    if(mesh!==null) mesh.render(cgl.getShader());
+    if(needsRebuild) updateMesh();
+    mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
@@ -35,15 +42,10 @@ function updateMesh()
     if(nstacks<2)nstacks=2;
     if(nslices<2)nslices=2;
     var r=radius.get();
-    generateCone(r,height.get(), nstacks, nslices);
+    generateCone(r,Math.max(0.01,height.get()), nstacks, nslices);
+    needsRebuild=false;
 }
 
-stacks.onChange=updateMesh;
-slices.onChange=updateMesh;
-radius.onChange=updateMesh;
-height.onChange=updateMesh;
-
-updateMesh();
 
 function circleTable(n,halfCircle)
 {
@@ -67,7 +69,7 @@ function circleTable(n,halfCircle)
         sint[i] = Math.sin(angle*i);
         cost[i] = Math.cos(angle*i);
     }
-    
+
     if (halfCircle)
     {
         sint[size] =  0.0;  /* sin PI */

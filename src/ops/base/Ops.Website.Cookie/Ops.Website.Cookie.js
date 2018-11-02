@@ -1,5 +1,3 @@
-op.name="Cookie";
-
 var outCookie=op.outObject("Cookie");
 
 update();
@@ -7,11 +5,11 @@ update();
 function str_obj(str)
 {
     str = str.split(';');
-    
-    console.log('strings',str);
-    
+
+    // console.log('strings',str);
+
     var result = {};
-    
+
     for (var i = 0; i < str.length; i++)
     {
         var cur = str[i].split('=');

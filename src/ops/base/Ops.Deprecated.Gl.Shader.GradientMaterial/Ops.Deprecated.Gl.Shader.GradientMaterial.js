@@ -1,6 +1,5 @@
 var cgl=op.patch.cgl;
 
-op.name='GradientMaterial';
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
 
@@ -151,8 +150,8 @@ direction.onChange=function()
 };
 
 
-r3.onValueChanged();
-r2.onValueChanged();
-r.onValueChanged();
+// r3.onValueChanged();
+// r2.onValueChanged();
+// r.onValueChanged();
 render.onTriggered=doRender;
 doRender();

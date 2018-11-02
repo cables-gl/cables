@@ -8,23 +8,28 @@
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse r"
+                "name": "diffuse r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse g"
+                "name": "diffuse g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse b"
+                "name": "diffuse b",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -35,7 +40,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Border"
     },
-    "updated": 1510740112720,
+    "updated": 1541053765271,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "e6aae62c-1620-465d-94de-049148b530e6",

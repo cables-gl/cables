@@ -8,49 +8,7 @@ const trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTI
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
-const srcFrag=''
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'UNI float scale;'
-    .endl()+'UNI float angle;'
-    .endl()+'UNI float ratio;'
-    .endl()+'UNI float add;'
-    
-    .endl()+'float rand(vec2 co)'
-    .endl()+'{'
-    .endl()+'    return fract(sin(dot(co.xy ,vec2(13.98987,28.533))) * 4758.6453+add*0.1);'
-    .endl()+'}'
-    
-    .endl()+'float GetLocation(vec2 s, float d)'
-    .endl()+'{'
-    .endl()+'    vec2 f = s*d;'
-    .endl()+'    f = f + vec2(0,0.5)*floor(f).x;'
-    .endl()+'    s = fract(f);'
-    .endl()+'    f = floor(f);'
-    
-    .endl()+'    d = s.y - 0.5;'
-    .endl()+'    float l = abs(d) + 0.5 * s.x;'
-    .endl()+'    float ff = f.x+f.y;'
-    .endl()+'    f = mix(f, f+sign(d)*vec2(0,0.5), step(0.5, l));'
-    .endl()+'    l = mix(ff, ff+sign(d)*0.5, step(0.5, l));'
-    
-    .endl()+'    float r=mod(rand(f)*2.0,2.0);'
-    .endl()+'    if(r>1.0)r=2.0-r;'
-    
-    .endl()+'    return r;'
-    .endl()+'}'
-    
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'    vec2 coord=texCoord;'
-    .endl()+'    coord.y*=ratio;'
-    
-    .endl()+'    float sin_factor = sin(angle*0.01745329251);'
-    .endl()+'    float cos_factor = cos(angle*0.01745329251);'
-    .endl()+'    coord = vec2((coord.x - 0.5) , coord.y - ratio/2.0) * mat2(cos_factor, sin_factor, -sin_factor, cos_factor);'
-    
-    .endl()+'    float a=GetLocation(coord,scale);'
-    .endl()+'    outColor= vec4(a,a,a,1.);'
-    .endl()+'}';
+const srcFrag=attachments.trianglenoise_frag;
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 

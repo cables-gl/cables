@@ -3,11 +3,13 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -21,5 +23,9 @@
     "summary": "A very simple empty texture",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1541052853544,
+    "authorName": "pandur",
+    "id": "fc124913-0916-4f5c-83e0-702ddf66420c",
+    "created": 1541052805439
 }

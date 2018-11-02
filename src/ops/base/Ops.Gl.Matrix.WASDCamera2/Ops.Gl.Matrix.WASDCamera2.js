@@ -1,4 +1,3 @@
-op.name='WASDCamera';
 op.requirements=[CABLES.Requirements.POINTERLOCK];
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
@@ -9,7 +8,7 @@ var vPos=vec3.create();
 var speedx=0,speedy=0,speedz=0;
 var movementSpeedFactor = 0.5;
 
-var fly=op.inValueBool("Allow Flying");
+var fly=op.inValueBool("Allow Flying",true);
 
 var outPosX=op.addOutPort(new CABLES.Port(op,"posX",CABLES.OP_PORT_TYPE_VALUE));
 var outPosY=op.addOutPort(new CABLES.Port(op,"posY",CABLES.OP_PORT_TYPE_VALUE));
@@ -22,6 +21,7 @@ var outDirX=op.outValue("Dir X");
 var outDirY=op.outValue("Dir Y");
 var outDirZ=op.outValue("Dir Z");
 
+const DEG2RAD=3.14159/180.0;
 
 var rotX=0;
 var rotY=0;
@@ -31,18 +31,14 @@ var posY=0;
 var posZ=0;
 
 var cgl=op.patch.cgl;
-var DEG2RAD=3.14159/180.0;
+
 var viewMatrix = mat4.create();
-
-
-
-
 
 render.onTriggered=function()
 {
     calcCameraMovement();
     move();
-    
+
     if(!fly.get())posY=0.0;
 
     if(speedx!==0.0 || speedy!==0.0 || speedz!==0)
@@ -58,21 +54,21 @@ render.onTriggered=function()
 
     mat4.rotateX( cgl.vMatrix ,cgl.vMatrix,DEG2RAD*rotX);
     mat4.rotateY( cgl.vMatrix ,cgl.vMatrix,DEG2RAD*rotY);
-    
+
     mat4.translate( cgl.vMatrix ,cgl.vMatrix,vPos);
 
     trigger.trigger();
     cgl.popViewMatrix();
-    
+
     // for dir vec
     mat4.identity(viewMatrix);
     mat4.rotateX( viewMatrix ,viewMatrix,DEG2RAD*rotX);
     mat4.rotateY( viewMatrix ,viewMatrix,DEG2RAD*rotY);
     mat4.transpose(viewMatrix,viewMatrix);
-    
+
     var dir=vec4.create();
     vec4.transformMat4(dir,[0,0,1,1],viewMatrix);
-    
+
     vec4.normalize(dir,dir);
     outDirX.set(-dir[0]);
     outDirY.set(-dir[1]);
@@ -94,7 +90,7 @@ function calcCameraMovement()
     {
         // Control X-Axis movement
         pitchFactor = Math.cos(DEG2RAD*rotX);
-                
+
         camMovementXComponent += ( movementSpeedFactor * (Math.sin(DEG2RAD*rotY)) ) * pitchFactor;
 
         // Control Y-Axis movement
@@ -143,7 +139,7 @@ var mulSpeed=0.5;
     speedx = camMovementXComponent*mulSpeed;
     speedy = camMovementYComponent*mulSpeed;
     speedz = camMovementZComponent*mulSpeed;
-    
+
 
 
 
@@ -175,7 +171,7 @@ function mouseDown(e)
 {
     if(e.which==3) outMouseDownRight.trigger();
         else outMouseDown.trigger();
-    
+
 }
 
 
@@ -205,7 +201,7 @@ function lockChangeCallback(e)
         pressedD=false;
     }
 }
-   
+
 document.addEventListener('pointerlockchange', lockChangeCallback, false);
 document.addEventListener('mozpointerlockchange', lockChangeCallback, false);
 document.addEventListener('webkitpointerlockchange', lockChangeCallback, false);
@@ -228,7 +224,7 @@ function move()
     posX=posX+speedx;
     posY=posY+speedy;
     posZ=posZ+speedz;
-    
+
 
     lastMove = window.performance.now();
 }
