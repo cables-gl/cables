@@ -1,8 +1,12 @@
 IN vec2 texCoord;
+UNI sampler2D tex;
 UNI float scale;
 UNI float angle;
 UNI float ratio;
 UNI float add;
+UNI float amount;
+
+{{BLENDCODE}}
 
 float rand(vec2 co)
 {
@@ -38,5 +42,12 @@ void main()
     coord = vec2((coord.x - 0.5) , coord.y - ratio/2.0) * mat2(cos_factor, sin_factor, -sin_factor, cos_factor);
 
     float a=GetLocation(coord,scale);
-    outColor= vec4(a,a,a,1.);
+
+    vec4 col=vec4(a,a,a,1.0);
+    vec4 base=texture2D(tex,texCoord);
+
+    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
+    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
+
+    outColor= col;
 }

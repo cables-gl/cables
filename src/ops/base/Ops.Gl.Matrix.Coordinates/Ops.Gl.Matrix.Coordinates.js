@@ -1,18 +1,16 @@
+const render=op.inTrigger('render');
+const trigger=op.outTrigger('trigger');
+const outX=op.outValue("X");
+const outY=op.outValue("Y");
+const outZ=op.outValue("Z");
 
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
+const cgl=op.patch.cgl;
+const pos=vec3.create();
+const empty=vec3.create();
 
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
-
-
-var cgl=op.patch.cgl;
-var pos=vec3.create();
-var empty=vec3.create();
 render.onTriggered=function()
 {
-    vec3.transformMat4(pos, empty, cgl.mvMatrix);
+    vec3.transformMat4(pos, empty, cgl.mMatrix);
 
     outX.set(pos[0]);
     outY.set(pos[1]);

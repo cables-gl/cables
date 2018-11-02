@@ -8,8 +8,8 @@ const trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTI
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
-const srcFrag=attachments.trianglenoise_frag;
-
+//const srcFrag=attachments.trianglenoise_frag;
+const srcFrag=(attachments.trianglenoise_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);

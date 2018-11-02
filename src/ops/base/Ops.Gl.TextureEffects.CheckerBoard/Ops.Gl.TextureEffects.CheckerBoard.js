@@ -1,16 +1,24 @@
+const render=op.inTrigger('render');
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const lineSize=op.inValue("Size",10);
 
-var render=op.inTrigger('render');
-var lineSize=op.inValue("Size",10);
+const trigger=op.outTrigger('trigger');
 
-var trigger=op.outTrigger('trigger');
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const srcFrag=(attachments.checkerboard_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.checkerboard_frag);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
 
-var uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
-
+blendMode.onChange=function()
+{
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};
 
 render.onTriggered=function()
 {
@@ -18,6 +26,8 @@ render.onTriggered=function()
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
+
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

@@ -1,9 +1,13 @@
 {
+    "updated": 1541166651484,
+    "authorName": "andro",
+    "id": "ca2e8b01-77b8-4838-ba03-d93437e7bfc0",
+    "created": 1541165802237,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
             },
             {
                 "type": "0",
@@ -17,25 +21,21 @@
             },
             {
                 "type": "0",
-                "name": "Size",
+                "name": "strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mul Color",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.CheckerBoard"
-    },
-    "summary": "draw a checkerboard pattern",
-    "updated": 1541165373372,
-    "author": "5a0fe67d9641cedb39929853",
-    "authorName": "pandur",
-    "id": "9a183b68-f62c-4ba5-aad6-c7976de5a51f",
-    "created": 1511080400344,
-    "docs": {
-        "ports": []
+        "name": "Ops.Gl.TextureEffects.EdgeDetection2"
     }
 }
