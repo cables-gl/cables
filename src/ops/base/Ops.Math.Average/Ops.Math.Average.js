@@ -1,6 +1,6 @@
-var number=op.addInPort(new CABLES.Port(op,"number"));
-var result=op.addOutPort(new CABLES.Port(op,"result"));
-var infl=op.inValueSlider("Influence",0.2);
+const number=op.inValue("number");
+const result=op.outValue("result");
+const infl=op.inValueSlider("Influence",0.2);
 
 number.onChange=function()
 {

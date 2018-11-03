@@ -19,6 +19,11 @@
                 "type": "0",
                 "name": "Size",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -30,7 +35,7 @@
         "name": "Ops.Gl.TextureEffects.CheckerBoard"
     },
     "summary": "draw a checkerboard pattern",
-    "updated": 1541165373372,
+    "updated": 1541172748636,
     "author": "5a0fe67d9641cedb39929853",
     "authorName": "pandur",
     "id": "9a183b68-f62c-4ba5-aad6-c7976de5a51f",

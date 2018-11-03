@@ -1,4 +1,3 @@
-
 var render=op.inTrigger('render');
 var string=op.inValueString('Text','cables');
 
@@ -17,7 +16,7 @@ var characters=
             l:[
                 [182.667,349.057,164.167,349.057],
                 [160.333,360.557,171.333,326.89,175.333,326.89,186,360.557],
-            ]    
+            ]
         },
         {
             // b
@@ -122,7 +121,7 @@ var characters=
                 [160.283,332.448,165.764,326.967,178.405,326.967,183.668,332.23,183.668,354.365,177.434,360.599,166.367,360.599,160.167,354.399,160.283,332.448],
             ]
         },
-        
+
         {
             //p
             l:
@@ -130,7 +129,7 @@ var characters=
                 [160.167,360.432,160.167,327.015,175.955,327.015,179.667,330.728,179.667,341.015,175.602,345.08,160.167,345.08],
             ]
         },
-        
+
         {
             // q
             l:
@@ -206,8 +205,8 @@ var characters=
                 [161.167,326.807,180.5,326.807,180.5,332.473,161.167,355.223,161.167,360.557,180.5,360.557],
             ]
         },
-        
-        
+
+
         {
             // 0
             l:
@@ -277,10 +276,10 @@ var characters=
             // 9
             l:
             [
-                [167.591,360.557,173.076,360.557,180.5,353.132,180.5,334.315,173.076,326.89,167.591,326.89,160.167,334.315,160.167,342.932,180.5,342.932]                
+                [167.591,360.557,173.076,360.557,180.5,353.132,180.5,334.315,173.076,326.89,167.591,326.89,160.167,334.315,160.167,342.932,180.5,342.932]
             ]
         },
-        
+
         {
             // &
             l:
@@ -393,7 +392,7 @@ var characters=
 function translateX(w)
 {
     vec3.set(vec, w,0,0);
-    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+    mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
 }
 
 var alignMode=0;
@@ -415,7 +414,7 @@ function renderChar(charIndex,simulate)
     shader.glPrimitive=cgl.gl.LINE_STRIP;
 
     if(charIndex>=characters.length)charIndex=0;
-    
+
     if(!simulate)
     {
         for(var m=0;m<characters[charIndex].m.length;m++)
@@ -450,8 +449,8 @@ render.onTriggered=function()
     for(var sim=0;sim<2;sim++)
     {
         var simulate=sim===0;
-        
-        if(!simulate) 
+
+        if(!simulate)
         {
             if(alignMode==1) translateX(-stringWidth/2+0.04*letterSpacing.get());
             if(alignMode==2) translateX(-stringWidth+0.08*letterSpacing.get());
@@ -551,7 +550,6 @@ function width(which)
     return ((max-min));
 }
 
-
 meshes.length=0;
 
 var avgXY=[];
@@ -575,17 +573,17 @@ for(var i=0;i<characters.length;i++)
             vertices.push( (characters[i].l[l][j]-min(i))*0.005 );
             vertices.push( (characters[i].l[l][j+1]-avgXY[1])*-0.005 );
             vertices.push( 0 );
-            
+
             indices.push(count);
             count++;
         }
-        
+
         var geom=new CGL.Geometry();
         geom.vertices=vertices;
         geom.verticesIndices=indices;
         var mesh=new CGL.Mesh(op.patch.cgl,geom);
         characters[i].m.push(mesh);
     }
-    
+
     characters[i].w+=0.1;
 }
