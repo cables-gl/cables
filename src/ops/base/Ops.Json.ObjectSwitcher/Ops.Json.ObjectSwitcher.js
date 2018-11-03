@@ -26,7 +26,7 @@ function indexChanged()
 
 function onPortChange()
 {
-    if(this.data.inputNum != inIndex.get()) return;
+    if(op.data.inputNum != inIndex.get()) return;
 
     outObject.set(null);
     outObject.set(this.get());
