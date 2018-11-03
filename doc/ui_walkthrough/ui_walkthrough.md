@@ -190,3 +190,9 @@ set colors for ops for easier identification
 
 ![alt text ](video/colormarker.gif)
 
+
+
+create and link new op by clicking parameter
+
+![alt text ](video/linkparameter.gif)
+
