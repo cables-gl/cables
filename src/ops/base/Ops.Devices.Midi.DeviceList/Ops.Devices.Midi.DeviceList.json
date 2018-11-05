@@ -4,11 +4,13 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Num Devices"
+                "name": "Num Devices",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Midi Support"
+                "name": "Midi Support",
+                "subType": "boolean"
             },
             {
                 "type": "3",
@@ -16,5 +18,9 @@
             }
         ],
         "name": "Ops.Devices.Midi.DeviceList"
-    }
+    },
+    "updated": 1541344442989,
+    "authorName": "pandur",
+    "id": "6e52048f-557d-4332-9d5e-2201f728cb23",
+    "created": 1541344437570
 }

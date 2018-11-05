@@ -9,7 +9,7 @@ exe.onTriggered=function()
 {
     if(!arr.val)return;
 
-    op.patch.instancing.pushLoop(arr.get().length);
+    // op.patch.instancing.pushLoop(arr.get().length);
 
     for(var i=0;i<arr.get().length;i++)
     {
@@ -19,6 +19,6 @@ exe.onTriggered=function()
         op.patch.instancing.increment();
 
     }
-    op.patch.instancing.popLoop();
+    // op.patch.instancing.popLoop();
 
 };

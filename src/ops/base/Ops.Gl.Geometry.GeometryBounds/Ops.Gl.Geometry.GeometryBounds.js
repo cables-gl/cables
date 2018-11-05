@@ -1,8 +1,7 @@
-const inGeom=op.inObject("Geometry");
 const render=op.inTrigger("Render");
+const inGeom=op.inObject("Geometry");
 
 const next=op.outTrigger("Next");
-
 
 const outMinX=op.outValue("Min X");
 const outMaxX=op.outValue("Max X");
@@ -20,11 +19,10 @@ const outWidth=op.outValue("Width");
 const outHeight=op.outValue("Height");
 const outLength=op.outValue("Length");
 
-
-
 var wireMesh=null;
 var bounds=null;
 var cgl=op.patch.cgl;
+
 inGeom.onChange=function()
 {
     var geom=inGeom.get();
@@ -79,7 +77,7 @@ render.onTriggered=function()
             outCenterZ.get()
             );
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
 
         wireMesh.render(cgl,
             outWidth.get()/2,

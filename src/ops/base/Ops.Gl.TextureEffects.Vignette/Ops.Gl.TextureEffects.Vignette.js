@@ -1,4 +1,6 @@
 var render=op.inTrigger("render");
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
 var trigger=op.outTrigger("trigger");
 
 var amount=op.inValueSlider("Amount",1);
@@ -37,7 +39,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
