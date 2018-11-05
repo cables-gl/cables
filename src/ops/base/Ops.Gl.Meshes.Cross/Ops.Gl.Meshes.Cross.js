@@ -1,8 +1,8 @@
-const render = op.inTrigger('render');
-const extend = op.inValue('extend',1.0);
-const thick = op.inValue('thicker',0.25);
-const target = op.inValueBool('Crosshair');
-const active = op.inValueBool('Draw',true);
+const inRender = op.inTrigger('render');
+const inExtend = op.inValue('extend',1.0);
+const inThickness = op.inValue('thicker',0.25);
+const inTarget = op.inValueBool('Crosshair');
+const inActive = op.inValueBool('Draw',true);
 
 const trigger = op.outTrigger('trigger');
 const geomOut = op.outObject("geometry");
@@ -11,32 +11,32 @@ const cgl= op.patch.cgl;
 var geom = null;
 var mesh = null;
 
-render.onTriggered=function()
+inRender.onTriggered=function()
 {
     if(!mesh)buildMesh();
-    if(active.get() && mesh) mesh.render(cgl.getShader());
+    if(inActive.get() && mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
 
 function buildMesh()
 {
-    if(!geom)geom=new CGL.Geometry("cubemesh");
-    geom.clear();
-    
-    var ext = extend.get();
-    var thi = thick.get();
+    if(!geom)geom=new CGL.Geometry("cross");
+    else geom.clear();
 
-    if (thi < 0.0) 
+    var ext = inExtend.get();
+    var thi = inThickness.get();
+
+    if (thi < 0.0)
     {
         thi = 0.0;
     }
-    else if (thi > ext) 
+    else if (thi > ext)
     {
         thi = ext;
     }
 
-    if (ext < 0.0) 
+    if (ext < 0.0)
     {
         ext = 0.0;
         thi = 0.0;
@@ -57,32 +57,31 @@ function buildMesh()
         -cx,cy,0,           //1
         cx, cy,0,           //2
         cx,-cy,0,           //3
-        
+
         //left piece
         -ox,-cy,0,          //4
         -ox,cy,0,           //5
         -cx,cy,0,           //6
         -cx,-cy,0,          //7
-        
+
         //right piece
         cx,-cy,0,           //8
         cx,cy,0,            //9
         ox,cy,0,            //10
         ox,-cy,0,           //11
-        
+
         //top piece
         -cx,cy,0,           //12
         -cx,oy,0,           //13
         cx, oy,0,           //14
         cx,cy,0,            //15
-        
+
         //bottom piece
         -cx,-oy,0,          //12
         -cx,-cy,0,          //13
         cx, -cy,0,          //14
         cx,-oy,0            //15
-
-        ];
+    ];
 
     var texCoords = [];
     texCoords.length = (geom.vertices.length / 3.0) * 2.0;
@@ -98,37 +97,11 @@ function buildMesh()
     }
 
     geom.setTexCoords(texCoords);
+    geom.tangents=geom.vertices.map(function (v,i){return i%3==0?1:0});
+    geom.biTangents=geom.vertices.map(function(v,i){return i%3==1?1:0});
+    geom.vertexNormals=geom.vertices.map(function(v,i){return i%3==2?1:0});
 
-    geom.vertexNormals = [
-        //center piece
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        
-        //left
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        //right
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        //top
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        //bottom
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0,
-        0.0,0.0,1.0
-        ];
-
-    if(target.get() == true )
+    if(inTarget.get() == true )
     {
         //draws a crosshair
         geom.verticesIndices = [
@@ -170,6 +143,6 @@ function buildMeshLater()
     mesh = null;
 }
 
-extend.onChange =
-    thick.onChange = 
-    target.onChange = buildMeshLater;
+inExtend.onChange =
+inThickness.onChange =
+inTarget.onChange = buildMeshLater;

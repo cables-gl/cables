@@ -42,9 +42,12 @@ function calc()
     
     geom.clear();
 
-    var faces=[];
-    // var texCoords=[];
-    var vertexNormals=[];
+    var
+        faces=[],
+        normals=[],
+        tangents=[],
+        biTangents=[]
+    ;
 
     var i=0,degInRad=0;
     var oldPosX=0,oldPosY=0;
@@ -104,35 +107,25 @@ function calc()
                             [ooutX,ooutY,0],
                             [outX,outY,0],
                             [oldPosX,oldPosY,0]
-                            );
-                    
+                    );
+                    normals.push(0,0,1,0,0,1,0,0,1);
+                    tangents.push(1,0,0,1,0,0,1,0,0);
+                    biTangents.push(0,1,0,0,1,0,0,1,0);
                 }
 
             break;
         }
 
-
-        // if(mapping.get()=='flat')
-        // {
-        //     posxTexCoord=(Math.cos(degInRad)+1.0)/2;
-        //     posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
-        //     posxTexCoordIn=0.5;
-        //     posyTexCoordIn=0.5;
-        // }
-        // else if(mapping.get()=='round')
-        // {
-        //     posxTexCoord=1.0-i/segs;
-        //     posyTexCoord=0;
-        //     posxTexCoordIn=posxTexCoord;
-        //     posyTexCoordIn=1;
-        // }
-
-        if(fill.get())
+        if(fill.get()) {
             faces.push(
                   [posx,posy,0],
                   [oldPosX,oldPosY,0],
                   [0,0,0]
-                  );
+            );
+            normals.push(0,0,1,0,0,1,0,0,1);
+            tangents.push(1,0,0,1,0,0,1,0,0);
+            biTangents.push(0,1,0,0,1,0,0,1,0);
+        }
 
 
         if(imode!=2 || cycleGear)
@@ -141,19 +134,20 @@ function calc()
                     [posx,posy,0],
                     [oldPosX,oldPosY,0],
                     [outX,outY,0]
-                    );
+            );
+            normals.push(0,0,1,0,0,1,0,0,1);
+            tangents.push(1,0,0,1,0,0,1,0,0);
+            biTangents.push(0,1,0,0,1,0,0,1,0);
         }
 
-        // oldPosXTexCoord=posxTexCoord;
-        // oldPosYTexCoord=posyTexCoord;
-        
         oldPosX=posx;
         oldPosY=posy;
     }
   
     geom=CGL.Geometry.buildFromFaces(faces);
-    geom.vertexNormals=vertexNormals;
-    // geom.texCoords=texCoords;
+    geom.vertexNormals=normals;
+    geom.tangents=tangents;
+    geom.biTangents=biTangents;
     geom.mapTexCoords2d();
 
     geomOut.set(null);
@@ -163,10 +157,6 @@ function calc()
     if(!mesh)mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
 }
-
-// var mapping=op.addInPort(new CABLES.Port(op,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
-// mapping.set('flat');
-// mapping.onValueChange(calc);
 
 segments.onChange=calc;
 radius.onChange=calc;
