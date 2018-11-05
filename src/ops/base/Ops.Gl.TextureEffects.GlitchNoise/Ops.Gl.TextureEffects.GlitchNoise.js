@@ -15,7 +15,7 @@ const trigger=op.outTrigger('trigger');
 const TEX_SLOT=0;
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
-const srcFrag=(attachments.interference_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+const srcFrag=(attachments.glitchnoise_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',TEX_SLOT);
