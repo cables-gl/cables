@@ -59,6 +59,8 @@ function calc()
     var faces=[];
     var texCoords=[];
     var vertexNormals=[];
+    var tangents=[];
+    var biTangents=[];
 
     var i=0,degInRad=0;
     var oldPosX=0,oldPosY=0;
@@ -137,6 +139,8 @@ function calc()
 
             texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
             vertexNormals.push(0,0,1,0,0,1,0,0,1);
+            tangents.push(1,0,0,1,0,0,1,0,0);
+            biTangents.push(0,1,0,0,1,0,0,1,0);
 
             oldPosXTexCoord=posxTexCoord;
             oldPosYTexCoord=posyTexCoord;
@@ -147,6 +151,8 @@ function calc()
 
         geom=CGL.Geometry.buildFromFaces(faces);
         geom.vertexNormals=vertexNormals;
+        geom.tangents=tangents;
+        geom.biTangents=biTangents;
         geom.texCoords=texCoords;
     }
     else
@@ -199,8 +205,18 @@ function calc()
                     oldPosXTexCoord,0,
                     oldPosXTexCoordIn,1);
 
-                vertexNormals.push(0,0,1,0,0,1,0,0,1);
-                vertexNormals.push(0,0,1,0,0,1,0,0,1);
+                vertexNormals.push(
+                    0,0,1,0,0,1,0,0,1,
+                    0,0,1,0,0,1,0,0,1
+                );
+                tangents.push(
+                    1,0,0,1,0,0,1,0,0,
+                    1,0,0,1,0,0,1,0,0
+                );
+                biTangents.push(
+                    0,1,0,0,1,0,0,1,0,
+                    0,1,0,0,1,0,0,1,0
+                );
             }
 
             oldPosXTexCoordIn=posxTexCoordIn;
@@ -218,6 +234,8 @@ function calc()
 
         geom=CGL.Geometry.buildFromFaces(faces);
         geom.vertexNormals=vertexNormals;
+        geom.tangents=tangents;
+        geom.biTangents=biTangents;
 
         if(mapping.get()=='flat') geom.mapTexCoords2d();
             else geom.texCoords=texCoords;

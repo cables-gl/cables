@@ -13,12 +13,10 @@ UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
 #ifdef HAS_TEXTURES
-    #ifdef TEXTURE_REPEAT
-        UNI float diffuseRepeatX;
-        UNI float diffuseRepeatY;
-        UNI float texOffsetX;
-        UNI float texOffsetY;
-    #endif
+    UNI float diffuseRepeatX;
+    UNI float diffuseRepeatY;
+    UNI float texOffsetX;
+    UNI float texOffsetY;
 #endif
 
 
@@ -26,14 +24,12 @@ void main()
 {
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix;
-    
+
     texCoordOrig=attrTexCoord;
     texCoord=attrTexCoord;
     #ifdef HAS_TEXTURES
-        #ifdef TEXTURE_REPEAT
-            texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
-            texCoord.y=texCoord.y*diffuseRepeatY+texOffsetY;
-        #endif
+        texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
+        texCoord.y=texCoord.y*diffuseRepeatY+texOffsetY;
     #endif
 
     vec4 pos = vec4( vPosition, 1. );

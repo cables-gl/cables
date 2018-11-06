@@ -1,5 +1,5 @@
 {
-    "updated": 1541418362575,
+    "updated": 1541534892597,
     "authorName": "pandur",
     "id": "eab5773b-dd10-4617-a8a0-e3990b10477a",
     "created": 1540369391208,
@@ -33,7 +33,7 @@
         "portsOut": [
             {
                 "type": "1",
-                "name": "Trigger"
+                "name": "Next"
             },
             {
                 "type": "2",

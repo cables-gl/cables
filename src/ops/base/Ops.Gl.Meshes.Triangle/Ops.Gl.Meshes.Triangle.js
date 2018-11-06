@@ -33,6 +33,16 @@ function create()
          0.0,  0.0,  1.0,
          0.0,  0.0,  1.0
     ];
+    geom.tangents = [
+        1,0,0,
+        1,0,0,
+        1,0,0
+    ];
+    geom.biTangents = [
+        0,1,0,
+        0,1,0,
+        0,1,0
+    ];
 
     geom.texCoords = [
          0.5,  0.0,

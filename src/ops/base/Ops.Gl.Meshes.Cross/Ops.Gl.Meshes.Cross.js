@@ -1,10 +1,10 @@
-var render = op.inFunction('Render');
+var render = op.inTrigger('Render');
 var size = op.inValue('Size');
 var thick = op.inValue('Thickness');
 var target = op.inValueBool('Crosshair');
 var active = op.inValueBool('Active',true);
 
-var trigger = op.outFunction('Trigger');
+var trigger = op.outTrigger('Next');
 var geomOut = op.outObject("Geometry");
 
 
@@ -85,8 +85,7 @@ function buildMesh()
         -cx,-cy,0,          //13
         cx, -cy,0,          //14
         cx,-oy,0            //15
-
-        ];
+    ];
 
     var texCoords = [];
     texCoords.length = (geom.vertices.length / 3.0) * 2.0;
@@ -102,6 +101,9 @@ function buildMesh()
     }
 
     geom.setTexCoords(texCoords);
+    geom.tangents=geom.vertices.map(function (v,i){return i%3==0?1:0});
+    geom.biTangents=geom.vertices.map(function(v,i){return i%3==1?1:0});
+    geom.vertexNormals=geom.vertices.map(function(v,i){return i%3==2?1:0});
 
     geom.vertexNormals = [
         //center piece
