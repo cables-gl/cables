@@ -1,0 +1,21 @@
+{
+    "updated": 1541535099997,
+    "authorName": "pandur",
+    "id": "3deae69f-510f-4364-9b0b-98aca34ccf54",
+    "created": 1541409220449,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ClearAlpha"
+    }
+}

@@ -1,7 +1,7 @@
 const render=op.inTrigger('render');
 const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 const amount=op.inValueSlider("Amount",1);
-const inDepthTex=op.inTexture("Depth Texture");
+const inDepthTex=op.inTexture("image");
 const farPlane=op.inValue("farplane",50.0);
 const nearPlane=op.inValue("nearplane",0.1);
 const inInv=op.inValueBool("Invert",false);
