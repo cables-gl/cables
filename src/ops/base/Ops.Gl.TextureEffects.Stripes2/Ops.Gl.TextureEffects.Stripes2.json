@@ -1,9 +1,13 @@
 {
+    "updated": 1541172248019,
+    "authorName": "andro",
+    "id": "b8a37747-1e84-4665-b1cc-29256d55cc7c",
+    "created": 1541169517706,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
             },
             {
                 "type": "0",
@@ -17,28 +21,48 @@
             },
             {
                 "type": "0",
-                "name": "X",
+                "name": "Num",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y",
+                "name": "Width",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z",
+                "name": "Rotate",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale",
+                "name": "Offset",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Tileable",
+                "name": "Gradients",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -47,22 +71,11 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Noise.CellularNoise"
+        "name": "Ops.Gl.TextureEffects.Stripes2"
     },
-    "credits": [
-        {
-            "title": "GPU-Noise-Lib",
-            "author": "Brian Sharpe",
-            "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
-            "license": "Public Domain"
-        }
-    ],
-    "summary": "cellular noise",
+    "summary": "Draw stripes into the current ImageCompose",
+    "youtubeid": "",
     "docs": {
         "ports": []
-    },
-    "updated": 1541533679784,
-    "authorName": "pandur",
-    "id": "62fa72eb-a607-4397-8b44-f8fd2a6cbe34",
-    "created": 1533920280260
+    }
 }

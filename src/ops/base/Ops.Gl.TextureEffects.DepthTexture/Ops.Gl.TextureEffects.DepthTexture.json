@@ -6,8 +6,18 @@
                 "name": "render"
             },
             {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
                 "type": "2",
-                "name": "image"
+                "name": "Depth Texture"
             },
             {
                 "type": "0",
@@ -21,7 +31,7 @@
             },
             {
                 "type": "0",
-                "name": "invert",
+                "name": "Invert",
                 "subType": "boolean"
             }
         ],
@@ -34,7 +44,7 @@
         "name": "Ops.Gl.TextureEffects.DepthTexture"
     },
     "summary": "draw the content of a depth texture",
-    "updated": 1540923157037,
+    "updated": 1541533864058,
     "authorName": "pandur",
     "id": "3e58b781-e6cd-466f-afc1-8477c32025e0",
     "created": 1516277778183,

@@ -1,18 +1,24 @@
 const render=op.inTrigger('render');
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
 const trigger=op.outTrigger('trigger');
 const smooth=op.inValueBool("Smooth",false);
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
-shader.setSource(shader.getDefaultVertexShader(),attachments.border_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var aspectUniform=new CGL.Uniform(shader,'f','aspect',0);
-var uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
+
+const srcFrag=(attachments.border_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const aspectUniform=new CGL.Uniform(shader,'f','aspect',0);
+const uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
 
 {
-    var width=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-    width.set(0.1);
-    var uniWidth=new CGL.Uniform(shader,'f','width',width.get());
+    const width=op.inValue("width",0.1);
+
+    const uniWidth=new CGL.Uniform(shader,'f','width',width.get());
 
     width.onValueChange(function()
     {
@@ -46,6 +52,11 @@ var uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
     g.set(Math.random());
     b.set(Math.random());
 }
+
+blendMode.onChange=function()
+{
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};
 
 render.onTriggered=function()
 {

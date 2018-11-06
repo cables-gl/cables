@@ -1,11 +1,14 @@
 IN vec2 texCoord;
-uniform sampler2D tex;
-uniform float smoothness;
-uniform float scale;
-uniform float seed;
-uniform float x;
-uniform float y;
-uniform float time;
+UNI sampler2D tex;
+UNI float amount;
+UNI float smoothness;
+UNI float scale;
+UNI float seed;
+UNI float x;
+UNI float y;
+UNI float time;
+
+{{BLENDCODE}}
 
 void FAST32_hash_3D(    vec3 gridcell,
                         vec3 v1_mask,       //  user definable v1 and v2.  ( 0s and 1s )
@@ -152,16 +155,23 @@ float SimplexPerlin3D(vec3 P)
     return dot( Simplex3D_GetSurfletWeights( v1234_x, v1234_y, v1234_z ), grad_results ) * FINAL_NORMALIZATION;
 }
 
+void main()
+{
 
-    void main()
-    {
+    vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
+    p=p*scale;
 
-       vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
-       p=p*scale;
+    p=vec2(p.x+0.5-x,p.y+0.5-y);
 
-       p=vec2(p.x+0.5-x,p.y+0.5-y);
+    float v=SimplexPerlin3D(vec3(p.x,p.y,time))*0.5+0.5;
 
-       float v=SimplexPerlin3D(vec3(p.x,p.y,time))*0.5+0.5;
-       vec4 col=vec4(v,v,v,1.0);
-       outColor= col;
-    }
+    //blend section
+    vec4 col=vec4(v,v,v,1.0);
+
+    vec4 base=texture2D(tex,texCoord);
+
+    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
+    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
+
+    outColor = col;
+}
