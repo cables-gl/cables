@@ -1,6 +1,4 @@
 var render=op.inTrigger("render");
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
 var trigger=op.outTrigger("trigger");
 
 var amount=op.inValueSlider("Amount",1);
@@ -21,6 +19,7 @@ var shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.vignette_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+
 var uniLensRadius1=new CGL.Uniform(shader,'f','lensRadius1',lensRadius1);
 var uniaspect=new CGL.Uniform(shader,'f','aspect',aspect);
 var uniAmount=new CGL.Uniform(shader,'f','amount',amount);

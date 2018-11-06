@@ -52,5 +52,10 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.SimplexNoise2"
+    },
+    "summary": "Simplex noise generator",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

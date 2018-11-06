@@ -1,5 +1,5 @@
 {
-    "updated": 1540370054906,
+    "updated": 1541418362575,
     "authorName": "pandur",
     "id": "eab5773b-dd10-4617-a8a0-e3990b10477a",
     "created": 1540369391208,
@@ -7,16 +7,16 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
             },
             {
                 "type": "0",
-                "name": "extend",
+                "name": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "thicker",
+                "name": "Thickness",
                 "subType": "number"
             },
             {
@@ -26,18 +26,18 @@
             },
             {
                 "type": "0",
-                "name": "Draw",
+                "name": "Active",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Trigger"
             },
             {
                 "type": "2",
-                "name": "geometry"
+                "name": "Geometry"
             }
         ],
         "name": "Ops.Gl.Meshes.Cross"

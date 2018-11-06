@@ -37,5 +37,10 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.EdgeDetection2"
+    },
+    "summary": "Draw only the edges of an image",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

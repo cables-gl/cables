@@ -1,4 +1,8 @@
 {
+    "updated": 1541486748880,
+    "authorName": "pandur",
+    "id": "c089646e-9324-48b2-8b32-81240408222e",
+    "created": 1541486742328,
     "layout": {
         "portsIn": [
             {
@@ -7,13 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "amountX",
+                "name": "amount X",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "amountY",
+                "name": "amount Y",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Input",
+                "subType": "string"
             },
             {
                 "type": "2",
@@ -26,15 +40,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.PixelDisplacement"
-    },
-    "summary": "Changes color lookup for every pixel using a displacement map",
-    "updated": 1535994572329,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "cd2987b3-b07b-4bcb-935a-1bf038780b2c",
-    "created": 1508866014799,
-    "docs": {
-        "ports": []
+        "name": "Ops.Gl.TextureEffects.PixelDisplacement3"
     }
 }
