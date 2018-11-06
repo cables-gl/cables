@@ -8,19 +8,23 @@
             },
             {
                 "type": "0",
-                "name": "sides"
+                "name": "sides",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rings"
+                "name": "rings",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "innerRadius"
+                "name": "innerRadius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "outerRadius"
+                "name": "outerRadius",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -35,7 +39,7 @@
         ],
         "name": "Ops.Gl.Meshes.Torus"
     },
-    "updated": 1518895048329,
+    "updated": 1541417597351,
     "authorName": "pandur",
     "id": "d921e008-21b9-4cf5-84a2-4dedca34f0c8",
     "created": 1518894913872,

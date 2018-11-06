@@ -1,20 +1,13 @@
-
-var render=op.inTrigger('render');
-var sides=op.addInPort(new CABLES.Port(op,"sides",CABLES.OP_PORT_TYPE_VALUE));
-var rings=op.addInPort(new CABLES.Port(op,"rings",CABLES.OP_PORT_TYPE_VALUE));
-var innerRadius=op.addInPort(new CABLES.Port(op,"innerRadius",CABLES.OP_PORT_TYPE_VALUE));
-var outerRadius=op.addInPort(new CABLES.Port(op,"outerRadius",CABLES.OP_PORT_TYPE_VALUE));
-
-var trigger=op.outTrigger('trigger');
-var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+const render=op.inTrigger('render');
+const sides=op.inValue("sides",32);
+const rings=op.inValue("rings",32);
+const innerRadius=op.inValue("innerRadius",0.5);
+const outerRadius=op.inValue("outerRadius",1);
+const trigger=op.outTrigger('trigger');
+const geomOut=op.outObject("geometry");
 
 const UP=vec3.fromValues(0,1,0),RIGHT=vec3.fromValues(1,0,0);
 var tmpNormal = vec3.create(), tmpVec = vec3.create();
-
-sides.set(32);
-rings.set(32);
-innerRadius.set(0.5);
-outerRadius.set(1);
 
 geomOut.ignoreValueSerialize=true;
 
@@ -22,13 +15,19 @@ var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 var j=0,i=0,idx=0;
-rings.onChange=updateMesh;
-sides.onChange=updateMesh;
-innerRadius.onChange=updateMesh;
-outerRadius.onChange=updateMesh;
+var needsUpdate=true;
+
+rings.onChange=
+sides.onChange=
+innerRadius.onChange=
+outerRadius.onChange=function()
+{
+    needsUpdate=true;
+};
 
 render.onTriggered=function()
 {
+    if(needsUpdate)updateMesh();
     if(mesh!==null) mesh.render(cgl.getShader());
     trigger.trigger();
 };
@@ -42,10 +41,8 @@ function updateMesh()
     var r=innerRadius.get();
     var r2=outerRadius.get();
     generateTorus(r,r2, nrings, nsides);
+    needsUpdate=false;
 }
-
-
-updateMesh();
 
 function circleTable(n,halfCircle)
 {
@@ -122,10 +119,8 @@ function generateTorus(iradius,oradius,nRings,nSides)
 
             geom.texCoords[offset2] = 0;
             geom.texCoords[offset2+1] = 0;
-
         }
     }
-
 
     for( i=0, idx=0; i<nSides; i++ )
     {

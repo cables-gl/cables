@@ -100,7 +100,7 @@ inTrigger.onTriggered = function () {
     if (needsRebuild) buildMesh();
     if (inDraw.get()) mesh.render(cgl.getShader());
     outTrigger.trigger();
-}
+};
 
 inStacks.onChange =
 inSlices.onChange =
@@ -111,4 +111,4 @@ inRadius.onChange = function() {
 };
 
 // set lifecycle handlers
-op.onDelete = function () { mesh.dispose(); }
+op.onDelete = function () { mesh.dispose(); };

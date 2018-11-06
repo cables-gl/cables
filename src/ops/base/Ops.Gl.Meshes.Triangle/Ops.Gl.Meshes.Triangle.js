@@ -33,7 +33,7 @@ function create()
          0.0,  0.0,  1.0,
          0.0,  0.0,  1.0
     ];
-    geom.trangents = [
+    geom.tangents = [
         1,0,0,
         1,0,0,
         1,0,0
