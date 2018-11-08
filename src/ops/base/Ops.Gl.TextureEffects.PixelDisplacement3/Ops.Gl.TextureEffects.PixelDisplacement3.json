@@ -1,0 +1,45 @@
+{
+    "updated": 1541486748880,
+    "authorName": "pandur",
+    "id": "c089646e-9324-48b2-8b32-81240408222e",
+    "created": 1541486742328,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "amount X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "amount Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Input",
+                "subType": "string"
+            },
+            {
+                "type": "2",
+                "name": "displaceTex"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.PixelDisplacement3"
+    }
+}

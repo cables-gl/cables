@@ -1,5 +1,5 @@
 {
-    "updated": 1541166651484,
+    "updated": 1541498066587,
     "authorName": "andro",
     "id": "ca2e8b01-77b8-4838-ba03-d93437e7bfc0",
     "created": 1541165802237,
@@ -37,5 +37,10 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.EdgeDetection2"
+    },
+    "summary": "Draw only the edges of an image",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

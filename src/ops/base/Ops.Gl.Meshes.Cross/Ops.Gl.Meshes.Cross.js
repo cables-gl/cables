@@ -1,31 +1,35 @@
-const inRender = op.inTrigger('render');
-const inExtend = op.inValue('extend',1.0);
-const inThickness = op.inValue('thicker',0.25);
-const inTarget = op.inValueBool('Crosshair');
-const inActive = op.inValueBool('Draw',true);
+var render = op.inTrigger('Render');
+var size = op.inValue('Size');
+var thick = op.inValue('Thickness');
+var target = op.inValueBool('Crosshair');
+var active = op.inValueBool('Active',true);
 
-const trigger = op.outTrigger('trigger');
-const geomOut = op.outObject("geometry");
+var trigger = op.outTrigger('Next');
+var geomOut = op.outObject("Geometry");
 
-const cgl= op.patch.cgl;
+
+var cgl= op.patch.cgl;
 var geom = null;
 var mesh = null;
 
-inRender.onTriggered=function()
+size.set(1.0);
+thick.set(0.25);
+
+render.onTriggered=function()
 {
     if(!mesh)buildMesh();
-    if(inActive.get() && mesh) mesh.render(cgl.getShader());
+    if(active.get() && mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
 
 function buildMesh()
 {
-    if(!geom)geom=new CGL.Geometry("cross");
-    else geom.clear();
+    if(!geom)geom=new CGL.Geometry("cubemesh");
+    geom.clear();
 
-    var ext = inExtend.get();
-    var thi = inThickness.get();
+    var ext = size.get()/2.0;
+    var thi = thick.get();
 
     if (thi < 0.0)
     {
@@ -101,7 +105,36 @@ function buildMesh()
     geom.biTangents=geom.vertices.map(function(v,i){return i%3==1?1:0});
     geom.vertexNormals=geom.vertices.map(function(v,i){return i%3==2?1:0});
 
-    if(inTarget.get() == true )
+    geom.vertexNormals = [
+        //center piece
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+
+        //left
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        //right
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        //top
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        //bottom
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0,
+        0.0,0.0,1.0
+        ];
+
+    if(target.get() == true )
     {
         //draws a crosshair
         geom.verticesIndices = [
@@ -135,6 +168,7 @@ function buildMesh()
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);
     geomOut.set(geom);
+
 }
 
 function buildMeshLater()
@@ -143,6 +177,6 @@ function buildMeshLater()
     mesh = null;
 }
 
-inExtend.onChange =
-inThickness.onChange =
-inTarget.onChange = buildMeshLater;
+size.onChange = buildMeshLater;
+thick.onChange = buildMeshLater;
+target.onChange = buildMeshLater;

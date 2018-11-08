@@ -8,6 +8,16 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Smooth",
                 "subType": "boolean"
             },
@@ -40,7 +50,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Border"
     },
-    "updated": 1541053765271,
+    "updated": 1541533746205,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "e6aae62c-1620-465d-94de-049148b530e6",

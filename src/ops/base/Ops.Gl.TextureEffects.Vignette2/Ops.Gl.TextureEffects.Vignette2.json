@@ -1,13 +1,13 @@
 {
-    "updated": 1541409536000,
+    "updated": 1541498368236,
     "authorName": "andro",
-    "id": "fa089064-dce9-47b2-85b7-3fc64c784988",
-    "created": 1541166754440,
+    "id": "ee274501-ac60-49ab-a854-80aa38c36f76",
+    "created": 1541409767721,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
             },
             {
                 "type": "0",
@@ -21,36 +21,51 @@
             },
             {
                 "type": "0",
-                "name": "smoothness",
+                "name": "Strength",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scale",
+                "name": "Radius",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "x",
+                "name": "Sharp",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y",
+                "name": "Aspect",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "time",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.SimplexNoise2"
+        "name": "Ops.Gl.TextureEffects.Vignette2"
+    },
+    "summary": "Simulating an old camera effect of fading away the edges of the image",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }
