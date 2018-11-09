@@ -1,28 +1,37 @@
-const render=op.inTrigger("render");
-const amount=op.inValueSlider("amount X");
-const amountY=op.inValueSlider("amount Y");
+const
+    render=op.inTrigger("render"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    amountX=op.inValueSlider("amount X"),
+    amountY=op.inValueSlider("amount Y"),
+    inWrap=op.inValueSelect("Wrap",["Mirror","Clamp","Repeat"],"Mirror"),
+    inInput=op.inValueSelect("Input",["Luminance","RedGreen","Red","Green","Blue"],"Luminance"),
+    displaceTex=op.inTexture("displaceTex"),
+    trigger=op.outTrigger("trigger");
 
-const inWrap=op.inValueSelect("Wrap",["Mirror","Clamp","Repeat"],"Mirror");
-const inInput=op.inValueSelect("Input",["Luminance","RedGreen","Red","Green","Blue"],"Luminance");
+const
+    cgl=op.patch.cgl,
+    shader=new CGL.Shader(cgl);
 
-const displaceTex=op.inTexture("displaceTex");
-const trigger=op.outTrigger("trigger");
+shader.setSource(shader.getDefaultVertexShader(),attachments.pixeldisplace3_frag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode()));
 
-const cgl=op.patch.cgl;
-const shader=new CGL.Shader(cgl);
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    textureDisplaceUniform=new CGL.Uniform(shader,'t','displaceTex',1),
+    amountXUniform=new CGL.Uniform(shader,'f','amountX',amountX),
+    amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.pixeldisplace3_frag);
-const textureUniform=new CGL.Uniform(shader,'t','tex',0);
-const textureDisplaceUniform=new CGL.Uniform(shader,'t','displaceTex',1);
-
-const amountXUniform=new CGL.Uniform(shader,'f','amountX',amount);
-const amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY);
-
-inWrap.onChange=updateWrap;
+inWrap.onChange=
 inInput.onChange=updateInput;
 
 updateWrap();
 updateInput();
+
+blendMode.onChange=function()
+{
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};
 
 function updateWrap()
 {
@@ -48,7 +57,6 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-
     if(displaceTex.get()) cgl.setTexture(1, displaceTex.get().tex );
 
     cgl.currentTextureEffect.finish();
@@ -56,4 +64,3 @@ render.onTriggered=function()
 
     trigger.trigger();
 };
-

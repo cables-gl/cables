@@ -1,5 +1,3 @@
-op.name='TextureText';
-
 var text=op.addInPort(new CABLES.Port(op,"text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var inFontSize=op.addInPort(new CABLES.Port(op,"fontSize"));
 var maximize=op.addInPort(new CABLES.Port(op,"Maximize Size",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
@@ -75,7 +73,6 @@ function refresh()
     {
         var txt=(text.get()+'').replace(/<br\/>/g, '\n');
 
-        if(txt=='0')txt=' ';
         var strings = txt.split("\n");
         var posy=0,i=0;
 
@@ -102,7 +99,7 @@ function refresh()
             while(maxWidth>ctx.canvas.width || maxHeight>ctx.canvas.height);
         }
 
-        if(valign.get()=='center') 
+        if(valign.get()=='center')
         {
             var maxy=(strings.length-1.5)*fontSize+parseFloat(lineDistance.get());
             posy=ctx.canvas.height / 2-maxy/2;

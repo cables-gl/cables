@@ -1,21 +1,30 @@
-const render=op.inTrigger('Render');
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
-const animated=op.inValueBool("Animated",true);
-const trigger=op.outTrigger("Next");
+const
+    render=op.inTrigger('Render'),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    animated=op.inValueBool("Animated",true),
+    inRGB=op.inValueBool("RGB",false),
+    trigger=op.outTrigger("Next");
 
-const cgl=op.patch.cgl;
-const shader=new CGL.Shader(cgl);
+const
+    cgl=op.patch.cgl,
+    shader=new CGL.Shader(cgl),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
+    timeUniform=new CGL.Uniform(shader,'f','time',1.0),
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    srcFrag=attachments.noise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
-const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-const timeUniform=new CGL.Uniform(shader,'f','time',1.0);
-const textureUniform=new CGL.Uniform(shader,'t','tex',0);
-const srcFrag=attachments.noise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};
+
+inRGB.onChange=function()
+{
+    if(inRGB.get())shader.define("RGB");
+    else shader.removeDefine("RGB");
 };
 
 render.onTriggered=function()
