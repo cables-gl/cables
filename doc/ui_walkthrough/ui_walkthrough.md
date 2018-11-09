@@ -196,3 +196,8 @@ create and link new op by clicking parameter
 
 ![alt text ](video/linkparameter.gif)
 
+
+use snap to grid for cleaner looking patches
+
+![alt text ](video/snaptogrid.gif)
+
