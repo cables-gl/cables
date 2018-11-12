@@ -14,12 +14,13 @@ var CABLES=CABLES || {};
  * @type CGL.Context
  * @readonly
  */
-CABLES.OP_PORT_TYPE_VALUE =0;
-CABLES.OP_PORT_TYPE_FUNCTION =1;
-CABLES.OP_PORT_TYPE_OBJECT =2;
-CABLES.OP_PORT_TYPE_TEXTURE =2;
-CABLES.OP_PORT_TYPE_ARRAY =3;
-CABLES.OP_PORT_TYPE_DYNAMIC=4;
+CABLES.OP_PORT_TYPE_VALUE = 0;
+CABLES.OP_PORT_TYPE_FUNCTION = 1;
+CABLES.OP_PORT_TYPE_OBJECT = 2;
+CABLES.OP_PORT_TYPE_TEXTURE = 2;
+CABLES.OP_PORT_TYPE_ARRAY = 3;
+CABLES.OP_PORT_TYPE_DYNAMIC = 4;
+CABLES.OP_PORT_TYPE_STRING = 5;
 
 /**
  * CABLES.Op
@@ -116,21 +117,15 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.hasPort=function(name)
     {
-        // for(var i in this.portsIn)
         for(var ipi=0;ipi<this.portsIn.length;ipi++)
-        {
             if(this.portsIn[i].getName()==name)
-            {
                 return true;
-            }
-        }
         return false;
     };
 
     CABLES.Op.prototype.hasDynamicPort=function()
     {
         var i=0;
-        // for(i in this.portsIn)
         for(i=0;i<this.portsIn.length;i++)
         {
             if(this.portsIn[i].type==CABLES.OP_PORT_TYPE_DYNAMIC) return true;
@@ -207,7 +202,11 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-	CABLES.Op.prototype.inValueString=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"type":"string"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueString = function (name, v) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { "type": "string" })); p.value = ''; if (v !== undefined) { p.set(v); p.defaultValue = v; } return p; };
+
+    CABLES.Op.prototype.inString = function (name, v) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" })); p.value = ''; if (v !== undefined) { p.set(v); p.defaultValue = v; } return p; };
+    
+
 
     /**
      * create a String value input port displayed as TextArea
@@ -333,7 +332,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outValueString=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"type":"string"})); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outValueString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { "type": "string" })); if (v !== undefined) p.set(v); return p; };
+    CABLES.Op.prototype.outString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" })); if (v !== undefined) p.set(v); return p; };
 
     /**
      * create output object port

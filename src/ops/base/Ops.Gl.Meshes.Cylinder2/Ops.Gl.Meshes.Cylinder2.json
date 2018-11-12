@@ -1,8 +1,8 @@
 {
-    "summary": "draw parameterizable cylinder",
+    "summary": "draw parameterizable cylinder  (aka tube,pipe,round,circle)",
     "author": "5b0e94534b69a27140afdab3",
     "authorName": "_LJ_",
-    "updated": 1540984693998,
+    "updated": 1541774012418,
     "id": "2899ad67-1e64-4692-af2a-c3b9078f1b5f",
     "created": 1540984639051,
     "layout": {
@@ -38,12 +38,12 @@
             },
             {
                 "type": "0",
-                "name": "uv mode",
+                "name": "UV mode",
                 "subType": "string"
             },
             {
                 "type": "0",
-                "name": "draw",
+                "name": "Draw",
                 "subType": "boolean"
             }
         ],
@@ -58,5 +58,9 @@
             }
         ],
         "name": "Ops.Gl.Meshes.Cylinder2"
+    },
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

@@ -2,7 +2,7 @@
     "summary": "draw parameterizable sphere",
     "author": "5b0e94534b69a27140afdab3",
     "authorName": "_LJ_",
-    "updated": 1541417238815,
+    "updated": 1541689121981,
     "id": "450b4d68-2278-4d9f-9849-0abdfa37ef69",
     "created": 1541417238816,
     "layout": {
@@ -13,17 +13,17 @@
             },
             {
                 "type": "0",
+                "name": "radius",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "stacks",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "slices",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "radius",
                 "subType": "number"
             },
             {

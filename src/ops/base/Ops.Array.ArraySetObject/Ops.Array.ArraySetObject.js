@@ -1,5 +1,3 @@
-
-
 var exe=op.inTriggerButton("exe");
 
 var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
@@ -10,17 +8,18 @@ values.ignoreValueSerialize=true;
 
 function updateIndex()
 {
-    if(exe.isLinked())return;    
+    if(exe.isLinked())return;
     update();
 }
 
 function update()
 {
-    if(!array.get())return;
-    array.get()[index.get()]=value.get();
+    var arr=array.get();
+    if(!arr)return;
+    arr[index.get()]=value.get();
 
     values.set(null);
-    values.set(array.get());
+    values.set(arr);
 }
 
 // index.onChange=updateIndex;

@@ -1,5 +1,5 @@
 {
-    "updated": 1541486748880,
+    "updated": 1541688935720,
     "authorName": "pandur",
     "id": "c089646e-9324-48b2-8b32-81240408222e",
     "created": 1541486742328,
@@ -8,6 +8,16 @@
             {
                 "type": "1",
                 "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
@@ -41,5 +51,10 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.PixelDisplacement3"
+    },
+    "summary": "Changes color lookup for every pixel using a displacement map",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

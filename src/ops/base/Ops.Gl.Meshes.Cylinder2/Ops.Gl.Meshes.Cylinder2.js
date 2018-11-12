@@ -85,8 +85,8 @@ function buildMesh () {
         ) {
             a = d + 1;
             indices.push(
-                d, a, d + (segments+1),
-                a, a + (segments+1), d + (segments+1)
+                d + (segments+1), a, d,
+                d + (segments+1), a + (segments+1), a
             );
         }
     }
@@ -178,25 +178,34 @@ function buildMesh () {
 
         // cap indices
         for (
-            j = x = 0;
-            j < 2;
-            j++, x += segments * 2
+            i = 0, o = a / 3 + x;
+            i < segments - 1;
+            i++, o++
         ) {
-            for (
-                i = 0, o = a / 3 + x;
-                i < segments - 1;
-                i++, o++
-            ) {
-                indices.push(
-                    o+1, o+segments, o,
-                    o+segments+1,o+segments,o+1
-                );
-            }
             indices.push(
-                o+segments, a/3 + x, a/3 + segments + x,
-                o, o+segments, a/3 + x
+                o+1,o+segments, o,
+                o+segments+1,o+segments,o+1
             );
         }
+        indices.push(
+            o+segments,a/3 + x,a/3 + segments + x,
+            o+segments,o, a/3 + x
+        );
+        x += segments * 2;
+        for (
+            i = 0, o = a / 3 + x;
+            i < segments - 1;
+            i++, o++
+        ) {
+            indices.push(
+                o,o+segments,o+1,
+                o+1,o+segments,o+segments+1
+            );
+        }
+        indices.push(
+            a/3 + segments + x, a/3 + x, o+segments,
+            a/3 + x, o, o+segments
+        );
     } else {
         a = positions.length;
         d = a / 3;
@@ -208,7 +217,6 @@ function buildMesh () {
         positions.push(0,0,length/2);
         Array.prototype.push.apply(positions, positions.slice(a-segments*3,a));
         for (i = 0; i <= segments; i++) normals.push(0,0,1), tangents.push(1,0,0), biTangents.push(0,1,0);
-
         if (uvMode == "atlas") {
             texcoords.push(.75,.25);
             for (i = a = 0; i < segments; i++, a += segmentRadians)
@@ -220,12 +228,14 @@ function buildMesh () {
             for (i = 0; i <= segments; i++) texcoords.push(0,0);
             for (i = 0; i <= segments; i++) texcoords.push(1,1);
         }
-        for (j = 0; j < 2; j++) {
-            indices.push(d, d+1, d+segments);
-            for (i = 1; i < segments; i++)
-                indices.push(d, d+i, d+i+1);
-            d += segments+1;
-        }
+        indices.push(d+1, d, d+segments);
+        for (i = 1; i < segments; i++)
+            indices.push(d, d+i, d+i+1);
+        d += segments+1;
+        indices.push(d, d+1, d+segments);
+        for (i = 1; i < segments; i++)
+            indices.push(d, d+i+1, d+i);
+        d += segments+1;
     }
 
     // set geometry

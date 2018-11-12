@@ -126,7 +126,7 @@ function onMouseLeave(e)
     relLastY=0;
 
     speed=100;
-    
+
     if(area.get()!='Document')
     {
         // leave anim
@@ -135,7 +135,7 @@ function onMouseLeave(e)
             mouseX=cgl.canvas.width/2;
             mouseY=cgl.canvas.height/2;
         }
-        
+
     }
     mouseOver.set(false);
     mouseDown.set(false);
@@ -150,7 +150,7 @@ relative.onChange=function()
 function onmousemove(e)
 {
     mouseOver.set(true);
-    
+
     if(!relative.get())
     {
         if(area.get()!="Document")
@@ -167,7 +167,7 @@ function onmousemove(e)
         if(smooth.get())
         {
             mouseX=offsetX;
-            
+
             if(flipY.get()) mouseY=listenerElement.clientHeight-offsetY;
                 else mouseY=offsetY;
         }
@@ -194,7 +194,7 @@ function onmousemove(e)
 
         mouseX+=offsetX;
         mouseY+=offsetY;
-        
+
         if(mouseY>460)mouseY=460;
     }
 };
@@ -212,7 +212,7 @@ function ontouchend(event)
     onMouseUp();
 };
 
-function removeLiseteners()
+function removeListeners()
 {
     listenerElement.removeEventListener('touchend', ontouchend);
     listenerElement.removeEventListener('touchstart', ontouchstart);
@@ -229,7 +229,7 @@ function removeLiseteners()
 
 function addListeners()
 {
-    if(listenerElement)removeLiseteners();
+    if(listenerElement)removeListeners();
 
     listenerElement=cgl.canvas;
     if(area.get()=='Document') listenerElement=document.body;
@@ -249,13 +249,13 @@ function addListeners()
 
 active.onChange=function()
 {
-    if(listenerElement)removeLiseteners();
+    if(listenerElement)removeListeners();
     if(active.get())addListeners();
 }
 
 op.onDelete=function()
 {
-    removeLiseteners();
+    removeListeners();
 };
 
 addListeners();

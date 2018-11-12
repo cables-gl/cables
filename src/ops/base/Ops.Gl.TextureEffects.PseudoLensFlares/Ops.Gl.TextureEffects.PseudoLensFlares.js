@@ -1,34 +1,34 @@
 // http://john-chapman-graphics.blogspot.com/2013/02/pseudo-lens-flare.html
 
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-// const textureFlare=op.inTexture("Input");
-const inAmountGhosts=op.inValueSlider("Ghosts",1.0);
-const inNumGhosts=op.inValueInt("Num Ghosts",3);
-const inDispersal=op.inValueSlider("Dispersal",0.5);
-const inAmountHalo=op.inValueSlider("Halo",1.0);
-const inHaloWidth=op.inValueSlider("Halo Width",0.5);
-const textureLookup=op.inTexture("Color Lookup");
-const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render"),
+    inAmountGhosts=op.inValueSlider("Ghosts",1.0),
+    inNumGhosts=op.inValueInt("Num Ghosts",3),
+    inDispersal=op.inValueSlider("Dispersal",0.5),
+    inAmountHalo=op.inValueSlider("Halo",1.0),
+    inHaloWidth=op.inValueSlider("Halo Width",0.5),
+    textureLookup=op.inTexture("Color Lookup"),
+    trigger=op.outTrigger("trigger");
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const
+    cgl=op.patch.cgl,
+    shader=new CGL.Shader(cgl);
+
+shader.setSource(shader.getDefaultVertexShader(),attachments.lensflares_frag||'');
+
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    textureLookupUni=new CGL.Uniform(shader,'t','texLookup',1),
+    uniHaloWidth=new CGL.Uniform(shader,'f','haloWidth',inHaloWidth),
+    uniNumGhosts=new CGL.Uniform(shader,'i','numGhosts',inNumGhosts),
+    uniDispersal=new CGL.Uniform(shader,'f','dispersal',inDispersal),
+    uniAmountGhosts=new CGL.Uniform(shader,'f','amountGhosts',inAmountGhosts),
+    uniAmounthalo=new CGL.Uniform(shader,'f','amountHalo',inAmountHalo);
 
 textureLookup.onChange=function()
 {
     if(textureLookup.get())shader.define("TEX_LOOPUP");
         else shader.removeDefine("TEX_LOOPUP");
 };
-
-shader.setSource(shader.getDefaultVertexShader(),attachments.lensflares_frag||'');
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-// var textureUniformIn=new CGL.Uniform(shader,'t','texInput',1);
-var textureLookupUni=new CGL.Uniform(shader,'t','texLookup',1);
-
-const uniHaloWidth=new CGL.Uniform(shader,'f','haloWidth',inHaloWidth);
-const uniNumGhosts=new CGL.Uniform(shader,'i','numGhosts',inNumGhosts);
-const uniDispersal=new CGL.Uniform(shader,'f','dispersal',inDispersal);
-const uniAmountGhosts=new CGL.Uniform(shader,'f','amountGhosts',inAmountGhosts);
-const uniAmounthalo=new CGL.Uniform(shader,'f','amountHalo',inAmountHalo);
 
 render.onTriggered=function()
 {
@@ -40,10 +40,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, texture.tex );
-
-    // if(textureFlare.get()) cgl.setTexture(1, textureFlare.get().tex );
     if(textureLookup.get()) cgl.setTexture(1, textureLookup.get().tex );
-
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

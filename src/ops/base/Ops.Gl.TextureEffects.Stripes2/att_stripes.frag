@@ -40,12 +40,12 @@ void main()
 
     #ifdef STRIPES_SMOOTHED
        m*=2.0;
-       stripe.rgb=vec3(  smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));
+       stripe.rgb=vec3(smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));
     #endif
 
     //blend section
     vec4 col=vec4(stripe.rgb,1.0);
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
 
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);

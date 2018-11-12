@@ -1,5 +1,5 @@
 {
-    "updated": 1540745167922,
+    "updated": 1541688156604,
     "authorName": "pandur",
     "id": "9e4a5694-ed59-4401-9f7b-123a627924c5",
     "created": 1540724212659,
@@ -46,5 +46,10 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.PseudoLensFlares"
+    },
+    "summary": "simulate lens flare effect",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }
