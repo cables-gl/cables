@@ -19,6 +19,11 @@
                 "type": "0",
                 "name": "Animated",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "RGB",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -30,7 +35,7 @@
         "name": "Ops.Gl.TextureEffects.Noise.Noise"
     },
     "summary": "white noise pixel effect",
-    "updated": 1541053102646,
+    "updated": 1541693972751,
     "authorName": "pandur",
     "id": "81253441-cc73-42fa-b903-6d23806873d9",
     "created": 1515151849116,

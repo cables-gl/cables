@@ -89,6 +89,8 @@ function generateCone(base,height,stacks,slices)
     var r=base;
     var z=0;
     var geom=new CGL.Geometry();
+    geom.tangents=[];
+    geom.biTangents=[];
 
     var table=circleTable(-slices,false);
 
@@ -107,6 +109,8 @@ function generateCone(base,height,stacks,slices)
     geom.vertexNormals[0] =  0;
     geom.vertexNormals[1] =  0;
     geom.vertexNormals[2] = -1;
+    geom.tangents.push(1,0,0);
+    geom.biTangents.push(0,1,0);
     idx = 3;
     /* other on bottom (get normals right) */
     for (j=0; j<slices; j++, idx+=3)
@@ -117,9 +121,12 @@ function generateCone(base,height,stacks,slices)
         geom.vertexNormals[idx  ] =  0;
         geom.vertexNormals[idx+1] =  0;
         geom.vertexNormals[idx+2] = -1;
-
-
-
+        geom.tangents[idx  ] =  1;
+        geom.tangents[idx+1] =  0;
+        geom.tangents[idx+2] = 0;
+        geom.biTangents[idx  ] =  0;
+        geom.biTangents[idx+1] =  1;
+        geom.biTangents[idx+2] = 0;
     }
 
     /* each stack */
@@ -133,6 +140,12 @@ function generateCone(base,height,stacks,slices)
             geom.vertexNormals[idx  ] = table.cost[j]*cosn;
             geom.vertexNormals[idx+1] = table.sint[j]*cosn;
             geom.vertexNormals[idx+2] = sinn;
+            geom.tangents[idx  ] = -table.sint[j]*cosn;
+            geom.tangents[idx+1] = table.cost[j]*cosn;
+            geom.tangents[idx+2] = sinn;
+            geom.biTangents[idx  ] = table.sint[j]*cosn*sinn-table.cost[j]*cosn*sinn;
+            geom.biTangents[idx+1] = sinn*(-table.sint[j]*cosn)-sinn*table.cost[j]*cosn;
+            geom.biTangents[idx+2] = table.cost[j]*cosn*table.cost[j]*cosn-(-table.sint[j]*cosn)*table.sint[j]*cosn;
         }
 
         z += zStep;

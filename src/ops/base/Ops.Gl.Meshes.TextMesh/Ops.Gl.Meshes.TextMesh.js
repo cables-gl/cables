@@ -7,7 +7,7 @@ var inFont=op.inValueString("Font","Arial");
 var align=op.inValueSelect("align",['left','center','right'],'center');
 var valign=op.inValueSelect("vertical align",['Top','Middle','Bottom'],'Middle');
 var lineHeight=op.inValue("Line Height",1);
-var letterSpace=op.addInPort(new CABLES.Port(op,"Letter Spacing"));
+var letterSpace=op.inValue("Letter Spacing");
 
 var loaded=op.outValue("Font Available",0);
 
@@ -133,7 +133,6 @@ var disabled=false;
 
 render.onTriggered=function()
 {
-    if(op.instanced(render))return;
 
     var font=getFont();
     if(font.lastChange!=lastTextureChange)
@@ -144,12 +143,12 @@ render.onTriggered=function()
 
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
-    
+
     if(mesh && mesh.numInstances>0)
     {
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
         cgl.setShader(shader);
-    
+
         cgl.setTexture(0,textureOut.get().tex);
 
         if(valignMode==2) vec3.set(vec, 0,height,0);
@@ -159,9 +158,9 @@ render.onTriggered=function()
         cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
         if(!disabled)mesh.render(cgl.getShader());
-    
+
         cgl.popModelMatrix();
-    
+
         cgl.setTexture(0,null);
         cgl.setPreviousShader();
         cgl.popBlendMode();

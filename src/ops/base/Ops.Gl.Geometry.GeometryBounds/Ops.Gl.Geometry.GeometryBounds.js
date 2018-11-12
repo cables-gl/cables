@@ -1,28 +1,28 @@
+const render=op.inTrigger("Render");
+const inGeom=op.inObject("Geometry");
 
-var inGeom=op.inObject("Geometry");
+const next=op.outTrigger("Next");
 
-var render=op.inTrigger("Render");
+const outMinX=op.outValue("Min X");
+const outMaxX=op.outValue("Max X");
+const outMinY=op.outValue("Min Y");
+const outMaxY=op.outValue("Max Y");
 
-var outMinX=op.outValue("Min X");
-var outMaxX=op.outValue("Max X");
-var outMinY=op.outValue("Min Y");
-var outMaxY=op.outValue("Max Y");
+const outMinZ=op.outValue("Min Z");
+const outMaxZ=op.outValue("Max Z");
 
-var outMinZ=op.outValue("Min Z");
-var outMaxZ=op.outValue("Max Z");
+const outCenterX=op.outValue("Center X");
+const outCenterY=op.outValue("Center Y");
+const outCenterZ=op.outValue("Center Z");
 
-var outCenterX=op.outValue("Center X");
-var outCenterY=op.outValue("Center Y");
-var outCenterZ=op.outValue("Center Z");
-
-var outWidth=op.outValue("Width");
-var outHeight=op.outValue("Height");
-var outLength=op.outValue("Length");
-
+const outWidth=op.outValue("Width");
+const outHeight=op.outValue("Height");
+const outLength=op.outValue("Length");
 
 var wireMesh=null;
 var bounds=null;
 var cgl=op.patch.cgl;
+
 inGeom.onChange=function()
 {
     var geom=inGeom.get();
@@ -30,20 +30,20 @@ inGeom.onChange=function()
     {
         bounds=geom.getBounds();
         // console.log('bounds ',bounds);
-        
+
         outMinX.set(bounds.minX);
         outMaxX.set(bounds.maxX);
-    
+
         outMinY.set(bounds.minY);
         outMaxY.set(bounds.maxY);
 
         outMinZ.set(bounds.minZ);
         outMaxZ.set(bounds.maxZ);
-        
+
         outWidth.set(Math.abs(bounds.minX)+Math.abs(bounds.maxX));
         outLength.set(Math.abs(bounds.minY)+Math.abs(bounds.maxY));
         outHeight.set(Math.abs(bounds.minZ)+Math.abs(bounds.maxZ));
-        
+
         outCenterX.set( (bounds.minX+bounds.maxX)/2 );
         outCenterY.set( (bounds.minY+bounds.maxY)/2 );
         outCenterZ.set( (bounds.minZ+bounds.maxZ)/2 );
@@ -53,7 +53,7 @@ inGeom.onChange=function()
         bounds=null;
         outMinX.set(0);
         outMaxX.set(0);
-    
+
         outMinY.set(0);
         outMaxY.set(0);
 
@@ -71,21 +71,23 @@ render.onTriggered=function()
 
     if(bounds)
     {
-        vec3.set(vec, 
+        vec3.set(vec,
             outCenterX.get(),
             outCenterY.get(),
             outCenterZ.get()
             );
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
 
         wireMesh.render(cgl,
             outWidth.get()/2,
             outLength.get()/2,
             outHeight.get()/2
             );
-        
-        cgl.popModelMatrix();    
+
+        cgl.popModelMatrix();
     }
+
+    next.trigger();
 
 };

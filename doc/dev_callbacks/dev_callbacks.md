@@ -128,14 +128,17 @@ Do **not** use `console.log()`!
 `op.log()` is not shown if the patch is embedded and the silent parameter is set, also you get a reference to the op which is producing the log-message in your browsers developer tools.
 **Be aware that logging things too often in the console can slow down the browser, use this only for debugging and remove all op.log() code when you are done** 
 
-### onResize - currently not working !
+### canvas resize
 
-Whenever the canvas is resized `onResize`gets called.
+Whenever the canvas is resized `onResize` gets called.
 
 ```javascript
-op.onResize( function() 
+op.patch.cgl.addEventListener("resize",onResize);
+
+function onResize()
 {
-	// adapt to the new size
-});
+	// do something
+}
+
 ```
 

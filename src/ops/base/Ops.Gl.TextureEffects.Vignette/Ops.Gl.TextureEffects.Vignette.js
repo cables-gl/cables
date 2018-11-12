@@ -19,6 +19,7 @@ var shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.vignette_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+
 var uniLensRadius1=new CGL.Uniform(shader,'f','lensRadius1',lensRadius1);
 var uniaspect=new CGL.Uniform(shader,'f','aspect',aspect);
 var uniAmount=new CGL.Uniform(shader,'f','amount',amount);
@@ -37,7 +38,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

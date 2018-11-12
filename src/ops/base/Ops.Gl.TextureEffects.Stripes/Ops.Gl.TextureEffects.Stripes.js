@@ -17,7 +17,7 @@ var trigger=op.outTrigger('trigger');
 
 smoothed.onChange=function()
 {
-    
+
     if(smoothed.get())shader.define("STRIPES_SMOOTHED");
     else shader.removeDefine("STRIPES_SMOOTHED");
 };

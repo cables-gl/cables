@@ -1,17 +1,15 @@
-var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+var filename=op.inFile("file");
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
-var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var unpackAlpha=op.addInPort(new CABLES.Port(op,"unpackPreMultipliedAlpha",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var flip=op.inValueBool("flip",false);
+var unpackAlpha=op.inValueBool("unpackPreMultipliedAlpha",false);
 
 var textureOut=op.outTexture("texture");
-var width=op.addOutPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addOutPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
-var loading=op.addOutPort(new CABLES.Port(op,"loading",CABLES.OP_PORT_TYPE_VALUE));
+var width=op.outValue("width");
+var height=op.outValue("height");
+var loading=op.outValue("loading");
 var ratio=op.outValue("Aspect Ratio");
 
-flip.set(false);
-unpackAlpha.set(false);
 unpackAlpha.hidePort();
 
 var cgl=op.patch.cgl;
@@ -43,7 +41,7 @@ var tex=null;
 function reloadSoon(nocache)
 {
     // if(!loadingId)loadingId=cgl.patch.loading.start('textureOp',filename.get());
-    
+
     // if(timedLoader!=0)
     // {
     //     console.log('tex load canceled...');
@@ -59,7 +57,7 @@ function reloadSoon(nocache)
 function realReload(nocache)
 {
     // if(!loadingId)loadingId=cgl.patch.loading.start('textureOp',filename.get());
-    
+
     var url=op.patch.getFilePath(String(filename.get()));
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 
@@ -112,7 +110,7 @@ function realReload(nocache)
         if(!textureOut.get() && nocache)
         {
         }
-        
+
         // cgl.patch.loading.finished(loadingId);
     }
     else

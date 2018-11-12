@@ -8,19 +8,23 @@
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -31,7 +35,7 @@
         ],
         "name": "Ops.Gl.ClearColor"
     },
-    "updated": 1523828676582,
+    "updated": 1541535173993,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "19b441eb-9f63-4f35-ba08-b87841517c4d",

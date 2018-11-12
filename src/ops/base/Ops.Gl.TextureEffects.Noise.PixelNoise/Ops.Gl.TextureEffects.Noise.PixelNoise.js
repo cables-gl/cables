@@ -6,6 +6,8 @@ const numY=op.inValue("Num Y",10);
 const addX=op.inValue("X",0);
 const addY=op.inValue("Y",0);
 const addZ=op.inValue("Z",0);
+const inRGB=op.inValueBool("RGB",false);
+
 const trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 const cgl=op.patch.cgl;
@@ -23,6 +25,12 @@ numY.uniform==new CGL.Uniform(shader,'f','numY',numY);
 addX.uniform==new CGL.Uniform(shader,'f','addX',addX);
 addY.uniform==new CGL.Uniform(shader,'f','addY',addY);
 addZ.uniform==new CGL.Uniform(shader,'f','addZ',addZ);
+
+inRGB.onChange=function()
+{
+    if(inRGB.get())shader.define("RGB");
+    else shader.removeDefine("RGB");
+};
 
 blendMode.onChange=function()
 {

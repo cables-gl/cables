@@ -21,7 +21,9 @@ function build()
     geom.vertices=vertices;
     geom.mapTexCoords2d();
     geom.verticesIndices=indices;
-
+    geom.tangents=vertices.map(function(v,i){return i%3==0?1:0});
+    geom.biTangents=vertices.map(function(v,i){return i%3==1?1:0});
+    geom.vertexNormals=vertices.map(function(v,i){return i%3==2?1:0});
     geomOut.set(null);
     geomOut.set(geom);
 

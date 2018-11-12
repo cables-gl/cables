@@ -7,6 +7,16 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "smoothness",
                 "subType": "number"
             },
@@ -51,7 +61,7 @@
     "docs": {
         "ports": []
     },
-    "updated": 1541052636379,
+    "updated": 1541534100095,
     "authorName": "pandur",
     "id": "85b0d8e5-f417-4349-aa35-fe45a6698183",
     "created": 1541052563850,
