@@ -6,6 +6,7 @@ UNI float amountY;
 
 {{BLENDCODE}}
 
+
 void main()
 {
    vec2 coord = vec2(

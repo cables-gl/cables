@@ -11,6 +11,7 @@ const shader=new CGL.Shader(cgl);
 const srcFrag=(attachments.repeat_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
+
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 const amountXUniform=new CGL.Uniform(shader,'f','amountX',amountX);
