@@ -7,12 +7,12 @@ var e=op.inValueString('String E');
 var f=op.inValueString('String F');
 var result=op.outValue("Result");
 
-format.onChange=update;
-a.onChange=update;
-b.onChange=update;
-c.onChange=update;
-d.onChange=update;
-e.onChange=update;
+format.onChange=
+a.onChange=
+b.onChange=
+c.onChange=
+d.onChange=
+e.onChange=
 f.onChange=update;
 
 update();
@@ -24,13 +24,13 @@ function update()
     {
         str='';
     }
-    
+
     str = str.replace(/\$a/g, a.get());
     str = str.replace(/\$b/g, b.get());
     str = str.replace(/\$c/g, c.get());
     str = str.replace(/\$d/g, d.get());
     str = str.replace(/\$e/g, e.get());
     str = str.replace(/\$f/g, f.get());
-    
+
     result.set(str);
 }

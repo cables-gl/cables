@@ -507,7 +507,8 @@ CABLES.Port.portTypeNumberToString = function(type) {
    if(type == CABLES.OP_PORT_TYPE_VALUE) return 'value';
    else if(type == CABLES.OP_PORT_TYPE_FUNCTION) return 'function';
    else if(type == CABLES.OP_PORT_TYPE_OBJECT) return 'object';
-   else if(type == CABLES.OP_PORT_TYPE_ARRAY) return 'array';
+   else if (type == CABLES.OP_PORT_TYPE_ARRAY) return 'array';
+   else if (type == CABLES.OP_PORT_TYPE_STRING) return 'string';
    else if(type == CABLES.OP_PORT_TYPE_DYNAMIC) return 'dynamic';
    else return 'unknown';
 };
