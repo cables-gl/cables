@@ -1,27 +1,24 @@
-op.name='Repeat';
+const render=op.inTrigger("render");
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const amountX=op.inValue("x",3);
+const amountY=op.inValue("y",3);
+const trigger=op.outTrigger("trigger");
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var amountX=op.addInPort(new Port(op,"x",OP_PORT_TYPE_VALUE,{  }));
-var amountY=op.addInPort(new Port(op,"y",OP_PORT_TYPE_VALUE,{  }));
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const srcFrag=(attachments.repeat_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.repeat_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const amountXUniform=new CGL.Uniform(shader,'f','amountX',amountX);
+const amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY);
 
-var amountXUniform=new CGL.Uniform(shader,'f','amountX',0.0);
-var amountYUniform=new CGL.Uniform(shader,'f','amountY',0.0);
-
-amountX.onValueChanged=function()
+blendMode.onChange=function()
 {
-    amountXUniform.setValue(amountX.get());
-};
-
-amountY.onValueChanged=function()
-{
-    amountYUniform.setValue(amountY.get());
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
 
 render.onTriggered=function()
@@ -31,8 +28,7 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
@@ -40,5 +36,3 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
-amountX.set(320.0);
-amountY.set(180.0);
