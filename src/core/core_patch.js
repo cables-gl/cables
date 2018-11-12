@@ -242,20 +242,16 @@ CABLES.Patch.prototype.createOp = function(objName,id) {
 
     try {
 
-    // console.log('createop',objName);
-
         if(objName.indexOf(".")==-1)
         {
+            // creating ops by id should be the default way from now on!
             var opId=objName;
-
             objName=CABLES.OPS[objName].objName;
-            console.log("OP CREATED BY ID");
 
             if(CABLES.OPS[opId])
             {
                 op=new CABLES.OPS[opId].f(this,objName,id);
                 op.opId=opId;
-                // console.log('created op!',op);
             }
             else
             {
@@ -285,21 +281,15 @@ CABLES.Patch.prototype.createOp = function(objName,id) {
                 else console.log('parts.length', parts.length);
             }
 
-
             if(op)
             {
                 op.opId=null;
-                console.log("OP CREATED BY OBJNAME ",objName);
+                console.log("deprecated: op created by objName:",objName);
                 for(var i in CABLES.OPS)
                 {
                     if(CABLES.OPS[i].objName==objName)
-                    {
-                        console.log("FOUND ID!!!",i);
                         op.opId=i;
-                    }
                 }
-                
-                
             }
         }
     }

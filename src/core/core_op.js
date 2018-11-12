@@ -481,8 +481,9 @@ CABLES.Op = function()
         var nameParts=this.objName.split('.');
         if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
 
-        op.objName=this.objName;
-        op.opId=this.opId;
+        if(this.opId) op.opId=this.opId;
+            else op.objName=this.objName;
+        
         op.id=this.id;
         op.uiAttribs=this.uiAttribs;
         op.portsIn=[];
