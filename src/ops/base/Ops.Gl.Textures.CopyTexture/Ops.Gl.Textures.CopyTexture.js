@@ -1,4 +1,3 @@
-
 var inTexture=op.inTexture("Texture");
 var render=op.inTrigger('render');
 var useVPSize=op.addInPort(new CABLES.Port(op,"use original size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
@@ -145,7 +144,7 @@ useVPSize.onChange=function()
 
 var doRender=function()
 {
-    
+
     if(!effect || reInitEffect)
     {
         initEffect();
@@ -171,7 +170,7 @@ var doRender=function()
     cgl.setShader(bgShader);
     cgl.currentTextureEffect.bind();
     cgl.setTexture(0, inTexture.get().tex );
-    
+
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
@@ -182,7 +181,7 @@ var doRender=function()
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 
     cgl.currentTextureEffect=null;
-    
+
     trigger.trigger();
 };
 

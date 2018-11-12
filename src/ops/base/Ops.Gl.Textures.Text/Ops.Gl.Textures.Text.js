@@ -10,9 +10,12 @@ var lineDistance=op.addInPort(new CABLES.Port(op,"line distance"));
 var border=op.addInPort(new CABLES.Port(op,"border"));
 var doRefresh=op.inTriggerButton("Refresh");
 
+var cachetexture=op.inValueBool("Reuse Texture",true);
+
 // var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");
 var outRatio=op.addOutPort(new CABLES.Port(op,"Ratio",CABLES.OP_PORT_TYPE_VALUE));
+textureOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;
 
@@ -32,6 +35,8 @@ fontImage.id = "texturetext_"+CABLES.generateUUID();
 fontImage.style.display = "none";
 var body = document.getElementsByTagName("body")[0];
 body.appendChild(fontImage);
+
+
 
 var ctx = fontImage.getContext('2d');
 
@@ -69,11 +74,16 @@ function refresh()
         ctx.stroke();
     }
 
+    var i=0;
+
     // if(text.get())
     {
         var txt=(text.get()+'').replace(/<br\/>/g, '\n');
+        var txt=(text.get()+'').replace(/<br>/g, '\n');
 
         var strings = txt.split("\n");
+
+
         var posy=0,i=0;
 
         if(maximize.get())
@@ -119,8 +129,9 @@ function refresh()
     ctx.restore();
     outRatio.set(ctx.canvas.height/ctx.canvas.width);
 
-    if(textureOut.get()) textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
-        else textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
+
+    if(!cachetexture.get() || !textureOut.get()) textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
+        else textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
 
     textureOut.get().unpackAlpha=true;
 }

@@ -1,5 +1,3 @@
-op.name='PointLight';
-
 var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 var trigger=op.outTrigger('trigger');
 
@@ -78,7 +76,7 @@ exe.onTriggered=function()
 
     vec3.transformMat4(mpos, [x.get(),y.get(),z.get()], cgl.mvMatrix);
     light=light||{};
-    
+
     // console.log(mpos);
     light.pos=mpos;
     light.mul=mul.get();

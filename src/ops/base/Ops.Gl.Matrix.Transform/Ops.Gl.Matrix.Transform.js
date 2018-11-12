@@ -1,36 +1,36 @@
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-
-
-const posX=op.inValue("posX",0);
-const posY=op.inValue("posY",0);
-const posZ=op.inValue("posZ",0);
-
-const scale=op.inValue("scale",0);
-
-const rotX=op.inValue("rotX",0);
-const rotY=op.inValue("rotY",0);
-const rotZ=op.inValue("rotZ",0);
-
+const
+    render=op.inTrigger("render"),
+    posX=op.inValue("posX",0),
+    posY=op.inValue("posY",0),
+    posZ=op.inValue("posZ",0),
+    scale=op.inValue("scale",1),
+    rotX=op.inValue("rotX",0),
+    rotY=op.inValue("rotY",0),
+    rotZ=op.inValue("rotZ",0),
+    trigger=op.outTrigger("trigger");
 
 op.setPortGroup([rotX,rotY,rotZ]);
 op.setPortGroup([posX,posY,posZ]);
 
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var vPos=vec3.create();
 var vScale=vec3.create();
 var transMatrix = mat4.create();
 mat4.identity(transMatrix);
 
-var doScale=false;
-var doTranslate=false;
-
-var translationChanged=true;
-var scaleChanged=true;
-var rotChanged=true;
+var
+    doScale=false,
+    doTranslate=false,
+    translationChanged=true,
+    scaleChanged=true,
+    rotChanged=true;
 
 scale.setUiAttribs({"divider":true});
+
+rotX.onChange=rotY.onChange=rotZ.onChange=setRotChanged;
+posX.onChange=posY.onChange=posZ.onChange=setTranslateChanged;
+scale.onChange=setScaleChanged;
+
 
 render.onTriggered=function()
 {
@@ -45,11 +45,9 @@ render.onTriggered=function()
         updateScale();
         updateMatrix=true;
     }
-    if(rotChanged)
-    {
-        updateMatrix=true;
-    }
-    if(updateMatrix)doUpdateMatrix();
+    if(rotChanged) updateMatrix=true;
+
+    if(updateMatrix) doUpdateMatrix();
 
     cgl.pushModelMatrix();
     mat4.multiply(cgl.mMatrix,cgl.mMatrix,transMatrix);
@@ -64,19 +62,14 @@ render.onTriggered=function()
                 posY:posY,
                 posZ:posZ,
             });
-
-
 };
 
 op.transform3d=function()
 {
-    return {
-            pos:[posX,posY,posZ]
-        };
-
+    return { pos:[posX,posY,posZ] };
 };
 
-var doUpdateMatrix=function()
+function doUpdateMatrix()
 {
     mat4.identity(transMatrix);
     if(doTranslate)mat4.translate(transMatrix,transMatrix, vPos);
@@ -87,7 +80,7 @@ var doUpdateMatrix=function()
 
     if(doScale)mat4.scale(transMatrix,transMatrix, vScale);
     rotChanged=false;
-};
+}
 
 function updateTranslation()
 {
@@ -105,41 +98,20 @@ function updateScale()
     scaleChanged=false;
 }
 
-var translateChanged=function()
+function setTranslateChanged()
 {
     translationChanged=true;
-};
+}
 
-var scaleChanged=function()
+function setScaleChanged()
 {
     scaleChanged=true;
-};
+}
 
-var rotChanged=function()
+function setRotChanged()
 {
     rotChanged=true;
-};
-
-
-rotX.onChange=rotChanged;
-rotY.onChange=rotChanged;
-rotZ.onChange=rotChanged;
-
-scale.onChange=scaleChanged;
-
-posX.onChange=translateChanged;
-posY.onChange=translateChanged;
-posZ.onChange=translateChanged;
-
-rotX.set(0.0);
-rotY.set(0.0);
-rotZ.set(0.0);
-
-scale.set(1.0);
-
-posX.set(0.0);
-posY.set(0.0);
-posZ.set(0.0);
+}
 
 doUpdateMatrix();
 
