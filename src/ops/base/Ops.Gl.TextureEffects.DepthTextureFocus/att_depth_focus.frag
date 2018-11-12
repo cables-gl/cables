@@ -7,23 +7,16 @@ UNI float width;
 
 void main()
 {
-    vec4 col=vec4(0.0,0.0,0.0,1.0);
-    
-    col=texture2D(image,texCoord);
+    vec4 col=texture(image,texCoord);
     float z=col.r;
     float c=(2.0*n)/(f+n-z*(f-n));
-    
+
     c=abs( c-focus );
-    // c*=width;
-    
-    c=smoothstep(0.,width,c);
-    
-    
+    c=smoothstep(0.0,width,c);
+
     #ifndef INVERT
-    c=1.0-c;
+        c=1.0-c;
     #endif
-    
-    col=vec4(c,c,c,1.0);
-    
-    outColor = col;
+
+    outColor = vec4(c,c,c,1.0);
 }

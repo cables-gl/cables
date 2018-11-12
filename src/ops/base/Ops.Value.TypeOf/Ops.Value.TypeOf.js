@@ -1,6 +1,6 @@
 
-var input=op.addInPort(new Port(op,"input"));
-var result=op.addOutPort(new Port(op,"result"));
+var input=op.addInPort(new CABLES.Port(op,"input"));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
 
 function update()
 {
@@ -8,5 +8,5 @@ function update()
 }
 
 
-input.onValueChanged=update;
+input.onChange=update;
 

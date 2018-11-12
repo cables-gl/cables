@@ -1,21 +1,15 @@
-
-var geometry=op.addInPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
-
-
+var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
 var transX=op.inValue("Translate X");
 var transY=op.inValue("Translate Y");
 var transZ=op.inValue("Translate Z");
-
 var scaleX=op.inValueSlider("Scale X",1);
 var scaleY=op.inValueSlider("Scale Y",1);
 var scaleZ=op.inValueSlider("Scale Z",1);
-
 var rotX=op.inValue("Rotation X");
 var rotY=op.inValue("Rotation Y");
 var rotZ=op.inValue("Rotation Z");
 
 var outGeom=op.outObject("Result");
-
 
 transX.onChange=
 transY.onChange=
@@ -32,6 +26,7 @@ geometry.onChange=update;
 function update()
 {
     var oldGeom=geometry.get();
+    var i=0;
 
     if(oldGeom)
     {
@@ -41,9 +36,7 @@ function update()
         var transVec=vec3.create();
         var centerVec=vec3.create();
 
-
-        
-        for(var i=0;i<geom.vertices.length;i+=3)
+        for(i=0;i<geom.vertices.length;i+=3)
         {
             geom.vertices[i+0]*=scaleX.get();
             geom.vertices[i+1]*=scaleY.get();
@@ -54,15 +47,7 @@ function update()
             geom.vertices[i+2]+=transZ.get();
         }
 
-        // var bounds=geom.getBounds();
-    
-        // vec3.set(centerVec,
-        //         bounds.minX+(bounds.maxX-bounds.minX)/2,
-        //         bounds.minY+(bounds.maxY-bounds.minY)/2,
-        //         bounds.minZ+(bounds.maxZ-bounds.minZ)/2
-        //     );
-
-        for(var i=0;i<geom.vertices.length;i+=3)
+        for(i=0;i<geom.vertices.length;i+=3)
         {
 
             vec3.set(rotVec,
@@ -81,6 +66,7 @@ function update()
 
         }
         
+        outGeom.set(null);
         outGeom.set(geom);
     }
     else

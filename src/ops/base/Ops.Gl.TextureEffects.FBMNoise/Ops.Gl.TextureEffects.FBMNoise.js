@@ -1,10 +1,10 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 var srcFrag=attachments.fbmnoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
@@ -33,7 +33,6 @@ function updateTileable()
         else shader.removeDefine("DO_TILEABLE");
 }
 
-
 blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
@@ -48,8 +47,7 @@ render.onTriggered=function()
 
     uniAspect.set( cgl.currentTextureEffect.getCurrentSourceTexture().width / cgl.currentTextureEffect.getCurrentSourceTexture().height );
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

@@ -1,7 +1,5 @@
-op.name="Voronoise";
-
-var render=op.inFunction("Render");
-var trigger=op.outFunction("Trigger");
+var render=op.inTrigger("Render");
+var trigger=op.outTrigger("Trigger");
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
@@ -20,7 +18,7 @@ var centerSize=op.inValueSlider("Draw Center",0);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 
 var srcFrag=attachments.voronoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode);
 
@@ -63,7 +61,7 @@ blendMode.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
 
     uniPx.setValue(1/cgl.currentTextureEffect.getCurrentSourceTexture().width);
@@ -72,8 +70,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

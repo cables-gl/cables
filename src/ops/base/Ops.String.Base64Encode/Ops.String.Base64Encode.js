@@ -1,13 +1,9 @@
-
-
 var inString=op.inValueString("String");
-
 var result=op.outValue("Result");
-
 
 inString.onChange=function()
 {
-result.set(b64EncodeUnicode(inString.get()));
+    result.set(b64EncodeUnicode(inString.get()));
 };
 
 

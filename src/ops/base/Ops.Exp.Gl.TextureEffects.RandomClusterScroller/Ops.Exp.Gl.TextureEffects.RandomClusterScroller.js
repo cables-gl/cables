@@ -1,8 +1,6 @@
-op.name="RandomClusterScroller";
+var render=op.inTrigger('render');
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -48,8 +46,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    // /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    // cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    // 
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

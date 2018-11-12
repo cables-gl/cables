@@ -22,5 +22,5 @@ void main()
 {
    vec2 tc=brownConradyDistortion(texCoord-0.5)+0.5;
    vec4 col=texture2D(tex,tc);
-   gl_FragColor = col;
+   outColor= col;
 }

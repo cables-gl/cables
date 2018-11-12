@@ -1,5 +1,5 @@
 var inArr=op.inArray("Array3x");
-var inCalc=op.inFunctionButton("Calculate");
+var inCalc=op.inTriggerButton("Calculate");
 var outValue=op.outValue("Length");
 
 var needsCalc=true;

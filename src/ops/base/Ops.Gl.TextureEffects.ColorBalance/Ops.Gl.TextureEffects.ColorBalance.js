@@ -1,20 +1,18 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var tone=op.inValueSelect("Tone",["Highlights","Midtones","Shadows"],"Highlights");
-var r=op.inValue("r");
-var g=op.inValue("g");
-var b=op.inValue("b");
+const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const tone=op.inValueSelect("Tone",["Highlights","Midtones","Shadows"],"Highlights");
+const r=op.inValue("r");
+const g=op.inValue("g");
+const b=op.inValue("b");
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
-
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.colorbalance_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var uniR=new CGL.Uniform(shader,'f','r',r);
-var uniG=new CGL.Uniform(shader,'f','g',g);
-var uniB=new CGL.Uniform(shader,'f','b',b);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const uniR=new CGL.Uniform(shader,'f','r',r);
+const uniG=new CGL.Uniform(shader,'f','g',g);
+const uniB=new CGL.Uniform(shader,'f','b',b);
 
 tone.onChange=function()
 {
@@ -26,7 +24,6 @@ tone.onChange=function()
     if(tone.get()=="Shadows") shader.define("TONE_LOW");
 };
 
-
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
@@ -34,8 +31,7 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

@@ -23,7 +23,7 @@ void main()
         am=amount*texture2D(imageMask,texCoord).r;
         if(am<=0.02)
         {
-            gl_FragColor=texture2D(tex, texCoord);
+            outColor=texture2D(tex, texCoord);
             return;
         }
     #endif
@@ -31,7 +31,7 @@ void main()
    vec2 delta=vec2(dirX*am*0.01,dirY*am*0.01);
 
 
-    
+
     float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);
 
 
@@ -47,14 +47,14 @@ void main()
         float percent = (t + offset - 0.5) / range;
         float weight = 1.0 - abs(percent);
         vec4 smpl = texture2D(tex, texCoord + delta * percent);
-        
+
         smpl.rgb *= smpl.a;
 
         color += smpl * weight;
         total += weight;
     }
 
-    gl_FragColor = color / total;
+    outColor= color / total;
 
-    gl_FragColor.rgb /= gl_FragColor.a + 0.00001;
+    outColor.rgb /= outColor.a + 0.00001;
 }

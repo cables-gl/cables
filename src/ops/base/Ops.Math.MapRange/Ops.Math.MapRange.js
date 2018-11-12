@@ -1,10 +1,10 @@
 
-var result=op.addOutPort(new Port(op,"result"));
-var v=op.addInPort(new Port(op,"value"));
-var old_min=op.addInPort(new Port(op,"old min"));
-var old_max=op.addInPort(new Port(op,"old max"));
-var new_min=op.addInPort(new Port(op,"new min"));
-var new_max=op.addInPort(new Port(op,"new max"));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
+var v=op.addInPort(new CABLES.Port(op,"value"));
+var old_min=op.addInPort(new CABLES.Port(op,"old min"));
+var old_max=op.addInPort(new CABLES.Port(op,"old max"));
+var new_min=op.addInPort(new CABLES.Port(op,"new min"));
+var new_max=op.addInPort(new CABLES.Port(op,"new max"));
 var easing=op.inValueSelect("Easing",["Linear","Smoothstep","Smootherstep"],"Linear");
 
 var ease=0;
@@ -82,11 +82,11 @@ new_min.set(-1);
 new_max.set(1);
 
 
-v.onValueChanged=exec;
-old_min.onValueChanged=exec;
-old_max.onValueChanged=exec;
-new_min.onValueChanged=exec;
-new_max.onValueChanged=exec;
+v.onChange=exec;
+old_min.onChange=exec;
+old_max.onChange=exec;
+new_min.onChange=exec;
+new_max.onChange=exec;
 
 result.set(0);
 

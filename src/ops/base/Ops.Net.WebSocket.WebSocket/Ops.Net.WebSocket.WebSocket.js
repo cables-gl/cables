@@ -6,13 +6,13 @@ var outResult=op.outObject("result");
 var outConnected=op.outValue("connected");
 var outConnection=this.outObject("Connection");
 
-var outReceived=op.outFunction("Received Data");
+var outReceived=op.outTrigger("Received Data");
 
 var connection=null;
 var timeout=null;
 var connectedTo='';
 
-inUrl.onValueChanged=connect;
+inUrl.onChange=connect;
 timeout=setTimeout(checkConnection,2000);
 
 inUrl.set();

@@ -1,17 +1,17 @@
 op.name="PixelDisplacementCenter";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
-var amount=op.addInPort(new Port(op,"amountX",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var amountY=op.addInPort(new Port(op,"amountY",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var amount=op.addInPort(new CABLES.Port(op,"amountX",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var amountY=op.addInPort(new CABLES.Port(op,"amountY",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var displaceTex=op.inTexture("displaceTex");
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -53,12 +53,12 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    
 
     if(displaceTex.get())
     {
-        /* --- */cgl.setTexture(1,displaceTex.get().tex );
+        cgl.setTexture(1,displaceTex.get().tex );
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, displaceTex.get().tex );
     }
 

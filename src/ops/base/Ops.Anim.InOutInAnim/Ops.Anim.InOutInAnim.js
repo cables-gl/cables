@@ -1,7 +1,7 @@
 
 var anim=new CABLES.TL.Anim();
 
-var update=op.inFunction("Update");
+var update=op.inTrigger("Update");
 
 var duration1=op.inValue("Duration Out",0.25);
 var easing1=anim.createPort(op,"Easing Out");
@@ -11,12 +11,12 @@ var duration2=op.inValue("Duration In",0.25);
 var easing2=anim.createPort(op,"Easing In");
 var value2=op.inValue("Value In",1);
 
-var trigger=op.inFunctionButton("Start");
-var next=op.outFunction("Next");
+var trigger=op.inTriggerButton("Start");
+var next=op.outTrigger("Next");
 
 var outVal=op.outValue("Result",0);
 
-var middle=op.outFunction("Middle");
+var middle=op.outTrigger("Middle");
 
 trigger.onTriggered=setupAnim;
 

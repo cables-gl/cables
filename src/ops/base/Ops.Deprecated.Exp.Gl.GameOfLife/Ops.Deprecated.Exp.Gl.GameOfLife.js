@@ -1,8 +1,8 @@
 op.name="GameOfLife";
 
-var render=op.inFunction("Render");
-var reset=op.inFunction("Reset");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var reset=op.inTrigger("Reset");
+var next=op.outTrigger("Next");
 
 var cells=[];
 var cellsA=[];

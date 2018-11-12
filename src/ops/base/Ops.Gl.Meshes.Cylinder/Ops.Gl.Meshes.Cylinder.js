@@ -1,16 +1,13 @@
-op.name='Cylinder';
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var slices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
-var stacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
-var radius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-
+var render=op.inTrigger('render');
+var slices=op.addInPort(new CABLES.Port(op,"slices",CABLES.OP_PORT_TYPE_VALUE));
+var stacks=op.addInPort(new CABLES.Port(op,"stacks",CABLES.OP_PORT_TYPE_VALUE));
+var radius=op.addInPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 
 var startSlice=op.inValueInt("Start Slice",0);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var trigger=op.outTrigger('trigger');
+var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 
 height.set(2);
@@ -25,11 +22,11 @@ var geom=null;
 var i=0,j=0;
 var offset=0;
 
-stacks.onValueChanged=updateMesh;
-slices.onValueChanged=updateMesh;
-radius.onValueChanged=updateMesh;
-height.onValueChanged=updateMesh;
-startSlice.onValueChanged=updateMesh;
+stacks.onChange=updateMesh;
+slices.onChange=updateMesh;
+radius.onChange=updateMesh;
+height.onChange=updateMesh;
+startSlice.onChange=updateMesh;
 
 render.onTriggered=function()
 {

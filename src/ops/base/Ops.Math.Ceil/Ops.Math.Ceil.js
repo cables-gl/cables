@@ -1,10 +1,9 @@
-op.name='Ceil';
-var number1=op.addInPort(new Port(op,"Number"));
-var result=op.addOutPort(new Port(op,"Result"));
+const number1=op.inValue("Number");
+const result=op.outValue("Result");
 
 function exec()
 {
     result.set(Math.ceil(number1.get()));
 }
 
-number1.onValueChanged=exec;
+number1.onChange=exec;

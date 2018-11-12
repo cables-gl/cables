@@ -1,8 +1,6 @@
-op.name="Min";
-
-var result=op.addOutPort(new Port(op,"result"));
-var value=op.addInPort(new Port(op,"value"));
-var min=op.addInPort(new Port(op,"Minimum"));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
+var value=op.addInPort(new CABLES.Port(op,"value"));
+var min=op.addInPort(new CABLES.Port(op,"Minimum"));
 
 function exec()
 {
@@ -10,8 +8,8 @@ function exec()
     if(v==v) result.set( v );
 }
 
-min.onValueChanged=exec;
-value.onValueChanged=exec;
+min.onChange=exec;
+value.onChange=exec;
 
 value.set(1);
 min.set(1);

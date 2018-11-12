@@ -1,61 +1,60 @@
 var self=this;
 var cgl=self.patch.cgl;
 
-this.name='MatCapMaterial';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+this.shaderOut=this.addOutPort(new CABLES.Port(this,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 this.shaderOut.ignoreValueSerialize=true;
 
-this.texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.texture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureUniform=null;
 
-this.textureDiffuse=this.addInPort(new Port(this,"diffuse",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.textureDiffuse=this.addInPort(new CABLES.Port(this,"diffuse",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureDiffuseUniform=null;
 
-this.textureNormal=this.addInPort(new Port(this,"normal",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.textureNormal=this.addInPort(new CABLES.Port(this,"normal",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureNormalUniform=null;
 
-this.normalScale=this.addInPort(new Port(this,"normalScale",OP_PORT_TYPE_VALUE,{display:'range'}));
+this.normalScale=this.addInPort(new CABLES.Port(this,"normalScale",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 this.normalScale.set(0.4);
 this.normalScaleUniform=null;
 
-this.textureSpec=this.addInPort(new Port(this,"specular",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.textureSpec=this.addInPort(new CABLES.Port(this,"specular",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureSpecUniform=null;
 
-this.textureSpecMatCap=this.addInPort(new Port(this,"specular matcap",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+this.textureSpecMatCap=this.addInPort(new CABLES.Port(this,"specular matcap",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 this.textureSpecMatCapUniform=null;
 
 
-this.diffuseRepeatX=this.addInPort(new Port(this,"diffuseRepeatX",OP_PORT_TYPE_VALUE));
-this.diffuseRepeatY=this.addInPort(new Port(this,"diffuseRepeatY",OP_PORT_TYPE_VALUE));
+this.diffuseRepeatX=this.addInPort(new CABLES.Port(this,"diffuseRepeatX",CABLES.OP_PORT_TYPE_VALUE));
+this.diffuseRepeatY=this.addInPort(new CABLES.Port(this,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
 this.diffuseRepeatX.set(1.0);
 this.diffuseRepeatY.set(1.0);
 
 var pOpacity=op.inValueSlider("Opacity",1);
 
 
-this.diffuseRepeatX.onValueChanged=function()
+this.diffuseRepeatX.onChange=function()
 {
     self.diffuseRepeatXUniform.setValue(self.diffuseRepeatX.get());
 };
 
-this.diffuseRepeatY.onValueChanged=function()
+this.diffuseRepeatY.onChange=function()
 {
     self.diffuseRepeatYUniform.setValue(self.diffuseRepeatY.get());
 };
 
 
-this.calcTangents=this.addInPort(new Port(this,"calc normal tangents",OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.calcTangents.onValueChanged=function()
+this.calcTangents=this.addInPort(new CABLES.Port(this,"calc normal tangents",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+this.calcTangents.onChange=function()
 {
     if(self.calcTangents.get()) shader.define('CALC_TANGENT');
         else shader.removeDefine('CALC_TANGENT');
 };
 
-this.projectCoords=this.addInPort(new Port(this,"projectCoords",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','xy','yz','xz']}));
+this.projectCoords=this.addInPort(new CABLES.Port(this,"projectCoords",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['no','xy','yz','xz']}));
 this.projectCoords.set('no');
-this.projectCoords.onValueChanged=function()
+this.projectCoords.onChange=function()
 {
     shader.removeDefine('DO_PROJECT_COORDS_XY');
     shader.removeDefine('DO_PROJECT_COORDS_YZ');
@@ -66,22 +65,22 @@ this.projectCoords.onValueChanged=function()
     if(self.projectCoords.get()=='xz') shader.define('DO_PROJECT_COORDS_XZ');
 };
 
-this.normalRepeatX=this.addInPort(new Port(this,"normalRepeatX",OP_PORT_TYPE_VALUE));
-this.normalRepeatY=this.addInPort(new Port(this,"normalRepeatY",OP_PORT_TYPE_VALUE));
+this.normalRepeatX=this.addInPort(new CABLES.Port(this,"normalRepeatX",CABLES.OP_PORT_TYPE_VALUE));
+this.normalRepeatY=this.addInPort(new CABLES.Port(this,"normalRepeatY",CABLES.OP_PORT_TYPE_VALUE));
 this.normalRepeatX.set(1.0);
 this.normalRepeatY.set(1.0);
 
-this.normalRepeatX.onValueChanged=function()
+this.normalRepeatX.onChange=function()
 {
     self.normalRepeatXUniform.setValue(self.normalRepeatX.get());
 };
 
-this.normalRepeatY.onValueChanged=function()
+this.normalRepeatY.onChange=function()
 {
     self.normalRepeatYUniform.setValue(self.normalRepeatY.get());
 };
 
-this.normalScale.onValueChanged=function()
+this.normalScale.onChange=function()
 {
     self.normalScaleUniform.setValue(self.normalScale.get()*2.0);
 };
@@ -104,7 +103,7 @@ this.textureNormal.onPreviewChanged=function()
         else self.render.onTriggered=self.doRender;
 };
 
-this.texture.onValueChanged=function()
+this.texture.onChange=function()
 {
     if(self.texture.get())
     {
@@ -119,7 +118,7 @@ this.texture.onValueChanged=function()
     }
 };
 
-this.textureDiffuse.onValueChanged=function()
+this.textureDiffuse.onChange=function()
 {
     if(self.textureDiffuse.get())
     {
@@ -138,7 +137,7 @@ this.textureDiffuse.onValueChanged=function()
 
 
 
-this.textureNormal.onValueChanged=function()
+this.textureNormal.onChange=function()
 {
     if(self.textureNormal.get())
     {
@@ -178,51 +177,23 @@ function changeSpec()
 
 }
 
-this.textureSpec.onValueChanged=changeSpec;
-this.textureSpecMatCap.onValueChanged=changeSpec;
+this.textureSpec.onChange=changeSpec;
+this.textureSpecMatCap.onChange=changeSpec;
 
 
 function bindTextures()
 {
-    
-    if(self.texture.get())
-    {
-        /* --- */cgl.setTexture(0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.texture.get().tex);
-    }
-
-    if(self.textureDiffuse.get())
-    {
-        /* --- */cgl.setTexture(1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureDiffuse.get().tex);
-    }
-
-    if(self.textureNormal.get())
-    {
-        /* --- */cgl.setTexture(2);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureNormal.get().tex);
-    }
-
-    if(self.textureSpec.get())
-    {
-        /* --- */cgl.setTexture(3);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpec.get().tex);
-    }
-    if(self.textureSpecMatCap.get())
-    {
-        /* --- */cgl.setTexture(4);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.textureSpecMatCap.get().tex);
-    }
-
+    if(self.texture.get())cgl.setTexture(0,self.texture.get().tex);
+    if(self.textureDiffuse.get()) cgl.setTexture(1,self.textureDiffuse.get().tex);
+    if(self.textureNormal.get()) cgl.setTexture(2,self.textureNormal.get().tex);
+    if(self.textureSpec.get()) cgl.setTexture(3,self.textureSpec.get().tex);
+    if(self.textureSpecMatCap.get()) cgl.setTexture(4,self.textureSpecMatCap.get().tex);
 };
-
-
-
 
 this.doRender=function()
 {
     shader.bindTextures=bindTextures;
-    
+
     cgl.setShader(shader);
     self.trigger.trigger();
     cgl.setPreviousShader();
@@ -231,38 +202,40 @@ this.doRender=function()
 
     // if(self.texture.get())
     // {
-    //     /* --- */cgl.setTexture(0);
+    //     cgl.setTexture(0);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
 
     // if(self.textureDiffuse.get())
     // {
-    //     /* --- */cgl.setTexture(1);
+    //     cgl.setTexture(1);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
 
     // if(self.textureNormal.get())
     // {
-    //     /* --- */cgl.setTexture(2);
+    //     cgl.setTexture(2);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
 
     // if(self.textureSpec.get())
     // {
-    //     /* --- */cgl.setTexture(3);
+    //     cgl.setTexture(3);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
     // if(self.textureSpecMatCap.get())
     // {
-    //     /* --- */cgl.setTexture(4);
+    //     cgl.setTexture(4);
     //     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // }
 };
 
 var srcVert=''
     .endl()+'{{MODULES_HEAD}}'
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec3 vPosition;'
+    .endl()+'IN float attrVertIndex;'
+
     .endl()+'IN vec2 attrTexCoord;'
     .endl()+'IN vec3 attrVertNormal;'
 
@@ -328,7 +301,7 @@ var srcVert=''
 
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
 
     .endl()+'{{MODULES_HEAD}}'
 
@@ -458,7 +431,7 @@ var srcFrag=''
     // .endl()+'    col.rgb=vec3(length(vn),0.0,0.0);'
 
 
-    .endl()+'    gl_FragColor = col;'
+    .endl()+'    outColor= col;'
     .endl()+''
     .endl()+'}';
 

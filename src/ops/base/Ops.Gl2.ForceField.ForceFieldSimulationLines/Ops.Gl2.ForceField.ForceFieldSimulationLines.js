@@ -1,18 +1,16 @@
-op.name="ForceFieldSimulationLines";
-
-var exec=op.inFunction("exec");
-var next=op.outFunction("next");
+var exec=op.inTrigger("exec");
+var next=op.outTrigger("next");
 
 var numParticles=op.inValueInt("Num Particles",100);
 
-var inReset=op.inFunctionButton("Reset");
-var inRespawn=op.inFunctionButton("Respawn all");
+var inReset=op.inTriggerButton("Reset");
+var inRespawn=op.inTriggerButton("Respawn all");
 var inSpeed=op.inValue("Speed",1);
 var inDamping=op.inValue("Damping");
 
 var col=op.outValue("color");
 
-var triggerForce=op.outFunction("force");
+var triggerForce=op.outTrigger("force");
 var inSize=op.inValue("Size Area");
 
 var outOffset=op.outValue("offset");
@@ -326,10 +324,10 @@ exec.onTriggered=function()
         // p.buff[i*3+0]=p.pos[0];
         // buffLineStart
 
-        arrayWriteToEnd(p.buff,p.pos[0])
-        arrayWriteToEnd(p.buff,p.pos[1])
-        arrayWriteToEnd(p.buff,p.pos[2])
-        // arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[0])
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[1])
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[2])
+        // CABLES.UTILS.arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
 
         col.set(ppos);
         outIndex.set(i);

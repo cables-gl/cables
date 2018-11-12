@@ -13,10 +13,10 @@ function triggerOutput() {
 
 // inputs
 for(var i=0; i<N_PORTS; i++) {
-    var port = op.inFunctionButton("Execute " + (i+1));
+    var port = op.inTriggerButton("Execute " + (i+1));
     port.onTriggered = triggerOutput; 
     inPorts.push(port);
 }
 
 // outpus
-var outTriggerPort = op.outFunction("Trigger");
+var outTriggerPort = op.outTrigger("Trigger");

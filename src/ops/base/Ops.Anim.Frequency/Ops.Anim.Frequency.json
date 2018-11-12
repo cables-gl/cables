@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "frequency"
+                "name": "frequency",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -17,7 +18,8 @@
             },
             {
                 "type": "0",
-                "name": "CPS"
+                "name": "CPS",
+                "subType": "number"
             }
         ],
         "name": "Ops.Anim.Frequency"
@@ -42,5 +44,9 @@
                 "text": "Calls per Second"
             }
         ]
-    }
+    },
+    "updated": 1540917388424,
+    "authorName": "pandur",
+    "id": "c72a160d-55f5-427c-a516-cf6753201d56",
+    "created": 1540917326448
 }

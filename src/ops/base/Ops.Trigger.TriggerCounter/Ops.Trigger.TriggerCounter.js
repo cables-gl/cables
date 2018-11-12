@@ -1,7 +1,7 @@
-const exe=op.inFunctionButton("exe");
-const reset=op.inFunctionButton("reset");//op.addInPort(new Port(op,"reset",OP_PORT_TYPE_FUNCTION));
-const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-const num=op.addOutPort(new Port(op,"timesTriggered",OP_PORT_TYPE_VALUE));
+const exe=op.inTriggerButton("exe");
+const reset=op.inTriggerButton("reset");
+const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const num=op.addOutPort(new CABLES.Port(op,"timesTriggered",CABLES.OP_PORT_TYPE_VALUE));
 
 var n=0;
 

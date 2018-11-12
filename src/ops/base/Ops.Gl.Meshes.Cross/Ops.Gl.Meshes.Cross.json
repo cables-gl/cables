@@ -1,0 +1,49 @@
+{
+    "updated": 1541534892597,
+    "authorName": "pandur",
+    "id": "eab5773b-dd10-4617-a8a0-e3990b10477a",
+    "created": 1540369391208,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Thickness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Crosshair",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.Cross"
+    },
+    "summary": "Draws a cross with controllable thickness and length. ",
+    "docs": {
+        "ports": []
+    }
+}

@@ -8,31 +8,38 @@
             },
             {
                 "type": "0",
-                "name": "segments"
+                "name": "segments",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "radius"
+                "name": "radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mulX"
+                "name": "mulX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mulY"
+                "name": "mulY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "percent"
+                "name": "percent",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "offset"
+                "name": "offset",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "speed"
+                "name": "speed",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -42,15 +49,18 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.CircleMovement"
@@ -58,6 +68,6 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "0dfae74d-cb5b-4214-b7da-bb42204041ba",
-    "updated": 1516194254025,
+    "updated": 1541628963001,
     "created": 1508827318444
 }

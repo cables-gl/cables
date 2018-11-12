@@ -1,7 +1,6 @@
-
 var inTexture=op.inTexture("Texture");
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var useVPSize=op.addInPort(new Port(op,"use original size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var render=op.inTrigger('render');
+var useVPSize=op.addInPort(new CABLES.Port(op,"use original size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var width=op.inValueInt("width");
 var height=op.inValueInt("height");
 
@@ -9,7 +8,7 @@ var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
 var fpTexture=op.inValueBool("HDR");
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var texOut=op.outTexture("texture_out");
 
 var outRatio=op.outValue("Aspect Ratio");
@@ -30,7 +29,7 @@ var bgFrag=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');
 bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);
@@ -49,6 +48,7 @@ function initEffect()
 
     tex=new CGL.Texture(cgl,
         {
+            "name":"copytexture",
             "isFloatingPointTexture":fpTexture.get(),
             "filter":selectedFilter,
             "wrap":selectedWrap,
@@ -125,18 +125,18 @@ function updateSizePorts()
     }
 }
 
-useVPSize.onValueChanged=function()
+useVPSize.onChange=function()
 {
     updateSizePorts();
     if(useVPSize.get())
     {
-        width.onValueChanged=null;
-        height.onValueChanged=null;
+        width.onChange=null;
+        height.onChange=null;
     }
     else
     {
-        width.onValueChanged=updateResolution;
-        height.onValueChanged=updateResolution;
+        width.onChange=updateResolution;
+        height.onChange=updateResolution;
     }
     updateResolution();
 };
@@ -144,6 +144,7 @@ useVPSize.onValueChanged=function()
 
 var doRender=function()
 {
+
     if(!effect || reInitEffect)
     {
         initEffect();
@@ -156,16 +157,20 @@ var doRender=function()
 
     updateResolution();
 
+    if(!inTexture.get())return;
+
     cgl.currentTextureEffect=effect;
     effect.setSourceTexture(tex);
 
     effect.startEffect();
 
+
+
     // render background color...
     cgl.setShader(bgShader);
     cgl.currentTextureEffect.bind();
-    /* --- */cgl.setTexture(0, inTexture.get().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTexture.get().tex );
+    cgl.setTexture(0, inTexture.get().tex );
+
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
@@ -176,7 +181,7 @@ var doRender=function()
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 
     cgl.currentTextureEffect=null;
-    
+
     trigger.trigger();
 };
 
@@ -192,7 +197,7 @@ function onWrapChange()
 }
 
 twrap.set('clamp to edge');
-twrap.onValueChanged=onWrapChange;
+twrap.onChange=onWrapChange;
 
 function onFilterChange()
 {
@@ -204,7 +209,7 @@ function onFilterChange()
 }
 
 tfilter.set('linear');
-tfilter.onValueChanged=onFilterChange;
+tfilter.onChange=onFilterChange;
 
 useVPSize.set(true);
 render.onTriggered=doRender;

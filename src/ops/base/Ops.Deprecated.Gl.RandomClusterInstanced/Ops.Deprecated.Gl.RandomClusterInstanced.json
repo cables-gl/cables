@@ -1,0 +1,71 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "0",
+                "name": "num",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "random seed",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Positions"
+            },
+            {
+                "type": "0",
+                "name": "scaleX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scaleY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scaleZ",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "rnd",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.RandomClusterInstanced"
+    },
+    "updated": 1540272266262,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "91fd2f98-d32a-475b-a418-eb1d76b71bf2",
+    "created": 1508761890880
+}

@@ -1,12 +1,12 @@
 
 var numValues=op.inValueInt("numValues");
 
-var values=op.addOutPort(new Port(op, "values",OP_PORT_TYPE_ARRAY));
+var values=op.addOutPort(new CABLES.Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
 values.ignoreValueSerialize=true;
 
 numValues.set(100);
 
-numValues.onValueChanged=init;
+numValues.onChange=init;
 
 var arr=[];
 init();

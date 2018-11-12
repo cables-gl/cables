@@ -1,4 +1,3 @@
-precision highp float;
 
 {{MODULES_HEAD}}
 
@@ -6,16 +5,16 @@ IN vec2 texCoord;
 #ifdef HAS_TEXTURES
    
    #ifdef HAS_TEXTURE_DIFFUSE
-       uniform sampler2D diffTex;
+       UNI sampler2D diffTex;
    #endif
    #ifdef HAS_TEXTURE_MASK
-       uniform sampler2D texMask;
+       UNI sampler2D texMask;
    #endif
 #endif
-uniform float r;
-uniform float g;
-uniform float b;
-uniform float a;
+UNI float r;
+UNI float g;
+UNI float b;
+UNI float a;
 
 void main()
 {

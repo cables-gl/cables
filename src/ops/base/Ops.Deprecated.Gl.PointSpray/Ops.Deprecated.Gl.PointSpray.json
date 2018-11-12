@@ -1,0 +1,61 @@
+{
+    "updated": 1537934048184,
+    "authorName": "pandur",
+    "id": "e9680fab-2ade-4571-801c-ce6d33de4314",
+    "created": 1519124253795,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sin Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sin Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Lifetime",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Points",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "SimPosTex"
+            }
+        ],
+        "name": "Ops.Gl.PointSpray"
+    }
+}

@@ -1,4 +1,2 @@
-
 - green is facing front
-
 - red is facing back

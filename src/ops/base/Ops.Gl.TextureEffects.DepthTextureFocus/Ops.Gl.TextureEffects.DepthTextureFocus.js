@@ -1,30 +1,23 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
-var farPlane=op.addInPort(new Port(op,"farplane",OP_PORT_TYPE_VALUE));
-var nearPlane=op.addInPort(new Port(op,"nearplane",OP_PORT_TYPE_VALUE));
-var inInv=op.inValueBool("Invert",false);
-var inFocus=op.inValueSlider("Center",0.5);
-var inWidth=op.inValueSlider("Width",0.2);
+const render=op.inTrigger('render');
+const image=op.inTexture("image");
+const farPlane=op.inValue("farplane",100);
+const nearPlane=op.inValue("nearplane",0.1);
+const inInv=op.inValueBool("Invert",false);
+const inFocus=op.inValueSlider("Center",0.5);
+const inWidth=op.inValueSlider("Width",0.2);
+const trigger=op.outTrigger('trigger');
 
+const cgl=op.patch.cgl;
 
-farPlane.set(100.0);
-nearPlane.set(0.1);
-
-var cgl=op.patch.cgl;
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var shader=new CGL.Shader(cgl);
-
-var srcFrag=attachments.depth_focus_frag||'';
-
-
+const shader=new CGL.Shader(cgl);
+const srcFrag=attachments.depth_focus_frag||'';
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','image',0);
 
-var uniFarplane=new CGL.Uniform(shader,'f','f',farPlane);
-var uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
-var uniFocus=new CGL.Uniform(shader,'f','focus',inFocus);
-var uniwidth=new CGL.Uniform(shader,'f','width',inWidth);
+const textureUniform=new CGL.Uniform(shader,'t','image',0);
+const uniFarplane=new CGL.Uniform(shader,'f','f',farPlane);
+const uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
+const uniFocus=new CGL.Uniform(shader,'f','focus',inFocus);
+const uniwidth=new CGL.Uniform(shader,'f','width',inWidth);
 
 inInv.onChange=function()
 {
@@ -34,7 +27,7 @@ inInv.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(image.val && image.val.tex)
     {
@@ -43,8 +36,6 @@ render.onTriggered=function()
 
 
         cgl.setTexture(0,image.get().tex);
-        // cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();

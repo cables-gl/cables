@@ -1,11 +1,11 @@
-var eventIn=op.addInPort(new Port(this,"Event Input",OP_PORT_TYPE_OBJECT));
+var eventIn=op.addInPort(new CABLES.Port(this,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
 
-var note=op.addInPort(new Port(this,"note"));
+var note=op.addInPort(new CABLES.Port(this,"note"));
 var channel=op.inValueInt("Channel",0);
-var learn=op.addInPort(new Port(this,"learn",OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var learn=op.addInPort(new CABLES.Port(this,"learn",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var eventOut=op.addOutPort(new Port(this,"Event Output",OP_PORT_TYPE_OBJECT));
-var value=op.addOutPort(new Port(this,"value"));
+var eventOut=op.addOutPort(new CABLES.Port(this,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
+var value=op.addOutPort(new CABLES.Port(this,"value"));
 
 note.set(60);
 value.set(0);
@@ -32,7 +32,7 @@ function initMidiValue()
     if(!setMidiValue()) setTimeout(initMidiValue,300);
 }
 
-eventIn.onValueChanged=function()
+eventIn.onChange=function()
 {
     var event=eventIn.get();
     if(!event)return;

@@ -8,7 +8,7 @@ var outPorts = [];
 for(var i=0; i<NUM_PORTS; i++) {
     outPorts.push(op.outValue('Out Value ' + i));
 }
-var outTrigger = op.outFunction('Value Changed');
+var outTrigger = op.outTrigger('Value Changed');
 
 // change listener
 inPort.onChange = function() {

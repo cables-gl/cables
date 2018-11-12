@@ -1,5 +1,4 @@
-op.name="CanvasInBrowserViewport";
-var inUpdate=op.inFunctionButton("Update");
+var inUpdate=op.inTriggerButton("Update");
 var outResult=op.outValue("Fully Visible");
 var outResultPartly=op.outValue("Partly Visible");
 

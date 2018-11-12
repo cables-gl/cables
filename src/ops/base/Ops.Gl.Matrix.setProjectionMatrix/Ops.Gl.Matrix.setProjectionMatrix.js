@@ -1,7 +1,7 @@
 
-var inExe=op.inFunction("exe");
+var inExe=op.inTrigger("exe");
 var inMatrix=op.inArray('Matrix');
-var next=op.outFunction("next");
+var next=op.outTrigger("next");
 var cgl=op.patch.cgl;
 
 inExe.onTriggered=function()

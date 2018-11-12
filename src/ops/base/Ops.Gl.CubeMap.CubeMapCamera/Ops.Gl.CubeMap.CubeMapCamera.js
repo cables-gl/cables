@@ -1,7 +1,7 @@
 // adapted from: math.hws.edu/graphicsbook/source/webgl/cube-camera.html
 
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 var outTex=op.outObject("cubemap");
 
 var inSize=op.inValueInt("Size",512);

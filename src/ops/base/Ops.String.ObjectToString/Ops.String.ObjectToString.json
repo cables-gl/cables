@@ -17,5 +17,9 @@
             }
         ],
         "name": "Ops.String.ObjectToString"
+    },
+    "summary": "convert an object to JSON string",
+    "docs": {
+        "ports": []
     }
 }

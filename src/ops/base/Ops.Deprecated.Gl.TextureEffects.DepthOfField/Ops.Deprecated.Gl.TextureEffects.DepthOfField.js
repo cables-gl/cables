@@ -1,18 +1,18 @@
-    Op.apply(this, arguments);
+    //Op.apply(this, arguments);
     var self=this;
     var cgl=this.patch.cgl;
 
     this.name='DepthOfField';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-    this.depthTex=this.addInPort(new Port(this,"depth map",OP_PORT_TYPE_TEXTURE));
+    this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+    this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+    this.depthTex=this.addInPort(new CABLES.Port(this,"depth map",CABLES.OP_PORT_TYPE_TEXTURE));
 
-    this.farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
-    this.nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
+    this.farPlane=this.addInPort(new CABLES.Port(this,"farplane",CABLES.OP_PORT_TYPE_VALUE));
+    this.nearPlane=this.addInPort(new CABLES.Port(this,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
 
-    this.showIntensity=this.addInPort(new Port(this,"showIntensity",OP_PORT_TYPE_VALUE,{display:'bool'}));
+    this.showIntensity=this.addInPort(new CABLES.Port(this,"showIntensity",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-    this.iterations=this.addInPort(new Port(this,"iterations",OP_PORT_TYPE_VALUE));
+    this.iterations=this.addInPort(new CABLES.Port(this,"iterations",CABLES.OP_PORT_TYPE_VALUE));
     this.iterations.val=10;
 
     var shader=new CGL.Shader(cgl);
@@ -96,19 +96,19 @@
     var uniFarplane=new CGL.Uniform(shader,'f','f',self.farPlane.get());
     var uniNearplane=new CGL.Uniform(shader,'f','n',self.nearPlane.get());
 
-    this.showIntensity.onValueChanged=function()
+    this.showIntensity.onChange=function()
     {
         if(self.showIntensity.get()) shader.define('SHOW_INTENSITY');
         else shader.removeDefine('SHOW_INTENSITY');
     };
 
-    this.farPlane.onValueChanged=function()
+    this.farPlane.onChange=function()
     {
         uniFarplane.setValue(self.farPlane.val);
     };
     self.farPlane.val=5.0;
 
-    this.nearPlane.onValueChanged=function()
+    this.nearPlane.onChange=function()
     {
         uniNearplane.setValue(self.nearPlane.val);
     };
@@ -127,12 +127,12 @@
             // first pass
 
             cgl.currentTextureEffect.bind();
-            /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+            
             if(i===0)
             {
 
-            /* --- */cgl.setTexture(1,self.depthTex.get().tex);
+            cgl.setTexture(1,self.depthTex.get().tex);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.depthTex.get().tex );
 
             }
@@ -146,10 +146,10 @@
             // second pass
 
             cgl.currentTextureEffect.bind();
-            /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+            
 
-            // /* --- */cgl.setTexture(1,self.depthTex.get().tex);
+            // cgl.setTexture(1,self.depthTex.get().tex);
             // // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.depthTex.get().tex );
 
             uniDirX.setValue(1.0);

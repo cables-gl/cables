@@ -1,5 +1,5 @@
 
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var inPoints=op.inArray("Points");
 var inParticles=op.inValue("Num Particles",500);
 var inLength=op.inValue("Length",20);
@@ -10,7 +10,7 @@ var inMaxDistance=op.inValue("Max Distance",0);
 
 var inRandomSpeed=op.inValueBool("RandomSpeed");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 
 var cgl=op.patch.cgl;

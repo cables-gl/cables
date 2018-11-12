@@ -1,12 +1,10 @@
-op.name="TriggerBetween";
-
-var exe=op.inFunction("Exe");
+var exe=op.inTrigger("Exe");
 
 var inIndex=op.inValueInt("Index");
 var inNumber1=op.inValueInt("Number 1");
 var inNumber2=op.inValueInt("Number 2");
 
-var next=op.outFunction("next");
+var next=op.outTrigger("next");
 var outFract=op.outValue("Fract");
 
 

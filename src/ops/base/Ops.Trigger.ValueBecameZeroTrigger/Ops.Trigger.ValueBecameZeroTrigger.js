@@ -4,7 +4,7 @@ var valueBefore = -1;
 var valuePort = op.inValue('Value', -1);
 
 // output
-var outTrigger = op.outFunction('Became Zero Trigger'); 
+var outTrigger = op.outTrigger('Became Zero Trigger'); 
 
 valuePort.onChange = function() {
     var value = valuePort.get();

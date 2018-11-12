@@ -18,7 +18,7 @@
             },
             {
                 "type": "0",
-                "name": "innerRadius",
+                "name": "innerradius",
                 "subType": "number"
             },
             {
@@ -33,23 +33,23 @@
             },
             {
                 "type": "0",
-                "name": "invertSteps",
+                "name": "invertsteps",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Render",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Spline",
+                "name": "draw",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "mapping",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "spline",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -64,7 +64,7 @@
         ],
         "name": "Ops.Gl.Meshes.Circle"
     },
-    "updated": 1533141309214,
+    "updated": 1540979916196,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "4db917cc-2cef-43f4-83d5-38c4572fe943",

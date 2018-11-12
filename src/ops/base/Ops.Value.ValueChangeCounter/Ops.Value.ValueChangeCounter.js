@@ -1,6 +1,6 @@
 
 var inVal=op.inValue("Value");
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 var outResult=op.outValue("Result");
 
 var count=0;

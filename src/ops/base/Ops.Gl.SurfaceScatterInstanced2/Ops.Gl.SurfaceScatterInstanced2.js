@@ -1,4 +1,4 @@
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var inGeomSurface=op.inObject("Geom Surface");
 var geom=op.inObject("Geometry");
 
@@ -9,7 +9,7 @@ var inNum=op.inValueInt("Num",100);
 var inSizeMin=op.inValueSlider("Size min",1.0);
 var inSizeMax=op.inValueSlider("Size max",1.0);
 var inRotateRandom=op.inValueBool("Random Rotate",true);
-var seed=op.addInPort(new Port(op,"Random Seed"));
+var seed=op.addInPort(new CABLES.Port(op,"Random Seed"));
 
 var mod=null;
 var mesh=null;
@@ -33,7 +33,7 @@ render.onTriggered=doRender;
 render.onLinkChanged=removeModule;
 
 
-function uniqueIndeces(oldCount,newCount,randomize)
+function uniqueIndices(oldCount,newCount,randomize)
 {
     function fisherYatesShuffle(array) {
       var i = 0;
@@ -61,7 +61,7 @@ function setup()
 {
     if(!mesh)return;
     var geom=inGeomSurface.get();
-    var num=inNum.get();
+    var num=Math.abs(Math.floor(inNum.get()));
     var m=mat4.create();
     var q=quat.create();
     var vm2=vec3.create();
@@ -85,7 +85,7 @@ function setup()
     if(geom.isIndexed())
     {
         var faces=geom.verticesIndices;
-        var indices=uniqueIndeces(faces.length/3,num,inVariety.get()=="Random");
+        var indices=uniqueIndices(faces.length/3,num,inVariety.get()=="Random");
         
         for(var i=0;i<num;i++)
         {
@@ -189,7 +189,7 @@ function setup()
 
 // // TODO: remove array3xtransformedinstanced....
 
-// var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+// var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 // var inTransformations=op.inArray("positions");
 // var inScales=op.inArray("Scale Array");

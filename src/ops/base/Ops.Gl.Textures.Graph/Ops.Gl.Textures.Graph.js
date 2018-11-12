@@ -1,12 +1,8 @@
+var trigger=this.addInPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var value=this.addInPort(new CABLES.Port(this,"value",CABLES.OP_PORT_TYPE_VALUE));
+var index=this.addInPort(new CABLES.Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
+var inReset=this.addInPort(new CABLES.Port(this,"reset",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
-var trigger=this.addInPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var value=this.addInPort(new Port(this,"value",OP_PORT_TYPE_VALUE));
-var index=this.addInPort(new Port(this,"index",OP_PORT_TYPE_VALUE));
-
-var inReset=this.addInPort(new Port(this,"reset",OP_PORT_TYPE_FUNCTION,{display:'button'}));
-
-// var texOut=op.addOutPort(new Port(op,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var texOut=op.outTexture("Texture");
 
 var cgl=op.patch.cgl;
@@ -34,7 +30,7 @@ value.onLinkChanged=reset;
 index.onLinkChanged=reset;
 inReset.onTriggered=reset;
 
-value.onValueChanged=function()
+value.onChange=function()
 {
     addValue(value.get(),Math.round(index.get()));
 };
@@ -128,5 +124,5 @@ function updateGraph()
         }) );
 
     lastTime=Date.now();
-};
+}
 

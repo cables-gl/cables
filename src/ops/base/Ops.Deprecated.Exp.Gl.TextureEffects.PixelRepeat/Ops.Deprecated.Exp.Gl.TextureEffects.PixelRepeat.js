@@ -1,8 +1,8 @@
 op.name="PixelRepeat";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -17,7 +17,7 @@ var unTex=new CGL.Uniform(shader,'t','tex',0);
 var time=op.inValue("Time");
 var uniTime=new CGL.Uniform(shader,'f','time',time);
 
-var mask=op.addInPort(new Port(op,"mask",OP_PORT_TYPE_TEXTURE,{preview:true }));
+var mask=op.addInPort(new CABLES.Port(op,"mask",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
 
 
 var prim=op.inValueSelect("Primitive",["Rectangle","Circle"],"Rectangle");
@@ -31,10 +31,10 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
-    /* --- */cgl.setTexture(1,mask.get().tex );
+    cgl.setTexture(1,mask.get().tex );
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
 
     cgl.currentTextureEffect.finish();

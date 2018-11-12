@@ -1,6 +1,6 @@
-const render=op.inFunction("Render");
+const render=op.inTrigger("Render");
 const inWidth=op.inValue("Width",0.5);
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
 

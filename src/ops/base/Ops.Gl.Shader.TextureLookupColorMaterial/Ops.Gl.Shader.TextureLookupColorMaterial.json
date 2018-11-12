@@ -1,5 +1,5 @@
 {
-    "updated": 1507741471192,
+    "updated": 1540237680059,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "59e19126-9017-48bf-baf6-ba0181b75c93",
@@ -12,15 +12,18 @@
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "pos X"
+                "name": "pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "pos Y"
+                "name": "pos Y",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -32,11 +35,13 @@
             },
             {
                 "type": "0",
-                "name": "billboard"
+                "name": "billboard",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "preMultiplied alpha"
+                "name": "preMultiplied alpha",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

@@ -7,7 +7,7 @@
 const inThreshold = op.inValue("Threshold");
 const inValue = op.inValue("Input");
 
-const output = op.outFunction("Output");
+const output = op.outTrigger("Output");
 
 var hasThresholdBeenExceeded = false;
 

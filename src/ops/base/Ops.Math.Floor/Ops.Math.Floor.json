@@ -3,13 +3,15 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Number"
+                "name": "number",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Floor"
@@ -22,5 +24,9 @@
                 "text": "floored number"
             }
         ]
-    }
+    },
+    "updated": 1540980206911,
+    "authorName": "pandur",
+    "id": "0c77617c-b688-4b55-addf-2cbcaabf98af",
+    "created": 1540980206914
 }

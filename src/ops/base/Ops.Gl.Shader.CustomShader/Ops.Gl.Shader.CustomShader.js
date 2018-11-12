@@ -1,8 +1,8 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var fragmentShader=op.addInPort(new Port(op,"fragment",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
-var vertexShader=op.addInPort(new Port(op,"vertex",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
+var render=op.inTrigger('render');
+var fragmentShader=op.addInPort(new CABLES.Port(op,"fragment",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
+var vertexShader=op.addInPort(new CABLES.Port(op,"vertex",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var outShader=op.outObject("Shader");
 var cgl=op.patch.cgl;
 var uniformInputs=[];
@@ -12,8 +12,8 @@ var shader=new CGL.Shader(cgl,"shaderMaterial");
 // shader.glslVersion=0;
 
 
-fragmentShader.set(shader.getDefaultFragmentShader());
-vertexShader.set(shader.getDefaultVertexShader());
+fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
+vertexShader.set(CGL.Shader.getDefaultVertexShader());
 
 fragmentShader.onChange=updateLater;
 vertexShader.onChange=updateLater;
@@ -29,7 +29,6 @@ function updateLater()
 
 op.init=function()
 {
-    console.log("scustomshader loaded!");
     updateShader();
 };
 
@@ -49,8 +48,7 @@ function bindTextures()
     {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
         {
-            /* --- */cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
+            cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
         }
     }
 }
@@ -70,7 +68,6 @@ function updateShader()
 {
     if(!shader)return;
     needsUpdate=false;
-    op.log('shader update!');
 
     // shader.glslVersion=0;
     shader.bindTextures=bindTextures.bind(this);

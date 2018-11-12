@@ -9,7 +9,7 @@ const inputRedPort = op.inValueSlider('Input Red', defaultColorArr[0]);
 const inputGreenPort = op.inValueSlider('Input Green', defaultColorArr[1]);
 const inputBluePort = op.inValueSlider('Input Blue', defaultColorArr[2]);
 // const inputValuePort = op.inValueString('Input', DEFAULT_COLOR_HEX);
-const setDefaultValueButtonPort = op.inFunctionButton('Set Default');
+const setDefaultValueButtonPort = op.inTriggerButton('Set Default');
 const defaultValuePort = op.inValueString('Default', DEFAULT_COLOR_HEX);
 defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 

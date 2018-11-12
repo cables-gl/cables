@@ -91,5 +91,5 @@ void main() {
     finalColor = vec4( mix( finalColor.rgb, base.rgb ,1.0-base.a*amount),1.0);
 
 
-    gl_FragColor = finalColor;
+    outColor= finalColor;
 }

@@ -1,24 +1,24 @@
-op.name='border';
+const render=op.inTrigger('render');
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const trigger=op.outTrigger('trigger');
+const smooth=op.inValueBool("Smooth",false);
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var smooth=op.inValueBool("Smooth",false);
+const srcFrag=(attachments.border_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-
-
-shader.setSource(shader.getDefaultVertexShader(),attachments.border_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var aspectUniform=new CGL.Uniform(shader,'f','aspect',0);
-var uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const aspectUniform=new CGL.Uniform(shader,'f','aspect',0);
+const uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
 
 {
-    var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
-    width.set(0.1);
+    const width=op.inValue("width",0.1);
 
-    var uniWidth=new CGL.Uniform(shader,'f','width',width.get());
+    const uniWidth=new CGL.Uniform(shader,'f','width',width.get());
 
     width.onValueChange(function()
     {
@@ -27,50 +27,48 @@ var uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
 }
 
 {
-    // diffuse color
-
-    var r=op.addInPort(new Port(op,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    r.onValueChanged=function()
+    var r=op.addInPort(new CABLES.Port(op,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    r.onChange=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
             else r.uniform.setValue(r.get());
     };
 
-    var g=op.addInPort(new Port(op,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    g.onValueChanged=function()
+    var g=op.addInPort(new CABLES.Port(op,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    g.onChange=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
             else g.uniform.setValue(g.get());
     };
 
-    var b=op.addInPort(new Port(op,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.onValueChanged=function()
+    var b=op.addInPort(new CABLES.Port(op,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    b.onChange=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
             else b.uniform.setValue(b.get());
     };
 
-
     r.set(Math.random());
     g.set(Math.random());
     b.set(Math.random());
-
 }
 
-
+blendMode.onChange=function()
+{
+    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+};
 
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
-aspectUniform.set(texture.height/texture.width);
+    var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
+    aspectUniform.set(texture.height/texture.width);
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, texture.tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
+    cgl.setTexture(0, texture.tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

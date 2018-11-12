@@ -50,5 +50,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.SineCurve"
+    },
+    "summary": "simple rendering of a sine curve to texture",
+    "docs": {
+        "ports": []
     }
 }

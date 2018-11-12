@@ -3,9 +3,18 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Audio.SpeechRecognition"
+    },
+    "updated": 1537933701129,
+    "authorName": "pandur",
+    "id": "e7ccd7a9-54e9-4637-b8cb-011708dfc0dd",
+    "created": 1537933698978,
+    "summary": "speech to text recognition",
+    "docs": {
+        "ports": []
     }
 }

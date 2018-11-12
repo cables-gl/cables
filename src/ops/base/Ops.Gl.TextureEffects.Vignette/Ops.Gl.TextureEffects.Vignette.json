@@ -1,5 +1,4 @@
 {
-    "summary": "effect of shading away the edges of the image",
     "layout": {
         "portsIn": [
             {
@@ -12,15 +11,27 @@
             },
             {
                 "type": "0",
-                "name": "lensRadius1"
+                "name": "Radius"
             },
             {
                 "type": "0",
-                "name": "lensRadius2"
+                "name": "sharp"
             },
             {
                 "type": "0",
-                "name": "Ratio"
+                "name": "Aspect"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
             }
         ],
         "portsOut": [
@@ -29,13 +40,14 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Vignette"
+        "name": "Ops.Gl.TextureEffects.Vignette2"
     },
-    "updated": 1508866139735,
+    "updated": 1541411124451,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "b1b03b84-e924-4308-a252-1d348ede07e6",
-    "created": 1508866133390,
+    "id": "358e95af-bab4-4ef2-8b47-bb482577ca9b",
+    "created": 1508866208695,
+    "summary": "simulating an old camera effect of fading away the edges of the image",
     "docs": {
         "ports": []
     }

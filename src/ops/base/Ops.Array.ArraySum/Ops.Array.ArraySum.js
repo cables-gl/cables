@@ -1,22 +1,23 @@
-var inArr=op.inArray("Array");
+var inArray=op.inArray("In");
+var inValue=op.inValue("Value",1.0);
+var outArray=op.outArray("Result");
 
-var result=op.outValue("Sum");
-
-inArr.onChange=function()
+var newArr=[];
+outArray.set(newArr);
+inArray.onChange=
+inValue.onChange=inArray.onChange=function()
 {
-    if(inArr.get())
+    var arr=inArray.get();
+    if(!arr)return;
+    
+    var add=inValue.get();
+    
+    if(newArr.length!=arr.length)newArr.length=arr.length;
+    
+    for(var i=0;i<arr.length;i++)
     {
-        var arr=inArr.get();
-        var sum=0;
-        for(var i=0;i<arr.length;i++)
-        {
-            sum+=Number(arr[i]);
-        }
-        result.set(sum);
-        
+        newArr[i]=arr[i]+add;
     }
-    else
-    {
-        result.set(0);
-    }
+    outArray.set(null);
+    outArray.set(newArr);
 };

@@ -1,6 +1,6 @@
-var val=op.addInPort(new Port(op,"Value"));
-var exe=op.inFunction("Execute");
-var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
+var val=op.addInPort(new CABLES.Port(op,"Value"));
+var exe=op.inTrigger("Execute");
+var trigger=op.outTrigger('trigger');
 
 var changed=false;
 
@@ -13,7 +13,7 @@ exe.onTriggered=function()
     }
 };
 
-val.onValueChanged=function()
+val.onChange=function()
 {
     changed=true;
 };

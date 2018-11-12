@@ -1,8 +1,8 @@
 op.name="polyLineTest";
 
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var points=[0,0,0, 1,1,1 ,3,3,3];
 

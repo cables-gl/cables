@@ -18,5 +18,5 @@ void main()
        col=texture2D(tex,texCoord);
        col.rgb=desaturate(col.rgb,amount);
    #endif
-   gl_FragColor = col;
+   outColor= col;
 }

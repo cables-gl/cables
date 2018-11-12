@@ -1,26 +1,26 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
 this.name='spray';
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
+this.exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.timer=this.addInPort(new Port(this,"time"));
-this.num=this.addInPort(new Port(this,"num"));
-this.size=this.addInPort(new Port(this,"size"));
+this.timer=this.addInPort(new CABLES.Port(this,"time"));
+this.num=this.addInPort(new CABLES.Port(this,"num"));
+this.size=this.addInPort(new CABLES.Port(this,"size"));
 
-var movementX=this.addInPort(new Port(this,"movement x"));
-var movementY=this.addInPort(new Port(this,"movement y"));
-var movementZ=this.addInPort(new Port(this,"movement z"));
+var movementX=this.addInPort(new CABLES.Port(this,"movement x"));
+var movementY=this.addInPort(new CABLES.Port(this,"movement y"));
+var movementZ=this.addInPort(new CABLES.Port(this,"movement z"));
 movementX.set(1);
 movementY.set(1);
 movementZ.set(1);
 
-this.lifetime=this.addInPort(new Port(this,"lifetime"));
+this.lifetime=this.addInPort(new CABLES.Port(this,"lifetime"));
 
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
-this.idx=this.addOutPort(new Port(this,"index")) ;
-this.lifeTimePercent=this.addOutPort(new Port(this,"lifeTimePercent")) ;
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION)) ;
+this.idx=this.addOutPort(new CABLES.Port(this,"index")) ;
+this.lifeTimePercent=this.addOutPort(new CABLES.Port(this,"lifeTimePercent")) ;
 var particles=[];
 
 var transVec=vec3.create();
@@ -115,9 +115,9 @@ function reset()
     }
 }
 
-this.num.onValueChanged=reset;
-this.size.onValueChanged=reset;
-this.lifetime.onValueChanged=reset;
+this.num.onChange=reset;
+this.size.onChange=reset;
+this.lifetime.onChange=reset;
 
 this.num.val=100;
 reset();

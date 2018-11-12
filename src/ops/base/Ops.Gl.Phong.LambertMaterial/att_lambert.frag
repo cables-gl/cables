@@ -9,9 +9,7 @@ IN vec3 mvNormal;
 IN vec3 mvTangent;
 IN vec3 mvBiTangent;
 
-
 UNI float r,g,b,a;
-
 
 struct Light {
   vec3 pos;
@@ -44,13 +42,8 @@ void main()
 
     vec4 col=vec4(0.0);
     vec3 normal = normalize(normalMatrix*norm);
-  
-    #ifdef HAS_TEXTURE_NORMAL
-        normal = texture2D(texNormal, texCoord).rgb * 2.0 - 1.0;
-        normal=normalize(normalMatrix*normal);
-    #endif
 
-  
+
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         Light light=lights[l];
@@ -65,11 +58,11 @@ void main()
         col.rgb+=vec3(light.ambient);
         col.rgb+=newColor;
     }
-    
+
     col.rgb*=vec3(r,g,b);
     col.a=a;
-    
+
     {{MODULE_COLOR}}
-    
+
     outColor=col;
 }

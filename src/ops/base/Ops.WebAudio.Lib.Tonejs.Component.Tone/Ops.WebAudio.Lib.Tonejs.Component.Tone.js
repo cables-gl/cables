@@ -10,9 +10,9 @@ var OCTAVE_MAX = 10;
 var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 // inputs
-var notePort = op.addInPort( new Port( op, "Note", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: NOTES } ) );
+var notePort = op.addInPort( new CABLES.Port( op, "Note", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: NOTES } ) );
 notePort.set(NOTE_DEFAULT);
-var octavePort = op.addInPort( new Port( op, "Octave", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVE_MIN, 'max': OCTAVE_MAX } ));
+var octavePort = op.addInPort( new CABLES.Port( op, "Octave", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVE_MIN, 'max': OCTAVE_MAX } ));
 octavePort.set(OCTAVE_DEFAULT);
 
 // output

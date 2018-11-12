@@ -1,5 +1,5 @@
-const render=op.inFunction("render");
-const trigger=op.outFunction("trigger");
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger");
 const amount=op.inValue("amount");
 
 const cgl=op.patch.cgl;
@@ -17,7 +17,7 @@ const uniPass=new CGL.Uniform(shader,'f','pass',0);
 const uniAmount=new CGL.Uniform(shader,'f','amount',amount.get());
 amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
 
-var direction=op.addInPort(new Port(op,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+var direction=op.addInPort(new CABLES.Port(op,"direction",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
 var dir=0;
 direction.set('both');
 direction.onValueChange(function()
@@ -46,7 +46,7 @@ render.onTriggered=function()
         {
             cgl.currentTextureEffect.bind();
             cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            
     
             // if(mask.get() && mask.get().tex)
             // {
@@ -65,7 +65,7 @@ render.onTriggered=function()
         {
             cgl.currentTextureEffect.bind();
             cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            
     
             // if(mask.get() && mask.get().tex)
             // {

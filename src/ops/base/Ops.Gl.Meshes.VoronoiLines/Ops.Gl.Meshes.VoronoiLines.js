@@ -1,8 +1,6 @@
-op.name="VoronoiLines";
-
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var inDiagram=op.inObject("Diagram");
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var pIgnoreBorderCells=op.inValueBool("Ignore Border Cells",false);
 
 var needsGeomUpdate=false;

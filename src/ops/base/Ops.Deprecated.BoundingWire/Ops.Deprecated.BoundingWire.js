@@ -3,8 +3,8 @@ var cgl=op.patch.cgl;
 
 var buffer = cgl.gl.createBuffer();
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 function doRender()
 {

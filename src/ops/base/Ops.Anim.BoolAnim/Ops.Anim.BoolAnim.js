@@ -1,13 +1,14 @@
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var bool=op.addInPort(new Port(op,"bool",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var valueFalse=op.addInPort(new Port(op,"value false",OP_PORT_TYPE_VALUE));
-var valueTrue=op.addInPort(new Port(op,"value true",OP_PORT_TYPE_VALUE));
-var duration=op.addInPort(new Port(op,"duration",OP_PORT_TYPE_VALUE));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var bool=op.addInPort(new CABLES.Port(op,"bool",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var valueFalse=op.addInPort(new CABLES.Port(op,"value false",CABLES.OP_PORT_TYPE_VALUE));
+var valueTrue=op.addInPort(new CABLES.Port(op,"value true",CABLES.OP_PORT_TYPE_VALUE));
+var duration=op.addInPort(new CABLES.Port(op,"duration",CABLES.OP_PORT_TYPE_VALUE));
 
-var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var value=op.addOutPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
-var finished=op.addOutPort(new Port(op,"finished",OP_PORT_TYPE_VALUE));
-var finishedTrigger=op.outFunction("Finished Trigger");
+
+var next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var value=op.addOutPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE));
+var finished=op.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
+var finishedTrigger=op.outTrigger("Finished Trigger");
 
 valueFalse.set(0);
 valueTrue.set(1);
@@ -31,10 +32,11 @@ function setAnim()
         else anim.setValue(now+duration.get(),valueTrue.get());
 }
 
-bool.onValueChanged=setAnim;
-valueFalse.onValueChanged=setAnim;
-valueTrue.onValueChanged=setAnim;
-duration.onValueChanged=setAnim;
+bool.onChange=setAnim;
+valueFalse.onChange=setAnim;
+valueTrue.onChange=setAnim;
+duration.onChange=setAnim;
+
 
 exe.onTriggered=function()
 {

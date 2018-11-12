@@ -1,10 +1,10 @@
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var inPoints=op.inArray("Points");
 var strip=op.inValueBool("Line Strip",true);
 var numPoints=op.inValue("Num Points");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 
@@ -37,7 +37,7 @@ render.onTriggered=function()
     {
         buff=points;
     }
-    
+
     var shader=cgl.getShader();
     if(!shader)return;
 
@@ -46,15 +46,15 @@ render.onTriggered=function()
         else shader.glPrimitive=cgl.gl.LINES;
     var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
 
-    
+
     var numTc=(points.length/3)*2;
     if(mesh.getAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD).numItems!=numTc/2)
     {
         var bufTexCoord=new Float32Array(numTc);
         var attrTc=mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,bufTexCoord,2);
     }
-    
-    
+
+
     if(numPoints.get()<=0)attr.numItems=buff.length/3;
         else attr.numItems=Math.min(numPoints.get(),buff.length/3);
 
@@ -63,12 +63,12 @@ render.onTriggered=function()
 
 
     mesh.render(shader);
-    
+
     // mesh.printDebug();
-    
+
     shader.glPrimitive=oldPrim;
-    
-    
+
+
     next.trigger();
-    
+
 };

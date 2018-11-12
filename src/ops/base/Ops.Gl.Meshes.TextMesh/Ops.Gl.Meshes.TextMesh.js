@@ -1,5 +1,5 @@
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 var textureOut=op.outTexture("texture");
 var str=op.inValueString("Text","cables");
 var scale=op.inValue("Scale",1);
@@ -7,7 +7,7 @@ var inFont=op.inValueString("Font","Arial");
 var align=op.inValueSelect("align",['left','center','right'],'center');
 var valign=op.inValueSelect("vertical align",['Top','Middle','Bottom'],'Middle');
 var lineHeight=op.inValue("Line Height",1);
-var letterSpace=op.addInPort(new Port(op,"Letter Spacing"));
+var letterSpace=op.inValue("Letter Spacing");
 
 var loaded=op.outValue("Font Available",0);
 
@@ -109,19 +109,19 @@ shader.setSource(attachments.textmesh_vert,attachments.textmesh_frag);
 var uniTex=new CGL.Uniform(shader,'t','tex',0);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
 r.set(1.0);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 g.set(1.0);
 g.uniform=new CGL.Uniform(shader,'f','g',g);
 
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 b.set(1.0);
 r.uniform=new CGL.Uniform(shader,'f','b',b);
 
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 a.uniform=new CGL.Uniform(shader,'f','a',a);
 a.set(1.0);
 
@@ -133,7 +133,6 @@ var disabled=false;
 
 render.onTriggered=function()
 {
-    if(op.instanced(render))return;
 
     var font=getFont();
     if(font.lastChange!=lastTextureChange)
@@ -144,12 +143,12 @@ render.onTriggered=function()
 
     if(createTexture) generateTexture();
     if(createMesh)generateMesh();
-    
+
     if(mesh && mesh.numInstances>0)
     {
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
         cgl.setShader(shader);
-    
+
         cgl.setTexture(0,textureOut.get().tex);
 
         if(valignMode==2) vec3.set(vec, 0,height,0);
@@ -159,9 +158,9 @@ render.onTriggered=function()
         cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
         if(!disabled)mesh.render(cgl.getShader());
-    
+
         cgl.popModelMatrix();
-    
+
         cgl.setTexture(0,null);
         cgl.setPreviousShader();
         cgl.popBlendMode();

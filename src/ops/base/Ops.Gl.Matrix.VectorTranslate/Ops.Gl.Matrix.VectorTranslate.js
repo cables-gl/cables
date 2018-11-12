@@ -1,13 +1,13 @@
 
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var speed=op.inValue("Speed");
 var vecX=op.inValue("Vector X");
 var vecY=op.inValue("Vector Y");
 var vecZ=op.inValue("Vector Z");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
-var reset=this.addInPort(new Port(this,"reset",OP_PORT_TYPE_FUNCTION,{"display":"button"}));
+var reset=this.addInPort(new CABLES.Port(this,"reset",CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"}));
 
 var max=op.inValue("max");
 

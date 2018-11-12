@@ -1,7 +1,7 @@
 // https://www.khronos.org/opengl/wiki/Skeletal_Animation
 // http://ogldev.atspace.co.uk/www/tutorial38/tutorial38.html
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var inMeshIndex=op.inValueInt("Mesh Index");
 
 var inTime=op.inValue("Time");
@@ -10,10 +10,10 @@ var inFade=op.inValueSlider("Fade Times");
 var inTime2=op.inValue("Time2");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outNumBounes=op.outValue("Num Bones");
 var outSpline=op.outArray("Spline");
-var outJoint=op.outFunction("Joint Trigger");
+var outJoint=op.outTrigger("Joint Trigger");
 
 var points=[];
 var tempMat=mat4.create();

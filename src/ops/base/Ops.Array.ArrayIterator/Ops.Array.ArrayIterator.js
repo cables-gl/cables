@@ -1,17 +1,15 @@
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var arr=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
 
-op.name='ArrayIterator';
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var arr=op.addInPort(new Port(op,"array",OP_PORT_TYPE_ARRAY));
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var idx=op.addOutPort(new Port(op,"index"));
-var val=op.addOutPort(new Port(op,"value"));
+var trigger=op.outTrigger('trigger');
+var idx=op.addOutPort(new CABLES.Port(op,"index"));
+var val=op.addOutPort(new CABLES.Port(op,"value"));
 
 exe.onTriggered=function()
 {
     if(!arr.val)return;
-    
-    op.patch.instancing.pushLoop(arr.get().length);
+
+    // op.patch.instancing.pushLoop(arr.get().length);
 
     for(var i=0;i<arr.get().length;i++)
     {
@@ -21,6 +19,6 @@ exe.onTriggered=function()
         op.patch.instancing.increment();
 
     }
-    op.patch.instancing.popLoop();
+    // op.patch.instancing.popLoop();
 
 };

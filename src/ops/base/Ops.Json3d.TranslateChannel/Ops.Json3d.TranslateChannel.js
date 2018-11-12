@@ -1,8 +1,8 @@
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var channel=this.addInPort(new Port(this,"channel"));
+var channel=this.addInPort(new CABLES.Port(this,"channel"));
 
 var q=quat.create();
 var qMat=mat4.create();

@@ -1,9 +1,9 @@
 op.name="TriggerOnce";
 
 
-var exe=op.inFunction("Exec");
-var reset=op.outFunction("Reset");
-var next=op.inFunctionButton("Next");
+var exe=op.inTrigger("Exec");
+var reset=op.outTrigger("Reset");
+var next=op.inTriggerButton("Next");
 
 var triggered=false;
 

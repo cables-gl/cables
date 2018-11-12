@@ -8,27 +8,33 @@
             },
             {
                 "type": "0",
-                "name": "X 1"
+                "name": "X 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y 1"
+                "name": "Y 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z 1"
+                "name": "Z 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "X 2"
+                "name": "X 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y 2"
+                "name": "Y 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z 2"
+                "name": "Z 2",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -38,5 +44,9 @@
             }
         ],
         "name": "Ops.Gl.Meshes.Line"
-    }
+    },
+    "updated": 1541225050373,
+    "authorName": "pandur",
+    "id": "c6a0d570-a0ac-4655-b17d-74d0870b0799",
+    "created": 1541225050374
 }

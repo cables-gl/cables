@@ -1,12 +1,12 @@
 op.name='Cube';
 
-var render=op.inFunction('render');
+var render=op.inTrigger('render');
 var width=op.inValue('width');
 var height=op.inValue('height');
 var lengt=op.inValue('length');
 var center=op.inValueBool('center');
 
-var trigger=op.outFunction('trigger');
+var trigger=op.outTrigger('trigger');
 var geomOut=op.outObject("geometry");
 
 geomOut.ignoreValueSerialize=true;
@@ -170,10 +170,10 @@ function buildMesh()
 
 }
 
-width.onValueChanged=buildMesh;
-height.onValueChanged=buildMesh;
-lengt.onValueChanged=buildMesh;
-center.onValueChanged=buildMesh;
+width.onChange=buildMesh;
+height.onChange=buildMesh;
+lengt.onChange=buildMesh;
+center.onChange=buildMesh;
 buildMesh();
 
 

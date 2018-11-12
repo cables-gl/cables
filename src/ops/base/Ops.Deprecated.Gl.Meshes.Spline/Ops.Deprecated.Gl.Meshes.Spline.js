@@ -1,16 +1,15 @@
-op.name='Spline';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var thickness=op.addInPort(new Port(op,"thickness",OP_PORT_TYPE_VALUE));
-var subDivs=op.addInPort(new Port(op,"subDivs",OP_PORT_TYPE_VALUE));
-var bezier=op.addInPort(new Port(op,"Bezier",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var centerpoint=op.addInPort(new Port(op,"centerpoint",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var doClose=op.addInPort(new Port(op,"Closed",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var renderLines=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var render=op.inTrigger('render');
+var thickness=op.addInPort(new CABLES.Port(op,"thickness",CABLES.OP_PORT_TYPE_VALUE));
+var subDivs=op.addInPort(new CABLES.Port(op,"subDivs",CABLES.OP_PORT_TYPE_VALUE));
+var bezier=op.addInPort(new CABLES.Port(op,"Bezier",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var centerpoint=op.addInPort(new CABLES.Port(op,"centerpoint",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var doClose=op.addInPort(new CABLES.Port(op,"Closed",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var renderLines=op.addInPort(new CABLES.Port(op,"Draw",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var triggerPoints=op.addOutPort(new Port(op,"triggerPoints",OP_PORT_TYPE_FUNCTION));
-var outPoints=op.addOutPort(new Port(op,"Points",OP_PORT_TYPE_ARRAY));
+var trigger=op.outTrigger('trigger');
+var triggerPoints=op.addOutPort(new CABLES.Port(op,"triggerPoints",CABLES.OP_PORT_TYPE_FUNCTION));
+var outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY));
 
 renderLines.set(true);
 centerpoint.set(false);
@@ -34,7 +33,7 @@ render.onTriggered=function()
 
     mySplinePoints.length=0;
     cgl.frameStore.SplinePoints=mySplinePoints;
-    
+
 
     var shader=cgl.getShader();
     trigger.trigger();
@@ -43,15 +42,15 @@ render.onTriggered=function()
 
     cgl.pushModelMatrix();
     mat4.identity(cgl.mvMatrix);
-    
+
     if(renderLines.get() && mesh)
     {
         var oldPrim=shader.glPrimitive;
         if(centerpoint.get()) shader.glPrimitive=cgl.gl.LINES;
             shader.glPrimitive=cgl.gl.LINE_STRIP;
-        
+
         cgl.gl.lineWidth(thickness.get());
-        
+
         mesh.render(shader);
         shader.glPrimitive=oldPrim;
     }
@@ -75,19 +74,19 @@ render.onTriggered=function()
     cgl.popModelMatrix();
     // cgl.frameStore.SplinePoints.length=0;
     mySplinePoints.length=0;
-    
+
     if(oldSplinePoints) cgl.frameStore.SplinePoints=oldSplinePoints;
     oldSplinePoints=null;
 
 };
 
-function ip(x0,x1,x2,t)//Bezier 
+function ip(x0,x1,x2,t)//Bezier
 {
     var r =(x0 * (1-t) * (1-t) + 2 * x1 * (1 - t)* t + x2 * t * t);
     return r;
 }
 
-    
+
 function bufferData()
 {
     var i=0,k=0,j=0;
@@ -125,9 +124,9 @@ function bufferData()
     {
 
         points.length=(cgl.frameStore.SplinePoints.length-3)*(subd);
-        
+
         // console.log("should be length",points.length);
-        
+
         var count=0;
         for(i=0;i<cgl.frameStore.SplinePoints.length-3;i+=3)
         {
@@ -173,7 +172,7 @@ function bufferData()
                 }
             }
         }
-        
+
     }
     else
     {
@@ -192,13 +191,13 @@ function bufferData()
     {
         geom.clear();
         geom.vertices=points;
-        
+
         // console.log(geom.vertices.length);
-        
+
         if(oldLength!=geom.vertices.length)
         {
             oldLength=geom.vertices.length;
-            if(geom.vertices.length*2!=geom.texCoords.length)geom.texCoords.length=geom.vertices.length*2;
+            // if(geom.vertices.length*2!=geom.texCoords.length)geom.texCoords.length=geom.vertices.length*2;
             geom.verticesIndices.length=geom.vertices.length;
             for(i=0;i<geom.vertices.length;i+=3)
             {
@@ -207,7 +206,7 @@ function bufferData()
                 geom.verticesIndices[i/3]=i/3;
             }
         }
-    
+
         if(!mesh) mesh=new CGL.Mesh(cgl,geom);
             else mesh.setGeom(geom);
     }

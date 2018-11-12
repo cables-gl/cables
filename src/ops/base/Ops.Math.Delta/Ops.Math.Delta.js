@@ -11,7 +11,7 @@ changeAlwaysPort.onChange = function() {
     val.changeAlways = changeAlwaysPort.get();    
 };
 
-val.onValueChanged=function()
+val.onChange=function()
 {
     var change=oldVal-val.get();
     oldVal=val.get();

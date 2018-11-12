@@ -1,8 +1,8 @@
 op.name="VectorField2d";
 
-var render=op.inFunction("Render");
-var reset=op.inFunction("Reset");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var reset=op.inTrigger("Reset");
+var next=op.outTrigger("Next");
 var textureField=op.inTexture("textureField");
 var shader=null;
 var outSimTex=op.outTexture("sim tex");
@@ -32,7 +32,7 @@ reset.onTriggered=function()
 // simulation...
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'UNI sampler2D tex;'
     .endl()+'UNI sampler2D texField;'
     .endl()+'UNI float time;'
@@ -80,7 +80,7 @@ var srcFrag=''
     .endl()+'       y=random(x*gl_FragCoord.xy);'
     .endl()+'   }'
 
-    .endl()+'   gl_FragColor = vec4( x, y , z, 1.0);'
+    .endl()+'   outColor= vec4( x, y , z, 1.0);'
     .endl()+'}';
 
 
@@ -187,7 +187,7 @@ render.onTriggered=function()
 
     // if(texture.get())
     {
-        /* --- */cgl.setTexture(4,t);
+        cgl.setTexture(4,t);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, t);
     }
 

@@ -1,6 +1,4 @@
-op.name='Cube';
-
-var render=op.inFunction('render');
+var render=op.inTrigger('render');
 var width=op.inValue('width');
 var height=op.inValue('height');
 var lengt=op.inValue('length');
@@ -8,9 +6,8 @@ var center=op.inValueBool('center');
 
 var active=op.inValueBool('Active',true);
 
-var trigger=op.outFunction('trigger');
+var trigger=op.outTrigger('trigger');
 var geomOut=op.outObject("geometry");
-
 
 var cgl=op.patch.cgl;
 var geom=null;
@@ -31,7 +28,6 @@ op.preRender=function()
     buildMesh();
     mesh.render(cgl.getShader());
 };
-
 
 function buildMesh()
 {
@@ -164,7 +160,34 @@ function buildMesh()
         -1.0,  0.0,  0.0,
         -1.0,  0.0,  0.0
     ];
-
+    geom.tangents = [
+        // front face
+        -1,0,0, -1,0,0, -1,0,0, -1,0,0,
+        // back face
+        1,0,0, 1,0,0, 1,0,0, 1,0,0,
+        // top face
+        1,0,0, 1,0,0, 1,0,0, 1,0,0,
+        // bottom face
+        -1,0,0, -1,0,0, -1,0,0, -1,0,0,
+        // right face
+        0,0,-1, 0,0,-1, 0,0,-1, 0,0,-1,
+        // left face
+        0,0,1, 0,0,1, 0,0,1, 0,0,1
+    ];
+    geom.biTangents = [
+      // front face
+      0,-1,0, 0,-1,0, 0,-1,0, 0,-1,0,
+      // back face
+      0,1,0, 0,1,0, 0,1,0, 0,1,0,
+      // top face
+      0,0,-1, 0,0,-1, 0,0,-1, 0,0,-1,
+      // bottom face
+      0,0,1, 0,0,1, 0,0,1, 0,0,1,
+      // right face
+      0,1,0, 0,1,0, 0,1,0, 0,1,0,
+      // left face
+      0,1,0, 0,1,0, 0,1,0, 0,1,0
+    ];
 
     geom.verticesIndices = [
         0, 1, 2,      0, 2, 3,    // Front face
@@ -175,17 +198,20 @@ function buildMesh()
         20, 21, 22,   20, 22, 23  // Left face
     ];
 
+    if(mesh)mesh.dispose();
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);
     geomOut.set(geom);
-
 }
 
-width.onValueChanged=buildMesh;
-height.onValueChanged=buildMesh;
-lengt.onValueChanged=buildMesh;
-center.onValueChanged=buildMesh;
-
-
+width.onChange=buildMesh;
+height.onChange=buildMesh;
+lengt.onChange=buildMesh;
+center.onChange=buildMesh;
 
 buildMesh();
+
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}

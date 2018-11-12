@@ -1,5 +1,5 @@
 {
-    "updated": 1511881414029,
+    "updated": 1539766908596,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "6bf26be8-8735-46ff-ac1e-fce304ac07b1",
@@ -20,7 +20,8 @@
             },
             {
                 "type": "0",
-                "name": "Fade"
+                "name": "Fade",
+                "subType": "number"
             }
         ],
         "portsOut": [

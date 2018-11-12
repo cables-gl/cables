@@ -33,6 +33,10 @@ CGL.Context = function() {
     mat4.identity(this.vMatrix);
 
     var simpleShader = new CGL.Shader(this, "simpleshader");
+    
+    simpleShader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+    simpleShader.setSource(CGL.Shader.getDefaultVertexShader(), CGL.Shader.getDefaultFragmentShader());
+
     var currentShader = simpleShader;
     var aborted = false;
     var cbResize = [];
@@ -130,7 +134,7 @@ CGL.Context = function() {
     this.beginFrame = function() {
 
         if (CABLES.UI) {
-            gui.preview.render();
+            gui._texturePreviewer.render();
             if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
         }
 
@@ -339,6 +343,11 @@ CGL.Context = function() {
 
         cgl.endFrame();
     };
+    
+    this.getTexture= function(slot)
+    {
+        return this._textureslots[slot];
+    }
     
     this.setTexture = function(slot, t, type)
     {

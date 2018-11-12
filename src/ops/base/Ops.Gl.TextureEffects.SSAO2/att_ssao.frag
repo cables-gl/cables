@@ -9,7 +9,6 @@ changelog:
 (http://www.cgafaq.info/wiki/Evenly_distributed_points_on_sphere)
 
 */
-precision highp float;
 
 IN vec2 texCoord;
 
@@ -181,6 +180,6 @@ void main(void)
 // 	}
 	
 	
-	gl_FragColor = vec4(final,1.0); 
+	outColor= vec4(final,1.0); 
 	
 }

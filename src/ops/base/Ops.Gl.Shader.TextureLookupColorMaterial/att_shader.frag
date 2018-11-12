@@ -1,19 +1,17 @@
-precision highp float;
-
 {{MODULES_HEAD}}
 
 #ifdef HAS_TEXTURES
    IN vec2 texCoord;
    #ifdef HAS_TEXTURE_DIFFUSE
-       uniform sampler2D tex;
+       UNI sampler2D tex;
    #endif
    #ifdef HAS_TEXTURE_OPACITY
-       uniform sampler2D texOpacity;
+       UNI sampler2D texOpacity;
    #endif
 #endif
-uniform float a;
-uniform float posX;
-uniform float posY;
+UNI float a;
+UNI float posX;
+UNI float posY;
 
 void main()
 {
@@ -36,5 +34,5 @@ void main()
    #endif
 {{MODULE_COLOR}}
 
-   gl_FragColor = col;
+   outColor= col;
 }

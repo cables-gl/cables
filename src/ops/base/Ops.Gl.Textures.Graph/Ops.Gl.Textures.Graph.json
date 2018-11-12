@@ -1,5 +1,5 @@
 {
-    "updated": 1524477954385,
+    "updated": 1537935198045,
     "authorName": "pandur",
     "id": "98d1c79e-71ea-468b-81fc-17da2cd3da89",
     "created": 1519837569086,
@@ -11,11 +11,13 @@
             },
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -29,5 +31,9 @@
             }
         ],
         "name": "Ops.Gl.Textures.Graph"
+    },
+    "summary": "draw a graph of a value into a texture",
+    "docs": {
+        "ports": []
     }
 }

@@ -1,5 +1,5 @@
-var render=op.inFunction("render");
-var trigger=op.outFunction("Trigger");
+var render=op.inTrigger("render");
+var trigger=op.outTrigger("Trigger");
 var amount=op.inValue("Amount",300);
 var height=op.inValue("Height",2);
 var inArr=op.inArray("Spline");

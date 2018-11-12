@@ -1,10 +1,10 @@
 var self=this;
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 
 this.name='Websocket';
-this.url=this.addInPort(new Port(this,"url",OP_PORT_TYPE_VALUE,{type:'string'}));
-this.result=this.addOutPort(new Port(this,"result", OP_PORT_TYPE_OBJECT));
-this.connected=this.addOutPort(new Port(this,"connected"));
+this.url=this.addInPort(new CABLES.Port(this,"url",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+this.result=this.addOutPort(new CABLES.Port(this,"result",CABLES.OP_PORT_TYPE_OBJECT));
+this.connected=this.addOutPort(new CABLES.Port(this,"connected"));
 
 var outSocket=op.outObject("Socket");
 
@@ -77,7 +77,7 @@ function connect()
     
 }
 
-this.url.onValueChanged=connect;
+this.url.onChange=connect;
 timeout=setTimeout(checkConnection,1000);
 
 this.url.val='ws://127.0.0.1:1337';

@@ -1,13 +1,10 @@
-op.name="KeyPressLearn";
-
-
-var onPress=op.addOutPort(new Port(op,"on press",OP_PORT_TYPE_FUNCTION));
-var onRelease=op.addOutPort(new Port(op,"on release",OP_PORT_TYPE_FUNCTION));
-var learn = op.addInPort( new Port( op, "learn", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
-var learnedKeyCode = op.addInPort( new Port( op, "key code", OP_PORT_TYPE_VALUE));
-var canvasOnly=op.addInPort(new Port(op,"canvas only",OP_PORT_TYPE_VALUE, {"display": "bool"}));
+var onPress=op.addOutPort(new CABLES.Port(op,"on press",CABLES.OP_PORT_TYPE_FUNCTION));
+var onRelease=op.addOutPort(new CABLES.Port(op,"on release",CABLES.OP_PORT_TYPE_FUNCTION));
+var learn = op.addInPort( new CABLES.Port( op, "learn",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var learnedKeyCode = op.addInPort( new CABLES.Port( op, "key code", CABLES.OP_PORT_TYPE_));
+var canvasOnly=op.addInPort(new CABLES.Port(op,"canvas only",CABLES.OP_PORT_TYPE_VALUE, {"display": "bool"}));
 var outPressed=op.outValue("Pressed",false);
-var modKey=op.addInPort(new Port(op,"Mod Key",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['none','alt']} ));
+var modKey=op.addInPort(new CABLES.Port(op,"Mod Key",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['none','alt']} ));
 
 var inEnable=op.inValueBool("Enabled",true);
 

@@ -1,5 +1,3 @@
-op.name="GeoLocation";
-
 var outSupported=op.outValue("Browser Support",navigator.geolocation!=false);
 
 var outLat=op.outValue("Latitude");

@@ -1,6 +1,6 @@
 
 var inArr=op.inArray("Array");
-var next=op.outFunction("Changed Trigger");
+var next=op.outTrigger("Changed Trigger");
 
 inArr.onChange=function()
 {

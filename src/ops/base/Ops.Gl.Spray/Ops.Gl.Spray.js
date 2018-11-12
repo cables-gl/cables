@@ -1,59 +1,41 @@
+const exe=op.inTrigger("exe");
+const timer=op.inValue("time");
+const num=op.inValue("num",100);
+const sizeX=op.inValue("Size X");
+const sizeY=op.inValue("Size Y");
+const sizeZ=op.inValue("Size Z");
+const movementX=op.inValue("movement x",1);
+const movementY=op.inValue("movement y",1);
+const movementZ=op.inValue("movement z",1);
+const inReset=op.inTriggerButton("Reset");
+const lifetime=op.inValue("lifetime",10);
+const lifetimeMin=op.inValue("Lifetime Minimum",5);
 
-var cgl=op.patch.cgl;
-
-var exe=op.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-
-var timer=op.addInPort(new Port(this,"time"));
-var num=op.addInPort(new Port(this,"num"));
-var sizeX=op.addInPort(new Port(this,"Size X"));
-var sizeY=op.addInPort(new Port(this,"Size Y"));
-var sizeZ=op.addInPort(new Port(this,"Size Z"));
-
-var movementX=op.addInPort(new Port(this,"movement x"));
-var movementY=op.addInPort(new Port(this,"movement y"));
-var movementZ=op.addInPort(new Port(this,"movement z"));
-
-const inReset=op.inFunctionButton("Reset");
-
-movementX.set(1);
-movementY.set(1);
-movementZ.set(1);
+const trigger=op.outTrigger("trigger") ;
+const idx=op.outValue("index");
+const lifeTimePercent=op.outValue("lifeTimePercent");
+const outRandom1=op.outValue("Random 1");
+const outRandom2=op.outValue("Random 2");
+const outRandom3=op.outValue("Random 3");
 
 inReset.onTriggered=reset;
-
-var lifetime=op.addInPort(new Port(this,"lifetime"));
-var lifetimeMin=op.addInPort(new Port(this,"Lifetime Minimum"));
-
-var trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION)) ;
-var idx=op.addOutPort(new Port(this,"index")) ;
-var lifeTimePercent=op.addOutPort(new Port(this,"lifeTimePercent")) ;
-
-var outRandom1=op.addOutPort(new Port(this,"Random 1")) ;
-var outRandom2=op.addOutPort(new Port(this,"Random 2")) ;
-var outRandom3=op.addOutPort(new Port(this,"Random 3")) ;
+const cgl=op.patch.cgl;
 
 var particles=[];
-
 var transVec=vec3.create();
 
+num.onChange=
+    sizeX.onChange=
+    sizeY.onChange=
+    sizeZ.onChange=
+    lifetime.onChange=
+    lifetimeMin.onChange=reset;
 
-num.onValueChanged=reset;
-sizeX.onValueChanged=reset;
-sizeY.onValueChanged=reset;
-sizeZ.onValueChanged=reset;
-lifetime.onValueChanged=reset;
-lifetimeMin.onValueChanged=reset;
-
-lifetime.set(10);
-lifetimeMin.set(7);
-num.set(100);
 reset();
-
 
 function Particle()
 {
     this.pos=null;
-
     this.startPos=null;
     this.startTime=0;
     this.lifeTime=0;
@@ -63,12 +45,10 @@ function Particle()
     this.pos=[0,0,0];
     this.moveVec=[0,0,0];
     this.idDead=false;
-    
+
     this.random1=Math.random();
     this.random2=Math.random();
     this.random3=Math.random();
-    
-    
 
     this.update=function(time)
     {
@@ -86,13 +66,9 @@ function Particle()
     this.reAnimate=function(time)
     {
         this.isDead=false;
-        
-        
         this.lifeTime = Math.random() * ( lifetime.get() - lifetimeMin.get() ) + lifetimeMin.get();
-        
         this.startTime=time;
-        
-        
+
         this.endTime=time+this.lifeTime;
         this.startPos=vec3.fromValues(
             Math.random()*sizeX.get(),
@@ -104,13 +80,9 @@ function Particle()
             Math.random()*movementY.get(),
             Math.random()*movementZ.get()
             ];
-
     };
     this.reAnimate(0);
 }
-
-
-
 
 exe.onTriggered=function()
 {
@@ -123,15 +95,15 @@ exe.onTriggered=function()
 
         cgl.pushModelMatrix();
 
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, particles[i].pos);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, particles[i].pos);
 
         idx.set(i);
         lifeTimePercent.set(particles[i].lifeTimePercent);
-        
+
         outRandom1.set(particles[i].random1);
         outRandom2.set(particles[i].random2);
         outRandom3.set(particles[i].random3);
-        
+
         trigger.trigger();
 
         cgl.popModelMatrix();

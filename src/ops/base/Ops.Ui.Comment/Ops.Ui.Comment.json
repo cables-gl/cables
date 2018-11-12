@@ -3,17 +3,19 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "title"
+                "name": "title",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "text"
+                "name": "text",
+                "subType": "string"
             }
         ],
         "name": "Ops.Ui.Comment"
     },
     "summary": "Displays a comment in the patch area",
-    "updated": 1514558159388,
+    "updated": 1541158787517,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9de0c04f-666b-47cd-9722-a8cf36ab4720",

@@ -1,12 +1,12 @@
 this.name="weather Simulation";
 var cgl=this.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var width=this.addInPort(new Port(this,"texture width"));
-var height=this.addInPort(new Port(this,"texture height"));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+var width=this.addInPort(new CABLES.Port(this,"texture width"));
+var height=this.addInPort(new CABLES.Port(this,"texture height"));
 
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var tex=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var tex=this.addOutPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 
 var texture=new CGL.Texture(cgl,{isFloatingPointTexture:true});
 texture.setSize(1024,1024);
@@ -18,7 +18,7 @@ this.onLoaded=shaderSim.compile;
 // simulation...
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'UNI sampler2D tex;'
     .endl()+'UNI float time;'
     .endl()+'IN vec2 texCoord;'
@@ -45,7 +45,7 @@ var srcFrag=''
 
     .endl()+'   if(c>15.0)c=random((0.2323)*gl_FragCoord.xy)*0.5;'
 
-    .endl()+'   gl_FragColor = vec4(c,c1,c2,1.0);'
+    .endl()+'   outColor= vec4(c,c1,c2,1.0);'
     .endl()+'}';
 
 // positioning,..

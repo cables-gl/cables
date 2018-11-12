@@ -12,7 +12,7 @@ for(var i=0; i<N_OUT_PORTS; i++) {
     outPorts[i] = op.outValue("Part " + (i+1))
 }
 
-inString.onValueChanged = function()
+inString.onChange=function()
 {
     var s = inString.get();
     if(s) {

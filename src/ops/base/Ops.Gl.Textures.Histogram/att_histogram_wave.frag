@@ -22,5 +22,5 @@ void main()
     
     if(strengthL > texCoord.y*2.0-1.0 && texCoord.y>0.5) col.rgb=vec3(1.0);
 
-    gl_FragColor = col;
+    outColor= col;
 }

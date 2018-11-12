@@ -11,7 +11,7 @@ var audioIn = op.inObject("Audio In");
 var timePort = op.inValueString("Time", TIME_DEFAULT);
 timePort.set(TIME_DEFAULT);
 var velocityPort = op.inValueSlider("Velocity", VELOCITY_DEFAULT);
-var triggerAttackPort = op.addInPort( new Port( this, "Trigger Attack", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var triggerAttackPort = op.addInPort( new CABLES.Port( this, "Trigger Attack",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 
 // listeners
 triggerAttackPort.onTriggered = function() {

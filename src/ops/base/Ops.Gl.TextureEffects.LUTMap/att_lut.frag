@@ -28,5 +28,5 @@ void main()
     vec4 newColor2 = texture2D(texLut, texPos2);
     
     vec4 newColor = mix(newColor1, newColor2, fract(blueColor));
-    gl_FragColor = mix(textureColor,vec4(newColor.rgb, textureColor.w),amount);
+    outColor= mix(textureColor,vec4(newColor.rgb, textureColor.w),amount);
 }

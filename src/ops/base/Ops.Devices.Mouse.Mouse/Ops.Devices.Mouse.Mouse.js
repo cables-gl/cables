@@ -1,19 +1,19 @@
 
-var outMouseX=op.addOutPort(new Port(op,"x",OP_PORT_TYPE_VALUE));
-var outMouseY=op.addOutPort(new Port(op,"y",OP_PORT_TYPE_VALUE));
-var mouseDown=op.addOutPort(new Port(op,"button down",OP_PORT_TYPE_VALUE));
-var mouseClick=op.addOutPort(new Port(op,"click",OP_PORT_TYPE_FUNCTION));
-var mouseUp=op.addOutPort(new Port(op,"Button Up",OP_PORT_TYPE_FUNCTION));
-var mouseClickRight=op.addOutPort(new Port(op,"click right",OP_PORT_TYPE_FUNCTION));
-var mouseOver=op.addOutPort(new Port(op,"mouseOver",OP_PORT_TYPE_VALUE));
-var relative=op.addInPort(new Port(op,"relative",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var normalize=op.addInPort(new Port(op,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var outMouseX=op.addOutPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
+var outMouseY=op.addOutPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+var mouseDown=op.addOutPort(new CABLES.Port(op,"button down",CABLES.OP_PORT_TYPE_VALUE));
+var mouseClick=op.addOutPort(new CABLES.Port(op,"click",CABLES.OP_PORT_TYPE_FUNCTION));
+var mouseUp=op.addOutPort(new CABLES.Port(op,"Button Up",CABLES.OP_PORT_TYPE_FUNCTION));
+var mouseClickRight=op.addOutPort(new CABLES.Port(op,"click right",CABLES.OP_PORT_TYPE_FUNCTION));
+var mouseOver=op.addOutPort(new CABLES.Port(op,"mouseOver",CABLES.OP_PORT_TYPE_VALUE));
+var relative=op.addInPort(new CABLES.Port(op,"relative",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var normalize=op.addInPort(new CABLES.Port(op,"normalize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 var active=op.inValueBool("Active",true);
-var smooth=op.addInPort(new Port(op,"smooth",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var smoothSpeed=op.addInPort(new Port(op,"smoothSpeed",OP_PORT_TYPE_VALUE));
-var area=op.addInPort(new Port(op,"Area",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document','Parent Element']}));
-var outButton=op.addOutPort(new Port(op,"button",OP_PORT_TYPE_VALUE));
-var multiply=op.addInPort(new Port(op,"multiply",OP_PORT_TYPE_VALUE));
+var smooth=op.addInPort(new CABLES.Port(op,"smooth",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var smoothSpeed=op.addInPort(new CABLES.Port(op,"smoothSpeed",CABLES.OP_PORT_TYPE_VALUE));
+var area=op.addInPort(new CABLES.Port(op,"Area",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document','Parent Element']}));
+var outButton=op.addOutPort(new CABLES.Port(op,"button",CABLES.OP_PORT_TYPE_VALUE));
+var multiply=op.addInPort(new CABLES.Port(op,"multiply",CABLES.OP_PORT_TYPE_VALUE));
 var flipY=op.inValueBool("flip y",true);
 
 area.set("Canvas");
@@ -46,7 +46,7 @@ function setValue(x,y)
     }
 }
 
-smooth.onValueChanged=function()
+smooth.onChange=function()
 {
     if(smooth.get()) smoothTimer = setInterval(updateSmooth, 5);
         else if(smoothTimer)clearTimeout(smoothTimer);
@@ -69,7 +69,7 @@ var offsetX=0;
 var offsetY=0;
 addListeners();
 
-area.onValueChanged=addListeners;
+area.onChange=addListeners;
 
 var speed=0;
 
@@ -126,7 +126,7 @@ function onMouseLeave(e)
     relLastY=0;
 
     speed=100;
-    
+
     if(area.get()!='Document')
     {
         // leave anim
@@ -135,7 +135,7 @@ function onMouseLeave(e)
             mouseX=cgl.canvas.width/2;
             mouseY=cgl.canvas.height/2;
         }
-        
+
     }
     mouseOver.set(false);
     mouseDown.set(false);
@@ -150,7 +150,7 @@ relative.onChange=function()
 function onmousemove(e)
 {
     mouseOver.set(true);
-    
+
     if(!relative.get())
     {
         if(area.get()!="Document")
@@ -167,7 +167,7 @@ function onmousemove(e)
         if(smooth.get())
         {
             mouseX=offsetX;
-            
+
             if(flipY.get()) mouseY=listenerElement.clientHeight-offsetY;
                 else mouseY=offsetY;
         }
@@ -194,7 +194,7 @@ function onmousemove(e)
 
         mouseX+=offsetX;
         mouseY+=offsetY;
-        
+
         if(mouseY>460)mouseY=460;
     }
 };
@@ -212,7 +212,7 @@ function ontouchend(event)
     onMouseUp();
 };
 
-function removeLiseteners()
+function removeListeners()
 {
     listenerElement.removeEventListener('touchend', ontouchend);
     listenerElement.removeEventListener('touchstart', ontouchstart);
@@ -229,7 +229,7 @@ function removeLiseteners()
 
 function addListeners()
 {
-    if(listenerElement)removeLiseteners();
+    if(listenerElement)removeListeners();
 
     listenerElement=cgl.canvas;
     if(area.get()=='Document') listenerElement=document.body;
@@ -249,13 +249,13 @@ function addListeners()
 
 active.onChange=function()
 {
-    if(listenerElement)removeLiseteners();
+    if(listenerElement)removeListeners();
     if(active.get())addListeners();
 }
 
 op.onDelete=function()
 {
-    removeLiseteners();
+    removeListeners();
 };
 
 addListeners();

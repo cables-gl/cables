@@ -2,10 +2,10 @@
 
 var divisor=5;
 
-var exec=op.inFunction("Update");
+var exec=op.inTrigger("Update");
 var inVal=op.inValue("Value");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var inDivisor=op.inValue("Divisor",divisor);
 var result=op.outValue("Result",0);
 

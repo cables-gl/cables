@@ -7,11 +7,13 @@
             },
             {
                 "type": "0",
-                "name": "contrast"
+                "name": "contrast",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "brightness"
+                "name": "brightness",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -23,7 +25,7 @@
         "name": "Ops.Gl.TextureEffects.BrightnessContrast"
     },
     "summary": "adjust image brightness and contrast",
-    "updated": 1519727385851,
+    "updated": 1540832730704,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "54b89199-c594-4dff-bc48-82d6c7a55e8a",

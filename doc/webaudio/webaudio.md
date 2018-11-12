@@ -31,7 +31,6 @@ Now select `tone.js`, click `Add`, save your patch and reload the page.
 In order to use tone.js there is one thing left to do: In your op-code add the following line below your op-name definition, it should look like this:
 
 ```javascript
-op.name="MyNewToneJsOp";
 
 CABLES.WEBAUDIO.createAudioContext();
 Tone.setContext(window.audioContext);

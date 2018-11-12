@@ -2,7 +2,7 @@
 var connection=op.inObject("Connection");
 
 var msg=op.inValueString("Message");
-var trigger=op.inFunctionButton("Trigger");
+var trigger=op.inTriggerButton("Trigger");
 
 connection.onChange=function()
 {

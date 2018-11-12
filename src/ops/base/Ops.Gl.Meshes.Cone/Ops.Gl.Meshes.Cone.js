@@ -1,30 +1,37 @@
 // adapted from the FreeGLUT project
 
-op.name='Cone';
+const render=op.inTrigger('render');
+const slices=op.inValue("slices",32);
+const stacks=op.inValue("stacks",5);
+const radius=op.inValue("radius",1);
+const height=op.inValue("height",2);
+const trigger=op.outTrigger('trigger');
+const geomOut=op.outObject("geometry");
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var slices=op.addInPort(new Port(op,"slices",OP_PORT_TYPE_VALUE));
-var stacks=op.addInPort(new Port(op,"stacks",OP_PORT_TYPE_VALUE));
-var radius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
-
-slices.set(32);
-stacks.set(5);
-radius.set(1);
-height.set(2);
 geomOut.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 var i=0,j=0,idx=0,offset=0;
 
+
+var needsRebuild=true;
+
+stacks.onChange=updateMeshLater;
+slices.onChange=updateMeshLater;
+radius.onChange=updateMeshLater;
+height.onChange=updateMeshLater;
+
+function updateMeshLater()
+{
+    needsRebuild=true;
+}
+
 render.onTriggered=function()
 {
-    if(mesh!==null) mesh.render(cgl.getShader());
+    if(needsRebuild) updateMesh();
+    mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
@@ -35,15 +42,10 @@ function updateMesh()
     if(nstacks<2)nstacks=2;
     if(nslices<2)nslices=2;
     var r=radius.get();
-    generateCone(r,height.get(), nstacks, nslices);
+    generateCone(r,Math.max(0.01,height.get()), nstacks, nslices);
+    needsRebuild=false;
 }
 
-stacks.onValueChanged=updateMesh;
-slices.onValueChanged=updateMesh;
-radius.onValueChanged=updateMesh;
-height.onValueChanged=updateMesh;
-
-updateMesh();
 
 function circleTable(n,halfCircle)
 {
@@ -67,7 +69,7 @@ function circleTable(n,halfCircle)
         sint[i] = Math.sin(angle*i);
         cost[i] = Math.cos(angle*i);
     }
-    
+
     if (halfCircle)
     {
         sint[size] =  0.0;  /* sin PI */
@@ -87,6 +89,8 @@ function generateCone(base,height,stacks,slices)
     var r=base;
     var z=0;
     var geom=new CGL.Geometry();
+    geom.tangents=[];
+    geom.biTangents=[];
 
     var table=circleTable(-slices,false);
 
@@ -105,6 +109,8 @@ function generateCone(base,height,stacks,slices)
     geom.vertexNormals[0] =  0;
     geom.vertexNormals[1] =  0;
     geom.vertexNormals[2] = -1;
+    geom.tangents.push(1,0,0);
+    geom.biTangents.push(0,1,0);
     idx = 3;
     /* other on bottom (get normals right) */
     for (j=0; j<slices; j++, idx+=3)
@@ -115,6 +121,12 @@ function generateCone(base,height,stacks,slices)
         geom.vertexNormals[idx  ] =  0;
         geom.vertexNormals[idx+1] =  0;
         geom.vertexNormals[idx+2] = -1;
+        geom.tangents[idx  ] =  1;
+        geom.tangents[idx+1] =  0;
+        geom.tangents[idx+2] = 0;
+        geom.biTangents[idx  ] =  0;
+        geom.biTangents[idx+1] =  1;
+        geom.biTangents[idx+2] = 0;
     }
 
     /* each stack */
@@ -128,6 +140,12 @@ function generateCone(base,height,stacks,slices)
             geom.vertexNormals[idx  ] = table.cost[j]*cosn;
             geom.vertexNormals[idx+1] = table.sint[j]*cosn;
             geom.vertexNormals[idx+2] = sinn;
+            geom.tangents[idx  ] = -table.sint[j]*cosn;
+            geom.tangents[idx+1] = table.cost[j]*cosn;
+            geom.tangents[idx+2] = sinn;
+            geom.biTangents[idx  ] = table.sint[j]*cosn*sinn-table.cost[j]*cosn*sinn;
+            geom.biTangents[idx+1] = sinn*(-table.sint[j]*cosn)-sinn*table.cost[j]*cosn;
+            geom.biTangents[idx+2] = table.cost[j]*cosn*table.cost[j]*cosn-(-table.sint[j]*cosn)*table.sint[j]*cosn;
         }
 
         z += zStep;

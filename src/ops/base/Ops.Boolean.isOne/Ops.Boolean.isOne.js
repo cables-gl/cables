@@ -1,5 +1,3 @@
-op.name="isOne";
-
 var val=op.inValue("Value");
 var result=op.outValue("Result",false);
 

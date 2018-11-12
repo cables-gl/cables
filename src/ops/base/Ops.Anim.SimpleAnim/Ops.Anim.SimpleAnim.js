@@ -1,20 +1,20 @@
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var reset=op.inFunctionButton("reset");
-var rewind=op.inFunctionButton("rewind");
+var reset=op.inTriggerButton("reset");
+var rewind=op.inTriggerButton("rewind");
 
-var inStart=op.addInPort(new Port(op,"start"));
-var inEnd=op.addInPort(new Port(op,"end"));
-var duration=op.addInPort(new Port(op,"duration"));
+var inStart=op.addInPort(new CABLES.Port(op,"start"));
+var inEnd=op.addInPort(new CABLES.Port(op,"end"));
+var duration=op.addInPort(new CABLES.Port(op,"duration"));
 
-var loop=op.addInPort(new Port(op,"loop",OP_PORT_TYPE_VALUE,{display:"bool"}));
+var loop=op.addInPort(new CABLES.Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
 var waitForReset=op.inValueBool("Wait for Reset",true);
 
-var next=op.outFunction("Next");
-var result=op.addOutPort(new Port(op,"result"));
-var finished=op.addOutPort(new Port(op,"finished",OP_PORT_TYPE_VALUE));
-var finishedTrigger=op.outFunction("Finished Trigger");
+var next=op.outTrigger("Next");
+var result=op.addOutPort(new CABLES.Port(op,"result"));
+var finished=op.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
+var finishedTrigger=op.outTrigger("Finished Trigger");
 
 var resetted=false;
 
@@ -61,7 +61,7 @@ function init()
     currentEasing=anim.defaultEasing;
 }
 
-loop.onValueChanged=init;
+loop.onChange=init;
 reset.onTriggered=function()
 {
     resetted=true;

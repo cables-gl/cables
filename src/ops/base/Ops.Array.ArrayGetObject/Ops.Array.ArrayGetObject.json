@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -18,7 +19,7 @@
         ],
         "name": "Ops.Array.ArrayGetObject"
     },
-    "updated": 1520935488246,
+    "updated": 1541960663612,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "44d34542-174c-47c6-b9c6-adde6fc371ac",

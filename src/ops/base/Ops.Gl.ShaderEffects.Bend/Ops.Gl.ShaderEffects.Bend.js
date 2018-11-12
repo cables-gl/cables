@@ -1,16 +1,15 @@
-op.name='Bend';
-var render=op.inFunction('render');
-var rotX=op.inValue('RotX');
-var rotY=op.inValue('RotY');
-var rotZ=op.inValue('RotZ');
-var scale=op.inValue('Scale', 1);
-var offset=op.inValue('Offset');
-var amount=op.inValue('Amount');
-var limited=op.inValueBool('Limited', true);
-var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger('render');
+const rotX=op.inValue('RotX');
+const rotY=op.inValue('RotY');
+const rotZ=op.inValue('RotZ');
+const scale=op.inValue('Scale', 1);
+const offset=op.inValue('Offset');
+const amount=op.inValue('Amount');
+const limited=op.inValueBool('Limited', true);
+const next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var srcHeadVert=attachments.bend_vert;
-var srcBodyVert=''
+const srcHeadVert=attachments.bend_vert;
+const srcBodyVert=''
     .endl()+'   MOD_bendDistort(pos.xyz, norm);'
     .endl();
 

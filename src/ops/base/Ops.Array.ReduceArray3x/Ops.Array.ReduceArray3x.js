@@ -1,5 +1,3 @@
-op.name="ReduceArray3x";
-
 var arr=op.inArray("Array");
 var num=op.inValueInt("Every xth Item",2);
 var maxOldIndex=op.inValueInt("Max Index",0);

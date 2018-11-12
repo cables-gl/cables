@@ -69,5 +69,9 @@
             }
         ],
         "name": "Ops.Value.ValueSwitcherNew"
+    },
+    "summary": "switch between number values by index",
+    "docs": {
+        "ports": []
     }
 }

@@ -1,6 +1,6 @@
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var joint=op.inValueSelect("Joint");
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 

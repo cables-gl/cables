@@ -1,20 +1,18 @@
-op.name="SoundCloud Resolve";
-
 var clientId="6f693b837b47b59a17403e79bcff3626";
 
-var soundCloudUrl=op.addInPort(new Port(op,"SoundCloud URL",OP_PORT_TYPE_VALUE,{type:"string"}));
+var soundCloudUrl=op.addInPort(new CABLES.Port(op,"SoundCloud URL",CABLES.OP_PORT_TYPE_VALUE,{type:"string"}));
 
-var streamUrl=op.addOutPort(new Port(op,"Stream URL",OP_PORT_TYPE_VALUE));
-var artworkUrl=op.addOutPort(new Port(op,"Artwork URL",OP_PORT_TYPE_VALUE));
-var title=op.addOutPort(new Port(op,"Title",OP_PORT_TYPE_VALUE));
-var result=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_OBJECT));
+var streamUrl=op.addOutPort(new CABLES.Port(op,"Stream URL",CABLES.OP_PORT_TYPE_VALUE));
+var artworkUrl=op.addOutPort(new CABLES.Port(op,"Artwork URL",CABLES.OP_PORT_TYPE_VALUE));
+var title=op.addOutPort(new CABLES.Port(op,"Title",CABLES.OP_PORT_TYPE_VALUE));
+var result=op.addOutPort(new CABLES.Port(op,"Result",CABLES.OP_PORT_TYPE_OBJECT));
 
 // soundCloudUrl.ignoreValueSerialize=true;
 streamUrl.ignoreValueSerialize=true;
 artworkUrl.ignoreValueSerialize=true;
 streamUrl.ignoreValueSerialize=true;
 title.ignoreValueSerialize=true;
-soundCloudUrl.onValueChanged=resolve;
+soundCloudUrl.onChange=resolve;
 
 function resolve()
 {

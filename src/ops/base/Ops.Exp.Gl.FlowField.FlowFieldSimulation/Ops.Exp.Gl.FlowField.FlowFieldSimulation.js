@@ -1,16 +1,14 @@
-op.name="FluidSimTest";
+var exec=op.inTrigger("exec");
+var next=op.outTrigger("next");
 
-var exec=op.inFunction("exec");
-var next=op.outFunction("next");
-
-var inReset=op.inFunction("Reset");
-var inRespawn=op.inFunction("Respawn all");
+var inReset=op.inTrigger("Reset");
+var inRespawn=op.inTrigger("Respawn all");
 var inDamping=op.inValue("Damping");
 
 var outSpeed=op.outValue("Speed");
 var col=op.outValue("color");
 
-var triggerForce=op.outFunction("force");
+var triggerForce=op.outTrigger("force");
 
 
 var outOffset=op.outValue("offset");
@@ -259,7 +257,6 @@ var vec=vec3.create();
 
 exec.onTriggered=function()
 {
-    
     outDieSlow.set(dieSlow);
     
     dieOffArea=0;
@@ -288,11 +285,9 @@ exec.onTriggered=function()
         var ppos=Math.abs( (p.pos[0]) );
         var lifetimeMul=Math.min(p.lifetime/3000,1);
 
-        arrayWriteToEnd(p.buff,p.pos[0])
-        arrayWriteToEnd(p.buff,p.pos[1])
-
-        arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
-        
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[0])
+        CABLES.UTILS.arrayWriteToEnd(p.buff,p.pos[1])
+        CABLES.UTILS.arrayWriteToEnd(p.buff,vec3.len(p.velocity)*20*lifetimeMul)
         
         col.set(ppos);
         outIndex.set(i);

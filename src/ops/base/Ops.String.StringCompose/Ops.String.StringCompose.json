@@ -4,42 +4,50 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Format"
+                "name": "Format",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "String A"
+                "name": "String A",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "String B"
+                "name": "String B",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "String C"
+                "name": "String C",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "String D"
+                "name": "String D",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "String E"
+                "name": "String E",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "String F"
+                "name": "String F",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.String.StringCompose"
     },
-    "updated": 1518867821799,
+    "updated": 1541806985445,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "046f9917-939c-4007-8116-6ab1a1f1d9d0",

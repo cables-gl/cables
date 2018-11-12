@@ -4,7 +4,7 @@ var firstRound = true;
 // inputs
 var valuesPort = op.inObject('Values');
 var startPort = op.inValueString('Start Value');
-var nextPort = op.inFunctionButton('Next');
+var nextPort = op.inTriggerButton('Next');
 
 // outputs
 var outValuePort = op.outValueString('Next Value');

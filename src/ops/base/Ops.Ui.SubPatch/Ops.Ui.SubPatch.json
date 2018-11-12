@@ -25,5 +25,9 @@
             }
         ],
         "name": "Ops.Ui.SubPatch"
+    },
+    "summary": "subpatch op",
+    "docs": {
+        "ports": []
     }
 }

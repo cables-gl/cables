@@ -1,13 +1,13 @@
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
-var trigger=op.outFunction("Trigger");
+var trigger=op.outTrigger("Trigger");
 var strength=op.inValue("strength",2);
 var threshold=op.inValueSlider("threshold",0.35);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 var srcFrag=''
@@ -74,7 +74,7 @@ var srcFrag=''
 
     .endl()+'   vec4 col=vec4( _blend(base.rgb,color.rgb) ,1.0);'
     .endl()+'   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);'
-    .endl()+'  	gl_FragColor = col;'
+    .endl()+'  	outColor= col;'
 
 
 
@@ -87,7 +87,7 @@ var uniWidth=new CGL.Uniform(shader,'f','width',0);
 var uniHeight=new CGL.Uniform(shader,'f','height',0);
 var unithreshold=new CGL.Uniform(shader,'f','threshold',threshold);
 
-blendMode.onValueChanged=function()
+blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
@@ -95,7 +95,7 @@ blendMode.onValueChanged=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
 
     cgl.setShader(shader);
@@ -105,8 +105,8 @@ render.onTriggered=function()
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

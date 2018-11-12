@@ -1,6 +1,6 @@
 
-var exe=op.inFunction("exec");
-var next=op.outFunction("Next");
+var exe=op.inTrigger("exec");
+var next=op.outTrigger("Next");
 
 
 exe.onTriggered=function()

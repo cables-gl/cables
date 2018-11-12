@@ -1,10 +1,10 @@
 
-var render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
 var inCubemap=op.inObject("Cubemap");
 
 var inAmount=op.inValueSlider("Amount",0.3);
 
-var next=op.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
+var next=op.addOutPort(new CABLES.Port(this,"next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var shader=null;
 var moduleFrag=null;
@@ -55,7 +55,7 @@ render.onTriggered=function()
         inCubemap.uni=new CGL.Uniform(shader,'i',moduleFrag.prefix+'cubemap',4);
     }
 
-    /* --- */cgl.setTexture(4,inCubemap.get().cubemap,cgl.gl.TEXTURE_CUBE_MAP);
+    cgl.setTexture(4,inCubemap.get().cubemap,cgl.gl.TEXTURE_CUBE_MAP);
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, inCubemap.get().cubemap);
     
     if(!shader)return;

@@ -1,5 +1,5 @@
 op.name="voronoi";
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var pSites=op.inArray("Site Points");
 
 var pRender=op.inValueBool("Render",true);
@@ -10,7 +10,7 @@ var pHeight=op.inValue("Height",2);
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 pExtrCenter.onChange=queueUpdate;
 

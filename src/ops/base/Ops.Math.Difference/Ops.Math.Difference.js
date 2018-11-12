@@ -1,5 +1,3 @@
-op.name="Difference";
-
 var num1 = op.inValue("Number A");
 var num2 = op.inValue("Number B");
 

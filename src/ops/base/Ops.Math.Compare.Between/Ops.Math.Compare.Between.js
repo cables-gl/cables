@@ -12,7 +12,7 @@ function exec()
         );
 }
 
-number1.onValueChanged=exec;
-number2.onValueChanged=exec;
-number.onValueChanged=exec;
+number1.onChange=exec;
+number2.onChange=exec;
+number.onChange=exec;
 exec();

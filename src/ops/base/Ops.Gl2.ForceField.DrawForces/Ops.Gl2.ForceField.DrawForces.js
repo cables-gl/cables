@@ -1,7 +1,5 @@
-op.name="DrawForces";
-
-var exec=op.inFunction("exec");
-var next=op.outFunction("next");
+var exec=op.inTrigger("exec");
+var next=op.outTrigger("next");
 
 var outIndex=op.outValue("Index");
 

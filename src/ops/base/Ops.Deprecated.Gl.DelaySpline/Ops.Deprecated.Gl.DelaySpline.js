@@ -1,11 +1,11 @@
 op.name="DelaySpline";
 
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var x=op.inValue("X");
 var y=op.inValue("Y");
 var z=op.inValue("Z");
 
-var next=op.outFunction("next");
+var next=op.outTrigger("next");
 var cgl=op.patch.cgl;
 
 var queue=[];

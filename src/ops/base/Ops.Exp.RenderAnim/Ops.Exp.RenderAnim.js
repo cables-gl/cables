@@ -1,5 +1,5 @@
 
-var inExec=op.inFunctionButton("Render");
+var inExec=op.inTriggerButton("Render");
 var inFilename=op.inValueString("Filename","cables");
 var inStart=op.inValue("Start Time",0);
 var inEnd=op.inValue("End Time",1);
@@ -7,12 +7,12 @@ var inFps=op.inValue("FPS",30);
 var inFormat=op.inValueSelect("Fileformat",["webm","png"],"webm");
 
 var outProgress=op.outValue("Progress");
-var outFinished=op.outFunction("Finished");
+var outFinished=op.outTrigger("Finished");
 
 inExec.onTriggered=function()
 {
     var seq=CABLES.UI.ImageSequenceExport(
-        inFilename.get()+'.'+inFormat.get(),
+        inFilename.get(),
         inStart.get(),
         inEnd.get(),
         inFps.get(),

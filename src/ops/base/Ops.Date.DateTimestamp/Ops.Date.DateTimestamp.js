@@ -1,5 +1,3 @@
-op.name="Date";
-
 var inYear=op.inValueInt("Year");
 var inMonth=op.inValueInt("Month");
 var inDay=op.inValueInt("Day");

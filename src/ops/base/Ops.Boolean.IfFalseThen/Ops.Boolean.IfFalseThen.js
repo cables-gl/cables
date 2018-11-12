@@ -1,10 +1,10 @@
 
-var exe=op.inFunction("Exe");
+var exe=op.inTrigger("Exe");
 
 var boolean=op.inValueBool("Boolean",false);
 
-var triggerThen=op.outFunction("then");
-var triggerElse=op.outFunction("else");
+var triggerThen=op.outTrigger("then");
+var triggerElse=op.outTrigger("else");
 
 boolean.onChange=execBool;
 exe.onTriggered=exec;

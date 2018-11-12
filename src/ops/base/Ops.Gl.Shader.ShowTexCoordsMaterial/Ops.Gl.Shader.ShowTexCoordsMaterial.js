@@ -1,7 +1,6 @@
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var cgl=op.patch.cgl;
+const render=op.inTrigger('render');
+const trigger=op.outTrigger('trigger');
+const cgl=op.patch.cgl;
 
 function doRender()
 {
@@ -10,21 +9,9 @@ function doRender()
     cgl.setPreviousShader();
 }
 
-var srcFrag=''
-    .endl()+'IN vec2 texCoord;'
-    .endl()+''
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=vec4(texCoord.x,texCoord.y,1.0,1.0);'
-    // .endl()+' if(texCoord.y==0.0)col.r=1.0;'
-    
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-
-
 var shader=new CGL.Shader(cgl,'showtexcoords material');
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.showtexcoord_frag);
 
 render.onTriggered=doRender;
 doRender();

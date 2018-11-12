@@ -1,11 +1,11 @@
 var inTime=op.inValue("Time");
 var inStr=op.inValueString("Frames");
 var inLoop=op.inValueBool("Loop");
-var inRewind=op.inFunctionButton("Rewind");
+var inRewind=op.inTriggerButton("Rewind");
 var outValue=op.outValue("result time");
 var outArr=op.outArray("Expanded Frames");
 var finished=op.outValue("Finished",false);
-var finishedTrigger=op.outFunction("Finished Trigger");
+var finishedTrigger=op.outTrigger("Finished Trigger");
 var outAnimLength=op.outValue("Anim Length");
 var outProgress=op.outValue("Progress");
 
@@ -16,9 +16,6 @@ var timeOffset=0;
 inStr.onChange=
 inLoop.onChange=parse;
 
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
 
 inRewind.onTriggered=function()
 {
@@ -51,7 +48,7 @@ function parse()
     
     for(var i=0;i<parts.length;i++)
     {
-        if(isNumeric(parts[i]))
+        if(CABLES.UTILS.isNumeric(parts[i]))
         {
             frames.push(parseInt(parts[i],10));
         }
