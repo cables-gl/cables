@@ -32,7 +32,7 @@ op.onDelete=removeElement;
 
 function setCSSVisible(visible)
 {
-    if(!visible) 
+    if(!visible)
     {
         div.style.visibility='hidden';
         div.style.display='none';
@@ -114,7 +114,7 @@ function removeListeners()
 function addListeners()
 {
     if(listenerElement)removeListeners();
-    
+
     listenerElement=div;
 
     if(listenerElement)

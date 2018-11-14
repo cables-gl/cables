@@ -21,6 +21,7 @@ blendMode.onChange=function()
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
 
+
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;

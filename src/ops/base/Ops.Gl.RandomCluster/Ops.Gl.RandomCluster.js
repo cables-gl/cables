@@ -44,7 +44,7 @@ function doRender()
     }
 
     op.patch.instancing.pushLoop(randoms.length);
-    
+
     if(scrollX.get()!=0)
     {
         for(var i=0;i<origRandoms.length;i++)
@@ -96,7 +96,7 @@ function reset()
     origRandoms.length=0;
 
     Math.randomSeed=seed.get();
-    
+
     var makeRound=round.get();
 
     for(var i=0;i<num.get();i++)
@@ -104,7 +104,7 @@ function reset()
         randomsFloats.push(Math.seededRandom());
 
         var v=getRandomPos();
-        
+
         if(makeRound)
             while(vec3.len(v)>size.get()/2)
                 v=getRandomPos();
