@@ -236,21 +236,23 @@ CABLES.Patch.getOpClass = function(objName) {
 //     return this.doAddOp(objName,uiAttribs,next);
 // };
 
-CABLES.Patch.prototype.createOp = function(objName,id) {
-    var parts = objName.split('.');
+CABLES.Patch.prototype.createOp = function(identifier,id)
+{
+    var parts = identifier.split('.');
     var op = null;
+    var objName='';
 
-    try {
-
-        if(objName.indexOf(".")==-1)
+    try
+    {
+        if(identifier.indexOf("Ops.")==-1) // this should be a uuid, not a namespace
         {
             // creating ops by id should be the default way from now on!
-            var opId=objName;
-            objName=CABLES.OPS[objName].objName;
-
+            var opId=identifier;
+            
             if(CABLES.OPS[opId])
             {
-                op=new CABLES.OPS[opId].f(this,objName,id);
+                objName=CABLES.OPS[opId].objName;
+                op=new CABLES.OPS[opId].f(this,objName,id,opId);
                 op.opId=opId;
             }
             else
@@ -258,8 +260,10 @@ CABLES.Patch.prototype.createOp = function(objName,id) {
                 console.error("could not find op by id");
             }
         }
-        else
+
+        if(!op) // fallback: create by objname!
         {
+            objName=identifier;
             var opObj = CABLES.Patch.getOpClass(objName);
 
             if (!opObj) {
@@ -284,7 +288,7 @@ CABLES.Patch.prototype.createOp = function(objName,id) {
             if(op)
             {
                 op.opId=null;
-                console.log("deprecated: op created by objName:",objName);
+                console.log("op created by objName:",objName);
                 for(var i in CABLES.OPS)
                 {
                     if(CABLES.OPS[i].objName==objName)
@@ -326,13 +330,13 @@ CABLES.Patch.prototype.createOp = function(objName,id) {
  * @param {Object} UI Attributes
  * @function
  */
-CABLES.Patch.prototype.addOp = function(objName, uiAttribs,id) {
+CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
     // if (!objName || objName.indexOf('.') == -1) {
     //     CABLES.UI.MODAL.showError('could not create op', 'op unknown');
     //     return;
     // }
 
-    var op = this.createOp(objName,id);
+    var op = this.createOp(opIdentifier,id);
 
     if (op) {
         op.uiAttr(uiAttribs);
@@ -650,7 +654,9 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
             var j, k, l;
             for (j in oldOp.portsIn) {
                 if (oldOp.portsIn[j].links.length === 0) {
-                    op.getPort(oldOp.portsIn[j].name).set(oldOp.portsIn[j].get());
+                    var p=op.getPort(oldOp.portsIn[j].name);
+                    if(!p) console.error("[reloadOp] could not set port "+oldOp.portsIn[j].name+", propably renamed port ?");
+                        else p.set(oldOp.portsIn[j].get());
                 } else
                     while (oldOp.portsIn[j].links.length) {
                         var oldName = oldOp.portsIn[j].links[0].portIn.name;
@@ -664,7 +670,7 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
                             oldOutOp,
                             oldOutName
                         );
-                        if(!l) console.log('relink after op reload not successfull for port '+oldOutName);
+                        if(!l) console.log('[reloadOp] relink after op reload not successfull for port '+oldOutName);
                             else l.setValue();
                     }
             }

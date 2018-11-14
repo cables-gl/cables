@@ -482,7 +482,7 @@ CABLES.Op = function()
         if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
 
         if(this.opId) op.opId=this.opId;
-            else op.objName=this.objName;
+        op.objName=this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
         
         op.id=this.id;
         op.uiAttribs=this.uiAttribs;
