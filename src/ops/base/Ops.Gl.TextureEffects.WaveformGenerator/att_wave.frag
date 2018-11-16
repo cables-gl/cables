@@ -1,20 +1,29 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
+UNI sampler2D tex1;
 UNI float amount;
+
+UNI float r;
+UNI float g;
+UNI float b;
 
 UNI float uAmp;
 UNI float uFreq;
 UNI float uWidth;
 UNI float uGlow;
 UNI float uWaveSelect;
+UNI bool uInvert;
+UNI bool uSolid;
 
-UNI float uTime;
-UNI float uResX;
-UNI float uResY;
+UNI float uOffSetX;
+UNI float uOffSetY;
+UNI float uRotate;
+
 
 {{BLENDCODE}}
 
 #define PI 3.14159265359
+#define TAU (2.0*PI)
 
 float vmax(vec2 v)
 {
@@ -23,6 +32,10 @@ float vmax(vec2 v)
 void pR45(inout vec2 p)
 {
 	p = (p + vec2(p.y, -p.x))*sqrt(0.5);
+}
+void pR(inout vec2 p, float a)
+{
+    float s=sin(a),c=cos(a);p*=mat2(c,s,-s,c);
 }
 float pMod1(inout float p, float size)
 {
@@ -39,33 +52,42 @@ float pModMirror1(inout float p, float size)
 	p *= mod(c, 2.0)*2.0 - 1.0;
 	return c;
 }
-void pR(inout vec2 p, float a)
-{
-    float s=sin(a),c=cos(a);p*=mat2(c,s,-s,c);
-}
 float fCapsule2D(vec2 p, float r, float c) {
 	return mix(abs(p.x) - r, length(vec2(p.x, abs(p.y) - c)) - r, step(c, abs(p.y)));
 }
 
-float SineWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow)
+float SineWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow, bool solid)
 {
     // compute the (tiling) wave shape (at the given frequency)
-    float v = sin(p.x * frequency * PI);
+    //wave = abs(sin(uv.x) - uv.y);
+    float v = sin(p.x * frequency * PI)  ;
     // scale for amplitude
     v *= amplitude;
     // get the distance in Y
-    float d = abs(v * amplitude - p.y);
-    // get aliased shape
-    d -= line_width;
-    // get shape with glow to allow soft drawing
-    return smoothstep(0.0, line_glow, d);
+    float d = 0.0;
+    //float d = abs(v * amplitude - p.y);
+    //float d = v * amplitude - p.y;//one half white //************
+
+    if (solid == false)
+    {
+        // get shape with glow to allow soft drawing
+        d = abs(v * amplitude - p.y*0.5);
+        // get aliased shape
+        d -= line_width;
+        return smoothstep(0.0, line_glow, d);
+    }
+    else
+        d = v * amplitude - p.y*0.5;
+        // get aliased shape
+        d -= -line_width;
+        return smoothstep(0.0, line_glow, -d);
 }
 
-float SawWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow)
+float SawWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow,bool solid)
 {
     // we most often want to divide by frequency so let's precalc that
     float inverse_frequency = 2.0 / frequency;
-    
+
     // draw vertical bars
     // copy point
     vec2 p1 = p;
@@ -73,7 +95,7 @@ float SawWave(vec2 p, float amplitude, float frequency, float line_width, float 
     pMod1(p1.x, inverse_frequency);
     // get distance to line (with round caps)
 	float d1 = fCapsule2D(p1, 0.0, amplitude);
-    
+
     // draw saw
     // offset so it lines up
     p.x += inverse_frequency * 0.5;
@@ -84,21 +106,26 @@ float SawWave(vec2 p, float amplitude, float frequency, float line_width, float 
     pR(p, atan(inverse_frequency, amplitude * 2.0));
     // draw the line, the length is determined by the diagonal of a rectangle
     float d = fCapsule2D(p, 0.0, 0.5 * length(vec2(inverse_frequency, 2.0 * amplitude)));
-    
+
     // combine shapes
 	d = min(d, d1);
-    
+
     // get aliased shape
     d -= line_width;
     // get shape with glow to allow soft drawing
-    return smoothstep(0.0, line_glow, d);
+    if(solid == false)
+    {
+        return smoothstep(0.0, line_glow, d);
+    }
+    else
+        return smoothstep(0.0, line_glow, min(d,p.x));//white half
 }
 
-float TriangleWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow)
+float TriangleWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow, bool solid)
 {
     // we most often want to divide by frequency so let's precalc that
     float inverse_frequency = 1.0 / frequency;
-    
+
     // draw triangle
     // offset to make periods align with other wave forms
     p.x -= inverse_frequency;
@@ -109,18 +136,24 @@ float TriangleWave(vec2 p, float amplitude, float frequency, float line_width, f
     pR(p, atan(inverse_frequency, amplitude * 2.0));
     // draw the line, the length is determined by the diagonal of a rectangle
     float d = fCapsule2D(p, 0.0, 0.5 * length(vec2(inverse_frequency, 2.0 * amplitude)));
-    
+
     // get aliased shape
     d -= line_width;
     // get shape with glow to allow soft drawing
-    return smoothstep(0.0, line_glow, d);
+    if (solid == false)
+    {
+        return smoothstep(0.0, line_glow, d);
+    }
+    else
+        return smoothstep(0.0, line_glow, min(d,p.x));
+
 }
 
-float SquareWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow)
+float SquareWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow, bool solid)
 {
     // we most often want to divide by frequency so let's precalc that
     float inverse_frequency = 0.5 / frequency;
-    
+
     // draw vertical bars
     // copy point
     vec2 p1 = p;
@@ -128,7 +161,7 @@ float SquareWave(vec2 p, float amplitude, float frequency, float line_width, flo
     pMod1(p1.x, 2.0 * inverse_frequency);
     // get distance to line (with round caps)
 	float d1 = fCapsule2D(p1, 0.0, abs(amplitude));
-    
+
     // draw horizontal bars
     // offset so it lines up
     p.x -= inverse_frequency * 0.5;
@@ -143,53 +176,68 @@ float SquareWave(vec2 p, float amplitude, float frequency, float line_width, flo
         p.y += amplitude;
     // draw the line, the length is determined by the frequency
     float d = fCapsule2D(p.yx, 0.0, abs(inverse_frequency));
-    
+
     // combine shapes
 	d = min(d, d1);
-    
+
     // get aliased shape
     d -= line_width;
-    // get shape with glow to allow soft drawing
-    return smoothstep(0.0, line_glow, d);
+    if (solid == false)
+    {
+        // get shape with glow to allow soft drawing
+        return smoothstep(0.0, line_glow, d);
+    }
+    else
+        return smoothstep(0.0, line_glow, p.y);//white half
 }
 
 void main()
 {
-    vec2 res = vec2(uResX,uResY);
+    vec4 rgb = vec4(r,g,b,1.0);
+    //vec2 res = vec2(uResX,uResY);
     // dividing by XY because we don't want anything to do with aspect ratio
     // just pure -1 to 1 on both X and Y
-	vec2 uv = (gl_FragCoord.xy * 2.0 - res) / res;
-    
+	vec2 uv = texCoord ;////this breaks chains -> (gl_FragCoord.xy * 2.0 - res) / res;
     // if we go ultra wide screen the wave will start squishing alot when rotating, because all coordinates are from -1 to 1
     // everything still works fi the coordinates go from any whole number
     // we can multiply with about 14 to get our ultra wide setup, or something less to demonstrate on a normal screen
-    
+    //uv.x +=uTime;
     uv.x *= 1.0; // 14.0;
-    
+
+    uv -= 0.5;
+    pR(uv.xy,uRotate * TAU);
+    uv += 0.5;
     //uv.x+=2.0;
-    
+
     float wave = 0.0;
     if      (uWaveSelect == 0.0)
     {
-        wave = SineWave     (uv, uAmp,  uFreq , uWidth, uGlow);
+        wave = SineWave     (uv-vec2(uOffSetX,uOffSetY), uAmp,  uFreq , uWidth, uGlow, uSolid);
     }
     else if (uWaveSelect == 1.0)
     {
-        wave = SawWave      (uv, uAmp,  uFreq, uWidth, uGlow);
+        wave = SawWave      (uv-vec2(uOffSetX,uOffSetY), uAmp,  uFreq, uWidth, uGlow, uSolid);
     }
     else if (uWaveSelect == 2.0)
     {
-        wave = TriangleWave   (uv, uAmp,  uFreq, uWidth, uGlow);
+        wave = TriangleWave   (uv-vec2(uOffSetX,uOffSetY), uAmp,  uFreq, uWidth, uGlow, uSolid);
     }
     else
     {
-        wave = SquareWave   (uv, uAmp,  uFreq, uWidth, uGlow);
+        wave = SquareWave   (uv-vec2(uOffSetX,uOffSetY), uAmp,  uFreq, uWidth, uGlow, uSolid);
     }
-
-    vec4 col =  vec4(vec3(1.0-wave),1.0);
-    vec3 background = vec3(0.0);
+    vec4 col = vec4(0.0);
+    if (uInvert )
+    {
+        col =  vec4(vec3(wave),1.0);
+    }
+    else
+    {
+        col =  vec4(vec3(1.0-wave),1.0);//remove -1 to invert
+    }
+    col *= rgb;
     //original texture
-    vec4 base=texture2D(tex,uv);
+    vec4 base=texture2D(tex,texCoord);
     //blend stuff
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
