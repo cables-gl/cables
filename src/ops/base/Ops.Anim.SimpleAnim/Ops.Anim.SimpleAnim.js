@@ -20,7 +20,7 @@ var resetted=false;
 
 
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 
 anim.createPort(op,"easing",init);
 

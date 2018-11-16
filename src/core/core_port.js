@@ -406,7 +406,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this._animated!=a)
         {
             this._animated=a;
-            if(this._animated && !this.anim)this.anim=new CABLES.TL.Anim();
+            if(this._animated && !this.anim)this.anim=new CABLES.Anim();
             this._onAnimToggle();
         }
     };
@@ -414,7 +414,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.toggleAnim=function(val)
     {
         this._animated=!this._animated;
-        if(this._animated && !this.anim)this.anim=new CABLES.TL.Anim();
+        if(this._animated && !this.anim)this.anim=new CABLES.Anim();
         this.setAnimated(this._animated);
         this._onAnimToggle();
     };

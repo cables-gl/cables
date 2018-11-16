@@ -9,7 +9,7 @@ var endValue=this.addInPort(new CABLES.Port(this,"endValue"));
 var duration = 0;
 var bpm=this.addInPort(new CABLES.Port(this,"bpm"));
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 
 var easing=this.addInPort(new CABLES.Port(this,"easing",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
 easing.set('linear');

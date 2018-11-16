@@ -13,7 +13,7 @@ var inGeoms=[];
 nextGeom.onChange=updateGeom;
 
 var oldGeom=0;
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.clear();
 
 

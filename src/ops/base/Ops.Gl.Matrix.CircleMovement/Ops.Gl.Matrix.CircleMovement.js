@@ -15,8 +15,8 @@ var speed=op.inValue("speed",1);
 
 var startTime=CABLES.now()/1000;
 var cgl=op.patch.cgl;
-var animX=new CABLES.TL.Anim();
-var animY=new CABLES.TL.Anim();
+var animX=new CABLES.Anim();
+var animY=new CABLES.Anim();
 var pos=[];
 animX.loop=true;
 animY.loop=true;

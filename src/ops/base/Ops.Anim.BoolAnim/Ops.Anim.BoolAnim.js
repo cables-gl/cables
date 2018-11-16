@@ -14,7 +14,7 @@ valueFalse.set(0);
 valueTrue.set(1);
 duration.set(0.3);
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.createPort(op,"easing");
 
 var startTime=CABLES.now();

@@ -30,9 +30,9 @@ function readAnim()
 
     if(an)
     {
-        animX=new CABLES.TL.Anim();
-        animY=new CABLES.TL.Anim();
-        animZ=new CABLES.TL.Anim();
+        animX=new CABLES.Anim();
+        animY=new CABLES.Anim();
+        animZ=new CABLES.Anim();
 
         for(var k in an.positionkeys)
         {

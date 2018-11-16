@@ -4,7 +4,7 @@ const delay=op.inValue("Delay");
 const percent=op.outValue("percent");
 const trigger=op.outTrigger("Trigger");
 
-const anim=new CABLES.TL.Anim();
+const anim=new CABLES.Anim();
 anim.setValue(1, 1);
 anim.setValue(2, 2);
 anim.setValue(3, 3);
