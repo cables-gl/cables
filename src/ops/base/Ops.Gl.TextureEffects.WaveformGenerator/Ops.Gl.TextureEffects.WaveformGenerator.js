@@ -1,7 +1,7 @@
 const render = op.inTrigger('render');
 const blendMode = CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 const amount = op.inValueSlider("Amount",1);
-const waveSelect = op.inValueSelect("Waveform",["Sine","Sawtooth","Triangle","Square"],"Sine");
+const waveSelect = op.inValueSelect("Waveform",["Sine","Sawtooth","Triangle","Square"],0.0);
 
 const amplitude = op.inValueSlider("Amplitude",0.5);
 const frequency = op.inValue("Frequency",2.0);
