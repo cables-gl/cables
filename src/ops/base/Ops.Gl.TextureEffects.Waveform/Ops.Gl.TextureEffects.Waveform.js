@@ -1,7 +1,7 @@
 const render = op.inTrigger('render');
 const blendMode = CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 const amount = op.inValueSlider("Amount",1);
-const waveSelect = op.inValueSelect("Waveform",["Sine","Sawtooth","Triangle","Square"],0.0);
+const waveSelect = op.inValueSelect("Waveform",["Sine","Sawtooth","Triangle","Square"],"Sine");
 
 const amplitude = op.inValueSlider("Amplitude",0.5);
 const frequency = op.inValue("Frequency",2.0);
@@ -45,14 +45,17 @@ const offSetXUniform = new CGL.Uniform(shader,'f','uOffSetX',offsetX);
 const offSetYUniform = new CGL.Uniform(shader,'f','uOffSetY',offsetY);
 const rotateUniform = new CGL.Uniform(shader,'f','uRotate',rotate);
 
+waveSelect.onChange = updateWaveForm;
+updateWaveForm();
 
-waveSelect.onChange = function()
+function updateWaveForm()
 {
     if(waveSelect.get() == "Sine") waveSelectUniform.setValue(0);
     else if(waveSelect.get() == "Sawtooth") waveSelectUniform.setValue(1);
     else if(waveSelect.get() == "Triangle") waveSelectUniform.setValue(2);
     else waveSelectUniform.setValue(3);
 }
+
 blendMode.onChange = function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
