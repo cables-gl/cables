@@ -20,7 +20,7 @@ function doRender()
 {
     cgl.setShader(shader);
 
-    
+
 
     if(inCubemap.get())
     {
@@ -38,12 +38,10 @@ function updateMapping()
     if(mapReflect.get())shader.define("DO_REFLECTION");
         else shader.removeDefine("DO_REFLECTION");
 
-
     if(inCubemap.get() && inCubemap.get().cubemap)
     {
         shader.define("TEX_FORMAT_CUBEMAP");
         shader.removeDefine("TEX_FORMAT_EQUIRECT");
-
     }
     else
     {

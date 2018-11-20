@@ -1,5 +1,6 @@
-var bool=op.addInPort(new CABLES.Port(op,"in bool",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var outbool=op.addOutPort(new CABLES.Port(op,"out bool",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+const
+    bool=op.inValueBool("in bool"),
+    outbool=op.outValueBool("out bool");
 
 bool.changeAlways=true;
 

@@ -10,7 +10,6 @@ const
     r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'})),
     g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
     b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
-    a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
     trigger=op.outTrigger('trigger');
 
 smoothed.onChange=function()
@@ -22,7 +21,6 @@ smoothed.onChange=function()
 r.set(1.0);
 g.set(1.0);
 b.set(1.0);
-a.set(1.0);
 
 const
     cgl=op.patch.cgl,
@@ -40,9 +38,7 @@ const
     uniOffset=new CGL.Uniform(shader,'f','offset',offset),
     uniformR=new CGL.Uniform(shader,'f','r',r),
     uniformG=new CGL.Uniform(shader,'f','g',g),
-    uniformB=new CGL.Uniform(shader,'f','b',b),
-    uniformA=new CGL.Uniform(shader,'f','a',a);
-
+    uniformB=new CGL.Uniform(shader,'f','b',b);
 
 blendMode.onChange=function()
 {

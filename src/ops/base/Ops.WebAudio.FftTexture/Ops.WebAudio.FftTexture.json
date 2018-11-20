@@ -17,7 +17,8 @@
             },
             {
                 "type": "0",
-                "name": "position"
+                "name": "position",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.FftTexture"
@@ -42,5 +43,9 @@
                 "text": "The y-position the last incoming FFT data was written to"
             }
         ]
-    }
+    },
+    "updated": 1542058222487,
+    "authorName": "pandur",
+    "id": "74212b0b-2260-48bd-9d22-70754db6ccba",
+    "created": 1542058221013
 }

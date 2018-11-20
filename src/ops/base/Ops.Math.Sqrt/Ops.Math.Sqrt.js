@@ -1,5 +1,6 @@
-const number=op.addInPort(new CABLES.Port(op,"number"));
-const result=op.addOutPort(new CABLES.Port(op,"result"));
+const
+    number=op.inValue("number"),
+    result=op.outValue("result");
 
 number.onChange=function()
 {

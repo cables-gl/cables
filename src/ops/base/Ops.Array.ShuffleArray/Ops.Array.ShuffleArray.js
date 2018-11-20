@@ -3,11 +3,12 @@ var arr=[];
 
 // inputs
 var exePort = op.inTriggerButton('Execute');
-var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
+var array=op.inArray("array");
 
 // outputs
 var nextPort = op.outTrigger('Next');
-var arrayOut=op.addOutPort(new CABLES.Port(op, "shuffled array",CABLES.OP_PORT_TYPE_ARRAY));
+var arrayOut=op.outArray("shuffled array");
+
 array.ignoreValueSerialize=true;
 arrayOut.ignoreValueSerialize=true;
 
@@ -29,21 +30,21 @@ function fisherYatesShuffle(array) {
 
 function update() {
     var a=array.get();
-    
+
     if(!a)return;
     if(arr.length!=a.length)
     {
         arr.length=a.length;
     }
-    
+
     var j, x, i;
-    
+
     for (i=0;i<a.length;i++) {
         arr[i]=a[i];
     }
-    
+
     fisherYatesShuffle(arr);
-    
+
     arrayOut.set(null);
     arrayOut.set(arr);
 }

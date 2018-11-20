@@ -1,13 +1,10 @@
-var number1=op.addInPort(new CABLES.Port(op,"number1"));
-var number2=op.addInPort(new CABLES.Port(op,"number2"));
-var result=op.addOutPort(new CABLES.Port(op,"result"));
+const
+    number1=op.inValue("number1",1),
+    number2=op.inValue("number2",1),
+    result=op.outValue("result");
 
 number1.onChange=exec;
 number2.onChange=exec;
-
-number1.set(1);
-number2.set(1);
-
 
 function exec()
 {

@@ -6,12 +6,12 @@ IN vec3 v_pos;
 
 #ifdef TEX_FORMAT_CUBEMAP
     UNI samplerCube skybox;
-    #define SAMPLETEX textureLod 
+    #define SAMPLETEX textureLod
 #endif
 #ifndef TEX_FORMAT_CUBEMAP
     #define TEX_FORMAT_EQUIRECT
     UNI sampler2D skybox;
-    #define SAMPLETEX sampleEquirect 
+    #define SAMPLETEX sampleEquirect
 #endif
 
 UNI mat4 modelMatrix;
@@ -41,7 +41,7 @@ void main()
 
     vec3 N = normalize( mat3(normalMatrix) * v_normal).xyz;
     vec4 col = vec4(1.0,1.0,1.0,1.0);
-    
+
     #ifdef DO_REFLECTION
         vec3 V = -v_eyeCoords;
         vec3 R = -reflect(V,N);

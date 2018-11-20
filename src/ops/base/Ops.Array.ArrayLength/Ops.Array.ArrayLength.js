@@ -1,6 +1,7 @@
+const
+    array=op.inArray("array"),
+    outLength=op.outValue("length");
 
-var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
-var outLength=op.addOutPort(new CABLES.Port(op, "length",CABLES.OP_PORT_TYPE_VALUE));
 outLength.ignoreValueSerialize=true;
 
 function update()

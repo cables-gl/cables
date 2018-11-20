@@ -10,7 +10,7 @@ UNI float rotate;
 UNI float r;
 UNI float g;
 UNI float b;
-UNI float a;
+
 
 {{BLENDCODE}}
 
@@ -36,11 +36,11 @@ void main()
     float rm=width*2.0*1.0/num/2.0;
 
     if(m>rm)
-       stripe.rgb=mix(stripe.rgb,vec3( r,g,b ),a);
+       stripe.rgb=mix(stripe.rgb,vec3( r,g,b ),1.0);
 
     #ifdef STRIPES_SMOOTHED
        m*=2.0;
-       stripe.rgb=vec3(smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));
+       stripe.rgb= vec3(r,g,b) * vec3(smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));
     #endif
 
     //blend section

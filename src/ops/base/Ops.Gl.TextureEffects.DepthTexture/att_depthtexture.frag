@@ -9,7 +9,7 @@ UNI float f;
 
 void main()
 {
-    vec4 col=texture2D(texDepth,texCoord);
+    vec4 col=texture(texDepth,texCoord);
     float z=col.r;
     float c=(2.0*n)/(f+n-z*(f-n));
 
@@ -18,7 +18,7 @@ void main()
     #endif
 
     col=vec4(c,c,c,1.0);
-    vec4 base=texture2D(texBase,texCoord);
+    vec4 base=texture(texBase,texCoord);
     //blend stuff
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);

@@ -1,19 +1,13 @@
-
-
-var exe=op.inTriggerButton("exe");
-// op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=op.outTrigger('trigger');
-var result=op.addOutPort(new CABLES.Port(op,"result"));
-
-var smooth=op.inValueBool("Smooth",false);
-var seconds=op.inValueBool("Seconds",false);
+const
+    exe=op.inTriggerButton("exe"),
+    smooth=op.inValueBool("Smooth",false),
+    seconds=op.inValueBool("Seconds",false),
+    trigger=op.outTrigger('trigger'),
+    result=op.outValue("result");
 
 var lastTime=CABLES.now();
-
 var diff=0;
-
 var smoothed=-1;
-
 
 exe.onTriggered=function()
 {
