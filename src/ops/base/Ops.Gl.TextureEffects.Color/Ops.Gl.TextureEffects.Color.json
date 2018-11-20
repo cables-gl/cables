@@ -7,6 +7,20 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Mask"
+            },
+            {
+                "type": "0",
                 "name": "r",
                 "subType": "number"
             },
@@ -19,16 +33,6 @@
                 "type": "0",
                 "name": "b",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Blend Mode",
-                "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "Amount",
-                "subType": "number"
             }
         ],
         "portsOut": [
@@ -40,7 +44,7 @@
         "name": "Ops.Gl.TextureEffects.Color"
     },
     "summary": "fill image using a color (overlay)",
-    "updated": 1540900101854,
+    "updated": 1542212049658,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c0acfc80-16f9-4f17-978d-bad650f3ed1c",

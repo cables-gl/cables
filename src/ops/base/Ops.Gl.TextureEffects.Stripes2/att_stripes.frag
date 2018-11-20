@@ -40,7 +40,7 @@ void main()
 
     #ifdef STRIPES_SMOOTHED
        m*=2.0;
-       stripe.rgb=vec3(smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));
+       stripe.rgb= vec3(smoothstep(0.,1., abs(( ((m-rm) )/ (rm) )  ) ));
     #endif
 
     //blend section
