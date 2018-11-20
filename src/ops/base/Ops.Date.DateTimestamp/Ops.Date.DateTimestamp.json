@@ -3,32 +3,38 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Year"
+                "name": "Year",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Month"
+                "name": "Month",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Day"
+                "name": "Day",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Hour"
+                "name": "Hour",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Minute"
+                "name": "Minute",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Timestamp"
+                "name": "Timestamp",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Date.Date"
+        "name": "Ops.Date.DateTimestamp"
     },
     "summary": "Calculates the timestamp of a date by year / month / day / hour / minute",
     "docs": {
@@ -58,5 +64,9 @@
                 "text": "The timestamp"
             }
         ]
-    }
+    },
+    "updated": 1542699353025,
+    "authorName": "pandur",
+    "id": "e86a668b-db87-472e-9484-3fd102ccbf8a",
+    "created": 1542699326459
 }

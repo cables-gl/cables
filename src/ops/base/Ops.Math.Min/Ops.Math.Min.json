@@ -3,17 +3,20 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Minimum"
+                "name": "Minimum",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Min"
@@ -21,5 +24,9 @@
     "summary": "Result will be the smaller number of the inputs",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1542700482596,
+    "authorName": "pandur",
+    "id": "ad6f54bd-6dbd-4fa0-aa8b-5854231a5fc9",
+    "created": 1542700332610
 }

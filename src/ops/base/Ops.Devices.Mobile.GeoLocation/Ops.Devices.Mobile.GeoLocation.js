@@ -10,10 +10,5 @@ function updatePos(position)
 {
     outLat.set(position.coords.latitude);
     outLon.set(position.coords.longitude);
+    console.log(position);
 }
-
-
-op.onDelete=function()
-{
-    
-};

@@ -1,16 +1,17 @@
-var canvasOnly=op.addInPort(new CABLES.Port(op,"canvas only",CABLES.OP_PORT_TYPE_VALUE, {"display": "bool"}));
+// var canvasOnly=op.addInPort(new CABLES.Port(op,"canvas only",CABLES.OP_PORT_TYPE_VALUE, {"display": "bool"}));
 
-var pressedUp=op.outValue("Up");
-var pressedDown=op.outValue("Down");
-var pressedLeft=op.outValue("Left");
-var pressedRight=op.outValue("Right");
+const
+    canvasOnly=op.inValueBool("canvas only",true),
+    keysCursor=op.inValueBool("Cursor Keys",true),
+    keysWasd=op.inValueBool("WASD",true),
+    pressedUp=op.outValue("Up"),
+    pressedDown=op.outValue("Down"),
+    pressedLeft=op.outValue("Left"),
+    pressedRight=op.outValue("Right");
 
-var keysCursor=op.inValueBool("Cursor Keys",true);
-var keysWasd=op.inValueBool("WASD",true);
+const cgl=op.patch.cgl;
 
-var cgl=op.patch.cgl;
-
-function onKeyDown(e) 
+function onKeyDown(e)
 {
     if(keysWasd.get())
     {
@@ -18,7 +19,7 @@ function onKeyDown(e)
         if(e.keyCode==83) pressedDown.set(true);
         if(e.keyCode==65) pressedLeft.set(true);
         if(e.keyCode==68) pressedRight.set(true);
-    }    
+    }
     if(keysCursor.get())
     {
         if(e.keyCode==38) pressedUp.set(true);
@@ -36,7 +37,7 @@ function onKeyUp(e)
         if(e.keyCode==83) pressedDown.set(false);
         if(e.keyCode==65) pressedLeft.set(false);
         if(e.keyCode==68) pressedRight.set(false);
-    }    
+    }
     if(keysCursor.get())
     {
         if(e.keyCode==38) pressedUp.set(false);

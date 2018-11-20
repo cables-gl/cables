@@ -1,4 +1,3 @@
-this.name='PatchInput';
 
 op.getPatchOp=function()
 {

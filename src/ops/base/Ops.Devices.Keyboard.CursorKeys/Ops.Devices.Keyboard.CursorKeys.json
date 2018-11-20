@@ -4,35 +4,46 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "canvas only"
+                "name": "canvas only",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Cursor Keys"
+                "name": "Cursor Keys",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "WASD"
+                "name": "WASD",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Up"
+                "name": "Up",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Down"
+                "name": "Down",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Left"
+                "name": "Left",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Right"
+                "name": "Right",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Keyboard.CursorKeys"
-    }
+    },
+    "updated": 1542699501723,
+    "authorName": "pandur",
+    "id": "65930ca9-c923-453f-b8c4-144eda13fa0a",
+    "created": 1542699465378
 }

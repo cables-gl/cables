@@ -48,7 +48,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
@@ -135,7 +135,7 @@ render.onTriggered=function()
 //     cgl.currentTextureEffect.bind();
 
 //     cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-//  
+//
 
 //     cgl.currentTextureEffect.finish();
 //     cgl.setPreviousShader();

@@ -4,19 +4,30 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Number A"
+                "name": "Number A",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Number B"
+                "name": "Number B",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Difference"
+    },
+    "updated": 1542701259227,
+    "authorName": "pandur",
+    "id": "5431b943-18aa-46e4-bd32-a7eee30d4e51",
+    "created": 1542700519159,
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

@@ -35,7 +35,7 @@ function update()
         newArray[count]=theArray[i+2];
         count++;
     }
-    
+
     if(i!=theLength*3-1)
     {
         newArray[count]=theArray[theLength*3-3];
@@ -45,10 +45,10 @@ function update()
         newArray[count]=theArray[theLength*3-1];
         count++;
     }
-    
+
     outArr.set(null);
     outArr.set(newArray);
-    
 
-    
+
+
 }

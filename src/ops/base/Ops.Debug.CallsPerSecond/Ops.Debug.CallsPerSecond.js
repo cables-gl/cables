@@ -1,5 +1,6 @@
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var cps=op.addOutPort(new CABLES.Port(op,"cps",CABLES.OP_PORT_TYPE_VALUE));
+const
+    exe=op.inTrigger("exe"),
+    cps=op.outValue("cps");
 
 var timeStart=0;
 var cpsCount=0;

@@ -10,17 +10,24 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Min"
+                "name": "Min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max"
+                "name": "Max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Average"
+                "name": "Average",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayAnalyze"
-    }
+    },
+    "updated": 1542698748876,
+    "authorName": "pandur",
+    "id": "1db230c8-212f-4679-87d6-3531659363da",
+    "created": 1542698747467
 }

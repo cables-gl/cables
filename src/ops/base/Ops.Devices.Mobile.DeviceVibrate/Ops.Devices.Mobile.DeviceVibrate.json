@@ -9,10 +9,15 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Supported"
+                "name": "Supported",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Html.DeviceVibrate"
+        "name": "Ops.Devices.Mobile.DeviceVibrate"
     },
-    "summary": "vibrating a mobile device"
+    "summary": "vibrating a mobile device",
+    "updated": 1542699557440,
+    "authorName": "pandur",
+    "id": "e947fc63-e44e-4bdd-98e0-89e79373f073",
+    "created": 1542699557913
 }

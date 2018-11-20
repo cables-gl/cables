@@ -168,7 +168,7 @@ op.dyn.onLinkChanged=function()
         var otherPort=op.dyn.links[0].getOtherPort(op.dyn);
         op.dyn.removeLinks();
         otherPort.removeLinkTo(op.dyn);
-        
+
 
         var newName="in"+data.ports.length+" "+otherPort.parent.name+" "+otherPort.name;
 

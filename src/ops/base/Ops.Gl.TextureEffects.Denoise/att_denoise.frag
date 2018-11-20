@@ -6,7 +6,7 @@ IN vec2 texCoord;
 
 void main()
 {
-    vec4 center = texture2D(tex, texCoord);
+    vec4 center = texture(tex, texCoord);
     vec4 color = vec4(0.0);
     float total = 0.0;
     float pixels=4.0;

@@ -1,7 +1,7 @@
 
 var CABLES=CABLES || {};
-// CABLES.ANIM=CABLES.ANIM || {};
-// CABLES.TL=CABLES.ANIM;
+CABLES.ANIM=CABLES.ANIM || {};
+ CABLES.TL=CABLES.ANIM;
 
 
 /** @constant {number} */
