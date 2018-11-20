@@ -1,6 +1,4 @@
-this.name="MultiIn";
 
-var op = this;
 
 if(!window.audioContext){ audioContext = new AudioContext(); }
 

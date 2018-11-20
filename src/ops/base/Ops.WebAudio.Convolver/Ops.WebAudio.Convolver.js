@@ -1,6 +1,3 @@
-this.name="Convolver";
-var op = this;
-
 if(!window.audioContext){ audioContext = new AudioContext(); }
 
 var NORMALIZE_DEF = true;

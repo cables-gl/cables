@@ -1,6 +1,4 @@
-this.name="Ops.WebAudio.KeyPiano";
 
-var op = this;
 
 var c_on = this.addInPort( new CABLES.Port( this, "c note on",CABLES.OP_PORT_TYPE_FUNCTION ));
 var c_off = this.addInPort( new CABLES.Port( this, "c note off",CABLES.OP_PORT_TYPE_FUNCTION ));

@@ -43,7 +43,7 @@ function connect()
     if(outConnected.get()===true && connectedTo==inUrl.get()) return;
     // if(outConnected.get()===true)connection.close();
 
-    if(!inUrl.get() || inUrl.get()==='') 
+    if(!inUrl.get() || inUrl.get()==='')
     {
         console.log("websocket: invalid url ");
         outConnected.set(false);
@@ -51,7 +51,7 @@ function connect()
     }
 
     window.WebSocket = window.WebSocket || window.MozWebSocket;
- 
+
     if (!window.WebSocket)
         console.error('Sorry, but your browser doesn\'t support WebSockets.');
 
@@ -76,7 +76,7 @@ function connect()
             outConnected.set(false);
             outConnection.set(null);
         };
-    
+
         connection.onclose = function (message)
         {
             connecting=false;
@@ -84,7 +84,7 @@ function connect()
             outConnected.set(false);
             outConnection.set(null);
         };
-    
+
         connection.onopen = function (message)
         {
             connecting=false;
@@ -92,7 +92,7 @@ function connect()
             connectedTo=inUrl.get();
             outConnection.set(connection);
         };
-    
+
         connection.onmessage = function (message)
         {
             try
@@ -101,7 +101,7 @@ function connect()
                 outResult.set(null);
                 outResult.set(json);
                 outReceived.trigger();
-    
+
             }
             catch(e)
             {
@@ -110,7 +110,7 @@ function connect()
                 return;
             }
         };
-        
+
     }
 
 }
