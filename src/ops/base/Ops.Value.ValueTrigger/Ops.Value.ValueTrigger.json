@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -17,13 +18,14 @@
             },
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Value.ValueTrigger"
     },
     "summary": "Sets the output value on trigger (SetValueOnTrigger, change)",
-    "updated": 1515686096165,
+    "updated": 1542045536610,
     "authorName": "pandur",
     "id": "d9d010c2-2bc9-4eb5-8514-f2adef7ceae4",
     "created": 1515686078871

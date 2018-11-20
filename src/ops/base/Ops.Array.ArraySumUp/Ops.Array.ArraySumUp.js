@@ -1,6 +1,6 @@
-var inArr=op.inArray("Array");
-
-var result=op.outValue("Sum");
+const
+    inArr=op.inArray("Array"),
+    result=op.outValue("Sum");
 
 inArr.onChange=function()
 {
@@ -13,7 +13,7 @@ inArr.onChange=function()
             sum+=Number(arr[i]);
         }
         result.set(sum);
-        
+
     }
     else
     {

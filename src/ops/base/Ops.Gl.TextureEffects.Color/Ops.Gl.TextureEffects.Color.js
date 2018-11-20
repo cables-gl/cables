@@ -1,17 +1,18 @@
-const render=op.inTrigger("render");
-const r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-const g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-const b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
-const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const
+    render=op.inTrigger("render"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    inMask=op.inTexture("Mask"),
+    r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'})),
+    g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
+    b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
+    trigger=op.outTrigger("trigger");
 
 r.set(1.0);
 g.set(1.0);
 b.set(1.0);
 
 const TEX_SLOT=0;
-
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,'textureeffect color');
 
@@ -20,12 +21,19 @@ srcFrag=srcFrag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
-var textureUniform=new CGL.Uniform(shader,'t','tex',TEX_SLOT);
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',TEX_SLOT),
+    makstextureUniform=new CGL.Uniform(shader,'t','mask',1),
+    uniformR=new CGL.Uniform(shader,'f','r',r),
+    uniformG=new CGL.Uniform(shader,'f','g',g),
+    uniformB=new CGL.Uniform(shader,'f','b',b),
+    uniformAmount=new CGL.Uniform(shader,'f','amount',amount);
 
-var uniformR=new CGL.Uniform(shader,'f','r',r);
-var uniformG=new CGL.Uniform(shader,'f','g',g);
-var uniformB=new CGL.Uniform(shader,'f','b',b);
-var uniformAmount=new CGL.Uniform(shader,'f','amount',amount);
+inMask.onChange=function()
+{
+    if(inMask.get())shader.define("MASK");
+        else shader.removeDefine("MASK");
+};
 
 blendMode.onChange=function()
 {
@@ -40,6 +48,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(TEX_SLOT, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    if(inMask.get()) cgl.setTexture(1, inMask.get().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

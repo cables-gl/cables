@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "Base Note"
+                "name": "Base Note",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -34,5 +35,9 @@
                 "text": "The triad chord for the base tone in the scale, e.g. `[\"C3\", \"E3\", \"G3\"]`"
             }
         ]
-    }
+    },
+    "updated": 1542058146953,
+    "authorName": "pandur",
+    "id": "846fd784-6367-4380-a68d-6a6a33f4171d",
+    "created": 1542058146958
 }

@@ -12,35 +12,43 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fill"
+                "name": "Fill",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "offset"
+                "name": "offset",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "frequency"
+                "name": "frequency",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "amplitude"
+                "name": "amplitude",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Thickness"
+                "name": "Thickness",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Flip"
+                "name": "Flip",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

@@ -1,0 +1,65 @@
+{
+    "updated": 1541805522927,
+    "authorName": "pandur",
+    "id": "60adab1c-b41a-4a03-ac13-f96f94002379",
+    "created": 1541805522930,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "attenuation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "multiply",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "1",
+                "name": "attachment"
+            }
+        ],
+        "name": "Ops.Deprecated.Gl.Phong.PointLight"
+    }
+}

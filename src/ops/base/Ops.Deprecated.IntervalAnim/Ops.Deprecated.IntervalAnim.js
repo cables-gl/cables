@@ -6,7 +6,7 @@ var interval=op.addInPort(new CABLES.Port(op,"Interval",CABLES.OP_PORT_TYPE_VALU
 var delay=op.addInPort(new CABLES.Port(op,"Delay",CABLES.OP_PORT_TYPE_VALUE));
 var percent=op.addOutPort(new CABLES.Port(op,"percent"));
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.setValue(1, 1);
 anim.setValue(2, 2);
 anim.loop=true;

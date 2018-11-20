@@ -1,6 +1,3 @@
-
-this.name="Gain";
-
 var audioIn=this.addInPort(new CABLES.Port(this,"audio in",CABLES.OP_PORT_TYPE_OBJECT));
 var gain=this.addInPort(new CABLES.Port(this,"gain",CABLES.OP_PORT_TYPE_VALUE));
 gain.onValueChange(updateGain);
@@ -25,14 +22,14 @@ audioIn.onChange=function()
             try{
                 oldAudioIn.disconnect(gainNode);
             } catch(e) {
-                
-                
+
+
                 console.log(e);
             }
         }
     } else {
         audioIn.val.connect(gainNode);
-    }  
+    }
     oldAudioIn=audioIn.get();
 };
 

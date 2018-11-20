@@ -7,10 +7,6 @@
                 "name": "Execute"
             },
             {
-                "type": "0",
-                "name": "Shuffle on Change"
-            },
-            {
                 "type": "3",
                 "name": "array"
             }
@@ -27,7 +23,7 @@
         ],
         "name": "Ops.Array.ShuffleArray"
     },
-    "updated": 1521900550341,
+    "updated": 1542042181966,
     "authorName": "tim",
     "id": "f5a62cd4-934a-4feb-99dc-f6cd6edfe350",
     "created": 1515843002617,

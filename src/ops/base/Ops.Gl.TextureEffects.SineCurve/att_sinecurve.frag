@@ -27,7 +27,7 @@ void main()
         s=thick/s;
         s=smoothstep(0.99,1.0,s);
     #endif
-    
+
     #ifdef FILL
         if(s>0.5) s=1.0;
             else s=0.0;
@@ -35,7 +35,7 @@ void main()
 
     #ifdef FLIP
         s=1.0-s;
-    #endif    
+    #endif
 
     vec4 col=vec4(s,s,s,1.0);
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);

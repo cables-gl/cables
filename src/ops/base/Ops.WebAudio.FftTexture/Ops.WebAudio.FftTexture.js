@@ -1,5 +1,3 @@
-op.name="FftTexture";
-
 var refresh=this.addInPort(new CABLES.Port(this,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
 var fftArr=this.addInPort(new CABLES.Port(this, "FFT Array",CABLES.OP_PORT_TYPE_ARRAY));
 
@@ -36,12 +34,12 @@ refresh.onTriggered=function()
     var width=arr.length;
     // var height=width;
     if(!width)return;
-    
+
 
     if(data.length===0 || data.length!=width*4)
     {
         // console.log(width*height*4);
-        
+
         data.length=width*4;
         buffer=new Uint8Array(width*height*4);
     }
@@ -68,7 +66,7 @@ refresh.onTriggered=function()
         tex.setSize(width,height);
         console.log('fft texture size',width,height);
     }
-    
+
     tex.initFromData(
         buffer,
         width,

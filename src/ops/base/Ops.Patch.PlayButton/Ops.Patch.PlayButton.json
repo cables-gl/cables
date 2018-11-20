@@ -1,0 +1,31 @@
+{
+    "updated": 1542036772709,
+    "authorName": "pandur",
+    "id": "32e53fa2-4545-4c53-a94d-2204aa079246",
+    "created": 1542036186881,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Clicked",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Patch.PlayButton"
+    },
+    "summary": "shows a playbutton for forcing a simple user interaction",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

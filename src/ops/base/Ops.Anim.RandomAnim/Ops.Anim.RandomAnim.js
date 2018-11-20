@@ -8,7 +8,7 @@ var seed=op.inValue("random seed",0);
 var result=op.outValue("result");
 var looped=op.outTrigger("Looped");
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.createPort(op,"easing",reinit);
 
 

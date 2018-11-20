@@ -299,6 +299,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '// '
                 .endl() + '// fragment shader '+name
                 .endl() + '// '
+                .endl() + '#define texture texture2D'
                 .endl() + '#define outColor gl_FragColor'
                 .endl() + '#define IN varying'
                 .endl() + '#define UNI uniform'
@@ -308,6 +309,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '// '
                 .endl() + '// vertex shader '+name
                 .endl() + '// '
+                .endl() + '#define texture texture2D'
                 .endl() + '#define OUT varying'
                 .endl() + '#define IN attribute'
                 .endl() + '#define UNI uniform'

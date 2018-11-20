@@ -783,13 +783,13 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                 }
                 if (objPort.animated) port.setAnimated(objPort.animated);
                 if (objPort.anim) {
-                    if (!port.anim) port.anim = new CABLES.TL.Anim();
+                    if (!port.anim) port.anim = new CABLES.Anim();
 
                     if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
 
                     for (var ani in objPort.anim.keys) {
                         // var o={t:objPort.anim.keys[ani].t,value:objPort.anim.keys[ani].v};
-                        port.anim.keys.push(new CABLES.TL.Key(objPort.anim.keys[ani]));
+                        port.anim.keys.push(new CABLES.ANIM.Key(objPort.anim.keys[ani]));
                     }
                 }
             }

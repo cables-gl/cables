@@ -4,23 +4,28 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Base Tone"
+                "name": "Base Tone",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Scale Type"
+                "name": "Scale Type",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Append Octave"
+                "name": "Append Octave",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Octave"
+                "name": "Octave",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Include High Base Tone"
+                "name": "Include High Base Tone",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -30,5 +35,9 @@
             }
         ],
         "name": "Ops.WebAudio.Scale.ScaleArray"
-    }
+    },
+    "updated": 1542058140376,
+    "authorName": "pandur",
+    "id": "ee6e1d9c-f831-47c2-8fe6-d4c9bbcc8107",
+    "created": 1542058134821
 }

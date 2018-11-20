@@ -1,5 +1,5 @@
 {
-    "updated": 1541772362377,
+    "updated": 1542623898818,
     "authorName": "andro",
     "id": "b8a37747-1e84-4665-b1cc-29256d55cc7c",
     "created": 1541169517706,
@@ -57,11 +57,6 @@
             {
                 "type": "0",
                 "name": "b",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "a",
                 "subType": "number"
             }
         ],

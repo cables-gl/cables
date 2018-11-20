@@ -1,4 +1,3 @@
-op.name="ScaleArray";
 
 // constants
 var BASE_TONES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -99,12 +98,12 @@ function setOutput() {
             }
             // append the base tone in the next octave
             if(includeHighBaseTonePort.get()) {
-                scaleArray.push(getToneAt(scale[0], baseToneIndex) + (octave+1));    
+                scaleArray.push(getToneAt(scale[0], baseToneIndex) + (octave+1));
             }
         } else { // "C", "D", ...
             for(var j=0; j<scale.length; j++) {
                 scaleArray.push(getToneAt(scale[j], baseToneIndex));
-            }    
+            }
         }
         scaleArrayPort.set(scaleArray);
         op.log("Scale Array: ", scaleArray);

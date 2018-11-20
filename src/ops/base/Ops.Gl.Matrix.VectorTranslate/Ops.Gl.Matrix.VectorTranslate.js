@@ -1,4 +1,3 @@
-
 var exec=op.inTrigger("Exec");
 var speed=op.inValue("Speed");
 var vecX=op.inValue("Vector X");
@@ -18,7 +17,7 @@ var pos=vec3.create();
 var mat=mat4.create();
 
 var lastTime=0;
-
+var timeDiff=0;
 
 reset.onTriggered=function()
 {
@@ -29,7 +28,7 @@ var dir=false;
 function changeDir(d)
 {
     dir=!dir;
-    
+
     move();
 }
 
@@ -38,7 +37,7 @@ function isOutside()
     if(
         pos[0]>max.get() || pos[0]<-max.get()
         ||pos[1]>max.get() || pos[1]<-max.get()
-        || pos[2]>max.get() || pos[2]<-max.get()) 
+        || pos[2]>max.get() || pos[2]<-max.get())
         return true;
     return false;
 
@@ -60,13 +59,13 @@ exec.onTriggered=function()
         (vecY.get()),
         (vecZ.get())
         );
-    
+
     vec3.normalize(vec,vec);
-    
+
     vec[0]*=m;
     vec[1]*=m;
     vec[2]*=m;
-    
+
     lastTime=op.patch.freeTimer.get();
 
     move();
@@ -80,7 +79,7 @@ exec.onTriggered=function()
     //     {
     //         randomize();
     // count++;
-    //         move();    
+    //         move();
     //     }
     // }
 
@@ -89,13 +88,13 @@ exec.onTriggered=function()
     //         else if(pos[2]>max.get() || pos[2]<-max.get()) changeDir();
 
     vec3.add(pos,pos,vec);
-    
+
     cgl.pushModelMatrix();
-    
+
     mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos);
 
     next.trigger();
-    
+
     cgl.popModelMatrix();
 
 };

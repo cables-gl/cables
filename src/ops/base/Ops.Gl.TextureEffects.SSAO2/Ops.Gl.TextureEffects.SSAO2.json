@@ -11,27 +11,33 @@
             },
             {
                 "type": "0",
-                "name": "Frustum Near"
+                "name": "Frustum Near",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Frustum Far"
+                "name": "Frustum Far",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Samples"
+                "name": "Samples",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Ao Radius"
+                "name": "Ao Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Ao Clamp"
+                "name": "Ao Clamp",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Luminance Influence"
+                "name": "Luminance Influence",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -50,7 +56,7 @@
             "url": "http://devlog-martinsh.blogspot.com"
         }
     ],
-    "updated": 1516113594773,
+    "updated": 1542042553966,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "76d2dafc-aaf9-48ca-8b24-ee18492fba80",

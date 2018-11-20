@@ -5,7 +5,7 @@ var inMax=op.inValue("Max",1);
 
 var result=op.outValue("Result");
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 
 anim.createPort(op,"Easing",updateAnimEasing);
 

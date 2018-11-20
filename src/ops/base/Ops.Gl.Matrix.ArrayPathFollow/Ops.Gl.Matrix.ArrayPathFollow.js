@@ -22,14 +22,14 @@ var cgl=op.patch.cgl;
 
 var startTime=CABLES.now();
 
-var animX=new CABLES.TL.Anim();
-var animY=new CABLES.TL.Anim();
-var animZ=new CABLES.TL.Anim();
+var animX=new CABLES.Anim();
+var animY=new CABLES.Anim();
+var animZ=new CABLES.Anim();
 
-var animQX=new CABLES.TL.Anim();
-var animQY=new CABLES.TL.Anim();
-var animQZ=new CABLES.TL.Anim();
-var animQW=new CABLES.TL.Anim();
+var animQX=new CABLES.Anim();
+var animQY=new CABLES.Anim();
+var animQZ=new CABLES.Anim();
+var animQW=new CABLES.Anim();
 
 var animLength=0;
 var timeStep=0.1;
