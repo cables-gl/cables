@@ -1,7 +1,7 @@
 var idx=op.inValueInt("Index");
 var inDur=op.inValue("Duration",0.5);
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.createPort(op,"easing");
 
 var resultTime1=op.outValue("Time 1");

@@ -1,5 +1,5 @@
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 
 var update=op.inTrigger("Update");
 

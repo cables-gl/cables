@@ -33,7 +33,7 @@ CABLES.Op = function()
     this.portsOut=[];
     this.portsIn=[];
     this.portsInData=[]; // original loaded patch data 
-    this.opId='';
+    this.opId=''; // unique op id
     this.uiAttribs={};
     this.enabled=true;
     this.patch=arguments[0];
@@ -45,7 +45,7 @@ CABLES.Op = function()
         this.name=this.name.split('.')[this.name.split('.').length-1]
     }
 
-    this.id=arguments[2]||CABLES.uuid();
+    this.id=arguments[2]||CABLES.uuid(); // instance id
     this.onAddPort=null;
     this.onCreate=null;
     this.onResize=null;
@@ -481,8 +481,9 @@ CABLES.Op = function()
         var nameParts=this.objName.split('.');
         if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
 
-        op.objName=this.objName;
-        op.opId=this.opId;
+        if(this.opId) op.opId=this.opId;
+        op.objName=this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
+        
         op.id=this.id;
         op.uiAttribs=this.uiAttribs;
         op.portsIn=[];

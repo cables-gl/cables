@@ -90,10 +90,10 @@ function findBoneChilds(n,parent,foundBone)
         
                 if(anim && !n.quatAnimX && anim.rotationkeys)
                 {
-                    n.quatAnimX=new CABLES.TL.Anim();
-                    n.quatAnimY=new CABLES.TL.Anim();
-                    n.quatAnimZ=new CABLES.TL.Anim();
-                    n.quatAnimW=new CABLES.TL.Anim();
+                    n.quatAnimX=new CABLES.Anim();
+                    n.quatAnimY=new CABLES.Anim();
+                    n.quatAnimZ=new CABLES.Anim();
+                    n.quatAnimW=new CABLES.Anim();
             
                     for(var k in anim.rotationkeys)
                     {
@@ -105,9 +105,9 @@ function findBoneChilds(n,parent,foundBone)
                 }
                 if(anim && !n.posAnimX && anim.positionkeys)
                 {
-                    n.posAnimX=new CABLES.TL.Anim();
-                    n.posAnimY=new CABLES.TL.Anim();
-                    n.posAnimZ=new CABLES.TL.Anim();
+                    n.posAnimX=new CABLES.Anim();
+                    n.posAnimY=new CABLES.Anim();
+                    n.posAnimZ=new CABLES.Anim();
             
                     for(var k in anim.positionkeys)
                     {

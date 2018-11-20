@@ -9,7 +9,7 @@ const
     finished=op.outTrigger("finished"),
     finishedTrigger=op.outTrigger("Finished Trigger");
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.createPort(op,"easing");
 var startTime=CABLES.now();
 

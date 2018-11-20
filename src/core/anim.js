@@ -1,8 +1,7 @@
 
 var CABLES=CABLES || {};
-CABLES.ANIM=CABLES.ANIM || {};
-
-CABLES.TL=CABLES.ANIM;
+// CABLES.ANIM=CABLES.ANIM || {};
+// CABLES.TL=CABLES.ANIM;
 
 
 /** @constant {number} */
@@ -370,7 +369,6 @@ CABLES.ANIM.Key.easeSmootherStep=function(perc,key2)
 
 CABLES.ANIM.Key.prototype.setEasing=function(e)
 {
-    // console.log('set easing uyay');
     this._easing=e;
 
     if(this._easing==CABLES.ANIM.EASING_ABSOLUTE) this.ease=CABLES.ANIM.Key.easeAbsolute;
@@ -455,7 +453,6 @@ CABLES.ANIM.Key.prototype.set=function(obj)
 
         if(obj.hasOwnProperty('t'))this.time=obj.t;
         if(obj.hasOwnProperty('time')) this.time=obj.time;
-
         if(obj.hasOwnProperty('v')) this.value=obj.v;
             else if(obj.hasOwnProperty('value')) this.value=obj.value;
     }
@@ -616,9 +613,7 @@ CABLES.Anim.prototype.setValue=function(time,value,cb)
     }
 
     if(!found)
-    {
-        this.keys.push(new CABLES.ANIM.Key({time:time,value:value,e:this.defaultEasing,cb:cb})) ;
-    }
+        this.keys.push(new CABLES.ANIM.Key({time:time,value:value,e:this.defaultEasing,cb:cb}));
 
     if(this.onChange)this.onChange();
     this._needsSort=true;
@@ -794,7 +789,7 @@ CABLES.Anim.prototype.createPort=function(op,title,cb)
         "Elastic In Out",
         "Bounce In",
         "Bounce Out",
-        ]} ));
+        ]}));
 
     port.set('linear');
     port.defaultValue='linear';

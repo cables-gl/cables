@@ -4,7 +4,7 @@ var result=op.outValue("Result");
 var firstTime=true;
 var smoothInterval=0;
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.defaultEasing=CABLES.TL.EASING_EXPO_OUT;
 
 

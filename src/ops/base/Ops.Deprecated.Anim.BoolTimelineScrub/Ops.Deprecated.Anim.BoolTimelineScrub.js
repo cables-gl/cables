@@ -7,7 +7,7 @@ var result=op.addOutPort(new CABLES.Port(op,"result"));
 var outTime=op.addOutPort(new CABLES.Port(op,"time",CABLES.OP_PORT_TYPE_VALUE));
 var outPerc=op.addOutPort(new CABLES.Port(op,"Percentage",CABLES.OP_PORT_TYPE_VALUE));
 
-var animTime=new CABLES.TL.Anim();
+var animTime=new CABLES.Anim();
 
 var lastState=true;
 var firstState=true;

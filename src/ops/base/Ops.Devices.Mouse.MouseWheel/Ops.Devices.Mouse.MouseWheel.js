@@ -18,7 +18,7 @@ const delta=op.outValue("delta",0);
 const cgl=op.patch.cgl;
 var value=0;
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.defaultEasing=CABLES.TL.EASING_EXPO_OUT;
 
 var startTime=CABLES.now()/1000.0;
