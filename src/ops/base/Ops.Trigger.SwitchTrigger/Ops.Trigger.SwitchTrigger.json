@@ -71,5 +71,9 @@
         ],
         "name": "Ops.Trigger.SwitchTrigger"
     },
-    "summary": "Triggers one of the out ports (value index switch case)"
+    "summary": "Triggers one of the out ports (value index switch case)",
+    "youtubeid": "nCJO9yF7bnk",
+    "docs": {
+        "ports": []
+    }
 }

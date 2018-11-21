@@ -15,6 +15,8 @@ var x=op.inValue("x");
 var y=op.inValue("y");
 var z=op.inValue("z");
 
+
+
 var scrollx=op.inValue("Scroll X");
 var scrolly=op.inValue("Scroll Y");
 var scrollz=op.inValue("Scroll Z");
@@ -45,7 +47,7 @@ function updateOutput()
 
     if(output.get()=='Add Z') shader.define(moduleVert.prefix+"METH_ADD_Z");
         else shader.removeDefine(moduleVert.prefix+"METH_ADD_Z");
-    
+
 }
 
 function updateWorldspace()
@@ -63,7 +65,7 @@ op.render.onTriggered=function()
         op.trigger.trigger();
         return;
     }
-    
+
     if(CABLES.UI)
     {
         cgl.pushModelMatrix();
@@ -76,9 +78,9 @@ op.render.onTriggered=function()
             CABLES.GL_MARKER.drawSphere(op,inSize.get());
             cgl.popModelMatrix();
         }
-    
-    
-        if(gui.patch().isCurrentOp(op)) 
+
+
+        if(gui.patch().isCurrentOp(op))
             gui.setTransformGizmo(
                 {
                     posX:x,
@@ -105,7 +107,7 @@ op.render.onTriggered=function()
                 srcBodyVert:attachments.perlindeform_body_vert
 
             });
-        
+
         inSize.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'size',inSize);
         inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
         inSmooth.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'smooth',inSmooth);
@@ -118,12 +120,12 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
-        
+
         updateOutput();
         updateWorldspace();
     }
-    
-    
+
+
     if(!shader)return;
 
     op.trigger.trigger();

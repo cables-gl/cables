@@ -1,15 +1,16 @@
-const exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-const arr=op.inArray("Array");
-const seed=op.inValue("Seed");
-const numPoints=op.inValueInt("Num Points");
-const outGeom=op.outObject("Geometry");
-const pTexCoordRand=op.inValueBool("Scramble Texcoords",true);
+
+const
+    exe=op.inTrigger("exe"),
+    arr=op.inArray("Array"),
+    numPoints=op.inValueInt("Num Points"),
+    outGeom=op.outObject("Geometry"),
+    pTexCoordRand=op.inValueBool("Scramble Texcoords",true),
+    seed=op.inValue("Seed");
 
 const cgl=op.patch.cgl;
 
-
-seed.onChange=reset;
-arr.onChange=reset;
+pTexCoordRand.onChange=updateRandTexCoords;
+seed.onChange=arr.onChange=reset;
 numPoints.onChange=updateNumVerts;
 
 var hasError=false;
@@ -17,10 +18,9 @@ var hasError=false;
 exe.onTriggered=doRender;
 
 var mesh=null;
-var geom=new CGL.Geometry("pointcloudfromarray");
+const geom=new CGL.Geometry("pointcloudfromarray");
 var texCoords=[];
-
-
+var needsRebuild=true;
 
 function doRender()
 {
@@ -42,32 +42,44 @@ function doRender()
             hasError=false;
         }
     }
-    
+
+    if(needsRebuild || !mesh)rebuild();
     if(mesh) mesh.render(cgl.getShader());
-}
-
-
-function updateNumVerts()
-{
-    if(mesh) mesh.setNumVertices(numPoints.get());
 }
 
 function reset()
 {
+    needsRebuild=true;
+}
+
+function updateRandTexCoords()
+{
+    if(!pTexCoordRand.get()) seed.setUiAttribs({hidePort:true,greyout:true});
+        else seed.setUiAttribs({hidePort:false,greyout:false});
+    needsRebuild=true;
+}
+
+function updateNumVerts()
+{
+    if(mesh) mesh.setNumVertices( Math.min(geom.vertices.length/3,numPoints.get()));
+    if(numPoints.get()==0)mesh.setNumVertices(geom.vertices.length/3);
+}
+
+function rebuild()
+{
     var verts=arr.get();
     if(!verts)return;
 
+    geom.clear();
     var num=verts.length/3;
     num=Math.abs(Math.floor(num));
 
     if(!texCoords || texCoords.length!=num*2) texCoords.length=num*2;//=new Float32Array(num*2);
 
     var changed=false;
-
     var rndTc=pTexCoordRand.get();
+
     Math.randomSeed=seed.get();
-    
-    // console.log(num);
 
     for(var i=0;i<num;i++)
     {
@@ -84,38 +96,25 @@ function reset()
             {
                 texCoords[i*2]=i/num;
                 texCoords[i*2+1]=i/num;
-
             }
             changed=true;
         }
     }
-    
-    // console.log(texCoords);
-    
-    
+
     if(changed)
     {
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);
+        geom.verticesIndices=[];
 
-
-        
-        if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+        if(mesh)mesh.dispose();
+        mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
         mesh.addVertexNumbers=true;
         mesh.setGeom(geom);
         outGeom.set(geom);
     }
-    
-    // if(verts instanceof Float32Array)
-    {
-        // mesh.getAttribute(CGL.SHADERVAR_VERTEX_POSITION).numItems=numPoints.get();
-        
-        // var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,verts,3);
-        // attr.numItems=numPoints.get();
-    }
-    
+
     updateNumVerts();
-
+    needsRebuild=false;
 }
-

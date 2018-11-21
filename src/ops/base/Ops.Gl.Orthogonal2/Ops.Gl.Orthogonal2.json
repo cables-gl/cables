@@ -32,5 +32,10 @@
             }
         ],
         "name": "Ops.Gl.Orthogonal2"
+    },
+    "summary": "Orthogonal projection / objects in distance don't appear smaller (isometric)",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

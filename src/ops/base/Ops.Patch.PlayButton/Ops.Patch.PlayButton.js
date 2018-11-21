@@ -18,8 +18,10 @@ ele.style['margin-left']="-50px";
 ele.style['margin-top']="-50px";
 ele.style.position="absolute";
 ele.style.cursor="pointer";
+ele.style.opacity=0.7;
 ele.style['z-index']=999999;
-ele.style['background-color']="rgba(55,55,55,0.7)";
+ele.style['background-color']="rgba(55,55,55)";
+
 
 elePlay.style["border-style"]="solid";
 elePlay.style["border-color"]="transparent transparent transparent #ccc";
@@ -33,6 +35,8 @@ elePlay.style['pointer-events']="none";
 
 canvas.appendChild(ele);
 ele.appendChild(elePlay);
+ele.addEventListener('mouseenter', hover);
+ele.addEventListener('mouseleave', hoverOut);
 ele.addEventListener('click', clicked);
 ele.addEventListener('touchStart', clicked);
 op.onDelete=removeElements;
@@ -53,4 +57,14 @@ function removeElements()
 {
     if(elePlay) elePlay.remove();
     if(ele) ele.remove();
+}
+
+function hoverOut()
+{
+    ele.style.opacity=0.7;
+}
+
+function hover()
+{
+    ele.style.opacity=1.0;
 }

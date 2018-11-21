@@ -6,7 +6,7 @@ function compare(a, b)
 	var xd = a[0]-b[0];
 	var yd = a[1]-b[1];
 	var zd = a[2]-b[2];
-	
+
 	return(Math.sqrt(xd*xd + yd*yd + zd*zd))-1.5;
 }
 
@@ -29,7 +29,7 @@ inArr.onChange=function()
 {
     if(!inArr.get())return;
     sliceArray();
-    
+
     arrArr.sort(compare);
     outArr.set(null);
     arrArr = [].concat.apply([], arrArr);

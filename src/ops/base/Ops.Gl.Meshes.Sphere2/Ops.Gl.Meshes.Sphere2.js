@@ -111,4 +111,4 @@ inRadius.onChange = function() {
 };
 
 // set lifecycle handlers
-op.onDelete = function () { mesh.dispose(); };
+op.onDelete = function () { if(mesh)mesh.dispose(); };

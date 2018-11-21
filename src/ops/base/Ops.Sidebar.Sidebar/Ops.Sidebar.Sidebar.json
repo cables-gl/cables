@@ -39,5 +39,9 @@
         ],
         "name": "Ops.Sidebar.Sidebar"
     },
-    "summary": "sidebar overlay to control values"
+    "summary": "sidebar overlay to control values",
+    "youtubeid": "cpRVswVdvI0",
+    "docs": {
+        "ports": []
+    }
 }

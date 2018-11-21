@@ -8,23 +8,28 @@
             },
             {
                 "type": "0",
-                "name": "Num"
+                "name": "Num",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Seed"
+                "name": "Seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Distance Random"
+                "name": "Distance Random",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Distribution"
+                "name": "Distribution",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -35,7 +40,7 @@
         ],
         "name": "Ops.Gl.Meshes.RandomPointSphere"
     },
-    "updated": 1519393488993,
+    "updated": 1542751941125,
     "authorName": "pandur",
     "id": "d8ac214e-0eff-4b31-a8e4-6af4f3cdf839",
     "created": 1519122617858,

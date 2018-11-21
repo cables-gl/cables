@@ -1,19 +1,22 @@
-var render=op.inTrigger("Render");
+const
+    render=op.inTrigger("Render"),
+    inPoints=op.inArray("Points"),
+    strip=op.inValueBool("Line Strip",true),
+    numPoints=op.inValueInt("Num Points"),
+    next=op.outTrigger("Next");
 
-var inPoints=op.inArray("Points");
-var strip=op.inValueBool("Line Strip",true);
-var numPoints=op.inValue("Num Points");
+const cgl=op.patch.cgl;
+const geom=new CGL.Geometry("simplespline");
 
-var next=op.outTrigger("Next");
-
-var cgl=op.patch.cgl;
-
-var geom=new CGL.Geometry("simplespline");
 geom.vertices=[0,0,0,0,0,0,0,0,0];
 var mesh=new CGL.Mesh(cgl,geom);
 var buff=new Float32Array();
 
-render.onTriggered=function()
+inPoints.onChange=rebuild;
+
+var attr;
+
+function rebuild()
 {
     var points=inPoints.get();
 
@@ -38,14 +41,7 @@ render.onTriggered=function()
         buff=points;
     }
 
-    var shader=cgl.getShader();
-    if(!shader)return;
-
-    var oldPrim=shader.glPrimitive;
-    if(strip.get())shader.glPrimitive=cgl.gl.LINE_STRIP;
-        else shader.glPrimitive=cgl.gl.LINES;
-    var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
-
+    attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
 
     var numTc=(points.length/3)*2;
     if(mesh.getAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD).numItems!=numTc/2)
@@ -53,22 +49,25 @@ render.onTriggered=function()
         var bufTexCoord=new Float32Array(numTc);
         var attrTc=mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,bufTexCoord,2);
     }
+}
 
+render.onTriggered=function()
+{
+    if(!mesh)rebuild();
+    var shader=cgl.getShader();
+    if(!shader)return;
 
-    if(numPoints.get()<=0)attr.numItems=buff.length/3;
-        else attr.numItems=Math.min(numPoints.get(),buff.length/3);
+    var oldPrim=shader.glPrimitive;
+    if(strip.get())shader.glPrimitive=cgl.gl.LINE_STRIP;
+        else shader.glPrimitive=cgl.gl.LINES;
 
+    if(attr)
+        if(numPoints.get()<=0)attr.numItems=buff.length/3;
+            else attr.numItems=Math.min(numPoints.get(),buff.length/3);
 
-
-
-
-    mesh.render(shader);
-
-    // mesh.printDebug();
+    if(mesh) mesh.render(shader);
 
     shader.glPrimitive=oldPrim;
 
-
     next.trigger();
-
 };

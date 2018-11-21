@@ -34,5 +34,9 @@
         ],
         "name": "Ops.Gl.Matrix.ScaleXYZ"
     },
-    "summary": "enlarge or shrink objects by a scale factor for every axis"
+    "summary": "enlarge or shrink objects by a scale factor for every axis",
+    "youtubeid": "5pucC-GuDcs",
+    "docs": {
+        "ports": []
+    }
 }
