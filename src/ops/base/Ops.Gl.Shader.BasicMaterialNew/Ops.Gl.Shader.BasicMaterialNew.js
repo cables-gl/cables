@@ -151,3 +151,10 @@ const diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseR
 const diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
 const diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
 
+
+const discardTransPxl=op.inValueBool("Discard Transparent Pixels");
+discardTransPxl.onChange=function()
+{
+    if(discardTransPxl.get()) shader.define('DISCARDTRANS');
+        else shader.removeDefine('DISCARDTRANS');
+};

@@ -1,17 +1,17 @@
 {
-    "updated": 1541971240646,
+    "updated": 1542958529218,
     "authorName": "pandur",
     "id": "18a6d1f4-a7f8-4a3e-ab1d-0c2d2efe3861",
     "created": 1519293465710,
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Texture"
-            },
-            {
                 "type": "1",
                 "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
             },
             {
                 "type": "0",

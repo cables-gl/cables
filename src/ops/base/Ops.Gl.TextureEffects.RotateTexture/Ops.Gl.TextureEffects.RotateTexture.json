@@ -1,4 +1,13 @@
 {
+    "summary": "Rotates a texture",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "updated": 1542819940473,
+    "authorName": "andro",
+    "id": "207bf2af-a3fc-458d-9efb-eb108a854072",
+    "created": 1542819941105,
     "layout": {
         "portsIn": [
             {
@@ -7,23 +16,23 @@
             },
             {
                 "type": "0",
-                "name": "Radius",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Strength",
+                "name": "Rotate",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Center X",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Center Y",
-                "subType": "number"
+                "name": "Crop",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -32,14 +41,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.BulgePinch"
-    },
-    "summary": "bulge and pinch an image (deform,stretch,distort)",
-    "docs": {
-        "ports": []
-    },
-    "updated": 1540923253862,
-    "authorName": "pandur",
-    "id": "25696840-bd64-463e-9301-964a81385bfb",
-    "created": 1540923201757
+        "name": "Ops.Gl.TextureEffects.RotateTexture"
+    }
 }

@@ -8,43 +8,53 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Time"
+                "name": "Time",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Movement"
+                "name": "Movement",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Num"
+                "name": "Num",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "seed"
+                "name": "seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fill"
+                "name": "Fill",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Draw Isolines"
+                "name": "Draw Isolines",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Draw Distance"
+                "name": "Draw Distance",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Draw Center"
+                "name": "Draw Center",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -67,5 +67,10 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Noise.LayerNoise"
+    },
+    "summary": "multilayer perlin noise variation",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

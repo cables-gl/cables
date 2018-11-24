@@ -16,7 +16,6 @@ render.onTriggered=function()
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
-
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
 
