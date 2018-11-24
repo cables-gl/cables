@@ -1,5 +1,5 @@
 
-op.render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
 var geometry=op.addInPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 var seed=op.addInPort(new CABLES.Port(op,"random seed",CABLES.OP_PORT_TYPE_VALUE));
 var num=op.addInPort(new CABLES.Port(op,"num",CABLES.OP_PORT_TYPE_VALUE));

@@ -1,6 +1,6 @@
 
 var render=op.inTrigger('render');
-var next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var next=op.outTrigger("trigger")
 
 op.frequency=op.addInPort(new CABLES.Port(op,"frequency",CABLES.OP_PORT_TYPE_VALUE));
 var uniFrequency=null;

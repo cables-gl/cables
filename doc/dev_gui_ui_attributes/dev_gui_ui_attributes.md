@@ -15,7 +15,7 @@ If the value is lower than 0 then the UI will show this message
 
 ```javascript
 //create a port for value input
-const inVal  = op.inValue ("Value in");
+const inVal  = op.inValueFloat ("Value in");
 //create a port for value output
 const outVal = op.outValue("value out");
 

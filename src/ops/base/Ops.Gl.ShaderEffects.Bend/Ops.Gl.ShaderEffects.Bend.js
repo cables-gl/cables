@@ -6,7 +6,7 @@ const scale=op.inValue('Scale', 1);
 const offset=op.inValue('Offset');
 const amount=op.inValue('Amount');
 const limited=op.inValueBool('Limited', true);
-const next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const next=op.outTrigger("trigger")
 
 const srcHeadVert=attachments.bend_vert;
 const srcBodyVert=''

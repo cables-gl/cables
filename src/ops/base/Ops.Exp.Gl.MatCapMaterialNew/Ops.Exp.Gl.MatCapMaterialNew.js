@@ -1,5 +1,5 @@
 const cgl=op.patch.cgl;
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
 const textureMatcap=op.inTexture('MatCap');
 const textureDiffuse=op.inTexture('Diffuse');
 const textureNormal=op.inTexture('Normal');
@@ -22,7 +22,7 @@ const calcTangents = op.inValueBool("calc normal tangents",true);
 const projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
 const ssNormals=op.inValueBool("Screen Space Normals");
 
-const next=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const next=op.outTrigger("trigger")
 const shaderOut=op.outObject("Shader");
 
 const shader=new CGL.Shader(cgl,'MatCapMaterialNew');

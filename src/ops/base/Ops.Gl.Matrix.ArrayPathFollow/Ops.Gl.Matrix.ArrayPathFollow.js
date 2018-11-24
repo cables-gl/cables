@@ -12,7 +12,7 @@ offset.set(0.0);
 var lookAhead=op.addInPort(new CABLES.Port(op,"look ahead",CABLES.OP_PORT_TYPE_VALUE));
 lookAhead.set(3.0);
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger("trigger")
 var triggerLookat=op.addOutPort(new CABLES.Port(op,"transform lookat",CABLES.OP_PORT_TYPE_FUNCTION));
 var idx=op.addOutPort(new CABLES.Port(op,"index"));
 

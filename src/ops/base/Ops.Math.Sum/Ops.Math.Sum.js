@@ -1,6 +1,6 @@
 const
-    number1=op.inValue("number1",1),
-    number2=op.inValue("number2",1),
+    number1=op.inValueFloat("number1",1),
+    number2=op.inValueFloat("number2",1),
     result=op.outValue("result");
 
 number1.onChange=

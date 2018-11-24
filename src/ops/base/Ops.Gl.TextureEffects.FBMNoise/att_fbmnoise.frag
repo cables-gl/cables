@@ -57,7 +57,7 @@ float fbm6( vec2 p )
 
 void main()
 {
-    // vec4 col=texture2D(tex,texCoord+2.0*fbm4(texCoord+2.0*fbm6(texCoord+anim)));
+    // vec4 col=texture(tex,texCoord+2.0*fbm4(texCoord+2.0*fbm6(texCoord+anim)));
 
     vec2 tc=texCoord;
 	#ifdef DO_TILEABLE
@@ -66,7 +66,7 @@ void main()
 
 
     vec2 p=(tc-0.5)*scale;
-    
+
 
     p.y/=aspect;
     vec2 q = vec2( fbm4( p + vec2(0.3+scrollX,0.20+scrollY) ),
@@ -82,33 +82,33 @@ void main()
 
     float v= fbm4( ( p + 4.0*q +anim*0.1)*repeat);
     float v2= fbm4( (p + 4.0*q2 +anim*0.1)*repeat );
-    
+
     float v3= fbm6( (p + 4.0*q3 +anim*0.1)*repeat );
     float v4= fbm6( (p + 4.0*q2 +anim*0.1)*repeat );
 
 
     // vec4 col=vec4( vec3( fbm4(( texCoord + fbm6(texCoord*anim) ) )) ,1.0 );
     // outColor = vec4(vec3(fbm6(texCoord)),1.0);
-    
-    
-    vec4 base=texture2D(tex,texCoord);
+
+
+    vec4 base=texture(tex,texCoord);
 
     vec4 finalColor;
     float colVal=0.0;
     float numLayers=0.0;
-    
+
     if(layer1)
     {
         colVal+=v;
         numLayers++;
     }
-    
+
     if(layer2)
     {
         colVal+=v2;
         numLayers++;
     }
-    
+
     if(layer3)
     {
         colVal+=v3;
@@ -120,14 +120,14 @@ void main()
         colVal+=v4;
         numLayers++;
     }
-    
+
 
     // finalColor=vec4( vec3(v3)*1.0,1.0);
     // finalColor=vec4( vec3(v3+v2)/2.0,1.0);
     // finalColor=vec4( vec3(v+v2+v4+v3)/4.0,1.0);
-    
+
     finalColor=vec4( vec3(colVal/numLayers),1.0);
-    
+
 
     finalColor = vec4( _blend( base.rgb, finalColor.rgb ) ,1.0);
     finalColor = vec4( mix( finalColor.rgb, base.rgb ,1.0-base.a*amount),1.0);
@@ -138,6 +138,6 @@ void main()
 
     // outColor=vec4( v2,v,v4,1.0);
     // outColor=vec4( vec3(q.x+q.y),1.0);
-    
-    // outColor=texture2D(tex,vec2(v,v2));
+
+    // outColor=texture(tex,vec2(v,v2));
 }

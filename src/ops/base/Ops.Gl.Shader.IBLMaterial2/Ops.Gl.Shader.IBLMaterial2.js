@@ -2,7 +2,7 @@
 //https://learnopengl.com/PBR/IBL/Diffuse-irradiance
 // https://www.marmoset.co/posts/physically-based-rendering-and-you-can-too/
 
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
 const inLightmap=op.inObject("Lightmap");
 const inReflectionCubemap=op.inObject("Reflection Cubemap");
 const inRoughMul=op.inValueSlider("Roughness",0);

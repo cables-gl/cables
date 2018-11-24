@@ -14,7 +14,7 @@ Value ports can hold a single float like -1 or 2.45
 "use strict";
 
 //Create a input port of the type value
-const inVal   = op.inValue("Value in");
+const inVal   = op.inValueFloat("Value in");
 //Create a output port of the type value
 const outResult  = op.outValue("Value out");
 

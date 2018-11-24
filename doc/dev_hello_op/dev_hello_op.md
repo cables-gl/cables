@@ -12,12 +12,12 @@ A naming example below:
 Now add the following code:    
 
 ```javascript
-var myInPort = op.inValue("Input");
+const myInPort = op.inValueFloat("Input");
 ```
 We have now created a new variable of the type value. Lets break this line of code down:
 - **var** creates a new variable
 - **myInPort** is the name of the variable, you could write anything here
-- **op** references to the operator itself **.inValue("Input")** creates an input port of the type value
+- **op** references to the operator itself **.inValueFloat("Input")** creates an input port of the type value
 
 Don't worry if your not following this all right now, it will all make much more sense later on :)
 
@@ -54,8 +54,8 @@ myInPort.onChange = function()
 Your op-code should look like this now:  
 
 ```javascript
-var myInPort = op.inValue("Input");
-var myOutPort = op.outValue("Output");
+const myInPort = op.inValueFloat("Input");
+const myOutPort = op.outValue("Output");
 
 myInPort.onChange = function() 
 {
@@ -91,7 +91,7 @@ To change the multiplication amount we have to go into the code editor which is 
 We'll create a second input port and use this to define the multiplication amount.
 Add the following line of code below the first **myInputPort**
 ```javascript
-var multiplyValueIn = op.inValue("Multiply amount");
+const multiplyValueIn = op.inValueFloat("Multiply amount");
 ```
 
 This creates a second port and a new part on the object pane which allows us to set the multiplication amount.
@@ -102,9 +102,9 @@ Your op should now look like this
 
 Your code should look like this
 ```javascript
-var myInPort = op.inValue("Input");
-var multiplyValueIn = op.inValue("Multiply amount");
-var myOutPort = op.outValue("Output");
+const myInPort = op.inValueFloat("Input");
+const multiplyValueIn = op.inValueFloat("Multiply amount");
+const myOutPort = op.outValue("Output");
 ```
 
 
@@ -114,13 +114,13 @@ If we'd follow this way of doing things we'd have to make two functions for each
 ```javascript
 myInPort.onChange = function()
 {
-    var inputValue = myInPort.get() * multiplyValueIn.get() ;
+    const inputValue = myInPort.get() * multiplyValueIn.get() ;
     myOutPort.set(inputValue);
 }
 
 multiplyValueIn.onChange = function()
 {
-    var inputValue = myInPort.get() * multiplyValueIn.get();
+    const inputValue = myInPort.get() * multiplyValueIn.get();
     myOutPort.set(inputValue);
 }
 

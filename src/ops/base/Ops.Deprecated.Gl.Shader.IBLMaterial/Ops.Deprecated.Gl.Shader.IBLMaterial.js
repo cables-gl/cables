@@ -2,7 +2,7 @@
 //https://learnopengl.com/PBR/IBL/Diffuse-irradiance
 // https://www.marmoset.co/posts/physically-based-rendering-and-you-can-too/
 
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
 const inCubemap=op.inObject("Cubemap");
 const inReflectionCubemap=op.inObject("Reflection Cubemap");
 const inFlipY=op.inValueBool("Flip Y");
@@ -16,7 +16,7 @@ const inDiffuse=op.inTexture("Diffuse");
 const inAo=op.inTexture("AO");
 const inRotation=op.inValueSlider("SampleRotation",0);
 
-const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.outTrigger("trigger")
 const outShader=op.outObject("Shader");
 
 var cgl=op.patch.cgl;
