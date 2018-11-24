@@ -1,0 +1,81 @@
+{
+    "updated": 1541692839514,
+    "authorName": "andro",
+    "id": "a55eea17-efb8-4418-bcf9-7fefeecf40e5",
+    "created": 1541692839518,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frequency",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Block size small x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Block size small y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Block size large x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Block size large y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.GlitchNoise"
+    },
+    "summary": "Creates a black and white glitched texture to use for displacement",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}
