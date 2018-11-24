@@ -45,10 +45,10 @@ inReflectionCubemap.onChange=updateTexturesDefines;
 var shader=new CGL.Shader(cgl,"ibl material 2");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
-if(cgl.glVersion==1 && !cgl.gl.getExtension('EXT_shader_texture_lod')) 
+if(cgl.glVersion==1 && !cgl.gl.getExtension('EXT_shader_texture_lod'))
     throw "no EXT_shader_texture_lod texture extension";
 
-if(cgl.glVersion==1) shader.enableExtension('GL_EXT_shader_texture_lod');    
+if(cgl.glVersion==1) shader.enableExtension('GL_EXT_shader_texture_lod');
 
 shader.setSource(attachments.ibl_vert,attachments.ibl_frag);
 shader.bindTextures=bindTextures;
@@ -77,10 +77,11 @@ outShader.set(shader);
 
 render.onTriggered=doRender;
 
+var hasError=false;
 
 function checkMipmap()
 {
-    var hasError=false;
+    hasError=false;
 
     if(inReflectionCubemap.get() && inReflectionCubemap.get().filter!=CGL.Texture.FILTER_MIPMAP )
     {
@@ -104,7 +105,7 @@ function bindTextures()
     }
     else cgl.setTexture(0,CGL.Texture.getTempGradientTexture(cgl).tex);
 
-    
+
     if(inReflection.get()) cgl.setTexture(2,inReflection.get().tex);
 
     if(inNormal.get()) cgl.setTexture(3,inNormal.get().tex);
@@ -123,7 +124,7 @@ function bindTextures()
     else cgl.setTexture(1, CGL.Texture.getTempTexture(cgl).tex);
 
     if(inRough.get()) cgl.setTexture(7,inRough.get().tex);
-    
+
     // console.log(cgl._textureslots);
 }
 
@@ -145,7 +146,7 @@ function updateTexturesDefines()
 
     shader.define("TEX_FORMAT_EQUIRECT");
     shader.removeDefine("TEX_FORMAT_CUBEMAP");
-    
+
     if(inLightmap.get() && inLightmap.get().cubemap)
     {
         shader.define("TEX_FORMAT_CUBEMAP");
@@ -170,7 +171,7 @@ function updateTexturesDefines()
 
     if(inAo.get()) shader.define("TEX_AO");
         else shader.removeDefine("TEX_AO");
-        
+
     if(inOpacityTex.get()) shader.define("TEX_OPACITY");
         else shader.removeDefine("TEX_OPACITY");
 

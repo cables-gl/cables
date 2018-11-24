@@ -7,22 +7,22 @@
             },
             {
                 "type": "0",
-                "name": "radius",
+                "name": "Radius",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "strength",
+                "name": "Strength",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "center x",
+                "name": "Center X",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "center y",
+                "name": "Center Y",
                 "subType": "number"
             }
         ],

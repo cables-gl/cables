@@ -1,1 +1,0 @@
-`Result` will be the smaller number – either `Value` or `Minimum`
