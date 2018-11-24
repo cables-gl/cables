@@ -2,12 +2,12 @@ const
     render=op.inTrigger("Render"),
     textureOut=op.outTexture("texture"),
     str=op.inString("Text","cables"),
-    scale=op.inValue("Scale",1),
+    scale=op.inValueFloat("Scale",1),
     inFont=op.inString("Font","Arial"),
     align=op.inValueSelect("align",['left','center','right'],'center'),
     valign=op.inValueSelect("vertical align",['Top','Middle','Bottom'],'Middle'),
-    lineHeight=op.inValue("Line Height",1),
-    letterSpace=op.inValue("Letter Spacing"),
+    lineHeight=op.inValueFloat("Line Height",1),
+    letterSpace=op.inValueFloat("Letter Spacing"),
     next=op.outTrigger("Next"),
     loaded=op.outValue("Font Available",0);
 
@@ -66,8 +66,8 @@ var valignMode=0;
 valign.onChange=function()
 {
     if(valign.get()=='Middle')valignMode=0;
-    if(valign.get()=='Top')valignMode=1;
-    if(valign.get()=='Bottom')valignMode=2;
+    else if(valign.get()=='Top')valignMode=1;
+    else if(valign.get()=='Bottom')valignMode=2;
 };
 
 function getFont()
@@ -125,14 +125,12 @@ a.uniform=new CGL.Uniform(shader,'f','a',a);
 a.set(1.0);
 
 var height=0;
-
 var vec=vec3.create();
 var lastTextureChange=-1;
 var disabled=false;
 
 render.onTriggered=function()
 {
-
     var font=getFont();
     if(font.lastChange!=lastTextureChange)
     {
@@ -147,12 +145,11 @@ render.onTriggered=function()
     {
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
         cgl.setShader(shader);
-
         cgl.setTexture(0,textureOut.get().tex);
 
         if(valignMode==2) vec3.set(vec, 0,height,0);
-        if(valignMode==1) vec3.set(vec, 0,0,0);
-        if(valignMode==0) vec3.set(vec, 0,height/2,0);
+        else if(valignMode==1) vec3.set(vec, 0,0,0);
+        else if(valignMode==0) vec3.set(vec, 0,height/2,0);
         vec[1]-=lineHeight.get();
         cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
@@ -242,9 +239,8 @@ function generateMesh()
 
         for(var i=0;i<numChars;i++)
         {
-            var chStr=txt.substring(i,i+1);
-            var char=font.chars[String(chStr)];
-
+            const chStr=txt.substring(i,i+1);
+            const char=font.chars[String(chStr)];
 
             if(!char)
             {

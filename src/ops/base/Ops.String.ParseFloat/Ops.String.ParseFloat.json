@@ -1,6 +1,22 @@
 {
-    "updated": 1541835372872,
+    "updated": 1543065656377,
     "authorName": "pandur",
     "id": "fa36a56b-a64d-4269-9a9e-addc16493006",
-    "created": 1541835372873
+    "created": 1541835372873,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.String.ParseFloat"
+    }
 }

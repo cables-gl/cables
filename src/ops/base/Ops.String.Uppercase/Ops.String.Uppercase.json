@@ -1,22 +1,3 @@
 {
-    "layout": {
-        "portsIn": [
-            {
-                "type": "0",
-                "name": "String"
-            }
-        ],
-        "portsOut": [
-            {
-                "type": "0",
-                "name": "Result"
-            }
-        ],
-        "name": "Ops.String.Uppercase"
-    },
-    "summary": "convert all characters to capital letters",
-    "updated": 1518873484621,
-    "authorName": "pandur",
-    "id": "1279b309-b4ca-4107-a55b-5a4eff178d65",
-    "created": 1518873484175
+    "id": "f344c48e-1647-4508-9eb7-3a1c6ad6cb81"
 }

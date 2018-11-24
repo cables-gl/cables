@@ -12,7 +12,6 @@ function update()
     var str=val.get()+'';
     for(var i=str.length;i<num.get();i++)
     {
-        // if(i==str.length && !isNaN(parseFloat(val.get())) && str.indexOf('.')==-1) str+='.';
         str+=char.get();
     }
     out.set(str);

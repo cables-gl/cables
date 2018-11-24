@@ -12,7 +12,7 @@ var ratio=op.outValue("Aspect Ratio");
 
 unpackAlpha.hidePort();
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
 
