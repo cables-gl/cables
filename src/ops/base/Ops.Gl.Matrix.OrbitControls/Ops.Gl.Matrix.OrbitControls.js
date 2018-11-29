@@ -117,16 +117,16 @@ render.onTriggered=function()
 
     px=ip(px,percX);
     py=ip(py,percY);
-    
-    var degY=(py+0.5)*180;
-    
 
-    if(minRotY.get()!==0 && degY<minRotY.get()) 
+    var degY=(py+0.5)*180;
+
+
+    if(minRotY.get()!==0 && degY<minRotY.get())
     {
         degY=minRotY.get();
         py=lastPy;
     }
-    else if(maxRotY.get()!==0 && degY>maxRotY.get()) 
+    else if(maxRotY.get()!==0 && degY>maxRotY.get())
     {
         degY=maxRotY.get();
         py=lastPy;
@@ -139,21 +139,21 @@ render.onTriggered=function()
     outYDeg.set( degY );
     // outXDeg.set( (px)*180 );
     outXDeg.set( (px)*CGL.RAD2DEG );
-    
+
 
     circlePosi(eye, py );
-    
+
     vec3.add(tempEye, eye, vOffset);
     vec3.add(tempCenter, vCenter, vOffset);
 
     finalEye[0]=ip(finalEye[0],tempEye[0]);
     finalEye[1]=ip(finalEye[1],tempEye[1]);
     finalEye[2]=ip(finalEye[2],tempEye[2]);
-    
+
     finalCenter[0]=ip(finalCenter[0],tempCenter[0]);
     finalCenter[1]=ip(finalCenter[1],tempCenter[1]);
     finalCenter[2]=ip(finalCenter[2],tempCenter[2]);
-    
+
     mat4.lookAt(viewMatrix, finalEye, finalCenter, vUp);
     mat4.rotate(viewMatrix, viewMatrix, px, vUp);
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,viewMatrix);
@@ -168,9 +168,9 @@ function circlePosi(vec,perc)
     const mmul=mul.get();
     if(radius<minDist.get()*mmul)radius=minDist.get()*mmul;
     if(radius>maxDist.get()*mmul)radius=maxDist.get()*mmul;
-    
+
     outRadius.set(radius*mmul);
-    
+
     var i=0,degInRad=0;
     // var vec=vec3.create();
     degInRad = 360*perc/2*CGL.DEG2RAD;
@@ -187,9 +187,9 @@ function circlePos(perc)
     const mmul=mul.get();
     if(radius<minDist.get()*mmul)radius=minDist.get()*mmul;
     if(radius>maxDist.get()*mmul)radius=maxDist.get()*mmul;
-    
+
     outRadius.set(radius*mmul);
-    
+
     var i=0,degInRad=0;
     var vec=vec3.create();
     degInRad = 360*perc/2*CGL.DEG2RAD;
@@ -206,7 +206,7 @@ function onmousemove(event)
 
     var x = event.clientX;
     var y = event.clientY;
-    
+
     var movementX=(x-lastMouseX)*speedX.get();
     var movementY=(y-lastMouseY)*speedY.get();
 
@@ -233,7 +233,7 @@ function onmousemove(event)
         {
             percX+=movementX*0.003;
             percY+=movementY*0.002;
-            
+
             if(restricted.get())
             {
                 if(percY>0.5)percY=0.5;
@@ -251,7 +251,7 @@ function onMouseDown(event)
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
     mouseDown=true;
-    
+
     if(doLockPointer)
     {
         var el=op.patch.cgl.canvas;
@@ -270,7 +270,7 @@ function onMouseUp()
 {
     mouseDown=false;
     // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
-            
+
     if(doLockPointer)
     {
         document.removeEventListener('pointerlockchange', lockChange, false);
@@ -377,7 +377,7 @@ function bind()
 function unbind()
 {
     if(!element)return;
-    
+
     element.removeEventListener('mousemove', onmousemove);
     element.removeEventListener('mousedown', onMouseDown);
     element.removeEventListener('mouseup', onMouseUp);

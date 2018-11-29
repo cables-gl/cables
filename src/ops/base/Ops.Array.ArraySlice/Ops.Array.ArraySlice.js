@@ -9,7 +9,7 @@ function setOutarray() {
     var inArr = inArrayPort.get();
     var begin = beginPort.get();
     var end = endPort.get();
-    
+
     // console.log('out arr',inArr);
     if(!Array.isArray(inArr)) {
         outArrayPort.set(null);

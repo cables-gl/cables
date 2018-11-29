@@ -9,13 +9,13 @@ IN mat3 newNormalMatrix;
 #ifdef TEX_FORMAT_CUBEMAP
     UNI samplerCube irradiance;
     UNI samplerCube mapReflection;
-    #define SAMPLETEX textureLod 
+    #define SAMPLETEX textureLod
 #endif
 #ifndef TEX_FORMAT_CUBEMAP
     #define TEX_FORMAT_EQUIRECT
     UNI sampler2D irradiance;
     UNI sampler2D mapReflection;
-    #define SAMPLETEX sampleEquirect 
+    #define SAMPLETEX sampleEquirect
 #endif
 
 #ifdef TEX_ROUGHNESS
@@ -56,7 +56,7 @@ UNI float mulRoughness;
 #endif
 
 #ifdef TEX_FORMAT_EQUIRECT
-    
+
     vec4 sampleEquirect(sampler2D tex,vec3 coord,float lod)
     {
         vec2 uv = vec2(atan(coord.z, coord.x), asin(coord.y+1e-6));
@@ -79,9 +79,10 @@ void main()
     vec4 col = vec4(1.0,1.0,1.0,1.0);
     float amountRough=mulRoughness;
     float amountReflect=mulReflection;
-    
+
     #ifdef TEX_ROUGHNESS
         amountRough=1.0-texture2D(maskRoughness,texCoord).r;
+        //amountRough*=mulRoughness;
     #endif
 
     #ifdef TEX_REFLECTION
@@ -101,7 +102,7 @@ void main()
         theNormal=normalize(mix(vec3(0,0,1),theNormal,normalIntensity));
         vec3 N=newNormalMatrix * theNormal;
     #endif
-    
+
     N=normalize(N);
 
     vec3 RN=N;
