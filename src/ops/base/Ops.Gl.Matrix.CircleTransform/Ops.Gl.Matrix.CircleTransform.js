@@ -1,10 +1,10 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var segments=op.addInPort(new Port(op,"segments"));
-var radius=op.addInPort(new Port(op,"radius"));
-var percent=op.addInPort(new Port(op,"percent",OP_PORT_TYPE_VALUE,{display:'range'}));
+var render=op.inTrigger('render');
+var segments=op.addInPort(new CABLES.Port(op,"segments"));
+var radius=op.addInPort(new CABLES.Port(op,"radius"));
+var percent=op.addInPort(new CABLES.Port(op,"percent",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 var inRotate=op.inValueBool("Rotate");
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var index=op.addOutPort(new Port(op,"index"));
+var trigger=op.outTrigger('trigger');
+var index=op.addOutPort(new CABLES.Port(op,"index"));
 
 var cgl=op.patch.cgl;
 
@@ -28,8 +28,8 @@ function doRender()
     {
         cgl.pushModelMatrix();
 
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos[i] );
-        if(doRot)mat4.rotateZ(cgl.mvMatrix,cgl.mvMatrix, i/pos.length*CGL.DEG2RAD*-360);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, pos[i] );
+        if(doRot)mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, i/pos.length*CGL.DEG2RAD*-360);
 
         index.set(i);
         trigger.trigger();

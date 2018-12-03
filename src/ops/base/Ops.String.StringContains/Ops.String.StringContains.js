@@ -1,5 +1,3 @@
-op.name="StringContains";
-
 var inStr=op.inValueString("String");
 var inValue=op.inValueString("SearchValue");
 

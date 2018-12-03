@@ -6,17 +6,20 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.PerlinNoise"
@@ -29,6 +32,9 @@
             "url": "https://github.com/josephg/noisejs/blob/master/perlin.js",
             "license": "Public Domain"
         }
-    ]
-
+    ],
+    "updated": 1542700181064,
+    "authorName": "pandur",
+    "id": "4e69926a-b0e4-4eaf-988b-00c044976d04",
+    "created": 1542700181620
 }

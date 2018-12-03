@@ -1,0 +1,64 @@
+{
+    "updated": 1538336912847,
+    "authorName": "pandur",
+    "id": "198d884c-a647-40d5-89ce-96a5cc7e1847",
+    "created": 1538261736305,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Data"
+            },
+            {
+                "type": "0",
+                "name": "Note",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Beat Start",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Beat End",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Count",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Progress",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Time since last",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "1",
+                "name": "Reseted"
+            }
+        ],
+        "name": "Ops.Audio.MidiJsonNote"
+    },
+    "summary": "filter midiJson for notes",
+    "docs": {
+        "ports": []
+    }
+}

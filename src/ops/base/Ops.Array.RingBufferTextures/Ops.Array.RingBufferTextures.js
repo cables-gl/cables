@@ -4,7 +4,7 @@ var inNum=op.inValueInt("Num",8);
 
 var outArr=op.outArray("Result");
 
-var inExec=op.inFunction("Write");
+var inExec=op.inTrigger("Write");
 var inSort=op.inValueBool("Order");
 var inClear=op.inValueBool("Clear",true);
 
@@ -28,7 +28,7 @@ var bgFrag=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');
 bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);

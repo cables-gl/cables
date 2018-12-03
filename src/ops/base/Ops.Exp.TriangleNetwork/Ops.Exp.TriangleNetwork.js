@@ -1,4 +1,3 @@
-op.name="TriangleNetwork";
 
 // in ports
 var pointsPort = op.inArray("Points");

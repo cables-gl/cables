@@ -1,24 +1,24 @@
 var cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
-op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE));
+var texture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 
-var extrude=op.inValue("extrude",0.5);//addInPort(new Port(this,"extrude",OP_PORT_TYPE_VALUE));
+var extrude=op.inValue("extrude",0.5);//addInPort(new CABLES.Port(this,"extrude",CABLES.OP_PORT_TYPE_VALUE));
 
 var flip=op.inValueBool("flip",true);
 
-var removeZero=op.addInPort(new Port(this,"Ignore Zero Values",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var removeZero=op.addInPort(new CABLES.Port(this,"Ignore Zero Values",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var invert=op.addInPort(new Port(this,"invert",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var invert=op.addInPort(new CABLES.Port(this,"invert",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 invert.set(false);
-var offsetX=op.addInPort(new Port(this,"offset X",OP_PORT_TYPE_VALUE));
-var offsetY=op.addInPort(new Port(this,"offset Y",OP_PORT_TYPE_VALUE));
+var offsetX=op.addInPort(new CABLES.Port(this,"offset X",CABLES.OP_PORT_TYPE_VALUE));
+var offsetY=op.addInPort(new CABLES.Port(this,"offset Y",CABLES.OP_PORT_TYPE_VALUE));
 
-var colorize=op.addInPort(new Port(this,"colorize",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var colorizeAdd=op.addInPort(new Port(this,"colorize add",OP_PORT_TYPE_VALUE,{display:'range'}));
+var colorize=op.addInPort(new CABLES.Port(this,"colorize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var colorizeAdd=op.addInPort(new CABLES.Port(this,"colorize add",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 colorize.set(false);
 
 function updateColorize()
@@ -35,14 +35,14 @@ function updateInvert()
             else shader.removeDefine(id+'HEIGHTMAP_INVERT');
 }
 
-colorize.onValueChanged=updateColorize;
-invert.onValueChanged=updateInvert;
+colorize.onChange=updateColorize;
+invert.onChange=updateInvert;
 
-var meth=op.addInPort(new Port(this,"mode",OP_PORT_TYPE_VALUE,{display:'dropdown',
+var meth=op.addInPort(new CABLES.Port(this,"mode",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',
     values:['normal','mul xyz','add z','add y','mul y','sub z']}));
 
 
-removeZero.onValueChanged=updateRemoveZero;
+removeZero.onChange=updateRemoveZero;
 
 function updateRemoveZero()
 {
@@ -73,8 +73,8 @@ var updateMethod=function()
     }
 };
 
-flip.onValueChanged=updateMethod;
-meth.onValueChanged=updateMethod;
+flip.onChange=updateMethod;
+meth.onChange=updateMethod;
 meth.set('normal');
 
 var shader=null;
@@ -233,7 +233,7 @@ op.render.onTriggered=function()
         uniTexture.setValue(texSlot);
         uniTextureFrag.setValue(texSlot);
 
-        /* --- */cgl.setTexture(0+texSlot,texture.get().tex);
+        cgl.setTexture(0+texSlot,texture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
     }
 

@@ -1,5 +1,3 @@
-op.name="UIMode";
-
 var isUi=false;
 if(CABLES.UI)isUi=true;
 

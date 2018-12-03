@@ -4,30 +4,35 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "x1"
+                "name": "x1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y1"
+                "name": "y1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "x2"
+                "name": "x2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y2"
+                "name": "y2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "distance"
+                "name": "distance",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Distance2d"
     },
-    "updated": 1511163204544,
+    "updated": 1541805744324,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d181cc7c-adbb-467b-842b-e6a854c58bfc",

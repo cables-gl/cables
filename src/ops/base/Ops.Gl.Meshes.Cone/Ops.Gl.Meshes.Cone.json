@@ -8,19 +8,23 @@
             },
             {
                 "type": "0",
-                "name": "slices"
+                "name": "slices",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "stacks"
+                "name": "stacks",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "radius"
+                "name": "radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -37,5 +41,9 @@
     },
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1540976733496,
+    "authorName": "pandur",
+    "id": "b67027f5-8f56-4aa0-8bb3-18d42ff15ffe",
+    "created": 1537800182423
 }

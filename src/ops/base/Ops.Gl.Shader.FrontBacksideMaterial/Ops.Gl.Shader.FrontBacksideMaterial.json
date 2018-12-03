@@ -1,5 +1,5 @@
 {
-    "updated": 1513338186945,
+    "updated": 1540977326066,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "beb92b81-8fe8-4871-b790-efb71bfeefc4",
@@ -19,5 +19,9 @@
         ],
         "name": "Ops.Gl.Shader.FrontBacksideMaterial"
     },
-    "summary": "see which faces are facing the camera"
+    "summary": "see which faces are facing the camera",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
 }

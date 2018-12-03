@@ -1,5 +1,3 @@
-op.name="CrossFade";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // TODO: Should this have two internal gain nodes, so users 

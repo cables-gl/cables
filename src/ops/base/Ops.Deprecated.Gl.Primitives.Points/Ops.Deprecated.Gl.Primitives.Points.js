@@ -1,9 +1,9 @@
 op.name='Points';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var pointSize=op.addInPort(new Port(op,"pointSize"));
+var render=op.inTrigger('render');
+var pointSize=op.addInPort(new CABLES.Port(op,"pointSize"));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 pointSize.set(2);
 
@@ -13,7 +13,7 @@ var uniPointSize=null;
 
 var cgl=op.patch.cgl;
 
-pointSize.onValueChanged=setPointSize;
+pointSize.onChange=setPointSize;
 
 function setPointSize()
 {

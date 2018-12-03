@@ -1,10 +1,8 @@
-this.name="MultiIn";
 
-var op = this;
 
 if(!window.audioContext){ audioContext = new AudioContext(); }
 
-var audioOut=this.addOutPort(new Port(this,"audio out",OP_PORT_TYPE_OBJECT));
+var audioOut=this.addOutPort(new CABLES.Port(this,"audio out",CABLES.OP_PORT_TYPE_OBJECT));
 
 var gain = audioContext.createGain();
 audioOut.set(gain);
@@ -33,8 +31,8 @@ var createValueChangedFunction = function( port ) {
 };
 
 for(var i=0; i<N_PORTS; i++) {
-    var audioIn = this.addInPort(new Port(this, "audio in " + i, OP_PORT_TYPE_OBJECT));
+    var audioIn = this.addInPort(new CABLES.Port(this, "audio in " + i,CABLES.OP_PORT_TYPE_OBJECT));
     audioIn.audioInPortNr = i;
-    audioIn.onValueChanged = createValueChangedFunction(i);
+    audioIn.onChange=createValueChangedFunction(i);
     audioIns.push( audioIn );
 }

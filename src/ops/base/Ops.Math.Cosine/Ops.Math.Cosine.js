@@ -11,7 +11,7 @@ var result = op.outValue('Result');
 
 var calculate = Math.cos;
 
-value.onValueChanged = function()
+value.onChange=function()
 {
     result.set(
         amplitude.get() * calculate( ( value.get()*mul.get() ) + phase.get() )

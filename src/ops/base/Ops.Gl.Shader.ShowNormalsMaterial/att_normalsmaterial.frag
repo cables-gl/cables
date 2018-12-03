@@ -9,5 +9,5 @@ void main()
     
     // col.rgb=tangent;
     
-    gl_FragColor = col;
+    outColor= col;
 }

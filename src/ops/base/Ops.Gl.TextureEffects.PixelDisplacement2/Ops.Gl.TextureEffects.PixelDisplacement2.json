@@ -31,5 +31,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.PixelDisplacement2"
+    },
+    "summary": "displace pixel by red/blue color value of pixel",
+    "docs": {
+        "ports": []
     }
 }

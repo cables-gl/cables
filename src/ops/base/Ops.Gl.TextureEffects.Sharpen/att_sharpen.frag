@@ -1,10 +1,9 @@
 
-precision highp float;
 IN vec2 texCoord;
-uniform sampler2D tex;
-uniform float amount;
+UNI sampler2D tex;
+UNI float amount;
 
-uniform float pX,pY;
+UNI float pX,pY;
 
 const vec4 lumcoeff = vec4(0.299,0.587,0.114, 0.);
 
@@ -35,6 +34,6 @@ void main()
     
     vec4 final = col + col * amount * (8.0*desaturate(col) - colorL - colorR - colorA - colorB - colorLA - colorRA - colorLB - colorRB);
 
-    gl_FragColor = final;
+    outColor= final;
 
 }

@@ -1,0 +1,29 @@
+{
+    "updated": 1537786564165,
+    "authorName": "pandur",
+    "id": "33befabf-7eef-45f6-869f-30e0e4f44739",
+    "created": 1537780664530,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Element"
+            },
+            {
+                "type": "0",
+                "name": "method",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Html.CSSFilter"
+    },
+    "summary": "set css filter to html element (blur/opacity/contrast)",
+    "docs": {
+        "ports": []
+    }
+}

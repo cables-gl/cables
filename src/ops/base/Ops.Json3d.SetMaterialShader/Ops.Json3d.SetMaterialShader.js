@@ -1,6 +1,6 @@
-const exe=op.inFunction("exe");
+const exe=op.inTrigger("exe");
 const key=op.inValueString("Key");
-const next=op.outFunction("trigger");
+const next=op.outTrigger("trigger");
 
 var cgl=op.patch.cgl;
 var mat=null;

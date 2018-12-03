@@ -1,0 +1,33 @@
+{
+    "id": "24a9062d-380c-4690-8fe7-6703787fa94c",
+    "updated": 1542700445366,
+    "authorName": "pandur",
+    "created": 1542700406454,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.math.Min2"
+    },
+    "summary": "Result will be the smaller number of the inputs",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

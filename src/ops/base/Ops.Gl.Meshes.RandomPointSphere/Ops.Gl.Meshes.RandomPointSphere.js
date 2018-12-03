@@ -1,6 +1,6 @@
 
-var exe=op.inFunction("Render");
-var num=op.inValue("Num",1000);
+var exe=op.inTrigger("Render");
+var num=op.inValueInt("Num",1000);
 var size=op.inValue("Size",1);
 var seed=op.inValue("Seed",0);
 var distRand=op.inValueSlider("Distance Random",0);
@@ -36,17 +36,17 @@ function reset()
     verts.length=Math.round(num.get())*3;
     texCoords.length=Math.round(num.get())*2;
     vertColors.length=Math.round(num.get())*3;
-    
+
     Math.randomSeed=seed.get();
 
     var sizeMul=size.get();
     var rndq = quat.create();
     var tempv = vec3.create();
-    
+
     var dist=0;
     if(distrib.get()=="Poles")dist=1;
     if(distrib.get()=="Half")dist=2;
-    
+
     var dRand=distRand.get();
 
     for(var i=0;i<num.get();i++)
@@ -80,7 +80,7 @@ function reset()
 
         tempv[1]=0;
         tempv[2]=0;
-        
+
         if(dRand!==0) tempv[0]-=Math.random()*dRand;
 
         vec3.transformQuat(tempv, tempv, rndq) ;
@@ -91,7 +91,7 @@ function reset()
         texCoords[i*2]=Math.seededRandom();
         texCoords[i*2+1]=Math.seededRandom();
     }
-    
+
     geom.setPointVertices(verts);
     geom.vertColors=vertColors;
     geom.texCoords=texCoords;

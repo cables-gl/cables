@@ -1,8 +1,8 @@
 
 
-var exec=op.inFunctionButton("Exec");
-var reset=op.inFunctionButton("reset");
-var download=op.inFunctionButton("download");
+var exec=op.inTriggerButton("Exec");
+var reset=op.inTriggerButton("reset");
+var download=op.inTriggerButton("download");
 
 
 var inObj=op.inObject("Object");

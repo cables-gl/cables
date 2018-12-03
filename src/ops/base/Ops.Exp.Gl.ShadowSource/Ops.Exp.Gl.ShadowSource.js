@@ -1,7 +1,6 @@
-op.name="ShadowSource";
 op.requirements=[CABLES.Requirements.WEBGL2];
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var strength=op.inValueSlider("Strength",0.5);
 
 
@@ -17,7 +16,7 @@ var zfar=op.inValueInt("Z Far",300);
 var lookat=op.inArray("Look at");
 
 var showMapArea=op.inValueBool("Show Map Area",false);
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 var lightMVP=mat4.create();

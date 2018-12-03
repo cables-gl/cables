@@ -1,0 +1,27 @@
+{
+    "updated": 1537358259920,
+    "authorName": "andro",
+    "id": "362a1c2f-c4e8-41eb-944b-d16c73a8d27b",
+    "created": 1537174432415,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value in",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Value out",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Templates.PortsValueExample"
+    },
+    "summary": "Is a template for creating Value ports",
+    "docs": {
+        "ports": []
+    }
+}

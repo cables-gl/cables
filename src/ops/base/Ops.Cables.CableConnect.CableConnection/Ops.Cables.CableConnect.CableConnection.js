@@ -1,12 +1,7 @@
-op.name="cableConnection";
-
-
-
 var inUrl=op.inValueString("URL","http://192.168.4.92:5712");
 var channel=op.inValueString("Channel",CABLES.generateUUID());
 var connection=op.outObject("Connection");
 var connected=op.outValue("Connected",false);
-
 
 var socket=null;
 

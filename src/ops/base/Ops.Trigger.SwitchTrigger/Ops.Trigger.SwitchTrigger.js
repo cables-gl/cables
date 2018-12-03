@@ -2,17 +2,17 @@
 var NUM_PORTS = 10;
 
 // inputs
-var exePort = op.inFunctionButton('Execute');
+var exePort = op.inTriggerButton('Execute');
 var switchPort = op.inValue('Switch Value');
 
 // outputs
-var nextTriggerPort = op.outFunction('Next Trigger');
+var nextTriggerPort = op.outTrigger('Next Trigger');
 var valueOutPort = op.outValue('Switched Value');
 var triggerPorts = [];
 for(var j=0; j<NUM_PORTS; j++) {
-    triggerPorts[j] = op.outFunction('Trigger ' + j);
+    triggerPorts[j] = op.outTrigger('Trigger ' + j);
 }
-var defaultTriggerPort = op.outFunction('Default Trigger');
+var defaultTriggerPort = op.outTrigger('Default Trigger');
 
 // functions
 

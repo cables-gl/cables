@@ -30,8 +30,6 @@ const outTrigger = op.outTrigger("Out trigger geometry");
 const lineTrigger = op.outTrigger("Line/point trigger");
 //const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
-const outIterationNumber = op.outValue("Current iteration number");
-const outBranchNumber = op.outValue("Current branch number");
 const outMax=op.outValue("Max Size");
 const stringOut = op.outValueString('Final generated string');
 
@@ -84,7 +82,7 @@ inStrRule3.onChange = defineRules;
 inStrConstant4.onChange = defineRules;
 inStrRule4.onChange = defineRules;
 
-op.init = function()
+op.init = function() 
 {
     defineRules();
 }
@@ -120,20 +118,17 @@ function generate()
     //reset the state of everything
     resetAll();
 
-    var iterationOutput = 0;
     var nextSentence = "";
     var iterationsLimit = Math.min(6,inIterations.get());
     var iter;
     var i;
     var j;
-
+    
     for (iter = 0; iter < iterationsLimit ; iter++)
     {
         var sentenceArrayLength = sentence.length;
-        var rulesArrayLength = rules.length;
-        iterationOutput += 1;
-        outIterationNumber.set(iterationOutput);
-
+        var rulesArrayLength = rules.length;//
+        
         for (i =0; i < sentenceArrayLength; i++)
         {
             var current = sentence.charAt(i);
@@ -223,6 +218,7 @@ function extract(str,pos)
             {
                 canceled=true;
                 break;
+                
             }
         }
         if(canceled)break;
@@ -354,19 +350,17 @@ function turtle()
             {
                 break;
             }
-            //send out current branch number
-            outBranchNumber.set(currentBranch);
             
             trans = stack[stack.length-1];
             stack.pop();
 
-            //this code section is used to correctly connect the branches together with spline
+            //this code section is used to correctly connect the branches together with spline 
             var branchStartCoord = branchCoordStack[branchCoordStack.length-1];
 
             branchCoordStack.pop();
-
+            
             pointArrays.push(currentPointArray);
-
+            
             if(branchStartCoord) currentPointArray=[branchStartCoord[0],branchStartCoord[1],branchStartCoord[2]];
                 else currentPointArray=[];
         }
@@ -386,14 +380,12 @@ function render ()
 {
     if(needsCalc)
     {
-        //used to time performance, don't remove for now
         //console.time("lsys");
         generate();
         //console.timeEnd('lsys');
     }
-
     needsCalc = false;
-
+    
     //iterate through transforms array and trigger all geometry
     for(var i = 0; i < transforms.length; i++)
     {
@@ -409,3 +401,23 @@ function render ()
         lineTrigger.trigger();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,15 +1,13 @@
-
-op.name='LineArray';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var width=op.addInPort(new Port(op,"width"));
-var height=op.addInPort(new Port(op,"height"));
+var render=op.inTrigger('render');
+var width=op.addInPort(new CABLES.Port(op,"width"));
+var height=op.addInPort(new CABLES.Port(op,"height"));
 var doLog=op.inValueBool("Logarithmic",false);
-var pivotX=op.addInPort(new Port(op,"pivot x",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new Port(op,"pivot y",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
-var nColumns=op.addInPort(new Port(op,"num columns"));
-var nRows=op.addInPort(new Port(op,"num rows"));
-var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var pivotX=op.addInPort(new CABLES.Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
+var pivotY=op.addInPort(new CABLES.Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var nColumns=op.addInPort(new CABLES.Port(op,"num columns"));
+var nRows=op.addInPort(new CABLES.Port(op,"num rows"));
+var axis=op.addInPort(new CABLES.Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var trigger=op.outTrigger('trigger');
 var outPointArrays=op.outArray("Point Arrays");
 
 var cgl=op.patch.cgl;
@@ -24,14 +22,14 @@ nColumns.set(10);
 
 var meshes=[];
 
-axis.onValueChanged=rebuildDelayed;
-pivotX.onValueChanged=rebuildDelayed;
-pivotY.onValueChanged=rebuildDelayed;
-width.onValueChanged=rebuildDelayed;
-height.onValueChanged=rebuildDelayed;
-nRows.onValueChanged=rebuildDelayed;
-nColumns.onValueChanged=rebuildDelayed;
-doLog.onValueChanged=rebuildDelayed;
+axis.onChange=rebuildDelayed;
+pivotX.onChange=rebuildDelayed;
+pivotY.onChange=rebuildDelayed;
+width.onChange=rebuildDelayed;
+height.onChange=rebuildDelayed;
+nRows.onChange=rebuildDelayed;
+nColumns.onChange=rebuildDelayed;
+doLog.onChange=rebuildDelayed;
 
 
 
@@ -84,7 +82,7 @@ function rebuild()
         geom.vertices=verts;
         geom.texCoords=tc;
         geom.verticesIndices=indices;
-        
+
         var mesh=new CGL.Mesh(cgl, geom, cgl.gl.LINES);
         mesh.setGeom(geom);
         meshes.push(mesh);
@@ -109,10 +107,10 @@ function rebuild()
         var ltx=null,lty=null;
         var log=0;
         var doLoga=doLog.get();
-        
+
         var linePoints=[];
         lines.push(linePoints);
-        
+
 
         for(c=numColumns;c>=0;c--)
         {
@@ -121,14 +119,14 @@ function rebuild()
                 vy=(Math.log((r/numRows) )/min)*height.get() - height.get() /2+y;
             else
                 vy = r * stepRow    - height.get() / 2 + y;
-            
+
             var tx = c/numColumns;
             var ty = 1.0-r/numRows;
             if(doLoga) ty = (Math.log((r/numRows) )/min);
-            
+
             vz=0.0;
 
-            if(axis.get()=='xz') 
+            if(axis.get()=='xz')
             {
                 vz=vy;
                 vy= 0.0 ;
@@ -140,25 +138,25 @@ function rebuild()
                 verts.push( lvx );
                 verts.push( lvy );
                 verts.push( lvz );
-                
+
                 linePoints.push(lvx,lvy,lvz);
-    
+
                 verts.push( vx );
                 verts.push( vy );
                 verts.push( vz );
-    
+
                 tc.push( ltx );
                 tc.push( lty );
 
                 tc.push( tx );
                 tc.push( ty );
-    
+
                 indices.push(count);
                 count++;
                 indices.push(count);
                 count++;
             }
-            
+
             if(count>64000)
             {
                 addMesh();
@@ -172,7 +170,7 @@ function rebuild()
             lvz=vz;
         }
     }
-    
+
     outPointArrays.set(lines);
 
     addMesh();

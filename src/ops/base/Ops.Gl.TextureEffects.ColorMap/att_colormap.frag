@@ -12,5 +12,5 @@ void main()
 {
    vec4 base=texture2D(tex,texCoord);
    vec4 color=texture2D(gradient,vec2(lumi(base.rgb),pos));
-   gl_FragColor = vec4(color);
+   outColor= vec4(color);
 }

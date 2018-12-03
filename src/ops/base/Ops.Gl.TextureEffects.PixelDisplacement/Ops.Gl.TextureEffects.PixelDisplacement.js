@@ -1,10 +1,10 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
-var amount=op.addInPort(new Port(op,"amountX",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var amountY=op.addInPort(new Port(op,"amountY",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var amount=op.addInPort(new CABLES.Port(op,"amountX",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var amountY=op.addInPort(new CABLES.Port(op,"amountY",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var displaceTex=op.inTexture("displaceTex");
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 
@@ -19,7 +19,7 @@ var amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

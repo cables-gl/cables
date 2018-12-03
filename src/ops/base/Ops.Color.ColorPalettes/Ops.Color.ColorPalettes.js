@@ -1,11 +1,11 @@
-const index=op.inValue("Index",0);
+const index=op.inValueInt("Index",0);
 const textureOut=op.outTexture("Texture");
-
+const inLinear=op.inValueBool("Smooth")
 const arrOut=op.outArray("Color Array");
 
 var canvas = document.createElement('canvas');
 canvas.id = "canvas_"+CABLES.generateUUID();
-canvas.width=1024;
+canvas.width=5;
 canvas.height=8;
 canvas.style.display = "none";
 
@@ -13,14 +13,15 @@ var body = document.getElementsByTagName("body")[0];
 body.appendChild(canvas);
 var ctx = canvas.getContext('2d');
 
-index.onChange=buildTexture;
+index.onChange=
+inLinear.onChange=buildTexture;
 
 var arr=[];
 arr.length=5*3;
+var lastFilter=null;
 
 function hexToR(h) {
     return parseInt((cutHex(h)).substring(0,2),16);
-    
 }
 function hexToG(h) {
     return parseInt((cutHex(h)).substring(2,4),16);
@@ -45,26 +46,30 @@ function buildTexture()
         var r = hexToR(colors[ind+i]);
         var g = hexToG(colors[ind+i]);
         var b = hexToB(colors[ind+i]);
-        
+
         arr[i*3+0]=r/255;
         arr[i*3+1]=g/255;
         arr[i*3+2]=b/255;
 
         ctx.fillStyle = 'rgb('+r+','+g+','+b+')';
         ctx.fillRect(
-            canvas.width/5*i-2,
+            canvas.width/5*i,
             0,
-            canvas.width/5+2,
+            canvas.width/5,
             canvas.height
             );
     }
 
-    if(textureOut.get()) textureOut.get().initTexture(canvas,CGL.Texture.FILTER_NEAREST);
-        else textureOut.set(new CGL.Texture.createFromImage( op.patch.cgl, canvas, { "filter":CGL.Texture.FILTER_NEAREST } ));
-    
+    var filter=CGL.Texture.FILTER_NEAREST;
+    if(inLinear.get())filter=CGL.Texture.FILTER_LINEAR;
+
+    if(lastFilter==filter && textureOut.get()) textureOut.get().initTexture(canvas,filter);
+        else textureOut.set(new CGL.Texture.createFromImage( op.patch.cgl, canvas, { "filter":filter } ));
+
     arrOut.set(null);
     arrOut.set(arr);
     textureOut.get().unpackAlpha=false;
+    lastFilter=filter;
 
 }
 

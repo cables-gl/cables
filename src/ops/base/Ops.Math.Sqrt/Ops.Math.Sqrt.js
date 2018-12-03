@@ -1,7 +1,8 @@
-const number=op.addInPort(new Port(op,"number"));
-const result=op.addOutPort(new Port(op,"result"));
+const
+    number=op.inValue("number"),
+    result=op.outValue("result");
 
-number.onValueChanged=function()
+number.onChange=function()
 {
     let r=Math.sqrt( number.get() );
     if(isNaN(r))r=0;

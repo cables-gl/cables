@@ -1,13 +1,13 @@
 // http://stackoverflow.com/questions/5504635/computing-fovx-opengl
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var fovY=op.addInPort(new Port(op,"fov y",OP_PORT_TYPE_VALUE ));
-var zNear=op.addInPort(new Port(op,"frustum near",OP_PORT_TYPE_VALUE ));
-var zFar=op.addInPort(new Port(op,"frustum far",OP_PORT_TYPE_VALUE ));
+var render=op.inTrigger('render');
+var fovY=op.addInPort(new CABLES.Port(op,"fov y",CABLES.OP_PORT_TYPE_VALUE ));
+var zNear=op.addInPort(new CABLES.Port(op,"frustum near",CABLES.OP_PORT_TYPE_VALUE ));
+var zFar=op.addInPort(new CABLES.Port(op,"frustum far",CABLES.OP_PORT_TYPE_VALUE ));
 var autoAspect=op.inValueBool("Auto Aspect Ratio",true);
 var aspect=op.inValue("Aspect Ratio");
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 
 var cgl=op.patch.cgl;
@@ -15,9 +15,9 @@ zNear.set(0.01);
 fovY.set(45);
 zFar.set(500.0);
 
-fovY.onValueChanged=changed;
-zFar.onValueChanged=changed;
-zNear.onValueChanged=changed;
+fovY.onChange=changed;
+zFar.onChange=changed;
+zNear.onChange=changed;
 changed();
 
 var asp=0;

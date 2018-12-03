@@ -34,5 +34,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.InterpolateMatrix"
+    },
+    "summary": "interpolate between two matrices",
+    "docs": {
+        "ports": []
     }
 }

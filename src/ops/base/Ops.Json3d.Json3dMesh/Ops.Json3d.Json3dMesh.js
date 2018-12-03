@@ -1,11 +1,11 @@
-var cgl=this.patch.cgl;
+const cgl=op.patch.cgl;
 
 var scene=new CABLES.Variable();
 
 cgl.frameStore.currentScene=null;
 
-var exe=op.inFunction("Render");
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
+var exe=op.inTrigger("Render");
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
 var meshIndex=op.inValueInt("Mesh Index",0);
 
 
@@ -15,7 +15,7 @@ var centerPivot=op.inValueBool("Center Mesh",true);
 
 var inSize=op.inValue("Size",1);
 
-var next=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var next=op.outTrigger("trigger");
 var geometryOut=op.outObject("Geometry");
 
 var merge=op.inValueBool("Merge",false);
@@ -70,7 +70,7 @@ function render()
         mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
 
         if(mesh) mesh.render(cgl.getShader());
-        
+
         cgl.popModelMatrix();
         next.trigger();
     }
@@ -129,10 +129,14 @@ function updateInfo(geom)
 
 function setMesh()
 {
-    mesh=null;
+    if(mesh)
+    {
+        mesh.dispose();
+        mesh=null;
+    }
     var index=Math.floor(meshIndex.get());
 
-    if(!data || index!=index || !isNumeric(index) || index<0 || index>=data.meshes.length)
+    if(!data || index!=index || !CABLES.UTILS.isNumeric(index) || index<0 || index>=data.meshes.length)
     {
         op.uiAttr({warning:'mesh not found - index out of range '});
         return;
@@ -153,14 +157,14 @@ function setMesh()
                 geom.merge(geomNew);
             }
         }
-        
+
         var bnd=geom.getBounds();
-        
+
         for(var i=0;i<geom.vertices.length;i++)
         {
             geom.vertices[i]/=bnd.maxAxis;
         }
-        
+
 
     }
     else
@@ -176,8 +180,8 @@ function setMesh()
 
         var i=0;
         geom=CGL.Geometry.json2geom(jsonGeom);
-        
-        
+
+
     }
 
     if(centerPivot.get())geom.center();
@@ -188,10 +192,13 @@ function setMesh()
 
     calcNormals();
     geometryOut.set(geom);
+
+    if(mesh)mesh.dispose();
+
     mesh=new CGL.Mesh(cgl,geom);
     needSetMesh=false;
     meshes[index]=mesh;
-    
+
     // console.log("set mesh done");
     // console.log(geom);
 

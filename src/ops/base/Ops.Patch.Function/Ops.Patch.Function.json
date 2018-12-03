@@ -3,7 +3,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Function Name"
+                "name": "function name",
+                "subType": "string"
             },
             {
                 "type": "1",
@@ -13,7 +14,7 @@
         "portsOut": [
             {
                 "type": "1",
-                "name": "Trigger"
+                "name": "trigger"
             }
         ],
         "name": "Ops.Patch.Function"
@@ -34,5 +35,9 @@
                 "text": "Triggered every time the input `Trigger` is executed or the function was called from outside cables"
             }
         ]
-    }
+    },
+    "updated": 1540980283572,
+    "authorName": "pandur",
+    "id": "b13d13a2-ab06-4c4c-afa3-5d506ecf327a",
+    "created": 1540980283574
 }

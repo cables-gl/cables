@@ -1,25 +1,17 @@
-op.name="TextureLookupColorMaterial";
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
+const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+const trigger=op.outTrigger("trigger")
+const shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 shaderOut.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 op.bindTextures=function()
 {
     if(op.texture.get())
-    {
-        /* --- */cgl.setTexture(0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.texture.val.tex);
-    }
+        cgl.setTexture(0,op.texture.val.tex);
 
     if(op.textureOpacity.get())
-    {
-        /* --- */cgl.setTexture(1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, op.textureOpacity.val.tex);
-    }
+        cgl.setTexture(1,op.textureOpacity.val.tex);
 };
 
 function doRender()
@@ -38,24 +30,24 @@ var shader=new CGL.Shader(cgl,'TextureLookupColorMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=op.bindTextures;
 shaderOut.set(shader);
-//op.onLoaded=shader.compile;
+
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
 
 
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 a.uniform=new CGL.Uniform(shader,'f','a',a);
 a.set(1.0);
 
-var posX=op.addInPort(new Port(op,"pos X",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var posX=op.addInPort(new CABLES.Port(op,"pos X",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 posX.uniform=new CGL.Uniform(shader,'f','posX',posX);
 posX.set(1.0);
 
-var posY=op.addInPort(new Port(op,"pos Y",OP_PORT_TYPE_VALUE,{ display:'range'}));
+var posY=op.addInPort(new CABLES.Port(op,"pos Y",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 posY.uniform=new CGL.Uniform(shader,'f','posY',posY);
 posY.set(1.0);
 
 render.onTriggered=doRender;
-op.texture=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+op.texture=op.addInPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 op.textureUniform=null;
 
 // op.texture.onPreviewChanged=function()
@@ -67,7 +59,7 @@ op.textureUniform=null;
 // };
 
 
-op.texture.onValueChanged=function()
+op.texture.onChange=function()
 {
     if(op.texture.get())
     {
@@ -84,7 +76,7 @@ op.texture.onValueChanged=function()
     }
 };
 
-op.textureOpacity=op.addInPort(new Port(op,"textureOpacity",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+op.textureOpacity=op.addInPort(new CABLES.Port(op,"textureOpacity",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 op.textureOpacityUniform=null;
 
 op.textureOpacity.onPreviewChanged=function()
@@ -95,7 +87,7 @@ op.textureOpacity.onPreviewChanged=function()
     console.log('show preview!');
 };
 
-op.textureOpacity.onValueChanged=function()
+op.textureOpacity.onChange=function()
 {
     if(op.textureOpacity.get())
     {
@@ -115,9 +107,9 @@ op.textureOpacity.onValueChanged=function()
 };
 
 
-op.doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+op.doBillboard=op.addInPort(new CABLES.Port(op,"billboard",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 op.doBillboard.val=false;
-op.doBillboard.onValueChanged=function()
+op.doBillboard.onChange=function()
 {
     if(op.doBillboard.val)
         shader.define('BILLBOARD');
@@ -127,4 +119,4 @@ op.doBillboard.onValueChanged=function()
 
 
 
-var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var preMultipliedAlpha=op.addInPort(new CABLES.Port(op,"preMultiplied alpha",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));

@@ -1,7 +1,7 @@
 
 var number=op.inValue("Number");
-var doAdd=op.inFunctionButton("Add");
-var doReset=op.inFunctionButton("Reset");
+var doAdd=op.inTriggerButton("Add");
+var doReset=op.inTriggerButton("Reset");
 
 var result=op.outValue("Result");
 

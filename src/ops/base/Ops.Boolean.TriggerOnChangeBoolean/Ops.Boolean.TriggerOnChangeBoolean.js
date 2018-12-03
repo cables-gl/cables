@@ -1,6 +1,6 @@
 var inBool=op.inValueBool("Value");
-var outFalse=op.outFunction("False");
-var outTrue=op.outFunction("True");
+var outTrue=op.outTrigger("True");
+var outFalse=op.outTrigger("False");
 
 inBool.onChange=function()
 {

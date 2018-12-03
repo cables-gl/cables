@@ -1,7 +1,7 @@
 op.name="LaserPacketSend";
 
-var exec=op.inFunction("Exec");
-var next=op.outFunction("Next");
+var exec=op.inTrigger("Exec");
+var next=op.outTrigger("Next");
 // var laserId=op.inValueInt("Laser Id",0);
 // var inSpeed=op.inValue("speed",15000);
 

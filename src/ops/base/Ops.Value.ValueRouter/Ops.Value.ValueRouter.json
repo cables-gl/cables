@@ -1,5 +1,5 @@
 {
-    "updated": 1519207671634,
+    "updated": 1538260863735,
     "authorName": "tim",
     "id": "e3b1fc2d-a813-4d9b-8cb0-595fc95af4e2",
     "created": 1519148999110,
@@ -7,57 +7,70 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Default Value"
+                "name": "Default Value",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Index 0 Value"
+                "name": "Index 0 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 1 Value"
+                "name": "Index 1 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 2 Value"
+                "name": "Index 2 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 3 Value"
+                "name": "Index 3 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 4 Value"
+                "name": "Index 4 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 5 Value"
+                "name": "Index 5 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 6 Value"
+                "name": "Index 6 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 7 Value"
+                "name": "Index 7 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 8 Value"
+                "name": "Index 8 Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index 9 Value"
+                "name": "Index 9 Value",
+                "subType": "number"
             }
         ],
         "name": "Ops.Value.ValueRouter"

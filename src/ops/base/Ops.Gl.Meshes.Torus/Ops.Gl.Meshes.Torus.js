@@ -1,17 +1,13 @@
+const render=op.inTrigger('render');
+const sides=op.inValue("sides",32);
+const rings=op.inValue("rings",32);
+const innerRadius=op.inValue("innerRadius",0.5);
+const outerRadius=op.inValue("outerRadius",1);
+const trigger=op.outTrigger('trigger');
+const geomOut=op.outObject("geometry");
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var sides=op.addInPort(new Port(op,"sides",OP_PORT_TYPE_VALUE));
-var rings=op.addInPort(new Port(op,"rings",OP_PORT_TYPE_VALUE));
-var innerRadius=op.addInPort(new Port(op,"innerRadius",OP_PORT_TYPE_VALUE));
-var outerRadius=op.addInPort(new Port(op,"outerRadius",OP_PORT_TYPE_VALUE));
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
-
-sides.set(32);
-rings.set(32);
-innerRadius.set(0.5);
-outerRadius.set(1);
+const UP=vec3.fromValues(0,1,0),RIGHT=vec3.fromValues(1,0,0);
+var tmpNormal = vec3.create(), tmpVec = vec3.create();
 
 geomOut.ignoreValueSerialize=true;
 
@@ -19,13 +15,19 @@ var cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 var j=0,i=0,idx=0;
-rings.onValueChanged=updateMesh;
-sides.onValueChanged=updateMesh;
-innerRadius.onValueChanged=updateMesh;
-outerRadius.onValueChanged=updateMesh;
+var needsUpdate=true;
+
+rings.onChange=
+sides.onChange=
+innerRadius.onChange=
+outerRadius.onChange=function()
+{
+    needsUpdate=true;
+};
 
 render.onTriggered=function()
 {
+    if(needsUpdate)updateMesh();
     if(mesh!==null) mesh.render(cgl.getShader());
     trigger.trigger();
 };
@@ -39,10 +41,8 @@ function updateMesh()
     var r=innerRadius.get();
     var r2=outerRadius.get();
     generateTorus(r,r2, nrings, nsides);
+    needsUpdate=false;
 }
-
-
-updateMesh();
 
 function circleTable(n,halfCircle)
 {
@@ -66,7 +66,7 @@ function circleTable(n,halfCircle)
         sint[i] = Math.sin(angle*i);
         cost[i] = Math.cos(angle*i);
     }
-    
+
     if (halfCircle)
     {
         sint[size] =  0.0;  /* sin PI */
@@ -81,15 +81,15 @@ function circleTable(n,halfCircle)
     return {cost:cost,sint:sint};
 }
 
-
 function generateTorus(iradius,oradius,nRings,nSides)
 {
     var table1=circleTable( nRings,false);
     var table2=circleTable(-nSides,false);
+    var t;
 
-    // if(!geom)
     geom=new CGL.Geometry();
-    // geom.clear();
+    geom.tangents = [];
+    geom.biTangents = [];
 
     for( j=0; j<nRings; j++ )
     {
@@ -101,16 +101,26 @@ function generateTorus(iradius,oradius,nRings,nSides)
             geom.vertices[offset  ] = table1.cost[j] * ( oradius + table2.cost[i] * iradius );
             geom.vertices[offset+1] = table1.sint[j] * ( oradius + table2.cost[i] * iradius );
             geom.vertices[offset+2] = table2.sint[i] * iradius;
-            geom.vertexNormals[offset  ] = table1.cost[j] * table2.cost[i];
-            geom.vertexNormals[offset+1] = table1.sint[j] * table2.cost[i];
-            geom.vertexNormals[offset+2] = table2.sint[i];
-            
+            geom.vertexNormals[offset  ] = tmpNormal[0] = table1.cost[j] * table2.cost[i];
+            geom.vertexNormals[offset+1] = tmpNormal[1] = table1.sint[j] * table2.cost[i];
+            geom.vertexNormals[offset+2] = tmpNormal[2] = table2.sint[i];
+
+            if (Math.abs(tmpNormal[1])==1) t = RIGHT;
+            else t = UP;
+            vec3.cross(tmpVec, tmpNormal, t);
+            vec3.normalize(tmpVec,tmpVec);
+            geom.tangents[offset  ] = tmpVec[0];
+            geom.tangents[offset+1] = tmpVec[1];
+            geom.tangents[offset+2] = tmpVec[2];
+            vec3.cross(tmpVec, tmpVec, tmpNormal);
+            geom.biTangents[offset  ] = tmpVec[0];
+            geom.biTangents[offset+1] = tmpVec[1];
+            geom.biTangents[offset+2] = tmpVec[2];
+
             geom.texCoords[offset2] = 0;
             geom.texCoords[offset2+1] = 0;
-
         }
     }
-
 
     for( i=0, idx=0; i<nSides; i++ )
     {
@@ -128,8 +138,7 @@ function generateTorus(iradius,oradius,nRings,nSides)
         geom.verticesIndices[idx+1] = i + ioff;
         idx +=2;
     }
-    
-    //geom.calcNormals({smooth:rue});
+
     geomOut.set(null);
     geomOut.set(geom);
 

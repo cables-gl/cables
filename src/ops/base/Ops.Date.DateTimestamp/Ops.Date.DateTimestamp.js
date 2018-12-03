@@ -1,10 +1,9 @@
-op.name="Date";
-
-var inYear=op.inValueInt("Year");
-var inMonth=op.inValueInt("Month");
-var inDay=op.inValueInt("Day");
-var inHour=op.inValueInt("Hour");
-var inMinute=op.inValueInt("Minute");
+const
+    inYear=op.inValueInt("Year"),
+    inMonth=op.inValueInt("Month"),
+    inDay=op.inValueInt("Day"),
+    inHour=op.inValueInt("Hour"),
+    inMinute=op.inValueInt("Minute");
 
 inYear.onChange=
 inMonth.onChange=
@@ -17,7 +16,7 @@ var outTimestamp=op.outValue("Timestamp");
 function setDate()
 {
     var d=new Date();
-    
+
     var datum = new Date(Date.UTC(
         inYear.get(),
         inMonth.get()-1,
@@ -25,10 +24,9 @@ function setDate()
         inHour.get(),
         inMinute.get()
         )+d.getTimezoneOffset()*60*1000);
-        
-        console.log(datum);
-    outTimestamp.set(datum.getTime());
 
+    // console.log(datum);
+    outTimestamp.set(datum.getTime());
 }
 
 

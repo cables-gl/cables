@@ -1,14 +1,14 @@
 var cgl=op.patch.cgl;
 
 op.name='PickingMaterial';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var next=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var next=op.outTrigger("trigger")
 
-var isPicked=op.addOutPort(new Port(op,"is picked",OP_PORT_TYPE_VALUE));
+var isPicked=op.addOutPort(new CABLES.Port(op,"is picked",CABLES.OP_PORT_TYPE_VALUE));
 
-var pickedTrigger=op.outFunction("On Picked");
+var pickedTrigger=op.outTrigger("On Picked");
 
-var doBillboard=op.addInPort(new Port(op,"billboard",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var doBillboard=op.addInPort(new CABLES.Port(op,"billboard",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 doBillboard.set(false);
 
 doBillboard.onChange=function()
@@ -19,7 +19,7 @@ doBillboard.onChange=function()
         shader.removeDefine('BILLBOARD');
 };
 
-var cursor=op.addInPort(new Port(op,"cursor",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
+var cursor=op.addInPort(new CABLES.Port(op,"cursor",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
 cursor.set('pointer');
 
 function doRender()
@@ -85,19 +85,19 @@ var srcVert=''
     .endl()+"}";
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'UNI float r;'
     .endl()+''
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   gl_FragColor = vec4(r,1.0,0.0,1.0);'
+    .endl()+'   outColor= vec4(r,1.0,0.0,1.0);'
     .endl()+'}';
 
 var shader=new CGL.Shader(cgl,"PickingMaterial");
 shader.offScreenPass=true;
 shader.setSource(srcVert,srcFrag);
 
-//op.onLoaded=shader.compile;
+
 
 var pickColorUniformR=new CGL.Uniform(shader,'f','r',0);
 

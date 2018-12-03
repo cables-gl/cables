@@ -1,0 +1,38 @@
+{
+    "updated": 1537795127974,
+    "authorName": "pandur",
+    "id": "16aaf067-a92d-4e8d-9746-117e0ccc52bf",
+    "created": 1517922958904,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Style",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Property",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value Suffix",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Style Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Html.CSSProperty"
+    }
+}

@@ -4,17 +4,24 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Browser Support"
+                "name": "Browser Support",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Latitude"
+                "name": "Latitude",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Longitude"
+                "name": "Longitude",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Mobile.GeoLocation"
-    }
+    },
+    "updated": 1542699598039,
+    "authorName": "pandur",
+    "id": "7d9ae643-d011-417e-afe3-b3acb78a6d63",
+    "created": 1542699582684
 }

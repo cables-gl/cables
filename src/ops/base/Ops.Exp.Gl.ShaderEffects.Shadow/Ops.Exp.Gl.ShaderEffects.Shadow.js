@@ -1,10 +1,8 @@
-op.name="Shadow";
-
 var cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
-op.render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var inAmount=op.inValueSlider("Strength",1.0);
 
@@ -103,7 +101,7 @@ op.render.onTriggered=function()
         }
         moduleFrag.bias.setValue(shadow.bias);
 
-        /* --- */cgl.setTexture(5,shadow.shadowMap.tex);
+        cgl.setTexture(5,shadow.shadowMap.tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, shadow.shadowMap.tex);
         op.trigger.trigger();
     }

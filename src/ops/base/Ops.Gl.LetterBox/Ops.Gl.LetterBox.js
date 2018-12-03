@@ -1,14 +1,14 @@
-var cgl=op.patch.cgl;
-
-op.name='letterbox';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger('render');
+const trigger=op.outTrigger('trigger');
 
 
-var ratio=op.addInPort(new Port(op,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1,1.25,1.3333333333,1.777777777778,1.88,2.33333333333333,2.4151,3,4]} ));
+var ratio=op.addInPort(new CABLES.Port(op,"ratio",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1,1.25,1.3333333333,1.777777777778,1.88,2.33333333333333,2.4151,3,4]} ));
+
 ratio.set(1.777777777778);
 
-var blackBars=op.addInPort(new Port(op,"black bars",OP_PORT_TYPE_VALUE,{display:'bool'}));
+const cgl=op.patch.cgl;
+
+var blackBars=op.addInPort(new CABLES.Port(op,"black bars",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 blackBars.set(true);
 
 var x=0,y=0,w=1000,h=1000;
@@ -50,7 +50,7 @@ op.onDelete=function()
 {
     // cgl.gl.disable(cgl.gl.SCISSOR_TEST);
     cgl.resetViewPort();
-}
+};
 
 render.onTriggered=function()
 {
@@ -69,7 +69,7 @@ render.onTriggered=function()
 
     cgl.gl.scissor(x,y,w,h);
     cgl.setViewPort(x,y,w,h);
-    
+
     mat4.perspective(cgl.pMatrix,45, ratio.get(), 0.1, 1100.0);
 
 

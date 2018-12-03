@@ -1,8 +1,8 @@
-op.name='ToggleBool';
+const
+    trigger=op.inTriggerButton("trigger"),
+    reset=op.inTriggerButton("reset"),
+    outBool=op.outValue("result");
 
-var trigger=op.inFunctionButton("trigger");
-var reset=op.inFunctionButton("reset");
-var outBool=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_VALUE));
 var theBool=false;
 outBool.set(theBool);
 outBool.ignoreValueSerialize=true;

@@ -1,5 +1,3 @@
-op.name="FatOscillator";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
@@ -35,20 +33,20 @@ var node = new Tone.FatOscillator();
 // inputs
 var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 var detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
-var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
+var typePort = op.addInPort( new CABLES.Port( op, "Type", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
 typePort.set(TYPE_DEFAULT);
 var spreadPort = op.inValue("Spread", SPREAD_DEFAULT);
 var countPort = op.inValue("Count", COUNT_DEFAULT);
-var phasePort = op.addInPort( new Port( op, "Phase", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX } ));
+var phasePort = op.addInPort( new CABLES.Port( op, "Phase", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX } ));
 phasePort.set(PHASE_DEFAULT);
 var syncFrequencyPort = op.inValueBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
-var startPort = op.addInPort( new Port( op, "Start", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var startPort = op.addInPort( new CABLES.Port( op, "Start",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
-var stopPort = op.addInPort( new Port( op, "Stop", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var stopPort = op.addInPort( new CABLES.Port( op, "Stop",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
 var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
-var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var mutePort = op.addInPort( new CABLES.Port( op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(MUTE_DEFAULT);
 
 function setSyncAndAutostart() {

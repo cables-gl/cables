@@ -61,6 +61,6 @@ void main(void)
 	float M = (cnv[0] + cnv[1]) + (cnv[2] + cnv[3]);
 	float S = (cnv[4] + cnv[5]) + (cnv[6] + cnv[7]) + (cnv[8] + M);
 
-	gl_FragColor = vec4(vec3(sqrt(M/S)), texture2D( tex, texCoord ).a )*2.0;
+	outColor= vec4(vec3(sqrt(M/S)), texture2D( tex, texCoord ).a )*2.0;
 
 }

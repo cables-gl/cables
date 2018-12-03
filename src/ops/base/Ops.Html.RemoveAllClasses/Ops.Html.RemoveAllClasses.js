@@ -1,4 +1,4 @@
-const exe=op.inFunctionButton("Remove");
+const exe=op.inTriggerButton("Remove");
 const inName=op.inValueString("Classname");
 
 exe.onTriggered=function()

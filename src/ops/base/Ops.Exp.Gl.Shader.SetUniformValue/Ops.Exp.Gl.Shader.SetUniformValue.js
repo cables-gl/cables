@@ -1,7 +1,7 @@
-const inRender=op.inFunction("Render");
+const inRender=op.inTrigger("Render");
 const inSelect=op.inValueSelect("Uniform");
 const inValue=op.inValue("Value");
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 
 var shader=null;
 const cgl=op.patch.cgl;

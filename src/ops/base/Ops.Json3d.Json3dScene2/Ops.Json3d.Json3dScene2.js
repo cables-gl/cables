@@ -1,7 +1,7 @@
-op.exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var doCreate=op.inFunctionButton("Create Nodes");
+op.exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
+var trigger=op.outTrigger('trigger');
+var doCreate=op.inTriggerButton("Create Nodes");
 var createNonMesh=op.inValueBool("Create Non Mesh Nodes");
 var createMaterials=op.inValueBool("Create Materials",false);
 var detectClones=op.inValueBool("Detect Clones",true);

@@ -27,5 +27,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.Shader.SetUniformValue"
+    },
+    "summary": "set a uniform value of the current shader",
+    "docs": {
+        "ports": []
     }
 }

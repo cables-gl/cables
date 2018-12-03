@@ -1,6 +1,4 @@
-op.name="HyperLink";
-
-var exec=op.inFunction("open");
+var exec=op.inTrigger("open");
 var inUrl=op.inValueString("URL","http://cables.gl");
 
 exec.onTriggered=function()

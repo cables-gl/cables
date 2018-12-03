@@ -1,5 +1,5 @@
 // constants
-const STEP_DEFAULT = 0.01;
+const STEP_DEFAULT = 0.001;
 
 // inputs
 const parentPort = op.inObject('link');
@@ -8,7 +8,7 @@ const inputValuePort = op.inValue('Input', 0.5);
 const minPort = op.inValue("Min", 0);
 const maxPort = op.inValue("Max", 1);
 const stepPort = op.inValue("Step", STEP_DEFAULT);
-const setDefaultValueButtonPort = op.inFunctionButton('Set Default');
+const setDefaultValueButtonPort = op.inTriggerButton('Set Default');
 const defaultValuePort = op.inValue('Default', 0.5);
 defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 

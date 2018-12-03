@@ -1,10 +1,10 @@
 // todo:rename to depthtest
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var enable=op.inValueBool("Enable depth testing",true);
 var meth=op.inValueSelect("Depth Test Method",['never','always','less','less or equal','greater', 'greater or equal','equal','not equal'],'less or equal');
 var write=op.inValueBool("Write to depth buffer",true);
-var trigger=op.outFunction("Next");
+var trigger=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 var compareMethod=cgl.gl.LEQUAL;

@@ -2,8 +2,8 @@ const parentPort = op.inObject('link');
 const labelPort = op.inValueString('Text', 'Presets');
 const siblingsPort = op.outObject('Children');
 
-const inAddPreset=op.inFunctionButton("Add Preset");
-const inUpdatePreset=op.inFunctionButton("Update current Preset");
+const inAddPreset=op.inTriggerButton("Add Preset");
+const inUpdatePreset=op.inTriggerButton("Update current Preset");
 
 inAddPreset.onTriggered=addPreset;
 inUpdatePreset.onTriggered=updatePreset;
@@ -177,7 +177,7 @@ function serializeSidebar()
 
             for(var j=0;j<op.patch.ops[i].portsOut.length;j++)
             {
-                if(theOp.portsOut[j].type==OP_PORT_TYPE_VALUE)
+                if(theOp.portsOut[j].type==CABLES.OP_PORT_TYPE_VALUE)
                 {
                     p.ports[theOp.portsOut[j].name]=theOp.portsOut[j].get();
                     foundPort=true;

@@ -1,10 +1,16 @@
-var exec=op.inFunctionButton("Join");
+var exec=op.inTriggerButton("Join");
 var inArr=op.inArray("Array");
+var inReset=op.inTriggerButton("Reset");
 
 var outArr=op.outArray("Result");
 
 var arr=[];
 outArr.set(arr);
+
+inReset.onTriggered=function()
+{
+    arr.length=0;
+};
 
 exec.onTriggered=function()
 {

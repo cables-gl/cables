@@ -1,4 +1,4 @@
-var exec=op.inFunction("Update");
+var exec=op.inTrigger("Update");
 var inArr=op.inArray("Array");
 var inMat=op.inArray("Matrix");
 

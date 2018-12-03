@@ -1,5 +1,5 @@
 {
-    "updated": 1519814245770,
+    "updated": 1541970347967,
     "authorName": "pandur",
     "id": "fac012e2-43c8-4e21-85ac-189fe85d5723",
     "created": 1519814244088,
@@ -73,7 +73,8 @@
             },
             {
                 "type": "0",
-                "name": "Count"
+                "name": "Count",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.TextureArray"

@@ -1,6 +1,4 @@
-op.name="Cannon";
-
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
 var inRadius=op.inValue("Radius");
 
@@ -16,17 +14,17 @@ var dirZ=op.inValue("dir Z");
 
 var speed=op.inValue("Speed");
 
-var inReset=op.inFunctionButton("Reset");
-var inSpawn=op.inFunctionButton("Spawn");
+var inReset=op.inTriggerButton("Reset");
+var inSpawn=op.inTriggerButton("Spawn");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outRadius=op.outValue("Out Radius");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
 
-var outCollision=op.outFunction("Collision");
+var outCollision=op.outTrigger("Collision");
 
 var cgl=op.patch.cgl;
 

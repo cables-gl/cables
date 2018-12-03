@@ -15,8 +15,8 @@ var f2y=op.outValue("Finger 2 Y");
 var outEvents=op.outArray("Events");
 
 
-var outTouchStart=op.outFunction("Touch Start");
-var outTouchEnd=op.outFunction("Touch End");
+var outTouchStart=op.outTrigger("Touch Start");
+var outTouchEnd=op.outTrigger("Touch End");
 
 
 

@@ -1,8 +1,7 @@
-op.name="MeshMorph";
 var cgl=op.patch.cgl;
 
 
-var render=op.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION ));
+var render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
 
 var nextGeom=op.inValueInt("Geometry");
 var duration=op.inValue("Duration",1.0);
@@ -14,7 +13,7 @@ var inGeoms=[];
 nextGeom.onChange=updateGeom;
 
 var oldGeom=0;
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.clear();
 
 
@@ -78,9 +77,9 @@ function updateGeom()
 }
 
 
-var trigger=op.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var calcVertexNormals=op.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{'display':'bool'} ));
+var calcVertexNormals=op.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'} ));
 calcVertexNormals.set(true);
 
 var geoms=[];

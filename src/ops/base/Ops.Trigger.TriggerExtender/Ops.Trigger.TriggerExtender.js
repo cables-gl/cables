@@ -1,8 +1,8 @@
 // inputs
-var inTriggerPort = op.inFunctionButton('Execute');
+var inTriggerPort = op.inTriggerButton('Execute');
 
 // outputs
-var outTriggerPort = op.outFunction('Next');
+var outTriggerPort = op.outTrigger('Next');
 
 // trigger listener
 inTriggerPort.onTriggered = function() {

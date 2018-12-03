@@ -1,10 +1,7 @@
-
-this.name="Gain";
-
-var audioIn=this.addInPort(new Port(this,"audio in",OP_PORT_TYPE_OBJECT));
-var gain=this.addInPort(new Port(this,"gain",OP_PORT_TYPE_VALUE));
+var audioIn=this.addInPort(new CABLES.Port(this,"audio in",CABLES.OP_PORT_TYPE_OBJECT));
+var gain=this.addInPort(new CABLES.Port(this,"gain",CABLES.OP_PORT_TYPE_VALUE));
 gain.onValueChange(updateGain);
-var audioOut=this.addOutPort(new Port(this,"audio out",OP_PORT_TYPE_OBJECT));
+var audioOut=this.addOutPort(new CABLES.Port(this,"audio out",CABLES.OP_PORT_TYPE_OBJECT));
 
 if(!window.audioContext){ audioContext = new AudioContext(); }
 
@@ -18,21 +15,21 @@ function updateGain(){
 
 var oldAudioIn = null;
 
-audioIn.onValueChanged = function()
+audioIn.onChange=function()
 {
     if (!audioIn.get()) {
         if (oldAudioIn) {
             try{
                 oldAudioIn.disconnect(gainNode);
             } catch(e) {
-                
-                
+
+
                 console.log(e);
             }
         }
     } else {
         audioIn.val.connect(gainNode);
-    }  
+    }
     oldAudioIn=audioIn.get();
 };
 

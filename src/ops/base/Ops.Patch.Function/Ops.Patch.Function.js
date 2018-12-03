@@ -1,12 +1,10 @@
-op.name='ExternalFunction';
-
-var funcName=op.addInPort(new Port(op,"Function Name",OP_PORT_TYPE_VALUE,{type:'string'}));
-var triggerButton=op.inFunctionButton("trigger");
-var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
+var funcName=op.addInPort(new CABLES.Port(op,"Function Name",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var triggerButton=op.inTriggerButton("trigger");
+var trigger=op.outTrigger('trigger');
 
 triggerButton.onTriggered=triggered;
 
-funcName.onValueChanged=function()
+funcName.onChange=function()
 {
     op.patch.config[funcName.get()]=triggered;
 };

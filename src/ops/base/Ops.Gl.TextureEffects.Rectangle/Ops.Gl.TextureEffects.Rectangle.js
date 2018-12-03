@@ -1,16 +1,16 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
-var inWidth=op.addInPort(new Port(op,"Width",OP_PORT_TYPE_VALUE,{display:'range'}));
-var inHeight=op.addInPort(new Port(op,"Height",OP_PORT_TYPE_VALUE,{display:'range'}));
-var inPosX=op.addInPort(new Port(op,"X",OP_PORT_TYPE_VALUE,{display:'range'}));
-var inPosY=op.addInPort(new Port(op,"Y",OP_PORT_TYPE_VALUE,{display:'range'}));
+var inWidth=op.addInPort(new CABLES.Port(op,"Width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var inHeight=op.addInPort(new CABLES.Port(op,"Height",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var inPosX=op.addInPort(new CABLES.Port(op,"X",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var inPosY=op.addInPort(new CABLES.Port(op,"Y",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'textureeffect rectangle');
@@ -64,8 +64,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

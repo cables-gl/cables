@@ -36,6 +36,7 @@
     * [Gui/UI attributes](dev_gui_ui_attributes/dev_gui_ui_attributes.md)
     * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
     * [Writing Shaders](shader/shader.md)
+    * [Creating Attachments](dev_attachments/dev_attachments.md)
 * [FAQ](chapter_readmes/faq/readme.md)
   * [Exported patch is black](faq/open_exported_patch_locally.md)
   - [Disable page scrolling on mobile](faq/page_scrolling_on_mobile.md)

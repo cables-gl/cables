@@ -1,0 +1,37 @@
+{
+    "updated": 1539275181916,
+    "authorName": "_LJ_",
+    "id": "9b39dd02-9558-4297-ba8a-8f21f690d128",
+    "created": 1539269021984,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Normal X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Normal Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Normal Z",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "recalculate"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "RotationMatrix",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Geometry.RotationFromNormal"
+    }
+}

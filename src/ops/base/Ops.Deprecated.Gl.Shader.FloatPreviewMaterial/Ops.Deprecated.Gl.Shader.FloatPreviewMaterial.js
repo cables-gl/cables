@@ -1,9 +1,9 @@
 this.name="fp material";
 var cgl=this.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var texture=this.addInPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var texture=this.addInPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 
 var srcVert=''
     .endl()+'IN float attrVertIndex;'
@@ -46,7 +46,7 @@ var doRender=function()
 
     if(texture.get())
     {
-        /* --- */cgl.setTexture(0,texture.get().tex);
+        cgl.setTexture(0,texture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
     }
 
@@ -58,7 +58,7 @@ var doRender=function()
 
 
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-texture.onValueChanged=function()
+texture.onChange=function()
 {
     if(texture.get())
     {

@@ -1,5 +1,3 @@
-op.name="Envelope";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
@@ -16,14 +14,14 @@ op.webAudio.setNodeSettings = function(settings) {
 
 // input port
 
-var attackPort = op.addInPort( new Port( this, "Attack", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
-var decayPort = op.addInPort( new Port( this, "Decay", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
-var sustainPort = op.addInPort( new Port( this, "Sustain", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
-var releasePort = op.addInPort( new Port( this, "Release", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
-var triggerAttackPort = op.addInPort( new Port( this, "Trigger Attack", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
-var velocityPort = op.addInPort( new Port( this, "Velocity", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
+var attackPort = op.addInPort( new CABLES.Port( this, "Attack", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
+var decayPort = op.addInPort( new CABLES.Port( this, "Decay", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
+var sustainPort = op.addInPort( new CABLES.Port( this, "Sustain", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
+var releasePort = op.addInPort( new CABLES.Port( this, "Release", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
+var triggerAttackPort = op.addInPort( new CABLES.Port( this, "Trigger Attack",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var velocityPort = op.addInPort( new CABLES.Port( this, "Velocity", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': 0, 'max': 1 } ));
 var attackTimePort = op.inValueString("Attack Time");
-var triggerReleasePort = op.addInPort( new Port( this, "Trigger Release", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var triggerReleasePort = op.addInPort( new CABLES.Port( this, "Trigger Release",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var releaseTimePort = op.inValueString("Release Time");
 
 // output port

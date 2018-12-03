@@ -1,6 +1,6 @@
 
-var inUrls=op.addInPort(new Port(op,"URLs",OP_PORT_TYPE_ARRAY));
-var outTextures=op.addOutPort(new Port(op,"Textures",OP_PORT_TYPE_ARRAY));
+var inUrls=op.addInPort(new CABLES.Port(op,"URLs",CABLES.OP_PORT_TYPE_ARRAY));
+var outTextures=op.addOutPort(new CABLES.Port(op,"Textures",CABLES.OP_PORT_TYPE_ARRAY));
 
 var texArr=[];
 
@@ -30,7 +30,7 @@ function loadTexture(url)
 }
 
 
-inUrls.onValueChanged=function()
+inUrls.onChange=function()
 {
     if(!inUrls.get())return;
 

@@ -1,7 +1,7 @@
-var exec=op.inFunction("exec");
-var num=this.addInPort(new Port(this,"num",OP_PORT_TYPE_VALUE));
+var exec=op.inTrigger("exec");
+var num=this.addInPort(new CABLES.Port(this,"num",CABLES.OP_PORT_TYPE_VALUE));
 var defaultTransparent=op.inValueBool("Default Texture Transparent",true);
-var textureOut=this.addOutPort(new Port(this,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+var textureOut=this.addOutPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 
 var cgl=op.patch.cgl;
 var texturePorts=[];
@@ -23,9 +23,9 @@ defaultTransparent.onChange=function()
 
 for(var i=0;i<16;i++)
 {
-    var tex=this.addInPort(new Port(this,"texture"+i,OP_PORT_TYPE_TEXTURE));
+    var tex=this.addInPort(new CABLES.Port(this,"texture"+i,CABLES.OP_PORT_TYPE_TEXTURE));
     texturePorts.push(tex);
-    tex.onValueChanged=forceUpdateTexture;
+    tex.onChange=forceUpdateTexture;
 }
 
 exec.onTriggered=updateTexture;

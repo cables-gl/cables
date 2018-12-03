@@ -1,8 +1,8 @@
 op.name="LaserSimulator";
 
-var exec=op.inFunction("Render");
+var exec=op.inTrigger("Render");
 var inPacket=op.inObject("Packet");
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var lineBuff=new Float32Array(6);
 

@@ -21,22 +21,22 @@ var subdivisionPort = op.inValueString("Subdivision");
 subdivisionPort.set(SUBDIVISION_DEFAULT);
 var sequencePort = op.inArray("Note Sequence");
 sequencePort.set(NOTE_SEQUENCE_DEFAULT);
-var startPort = op.addInPort( new Port( this, "Start", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var startPort = op.addInPort( new CABLES.Port( this, "Start",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var startOffsetPort = op.inValueString("Start Offset", START_OFFSET_DEFAULT);
-var stopPort = op.addInPort( new Port( this, "Stop", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var stopPort = op.addInPort( new CABLES.Port( this, "Stop",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
-var humanizePort = op.addInPort( new Port( op, "Humanize", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var humanizePort = op.addInPort( new CABLES.Port( op, "Humanize", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 humanizePort.set(HUMANIZE_DEFAULT);
 var humanizeTimePort = op.inValue("Humanize Time");
 humanizeTimePort.set(HUMANIZE_TIME_DEFAULT);
-var mutePort = op.addInPort( new Port( op, "Mute", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var mutePort = op.addInPort( new CABLES.Port( op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(MUTE_DEFAULT);
 var probabilityPort = op.inValueSlider("Probability");
 probabilityPort.set(PROBABILITY_DEFAULT);
 
 // output ports
-var eventTriggerPort = op.outFunction("Event Trigger");
+var eventTriggerPort = op.outTrigger("Event Trigger");
 var timePort = op.outValue("Time");
 var notePort = op.outValue("Note");
 

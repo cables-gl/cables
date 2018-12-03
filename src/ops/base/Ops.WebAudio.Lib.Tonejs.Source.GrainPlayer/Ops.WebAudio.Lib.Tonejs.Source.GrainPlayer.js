@@ -1,4 +1,3 @@
-op.name="GrainPlayer";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -24,7 +23,7 @@ var buffer = null;
 var bufferLoaded = false;
 
 // input ports
-var playPort = op.addInPort( new Port( this, "Play", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var playPort = op.addInPort( new CABLES.Port( this, "Play", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 playPort.set(PLAY_DEFAULT);
 var samplePort = op.inObject("Sample (AudioBuffer)");
 var detunePort = op.inValue("Detune", DETUNE_DEFAULT);
@@ -32,7 +31,7 @@ var driftPort = op.inValue("Drift", DRIFT_DEFAULT);
 var playbackRatePort = op.inValue("Playback Rate", PLAYBACK_RATE_DEFAULT);
 var overlapPort = op.inValue("Overlap", OVERLAP_DEFAULT);
 var grainSizePort = op.inValue("Grain Size", GRAIN_SIZE_DEFAULT);
-var loopPort = op.addInPort( new Port( this, "Loop", OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
+var loopPort = op.addInPort( new CABLES.Port( this, "Loop", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 loopPort.set(PLAY_DEFAULT);
 var loopStartPort = op.inValue("Loop Start", LOOP_START_DEFAULT);
 var loopEndPort = op.inValue("Loop End", LOOP_END_DEFAULT);

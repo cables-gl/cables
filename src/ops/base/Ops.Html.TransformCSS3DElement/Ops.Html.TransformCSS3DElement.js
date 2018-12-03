@@ -5,15 +5,16 @@ const
 	    'center-left','center-middle','center-right',
 	    'bottom-left','bottom-middle','bottom-right'
     ],
-	trigger = op.inFunction('trigger'),
+	trigger = op.inTrigger('trigger'),
 	inElement = op.inObject('DOMElement'),
 	inOrigin = op.inValueSelect("origin",origins,'center-middle'),
-	next = op.outFunction('next'),
+	next = op.outTrigger('next'),
 	sCSSMatrix = mat4.create(),
 	sScalingVector = vec3.create()
 ;
 
 op.uuid = CABLES.uuid();
+var oldEle=null;
 
 var elProjection = cgl.canvas.parentElement.querySelector('[data-provide="css3d"]');
 if (!elProjection) {
@@ -48,7 +49,7 @@ if (!elProjection) {
 
 op.onDelete = function() {
 	var el = elProjection.querySelector('[data-ccs3did="'+op.uuid+'"]');
-	if (el) el.parentElement.removeChild(el);
+	if(el && el.parentElement) el.parentElement.removeChild(el);
 }
 
 function wrap (el) {
@@ -67,7 +68,7 @@ inElement.onChange = function (self, el) {
 }
 inOrigin.onChange = function () {
     var el = inElement.get();
-    if (!el) return;
+    if (!el || !el.parentElement) return;
     DOMTokenList.prototype.remove.apply(el.parentElement.classList, origins.map(function (o){return 'origin-'+o}));
     el.parentElement.classList.add('origin-'+inOrigin.get());
 }
@@ -93,29 +94,53 @@ trigger.onTriggered = function () {
 			sCSSMatrix,
 			sScalingVector
 		);
-		el.parentElement.style.transform = "translateZ("+pxfov+"px) matrix3d(" +
-			sCSSMatrix[0] + ',' +
-			-sCSSMatrix[1] + ',' +
-			sCSSMatrix[2] + ',' +
-			sCSSMatrix[3] + ',' +
-			sCSSMatrix[4] + ',' +
-			-sCSSMatrix[5] + ',' +
-			sCSSMatrix[6] + ',' +
-			sCSSMatrix[7] + ',' +
-			sCSSMatrix[8] + ',' +
-			-sCSSMatrix[9] + ',' +
-			sCSSMatrix[10] + ',' +
-			sCSSMatrix[11] + ',' +
-			sCSSMatrix[12] + ',' +
-			-sCSSMatrix[13] + ',' +
-			sCSSMatrix[14] + ',' +
-			sCSSMatrix[15] +
-		") scaleX(-1) translate3d("+
-			cgl.gl.drawingBufferWidth/2+"px,"+
-			cgl.gl.drawingBufferHeight/2+"px"+
-			",0"+
-		")";
+		if(el.parentElement)
+    		el.parentElement.style.transform = "translateZ("+pxfov+"px) matrix3d(" +
+    			sCSSMatrix[0] + ',' +
+    			-sCSSMatrix[1] + ',' +
+    			sCSSMatrix[2] + ',' +
+    			sCSSMatrix[3] + ',' +
+    			sCSSMatrix[4] + ',' +
+    			-sCSSMatrix[5] + ',' +
+    			sCSSMatrix[6] + ',' +
+    			sCSSMatrix[7] + ',' +
+    			sCSSMatrix[8] + ',' +
+    			-sCSSMatrix[9] + ',' +
+    			sCSSMatrix[10] + ',' +
+    			sCSSMatrix[11] + ',' +
+    			sCSSMatrix[12] + ',' +
+    			-sCSSMatrix[13] + ',' +
+    			sCSSMatrix[14] + ',' +
+    			sCSSMatrix[15] +
+    		") scaleX(-1) translate3d("+
+    			cgl.gl.drawingBufferWidth/2+"px,"+
+    			cgl.gl.drawingBufferHeight/2+"px"+
+    			",0"+
+    		")";
 	}
 	next.trigger();
-}
+	oldEle=el;
+};
 inOrigin.onChange();
+
+function removeProperties(el)
+{
+    if(!el)el = inElement.get();
+    if(el && el.parentElement)el.parentElement.style.transform='';
+}
+
+op.onDelete=function()
+{
+    removeProperties(oldEle);
+};
+
+inElement.onLinkChanged = function() 
+{
+    if(!inElement.isLinked())
+        removeProperties(oldEle);
+};
+
+op.addEventListener("onEnabledChange",function(enabled)
+{
+    if(!enabled) removeProperties();
+});

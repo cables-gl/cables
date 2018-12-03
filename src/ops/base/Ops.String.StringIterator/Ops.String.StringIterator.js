@@ -1,8 +1,8 @@
 
-var inExe=op.inFunction("Exec");
+var inExe=op.inTrigger("Exec");
 var inString=op.inValueString("String","cables");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outIndex=op.outValue("Index");
 var outChar=op.outValue("Character");
 var outLength=op.outValue("Length");

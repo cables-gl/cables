@@ -1,7 +1,5 @@
-op.name="ForceCluster";
-
-var exec=op.inFunction("Exec");
-var doreset=op.inFunctionButton("reset");
+var exec=op.inTrigger("Exec");
+var doreset=op.inTriggerButton("reset");
 
 var num=op.inValue("num",20);
 
@@ -19,7 +17,7 @@ var areaX=op.inValue("Area X");
 var areaY=op.inValue("Area Y");
 var areaZ=op.inValue("Area Z");
 
-var next=op.outFunction("next");
+var next=op.outTrigger("next");
 
 var outPoints=op.outArray("Points");
 

@@ -17,7 +17,7 @@ var preventDefaultPort = op.inValueBool('Prevent Default', PREVENT_DEFAULT_DEFAU
 var stopPropagationPort = op.inValueBool('Stop Propagation', STOP_PROPAGATION_DEFAULT);
 
 // outputs
-var triggerPort = op.outFunction('Event Trigger');
+var triggerPort = op.outTrigger('Event Trigger');
 var eventObjPort = op.outObject('Event Object');
 
 // change listeners

@@ -1,8 +1,6 @@
-op.name="ValueNoise";
-
 var cgl=op.patch.cgl;
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
@@ -13,7 +11,7 @@ var x=op.inValue("X",0);
 var y=op.inValue("Y",0);
 var z=op.inValue("Z",0);
 var scale=op.inValue("Scale",4);
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var shader=new CGL.Shader(cgl);
 
@@ -34,16 +32,14 @@ blendMode.onChange=function()
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
 
-
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

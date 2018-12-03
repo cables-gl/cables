@@ -1,5 +1,5 @@
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
@@ -13,20 +13,20 @@ var smoothStep=op.inValueBool("Smoothstep",true);
 smoothStep.onChange=updateSmoothstep;
 
 
-var r=op.addInPort(new Port(op,"r1",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new Port(op,"g1",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b1",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"r1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=op.addInPort(new CABLES.Port(op,"g1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var r2=op.addInPort(new Port(op,"r2",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g2=op.addInPort(new Port(op,"g2",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b2=op.addInPort(new Port(op,"b2",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r2=op.addInPort(new CABLES.Port(op,"r2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g2=op.addInPort(new CABLES.Port(op,"g2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b2=op.addInPort(new CABLES.Port(op,"b2",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var r3=op.addInPort(new Port(op,"r3",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g3=op.addInPort(new Port(op,"g3",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b3=op.addInPort(new Port(op,"b3",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r3=op.addInPort(new CABLES.Port(op,"r3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g3=op.addInPort(new CABLES.Port(op,"g3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b3=op.addInPort(new CABLES.Port(op,"b3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 
 var cgl=op.patch.cgl;
@@ -62,7 +62,7 @@ gType.onChange=function()
     
 };
 
-blendMode.onValueChanged=function()
+blendMode.onChange=function()
 {
     CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
 };
@@ -90,13 +90,13 @@ r3.onChange=g3.onChange=b3.onChange=function()
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

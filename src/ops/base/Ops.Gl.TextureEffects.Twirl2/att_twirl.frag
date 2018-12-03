@@ -24,5 +24,5 @@ void main()
 
     vec4 col = texture2D(tex, tc);
 
-    gl_FragColor = col;
+    outColor= col;
 }

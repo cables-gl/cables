@@ -11,7 +11,7 @@ var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var durationPort = op.inValueString("Duration", INFINITE);
 
 // output ports
-var triggerPort = op.outFunction("Trigger");
+var triggerPort = op.outTrigger("Trigger");
 var timeOutPort = op.outValue("Event Time");
 
 // vars

@@ -1,18 +1,18 @@
 
-var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
+var execute=this.addInPort(new CABLES.Port(this,"execute",CABLES.OP_PORT_TYPE_FUNCTION) );
 
 
-var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=this.addInPort(new CABLES.Port(this,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+var g=this.addInPort(new CABLES.Port(this,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=this.addInPort(new CABLES.Port(this,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=this.addInPort(new CABLES.Port(this,"diffuse a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
 var inFesnel=op.inValueSlider("Fesnel",0);
 var inShininess=op.inValueSlider("Specular Shininess",0.75);
 var inSpecAmount=op.inValueSlider("Specular Amount",0.5);
 
 
-var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
+var next=this.addOutPort(new CABLES.Port(this,"next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 var cgl=op.patch.cgl;
@@ -20,7 +20,7 @@ var shader=new CGL.Shader(cgl,'PhongMaterial3');
 // shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_NORMAL','MODULE_BEGIN_FRAG']);
 shader.define('NUM_LIGHTS','1');
 
-var shaderOut=this.addOutPort(new Port(this,"shader",OP_PORT_TYPE_OBJECT));
+var shaderOut=this.addOutPort(new CABLES.Port(this,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 shaderOut.set(shader);
 shaderOut.ignoreValueSerialize=true;
 
@@ -162,7 +162,7 @@ function texturingChanged()
 
 
 // diffuse texture
-var diffuseTexture=this.addInPort(new Port(this,"Diffuse Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var diffuseTexture=this.addInPort(new CABLES.Port(this,"Diffuse Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var diffuseTextureUniform=null;
 shader.bindTextures=bindTextures;
 
@@ -188,7 +188,7 @@ diffuseTexture.onChange=function()
 
 
 // normal texture
-var normalTexture=this.addInPort(new Port(this,"Normal Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var normalTexture=this.addInPort(new CABLES.Port(this,"Normal Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var normalTextureUniform=null;
 
 normalTexture.onChange=function()
@@ -210,7 +210,7 @@ normalTexture.onChange=function()
 };
 
 // specular texture
-var specTexture=this.addInPort(new Port(this,"Specular Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var specTexture=this.addInPort(new CABLES.Port(this,"Specular Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var specTextureUniform=null;
 
 specTexture.onChange=function()
@@ -231,7 +231,7 @@ specTexture.onChange=function()
 };
 
 // ao texture
-var aoTexture=this.addInPort(new Port(this,"AO Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var aoTexture=this.addInPort(new CABLES.Port(this,"AO Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var aoTextureUniform=null;
 aoTexture.ignoreValueSerialize=true;
 shader.bindTextures=bindTextures;
@@ -254,7 +254,7 @@ aoTexture.onChange=function()
 };
 
 // emissive texture
-var emissiveTexture=this.addInPort(new Port(this,"Emissive Texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var emissiveTexture=this.addInPort(new CABLES.Port(this,"Emissive Texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 emissiveTexture.uniform=new CGL.Uniform(shader,'t','texEmissive',4);
 emissiveTexture.ignoreValueSerialize=true;
 shader.bindTextures=bindTextures;
@@ -281,31 +281,31 @@ function bindTextures()
 {
     if(diffuseTexture.get())
     {
-        /* --- */cgl.setTexture(0,diffuseTexture.get().tex);
+        cgl.setTexture(0,diffuseTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
 
     if(aoTexture.get())
     {
-        /* --- */cgl.setTexture(1,aoTexture.get().tex);
+        cgl.setTexture(1,aoTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, aoTexture.get().tex);
     }
 
     if(specTexture.get())
     {
-        /* --- */cgl.setTexture(2,specTexture.get().tex);
+        cgl.setTexture(2,specTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, specTexture.get().tex);
     }
 
     if(normalTexture.get())
     {
-        /* --- */cgl.setTexture(3,normalTexture.get().tex);
+        cgl.setTexture(3,normalTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, normalTexture.get().tex);
     }
 
     if(emissiveTexture.get())
     {
-        /* --- */cgl.setTexture(4,emissiveTexture.get().tex);
+        cgl.setTexture(4,emissiveTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, emissiveTexture.get().tex);
     }
 
@@ -325,9 +325,9 @@ toggleNormal.setUiAttribs({"hidePort":true});
 toggleNormal.onChange=updateToggles;
 
 
-var toggleSpecular=op.inValueBool("Toggle Specular",true);
-toggleSpecular.setUiAttribs({"hidePort":true});
-toggleSpecular.onChange=updateToggles;
+// var toggleSpecular=op.inValueBool("Toggle Specular",true);
+// toggleSpecular.setUiAttribs({"hidePort":true});
+// toggleSpecular.onChange=updateToggles;
 
 var toggleAo=op.inValueBool("Toggle Ao Texture",true);
 toggleAo.setUiAttribs({"hidePort":true});

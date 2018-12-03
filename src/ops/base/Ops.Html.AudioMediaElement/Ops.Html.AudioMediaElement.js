@@ -4,7 +4,7 @@ var fileName=op.inFile("file","audio");
 var inPlay=op.inValueBool("Play");
 var volume=op.inValueSlider("Volume");
 var outPlaying=op.outValue("Playing");
-var outEnded=op.outFunction("Has Ended");
+var outEnded=op.outTrigger("Has Ended");
 
 var doLoop=op.inValueBool("Loop");
 
@@ -25,7 +25,7 @@ function play()
     }
 }
 
-inPlay.onValueChanged=function()
+inPlay.onChange=function()
 {
     if(inPlay.get())
     {
@@ -44,7 +44,7 @@ this.onDelete=function()
     if(audio) audio.pause();
 };
 
-doLoop.onValueChanged=function()
+doLoop.onChange=function()
 {
     if(audio) audio.loop=doLoop.get();
 };
@@ -66,7 +66,7 @@ function updateVolume()
 op.onMasterVolumeChanged=updateVolume;
 
 
-fileName.onValueChanged = function()
+fileName.onChange=function()
 {
     if(!fileName.get())return;
 

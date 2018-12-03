@@ -42,5 +42,9 @@
             }
         ],
         "name": "Ops.Devices.Midi.MidiButton"
+    },
+    "summary": "triggers when midi button is pressed",
+    "docs": {
+        "ports": []
     }
 }

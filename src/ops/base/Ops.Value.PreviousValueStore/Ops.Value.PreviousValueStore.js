@@ -1,4 +1,4 @@
-var val=op.addInPort(new Port(op,"Value"));
+var val=op.addInPort(new CABLES.Port(op,"Value"));
 var outCurrent=op.outValue("Current Value");
 var outOldVal=op.outValue("Previous Value");
 

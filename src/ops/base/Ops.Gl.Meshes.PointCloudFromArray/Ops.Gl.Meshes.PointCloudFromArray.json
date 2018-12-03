@@ -11,22 +11,35 @@
             },
             {
                 "type": "0",
-                "name": "Seed"
+                "name": "Num Points",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Num Points"
+                "name": "Scramble Texcoords",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Scramble Texcoords"
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Geometry"
             }
         ],
         "name": "Ops.Gl.Meshes.PointCloudFromArray"
     },
-    "updated": 1505232190495,
+    "updated": 1542786285136,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "0a6d9c6f-6459-45ca-88ad-268a1f7304db",
-    "created": 1505232018932
+    "created": 1505232018932,
+    "summary": "visualize an array of coordinates as points",
+    "docs": {
+        "ports": []
+    }
 }

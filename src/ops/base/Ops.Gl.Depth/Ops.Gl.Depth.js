@@ -1,16 +1,16 @@
 var cgl=op.patch.cgl;
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
-var clear=op.addInPort(new Port(op,"clear depth",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var enable=op.addInPort(new Port(op,"enable depth testing",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var write=op.addInPort(new Port(op,"write to depth buffer",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var clear=op.addInPort(new CABLES.Port(op,"clear depth",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var enable=op.addInPort(new CABLES.Port(op,"enable depth testing",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var write=op.addInPort(new CABLES.Port(op,"write to depth buffer",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
-var depthFunc=op.addInPort(new Port(op,"ratio",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['never','always','less','less or equal','greater', 'greater or equal','equal','not equal']} ));
+var depthFunc=op.addInPort(new CABLES.Port(op,"ratio",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['never','always','less','less or equal','greater', 'greater or equal','equal','not equal']} ));
 var theDepthFunc=cgl.gl.LEQUAL;
 
-depthFunc.onValueChanged=updateFunc;
+depthFunc.onChange=updateFunc;
 depthFunc.set('less or equal');
 clear.set(false);
 enable.set(true);

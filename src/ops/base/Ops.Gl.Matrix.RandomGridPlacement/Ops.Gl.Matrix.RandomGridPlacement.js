@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("Exe");
+var exe=op.inTrigger("Exe");
 var maxDepth=op.inValue("max Depth",4);
 var deeper=op.inValueSlider("Possibility");
 var seed=op.inValue("Seed",0);
@@ -10,7 +10,7 @@ var width=op.inValue("Width",4);
 var height=op.inValue("Height",3);
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outIndex=op.outValue("Index");
 var outDepth=op.outValue("depth");
 

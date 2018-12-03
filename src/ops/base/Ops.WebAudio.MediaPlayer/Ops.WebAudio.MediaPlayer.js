@@ -1,15 +1,15 @@
 /* ports in */
-var volume = op.addInPort(new Port(op,"Volume",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var file = op.addInPort(new Port(op,"File",OP_PORT_TYPE_VALUE,{ display:'file',filter:'audio' }));
-var play = op.addInPort(new Port(op,"Play", OP_PORT_TYPE_FUNCTION,{ display:'button' }));
-var pause = op.addInPort(new Port(op,"Pause", OP_PORT_TYPE_FUNCTION,{ display:'button' }));
-var rewind = op.addInPort(new Port(op,"Rewind", OP_PORT_TYPE_FUNCTION,{ display:'button' }));
-var seekPosition = op.addInPort(new Port(op,"Seek Position (Seconds)",OP_PORT_TYPE_VALUE));
-var jumpToSeekPosition = op.addInPort(new Port(op,"Jump To Seek Position", OP_PORT_TYPE_FUNCTION,{ display:'button' }));
+var volume = op.addInPort(new CABLES.Port(op,"Volume",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var file = op.addInPort(new CABLES.Port(op,"File",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',filter:'audio' }));
+var play = op.addInPort(new CABLES.Port(op,"Play",CABLES.OP_PORT_TYPE_FUNCTION,{ display:'button' }));
+var pause = op.addInPort(new CABLES.Port(op,"Pause",CABLES.OP_PORT_TYPE_FUNCTION,{ display:'button' }));
+var rewind = op.addInPort(new CABLES.Port(op,"Rewind",CABLES.OP_PORT_TYPE_FUNCTION,{ display:'button' }));
+var seekPosition = op.addInPort(new CABLES.Port(op,"Seek Position (Seconds)",CABLES.OP_PORT_TYPE_VALUE));
+var jumpToSeekPosition = op.addInPort(new CABLES.Port(op,"Jump To Seek Position",CABLES.OP_PORT_TYPE_FUNCTION,{ display:'button' }));
 
 /* ports out */
-var audioOut = op.addOutPort(new Port(op, "Audio Out",OP_PORT_TYPE_OBJECT));
-var duration = op.addOutPort(new Port(op,"Duration",OP_PORT_TYPE_VALUE));
+var audioOut = op.addOutPort(new CABLES.Port(op, "Audio Out",CABLES.OP_PORT_TYPE_OBJECT));
+var duration = op.addOutPort(new CABLES.Port(op,"Duration",CABLES.OP_PORT_TYPE_VALUE));
 
 /* port default values*/
 volume.set(1.0);
@@ -75,7 +75,7 @@ function handleVolumeChange() {
 play.onTriggered = startPlayback;
 pause.onTriggered = pausePlayback;
 rewind.onTriggered = rewindPlayback;
-seekPosition.onValueChanged = handleSeek;
+seekPosition.onChange=handleSeek;
 jumpToSeekPosition.onTriggered = handleSeek;
-file.onValueChanged = handleFileChange;
-volume.onValueChanged = handleVolumeChange;
+file.onChange=handleFileChange;
+volume.onChange=handleVolumeChange;

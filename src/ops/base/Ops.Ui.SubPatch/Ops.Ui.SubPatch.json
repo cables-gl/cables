@@ -1,5 +1,5 @@
 {
-    "updated": 1535442771274,
+    "updated": 1542698119583,
     "authorName": "pandur",
     "id": "84d9a6f0-ed7a-466d-b386-225ed9e89c60",
     "created": 1519817031982,
@@ -11,11 +11,13 @@
             },
             {
                 "type": "0",
-                "name": "dataStr"
+                "name": "dataStr",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "patchId"
+                "name": "patchId",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -25,5 +27,9 @@
             }
         ],
         "name": "Ops.Ui.SubPatch"
+    },
+    "summary": "subpatch op",
+    "docs": {
+        "ports": []
     }
 }

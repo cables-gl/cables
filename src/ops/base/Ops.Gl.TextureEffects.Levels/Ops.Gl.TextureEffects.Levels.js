@@ -1,6 +1,4 @@
-op.name="Levels";
-
-var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('Render');
 
 var inMin=op.inValueSlider("In Min",0);
 var inMid=op.inValueSlider("Midpoint",0.5);
@@ -9,7 +7,7 @@ var inMax=op.inValueSlider("In Max",1);
 var outMin=op.inValueSlider("Out Min",0);
 var outMax=op.inValueSlider("Out Max",1);
 
-var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -34,7 +32,7 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

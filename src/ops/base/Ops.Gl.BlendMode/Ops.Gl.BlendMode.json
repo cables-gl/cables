@@ -8,11 +8,13 @@
             },
             {
                 "type": "0",
-                "name": "Blendmode"
+                "name": "Blendmode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Premultiplied"
+                "name": "Premultiplied",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -22,5 +24,9 @@
             }
         ],
         "name": "Ops.Gl.BlendMode"
-    }
+    },
+    "updated": 1542697969382,
+    "authorName": "pandur",
+    "id": "a5965fc7-d634-4e05-abd5-35b29b7993f9",
+    "created": 1542697969798
 }

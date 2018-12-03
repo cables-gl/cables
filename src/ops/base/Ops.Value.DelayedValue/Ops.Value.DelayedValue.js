@@ -1,11 +1,11 @@
 
-var exe=op.inFunction("Update");
+var exe=op.inTrigger("Update");
 var v=op.inValue("Value",0);
 var delay=op.inValue("Delay",0.5);
 var result=op.outValue("Result",0);
 var clear=op.inValueBool("Clear on Change",true);
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.createPort(op,"easing",function(){}).set("absolute");
 
 exe.onTriggered=function()

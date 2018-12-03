@@ -1,16 +1,16 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var shaderId=op.addInPort(new Port(op,"ShaderToy ID",OP_PORT_TYPE_VALUE,{type:"string"}));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var shaderId=op.addInPort(new CABLES.Port(op,"ShaderToy ID",CABLES.OP_PORT_TYPE_VALUE,{type:"string"}));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var result=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_OBJECT));
-var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
+var trigger=op.outTrigger('trigger');
+var result=op.addOutPort(new CABLES.Port(op,"Result",CABLES.OP_PORT_TYPE_OBJECT));
+var shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 
 var cgl=op.patch.cgl;
 var appKey="Nt8KwM";
 shaderId.set('lsGSDG');
 // ldtGDr
 shaderOut.ignoreValueSerialize=true;
-shaderId.onValueChanged=setId;
+shaderId.onChange=setId;
 var uniTime=null;
 var uniTime2=null;
 var startTime=Date.now();
@@ -45,7 +45,7 @@ function setId()
                 if(data.Shader && data.Shader.renderpass)
                 {
                     var code=''
-                    .endl()+'precision highp float;'
+                
                     .endl()+'IN vec2 texCoord;'
     
                     .endl()+'UNI float iGlobalTime;'

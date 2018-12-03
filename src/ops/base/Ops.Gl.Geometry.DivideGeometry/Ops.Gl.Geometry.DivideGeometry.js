@@ -1,5 +1,5 @@
 
-var geometry=op.addInPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
+var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
 var outGeom=op.outObject("Result");
 
 geometry.onChange=update;

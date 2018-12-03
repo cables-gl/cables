@@ -1,9 +1,7 @@
-op.name="BarrelDistortion";
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 var amount=op.inValue("amount");
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -15,7 +13,7 @@ var uniamount=new CGL.Uniform(shader,'f','amount',0);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 
@@ -24,7 +22,7 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    /* --- */cgl.setTexture(0, texture.tex );
+    cgl.setTexture(0, texture.tex );
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
 
     cgl.currentTextureEffect.finish();

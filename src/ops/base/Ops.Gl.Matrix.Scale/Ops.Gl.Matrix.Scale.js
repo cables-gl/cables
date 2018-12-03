@@ -1,6 +1,6 @@
-const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-const scale=op.addInPort(new Port(op,"scale"));
-const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
+const scale=op.addInPort(new CABLES.Port(op,"scale"));
+const trigger=op.outTrigger("trigger")
 
 const cgl=op.patch.cgl;
 const vScale=vec3.create();

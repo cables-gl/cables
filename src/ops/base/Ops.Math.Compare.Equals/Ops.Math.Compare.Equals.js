@@ -1,17 +1,14 @@
-op.name='Equals';
+const number1 = op.inValue("number1",1);
+const number2 = op.inValue("number2",1);
+const result = op.outValue("result");
 
-var result = op.addOutPort(new Port(op,"result"));
-var number1 = op.addInPort(new Port(op,"number1"));
-var number2 = op.addInPort(new Port(op,"number2"));
 
-number1.set(1);
-number2.set(1);
+number1.onChange=exec;
+number2.onChange=exec;
+exec();
 
 function exec()
 {
     result.set( number1.get() == number2.get() );
 }
 
-number1.onValueChanged = exec;
-number2.onValueChanged = exec;
-exec();

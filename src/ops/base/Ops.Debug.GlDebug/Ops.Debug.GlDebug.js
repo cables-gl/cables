@@ -1,6 +1,6 @@
 
-var exec=op.inFunction("Update");
-var next=op.outFunction("Next");
+var exec=op.inTrigger("Update");
+var next=op.outTrigger("Next");
 
 var outError=op.outValue("glGetError");
 

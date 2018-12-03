@@ -1,5 +1,5 @@
 {
-    "updated": 1518259925740,
+    "updated": 1537955598195,
     "authorName": "pandur",
     "id": "e8f01999-ad25-4a75-9cac-46468551ba67",
     "created": 1518259734902,
@@ -25,5 +25,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.TextureDifference"
+    },
+    "summary": "render the difference of two textures",
+    "docs": {
+        "ports": []
     }
 }

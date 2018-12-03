@@ -1,7 +1,7 @@
 var inGeom=op.inObject("Geometry");
 var inGeom2=op.inObject("Geometry 2");
-var inMerge=op.inFunctionButton("Merge");
-var inReset=op.inFunctionButton("Reset");
+var inMerge=op.inTriggerButton("Merge");
+var inReset=op.inTriggerButton("Reset");
 
 var outGeom=op.outObject("Geometry Result");
 var geom=new CGL.Geometry();

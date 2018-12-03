@@ -1,8 +1,6 @@
-op.name="TriangleArray";
-
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var inArr=op.inArray("Points");
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var geomOut=op.outObject("Geometry");
 
 var geom=new CGL.Geometry("triangle array");

@@ -1,8 +1,6 @@
-op.name="World";
+var exec=op.inTrigger("Exec");
 
-var exec=op.inFunction("Exec");
-
-var reset=op.inFunctionButton("Reset");
+var reset=op.inTriggerButton("Reset");
 
 var groundPlane=op.inValueBool("Groundplane",true);
 
@@ -11,7 +9,7 @@ var gravX=op.inValue("Gravity X");
 var gravY=op.inValue("Gravity Y",-9.82);
 var gravZ=op.inValue("Gravity Z");
 
-var next=op.outFunction("next");
+var next=op.outTrigger("next");
 
 gravX.onChange=setGravity;
 gravY.onChange=setGravity;

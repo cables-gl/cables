@@ -1,16 +1,13 @@
-this.name="Convolver";
-var op = this;
-
 if(!window.audioContext){ audioContext = new AudioContext(); }
 
 var NORMALIZE_DEF = true;
 
 var convolver = audioContext.createConvolver();
 
-var audioIn=this.addInPort(new Port(this,"audio in",OP_PORT_TYPE_OBJECT));
-var impulseResponse=this.addInPort(new Port(this,"impulse response",OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-var normalize = this.addInPort(new Port(this,"normalize",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var audioOut=this.addOutPort(new Port(this,"audio out",OP_PORT_TYPE_OBJECT));
+var audioIn=this.addInPort(new CABLES.Port(this,"audio in",CABLES.OP_PORT_TYPE_OBJECT));
+var impulseResponse=this.addInPort(new CABLES.Port(this,"impulse response",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+var normalize = this.addInPort(new CABLES.Port(this,"normalize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var audioOut=this.addOutPort(new CABLES.Port(this,"audio out",CABLES.OP_PORT_TYPE_OBJECT));
 
 var oldAudioIn = null;
 

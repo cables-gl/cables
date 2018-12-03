@@ -3,7 +3,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "url"
+                "name": "url",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -13,7 +14,8 @@
             },
             {
                 "type": "0",
-                "name": "connected"
+                "name": "connected",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -26,7 +28,7 @@
         ],
         "name": "Ops.Net.WebSocket.WebSocket"
     },
-    "updated": 1524499476519,
+    "updated": 1542299288124,
     "authorName": "pandur",
     "id": "d45aca4c-1c62-4261-80b3-d338a3203bf6",
     "created": 1524496393613,

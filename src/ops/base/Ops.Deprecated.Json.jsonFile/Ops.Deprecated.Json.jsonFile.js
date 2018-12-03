@@ -1,7 +1,7 @@
 op.name='jsonFile';
 
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_OBJECT));
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var result=op.addOutPort(new CABLES.Port(op,"result",CABLES.OP_PORT_TYPE_OBJECT));
 
 result.ignoreValueSerialize=true;
 var patch=op.patch;
@@ -36,4 +36,4 @@ var reload=function()
     
 };
 
-filename.onValueChanged=reload;
+filename.onChange=reload;

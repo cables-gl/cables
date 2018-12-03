@@ -1,5 +1,3 @@
-op.name="LockOrientation";
-
 var inPortrait=op.inValueBool("Portrait");
 var inLandscape=op.inValueBool("Landscape");
 

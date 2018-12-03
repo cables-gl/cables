@@ -64,6 +64,6 @@ void main()
     blendRGBA.a=1.0;
     
     
-    gl_FragColor = blendRGBA;
+    outColor= blendRGBA;
 
 }

@@ -5,7 +5,12 @@
             {
                 "type": "0",
                 "name": "Index",
-                "subType": "number"
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Smooth",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -39,6 +44,6 @@
             }
         ]
     },
-    "updated": 1523828836372,
+    "updated": 1541327478296,
     "created": 1523828824965
 }

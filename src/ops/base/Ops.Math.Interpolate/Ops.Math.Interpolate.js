@@ -1,5 +1,3 @@
-op.name="Interpolate";
-
 var val1=op.inValue("Value 1");
 var val2=op.inValue("Value 2");
 var perc=op.inValueSlider("Percentage");

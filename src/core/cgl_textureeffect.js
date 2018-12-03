@@ -248,54 +248,49 @@ CGL.TextureEffect.checkOpInEffect=function(op)
 CGL.TextureEffect.getBlendCode=function()
 {
     return ''
-    //.endl()+'#define Blend(base, blend, funcf)       vec3(funcf(base.r, blend.r), funcf(base.g, blend.g), funcf(base.b, blend.b))'
 
     .endl()+'vec3 _blend(vec3 base,vec3 blend)'
     .endl()+'{'
     .endl()+'   vec3 colNew=blend;'
-    // .endl()+'   #ifdef BM_NORMAL'
-    // .endl()+'   colNew=blend;'
-    // .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_MULTIPLY'
-    .endl()+'   colNew=base*blend;'
+    .endl()+'       colNew=base*blend;'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_MULTIPLY_INV'
-    .endl()+'   colNew=base* vec3(1.0)-blend;'
+    .endl()+'       colNew=base* vec3(1.0)-blend;'
     .endl()+'   #endif'
 
-
     .endl()+'   #ifdef BM_AVERAGE'
-    .endl()+'   colNew=((base + blend) / 2.0);'
+    .endl()+'       colNew=((base + blend) / 2.0);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_ADD'
-    .endl()+'   colNew=min(base + blend, vec3(1.0));'
+    .endl()+'       colNew=min(base + blend, vec3(1.0));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_SUBSTRACT'
-    .endl()+'   colNew=max(base + blend - vec3(1.0), vec3(0.0));'
+    .endl()+'       colNew=max(base + blend - vec3(1.0), vec3(0.0));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_DIFFERENCE'
-    .endl()+'   colNew=abs(base - blend);'
+    .endl()+'       colNew=abs(base - blend);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_NEGATION'
-    .endl()+'   colNew=(vec3(1.0) - abs(vec3(1.0) - base - blend));'
+    .endl()+'       colNew=(vec3(1.0) - abs(vec3(1.0) - base - blend));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_EXCLUSION'
-    .endl()+'   colNew=(base + blend - 2.0 * base * blend);'
+    .endl()+'       colNew=(base + blend - 2.0 * base * blend);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_LIGHTEN'
-    .endl()+'   colNew=max(blend, base);'
+    .endl()+'       colNew=max(blend, base);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_DARKEN'
-    .endl()+'   colNew=min(blend, base);'
+    .endl()+'       colNew=min(blend, base);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_OVERLAY'

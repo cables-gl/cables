@@ -1,7 +1,6 @@
+var render=op.inTrigger('render');
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-
-var geometry=op.addInPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
+var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
 geometry.ignoreValueSerialize=true;
 
 var updateAll=op.inValueBool('Update All',true);
@@ -10,7 +9,7 @@ var updateVerts=op.inValueBool('Update Vertices',false);
 var updateTexcoords=op.inValueBool('Update Texcoords',false);
 var vertNums=op.inValueBool('Vertex Numbers',true);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 vertNums.onChange=
     geometry.onChange=update;
@@ -31,7 +30,7 @@ function update()
     
     if(geom)
     {
-        // if(mesh)mesh.dispose();
+        if(mesh)mesh.dispose();
         if(!mesh)
         {
             mesh=new CGL.Mesh(op.patch.cgl,geom);

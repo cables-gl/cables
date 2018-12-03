@@ -1,0 +1,83 @@
+{
+    "updated": 1543065260452,
+    "authorName": "pandur",
+    "id": "2390f6b3-2122-412e-8c8d-5c2f574e8bd1",
+    "created": 1542744323655,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Font"
+            },
+            {
+                "type": "0",
+                "name": "align",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "vertical align",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Line Height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Letter Spacing",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Font Available",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.TextMesh3"
+    }
+}

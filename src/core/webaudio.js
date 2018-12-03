@@ -8,19 +8,16 @@ CABLES.WEBAUDIO.toneJsInitialized = false;
 
  /**
  * Part of the Web Audio API, the AudioBuffer interface represents a short audio asset residing in memory.
- * @external AudioBuffer
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer}
  */
 
  /**
  * Part of the Web Audio API, the AudioNode interface is a generic interface for representing an audio processing module.
- * @external AudioNode
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioNode}
  */
 
  /**
  * The AudioContext interface represents an audio-processing graph built from audio modules linked together
- * @external AudioContext
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioContext}
  */
 
@@ -29,7 +26,6 @@ CABLES.WEBAUDIO.toneJsInitialized = false;
  * it if necessary. This audio context can be used for native Web Audio as well as Tone.js ops.
  * Associates the audio context with Tone.js if it is being used
  * @param {CABLES.Op} op - The operator which needs the Audio Context
- * @returns {(external:AudioContext|undefined)} - The audio context or `undefined` if Web Audio is not supported
  */
 CABLES.WEBAUDIO.createAudioContext = function(op) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -132,8 +128,6 @@ CABLES.WEBAUDIO.createAudioInPort = function(op, portName, audioNode, inputChann
  * Can be used for both Audio ports as well as AudioParam ports
  * if used with an AudioParam pass e.g. `synth.frequency` as newNode
  * @param {CABLES.Port} port - The port where the audio node needs to be replaced
- * @param {external:AudioNode} oldNode - The old audio node, which should be unlinked from the port
- * @param {external:AudioNode} newNode - The new audio node, which should be linked to the port
  */
 CABLES.WEBAUDIO.replaceNodeInPort = function(port, oldNode, newNode) {
   var connectedNode = port.webAudio.previousAudioInNode;
@@ -183,7 +177,6 @@ CABLES.WEBAUDIO.createAudioOutPort = function(op, portName, audioNode) {
  * from the op's audio node and restore the number value set before.
  * @param {CABLES.Op} op - The operator to create an audio param input port for
  * @param {string} portName - The name of the port to create
- * @param {external:AudioNode} audioNode - The audionode incoming connections should connect to
  * @returns {(CABLES.Port|undefined)} - The newly created port, which takes care of (dis-)connecting on its own, or `undefined` if there was an error
  */
 CABLES.WEBAUDIO.createAudioParamInPort = function(op, portName, audioNode, options, defaultValue) {
@@ -197,7 +190,7 @@ CABLES.WEBAUDIO.createAudioParamInPort = function(op, portName, audioNode, optio
   op.webAudio = op.webAudio || {};
   op.webAudio.audioInPorts = op.webAudio.audioInPorts || [];
   //var port = op.inObject(portName);
-  var port = op.inDynamic(portName, [OP_PORT_TYPE_VALUE, OP_PORT_TYPE_OBJECT], options, defaultValue);
+  var port = op.inDynamic(portName, [CABLES.OP_PORT_TYPE_VALUE, CABLES.OP_PORT_TYPE_OBJECT], options, defaultValue);
   port.webAudio = {};
   port.webAudio.previousAudioInNode = null;
   port.webAudio.audioNode = audioNode;
@@ -208,9 +201,9 @@ CABLES.WEBAUDIO.createAudioParamInPort = function(op, portName, audioNode, optio
   //   op.log("onLinkChanged");
   //   if(port.isLinked()) {
   //
-  //       if(port.links[0].portOut.type === OP_PORT_TYPE_VALUE) { // value
+  //       if(port.links[0].portOut.type === CABLES.OP_PORT_TYPE_) { // value
   //
-  //       } else if(port.links[0].portOut.type === OP_PORT_TYPE_OBJECT) { // object
+  //       } else if(port.links[0].portOut.type === CABLES.OP_PORT_TYPE_OBJECT) { // object
   //
   //       }
   //   } else { // unlinked
@@ -307,7 +300,6 @@ CABLES.WEBAUDIO.createAudioParamInPort = function(op, portName, audioNode, optio
  * Callback when an audio file finished loading
  *
  * @callback loadAudioFileFinishedCallback
- * @param {external:AudioBuffer} buffer - The AudioBuffer holding the audio data
  */
 
  /**

@@ -7,19 +7,23 @@
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -28,7 +32,11 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Color"
+        "name": "Ops.Deprecated.Gl.TextureEffects.Color"
     },
-    "summary": "Fill the current ImageCompose with a color"
+    "summary": "Fill the current ImageCompose with a color",
+    "updated": 1542698229323,
+    "authorName": "pandur",
+    "id": "b1059b01-539f-4356-b2cc-695cd0f22b0b",
+    "created": 1542698229893
 }

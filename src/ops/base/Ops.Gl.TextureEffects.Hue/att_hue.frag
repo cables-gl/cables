@@ -34,5 +34,5 @@ void main()
        col.rgb = hsv2rgb(hsv);
 
    #endif
-   gl_FragColor = col;
+   outColor= col;
 }

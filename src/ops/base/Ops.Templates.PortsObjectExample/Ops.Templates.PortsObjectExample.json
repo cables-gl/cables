@@ -1,0 +1,26 @@
+{
+    "updated": 1537260603262,
+    "authorName": "andro",
+    "id": "d7f414bf-804f-4c1a-987f-dfdbb3d80e27",
+    "created": 1537191826097,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object in"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Test",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.Templates.PortsObjectExample"
+    },
+    "summary": "Is a template for creating Object ports",
+    "docs": {
+        "ports": []
+    }
+}

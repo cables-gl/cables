@@ -1,18 +1,18 @@
 var self=this;
-var cgl=op.patch.cgl;
-var patch=op.patch;
+const cgl=op.patch.cgl;
+const patch=op.patch;
 
-this.exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-this.finished=this.addOutPort(new Port(this,"finished",OP_PORT_TYPE_FUNCTION));
-var result=this.addOutPort(new Port(this,"status",OP_PORT_TYPE_VALUE));
+this.exe=this.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+this.finished=this.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_FUNCTION));
+var result=this.addOutPort(new CABLES.Port(op,"status",CABLES.OP_PORT_TYPE_VALUE));
 var isFinishedPort = op.outValue('all loaded', false);
-var preRenderStatus=this.addOutPort(new Port(this,"preRenderStatus",OP_PORT_TYPE_VALUE));
-var preRenderTimeFrames=this.addInPort(new Port(this,"preRenderTimes",OP_PORT_TYPE_VALUE));
+var preRenderStatus=this.addOutPort(new CABLES.Port(op,"preRenderStatus",CABLES.OP_PORT_TYPE_VALUE));
+var preRenderTimeFrames=this.addInPort(new CABLES.Port(op,"preRenderTimes",CABLES.OP_PORT_TYPE_VALUE));
 var preRenderOps=op.inValueBool("PreRender Ops");
 preRenderStatus.set(0);
-this.numAssets=this.addOutPort(new Port(this,"numAssets",OP_PORT_TYPE_VALUE));
-this.loading=this.addOutPort(new Port(this,"loading",OP_PORT_TYPE_FUNCTION));
-var loadingFinished=op.outFunction("loading finished");//this.addOutPort(new Port(this,"loading finished",OP_PORT_TYPE_FUNCTION));
+this.numAssets=this.addOutPort(new CABLES.Port(op,"numAssets",CABLES.OP_PORT_TYPE_VALUE));
+this.loading=this.addOutPort(new CABLES.Port(op,"loading",CABLES.OP_PORT_TYPE_FUNCTION));
+var loadingFinished=op.outTrigger("loading finished");//this.addOutPort(new CABLES.Port(op,"loading finished",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var finishedAll=false;
 var preRenderTimes=[];
@@ -33,16 +33,15 @@ var preRenderAnimFrame=function(t)
 
     preRenderStatus.set(prerenderCount/(preRenderTimeFrames.anim.keys.length-1));
 
-    self.patch.timer.setTime(time);
+    op.patch.timer.setTime(time);
     cgl.renderStart(cgl,identTranslate,identTranslateView);
-    
+
     self.finished.trigger();
 
     cgl.gl.clearColor(0,0,0,1);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     self.loading.trigger();
-    
 
     cgl.renderEnd(cgl);
     prerenderCount++;
@@ -53,7 +52,6 @@ var loadingIdPrerender='';
 
 this.onLoaded=function()
 {
-
     if(preRenderTimeFrames.isAnimated())
     if(preRenderTimeFrames.anim)
         for(var i=0;i<preRenderTimeFrames.anim.keys.length;i++)
@@ -64,7 +62,6 @@ this.onLoaded=function()
 
 function checkPreRender()
 {
-    
     if(patch.loading.getProgress()>=1.0)
     {
         if(preRenderTimeFrames.anim && prerenderCount>=preRenderTimeFrames.anim.keys.length)
@@ -72,7 +69,6 @@ function checkPreRender()
             self.onAnimFrame=function(){};
             isFinishedPort.set(true);
             finishedAll=true;
-            
         }
         else
         {
@@ -81,18 +77,13 @@ function checkPreRender()
     }
     else
     {
-        
         setTimeout(checkPreRender,100);
     }
-
 }
-
-
 
 var loadingId=patch.loading.start('delayloading','delayloading');
 setTimeout(function()
 {
-    
     patch.loading.finished(loadingId);
 },100);
 
@@ -107,8 +98,8 @@ this.exe.onTriggered= function()
         {
             if(preRenderOps.get()) op.patch.preRenderOps();
             loadingFinished.trigger();
-            self.patch.timer.setTime(0);
-            self.patch.timer.play();
+            op.patch.timer.setTime(0);
+            op.patch.timer.play();
             isFinishedPort.set(true);
             firstTime=false;
         }
@@ -124,7 +115,7 @@ this.exe.onTriggered= function()
             finishedAll=true;
             self.onAnimFrame=function(){};
         }
-        
+
         if(preRenderTimeFrames.anim && patch.loading.getProgress()>=1.0
             && prerenderCount<preRenderTimeFrames.anim.keys.length
         )
@@ -137,8 +128,8 @@ this.exe.onTriggered= function()
         if(patch.loading.getProgress()<1.0)
         {
             self.loading.trigger();
-            self.patch.timer.setTime(0);
-            self.patch.timer.pause();
+            op.patch.timer.setTime(0);
+            op.patch.timer.pause();
         }
     }
 

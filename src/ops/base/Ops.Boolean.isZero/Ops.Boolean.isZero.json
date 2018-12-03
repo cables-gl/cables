@@ -3,13 +3,15 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Boolean.isZero"
@@ -26,5 +28,9 @@
                 "text": "`true` if input `Value` is `0`, `false` otherwise"
             }
         ]
-    }
+    },
+    "updated": 1542699278983,
+    "authorName": "pandur",
+    "id": "76d37c73-3c32-47bd-8b4a-4229db7e57f1",
+    "created": 1542699279469
 }

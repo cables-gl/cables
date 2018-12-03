@@ -1,9 +1,3 @@
-
-var inStr=op.inValueString("String");
-var outStr=op.outValue("Result");
-
-inStr.onChange=function()
-{
-    if(!inStr.get())outStr.set('');
-    else outStr.set(inStr.get().toUpperCase());
-};
+// your new op
+// have a look at the documentation at: 
+// https://docs.cables.gl/dev_hello_op/dev_hello_op.html

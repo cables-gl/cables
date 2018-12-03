@@ -1,15 +1,12 @@
-
-var colName=op.inValueString("Column Name","name");
-var inArr=op.inArray("CSV Array");
-
-var result=op.outArray("Result");
+const colName=op.inValueString("Column Name","name");
+const inArr=op.inArray("CSV Array");
+const result=op.outArray("Result");
 
 colName.onChange=update;
 inArr.onChange=update;
 
 function update()
 {
-    
     var iArr=inArr.get();
     var iName=colName.get();
     

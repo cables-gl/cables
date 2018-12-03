@@ -11,25 +11,30 @@
             },
             {
                 "type": "0",
-                "name": "startValue"
+                "name": "startValue",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "endValue"
+                "name": "endValue",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "bpm"
+                "name": "bpm",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "easing"
+                "name": "easing",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "bang"
+                "name": "bang",
+                "subType": "number"
             }
         ],
         "name": "Ops.Audio.Bang"
@@ -66,5 +71,9 @@
                 "text": "The output of the animation int the range [Start Value, End Value], connect this e.g. to a `translate`-operator"
             }
         ]
-    }
+    },
+    "updated": 1542698810157,
+    "authorName": "pandur",
+    "id": "a745f54c-d85e-4ddf-b6db-c3cbc9c4330d",
+    "created": 1542698807379
 }

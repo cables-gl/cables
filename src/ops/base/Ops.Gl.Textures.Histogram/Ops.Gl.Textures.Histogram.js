@@ -1,4 +1,4 @@
-const exe=op.inFunction("Trigger");
+const exe=op.inTrigger("Trigger");
 const inTex=op.inTexture("Texture");
 
 const outTex=op.outTexture("Histogram Texture");

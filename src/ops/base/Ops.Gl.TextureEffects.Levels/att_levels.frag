@@ -13,6 +13,6 @@ void main()
    vec4 inputRange = min(max(base - vec4(inMin), vec4(0.0)) / (vec4(inMax) - vec4(inMin)), vec4(outMax));
    inputRange = pow(inputRange, vec4(1.0 / (1.5 - midPoint)));
 
-   gl_FragColor = mix(vec4(outMin), vec4(1.0), inputRange);
+   outColor= mix(vec4(outMin), vec4(1.0), inputRange);
 
 }

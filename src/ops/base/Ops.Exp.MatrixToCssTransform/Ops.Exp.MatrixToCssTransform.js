@@ -1,7 +1,7 @@
-const update=op.inFunction("Update");
+const update=op.inTrigger("Update");
 const elId=op.inValueString("Html Id");
 const persp=op.inValue("Perspective",600);
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 
 function generateCSSString(matrix ){
    var str = '';

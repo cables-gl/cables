@@ -1,4 +1,3 @@
-op.name="ChordTriad";
 
 // constants
 var OCTAVE_DEFAULT = 4;
@@ -51,7 +50,7 @@ function appendOctave(scale) {
     for(var i=0; i<scale.length; i++) {
         var noteAndOctave = getNoteAndOctaveFromString(scale[i]);
         if(noteAndOctave) {
-            ret.push(noteAndOctave[0] + (noteAndOctave[1]+1));    
+            ret.push(noteAndOctave[0] + (noteAndOctave[1]+1));
         } else {
             return;
         }
@@ -67,7 +66,7 @@ function findInArray(val, arr) {
     var noteOctaveArr = getNoteAndOctaveFromString(val);
     if(noteOctaveArr) { // e.g. "C4"
         note = noteOctaveArr[0]; // "C"
-    }    
+    }
     for(var i=0; i<arr.length; i++) {
         var noteOct = getNoteAndOctaveFromString(arr[i]);
         if(arr[i] === val || noteOct && noteOct[0] === note || arr[i] === note) {

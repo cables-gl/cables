@@ -1,6 +1,6 @@
-const render=op.inFunction("render");
+const render=op.inTrigger("render");
 const shader=op.inObject("shader");
-const trigger=op.outFunction("trigger");
+const trigger=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;
 shader.ignoreValueSerialize=true;

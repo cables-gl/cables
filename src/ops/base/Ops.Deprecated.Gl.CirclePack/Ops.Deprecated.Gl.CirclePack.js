@@ -1,10 +1,10 @@
 op.name="CirclePack";
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var max=op.inValue("Max Circles",200);
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outIndex=op.outValue("index");
 var outX=op.outValue("x");
 var outY=op.outValue("y");

@@ -8,8 +8,8 @@ var mul = op.inValue('Frequency', 1.0);
 // output
 var result = op.outValue('Result');
 
-x.onValueChanged = update;
-y.onValueChanged = update;
+x.onChange=update;
+y.onChange=update;
 
 function update() {
     result.set(

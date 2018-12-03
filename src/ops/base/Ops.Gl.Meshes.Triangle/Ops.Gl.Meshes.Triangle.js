@@ -1,15 +1,14 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var sizeW=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var sizeH=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
+var sizeW=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var sizeH=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 const draw=op.inValueBool("Draw",true);
 var geom=new CGL.Geometry("triangle");
-
 
 sizeW.set(1);
 sizeH.set(1);
 
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;
@@ -20,7 +19,6 @@ render.onTriggered=function()
     if(draw.get())mesh.render(cgl.getShader());
     trigger.trigger();
 };
-
 
 function create()
 {
@@ -35,6 +33,16 @@ function create()
          0.0,  0.0,  1.0,
          0.0,  0.0,  1.0
     ];
+    geom.tangents = [
+        1,0,0,
+        1,0,0,
+        1,0,0
+    ];
+    geom.biTangents = [
+        0,1,0,
+        0,1,0,
+        0,1,0
+    ];
 
     geom.texCoords = [
          0.5,  0.0,
@@ -42,16 +50,13 @@ function create()
          0.0,  1.0,
     ];
 
-    
     geom.verticesIndices = [
         0, 1, 2
     ];
 
-
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);
     geomOut.set(geom);
-
 }
 
 sizeW.onValueChange(create);

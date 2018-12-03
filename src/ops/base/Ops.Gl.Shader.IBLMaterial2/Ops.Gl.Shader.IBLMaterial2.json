@@ -1,5 +1,5 @@
 {
-    "updated": 1536740762436,
+    "updated": 1542959360902,
     "authorName": "pandur",
     "id": "bc561659-a89f-499d-bb21-30bade34c1e7",
     "created": 1534581433227,
@@ -98,5 +98,9 @@
             }
         ],
         "name": "Ops.Gl.Shader.IBLMaterial2"
+    },
+    "summary": "image based lighting material using cubemaps",
+    "docs": {
+        "ports": []
     }
 }

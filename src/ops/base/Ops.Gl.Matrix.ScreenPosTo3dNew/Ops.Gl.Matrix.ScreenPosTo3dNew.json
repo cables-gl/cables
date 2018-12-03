@@ -1,5 +1,5 @@
 {
-    "updated": 1519852870121,
+    "updated": 1537932515590,
     "authorName": "pandur",
     "id": "48d72532-afa6-40c9-a895-00a43635a94b",
     "created": 1519852858295,
@@ -11,23 +11,31 @@
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result X"
+                "name": "Result X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Result Y"
+                "name": "Result Y",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.ScreenPosTo3dNew"
+    },
+    "summary": "convert screen coordinates to 3d coordinates",
+    "docs": {
+        "ports": []
     }
 }

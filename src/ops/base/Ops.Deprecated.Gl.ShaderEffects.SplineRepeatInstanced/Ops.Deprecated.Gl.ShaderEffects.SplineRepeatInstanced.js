@@ -1,6 +1,6 @@
 // TODO: remove array3xtransformedinstanced....
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var inTransformations=op.inArray("positions");
 var geom=op.inObject("geom");
@@ -211,13 +211,13 @@ function doRender()
 
     if(texScaling.get())
     {
-        /* --- */cgl.setTexture(6,texScaling.get().tex);
+        cgl.setTexture(6,texScaling.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texScaling.get().tex);
     }
 
     if(texRotation.get())
     {
-        /* --- */cgl.setTexture(7,texRotation.get().tex);
+        cgl.setTexture(7,texRotation.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texRotation.get().tex);
     }
 

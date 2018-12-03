@@ -1,15 +1,15 @@
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var num=op.addInPort(new Port(op,"num"));
-var size=op.addInPort(new Port(op,"size"));
-var seed=op.addInPort(new Port(op,"random seed"));
-var scaleX=op.addInPort(new Port(op,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleY=op.addInPort(new Port(op,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleZ=op.addInPort(new Port(op,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var num=op.addInPort(new CABLES.Port(op,"num"));
+var size=op.addInPort(new CABLES.Port(op,"size"));
+var seed=op.addInPort(new CABLES.Port(op,"random seed"));
+var scaleX=op.addInPort(new CABLES.Port(op,"scaleX",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleY=op.addInPort(new CABLES.Port(op,"scaleY",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleZ=op.addInPort(new CABLES.Port(op,"scaleZ",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 var round=op.inValueBool('round',false);
 
 var trigger=op.outTrigger("trigger");
-var idx=op.addOutPort(new Port(op,"index")) ;
-var rnd=op.addOutPort(new Port(op,"rnd")) ;
+var idx=op.addOutPort(new CABLES.Port(op,"index")) ;
+var rnd=op.addOutPort(new CABLES.Port(op,"rnd")) ;
 
 var rotX=op.inValueSlider("Rotate X",1);
 var rotY=op.inValueSlider("Rotate Y",1);
@@ -44,7 +44,7 @@ function doRender()
     }
 
     op.patch.instancing.pushLoop(randoms.length);
-    
+
     if(scrollX.get()!=0)
     {
         for(var i=0;i<origRandoms.length;i++)
@@ -96,7 +96,7 @@ function reset()
     origRandoms.length=0;
 
     Math.randomSeed=seed.get();
-    
+
     var makeRound=round.get();
 
     for(var i=0;i<num.get();i++)
@@ -104,7 +104,7 @@ function reset()
         randomsFloats.push(Math.seededRandom());
 
         var v=getRandomPos();
-        
+
         if(makeRound)
             while(vec3.len(v)>size.get()/2)
                 v=getRandomPos();

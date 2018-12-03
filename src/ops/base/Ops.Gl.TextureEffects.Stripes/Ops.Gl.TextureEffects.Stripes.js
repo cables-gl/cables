@@ -1,28 +1,28 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
-var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
-var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['X','Y','Diagonal','Diagonal Flip']}));
+var render=op.inTrigger('render');
+var num=op.addInPort(new CABLES.Port(op,"num",CABLES.OP_PORT_TYPE_VALUE));
+var width=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var axis=op.addInPort(new CABLES.Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['X','Y','Diagonal','Diagonal Flip']}));
 
-var offset=op.addInPort(new Port(op,"offset",OP_PORT_TYPE_VALUE));
+var offset=op.addInPort(new CABLES.Port(op,"offset",CABLES.OP_PORT_TYPE_VALUE));
 
 var smoothed=op.inValueBool("Gradients");
 
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 smoothed.onChange=function()
 {
-    
+
     if(smoothed.get())shader.define("STRIPES_SMOOTHED");
     else shader.removeDefine("STRIPES_SMOOTHED");
 };
 
-axis.onValueChanged=function()
+axis.onChange=function()
 {
     if(axis.get()=='X')uniAxis.setValue(0);
     if(axis.get()=='Y')uniAxis.setValue(1);
@@ -35,7 +35,7 @@ var shader=new CGL.Shader(cgl,'textureeffect stripes');
 shader.setSource(shader.getDefaultVertexShader(),attachments.stripes_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-//op.onLoaded=shader.compile;
+
 var numUniform=new CGL.Uniform(shader,'f','num',num);
 var uniWidth=new CGL.Uniform(shader,'f','width',width);
 var uniAxis=new CGL.Uniform(shader,'f','axis',0);

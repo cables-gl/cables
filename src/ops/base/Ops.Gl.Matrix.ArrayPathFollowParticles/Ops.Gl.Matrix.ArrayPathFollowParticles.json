@@ -1,7 +1,4 @@
 {
-    "libs": [
-        "moment.js"
-    ],
     "layout": {
         "portsIn": [
             {

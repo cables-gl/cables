@@ -1,14 +1,16 @@
-var render=op.inFunction("Render");
-var inNum=op.inValue("Num",10);
-var inSpacing=op.inValue("Spacing",1);
-var next=op.outFunction("Next");
+const render=op.inTrigger("Render");
+const inNum=op.inValue("Num",10);
+const inSpacing=op.inValue("Spacing",1);
+const next=op.outTrigger("Next");
 
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var mesh=null;
 
-inNum.onChange=init;
-inSpacing.onChange=init;
+inNum.onChange=inSpacing.onChange=function()
+{
+    if(mesh)mesh.dispose();
+    mesh=null;
+};
 
 function init()
 {
@@ -19,12 +21,14 @@ function init()
 
     var l=space*num/2;
 
+    var tc=[];
+
     for(var i=-num/2;i<num/2+1;i++)
     {
         geomVertical.vertices.push(-l);
         geomVertical.vertices.push(i*space);
         geomVertical.vertices.push(0);
-    
+
         geomVertical.vertices.push(l);
         geomVertical.vertices.push(i*space);
         geomVertical.vertices.push(0);
@@ -32,11 +36,19 @@ function init()
         geomVertical.vertices.push(i*space);
         geomVertical.vertices.push(-l);
         geomVertical.vertices.push(0);
-    
+
         geomVertical.vertices.push(i*space);
         geomVertical.vertices.push(l);
         geomVertical.vertices.push(0);
+        
+        tc.push(0,0);
+        tc.push(0,0);
+        tc.push(0,0);
+        tc.push(0,0);
     }
+    
+    geomVertical.setTexCoords(tc);
+    geomVertical.calculateNormals();
 
     if(!mesh) mesh=new CGL.Mesh(cgl,geomVertical);
         else mesh.setGeom(geomVertical);

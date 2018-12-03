@@ -1,6 +1,5 @@
-
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 
 var inGeomA=op.inObject("Geometry 1");
 var inGeomB=op.inObject("Geometry 2");
@@ -16,7 +15,7 @@ var shader=null;
 var mesh=null;
 var module=null;
 var needsRebuild=true;
-
+var uniFade=null;
 inGeomA.onChange=rebuildLater;
 inGeomB.onChange=rebuildLater;
 
@@ -79,10 +78,7 @@ render.onTriggered=function()
     mesh.render(cgl.getShader());
     
     next.trigger();
-
 };
-
-
 
 inStart.onChange=updateStart;
 inEnd.onChange=updateEnd;

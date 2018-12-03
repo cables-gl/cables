@@ -1,5 +1,5 @@
 {
-    "updated": 1537272323586,
+    "updated": 1541093630563,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f6fd7e38-171b-4c53-b215-c198de19c20e",
@@ -37,5 +37,9 @@
             }
         ],
         "name": "Ops.Json3d.Mesh"
+    },
+    "summary": "internal op of json3dscene - render a mesh",
+    "docs": {
+        "ports": []
     }
 }

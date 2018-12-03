@@ -1,5 +1,5 @@
 var value=op.inValue("Value");
-var trigger=op.outFunction("Trigger");
+var trigger=op.outTrigger("Trigger");
 
 var lastValue=-Number.MAX_VALUE;
 

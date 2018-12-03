@@ -1,8 +1,6 @@
-
 var inArray=op.inArray("In");
-var inValue=op.inValue("Value");
+var inValue=op.inValue("Value",1.0);
 var outArray=op.outArray("Result");
-
 
 var newArr=[];
 outArray.set(newArr);
@@ -20,11 +18,6 @@ inValue.onChange=inArray.onChange=function()
     {
         newArr[i]=arr[i]*mul;
     }
-    
-    
     outArray.set(null);
     outArray.set(newArr);
-
-    
-    
 };

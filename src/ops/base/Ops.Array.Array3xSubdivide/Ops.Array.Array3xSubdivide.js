@@ -1,10 +1,8 @@
+const inArr=op.inArray("Points");
+const subDivs=op.inValue("Num Subdivs",5);
+const bezier=op.inValueBool("Smooth",true);
 
-
-var inArr=op.inArray("Points");
-var subDivs=op.inValue("Num Subdivs",5);
-var bezier=op.inValueBool("Smooth",true);
-
-var result=op.outArray("Result");
+const result=op.outArray("Result");
 
 subDivs.onChange=calc;
 bezier.onChange=calc;

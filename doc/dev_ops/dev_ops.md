@@ -6,38 +6,38 @@
 
 Different port examples below.
 
-Value ports in and out:
+Floating point number ports in and out:
 ```javascript
-var inFloat = op.inValue("Value or float in");
-var outFloat = op.outValue("Value or float out");
+const inFloat = op.inValueFloat("float in");
+const outFloat = op.outValue("float out");
 ```
 String ports in and out:
 ```javascript
-var inString = op.inValueString("String in");
-var outString = op.outValueString("String out");
+const inString = op.inValueString("String in");
+const outString = op.outValueString("String out");
 ```
 
 Boolean ports in and out:
 ```javascript
-var inBoolean = op.inValueBool("Boolean in");
-var outBoolean = op.outValueBool("Boolean out");
+const inBoolean = op.inValueBool("Boolean in");
+const outBoolean = op.outValueBool("Boolean out");
 ```
 
 Trigger ports in and out:
 ```javascript
-var execute = op.inFunction("Trigger In");
-var trigger = op.outFunction("Trigger out");
+const execute = op.inTrigger("Trigger In");
+const trigger = op.outTrigger("Trigger out");
 ```
 Array ports in and out:
 ```javascript
-var inArray = op.inArray("Array in");
-var outArray = op.outArray("Array out");
+const inArray = op.inArray("Array in");
+const outArray = op.outArray("Array out");
 ```
 
 Object ports in and out:
 ```javascript
-var inObject = op.inObject("Object In");
-var outObject = op.outObject("Object Out");
+const inObject = op.inObject("Object In");
+const outObject = op.outObject("Object Out");
 ```
 
 
@@ -50,7 +50,7 @@ The code you write inside your op will be executed once the op is added to the p
 All your initialisation-code should be in the root of your code, e.g.
 
 ```javascript
-var inPort = op.inValue("My Input Port");
+var inPort = op.inValueFloat("My Input Port");
 var outPort = op.outValue("My Output Port");
 
 // put your initialisation code here
@@ -66,7 +66,7 @@ At this state the links between ops / the port-values are not set, yet, we will 
 
 ### port.onChange
 
-For every input-port (except `inFunction` and `inFunctionButton`) you can implement the `onChange`-method which gets called every time the value on the port changes. This means that it is being called when:
+For every input-port (except `inTrigger` and `inTriggerButton`) you can implement the `onChange`-method which gets called every time the value on the port changes. This means that it is being called when:
 
 - the user entered a new value in the GUI (input field / moved a slider / checkbox / …)
 - Another op linked to this port

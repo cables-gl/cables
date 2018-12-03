@@ -18,5 +18,9 @@
             }
         ],
         "name": "Ops.Json.ObjectIsNull"
+    },
+    "summary": "check if object is null or a valid object",
+    "docs": {
+        "ports": []
     }
 }

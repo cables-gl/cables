@@ -11,23 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
-            },
-            {
-                "type": "0",
-                "name": "draw preview"
+                "name": "height",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -37,7 +37,8 @@
             },
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.FFTAreaAverage"
@@ -45,6 +46,11 @@
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "ed633fe4-3200-4890-8d9e-ccd1ea478c74",
-    "updated": 1508579309314,
-    "created": 1508578965659
+    "updated": 1542795249867,
+    "created": 1508578965659,
+    "summary": "ger average value in an area of a fft audio analysis buffer",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
 }

@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.ScaleXYZViewMatrix"
+    },
+    "summary": "scale xyz of viewmatrix",
+    "docs": {
+        "ports": []
     }
 }

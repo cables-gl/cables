@@ -1,5 +1,4 @@
 // #extension GL_OES_standard_derivatives : enable
-// precision highp float;
 
 {{MODULES_HEAD}}
 
@@ -271,7 +270,7 @@ void main()
     {{MODULE_COLOR}}
 
 
-    gl_FragColor = col;
+    outColor= col;
     // gl_FragColor.a =a;
 }
 

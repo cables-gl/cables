@@ -1,8 +1,7 @@
-op.name="ObjectChanged";
 
 var inObj=op.inObject("Object");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var obj=null;
 

@@ -1,0 +1,58 @@
+{
+    "updated": 1538304788728,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "695aef03-8ab0-48a1-b3ee-2c6c01a21640",
+    "created": 1504962897297,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MidiJson"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Beat",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Names"
+            },
+            {
+                "type": "3",
+                "name": "Progress"
+            },
+            {
+                "type": "3",
+                "name": "Velocity"
+            },
+            {
+                "type": "0",
+                "name": "Num Tracks",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "BPM",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Data"
+            }
+        ],
+        "name": "Ops.Audio.MidiJson"
+    },
+    "summary": "read MIDI information at time x",
+    "docs": {
+        "ports": []
+    }
+}

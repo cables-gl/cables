@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.getViewMatrix"
+    },
+    "summary": "get current viewmatrix",
+    "docs": {
+        "ports": []
     }
 }

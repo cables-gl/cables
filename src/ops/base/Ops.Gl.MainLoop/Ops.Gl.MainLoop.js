@@ -1,5 +1,5 @@
 const fpsLimit=op.inValue("FPS Limit",0);
-const trigger=op.outFunction("trigger");
+const trigger=op.outTrigger("trigger");
 const width=op.outValue("width");
 const height=op.outValue("height");
 const reduceLoadingFPS=op.inValueBool("Reduce FPS loading");

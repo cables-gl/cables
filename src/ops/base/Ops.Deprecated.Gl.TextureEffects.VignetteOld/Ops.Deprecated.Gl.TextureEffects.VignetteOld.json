@@ -1,0 +1,42 @@
+{
+    "summary": "effect of shading away the edges of the image",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Amount"
+            },
+            {
+                "type": "0",
+                "name": "lensRadius1"
+            },
+            {
+                "type": "0",
+                "name": "lensRadius2"
+            },
+            {
+                "type": "0",
+                "name": "Ratio"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Vignette"
+    },
+    "updated": 1508866139735,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "b1b03b84-e924-4308-a252-1d348ede07e6",
+    "created": 1508866133390,
+    "docs": {
+        "ports": []
+    }
+}

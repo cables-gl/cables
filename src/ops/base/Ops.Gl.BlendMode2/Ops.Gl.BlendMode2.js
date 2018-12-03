@@ -1,18 +1,11 @@
-var exec=op.inFunction("Render");
-var inBlend=op.inValueSelect("Blendmode",
-    [
-        'None',
-        'Normal',
-        'Add',
-        'Subtract',
-        'Multiply'
-    ],'Normal');
-var inPremul=op.inValueBool("Premultiplied");
-var next=op.outFunction("Next");
+const
+    exec=op.inTrigger("Render"),
+    inBlend=op.inValueSelect("Blendmode",['None','Normal','Add','Subtract','Multiply'],'Normal'),
+    inPremul=op.inValueBool("Premultiplied"),
+    next=op.outTrigger("Next");
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var blendMode=0;
-
 inBlend.onChange=update;
 update();
 
@@ -30,7 +23,6 @@ exec.onTriggered=function()
     cgl.pushBlendMode(blendMode,inPremul.get());
     next.trigger();
     cgl.popBlendMode();
-    
 	cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
 	cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
 };

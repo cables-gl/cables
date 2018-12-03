@@ -1,13 +1,13 @@
 op.name="ToneMap";
 
-var render=op.inFunction("Render");
-var trigger=op.outFunction("Trigger");
+var render=op.inTrigger("Render");
+var trigger=op.outTrigger("Trigger");
 var method=op.inValueSelect("Method",["Linear","Reinhard","Hejl Dawson","Uncharted"],"Linear");
 var exposure=op.inValue("Exposure",3);
 var cgl=op.patch.cgl;
 
 var shader=new CGL.Shader(cgl);
-//op.onLoaded=shader.compile;
+
 
 method.onChange=function()
 {
@@ -103,8 +103,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
 
     cgl.currentTextureEffect.bind();
-    /* --- */cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    
 
     cgl.currentTextureEffect.finish();
 

@@ -1,18 +1,11 @@
-op.name="AudioBuffer";
-
-var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
-
-// input ports
-var inUrlPort = op.addInPort( new Port( op, "URL", OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'audio'  } ));
-
-
-// output ports
-var audioBufferPort = op.outObject("Audio Buffer");
-var finishedLoadingPort = op.outValue("Finished Loading", false);
-var sampleRatePort = op.outValue("Sample Rate", 0);
-var lengthPort = op.outValue("Length", 0);
-var durationPort = op.outValue("Duration", 0);
-var numberOfChannelsPort = op.outValue("Number of Channels", 0);
+const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
+const inUrlPort = op.addInPort( new CABLES.Port( op, "URL", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: 'audio'  } ));
+const audioBufferPort = op.outObject("Audio Buffer");
+const finishedLoadingPort = op.outValue("Finished Loading", false);
+const sampleRatePort = op.outValue("Sample Rate", 0);
+const lengthPort = op.outValue("Length", 0);
+const durationPort = op.outValue("Duration", 0);
+const numberOfChannelsPort = op.outValue("Number of Channels", 0);
 
 // change listeners
 inUrlPort.onChange = function() {
@@ -33,7 +26,7 @@ function onLoadFinished(buffer) {
 }
 
 function onLoadFailed(e) {
-    op.log("Error: Loading audio file failed: ", e);
+    console.error("Error: Loading audio file failed: ", e);
     invalidateOutPorts();
 }
 

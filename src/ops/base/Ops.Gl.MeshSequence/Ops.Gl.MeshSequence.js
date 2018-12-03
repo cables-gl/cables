@@ -1,13 +1,13 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION ));
-var filename=this.addInPort(new Port(this,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var frame=this.addInPort(new Port(this,"frame",OP_PORT_TYPE_VALUE ));
+var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
+var filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var frame=this.addInPort(new CABLES.Port(this,"frame",CABLES.OP_PORT_TYPE_VALUE ));
 frame.set(0);
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var calcVertexNormals=this.addInPort(new Port(this,"smooth",OP_PORT_TYPE_VALUE,{'display':'bool'} ));
+var calcVertexNormals=this.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'} ));
 calcVertexNormals.set(true);
 
 var doDraw=op.inValueBool("Render",true);

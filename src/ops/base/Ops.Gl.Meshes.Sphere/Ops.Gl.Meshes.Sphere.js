@@ -1,17 +1,15 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var inStacks=op.inValueInt("stacks",32);
-var inSlices=op.inValueInt("slices",32);
-var inRadius=op.addInPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
-var inRender=op.inValueBool("Render",true);
-
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+const render=op.inTrigger("render");
+const inStacks=op.inValueInt("stacks",32);
+const inSlices=op.inValueInt("slices",32);
+const inRadius=op.addInPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
+const inRender=op.inValueBool("Render",true);
+const trigger=op.outTrigger("trigger")
+const geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 inRadius.set(1);
 geomOut.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var mesh=null;
 var geom=null;
 var geomVertices=[];
@@ -19,10 +17,11 @@ var geomVertexNormals=[];
 var geomTexCoords=[];
 var geomVerticesIndices=[];
 
-
-inSlices.onChange=function(){ mesh=null; };
-inStacks.onChange=function(){ mesh=null; };
-inRadius.onChange=function(){ mesh=null; };
+inSlices.onChange=inStacks.onChange=inRadius.onChange=function()
+    {
+        if(mesh)mesh.dispose();
+        mesh=null;
+    };
 
 op.preRender=
 render.onTriggered=function()
@@ -140,7 +139,6 @@ function uvSphere(radius, slices, stacks)
             indices[k++] = row1 + i;
             indices[k++] = row2 + i + 1;
             indices[k++] = row1 + i + 1;
-
         }
     }
 
@@ -148,11 +146,15 @@ function uvSphere(radius, slices, stacks)
     geom.vertexNormals=normals;
     geom.texCoords=texCoords;
     geom.verticesIndices=indices;
+    geom.glPrimitive=cgl.gl.TRIANGLE_STRIP;
 
     geomOut.set(geom);
 
-    if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
+    if(!mesh)mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);
-
 }
 
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}

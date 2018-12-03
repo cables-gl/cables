@@ -6,7 +6,7 @@ var DEFAULT_SIZE = 10;
 var NUM_DEFAULT = 4;
 
 // inputs
-var triggerPort = op.inFunction('Execute');
+var triggerPort = op.inTrigger('Execute');
 var scrollValuePort = op.inValue('Scroll Position');
 var numPort = op.inValue('Number of Elements', NUM_DEFAULT);
 var sizePort = op.inValue('Size', DEFAULT_SIZE);
@@ -16,15 +16,15 @@ var sizePort = op.inValue('Size', DEFAULT_SIZE);
 // var maxPort = op.inValue('Maximum', 80);
 
 // outputs
-var triggerItemPort = op.outFunction('Item Trigger');
+var triggerItemPort = op.outTrigger('Item Trigger');
 var indexPort = op.outValue('Index');
 var positionPort = op.outValue('Position');
-// var beginningReachedPort = op.outFunction('Beginning Reached');
-// var endReachedPort = op.outFunction('End Reached');
+// var beginningReachedPort = op.outTrigger('Beginning Reached');
+// var endReachedPort = op.outTrigger('End Reached');
 // var distBeginningPort = op.outValue('Item Dist Beginning');
 var distCenterPort = op.outValue('Norm Position');
 // var distEndPort = op.outValue('Item Dist End');
-var nextPort = op.outFunction('Next');
+var nextPort = op.outTrigger('Next');
 var frontIndexPort = op.outValue('Front Index');
 var frontPercentPort = op.outValue('Front Percentage');
 

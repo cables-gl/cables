@@ -1,0 +1,1 @@
+result will always be a positive number or zero

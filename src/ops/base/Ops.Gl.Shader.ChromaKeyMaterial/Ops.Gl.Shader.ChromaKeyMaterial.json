@@ -1,5 +1,5 @@
 {
-    "updated": 1519816671060,
+    "updated": 1541061931849,
     "authorName": "pandur",
     "id": "20be6064-b332-447c-a220-e70d5bc506e0",
     "created": 1519816612579,
@@ -15,43 +15,53 @@
             },
             {
                 "type": "0",
-                "name": "Mode"
+                "name": "Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "weightMul"
+                "name": "weightMul",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "white"
+                "name": "white",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuseRepeatX"
+                "name": "diffuseRepeatX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuseRepeatY"
+                "name": "diffuseRepeatY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Tex Offset X"
+                "name": "Tex Offset X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Tex Offset Y"
+                "name": "Tex Offset Y",
+                "subType": "number"
             }
         ],
         "portsOut": [

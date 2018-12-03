@@ -1,6 +1,6 @@
 {
     "summary": "timed switching of trigger",
-    "updated": 1522335599227,
+    "updated": 1541226131475,
     "authorName": "pandur",
     "id": "73c892c9-3e81-4ddc-952a-fbe6bf00ef2c",
     "created": 1516308627269,
@@ -12,15 +12,18 @@
             },
             {
                 "type": "0",
-                "name": "current"
+                "name": "current",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "overwriteTime"
+                "name": "overwriteTime",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "ignoreInSubPatch"
+                "name": "ignoreInSubPatch",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -34,7 +37,13 @@
             },
             {
                 "type": "0",
-                "name": "currentKeyTime"
+                "name": "currentKeyTime",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Current",
+                "subType": "number"
             },
             {
                 "type": "1",

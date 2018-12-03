@@ -1,9 +1,7 @@
-op.name="ForceMeshDeformer";
-
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var inSmooth=op.inValueBool("Smooth",true);
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 var shaderModule=null;

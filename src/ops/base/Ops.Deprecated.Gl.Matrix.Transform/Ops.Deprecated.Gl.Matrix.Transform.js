@@ -1,21 +1,21 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=self.patch.cgl;
 this.name='transform';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.posX=this.addInPort(new Port(this,"posX"));
-this.posY=this.addInPort(new Port(this,"posY"));
-this.posZ=this.addInPort(new Port(this,"posZ"));
+this.posX=this.addInPort(new CABLES.Port(this,"posX"));
+this.posY=this.addInPort(new CABLES.Port(this,"posY"));
+this.posZ=this.addInPort(new CABLES.Port(this,"posZ"));
 
-this.scaleX=this.addInPort(new Port(this,"scaleX"));
-this.scaleY=this.addInPort(new Port(this,"scaleY"));
-this.scaleZ=this.addInPort(new Port(this,"scaleZ"));
+this.scaleX=this.addInPort(new CABLES.Port(this,"scaleX"));
+this.scaleY=this.addInPort(new CABLES.Port(this,"scaleY"));
+this.scaleZ=this.addInPort(new CABLES.Port(this,"scaleZ"));
 
-this.rotX=this.addInPort(new Port(this,"rotX"));
-this.rotY=this.addInPort(new Port(this,"rotY"));
-this.rotZ=this.addInPort(new Port(this,"rotZ"));
+this.rotX=this.addInPort(new CABLES.Port(this,"rotX"));
+this.rotY=this.addInPort(new CABLES.Port(this,"rotY"));
+this.rotZ=this.addInPort(new CABLES.Port(this,"rotZ"));
 
 var vPos=vec3.create();
 var vScale=vec3.create();
@@ -100,17 +100,17 @@ this.rotChanged=function()
     rotChanged=true;
 };
 
-this.rotX.onValueChanged=this.rotChanged;
-this.rotY.onValueChanged=this.rotChanged;
-this.rotZ.onValueChanged=this.rotChanged;
+this.rotX.onChange=this.rotChanged;
+this.rotY.onChange=this.rotChanged;
+this.rotZ.onChange=this.rotChanged;
 
-this.scaleX.onValueChanged=this.scaleChanged;
-this.scaleY.onValueChanged=this.scaleChanged;
-this.scaleZ.onValueChanged=this.scaleChanged;
+this.scaleX.onChange=this.scaleChanged;
+this.scaleY.onChange=this.scaleChanged;
+this.scaleZ.onChange=this.scaleChanged;
 
-this.posX.onValueChanged=this.translateChanged;
-this.posY.onValueChanged=this.translateChanged;
-this.posZ.onValueChanged=this.translateChanged;
+this.posX.onChange=this.translateChanged;
+this.posY.onChange=this.translateChanged;
+this.posZ.onChange=this.translateChanged;
 
 this.rotX.set(0.0);
 this.rotY.set(0.0);

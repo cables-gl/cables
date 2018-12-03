@@ -1,10 +1,8 @@
-op.name="WebcamTexture";
-
-var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
-var fps=op.addInPort(new Port(op,"fps",OP_PORT_TYPE_VALUE ));
+var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+var fps=op.addInPort(new CABLES.Port(op,"fps",CABLES.OP_PORT_TYPE_VALUE ));
 var inActive=op.inValueBool("Active",true);
 
-// var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
+// var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 var textureOut=op.outTexture("texture");
 
 var outRatio=op.outValue("Ratio");

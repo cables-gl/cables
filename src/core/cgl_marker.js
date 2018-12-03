@@ -1,5 +1,4 @@
 CABLES=CABLES||{};
-CABLES.WEBAUDIO = CABLES.WEBAUDIO || {};
 
 CGL.Marker=function(cgl)
 {

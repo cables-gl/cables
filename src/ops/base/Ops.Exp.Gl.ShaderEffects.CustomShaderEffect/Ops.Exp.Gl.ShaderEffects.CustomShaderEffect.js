@@ -1,7 +1,7 @@
-const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-const fragHead=op.addInPort(new Port(op,"Fragment Head",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
-const fragBody=op.addInPort(new Port(op,"Fragment Main",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
-const next=op.outFunction("Next");
+const render=op.inTrigger("render");
+const fragHead=op.addInPort(new CABLES.Port(op,"Fragment Head",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
+const fragBody=op.addInPort(new CABLES.Port(op,"Fragment Main",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
+const next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
 var shader=null;
@@ -74,7 +74,7 @@ function bindTextures()
     {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
         {
-            /* --- */cgl.setTexture(0+i+3,uniformTextures[i].get().tex);
+            cgl.setTexture(0+i+3,uniformTextures[i].get().tex);
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
         }
     }

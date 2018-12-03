@@ -1,9 +1,6 @@
-
-op.name='MidiDeviceList';
-
-var outNumDevices=op.addOutPort(new Port(op,"Num Devices"));
-var outSupport=op.addOutPort(new Port(op,"Midi Support"));
-var outNames=op.addOutPort(new Port(op,"Device Names",OP_PORT_TYPE_ARRAY));
+const outNumDevices=op.outValue("Num Devices");
+const outSupport=op.outValueBool("Midi Support");
+const outNames=op.outArray("Device Names");
 
 var midi=null;
 
@@ -25,7 +22,7 @@ function onMIDISuccess(midiAccess)
 
     var devices=[];
     var numDevices=0;
-    
+
     for (var input = inputs.next(); input && !input.done; input = inputs.next())
     {
         arr.push(input.value.name);
@@ -35,5 +32,3 @@ function onMIDISuccess(midiAccess)
     outNames.set(arr);
     outNumDevices.set(numDevices);
 }
-
-

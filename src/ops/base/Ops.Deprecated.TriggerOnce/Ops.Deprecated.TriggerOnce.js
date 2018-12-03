@@ -1,6 +1,6 @@
 op.name="TriggerOnce";
 
 
-var exe=op.outFunction("exe");
+var exe=op.outTrigger("exe");
 
 exe.trigger();

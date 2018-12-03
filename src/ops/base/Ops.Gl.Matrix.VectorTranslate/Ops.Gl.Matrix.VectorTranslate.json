@@ -1,5 +1,5 @@
 {
-    "updated": 1517222227205,
+    "updated": 1542292899581,
     "authorName": "pandur",
     "id": "ca65a1bc-3efa-4b73-96c4-087003b9470a",
     "created": 1517222226007,
@@ -11,19 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "Speed"
+                "name": "Speed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Vector X"
+                "name": "Vector X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Vector Y"
+                "name": "Vector Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Vector Z"
+                "name": "Vector Z",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -31,7 +35,8 @@
             },
             {
                 "type": "0",
-                "name": "max"
+                "name": "max",
+                "subType": "number"
             }
         ],
         "portsOut": [

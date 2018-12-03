@@ -1,15 +1,15 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
-var shearX=op.addInPort(new Port(op,"shearX"));
-var shearY=op.addInPort(new Port(op,"shearY"));
+var shearX=op.addInPort(new CABLES.Port(op,"shearX"));
+var shearY=op.addInPort(new CABLES.Port(op,"shearY"));
 
 var cgl=op.patch.cgl;
 var shearMatrix = mat4.create();
 
-shearY.onValueChanged=update;
-shearX.onValueChanged=update;
+shearY.onChange=update;
+shearX.onChange=update;
 shearX.set(0.0);
 shearY.set(0.0);
 

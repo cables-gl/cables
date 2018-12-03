@@ -8,26 +8,29 @@
             },
             {
                 "type": "0",
-                "name": "Interval"
+                "name": "Interval",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Delay"
+                "name": "Delay",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
-                "name": "Trigger"
+                "type": "0",
+                "name": "percent",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "percent"
+                "type": "1",
+                "name": "Trigger"
             }
         ],
         "name": "Ops.Anim.IntervalAnim"
     },
-    "updated": 1536332102688,
+    "updated": 1537871189096,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "5ac2cf80-18f7-4390-b0ce-ebdad22d2a80",

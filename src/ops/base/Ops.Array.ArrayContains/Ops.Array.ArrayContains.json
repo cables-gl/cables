@@ -7,20 +7,27 @@
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "SearchValue",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Found"
+                "name": "Found",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayContains"
     },
-    "summary": "check if array contains a string or number (find,search,indexOf)"
+    "summary": "check if array contains a string or number (find,search,indexOf)",
+    "updated": 1542698772835,
+    "authorName": "pandur",
+    "id": "3ff90564-fe8d-422f-a4ee-f8bfb8f1b76f",
+    "created": 1542698773328
 }

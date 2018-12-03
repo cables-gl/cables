@@ -42,5 +42,9 @@
         ],
         "name": "Ops.Sidebar.Toggle"
     },
-    "summary": "sidebar boolean toggle/switch element"
+    "summary": "sidebar boolean toggle/switch element",
+    "youtubeid": "cpRVswVdvI0",
+    "docs": {
+        "ports": []
+    }
 }

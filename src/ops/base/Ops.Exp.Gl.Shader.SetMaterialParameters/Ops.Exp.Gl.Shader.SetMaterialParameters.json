@@ -69,5 +69,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.Shader.SetMaterialParameters"
+    },
+    "summary": "edit shader parameters ",
+    "docs": {
+        "ports": []
     }
 }

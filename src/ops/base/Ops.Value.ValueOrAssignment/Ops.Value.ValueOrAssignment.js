@@ -1,7 +1,7 @@
 
-var val=op.addInPort(new Port(op,"Value",OP_PORT_TYPE_VALUE));
-var orval=op.addInPort(new Port(op,"Default Value",OP_PORT_TYPE_VALUE));
-var result=op.addOutPort(new Port(op,"Result",OP_PORT_TYPE_VALUE));
+var val=op.addInPort(new CABLES.Port(op,"Value",CABLES.OP_PORT_TYPE_VALUE));
+var orval=op.addInPort(new CABLES.Port(op,"Default Value",CABLES.OP_PORT_TYPE_VALUE));
+var result=op.addOutPort(new CABLES.Port(op,"Result",CABLES.OP_PORT_TYPE_VALUE));
 
 val.ignoreValueSerialize=true;
 
@@ -17,5 +17,5 @@ function updateVar()
     }
 }
 
-val.onValueChanged=updateVar;
-orval.onValueChanged=updateVar;
+val.onChange=updateVar;
+orval.onChange=updateVar;

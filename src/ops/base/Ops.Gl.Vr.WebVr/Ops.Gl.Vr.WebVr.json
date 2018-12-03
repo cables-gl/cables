@@ -26,5 +26,9 @@
             }
         ],
         "name": "Ops.Gl.Vr.WebVr"
+    },
+    "summary": "experimental webvr rendering",
+    "docs": {
+        "ports": []
     }
 }

@@ -1,5 +1,5 @@
 {
-    "updated": 1535881462814,
+    "updated": 1541667135340,
     "authorName": "pandur",
     "id": "d11b89b2-c2e3-4fcb-b4da-632d23b69075",
     "created": 1535108886705,
@@ -46,5 +46,10 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.DepthTextureFocus"
-    }
+    },
+    "summary": "draw a gradient mapped to depth buffer values",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "QXxgX2kS0TE"
 }

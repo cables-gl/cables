@@ -5,6 +5,7 @@
 Ui attributes of an op can be set to give the user warnings and give visual feedback about things that may require their attention.
 <br>
 The following example will give an error in the OP UI and show a red circle if the value coming in is above 1.0
+<br>
 ![Button](img/dev_gui_ui_attributes_error_message.png)
 <br>
 
@@ -14,7 +15,7 @@ If the value is lower than 0 then the UI will show this message
 
 ```javascript
 //create a port for value input
-const inVal  = op.inValue ("Value in");
+const inVal  = op.inValueFloat ("Value in");
 //create a port for value output
 const outVal = op.outValue("value out");
 
@@ -46,4 +47,11 @@ inVal.onChange = function()
     }
 };
 ```
+### Hide port
+To hide a port on a op but still have a UI element use the following code
+
+```javascript
+portName.hidePort();
+```
+
 

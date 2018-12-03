@@ -1,4 +1,4 @@
-var exe=op.inFunction("Exe");
+var exe=op.inTrigger("Exe");
 
 var inArr1=op.inArray('Array 1');
 var inArr2=op.inArray('Array 2');
@@ -6,7 +6,7 @@ var inArr2=op.inArray('Array 2');
 var inPerc=op.inValueSlider("perc");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outArr=op.outArray("Result");
 
 

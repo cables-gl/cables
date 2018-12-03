@@ -1,7 +1,5 @@
-op.name="HoverPoint";
-
-var exec=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
+var exec=op.addInPort(new CABLES.Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('Trigger');
 
 var inId=op.inValueString("id");
 var pPointSize=op.inValue("Size Point",10);
@@ -17,7 +15,7 @@ var ignore=op.inValueBool("Ignore Mouse");
 var outHovering=op.outValue("Hovering",false);
 var outHoverIndex=op.outValue("Hover Index",-1);
 
-var triggerClicked=op.outFunction("Clicked");
+var triggerClicked=op.outTrigger("Clicked");
 
 
 

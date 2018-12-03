@@ -1,4 +1,4 @@
-var inExe=op.inFunction("Update");
+var inExe=op.inTrigger("Update");
 var inVal=op.inValue("Value");
 var result=op.outValue("Speed");
 

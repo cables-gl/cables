@@ -1,1 +1,91 @@
-{}
+{
+    "updated": 1540986130204,
+    "authorName": "pandur",
+    "id": "6144cc4f-c68f-4c8f-ada6-b1745d527716",
+    "created": 1540986119378,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "screen space",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "direction",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "r1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r3",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g3",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b3",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a3",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Deprecated.Gl.Shader.GradientMaterial"
+    }
+}

@@ -1,5 +1,3 @@
-op.name="SetVariableString";
-
 var val=op.inValueString("Value");
 op.varName=op.inValueSelect("Variable");
 

@@ -10,8 +10,8 @@ var node = new Tone.Meter (SMOOTHING_DEFAULT);
 
 // inputs
 var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-var updateValuePort = op.inFunction("Update Value");
-var updateDecibelsPort = op.inFunction("Update Decibels");
+var updateValuePort = op.inTrigger("Update Value");
+var updateDecibelsPort = op.inTrigger("Update Decibels");
 var smoothingPort = op.inValueSlider("Smoothing");
 smoothingPort.set(SMOOTHING_DEFAULT);
 

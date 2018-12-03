@@ -1,11 +1,11 @@
 const playPause=op.inValueBool("Play",true);
-const reset=op.inFunctionButton("Reset");
+const reset=op.inTriggerButton("Reset");
 const outTime=op.outValue("Time");
 const inSpeed=op.inValue("Speed",1);
 
-let timer=new CABLES.Timer();
-let lastTime=0;
-let time=0;
+var timer=new CABLES.Timer();
+var lastTime=0;
+var time=0;
 
 playPause.onChange=setState;
 setState();

@@ -1,4 +1,4 @@
-var exe=op.inFunctionButton("exe");
+var exe=op.inTriggerButton("exe");
 
 exe.onTriggered=function()
 {

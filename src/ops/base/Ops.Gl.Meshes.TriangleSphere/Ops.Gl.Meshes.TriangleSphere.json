@@ -7,17 +7,17 @@
             },
             {
                 "type": "0",
-                "name": "Render",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Iterations",
+                "name": "iterations",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Flat",
+                "name": "flat",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "draw",
                 "subType": "boolean"
             }
         ],
@@ -28,7 +28,7 @@
             },
             {
                 "type": "2",
-                "name": "Geometry"
+                "name": "geometry"
             }
         ],
         "name": "Ops.Gl.Meshes.TriangleSphere"
@@ -37,7 +37,7 @@
     "docs": {
         "ports": []
     },
-    "updated": 1522739002474,
+    "updated": 1540977195216,
     "authorName": "pandur",
     "id": "ad0e8831-9554-46b3-ac03-c5c166921eda",
     "created": 1519245806225

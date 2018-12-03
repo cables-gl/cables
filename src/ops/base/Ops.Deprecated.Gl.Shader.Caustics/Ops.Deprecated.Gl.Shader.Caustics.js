@@ -1,10 +1,10 @@
 op.name="Ops.Gl.Shader.Caustics";
 
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
-var lightmap=op.addInPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
+var lightmap=op.addInPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true,display:'createOpHelper'}));
 var lightmapUniform=null;
 
 
@@ -15,11 +15,11 @@ var uniCausticsTime=null;
 render.onTriggered=doRender;
 
 
-var pOpacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE));
+var pOpacity=op.addInPort(new CABLES.Port(op,"opacity",CABLES.OP_PORT_TYPE_VALUE));
 
-var pAmplitude=op.addInPort(new Port(op,"amplitude",OP_PORT_TYPE_VALUE));
-var pFrequency=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
-var pRepeat=op.addInPort(new Port(op,"repeat",OP_PORT_TYPE_VALUE));
+var pAmplitude=op.addInPort(new CABLES.Port(op,"amplitude",CABLES.OP_PORT_TYPE_VALUE));
+var pFrequency=op.addInPort(new CABLES.Port(op,"frequency",CABLES.OP_PORT_TYPE_VALUE));
+var pRepeat=op.addInPort(new CABLES.Port(op,"repeat",CABLES.OP_PORT_TYPE_VALUE));
 pRepeat.set(1.0);
 pOpacity.set(1.0);
 
@@ -74,7 +74,7 @@ function doRender()
         uniOpacity=new CGL.Uniform(shader,'f',mod.prefix+'_opacity',pOpacity.get());
     }
     
-    /* --- */cgl.setTexture(4,lightmap.get().tex);
+    cgl.setTexture(4,lightmap.get().tex);
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, lightmap.get().tex);
     uniCausticsTime.setValue(Date.now()/1000.0-startTime);
 

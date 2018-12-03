@@ -1,11 +1,9 @@
-op.name="ReadEntries";
-
 // see https://de.mathworks.com/help/thingspeak/get-a-channel-feed.html
 
 var dummyKey = "12345";
 var dummyChannelId = "12345";
 
-var read = op.addInPort( new Port( this, "Read", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var read = op.addInPort( new CABLES.Port( this, "Read",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var channelId = op.inValue("Channel ID", dummyChannelId);
 var readApiKey = op.inValueString("Read API Key", dummyKey);
 
@@ -13,7 +11,7 @@ var readApiKey = op.inValueString("Read API Key", dummyKey);
 var apiUrlPart1 = "https://api.thingspeak.com/channels/";
 var apiUrlPart2 = "/feeds.json";
 
-var finished = op.outFunction("When Finished");
+var finished = op.outTrigger("When Finished");
 var entries = op.outArray("Entries");
 var channelInfos = op.outObject("Channel Infos");
 var success = op.outValue("Success", false);

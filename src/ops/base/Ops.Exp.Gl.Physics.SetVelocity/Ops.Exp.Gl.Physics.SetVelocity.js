@@ -1,12 +1,12 @@
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 
 var velX=op.inValue("Velocity X");
 var velY=op.inValue("Velocity Y");
 var velZ=op.inValue("Velocity Z");
 
-var doSet=op.inFunctionButton("Set");
+var doSet=op.inTriggerButton("Set");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var doSetDelayed=false;
 

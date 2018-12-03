@@ -1,10 +1,10 @@
 
 op.name='get var';
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var varname=op.addInPort(new Port(op,"name",OP_PORT_TYPE_VALUE,{type:'string'}));
-var val=op.addOutPort(new Port(op,"val",OP_PORT_TYPE_VALUE));
+var varname=op.addInPort(new CABLES.Port(op,"name",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var val=op.addOutPort(new CABLES.Port(op,"val",CABLES.OP_PORT_TYPE_VALUE));
 var defaultValue=op.inValue("Default Value",0);
 
 val.ignoreValueSerialize=true;

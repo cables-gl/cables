@@ -1,6 +1,6 @@
 
-var render=op.inFunction("Exec");
-var next=op.outFunction("next");
+var render=op.inTrigger("Exec");
+var next=op.outTrigger("next");
 var w=op.inValueInt("Width",1920);
 var h=op.inValueInt("Height",1080);
 

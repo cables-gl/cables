@@ -11,8 +11,8 @@
  * @type Function
  */
 
-var PORT_DIR_IN=0;
-var PORT_DIR_OUT=1;
+CABLES.PORT_DIR_IN=0;
+CABLES.PORT_DIR_OUT=1;
 
 var CABLES=CABLES || {};
 
@@ -24,7 +24,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @name CABLES.Port#direction
      * @description direction of port (input(0) or output(1))
      */
-    this.direction=PORT_DIR_IN;
+    this.direction=CABLES.PORT_DIR_IN;
     this.id=CABLES.generateUUID();
     this.parent=__parent;
 
@@ -36,7 +36,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.links=[];
     this.value=0.0;
     this.name=name;
-    this.type=type || OP_PORT_TYPE_VALUE;
+    this.type=type || CABLES.OP_PORT_TYPE_VALUE;
     this.uiAttribs=uiAttribs || {};
     this.anim=null;
     var oldAnimVal=-5711;
@@ -148,7 +148,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
         if(this.parent.enabled && !this.crashed)
         {
-            if(v!=this.value || this.changeAlways || this.type==OP_PORT_TYPE_TEXTURE || this.type==OP_PORT_TYPE_ARRAY )
+            if(v!=this.value || this.changeAlways || this.type==CABLES.OP_PORT_TYPE_TEXTURE || this.type==CABLES.OP_PORT_TYPE_ARRAY )
             {
                 if(this._animated)
                 {
@@ -171,12 +171,18 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                         console.error('onvaluechanged exception cought',ex);
                         console.log(ex.stack);
                         console.log('exception in: '+this.parent.name);
+                        gui.showOpCrash(this.parent);
 
                         if(CABLES.UI) CABLES.UI.MODAL.showException(ex,this.parent);
                     }
+
+                    if(CABLES.UI && this.type==CABLES.OP_PORT_TYPE_TEXTURE )
+                    {
+                        gui.texturePreview().updateTexturePort(this);
+                    }
                 }
 
-                if(this.direction==PORT_DIR_OUT)
+                if(this.direction==CABLES.PORT_DIR_OUT)
                     for (var i = 0; i < this.links.length; ++i)
                         this.links[i].setValue();
             }
@@ -212,11 +218,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      */
     CABLES.Port.prototype.getTypeString=function()
     {
-        if(this.type==OP_PORT_TYPE_VALUE)return 'Value';
-        else if(this.type==OP_PORT_TYPE_FUNCTION)return 'Function';
-        else if(this.type==OP_PORT_TYPE_OBJECT)return 'Object';
-        else if(this.type==OP_PORT_TYPE_DYNAMIC)return 'Dynamic';
-        else if(this.type==OP_PORT_TYPE_ARRAY)return 'Array';
+        if(this.type==CABLES.OP_PORT_TYPE_VALUE)return 'Value';
+        else if(this.type==CABLES.OP_PORT_TYPE_FUNCTION)return 'Function';
+        else if(this.type==CABLES.OP_PORT_TYPE_OBJECT)return 'Object';
+        else if(this.type==CABLES.OP_PORT_TYPE_DYNAMIC)return 'Dynamic';
+        else if(this.type==CABLES.OP_PORT_TYPE_ARRAY)return 'Array';
         else return 'Unknown';
     };
 
@@ -227,13 +233,13 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
         if(!this.ignoreValueSerialize && this.links.length===0 )
         {
-            if(this.type==OP_PORT_TYPE_OBJECT && this.value && this.value.tex){}
+            if(this.type==CABLES.OP_PORT_TYPE_OBJECT && this.value && this.value.tex){}
                 else obj.value=this.value;
         }
         if(this._animated) obj.animated=true;
         if(this.anim) obj.anim=this.anim.getSerialized();
         if(this.uiAttribs.display=='file')  obj.display=this.uiAttribs.display;
-        if(this.direction==PORT_DIR_IN && this.links.length>0)
+        if(this.direction==CABLES.PORT_DIR_IN && this.links.length>0)
         {
             obj.links=[];
             for(var i in this.links)
@@ -275,9 +281,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             }
 
 
-        if(this.direction==PORT_DIR_IN)
+        if(this.direction==CABLES.PORT_DIR_IN)
         {
-            if(this.type==OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
+            if(this.type==CABLES.OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
                 else this.setValue(this._valueBeforeLink || null);
         }
 
@@ -297,7 +303,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.addLink=function(l)
     {
         this._valueBeforeLink=this.value;
-
         this.links.push(l);
         if(this.onLinkChanged)this.onLinkChanged();
     };
@@ -356,29 +361,32 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this.links.length===0)return;
         if(!this.parent.enabled)return;
 
+        var portTriggered=null;
         try
         {
             for (var i = 0; i < this.links.length; ++i)
             {
                 if(this.links[i].portIn)
                 {
-                    this.links[i].portIn._onTriggered();
+                    portTriggered=this.links[i].portIn;
+                    portTriggered._onTriggered();
                 }
                 this.links[i].activity();
-                // console.log(1);
-
             }
         }
         catch(ex)
         {
             this.parent.enabled=false;
 
-            if(CABLES.UI) CABLES.UI.MODAL.showException(ex,this.parent);
+            if(CABLES.UI) CABLES.UI.MODAL.showException(ex,portTriggered.parent);
+
+            
+            gui.showOpCrash(portTriggered.parent);
 
             console.log('exception!');
             console.error('ontriggered exception cought',ex);
             console.log(ex.stack);
-            console.log('exception in: '+this.parent.name);
+            console.log('exception in: '+portTriggered.parent.name);
         }
     };
 
@@ -398,7 +406,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         if(this._animated!=a)
         {
             this._animated=a;
-            if(this._animated && !this.anim)this.anim=new CABLES.TL.Anim();
+            if(this._animated && !this.anim)this.anim=new CABLES.Anim();
             this._onAnimToggle();
         }
     };
@@ -406,7 +414,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.toggleAnim=function(val)
     {
         this._animated=!this._animated;
-        if(this._animated && !this.anim)this.anim=new CABLES.TL.Anim();
+        if(this._animated && !this.anim)this.anim=new CABLES.Anim();
         this.setAnimated(this._animated);
         this._onAnimToggle();
     };
@@ -496,12 +504,13 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 * @returns {string} - The port type as string
 */
 CABLES.Port.portTypeNumberToString = function(type) {
-   if(type == OP_PORT_TYPE_VALUE) return 'value';
-   else if(type == OP_PORT_TYPE_FUNCTION) return 'function';
-   else if(type == OP_PORT_TYPE_OBJECT) return 'object';
-   else if(type == OP_PORT_TYPE_ARRAY) return 'array';
-   else if(type == OP_PORT_TYPE_DYNAMIC) return 'dynamic';
+   if(type == CABLES.OP_PORT_TYPE_VALUE) return 'value';
+   else if(type == CABLES.OP_PORT_TYPE_FUNCTION) return 'function';
+   else if(type == CABLES.OP_PORT_TYPE_OBJECT) return 'object';
+   else if (type == CABLES.OP_PORT_TYPE_ARRAY) return 'array';
+   else if (type == CABLES.OP_PORT_TYPE_STRING) return 'string';
+   else if(type == CABLES.OP_PORT_TYPE_DYNAMIC) return 'dynamic';
    else return 'unknown';
 };
 
-var Port = CABLES.Port; // TODO deprecated.. remove one day...
+// var Port = CABLES.Port; // TODO deprecated.. remove one day...

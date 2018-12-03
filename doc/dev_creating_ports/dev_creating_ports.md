@@ -102,7 +102,7 @@ It is also possible to define the syntax highlighting for the editor-tab:
 
 ```javascript
 var styleSheetPort = op.addInPort(
-    new Port(op, "Stylesheet", OP_PORT_TYPE_VALUE, {
+    new CABLES.Port(op, "Stylesheet",CABLES.OP_PORT_TYPE_VALUE, {
         display: 'editor',
         editorSyntax: 'css'
     })
@@ -114,7 +114,7 @@ var styleSheetPort = op.addInPort(
 For a fixed amount of values to choose from.
 
 ```javascript
-var align = op.addInPort( new Port( op, "align", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: ['left', 'center', 'right'] } ) );
+var align = op.addInPort( new Port( op, "align",CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: ['left', 'center', 'right'] } ) );
 ```
 
 ### Array Ports
@@ -151,7 +151,7 @@ An object can contain basically anything, e.g.:
 Every port has a `data`-object-attribute, which can be used to store port-specific-data. This can be useful e.g. when you create ports in a for loop and need to store an index-reference or something similar.
 
 ```javascript
-var myPort = op.inValue("My In Port");
+var myPort = op.inValueFloat("My In Port");
 myPort.data.someValue = 1;
 
 ```
@@ -159,7 +159,7 @@ myPort.data.someValue = 1;
 Additionally you can create a **read-only** port, which is visible, but cannot be edited.
 
 ```javascript
-op.patchId = op.addInPort(new Port(op, "Patch ID", OP_PORT_TYPE_VALUE, { display: 'readonly' }));
+op.patchId = op.addInPort(new CABLES.Port(op, "Patch ID",CABLES.OP_PORT_TYPE_VALUE, { display: 'readonly' }));
 ```
 
 ## Port linking
@@ -167,9 +167,7 @@ op.patchId = op.addInPort(new Port(op, "Patch ID", OP_PORT_TYPE_VALUE, { display
 Once a port is linked with another port `myPort.onLinkChanged` is executed. When it is executed the port may not have a value yet, it just sais: «There is a new connection». Later on `myPort.onLinkChanged` is called and you can get the new value with `myPort.get()`.
 
 ```javascript
-op.name="MyTestOp";
-
-var myPort = op.inValue("My Port");
+var myPort = op.inValueFloat("My Port");
 
 myPort.onLinkChanged = function() {
 	op.log("A link to myPort has been added or removed");

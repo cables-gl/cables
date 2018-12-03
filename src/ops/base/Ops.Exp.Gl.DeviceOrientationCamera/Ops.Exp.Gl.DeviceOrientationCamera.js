@@ -1,7 +1,6 @@
-op.name="DeviceOrientationCamera";
 
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 var winOrient=op.outValue("Window Orientation");
 
 window.addEventListener("deviceorientation", onOrientationChange,true);

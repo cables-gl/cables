@@ -1,6 +1,6 @@
 {
     "summary": "Executes an external function (external javascript)",
-    "updated": 1516178727515,
+    "updated": 1541051030933,
     "authorName": "tim",
     "id": "33475ab9-b631-4225-92fa-c678cb2e0a24",
     "created": 1516178727528,
@@ -12,19 +12,23 @@
             },
             {
                 "type": "0",
-                "name": "callback name"
+                "name": "callback name",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "value 1"
+                "name": "value 1",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "value 2"
+                "name": "value 2",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "value 3"
+                "name": "value 3",
+                "subType": "string"
             }
         ],
         "name": "Ops.Patch.CallBack"

@@ -1,5 +1,5 @@
 var v=op.inValueString("value","");
-var result=op.addOutPort(new Port(op,"result"));
+var result=op.addOutPort(new CABLES.Port(op,"result"));
 
 v.onChange=function()
 {
