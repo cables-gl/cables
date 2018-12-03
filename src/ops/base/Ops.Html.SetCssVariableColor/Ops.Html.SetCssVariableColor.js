@@ -22,6 +22,5 @@ function toHex(c)
 function update()
 {
     const hex='#'+toHex(r.get())+toHex(g.get())+toHex(b.get());
-    console.log(hex);
     root.style.setProperty('--'+varname.get(), hex);
 }

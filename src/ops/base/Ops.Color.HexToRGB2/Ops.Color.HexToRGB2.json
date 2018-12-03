@@ -1,0 +1,51 @@
+{
+    "id": "9877f198-8dac-48e5-9310-244ef1a8dec5",
+    "updated": 1543861625154,
+    "authorName": "pandur",
+    "created": 1543861514673,
+    "summary": "Converts a hex color like `#ff0000` to number values",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Hex",
+                "text": "A hex color, e.g. `#ff0000` or `00ff00` (you can omit the `#` character if you want)"
+            },
+            {
+                "name": "Bytes",
+                "text": "If `true` the output will be in range `[0..255]`, otherwise `[0..1]`"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Hex"
+            },
+            {
+                "type": "0",
+                "name": "Bytes",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Color.HexToRGB2"
+    }
+}
