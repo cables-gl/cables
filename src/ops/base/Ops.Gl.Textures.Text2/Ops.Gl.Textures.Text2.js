@@ -1,7 +1,7 @@
 const
     text=op.inStringEditor("text",'cables'),
     doRefresh=op.inTriggerButton("Refresh"),
-    font=op.inString("font"),
+    font=op.inString("font","Arial"),
     inFontSize=op.inValueFloat("fontSize",30),
     maximize=op.inValueBool("Maximize Size"),
     texWidth=op.inValueInt("texture width",512),

@@ -43,6 +43,7 @@ void main()
         y=o*amountY+texCoord.y;
     #endif
 
+
     #ifdef WRAP_CLAMP
         x=clamp(x,0.0,1.0);
         y=clamp(y,0.0,1.0);
@@ -59,6 +60,8 @@ void main()
         x=abs((floor(mx)-fract(mx)));
         y=abs((floor(my)-fract(my)));
     #endif
+
+
 
     vec4 col=texture(tex,vec2(x,y) );
     vec4 base=texture2D(tex,texCoord);
