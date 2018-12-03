@@ -1,5 +1,5 @@
 {
-    "updated": 1543860105839,
+    "updated": 1543875380350,
     "authorName": "pandur",
     "id": "9fb1baae-db06-481c-8220-6d87d02c4c9e",
     "created": 1542744846969,
@@ -19,13 +19,18 @@
             },
             {
                 "type": "0",
+                "name": "Maximize Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "fontSize",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Maximize Size",
-                "subType": "boolean"
+                "name": "line distance",
+                "subType": "number"
             },
             {
                 "type": "0",
@@ -46,11 +51,6 @@
                 "type": "0",
                 "name": "vertical align",
                 "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "line distance",
-                "subType": "number"
             },
             {
                 "type": "0",

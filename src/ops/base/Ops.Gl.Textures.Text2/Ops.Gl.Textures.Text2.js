@@ -2,17 +2,23 @@ const
     text=op.inStringEditor("text",'cables'),
     doRefresh=op.inTriggerButton("Refresh"),
     font=op.inString("font","Arial"),
-    inFontSize=op.inValueFloat("fontSize",30),
     maximize=op.inValueBool("Maximize Size"),
+    inFontSize=op.inValueFloat("fontSize",30),
+    lineDistance=op.inValueFloat("line distance",1),
     texWidth=op.inValueInt("texture width",512),
     texHeight=op.inValueInt("texture height",512),
     align=op.inValueSelect("align",['left','center','right'],'center'),
     valign=op.inValueSelect("vertical align",['top','center','bottom'],'center'),
-    lineDistance=op.inValueFloat("line distance",1),
     border=op.inValueFloat("border",0),
     cachetexture=op.inValueBool("Reuse Texture",true),
     outRatio=op.outValue("Ratio"),
     textureOut=op.outTexture("texture");
+
+
+op.setPortGroup('Size',[font,maximize,inFontSize,lineDistance]);
+op.setPortGroup('Texture',[texWidth,texHeight]);
+op.setPortGroup('Alignment',[valign,align]);
+
 
 textureOut.ignoreValueSerialize=true;
 

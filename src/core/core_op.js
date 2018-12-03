@@ -876,10 +876,16 @@ CABLES.Op = function()
         // if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
     }
 
-    CABLES.Op.prototype.setPortGroup=function(ports)
+    CABLES.Op.prototype.setPortGroup=function(name,ports)
     {
-        // ports[0].setUiAttribs({"spaceBefore":true});
-        // ports[ports.length-1].setUiAttribs({"spaceAfter":true});
+        for (var i = 0; i < ports.length; i++)
+            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
+                else
+                {
+                    console.error('setPortGroup: invalid port!');
+                    // console.trace();
+
+                }
     }
 
     /**

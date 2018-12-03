@@ -21,9 +21,9 @@ axis.set('xy');
 pivotX.set('center');
 pivotY.set('center');
 
-op.setPortGroup([pivotX,pivotY]);
-op.setPortGroup([width,height]);
-op.setPortGroup([nColumns,nRows]);
+op.setPortGroup('Pivot',[pivotX,pivotY]);
+op.setPortGroup('Size',[width,height]);
+op.setPortGroup('Structure',[nColumns,nRows]);
 
 var geom=new CGL.Geometry('rectangle');
 var mesh=null;

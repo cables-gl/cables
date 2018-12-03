@@ -1,13 +1,13 @@
 var cgl=op.patch.cgl;
 
 var render=op.inTrigger('render');
-var msaa=op.inValueSelect("MSAA",["none","2x","4x","8x"],"none");
 var useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 var width=op.inValueInt("texture width");
 var height=op.inValueInt("texture height");
-
 var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+
+var msaa=op.inValueSelect("MSAA",["none","2x","4x","8x"],"none");
 var trigger=op.outTrigger('trigger');
 // var tex=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 // var texDepth=op.addOutPort(new CABLES.Port(op,"textureDepth",CABLES.OP_PORT_TYPE_TEXTURE));
@@ -26,6 +26,8 @@ height.set(512);
 useVPSize.set(true);
 tfilter.set('linear');
 var reInitFb=true;
+
+op.setPortGroup('Alignment',[useVPSize,width,height,tfilter]);
 
 
 // todo why does it only work when we render a mesh before>?>?????

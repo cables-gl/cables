@@ -20,6 +20,8 @@ align.onChange=
     str.onChange=
     lineHeight.onChange=generateMesh;
 
+
+
 var geom=null;
 var mesh=null;
 
@@ -123,6 +125,13 @@ r.uniform=new CGL.Uniform(shader,'f','b',b);
 var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 a.uniform=new CGL.Uniform(shader,'f','a',a);
 a.set(1.0);
+
+
+
+op.setPortGroup('Display',[scale,inFont]);
+op.setPortGroup('Alignment',[align,valign]);
+op.setPortGroup('Color',[r,g,b,a]);
+
 
 var height=0;
 var vec=vec3.create();
