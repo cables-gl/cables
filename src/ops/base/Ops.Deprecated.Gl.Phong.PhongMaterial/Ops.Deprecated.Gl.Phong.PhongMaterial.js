@@ -6,7 +6,7 @@ var cgl=this.patch.cgl;
 
 var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
 var gammeCorrect=this.addInPort(new CABLES.Port(this,"gamma correction",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.outTrigger("trigger");
 var shaderOut=this.addOutPort(new CABLES.Port(this,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 shaderOut.ignoreValueSerialize=true;
 var MAX_LIGHTS=16;

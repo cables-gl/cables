@@ -1,7 +1,7 @@
 //Op.apply(this, arguments);
 this.name="HeightMap";
 
-var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
 var filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 
 
@@ -15,7 +15,7 @@ var nRows=this.addInPort(new CABLES.Port(this,"rows",CABLES.OP_PORT_TYPE_VALUE))
 var nColumns=this.addInPort(new CABLES.Port(this,"columns",CABLES.OP_PORT_TYPE_VALUE));
 
 
-var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.outTrigger("trigger");
 
 mHeight.set(3.0);
 mWidth.set(3.0);
