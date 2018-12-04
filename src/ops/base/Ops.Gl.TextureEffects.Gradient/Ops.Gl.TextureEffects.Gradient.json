@@ -8,11 +8,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -38,46 +40,55 @@
             {
                 "type": "0",
                 "name": "r1",
+                "group": "Color A",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g1",
+                "group": "Color A",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b1",
+                "group": "Color A",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "r2",
+                "group": "Color B",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g2",
+                "group": "Color B",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b2",
+                "group": "Color B",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "r3",
+                "group": "Color C",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g3",
+                "group": "Color C",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b3",
+                "group": "Color C",
                 "subType": "number"
             }
         ],
@@ -93,7 +104,7 @@
     "docs": {
         "ports": []
     },
-    "updated": 1522250311894,
+    "updated": 1543911774549,
     "authorName": "pandur",
     "id": "5ada9bd8-227a-4a1f-87ad-0f879c7aa84d",
     "created": 1520431091087
