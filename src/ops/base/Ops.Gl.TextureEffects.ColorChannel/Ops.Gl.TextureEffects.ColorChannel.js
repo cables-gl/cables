@@ -1,5 +1,5 @@
 const render=op.inTrigger("render");
-const trigger=op.outTrigger("trigger")
+const trigger=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
@@ -22,36 +22,27 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
-var channelR=op.addInPort(new CABLES.Port(op,"channelR",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-channelR.onChange=function()
+var channelR=op.inValueBool("channelR",true);
+var channelG=op.inValueBool("channelG",false);
+var channelB=op.inValueBool("channelB",false);
+var mono=op.inValueBool("mono",false);
+
+mono.onChange=
+    channelR.onChange=
+    channelG.onChange=
+    channelB.onChange=updateChannels;
+
+function updateChannels()
 {
     if(channelR.get()) shader.define('CHANNEL_R');
         else shader.removeDefine('CHANNEL_R');
-};
-channelR.set(true);
 
-var channelG=op.addInPort(new CABLES.Port(op,"channelG",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-channelG.set(false);
-channelG.onChange=function()
-{
     if(channelG.get())shader.define('CHANNEL_G');
         else shader.removeDefine('CHANNEL_G');
-};
 
-
-var channelB=op.addInPort(new CABLES.Port(op,"channelB",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-channelB.set(false);
-channelB.onChange=function()
-{
     if(channelB.get()) shader.define('CHANNEL_B');
         else shader.removeDefine('CHANNEL_B');
-};
 
-var mono=op.addInPort(new CABLES.Port(op,"mono",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-mono.set(false);
-mono.onChange=function()
-{
     if(mono.get()) shader.define('MONO');
         else shader.removeDefine('MONO');
-};
-
+}

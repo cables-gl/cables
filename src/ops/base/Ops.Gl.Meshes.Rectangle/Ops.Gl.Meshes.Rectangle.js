@@ -4,16 +4,16 @@ var trigger=op.outTrigger('trigger');
 var width=op.inValue("width",1);
 var height=op.inValue("height",1);
 
-var pivotX=op.addInPort(new CABLES.Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new CABLES.Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var pivotX=op.inValueSelect("pivot x",["center","left","right"]);
+var pivotY=op.inValueSelect("pivot y",["center","top","bottom"]);
 
 var nColumns=op.inValueInt("num columns",1);
 var nRows=op.inValueInt("num rows",1);
-var axis=op.addInPort(new CABLES.Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var axis=op.inValueSelect("axis",["xy","xz"],"xy");
 
 var active=op.inValueBool('Active',true);
 
-var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.outObject("geometry");
 geomOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;

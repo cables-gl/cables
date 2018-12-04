@@ -59,24 +59,24 @@ texture.onChange=function()
     }
 };
 
-var w=op.addInPort(new CABLES.Port(op,"weightMul",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
-w.set(0.6);
+var w=op.inValueSlider("weightMul",0.6);
 w.uniform=new CGL.Uniform(shader,'f','weightMul',w);
 
-var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
+r.setUiAttribs({ colorPick: true });
+
 r.set(0.467);
 r.uniform=new CGL.Uniform(shader,'f','r',r);
 
-var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
 g.set(0.836);
 g.uniform=new CGL.Uniform(shader,'f','g',g);
 
-var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 b.set(0.098);
 b.uniform=new CGL.Uniform(shader,'f','b',b);
 
-var white=op.addInPort(new CABLES.Port(op,"white",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-white.set(0.0);
+var white=op.inValueSlider("white",0);
 white.uniform=new CGL.Uniform(shader,'f','white',white);
 
 const diffuseRepeatX=op.inValue("diffuseRepeatX",1);
