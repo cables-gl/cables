@@ -1,5 +1,5 @@
 
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 
 var numx=op.inValueInt("num x");
 var numy=op.inValueInt("num y");

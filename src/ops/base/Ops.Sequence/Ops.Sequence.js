@@ -1,4 +1,4 @@
-const exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 const exes=[];
 const triggers=[];
 const num=16;

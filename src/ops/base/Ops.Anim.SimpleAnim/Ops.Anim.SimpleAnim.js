@@ -1,5 +1,5 @@
 
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 
 var reset=op.inTriggerButton("reset");
 var rewind=op.inTriggerButton("rewind");
@@ -12,7 +12,7 @@ var loop=op.addInPort(new CABLES.Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{displ
 var waitForReset=op.inValueBool("Wait for Reset",true);
 
 var next=op.outTrigger("Next");
-var result=op.addOutPort(new CABLES.Port(op,"result"));
+const result=op.outValue("result");
 var finished=op.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
 var finishedTrigger=op.outTrigger("Finished Trigger");
 

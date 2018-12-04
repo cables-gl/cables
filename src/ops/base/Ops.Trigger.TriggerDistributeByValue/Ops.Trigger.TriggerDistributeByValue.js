@@ -1,4 +1,4 @@
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var number=op.addInPort(new CABLES.Port(op,"number"));
 var max=op.addInPort(new CABLES.Port(op,"max"));
 var numOut=op.addInPort(new CABLES.Port(op,"num outputs"));

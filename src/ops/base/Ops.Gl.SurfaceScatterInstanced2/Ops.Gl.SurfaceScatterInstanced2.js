@@ -189,7 +189,7 @@ function setup()
 
 // // TODO: remove array3xtransformedinstanced....
 
-// var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+// const exe=op.inTrigger("exe");
 
 // var inTransformations=op.inArray("positions");
 // var inScales=op.inArray("Scale Array");

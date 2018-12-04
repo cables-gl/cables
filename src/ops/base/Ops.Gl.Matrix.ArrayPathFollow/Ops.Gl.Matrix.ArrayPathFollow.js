@@ -1,5 +1,5 @@
 
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var arrayIn=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
 var time=op.addInPort(new CABLES.Port(op,"time",CABLES.OP_PORT_TYPE_VALUE));
 

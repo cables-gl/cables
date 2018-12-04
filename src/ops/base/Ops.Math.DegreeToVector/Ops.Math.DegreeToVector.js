@@ -1,4 +1,4 @@
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 
 var deg=op.addInPort(new CABLES.Port(op,"degree"));
 var x=op.addOutPort(new CABLES.Port(op,"x"));

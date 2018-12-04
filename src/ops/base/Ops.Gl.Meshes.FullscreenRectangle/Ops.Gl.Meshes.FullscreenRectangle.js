@@ -1,15 +1,11 @@
+const
+    render=op.inTrigger('render'),
+    centerInCanvas=op.inValueBool("Center in Canvas"),
+    flipY=op.inValueBool("Flip Y"),
+    inTexture=op.inTexture("Texture"),
+    trigger=op.outTrigger('trigger');
 
-
-var render=op.inTrigger('render');
-var centerInCanvas=op.addInPort(new CABLES.Port(op,"Center in Canvas",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var flipY=op.inValueBool("Flip Y");
-
-var inTexture=op.inTexture("Texture");
-
-
-var trigger=op.outTrigger('trigger');
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var mesh=null;
 var geom=new CGL.Geometry("fullscreen rectangle");
 var x=0,y=0,z=0,w=0,h=0;
@@ -32,7 +28,7 @@ inTexture.onChange=function()
         shader.setSource(attachments.shader_vert,attachments.shader_frag);
         shader.fullscreenRectUniform=new CGL.Uniform(shader,'t','tex',0);
     }
-    
+
     if(!tex)
     {
         shader=null;
@@ -44,22 +40,18 @@ op.preRender=function()
     if(shader)shader.bind();
     if(mesh)mesh.render(shader);
     doRender();
-    
 };
 
 function doRender()
 {
-    if( cgl.getViewPort()[2]!=w || cgl.getViewPort()[3]!=h )
-    {
-        rebuild();
-    }
+    if( cgl.getViewPort()[2]!=w || cgl.getViewPort()[3]!=h ) rebuild();
 
     cgl.pushPMatrix();
     mat4.identity(cgl.pMatrix);
     mat4.ortho(cgl.pMatrix, 0, w,h, 0, -10.0, 1000);
 
     cgl.pushModelMatrix();
-    mat4.identity(cgl.mvMatrix);
+    mat4.identity(cgl.mMatrix);
 
     cgl.pushViewMatrix();
     mat4.identity(cgl.vMatrix);
@@ -101,8 +93,7 @@ function doRender()
 
 function rebuild()
 {
-
-    var currentViewPort=cgl.getViewPort();
+    const currentViewPort=cgl.getViewPort();
     if(currentViewPort[2]==w && currentViewPort[3]==h)return;
 
     var xx=0,xy=0;

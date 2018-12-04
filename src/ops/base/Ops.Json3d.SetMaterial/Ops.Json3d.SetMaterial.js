@@ -1,5 +1,5 @@
 
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var materialName=op.inValueString("name");
 var material=op.addInPort(new CABLES.Port(op,"material",CABLES.OP_PORT_TYPE_OBJECT));
 var trigger=op.outTrigger('trigger');

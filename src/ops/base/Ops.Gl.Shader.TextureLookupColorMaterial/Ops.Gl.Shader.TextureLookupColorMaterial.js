@@ -1,4 +1,4 @@
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+const render=op.inTrigger("render");
 const trigger=op.outTrigger("trigger")
 const shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 shaderOut.ignoreValueSerialize=true;

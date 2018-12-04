@@ -1,4 +1,4 @@
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var value1=op.inValue("Value 1",0);
 var value2=op.inValue("Value 2",0);
 

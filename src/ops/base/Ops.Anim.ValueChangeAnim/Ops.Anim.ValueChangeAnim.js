@@ -1,4 +1,4 @@
-const exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 const inValue=op.inValue("Value");
 const duration=op.addInPort(new CABLES.Port(op,"duration"));
 const result=op.addOutPort(new CABLES.Port(op,"result"));

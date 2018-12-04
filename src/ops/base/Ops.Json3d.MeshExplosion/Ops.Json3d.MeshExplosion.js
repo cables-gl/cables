@@ -3,7 +3,7 @@ var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION
 
 var expansion=op.addInPort(new CABLES.Port(op,"expansion",CABLES.OP_PORT_TYPE_VALUE ));
 
-var next=op.addOutPort(new CABLES.Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+const next=op.outTrigger("next");
 
 
 

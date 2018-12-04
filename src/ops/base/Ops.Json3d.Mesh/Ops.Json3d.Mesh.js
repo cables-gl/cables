@@ -1,7 +1,7 @@
 var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
 op.index=op.inValueInt("mesh index");
 var centerPivot=op.addInPort(new CABLES.Port(op,"center pivot",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'} ));
-var next=op.addOutPort(new CABLES.Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+const next=op.outTrigger("next");
 
 var geometryOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT ));
 var draw=op.addInPort(new CABLES.Port(op,"draw",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
