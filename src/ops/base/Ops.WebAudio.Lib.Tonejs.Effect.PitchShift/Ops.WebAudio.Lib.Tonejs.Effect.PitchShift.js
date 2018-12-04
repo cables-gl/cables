@@ -1,4 +1,3 @@
-op.name="PitchShift";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

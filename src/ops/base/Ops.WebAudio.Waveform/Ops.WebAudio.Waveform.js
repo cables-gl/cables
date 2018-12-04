@@ -1,5 +1,3 @@
-op.name="Waveform";
-
 // currently only uses mono, if we want to extract stereo data some changes in extractPeaks are needed
 
 // constants

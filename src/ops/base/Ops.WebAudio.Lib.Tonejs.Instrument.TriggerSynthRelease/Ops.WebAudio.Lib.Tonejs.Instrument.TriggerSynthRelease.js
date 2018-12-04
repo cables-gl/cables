@@ -1,4 +1,3 @@
-op.name="TriggerSynthRelease";
 
 // input
 var nodePort = op.inObject("Synth");

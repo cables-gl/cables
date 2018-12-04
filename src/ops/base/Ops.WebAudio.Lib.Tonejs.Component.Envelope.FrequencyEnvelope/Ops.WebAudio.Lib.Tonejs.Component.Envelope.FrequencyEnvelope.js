@@ -1,4 +1,3 @@
-op.name="FrequencyEnvelope";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

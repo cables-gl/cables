@@ -1,4 +1,3 @@
-op.name="FmSynth";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

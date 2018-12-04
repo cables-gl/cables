@@ -1,4 +1,3 @@
-op.name="MonoToStereo";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

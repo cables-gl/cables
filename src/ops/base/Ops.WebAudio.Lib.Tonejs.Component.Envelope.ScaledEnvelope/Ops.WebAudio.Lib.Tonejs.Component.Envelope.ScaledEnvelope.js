@@ -1,4 +1,3 @@
-op.name="ScaledEnvelope";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

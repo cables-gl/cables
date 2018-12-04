@@ -1,4 +1,3 @@
-op.name="TriggerSynthAttack";
 
 // input
 var nodePort = op.inObject("Synth");

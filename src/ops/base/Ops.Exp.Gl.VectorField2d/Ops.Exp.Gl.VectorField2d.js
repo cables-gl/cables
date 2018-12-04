@@ -1,5 +1,3 @@
-op.name="VectorField2d";
-
 var render=op.inTrigger("Render");
 var reset=op.inTrigger("Reset");
 var next=op.outTrigger("Next");

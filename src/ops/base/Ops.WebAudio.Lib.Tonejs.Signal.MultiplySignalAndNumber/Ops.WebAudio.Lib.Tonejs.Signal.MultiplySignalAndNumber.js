@@ -1,4 +1,3 @@
-op.name="MultiplySignalAndNumber";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

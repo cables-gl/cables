@@ -1,4 +1,3 @@
-op.name="MembraneSynth";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

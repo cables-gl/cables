@@ -1,4 +1,3 @@
-op.name="PulseOscillator";
 
 if(Tone && Tone.context && Tone.context._context && window.audioContext) {
     op.log('Checking audio context before: Tone.context._context === window.audioContext: ' + Tone.context._context === window.audioContext);

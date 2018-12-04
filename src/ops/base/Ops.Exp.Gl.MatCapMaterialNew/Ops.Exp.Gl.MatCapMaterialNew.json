@@ -11,37 +11,51 @@
             },
             {
                 "type": "2",
-                "name": "Diffuse"
+                "name": "Diffuse",
+                "group": "Texture maps"
             },
             {
                 "type": "2",
-                "name": "Normal"
+                "name": "Normal",
+                "group": "Texture maps"
             },
             {
                 "type": "2",
-                "name": "Specular"
+                "name": "Specular",
+                "group": "Texture maps"
             },
             {
                 "type": "2",
-                "name": "Specular MatCap"
+                "name": "Specular MatCap",
+                "group": "Texture maps"
             },
             {
                 "type": "2",
-                "name": "AO Texture"
+                "name": "AO Texture",
+                "group": "Texture maps"
             },
             {
                 "type": "0",
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Opacity",
+                "group": "Color",
                 "subType": "number"
             },
             {
@@ -57,11 +71,6 @@
             {
                 "type": "0",
                 "name": "Repeat Y",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Opacity",
                 "subType": "number"
             },
             {
@@ -92,7 +101,6 @@
         ],
         "name": "Ops.Exp.Gl.MatCapMaterialNew"
     },
-    "updated": 1539681166635,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "7857ee9e-6d60-4c30-9bc0-dfdddf2b47ad",

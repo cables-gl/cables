@@ -1,4 +1,3 @@
-op.name="NoteToFrequency";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

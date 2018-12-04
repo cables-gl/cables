@@ -1,4 +1,3 @@
-op.name="StartTransport";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

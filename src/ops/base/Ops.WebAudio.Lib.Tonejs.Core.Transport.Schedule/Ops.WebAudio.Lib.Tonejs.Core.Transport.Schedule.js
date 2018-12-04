@@ -1,4 +1,3 @@
-op.name="Schedule";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

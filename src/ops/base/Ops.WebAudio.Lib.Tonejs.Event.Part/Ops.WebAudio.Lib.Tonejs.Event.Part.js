@@ -1,4 +1,3 @@
-op.name="Part";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

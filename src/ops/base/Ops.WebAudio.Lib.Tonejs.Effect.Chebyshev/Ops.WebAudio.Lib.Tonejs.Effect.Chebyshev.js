@@ -1,4 +1,3 @@
-op.name="Chebyshev";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

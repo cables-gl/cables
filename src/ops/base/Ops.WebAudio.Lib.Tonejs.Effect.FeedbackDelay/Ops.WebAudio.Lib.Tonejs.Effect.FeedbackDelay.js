@@ -1,4 +1,3 @@
-op.name="FeedbackDelay";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

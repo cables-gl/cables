@@ -1,4 +1,3 @@
-op.name="Gate";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

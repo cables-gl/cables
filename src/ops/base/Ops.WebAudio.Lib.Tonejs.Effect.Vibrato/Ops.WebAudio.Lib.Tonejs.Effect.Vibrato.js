@@ -1,4 +1,3 @@
-op.name="Vibrato";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

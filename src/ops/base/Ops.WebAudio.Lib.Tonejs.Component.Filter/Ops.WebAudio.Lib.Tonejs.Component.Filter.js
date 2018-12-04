@@ -1,4 +1,3 @@
-op.name="Filter";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

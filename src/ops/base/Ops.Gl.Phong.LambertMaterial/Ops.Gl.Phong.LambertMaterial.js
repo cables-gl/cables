@@ -1,23 +1,19 @@
-const execute=op.addInPort(new CABLES.Port(op,"execute",CABLES.OP_PORT_TYPE_FUNCTION) );
-const r=op.addInPort(new CABLES.Port(op,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-const g=op.addInPort(new CABLES.Port(op,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-const b=op.addInPort(new CABLES.Port(op,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-const a=op.addInPort(new CABLES.Port(op,"diffuse a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+const execute=op.inTrigger("execute");
+const r = op.inValueSlider("diffuse r", Math.random());
+const g = op.inValueSlider("diffuse g", Math.random());
+const b = op.inValueSlider("diffuse b", Math.random());
+const a = op.inValueSlider("diffuse a", 1.0);
+const next=op.outTrigger("next");
 
-const next=op.addOutPort(new CABLES.Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+r.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,"LambertMaterial");
 
-r.uniform=new CGL.Uniform(shader,'f','r',r);
-g.uniform=new CGL.Uniform(shader,'f','g',g);
-b.uniform=new CGL.Uniform(shader,'f','b',b);
-a.uniform=new CGL.Uniform(shader,'f','a',a);
-
-r.set(Math.random());
-g.set(Math.random());
-b.set(Math.random());
-a.set(1.0);
+const runiform=new CGL.Uniform(shader,'f','r',r);
+const guniform=new CGL.Uniform(shader,'f','g',g);
+const buniform=new CGL.Uniform(shader,'f','b',b);
+const auniform=new CGL.Uniform(shader,'f','a',a);
 
 var outShader=op.outObject("Shader");
 outShader.set(shader);

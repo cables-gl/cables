@@ -1,5 +1,3 @@
-op.name="AutoWah";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults

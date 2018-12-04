@@ -1,4 +1,3 @@
-op.name="Gain";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
