@@ -56,7 +56,7 @@ void main()
 {
     vec4 col=vec4(1.0,1.0,0.0,1.0);
     {{MODULE_COLOR}}
-    col=texture2D(tex,texCoord);
+    col=texture(tex,texCoord);
 
     #ifdef MODE_R
        float maxrb = max( col.g, col.b );

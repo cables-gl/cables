@@ -25,16 +25,16 @@ void main()
     #ifdef HAS_TEXTURES
 
         #ifdef HAS_TEXTURE_MASK
-            float mask=texture2D(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
+            float mask=texture(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
         #endif
 
         #ifdef HAS_TEXTURE_DIFFUSE
 
             #ifdef LOOKUP_TEXTURE
-                col=texture2D(diffTex,texCoord);
+                col=texture(diffTex,texCoord);
             #endif
             #ifndef LOOKUP_TEXTURE
-                col=texture2D(diffTex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));
+                col=texture(diffTex,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y)));
             #endif
 
             #ifdef COLORIZE_TEXTURE

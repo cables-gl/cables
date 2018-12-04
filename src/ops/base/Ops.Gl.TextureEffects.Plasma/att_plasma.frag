@@ -23,7 +23,7 @@ void main() {
     v = v/2.0;
     vec3 newColor = vec3(sin(PI*v*mul/4.0), sin(PI*v*mul), cos(PI*v*mul))*.5 + .5;
 
-   vec4 base=texture2D(tex,texCoord);
+   vec4 base=texture(tex,texCoord);
 
    #ifndef GREY
        vec4 col=vec4( _blend(base.rgb,newColor) ,1.0);

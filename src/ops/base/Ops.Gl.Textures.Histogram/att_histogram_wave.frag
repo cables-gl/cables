@@ -5,10 +5,10 @@ IN vec2 texCoord;
 void main()
 {
     vec4 col=vec4(0.0,0.0,0.0,1.0);
-    float strengthR=texture2D(tex,vec2(texCoord.x,0.4)).r;
-    float strengthG=texture2D(tex,vec2(texCoord.x,0.5)).g;
-    float strengthB=texture2D(tex,vec2(texCoord.x,0.7)).b;
-    float strengthL=texture2D(tex,vec2(texCoord.x,0.8)).r;
+    float strengthR=texture(tex,vec2(texCoord.x,0.4)).r;
+    float strengthG=texture(tex,vec2(texCoord.x,0.5)).g;
+    float strengthB=texture(tex,vec2(texCoord.x,0.7)).b;
+    float strengthL=texture(tex,vec2(texCoord.x,0.8)).r;
     
     strengthR*=strengthR;
     strengthG*=strengthG;

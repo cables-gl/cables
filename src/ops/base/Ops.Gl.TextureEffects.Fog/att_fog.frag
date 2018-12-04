@@ -15,9 +15,9 @@ const float LOG2 = 1.442695;
 void main()
 {
    vec4 col=vec4(0.0,0.0,0.0,1.0);
-   vec4 colImg=texture2D(image,texCoord);
+   vec4 colImg=texture(image,texCoord);
 
-    col=texture2D(depthTex,texCoord);
+    col=texture(depthTex,texCoord);
 
     float z=1.0-col.r;
 

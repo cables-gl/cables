@@ -8,7 +8,6 @@ const
     b=op.inValueSlider("b",Math.random()),
     trigger=op.outTrigger("trigger");
 
-
 r.setUiAttribs({colorPick:true});
 
 op.setPortGroup('Blending',[blendMode,amount]);

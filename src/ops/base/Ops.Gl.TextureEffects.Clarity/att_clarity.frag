@@ -11,7 +11,7 @@ vec3 desaturate(vec4 color)
 
 void main()
 {
-    vec4 col=texture2D(tex,texCoord);
+    vec4 col=texture(tex,texCoord);
 
     vec3 gray=desaturate(col);
     vec3 m=smoothstep(0.2,0.5,gray)*smoothstep(0.75,0.5,gray);

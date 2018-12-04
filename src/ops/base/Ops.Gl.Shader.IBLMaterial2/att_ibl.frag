@@ -81,11 +81,11 @@ void main()
     float amountReflect=mulReflection;
     
     #ifdef TEX_ROUGHNESS
-        amountRough=1.0-texture2D(maskRoughness,texCoord).r;
+        amountRough=1.0-texture(maskRoughness,texCoord).r;
     #endif
 
     #ifdef TEX_REFLECTION
-        amountReflect*=texture2D(maskReflection,texCoord).r;
+        amountReflect*=texture(maskReflection,texCoord).r;
     #endif
 
 
@@ -94,7 +94,7 @@ void main()
     #ifndef TEX_NORMAL
         vec3 N = newNormalMatrix[2];
     #else
-        theNormal=texture2D(texNormal,texCoord).rgb*2.-1.;
+        theNormal=texture(texNormal,texCoord).rgb*2.-1.;
         #ifdef TEX_NORMAL_FLIP
             theNormal.xy*=-1.;
         #endif
@@ -109,11 +109,11 @@ void main()
     col=SAMPLETEX(irradiance,RN,8.0);
 
     #ifdef TEX_AO
-        col.rgb *= clamp(texture2D(texAo,texCoord).r+(1.0-aoIntensity),0.0,1.0);
+        col.rgb *= clamp(texture(texAo,texCoord).r+(1.0-aoIntensity),0.0,1.0);
     #endif
 
     #ifdef TEX_DIFFUSE
-        col.rgb *= texture2D(texDiffuse,texCoord).rgb;
+        col.rgb *= texture(texDiffuse,texCoord).rgb;
     #endif
 
 
@@ -126,7 +126,7 @@ void main()
 
     col.a=1.0;
     #ifdef TEX_OPACITY
-        col.a*=texture2D(texOpacity,texCoord).r;
+        col.a*=texture(texOpacity,texCoord).r;
     #endif
 
     col.a*=opacity;
@@ -137,7 +137,7 @@ void main()
 
 
     // #ifdef TEX_ROUGHNESS
-    //     col=texture2D(maskRoughness,texCoord);
+    //     col=texture(maskRoughness,texCoord);
     // #endif
 
     outColor=col;

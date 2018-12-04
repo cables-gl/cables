@@ -98,7 +98,7 @@ void main()
     #endif
 
    #ifdef HAS_NORMAL_TEXTURE
-        vec3 tnorm=texture2D( texNormal, vec2(texCoord.x*repeatX,texCoord.y*repeatY) ).xyz * 2.0 - 1.0;
+        vec3 tnorm=texture( texNormal, vec2(texCoord.x*repeatX,texCoord.y*repeatY) ).xyz * 2.0 - 1.0;
         
         tnorm = normalize(tnorm*normalScale);
         
@@ -147,10 +147,10 @@ void main()
     vn.s=clamp(vn.s, 0.0, 1.0);
     
     
-    vec4 col = texture2D( tex, vn );
+    vec4 col = texture( tex, vn );
 
     #ifdef HAS_DIFFUSE_TEXTURE
-        col = col*texture2D( texDiffuse, vec2(texCoords.x*repeatX,texCoords.y*repeatY));
+        col = col*texture( texDiffuse, vec2(texCoords.x*repeatX,texCoords.y*repeatY));
     #endif
 
     col.r*=r;
@@ -162,14 +162,14 @@ void main()
         col = col*
             mix(
                 vec4(1.0,1.0,1.0,1.0),
-                texture2D( texAo, vec2(texCoords.x*repeatX,texCoords.y*repeatY)),
+                texture( texAo, vec2(texCoords.x*repeatX,texCoords.y*repeatY)),
                 aoIntensity
                 );
     #endif
 
     #ifdef USE_SPECULAR_TEXTURE
-        vec4 spec = texture2D( texSpecMatCap, vn );
-        spec*= texture2D( texSpec, vec2(texCoords.x*repeatX,texCoords.y*repeatY) );
+        vec4 spec = texture( texSpecMatCap, vn );
+        spec*= texture( texSpec, vec2(texCoords.x*repeatX,texCoords.y*repeatY) );
         col+=spec;
     #endif
 

@@ -19,18 +19,18 @@ void main()
 {
     
     vec4 col=vec4(1.0,0.0,0.0,1.0);
-    col=texture2D(tex,texCoord);
+    col=texture(tex,texCoord);
     
     
-    float colorL = desaturate(texture2D(tex, texCoord+vec2(-pX,0) ));
-    float colorR = desaturate(texture2D(tex, texCoord+vec2( pX,0) ));
-    float colorA = desaturate(texture2D(tex, texCoord+vec2( 0,-pY) ));
-    float colorB = desaturate(texture2D(tex, texCoord+vec2( 0, pY) ));
+    float colorL = desaturate(texture(tex, texCoord+vec2(-pX,0) ));
+    float colorR = desaturate(texture(tex, texCoord+vec2( pX,0) ));
+    float colorA = desaturate(texture(tex, texCoord+vec2( 0,-pY) ));
+    float colorB = desaturate(texture(tex, texCoord+vec2( 0, pY) ));
     
-    float colorLA = desaturate(texture2D(tex, texCoord+vec2(-pX,pY)));
-    float colorRA = desaturate(texture2D(tex, texCoord+vec2( pX,pY)));
-    float colorLB = desaturate(texture2D(tex, texCoord+vec2(-pX,-pY)));
-    float colorRB = desaturate(texture2D(tex, texCoord+vec2( pX,-pY)));
+    float colorLA = desaturate(texture(tex, texCoord+vec2(-pX,pY)));
+    float colorRA = desaturate(texture(tex, texCoord+vec2( pX,pY)));
+    float colorLB = desaturate(texture(tex, texCoord+vec2(-pX,-pY)));
+    float colorRB = desaturate(texture(tex, texCoord+vec2( pX,-pY)));
     
     vec4 final = col + col * amount * (8.0*desaturate(col) - colorL - colorR - colorA - colorB - colorLA - colorRA - colorLB - colorRB);
 

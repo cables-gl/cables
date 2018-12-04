@@ -149,13 +149,13 @@ float Perlin3D( vec3 P )
 
 void main()
 {
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
     vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
     
     p=p*scale;
     p=vec2(p.x+0.5-x,p.y+0.5-y);
 
-    float aa=texture2D(tex,texCoord).r;
+    float aa=texture(tex,texCoord).r;
     float v=Perlin3D(vec3(p.x,p.y,z))*0.5+0.5;
 
    

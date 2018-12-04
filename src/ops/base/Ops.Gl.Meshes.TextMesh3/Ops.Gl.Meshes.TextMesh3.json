@@ -1,5 +1,4 @@
 {
-    "updated": 1543876373629,
     "authorName": "pandur",
     "id": "2390f6b3-2122-412e-8c8d-5c2f574e8bd1",
     "created": 1542744323655,
@@ -16,20 +15,24 @@
             {
                 "type": "0",
                 "name": "Scale",
+                "group": "Display",
                 "subType": "number"
             },
             {
                 "type": "5",
-                "name": "Font"
+                "name": "Font",
+                "group": "Display"
             },
             {
                 "type": "0",
                 "name": "align",
+                "group": "Alignment",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "vertical align",
+                "group": "Alignment",
                 "subType": "string"
             },
             {
@@ -45,21 +48,25 @@
             {
                 "type": "0",
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "a",
+                "group": "Color",
                 "subType": "number"
             }
         ],

@@ -20,6 +20,9 @@ align.onChange=
     str.onChange=
     lineHeight.onChange=generateMesh;
 
+var canvasid=null;
+CABLES.OpTextureMeshCanvas={};
+var valignMode=0;
 
 
 var geom=null;
@@ -58,12 +61,6 @@ function checkFont()
     if(!fontLoaded) setTimeout(checkFont,250);
 }
 
-var canvasid=null;
-
-
-CABLES.OpTextureMeshCanvas={};
-
-var valignMode=0;
 
 valign.onChange=function()
 {
@@ -76,9 +73,7 @@ function getFont()
 {
     canvasid=''+inFont.get();
     if(CABLES.OpTextureMeshCanvas.hasOwnProperty(canvasid))
-    {
         return CABLES.OpTextureMeshCanvas[canvasid];
-    }
 
     var fontImage = document.createElement('canvas');
     fontImage.dataset.font=inFont.get();
@@ -100,7 +95,6 @@ function getFont()
 
 op.onDelete=function()
 {
-    // fontImage.remove();
     if(canvasid && CABLES.OpTextureMeshCanvas[canvasid])
         CABLES.OpTextureMeshCanvas[canvasid].canvas.remove();
 };
@@ -110,23 +104,16 @@ shader.setSource(attachments.textmesh_vert,attachments.textmesh_frag);
 var uniTex=new CGL.Uniform(shader,'t','tex',0);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
-var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-r.set(1.0);
-r.uniform=new CGL.Uniform(shader,'f','r',r);
-
-var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
-g.set(1.0);
-g.uniform=new CGL.Uniform(shader,'f','g',g);
-
-var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-b.set(1.0);
-r.uniform=new CGL.Uniform(shader,'f','b',b);
-
-var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
-a.uniform=new CGL.Uniform(shader,'f','a',a);
-a.set(1.0);
-
-
+const
+    r = op.inValueSlider("r", 1),
+    g = op.inValueSlider("g", 1),
+    b = op.inValueSlider("b", 1),
+    a = op.inValueSlider("a", 1),
+    runiform=new CGL.Uniform(shader,'f','r',r),
+    guniform=new CGL.Uniform(shader,'f','g',g),
+    buniform=new CGL.Uniform(shader,'f','b',b),
+    auniform=new CGL.Uniform(shader,'f','a',a);
+r.setUiAttribs({ colorPick: true });
 
 op.setPortGroup('Display',[scale,inFont]);
 op.setPortGroup('Alignment',[align,valign]);
@@ -161,7 +148,7 @@ render.onTriggered=function()
         else if(valignMode==0) vec3.set(vec, 0,height/2,0);
         vec[1]-=lineHeight.get();
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
         if(!disabled)mesh.render(cgl.getShader());
 
         cgl.popModelMatrix();

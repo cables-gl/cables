@@ -33,7 +33,7 @@ float smin( float a, float b, float k )
 
 void main()
 {
-    vec4 col=texture2D(tex,texCoord);
+    vec4 col=texture(tex,texCoord);
     vec4 newcol;
     vec2 p=texCoord*2.0-1.0;
     float d=1.0;

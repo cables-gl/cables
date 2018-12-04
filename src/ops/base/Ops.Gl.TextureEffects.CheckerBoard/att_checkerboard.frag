@@ -24,7 +24,7 @@ void main()
     //blend section
     vec4 col=vec4(r,r,r,1.0);
     //original texture
-    vec4 base=texture2D(tex,uv);
+    vec4 base=texture(tex,uv);
     //blend stuff
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);

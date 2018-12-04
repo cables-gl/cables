@@ -13,7 +13,7 @@ UNI float thick;
 
 void main()
 {
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
 
     float s=sin((texCoord.x*M_PI*frequency)+offset)*(amplitude*0.5);
     s+=texCoord.y;

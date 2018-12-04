@@ -69,10 +69,10 @@ void main()
     #ifdef HAS_TEXTURES
         #ifdef HAS_TEXTURE_DIFFUSE
             #ifdef TEXTURED_POINTS
-                surfaceColor=texture2D(tex,vec2(gl_PointCoord.x*diffuseRepeatX,(1.0-gl_PointCoord.y)*diffuseRepeatY));
+                surfaceColor=texture(tex,vec2(gl_PointCoord.x*diffuseRepeatX,(1.0-gl_PointCoord.y)*diffuseRepeatY));
             #endif
             #ifndef TEXTURED_POINTS
-                surfaceColor=texture2D(tex,vec2(texCoord.x*diffuseRepeatX,(texCoord.y)*diffuseRepeatY));
+                surfaceColor=texture(tex,vec2(texCoord.x*diffuseRepeatX,(texCoord.y)*diffuseRepeatY));
             #endif
             surfaceColor.a*=a;
             #ifdef COLORIZE_TEXTURE
@@ -100,7 +100,7 @@ void main()
 
             #ifdef HAS_TEXTURE_NORMAL
                 // #define CALC_TANGENT
-                vec3 tnorm= texture2D( texNormal,vec2(texCoord.x*diffuseRepeatX,(texCoord.y)*diffuseRepeatY)  ).xyz*2.0-1.0;
+                vec3 tnorm= texture( texNormal,vec2(texCoord.x*diffuseRepeatX,(texCoord.y)*diffuseRepeatY)  ).xyz*2.0-1.0;
                 vec3 tangent,binormal;
 
 
@@ -155,7 +155,7 @@ void main()
                 specular =(specularCoefficient * materialSpecularColor * lightIntensity*0.2);
 
                 #ifdef HAS_TEXTURE_SPEC
-                    specular*=1.0-texture2D( texSpec, texCoord ).rgb;
+                    specular*=1.0-texture( texSpec, texCoord ).rgb;
                 #endif
             #endif
 
@@ -175,7 +175,7 @@ void main()
 
                 // shadows...
                 vec4 shadowCoord = lights[l].depthMVP * vec4(vert,1.0);
-                //float s=texture2D( depthTex, shadowCoord.xy  ).z;
+                //float s=texture( depthTex, shadowCoord.xy  ).z;
                 float s=1.0;
 
                 float f=100.0;
@@ -199,7 +199,7 @@ void main()
     vec4 col=vec4(theColor, surfaceColor.a);
 
     #ifdef HAS_TEXTURE_AO
-       col.rgb*=texture2D( texAo, texCoord ).rgb;
+       col.rgb*=texture( texAo, texCoord ).rgb;
     #endif
 
     {{MODULE_COLOR}}

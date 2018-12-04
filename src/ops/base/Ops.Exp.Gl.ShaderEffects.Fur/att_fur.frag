@@ -13,14 +13,14 @@ void main()
 {
     vec4 col=vec4(1.0,1.0,0.0,1.0);
     
-    float lengthMask=texture2D(texLength,vec2(texCoord.x,(1.0-texCoord.y))).r;
+    float lengthMask=texture(texLength,vec2(texCoord.x,(1.0-texCoord.y))).r;
     
     if(layerPerc>lengthMask)
         discard;
 
 
-    vec4 hairColor=texture2D(texStructure,vec2(texCoordMul.x,(1.0-texCoordMul.y)));
-    col=texture2D(texColor,vec2(texCoord.x,(1.0-texCoord.y)));
+    vec4 hairColor=texture(texStructure,vec2(texCoordMul.x,(1.0-texCoordMul.y)));
+    col=texture(texColor,vec2(texCoord.x,(1.0-texCoord.y)));
 
 
 	if (hairColor.a <= 0.0 || hairColor.g < layerPerc) {

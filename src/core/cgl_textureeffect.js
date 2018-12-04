@@ -423,3 +423,13 @@ CGL.TextureEffect.AddBlendSelect=function(op,name)
 
     return p;
 };
+
+CGL.TextureEffect.setupBlending=function(op,shader,blendMode,amount)
+{
+    op.setPortGroup('Blending', [blendMode, amount]);
+
+    blendMode.onChange = function () {
+        CGL.TextureEffect.onChangeBlendSelect(shader, blendMode.get());
+    };
+
+}
