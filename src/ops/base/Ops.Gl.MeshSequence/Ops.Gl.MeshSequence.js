@@ -5,7 +5,7 @@ var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNC
 var filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 var frame=this.addInPort(new CABLES.Port(this,"frame",CABLES.OP_PORT_TYPE_VALUE ));
 frame.set(0);
-var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.outTrigger("trigger");
 
 var calcVertexNormals=this.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'} ));
 calcVertexNormals.set(true);

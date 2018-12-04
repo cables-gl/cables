@@ -1,8 +1,8 @@
 this.name='particles';
 var cgl=this.patch.cgl;
 
-var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger");
 var num=this.addInPort(new CABLES.Port(this,"count",CABLES.OP_PORT_TYPE_VALUE));
 num.set(100000);
 
