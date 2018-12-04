@@ -33,10 +33,7 @@ const unir=new CGL.Uniform(shader,'f','r',r);
 const unig=new CGL.Uniform(shader,'f','g',g);
 const unib=new CGL.Uniform(shader,'f','b',b);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

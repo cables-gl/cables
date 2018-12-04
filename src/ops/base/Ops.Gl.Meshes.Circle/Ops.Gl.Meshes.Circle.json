@@ -8,37 +8,37 @@
             },
             {
                 "type": "0",
+                "name": "radius",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "innerRadius",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "segments",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "radius",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "innerradius",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "percent",
+                "group": "Display",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "steps",
+                "group": "Display",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "invertsteps",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "draw",
+                "name": "invertSteps",
+                "group": "Display",
                 "subType": "boolean"
             },
             {
@@ -48,7 +48,12 @@
             },
             {
                 "type": "0",
-                "name": "spline",
+                "name": "Spline",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
                 "subType": "boolean"
             }
         ],
@@ -64,7 +69,7 @@
         ],
         "name": "Ops.Gl.Meshes.Circle"
     },
-    "updated": 1540979916196,
+    "updated": 1543910388202,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "4db917cc-2cef-43f4-83d5-38c4572fe943",

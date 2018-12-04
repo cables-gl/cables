@@ -1,6 +1,23 @@
 # GUI/UI attributes
 
-## GUI/UI Attributes
+## Group Ports
+
+to bundle ports into groups and set a visual divider between them:
+
+```
+op.setPortGroup('Display',[portScale,portFont]);
+op.setPortGroup('Alignment',[portAlign,portVAlign]);
+op.setPortGroup('Color',[r,g,b,a]);
+```
+
+## Hide port
+To hide a port on a op but still have a UI element use the following code
+
+```javascript
+portName.hidePort();
+```
+
+## Warnings and Errors
 
 Ui attributes of an op can be set to give the user warnings and give visual feedback about things that may require their attention.
 <br>
@@ -47,11 +64,3 @@ inVal.onChange = function()
     }
 };
 ```
-### Hide port
-To hide a port on a op but still have a UI element use the following code
-
-```javascript
-portName.hidePort();
-```
-
-

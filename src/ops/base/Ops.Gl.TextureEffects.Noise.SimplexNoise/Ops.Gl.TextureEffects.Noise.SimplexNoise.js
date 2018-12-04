@@ -32,10 +32,7 @@ time.onChange=function(){ uniTime.setValue(time.get()/100); };
 smoothness.onChange=function(){ uniSmoothness.setValue(smoothness.get());};
 scale.onChange=function(){ uniScale.setValue(scale.get()); };
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

@@ -64,24 +64,24 @@ void main()
 
     float amountRough=mulRoughness;
     #ifdef TEX_ROUGHNESS
-        amountRough*=texture2D(maskRoughness,texCoord).r;
+        amountRough*=texture(maskRoughness,texCoord).r;
     #endif
     amountRough=smoothstep(0.0,1.0,amountRough);
     
     float amountReflect=mulReflection;
     #ifdef TEX_REFLECTION
-        amountReflect*=texture2D(maskReflection,texCoord).r;
+        amountReflect*=texture(maskReflection,texCoord).r;
     #endif
     amountReflect=smoothstep(0.0,1.0,amountReflect);
 
     vec3 tNorm=vec3(0.0);
     #ifdef TEX_NORMAL
-        theNormal=texture2D(texNormal,texCoord).rgb*2.0-1.0;
+        theNormal=texture(texNormal,texCoord).rgb*2.0-1.0;
     #endif
     
     vec4 tCol=vec4(1.0);
     #ifdef TEX_DIFFUSE
-        tCol*=texture2D(texDiffuse,texCoord);
+        tCol*=texture(texDiffuse,texCoord);
     #endif
 
 
@@ -171,7 +171,7 @@ void main()
 
 
     #ifdef TEX_AO
-        col.rgb*=texture2D(texAo,texCoord).r;
+        col.rgb*=texture(texAo,texCoord).r;
     #endif
 
 

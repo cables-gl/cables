@@ -1,16 +1,20 @@
 const render=op.inTrigger("render");
-const segments=op.inValueInt('segments',40);
 const radius=op.inValue('radius',0.5);
 const innerRadius=op.inValueSlider('innerRadius',0);
+const segments=op.inValueInt('segments',40);
 const percent=op.inValueSlider('percent',1);
 const steps=op.inValue('steps',0);
 const invertSteps=op.inValueBool('invertSteps',false);
-const inDraw=op.inValueBool('Draw',true);
 const mapping=op.addInPort(new CABLES.Port(op,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
 const drawSpline=op.inValueBool("Spline",false);
 
+const inDraw=op.inValueBool('Draw',true);
 const trigger=op.outTrigger('trigger');
 const geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+
+
+op.setPortGroup('Size',[radius,innerRadius]);
+op.setPortGroup('Display',[percent,steps,invertSteps]);
 
 mapping.set('flat');
 

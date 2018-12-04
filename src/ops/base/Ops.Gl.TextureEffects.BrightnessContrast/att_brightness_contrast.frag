@@ -6,7 +6,7 @@ UNI float amountbright;
 void main()
 {
     vec4 col=vec4(1.0,0.0,0.0,1.0);
-    col=texture2D(tex,texCoord);
+    col=texture(tex,texCoord);
 
     // apply contrast
     col.rgb = ((col.rgb - 0.5) * max(amount*2.0, 0.0))+0.5;

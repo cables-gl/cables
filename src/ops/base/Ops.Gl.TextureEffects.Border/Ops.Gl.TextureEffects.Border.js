@@ -53,10 +53,7 @@ const uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
     b.set(Math.random());
 }
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

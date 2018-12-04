@@ -11,7 +11,7 @@ float lumi(vec3 color)
 
 void main()
 {
-   vec3 base=texture2D(tex,texCoord).rgb;
+   vec3 base=texture(tex,texCoord).rgb;
    float l=lumi(base);
 
    #ifdef TONE_MID

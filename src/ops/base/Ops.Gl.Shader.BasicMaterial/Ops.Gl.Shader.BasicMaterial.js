@@ -1,5 +1,5 @@
 const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
-const trigger=op.outTrigger("trigger")
+const trigger=op.outTrigger("trigger");
 const shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 
 shaderOut.ignoreValueSerialize=true;
@@ -60,6 +60,8 @@ function doRender()
     g.set(Math.random());
     b.set(Math.random());
     a.set(1.0);
+
+    op.setPortGroup('Color',[r,g,b,a]);
 
 }
 
@@ -168,6 +170,8 @@ function updateTexRepeat()
     var diffuseRepeatY=op.addInPort(new CABLES.Port(op,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
     var diffuseOffsetX=op.addInPort(new CABLES.Port(op,"Tex Offset X",CABLES.OP_PORT_TYPE_VALUE));
     var diffuseOffsetY=op.addInPort(new CABLES.Port(op,"Tex Offset Y",CABLES.OP_PORT_TYPE_VALUE));
+
+    op.setPortGroup('Transform Texture',[diffuseRepeatX,diffuseRepeatY,diffuseOffsetX,diffuseOffsetY]);
 
     diffuseRepeatX.onChange=updateTexRepeat;
     diffuseRepeatY.onChange=updateTexRepeat;

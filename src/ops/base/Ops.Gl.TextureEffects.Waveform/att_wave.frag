@@ -182,7 +182,7 @@ void main()
         col = vec4(vec3(1.0 - wave),1.0);
     }
     col *= rgb;
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a * amount),1.0);
     outColor= col;

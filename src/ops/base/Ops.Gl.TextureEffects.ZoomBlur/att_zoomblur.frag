@@ -31,10 +31,10 @@ void main()
     float am=strength;
 
     #ifdef HAS_MASK
-        am=am*texture2D(texMask,texCoord).r;
+        am=am*texture(texMask,texCoord).r;
         if(am<=0.02)
         {
-            outColor=texture2D(tex, texCoord);
+            outColor=texture(tex, texCoord);
             return;
         }
     #endif
@@ -45,7 +45,7 @@ void main()
     for (float t = 0.0; t <= 40.0; t++) {
         float percent = (t + offset) / 40.0;
         float weight = 4.0 * (percent - percent * percent);
-        vec4 smpl = texture2D(tex, texCoord + toCenter * percent * am / texSize);
+        vec4 smpl = texture(tex, texCoord + toCenter * percent * am / texSize);
 
         /* switch to pre-multiplied alpha to correctly blur transparent images */
         smpl.rgb *= smpl.a;

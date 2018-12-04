@@ -1,4 +1,3 @@
-op.name="AmSynth";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

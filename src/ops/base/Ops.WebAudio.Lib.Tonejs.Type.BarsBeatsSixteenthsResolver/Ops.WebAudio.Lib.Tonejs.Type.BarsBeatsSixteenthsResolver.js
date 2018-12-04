@@ -1,4 +1,3 @@
-op.name="BarsBeatsSixteenthsResolver";
 
 // input ports
 var inPort = op.inValueString("Bars Beats Sixteenth");

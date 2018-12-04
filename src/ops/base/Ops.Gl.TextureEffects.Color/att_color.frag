@@ -4,6 +4,7 @@ UNI float r;
 UNI float g;
 UNI float b;
 UNI float amount;
+
 #ifdef MASK
     UNI sampler2D mask;
 #endif
@@ -13,7 +14,7 @@ UNI float amount;
 void main()
 {
    vec4 col=vec4(r,g,b,1.0);
-   vec4 base=texture2D(tex,texCoord);
+   vec4 base=texture(tex,texCoord);
 
     float am=amount;
     #ifdef MASK

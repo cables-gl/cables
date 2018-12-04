@@ -1,4 +1,3 @@
-op.name="AmplitudeEnvelope";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

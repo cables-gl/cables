@@ -13,7 +13,7 @@ UNI float a;
 
 void main()
 {
-   vec4 col=texture2D(tex,texCoord);
+   vec4 col=texture(tex,texCoord);
    vec4 newcol;
 
    if(texCoord.x > x && texCoord.x < x+width && 1.0-texCoord.y < y+height && 1.0-texCoord.y > y) 

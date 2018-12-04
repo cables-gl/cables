@@ -1,4 +1,3 @@
-op.name="SubtractSignals";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

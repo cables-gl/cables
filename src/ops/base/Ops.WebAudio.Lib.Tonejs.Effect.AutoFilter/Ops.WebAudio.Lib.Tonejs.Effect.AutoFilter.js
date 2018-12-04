@@ -1,5 +1,3 @@
-op.name="AutoFilter";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // TODO: Add filter / filter-op needed?

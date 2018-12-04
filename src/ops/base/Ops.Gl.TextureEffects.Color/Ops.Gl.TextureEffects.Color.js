@@ -3,14 +3,15 @@ const
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     inMask=op.inTexture("Mask"),
-    r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'})),
-    g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
-    b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
+    r=op.inValueSlider("r",Math.random()),
+    g=op.inValueSlider("g",Math.random()),
+    b=op.inValueSlider("b",Math.random()),
     trigger=op.outTrigger("trigger");
 
-r.set(1.0);
-g.set(1.0);
-b.set(1.0);
+r.setUiAttribs({colorPick:true});
+
+op.setPortGroup('Blending',[blendMode,amount]);
+op.setPortGroup('Color',[r,g,b]);
 
 const TEX_SLOT=0;
 const cgl=op.patch.cgl;
@@ -35,10 +36,7 @@ inMask.onChange=function()
         else shader.removeDefine("MASK");
 };
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

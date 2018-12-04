@@ -1,4 +1,3 @@
-op.name="PwmOscillator";
 
 // defaults
 var FREQUENCY_DEFAULT = 440;

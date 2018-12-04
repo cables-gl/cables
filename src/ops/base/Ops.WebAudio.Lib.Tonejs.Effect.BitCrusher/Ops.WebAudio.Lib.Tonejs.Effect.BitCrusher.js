@@ -1,5 +1,3 @@
-op.name="BitCrusher";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults

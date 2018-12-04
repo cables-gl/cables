@@ -1,4 +1,3 @@
-op.name="TriggerEnvelopeAttackRelease";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

@@ -1,5 +1,3 @@
-op.name="Distortion";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars

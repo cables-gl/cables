@@ -1,4 +1,3 @@
-op.name="PingPongDelay";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

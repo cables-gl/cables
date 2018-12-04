@@ -1,17 +1,15 @@
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
-var sizeW=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var sizeH=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
-const draw=op.inValueBool("Draw",true);
-var geom=new CGL.Geometry("triangle");
+const
+    render=op.inTrigger('render'),
+    trigger=op.outTrigger('trigger'),
+    sizeW=op.inValueFloat("width",1),
+    sizeH=op.inValueFloat("height",1),
+    draw=op.inValueBool("Draw",true),
+    geom=new CGL.Geometry("triangle"),
+    geomOut=op.outObject("geometry");
 
-sizeW.set(1);
-sizeH.set(1);
-
-var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var mesh=null;
 
 render.onTriggered=function()

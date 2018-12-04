@@ -1,4 +1,3 @@
-op.name="StereoXFeedbackEffect";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

@@ -28,10 +28,8 @@ inInput.onChange=updateInput;
 updateWrap();
 updateInput();
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
+
 
 function updateWrap()
 {

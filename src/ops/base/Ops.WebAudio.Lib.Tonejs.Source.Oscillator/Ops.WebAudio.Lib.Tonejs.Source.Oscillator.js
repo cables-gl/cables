@@ -1,4 +1,3 @@
-op.name="Oscillator";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

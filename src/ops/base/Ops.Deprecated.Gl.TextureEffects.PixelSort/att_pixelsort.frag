@@ -17,8 +17,8 @@ float lumi(vec4 color)
 void main()
 {
     // vec4 col=vec4(1.0,0.0,0.0,1.0);
-    vec4 col1=texture2D(tex,vec2(texCoord.x,texCoord.y));
-    vec4 col2=texture2D(tex,vec2(min(1.0,texCoord.x+pixelX),texCoord.y));
+    vec4 col1=texture(tex,vec2(texCoord.x,texCoord.y));
+    vec4 col2=texture(tex,vec2(min(1.0,texCoord.x+pixelX),texCoord.y));
 
     if(lumi(col1)>lumi(col2))
     {

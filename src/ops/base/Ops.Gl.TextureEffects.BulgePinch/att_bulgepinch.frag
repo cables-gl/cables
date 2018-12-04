@@ -16,6 +16,6 @@ void main()
    if (strength > 0.0) coord *= mix(1.0, smoothstep(0.0, radius / distance, percent), strength * 0.75);
    else coord *= mix(1.0, pow(percent, 1.0 + strength * 0.75) * radius / distance, 1.0 - percent);
    coord += center;
-   vec4 col=texture2D(tex,coord);
+   vec4 col=texture(tex,coord);
    outColor= col;
 }

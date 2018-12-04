@@ -13,7 +13,7 @@ UNI sampler2D texMask;
 void main()
 {
 
-   vec4 col=texture2D(tex,texCoord);
+   vec4 col=texture(tex,texCoord);
 
    vec2 tc=texCoord;;
    float pix = pixel;
@@ -26,7 +26,7 @@ void main()
    }
 
     #ifdef MASK
-        vec4 m=texture2D(texMask,texCoord);
+        vec4 m=texture(texMask,texCoord);
         pix*=m.r*m.a;
     #endif
 
@@ -38,14 +38,14 @@ void main()
         for(float off=0.0;off<samples;off++)
         {
             float diff=(pix/samples)*off;
-            col.r+=texture2D(tex,vec2(tc.x+diff,tc.y)).r/samples;
-            col.b+=texture2D(tex,vec2(tc.x-diff,tc.y)).b/samples;
+            col.r+=texture(tex,vec2(tc.x+diff,tc.y)).r/samples;
+            col.b+=texture(tex,vec2(tc.x-diff,tc.y)).b/samples;
         }
     #endif
 
     #ifndef SMOOTH
-        col.r=texture2D(tex,vec2(tc.x+pix,tc.y)).r;
-        col.b=texture2D(tex,vec2(tc.x-pix,tc.y)).b;
+        col.r=texture(tex,vec2(tc.x+pix,tc.y)).r;
+        col.b=texture(tex,vec2(tc.x-pix,tc.y)).b;
     #endif
 
    outColor = col;

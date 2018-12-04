@@ -22,7 +22,7 @@ void main()
     }
     tc += center;
 
-    vec4 col = texture2D(tex, tc);
+    vec4 col = texture(tex, tc);
 
     outColor= col;
 }

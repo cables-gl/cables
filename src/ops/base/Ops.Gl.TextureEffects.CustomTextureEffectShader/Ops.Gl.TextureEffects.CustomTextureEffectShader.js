@@ -24,10 +24,7 @@ inShader.onChange=function()
 
 
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 
 render.onTriggered=function()

@@ -40,10 +40,7 @@ const
     uniformG=new CGL.Uniform(shader,'f','g',g),
     uniformB=new CGL.Uniform(shader,'f','b',b);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

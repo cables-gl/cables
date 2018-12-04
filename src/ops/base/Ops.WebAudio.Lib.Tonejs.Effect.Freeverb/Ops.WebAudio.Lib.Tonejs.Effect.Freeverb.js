@@ -1,4 +1,3 @@
-op.name="Freeverb";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

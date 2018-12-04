@@ -15,6 +15,6 @@ void main()
    tc.s = ( radius - inner) / (outer - inner);
    tc.t = angle * 0.5 / 3.141592653589793 + 0.5;
 
-   col=texture2D(tex,tc);
+   col=texture(tex,tc);
    outColor= col;
 }

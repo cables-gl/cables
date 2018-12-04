@@ -1,4 +1,3 @@
-op.name="DuoSynth";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

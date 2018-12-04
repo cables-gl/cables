@@ -1,4 +1,3 @@
-const cgl=op.patch.cgl;
 const render=op.inTrigger("render");
 const textureMatcap=op.inTexture('MatCap');
 const textureDiffuse=op.inTexture('Diffuse');
@@ -6,25 +5,24 @@ const textureNormal=op.inTexture('Normal');
 const textureSpec=op.inTexture('Specular');
 const textureSpecMatCap=op.inTexture('Specular MatCap');
 const textureAo=op.inTexture('AO Texture');
-
-{
-    // rgba colors
-    var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' })); r.set(1);
-    var g=op.inValueSlider('g',1);
-    var b=op.inValueSlider('b',1);
-}
-
+const r=op.inValueSlider('r',1);
+const g=op.inValueSlider('g',1);
+const b=op.inValueSlider('b',1);
+const pOpacity=op.inValueSlider("Opacity",1);
 const aoIntensity=op.inValueSlider("AO Intensity",1.0);
 const repeatX=op.inValue("Repeat X",1);
 const repeatY=op.inValue("Repeat Y",1);
-const pOpacity=op.inValueSlider("Opacity",1);
 const calcTangents = op.inValueBool("calc normal tangents",true);
 const projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
 const ssNormals=op.inValueBool("Screen Space Normals");
-
-const next=op.outTrigger("trigger")
+const next=op.outTrigger("trigger");
 const shaderOut=op.outObject("Shader");
 
+r.setUiAttribs({colorPick:true});
+op.setPortGroup("Texture maps",[textureDiffuse,textureNormal,textureSpec,textureSpecMatCap,textureAo,]);
+op.setPortGroup("Color",[r,g,b,pOpacity]);
+
+const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,'MatCapMaterialNew');
 var uniOpacity=new CGL.Uniform(shader,'f','opacity',pOpacity);
 

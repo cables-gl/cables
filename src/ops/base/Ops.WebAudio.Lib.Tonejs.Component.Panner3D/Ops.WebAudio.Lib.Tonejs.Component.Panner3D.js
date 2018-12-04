@@ -1,4 +1,3 @@
-op.name="Panner3D";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

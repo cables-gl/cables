@@ -32,9 +32,9 @@ void main()
     #endif
 
     //blend section
-    vec4 col=texture2D(tex,uv);
+    vec4 col=texture(tex,uv);
     //original texture
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
     //blend stuff
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);

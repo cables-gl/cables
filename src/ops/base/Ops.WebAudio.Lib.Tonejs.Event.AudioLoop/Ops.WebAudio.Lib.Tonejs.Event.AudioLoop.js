@@ -1,4 +1,3 @@
-op.name="AudioLoop";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

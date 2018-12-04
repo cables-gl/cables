@@ -1,5 +1,3 @@
-op.name="Compressor";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults

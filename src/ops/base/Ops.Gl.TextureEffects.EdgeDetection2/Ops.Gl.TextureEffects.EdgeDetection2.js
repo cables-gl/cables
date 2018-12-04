@@ -21,10 +21,7 @@ const uniWidth=new CGL.Uniform(shader,'f','texWidth',128);
 const uniHeight=new CGL.Uniform(shader,'f','texHeight',128);
 const uniMulColor=new CGL.Uniform(shader,'f','mulColor',mulColor);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

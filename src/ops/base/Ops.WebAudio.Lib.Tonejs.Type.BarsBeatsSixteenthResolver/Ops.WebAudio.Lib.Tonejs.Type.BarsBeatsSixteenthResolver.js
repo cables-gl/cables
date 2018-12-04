@@ -1,4 +1,3 @@
-op.name="BarsBeatsSixteenthResolver";
 
 // inputs
 var bbsPort = op.inValueString("Bars:Beats:Sixteenth");

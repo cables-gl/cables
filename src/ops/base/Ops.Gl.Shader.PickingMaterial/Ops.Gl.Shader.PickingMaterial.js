@@ -1,6 +1,5 @@
 var cgl=op.patch.cgl;
 
-op.name='PickingMaterial';
 var render=op.inTrigger('render');
 var next=op.outTrigger("trigger")
 

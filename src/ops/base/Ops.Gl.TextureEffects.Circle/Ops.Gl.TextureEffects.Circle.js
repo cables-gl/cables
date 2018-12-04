@@ -50,10 +50,7 @@ var uniformY=new CGL.Uniform(shader,'f','y',inY);
 fallOff.onChange=setFallOf;
 warnOverflow.onChange=setWarnOverflow;
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 function setFallOf()
 {

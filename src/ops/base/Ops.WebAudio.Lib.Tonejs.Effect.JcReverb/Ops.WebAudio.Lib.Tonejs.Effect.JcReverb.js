@@ -1,4 +1,3 @@
-op.name="JcReverb";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

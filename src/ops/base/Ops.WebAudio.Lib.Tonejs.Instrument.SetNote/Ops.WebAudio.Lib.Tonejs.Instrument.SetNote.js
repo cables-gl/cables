@@ -1,4 +1,3 @@
-op.name="SetNote";
 
 // input
 var nodePort = op.inObject("Synth");
