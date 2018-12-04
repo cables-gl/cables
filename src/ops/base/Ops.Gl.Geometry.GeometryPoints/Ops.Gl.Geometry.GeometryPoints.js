@@ -1,9 +1,9 @@
-const geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
-
-const  outVertices=op.outArray("Vertices");
-const  outFaces=op.outArray("Faces");
-const  outTextcoords=op.outArray("TexCoords");
-const  outNormals=op.outArray("Normals");
+const
+    geometry=op.inObject("Geometry"),
+    outVertices=op.outArray("Vertices"),
+    outFaces=op.outArray("Faces"),
+    outTextcoords=op.outArray("TexCoords"),
+    outNormals=op.outArray("Normals");
 
 geometry.onChange=function()
 {

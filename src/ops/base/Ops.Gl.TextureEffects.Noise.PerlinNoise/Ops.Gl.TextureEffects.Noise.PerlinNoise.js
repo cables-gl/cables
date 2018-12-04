@@ -1,25 +1,26 @@
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
-const x=op.inValue("X",0);
-const y=op.inValue("Y",0);
-const z=op.inValue("Z",0);
-const scale=op.inValue("Scale",22);
-const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const
+    render=op.inTrigger("render"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    x=op.inValue("X",0),
+    y=op.inValue("Y",0),
+    z=op.inValue("Z",0),
+    scale=op.inValue("Scale",22),
+    trigger=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
-
-var srcFrag=attachments.perlinnoise3d_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
+const srcFrag=attachments.perlinnoise3d_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag );
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-var uniZ=new CGL.Uniform(shader,'f','z',z);
-var uniX=new CGL.Uniform(shader,'f','x',x);
-var uniY=new CGL.Uniform(shader,'f','y',y);
-var uniScale=new CGL.Uniform(shader,'f','scale',scale);
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    uniZ=new CGL.Uniform(shader,'f','z',z),
+    uniX=new CGL.Uniform(shader,'f','x',x),
+    uniY=new CGL.Uniform(shader,'f','y',y),
+    uniScale=new CGL.Uniform(shader,'f','scale',scale),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 blendMode.onChange=function()
 {

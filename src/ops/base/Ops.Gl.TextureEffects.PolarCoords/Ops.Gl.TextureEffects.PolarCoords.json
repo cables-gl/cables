@@ -7,13 +7,18 @@
             },
             {
                 "type": "0",
-                "name": "radius inner",
+                "name": "Radius Inner",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "radius outer",
+                "name": "Radius Outer",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Crop",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -24,8 +29,13 @@
         ],
         "name": "Ops.Gl.TextureEffects.PolarCoords"
     },
-    "updated": 1540921913297,
+    "updated": 1543743236402,
     "authorName": "pandur",
     "id": "1555fefe-4eb4-4aed-84c0-ad54e0dae1c1",
-    "created": 1540921849064
+    "created": 1540921849064,
+    "summary": "display texture using polar/radial coordinate system",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
 }

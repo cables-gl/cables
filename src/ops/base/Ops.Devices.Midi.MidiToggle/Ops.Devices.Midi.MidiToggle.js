@@ -1,11 +1,8 @@
-op.name='Midi Toggle';
-var eventIn=op.addInPort(new CABLES.Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
-
+var eventIn=op.inObject("Event Input");
 var note=op.addInPort(new CABLES.Port(op,"note"));
 var channel=op.inValueInt("Channel",0);
-
-var learn=op.addInPort(new CABLES.Port(op,"learn",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
-var eventOut=op.addOutPort(new CABLES.Port(op,"Event Output",CABLES.OP_PORT_TYPE_OBJECT));
+var learn=op.inTriggerButton("learn");
+var eventOut=op.outObject("Event Output");
 
 var value=op.addOutPort(new CABLES.Port(op,"pressed"));
 
@@ -43,7 +40,7 @@ eventIn.onChange=function()
             value.set(!value.get());
             var noteOnMessage = [0x90, note.get(), 0];
             if(value.get()) noteOnMessage = [0x90, note.get(), 120];
-            
+
             event.output.send( noteOnMessage );
         }
         lastValue=v;

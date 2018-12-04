@@ -9,6 +9,9 @@ const minPort = op.inValue("Min", 0);
 const maxPort = op.inValue("Max", 1);
 const stepPort = op.inValue("Step", STEP_DEFAULT);
 const setDefaultValueButtonPort = op.inTriggerButton('Set Default');
+
+const reset = op.inTriggerButton('Reset');
+
 const defaultValuePort = op.inValue('Default', 0.5);
 defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 
@@ -68,6 +71,14 @@ op.onDelete = onDelete;
 op.init=function()
 {
     valuePort.set(parseFloat(defaultValuePort.get()));
+};
+
+reset.onTriggered=function()
+{
+    var newValue=parseFloat(defaultValuePort.get());
+    valuePort.set(newValue);
+    input.value = newValue;
+    updateActiveTrack();
 };
 
 // functions
@@ -147,9 +158,9 @@ function updateActiveTrack(val) {
     if(availableWidth === 0) { availableWidth = 206; }
     var trackWidth = CABLES.map(
         valueToUse,
-        parseFloat(input.min), 
-        parseFloat(input.max), 
-        0, 
+        parseFloat(input.min),
+        parseFloat(input.max),
+        0,
         availableWidth - 16 /* subtract slider thumb width */
     );
     // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
@@ -182,7 +193,7 @@ function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Slider: ' + labelText);    
+        op.setTitle('Slider: ' + labelText);
     }
 }
 
@@ -194,7 +205,7 @@ function onParentChanged() {
         siblingsPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -217,6 +228,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }

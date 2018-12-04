@@ -7,11 +7,13 @@
             },
             {
                 "type": "0",
-                "name": "note"
+                "name": "note",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Channel"
+                "name": "Channel",
+                "subType": "integer"
             },
             {
                 "type": "1",
@@ -25,16 +27,17 @@
             },
             {
                 "type": "0",
-                "name": "pressed"
+                "name": "pressed",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Midi.MidiToggle"
     },
-    "updated": 1516046933119,
+    "updated": 1543956236033,
     "authorName": "pandur",
     "id": "b2aed468-d249-4e30-ad26-7902b15fe21c",
     "created": 1516046806684,
-    "summary": "",
+    "summary": "toggle a bool value by pressing a midi button",
     "youtubeid": "eDlaFD_d5lc",
     "docs": {
         "ports": []

@@ -1,10 +1,12 @@
-var exe=op.inTriggerButton("exe");
+const
+    exe=op.inTriggerButton("exe"),
+    array=op.inArray("array"),
+    index=op.inValueInt("index"),
+    value=op.inObject("object"),
+    values=op.outArray("values");
 
-var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
-var index=op.addInPort(new CABLES.Port(op, "index",CABLES.OP_PORT_TYPE_VALUE,{type:'int'}));
-var value=op.inObject("object");
-var values=op.addOutPort(new CABLES.Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
 values.ignoreValueSerialize=true;
+exe.onTriggered=update;
 
 function updateIndex()
 {
@@ -22,7 +24,3 @@ function update()
     values.set(arr);
 }
 
-// index.onChange=updateIndex;
-// array.onChange=updateIndex;
-// value.onChange=update;
-exe.onTriggered=update;

@@ -18,8 +18,6 @@ var finishedTrigger=op.outTrigger("Finished Trigger");
 
 var resetted=false;
 
-
-
 var anim=new CABLES.Anim();
 
 anim.createPort(op,"easing",init);
@@ -33,14 +31,14 @@ function init()
         anim.setValue(1,0);
         anim.setValue(2,0);
     }
-    
+
     anim.keys[0].time=CABLES.now()/1000.0;
     anim.keys[0].value=inStart.get();
     if(anim.defaultEasing!=currentEasing) anim.keys[0].setEasing(anim.defaultEasing);
 
     anim.keys[1].time=duration.get()+CABLES.now()/1000.0;
     anim.keys[1].value=inEnd.get();
-    
+
     if(anim.defaultEasing!=currentEasing) anim.keys[1].setEasing(anim.defaultEasing);
 
     anim.loop=loop.get();
@@ -78,13 +76,13 @@ rewind.onTriggered=function()
 
     anim.keys[2].time=CABLES.now()/1000.0;
     anim.keys[2].value=inStart.get();
-    
+
     result.set(inStart.get());
 };
 
 exe.onTriggered=function()
 {
-    if(waitForReset.get() && !resetted) 
+    if(waitForReset.get() && !resetted)
     {
         result.set(inStart.get());
         return;
@@ -97,7 +95,7 @@ exe.onTriggered=function()
         if(!finished.get()) finishedTrigger.trigger();
         finished.set(true);
     }
-    
+
     next.trigger();
 };
 

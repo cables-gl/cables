@@ -8,39 +8,48 @@
             },
             {
                 "type": "0",
-                "name": "Specular Strength"
+                "name": "Specular Strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Shininess"
+                "name": "Shininess",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fresnel"
+                "name": "Fresnel",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Normal Texture Intensity"
+                "name": "Normal Texture Intensity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse r"
+                "name": "diffuse r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse g"
+                "name": "diffuse g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse b"
+                "name": "diffuse b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse a"
+                "name": "diffuse a",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "colorize texture"
+                "name": "colorize texture",
+                "subType": "boolean"
             },
             {
                 "type": "2",
@@ -60,11 +69,13 @@
             },
             {
                 "type": "0",
-                "name": "diffuseRepeatX"
+                "name": "diffuseRepeatX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuseRepeatY"
+                "name": "diffuseRepeatY",
+                "subType": "number"
             }
         ],
         "portsOut": [

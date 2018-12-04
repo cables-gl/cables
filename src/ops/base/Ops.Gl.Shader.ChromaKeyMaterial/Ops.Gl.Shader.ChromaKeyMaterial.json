@@ -71,5 +71,10 @@
             }
         ],
         "name": "Ops.Gl.Shader.ChromaKeyMaterial"
+    },
+    "summary": "display texture and replace a color with transparency",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

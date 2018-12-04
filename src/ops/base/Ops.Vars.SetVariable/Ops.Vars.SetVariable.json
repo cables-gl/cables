@@ -3,20 +3,22 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Variable"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Variable",
+                "subType": "string"
             }
         ],
-        "name": "Ops.SetVariable"
+        "name": "Ops.Vars.SetVariable"
     },
     "summary": "set a variable value",
     "docs": {
         "ports": []
     },
-    "updated": 1524929969755,
+    "updated": 1543840770859,
     "authorName": "pandur",
     "id": "b0190d08-82f6-45b2-bc0c-b70a3257ea92",
     "created": 1519228504479

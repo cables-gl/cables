@@ -71,9 +71,11 @@ float SineWave(vec2 p, float amplitude, float frequency, float line_width, float
         return smoothstep(0.0, line_glow, d);
     }
     else
+    {
         d = v * amplitude - p.y * 0.5;
         d -= -line_width;
         return smoothstep(0.0, line_glow, -d);
+    }
 }
 
 float SawWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow, bool solid)
@@ -127,12 +129,9 @@ float SquareWave(vec2 p, float amplitude, float frequency, float line_width, flo
     p.x -= inverse_frequency * 0.5;
     float cell = pMod1(p.x, inverse_frequency);
 
-    if(cell < 0.0)
-        cell = -cell + 1.0;
-    if(int(cell * 0.5) % 2 == 1)
-    	p.y -= amplitude;
-    else
-        p.y += amplitude;
+    if(cell < 0.0) cell = -cell + 1.0;
+    if(int(cell * 0.5) % 2 == 1) p.y -= amplitude;
+        else p.y += amplitude;
 
     float d = fCapsule2D(p.yx, 0.0, abs(inverse_frequency));
     d = min(d, d1);
@@ -154,6 +153,8 @@ void main()
     uv -= 0.5;
     pR(uv.xy,uRotate * TAU);
     uv += 0.5;
+
+    // uv.y=0.0;
 
     float wave = 0.0;
     if      (uWaveSelect == 0.0)
@@ -182,6 +183,7 @@ void main()
         col = vec4(vec3(1.0 - wave),1.0);
     }
     col *= rgb;
+
     vec4 base=texture2D(tex,texCoord);
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a * amount),1.0);

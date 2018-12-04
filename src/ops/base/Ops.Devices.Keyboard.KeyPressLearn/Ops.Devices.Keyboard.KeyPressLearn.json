@@ -7,23 +7,28 @@
             },
             {
                 "type": "0",
-                "name": "key code"
+                "name": "key code",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "canvas only"
+                "name": "canvas only",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Mod Key"
+                "name": "Mod Key",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Enable"
+                "name": "Enabled",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Prevent Default"
+                "name": "Prevent Default",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -37,12 +42,13 @@
             },
             {
                 "type": "0",
-                "name": "Pressed"
+                "name": "Pressed",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Keyboard.KeyPressLearn"
     },
-    "updated": 1510680466751,
+    "updated": 1543956437422,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f069c0db-4051-4eae-989e-6ef7953787fd",

@@ -25,7 +25,7 @@ blendMode.onChange=function()
 
 function updateCrop()
 {
-    if(crop.get()==true) shader.define('CROP_IMAGE');
+    if(crop.get()) shader.define('CROP_IMAGE');
         else shader.removeDefine('CROP_IMAGE');
 }
 render.onTriggered=function()

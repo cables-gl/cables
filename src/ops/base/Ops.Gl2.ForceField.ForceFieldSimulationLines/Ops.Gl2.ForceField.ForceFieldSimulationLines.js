@@ -61,12 +61,12 @@ numLinePoints.onChange=respawnAll;
 function respawnAll()
 {
     particles.length=0;
-    
+
     op.log("respawn all");
     for(var i=0;i<numParticles.get();i++)
     {
-        
-        var p=new Particle();    
+
+        var p=new Particle();
         p.spawn();
         particles[i]=p;
     }
@@ -104,9 +104,9 @@ var Particle=function()
     this.idleFrames=0;
     // this.points=[];
     this.speed=0;
-    
+
     this.buffLineStart=0;
-    
+
     this.buff=new Float32Array(2*3*Math.floor(numLinePoints.get()));
     this.spawn();
 };
@@ -114,14 +114,14 @@ var Particle=function()
 Particle.prototype.spawn=function()
 {
     this.idleFrames=0;
-    
+
     if(spawns.get())
     {
         var spawnArr=spawns.get();
         var num=spawnArr.length/3;
-        
+
         var ind=Math.floor(num*Math.random());
-        
+
         this.pos[0]=spawnArr[ind*3+0]+Math.random()*size-(size/2);
         this.pos[1]=spawnArr[ind*3+1]+Math.random()*size-(size/2);
         this.pos[2]=spawnArr[ind*3+2]+Math.random()*size-(size/2);
@@ -144,10 +144,10 @@ Particle.prototype.spawn=function()
         this.buff[i+2]=this.pos[2];
     }
     this.rnd=Math.random();
-    
-    
+
+
     var lt=(maxLifetime.get()-minLifetime.get())*Math.random();
-    
+
     this.startTime=CABLES.now()+(lt*1000);
 
     this.endTime=
@@ -155,7 +155,7 @@ Particle.prototype.spawn=function()
         (
             (
                 (maxLifetime.get()-minLifetime.get()) + minLifetime.get()
-            )*1000 
+            )*1000
         );
 
     this.lifetime=0;
@@ -189,7 +189,7 @@ Particle.prototype.update=function(forces)
         return;
     }
     this.lifetime=CABLES.now()-this.startTime;
-    
+
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
     {
         this.applyForce(CABLES.forceFieldForces[i]);
@@ -212,12 +212,12 @@ Particle.prototype.update=function(forces)
     {
         // Particle is pretty stationary
         this.idleFrames++;
-      
+
         // Should we kill it yet?
         // if (this.idleFrames > 100)
         // {
         //     dieSlow++;
-            
+
         //     // console.log('die faul');
         //     this.spawn();
         // }
@@ -249,12 +249,12 @@ Particle.prototype.applyForce=function(force)
     // Are we close enough to be influenced?
     vec3.sub(vecToOrigin,this.pos,force.pos);
     var dist = vec3.len(vecToOrigin);
-    
+
     if (dist < force.range)
     {
         var distAlpha = (force.range - dist) / force.range;
         distAlpha = distAlpha * distAlpha;
-        
+
         if (distAlpha > 0.92)
         {
             // If particle is too close to origin then kill it
@@ -304,7 +304,7 @@ exec.onTriggered=function()
     {
         cgl.pushModelMatrix();
         vec3.set(vec, CABLES.forceFieldForces[j].pos[0],CABLES.forceFieldForces[j].pos[1],CABLES.forceFieldForces[j].pos[2]);
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
 
         // outSpeed.set(p.speed/maxSpeed);
 
@@ -317,7 +317,7 @@ exec.onTriggered=function()
         var p=particles[i];
         p.update(CABLES.forceFieldForces);
         // outSpeed.set(p.speed/maxSpeed);
-        
+
         var ppos=Math.abs( (p.pos[0]) );
         var lifetimeMul=Math.min(p.lifetime/3000,1);
 
@@ -337,7 +337,7 @@ exec.onTriggered=function()
         lastTime=time;
     }
 
-    
+
 
 };
 

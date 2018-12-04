@@ -1,19 +1,17 @@
-var onPress=op.addOutPort(new CABLES.Port(op,"on press",CABLES.OP_PORT_TYPE_FUNCTION));
-var onRelease=op.addOutPort(new CABLES.Port(op,"on release",CABLES.OP_PORT_TYPE_FUNCTION));
-var learn = op.addInPort( new CABLES.Port( op, "learn",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
-var learnedKeyCode = op.addInPort( new CABLES.Port( op, "key code", CABLES.OP_PORT_TYPE_));
-var canvasOnly=op.addInPort(new CABLES.Port(op,"canvas only",CABLES.OP_PORT_TYPE_VALUE, {"display": "bool"}));
-var outPressed=op.outValue("Pressed",false);
-var modKey=op.addInPort(new CABLES.Port(op,"Mod Key",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['none','alt']} ));
-
+var learn = op.inTriggerButton("learn");
+var learnedKeyCode = op.inValueInt("key code");
+var canvasOnly=op.inValueBool("canvas only");
+var modKey=op.inValueSelect("Mod Key",['none','alt']);
 var inEnable=op.inValueBool("Enabled",true);
-
 var preventDefault=op.inValueBool("Prevent Default");
+var onPress=op.outTrigger("on press");
+var onRelease=op.outTrigger("on release");
+var outPressed=op.outValue("Pressed",false);
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var learning = false;
 
-function onKeyDown(e) 
+function onKeyDown(e)
 {
     if(learning){
         learnedKeyCode.set(e.keyCode);
@@ -26,7 +24,7 @@ function onKeyDown(e)
         addListener();
     } else {
         if(e.keyCode == learnedKeyCode.get()){
-            
+
             if(modKey.get()=='alt' )
             {
                 if(e.altKey===true)
@@ -36,7 +34,7 @@ function onKeyDown(e)
                     if(preventDefault.get())e.preventDefault();
                 }
             }
-            else 
+            else
             {
                 onPress.trigger();
                 outPressed.set(true);
