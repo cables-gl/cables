@@ -49,10 +49,10 @@ function rebuild()
     var h=height.get();
     var x=0;
     var y=0;
-    
+
     if(typeof w=='string')w=parseFloat(w);
     if(typeof h=='string')h=parseFloat(h);
-    
+
     if(pivotX.get()=='center') x=0;
     else if(pivotX.get()=='right') x=-w/2;
     else if(pivotX.get()=='left') x=+w/2;
@@ -102,7 +102,7 @@ function rebuild()
             }
         }
     }
-    
+
     for(c=0;c<numColumns;c++)
     {
         for(r=0;r<numRows;r++)
