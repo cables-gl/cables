@@ -30,10 +30,7 @@ greyscale.onChange=function()
         else shader.removeDefine('GREY');
 };
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

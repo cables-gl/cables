@@ -34,10 +34,7 @@ Y.uniform==new CGL.Uniform(shader,'f','Y',Y);
 Z.uniform==new CGL.Uniform(shader,'f','Z',Z);
 scale.uniform==new CGL.Uniform(shader,'f','scale',scale);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

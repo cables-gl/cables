@@ -16,10 +16,7 @@ const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 const amountXUniform=new CGL.Uniform(shader,'f','amountX',amountX);
 const amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 
 render.onTriggered=function()

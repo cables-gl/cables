@@ -16,10 +16,7 @@ const
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 inRGB.onChange=function()
 {

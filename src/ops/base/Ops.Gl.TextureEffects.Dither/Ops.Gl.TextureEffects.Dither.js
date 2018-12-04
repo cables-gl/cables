@@ -20,10 +20,7 @@ const textureUniform=new CGL.Uniform(shader,'t','tex',0),
     uniHeight=new CGL.Uniform(shader,'f','height',0),
     unithreshold=new CGL.Uniform(shader,'f','threshold',threshold);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

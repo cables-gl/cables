@@ -32,10 +32,7 @@ const sizeDUniform=new CGL.Uniform(shader,'f','blockSizeD',inBlockSizeD);
 const scrollXUniform=new CGL.Uniform(shader,'f','scrollX',inScrollX);
 const scrollYUniform=new CGL.Uniform(shader,'f','scrollY',inScrollY);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {
