@@ -1,0 +1,1 @@
+result is 1 or -1

@@ -1,0 +1,97 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "anim",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scrollX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scrollY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "repeat",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aspect",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Layer 1",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Layer 2",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Layer 3",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Layer 4",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Tileable",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Noise.FBMNoise"
+    },
+    "credits": [
+        {
+            "title": "Domain Warping Shader",
+            "author": "inigo quilez",
+            "url": "http://iquilezles.org/www/articles/warp/warp.htm"
+        }
+    ],
+    "summary": "fractional brownian motion noise ",
+    "docs": {
+        "ports": []
+    },
+    "updated": 1543740461349,
+    "authorName": "pandur",
+    "id": "7073186c-b776-48c2-a01e-041df88ad88a",
+    "created": 1520431410269
+}
