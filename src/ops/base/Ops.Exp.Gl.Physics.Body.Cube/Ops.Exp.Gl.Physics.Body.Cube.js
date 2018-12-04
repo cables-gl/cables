@@ -51,7 +51,7 @@ function setup()
 {
     var world=cgl.frameStore.world;
     if(!world)return;
-    
+
     if(body)world.removeBody(body);
 
     body = new CANNON.Body(
@@ -85,48 +85,48 @@ function render()
     if(needSetup)setup();
     if(lastWorld!=cgl.frameStore.world)setup();
 
-    if(!body)return; 
+    if(!body)return;
 
     vec3.set(vec,
         body.position.x,
         body.position.y,
         body.position.z
         );
-    
+
     quat.set(q,
         body.quaternion.x,
         body.quaternion.y,
         body.quaternion.z,
         body.quaternion.w);
-        
+
     quat.invert(q,q);
 
     cgl.pushModelMatrix();
 
     mat4.fromRotationTranslation(trMat,q,vec);
-    
-    mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
-    
-    
+
+    mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
+
+
     if(doRender.get() && m)m.render(cgl,sizeX.get(),sizeY.get(),sizeZ.get());
-    
+
     outX.set(body.position.x);
     outY.set(body.position.y);
     outZ.set(body.position.z);
- 
+
     if(collided)
     {
         collided=false;
         outCollision.trigger();
     }
-    
-    
+
+
     CABLES.physicsCurrentBody=body;
-    
+
     next.trigger();
-    
+
     CABLES.physicsCurrentBody=null;
 
-    
+
     cgl.popModelMatrix();
 }

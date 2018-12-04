@@ -1,5 +1,4 @@
 {
-    "updated": 1526647025366,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "303f6984-6eb5-42a4-ae05-ad561f232a64",
@@ -12,35 +11,43 @@
             },
             {
                 "type": "0",
-                "name": "Mass"
+                "name": "Mass",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Render"
+                "name": "Render",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Z"
+                "name": "Pos Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "sizeX"
+                "name": "sizeX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "sizeY"
+                "name": "sizeY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "sizeZ"
+                "name": "sizeZ",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -54,15 +61,18 @@
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             },
             {
                 "type": "1",

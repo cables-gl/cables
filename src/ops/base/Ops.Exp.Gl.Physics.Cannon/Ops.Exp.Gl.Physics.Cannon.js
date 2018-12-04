@@ -86,14 +86,14 @@ function spawn()
         // console.log("Contact between bodies:",e.contact);
     });
 
-    
+
 }
 
 function setup()
 {
     var world=cgl.frameStore.world;
     if(!world)return;
-    
+
     // if(body)world.removeBody(body);
 
     lastWorld=world;
@@ -114,42 +114,42 @@ function render()
     for(var i=0;i<bodies.length;i++)
     {
         var body=bodies[i];
-        // if(!body)return; 
-    
-        vec3.set(vec, 
+        // if(!body)return;
+
+        vec3.set(vec,
             body.position.x,
             body.position.y,
             body.position.z
             );
-        
+
         quat.set(q,
             body.quaternion.x,
             body.quaternion.y,
             body.quaternion.z,
             body.quaternion.w);
         quat.invert(q,q);
-    
+
         cgl.pushModelMatrix();
-    
+
         mat4.fromRotationTranslation(trMat,q,vec);
-        mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
-    
+        mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
+
         if(doRender.get())m.render(cgl,inRadius.get()*2);
-        
+
         outX.set(body.position.x);
         outY.set(body.position.y);
         outZ.set(body.position.z);
-     
+
         if(collided)
         {
             collided=false;
             outCollision.trigger();
         }
-        
+
         CABLES.physicsCurrentBody=body;
-        
+
         next.trigger();
-        
+
         CABLES.physicsCurrentBody=null;
         cgl.popModelMatrix();
     }

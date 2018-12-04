@@ -128,17 +128,17 @@ function render()
         );
 
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vecn);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, vecn);
         triggerLookat.trigger();
         cgl.popModelMatrix();
     }
 
     cgl.pushModelMatrix();
-    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+    mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
 
     CABLES.TL.Anim.slerpQuaternion(t,q,animQX,animQY,animQZ,animQW);
     mat4.fromQuat(qMat, q);
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
+    mat4.multiply(cgl.mMatrix,cgl.mMatrix, qMat);
 
     trigger.trigger();
     cgl.popModelMatrix();

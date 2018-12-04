@@ -56,7 +56,7 @@ inReset.onTriggered=function()
 //         v.y += offset;
 //         v.z += offset;
 //     }
-    
+
 //     return new CANNON.ConvexPolyhedron(verts,
 //         [
 //             [0,3,2], // -x
@@ -71,15 +71,15 @@ function setup()
 {
     var world=cgl.frameStore.world;
     if(!world)return;
-    
+
     if(body)world.removeBody(body);
-    
+
     body = new CANNON.Body({
       mass: inMass.get(), // kg
       position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
       shape: new CANNON.Sphere(inRadius.get())
     });
-    
+
 
     world.addBody(body);
 
@@ -106,15 +106,15 @@ function render()
     if(needSetup)setup();
     if(lastWorld!=cgl.frameStore.world)setup();
 
-    if(!body)return; 
+    if(!body)return;
 
 
-    vec3.set(vec, 
+    vec3.set(vec,
         body.position.x,
         body.position.y,
         body.position.z
         );
-    
+
     quat.set(q,
         body.quaternion.x,
         body.quaternion.y,
@@ -125,24 +125,24 @@ function render()
     cgl.pushModelMatrix();
 
     mat4.fromRotationTranslation(trMat,q,vec);
-    mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
+    mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
 
     if(doRender.get())m.render(cgl,inRadius.get()*2);
-    
+
     outX.set(body.position.x);
     outY.set(body.position.y);
     outZ.set(body.position.z);
- 
+
     if(collided)
     {
         collided=false;
         outCollision.trigger();
     }
-    
+
     CABLES.physicsCurrentBody=body;
-    
+
     next.trigger();
-    
+
     CABLES.physicsCurrentBody=null;
     cgl.popModelMatrix();
 }

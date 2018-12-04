@@ -1,5 +1,4 @@
 {
-    "updated": 1510124607625,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "70e756bf-4e2c-4478-8c38-9a7b68b616d6",
@@ -12,27 +11,33 @@
             },
             {
                 "type": "0",
-                "name": "Mass"
+                "name": "Mass",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Radius"
+                "name": "Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Render"
+                "name": "Render",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Z"
+                "name": "Pos Z",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -46,19 +51,23 @@
             },
             {
                 "type": "0",
-                "name": "Out Radius"
+                "name": "Out Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             },
             {
                 "type": "1",
