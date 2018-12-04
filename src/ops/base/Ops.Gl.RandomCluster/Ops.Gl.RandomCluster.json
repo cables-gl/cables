@@ -1,6 +1,5 @@
 {
     "summary": "Transforms objects randomly in space",
-    "updated": 1542192314690,
     "authorName": "pandur",
     "id": "ca3bc984-e596-48fb-b53d-502eb13979b0",
     "created": 1516269330315,
@@ -13,51 +12,61 @@
             {
                 "type": "0",
                 "name": "num",
-                "subType": "number"
+                "group": "Parameters",
+                "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "size",
+                "group": "Parameters",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "random seed",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "scaleX",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "scaleY",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "scaleZ",
+                "group": "Parameters",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "round",
+                "group": "Parameters",
                 "subType": "boolean"
             },
             {
                 "type": "0",
+                "name": "scaleX",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scaleY",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scaleZ",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Rotate X",
+                "group": "Rotation",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Rotate Y",
+                "group": "Rotation",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Rotate Z",
+                "group": "Rotation",
                 "subType": "number"
             },
             {
