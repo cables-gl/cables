@@ -41,7 +41,7 @@ function checkFont()
     var oldFontLoaded=fontLoaded;
     try
     {
-    fontLoaded=document.fonts.check('20px '+inFont.get());
+        fontLoaded=document.fonts.check('20px '+inFont.get());
     }
     catch(ex)
     {
