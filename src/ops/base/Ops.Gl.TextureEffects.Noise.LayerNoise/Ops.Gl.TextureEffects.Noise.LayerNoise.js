@@ -36,20 +36,20 @@ var needsUpdate=false;
 // events
 inTrigger.onTriggered = function () {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
-    
+
     if(needsUpdate)
     {
         attribs[0] = inScale.get();
         attribs[1] = inNumLayers.get();
-        
+
         var layerMode = inLayerMode.get();
         if (layerMode == "linear")
             uniMode.set(0);
         else if (layerMode == "exponential")
             uniMode.set(1);
-        else 
+        else
             uniMode.set(2);
-    
+
         attribs[2] = inFactor.get();
         attribs[3] = inExponent.get();
         uniRGBA.set(inRGBA.get());
@@ -58,6 +58,8 @@ inTrigger.onTriggered = function () {
         scroll[2] = inScrollZ.get();
         uniScroll.set(scroll);
         needsUpdate=false;
+
+
     }
 
     cgl.setShader(shader);
@@ -65,6 +67,8 @@ inTrigger.onTriggered = function () {
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
     outTrigger.trigger();
+
+    // console.log(shader.finalShaderFrag);
 };
 
 
@@ -78,12 +82,12 @@ function updateTileable()
 
 
 inScale.onChange =
-inNumLayers.onChange = 
+inNumLayers.onChange =
 inLayerMode.onChange =
 inExponent.onChange =
 inFactor.onChange =
 inRGBA.onChange =
-inScrollX.onChange = 
+inScrollX.onChange =
 inScrollY.onChange =
 inScrollZ.onChange =
 function () {
