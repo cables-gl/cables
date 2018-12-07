@@ -1,4 +1,3 @@
-"use strict";
 
 const inArray = op.inArray("Array");
 const inIterations = op.inValueInt("Iterations",1);

@@ -7,10 +7,12 @@ var lensRadius1=op.inValueSlider("Radius",0.5);
 var sharp=op.inValueSlider("sharp",0.25);
 var aspect=op.inValue("Aspect",1);
 
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
+r.setUiAttribs({ colorPick: true });
 
-var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+
 
 
 var cgl=op.patch.cgl;

@@ -1,10 +1,11 @@
-var render=op.inTrigger('render');
-var segments=op.addInPort(new CABLES.Port(op,"segments"));
-var radius=op.addInPort(new CABLES.Port(op,"radius"));
-var percent=op.addInPort(new CABLES.Port(op,"percent",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var inRotate=op.inValueBool("Rotate");
-var trigger=op.outTrigger('trigger');
-var index=op.addOutPort(new CABLES.Port(op,"index"));
+const
+    render=op.inTrigger('render'),
+    segments=op.inValueInt("segments",40),
+    radius=op.inValueFloat("radius",1),
+    percent=op.inValueSlider("percent",1),
+    inRotate=op.inValueBool("Rotate"),
+    trigger=op.outTrigger('trigger'),
+    index=op.outValue("index");
 
 var cgl=op.patch.cgl;
 
@@ -29,7 +30,7 @@ function doRender()
         cgl.pushModelMatrix();
 
         mat4.translate(cgl.mMatrix,cgl.mMatrix, pos[i] );
-        if(doRot)mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, i/pos.length*CGL.DEG2RAD*-360);
+        if(doRot)mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, (i/pos.length*percent.get())*CGL.DEG2RAD*-360);
 
         index.set(i);
         trigger.trigger();
@@ -50,7 +51,7 @@ function calc()
     var i=0,degInRad=0;
     var segs=segments.get();
     if(segs<1)segs=1;
-    
+
     for (i=0; i < Math.round(segs*percent.get()); i++)
     {
         degInRad = (360/Math.round(segs))*i*CGL.DEG2RAD;

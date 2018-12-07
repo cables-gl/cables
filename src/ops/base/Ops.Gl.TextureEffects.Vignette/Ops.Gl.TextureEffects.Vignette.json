@@ -7,31 +7,38 @@
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Radius"
+                "name": "Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "sharp"
+                "name": "sharp",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Aspect"
+                "name": "Aspect",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -40,9 +47,8 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Vignette2"
+        "name": "Ops.Gl.TextureEffects.Vignette"
     },
-    "updated": 1541411124451,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "358e95af-bab4-4ef2-8b47-bb482577ca9b",
