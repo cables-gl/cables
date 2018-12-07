@@ -2,7 +2,7 @@
 //mathematical function which will be applied to the
 //two arrays. If arrays have a different length then a warning
 //is given in the panel
-"use strict";
+
 const inArray_0 = op.inArray("array 0");
 const inArray_1 = op.inArray("array 1");
 const mathSelect = op.inValueSelect("Math function",['+','-','*','/','%','min','max'],'+');

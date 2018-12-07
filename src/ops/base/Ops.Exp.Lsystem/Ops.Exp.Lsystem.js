@@ -1,4 +1,4 @@
-"use strict";
+
 const inExe = op.inTrigger ('Trigger');
 const inStrAxiom = op.inValueString("Axiom / seed","F");
 const inStrConstant1 = op.inValueString("Constant 1","F");
@@ -54,14 +54,14 @@ var pointArrays = [];
 var currentPointArray=[];
 var lastPointArray=[0,0,0];
 
-//this becomes the axiom after the resetAll() is called 
+//this becomes the axiom after the resetAll() is called
 var sentence = "";//axiom;
 
 //an array that holds the string replacment rules
 var rules = [];
 
 var needsCalc = true;
-//UI input 
+//UI input
 inRotateMutliplier.onChange = calcLater;
 inStepLength.onChange = calcLater;
 inStepScale.onChange = calcLater;
@@ -82,7 +82,7 @@ inStrRule3.onChange = defineRules;
 inStrConstant4.onChange = defineRules;
 inStrRule4.onChange = defineRules;
 
-op.init = function() 
+op.init = function()
 {
     defineRules();
 }
@@ -123,12 +123,12 @@ function generate()
     var iter;
     var i;
     var j;
-    
+
     for (iter = 0; iter < iterationsLimit ; iter++)
     {
         var sentenceArrayLength = sentence.length;
         var rulesArrayLength = rules.length;//
-        
+
         for (i =0; i < sentenceArrayLength; i++)
         {
             var current = sentence.charAt(i);
@@ -189,7 +189,7 @@ function generate()
 
 //used to connect start and end of branches together correctly
 var pos=vec3.create();
-var empty=vec3.create();  
+var empty=vec3.create();
 
 //extracts the user defined angle
 //FfFx45FF returns 45 on the x axis
@@ -212,13 +212,13 @@ function extract(str,pos)
             currentChar = output.charAt(j);
             if (!Number.isNaN(currentChar)  )
             {
-                parsedNumber += currentChar;   
+                parsedNumber += currentChar;
             }
             else if (Number.isNaN(currentChar))
             {
                 canceled=true;
                 break;
-                
+
             }
         }
         if(canceled)break;
@@ -265,7 +265,7 @@ function turtle()
         else if (current == "f")
         {
             mat4.translate(trans,trans,[0.0,len,0.0]);
-            
+
         }
         //alter step length by step multiplier
         else if (current == ">")
@@ -346,21 +346,21 @@ function turtle()
         {
             //get the current branch push into the transform matrix
             //check if branch has a start to avoid error
-            if(stack.length === 0) 
+            if(stack.length === 0)
             {
                 break;
             }
-            
+
             trans = stack[stack.length-1];
             stack.pop();
 
-            //this code section is used to correctly connect the branches together with spline 
+            //this code section is used to correctly connect the branches together with spline
             var branchStartCoord = branchCoordStack[branchCoordStack.length-1];
 
             branchCoordStack.pop();
-            
+
             pointArrays.push(currentPointArray);
-            
+
             if(branchStartCoord) currentPointArray=[branchStartCoord[0],branchStartCoord[1],branchStartCoord[2]];
                 else currentPointArray=[];
         }
@@ -385,7 +385,7 @@ function render ()
         //console.timeEnd('lsys');
     }
     needsCalc = false;
-    
+
     //iterate through transforms array and trigger all geometry
     for(var i = 0; i < transforms.length; i++)
     {
