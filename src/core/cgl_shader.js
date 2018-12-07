@@ -45,7 +45,7 @@ CGL.Shader = function(_cgl, _name) {
     var inverseViewMatrixUniform = null;
     var attrVertexPos = -1;
 
-    this.precision = 'mediump';
+    this.precision = 'mediump'; //'highp'
 
     this._pMatrixState =-1;
     this._vMatrixState =-1;

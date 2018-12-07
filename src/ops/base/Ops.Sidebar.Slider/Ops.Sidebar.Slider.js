@@ -147,9 +147,9 @@ function updateActiveTrack(val) {
     if(availableWidth === 0) { availableWidth = 206; }
     var trackWidth = CABLES.map(
         valueToUse,
-        parseFloat(input.min), 
-        parseFloat(input.max), 
-        0, 
+        parseFloat(input.min),
+        parseFloat(input.max),
+        0,
         availableWidth - 16 /* subtract slider thumb width */
     );
     // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
@@ -182,7 +182,7 @@ function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Slider: ' + labelText);    
+        op.setTitle('Slider: ' + labelText);
     }
 }
 
@@ -194,7 +194,7 @@ function onParentChanged() {
         siblingsPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -217,6 +217,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }
