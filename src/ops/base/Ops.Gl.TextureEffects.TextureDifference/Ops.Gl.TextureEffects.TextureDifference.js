@@ -1,4 +1,4 @@
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
 const texture1=op.inTexture("Texture 1");
 const texture2=op.inTexture("Texture 2");
 

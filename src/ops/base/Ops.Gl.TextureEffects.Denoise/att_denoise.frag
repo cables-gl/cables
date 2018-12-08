@@ -12,7 +12,7 @@ void main()
     float pixels=4.0;
     for (float x = -pixels; x <= pixels; x += 1.0) {
         for (float y = -pixels; y <= pixels; y += 1.0) {
-            vec4 smpl = texture2D(tex, texCoord + vec2(x, y) / texSize);
+            vec4 smpl = texture(tex, texCoord + vec2(x, y) / texSize);
             float weight = 1.0 - abs(dot(smpl.rgb - center.rgb, vec3(0.25)));
             weight = pow(weight, (1.0-exponent)*50.0);
             color += smpl * weight;

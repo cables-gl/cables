@@ -1,4 +1,3 @@
-op.name="NoiseSynth";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

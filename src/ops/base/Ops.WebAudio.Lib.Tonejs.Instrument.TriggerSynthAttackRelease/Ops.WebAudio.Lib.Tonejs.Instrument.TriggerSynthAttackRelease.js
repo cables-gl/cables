@@ -1,4 +1,3 @@
-op.name="TriggerSynthAttackRelease";
 
 // vars
 var NOTE_DEFAULT = "C4";

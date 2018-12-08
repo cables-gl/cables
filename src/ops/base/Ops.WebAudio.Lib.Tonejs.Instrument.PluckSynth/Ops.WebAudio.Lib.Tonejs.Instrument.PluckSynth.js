@@ -1,4 +1,3 @@
-op.name="PluckSynth";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

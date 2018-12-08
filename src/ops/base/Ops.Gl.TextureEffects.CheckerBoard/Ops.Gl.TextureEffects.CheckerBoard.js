@@ -17,10 +17,7 @@ const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 const uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
 const rotateUniform=new CGL.Uniform(shader,'f','rotate',inRotate);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

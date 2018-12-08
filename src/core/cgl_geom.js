@@ -157,6 +157,8 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
     this.verticesIndices.length=verts.length/3;
     // this.verticesIndices=[];
 
+    // TODO why does this have indizes ???????????????????????????
+
     for(i=0;i<verts.length/3;i++)
     {
         this.verticesIndices[i]=i;
@@ -398,6 +400,8 @@ CGL.Geometry.prototype.unIndex=function()
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
     this.vertexNormals=newNormals;
+
+    // TODO why does unindexed has indizes ???????????????????????????
     this.verticesIndices=newIndizes;
     this.calculateNormals();
 };

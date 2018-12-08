@@ -1,5 +1,5 @@
 
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var arrayIn=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
 var time=op.addInPort(new CABLES.Port(op,"time",CABLES.OP_PORT_TYPE_VALUE));
 
@@ -12,7 +12,7 @@ offset.set(0.0);
 var lookAhead=op.addInPort(new CABLES.Port(op,"look ahead",CABLES.OP_PORT_TYPE_VALUE));
 lookAhead.set(3.0);
 
-var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger("trigger")
 var triggerLookat=op.addOutPort(new CABLES.Port(op,"transform lookat",CABLES.OP_PORT_TYPE_FUNCTION));
 var idx=op.addOutPort(new CABLES.Port(op,"index"));
 
@@ -128,17 +128,17 @@ function render()
         );
 
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vecn);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, vecn);
         triggerLookat.trigger();
         cgl.popModelMatrix();
     }
 
     cgl.pushModelMatrix();
-    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+    mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
 
     CABLES.TL.Anim.slerpQuaternion(t,q,animQX,animQY,animQZ,animQW);
     mat4.fromQuat(qMat, q);
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
+    mat4.multiply(cgl.mMatrix,cgl.mMatrix, qMat);
 
     trigger.trigger();
     cgl.popModelMatrix();

@@ -7,10 +7,10 @@ void main()
 {
     vec4 col=vec4(0.0,0.0,0.0,1.0);
     
-    col=texture2D(tex, texCoord);
-    float m=texture2D(mask, texCoord).r;
+    col=texture(tex, texCoord);
+    float m=texture(mask, texCoord).r;
     
-    if(m>0.0)col=texture2D(tex, vec2(texCoord.x+m*0.1,texCoord.y) );
+    if(m>0.0)col=texture(tex, vec2(texCoord.x+m*0.1,texCoord.y) );
     
     
     outColor=col;

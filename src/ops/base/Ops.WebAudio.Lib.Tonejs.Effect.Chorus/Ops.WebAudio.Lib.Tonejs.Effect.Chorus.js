@@ -1,5 +1,3 @@
-op.name="Chorus";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars

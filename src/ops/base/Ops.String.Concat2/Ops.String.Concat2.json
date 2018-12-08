@@ -1,0 +1,30 @@
+{
+    "updated": 1541808233302,
+    "authorName": "pandur",
+    "id": "a52722aa-0ca9-402c-a844-b7e98a6c6e60",
+    "created": 1541808162771,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "string1"
+            },
+            {
+                "type": "5",
+                "name": "string2"
+            },
+            {
+                "type": "0",
+                "name": "New Line",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.String.Concat2"
+    }
+}

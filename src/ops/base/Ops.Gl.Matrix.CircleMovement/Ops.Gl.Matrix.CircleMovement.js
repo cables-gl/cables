@@ -1,16 +1,14 @@
 var render=op.inTrigger('render');
-var segments=op.addInPort(new CABLES.Port(op,"segments"));
-var radius=op.addInPort(new CABLES.Port(op,"radius"));
-var mulX=op.addInPort(new CABLES.Port(op,"mulX"));
-var mulY=op.addInPort(new CABLES.Port(op,"mulY"));
-var percent=op.addInPort(new CABLES.Port(op,"percent",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var offset=op.addInPort(new CABLES.Port(op,"offset"));
+var segments=op.inValueInt("segments",40);
+var radius=op.inValueFloat("radius",1);
+var mulX=op.inValueFloat("mulX",1);
+var mulY=op.inValueFloat("mulY",1);
+var percent=op.inValueSlider("percent");
+var offset=op.inValueFloat("offset");
 var trigger=op.outTrigger('trigger');
-var index=op.addOutPort(new CABLES.Port(op,"index"));
-var outX=op.addOutPort(new CABLES.Port(op,"X"));
-var outY=op.addOutPort(new CABLES.Port(op,"Y"));
-
-
+var index=op.outValue("index");
+var outX=op.outValue("X");
+var outY=op.outValue("Y");
 var speed=op.inValue("speed",1);
 
 var startTime=CABLES.now()/1000;
@@ -21,11 +19,6 @@ var pos=[];
 animX.loop=true;
 animY.loop=true;
 
-segments.set(40);
-radius.set(1);
-mulX.set(1);
-mulY.set(1);
-
 segments.onChange=calc;
 
 calc();
@@ -33,7 +26,6 @@ calc();
 render.onTriggered=function()
 {
     cgl.pushModelMatrix();
-
 
     var time=(CABLES.now()/1000-startTime)*speed.get()+Math.round(segments.get())*0.1*percent.get();
 
@@ -43,10 +35,7 @@ render.onTriggered=function()
     outX.set(x);
     outY.set(y);
 
-    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, [
-        x,
-        y,
-        0] );
+    mat4.translate(cgl.mMatrix,cgl.mMatrix, [x,y,0] );
 
     trigger.trigger();
 

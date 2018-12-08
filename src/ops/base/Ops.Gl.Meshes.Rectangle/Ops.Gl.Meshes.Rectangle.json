@@ -9,31 +9,37 @@
             {
                 "type": "0",
                 "name": "width",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "height",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "pivot x",
+                "group": "Pivot",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "pivot y",
+                "group": "Pivot",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "num columns",
+                "group": "Structure",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "num rows",
+                "group": "Structure",
                 "subType": "integer"
             },
             {
@@ -59,7 +65,6 @@
         ],
         "name": "Ops.Gl.Meshes.Rectangle"
     },
-    "updated": 1540470888833,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "20f3c4e7-04d1-44e0-b868-05756d1c66c6",

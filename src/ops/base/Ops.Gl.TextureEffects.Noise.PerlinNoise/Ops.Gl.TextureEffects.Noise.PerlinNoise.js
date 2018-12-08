@@ -22,10 +22,7 @@ const
     uniScale=new CGL.Uniform(shader,'f','scale',scale),
     amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

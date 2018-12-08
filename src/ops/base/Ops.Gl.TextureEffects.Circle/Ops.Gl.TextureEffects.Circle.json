@@ -8,47 +8,56 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "size",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Inner",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Pos X",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Pos Y",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
+                "name": "fallOff",
+                "group": "Style",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "fade Out",
+                "group": "Style",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "warn overflow",
+                "group": "Style",
                 "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "fallOff",
-                "subType": "string"
             },
             {
                 "type": "0",
@@ -79,7 +88,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.Circle"
     },
-    "updated": 1540823026767,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c260d839-065c-4101-8943-c4680b771343",

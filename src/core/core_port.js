@@ -277,15 +277,31 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         for(var i in this.links)
             if(this.links[i]==link)
             {
-                this.links.splice( i, 1 );
+                this.links.splice(i, 1);
             }
-
 
         if(this.direction==CABLES.PORT_DIR_IN)
         {
             if(this.type==CABLES.OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
                 else this.setValue(this._valueBeforeLink || null);
         }
+
+        // if (this.type == CABLES.OP_PORT_TYPE_OBJECT && this.direction == CABLES.PORT_DIR_IN && this.links.length > 0)
+        // {
+        //     console.log("REMOVELINK OBJECT!!",this);
+
+        //     for (var i=0;i<this.links.length;i++)
+        //     {
+        //         // console.log('iii', i, this.links[i].portOut.get());
+        //         // this.links[i].setValue();
+        //         // this.set(null);
+        //         // this.forceChange();
+        //         this.set(this.links[i].portOut.get());
+        //         console.log(this.get())
+        //         // this.forceChange();
+                
+        //     }
+        // }
 
         if(this.onLinkChanged)this.onLinkChanged();
     };

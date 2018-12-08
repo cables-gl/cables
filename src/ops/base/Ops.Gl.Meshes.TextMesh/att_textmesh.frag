@@ -8,7 +8,7 @@ UNI float a;
 
 void main()
 {
-   vec4 col=texture2D(tex,texCoord);
+   vec4 col=texture(tex,texCoord);
    col.a=col.r;
    col.r*=r;
    col.g*=g;

@@ -10,7 +10,7 @@ float lumi(vec3 color)
 
 void main()
 {
-   vec4 base=texture2D(tex,texCoord);
-   vec4 color=texture2D(gradient,vec2(lumi(base.rgb),pos));
+   vec4 base=texture(tex,texCoord);
+   vec4 color=texture(gradient,vec2(lumi(base.rgb),pos));
    outColor= vec4(color);
 }

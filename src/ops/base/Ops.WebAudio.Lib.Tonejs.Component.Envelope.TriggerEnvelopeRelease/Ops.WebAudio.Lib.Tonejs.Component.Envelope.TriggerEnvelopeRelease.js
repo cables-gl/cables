@@ -1,4 +1,3 @@
-op.name="TriggerEnvelopeRelease";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

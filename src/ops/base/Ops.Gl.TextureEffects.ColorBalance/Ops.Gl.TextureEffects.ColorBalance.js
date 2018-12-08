@@ -1,5 +1,5 @@
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger")
 const tone=op.inValueSelect("Tone",["Highlights","Midtones","Shadows"],"Highlights");
 const r=op.inValue("r");
 const g=op.inValue("g");

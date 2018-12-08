@@ -4,16 +4,16 @@ var trigger=op.outTrigger('trigger');
 var width=op.inValue("width",1);
 var height=op.inValue("height",1);
 
-var pivotX=op.addInPort(new CABLES.Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new CABLES.Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var pivotX=op.inValueSelect("pivot x",["center","left","right"]);
+var pivotY=op.inValueSelect("pivot y",["center","top","bottom"]);
 
 var nColumns=op.inValueInt("num columns",1);
 var nRows=op.inValueInt("num rows",1);
-var axis=op.addInPort(new CABLES.Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var axis=op.inValueSelect("axis",["xy","xz"],"xy");
 
 var active=op.inValueBool('Active',true);
 
-var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.outObject("geometry");
 geomOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;
@@ -21,9 +21,9 @@ axis.set('xy');
 pivotX.set('center');
 pivotY.set('center');
 
-op.setPortGroup([pivotX,pivotY]);
-op.setPortGroup([width,height]);
-op.setPortGroup([nColumns,nRows]);
+op.setPortGroup('Pivot',[pivotX,pivotY]);
+op.setPortGroup('Size',[width,height]);
+op.setPortGroup('Structure',[nColumns,nRows]);
 
 var geom=new CGL.Geometry('rectangle');
 var mesh=null;
@@ -49,10 +49,10 @@ function rebuild()
     var h=height.get();
     var x=0;
     var y=0;
-    
+
     if(typeof w=='string')w=parseFloat(w);
     if(typeof h=='string')h=parseFloat(h);
-    
+
     if(pivotX.get()=='center') x=0;
     else if(pivotX.get()=='right') x=-w/2;
     else if(pivotX.get()=='left') x=+w/2;
@@ -102,7 +102,7 @@ function rebuild()
             }
         }
     }
-    
+
     for(c=0;c<numColumns;c++)
     {
         for(r=0;r<numRows;r++)

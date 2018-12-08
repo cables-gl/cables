@@ -1,4 +1,3 @@
-op.name="AmOscillator";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

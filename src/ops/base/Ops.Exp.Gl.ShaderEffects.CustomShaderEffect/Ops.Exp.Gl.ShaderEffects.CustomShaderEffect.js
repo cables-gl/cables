@@ -1,4 +1,4 @@
-const render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
 const fragHead=op.addInPort(new CABLES.Port(op,"Fragment Head",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
 const fragBody=op.addInPort(new CABLES.Port(op,"Fragment Main",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
 const next=op.outTrigger("Next");

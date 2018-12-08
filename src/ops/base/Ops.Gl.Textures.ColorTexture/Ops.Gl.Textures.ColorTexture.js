@@ -1,19 +1,27 @@
-const r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-const g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-const b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-const a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
+const a = op.inValueSlider("a", 1.0);
 const texOut=op.outTexture("texture_out");
 
+r.setUiAttribs({ colorPick: true });
 const cgl=op.patch.cgl;
+
 var fb=null;
 
-var render=function()
+r.onChange=
+    g.onChange=
+    b.onChange=
+    a.onChange=render;
+
+render();
+
+function render()
 {
     if(!fb)
     {
         if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
-        else fb=new CGL.Framebuffer2(cgl,4,4);
+            else fb=new CGL.Framebuffer2(cgl,4,4);
         fb.setFilter(CGL.Texture.FILTER_MIPMAP);
     }
 
@@ -23,14 +31,4 @@ var render=function()
     fb.renderEnd();
 
     texOut.set(fb.getTextureColor());
-};
-
-r.set(0.3);
-g.set(0.3);
-b.set(0.3);
-a.set(1.0);
-
-r.onChange=render;
-g.onChange=render;
-b.onChange=render;
-a.onChange=render;
+}

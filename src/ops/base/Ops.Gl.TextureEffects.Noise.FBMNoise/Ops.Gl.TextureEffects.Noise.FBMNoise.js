@@ -34,10 +34,7 @@ function updateTileable()
         else shader.removeDefine("DO_TILEABLE");
 }
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

@@ -1,4 +1,3 @@
-op.name="FrequencyToNote";
 
 /**
  * Converts a frequency to a note

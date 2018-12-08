@@ -1,5 +1,3 @@
-op.name="Convolver";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars

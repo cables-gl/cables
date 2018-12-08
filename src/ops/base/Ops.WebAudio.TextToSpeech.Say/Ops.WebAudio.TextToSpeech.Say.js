@@ -1,4 +1,3 @@
-op.name="Say";
 
 // default / min /max values
 var PITCH_DEFAULT = 1;

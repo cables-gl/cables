@@ -1,4 +1,3 @@
-op.name="MonoSynth";
 
 // TODO: Update UI when port is replaced
 

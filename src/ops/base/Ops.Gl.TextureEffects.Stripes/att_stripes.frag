@@ -13,7 +13,7 @@ UNI float a;
 
 void main()
 {
-   vec4 col=texture2D(tex,texCoord);
+   vec4 col=texture(tex,texCoord);
 
    float v=0.0;
    float c=1.0;

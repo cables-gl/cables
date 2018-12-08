@@ -1,6 +1,6 @@
-const exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 const arrayIn=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
-const trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.outTrigger("trigger")
 const idx=op.addOutPort(new CABLES.Port(op,"index"));
 
 var vec=vec3.create();

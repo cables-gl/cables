@@ -9,14 +9,14 @@ UNI float amountY;
 
 void main()
 {
-    vec3 offset=texture2D(displaceTex,texCoord).rgb;
+    vec3 offset=texture(displaceTex,texCoord).rgb;
 
     offset=offset*2.0-1.0;
 
     float x=(offset.r)*amountX;
     float y=(offset.g)*amountY;
 
-    vec4 col=texture2D(tex,vec2(x,y)+texCoord );
+    vec4 col=texture(tex,vec2(x,y)+texCoord );
 
 // col.r=x;
 // col.g=y;

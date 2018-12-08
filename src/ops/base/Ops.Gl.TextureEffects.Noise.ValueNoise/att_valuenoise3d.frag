@@ -72,7 +72,7 @@ float Value3D( vec3 P )
 
 void main()
 {
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
 
    vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
    p=p*scale;

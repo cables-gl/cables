@@ -1,4 +1,3 @@
-op.name="Lfo";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

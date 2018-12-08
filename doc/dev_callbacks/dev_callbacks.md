@@ -68,7 +68,7 @@ When you inspect existing ops by pressing the `View Code` button in the op param
 
 
 ```javascript
-var inPort = op.inValue('In Value');
+var inPort = op.inValueFloat('In Value');
 
 op.init = function() 
 {

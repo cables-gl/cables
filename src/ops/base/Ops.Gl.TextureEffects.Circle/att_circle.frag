@@ -19,7 +19,7 @@ UNI float y;
 
 void main()
 {
-   vec4 base=texture2D(tex,texCoord);
+   vec4 base=texture(tex,texCoord);
    vec4 col=vec4(0.0,0.0,0.0,1.0);
     // .endl()+'   float dist = distance(vec2(0.5,0.5),vec2(texCoord.x,texCoord.y/aspect));'
    float dist = distance(vec2( x,y),vec2(texCoord.x,(texCoord.y-0.5)*aspect)+0.5);

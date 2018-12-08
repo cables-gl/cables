@@ -47,29 +47,47 @@ const unig=new CGL.Uniform(shader,'f','g',g);
 const unib=new CGL.Uniform(shader,'f','b',b);
 const unia=new CGL.Uniform(shader,'f','a',a);
 
-{
+op.setPortGroup("Color",[r,g,b,a]);
+
+
     // diffuse outTexture
 
     var diffuseTexture=op.inTexture("texture");
     var diffuseTextureUniform=null;
     shader.bindTextures=bindTextures;
 
-    diffuseTexture.onChange=function()
+    diffuseTexture.onChange=updateDiffuseTexture;
+
+    function updateDiffuseTexture()
     {
         if(diffuseTexture.get())
         {
             if(!shader.hasDefine('HAS_TEXTURE_DIFFUSE'))shader.define('HAS_TEXTURE_DIFFUSE');
             if(!diffuseTextureUniform)diffuseTextureUniform=new CGL.Uniform(shader,'t','texDiffuse',0);
+
+            diffuseRepeatX.setUiAttribs({greyout:false});
+            diffuseRepeatY.setUiAttribs({greyout:false});
+            diffuseOffsetX.setUiAttribs({greyout:false});
+            diffuseOffsetY.setUiAttribs({greyout:false});
+            colorizeTexture.setUiAttribs({greyout:false});
         }
         else
         {
             shader.removeUniform('texDiffuse');
             shader.removeDefine('HAS_TEXTURE_DIFFUSE');
             diffuseTextureUniform=null;
+
+            diffuseRepeatX.setUiAttribs({greyout:true});
+            diffuseRepeatY.setUiAttribs({greyout:true});
+            diffuseOffsetX.setUiAttribs({greyout:true});
+            diffuseOffsetY.setUiAttribs({greyout:true});
+            colorizeTexture.setUiAttribs({greyout:true});
+
         }
     };
 
-}
+const colorizeTexture=op.inValueBool("colorizeTexture",false);
+
 
 // opacity texture
 op.textureOpacity=op.inTexture("textureOpacity");
@@ -77,6 +95,7 @@ op.textureOpacityUniform=null;
 
 op.alphaMaskSource=op.inValueSelect("Alpha Mask Source",["Alpha Channel","Luminance","R","G","B"],"Luminance");
 op.alphaMaskSource.onChange=updateAlphaMaskMethod;
+op.alphaMaskSource.setUiAttribs({greyout:true});
 
 function updateAlphaMaskMethod()
 {
@@ -96,40 +115,45 @@ function updateAlphaMaskMethod()
         else shader.removeDefine('ALPHA_MASK_B');
 }
 
-op.textureOpacity.onChange=function()
+op.textureOpacity.onChange=updateOpacity;
+function updateOpacity()
 {
+
     if(op.textureOpacity.get())
     {
         if(op.textureOpacityUniform!==null)return;
         shader.removeUniform('texOpacity');
         shader.define('HAS_TEXTURE_OPACITY');
         if(!op.textureOpacityUniform)op.textureOpacityUniform=new CGL.Uniform(shader,'t','texOpacity',1);
+
+        op.alphaMaskSource.setUiAttribs({greyout:false});
+        discardTransPxl.setUiAttribs({greyout:false});
+        texCoordAlpha.setUiAttribs({greyout:false});
+
     }
     else
     {
         shader.removeUniform('texOpacity');
         shader.removeDefine('HAS_TEXTURE_OPACITY');
         op.textureOpacityUniform=null;
+
+        op.alphaMaskSource.setUiAttribs({greyout:true});
+        discardTransPxl.setUiAttribs({greyout:true});
+        texCoordAlpha.setUiAttribs({greyout:true});
     }
     updateAlphaMaskMethod();
 };
 
 
-const colorizeTexture=op.inValueBool("colorizeTexture",false);
-const doBillboard=op.inValueBool("billboard",false);
 var texCoordAlpha=op.inValueBool("Opacity TexCoords Transform",false);
+const discardTransPxl=op.inValueBool("Discard Transparent Pixels");
 
-colorizeTexture.onChange=function()
+discardTransPxl.onChange=function()
 {
-    if(colorizeTexture.get()) shader.define('COLORIZE_TEXTURE');
-        else shader.removeDefine('COLORIZE_TEXTURE');
+    if(discardTransPxl.get()) shader.define('DISCARDTRANS');
+        else shader.removeDefine('DISCARDTRANS');
 };
 
-doBillboard.onChange=function()
-{
-    if(doBillboard.get()) shader.define('BILLBOARD');
-        else shader.removeDefine('BILLBOARD');
-};
 
 texCoordAlpha.onChange=function()
 {
@@ -137,7 +161,17 @@ texCoordAlpha.onChange=function()
         else shader.removeDefine('TRANSFORMALPHATEXCOORDS');
 };
 
-var preMultipliedAlpha=op.inValueBool("preMultiplied alpha");
+op.setPortGroup("Opacity",[op.textureOpacity,op.alphaMaskSource,discardTransPxl,texCoordAlpha]);
+
+
+colorizeTexture.onChange=function()
+{
+    if(colorizeTexture.get()) shader.define('COLORIZE_TEXTURE');
+        else shader.removeDefine('COLORIZE_TEXTURE');
+};
+
+
+
 
 // texture coords
 
@@ -151,10 +185,17 @@ const diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseR
 const diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
 const diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
 
+op.setPortGroup("Texture Transform",[diffuseRepeatX,diffuseRepeatY,diffuseOffsetX,diffuseOffsetY]);
 
-const discardTransPxl=op.inValueBool("Discard Transparent Pixels");
-discardTransPxl.onChange=function()
+
+
+const doBillboard=op.inValueBool("billboard",false);
+
+doBillboard.onChange=function()
 {
-    if(discardTransPxl.get()) shader.define('DISCARDTRANS');
-        else shader.removeDefine('DISCARDTRANS');
+    if(doBillboard.get()) shader.define('BILLBOARD');
+        else shader.removeDefine('BILLBOARD');
 };
+
+updateOpacity();
+updateDiffuseTexture();

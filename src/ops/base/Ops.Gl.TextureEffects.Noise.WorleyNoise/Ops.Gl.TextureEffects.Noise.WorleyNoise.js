@@ -33,10 +33,7 @@ const rangeBUniform=new CGL.Uniform(shader,'f','rangeB',rangeB);
 inv.onChange=updateInvert;
 updateInvert();
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 
 function updateInvert()

@@ -1,6 +1,5 @@
 //this op allows the user to perform sin or cos
 //math functions on an array
-"use strict";
 const inArray = op.inArray("array in");
 const mathSelect = op.inValueSelect("Math function",["Sin","Cos"],"Sin");
 const outArray = op.outArray("Array result");

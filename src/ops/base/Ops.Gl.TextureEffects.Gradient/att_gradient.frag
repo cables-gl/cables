@@ -12,7 +12,7 @@ UNI sampler2D tex;
 
 void main()
 {
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
     vec4 col;
     float ax=texCoord.x;
 

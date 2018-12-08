@@ -1,4 +1,3 @@
-op.name="ControlPattern";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

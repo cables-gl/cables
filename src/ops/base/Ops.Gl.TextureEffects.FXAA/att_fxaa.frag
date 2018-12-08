@@ -12,11 +12,11 @@ vec4 getColorFXAA(vec2 coord)
 
     float step=1.0;
 
-    vec3 rgbNW = texture2D(tex, coord.xy + (vec2(-step, -step)*invtexsize )).xyz;
-    vec3 rgbNE = texture2D(tex, coord.xy + (vec2(+step, -step)*invtexsize )).xyz;
-    vec3 rgbSW = texture2D(tex, coord.xy + (vec2(-step, +step)*invtexsize )).xyz;
-    vec3 rgbSE = texture2D(tex, coord.xy + (vec2(+step, +step)*invtexsize )).xyz;
-    vec3 rgbM  = texture2D(tex, coord.xy).xyz;
+    vec3 rgbNW = texture(tex, coord.xy + (vec2(-step, -step)*invtexsize )).xyz;
+    vec3 rgbNE = texture(tex, coord.xy + (vec2(+step, -step)*invtexsize )).xyz;
+    vec3 rgbSW = texture(tex, coord.xy + (vec2(-step, +step)*invtexsize )).xyz;
+    vec3 rgbSE = texture(tex, coord.xy + (vec2(+step, +step)*invtexsize )).xyz;
+    vec3 rgbM  = texture(tex, coord.xy).xyz;
 
     vec3 luma = vec3(0.299, 0.587, 0.114);
     float lumaNW = dot(rgbNW, luma);
@@ -40,14 +40,14 @@ vec4 getColorFXAA(vec2 coord)
           max(vec2(-FXAA_SPAN_MAX, -FXAA_SPAN_MAX), dir * rcpDirMin))*invtexsize ;
 
     vec3 rgbA = (1.0/2.0) * (
-                texture2D(tex, coord.xy + dir * (1.0/3.0 - 0.5)).xyz +
-                texture2D(tex, coord.xy + dir * (2.0/3.0 - 0.5)).xyz);
+                texture(tex, coord.xy + dir * (1.0/3.0 - 0.5)).xyz +
+                texture(tex, coord.xy + dir * (2.0/3.0 - 0.5)).xyz);
     vec3 rgbB = rgbA * (1.0/2.0) + (1.0/4.0) * (
-                texture2D(tex, coord.xy + dir * (0.0/3.0 - 0.5)).xyz +
-                texture2D(tex, coord.xy + dir * (3.0/3.0 - 0.5)).xyz);
+                texture(tex, coord.xy + dir * (0.0/3.0 - 0.5)).xyz +
+                texture(tex, coord.xy + dir * (3.0/3.0 - 0.5)).xyz);
     float lumaB = dot(rgbB, luma);
 
-    vec4 color=texture2D(tex,coord).rgba;
+    vec4 color=texture(tex,coord).rgba;
 
     if((lumaB < lumaMin) || (lumaB > lumaMax)){
       color.xyz=rgbA;

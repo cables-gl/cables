@@ -5,7 +5,7 @@ UNI float amount;
 
 void main()
 {
-    vec4 textureColor = texture2D(tex, texCoord);
+    vec4 textureColor = texture(tex, texCoord);
     float blueColor = textureColor.b * 63.0;
     
     vec2 quad1;
@@ -24,8 +24,8 @@ void main()
     texPos2.x = (quad2.x * 0.125) + 0.5/512.0 + ((0.125 - 1.0/512.0) * textureColor.r);
     texPos2.y = (quad2.y * 0.125) + 0.5/512.0 + ((0.125 - 1.0/512.0) * textureColor.g);
     
-    vec4 newColor1 = texture2D(texLut, texPos1);
-    vec4 newColor2 = texture2D(texLut, texPos2);
+    vec4 newColor1 = texture(texLut, texPos1);
+    vec4 newColor2 = texture(texLut, texPos2);
     
     vec4 newColor = mix(newColor1, newColor2, fract(blueColor));
     outColor= mix(textureColor,vec4(newColor.rgb, textureColor.w),amount);

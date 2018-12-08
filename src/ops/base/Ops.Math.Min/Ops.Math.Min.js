@@ -1,4 +1,4 @@
-var result=op.addOutPort(new CABLES.Port(op,"result"));
+const result=op.outValue("result");
 var value=op.addInPort(new CABLES.Port(op,"value"));
 var min=op.addInPort(new CABLES.Port(op,"Minimum"));
 

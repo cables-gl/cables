@@ -26,10 +26,7 @@ amountY.onChange=function()
     amountYUniform.setValue(amountY.get());
 };
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 
 render.onTriggered=function()

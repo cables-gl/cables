@@ -20,10 +20,7 @@ const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 const uniFarplane=new CGL.Uniform(shader,'f','f',farPlane);
 const uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 inInv.onChange=function()
 {

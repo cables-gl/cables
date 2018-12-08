@@ -1,6 +1,6 @@
 
 var input=op.addInPort(new CABLES.Port(op,"input"));
-var result=op.addOutPort(new CABLES.Port(op,"result"));
+const result=op.outValue("result");
 
 function update()
 {

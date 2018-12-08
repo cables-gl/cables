@@ -1,17 +1,10 @@
-
 var render=op.inTrigger("Render");
-
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
 var width=op.inValue("Width",1);
-
 var gType=op.inValueSelect("Type",['X','Y','XY','Radial'],"X");
-
 var pos1=op.inValueSlider("Pos",0.5);
-
 var smoothStep=op.inValueBool("Smoothstep",true);
-smoothStep.onChange=updateSmoothstep;
-
 
 var r=op.addInPort(new CABLES.Port(op,"r1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g=op.addInPort(new CABLES.Port(op,"g1",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
@@ -24,6 +17,14 @@ var b2=op.addInPort(new CABLES.Port(op,"b2",CABLES.OP_PORT_TYPE_VALUE,{ display:
 var r3=op.addInPort(new CABLES.Port(op,"r3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
 var g3=op.addInPort(new CABLES.Port(op,"g3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 var b3=op.addInPort(new CABLES.Port(op,"b3",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+
+
+smoothStep.onChange=updateSmoothstep;
+
+op.setPortGroup('Blending',[blendMode,amount]);
+op.setPortGroup('Color A',[r,g,b]);
+op.setPortGroup('Color B',[r2,g2,b2]);
+op.setPortGroup('Color C',[r3,g3,b3]);
 
 
 var next=op.outTrigger("Next");
@@ -54,18 +55,15 @@ gType.onChange=function()
     shader.removeDefine('GRAD_Y');
     shader.removeDefine('GRAD_XY');
     shader.removeDefine('GRAD_RADIAL');
-    
+
     if(gType.get()=='XY')shader.define('GRAD_XY');
     if(gType.get()=='X')shader.define('GRAD_X');
     if(gType.get()=='Y')shader.define('GRAD_Y');
     if(gType.get()=='Radial')shader.define('GRAD_RADIAL');
-    
+
 };
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 r.onChange=g.onChange=b.onChange=function()
 {
@@ -96,7 +94,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

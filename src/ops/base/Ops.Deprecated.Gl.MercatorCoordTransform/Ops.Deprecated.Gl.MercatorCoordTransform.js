@@ -13,7 +13,7 @@ var mul=this.addInPort(new CABLES.Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
 
 
 var indexOut=this.addOutPort(new CABLES.Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
-var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.outTrigger("trigger");
 
 
 var vecMin=vec3.create();

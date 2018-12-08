@@ -1,5 +1,3 @@
-op.name="MultiplySignals";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars

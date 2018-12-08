@@ -42,6 +42,6 @@ void main()
 	if(loc.x > 1.0) loc.x = mod(abs(1.0-loc.x),1.0);
 	if(loc.y > 1.0) loc.y = mod(abs(1.0-loc.y),1.0);
 
-	outColor= texture2D(tex,loc);
+	outColor= texture(tex,loc);
 
 }

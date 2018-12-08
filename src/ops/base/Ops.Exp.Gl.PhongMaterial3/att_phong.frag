@@ -109,7 +109,7 @@ void main()
     #endif
   
     #ifdef HAS_TEXTURE_NORMAL
-        vec3 TextureNormal_tangentspace = normalize(texture2D(texNormal, texCoord).rgb*2.0-1.0);
+        vec3 TextureNormal_tangentspace = normalize(texture(texNormal, texCoord).rgb*2.0-1.0);
     #endif
     
     vec3 eyevector = normalize( camPos);
@@ -195,7 +195,7 @@ void main()
             #ifdef SHOW_SPECULAR
                 float specMul=specular;
                 #ifdef HAS_TEXTURE_SPECULAR
-                    specMul*=texture2D(texSpecular, texCoord).r;
+                    specMul*=texture(texSpecular, texCoord).r;
                 #endif
                 
                 col+=light.mul*specMul*pow(cosAlpha,5.0);// (distance*distance);
@@ -211,7 +211,7 @@ void main()
 
     #ifdef SHOW_DIFFUSE
         #ifdef HAS_TEXTURE_DIFFUSE
-            vec4 texCol=texture2D(texDiffuse, texCoord);
+            vec4 texCol=texture(texDiffuse, texCoord);
             col*=texCol.rgb;
             alpha*=texCol.a;
             // if(texCol.a<=0.1)
@@ -234,7 +234,7 @@ void main()
     
     #ifdef SHOW_AO
         #ifdef HAS_TEXTURE_AO
-            col*= texture2D(texAo, texCoord).rgb;
+            col*= texture(texAo, texCoord).rgb;
         #endif
     #endif
 
@@ -246,7 +246,7 @@ void main()
 
     #ifdef SHOW_EMISSIVE
         #ifdef HAS_TEXTURE_EMISSIVE
-            col+= 25.0*texture2D(texEmissive, texCoord).rgb;
+            col+= 25.0*texture(texEmissive, texCoord).rgb;
         #endif
     #endif
 

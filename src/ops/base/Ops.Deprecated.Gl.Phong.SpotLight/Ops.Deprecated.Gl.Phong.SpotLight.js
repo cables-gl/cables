@@ -2,7 +2,7 @@
 // var cgl=this.patch.cgl;
 
 // var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-// var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+// const trigger=op.outTrigger("trigger");
 
 // var attachment=this.addOutPort(new CABLES.Port(this,"attachment",CABLES.OP_PORT_TYPE_FUNCTION));
 

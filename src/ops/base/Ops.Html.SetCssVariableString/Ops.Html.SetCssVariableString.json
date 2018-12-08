@@ -1,0 +1,19 @@
+{
+    "id": "e7b4ea20-ef7e-461d-92f8-6aff58c5ba6f",
+    "updated": 1543859796714,
+    "authorName": "pandur",
+    "created": 1543859675351,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Var Name"
+            },
+            {
+                "type": "5",
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.User.pandur.CssVariable"
+    }
+}

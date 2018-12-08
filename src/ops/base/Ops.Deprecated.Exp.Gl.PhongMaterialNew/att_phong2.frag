@@ -100,14 +100,14 @@ void main()
 
 
     #ifdef HAS_TEXTURE_DIFFUSE
-        vec3 diffuseColor = texture2D(texDiffuse, uv).rgb;
+        vec3 diffuseColor = texture(texDiffuse, uv).rgb;
     #endif
     #ifndef HAS_TEXTURE_DIFFUSE
         vec3 diffuseColor = vec3(r,g,b);
     #endif
 
     #ifdef HAS_TEXTURE_NORMAL
-        vec3 normalMap = texture2D(texNormal, uv).rgb * 2.0 - 1.0;
+        vec3 normalMap = texture(texNormal, uv).rgb * 2.0 - 1.0;
         // normalMap=normalize(normalMap);
 
         N=normalize(normalMatrix * normalMap);
@@ -121,7 +121,7 @@ void main()
 
     float specStrength = specularStrength;
     #ifdef HAS_TEXTURE_SPECULAR
-        specStrength = specularStrength*texture2D(texSpecular, uv).r;
+        specStrength = specularStrength*texture(texSpecular, uv).r;
     #endif
 
     vec3 specularColors=vec3(0.0);

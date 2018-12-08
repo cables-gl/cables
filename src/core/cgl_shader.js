@@ -45,6 +45,8 @@ CGL.Shader = function(_cgl, _name) {
     var inverseViewMatrixUniform = null;
     var attrVertexPos = -1;
 
+    this.precision = 'mediump'; //'highp'
+
     this._pMatrixState =-1;
     this._vMatrixState =-1;
 
@@ -234,7 +236,7 @@ CGL.Shader = function(_cgl, _name) {
         var vs = '';
         var fs = '';
 
-        var precision='highp';
+
 
         if (self.glslVersion == 300)
         {
@@ -254,7 +256,6 @@ CGL.Shader = function(_cgl, _name) {
                 drawBufferStr+='vec4 outColor;'.endl();
                 for(var i=0;i<this._drawBuffers.length;i++)
                 {
-                    
                     // if(this._drawBuffers[i])
                     {
                         if(count==0)
@@ -273,7 +274,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '// '
                 .endl() + '// vertex shader '+name
                 .endl() + '// '
-                .endl() + 'precision '+precision+' float;'
+                .endl() + 'precision ' + this.precision+' float;'
                 .endl() + ''
                 .endl() + '#define texture2D texture'
                 .endl() + '#define UNI uniform'
@@ -285,7 +286,7 @@ CGL.Shader = function(_cgl, _name) {
                 .endl() + '// '
                 .endl() + '// fragment shader '+name
                 .endl() + '// '
-                .endl() + 'precision '+precision+' float;'
+                .endl() + 'precision ' + this.precision+' float;'
                 .endl() + ''
                 .endl() + '#define texture2D texture'
                 .endl() + '#define IN in'
@@ -316,8 +317,8 @@ CGL.Shader = function(_cgl, _name) {
                 .endl();
             }
 
-        if (fs.indexOf("precision") == -1) fs = 'precision '+precision+' float;'.endl() + fs;
-        if (vs.indexOf("precision") == -1) vs = 'precision '+precision+' float;'.endl() + vs;
+        if (fs.indexOf("precision") == -1) fs = 'precision ' + this.precision+' float;'.endl() + fs;
+        if (vs.indexOf("precision") == -1) vs = 'precision ' + this.precision+' float;'.endl() + vs;
 
         vs = extensionString + vs + definesStr + self.srcVert;
         fs = extensionString + fs + definesStr + self.srcFrag;

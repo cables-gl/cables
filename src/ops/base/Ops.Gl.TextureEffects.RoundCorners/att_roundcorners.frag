@@ -17,7 +17,7 @@ float roundRect(in vec2 distFromCenter)
 
 void main()
 {
-    vec4 col=texture2D(tex,texCoord);
+    vec4 col=texture(tex,texCoord);
     float c=0.0;
     
     c=roundRect(vec2(0.5*width,0.5*height)-vec2(gl_FragCoord));

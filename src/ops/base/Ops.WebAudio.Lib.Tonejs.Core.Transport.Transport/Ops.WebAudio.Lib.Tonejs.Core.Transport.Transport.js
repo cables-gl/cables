@@ -1,5 +1,3 @@
-op.name="Transport";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // in port defaults

@@ -1,5 +1,4 @@
 {
-    "updated": 1510178425590,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "c529ee2b-87cb-4631-82c6-a84a61271d17",
@@ -12,43 +11,53 @@
             },
             {
                 "type": "0",
-                "name": "Mass"
+                "name": "Mass",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Radius"
+                "name": "Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Render"
+                "name": "Render",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Z"
+                "name": "Pos Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "dir X"
+                "name": "dir X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "dir Y"
+                "name": "dir Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "dir Z"
+                "name": "dir Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Speed"
+                "name": "Speed",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -66,19 +75,23 @@
             },
             {
                 "type": "0",
-                "name": "Out Radius"
+                "name": "Out Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             },
             {
                 "type": "1",

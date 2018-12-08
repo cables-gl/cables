@@ -1,4 +1,3 @@
-op.name="StereoWidener";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

@@ -18,10 +18,7 @@ const rotateUniform=new CGL.Uniform(shader,'f','rotate',inRotate);
 crop.onChange=updateCrop;
 updateCrop();
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 function updateCrop()
 {

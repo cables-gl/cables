@@ -58,6 +58,8 @@ inTrigger.onTriggered = function () {
         scroll[2] = inScrollZ.get();
         uniScroll.set(scroll);
         needsUpdate=false;
+
+
     }
 
     cgl.setShader(shader);
@@ -65,6 +67,8 @@ inTrigger.onTriggered = function () {
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
     outTrigger.trigger();
+
+    // console.log(shader.finalShaderFrag);
 };
 
 

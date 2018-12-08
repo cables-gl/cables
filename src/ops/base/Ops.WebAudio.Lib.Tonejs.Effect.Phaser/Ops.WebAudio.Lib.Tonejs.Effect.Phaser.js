@@ -1,4 +1,3 @@
-op.name="Phaser";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

@@ -1,4 +1,3 @@
-op.name="Tremolo";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

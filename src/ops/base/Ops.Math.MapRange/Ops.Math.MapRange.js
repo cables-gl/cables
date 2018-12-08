@@ -1,5 +1,5 @@
 
-var result=op.addOutPort(new CABLES.Port(op,"result"));
+const result=op.outValue("result");
 var v=op.addInPort(new CABLES.Port(op,"value"));
 var old_min=op.addInPort(new CABLES.Port(op,"old min"));
 var old_max=op.addInPort(new CABLES.Port(op,"old max"));

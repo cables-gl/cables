@@ -1,5 +1,5 @@
 
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var num=op.addInPort(new CABLES.Port(op,"num"));
 var size=op.addInPort(new CABLES.Port(op,"size"),CABLES.OP_PORT_TYPE_VALUE);
 var seed=op.addInPort(new CABLES.Port(op,"random seed"));

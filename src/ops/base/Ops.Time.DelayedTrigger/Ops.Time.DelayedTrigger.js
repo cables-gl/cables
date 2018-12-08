@@ -1,7 +1,7 @@
-var exe=op.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var delay=op.addInPort(new CABLES.Port(op,"delay",CABLES.OP_PORT_TYPE_VALUE));
 
-var next=op.addOutPort(new CABLES.Port(op,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+const next=op.outTrigger("next");
 
 delay.set(1);
 

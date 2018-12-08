@@ -1,4 +1,3 @@
-op.name="NoteToFrequency";
 
 // defaults
 var NOTE_DEFAULT = "C";

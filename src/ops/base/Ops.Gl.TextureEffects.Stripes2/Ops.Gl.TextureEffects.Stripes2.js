@@ -7,10 +7,12 @@ const
     rotate=op.inValueSlider("Rotate",0),
     offset=op.inValue("Offset",0),
     smoothed=op.inValueBool("Gradients"),
-    r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'})),
-    g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
-    b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' })),
+    r=op.inValueSlider("r", Math.random()),
+    g=op.inValueSlider("g", Math.random()),
+    b=op.inValueSlider("b", Math.random()),
     trigger=op.outTrigger('trigger');
+
+r.setUiAttribs({ colorPick: true });
 
 smoothed.onChange=function()
 {
@@ -18,9 +20,6 @@ smoothed.onChange=function()
         else shader.removeDefine("STRIPES_SMOOTHED");
 };
 
-r.set(1.0);
-g.set(1.0);
-b.set(1.0);
 
 const
     cgl=op.patch.cgl,
@@ -40,10 +39,7 @@ const
     uniformG=new CGL.Uniform(shader,'f','g',g),
     uniformB=new CGL.Uniform(shader,'f','b',b);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

@@ -118,10 +118,7 @@ function updateTransformPorts()
 
 
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);

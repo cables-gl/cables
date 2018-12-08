@@ -44,7 +44,7 @@ function setDevice()
     if(!midi || !midi.inputs)return;
     var name=deviceSelect.get();
     
-    op.name="Midi "+name;
+    op.setTitle("Midi " + name);
     
     var inputs = midi.inputs.values();
     var outputs = midi.outputs.values();
