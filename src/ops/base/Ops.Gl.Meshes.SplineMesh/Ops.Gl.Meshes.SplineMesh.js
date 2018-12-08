@@ -219,7 +219,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecA[1];
         geom.vertices[index++]=vecA[2];
 
-        geom.texCoords[indexTc++]=repx;
+        geom.texCoords[indexTc++]=repx0;
         geom.texCoords[indexTc++]=repy0;
 
         // b
@@ -227,7 +227,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecB[1];
         geom.vertices[index++]=vecB[2];
 
-        geom.texCoords[indexTc++]=repx;
+        geom.texCoords[indexTc++]=repx0;
         geom.texCoords[indexTc++]=repy;
 
         // c
@@ -235,7 +235,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecC[1];
         geom.vertices[index++]=vecC[2];
 
-        geom.texCoords[indexTc++]=repx0;
+        geom.texCoords[indexTc++]=repx;
         geom.texCoords[indexTc++]=repy0;
 
         // d
@@ -243,7 +243,10 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecD[1];
         geom.vertices[index++]=vecD[2];
 
-        geom.texCoords[indexTc++]=repx0;
+
+
+
+        geom.texCoords[indexTc++]=repx;
         geom.texCoords[indexTc++]=repy;
 
         // c
@@ -251,7 +254,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecC[1];
         geom.vertices[index++]=vecC[2];
 
-        geom.texCoords[indexTc++]=repx0;
+        geom.texCoords[indexTc++]=repx;
         geom.texCoords[indexTc++]=repy0;
 
         // b
@@ -259,7 +262,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecB[1];
         geom.vertices[index++]=vecB[2];
 
-        geom.texCoords[indexTc++]=repx;
+        geom.texCoords[indexTc++]=repx0;
         geom.texCoords[indexTc++]=repy;
 
         if(!lastC)

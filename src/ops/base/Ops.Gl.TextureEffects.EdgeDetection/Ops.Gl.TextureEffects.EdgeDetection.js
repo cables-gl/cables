@@ -1,8 +1,6 @@
 var render=op.inTrigger("Render");
 var trigger=op.outTrigger("Trigger");
-
 var amount=op.inValueSlider("amount",1);
-
 var mulColor=op.inValueSlider("Mul Color",0);
 
 var cgl=op.patch.cgl;

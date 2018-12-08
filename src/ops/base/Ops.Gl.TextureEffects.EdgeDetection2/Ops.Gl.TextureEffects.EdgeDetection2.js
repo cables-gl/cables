@@ -11,6 +11,7 @@ const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
 const srcFrag=(attachments.edgedetect_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);

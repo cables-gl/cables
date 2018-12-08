@@ -96,7 +96,7 @@ function onTextInputChanged(ev) {
     valuePort.set(newValue);
     updateActiveTrack();
     inputValuePort.set(newValue);
-    if(CABLES.UI){
+    if(CABLES.UI && gui.patch().isCurrentOp(op)){
         gui.patch().showOpParams(op); /* update DOM */
     }
 }
@@ -123,7 +123,7 @@ function onSetDefaultValueButtonPress() {
     input.value = newValue;
     valuePort.set(newValue);
     defaultValuePort.set(newValue);
-    if(CABLES.UI){
+    if(CABLES.UI && gui.patch().isCurrentOp(op)){
         gui.patch().showOpParams(op); /* update DOM */
     }
     updateActiveTrack();
@@ -136,7 +136,7 @@ function onSliderInput(ev) {
     const inputFloat = parseFloat(ev.target.value);
     valuePort.set(inputFloat);
     inputValuePort.set(inputFloat);
-    if(CABLES.UI){
+    if(CABLES.UI && gui.patch().isCurrentOp(op)){
         gui.patch().showOpParams(op); /* update DOM */
     }
     updateActiveTrack();
