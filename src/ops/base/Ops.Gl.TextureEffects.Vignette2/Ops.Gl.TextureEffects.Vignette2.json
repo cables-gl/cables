@@ -1,5 +1,4 @@
 {
-    "updated": 1541498368236,
     "authorName": "andro",
     "id": "ee274501-ac60-49ab-a854-80aa38c36f76",
     "created": 1541409767721,
@@ -12,11 +11,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {

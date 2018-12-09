@@ -1,5 +1,4 @@
 {
-    "updated": 1536678060855,
     "authorName": "pandur",
     "id": "2220f2f2-2219-4e6d-86f1-bdb0b8631308",
     "created": 1536675675895,
@@ -52,5 +51,10 @@
             }
         ],
         "name": "Ops.Json3d.MeshExplosion2"
+    },
+    "summary": "create an explosion-effect using pre sliced 3d models",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

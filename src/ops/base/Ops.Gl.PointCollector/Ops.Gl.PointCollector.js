@@ -18,24 +18,24 @@ var mySplinePoints=[];
 
 render.onTriggered=function()
 {
-    if(cgl.frameStore.SplinePoints) 
+    if(cgl.frameStore.SplinePoints)
     {
         oldSplinePoints=cgl.frameStore.SplinePoints;
         cgl.frameStore.SplinePoints=[];
     }
 
     cgl.frameStore.SplinePointCounter=0;
-    
+
     cgl.frameStore.SplinePoints=mySplinePoints;//cgl.frameStore.SplinePoints||[];
-    
+
     if(cgl.frameStore.SplinePointCounter!=cgl.frameStore.SplinePoints.length)
     cgl.frameStore.SplinePoints.length=cgl.frameStore.SplinePointCounter;
 
     if(!inAbsolute.get())
     {
-        mat4.invert(m,cgl.mvMatrix);
+        mat4.invert(m,cgl.mMatrix);
         cgl.frameStore.SplinePointsInverseOriginalMatrix=m;
-    } 
+    }
     else
     {
         cgl.frameStore.SplinePointsInverseOriginalMatrix=null;

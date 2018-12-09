@@ -1,8 +1,9 @@
-const result=op.outValue("result");
-var number1=op.addInPort(new CABLES.Port(op,"number"));
-var decPlaces=op.addInPort(new CABLES.Port(op,"Decimal Places"));
+const
+    result=op.outValue("result"),
+    number1=op.inValueFloat("number"),
+    decPlaces=op.inValueFloat("Decimal Places",0);
 
-decPlaces.set(0);
+number1.onChange=decPlaces.onChange=exec;
 
 function exec()
 {
@@ -10,5 +11,3 @@ function exec()
     result.set(Math.round(number1.get()*decm)/decm);
 }
 
-number1.onChange=exec;
-decPlaces.onChange=exec;

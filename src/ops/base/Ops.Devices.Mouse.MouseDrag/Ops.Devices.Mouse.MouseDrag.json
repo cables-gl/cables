@@ -1,71 +1,42 @@
 {
+    "updated": 1521558818623,
+    "authorName": "pandur",
+    "id": "5103d14e-2f21-4f43-ae91-c1b55a944226",
+    "created": 1519221134310,
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "Flip Y"
+                "name": "Active",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Inertia Movement"
-            },
-            {
-                "type": "0",
-                "name": "Limit"
-            },
-            {
-                "type": "1",
-                "name": "Reset"
-            },
-            {
-                "type": "0",
-                "name": "mul"
-            },
-            {
-                "type": "0",
-                "name": "minX"
-            },
-            {
-                "type": "0",
-                "name": "maxX"
-            },
-            {
-                "type": "0",
-                "name": "minY"
-            },
-            {
-                "type": "0",
-                "name": "maxY"
-            },
-            {
-                "type": "0",
-                "name": "Active"
+                "name": "Speed",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "x"
+                "name": "Delta X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "Delta Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "isMoving"
-            },
-            {
-                "type": "0",
-                "name": "isPressed"
+                "name": "Is Dragging",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Devices.Mouse.MouseDrag"
+        "name": "Ops.Devices.Mouse.MouseDrag2"
     },
-    "summary": "get values by dragging the mouse",
-    "updated": 1519229638630,
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "4aead64d-e909-4500-b7f0-4f4cbb705489",
-    "created": 1509704709217
+    "summary": "get delta of mouse position while dragging",
+    "docs": {
+        "ports": []
+    }
 }

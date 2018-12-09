@@ -1,5 +1,4 @@
 {
-    "updated": 1535555282917,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "1511ba6a-6600-4c36-bfce-6c9abd5b70e5",
@@ -22,7 +21,7 @@
             {
                 "type": "0",
                 "name": "num",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",

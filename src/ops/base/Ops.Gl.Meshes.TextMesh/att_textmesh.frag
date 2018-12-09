@@ -5,7 +5,6 @@ UNI float g;
 UNI float b;
 UNI float a;
 
-
 void main()
 {
    vec4 col=texture(tex,texCoord);
@@ -15,5 +14,5 @@ void main()
    col.b*=b;
    col*=a;
 
-   gl_FragColor=col;
+   outColor=col;
 }

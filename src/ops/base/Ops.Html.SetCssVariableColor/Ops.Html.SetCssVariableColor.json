@@ -1,6 +1,5 @@
 {
     "id": "3a478c83-1dcd-4d06-baa9-96d02ebf941f",
-    "updated": 1543861399878,
     "authorName": "pandur",
     "created": 1543860176781,
     "layout": {
@@ -26,5 +25,10 @@
             }
         ],
         "name": "Ops.Html.SetCssVariableColor"
+    },
+    "summary": "set color value of a CSS variable",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

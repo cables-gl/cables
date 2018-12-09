@@ -18,7 +18,6 @@ vec3 desaturate(vec3 color)
 void main()
 {
     // vec4 col=vec4(1.0,0.0,0.0,1.0);
-    vec4 base=texture2D(tex,texCoord);
 
     float pixelX=strength/texWidth;
     float pixelY=strength/texHeight;

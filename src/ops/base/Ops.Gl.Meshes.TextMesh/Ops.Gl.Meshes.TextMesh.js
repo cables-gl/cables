@@ -109,19 +109,17 @@ shader.setSource(attachments.textmesh_vert,attachments.textmesh_frag);
 var uniTex=new CGL.Uniform(shader,'t','tex',0);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
-var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-r.set(1.0);
-r.uniform=new CGL.Uniform(shader,'f','r',r);
 
-var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
-g.set(1.0);
-g.uniform=new CGL.Uniform(shader,'f','g',g);
+const r = op.inValueSlider("r", 1);
+const g = op.inValueSlider("g", 1);
+const b = op.inValueSlider("b", 1);
+r.setUiAttribs({ colorPick: true });
 
-var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-b.set(1.0);
-r.uniform=new CGL.Uniform(shader,'f','b',b);
+const runiform=new CGL.Uniform(shader,'f','r',r);
+const guniform=new CGL.Uniform(shader,'f','g',g);
+const buniform=new CGL.Uniform(shader,'f','b',b);
 
-var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
+var a=op.inValueSlider("a");
 a.uniform=new CGL.Uniform(shader,'f','a',a);
 a.set(1.0);
 
@@ -156,7 +154,7 @@ render.onTriggered=function()
         if(valignMode==0) vec3.set(vec, 0,height/2,0);
         vec[1]-=lineHeight.get();
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
         if(!disabled)mesh.render(cgl.getShader());
 
         cgl.popModelMatrix();

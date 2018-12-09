@@ -1,0 +1,2 @@
+basically javascripts JSON.stringify()
+

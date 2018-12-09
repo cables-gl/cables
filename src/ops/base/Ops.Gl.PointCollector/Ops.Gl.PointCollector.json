@@ -1,5 +1,4 @@
 {
-    "updated": 1506612473599,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "52f368ee-303b-4d84-919d-450b0c002e39",
@@ -12,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Absolute"
+                "name": "Absolute",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

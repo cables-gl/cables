@@ -1,5 +1,12 @@
 {
-    "summary": "change how colors are mixed (blendign/mixing modes)",
+    "updated": 1543065295679,
+    "authorName": "pandur",
+    "id": "ce0fff72-1438-4373-924f-e1d0f78b053f",
+    "created": 1518859707157,
+    "summary": "change how colors are mixed (blending/mixing modes)",
+    "docs": {
+        "ports": []
+    },
     "layout": {
         "portsIn": [
             {
@@ -23,10 +30,6 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Gl.BlendMode"
-    },
-    "updated": 1542697969382,
-    "authorName": "pandur",
-    "id": "a5965fc7-d634-4e05-abd5-35b29b7993f9",
-    "created": 1542697969798
+        "name": "Ops.Gl.BlendMode2"
+    }
 }

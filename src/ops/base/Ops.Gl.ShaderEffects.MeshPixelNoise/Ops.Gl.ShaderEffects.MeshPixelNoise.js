@@ -1,15 +1,18 @@
-var cgl=op.patch.cgl;
-var id='mod'+Math.floor(Math.random()*10000);
-
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-
-var inScale=op.inValue("Scale",10);
-var inAmount=op.inValueSlider("Amount",0.3);
-var inWorldSpace=op.inValueBool("WorldSpace");
+const
+    render=op.inTrigger("render"),
+    next=op.outTrigger("trigger"),
+    inScale=op.inValue("Scale",10),
+    inAmount=op.inValueSlider("Amount",0.3),
+    inWorldSpace=op.inValueBool("WorldSpace");
 
 
+const cgl=op.patch.cgl;
 var shader=null;
+var moduleFrag=null;
+var moduleVert=null;
+inWorldSpace.onChange=updateWorldspace;
+render.onLinkChanged=removeModule;
+
 
 var srcHeadVert=''
     .endl()+'OUT vec4 MOD_pos;'
@@ -33,17 +36,12 @@ var srcBodyFrag=''
     .endl()+'col.rgb -= MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
     .endl();
 
-var moduleFrag=null;
-var moduleVert=null;
-
-inWorldSpace.onChange=updateWorldspace;
 function updateWorldspace()
 {
     if(!shader)return;
     if(inWorldSpace.get()) shader.define("WORLDSPACE");
         else shader.removeDefine("WORLDSPACE");
 }
-
 
 function removeModule()
 {
@@ -52,13 +50,12 @@ function removeModule()
     shader=null;
 }
 
-op.render.onLinkChanged=removeModule;
 
-op.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.getShader())
     {
-         op.trigger.trigger();
+         next.trigger();
          return;
     }
 
@@ -90,5 +87,5 @@ op.render.onTriggered=function()
 
     if(!shader)return;
 
-    op.trigger.trigger();
+    next.trigger();
 };

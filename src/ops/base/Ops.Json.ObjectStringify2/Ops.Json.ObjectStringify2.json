@@ -22,5 +22,10 @@
             }
         ],
         "name": "Ops.Json.ObjectStringify2"
+    },
+    "summary": "Convert object to string",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

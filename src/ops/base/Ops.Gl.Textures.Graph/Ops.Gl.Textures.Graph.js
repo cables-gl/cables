@@ -1,11 +1,11 @@
-var trigger=this.addInPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-var value=this.addInPort(new CABLES.Port(this,"value",CABLES.OP_PORT_TYPE_VALUE));
-var index=this.addInPort(new CABLES.Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
-var inReset=this.addInPort(new CABLES.Port(this,"reset",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+const
+    trigger=this.inTrigger("trigger"),
+    value=this.inValueFloat("value"),
+    index=this.inValueInt("index"),
+    inReset=this.inTriggerButton("reset"),
+    texOut=op.outTexture("Texture");
 
-var texOut=op.outTexture("Texture");
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 var canvas = document.createElement('canvas');
 canvas.id     = "graph_"+Math.random();
@@ -55,18 +55,18 @@ function addValue(val,currentIndex)
 {
     maxValue=Math.max(maxValue,parseFloat(val));
     minValue=Math.min(minValue,parseFloat(val));
-    
-    
+
+
     if(!buff[currentIndex])
     {
         buff[currentIndex]=[];
         Math.randomSeed=5711+2*currentIndex;
         colors[currentIndex] = 'rgba('+Math.round(Math.seededRandom()*255)+','+Math.round(Math.seededRandom()*255)+','+Math.round(Math.seededRandom()*255)+',1)';
     }
-    
+
     var buf=buff[currentIndex];
     buf.push(val);
-    
+
     if(!trigger.isLinked())if(Date.now()-lastTime>30)updateGraph();
 }
 
@@ -89,22 +89,22 @@ function updateGraph()
         if(!buf)continue;
 
         ctx.lineWidth = 2;
-    
+
         var h=Math.max(Math.abs(maxValue),Math.abs(minValue));
         var heightmul=canvas.height/h;
         var start=Math.max(0,buf.length-canvas.width);
 
-        ctx.beginPath();    
+        ctx.beginPath();
         ctx.strokeStyle=colors[b];
 
         ctx.moveTo(0,getPos(buf[start]));
-        
+
         for(var i=start;i<buf.length;i++)
         {
             ctx.lineTo(
                 1+i-start,
                 getPos(buf[i]));
-    
+
         }
         ctx.stroke();
     }
@@ -120,7 +120,7 @@ function updateGraph()
         else texOut.set( new CGL.Texture.createFromImage(cgl,canvImage,
         {
             "filter":CGL.Texture.FILTER_MIPMAP
-            
+
         }) );
 
     lastTime=Date.now();

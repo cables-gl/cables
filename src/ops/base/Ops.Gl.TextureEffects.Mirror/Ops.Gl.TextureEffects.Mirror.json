@@ -8,7 +8,7 @@
             {
                 "type": "0",
                 "name": "axis",
-                "subType": "string"
+                "subType": "number"
             },
             {
                 "type": "0",
@@ -34,7 +34,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.Mirror"
     },
-    "updated": 1540824122880,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "10d3c769-9a7f-4bd3-a849-7354d3e5f7f0",

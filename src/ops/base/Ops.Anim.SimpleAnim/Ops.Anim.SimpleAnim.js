@@ -1,28 +1,27 @@
+const
+    exe=op.inTrigger("exe"),
+    reset=op.inTriggerButton("reset"),
+    rewind=op.inTriggerButton("rewind"),
+    inStart=op.inValueFloat("start",0),
+    inEnd=op.inValueFloat("end",1),
+    duration=op.inValueFloat("duration",0.5),
+    loop=op.inValueBool("loop"),
+    waitForReset=op.inValueBool("Wait for Reset",true),
+    next=op.outTrigger("Next"),
+    result=op.outValue("result"),
+    finished=op.outValue("finished"),
+    finishedTrigger=op.outTrigger("Finished Trigger");
 
-const exe=op.inTrigger("exe");
-
-var reset=op.inTriggerButton("reset");
-var rewind=op.inTriggerButton("rewind");
-
-var inStart=op.addInPort(new CABLES.Port(op,"start"));
-var inEnd=op.addInPort(new CABLES.Port(op,"end"));
-var duration=op.addInPort(new CABLES.Port(op,"duration"));
-
-var loop=op.addInPort(new CABLES.Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
-var waitForReset=op.inValueBool("Wait for Reset",true);
-
-var next=op.outTrigger("Next");
-const result=op.outValue("result");
-var finished=op.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
-var finishedTrigger=op.outTrigger("Finished Trigger");
-
+const anim=new CABLES.Anim();
 var resetted=false;
-
-var anim=new CABLES.Anim();
-
 anim.createPort(op,"easing",init);
-
 var currentEasing=-1;
+loop.onChange=init;
+init();
+
+duration.onChange=init;
+
+
 function init()
 {
     if(anim.keys.length!=3)
@@ -59,7 +58,6 @@ function init()
     currentEasing=anim.defaultEasing;
 }
 
-loop.onChange=init;
 reset.onTriggered=function()
 {
     resetted=true;
@@ -99,9 +97,3 @@ exe.onTriggered=function()
     next.trigger();
 };
 
-inStart.set(0.0);
-inEnd.set(1.0);
-duration.set(0.5);
-init();
-
-duration.onChange=init;

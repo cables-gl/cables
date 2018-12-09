@@ -86,5 +86,10 @@
             }
         ],
         "name": "Ops.Gl.Meshes.TextMesh3"
+    },
+    "summary": "Draw text",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }
