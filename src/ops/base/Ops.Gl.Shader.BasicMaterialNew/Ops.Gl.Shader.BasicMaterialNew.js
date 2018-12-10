@@ -5,7 +5,7 @@ shaderOut.ignoreValueSerialize=true;
 
 const cgl=op.patch.cgl;
 
-const shader=new CGL.Shader(cgl,op.objName);
+const shader=new CGL.Shader(cgl,"basicmaterialnew");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=bindTextures;
 shader.setSource(attachments.basicmaterial_vert,attachments.basicmaterial_frag);
