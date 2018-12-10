@@ -1,0 +1,1 @@
+creates an array, into which `PointCollectorCollect` will write into

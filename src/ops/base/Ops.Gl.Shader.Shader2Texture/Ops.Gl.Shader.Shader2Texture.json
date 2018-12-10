@@ -1,5 +1,4 @@
 {
-    "updated": 1536155364357,
     "authorName": "pandur",
     "id": "a3debb76-7d84-4548-9e7b-24891423dcce",
     "created": 1526299020358,
@@ -45,6 +44,10 @@
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
             {
                 "type": "2",
                 "name": "Texture"

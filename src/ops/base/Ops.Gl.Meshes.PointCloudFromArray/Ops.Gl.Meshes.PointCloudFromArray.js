@@ -61,8 +61,11 @@ function updateRandTexCoords()
 
 function updateNumVerts()
 {
-    if(mesh) mesh.setNumVertices( Math.min(geom.vertices.length/3,numPoints.get()));
-    if(numPoints.get()==0)mesh.setNumVertices(geom.vertices.length/3);
+    if(mesh)
+    {
+        mesh.setNumVertices( Math.min(geom.vertices.length/3,numPoints.get()));
+        if(numPoints.get()==0)mesh.setNumVertices(geom.vertices.length/3);
+    }
 }
 
 function rebuild()

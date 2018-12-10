@@ -8,11 +8,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -43,7 +45,6 @@
     "docs": {
         "ports": []
     },
-    "updated": 1541409133637,
     "authorName": "pandur",
     "id": "2f0a3a6a-58e2-4517-8f7e-319e271c71aa",
     "created": 1540824312194

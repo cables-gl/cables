@@ -7,19 +7,23 @@
             },
             {
                 "type": "0",
-                "name": "num x"
+                "name": "num x",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "num y"
+                "name": "num y",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "mul"
+                "name": "mul",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "center"
+                "name": "center",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -29,21 +33,23 @@
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             }
         ],
         "name": "Ops.Trigger.Repeat2d"
     },
     "summary": "Triggers all ops underneath Num X * Num Y times",
-    "updated": 1515961362946,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "79934693-5887-4173-8b48-3e3a18fcf225",

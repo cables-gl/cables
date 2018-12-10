@@ -1,1 +1,25 @@
-{"layout":{"portsIn":[{"type":"1","name":"render"}],"portsOut":[{"type":"1","name":"trigger"}],"name":"Ops.Gl.PointCollectorCollect"}}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.PointCollectorCollect"
+    },
+    "summary": "collect world space coordinates into an array",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "766147f4-94c5-4197-8e0b-f41320aac2c6",
+    "created": 1544360226445
+}

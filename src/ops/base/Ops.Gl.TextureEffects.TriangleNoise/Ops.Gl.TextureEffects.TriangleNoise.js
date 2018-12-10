@@ -26,7 +26,7 @@ render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    var ratio=cgl.canvasHeight/cgl.canvasWidth;
+    var ratio=cgl.currentTextureEffect.getCurrentSourceTexture().width/cgl.currentTextureEffect.getCurrentSourceTexture().height;
     if(ratio!=oldRatio)
     {
         ratioUniform.setValue(ratio);

@@ -27,5 +27,9 @@
         ],
         "name": "Ops.Gl.PointCollector"
     },
-    "summary": "collect points/coordinates below with pointCollectorCollect"
+    "summary": "save points/coordinates in an array",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
 }
