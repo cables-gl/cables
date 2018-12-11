@@ -29,7 +29,7 @@ CGL.ShaderLibMods=
 
             .endl()+'float cgl_random(vec3 co)'
             .endl()+'{'
-            .endl()+'   return texture(CGLRNDTEX,mod(co.xy*3232.2,289.33)*(50.2+co.z).r;'
+            .endl()+'   return texture(CGLRNDTEX,mod(co.xy*3232.2,289.33)*(50.2+co.z)).r;'
             // .endl()+'   return texture(CGLRNDTEX,co*1000.0).r;'
             .endl()+'}'
 
