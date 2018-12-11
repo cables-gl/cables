@@ -5,14 +5,14 @@ UNI float time;
 
 {{BLENDCODE}}
 {{MODULES_HEAD}}
-{{MOD_RANDOM}}
+{{LIB_RANDOM_OLD}}
 
 void main()
 {
     vec4 rnd;
 
     #ifndef RGB
-        float r=cgl_random(vec3(texCoord.xy+vec2(time),texCoord.x ));
+        float r=cgl_random(texCoord.xy+vec2(time));
         rnd=vec4( r,r,r,1.0 );
     #endif
 
