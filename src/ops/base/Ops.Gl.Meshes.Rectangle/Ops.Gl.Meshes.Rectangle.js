@@ -39,7 +39,7 @@ rebuild();
 
 render.onTriggered=function()
 {
-    if(CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
+    if(!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
 
     if(active.get() && mesh) mesh.render(cgl.getShader());
