@@ -11,11 +11,11 @@ const inRotate=op.inValueSlider("Rotate",0.0);
 const offsetX=op.inValue("Offset X",0.0);
 const offsetY=op.inValue("Offset Y",0.0);
 
-const redLine=op.inValueSlider("Line red",Math.random());
-const greenLine=op.inValueSlider("Line green",Math.random());
-const blueLine=op.inValueSlider("Line Blue",Math.random());
+const r=op.inValueSlider("Line red",Math.random());
+const g=op.inValueSlider("Line green",Math.random());
+const b=op.inValueSlider("Line Blue",Math.random());
 
-redLine.setUiAttribs({colorPick:true});
+r.setUiAttribs({colorPick:true});
 
 const trigger=op.outTrigger('trigger');
 
@@ -37,9 +37,9 @@ const rotateUniform=new CGL.Uniform(shader,'f','rotate',inRotate);
 const offsetXUniform=new CGL.Uniform(shader,'f','offsetX',offsetX);
 const offsetYUniform=new CGL.Uniform(shader,'f','offsetY',offsetY);
 
-const uniformLineR=new CGL.Uniform(shader,'f','lineR',redLine);
-const uniformLineG=new CGL.Uniform(shader,'f','lineG',greenLine);
-const uniformLineB=new CGL.Uniform(shader,'f','lineB',blueLine);
+const uniformLineR=new CGL.Uniform(shader,'f','lineR',r);
+const uniformLineG=new CGL.Uniform(shader,'f','lineG',g);
+const uniformLineB=new CGL.Uniform(shader,'f','lineB',b);
 
 
 
