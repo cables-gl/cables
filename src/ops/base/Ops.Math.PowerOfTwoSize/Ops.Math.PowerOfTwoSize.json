@@ -1,0 +1,42 @@
+{
+    "id": "58e01e34-0f42-4861-ad9a-ed96e08f8565",
+    "authorName": "pandur",
+    "created": 1544711567131,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Strategy",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Width Result",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.PowerOfTwoSize"
+    },
+    "summary": "Return the next values as power of two",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}
