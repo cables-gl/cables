@@ -1,0 +1,54 @@
+{
+    "summary": "draw cylinder (aka tube,pipe,round,circle)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "slices",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "stacks",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "radius",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Start Slice",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.Cylinder"
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "2af1489e-ffd6-4bdb-96f8-42b7cddceaf5",
+    "created": 1511344892398,
+    "docs": {
+        "ports": []
+    }
+}

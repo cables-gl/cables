@@ -45,6 +45,11 @@
                 "type": "0",
                 "name": "index",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "total iterations",
+                "subType": "number"
             }
         ],
         "name": "Ops.Trigger.Repeat2d"

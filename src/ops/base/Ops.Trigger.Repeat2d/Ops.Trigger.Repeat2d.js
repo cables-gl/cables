@@ -7,7 +7,8 @@ const
     trigger=op.outTrigger('trigger'),
     outX=op.outValue("x"),
     outY=op.outValue("y"),
-    idx=op.outValue("index");
+    idx=op.outValue("index"),
+    total=op.outValue("total iterations");
 
 exe.onTriggered=function()
 {
@@ -33,5 +34,5 @@ exe.onTriggered=function()
             trigger.trigger();
         }
     }
-
+    total.set(numx.get() * numy.get());
 };
