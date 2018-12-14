@@ -227,19 +227,44 @@ CGL.TextureEffect.prototype.createMesh=function()
 
 // ---------------------------------------------------------------------------------
 
-CGL.TextureEffect.checkOpInEffect=function(op)
+
+CGL.TextureEffect.checkOpNotInTextureEffect=function(op)
 {
-    if(!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+    if(op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
-        op.uiAttr({'error':'This op must be a child of a texture effect! More infos <a href="https://docs.cables.gl/image_composition/image_composition.html" target="_blank">here</a>.'});
+        op.uiAttr({'error':null});
+        return true;
+    }
+
+    if(!op.patch.cgl.currentTextureEffect)return true;
+
+    if(op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+    {
+        op.uiAttr({'error':'This op can not be a child of a ImageCompose/texture effect! imagecompose should only have textureeffect childs.'});
         return false;
     }
+
+    if(op.patch.cgl.currentTextureEffect)return false;
+    return true;
+
+};
+
+
+CGL.TextureEffect.checkOpInEffect=function(op)
+{
     if(op.patch.cgl.currentTextureEffect && op.uiAttribs.error)
     {
         op.uiAttr({'error':null});
         return true;
     }
+
     if(op.patch.cgl.currentTextureEffect)return true;
+
+    if(!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+    {
+        op.uiAttr({'error':'This op must be a child of a texture effect! More infos <a href="https://docs.cables.gl/image_composition/image_composition.html" target="_blank">here</a>.'});
+        return false;
+    }
 
     if(!op.patch.cgl.currentTextureEffect)return false;
     return true;

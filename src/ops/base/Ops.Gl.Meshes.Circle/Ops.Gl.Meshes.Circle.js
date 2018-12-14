@@ -5,7 +5,7 @@ const segments=op.inValueInt('segments',40);
 const percent=op.inValueSlider('percent',1);
 const steps=op.inValue('steps',0);
 const invertSteps=op.inValueBool('invertSteps',false);
-const mapping=op.addInPort(new CABLES.Port(op,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
+const mapping=op.inValueSelect("mapping",['flat','round']);
 const drawSpline=op.inValueBool("Spline",false);
 
 const inDraw=op.inValueBool('Draw',true);
@@ -41,6 +41,8 @@ var needsCalc=true;
 op.preRender=
 render.onTriggered=function()
 {
+    if(!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
+
     if(needsCalc)calc();
     shader=cgl.getShader();
     if(!shader)return;

@@ -35,6 +35,8 @@ scale.onChange=setScaleChanged;
 
 render.onTriggered=function()
 {
+    if(!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
+
     var updateMatrix=false;
     if(translationChanged)
     {

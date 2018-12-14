@@ -9,11 +9,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {

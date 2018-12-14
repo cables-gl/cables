@@ -197,8 +197,10 @@ CGL.Texture.prototype.setSize=function(w,h)
  */
 CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 {
-    this.filter=filter||CGL.Texture.FILTER_LINEAR;
-    this.wrap=wrap||CGL.Texture.CLAMP_TO_EDGE;
+    this.filter=filter;
+    this.wrap=wrap;
+    if(filter==undefined)this.filter=CGL.Texture.FILTER_LINEAR;
+    if(wrap==undefined)this.wrap=CGL.Texture.CLAMP_TO_EDGE;
     this.width=w;
     this.height=h;
     this._fromData=true;
@@ -472,6 +474,34 @@ CGL.Texture.getEmptyTexture=function(cgl)
     CGL.tempTextureEmpty.initFromData(data,8,8,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
 
     return CGL.tempTextureEmpty;
+};
+
+
+/**
+ * @function
+ * @name CGL.Texture#getEmptyTexture
+ * @description returns a reference to a small empty texture
+ * @return {CGL.Texture}
+ */
+CGL.Texture.getRandomTexture=function(cgl)
+{
+    if(CGL.randomTexture) return CGL.randomTexture;
+
+    const size=256;
+    const data = new Uint8Array(size*size*4);
+    
+    for(var x=0;x<size*size;x++)
+    {
+        data[ x*4+0]=Math.random()*255;
+        data[ x*4+1]=Math.random()*255;
+        data[ x*4+2]=Math.random()*255;
+        data[ x*4+3]=255;
+    }
+    
+    CGL.randomTexture=new CGL.Texture(cgl);
+    CGL.randomTexture.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_MIRRORED_REPEAT);
+
+    return CGL.randomTexture;
 };
 
 
