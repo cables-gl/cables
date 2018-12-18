@@ -7,33 +7,33 @@ const projectionMode=op.inValueSelect("projection mode",['prespective','ortogona
 const zNear=op.inValue("frustum near",0.01);
 const zFar=op.inValue("frustum far",5000.0);
 
-var fov=op.inValue("fov",45);
+const fov=op.inValue("fov",45);
 
-var autoAspect=op.inValueBool("Auto Aspect Ratio",true);
-var aspect=op.inValue("Aspect Ratio",1);
+const autoAspect=op.inValueBool("Auto Aspect Ratio",true);
+const aspect=op.inValue("Aspect Ratio",1);
 
 // look at camera
-var eyeX=op.inValue("eye X",0);
-var eyeY=op.inValue("eye Y",0);
-var eyeZ=op.inValue("eye Z",5);
+const eyeX=op.inValue("eye X",0);
+const eyeY=op.inValue("eye Y",0);
+const eyeZ=op.inValue("eye Z",5);
 
-var centerX=op.inValue("center X",0);
-var centerY=op.inValue("center Y",0);
-var centerZ=op.inValue("center Z",0);
+const centerX=op.inValue("center X",0);
+const centerY=op.inValue("center Y",0);
+const centerZ=op.inValue("center Z",0);
 
 // camera transform and movements
-var posX=op.inValue("truck",0);
-var posY=op.inValue("boom",0);
-var posZ=op.inValue("dolly",0);
+const posX=op.inValue("truck",0);
+const posY=op.inValue("boom",0);
+const posZ=op.inValue("dolly",0);
 
-var rotX=op.inValue("tilt",0);
-var rotY=op.inValue("pan",0);
-var rotZ=op.inValue("roll",0);
+const rotX=op.inValue("tilt",0);
+const rotY=op.inValue("pan",0);
+const rotZ=op.inValue("roll",0);
 
 
 /* Outputs */
-var outAsp=op.outValue("Aspect");
-var outArr=op.outArray("Look At Array");
+const outAsp=op.outValue("Aspect");
+const outArr=op.outArray("Look At Array");
 
 
 /* logic */
