@@ -1,6 +1,5 @@
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
-
 UNI sampler2D tex;
 
 float lumi(vec3 color)
@@ -11,27 +10,26 @@ float lumi(vec3 color)
 void main()
 {
     vec2 tc=attrTexCoord;
-    
+
     float strength;
     highp float pos=0.0;
     #ifdef HISTOGRAM_R
-        strength=texture2D(tex,tc).r;
+        strength=texture(tex,tc).r;
         pos=0.0;
     #endif
-    
+
     #ifdef HISTOGRAM_G
-        strength=texture2D(tex,tc).g;
+        strength=texture(tex,tc).g;
         pos=0.25;
     #endif
 
     #ifdef HISTOGRAM_B
-        strength=texture2D(tex,tc).b;
+        strength=texture(tex,tc).b;
         pos=0.5;
     #endif
 
     #ifdef HISTOGRAM_LUMI
-        strength=lumi(texture2D(tex,tc).rgb);
-        // strength=1.0;
+        strength=lumi(texture(tex,tc).rgb);
         pos=0.75;
     #endif
 

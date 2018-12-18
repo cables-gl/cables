@@ -1,5 +1,3 @@
-op.name="AutoFilter";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // TODO: Add filter / filter-op needed?
@@ -30,7 +28,7 @@ var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var depthPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Depth", node.depth, {"display": "range", "min": DEPTH_MIN, "max": DEPTH_MAX}, DEPTH_DEFAULT);
 var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 //var filterPort = op.inObject("Filter");
-var typePort = this.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: OSCILLATOR_TYPES }, OSCILLATOR_TYPES[0] ) );
+var typePort = this.addInPort( new CABLES.Port( op, "Type", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: OSCILLATOR_TYPES }, OSCILLATOR_TYPES[0] ) );
 typePort.set(OSCILLATOR_TYPES[0]);
 //var minPort = op.inValue("Min", MIN_DEFAULT); // not noticable, tone.js bug?
 var octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);

@@ -1,33 +1,25 @@
-
-var cgl=op.patch.cgl;
-
-op.name='FaceCulling';
-op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-op.enable=op.addInPort(new Port(op,"enable",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-op.enable.set(true);
-
-op.facing=op.addInPort(new Port(op,"facing",OP_PORT_TYPE_VALUE ,{display:'dropdown',values:['back','front','both']} ));
-op.facing.set('back');
+const
+    render=op.inTrigger("render"),
+    trigger=op.outTrigger("trigger"),
+    enable=op.inValueBool("enable",true),
+    facing=op.inValueSelect("facing",['back','front','both'],'back'),
+    cgl=op.patch.cgl;
 
 var whichFace=cgl.gl.BACK;
-op.render.onTriggered=function()
+
+render.onTriggered=function()
 {
+    if(enable.get()) cgl.gl.enable(cgl.gl.CULL_FACE);
+        else cgl.gl.disable(cgl.gl.CULL_FACE);
 
-    if(op.enable.get()) cgl.gl.enable(cgl.gl.CULL_FACE);
-    else cgl.gl.disable(cgl.gl.CULL_FACE);
-    
     cgl.gl.cullFace(whichFace);
-
-    op.trigger.trigger();
-
+    trigger.trigger();
     cgl.gl.disable(cgl.gl.CULL_FACE);
 };
 
-op.facing.onValueChanged=function()
+facing.onChange=function()
 {
     whichFace=cgl.gl.BACK;
-    if(op.facing.get()=='front')whichFace=cgl.gl.FRONT;
-    if(op.facing.get()=='both')whichFace=cgl.gl.FRONT_AND_BACK;
+    if(facing.get()=='front') whichFace=cgl.gl.FRONT;
+        else if(facing.get()=='both') whichFace=cgl.gl.FRONT_AND_BACK;
 };

@@ -1,5 +1,5 @@
 
-var inExec=op.inFunctionButton("Transform");
+var inExec=op.inTriggerButton("Transform");
 var inArr=op.inArray("Array");
 
 

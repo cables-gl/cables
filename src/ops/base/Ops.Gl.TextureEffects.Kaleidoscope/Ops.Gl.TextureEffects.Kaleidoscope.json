@@ -3,37 +3,43 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "Render"
+                "name": "render"
             },
             {
                 "type": "0",
-                "name": "Sides"
+                "name": "sides",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Angle"
+                "name": "angle",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Slide X"
+                "name": "slide x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Slide Y"
+                "name": "slide y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Center X"
+                "name": "center x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Center Y"
+                "name": "center y",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "Next"
+                "name": "next"
             }
         ],
         "name": "Ops.Gl.TextureEffects.Kaleidoscope"
@@ -41,5 +47,9 @@
     "summary": "kaleidoscope effect",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1540921627658,
+    "authorName": "pandur",
+    "id": "4dae0a0f-1acb-43a8-8d98-882212ef477b",
+    "created": 1540920717039
 }

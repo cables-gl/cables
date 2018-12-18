@@ -1,0 +1,30 @@
+{
+    "summary": " Divides all values in an array by one number",
+    "docs": {
+        "ports": []
+    },
+    "updated": 1540902073880,
+    "authorName": "andro",
+    "id": "e9406477-1f1c-4cf3-8a64-f6009df05c7c",
+    "created": 1540902073883,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array In"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array Out"
+            }
+        ],
+        "name": "Ops.Array.ArrayDivide"
+    }
+}

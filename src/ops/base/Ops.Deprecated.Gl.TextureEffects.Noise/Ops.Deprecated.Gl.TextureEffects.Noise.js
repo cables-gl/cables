@@ -1,18 +1,18 @@
 
 op.name='Noise';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{display:'range'}));
+var render=op.inTrigger('render');
+var amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',1.0);
 var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 
-amount.onValueChanged=function(){amountUniform.setValue(amount.get());};
+amount.onChange=function(){amountUniform.setValue(amount.get());};
 
 amount.set(0.3);
 
@@ -54,8 +54,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

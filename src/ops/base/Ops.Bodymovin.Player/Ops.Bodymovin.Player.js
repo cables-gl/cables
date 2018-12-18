@@ -1,24 +1,22 @@
-op.name="bodymovin";
+const exe=op.inTrigger("exe");
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-
-var play=op.addInPort(new Port(op,"play",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+var play=op.addInPort(new CABLES.Port(op,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 
 
 
-var tfilter=op.addInPort(new Port(op,"filter",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
-var wrap=op.addInPort(new Port(op,"wrap",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
-var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
+var wrap=op.addInPort(new CABLES.Port(op,"wrap",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
+var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var width=op.addInPort(new Port(op,"texture width"));
-var height=op.addInPort(new Port(op,"texture height"));
+var width=op.addInPort(new CABLES.Port(op,"texture width"));
+var height=op.addInPort(new CABLES.Port(op,"texture height"));
 
-var bmScale=op.addInPort(new Port(op,"scale",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['fit','nofit']}));
+var bmScale=op.addInPort(new CABLES.Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['fit','nofit']}));
 
-var rewind=op.addInPort(new Port(op,"rewind",OP_PORT_TYPE_FUNCTION,{display:'button'}));
-var speed=op.addInPort(new Port(op,"speed"));
-var frame=op.addInPort(new Port(op,"frame"));
+var rewind=op.addInPort(new CABLES.Port(op,"rewind",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
+var speed=op.addInPort(new CABLES.Port(op,"speed"));
+var frame=op.addInPort(new CABLES.Port(op,"frame"));
 
 var textureOut=op.outTexture("texture");
 
@@ -27,12 +25,12 @@ var canvasId="bodymovin_"+CABLES.generateUUID();
 bmScale.set('fit');
 
 tfilter.set('linear');
-tfilter.onValueChanged=onFilterChange;
-filename.onValueChanged=reload;
+tfilter.onChange=onFilterChange;
+filename.onChange=reload;
 
-bmScale.onValueChanged=reloadForce;
-width.onValueChanged=reloadForce;
-height.onValueChanged=reloadForce;
+bmScale.onChange=reloadForce;
+width.onChange=reloadForce;
+height.onChange=reloadForce;
 
 var canvasImage=null;
 var cgl=op.patch.cgl;
@@ -49,7 +47,7 @@ height.set(720);
 var createTexture=false;
 
 
-play.onValueChanged=function()
+play.onChange=function()
 {
     if(play.get()) 
     {
@@ -65,17 +63,17 @@ rewind.onTriggered=function()
     anim.goToAndPlay(0, true);  
 };
 
-speed.onValueChanged=function()
+speed.onChange=function()
 {
     if(anim) anim.setSpeed(speed.get());
 };
 
-flip.onValueChanged=function()
+flip.onChange=function()
 {
     createTexture=true;
 };
 
-wrap.onValueChanged=function()
+wrap.onChange=function()
 {
     // op.log(wrap.get());
     if(wrap.get()=='repeat') cgl_wrap=CGL.Texture.WRAP_REPEAT;

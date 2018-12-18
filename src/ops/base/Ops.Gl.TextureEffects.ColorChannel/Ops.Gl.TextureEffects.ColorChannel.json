@@ -8,19 +8,23 @@
             },
             {
                 "type": "0",
-                "name": "channelR"
+                "name": "channelR",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "channelG"
+                "name": "channelG",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "channelB"
+                "name": "channelB",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "mono"
+                "name": "mono",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -30,5 +34,8 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.ColorChannel"
-    }
+    },
+    "authorName": "pandur",
+    "id": "c7c5dadd-16fd-4c3b-a910-6882048e6b8d",
+    "created": 1540831235400
 }

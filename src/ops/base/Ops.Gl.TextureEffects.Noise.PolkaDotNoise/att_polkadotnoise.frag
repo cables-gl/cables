@@ -106,10 +106,10 @@ void main()
     vec4 rnd=vec4(PolkaDot3D(pos,radius_low,radius_high));
     rnd.a=1.0;
 
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
     
     vec4 col=vec4( _blend(base.rgb,rnd.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
     
-gl_FragColor = col;
+outColor= col;
 }

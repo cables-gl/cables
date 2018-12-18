@@ -1,6 +1,36 @@
 {
-    "updated": 1517615145958,
+    "updated": 1540485650562,
     "authorName": "tim",
     "id": "71203be9-df3e-4cfc-88c7-b1543d48d2dc",
-    "created": 1517615145961
+    "created": 1517615145961,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Query",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "name": "Ops.Html.QuerySelector"
+    },
+    "summary": "Selects an element in the DOM",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Query",
+                "text": "E.g. \".some-classname\", '#some-id' or \"footer\""
+            },
+            {
+                "name": "Element",
+                "text": "The first element which can be found using the query or null (no results)"
+            }
+        ]
+    }
 }

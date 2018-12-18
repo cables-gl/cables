@@ -1,9 +1,9 @@
-var render=op.inFunction("render");
+var render=op.inTrigger("render");
 var radius=op.inValueSlider("radius",0.25);
 var r=op.inValueSlider("r");
 var g=op.inValueSlider("g");
 var b=op.inValueSlider("b");
-var next=op.outFunction("next");
+var next=op.outTrigger("next");
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -29,8 +29,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
+    cgl.setTexture(0, texture.tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

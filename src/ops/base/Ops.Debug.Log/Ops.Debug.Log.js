@@ -1,10 +1,9 @@
-op.name='logger';
-var exe=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
-var functionInput=op.addInPort(new Port(op,"Function Input",OP_PORT_TYPE_FUNCTION));
-// var valueInput=op.addInPort(new Port(op,"Value Input"));
+var exe=op.addInPort(new CABLES.Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
+var functionInput=op.addInPort(new CABLES.Port(op,"Function Input",CABLES.OP_PORT_TYPE_FUNCTION));
+// var valueInput=op.addInPort(new CABLES.Port(op,"Value Input"));
 var valueInput=op.inValueString('Value Input');
 valueInput.set('');
-var arrayInput=op.addInPort(new Port(op,"Array Input", OP_PORT_TYPE_ARRAY));
+var arrayInput=op.addInPort(new CABLES.Port(op,"Array Input",CABLES.OP_PORT_TYPE_ARRAY));
 arrayInput.set('');
 var objectInput = op.inObject('Object Input');
 objectInput.onChange = printObject;
@@ -76,11 +75,11 @@ functionInput.onTriggered = function(){
         }
 };
 
-valueInput.onValueChanged = printValue;
-arrayInput.onValueChanged = printArray;
-/*objectInput.onValueChanged = printObject;*/
+valueInput.onChange=printValue;
+arrayInput.onChange=printArray;
+/*objectInput.onChange=printObject;*/
 
-/*objectInput.onValueChanged = function(){
+/*objectInput.onChange=function(){
     if(objectInput.links && objectInput.links.length > 0) {
         op.log("[" + objectInput.links[0].portOut.parent.name + ": " + objectInput.links[0].portOut.name + "] " + JSON.stringify(objectInput.get()));
     }

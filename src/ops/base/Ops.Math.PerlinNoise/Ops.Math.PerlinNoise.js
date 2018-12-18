@@ -1,5 +1,3 @@
-op.name="PerlinNoise";
-
 noise.seed(Math.random());
 
 var x=op.inValue("X");

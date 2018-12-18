@@ -1,5 +1,3 @@
-op.name="Join";
-
 var inArr=op.inArray("Array");
 var inSeperator=op.inValueString("Seperator",",");
 var inNewLine=op.inValueBool("New Line");

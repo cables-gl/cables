@@ -1,7 +1,5 @@
-op.name="PointCollectorCollect";
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 
@@ -15,12 +13,12 @@ render.onTriggered=function()
 
     if(cgl.frameStore.SplinePointsInverseOriginalMatrix)
     {
-        mat4.multiply(tempMat,cgl.frameStore.SplinePointsInverseOriginalMatrix,cgl.mvMatrix);
+        mat4.multiply(tempMat,cgl.frameStore.SplinePointsInverseOriginalMatrix,cgl.mMatrix);
         vec3.transformMat4(pos, empty, tempMat);
     }
-    else    
+    else
     {
-        vec3.transformMat4(pos, empty, cgl.mvMatrix);
+        vec3.transformMat4(pos, empty, cgl.mMatrix);
     }
 
     cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter+0]=pos[0];

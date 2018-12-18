@@ -1,56 +1,72 @@
-const render=op.inFunction("render");
-const segments=op.inValueInt('segments',40);
+const render=op.inTrigger("render");
 const radius=op.inValue('radius',0.5);
 const innerRadius=op.inValueSlider('innerRadius',0);
-const percent=op.inValueSlider('percent');
+const segments=op.inValueInt('segments',40);
+const percent=op.inValueSlider('percent',1);
 const steps=op.inValue('steps',0);
 const invertSteps=op.inValueBool('invertSteps',false);
-const doRender=op.inValueBool('Render',true);
+const mapping=op.inValueSelect("mapping",['flat','round']);
+const drawSpline=op.inValueBool("Spline",false);
+
+const inDraw=op.inValueBool('Draw',true);
+const trigger=op.outTrigger('trigger');
+const geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 
-const trigger=op.outFunction('trigger');
-const geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+op.setPortGroup('Size',[radius,innerRadius]);
+op.setPortGroup('Display',[percent,steps,invertSteps]);
+
+mapping.set('flat');
+
+mapping.onChange=
+    segments.onChange=
+    radius.onChange=
+    innerRadius.onChange=
+    percent.onChange=
+    steps.onChange=
+    invertSteps.onChange=
+    drawSpline.onChange=calcLater;
 
 geomOut.ignoreValueSerialize=true;
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
-var drawSpline=op.addInPort(new Port(op,"Spline",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-drawSpline.set(false);
+var geom=new CGL.Geometry("circle");
+var mesh=null;
+var lastSegs=-1;
 
 var oldPrim=0;
 var shader=null;
+var needsCalc=true;
 
 op.preRender=
 render.onTriggered=function()
 {
-    // if(op.instanced(render))return;
-    
+    if(!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
+
+    if(needsCalc)calc();
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
-    
+
     if(drawSpline.get()) shader.glPrimitive=cgl.gl.LINE_STRIP;
 
-    if(doRender.get())mesh.render(shader);
+    if(inDraw.get())mesh.render(shader);
     trigger.trigger();
 
     shader.glPrimitive=oldPrim;
 };
 
-percent.set(1);
-
-var geom=new CGL.Geometry("circle");
-var mesh=null;
-var lastSegs=-1;
 function calc()
 {
     var segs=Math.max(3,Math.floor(segments.get()));
-    
+
     geom.clear();
 
     var faces=[];
     var texCoords=[];
     var vertexNormals=[];
+    var tangents=[];
+    var biTangents=[];
 
     var i=0,degInRad=0;
     var oldPosX=0,oldPosY=0;
@@ -75,7 +91,7 @@ function calc()
             degInRad = (360/segs)*i*CGL.DEG2RAD;
             posx=Math.cos(degInRad)*radius.get();
             posy=Math.sin(degInRad)*radius.get();
-            
+
             posyTexCoord=0.5;
 
             if(i>0)
@@ -84,21 +100,17 @@ function calc()
                 verts.push(lastY);
                 verts.push(0);
                 posxTexCoord=1.0-(i-1)/segs;
-                
+
                 tc.push(posxTexCoord,posyTexCoord);
             }
             verts.push(posx);
             verts.push(posy);
             verts.push(0);
-            
-            // posxTexCoord=1.0-i/segs;
-            // tc.push(posxTexCoord,posyTexCoord);
 
             lastX=posx;
             lastY=posy;
         }
         geom.setPointVertices(verts);
-        // geom.texCoords=tc;
     }
     else
     if(innerRadius.get()<=0)
@@ -133,18 +145,21 @@ function calc()
 
             texCoords.push(posxTexCoord,posyTexCoord,oldPosXTexCoord,oldPosYTexCoord,posxTexCoordIn,posyTexCoordIn);
             vertexNormals.push(0,0,1,0,0,1,0,0,1);
-            
+            tangents.push(1,0,0,1,0,0,1,0,0);
+            biTangents.push(0,1,0,0,1,0,0,1,0);
+
             oldPosXTexCoord=posxTexCoord;
             oldPosYTexCoord=posyTexCoord;
-            
+
             oldPosX=posx;
             oldPosY=posy;
         }
-      
+
         geom=CGL.Geometry.buildFromFaces(faces);
         geom.vertexNormals=vertexNormals;
+        geom.tangents=tangents;
+        geom.biTangents=biTangents;
         geom.texCoords=texCoords;
-
     }
     else
     {
@@ -155,97 +170,99 @@ function calc()
         for (i=0; i <= numSteps; i++)
         {
             count++;
-            
+
             degInRad = (360/segs)*i*CGL.DEG2RAD;
             posx=Math.cos(degInRad)*radius.get();
             posy=Math.sin(degInRad)*radius.get();
-            
+
             var posxIn=Math.cos(degInRad)*innerRadius.get()*radius.get();
             var posyIn=Math.sin(degInRad)*innerRadius.get()*radius.get();
 
-
-            if(mapping.get()=='flat')
-            {
-                posxTexCoord=(Math.cos(degInRad)+1.0)/2;
-                posyTexCoord=1.0-(Math.sin(degInRad)+1.0)/2;
-                posxTexCoordIn=((posxTexCoord-0.5)*innerRadius.get())+0.5;
-                posyTexCoordIn=((posyTexCoord-0.5)*innerRadius.get())+0.5;
-            }
-            else if(mapping.get()=='round')
+            if(mapping.get()=='round')
             {
                 posxTexCoord=1.0-i/segs;
                 posyTexCoord=0;
                 posxTexCoordIn=posxTexCoord;
                 posyTexCoordIn=1;
             }
-            
 
             if(steps.get()===0.0 ||
                 (count%parseInt(steps.get(),10)===0 && !invertSteps.get()) ||
                 (count%parseInt(steps.get(),10)!==0 && invertSteps.get()) )
             {
                 faces.push(
-                          [posx,posy,0],
-                          [oldPosX,oldPosY,0],
-                          [posxIn,posyIn,0]
-                          );
+                        [posx,posy,0],
+                        [oldPosX,oldPosY,0],
+                        [posxIn,posyIn,0]
+                        );
 
                 faces.push(
-                          [posxIn,posyIn,0],
-                          [oldPosX,oldPosY,0],
-                          [oldPosXIn,oldPosYIn,0]
-                          );
+                        [posxIn,posyIn,0],
+                        [oldPosX,oldPosY,0],
+                        [oldPosXIn,oldPosYIn,0]
+                        );
 
-                // texCoords.push(
-                //     posxTexCoord,0,
-                //     oldPosXTexCoord,0,
-                //     posxTexCoordIn,1);
+                texCoords.push(
+                    posxTexCoord,0,
+                    oldPosXTexCoord,0,
+                    posxTexCoordIn,1,
 
-                // texCoords.push(
-                //     posxTexCoord,1,
-                //     oldPosXTexCoord,0,
-                //     oldPosXTexCoordIn,1);
+                    posxTexCoord,1,
+                    oldPosXTexCoord,0,
+                    oldPosXTexCoordIn,1);
 
-                vertexNormals.push(0,0,1,0,0,1,0,0,1);
-                vertexNormals.push(0,0,1,0,0,1,0,0,1);
+                vertexNormals.push(
+                    0,0,1,0,0,1,0,0,1,
+                    0,0,1,0,0,1,0,0,1
+                );
+                tangents.push(
+                    1,0,0,1,0,0,1,0,0,
+                    1,0,0,1,0,0,1,0,0
+                );
+                biTangents.push(
+                    0,1,0,0,1,0,0,1,0,
+                    0,1,0,0,1,0,0,1,0
+                );
             }
 
             oldPosXTexCoordIn=posxTexCoordIn;
             oldPosYTexCoordIn=posyTexCoordIn;
-            
+
             oldPosXTexCoord=posxTexCoord;
             oldPosYTexCoord=posyTexCoord;
-            
+
             oldPosX=posx;
             oldPosY=posy;
-            
+
             oldPosXIn=posxIn;
             oldPosYIn=posyIn;
         }
+
         geom=CGL.Geometry.buildFromFaces(faces);
         geom.vertexNormals=vertexNormals;
-        // geom.texCoords=texCoords;
-        geom.mapTexCoords2d();
+        geom.tangents=tangents;
+        geom.biTangents=biTangents;
+
+        if(mapping.get()=='flat') geom.mapTexCoords2d();
+            else geom.texCoords=texCoords;
     }
 
     geomOut.set(null);
     geomOut.set(geom);
-    
+
     if(geom.vertices.length==0)return;
-    if(!mesh)mesh=new CGL.Mesh(cgl,geom);
-    mesh.setGeom(geom);
+    if(mesh) mesh.dispose();
+    mesh=null;
+    mesh=new CGL.Mesh(cgl,geom);
+    needsCalc=false;
 }
 
-var mapping=op.addInPort(new Port(op,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['flat','round']}));
-mapping.set('flat');
-mapping.onValueChange(calc);
+function calcLater()
+{
+    needsCalc=true;
+}
 
-segments.onChange=calc;
-radius.onChange=calc;
-innerRadius.onChange=calc;
-percent.onChange=calc;
-steps.onChange=calc;
-invertSteps.onChange=calc;
-drawSpline.onChange=calc;
-calc();
-
+op.onDelete=function()
+{
+    if(mesh)mesh.dispose();
+}

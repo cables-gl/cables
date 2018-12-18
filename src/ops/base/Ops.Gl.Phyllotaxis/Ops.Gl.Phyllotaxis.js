@@ -1,8 +1,8 @@
-const exec=op.inFunction("Render");
+const exec=op.inTrigger("Render");
 const inNum=op.inValue("Num",400);
 const inC=op.inValue("Scale",0.1);
 
-const next=op.outFunction("Next");
+const next=op.outTrigger("Next");
 const outX=op.outValue("X");
 const outY=op.outValue("Y");
 const outI=op.outValue("Index");

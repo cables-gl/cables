@@ -1,13 +1,13 @@
-    Op.apply(this, arguments);
+    //Op.apply(this, arguments);
     var self=this;
     var cgl=this.patch.cgl;
 
     this.name='SkyBox';
-    this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-    this.mapping=this.addInPort(new Port(this,"mapping",OP_PORT_TYPE_VALUE,{display:'dropdown',values:["-+--","--+-"]} ));
+    this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+    this.mapping=this.addInPort(new CABLES.Port(this,"mapping",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["-+--","--+-"]} ));
     this.mapping.val="-+--";
 
-    this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+    this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
     var mesh=null;
 
@@ -193,5 +193,5 @@
         mesh=new CGL.Mesh(cgl,geom);
     }
 
-    this.mapping.onValueChanged=build;
+    this.mapping.onChange=build;
     build();

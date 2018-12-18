@@ -4,7 +4,7 @@ var inNum=op.inValueInt("Num",8);
 
 var outArr=op.outArray("Result");
 
-var inExec=op.inFunction("Write");
+var inExec=op.inTrigger("Write");
 var inSort=op.inValueBool("Order");
 var inClear=op.inValueBool("Clear",true);
 
@@ -28,7 +28,7 @@ var bgFrag=''
     .endl()+'void main()'
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');
 bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);
@@ -116,7 +116,7 @@ index=index%inNum.get();
 
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
     cgl.gl.framebufferTexture2D(cgl.gl.FRAMEBUFFER, cgl.gl.COLOR_ATTACHMENT0, cgl.gl.TEXTURE_2D, textures[index].tex, 0);
-    cgl.pushFrameBuffer(frameBuf);
+    cgl.pushGlFrameBuffer(frameBuf);
 
 
 
@@ -148,13 +148,11 @@ index=index%inNum.get();
 
     // here be rendering
 
-
-
-
     cgl.setShader(bgShader);
     // cgl.currentTextureEffect.bind();
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTexture.get().tex );
+    
+    cgl.setTexture(0,inTexture.get().tex);
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D,  );
 
 
 
@@ -163,7 +161,7 @@ index=index%inNum.get();
 
     quadMesh.render(cgl.getShader());
 
-    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popFrameBuffer());
+    cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, cgl.popGlFrameBuffer());
 
 
 

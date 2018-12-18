@@ -8,38 +8,43 @@
             },
             {
                 "type": "0",
-                "name": "segments",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
                 "name": "radius",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "innerRadius",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
+                "name": "segments",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "percent",
+                "group": "Display",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "steps",
+                "group": "Display",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "invertSteps",
+                "group": "Display",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Render",
-                "subType": "boolean"
+                "name": "mapping",
+                "subType": "string"
             },
             {
                 "type": "0",
@@ -48,8 +53,8 @@
             },
             {
                 "type": "0",
-                "name": "mapping",
-                "subType": "string"
+                "name": "Draw",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -64,7 +69,6 @@
         ],
         "name": "Ops.Gl.Meshes.Circle"
     },
-    "updated": 1526723454581,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "4db917cc-2cef-43f4-83d5-38c4572fe943",

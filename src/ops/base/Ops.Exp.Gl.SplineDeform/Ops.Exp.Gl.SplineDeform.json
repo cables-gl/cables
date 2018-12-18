@@ -1,5 +1,5 @@
 {
-    "updated": 1516015259123,
+    "updated": 1539170089591,
     "authorName": "pandur",
     "id": "a9464e80-6958-4846-8cae-9cdae608a2ad",
     "created": 1515604228291,
@@ -29,5 +29,9 @@
             }
         ],
         "name": "Ops.Exp.Gl.SplineDeform"
+    },
+    "summary": "Deform a mesh along a spline",
+    "docs": {
+        "ports": []
     }
 }

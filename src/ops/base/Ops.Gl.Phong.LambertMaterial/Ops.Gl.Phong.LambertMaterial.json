@@ -1,5 +1,4 @@
 {
-    "updated": 1524478308527,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eae9a731-3712-4891-9c22-dc7f4d80ce66",
@@ -9,11 +8,6 @@
             {
                 "type": "1",
                 "name": "execute"
-            },
-            {
-                "type": "0",
-                "name": "Specular",
-                "subType": "number"
             },
             {
                 "type": "0",
@@ -40,8 +34,16 @@
             {
                 "type": "1",
                 "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
             }
         ],
         "name": "Ops.Gl.Phong.LambertMaterial"
+    },
+    "summary": "simple shaded material",
+    "docs": {
+        "ports": []
     }
 }

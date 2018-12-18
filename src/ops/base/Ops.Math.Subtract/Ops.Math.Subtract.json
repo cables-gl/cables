@@ -4,22 +4,25 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "number1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number2"
+                "name": "number2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Subtract"
     },
-    "updated": 1511163200016,
+    "updated": 1542045295300,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a4ffe852-d200-4b96-9347-68feb01122ca",

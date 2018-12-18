@@ -1,6 +1,6 @@
 {
     "summary": "Increase contrast in midtones",
-    "updated": 1519812712349,
+    "updated": 1541226382345,
     "authorName": "pandur",
     "id": "37d66c32-5594-4509-bba0-0ba2cbb706d8",
     "created": 1519812712350,
@@ -12,7 +12,8 @@
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             }
         ],
         "portsOut": [

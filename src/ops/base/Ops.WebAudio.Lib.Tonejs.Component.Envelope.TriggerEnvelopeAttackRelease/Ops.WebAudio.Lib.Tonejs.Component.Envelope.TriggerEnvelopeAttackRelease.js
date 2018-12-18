@@ -1,4 +1,3 @@
-op.name="TriggerEnvelopeAttackRelease";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -14,7 +13,7 @@ durationPort.set(DURATION_DEFAULT);
 var timePort = op.inValueString("Time", TIME_DEFAULT);
 timePort.set(TIME_DEFAULT);
 var velocityPort = op.inValueSlider("Velocity", VELOCITY_DEFAULT);
-var triggerAttackReleasePort = op.addInPort( new Port( this, "Trigger Attack Release", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var triggerAttackReleasePort = op.addInPort( new CABLES.Port( this, "Trigger Attack Release",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 
 // listeners
 triggerAttackReleasePort.onTriggered = function() {

@@ -1,5 +1,5 @@
 {
-    "updated": 1519813822915,
+    "updated": 1543930033650,
     "authorName": "pandur",
     "id": "e4f7fd96-cfbe-49db-99f5-126f389e3a85",
     "created": 1519813822916,
@@ -11,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Num Particles"
+                "name": "Num Particles",
+                "subType": "integer"
             },
             {
                 "type": "1",
@@ -23,39 +24,48 @@
             },
             {
                 "type": "0",
-                "name": "Speed"
+                "name": "Speed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Damping"
+                "name": "Damping",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size Area"
+                "name": "Size Area",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Num Line Points"
+                "name": "Num Line Points",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Min LifeTime"
+                "name": "Min LifeTime",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Max LifeTime"
+                "name": "Max LifeTime",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Z"
+                "name": "Pos Z",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -69,7 +79,8 @@
             },
             {
                 "type": "0",
-                "name": "color"
+                "name": "color",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -77,11 +88,13 @@
             },
             {
                 "type": "0",
-                "name": "offset"
+                "name": "offset",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -89,7 +102,8 @@
             },
             {
                 "type": "0",
-                "name": "Die Slow"
+                "name": "Die Slow",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl2.ForceField.ForceFieldSimulationLines"

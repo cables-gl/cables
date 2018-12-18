@@ -1,0 +1,224 @@
+const render=op.inTrigger("render");
+const textureMatcap=op.inTexture('MatCap');
+const textureDiffuse=op.inTexture('Diffuse');
+const textureNormal=op.inTexture('Normal');
+const textureSpec=op.inTexture('Specular');
+const textureSpecMatCap=op.inTexture('Specular MatCap');
+const textureAo=op.inTexture('AO Texture');
+const r=op.inValueSlider('r',1);
+const g=op.inValueSlider('g',1);
+const b=op.inValueSlider('b',1);
+const pOpacity=op.inValueSlider("Opacity",1);
+const aoIntensity=op.inValueSlider("AO Intensity",1.0);
+const repeatX=op.inValue("Repeat X",1);
+const repeatY=op.inValue("Repeat Y",1);
+const calcTangents = op.inValueBool("calc normal tangents",true);
+const projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
+const ssNormals=op.inValueBool("Screen Space Normals");
+const next=op.outTrigger("trigger");
+const shaderOut=op.outObject("Shader");
+
+r.setUiAttribs({colorPick:true});
+op.setPortGroup("Texture maps",[textureDiffuse,textureNormal,textureSpec,textureSpecMatCap,textureAo,]);
+op.setPortGroup("Color",[r,g,b,pOpacity]);
+
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl,'MatCapMaterialNew');
+var uniOpacity=new CGL.Uniform(shader,'f','opacity',pOpacity);
+
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+shader.bindTextures=bindTextures;
+shader.setSource(attachments.matcap_vert,attachments.matcap_frag);
+shaderOut.set(shader);
+
+var textureMatcapUniform=null;
+var textureDiffuseUniform=null;
+var textureNormalUniform=null;
+var textureSpecUniform=null;
+var textureSpecMatCapUniform=null;
+var textureAoUniform=null;
+var repeatXUniform=new CGL.Uniform(shader,'f','repeatX',repeatX);
+var repeatYUniform=new CGL.Uniform(shader,'f','repeatY',repeatY);
+var aoIntensityUniform=new CGL.Uniform(shader,'f','aoIntensity',aoIntensity);
+b.uniform=new CGL.Uniform(shader,'f','b',b);
+g.uniform=new CGL.Uniform(shader,'f','g',g);
+r.uniform=new CGL.Uniform(shader,'f','r',r);
+
+
+calcTangents.onChange=updateDefines;
+updateDefines();
+updateMatcap();
+
+function updateDefines()
+{
+    if(calcTangents.get()) shader.define('CALC_TANGENT');
+        else shader.removeDefine('CALC_TANGENT');
+
+}
+
+ssNormals.onChange=function()
+{
+    if(ssNormals.get())
+    {
+        if(cgl.glVersion<2)
+        {
+            cgl.gl.getExtension('OES_standard_derivatives');
+            shader.enableExtension('GL_OES_standard_derivatives');
+        }
+
+        shader.define('CALC_SSNORMALS');
+    }
+    else shader.removeDefine('CALC_SSNORMALS');
+};
+
+projectCoords.onChange=function()
+{
+    shader.removeDefine('DO_PROJECT_COORDS_XY');
+    shader.removeDefine('DO_PROJECT_COORDS_YZ');
+    shader.removeDefine('DO_PROJECT_COORDS_XZ');
+
+    if(projectCoords.get()=='xy') shader.define('DO_PROJECT_COORDS_XY');
+    else if(projectCoords.get()=='yz') shader.define('DO_PROJECT_COORDS_YZ');
+    else if(projectCoords.get()=='xz') shader.define('DO_PROJECT_COORDS_XZ');
+};
+
+textureMatcap.onChange=updateMatcap;
+
+function updateMatcap()
+{
+    if(textureMatcap.get())
+    {
+        if(textureMatcapUniform!==null)return;
+        shader.removeUniform('tex');
+        textureMatcapUniform=new CGL.Uniform(shader,'t','tex',0);
+    }
+    else
+    {
+        if(!CGL.defaultTextureMap)
+        {
+            var pixels=new Uint8Array(256*4);
+            for(var x=0;x<16;x++)
+            {
+                for(var y=0;y<16;y++)
+                {
+                    var c=y*16;
+                    c*=Math.min(1,(x+y/3)/8);
+                    pixels[(x+y*16)*4+0]=pixels[(x+y*16)*4+1]=pixels[(x+y*16)*4+2]=c;
+                    pixels[(x+y*16)*4+3]=255;
+                }
+            }
+
+            CGL.defaultTextureMap=new CGL.Texture(cgl);
+            CGL.defaultTextureMap.initFromData(pixels,16,16);
+        }
+        textureMatcap.set(CGL.defaultTextureMap);
+
+        shader.removeUniform('tex');
+        textureMatcapUniform=new CGL.Uniform(shader,'t','tex',0);
+    }
+}
+
+textureDiffuse.onChange=function()
+{
+    if(textureDiffuse.get())
+    {
+        if(textureDiffuseUniform!==null)return;
+        shader.define('HAS_DIFFUSE_TEXTURE');
+        shader.removeUniform('texDiffuse');
+        textureDiffuseUniform=new CGL.Uniform(shader,'t','texDiffuse',1);
+    }
+    else
+    {
+        shader.removeDefine('HAS_DIFFUSE_TEXTURE');
+        shader.removeUniform('texDiffuse');
+        textureDiffuseUniform=null;
+    }
+};
+
+textureNormal.onChange=function()
+{
+    if(textureNormal.get())
+    {
+        if(textureNormalUniform!==null)return;
+        shader.define('HAS_NORMAL_TEXTURE');
+        shader.removeUniform('texNormal');
+        textureNormalUniform=new CGL.Uniform(shader,'t','texNormal',2);
+    }
+    else
+    {
+        shader.removeDefine('HAS_NORMAL_TEXTURE');
+        shader.removeUniform('texNormal');
+        textureNormalUniform=null;
+    }
+};
+
+textureAo.onChange=function()
+{
+    if(textureAo.get())
+    {
+        if(textureAoUniform!==null)return;
+        shader.define('HAS_AO_TEXTURE');
+        shader.removeUniform('texAo');
+        textureAoUniform=new CGL.Uniform(shader,'t','texAo',5);
+    }
+    else
+    {
+        shader.removeDefine('HAS_AO_TEXTURE');
+        shader.removeUniform('texAo');
+        textureAoUniform=null;
+    }
+};
+
+textureSpec.onChange=textureSpecMatCap.onChange=function()
+{
+    if(textureSpec.get() && textureSpecMatCap.get())
+    {
+        if(textureSpecUniform!==null)return;
+        shader.define('USE_SPECULAR_TEXTURE');
+        shader.removeUniform('texSpec');
+        shader.removeUniform('texSpecMatCap');
+        textureSpecUniform=new CGL.Uniform(shader,'t','texSpec',3);
+        textureSpecMatCapUniform=new CGL.Uniform(shader,'t','texSpecMatCap',4);
+    }
+    else
+    {
+        shader.removeDefine('USE_SPECULAR_TEXTURE');
+        shader.removeUniform('texSpec');
+        shader.removeUniform('texSpecMatCap');
+        textureSpecUniform=null;
+        textureSpecMatCapUniform=null;
+    }
+};
+
+function bindTextures()
+{
+    if(textureMatcap.get())     cgl.setTexture(0,textureMatcap.get().tex);
+    if(textureDiffuse.get())    cgl.setTexture(1,textureDiffuse.get().tex);
+    if(textureNormal.get())     cgl.setTexture(2,textureNormal.get().tex);
+    if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
+    if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
+    if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
+};
+
+op.onDelete=function()
+{
+    if(CGL.defaultTextureMap)
+    {
+        CGL.defaultTextureMap.delete();
+        CGL.defaultTextureMap=null;
+    }
+};
+
+op.preRender=function()
+{
+    shader.bind();
+};
+
+render.onTriggered=function()
+{
+    shader.bindTextures=bindTextures;
+    cgl.setShader(shader);
+    next.trigger();
+    cgl.setPreviousShader();
+};
+

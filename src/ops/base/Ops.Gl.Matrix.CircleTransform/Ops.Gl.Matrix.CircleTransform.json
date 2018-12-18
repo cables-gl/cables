@@ -9,7 +9,7 @@
             {
                 "type": "0",
                 "name": "segments",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -40,9 +40,12 @@
         ],
         "name": "Ops.Gl.Matrix.CircleTransform"
     },
-    "updated": 1521446056225,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "4e96d5a2-a1ec-4f83-954d-7c34a9021e9c",
-    "created": 1512035143187
+    "created": 1512035143187,
+    "youtubeid": "1BtgdAfBLlY",
+    "docs": {
+        "ports": []
+    }
 }

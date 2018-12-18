@@ -1,5 +1,5 @@
 {
-    "updated": 1513070283306,
+    "updated": 1543926386417,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "b215118b-de1f-4be9-8890-d07a2ecff010",
@@ -23,9 +23,16 @@
             {
                 "type": "3",
                 "name": "TexCoords"
+            },
+            {
+                "type": "3",
+                "name": "Normals"
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryPoints"
     },
-    "summary": "get vertices of a geometry as array3x"
+    "summary": "get vertices of a geometry as array3x (vertex vertices)",
+    "docs": {
+        "ports": []
+    }
 }

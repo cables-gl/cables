@@ -1,7 +1,7 @@
 op.name="LaserPacket";
 
 
-var exe=op.inFunctionButton("Send");
+var exe=op.inTriggerButton("Send");
 
 var inLaser=op.inValue("laser id",0);
 var inSpeed=op.inValue("speed",7000);

@@ -1,6 +1,30 @@
-
+// "use strict";
 
 var CABLES=CABLES || {};
+CABLES.UTILS={};
+CGL=CGL || {};
+
+/**
+ * merge two float32Arrays
+ * @name float32Concat
+ * @memberof CABLES.UTILS
+ * @function
+ * @return {Float32Array} 
+ * @static
+ */
+CABLES.UTILS.float32Concat=function(first, second)
+{
+    if(!(first instanceof Float32Array))first=new Float32Array(first);
+    if(!(second instanceof Float32Array))second=new Float32Array(second);
+
+    var firstLength = first.length,
+        result = new Float32Array(firstLength + second.length);
+
+    result.set(first);
+    result.set(second, firstLength);
+
+    return result;
+}
 
 /**
  * generate a UUID
@@ -22,9 +46,20 @@ CABLES.generateUUID=CABLES.uuid=function()
     return uuid;
 };
 
-// generateUUID=CABLES.generateUUID;
-
-// ----------------------------------------------------------------
+/**
+ * generate a simple ID 
+ * @name simpleId
+ * @memberof CABLES
+ * @function
+ * @return {Number} new id
+ * @static
+ */
+CABLES.simpleIdCounter=0;
+CABLES.simpleId=function()
+{
+    CABLES.simpleIdCounter++;
+    return CABLES.simpleIdCounter;
+};
 
 /**
  * smoothStep a value
@@ -57,8 +92,6 @@ CABLES.smootherStep=function(perc)
     perc= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
     return perc;
 };
-
-// ----------------------------------------------------------------
 
 /**
  * map a value in a range to a value in another range
@@ -114,8 +147,6 @@ CABLES.map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
     return r;
 };
 
-// ----------------------------------------------------------------
-
 /**
  * set random seed for seededRandom()
  * @name Math#randomSeed
@@ -148,7 +179,7 @@ Math.seededRandom = function(max, min)
 
 // ----------------------------------------------------------------
 
-function arrayWriteToEnd(arr,v)
+CABLES.UTILS.arrayWriteToEnd=function(arr,v)
 {
     for(var i=1;i<arr.length;i++)arr[i-1]=arr[i];
     arr[arr.length-1]=v;
@@ -156,9 +187,32 @@ function arrayWriteToEnd(arr,v)
 
 // ----------------------------------------------------------------
 
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
+/**
+ * returns true if parameter is a number
+ * @name isNumeric
+ * @memberof CABLES.UTILS
+ * @function
+ * @return {Boolean} 
+ * @static
+ */
+CABLES.UTILS.isNumeric=function(n)
+{
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+/**
+ * returns true if parameter is array
+ * @name isArray
+ * @memberof CABLES.UTILS
+ * @function
+ * @return {Boolean} 
+ * @static
+ */
+CABLES.UTILS.isArray = function(v)
+{
+    return Object.prototype.toString.call(v) === '[object Array]';
+};
+
 
 /**
  * append a linebreak to a string
@@ -192,38 +246,34 @@ String.prototype.startsWith = function(prefix) {
 String.prototype.endsWith = function(suffix) {
     return this.match(suffix+"$") == suffix;
 };
+
 // ----------------------------------------------------------------
 
-function ajaxRequest(url, callback)
+/**
+ * append a unique/random parameter to a url, so the browser is forced to reload the file, even if its cached
+ * @name cacheBust
+ * @static
+ * @memberof CABLES
+ * @function
+ * @param {String} url
+ * @return {String} url with cachebuster parameter
+ */
+CABLES.cacheBust=function(url)
 {
-    var request = new XMLHttpRequest();
-    request.open("GET", url, true);
-    request.responseType = "arraybuffer";
-    request.onload = function(e)
-    {
-        callback(e.target.response);
-    };
-    request.send();
+    if(url.indexOf('?')>-1) url+='&'; else url+='?';
+    return url+'cb='+CABLES.uuid();
 }
-
-// ----------------------------------------------------------------
-
-
-
 
 CABLES.jsonp=function(url,cb)
 {
-
     CABLES.jsonpCounter=CABLES.jsonpCounter||0;
     CABLES.jsonpCounter++;
     var jsonPID=CABLES.jsonpCounter;
 
     console.log('making jsonp request...');
 
-
     CABLES["jsonpFunc"+jsonPID]=function(data)
     {
-
         console.log(data);
         cb(false, data);
     };
@@ -243,16 +293,34 @@ CABLES.jsonp=function(url,cb)
 
 CABLES.ajaxSync=function(url,cb,method,post,contenttype)
 {
-    CABLES.ajaxIntern(url,cb,method,post,contenttype,false);
+    CABLES.request(
+        {
+            "url":url,
+            "cb":cb,
+            "method":method,
+            "data":post,
+            "contenttype":contenttype,
+            "sync":true
+        });
 };
 
 CABLES.ajax=function(url,cb,method,post,contenttype,jsonp)
 {
-    CABLES.ajaxIntern(url,cb,method,post,contenttype,true,jsonp);
+    CABLES.request(
+        {
+            "url":url,
+            "cb":cb,
+            "method":method,
+            "data:":post,
+            "contenttype":contenttype,
+            "sync":false,
+            "jsonp":jsonp
+        });
 };
 
-CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
+CABLES.request=function(options)
 {
+    if(!options.hasOwnProperty('asynch'))options.asynch=true;
 
     var xhr;
     try{ xhr = new XMLHttpRequest(); }catch(e){}
@@ -261,13 +329,16 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
     {
         if (xhr.readyState != 4) return;
 
-        // cb( (xhr.status != 200 || xhr.status !==0 ) ?new Error(url+"server response status is "+xhr.status):false, xhr.responseText,xhr);
-        cb(false, xhr.responseText,xhr);
+        if(options.cb)
+        {
+            if(xhr.status == 200 || xhr.status == 0) options.cb(false, xhr.responseText,xhr);
+            else options.cb(true, xhr.responseText,xhr);
+        }
     };
 
     xhr.addEventListener("progress", function(ev)
     {
-        // console.log('progress',ev.loaded/1024);
+        // console.log('progress',ev.loaded/1024+' kb');
         // if (ev.lengthComputable)
         // {
         //     var percentComplete = ev.loaded / ev.total;
@@ -275,55 +346,32 @@ CABLES.ajaxIntern=function(url,cb,method,post,contenttype,asynch)
         // }
     });
 
+    xhr.open(options.method?options.method.toUpperCase():"GET", options.url, !options.sync);
 
-    xhr.open(method?method.toUpperCase():"GET", url, asynch);
-
-
-
-    if(!post) xhr.send();
+    if(!options.post && !options.data)
+    {
+        xhr.send();
+    }
     else
     {
-        xhr.setRequestHeader('Content-type', contenttype?contenttype:'application/x-www-form-urlencoded');
-        xhr.send(post);
+        xhr.setRequestHeader('Content-type', options.contenttype?options.contenttype:'application/x-www-form-urlencoded');
+        xhr.send(options.data||options.post);
     }
 };
-
-// ----------------------------------------------------------------
-
-// ----------------------------------------------------------------
-
-var arrayContains = function(arr,obj)
-{
-    var i = arr.length;
-    while (i--)
-    {
-        if (arr[i] === obj)
-        {
-            return true;
-        }
-    }
-    return false;
-};
-
-// ----------------------------------------------------------------
-
-CGL=CGL || {};
 
 /** 
  * @constant {number} 
  * @description multiply to get radians from degree, e.g. `360 * CGL.DEG2RAD`
  */
 CGL.DEG2RAD=Math.PI/180.0;
+
 /** 
  * @constant {number} 
  * @description to get degrees from radians, e.g. `3.14 * CGL.RAD2DEG` 
  */
 CGL.RAD2DEG=180.0/Math.PI;
 
-
 CGL.onLoadingAssetsFinished=null; // deprecated / remove later
-
-
 
 /**
  * get normalized mouse wheel delta (including browser specific adjustment)
@@ -361,16 +409,8 @@ CGL.getWheelSpeed=CGL.getWheelDelta=function(event)
 
 // ----------------------------------------------------------------
 
-function float32Concat(first, second)
+window.performance = (window.performance ||
 {
-    if(!(first instanceof Float32Array))first=new Float32Array(first);
-    if(!(second instanceof Float32Array))second=new Float32Array(second);
-
-    var firstLength = first.length,
-        result = new Float32Array(firstLength + second.length);
-
-    result.set(first);
-    result.set(second, firstLength);
-
-    return result;
-}
+    offset: Date.now(),
+    now: function now(){ return Date.now() - this.offset; }
+});

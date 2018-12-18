@@ -1,6 +1,6 @@
 // TODO: remove array3xtransformedinstanced....
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 
 var inTransformations=op.inArray("positions");
 var geom=op.inObject("geom");
@@ -208,14 +208,14 @@ function doRender()
 
     if(texScaling.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE6);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texScaling.get().tex);
+        cgl.setTexture(6,texScaling.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texScaling.get().tex);
     }
 
     if(texRotation.get())
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE7);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texRotation.get().tex);
+        cgl.setTexture(7,texRotation.get().tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texRotation.get().tex);
     }
 
     if(!recalc && numSplinePoints)

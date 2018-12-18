@@ -1,19 +1,19 @@
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var shaderOut=op.addOutPort(new Port(op,"shader",OP_PORT_TYPE_OBJECT));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var trigger=op.outTrigger('trigger');
+var shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 
-var pointSize=op.addInPort(new Port(op,"PointSize",OP_PORT_TYPE_VALUE));
+var pointSize=op.addInPort(new CABLES.Port(op,"PointSize",CABLES.OP_PORT_TYPE_VALUE));
 var randomSize=op.inValue("Random Size",0);
 
-var makeRound=op.addInPort(new Port(op,"Round",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var doScale=op.addInPort(new Port(op,"Scale by Distance",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var preMultipliedAlpha=op.addInPort(new Port(op,"preMultiplied alpha",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var makeRound=op.addInPort(new CABLES.Port(op,"Round",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var doScale=op.addInPort(new CABLES.Port(op,"Scale by Distance",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var preMultipliedAlpha=op.addInPort(new CABLES.Port(op,"preMultiplied alpha",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 
 makeRound.set(true);
@@ -65,24 +65,15 @@ op.preRender=function()
 
 function bindTextures()
 {
-    if(texture.get())
-    {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
-    }
-    if(textureMask.get())
-    {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, textureMask.get().tex);
-    }
+    if(texture.get()) cgl.setTexture(0,texture.get().tex);
+    if(textureMask.get()) cgl.setTexture(1,textureMask.get().tex);
 }
 
 function doRender()
 {
     uniWidth.setValue(cgl.canvasWidth);
     uniHeight.setValue(cgl.canvasHeight);
-    
-    
+
     cgl.setShader(shader);
     bindTextures();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
@@ -93,20 +84,19 @@ function doRender()
     cgl.setPreviousShader();
 }
 
-
-doScale.onValueChanged=function()
+doScale.onChange=function()
 {
     if(doScale.get()) shader.define('SCALE_BY_DISTANCE');
         else shader.removeDefine('SCALE_BY_DISTANCE');
 };
 
-makeRound.onValueChanged=function()
+makeRound.onChange=function()
 {
     if(makeRound.get()) shader.define('MAKE_ROUND');
         else shader.removeDefine('MAKE_ROUND');
 };
 
-texture.onValueChanged=function()
+texture.onChange=function()
 {
     if(texture.get())
     {
@@ -123,7 +113,7 @@ texture.onValueChanged=function()
     }
 };
 
-textureMask.onValueChanged=function()
+textureMask.onChange=function()
 {
     if(textureMask.get())
     {
@@ -140,19 +130,17 @@ textureMask.onValueChanged=function()
     }
 };
 
-
-
-var colorizeTexture=op.addInPort(new Port(op,"colorizeTexture",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var colorizeTexture=op.addInPort(new CABLES.Port(op,"colorizeTexture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 colorizeTexture.set(false);
-colorizeTexture.onValueChanged=function()
+colorizeTexture.onChange=function()
 {
     if(colorizeTexture.get()) shader.define('COLORIZE_TEXTURE');
         else shader.removeDefine('COLORIZE_TEXTURE');
 };
 
-var textureLookup=op.addInPort(new Port(op,"texture Lookup",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var textureLookup=op.addInPort(new CABLES.Port(op,"texture Lookup",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 textureLookup.set(false);
-textureLookup.onValueChanged=function()
+textureLookup.onChange=function()
 {
     if(textureLookup.get()) shader.define('LOOKUP_TEXTURE');
         else shader.removeDefine('LOOKUP_TEXTURE');

@@ -1,8 +1,6 @@
-op.name="VoronoiMesh";
-
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var inDiagram=op.inObject("Diagram");
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
 var pIgnoreBorderCells=op.inValueBool("Ignore Border Cells",false);
 var inCalcNormals=op.inValueBool("Calc Normals",true);

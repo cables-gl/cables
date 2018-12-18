@@ -1,16 +1,23 @@
+const render=op.inTrigger('render');
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const lineSize=op.inValue("Size",10);
+const inRotate=op.inValueSlider("Rotate",0.0);
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var lineSize=op.inValue("Size",10);
+const trigger=op.outTrigger('trigger');
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const srcFrag=(attachments.checkerboard_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.checkerboard_frag);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
+const rotateUniform=new CGL.Uniform(shader,'f','rotate',inRotate);
 
-var uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
-
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {
@@ -18,6 +25,8 @@ render.onTriggered=function()
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
+
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

@@ -1,5 +1,5 @@
 {
-    "updated": 1520434120617,
+    "updated": 1541173199317,
     "authorName": "pandur",
     "id": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
     "created": 1519312271232,
@@ -8,6 +8,11 @@
             {
                 "type": "0",
                 "name": "Delta Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Default Value",
                 "subType": "number"
             },
             {

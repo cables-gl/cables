@@ -4,18 +4,24 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Fract"
     },
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1542698091403,
+    "authorName": "pandur",
+    "id": "12573ba7-866d-40c4-9ddd-14d9331ffe6f",
+    "created": 1542698065793
 }

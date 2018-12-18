@@ -7,23 +7,38 @@
             },
             {
                 "type": "0",
-                "name": "smoothness"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "smoothness",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "time"
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "time",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -42,8 +57,13 @@
             "license": "Public Domain"
         }
     ],
-    "summary": "",
+    "summary": "simplex noise generator",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1541534100095,
+    "authorName": "pandur",
+    "id": "85b0d8e5-f417-4349-aa35-fe45a6698183",
+    "created": 1541052563850,
+    "youtubeid": ""
 }

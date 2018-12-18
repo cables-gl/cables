@@ -16,9 +16,9 @@ function update()
     var hue=(inH.get());
     var saturation=(inS.get());
     var lightness=(inV.get());
-    
+
     // based on algorithm from http://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
-    
+
     var chroma = (1 - Math.abs((2 * lightness) - 1)) * saturation;
     var huePrime = hue *6; // / 60;
     var secondComponent = chroma * (1 - Math.abs((huePrime % 2) - 1));
@@ -48,7 +48,7 @@ function update()
         red = secondComponent;
         green = 0;
         blue = chroma;
-    }else if( huePrime === 5 ){
+    }else if( huePrime >= 5){
         red = chroma;
         green = 0;
         blue = secondComponent;

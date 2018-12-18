@@ -1,5 +1,3 @@
-op.name="CablesLink";
-
 var size=op.inValue("size",40);
 var opacity=op.inValue("Opacity",0.5);
 

@@ -1,0 +1,40 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "amountX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "amountY",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "displaceTex"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.PixelDisplacement"
+    },
+    "summary": "Changes color lookup for every pixel using a displacement map",
+    "updated": 1535994572329,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "cd2987b3-b07b-4bcb-935a-1bf038780b2c",
+    "created": 1508866014799,
+    "docs": {
+        "ports": []
+    }
+}

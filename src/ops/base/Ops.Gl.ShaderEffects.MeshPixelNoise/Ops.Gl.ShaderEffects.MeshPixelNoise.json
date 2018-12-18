@@ -7,15 +7,18 @@
             },
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "Scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "WorldSpace"
+                "name": "WorldSpace",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -27,7 +30,6 @@
         "name": "Ops.Gl.ShaderEffects.MeshPixelNoise"
     },
     "summary": "3d space noise for mesh materials",
-    "updated": 1516016778983,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "3eeb7a13-339c-4409-9de7-3dfcab303663",

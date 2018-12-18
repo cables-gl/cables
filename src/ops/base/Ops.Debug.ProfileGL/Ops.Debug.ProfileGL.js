@@ -1,8 +1,8 @@
-var exec=op.inFunction("Exec");
-var next=op.outFunction("Next");
+const exec=op.inTrigger("Exec");
+const next=op.outTrigger("Next");
+const dump=op.inTriggerButton("Debug one Frame");
 
-var dump=op.inFunctionButton("Debug one Frame");
-var gl=op.patch.cgl.gl;
+const gl=op.patch.cgl.gl;
 
 var originals={};
 var counts={};
@@ -16,15 +16,13 @@ exec.onTriggered=function()
         start();
         resetStats();
     }
-    
+
     next.trigger();
 
     if(dumpFrame)
     {
         end();
-        
         var rows=[];
-    
         for(var i in originals)
             if(counts[i]>0)
                 rows.push([i,counts[i],durations[i]]);
@@ -42,7 +40,7 @@ function profile(func, funcName)
         var start = performance.now(),
         returnVal = func.apply(this, arguments),
         duration = performance.now() - start;
-    
+
         durations[funcName]+=duration;
         counts[funcName]++;
         return returnVal;
@@ -66,7 +64,7 @@ function start()
         {
             originals[i]=gl[i];
             var orig=originals[i];
-            
+
             gl[i]=profile(gl[i],''+i);
         }
     }
@@ -82,5 +80,6 @@ function end()
 
 dump.onTriggered=function()
 {
-    dumpFrame=true;   
-}
+    dumpFrame=true;
+};
+

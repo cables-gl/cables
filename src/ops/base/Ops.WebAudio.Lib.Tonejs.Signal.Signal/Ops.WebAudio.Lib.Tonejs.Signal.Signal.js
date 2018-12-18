@@ -1,4 +1,3 @@
-op.name="Signal";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

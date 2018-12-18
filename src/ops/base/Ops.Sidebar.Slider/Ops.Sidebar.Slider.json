@@ -1,5 +1,4 @@
 {
-    "updated": 1526476160538,
     "authorName": "pandur",
     "id": "eb3232e5-e947-4683-a17f-27a72d464b2c",
     "created": 1518204108335,
@@ -16,6 +15,11 @@
             },
             {
                 "type": "0",
+                "name": "Input",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Min",
                 "subType": "number"
             },
@@ -28,6 +32,14 @@
                 "type": "0",
                 "name": "Step",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Set Default"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             },
             {
                 "type": "0",
@@ -48,5 +60,9 @@
         ],
         "name": "Ops.Sidebar.Slider"
     },
-    "summary": "sidebar slider element (range)"
+    "summary": "sidebar slider element (range)",
+    "youtubeid": "cpRVswVdvI0",
+    "docs": {
+        "ports": []
+    }
 }

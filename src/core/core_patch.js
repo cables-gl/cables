@@ -34,7 +34,8 @@ CABLES.Patch = function(cfg) {
     this.onLoadStart = null;
     this.onLoadEnd = null;
     this.aborted = false;
-    this.loading = new CABLES.LoadingStatus();
+    this.loading = new CABLES.LoadingStatus(this);
+    this._crashedOps=[];
 
     this._fps=0;
     this._fpsFrameCount=0;
@@ -47,6 +48,12 @@ CABLES.Patch = function(cfg) {
     this.instancing = new CABLES.Instancing();
     this.onOneFrameRendered=null;
 
+
+    this._frameNext = 0;
+    this._frameInterval = 0;
+    this._lastFrameTime = 0;
+    this._frameWasdelayed = true;
+
     this.config = cfg || {
         glCanvasResizeToWindow: false,
         glCanvasId: 'glcanvas',
@@ -55,7 +62,7 @@ CABLES.Patch = function(cfg) {
         onError: null,
         onFinishedLoading: null,
         onFirstFrameRendered: null,
-	onPatchLoaded:null,
+	    onPatchLoaded:null,
         fpsLimit: 0
     };
 
@@ -70,7 +77,8 @@ CABLES.Patch = function(cfg) {
     this.cgl = new CGL.Context();
     this.cgl.patch = this;
     this.cgl.setCanvas(this.config.glCanvasId);
-    if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResizeToWindow(true);
+    if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize('window');
+    if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize('parent');
     this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
 
     if (this.cgl.aborted) this.aborted = true;
@@ -103,8 +111,7 @@ CABLES.Patch = function(cfg) {
         }
     }
 
-    console.log("made with cables.gl")
-
+    console.log('made with https://cables.gl')
 };
 
 CABLES.Patch.prototype.isPlaying = function() {
@@ -229,37 +236,75 @@ CABLES.Patch.getOpClass = function(objName) {
 //     return this.doAddOp(objName,uiAttribs,next);
 // };
 
-CABLES.Patch.prototype.createOp = function(objName) {
-    var parts = objName.split('.');
+CABLES.Patch.prototype.createOp = function(identifier,id)
+{
+    var parts = identifier.split('.');
     var op = null;
+    var objName='';
 
-    try {
-        var opObj = CABLES.Patch.getOpClass(objName);
-
-        if (!opObj) {
-            if (CABLES.UI) {
-                CABLES.UI.MODAL.showError('unknown op', 'unknown op: ' + objName);
+    try
+    {
+        if(identifier.indexOf("Ops.")==-1) // this should be a uuid, not a namespace
+        {
+            // creating ops by id should be the default way from now on!
+            var opId=identifier;
+            
+            if(CABLES.OPS[opId])
+            {
+                objName=CABLES.OPS[opId].objName;
+                op=new CABLES.OPS[opId].f(this,objName,id,opId);
+                op.opId=opId;
             }
-            console.error('unknown op: ' + objName);
-            throw('unknown op: ' + objName);
-        } else {
-            if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName);
-            else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName);
-            else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName);
-            else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName);
-            else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName);
-            else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName);
-            else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName);
-            else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName);
-            else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName);
-            else console.log('parts.length', parts.length);
+            else
+            {
+                console.error("could not find op by id");
+            }
+        }
+
+        if(!op) // fallback: create by objname!
+        {
+            objName=identifier;
+            var opObj = CABLES.Patch.getOpClass(objName);
+
+            if (!opObj) {
+                if (CABLES.UI) {
+                    CABLES.UI.MODAL.showError('unknown op', 'unknown op: ' + objName);
+                }
+                console.error('unknown op: ' + objName);
+                throw('unknown op: ' + objName);
+            } else {
+                if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName,id);
+                else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName,id);
+                else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName,id);
+                else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName,id);
+                else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName,id);
+                else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName,id);
+                else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName,id);
+                else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName,id);
+                else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName,id);
+                else console.log('parts.length', parts.length);
+            }
+
+            if(op)
+            {
+                op.opId=null;
+                console.log("op created by objName:",objName);
+                for(var i in CABLES.OPS)
+                {
+                    if(CABLES.OPS[i].objName==objName)
+                        op.opId=i;
+                }
+            }
         }
     }
     catch (e)
     {
-        console.error('instancing error ' + objName);
+        this._crashedOps.push(objName);
+        console.error('instancing error ' + objName,e);
         if (CABLES.UI)
+        {
             CABLES.UI.MODAL.showOpException(e, objName);
+        }
         else
         {
             if (CABLES.api) CABLES.api.sendErrorReport(e);
@@ -277,13 +322,21 @@ CABLES.Patch.prototype.createOp = function(objName) {
     return op;
 };
 
-CABLES.Patch.prototype.addOp = function(objName, uiAttribs) {
-    if (!objName || objName.indexOf('.') == -1) {
-        CABLES.UI.MODAL.showError('could not create op', 'op unknown');
-        return;
-    }
 
-    var op = this.createOp(objName);
+/**
+ * create a new op in patch
+ * @name CABLES.Patch#addOp
+ * @param {String} objName, e.g. Ops.Math.Sum
+ * @param {Object} UI Attributes
+ * @function
+ */
+CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
+    // if (!objName || objName.indexOf('.') == -1) {
+    //     CABLES.UI.MODAL.showError('could not create op', 'op unknown');
+    //     return;
+    // }
+
+    var op = this.createOp(opIdentifier,id);
 
     if (op) {
         op.uiAttr(uiAttribs);
@@ -295,9 +348,9 @@ CABLES.Patch.prototype.addOp = function(objName, uiAttribs) {
         this.ops.push(op);
 
         if (this.onAdd) this.onAdd(op);
+        
+        if(op.init)op.init();
     }
-
-    if(op.init)op.init();
 
     // if(next) next(op);
     return op;
@@ -351,7 +404,6 @@ CABLES.Patch.prototype.deleteOp = function(opid, tryRelink) {
                 var opToDelete = this.ops[i];
                 opToDelete.removeLinks();
                 this.onDelete(opToDelete);
-                // opToDelete.id=generateUUID();
                 this.ops.splice(i, 1);
 
                 if (opToDelete.onDelete) opToDelete.onDelete();
@@ -374,10 +426,6 @@ CABLES.Patch.prototype.getFrameNum = function() {
     return this._frameNum;
 };
 
-var frameNext = 0;
-var frameInterval = 0;
-var lastFrameTime = 0;
-var wasdelayed = true;
 
 CABLES.Patch.prototype.renderFrame = function(e) {
     this.timer.update();
@@ -405,11 +453,11 @@ CABLES.Patch.prototype.exec = function(e) {
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
     if (this.config.fpsLimit) {
-        frameInterval = 1000 / this.config.fpsLimit;
+        this._frameInterval = 1000 / this.config.fpsLimit;
     }
 
     var now = CABLES.now();
-    var frameDelta = now - frameNext;
+    var frameDelta = now - this._frameNext;
     
 
     if (CABLES.UI) {
@@ -417,39 +465,39 @@ CABLES.Patch.prototype.exec = function(e) {
 
         if(!this._renderOneFrame)
         {
-            if (now - lastFrameTime > 500 && lastFrameTime !== 0 && !wasdelayed) {
-                lastFrameTime = 0;
+            if (now - this._lastFrameTime > 500 && this._lastFrameTime !== 0 && !this._frameWasdelayed) {
+                this._lastFrameTime = 0;
                 setTimeout(this.exec.bind(this), 500);
     
                 if (CABLES.UI) $('#delayed').show();
-                wasdelayed = true;
+                this._frameWasdelayed = true;
                 return;
             }
     
         }
 
-        // if(now-lastFrameTime>300 && lastFrameTime!==0  && !wasdelayed)
+        // if(now-this._lastFrameTime>300 && this._lastFrameTime!==0  && !this._frameWasdelayed)
         // {
-        //     lastFrameTime=0;
+        //     this._lastFrameTime=0;
         //     setTimeout(this.exec.bind(this),300);
         //
         //     if(CABLES.UI)$('#delayed').show();
-        //     wasdelayed=true;
+        //     this._frameWasdelayed=true;
         //     return;
         // }
     }
 
-    if(this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > frameInterval || wasdelayed) {
+    if(this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed) {
         var startFrameTime=CABLES.now();
         this.renderFrame();
         this._fpsMsCount+=CABLES.now()-startFrameTime;
 
-        if (frameInterval) frameNext = now - (frameDelta % frameInterval);
+        if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
     }
 
-    if (wasdelayed) {
+    if (this._frameWasdelayed) {
         if (CABLES.UI) $('#delayed').hide();
-        wasdelayed = false;
+        this._frameWasdelayed = false;
     }
 
     if(this._renderOneFrame && this.onOneFrameRendered)
@@ -474,33 +522,51 @@ CABLES.Patch.prototype.exec = function(e) {
         }
     }
     
-    lastFrameTime = CABLES.now();
+    this._lastFrameTime = CABLES.now();
     this._fpsFrameCount++;
 
     requestAnimationFrame(this.exec.bind(this));
 };
 
 
+/**
+ * link two ops/ports
+ * @name CABLES.Patch#link
+ * @param {CABLES.Op} op1
+ * @param {String} op1 portName
+ * @param {CABLES.Op} op2
+ * @param {String} op2 portName
+ * @function
+ */
 CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
-    if (!op1 || !op2) return;
+    if(!op1)
+    {
+        console.log('link: op1 is null ');
+        return;
+    }
+    if(!op2)
+    {
+        console.log('link: op2 is null');
+        return;
+    }
     var port1 = op1.getPort(port1Name);
     var port2 = op2.getPort(port2Name);
 
-    if (!port1) {
-        console.warn('port not found! ' + port1Name);
+    if(!port1) {
+        console.warn('port not found! ' + port1Name+' ('+op1.objName+')');
         return;
     }
 
-    if (!port2) {
-        console.warn('port not found! ' + port2Name + ' of ' + op2.name);
+    if(!port2) {
+        console.warn('port not found! ' + port2Name + ' of ' + op2.name+' ('+op2.objName+')');
         return;
     }
 
-    if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) {
+    if(!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) {
         return false;
     }
 
-    if (CABLES.Link.canLink(port1, port2)) {
+    if(CABLES.Link.canLink(port1, port2)) {
         var link = new CABLES.Link(this);
         link.link(port1, port2);
 
@@ -566,10 +632,19 @@ CABLES.Patch.prototype.loadLib = function(which) {
 CABLES.Patch.prototype.reloadOp = function(objName, cb) {
     var count = 0;
     var ops = [];
+    var oldOps=[];
+
     for (var i in this.ops) {
         if (this.ops[i].objName == objName) {
+            oldOps.push(this.ops[i]);
+        }
+    }
+
+    for (var i=0;i<oldOps.length;i++)
+    {
+        // if (this.ops[i].objName == objName) {
             count++;
-            var oldOp = this.ops[i];
+            var oldOp = oldOps[i];
             oldOp.deleted = true;
             var self = this;
 
@@ -579,7 +654,9 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
             var j, k, l;
             for (j in oldOp.portsIn) {
                 if (oldOp.portsIn[j].links.length === 0) {
-                    op.getPort(oldOp.portsIn[j].name).set(oldOp.portsIn[j].get());
+                    var p=op.getPort(oldOp.portsIn[j].name);
+                    if(!p) console.error("[reloadOp] could not set port "+oldOp.portsIn[j].name+", propably renamed port ?");
+                        else p.set(oldOp.portsIn[j].get());
                 } else
                     while (oldOp.portsIn[j].links.length) {
                         var oldName = oldOp.portsIn[j].links[0].portIn.name;
@@ -593,7 +670,8 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
                             oldOutOp,
                             oldOutName
                         );
-                        l.setValue();
+                        if(!l) console.log('[reloadOp] relink after op reload not successfull for port '+oldOutName);
+                            else l.setValue();
                     }
             }
 
@@ -610,13 +688,14 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
                         oldInOp,
                         oldInName
                     );
-                    l.setValue();
+                    if(!l) console.log('relink after op reload not successfull for port '+oldInName);
+                        else l.setValue();
                 }
             }
 
 
             this.deleteOp(oldOp.id);
-        }
+        // }
     }
     cb(count, ops);
 };
@@ -647,14 +726,11 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     var loadingId = this.loading.start('core', 'deserialize');
     if (this.onLoadStart) this.onLoadStart();
 
-    var stopwatch=null;
-    if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('deserialize');
-
+    this.namespace=obj.namespace||'';
+    this.name=obj.name||'';
     
     if (typeof obj === "string") obj = JSON.parse(obj);
     var self = this;
-
-    if(stopwatch)stopwatch.stop('jsonparse');
 
     this.settings = obj.settings;
 
@@ -670,23 +746,28 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-    if(stopwatch)stopwatch.stop('add ops..');
-
     var reqs=new CABLES.Requirements(this);
     
 
 
-    // console.log('add ops ',self.config.glCanvasId);
+    // console.log('add ops ',obj.ops);
     // add ops...
     for (var iop in obj.ops) {
 
         var start=CABLES.now();
-        var op = this.addOp(obj.ops[iop].objName, obj.ops[iop].uiAttribs);
+        
+        var op=null;
+        if(obj.ops[iop].opId) op = this.addOp(obj.ops[iop].opId, obj.ops[iop].uiAttribs, obj.ops[iop].id);
+            else op = this.addOp(obj.ops[iop].objName, obj.ops[iop].uiAttribs, obj.ops[iop].id);
+
         reqs.checkOp(op);
 
         if (op) {
-            op.id = obj.ops[iop].id;
-            if (genIds) op.id = CABLES.generateUUID();
+            // op.id = obj.ops[iop].id;
+            if (genIds) op.id = CABLES.uuid();
+
+            // console.log(obj.ops[iop].portsIn);
+            op.portsInData=obj.ops[iop].portsIn;
 
             for (var ipi in obj.ops[iop].portsIn) {
                 var objPort = obj.ops[iop].portsIn[ipi];
@@ -697,25 +778,25 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                     objPort.value = true === objPort.value;
                 }
 
-                if (port && objPort.value !== undefined && port.type != OP_PORT_TYPE_TEXTURE) {
+                if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) {
                     port.set(objPort.value);
                 }
                 if (objPort.animated) port.setAnimated(objPort.animated);
                 if (objPort.anim) {
-                    if (!port.anim) port.anim = new CABLES.TL.Anim();
+                    if (!port.anim) port.anim = new CABLES.Anim();
 
                     if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
 
                     for (var ani in objPort.anim.keys) {
                         // var o={t:objPort.anim.keys[ani].t,value:objPort.anim.keys[ani].v};
-                        port.anim.keys.push(new CABLES.TL.Key(objPort.anim.keys[ani]));
+                        port.anim.keys.push(new CABLES.ANIM.Key(objPort.anim.keys[ani]));
                     }
                 }
             }
 
             for (var ipo in obj.ops[iop].portsOut) {
                 var port2 = op.getPort(obj.ops[iop].portsOut[ipo].name);
-                if (port2 && port2.type != OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value')) {
+                if (port2 && port2.type != CABLES.OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value')) {
                     port2.set(obj.ops[iop].portsOut[ipo].value);
                 }
             }
@@ -726,8 +807,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         // else console.log('op time',obj.ops[iop].objName,timeused);
     }
 
-    if(stopwatch)stopwatch.stop('onloaded valueset');
-
     for (var i in this.ops) {
         if (this.ops[i].onLoadedValueSet) {
             this.ops[i].onLoadedValueSet();
@@ -735,8 +814,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-
-    if(stopwatch)stopwatch.stop('create links');
 
     // create links...
     if(obj.ops)
@@ -757,16 +834,12 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-    if(stopwatch)stopwatch.stop('onloaded');
-
     for (var i in this.ops) {
         if (this.ops[i].onLoaded) { // TODO: deprecate!!!
             this.ops[i].onLoaded();
             this.ops[i].onLoaded = null;
         }
     }
-
-    if(stopwatch)stopwatch.stop('init ops');
 
     for (var i in this.ops) {
         if (this.ops[i].init) {
@@ -775,10 +848,8 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-    if(stopwatch)stopwatch.stop('finished');
 
-
-    this.loading.finished(loadingId);
+    setTimeout(function(){ this.loading.finished(loadingId); }.bind(this),100);
     if(this.config.onPatchLoaded)this.config.onPatchLoaded();
 
     if (this.onLoadEnd) this.onLoadEnd();
@@ -796,6 +867,9 @@ CABLES.Patch.prototype.profile = function(enable) {
 
 
 // ----------------------
+
+
+
 
 /**
  * @name Variable
@@ -841,6 +915,8 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
     }
 };
 
+
+
 /**
  * function will be called when value of variable is changed
  * @name CABLES.Patch.Variable#addListener
@@ -864,16 +940,38 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
 
 // ------------------
 
+// old?
 CABLES.Patch.prototype.addVariableListener = function(cb) {
     this._variableListeners.push(cb);
 };
 
+// old?
 CABLES.Patch.prototype._callVariableListener = function(cb) {
     for (var i = 0; i < this._variableListeners.length; i++) {
         this._variableListeners[i]();
     }
 };
 
+
+/**
+ * set variable value
+ * @name CABLES.Patch.Variable#setVariable
+ * @param {String} name of variable
+ * @param {Number|String|Boolena} value
+ * @function
+ */
+CABLES.Patch.prototype.setVariable = function(name, val)
+{
+    if (this._variables.hasOwnProperty(name)) {
+        this._variables[name].setValue(val);
+    } else {
+        consolr.warn("variable "+name+" not found!");
+    }
+};
+
+
+
+// used internally
 CABLES.Patch.prototype.setVarValue = function(name, val) {
     if (this._variables.hasOwnProperty(name)) {
         this._variables[name].setValue(val);
@@ -883,11 +981,13 @@ CABLES.Patch.prototype.setVarValue = function(name, val) {
     }
     return this._variables[name];
 };
-
+// old?
 CABLES.Patch.prototype.getVarValue = function(name, val) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name].getValue();
 };
+
+
 
 /**
  * @name CABLES.Patch#getVar

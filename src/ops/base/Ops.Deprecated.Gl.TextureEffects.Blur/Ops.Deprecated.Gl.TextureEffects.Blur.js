@@ -1,16 +1,16 @@
-CABLES.Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
 this.name='Blur';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
-this.iterations=this.addInPort(new Port(this,"iterations",OP_PORT_TYPE_VALUE));
+this.iterations=this.addInPort(new CABLES.Port(this,"iterations",CABLES.OP_PORT_TYPE_VALUE));
 this.iterations.val=10;
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+// this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -53,7 +53,7 @@ var uniDirY=new CGL.Uniform(shader,'f','dirY',0);
 var uniWidth=new CGL.Uniform(shader,'f','width',0);
 var uniHeight=new CGL.Uniform(shader,'f','height',0);
 
-var direction=this.addInPort(new Port(this,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+var direction=this.addInPort(new CABLES.Port(this,"direction",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
 var dir=0;
 direction.set('both');
 direction.onValueChange(function()
@@ -78,8 +78,8 @@ this.render.onTriggered=function()
         {
 
             cgl.currentTextureEffect.bind();
-            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+            
 
             uniDirX.setValue(0.0);
             uniDirY.setValue(1.0);
@@ -92,8 +92,8 @@ this.render.onTriggered=function()
         {
 
             cgl.currentTextureEffect.bind();
-            cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+            cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+            
 
             uniDirX.setValue(1.0);
             uniDirY.setValue(0.0);

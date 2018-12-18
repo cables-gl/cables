@@ -1,0 +1,47 @@
+{
+    "updated": 1540451471653,
+    "authorName": "pandur",
+    "id": "22523fae-a623-401d-b952-a57c26de4b4e",
+    "created": 1540296698793,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "refresh"
+            },
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Data",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Audio Out"
+            },
+            {
+                "type": "0",
+                "name": "average volume",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "fft"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioAnalyzer"
+    },
+    "summary": "Extracts FFT or Waveform data from the incoming signal",
+    "docs": {
+        "ports": []
+    }
+}

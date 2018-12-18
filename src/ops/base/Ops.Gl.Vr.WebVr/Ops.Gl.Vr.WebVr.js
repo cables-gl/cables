@@ -1,6 +1,6 @@
-var inStartVr=op.inFunctionButton("Start VR");
+var inStartVr=op.inTriggerButton("Start VR");
 
-var nextVr=op.outFunction("VR Mainloop");
+var nextVr=op.outTrigger("VR Mainloop");
 var outSupported=op.outValue("Supported");
 var outDisplayName=op.outValue("VR Display");
 var outFps=op.outValue("FPS");
@@ -50,7 +50,7 @@ function mainloopVr()
     
     if(CABLES.now()-frameLast>1000)
     {
-        console.log('frameCount',frameCount);
+        // console.log('frameCount',frameCount);
         outFps.set(frameCount);
         frameCount=0;
         frameLast=CABLES.now();

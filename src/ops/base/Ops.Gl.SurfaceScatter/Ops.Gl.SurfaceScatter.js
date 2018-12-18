@@ -1,28 +1,27 @@
+const
+    render=op.inTrigger("render"),
+    geometry=op.inObject("geometry"),
+    seed=op.inValueFloat("random seed"),
+    num=op.inValueInt("num",20),
+    rotX=op.inValueBool("Rotate X",true),
+    rotY=op.inValueBool("Rotate Y",true),
+    rotZ=op.inValueBool("Rotate Z",true),
+    trigger=op.outTrigger('trigger'),
+    index=op.outValue("index"),
+    outPoints=op.outArray("Points");
 
-op.name='SurfaceScatter';
-op.render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var geometry=op.addInPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
-var seed=op.addInPort(new Port(op,"random seed",OP_PORT_TYPE_VALUE));
-var num=op.addInPort(new Port(op,"num",OP_PORT_TYPE_VALUE));
-
-var rotX=op.inValueBool("Rotate X",true);
-var rotY=op.inValueBool("Rotate Y",true);
-var rotZ=op.inValueBool("Rotate Z",true);
-
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var index=op.addOutPort(new Port(op,"index",OP_PORT_TYPE_VALUE));
-
-var outPoints=op.outArray("Points");
-
-num.set(20);
 geometry.ignoreValueSerialize=true;
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var objects=[];
-
-
 var vec=vec3.create();
+
+
+geometry.onChange=
+    num.onChange=
+    seed.onChange=
+    rotX.onChange=
+    rotY.onChange=
+    rotZ.onChange=initRandom;
 
 function initRandom()
 {
@@ -38,7 +37,7 @@ function initRandom()
     {
         op.uiAttr({'error':null});
     }
-    
+
     Math.randomSeed=seed.get();
 
     for(var i=0;i<num.get();i++)
@@ -81,26 +80,21 @@ function initRandom()
 
         objects.push(obj);
     }
+
     outPoints.set(points);
 }
 
-geometry.onValueChanged=initRandom;
-num.onValueChanged=initRandom;
-seed.onValueChanged=initRandom;
-rotX.onChange==initRandom;
-rotY.onChange==initRandom;
-rotZ.onChange==initRandom;
 
-op.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(geometry.get())
     {
         for(var j=0;j<objects.length;j++)
         {
             cgl.pushModelMatrix();
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix, objects[j].pos);
+            mat4.translate(cgl.mMatrix,cgl.mMatrix, objects[j].pos);
 
-            mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, objects[j].qMat);
+            mat4.multiply(cgl.mMatrix,cgl.mMatrix, objects[j].qMat);
 
             index.set(j);
             trigger.trigger();

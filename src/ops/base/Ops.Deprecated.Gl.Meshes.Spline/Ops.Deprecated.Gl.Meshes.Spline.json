@@ -1,1 +1,59 @@
-{}
+{
+    "updated": 1540979932806,
+    "authorName": "pandur",
+    "id": "93e45490-d5ec-421a-8f3e-d3c76a220b74",
+    "created": 1540382300865,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "thickness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "subdivs",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "bezier",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "centerpoint",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "closed",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "1",
+                "name": "triggerpoints"
+            },
+            {
+                "type": "3",
+                "name": "points"
+            }
+        ],
+        "name": "Ops.Deprecated.Gl.Meshes.Spline"
+    }
+}

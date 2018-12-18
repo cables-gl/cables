@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "smooth"
+                "name": "smooth",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -38,5 +39,9 @@
                 "text": "The geometry of the polyhedron"
             }
         ]
-    }
+    },
+    "updated": 1542701687982,
+    "authorName": "pandur",
+    "id": "109cead5-8eda-4726-9e3d-b23afe201abd",
+    "created": 1542701625850
 }

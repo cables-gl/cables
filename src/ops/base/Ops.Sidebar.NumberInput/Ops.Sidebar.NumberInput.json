@@ -1,0 +1,78 @@
+{
+    "updated": 1544114716527,
+    "authorName": "tim",
+    "id": "88759486-cc29-4068-9adc-85114036508f",
+    "created": 1528720760681,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Link"
+            },
+            {
+                "type": "0",
+                "name": "Text",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Input",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Set Default"
+            },
+            {
+                "type": "0",
+                "name": "Default",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Children"
+            },
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Sidebar.NumberInput"
+    },
+    "summary": "Enter a number in the sidebar",
+    "docs": {
+        "ports": [
+            {
+                "name": "Link",
+                "text": "Link to previous sidebar ops"
+            },
+            {
+                "name": "Text",
+                "text": "The text label next to the input"
+            },
+            {
+                "name": "Input",
+                "text": "Same as the input value in the sidebar, use this to set the value programmatically"
+            },
+            {
+                "name": "Set Default",
+                "text": "When triggered the input value will be stored as default value"
+            },
+            {
+                "name": "Default",
+                "text": "The value to use as default"
+            },
+            {
+                "name": "Children",
+                "text": "Link to next sidebar ops"
+            },
+            {
+                "name": "Result",
+                "text": "The number"
+            }
+        ]
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "summary": "change how colors are mixed (blendign/mixing modes)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blendmode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Premultiplied",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.BlendMode"
+    },
+    "updated": 1542697969382,
+    "authorName": "pandur",
+    "id": "a5965fc7-d634-4e05-abd5-35b29b7993f9",
+    "created": 1542697969798
+}

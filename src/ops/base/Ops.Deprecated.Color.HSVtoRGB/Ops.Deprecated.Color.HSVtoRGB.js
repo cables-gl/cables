@@ -1,5 +1,3 @@
-op.name="HSVtoRGB";
-
 var outR=op.outValue("R");
 var outG=op.outValue("G");
 var outB=op.outValue("B");

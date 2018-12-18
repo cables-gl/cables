@@ -1,4 +1,4 @@
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 var outArr=op.outArray("Array");
 
 var arr=[];

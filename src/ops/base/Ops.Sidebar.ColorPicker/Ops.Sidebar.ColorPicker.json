@@ -1,5 +1,5 @@
 {
-    "updated": 1525886789492,
+    "updated": 1532355171395,
     "authorName": "tim",
     "id": "580500eb-1f95-4e40-95f8-1ca50b044d0e",
     "created": 1525871498923,
@@ -13,6 +13,25 @@
                 "type": "0",
                 "name": "Text",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Input Red",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Input Green",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Input Blue",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Set Default"
             },
             {
                 "type": "0",

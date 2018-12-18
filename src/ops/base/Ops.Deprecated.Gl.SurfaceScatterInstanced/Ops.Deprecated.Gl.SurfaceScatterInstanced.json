@@ -1,0 +1,62 @@
+{
+    "updated": 1539788382356,
+    "authorName": "pandur",
+    "id": "01305694-f1b9-485e-8bbd-9daa0a7be996",
+    "created": 1516622763169,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "2",
+                "name": "Geom Surface"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Distribution",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Selection",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size min",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size max",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Random Rotate",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Random Seed",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.SurfaceScatterInstanced"
+    },
+    "summary": "render meshes randomly distributed on the surface of a geometry",
+    "docs": {
+        "ports": []
+    }
+}

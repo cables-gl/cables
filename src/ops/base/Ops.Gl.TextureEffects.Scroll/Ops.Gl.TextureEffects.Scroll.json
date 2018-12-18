@@ -7,15 +7,18 @@
             },
             {
                 "type": "0",
-                "name": "amountX"
+                "name": "amountX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "amountY"
+                "name": "amountY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Repeat"
+                "name": "Repeat",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -26,7 +29,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Scroll"
     },
-    "updated": 1510252635179,
+    "updated": 1540920771691,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "cabpandurles",
     "id": "9b151d99-7888-4948-81c7-cd23b334e8d4",

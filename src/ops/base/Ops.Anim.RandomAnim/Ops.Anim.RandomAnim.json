@@ -7,6 +7,11 @@
             },
             {
                 "type": "0",
+                "name": "duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "min",
                 "subType": "number"
             },
@@ -27,11 +32,6 @@
             },
             {
                 "type": "0",
-                "name": "duration",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "easing",
                 "subType": "string"
             }
@@ -41,6 +41,10 @@
                 "type": "0",
                 "name": "result",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Looped"
             }
         ],
         "name": "Ops.Anim.RandomAnim"
@@ -49,8 +53,9 @@
     "docs": {
         "ports": []
     },
-    "updated": 1525413487148,
+    "updated": 1541493251932,
     "authorName": "pandur",
     "id": "2d2e5f0e-b69f-4789-9a48-1ee6ade5049a",
-    "created": 1525413404905
+    "created": 1525413404905,
+    "youtubeid": ""
 }

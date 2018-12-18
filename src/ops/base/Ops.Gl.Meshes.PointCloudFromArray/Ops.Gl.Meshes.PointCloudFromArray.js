@@ -1,40 +1,87 @@
-op.name="PointCloudFromArray";
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var arr=op.inArray("Array");
-var seed=op.inValue("Seed");
-var numPoints=op.inValue("Num Points");
+const
+    exe=op.inTrigger("exe"),
+    arr=op.inArray("Array"),
+    numPoints=op.inValueInt("Num Points"),
+    outGeom=op.outObject("Geometry"),
+    pTexCoordRand=op.inValueBool("Scramble Texcoords",true),
+    seed=op.inValue("Seed");
 
-var pTexCoordRand=op.inValueBool("Scramble Texcoords");
+const cgl=op.patch.cgl;
 
-var cgl=op.patch.cgl;
+pTexCoordRand.onChange=updateRandTexCoords;
+seed.onChange=arr.onChange=reset;
+numPoints.onChange=updateNumVerts;
 
-
-function doRender()
-{
-    if(mesh) mesh.render(cgl.getShader());
-}
+var hasError=false;
 
 exe.onTriggered=doRender;
 
 var mesh=null;
-var geom=new CGL.Geometry("pointcloudfromarray");
-var texCoords=null;
+const geom=new CGL.Geometry("pointcloudfromarray");
+var texCoords=[];
+var needsRebuild=true;
+
+function doRender()
+{
+    if(CABLES.UI)
+    {
+        var shader=cgl.getShader();
+        if(shader && shader.glPrimitive!=cgl.gl.POINTS)
+        {
+            if(!hasError)
+            {
+                op.uiAttr( { 'warning': 'using a Material not made for point rendering. maybe use pointMaterial.' } );
+                hasError=true;
+            }
+            return;
+        }
+        if(hasError)
+        {
+            op.uiAttr({'warning':null});
+            hasError=false;
+        }
+    }
+
+    if(needsRebuild || !mesh)rebuild();
+    if(mesh) mesh.render(cgl.getShader());
+}
+
 function reset()
 {
-    
+    needsRebuild=true;
+}
+
+function updateRandTexCoords()
+{
+    if(!pTexCoordRand.get()) seed.setUiAttribs({hidePort:true,greyout:true});
+        else seed.setUiAttribs({hidePort:false,greyout:false});
+    needsRebuild=true;
+}
+
+function updateNumVerts()
+{
+    if(mesh)
+    {
+        mesh.setNumVertices( Math.min(geom.vertices.length/3,numPoints.get()));
+        if(numPoints.get()==0)mesh.setNumVertices(geom.vertices.length/3);
+    }
+}
+
+function rebuild()
+{
     var verts=arr.get();
     if(!verts)return;
 
+    geom.clear();
     var num=verts.length/3;
-    num=Math.floor(num);
+    num=Math.abs(Math.floor(num));
 
-    if(!texCoords || texCoords.length!=num*2)
-    texCoords=new Float32Array(num*2);
+    if(!texCoords || texCoords.length!=num*2) texCoords.length=num*2;//=new Float32Array(num*2);
 
     var changed=false;
-
     var rndTc=pTexCoordRand.get();
+
     Math.randomSeed=seed.get();
 
     for(var i=0;i<num;i++)
@@ -56,28 +103,21 @@ function reset()
             changed=true;
         }
     }
-    
-    
+
     if(changed)
     {
-        // geom.clear();
         geom.setPointVertices(verts);
-        geom.texCoords=texCoords;
-        
-        if(!mesh)mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
-            // else mesh.setGeom(geom);
+        geom.setTexCoords(texCoords);
+        geom.verticesIndices=[];
+
+        if(mesh)mesh.dispose();
+        mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+
         mesh.addVertexNumbers=true;
         mesh.setGeom(geom);
+        outGeom.set(geom);
     }
-    
-    if(verts instanceof Float32Array)
-    {
-        var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,verts,3);
-        attr.numItems=numPoints.get();
-    }
-    
 
+    updateNumVerts();
+    needsRebuild=false;
 }
-
-arr.onChange=reset;
-

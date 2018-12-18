@@ -1,8 +1,6 @@
-op.name="PointCollector";
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var outPoints=op.addOutPort(new Port(op,"Points",OP_PORT_TYPE_ARRAY));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
+var outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY));
 outPoints.ignoreValueSerialize=true;
 
 var inAbsolute=op.inValueBool("Absolute",true);
@@ -20,24 +18,24 @@ var mySplinePoints=[];
 
 render.onTriggered=function()
 {
-    if(cgl.frameStore.SplinePoints) 
+    if(cgl.frameStore.SplinePoints)
     {
         oldSplinePoints=cgl.frameStore.SplinePoints;
         cgl.frameStore.SplinePoints=[];
     }
 
     cgl.frameStore.SplinePointCounter=0;
-    
+
     cgl.frameStore.SplinePoints=mySplinePoints;//cgl.frameStore.SplinePoints||[];
-    
+
     if(cgl.frameStore.SplinePointCounter!=cgl.frameStore.SplinePoints.length)
     cgl.frameStore.SplinePoints.length=cgl.frameStore.SplinePointCounter;
 
     if(!inAbsolute.get())
     {
-        mat4.invert(m,cgl.mvMatrix);
+        mat4.invert(m,cgl.mMatrix);
         cgl.frameStore.SplinePointsInverseOriginalMatrix=m;
-    } 
+    }
     else
     {
         cgl.frameStore.SplinePointsInverseOriginalMatrix=null;

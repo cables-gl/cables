@@ -1,6 +1,5 @@
-op.name='Scroll';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var amountX=op.inValue("amountX");
 var amountY=op.inValue("amountY");
@@ -29,12 +28,12 @@ function updateRepeat()
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
-    
+
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

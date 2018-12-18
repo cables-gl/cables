@@ -1,6 +1,4 @@
-op.name="BodySphere";
-
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
 var inRadius=op.inValue("Radius");
 
@@ -10,16 +8,16 @@ var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outRadius=op.outValue("Out Radius");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
 
-var outCollision=op.outFunction("Collision");
+var outCollision=op.outTrigger("Collision");
 
 var cgl=op.patch.cgl;
 
@@ -58,7 +56,7 @@ inReset.onTriggered=function()
 //         v.y += offset;
 //         v.z += offset;
 //     }
-    
+
 //     return new CANNON.ConvexPolyhedron(verts,
 //         [
 //             [0,3,2], // -x
@@ -73,15 +71,15 @@ function setup()
 {
     var world=cgl.frameStore.world;
     if(!world)return;
-    
+
     if(body)world.removeBody(body);
-    
+
     body = new CANNON.Body({
       mass: inMass.get(), // kg
       position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
       shape: new CANNON.Sphere(inRadius.get())
     });
-    
+
 
     world.addBody(body);
 
@@ -108,15 +106,15 @@ function render()
     if(needSetup)setup();
     if(lastWorld!=cgl.frameStore.world)setup();
 
-    if(!body)return; 
+    if(!body)return;
 
 
-    vec3.set(vec, 
+    vec3.set(vec,
         body.position.x,
         body.position.y,
         body.position.z
         );
-    
+
     quat.set(q,
         body.quaternion.x,
         body.quaternion.y,
@@ -127,24 +125,24 @@ function render()
     cgl.pushModelMatrix();
 
     mat4.fromRotationTranslation(trMat,q,vec);
-    mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
+    mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
 
     if(doRender.get())m.render(cgl,inRadius.get()*2);
-    
+
     outX.set(body.position.x);
     outY.set(body.position.y);
     outZ.set(body.position.z);
- 
+
     if(collided)
     {
         collided=false;
         outCollision.trigger();
     }
-    
+
     CABLES.physicsCurrentBody=body;
-    
+
     next.trigger();
-    
+
     CABLES.physicsCurrentBody=null;
     cgl.popModelMatrix();
 }

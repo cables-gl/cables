@@ -1,10 +1,3 @@
-
-
-
-var cgl=op.patch.cgl;
-
-
-
 var div = document.createElement('div');
 div.style.padding="10px";
 div.style.position="absolute";
@@ -21,6 +14,8 @@ div.style.margin="20px";
 div.style.width="250px";
 div.style.height="85px";
 div.style.bottom="10px";
+
+var cgl=op.patch.cgl;
 
 var canvas = op.patch.cgl.canvas.parentElement;
 canvas.appendChild(div);

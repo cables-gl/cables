@@ -35,24 +35,27 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "loading"
+                "name": "loading",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Aspect Ratio"
+                "name": "Aspect Ratio",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Texture"
     },
-    "updated": 1525251943919,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "466394d4-6c1a-4e5d-a057-0063ab0f096a",

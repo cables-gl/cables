@@ -21,7 +21,7 @@ If you open the Arduino Serial monitor (by pressing `cmd + shift + m`) you shoul
 
 ![](img/arduino-serial-monitor.png)
 
-Okay, now we need to download _serial-port-json-server_, a little helper tool to send the Serial data to your cables patch. Go to the [release page](https://github.com/chilipeppr/serial-port-json-server/releases), find the right version for your operating system and download it. If there is none for the latest release, just pick the release prior to that.
+Now we need to download _serial-port-json-server_, a little helper tool to send the Serial data to your cables patch. Go to the [release page](https://github.com/chilipeppr/serial-port-json-server/releases), find the right version for your operating system and download it. If there is none for the latest release, just pick the release prior to that.
 
 Once downloaded extract the zip-file, go into the extracted folder and you should see a file called `serial-port-json-server` / `serial-port-json-server.exe`.  Run this file in your Terminal / command prompt. On mac you do this by opening up Terminal-app, then `cd` into the directory, e.g.:
 
@@ -85,6 +85,6 @@ If you now click on the little magnifier icon next to the `Result` port you can 
 
 To make use of the incoming data we need to extract the value. Connect a `GetValue` op to the `Result` port and enter `D` as the key:  
 
-![](img/cables4.png)From here on you can use the `Result` value howevery you like. In the [Arduino Serial Tutorial](https://cables.gl/p/5acb7afd7173b0651a826aac) patch you can see how the data from the Arduino changes the size of the circle.
+![](img/cables4.png)From here on you can use the `Result` value however you like. In the [Arduino Serial Tutorial](https://cables.gl/p/5acb7afd7173b0651a826aac) patch you can see how the data from the Arduino changes the size of the circle.
 
 Now go on and build some crazy things with Arduino + cables :)

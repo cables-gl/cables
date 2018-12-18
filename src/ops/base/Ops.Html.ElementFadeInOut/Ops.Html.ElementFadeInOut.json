@@ -1,5 +1,5 @@
 {
-    "updated": 1522089188950,
+    "updated": 1536747687286,
     "authorName": "pandur",
     "id": "392e65eb-4ebe-4adb-8711-e4cfe059c6c9",
     "created": 1520435372077,
@@ -17,6 +17,11 @@
             {
                 "type": "0",
                 "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Opacity",
                 "subType": "number"
             }
         ],

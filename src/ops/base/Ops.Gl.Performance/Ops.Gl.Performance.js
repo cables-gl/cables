@@ -1,5 +1,5 @@
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-var next=this.addOutPort(new Port(this,"childs",OP_PORT_TYPE_FUNCTION)) ;
+var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var next=this.addOutPort(new CABLES.Port(this,"childs",CABLES.OP_PORT_TYPE_FUNCTION)) ;
 
 var inShow=op.inValueBool("Visible",true);
 
@@ -151,7 +151,7 @@ function updateText()
     element.innerHTML=fps+" fps | "+Math.round(childsTime*100)/100+"ms "+warn;
     if(op.patch.loading.getProgress()!=1.0)
     {
-        element.innerHTML+="<br/>loading "+op.patch.loading.getProgress()+' '+loadingChars[ (++loadingCounter)%loadingChars.length ];
+        element.innerHTML+="<br/>loading "+Math.round(op.patch.loading.getProgress()*100)+'% '+loadingChars[ (++loadingCounter)%loadingChars.length ];
     }
     
     if(opened)

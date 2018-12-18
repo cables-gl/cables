@@ -1,5 +1,5 @@
 
-var update=op.inFunction("Update");
+var update=op.inTrigger("Update");
 var cgl=op.patch.cgl;
 
 var lastScene=null;

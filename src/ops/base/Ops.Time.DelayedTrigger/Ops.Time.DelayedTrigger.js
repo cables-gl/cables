@@ -1,9 +1,7 @@
-op.name="DelayedTrigger";
+const exe=op.inTrigger("exe");
+var delay=op.addInPort(new CABLES.Port(op,"delay",CABLES.OP_PORT_TYPE_VALUE));
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var delay=op.addInPort(new Port(op,"delay",OP_PORT_TYPE_VALUE));
-
-var next=op.addOutPort(new Port(op,"next",OP_PORT_TYPE_FUNCTION));
+const next=op.outTrigger("next");
 
 delay.set(1);
 

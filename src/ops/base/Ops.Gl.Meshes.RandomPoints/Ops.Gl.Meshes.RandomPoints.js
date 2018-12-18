@@ -1,11 +1,11 @@
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var num=op.addInPort(new Port(op,"num"));
-var size=op.addInPort(new Port(op,"size"),OP_PORT_TYPE_VALUE);
-var seed=op.addInPort(new Port(op,"random seed"));
-var scaleX=op.addInPort(new Port(op,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleY=op.addInPort(new Port(op,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleZ=op.addInPort(new Port(op,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
+const exe=op.inTrigger("exe");
+var num=op.addInPort(new CABLES.Port(op,"num"));
+var size=op.addInPort(new CABLES.Port(op,"size"),CABLES.OP_PORT_TYPE_VALUE);
+var seed=op.addInPort(new CABLES.Port(op,"random seed"));
+var scaleX=op.addInPort(new CABLES.Port(op,"scaleX",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleY=op.addInPort(new CABLES.Port(op,"scaleY",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var scaleZ=op.addInPort(new CABLES.Port(op,"scaleZ",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 // var round=op.inValueBool('round',false);
 
 var cgl=op.patch.cgl;
@@ -40,6 +40,7 @@ function reset()
     geom=new CGL.Geometry();
     var verts=[];
     var n=Math.round(num.get())||1;
+    if(n<0)n=1;
     var texCoords=[];
     var vertColors=[];
     verts.length=n*3;

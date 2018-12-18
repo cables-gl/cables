@@ -22,8 +22,8 @@ void main()
        if(flip==1.0)x=1.0-x;
        x*=1.0-offset;
 
-       if(axis==1.0) col=texture2D(tex,vec2(texCoord.x,x) );
-           else col=texture2D(tex,vec2(x,texCoord.y) );
+       if(axis==1.0) col=texture(tex,vec2(texCoord.x,x) );
+           else col=texture(tex,vec2(x,texCoord.y) );
    #endif
-   gl_FragColor = col;
+   outColor= col;
 }

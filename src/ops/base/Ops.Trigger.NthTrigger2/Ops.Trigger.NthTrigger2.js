@@ -1,11 +1,11 @@
 var DEFAULT_NTH = 5;
 
 // inputs
-var exePort = op.inFunctionButton('Execute');
+var exePort = op.inTriggerButton('Execute');
 var nthPort = op.inValue('Nth', DEFAULT_NTH);
 
 // outputs
-var triggerPort = op.outFunction('Next');
+var triggerPort = op.outTrigger('Next');
 
 var count = 0;
 var nth = DEFAULT_NTH;

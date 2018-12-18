@@ -1,9 +1,9 @@
-op.name="Fract";
-
-var value=op.inValue("Value");
-var result=op.outValue("Result");
+const
+    value=op.inValue("Value"),
+    result=op.outValue("Result");
 
 value.onChange=function()
 {
-    result.set(value.get()-Math.floor(value.get()));
+    const v=value.get();
+    result.set(v-Math.floor(v));
 };

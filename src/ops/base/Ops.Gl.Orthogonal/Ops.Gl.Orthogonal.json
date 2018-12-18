@@ -8,27 +8,33 @@
             },
             {
                 "type": "0",
-                "name": "left"
+                "name": "left",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "right"
+                "name": "right",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "bottom"
+                "name": "bottom",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "top"
+                "name": "top",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "frustum near"
+                "name": "frustum near",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "frustum far"
+                "name": "frustum far",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -38,5 +44,9 @@
             }
         ],
         "name": "Ops.Gl.Orthogonal"
-    }
+    },
+    "updated": 1541805244958,
+    "authorName": "pandur",
+    "id": "6095c9fb-8080-4b08-835b-87b73ccd1b65",
+    "created": 1540976901749
 }

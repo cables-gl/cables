@@ -1,8 +1,8 @@
 
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var materialName=op.inValueString("name");
-var material=op.addInPort(new Port(op,"material",OP_PORT_TYPE_OBJECT));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var material=op.addInPort(new CABLES.Port(op,"material",CABLES.OP_PORT_TYPE_OBJECT));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 

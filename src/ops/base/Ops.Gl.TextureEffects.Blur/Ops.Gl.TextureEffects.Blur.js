@@ -1,18 +1,13 @@
-var cgl=op.patch.cgl;
+const render=op.inTrigger('render');
+const trigger=op.outTrigger('trigger');
+const fast=op.inValueBool("Fast",true);
 
-op.name='Blur';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var fast=op.inValueBool("Fast",true);
+const cgl=op.patch.cgl;
 
-
-
-
-var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE));
+const amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE));
 amount.set(10);
 
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
 
 shader.define("FASTBLUR");
 
@@ -37,7 +32,7 @@ amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
 var textureAlpha=new CGL.Uniform(shader,'t','imageMask',1);
 
 
-var direction=op.addInPort(new Port(op,"direction",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+var direction=op.addInPort(new CABLES.Port(op,"direction",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
 var dir=0;
 direction.set('both');
 direction.onValueChange(function()
@@ -47,9 +42,9 @@ direction.onValueChange(function()
     if(direction.get()=='vertical')dir=2;
 });
 
-var mask=op.addInPort(new Port(op,"mask",OP_PORT_TYPE_TEXTURE,{preview:true }));
+var mask=op.inTexture("mask");
 
-mask.onValueChanged=function()
+mask.onChange=function()
 {
     if(mask.get() && mask.get().tex) shader.define('HAS_MASK');
         else shader.removeDefine('HAS_MASK');
@@ -71,13 +66,13 @@ render.onTriggered=function()
     {
 
         cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
 
         if(mask.get() && mask.get().tex)
         {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
+            cgl.setTexture(1, mask.get().tex );
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
         }
 
 
@@ -92,13 +87,13 @@ render.onTriggered=function()
     {
 
         cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
 
         if(mask.get() && mask.get().tex)
         {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
+            cgl.setTexture(1, mask.get().tex );
+            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
         }
 
         uniDirX.setValue(1.0);

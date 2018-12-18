@@ -1,8 +1,8 @@
 var cgl=this.patch.cgl;
 
 this.name='ParticleSinus';
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger");
 
 var shader=null;
 

@@ -1,5 +1,3 @@
-
-
 var CGL = CGL || {};
 
 /**
@@ -9,11 +7,6 @@ var CGL = CGL || {};
  */
 CGL.Context = function() {
     var self = this;
-
-    // var vMatrixStack = [];
-    // var pMatrixStack = [];
-    var shaderStack = [];
-    var frameBufferStack = [null];
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
 
@@ -23,10 +16,14 @@ CGL.Context = function() {
     this.pMatrix = mat4.create();
     this.mMatrix = mat4.create();
     this.vMatrix = mat4.create();
+    this._textureslots=[];
 
     this._pMatrixStack=new CGL.MatrixStack();
     this._mMatrixStack=new CGL.MatrixStack();
     this._vMatrixStack=new CGL.MatrixStack();
+    this._glFrameBufferStack = [];
+    this._frameBufferStack=[];
+    this._shaderStack = [];
 
     Object.defineProperty(this, 'mvMatrix', { get: function() { return this.mMatrix; }, set: function(m) { this.mMatrix=m; } }); // todo: deprecated
 
@@ -36,6 +33,10 @@ CGL.Context = function() {
     mat4.identity(this.vMatrix);
 
     var simpleShader = new CGL.Shader(this, "simpleshader");
+    
+    simpleShader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+    simpleShader.setSource(CGL.Shader.getDefaultVertexShader(), CGL.Shader.getDefaultFragmentShader());
+
     var currentShader = simpleShader;
     var aborted = false;
     var cbResize = [];
@@ -69,7 +70,7 @@ CGL.Context = function() {
         if (!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer = false;
         if (!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha = false;
         if (!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha = false;
-        if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
+        // if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
 
         this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
         if (this.gl) {
@@ -79,11 +80,8 @@ CGL.Context = function() {
             this.glVersion = 1;
         }
 
-
         if (!this.gl) {
-
             this.exitError('NO_WEBGL', 'sorry, could not initialize WebGL. Please check if your Browser supports WebGL.');
-
             return;
         } else {
             var derivativeExt = this.gl.getExtension("GL_OES_standard_derivatives");
@@ -136,7 +134,7 @@ CGL.Context = function() {
     this.beginFrame = function() {
 
         if (CABLES.UI) {
-            gui.preview.render();
+            gui._texturePreviewer.render();
             if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
         }
 
@@ -171,22 +169,13 @@ CGL.Context = function() {
         if (this._vMatrixStack.length() > 0) console.warn('view matrix stack length !=0 at end of rendering...');
         if (this._mMatrixStack.length() > 0) console.warn('mvmatrix stack length !=0 at end of rendering...');
         if (this._pMatrixStack.length() > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
-
-        // if (vMatrixStack.length > 0) console.warn('view matrix stack length !=0 at end of rendering...');
-        // if (this._stackModelMatrix.length > 0) console.warn('mmatrix stack length !=0 at end of rendering...');
-        // if (pMatrixStack.length > 0) console.warn('pmatrix stack length !=0 at end of rendering...');
-        if (shaderStack.length > 0) console.warn('shaderStack length !=0 at end of rendering...');
-
+        if (this._glFrameBufferStack.length > 0) console.warn('glFrameBuffer stack length !=0 at end of rendering...');
         if (this._stackDepthTest.length > 0) console.warn('depthtest stack length !=0 at end of rendering...');
         if (this._stackDepthWrite.length > 0) console.warn('depthwrite stack length !=0 at end of rendering...');
         if (this._stackDepthFunc.length > 0) console.warn('depthfunc stack length !=0 at end of rendering...');
         if (this._stackBlend.length > 0) console.warn('blend stack length !=0 at end of rendering...');
         if (this._stackBlendMode.length > 0) console.warn('blendMode stack length !=0 at end of rendering...');
-
-        // this._stackModelMatrix.length = 0;
-        // vMatrixStack.length = 0;
-        // pMatrixStack.length = 0;
-        // shaderStack.length = 0;
+        if (this._shaderStack.length > 0) console.warn('this._shaderStack length !=0 at end of rendering...');
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight) {
             oldCanvasWidth = self.canvasWidth;
@@ -204,12 +193,10 @@ CGL.Context = function() {
             if (!this.frameStore || (true === this.frameStore.renderOffscreen == currentShader.offScreenPass === true))
                 return currentShader;
 
-        for (var i = shaderStack.length - 1; i >= 0; i--)
-            if (shaderStack[i])
-                if (this.frameStore.renderOffscreen == shaderStack[i].offScreenPass)
-                    return shaderStack[i];
-
-        // console.log('no shader found?');
+        for (var i = this._shaderStack.length - 1; i >= 0; i--)
+            if (this._shaderStack[i])
+                if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass)
+                    return this._shaderStack[i];
     };
 
     this.getDefaultShader = function() {
@@ -217,29 +204,83 @@ CGL.Context = function() {
     };
 
     this.setShader = function(shader) {
-        shaderStack.push(shader);
+        this._shaderStack.push(shader);
         currentShader = shader;
     };
 
     this.setPreviousShader = function() {
-        if (shaderStack.length === 0) throw "Invalid shader stack pop!";
-        shaderStack.pop();
-        currentShader = shaderStack[shaderStack.length - 1];
+        if (this._shaderStack.length === 0) throw "Invalid shader stack pop!";
+        this._shaderStack.pop();
+        currentShader = this._shaderStack[this._shaderStack.length - 1];
     };
 
+    /**
+     * push a framebuffer to the framebuffer stack
+     * @name CGL.Context#pushGlFrameBuffer
+     * @param {Object} framebuffer
+     * @function
+     */
+    this.pushGlFrameBuffer = function(fb) {
+        this._glFrameBufferStack.push(fb);
+    };
+
+    /**
+     * pop framebuffer stack
+     * @name CGL.Context#popGlFrameBuffer
+     * @returns {Object} current framebuffer or null
+     * @function
+     */
+    this.popGlFrameBuffer = function() {
+        if (this._glFrameBufferStack.length == 0) return null;
+        this._glFrameBufferStack.pop();
+        return this._glFrameBufferStack[this._glFrameBufferStack.length - 1];
+    };
+
+    /**
+     * get current framebuffer 
+     * @name CGL.Context#getCurrentFrameBuffer
+     * @returns {Object} current framebuffer or null
+     * @function
+     */
+    this.getCurrentGlFrameBuffer=function()
+    {
+        if (this._glFrameBufferStack.length === 0) return null;
+        return this._glFrameBufferStack[this._glFrameBufferStack.length - 1];
+    }
+
+    /**
+     * push a framebuffer to the framebuffer stack
+     * @name CGL.Context#pushGlFrameBuffer
+     * @param {CGL.FrameBuffer} framebuffer
+     * @function
+     */
     this.pushFrameBuffer = function(fb) {
-        frameBufferStack.push(fb);
+        this._frameBufferStack.push(fb);
     };
 
+    /**
+     * pop framebuffer stack
+     * @name CGL.Context#popFrameBuffer
+     * @returns {CGL.FrameBuffer} current framebuffer or null
+     * @function
+     */
     this.popFrameBuffer = function() {
-        if (frameBufferStack.length == 1) return null;
-        frameBufferStack.pop();
-        return frameBufferStack[frameBufferStack.length - 1];
+        if (this._frameBufferStack.length == 0) return null;
+        this._frameBufferStack.pop();
+        return this._frameBufferStack[this._frameBufferStack.length - 1];
     };
 
-
-
-    
+    /**
+     * get current framebuffer 
+     * @name CGL.Context#getCurrentFrameBuffer
+     * @returns {CGL.FrameBuffer} current framebuffer or null
+     * @function
+     */
+    this.getCurrentFrameBuffer=function()
+    {
+        if (this._frameBufferStack.length === 0) return null;
+        return this._frameBufferStack[this._frameBufferStack.length - 1];
+    }
 
 
 
@@ -281,6 +322,11 @@ CGL.Context = function() {
         // cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
         // cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
 
+        for(var i=0;i<this._textureslots.length;i++)
+        {
+            this._textureslots[i]=null;
+        }
+
         cgl.beginFrame();
     };
 
@@ -297,10 +343,20 @@ CGL.Context = function() {
 
         cgl.endFrame();
     };
-
-    this.setTexture = function(slot, t) {
-        this.gl.activeTexture(this.gl.TEXTURE0 + slot);
-        this.gl.bindTexture(this.gl.TEXTURE_2D, t);
+    
+    this.getTexture= function(slot)
+    {
+        return this._textureslots[slot];
+    }
+    
+    this.setTexture = function(slot, t, type)
+    {
+        if(this._textureslots[slot]!=t)
+        {
+            this.gl.activeTexture(this.gl.TEXTURE0 + slot);
+            this.gl.bindTexture(type||this.gl.TEXTURE_2D, t);
+            this._textureslots[slot]=t;
+        }
     };
 
     this.fullScreen = function() {
@@ -323,15 +379,36 @@ CGL.Context = function() {
 
     this._resizeToWindowSize = function() {
         this.setSize(window.innerWidth,window.innerHeight);
-        self.updateSize();
+        this.updateSize();
     };
 
-    this.setAutoResizeToWindow = function(resize) {
-        if (resize) {
+    this._resizeToParentSize = function() {
+        var p=this.canvas.parentElement;
+        if(!p)
+        {
+            console.error("cables: can not resize to container element");
+            return;
+        }
+        this.setSize(p.clientWidth,p.clientHeight);
+        console.log("_resizeToParentSize",p.clientWidth,p.clientHeight);
+
+        this.updateSize();
+    };
+
+    this.setAutoResize = function(parent) {
+        
+        window.removeEventListener('resize', this._resizeToWindowSize.bind(this));
+        window.removeEventListener('resize', this._resizeToParentSize.bind(this));
+
+        if(parent=='window')
+        {
             window.addEventListener('resize', this._resizeToWindowSize.bind(this));
             this._resizeToWindowSize();
-        } else {
-            window.removeEventListener('resize', this._resizeToWindowSize.bind(this));
+        }
+        if(parent=='parent')
+        {
+            window.addEventListener('resize', this._resizeToParentSize.bind(this));
+            this._resizeToParentSize();
         }
     };
 
@@ -353,18 +430,17 @@ CGL.Context = function() {
 
 
     this.saveScreenshot = function(filename, cb, pw, ph) {
-        // console.log(pw,ph);
         this.patch.renderOneFrame();
 
-        var w = $('#glcanvas').attr('width');
-        var h = $('#glcanvas').attr('height');
+        var w = this.canvas.clientWidth;
+        var h = this.canvas.clientHeight;
 
         if (pw) {
-            $('#glcanvas').attr('width', pw);
+            this.canvas.width=pw;
             w = pw;
         }
         if (ph) {
-            $('#glcanvas').attr('height', ph);
+            this.canvas.height=ph;
             h = ph;
         }
 
@@ -381,29 +457,20 @@ CGL.Context = function() {
             padLeft(d.getMinutes(), 2) +
             padLeft(d.getSeconds(), 2);
 
-        // var projectStr = this.patch.name;
-        // projectStr = projectStr.split(' ').join('_');
-
         if (!filename) filename = 'cables_'+ dateStr + '.png';
         else filename += '.png';
 
-        this.patch.cgl.doScreenshotClearAlpha = $('#render_removeAlpha').is(':checked');
-
-        // console.log('this.patch.cgl.doScreenshotClearAlpha ',this.patch.cgl.doScreenshotClearAlpha);
-        // this.patch.cgl.doScreenshot = true;
-
-        // this.patch.cgl.screenShot = function(blob) {
         this.patch.cgl.screenShot(function(blob)
         {
-            $('#glcanvas').attr('width', w);
-            $('#glcanvas').attr('height', h);
+            this.canvas.width=w;
+            this.canvas.height=h;
             this.onScreenShot = null;
             if(blob)
             {
                 var anchor = document.createElement('a');
 
-                anchor.setAttribute('download', filename);
-                anchor.setAttribute('href', URL.createObjectURL(blob));
+                anchor.download=filename;
+                anchor.href=URL.createObjectURL(blob);
                 document.body.appendChild(anchor);
     
                 anchor.click();
@@ -415,44 +482,67 @@ CGL.Context = function() {
                 console.log("screenshot: no blob");
             }
 
-
         }.bind(this),true);
     };
 };
 
 
+/**
+ * push a matrix to the view matrix stack
+ * @name CGL.Context#pushviewMatrix
+ * @param {mat4} viewmatrix
+ * @function
+ */
+CGL.Context.prototype.pushViewMatrix = function() {
+    this.vMatrix=this._vMatrixStack.push(this.vMatrix);
+};
 
-// view matrix stack
+/**
+ * pop view matrix stack
+ * @name CGL.Context#popViewMatrix
+ * @returns {mat4} current viewmatrix 
+ * @function
+ */
+CGL.Context.prototype.popViewMatrix = function() {
+    this.vMatrix = this._vMatrixStack.pop();
+};
 
 CGL.Context.prototype.getViewMatrixStateCount = function() {
     return this._vMatrixStack.stateCounter;
 };
 
-CGL.Context.prototype.pushViewMatrix = function() {
-    this.vMatrix=this._vMatrixStack.push(this.vMatrix);
+
+/**
+ * push a matrix to the projection matrix stack
+ * @name CGL.Context#pushPMatrix
+ * @param {mat4} projectionmatrix
+ * @function
+ */
+CGL.Context.prototype.pushPMatrix = function() {
+    this.pMatrix=this._pMatrixStack.push(this.pMatrix);
 };
 
-CGL.Context.prototype.popViewMatrix = function() {
-    this.vMatrix = this._vMatrixStack.pop();
+/**
+ * pop projection matrix stack
+ * @name CGL.Context#popPMatrix
+ * @returns {mat4} current projectionmatrix 
+ * @function
+ */
+CGL.Context.prototype.popPMatrix = function() {
+    this.pMatrix = this._pMatrixStack.pop();
+    return this.pMatrix;
 };
-
-// projection matrix stack
 
 CGL.Context.prototype.getProjectionMatrixStateCount = function() {
     return this._pMatrixStack.stateCounter;
 };
 
-CGL.Context.prototype.pushPMatrix = function() {
-    this.pMatrix=this._pMatrixStack.push(this.pMatrix);
-};
-
-CGL.Context.prototype.popPMatrix = function() {
-    this.pMatrix = this._pMatrixStack.pop();
-};
-
-// model matrix stack
-
-// CGL.Context.prototype._stackModelMatrix=[];
+/**
+ * push a matrix to the model matrix stack
+ * @name CGL.Context#pushModelMatrix
+ * @param {mat4} modelmatrix
+ * @function
+ */
 CGL.Context.prototype.pushMvMatrix = // deprecated
 CGL.Context.prototype.pushModelMatrix = function()
 {
@@ -460,19 +550,29 @@ CGL.Context.prototype.pushModelMatrix = function()
     this.mMatrix=this._mMatrixStack.push(this.mMatrix);
 };
 
-
+/**
+ * pop model matrix stack
+ * @name CGL.Context#popModelMatrix
+ * @returns {mat4} current modelmatrix 
+ * @function
+ */
 CGL.Context.prototype.popMvMatrix = // todo: DEPRECATE
 CGL.Context.prototype.popmMatrix =
 CGL.Context.prototype.popModelMatrix = function() {
     // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
     this.mMatrix = this._mMatrixStack.pop();
-};
-CGL.Context.prototype.modelMatrix = function() {
     return this.mMatrix;
 };
 
-
-
+/**
+ * get model matrix 
+ * @name CGL.Context#modelMatrix
+ * @returns {mat4} current modelmatrix 
+ * @function
+ */
+CGL.Context.prototype.modelMatrix = function() {
+    return this.mMatrix;
+};
 
 
 // state depthtest
@@ -602,8 +702,6 @@ CGL.Context.prototype.popBlend=function()
 };
 
 
-
-
 CGL.BLEND_NONE=0;
 CGL.BLEND_NORMAL=1;
 CGL.BLEND_ADD=2;
@@ -613,6 +711,13 @@ CGL.BLEND_MUL=4;
 CGL.Context.prototype._stackBlendMode=[];
 CGL.Context.prototype._stackBlendModePremul=[];
 
+/**
+ * push and switch to predefined blendmode (CGL.BLEND_NONE,CGL.BLEND_NORMAL,CGL.BLEND_ADD,CGL.BLEND_SUB,CGL.BLEND_MUL)
+ * @name CGL.Context#pushBlendMode
+ * @param {Number} blendmode
+ * @param {Boolean} premultiplied mode
+ * @function
+ */
 CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
 {
     this._stackBlendMode.push(blendMode);
@@ -624,6 +729,11 @@ CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
     this._setBlendMode(this._stackBlendMode[n],this._stackBlendModePremul[n]);
 }
 
+/**
+ * pop predefined blendmode / switch back to previous blendmode
+ * @name CGL.Context#pushBlendMode
+ * @function
+ */
 CGL.Context.prototype.popBlendMode=function()
 {
     this._stackBlendMode.pop();
@@ -637,11 +747,28 @@ CGL.Context.prototype.popBlendMode=function()
         this._setBlendMode(this._stackBlendMode[n],this._stackBlendModePremul[n]);
 }
 
+CGL.Context.prototype.glGetAttribLocation=function(prog,name)
+{
+    const  l=this.gl.getAttribLocation(prog, name);
+    if(l==-1)
+    {
+        // console.log("get attr loc -1 ",name);
+        // debugger;
+    }
+    return l;
+}
+
+
+
 CGL.Context.prototype._setBlendMode=function(blendMode,premul)
 {
     const gl=this.gl;
 
-
+    if(blendMode==CGL.BLEND_NONE)
+    {
+        // this.gl.disable(this.gl.BLEND);
+    }
+    else
     if(blendMode==CGL.BLEND_ADD)
     {
         if(premul)

@@ -4,19 +4,26 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Number of Values"
+                "name": "Number of Values",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.SimpleMovingAverage"
-    }
+    },
+    "updated": 1542700173309,
+    "authorName": "pandur",
+    "id": "b28c1e66-1c88-4394-bf73-327c0e82ea34",
+    "created": 1542700173818
 }

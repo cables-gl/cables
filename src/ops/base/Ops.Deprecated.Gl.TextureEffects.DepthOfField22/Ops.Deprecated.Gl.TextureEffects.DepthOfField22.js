@@ -1,30 +1,30 @@
-Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
 this.name='DepthOfField';
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-this.depthTex=this.addInPort(new Port(this,"depth map",OP_PORT_TYPE_TEXTURE));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+this.depthTex=this.addInPort(new CABLES.Port(this,"depth map",CABLES.OP_PORT_TYPE_TEXTURE));
 
-var tex1=this.addInPort(new Port(this,"tex",OP_PORT_TYPE_TEXTURE));
-var tex2=this.addInPort(new Port(this,"tex 1",OP_PORT_TYPE_TEXTURE));
-var tex3=this.addInPort(new Port(this,"tex 2",OP_PORT_TYPE_TEXTURE));
-var tex4=this.addInPort(new Port(this,"tex 3",OP_PORT_TYPE_TEXTURE));
+var tex1=this.addInPort(new CABLES.Port(this,"tex",CABLES.OP_PORT_TYPE_TEXTURE));
+var tex2=this.addInPort(new CABLES.Port(this,"tex 1",CABLES.OP_PORT_TYPE_TEXTURE));
+var tex3=this.addInPort(new CABLES.Port(this,"tex 2",CABLES.OP_PORT_TYPE_TEXTURE));
+var tex4=this.addInPort(new CABLES.Port(this,"tex 3",CABLES.OP_PORT_TYPE_TEXTURE));
 
-this.farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
-this.nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
+this.farPlane=this.addInPort(new CABLES.Port(this,"farplane",CABLES.OP_PORT_TYPE_VALUE));
+this.nearPlane=this.addInPort(new CABLES.Port(this,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
 
-// var distNear=this.addInPort(new Port(this,"distance near",OP_PORT_TYPE_VALUE,{'display':'range'}));
-var distFar=this.addInPort(new Port(this,"distance far",OP_PORT_TYPE_VALUE,{'display':'range'}));
+// var distNear=this.addInPort(new CABLES.Port(this,"distance near",CABLES.OP_PORT_TYPE_VALUE,{'display':'range'}));
+var distFar=this.addInPort(new CABLES.Port(this,"distance far",CABLES.OP_PORT_TYPE_VALUE,{'display':'range'}));
 
-var stepWidth=this.addInPort(new Port(this,"step width",OP_PORT_TYPE_VALUE,{}));
+var stepWidth=this.addInPort(new CABLES.Port(this,"step width",CABLES.OP_PORT_TYPE_VALUE,{}));
 
-var showDistances=this.addInPort(new Port(this,"showDistances",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var showDistances=this.addInPort(new CABLES.Port(this,"showDistances",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 showDistances.set(false);
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+// this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision mediump float;'
@@ -126,13 +126,13 @@ var uniDistFar=new CGL.Uniform(shader,'f','distFar',distFar.get());
 var uniStepWidth=new CGL.Uniform(shader,'f','stepWidth',stepWidth.get());
 
 
-this.farPlane.onValueChanged=function()
+this.farPlane.onChange=function()
 {
     uniFarplane.setValue(self.farPlane.val);
 };
 self.farPlane.val=5.0;
 
-this.nearPlane.onValueChanged=function()
+this.nearPlane.onChange=function()
 {
     uniNearplane.setValue(self.nearPlane.val);
 };
@@ -162,20 +162,20 @@ this.render.onTriggered=function()
     // first pass
 
     cgl.currentTextureEffect.bind();
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex1.get().tex );
+    cgl.setTexture(0,tex1.get().tex);
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex1.get().tex );
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.depthTex.get().tex );
+    cgl.setTexture(1,self.depthTex.get().tex);
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.depthTex.get().tex );
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex2.get().tex );
+    cgl.setTexture(2,tex2.get().tex);
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex2.get().tex );
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE3);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex3.get().tex );
+    cgl.setTexture(3,tex3.get().tex);
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex3.get().tex );
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE4);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex4.get().tex );
+    cgl.setTexture(4,tex4.get().tex);
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex4.get().tex );
 
 
     cgl.currentTextureEffect.finish();

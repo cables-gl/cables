@@ -1,18 +1,12 @@
-op.name="ChromaticAberration";
+const render=op.inTrigger('render');
+const pixel=op.inValue("Pixel",5);
+const lensDistort=op.inValueSlider("Lens Distort",0);
+const textureMask=op.inTexture("Mask");
+const doSmooth=op.inValueBool("Smooth",false);
+const trigger=op.outTrigger('trigger');
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var pixel=op.inValue("Pixel",5);
-var lensDistort=op.inValueSlider("Lens Distort",0);
-
-var textureMask=op.inTexture("Mask");
-
-var doSmooth=op.inValueBool("Smooth",false);
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 doSmooth.onChange=function()
 {
@@ -26,18 +20,16 @@ textureMask.onChange=function()
         else shader.removeDefine("MASK");
 };
 
-
 shader.setSource(shader.getDefaultVertexShader(),attachments.chromatic_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniPixel=new CGL.Uniform(shader,'f','pixel',0);
 var uniOnePixel=new CGL.Uniform(shader,'f','onePixel',0);
 var unitexMask=new CGL.Uniform(shader,'t','texMask',1);
-
 var unilensDistort=new CGL.Uniform(shader,'f','lensDistort',lensDistort);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 
@@ -47,17 +39,9 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
-    
-    if(textureMask.get())
-    {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, textureMask.get().tex );
-        
-    }
-    
-    
+    cgl.setTexture(0, texture.tex );
+
+    if(textureMask.get()) cgl.setTexture(1, textureMask.get().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

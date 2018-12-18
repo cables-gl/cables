@@ -1,4 +1,3 @@
-
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI float r;
@@ -12,7 +11,7 @@ float lumi(vec3 color)
 
 void main()
 {
-   vec3 base=texture2D(tex,texCoord).rgb;
+   vec3 base=texture(tex,texCoord).rgb;
    float l=lumi(base);
 
    #ifdef TONE_MID
@@ -25,5 +24,5 @@ void main()
    
    l=l*l;
    vec3 color=base+vec3(l*r*0.1,l*g*0.1,l*b*0.1);
-   gl_FragColor = vec4(color,1.0);
+   outColor= vec4(color,1.0);
 }

@@ -1,0 +1,33 @@
+{
+    "summary": "performs a math operations on two arrays",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "andro",
+    "id": "f31a1764-ce14-41de-9b3f-dc2fe249bb52",
+    "created": 1537345902425,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "array 0"
+            },
+            {
+                "type": "3",
+                "name": "array 1"
+            },
+            {
+                "type": "0",
+                "name": "Math function",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array result"
+            }
+        ],
+        "name": "Ops.Array.ArrayMath"
+    }
+}

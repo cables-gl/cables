@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -18,7 +19,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Vibrance"
     },
-    "updated": 1508766498364,
+    "updated": 1540822536034,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9c71c980-e439-4397-9c2b-c2ae085eaed9",

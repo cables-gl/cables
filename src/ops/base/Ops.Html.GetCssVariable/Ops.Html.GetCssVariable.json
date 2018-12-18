@@ -1,0 +1,30 @@
+{
+    "id": "ef03f407-e365-47c7-9829-be54ba53c54d",
+    "updated": 1543861003499,
+    "authorName": "pandur",
+    "created": 1543860974763,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "5",
+                "name": "Var Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.User.pandur.getCssVariable"
+    },
+    "summary": "gets current value of CSS Variable",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

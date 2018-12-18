@@ -1,0 +1,35 @@
+{
+    "updated": 1535365770336,
+    "authorName": "pandur",
+    "id": "0df4242f-57d1-4219-b889-a713787642b7",
+    "created": 1534243130579,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Uniform",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Exp.Gl.Shader.SetUniformValue"
+    },
+    "summary": "set a uniform value of the current shader",
+    "docs": {
+        "ports": []
+    }
+}

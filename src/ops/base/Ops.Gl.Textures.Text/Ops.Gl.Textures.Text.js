@@ -1,23 +1,21 @@
-op.name='TextureText';
+var text=op.addInPort(new CABLES.Port(op,"text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
+var inFontSize=op.addInPort(new CABLES.Port(op,"fontSize"));
+var maximize=op.addInPort(new CABLES.Port(op,"Maximize Size",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var texWidth=op.addInPort(new CABLES.Port(op,"texture width"));
+var texHeight=op.addInPort(new CABLES.Port(op,"texture height"));
+var align=op.addInPort(new CABLES.Port(op,"align",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
+var valign=op.addInPort(new CABLES.Port(op,"vertical align",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['top','center','bottom']}));
+var font=op.addInPort(new CABLES.Port(op,"font",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+var lineDistance=op.addInPort(new CABLES.Port(op,"line distance"));
+var border=op.addInPort(new CABLES.Port(op,"border"));
+var doRefresh=op.inTriggerButton("Refresh");
 
-var text=op.addInPort(new Port(op,"text",OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
-var inFontSize=op.addInPort(new Port(op,"fontSize"));
-var maximize=op.addInPort(new Port(op,"Maximize Size",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var texWidth=op.addInPort(new Port(op,"texture width"));
-var texHeight=op.addInPort(new Port(op,"texture height"));
-var align=op.addInPort(new Port(op,"align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['left','center','right']}));
-var valign=op.addInPort(new Port(op,"vertical align",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['top','center','bottom']}));
-var font=op.addInPort(new Port(op,"font",OP_PORT_TYPE_VALUE,{type:'string'}));
-var lineDistance=op.addInPort(new Port(op,"line distance"));
-var border=op.addInPort(new Port(op,"border"));
-var doRefresh=op.inFunctionButton("Refresh");
+var cachetexture=op.inValueBool("Reuse Texture",true);
 
-// var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE));
+// var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");
-var outRatio=op.addOutPort(new Port(op,"Ratio",OP_PORT_TYPE_VALUE));
-
-
-
+var outRatio=op.addOutPort(new CABLES.Port(op,"Ratio",CABLES.OP_PORT_TYPE_VALUE));
+textureOut.ignoreValueSerialize=true;
 
 var cgl=op.patch.cgl;
 
@@ -37,6 +35,8 @@ fontImage.id = "texturetext_"+CABLES.generateUUID();
 fontImage.style.display = "none";
 var body = document.getElementsByTagName("body")[0];
 body.appendChild(fontImage);
+
+
 
 var ctx = fontImage.getContext('2d');
 
@@ -74,12 +74,16 @@ function refresh()
         ctx.stroke();
     }
 
+    var i=0;
+
     // if(text.get())
     {
         var txt=(text.get()+'').replace(/<br\/>/g, '\n');
-        
-        if(txt=='0')txt=' ';
+        var txt=(text.get()+'').replace(/<br>/g, '\n');
+
         var strings = txt.split("\n");
+
+
         var posy=0,i=0;
 
         if(maximize.get())
@@ -105,7 +109,7 @@ function refresh()
             while(maxWidth>ctx.canvas.width || maxHeight>ctx.canvas.height);
         }
 
-        if(valign.get()=='center') 
+        if(valign.get()=='center')
         {
             var maxy=(strings.length-1.5)*fontSize+parseFloat(lineDistance.get());
             posy=ctx.canvas.height / 2-maxy/2;
@@ -125,24 +129,25 @@ function refresh()
     ctx.restore();
     outRatio.set(ctx.canvas.height/ctx.canvas.width);
 
-    if(textureOut.get()) textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
-        else textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
 
-    textureOut.get().unpackAlpha=false;
+    if(!cachetexture.get() || !textureOut.get()) textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
+        else textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
+
+    textureOut.get().unpackAlpha=true;
 }
 
-align.onValueChanged=refresh;
-valign.onValueChanged=refresh;
-text.onValueChanged=refresh;
-inFontSize.onValueChanged=refresh;
-font.onValueChanged=refresh;
-lineDistance.onValueChanged=refresh;
-maximize.onValueChanged=refresh;
+align.onChange=refresh;
+valign.onChange=refresh;
+text.onChange=refresh;
+inFontSize.onChange=refresh;
+font.onChange=refresh;
+lineDistance.onChange=refresh;
+maximize.onChange=refresh;
 
-texWidth.onValueChanged=reSize;
-texHeight.onValueChanged=reSize;
+texWidth.onChange=reSize;
+texHeight.onChange=reSize;
 
-border.onValueChanged=refresh;
+border.onChange=refresh;
 
 text.set('cables');
 reSize();

@@ -1,5 +1,4 @@
 // #extension GL_OES_standard_derivatives : enable
-// precision highp float;
 
 {{MODULES_HEAD}}
 
@@ -175,7 +174,7 @@ vec4 toGamma_3_9(vec4 v) {
 
 //account for gamma-corrected images
 vec4 textureLinear(sampler2D uTex, vec2 uv) {
-  return toLinear_2_7(texture2D(uTex, uv));
+  return toLinear_2_7(texture(uTex, uv));
 }
 
 
@@ -200,20 +199,20 @@ void main()
     vec2 uv = texCoord * UV_SCALE;
 
     #ifdef HAS_TEXTURE_DIFFUSE
-        vec3 diffuseColor = texture2D(texDiffuse, uv).rgb;
+        vec3 diffuseColor = texture(texDiffuse, uv).rgb;
     #endif
     #ifndef HAS_TEXTURE_DIFFUSE
         vec3 diffuseColor = vec3(r,g,b);
     #endif
 
     #ifdef HAS_TEXTURE_NORMAL
-        vec3 normalMap = texture2D(texNormal, uv).rgb * 2.0 - 1.0;
+        vec3 normalMap = texture(texNormal, uv).rgb * 2.0 - 1.0;
         normalMap=normalize(normalMatrix * normalMap);
     #endif
 
     float specStrength = specularStrength;
     #ifdef HAS_TEXTURE_SPECULAR
-        specStrength = specularStrength*texture2D(texSpecular, uv).r;
+        specStrength = specularStrength*texture(texSpecular, uv).r;
     #endif
 
     vec3 specular=vec3(0.0);
@@ -271,7 +270,7 @@ void main()
     {{MODULE_COLOR}}
 
 
-    gl_FragColor = col;
+    outColor= col;
     // gl_FragColor.a =a;
 }
 

@@ -1,20 +1,28 @@
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
+const a = op.inValueSlider("a", 1.0);
+const texOut=op.outTexture("texture_out");
 
-var texOut=op.outTexture("texture_out");
+r.setUiAttribs({ colorPick: true });
+const cgl=op.patch.cgl;
 
-var cgl=op.patch.cgl;
 var fb=null;
 
-var render=function()
+r.onChange=
+    g.onChange=
+    b.onChange=
+    a.onChange=render;
+
+render();
+
+function render()
 {
     if(!fb)
     {
         if(cgl.glVersion==1) fb=new CGL.Framebuffer(cgl,4,4);
-        else fb=new CGL.Framebuffer2(cgl,4,4);
-        fb.setFilter(CGL.Texture.FILTER_NEAREST);
+            else fb=new CGL.Framebuffer2(cgl,4,4);
+        fb.setFilter(CGL.Texture.FILTER_MIPMAP);
     }
 
     fb.renderStart();
@@ -23,16 +31,4 @@ var render=function()
     fb.renderEnd();
 
     texOut.set(fb.getTextureColor());
-};
-
-r.set(0.3);
-g.set(0.3);
-b.set(0.3);
-a.set(1.0);
-
-r.onValueChange(render);
-g.onValueChange(render);
-b.onValueChange(render);
-a.onValueChange(render);
-
-render();
+}

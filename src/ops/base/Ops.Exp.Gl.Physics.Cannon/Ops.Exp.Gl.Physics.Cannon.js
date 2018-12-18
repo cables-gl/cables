@@ -1,6 +1,4 @@
-op.name="Cannon";
-
-var exec=op.inFunction("Exec");
+var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
 var inRadius=op.inValue("Radius");
 
@@ -16,17 +14,17 @@ var dirZ=op.inValue("dir Z");
 
 var speed=op.inValue("Speed");
 
-var inReset=op.inFunctionButton("Reset");
-var inSpawn=op.inFunctionButton("Spawn");
+var inReset=op.inTriggerButton("Reset");
+var inSpawn=op.inTriggerButton("Spawn");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var outRadius=op.outValue("Out Radius");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
 
-var outCollision=op.outFunction("Collision");
+var outCollision=op.outTrigger("Collision");
 
 var cgl=op.patch.cgl;
 
@@ -88,14 +86,14 @@ function spawn()
         // console.log("Contact between bodies:",e.contact);
     });
 
-    
+
 }
 
 function setup()
 {
     var world=cgl.frameStore.world;
     if(!world)return;
-    
+
     // if(body)world.removeBody(body);
 
     lastWorld=world;
@@ -116,42 +114,42 @@ function render()
     for(var i=0;i<bodies.length;i++)
     {
         var body=bodies[i];
-        // if(!body)return; 
-    
-        vec3.set(vec, 
+        // if(!body)return;
+
+        vec3.set(vec,
             body.position.x,
             body.position.y,
             body.position.z
             );
-        
+
         quat.set(q,
             body.quaternion.x,
             body.quaternion.y,
             body.quaternion.z,
             body.quaternion.w);
         quat.invert(q,q);
-    
+
         cgl.pushModelMatrix();
-    
+
         mat4.fromRotationTranslation(trMat,q,vec);
-        mat4.mul(cgl.mvMatrix,trMat,cgl.mvMatrix);
-    
+        mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
+
         if(doRender.get())m.render(cgl,inRadius.get()*2);
-        
+
         outX.set(body.position.x);
         outY.set(body.position.y);
         outZ.set(body.position.z);
-     
+
         if(collided)
         {
             collided=false;
             outCollision.trigger();
         }
-        
+
         CABLES.physicsCurrentBody=body;
-        
+
         next.trigger();
-        
+
         CABLES.physicsCurrentBody=null;
         cgl.popModelMatrix();
     }

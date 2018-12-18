@@ -1,0 +1,42 @@
+{
+    "updated": 1535461353075,
+    "authorName": "pandur",
+    "id": "84e1908b-fc17-47db-9ba1-bc38d7809076",
+    "created": 1535453536641,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exe"
+            },
+            {
+                "type": "3",
+                "name": "Array 1"
+            },
+            {
+                "type": "3",
+                "name": "Array 2"
+            },
+            {
+                "type": "0",
+                "name": "perc",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.InterpolateMatrix"
+    },
+    "summary": "interpolate between two matrices",
+    "docs": {
+        "ports": []
+    }
+}

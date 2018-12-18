@@ -68,7 +68,7 @@ function getUnversionedOpName(op) {
 }
 
 /**
- * Checks if an array contrains an element
+ * Checks if an array contains an element
  */
 function arrayContains(arr, element) {
     return (arr.indexOf(element) > -1);

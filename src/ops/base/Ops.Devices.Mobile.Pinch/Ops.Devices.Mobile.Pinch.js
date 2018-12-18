@@ -6,7 +6,7 @@ var initialScale = 1.0;
 var enabledPort = op.inValueBool('Enabled', true);
 var minScalePort = op.inValue('Min Scale', 0.0);
 var maxScalePort = op.inValue('Max Scale', 4.0);
-var resetScalePort = op.inFunctionButton('Reset Scale');
+var resetScalePort = op.inTriggerButton('Reset Scale');
 
 // variables
 var scale = initialScale;

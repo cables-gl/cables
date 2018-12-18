@@ -1,11 +1,11 @@
 op.name='Lines';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var pointSize=op.addInPort(new Port(op,"pointSize"));
-var mode=op.addInPort(new Port(op,"Draw Mode",OP_PORT_TYPE_VALUE ,{
+var render=op.inTrigger('render');
+var pointSize=op.addInPort(new CABLES.Port(op,"pointSize"));
+var mode=op.addInPort(new CABLES.Port(op,"Draw Mode",CABLES.OP_PORT_TYPE_VALUE ,{
     display:'dropdown',values:['Line Strip','Line Loop','Lines']} ));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 pointSize.set(2);
 
@@ -15,7 +15,7 @@ var mod=null;
 var uniPointSize=null;
 var drawMode=cgl.gl.LINE_STRIP;
 
-mode.onValueChanged=function()
+mode.onChange=function()
 {
     drawMode=cgl.gl.LINES;
     if(mode.get()=='Line Loop')drawMode=cgl.gl.LINE_LOOP;
@@ -23,7 +23,7 @@ mode.onValueChanged=function()
         else drawMode=cgl.gl.LINE_STRIP;
 };
 
-pointSize.onValueChanged=function()
+pointSize.onChange=function()
 {
     if(uniPointSize)uniPointSize.setValue(pointSize.get());
 };

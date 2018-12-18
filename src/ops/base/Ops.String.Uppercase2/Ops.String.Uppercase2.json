@@ -1,0 +1,21 @@
+{
+    "id": "3f7e6ede-63b6-4262-9dcd-176b43374c4d",
+    "updated": 1543065766513,
+    "authorName": "pandur",
+    "created": 1543065730037,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.Uppercase2"
+    }
+}

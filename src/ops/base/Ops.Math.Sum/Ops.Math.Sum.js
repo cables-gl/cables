@@ -1,15 +1,14 @@
-var result=op.addOutPort(new Port(op,"result"));
-var number1=op.inValue("number1");
-var number2=op.inValue("number2");
+const
+    number1=op.inValueFloat("number1",1),
+    number2=op.inValueFloat("number2",1),
+    result=op.outValue("result");
+
+number1.onChange=
+number2.onChange=exec;
 
 function exec()
 {
-    var v=parseFloat(number1.get())+parseFloat(number2.get());
+    var v=number1.get()+number2.get();
     if(!isNaN(v)) result.set( v );
 }
 
-number1.onValueChanged=exec;
-number2.onValueChanged=exec;
-
-number1.set(1);
-number2.set(1);

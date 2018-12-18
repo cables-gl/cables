@@ -8,35 +8,43 @@
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "Height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -47,7 +55,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Rectangle"
     },
-    "updated": 1510252891992,
+    "updated": 1534583487413,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "145a9ead-0e4a-4df4-ad72-b9f3c7bbc1bb",

@@ -5,17 +5,17 @@ var cgl=this.patch.cgl;
 
 this.name='SSAO';
 
-this.render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-this.farPlane=this.addInPort(new Port(this,"farplane",OP_PORT_TYPE_VALUE));
-this.nearPlane=this.addInPort(new Port(this,"nearplane",OP_PORT_TYPE_VALUE));
-this.amount=this.addInPort(new Port(this,"amount",OP_PORT_TYPE_VALUE,{display:'range'}));
-this.dist=this.addInPort(new Port(this,"dist",OP_PORT_TYPE_VALUE,{display:'range'}));
+this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
+this.farPlane=this.addInPort(new CABLES.Port(this,"farplane",CABLES.OP_PORT_TYPE_VALUE));
+this.nearPlane=this.addInPort(new CABLES.Port(this,"nearplane",CABLES.OP_PORT_TYPE_VALUE));
+this.amount=this.addInPort(new CABLES.Port(this,"amount",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+this.dist=this.addInPort(new CABLES.Port(this,"dist",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 
-this.image=this.addInPort(new Port(this,"image",OP_PORT_TYPE_TEXTURE));
-this.trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+this.image=this.addInPort(new CABLES.Port(this,"image",CABLES.OP_PORT_TYPE_TEXTURE));
+this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
 
 var shader=new CGL.Shader(cgl);
-this.onLoaded=shader.compile;
+// this.onLoaded=shader.compile;
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -114,25 +114,25 @@ var uniDist=new CGL.Uniform(shader,'f','dist',1.0);
 
 
 
-this.dist.onValueChanged=function()
+this.dist.onChange=function()
 {
     uniDist.setValue(self.dist.val*5);
 };
 self.dist.val=0.2;
 
-this.amount.onValueChanged=function()
+this.amount.onChange=function()
 {
     uniAmount.setValue(self.amount.val);
 };
 self.amount.val=1.0;
 
-this.farPlane.onValueChanged=function()
+this.farPlane.onChange=function()
 {
     uniFarplane.setValue(self.farPlane.val);
 };
 self.farPlane.val=5.0;
 
-this.nearPlane.onValueChanged=function()
+this.nearPlane.onChange=function()
 {
     uniNearplane.setValue(self.nearPlane.val);
 };
@@ -147,11 +147,11 @@ this.render.onTriggered=function()
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
+        cgl.setTexture(0,self.image.val.tex);
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, self.image.val.tex );
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(1,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+        
 
 
         cgl.currentTextureEffect.finish();

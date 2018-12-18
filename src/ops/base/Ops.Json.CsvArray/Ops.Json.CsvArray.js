@@ -1,7 +1,7 @@
 
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_ARRAY));
-var len=op.addOutPort(new Port(op,"num items",OP_PORT_TYPE_VALUE));
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var result=op.addOutPort(new CABLES.Port(op,"result",CABLES.OP_PORT_TYPE_ARRAY));
+var len=op.addOutPort(new CABLES.Port(op,"num items",CABLES.OP_PORT_TYPE_VALUE));
 
 var reload=function()
 {
@@ -17,4 +17,4 @@ var reload=function()
 
 };
 
-filename.onValueChanged=reload;
+filename.onChange=reload;

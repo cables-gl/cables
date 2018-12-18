@@ -1,7 +1,5 @@
-op.name="Interlace";
-
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var amount=op.inValueSlider("amount",0.5);//op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{display:'range'}));
+var render=op.inTrigger('render');
+var amount=op.inValueSlider("amount",0.5);//op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 var lum=op.inValueSlider("Lumi Scale",0.9);
 var lineSize=op.inValue("Line Size",4);
 var displace=op.inValueSlider("Displacement",0);
@@ -9,11 +7,11 @@ var displace=op.inValueSlider("Displacement",0);
 var add=op.inValue("Add",0.02);
 var inScroll=op.inValue("scroll",0);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+
 
 
 
@@ -35,8 +33,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

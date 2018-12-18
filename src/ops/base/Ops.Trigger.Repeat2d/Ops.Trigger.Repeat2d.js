@@ -1,49 +1,38 @@
-
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-
-var numx=op.inValueInt("num x");
-var numy=op.inValueInt("num y");
-var mul=op.addInPort(new Port(op,"mul"));
-// var center=op.addInPort(new Port(op,"center",OP_PORT_TYPE_VALUE,{"display":"bool"}));
-var center=op.inValueBool("center");
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var outX=op.addOutPort(new Port(op,"x"));
-var outY=op.addOutPort(new Port(op,"y"));
-var idx=op.addOutPort(new Port(op,"index"));
-
-
-mul.set(1);
-numx.set(5);
-numy.set(5);
+const
+    exe=op.inTrigger("exe"),
+    numx=op.inValueInt("num x",5),
+    numy=op.inValueInt("num y",5),
+    mul=op.inValueFloat("mul",1),
+    center=op.inValueBool("center"),
+    trigger=op.outTrigger('trigger'),
+    outX=op.outValue("x"),
+    outY=op.outValue("y"),
+    idx=op.outValue("index"),
+    total=op.outValue("total iterations");
 
 exe.onTriggered=function()
 {
-    op.patch.instancing.pushLoop((numx.get()+1)*numy.get());
-
     var subX=0;
     var subY=0;
+    const m=mul.get();
+    const nx=numx.get();
+    const ny=numy.get();
+
     if(center.get())
     {
-        subX=( (numx.get()-1)*mul.get())/2.0;
-        subY=( (numy.get()-1)*mul.get())/2.0;
+        subX=((nx-1)*m)/2.0;
+        subY=((ny-1)*m)/2.0;
     }
 
-    var m=mul.get();
-    // for(var y=numy.get()-1;y>-1;y--)
-    for(var y=0;y<numy.get();y++)
+    for(var y=0;y<ny;y++)
     {
-        outY.set( (y*m) - subY);
-        // for(var x=numx.get()-1;x>-1;x--)
-        for(var x=0;x<numx.get();x++)
+        outY.set((y*m)-subY);
+        for(var x=0;x<nx;x++)
         {
-            outX.set( (x*m) - subX);
-            idx.set(x+y*numx.get());
+            outX.set((x*m)-subX);
+            idx.set(x+y*nx);
             trigger.trigger();
-            op.patch.instancing.increment();
-
         }
     }
-    op.patch.instancing.popLoop();
-
+    total.set(numx.get() * numy.get());
 };

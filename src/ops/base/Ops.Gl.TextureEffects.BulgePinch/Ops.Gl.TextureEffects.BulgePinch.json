@@ -7,19 +7,23 @@
             },
             {
                 "type": "0",
-                "name": "Radius"
+                "name": "Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Center X"
+                "name": "Center X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Center Y"
+                "name": "Center Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -33,5 +37,9 @@
     "summary": "bulge and pinch an image (deform,stretch,distort)",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1540923253862,
+    "authorName": "pandur",
+    "id": "25696840-bd64-463e-9301-964a81385bfb",
+    "created": 1540923201757
 }

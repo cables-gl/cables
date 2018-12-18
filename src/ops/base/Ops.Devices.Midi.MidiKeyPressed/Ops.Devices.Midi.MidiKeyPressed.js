@@ -5,8 +5,8 @@ var eventIn = op.inObject("Event Input");
 
 // output ports
 var eventOut = op.outObject("Event Output");
-var outPressed = op.outFunction("Key Pressed");
-var outReleased = op.outFunction("Key Released");
+var outPressed = op.outTrigger("Key Pressed");
+var outReleased = op.outTrigger("Key Released");
 
 var outNote = op.outValue("Note");
 var outVelocity = op.outValue("Velocity");
@@ -16,7 +16,7 @@ var outDevice = op.outValue("Device");
 var CMD_NOTE_ON = 9;
 var CMD_NOTE_OFF = 8;
 
-eventIn.onValueChanged=function() {
+eventIn.onChange=function() {
   var event=eventIn.get();
   if(event && event.cmd == 9 || event.cmd == 8) {
     outDevice.set(event.deviceName);

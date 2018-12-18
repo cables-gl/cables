@@ -8,15 +8,18 @@
             },
             {
                 "type": "0",
-                "name": "Invert"
+                "name": "invert",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Black White"
+                "name": "black white",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "amthresholdount"
+                "name": "amthresholdount",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -29,5 +32,9 @@
     },
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1540923386021,
+    "authorName": "pandur",
+    "id": "2175ae00-989c-4045-a52e-742d5c30bf4e",
+    "created": 1540923285172
 }

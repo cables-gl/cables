@@ -1,5 +1,5 @@
 
-var exe=op.inFunction("Render");
+var exe=op.inTrigger("Render");
 var geom=op.inObject("Geometry");
 
 var num=op.inValueInt("Count",1000);
@@ -14,6 +14,10 @@ var scaleX=op.inValueSlider("Scale X",1);
 var scaleY=op.inValueSlider("Scale Y",1);
 var scaleZ=op.inValueSlider("Scale Z",1);
 
+var rotX=op.inValueSlider("Rotate X",1);
+var rotY=op.inValueSlider("Rotate Y",1);
+var rotZ=op.inValueSlider("Rotate Z",1);
+
 spread.onChange=
     shape.onChange=
     num.onChange=
@@ -22,6 +26,9 @@ spread.onChange=
     scaleX.onChange=
     scaleZ.onChange=
     scaleY.onChange=
+    rotY.onChange=
+    rotX.onChange=
+    rotZ.onChange=
     geom.onChange=
     seed.onChange=prepareLater;
 
@@ -81,7 +88,7 @@ function removeModule()
 
 function doRender()
 {
-    if(needsPrepare)prepare();
+    if(needsPrepare || !mesh) prepare();
     
     if(mesh)
     {
@@ -110,10 +117,7 @@ function doRender()
 
         mesh.render(shader);
     }
-    else
-    {
-        prepare();
-    }
+
 }
 
 
@@ -131,7 +135,7 @@ function reset()
         var tempv=vec3.create();
         for(i=0;i<num.get();i++)
         {
-            rndq=[Math.seededRandom(),Math.seededRandom(),Math.seededRandom(),Math.seededRandom()];
+            var rndq=[Math.seededRandom(),Math.seededRandom(),Math.seededRandom(),Math.seededRandom()];
             quat.normalize(rndq,rndq);
             
             if(i%2===0) tempv[0]=-size.get()/2;
@@ -176,9 +180,9 @@ function reset()
     for(i=0;i<num.get();i++)
     {
         randomsRot.push(vec3.fromValues(
-        Math.seededRandom()*360*CGL.DEG2RAD,
-        Math.seededRandom()*360*CGL.DEG2RAD,
-        Math.seededRandom()*360*CGL.DEG2RAD
+        Math.seededRandom()*360*CGL.DEG2RAD*rotX.get(),
+        Math.seededRandom()*360*CGL.DEG2RAD*rotY.get(),
+        Math.seededRandom()*360*CGL.DEG2RAD*rotZ.get()
         ));
     }
     

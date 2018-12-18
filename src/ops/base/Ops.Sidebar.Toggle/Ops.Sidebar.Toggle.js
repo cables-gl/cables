@@ -3,7 +3,10 @@ const DEFAULT_VALUE_DEFAULT = true;
 // inputs
 var parentPort = op.inObject('link');
 var labelPort = op.inValueString('Text', 'Toggle');
+const inputValuePort = op.inValueBool('Input', DEFAULT_VALUE_DEFAULT);
+const setDefaultValueButtonPort = op.inTriggerButton('Set Default');
 var defaultValuePort = op.inValueBool('Default', DEFAULT_VALUE_DEFAULT);
+defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 
 // outputs
 var siblingsPort = op.outObject('childs');
@@ -34,23 +37,52 @@ el.appendChild(input);
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
 defaultValuePort.onChange = onDefaultValueChanged;
+inputValuePort.onChange = onInputValuePortChanged;
 op.onDelete = onDelete;
+setDefaultValueButtonPort.onTriggered = setDefaultValue;
 
 // functions
+
+function setDefaultValue() {
+  const defaultValue = inputValuePort.get();
+  defaultValuePort.set(defaultValue);
+  valuePort.set(defaultValue);
+  if(CABLES.UI  && gui.patch().isCurrentOp(op)){
+    gui.patch().showOpParams(op); /* update DOM */
+  }
+}
 
 function onInputClick() {
     el.classList.toggle('sidebar__toggle--active')
     if(el.classList.contains('sidebar__toggle--active')) {
         valuePort.set(true);
+        inputValuePort.set(true);
         value.textContent = 'true';
     } else {
         valuePort.set(false);
+        inputValuePort.set(false);
         value.textContent = 'false';
     }
-    
+    if(CABLES.UI  && gui.patch().isCurrentOp(op)){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
+}
+
+function onInputValuePortChanged() {
+    var inputValue = inputValuePort.get();
+    if(inputValue) {
+        el.classList.add('sidebar__toggle--active');
+        valuePort.set(true);
+        value.textContent = 'true';
+    } else {
+        el.classList.remove('sidebar__toggle--active');
+        valuePort.set(false);
+        value.textContent = 'false';
+    }
 }
 
 function onDefaultValueChanged() {
+    /*
     var defaultValue = defaultValuePort.get();
     if(defaultValue) {
         el.classList.add('sidebar__toggle--active');
@@ -59,13 +91,14 @@ function onDefaultValueChanged() {
         el.classList.remove('sidebar__toggle--active');
         valuePort.set(false);
     }
+    */
 }
 
 function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Toggle: ' + labelText);    
+        op.setTitle('Toggle: ' + labelText);
     }
 }
 
@@ -77,7 +110,7 @@ function onParentChanged() {
         siblingsPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -100,6 +133,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }

@@ -1,4 +1,3 @@
-op.name="PitchShift";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -26,7 +25,7 @@ op.log('node.get("windowSize")', node.get("windowSize").windowSize);
 var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 var delayTimePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Delay Time", node.delayTime, {"display": "range", "min": DELAY_TIME_MIN, "max": DELAY_TIME_MAX}, node.get("delayTime").delayTime);
 var pitchPort = op.inValue("Pitch", PITCH_DEFAULT);
-var windowSizePort = op.addInPort( new Port( op, "Window Size", OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': WINDOW_SIZE_MIN, 'max': WINDOW_SIZE_MAX }, node.get("windowSize").windowSize ));
+var windowSizePort = op.addInPort( new CABLES.Port( op, "Window Size", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': WINDOW_SIZE_MIN, 'max': WINDOW_SIZE_MAX }, node.get("windowSize").windowSize ));
 var feedbackPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Feedback", node.feedback, {"display": "range", "min": FEEDBACK_MIN, "max": FEEDBACK_MAX}, node.get("feedback").feedback);
 var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, node.get("wet").wet);
 

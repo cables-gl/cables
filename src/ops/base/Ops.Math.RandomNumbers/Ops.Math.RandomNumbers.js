@@ -1,7 +1,7 @@
-var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE));
-var seed=op.addInPort(new Port(op,"random seed"));
-var min=op.addInPort(new Port(op,"Min"));
-var max=op.addInPort(new Port(op,"Max"));
+var index=op.addInPort(new CABLES.Port(op, "index",CABLES.OP_PORT_TYPE_VALUE));
+var seed=op.addInPort(new CABLES.Port(op,"random seed"));
+var min=op.addInPort(new CABLES.Port(op,"Min"));
+var max=op.addInPort(new CABLES.Port(op,"Max"));
 
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
@@ -12,9 +12,9 @@ min.set(-1);
 max.set(1);
 seed.set(Math.round(Math.random()*99999));
 
-max.onValueChanged=init;
-min.onValueChanged=init;
-seed.onValueChanged=init;
+max.onChange=init;
+min.onChange=init;
+seed.onChange=init;
 
 var arr=[];
 init();

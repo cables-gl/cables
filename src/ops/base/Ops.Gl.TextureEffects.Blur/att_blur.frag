@@ -1,11 +1,11 @@
 IN vec2 texCoord;
-uniform sampler2D tex;
-uniform float dirX;
-uniform float dirY;
-uniform float amount;
+UNI sampler2D tex;
+UNI float dirX;
+UNI float dirY;
+UNI float amount;
 
 #ifdef HAS_MASK
-    uniform sampler2D imageMask;
+    UNI sampler2D imageMask;
 #endif
 
 float random(vec3 scale, float seed)
@@ -20,10 +20,10 @@ void main()
 
     float am=amount;
     #ifdef HAS_MASK
-        am=amount*texture2D(imageMask,texCoord).r;
+        am=amount*texture(imageMask,texCoord).r;
         if(am<=0.02)
         {
-            gl_FragColor=texture2D(tex, texCoord);
+            outColor=texture(tex, texCoord);
             return;
         }
     #endif
@@ -31,7 +31,7 @@ void main()
    vec2 delta=vec2(dirX*am*0.01,dirY*am*0.01);
 
 
-    
+
     float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);
 
 
@@ -46,15 +46,15 @@ void main()
     {
         float percent = (t + offset - 0.5) / range;
         float weight = 1.0 - abs(percent);
-        vec4 smpl = texture2D(tex, texCoord + delta * percent);
-        
+        vec4 smpl = texture(tex, texCoord + delta * percent);
+
         smpl.rgb *= smpl.a;
 
         color += smpl * weight;
         total += weight;
     }
 
-    gl_FragColor = color / total;
+    outColor= color / total;
 
-    gl_FragColor.rgb /= gl_FragColor.a + 0.00001;
+    outColor.rgb /= outColor.a + 0.00001;
 }

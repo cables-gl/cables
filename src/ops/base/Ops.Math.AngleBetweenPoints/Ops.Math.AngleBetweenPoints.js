@@ -1,5 +1,3 @@
-op.name="AngleBetweenPoints";
-
 var outAngle=op.outValue("Angle",0);
 
 var p1x=op.inValue("Point 1 X");

@@ -1,0 +1,25 @@
+{
+    "updated": 1537364403098,
+    "authorName": "pandur",
+    "id": "a16c565a-574d-48d2-a95e-1bdce96dc00f",
+    "created": 1535879032157,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Shader.ErrorMaterial"
+    },
+    "summary": "draw meshes using the cables error material shader",
+    "docs": {
+        "ports": []
+    }
+}

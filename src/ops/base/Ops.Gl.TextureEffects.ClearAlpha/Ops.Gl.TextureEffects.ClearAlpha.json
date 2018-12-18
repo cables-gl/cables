@@ -1,0 +1,26 @@
+{
+    "updated": 1540811817369,
+    "authorName": "pandur",
+    "id": "6c33809b-aa32-4ca2-9903-4dbba1ffa299",
+    "created": 1540811679686,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.ClearAlpha"
+    }
+}

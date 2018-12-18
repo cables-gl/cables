@@ -1,16 +1,16 @@
-var exec=op.inFunction("Exec");
-var showFrag=op.inFunctionButton("Show Fragment");
-var showVert=op.inFunctionButton("Show Vertex");
-var showModules=op.inFunctionButton("Show Modules");
+var exec=op.inTrigger("Exec");
+var showFrag=op.inTriggerButton("Show Fragment");
+var showVert=op.inTriggerButton("Show Vertex");
+var showModules=op.inTriggerButton("Show Modules");
 
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
+var outName=op.outValueString("Name");
 var outNumUniforms=op.outValue("Num Uniforms");
 var outNumAttributes=op.outValue("Num Attributes");
 var outAttributeNames=op.outArray("Arributes Names");
 var outDefines=op.outArray("Num Defines");
-
 var cgl=op.patch.cgl;
 
 var shader=null;
@@ -50,6 +50,7 @@ exec.onTriggered=function()
         outAttributeNames.set(attribNames);
         
         outDefines.set(shader.getDefines());
+        outName.set(shader.getName());
 
         op.error("programnull",null);
     }

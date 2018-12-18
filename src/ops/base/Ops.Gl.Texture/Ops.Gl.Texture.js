@@ -1,32 +1,34 @@
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+var filename=op.inFile("file");
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
-var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var unpackAlpha=op.addInPort(new Port(op,"unpackPreMultipliedAlpha",OP_PORT_TYPE_VALUE,{display:'bool'}));
-
+var flip=op.inValueBool("flip",false);
+var unpackAlpha=op.inValueBool("unpackPreMultipliedAlpha",false);
 
 var textureOut=op.outTexture("texture");
-var width=op.addOutPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var height=op.addOutPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-var loading=op.addOutPort(new Port(op,"loading",OP_PORT_TYPE_VALUE));
+var width=op.outValue("width");
+var height=op.outValue("height");
+var loading=op.outValue("loading");
 var ratio=op.outValue("Aspect Ratio");
 
-flip.set(false);
-unpackAlpha.set(false);
 unpackAlpha.hidePort();
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
 
-flip.onChange=function(){reload();};
-filename.onChange=reload;
+flip.onChange=function(){reloadSoon();};
+filename.onChange=reloadSoon;
 
 tfilter.onChange=onFilterChange;
 wrap.onChange=onWrapChange;
-unpackAlpha.onChange=function(){ reload(); };
+unpackAlpha.onChange=function(){ reloadSoon(); };
 
 var timedLoader=0;
+
+tfilter.set('mipmap');
+wrap.set('repeat');
+
+textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 
 var setTempTexture=function()
 {
@@ -35,21 +37,27 @@ var setTempTexture=function()
 };
 
 var loadingId=null;
-
-function reload(nocache)
+var tex=null;
+function reloadSoon(nocache)
 {
-    if(!loadingId)loadingId=cgl.patch.loading.start('texture',filename.get());
+    // if(!loadingId)loadingId=cgl.patch.loading.start('textureOp',filename.get());
+
+    // if(timedLoader!=0)
+    // {
+    //     console.log('tex load canceled...');
+    // }
     clearTimeout(timedLoader);
     timedLoader=setTimeout(function()
     {
+        // console.log('tex load yay...');
         realReload(nocache);
     },30);
 }
 
 function realReload(nocache)
 {
-    if(!loadingId)loadingId=cgl.patch.loading.start('texture',filename.get());
-    
+    if(!loadingId)loadingId=cgl.patch.loading.start('textureOp',filename.get());
+
     var url=op.patch.getFilePath(String(filename.get()));
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 
@@ -57,11 +65,10 @@ function realReload(nocache)
     {
         loading.set(true);
 
-        var tex=CGL.Texture.load(cgl,url,
+        if(tex)tex.delete();
+        tex=CGL.Texture.load(cgl,url,
             function(err)
             {
-                // console.log('tex loaded!!');
-
                 if(err)
                 {
                     setTempTexture();
@@ -88,8 +95,6 @@ function realReload(nocache)
 
                 textureOut.set(null);
                 textureOut.set(tex);
-                cgl.patch.loading.finished(loadingId);
-                
                 // tex.printInfo();
 
             },{
@@ -105,7 +110,7 @@ function realReload(nocache)
         if(!textureOut.get() && nocache)
         {
         }
-        loading.set(false);
+
         cgl.patch.loading.finished(loadingId);
     }
     else
@@ -122,7 +127,7 @@ function onFilterChange()
     if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
     if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
 
-    reload();
+    reloadSoon();
 }
 
 function onWrapChange()
@@ -131,10 +136,10 @@ function onWrapChange()
     if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
     if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-    reload();
+    reloadSoon();
 }
 
-op.onFileUploaded=function(fn)
+op.onFileChanged=function(fn)
 {
     if(filename.get() && filename.get().indexOf(fn)>-1)
     {
@@ -148,9 +153,4 @@ op.onFileUploaded=function(fn)
 
 
 
-tfilter.set('linear');
-wrap.set('repeat');
-
-
-textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 

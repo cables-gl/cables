@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "levels"
+                "name": "levels",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -21,5 +22,9 @@
     "summary": "reduce number of colors",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1542698343471,
+    "authorName": "pandur",
+    "id": "6828f239-09be-45fd-afab-7962596fd2a4",
+    "created": 1542698279938
 }

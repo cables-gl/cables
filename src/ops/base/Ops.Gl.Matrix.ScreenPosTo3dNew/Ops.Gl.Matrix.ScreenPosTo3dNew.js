@@ -1,13 +1,11 @@
-var exec=op.inFunction("Exec");
+const exec=op.inTrigger("Exec");
+const inX=op.inValue("X");
+const inY=op.inValue("Y");
+const outX=op.outValue("Result X");
+const outY=op.outValue("Result Y");
 
-var inX=op.inValue("X");
-var inY=op.inValue("Y");
-
-var outX=op.outValue("Result X");
-var outY=op.outValue("Result Y");
-
-var mat=mat4.create();
-var cgl=op.patch.cgl;
+const mat=mat4.create();
+const cgl=op.patch.cgl;
 
 exec.onTriggered=calc;
 

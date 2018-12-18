@@ -1,0 +1,1 @@
+result is 1 if value is positive or -1 if value is negative

@@ -1,4 +1,3 @@
-op.name="ControlPattern";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -21,12 +20,12 @@ var TYPE_DEFAULT = "up";
 var node = new Tone.CtrlPattern(VALUES_DEFAULT, TYPE_DEFAULT);
 
 // inputs
-var triggerPort = op.inFunction("Trigger");
+var triggerPort = op.inTrigger("Trigger");
 var valuesPort = op.inArray("Values");
-var typePort = op.addInPort( new Port( op, "Type", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
+var typePort = op.addInPort( new CABLES.Port( op, "Type", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: TYPES } ) );
 
 // output
-var triggerNextPort = op.outFunction("Trigger Next");
+var triggerNextPort = op.outTrigger("Trigger Next");
 var valuePort = op.outValue("Value");
 var indexPort = op.outValue("Index");
 

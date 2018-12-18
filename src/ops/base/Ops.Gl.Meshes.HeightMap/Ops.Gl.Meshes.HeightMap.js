@@ -1,19 +1,17 @@
-op.name="HeightMap";
+var render=op.inTrigger('render');
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+var extrude=op.addInPort(new CABLES.Port(op,"extrude",CABLES.OP_PORT_TYPE_VALUE));
+var mWidth=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var mHeight=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var nRows=op.addInPort(new CABLES.Port(op,"rows",CABLES.OP_PORT_TYPE_VALUE));
+var nColumns=op.addInPort(new CABLES.Port(op,"columns",CABLES.OP_PORT_TYPE_VALUE));
+var sliceTex=op.addInPort(new CABLES.Port(op,"texCoords slice",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var flat=op.addInPort(new CABLES.Port(op,"flat",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
-var extrude=op.addInPort(new Port(op,"extrude",OP_PORT_TYPE_VALUE));
-var mWidth=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var mHeight=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
-var nRows=op.addInPort(new Port(op,"rows",OP_PORT_TYPE_VALUE));
-var nColumns=op.addInPort(new Port(op,"columns",OP_PORT_TYPE_VALUE));
-var sliceTex=op.addInPort(new Port(op,"texCoords slice",OP_PORT_TYPE_VALUE,{display:'bool'}));
-var flat=op.addInPort(new Port(op,"flat",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var trigger=op.outTrigger('trigger');
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var outGeom=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var outGeom=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 outGeom.ignoreValueSerialize=true;
 
 
@@ -34,14 +32,14 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
-extrude.onValueChanged=rebuildGeom;
-mHeight.onValueChanged=rebuildGeom;
-mWidth.onValueChanged=rebuildGeom;
-nRows.onValueChanged=rebuildGeom;
-nColumns.onValueChanged=rebuildGeom;
-flat.onValueChanged=rebuildGeom;
+extrude.onChange=rebuildGeom;
+mHeight.onChange=rebuildGeom;
+mWidth.onChange=rebuildGeom;
+nRows.onChange=rebuildGeom;
+nColumns.onChange=rebuildGeom;
+flat.onChange=rebuildGeom;
 
-filename.onValueChanged=reload;
+filename.onChange=reload;
 
 function rebuildGeom()
 {

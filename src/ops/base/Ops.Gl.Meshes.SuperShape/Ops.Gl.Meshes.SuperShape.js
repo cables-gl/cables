@@ -1,6 +1,6 @@
 // from https://github.com/ahoiin/supershape.js/blob/master/js/objects.js
 
-const render=op.inFunction("render");
+const render=op.inTrigger("render");
 
 var pNormalizeSize=op.inValueBool("Normalize Size",true);
 var asPointCloud=op.inValueBool("Point Cloud",false);
@@ -20,7 +20,7 @@ var n12=op.inValue("n12",1);
 var n22=op.inValue("n22",1);
 var n32=op.inValue("n32",3);
 
-var trigger=op.outFunction("Trigger");
+var trigger=op.outTrigger("Trigger");
 var outNumVerts=op.outValue("Num Vertices");
 var outGeom=op.outObject("geom");
 

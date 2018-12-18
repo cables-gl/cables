@@ -1,33 +1,56 @@
 {
-    "updated": 1519297025375,
-    "authorName": "tim",
-    "id": "905e6cde-7eed-4c63-a849-153fc1c862f0",
-    "created": 1519297025378,
+    "updated": 1527699215922,
+    "authorName": "action",
+    "id": "b51166c4-e0a8-441a-b724-1531effdc52f",
+    "created": 1527699215931,
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Amplitude"
+                "name": "Phase",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Frequency"
+                "name": "Frequency",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Phase"
+                "name": "Amplitude",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "asine",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Cosine"
+    },
+    "summary": "Calculates the cosine of an angle.",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "Value input in radians"
+            },
+            {
+                "name": "Result",
+                "text": "Output in the range -1 to 1"
+            }
+        ]
     }
 }

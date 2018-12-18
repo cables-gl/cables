@@ -1,5 +1,5 @@
 var interval=op.inValue('interval');
-var trigger=op.outFunction('trigger');
+var trigger=op.outTrigger('trigger');
 var active=op.inValueBool("Active",true);
 
 active.onChange=function()
@@ -29,6 +29,6 @@ function exec()
     interval.get() );
 }
 
-interval.onValueChanged=exec;
+interval.onChange=exec;
 
 exec();

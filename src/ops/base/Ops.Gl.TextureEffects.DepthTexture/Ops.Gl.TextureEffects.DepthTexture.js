@@ -1,69 +1,44 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var image=op.addInPort(new Port(op,"image",OP_PORT_TYPE_TEXTURE));
-var farPlane=op.addInPort(new Port(op,"farplane",OP_PORT_TYPE_VALUE));
-var nearPlane=op.addInPort(new Port(op,"nearplane",OP_PORT_TYPE_VALUE));
-var inInv=op.inValueBool("Invert",false);
+const render=op.inTrigger('render');
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const inDepthTex=op.inTexture("image");
+const farPlane=op.inValue("farplane",50.0);
+const nearPlane=op.inValue("nearplane",0.1);
+const inInv=op.inValueBool("Invert",false);
+const trigger=op.outTrigger('trigger');
 
-farPlane.set(100.0);
-nearPlane.set(0.1);
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var cgl=op.patch.cgl;
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
-
-var srcFrag=''
-    .endl()+'#ifdef HAS_TEXTURES'
-    .endl()+'  IN vec2 texCoord;'
-    .endl()+'  uniform sampler2D image;'
-    .endl()+'#endif'
-    .endl()+'uniform float n;'
-    .endl()+'uniform float f;'
-    .endl()+''
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=vec4(0.0,0.0,0.0,1.0);'
-    .endl()+'   #ifdef HAS_TEXTURES'
-    .endl()+'       col=texture2D(image,texCoord);'
-    .endl()+'       float z=col.r;'
-    .endl()+'       float c=(2.0*n)/(f+n-z*(f-n));'
-
-    .endl()+'       #ifdef INVERT'
-    .endl()+'       c=1.0-c;'
-    .endl()+'       #endif'
-
-    .endl()+'       col=vec4(c,c,c,1.0);'
-
-    .endl()+'   #endif'
-
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
-
+const srcFrag=(attachments.depthtexture_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','image',0);
 
-var uniFarplane=new CGL.Uniform(shader,'f','f',farPlane);
-var uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
+const textureUniform=new CGL.Uniform(shader,'t','texDepth',0);
+const textureBaseUniform=new CGL.Uniform(shader,'t','texBase',1);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+
+const uniFarplane=new CGL.Uniform(shader,'f','f',farPlane);
+const uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
+
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 inInv.onChange=function()
 {
     if(inInv.get())shader.define("INVERT");
         else shader.removeDefine("INVERT");
-}
+};
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    if(image.val && image.val.tex)
+    if(inDepthTex.get() && inDepthTex.get().tex)
     {
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
-
+        cgl.setTexture(0, inDepthTex.get().tex );
+        cgl.setTexture(1, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
     }

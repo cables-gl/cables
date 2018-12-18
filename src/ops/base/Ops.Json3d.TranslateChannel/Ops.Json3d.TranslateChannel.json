@@ -22,5 +22,9 @@
             }
         ],
         "name": "Ops.Json3d.TranslateChannel"
+    },
+    "summary": "internal op of json3d scene",
+    "docs": {
+        "ports": []
     }
 }

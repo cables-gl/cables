@@ -27,59 +27,57 @@ CGL.Uniform=function(__shader,__type,__name,_value)
     this._shader.addUniform(this);
     this.needsUpdate=true;
 
-    if(__type=='3f[]')
-    {
-        this.set=this.setValue=this.setValueArray3F.bind(this);
-        this.updateValue=this.updateValueArray3F.bind(this);
-    }
-
     if(__type=='f')
     {
         this.set=this.setValue=this.setValueF.bind(this);
         this.updateValue=this.updateValueF.bind(this);
-    }
-
+    } else
+    if(__type=='f[]')
+    {
+        this.set=this.setValue=this.setValueArrayF.bind(this);
+        this.updateValue=this.updateValueArrayF.bind(this);
+    } else
+    if(__type=='3f[]')
+    {
+        this.set=this.setValue=this.setValueArray3F.bind(this);
+        this.updateValue=this.updateValueArray3F.bind(this);
+    } else
     if(__type=='i')
     {
         this.set=this.setValue=this.setValueI.bind(this);
         this.updateValue=this.updateValueI.bind(this);
-    }
-
+    } else
     if(__type=='b')
     {
         this.set=this.setValue=this.setValueBool.bind(this);
         this.updateValue=this.updateValueBool.bind(this);
-    }
-
+    } else
     if(__type=='4f')
     {
         this.set=this.setValue=this.setValue4F.bind(this);
         this.updateValue=this.updateValue4F.bind(this);
-    }
-
+    } else
     if(__type=='3f')
     {
         this.set=this.setValue=this.setValue3F.bind(this);
         this.updateValue=this.updateValue3F.bind(this);
-    }
-
+    } else
     if(__type=='2f')
     {
         this.set=this.setValue=this.setValue2F.bind(this);
         this.updateValue=this.updateValue2F.bind(this);
-    }
-
+    } else
     if(__type=='t')
     {
         this.set=this.setValue=this.setValueT.bind(this);
         this.updateValue=this.updateValueT.bind(this);
-    }
-
+    } else
     if(__type=='m4')
     {
         this.set=this.setValue=this.setValueM4.bind(this);
         this.updateValue=this.updateValueM4.bind(this);
-    }
+    } else
+        throw new Error("Unknown uniform type");
 
     if(typeof _value=="object" && _value instanceof CABLES.Port)
     {
@@ -179,6 +177,22 @@ CGL.Uniform.prototype.updateValueArray3F=function()
 
     if(!this._value)return;
     this._shader.getCgl().gl.uniform3fv(this._loc, this._value);
+    CGL.profileUniformCount++;
+};
+
+CGL.Uniform.prototype.setValueArrayF=function(v)
+{
+    this.needsUpdate=true;
+    this._value=v;
+};
+
+CGL.Uniform.prototype.updateValueArrayF=function()
+{
+    if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        else this.needsUpdate=false;
+
+    if(!this._value)return;
+    this._shader.getCgl().gl.uniformfv(this._loc, this._value);
     CGL.profileUniformCount++;
 };
 

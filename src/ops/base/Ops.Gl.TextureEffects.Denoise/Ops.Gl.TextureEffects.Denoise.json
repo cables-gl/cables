@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "Exponent"
+                "name": "Exponent",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -17,5 +18,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Denoise"
-    }
+    },
+    "updated": 1542701451115,
+    "authorName": "pandur",
+    "id": "0abfea0f-1aa9-47bf-b540-f54f89a60a6c",
+    "created": 1542701445023
 }

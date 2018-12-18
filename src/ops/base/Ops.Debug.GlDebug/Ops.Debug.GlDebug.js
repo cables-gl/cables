@@ -1,6 +1,6 @@
 
-var exec=op.inFunction("Update");
-var next=op.outFunction("Next");
+var exec=op.inTrigger("Update");
+var next=op.outTrigger("Next");
 
 var outError=op.outValue("glGetError");
 
@@ -41,6 +41,9 @@ exec.onTriggered=function()
     cull.set(cullModeToString(cgl.gl.getParameter(cgl.gl.CULL_FACE_MODE)));
 
     outError.set(errorToString(cgl.gl.getError()));
+
+
+    console.log(cgl._textureslots);
 
     next.trigger();
 };

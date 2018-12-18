@@ -12,19 +12,23 @@
             },
             {
                 "type": "0",
-                "name": "Layer"
+                "name": "Layer",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Num Layers"
+                "name": "Num Layers",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Time"
+                "name": "Time",
+                "subType": "number"
             },
             {
                 "type": "2",

@@ -1,5 +1,3 @@
-op.name="SpeechRecognition";
-
 var result=op.outValue("Result");
 
 window.SpeechRecognition = window.SpeechRecognition||window.webkitSpeechRecognition || mozSpeechRecognition || window.mozSpeechRecognition;

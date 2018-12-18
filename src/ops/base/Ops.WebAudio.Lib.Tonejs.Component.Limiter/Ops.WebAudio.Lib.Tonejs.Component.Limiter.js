@@ -1,4 +1,3 @@
-op.name="Limiter";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

@@ -1,4 +1,3 @@
-op.name="MidiValueToFrequency";
 
 // input
 var midiValuePort = op.inValue("MIDI Value");

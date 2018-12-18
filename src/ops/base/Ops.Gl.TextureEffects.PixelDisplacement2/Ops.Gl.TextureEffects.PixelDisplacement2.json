@@ -1,0 +1,39 @@
+{
+    "updated": 1535994764336,
+    "authorName": "pandur",
+    "id": "c343f508-a803-4f2a-b89e-295089988f27",
+    "created": 1535994706732,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "amount X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "amount Y",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "displaceTex"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.PixelDisplacement2"
+    },
+    "summary": "displace pixel by red/blue color value of pixel",
+    "docs": {
+        "ports": []
+    }
+}

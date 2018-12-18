@@ -1,5 +1,3 @@
-op.name="Array3xSort";
-
 var inArr=op.inArray("Array");
 var what=op.inValueSelect("What",['None','X','Y','Z','XYZ']);
 what.set("X");

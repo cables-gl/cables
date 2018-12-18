@@ -1,0 +1,30 @@
+{
+    "updated": 1537261003050,
+    "authorName": "pandur",
+    "id": "a0df10ce-7ae5-49a4-83df-6afc1f5a3f3a",
+    "created": 1537260020630,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Templates.ShaderEffectExample"
+    },
+    "summary": "shader effect example template",
+    "docs": {
+        "ports": []
+    }
+}

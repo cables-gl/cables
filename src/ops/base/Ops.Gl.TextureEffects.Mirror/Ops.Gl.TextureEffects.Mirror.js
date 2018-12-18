@@ -1,37 +1,33 @@
-op.name="Mirror";
+const
+    render=op.inTrigger('render'),
+    trigger=op.outTrigger('trigger'),
+    axis=op.inValueFloat("axis"),
+    width=op.inValueFloat("width",0.5),
+    offset=op.inValueFloat("offset"),
+    flip=op.inValueBool("flip");
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
-
-var axis=op.addInPort(new Port(op,"axis",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['X','Y']}));
-var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{display:'range'}));
-var offset=op.addInPort(new Port(op,"offset",OP_PORT_TYPE_VALUE,{display:'range'}));
-var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
-
-width.set(0.5);
-
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.mirror_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var uniAxis=new CGL.Uniform(shader,'f','axis',0);
-var uniWidth=new CGL.Uniform(shader,'f','width',width);
-var uniOffset=new CGL.Uniform(shader,'f','offset',offset);
-var uniFlip=new CGL.Uniform(shader,'f','flip',0);
 
-flip.onValueChanged=function()
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    uniAxis=new CGL.Uniform(shader,'f','axis',0),
+    uniWidth=new CGL.Uniform(shader,'f','width',width),
+    uniOffset=new CGL.Uniform(shader,'f','offset',offset),
+    uniFlip=new CGL.Uniform(shader,'f','flip',0);
+
+flip.onChange=function()
 {
     if(flip.get())uniFlip.setValue(1);
-    else uniFlip.setValue(0);
+        else uniFlip.setValue(0);
 };
 
-axis.onValueChanged=function()
+axis.onChange=function()
 {
     if(axis.get()=='X')uniAxis.setValue(0);
-    if(axis.get()=='Y')uniAxis.setValue(1);
+        else if(axis.get()=='Y')uniAxis.setValue(1);
 };
 
 render.onTriggered=function()
@@ -41,8 +37,7 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

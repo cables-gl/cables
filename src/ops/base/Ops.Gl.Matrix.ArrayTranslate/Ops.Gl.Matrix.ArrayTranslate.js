@@ -1,18 +1,16 @@
-
-var exe=this.addInPort(new Port(this,"exe",OP_PORT_TYPE_FUNCTION));
-// var arrayIn=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
-var arrayIn=this.addInPort(new Port(this,"array",OP_PORT_TYPE_ARRAY));
-
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var idx=this.addOutPort(new Port(this,"index"));
+const exe=op.inTrigger("exe");
+const arrayIn=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
+const trigger=op.outTrigger("trigger")
+const idx=op.addOutPort(new CABLES.Port(op,"index"));
 
 var vec=vec3.create();
-var cgl=this.patch.cgl;
+const cgl=op.patch.cgl;
+exe.onTriggered=render;
+
 function render()
 {
-
     if(!arrayIn.get())return;
-    var arr=arrayIn.val;
+    var arr=arrayIn.get();
 
     for(var i=0;i<arr.length;i+=3)
     {
@@ -24,4 +22,3 @@ function render()
     }
 }
 
-exe.onTriggered=render;

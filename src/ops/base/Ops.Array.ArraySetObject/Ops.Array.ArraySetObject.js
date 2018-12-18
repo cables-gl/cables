@@ -1,29 +1,26 @@
+const
+    exe=op.inTriggerButton("exe"),
+    array=op.inArray("array"),
+    index=op.inValueInt("index"),
+    value=op.inObject("object"),
+    values=op.outArray("values");
 
-
-var exe=op.inFunctionButton("exe");
-
-var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
-var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
-var value=op.inObject("object");
-var values=op.addOutPort(new Port(op, "values",OP_PORT_TYPE_ARRAY));
 values.ignoreValueSerialize=true;
+exe.onTriggered=update;
 
 function updateIndex()
 {
-    if(exe.isLinked())return;    
+    if(exe.isLinked())return;
     update();
 }
 
 function update()
 {
-    if(!array.get())return;
-    array.get()[index.get()]=value.get();
+    var arr=array.get();
+    if(!arr)return;
+    arr[index.get()]=value.get();
 
     values.set(null);
-    values.set(array.get());
+    values.set(arr);
 }
 
-// index.onChange=updateIndex;
-// array.onChange=updateIndex;
-// value.onChange=update;
-exe.onTriggered=update;

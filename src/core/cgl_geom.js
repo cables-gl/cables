@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * @constructor
@@ -15,13 +16,10 @@ CGL.Geometry=function(name)
     this.texCoords=new Float32Array();
     this.texCoordsIndices=[];
     this.vertexNormals=[];
-    this.baycentrics=[];
+    this.barycentrics=[];
     this.morphTargets=[];
     this.vertexColors=[];
-
     this._attributes={};
-
-    this._indexed=true;
 
     Object.defineProperty(this, 'vertices', {
       get: function() {
@@ -36,7 +34,6 @@ CGL.Geometry=function(name)
 
 CGL.Geometry.prototype.clear=function()
 {
-    this._indexed=true;
     this.vertices=new Float32Array([]);
     this.verticesIndices.length=0;
     this.texCoords=new Float32Array([]);
@@ -158,6 +155,9 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 
     // this.texCoords.length=verts.length/3*2;
     this.verticesIndices.length=verts.length/3;
+    // this.verticesIndices=[];
+
+    // TODO why does this have indizes ???????????????????????????
 
     for(i=0;i<verts.length/3;i++)
     {
@@ -166,6 +166,7 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
         this.texCoords[i*2+1]=0;
     }
 };
+
 
 
 CGL.Geometry.prototype.merge=function(geom)
@@ -180,9 +181,9 @@ CGL.Geometry.prototype.merge=function(geom)
         this.verticesIndices[oldIndizesLength+i]=geom.verticesIndices[i]+vertLength;
     }
 
-    this.vertices=float32Concat(this.vertices,geom.vertices);
-    this.texCoords=float32Concat(this.texCoords,geom.texCoords);
-    this.vertexNormals=float32Concat(this.vertexNormals,geom.vertexNormals);
+    this.vertices=CABLES.UTILS.float32Concat(this.vertices,geom.vertices);
+    this.texCoords=CABLES.UTILS.float32Concat(this.texCoords,geom.texCoords);
+    this.vertexNormals=CABLES.UTILS.float32Concat(this.vertexNormals,geom.vertexNormals);
 };
 
 CGL.Geometry.prototype.copy=function()
@@ -207,8 +208,8 @@ CGL.Geometry.prototype.copy=function()
     geom.vertexNormals.length=this.vertexNormals.length;
     for(i=0;i<this.vertexNormals.length;i++) geom.vertexNormals[i]=this.vertexNormals[i];
 
-    geom.baycentrics.length=this.baycentrics.length;
-    for(i=0;i<this.baycentrics.length;i++) geom.baycentrics[i]=this.baycentrics[i];
+    geom.barycentrics.length=this.barycentrics.length;
+    for(i=0;i<this.barycentrics.length;i++) geom.barycentrics[i]=this.barycentrics[i];
 
     geom.morphTargets.length=this.morphTargets.length;
     for(i=0;i<this.morphTargets.length;i++) geom.morphTargets[i]=this.morphTargets[i];
@@ -224,6 +225,7 @@ CGL.Geometry.prototype.calculateNormals=function(options)
     var u=vec3.create();
     var v=vec3.create();
     var n=vec3.create();
+    var i=0;
 
     function calcNormal(triangle)
     {
@@ -252,9 +254,6 @@ CGL.Geometry.prototype.calculateNormals=function(options)
         vec[2]=this.vertices[which*3+2];
         return vec;
     };
-
-    var i=0;
-
 
     if(!(this.vertexNormals instanceof Float32Array) || this.vertexNormals.length!=this.vertices.length) this.vertexNormals=new Float32Array(this.vertices.length);
 
@@ -308,24 +307,20 @@ CGL.Geometry.prototype.calculateNormals=function(options)
 };
 
 
-
-
-
 CGL.Geometry.prototype.isIndexed=function()
 {
-    return this._indexed;
+    return this.verticesIndices.length!=0;
 };
 
 
 CGL.Geometry.prototype.unIndex=function()
 {
-    this._indexed=false;
     var newVerts=[];
     var newIndizes=[];
     var newTexCoords=[];
-
+    var newNormals=[];
     var count=0;
-    // console.log('unindexing');
+    var i=0;
     this.vertexNormals.length=0;
 
     for(i=0;i<this.verticesIndices.length;i+=3)
@@ -333,6 +328,10 @@ CGL.Geometry.prototype.unIndex=function()
         newVerts.push(this.vertices[this.verticesIndices[i+0]*3+0]);
         newVerts.push(this.vertices[this.verticesIndices[i+0]*3+1]);
         newVerts.push(this.vertices[this.verticesIndices[i+0]*3+2]);
+
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+0]*3+0]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+0]*3+1]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+0]*3+2]);
 
         if(!this.texCoords)
         {
@@ -345,12 +344,19 @@ CGL.Geometry.prototype.unIndex=function()
             newTexCoords.push(this.texCoords[this.verticesIndices[i+0]*2+1]);
         }
 
+
+
         newIndizes.push(count);
         count++;
 
         newVerts.push(this.vertices[this.verticesIndices[i+1]*3+0]);
         newVerts.push(this.vertices[this.verticesIndices[i+1]*3+1]);
         newVerts.push(this.vertices[this.verticesIndices[i+1]*3+2]);
+
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+1]*3+0]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+1]*3+1]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+1]*3+2]);
+
 
         if(!this.texCoords)
         {
@@ -363,12 +369,18 @@ CGL.Geometry.prototype.unIndex=function()
             newTexCoords.push(this.texCoords[this.verticesIndices[i+1]*2+1]);
         }
 
+        
         newIndizes.push(count);
         count++;
 
         newVerts.push(this.vertices[this.verticesIndices[i+2]*3+0]);
         newVerts.push(this.vertices[this.verticesIndices[i+2]*3+1]);
         newVerts.push(this.vertices[this.verticesIndices[i+2]*3+2]);
+
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+2]*3+0]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+2]*3+1]);
+        newNormals.push(this.vertexNormals[this.verticesIndices[i+2]*3+2]);
+
 
         if(!this.texCoords)
         {
@@ -387,19 +399,23 @@ CGL.Geometry.prototype.unIndex=function()
 
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
+    this.vertexNormals=newNormals;
+
+    // TODO why does unindexed has indizes ???????????????????????????
     this.verticesIndices=newIndizes;
+    this.calculateNormals();
 };
 
-CGL.Geometry.prototype.calcBaycentric=function()
+CGL.Geometry.prototype.calcBarycentric=function()
 {
-    this.baycentrics.length=this.vertices.length;
+    this.barycentrics.length=this.vertices.length;
 
-    for(i=0;i<this.vertices.length;i++) this.baycentrics[i]=0;
+    for(var i=0;i<this.vertices.length;i++) this.barycentrics[i]=0;
 
     var count=0;
     for(i=0;i<this.vertices.length;i+=3)
     {
-        this.baycentrics[i+count]=1;
+        this.barycentrics[i+count]=1;
         count++;
         if(count==3)count=0;
     }
@@ -490,14 +506,10 @@ CGL.Geometry.prototype.mapTexCoords2d=function()
 
 // -----------------
 
-
-
-
 CGL.Geometry.buildFromFaces=function(arr)
 {
     var vertices=[];
     var verticesIndices=[];
-
 
     for(var i=0;i<arr.length;i+=3)
     {
@@ -581,5 +593,4 @@ CGL.Geometry.json2geom=function(jsonMesh)
     }
     
     return geom;
-
 };

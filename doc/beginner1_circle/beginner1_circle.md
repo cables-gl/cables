@@ -11,19 +11,19 @@ To draw a circle, we need two operators:
 ## 1.Add the WebGL-op
 
 - To create an operator press `[esc]` – the `Select Operator`-dialog shows up
-- Now enter `Main`
-- The first entry in the list should be [Ops.Gl.MainLoop](../ops/Ops.Gl.MainLoop/Ops.Gl.MainLoop.md)
-- Press `[enter]` to create the operator
+- Now type `Main`
+- The first entry in the list should be [Ops.Gl.MainLoop](https://cables.gl/op/Ops.Gl.MainLoop)
+- Press `[enter]` or click the `+` button to create the operator
 
 ## 2. Add The Circle Operator
 
-- To create a new operator and automatically connect it to another op you can pull the blue output port on the left side with your mouse (drag it out of the operator and release your mouse button).
+- To create a new operator and automatically connect it to another op you can pull the yellow output port on the left side with your mouse (drag it out of the operator and release your mouse button).
 
-![](img/create_op_pull.gif)
+![](img/create_main_loop_circle.gif)
 
-- The `Select Operator`-dialog is showing again
-- Enter `circle`, now the entry [Ops.Gl.Meshes.Circle](../ops/Ops.Gl.Meshes.Circle/Ops.Gl.Meshes.Circle.md) should be selected
-- Press `[enter]` to create it
+- The `Select Operator`-dialog will appear
+- Type `circle`, now the entry [Ops.Gl.Meshes.Circle](https://cables.gl/op/Ops.Gl.Meshes.Circle) should be selected
+- Press `[enter]` or click the `+` button to create it
 
 Now it should look like this:  
 
@@ -31,7 +31,7 @@ Now it should look like this:
 
 ## 3. Parameters
 
-- The renderer canvas (on the right side) should show a circle now
+- The renderer canvas (on the right side) now shows a circle
 - The parameter panel shows all parameters to tweak the circle
 - Play around with the parameters, for example drag the slider `innerradius`
 

@@ -1,9 +1,9 @@
-var inExec=op.inFunctionButton("Calculate");
+var inExec=op.inTriggerButton("Calculate");
 var inArr=op.inArray("Array3x");
 var inDist=op.inValue("Distance");
 var inNormalized=op.inValueBool("Normalized");
 
-var outNext=op.outFunction("Next");
+var outNext=op.outTrigger("Next");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
@@ -31,7 +31,7 @@ function splineLength(arr)
     {
         l+=dist(arr[i-3],arr[i-2],arr[i-1],arr[i+0],arr[i+1],arr[i+2]);
     }
-    
+
     outSplineLength.set(l);
     return l;
 }
@@ -43,9 +43,9 @@ function mapArrays()
     animZ.clear();
     var arr=inArr.get();
     var sl=splineLength(arr);
-    
+
     var distPos=0;
-    
+
     for(var i=0;i<arr.length;i+=3)
     {
         var p=i/(arr.length-3);
@@ -74,13 +74,11 @@ inExec.onTriggered=function()
 
     var d=inDist.get();
     if(inNormalized.get())d*=outSplineLength.get();
- 
-//  console.log(animX.getValue(d));
-    
+
     outX.set(animX.getValue(d));
     outY.set(animY.getValue(d));
     outZ.set(animZ.getValue(d));
-    
+
     outNext.trigger();
 };
 

@@ -1,4 +1,4 @@
-const exec=op.inFunction("Render");
+const exec=op.inTrigger("Render");
 const inNum=op.inValueInt("Num",400);
 const inC=op.inValue("Scale",0.1);
 const inI=op.inValue("Param",100);

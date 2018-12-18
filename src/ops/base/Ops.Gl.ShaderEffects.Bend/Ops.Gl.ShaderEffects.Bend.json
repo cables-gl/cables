@@ -1,5 +1,5 @@
 {
-    "updated": 1526460686472,
+    "updated": 1540978930731,
     "author": "599c49d0bd5c13002aac8617",
     "authorName": "kusma",
     "id": "8d4941a9-388d-40da-8574-266070235251",
@@ -13,37 +13,37 @@
             },
             {
                 "type": "0",
-                "name": "RotX",
+                "name": "rotx",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "RotY",
+                "name": "roty",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "RotZ",
+                "name": "rotz",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale",
+                "name": "scale",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Offset",
+                "name": "offset",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Amount",
+                "name": "amount",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Limited",
+                "name": "limited",
                 "subType": "boolean"
             }
         ],

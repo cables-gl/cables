@@ -1,6 +1,5 @@
 // view-source:http://toji.github.io/webgl2-particles-2/
 
-
 CGL.Mesh.prototype.hasFeedbacks=function()
 {
     return this._feedBacks.length>0;
@@ -26,7 +25,7 @@ CGL.Mesh.prototype.setFeedback=function(attrib,nameOut,initialArr)
 
     var found=false;
 
-this.unBindFeedbacks();
+    this.unBindFeedbacks();
 
     for(var i=0;i<this._feedBacks.length;i++)
     {

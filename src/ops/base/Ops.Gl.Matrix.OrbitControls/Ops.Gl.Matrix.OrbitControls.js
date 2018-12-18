@@ -1,18 +1,24 @@
-const render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-const minDist=op.addInPort(new Port(op,"min distance",OP_PORT_TYPE_VALUE));
-const maxDist=op.addInPort(new Port(op,"max distance",OP_PORT_TYPE_VALUE));
-const initialAxis=op.addInPort(new Port(op,"initial axis y",OP_PORT_TYPE_VALUE,{display:'range'}));
-const initialX=op.addInPort(new Port(op,"initial axis x",OP_PORT_TYPE_VALUE,{display:'range'}));
+const render=op.inTrigger("render");
+const minDist=op.addInPort(new CABLES.Port(op,"min distance",CABLES.OP_PORT_TYPE_VALUE));
+const maxDist=op.addInPort(new CABLES.Port(op,"max distance",CABLES.OP_PORT_TYPE_VALUE));
+
+const minRotY=op.inValue("min rot y",0);
+const maxRotY=op.inValue("max rot y",0);
+
+const initialAxis=op.addInPort(new CABLES.Port(op,"initial axis y",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+const initialX=op.addInPort(new CABLES.Port(op,"initial axis x",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 const initialRadius=op.inValue("initial radius",0);
 
-const mul=op.addInPort(new Port(op,"mul",OP_PORT_TYPE_VALUE));
+
+
+const mul=op.addInPort(new CABLES.Port(op,"mul",CABLES.OP_PORT_TYPE_VALUE));
 
 const smoothness=op.inValueSlider("Smoothness",1.0);
-const restricted=op.addInPort(new Port(op,"restricted",OP_PORT_TYPE_VALUE,{display:'bool'}));
+const restricted=op.addInPort(new CABLES.Port(op,"restricted",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 const active=op.inValueBool("Active",true);
 
-const inReset=op.inFunctionButton("Reset");
+const inReset=op.inTriggerButton("Reset");
 
 const allowPanning=op.inValueBool("Allow Panning",true);
 const allowZooming=op.inValueBool("Allow Zooming",true);
@@ -22,10 +28,10 @@ const pointerLock=op.inValueBool("Pointerlock",false);
 const speedX=op.inValue("Speed X",1);
 const speedY=op.inValue("Speed Y",1);
 
-const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-const outRadius=op.addOutPort(new Port(op,"radius",OP_PORT_TYPE_VALUE));
-const outYDeg=op.addOutPort(new Port(op,"Rot Y",OP_PORT_TYPE_VALUE));
-const outXDeg=op.addOutPort(new Port(op,"Rot X",OP_PORT_TYPE_VALUE));
+const trigger=op.outTrigger("trigger")
+const outRadius=op.addOutPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
+const outYDeg=op.addOutPort(new CABLES.Port(op,"Rot Y",CABLES.OP_PORT_TYPE_VALUE));
+const outXDeg=op.addOutPort(new CABLES.Port(op,"Rot X",CABLES.OP_PORT_TYPE_VALUE));
 
 restricted.set(true);
 mul.set(1);
@@ -34,7 +40,7 @@ maxDist.set(99999);
 
 inReset.onTriggered=reset;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var eye=vec3.create();
 var vUp=vec3.create();
 var vCenter=vec3.create();
@@ -103,17 +109,39 @@ function ip(val,goal)
     return val+(goal-val)/divisor;
 }
 
+var lastPy=0;
+
 render.onTriggered=function()
 {
     cgl.pushViewMatrix();
 
     px=ip(px,percX);
     py=ip(py,percY);
-    
-    outYDeg.set( (py+0.5)*180 );
-    outXDeg.set( (px)*180 );
 
-    eye=circlePos(py);
+    var degY=(py+0.5)*180;
+
+
+    if(minRotY.get()!==0 && degY<minRotY.get())
+    {
+        degY=minRotY.get();
+        py=lastPy;
+    }
+    else if(maxRotY.get()!==0 && degY>maxRotY.get())
+    {
+        degY=maxRotY.get();
+        py=lastPy;
+    }
+    else
+    {
+        lastPy=py;
+    }
+
+    outYDeg.set( degY );
+    // outXDeg.set( (px)*180 );
+    outXDeg.set( (px)*CGL.RAD2DEG );
+
+
+    circlePosi(eye, py );
 
     vec3.add(tempEye, eye, vOffset);
     vec3.add(tempCenter, vCenter, vOffset);
@@ -121,11 +149,11 @@ render.onTriggered=function()
     finalEye[0]=ip(finalEye[0],tempEye[0]);
     finalEye[1]=ip(finalEye[1],tempEye[1]);
     finalEye[2]=ip(finalEye[2],tempEye[2]);
-    
+
     finalCenter[0]=ip(finalCenter[0],tempCenter[0]);
     finalCenter[1]=ip(finalCenter[1],tempCenter[1]);
     finalCenter[2]=ip(finalCenter[2],tempCenter[2]);
-    
+
     mat4.lookAt(viewMatrix, finalEye, finalCenter, vUp);
     mat4.rotate(viewMatrix, viewMatrix, px, vUp);
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,viewMatrix);
@@ -135,19 +163,39 @@ render.onTriggered=function()
     initializing=false;
 };
 
+function circlePosi(vec,perc)
+{
+    const mmul=mul.get();
+    if(radius<minDist.get()*mmul)radius=minDist.get()*mmul;
+    if(radius>maxDist.get()*mmul)radius=maxDist.get()*mmul;
+
+    outRadius.set(radius*mmul);
+
+    var i=0,degInRad=0;
+    // var vec=vec3.create();
+    degInRad = 360*perc/2*CGL.DEG2RAD;
+    vec3.set(vec,
+        Math.cos(degInRad)*radius*mmul,
+        Math.sin(degInRad)*radius*mmul,
+        0);
+    return vec;
+}
+
+
 function circlePos(perc)
 {
-    if(radius<minDist.get()*mul.get())radius=minDist.get()*mul.get();
-    if(radius>maxDist.get()*mul.get())radius=maxDist.get()*mul.get();
-    
-    outRadius.set(radius*mul.get());
-    
+    const mmul=mul.get();
+    if(radius<minDist.get()*mmul)radius=minDist.get()*mmul;
+    if(radius>maxDist.get()*mmul)radius=maxDist.get()*mmul;
+
+    outRadius.set(radius*mmul);
+
     var i=0,degInRad=0;
     var vec=vec3.create();
     degInRad = 360*perc/2*CGL.DEG2RAD;
     vec3.set(vec,
-        Math.cos(degInRad)*radius*mul.get(),
-        Math.sin(degInRad)*radius*mul.get(),
+        Math.cos(degInRad)*radius*mmul,
+        Math.sin(degInRad)*radius*mmul,
         0);
     return vec;
 }
@@ -158,7 +206,7 @@ function onmousemove(event)
 
     var x = event.clientX;
     var y = event.clientY;
-    
+
     var movementX=(x-lastMouseX)*speedX.get();
     var movementY=(y-lastMouseY)*speedY.get();
 
@@ -176,22 +224,21 @@ function onmousemove(event)
     else
     if(event.which==2 && allowZooming.get())
     {
-        radius+=(movementY)*0.05;
+        radius+=movementY*0.05;
         eye=circlePos(percY);
     }
     else
     {
         if(allowRotation.get())
         {
-            percX+=(movementX)*0.003;
-            percY+=(movementY)*0.002;
-            
+            percX+=movementX*0.003;
+            percY+=movementY*0.002;
+
             if(restricted.get())
             {
                 if(percY>0.5)percY=0.5;
                 if(percY<-0.5)percY=-0.5;
             }
-            
         }
     }
 
@@ -204,7 +251,7 @@ function onMouseDown(event)
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
     mouseDown=true;
-    
+
     if(doLockPointer)
     {
         var el=op.patch.cgl.canvas;
@@ -223,7 +270,7 @@ function onMouseUp()
 {
     mouseDown=false;
     // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
-            
+
     if(doLockPointer)
     {
         document.removeEventListener('pointerlockchange', lockChange, false);
@@ -253,8 +300,6 @@ function onMouseEnter(e)
 
 initialRadius.onValueChange(function()
 {
-    // percX=(initialX.get()*Math.PI*2);
-    console.log('init radius');
     radius=initialRadius.get();
     reset();
 });
@@ -262,13 +307,12 @@ initialRadius.onValueChange(function()
 initialX.onValueChange(function()
 {
     px=percX=(initialX.get()*Math.PI*2);
-    
 });
 
 initialAxis.onValueChange(function()
 {
     py=percY=(initialAxis.get()-0.5);
-    eye=circlePos( percY );
+    eye=circlePos(percY);
 });
 
 var onMouseWheel=function(event)
@@ -328,13 +372,12 @@ function bind()
     element.addEventListener('touchmove', ontouchmove);
     element.addEventListener('touchstart', ontouchstart);
     element.addEventListener('touchend', ontouchend);
-
 }
 
 function unbind()
 {
     if(!element)return;
-    
+
     element.removeEventListener('mousemove', onmousemove);
     element.removeEventListener('mousedown', onMouseDown);
     element.removeEventListener('mouseup', onMouseUp);
@@ -346,8 +389,6 @@ function unbind()
     element.removeEventListener('touchstart', ontouchstart);
     element.removeEventListener('touchend', ontouchend);
 }
-
-
 
 eye=circlePos(0);
 this.setElement(cgl.canvas);

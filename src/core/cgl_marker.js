@@ -1,10 +1,7 @@
 CABLES=CABLES||{};
-CABLES.WEBAUDIO = CABLES.WEBAUDIO || {};
-
 
 CGL.Marker=function(cgl)
 {
-
     var geom=new CGL.Geometry("marker");
     geom.setPointVertices(
         [
@@ -149,7 +146,6 @@ CGL.WirePoint=function(cgl,size)
         cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
 
         cgl.popModelMatrix();
-
     };
 
     bufferData();

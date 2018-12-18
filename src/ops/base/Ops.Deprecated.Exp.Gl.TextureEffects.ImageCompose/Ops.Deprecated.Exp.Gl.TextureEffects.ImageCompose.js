@@ -1,15 +1,15 @@
 op.name="ImageCompose";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var useVPSize=op.addInPort(new Port(op,"use viewport size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var width=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new Port(op,"height",OP_PORT_TYPE_VALUE));
+var render=op.inTrigger('render');
+var useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var width=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
+var height=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 
 var fpTexture=op.inValueBool("HDR");
 var clear=op.inValueBool("Clear",true);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var texOut=op.outTexture("texture_out");
 
 texOut.set(null);
@@ -96,17 +96,17 @@ function updateResolution()
 }
 
 
-useVPSize.onValueChanged=function()
+useVPSize.onChange=function()
 {
     if(useVPSize.get())
     {
-        width.onValueChanged=null;
-        height.onValueChanged=null;
+        width.onChange=null;
+        height.onChange=null;
     }
     else
     {
-        width.onValueChanged=updateResolution;
-        height.onValueChanged=updateResolution;
+        width.onChange=updateResolution;
+        height.onChange=updateResolution;
     }
     updateResolution();
 };
@@ -136,8 +136,8 @@ var doRender=function()
 
         cgl.setShader(bgShader);
         cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+        
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
     }
@@ -172,7 +172,7 @@ function onFilterChange()
 }
 
 tfilter.set('linear');
-tfilter.onValueChanged=onFilterChange;
+tfilter.onChange=onFilterChange;
 
 useVPSize.set(true);
 render.onTriggered=doRender;

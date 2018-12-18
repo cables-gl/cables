@@ -1,6 +1,5 @@
 {
     "summary": "Transforms objects randomly in space",
-    "updated": 1524236146714,
     "authorName": "pandur",
     "id": "ca3bc984-e596-48fb-b53d-502eb13979b0",
     "created": 1516269330315,
@@ -12,47 +11,68 @@
             },
             {
                 "type": "0",
-                "name": "num"
+                "name": "num",
+                "group": "Parameters",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "size"
+                "name": "size",
+                "group": "Parameters",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "random seed"
+                "name": "random seed",
+                "group": "Parameters",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scaleX"
+                "name": "round",
+                "group": "Parameters",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "scaleY"
+                "name": "scaleX",
+                "group": "Scaling",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scaleZ"
+                "name": "scaleY",
+                "group": "Scaling",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "round"
+                "name": "scaleZ",
+                "group": "Scaling",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotate X"
+                "name": "Rotate X",
+                "group": "Rotation",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotate Y"
+                "name": "Rotate Y",
+                "group": "Rotation",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotate Z"
+                "name": "Rotate Z",
+                "group": "Rotation",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scroll X"
+                "name": "Scroll X",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -62,11 +82,13 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rnd"
+                "name": "rnd",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.RandomCluster"

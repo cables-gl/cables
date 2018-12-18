@@ -3,20 +3,27 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "String"
+                "name": "String",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Max Line Chars"
+                "name": "Max Line Chars",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.String.StringBreak"
     },
-    "summary": "insert linebreaks into a string after [num] chars"
+    "summary": "insert linebreaks into a string after [num] chars",
+    "updated": 1533987495662,
+    "authorName": "pandur",
+    "id": "0e2e4bed-bf76-4e37-80cd-7fa813f5cd72",
+    "created": 1533986724260
 }

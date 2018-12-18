@@ -1,0 +1,30 @@
+{
+    "updated": 1540902078966,
+    "authorName": "andro",
+    "id": "fbb78acc-c004-4669-a277-98c47eb59598",
+    "created": 1540369903561,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array In"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array Out"
+            }
+        ],
+        "name": "Ops.Array.ArrayMin"
+    },
+    "summary": "Applies a min operation to all values in an array",
+    "docs": {
+        "ports": []
+    }
+}

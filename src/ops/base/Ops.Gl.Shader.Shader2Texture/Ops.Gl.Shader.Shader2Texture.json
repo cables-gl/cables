@@ -1,5 +1,4 @@
 {
-    "updated": 1526452047455,
     "authorName": "pandur",
     "id": "a3debb76-7d84-4548-9e7b-24891423dcce",
     "created": 1526299020358,
@@ -12,6 +11,21 @@
             {
                 "type": "2",
                 "name": "Shader"
+            },
+            {
+                "type": "0",
+                "name": "filter",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Use Viewport Size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -30,6 +44,10 @@
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
             {
                 "type": "2",
                 "name": "Texture"

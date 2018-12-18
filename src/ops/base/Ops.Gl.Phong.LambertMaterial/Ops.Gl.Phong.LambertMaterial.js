@@ -1,38 +1,22 @@
+const execute=op.inTrigger("execute");
+const r = op.inValueSlider("diffuse r", Math.random());
+const g = op.inValueSlider("diffuse g", Math.random());
+const b = op.inValueSlider("diffuse b", Math.random());
+const a = op.inValueSlider("diffuse a", 1.0);
+const next=op.outTrigger("next");
 
+r.setUiAttribs({ colorPick: true });
 
-var execute=this.addInPort(new Port(this,"execute",OP_PORT_TYPE_FUNCTION) );
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl,"LambertMaterial");
 
-var inSpecular=op.inValueSlider("Specular",0.5);
+const runiform=new CGL.Uniform(shader,'f','r',r);
+const guniform=new CGL.Uniform(shader,'f','g',g);
+const buniform=new CGL.Uniform(shader,'f','b',b);
+const auniform=new CGL.Uniform(shader,'f','a',a);
 
-// diffuse color
-
-var r=this.addInPort(new Port(this,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=this.addInPort(new Port(this,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=this.addInPort(new Port(this,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=this.addInPort(new Port(this,"diffuse a",OP_PORT_TYPE_VALUE,{ display:'range' }));
-
-
-
-var next=this.addOutPort(new Port(this,"next",OP_PORT_TYPE_FUNCTION));
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl,'PhongMaterial2');
-// shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_NORMAL','MODULE_BEGIN_FRAG']);
-
-r.uniform=new CGL.Uniform(shader,'f','r',r);
-g.uniform=new CGL.Uniform(shader,'f','g',g);
-b.uniform=new CGL.Uniform(shader,'f','b',b);
-a.uniform=new CGL.Uniform(shader,'f','a',a);
-
-r.set(Math.random());
-g.set(Math.random());
-b.set(Math.random());
-a.set(1.0);
-
-
-
-
-
+var outShader=op.outObject("Shader");
+outShader.set(shader);
 
 var MAX_LIGHTS=16;
 var lights=[];
@@ -47,9 +31,7 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
     lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
     lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
-    
     lights[count].ambient=new CGL.Uniform(shader,'3f','lights['+count+'].ambient',1);
-
     lights[count].fallOff=new CGL.Uniform(shader,'f','lights['+count+'].falloff',0);
     lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',10);
 }
@@ -88,8 +70,6 @@ var updateLights=function()
         lights[count].ambient.setValue([0.1,0.1,0.1]);
         lights[count].mul.setValue(1);
         lights[count].fallOff.setValue(0.5);
-
-
     }
     else
     {
@@ -128,16 +108,12 @@ function updateSpecular()
         else inSpecular.uniform.setValue(Math.exp(inSpecular.get()*8,2));
 }
 
-
 execute.onTriggered=function()
 {
     if(!shader)return;
 
     cgl.setShader(shader);
     updateLights();
-    // shader.bindTextures();
     next.trigger();
     cgl.setPreviousShader();
 };
-
-

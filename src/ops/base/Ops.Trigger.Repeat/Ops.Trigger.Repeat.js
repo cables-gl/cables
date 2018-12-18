@@ -1,8 +1,8 @@
-const exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 const num=op.inValueInt("num",5);
 
-const trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-const idx=op.addOutPort(new Port(op,"index"));
+const trigger=op.outTrigger("trigger")
+const idx=op.addOutPort(new CABLES.Port(op,"index"));
 
 exe.onTriggered=function()
 {

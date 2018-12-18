@@ -1,11 +1,7 @@
-op.name='Log';
+const number=op.addInPort(new CABLES.Port(op,"number"));
+const result=op.addOutPort(new CABLES.Port(op,"result"));
 
-var number=op.addInPort(new Port(op,"number"));
-
-var result=op.addOutPort(new Port(op,"result"));
-
-
-number.onValueChanged=function()
+number.onChange=function()
 {
     var r=Math.log( number.get() );
     if(isNaN(r))r=0;

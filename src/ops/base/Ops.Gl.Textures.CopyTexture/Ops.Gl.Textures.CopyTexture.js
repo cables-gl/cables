@@ -1,18 +1,15 @@
-
-var inTexture=op.inTexture("Texture");
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var useVPSize=op.addInPort(new Port(op,"use original size",OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var width=op.inValueInt("width");
-var height=op.inValueInt("height");
-
-var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
-var twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
-var fpTexture=op.inValueBool("HDR");
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var texOut=op.outTexture("texture_out");
-
-var outRatio=op.outValue("Aspect Ratio");
+const
+    render=op.inTrigger('render'),
+    inTexture=op.inTexture('Texture'),
+    useVPSize=op.inValueBool('use original size'),
+    width=op.inValueInt('width'),
+    height=op.inValueInt('height'),
+    tfilter=op.inValueSelect('filter',['nearest','linear','mipmap']),
+    twrap=op.inValueSelect('wrap',['clamp to edge','repeat','mirrored repeat']),
+    fpTexture=op.inValueBool('HDR'),
+    trigger=op.outTrigger('trigger'),
+    texOut=op.outTexture('texture_out'),
+    outRatio=op.outValue("Aspect Ratio");
 
 texOut.set(null);
 var cgl=op.patch.cgl;
@@ -23,17 +20,8 @@ var w=8,h=8;
 var prevViewPort=[0,0,0,0];
 var reInitEffect=true;
 
-var bgFrag=''
-    .endl()+'UNI float a;'
-    .endl()+'UNI sampler2D tex;'
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col=texture2D(tex,texCoord);'
-    .endl()+'   gl_FragColor = col;'
-    .endl()+'}';
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');
-bgShader.setSource(bgShader.getDefaultVertexShader(),bgFrag);
+bgShader.setSource(bgShader.getDefaultVertexShader(),attachments.copytexture_frag);
 var textureUniform=new CGL.Uniform(bgShader,'t','tex',0);
 
 var selectedFilter=CGL.Texture.FILTER_LINEAR;
@@ -49,6 +37,7 @@ function initEffect()
 
     tex=new CGL.Texture(cgl,
         {
+            "name":"copytexture",
             "isFloatingPointTexture":fpTexture.get(),
             "filter":selectedFilter,
             "wrap":selectedWrap,
@@ -86,7 +75,7 @@ function updateResolution()
     {
         height.set(h);
         width.set(w);
-        tex.filter=CGL.Texture.FILTER_LINEAR;
+        tex.filter=selectedFilter;
         tex.setSize(w,h);
         outRatio.set(w/h);
         effect.setSourceTexture(tex);
@@ -125,26 +114,28 @@ function updateSizePorts()
     }
 }
 
-useVPSize.onValueChanged=function()
+useVPSize.onChange=function()
 {
     updateSizePorts();
     if(useVPSize.get())
     {
-        width.onValueChanged=null;
-        height.onValueChanged=null;
+        width.onChange=null;
+        height.onChange=null;
     }
     else
     {
-        width.onValueChanged=updateResolution;
-        height.onValueChanged=updateResolution;
+        width.onChange=updateResolution;
+        height.onChange=updateResolution;
     }
     updateResolution();
 };
 
+var lastTex=null;
 
 var doRender=function()
 {
-    if(!effect || reInitEffect)
+
+    if(!effect || reInitEffect || lastTex!=inTexture.get())
     {
         initEffect();
     }
@@ -156,6 +147,10 @@ var doRender=function()
 
     updateResolution();
 
+    if(!inTexture.get())return;
+
+    lastTex=inTexture.get();
+
     cgl.currentTextureEffect=effect;
     effect.setSourceTexture(tex);
 
@@ -164,10 +159,11 @@ var doRender=function()
     // render background color...
     cgl.setShader(bgShader);
     cgl.currentTextureEffect.bind();
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTexture.get().tex );
+    cgl.setTexture(0, inTexture.get().tex );
+
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
+
 
     texOut.set(effect.getCurrentSourceTexture());
 
@@ -176,7 +172,7 @@ var doRender=function()
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 
     cgl.currentTextureEffect=null;
-    
+
     trigger.trigger();
 };
 
@@ -192,19 +188,20 @@ function onWrapChange()
 }
 
 twrap.set('clamp to edge');
-twrap.onValueChanged=onWrapChange;
+twrap.onChange=onWrapChange;
 
 function onFilterChange()
 {
     if(tfilter.get()=='nearest') selectedFilter=CGL.Texture.FILTER_NEAREST;
-    if(tfilter.get()=='linear')  selectedFilter=CGL.Texture.FILTER_LINEAR;
+    else if(tfilter.get()=='linear')  selectedFilter=CGL.Texture.FILTER_LINEAR;
+    else if(tfilter.get()=='mipmap')  selectedFilter=CGL.Texture.FILTER_MIPMAP;
 
     reInitEffect=true;
     updateResolution();
 }
 
 tfilter.set('linear');
-tfilter.onValueChanged=onFilterChange;
+tfilter.onChange=onFilterChange;
 
 useVPSize.set(true);
 render.onTriggered=doRender;

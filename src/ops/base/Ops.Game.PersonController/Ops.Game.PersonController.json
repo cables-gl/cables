@@ -1,5 +1,5 @@
 {
-    "updated": 1519816391235,
+    "updated": 1541173639997,
     "authorName": "pandur",
     "id": "7b08dea1-a05b-422e-a1de-7832058bee51",
     "created": 1519816303489,
@@ -11,39 +11,51 @@
             },
             {
                 "type": "0",
-                "name": "Speed"
+                "name": "Speed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "North"
+                "name": "North",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "East"
+                "name": "East",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "South"
+                "name": "South",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "West"
+                "name": "West",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Dir"
+                "name": "Dir",
+                "subType": "number"
             }
         ],
         "name": "Ops.Game.PersonController"
+    },
+    "summary": "simple controller example op for game characters",
+    "docs": {
+        "ports": []
     }
 }

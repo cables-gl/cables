@@ -1,5 +1,5 @@
 {
-    "updated": 1524310814089,
+    "updated": 1541487494602,
     "authorName": "pandur",
     "id": "7fa95a3b-9ba2-4b5b-aee9-819bbde70bab",
     "created": 1524157719214,
@@ -43,6 +43,11 @@
                 "type": "0",
                 "name": "Z",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RGB",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

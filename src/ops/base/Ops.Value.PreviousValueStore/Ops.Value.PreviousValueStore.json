@@ -1,0 +1,32 @@
+{
+    "updated": 1535465379107,
+    "authorName": "pandur",
+    "id": "01716872-67bd-4b31-a4a2-e0ccadf48411",
+    "created": 1535465357281,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Current Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Previous Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Value.PreviousValueStore"
+    },
+    "summary": "remember/store last set value ",
+    "docs": {
+        "ports": []
+    }
+}

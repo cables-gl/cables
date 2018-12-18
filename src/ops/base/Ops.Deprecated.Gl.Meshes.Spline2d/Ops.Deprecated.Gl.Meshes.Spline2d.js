@@ -1,12 +1,12 @@
 op.name="Spline2d";
 
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 
 var inThickness=op.inValue("Thickness",1);
 
 var inFill=op.inValueBool("Fill");
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 var inPoints=op.inArray("points");
 
 

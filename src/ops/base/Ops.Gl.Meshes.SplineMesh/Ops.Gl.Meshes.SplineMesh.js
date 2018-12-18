@@ -1,5 +1,5 @@
-var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('Render');
+var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 var thick=op.inValue("Thickness");
 var inStart=op.inValueSlider("Start");
 var inLength=op.inValueSlider("Length",1);
@@ -8,7 +8,7 @@ var inStrip=op.inValueBool("Line Strip",true);
 var inPoints=op.inArray('points');
 var inNumPoints=op.inValue("Num Points",0);
 
-var geomOut=op.addOutPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize=true;
 
@@ -219,7 +219,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecA[1];
         geom.vertices[index++]=vecA[2];
 
-        geom.texCoords[indexTc++]=repx;
+        geom.texCoords[indexTc++]=repx0;
         geom.texCoords[indexTc++]=repy0;
 
         // b
@@ -227,7 +227,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecB[1];
         geom.vertices[index++]=vecB[2];
 
-        geom.texCoords[indexTc++]=repx;
+        geom.texCoords[indexTc++]=repx0;
         geom.texCoords[indexTc++]=repy;
 
         // c
@@ -235,7 +235,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecC[1];
         geom.vertices[index++]=vecC[2];
 
-        geom.texCoords[indexTc++]=repx0;
+        geom.texCoords[indexTc++]=repx;
         geom.texCoords[indexTc++]=repy0;
 
         // d
@@ -243,7 +243,10 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecD[1];
         geom.vertices[index++]=vecD[2];
 
-        geom.texCoords[indexTc++]=repx0;
+
+
+
+        geom.texCoords[indexTc++]=repx;
         geom.texCoords[indexTc++]=repy;
 
         // c
@@ -251,7 +254,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecC[1];
         geom.vertices[index++]=vecC[2];
 
-        geom.texCoords[indexTc++]=repx0;
+        geom.texCoords[indexTc++]=repx;
         geom.texCoords[indexTc++]=repy0;
 
         // b
@@ -259,7 +262,7 @@ repx=repx0+1/(numPoints/3);
         geom.vertices[index++]=vecB[1];
         geom.vertices[index++]=vecB[2];
 
-        geom.texCoords[indexTc++]=repx;
+        geom.texCoords[indexTc++]=repx0;
         geom.texCoords[indexTc++]=repy;
 
         if(!lastC)

@@ -1,5 +1,5 @@
 {
-    "updated": 1525706116567,
+    "updated": 1536772924415,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "44f0aa70-e97d-41cf-9560-369bffa0d21c",
@@ -12,7 +12,8 @@
             },
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "1",
@@ -20,23 +21,39 @@
             },
             {
                 "type": "0",
-                "name": "Create Non Mesh Nodes"
+                "name": "Create Non Mesh Nodes",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Create Materials"
+                "name": "Create Materials",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Detect Clones"
+                "name": "Detect Clones",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Mesh Materials"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Loading",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Json3d.Json3dScene2"
+    },
+    "summary": "load a 3d scene, .fbx, .dae, collada etc.",
+    "docs": {
+        "ports": []
     }
 }

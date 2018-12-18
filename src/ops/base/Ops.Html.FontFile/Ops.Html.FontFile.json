@@ -3,16 +3,29 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "family"
+                "name": "family",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Loaded",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Loaded Trigger"
             }
         ],
         "name": "Ops.Html.FontFile"
     },
-    "updated": 1520955693826,
+    "updated": 1542887447548,
     "authorName": "pandur",
     "id": "0cf90109-cccd-4633-9c77-8aaf53eae15c",
     "created": 1518009204879,

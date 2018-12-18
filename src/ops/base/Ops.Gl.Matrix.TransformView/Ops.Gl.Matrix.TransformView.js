@@ -1,17 +1,17 @@
-op.name="TransformView";
+const
+    render=op.inTrigger('render'),
+    posX=op.inValueFloat("posX"),
+    posY=op.inValueFloat("posY"),
+    posZ=op.inValueFloat("posZ"),
+    scale=op.inValueFloat("scale"),
+    rotX=op.inValueFloat("rotX"),
+    rotY=op.inValueFloat("rotY"),
+    rotZ=op.inValueFloat("rotZ"),
+    trigger=op.outTrigger('trigger');
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-
-var posX=op.addInPort(new Port(op,"posX"),0);
-var posY=op.addInPort(new Port(op,"posY"),0);
-var posZ=op.addInPort(new Port(op,"posZ"),0);
-
-var scale=op.addInPort(new Port(op,"scale"));
-
-var rotX=op.addInPort(new Port(op,"rotX"));
-var rotY=op.addInPort(new Port(op,"rotY"));
-var rotZ=op.addInPort(new Port(op,"rotZ"));
+op.setPortGroup("Position",[posX,posY,posZ]);
+op.setPortGroup("Scale",[scale]);
+op.setPortGroup("Rotation",[rotX,rotZ,rotY]);
 
 var cgl=op.patch.cgl;
 var vPos=vec3.create();
@@ -28,11 +28,11 @@ var rotChanged=true;
 
 render.onTriggered=function()
 {
-    
-    
 
-    
-    
+
+
+
+
     var updateMatrix=false;
     if(translationChanged)
     {
@@ -64,8 +64,8 @@ render.onTriggered=function()
 
     trigger.trigger();
     cgl.popViewMatrix();
-    
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:posX,
@@ -73,7 +73,7 @@ render.onTriggered=function()
                 posZ:posZ,
             });
 
-    
+
 };
 
 op.transform3d=function()
@@ -81,7 +81,7 @@ op.transform3d=function()
     return {
             pos:[posX,posY,posZ]
         };
-    
+
 };
 
 var doUpdateMatrix=function()

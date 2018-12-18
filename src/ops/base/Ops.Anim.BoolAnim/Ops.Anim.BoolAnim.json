@@ -7,23 +7,28 @@
             },
             {
                 "type": "0",
-                "name": "bool"
+                "name": "bool",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "value false"
+                "name": "value false",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "value true"
+                "name": "value true",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "duration"
+                "name": "duration",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "easing"
+                "name": "easing",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -33,10 +38,11 @@
             },
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": "1",
                 "name": "finished"
             },
             {
@@ -47,7 +53,7 @@
         "name": "Ops.Anim.BoolAnim"
     },
     "summary": "animate between two values  based on boolean value",
-    "updated": 1520949224863,
+    "updated": 1542041964750,
     "authorName": "pandur",
     "id": "06ad9d35-ccf5-4d31-889c-e23fa062588a",
     "created": 1518522798910,

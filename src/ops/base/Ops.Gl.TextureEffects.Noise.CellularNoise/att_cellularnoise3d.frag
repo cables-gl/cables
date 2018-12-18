@@ -1,12 +1,12 @@
-precision highp float;
-
-uniform float z;
-uniform float x;
-uniform float y;
-uniform float scale;
+UNI float z;
+UNI float x;
+UNI float y;
+UNI float scale;
 IN vec2 texCoord;
-uniform sampler2D tex;
+UNI sampler2D tex;
+UNI float amount;
 
+{{BLENDCODE}}
 
 void FAST32_hash_3D( 	vec3 gridcell,
                         out vec4 lowz_hash_0,
@@ -115,12 +115,25 @@ float Cellular3D(vec3 P)
 void main()
 {
 
-   vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
-   p=p*scale;
 
-   p=vec2(p.x+0.5-x,p.y+0.5-y);
+    vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
 
-   float v=Cellular3D(vec3(p.x,p.y,z));
-   vec4 col=vec4(v,v,v,1.0);
-   gl_FragColor = col;
+    #ifdef DO_TILEABLE
+        p=abs(texCoord-0.5);
+    #endif
+
+    p=p*scale;
+
+    p=vec2(p.x+0.5-x,p.y+0.5-y);
+
+    float v=Cellular3D(vec3(p.x,p.y,z));
+
+       //blend section
+    vec4 col=vec4(v,v,v,1.0);
+    //original texture
+    vec4 base=texture(tex,texCoord);
+    //blend stuff
+    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
+    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
+    outColor= col;
 }

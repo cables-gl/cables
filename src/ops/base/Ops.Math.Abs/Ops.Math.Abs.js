@@ -1,8 +1,7 @@
-op.name='abs';
-var number=op.addInPort(new Port(op,"number"));
-var result=op.addOutPort(new Port(op,"result"));
+const number=op.inValue("number");
+const result=op.outValue("result");
 
-number.onValueChanged=function()
+number.onChange=function()
 {
     result.set( Math.abs(number.get()) );
 };

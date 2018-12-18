@@ -1,15 +1,15 @@
-CABLES.Op.apply(this, arguments);
+//Op.apply(this, arguments);
 var self=this;
 var cgl=this.patch.cgl;
 
 this.name='texture resize';
-// var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+// const render=op.inTrigger("render");
 
-var width=this.addInPort(new Port(this,"width",OP_PORT_TYPE_VALUE));
-var height=this.addInPort(new Port(this,"height",OP_PORT_TYPE_VALUE));
+var width=this.addInPort(new CABLES.Port(this,"width",CABLES.OP_PORT_TYPE_VALUE));
+var height=this.addInPort(new CABLES.Port(this,"height",CABLES.OP_PORT_TYPE_VALUE));
 
-// var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
-var texOut=this.addOutPort(new Port(this,"texture_out",OP_PORT_TYPE_TEXTURE,{preview:true}));
+// const trigger=op.outTrigger("trigger");
+var texOut=this.addOutPort(new CABLES.Port(this,"texture_out",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
 
 var tex=new CGL.Texture(cgl);
 tex.filter=CGL.Texture.FILTER_MIPMAP;

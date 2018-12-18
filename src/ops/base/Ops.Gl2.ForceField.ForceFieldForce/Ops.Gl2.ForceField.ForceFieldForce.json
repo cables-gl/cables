@@ -1,5 +1,4 @@
 {
-    "updated": 1505164466985,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "542e6770-7a52-4ad7-ba61-034070317ed4",
@@ -12,31 +11,38 @@
             },
             {
                 "type": "0",
-                "name": "Range Radius"
+                "name": "Range Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "attraction"
+                "name": "attraction",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Angle"
+                "name": "Angle",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Show"
+                "name": "Show",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Z"
+                "name": "Pos Z",
+                "subType": "number"
             }
         ],
         "portsOut": [

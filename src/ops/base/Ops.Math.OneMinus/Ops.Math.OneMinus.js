@@ -1,6 +1,5 @@
-var inValue=op.inValue("Value");
-
-var result=op.outValue("Result");
+const inValue=op.inValue("Value");
+const result=op.outValue("Result");
 
 inValue.onChange=update;
 update();

@@ -1,5 +1,5 @@
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 
 var numNodes=op.outValue("Num Nodes");
 var numMaterials=op.outValue("Num Materials");
@@ -11,7 +11,7 @@ var numAnimsChannels=op.outValue("Num Anim Channels");
 var outDuration=op.outValue("Anim Duration");
 
 
-var inDump=op.inFunctionButton("Dump Console");
+var inDump=op.inTriggerButton("Dump Console");
 
 var cgl=op.patch.cgl;
 var scene=null;

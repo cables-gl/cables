@@ -1,0 +1,35 @@
+{
+    "updated": 1516129152171,
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "pandur",
+    "id": "5ad3323f-967e-4ad4-874d-e24fb31c0b7d",
+    "created": 1507357452324,
+    "summary": "connect to a Midi device",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "normalize"
+            },
+            {
+                "type": "0",
+                "name": "device"
+            },
+            {
+                "type": "0",
+                "name": "Reset Lights"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiInput"
+    },
+    "youtubeid": "eDlaFD_d5lc",
+    "docs": {
+        "ports": []
+    }
+}

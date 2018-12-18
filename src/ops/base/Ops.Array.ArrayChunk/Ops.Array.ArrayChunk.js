@@ -1,5 +1,3 @@
-op.name="ArrayChunk";
-
 // inputs
 var inArrayPort = op.inArray("Input Array");
 var beginPort = op.inValue("Begin Index", 0);

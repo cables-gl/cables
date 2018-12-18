@@ -1,0 +1,62 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "num"
+            },
+            {
+                "type": "0",
+                "name": "width"
+            },
+            {
+                "type": "0",
+                "name": "axis"
+            },
+            {
+                "type": "0",
+                "name": "offset"
+            },
+            {
+                "type": "0",
+                "name": "Gradients"
+            },
+            {
+                "type": "0",
+                "name": "r"
+            },
+            {
+                "type": "0",
+                "name": "g"
+            },
+            {
+                "type": "0",
+                "name": "b"
+            },
+            {
+                "type": "0",
+                "name": "a"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Stripes"
+    },
+    "updated": 1541534453653,
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "pandur",
+    "id": "38576e9c-3690-4a44-ac9b-ad28816749a1",
+    "created": 1510252175643,
+    "summary": "Draw stripes into the current ImageCompose",
+    "docs": {
+        "ports": []
+    }
+}

@@ -1,4 +1,4 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
@@ -12,7 +12,7 @@ var inv=op.inValueBool("Invert",true);
 var rangeA=op.inValueSlider("RangeA",0.4);
 var rangeB=op.inValueSlider("RangeB",0.5);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -33,16 +33,21 @@ const rangeBUniform=new CGL.Uniform(shader,'f','rangeB',rangeB);
 inv.onChange=updateInvert;
 updateInvert();
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 
 function updateInvert()
 {
     if(inv.get())shader.define("DO_INVERT");
         else shader.removeDefine("DO_INVERT");
+}
+
+var tile=op.inValueBool("Tileable",false);
+tile.onChange=updateTileable;
+function updateTileable()
+{
+    if(tile.get())shader.define("DO_TILEABLE");
+        else shader.removeDefine("DO_TILEABLE");
 }
 
 render.onTriggered=function()
@@ -52,8 +57,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

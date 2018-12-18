@@ -1,0 +1,53 @@
+{
+    "updated": 1536134156431,
+    "authorName": "pandur",
+    "id": "3206e336-7edf-48c1-81f7-460c8520a0c3",
+    "created": 1519816964253,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "visible",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "focus"
+            },
+            {
+                "type": "1",
+                "name": "blur"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "text",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "cursorPos",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "focussed",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "escape pressed"
+            },
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "name": "Ops.Html.Elements.TextArea"
+    },
+    "summary": "input field text area, can be used for inputting stuff while being hidden",
+    "docs": {
+        "ports": []
+    }
+}

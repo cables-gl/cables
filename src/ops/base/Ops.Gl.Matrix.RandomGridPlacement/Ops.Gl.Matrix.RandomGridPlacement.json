@@ -1,5 +1,5 @@
 {
-    "updated": 1524494563611,
+    "updated": 1543741419001,
     "authorName": "pandur",
     "id": "3353effa-851f-4c0f-bace-ba5e2e82ae49",
     "created": 1517222182124,
@@ -11,27 +11,33 @@
             },
             {
                 "type": "0",
-                "name": "max Depth"
+                "name": "max Depth",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Possibility"
+                "name": "Possibility",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Seed"
+                "name": "Seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "Scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "Height",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -41,13 +47,20 @@
             },
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "depth"
+                "name": "depth",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.RandomGridPlacement"
+    },
+    "summary": "place random objects on a grid",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

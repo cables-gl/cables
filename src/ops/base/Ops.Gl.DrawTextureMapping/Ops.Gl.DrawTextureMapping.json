@@ -1,5 +1,5 @@
 {
-    "updated": 1511948857803,
+    "updated": 1535151171719,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "f61e47de-9156-4243-9a83-79002aeaf7be",
@@ -16,7 +16,8 @@
             },
             {
                 "type": "0",
-                "name": "Num Points"
+                "name": "Num Points",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -1,26 +1,22 @@
 // adapted from https://thebookofshaders.com/12/
 
 IN vec2 texCoord;
-// uniform vec2 u_resolution;
-// uniform float mouseX;
-// uniform float mouseY;
-// uniform float u_time;
 
-uniform bool drawIsoLines;
-uniform bool drawDistance;
-uniform int fill;
-uniform float seed;
+UNI bool drawIsoLines;
+UNI bool drawDistance;
+UNI int fill;
+UNI float seed;
 
-uniform float time;
-uniform float movement;
-uniform float amount;
-uniform float centerSize;
-uniform sampler2D tex;
+UNI float time;
+UNI float movement;
+UNI float amount;
+UNI float centerSize;
+UNI sampler2D tex;
 
 {{BLENDCODE}}
+{{LIB_RANDOM_OLD}}
 
 float rand(float n){return fract(sin(n) * 43758.5453123);}
-
 vec2 random2( vec2 p )
 {
     return vec2(rand(p.x),rand(p.x+p.y));
@@ -37,7 +33,7 @@ void main() {
     // point[2] = vec2(0.28,0.64);
     // point[3] = vec2(0.31,0.26);
     // point[4] = vec2(mouseX,mouseY);
-    
+
     float m_dist = 1.;  // minimun distance
     vec2 m_point;        // minimum position
     float indexColor=0.0;
@@ -48,7 +44,7 @@ void main() {
     for (float i = 0.0; i < NUM; i++)
     {
         vec2 pos= random2(vec2(i+seed,i+seed));
-        
+
         pos.x+=sin(time+i)*movement;
         pos.y+=cos(time+i)*movement;
 
@@ -56,7 +52,7 @@ void main() {
         {
             // pos=vec2(mouseX,mouseY);
         }
-        
+
         float dist = distance(texCoord, pos);
         if( dist < m_dist )
         {
@@ -74,7 +70,7 @@ void main() {
     if(fill==2) color.rgb = vec3( m_point.x );
     if(fill==3) color.rgb = vec3( 0.5 );
 
-    // Add distance field to closest point center 
+    // Add distance field to closest point center
     if(drawDistance) color += m_dist*2.;
 
     // Show isolines
@@ -85,11 +81,11 @@ void main() {
     color += 1.-step(centerSize/30.0, m_dist);
 
 
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
     vec4 finalColor = vec4(color,1.0);
     finalColor = vec4( _blend( base.rgb, finalColor.rgb ) ,1.0);
     finalColor = vec4( mix( finalColor.rgb, base.rgb ,1.0-base.a*amount),1.0);
 
 
-    gl_FragColor = finalColor;
+    outColor= finalColor;
 }

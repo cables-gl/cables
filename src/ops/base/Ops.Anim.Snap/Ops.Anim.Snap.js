@@ -6,7 +6,7 @@ var snapDist=op.inValue("Snap Distance");
 var snapDistRelease=op.inValue("Snap Distance Release");
 var inSlow=op.inValue("Slowdown",0.4);
 var inBlock=op.inValue("Block Input after snap");
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 var inMin=op.inValue("Min",0);
 var inMax=op.inValue("Max",0);
 

@@ -20,7 +20,7 @@
         ],
         "name": "Ops.Api.Ifttt.IftttTrigger"
     },
-    "summary": "Triggers a custom event in the maker channel of [IFTTT](https://ifttt.com/)",
+    "summary": "Triggers a custom event in the maker channel of IFTTT",
     "docs": {
         "ports": [
             {

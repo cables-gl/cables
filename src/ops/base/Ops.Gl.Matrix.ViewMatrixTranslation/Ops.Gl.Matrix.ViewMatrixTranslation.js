@@ -1,15 +1,15 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
 
-
 var cgl=op.patch.cgl;
 var pos=vec3.create();
 var identVec=vec3.create();
 var iViewMatrix=mat4.create();
+
 render.onTriggered=function()
 {
     mat4.invert(iViewMatrix,cgl.vMatrix);

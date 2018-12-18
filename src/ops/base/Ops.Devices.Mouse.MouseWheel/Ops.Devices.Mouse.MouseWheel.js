@@ -1,35 +1,24 @@
-
-op.name='mousewheel';
-
-var valIn=op.inValue("Value",0);
-
-var mul=op.inValue("Multiply",1);
-
-var minUnlimitedPort = op.inValueBool('Min Unlimited', false);
+const valIn=op.inValue("Value",0);
+const mul=op.inValue("Multiply",1);
+const minUnlimitedPort = op.inValueBool('Min Unlimited', false);
 minUnlimitedPort.setUiAttribs({ hidePort: true });
-var min=op.inValue("min",-100);
-var maxUnlimitedPort = op.inValueBool('Max Unlimited', false);
+const min=op.inValue("min",-100);
+const maxUnlimitedPort = op.inValueBool('Max Unlimited', false);
 maxUnlimitedPort.setUiAttribs({ hidePort: true });
-var max=op.inValue("max", 100);
+const max=op.inValue("max", 100);
+const smooth=op.inValueBool("smooth");
+const smoothSpeed=op.inValue("delay",0.3);
+const preventScroll=op.inValueBool("prevent scroll");
+const flip=op.inValueBool("Flip Direction");
+const active=op.inValueBool("active",true);
+const reset=op.inTriggerButton("Reset");
+const absVal=op.outValue("absolute value",0);
+const delta=op.outValue("delta",0);
 
-var smooth=op.inValueBool("smooth");
-var smoothSpeed=op.inValue("delay",0.3);
-var preventScroll=op.inValueBool("prevent scroll");
-var flip=op.inValueBool("Flip Direction");
-
-var active=op.inValueBool("active",true);
-
-var reset=op.inFunctionButton("Reset");
-
-var absVal=op.outValue("absolute value",0);
-var delta=op.outValue("delta",0);
-
-var cgl=op.patch.cgl;
-
-
+const cgl=op.patch.cgl;
 var value=0;
 
-var anim=new CABLES.TL.Anim();
+var anim=new CABLES.Anim();
 anim.defaultEasing=CABLES.TL.EASING_EXPO_OUT;
 
 var startTime=CABLES.now()/1000.0;
@@ -75,7 +64,6 @@ reset.onTriggered=function()
 {
     anim.clear();
     anim.setValue(CABLES.now()/1000.0-startTime,valIn.get());
-
     absVal.set(valIn.get());
     v=0;
 };
@@ -85,9 +73,9 @@ valIn.onChange=function()
     v=valIn.get();
 
     checkValue();
-    
+
     absVal.set( v );
-    
+
     anim.clear();
     anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
 
@@ -96,7 +84,7 @@ valIn.onChange=function()
 function updateSmooth()
 {
     var v=anim.getValue( CABLES.now()/1000.0-startTime );
-    
+
     absVal.set( v );
 }
 
@@ -112,10 +100,10 @@ smooth.onChange=function()
 function checkValue()
 {
     if(!maxUnlimitedPort.get()) {
-        v=Math.min(max.get(),v);    
+        v=Math.min(max.get(),v);
     }
     if(!minUnlimitedPort.get()) {
-        v=Math.max(min.get(),v);    
+        v=Math.max(min.get(),v);
     }
 }
 
@@ -134,9 +122,7 @@ function onMouseWheel(e)
 
     delta.set(0);
     delta.set(d);
-    
     v-=d;
-    
     checkValue();
 
     if( !smooth.get() )
@@ -149,7 +135,7 @@ function onMouseWheel(e)
         anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
         anim.setValue(CABLES.now()/1000.0-startTime+smoothSpeed.get(),v);
     }
-    
+
     if(preventScroll.get()) e.preventDefault();
 }
 
@@ -169,3 +155,4 @@ active.onChange=function()
     removeListener();
     if(active.get())addListener();
 };
+

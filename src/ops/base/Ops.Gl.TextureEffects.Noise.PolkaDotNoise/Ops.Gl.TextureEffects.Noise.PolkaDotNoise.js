@@ -1,4 +1,4 @@
-var render=op.addInPort(new Port(op,"Render",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('Render');
 
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
@@ -12,7 +12,7 @@ var Y=op.inValue("Y",0);
 
 var Z=op.inValue("Z",0);
 
-var trigger=op.addOutPort(new Port(op,"Next",OP_PORT_TYPE_FUNCTION));
+var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
 
 
 var cgl=op.patch.cgl;
@@ -34,21 +34,18 @@ Y.uniform==new CGL.Uniform(shader,'f','Y',Y);
 Z.uniform==new CGL.Uniform(shader,'f','Z',Z);
 scale.uniform==new CGL.Uniform(shader,'f','scale',scale);
 
-blendMode.onValueChanged=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

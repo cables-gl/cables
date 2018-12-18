@@ -1,0 +1,40 @@
+{
+    "updated": 1542006156932,
+    "authorName": "pandur",
+    "id": "3996ed5d-8143-4bec-9cfd-c1b193a295af",
+    "created": 1518855027067,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Enable depth testing",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Depth Test Method",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Write to depth buffer",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.Depth2"
+    },
+    "summary": "change depth testing method (depthMask,depthWrite,depthFunc)",
+    "docs": {
+        "ports": []
+    }
+}

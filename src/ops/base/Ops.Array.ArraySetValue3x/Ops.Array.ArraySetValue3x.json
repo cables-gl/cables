@@ -37,5 +37,9 @@
             }
         ],
         "name": "Ops.Array.ArraySetValue3x"
+    },
+    "summary": "set three values at position index in an array",
+    "docs": {
+        "ports": []
     }
 }

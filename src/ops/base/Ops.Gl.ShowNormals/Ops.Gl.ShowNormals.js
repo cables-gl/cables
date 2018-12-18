@@ -1,9 +1,9 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var geometry=op.addInPort(new Port(op,"geometry",OP_PORT_TYPE_OBJECT));
+var render=op.inTrigger('render');
+var geometry=op.addInPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
 
-var mul=op.addInPort(new Port(op,"Length",OP_PORT_TYPE_VALUE));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var mul=op.addInPort(new CABLES.Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
+var trigger=op.outTrigger('trigger');
 
 mul.set(0.1);
 
@@ -22,9 +22,9 @@ function rebuild()
     var i=0;
     var geom=geometry.get();
 
-    if(geom)
+    if(geom && geom.vertices)
     {
-        for(i=0;i<geom.vertices.length;i+=3)
+        for(var i=0;i<geom.vertices.length;i+=3)
         {
             points.push(geom.vertices[i+0]);
             points.push(geom.vertices[i+1]);
@@ -50,7 +50,7 @@ render.onTriggered=function()
         if(!shader)return;
     
         cgl.pushModelMatrix();
-    
+
         shader.bind();
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
     

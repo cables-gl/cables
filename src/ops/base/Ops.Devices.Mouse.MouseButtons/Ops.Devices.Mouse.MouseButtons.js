@@ -1,31 +1,24 @@
-op.name="MouseButtons";
-var cgl=op.patch.cgl;
+const
+    mouseClickLeft=op.outTrigger("Click Left"),
+    mouseClickRight=op.outTrigger("Click Right"),
+    mouseDoubleClick=op.outTrigger("Double Click"),
+    mouseDownLeft=op.outValue("Button pressed Left",false),
+    mouseDownMiddle=op.outValue("Button pressed Middle",false),
+    mouseDownRight=op.outValue("Button pressed Right",false),
+    triggerMouseDownLeft=op.outTrigger("Mouse Down Left"),
+    triggerMouseDownMiddle=op.outTrigger("Mouse Down Middle"),
+    triggerMouseDownRight=op.outTrigger("Mouse Down Right"),
+    triggerMouseUpLeft=op.outTrigger("Mouse Up Left"),
+    triggerMouseUpMiddle=op.outTrigger("Mouse Up Middle"),
+    triggerMouseUpRight=op.outTrigger("Mouse Up Right"),
+    area=op.inValueSelect("Area",['Canvas','Document'],'Canvas'),
+    active=op.inValueBool("Active",true);
 
-var mouseClickLeft=op.outFunction("Click Left");
-var mouseClickRight=op.outFunction("Click Right");
-var mouseDoubleClick=op.outFunction("Double Click");
-
-var mouseDownLeft=op.outValue("Button pressed Left",false);
-var mouseDownMiddle=op.outValue("Button pressed Middle",false);
-var mouseDownRight=op.outValue("Button pressed Right",false);
-
-var triggerMouseDownLeft=op.outFunction("Mouse Down Left");
-var triggerMouseDownMiddle=op.outFunction("Mouse Down Middle");
-var triggerMouseDownRight=op.outFunction("Mouse Down Right");
-
-var triggerMouseUpLeft=op.outFunction("Mouse Up Left");
-var triggerMouseUpMiddle=op.outFunction("Mouse Up Middle");
-var triggerMouseUpRight=op.outFunction("Mouse Up Right");
-
-var area=op.addInPort(new Port(op,"Area",OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document']}));
-var active=op.inValueBool("Active",true);
-
-area.set("Canvas");
-
+const cgl=op.patch.cgl;
 var listenerElement=null;
-
-area.onValueChanged=addListeners;
-
+area.onChange=addListeners;
+op.onDelete=removeListeners;
+addListeners();
 
 var onMouseDown = function(e)
 {
@@ -34,12 +27,12 @@ var onMouseDown = function(e)
         mouseDownLeft.set(true);
         triggerMouseDownLeft.trigger();
     }
-    if(e.which==2)
+    else if(e.which==2)
     {
         mouseDownMiddle.set(true);
         triggerMouseDownMiddle.trigger();
     }
-    if(e.which==3)
+    else if(e.which==3)
     {
         mouseDownRight.set(true);
         triggerMouseDownRight.trigger();
@@ -53,12 +46,12 @@ var onMouseUp = function(e)
         mouseDownLeft.set(false);
         triggerMouseUpLeft.trigger();
     }
-    if(e.which==2)
+    else if(e.which==2)
     {
         mouseDownMiddle.set(false);
         triggerMouseUpMiddle.trigger();
     }
-    if(e.which==3)
+    else if(e.which==3)
     {
         mouseDownRight.set(false);
         triggerMouseUpRight.trigger();
@@ -83,7 +76,7 @@ function onmouseclick(e)
 
 var ontouchstart=function(event)
 {
-    if(event.touches && event.touches.length>0) 
+    if(event.touches && event.touches.length>0)
     {
         event.touches[0].which=1;
         onMouseDown(event.touches[0]);
@@ -95,10 +88,8 @@ var ontouchend=function(event)
     onMouseUp({which:1});
 };
 
-
 function removeListeners()
 {
-    
     listenerElement.removeEventListener('touchend', ontouchend);
     listenerElement.removeEventListener('touchcancel', ontouchend);
     listenerElement.removeEventListener('touchstart', ontouchstart);
@@ -114,10 +105,10 @@ function removeListeners()
 function addListeners()
 {
     if(listenerElement)removeListeners();
-    
+
     listenerElement=cgl.canvas;
     if(area.get()=='Document') listenerElement=document.body;
-    
+
     listenerElement.addEventListener('touchend', ontouchend);
     listenerElement.addEventListener('touchcancel', ontouchend);
     listenerElement.addEventListener('touchstart', ontouchstart);
@@ -133,13 +124,6 @@ active.onChange=function()
 {
     if(listenerElement) removeListeners();
     if(active.get()) addListeners();
-    
 };
 
-op.onDelete=function()
-{
-    // console.log("remove mouse op...");
-    removeListeners();
-};
 
-addListeners();

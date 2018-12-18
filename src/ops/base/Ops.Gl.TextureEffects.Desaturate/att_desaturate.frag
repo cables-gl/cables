@@ -1,9 +1,11 @@
 
-#ifdef HAS_TEXTURES
-  IN vec2 texCoord;
-  UNI sampler2D tex;
+IN vec2 texCoord;
+UNI sampler2D tex;
+UNI float amount;
+
+#ifdef MASK
+    UNI sampler2D mask;
 #endif
-uniform float amount;
 
 vec3 desaturate(vec3 color, float amount)
 {
@@ -13,10 +15,13 @@ vec3 desaturate(vec3 color, float amount)
 
 void main()
 {
-   vec4 col=vec4(1.0,0.0,0.0,1.0);
-   #ifdef HAS_TEXTURES
-       col=texture2D(tex,texCoord);
-       col.rgb=desaturate(col.rgb,amount);
-   #endif
-   gl_FragColor = col;
+    vec4 col=texture(tex,texCoord);
+
+    float am=amount;
+    #ifdef MASK
+        am*=1.0-texture(mask,texCoord).r;
+    #endif
+
+    col.rgb=desaturate(col.rgb,am);
+    outColor= col;
 }

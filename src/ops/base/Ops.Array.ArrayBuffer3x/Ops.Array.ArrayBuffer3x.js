@@ -1,13 +1,11 @@
-op.name="ArrayBuffer3x";
-
-var exec=op.inFunction("exec");
+var exec=op.inTrigger("exec");
 var maxLength=op.inValue("Max Num Elements",100);
 
 var valX=op.inValue("Value X");
 var valY=op.inValue("Value Y");
 var valZ=op.inValue("Value Z");
 
-var inReset=op.inFunctionButton("Reset");
+var inReset=op.inTriggerButton("Reset");
 
 var arr=[];
 

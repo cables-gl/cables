@@ -1,0 +1,56 @@
+{
+    "updated": 1527697077712,
+    "authorName": "action",
+    "id": "be52d1f0-1004-4161-9ba9-7921c38955c0",
+    "created": 1527697077719,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Phase",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Amplitude",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "asine",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Tangent"
+    },
+    "summary": "Calculates the ratio of the sine and cosine of an angle.",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "Value input in radians"
+            },
+            {
+                "name": "Result",
+                "text": "Outout in the range infinity to -infinity"
+            }
+        ]
+    }
+}

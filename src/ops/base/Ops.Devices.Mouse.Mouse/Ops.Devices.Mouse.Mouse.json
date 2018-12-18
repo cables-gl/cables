@@ -4,49 +4,60 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "relative"
+                "name": "relative",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "normalize"
+                "name": "normalize",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Active"
+                "name": "Active",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "smooth"
+                "name": "smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "smoothSpeed"
+                "name": "smoothSpeed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Area"
+                "name": "Area",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "multiply"
+                "name": "multiply",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "flip y"
+                "name": "flip y",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "button down"
+                "name": "button down",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -62,16 +73,18 @@
             },
             {
                 "type": "0",
-                "name": "mouseOver"
+                "name": "mouseOver",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "button"
+                "name": "button",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Mouse.Mouse"
     },
-    "updated": 1517517165683,
+    "updated": 1541805046647,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "0bf51f3e-3161-4cc5-aecf-6e9160089fd2",

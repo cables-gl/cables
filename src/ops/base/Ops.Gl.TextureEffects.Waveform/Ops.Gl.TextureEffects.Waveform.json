@@ -1,0 +1,101 @@
+{
+    "updated": 1542819898264,
+    "authorName": "andro",
+    "id": "1ceabad7-1188-4a8f-b412-ff05adbb1576",
+    "created": 1542817961575,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Waveform",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amplitude",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line Glow",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "invert color",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Solid fill",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Waveform"
+    },
+    "summary": "Generates 4 different waveform textures. Sine, sawtooth,Triangle, Square.",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

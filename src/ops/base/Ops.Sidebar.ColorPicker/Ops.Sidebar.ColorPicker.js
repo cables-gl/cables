@@ -1,7 +1,17 @@
+// constants
+const DEFAULT_COLOR_HEX = '#07F78C';
+
 // inputs
 const parentPort = op.inObject('Link');
 const labelPort = op.inValueString('Text', 'Hex Color');
-const defaultValuePort = op.inValueString('Default', '#07F78C');
+const defaultColorArr = hexToRgbNorm(DEFAULT_COLOR_HEX);
+const inputRedPort = op.inValueSlider('Input Red', defaultColorArr[0]);
+const inputGreenPort = op.inValueSlider('Input Green', defaultColorArr[1]);
+const inputBluePort = op.inValueSlider('Input Blue', defaultColorArr[2]);
+// const inputValuePort = op.inValueString('Input', DEFAULT_COLOR_HEX);
+const setDefaultValueButtonPort = op.inTriggerButton('Set Default');
+const defaultValuePort = op.inValueString('Default', DEFAULT_COLOR_HEX);
+defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 
 // outputs
 const siblingsPort = op.outObject('Children');
@@ -45,8 +55,60 @@ parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
 defaultValuePort.onChange = onDefaultValueChanged;
 op.onDelete = onDelete;
+// inputValuePort.onChange = onInputValuePortChange;
+setDefaultValueButtonPort.onTriggered = setDefaultColor;
+inputRedPort.onChange = inputColorChanged;
+inputGreenPort.onChange = inputColorChanged;
+inputBluePort.onChange = inputColorChanged;
 
 // functions
+
+function inputColorChanged() {
+    const hex = getInputColorHex();
+    // defaultValuePort.set(hex);
+    colorInput.value = hex;
+    input.value = hex;
+    setColorOutPorts(hex);
+    /*
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); // update DOM
+    }
+    */
+}
+
+/**
+ * Returns the color of the op params ("input red", "input green", "input blue") as hex
+ */
+function getInputColorHex() {
+    const r = inputRedPort.get();
+    const g = inputGreenPort.get();
+    const b = inputBluePort.get();
+    const hex = rgbNormToHex(r, g, b);
+    return hex;
+}
+
+function setDefaultColor() {
+    // let hexCol = inputValuePort.get().trim();
+    const hex = getInputColorHex();
+    defaultValuePort.set(hex);
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
+}
+
+/*
+function onInputValuePortChange() {
+    let hexCol = inputValuePort.get().trim();
+    if(hexCol.length === 6 && hexCol.charAt(0) !== '#') {
+        hexCol = '#' + hexCol;
+    }
+    if(hexCol.length === 7) {
+        colorInput.value = hexCol;
+        input.value = hexCol;
+        setColorOutPorts(hexCol);
+    }
+}
+*/
 
 function hexToRgbNorm(hexColor) {
     if(!hexColor || hexColor.length !== 7) { return; }
@@ -58,9 +120,49 @@ function hexToRgbNorm(hexColor) {
 
 }
 
+/**
+ * Helper for rgbNormToHex / rgbToHex
+ * Converts a number in range [0..255] to hex [00..FF] (with left padding)
+ */
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+/*
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+*/
+
+/**
+ * r, g, b in range [0..1]
+ * @returns {string} e.g. "#ff0000"
+ */
+function rgbNormToHex(r, g, b) {
+    return "#" + componentToHex(Math.floor(255 * r)) + componentToHex(Math.floor(255 * g)) + componentToHex(Math.floor(255 * b));
+}
+
 function onColorPickerChange(event) {
-    setColorOutPorts(event.target.value)
-    input.value = event.target.value;
+    const hex = event.target.value;
+    setColorOutPorts(hex);
+    input.value = hex;
+    // inputValuePort.set(hex)
+    setInputsByHex(hex);
+    if(CABLES.UI){
+        gui.patch().showOpParams(op); /* update DOM */
+    }
+}
+
+/**
+ * Sets the op param color input ports by hex value (e.g. "#FF0000")
+ * Does NOT update the gui
+ */
+function setInputsByHex(hex) {
+    const colorArr = hexToRgbNorm(hex);
+    inputRedPort.set(colorArr[0]),
+    inputGreenPort.set(colorArr[1]),
+    inputBluePort.set(colorArr[2])
 }
 
 function onInput(ev) {
@@ -71,6 +173,11 @@ function onInput(ev) {
     if(newValue.length === 7) {
         colorInput.value = newValue;
         setColorOutPorts(newValue);
+        // inputValuePort.set(newValue)
+        setInputsByHex(newValue);
+        if(CABLES.UI){
+            gui.patch().showOpParams(op); /* update DOM */
+        }
     }
 }
 

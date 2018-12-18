@@ -1,27 +1,16 @@
+const
+    render=op.inTrigger("render"),
+    trigger=op.outTrigger("trigger"),
+    depth=op.inTexture("depth texture"),
+    zNear=op.inValue("Frustum Near",0.1),
+    zFar=op.inValue("Frustum Far",20),
+    samples=op.inValueInt("Samples",4),
+    aoRadius=op.inValue("Ao Radius",3),
+    aoClamp=op.inValueSlider("Ao Clamp",0.25),
+    lumInfluence=op.inValueSlider("Luminance Influence",0.7);
 
-var render=op.inFunction("render");
-var trigger=op.outFunction("trigger");
-
-var depth=op.inTexture("depth texture");
-
-
-var zNear=op.inValue("Frustum Near",0.1);
-var zFar=op.inValue("Frustum Far",20);
-
-var samples=op.inValueInt("Samples",4);
-
-var aoRadius=op.inValue("Ao Radius",3);
-var aoClamp=op.inValueSlider("Ao Clamp",0.25);
-var lumInfluence=op.inValueSlider("Luminance Influence",0.7);
-
-
-// const float radius = 3.0; //ao radius
-// UNI float radius;
-// UNI float aoClamp;
-// const float aoclamp = 0.25; //depth clamp - reduces haloing at screen edges
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.ssao_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
@@ -51,20 +40,20 @@ render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
     if(!depth.get())return;
-    
+
     uniWidth.setValue( depth.get().width );
     uniHeight.setValue( depth.get().height );
 
     cgl.setShader(shader);
 
     cgl.currentTextureEffect.bind();
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
 
     if(depth.get() && depth.get().tex)
     {
-        cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, depth.get().tex );
+        cgl.setTexture(1, depth.get().tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, depth.get().tex );
     }
 
     cgl.currentTextureEffect.finish();

@@ -1,7 +1,7 @@
 
 var val=op.inValueBool("Value",false);
 
-var next=op.outFunction("Next");
+var next=op.outTrigger("Next");
 
 var oldVal=0;
 

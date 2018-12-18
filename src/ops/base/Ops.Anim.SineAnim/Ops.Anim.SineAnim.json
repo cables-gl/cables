@@ -1,6 +1,5 @@
 {
-    "summary": "Outputs a changing value based on a sine operation, which can be used for animations. (sinus)",
-    "updated": 1513029345343,
+    "summary": "animation in form of sine curve (sinus)",
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "736d3d0e-c920-449e-ade0-f5ca6018fb5c",
@@ -13,21 +12,25 @@
             },
             {
                 "type": "0",
-                "name": "phase"
+                "name": "phase",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "frequency"
+                "name": "frequency",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "amplitude"
+                "name": "amplitude",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Anim.SineAnim"

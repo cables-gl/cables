@@ -1,5 +1,3 @@
-op.name="ReduceArray3x";
-
 var arr=op.inArray("Array");
 var num=op.inValueInt("Every xth Item",2);
 var maxOldIndex=op.inValueInt("Max Index",0);
@@ -37,7 +35,7 @@ function update()
         newArray[count]=theArray[i+2];
         count++;
     }
-    
+
     if(i!=theLength*3-1)
     {
         newArray[count]=theArray[theLength*3-3];
@@ -47,10 +45,10 @@ function update()
         newArray[count]=theArray[theLength*3-1];
         count++;
     }
-    
+
     outArr.set(null);
     outArr.set(newArray);
-    
 
-    
+
+
 }

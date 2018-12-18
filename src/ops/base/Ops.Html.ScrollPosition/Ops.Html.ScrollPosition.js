@@ -1,7 +1,5 @@
-op.name="ScrollPosition";
-
-var sleft=op.addOutPort(new Port(op,"left"));
-var stop=op.addOutPort(new Port(op,"top"));
+var sleft=op.addOutPort(new CABLES.Port(op,"left"));
+var stop=op.addOutPort(new CABLES.Port(op,"top"));
 
 function updateScroll()
 {

@@ -1,5 +1,3 @@
-op.name="ScreenOrientation";
-
 var angle=op.outValue("Angle");
 var str=op.outValue("Description");
 

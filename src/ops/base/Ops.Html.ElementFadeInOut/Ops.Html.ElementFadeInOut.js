@@ -1,13 +1,22 @@
-
-var inEle=op.inObject("HTML Element");
-
-var inVisible=op.inValueBool("Visible",true);
-var inDuration=op.inValue("Duration",0.5);
+const inEle=op.inObject("HTML Element");
+const inVisible=op.inValueBool("Visible",true);
+const inDuration=op.inValue("Duration",0.5);
+const inOpacity=op.inValue("Opacity",1);
 
 var theTimeout=null;
 inDuration.onChange=update;
+inOpacity.onChange=update;
 
-inVisible.onChange=function()
+inVisible.onChange=updateVisibility;
+var styleEle=null;
+var eleId='css_'+CABLES.uuid();
+
+update();
+
+inEle.onChange=updateVisibility;
+
+
+function updateVisibility()
 {
     if(styleEle && inEle.get())
     {
@@ -19,6 +28,11 @@ inVisible.onChange=function()
                 inEle.get().classList.remove("CABLES_animFadedOut");
                 inEle.get().classList.remove("CABLES_animFadeOut");
                 inEle.get().classList.add("CABLES_animFadeIn");
+                theTimeout=setTimeout(function()
+                {
+                    inEle.get().classList.remove("CABLES_animFadeIn");
+                },inDuration.get()*1000);
+
             }
         }
         else
@@ -38,16 +52,7 @@ inVisible.onChange=function()
     {
         console.log("fadeInOut: no html element???");
     }
-    
-};
-
-
-
-
-var styleEle=null;
-var eleId='css_'+CABLES.uuid();
-
-update();
+}
 
 
 function getCssContent()
@@ -55,6 +60,7 @@ function getCssContent()
     var css=attachments.fadeInOut_css;
     
     while(css.indexOf("$LENGTH")>-1)css=css.replace('$LENGTH',inDuration.get());
+    while(css.indexOf("$FULLOPACITY")>-1)css=css.replace('$FULLOPACITY',inOpacity.get());
 
     return css;
 }

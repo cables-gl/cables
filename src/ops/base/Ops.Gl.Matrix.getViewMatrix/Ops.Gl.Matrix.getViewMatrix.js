@@ -1,15 +1,16 @@
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var m=mat4.create();
-var matrix=op.addOutPort(new Port(op,"matrix",OP_PORT_TYPE_ARRAY));
+var matrix=op.addOutPort(new CABLES.Port(op,"matrix",CABLES.OP_PORT_TYPE_ARRAY));
 
 var cgl=op.patch.cgl;
 
 render.onTriggered=function()
 {
     mat4.copy(m, cgl.vMatrix);
+    matrix.set(null);
     matrix.set(m);
     trigger.trigger();
 };

@@ -8,7 +8,8 @@
             },
             {
                 "type": "0",
-                "name": "boolean"
+                "name": "boolean",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -43,7 +44,7 @@
             }
         ]
     },
-    "updated": 1519743353357,
+    "updated": 1541804956472,
     "authorName": "pandur",
     "id": "99892fda-8821-4660-ac57-3103d1546924",
     "created": 1519743353368

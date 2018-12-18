@@ -3,10 +3,6 @@
 
 IN vec2 texCoord;
 
-#ifdef GL_ES
-precision mediump float;
-#endif
-
 UNI float amount;
 UNI float x;
 UNI float y;
@@ -90,6 +86,11 @@ vec2 cellular2x2x2(vec3 P) {
 
 void main(void) {
 	vec2 st = texCoord;//gl_FragCoord.xy/u_resolution.xy;
+
+	#ifdef DO_TILEABLE
+	    st=abs(texCoord-0.5);
+	#endif
+
     st.x-=0.5;
     st.y-=0.5;
 	st *= scale;
@@ -98,23 +99,23 @@ void main(void) {
 
 	st.x+=x;
 	st.y+=y;
+	
 
 	vec2 F = cellular2x2x2(vec3(st,z));
 	float n = smoothstep(rangeA,rangeB, F.x);
-	
-   
+
     #ifdef DO_INVERT
         n=1.0-n;
     #endif
     
     vec4 col=vec4(n,n,n,1.0);
 
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
     
     col=vec4( _blend(base.rgb,col.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
 
-    gl_FragColor = col;
+    outColor= col;
 
-// 	gl_FragColor = vec4(n, n, n, 1.0);
+// 	outColor= vec4(n, n, n, 1.0);
 }

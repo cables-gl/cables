@@ -1,13 +1,13 @@
 
 op.name='ChromaticAberration';
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var amount=op.addInPort(new Port(op,"amount",OP_PORT_TYPE_VALUE,{display:'range'}));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -35,7 +35,7 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var uniAmount=new CGL.Uniform(shader,'f','amount',0);
 
-amount.onValueChanged=function()
+amount.onChange=function()
 {
     uniAmount.setValue(amount.get()*0.1);
 };
@@ -48,8 +48,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

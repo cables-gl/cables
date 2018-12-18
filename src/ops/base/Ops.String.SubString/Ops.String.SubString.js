@@ -1,5 +1,3 @@
-op.name="SubString";
-
 var inStr=op.inValueString("String","cables");
 var inStart=op.inValueInt("Start",0);
 var inEnd=op.inValueInt("End",4);

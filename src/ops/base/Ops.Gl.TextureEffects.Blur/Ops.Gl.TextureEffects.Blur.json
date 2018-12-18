@@ -8,15 +8,18 @@
             },
             {
                 "type": "0",
-                "name": "Fast"
+                "name": "Fast",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "direction"
+                "name": "direction",
+                "subType": "string"
             },
             {
                 "type": "2",
@@ -31,7 +34,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Blur"
     },
-    "updated": 1520869339744,
+    "updated": 1541054008828,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "54f26f53-f637-44c1-9bfb-a2f2b722e998",

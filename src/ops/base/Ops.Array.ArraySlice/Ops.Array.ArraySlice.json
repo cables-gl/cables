@@ -1,5 +1,5 @@
 {
-    "updated": 1518458615367,
+    "updated": 1543329346885,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "tim",
     "id": "dbfd66dd-048e-4b36-a388-502fd36627cb",
@@ -12,11 +12,13 @@
             },
             {
                 "type": "0",
-                "name": "Begin Index"
+                "name": "Begin Index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "End Index"
+                "name": "End Index",
+                "subType": "number"
             }
         ],
         "portsOut": [

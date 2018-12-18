@@ -25,5 +25,9 @@
             }
         ],
         "name": "Ops.Json3d.SetMaterial"
+    },
+    "summary": "internal json3d op",
+    "docs": {
+        "ports": []
     }
 }

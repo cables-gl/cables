@@ -1,18 +1,9 @@
-op.name="TriggerLimiter";
-
-// input
-var inTriggerPort = op.inFunction("In Trigger");
+var inTriggerPort = op.inTrigger("In Trigger");
 var timePort = op.inValue("Milliseconds", 300);
-
-
-// output
-var outTriggerPort = op.outFunction("Out Trigger");
+var outTriggerPort = op.outTrigger("Out Trigger");
 var progress=op.outValue("Progress");
 
-
-// vars
 var lastTriggerTime = 0;
-
 
 // change listeners
 inTriggerPort.onTriggered = function()
@@ -32,7 +23,4 @@ inTriggerPort.onTriggered = function()
         // progress.set(1.0);
         outTriggerPort.trigger();
     }
-    
-
 };
-

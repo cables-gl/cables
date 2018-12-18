@@ -1,8 +1,8 @@
 var cgl=op.patch.cgl;
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var opacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE,{display:'range'}));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var trigger=op.outTrigger('trigger');
+var opacity=op.addInPort(new CABLES.Port(op,"opacity",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 opacity.set(1);
 
 var srcVert=''
@@ -25,7 +25,7 @@ var srcVert=''
     .endl()+'}';
 
     var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'{{MODULES_HEAD}}'
 
     .endl()+'IN vec4 color;'
@@ -38,7 +38,7 @@ var srcVert=''
     .endl()+'{{MODULE_COLOR}}'
 
     .endl()+'   col.a=opacity;'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 var doRender=function()
@@ -49,9 +49,9 @@ var doRender=function()
     cgl.setPreviousShader();
 };
 
-opacity.onValueChanged=function()
+opacity.onChange=function()
 {
-    uniOpacity.setValue(opacity.get());
+    shader.uniOpacity.setValue(opacity.get());
 };
 
 
@@ -60,7 +60,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shader.uniOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 
 shader.setSource(srcVert,srcFrag);
-op.onLoaded=shader.compile;
+
 
 render.onTriggered=doRender;
 

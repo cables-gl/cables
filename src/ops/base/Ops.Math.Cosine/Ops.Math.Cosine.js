@@ -1,17 +1,25 @@
 // input
 var value = op.inValue('Value');
-var amplitude = op.inValue('Amplitude', 1.0);
-var mul = op.inValue('Frequency', 1.0);
+
 var phase = op.inValue('Phase', 0.0);
+var mul = op.inValue('Frequency', 1.0);
+var amplitude = op.inValue('Amplitude', 1.0);
+var invert = op.inValueBool("asine", false);
 
 // output
 var result = op.outValue('Result');
 
-// change listener
-value.onValueChanged = update;
+var calculate = Math.cos;
 
-function update() {
+value.onChange=function()
+{
     result.set(
-        amplitude.get() * Math.cos( ( value.get() * mul.get() ) + phase.get())
+        amplitude.get() * calculate( ( value.get()*mul.get() ) + phase.get() )
     );
+};
+
+invert.onChange = function()
+{
+    if(invert.get()) calculate = Math.acos;
+    else calculate = Math.cos;
 }

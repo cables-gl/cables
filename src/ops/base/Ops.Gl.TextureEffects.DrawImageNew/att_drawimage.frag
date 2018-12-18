@@ -32,10 +32,10 @@ void main()
             tc=(transform * coordinates ).xy;
         #endif
     
-        blendRGBA=texture2D(image,tc);
+        blendRGBA=texture(image,tc);
         
         vec3 blend=blendRGBA.rgb;
-        vec4 baseRGBA=texture2D(tex,texCoord);
+        vec4 baseRGBA=texture(tex,texCoord);
         vec3 base=baseRGBA.rgb;
         
         vec3 colNew=_blend(base,blend);
@@ -45,7 +45,7 @@ void main()
         #endif
 
         #ifdef HAS_TEXTUREALPHA
-            vec4 colImgAlpha=texture2D(imageAlpha,texCoord);
+            vec4 colImgAlpha=texture(imageAlpha,texCoord);
             float colImgAlphaAlpha=colImgAlpha.a;
 
             #ifdef ALPHA_FROM_LUMINANCE
@@ -64,6 +64,6 @@ void main()
     blendRGBA.a=1.0;
     
     
-    gl_FragColor = blendRGBA;
+    outColor= blendRGBA;
 
 }

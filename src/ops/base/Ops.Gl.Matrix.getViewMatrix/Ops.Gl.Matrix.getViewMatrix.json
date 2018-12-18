@@ -1,5 +1,5 @@
 {
-    "updated": 1517222037201,
+    "updated": 1535798466760,
     "authorName": "pandur",
     "id": "a58406ae-79b5-4dab-99fa-0a66c2325aab",
     "created": 1517222036539,
@@ -21,5 +21,9 @@
             }
         ],
         "name": "Ops.Gl.Matrix.getViewMatrix"
+    },
+    "summary": "get current viewmatrix",
+    "docs": {
+        "ports": []
     }
 }

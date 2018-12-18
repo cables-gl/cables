@@ -1,10 +1,7 @@
-
-var render=op.inFunction("Render");
-var next=op.outFunction("Next");
-
+var render=op.inTrigger("Render");
+var next=op.outTrigger("Next");
 var inGeomA=op.inObject("Geometry 1");
 var inGeomB=op.inObject("Geometry 2");
-
 var inFade=op.inValueSlider("Fade");
 
 var cgl=op.patch.cgl;
@@ -12,6 +9,7 @@ var shader=null;
 var mesh=null;
 var module=null;
 var needsRebuild=true;
+var uniFade=null;
 
 inGeomA.onChange=rebuildLater;
 inGeomB.onChange=rebuildLater;
@@ -23,6 +21,8 @@ var srcHeadVert=''
 
 var srcBodyVert=attachments.morph_geometries_vert;
 
+render.onLinkChanged=removeModule;
+op.onDelete=removeModule;
 
 function removeModule()
 {
@@ -33,31 +33,24 @@ function removeModule()
     }
 }
 
-render.onLinkChanged=removeModule;
-
 render.onTriggered=function()
 {
     
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
-
         shader=cgl.getShader();
-
         module=shader.addModule(
             {
                 priority:-11,
                 title:op.objName,
-
                 name:'MODULE_VERTEX_POSITION',
                 srcHeadVert:srcHeadVert,
                 srcBodyVert:srcBodyVert
             });
 
         console.log('morph module inited');
-    
         uniFade=new CGL.Uniform(shader,'f',module.prefix+'fade',inFade);
-
         needsRebuild=true;
     }
 
@@ -65,9 +58,7 @@ render.onTriggered=function()
     if(!mesh)return;
 
     mesh.render(cgl.getShader());
-    
     next.trigger();
-
 };
 
 function doRender()
@@ -85,7 +76,7 @@ function rebuild()
     if(inGeomB.get() && inGeomA.get() && module)
     {
         var geom=inGeomA.get();
-
+        if(mesh)mesh.dispose();
         mesh=new CGL.Mesh(cgl,geom);
         mesh.addVertexNumbers=true;
         mesh.addAttribute(module.prefix+'morphTarget',inGeomB.get().vertices,3);
@@ -95,6 +86,8 @@ function rebuild()
     else
     {
         // console.log('no rebuild');
+        if(mesh)mesh.dispose();
         mesh=null;
+        needsRebuild=true;
     }
 }

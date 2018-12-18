@@ -1,8 +1,7 @@
-op.name="TriggerSynthRelease";
 
 // input
 var nodePort = op.inObject("Synth");
-var triggerPort = op.addInPort( new Port( this, "Trigger Arrack", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var triggerPort = op.addInPort( new CABLES.Port( this, "Trigger Arrack",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var timePort = op.inValueString("Time", "+0");
 
 // change listeners

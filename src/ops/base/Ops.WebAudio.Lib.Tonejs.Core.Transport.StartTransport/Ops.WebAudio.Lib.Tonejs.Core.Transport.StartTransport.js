@@ -1,9 +1,8 @@
-op.name="StartTransport";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
-var startPort = op.addInPort( new Port( this, "Start", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var startPort = op.addInPort( new CABLES.Port( this, "Start",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var timePort = op.inValueString("Time");
 var offsetPort = op.inValueString("Offset");
 

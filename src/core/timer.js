@@ -1,16 +1,4 @@
 
-
-window.performance = (window.performance ||
-    {
-        offset: Date.now(),
-        now: function now()
-        {
-            return Date.now() - this.offset;
-        }
-    });
-
-// ----------------------------
-
 CABLES.internalNow=function() { return window.performance.now(); };
 
 /**
@@ -21,7 +9,6 @@ CABLES.internalNow=function() { return window.performance.now(); };
  * @static
  */
 CABLES.now=function() { return CABLES.internalNow(); };
-
 
 // ----------------------------
 

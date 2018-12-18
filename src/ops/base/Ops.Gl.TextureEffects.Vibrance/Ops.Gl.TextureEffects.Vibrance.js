@@ -1,30 +1,22 @@
-op.name="Vibrance";
+const render=op.inTrigger("Render");
+const trigger=op.outTrigger("Trigger");
+const amount=op.inValue("amount",2);
 
-var render=op.inFunction("Render");
-var trigger=op.outFunction("Trigger");
-
-var amount=op.inValue("amount",2);
-
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
-
-
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.vibrance_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

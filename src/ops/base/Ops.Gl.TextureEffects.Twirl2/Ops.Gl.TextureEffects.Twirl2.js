@@ -1,9 +1,9 @@
-var render=op.inFunction("Render");
+var render=op.inTrigger("Render");
 var amount=op.inValue("Amount");
 var radius=op.inValue("Radius");
 var centerX=op.inValue("Center X",0.5);
 var centerY=op.inValue("Center Y",0.5);
-var trigger=op.outFunction("Next");
+var trigger=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
@@ -17,7 +17,7 @@ var unicenterY=new CGL.Uniform(shader,'f','centerY',centerY);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 
@@ -26,8 +26,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
+    cgl.setTexture(0, texture.tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

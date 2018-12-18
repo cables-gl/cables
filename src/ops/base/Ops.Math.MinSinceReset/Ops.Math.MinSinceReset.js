@@ -1,6 +1,6 @@
 // input
 var valuePort = op.inValue('Value');
-var resetPort = op.inFunctionButton('Reset');
+var resetPort = op.inTriggerButton('Reset');
 
 // variables
 var first;

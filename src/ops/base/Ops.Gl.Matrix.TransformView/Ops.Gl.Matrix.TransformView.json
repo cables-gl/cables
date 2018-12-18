@@ -1,5 +1,4 @@
 {
-    "updated": 1505080648293,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "0b3e04f7-323e-4ac8-8a22-a21e2f36e0e9",
@@ -12,31 +11,45 @@
             },
             {
                 "type": "0",
-                "name": "posX"
+                "name": "posX",
+                "group": "Position",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posY"
+                "name": "posY",
+                "group": "Position",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posZ"
+                "name": "posZ",
+                "group": "Position",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scale"
+                "name": "scale",
+                "group": "Scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotX"
+                "name": "rotX",
+                "group": "Rotation",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotY"
+                "name": "rotY",
+                "group": "Rotation",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotZ"
+                "name": "rotZ",
+                "group": "Rotation",
+                "subType": "number"
             }
         ],
         "portsOut": [

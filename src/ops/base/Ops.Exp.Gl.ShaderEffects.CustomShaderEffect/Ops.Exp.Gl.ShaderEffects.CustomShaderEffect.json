@@ -1,0 +1,35 @@
+{
+    "updated": 1534088741577,
+    "authorName": "pandur",
+    "id": "1a9705cb-fe1b-424b-be6e-1290840b5ef8",
+    "created": 1534003471738,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Fragment Head",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fragment Main",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.CustomShaderEffect"
+    },
+    "summary": "write custom shadereffects",
+    "docs": {
+        "ports": []
+    }
+}

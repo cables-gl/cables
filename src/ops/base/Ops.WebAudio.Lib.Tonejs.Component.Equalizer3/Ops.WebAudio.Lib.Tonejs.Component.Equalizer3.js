@@ -1,4 +1,3 @@
-op.name="Equalizer3";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

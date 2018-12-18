@@ -1,5 +1,3 @@
-op.name="GeoLocation";
-
 var outSupported=op.outValue("Browser Support",navigator.geolocation!=false);
 
 var outLat=op.outValue("Latitude");
@@ -12,10 +10,5 @@ function updatePos(position)
 {
     outLat.set(position.coords.latitude);
     outLon.set(position.coords.longitude);
+    console.log(position);
 }
-
-
-op.onDelete=function()
-{
-    
-};

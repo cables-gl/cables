@@ -1,5 +1,3 @@
-op.name="ValueToggle";
-
 // inputs
 var value0port = op.inValue("Value 0", 0);
 var value1port = op.inValue("Value 1", 1);

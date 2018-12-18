@@ -3,7 +3,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -15,7 +16,7 @@
         "name": "Ops.Value.ValueChanged"
     },
     "summary": "Triggers the next Op if value has changed",
-    "updated": 1512038556403,
+    "updated": 1540986408823,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "c62cb6f6-77be-4d5e-818b-89a8eb596797",

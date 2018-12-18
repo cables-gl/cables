@@ -27,12 +27,12 @@ void main()
 {
    vec4 col=vec4(1.0,0.0,0.0,1.0);
    #ifdef HAS_TEXTURES
-       col=texture2D(tex,texCoord);
+       col=texture(tex,texCoord);
 
        vec3 hsv = rgb2hsv(col.rgb);
        hsv.x=hsv.x+hue;
        col.rgb = hsv2rgb(hsv);
 
    #endif
-   gl_FragColor = col;
+   outColor= col;
 }

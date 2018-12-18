@@ -7,11 +7,13 @@
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Mul Color"
+                "name": "Mul Color",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -25,5 +27,9 @@
     "summary": "draw only the edges of an image",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1544217777058,
+    "authorName": "pandur",
+    "id": "bada465b-5dfb-4cfd-a5c6-13096506c1bf",
+    "created": 1540919979853
 }

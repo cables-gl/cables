@@ -4,15 +4,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "flip"
+                "name": "flip",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "fps"
+                "name": "fps",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Active"
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -22,12 +25,17 @@
             },
             {
                 "type": "0",
-                "name": "Ratio"
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Available",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Textures.WebcamTexture"
     },
-    "updated": 1524500112156,
     "authorName": "pandur",
     "id": "ef451374-cbc2-49f1-a51c-5df5d71dc03d",
     "created": 1524500112159

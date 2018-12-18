@@ -1,13 +1,9 @@
-op.name="WebcamTexture";
-
-var flip=op.addInPort(new Port(op,"flip",OP_PORT_TYPE_VALUE,{ display:'bool' } ));
-var fps=op.addInPort(new Port(op,"fps",OP_PORT_TYPE_VALUE ));
+var flip=op.inValueBool("flip");
+var fps=op.inValueInt("fps");
 var inActive=op.inValueBool("Active",true);
-
-// var textureOut=op.addOutPort(new Port(op,"texture",OP_PORT_TYPE_TEXTURE,{preview:true}));
 var textureOut=op.outTexture("texture");
-
 var outRatio=op.outValue("Ratio");
+var available=op.outValue("Available");
 
 fps.set(30);
 flip.set(true);
@@ -38,7 +34,7 @@ inActive.onChange=function()
     {
         canceled=true;
     }
-    
+
 };
 
 fps.onChange=function()
@@ -70,8 +66,9 @@ function startWebcam()
             videoElement.src = window.URL.createObjectURL(stream);
             videoElement.onloadedmetadata = function(e)
             {
+                available.set(true);
                 tex.setSize(videoElement.videoWidth,videoElement.videoHeight);
-                
+
                 outRatio.set(videoElement.videoWidth/videoElement.videoHeight);
 
                 videoElement.play();
@@ -80,7 +77,8 @@ function startWebcam()
         },
         function()
         {
-            console.log('error webcam');
+            available.set(false);
+            // console.log('error webcam');
         });
 }
 

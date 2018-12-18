@@ -1,28 +1,27 @@
-var inTime=op.inValue("Time");
-var fps=op.addInPort(new Port(op,"FPS",OP_PORT_TYPE_VALUE));
-var numX=op.addInPort(new Port(op,"Num X",OP_PORT_TYPE_VALUE));
-var numY=op.addInPort(new Port(op,"Num Y",OP_PORT_TYPE_VALUE));
+const
+    inTime=op.inValue("Time"),
+    fps=op.inValueFloat("FPS",10),
+    numX=op.inValueFloat("Num X",4),
+    numY=op.inValueFloat("Num Y",4),
 
-var texRepeatX=op.addOutPort(new Port(op,"Repeat X",OP_PORT_TYPE_VALUE));
-var texRepeatY=op.addOutPort(new Port(op,"Repeat Y",OP_PORT_TYPE_VALUE));
-var texU=op.addOutPort(new Port(op,"Offset X",OP_PORT_TYPE_VALUE));
-var texV=op.addOutPort(new Port(op,"Offset Y",OP_PORT_TYPE_VALUE));
+    texRepeatX=op.outValue("Repeat X"),
+    texRepeatY=op.outValue("Repeat Y"),
+    texU=op.outValue("Offset X"),
+    texV=op.outValue("Offset Y"),
 
-var outFrame=op.outValue("Frame");
-var outProgress=op.outValue("Progress");
+    outFrame=op.outValue("Frame"),
+    outProgress=op.outValue("Progress");
 
-numX.onValueChanged=setRepeat;
-numY.onValueChanged=setRepeat;
+numX.onChange=numY.onChange=setRepeat;
+
 texU.set(0);
 texV.set(0);
-fps.set(10);
-numX.set(4);
-numY.set(4);
 
 var posX=0;
 var posY=0;
 var lastSwitch=0;
 var frame=0;
+setRepeat();
 
 function setRepeat()
 {

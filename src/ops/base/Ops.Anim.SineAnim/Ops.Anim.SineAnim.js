@@ -1,13 +1,10 @@
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var result=op.addOutPort(new Port(op,"result"));
+const
+    exe=op.inTrigger("exe"),
+    result=op.outValue("result"),
+    phase=op.inValueFloat("phase",0),
+    mul=op.inValueFloat("frequency",1),
+    amplitude=op.inValueFloat("amplitude",1);
 
-var phase=op.addInPort(new Port(op,"phase",OP_PORT_TYPE_VALUE));
-var mul=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
-var amplitude=op.addInPort(new Port(op,"amplitude",OP_PORT_TYPE_VALUE));
-
-mul.set(1.0);
-amplitude.set(1.0);
-phase.set(1);
 exe.onTriggered=exec;
 exec();
 

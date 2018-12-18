@@ -1,5 +1,3 @@
-op.name="Delay";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values

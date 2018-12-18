@@ -1,9 +1,9 @@
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
 var inAttrib=op.inValueSelect("Attribute",[]);
 var inGeom=op.inObject("Geometry");
 var limitMax=op.inValue("Max",1000);
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+const trigger=op.outTrigger("trigger");
 
 var srcHeadFrag='';
 var srcBodyFrag='';

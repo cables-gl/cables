@@ -1,4 +1,3 @@
-op.name="AudioModulo";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

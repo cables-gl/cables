@@ -8,23 +8,38 @@
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Blend Mode",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse r"
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "diffuse g"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse b"
+                "name": "diffuse r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuse g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuse b",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -35,7 +50,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Border"
     },
-    "updated": 1510740112720,
+    "updated": 1541533746205,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "e6aae62c-1620-465d-94de-049148b530e6",

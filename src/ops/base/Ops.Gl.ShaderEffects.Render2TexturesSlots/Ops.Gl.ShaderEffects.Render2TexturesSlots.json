@@ -1,0 +1,45 @@
+{
+    "updated": 1537870298027,
+    "authorName": "pandur",
+    "id": "0a8b94f9-07fb-460f-af98-19199b8b600b",
+    "created": 1537256136741,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Texture 0",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Texture 1",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Texture 2",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Texture 3",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.Render2TexturesSlots"
+    },
+    "summary": "select textures to render to",
+    "docs": {
+        "ports": []
+    }
+}

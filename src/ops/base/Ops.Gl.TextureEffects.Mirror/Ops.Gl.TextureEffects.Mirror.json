@@ -7,19 +7,23 @@
             },
             {
                 "type": "0",
-                "name": "axis"
+                "name": "axis",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "offset"
+                "name": "offset",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "flip"
+                "name": "flip",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -30,7 +34,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.Mirror"
     },
-    "updated": 1510252965746,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "10d3c769-9a7f-4bd3-a849-7354d3e5f7f0",

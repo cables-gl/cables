@@ -1,0 +1,92 @@
+{
+    "updated": 1543910385670,
+    "authorName": "pandur",
+    "id": "9fb1baae-db06-481c-8220-6d87d02c4c9e",
+    "created": 1542744846969,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "text"
+            },
+            {
+                "type": "1",
+                "name": "Refresh"
+            },
+            {
+                "type": "5",
+                "name": "font",
+                "group": "Size"
+            },
+            {
+                "type": "0",
+                "name": "Maximize Size",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "fontSize",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "line distance",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "texture width",
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "texture height",
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "align",
+                "group": "Alignment",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "vertical align",
+                "group": "Alignment",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "border",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Reuse Texture",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            }
+        ],
+        "name": "Ops.Gl.Textures.Text2"
+    },
+    "summary": "Generates a texture which reads Text",
+    "youtubeid": "z1Qf9dE67-w",
+    "docs": {
+        "ports": []
+    }
+}

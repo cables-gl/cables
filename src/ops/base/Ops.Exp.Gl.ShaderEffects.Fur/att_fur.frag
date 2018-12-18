@@ -13,14 +13,14 @@ void main()
 {
     vec4 col=vec4(1.0,1.0,0.0,1.0);
     
-    float lengthMask=texture2D(texLength,vec2(texCoord.x,(1.0-texCoord.y))).r;
+    float lengthMask=texture(texLength,vec2(texCoord.x,(1.0-texCoord.y))).r;
     
     if(layerPerc>lengthMask)
         discard;
 
 
-    vec4 hairColor=texture2D(texStructure,vec2(texCoordMul.x,(1.0-texCoordMul.y)));
-    col=texture2D(texColor,vec2(texCoord.x,(1.0-texCoord.y)));
+    vec4 hairColor=texture(texStructure,vec2(texCoordMul.x,(1.0-texCoordMul.y)));
+    col=texture(texColor,vec2(texCoord.x,(1.0-texCoord.y)));
 
 
 	if (hairColor.a <= 0.0 || hairColor.g < layerPerc) {
@@ -57,12 +57,12 @@ void main()
 
     // col.a=col.r*(1.0-layerPerc);
     
-    col.a=(1.0-layerPerc)*0.5;
+    col.a=(1.0-layerPerc);
     // col.a=col.r*(1.0-layerPerc)*0.9;
     // col.a*=alpha*0.8;
     // col.a*=col.r;
 
 
    {{MODULE_COLOR}}
-   gl_FragColor = col;
+   outColor= col;
 }

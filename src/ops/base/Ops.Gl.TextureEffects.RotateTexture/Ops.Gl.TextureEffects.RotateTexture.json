@@ -1,0 +1,46 @@
+{
+    "summary": "Rotates a texture",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "updated": 1543743023322,
+    "authorName": "andro",
+    "id": "207bf2af-a3fc-458d-9efb-eb108a854072",
+    "created": 1542819941105,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Crop",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.RotateTexture"
+    }
+}

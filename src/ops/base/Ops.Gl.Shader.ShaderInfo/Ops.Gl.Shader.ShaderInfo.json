@@ -25,11 +25,18 @@
             },
             {
                 "type": "0",
-                "name": "Num Uniforms"
+                "name": "Name",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Num Attributes"
+                "name": "Num Uniforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Attributes",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -43,7 +50,7 @@
         "name": "Ops.Gl.Shader.ShaderInfo"
     },
     "summary": "view current shader source code",
-    "updated": 1517397947705,
+    "updated": 1535261203293,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "cables",
     "id": "7afaa77e-a976-4e65-8eb1-a6302b91c0d3",

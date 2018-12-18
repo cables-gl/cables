@@ -1,13 +1,13 @@
 op.name="SubstractColor";
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var amount=op.inValueSlider("amount",0.1);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -32,7 +32,7 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount.get());
 
-amount.onValueChanged=function()
+amount.onChange=function()
 {
     amountUniform.setValue(amount.get());
 };
@@ -44,8 +44,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

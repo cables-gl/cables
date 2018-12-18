@@ -12,16 +12,16 @@
 
 .CABLES_animFadeIn
 {
-    display:block;
+    /*display:block;*/
     animation: CABLES_keysFadeIn $LENGTHs normal forwards ease-in-out;
 }
 
 @keyframes CABLES_keysFadeIn {
     from { opacity: 0; }
-    to   { opacity: 1; }
+    to   { opacity: $FULLOPACITY; }
 }
 
 @keyframes CABLES_keysFadeOut {
-    from { opacity: 1; }
+    from { opacity: $FULLOPACITY; }
     to   { opacity: 0; }
 }

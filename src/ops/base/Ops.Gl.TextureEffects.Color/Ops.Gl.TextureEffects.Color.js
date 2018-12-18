@@ -1,37 +1,42 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+const
+    render=op.inTrigger("render"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    inMask=op.inTexture("Mask"),
+    r=op.inValueSlider("r",Math.random()),
+    g=op.inValueSlider("g",Math.random()),
+    b=op.inValueSlider("b",Math.random()),
+    trigger=op.outTrigger("trigger");
 
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
+r.setUiAttribs({colorPick:true});
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+op.setPortGroup('Blending',[blendMode,amount]);
+op.setPortGroup('Color',[r,g,b]);
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl,'textureeffect color');
+const TEX_SLOT=0;
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl,'textureeffect color');
 
-op.onLoaded=shader.compile;
-
-var srcFrag=attachments.color_frag;
-
+var srcFrag=attachments.color_frag||'';
 srcFrag=srcFrag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-r.set(1.0);
-g.set(1.0);
-b.set(1.0);
 
-var uniformR=new CGL.Uniform(shader,'f','r',r);
-var uniformG=new CGL.Uniform(shader,'f','g',g);
-var uniformB=new CGL.Uniform(shader,'f','b',b);
-var uniformAmount=new CGL.Uniform(shader,'f','amount',amount);
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',TEX_SLOT),
+    makstextureUniform=new CGL.Uniform(shader,'t','mask',1),
+    uniformR=new CGL.Uniform(shader,'f','r',r),
+    uniformG=new CGL.Uniform(shader,'f','g',g),
+    uniformB=new CGL.Uniform(shader,'f','b',b),
+    uniformAmount=new CGL.Uniform(shader,'f','amount',amount);
 
-blendMode.onChange=function()
+inMask.onChange=function()
 {
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+    if(inMask.get())shader.define("MASK");
+        else shader.removeDefine("MASK");
 };
+
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {
@@ -40,8 +45,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(TEX_SLOT, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    if(inMask.get()) cgl.setTexture(1, inMask.get().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

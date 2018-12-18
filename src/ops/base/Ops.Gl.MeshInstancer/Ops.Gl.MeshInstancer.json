@@ -1,5 +1,5 @@
 {
-    "updated": 1516287789775,
+    "updated": 1539850779508,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ec3699a1-5154-44dd-a4fe-447031fea4ad",
@@ -20,7 +20,8 @@
             },
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "Scale",
+                "subType": "number"
             },
             {
                 "type": "2",

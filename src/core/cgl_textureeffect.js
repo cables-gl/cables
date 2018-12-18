@@ -1,6 +1,5 @@
 var CGL=CGL || {};
 
-
 CGL.TextureEffect=function(cgl,options)
 {
     this._cgl=cgl;
@@ -24,11 +23,16 @@ CGL.TextureEffect=function(cgl,options)
     this._renderbuffer2  = this._cgl.gl.createRenderbuffer();
     this.switched=false;
     this.depth=false;
+
+    
+
 };
 
 
 CGL.TextureEffect.prototype.setSourceTexture=function(tex)
 {
+    if(tex.textureType==CGL.Texture.TYPE_FLOAT) this._cgl.gl.getExtension('EXT_color_buffer_float');
+
     if(tex===null)
     {
         this._textureSource=new CGL.Texture(this._cgl);
@@ -38,6 +42,7 @@ CGL.TextureEffect.prototype.setSourceTexture=function(tex)
     {
         this._textureSource=tex;
     }
+
 
     if(!this._textureSource.compareSettings(this._textureTarget))
     {
@@ -51,7 +56,13 @@ CGL.TextureEffect.prototype.setSourceTexture=function(tex)
         CGL.profileEffectBuffercreate++;
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
 
+
+        
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._renderbuffer);
+
+        // if(tex.textureType==CGL.Texture.TYPE_FLOAT) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA32F, this._textureSource.width,this._textureSource.height);
+            // else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA8, this._textureSource.width,this._textureSource.height);
+
         if(this.depth) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this._textureSource.width,this._textureSource.height);
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureTarget.tex, 0);
         if(this.depth) this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._renderbuffer);
@@ -65,13 +76,21 @@ CGL.TextureEffect.prototype.setSourceTexture=function(tex)
 
 
 
-
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf2);
 
+
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._renderbuffer2);
+
+
+        // if(tex.textureType==CGL.Texture.TYPE_FLOAT) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA32F, this._textureSource.width,this._textureSource.height);
+            // else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA8, this._textureSource.width,this._textureSource.height);
+
+
         if(this.depth) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this._textureSource.width,this._textureSource.height);
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureSource.tex, 0);
+
         if(this.depth) this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._renderbuffer2);
+
 
         // this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureSource.tex, 0);
 
@@ -137,12 +156,12 @@ CGL.TextureEffect.prototype.bind=function()
     if(!this.switched)
     {
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
-        this._cgl.pushFrameBuffer(this._frameBuf);
+        this._cgl.pushGlFrameBuffer(this._frameBuf);
     }
     else
 	{
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf2);
-        this._cgl.pushFrameBuffer(this._frameBuf2);
+        this._cgl.pushGlFrameBuffer(this._frameBuf2);
     }
 };
 
@@ -156,7 +175,26 @@ CGL.TextureEffect.prototype.finish=function()
 
     this._cgl.TextureEffectMesh.render(this._cgl.getShader());
 
-    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popFrameBuffer());
+    this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
+
+    // this._textureTarget.updateMipMap();
+
+    if(this._textureTarget.filter==CGL.Texture.FILTER_MIPMAP)
+    {
+        if(!this.switched)
+        {
+            this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._textureTarget.tex);
+            this._textureTarget.updateMipMap();
+        }
+        else
+        {
+            this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._textureSource.tex);;
+            this._textureSource.updateMipMap();
+        }
+        
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+    }
+
 
     this.switched=!this.switched;
 };
@@ -189,19 +227,44 @@ CGL.TextureEffect.prototype.createMesh=function()
 
 // ---------------------------------------------------------------------------------
 
-CGL.TextureEffect.checkOpInEffect=function(op)
+
+CGL.TextureEffect.checkOpNotInTextureEffect=function(op)
 {
-    if(!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+    if(op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
-        op.uiAttr({'error':'This op must be a child of a texture effect! More infos <a href="https://docs.cables.gl/image_composition/image_composition.html" target="_blank">here</a>.'});
+        op.uiAttr({'error':null});
+        return true;
+    }
+
+    if(!op.patch.cgl.currentTextureEffect)return true;
+
+    if(op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+    {
+        op.uiAttr({'error':'This op can not be a child of a ImageCompose/texture effect! imagecompose should only have textureeffect childs.'});
         return false;
     }
+
+    if(op.patch.cgl.currentTextureEffect)return false;
+    return true;
+
+};
+
+
+CGL.TextureEffect.checkOpInEffect=function(op)
+{
     if(op.patch.cgl.currentTextureEffect && op.uiAttribs.error)
     {
         op.uiAttr({'error':null});
         return true;
     }
+
     if(op.patch.cgl.currentTextureEffect)return true;
+
+    if(!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+    {
+        op.uiAttr({'error':'This op must be a child of a texture effect! More infos <a href="https://docs.cables.gl/image_composition/image_composition.html" target="_blank">here</a>.'});
+        return false;
+    }
 
     if(!op.patch.cgl.currentTextureEffect)return false;
     return true;
@@ -210,54 +273,49 @@ CGL.TextureEffect.checkOpInEffect=function(op)
 CGL.TextureEffect.getBlendCode=function()
 {
     return ''
-    //.endl()+'#define Blend(base, blend, funcf)       vec3(funcf(base.r, blend.r), funcf(base.g, blend.g), funcf(base.b, blend.b))'
 
     .endl()+'vec3 _blend(vec3 base,vec3 blend)'
     .endl()+'{'
     .endl()+'   vec3 colNew=blend;'
-    // .endl()+'   #ifdef BM_NORMAL'
-    // .endl()+'   colNew=blend;'
-    // .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_MULTIPLY'
-    .endl()+'   colNew=base*blend;'
+    .endl()+'       colNew=base*blend;'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_MULTIPLY_INV'
-    .endl()+'   colNew=base* vec3(1.0)-blend;'
+    .endl()+'       colNew=base* vec3(1.0)-blend;'
     .endl()+'   #endif'
 
-
     .endl()+'   #ifdef BM_AVERAGE'
-    .endl()+'   colNew=((base + blend) / 2.0);'
+    .endl()+'       colNew=((base + blend) / 2.0);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_ADD'
-    .endl()+'   colNew=min(base + blend, vec3(1.0));'
+    .endl()+'       colNew=min(base + blend, vec3(1.0));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_SUBSTRACT'
-    .endl()+'   colNew=max(base + blend - vec3(1.0), vec3(0.0));'
+    .endl()+'       colNew=max(base + blend - vec3(1.0), vec3(0.0));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_DIFFERENCE'
-    .endl()+'   colNew=abs(base - blend);'
+    .endl()+'       colNew=abs(base - blend);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_NEGATION'
-    .endl()+'   colNew=(vec3(1.0) - abs(vec3(1.0) - base - blend));'
+    .endl()+'       colNew=(vec3(1.0) - abs(vec3(1.0) - base - blend));'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_EXCLUSION'
-    .endl()+'   colNew=(base + blend - 2.0 * base * blend);'
+    .endl()+'       colNew=(base + blend - 2.0 * base * blend);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_LIGHTEN'
-    .endl()+'   colNew=max(blend, base);'
+    .endl()+'       colNew=max(blend, base);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_DARKEN'
-    .endl()+'   colNew=min(blend, base);'
+    .endl()+'       colNew=min(blend, base);'
     .endl()+'   #endif'
 
     .endl()+'   #ifdef BM_OVERLAY'
@@ -390,3 +448,13 @@ CGL.TextureEffect.AddBlendSelect=function(op,name)
 
     return p;
 };
+
+CGL.TextureEffect.setupBlending=function(op,shader,blendMode,amount)
+{
+    op.setPortGroup('Blending', [blendMode, amount]);
+
+    blendMode.onChange = function () {
+        CGL.TextureEffect.onChangeBlendSelect(shader, blendMode.get());
+    };
+
+}

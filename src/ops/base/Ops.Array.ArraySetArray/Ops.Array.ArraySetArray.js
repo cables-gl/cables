@@ -1,9 +1,9 @@
-var exe=op.inFunctionButton("exe");
+var exe=op.inTriggerButton("exe");
 
-var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
-var index=op.addInPort(new Port(op, "index",OP_PORT_TYPE_VALUE,{type:'int'}));
+var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
+var index=op.addInPort(new CABLES.Port(op, "index",CABLES.OP_PORT_TYPE_VALUE,{type:'int'}));
 var value=op.inArray("new Array");
-var values=op.addOutPort(new Port(op, "values",OP_PORT_TYPE_ARRAY));
+var values=op.addOutPort(new CABLES.Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
 values.ignoreValueSerialize=true;
 
 function updateIndex()

@@ -1,7 +1,5 @@
-op.name="AnalyserTexture";
-
-var refresh=op.addInPort(new Port(op,"refresh",OP_PORT_TYPE_FUNCTION));
-var fftArr=op.addInPort(new Port(op, "FFT Array",OP_PORT_TYPE_ARRAY));
+var refresh=op.addInPort(new CABLES.Port(op,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
+var fftArr=op.addInPort(new CABLES.Port(op, "FFT Array",CABLES.OP_PORT_TYPE_ARRAY));
 
 
 var amount=op.inValueSlider("Blur Amount");
@@ -73,7 +71,7 @@ function updateFFT()
 // ----------
 
 var scrollShader=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'UNI sampler2D texFFT;'
     .endl()+'UNI float posY;'
@@ -83,7 +81,7 @@ var scrollShader=''
     .endl()+'{'
     .endl()+'   vec4 col=texture2D(texFFT,vec2(texCoord.x,texCoord.y-posY));'
     // .endl()+'   col.r=1.0;'
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 var shaderScroll=new CGL.Shader(cgl,'AnalyserTexture');
@@ -111,8 +109,8 @@ function scrollTexture()
     cgl.setShader(shaderScroll);
     effect.startEffect();
     effect.bind();
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texFFT.tex );
+    cgl.setTexture(0, texFFT.tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texFFT.tex );
     effect.finish();
     cgl.setPreviousShader();
 
@@ -128,7 +126,7 @@ function scrollTexture()
 var shaderBlur=new CGL.Shader(cgl);
 
 var srcFrag=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
     .endl()+'UNI sampler2D tex;'
     .endl()+'UNI float dirX;'
@@ -163,7 +161,7 @@ var srcFrag=''
     .endl()+'        total += weight;'
     .endl()+'    }'
 
-    .endl()+'    gl_FragColor = color / total;'
+    .endl()+'    outColor= color / total;'
 
     // .endl()+'    /* switch back from pre-multiplied alpha */'
     .endl()+'    gl_FragColor.rgb /= gl_FragColor.a + 0.00001;'
@@ -196,8 +194,8 @@ function blurTexture()
         effect.startEffect();
 
         effect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, effect.getCurrentSourceTexture().tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
 
         uniDirX.setValue(0.0);
         uniDirY.setValue(1.0);
@@ -212,8 +210,8 @@ function blurTexture()
         effect.startEffect();
 
         effect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, effect.getCurrentSourceTexture().tex );
+        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
 
         uniDirX.setValue(1.0);
         uniDirY.setValue(0.0);
@@ -232,14 +230,14 @@ function blurTexture()
 var shaderMirror=new CGL.Shader(cgl);
 
 var doMirror=op.inValueBool("Mirror");
-var mirrorWidth=op.addInPort(new Port(op,"mirror width",OP_PORT_TYPE_VALUE,{display:'range'}));
-var mirrorOffset=op.addInPort(new Port(op,"mirror offset",OP_PORT_TYPE_VALUE,{display:'range'}));
-var mirrorFlip=op.addInPort(new Port(op,"mirror flip",OP_PORT_TYPE_VALUE,{display:'bool'}));
+var mirrorWidth=op.addInPort(new CABLES.Port(op,"mirror width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var mirrorOffset=op.addInPort(new CABLES.Port(op,"mirror offset",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var mirrorFlip=op.addInPort(new CABLES.Port(op,"mirror flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 
 mirrorFlip.set(true);
 mirrorWidth.set(1);
 var srcFragMirror=''
-    .endl()+'precision highp float;'
+
     .endl()+'IN vec2 texCoord;'
 
     .endl()+'UNI sampler2D tex;'
@@ -261,7 +259,7 @@ var srcFragMirror=''
 
     .endl()+'   col=texture2D(tex,vec2(x,texCoord.y) );'
 
-    .endl()+'   gl_FragColor = col;'
+    .endl()+'   outColor= col;'
     .endl()+'}';
 
 shaderMirror.setSource(shaderMirror.getDefaultVertexShader(),srcFragMirror);
@@ -271,7 +269,7 @@ var uniWidthMirror=new CGL.Uniform(shaderMirror,'f','width',mirrorWidth);
 var uniOffsetMirror=new CGL.Uniform(shaderMirror,'f','offset',mirrorOffset);
 var uniFlipMirror=new CGL.Uniform(shaderMirror,'f','flip',0);
 
-mirrorFlip.onValueChanged=function()
+mirrorFlip.onChange=function()
 {
     if(mirrorFlip.get())uniFlipMirror.setValue(1);
         else uniFlipMirror.setValue(0);
@@ -284,8 +282,8 @@ function mirrorTexture()
     effect.startEffect();
     effect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, effect.getCurrentSourceTexture().tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture().tex );
 
     effect.finish();
     effect.endEffect();

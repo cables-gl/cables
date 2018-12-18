@@ -14,7 +14,7 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
     {
         vec3 shadowCoord=vec3(coords.xy+( samples[int(x)]/(MOD_mapsize*2.0) ), (coords.z-MOD_bias)/MOD_positionFromLight.w);
 
-        float shadowPixel=texture2D(MOD_shadowMap,shadowCoord);
+        float shadowPixel=texture(MOD_shadowMap,shadowCoord);
 
         shadow-=((1.0/(SHADOW_NUM_SAMPLES))*shadowPixel);
     }

@@ -1,5 +1,3 @@
-op.name="AutoPanner";
-
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars

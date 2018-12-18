@@ -1,3 +1,2 @@
 
-this.name='PatchOutput';
-
+// empty

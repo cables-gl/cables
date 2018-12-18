@@ -1,0 +1,31 @@
+{
+    "id": "89fc70ea-2350-4a0e-9a24-4efca10cced6",
+    "updated": 1543048689233,
+    "authorName": "pandur",
+    "created": 1543048614948,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Beautify",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Json.ObjectStringify2"
+    },
+    "summary": "Convert object to string",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

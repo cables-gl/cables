@@ -1,17 +1,10 @@
-op.name="EdgeDetection";
-
-var render=op.inFunction("Render");
-var trigger=op.outFunction("Trigger");
-
+var render=op.inTrigger("Render");
+var trigger=op.outTrigger("Trigger");
 var amount=op.inValueSlider("amount",1);
-
 var mulColor=op.inValueSlider("Mul Color",0);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
-
-
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.edgedetect_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
@@ -24,13 +17,12 @@ var uniMulColor=new CGL.Uniform(shader,'f','mulColor',mulColor);
 
 render.onTriggered=function()
 {
-    if(!cgl.currentTextureEffect)return;
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);

@@ -1,0 +1,106 @@
+{
+    "updated": 1542959360902,
+    "authorName": "pandur",
+    "id": "bc561659-a89f-499d-bb21-30bade34c1e7",
+    "created": 1534581433227,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Lightmap"
+            },
+            {
+                "type": "2",
+                "name": "Reflection Cubemap"
+            },
+            {
+                "type": "0",
+                "name": "Roughness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Reflection Amount",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Roughness Map"
+            },
+            {
+                "type": "2",
+                "name": "Reflection"
+            },
+            {
+                "type": "2",
+                "name": "Normal"
+            },
+            {
+                "type": "0",
+                "name": "Normal Intensity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Normal Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Diffuse"
+            },
+            {
+                "type": "2",
+                "name": "AO"
+            },
+            {
+                "type": "0",
+                "name": "AO Intensity",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Opacity Texture"
+            },
+            {
+                "type": "0",
+                "name": "Opacity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "SampleRotation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Repeat X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Repeat Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.IBLMaterial2"
+    },
+    "summary": "image based lighting material using cubemaps",
+    "docs": {
+        "ports": []
+    }
+}

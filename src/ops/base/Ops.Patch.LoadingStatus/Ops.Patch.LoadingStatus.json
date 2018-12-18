@@ -8,7 +8,13 @@
             },
             {
                 "type": "0",
-                "name": "preRenderTimes"
+                "name": "preRenderTimes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "PreRender Ops",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -18,19 +24,23 @@
             },
             {
                 "type": "0",
-                "name": "status"
+                "name": "status",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "all loaded"
+                "name": "all loaded",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "preRenderStatus"
+                "name": "preRenderStatus",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "numAssets"
+                "name": "numAssets",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -43,7 +53,7 @@
         ],
         "name": "Ops.Patch.LoadingStatus"
     },
-    "updated": 1522233853936,
+    "updated": 1541051246021,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "30f01b6d-b234-4ebe-a2c3-ebffd96a31e9",

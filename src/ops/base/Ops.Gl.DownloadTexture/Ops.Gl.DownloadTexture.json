@@ -1,0 +1,36 @@
+{
+    "updated": 1542216842929,
+    "authorName": "pandur",
+    "id": "654bb341-fbae-4ac4-bf95-6f8292e707d9",
+    "created": 1542216824352,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "1",
+                "name": "Download"
+            },
+            {
+                "type": "0",
+                "name": "Filename",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Finished",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.DownloadTexture"
+    },
+    "summary": "download a texture as png file",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

@@ -1,5 +1,5 @@
 {
-    "updated": 1525173783758,
+    "updated": 1536765725439,
     "authorName": "pandur",
     "id": "966cefee-8349-4ef3-b64e-69afca0395f5",
     "created": 1524902340627,
@@ -17,11 +17,11 @@
         "portsOut": [
             {
                 "type": "2",
-                "name": "Histogram Data"
+                "name": "Histogram Texture"
             },
             {
                 "type": "2",
-                "name": "Histogram Texture"
+                "name": "Histogram Data"
             }
         ],
         "name": "Ops.Gl.Textures.Histogram"

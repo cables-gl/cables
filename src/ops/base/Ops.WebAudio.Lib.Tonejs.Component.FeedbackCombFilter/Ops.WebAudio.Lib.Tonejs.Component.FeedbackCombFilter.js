@@ -1,4 +1,3 @@
-op.name="FeedbackCombFilter";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

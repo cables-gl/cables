@@ -1,26 +1,20 @@
-
-op.name='ArrayIterator';
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var arr=op.addInPort(new Port(op,"array",OP_PORT_TYPE_ARRAY));
-
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
-var idx=op.addOutPort(new Port(op,"index"));
-var val=op.addOutPort(new Port(op,"value"));
+const
+    exe=op.inTrigger("exe"),
+    arr=op.inArray("array"),
+    trigger=op.outTrigger('trigger'),
+    idx=op.addOutPort(new CABLES.Port(op,"index")),
+    val=op.addOutPort(new CABLES.Port(op,"value"));
 
 exe.onTriggered=function()
 {
-    if(!arr.val)return;
-    
-    op.patch.instancing.pushLoop(arr.get().length);
+    if(!arr.get())return;
 
     for(var i=0;i<arr.get().length;i++)
     {
         idx.set(i);
-        val.set(arr.val[i]);
+        val.set(arr.get()[i]);
         trigger.trigger();
         op.patch.instancing.increment();
-
     }
-    op.patch.instancing.popLoop();
 
 };

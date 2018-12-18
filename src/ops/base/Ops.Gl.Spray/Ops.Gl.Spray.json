@@ -7,43 +7,57 @@
             },
             {
                 "type": "0",
-                "name": "time"
+                "name": "time",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "num"
+                "name": "num",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size X"
+                "name": "Size X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size Y"
+                "name": "Size Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size Z"
+                "name": "Size Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "movement x"
+                "name": "movement x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "movement y"
+                "name": "movement y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "movement z"
+                "name": "movement z",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             },
             {
                 "type": "0",
-                "name": "lifetime"
+                "name": "lifetime",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Lifetime Minimum"
+                "name": "Lifetime Minimum",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -53,23 +67,28 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "lifeTimePercent"
+                "name": "lifeTimePercent",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Random 1"
+                "name": "Random 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Random 2"
+                "name": "Random 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Random 3"
+                "name": "Random 3",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Spray"
@@ -77,5 +96,9 @@
     "summary": "Spray simulation",
     "docs": {
         "ports": []
-    }
+    },
+    "updated": 1541168526635,
+    "authorName": "pandur",
+    "id": "80ca4cc5-d6ba-4fbf-a629-de04df600060",
+    "created": 1534507645860
 }

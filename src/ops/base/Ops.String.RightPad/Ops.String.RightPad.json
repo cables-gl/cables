@@ -1,5 +1,5 @@
 {
-    "updated": 1519941196649,
+    "updated": 1543065564817,
     "authorName": "pandur",
     "id": "fb8851d1-7605-430a-bf7a-38a7bbe9b984",
     "created": 1519940499582,
@@ -7,21 +7,25 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Char"
+                "name": "Char",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Num"
+                "name": "Num",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "String"
+                "name": "String",
+                "subType": "number"
             }
         ],
         "name": "Ops.String.RightPad"

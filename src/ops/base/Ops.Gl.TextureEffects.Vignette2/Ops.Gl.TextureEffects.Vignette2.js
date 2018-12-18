@@ -1,35 +1,40 @@
-op.name="Vignette";
+const render=op.inTrigger("Render");
+const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+const amount=op.inValueSlider("Amount",1);
+const trigger=op.outTrigger("Trigger");
 
-var render=op.inFunction("render");
-var trigger=op.outFunction("trigger");
-
-var amount=op.inValueSlider("Amount",1);
-// var lensRadius1=op.inValue("lensRadius1",0.8);
-var lensRadius1=op.inValueSlider("Radius",0.5);
-var sharp=op.inValueSlider("sharp",0.25);
-var aspect=op.inValue("Aspect",1);
-
-
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
+const strength=op.inValueSlider("Strength",1);
+// const lensRadius1=op.inValue("lensRadius1",0.8);
+const lensRadius1=op.inValueSlider("Radius",0.5);
+const sharp=op.inValueSlider("Sharp",0.25);
+const aspect=op.inValue("Aspect",1);
 
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
 
+r.setUiAttribs({ colorPick: true });
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.vignette_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var uniLensRadius1=new CGL.Uniform(shader,'f','lensRadius1',lensRadius1);
-var uniaspect=new CGL.Uniform(shader,'f','aspect',aspect);
-var uniAmount=new CGL.Uniform(shader,'f','amount',amount);
-var unisharp=new CGL.Uniform(shader,'f','sharp',sharp);
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
-var unir=new CGL.Uniform(shader,'f','r',r);
-var unig=new CGL.Uniform(shader,'f','g',g);
-var unib=new CGL.Uniform(shader,'f','b',b);
+const srcFrag=(attachments.vignette_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+
+const uniLensRadius1=new CGL.Uniform(shader,'f','lensRadius1',lensRadius1);
+const uniaspect=new CGL.Uniform(shader,'f','aspect',aspect);
+const unistrength=new CGL.Uniform(shader,'f','strength',strength);
+const unisharp=new CGL.Uniform(shader,'f','sharp',sharp);
+
+const unir=new CGL.Uniform(shader,'f','r',r);
+const unig=new CGL.Uniform(shader,'f','g',g);
+const unib=new CGL.Uniform(shader,'f','b',b);
+
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {
@@ -38,8 +43,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

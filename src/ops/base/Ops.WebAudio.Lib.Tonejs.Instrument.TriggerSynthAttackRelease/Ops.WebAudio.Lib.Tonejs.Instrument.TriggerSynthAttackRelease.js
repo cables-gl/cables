@@ -1,4 +1,3 @@
-op.name="TriggerSynthAttackRelease";
 
 // vars
 var NOTE_DEFAULT = "C4";
@@ -10,7 +9,7 @@ var DURATION_DEFAULT = "4n";
 
 // input
 var nodePort = op.inObject("Synth");
-var triggerPort = op.addInPort( new Port( this, "Trigger Arrack Release", OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
+var triggerPort = op.addInPort( new CABLES.Port( this, "Trigger Arrack Release",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var notePort = op.inValueString("Note", NOTE_DEFAULT); // frequency also works
 var durationPort = op.inValueString("Duration", DURATION_DEFAULT);
 var timePort = op.inValueString("Time", TIME_DEFAULT);

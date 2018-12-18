@@ -1,13 +1,12 @@
-op.name="AjaxRequestString";
-
-var filename=op.addInPort(new Port(op,"file",OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var outData=op.outValue("Result");
-var isLoading=op.outValue("Is Loading",false);
-
-var jsonp=op.inValueBool("JsonP",false);
-
+const filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
+const reloadBtn=op.inTriggerButton("reload");
+const jsonp=op.inValueBool("JsonP",false);
+const outData=op.outValue("Result");
+const isLoading=op.outValue("Is Loading",false);
 
 filename.onChange=delayedReload;
+reloadBtn.hidePort();
+reloadBtn.onTriggered=reload;
 jsonp.onChange=delayedReload;
 
 var loadingId=0;
@@ -19,12 +18,20 @@ function delayedReload()
     reloadTimeout=setTimeout(reload,100);
 }
 
+op.onFileChanged=function(fn)
+{
+    if(filename.get() && filename.get().indexOf(fn)>-1)
+    {
+        reload();
+    }
+};
+
 function reload()
 {
     if(!filename.get())return;
-    
+
     op.patch.loading.finished(loadingId);
-    
+
     loadingId=op.patch.loading.start('jsonFile',''+filename.get());
     isLoading.set(true);
 
@@ -32,13 +39,12 @@ function reload()
     if(jsonp.get())f=CABLES.jsonp;
 
     f(
-        op.patch.getFilePath(filename.get()),
+        op.patch.getFilePath(filename.get())+'?nc='+CABLES.uuid(),
         function(err,data,xhr)
         {
             try
             {
                 outData.set(data);
-                console.log(data);
                 op.uiAttr({'error':''});
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
@@ -51,6 +57,5 @@ function reload()
                 isLoading.set(false);
             }
         });
-    
-}
 
+}

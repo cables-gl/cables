@@ -1,4 +1,3 @@
-op.name="Follower";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 

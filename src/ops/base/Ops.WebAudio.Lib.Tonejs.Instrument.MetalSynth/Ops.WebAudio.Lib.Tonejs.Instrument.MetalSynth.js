@@ -1,5 +1,4 @@
 // op vars
-op.name="MetalSynth";
 op.webAudio = op.webAudio || {};
 
 // TODO:

@@ -1,31 +1,29 @@
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
-var num=op.addInPort(new Port(op,"num"));
-var size=op.addInPort(new Port(op,"size"));
-var seed=op.addInPort(new Port(op,"random seed"));
-var scaleX=op.addInPort(new Port(op,"scaleX",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleY=op.addInPort(new Port(op,"scaleY",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var scaleZ=op.addInPort(new Port(op,"scaleZ",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var round=op.inValueBool('round',false);
+const
+    exe=op.inTrigger("exe"),
+    num=op.inValueInt("num"),
+    size=op.inValueFloat("size",10),
+    seed=op.inValueFloat("random seed",1),
+    round=op.inValueBool('round',false),
+    scaleX=op.inValueFloat("scaleX",1),
+    scaleY=op.inValueFloat("scaleY",1),
+    scaleZ=op.inValueFloat("scaleZ",1),
+    trigger=op.outTrigger("trigger"),
+    idx=op.outValue("index"),
+    rnd=op.outValue("rnd"),
+    rotX=op.inValueSlider("Rotate X",1),
+    rotY=op.inValueSlider("Rotate Y",1),
+    rotZ=op.inValueSlider("Rotate Z",1),
+    scrollX=op.inValue("Scroll X",0);
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION)) ;
-var idx=op.addOutPort(new Port(op,"index")) ;
-var rnd=op.addOutPort(new Port(op,"rnd")) ;
+op.setPortGroup("Scaling",[scaleX,scaleY,scaleZ]);
+op.setPortGroup("Rotation",[rotX,rotY,rotZ]);
+op.setPortGroup("Parameters",[num,size,round,seed]);
 
-var rotX=op.inValueSlider("Rotate X",1);
-var rotY=op.inValueSlider("Rotate Y",1);
-var rotZ=op.inValueSlider("Rotate Z",1);
-
-var scrollX=op.inValue("Scroll X",0);
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var randoms=[];
 var origRandoms=[];
 var randomsRot=[];
 var randomsFloats=[];
-
-scaleX.set(1);
-scaleY.set(1);
-scaleZ.set(1);
 
 var transVec=vec3.create();
 var mat=mat4.create();
@@ -44,7 +42,7 @@ function doRender()
     }
 
     op.patch.instancing.pushLoop(randoms.length);
-    
+
     if(scrollX.get()!=0)
     {
         for(var i=0;i<origRandoms.length;i++)
@@ -96,7 +94,7 @@ function reset()
     origRandoms.length=0;
 
     Math.randomSeed=seed.get();
-    
+
     var makeRound=round.get();
 
     for(var i=0;i<num.get();i++)
@@ -104,7 +102,7 @@ function reset()
         randomsFloats.push(Math.seededRandom());
 
         var v=getRandomPos();
-        
+
         if(makeRound)
             while(vec3.len(v)>size.get()/2)
                 v=getRandomPos();
@@ -120,8 +118,6 @@ function reset()
     }
 }
 
-size.set(20);
-seed.set(1);
 seed.onChange=reset;
 num.onChange=reset;
 size.onChange=reset;

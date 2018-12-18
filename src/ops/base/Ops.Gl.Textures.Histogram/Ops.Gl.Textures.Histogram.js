@@ -1,22 +1,18 @@
-
-const exe=op.inFunction("Trigger");
+const exe=op.inTrigger("Trigger");
 const inTex=op.inTexture("Texture");
 
-var outTexData=op.outTexture("Histogram Data");
-var outTex=op.outTexture("Histogram Texture");
-
-var cgl=op.patch.cgl;
+const outTex=op.outTexture("Histogram Texture");
+const outTexData=op.outTexture("Histogram Data");
+const cgl=op.patch.cgl;
 var meshPoints=null;
-
 var fb=new CGL.Framebuffer2(cgl,256,8,{isFloatingPointTexture:true});
+
 fb.setFilter(CGL.Texture.FILTER_NEAREST);
 var effect=null;
 
 function initEffect()
 {
     if(effect)effect.delete();
-    // if(tex)tex.delete();
-
     effect=new CGL.TextureEffect(cgl,{"isFloatingPointTexture":false});
 
     var tex=new CGL.Texture(cgl,
@@ -28,11 +24,9 @@ function initEffect()
             "height": 256,
         });
 
-
     effect.setSourceTexture(tex);
     outTex.set(null);
 }
-
 
 function setUpPointVerts()
 {
@@ -40,6 +34,7 @@ function setUpPointVerts()
     var res=256;
     var verts=[];
     var texCoords=[];
+    var i=0;
     verts.length=res*res*3;
     texCoords.length=res*res*2;
     for(var x=0;x<res;x++)
@@ -83,8 +78,6 @@ shaderPointsLumi.setSource(attachments.histogram_vert,attachments.histogram_frag
 shaderPointsLumi.textureUniform=new CGL.Uniform(shaderPointsLumi,'t','tex',0);
 shaderPointsLumi.define("HISTOGRAM_LUMI");
 
-
-
 setUpPointVerts();
 initEffect();
 var prevViewPort=[0,0,0,0];
@@ -102,11 +95,7 @@ exe.onTriggered=function()
         // setup data
         fb.renderStart(cgl);
 
-
-
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTex.get().tex);
-
+        cgl.setTexture(0, inTex.get().tex);
         meshPoints.render(shaderPointsR);
         meshPoints.render(shaderPointsG);
         meshPoints.render(shaderPointsB);
@@ -115,45 +104,28 @@ exe.onTriggered=function()
         fb.renderEnd(cgl);
         outTexData.set( fb.getTextureColor() );
 
-
-
-
         // render wave
 
-
-    
         cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
         cgl.currentTextureEffect=effect;
-    
+
         effect.startEffect();
 
         cgl.setShader(shaderWave);
         cgl.currentTextureEffect.bind();
-        cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        
-        cgl.gl.activeTexture(cgl.gl.TEXTURE2);
-        cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, fb.getTextureColor().tex);
-    
-    
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(2, fb.getTextureColor().tex);
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
-    
-        // texOut.set(effect.getCurrentSourceTexture());
-        // texOut.set(effect.getCurrentTargetTexture());
+
         outTex.set(effect.getCurrentSourceTexture());
-    
+
         effect.endEffect();
-    
+
         cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
-    
-    
         cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
-    
         cgl.currentTextureEffect=null;
-        // cgl.popDepthTest();
-
     }
-
-
 };
+
+

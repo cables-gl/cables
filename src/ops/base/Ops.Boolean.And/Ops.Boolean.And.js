@@ -1,15 +1,12 @@
-op.name='And';
+const
+    bool0=op.inValueBool("bool 1"),
+    bool1=op.inValueBool("bool 2"),
+    result=op.outValueBool("result");
 
-var bool0=op.addInPort(new Port(op,"bool 1",OP_PORT_TYPE_VALUE));
-var bool1=op.addInPort(new Port(op,"bool 2",OP_PORT_TYPE_VALUE));
-
-var result=op.addOutPort(new Port(op,"result",OP_PORT_TYPE_VALUE));
+bool0.onChange=exec;
+bool1.onChange=exec;
 
 function exec()
 {
     result.set( bool1.get() && bool0.get() );
 }
-
-bool0.onValueChanged=exec;
-bool1.onValueChanged=exec;
-

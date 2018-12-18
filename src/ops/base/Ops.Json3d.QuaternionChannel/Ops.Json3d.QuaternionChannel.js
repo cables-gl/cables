@@ -1,8 +1,8 @@
 
-var render=this.addInPort(new Port(this,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=this.addOutPort(new Port(this,"trigger",OP_PORT_TYPE_FUNCTION));
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger");
 
-var channel=this.addInPort(new Port(this,"channel"));
+var channel=this.addInPort(new CABLES.Port(this,"channel"));
 
 var q=quat.create();
 var qMat=mat4.create();
@@ -31,10 +31,10 @@ function readAnim()
 
     if(an)
     {
-        animX=new CABLES.TL.Anim();
-        animY=new CABLES.TL.Anim();
-        animZ=new CABLES.TL.Anim();
-        animW=new CABLES.TL.Anim();
+        animX=new CABLES.Anim();
+        animY=new CABLES.Anim();
+        animZ=new CABLES.Anim();
+        animW=new CABLES.Anim();
 
         for(var k in an.rotationkeys)
         {

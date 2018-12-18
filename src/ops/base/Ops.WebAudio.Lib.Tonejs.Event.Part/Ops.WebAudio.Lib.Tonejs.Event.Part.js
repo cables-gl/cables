@@ -1,4 +1,3 @@
-op.name="Part";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -37,9 +36,9 @@ var TIME_NOTE_ARRAY_DEFAULT =
 var node = new Tone.Part(cb, TIME_NOTE_ARRAY_DEFAULT);
 
 // input ports
-var updateStatePorts = op.inFunction("Update State Ports");
+var updateStatePorts = op.inTrigger("Update State Ports");
 updateStatePorts.onLinkChanged = checkAutoStart;
-var timeNoteArrayPort = op.addInPort( new Port( op, "Time & Note Array", OP_PORT_TYPE_ARRAY, { type: 'string', display:'editor' } ));
+var timeNoteArrayPort = op.addInPort( new CABLES.Port( op, "Time & Note Array",CABLES.OP_PORT_TYPE_ARRAY, { type: 'string', display:'editor' } ));
 timeNoteArrayPort.set(JSON.stringify(TIME_NOTE_ARRAY_DEFAULT, null, 4));
 var loopPort = op.inValueBool("Loop", LOOP_DEFAULT);
 var iterationsPort = op.inValue("Loop Iterations", ITERATIONS_DEFAULT);
@@ -50,12 +49,12 @@ var humanizePort = op.inValueBool("Humanize", false);
 var humanizeTimePort = op.inValueString("Humanize Time", HUMANIZE_TIME_DEFAULT);
 var probabilityPort = op.inValueSlider("Probability", PROBABILITY_DEFAULT);
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
-var startTriggerPort = op.inFunctionButton("Start");
+var startTriggerPort = op.inTriggerButton("Start");
 var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
-var stopTriggerPort = op.inFunctionButton("Stop");
+var stopTriggerPort = op.inTriggerButton("Stop");
 var cancelTimePort = op.inValueString("Cancel Time", CANCEL_TIME_DEFAULT);
-var cancelTriggerPort = op.inFunctionButton("Cancel");
+var cancelTriggerPort = op.inTriggerButton("Cancel");
 var mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
 
 // functions
@@ -248,7 +247,7 @@ updateStatePorts.onTriggered = function() {
 };
 
 // output ports
-var triggerPort = op.outFunction("Trigger");
+var triggerPort = op.outTrigger("Trigger");
 triggerPort.onLinkChanged = checkAutoStart;
 var timePort = op.outValue("Time");
 timePort.onLinkChanged = checkAutoStart;

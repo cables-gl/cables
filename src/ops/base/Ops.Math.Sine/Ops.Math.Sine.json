@@ -1,5 +1,8 @@
 {
-    "summary": "outputs sine of a number",
+    "updated": 1538425645394,
+    "authorName": "pandur",
+    "id": "d24da018-9f3d-428b-85c9-6ff14d77548b",
+    "created": 1527697396067,
     "layout": {
         "portsIn": [
             {
@@ -21,6 +24,11 @@
                 "type": "0",
                 "name": "amplitude",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "asine",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -32,8 +40,17 @@
         ],
         "name": "Ops.Math.Sine"
     },
-    "updated": 1526413610381,
-    "authorName": "pandur",
-    "id": "a5164007-32ad-4d3e-b734-35bacc8db5be",
-    "created": 1523828867365
+    "summary": "Calculates the sine of an angle.",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "Value input in radians"
+            },
+            {
+                "name": "Result",
+                "text": "Output in the range -1 to 1"
+            }
+        ]
+    }
 }

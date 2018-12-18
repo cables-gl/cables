@@ -1,5 +1,5 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var trigger=op.outTrigger('trigger');
 
 var inLut=op.inTexture("LUT Image");
 
@@ -7,7 +7,7 @@ var inAmount=op.inValueSlider("Amount",1.0);
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
-op.onLoaded=shader.compile;
+
 
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.lut_frag);
@@ -25,11 +25,11 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE1);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLut.get().tex );
+    cgl.setTexture(1, inLut.get().tex );
+    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLut.get().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

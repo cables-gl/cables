@@ -1,8 +1,8 @@
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var fragmentShader=op.addInPort(new Port(op,"fragment",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
-var vertexShader=op.addInPort(new Port(op,"vertex",OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
+var render=op.inTrigger('render');
+var fragmentShader=op.addInPort(new CABLES.Port(op,"fragment",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
+var vertexShader=op.addInPort(new CABLES.Port(op,"vertex",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
 
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger('trigger');
 var outShader=op.outObject("Shader");
 var cgl=op.patch.cgl;
 var uniformInputs=[];
@@ -12,8 +12,8 @@ var shader=new CGL.Shader(cgl,"shaderMaterial");
 // shader.glslVersion=0;
 
 
-fragmentShader.set(shader.getDefaultFragmentShader());
-vertexShader.set(shader.getDefaultVertexShader());
+fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
+vertexShader.set(CGL.Shader.getDefaultVertexShader());
 
 fragmentShader.onChange=updateLater;
 vertexShader.onChange=updateLater;
@@ -27,10 +27,19 @@ function updateLater()
     updateShader();
 }
 
+op.init=function()
+{
+    updateShader();
+};
+
 function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
+    
+    
+// console.log(lastm4);
+
 }
 
 function bindTextures()
@@ -39,8 +48,7 @@ function bindTextures()
     {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
         {
-            cgl.gl.activeTexture(cgl.gl.TEXTURE0+i+3);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
+            cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
         }
     }
 }
@@ -53,11 +61,13 @@ function hasUniformInput(name)
     return false;
 }
 
+var tempMat4=mat4.create();
+var lastm4;
+
 function updateShader()
 {
     if(!shader)return;
     needsUpdate=false;
-    op.log('shader update!');
 
     // shader.glslVersion=0;
     shader.bindTextures=bindTextures.bind(this);
@@ -75,9 +85,9 @@ function updateShader()
 
         if(!hasUniformInput(uniform.name))
         {
-            if(uniform.type==0x1406)
+            if(uniform.type==cgl.gl.FLOAT)
             {
-                var newInput=op.inValue(uniform.name,newInput,0);
+                var newInput=op.inValue(uniform.name,0);
                 newInput.onChange=function(p)
                 {
                     p.uniform.needsUpdate=true;
@@ -88,7 +98,25 @@ function updateShader()
                 newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
             }
             else
-            if(uniform.type==0x8B5E )
+            if(uniform.type==cgl.gl.FLOAT_MAT4)
+            {
+                var newInputM4=op.inArray(uniform.name);
+                newInputM4.onChange=function(p)
+                {
+                    if(p.get())
+                    {
+                        mat4.copy(tempMat4,p.get());
+                        p.uniform.needsUpdate=true;
+                        p.uniform.setValue(tempMat4);
+                    }
+                };
+
+                uniformInputs.push(newInputM4);
+                lastm4=newInputM4;
+                newInputM4.uniform=new CGL.Uniform(shader,'m4',uniform.name,mat4.create());
+            }
+            else
+            if(uniform.type==cgl.gl.SAMPLER_2D)
             {
                 var newInputTex=op.inObject(uniform.name);
                 newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
@@ -108,6 +136,7 @@ function updateShader()
     }
 
     if(CABLES.UI) gui.patch().showOpParams(op);
+
 
     outShader.set(null);
     outShader.set(shader);

@@ -1,12 +1,12 @@
 var cgl=op.patch.cgl;
 
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION) );
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var trigger=op.outTrigger('trigger');
 
-var enableDepth=op.addInPort(new Port(op,"enable depth testing",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var enableDepth=op.addInPort(new CABLES.Port(op,"enable depth testing",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 enableDepth.set(true);
 
-var fill=op.addInPort(new Port(op,"fill",OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var fill=op.addInPort(new CABLES.Port(op,"fill",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 fill.set(true);
 
 function setDefines()
@@ -20,13 +20,13 @@ fill.onChange=function()
     setDefines();
 };
 
-var w=op.addInPort(new Port(op,"width",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var w=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 w.set(0.25);
-w.onValueChanged=function(){ uniformWidth.setValue(w.get()); };
+w.onChange=function(){ uniformWidth.setValue(w.get()); };
 
-var opacity=op.addInPort(new Port(op,"opacity",OP_PORT_TYPE_VALUE,{ display:'range' }));
+var opacity=op.addInPort(new CABLES.Port(op,"opacity",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
 opacity.set(1.0);
-opacity.onValueChanged=function(){ uniformOpacity.setValue(opacity.get()); };
+opacity.onChange=function(){ uniformOpacity.setValue(opacity.get()); };
 
 if(cgl.glVersion==1 && !cgl.gl.getExtension('OES_standard_derivatives') )
 {
@@ -38,102 +38,7 @@ else
 }
 
 
-if(cgl.glVersion==1)
-{
-    var srcVert=''
-        .endl()+'{{MODULES_HEAD}}'
-        .endl()+'IN vec3 vPosition;'
-        .endl()+'IN vec3 attrBaycentric;'
-        .endl()+'UNI mat4 projMatrix;'
-        .endl()+'UNI mat4 modelMatrix;'
-        .endl()+'UNI mat4 viewMatrix;'
-        .endl()+'OUT vec3 baycentric;'
-        .endl()+'IN vec2 attrTexCoord;'
-        .endl()+'OUT vec2 texCoord;'
-        .endl();
-}
-else
-{
-    var srcVert=''
-        .endl()+'{{MODULES_HEAD}}'
-        .endl()+'IN vec3 vPosition;'
-        .endl()+'IN vec3 attrBaycentric;'
-        .endl()+'UNI mat4 projMatrix;'
-        .endl()+'UNI mat4 modelMatrix;'
-        .endl()+'UNI mat4 viewMatrix;'
-        .endl()+'OUT vec3 baycentric;'
-        .endl()+'IN vec2 attrTexCoord;'
-        .endl()+'OUT vec2 texCoord;'
-        .endl();
-}
 
-srcVert+=''
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'    texCoord=attrTexCoord;'
-    .endl()+'    baycentric=attrBaycentric;'
-    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
-    .endl()+'    {{MODULE_VERTEX_POSITION}}'
-    .endl()+'    gl_Position = projMatrix * viewMatrix * modelMatrix * pos;'
-    .endl()+'}';
-
-
-
-var srcFrag='';
-
-if(cgl.glVersion==1)
-{
-    srcFrag=''//#extension GL_OES_standard_derivatives : enable'
-    // .endl()+'precision highp float;'
-    .endl()+'IN vec3 baycentric;'
-    .endl();
-}
-else
-{
-    srcFrag=''
-    // .endl()+'precision highp float;'
-    .endl()+'IN vec3 baycentric;'
-    // .endl()+'out vec4 fragColor;'
-
-    .endl();
-}
-
-srcFrag+=''
-.endl()+'UNI float width;'
-.endl()+'UNI float opacity;'
-.endl()+'UNI float r,g,b;'
-.endl()+'UNI float fr,fg,fb;'
-.endl()+''
-.endl()+'float edgeFactor()'
-.endl()+'{'
-.endl()+'    vec3 d = fwidth(baycentric);'
-.endl()+'    vec3 a3 = smoothstep(vec3(0.0), d*width*4.0, baycentric);'
-.endl()+'    return min(min(a3.x, a3.y), a3.z);'
-.endl()+'}'
-.endl()+'void main()'
-.endl()+'{'
-.endl()+'   vec4 col;'
-
-.endl()+'   #ifdef WIREFRAME_FILL'
-.endl()+'        float v=opacity*(1.0-edgeFactor())*0.95;'
-.endl()+'       vec3 wire = vec3(fr, fg, fb);'
-.endl()+'       col.rgb = vec3(r, g, b);'
-.endl()+'       col.rgb = mix(wire,col.rgb,v);'
-.endl()+'       col.a = opacity;'
-// .endl()+'    col = wire;'
-.endl()+'   #endif'
-
-.endl()+'   #ifndef WIREFRAME_FILL'
-.endl()+'       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);'
-.endl()+'   #endif'
-// .endl()+'col.xyz=baycentric;'
-.endl();
-
-// if(cgl.glVersion==1)srcFrag+='gl_FragColor=col;';
-// else
-srcFrag+='outColor=col;';
-
-srcFrag+=''.endl()+'}';
 
 var doRender=function()
 {
@@ -158,7 +63,7 @@ var uniformOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
 
 if(cgl.glVersion==1)shader.enableExtension('OES_standard_derivatives');
 
-shader.setSource(srcVert,srcFrag);
+shader.setSource(attachments.wireframe_vert||'',attachments.wireframe_frag||'');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.wireframe=true;
 setDefines();
@@ -166,22 +71,22 @@ setDefines();
 {
     // diffuse color
 
-    var r=op.addInPort(new Port(op,"diffuse r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    r.onValueChanged=function()
+    var r=op.addInPort(new CABLES.Port(op,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    r.onChange=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
 
-    var g=op.addInPort(new Port(op,"diffuse g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    g.onValueChanged=function()
+    var g=op.addInPort(new CABLES.Port(op,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    g.onChange=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
 
-    var b=op.addInPort(new Port(op,"diffuse b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.onValueChanged=function()
+    var b=op.addInPort(new CABLES.Port(op,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    b.onChange=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
@@ -195,13 +100,13 @@ setDefines();
 {
     // diffuse color
 
-    var fr=op.addInPort(new Port(op,"Fill R",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var fr=op.addInPort(new CABLES.Port(op,"Fill R",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
     fr.uniform=new CGL.Uniform(shader,'f','fr',fr);
 
-    var fg=op.addInPort(new Port(op,"Fill G",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var fg=op.addInPort(new CABLES.Port(op,"Fill G",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     fg.uniform=new CGL.Uniform(shader,'f','fg',fg);
 
-    var fb=op.addInPort(new Port(op,"Fill B",OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var fb=op.addInPort(new CABLES.Port(op,"Fill B",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
     fb.uniform=new CGL.Uniform(shader,'f','fb',fb);
 
     fr.set(0);
@@ -210,7 +115,7 @@ setDefines();
 }
 
 
-// op.onLoaded=shader.compile;
+
 
 render.onTriggered=doRender;
 

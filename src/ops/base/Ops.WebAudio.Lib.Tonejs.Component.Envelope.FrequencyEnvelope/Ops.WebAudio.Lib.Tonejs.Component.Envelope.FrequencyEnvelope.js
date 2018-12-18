@@ -1,4 +1,3 @@
-op.name="FrequencyEnvelope";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -47,9 +46,9 @@ var attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
 var decayPort = op.inValue("Decay", DECAY_DEFAULT);
 var sustainPort = op.inValueSlider("Sustain", SUSTAIN_DEFAULT);
 var releasePort = op.inValueString("Release", RELEASE_DEFAULT);
-var attackCurvePort = this.addInPort( new Port( this, "Attack Curve", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: CURVE_VALUES } ) );
+var attackCurvePort = this.addInPort( new CABLES.Port( this, "Attack Curve", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: CURVE_VALUES } ) );
 attackCurvePort.set(ATTACK_CURVE_DEFAULT);
-var releaseCurvePort = this.addInPort( new Port( this, "Release Curve", OP_PORT_TYPE_VALUE, { display: 'dropdown', values: CURVE_VALUES } ) );
+var releaseCurvePort = this.addInPort( new CABLES.Port( this, "Release Curve", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: CURVE_VALUES } ) );
 releaseCurvePort.set(ATTACK_CURVE_DEFAULT);
 var exponentPort = op.inValue("Exponent", EXPONENT_DEFAULT);
 

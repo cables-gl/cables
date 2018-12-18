@@ -1,5 +1,5 @@
 {
-    "updated": 1522766918788,
+    "updated": 1536910746289,
     "authorName": "pandur",
     "id": "2a90bd0e-e743-475e-8e19-00793950b531",
     "created": 1521449493456,
@@ -17,11 +17,6 @@
             },
             {
                 "type": "0",
-                "name": "Max Samples MSAA",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Max Frag uniforms",
                 "subType": "number"
             },
@@ -33,6 +28,16 @@
             {
                 "type": "0",
                 "name": "Max Texture Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Texture Units",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max MSAA Samples",
                 "subType": "number"
             },
             {

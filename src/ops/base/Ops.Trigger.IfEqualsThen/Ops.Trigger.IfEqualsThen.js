@@ -1,9 +1,9 @@
-var exe=op.addInPort(new Port(op,"exe",OP_PORT_TYPE_FUNCTION));
+const exe=op.inTrigger("exe");
 var value1=op.inValue("Value 1",0);
 var value2=op.inValue("Value 2",0);
 
-var triggerThen=op.addOutPort(new Port(op,"then",OP_PORT_TYPE_FUNCTION));
-var triggerElse=op.addOutPort(new Port(op,"else",OP_PORT_TYPE_FUNCTION));
+var triggerThen=op.addOutPort(new CABLES.Port(op,"then",CABLES.OP_PORT_TYPE_FUNCTION));
+var triggerElse=op.addOutPort(new CABLES.Port(op,"else",CABLES.OP_PORT_TYPE_FUNCTION));
 
 function exec()
 {

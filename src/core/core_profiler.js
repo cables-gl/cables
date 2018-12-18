@@ -36,9 +36,6 @@ CABLES.Profiler=function()
                         items[currentId].peakTime=CABLES.now();
                     }
                     items[currentId].peak=Math.max( items[currentId].peak,(performance.now()-currentStart) );
-                    
-                    
-                    
                 }
             }
 

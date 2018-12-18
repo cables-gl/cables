@@ -3,17 +3,20 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "bool 1"
+                "name": "bool 1",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "bool 2"
+                "name": "bool 2",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Boolean.And"
@@ -34,5 +37,9 @@
                 "text": "The result, only `true` when both input values are `true`"
             }
         ]
-    }
+    },
+    "updated": 1542699015106,
+    "authorName": "pandur",
+    "id": "c26e6ce0-8047-44bb-9bc8-5a4f911ed8ad",
+    "created": 1542698826538
 }

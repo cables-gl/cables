@@ -1,17 +1,13 @@
-op.name="ForceFieldForce";
-
-var exec=op.inFunction("Exec");
-
+var exec=op.inTrigger("Exec");
 var range=op.inValue("Range Radius",1);
 var attraction=op.inValue("attraction");
 var angle=op.inValue("Angle");
 var show=op.inValueBool("Show");
-
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
 
-var next=op.outFunction("next");
+var next=op.outTrigger("next");
 
 var forceObj={};
 var mesh=null;
@@ -35,7 +31,7 @@ function updateForceObject()
 
 op.onDelete=function()
 {
-    
+
 };
 
 var mark=new CGL.Marker(cgl);
@@ -60,12 +56,12 @@ exec.onTriggered=function()
 
     CABLES.forceFieldForces=CABLES.forceFieldForces||[];
     CABLES.forceFieldForces.push(forceObj);
-    
+
     next.trigger();
-    
+
     CABLES.forceFieldForces.pop();
-    
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:posX,

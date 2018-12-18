@@ -1,21 +1,26 @@
-const value=op.addInPort(new Port(op,"value",OP_PORT_TYPE_VALUE));
-const result=op.addOutPort(new Port(op,"result"));
+// input
+var value = op.inValue('value');
 
-const phase=op.addInPort(new Port(op,"phase",OP_PORT_TYPE_VALUE));
-const mul=op.addInPort(new Port(op,"frequency",OP_PORT_TYPE_VALUE));
-const amplitude=op.addInPort(new Port(op,"amplitude",OP_PORT_TYPE_VALUE));
+var phase = op.inValue('phase', 0.0);
+var mul = op.inValue('frequency', 1.0);
+var amplitude = op.inValue('amplitude', 1.0);
+var invert = op.inValueBool("asine", false);
 
+// output
+var result = op.outValue('result');
 
-mul.set(1.0);
-amplitude.set(1.0);
-phase.set(1);
+var calculate = Math.sin;
 
-value.onValueChanged=function()
+phase.onChange = 
+value.onChange = function()
 {
     result.set(
-        amplitude.get() * 
-        Math.sin( 
-            (value.get()*mul.get()) 
-            + phase.get() ));
+        amplitude.get() * calculate( ( value.get()*mul.get() ) + phase.get() )
+    );
 };
 
+invert.onChange = function()
+{
+    if(invert.get()) calculate = Math.asin;
+    else calculate = Math.sin;
+}

@@ -4,7 +4,7 @@ var SORT_Y="Y Axis";
 var SORT_Z="Z Axis";
 var SORT_NONE="None";
 
-var geometry=op.addInPort(new Port(op,"Geometry",OP_PORT_TYPE_OBJECT));
+var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
 var sorting=op.inValueSelect("Sort",[SORT_RANDOM,SORT_X,SORT_Y,SORT_Z,SORT_NONE],SORT_X);
 var reverse=op.inValueBool("Reverse",false);
 

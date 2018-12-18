@@ -4,47 +4,58 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Multiply"
+                "name": "Multiply",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min Unlimited"
+                "name": "Min Unlimited",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "min"
+                "name": "min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max Unlimited"
+                "name": "Max Unlimited",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "max"
+                "name": "max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "smooth"
+                "name": "smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "delay"
+                "name": "delay",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "prevent scroll"
+                "name": "prevent scroll",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Flip Direction"
+                "name": "Flip Direction",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "active"
+                "name": "active",
+                "subType": "boolean"
             },
             {
                 "type": "1",
@@ -54,16 +65,18 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "absolute value"
+                "name": "absolute value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "delta"
+                "name": "delta",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Mouse.MouseWheel"
     },
-    "updated": 1518625527230,
+    "updated": 1541173154519,
     "authorName": "pandur",
     "id": "40331e99-d2c6-4a0a-b5dd-385045aecd18",
     "created": 1516633142096,

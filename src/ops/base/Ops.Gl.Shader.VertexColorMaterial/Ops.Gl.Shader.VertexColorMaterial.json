@@ -1,5 +1,5 @@
 {
-    "updated": 1513332084423,
+    "updated": 1539765339750,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "a01d592b-0e5e-48f3-a9fd-54b87ffd623b",
@@ -12,7 +12,8 @@
             },
             {
                 "type": "0",
-                "name": "opacity"
+                "name": "opacity",
+                "subType": "number"
             }
         ],
         "portsOut": [

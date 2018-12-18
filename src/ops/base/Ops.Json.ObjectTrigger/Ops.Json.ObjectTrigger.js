@@ -1,9 +1,9 @@
 var inObj=op.inObject("Object");
-var inTrigger=op.inFunctionButton("Trigger");
+var inTrigger=op.inTriggerButton("Trigger");
 
 var outObj=op.outObject("Result");
 
 inTrigger.onTriggered=function()
 {
-    outObject.set(inObject.get());
+    outObj.set(inObj.get());
 };

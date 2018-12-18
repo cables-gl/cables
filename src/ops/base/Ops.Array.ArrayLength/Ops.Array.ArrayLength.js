@@ -1,7 +1,7 @@
-op.name='ArrayLength';
+const
+    array=op.inArray("array"),
+    outLength=op.outValue("length");
 
-var array=op.addInPort(new Port(op, "array",OP_PORT_TYPE_ARRAY));
-var outLength=op.addOutPort(new Port(op, "length",OP_PORT_TYPE_VALUE));
 outLength.ignoreValueSerialize=true;
 
 function update()
@@ -12,4 +12,4 @@ function update()
     outLength.set(l);
 }
 
-array.onValueChanged=update;
+array.onChange=update;

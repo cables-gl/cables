@@ -1,4 +1,3 @@
-op.name="AudioLoop";
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -22,7 +21,7 @@ var node = new Tone.Loop(cb, INTERVAL_DEFAULT);
 op.log("iterations: ", node.get("iterations"));
 
 // input ports
-var updateStatePorts = op.inFunction("Update State Ports");
+var updateStatePorts = op.inTrigger("Update State Ports");
 updateStatePorts.onLinkChanged = checkAutoStart;
 var intervalPort = op.inValueString("Interval", INTERVAL_DEFAULT);
 var iterationsPort = op.inValue("Iterations", ITERATIONS_DEFAULT);
@@ -31,12 +30,12 @@ var humanizePort = op.inValueBool("Humanize", false);
 var humanizeTimePort = op.inValueString("Humanize Time", HUMANIZE_TIME_DEFAULT);
 var probabilityPort = op.inValueSlider("Probability", PROBABILITY_DEFAULT);
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
-var startTriggerPort = op.inFunctionButton("Start");
+var startTriggerPort = op.inTriggerButton("Start");
 var autoStartPort = op.inValueBool("Auto Start", true);
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
-var stopTriggerPort = op.inFunctionButton("Stop");
+var stopTriggerPort = op.inTriggerButton("Stop");
 var cancelTimePort = op.inValueString("Cancel Time", CANCEL_TIME_DEFAULT);
-var cancelTriggerPort = op.inFunctionButton("Cancel");
+var cancelTriggerPort = op.inTriggerButton("Cancel");
 var mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
 
 // functions
@@ -178,7 +177,7 @@ updateStatePorts.onTriggered = function() {
 };
 
 // output ports
-var triggerPort = op.outFunction("Trigger");
+var triggerPort = op.outTrigger("Trigger");
 triggerPort.onLinkChanged = checkAutoStart;
 var timePort = op.outValue("Time");
 timePort.onLinkChanged = checkAutoStart;

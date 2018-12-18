@@ -1,0 +1,21 @@
+{
+    "updated": 1528715068196,
+    "authorName": "pandur",
+    "id": "21f9b43a-7e12-477e-bace-a62fcc020d3f",
+    "created": 1528290556141,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Sidebar.SidebarAsObject"
+    }
+}

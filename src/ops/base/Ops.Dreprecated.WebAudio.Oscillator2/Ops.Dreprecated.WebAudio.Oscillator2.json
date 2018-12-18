@@ -1,0 +1,27 @@
+{
+    "updated": 1542058158911,
+    "authorName": "pandur",
+    "id": "49e8b29f-cc0e-49f5-85f7-ee8be3ede96a",
+    "created": 1542058158915,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "type",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "frequency",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            }
+        ],
+        "name": "Ops.WebAudio.Oscillator"
+    }
+}

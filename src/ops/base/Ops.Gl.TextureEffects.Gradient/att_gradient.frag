@@ -12,9 +12,8 @@ UNI sampler2D tex;
 
 void main()
 {
-    vec4 base=texture2D(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
     vec4 col;
-
     float ax=texCoord.x;
 
     #ifdef GRAD_Y
@@ -29,7 +28,6 @@ void main()
 
     ax=((ax-0.5)*width)+0.5;
 
-
     #ifndef GRAD_SMOOTHSTEP
         if(ax<=pos) col = vec4(mix(colA, colB, ax*1.0/pos),1.0);
             else col = vec4(mix(colB, colC, min(1.0,(ax-pos)*1.0/(1.0-pos))),1.0);
@@ -38,16 +36,10 @@ void main()
     #ifdef GRAD_SMOOTHSTEP
         if(ax<=pos) col = vec4(mix(colA, colB, smoothstep(0.0,1.0,ax*1.0/pos)),1.0);
             else col = vec4(mix(colB, colC, smoothstep(0.0,1.0,min(1.0,(ax-pos)*1.0/(1.0-pos)))),1.0);
-        // ax=smoothstep(0.0,1.0,ax);
     #endif
-
-
-
-
 
    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
 
-   gl_FragColor=col;
-
+   outColor=col;
 }

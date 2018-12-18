@@ -1,21 +1,20 @@
+const inId=op.inValueString("Id");
+const inClass=op.inValueString("Class");
+const inText=op.inValueString("Text","Hello Div");
+const inStyle=op.inValueEditor("Style","position:absolute;z-index:9999;","css");
 
-var inId=op.inValueString("Id");
-var inClass=op.inValueString("Class");
-var inText=op.inValueString("Text","Hello Div");
-var inStyle=op.inValueEditor("Style","position:absolute;z-index:9999;","css");
+const inInteractive=op.inValueBool("Interactive",false);
+const inVisible=op.inValueBool("Visible",true);
 
-var inInteractive=op.inValueBool("Interactive",false);
-var inVisible=op.inValueBool("Visible",true);
-
-var outElement=op.outObject("DOM Element");
-var outHover=op.outValue("Hover");
-var outClicked=op.outFunction("Clicked");
+const outElement=op.outObject("DOM Element");
+const outHover=op.outValue("Hover");
+const outClicked=op.outTrigger("Clicked");
 
 var listenerElement=null;
 
 var div = document.createElement('div');
 var canvas = op.patch.cgl.canvas.parentElement;
-// var canvas = op.patch.cgl.canvas;
+
 canvas.appendChild(div);
 outElement.set(div);
 
@@ -28,9 +27,12 @@ inVisible.onChange=updateVisibility;
 updateText();
 updateStyle();
 
-function updateVisibility()
+op.onDelete=removeElement;
+
+
+function setCSSVisible(visible)
 {
-    if(!inVisible.get()) 
+    if(!visible)
     {
         div.style.visibility='hidden';
         div.style.display='none';
@@ -42,19 +44,29 @@ function updateVisibility()
     }
 }
 
+function updateVisibility()
+{
+    setCSSVisible(inVisible.get());
+}
+
 function updateText()
 {
     div.innerHTML=inText.get();
+    outElement.set(null);
+    outElement.set(div);
 }
 
-op.onDelete=function()
+function removeElement()
 {
-    div.remove();
-};
+    div.parentNode.removeChild(div);
+}
 
 function updateStyle()
 {
     div.setAttribute("style",inStyle.get());
+    updateVisibility();
+    outElement.set(null);
+    outElement.set(div);
 }
 
 function updateClass()
@@ -83,6 +95,11 @@ function updateInteractive()
     if(inInteractive.get()) addListeners();
 }
 
+inId.onChange=function()
+{
+    div.id=inId.get();
+};
+
 function removeListeners()
 {
     if(listenerElement)
@@ -97,7 +114,7 @@ function removeListeners()
 function addListeners()
 {
     if(listenerElement)removeListeners();
-    
+
     listenerElement=div;
 
     if(listenerElement)
@@ -107,3 +124,16 @@ function addListeners()
         listenerElement.addEventListener('mouseenter', onMouseEnter);
     }
 }
+
+op.addEventListener("onEnabledChange",function(enabled)
+{
+    setCSSVisible( div.style.visibility!='visible' );
+});
+
+
+
+
+
+
+
+

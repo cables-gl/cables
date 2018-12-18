@@ -7,55 +7,77 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode"
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "size"
+                "name": "size",
+                "group": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Inner"
+                "name": "Inner",
+                "group": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "fade Out"
+                "name": "fallOff",
+                "group": "Style",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "warn overflow"
+                "name": "fade Out",
+                "group": "Style",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "fallOff"
+                "name": "warn overflow",
+                "group": "Style",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a"
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -66,7 +88,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.Circle"
     },
-    "updated": 1510557236082,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c260d839-065c-4101-8943-c4680b771343",

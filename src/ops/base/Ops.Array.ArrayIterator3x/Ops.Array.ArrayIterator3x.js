@@ -1,15 +1,14 @@
-op.name='ArrayIterator 3x';
-var exe=op.addInPort(new Port(op,"Execute",OP_PORT_TYPE_FUNCTION));
-var arr=op.addInPort(new Port(op,"Array",OP_PORT_TYPE_ARRAY));
+var exe=op.addInPort(new CABLES.Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
+var arr=op.addInPort(new CABLES.Port(op,"Array",CABLES.OP_PORT_TYPE_ARRAY));
 
 var pStep=op.inValue("Step");
 
-var trigger=op.addOutPort(new Port(op,"Trigger",OP_PORT_TYPE_FUNCTION));
-var idx=op.addOutPort(new Port(op,"Index"));
+var trigger=op.outTrigger('Trigger');
+var idx=op.addOutPort(new CABLES.Port(op,"Index"));
 
-var valX=op.addOutPort(new Port(op,"Value 1"));
-var valY=op.addOutPort(new Port(op,"Value 2"));
-var valZ=op.addOutPort(new Port(op,"Value 3"));
+var valX=op.addOutPort(new CABLES.Port(op,"Value 1"));
+var valY=op.addOutPort(new CABLES.Port(op,"Value 2"));
+var valZ=op.addOutPort(new CABLES.Port(op,"Value 3"));
 
 var ar=arr.get()||[];
 

@@ -1,0 +1,86 @@
+{
+    "summary": "Easy to use image based lighting Material",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "2",
+                "name": "diffuse"
+            },
+            {
+                "type": "2",
+                "name": "normal"
+            },
+            {
+                "type": "0",
+                "name": "normalScale",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "specular"
+            },
+            {
+                "type": "2",
+                "name": "specular matcap"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Opacity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "calc normal tangents",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "projectCoords",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "normalRepeatX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "normalRepeatY",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.MatCapMaterial"
+    },
+    "updated": 1540993020707,
+    "authorName": "pandur",
+    "id": "06d1d014-7de0-4d95-b80f-c3e4b583b25f",
+    "created": 1516227223965
+}

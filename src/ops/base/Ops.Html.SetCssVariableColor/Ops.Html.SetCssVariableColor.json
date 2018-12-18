@@ -1,0 +1,34 @@
+{
+    "id": "3a478c83-1dcd-4d06-baa9-96d02ebf941f",
+    "authorName": "pandur",
+    "created": 1543860176781,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Var Name"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Html.SetCssVariableColor"
+    },
+    "summary": "set color value of a CSS variable",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

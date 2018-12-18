@@ -1,5 +1,5 @@
 {
-    "updated": 1519817235050,
+    "updated": 1543956516133,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "5cccb9a4-3653-4c58-b54e-932c4c585b5f",
@@ -17,7 +17,8 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "integer"
             },
             {
                 "type": "2",

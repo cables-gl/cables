@@ -1,15 +1,15 @@
 op.name='Color';
-var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
-var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
-var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger('render');
+var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'textureeffect color');
 
-op.onLoaded=shader.compile;
+
 
 var srcFrag=''
     .endl()+'precision highp float;'
@@ -47,8 +47,8 @@ render.onTriggered=function()
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
@@ -57,23 +57,23 @@ render.onTriggered=function()
 };
 
 // op.name='Color';
-// var render=op.addInPort(new Port(op,"render",OP_PORT_TYPE_FUNCTION));
+// var render=op.inTrigger('render');
 
 
 // var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 // var amount=op.inValueSlider("Amount",1);
 
 
-// var r=op.addInPort(new Port(op,"r",OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-// var g=op.addInPort(new Port(op,"g",OP_PORT_TYPE_VALUE,{ display:'range' }));
-// var b=op.addInPort(new Port(op,"b",OP_PORT_TYPE_VALUE,{ display:'range' }));
-// var a=op.addInPort(new Port(op,"a",OP_PORT_TYPE_VALUE,{ display:'range' }));
-// var trigger=op.addOutPort(new Port(op,"trigger",OP_PORT_TYPE_FUNCTION));
+// var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
+// var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+// var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+// var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+// var trigger=op.outTrigger('trigger');
 
 // var cgl=op.patch.cgl;
 // var shader=new CGL.Shader(cgl,'textureeffect color');
 
-// op.onLoaded=shader.compile;
+
 
 // var srcFrag=''+
 //     CGL.TextureEffect.getBlendCode()
@@ -134,8 +134,8 @@ render.onTriggered=function()
 //     cgl.setShader(shader);
 //     cgl.currentTextureEffect.bind();
 
-//     cgl.gl.activeTexture(cgl.gl.TEXTURE0);
-//     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+//     cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+//
 
 //     cgl.currentTextureEffect.finish();
 //     cgl.setPreviousShader();
