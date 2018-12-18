@@ -1,5 +1,5 @@
 const render=op.inTrigger("render");
-const trigger=op.outTrigger("trigger")
+const trigger=op.outTrigger("trigger");
 
 /* Inputs */
 // projection | prespective & ortogonal
