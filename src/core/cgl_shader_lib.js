@@ -10,7 +10,7 @@ CGL.ShaderLibMods=
         this.srcHeadFrag=''
             .endl()+'float cgl_random(vec2 co)'
             .endl()+'{'
-            .endl()+'    return fract(sin(dot(co.xy ,vec2(12.9898,4.1414))) * 43758.5453);'
+            .endl()+'    return fract(sin(dot(co.xy ,vec2(12.9898,4.1414))) * 432758.5453);'
             .endl()+'}'
             
             .endl()+'vec3 cgl_random3(vec2 co)'
