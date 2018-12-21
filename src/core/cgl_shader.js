@@ -112,7 +112,6 @@ CGL.Shader.prototype._addLibs=function(src)
         if(src.indexOf(id)>-1)
         {
             var lib=new CGL.ShaderLibMods[id]();
-
             src = src.replace('{{'+id+'}}', lib.srcHeadFrag);
             this._libs.push(lib);
         }
