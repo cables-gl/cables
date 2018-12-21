@@ -5,6 +5,11 @@ shaderOut.ignoreValueSerialize=true;
 
 const cgl=op.patch.cgl;
 
+
+op.needsToBeLinkedToWork(render,trigger);
+
+
+
 const shader=new CGL.Shader(cgl,"basicmaterialnew");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=bindTextures;
@@ -48,6 +53,8 @@ const unib=new CGL.Uniform(shader,'f','b',b);
 const unia=new CGL.Uniform(shader,'f','a',a);
 
 op.setPortGroup("Color",[r,g,b,a]);
+
+
 
 
     // diffuse outTexture

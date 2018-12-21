@@ -39,7 +39,8 @@ CABLES.Op = function()
     this.patch=arguments[0];
     this.name=arguments[1];
     this.errors={};
-    
+    this._needsLinkedToWork=[];
+
     if(this.name)
     {
         this.name=this.name.split('.')[this.name.split('.').length-1]
@@ -575,6 +576,7 @@ CABLES.Op = function()
     {
         for(var ipo=0;ipo<this.portsOut.length;ipo++) this.portsOut[ipo].removeLinks();
         for(var ipi=0;ipi<this.portsIn.length;ipi++) this.portsIn[ipi].removeLinks();
+        
     };
 
     CABLES.Op.unLinkTempReLinkP1=null;
@@ -633,6 +635,7 @@ CABLES.Op = function()
                 CABLES.Op.unLinkTempReLinkP2.getName()
                 );
         }
+        
     };
 
     CABLES.Op.prototype.profile=function(enable)
@@ -876,6 +879,12 @@ CABLES.Op = function()
         // if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
     }
 
+    /**
+     * @function
+     * @description organize ports into a group
+     * @param {String} name
+     * @param {Array} ports
+     */
     CABLES.Op.prototype.setPortGroup=function(name,ports)
     {
         for (var i = 0; i < ports.length; i++)
@@ -883,10 +892,16 @@ CABLES.Op = function()
                 else
                 {
                     console.error('setPortGroup: invalid port!');
-                    // console.trace();
-
                 }
     }
+
+    CABLES.Op.prototype.setUiAxisPorts=function(px,py,pz)
+    {
+        if(px) px.setUiAttribs({"axis":"X"})
+        if(py) py.setUiAttribs({"axis":"Y"})
+        if(pz) pz.setUiAttribs({"axis":"Z"})
+    }
+
 
     /**
      * @function
@@ -905,6 +920,127 @@ CABLES.Op = function()
                 return;
             }
         }
+    }
+
+
+    CABLES.Op.prototype.checkLinkTimeWarnings=function()
+    {
+
+
+        function isTriggerConnectedTo(op,name)
+        {
+            for(var i=0;i<op.portsIn.length;i++)
+            {
+                if(
+                    op.portsIn[i].type==CABLES.OP_PORT_TYPE_FUNCTION && 
+                    op.portsIn[i].isLinked() )
+                    {
+                        var pi=op.portsIn[i];
+
+                        for(var li=0;li<pi.links.length;li++)
+                        {
+                            if(!pi.links[li])continue;
+                            if(pi.links[li].portOut.parent.objName==name)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                var isConnected=isTriggerConnectedTo(pi.links[li].portOut.parent,name);
+                                if(isConnected)return true;
+                            }
+                        }
+                    }
+            }
+            return false;
+        }
+
+        function hasTriggerInput(op)
+        {
+            for(var i=0;i<op.portsIn.length;i++)
+            {
+                if( op.portsIn[i].type==CABLES.OP_PORT_TYPE_FUNCTION )return true;
+            }
+            return false;
+        }
+
+        var working=true;
+        if(this.objName.indexOf('Ops.Gl')==0 && hasTriggerInput(this) && this.objName!='Ops.Gl.MainLoop')
+        {
+            // console.log("CHECKING GL MAINLOOP!",this.objName);
+            var iscon=isTriggerConnectedTo( this,'Ops.Gl.MainLoop' );
+            working=iscon;
+            console.log('isconnected to mainloop',this.name,iscon);
+        }
+
+
+        if(!working)
+        this.setUiAttrib(
+            {
+                "working":working
+            });
+                else
+                if(!this.uiAttribs.working)
+                this.setUiAttrib(
+                    {
+                        "working":true
+                    });
+
+    }
+    
+
+    CABLES.Op.prototype._checkLinksNeededToWork=function()
+    {
+        if(this._needsLinkedToWork.length==0)return;
+
+        var working=true;
+        var notWorkingMsg=null;
+
+        for(var i=0;i<this._needsLinkedToWork.length;i++)
+        {
+            var p=this._needsLinkedToWork[i];
+            if(!p)
+            {
+                console.warn('[needsLinkedToWork] port not found');
+                continue;
+            }
+            if(!p.isLinked())
+            {
+                working=false;
+
+                if(!notWorkingMsg)notWorkingMsg='this op can not do anything without at least linking those ports: ';
+                    else notWorkingMsg+=', ';
+                notWorkingMsg+=''+p.name.toUpperCase()+'';
+            }
+        }
+    
+
+        this.setUiAttrib(
+            {
+                "working":working,
+                "notWorkingMsg":notWorkingMsg
+            });
+
+
+
+
+
+
+
+
+
+    }
+
+    // CABLES.Op.prototype.needsToBeBelow=function(opname)
+    // {
+
+    // }
+    
+    CABLES.Op.prototype.needsToBeLinkedToWork=function()
+    {
+        if(!CABLES.UI)return;
+        for (var i = 0; i < arguments.length; i++)
+            this._needsLinkedToWork.push(arguments[i]);
     }
 
 }
@@ -931,5 +1067,8 @@ CABLES.Op.isSubpatchOp=function(name)
 {
     return (name=='Ops.Ui.Patch' || name=='Ops.Ui.SubPatch');
 };
+
+
+
 
 // var Op=CABLES.Op; 

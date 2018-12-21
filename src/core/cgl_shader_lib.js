@@ -40,9 +40,8 @@ CGL.ShaderLibMods=
     "CGL.RANDOM_TEX": function()
     {
         this.name="randomNumbertex";
-
         this.srcHeadFrag=''
-            .endl()+'uniform sampler2D CGLRNDTEX;'
+            .endl()+'UNI sampler2D CGLRNDTEX;'
 
             .endl()+'float cgl_random(vec2 co)'
             .endl()+'{'
@@ -56,7 +55,7 @@ CGL.ShaderLibMods=
 
         this.onBind=function(cgl,shader)
         {
-            if(!this.rndTexUni)this.rndTexUni=new CGL.Uniform(shader,'t','CGLRNDTEX',7);
+            if(!shader.rndTexUni)shader.rndTexUni=new CGL.Uniform(shader,'t','CGLRNDTEX',7);
             cgl.setTexture(7, CGL.Texture.getRandomTexture(cgl).tex );
         }
     }

@@ -1,5 +1,4 @@
 {
-    "updated": 1522763607753,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "f94b5136-61fd-4558-8348-e7c8db5a6348",
@@ -13,11 +12,13 @@
             {
                 "type": "0",
                 "name": "blendMode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {

@@ -16,6 +16,8 @@ flipY.onChange=rebuild;
 var shader=null;
 render.onTriggered=doRender;
 
+op.needsToBeLinkedToWork(render);
+
 inTexture.onChange=function()
 {
     var tex=inTexture.get();
