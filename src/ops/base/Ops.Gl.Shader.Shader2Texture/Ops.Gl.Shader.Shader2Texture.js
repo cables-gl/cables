@@ -8,6 +8,7 @@ var inVPSize=op.inValueBool("Use Viewport Size",true);
 var inWidth=op.inValueInt("Width",512);
 var inHeight=op.inValueInt("Height",512);
 var inFloatingPoint=op.inValueBool("Floating Point",false);
+var next=op.outTrigger("Next");
 var outTex=op.outTexture("Texture");
 
 var prevViewPort=[0,0,0,0];
@@ -38,7 +39,7 @@ function initFb()
     needInit=false;
     if(fb)fb.delete();
     fb=null;
-    
+
     var w=inWidth.get();
     var h=inHeight.get();
 
@@ -72,7 +73,7 @@ function initFb()
         }
     }
 
-    if(cgl.glVersion>=2) 
+    if(cgl.glVersion>=2)
     {
         fb=new CGL.Framebuffer2(cgl,w,h,
         {
@@ -94,7 +95,7 @@ function initFb()
             wrap:selectedWrap
         });
     }
-    
+
 
 
 }
@@ -102,7 +103,7 @@ function initFb()
 exec.onTriggered=function()
 {
     var vp=cgl.getViewPort();
-    
+
     // console.log();
     if(!fb || needInit )initFb();
     if(inVPSize.get() && fb && ( vp[2]!=fb.getTextureColor().width || vp[3]!=fb.getTextureColor().height ) )
@@ -114,7 +115,7 @@ exec.onTriggered=function()
     prevViewPort[1]=vp[1];
     prevViewPort[2]=vp[2];
     prevViewPort[3]=vp[3];
-    
+
 
     fb.renderStart(cgl);
 
@@ -140,6 +141,8 @@ exec.onTriggered=function()
     outTex.set(fb.getTextureColor());
 
     cgl.setPreviousShader();
-    
+
     cgl.gl.viewport(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3] );
+
+    next.trigger();
 };

@@ -13,6 +13,9 @@ var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLE
 
 var trigger=op.outTrigger('trigger');
 
+op.needsToBeLinkedToWork(render);
+
+
 blendMode.set('normal');
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'drawimage');

@@ -1,6 +1,5 @@
 {
     "summary": "Trigger the following childs once",
-    "updated": 1518003036149,
     "authorName": "pandur",
     "id": "cf3544e4-e392-432b-89fd-fcfb5c974388",
     "created": 1518003035091,
@@ -22,7 +21,8 @@
             },
             {
                 "type": "0",
-                "name": "Was Triggered"
+                "name": "Was Triggered",
+                "subType": "number"
             }
         ],
         "name": "Ops.Trigger.TriggerOnce"

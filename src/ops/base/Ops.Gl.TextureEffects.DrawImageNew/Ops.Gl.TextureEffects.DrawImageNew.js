@@ -20,7 +20,7 @@ var shader=new CGL.Shader(cgl,'drawimage');
 var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
 
-    
+
 
 shader.setSource(attachments.drawimage_vert,srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
@@ -73,20 +73,20 @@ alphaSrc.set("alpha channel");
     //
     // texture transform
     //
-    
+
     var doTransform=op.inValueBool("Transform");
-    
+
     var scaleX=op.inValueSlider("Scale X",1);
     var scaleY=op.inValueSlider("Scale Y",1);
 
     var posX=op.inValue("Position X",0);
     var posY=op.inValue("Position Y",0);
-    
+
     var rotate=op.inValue("Rotation",0);
 
     var uniScaleX=new CGL.Uniform(shader,'f','scaleX',scaleX);
     var uniScaleY=new CGL.Uniform(shader,'f','scaleY',scaleY);
-    
+
     var uniPosX=new CGL.Uniform(shader,'f','posX',posX);
     var uniPosY=new CGL.Uniform(shader,'f','posY',posY);
     var uniRotate=new CGL.Uniform(shader,'f','rotate',rotate);
@@ -149,7 +149,7 @@ function doRender()
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        
+
 
         cgl.setTexture(1, image.get().tex );
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );

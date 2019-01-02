@@ -1,5 +1,4 @@
 {
-    "updated": 1520245536153,
     "authorName": "pandur",
     "id": "02100bb5-fe07-4c1b-8792-67f9add7afff",
     "created": 1519999019701,
@@ -15,11 +14,13 @@
             },
             {
                 "type": "0",
-                "name": "Distance"
+                "name": "Distance",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Normalized"
+                "name": "Normalized",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -29,19 +30,23 @@
             },
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Spline Length"
+                "name": "Spline Length",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.Array3xSplinePositionAtDistance"

@@ -1,51 +1,55 @@
 {
+    "authorName": "andro",
+    "id": "d8d0ab9a-3cd9-4f91-9d9f-953b515c7c7f",
+    "created": 1544615278461,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "Render"
+                "name": "render"
             },
             {
                 "type": "0",
                 "name": "Blend Mode",
-                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
-                "group": "Blending",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scale",
+                "name": "Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "angle",
+                "name": "Pow factor",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Add",
+                "name": "Offset",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "Next"
+                "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.TriangleNoise"
-    },
-    "summary": "noise made from triangles",
-    "docs": {
-        "ports": []
-    },
-    "authorName": "pandur",
-    "id": "2f0a3a6a-58e2-4517-8f7e-319e271c71aa",
-    "created": 1540824312194
+        "name": "Ops.Gl.TextureEffects.WaveformGradient"
+    }
 }

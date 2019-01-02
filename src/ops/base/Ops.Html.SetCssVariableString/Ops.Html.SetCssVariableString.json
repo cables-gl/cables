@@ -15,5 +15,10 @@
             }
         ],
         "name": "Ops.User.pandur.CssVariable"
+    },
+    "summary": "set CSS variable string value",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

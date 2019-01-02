@@ -12,6 +12,7 @@ const
 op.setPortGroup('Rotation',[rotX,rotY,rotZ]);
 op.setPortGroup('Position',[posX,posY,posZ]);
 op.setPortGroup('Scale',[scale]);
+op.setUiAxisPorts(posX,posY,posZ);
 
 const cgl=op.patch.cgl;
 var vPos=vec3.create();
@@ -26,7 +27,7 @@ var
     scaleChanged=true,
     rotChanged=true;
 
-// scale.setUiAttribs({"divider":true});
+op.needsToBeLinkedToWork(render,trigger);
 
 rotX.onChange=rotY.onChange=rotZ.onChange=setRotChanged;
 posX.onChange=posY.onChange=posZ.onChange=setTranslateChanged;

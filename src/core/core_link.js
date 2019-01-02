@@ -86,9 +86,13 @@ CABLES.Link.prototype.remove=function()
     if(this.portIn && this.portIn.type==CABLES.OP_PORT_TYPE_OBJECT)
         this.portIn.set(null);
 
+    this.portIn.parent._checkLinksNeededToWork();
+    this.portOut.parent._checkLinksNeededToWork();
+    
     this.portIn=null;
     this.portOut=null;
     this.scene=null;
+
 };
 
 /**
@@ -124,6 +128,10 @@ CABLES.Link.prototype.link=function(p1,p2)
 
     if(p1.onLink) p1.onLink(this);
     if(p2.onLink) p2.onLink(this);
+
+    p1.parent._checkLinksNeededToWork();
+    p2.parent._checkLinksNeededToWork();
+
 };
 
 CABLES.Link.prototype.getSerialized=function()

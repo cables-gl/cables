@@ -18,6 +18,7 @@ const
 op.setPortGroup("Scaling",[scaleX,scaleY,scaleZ]);
 op.setPortGroup("Rotation",[rotX,rotY,rotZ]);
 op.setPortGroup("Parameters",[num,size,round,seed]);
+op.needsToBeLinkedToWork(exe,trigger);
 
 const cgl=op.patch.cgl;
 var randoms=[];

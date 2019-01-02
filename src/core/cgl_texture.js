@@ -499,7 +499,7 @@ CGL.Texture.getRandomTexture=function(cgl)
     }
     
     CGL.randomTexture=new CGL.Texture(cgl);
-    CGL.randomTexture.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_MIRRORED_REPEAT);
+    CGL.randomTexture.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
 
     return CGL.randomTexture;
 };

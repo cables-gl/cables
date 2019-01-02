@@ -1,5 +1,4 @@
 {
-    "updated": 1519124231615,
     "authorName": "pandur",
     "id": "ada03d29-07be-48f1-a428-7d0e8c52a163",
     "created": 1519124229040,
@@ -17,5 +16,10 @@
             }
         ],
         "name": "Ops.Gl.PointCollectorScreenCoords"
+    },
+    "summary": "collect screen pixel coordinates into an array",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

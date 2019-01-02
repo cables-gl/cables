@@ -103,5 +103,8 @@
     "summary": "shoot physic objects",
     "docs": {
         "ports": []
-    }
+    },
+    "libs": [
+        "cannon.js"
+    ]
 }

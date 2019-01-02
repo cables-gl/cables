@@ -83,5 +83,10 @@
             }
         ],
         "name": "Ops.Gl.Textures.Text2"
+    },
+    "summary": "Generates a texture which reads Text",
+    "youtubeid": "z1Qf9dE67-w",
+    "docs": {
+        "ports": []
     }
 }

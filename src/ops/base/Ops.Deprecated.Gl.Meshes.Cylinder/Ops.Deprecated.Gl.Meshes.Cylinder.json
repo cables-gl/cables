@@ -1,4 +1,5 @@
 {
+    "summary": "draw cylinder (aka tube,pipe,round,circle)",
     "layout": {
         "portsIn": [
             {
@@ -7,41 +8,46 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode",
-                "group": "Blending",
-                "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "Amount",
-                "group": "Blending",
+                "name": "slices",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size",
+                "name": "stacks",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotate",
+                "name": "radius",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Start Slice",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.CheckerBoard"
+        "name": "Ops.Gl.Meshes.Cylinder"
     },
-    "summary": "draw a checkerboard pattern",
-    "updated": 1541172748636,
-    "author": "5a0fe67d9641cedb39929853",
+    "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "9a183b68-f62c-4ba5-aad6-c7976de5a51f",
-    "created": 1511080400344,
+    "id": "2af1489e-ffd6-4bdb-96f8-42b7cddceaf5",
+    "created": 1511344892398,
     "docs": {
         "ports": []
     }

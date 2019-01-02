@@ -1,20 +1,18 @@
-var inExec=op.inTriggerButton("Calculate");
-var inArr=op.inArray("Array3x");
-var inDist=op.inValue("Distance");
-var inNormalized=op.inValueBool("Normalized");
+const
+    inArr=op.inArray("Array3x"),
+    num=op.inValueInt("Num Points",100),
+    inExec=op.inTriggerButton("Calculate"),
+    inNormalized=op.inValueBool("Normalized"),
+    result=op.outArray("Result");
 
-var outNext=op.outTrigger("Next");
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
-
-var outSplineLength=op.outValue("Spline Length");
-
-var animX=new CABLES.Anim();
-var animY=new CABLES.Anim();
-var animZ=new CABLES.Anim();
+const
+    animX=new CABLES.Anim(),
+    animY=new CABLES.Anim(),
+    animZ=new CABLES.Anim();
 
 var needsMapping=true;
+var newArray=[];
+var totalSplineLength=0;
 
 function dist(x1,y1,z1,x2,y2,z2)
 {
@@ -32,7 +30,6 @@ function splineLength(arr)
         l+=dist(arr[i-3],arr[i-2],arr[i-1],arr[i+0],arr[i+1],arr[i+2]);
     }
 
-    outSplineLength.set(l);
     return l;
 }
 
@@ -42,7 +39,12 @@ function mapArrays()
     animY.clear();
     animZ.clear();
     var arr=inArr.get();
-    var sl=splineLength(arr);
+    if(!arr)
+    {
+        result.set([]);
+        return;
+    }
+    totalSplineLength=splineLength(arr);
 
     var distPos=0;
 
@@ -62,24 +64,37 @@ function mapArrays()
     needsMapping=false;
 }
 
+function buildResultArray()
+{
+    var n=Math.max(0,num.get());
+    if(n===0)
+    {
+        result.set([]);
+        return;
+    }
+
+    newArray.length=n*3;
+
+    for(var i=0;i<n;i++)
+    {
+        newArray[i*3+0]=animX.getValue(i/n*totalSplineLength);
+        newArray[i*3+1]=animY.getValue(i/n*totalSplineLength);
+        newArray[i*3+2]=animZ.getValue(i/n*totalSplineLength);
+    }
+
+    result.set(null);
+    result.set(newArray);
+}
+
 inArr.onChange=function()
 {
     needsMapping=true;
 };
 
-
 inExec.onTriggered=function()
 {
     if(needsMapping)mapArrays();
-
-    var d=inDist.get();
-    if(inNormalized.get())d*=outSplineLength.get();
-
-    outX.set(animX.getValue(d));
-    outY.set(animY.getValue(d));
-    outZ.set(animZ.getValue(d));
-
-    outNext.trigger();
+    buildResultArray();
 };
 
 
