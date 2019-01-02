@@ -16,7 +16,7 @@ flipY.onChange=rebuild;
 var shader=null;
 render.onTriggered=doRender;
 
-op.needsToBeLinkedToWork(render);
+op.toWorkPortsNeedToBeLinked(render);
 
 inTexture.onChange=function()
 {

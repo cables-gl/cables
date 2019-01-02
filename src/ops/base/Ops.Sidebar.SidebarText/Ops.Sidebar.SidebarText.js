@@ -22,6 +22,8 @@ labelPort.onChange = onLabelTextChanged;
 inId.onChange = onIdChanged;
 op.onDelete = onDelete;
 
+op.toWorkNeedsParent('Ops.Sidebar.Sidebar');
+
 // functions
 
 function onIdChanged()
@@ -49,7 +51,7 @@ function onParentChanged() {
         siblingsPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -72,6 +74,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }

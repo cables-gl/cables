@@ -18,7 +18,7 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
-op.needsToBeLinkedToWork(render);
+op.toWorkPortsNeedToBeLinked(render);
 
 inRGB.onChange=function()
 {

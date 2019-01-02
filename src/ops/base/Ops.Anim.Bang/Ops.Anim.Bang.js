@@ -5,6 +5,7 @@ const outValue=op.outValue("Value");
 
 const anim=new CABLES.Anim();
 var startTime=CABLES.now();
+op.toWorkPortsNeedToBeLinked(inUpdate);
 
 inBang.onTriggered=function()
 {

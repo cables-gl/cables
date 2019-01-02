@@ -6,7 +6,7 @@ shaderOut.ignoreValueSerialize=true;
 const cgl=op.patch.cgl;
 
 
-op.needsToBeLinkedToWork(render,trigger);
+op.toWorkPortsNeedToBeLinked(render,trigger);
 
 
 

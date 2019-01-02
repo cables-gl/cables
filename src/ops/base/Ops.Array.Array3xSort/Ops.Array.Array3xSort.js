@@ -6,6 +6,8 @@ var outArr=op.outArray("Result");
 var comparator=compareX;
 var arrArr=[];
 
+op.toWorkPortsNeedToBeLinked(inArr);
+
 function compareX(a, b){ return a[0]-b[0]; }
 function compareY(a, b){ return a[1]-b[1]; }
 function compareZ(a, b){ return a[2]-b[2]; }
@@ -24,6 +26,8 @@ function sliceArray()
 
 inArr.onChange=function()
 {
+console.log("array3x sort start");
+
     if(!Array.isArray(inArr.get()))
     {
         outArr.set(null);
@@ -35,19 +39,35 @@ inArr.onChange=function()
         outArr.set(inArr.get());
         return;
     }
+
+    var start=performance.now();
+
+
     sliceArray();
-    
+
+    console.log("OP1");
+
     arrArr.sort(comparator);
     outArr.set(null);
-    arrArr = [].concat.apply([], arrArr);
+
+    if(arrArr.flat)arrArr=arrArr.flat();
+        else arrArr = [].concat.apply([], arrArr);
+
+
 
     outArr.set(null);
     outArr.set(arrArr);
+
+
+console.log('op time',performance.now()-start);
+
+    console.log("array3x sort end");
+
 };
 
 what.onChange=function()
 {
-    if(what.get()=='None')comparator=null;
+    // if(what.get()=='None')comparator=null;
     if(what.get()=='X')comparator=compareX;
     if(what.get()=='Y')comparator=compareY;
     if(what.get()=='Z')comparator=compareZ;

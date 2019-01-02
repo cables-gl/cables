@@ -1,8 +1,8 @@
 
-var numValues=op.addInPort(new CABLES.Port(op, "numValues",CABLES.OP_PORT_TYPE_VALUE));
-var seed=op.addInPort(new CABLES.Port(op,"random seed"));
-var min=op.addInPort(new CABLES.Port(op,"Min"));
-var max=op.addInPort(new CABLES.Port(op,"Max"));
+var numValues=op.inValueInt("numValues");
+var seed=op.inValueFloat("random seed");
+var min=op.inValueFloat("Min");
+var max=op.inValueFloat("Max");
 var closed=op.inValueBool("Last == First");
 
 var values=op.addOutPort(new CABLES.Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
@@ -39,7 +39,7 @@ function init()
         arr[arr.length-3+1]=arr[1];
         arr[arr.length-3+2]=arr[2];
     }
-    
+
     values.set(null);
     values.set(arr);
 }

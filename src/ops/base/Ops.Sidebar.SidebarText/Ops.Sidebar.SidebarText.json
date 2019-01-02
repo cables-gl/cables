@@ -1,5 +1,4 @@
 {
-    "updated": 1528795188621,
     "authorName": "tim",
     "id": "cf4c613e-2a99-4903-9d71-a39a739f440c",
     "created": 1525265917547,
@@ -12,6 +11,11 @@
             {
                 "type": "0",
                 "name": "Text",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Id",
                 "subType": "string"
             }
         ],

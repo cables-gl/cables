@@ -570,7 +570,7 @@ CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
         var link = new CABLES.Link(this);
         link.link(port1, port2);
 
-        this.onLink(port1, port2);
+        this.onLink(port1, port2,link);
         return link;
     }
 };

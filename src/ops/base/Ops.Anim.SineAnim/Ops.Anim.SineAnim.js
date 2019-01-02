@@ -5,6 +5,8 @@ const
     mul=op.inValueFloat("frequency",1),
     amplitude=op.inValueFloat("amplitude",1);
 
+op.toWorkPortsNeedToBeLinked(exe);
+
 exe.onTriggered=exec;
 exec();
 
