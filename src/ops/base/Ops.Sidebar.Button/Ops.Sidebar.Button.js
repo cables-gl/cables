@@ -16,6 +16,7 @@ el.appendChild(input);
 input.addEventListener('click', onButtonClick);
 var inputText = document.createTextNode(buttonTextPort.get());
 input.appendChild(inputText);
+op.toWorkNeedsParent('Ops.Sidebar.Sidebar');
 
 // events
 parentPort.onChange = onParentChanged;
@@ -32,7 +33,7 @@ function onButtonTextChanged() {
     var buttonText = buttonTextPort.get();
     input.textContent = buttonText;
     if(CABLES.UI) {
-        op.setTitle('Button: ' + buttonText);    
+        op.setTitle('Button: ' + buttonText);
     }
 }
 
@@ -44,7 +45,7 @@ function onParentChanged() {
         siblingsPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -67,6 +68,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }

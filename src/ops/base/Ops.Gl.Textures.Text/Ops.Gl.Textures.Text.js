@@ -55,7 +55,7 @@ function refresh()
     ctx.clearRect(0,0,fontImage.width,fontImage.height);
     ctx.fillStyle = 'white';
     var fontSize=parseFloat(inFontSize.get());
-    var fontname=font.get();
+    var fontname=font.get()+'';
     if(fontname.indexOf(" ")>-1)fontname='"'+fontname+'"';
     ctx.font = fontSize+'px '+fontname+'';
     ctx.textAlign = align.get();

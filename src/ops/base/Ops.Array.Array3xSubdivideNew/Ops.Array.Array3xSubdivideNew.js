@@ -5,12 +5,14 @@ var bezierEndPoints=op.inValueBool("Bezier Start/End Points",true);
 
 var result=op.outArray("Result");
 
+op.toWorkPortsNeedToBeLinked(inArr);
+
 subDivs.onChange=calc;
 bezier.onChange=calc;
 inArr.onChange=calc;
 bezierEndPoints.onChange=calc;
 
-function ip(x0,x1,x2,t)//Bezier 
+function ip(x0,x1,x2,t)//Bezier
 {
     var r =(x0 * (1-t) * (1-t) + 2 * x1 * (1 - t)* t + x2 * t * t);
     return r;
@@ -27,9 +29,9 @@ function calc()
     }
     const subd=Math.floor(subDivs.get());
     var inPoints=inArr.get();
-    
+
     if(inPoints.length<3)return;
-    
+
     let i=0;
     let j=0;
     let k=0;
@@ -66,10 +68,10 @@ function calc()
     {
         var newLen=(inPoints.length-6)*(subd-1);
         if(bezierEndPoints.get())newLen+=6;
-        
+
         if(newLen!=arr.length) arr.length=Math.floor(Math.abs(newLen));
         count=0;
-        
+
         if(bezierEndPoints.get())
         {
             arr[0]=inPoints[0];
@@ -95,7 +97,7 @@ function calc()
                 }
             }
         }
-        
+
         if(bezierEndPoints.get())
         {
             arr[count-0]=inPoints[inPoints.length-3];

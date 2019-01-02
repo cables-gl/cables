@@ -4,7 +4,7 @@ const
     trigger=op.outTrigger("trigger"),
     num=op.outValue("timesTriggered");
 
-op.needsToBeLinkedToWork(exe);
+op.toWorkPortsNeedToBeLinked(exe);
 
 var n=0;
 
