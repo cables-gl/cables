@@ -11,7 +11,13 @@ UNI float maxIn;
 
 float random(vec2 co)
 {
-   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * (5.5453+addZ));
+    float r=fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * (5.711+(mod(addZ+5711.210,57111.0))));
+
+    #ifdef LOOP
+        r=abs(r-0.5)*2.0;
+    #endif
+
+    return r;
 }
 
 {{BLENDCODE}}
