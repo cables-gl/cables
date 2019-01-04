@@ -28,9 +28,9 @@ function update()
         op.uiAttr({error:null});
     }
 
-    arr1.length = array1.length/3;
-    arr2.length = array1.length/3;
-    arr3.length = array1.length/3;
+    arr1.length = Math.floor(array1.length/3);
+    arr2.length = Math.floor(array1.length/3);
+    arr3.length = Math.floor(array1.length/3);
 
     for(var i=0;i<array1.length/3;i++)
     {
