@@ -13,14 +13,14 @@
                 "subType": "number"
             },
             {
-                "type": "2",
-                "name": "image"
-            },
-            {
                 "type": "0",
                 "name": "blendMode",
                 "group": "Blending",
                 "subType": "string"
+            },
+            {
+                "type": "2",
+                "name": "image"
             },
             {
                 "type": "2",

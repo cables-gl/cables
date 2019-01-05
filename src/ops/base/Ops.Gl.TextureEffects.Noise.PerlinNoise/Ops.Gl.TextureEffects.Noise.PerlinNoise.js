@@ -2,15 +2,17 @@ const
     render=op.inTrigger("render"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
+    scale=op.inValue("Scale",22),
     x=op.inValue("X",0),
     y=op.inValue("Y",0),
     z=op.inValue("Z",0),
-    scale=op.inValue("Scale",22),
     trigger=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 const srcFrag=attachments.perlinnoise3d_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
+
+op.setPortGroup("Position",[x,y,z]);
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag );
 

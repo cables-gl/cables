@@ -6,6 +6,7 @@ const
 
 exe.onTriggered=exec;
 result.changeAlways=true;
+op.toWorkPortsNeedToBeLinked(exe);
 
 function exec()
 {

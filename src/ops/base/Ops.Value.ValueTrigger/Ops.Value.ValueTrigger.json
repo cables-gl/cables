@@ -25,7 +25,6 @@
         "name": "Ops.Value.ValueTrigger"
     },
     "summary": "Sets the output value on trigger (SetValueOnTrigger, change)",
-    "updated": 1542045536610,
     "authorName": "pandur",
     "id": "d9d010c2-2bc9-4eb5-8514-f2adef7ceae4",
     "created": 1515686078871
