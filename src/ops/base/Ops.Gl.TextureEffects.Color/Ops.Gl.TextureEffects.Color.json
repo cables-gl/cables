@@ -18,10 +18,6 @@
                 "subType": "number"
             },
             {
-                "type": "2",
-                "name": "Mask"
-            },
-            {
                 "type": "0",
                 "name": "r",
                 "group": "Color",
@@ -38,6 +34,10 @@
                 "name": "b",
                 "group": "Color",
                 "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Mask"
             }
         ],
         "portsOut": [

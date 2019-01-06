@@ -10,7 +10,6 @@ var easing=op.inValueSelect("Easing",["Linear","Smoothstep","Smootherstep"],"Lin
 op.setPortGroup("Input Range",[old_min,old_max]);
 op.setPortGroup("Output Range",[new_min,new_max]);
 
-
 var ease=0;
 var r=0;
 

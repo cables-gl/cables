@@ -1,13 +1,19 @@
 const
     render=op.inTrigger("render"),
+    displaceTex=op.inTexture("displaceTex"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     amountX=op.inValueSlider("amount X"),
     amountY=op.inValueSlider("amount Y"),
     inWrap=op.inValueSelect("Wrap",["Mirror","Clamp","Repeat"],"Mirror"),
     inInput=op.inValueSelect("Input",["Luminance","RedGreen","Red","Green","Blue"],"Luminance"),
-    displaceTex=op.inTexture("displaceTex"),
     trigger=op.outTrigger("trigger");
+
+op.setPortGroup("Axis Displacement Strength",[amountX,amountY]);
+op.setPortGroup("Modes",[inWrap,inInput]);
+op.toWorkPortsNeedToBeLinked(displaceTex);
+
+
 
 const
     cgl=op.patch.cgl,
@@ -25,8 +31,11 @@ const
 inWrap.onChange=
 inInput.onChange=updateInput;
 
+
 updateWrap();
 updateInput();
+
+
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 

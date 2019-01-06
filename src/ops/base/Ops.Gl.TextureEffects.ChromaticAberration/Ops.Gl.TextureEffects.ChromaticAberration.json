@@ -7,22 +7,22 @@
             },
             {
                 "type": "0",
-                "name": "pixel",
+                "name": "Pixel",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "lens distort",
+                "name": "Lens Distort",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "2",
-                "name": "mask"
-            },
-            {
-                "type": "0",
-                "name": "smooth",
-                "subType": "boolean"
+                "name": "Mask"
             }
         ],
         "portsOut": [
@@ -33,7 +33,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.ChromaticAberration"
     },
-    "updated": 1540977950205,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "38ac43a1-1757-48f4-9450-29f07ac0d376",

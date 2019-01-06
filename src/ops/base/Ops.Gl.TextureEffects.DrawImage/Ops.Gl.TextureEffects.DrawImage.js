@@ -13,7 +13,7 @@ var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLE
 
 var trigger=op.outTrigger('trigger');
 
-op.toWorkPortsNeedToBeLinked(render);
+op.toWorkPortsNeedToBeLinked(image);
 
 
 blendMode.set('normal');

@@ -19,6 +19,7 @@ var shader=new CGL.Shader(cgl,'drawimage');
 
 var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
+op.toWorkPortsNeedToBeLinked(image);
 
 
 

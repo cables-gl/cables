@@ -20,6 +20,8 @@ var w=8,h=8;
 var prevViewPort=[0,0,0,0];
 var reInitEffect=true;
 
+op.setPortGroup("Size",[useVPSize,width,height]);
+
 var bgShader=new CGL.Shader(cgl,'imgcompose bg');
 bgShader.setSource(bgShader.getDefaultVertexShader(),attachments.copytexture_frag);
 var textureUniform=new CGL.Uniform(bgShader,'t','tex',0);

@@ -2,10 +2,10 @@ const
     render=op.inTrigger("render"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
-    inMask=op.inTexture("Mask"),
     r=op.inValueSlider("r",Math.random()),
     g=op.inValueSlider("g",Math.random()),
     b=op.inValueSlider("b",Math.random()),
+    inMask=op.inTexture("Mask"),
     trigger=op.outTrigger("trigger");
 
 r.setUiAttribs({colorPick:true});

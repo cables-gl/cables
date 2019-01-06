@@ -1,12 +1,21 @@
-const render=op.inTrigger('render');
-const pixel=op.inValue("Pixel",5);
-const lensDistort=op.inValueSlider("Lens Distort",0);
-const textureMask=op.inTexture("Mask");
-const doSmooth=op.inValueBool("Smooth",false);
-const trigger=op.outTrigger('trigger');
+const
+    render=op.inTrigger('render'),
+    pixel=op.inValue("Pixel",5),
+    lensDistort=op.inValueSlider("Lens Distort",0),
+    doSmooth=op.inValueBool("Smooth",false),
+    textureMask=op.inTexture("Mask"),
+    trigger=op.outTrigger('trigger');
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
+
+
+shader.setSource(shader.getDefaultVertexShader(),attachments.chromatic_frag);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    uniPixel=new CGL.Uniform(shader,'f','pixel',0),
+    uniOnePixel=new CGL.Uniform(shader,'f','onePixel',0),
+    unitexMask=new CGL.Uniform(shader,'t','texMask',1),
+    unilensDistort=new CGL.Uniform(shader,'f','lensDistort',lensDistort);
 
 doSmooth.onChange=function()
 {
@@ -19,13 +28,6 @@ textureMask.onChange=function()
     if(textureMask.get())shader.define("MASK");
         else shader.removeDefine("MASK");
 };
-
-shader.setSource(shader.getDefaultVertexShader(),attachments.chromatic_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var uniPixel=new CGL.Uniform(shader,'f','pixel',0);
-var uniOnePixel=new CGL.Uniform(shader,'f','onePixel',0);
-var unitexMask=new CGL.Uniform(shader,'t','texMask',1);
-var unilensDistort=new CGL.Uniform(shader,'f','lensDistort',lensDistort);
 
 render.onTriggered=function()
 {
