@@ -1,17 +1,23 @@
-{ 
-	"title": "cables Documentation",
-	"styles": {
-		"website": "styles/website.css"
+{
+    "title": "cables Documentation",
+    "root": "content",
+    "styles": {
+        "website": "main.css"
     },
-	"plugins": [
-	  "ga"
-	],
-	"pluginsConfig": {
+    "plugins": [
+        "ga",
+        "-livereload",
+        "-sharing"
+    ],
+    "pluginsConfig": {
         "ga": {
             "token": "UA-72727305-3"
         }
     },
     "structure": {
-        "readme": "documentation_introduction.md"
-    }
+        "readme": "INTRO",
+        "summary": "TABLE_OF_CONTENT"
+    },
+    "direction": "ltr",
+    "gitbook": ">= 3.0.0"
 }

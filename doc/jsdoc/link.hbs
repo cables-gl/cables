@@ -1,0 +1,34 @@
+{{!--
+ORIGINAL: node_modules/dmd/partials/shared/value/link.hbs
+========
+this code is IDENTICAL to the ORIGINAL,
+EXECPT:
+- we removed the outer <code> tags, replacing them with in-line
+       code backticks (within the link)
+GOALS:
+=====
+  - make return values and parameter types linkable!
+--}}
+{{! usage: link to="namepath" html=true/false caption="optional caption"~}}
+
+{{~#if html~}}
+
+{{#link to~}}
+{{#if url~}}
+<a href="{{{url}}}">`{{#if ../../caption}}{{../../../caption}}{{else}}{{name}}{{/if}}`</a>
+{{~else~}}
+{{#if ../../caption}}{{../../../caption}}{{else}}{{name}}{{/if~}}
+{{/if~}}
+{{/link~}}
+
+{{else~}}
+
+{{#link to~}}
+{{#if url~}}
+[`{{#if ../../caption}}{{escape ../../../caption}}{{else}}{{escape name}}{{/if}}`]({{{url}}})
+{{~else~}}
+{{#if ../../caption}}{{escape ../../../caption}}{{else}}{{escape name}}{{/if~}}
+{{/if~}}
+{{/link~}}
+
+{{/if~}}

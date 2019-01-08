@@ -4,16 +4,31 @@
   "description": "You need to add a symlink called \"ops_base\" pointing to \"src/ops/base\" first. Will add all ops with a markdown file to the doc index (summary).",
   "main": "add_ops.js",
   "scripts": {
+    "docs:api": "jsdoc2md --configure jsdoc.json --partial jsdoc/header.hbs --files ../src/core/*.js > content/core_api/CORE_API.md",
+    "docs:prepare": "gitbook install",
+    "docs:build": "npm run docs:prepare && npm run docs:api && gitbook build",
+    "docs:serve": "npm run docs:prepare && npm run docs:api && gitbook serve --no-live",
+    "docs:clean": "rimraf _book",
     "build": "node build_docs.js && node clean.js",
     "ops": "node add_ops.js",
-    "serve": "gitbook serve",
+    "serve": "npm run gitbook serve --no-live",
     "clean": "node clean.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tim Pulver",
   "license": "ISC",
+  "engines": {
+    "node": ">=8"
+  },
   "dependencies": {
-    "fs-sync": "^1.0.2",
     "gitbook-plugin-ga": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "fs-sync": "^1.0.6",
+    "gitbook-plugin-ga": "^2.0.0",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^4.0.1",
+    "rimraf": "^2.6.3"
   }
 }

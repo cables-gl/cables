@@ -5,18 +5,11 @@
 
 ## How to add an article / tutorial
 
-- Create a new file / folder in `doc`, e.g. `/how-to-write-shader-ops/how-to-write-shader-ops.md`
-- Write your text 
-- Include a link to your new article in `SUMMARY_base.md`, **not SUMMARY.md!**
+- Create a new file / folder in `content`, e.g. `/how-to-write-shader-ops/how-to-write-shader-ops.md`
+- Write your text
+- Include a link to your new article in `content/TABLE_OF_CONTENT.md`
 - Generate the gitbook by running `npm run build` (be patient, that takes a bit)
 - Run `git push`,  [docs.cables.gl](https://docs.cables.gl) will automatically update
-
-## How to add the docs of an op
-
-- All op-documentations are in the folder  `cables/src/ops/base/`, next to the op-code (JavaScript-file).
-- If you want to add a documentation for an op, create a new markdown file in the op-folder, e.g. `cables/src/ops/base/Ops.Anim.Frequency/Ops.Anim.Frequency.md`
-- When you are done writing the doc generate the gitbook by running `npm run build` (be patient, that takes a bit)
-- Run `git push`  [docs.cables.gl](https://docs.cables.gl) will automatically update
 
 ## Using Images in an Article / Op Doc
 
@@ -24,7 +17,7 @@
 
 ## Installation
 
-- `nvm use 6` – switch to node.js v6
+- `nvm use` – switch to node.js version specified in .nvmrc
 
 
 - `npm install gitbook-cli -g` (see [gitbook docu ](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md))
@@ -40,9 +33,7 @@
 
 - Copies all op-documentations with images from the `src` folder to the temp folder `ops`
 - A script generates the op-summary with indentation for every namespace
-- `SUMMARY_base.md` defines the basic book structure, here you can add tutorials / articles
-- A script will generate `SUMMARY.md`, which consists of `SUMMARY_base.md` (all articles / tutorials) and appends the documentation for the ops
-- After the build is finished the temporary foldr `ops` is deleted
+- `content/TABLE_OF_CONTENT.md` defines the basic book structure, here you can add tutorials / articles
 - In `_book` you can now start a http-server to view the book
 
 ## Rebuild on Server
@@ -52,13 +43,8 @@
 
 ## Testing
 
-- To test changes to the doc call `npm run serve` and run the gitbook listener and `npm run ops` to re-generate the summary
-- Call `npm run clean` afterwards to remove the temp-directory (`ops`)
+- To test changes to the doc call `npm run serve` and run the gitbook listener
 - Gitbook serve URL: `http://localhost:4000`
-
-## Editing the index-file (SUMMARY.md)
-
-- `SUMMARY.md` will be partly generated (op-documentations will be added by a script), if you want to make changes to `SUMMARY.md`, you need to edit `SUMMARY_base.md`
 
 ## book.json
 
@@ -81,3 +67,10 @@ Make sure to have a newline on the end!
 - Check with `blc https://docs.cables.gl -ro`
   - Error 401: Not logged in
   - Mozilla Web Audio Error: Can be ignored
+
+## How to add the docs of an op - DEPRECATED
+
+- All op-documentations are in the folder  `cables/src/ops/base/`, next to the op-code (JavaScript-file).
+- If you want to add a documentation for an op, create a new markdown file in the op-folder, e.g. `cables/src/ops/base/Ops.Anim.Frequency/Ops.Anim.Frequency.md`
+- When you are done writing the doc generate the gitbook by running `npm run build` (be patient, that takes a bit)
+- Run `git push`  [docs.cables.gl](https://docs.cables.gl) will automatically update

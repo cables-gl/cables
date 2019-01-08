@@ -42,6 +42,5 @@
   - [Disable page scrolling on mobile](faq/page_scrolling_on_mobile.md)
   - [Remove grey rectangles on touch (iOS)](faq/grey_rectangles_on_ios.md)
   - [Video on Mobile](faq/video_on_mobile.md)
-* [API](api/api.md)
-
-
+* [Core API](core_api/CORE_API.md)
+* [Web API](api/api.md)

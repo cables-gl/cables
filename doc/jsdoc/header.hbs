@@ -1,0 +1,26 @@
+{{!-- 
+ORIGINAL: node_modules/dmd/partials/all-docs/docs/header.hbs
+========
+<a name="{{{anchorName}}}"></a>
+{{>heading-indent}}{{>sig-name}}
+GOALS:
+=====
+  - make indexable using markdown #section
+      CHANGE: name=
+      TO:     id=
+  - more distinct section header
+    * with bordered h5 tag
+      ... use neutral color that is OK in any of the user-selectable colors
+          (White, Sepia, Night)
+          * OK: grey, or #704214
+          * ACTUALLY, leaving color alone uses "inherit" which works great!
+    * bit more spacing (with br tags)
+      ... using br tags in separate paragraph above index point
+      ... SO THAT: when indexed, eliminate prior entry visual
+--}}
+
+<br/><br/><br/>
+
+<a id="{{{anchorName}}}"></a>
+{{>heading-indent}}{{>sig-name}}
+
