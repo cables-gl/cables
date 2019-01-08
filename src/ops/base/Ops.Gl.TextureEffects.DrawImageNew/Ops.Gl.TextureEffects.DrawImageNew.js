@@ -1,23 +1,42 @@
 var render=op.inTrigger('render');
-
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
 var amount=op.inValueSlider("amount",1);
 
-var image=op.addInPort(new CABLES.Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
-var imageAlpha=op.addInPort(new CABLES.Port(op,"imageAlpha",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var image=op.inTexture("image");
+var removeAlphaSrc=op.inValueBool("removeAlphaSrc",false);
 
+
+var imageAlpha=op.inTexture("imageAlpha");
 var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
-var removeAlphaSrc=op.addInPort(new CABLES.Port(op,"removeAlphaSrc",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var invAlphaChannel=op.inValueBool("invert alpha channel");
 
 var trigger=op.outTrigger('trigger');
 
 blendMode.set('normal');
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'drawimage');
-
-
 var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
+
+imageAlpha.onLinkChanged=updateAlphaPorts;
+
+op.setPortGroup("Mask",[imageAlpha,alphaSrc,invAlphaChannel]);
+removeAlphaSrc.onChange=updateRemoveAlphaSrc;
+
+function updateAlphaPorts()
+{
+    if(imageAlpha.isLinked())
+    {
+        removeAlphaSrc.setUiAttribs({greyout:true});
+        alphaSrc.setUiAttribs({greyout:false});
+        invAlphaChannel.setUiAttribs({greyout:false});
+    }
+    else
+    {
+        removeAlphaSrc.setUiAttribs({greyout:false});
+        alphaSrc.setUiAttribs({greyout:true});
+        invAlphaChannel.setUiAttribs({greyout:true});
+    }
+}
 
 
 
@@ -33,12 +52,14 @@ invAlphaChannel.onChange=function()
         else shader.removeDefine('INVERT_ALPHA');
 };
 
-removeAlphaSrc.onChange=function()
+
+
+function updateRemoveAlphaSrc()
 {
     if(removeAlphaSrc.get()) shader.define('REMOVE_ALPHA_SRC');
         else shader.removeDefine('REMOVE_ALPHA_SRC');
-};
-removeAlphaSrc.set(true);
+}
+
 
 alphaSrc.onChange=function()
 {
@@ -169,3 +190,5 @@ function doRender()
 
 render.onTriggered=doRender;
 updateTransformPorts();
+updateRemoveAlphaSrc();
+updateAlphaPorts();

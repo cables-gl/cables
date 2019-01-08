@@ -26,22 +26,25 @@
                 "name": "image"
             },
             {
-                "type": "2",
-                "name": "imageAlpha"
-            },
-            {
-                "type": "0",
-                "name": "alphaSrc",
-                "subType": "string"
-            },
-            {
                 "type": "0",
                 "name": "removeAlphaSrc",
                 "subType": "boolean"
             },
             {
+                "type": "2",
+                "name": "imageAlpha",
+                "group": "Mask"
+            },
+            {
+                "type": "0",
+                "name": "alphaSrc",
+                "group": "Mask",
+                "subType": "string"
+            },
+            {
                 "type": "0",
                 "name": "invert alpha channel",
+                "group": "Mask",
                 "subType": "boolean"
             },
             {

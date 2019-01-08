@@ -6,6 +6,7 @@ const
     amountY=op.inValueSlider("amount Y"),
     inWrap=op.inValueSelect("Wrap",["Mirror","Clamp","Repeat"],"Mirror"),
     inInput=op.inValueSelect("Input",["Luminance","RedGreen","Red","Green","Blue"],"Luminance"),
+    inZero=op.inValueSelect("Zero Displace",["Grey","Black"],"Grey"),
     displaceTex=op.inTexture("displaceTex"),
     trigger=op.outTrigger("trigger");
 
@@ -22,14 +23,23 @@ const
     amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY),
     amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
-inWrap.onChange=
+
+inZero.onChange=updateZero;
+inWrap.onChange=updateWrap;
 inInput.onChange=updateInput;
 
 updateWrap();
 updateInput();
+updateZero();
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
+function updateZero()
+{
+    shader.removeDefine("ZERO_BLACK");
+    shader.removeDefine("ZERO_GREY");
+    shader.define("ZERO_"+(inZero.get()+'').toUpperCase());
+}
 
 function updateWrap()
 {

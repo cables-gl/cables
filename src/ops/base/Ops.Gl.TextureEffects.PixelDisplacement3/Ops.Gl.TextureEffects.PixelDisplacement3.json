@@ -41,6 +41,11 @@
                 "subType": "string"
             },
             {
+                "type": "0",
+                "name": "Zero Displace",
+                "subType": "string"
+            },
+            {
                 "type": "2",
                 "name": "displaceTex"
             }

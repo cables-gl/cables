@@ -3,6 +3,7 @@ const
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     inMask=op.inTexture("Mask"),
+    inMaskInvert=op.inValueBool("Mask Invert"),
     r=op.inValueSlider("r",Math.random()),
     g=op.inValueSlider("g",Math.random()),
     b=op.inValueSlider("b",Math.random()),
@@ -22,6 +23,8 @@ srcFrag=srcFrag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
+
+
 const
     textureUniform=new CGL.Uniform(shader,'t','tex',TEX_SLOT),
     makstextureUniform=new CGL.Uniform(shader,'t','mask',1),
@@ -35,6 +38,13 @@ inMask.onChange=function()
     if(inMask.get())shader.define("MASK");
         else shader.removeDefine("MASK");
 };
+
+inMaskInvert.onChange=function()
+{
+    if(inMaskInvert.get())shader.define("INVERTMASK");
+        else shader.removeDefine("INVERTMASK");
+};
+
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
