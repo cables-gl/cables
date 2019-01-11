@@ -65,6 +65,11 @@ CGL.Shader = function(_cgl, _name) {
 
     this._libs=[];
 
+    this._tempNormalMatrix=mat4.create();
+    this._tempCamPosMatrix = mat4.create();
+    this._tempInverseViewMatrix = mat4.create();
+
+
     this.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 };
 
@@ -400,9 +405,8 @@ CGL.Shader.prototype.bind = function() {
 
             if (this._inverseViewMatrixUniform)
             {
-                var inverseViewMatrix = mat4.create();
-                mat4.invert(inverseViewMatrix, this._cgl.vMatrix);
-                this._cgl.gl.uniformMatrix4fv(this._inverseViewMatrixUniform, false, inverseViewMatrix);
+                mat4.invert(this._tempInverseViewMatrix, this._cgl.vMatrix);
+                this._cgl.gl.uniformMatrix4fv(this._inverseViewMatrixUniform, false, this._tempInverseViewMatrix);
                 CGL.profileMVPMatrixCount++;
             }
         }
@@ -411,15 +415,13 @@ CGL.Shader.prototype.bind = function() {
 
         if(this._camPosUniform)
         {
-            var m = mat4.create();
-            mat4.invert(m, this._cgl.vMatrix);
-            this._cgl.gl.uniform3f(this._camPosUniform, m[12], m[13], m[14]);
+            mat4.invert(this._tempCamPosMatrix, this._cgl.vMatrix);
+            this._cgl.gl.uniform3f(this._camPosUniform, this._tempCamPosMatrix[12], this._tempCamPosMatrix[13], this._tempCamPosMatrix[14]);
             CGL.profileMVPMatrixCount++;
         }
     }
     else
     {
-        var tempmv = mat4.create();
         mat4.mul(tempmv, this._cgl.vMatrix, this._cgl.mMatrix);
         this._cgl.gl.uniformMatrix4fv(this._mvMatrixUniform, false, tempmv);
         CGL.profileMVPMatrixCount++;
@@ -427,13 +429,11 @@ CGL.Shader.prototype.bind = function() {
 
     if (this._normalMatrixUniform)
     {
-        var normalMatrix = mat4.create();
+        mat4.mul(this._tempNormalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
+        mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
+        mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
-        mat4.mul(normalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
-        mat4.invert(normalMatrix, normalMatrix);
-        mat4.transpose(normalMatrix, normalMatrix);
-
-        this._cgl.gl.uniformMatrix4fv(this._normalMatrixUniform, false, normalMatrix);
+        this._cgl.gl.uniformMatrix4fv(this._normalMatrixUniform, false, this._tempNormalMatrix);
         CGL.profileMVPMatrixCount++;
     }
 
