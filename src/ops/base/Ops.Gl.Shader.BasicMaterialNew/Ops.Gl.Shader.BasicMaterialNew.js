@@ -57,6 +57,7 @@ op.setPortGroup("Color",[r,g,b,a]);
 
 
 
+
     // diffuse outTexture
 
     var diffuseTexture=op.inTexture("texture");
@@ -92,8 +93,9 @@ op.setPortGroup("Color",[r,g,b,a]);
 
         }
     };
-
 const colorizeTexture=op.inValueBool("colorizeTexture",false);
+
+op.setPortGroup("Color Texture",[diffuseTexture,colorizeTexture]);
 
 
 // opacity texture

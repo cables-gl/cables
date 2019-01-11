@@ -38,6 +38,7 @@ function updateAlphaPorts()
     }
 }
 
+op.toWorkPortsNeedToBeLinked(image);
 
 
 
