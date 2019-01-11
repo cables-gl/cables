@@ -970,7 +970,7 @@ CABLES.Op = function()
             // console.log("CHECKING GL MAINLOOP!",this.objName);
             var iscon=isTriggerConnectedTo( this,'Ops.Gl.MainLoop' );
             working=iscon;
-            console.log('isconnected to mainloop',this.name,iscon);
+            // console.log('isconnected to mainloop',this.name,iscon);
         }
 
 
@@ -985,6 +985,7 @@ CABLES.Op = function()
                     {
                         "working":true
                     });
+
 
     }
     

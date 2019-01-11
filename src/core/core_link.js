@@ -86,9 +86,9 @@ CABLES.Link.prototype.remove=function()
     if(this.portIn && this.portIn.type==CABLES.OP_PORT_TYPE_OBJECT)
         this.portIn.set(null);
 
-    this.portIn.parent._checkLinksNeededToWork();
-    this.portOut.parent._checkLinksNeededToWork();
-    
+    if(this.portIn)this.portIn.parent._checkLinksNeededToWork();
+    if(this.portOut)this.portOut.parent._checkLinksNeededToWork();
+        
     this.portIn=null;
     this.portOut=null;
     this.scene=null;

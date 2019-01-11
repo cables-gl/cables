@@ -182,6 +182,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + 'precision ' + this.precision+' float;'
             .endl() + ''
+            .endl() + '#define WEBGL2'
             .endl() + '#define texture2D texture'
             .endl() + '#define UNI uniform'
             .endl() + '#define IN in'
@@ -206,6 +207,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + '// fragment shader '+name
             .endl() + '// '
+            .endl() + '#define WEBGL1'
             .endl() + '#define texture texture2D'
             .endl() + '#define outColor gl_FragColor'
             .endl() + '#define IN varying'
