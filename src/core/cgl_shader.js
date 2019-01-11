@@ -209,6 +209,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + 'precision ' + this.precision+' float;'
             .endl() + ''
+            .endl() + '#define WEBGL2'
             .endl() + '#define texture2D texture'
             .endl() + '#define IN in'
             .endl() + '#define UNI uniform'
@@ -232,6 +233,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + '// vertex shader '+name
             .endl() + '// '
+            .endl() + '#define WEBGL1'
             .endl() + '#define texture texture2D'
             .endl() + '#define OUT varying'
             .endl() + '#define IN attribute'
