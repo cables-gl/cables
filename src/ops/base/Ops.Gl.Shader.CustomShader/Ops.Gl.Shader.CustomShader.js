@@ -11,6 +11,7 @@ var uniformTextures=[];
 var shader=new CGL.Shader(cgl,"shaderMaterial");
 // shader.glslVersion=0;
 
+op.setPortGroup("Source Code",[fragmentShader,vertexShader]);
 
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
@@ -36,10 +37,6 @@ function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
-    
-    
-// console.log(lastm4);
-
 }
 
 function bindTextures()
@@ -62,7 +59,7 @@ function hasUniformInput(name)
 }
 
 var tempMat4=mat4.create();
-var lastm4;
+// var lastm4;
 
 function updateShader()
 {
@@ -93,27 +90,38 @@ function updateShader()
                     p.uniform.needsUpdate=true;
                     p.uniform.setValue(p.get());
                 };
-                
+
                 uniformInputs.push(newInput);
                 newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
             }
             else
             if(uniform.type==cgl.gl.FLOAT_MAT4)
             {
-                var newInputM4=op.inArray(uniform.name);
-                newInputM4.onChange=function(p)
+                if(
+                    uniform.name!='modelMatrix' &&
+                    uniform.name!='viewMatrix' &&
+                    uniform.name!='normalMatrix' &&
+                    uniform.name!='mvMatrix' &&
+                    uniform.name!='projMatrix' &&
+                    uniform.name!='inverseViewMatrix'
+                    )
                 {
-                    if(p.get())
+                    var newInputM4=op.inArray(uniform.name);
+                    newInputM4.onChange=function(p)
                     {
-                        mat4.copy(tempMat4,p.get());
-                        p.uniform.needsUpdate=true;
-                        p.uniform.setValue(tempMat4);
-                    }
-                };
+                        if(p.get() && p.isLinked())
+                        {
+                            mat4.copy(tempMat4,p.get());
+                            p.uniform.needsUpdate=true;
+                            p.uniform.setValue(tempMat4);
+                        }
+                    };
 
-                uniformInputs.push(newInputM4);
-                lastm4=newInputM4;
-                newInputM4.uniform=new CGL.Uniform(shader,'m4',uniform.name,mat4.create());
+                    uniformInputs.push(newInputM4);
+                    // lastm4=newInputM4;
+                    newInputM4.uniform=new CGL.Uniform(shader,'m4',uniform.name,mat4.create());
+
+                }
             }
             else
             if(uniform.type==cgl.gl.SAMPLER_2D)

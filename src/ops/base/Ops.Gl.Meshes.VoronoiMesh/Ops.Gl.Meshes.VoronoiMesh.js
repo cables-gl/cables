@@ -4,17 +4,20 @@ var next=op.outTrigger("Next");
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
 var pIgnoreBorderCells=op.inValueBool("Ignore Border Cells",false);
 var inCalcNormals=op.inValueBool("Calc Normals",true);
+var updatebutton=op.inTriggerButton("Update");
 
 var needsGeomUpdate=false;
 var verts=null;
 var indices=new Uint16Array();
-
+var centerPoints=[];
 var mesh=null;
 var geom=null;
+updatebutton.onTriggered=changed;
 inDiagram.onChange=changed;
 inCalcNormals.onChange=changed;
 pIgnoreBorderCells.onChange=changed;
 pExtrCenter.onChange=changed;
+var i=0;
 
 function changed()
 {
@@ -27,18 +30,18 @@ function updateGeom()
     var voro=inDiagram.get();
     if(!voro)return;
     needsGeomUpdate=false;
-    
+
     var sites=voro.sites;
     var diagram=voro.diagram;
     var w=voro.width;
     var h=voro.height;
-    
-    console.log(w,h);
+
+    // console.log(w,h);
 
 
     // todo delete unalloc old mesh objects
     // meshes.length=0;
-    needsUpdate=false;
+    // needsUpdate=false;
 
 
     var count=0;
@@ -55,14 +58,14 @@ function updateGeom()
             }
         }
     }
-    
+
     var filling=0.0;
 
     if(filling<=0.0) verts=new Float32Array(count*3*3);
     else verts=new Float32Array(count*6*3);
-    
+
     // console.log(count*6);
-    
+
     count=0;
 
     // for(var i=0;i<verts.length;i++)verts[i]=0;
@@ -85,11 +88,11 @@ function updateGeom()
         var mX=0;
         var mY=0;
         var check=0;
-        
+
         var minDist=9999999;
         var ignoreCell=false;
 
-        if(ignoreBorderCells)    
+        if(ignoreBorderCells)
         {
             for(var j=0;j<cell.halfedges.length;j++)
             {
@@ -100,7 +103,7 @@ function updateGeom()
                 if(Math.abs(edge.vb.y)>=h/2)ignoreCell=true;
             }
         }
-        
+
         var scale=1;
 
         // for(var j=0;j<cell.halfedges.length;j++)
@@ -120,9 +123,9 @@ function updateGeom()
 
 
         // maxDist/=cell.halfedges.length;
-        
+
         // console.log(maxDist);
-    
+
         // if(maxDist>maxSize.get())
         // {
         //     var sizeDist=maxSizeEnd.get()-maxSize.get();
@@ -143,7 +146,7 @@ function updateGeom()
 
         //     // if(invertFill)
         //         // filli = (filling)* ( (maxDist/maxSize.get()) );
-            
+
         //     // if(maxDist>maxSizeEnd.get())ignoreCell=true;
         // }
 
@@ -217,30 +220,30 @@ function updateGeom()
                 }
                 else
                 {
-                    
+
                     if(invertFill)
                     {
                         verts[count++]=cell.site.x;
                         verts[count++]=cell.site.y;
                         verts[count++]=pExtrCenter.get();
-    
+
                         verts[count++]=edgevax-(edgevax-cell.site.x)*filli;
                         verts[count++]=edgevay-(edgevay-cell.site.y)*filli;
                         verts[count++]=0;
-    
+
                         verts[count++]=edgevbx-(edgevbx-cell.site.x)*filli;
                         verts[count++]=edgevby-(edgevby-cell.site.y)*filli;
                         verts[count++]=0;
-                        
-                        
+
+
                         verts[count++]=cell.site.x;
                         verts[count++]=cell.site.y;
                         verts[count++]=pExtrCenter.get();
-    
+
                         verts[count++]=edgevax-(edgevax-cell.site.x)*filli;
                         verts[count++]=edgevay-(edgevay-cell.site.y)*filli;
                         verts[count++]=0;
-    
+
                         verts[count++]=edgevbx-(edgevbx-cell.site.x)*filli;
                         verts[count++]=edgevby-(edgevby-cell.site.y)*filli;
                         verts[count++]=0;
@@ -251,11 +254,11 @@ function updateGeom()
                         verts[count++]=cell.site.x+(edgevax-cell.site.x)*filli;
                         verts[count++]=cell.site.y+(edgevay-cell.site.y)*filli;
                         verts[count++]=0;
-            
+
                         verts[count++]=edgevax;
                         verts[count++]=edgevay;
                         verts[count++]=0;
-        
+
                         verts[count++]=edgevbx;
                         verts[count++]=edgevby;
                         verts[count++]=0;
@@ -265,11 +268,11 @@ function updateGeom()
                         verts[count++]=cell.site.x+(edgevbx-cell.site.x)*filli;
                         verts[count++]=cell.site.y+(edgevby-cell.site.y)*filli;
                         verts[count++]=0;
-            
+
                         verts[count++]=cell.site.x+(edgevax-cell.site.x)*filli;
                         verts[count++]=cell.site.y+(edgevay-cell.site.y)*filli;
                         verts[count++]=0;
-                        
+
                         verts[count++]=edgevbx;
                         verts[count++]=edgevby;
                         verts[count++]=0;
@@ -277,9 +280,9 @@ function updateGeom()
                 }
             }
         }
-        
 
-        
+
+
         // var md=99999;
 
         // for (var s = 0; s < sites.length; s++)
@@ -295,19 +298,19 @@ function updateGeom()
         //         sites[ic].mdIndex=s;
         //     }
         // }
-        
+
         // md=md*md;
         // [vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
-        
+
     }
 
     // geom.unIndex();
-    
+
     // if(pRender.get())
     {
         // tc.length=verts.length/3*2;
-        
-        
+
+
         if(indices.length<verts.length/3)
         {
             indices=new Uint16Array(verts.length/3);
@@ -315,31 +318,31 @@ function updateGeom()
 
             for(i=0;i<verts.length/3;i++)indices[i]=i;
         }
-    
-    
+
+
         // indices.length=verts.length;
         // var c=0;
-        
+
         // for(i=0;i<verts.length/3;i++)indices.push(i);
-    
-    
-    
-    
+
+
+
+
         // for(i=0;i<verts.length/3;i++)
         // {
         //     tc[i*2+0]=0.0;
         //     tc[i*2+1]=0.0;
         // }
-    
+
         if(!geom)geom=new CGL.Geometry();
-    
+
         geom.vertices=verts;
         geom.verticesIndices=indices;
         // geom.texCoords=tc;
         if(inCalcNormals.get())
             geom.calculateNormals({"forceZUp":true});
-        
-        if(!mesh) 
+
+        if(!mesh)
         {
             mesh=new CGL.Mesh(op.patch.cgl,geom);
             console.log("new voronoi mesh");
@@ -350,16 +353,16 @@ function updateGeom()
 
         var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,verts,3);
         attr.numItems=verts.length/3;
-        
+
         mesh.setVertexIndices(indices);
         // else mesh.updateVertices(geom);
 
-        console.log('verts ',verts.length);
+        // console.log('verts ',verts.length);
         // mesh.pos=[sites[ic].x,sites[ic].y,0];
     }
-    
+
     // console.log(verts.length);
-    
+
     // outVerts.set(null);
     // outVerts.set(verts);
 }
@@ -370,7 +373,7 @@ function updateGeom()
 render.onTriggered=function()
 {
     if(needsGeomUpdate)updateGeom();
-    if(mesh) 
+    if(mesh)
     {
         mesh.render(op.patch.cgl.getShader());
     }

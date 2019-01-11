@@ -1,1 +1,32 @@
-{"libs":["perlin.js"]}
+{
+    "libs": [
+        "perlin.js"
+    ],
+    "authorName": "andro",
+    "id": "9a8cf4da-4a95-45a5-be8e-772c77cb2112",
+    "created": 1547022893565,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "2",
+                "name": "Diagram"
+            },
+            {
+                "type": "0",
+                "name": "Ignore Border Cells",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.VoronoiLines"
+    }
+}

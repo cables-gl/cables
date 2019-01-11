@@ -19,6 +19,11 @@
             },
             {
                 "type": "0",
+                "name": "Mask Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "r",
                 "group": "Color",
                 "subType": "number"

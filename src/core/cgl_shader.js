@@ -195,6 +195,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + 'precision ' + this.precision+' float;'
             .endl() + ''
+            .endl() + '#define WEBGL2'
             .endl() + '#define texture2D texture'
             .endl() + '#define UNI uniform'
             .endl() + '#define IN in'
@@ -207,6 +208,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + 'precision ' + this.precision+' float;'
             .endl() + ''
+            .endl() + '#define WEBGL2'
             .endl() + '#define texture2D texture'
             .endl() + '#define IN in'
             .endl() + '#define UNI uniform'
@@ -219,6 +221,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + '// fragment shader '+name
             .endl() + '// '
+            .endl() + '#define WEBGL1'
             .endl() + '#define texture texture2D'
             .endl() + '#define outColor gl_FragColor'
             .endl() + '#define IN varying'
@@ -229,6 +232,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + '// vertex shader '+name
             .endl() + '// '
+            .endl() + '#define WEBGL1'
             .endl() + '#define texture texture2D'
             .endl() + '#define OUT varying'
             .endl() + '#define IN attribute'
@@ -376,9 +380,6 @@ CGL.Shader.prototype.bind = function()
         this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_NORMALMAT);
         this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_INVVIEWMAT);
         for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
-
-        if (this._mvMatrixUniform)
-            console.warn("mvMatrix uniform should not be used ", this._mvMatrixUniform,this);
     }
 
     if (this._cgl.currentProgram != this._program) {

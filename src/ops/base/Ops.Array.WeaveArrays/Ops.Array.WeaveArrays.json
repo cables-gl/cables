@@ -1,5 +1,4 @@
 {
-    "updated": 1518187803562,
     "authorName": "tim",
     "id": "ad6d77b7-d81d-4115-a2f2-5160adaaef3a",
     "created": 1518102453401,
@@ -15,7 +14,8 @@
             },
             {
                 "type": "0",
-                "name": "Chunk Size"
+                "name": "Chunk Size",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -24,7 +24,7 @@
                 "name": "Combined Array"
             }
         ],
-        "name": "Ops.Array.CombineArrays"
+        "name": "Ops.Array.WeaveArrays"
     },
     "summary": "Weaves two arrays together (combine, join, merge)",
     "docs": {

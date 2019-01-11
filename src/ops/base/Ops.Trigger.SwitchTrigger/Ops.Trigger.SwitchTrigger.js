@@ -3,7 +3,7 @@ var NUM_PORTS = 10;
 
 // inputs
 var exePort = op.inTriggerButton('Execute');
-var switchPort = op.inValue('Switch Value');
+var switchPort = op.inValueInt('Switch Value');
 
 // outputs
 var nextTriggerPort = op.outTrigger('Next Trigger');
@@ -22,11 +22,11 @@ var defaultTriggerPort = op.outTrigger('Default Trigger');
 function update() {
     var index = Math.round(switchPort.get());
     if(index >= 0 && index < NUM_PORTS) {
-        valueOutPort.set(index);    
+        valueOutPort.set(index);
         triggerPorts[index].trigger();
     } else {
-        valueOutPort.set(-1);    
-        defaultTriggerPort.trigger();   
+        valueOutPort.set(-1);
+        defaultTriggerPort.trigger();
     }
     nextTriggerPort.trigger();
 }

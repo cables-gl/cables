@@ -36,5 +36,15 @@
             }
         ],
         "name": "Ops.Gl.Meshes.VoronoiNew"
+    },
+    "summary": "",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Site Points",
+                "text": "array of two dimensional values (XYXYXYXYXY)"
+            }
+        ]
     }
 }

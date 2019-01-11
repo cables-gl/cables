@@ -30,7 +30,7 @@
         ],
         "name": "Ops.Devices.ListGamePads"
     },
-    "summary": "list connected gamepads",
+    "summary": "list connected gamepads - press a button to connect",
     "docs": {
         "ports": [
             {
@@ -38,5 +38,6 @@
                 "text": "trigger to update gamepad button/axis states"
             }
         ]
-    }
+    },
+    "youtubeid": ""
 }

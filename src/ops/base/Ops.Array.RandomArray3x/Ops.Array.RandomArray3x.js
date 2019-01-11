@@ -1,22 +1,20 @@
+const
+    numValues=op.inValueInt("numValues",100),
+    min=op.inValueFloat("Min",-1),
+    max=op.inValueFloat("Max",1),
+    seed=op.inValueFloat("random seed"),
+    closed=op.inValueBool("Last == First"),
+    values=op.outArray("values");
 
-var numValues=op.inValueInt("numValues");
-var seed=op.inValueFloat("random seed");
-var min=op.inValueFloat("Min");
-var max=op.inValueFloat("Max");
-var closed=op.inValueBool("Last == First");
+op.setPortGroup("Value Range",[min,max])
 
-var values=op.addOutPort(new CABLES.Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
 values.ignoreValueSerialize=true;
 
-numValues.set(100);
-min.set(-1);
-max.set(1);
-
-closed.onChange=max.onChange=init;
-min.onChange=init;
-numValues.onChange=init;
-seed.onChange=init;
-values.onLinkChanged=init;
+closed.onChange=max.onChange=
+    min.onChange=
+    numValues.onChange=
+    seed.onChange=
+    values.onLinkChanged=init;
 
 var arr=[];
 init();

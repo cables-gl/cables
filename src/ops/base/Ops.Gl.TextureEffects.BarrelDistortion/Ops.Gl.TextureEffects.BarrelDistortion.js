@@ -13,7 +13,6 @@ var uniamount=new CGL.Uniform(shader,'f','amount',0);
 
 render.onTriggered=function()
 {
-    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 
