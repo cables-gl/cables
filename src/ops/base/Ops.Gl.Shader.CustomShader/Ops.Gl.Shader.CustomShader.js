@@ -11,6 +11,7 @@ var uniformTextures=[];
 var shader=new CGL.Shader(cgl,"shaderMaterial");
 // shader.glslVersion=0;
 
+op.setPortGroup("Source Code",[fragmentShader,vertexShader]);
 
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
@@ -36,10 +37,6 @@ function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
-
-
-// console.log(lastm4);
-
 }
 
 function bindTextures()

@@ -8,37 +8,43 @@
             {
                 "type": "0",
                 "name": "use viewport size",
+                "group": "Texture Size",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "width",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "height",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "filter",
+                "group": "Texture Settings",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "wrap",
+                "group": "Texture Settings",
                 "subType": "string"
             },
             {
                 "type": "0",
-                "name": "background alpha",
-                "subType": "number"
+                "name": "HDR",
+                "group": "Texture Settings",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "hdr",
-                "subType": "boolean"
+                "name": "Background Alpha",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -52,7 +58,7 @@
             },
             {
                 "type": "0",
-                "name": "aspect ratio",
+                "name": "Aspect Ratio",
                 "subType": "number"
             }
         ],
@@ -66,7 +72,6 @@
             "url": "https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/"
         }
     ],
-    "updated": 1540978399309,
     "authorName": "pandur",
     "id": "5c04608d-1e42-4e36-be00-1be4a81fc309",
     "created": 1505424175620

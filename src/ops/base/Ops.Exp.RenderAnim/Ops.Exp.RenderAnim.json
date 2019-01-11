@@ -50,7 +50,20 @@
     },
     "summary": "render an animation and save as file webm video or png image sequence",
     "docs": {
-        "ports": [],
+        "ports": [
+            {
+                "name": "Start Time",
+                "text": "start time of timeline in seconds"
+            },
+            {
+                "name": "End Time",
+                "text": "end time of timeline in seconds"
+            },
+            {
+                "name": "FPS",
+                "text": "how many frames are rendered for one second of animation"
+            }
+        ],
         "portsOut": [
             {
                 "type": "0",
@@ -59,5 +72,6 @@
             }
         ],
         "name": "Ops.Exp.RenderAnim"
-    }
+    },
+    "youtubeid": ""
 }

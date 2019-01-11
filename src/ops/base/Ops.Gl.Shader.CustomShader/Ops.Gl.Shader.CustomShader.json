@@ -11,16 +11,23 @@
             {
                 "type": "0",
                 "name": "fragment",
+                "group": "Source Code",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "vertex",
+                "group": "Source Code",
                 "subType": "number"
             },
             {
                 "type": "2",
                 "name": "tex"
+            },
+            {
+                "type": "0",
+                "name": "angle",
+                "subType": "number"
             }
         ],
         "portsOut": [

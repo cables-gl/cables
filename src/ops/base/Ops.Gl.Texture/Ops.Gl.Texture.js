@@ -16,8 +16,7 @@ const cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
 
-flip.onChange=function(){reloadSoon();};
-filename.onChange=reloadSoon;
+filename.onChange=flip.onChange=function(){reloadSoon();};
 
 tfilter.onChange=onFilterChange;
 wrap.onChange=onWrapChange;
@@ -141,6 +140,7 @@ function onWrapChange()
 
 op.onFileChanged=function(fn)
 {
+    console.log(fn);
     if(filename.get() && filename.get().indexOf(fn)>-1)
     {
         textureOut.set(null);

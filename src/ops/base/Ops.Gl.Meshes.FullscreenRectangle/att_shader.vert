@@ -13,6 +13,5 @@ void main()
 
    texCoord=attrTexCoord;
 
-
    gl_Position = projMatrix * mvMatrix * pos;
 }

@@ -1,11 +1,14 @@
 const render=op.inTrigger('render');
+const inDepthTex=op.inTexture("image");
 const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 const amount=op.inValueSlider("Amount",1);
-const inDepthTex=op.inTexture("image");
 const farPlane=op.inValue("farplane",50.0);
 const nearPlane=op.inValue("nearplane",0.1);
 const inInv=op.inValueBool("Invert",false);
 const trigger=op.outTrigger('trigger');
+
+op.setPortGroup("Frustum",[farPlane,nearPlane]);
+
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
