@@ -50,7 +50,7 @@ function updateGeom()
     var voro=inDiagram.get();
     if(!voro)return;
     needsGeomUpdate=false;
-    
+
     var sites=voro.sites;
     var diagram=voro.diagram;
     var w=voro.width;
@@ -80,11 +80,11 @@ function updateGeom()
         var mX=0;
         var mY=0;
         var check=0;
-        
+
         var minDist=9999999;
         var ignoreCell=false;
 
-        if(ignoreBorderCells)    
+        if(ignoreBorderCells)
         {
             for(var j=0;j<cell.halfedges.length;j++)
             {
@@ -109,10 +109,10 @@ function updateGeom()
 
                 var addX=0.0;
                 var addY=0;
-                
+
             	var xd = edge.vb.x-edge.va.x;
             	var yd = edge.vb.y-edge.va.y;
-            	
+
                 if( !Math.abs(xd*xd + yd*yd) >0.41 )canceled=true;
 
                 verts[count++]=edge.va.x;
@@ -124,7 +124,7 @@ function updateGeom()
                 verts[count++]=0;
             }
         }
-        
+
         if(!canceled)drawLine(verts,count/3);
 
     }

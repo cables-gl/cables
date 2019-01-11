@@ -34,12 +34,13 @@ CABLES.Op = function()
     this.portsIn=[];
     this.portsInData=[]; // original loaded patch data 
     this.opId=''; // unique op id
-    this.uiAttribs={};
+    this.uiAttribs = {};
     this.enabled=true;
     this.patch=arguments[0];
     this.name=arguments[1];
     this.errors={};
     this._needsLinkedToWork=[];
+    this._needsParentOp=null;
 
     if(this.name)
     {
@@ -922,124 +923,94 @@ CABLES.Op = function()
         }
     }
 
-
+    // needs to be in UI only
     CABLES.Op.prototype.checkLinkTimeWarnings=function()
     {
-
-
-        function isTriggerConnectedTo(op,name)
+        function hasParent(op, type,name)
         {
             for(var i=0;i<op.portsIn.length;i++)
             {
-                if(
-                    op.portsIn[i].type==CABLES.OP_PORT_TYPE_FUNCTION && 
-                    op.portsIn[i].isLinked() )
+                if (op.portsIn[i].type ==type &&  op.portsIn[i].isLinked())
+                {
+                    var pi=op.portsIn[i];
+                    for(var li=0;li<pi.links.length;li++)
                     {
-                        var pi=op.portsIn[i];
-
-                        for(var li=0;li<pi.links.length;li++)
-                        {
-                            if(!pi.links[li])continue;
-                            if(pi.links[li].portOut.parent.objName==name)
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                var isConnected=isTriggerConnectedTo(pi.links[li].portOut.parent,name);
-                                if(isConnected)return true;
-                            }
-                        }
+                        if(!pi.links[li])continue;
+                        if(pi.links[li].portOut.parent.objName.indexOf(name)>-1) return true;
+                        else if (hasParent(pi.links[li].portOut.parent,type,name)) return true;
                     }
+                }
             }
             return false;
         }
 
         function hasTriggerInput(op)
         {
-            for(var i=0;i<op.portsIn.length;i++)
-            {
-                if( op.portsIn[i].type==CABLES.OP_PORT_TYPE_FUNCTION )return true;
-            }
+            if (op.portsIn.length>0 && op.portsIn[0].type==CABLES.OP_PORT_TYPE_FUNCTION )return true;
             return false;
         }
 
+        var notWorkingMsg=null;
         var working=true;
-        if(this.objName.indexOf('Ops.Gl')==0 && hasTriggerInput(this) && this.objName!='Ops.Gl.MainLoop')
-        {
-            // console.log("CHECKING GL MAINLOOP!",this.objName);
-            var iscon=isTriggerConnectedTo( this,'Ops.Gl.MainLoop' );
-            working=iscon;
-            // console.log('isconnected to mainloop',this.name,iscon);
+
+        if (working && this.objName.indexOf('Ops.Gl.TextureEffects') == 0 && hasTriggerInput(this) && this.objName.indexOf('TextureEffects.ImageCompose')==-1) {
+            working = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'TextureEffects.ImageCompose');
+            if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'ImageCompose';
+        }
+        else
+        if (this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop') {
+            var iscon = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
+            working = iscon;
+            if (!iscon) {
+                notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
+            }
         }
 
 
-        if(!working)
-        this.setUiAttrib(
-            {
-                "working":working
-            });
-                else
-                if(!this.uiAttribs.working)
-                this.setUiAttrib(
-                    {
-                        "working":true
-                    });
+        if (this._needsParentOp && working)
+        {
+            working = hasParent(this, CABLES.OP_PORT_TYPE_OBJECT,this._needsParentOp);
+            if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + this._needsParentOp;
+        }
 
+        if (this._needsLinkedToWork.length>0)
+        {
+            for (var i = 0; i < this._needsLinkedToWork.length; i++) {
+                var p = this._needsLinkedToWork[i];
+                if (!p) {
+                    console.warn('[needsLinkedToWork] port not found');
+                    continue;
+                }
+                if (!p.isLinked()) {
+                    working = false;
+
+                    if (!notWorkingMsg) notWorkingMsg = CABLES.UI.TEXTS.working_connected_needs_connections_to;
+                    else notWorkingMsg += ', ';
+                    notWorkingMsg += '' + p.name.toUpperCase() + '';
+                }
+            }
+        }
+
+
+        if (!working) this.setUiAttrib({ "working": working, "notWorkingMsg": notWorkingMsg });
+            else if (!this.uiAttribs.working) this.setUiAttrib({ "working": true,"notWorkingMsg":null});
 
     }
     
 
     CABLES.Op.prototype._checkLinksNeededToWork=function()
     {
-        if(this._needsLinkedToWork.length==0)return;
-
-        var working=true;
-        var notWorkingMsg=null;
-
-        for(var i=0;i<this._needsLinkedToWork.length;i++)
-        {
-            var p=this._needsLinkedToWork[i];
-            if(!p)
-            {
-                console.warn('[needsLinkedToWork] port not found');
-                continue;
-            }
-            if(!p.isLinked())
-            {
-                working=false;
-
-                if(!notWorkingMsg)notWorkingMsg='this op can not do anything without at least linking those ports: ';
-                    else notWorkingMsg+=', ';
-                notWorkingMsg+=''+p.name.toUpperCase()+'';
-            }
-        }
-    
-
-        this.setUiAttrib(
-            {
-                "working":working,
-                "notWorkingMsg":notWorkingMsg
-            });
-
-
-
-
-
-
-
-
-
     }
 
-    // CABLES.Op.prototype.needsToBeBelow=function(opname)
-    // {
-
-    // }
     
-    CABLES.Op.prototype.needsToBeLinkedToWork=function()
+    CABLES.Op.prototype.toWorkNeedsParent = function (parentOpName)
     {
-        if(!CABLES.UI)return;
+        if (!CABLES.UI) return;
+        this._needsParentOp=parentOpName;
+    }
+    CABLES.Op.prototype.toWorkPortsNeedToBeLinked = function ()
+    {
+        if (!CABLES.UI) return;
         for (var i = 0; i < arguments.length; i++)
             this._needsLinkedToWork.push(arguments[i]);
     }

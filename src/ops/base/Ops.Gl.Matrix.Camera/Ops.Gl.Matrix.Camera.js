@@ -1,61 +1,43 @@
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger");
 
 /* Inputs */
 // projection | prespective & ortogonal
-var projectionMode=op.addInPort(new CABLES.Port(op,"projection mode",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['prespective','ortogonal']}));
-var zNear=op.addInPort(new CABLES.Port(op,"frustum near",CABLES.OP_PORT_TYPE_VALUE ));
-var zFar=op.addInPort(new CABLES.Port(op,"frustum far",CABLES.OP_PORT_TYPE_VALUE ));
+const projectionMode=op.inValueSelect("projection mode",['prespective','ortogonal'], 'prespective');
+const zNear=op.inValue("frustum near",0.01);
+const zFar=op.inValue("frustum far",5000.0);
 
-var fov=op.addInPort(new CABLES.Port(op,"fov",CABLES.OP_PORT_TYPE_VALUE ));
-
-var autoAspect=op.inValueBool("Auto Aspect Ratio",true);
-var aspect=op.inValue("Aspect Ratio");
+const fov=op.inValue("fov",45);
+const autoAspect=op.inValueBool("Auto Aspect Ratio",true);
+const aspect=op.inValue("Aspect Ratio",1);
 
 // look at camera
-var eyeX=op.addInPort(new CABLES.Port(op,"eye X"));
-var eyeY=op.addInPort(new CABLES.Port(op,"eye Y"));
-var eyeZ=op.addInPort(new CABLES.Port(op,"eye Z"));
+const eyeX=op.inValue("eye X",0);
+const eyeY=op.inValue("eye Y",0);
+const eyeZ=op.inValue("eye Z",5);
 
-var centerX=op.addInPort(new CABLES.Port(op,"center X"));
-var centerY=op.addInPort(new CABLES.Port(op,"center Y"));
-var centerZ=op.addInPort(new CABLES.Port(op,"center Z"));
+const centerX=op.inValue("center X",0);
+const centerY=op.inValue("center Y",0);
+const centerZ=op.inValue("center Z",0);
 
 // camera transform and movements
-var posX=op.addInPort(new CABLES.Port(op,"truck"),0);
-var posY=op.addInPort(new CABLES.Port(op,"boom"),0);
-var posZ=op.addInPort(new CABLES.Port(op,"dolly"),0);
+const posX=op.inValue("truck",0);
+const posY=op.inValue("boom",0);
+const posZ=op.inValue("dolly",0);
 
-var rotX=op.addInPort(new CABLES.Port(op,"tilt"),0);
-var rotY=op.addInPort(new CABLES.Port(op,"pan"),0);
-var rotZ=op.addInPort(new CABLES.Port(op,"roll"),0);
+const rotX=op.inValue("tilt",0);
+const rotY=op.inValue("pan",0);
+const rotZ=op.inValue("roll",0);
 
 
 /* Outputs */
-var outAsp=op.addOutPort(new CABLES.Port(op,"Aspect",CABLES.OP_PORT_TYPE_VALUE));
-var outArr=op.outArray("Look At Array");
-
+const outAsp=op.outValue("Aspect");
+const outArr=op.outArray("Look At Array");
 
 /* logic */
 var cgl=op.patch.cgl;
 
-// prespective
-projectionMode.set('prespective');
-zNear.set(0.01);
-zFar.set(500.0);
-fov.set(45);
-aspect.set(1);
-
 var asp=0;
-
-// look at camera
-centerX.set(0);
-centerY.set(0);
-centerZ.set(0);
-
-eyeX.set(0);
-eyeY.set(0);
-eyeZ.set(5);
 
 var vUp=vec3.create();
 var vEye=vec3.create();

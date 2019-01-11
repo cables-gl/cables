@@ -26,6 +26,7 @@ input.setAttribute('value', defaultValuePort.get());
 //inputWrapper.appendChild(input);
 el.appendChild(input);
 input.addEventListener('input', onInput);
+op.toWorkPortsNeedToBeLinked(parentPort);
 
 // events
 parentPort.onChange = onParentChanged;
@@ -49,7 +50,7 @@ function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Text Input: ' + labelText);    
+        op.setTitle('Text Input: ' + labelText);
     }
 }
 
@@ -61,7 +62,7 @@ function onParentChanged() {
         siblingsPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -84,6 +85,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }

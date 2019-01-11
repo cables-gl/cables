@@ -8,11 +8,13 @@
             },
             {
                 "type": "0",
-                "name": "Geometry"
+                "name": "Geometry",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Duration"
+                "name": "Duration",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -48,13 +50,15 @@
             },
             {
                 "type": "0",
-                "name": "smooth"
+                "name": "smooth",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Finished"
+                "name": "Finished",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -63,7 +67,6 @@
         ],
         "name": "Ops.Gl.MeshMorph"
     },
-    "updated": 1511867856501,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "41bc544e-a0c9-450b-b657-405d80b1298c",

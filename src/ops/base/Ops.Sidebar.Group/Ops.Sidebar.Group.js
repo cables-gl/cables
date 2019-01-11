@@ -30,6 +30,7 @@ headerTitle.appendChild(icon);
 var groupItems = document.createElement('div');
 groupItems.classList.add('sidebar__group-items');
 el.appendChild(groupItems);
+op.toWorkPortsNeedToBeLinked(parentPort);
 
 // events
 parentPort.onChange = onParentChanged;
@@ -41,22 +42,22 @@ op.onDelete = onDelete;
 
 function onDefaultMinimizedPortChanged() {
     if(defaultMinimizedPort.get()) {
-        el.classList.add('sidebar__group--closed');    
+        el.classList.add('sidebar__group--closed');
     } else {
-        el.classList.remove('sidebar__group--closed');    
+        el.classList.remove('sidebar__group--closed');
     }
 }
 
 function onClick(ev) {
     ev.stopPropagation();
-    el.classList.toggle('sidebar__group--closed');  
+    el.classList.toggle('sidebar__group--closed');
 }
 
 function onLabelTextChanged() {
     var labelText = labelPort.get();
     headerTitleText.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Group: ' + labelText);    
+        op.setTitle('Group: ' + labelText);
     }
 }
 
@@ -72,7 +73,7 @@ function onParentChanged() {
         nextPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -95,6 +96,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }

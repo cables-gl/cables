@@ -34,11 +34,13 @@
             },
             {
                 "type": "2",
-                "name": "texture"
+                "name": "texture",
+                "group": "Color Texture"
             },
             {
                 "type": "0",
                 "name": "colorizeTexture",
+                "group": "Color Texture",
                 "subType": "boolean"
             },
             {

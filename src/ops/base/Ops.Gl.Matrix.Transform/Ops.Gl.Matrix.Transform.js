@@ -27,16 +27,13 @@ var
     scaleChanged=true,
     rotChanged=true;
 
-op.needsToBeLinkedToWork(render,trigger);
-
 rotX.onChange=rotY.onChange=rotZ.onChange=setRotChanged;
 posX.onChange=posY.onChange=posZ.onChange=setTranslateChanged;
 scale.onChange=setScaleChanged;
 
-
 render.onTriggered=function()
 {
-    if(!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
+    // if(!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
     var updateMatrix=false;
     if(translationChanged)
@@ -96,8 +93,9 @@ function updateTranslation()
 
 function updateScale()
 {
-    doScale=false;
-    if(scale.get()!==0.0)doScale=true;
+    // doScale=false;
+    // if(scale.get()!==0.0)
+    doScale=true;
     vec3.set(vScale, scale.get(),scale.get(),scale.get());
     scaleChanged=false;
 }

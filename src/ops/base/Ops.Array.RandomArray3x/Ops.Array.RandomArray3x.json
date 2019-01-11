@@ -3,23 +3,28 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "numValues"
+                "name": "numValues",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "random seed"
+                "name": "random seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min"
+                "name": "Min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max"
+                "name": "Max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Last == First"
+                "name": "Last == First",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -31,7 +36,6 @@
         "name": "Ops.Array.RandomArray3x"
     },
     "summary": "Generates a random array of numbers",
-    "updated": 1539699436861,
     "authorName": "pandur",
     "id": "7f981578-542e-417b-b304-8fbe41258772",
     "created": 1515883841358,

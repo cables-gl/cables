@@ -40,6 +40,7 @@ defaultValuePort.onChange = onDefaultValueChanged;
 inputValuePort.onChange = onInputValuePortChanged;
 op.onDelete = onDelete;
 setDefaultValueButtonPort.onTriggered = setDefaultValue;
+op.toWorkNeedsParent('Ops.Sidebar.Sidebar');
 
 // functions
 

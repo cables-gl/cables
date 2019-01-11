@@ -1,17 +1,20 @@
-var cgl=op.patch.cgl;
-
 var render=op.inTrigger('render');
-
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
 
-
-
+var scale=op.inValue("Scale",4);
 var x=op.inValue("X",0);
 var y=op.inValue("Y",0);
 var z=op.inValue("Z",0);
-var scale=op.inValue("Scale",4);
+
+
 var trigger=op.outTrigger('trigger');
+
+op.setPortGroup("Position",[x,y,z]);
+op.setPortGroup("Look",[scale]);
+
+
+var cgl=op.patch.cgl;
 
 var shader=new CGL.Shader(cgl);
 

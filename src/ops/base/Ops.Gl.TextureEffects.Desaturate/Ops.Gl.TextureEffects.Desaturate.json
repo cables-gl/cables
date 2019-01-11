@@ -13,6 +13,11 @@
             {
                 "type": "2",
                 "name": "Mask"
+            },
+            {
+                "type": "0",
+                "name": "Invert Mask",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -23,7 +28,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.Desaturate"
     },
-    "updated": 1542211496689,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "340efbd5-be53-4bd5-92ad-8f38d8eeecf1",

@@ -17,7 +17,7 @@ anim.createPort(op,"easing",reinit);
 op.setPortGroup("Timing",[duration,pause]);
 op.setPortGroup("Value",[min,max,seed]);
 
-op.needsToBeLinkedToWork(exe);
+op.toWorkPortsNeedToBeLinked(exe);
 
 var counter=0;
 

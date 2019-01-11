@@ -7,6 +7,9 @@ var new_min=op.addInPort(new CABLES.Port(op,"new min"));
 var new_max=op.addInPort(new CABLES.Port(op,"new max"));
 var easing=op.inValueSelect("Easing",["Linear","Smoothstep","Smootherstep"],"Linear");
 
+op.setPortGroup("Input Range",[old_min,old_max]);
+op.setPortGroup("Output Range",[new_min,new_max]);
+
 var ease=0;
 var r=0;
 
@@ -26,7 +29,7 @@ function exec()
         return;
     }
     else
-    if(v.get()<=Math.min( old_max.get(),old_min.get() )) 
+    if(v.get()<=Math.min( old_max.get(),old_min.get() ))
     {
         result.set(new_min.get());
         return;

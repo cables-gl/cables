@@ -16,11 +16,14 @@ inPoints.onChange=rebuild;
 
 var attr;
 
+op.toWorkPortsNeedToBeLinked(inPoints);
+
 function rebuild()
 {
     var points=inPoints.get();
 
     if(!points)return;
+
     if(points.length===0)return;
     if(op.instanced(render))return;
 
@@ -53,6 +56,7 @@ function rebuild()
 
 render.onTriggered=function()
 {
+    if(!inPoints.get())return;
     if(!mesh)rebuild();
     var shader=cgl.getShader();
     if(!shader)return;

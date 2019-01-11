@@ -8,31 +8,37 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "X",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Y",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Z",
+                "group": "Blending",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Scale",
+                "group": "Look",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Position",
                 "subType": "number"
             }
         ],
@@ -52,7 +58,6 @@
             "license": "Public Domain"
         }
     ],
-    "updated": 1515088149839,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "3523aaba-d00c-4226-add1-bbfd8bf5fe9f",

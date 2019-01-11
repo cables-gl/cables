@@ -12,6 +12,8 @@ const
 var anim=new CABLES.Anim();
 anim.createPort(op,"easing");
 var startTime=CABLES.now();
+op.toWorkPortsNeedToBeLinked(exe);
+
 
 bool.onChange=
     valueFalse.onChange=

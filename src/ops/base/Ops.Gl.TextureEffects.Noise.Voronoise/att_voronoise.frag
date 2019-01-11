@@ -14,7 +14,7 @@ UNI float centerSize;
 UNI sampler2D tex;
 
 {{BLENDCODE}}
-{{LIB_RANDOM_OLD}}
+{{CGL.RANDOM_OLD}}
 
 float rand(float n){return fract(sin(n) * 43758.5453123);}
 vec2 random2( vec2 p )
