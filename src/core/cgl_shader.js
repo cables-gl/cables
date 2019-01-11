@@ -381,9 +381,6 @@ CGL.Shader.prototype.bind = function()
         this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_NORMALMAT);
         this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_INVVIEWMAT);
         for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
-
-        if (this._mvMatrixUniform)
-            console.warn("mvMatrix uniform should not be used ", this._mvMatrixUniform,this);
     }
 
     if (this._cgl.currentProgram != this._program) {
