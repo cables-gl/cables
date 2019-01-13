@@ -8,16 +8,19 @@
             {
                 "type": "0",
                 "name": "width",
+                "group": "Geometry",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "height",
+                "group": "Geometry",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "length",
+                "group": "Geometry",
                 "subType": "number"
             },
             {
@@ -44,7 +47,6 @@
         "name": "Ops.Gl.Meshes.Cube"
     },
     "summary": "draw a cube",
-    "updated": 1539790906967,
     "authorName": "pandur",
     "id": "ff0535e2-603a-4c07-9ce6-e9e0db857dfe",
     "created": 1516270987894,

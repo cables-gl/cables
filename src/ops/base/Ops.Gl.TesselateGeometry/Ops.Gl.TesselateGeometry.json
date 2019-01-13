@@ -3,29 +3,28 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "geometry"
+                "name": "Geometry"
             },
             {
                 "type": "0",
-                "name": "iterations",
+                "name": "Iterations",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": "2",
-                "name": "result"
+                "name": "Result"
             },
             {
                 "type": "0",
-                "name": "num vertices",
+                "name": "Num Vertices",
                 "subType": "number"
             }
         ],
         "name": "Ops.Gl.TesselateGeometry"
     },
     "summary": "create new triangles in a mesh (subdivide)",
-    "updated": 1540978887585,
     "authorName": "pandur",
     "id": "eb3f0bd8-211c-4336-a3ad-fa31c50d705d",
     "created": 1515175859293

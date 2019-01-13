@@ -1,21 +1,27 @@
-var render=op.inTrigger('render');
-var width=op.inValue('width');
-var height=op.inValue('height');
-var lengt=op.inValue('length');
-var center=op.inValueBool('center');
+const
+    render=op.inTrigger('render'),
+    width=op.inValue('width',1),
+    height=op.inValue('height',1),
+    lengt=op.inValue('length',1),
+    center=op.inValueBool('center',true),
+    active=op.inValueBool('Active',true),
+    trigger=op.outTrigger('trigger'),
+    geomOut=op.outObject("geometry");
 
-var active=op.inValueBool('Active',true);
+const cgl=op.patch.cgl;
 
-var trigger=op.outTrigger('trigger');
-var geomOut=op.outObject("geometry");
+op.setPortGroup("Geometry",[width,height,lengt]);
 
-var cgl=op.patch.cgl;
 var geom=null;
 var mesh=null;
-width.set(1.0);
-height.set(1.0);
-lengt.set(1.0);
-center.set(true);
+
+width.onChange=buildMesh;
+height.onChange=buildMesh;
+lengt.onChange=buildMesh;
+center.onChange=buildMesh;
+
+buildMesh();
+
 
 render.onTriggered=function()
 {
@@ -175,18 +181,18 @@ function buildMesh()
         0,0,1, 0,0,1, 0,0,1, 0,0,1
     ];
     geom.biTangents = [
-      // front face
-      0,-1,0, 0,-1,0, 0,-1,0, 0,-1,0,
-      // back face
-      0,1,0, 0,1,0, 0,1,0, 0,1,0,
-      // top face
-      0,0,-1, 0,0,-1, 0,0,-1, 0,0,-1,
-      // bottom face
-      0,0,1, 0,0,1, 0,0,1, 0,0,1,
-      // right face
-      0,1,0, 0,1,0, 0,1,0, 0,1,0,
-      // left face
-      0,1,0, 0,1,0, 0,1,0, 0,1,0
+        // front face
+        0,-1,0, 0,-1,0, 0,-1,0, 0,-1,0,
+        // back face
+        0,1,0, 0,1,0, 0,1,0, 0,1,0,
+        // top face
+        0,0,-1, 0,0,-1, 0,0,-1, 0,0,-1,
+        // bottom face
+        0,0,1, 0,0,1, 0,0,1, 0,0,1,
+        // right face
+        0,1,0, 0,1,0, 0,1,0, 0,1,0,
+        // left face
+        0,1,0, 0,1,0, 0,1,0, 0,1,0
     ];
 
     geom.verticesIndices = [
@@ -204,12 +210,6 @@ function buildMesh()
     geomOut.set(geom);
 }
 
-width.onChange=buildMesh;
-height.onChange=buildMesh;
-lengt.onChange=buildMesh;
-center.onChange=buildMesh;
-
-buildMesh();
 
 op.onDelete=function()
 {

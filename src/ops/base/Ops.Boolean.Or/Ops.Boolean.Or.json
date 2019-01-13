@@ -4,41 +4,50 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "bool 1"
+                "name": "bool 1",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "bool 2"
+                "name": "bool 2",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "bool 3"
+                "name": "bool 3",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "bool 4"
+                "name": "bool 4",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "bool 5"
+                "name": "bool 5",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "bool 6"
+                "name": "bool 6",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "bool 7"
+                "name": "bool 7",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "bool 8"
+                "name": "bool 8",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Boolean.Or"
@@ -51,7 +60,6 @@
             }
         ]
     },
-    "updated": 1520261822992,
     "authorName": "pandur",
     "id": "b3b36238-4592-4e11-afe3-8361c4fd6be5",
     "created": 1520261823005

@@ -27,7 +27,7 @@ function update()
 {
 
     var geom=geometry.get();
-    
+
     if(geom)
     {
         if(mesh)mesh.dispose();
@@ -35,9 +35,9 @@ function update()
         {
             mesh=new CGL.Mesh(op.patch.cgl,geom);
             mesh.addVertexNumbers=vertNums.get();
-            mesh.setGeom(geom); 
+            mesh.setGeom(geom);
         }
-        
+
 
         if(updateFaces.get() || updateAll.get())
         {
@@ -55,7 +55,16 @@ function update()
         }
 
         mesh.addVertexNumbers=vertNums.get();
-        
+
+
+        if(updateAll.get())
+        {
+            if(geom.hasOwnProperty('tangents') && geom.tangents && geom.tangents.length>0) mesh.setAttribute('attrTangent',geom.tangents,3);
+            if(geom.hasOwnProperty('biTangents') && geom.biTangents && geom.biTangents.length>0) mesh.setAttribute('attrBiTangent',geom.biTangents,3);
+
+        }
+
+
     }
     else
     {

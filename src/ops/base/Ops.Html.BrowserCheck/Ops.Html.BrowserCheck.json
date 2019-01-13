@@ -4,60 +4,77 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Is IE"
+                "name": "Is Mobile",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is IE 10+"
+                "name": "Is IE",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is IE 11"
+                "name": "Is IE 10+",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Edge"
+                "name": "Is IE 11",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Chrome"
+                "name": "Is Edge",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Firefox"
+                "name": "Is Chrome",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Mobile"
+                "name": "Is Firefox",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Windows"
+                "name": "Is Safari",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Linux"
+                "name": "Is Windows",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Mac"
+                "name": "Is Linux",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is iOS"
+                "name": "Is Mac",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Is Android"
+                "name": "Is iOS",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Language"
+                "name": "Is Android",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Language",
+                "subType": "number"
             }
         ],
         "name": "Ops.Html.BrowserCheck"
     },
-    "updated": 1520862592753,
     "authorName": "pandur",
     "id": "6e2ff98b-1e85-4b89-b125-fb8da727ba0c",
     "created": 1520862565547,

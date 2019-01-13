@@ -1,3 +1,4 @@
+var isMobile=op.outValue("Is Mobile",false);
 var isIe=op.outValue("Is IE",false);
 var isIe10Plus=op.outValue("Is IE 10+",false);
 var isIe11=op.outValue("Is IE 11",false);
@@ -5,7 +6,6 @@ var isEdge=op.outValue("Is Edge",false);
 var isChrome=op.outValue("Is Chrome",false);
 var isFirefox=op.outValue("Is Firefox",false);
 var isSafari=op.outValue("Is Safari",false);
-var isMobile=op.outValue("Is Mobile",false);
 var isWindows=op.outValue("Is Windows",false);
 var isLinux=op.outValue("Is Linux",false);
 var isMac=op.outValue("Is Mac",false);
@@ -28,14 +28,14 @@ if( /MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) 
     isIe.set(true);
     isFirefox.set(false);
     if( /MSIE 9/i.test(navigator.userAgent) ) {
-        isIe10Plus.set(false);    
-        isIe11.set(false);    
+        isIe10Plus.set(false);
+        isIe11.set(false);
     } else if( /MSIE 10/i.test(navigator.userAgent) ) {
-        isIe10Plus.set(true);    
-        isIe11.set(false);    
+        isIe10Plus.set(true);
+        isIe11.set(false);
     } else if( /rv:11.0/i.test(navigator.userAgent) ) {
-        isIe10Plus.set(false);    
-        isIe11.set(true);    
+        isIe10Plus.set(false);
+        isIe11.set(true);
     }
 }
 
@@ -85,7 +85,7 @@ if(window.navigator.userAgent.indexOf("Mac") != -1)
 
 isIos.set( /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
 
-if(window.navigator.userAgent.toLowerCase().indexOf("android") != -1) 
+if(window.navigator.userAgent.toLowerCase().indexOf("android") != -1)
     isAndroid.set(true);
 
 
