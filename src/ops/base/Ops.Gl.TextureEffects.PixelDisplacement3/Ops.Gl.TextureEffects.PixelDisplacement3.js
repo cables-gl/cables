@@ -1,13 +1,21 @@
 const
     render=op.inTrigger("render"),
+    displaceTex=op.inTexture("displaceTex"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     amountX=op.inValueSlider("amount X"),
     amountY=op.inValueSlider("amount Y"),
     inWrap=op.inValueSelect("Wrap",["Mirror","Clamp","Repeat"],"Mirror"),
     inInput=op.inValueSelect("Input",["Luminance","RedGreen","Red","Green","Blue"],"Luminance"),
-    displaceTex=op.inTexture("displaceTex"),
+    inZero=op.inValueSelect("Zero Displace",["Grey","Black"],"Grey"),
+    // displaceTex=op.inTexture("displaceTex"),
     trigger=op.outTrigger("trigger");
+
+op.setPortGroup("Axis Displacement Strength",[amountX,amountY]);
+op.setPortGroup("Modes",[inWrap,inInput]);
+op.toWorkPortsNeedToBeLinked(displaceTex);
+
+
 
 const
     cgl=op.patch.cgl,
@@ -22,14 +30,26 @@ const
     amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY),
     amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
-inWrap.onChange=
+
+inZero.onChange=updateZero;
+inWrap.onChange=updateWrap;
 inInput.onChange=updateInput;
+
 
 updateWrap();
 updateInput();
+updateZero();
+
+
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
+function updateZero()
+{
+    shader.removeDefine("ZERO_BLACK");
+    shader.removeDefine("ZERO_GREY");
+    shader.define("ZERO_"+(inZero.get()+'').toUpperCase());
+}
 
 function updateWrap()
 {

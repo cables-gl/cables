@@ -19,6 +19,8 @@ defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
 const siblingsPort = op.outObject('childs');
 const valuePort = op.outValue('Result', defaultValuePort.get());
 
+op.toWorkNeedsParent('Ops.Sidebar.Sidebar');
+
 // vars
 var el = document.createElement('div');
 el.classList.add('sidebar__item');

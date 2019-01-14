@@ -5,13 +5,18 @@ const height=op.inValueInt("height");
 
 const tfilter=op.inValueSelect("filter",['nearest','linear','mipmap'],"linear");
 const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
-const bgAlpha=op.inValueSlider("Background Alpha",1);
 const fpTexture=op.inValueBool("HDR");
 
-const trigger=op.outTrigger("trigger")
+const trigger=op.outTrigger("trigger");
 const texOut=op.outTexture("texture_out");
 
+const bgAlpha=op.inValueSlider("Background Alpha",1);
 const outRatio=op.outValue("Aspect Ratio");
+
+op.setPortGroup("Texture Size",[useVPSize,width,height]);
+op.setPortGroup("Texture Settings",[twrap,tfilter,fpTexture]);
+
+
 
 texOut.set(null);
 var cgl=op.patch.cgl;

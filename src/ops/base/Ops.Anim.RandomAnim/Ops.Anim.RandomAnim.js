@@ -1,9 +1,12 @@
 var exe=op.inTrigger("exe");
-var duration=op.inValue("duration",0.5);
+
 var min=op.inValue("min",0);
 var max=op.inValue("max",1);
-var pause=op.inValue("pause between",0);
 var seed=op.inValue("random seed",0);
+
+var duration=op.inValue("duration",0.5);
+var pause=op.inValue("pause between",0);
+
 
 var result=op.outValue("result");
 var looped=op.outTrigger("Looped");
@@ -11,6 +14,10 @@ var looped=op.outTrigger("Looped");
 var anim=new CABLES.Anim();
 anim.createPort(op,"easing",reinit);
 
+op.setPortGroup("Timing",[duration,pause]);
+op.setPortGroup("Value",[min,max,seed]);
+
+op.toWorkPortsNeedToBeLinked(exe);
 
 var counter=0;
 

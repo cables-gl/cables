@@ -8,9 +8,18 @@ CGL.profileShaderCompiles = 0;
 CGL.profileVideosPlaying = 0;
 CGL.profileMVPMatrixCount = 0;
 
+// default attributes
 CGL.SHADERVAR_VERTEX_POSITION = 'vPosition';
 CGL.SHADERVAR_VERTEX_NUMBER = 'attrVertIndex';
 CGL.SHADERVAR_VERTEX_TEXCOORD = 'attrTexCoord';
+
+// default uniforms
+CGL.SHADERVAR_UNI_PROJMAT = "projMatrix"
+CGL.SHADERVAR_UNI_VIEWMAT = "viewMatrix"
+CGL.SHADERVAR_UNI_MODELMAT = "modelMatrix"
+CGL.SHADERVAR_UNI_NORMALMAT = "normalMatrix"
+CGL.SHADERVAR_UNI_INVVIEWMAT = "inverseViewMatrix"
+CGL.SHADERVAR_UNI_VIEWPOS = "camPos"
 
 // ---------------------------------------------------------------------------
 
@@ -65,6 +74,10 @@ CGL.Shader = function(_cgl, _name) {
 
     this._libs=[];
 
+    this._tempNormalMatrix=mat4.create();
+    this._tempCamPosMatrix = mat4.create();
+    this._tempInverseViewMatrix = mat4.create();
+
     this.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 };
 
@@ -112,7 +125,6 @@ CGL.Shader.prototype._addLibs=function(src)
         if(src.indexOf(id)>-1)
         {
             var lib=new CGL.ShaderLibMods[id]();
-
             src = src.replace('{{'+id+'}}', lib.srcHeadFrag);
             this._libs.push(lib);
         }
@@ -183,6 +195,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + 'precision ' + this.precision+' float;'
             .endl() + ''
+            .endl() + '#define WEBGL2'
             .endl() + '#define texture2D texture'
             .endl() + '#define UNI uniform'
             .endl() + '#define IN in'
@@ -195,6 +208,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + 'precision ' + this.precision+' float;'
             .endl() + ''
+            .endl() + '#define WEBGL2'
             .endl() + '#define texture2D texture'
             .endl() + '#define IN in'
             .endl() + '#define UNI uniform'
@@ -207,6 +221,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + '// fragment shader '+name
             .endl() + '// '
+            .endl() + '#define WEBGL1'
             .endl() + '#define texture texture2D'
             .endl() + '#define outColor gl_FragColor'
             .endl() + '#define IN varying'
@@ -217,6 +232,7 @@ CGL.Shader.prototype.compile = function() {
             .endl() + '// '
             .endl() + '// vertex shader '+name
             .endl() + '// '
+            .endl() + '#define WEBGL1'
             .endl() + '#define texture texture2D'
             .endl() + '#define OUT varying'
             .endl() + '#define IN attribute'
@@ -242,10 +258,6 @@ CGL.Shader.prototype.compile = function() {
     });
 
     var addedAttributes=false;
-
-
-
-
 
     for (i = 0; i < this._moduleNames.length; i++) {
         var srcVert = '';
@@ -306,8 +318,6 @@ CGL.Shader.prototype.compile = function() {
                 srcVert+='\n//---- end mod ------\n';
                 srcFrag+='\n//---- end mod ------\n';
 
-
-
                 srcVert = srcVert.replace(/{{mod}}/g, this._modules[j].prefix);
                 srcFrag = srcFrag.replace(/{{mod}}/g, this._modules[j].prefix);
                 srcHeadVert = srcHeadVert.replace(/{{mod}}/g, this._modules[j].prefix);
@@ -346,7 +356,6 @@ CGL.Shader.prototype.compile = function() {
     this.finalShaderFrag = fs;
     this.finalShaderVert = vs;
 
-
     CGL.MESH.lastMesh = null;
     CGL.MESH.lastShader = null;
 
@@ -354,10 +363,8 @@ CGL.Shader.prototype.compile = function() {
     this.lastCompile = CABLES.now();
 };
 
-
-
-
-CGL.Shader.prototype.bind = function() {
+CGL.Shader.prototype.bind = function()
+{
     var i = 0;
     CGL.MESH.lastShader = this;
 
@@ -365,13 +372,13 @@ CGL.Shader.prototype.bind = function() {
 
     if (!this._projMatrixUniform) {
         this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CGL.SHADERVAR_VERTEX_POSITION);
-        this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "projMatrix");
+        this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_PROJMAT);
         this._mvMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "mvMatrix");
-        this._vMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "viewMatrix");
-        this._mMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "modelMatrix");
-        this._camPosUniform = this._cgl.gl.getUniformLocation(this._program, "camPos");
-        this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "normalMatrix");
-        this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "inverseViewMatrix");
+        this._vMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_VIEWMAT);
+        this._mMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_MODELMAT);
+        this._camPosUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_VIEWPOS);
+        this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_NORMALMAT);
+        this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_INVVIEWMAT);
         for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
     }
 
@@ -401,9 +408,8 @@ CGL.Shader.prototype.bind = function() {
 
             if (this._inverseViewMatrixUniform)
             {
-                var inverseViewMatrix = mat4.create();
-                mat4.invert(inverseViewMatrix, this._cgl.vMatrix);
-                this._cgl.gl.uniformMatrix4fv(this._inverseViewMatrixUniform, false, inverseViewMatrix);
+                mat4.invert(this._tempInverseViewMatrix, this._cgl.vMatrix);
+                this._cgl.gl.uniformMatrix4fv(this._inverseViewMatrixUniform, false, this._tempInverseViewMatrix);
                 CGL.profileMVPMatrixCount++;
             }
         }
@@ -412,15 +418,16 @@ CGL.Shader.prototype.bind = function() {
 
         if(this._camPosUniform)
         {
-            var m = mat4.create();
-            mat4.invert(m, this._cgl.vMatrix);
-            this._cgl.gl.uniform3f(this._camPosUniform, m[12], m[13], m[14]);
+            mat4.invert(this._tempCamPosMatrix, this._cgl.vMatrix);
+            this._cgl.gl.uniform3f(this._camPosUniform, this._tempCamPosMatrix[12], this._tempCamPosMatrix[13], this._tempCamPosMatrix[14]);
             CGL.profileMVPMatrixCount++;
         }
     }
     else
     {
-        var tempmv = mat4.create();
+        // mvmatrix deprecated....
+        var tempmv=mat4.create();
+
         mat4.mul(tempmv, this._cgl.vMatrix, this._cgl.mMatrix);
         this._cgl.gl.uniformMatrix4fv(this._mvMatrixUniform, false, tempmv);
         CGL.profileMVPMatrixCount++;
@@ -428,13 +435,11 @@ CGL.Shader.prototype.bind = function() {
 
     if (this._normalMatrixUniform)
     {
-        var normalMatrix = mat4.create();
+        mat4.mul(this._tempNormalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
+        mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
+        mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
-        mat4.mul(normalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
-        mat4.invert(normalMatrix, normalMatrix);
-        mat4.transpose(normalMatrix, normalMatrix);
-
-        this._cgl.gl.uniformMatrix4fv(this._normalMatrixUniform, false, normalMatrix);
+        this._cgl.gl.uniformMatrix4fv(this._normalMatrixUniform, false, this._tempNormalMatrix);
         CGL.profileMVPMatrixCount++;
     }
 
@@ -443,9 +448,6 @@ CGL.Shader.prototype.bind = function() {
         if(this._libs[i].onBind)this._libs[i].onBind.bind(this._libs[i])(this._cgl,this);
     }
 };
-
-
-
 
 CGL.Shader.prototype.define = function(name, value)
 {
@@ -565,16 +567,9 @@ CGL.Shader.prototype.addModule = function(mod, sibling) {
     return mod;
 };
 
-
-
-
 CGL.Shader.prototype.setModules = function(names) {
     this._moduleNames = names;
 };
-
-
-
-
 
 CGL.Shader.prototype.dispose=function()
 {
@@ -719,7 +714,7 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + 'OUT vec2 texCoord;'
         .endl() + 'OUT vec3 norm;'
         .endl() + 'UNI mat4 projMatrix;'
-        .endl() + 'UNI mat4 mvMatrix;'
+        .endl() + 'UNI mat4 viewMatrix;'
         .endl() + 'UNI mat4 modelMatrix;'
 
         .endl() + 'void main()'
@@ -729,7 +724,7 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + '   vec4 pos=vec4(vPosition,  1.0);'
         .endl() + '   mat4 mMatrix=modelMatrix;'
         .endl() + '   {{MODULE_VERTEX_POSITION}}'
-        .endl() + '   gl_Position = projMatrix * mvMatrix * pos;'
+        .endl() + '   gl_Position = projMatrix * (viewMatrix*modelMatrix) * pos;'
         .endl() + '}';
 };
 

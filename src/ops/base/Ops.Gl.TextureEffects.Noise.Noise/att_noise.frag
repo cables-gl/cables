@@ -5,7 +5,8 @@ UNI float time;
 
 {{BLENDCODE}}
 {{MODULES_HEAD}}
-{{LIB_RANDOM_OLD}}
+
+{{CGL.RANDOM_TEX}}
 
 void main()
 {

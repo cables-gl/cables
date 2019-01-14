@@ -1,8 +1,8 @@
 var render=op.inTrigger('render');
 var amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
 
 var image=op.addInPort(new CABLES.Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
 
 var imageAlpha=op.addInPort(new CABLES.Port(op,"imageAlpha",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
 var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
@@ -12,6 +12,9 @@ var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLE
 
 
 var trigger=op.outTrigger('trigger');
+
+op.toWorkPortsNeedToBeLinked(image);
+
 
 blendMode.set('normal');
 var cgl=op.patch.cgl;

@@ -58,8 +58,6 @@ function tesselate(vertices, x1,y1,z1, x2,y2,z2, x3,y3,z3)
     vertices.push( y1 );
     vertices.push( z1 );
 
-
-
     vertices.push( (x1+x2)/2 );
     vertices.push( (y1+y2)/2 );
     vertices.push( (z1+z2)/2 );
@@ -117,6 +115,8 @@ function tesselateGeom(oldGeom)
     var geom=new CGL.Geometry();
     var vertices=[];
     var norms=[];
+    var biTangents=[];
+    var tangents=[];
     var tc=[];
 
     var i,j,k;
@@ -127,14 +127,30 @@ function tesselateGeom(oldGeom)
         {
 
             for(j=0;j<4;j++)
-                for(k=0;k<3;k++)
-                {
-                    norms.push(
-                        oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+0],
-                        oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+1],
-                        oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+2]
+            for(k=0;k<3;k++)
+            {
+                norms.push(
+                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+0],
+                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+1],
+                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+2]
+                    );
+
+                if(oldGeom.tangents)
+                    tangents.push(
+                        oldGeom.tangents[oldGeom.verticesIndices[i+k]*3+0],
+                        oldGeom.tangents[oldGeom.verticesIndices[i+k]*3+1],
+                        oldGeom.tangents[oldGeom.verticesIndices[i+k]*3+2]
                         );
-                }
+
+                if(oldGeom.biTangents)
+                    biTangents.push(
+                        oldGeom.biTangents[oldGeom.verticesIndices[i+k]*3+0],
+                        oldGeom.biTangents[oldGeom.verticesIndices[i+k]*3+1],
+                        oldGeom.biTangents[oldGeom.verticesIndices[i+k]*3+2]
+                        );
+
+
+            }
 
             tesselate(vertices,
                 oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+0],
@@ -170,11 +186,18 @@ function tesselateGeom(oldGeom)
             for(i=0;i<oldGeom.vertices.length;i+=9)
             {
                 for(j=0;j<4;j++)
-                for(k=0;k<9;k++)
                 {
-                    norms.push(
-                        oldGeom.vertexNormals[i+k]
-                    );
+                    for(k=0;k<9;k++)
+                        norms.push(oldGeom.vertexNormals[i+k]);
+
+                    if(oldGeom.tangents)
+                        for(k=0;k<9;k++)
+                            tangents.push(oldGeom.tangents[i+k]);
+
+                    if(oldGeom.biTangents)
+                        for(k=0;k<9;k++)
+                            biTangents.push(oldGeom.biTangents[i+k]);
+
                 }
 
                 tesselate(vertices,
@@ -211,6 +234,8 @@ function tesselateGeom(oldGeom)
     geom.vertexNormals=norms;
     geom.setVertices(vertices);
     geom.setTexCoords(tc);
+    geom.tangents=tangents;
+    geom.biTangents=biTangents;
     return geom;
 
 }
@@ -227,7 +252,7 @@ function update()
     }
 
     outVertices.set(geom.vertices.length/3);
-        console.log('tesselate time',CABLES.now()-startTime);
+    console.log('tesselate time',CABLES.now()-startTime);
 
     outGeom.set(null);
     outGeom.set(geom);

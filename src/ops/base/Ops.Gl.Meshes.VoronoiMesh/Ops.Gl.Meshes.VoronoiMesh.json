@@ -1,5 +1,4 @@
 {
-    "updated": 1519817247189,
     "authorName": "pandur",
     "id": "5e255dde-7425-442a-a22a-b4d108803204",
     "created": 1519817247190,
@@ -15,15 +14,22 @@
             },
             {
                 "type": "0",
-                "name": "Extrude Cell Center"
+                "name": "Extrude Cell Center",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Ignore Border Cells"
+                "name": "Ignore Border Cells",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Calc Normals"
+                "name": "Calc Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Update"
             }
         ],
         "portsOut": [

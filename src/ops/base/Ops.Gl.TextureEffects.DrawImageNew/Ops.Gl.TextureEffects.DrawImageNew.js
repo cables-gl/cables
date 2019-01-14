@@ -38,7 +38,7 @@ function updateAlphaPorts()
     }
 }
 
-
+op.toWorkPortsNeedToBeLinked(image);
 
 
 shader.setSource(attachments.drawimage_vert,srcFrag);

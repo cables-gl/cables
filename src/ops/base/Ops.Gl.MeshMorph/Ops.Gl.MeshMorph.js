@@ -37,7 +37,7 @@ function updateMeshes()
             if(i===0)
             {
                 mesh=new CGL.Mesh(cgl,geom);
-                
+
                 mesh.addAttribute(prfx+'_attrMorphTargetA',geom._vertices,3);
                 mesh.addAttribute(prfx+'_attrMorphTargetB',geom._vertices,3);
                 op.log("MESH BUILD");
@@ -49,9 +49,10 @@ function updateMeshes()
 
 function updateGeom()
 {
+    var temp = 0;
     op.log("update geom");
     if(oldGeom==nextGeom.get())return;
-    
+
     anim.clear();
     anim.setValue(op.patch.freeTimer.get(), 0);
     anim.setValue(op.patch.freeTimer.get()+duration.get(), 1,
@@ -64,10 +65,13 @@ function updateGeom()
     finished.set(false);
 
     var geom1=inGeoms[oldGeom].get();
-    var geom2=inGeoms[nextGeom.get()].get();
-    
+    temp = nextGeom.get();
+    if(temp >=7 ) temp=7;
+    var geom2=inGeoms[temp].get();
+    //var geom2=inGeoms[nextGeom.get()].get();
+
     // op.log("from toooooooo ",oldGeom,nextGeom.get());
-    
+
     if(mesh && geom1 && geom2 && geom1._vertices && geom2._vertices)
     {
         mesh.updateAttribute(prfx+'_attrMorphTargetB',geom1._vertices);

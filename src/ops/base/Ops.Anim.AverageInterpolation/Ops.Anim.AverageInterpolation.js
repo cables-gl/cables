@@ -10,6 +10,7 @@ var val=0;
 var goal=0;
 var oldVal=0;
 var lastTrigger=0;
+op.toWorkPortsNeedToBeLinked(exec);
 
 inVal.onChange=function()
 {
@@ -25,7 +26,7 @@ inDivisor.onChange=function()
 exec.onTriggered=function()
 {
     var tm=1;
-    if(CABLES.now()-lastTrigger>500 || lastTrigger==0)val=inVal.get();
+    if(CABLES.now()-lastTrigger>500 || lastTrigger===0)val=inVal.get();
     else tm=(CABLES.now()-lastTrigger)/16;
     lastTrigger=CABLES.now();
 

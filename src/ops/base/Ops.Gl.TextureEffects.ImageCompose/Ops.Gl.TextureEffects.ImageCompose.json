@@ -8,26 +8,31 @@
             {
                 "type": "0",
                 "name": "use viewport size",
+                "group": "Texture Size",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "width",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "height",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "filter",
+                "group": "Texture Settings",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "wrap",
+                "group": "Texture Settings",
                 "subType": "string"
             },
             {
@@ -38,6 +43,9 @@
             {
                 "type": "0",
                 "name": "HDR",
+                "subType": "boolean",
+                "name": "HDR",
+                "group": "Texture Settings",
                 "subType": "boolean"
             }
         ],

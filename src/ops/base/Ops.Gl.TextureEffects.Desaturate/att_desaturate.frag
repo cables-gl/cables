@@ -20,6 +20,9 @@ void main()
     float am=amount;
     #ifdef MASK
         am*=1.0-texture(mask,texCoord).r;
+        #ifdef INVERTMASK
+        am=1.0-am;
+        #endif
     #endif
 
     col.rgb=desaturate(col.rgb,am);

@@ -1,1 +1,40 @@
-{}
+{
+    "authorName": "andro",
+    "id": "12cfa989-d575-4ee2-9deb-5392097c5a27",
+    "created": 1546870355606,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.ScaleTexture"
+    }
+}

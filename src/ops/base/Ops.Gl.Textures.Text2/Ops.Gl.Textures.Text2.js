@@ -14,11 +14,9 @@ const
     outRatio=op.outValue("Ratio"),
     textureOut=op.outTexture("texture");
 
-
 op.setPortGroup('Size',[font,maximize,inFontSize,lineDistance]);
-op.setPortGroup('Texture',[texWidth,texHeight]);
+op.setPortGroup('Texture Size',[texWidth,texHeight]);
 op.setPortGroup('Alignment',[valign,align]);
-
 
 textureOut.ignoreValueSerialize=true;
 
@@ -48,7 +46,6 @@ texWidth.onChange=
 
 refresh();
 reSize();
-
 
 function reSize()
 {

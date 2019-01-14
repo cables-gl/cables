@@ -1,1 +1,40 @@
-{}
+{
+    "authorName": "andro",
+    "id": "f77176eb-6c43-44b7-8229-b6a7e78fe934",
+    "created": 1546883582091,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Multiply texture",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gamma correction",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.GammaCorrection"
+    }
+}

@@ -1,9 +1,12 @@
-
-var exe=op.inTriggerButton("Exec");
-var reset=op.inTriggerButton("Reset");
-var next=op.outTrigger("Next");
+const
+    exe=op.inTriggerButton("Exec"),
+    reset=op.inTriggerButton("Reset"),
+    next=op.outTrigger("Next");
 var outTriggered=op.outValue("Was Triggered");
+
 var triggered=false;
+
+op.toWorkPortsNeedToBeLinked(exe,next);
 
 reset.onTriggered=function()
 {

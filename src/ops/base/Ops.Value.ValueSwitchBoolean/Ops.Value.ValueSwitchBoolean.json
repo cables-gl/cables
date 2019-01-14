@@ -1,5 +1,4 @@
 {
-    "updated": 1521643032903,
     "authorName": "pandur",
     "id": "637c5fa8-840d-4535-96ab-3d27b458a8ba",
     "created": 1519910342752,
@@ -13,11 +12,13 @@
             {
                 "type": "0",
                 "name": "Value true",
+                "group": "Output Values",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Value false",
+                "group": "Output Values",
                 "subType": "number"
             }
         ],

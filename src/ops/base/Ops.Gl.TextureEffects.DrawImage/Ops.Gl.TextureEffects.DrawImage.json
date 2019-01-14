@@ -9,29 +9,31 @@
             {
                 "type": "0",
                 "name": "amount",
+                "group": "Blending",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "blendMode",
+                "group": "Blending",
+                "subType": "string"
             },
             {
                 "type": "2",
                 "name": "image"
             },
             {
-                "type": "0",
-                "name": "blendmode",
-                "subType": "string"
-            },
-            {
                 "type": "2",
-                "name": "imagealpha"
+                "name": "imageAlpha"
             },
             {
                 "type": "0",
-                "name": "alphasrc",
+                "name": "alphaSrc",
                 "subType": "string"
             },
             {
                 "type": "0",
-                "name": "removealphasrc",
+                "name": "removeAlphaSrc",
                 "subType": "boolean"
             },
             {
@@ -78,7 +80,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.DrawImage"
     },
-    "updated": 1540977873919,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8248b866-9492-48c8-897d-3097c6fe6fe8",

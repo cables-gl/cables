@@ -9,6 +9,10 @@
                 "name": "render"
             },
             {
+                "type": "2",
+                "name": "displaceTex"
+            },
+            {
                 "type": "0",
                 "name": "Blend Mode",
                 "group": "Blending",
@@ -23,21 +27,30 @@
             {
                 "type": "0",
                 "name": "amount X",
+                "group": "Axis Displacement Strength",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "amount Y",
+                "group": "Axis Displacement Strength",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Wrap",
+                "group": "Modes",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Input",
+                "group": "Modes",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Zero Displace",
                 "subType": "string"
             },
             {
