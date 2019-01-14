@@ -271,7 +271,7 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
                     CABLES.UI.MODAL.showError('unknown op', 'unknown op: ' + objName);
                 }
                 console.error('unknown op: ' + objName);
-                throw('unknown op: ' + objName);
+                throw(new Error('unknown op: ' + objName));
             } else {
                 if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName,id);
                 else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName,id);

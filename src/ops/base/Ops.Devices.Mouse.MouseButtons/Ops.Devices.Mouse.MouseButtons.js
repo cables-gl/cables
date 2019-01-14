@@ -118,6 +118,8 @@ function addListeners()
     listenerElement.addEventListener('mouseup', onMouseUp);
     listenerElement.addEventListener('contextmenu', onClickRight);
     listenerElement.addEventListener('mouseleave', onMouseUp);
+
+    console.log("Added!");
 }
 
 active.onChange=function()

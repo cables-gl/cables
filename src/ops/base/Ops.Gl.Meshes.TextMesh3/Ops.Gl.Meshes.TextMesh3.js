@@ -222,8 +222,13 @@ function generateMesh()
         {
             var chStr=txt.substring(i,i+1);
             var char=font.chars[String(chStr)];
-            if(char) width+=(char.texCoordWidth/char.texCoordHeight);
+            if(char)
+            {
+                width+=(char.texCoordWidth/char.texCoordHeight);
+                width+=letterSpace.get();
+            }
         }
+        width-=letterSpace.get();
 
         height=0;
 

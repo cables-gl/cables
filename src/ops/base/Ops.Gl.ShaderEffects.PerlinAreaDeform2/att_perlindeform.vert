@@ -8,7 +8,7 @@ UNI float MOD_scrollx;
 UNI float MOD_scrolly;
 UNI float MOD_scrollz;
 
-    
+
 
 float Interpolation_C2( float x ) { return x * x * x * (x * (x * 6.0 - 15.0) + 10.0); }   //  6x^5-15x^4+10x^3	( Quintic Curve.  As used by Perlin in Improved Noise.  http://mrl.nyu.edu/~perlin/paper445.pdf )
 vec2 Interpolation_C2( vec2 x ) { return x * x * x * (x * (x * 6.0 - 15.0) + 10.0); }
@@ -152,7 +152,7 @@ vec3 MOD_deform(vec3 pos)
     // vec3 MOD_pos=vec3();
     vec3 modelPos=pos;
     vec3 forcePos=vec3(MOD_x,MOD_y,MOD_z);
-    
+
 
     vec3 vecToOrigin=modelPos-forcePos;
     float dist=abs(length(vecToOrigin));
@@ -160,16 +160,16 @@ vec3 MOD_deform(vec3 pos)
 
     if(MOD_smooth) distAlpha=smoothstep(0.0,MOD_size,distAlpha);
 
-    
+
     vec3 ppos=vec3(pos*MOD_scale);
     ppos.x+=MOD_scrollx;
     ppos.y+=MOD_scrolly;
     ppos.z+=MOD_scrollz;
-    
+
     float p=Perlin3D(ppos)*MOD_strength*distAlpha;
-    
+
     vec3 pnorm=normalize(pos.xyz);
-    
+
     #ifdef MOD_METH_ADD_XYZ
         pos.x+=p*pnorm.x;
         pos.y+=p*pnorm.y;
@@ -186,7 +186,7 @@ vec3 MOD_deform(vec3 pos)
 
 vec3 MOD_calcNormal(vec3 pos)
 {
-    float theta = .001; 
+    float theta = .001;
     vec3 vecTangent = normalize(cross(pos, vec3(1.0, 0.0, 0.0)) + cross(pos, vec3(0.0, 1.0, 0.0)));
     vec3 vecBitangent = normalize(cross(vecTangent, pos));
     vec3 ptTangentSample = MOD_deform(normalize(pos + theta * normalize(vecTangent)));

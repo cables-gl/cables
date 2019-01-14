@@ -1,8 +1,9 @@
-const exe=op.inTrigger("exe");
-const inValue=op.inValue("Value");
-const duration=op.addInPort(new CABLES.Port(op,"duration"));
-const result=op.addOutPort(new CABLES.Port(op,"result"));
-const finished=op.outTrigger("Finished");
+const
+    exe=op.inTrigger("exe"),
+    inValue=op.inValue("Value"),
+    duration=op.inValueFloat("duration"),
+    result=op.outValue("result"),
+    finished=op.outTrigger("Finished");
 
 const anim=new CABLES.Anim();
 anim.createPort(op,"easing",init);

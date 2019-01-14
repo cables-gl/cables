@@ -1,0 +1,50 @@
+{
+    "authorName": "pandur",
+    "id": "fa671f66-6957-41e6-ac35-d615b7c29285",
+    "created": 1547231076202,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array in xyz"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array 1 out"
+            },
+            {
+                "type": "3",
+                "name": "Array 2 out"
+            },
+            {
+                "type": "3",
+                "name": "Array 3 out"
+            }
+        ],
+        "name": "Ops.Array.ArrayUnpack3"
+    },
+    "summary": "splits a xyz array into 3 individual arrays",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in xyz",
+                "text": "The array to unpack"
+            },
+            {
+                "name": "Array 1 out",
+                "text": "array x out"
+            },
+            {
+                "name": "Array 2 out",
+                "text": "array y out"
+            },
+            {
+                "name": "Array 3 out",
+                "text": "array z out"
+            }
+        ]
+    }
+}

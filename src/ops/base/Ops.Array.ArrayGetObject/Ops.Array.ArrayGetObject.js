@@ -1,6 +1,6 @@
 
 var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
-var index=op.addInPort(new CABLES.Port(op, "index",CABLES.OP_PORT_TYPE_VALUE,{type:'int'}));
+var index=op.inValueInt("index");
 var value=op.addOutPort(new CABLES.Port(op, "value",CABLES.OP_PORT_TYPE_OBJECT));
 array.ignoreValueSerialize=true;
 value.ignoreValueSerialize=true;

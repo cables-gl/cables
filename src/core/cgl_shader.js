@@ -78,7 +78,6 @@ CGL.Shader = function(_cgl, _name) {
     this._tempCamPosMatrix = mat4.create();
     this._tempInverseViewMatrix = mat4.create();
 
-
     this.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 };
 

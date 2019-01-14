@@ -1,19 +1,16 @@
-const render=op.inTrigger('render');
-const trigger=op.outTrigger('trigger');
-const inInvert=op.inValueBool("Invert");
-const inBlackWhite=op.inValueBool("Black White");
+const
+    render=op.inTrigger('render'),
+    trigger=op.outTrigger('trigger'),
+    inInvert=op.inValueBool("Invert"),
+    inBlackWhite=op.inValueBool("Black White"),
+    threshold=op.inValueSlider("amthresholdount",0.5);
 
 const cgl=op.patch.cgl;
-
-var threshold=op.addInPort(new CABLES.Port(op,"amthresholdount",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-threshold.set(0.5);
-
-var shader=new CGL.Shader(cgl);
+const shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.lumakey_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-
-var unThreshold=new CGL.Uniform(shader,'f','threshhold',threshold);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const unThreshold=new CGL.Uniform(shader,'f','threshhold',threshold);
 
 inBlackWhite.onChange=function()
 {

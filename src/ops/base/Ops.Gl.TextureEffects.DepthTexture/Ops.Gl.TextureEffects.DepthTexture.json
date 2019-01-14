@@ -6,27 +6,31 @@
                 "name": "render"
             },
             {
-                "type": "0",
-                "name": "Blend Mode",
-                "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "Amount",
-                "subType": "number"
-            },
-            {
                 "type": "2",
                 "name": "image"
             },
             {
                 "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "farplane",
+                "group": "Frustum",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "nearplane",
+                "group": "Frustum",
                 "subType": "number"
             },
             {
@@ -44,7 +48,6 @@
         "name": "Ops.Gl.TextureEffects.DepthTexture"
     },
     "summary": "draw the content of a depth texture",
-    "updated": 1542099767284,
     "authorName": "pandur",
     "id": "3e58b781-e6cd-466f-afc1-8477c32025e0",
     "created": 1516277778183,

@@ -1,5 +1,4 @@
 {
-    "updated": 1519394311065,
     "authorName": "pandur",
     "id": "1bbd3b97-d8cd-4ff6-a6a4-f5121c28d29f",
     "created": 1519394197766,
@@ -16,7 +15,8 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "FPS"
+                "name": "FPS",
+                "subType": "number"
             }
         ],
         "name": "Ops.Cables.FPS"

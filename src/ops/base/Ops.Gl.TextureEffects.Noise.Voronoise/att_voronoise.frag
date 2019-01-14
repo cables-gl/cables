@@ -16,7 +16,8 @@ UNI sampler2D tex;
 {{BLENDCODE}}
 {{CGL.RANDOM_OLD}}
 
-float rand(float n){return fract(sin(n) * 43758.5453123);}
+//float rand(float n){return fract(sin(n) * 43758.5453123);}
+float rand(float n){return fract(sin(n) * 43.5453123);}
 vec2 random2( vec2 p )
 {
     return vec2(rand(p.x),rand(p.x+p.y));

@@ -95,5 +95,15 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.DrawImageNew"
+    },
+    "summary": "",
+    "youtubeid": "Ww04Cw9wArM",
+    "docs": {
+        "ports": [
+            {
+                "name": "removeAlphaSrc",
+                "text": "If this is enabled then the alpha value is 1 for everything"
+            }
+        ]
     }
 }

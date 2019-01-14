@@ -7,6 +7,18 @@ UNI float amount;
 
 {{BLENDCODE}}
 
+vec3 getOffset(vec3 offset)
+{
+    #ifdef ZERO_BLACK
+        return offset;
+    #endif
+
+    #ifdef ZERO_GREY
+        return offset*2.0-1.0;
+    #endif
+}
+
+
 float getOffset(float offset)
 {
     #ifdef ZERO_BLACK
@@ -17,6 +29,7 @@ float getOffset(float offset)
         return offset*2.0-1.0;
     #endif
 }
+
 
 void main()
 {

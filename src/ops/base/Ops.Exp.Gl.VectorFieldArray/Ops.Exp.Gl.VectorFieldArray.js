@@ -15,6 +15,14 @@ var doCenter=op.inValueBool("Center",true);
 
 var transRotate=op.inValueBool("Rotate",true);
 var transScale=op.inValueBool("Scale",false);
+var transTransZ=op.inValueBool("Translate Z",false);
+
+transTransZ.onChange=updateTransforms;
+transRotate.onChange=updateTransforms;
+transScale.onChange=updateTransforms;
+
+
+
 
 function updateTransforms()
 {
@@ -24,10 +32,11 @@ function updateTransforms()
 
     if(transScale.get())shader.define("TRANS_SCALE");
         else shader.removeDefine("TRANS_SCALE");
-}
 
-transRotate.onChange=updateTransforms;
-transScale.onChange=updateTransforms;
+    if(transTransZ.get())shader.define("TRANS_TRANS_Z");
+        else shader.removeDefine("TRANS_TRANS_Z");
+
+}
 
 
 var transformations=[];
@@ -94,6 +103,10 @@ var srcBodyVert=''
 
     .endl()+'       #ifdef TRANS_SCALE'
     .endl()+'           pos.rgb*=instCol.r;'
+    .endl()+'       #endif'
+
+    .endl()+'       #ifdef TRANS_TRANS_Z'
+    .endl()+'           pos.z+=instCol.r;'
     .endl()+'       #endif'
 
 // .endl()+'       pos*=instCol.r;'

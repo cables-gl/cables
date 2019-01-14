@@ -1,0 +1,27 @@
+{
+    "id": "f5c858a2-2654-4108-86fe-319efa70ecec",
+    "authorName": "pandur",
+    "created": 1547412698647,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.FlipSign"
+    },
+    "summary": "positive numbers become positive and vice versa ",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

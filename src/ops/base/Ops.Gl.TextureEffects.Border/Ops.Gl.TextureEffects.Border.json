@@ -9,11 +9,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -28,17 +30,17 @@
             },
             {
                 "type": "0",
-                "name": "diffuse r",
+                "name": "r",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse g",
+                "name": "g",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "diffuse b",
+                "name": "b",
                 "subType": "number"
             }
         ],
@@ -50,7 +52,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.Border"
     },
-    "updated": 1541533746205,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "e6aae62c-1620-465d-94de-049148b530e6",

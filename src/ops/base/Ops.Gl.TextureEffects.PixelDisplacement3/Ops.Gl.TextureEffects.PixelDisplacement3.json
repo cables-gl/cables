@@ -52,10 +52,6 @@
                 "type": "0",
                 "name": "Zero Displace",
                 "subType": "string"
-            },
-            {
-                "type": "2",
-                "name": "displaceTex"
             }
         ],
         "portsOut": [
@@ -67,7 +63,7 @@
         "name": "Ops.Gl.TextureEffects.PixelDisplacement3"
     },
     "summary": "Changes color lookup for every pixel using a displacement map",
-    "youtubeid": "",
+    "youtubeid": "cc5Vlmvlq6A",
     "docs": {
         "ports": []
     }

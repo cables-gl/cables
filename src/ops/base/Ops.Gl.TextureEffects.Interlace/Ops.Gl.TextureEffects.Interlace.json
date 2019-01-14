@@ -7,27 +7,33 @@
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Lumi Scale"
+                "name": "Lumi Scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Line Size"
+                "name": "Line Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Displacement"
+                "name": "Displacement",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Add"
+                "name": "Add",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "scroll"
+                "name": "scroll",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -39,7 +45,6 @@
         "name": "Ops.Gl.TextureEffects.Interlace"
     },
     "summary": "Tv scanlines effect",
-    "updated": 1510252331466,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "3cd69d5b-6c05-4522-9551-52458f99421a",

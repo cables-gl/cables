@@ -81,7 +81,7 @@ void main()
     float amountReflect=mulReflection;
 
     #ifdef TEX_ROUGHNESS
-        amountRough=1.0-texture(maskRoughness,texCoord).r;
+        amountRough*=texture2D(maskRoughness,texCoord).r ;
     #endif
 
     #ifdef TEX_REFLECTION

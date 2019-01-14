@@ -9,8 +9,8 @@ var index=0;
 var lastIndex=-1;
 var tempTexture=CGL.Texture.getEmptyTexture(cgl);
 
-exec.onTriggered=updateTexture;
-num.onChange=updateTexture;
+num.onChange=exec.onTriggered=function(){updateTexture();};
+
 
 defaultTransparent.onChange=function()
 {

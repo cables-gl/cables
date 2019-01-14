@@ -12,7 +12,6 @@ UNI sampler2D texMask;
 
 void main()
 {
-
    vec4 col=texture(tex,texCoord);
 
    vec2 tc=texCoord;;
@@ -31,16 +30,18 @@ void main()
     #endif
 
     #ifdef SMOOTH
-        float samples=round(pix/onePixel/4.0+1.0);
+    #ifdef WEBGL2
+        float numSamples=round(pix/onePixel/4.0+1.0);
         col.r=0.0;
         col.b=0.0;
-        // float b=0.0;
-        for(float off=0.0;off<samples;off++)
+
+        for(float off=0.0;off<numSamples;off++)
         {
-            float diff=(pix/samples)*off;
-            col.r+=texture(tex,vec2(tc.x+diff,tc.y)).r/samples;
-            col.b+=texture(tex,vec2(tc.x-diff,tc.y)).b/samples;
+            float diff=(pix/numSamples)*off;
+            col.r+=texture(tex,vec2(tc.x+diff,tc.y)).r/numSamples;
+            col.b+=texture(tex,vec2(tc.x-diff,tc.y)).b/numSamples;
         }
+    #endif
     #endif
 
     #ifndef SMOOTH
@@ -49,5 +50,4 @@ void main()
     #endif
 
    outColor = col;
-
 }

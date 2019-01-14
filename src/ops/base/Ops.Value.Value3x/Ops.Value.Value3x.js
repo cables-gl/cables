@@ -1,11 +1,17 @@
-const exe=op.inTrigger("exe");
-var x=op.addInPort(new CABLES.Port(op,"value x",CABLES.OP_PORT_TYPE_VALUE));
-var y=op.addInPort(new CABLES.Port(op,"value y",CABLES.OP_PORT_TYPE_VALUE));
-var z=op.addInPort(new CABLES.Port(op,"value z",CABLES.OP_PORT_TYPE_VALUE));
+const
+    exe=op.inTrigger("exe"),
+    x=op.inValueFloat("value x"),
+    y=op.inValueFloat("value y"),
+    z=op.inValueFloat("value z"),
+    resultX=op.outValue("result x"),
+    resultY=op.outValue("result y"),
+    resultZ=op.outValue("result z");
 
-var resultX=op.addOutPort(new CABLES.Port(op,"result x"));
-var resultY=op.addOutPort(new CABLES.Port(op,"result y"));
-var resultZ=op.addOutPort(new CABLES.Port(op,"result z"));
+exe.onTriggered=
+    x.onChange=
+    y.onChange=
+    z.onChange=exec;
+
 
 function frame(time)
 {
@@ -19,8 +25,3 @@ function exec()
     if(resultZ.get()!=z.get()) resultZ.set(z.get());
 }
 
-exe.onTriggered=exec;
-
-x.onChange=exec;
-y.onChange=exec;
-z.onChange=exec;

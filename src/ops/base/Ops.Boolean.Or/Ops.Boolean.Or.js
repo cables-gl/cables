@@ -1,26 +1,25 @@
+const bool0=op.inValueBool("bool 1");
+const bool1=op.inValueBool("bool 2");
+const bool2=op.inValueBool("bool 3");
+const bool3=op.inValueBool("bool 4");
+const bool4=op.inValueBool("bool 5");
+const bool5=op.inValueBool("bool 6");
+const bool6=op.inValueBool("bool 7");
+const bool7=op.inValueBool("bool 8");
 
-var bool0=op.addInPort(new CABLES.Port(op,"bool 1",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var bool1=op.addInPort(new CABLES.Port(op,"bool 2",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var bool2=op.addInPort(new CABLES.Port(op,"bool 3",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var bool3=op.addInPort(new CABLES.Port(op,"bool 4",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var bool4=op.addInPort(new CABLES.Port(op,"bool 5",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var bool5=op.addInPort(new CABLES.Port(op,"bool 6",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var bool6=op.addInPort(new CABLES.Port(op,"bool 7",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var bool7=op.addInPort(new CABLES.Port(op,"bool 8",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+const result=op.outValueBool("result");
 
-var result=op.addOutPort(new CABLES.Port(op,"result",CABLES.OP_PORT_TYPE_VALUE));
+bool0.onChange=
+    bool1.onChange=
+    bool2.onChange=
+    bool3.onChange=
+    bool4.onChange=
+    bool5.onChange=
+    bool6.onChange=
+    bool7.onChange=exec;
 
 function exec()
 {
     result.set( bool0.get() || bool1.get()  || bool2.get() || bool3.get() || bool4.get() || bool5.get() || bool6.get() || bool7.get() );
 }
-
-bool0.onValueChange(exec);
-bool1.onValueChange(exec);
-bool2.onValueChange(exec);
-bool3.onValueChange(exec);
-bool4.onValueChange(exec);
-bool5.onValueChange(exec);
-bool6.onValueChange(exec);
-bool7.onValueChange(exec);
 

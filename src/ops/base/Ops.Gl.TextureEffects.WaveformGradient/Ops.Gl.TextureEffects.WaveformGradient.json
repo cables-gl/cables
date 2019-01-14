@@ -51,5 +51,10 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.WaveformGradient"
+    },
+    "summary": "Generate different texture waveforms. Sine, sawtooth and triangle.",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
     }
 }

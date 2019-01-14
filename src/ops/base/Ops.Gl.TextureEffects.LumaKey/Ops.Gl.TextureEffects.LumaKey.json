@@ -8,12 +8,12 @@
             },
             {
                 "type": "0",
-                "name": "invert",
+                "name": "Invert",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "black white",
+                "name": "Black White",
                 "subType": "boolean"
             },
             {
@@ -33,7 +33,6 @@
     "docs": {
         "ports": []
     },
-    "updated": 1540923386021,
     "authorName": "pandur",
     "id": "2175ae00-989c-4045-a52e-742d5c30bf4e",
     "created": 1540923285172

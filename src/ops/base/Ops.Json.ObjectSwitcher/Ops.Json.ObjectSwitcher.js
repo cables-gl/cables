@@ -16,7 +16,7 @@ for(var i = 0; i < NUM_PORTS; i++)
 
 function indexChanged()
 {
-    var index = inIndex.get();
+    var index = Math.max(0,Math.floor(inIndex.get()));
     if(index < 0) index = 0;
         else if(index > NUM_PORTS-1) index = NUM_PORTS-1;
 

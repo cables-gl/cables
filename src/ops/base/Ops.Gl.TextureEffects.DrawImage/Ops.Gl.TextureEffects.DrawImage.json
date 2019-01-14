@@ -99,18 +99,6 @@
                 "text": "The image to be drawn"
             },
             {
-                "name": "blendMode",
-                "text": "How the image will be drawn/blended onto the state of image compose "
-            },
-            {
-                "name": "imageAlpha",
-                "text": "Use this image as an alpha mask"
-            },
-            {
-                "name": "removeAlphaSrc",
-                "text": "Completly ignore and remove the Alpha channel"
-            },
-            {
                 "name": "invert alpha channel",
                 "text": "invert the alpha channel"
             },
@@ -131,5 +119,6 @@
                 "text": "Trigger the rendering of the next image effect."
             }
         ]
-    }
+    },
+    "youtubeid": "Ww04Cw9wArM"
 }

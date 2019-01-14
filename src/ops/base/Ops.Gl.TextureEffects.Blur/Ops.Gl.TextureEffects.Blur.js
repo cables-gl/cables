@@ -1,10 +1,11 @@
 const render=op.inTrigger('render');
 const trigger=op.outTrigger('trigger');
+const amount=op.inValueFloat("amount");
+const direction=op.inValueSelect("direction",['both','vertical','horizontal'],'both');
 const fast=op.inValueBool("Fast",true);
 
 const cgl=op.patch.cgl;
 
-const amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE));
 amount.set(10);
 
 var shader=new CGL.Shader(cgl);
@@ -32,9 +33,9 @@ amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
 var textureAlpha=new CGL.Uniform(shader,'t','imageMask',1);
 
 
-var direction=op.addInPort(new CABLES.Port(op,"direction",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['both','vertical','horizontal']}));
+
 var dir=0;
-direction.set('both');
+
 direction.onValueChange(function()
 {
     if(direction.get()=='both')dir=0;

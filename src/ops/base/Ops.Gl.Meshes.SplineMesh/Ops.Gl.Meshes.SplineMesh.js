@@ -36,8 +36,6 @@ render.onTriggered=function()
 
     if(mesh && draw)
     {
-
-
         mesh._bufVertexAttrib.startItem=Math.floor(
             inStart.get()*(numItems/3))*3;
         mesh._bufVertexAttrib.numItems=
@@ -288,7 +286,14 @@ function doRebuild()
 {
     draw=true;
     var points=inPoints.get()||[];
-    if(!points.length)return;
+
+
+    if(!points.length)
+    {
+        mesh=null;
+        geomOut.set(null);
+        return;
+    }
 
     linesToGeom(points);
 
