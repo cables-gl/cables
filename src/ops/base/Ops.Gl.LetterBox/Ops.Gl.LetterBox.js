@@ -1,6 +1,9 @@
 const render=op.inTrigger('render');
 const trigger=op.outTrigger('trigger');
 
+const outWidth=op.outValue("Width");
+const outHeight=op.outValue("Height");
+
 
 var ratio=op.addInPort(new CABLES.Port(op,"ratio",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1,1.25,1.3333333333,1.777777777778,1.88,2.33333333333333,2.4151,3,4]} ));
 
@@ -30,6 +33,11 @@ function resize()
     if(_h<cgl.canvasHeight) _y=(cgl.canvasHeight-_h)/2;
 
 
+    _w=Math.ceil(_w);
+    _h=Math.ceil(_h);
+    _x=Math.ceil(_x);
+    _y=Math.ceil(_y);
+
     if(_w!=w || _h!=h || _x!=x ||_y!=y)
     {
         w=_w;
@@ -40,10 +48,11 @@ function resize()
         cgl.setViewPort(x,y,w,h);
 
         for(var i=0;i<op.patch.ops.length;i++)
-        {
             if(op.patch.ops[i].onResize)op.patch.ops[i].onResize();
-        }
     }
+
+    outWidth.set(w);
+    outHeight.set(h);
 }
 
 op.onDelete=function()

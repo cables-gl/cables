@@ -94,6 +94,8 @@ function updateResolution()
         tex.setSize(w,h);
         outRatio.set(w/h);
         effect.setSourceTexture(tex);
+        texOut.set(null);
+        texOut.set(tex);
     }
 
     if(texOut.get())
@@ -119,13 +121,13 @@ function updateSizePorts()
 {
     if(useVPSize.get())
     {
-        width.setUiAttribs({hidePort:true,greyout:true});
-        height.setUiAttribs({hidePort:true,greyout:true});
+        width.setUiAttribs({greyout:true});
+        height.setUiAttribs({greyout:true});
     }
     else
     {
-        width.setUiAttribs({hidePort:false,greyout:false});
-        height.setUiAttribs({hidePort:false,greyout:false});
+        width.setUiAttribs({greyout:false});
+        height.setUiAttribs({greyout:false});
     }
 }
 

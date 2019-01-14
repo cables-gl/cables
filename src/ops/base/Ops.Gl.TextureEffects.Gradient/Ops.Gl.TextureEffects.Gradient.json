@@ -39,19 +39,19 @@
             },
             {
                 "type": "0",
-                "name": "r1",
+                "name": "r",
                 "group": "Color A",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g1",
+                "name": "g",
                 "group": "Color A",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b1",
+                "name": "b",
                 "group": "Color A",
                 "subType": "number"
             },
@@ -90,6 +90,10 @@
                 "name": "b3",
                 "group": "Color C",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Randomize"
             }
         ],
         "portsOut": [
@@ -104,7 +108,6 @@
     "docs": {
         "ports": []
     },
-    "updated": 1543911774549,
     "authorName": "pandur",
     "id": "5ada9bd8-227a-4a1f-87ad-0f879c7aa84d",
     "created": 1520431091087

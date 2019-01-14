@@ -126,7 +126,7 @@ function rebuild()
         ]));
 
     geom.verticesIndices = new Float32Array([
-        0, 1, 2,
+        2, 1, 0,
         3, 1, 2
     ]);
 

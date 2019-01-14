@@ -3,7 +3,14 @@ const
     value=this.inValueFloat("value"),
     index=this.inValueInt("index"),
     inReset=this.inTriggerButton("reset"),
+    inShowMinMax=op.inValueBool("Show Min/Max"),
+    inSeed=op.inValueFloat("Color Random Seed",23),
+    inWidth=op.inValueInt("Texture Width",512),
+    inHeight=op.inValueInt("Texture Height",512),
+
     texOut=op.outTexture("Texture");
+
+
 
 const cgl=op.patch.cgl;
 
@@ -18,6 +25,11 @@ body.appendChild(canvas);
 var canvImage = document.getElementById(canvas.id);
 var ctx = canvImage.getContext('2d');
 
+inWidth.onChange=inHeight.onChange=function()
+{
+   canvas.width  = inWidth.get();
+    canvas.height = inHeight.get();
+}
 
 var buff=[];
 
@@ -38,9 +50,8 @@ value.onChange=function()
 trigger.onTriggered=function()
 {
     for(var i=0;i<buff.length;i++)
-    {
         if(buff[i]) addValue(buff[i][ buff[i].length-1 ],i);
-    }
+
     updateGraph();
 };
 
@@ -56,11 +67,11 @@ function addValue(val,currentIndex)
     maxValue=Math.max(maxValue,parseFloat(val));
     minValue=Math.min(minValue,parseFloat(val));
 
-
     if(!buff[currentIndex])
     {
         buff[currentIndex]=[];
-        Math.randomSeed=5711+2*currentIndex;
+        Math.randomSeed=inSeed.get()+currentIndex;
+
         colors[currentIndex] = 'rgba('+Math.round(Math.seededRandom()*255)+','+Math.round(Math.seededRandom()*255)+','+Math.round(Math.seededRandom()*255)+',1)';
     }
 
@@ -111,9 +122,12 @@ function updateGraph()
 
     ctx.font = "22px monospace";
 
-    ctx.fillStyle="#fff";
-    ctx.fillText('max:'+(Math.round(maxValue*100)/100), 10, canvas.height-10);
-    ctx.fillText('min:'+(Math.round(minValue*100)/100), 10, canvas.height-30);
+    if(inShowMinMax.get())
+    {
+        ctx.fillStyle="#fff";
+        ctx.fillText('max:'+(Math.round(maxValue*100)/100), 10, canvas.height-10);
+        ctx.fillText('min:'+(Math.round(minValue*100)/100), 10, canvas.height-30);
+    }
 
 
     if(texOut.get()) texOut.get().initTexture(canvImage);

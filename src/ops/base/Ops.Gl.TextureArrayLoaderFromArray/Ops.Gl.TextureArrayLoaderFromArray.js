@@ -53,9 +53,9 @@ function loadImage(_i,_url,nocache,cb)
     var i=_i;
     if(!url)return;
     // url=url.replace("XXX",i);
-    
+
     // console.log(url);
-    
+
     url=op.patch.getFilePath(url);
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 
@@ -96,7 +96,7 @@ function loadImage(_i,_url,nocache,cb)
 
                 // textureOut.set(null);
                 // textureOut.set(tex);
-                
+
                 // tex.printInfo();
                 arrOut.set(null);
                 arrOut.set(arr);
@@ -119,20 +119,20 @@ function loadImage(_i,_url,nocache,cb)
         loading.set(false);
     }
 
-    
+
 }
 
 function realReload(nocache)
 {
-    
+
     var files=filenames.get();
-    
+
     if(!files||files.length==0)return;
-    
-    
+
+
     if(loadingId)cgl.patch.loading.finished(loadingId);
     loadingId=cgl.patch.loading.start('texturearray',CABLES.uuid());
-    
+
     for(var i=0;i<files.length;i++)
     {
         console.log('load',files[i]);
@@ -145,7 +145,7 @@ console.log('loaded all');
         loadImage(i,files[i],nocache,cb);
 
     }
-    
+
 
 }
 

@@ -1,5 +1,4 @@
 {
-    "updated": 1524493508184,
     "authorName": "pandur",
     "id": "d56326a2-6351-4261-898a-635ca0636dd0",
     "created": 1519030581468,
@@ -11,29 +10,35 @@
             },
             {
                 "type": "0",
-                "name": "value x"
+                "name": "value x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "value y"
+                "name": "value y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "value z"
+                "name": "value z",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result x"
+                "name": "result x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "result y"
+                "name": "result y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "result z"
+                "name": "result z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Value.Value3x"

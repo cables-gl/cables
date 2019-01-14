@@ -25,8 +25,51 @@
                 "name": "tex"
             },
             {
+                "type": "2",
+                "name": "normalmap"
+            },
+            {
+                "type": "2",
+                "name": "pattern"
+            },
+            {
                 "type": "0",
-                "name": "angle",
+                "name": "fromColorR",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fromColorG",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fromColorB",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "toColorR",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "toColorG",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "toColorB",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fadeBegin",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fadeEnd",
                 "subType": "number"
             }
         ],

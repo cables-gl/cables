@@ -53,15 +53,19 @@
         "ports": [
             {
                 "name": "Start Time",
-                "text": "start time of timeline in seconds"
+                "text": "in seconds"
             },
             {
                 "name": "End Time",
-                "text": "end time of timeline in seconds"
+                "text": "in seconds"
             },
             {
                 "name": "FPS",
-                "text": "how many frames are rendered for one second of animation"
+                "text": "Frames per second for render."
+            },
+            {
+                "name": "Fileformat",
+                "text": "video file (only small files for now) or PNG files"
             }
         ],
         "portsOut": [

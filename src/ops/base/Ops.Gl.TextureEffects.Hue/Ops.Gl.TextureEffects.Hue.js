@@ -1,15 +1,14 @@
+const
+    render=op.inTrigger('render'),
+    hue=op.inValueSlider("hue",1),
+    trigger=op.outTrigger('trigger');
 
-var render=op.inTrigger('render');
-var hue=op.addInPort(new CABLES.Port(op,"hue",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var trigger=op.outTrigger('trigger');
-
-hue.set(1.0);
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.hue_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var uniformHue=new CGL.Uniform(shader,'f','hue',1.0);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const uniformHue=new CGL.Uniform(shader,'f','hue',1.0);
 
 hue.onChange=function(){ uniformHue.setValue(hue.get()); };
 
@@ -21,7 +20,6 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

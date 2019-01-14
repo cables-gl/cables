@@ -41,7 +41,6 @@ function updateAlphaPorts()
 op.toWorkPortsNeedToBeLinked(image);
 
 
-
 shader.setSource(attachments.drawimage_vert,srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureImaghe=new CGL.Uniform(shader,'t','image',1);

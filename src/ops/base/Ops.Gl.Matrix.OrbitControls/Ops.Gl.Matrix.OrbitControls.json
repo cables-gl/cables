@@ -8,61 +8,73 @@
             {
                 "type": "0",
                 "name": "min distance",
+                "group": "Boundaries",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "max distance",
+                "group": "Boundaries",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "min rot y",
+                "group": "Boundaries",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "max rot y",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "initial axis y",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "initial axis x",
+                "group": "Boundaries",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "initial radius",
+                "group": "Initial Values",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "initial axis y",
+                "group": "Initial Values",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "initial axis x",
+                "group": "Initial Values",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "mul",
+                "group": "Interaction",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Smoothness",
+                "group": "Interaction",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "restricted",
-                "subType": "boolean"
+                "name": "Speed X",
+                "group": "Interaction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Speed Y",
+                "group": "Interaction",
+                "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Active",
                 "subType": "boolean"
-            },
-            {
-                "type": "1",
-                "name": "Reset"
             },
             {
                 "type": "0",
@@ -81,18 +93,17 @@
             },
             {
                 "type": "0",
-                "name": "Pointerlock",
+                "name": "restricted",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Speed X",
-                "subType": "number"
+                "name": "Pointerlock",
+                "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Speed Y",
-                "subType": "number"
+                "type": "1",
+                "name": "Reset"
             }
         ],
         "portsOut": [
@@ -119,7 +130,6 @@
         "name": "Ops.Gl.Matrix.OrbitControls"
     },
     "summary": "rotate your object by clicking and dragging the mouse",
-    "updated": 1543397892941,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eaf4f7ce-08a3-4d1b-b9f4-ebc0b7b1cde1",
@@ -143,9 +153,14 @@
                 "text": "The starting point from where to look at the scene in the x-axis"
             },
             {
+                "name": "Pointerlock",
+                "text": "hides cursor and allows mouse to move further than the window boundaries"
+            },
+            {
                 "name": "trigger",
                 "text": "Triggers the next op"
             }
         ]
-    }
+    },
+    "youtubeid": ""
 }

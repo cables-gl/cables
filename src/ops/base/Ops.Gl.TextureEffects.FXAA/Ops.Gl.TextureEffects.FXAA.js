@@ -2,15 +2,12 @@
 
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
-
-var fxaa_span=op.addInPort(new CABLES.Port(op,"span",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:[0,2,4,8,16,32,64]}));
-var fxaa_reduceMin=op.addInPort(new CABLES.Port(op,"reduceMin",CABLES.OP_PORT_TYPE_VALUE));
-var fxaa_reduceMul=op.addInPort(new CABLES.Port(op,"reduceMul",CABLES.OP_PORT_TYPE_VALUE));
-
+var fxaa_span=op.inValueSelect("span",[0,2,4,8,16,32,64]);
+var fxaa_reduceMin=op.inValueFloat("reduceMin");
+var fxaa_reduceMul=op.inValueFloat("reduceMul");
 var useVPSize=op.inValueBool("use viewport size",true);
-
-var texWidth=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var texHeight=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var texWidth=op.inValueInt("width");
+var texHeight=op.inValueInt("height");
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);

@@ -1,5 +1,4 @@
 {
-    "updated": 1525412667073,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "febd6cdf-e049-4aed-be34-d7e370b90e03",
@@ -12,19 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "filter",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "wrap"
+                "name": "wrap",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "flip"
+                "name": "flip",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "unpackPreMultipliedAlpha"
+                "name": "unpackPreMultipliedAlpha",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -34,19 +37,23 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "loading"
+                "name": "loading",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Aspect Ratio"
+                "name": "Aspect Ratio",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.TextureArrayLoaderFromArray"
