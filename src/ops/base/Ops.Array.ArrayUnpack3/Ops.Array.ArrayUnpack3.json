@@ -24,5 +24,27 @@
             }
         ],
         "name": "Ops.Array.ArrayUnpack3"
+    },
+    "summary": "splits a xyz array into 3 individual arrays",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in xyz",
+                "text": "The array to unpack"
+            },
+            {
+                "name": "Array 1 out",
+                "text": "array x out"
+            },
+            {
+                "name": "Array 2 out",
+                "text": "array y out"
+            },
+            {
+                "name": "Array 3 out",
+                "text": "array z out"
+            }
+        ]
     }
 }

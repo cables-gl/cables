@@ -36,5 +36,19 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.ScaleTexture"
+    },
+    "summary": "Scales a texture",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Scale X",
+                "text": "scale on the x axis"
+            },
+            {
+                "name": "Scale Y",
+                "text": "scale on the y axis"
+            }
+        ]
     }
 }

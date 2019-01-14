@@ -11,10 +11,7 @@ var uniformTextures=[];
 var shader=new CGL.Shader(cgl,"shaderMaterial");
 // shader.glslVersion=0;
 
-<<<<<<< HEAD
-=======
 op.setPortGroup("Source Code",[fragmentShader,vertexShader]);
->>>>>>> 1e07d24668968cef7df742c8b7c1e621e659f3b0
 
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
@@ -40,13 +37,7 @@ function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
-<<<<<<< HEAD
 
-
-// console.log(lastm4);
-
-=======
->>>>>>> 1e07d24668968cef7df742c8b7c1e621e659f3b0
 }
 
 function bindTextures()
@@ -55,10 +46,6 @@ function bindTextures()
     {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
         {
-<<<<<<< HEAD
-                //console.log("Binding "+(i+3), uniformTextures[i].get());
-=======
->>>>>>> 1e07d24668968cef7df742c8b7c1e621e659f3b0
             cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
         }
     }
@@ -115,10 +102,7 @@ function updateShader()
                     uniform.name!='modelMatrix' &&
                     uniform.name!='viewMatrix' &&
                     uniform.name!='normalMatrix' &&
-<<<<<<< HEAD
-=======
                     uniform.name!='mvMatrix' &&
->>>>>>> 1e07d24668968cef7df742c8b7c1e621e659f3b0
                     uniform.name!='projMatrix' &&
                     uniform.name!='inverseViewMatrix'
                     )

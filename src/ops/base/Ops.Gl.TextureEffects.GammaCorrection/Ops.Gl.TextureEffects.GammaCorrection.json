@@ -36,5 +36,19 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.GammaCorrection"
+    },
+    "summary": "Allows for Gamma correction of a texture",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Multiply texture",
+                "text": "Multiplies value of texture before gamma correction"
+            },
+            {
+                "name": "Gamma correction",
+                "text": "Amount of gamma correction to apply"
+            }
+        ]
     }
 }
