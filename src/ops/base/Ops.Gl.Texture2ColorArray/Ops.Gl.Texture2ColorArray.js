@@ -17,9 +17,9 @@ pUpdate.onTriggered = function () {
     var realTexture = tex.get(), gl = cgl.gl;
     if (!realTexture) return;
     if (!fb) fb = gl.createFramebuffer();
-    
+
     gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-    
+
     if (texChanged) {
         gl.framebufferTexture2D(
            gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
@@ -28,9 +28,9 @@ pUpdate.onTriggered = function () {
         pixelData = new Uint8Array(realTexture.width*realTexture.height*4);
         texChanged = false;
     }
-    
+
     gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-    
+
     gl.readPixels(
        0, 0,
        realTexture.width,
@@ -38,13 +38,13 @@ pUpdate.onTriggered = function () {
        gl.RGBA,
        gl.UNSIGNED_BYTE,
        pixelData
-    );        
-    
+    );
+
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    
+
     outColors.set(null);
     outColors.set(pixelData);
-    
+
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     outTrigger.trigger();
 }

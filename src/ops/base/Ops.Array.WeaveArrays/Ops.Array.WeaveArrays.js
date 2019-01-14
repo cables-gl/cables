@@ -33,13 +33,13 @@ function update() {
     // array 1 and 2 are not empty -> combine them
     else if(arr1 && arr2) {
         for(var i=0; i<Math.max(arr1.length, arr2.length); i+=chunkSize) {
-            for(j=0; j<chunkSize && j+i <arr1.length ; j++) {
+            for(var j=0; j<chunkSize && j+i <arr1.length ; j++) {
                 newArr.push(arr1[i+j]);
             }
-            for(k=0; k<chunkSize && k+i <arr2.length ; k++) {
+            for(var k=0; k<chunkSize && k+i <arr2.length ; k++) {
                 newArr.push(arr2[i+k]);
             }
-        }    
+        }
     }
     outPort.set(newArr);
 }

@@ -20,6 +20,16 @@
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.LetterBox"
@@ -41,7 +51,6 @@
             }
         ]
     },
-    "updated": 1540920497584,
     "authorName": "pandur",
     "id": "6a62d24e-d0a6-4110-a042-15e3cda59db4",
     "created": 1540920488363

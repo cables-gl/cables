@@ -1,5 +1,4 @@
 {
-    "updated": 1518542257470,
     "authorName": "pandur",
     "id": "b15472e2-b895-4dde-95c3-239fa5e08afc",
     "created": 1517221883316,
@@ -11,15 +10,18 @@
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             }
         ],
         "portsOut": [

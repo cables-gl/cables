@@ -21,6 +21,26 @@
             {
                 "type": "1",
                 "name": "reset"
+            },
+            {
+                "type": "0",
+                "name": "Show Min/Max",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Color Random Seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Texture Width",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Texture Height",
+                "subType": "integer"
             }
         ],
         "portsOut": [

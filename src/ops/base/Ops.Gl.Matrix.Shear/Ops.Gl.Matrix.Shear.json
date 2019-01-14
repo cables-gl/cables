@@ -1,5 +1,4 @@
 {
-    "updated": 1517222109720,
     "authorName": "pandur",
     "id": "02d76d99-67f2-4146-b906-8bce2c3ad6bb",
     "created": 1517222103996,
@@ -11,11 +10,13 @@
             },
             {
                 "type": "0",
-                "name": "shearX"
+                "name": "shearX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "shearY"
+                "name": "shearY",
+                "subType": "number"
             }
         ],
         "portsOut": [

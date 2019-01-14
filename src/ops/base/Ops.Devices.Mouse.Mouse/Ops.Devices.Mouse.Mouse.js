@@ -25,6 +25,8 @@ smoothSpeed.set(20);
 var cgl=op.patch.cgl;
 var listenerElement=null;
 
+
+
 function setValue(x,y)
 {
     if(normalize.get())
@@ -55,8 +57,16 @@ smooth.onChange=function()
 var smoothX,smoothY;
 var lineX=0,lineY=0;
 
+normalize.onChange=function()
+{
+    mouseX=0;
+    mouseY=0;
+    setValue(mouseX,mouseY);
+};
+
 var mouseX=cgl.canvas.width/2;
 var mouseY=cgl.canvas.height/2;
+
 lineX=mouseX;
 lineY=mouseY;
 

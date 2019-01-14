@@ -1,40 +1,35 @@
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
-var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
+const inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
 
-var inSize=op.inValue("Size",1);
-var inAmount=op.inValueSlider("Amount",0.5);
+const inSize=op.inValue("Size",1);
+const inAmount=op.inValueSlider("Amount",0.5);
 
-var inFalloff=op.inValueSlider("Falloff",0);
-var inInvert=op.inValueBool("Invert");
+const inFalloff=op.inValueSlider("Falloff",0);
+const inInvert=op.inValueBool("Invert");
 
-{
-    // rgba colors
-    var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-    r.set(Math.random());
-    
-    var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
-    g.set(Math.random());
-    
-    var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.set(Math.random());
-}
+
+// rgba colors
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
+r.setUiAttribs({ colorPick: true });
 
 var inBlend=op.inValueSelect("Blend ",["Normal","Multiply"],"Normal");
 
 // position
-var x=op.inValue("x");
-var y=op.inValue("y");
-var z=op.inValue("z");
+const x=op.inValue("x");
+const y=op.inValue("y");
+const z=op.inValue("z");
 
-var sizeX=op.inValueSlider("Size X",1);
+const sizeX=op.inValueSlider("Size X",1);
 
 
 
-var inWorldSpace=op.inValueBool("WorldSpace",true);
+const inWorldSpace=op.inValueBool("WorldSpace",true);
 
 var shader=null;
 
@@ -63,10 +58,10 @@ inBlend.onChange=updateBlend;
 function updateBlend()
 {
     if(!shader)return;
-    
+
     shader.removeDefine(moduleVert.prefix+"BLEND_NORMAL");
     shader.removeDefine(moduleVert.prefix+"BLEND_MULTIPLY");
-    
+
     if(inBlend.get()=="Normal") shader.define(moduleVert.prefix+"BLEND_NORMAL");
         else shader.define(moduleVert.prefix+"BLEND_MULTIPLY");
 }
@@ -82,7 +77,7 @@ function updateInvert()
 function updateArea()
 {
     if(!shader)return;
-    
+
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_X");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Z");
@@ -120,18 +115,18 @@ op.render.onTriggered=function()
     if(CABLES.UI)
     {
         cgl.pushModelMatrix();
-        mat4.identity(cgl.mvMatrix);
-        if(gui.patch().isCurrentOp(op)) 
+        mat4.identity(cgl.mMatrix);
+        if(gui.patch().isCurrentOp(op))
             gui.setTransformGizmo(
                 {
                     posX:x,
                     posY:y,
                     posZ:z
                 });
-    
+
         if(CABLES.UI.renderHelper)
         {
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
+            mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
             CABLES.GL_MARKER.drawSphere(op,inSize.get());
         }
         cgl.popModelMatrix();
@@ -164,7 +159,7 @@ op.render.onTriggered=function()
                 srcHeadFrag:attachments.colorarea_head_frag,
                 srcBodyFrag:attachments.colorarea_frag
             },moduleVert);
-            
+
         inSize.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'size',inSize);
         inAmount.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
 
@@ -176,9 +171,9 @@ op.render.onTriggered=function()
         y.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'z',z);
         sizeX.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'sizeX',sizeX);
-        
+
         inFalloff.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'falloff',inFalloff);
-        
+
         updateWorldspace();
         updateArea();
         updateInvert();

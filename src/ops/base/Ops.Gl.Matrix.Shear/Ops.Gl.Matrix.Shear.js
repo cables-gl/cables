@@ -1,18 +1,13 @@
+const
+    render=op.inTrigger('render'),
+    shearX=op.inValueFloat("shearX",0.5),
+    shearY=op.inValueFloat("shearY"),
+    trigger=op.outTrigger('trigger');
 
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
+const cgl=op.patch.cgl;
+const shearMatrix = mat4.create();
 
-var shearX=op.addInPort(new CABLES.Port(op,"shearX"));
-var shearY=op.addInPort(new CABLES.Port(op,"shearY"));
-
-var cgl=op.patch.cgl;
-var shearMatrix = mat4.create();
-
-shearY.onChange=update;
-shearX.onChange=update;
-shearX.set(0.0);
-shearY.set(0.0);
-
+shearY.onChange=shearX.onChange=update;
 
 function update()
 {
@@ -21,12 +16,11 @@ function update()
     shearMatrix[4]=Math.tan(shearY.get());
 }
 
-
 render.onTriggered=function()
 {
     cgl.pushModelMatrix();
 
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,shearMatrix);
+    mat4.multiply(cgl.mMatrix,cgl.mMatrix,shearMatrix);
     trigger.trigger();
 
     cgl.popModelMatrix();

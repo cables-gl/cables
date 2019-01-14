@@ -5,35 +5,43 @@ const maxDist=op.addInPort(new CABLES.Port(op,"max distance",CABLES.OP_PORT_TYPE
 const minRotY=op.inValue("min rot y",0);
 const maxRotY=op.inValue("max rot y",0);
 
+// const minRotX=op.inValue("min rot x",0);
+// const maxRotX=op.inValue("max rot x",0);
+
+const initialRadius=op.inValue("initial radius",0);
 const initialAxis=op.addInPort(new CABLES.Port(op,"initial axis y",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 const initialX=op.addInPort(new CABLES.Port(op,"initial axis x",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-const initialRadius=op.inValue("initial radius",0);
-
-
 
 const mul=op.addInPort(new CABLES.Port(op,"mul",CABLES.OP_PORT_TYPE_VALUE));
-
 const smoothness=op.inValueSlider("Smoothness",1.0);
-const restricted=op.addInPort(new CABLES.Port(op,"restricted",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+const speedX=op.inValue("Speed X",1);
+const speedY=op.inValue("Speed Y",1);
+
+
 
 const active=op.inValueBool("Active",true);
-
-const inReset=op.inTriggerButton("Reset");
 
 const allowPanning=op.inValueBool("Allow Panning",true);
 const allowZooming=op.inValueBool("Allow Zooming",true);
 const allowRotation=op.inValueBool("Allow Rotation",true);
+const restricted=op.inValueBool("restricted",true);
 const pointerLock=op.inValueBool("Pointerlock",false);
 
-const speedX=op.inValue("Speed X",1);
-const speedY=op.inValue("Speed Y",1);
 
-const trigger=op.outTrigger("trigger")
+
+const trigger=op.outTrigger("trigger");
 const outRadius=op.addOutPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
 const outYDeg=op.addOutPort(new CABLES.Port(op,"Rot Y",CABLES.OP_PORT_TYPE_VALUE));
 const outXDeg=op.addOutPort(new CABLES.Port(op,"Rot X",CABLES.OP_PORT_TYPE_VALUE));
 
-restricted.set(true);
+const inReset=op.inTriggerButton("Reset");
+
+op.setPortGroup("Initial Values",[initialAxis,initialX,initialRadius]);
+op.setPortGroup("Interaction",[mul,smoothness,speedX,speedY]);
+op.setPortGroup("Boundaries",[minRotY,maxRotY,minDist,maxDist]);
+
+
+
 mul.set(1);
 minDist.set(0.05);
 maxDist.set(99999);
@@ -110,6 +118,7 @@ function ip(val,goal)
 }
 
 var lastPy=0;
+var lastPx=0;
 
 render.onTriggered=function()
 {
@@ -136,9 +145,29 @@ render.onTriggered=function()
         lastPy=py;
     }
 
+
+    var degX=(px)*CGL.RAD2DEG;
+
+    // if(minRotX.get()!==0 && degX<minRotX.get())
+    // {
+    //     degX=minRotX.get();
+    //     px=lastPx;
+    // }
+    // else if(maxRotX.get()!==0 && degX>maxRotX.get())
+    // {
+    //     degX=maxRotX.get();
+    //     px=lastPx;
+    // }
+    // else
+    // {
+    //     lastPx=px;
+    // }
+
+
+
     outYDeg.set( degY );
     // outXDeg.set( (px)*180 );
-    outXDeg.set( (px)*CGL.RAD2DEG );
+    outXDeg.set( degX );
 
 
     circlePosi(eye, py );
@@ -207,14 +236,17 @@ function onmousemove(event)
     var x = event.clientX;
     var y = event.clientY;
 
-    var movementX=(x-lastMouseX)*speedX.get();
-    var movementY=(y-lastMouseY)*speedY.get();
+    var movementX=(x-lastMouseX);
+    var movementY=(y-lastMouseY);
 
     if(doLockPointer)
     {
         movementX=event.movementX*mul.get();
         movementY=event.movementY*mul.get();
     }
+
+    movementX*=speedX.get();
+    movementY*=speedY.get();
 
     if(event.which==3 && allowPanning.get())
     {
@@ -278,7 +310,7 @@ function onMouseUp()
         document.removeEventListener('webkitpointerlockchange', lockChange, false);
 
         if(document.exitPointerLock) document.exitPointerLock();
-        document.removeEventListener("mousemove", onmousemove, false);
+        document.removeEventListener("mousemove", pointerLock, false);
     }
 }
 

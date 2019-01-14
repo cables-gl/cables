@@ -1,5 +1,4 @@
 {
-    "updated": 1522763607753,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "f94b5136-61fd-4558-8348-e7c8db5a6348",
@@ -13,11 +12,13 @@
             {
                 "type": "0",
                 "name": "blendMode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -25,22 +26,25 @@
                 "name": "image"
             },
             {
-                "type": "2",
-                "name": "imageAlpha"
-            },
-            {
-                "type": "0",
-                "name": "alphaSrc",
-                "subType": "string"
-            },
-            {
                 "type": "0",
                 "name": "removeAlphaSrc",
                 "subType": "boolean"
             },
             {
+                "type": "2",
+                "name": "imageAlpha",
+                "group": "Mask"
+            },
+            {
+                "type": "0",
+                "name": "alphaSrc",
+                "group": "Mask",
+                "subType": "string"
+            },
+            {
                 "type": "0",
                 "name": "invert alpha channel",
+                "group": "Mask",
                 "subType": "boolean"
             },
             {
@@ -91,5 +95,15 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.DrawImageNew"
+    },
+    "summary": "",
+    "youtubeid": "Ww04Cw9wArM",
+    "docs": {
+        "ports": [
+            {
+                "name": "removeAlphaSrc",
+                "text": "If this is enabled then the alpha value is 1 for everything"
+            }
+        ]
     }
 }

@@ -127,14 +127,14 @@ function tesselateGeom(oldGeom)
         {
 
             for(j=0;j<4;j++)
-            for(k=0;k<3;k++)
-            {
-                norms.push(
-                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+0],
-                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+1],
-                    oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+2]
-                    );
-            }
+                for(k=0;k<3;k++)
+                {
+                    norms.push(
+                        oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+0],
+                        oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+1],
+                        oldGeom.vertexNormals[oldGeom.verticesIndices[i+k]*3+2]
+                        );
+                }
 
             tesselate(vertices,
                 oldGeom.vertices[oldGeom.verticesIndices[i+0]*3+0],

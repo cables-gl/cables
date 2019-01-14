@@ -13,12 +13,12 @@
             },
             {
                 "type": "0",
-                "name": "reducemin",
+                "name": "reduceMin",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "reducemul",
+                "name": "reduceMul",
                 "subType": "number"
             },
             {
@@ -29,12 +29,12 @@
             {
                 "type": "0",
                 "name": "width",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "height",
-                "subType": "number"
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -55,7 +55,6 @@
             "url": "https://github.com/mattdesl/glsl-fxaa"
         }
     ],
-    "updated": 1540922800187,
     "authorName": "pandur",
     "id": "3e679c17-f050-4bc8-bfe5-5b9190e7ce40",
     "created": 1540922733116

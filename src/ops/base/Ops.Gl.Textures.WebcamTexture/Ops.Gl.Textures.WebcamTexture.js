@@ -63,7 +63,8 @@ function startWebcam()
         function(stream)
         {
             videoElement.autplay=true;
-            videoElement.src = window.URL.createObjectURL(stream);
+            // videoElement.src = window.URL.createObjectURL(stream);
+            videoElement.srcObject = stream;
             videoElement.onloadedmetadata = function(e)
             {
                 available.set(true);

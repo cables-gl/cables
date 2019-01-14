@@ -37,6 +37,24 @@
     },
     "summary": "map a value to an easing curve",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Value",
+                "text": "value to ease"
+            },
+            {
+                "name": "Min",
+                "text": "minimum value"
+            },
+            {
+                "name": "Max",
+                "text": "maximum value"
+            },
+            {
+                "name": "Easing",
+                "text": "Pick the easing mode"
+            }
+        ]
+    },
+    "youtubeid": "PEVSinWoOSc"
 }

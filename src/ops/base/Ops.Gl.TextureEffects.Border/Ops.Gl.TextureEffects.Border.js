@@ -26,32 +26,41 @@ const uniSmooth=new CGL.Uniform(shader,'b','smoothed',smooth);
     });
 }
 
-{
-    var r=op.addInPort(new CABLES.Port(op,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    r.onChange=function()
-    {
-        if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
-            else r.uniform.setValue(r.get());
-    };
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
+r.setUiAttribs({ colorPick: true });
 
-    var g=op.addInPort(new CABLES.Port(op,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    g.onChange=function()
-    {
-        if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
-            else g.uniform.setValue(g.get());
-    };
+const unir=new CGL.Uniform(shader,'f','r',r);
+const unig=new CGL.Uniform(shader,'f','g',g);
+const unib=new CGL.Uniform(shader,'f','b',b);
 
-    var b=op.addInPort(new CABLES.Port(op,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.onChange=function()
-    {
-        if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
-            else b.uniform.setValue(b.get());
-    };
+// {
+//     var r=op.addInPort(new CABLES.Port(op,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+//     r.onChange=function()
+//     {
+//         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
+//             else r.uniform.setValue(r.get());
+//     };
 
-    r.set(Math.random());
-    g.set(Math.random());
-    b.set(Math.random());
-}
+//     var g=op.addInPort(new CABLES.Port(op,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+//     g.onChange=function()
+//     {
+//         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
+//             else g.uniform.setValue(g.get());
+//     };
+
+//     var b=op.addInPort(new CABLES.Port(op,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+//     b.onChange=function()
+//     {
+//         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
+//             else b.uniform.setValue(b.get());
+//     };
+
+//     r.set(Math.random());
+//     g.set(Math.random());
+//     b.set(Math.random());
+// }
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 

@@ -1,5 +1,4 @@
 {
-    "updated": 1540470983670,
     "authorName": "pandur",
     "id": "86565630-2092-4d16-b177-ffb1d4040f4e",
     "created": 1526300707715,
@@ -24,8 +23,52 @@
                 "name": "mvMatrix"
             },
             {
-                "type": "3",
-                "name": "projMatrix"
+                "type": "2",
+                "name": "normalmap"
+            },
+            {
+                "type": "2",
+                "name": "pattern"
+            },
+            {
+                "type": "0",
+                "name": "fromColorR",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fromColorG",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fromColorB",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "toColorR",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "toColorG",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "toColorB",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fadeBegin",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fadeEnd",
+                "subType": "number"
             }
         ],
         "portsOut": [
