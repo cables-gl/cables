@@ -1,0 +1,46 @@
+{
+    "id": "5fbfaf72-b57e-41c2-8574-5b0234f87703",
+    "authorName": "pandur",
+    "created": 1547332889117,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Rows",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Columns",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Center",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.PointArray.Field"
+    },
+    "summary": "generate coordinates for a rectangular field of points",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    }
+}

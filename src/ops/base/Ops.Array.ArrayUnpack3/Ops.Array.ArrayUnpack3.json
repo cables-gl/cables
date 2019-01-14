@@ -1,0 +1,28 @@
+{
+    "authorName": "pandur",
+    "id": "fa671f66-6957-41e6-ac35-d615b7c29285",
+    "created": 1547231076202,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array in xyz"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array 1 out"
+            },
+            {
+                "type": "3",
+                "name": "Array 2 out"
+            },
+            {
+                "type": "3",
+                "name": "Array 3 out"
+            }
+        ],
+        "name": "Ops.Array.ArrayUnpack3"
+    }
+}
