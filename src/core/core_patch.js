@@ -288,7 +288,7 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
             if(op)
             {
                 op.opId=null;
-                console.log("op created by objName:",objName);
+                // console.log("op created by objName:",objName);
                 for(var i in CABLES.OPS)
                 {
                     if(CABLES.OPS[i].objName==objName)

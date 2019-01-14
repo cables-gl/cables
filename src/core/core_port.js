@@ -171,7 +171,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                         console.error('onvaluechanged exception cought',ex);
                         console.log(ex.stack);
                         console.log('exception in: '+this.parent.name);
-                        gui.showOpCrash(this.parent);
+                        if(gui)gui.showOpCrash(this.parent);
 
                         if(CABLES.UI) CABLES.UI.MODAL.showException(ex,this.parent);
                     }
@@ -419,8 +419,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
             if(CABLES.UI) CABLES.UI.MODAL.showException(ex,portTriggered.parent);
 
-            
-            gui.showOpCrash(portTriggered.parent);
+            if(gui)gui.showOpCrash(portTriggered.parent);
 
             console.log('exception!');
             console.error('ontriggered exception cought',ex);
