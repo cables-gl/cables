@@ -83,17 +83,24 @@ function reload()
 
         if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
         geom.verticesIndices=[];
-        geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 
-        var nfo='';
-        nfo += (geom.verticesIndices.length/3)+' faces <br/>';
-        nfo += (geom.vertices.length/3)+' vertices <br/>';
-        nfo += geom.texCoords.length+' texturecoords <br/>';
-        nfo += geom.tangents.length+' tangents <br/>';
-        nfo += geom.biTangents.length+' biTangents <br/>';
-        if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
+        console.log(geom.verticesIndices.length);
 
-        op.uiAttr({"info":nfo});
+        for(var i=0;i<jsonMesh.faces.length;i++)
+        {
+            geom.verticesIndices.push(jsonMesh.faces[i][0],jsonMesh.faces[i][1],jsonMesh.faces[i][2]);
+        }
+        // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
+
+        // var nfo='';
+        // nfo += (geom.verticesIndices.length/3)+' faces <br/>';
+        // nfo += (geom.vertices.length/3)+' vertices <br/>';
+        // nfo += geom.texCoords.length+' texturecoords <br/>';
+        // nfo += geom.tangents.length+' tangents <br/>';
+        // nfo += geom.biTangents.length+' biTangents <br/>';
+        // if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
+
+        // op.uiAttr({"info":nfo});
 
         geometryOut.set(null);
         geometryOut.set(geom);

@@ -38,13 +38,13 @@ function updateVpSize()
 {
     if(useVPSize.get())
     {
-        width.setUiAttribs({hidePort:true,greyout:true});
-        height.setUiAttribs({hidePort:true,greyout:true});
+        width.setUiAttribs({greyout:true});
+        height.setUiAttribs({greyout:true});
     }
     else
     {
-        width.setUiAttribs({hidePort:false,greyout:false});
-        height.setUiAttribs({hidePort:false,greyout:false});
+        width.setUiAttribs({greyout:false});
+        height.setUiAttribs({greyout:false});
     }
 }
 
@@ -109,8 +109,6 @@ function doRender()
         if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
             else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
             else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
-
-
 
 
         texDepth.set( fb.getTextureDepth() );
