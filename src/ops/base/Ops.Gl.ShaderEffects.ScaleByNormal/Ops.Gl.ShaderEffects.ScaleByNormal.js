@@ -12,7 +12,7 @@ var shader=null;
 var srcHeadVert=attachments.scalebynormal_vert;
 
 var srcBodyVert=''
-    .endl()+'pos=MOD_scaler(pos,attrVertIndex,attrVertNormal);' //modelMatrix*
+    .endl()+'pos=MOD_scaler(pos,mat3(modelMatrix)*attrVertNormal);'
     .endl();
     
 var moduleVert=null;

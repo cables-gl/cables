@@ -3,7 +3,7 @@
 
 IN vec2 texCoord;
 #ifdef HAS_TEXTURES
-   
+
    #ifdef HAS_TEXTURE_DIFFUSE
        UNI sampler2D diffTex;
    #endif
@@ -15,6 +15,8 @@ UNI float r;
 UNI float g;
 UNI float b;
 UNI float a;
+
+
 
 void main()
 {

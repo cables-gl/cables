@@ -22,19 +22,22 @@ UNI float randomSize;
 
 IN float attrVertIndex;
 
+
 float rand(float n){return fract(sin(n) * 43758.5453123);}
 
 #define POINTMATERIAL
 
 void main()
 {
-    float psMul=sqrt(canvasWidth*canvasHeight)*0.001+0.00000000001;
+    float psMul=sqrt(canvasWidth/canvasHeight)*0.001+0.00000000001;
     float sizeMultiply=1.0;
+
+
 
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
     #endif
-    
+
     mat4 mMatrix=modelMatrix;
 
     vec4 pos = vec4( vPosition, 1. );
@@ -54,6 +57,7 @@ void main()
         float cameraDist = distance(model.xyz, camPos);
         gl_PointSize = (pointSize / cameraDist) * psMul;
     #endif
+
 
 
 
