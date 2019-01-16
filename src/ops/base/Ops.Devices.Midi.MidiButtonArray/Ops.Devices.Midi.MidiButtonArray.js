@@ -55,14 +55,15 @@ function setButtonState(i,v)
     {
         buttons[i]=v;
     }
-
-    values.set(buttons);
     lastIndex.set(i);
+    values.set(null);
+    values.set(buttons);
+    //lastIndex.set(i);
     if(lights.get())
     {
         var noteOnMessage = [0x90, note.get()+i, 0];
         if(buttons[i]>0) noteOnMessage = [0x90, note.get()+i, 120];
-        
+
         if(lastEvent && lastEvent.output) lastEvent.output.send( noteOnMessage );
     }
 }
@@ -92,7 +93,7 @@ eventIn.onChange=function()
     {
         note.set(event.note);
         learning=false;
-        
+
         if(CABLES.UI)
         {
             op.uiAttr({info:'bound to note: ' + note.get()});
@@ -104,7 +105,7 @@ eventIn.onChange=function()
     {
         noteEnd.set(event.note);
         learningEnd=false;
-        
+
         if(CABLES.UI)
         {
             op.uiAttr({info:'bound to note: ' + note.get()});
