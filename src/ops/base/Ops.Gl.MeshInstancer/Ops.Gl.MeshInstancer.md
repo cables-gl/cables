@@ -1,0 +1,2 @@
+You must apply a material to meshInstancer to see the results.
+For better performance  you should use the "trigger once" op on the mesh going into the Geom input. Check the example patch to see this being applied.

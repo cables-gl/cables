@@ -1,0 +1,40 @@
+{
+    "authorName": "pandur",
+    "id": "460574ca-dca2-4283-8c37-57a8c446a51f",
+    "created": 1547736315988,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger in"
+            },
+            {
+                "type": "0",
+                "name": "Add to number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Multiplier to add number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Default Value",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Set Default Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Current value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Accumulator"
+    }
+}

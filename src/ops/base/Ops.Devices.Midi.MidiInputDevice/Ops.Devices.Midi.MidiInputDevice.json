@@ -4,7 +4,7 @@
     "authorName": "pandur",
     "id": "5ad3323f-967e-4ad4-874d-e24fb31c0b7d",
     "created": 1507357452324,
-    "summary": "connect to a Midi device",
+    "summary": "connect to a Midi device or external DAW",
     "layout": {
         "portsIn": [
             {
@@ -34,6 +34,10 @@
             {
                 "name": "device",
                 "text": "This lists all connected devices"
+            },
+            {
+                "name": "Event",
+                "text": "This outputs all midi data from midi clock to note on/off and midi cc"
             }
         ]
     }
