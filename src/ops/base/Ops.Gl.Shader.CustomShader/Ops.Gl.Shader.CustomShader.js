@@ -93,7 +93,7 @@ function updateShader()
         if (
 			hasUniformInput(uniform.name) ||
 			uniform.name.indexOf('mod') == 0 ||
-			uniformNameBlacklist.indexOf(uniform.name)
+			uniformNameBlacklist.indexOf(uniform.name)!=-1
 		)
 		    continue;
 
