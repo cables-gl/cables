@@ -62,6 +62,15 @@ function hasUniformInput(name)
 var tempMat4=mat4.create();
 // var lastm4;
 
+const uniformNameBlacklist = [
+    'modelMatrix',
+    'viewMatrix',
+    'normalMatrix',
+    'mvMatrix',
+    'projMatrix',
+    'inverseViewMatrix',
+    'camPos'
+];
 function updateShader()
 {
     if(!shader)return;
@@ -81,61 +90,54 @@ function updateShader()
     {
         var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
 
-        if(!hasUniformInput(uniform.name))
+        if (
+			hasUniformInput(uniform.name) ||
+			uniform.name.indexOf('mod') == 0 ||
+			uniformNameBlacklist.indexOf(uniform.name)
+		)
+		    continue;
+
+        if(uniform.type==cgl.gl.FLOAT)
         {
-            if(uniform.type==cgl.gl.FLOAT)
+            var newInput=op.inValue(uniform.name,0);
+            newInput.onChange=function(p)
             {
-                var newInput=op.inValue(uniform.name,0);
-                newInput.onChange=function(p)
+                p.uniform.needsUpdate=true;
+                p.uniform.setValue(p.get());
+            };
+
+            uniformInputs.push(newInput);
+            newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
+        }
+        else
+        if(uniform.type==cgl.gl.FLOAT_MAT4)
+        {
+            var newInputM4=op.inArray(uniform.name);
+            newInputM4.onChange=function(p)
+            {
+                if(p.get() && p.isLinked())
                 {
+                    mat4.copy(tempMat4,p.get());
                     p.uniform.needsUpdate=true;
-                    p.uniform.setValue(p.get());
-                };
-
-                uniformInputs.push(newInput);
-                newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
-            }
-            else
-            if(uniform.type==cgl.gl.FLOAT_MAT4)
-            {
-                if(
-                    uniform.name!='modelMatrix' &&
-                    uniform.name!='viewMatrix' &&
-                    uniform.name!='normalMatrix' &&
-                    uniform.name!='mvMatrix' &&
-                    uniform.name!='projMatrix' &&
-                    uniform.name!='inverseViewMatrix'
-                    )
-                {
-                    var newInputM4=op.inArray(uniform.name);
-                    newInputM4.onChange=function(p)
-                    {
-                        if(p.get() && p.isLinked())
-                        {
-                            mat4.copy(tempMat4,p.get());
-                            p.uniform.needsUpdate=true;
-                            p.uniform.setValue(tempMat4);
-                        }
-                    };
-
-                    uniformInputs.push(newInputM4);
-                    // lastm4=newInputM4;
-                    newInputM4.uniform=new CGL.Uniform(shader,'m4',uniform.name,mat4.create());
-
+                    p.uniform.setValue(tempMat4);
                 }
-            }
-            else
-            if(uniform.type==cgl.gl.SAMPLER_2D)
-            {
-                var newInputTex=op.inObject(uniform.name);
-                newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
-                uniformTextures.push(newInputTex);
-                countTexture++;
-            }
-            else
-            {
-                console.log('unknown uniform type',uniform.type,uniform);
-            }
+            };
+
+            uniformInputs.push(newInputM4);
+            // lastm4=newInputM4;
+            newInputM4.uniform=new CGL.Uniform(shader,'m4',uniform.name,mat4.create());
+        }
+        else
+        if(uniform.type==cgl.gl.SAMPLER_2D)
+        {
+            var newInputTex=op.inObject(uniform.name);
+            newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
+            uniformTextures.push(newInputTex);
+            countTexture++;
+        }
+        else
+        {
+            console.log('unsupported uniform type',uniform.type,uniform);
         }
     }
 
