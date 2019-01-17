@@ -48,17 +48,21 @@
                 "text": "The number of value triplets to generate"
             },
             {
-                "name": "random seed",
-                "text": "When set to `0` the array will be different every time the patch is run, set to another value to have the same output every time"
-            },
-            {
                 "name": "Min",
                 "text": "The minimum for the generated values"
             },
             {
                 "name": "Max",
                 "text": "The maximum for the generated values"
+            },
+            {
+                "name": "random seed",
+                "text": "When set to `0` the array will be different every time the patch is run, set to another value to have the same output every time"
             }
         ]
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ]
 }

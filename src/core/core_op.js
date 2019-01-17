@@ -953,16 +953,21 @@ CABLES.Op = function()
         var notWorkingMsg=null;
         var working=true;
 
-        if (working && this.objName.indexOf('Ops.Gl.TextureEffects') == 0 && hasTriggerInput(this) && this.objName.indexOf('TextureEffects.ImageCompose')==-1) {
+        if (working && this.objName.indexOf('Ops.Gl.TextureEffects') == 0 && hasTriggerInput(this) && this.objName.indexOf('TextureEffects.ImageCompose')==-1)
+        {
             working = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'TextureEffects.ImageCompose');
             if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'ImageCompose';
         }
         else
-        if (this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop') {
-            var iscon = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
-            working = iscon;
-            if (!iscon) {
-                notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
+        {
+            if(!this.uiAttribs.subPatch) // todo: real subpatch check at one point!
+            {
+                if(this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop')
+                {
+                    var iscon = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
+                    working = iscon;
+                    if (!iscon) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
+                }
             }
         }
 

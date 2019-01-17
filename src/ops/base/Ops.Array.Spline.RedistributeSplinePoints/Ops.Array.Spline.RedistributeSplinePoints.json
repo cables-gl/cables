@@ -35,5 +35,8 @@
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "collections": [
+        "pointArrays"
+    ]
 }

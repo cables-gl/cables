@@ -29,5 +29,12 @@
     "updated": 1524563150795,
     "authorName": "pandur",
     "id": "ef54ba67-8b1d-41b0-8140-bb97061eaa97",
-    "created": 1518184894733
+    "created": 1518184894733,
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

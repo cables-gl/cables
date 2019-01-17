@@ -28,5 +28,30 @@
             }
         ],
         "name": "Ops.Array.ArrayPack3"
+    },
+    "summary": "Packs 3 individual arrays into a xyz array",
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array 1",
+                "text": "x array"
+            },
+            {
+                "name": "Array 2",
+                "text": "y array"
+            },
+            {
+                "name": "Array 3",
+                "text": "z array"
+            },
+            {
+                "name": "Array out",
+                "text": "The combined xyz array"
+            }
+        ]
     }
 }

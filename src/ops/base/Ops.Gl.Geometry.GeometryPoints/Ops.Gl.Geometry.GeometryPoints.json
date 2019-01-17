@@ -34,5 +34,9 @@
     "summary": "get vertices of a geometry as array3x (vertex vertices)",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ]
 }

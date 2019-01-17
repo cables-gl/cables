@@ -33,5 +33,9 @@
     "summary": "multiply every XYZ member of array3x",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ]
 }

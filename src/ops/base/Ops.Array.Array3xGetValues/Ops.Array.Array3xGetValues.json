@@ -33,5 +33,9 @@
     "summary": "get 3 values from an array3x",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ]
 }

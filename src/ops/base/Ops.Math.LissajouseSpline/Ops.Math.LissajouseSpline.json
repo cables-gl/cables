@@ -34,5 +34,12 @@
         ],
         "name": "Ops.Math.LissajouseSpline"
     },
-    "summary": "generate spline using lissajous formulas"
+    "summary": "generate spline using lissajous formulas",
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

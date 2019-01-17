@@ -92,5 +92,8 @@
                 "text": "Total number of instances/shapes"
             }
         ]
-    }
+    },
+    "collections": [
+        "pointArrays"
+    ]
 }

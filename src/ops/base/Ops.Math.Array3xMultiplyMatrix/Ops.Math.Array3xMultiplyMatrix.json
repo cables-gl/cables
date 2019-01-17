@@ -29,5 +29,9 @@
     "summary": "multiply every XYZ coordinate with a matrix",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ]
 }

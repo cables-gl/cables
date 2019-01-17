@@ -36,5 +36,9 @@
     "summary": "for subdividing splines, smoothing lines using cubic bezier interpolation",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ]
 }
