@@ -17,12 +17,6 @@
             },
             {
                 "type": "0",
-                "name": "size",
-                "group": "Parameters",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "random seed",
                 "group": "Parameters",
                 "subType": "number"
@@ -35,20 +29,26 @@
             },
             {
                 "type": "0",
+                "name": "size",
+                "group": "Area",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "scaleX",
-                "group": "Scaling",
+                "group": "Area",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "scaleY",
-                "group": "Scaling",
+                "group": "Area",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "scaleZ",
-                "group": "Scaling",
+                "group": "Area",
                 "subType": "number"
             },
             {
