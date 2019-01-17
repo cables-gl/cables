@@ -30,6 +30,11 @@
     },
     "youtubeid": "eDlaFD_d5lc",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "device",
+                "text": "This lists all connected devices"
+            }
+        ]
     }
 }

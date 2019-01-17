@@ -13,8 +13,8 @@ var f2x=op.outValue("Finger 2 X");
 var f2y=op.outValue("Finger 2 Y");
 
 var outEvents=op.outArray("Events");
-
-
+var normalize=op.inValueBool("Normalize Coordinates");
+var flipY=op.inValueBool("Flip Y");
 var outTouchStart=op.outTrigger("Touch Start");
 var outTouchEnd=op.outTrigger("Touch End");
 
@@ -22,11 +22,13 @@ var outTouchEnd=op.outTrigger("Touch End");
 
 function setPos(event)
 {
-    if(event.touches && event.touches.length>0) 
+    if(event.touches && event.touches.length>0)
     {
         var rect = event.target.getBoundingClientRect();
         var x = event.touches[0].clientX - event.touches[0].target.offsetLeft;
         var y = event.touches[0].clientY - event.touches[0].target.offsetTop;
+
+        if(flipY.get()) y=rect.height-y;
 
         if(hdpi.get())
         {
@@ -34,13 +36,18 @@ function setPos(event)
             y*=(op.patch.cgl.pixelDensity||1);
         }
 
+        if(normalize.get())
+        {
+            x=(x/rect.width*2.0-1.0);
+            y=(y/rect.height*2.0-1.0);
+        }
+
         f1x.set(x);
         f1y.set(y);
     }
 
-    if(event.touches && event.touches.length>1) 
+    if(event.touches && event.touches.length>1)
     {
-
         var rect = event.target.getBoundingClientRect();
         var x = event.touches[1].clientX - event.touches[1].target.offsetLeft;
         var y = event.touches[1].clientY - event.touches[1].target.offsetTop;
@@ -77,14 +84,12 @@ var ontouchend=function(event)
 
 var ontouchmove=function(event)
 {
-    
     setPos(event);
     numFingers.set(event.touches.length);
     if(disableDefault.get() || (disableScaleWeb.get() && event.scale !== 1))
-    { 
+    {
         event.preventDefault();
     }
-    
 };
 
 

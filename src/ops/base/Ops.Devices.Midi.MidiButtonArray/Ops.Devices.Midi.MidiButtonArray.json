@@ -1,5 +1,4 @@
 {
-    "updated": 1516375939289,
     "authorName": "pandur",
     "id": "6afe0f08-0f09-4a57-b43c-414db478dcf4",
     "created": 1516049339061,
@@ -11,7 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "Note Start"
+                "name": "Note Start",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -19,7 +19,8 @@
             },
             {
                 "type": "0",
-                "name": "Note End"
+                "name": "Note End",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -27,15 +28,18 @@
             },
             {
                 "type": "0",
-                "name": "Light"
+                "name": "Light",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Toggle"
+                "name": "Toggle",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Button Value"
+                "name": "Button Value",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -43,7 +47,8 @@
             },
             {
                 "type": "0",
-                "name": "enabled"
+                "name": "enabled",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -53,11 +58,13 @@
             },
             {
                 "type": "0",
-                "name": "Last Index"
+                "name": "Last Index",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Num Buttons"
+                "name": "Num Buttons",
+                "subType": "number"
             },
             {
                 "type": "3",

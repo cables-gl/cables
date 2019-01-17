@@ -20,6 +20,16 @@
                 "type": "0",
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Normalize Coordinates",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip Y",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -68,7 +78,6 @@
         ],
         "name": "Ops.Devices.TouchScreen"
     },
-    "updated": 1522141296669,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "cedffacf-0f09-4342-bd21-540bd9c8037d",

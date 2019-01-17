@@ -59,41 +59,41 @@ render.onTriggered=function() {
     if(!autoAspect.get()) asp=aspect.get();
     else asp=cgl.getViewPort()[2]/cgl.getViewPort()[3];
     outAsp.set(asp);
-    
+
     // translation (truck, boom, dolly)
     cgl.pushViewMatrix();
-    
+
     if (updateCameraMovementMatrix) {
         mat4.identity(transMatrixMove);
-        
+
         vec3.set(vPos, posX.get(),posY.get(),posZ.get());
         if(posX.get()!==0.0 || posY.get()!==0.0 || posZ.get()!==0.0)
             mat4.translate(transMatrixMove,transMatrixMove, vPos);
-        
+
         if(rotX.get()!==0)
             mat4.rotateX(transMatrixMove,transMatrixMove, rotX.get()*CGL.DEG2RAD);
         if(rotY.get()!==0)
             mat4.rotateY(transMatrixMove,transMatrixMove, rotY.get()*CGL.DEG2RAD);
         if(rotZ.get()!==0)
             mat4.rotateZ(transMatrixMove,transMatrixMove, rotZ.get()*CGL.DEG2RAD);
-        
+
         updateCameraMovementMatrix = false;
     }
-    
+
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrixMove);
-    
+
     // projection (prespective / ortogonal)
     cgl.pushPMatrix();
-    
+
     // look at
     cgl.pushViewMatrix();
- 
+
     if (projectionMode.get()=='prespective') {
         mat4.perspective(
             cgl.pMatrix,
             fov.get()*0.0174533,
-            asp, 
-            zNear.get(), 
+            asp,
+            zNear.get(),
             zFar.get()
         );
     } else if (projectionMode.get()=='ortogonal') {
@@ -103,12 +103,12 @@ render.onTriggered=function() {
              1 * (fov.get() / 14),
             -1 * (fov.get() / 14) / asp,
              1 * (fov.get() / 14) / asp,
-            zNear.get(), 
+            zNear.get(),
             zFar.get()
         );
     }
-    
-    
+
+
 	arr[0]=eyeX.get();
 	arr[1]=eyeY.get();
 	arr[2]=eyeZ.get();
@@ -137,10 +137,10 @@ render.onTriggered=function() {
 	cgl.popPMatrix();
 
 	cgl.popViewMatrix();
-    
-    
+
+
 	// GUI for dolly, boom and truck
-	if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+	if(CABLES.UI && gui.patch().isCurrentOp(op))
 		gui.setTransformGizmo({
 			posX:posX,
 			posY:posY,

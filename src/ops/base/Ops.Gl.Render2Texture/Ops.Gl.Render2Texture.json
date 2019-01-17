@@ -9,21 +9,25 @@
             {
                 "type": "0",
                 "name": "use viewport size",
+                "group": "Alignment",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "texture width",
+                "group": "Alignment",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "texture height",
+                "group": "Alignment",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "filter",
+                "group": "Alignment",
                 "subType": "string"
             },
             {
@@ -63,7 +67,6 @@
         ],
         "name": "Ops.Gl.Render2Texture"
     },
-    "updated": 1543875428151,
     "authorName": "pandur",
     "id": "d01fa820-396c-4cb5-9d78-6b14762852af",
     "created": 1510268440125,

@@ -70,29 +70,52 @@ function reload()
         }
         op.uiAttribs.warning='';
 
-        var i=0;
-        var verts=JSON.parse(JSON.stringify(jsonMesh.vertices));
-
         var geom=new CGL.Geometry();
-        geom.vertices=verts;
+        geom.vertices=jsonMesh.vertices.slice();
         geom.vertexNormals=jsonMesh.normals||[];
         geom.tangents=jsonMesh.tangents||[];
         geom.biTangents=jsonMesh.bitangents||[];
 
-        if(centerPivot.get())geom.center();
+        if(centerPivot.get()) geom.center();
 
         if(jsonMesh.texturecoords) geom.texCoords = jsonMesh.texturecoords[0];
-        geom.verticesIndices=[];
-        geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
+        //geom.verticesIndices=[];
+
+        //console.log(geom.verticesIndices.length);
+
+        //for(var i=0;i<jsonMesh.faces.length;i++)
+        //{
+        //    geom.verticesIndices.push(jsonMesh.faces[i][0],jsonMesh.faces[i][1],jsonMesh.faces[i][2]);
+        //}
+        // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
+
+        // var nfo='';
+        // nfo += (geom.verticesIndices.length/3)+' faces <br/>';
+        // nfo += (geom.vertices.length/3)+' vertices <br/>';
+        // nfo += geom.texCoords.length+' texturecoords <br/>';
+        // nfo += geom.tangents.length+' tangents <br/>';
+        // nfo += geom.biTangents.length+' biTangents <br/>';
+        // if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
+
+        // op.uiAttr({"info":nfo});
+
+        var
+            indices = geom.verticesIndices = [],
+            faces = jsonMesh.faces,
+            face, i
+        ;
+        for(i = 0; i < faces.length; i++) {
+            face=jsonMesh.faces[i];
+            Array.prototype.push.apply(indices, face);
+        }
 
         var nfo='';
         nfo += (geom.verticesIndices.length/3)+' faces <br/>';
         nfo += (geom.vertices.length/3)+' vertices <br/>';
-        nfo += geom.texCoords.length+' texturecoords <br/>';
+        nfo += (geom.texCoords?geom.texCoords.length:'no')+' texturecoords <br/>';
+        nfo += geom.vertexNormals.length+' normals <br/>';
         nfo += geom.tangents.length+' tangents <br/>';
         nfo += geom.biTangents.length+' biTangents <br/>';
-        if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
-
         op.uiAttr({"info":nfo});
 
         geometryOut.set(null);
