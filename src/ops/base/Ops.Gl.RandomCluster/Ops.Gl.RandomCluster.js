@@ -1,9 +1,9 @@
 const
     exe=op.inTrigger("exe"),
     num=op.inValueInt("num"),
-    size=op.inValueFloat("size",10),
     seed=op.inValueFloat("random seed",1),
     round=op.inValueBool('round',false),
+    size=op.inValueFloat("size",10),
     scaleX=op.inValueFloat("scaleX",1),
     scaleY=op.inValueFloat("scaleY",1),
     scaleZ=op.inValueFloat("scaleZ",1),
@@ -15,9 +15,9 @@ const
     rotZ=op.inValueSlider("Rotate Z",1),
     scrollX=op.inValue("Scroll X",0);
 
-op.setPortGroup("Scaling",[scaleX,scaleY,scaleZ]);
+op.setPortGroup("Area",[size,scaleX,scaleY,scaleZ]);
 op.setPortGroup("Rotation",[rotX,rotY,rotZ]);
-op.setPortGroup("Parameters",[num,size,round,seed]);
+op.setPortGroup("Parameters",[num,round,seed]);
 op.toWorkPortsNeedToBeLinked(exe,trigger);
 
 const cgl=op.patch.cgl;
