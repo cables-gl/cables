@@ -1,0 +1,1 @@
+Enable HDR on the image compose op to get floating point outputs from the arrays

@@ -55,5 +55,42 @@
         ],
         "name": "Ops.Gl.MeshInstancer"
     },
-    "summary": "draw the same mesh multiple times very fast"
+    "summary": "draw the same mesh multiple times very fast",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "geom",
+                "text": "The shape that will be instanced"
+            },
+            {
+                "name": "Scale",
+                "text": "Global scale for all instances, disabled if scale array is used"
+            },
+            {
+                "name": "Limit Instances",
+                "text": "Enable to set a limit on how many instances are created"
+            },
+            {
+                "name": "Limit",
+                "text": "If limit instances is enabled this number determines how many instances are created"
+            },
+            {
+                "name": "positions",
+                "text": "Needs an XYZ array to determine the positions of each instance"
+            },
+            {
+                "name": "Scale Array",
+                "text": "needs an X array to determine the scale of each instance"
+            },
+            {
+                "name": "Rotations",
+                "text": "Needs an XYZ array to determine the xyz rotation of each instance. 0-360 degrees "
+            },
+            {
+                "name": "Num",
+                "text": "Total number of instances/shapes"
+            }
+        ]
+    }
 }

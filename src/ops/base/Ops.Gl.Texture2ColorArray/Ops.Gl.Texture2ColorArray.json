@@ -21,6 +21,11 @@
             {
                 "type": "3",
                 "name": "Colors"
+            },
+            {
+                "type": "0",
+                "name": "Floating Point",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Texture2ColorArray"
@@ -28,5 +33,6 @@
     "summary": "extract colors from a texture",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": ""
 }
