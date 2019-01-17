@@ -60,5 +60,12 @@
         ],
         "name": "Ops.Gl.Matrix.TransformView"
     },
-    "summary": "transform the viewmatrix"
+    "summary": "transform the viewmatrix",
+    "youtubeid": "",
+    "collections": [
+        "cameras"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

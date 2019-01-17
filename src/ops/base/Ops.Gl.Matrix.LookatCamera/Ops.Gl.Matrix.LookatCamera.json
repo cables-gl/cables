@@ -59,5 +59,12 @@
     "authorName": "pandur",
     "id": "e0f1bad6-7dfb-4665-b458-ca50a1bfe7fa",
     "created": 1512035659193,
-    "summary": "transforms view to look from eye to center "
+    "summary": "transforms view to look from eye to center ",
+    "youtubeid": "",
+    "collections": [
+        "cameras"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

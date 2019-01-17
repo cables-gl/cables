@@ -27,5 +27,12 @@
     "updated": 1522229032404,
     "authorName": "pandur",
     "id": "9194ea61-0746-4343-8c97-5028768509c5",
-    "created": 1521135757341
+    "created": 1521135757341,
+    "youtubeid": "",
+    "collections": [
+        "cameras"
+    ],
+    "docs": {
+        "ports": []
+    }
 }
