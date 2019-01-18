@@ -43,7 +43,5 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ]
+    "relatedops": null
 }
