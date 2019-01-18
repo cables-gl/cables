@@ -21,5 +21,11 @@
     },
     "authorName": "pandur",
     "id": "766147f4-94c5-4197-8e0b-f41320aac2c6",
-    "created": 1544360226445
+    "created": 1544360226445,
+    "collections": [
+        "pointArrays"
+    ],
+    "relatedops": [
+        "Ops.Gl.PointCollector"
+    ]
 }

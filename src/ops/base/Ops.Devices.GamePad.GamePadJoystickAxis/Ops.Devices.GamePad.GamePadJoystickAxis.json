@@ -42,5 +42,12 @@
     "summary": "get axis and angle of a joystick/thumbstick",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

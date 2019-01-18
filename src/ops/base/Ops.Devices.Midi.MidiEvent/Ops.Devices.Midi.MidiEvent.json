@@ -46,5 +46,16 @@
             }
         ],
         "name": "Ops.Devices.Midi.MidiEvent"
+    },
+    "summary": "",
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ],
+    "docs": {
+        "ports": []
     }
 }

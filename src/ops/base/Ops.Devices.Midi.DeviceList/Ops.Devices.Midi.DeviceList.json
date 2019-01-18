@@ -22,5 +22,15 @@
     "updated": 1541344442989,
     "authorName": "pandur",
     "id": "6e52048f-557d-4332-9d5e-2201f728cb23",
-    "created": 1541344437570
+    "created": 1541344437570,
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ],
+    "docs": {
+        "ports": []
+    }
 }

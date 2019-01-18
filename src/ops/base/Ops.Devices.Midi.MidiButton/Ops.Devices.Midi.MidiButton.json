@@ -47,5 +47,11 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "eDlaFD_d5lc"
+    "youtubeid": "eDlaFD_d5lc",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

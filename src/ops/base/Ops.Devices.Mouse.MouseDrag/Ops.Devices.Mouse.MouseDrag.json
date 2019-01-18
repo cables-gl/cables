@@ -38,5 +38,12 @@
     "summary": "get delta of mouse position while dragging",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

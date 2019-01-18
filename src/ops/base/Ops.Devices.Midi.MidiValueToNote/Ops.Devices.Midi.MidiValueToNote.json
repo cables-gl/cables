@@ -31,5 +31,12 @@
                 "text": "The note-string (compatible to [tone.js](https://github.com/Tonejs/Tone.js))"
             }
         ]
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

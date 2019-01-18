@@ -30,5 +30,16 @@
             }
         ],
         "name": "Ops.Devices.Midi.LaunchPadSequencer"
+    },
+    "summary": "",
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ],
+    "docs": {
+        "ports": []
     }
 }

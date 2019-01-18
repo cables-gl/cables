@@ -69,10 +69,6 @@
                 "text": "If you want to only trigger when a key has been pressed while the canvas has the focus (when you clicked in the canvas before) use `true`. If you want key presses to trigger even if the canvas is not in focus set it to `false` (global mode). "
             },
             {
-                "name": "Enable",
-                "text": "Enables / disables the op"
-            },
-            {
                 "name": "Prevent Default",
                 "text": "Prevent that other key listeners (parents) are informed on the key press"
             },
@@ -89,5 +85,12 @@
                 "text": "True if the key is currently pressed, false otherwise"
             }
         ]
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

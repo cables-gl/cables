@@ -42,5 +42,12 @@
     "summary": "Send a midi event to another device",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

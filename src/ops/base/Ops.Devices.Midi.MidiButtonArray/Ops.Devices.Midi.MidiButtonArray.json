@@ -77,5 +77,11 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "x0mjo8XStzA"
+    "youtubeid": "x0mjo8XStzA",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

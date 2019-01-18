@@ -39,5 +39,11 @@
             }
         ]
     },
-    "youtubeid": ""
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

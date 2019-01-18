@@ -31,5 +31,11 @@
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "collections": [
+        "pointArrays"
+    ],
+    "relatedops": [
+        "Ops.Gl.PointCollectorCollect"
+    ]
 }

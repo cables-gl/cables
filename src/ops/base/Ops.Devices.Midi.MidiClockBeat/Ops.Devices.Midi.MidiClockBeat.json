@@ -45,5 +45,12 @@
     "summary": "receive midi clock beat / sync",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

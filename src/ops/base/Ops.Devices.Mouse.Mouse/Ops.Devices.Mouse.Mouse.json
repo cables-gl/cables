@@ -123,5 +123,12 @@
                 "text": "True if the mouse is over the canvas"
             }
         ]
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

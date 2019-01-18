@@ -42,5 +42,16 @@
             }
         ],
         "name": "Ops.Devices.Midi.MidiKeyPressed"
+    },
+    "summary": "",
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ],
+    "docs": {
+        "ports": []
     }
 }

@@ -41,5 +41,11 @@
     "youtubeid": "eDlaFD_d5lc",
     "docs": {
         "ports": []
-    }
+    },
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }

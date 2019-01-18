@@ -90,5 +90,12 @@
     },
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ]
 }
