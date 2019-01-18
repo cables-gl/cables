@@ -91,5 +91,10 @@
     "summary": "Repeat a mesh along a spline using instancing",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "meshInstancing"
+    ],
+    "relatedops": null
 }

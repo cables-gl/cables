@@ -46,5 +46,10 @@
     "summary": "displace position of instanced object by perlin noise value",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "meshInstancing"
+    ],
+    "relatedops": null
 }

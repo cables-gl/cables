@@ -94,6 +94,8 @@
         ]
     },
     "collections": [
-        "pointArrays"
-    ]
+        "pointArrays",
+        "meshInstancing"
+    ],
+    "relatedops": null
 }

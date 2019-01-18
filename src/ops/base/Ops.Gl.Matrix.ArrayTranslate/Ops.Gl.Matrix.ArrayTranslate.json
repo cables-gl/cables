@@ -30,5 +30,11 @@
     "summary": "iterate over an array3: translate to xyz, then trigger next op ",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "pointArrays",
+        "transform"
+    ],
+    "relatedops": null
 }

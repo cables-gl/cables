@@ -35,5 +35,10 @@
     "summary": "colorize instanced meshes by picking random color from atexture",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "meshInstancing"
+    ],
+    "relatedops": null
 }
