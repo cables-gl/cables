@@ -724,7 +724,7 @@ CGL.Shader.prototype.getDefaultVertexShader = CGL.Shader.getDefaultVertexShader 
         .endl() + '   vec4 pos=vec4(vPosition,  1.0);'
         .endl() + '   mat4 mMatrix=modelMatrix;'
         .endl() + '   {{MODULE_VERTEX_POSITION}}'
-        .endl() + '   gl_Position = projMatrix * (viewMatrix*modelMatrix) * pos;'
+        .endl() + '   gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;'
         .endl() + '}';
 };
 
