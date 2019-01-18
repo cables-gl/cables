@@ -1,6 +1,6 @@
 var inGrad=op.inGradient("Gradient");
 var inSize=op.inValueInt("Size",256);
-var outTex=op.outObject("Texture");
+var outTex=op.outTexture("Texture");
 var inDir=op.inValueSelect("Direction",["X","Y"],"X");
 
 var cgl=op.patch.cgl;
@@ -8,11 +8,17 @@ inSize.onChange=update;
 inGrad.onChange=update;
 inDir.onChange=update;
 
+inGrad.set('{"keys" : [{"pos":0,"r":0,"g":0,"b":0},{"pos":0.25,"r":0,"g":0,"b":0},{"pos":0.75,"r":1,"g":1,"b":1},{"pos":1,"r":1,"g":1,"b":1}]}');
+
+console.log(inGrad.get());
+
 function update()
 {
     var width=Math.round(inSize.get());
     if(width<4)width=4;
     var grad=null;
+
+    console.log(inGrad.get());
 
     if(!inGrad.get() || inGrad.get()=='')
     {
@@ -28,13 +34,13 @@ function update()
     {
         console.error("could not parse gradient data");
     }
-    
-    if(!grad.keys)
+
+    if(!grad || !grad.keys)
     {
         console.error("gradient no data");
         return;
     }
-    
+
     var keys=grad.keys;
     var pixels=new Uint8Array(width*4);
 
@@ -42,7 +48,7 @@ function update()
     {
         var keyA=keys[i];
         var keyB=keys[i+1];
-        
+
         for(var x=keyA.pos*width;x<keyB.pos*width;x++)
         {
             var p=CABLES.map(x,keyA.pos*width,keyB.pos*width,0,1);
@@ -56,7 +62,7 @@ function update()
     }
 
     var tex=new CGL.Texture(cgl);
-    
+
     if(inDir.get()=="X") tex.initFromData(pixels,width,1);
     if(inDir.get()=="Y") tex.initFromData(pixels,1,width);
     outTex.set(null);
