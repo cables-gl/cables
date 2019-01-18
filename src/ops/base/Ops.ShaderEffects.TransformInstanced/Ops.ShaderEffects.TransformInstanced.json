@@ -91,5 +91,10 @@
     "summary": "transform instanced object",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "meshInstancing"
+    ],
+    "relatedops": null
 }

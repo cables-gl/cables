@@ -57,5 +57,10 @@
     "summary": "scatter object on the surface of a mesh",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "meshInstancing"
+    ],
+    "relatedops": null
 }
