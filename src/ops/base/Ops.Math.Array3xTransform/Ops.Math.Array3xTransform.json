@@ -61,5 +61,9 @@
     "summary": "transform (translate,rotate,scale) positions in an array3x ",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ]
 }
