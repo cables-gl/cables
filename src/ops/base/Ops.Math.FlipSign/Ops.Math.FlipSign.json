@@ -19,9 +19,11 @@
         ],
         "name": "Ops.Math.FlipSign"
     },
-    "summary": "positive numbers become positive and vice versa ",
+    "summary": "positive numbers become negative and vice versa ",
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "collections": null,
+    "relatedops": null
 }

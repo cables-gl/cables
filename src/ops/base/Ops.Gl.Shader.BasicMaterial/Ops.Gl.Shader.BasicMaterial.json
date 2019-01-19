@@ -9,21 +9,25 @@
             {
                 "type": "0",
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "a",
+                "group": "Color",
                 "subType": "number"
             },
             {
@@ -57,21 +61,25 @@
             {
                 "type": "0",
                 "name": "diffuseRepeatX",
+                "group": "Transform Texture",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "diffuseRepeatY",
+                "group": "Transform Texture",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Tex Offset X",
+                "group": "Transform Texture",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Tex Offset Y",
+                "group": "Transform Texture",
                 "subType": "number"
             }
         ],
@@ -87,7 +95,6 @@
         ],
         "name": "Ops.Gl.Shader.BasicMaterial"
     },
-    "updated": 1543875344979,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "85ae5cfa-5eca-4dd8-8b30-850ac34f7cd5",

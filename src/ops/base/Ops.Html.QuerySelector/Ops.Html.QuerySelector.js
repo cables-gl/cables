@@ -8,6 +8,13 @@ queryPort.onChange = update;
 
 function update() {
     var q = queryPort.get();
-    var el = document.querySelector(q);
-    elementPort.set(el);
+    try
+    {
+        var el = document.querySelector(q);
+        elementPort.set(el);
+    }
+    catch(e)
+    {
+        console.log(e);
+    }
 }
