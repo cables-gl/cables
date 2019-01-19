@@ -36,5 +36,35 @@
             }
         ],
         "name": "Ops.Math.Accumulator"
+    },
+    "summary": "Add to and multiply a number, set to current value",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger in",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Add to number",
+                "text": "this number will be added to the current number. Accepts positive and negative values"
+            },
+            {
+                "name": "Multiplier to add number",
+                "text": "Multiplies \"add to number\" by this amount"
+            },
+            {
+                "name": "Default Value",
+                "text": "When \"set default value\" is triggered this sets the current number"
+            },
+            {
+                "name": "Set Default Value",
+                "text": "Trigger this to make the current number the \"default value\""
+            },
+            {
+                "name": "Current value",
+                "text": "The current number"
+            }
+        ]
     }
 }

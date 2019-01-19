@@ -3,7 +3,7 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "function name",
+                "name": "Function Name",
                 "subType": "string"
             },
             {
@@ -14,7 +14,7 @@
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Next"
             }
         ],
         "name": "Ops.Patch.Function"
@@ -29,15 +29,13 @@
             {
                 "name": "trigger",
                 "text": "Execute the trigger from inside cables, for testing or to combine internal / external trigger"
-            },
-            {
-                "name": "Trigger",
-                "text": "Triggered every time the input `Trigger` is executed or the function was called from outside cables"
             }
         ]
     },
-    "updated": 1540980283572,
     "authorName": "pandur",
     "id": "b13d13a2-ab06-4c4c-afa3-5d506ecf327a",
-    "created": 1540980283574
+    "created": 1540980283574,
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null
 }
