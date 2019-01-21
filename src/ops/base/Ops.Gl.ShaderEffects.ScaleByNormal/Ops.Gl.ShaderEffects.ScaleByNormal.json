@@ -26,5 +26,10 @@
     "summary": "scale vertices of an object in the direction of face normals",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null
 }

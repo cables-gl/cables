@@ -32,5 +32,10 @@
     "summary": "load a font file like .otf, .ttf, .woff",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "drawText"
+    ],
+    "relatedops": null
 }

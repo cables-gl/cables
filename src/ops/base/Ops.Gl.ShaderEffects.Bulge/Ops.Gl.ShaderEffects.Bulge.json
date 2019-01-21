@@ -41,5 +41,9 @@
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null
 }

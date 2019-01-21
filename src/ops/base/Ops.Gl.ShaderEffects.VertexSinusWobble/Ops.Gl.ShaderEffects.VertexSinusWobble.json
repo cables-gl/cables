@@ -66,5 +66,10 @@
     "summary": "sine wave vertex displacement",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null
 }

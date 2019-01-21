@@ -1,7 +1,7 @@
-var val=op.addInPort(new CABLES.Port(op,"Value"));
-var outCurrent=op.outValue("Current Value");
-var outOldVal=op.outValue("Previous Value");
-
+const
+    val=op.inValueFloat("Value"),
+    outCurrent=op.outValue("Current Value"),
+    outOldVal=op.outValue("Previous Value");
 
 var oldValue=0;
 

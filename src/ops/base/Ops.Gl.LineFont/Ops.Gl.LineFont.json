@@ -32,5 +32,13 @@
         ],
         "name": "Ops.Gl.LineFont"
     },
-    "summary": "A Simple way to write text on the screen."
+    "summary": "A Simple way to write text on the screen.",
+    "youtubeid": "",
+    "collections": [
+        "drawText"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }
