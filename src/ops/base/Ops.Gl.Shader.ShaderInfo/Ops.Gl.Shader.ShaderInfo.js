@@ -37,8 +37,20 @@ exec.onTriggered=function()
 
     if(shader && shader.getProgram())
     {
-        outNumUniforms.set(cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS));
+        var activeUniforms=cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
+        outNumUniforms.set(activeUniforms);
         outNumAttributes.set(cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_ATTRIBUTES));
+
+
+    // var uniFloats=0;
+    // for (var i=0; i < activeUniforms; i++) {
+    //     var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
+    //     console.log(uniform)
+    //     var floats=0;
+
+    //     uniSize += uniform.size;
+    // }
+
 
         var i=0;
         var attribNames=[];
@@ -48,7 +60,7 @@ exec.onTriggered=function()
             attribNames.push(name);
         }
         outAttributeNames.set(attribNames);
-        
+
         outDefines.set(shader.getDefines());
         outName.set(shader.getName());
 
@@ -69,7 +81,7 @@ showModules.onTriggered=function()
 {
     if(!shader)return;
     var mods=shader.getCurrentModules();
- 
+
 
     CABLES.UI.MODAL.showCode('vertex shader',JSON.stringify(mods,false,4),"json");
 };

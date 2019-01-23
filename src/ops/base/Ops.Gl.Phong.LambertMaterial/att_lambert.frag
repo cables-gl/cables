@@ -2,7 +2,7 @@
 
 IN vec3 norm;
 IN vec4 modelPos;
-IN mat3 normalMatrix;
+UNI mat4 normalMatrix;
 IN vec2 texCoord;
 
 IN vec3 mvNormal;
@@ -39,7 +39,7 @@ void main()
     {{MODULE_BEGIN_FRAG}}
 
     vec4 col=vec4(0.0);
-    vec3 normal = normalize(normalMatrix*norm);
+    vec3 normal = normalize(mat3(normalMatrix)*norm);
 
     for(int l=0;l<NUM_LIGHTS;l++)
     {
