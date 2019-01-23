@@ -41,7 +41,8 @@ IN vec2 texCoord;
 
 IN vec3 norm;
 IN vec4 modelPos;
-IN mat3 normalMatrix;
+// IN mat3 normalMatrix;
+UNI mat4 normalMatrix;
 
 UNI float r,g,b,a;
 
@@ -89,7 +90,7 @@ float calcFresnel(vec3 direction, vec3 normal)
     {
         vec3 R = reflect(lightDirection, surfaceNormal);
         float r= pow(max(0.0, dot(viewDirection, R)), shininess);
-    
+
         return r;
     }
 #endif
@@ -102,16 +103,16 @@ void main()
     float specular=0.0;
 
     vec3 col=vec3(0.0);
-    vec3 normal = normalize(normalMatrix*norm);
-  
+    vec3 normal = normalize(mat3(normalMatrix)*norm);
+
     #ifdef DOUBLESIDED
         if(!gl_FrontFacing)normal*=vec3(-1);
     #endif
-  
+
     #ifdef HAS_TEXTURE_NORMAL
         vec3 TextureNormal_tangentspace = normalize(texture(texNormal, texCoord).rgb*2.0-1.0);
     #endif
-    
+
     vec3 eyevector = normalize( camPos);
 
     for(int l=0;l<NUM_LIGHTS;l++)
@@ -122,7 +123,7 @@ void main()
 
         vec3 lightModelDiff=light.pos - modelPos.xyz;
         vec3 lightDir = normalize(lightModelDiff);
-  
+
       	float distance = length( lightModelDiff );
         float falloff=getfallOff(light, distance);
         #ifndef SHOW_FALLOFF
@@ -142,14 +143,14 @@ void main()
 
             vec3 ll = normalize(LightDirection_tangentspace);
             // vec3 ll = normalize(lightDir);
-        	// Cosine of the angle between the normal and the light direction, 
+        	// Cosine of the angle between the normal and the light direction,
         	// clamped above 0
         	//  - light is at the vertical of the triangle -> 1
         	//  - light is perpendicular to the triangle -> 0
         	//  - light is behind the triangle -> 0
         	float cosTheta = clamp( dot(TextureNormal_tangentspace,ll ), 0.0,1.0 );
-        
-        
+
+
         	// Eye vector (towards the camera)
         	vec3 E = normalize( TBN*(camPos-modelPos.xyz));
         	// Direction in which the triangle reflects the light
@@ -164,12 +165,12 @@ void main()
 
 
         #ifndef HAS_TEXTURE_NORMAL
-        
+
             #ifdef SHOW_LAMBERT
                 vec3 lambert = vec3( max(dot(lightDir,normal), 0.0) );
                 vec3 lambertColor=lambert * light.color.rgb * light.mul;
                 lambertColor*=getfallOff(light, length(lightModelDiff));
-        
+
                 col+=lambertColor;
             #endif
 
@@ -191,13 +192,13 @@ void main()
             #ifdef SHOW_LAMBERT
                 col+= falloff*(light.color.rgb * light.mul*((cosTheta)))*1.0;
             #endif
-            
+
             #ifdef SHOW_SPECULAR
                 float specMul=specular;
                 #ifdef HAS_TEXTURE_SPECULAR
                     specMul*=texture(texSpecular, texCoord).r;
                 #endif
-                
+
                 col+=light.mul*specMul*pow(cosAlpha,5.0);// (distance*distance);
             #endif
 
@@ -227,19 +228,19 @@ void main()
             col*= vec3(r,g,b);
         #endif
     #endif
-    
+
     #ifndef SHOW_DIFFUSE
         col*=vec3(0.5);
     #endif
-    
+
     #ifdef SHOW_AO
         #ifdef HAS_TEXTURE_AO
             col*= texture(texAo, texCoord).rgb;
         #endif
     #endif
 
-    vec3 vNormal = normalize(normalMatrix * normal);
-    
+    vec3 vNormal = normalize(mat3(normalMatrix) * normal);
+
     #ifdef ENABLE_FRESNEL
     col+=vec3(r,g,b)*(calcFresnel(mvPos,vNormal)*fresnel*5.0);
     #endif

@@ -91,5 +91,9 @@
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "collections": [
+        "drawText"
+    ],
+    "relatedops": null
 }

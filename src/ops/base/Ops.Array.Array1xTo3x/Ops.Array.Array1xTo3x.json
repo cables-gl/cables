@@ -1,5 +1,4 @@
 {
-    "updated": 1519808647212,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "0d67fdf1-8e60-465e-9897-6aae6676e4c9",
@@ -19,12 +18,22 @@
         ],
         "name": "Ops.Array.Array1xTo3x"
     },
-    "summary": "convert array to array3x",
+    "summary": "convert array1x to array3x",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array1x",
+                "text": "Array in of single values"
+            },
+            {
+                "name": "Array3x",
+                "text": "Array output [index, value, always zero]"
+            }
+        ]
     },
     "youtubeid": "",
     "collections": [
         "pointArrays"
-    ]
+    ],
+    "relatedops": null
 }

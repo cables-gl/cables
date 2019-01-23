@@ -1,5 +1,4 @@
 {
-    "updated": 1515496896940,
     "authorName": "pandur",
     "id": "5e67cc5c-779c-4599-a168-a499140ae7be",
     "created": 1515496696277,
@@ -7,7 +6,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "integer"
             },
             {
                 "type": "3",
@@ -17,25 +17,52 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.Array3xGetValues"
     },
-    "summary": "get 3 values from an array3x",
+    "summary": "get 3 values xyz from an array3x",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Index",
+                "text": "Used to get data from the array"
+            },
+            {
+                "name": "Array",
+                "text": "Array in to get xyz data from"
+            },
+            {
+                "name": "X",
+                "text": "x component of index"
+            },
+            {
+                "name": "Y",
+                "text": "y component of index"
+            },
+            {
+                "name": "Z",
+                "text": "z component of index"
+            }
+        ]
     },
     "youtubeid": "",
     "collections": [
         "pointArrays"
+    ],
+    "relatedops": [
+        "Ops.Array.ArrayGetNumber"
     ]
 }

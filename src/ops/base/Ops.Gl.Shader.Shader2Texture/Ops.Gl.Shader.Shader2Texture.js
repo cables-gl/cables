@@ -1,6 +1,6 @@
 var exec=op.inTrigger("Render");
 var inShader=op.inObject("Shader");
-var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear']}));
+var tfilter=op.inValueSelect("filter",['nearest','linear']);
 // ,'mipmap'
 const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat'],'clamp to edge');
 
@@ -46,7 +46,6 @@ function initFb()
     var filter=CGL.Texture.FILTER_NEAREST;
     if(tfilter.get()=='linear') filter=CGL.Texture.FILTER_LINEAR;
 //        else if(tfilter.get()=='mipmap') filter=CGL.Texture.FILTER_MIPMAP;
-
 
     var selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
     if(twrap.get()=='repeat') selectedWrap=CGL.Texture.WRAP_REPEAT;
@@ -126,7 +125,7 @@ exec.onTriggered=function()
     mat4.identity(cgl.vMatrix);
 
     cgl.pushModelMatrix();
-    mat4.identity(cgl.mvMatrix);
+    mat4.identity(cgl.mMatrix);
 
     cgl.setShader(inShader.get());
     if(inShader.get().bindTextures) inShader.get().bindTextures();

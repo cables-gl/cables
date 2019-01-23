@@ -1,17 +1,17 @@
+var exe=op.inTrigger("Exe");
 var inArr1=op.inArray('Array 1');
 var inArr2=op.inArray('Array 2');
 
 var inPos=op.inValueSlider("Pos");
 var inWidth=op.inValueSlider("Width");
 
-var exe=op.inTrigger("Exe");
 
 var easing=op.inValueSelect("Easing",[
     'Linear',
     'Expo in','Expo out','Expo in out',
     'Cubic in','Cubic out','Cubic in out'],
     'Linear');
-    
+
 var reverse=op.inValueBool("Reverse");
 
 var next=op.outTrigger("Next");
@@ -28,7 +28,7 @@ easing.onChange=function()
     else if(easing.get()=='Cubic out') easingFunction=CABLES.easeCubicOut;
     else if(easing.get()=='Cubic in out') easingFunction=CABLES.easeCubicInOut;
     else easingFunction=null;
-    console.log(easingFunction);
+    // console.log(easingFunction);
 };
 
 exe.onTriggered=function()
@@ -64,11 +64,11 @@ exe.onTriggered=function()
                 resultArr[i]=m;
             }
         }
-        
+
         outArr.set(null);
         outArr.set(resultArr);
     }
-    
+
     next.trigger();
 };
 

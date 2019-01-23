@@ -21,10 +21,10 @@ function updateArr2()
 {
     if(!inArr2.get())return;
 
-    indexArray.length=inArr2.get().length/3;
-    
+    indexArray.length=Math.ceil(inArr2.get().length/3);
+
     var arr2=inArr2.get();
-    
+
     for(var i=0;i<indexArray.length;i+=3)
     {
         var index2=Math.floor(arr2.length/3*Math.random());
@@ -35,7 +35,7 @@ function updateArr2()
         // indexArray[i+1]=arr2[index2*3+1];
         // indexArray[i+2]=arr2[index2*3+2];
     }
-    
+
     // arrOut.set(null);
     // arrOut.set(resultArr);
     // updateArr1();
@@ -47,14 +47,14 @@ exec.onTriggered=function()
     var val1=0,val2=0;
     var arr1=inArr1.get();
     var arr2=inArr2.get();
-    
+
     var l1=0;
     var l2=0;
     if(arr1)l1=arr1.length;
     if(arr2)l2=arr2.length;
-    
+
     var l=Math.min(l1,l2);
-    
+
 
     for(var i=0;i<l;i+=3)
     {

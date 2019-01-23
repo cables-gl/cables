@@ -1,8 +1,8 @@
 
 var cgl=op.patch.cgl;
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
 
@@ -56,7 +56,7 @@ function updateInvert()
 function updateArea()
 {
     if(!shader)return;
-    
+
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_X");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Z");
@@ -91,7 +91,7 @@ function removeModule()
 op.render.onTriggered=function()
 {
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:x,
@@ -112,7 +112,7 @@ op.render.onTriggered=function()
 
     if(cgl.getShader()!=shader)
     {
-        
+
         console.log("Areapixeldiscard shader change!");
         if(shader) removeModule();
         shader=cgl.getShader();
@@ -133,7 +133,7 @@ op.render.onTriggered=function()
                 srcHeadFrag:attachments.areadiscard_head_frag||'',
                 srcBodyFrag:attachments.areadiscard_frag||''
             },moduleVert);
-            
+
         inSize.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'size',inSize);
 
         x.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'x',x);

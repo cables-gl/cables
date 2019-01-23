@@ -82,5 +82,9 @@
     "youtubeid": "z1Qf9dE67-w",
     "docs": {
         "ports": []
-    }
+    },
+    "collections": [
+        "drawText"
+    ],
+    "relatedops": null
 }
