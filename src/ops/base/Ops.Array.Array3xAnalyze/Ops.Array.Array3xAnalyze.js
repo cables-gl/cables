@@ -17,7 +17,7 @@ var outAvgZ=op.outValue("Average Z");
 inArr.onChange=function()
 {
     var arr=inArr.get();
-    
+
     var minX=999999999;
     var maxX=-999999999;
     var avgX=0;
@@ -30,11 +30,11 @@ inArr.onChange=function()
     var maxY=-999999999;
     var avgY=0;
     outNum.set(0);
-    
+
     if(arr)
     {
         outNum.set(arr.length/3);
-    
+
         for(var i=0;i<arr.length;i+=3)
         {
             avgX+=arr[i];

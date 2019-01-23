@@ -3,15 +3,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "text"
+                "name": "text",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "separator"
+                "name": "separator",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Numbers"
+                "name": "Numbers",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -25,13 +28,13 @@
             },
             {
                 "type": "0",
-                "name": "length"
+                "name": "length",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ParseArray"
     },
     "summary": "Parse a string into an array (create)",
-    "updated": 1517954951893,
     "authorName": "pandur",
     "id": "6d6bd309-fb4b-4eed-9a05-5a1cd93f2a05",
     "created": 1517954950220,

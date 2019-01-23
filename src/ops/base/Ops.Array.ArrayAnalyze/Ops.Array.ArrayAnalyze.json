@@ -1,5 +1,5 @@
 {
-    "summary": "get simple statistics about a number array",
+    "summary": "get the min, max and average value from an array",
     "layout": {
         "portsIn": [
             {
@@ -26,7 +26,6 @@
         ],
         "name": "Ops.Array.ArrayAnalyze"
     },
-    "updated": 1542698748876,
     "authorName": "pandur",
     "id": "1db230c8-212f-4679-87d6-3531659363da",
     "created": 1542698747467,
@@ -36,6 +35,19 @@
     ],
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Min",
+                "text": "The lowest value in the array "
+            },
+            {
+                "name": "Max",
+                "text": "The largest value in the array"
+            },
+            {
+                "name": "Average",
+                "text": "The average value of all numbers in the array"
+            }
+        ]
     }
 }

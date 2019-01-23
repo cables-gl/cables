@@ -1,11 +1,9 @@
 
 var render=op.inTrigger('render');
-var geometry=op.addInPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geometry=op.inObject("geometry");
 
-var mul=op.addInPort(new CABLES.Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
+var mul=op.inValueFloat("Length",0.1);
 var trigger=op.outTrigger('trigger');
-
-mul.set(0.1);
 
 geometry.ignoreValueSerialize=true;
 
@@ -29,7 +27,7 @@ function rebuild()
             points.push(geom.vertices[i+0]);
             points.push(geom.vertices[i+1]);
             points.push(geom.vertices[i+2]);
-    
+
             points.push(geom.vertices[i+0]+geom.vertexNormals[i+0]*mul.get());
             points.push(geom.vertices[i+1]+geom.vertexNormals[i+1]*mul.get());
             points.push(geom.vertices[i+2]+geom.vertexNormals[i+2]*mul.get());
@@ -48,18 +46,18 @@ render.onTriggered=function()
     {
         var shader=cgl.getShader();
         if(!shader)return;
-    
+
         cgl.pushModelMatrix();
 
         shader.bind();
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
-    
+
         cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(),buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
         cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
-    
+
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
         cgl.gl.drawArrays(cgl.gl.LINES, 0, buffer.numItems);
-    
+
         cgl.popModelMatrix();
         trigger.trigger();
 

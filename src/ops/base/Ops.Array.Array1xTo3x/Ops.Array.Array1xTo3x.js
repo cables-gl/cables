@@ -17,14 +17,14 @@ inArr.onChange=function()
     {
         arr.length=(theArray.length)*3;
     }
-    
+
     for(var i=0;i<theArray.length;i++)
     {
         arr[i*3+0]=i;
         arr[i*3+1]=theArray[i];
         arr[i*3+2]=0;
     }
-    
+
     outArr.set(null);
     outArr.set(arr);
 };

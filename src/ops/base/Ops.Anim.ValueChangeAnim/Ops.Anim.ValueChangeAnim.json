@@ -37,5 +37,32 @@
     "summary": "always animates to the current value",
     "authorName": "pandur",
     "id": "e5b0b016-9663-4c9d-9365-f54ae3c5fbb6",
-    "created": 1519730689749
+    "created": 1519730689749,
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The value you want to alter"
+            },
+            {
+                "name": "duration",
+                "text": "How long it takes for the value to reach the current value"
+            },
+            {
+                "name": "easing",
+                "text": "Easing mode selector"
+            },
+            {
+                "name": "result",
+                "text": "Calculated result"
+            },
+            {
+                "name": "Finished",
+                "text": "Sends a trigger out when the value is reached"
+            }
+        ]
+    }
 }

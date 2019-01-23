@@ -9,11 +9,13 @@
             {
                 "type": "0",
                 "name": "width",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "height",
+                "group": "Size",
                 "subType": "number"
             },
             {

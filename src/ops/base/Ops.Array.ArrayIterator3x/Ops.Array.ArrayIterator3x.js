@@ -1,25 +1,26 @@
-var exe=op.addInPort(new CABLES.Port(op,"Execute",CABLES.OP_PORT_TYPE_FUNCTION));
-var arr=op.addInPort(new CABLES.Port(op,"Array",CABLES.OP_PORT_TYPE_ARRAY));
-
-var pStep=op.inValue("Step");
-
-var trigger=op.outTrigger('Trigger');
-var idx=op.addOutPort(new CABLES.Port(op,"Index"));
-
-var valX=op.addOutPort(new CABLES.Port(op,"Value 1"));
-var valY=op.addOutPort(new CABLES.Port(op,"Value 2"));
-var valZ=op.addOutPort(new CABLES.Port(op,"Value 3"));
+const
+    exe=op.inTrigger("Execute"),
+    arr=op.inArray("Array"),
+    pStep=op.inValue("Step"),
+    trigger=op.outTrigger('Trigger'),
+    idx=op.outValue("Index"),
+    valX=op.outValue("Value 1"),
+    valY=op.outValue("Value 2"),
+    valZ=op.outValue("Value 3");
 
 var ar=arr.get()||[];
 
+var vstep=1;
+pStep.onChange=changeStep;
+changeStep();
+
+var i=0;
+var count=0;
 
 arr.onChange=function()
 {
-    ar=arr.get()||[];  
+    ar=arr.get()||[];
 };
-
-var vstep=1;
-pStep.onChange=changeStep;
 
 function changeStep()
 {
@@ -27,14 +28,11 @@ function changeStep()
     if(vstep<1.0)vstep=1.0;
     vstep=3*vstep;
 }
-changeStep();
 
-var i=0;
-var count=0;
 exe.onTriggered=function()
 {
     count=0;
-    
+
     for (var i = 0, len = ar.length; i < len; i+=vstep)
     {
         idx.set(count);

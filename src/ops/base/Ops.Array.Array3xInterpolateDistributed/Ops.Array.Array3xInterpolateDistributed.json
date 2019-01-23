@@ -1,5 +1,4 @@
 {
-    "updated": 1537363319611,
     "authorName": "pandur",
     "id": "a004a6e9-a05f-42dc-91d3-69aa88e67a87",
     "created": 1517242634176,
@@ -29,7 +28,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.Array3xDistributedInterpolate"
+        "name": "Ops.Array.Array3xInterpolateDistributed"
     },
     "summary": "interpolate between two arrays",
     "docs": {

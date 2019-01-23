@@ -27,5 +27,31 @@
         ],
         "name": "Ops.Array.Array3xAverage"
     },
-    "summary": "average x,y,z values of an array3d"
+    "summary": "average x,y,z values of an array3x",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.ArrayAnalyze",
+        "Ops.Array.Array3xAnalyze"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The xyz array to analyze"
+            },
+            {
+                "name": "Average X",
+                "text": "The average of the x component"
+            },
+            {
+                "name": "Average Y",
+                "text": "The average of the y component"
+            },
+            {
+                "name": "Average Z",
+                "text": "The average of the z component"
+            }
+        ]
+    }
 }

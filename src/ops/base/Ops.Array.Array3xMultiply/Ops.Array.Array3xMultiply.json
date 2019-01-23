@@ -32,10 +32,32 @@
     },
     "summary": "multiply every XYZ member of array3x",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array3x",
+                "text": "3x array in"
+            },
+            {
+                "name": "Mul X",
+                "text": "Multiply x component by this number"
+            },
+            {
+                "name": "Mul Y",
+                "text": "Multiply y component by this number"
+            },
+            {
+                "name": "Mul Z",
+                "text": "Multiply z component by this number"
+            },
+            {
+                "name": "Result",
+                "text": "Calculated array output"
+            }
+        ]
     },
     "youtubeid": "",
     "collections": [
         "pointArrays"
-    ]
+    ],
+    "relatedops": null
 }

@@ -1,11 +1,12 @@
-const render=op.inTrigger("render");
-const scale=op.addInPort(new CABLES.Port(op,"scale"));
-const trigger=op.outTrigger("trigger")
+const
+    render=op.inTrigger("render"),
+    scale=op.inValueFloat("scale",1.0),
+    trigger=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;
 const vScale=vec3.create();
+
 scale.onChange=scaleChanged;
-scale.set(1.0);
 scaleChanged();
 
 render.onTriggered=function()
@@ -18,6 +19,7 @@ render.onTriggered=function()
 
 function scaleChanged()
 {
-    vec3.set(vScale, scale.get(),scale.get(),scale.get());
+    var s=scale.get();
+    vec3.set(vScale, s,s,s);
 }
 

@@ -23,8 +23,6 @@ struct Light {
 
 UNI Light lights[NUM_LIGHTS];
 
-
-
 float getfallOff(Light light,float distLight)
 {
     float denom = distLight / light.radius + 1.0;
@@ -43,7 +41,6 @@ void main()
     vec4 col=vec4(0.0);
     vec3 normal = normalize(normalMatrix*norm);
 
-
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         Light light=lights[l];
@@ -53,11 +50,17 @@ void main()
         vec3 lambert = vec3( max(dot(lightDir,normal), 0.0) );
 
         vec3 newColor=lambert * light.color.rgb * light.mul;
+
         newColor*=getfallOff(light, length(lightModelDiff));
 
         col.rgb+=vec3(light.ambient);
         col.rgb+=newColor;
+        // col.rgb=light.color.rgb;
+
+
     }
+
+
 
     col.rgb*=vec3(r,g,b);
     col.a=a;
