@@ -31,9 +31,11 @@ void main()
    vec2 delta=vec2(dirX*am*0.01,dirY*am*0.01);
 
 
-
+    #ifdef RANDOM_OFFSET
     float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);
-
+    #else
+    float offset = 0.;
+    #endif
 
     #ifndef FASTBLUR
     const float range=20.0;
