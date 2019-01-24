@@ -51,5 +51,12 @@
     "updated": 1540921627658,
     "authorName": "pandur",
     "id": "4dae0a0f-1acb-43a8-8d98-882212ef477b",
-    "created": 1540920717039
+    "created": 1540920717039,
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344212850
+        }
+    ]
 }

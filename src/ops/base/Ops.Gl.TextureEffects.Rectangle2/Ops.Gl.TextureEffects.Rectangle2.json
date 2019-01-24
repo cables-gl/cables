@@ -67,5 +67,68 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Rectangle2"
-    }
+    },
+    "summary": "Draw a 2D rectangle with controllable parameters",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Needs trigger to work"
+            },
+            {
+                "name": "Width",
+                "text": "Width of the rectangle"
+            },
+            {
+                "name": "Height",
+                "text": "Height of the rectangle"
+            },
+            {
+                "name": "X",
+                "text": "The x position of the rectangle"
+            },
+            {
+                "name": "Y",
+                "text": "The y position of the rectangle"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotates the rectangle"
+            },
+            {
+                "name": "roundness",
+                "text": "Softens the 4 corners"
+            },
+            {
+                "name": "r",
+                "text": "Red amount"
+            },
+            {
+                "name": "g",
+                "text": "Green amount"
+            },
+            {
+                "name": "b",
+                "text": "Blue amount"
+            },
+            {
+                "name": "a",
+                "text": "Alpha amount"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344369982
+        }
+    ]
 }

@@ -40,5 +40,12 @@
     "summary": "simulating lens effect by shifting rgb channels",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344111327
+        }
+    ]
 }
