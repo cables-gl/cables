@@ -11,7 +11,6 @@ const
 
 r.setUiAttribs({colorPick:true});
 
-op.setPortGroup('Blending',[blendMode,amount]);
 op.setPortGroup('Color',[r,g,b]);
 
 const TEX_SLOT=0;
@@ -19,7 +18,7 @@ const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,'textureeffect color');
 
 var srcFrag=attachments.color_frag||'';
-srcFrag=srcFrag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+// srcFrag=srcFrag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 

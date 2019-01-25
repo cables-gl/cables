@@ -3,6 +3,7 @@ UNI sampler2D tex;
 
 UNI float sides;
 UNI float angle;
+UNI float amount;
 
 UNI float slidex;
 UNI float slidey;
@@ -10,6 +11,8 @@ UNI float centerX;
 UNI float centerY;
 
 const float tau = 6.28318530718;
+
+{{CGL.BLENDMODES}}
 
 void main()
 {
@@ -42,6 +45,8 @@ void main()
 	if(loc.x > 1.0) loc.x = mod(abs(1.0-loc.x),1.0);
 	if(loc.y > 1.0) loc.y = mod(abs(1.0-loc.y),1.0);
 
-	outColor= texture(tex,loc);
+	vec4 col=texture(tex,loc);
+	vec4 base=texture(tex,texCoord);
+    outColor= cgl_blend(base,col,amount);
 
 }

@@ -8,8 +8,11 @@ UNI int mode;
 UNI vec4 attribs;
 UNI vec3 scroll;
 UNI bool rgba;
-
+UNI float amount;
 IN vec2 texCoord;
+UNI sampler2D tex;
+
+{{CGL.BLENDMODES}}
 
 #define LINEAR 0
 #define EXPONENTIAL 1
@@ -48,6 +51,8 @@ float gn(vec3 p){
 
 void main()
 {
+    vec4 base=texture(tex,texCoord);
+
     vec2 tc=texCoord;
 	#ifdef DO_TILEABLE
 	    tc=abs(texCoord-0.5);
@@ -62,7 +67,5 @@ void main()
     } else
         col = vec4(vec3(gn(p*attribs.r)),1);
 
-    //outColor = col;
-    //outColor = pow(col,vec4(abs(attribs.a)));
-    outColor = vec4(col.rgb,1.0);
+    outColor=cgl_blend(base,col,amount);
 }

@@ -1,5 +1,4 @@
 {
-    "updated": 1536076107074,
     "authorName": "pandur",
     "id": "fbe5f1c6-019b-4fa7-a65a-050a7cd7720e",
     "created": 1536072067728,
@@ -8,6 +7,18 @@
             {
                 "type": "1",
                 "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
             },
             {
                 "type": "0",
