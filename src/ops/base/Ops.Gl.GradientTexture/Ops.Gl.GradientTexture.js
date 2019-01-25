@@ -10,15 +10,11 @@ inDir.onChange=update;
 
 inGrad.set('{"keys" : [{"pos":0,"r":0,"g":0,"b":0},{"pos":0.25,"r":0,"g":0,"b":0},{"pos":0.75,"r":1,"g":1,"b":1},{"pos":1,"r":1,"g":1,"b":1}]}');
 
-console.log(inGrad.get());
-
 function update()
 {
     var width=Math.round(inSize.get());
     if(width<4)width=4;
     var grad=null;
-
-    console.log(inGrad.get());
 
     if(!inGrad.get() || inGrad.get()=='')
     {

@@ -55,7 +55,10 @@ CGL.ShaderLibMods=
 
         this.onBind=function(cgl,shader)
         {
-            if(!shader.rndTexUni)shader.rndTexUni=new CGL.Uniform(shader,'t','CGLRNDTEX',7);
+            if(!shader.rndTexUni)
+            {
+                shader.rndTexUni=new CGL.Uniform(shader,'t','CGLRNDTEX',7);
+            }
             cgl.setTexture(7, CGL.Texture.getRandomTexture(cgl).tex );
         }
     }

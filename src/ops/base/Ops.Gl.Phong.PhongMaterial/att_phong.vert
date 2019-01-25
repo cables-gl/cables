@@ -14,8 +14,8 @@ OUT vec3 vTangent;
 OUT vec3 vBiTangent;
 
 
-OUT mediump vec3 norm;
-OUT mediump vec3 vert;
+OUT vec3 norm;
+OUT vec3 vert;
 OUT mat4 mvMatrix;
 // UNI mat4 normalMatrix;
 

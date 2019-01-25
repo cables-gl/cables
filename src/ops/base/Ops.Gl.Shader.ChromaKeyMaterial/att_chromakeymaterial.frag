@@ -1,6 +1,6 @@
 {{MODULE_BEGIN_FRAG}}
 
-IN mediump vec2 texCoord;
+IN vec2 texCoord;
 
 UNI sampler2D tex;
 UNI float r;
