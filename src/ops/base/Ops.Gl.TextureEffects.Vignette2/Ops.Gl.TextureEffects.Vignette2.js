@@ -4,15 +4,13 @@ const amount=op.inValueSlider("Amount",1);
 const trigger=op.outTrigger("Trigger");
 
 const strength=op.inValueSlider("Strength",1);
-// const lensRadius1=op.inValue("lensRadius1",0.8);
-const lensRadius1=op.inValueSlider("Radius",0.5);
+const lensRadius1=op.inValueSlider("Radius",0.3);
 const sharp=op.inValueSlider("Sharp",0.25);
 const aspect=op.inValue("Aspect",1);
 
-
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
+const r = op.inValueSlider("r", 0);
+const g = op.inValueSlider("g", 0);
+const b = op.inValueSlider("b", 0);
 
 r.setUiAttribs({ colorPick: true });
 
