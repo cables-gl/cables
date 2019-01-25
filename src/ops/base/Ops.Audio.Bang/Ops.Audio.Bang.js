@@ -1,16 +1,15 @@
-var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+var exe=op.inTrigger("exe");
 var beat=op.inTriggerButton("beat");
-var bang=this.addOutPort(new CABLES.Port(this,"bang"));
+var bang=op.outValue("bang");
 
-var startValue=this.addInPort(new CABLES.Port(this,"startValue"));
-var endValue=this.addInPort(new CABLES.Port(this,"endValue"));
+var startValue=op.inValueFloat("startValue");
+var endValue=op.inValueFloat("endValue");
 var duration = 0;
-var bpm=this.addInPort(new CABLES.Port(this,"bpm"));
+var bpm=op.inValueFloat("bpm");
 
 var anim=new CABLES.Anim();
 
-var easing=this.addInPort(new CABLES.Port(this,"easing",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["linear","smoothstep","smootherstep"]} ));
-easing.set('linear');
+var easing=op.inValueSelect("easing",["linear","smoothstep","smootherstep"],'linear');
 
 
 function init()
