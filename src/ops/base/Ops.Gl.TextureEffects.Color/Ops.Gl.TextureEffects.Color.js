@@ -11,7 +11,6 @@ const
 
 r.setUiAttribs({colorPick:true});
 
-op.setPortGroup('Blending',[blendMode,amount]);
 op.setPortGroup('Color',[r,g,b]);
 
 const TEX_SLOT=0;
