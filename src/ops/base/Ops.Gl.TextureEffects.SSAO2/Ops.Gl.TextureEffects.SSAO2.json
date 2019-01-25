@@ -59,12 +59,5 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "76d2dafc-aaf9-48ca-8b24-ee18492fba80",
-    "created": 1510089517558,
-    "changelog": [
-        {
-            "message": "added : Blend modes",
-            "author": "andro",
-            "date": 1548344174853
-        }
-    ]
+    "created": 1510089517558
 }

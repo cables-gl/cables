@@ -1,5 +1,7 @@
 const
     render=op.inTrigger('render'),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
     pixel=op.inValue("Pixel",5),
     lensDistort=op.inValueSlider("Lens Distort",0),
     doSmooth=op.inValueBool("Smooth",false),
@@ -9,12 +11,14 @@ const
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.chromatic_frag);
 const textureUniform=new CGL.Uniform(shader,'t','tex',0),
     uniPixel=new CGL.Uniform(shader,'f','pixel',0),
     uniOnePixel=new CGL.Uniform(shader,'f','onePixel',0),
     unitexMask=new CGL.Uniform(shader,'t','texMask',1),
+    uniAmount=new CGL.Uniform(shader,'f','amount',amount),
     unilensDistort=new CGL.Uniform(shader,'f','lensDistort',lensDistort);
 
 doSmooth.onChange=function()

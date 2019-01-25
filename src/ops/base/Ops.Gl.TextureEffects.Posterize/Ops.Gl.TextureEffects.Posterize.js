@@ -1,5 +1,7 @@
 const
     render=op.inTrigger("Render"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
     levels=op.inValue("levels",2),
     trigger=op.outTrigger("Trigger");
 
@@ -14,6 +16,9 @@ const
     levelsUniform=new CGL.Uniform(shader,'f','levels',levels),
     uniWidth=new CGL.Uniform(shader,'f','texWidth',128),
     uniHeight=new CGL.Uniform(shader,'f','texHeight',128);
+    uniAmount=new CGL.Uniform(shader,'f','amount',amount);
+
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {
@@ -26,7 +31,6 @@ render.onTriggered=function()
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
