@@ -3,7 +3,7 @@ const trigger=op.outTrigger('trigger');
 const amount=op.inValueFloat("amount");
 const direction=op.inValueSelect("direction",['both','vertical','horizontal'],'both');
 const fast=op.inValueBool("Fast",true);
-
+const randomOffset=op.inValueBool("Random Offset",true);
 const cgl=op.patch.cgl;
 
 amount.set(10);
@@ -15,7 +15,9 @@ shader.define("FASTBLUR");
 fast.onChange=function()
 {
     if(fast.get()) shader.define("FASTBLUR");
-        else shader.removeDefine("FASTBLUR");
+    else shader.removeDefine("FASTBLUR");
+    if(randomOffset.get()) shader.define("RANDOM_OFFSET");
+    else shader.removeDefine("RANDOM_OFFSET");
 };
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.blur_frag);

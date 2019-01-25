@@ -1,5 +1,4 @@
 {
-    "updated": 1537258114593,
     "authorName": "pandur",
     "id": "85846539-6ef7-46ba-aaf5-156bb6f49b87",
     "created": 1516276730775,
@@ -11,31 +10,38 @@
             },
             {
                 "type": "0",
-                "name": "Area"
+                "name": "Area",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Invert"
+                "name": "Invert",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "WorldSpace"
+                "name": "WorldSpace",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

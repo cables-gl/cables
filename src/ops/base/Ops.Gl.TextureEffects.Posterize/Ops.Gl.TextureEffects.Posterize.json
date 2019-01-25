@@ -7,6 +7,18 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "levels",
                 "subType": "number"
             }
@@ -23,8 +35,14 @@
     "docs": {
         "ports": []
     },
-    "updated": 1542698343471,
     "authorName": "pandur",
     "id": "6828f239-09be-45fd-afab-7962596fd2a4",
-    "created": 1542698279938
+    "created": 1542698279938,
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344250583
+        }
+    ]
 }

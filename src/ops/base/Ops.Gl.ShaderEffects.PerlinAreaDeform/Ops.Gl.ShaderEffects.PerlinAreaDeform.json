@@ -89,5 +89,13 @@
     "authorName": "pandur",
     "id": "8118b7a9-2ba7-4607-8fd1-8525d6fcf0d6",
     "updated": 1523638711303,
-    "created": 1505491754109
+    "created": 1505491754109,
+    "youtubeid": "",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

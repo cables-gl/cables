@@ -54,5 +54,10 @@
     "summary": "information about the current 3d scene",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "dataInfo"
+    ],
+    "relatedops": null
 }

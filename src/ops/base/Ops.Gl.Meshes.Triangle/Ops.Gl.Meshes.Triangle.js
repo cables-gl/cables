@@ -9,8 +9,14 @@ const
 
 geomOut.ignoreValueSerialize=true;
 
+op.setPortGroup("Size",[sizeW,sizeH]);
+
 const cgl=op.patch.cgl;
 var mesh=null;
+sizeW.onChange=create;
+sizeH.onChange=create;
+
+create();
 
 render.onTriggered=function()
 {
@@ -57,7 +63,3 @@ function create()
     geomOut.set(geom);
 }
 
-sizeW.onValueChange(create);
-sizeH.onValueChange(create);
-
-create();

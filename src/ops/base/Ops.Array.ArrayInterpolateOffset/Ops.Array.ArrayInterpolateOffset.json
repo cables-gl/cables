@@ -1,5 +1,4 @@
 {
-    "updated": 1518455577997,
     "authorName": "pandur",
     "id": "f89f5664-7cfa-4598-b09c-e4320b588b45",
     "created": 1518451074145,
@@ -19,19 +18,23 @@
             },
             {
                 "type": "0",
-                "name": "Pos"
+                "name": "Pos",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Easing"
+                "name": "Easing",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Reverse"
+                "name": "Reverse",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -46,5 +49,13 @@
         ],
         "name": "Ops.Array.ArrayInterpolateOffset"
     },
-    "summary": "interpolate between two arrays, only a few numbers at the same time"
+    "summary": "interpolate between two arrays, only a few numbers at the same time",
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

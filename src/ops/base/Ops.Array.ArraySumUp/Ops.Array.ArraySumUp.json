@@ -20,5 +20,16 @@
         ],
         "name": "Ops.Array.ArraySumUp"
     },
-    "summary": "sum of every number in an array"
+    "summary": "sum of every number in an array",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "an array full of numbers"
+            }
+        ]
+    }
 }

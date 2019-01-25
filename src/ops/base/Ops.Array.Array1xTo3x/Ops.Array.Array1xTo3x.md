@@ -4,3 +4,5 @@ structure of result:
 - first item is the index
 - second item is value from input array
 - third item is 0
+
+This op is useful to generate arrays for ops like the SplineMesh

@@ -1,5 +1,4 @@
 {
-    "updated": 1541970347967,
     "authorName": "pandur",
     "id": "fac012e2-43c8-4e21-85ac-189fe85d5723",
     "created": 1519814244088,
@@ -82,5 +81,12 @@
     "summary": "create an array of textures",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup",
+            "author": "pandur",
+            "date": 1548415252635
+        }
+    ]
 }

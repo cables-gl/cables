@@ -72,5 +72,9 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "NjG85Qbbl0w"
+    "youtubeid": "NjG85Qbbl0w",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null
 }

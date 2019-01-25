@@ -1,15 +1,17 @@
 
 var render=op.inTrigger('Render');
-var width=op.addInPort(new CABLES.Port(op,"Width",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new CABLES.Port(op,"Height",CABLES.OP_PORT_TYPE_VALUE));
-var thickness=op.addInPort(new CABLES.Port(op,"Thickness",CABLES.OP_PORT_TYPE_VALUE));
-var pivotX=op.addInPort(new CABLES.Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new CABLES.Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var width=op.inValueFloat("Width",1);
+var height=op.inValueFloat("Height",1);
+var thickness=op.inValueFloat("Thickness",-0.1);
+var dodraw=op.inValueBool("Draw",true);
+var pivotX=op.inValueSelect("pivot x",["center","left","right"]);
+var pivotY=op.inValueSelect("pivot y",["center","top","bottom"]);
 
 var trigger=op.outTrigger('trigger');
-var geomOut=op.addOutPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.outObject("Geometry");
 
-
+op.setPortGroup("Size",[width,height]);
+op.setPortGroup("Align",[pivotX,pivotY]);
 
 var cgl=op.patch.cgl;
 var mesh=null;
@@ -17,26 +19,22 @@ var geom=new CGL.Geometry();
 geom.tangents=[];
 geom.biTangents=[];
 
-width.set(1);
-height.set(1);
-thickness.set(-0.1);
 pivotX.set('center');
 pivotY.set('center');
 
 geomOut.ignoreValueSerialize=true;
 
-width.onChange=create;
-pivotX.onChange=create;
-pivotY.onChange=create;
-height.onChange=create;
-thickness.onChange=create;
-
+width.onChange=
+    pivotX.onChange=
+    pivotY.onChange=
+    height.onChange=
+    thickness.onChange=create;
 
 create();
 
 render.onTriggered=function()
 {
-    mesh.render(cgl.getShader());
+    if(dodraw.get()) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
@@ -48,7 +46,7 @@ function create()
     var x=-w/2;
     var y=-h/2;
     var th=thickness.get();
- 
+
     var pivot = pivotX.get();
     if(pivot=='right') x=-w;
     else if(pivot=='left') x=0;

@@ -1,0 +1,14 @@
+{
+    "id": "b781bc6b-b2cf-44fe-80eb-a840e430d27d",
+    "authorName": "pandur",
+    "created": 1544452851096,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "name": "Ops.Gl.Textures.NoiseTexture"
+    }
+}

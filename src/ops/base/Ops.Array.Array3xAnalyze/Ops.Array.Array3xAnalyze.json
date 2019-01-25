@@ -1,5 +1,4 @@
 {
-    "updated": 1513172083205,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "e2ace702-eed6-4b40-86f6-cea716ba8579",
@@ -14,46 +13,105 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Num Items"
+                "name": "Num Items",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min X"
+                "name": "Min X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max X"
+                "name": "Max X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Average X"
+                "name": "Average X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min Y"
+                "name": "Min Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max Y"
+                "name": "Max Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Average Y"
+                "name": "Average Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min Z"
+                "name": "Min Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max Z"
+                "name": "Max Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Average Z"
+                "name": "Average Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.Array3xAnalyze"
     },
-    "summary": "min,max and average values of an array3x"
+    "summary": "min,max and average values of an array3x",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.ArrayAnalyze"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Num Items",
+                "text": "Number of items in the array"
+            },
+            {
+                "name": "Min X",
+                "text": "Minimum value of the x component in the array"
+            },
+            {
+                "name": "Max X",
+                "text": "Maximum value of the x component in the array"
+            },
+            {
+                "name": "Average X",
+                "text": "Average of all the values in the x component"
+            },
+            {
+                "name": "Min Y",
+                "text": "Minimum value of the y component in the array"
+            },
+            {
+                "name": "Max Y",
+                "text": "Maximum value of the y component in the array"
+            },
+            {
+                "name": "Average Y",
+                "text": "Average of all the values in the y component"
+            },
+            {
+                "name": "Min Z",
+                "text": "Minimum value of the z component in the array"
+            },
+            {
+                "name": "Max Z",
+                "text": "Maximum value of the z component in the array"
+            },
+            {
+                "name": "Average Z",
+                "text": "Average of all the values in the z component"
+            }
+        ]
+    }
 }

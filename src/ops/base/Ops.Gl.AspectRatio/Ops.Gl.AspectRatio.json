@@ -1,0 +1,59 @@
+{
+    "id": "b4f17994-3028-4203-9a8d-d5e5377a58fc",
+    "authorName": "pandur",
+    "created": 1548265078416,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Custom",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Black Bars",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.AspectRatio"
+    },
+    "changelog": [
+        {
+            "message": "new op: replacing viewport and letterbox ops",
+            "author": "pandur",
+            "date": 1548266743514
+        }
+    ],
+    "summary": "set fixed viewport aspect ratop and letterboxing",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

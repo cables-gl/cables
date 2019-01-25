@@ -27,12 +27,10 @@ const allowRotation=op.inValueBool("Allow Rotation",true);
 const restricted=op.inValueBool("restricted",true);
 const pointerLock=op.inValueBool("Pointerlock",false);
 
-
-
 const trigger=op.outTrigger("trigger");
-const outRadius=op.addOutPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
-const outYDeg=op.addOutPort(new CABLES.Port(op,"Rot Y",CABLES.OP_PORT_TYPE_VALUE));
-const outXDeg=op.addOutPort(new CABLES.Port(op,"Rot X",CABLES.OP_PORT_TYPE_VALUE));
+const outRadius=op.outValue("radius");
+const outYDeg=op.outValue("Rot Y");
+const outXDeg=op.outValue("Rot X");
 
 const inReset=op.inTriggerButton("Reset");
 
@@ -330,22 +328,22 @@ function onMouseEnter(e)
     // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
 }
 
-initialRadius.onValueChange(function()
+initialRadius.onChange=function()
 {
     radius=initialRadius.get();
     reset();
-});
+};
 
-initialX.onValueChange(function()
+initialX.onChange=function()
 {
     px=percX=(initialX.get()*Math.PI*2);
-});
+};
 
-initialAxis.onValueChange(function()
+initialAxis.onChange=function()
 {
     py=percY=(initialAxis.get()-0.5);
     eye=circlePos(percY);
-});
+};
 
 var onMouseWheel=function(event)
 {
@@ -384,7 +382,7 @@ active.onChange=function()
 }
 
 
-this.setElement=function(ele)
+function setElement(ele)
 {
     unbind();
     element=ele;
@@ -423,7 +421,7 @@ function unbind()
 }
 
 eye=circlePos(0);
-this.setElement(cgl.canvas);
+setElement(cgl.canvas);
 
 
 bind();

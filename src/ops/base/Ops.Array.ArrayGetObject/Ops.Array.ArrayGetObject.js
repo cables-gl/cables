@@ -1,12 +1,17 @@
+const
+    array=op.inArray("array"),
+    index=op.inValueInt("index"),
+    value=op.outObject("value");
 
-var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
-var index=op.inValueInt("index");
-var value=op.addOutPort(new CABLES.Port(op, "value",CABLES.OP_PORT_TYPE_OBJECT));
+var last=null;
+
 array.ignoreValueSerialize=true;
 value.ignoreValueSerialize=true;
 
+index.onChange=update;
+array.onChange=update;
 
-var last=null;
+op.toWorkPortsNeedToBeLinked(array,value);
 
 function update()
 {
@@ -31,11 +36,8 @@ function update()
     }
     if(arr[ind])
     {
-
         value.set( arr[ind]);
         last=arr[ind];
     }
 }
 
-index.onChange=update;
-array.onChange=update;

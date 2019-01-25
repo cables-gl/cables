@@ -54,5 +54,13 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.Bend"
+    },
+    "youtubeid": "",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

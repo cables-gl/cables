@@ -9,6 +9,8 @@ const
     aoClamp=op.inValueSlider("Ao Clamp",0.25),
     lumInfluence=op.inValueSlider("Luminance Influence",0.7);
 
+
+
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 

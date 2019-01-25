@@ -57,5 +57,10 @@
     "summary": "deform a spherical area of a mesh",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null
 }

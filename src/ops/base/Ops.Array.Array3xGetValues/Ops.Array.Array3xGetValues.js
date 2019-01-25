@@ -19,8 +19,8 @@ return;
         outX.set(arr[i+0]);
         outY.set(arr[i+1]);
         outZ.set(arr[i+2]);
-    
+
     }
-    
-    
+
+
 };
