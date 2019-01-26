@@ -57,7 +57,7 @@
             {
                 "type": "0",
                 "name": "button down",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": "1",
@@ -74,7 +74,7 @@
             {
                 "type": "0",
                 "name": "mouseOver",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": "0",

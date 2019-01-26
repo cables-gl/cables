@@ -1,5 +1,4 @@
 {
-    "updated": 1519815842715,
     "authorName": "pandur",
     "id": "76b42a0b-21a4-4eef-b20c-5a969a2189f0",
     "created": 1519815116286,
@@ -13,7 +12,8 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Num Gamepads"
+                "name": "Num Gamepads",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -26,9 +26,13 @@
             {
                 "type": "2",
                 "name": "Pad 2"
+            },
+            {
+                "type": "2",
+                "name": "Pad 3"
             }
         ],
-        "name": "Ops.Devices.ListGamePads"
+        "name": "Ops.Devices.GamePad.GamePads"
     },
     "summary": "list connected gamepads - press a button to connect",
     "docs": {

@@ -1,11 +1,10 @@
-var index=op.addInPort(new CABLES.Port(op, "index",CABLES.OP_PORT_TYPE_VALUE));
-var seed=op.addInPort(new CABLES.Port(op,"random seed"));
-var min=op.addInPort(new CABLES.Port(op,"Min"));
-var max=op.addInPort(new CABLES.Port(op,"Max"));
-
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
+const index=op.inValueInt("index");
+const seed=op.inValueFloat("random seed");
+const min=op.inValueFloat("Min");
+const max=op.inValueFloat("Max");
+const outX=op.outValue("X");
+const outY=op.outValue("Y");
+const outZ=op.outValue("Z");
 
 var numValues=100;
 min.set(-1);
@@ -27,9 +26,9 @@ index.onChange=function()
         numValues=idx+100;
         init();
     }
-    
+
     idx*=3;
-    
+
     outX.set(arr[idx+0]);
     outY.set(arr[idx+1]);
     outZ.set(arr[idx+2]);
@@ -38,7 +37,7 @@ index.onChange=function()
 function init()
 {
     Math.randomSeed=seed.get();
-    
+
     arr.length=Math.floor(numValues*3) || 300;
     for(var i=0;i<arr.length;i+=3)
     {

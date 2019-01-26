@@ -12,7 +12,8 @@
             },
             {
                 "type": "0",
-                "name": "Length"
+                "name": "Length",
+                "subType": "integer"
             },
             {
                 "type": "1",
@@ -20,13 +21,15 @@
             },
             {
                 "type": "0",
-                "name": "Mode"
+                "name": "Mode",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -35,7 +38,6 @@
         ],
         "name": "Ops.Math.Incrementor"
     },
-    "updated": 1519928353362,
     "authorName": "pandur",
     "id": "45cc0011-ada8-4423-8f5b-39a3810b8389",
     "created": 1516875152747

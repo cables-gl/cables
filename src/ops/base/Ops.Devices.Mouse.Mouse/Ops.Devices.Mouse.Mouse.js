@@ -1,31 +1,24 @@
+const
+    relative=op.inValueBool("relative"),
+    normalize=op.inValueBool("normalize"),
+    active=op.inValueBool("Active",true),
+    smooth=op.inValueBool("smooth"),
+    smoothSpeed=op.inValueFloat("smoothSpeed",20),
+    area=op.inValueSelect("Area",['Canvas','Document','Parent Element'],"Canvas"),
+    multiply=op.inValueFloat("multiply",1),
+    flipY=op.inValueBool("flip y",true),
+    outMouseX=op.outValue("x"),
+    outMouseY=op.outValue("y"),
+    mouseDown=op.outValueBool("button down"),
+    mouseClick=op.outTrigger("click"),
+    mouseUp=op.outTrigger("Button Up"),
+    mouseClickRight=op.outTrigger("click right"),
+    mouseOver=op.outValueBool("mouseOver"),
+    outButton=op.outValue("button");
 
-var outMouseX=op.addOutPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
-var outMouseY=op.addOutPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
-var mouseDown=op.addOutPort(new CABLES.Port(op,"button down",CABLES.OP_PORT_TYPE_VALUE));
-var mouseClick=op.addOutPort(new CABLES.Port(op,"click",CABLES.OP_PORT_TYPE_FUNCTION));
-var mouseUp=op.addOutPort(new CABLES.Port(op,"Button Up",CABLES.OP_PORT_TYPE_FUNCTION));
-var mouseClickRight=op.addOutPort(new CABLES.Port(op,"click right",CABLES.OP_PORT_TYPE_FUNCTION));
-var mouseOver=op.addOutPort(new CABLES.Port(op,"mouseOver",CABLES.OP_PORT_TYPE_VALUE));
-var relative=op.addInPort(new CABLES.Port(op,"relative",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var normalize=op.addInPort(new CABLES.Port(op,"normalize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var active=op.inValueBool("Active",true);
-var smooth=op.addInPort(new CABLES.Port(op,"smooth",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var smoothSpeed=op.addInPort(new CABLES.Port(op,"smoothSpeed",CABLES.OP_PORT_TYPE_VALUE));
-var area=op.addInPort(new CABLES.Port(op,"Area",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['Canvas','Document','Parent Element']}));
-var outButton=op.addOutPort(new CABLES.Port(op,"button",CABLES.OP_PORT_TYPE_VALUE));
-var multiply=op.addInPort(new CABLES.Port(op,"multiply",CABLES.OP_PORT_TYPE_VALUE));
-var flipY=op.inValueBool("flip y",true);
-
-area.set("Canvas");
-
-multiply.set(1.0);
 var smoothTimer=0;
-smoothSpeed.set(20);
-
 var cgl=op.patch.cgl;
 var listenerElement=null;
-
-
 
 function setValue(x,y)
 {
@@ -98,31 +91,31 @@ function updateSmooth()
     setValue(lineX,lineY);
 }
 
-var onMouseEnter = function(e)
+function onMouseEnter(e)
 {
     mouseDown.set(false);
     mouseOver.set(true);
     speed=smoothSpeed.get();
-};
+}
 
-var onMouseDown = function(e)
+function onMouseDown(e)
 {
     outButton.set(e.which);
     mouseDown.set(true);
-};
+}
 
-var onMouseUp = function(e)
+function onMouseUp(e)
 {
     outButton.set(0);
     mouseDown.set(false);
     mouseUp.trigger();
-};
+}
 
-var onClickRight= function(e)
+function onClickRight(e)
 {
     mouseClickRight.trigger();
     e.preventDefault();
-};
+}
 
 function onmouseclick(e)
 {
@@ -214,13 +207,13 @@ function ontouchstart(event)
     mouseDown.set(true);
 
     if(event.touches && event.touches.length>0) onMouseDown(event.touches[0]);
-};
+}
 
 function ontouchend(event)
 {
     mouseDown.set(false);
     onMouseUp();
-};
+}
 
 function removeListeners()
 {
