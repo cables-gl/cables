@@ -1,7 +1,10 @@
 const cgl = op.patch.cgl;
 
 // inputs
-const inTrigger = op.inTrigger("render");
+const inTrigger = op.inTrigger("render"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1);
+
 const inLayerMode = op.inValueSelect("mode",[
     "exponential",
     "logarithmic",
@@ -20,6 +23,7 @@ const inScrollZ = op.inValue("scrollZ");
 const outTrigger = op.outTrigger("trigger");
 
 // locals
+const TEX_SLOT=0;
 const shader = new CGL.Shader(cgl);
 const attribs = [inScale.get(),inNumLayers.get(),inFactor.get(),0];
 shader.setSource(shader.getDefaultVertexShader(),attachments.layernoise_frag);
@@ -31,6 +35,10 @@ shader.addUniform(uniMode);
 const uniRGBA = new CGL.Uniform(shader, "b", "rgba", false);
 const scroll = [inScrollX.get(),inScrollY.get(),inScrollZ.get()];
 const uniScroll = new CGL.Uniform(shader, "3f", "scroll", scroll);
+const uniformAmount=new CGL.Uniform(shader,'f','amount',amount);
+const textureUniform=new CGL.Uniform(shader,'t','tex',TEX_SLOT);
+
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 var needsUpdate=false;
 // events
@@ -61,6 +69,8 @@ inTrigger.onTriggered = function () {
 
 
     }
+
+    cgl.setTexture(TEX_SLOT, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();

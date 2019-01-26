@@ -1,5 +1,8 @@
 var render=op.inTrigger('render');
 
+var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+var amount=op.inValueSlider("Amount",1);
+
 var inWidth=op.inValue("Width",0.25);
 var inHeight=op.inValue("Height",0.25);
 var inPosX=op.inValue("X",0.5);
@@ -37,6 +40,9 @@ var uniformR=new CGL.Uniform(shader,'f','r',r);
 var uniformG=new CGL.Uniform(shader,'f','g',g);
 var uniformB=new CGL.Uniform(shader,'f','b',b);
 var uniformA=new CGL.Uniform(shader,'f','a',a);
+
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
+var uniformAmount=new CGL.Uniform(shader,'f','amount',amount);
 
 render.onTriggered=function()
 {

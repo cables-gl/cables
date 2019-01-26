@@ -4,6 +4,13 @@ var CGL = CGL || {};
 
 CGL.ShaderLibMods=
 {
+    "CGL.BLENDMODES": function()
+    {
+        this.name="blendmodes";
+        this.srcHeadFrag=CGL.TextureEffect.getBlendCode();
+    },
+    
+
     // quite good random numbers, but somehow don't work in ANGLE 
     "CGL.RANDOM_OLD": function()
     {

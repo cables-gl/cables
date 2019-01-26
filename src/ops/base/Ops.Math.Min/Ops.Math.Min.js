@@ -1,6 +1,6 @@
 const result=op.outValue("result");
-var value=op.addInPort(new CABLES.Port(op,"value"));
-var min=op.addInPort(new CABLES.Port(op,"Minimum"));
+const value=op.inValueFloat("value");
+const min=op.inValueFloat("Minimum");
 
 function exec()
 {

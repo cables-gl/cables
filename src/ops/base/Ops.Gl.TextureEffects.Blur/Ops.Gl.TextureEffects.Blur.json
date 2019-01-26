@@ -22,6 +22,11 @@
                 "subType": "boolean"
             },
             {
+                "type": "0",
+                "name": "Random Offset",
+                "subType": "boolean"
+            },
+            {
                 "type": "2",
                 "name": "mask"
             }

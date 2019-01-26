@@ -1,5 +1,4 @@
 {
-    "updated": 1523968064961,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9ba52457-5f0d-4b20-a97c-4ec4856b8e29",
@@ -42,5 +41,12 @@
     "collections": [
         "transform"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "code cleanup",
+            "author": "pandur",
+            "date": 1548414796525
+        }
+    ]
 }

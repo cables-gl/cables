@@ -5,7 +5,7 @@ const outWidth=op.outValue("Width");
 const outHeight=op.outValue("Height");
 
 
-var ratio=op.addInPort(new CABLES.Port(op,"ratio",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[1,1.25,1.3333333333,1.777777777778,1.88,2.33333333333333,2.4151,3,4]} ));
+var ratio=op.inValueSelect("ratio",[1,1.25,1.3333333333,1.777777777778,1.88,2.33333333333333,2.4151,3,4]);
 
 ratio.set(1.777777777778);
 
@@ -31,7 +31,6 @@ function resize()
 
     if(_w<cgl.canvasWidth) _x=(cgl.canvasWidth-_w)/2;
     if(_h<cgl.canvasHeight) _y=(cgl.canvasHeight-_h)/2;
-
 
     _w=Math.ceil(_w);
     _h=Math.ceil(_h);

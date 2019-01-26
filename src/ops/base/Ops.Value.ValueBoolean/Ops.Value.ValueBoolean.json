@@ -11,7 +11,7 @@
             {
                 "type": "0",
                 "name": "result",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Value.ValueBoolean"
@@ -29,7 +29,6 @@
             }
         ]
     },
-    "updated": 1541052021738,
     "authorName": "pandur",
     "id": "83e2d74c-9741-41aa-a4d7-1bda4ef55fb3",
     "created": 1541052012961

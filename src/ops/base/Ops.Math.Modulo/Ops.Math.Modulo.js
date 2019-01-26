@@ -1,11 +1,18 @@
 
 const result=op.outValue("result");
-var number1=op.addInPort(new CABLES.Port(op,"number1"));
-var number2=op.addInPort(new CABLES.Port(op,"number2"));
-var pingpong=op.addInPort(new CABLES.Port(op,"pingpong",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-
+const number1=op.inValueFloat("number1");
+const number2=op.inValueFloat("number2");
+const pingpong=op.inValueBool("pingpong");
 
 var doPingPong=false;
+
+number1.onChange=exec;
+number2.onChange=exec;
+
+number1.set(1);
+number2.set(2);
+
+pingpong.onChange=updatePingPong;
 
 function exec()
 {
@@ -27,14 +34,7 @@ function exec()
     }
 }
 
-number1.onChange=exec;
-number2.onChange=exec;
-
-number1.set(1);
-number2.set(2);
-
-pingpong.onValueChange(
-    function()
-    {
-        doPingPong=pingpong.get();
-    });
+function updatePingPong()
+{
+    doPingPong=pingpong.get();
+}

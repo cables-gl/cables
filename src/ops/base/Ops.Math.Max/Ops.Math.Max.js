@@ -1,6 +1,13 @@
-const result=op.outValue("result");
-var value=op.addInPort(new CABLES.Port(op,"value"));
-var max=op.addInPort(new CABLES.Port(op,"Maximum"));
+const
+    result=op.outValue("result"),
+    value=op.inValueFloat("value"),
+    max=op.inValueFloat("Maximum");
+
+max.onChange=exec;
+value.onChange=exec;
+
+value.set(1);
+max.set(1);
 
 function exec()
 {
@@ -8,8 +15,3 @@ function exec()
     if(v==v) result.set( v );
 }
 
-max.onChange=exec;
-value.onChange=exec;
-
-value.set(1);
-max.set(1);
