@@ -7,6 +7,18 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Pixel",
                 "subType": "number"
             },
@@ -40,5 +52,12 @@
     "summary": "simulating lens effect by shifting rgb channels",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344111327
+        }
+    ]
 }

@@ -20,9 +20,9 @@ vec3 mPos;
 
 float mulRotPre=0.0;
 #ifdef TEX_ROT
-    // float scc=texture2D( MOD_texScale, vec2(posOnSpline,0.5) ).r;
-    mulRotPre=texture2D( MOD_texRot, vec2(posOnSpline,0.5) ).r*116.28;
-    
+    // float scc=texture( MOD_texScale, vec2(posOnSpline,0.5) ).r;
+    mulRotPre=texture( MOD_texRot, vec2(posOnSpline,0.5) ).r*116.28;
+
 #endif
 
 mat4 rotma=mat4(1.0);
@@ -50,8 +50,8 @@ newMatrix[3][2]+=mPos.z;
 newMatrix[3][3]=1.0;
 
 #ifdef TEX_SCALE
-    float scc=texture2D( MOD_texScale, vec2(posOnSpline,0.5) ).r;
-    
+    float scc=texture( MOD_texScale, vec2(posOnSpline,0.5) ).r;
+
     newMatrix[0][0]*=scc;
     newMatrix[1][1]*=scc;
     newMatrix[2][2]*=scc;

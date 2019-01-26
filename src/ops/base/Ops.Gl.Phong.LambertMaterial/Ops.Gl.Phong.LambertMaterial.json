@@ -45,5 +45,12 @@
     "summary": "simple shaded material",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "fixed: now works on ios again",
+            "author": "pandur",
+            "date": 1548264683950
+        }
+    ]
 }

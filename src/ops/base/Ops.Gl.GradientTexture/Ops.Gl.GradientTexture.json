@@ -11,6 +11,11 @@
             },
             {
                 "type": "0",
+                "name": "Smoothstep",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Size",
                 "subType": "integer"
             },

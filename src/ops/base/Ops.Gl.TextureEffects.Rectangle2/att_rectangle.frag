@@ -11,16 +11,19 @@ UNI float g;
 UNI float b;
 UNI float a;
 
+UNI float amount;
 UNI float rotate;
 UNI float roundness;
 
 #define DEG2RAD 0.785398163397
 
+{{CGL.BLENDMODES}}
+
 mat2 rot(float angle)
 {
     float s=sin(angle);
     float c=cos(angle);
-    
+
     return mat2(c,-s,s,c);
 }
 
@@ -33,15 +36,15 @@ float smin( float a, float b, float k )
 
 void main()
 {
-    vec4 col=texture(tex,texCoord);
-    vec4 newcol;
+    vec4 base=texture(tex,texCoord);
+    vec4 col;
     vec2 p=texCoord*2.0-1.0;
     float d=1.0;
 
     vec2 pp=vec2(p.x-x,p.y-y);
 
     pp=pp*rot(rotate*DEG2RAD/45.0);
-    
+
     float roundn=roundness*min(width,height);
 
     vec2 size=max(vec2(width,height)-roundn,0.0);
@@ -55,10 +58,14 @@ void main()
     // d=max(d,0.0);
     // d=max(d,0.0);
 
+    col = vec4( (1.0-d)*vec3(r,g,b),1.0);
+
+    // col=vec4( _blend(base.rgb,col.rgb) ,1.0);
+    // col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
+
+    outColor= cgl_blend(base,col,amount);
 
 
-
-    outColor = vec4( (1.0-d)*vec3(r,g,b),1.0);
 }
 
 

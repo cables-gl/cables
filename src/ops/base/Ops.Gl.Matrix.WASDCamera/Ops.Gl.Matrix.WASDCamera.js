@@ -1,5 +1,3 @@
-op.name='WASDCamera';
-
 
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
@@ -10,16 +8,16 @@ var vPos=vec3.create();
 var speedx=0,speedy=0,speedz=0;
 var movementSpeedFactor = 0.5;
 
-var posX=op.addInPort(new CABLES.Port(op,"posX",CABLES.OP_PORT_TYPE_VALUE));
-var posY=op.addInPort(new CABLES.Port(op,"posY",CABLES.OP_PORT_TYPE_VALUE));
-var posZ=op.addInPort(new CABLES.Port(op,"posZ",CABLES.OP_PORT_TYPE_VALUE));
+var posX=op.inValueFloat("posX");
+var posY=op.inValueFloat("posY");
+var posZ=op.inValueFloat("posZ");
 
-var rotX=op.addInPort(new CABLES.Port(op,"rotX",CABLES.OP_PORT_TYPE_VALUE));
-var rotY=op.addInPort(new CABLES.Port(op,"rotY",CABLES.OP_PORT_TYPE_VALUE));
+var rotX=op.inValueFloat("rotX");
+var rotY=op.inValueFloat("rotY");
 
-var outPosX=op.addOutPort(new CABLES.Port(op,"posX",CABLES.OP_PORT_TYPE_VALUE));
-var outPosY=op.addOutPort(new CABLES.Port(op,"posY",CABLES.OP_PORT_TYPE_VALUE));
-var outPosZ=op.addOutPort(new CABLES.Port(op,"posZ",CABLES.OP_PORT_TYPE_VALUE));
+var outPosX=op.outValue("posX");
+var outPosY=op.outValue("posY");
+var outPosZ=op.outValue("posZ");
 outPosX.set(-posX.get());
 outPosY.set(-posY.get());
 outPosZ.set(-posZ.get());
@@ -68,7 +66,7 @@ function calcCameraMovement()
     {
         // Control X-Axis movement
         pitchFactor = Math.cos(DEG2RAD*rotX.get());
-                
+
         camMovementXComponent += ( movementSpeedFactor * (Math.sin(DEG2RAD*rotY.get())) ) * pitchFactor;
 
         // Control Y-Axis movement
@@ -163,7 +161,7 @@ function lockChangeCallback(e)
         pressedD=false;
     }
 }
-   
+
 document.addEventListener('pointerlockchange', lockChangeCallback, false);
 document.addEventListener('mozpointerlockchange', lockChangeCallback, false);
 document.addEventListener('webkitpointerlockchange', lockChangeCallback, false);

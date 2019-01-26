@@ -7,23 +7,28 @@
             },
             {
                 "type": "0",
-                "name": "posX"
+                "name": "posX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posY"
+                "name": "posY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posZ"
+                "name": "posZ",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotX"
+                "name": "rotX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rotY"
+                "name": "rotY",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -33,25 +38,28 @@
             },
             {
                 "type": "0",
-                "name": "isLocked"
+                "name": "isLocked",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posX"
+                "name": "posX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posY"
+                "name": "posY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posZ"
+                "name": "posZ",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.WASDCamera"
     },
     "summary": "camera controller like in a FPS game, move with WASD keys",
-    "updated": 1509796056363,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "977aa8eb-ec74-4821-b976-50829de2a2cf",

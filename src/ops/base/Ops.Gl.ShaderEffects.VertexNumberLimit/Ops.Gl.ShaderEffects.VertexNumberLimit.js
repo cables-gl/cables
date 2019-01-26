@@ -31,9 +31,6 @@ var srcBodyFrag=''
 var module=null;
 var moduleFrag=null;
 
-
-var startTime=Date.now()/1000.0;
-
 function removeModule()
 {
     if(shader && module)

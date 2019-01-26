@@ -2,7 +2,10 @@
 
 IN vec3 norm;
 IN vec4 modelPos;
-UNI mat4 normalMatrix;
+
+// UNI mat4 normalMatrix;
+IN mat3 normalMatrix; // when instancing...
+
 IN vec2 texCoord;
 
 IN vec3 mvNormal;
@@ -56,10 +59,7 @@ void main()
         col.rgb+=vec3(light.ambient);
         col.rgb+=newColor;
         // col.rgb=light.color.rgb;
-
-
     }
-
 
 
     col.rgb*=vec3(r,g,b);

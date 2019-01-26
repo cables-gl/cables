@@ -86,7 +86,7 @@
                 "name": "Texture Rotation"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.SplineRepeatInstanced2"
+        "name": "Ops.Gl.ShaderEffects.SplineRepeatInstanced"
     },
     "summary": "Repeat a mesh along a spline using instancing",
     "docs": {

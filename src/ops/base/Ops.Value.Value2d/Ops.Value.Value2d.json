@@ -7,24 +7,28 @@
             },
             {
                 "type": "0",
-                "name": "value x"
+                "name": "value x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "value y"
+                "name": "value y",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result x"
+                "name": "result x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "result y"
+                "name": "result y",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Value2d"
+        "name": "Ops.Value.Value2d"
     },
     "summary": "Stores a 2D coordinate",
     "docs": {
@@ -47,7 +51,6 @@
             }
         ]
     },
-    "updated": 1524499183854,
     "authorName": "pandur",
     "id": "ef4fa87b-a075-4f29-9628-b4f26ce41533",
     "created": 1524499178013

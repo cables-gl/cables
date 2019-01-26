@@ -1,15 +1,10 @@
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
 
-var x=op.addInPort(new CABLES.Port(op,"x"));
-var y=op.addInPort(new CABLES.Port(op,"y"));
-var z=op.addInPort(new CABLES.Port(op,"z"));
-var w=op.addInPort(new CABLES.Port(op,"w"));
-
-x.set(0.0);
-y.set(0.0);
-z.set(0.0);
-w.set(0.0);
+var x=op.inValueFloat("x");
+var y=op.inValueFloat("y");
+var z=op.inValueFloat("z");
+var w=op.inValueFloat("w");
 
 var q=quat.create();
 var qMat=mat4.create();
@@ -28,7 +23,7 @@ render.onTriggered=function()
     cgl.pushModelMatrix();
 
     mat4.fromQuat(qMat, q);
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
+    mat4.multiply(cgl.mMatrix,cgl.mMatrix, qMat);
 
     trigger.trigger();
     cgl.popModelMatrix();

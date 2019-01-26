@@ -1,24 +1,21 @@
-var inGrad=op.inGradient("Gradient");
-var inSize=op.inValueInt("Size",256);
-var outTex=op.outTexture("Texture");
-var inDir=op.inValueSelect("Direction",["X","Y"],"X");
+const
+    inGrad=op.inGradient("Gradient"),
+    inSmoothstep=op.inValueBool("Smoothstep",true),
+    inSize=op.inValueInt("Size",256),
+    outTex=op.outTexture("Texture"),
+    inDir=op.inValueSelect("Direction",["X","Y"],"X");
+
 
 var cgl=op.patch.cgl;
-inSize.onChange=update;
-inGrad.onChange=update;
-inDir.onChange=update;
+inSize.onChange=inGrad.onChange=inSmoothstep.onChange=inDir.onChange=update;
 
 inGrad.set('{"keys" : [{"pos":0,"r":0,"g":0,"b":0},{"pos":0.25,"r":0,"g":0,"b":0},{"pos":0.75,"r":1,"g":1,"b":1},{"pos":1,"r":1,"g":1,"b":1}]}');
-
-console.log(inGrad.get());
 
 function update()
 {
     var width=Math.round(inSize.get());
     if(width<4)width=4;
     var grad=null;
-
-    console.log(inGrad.get());
 
     if(!inGrad.get() || inGrad.get()=='')
     {
@@ -52,6 +49,7 @@ function update()
         for(var x=keyA.pos*width;x<keyB.pos*width;x++)
         {
             var p=CABLES.map(x,keyA.pos*width,keyB.pos*width,0,1);
+            if(inSmoothstep.get())p=CABLES.smoothStep(p);
             x=Math.round(x);
 
             pixels[x*4+0]=Math.round(( (p*keyB.r)+ (1.0-p)*(keyA.r))*255);

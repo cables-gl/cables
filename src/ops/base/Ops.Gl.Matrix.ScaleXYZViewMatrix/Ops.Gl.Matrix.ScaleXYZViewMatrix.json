@@ -1,5 +1,4 @@
 {
-    "updated": 1519811626439,
     "authorName": "pandur",
     "id": "8b1fa9c9-0c4d-41b6-9c4f-8f4b633a9d7f",
     "created": 1519811624556,
@@ -11,15 +10,18 @@
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -33,5 +35,12 @@
     "summary": "scale xyz of viewmatrix",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup",
+            "author": "pandur",
+            "date": 1548415008544
+        }
+    ]
 }

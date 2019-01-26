@@ -4,6 +4,13 @@ var CGL = CGL || {};
 
 CGL.ShaderLibMods=
 {
+    "CGL.BLENDMODES": function()
+    {
+        this.name="blendmodes";
+        this.srcHeadFrag=CGL.TextureEffect.getBlendCode();
+    },
+    
+
     // quite good random numbers, but somehow don't work in ANGLE 
     "CGL.RANDOM_OLD": function()
     {
@@ -55,7 +62,10 @@ CGL.ShaderLibMods=
 
         this.onBind=function(cgl,shader)
         {
-            if(!shader.rndTexUni)shader.rndTexUni=new CGL.Uniform(shader,'t','CGLRNDTEX',7);
+            if(!shader.rndTexUni)
+            {
+                shader.rndTexUni=new CGL.Uniform(shader,'t','CGLRNDTEX',7);
+            }
             cgl.setTexture(7, CGL.Texture.getRandomTexture(cgl).tex );
         }
     }

@@ -435,7 +435,8 @@ CGL.Shader.prototype.bind = function()
 
     if (this._normalMatrixUniform)
     {
-        mat4.mul(this._tempNormalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
+        // mat4.mul(this._tempNormalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
+        mat4.copy(this._tempNormalMatrix,this._cgl.mMatrix);
         mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
         mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
@@ -768,8 +769,6 @@ CGL.Shader.prototype.addAttribute = function(attr) {
 
 CGL.Shader.getErrorFragmentShader = function() {
     return ''
-        // .endl()+'precision mediump float;'
-        // .endl() + 'IN vec3 norm;'
         .endl() + 'void main()'
         .endl() + '{'
         .endl() + '   float g=mod((gl_FragCoord.y+gl_FragCoord.x),50.0)/50.0;'
