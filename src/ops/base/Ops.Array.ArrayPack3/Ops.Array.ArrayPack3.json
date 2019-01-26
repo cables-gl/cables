@@ -53,5 +53,8 @@
                 "text": "The combined xyz array"
             }
         ]
-    }
+    },
+    "relatedops": [
+        "Ops.Array.ArrayUnpack3"
+    ]
 }

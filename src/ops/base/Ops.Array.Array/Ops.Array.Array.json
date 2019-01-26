@@ -1,5 +1,5 @@
 {
-    "summary": "Create an Array",
+    "summary": "Create an Array and fill with one value",
     "layout": {
         "portsIn": [
             {
@@ -29,5 +29,24 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "fe2ed80f-fd0a-438d-8aa0-01a59129261d",
-    "created": 1506587820889
+    "created": 1506587820889,
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Length",
+                "text": "Length of the array"
+            },
+            {
+                "name": "DefaultValue",
+                "text": "The value applied to every index"
+            },
+            {
+                "name": "Array",
+                "text": "Array output with value"
+            }
+        ]
+    }
 }
