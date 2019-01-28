@@ -38,8 +38,14 @@
     "docs": {
         "ports": []
     },
-    "updated": 1540923253862,
     "authorName": "pandur",
     "id": "25696840-bd64-463e-9301-964a81385bfb",
-    "created": 1540923201757
+    "created": 1540923201757,
+    "changelog": [
+        {
+            "message": "code cleanup",
+            "author": "pandur",
+            "date": 1548423809948
+        }
+    ]
 }

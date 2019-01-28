@@ -1,6 +1,5 @@
 {
     "summary": "interpolate smoothly between two input values",
-    "updated": 1518871989734,
     "authorName": "pandur",
     "id": "c66da84f-ff2f-45de-b3c2-557bdf1cb946",
     "created": 1518871989206,
@@ -8,21 +7,25 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "val"
+                "name": "val",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "min"
+                "name": "min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "max"
+                "name": "max",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.SmootherStep"

@@ -1,7 +1,6 @@
-const base=op.addInPort(new CABLES.Port(op,"Base"));
-const exponent=op.addInPort(new CABLES.Port(op,"Exponent"));
-
-const result=op.addOutPort(new CABLES.Port(op,"Result"));
+const base=op.inValueFloat("Base");
+const exponent=op.inValueFloat("Exponent");
+const result=op.outValue("Result");
 
 exponent.set(2);
 

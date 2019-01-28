@@ -1,5 +1,5 @@
 const v=op.inValueBool("value",false);
-const result=op.addOutPort(new CABLES.Port(op,"result"));
+const result=op.outValueBool("result");
 
 result.set(false);
 v.onChange=exec;

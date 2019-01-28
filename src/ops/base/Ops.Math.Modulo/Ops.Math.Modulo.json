@@ -4,26 +4,29 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "number1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number2"
+                "name": "number2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "pingpong"
+                "name": "pingpong",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Modulo"
     },
-    "updated": 1511163212993,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ebc13b25-3705-4265-8f06-5f985b6a7bb1",

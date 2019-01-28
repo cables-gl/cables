@@ -1,10 +1,10 @@
 
 const result=op.outValue("result");
-var v=op.addInPort(new CABLES.Port(op,"value"));
-var old_min=op.addInPort(new CABLES.Port(op,"old min"));
-var old_max=op.addInPort(new CABLES.Port(op,"old max"));
-var new_min=op.addInPort(new CABLES.Port(op,"new min"));
-var new_max=op.addInPort(new CABLES.Port(op,"new max"));
+var v=op.inValueFloat("value");
+var old_min=op.inValueFloat("old min");
+var old_max=op.inValueFloat("old max");
+var new_min=op.inValueFloat("new min");
+var new_max=op.inValueFloat("new max");
 var easing=op.inValueSelect("Easing",["Linear","Smoothstep","Smootherstep"],"Linear");
 
 op.setPortGroup("Input Range",[old_min,old_max]);

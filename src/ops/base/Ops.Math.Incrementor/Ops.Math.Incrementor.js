@@ -1,15 +1,11 @@
 var increment = op.inTriggerButton("Increment");
 var decrement = op.inTriggerButton("Decrement");
-var inLength=op.addInPort(new CABLES.Port(op,"Length",CABLES.OP_PORT_TYPE_VALUE));
-// var reset=op.addInPort(new CABLES.Port(op,"Reset",CABLES.OP_PORT_TYPE_FUNCTION));
+var inLength=op.inValueInt("Length");
 var reset=op.inTriggerButton("Reset");
-
-
 var inMode=op.inValueSelect("Mode",["Rewind","Stop at Max"]);
-
-var value=op.addOutPort(new CABLES.Port(op,"Value",CABLES.OP_PORT_TYPE_VALUE));
-
+var value=op.outValue("Value");
 var outRestarted=op.outTrigger("Restarted");
+
 
 value.ignoreValueSerialize=true;
 inLength.set(10);
@@ -34,8 +30,6 @@ inMode.onChange=function()
     {
         mode=MODE_STOP;
     }
-
-    
 };
 
 function doReset()
@@ -64,6 +58,6 @@ increment.onTriggered=function()
         outRestarted.trigger();
     }
     if(mode==MODE_STOP && val>=inLength.get())val=inLength.get()-1;
-    
+
     value.set(val);
 };
