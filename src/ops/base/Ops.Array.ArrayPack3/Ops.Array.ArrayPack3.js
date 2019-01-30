@@ -4,6 +4,7 @@ const inArr2=op.inArray("Array 2");
 const inArr3=op.inArray("Array 3");
 
 const outArr=op.outArray("Array out");
+const outNum=op.outValue("Num Points");
 
 var showingError = false;
 
@@ -51,5 +52,6 @@ function update()
 
     outArr.set(null);
     outArr.set(arr);
+    outNum.set(arr.length/3);
 }
 

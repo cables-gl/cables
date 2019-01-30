@@ -12,23 +12,32 @@
             },
             {
                 "type": "0",
+                "name": "easing",
+                "group": "Animation",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "duration",
+                "group": "Animation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Direction",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "value false",
+                "group": "Values",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "value true",
+                "group": "Values",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "duration",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "easing",
-                "subType": "string"
             }
         ],
         "portsOut": [

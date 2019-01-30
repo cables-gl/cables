@@ -131,6 +131,28 @@ function rebuild()
     ]);
 
 
+    geom.vertexNormals=new Float32Array([
+        0,0,1,
+        0,0,1,
+        0,0,1,
+        0,0,1,
+        ]);
+    geom.tangents=new Float32Array([
+        -1,0,0,
+        -1,0,0,
+        -1,0,0,
+        -1,0,0]);
+    geom.biTangents==new Float32Array([
+        0,-1,0,
+        0,-1,0,
+        0,-1,0,
+        0,-1,0]);
+
+                // norms.push(0,0,1);
+                // tangents.push(-1,0,0);
+                // biTangents.push(0,-1,0);
+
+
     if(!mesh) mesh=new CGL.Mesh(cgl,geom);
         else mesh.setGeom(geom);
 }
