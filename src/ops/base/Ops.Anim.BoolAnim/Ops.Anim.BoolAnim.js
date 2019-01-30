@@ -1,25 +1,27 @@
+var anim=new CABLES.Anim();
+
 const
     exe=op.inTrigger("exe"),
     bool=op.inValueBool("bool"),
+    pease=anim.createPort(op,"easing"),
+    duration=op.inValue("duration",0.5),
+    dir=op.inValueSelect("Direction",["Animate Both","Only True","Only False"],"Both"),
     valueFalse=op.inValue("value false",0),
     valueTrue=op.inValue("value true",1),
-    duration=op.inValue("duration",0.5),
     next=op.outTrigger("trigger"),
     value=op.outValue("value"),
     finished=op.outTrigger("finished"),
     finishedTrigger=op.outTrigger("Finished Trigger");
 
-var anim=new CABLES.Anim();
-anim.createPort(op,"easing");
+
 var startTime=CABLES.now();
 op.toWorkPortsNeedToBeLinked(exe);
+op.setPortGroup("Animation",[duration,pease]);
+op.setPortGroup("Values",[valueFalse,valueTrue]);
 
-
-bool.onChange=
-    valueFalse.onChange=
-    valueTrue.onChange=
-    duration.onChange=setAnim;
+dir.onChange=bool.onChange=valueFalse.onChange=valueTrue.onChange=duration.onChange=setAnim;
 setAnim();
+
 
 function setAnim()
 {
@@ -30,8 +32,18 @@ function setAnim()
 
     anim.setValue(now,oldValue);
 
-    if(!bool.get()) anim.setValue(now+duration.get(),valueFalse.get());
-        else anim.setValue(now+duration.get(),valueTrue.get());
+
+    if(!bool.get())
+    {
+        if(dir.get()!='Only True' ) anim.setValue(now+duration.get(),valueFalse.get());
+            else anim.setValue(now,valueFalse.get());
+    }
+    else
+    {
+        if(dir.get()!='Only False' ) anim.setValue(now+duration.get(),valueTrue.get());
+            else anim.setValue(now,valueTrue.get());
+
+    }
 }
 
 

@@ -25,6 +25,11 @@
             {
                 "type": "3",
                 "name": "Array out"
+            },
+            {
+                "type": "0",
+                "name": "Num Points",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayPack3"

@@ -8,6 +8,7 @@ const
 
 var lastTime=performance.now();
 var currentNumber=0.0;
+var firsttime=true;
 
 // inSetNumber.onChange = resetNumber;
 inSet.onTriggered=resetNumber;
@@ -15,12 +16,19 @@ inSet.onTriggered=resetNumber;
 function resetNumber ()
 {
     currentNumber = inSetNumber.get();
+    outNumber.set(currentNumber);
+    firsttime=true;
 }
 
 exe.onTriggered = function()
 {
-    var diff=(performance.now()-lastTime)/100;
-    currentNumber += inAddNumber.get() * diff * inMultiplier.get();
-    outNumber.set(currentNumber);
+    if(!firsttime)
+    {
+        var diff=(performance.now()-lastTime)/100;
+        currentNumber += inAddNumber.get() * diff * inMultiplier.get();
+        outNumber.set(currentNumber);
+
+    }
     lastTime=performance.now();
+    firsttime=false;
 };
