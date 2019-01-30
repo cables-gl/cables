@@ -33,18 +33,17 @@ void main()
 
     float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);
 
-    // #ifdef GL_ES
-    //     offset = 10.;
-    // #endif
+    #ifdef MOBILE
+        offset = 0.1;
+    #endif
 
-    #ifndef FASTBLUR
+    #if defined(FASTBLUR) && !defined(MOBILE)
+        const float range=5.0;
+    #else
         const float range=20.0;
     #endif
-    #ifdef FASTBLUR
-        const float range=5.0;
-    #endif
 
-    for (float t = -range; t <= range; t++)
+    for (float t = -range; t <= range; t+=1.0)
     {
         float percent = (t + offset - 0.5) / range;
         float weight = 1.0 - abs(percent);
@@ -59,4 +58,7 @@ void main()
     outColor= color / total;
 
     outColor.rgb /= outColor.a + 0.00001;
+
+
+
 }
