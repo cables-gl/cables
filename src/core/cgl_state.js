@@ -5,10 +5,11 @@ var CGL = CGL || {};
  * @memberof CGL
  * @class
  */
-CGL.Context = function() {
+CGL.Context = function(_patch) {
     var self = this;
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
+    this.patch = _patch;
 
     this.temporaryTexture = null;
     this.frameStore = {};

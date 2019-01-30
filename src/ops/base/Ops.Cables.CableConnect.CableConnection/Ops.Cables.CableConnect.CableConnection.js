@@ -10,10 +10,10 @@ channel.onChange=function()
     socket = io(inUrl.get());
     console.log("joining cableconenct channel...");
     socket.emit('channel', { name: channel.get() });
-    
+
     socket.on("connect",function()
         {
-            
+
             connection.set(socket);
             connected.set(true);
         });

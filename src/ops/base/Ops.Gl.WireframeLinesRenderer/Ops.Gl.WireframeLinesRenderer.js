@@ -6,6 +6,8 @@ const
 
 const cgl=op.patch.cgl;
 
+op.toWorkPortsNeedToBeLinked(inGeom);
+
 render.onTriggered=doRender;
 
 var mesh=null;
