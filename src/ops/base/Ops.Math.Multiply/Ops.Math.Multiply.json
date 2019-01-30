@@ -4,17 +4,20 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number1"
+                "name": "number1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "number2"
+                "name": "number2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Multiply"
@@ -27,7 +30,6 @@
             }
         ]
     },
-    "updated": 1523828700076,
     "authorName": "pandur",
     "id": "1bbdae06-fbb2-489b-9bcc-36c9d65bd441",
     "created": 1523828700087

@@ -1,6 +1,5 @@
 {
     "summary": "Convert an array to a string, divided by a separator",
-    "updated": 1518868113801,
     "authorName": "pandur",
     "id": "7b27f5e9-5599-48d0-bb33-bc74d53784ac",
     "created": 1518868112591,
@@ -12,13 +11,15 @@
             },
             {
                 "type": "0",
-                "name": "separator"
+                "name": "separator",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "string"
+                "name": "string",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ToString"

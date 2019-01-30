@@ -31,20 +31,19 @@ void main()
    vec2 delta=vec2(dirX*am*0.01,dirY*am*0.01);
 
 
-    #ifdef RANDOM_OFFSET
     float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);
+
+    #ifdef MOBILE
+        offset = 0.1;
+    #endif
+
+    #if defined(FASTBLUR) && !defined(MOBILE)
+        const float range=5.0;
     #else
-    float offset = 0.;
+        const float range=20.0;
     #endif
 
-    #ifndef FASTBLUR
-    const float range=20.0;
-    #endif
-    #ifdef FASTBLUR
-    const float range=5.0;
-    #endif
-
-    for (float t = -range; t <= range; t++)
+    for (float t = -range; t <= range; t+=1.0)
     {
         float percent = (t + offset - 0.5) / range;
         float weight = 1.0 - abs(percent);
@@ -59,4 +58,7 @@ void main()
     outColor= color / total;
 
     outColor.rgb /= outColor.a + 0.00001;
+
+
+
 }

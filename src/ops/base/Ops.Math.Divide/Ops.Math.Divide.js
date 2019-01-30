@@ -1,14 +1,13 @@
-const number1 = op.addInPort(new CABLES.Port(op, "number1"));
-const number2 = op.addInPort(new CABLES.Port(op, "number2"));
-const result = op.addOutPort(new CABLES.Port(op, "result"));
+const
+    number1 = op.inValueFloat("number1",1),
+    number2 = op.inValueFloat("number2",1),
+    result = op.outValue("result");
 
-const exec = function() {
-    result.set( number1.get() / number2.get() );
-};
-
-number1.set(1);
-number2.set(1);
-
-number1.onChange=exec;
-number2.onChange=exec;
+number1.onChange=number2.onChange=exec;
 exec();
+
+function exec()
+{
+    result.set( number1.get() / number2.get() );
+}
+

@@ -1,5 +1,4 @@
 {
-    "updated": 1519028297167,
     "authorName": "pandur",
     "id": "f503913b-9162-4784-90a6-23e6a5b6f16a",
     "created": 1519028297170,
@@ -7,13 +6,15 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "input"
+                "name": "input",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Value.TypeOf"

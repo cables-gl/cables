@@ -525,6 +525,23 @@ CABLES.Op = function()
             if(this.portsOut[ipo].getName()==name)return this.portsOut[ipo];
     };
 
+    /**
+     * return port by the name id
+     * @name CABLES.Op#getPortById
+     * @param {string} id
+     * @return {CABLES.Port}
+     * @function
+     */
+    CABLES.Op.prototype.getPortById=function(id)
+    {
+        for(var ipi=0;ipi<this.portsIn.length;ipi++)
+            if(this.portsIn[ipi].id==id)return this.portsIn[ipi];
+
+        for(var ipo=0;ipo<this.portsOut.length;ipo++)
+            if(this.portsOut[ipo].id==id)return this.portsOut[ipo];
+
+    };
+
     CABLES.Op.prototype.getPort=function(name)
     {
         return this.getPortByName(name);

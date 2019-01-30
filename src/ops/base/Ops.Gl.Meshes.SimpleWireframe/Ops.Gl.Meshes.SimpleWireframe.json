@@ -20,5 +20,13 @@
             }
         ],
         "name": "Ops.Gl.WireframeLinesRenderer"
+    },
+    "summary": "Simple Wireframe Line Renderer",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

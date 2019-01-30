@@ -1,12 +1,14 @@
 var render=op.inTrigger('render');
-var width=op.addInPort(new CABLES.Port(op,"width"));
-var height=op.addInPort(new CABLES.Port(op,"height"));
+var width=op.addInPort(new CABLES.Port(op,"width"),10);
+var height=op.addInPort(new CABLES.Port(op,"height"),1);
 var doLog=op.inValueBool("Logarithmic",false);
-var pivotX=op.addInPort(new CABLES.Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new CABLES.Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
-var nColumns=op.addInPort(new CABLES.Port(op,"num columns"));
-var nRows=op.addInPort(new CABLES.Port(op,"num rows"));
-var axis=op.addInPort(new CABLES.Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var pivotX=op.inValueSelect("pivot x",["center","left","right"]);
+var pivotY=op.inValueSelect("pivot y",["center","top","bottom"]);
+
+var nColumns=op.addInPort(new CABLES.Port(op,"num columns"),10);
+var nRows=op.addInPort(new CABLES.Port(op,"num rows"),10);
+
+var axis=op.inValueSelect("axis",["xy","xz"]);
 var trigger=op.outTrigger('trigger');
 var outPointArrays=op.outArray("Point Arrays");
 
@@ -15,21 +17,19 @@ axis.set('xy');
 pivotX.set('center');
 pivotY.set('center');
 
-width.set(1.0);
-height.set(1.0);
-nRows.set(10);
-nColumns.set(10);
-
 var meshes=[];
 
-axis.onChange=rebuildDelayed;
-pivotX.onChange=rebuildDelayed;
-pivotY.onChange=rebuildDelayed;
-width.onChange=rebuildDelayed;
-height.onChange=rebuildDelayed;
-nRows.onChange=rebuildDelayed;
-nColumns.onChange=rebuildDelayed;
-doLog.onChange=rebuildDelayed;
+op.setPortGroup("Size",[width,height]);
+op.setPortGroup("Alignment",[pivotX,pivotY]);
+
+axis.onChange=
+    pivotX.onChange=
+    pivotY.onChange=
+    width.onChange=
+    height.onChange=
+    nRows.onChange=
+    nColumns.onChange=
+    doLog.onChange=rebuildDelayed;
 
 
 

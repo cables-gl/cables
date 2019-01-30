@@ -1,4 +1,4 @@
-var number=op.addInPort(new CABLES.Port(op,"number"));
+const number=op.inValueFloat("number");
 const result=op.outValue("result");
 
 number.onChange=function()
