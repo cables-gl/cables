@@ -22,12 +22,11 @@
             },
             {
                 "type": "2",
-                "name": "tex"
+                "name": "ctex"
             },
             {
-                "type": "0",
-                "name": "angle",
-                "subType": "number"
+                "type": "2",
+                "name": "tex"
             }
         ],
         "portsOut": [

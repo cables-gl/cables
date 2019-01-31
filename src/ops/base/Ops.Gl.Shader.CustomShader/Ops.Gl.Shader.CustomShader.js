@@ -9,13 +9,15 @@ var uniformInputs=[];
 var uniformTextures=[];
 
 var shader=new CGL.Shader(cgl,"shaderMaterial");
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
 // shader.glslVersion=0;
 
 op.setPortGroup("Source Code",[fragmentShader,vertexShader]);
 
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
-
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 fragmentShader.onChange=updateLater;
 vertexShader.onChange=updateLater;
 render.onTriggered=doRender;
@@ -78,7 +80,6 @@ function updateShader()
 
     // shader.glslVersion=0;
     shader.bindTextures=bindTextures.bind(this);
-
     shader.setSource(vertexShader.get(),fragmentShader.get());
     shader.compile();
 
