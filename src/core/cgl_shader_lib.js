@@ -60,17 +60,14 @@ CGL.ShaderLibMods=
             .endl()+'    return texture(CGLRNDTEX,co*5711.0).rgb;'
             .endl()+'}';
 
-
         this.initUniforms=function(shader)
         {
-            return [
-                new CGL.Uniform(shader,'t','CGLRNDTEX',7)
-            ];
+            return [ new CGL.Uniform(shader,'t','CGLRNDTEX',7) ];
         };
+
         this.onBind=function(cgl,shader)
         {
             CGL.Texture.getRandomTexture(cgl);
-            console.log(shader._uniforms,CGL.randomTexture);
             cgl.setTexture(7,CGL.Texture.getRandomTexture(cgl).tex );
         };
     }

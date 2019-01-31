@@ -25,7 +25,7 @@ var needsUpdate=true;
 function updateLater()
 {
     needsUpdate=true;
-    updateShader();
+    // updateShader();
 }
 
 op.init=function()
@@ -80,6 +80,7 @@ function updateShader()
     shader.bindTextures=bindTextures.bind(this);
 
     shader.setSource(vertexShader.get(),fragmentShader.get());
+
     shader.compile();
 
     var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
