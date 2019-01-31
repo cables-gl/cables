@@ -18,6 +18,10 @@
                 "subType": "number"
             },
             {
+                "type": "2",
+                "name": "Mask"
+            },
+            {
                 "type": "0",
                 "name": "Mask Invert",
                 "subType": "boolean"
@@ -39,10 +43,6 @@
                 "name": "b",
                 "group": "Color",
                 "subType": "number"
-            },
-            {
-                "type": "2",
-                "name": "Mask"
             }
         ],
         "portsOut": [

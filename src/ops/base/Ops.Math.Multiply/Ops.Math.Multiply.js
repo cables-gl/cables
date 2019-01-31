@@ -1,6 +1,12 @@
-const number1=op.addInPort(new CABLES.Port(op,"number1"));
-const number2=op.addInPort(new CABLES.Port(op,"number2"));
-const result=op.addOutPort(new CABLES.Port(op,"result"));
+const number1=op.inValueFloat("number1");
+const number2=op.inValueFloat("number2");
+const result=op.outValue("result");
+
+number1.set(1);
+number2.set(2);
+
+number1.onChange=update;
+number2.onChange=update;
 
 function update()
 {
@@ -13,8 +19,3 @@ function update()
     result.set( n1*n2 );
 }
 
-number1.onChange=update;
-number2.onChange=update;
-
-number1.set(1);
-number2.set(2);

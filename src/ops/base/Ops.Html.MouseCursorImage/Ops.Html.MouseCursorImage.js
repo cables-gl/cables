@@ -1,13 +1,17 @@
+const
+    filename=op.inFile("file"),
+    trigger=op.inTriggerButton("Set Cursor"),
+    offX=op.inValueInt("Offset X"),
+    offY=op.inValueInt("Offset Y");
 
-var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 
-var trigger=op.inTriggerButton("Set Cursor");
+offX.onChange=offY.onChange=
+filename.onChange=update;
+trigger.onTriggered=update;
 
 function update()
 {
-    var str='url('+filename.get()+') 0 0, auto';
+    var str='url('+filename.get()+') '+offX.get()+' '+offX.get()+', auto';
     op.patch.cgl.canvas.style.cursor = str;
 }
 
-filename.onChange=update;
-trigger.onTriggered=update;

@@ -10,8 +10,11 @@ UNI float lensDistort;
 UNI sampler2D texMask;
 #endif
 
+{{CGL.BLENDMODES}}
+
 void main()
 {
+   vec4 base=texture(tex,texCoord);
    vec4 col=texture(tex,texCoord);
 
    vec2 tc=texCoord;;
@@ -49,5 +52,7 @@ void main()
         col.b=texture(tex,vec2(tc.x-pix,tc.y)).b;
     #endif
 
-   outColor = col;
+//   outColor = col;
+   outColor= cgl_blend(base,col,amount);
+
 }

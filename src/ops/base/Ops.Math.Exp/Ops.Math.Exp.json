@@ -1,5 +1,4 @@
 {
-    "updated": 1518718313440,
     "authorName": "pandur",
     "id": "612727c2-b2e5-446c-99bb-7e30132f2ff6",
     "created": 1518717928149,
@@ -7,13 +6,15 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "number"
+                "name": "number",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "result"
+                "name": "result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Exp"

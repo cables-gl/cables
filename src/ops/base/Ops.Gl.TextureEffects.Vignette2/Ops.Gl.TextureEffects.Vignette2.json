@@ -68,5 +68,12 @@
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344228988
+        }
+    ]
 }

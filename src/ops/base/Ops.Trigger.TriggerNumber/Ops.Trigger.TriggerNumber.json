@@ -1,5 +1,4 @@
 {
-    "updated": 1519814609734,
     "authorName": "pandur",
     "id": "43ed1123-1312-4383-b843-27b8ec540c09",
     "created": 1519814609448,
@@ -41,7 +40,8 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "number"
+                "name": "number",
+                "subType": "number"
             }
         ],
         "name": "Ops.Trigger.TriggerNumber"

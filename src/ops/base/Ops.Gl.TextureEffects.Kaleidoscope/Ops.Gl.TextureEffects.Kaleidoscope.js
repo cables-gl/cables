@@ -1,4 +1,6 @@
 var render=op.inTrigger('Render');
+var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
+var amount=op.inValueSlider("Amount",1);
 
 var sides=op.inValue("Sides",10);
 var angle=op.inValueSlider("Angle",0);
@@ -18,6 +20,9 @@ var unislidex=new CGL.Uniform(shader,'f','slidex',slidex);
 var unislidey=new CGL.Uniform(shader,'f','slidey',slidey);
 var uniCenterX=new CGL.Uniform(shader,'f','centerX',centerX);
 var uniCenterY=new CGL.Uniform(shader,'f','centerY',centerY);
+var uniAmount=new CGL.Uniform(shader,'f','amount',amount);
+
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.kaleidoscope_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);

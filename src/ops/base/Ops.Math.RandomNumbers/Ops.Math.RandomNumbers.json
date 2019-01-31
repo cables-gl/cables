@@ -4,38 +4,44 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "random seed"
+                "name": "random seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Min"
+                "name": "Min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max"
+                "name": "Max",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.RandomNumbers"
     },
-    "updated": 1518471946456,
     "authorName": "pandur",
     "id": "855880fa-6a85-4ba0-aac8-50440ccae948",
     "created": 1518471909259,

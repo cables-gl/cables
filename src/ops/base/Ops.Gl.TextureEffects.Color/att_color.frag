@@ -9,7 +9,7 @@ UNI float amount;
     UNI sampler2D mask;
 #endif
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 void main()
 {
@@ -25,8 +25,5 @@ void main()
         am*=1.0-msk;
     #endif
 
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*am),1.0);
-
-    outColor= col;
+    outColor= cgl_blend(base,col,am);
 }

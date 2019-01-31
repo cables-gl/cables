@@ -5,7 +5,7 @@ var trigger=op.outTrigger('trigger');
 var shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
 
 var pointSize=op.addInPort(new CABLES.Port(op,"PointSize",CABLES.OP_PORT_TYPE_VALUE));
-var randomSize=op.inValue("Random Size",0);
+var randomSize=op.inValue("Random Size",3);
 
 var makeRound=op.addInPort(new CABLES.Port(op,"Round",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var doScale=op.addInPort(new CABLES.Port(op,"Scale by Distance",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));

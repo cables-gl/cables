@@ -1,11 +1,12 @@
-const render=op.inTrigger('render');
-const x=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
-const y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
+const
+    render=op.inTrigger('render'),
+    x=op.inValueFloat("x"),
+    y=op.inValueFloat("y"),
 
-const r=op.addOutPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE));
-const g=op.addOutPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE));
-const b=op.addOutPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE));
-const a=op.addOutPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE));
+    r=op.outValue("r"),
+    g=op.outValue("g"),
+    b=op.outValue("b"),
+    a=op.outValue("a");
 
 const cgl=op.patch.cgl;
 var pixelValues = new Uint8Array(4);
