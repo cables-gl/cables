@@ -1,12 +1,13 @@
 
 var aspects=[
-    { title:"1", v:1 },
     { title:"1:2", v:1/2 },
+    { title:"1", v:1 },
     { title:"5:4", v:5/4 },
     { title:"4:3", v:4/3 },
     { title:"3:2", v:3/2 },
     { title:"11:8", v:11/8 },
     { title:"16:9", v:16/9 },
+    { title:"2:1", v:2 },
     { title:"21:9", v:21/9 },
     { title:"custom", v:0 },
     ];
@@ -19,8 +20,8 @@ const
     outWidth=op.outValue("Width"),
     outHeight=op.outValue("Height"),
     inAspect=op.inValueSelect('Aspect Ratio',aspectTitles,aspects[0].title),
-    inCustom=op.inValueFloat("Custom",1.777777),
-    blackBars=op.inValueBool("Black Bars");
+    inCustom=op.inValueFloat("Custom",1.777777);
+    // blackBars=op.inValueBool("Black Bars");
 
 
 const cgl=op.patch.cgl;
@@ -101,11 +102,11 @@ op.onDelete=function()
 
 render.onTriggered=function()
 {
-    if(blackBars.get())
-    {
-        cgl.gl.clearColor(0,0,0,1);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-    }
+    // if(blackBars.get())
+    // {
+    //     cgl.gl.clearColor(0,0,0,1);
+    //     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    // }
 
     resize();
     x=Math.round(x);
