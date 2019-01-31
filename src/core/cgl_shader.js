@@ -127,6 +127,7 @@ CGL.Shader.prototype._addLibs=function(src)
             var lib=new CGL.ShaderLibMods[id]();
             src = src.replace('{{'+id+'}}', lib.srcHeadFrag);
             this._libs.push(lib);
+            if(lib.initUniforms)lib.initUniforms(this);
         }
     }
 
