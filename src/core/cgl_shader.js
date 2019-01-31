@@ -436,7 +436,6 @@ CGL.Shader.prototype.bind = function()
 
     if (this._normalMatrixUniform)
     {
-
         mat4.mul(this._tempNormalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
 
         // this._tempNormalMatrix[3]=0;
