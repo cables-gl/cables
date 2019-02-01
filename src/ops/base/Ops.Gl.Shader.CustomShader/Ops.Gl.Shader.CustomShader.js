@@ -23,6 +23,7 @@ vertexShader.onChange=updateLater;
 render.onTriggered=doRender;
 
 var needsUpdate=true;
+op.onLoadedValueSet=updateShader;
 
 function updateLater()
 {
