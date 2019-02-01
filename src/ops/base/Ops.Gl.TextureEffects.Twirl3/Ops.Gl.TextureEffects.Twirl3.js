@@ -1,0 +1,42 @@
+const render=op.inTrigger("Render"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    twistAmount=op.inValue("Twist amount",200),
+    radius=op.inValue("Radius",0.5),
+    centerX=op.inValue("Center X",0.5),
+    centerY=op.inValue("Center Y",0.5),
+    trigger=op.outTrigger("Next");
+
+const cgl=op.patch.cgl;
+const shader=new CGL.Shader(cgl);
+
+const srcFrag=attachments.twirl_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
+shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+
+const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const uniTwistAmount=new CGL.Uniform(shader,'f','twistAmount',1);
+const uniRadius=new CGL.Uniform(shader,'f','radius',radius);
+const unicenterX=new CGL.Uniform(shader,'f','centerX',centerX);
+const unicenterY=new CGL.Uniform(shader,'f','centerY',centerY);
+
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
+
+render.onTriggered=function()
+{
+    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+
+    var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
+
+    uniTwistAmount.setValue(twistAmount.get()*(1/texture.width));
+
+    cgl.setShader(shader);
+    cgl.currentTextureEffect.bind();
+
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
+    cgl.currentTextureEffect.finish();
+    cgl.setPreviousShader();
+
+    trigger.trigger();
+};

@@ -26,7 +26,7 @@
 - `g`: Show animation-graphs of selected ops in the timeline
 - `d`: Disable op
 - `[mod] + a`: Select all ops
-- `[mod] + z`: Undo (Currently not working everywhere)
+- `[mod] + z`: Undo
 
 ## Editor
 
@@ -43,5 +43,4 @@
 - `j/k`: Jump to previous / next key 
 - `left` / `right` move scrubber 1 frame left / right
 - `[mod] + a`: Select all keys
-- `[mod] + z`: Undo (Currently not working everywhere) 
-
+- `[mod] + z`: Undo

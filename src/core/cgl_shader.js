@@ -775,8 +775,6 @@ CGL.Shader.prototype.addAttribute = function(attr) {
 
 CGL.Shader.getErrorFragmentShader = function() {
     return ''
-        // .endl()+'precision mediump float;'
-        // .endl() + 'IN vec3 norm;'
         .endl() + 'void main()'
         .endl() + '{'
         .endl() + '   float g=mod((gl_FragCoord.y+gl_FragCoord.x),50.0)/50.0;'
