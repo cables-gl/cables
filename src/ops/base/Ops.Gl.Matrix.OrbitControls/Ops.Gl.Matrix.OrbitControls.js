@@ -31,6 +31,7 @@ const trigger=op.outTrigger("trigger");
 const outRadius=op.outValue("radius");
 const outYDeg=op.outValue("Rot Y");
 const outXDeg=op.outValue("Rot X");
+const outOrbiting=op.outValueBool("Orbiting", false);
 
 const inReset=op.inTriggerButton("Reset");
 
@@ -281,6 +282,7 @@ function onMouseDown(event)
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
     mouseDown=true;
+    outOrbiting.set(true);
 
     if(doLockPointer)
     {
@@ -299,6 +301,7 @@ function onMouseDown(event)
 function onMouseUp()
 {
     mouseDown=false;
+    outOrbiting.set(false);
     // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
 
     if(doLockPointer)
