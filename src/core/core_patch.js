@@ -50,7 +50,7 @@ CABLES.Patch = function(cfg) {
     this.instancing = new CABLES.Instancing();
     this.onOneFrameRendered=null;
 
-
+    this._origData=null;
     this._frameNext = 0;
     this._frameInterval = 0;
     this._lastFrameTime = 0;
@@ -771,6 +771,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
             // console.log(obj.ops[iop].portsIn);
             op.portsInData=obj.ops[iop].portsIn;
+            op._origData=obj.ops[iop];
 
             for (var ipi in obj.ops[iop].portsIn) {
                 var objPort = obj.ops[iop].portsIn[ipi];
@@ -807,8 +808,9 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
     for (var i in this.ops) {
         if (this.ops[i].onLoadedValueSet) {
-            this.ops[i].onLoadedValueSet(obj.ops[iop]);
+            this.ops[i].onLoadedValueSet(this.ops[i]._origData);
             this.ops[i].onLoadedValueSet = null;
+            this.ops[i]._origData=null;
         }
     }
 
