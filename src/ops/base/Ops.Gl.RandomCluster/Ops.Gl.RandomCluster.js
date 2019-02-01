@@ -59,9 +59,9 @@ function doRender()
 
         mat4.translate(cgl.mMatrix,cgl.mMatrix, randoms[i]);
 
-        mat4.rotateX(cgl.mMatrix,cgl.mMatrix, randomsRot[i][0]);
-        mat4.rotateY(cgl.mMatrix,cgl.mMatrix, randomsRot[i][1]);
-        mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, randomsRot[i][2]);
+        if(randomsRot[i][0]) mat4.rotateX(cgl.mMatrix,cgl.mMatrix, randomsRot[i][0]);
+        if(randomsRot[i][1]) mat4.rotateY(cgl.mMatrix,cgl.mMatrix, randomsRot[i][1]);
+        if(randomsRot[i][2]) mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, randomsRot[i][2]);
 
         idx.set(i);
         rnd.set(randomsFloats[i]);

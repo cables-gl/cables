@@ -77,7 +77,7 @@ function setup()
     body = new CANNON.Body({
       mass: inMass.get(), // kg
       position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
-      shape: new CANNON.Sphere(inRadius.get())
+      shape: new CANNON.Sphere(Math.max(0,inRadius.get()))
     });
 
 

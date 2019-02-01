@@ -2,8 +2,6 @@ const
     cgl = op.patch.cgl,
     pUpdate = op.inTrigger("update"),
     tex = op.inObject("texture"),
-
-
     outTrigger = op.outTrigger("trigger"),
     outColors = op.outArray("Colors"),
     outIsFloatingPoint=op.outValue("Floating Point")
@@ -17,8 +15,10 @@ var
 
 tex.onChange = function (){ texChanged=true; };
 
+op.toWorkPortsNeedToBeLinked(tex,outColors);
+
 var isFloatingPoint=false;
-    var channelType=op.patch.cgl.gl.UNSIGNED_BYTE;
+var channelType=op.patch.cgl.gl.UNSIGNED_BYTE;
 
 
 pUpdate.onTriggered = function () {

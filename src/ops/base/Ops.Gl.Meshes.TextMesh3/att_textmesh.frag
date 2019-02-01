@@ -13,6 +13,7 @@ void main()
    col.g*=g;
    col.b*=b;
    col*=a;
+   if(col.a==0.0)discard;
 
    outColor=col;
 }

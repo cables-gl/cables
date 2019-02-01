@@ -42,6 +42,8 @@ sizeZ.onChange=setup;
 var lastWorld=null;
 var collided=false;
 
+
+
 inReset.onTriggered=function()
 {
     needSetup=true;
