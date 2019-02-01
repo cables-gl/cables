@@ -99,5 +99,8 @@
                 "text": "true if the image ist still loading"
             }
         ]
-    }
+    },
+    "libs": [
+        "clmtrackr.js"
+    ]
 }

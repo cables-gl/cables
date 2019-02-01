@@ -58,7 +58,6 @@ function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
-
 }
 
 function bindTextures()
