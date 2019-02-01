@@ -28,7 +28,6 @@ op.onLoadedValueSet=updateShader;
 function updateLater()
 {
     needsUpdate=true;
-    // updateShader();
 }
 
 op.init=function()
@@ -40,7 +39,6 @@ function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
-
 }
 
 function bindTextures()
