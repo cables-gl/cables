@@ -774,13 +774,8 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                 var port = op.getPort(objPort.name);
 
                 // if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
-                if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) {
-                    objPort.value = true === objPort.value;
-                }
-
-                if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) {
-                    port.set(objPort.value);
-                }
+                if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) objPort.value = true === objPort.value;
+                if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
                 if (objPort.animated) port.setAnimated(objPort.animated);
                 if (objPort.anim) {
                     if (!port.anim) port.anim = new CABLES.Anim();
@@ -809,7 +804,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
     for (var i in this.ops) {
         if (this.ops[i].onLoadedValueSet) {
-            this.ops[i].onLoadedValueSet();
+            this.ops[i].onLoadedValueSet(obj.ops[iop]);
             this.ops[i].onLoadedValueSet = null;
         }
     }

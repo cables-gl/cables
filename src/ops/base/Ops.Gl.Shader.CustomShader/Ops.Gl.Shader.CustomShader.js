@@ -23,7 +23,26 @@ vertexShader.onChange=updateLater;
 render.onTriggered=doRender;
 
 var needsUpdate=true;
-op.onLoadedValueSet=updateShader;
+op.onLoadedValueSet=initDataOnLoad;
+
+function initDataOnLoad(data)
+{
+    updateShader();
+
+    // set uniform values AFTER shader has been compiled and uniforms are extracted and uniform ports are created.
+
+    for(var i=0;i<uniformInputs.length;i++)
+    {
+        for(var j=0;j<data.portsIn.length;j++)
+        {
+            if(uniformInputs[i].name==data.portsIn[j].name)
+            {
+                uniformInputs[i].set(data.portsIn[j].value);
+            }
+        }
+    }
+
+}
 
 function updateLater()
 {
