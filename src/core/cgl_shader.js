@@ -52,7 +52,7 @@ CGL.Shader = function(_cgl, _name) {
     this._inverseViewMatrixUniform = null;
 
     this._attrVertexPos = -1;
-    this.precision = 'mediump'; //'highp'
+    this.precision = 'highp'; //'highp'
 
     this._pMatrixState =-1;
     this._vMatrixState =-1;
@@ -127,6 +127,7 @@ CGL.Shader.prototype._addLibs=function(src)
             var lib=new CGL.ShaderLibMods[id]();
             src = src.replace('{{'+id+'}}', lib.srcHeadFrag);
             this._libs.push(lib);
+            if(lib.initUniforms)lib.initUniforms(this);
         }
     }
 
@@ -435,8 +436,16 @@ CGL.Shader.prototype.bind = function()
 
     if (this._normalMatrixUniform)
     {
-        // mat4.mul(this._tempNormalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
-        mat4.copy(this._tempNormalMatrix,this._cgl.mMatrix);
+        mat4.mul(this._tempNormalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
+
+        // this._tempNormalMatrix[3]=0;
+        // this._tempNormalMatrix[6]=0;
+        // this._tempNormalMatrix[9]=0;
+        // this._tempNormalMatrix[12]=0;
+        // this._tempNormalMatrix[13]=0;
+        // this._tempNormalMatrix[14]=0;
+        // this._tempNormalMatrix[15]=1;
+
         mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
         mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
@@ -668,6 +677,12 @@ CGL.Shader.prototype._linkProgram = function(program)
 
     if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS)) {
         
+
+        // todo print shaderinfolog!!!! 
+
+        console.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
+        console.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
+
         console.error(name + " shader linking fail...");
         console.log('srcFrag',this.srcFrag);
         console.log('srcVert',this.srcVert);

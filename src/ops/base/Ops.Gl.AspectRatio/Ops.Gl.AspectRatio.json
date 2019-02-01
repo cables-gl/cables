@@ -17,11 +17,6 @@
                 "type": "0",
                 "name": "Custom",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Black Bars",
-                "subType": "boolean"
             }
         ],
         "portsOut": [

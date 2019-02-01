@@ -417,10 +417,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         {
             this.parent.enabled=false;
 
-            if(CABLES.UI) CABLES.UI.MODAL.showException(ex,portTriggered.parent);
+            if(CABLES.UI)
+{
+ CABLES.UI.MODAL.showException(ex,portTriggered.parent);
 
-            if(gui)gui.showOpCrash(portTriggered.parent);
-
+            if(window.gui)gui.showOpCrash(portTriggered.parent);
+}
             console.log('exception!');
             console.error('ontriggered exception cought',ex);
             console.log(ex.stack);

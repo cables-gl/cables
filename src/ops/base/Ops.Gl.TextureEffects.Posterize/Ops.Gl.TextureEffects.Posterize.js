@@ -15,7 +15,7 @@ const
     textureUniform=new CGL.Uniform(shader,'t','tex',0),
     levelsUniform=new CGL.Uniform(shader,'f','levels',levels),
     uniWidth=new CGL.Uniform(shader,'f','texWidth',128),
-    uniHeight=new CGL.Uniform(shader,'f','texHeight',128);
+    uniHeight=new CGL.Uniform(shader,'f','texHeight',128),
     uniAmount=new CGL.Uniform(shader,'f','amount',amount);
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);

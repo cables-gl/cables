@@ -13,7 +13,6 @@ const
     ;
 
 const cgl=op.patch.cgl;
-
 geom.ignoreValueSerialize=true;
 
 var mod=null;
@@ -25,6 +24,7 @@ var num=0;
 
 op.setPortGroup("Limit Number of Instances",[inLimit,doLimit]);
 op.setPortGroup("Parameters",[inScales,inRot,inTranslates]);
+op.toWorkPortsNeedToBeLinked(geom);
 
 doLimit.onChange=updateLimit;
 exe.onTriggered=doRender;
