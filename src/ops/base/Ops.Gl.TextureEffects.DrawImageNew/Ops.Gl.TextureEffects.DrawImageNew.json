@@ -49,6 +49,18 @@
             },
             {
                 "type": "0",
+                "name": "Aspect Ratio",
+                "group": "Aspect Ratio",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Position",
+                "group": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "flip x",
                 "subType": "boolean"
             },
@@ -86,6 +98,11 @@
                 "type": "0",
                 "name": "Rotation",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Clip Repeat",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -105,5 +122,12 @@
                 "text": "If this is enabled then the alpha value is 1 for everything"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "added Aspect Ratio Fix Checkbox",
+            "author": "pandur",
+            "date": 1549557373535
+        }
+    ]
 }
