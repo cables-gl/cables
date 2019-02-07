@@ -1,0 +1,1 @@
+add up all numbers in an array

@@ -1,0 +1,1 @@
+Use this op to to multiply individual components of an array
