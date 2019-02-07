@@ -212,10 +212,13 @@ function doRender()
         cgl.setTexture(0,imgTex.tex );
 
 
-        if(tex.width>tex.height)
-            uniTexAspect.setValue((tex.width/tex.height*imgTex.width/imgTex.height));
-        else
-            uniTexAspect.setValue(1/(tex.width/tex.height*imgTex.width/imgTex.height));
+        // if(tex.width>tex.height)
+        //     uniTexAspect.setValue(   (tex.width/tex.height*imgTex.width/imgTex.height));
+        // else
+
+        uniTexAspect.setValue( 1/(tex.height/tex.width*imgTex.width/imgTex.height));
+        console.log(uniTexAspect.getValue());
+        // uniTexAspect.setValue( (tex.height/tex.width*imgTex.height/imgTex.width));
 
 
 

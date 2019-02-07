@@ -33,7 +33,10 @@ void main()
         #endif
 
         #ifdef ASPECT_RATIO
-            tc.y=(1.0-aspectPos)-(((1.0-aspectPos)-tc.y)*aspectTex);
+            // if(aspectTex<1.0)
+                tc.y=(1.0-aspectPos)-(((1.0-aspectPos)-tc.y)*aspectTex);
+                // else
+                // tc.x=(1.0-aspectPos)-(((1.0-aspectPos)-tc.x)*aspectTex);
         #endif
 
         #ifdef TEX_TRANSFORM
