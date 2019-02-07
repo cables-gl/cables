@@ -11,18 +11,29 @@ UNI float g;
 UNI float b;
 UNI float a;
 UNI float aspect;
+UNI float stretch;
 
 UNI float x;
 UNI float y;
 
 {{BLENDCODE}}
 
+float dist(float x,float y,float x2,float y2)
+{
+	float xd = x2-x;
+	float yd = y2-y;
+	return abs(sqrt(xd*xd + yd*yd*(1.0-stretch)));
+
+}
+
+
 void main()
 {
    vec4 base=texture(tex,texCoord);
    vec4 col=vec4(0.0,0.0,0.0,1.0);
     // .endl()+'   float dist = distance(vec2(0.5,0.5),vec2(texCoord.x,texCoord.y/aspect));'
-   float dist = distance(vec2( x,y),vec2(texCoord.x,(texCoord.y-0.5)*aspect)+0.5);
+//   float dist = distance(vec2( x,y),vec2(texCoord.x,(texCoord.y-0.5)*aspect)+0.5);
+float dist = dist(x,y,texCoord.x+0.5,(texCoord.y-0.5)*aspect+0.5);
 
    float sz=size*0.5;
    float v=0.0;

@@ -31,6 +31,12 @@
             },
             {
                 "type": "0",
+                "name": "Stretch",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Pos X",
                 "group": "Position",
                 "subType": "number"

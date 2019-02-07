@@ -1,0 +1,1 @@
+Check the example file Ops.Array.ArrayAnalyze for a simplified version of Array3xAnalyze
