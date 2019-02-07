@@ -1,5 +1,4 @@
 {
-    "updated": 1517312263585,
     "authorName": "tim",
     "id": "67323640-c377-4949-aa5f-3e2b54278fa4",
     "created": 1516711143659,
@@ -15,15 +14,18 @@
             },
             {
                 "type": "0",
-                "name": "Value 1"
+                "name": "Value 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 2"
+                "name": "Value 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 3"
+                "name": "Value 3",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -1,1 +1,1 @@
-Tthis can be useful to document your patch. It does not have an effect on the patch itself.
+This can be useful to document your patch. It does not have an effect on the patch itself.

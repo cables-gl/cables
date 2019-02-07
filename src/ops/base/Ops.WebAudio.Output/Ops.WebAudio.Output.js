@@ -1,4 +1,3 @@
-op.name='audioOutput';
 op.requirements=[CABLES.Requirements.WEBAUDIO];
 
 var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);

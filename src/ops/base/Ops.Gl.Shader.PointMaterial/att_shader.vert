@@ -29,7 +29,7 @@ float rand(float n){return fract(sin(n) * 43758.5453123);}
 
 void main()
 {
-    float psMul=sqrt(canvasWidth/canvasHeight)*0.001+0.00000000001;
+    float psMul=sqrt(canvasWidth/canvasHeight)+0.00000000001;
     float sizeMultiply=1.0;
 
 
