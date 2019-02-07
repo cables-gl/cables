@@ -24,7 +24,9 @@ function sliceArray()
     }
 }
 
-inArr.onChange=function()
+inArr.onChange=recalc;
+
+function recalc()
 {
 console.log("array3x sort start");
 
@@ -72,4 +74,5 @@ what.onChange=function()
     if(what.get()=='Y')comparator=compareY;
     if(what.get()=='Z')comparator=compareZ;
     if(what.get()=='XYZ')comparator=compareXYZ;
+    recalc();
 };

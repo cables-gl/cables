@@ -1,5 +1,4 @@
 {
-    "updated": 1519025104859,
     "authorName": "pandur",
     "id": "6c5772d8-c6f4-4cad-a8e7-f669c0186964",
     "created": 1519025101521,
@@ -7,33 +6,46 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "x1"
+                "name": "x1",
+                "group": "Point 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y1"
+                "name": "y1",
+                "group": "Point 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z1"
+                "name": "z1",
+                "group": "Point 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "x2"
+                "name": "x2",
+                "group": "Point 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y2"
+                "name": "y2",
+                "group": "Point 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z2"
+                "name": "z2",
+                "group": "Point 2",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "distance"
+                "name": "distance",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Distance3d"

@@ -5,24 +5,23 @@ var autoPlay = op.inValueBool('auto play', false);
 
 var volume=op.inValueSlider("Volume");
 var muted = op.inValueBool('mute', true);
-var speed=op.addInPort(new CABLES.Port(op,"speed",CABLES.OP_PORT_TYPE_VALUE ));
+var speed=op.inValueFloat("speed",1);
 
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
 
 var flip=op.inValueBool("flip",true);
-var fps=op.addInPort(new CABLES.Port(op,"fps",CABLES.OP_PORT_TYPE_VALUE ));
-var time=op.addInPort(new CABLES.Port(op,"set time",CABLES.OP_PORT_TYPE_VALUE ));
-var rewind=op.addInPort(new CABLES.Port(op,"rewind",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'} ));
+var fps=op.inValueFloat("fps",25);
+var time=op.inValueFloat("set time");
+var rewind=op.inTriggerButton("rewind");
 
 var inPreload=op.inValueBool("Preload",true);
 
 var textureOut=op.outTexture("texture");
-var outDuration=op.addOutPort(new CABLES.Port(op,"duration",CABLES.OP_PORT_TYPE_VALUE));
-var outProgress=op.addOutPort(new CABLES.Port(op,"progress",CABLES.OP_PORT_TYPE_VALUE));
-var outTime=op.addOutPort(new CABLES.Port(op,"CurrentTime",CABLES.OP_PORT_TYPE_VALUE));
-
-var loading=op.addOutPort(new CABLES.Port(op,"Loading",CABLES.OP_PORT_TYPE_VALUE));
+var outDuration=op.outValue("duration");
+var outProgress=op.outValue("progress");
+var outTime=op.outValue("CurrentTime");
+var loading=op.outValue("Loading");
 var canPlayThrough = op.outValueBool('Can Play Through', false);
 
 var videoElementPlaying=false;
@@ -33,7 +32,6 @@ videoElement.setAttribute('playsinline', '');
 videoElement.setAttribute('webkit-playsinline', '');
 var intervalID=null;
 fps.set(25);
-speed.set(1);
 volume.set(1);
 
 var cgl_filter=0;
@@ -44,6 +42,8 @@ var emptyTexture=CGL.Texture.getEmptyTexture(cgl);
 var tex=null;
 textureOut.set(tex);
 var timeout=null;
+var firstTime=true;
+textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 
 function reInitTexture()
 {
@@ -64,7 +64,7 @@ autoPlay.onChange = function() {
             videoElement.removeAttribute('autoplay');
         }
     }
-}
+};
 
 rewind.onTriggered=function()
 {
@@ -134,9 +134,7 @@ wrap.onChange=function()
     if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
     if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
     tex=null;
-    // reload();
 };
-var firstTime=true;
 
 function updateTexture()
 {
@@ -172,7 +170,6 @@ function updateTexture()
     else
     {
         cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
-
         cgl.gl.texSubImage2D( cgl.gl.TEXTURE_2D, 0, 0, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     }
 
@@ -241,12 +238,9 @@ function embedVideo(force)
             videoElement.addEventListener("canplaythrough", initVideo, true);
             videoElement.addEventListener('loadedmetadata', loadedMetaData );
             videoElement.addEventListener("playing", function() {videoElementPlaying = true;}, true);
-
         }
         embedded=true
-
     }
-
 }
 
 
@@ -262,4 +256,4 @@ function reload()
     loadVideo();
 }
 
-filename.onValueChange(reload);
+filename.onChange=reload;

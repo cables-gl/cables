@@ -19,7 +19,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Gl.WireframeLinesRenderer"
+        "name": "Ops.Gl.Meshes.SimpleWireframe"
     },
     "summary": "Simple Wireframe Line Renderer",
     "youtubeid": "",
