@@ -1,0 +1,76 @@
+{
+    "authorName": "andro",
+    "id": "1ea17de7-adad-4053-943a-4874bccf54e9",
+    "created": 1549533492983,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Amount of points",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Sphere size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Random seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Random distance from sphere",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Distribution",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Points.PointsSphereRandom"
+    },
+    "summary": "Generates a point field mapped to the surface of a sphere",
+    "youtubeid": "",
+    "issues": "",
+    "collections": [
+        "pointArrays"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Amount of points",
+                "text": "Amount of xyz coordinates generated"
+            },
+            {
+                "name": "Sphere size",
+                "text": "Size of the sphere to map to"
+            },
+            {
+                "name": "Random seed",
+                "text": "Seed number. 0 is always a different seed on reload"
+            },
+            {
+                "name": "Random distance from sphere",
+                "text": "Alters the random distance of the position from the sphere surface"
+            },
+            {
+                "name": "Distribution",
+                "text": "Distribution modes. Uniform - over the whole sphere. Poles - mainly at the top and bottom. Half - only half of the sphere generates points"
+            },
+            {
+                "name": "Array out",
+                "text": "The array/point field output"
+            }
+        ]
+    }
+}

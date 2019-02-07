@@ -1,0 +1,46 @@
+{
+    "summary": "Applies a Pow function to an array",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in",
+                "text": "The array to apply the pow function to"
+            },
+            {
+                "name": "Pow factor",
+                "text": "Values below 0 are not accepted. 1 = Array in is unaltered"
+            },
+            {
+                "name": "Array out",
+                "text": "The modified array out"
+            }
+        ]
+    },
+    "authorName": "andro",
+    "id": "d60b6c52-d142-41dd-a38d-d185148be33f",
+    "created": 1549530778262,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array in"
+            },
+            {
+                "type": "0",
+                "name": "Pow factor",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.ArrayPow"
+    }
+}

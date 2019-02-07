@@ -1,0 +1,55 @@
+{
+    "authorName": "andro",
+    "id": "eb95b563-937b-4189-a8c9-ba6776971719",
+    "created": 1549533987803,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array In"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.ArraySmoothStep"
+    },
+    "summary": "Applies a smoothstep function to the contents of an array ",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "The array in to modify"
+            },
+            {
+                "name": "Min",
+                "text": "min interpolation point"
+            },
+            {
+                "name": "Max",
+                "text": "max interpolation point"
+            },
+            {
+                "name": "Array out",
+                "text": "The modified array "
+            }
+        ]
+    }
+}
