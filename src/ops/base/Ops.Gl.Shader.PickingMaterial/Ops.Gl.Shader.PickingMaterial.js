@@ -25,7 +25,7 @@ function doRender()
 {
     cgl.frameStore.pickingpassNum+=2;
     var currentPickingColor=cgl.frameStore.pickingpassNum;
-    
+
     if(cgl.frameStore.pickingpass)
     {
         // isPicked.set(false);
@@ -38,7 +38,7 @@ function doRender()
     else
     {
         isPicked.set( cgl.frameStore.pickedColor==currentPickingColor );
-        
+
         if(cgl.frameStore.pickedColor==currentPickingColor)
         {
             if(cursor.get().length>0 && cgl.canvas.style.cursor!=cursor.get())
@@ -50,8 +50,8 @@ function doRender()
         else
         {
         }
-        
-        // console.log(cgl.frameStore.pickedColor,currentPickingColor);
+
+        //console.log(cgl.frameStore.pickedColor,currentPickingColor);
 
         next.trigger();
     }
@@ -80,7 +80,7 @@ var srcVert=''
     .endl()+"   #ifndef BILLBOARD"
     .endl()+"       gl_Position = projMatrix * mvMatrix * vec4(vPosition,  1.0);"
     .endl()+"   #endif"
-    
+
     .endl()+"}";
 
 var srcFrag=''

@@ -41,5 +41,12 @@
                 "text": "Once the audio context has been started (and it is therefore save to play sounds) this becomes `true`"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "fixed - removed a user op from tim which was causing the patch to not load for users",
+            "author": "andro",
+            "date": 1549890067562
+        }
+    ]
 }

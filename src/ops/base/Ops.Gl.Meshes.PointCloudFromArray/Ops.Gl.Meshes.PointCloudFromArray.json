@@ -40,5 +40,11 @@
     "summary": "visualize an array of coordinates as points",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": [
+        "pointArrays"
+    ],
+    "relatedops": null
 }
