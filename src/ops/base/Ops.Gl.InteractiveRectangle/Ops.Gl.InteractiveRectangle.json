@@ -1,5 +1,4 @@
 {
-    "updated": 1517501094893,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "eeebdb51-9d8c-404d-a538-f5d9cf409200",
@@ -12,47 +11,58 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "id"
+                "name": "id",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Class"
+                "name": "Class",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "pivot x"
+                "name": "pivot x",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "pivot y"
+                "name": "pivot y",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "axis"
+                "name": "axis",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Is Interactive"
+                "name": "Is Interactive",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Render"
+                "name": "Render",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Show Boundings"
+                "name": "Show Boundings",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Cursor"
+                "name": "Cursor",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -66,35 +76,43 @@
             },
             {
                 "type": "0",
-                "name": "Pointer Hover"
+                "name": "Pointer Hover",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pointer Down"
+                "name": "Pointer Down",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pointer X"
+                "name": "Pointer X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pointer Y"
+                "name": "Pointer Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Top"
+                "name": "Top",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Left"
+                "name": "Left",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Right"
+                "name": "Right",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Bottom"
+                "name": "Bottom",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -110,5 +128,12 @@
     "summary": "an area which is interactive ",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "tweaked interaction on mobile: no contextmenu/no highlight color/no long tap",
+            "author": "pandur",
+            "date": 1549553115947
+        }
+    ]
 }

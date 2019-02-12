@@ -14,6 +14,7 @@ inWidth.onChange=generate;
 inHeight.onChange=generate;
 
 var arr=[];
+outArr.set(arr);
 generate();
 
 function generate()

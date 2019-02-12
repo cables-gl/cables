@@ -65,5 +65,17 @@
                 "text": "The length of the parsed array"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup - moved variables outside of for loop",
+            "author": "andro",
+            "date": 1549631841932
+        },
+        {
+            "message": "fixed the interpolation method when working with strings, temp fix",
+            "author": "andro",
+            "date": 1549631884665
+        }
+    ]
 }

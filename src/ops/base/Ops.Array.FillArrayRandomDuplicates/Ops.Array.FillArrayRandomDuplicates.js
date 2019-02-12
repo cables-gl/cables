@@ -2,6 +2,7 @@ const
     inArr=op.inArray("Array"),
     inNum=op.inValueInt("Num Elements",1000),
     inCalc=op.inTriggerButton("Calculate"),
+    inSeed = op.inValueFloat("Random seed"),
     outArr=op.outArray("Result")
     ;
 
@@ -29,7 +30,7 @@ inCalc.onTriggered=function()
         arr[i]=oldArr[i];
     }
 
-    Math.randomSeed=5711;
+    Math.randomSeed=inSeed.get();
 
 
     while(i<(num-1))

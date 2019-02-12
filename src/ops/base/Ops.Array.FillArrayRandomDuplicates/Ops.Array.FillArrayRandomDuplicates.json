@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1548778701055
+        },
+        {
+            "message": "added random seed input port",
+            "author": "andro",
+            "date": 1549628305371
         }
     ],
     "authorName": "pandur",
@@ -23,6 +28,11 @@
             {
                 "type": "1",
                 "name": "Calculate"
+            },
+            {
+                "type": "0",
+                "name": "Random seed",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -32,5 +42,30 @@
             }
         ],
         "name": "Ops.Array.FillArrayRandomDuplicates"
+    },
+    "summary": "Fill an array with random duplicates",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array used to get random values from"
+            },
+            {
+                "name": "Num Elements",
+                "text": "The length of the new array"
+            },
+            {
+                "name": "Random seed",
+                "text": "Random seed 0 will always give a different number. Set to a number for a fixed seed."
+            },
+            {
+                "name": "Result",
+                "text": "The generated array with the new values."
+            }
+        ]
     }
 }
