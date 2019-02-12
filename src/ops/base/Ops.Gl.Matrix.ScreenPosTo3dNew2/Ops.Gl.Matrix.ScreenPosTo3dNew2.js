@@ -3,6 +3,7 @@ const inX=op.inValue("X");
 const inY=op.inValue("Y");
 const outX=op.outValue("Result X");
 const outY=op.outValue("Result Y");
+const outZ=op.outValue("Result Z");
 
 const mat=mat4.create();
 const cgl=op.patch.cgl;
@@ -22,6 +23,7 @@ function calc()
 
     vec3.transformMat4(point3d, point3d, mat);
 
-    outX.set(point3d[0]*10);
-    outY.set(point3d[1]*10);
+    outX.set(point3d[0]*1);
+    outY.set(point3d[1]*1);
+    outZ.set(point3d[2]*1);
 }
