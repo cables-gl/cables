@@ -1,4 +1,4 @@
-var data=op.addInPort(new CABLES.Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT ));
+var data=op.inObject("data");
 var key = op.inValueString("key");
 const result=op.outValue("result");
 

@@ -6,6 +6,7 @@ var result=op.outArray("Result");
 
 inExec.onTriggered=function()
 {
-    result.set(null);
+    const arrValue = inArr.get();
+    if(!arrValue) result.set(null);
     result.set(inArr.get());
 };

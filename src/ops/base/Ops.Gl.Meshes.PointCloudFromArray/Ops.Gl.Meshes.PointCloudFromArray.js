@@ -13,6 +13,8 @@ pTexCoordRand.onChange=updateRandTexCoords;
 seed.onChange=arr.onChange=reset;
 numPoints.onChange=updateNumVerts;
 
+op.toWorkPortsNeedToBeLinked(arr,exe);
+
 var hasError=false;
 
 exe.onTriggered=doRender;
@@ -71,7 +73,11 @@ function updateNumVerts()
 function rebuild()
 {
     var verts=arr.get();
-    if(!verts)return;
+    if(!verts || verts.length==0)
+    {
+        mesh=null;
+        return;
+    }
 
     geom.clear();
     var num=verts.length/3;

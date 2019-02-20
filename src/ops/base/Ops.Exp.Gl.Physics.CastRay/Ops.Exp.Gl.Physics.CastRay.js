@@ -12,6 +12,10 @@ const
     hitX=op.outValue("Hit X"),
     hitY=op.outValue("Hit Y"),
     hitZ=op.outValue("Hit Z"),
+    hitNormalX=op.outValue("Hit Normal X"),
+    hitNormalY=op.outValue("Hit Normal Y"),
+    hitNormalZ=op.outValue("Hit Normal Z"),
+    hitResult=op.outObject("Result"),
 
     cgl=op.patch.cgl
     ;
@@ -66,13 +70,20 @@ function render()
 
     if(r && ray.result)
     {
+        // console.log(ray.result);
         hasHit.set(ray.result.hasHit);
 
         hitX.set(ray.result.hitPointWorld.x);
         hitY.set(ray.result.hitPointWorld.y);
         hitZ.set(ray.result.hitPointWorld.z);
+
+        hitNormalX.set(ray.result.hitNormalWorld.x);
+        hitNormalY.set(ray.result.hitNormalWorld.y);
+        hitNormalZ.set(ray.result.hitNormalWorld.z);
+
     }
     else hasHit.set(false);
+    hitResult.set(ray.result);
 
 
 }

@@ -12,8 +12,10 @@ var invAlphaChannel=op.inValueBool("invert alpha channel");
 
 
 
-var inAspect=op.inValueBool("Aspect Ratio",false);
-var inAspectPos=op.inValueSlider("Position",0.0);
+const inAspect=op.inValueBool("Aspect Ratio",false);
+const inAspectAxis=op.inValueSelect("Stretch Axis",['X','Y'],"X");
+const inAspectPos=op.inValueSlider("Position",0.0);
+const inAspectCrop=op.inValueBool("Crop",false);
 
 
 var trigger=op.outTrigger('trigger');
@@ -26,7 +28,7 @@ var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect
 imageAlpha.onLinkChanged=updateAlphaPorts;
 
 op.setPortGroup("Mask",[imageAlpha,alphaSrc,invAlphaChannel]);
-op.setPortGroup("Aspect Ratio",[inAspect,inAspectPos]);
+op.setPortGroup("Aspect Ratio",[inAspect,inAspectPos,inAspectCrop,inAspectAxis]);
 
 
 removeAlphaSrc.onChange=updateRemoveAlphaSrc;
@@ -66,17 +68,40 @@ invAlphaChannel.onChange=function()
 
 
 inAspect.onChange=updateAspectRatio;
+inAspectCrop.onChange=updateAspectRatio;
+inAspectAxis.onChange=updateAspectRatio;
 function updateAspectRatio()
 {
+    shader.removeDefine('ASPECT_AXIS_X');
+    shader.removeDefine('ASPECT_AXIS_Y');
+
     if(inAspect.get())
     {
         shader.define('ASPECT_RATIO');
+
+        if(inAspectCrop.get()) shader.define('ASPECT_CROP');
+            else shader.removeDefine('ASPECT_CROP');
+
+        if(inAspectAxis.get()=="X") shader.define('ASPECT_AXIS_X');
+        if(inAspectAxis.get()=="Y") shader.define('ASPECT_AXIS_Y');
+
+
         inAspectPos.setUiAttribs({greyout:false});
+        inAspectCrop.setUiAttribs({greyout:false});
+        inAspectAxis.setUiAttribs({greyout:false});
     }
     else
     {
         shader.removeDefine('ASPECT_RATIO');
+        if(inAspectCrop.get()) shader.define('ASPECT_CROP');
+            else shader.removeDefine('ASPECT_CROP');
+
+        if(inAspectAxis.get()=="X") shader.define('ASPECT_AXIS_X');
+        if(inAspectAxis.get()=="Y") shader.define('ASPECT_AXIS_Y');
+
         inAspectPos.setUiAttribs({greyout:true});
+        inAspectCrop.setUiAttribs({greyout:true});
+        inAspectAxis.setUiAttribs({greyout:true});
     }
 }
 
@@ -211,15 +236,7 @@ function doRender()
         const imgTex=cgl.currentTextureEffect.getCurrentSourceTexture();
         cgl.setTexture(0,imgTex.tex );
 
-
-        // if(tex.width>tex.height)
-        //     uniTexAspect.setValue(   (tex.width/tex.height*imgTex.width/imgTex.height));
-        // else
-
         uniTexAspect.setValue( 1/(tex.height/tex.width*imgTex.width/imgTex.height));
-        console.log(uniTexAspect.getValue());
-        // uniTexAspect.setValue( (tex.height/tex.width*imgTex.height/imgTex.width));
-
 
 
         cgl.setTexture(1, tex.tex );

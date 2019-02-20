@@ -11,7 +11,7 @@ inArray.onChange = function()
     var arr=inArray.get();
     if(!arr)return;
 
-    var rotateIndex = count.get();
+    var rotateIndex = -count.get();
 
     newArr = rotate(inArray.get(),rotateIndex,0);
     outArray.set(null);

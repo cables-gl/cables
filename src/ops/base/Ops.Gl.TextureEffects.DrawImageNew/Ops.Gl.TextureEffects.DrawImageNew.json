@@ -55,9 +55,21 @@
             },
             {
                 "type": "0",
+                "name": "Stretch Axis",
+                "group": "Aspect Ratio",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Position",
                 "group": "Aspect Ratio",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Crop",
+                "group": "Aspect Ratio",
+                "subType": "boolean"
             },
             {
                 "type": "0",

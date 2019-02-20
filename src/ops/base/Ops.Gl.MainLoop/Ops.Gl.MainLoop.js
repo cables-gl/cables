@@ -12,7 +12,7 @@ hdpi.onChange=function()
 {
     if(hdpi.get()) op.patch.cgl.pixelDensity=window.devicePixelRatio;
         else op.patch.cgl.pixelDensity=1;
-        
+
     op.patch.cgl.updateSize();
     if(CABLES.UI) gui.setLayout();
 };
@@ -44,19 +44,19 @@ function updateFullscreenButton()
     {
         if(fsElement)fsElement.style.display="none";
     }
-    
+
     op.patch.cgl.canvas.addEventListener('mouseleave', onMouseLeave);
     op.patch.cgl.canvas.addEventListener('mouseenter', onMouseEnter);
 
     if(fullscreen.get())
     {
-        if(!fsElement) 
+        if(!fsElement)
         {
             fsElement = document.createElement('div');
 
             var container = op.patch.cgl.canvas.parentElement;
             if(container)container.appendChild(fsElement);
-    
+
             fsElement.addEventListener('mouseenter', onMouseEnter);
             fsElement.addEventListener('click', function(e)
             {
@@ -169,11 +169,9 @@ op.onAnimFrame=function(time)
         CGL.Texture.texturePreviewer.render(CGL.Texture.previewTexture);
     }
     cgl.renderEnd(cgl);
-    
-    
+
+
     // cgl.printError('mainloop end');
-    
-    
 
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     rframes++;
