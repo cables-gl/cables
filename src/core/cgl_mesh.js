@@ -42,6 +42,12 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
       });
 };
 
+/**
+ * @function
+ * @description update vertices only from a geometry
+ * @name CGL.Mesh#updateVertices
+ * @param {CGL.Geometry} geometry
+ */
 CGL.Mesh.prototype.updateVertices=function(geom)
 {
     this.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,geom.vertices,3);
@@ -72,6 +78,16 @@ CGL.Mesh.prototype.getAttribute=function(name)
             return this._attributes[i];
 };
 
+
+/**
+ * @function
+ * @description update attribute 
+ * @name CGL.Mesh#setAttribute
+ * @param {String} attribute name
+ * @param {Array} data
+ * @param {Number} itemSize
+ * @param {Object} options
+ */
 CGL.Mesh.prototype.addAttribute=
 CGL.Mesh.prototype.updateAttribute=
 CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
@@ -154,6 +170,12 @@ CGL.Mesh.prototype.getAttributes=function()
     return this._attributes;
 };
 
+/**
+ * @function
+ * @description update texture coordinates only from a geometry
+ * @name CGL.Mesh#updateTexCoords
+ * @param {CGL.Geometry} geometry
+ */
 CGL.Mesh.prototype.updateTexCoords=function(geom)
 {
     if(geom.texCoords && geom.texCoords.length>0)
@@ -457,7 +479,7 @@ CGL.Mesh.prototype.render=function(shader)
     if(this.addVertexNumbers)this._setVertexNumbers();
 
     CGL.MESH.lastMesh=this;
-    
+
     var prim=this._cgl.gl.TRIANGLES;
     if(this._glPrimitive!==undefined) prim=this._glPrimitive;
     if(shader.glPrimitive!==null) prim=shader.glPrimitive;
@@ -469,7 +491,6 @@ CGL.Mesh.prototype.render=function(shader)
     // if(shader.glPrimitive==2)prim=this._cgl.gl.LINE_STRIP;
     // if(cgl.points)prim=; // todo this should be in the shader...
     // prim=this._cgl.gl.LINE_STRIP;
-
     // if(this._bufVerticesIndizes.numItems===0)
     // console.log(this._bufVertexAttrib.numItems);
 
@@ -492,11 +513,7 @@ CGL.Mesh.prototype.render=function(shader)
         {
             this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0,this._numInstances);
         }
-        // this.printDebug(shader);
-    }
-
-    
-    
+    }    
 };
 
 CGL.Mesh.prototype.setNumInstances=function(n)
