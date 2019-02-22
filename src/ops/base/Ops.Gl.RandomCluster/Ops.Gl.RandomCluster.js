@@ -32,7 +32,7 @@ var mat=mat4.create();
 function doRender()
 {
     // console.log(doRender);
-    if(op.instanced(exe))return;
+    // if(op.instanced(exe))return;
 
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
@@ -42,7 +42,7 @@ function doRender()
             size.get()/2*scaleZ.get());
     }
 
-    op.patch.instancing.pushLoop(randoms.length);
+    // op.patch.instancing.pushLoop(randoms.length);
 
     if(scrollX.get()!=0)
     {
@@ -67,11 +67,11 @@ function doRender()
         rnd.set(randomsFloats[i]);
 
         trigger.trigger();
-        op.patch.instancing.increment();
+        // op.patch.instancing.increment();
 
         cgl.popModelMatrix();
     }
-    op.patch.instancing.popLoop();
+    // op.patch.instancing.popLoop();
 
 }
 

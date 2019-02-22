@@ -285,6 +285,12 @@ function updateDivSize()
     divWidth=Math.abs(xb-divX);
     divHeight=Math.abs(yb-divY);
 
+
+    divX/=op.patch.cgl.pixelDensity;
+    divY/=op.patch.cgl.pixelDensity;
+    divWidth/=op.patch.cgl.pixelDensity;
+    divHeight/=op.patch.cgl.pixelDensity;
+
     div.style.left=divX+'px';
     div.style.top=divY+'px';
     div.style.width=divWidth+'px';

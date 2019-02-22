@@ -42,13 +42,6 @@ function update()
     //reset array
     mathArray.length = 0;
 
-    //keep code trying to build a feedback based system
-    // if(!array1)
-    // {
-    //     outArray.set(null);
-    //     outArray.set(array0);
-    //     return;
-    // }
     //check if arrays come in correctly on startup
     if(!array0 || !array1)
     {

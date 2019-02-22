@@ -34,5 +34,11 @@
     "summary": "switch between two values by a boolean",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.String.StringSwitchBoolean"
+    ]
 }
