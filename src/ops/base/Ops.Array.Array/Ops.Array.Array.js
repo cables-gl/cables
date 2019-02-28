@@ -14,11 +14,12 @@ inLength.onChange=function() {
 function reset()
 {
     outArr.set(arr);
-    var l=parseInt(inLength.get(),10);
+    var l=parseInt(inLength.get(),10); //why this ?
+    //var l=Math.floor(inLength.get());
     if(l<0)return;
-    
+
     arr.length=l;
-    
+
     for(var i=0;i<l;i++)
     {
         arr[i]=inDefaultValue.get();

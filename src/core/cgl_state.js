@@ -404,6 +404,7 @@ CGL.Context = function(_patch) {
         if(parent=='window')
         {
             window.addEventListener('resize', this._resizeToWindowSize.bind(this));
+            window.addEventListener('orientationchange', this._resizeToWindowSize.bind(this));
             this._resizeToWindowSize();
         }
         if(parent=='parent')

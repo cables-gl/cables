@@ -15,7 +15,7 @@ function calc()
 {
     var numPoints=13200;
     var step=40;
-    
+
     var arr=[];
     var x=0,y=0,z=0;
     var form=parseInt(inForm.get());
@@ -24,7 +24,7 @@ function calc()
     for(var i = 0; i < numPoints; i+=step)
     {
         var index=i/step;
-        
+
         if(form==1)
         {
             x=Math.sin( (i * inA.get()) * 0.001 );

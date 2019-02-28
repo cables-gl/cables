@@ -24,12 +24,12 @@ function setValue(x,y)
 {
     if(normalize.get())
     {
-        var w=cgl.canvas.width;
-        var h=cgl.canvas.height;
+        var w=cgl.canvas.width/cgl.pixelDensity;
+        var h=cgl.canvas.height/cgl.pixelDensity;
         if(listenerElement==document.body)
         {
-            w=listenerElement.clientWidth;
-            h=listenerElement.clientHeight;
+            w=listenerElement.clientWidth/cgl.pixelDensity;
+            h=listenerElement.clientHeight/cgl.pixelDensity;
         }
         outMouseX.set( (x/w*2.0-1.0)*multiply.get() );
         outMouseY.set( (y/h*2.0-1.0)*multiply.get() );

@@ -1,5 +1,4 @@
 {
-    "updated": 1541345055471,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "3711150e-a02f-4455-b376-f31ae30c9301",
@@ -13,6 +12,11 @@
             {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -83,5 +87,12 @@
         ],
         "name": "Ops.Gl.Geometry.GeometryBounds"
     },
-    "summary": "boundings of a geometry / draw a bounding box / (width,height,length,size)"
+    "summary": "boundings of a geometry / draw a bounding box / (width,height,length,size)",
+    "changelog": [
+        {
+            "message": "added: draw parameter",
+            "author": "pandur",
+            "date": 1550863269608
+        }
+    ]
 }

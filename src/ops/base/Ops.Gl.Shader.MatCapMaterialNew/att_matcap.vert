@@ -1,4 +1,3 @@
-
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
@@ -62,15 +61,11 @@ void main()
     e = normalize( vec3( mvMatrix * pos ) );
     vec3 n = normalize( mat3(normalMatrix) * norm );
 
-
     // mat3 nMatrix = transpose(inverse(mat3(mMatrix)));
     // vec3 n = normalize( mat3(nMatrix) * norm );
     // norm=n;
 
     vec3 r = reflect( e, n );
-
-
-
 
     float m = 2. * sqrt(
         pow(r.x, 2.0)+

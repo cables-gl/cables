@@ -249,6 +249,8 @@ tfilter.onChange=onFilterChange;
 
 useVPSize.set(true);
 render.onTriggered=doRender;
+op.preRender=doRender;
+
 
 width.set(640);
 height.set(360);

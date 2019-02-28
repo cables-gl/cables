@@ -7,31 +7,38 @@
             },
             {
                 "type": "0",
-                "name": "use viewport size"
+                "name": "use viewport size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "filter",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "wrap"
+                "name": "wrap",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "HDR"
+                "name": "HDR",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Clear"
+                "name": "Clear",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -46,7 +53,6 @@
         ],
         "name": "Ops.Exp.Gl.TextureEffects.ImageCompose"
     },
-    "updated": 1524489812471,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "89920a68-f1f2-4682-b399-a0ecb78ce467",

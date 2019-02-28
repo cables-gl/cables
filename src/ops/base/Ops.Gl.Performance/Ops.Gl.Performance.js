@@ -57,13 +57,22 @@ op.onDelete=function()
 
 inShow.onChange=function()
 {
-    if(!inShow.get())element.style.opacity=0;
-        else element.style.opacity=1;
+    if(!inShow.get())
+    {
+        element.style.display='none';
+        element.style.opacity=0;
+    }
+    else
+    {
+        element.style.display='block';
+        element.style.opacity=1;
+    }
 
 };
 
 function toggleOpened()
 {
+    if(!inShow.get())return;
     element.style.opacity=1;
     opened=!opened;
     updateText();
@@ -128,7 +137,7 @@ function createCanvas()
 
 function updateText()
 {
-
+    if(!inShow.get())return;
     var warn="";
     if(CGL.profileShaderCompiles>0)warn+='Shader compile ('+CGL.profileShaderCompileName+') ';
     if(CGL.profileShaderGetUniform>0)warn+='Shader get uni loc! ('+CGL.profileShaderGetUniformName+')';
@@ -227,11 +236,13 @@ function addMeasureChild(m,parentEle,timeSum,level)
 
         newEle.style.overflow='hidden';
 
+        newEle.style.display='inline-block';
+
         if(!m.isRoot)
         {
             newEle.innerHTML='<div style="min-height:'+height+'px;width:100%;overflow:hidden;color:black;position:relative">&nbsp;'+m.name+'</div>';
             newEle.style['background-color']="rgb("+m.colR+","+m.colG+","+m.colB+")";
-            newEle.style.display='inline-block';
+
             newEle.style['border-left']='1px solid black';
         }
 
@@ -256,7 +267,7 @@ function addMeasureChild(m,parentEle,timeSum,level)
         }
 
         m.ele.style.float='left';
-        m.ele.style.width=Math.floor((m.usedAvg/timeSum)*99.)+'%';
+        m.ele.style.width=Math.floor((m.usedAvg/timeSum)*98.)+'%';
     }
     else
     {
@@ -356,24 +367,28 @@ exe.onTriggered=function()
         frameCount=0;
         frames=0;
         outFPS.set(fps);
-        updateText();
+        if(inShow.get())updateText();
 
         fpsStartTime=Date.now();
     }
 
-    measures();
-
-    if(opened)
+    if(inShow.get())
     {
-        var timeUsed=performance.now()-lastTime;
-        // if(timeUsed>30)console.log("peak ",performance.now()-lastTime);
-        queue.push(timeUsed);
-        queue.shift();
+        measures();
 
-        queueChilds.push(childsTime);
-        queueChilds.shift();
+        if(opened)
+        {
+            var timeUsed=performance.now()-lastTime;
+            // if(timeUsed>30)console.log("peak ",performance.now()-lastTime);
+            queue.push(timeUsed);
+            queue.shift();
 
-        updateCanvas();
+            queueChilds.push(childsTime);
+            queueChilds.shift();
+
+            updateCanvas();
+        }
+
     }
 
     lastTime=performance.now();

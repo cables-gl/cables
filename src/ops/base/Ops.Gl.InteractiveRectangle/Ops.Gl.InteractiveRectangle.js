@@ -438,6 +438,8 @@ function updateIsInteractive()
     else
     {
         removeListeners();
+        mouseDown.set(false);
+        mouseOver.set(false);
         if(div)div.style['pointer-events']='none';
     }
 }

@@ -33,6 +33,7 @@ var transMatrix=mat4.create();
 var bounds={};
 var vScale=vec3.fromValues(1,1,1);
 
+op.preRender=render;
 exe.onTriggered=render;
 filename.onChange=reload;
 centerPivot.onChange=setMeshLater;

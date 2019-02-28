@@ -12,6 +12,8 @@ var ratio=op.outValue("Aspect Ratio");
 
 unpackAlpha.hidePort();
 
+op.toWorkPortsNeedToBeLinked(textureOut);
+
 const cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;

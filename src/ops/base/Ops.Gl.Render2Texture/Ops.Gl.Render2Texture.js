@@ -140,7 +140,7 @@ function doRender()
 
 
 render.onTriggered=doRender;
-
+op.preRender=doRender;
 
 tfilter.onValueChange(onFilterChange);
 updateVpSize();

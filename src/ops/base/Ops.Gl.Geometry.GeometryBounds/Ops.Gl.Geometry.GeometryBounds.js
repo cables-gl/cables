@@ -1,5 +1,6 @@
 const render=op.inTrigger("Render");
 const inGeom=op.inObject("Geometry");
+const inDraw=op.inValueBool("Draw",true);
 
 const next=op.outTrigger("Next");
 
@@ -69,7 +70,7 @@ render.onTriggered=function()
 {
     if(!wireMesh) wireMesh=new CGL.WireCube(cgl);
 
-    if(bounds)
+    if(bounds && inDraw.get())
     {
         vec3.set(vec,
             outCenterX.get(),

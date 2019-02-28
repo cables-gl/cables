@@ -37,6 +37,7 @@ nRows.onChange=rebuild;
 nColumns.onChange=rebuild;
 rebuild();
 
+op.preRender=
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;

@@ -130,5 +130,12 @@
     ],
     "relatedops": [
         ""
+    ],
+    "changelog": [
+        {
+            "message": "fixed: wrong coordinates when using HDPI displays",
+            "author": "pandur",
+            "date": 1550863318111
+        }
     ]
 }

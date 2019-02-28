@@ -1,5 +1,4 @@
 {
-    "updated": 1515973766389,
     "authorName": "pandur",
     "id": "b4be3f11-20ed-43a0-865d-2b88f0879a6f",
     "created": 1515970216234,
@@ -7,23 +6,28 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Formula"
+                "name": "Formula",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "A"
+                "name": "A",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "B"
+                "name": "B",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "C"
+                "name": "C",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "D"
+                "name": "D",
+                "subType": "integer"
             }
         ],
         "portsOut": [

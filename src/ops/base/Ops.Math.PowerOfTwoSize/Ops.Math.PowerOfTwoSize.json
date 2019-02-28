@@ -28,11 +28,11 @@
             },
             {
                 "type": "0",
-                "name": "Width Result",
+                "name": "Height Result",
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.PowerOfTwoSize"
+        "name": "Ops.Math.PowerOfTwoSize"
     },
     "summary": "Return the next values as power of two",
     "youtubeid": "",

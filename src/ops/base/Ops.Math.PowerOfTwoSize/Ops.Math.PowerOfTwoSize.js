@@ -3,7 +3,7 @@ const
     inH=op.inValueInt("Height"),
     inStrat=op.inValueSelect("Strategy",['floor','floor/2','ceil'],'floor'),
     outW=op.outValue("Width Result"),
-    outH=op.outValue("Width Result")
+    outH=op.outValue("Height Result")
     ;
 
 inStrat.onChange=updateStrategy;

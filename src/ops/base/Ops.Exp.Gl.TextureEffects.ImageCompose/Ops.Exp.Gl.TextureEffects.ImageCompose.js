@@ -86,7 +86,7 @@ function updateResolution()
     if(tfilter.get()=='nearest') newFilter=CGL.Texture.FILTER_NEAREST;
     if(tfilter.get()=='linear')  newFilter=CGL.Texture.FILTER_LINEAR;
     // if(tfilter.get()=='mipmap')  newFilter=CGL.Texture.FILTER_MIPMAP;
-    
+
     if(wrap.get()=='repeat') newWrap=CGL.Texture.WRAP_REPEAT;
     if(wrap.get()=='mirrored repeat') newWrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
     if(wrap.get()=='clamp to edge') newWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
@@ -99,7 +99,7 @@ function updateResolution()
         tex.filter=newFilter;
 
         tex.setSize(w,h);
-        
+
         effect.setSourceTexture(tex);
     }
 
@@ -128,7 +128,7 @@ useVPSize.onChange=function()
 
 var doRender=function()
 {
-    
+
     if(!effect || reInitEffect)
     {
         initEffect();
@@ -156,8 +156,8 @@ var doRender=function()
         cgl.setShader(bgShader);
         cgl.currentTextureEffect.bind();
         cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        
-        
+
+
         cgl.gl.clearColor(0,0,0,0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT );
 
@@ -172,7 +172,7 @@ var doRender=function()
 
     trigger.trigger();
     texOut.set(effect.getCurrentSourceTexture());
-    
+
     effect.endEffect();
 
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
@@ -194,6 +194,7 @@ tfilter.onChange=onFilterChange;
 
 useVPSize.set(true);
 render.onTriggered=doRender;
+op.preRender=doRender;
 
 width.set(640);
 height.set(360);
