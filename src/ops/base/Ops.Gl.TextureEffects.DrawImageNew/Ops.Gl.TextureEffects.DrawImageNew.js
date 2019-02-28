@@ -10,6 +10,14 @@ var imageAlpha=op.inTexture("imageAlpha");
 var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
 var invAlphaChannel=op.inValueBool("invert alpha channel");
 
+
+
+const inAspect=op.inValueBool("Aspect Ratio",false);
+const inAspectAxis=op.inValueSelect("Stretch Axis",['X','Y'],"X");
+const inAspectPos=op.inValueSlider("Position",0.0);
+const inAspectCrop=op.inValueBool("Crop",false);
+
+
 var trigger=op.outTrigger('trigger');
 
 blendMode.set('normal');
@@ -20,6 +28,9 @@ var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect
 imageAlpha.onLinkChanged=updateAlphaPorts;
 
 op.setPortGroup("Mask",[imageAlpha,alphaSrc,invAlphaChannel]);
+op.setPortGroup("Aspect Ratio",[inAspect,inAspectPos,inAspectCrop,inAspectAxis]);
+
+
 removeAlphaSrc.onChange=updateRemoveAlphaSrc;
 
 function updateAlphaPorts()
@@ -46,11 +57,54 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureImaghe=new CGL.Uniform(shader,'t','image',1);
 var textureAlpha=new CGL.Uniform(shader,'t','imageAlpha',2);
 
+const uniTexAspect=new CGL.Uniform(shader,'f','aspectTex',1);
+const uniAspectPos=new CGL.Uniform(shader,'f','aspectPos',inAspectPos);
+
 invAlphaChannel.onChange=function()
 {
     if(invAlphaChannel.get()) shader.define('INVERT_ALPHA');
         else shader.removeDefine('INVERT_ALPHA');
 };
+
+
+inAspect.onChange=updateAspectRatio;
+inAspectCrop.onChange=updateAspectRatio;
+inAspectAxis.onChange=updateAspectRatio;
+function updateAspectRatio()
+{
+    shader.removeDefine('ASPECT_AXIS_X');
+    shader.removeDefine('ASPECT_AXIS_Y');
+
+    if(inAspect.get())
+    {
+        shader.define('ASPECT_RATIO');
+
+        if(inAspectCrop.get()) shader.define('ASPECT_CROP');
+            else shader.removeDefine('ASPECT_CROP');
+
+        if(inAspectAxis.get()=="X") shader.define('ASPECT_AXIS_X');
+        if(inAspectAxis.get()=="Y") shader.define('ASPECT_AXIS_Y');
+
+
+        inAspectPos.setUiAttribs({greyout:false});
+        inAspectCrop.setUiAttribs({greyout:false});
+        inAspectAxis.setUiAttribs({greyout:false});
+    }
+    else
+    {
+        shader.removeDefine('ASPECT_RATIO');
+        if(inAspectCrop.get()) shader.define('ASPECT_CROP');
+            else shader.removeDefine('ASPECT_CROP');
+
+        if(inAspectAxis.get()=="X") shader.define('ASPECT_AXIS_X');
+        if(inAspectAxis.get()=="Y") shader.define('ASPECT_AXIS_Y');
+
+        inAspectPos.setUiAttribs({greyout:true});
+        inAspectCrop.setUiAttribs({greyout:true});
+        inAspectAxis.setUiAttribs({greyout:true});
+    }
+}
+
 
 
 
@@ -104,6 +158,16 @@ alphaSrc.set("alpha channel");
     var posY=op.inValue("Position Y",0);
 
     var rotate=op.inValue("Rotation",0);
+
+    var inClipRepeat=op.inValueBool("Clip Repeat",false);
+
+    inClipRepeat.onChange=updateClip;
+    function updateClip()
+    {
+        if(inClipRepeat.get()) shader.define('CLIP_REPEAT');
+            else shader.removeDefine('CLIP_REPEAT');
+    }
+
 
     var uniScaleX=new CGL.Uniform(shader,'f','scaleX',scaleX);
     var uniScaleY=new CGL.Uniform(shader,'f','scaleY',scaleY);
@@ -159,20 +223,23 @@ imageAlpha.onChange=function()
 };
 
 
-
 function doRender()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    if(image.get() && image.get().tex && amount.get()>0.0)
+    var tex=image.get();
+    if(tex && tex.tex && amount.get()>0.0)
     {
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
 
-        cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        const imgTex=cgl.currentTextureEffect.getCurrentSourceTexture();
+        cgl.setTexture(0,imgTex.tex );
+
+        uniTexAspect.setValue( 1/(tex.height/tex.width*imgTex.width/imgTex.height));
 
 
-        cgl.setTexture(1, image.get().tex );
+        cgl.setTexture(1, tex.tex );
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 
         if(imageAlpha.get() && imageAlpha.get().tex)
@@ -192,3 +259,4 @@ render.onTriggered=doRender;
 updateTransformPorts();
 updateRemoveAlphaSrc();
 updateAlphaPorts();
+updateAspectRatio();

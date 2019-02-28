@@ -5,6 +5,7 @@ var inShow=op.inValueBool("Visible",true);
 
 var outFPS=op.outValue("FPS");
 var element = document.createElement('div');
+var elementMeasures=null;
 var ctx=null;
 var cgl=op.patch.cgl;
 var opened=false;
@@ -58,7 +59,7 @@ inShow.onChange=function()
 {
     if(!inShow.get())element.style.opacity=0;
         else element.style.opacity=1;
-    
+
 };
 
 function toggleOpened()
@@ -73,7 +74,7 @@ function toggleOpened()
         element.style.left=numBars+"px";
         element.style["min-height"]="56px";
     }
-    else 
+    else
     {
         canvas.style.display="none";
         element.style.left="0px";
@@ -122,7 +123,7 @@ function createCanvas()
     ctx = canvas.getContext('2d');
 
     canvas.addEventListener("click", toggleOpened);
-    
+
 }
 
 function updateText()
@@ -137,12 +138,12 @@ function updateText()
     if(CGL.profileTextureDelete>0)warn+='Texture delete! ';
 
     if(CGL.profileNonTypedAttrib>0)warn+='Not-Typed Buffer Attrib! '+CGL.profileNonTypedAttribNames;
-    
+
     //     CGL.profileNonTypedAttrib=0;
     // CGL.profileNonTypedAttribNames="";
 
     // if(warn && warn.length>0)console.warn(warn);
-    
+
     if(warn.length>0)
     {
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
@@ -153,7 +154,7 @@ function updateText()
     {
         element.innerHTML+="<br/>loading "+Math.round(op.patch.loading.getProgress()*100)+'% '+loadingChars[ (++loadingCounter)%loadingChars.length ];
     }
-    
+
     if(opened)
     {
         var count=0;
@@ -172,22 +173,19 @@ function updateText()
                 avgMsChilds+=queueChilds[i];
             }
         }
-        
+
         avgMs/=count;
         avgMsChilds/=count;
 
         element.innerHTML+='<br/> '+cgl.canvasWidth+' x '+cgl.canvasHeight+' (x'+cgl.pixelDensity+') ';
         element.innerHTML+='<br/>frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         element.innerHTML+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
-        
+
         element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+
             ' uniforms: '+Math.ceil(CGL.profileUniformCount/fps)+
             ' mvp_uni_mat4: '+Math.ceil(CGL.profileMVPMatrixCount/fps)+
-                
-
             ' mesh.setGeom: '+CGL.profileMeshSetGeom+
             ' videos: '+CGL.profileVideosPlaying;
-        
     }
 
 
@@ -205,7 +203,144 @@ function updateText()
 
     CGL.profileNonTypedAttrib=0;
     CGL.profileNonTypedAttribNames="";
+}
 
+
+function styleMeasureEle(ele)
+{
+    ele.style.padding="0px";
+    ele.style.margin="0px";
+}
+
+function addMeasureChild(m,parentEle,timeSum,level)
+{
+    const height=20;
+    m.usedAvg=(m.usedAvg||m.used);
+
+    if(!m.ele || initMeasures)
+    {
+        var newEle = document.createElement('div');
+        m.ele=newEle;
+
+        if(m.childs && m.childs.length>0) newEle.style.height='500px';
+            else  newEle.style.height=height+'px';
+
+        newEle.style.overflow='hidden';
+
+        if(!m.isRoot)
+        {
+            newEle.innerHTML='<div style="min-height:'+height+'px;width:100%;overflow:hidden;color:black;position:relative">&nbsp;'+m.name+'</div>';
+            newEle.style['background-color']="rgb("+m.colR+","+m.colG+","+m.colB+")";
+            newEle.style.display='inline-block';
+            newEle.style['border-left']='1px solid black';
+        }
+
+        parentEle.appendChild(newEle);
+    }
+
+
+    if(!m.isRoot)
+    {
+        if(performance.now()-m.lastTime>200)
+        {
+            m.ele.style.display="none";
+            m.hidden=true;
+        }
+        else
+        {
+            if(m.hidden)
+            {
+                m.ele.style.display="inline-block";
+                m.hidden=false;
+            }
+        }
+
+        m.ele.style.float='left';
+        m.ele.style.width=Math.floor((m.usedAvg/timeSum)*99.)+'%';
+    }
+    else
+    {
+        m.ele.style.width='100%';
+        m.ele.style.clear='both';
+        m.ele.style.float='none';
+    }
+
+    if(m && m.childs && m.childs.length>0)
+    {
+        var thisTimeSum=0;
+        for(var i=0;i<m.childs.length;i++)
+        {
+            m.childs[i].usedAvg=(m.childs[i].usedAvg||m.childs[i].used)*0.95+m.childs[i].used*0.05;
+            thisTimeSum+=m.childs[i].usedAvg;
+        }
+        for(var i=0;i<m.childs.length;i++)
+        {
+            addMeasureChild(m.childs[i],m.ele,thisTimeSum,level+1);
+        }
+    }
+
+}
+
+var initMeasures=true;
+
+function clearMeasures(p)
+{
+    for(var i=0;i<p.childs.length;i++)
+    {
+        clearMeasures(p.childs[i]);
+    }
+
+    p.childs.length=0;
+
+}
+
+function measures()
+{
+    if(!CGL.performanceMeasures)return;
+
+    if(!elementMeasures)
+    {
+        console.log("create measure ele");
+        elementMeasures = document.createElement('div');
+        // elementMeasures.style.border="1px solid red";
+        elementMeasures.style.width="100%";
+        elementMeasures.style['background-color']="#444";
+        elementMeasures.style.bottom="10px";
+        elementMeasures.style.height="100px";
+        elementMeasures.style.opacity="1";
+        elementMeasures.style.position="absolute";
+
+        elementMeasures.style['z-index']="99999";
+        elementMeasures.innerHTML='';
+        container.appendChild(elementMeasures);
+    }
+
+    // elementMeasures.innerHTML='';
+
+    // console.log(CGL.performanceMeasures[0]);
+
+    var timeSum=0;
+
+    // if(CGL.performanceMeasures[0])
+        var root=CGL.performanceMeasures[0];
+
+        for(var i=0;i<root.childs.length;i++)
+        {
+            timeSum+=root.childs[i].used;
+        }
+
+    // console.log(root.childs.length);
+
+    // console.log(timeSum);
+
+    addMeasureChild(CGL.performanceMeasures[0],elementMeasures,timeSum,0);
+
+    root.childs.length=0;
+
+    clearMeasures(CGL.performanceMeasures[0]);
+
+    CGL.performanceMeasures.length=0;
+    initMeasures=false;
 }
 
 
@@ -222,23 +357,25 @@ exe.onTriggered=function()
         frames=0;
         outFPS.set(fps);
         updateText();
-        
+
         fpsStartTime=Date.now();
     }
-   
+
+    measures();
+
     if(opened)
     {
         var timeUsed=performance.now()-lastTime;
         // if(timeUsed>30)console.log("peak ",performance.now()-lastTime);
         queue.push(timeUsed);
         queue.shift();
-    
+
         queueChilds.push(childsTime);
         queueChilds.shift();
 
         updateCanvas();
     }
-    
+
     lastTime=performance.now();
     selfTime=performance.now()-selfTimeStart;
     var startTimeChilds=performance.now();
@@ -246,7 +383,7 @@ exe.onTriggered=function()
     next.trigger();
 
     childsTime=performance.now()-startTimeChilds;
-    
+
 };
 
 

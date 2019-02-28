@@ -32,7 +32,6 @@ var outLeft=op.outValue("Left");
 var outRight=op.outValue("Right");
 var outBottom=op.outValue("Bottom");
 
-
 var mouseClick=op.outTrigger("Left Click");
 
 var elementPort = op.outObject('Dom Element');
@@ -86,11 +85,11 @@ function rebuild()
     var h=height.get();
     var x=0;
     var y=0;
-    
+
     if(typeof w=='string')w=parseFloat(w);
     if(typeof h=='string')h=parseFloat(h);
-    
-    if(pivotX.get()=='center') 
+
+    if(pivotX.get()=='center')
     {
         x=0;
         divAlign[0]=-w/2;
@@ -152,7 +151,7 @@ function rebuild()
             }
         }
     }
-    
+
     for(c=0;c<numColumns;c++)
     {
         for(r=0;r<numRows;r++)
@@ -219,15 +218,15 @@ function updateId()
     if(div)
     {
         div.setAttribute('id',inId.get());
-        
+
     }
 }
 
 function updateDivSize()
 {
     var vp=cgl.getViewPort();
-    
-    
+
+
     mat4.multiply(mvMatrix,cgl.vMatrix,cgl.mvMatrix);
     vec3.transformMat4(pos, divAlign, mvMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
@@ -237,10 +236,10 @@ function updateDivSize()
     var x1 = (trans[0] * vp[2]/2) + vp[2]/2;
     var y1 = (trans[1] * vp[3]/2) + vp[3]/2;
 
-    
+
     divAlignSize[0] = divAlign[0] + width.get();
     divAlignSize[1] = divAlign[1];
-    
+
     vec3.transformMat4(pos, divAlignSize, mvMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
@@ -252,7 +251,7 @@ function updateDivSize()
 
     divAlignSize[0] = divAlign[0];
     divAlignSize[1] = divAlign[1] + height.get();
-    
+
     vec3.transformMat4(pos, divAlignSize, mvMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
@@ -264,7 +263,7 @@ function updateDivSize()
 
     divAlignSize[0] = divAlign[0] + width.get();
     divAlignSize[1] = divAlign[1] + height.get();
-    
+
     vec3.transformMat4(pos, divAlignSize, mvMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
@@ -278,18 +277,19 @@ function updateDivSize()
     var xb=Math.max(x1,x2,x3,x4);
     var yb=Math.max(vp[3]-y1,vp[3]-y2,vp[3]-y3,vp[3]-y4);
 
-outTop.set(divY);//=op.outValue("Top");
-outLeft.set(divX);//=op.outValue("Left");
-outRight.set(xb);//=op.outValue("Right");
-outBottom.set(yb);//=op.outValue("Bottom");
-
-
+    outTop.set(divY);
+    outLeft.set(divX);
+    outRight.set(xb);
+    outBottom.set(yb);
 
     divWidth=Math.abs(xb-divX);
     divHeight=Math.abs(yb-divY);
-    
-    
 
+
+    divX/=op.patch.cgl.pixelDensity;
+    divY/=op.patch.cgl.pixelDensity;
+    divWidth/=op.patch.cgl.pixelDensity;
+    divHeight/=op.patch.cgl.pixelDensity;
 
     div.style.left=divX+'px';
     div.style.top=divY+'px';
@@ -299,13 +299,13 @@ outBottom.set(yb);//=op.outValue("Bottom");
 
 function updateClassNames() {
     if(div) {
-        div.className = classPort.get(); 
+        div.className = classPort.get();
     }
 }
 
 op.onDelete=function()
 {
-    if(div)div.remove();    
+    if(div)div.remove();
 }
 
 function setUpDiv()
@@ -313,15 +313,25 @@ function setUpDiv()
     if(!div)
     {
         div = document.createElement('div');
+        div.oncontextmenu = function(e){
+
+            console.log("context menu canceled!");
+            e.preventDefault();
+        }
+
         div.style.padding="0px";
         div.style.position="absolute";
-        // div.style.overflow="hidden";
         div.style['box-sizing']="border-box";
         div.style.border="1px solid red";
-        div.style['border-left']="1px solid blue";
-        div.style['border-top']="1px solid green";
+        // div.style['border-left']="1px solid blue";
+        // div.style['border-top']="1px solid green";
         div.style["z-index"]="9999";
-        
+
+        div.style["-webkit-user-select"]="none";
+        div.style["user-select"]="none";
+        div.style["-webkit-tap-highlight-color"]="rgba(0,0,0,0)";
+        div.style["-webkit-touch-callout"]="none";
+
         var canvas = op.patch.cgl.canvas.parentElement;
         canvas.appendChild(div);
         updateCursor();
@@ -331,7 +341,6 @@ function setUpDiv()
     }
     updateDivSize();
     elementPort.set(div);
-    // op.log('div', div);
 }
 
 var listenerElement=null;
@@ -381,14 +390,14 @@ function onTouchMove(e)
     if(targetEle==div)
     {
         mouseOver.set(true);
-        if(e.touches && e.touches.length>0) 
+        if(e.touches && e.touches.length>0)
         {
             var rect = div.getBoundingClientRect(); //e.target
             var x = e.targetTouches[0].pageX - rect.left;
             var y = e.targetTouches[0].pageY - rect.top;
 
             var touch=e.touches[0];
-        
+
             outX.set( Math.max(0.0,Math.min(1.0,x/divWidth)));
             outY.set( Math.max(0.0,Math.min(1.0,1.0-y/divHeight)));
 
@@ -405,7 +414,7 @@ function onTouchMove(e)
 active.onChange=updateActiveRender;
 function updateActiveRender()
 {
-    if(active.get()) 
+    if(active.get())
     {
         addListeners();
         if(div) div.style['display']='block';
@@ -415,13 +424,13 @@ function updateActiveRender()
         removeListeners();
         if(div) div.style['display']='none';
     }
-    
+
 }
 
 isInteractive.onChange=updateIsInteractive;
 function updateIsInteractive()
 {
-    if(isInteractive.get()) 
+    if(isInteractive.get())
     {
         addListeners();
         if(div)div.style['pointer-events']='initial';
@@ -438,9 +447,9 @@ function removeListeners()
     if(listenerElement)
     {
         document.removeEventListener('touchmove', onTouchMove);
-        // listenerElement.removeEventListener('touchend', onMouseLeave);
-        // listenerElement.removeEventListener('touchstart', onMouseEnter);
-    
+        listenerElement.removeEventListener('touchend', onMouseUp);
+        listenerElement.removeEventListener('touchstart', onMouseDown);
+
         listenerElement.removeEventListener('click', onmouseclick);
         listenerElement.removeEventListener('mousemove', onMouseMove);
         listenerElement.removeEventListener('mouseleave', onMouseLeave);
@@ -455,15 +464,15 @@ function removeListeners()
 function addListeners()
 {
     if(listenerElement)removeListeners();
-    
+
     listenerElement=div;
 
     if(listenerElement)
     {
         document.addEventListener('touchmove', onTouchMove);
-        // listenerElement.addEventListener('touchend', onMouseLeave);
-        // listenerElement.addEventListener('touchstart', onMouseEnter);
-    
+        listenerElement.addEventListener('touchend', onMouseUp);
+        listenerElement.addEventListener('touchstart', onMouseDown);
+
         listenerElement.addEventListener('click', onmouseclick);
         listenerElement.addEventListener('mousemove', onMouseMove);
         listenerElement.addEventListener('mouseleave', onMouseLeave);
@@ -471,7 +480,7 @@ function addListeners()
         listenerElement.addEventListener('mouseup', onMouseUp);
         listenerElement.addEventListener('mouseenter', onMouseEnter);
         // listenerElement.addEventListener('contextmenu', onClickRight);
-        
+
     }
 }
 

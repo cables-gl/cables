@@ -32,7 +32,7 @@ var mat=mat4.create();
 function doRender()
 {
     // console.log(doRender);
-    if(op.instanced(exe))return;
+    // if(op.instanced(exe))return;
 
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
@@ -42,7 +42,7 @@ function doRender()
             size.get()/2*scaleZ.get());
     }
 
-    op.patch.instancing.pushLoop(randoms.length);
+    // op.patch.instancing.pushLoop(randoms.length);
 
     if(scrollX.get()!=0)
     {
@@ -59,19 +59,19 @@ function doRender()
 
         mat4.translate(cgl.mMatrix,cgl.mMatrix, randoms[i]);
 
-        mat4.rotateX(cgl.mMatrix,cgl.mMatrix, randomsRot[i][0]);
-        mat4.rotateY(cgl.mMatrix,cgl.mMatrix, randomsRot[i][1]);
-        mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, randomsRot[i][2]);
+        if(randomsRot[i][0]) mat4.rotateX(cgl.mMatrix,cgl.mMatrix, randomsRot[i][0]);
+        if(randomsRot[i][1]) mat4.rotateY(cgl.mMatrix,cgl.mMatrix, randomsRot[i][1]);
+        if(randomsRot[i][2]) mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, randomsRot[i][2]);
 
         idx.set(i);
         rnd.set(randomsFloats[i]);
 
         trigger.trigger();
-        op.patch.instancing.increment();
+        // op.patch.instancing.increment();
 
         cgl.popModelMatrix();
     }
-    op.patch.instancing.popLoop();
+    // op.patch.instancing.popLoop();
 
 }
 

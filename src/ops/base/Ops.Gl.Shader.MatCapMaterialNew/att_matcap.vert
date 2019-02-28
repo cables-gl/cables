@@ -42,7 +42,7 @@ void main()
     norm=attrVertNormal;
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix;
-    
+
     #ifdef HAS_NORMAL_TEXTURE
         vTangent=attrTangent;
         vBiTangent=attrBiTangent;
@@ -56,22 +56,22 @@ void main()
     mvMatrix= viewMatrix * mMatrix;
 
     #ifdef INSTANCING
-        mat4 normalMatrix=inverse(transpose(mvMatrix));
+        mat4 normalMatrix=mvMatrix;//inverse(transpose(mvMatrix));
     #endif
-    
+
     e = normalize( vec3( mvMatrix * pos ) );
     vec3 n = normalize( mat3(normalMatrix) * norm );
-    
+
 
     // mat3 nMatrix = transpose(inverse(mat3(mMatrix)));
     // vec3 n = normalize( mat3(nMatrix) * norm );
     // norm=n;
 
     vec3 r = reflect( e, n );
-    
-    
-    
-    
+
+
+
+
     float m = 2. * sqrt(
         pow(r.x, 2.0)+
         pow(r.y, 2.0)+

@@ -1,6 +1,6 @@
 var text=op.addInPort(new CABLES.Port(op,"text",CABLES.OP_PORT_TYPE_VALUE,{type:'string',display:'editor'}));
 var separator=op.inValueString("separator",",");
-var toNumber=op.inValueBool("Numbers",false);
+var toNumber=op.inValueBool("Numbers",true);
 var parsed=op.outTrigger("Parsed");
 var arr=op.outArray("array");
 var len=op.outValue("length");

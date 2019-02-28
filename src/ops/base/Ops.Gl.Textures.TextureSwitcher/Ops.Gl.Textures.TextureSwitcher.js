@@ -37,14 +37,18 @@ function updateTexture(force)
     index=parseInt(num.get(),10);
     if(!force)
     {
-        if(index==lastIndex)return;
-        if(index!=index)return;
+        if(index == lastIndex)return;
+        if(index != index)return;
     }
-    if(index<0)index=0;
-    if(index>texturePorts.length-1)index=0;
+    if(
+	    isNaN(index) ||
+	    index < 0 ||
+	    index > texturePorts.length-1
+    )
+	index = 0;
 
     if(texturePorts[index].get()) textureOut.set(texturePorts[index].get());
-        else textureOut.set(tempTexture);
+    else textureOut.set(tempTexture);
 
     lastIndex=index;
 }

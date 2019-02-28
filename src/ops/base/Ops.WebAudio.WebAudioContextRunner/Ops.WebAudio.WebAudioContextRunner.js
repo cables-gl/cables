@@ -1,3 +1,18 @@
+CABLES.WEBAUDIO.createAudioContext = function(op) {
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    if(!AudioContext) return;
+    if(!window.audioContext)
+        window.audioContext = new AudioContext({sampleRate:44100});
+    // check if tone.js lib is being used
+    if(window.Tone && !CABLES.WEBAUDIO.toneJsInitialized) {
+      // set current audio context in tone.js
+      Tone.setContext(window.audioContext);
+      CABLES.WEBAUDIO.toneJsInitialized = true;
+    }
+    return window.audioContext;
+};
+
+
 const context = CABLES.WEBAUDIO.createAudioContext(op);
 context.addEventListener('statechange', onContextStateChange);
 const canvasWrapper = op.patch.cgl.canvas.parentElement;
@@ -16,14 +31,14 @@ inTrigger.onTriggered = checkState;
 showOverlayPort.onChange = onShowOverlayPortChange;
 
 if(showOverlayPort.get()) {
-    checkOverlay();    
+    checkOverlay();
 }
 
 function onShowOverlayPortChange() {
     if(showOverlayPort.get()) {
-        checkOverlay();    
+        checkOverlay();
     } else {
-        removeOverlay();    
+        removeOverlay();
     }
 }
 
@@ -32,7 +47,7 @@ function checkState() {
         context.resume();
     }
     if(showOverlayPort.get()) {
-        checkOverlay();    
+        checkOverlay();
     }
 }
 
@@ -42,7 +57,7 @@ function removeOverlay() {
     }
     if(button) {
         button.parentNode.removeChild(button);
-        button.removeEventListener('click', onButtonClick);    
+        button.removeEventListener('click', onButtonClick);
     }
     overlay = null;
     button = null;
@@ -82,7 +97,7 @@ function initElements() {
             overlay.style.height = '100%';
             overlay.style.backgroundColor = 'white';
             overlay.style.opacity = '0.7';
-        canvasWrapper.appendChild(overlay);    
+        canvasWrapper.appendChild(overlay);
     }
     if(!button) {
         button = document.createElement('div');
@@ -92,7 +107,7 @@ function initElements() {
             button.style.cursor = 'pointer';
             button.style.backgroundSize = 'cover';
         button.addEventListener('click', onButtonClick);
-        overlay.appendChild(button);    
+        overlay.appendChild(button);
     }
 }
 

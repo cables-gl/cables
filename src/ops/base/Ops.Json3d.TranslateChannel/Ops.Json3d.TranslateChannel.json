@@ -1,5 +1,4 @@
 {
-    "updated": 1513973747666,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "03b8e546-8408-4ddd-b5e8-9605e786c3b9",
@@ -12,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "channel"
+                "name": "channel",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -50,7 +50,7 @@ CABLES.Patch = function(cfg) {
     this.instancing = new CABLES.Instancing();
     this.onOneFrameRendered=null;
 
-
+    this._origData=null;
     this._frameNext = 0;
     this._frameInterval = 0;
     this._lastFrameTime = 0;
@@ -771,19 +771,15 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
             // console.log(obj.ops[iop].portsIn);
             op.portsInData=obj.ops[iop].portsIn;
+            op._origData=obj.ops[iop];
 
             for (var ipi in obj.ops[iop].portsIn) {
                 var objPort = obj.ops[iop].portsIn[ipi];
                 var port = op.getPort(objPort.name);
 
                 // if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
-                if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) {
-                    objPort.value = true === objPort.value;
-                }
-
-                if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) {
-                    port.set(objPort.value);
-                }
+                if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) objPort.value = true === objPort.value;
+                if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
                 if (objPort.animated) port.setAnimated(objPort.animated);
                 if (objPort.anim) {
                     if (!port.anim) port.anim = new CABLES.Anim();
@@ -812,8 +808,9 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
     for (var i in this.ops) {
         if (this.ops[i].onLoadedValueSet) {
-            this.ops[i].onLoadedValueSet();
+            this.ops[i].onLoadedValueSet(this.ops[i]._origData);
             this.ops[i].onLoadedValueSet = null;
+            this.ops[i]._origData=null;
         }
     }
 

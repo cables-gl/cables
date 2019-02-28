@@ -26,6 +26,11 @@ inRGB.onChange=function()
     else shader.removeDefine("RGB");
 };
 
+shader.bindTextures=function()
+{
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+};
+
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
@@ -35,8 +40,6 @@ render.onTriggered=function()
 
     cgl.setShader(shader);
     cgl.currentTextureEffect.bind();
-
-    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

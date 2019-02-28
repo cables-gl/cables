@@ -4,7 +4,7 @@ IN vec3 vPosition;
 UNI mat4 projMatrix;
 UNI mat4 mvMatrix;
 IN vec2 attrTexCoord;
-OUT mediump vec2 texCoord;
+OUT vec2 texCoord;
 
 UNI float diffuseRepeatX;
 UNI float diffuseRepeatY;

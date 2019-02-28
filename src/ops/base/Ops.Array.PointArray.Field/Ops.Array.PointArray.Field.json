@@ -45,5 +45,12 @@
     },
     "collections": [
         "pointArrays"
+    ],
+    "changelog": [
+        {
+            "message": "fixed the columns and rows parameter not resetting the array",
+            "author": "andro",
+            "date": 1550658911313
+        }
     ]
 }

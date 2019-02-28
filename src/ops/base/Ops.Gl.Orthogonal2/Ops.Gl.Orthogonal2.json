@@ -28,6 +28,21 @@
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Orthogonal2"

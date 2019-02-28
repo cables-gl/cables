@@ -1,0 +1,46 @@
+{
+    "authorName": "andro",
+    "id": "e435d07b-8545-4469-befb-868510adcb76",
+    "created": 1549535288470,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array in"
+            },
+            {
+                "type": "0",
+                "name": "Rotate amount",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "ArrayOut"
+            }
+        ],
+        "name": "Ops.Array.ArrayRotate"
+    },
+    "summary": "Shift array contents based upon rotate amount",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in",
+                "text": "Array in to modify"
+            },
+            {
+                "name": "Rotate amount",
+                "text": "Rotates array contents - accepts negative and positive numbers"
+            },
+            {
+                "name": "ArrayOut",
+                "text": "The modified array out"
+            }
+        ]
+    }
+}

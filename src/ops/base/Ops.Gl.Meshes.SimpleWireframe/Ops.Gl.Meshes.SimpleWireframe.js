@@ -16,7 +16,11 @@ var verts=[];
 inGeom.onChange=function()
 {
     var geom=inGeom.get();
-    if(!geom)return;
+    if(!geom)
+    {
+        mesh=null;
+        return;
+    }
 
     verts.length=0;
 

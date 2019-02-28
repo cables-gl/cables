@@ -99,7 +99,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Exp.Gl.MatCapMaterialNew"
+        "name": "Ops.Gl.Shader.MatCapMaterialNew"
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

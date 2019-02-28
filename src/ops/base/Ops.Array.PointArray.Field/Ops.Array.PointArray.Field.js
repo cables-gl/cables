@@ -14,10 +14,12 @@ inWidth.onChange=generate;
 inHeight.onChange=generate;
 
 var arr=[];
+outArr.set(arr);
 generate();
 
 function generate()
 {
+    arr.length = 0;
     const numX=inNumX.get();
     const numY=inNumY.get();
     const stepY=inHeight.get()/numY;
@@ -38,9 +40,19 @@ function generate()
     {
         for(var y=0;y<numY;y++)
         {
+            //original code, broekn
             arr[i++]=stepX*x-centerX;
             arr[i++]=stepY*y-centerY;
             arr[i++]=0;
+
+            //doesn't work ??
+            // arr[i*3+0]=stepX*x-centerX;
+            // arr[i*3+1]=stepY*y-centerY;
+            // arr[i*3+2]=0;
+
+            // arr.push(stepX*x-centerX);
+            // arr.push(stepY*y-centerY);
+            // arr.push(0);
         }
     }
 

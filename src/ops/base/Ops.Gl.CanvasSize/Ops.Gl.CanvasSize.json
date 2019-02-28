@@ -21,11 +21,15 @@
                 "type": "0",
                 "name": "Aspect Ratio",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Landscape",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.CanvasSize"
     },
-    "updated": 1522140429805,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "94e499e5-b4ee-4861-ab48-6ab5098b2cc3",
@@ -37,5 +41,12 @@
     "collections": [
         "dataInfo"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "new output: landscape - true if canvas width > height",
+            "author": "pandur",
+            "date": 1550644352354
+        }
+    ]
 }

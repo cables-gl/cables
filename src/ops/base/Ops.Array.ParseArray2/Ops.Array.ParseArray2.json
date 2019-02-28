@@ -1,0 +1,71 @@
+{
+    "id": "c974de41-4ce4-4432-b94d-724741109c71",
+    "authorName": "pandur",
+    "created": 1548108515570,
+    "summary": "Parse a string into an array (create)",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "text",
+                "text": "The array-data you want to use, e.g. `100,200,300`"
+            },
+            {
+                "name": "separator",
+                "text": "The separator to use, e.g. `,` (comma) when your text is `foo,bar,baz`"
+            },
+            {
+                "name": "Numbers",
+                "text": "If set, the values inside the array will be interpreted as numbers (not strings)"
+            },
+            {
+                "name": "Parsed",
+                "text": "Triggers once the array has been parsed"
+            },
+            {
+                "name": "array",
+                "text": "The parsed array"
+            },
+            {
+                "name": "length",
+                "text": "The number of elements in the resulting array"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "text"
+            },
+            {
+                "type": "0",
+                "name": "separator",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Numbers",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Parsed"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.ParseArray2"
+    }
+}

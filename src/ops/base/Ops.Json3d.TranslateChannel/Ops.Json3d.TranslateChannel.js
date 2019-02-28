@@ -1,4 +1,3 @@
-
 const render=op.inTrigger("render");
 const trigger=op.outTrigger("trigger");
 
@@ -6,7 +5,12 @@ var channel=this.addInPort(new CABLES.Port(this,"channel"));
 
 var q=quat.create();
 var qMat=mat4.create();
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
+
+var animX=null;
+var animY=null;
+var animZ=null;
+var vec=vec3.create();
 
 function dataGetAnimation(data,name)
 {
@@ -18,11 +22,6 @@ function dataGetAnimation(data,name)
                 return data.animations[iAnims].channels[iChannels];
     return false;
 }
-
-var animX=null;
-var animY=null;
-var animZ=null;
-
 
 function readAnim()
 {
@@ -43,9 +42,6 @@ function readAnim()
     }
 }
 
-
-var vec=vec3.create();
-
 render.onTriggered=function()
 {
     if(!cgl.frameStore.currentScene)return;
@@ -58,7 +54,7 @@ render.onTriggered=function()
         vec[0]=animX.getValue(time);
         vec[1]=animY.getValue(time);
         vec[2]=animZ.getValue(time);
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,vec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix,vec);
     }
     else readAnim();
 

@@ -90,6 +90,7 @@ var ontouchend=function(event)
 
 function removeListeners()
 {
+    if(!listenerElement) return;
     listenerElement.removeEventListener('touchend', ontouchend);
     listenerElement.removeEventListener('touchcancel', ontouchend);
     listenerElement.removeEventListener('touchstart', ontouchstart);
@@ -119,13 +120,17 @@ function addListeners()
     listenerElement.addEventListener('contextmenu', onClickRight);
     listenerElement.addEventListener('mouseleave', onMouseUp);
 
-    console.log("Added!");
 }
 
-active.onChange=function()
+op.onLoaded=addListeners;
+
+active.onChange=updateListeners;
+
+function updateListeners()
 {
-    if(listenerElement) removeListeners();
+    removeListeners();
     if(active.get()) addListeners();
+
 };
 
 

@@ -14,7 +14,7 @@ const unThreshold=new CGL.Uniform(shader,'f','threshhold',threshold);
 
 inBlackWhite.onChange=function()
 {
-    if(inInvert.get()) shader.define('BLACKWHITE');
+    if(inBlackWhite.get()) shader.define('BLACKWHITE');
         else shader.removeDefine('BLACKWHITE');
 };
 

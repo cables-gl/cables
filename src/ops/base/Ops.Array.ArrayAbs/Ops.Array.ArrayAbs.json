@@ -1,0 +1,37 @@
+{
+    "authorName": "andro",
+    "id": "f3629406-f393-4b2d-970e-cf47a0c5ca75",
+    "created": 1549532668282,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayAbs"
+    },
+    "summary": "Converts array contents to absolute values - converts all negative numbers to positive numbers",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "In",
+                "text": "The array to process"
+            },
+            {
+                "name": "Result",
+                "text": "The modified array out"
+            }
+        ]
+    }
+}

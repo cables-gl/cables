@@ -32,7 +32,7 @@ function updateMeshes()
         var geom=inGeoms[i].get();
         if(geom && geom._vertices)
         {
-            op.log(i+" verts",geom._vertices.length);
+            //op.log(i+" verts",geom._vertices.length);
 
             if(i===0)
             {
@@ -40,7 +40,7 @@ function updateMeshes()
 
                 mesh.addAttribute(prfx+'_attrMorphTargetA',geom._vertices,3);
                 mesh.addAttribute(prfx+'_attrMorphTargetB',geom._vertices,3);
-                op.log("MESH BUILD");
+                //op.log("MESH BUILD");
                 updateGeom();
             }
         }
@@ -49,24 +49,29 @@ function updateMeshes()
 
 function updateGeom()
 {
+    var getGeom = nextGeom.get();
+    if (getGeom < 0) getGeom =0 ;
+    else if(getGeom >= 7) getGeom = 7;
     var temp = 0;
-    op.log("update geom");
-    if(oldGeom==nextGeom.get())return;
+    //op.log("update geom");
+
+    if(oldGeom === getGeom)return;
 
     anim.clear();
     anim.setValue(op.patch.freeTimer.get(), 0);
     anim.setValue(op.patch.freeTimer.get()+duration.get(), 1,
         function()
         {
-            op.log("finished");
-            oldGeom=nextGeom.get();
+            //op.log("finished");
+            oldGeom=getGeom;
             finished.set(true);
         });
     finished.set(false);
 
     var geom1=inGeoms[oldGeom].get();
-    temp = nextGeom.get();
-    if(temp >=7 ) temp=7;
+
+    temp = getGeom;
+
     var geom2=inGeoms[temp].get();
     //var geom2=inGeoms[nextGeom.get()].get();
 

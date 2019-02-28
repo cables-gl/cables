@@ -43,6 +43,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Next"
+            },
+            {
                 "type": "0",
                 "name": "result",
                 "subType": "number"

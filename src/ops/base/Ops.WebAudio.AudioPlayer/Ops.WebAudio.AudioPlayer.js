@@ -2,7 +2,7 @@ var self = this;
 var patch=this.patch;
 // todo: audio object: firefox does not support .loop=true
 //
-// myAudio = new Audio('someSound.ogg'); 
+// myAudio = new Audio('someSound.ogg');
 // myAudio.addEventListener('ended', function() {
 //     this.currentTime = 0;
 //     this.play();
@@ -50,14 +50,14 @@ outPlaying.set(false);
 
 play.onChange=function()
 {
-    
-    if(!self.audio) 
+
+    if(!self.audio)
     {
         op.uiAttr({'error':'No audio file selected'});
         return;
     }
     else op.uiAttr({'error':null});
-        
+
 
     if(play.get())
     {
@@ -134,7 +134,7 @@ function seek()
 function playPause()
 {
     if(!self.audio)return;
-            
+
     if(self.patch.timer.isPlaying()) self.audio.play();
         else self.audio.pause();
 }
@@ -154,7 +154,7 @@ this.file.onChange=function()
 {
     if(!self.file.get())return;
     loadingFilename=op.patch.getFilePath(self.file.get());
-    
+
     var loadingId=patch.loading.start('audioplayer',self.file.get());
 
 
@@ -183,7 +183,7 @@ this.file.onChange=function()
         };
 
         self.audio.addEventListener('canplaythrough',canplaythrough, false);
-        
+
         self.audio.addEventListener('ended',function()
         {
             // console.log('audio player ended...');
@@ -191,7 +191,7 @@ this.file.onChange=function()
             playing=false;
             outEnded.trigger();
         }, false);
-        
+
 
         self.media = audioContext.createMediaElementSource(self.audio);
         self.media.connect(self.filter);

@@ -32,9 +32,13 @@ function onFilterChange()
 function update()
 {
     var arrayIn = inArray.get();
-    mathArray.length = 0;
 
-    if(!arrayIn) return;
+
+    if(!arrayIn)
+    {
+        mathArray.length = 0;
+        return;
+    }
 
     mathArray.length = arrayIn.length;
 

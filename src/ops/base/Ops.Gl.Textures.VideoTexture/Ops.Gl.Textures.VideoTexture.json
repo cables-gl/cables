@@ -105,7 +105,6 @@
         "name": "Ops.Gl.Textures.VideoTexture"
     },
     "summary": "play a video file and use it as a texture",
-    "updated": 1541345833836,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "569af220-e7c5-4dde-a5d9-b63cebdc8bfd",
@@ -117,5 +116,12 @@
                 "text": "must be checked to play on ios"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "added: outputs transparent texture while loading/before showing first frame",
+            "author": "pandur",
+            "date": 1549122408996
+        }
+    ]
 }

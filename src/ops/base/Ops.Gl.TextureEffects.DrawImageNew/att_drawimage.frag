@@ -14,6 +14,11 @@ UNI float rotate;
 
 UNI float amount;
 
+#ifdef ASPECT_RATIO
+    UNI float aspectTex;
+    UNI float aspectPos;
+#endif
+
 void main()
 {
     vec4 blendRGBA=vec4(0.0,0.0,0.0,1.0);
@@ -27,17 +32,25 @@ void main()
             tc.y=1.0-tc.y;
         #endif
 
+        #ifdef ASPECT_RATIO
+            #ifdef ASPECT_AXIS_X
+                tc.y=(1.0-aspectPos)-(((1.0-aspectPos)-tc.y)*aspectTex);
+            #endif
+            #ifdef ASPECT_AXIS_Y
+                tc.x=(1.0-aspectPos)-(((1.0-aspectPos)-tc.x)/aspectTex);
+            #endif
+        #endif
+
         #ifdef TEX_TRANSFORM
             vec3 coordinates=vec3(tc.x, tc.y,1.0);
             tc=(transform * coordinates ).xy;
         #endif
-    
+
         blendRGBA=texture(image,tc);
-        
+
         vec3 blend=blendRGBA.rgb;
         vec4 baseRGBA=texture(tex,texCoord);
         vec3 base=baseRGBA.rgb;
-        
         vec3 colNew=_blend(base,blend);
 
         #ifdef REMOVE_ALPHA_SRC
@@ -55,15 +68,21 @@ void main()
 
             blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;
         #endif
-
-
     #endif
-    
+
+    #ifdef CLIP_REPEAT
+        if(tc.y>1.0 || tc.y<0.0 || tc.x>1.0 || tc.x<0.0)colNew.rgb=vec3(0.0);
+    #endif
+
+    #ifdef ASPECT_RATIO
+        #ifdef ASPECT_CROP
+            if(tc.y>1.0 || tc.y<0.0 || tc.x>1.0 || tc.x<0.0) colNew.rgb=vec3(0.0);
+        #endif
+    #endif
+
     blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);
-    
     blendRGBA.a=1.0;
-    
-    
+
     outColor= blendRGBA;
 
 }

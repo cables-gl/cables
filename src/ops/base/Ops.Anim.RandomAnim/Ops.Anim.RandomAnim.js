@@ -8,6 +8,8 @@ var duration=op.inValue("duration",0.5);
 var pause=op.inValue("pause between",0);
 
 
+var next=op.outTrigger("Next");
+
 var result=op.outValue("result");
 var looped=op.outTrigger("Looped");
 
@@ -58,7 +60,9 @@ function init(v)
 }
 
 
-exe.onTriggered=function()
+exe.onTriggered=updateExe;
+
+function updateExe()
 {
     if(needsReinit)reinit();
 
@@ -73,5 +77,6 @@ exe.onTriggered=function()
         looped.trigger();
     }
     result.set(v);
+    next.trigger();
 };
 

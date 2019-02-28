@@ -1,5 +1,5 @@
 IN vec2 texCoord;
-UNI sampler2D tex;
+// UNI sampler2D tex;
 UNI float threshhold;
 UNI sampler2D text;
 

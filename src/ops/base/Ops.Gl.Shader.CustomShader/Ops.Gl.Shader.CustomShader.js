@@ -9,23 +9,38 @@ var uniformInputs=[];
 var uniformTextures=[];
 
 var shader=new CGL.Shader(cgl,"shaderMaterial");
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
 // shader.glslVersion=0;
 
 op.setPortGroup("Source Code",[fragmentShader,vertexShader]);
 
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
-
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 fragmentShader.onChange=updateLater;
 vertexShader.onChange=updateLater;
 render.onTriggered=doRender;
 
 var needsUpdate=true;
+op.onLoadedValueSet=initDataOnLoad;
+
+function initDataOnLoad(data)
+{
+    updateShader();
+
+    // set uniform values AFTER shader has been compiled and uniforms are extracted and uniform ports are created.
+
+    for(var i=0;i<uniformInputs.length;i++)
+        for(var j=0;j<data.portsIn.length;j++)
+            if(uniformInputs[i].name==data.portsIn[j].name)
+                uniformInputs[i].set(data.portsIn[j].value);
+
+}
 
 function updateLater()
 {
     needsUpdate=true;
-    updateShader();
 }
 
 op.init=function()
@@ -37,7 +52,6 @@ function doRender()
 {
     if(needsUpdate)updateShader();
     trigger.trigger();
-
 }
 
 function bindTextures()
@@ -78,8 +92,8 @@ function updateShader()
 
     // shader.glslVersion=0;
     shader.bindTextures=bindTextures.bind(this);
-
     shader.setSource(vertexShader.get(),fragmentShader.get());
+
     shader.compile();
 
     var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);

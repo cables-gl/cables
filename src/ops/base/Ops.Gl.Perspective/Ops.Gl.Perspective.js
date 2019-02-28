@@ -3,7 +3,7 @@
 var render=op.inTrigger('render');
 var fovY=op.inValueFloat("fov y",45);
 var zNear=op.inValueFloat("frustum near",0.01);
-var zFar=op.inValueFloat("frustum far",45);
+var zFar=op.inValueFloat("frustum far",20);
 var autoAspect=op.inValueBool("Auto Aspect Ratio",true);
 var aspect=op.inValue("Aspect Ratio");
 

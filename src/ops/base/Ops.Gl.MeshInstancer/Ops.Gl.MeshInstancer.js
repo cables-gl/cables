@@ -13,7 +13,6 @@ const
     ;
 
 const cgl=op.patch.cgl;
-
 geom.ignoreValueSerialize=true;
 
 var mod=null;
@@ -25,6 +24,7 @@ var num=0;
 
 op.setPortGroup("Limit Number of Instances",[inLimit,doLimit]);
 op.setPortGroup("Parameters",[inScales,inRot,inTranslates]);
+op.toWorkPortsNeedToBeLinked(geom);
 
 doLimit.onChange=updateLimit;
 exe.onTriggered=doRender;
@@ -135,6 +135,7 @@ function doRender()
 {
     if(!mesh) return;
     if(recalc)setupArray();
+    if(recalc)return;
     if(matrixArray.length<=1)return;
 
     if(cgl.getShader() && cgl.getShader()!=shader)
@@ -158,10 +159,8 @@ function doRender()
         }
     }
 
-    if(doLimit.get())
-    {
-        mesh.numInstances=Math.min(num,inLimit.get());
-    } else mesh.numInstances=num;
+    if(doLimit.get()) mesh.numInstances=Math.min(num,inLimit.get());
+        else mesh.numInstances=num;
 
     outNum.set(mesh.numInstances);
 

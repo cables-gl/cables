@@ -70,5 +70,12 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "41bc544e-a0c9-450b-b657-405d80b1298c",
-    "created": 1508241684882
+    "created": 1508241684882,
+    "changelog": [
+        {
+            "message": "Geometry parameter being below 0 or above 7 no longer throws an error",
+            "author": "andro",
+            "date": 1549461050219
+        }
+    ]
 }

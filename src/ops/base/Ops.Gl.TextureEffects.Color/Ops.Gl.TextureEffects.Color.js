@@ -18,11 +18,8 @@ const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,'textureeffect color');
 
 var srcFrag=attachments.color_frag||'';
-// srcFrag=srcFrag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-
-
 
 const
     textureUniform=new CGL.Uniform(shader,'t','tex',TEX_SLOT),

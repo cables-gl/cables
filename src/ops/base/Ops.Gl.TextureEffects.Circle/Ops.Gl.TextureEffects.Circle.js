@@ -3,6 +3,8 @@ var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
 var inSize=op.inValueSlider("size");
 var inInner=op.inValueSlider("Inner");
+var inStretch=op.inValueSlider("Stretch");
+
 var inX=op.inValue("Pos X",0.5);
 var inY=op.inValue("Pos Y",0.5);
 
@@ -17,7 +19,7 @@ const a = op.inValueSlider("a", 1);
 
 r.setUiAttribs({ colorPick: true });
 
-op.setPortGroup("Size",[inSize,inInner]);
+op.setPortGroup("Size",[inSize,inInner,inStretch]);
 op.setPortGroup("Position",[inX,inY]);
 op.setPortGroup("Style",[warnOverflow,fallOff,inFadeOut]);
 
@@ -31,6 +33,8 @@ shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
+
+var uniStretch=new CGL.Uniform(shader,'f','stretch',inStretch);
 var uniSize=new CGL.Uniform(shader,'f','size',inSize);
 var uniFadeOut=new CGL.Uniform(shader,'f','fadeOut',inFadeOut);
 var uniInner=new CGL.Uniform(shader,'f','inner',inInner);

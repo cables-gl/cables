@@ -5,7 +5,8 @@ var scene=new CABLES.Variable();
 cgl.frameStore.currentScene=null;
 
 var exe=op.inTrigger("Render");
-var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'3d json' } ));
+var filename=op.inFile("file",'3d json');
+
 var meshIndex=op.inValueInt("Mesh Index",0);
 
 
@@ -67,7 +68,7 @@ function render()
     if(draw.get())
     {
         cgl.pushModelMatrix();
-        mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,transMatrix);
+        mat4.multiply(cgl.mMatrix,cgl.mMatrix,transMatrix);
 
         if(mesh) mesh.render(cgl.getShader());
 
