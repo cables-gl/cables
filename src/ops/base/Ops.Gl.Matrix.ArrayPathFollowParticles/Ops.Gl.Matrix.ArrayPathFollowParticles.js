@@ -146,11 +146,9 @@ inMaxDistance.onChange=updateCheckDistance;
 
 function updateCheckDistance()
 {
-    
     if(shader)
     {
         shaderModule.maxDistance.setValue(inMaxDistance.get());
-
 
         if(inMaxDistance.get()==0)
         {
@@ -159,10 +157,7 @@ function updateCheckDistance()
         else
         {
             shader.define("CHECK_DISTANCE");
-            console.log("JAJA CHECK DISTANCE");
         }
-
-
     }
 }
 
