@@ -1,5 +1,4 @@
 {
-    "updated": 1519296735006,
     "authorName": "pandur",
     "id": "311e8179-9a7c-43de-9eb2-84577d702974",
     "created": 1519296680513,
@@ -11,7 +10,8 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Pi"
+                "name": "Pi",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Pi"
