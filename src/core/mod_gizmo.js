@@ -77,8 +77,9 @@ CABLES.htmlLine=function(parentElement,color)
 };
 
 
-CABLES.Gizmo=function()
+CABLES.Gizmo=function(cgl)
 {
+    this._cgl=cgl;
     this._eleCenter=null;
     this._eleX=null;
     this._eleY=null;
@@ -87,67 +88,13 @@ CABLES.Gizmo=function()
     this._origValue=0;
     this._dragSum=0;
     this._dir=1;
+
+    if(!cgl && CABLES.UI) this._cgl=gui.scene().cgl;
+
 };
 
 
 
-// CABLES.Gizmo.prototype.drawLine=function(x,y,z)
-// {
-//     var cgl=gui.scene().cgl;
-//     cgl.gl.disable(cgl.gl.DEPTH_TEST);
-
-
-//     if(!this.geom)
-//     {
-//         this.geom=new CGL.Geometry("gizmoline");
-//         this.geom.vertices=[0,0,0,0,0,0,0];
-//         this.geom.vertices.length=18;
-//         this.mesh=new CGL.Mesh(cgl,this.geom);
-
-//         this.shaderX=new CGL.Shader(cgl,'gizmo mat');
-//         this.shaderX.setSource(this.shaderX.getDefaultVertexShader(),this.shaderX.getDefaultFragmentShader(1,0,0));
-//         this.shaderX.glPrimitive=cgl.gl.LINES;
-
-//         this.shaderY=new CGL.Shader(cgl,'gizmo mat');
-//         this.shaderY.setSource(this.shaderY.getDefaultVertexShader(),this.shaderY.getDefaultFragmentShader(0,1,0));
-//         this.shaderY.glPrimitive=cgl.gl.LINES;
-
-//         this.shaderZ=new CGL.Shader(cgl,'gizmo mat');
-//         this.shaderZ.setSource(this.shaderZ.getDefaultVertexShader(),this.shaderZ.getDefaultFragmentShader(0,0,1));
-//         this.shaderZ.glPrimitive=cgl.gl.LINES;
-//     }
-
-//     var ind=0;
-
-
-
-
-//     this.geom.vertices[ind++]=this._params.posX.get();
-//     this.geom.vertices[ind++]=this._params.posY.get();
-//     this.geom.vertices[ind++]=this._params.posZ.get();
-
-//     this.geom.vertices[ind++]=this._params.posX.get()+x;
-//     this.geom.vertices[ind++]=this._params.posY.get()+y;
-//     this.geom.vertices[ind++]=this._params.posZ.get()+z;
-
-
-
-
-
-//     var shader=this.shaderX;
-//     if(y>0)shader=this.shaderY;
-//     if(z>0)shader=this.shaderZ;
-
-//     this.mesh.updateVertices(this.geom);
-
-//     cgl.setShader(shader);
-
-//     this.mesh.render(shader);
-
-//     cgl.setPreviousShader();
-//     cgl.gl.enable(cgl.gl.DEPTH_TEST);
-
-// };
 
 
 CABLES.Gizmo.prototype.getDir=function(x2,y2)
@@ -168,8 +115,7 @@ CABLES.Gizmo.prototype.set=function(params,cgl)
 {
     if(!params)return this.setParams(params);
 
-    if(!cgl && CABLES.UI) cgl=gui.scene().cgl;
-
+    var cgl=this._cgl;
     cgl.pushModelMatrix();
     function toScreen(trans)
     {
@@ -269,7 +215,7 @@ CABLES.Gizmo.prototype.setParams=function(params)
 
     if(!this._eleCenter)
     {
-        var container = gui.scene().cgl.canvas.parentElement;
+        var container = this._cgl.canvas.parentElement;
 
         this._eleCenter = document.createElement('div');
         this._eleCenter.id="gizmo";
@@ -393,7 +339,7 @@ CABLES.Gizmo.prototype.dragger=function(el)
 
     function down(e)
     {
-        gui.setStateUnsaved();
+        if(CABLES.UI)gui.setStateUnsaved();
         isDown=true;
         document.addEventListener('pointerlockchange', lockChange, false);
         document.addEventListener('mozpointerlockchange', lockChange, false);
@@ -405,7 +351,7 @@ CABLES.Gizmo.prototype.dragger=function(el)
 
     function up(e)
     {
-        gui.setStateUnsaved();
+        if(CABLES.UI)gui.setStateUnsaved();
         isDown=false;
         document.removeEventListener('pointerlockchange', lockChange, false);
         document.removeEventListener('mozpointerlockchange', lockChange, false);
@@ -419,12 +365,12 @@ CABLES.Gizmo.prototype.dragger=function(el)
 
         document.removeEventListener("mousemove", move, false);
 
-        gui.patch().showOpParams(self._draggingPort.parent);
+        if(CABLES.UI)gui.patch().showOpParams(self._draggingPort.parent);
     }
 
     function move(e)
     {
-        gui.setStateUnsaved();
+        if(CABLES.UI)gui.setStateUnsaved();
         var v=(e.movementY+e.movementX)*(self._dir*((self._multi||1)/100));
         if(e.shiftKey)v*=0.025;
         self._dragSum+=v;
