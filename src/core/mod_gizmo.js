@@ -89,7 +89,7 @@ CABLES.Gizmo=function(cgl)
     this._dragSum=0;
     this._dir=1;
 
-    if(!cgl && CABLES.UI) this._cgl=gui.scene().cgl;
+    // if(!cgl && CABLES.UI) this._cgl=gui.scene().cgl;
 
 };
 
@@ -111,7 +111,7 @@ CABLES.Gizmo.prototype.getDir=function(x2,y2)
 
 CABLES.Gizmo.tempParams={};
 
-CABLES.Gizmo.prototype.set=function(params,cgl)
+CABLES.Gizmo.prototype.set=function(params)
 {
     if(!params)return this.setParams(params);
 
