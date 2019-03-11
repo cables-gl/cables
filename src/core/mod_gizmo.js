@@ -164,11 +164,12 @@ CABLES.Gizmo.prototype.getDir=function(x2,y2)
 
 CABLES.Gizmo.tempParams={};
 
-CABLES.Gizmo.prototype.set=function(params)
+CABLES.Gizmo.prototype.set=function(params,cgl)
 {
     if(!params)return this.setParams(params);
 
-    var cgl=gui.scene().cgl;
+    if(!cgl && CABLES.UI) cgl=gui.scene().cgl;
+
     cgl.pushModelMatrix();
     function toScreen(trans)
     {
