@@ -29,5 +29,29 @@
     "updated": 1542698772835,
     "authorName": "pandur",
     "id": "3ff90564-fe8d-422f-a4ee-f8bfb8f1b76f",
-    "created": 1542698773328
+    "created": 1542698773328,
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array in that will be searched through"
+            },
+            {
+                "name": "SearchValue",
+                "text": "the string to look for"
+            },
+            {
+                "name": "Found",
+                "text": "Returns `true` if string is in array otherwise `false`"
+            },
+            {
+                "name": "Index",
+                "text": "The index number where the string was found in the array"
+            }
+        ]
+    }
 }

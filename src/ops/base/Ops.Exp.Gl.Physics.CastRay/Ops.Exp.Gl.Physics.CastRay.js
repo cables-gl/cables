@@ -13,6 +13,14 @@ const
     hitY=op.outValue("Hit Y"),
     hitZ=op.outValue("Hit Z"),
 
+    aabbX=op.outValue("aabb x"),
+    aabbY=op.outValue("aabb y"),
+    aabbZ=op.outValue("aabb z"),
+
+    aabbX2=op.outValue("aabb x2"),
+    aabbY2=op.outValue("aabb y2"),
+    aabbZ2=op.outValue("aabb z2"),
+
     cgl=op.patch.cgl
     ;
 
@@ -66,7 +74,21 @@ function render()
 
     if(r && ray.result)
     {
+        console.log(ray.result);
         hasHit.set(ray.result.hasHit);
+
+        if(ray.result.body)
+        {
+            aabbX.set(ray.result.body.aabb.lowerBound.x);
+            aabbX.set(ray.result.body.aabb.lowerBound.y);
+            aabbX.set(ray.result.body.aabb.lowerBound.z);
+
+            aabbX2.set(ray.result.body.aabb.upperBound.x);
+            aabbX2.set(ray.result.body.aabb.upperBound.y);
+            aabbX2.set(ray.result.body.aabb.upperBound.z);
+        }
+
+        // console.log(ray.result);
 
         hitX.set(ray.result.hitPointWorld.x);
         hitY.set(ray.result.hitPointWorld.y);

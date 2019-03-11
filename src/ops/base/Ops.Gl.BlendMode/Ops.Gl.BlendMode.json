@@ -5,7 +5,24 @@
     "created": 1518859707157,
     "summary": "change how colors are mixed (blending/mixing modes)",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Blendmode",
+                "text": "Pick a from the following : blendMode `none, add, subtract, mul`"
+            },
+            {
+                "name": "Premultiplied",
+                "text": "Enable pre-multiplied mode"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
     },
     "layout": {
         "portsIn": [
@@ -31,5 +48,9 @@
             }
         ],
         "name": "Ops.Gl.BlendMode2"
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

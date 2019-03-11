@@ -34,9 +34,31 @@
     },
     "summary": "weighted average interpolation",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Value",
+                "text": "The value to interpolate"
+            },
+            {
+                "name": "Divisor",
+                "text": "Higher numbers result in slower interpolation towards the current value"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Result",
+                "text": "The interpolated result"
+            }
+        ]
     },
     "youtubeid": "iM3BTNHwmsA",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "issues": ""
 }

@@ -1,5 +1,5 @@
 {
-    "summary": "Draw all vertices as points, like particles",
+    "summary": "Draw all vertices as points / circles",
     "layout": {
         "portsIn": [
             {
@@ -87,6 +87,73 @@
     "id": "f86a4a07-00ee-4f68-8839-e02d51d1cd2f",
     "created": 1505469976045,
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "PointSize",
+                "text": "The size of each point, distance has no effect unless \"scale by distance\" is enabled"
+            },
+            {
+                "name": "Random Size",
+                "text": "Causes point size to become more random with higher values"
+            },
+            {
+                "name": "Round",
+                "text": "Render points as circles , disable to render squares"
+            },
+            {
+                "name": "Scale by Distance",
+                "text": "Point size is changed with distance to the camera"
+            },
+            {
+                "name": "r",
+                "text": "Red colour component"
+            },
+            {
+                "name": "g",
+                "text": "Green colour component"
+            },
+            {
+                "name": "b",
+                "text": "Blue colour component"
+            },
+            {
+                "name": "a",
+                "text": "Alpha component"
+            },
+            {
+                "name": "preMultiplied alpha",
+                "text": "Enable pre-multiplied alpha with texture input"
+            },
+            {
+                "name": "texture",
+                "text": "Texture which is applied to each point"
+            },
+            {
+                "name": "Texture Mask",
+                "text": "Texture mask which is applied to each point"
+            },
+            {
+                "name": "colorizeTexture",
+                "text": "RGB values are mixed with texture values"
+            },
+            {
+                "name": "texture Lookup",
+                "text": "Use to give each point a random colour from the texture input"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "youtubeid": "tFM2Ixf-ixs",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Meshes.PointCloudFromArray"
+    ]
 }

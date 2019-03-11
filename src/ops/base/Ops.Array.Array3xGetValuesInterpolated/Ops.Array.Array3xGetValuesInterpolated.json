@@ -32,10 +32,33 @@
     },
     "summary": "get interpolated values between the indices of an array3x",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Index Position",
+                "text": "The lookup number which returns the interpolated value"
+            },
+            {
+                "name": "Array",
+                "text": "The array in "
+            },
+            {
+                "name": "X",
+                "text": "X component from lookup with 'index position'"
+            },
+            {
+                "name": "Y",
+                "text": "Y component from lookup with 'index position'"
+            },
+            {
+                "name": "Z",
+                "text": "Z component from lookup with 'index position'"
+            }
+        ]
     },
     "youtubeid": "",
     "collections": [
         "pointArrays"
-    ]
+    ],
+    "issues": "",
+    "relatedops": null
 }

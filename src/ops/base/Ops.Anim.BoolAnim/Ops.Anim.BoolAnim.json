@@ -51,8 +51,9 @@
                 "subType": "number"
             },
             {
-                "type": "1",
-                "name": "finished"
+                "type": "0",
+                "name": "finished",
+                "subType": "boolean"
             },
             {
                 "type": "1",
@@ -61,11 +62,58 @@
         ],
         "name": "Ops.Anim.BoolAnim"
     },
-    "summary": "animate between two values  based on boolean value",
+    "summary": "animate between two values based on a boolean value",
     "authorName": "pandur",
     "id": "06ad9d35-ccf5-4d31-889c-e23fa062588a",
     "created": 1518522798910,
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "bool",
+                "text": "Required to trigger an animation"
+            },
+            {
+                "name": "easing",
+                "text": "Easing mode for animation"
+            },
+            {
+                "name": "duration",
+                "text": "How long it takes for the animation to occur"
+            },
+            {
+                "name": "Direction",
+                "text": "Can be set to trigger on `true and false`, only `true` or only `false`"
+            },
+            {
+                "name": "value false",
+                "text": "The value to animate to when `Bool input' evaluates to `false'"
+            },
+            {
+                "name": "value true",
+                "text": "The value to animate to when `Bool input' evaluates to `true'"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out "
+            },
+            {
+                "name": "value",
+                "text": "The current value of the animation"
+            },
+            {
+                "name": "Finished Trigger",
+                "text": "Outputs a trigger when the animation has finished"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Boolean.ToggleBool"
+    ]
 }

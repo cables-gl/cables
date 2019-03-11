@@ -57,8 +57,12 @@
         ],
         "name": "Ops.Gl.GlInfo"
     },
-    "summary": "information about yout webgl context",
+    "summary": "information about the webgl context",
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

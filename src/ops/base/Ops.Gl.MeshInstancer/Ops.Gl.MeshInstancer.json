@@ -56,7 +56,7 @@
         "name": "Ops.Gl.MeshInstancer"
     },
     "summary": "draw the same mesh multiple times very fast",
-    "youtubeid": "",
+    "youtubeid": "7xlElfbMWgw",
     "docs": {
         "ports": [
             {
@@ -97,5 +97,6 @@
         "pointArrays",
         "meshInstancing"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "issues": ""
 }

@@ -12,10 +12,8 @@ doBillboard.set(false);
 
 doBillboard.onChange=function()
 {
-    if(doBillboard.get())
-        shader.define('BILLBOARD');
-    else
-        shader.removeDefine('BILLBOARD');
+    if(doBillboard.get()) shader.define('BILLBOARD');
+        else shader.removeDefine('BILLBOARD');
 };
 
 var cursor=op.addInPort(new CABLES.Port(op,"cursor",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));

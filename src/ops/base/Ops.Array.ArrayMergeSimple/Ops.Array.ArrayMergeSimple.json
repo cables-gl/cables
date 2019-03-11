@@ -2,9 +2,22 @@
     "authorName": "pandur",
     "id": "3df0db41-26f9-4deb-a6ce-9e71eb8f9784",
     "created": 1520592423600,
-    "summary": "merge two arrays",
+    "summary": "merge two arrays - Array 2 is placed behind array 1",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array 1"
+            },
+            {
+                "name": "Array 2",
+                "text": "Array 2"
+            },
+            {
+                "name": "Result",
+                "text": "The new array with array 1 and 2 merged together"
+            }
+        ]
     },
     "layout": {
         "portsIn": [
@@ -24,5 +37,9 @@
             }
         ],
         "name": "Ops.Array.ArrayMergeSimple"
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

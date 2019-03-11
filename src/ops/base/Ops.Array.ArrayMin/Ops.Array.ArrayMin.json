@@ -25,6 +25,23 @@
     },
     "summary": "Applies a min operation to all values in an array",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "The array in"
+            },
+            {
+                "name": "Value",
+                "text": "The value to test the min operation with"
+            },
+            {
+                "name": "Array Out",
+                "text": "Array out returning the minimum value"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

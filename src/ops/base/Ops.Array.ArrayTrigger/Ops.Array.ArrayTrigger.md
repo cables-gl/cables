@@ -1,1 +1,1 @@
-`output array` gets `input array` after triggering `exec`
+Array is only sent out when op is triggered.

@@ -5,6 +5,7 @@ const
 
 number1.onChange=
 number2.onChange=exec;
+exec();
 
 function exec()
 {
