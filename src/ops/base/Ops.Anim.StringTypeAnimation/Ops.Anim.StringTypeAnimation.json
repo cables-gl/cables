@@ -1,5 +1,5 @@
 {
-    "summary": "Animates a string, like it is being written by a person",
+    "summary": "Animates a text/string, like it is being typed out by a person",
     "updated": 1538418659151,
     "authorName": "pandur",
     "id": "61b0db65-814c-403f-b4d1-2b58e6311454",
@@ -42,5 +42,39 @@
             }
         ],
         "name": "Ops.Anim.StringTypeAnimation"
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Textures.Text"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "text",
+                "text": "The text/string which will typed out"
+            },
+            {
+                "name": "Restart",
+                "text": "When triggered causes the string to be typed out again"
+            },
+            {
+                "name": "Speed",
+                "text": "Determines the speed that the typing occurs at"
+            },
+            {
+                "name": "Result",
+                "text": "The typed out string"
+            },
+            {
+                "name": "Changed",
+                "text": "Triggers out each time a letter is typed"
+            },
+            {
+                "name": "Finished",
+                "text": "Trigger out when animation is finished"
+            }
+        ]
     }
 }

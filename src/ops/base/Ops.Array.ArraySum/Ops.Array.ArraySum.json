@@ -24,6 +24,23 @@
     },
     "summary": "Adds one number to all values in an array",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "In",
+                "text": "Array in"
+            },
+            {
+                "name": "Value",
+                "text": "The number to add to all numbers in the array"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

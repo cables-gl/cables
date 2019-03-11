@@ -1,5 +1,4 @@
 {
-    "updated": 1537277948045,
     "authorName": "pandur",
     "id": "72f95dbd-7b36-4e88-9d59-1bb2d3f2144e",
     "created": 1537202890744,
@@ -81,5 +80,16 @@
     "summary": "render to multiple textures at the same time",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "added webgl2 requirement",
+            "author": "pandur",
+            "date": 1549608962401
+        }
+    ],
+    "youtubeid": "",
+    "issues": "requires WebGL2",
+    "collections": null,
+    "relatedops": null
 }

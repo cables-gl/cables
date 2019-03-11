@@ -58,12 +58,56 @@
         ],
         "name": "Ops.Anim.RandomAnim"
     },
-    "summary": "animating between random numbers",
+    "summary": "Animates between random values defined by a min and max value",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "min",
+                "text": "Minimum random value that can be generated"
+            },
+            {
+                "name": "max",
+                "text": "Maximum random value that can be generated"
+            },
+            {
+                "name": "random seed",
+                "text": "Random seed. set to 0 for a different seed on each reload. Set to a number to keep the same seed"
+            },
+            {
+                "name": "duration",
+                "text": "How long it takes to animate from the random min and max values"
+            },
+            {
+                "name": "pause between",
+                "text": "Define a pause between each random animation cycle"
+            },
+            {
+                "name": "easing",
+                "text": "Easing mode "
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "result",
+                "text": "The random animated value"
+            },
+            {
+                "name": "Looped",
+                "text": "Trigger out each time the animation reaches its end"
+            }
+        ]
     },
     "authorName": "pandur",
     "id": "2d2e5f0e-b69f-4789-9a48-1ee6ade5049a",
     "created": 1525413404905,
-    "youtubeid": ""
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

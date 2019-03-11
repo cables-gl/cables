@@ -2,7 +2,28 @@
     "summary": "Splits a xyzw array into 4 individual arrays",
     "youtubeid": "",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array in xyzw",
+                "text": "Array in xyzw"
+            },
+            {
+                "name": "Array 1 out",
+                "text": "array x out"
+            },
+            {
+                "name": "Array 2 out",
+                "text": "array y out"
+            },
+            {
+                "name": "Array 3 out",
+                "text": "array z out"
+            },
+            {
+                "name": "Array 4 out",
+                "text": "array w out"
+            }
+        ]
     },
     "authorName": "andro",
     "id": "8d2127d8-f3e4-4036-8cd8-75c6a404b582",
@@ -33,5 +54,8 @@
             }
         ],
         "name": "Ops.Array.ArrayUnpack4"
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

@@ -67,11 +67,64 @@
         "name": "Ops.Anim.SimpleAnim"
     },
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "reset",
+                "text": "Trigger the animation"
+            },
+            {
+                "name": "rewind",
+                "text": "Rewinds animation to start but only after its finished"
+            },
+            {
+                "name": "start",
+                "text": "starting animation value"
+            },
+            {
+                "name": "end",
+                "text": "ending animation value"
+            },
+            {
+                "name": "duration",
+                "text": "Duration to get from start to end value"
+            },
+            {
+                "name": "loop",
+                "text": "enable to loop animation back and forth"
+            },
+            {
+                "name": "easing",
+                "text": "Easing mode applied to value"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "result",
+                "text": "The animated value out"
+            },
+            {
+                "name": "finished",
+                "text": "Outputs true when animation is finished"
+            },
+            {
+                "name": "Finished Trigger",
+                "text": "Outputs a trigger when animation is finished"
+            }
+        ]
     },
     "summary": "simple animation between two values",
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "5b244b6e-c505-4743-b2cc-8119ef720028",
-    "created": 1506695249414
+    "created": 1506695249414,
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

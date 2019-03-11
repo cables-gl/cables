@@ -4,14 +4,14 @@ const outResult=op.outObject("Result");
 exec.onTriggered=function()
 {
     var values=[];
-    for(i=0;i<op.patch.ops.length;i++)
+    for(var i=0;i<op.patch.ops.length;i++)
     {
         if(
             op.patch.ops[i].objName.indexOf('Ops.Sidebar.Sidebar')==-1 &&
             op.patch.ops[i].objName.indexOf('AsObject')==-1 &&
             op.patch.ops[i].objName.indexOf('Group')==-1 &&
-            op.patch.ops[i].objName.indexOf('Preset')==-1 && 
-            op.patch.ops[i].objName.indexOf('Ops.Sidebar')===0 
+            op.patch.ops[i].objName.indexOf('Preset')==-1 &&
+            op.patch.ops[i].objName.indexOf('Ops.Sidebar')===0
             )
         {
             console.log("objname",op.patch.ops[i].objName);
@@ -37,9 +37,9 @@ exec.onTriggered=function()
             if(foundPort)values.push(p);
         }
     }
-    
+
     var r={ops:values};
-    
+
     outResult.set(r);
 };
 

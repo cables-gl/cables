@@ -1,5 +1,5 @@
 {
-    "summary": "set all pixels with to one color",
+    "summary": "sets all cleared pixels to one colour. Use to change the background colour.",
     "layout": {
         "portsIn": [
             {
@@ -42,6 +42,10 @@
     "docs": {
         "ports": [
             {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
                 "name": "r",
                 "text": "Red color value, between `0.0` and `1.0`"
             },
@@ -56,7 +60,15 @@
             {
                 "name": "a",
                 "text": "Alpha value (opacity), between `0.0` (not visible) and `1.0` (fully visible). "
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
             }
         ]
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

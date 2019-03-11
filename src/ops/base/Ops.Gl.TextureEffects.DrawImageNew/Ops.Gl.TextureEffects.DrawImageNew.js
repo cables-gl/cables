@@ -239,6 +239,7 @@ function doRender()
         uniTexAspect.setValue( 1/(tex.height/tex.width*imgTex.width/imgTex.height));
 
 
+
         cgl.setTexture(1, tex.tex );
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 

@@ -59,10 +59,6 @@
                 "text": "The length of the new array"
             },
             {
-                "name": "Random seed",
-                "text": "Random seed 0 will always give a different number. Set to a number for a fixed seed."
-            },
-            {
                 "name": "Result",
                 "text": "The generated array with the new values."
             }

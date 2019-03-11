@@ -31,7 +31,8 @@
         ],
         "name": "Ops.Array.ArrayInterpolate"
     },
-    "summary": "interpolate between two arrays (lerp)",
+    "summary": "interpolate between two arrays (lerp) - linear interpolation",
+    "updated": 1535449479302,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "09296117-7312-4f80-982b-7b4a81d22cf8",
@@ -39,9 +40,33 @@
     "docs": {
         "ports": [
             {
+                "name": "Exe",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Array 1",
+                "text": "Array 1 in"
+            },
+            {
+                "name": "Array 2",
+                "text": "array 2 in"
+            },
+            {
                 "name": "perc",
-                "text": "progress value 0-1"
+                "text": "Interpolation value between both arrays. Range `0-1`"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Result",
+                "text": "The interpolated array out"
             }
         ]
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

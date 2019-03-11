@@ -28,6 +28,27 @@
     },
     "summary": "stores values in an array / fifo array buffer",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "exec",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Value",
+                "text": "The value to write into the new indexes of the array"
+            },
+            {
+                "name": "Max Length",
+                "text": "The maximum length of the array"
+            },
+            {
+                "name": "Result",
+                "text": "The fifo array out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

@@ -25,6 +25,22 @@
     "summary": "get a string from an array at [index]",
     "youtubeid": "",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "array",
+                "text": "The string array in"
+            },
+            {
+                "name": "index",
+                "text": "The index to look up. Starts at 0"
+            },
+            {
+                "name": "result",
+                "text": "The returned string based upon index lookup"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

@@ -33,7 +33,7 @@
         "ports": [
             {
                 "name": "exe",
-                "text": "Start the iteration"
+                "text": "Trigger the op"
             },
             {
                 "name": "array",
@@ -45,7 +45,7 @@
             },
             {
                 "name": "index",
-                "text": "Index of the array (0-array.length)"
+                "text": "Index of the array `0 to array.length`"
             },
             {
                 "name": "value",
@@ -56,5 +56,10 @@
     "authorName": "pandur",
     "id": "ec280011-1190-4333-9a68-adb4904fca1a",
     "created": 1540826805478,
-    "youtubeid": "63UbYklOZ3c"
+    "youtubeid": "63UbYklOZ3c",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Trigger.Repeat"
+    ]
 }

@@ -39,6 +39,40 @@
     "created": 1505232018932,
     "summary": "visualize an array of coordinates as points",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Array",
+                "text": "xyz array in"
+            },
+            {
+                "name": "Num Points",
+                "text": "Define how many points are rendered. Overrides the xyz array in."
+            },
+            {
+                "name": "Scramble Texcoords",
+                "text": "Scramble xyz array and color lookup when connected to pointMaterial op with a texture"
+            },
+            {
+                "name": "Seed",
+                "text": "Random seed for Scramble Texcoords"
+            },
+            {
+                "name": "Geometry",
+                "text": "Outputs geometry object"
+            }
+        ]
+    },
+    "youtubeid": "tFM2Ixf-ixs",
+    "issues": "",
+    "collections": [
+        "pointArrays"
+    ],
+    "relatedops": [
+        "Ops.Gl.Shader.PointMaterial",
+        "Ops.Gl.Geometry.GeometryPoints"
+    ]
 }

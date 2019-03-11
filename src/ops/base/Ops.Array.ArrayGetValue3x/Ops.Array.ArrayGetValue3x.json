@@ -30,9 +30,37 @@
         ],
         "name": "Ops.Array.ArrayGetValue3x"
     },
-    "summary": "get 3 values from an array",
+    "summary": "get 3 values XYZ from an array",
     "updated": 1542698783543,
     "authorName": "pandur",
     "id": "56882cc4-c40d-4dc0-bf7c-db1b5a7acad0",
-    "created": 1542698784091
+    "created": 1542698784091,
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array to get the values from"
+            },
+            {
+                "name": "Index",
+                "text": "The index to look up"
+            },
+            {
+                "name": "X",
+                "text": "The X component from the index look up"
+            },
+            {
+                "name": "Y",
+                "text": "The Y component from the index look up"
+            },
+            {
+                "name": "Z",
+                "text": "The Z component from the index look up"
+            }
+        ]
+    }
 }

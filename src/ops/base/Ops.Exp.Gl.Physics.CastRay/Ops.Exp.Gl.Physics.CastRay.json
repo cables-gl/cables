@@ -58,22 +58,18 @@
             },
             {
                 "type": "0",
-                "name": "Hit Normal X",
+                "name": "aabb x2",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Hit Normal Y",
+                "name": "aabb y2",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Hit Normal Z",
+                "name": "aabb z2",
                 "subType": "number"
-            },
-            {
-                "type": "2",
-                "name": "Result"
             }
         ],
         "name": "Ops.Exp.Gl.Physics.CastRay"

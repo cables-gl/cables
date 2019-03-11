@@ -61,6 +61,59 @@
     },
     "summary": "switch between multiple arrays",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Index",
+                "text": "The array to send to array out "
+            },
+            {
+                "name": "Array 0",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 1",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 2",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 3",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 4",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 5",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 6",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 7",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 8",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 9",
+                "text": "Array in"
+            },
+            {
+                "name": "Result",
+                "text": "The selected array out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

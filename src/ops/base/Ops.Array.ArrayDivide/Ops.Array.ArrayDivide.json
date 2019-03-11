@@ -1,7 +1,20 @@
 {
     "summary": " Divides all values in an array by one number",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "The array to divide"
+            },
+            {
+                "name": "Value",
+                "text": "The number that all array values are divided by "
+            },
+            {
+                "name": "Array Out",
+                "text": "Divided array out"
+            }
+        ]
     },
     "updated": 1540902073880,
     "authorName": "andro",
@@ -26,5 +39,11 @@
             }
         ],
         "name": "Ops.Array.ArrayDivide"
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.ArrayMath"
+    ]
 }
