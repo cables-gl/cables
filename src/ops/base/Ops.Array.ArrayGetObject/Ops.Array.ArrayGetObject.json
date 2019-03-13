@@ -29,7 +29,19 @@
             {
                 "name": "array",
                 "text": "must contain only objects"
+            },
+            {
+                "name": "index",
+                "text": "The index of the array containing the object"
+            },
+            {
+                "name": "value",
+                "text": "The object out from the index"
             }
         ]
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

@@ -8,23 +8,28 @@
             },
             {
                 "type": "0",
-                "name": "Use Mouse Coordinates"
+                "name": "Use Mouse Coordinates",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "enabled"
+                "name": "enabled",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "cursor"
+                "name": "cursor",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -34,7 +39,8 @@
             },
             {
                 "type": "0",
-                "name": "Something Picked"
+                "name": "Something Picked",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -43,7 +49,6 @@
         ],
         "name": "Ops.Gl.Shader.Picker"
     },
-    "updated": 1539598216105,
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "09122fbf-3b6b-4a05-ac76-fca031b505b9",

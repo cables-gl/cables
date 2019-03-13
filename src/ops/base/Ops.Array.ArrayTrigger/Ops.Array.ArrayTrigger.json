@@ -24,6 +24,23 @@
     },
     "summary": "Trigger an array",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Exec",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Result",
+                "text": "Array output when op is triggered."
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

@@ -9,6 +9,8 @@ const ele=document.createElement("div");
 const elePlay=document.createElement("div");
 const canvas = op.patch.cgl.canvas.parentElement;
 
+op.toWorkPortsNeedToBeLinked(inExec);
+
 ele.style.width="100px";
 ele.style.height="100px";
 ele.style.left="50%";

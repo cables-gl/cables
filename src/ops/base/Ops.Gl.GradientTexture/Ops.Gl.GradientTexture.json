@@ -33,8 +33,33 @@
         ],
         "name": "Ops.Gl.GradientTexture"
     },
-    "summary": "texture containing a color gradient",
+    "summary": "texture containing a colour gradient that can be altered with an editor",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Gradient",
+                "text": "Click this to open the editor for the gradient. See docs for a more in depth explanation."
+            },
+            {
+                "name": "Smoothstep",
+                "text": "Enable smoothstep on changes in gradients."
+            },
+            {
+                "name": "Size",
+                "text": "The resolution of the gradient in pixels. 256 is a good default value"
+            },
+            {
+                "name": "Direction",
+                "text": "`X or Y` render the texture horizontally or vertically"
+            },
+            {
+                "name": "Texture",
+                "text": "The texture out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

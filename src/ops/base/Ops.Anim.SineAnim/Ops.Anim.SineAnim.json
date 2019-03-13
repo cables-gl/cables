@@ -1,5 +1,5 @@
 {
-    "summary": "animation in form of sine curve (sinus)",
+    "summary": "animation in the form of a sine curve (sinus)",
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "736d3d0e-c920-449e-ade0-f5ca6018fb5c",
@@ -58,5 +58,9 @@
                 "text": "A value cycling between `-Amplitude` and `Amplitude`"
             }
         ]
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

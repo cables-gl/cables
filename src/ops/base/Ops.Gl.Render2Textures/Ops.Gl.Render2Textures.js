@@ -18,6 +18,8 @@ const fpTexture=op.inValueBool("HDR");
 const depth=op.inValueBool("Depth",true);
 const clear=op.inValueBool("Clear",true);
 
+op.requirements=[CABLES.Requirements.WEBGL2];
+
 
 const cgl=op.patch.cgl;
 
@@ -64,11 +66,11 @@ function doRender()
     if(!fb || reInitFb)
     {
         if(fb) fb.delete();
-        if(cgl.glVersion>=2) 
+        if(cgl.glVersion>=2)
         {
             var ms=true;
             var msSamples=4;
-            
+
             if(msaa.get()=="none")
             {
                 msSamples=0;
@@ -77,7 +79,7 @@ function doRender()
             if(msaa.get()=="2x")msSamples=2;
             if(msaa.get()=="4x")msSamples=4;
             if(msaa.get()=="8x")msSamples=8;
-            
+
             fb=new CGL.Framebuffer2(cgl,8,8,
             {
                 numRenderBuffers:4,

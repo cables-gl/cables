@@ -23,8 +23,25 @@
         ],
         "name": "Ops.Array.Array3xSplineLength"
     },
-    "summary": "sum of distances between points/items in an array3x",
+    "summary": "Returns a number with the total distance between the points/items in an array3x",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Array3x",
+                "text": "The array in that is analysed for it's length"
+            },
+            {
+                "name": "Calculate",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Length",
+                "text": "Total length of the spline points from the array returned as a single number"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

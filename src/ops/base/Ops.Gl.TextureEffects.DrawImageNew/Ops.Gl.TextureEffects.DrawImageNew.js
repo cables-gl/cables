@@ -217,7 +217,7 @@ function doRender()
         // else
 
         uniTexAspect.setValue( 1/(tex.height/tex.width*imgTex.width/imgTex.height));
-        console.log(uniTexAspect.getValue());
+        // console.log(uniTexAspect.getValue());
         // uniTexAspect.setValue( (tex.height/tex.width*imgTex.height/imgTex.width));
 
 

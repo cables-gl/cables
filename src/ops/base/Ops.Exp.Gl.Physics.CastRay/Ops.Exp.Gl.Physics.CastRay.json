@@ -1,0 +1,92 @@
+{
+    "id": "88fc51f5-1550-4f00-abd3-6cae8f6f5a57",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1549947595927
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1549947598925,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "0",
+                "name": "Screen X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Screen Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Screen Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Has Hit",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Hit X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Hit Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Hit Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb x2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb y2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb z2",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Exp.Gl.Physics.CastRay"
+    }
+}
