@@ -73,7 +73,6 @@ CABLES.Patch = function(cfg) {
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
-    if (cfg && cfg.variables) this._variables = cfg.variables;
     
     this._variableListeners = [];
     this.vars = {};
@@ -849,6 +848,16 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             this.ops[i].init = null;
         }
     }
+
+    if (this.config.variables)
+    {
+        for(var varName in this.config.variables)
+        {
+            this.setVarValue(varName,this.config.variables[varName]);
+            // this._variables = cfg.variables;
+        }
+    }
+
 
 
     setTimeout(function(){ this.loading.finished(loadingId); }.bind(this),100);
