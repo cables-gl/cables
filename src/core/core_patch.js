@@ -72,7 +72,7 @@ CABLES.Patch = function(cfg) {
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
-    this._variables = {};
+    this._variables = cfg.variables||{};
     this._variableListeners = [];
     this.vars = {};
     if (cfg && cfg.vars) this.vars = cfg.vars;
