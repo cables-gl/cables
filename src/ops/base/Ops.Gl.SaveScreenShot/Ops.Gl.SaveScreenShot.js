@@ -21,7 +21,7 @@ exe.onTriggered=function()
     if(!useSize.get())
     {
         op.patch.pause();
-        op.patch.cgl.setSize(2048,2048);
+        op.patch.cgl.setSize(width.get(),height.get());
         op.patch.renderOneFrame();
     }
 

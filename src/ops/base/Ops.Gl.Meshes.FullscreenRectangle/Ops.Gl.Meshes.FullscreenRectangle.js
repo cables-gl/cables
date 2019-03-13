@@ -40,13 +40,14 @@ inTexture.onChange=function()
 op.preRender=function()
 {
     if(shader)shader.bind();
+    // rebuild();
     if(mesh)mesh.render(shader);
     doRender();
 };
 
 function doRender()
 {
-    if( cgl.getViewPort()[2]!=w || cgl.getViewPort()[3]!=h ) rebuild();
+    if( cgl.getViewPort()[2]!=w || cgl.getViewPort()[3]!=h ||!mesh ) rebuild();
 
     cgl.pushPMatrix();
     mat4.identity(cgl.pMatrix);
@@ -95,8 +96,10 @@ function doRender()
 
 function rebuild()
 {
-    const currentViewPort=cgl.getViewPort();
-    if(currentViewPort[2]==w && currentViewPort[3]==h)return;
+        const currentViewPort=cgl.getViewPort();
+    console.log(currentViewPort);
+
+    if(currentViewPort[2]==w && currentViewPort[3]==h && mesh)return;
 
     var xx=0,xy=0;
 

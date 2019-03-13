@@ -62,10 +62,10 @@ function startWebcam()
     navigator.getUserMedia(constraints,
         function(stream)
         {
-            // videoElement.autoplay=true;
+            tex.videoElement=videoElement;
             // videoElement.src = window.URL.createObjectURL(stream);
             videoElement.srcObject = stream;
-            tex.videoElement=stream;
+            //tex.videoElement=stream;
             videoElement.onloadedmetadata = function(e)
             {
                 available.set(true);
