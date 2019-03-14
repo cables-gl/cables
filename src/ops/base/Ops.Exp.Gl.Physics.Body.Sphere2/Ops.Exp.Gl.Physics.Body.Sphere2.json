@@ -1,8 +1,14 @@
 {
-    "author": "58dabd06a0d7ec8d1a982e66",
+    "id": "a7fb726f-8d21-4e5d-92ca-f53087be5d42",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1552587436112
+        }
+    ],
     "authorName": "pandur",
-    "id": "70e756bf-4e2c-4478-8c38-9a7b68b616d6",
-    "created": 1509660444804,
+    "created": 1552587453715,
     "layout": {
         "portsIn": [
             {
@@ -23,21 +29,6 @@
                 "type": "0",
                 "name": "Render",
                 "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Pos X",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Pos Y",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Pos Z",
-                "subType": "number"
             },
             {
                 "type": "1",
@@ -79,13 +70,6 @@
                 "name": "Collision"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.Body.Sphere"
-    },
-    "libs": [
-        "cannon.js"
-    ],
-    "summary": "physical body in form of a sphere",
-    "docs": {
-        "ports": []
+        "name": "Ops.Exp.Gl.Physics.Body.Sphere2"
     }
 }

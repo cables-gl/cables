@@ -1,5 +1,4 @@
 {
-    "updated": 1533563629260,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ff0bdad4-12ae-4444-b273-edfeab443a62",
@@ -18,11 +17,18 @@
             },
             {
                 "type": "0",
-                "name": "Supported"
+                "name": "Supported",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "VR Display"
+                "name": "VR Display",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "FPS",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Vr.WebVr"
