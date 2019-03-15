@@ -1,6 +1,34 @@
 {
     "id": "f45945ab-88c7-458d-ab2a-38b39050a984",
-    "updated": 1543053942488,
     "authorName": "pandur",
-    "created": 1543053907746
+    "created": 1543053907746,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Max Line Chars",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.String.StringBreak2"
+    },
+    "summary": "breaks into a string after [num] chars",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

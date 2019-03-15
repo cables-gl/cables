@@ -11,47 +11,58 @@
             },
             {
                 "type": "0",
-                "name": "Size Area X"
+                "name": "Size Area X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size Area Y"
+                "name": "Size Area Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size Area Z"
+                "name": "Size Area Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Particles"
+                "name": "Particles",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Speed"
+                "name": "Speed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Lifetime"
+                "name": "Lifetime",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fade Birth Death"
+                "name": "Fade Birth Death",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Show"
+                "name": "Show",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Z"
+                "name": "Pos Z",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -60,7 +71,6 @@
         ],
         "name": "Ops.Gl2.ForceField.ForceFieldSimulationParticles"
     },
-    "updated": 1506757413252,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "2a9f663d-c31f-4a45-bf9b-ddb925ff6384",

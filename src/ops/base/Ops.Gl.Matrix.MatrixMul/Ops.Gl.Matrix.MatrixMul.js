@@ -1,6 +1,6 @@
 const render=op.inTrigger("render");
-const trigger=op.outTrigger("trigger")
-const matrix=op.addInPort(new CABLES.Port(op,"matrix"),CABLES.OP_PORT_TYPE_ARRAY);
+const trigger=op.outTrigger("trigger");
+const matrix=op.inArray("matrix");
 
 const cgl=op.patch.cgl;
 var m=mat4.create();

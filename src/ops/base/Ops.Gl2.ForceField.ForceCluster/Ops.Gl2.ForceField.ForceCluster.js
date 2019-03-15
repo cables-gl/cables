@@ -62,7 +62,7 @@ function reset()
 
         // forces[i].pos=[0,0,0,0];
         forces[i].pos=[x,y,z];
-            
+
         forces[i].range=range.get()*Math.seededRandom()-range.get()/2;
         forces[i].attraction=attraction.get()*Math.seededRandom()-attraction.get()/2;
         forces[i].angle=angle.get()*Math.seededRandom()-angle.get()/2;
@@ -84,22 +84,22 @@ exec.onTriggered=function()
     //     cgl.pushModelMatrix();
 
     //     if(!mesh)mesh=new CGL.WirePoint(cgl);
-    //     mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[posX.get(),posY.get(),posZ.get()]);
+    //     mat4.translate(cgl.mMatrix,cgl.mMatrix,[posX.get(),posY.get(),posZ.get()]);
     //     mesh.render(cgl,range.get()*2);
     //     cgl.popModelMatrix();
     // }
     if(show.get())
     {
-        
+
         for(var i=0;i<num.get();i++)
         {
-            // vec3.transformMat4(forces[i].pos, forces[i].posOrig, cgl.mvMatrix);
+            // vec3.transformMat4(forces[i].pos, forces[i].posOrig, cgl.mMatrix);
             // CABLES.forceFieldForces.push( forces[i] );
 
             cgl.pushModelMatrix();
-    
+
             // if(!mesh)mesh=new CGL.WirePoint(cgl);
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix,forces[i].pos);
+            mat4.translate(cgl.mMatrix,cgl.mMatrix,forces[i].pos);
             // mesh.render(cgl,range.get()*2);
             mark.draw(cgl);
             cgl.popModelMatrix();
@@ -114,7 +114,7 @@ exec.onTriggered=function()
 
     for(var i=0;i<num.get();i++)
     {
-        // vec3.transformMat4(forces[i].pos, forces[i].posOrig, cgl.mvMatrix);
+        // vec3.transformMat4(forces[i].pos, forces[i].posOrig, cgl.mMatrix);
         CABLES.forceFieldForces.push( forces[i] );
     }
     // console.log(forces[0].pos);
@@ -122,7 +122,7 @@ exec.onTriggered=function()
 
     next.trigger();
 
-    for(var i=0;i<num.get();i++) 
+    for(var i=0;i<num.get();i++)
         CABLES.forceFieldForces.pop();
 
 

@@ -73,7 +73,7 @@ function updateAxis()
     if(doX.get()) shader.define(moduleVert.prefix+"DO_X");
     if(doY.get()) shader.define(moduleVert.prefix+"DO_Y");
     if(doZ.get()) shader.define(moduleVert.prefix+"DO_Z");
-        
+
 }
 
 
@@ -84,17 +84,17 @@ op.render.onTriggered=function()
          op.trigger.trigger();
          return;
     }
-    
+
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[x.get(),y.get(),z.get()]);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
         CABLES.GL_MARKER.drawSphere(op,inSize.get());
         cgl.popModelMatrix();
     }
 
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:x,
@@ -127,12 +127,12 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
-        
+
         updateWorldspace();
         updateAxis();
     }
-    
-    
+
+
     if(!shader)return;
 
     op.trigger.trigger();

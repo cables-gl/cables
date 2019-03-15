@@ -8,10 +8,10 @@ var height=op.inValue("height",1);
 var inId=op.inValueString("id");
 var classPort = op.inValueString("Class");
 
-var pivotX=op.addInPort(new CABLES.Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new CABLES.Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+var pivotX=op.inValueSelect("pivot x",["center","left","right"]);
+var pivotY=op.inValueSelect("pivot y",["center","top","bottom"]);
 
-var axis=op.addInPort(new CABLES.Port(op,"axis",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["xy","xz"]} ));
+var axis=op.inValueSelect("axis",["xy","xz"]);
 
 var isInteractive=op.inValueBool('Is Interactive',true);
 var active=op.inValueBool('Render',true);
@@ -19,7 +19,7 @@ var divVisible=op.inValueBool('Show Boundings',true);
 
 var cursorPort=op.inValueSelect("Cursor",["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help", "none"],"pointer");
 
-var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.outObject("geometry");
 geomOut.ignoreValueSerialize=true;
 
 var mouseOver=op.outValue("Pointer Hover",false);
@@ -191,7 +191,7 @@ var divY=0;
 var divWidth=0;
 var divHeight=0;
 
-var mvMatrix=mat4.create();
+var mMatrix=mat4.create();
 divVisible.onChange=updateDivVisibility;
 inId.onChange=updateId;
 classPort.onChange = updateClassNames;
@@ -227,8 +227,8 @@ function updateDivSize()
     var vp=cgl.getViewPort();
 
 
-    mat4.multiply(mvMatrix,cgl.vMatrix,cgl.mvMatrix);
-    vec3.transformMat4(pos, divAlign, mvMatrix);
+    mat4.multiply(mMatrix,cgl.vMatrix,cgl.mMatrix);
+    vec3.transformMat4(pos, divAlign, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
 
@@ -240,7 +240,7 @@ function updateDivSize()
     divAlignSize[0] = divAlign[0] + width.get();
     divAlignSize[1] = divAlign[1];
 
-    vec3.transformMat4(pos, divAlignSize, mvMatrix);
+    vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
     var x2 = ((trans[0] * vp[2]/2) + vp[2]/2);
@@ -252,7 +252,7 @@ function updateDivSize()
     divAlignSize[0] = divAlign[0];
     divAlignSize[1] = divAlign[1] + height.get();
 
-    vec3.transformMat4(pos, divAlignSize, mvMatrix);
+    vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
     var x3 = ((trans[0] * vp[2]/2) + vp[2]/2);
@@ -264,7 +264,7 @@ function updateDivSize()
     divAlignSize[0] = divAlign[0] + width.get();
     divAlignSize[1] = divAlign[1] + height.get();
 
-    vec3.transformMat4(pos, divAlignSize, mvMatrix);
+    vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
     var x4 = ((trans[0] * vp[2]/2) + vp[2]/2);
