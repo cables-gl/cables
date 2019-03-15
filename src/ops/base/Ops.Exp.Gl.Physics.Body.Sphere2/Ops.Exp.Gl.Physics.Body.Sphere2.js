@@ -4,9 +4,9 @@ var inRadius=op.inValue("Radius",1);
 
 var doRender=op.inValueBool("Render",true);
 
-var posX=op.inValue("Pos X");
-var posY=op.inValue("Pos Y");
-var posZ=op.inValue("Pos Z");
+// var posX=op.inValue("Pos X");
+// var posY=op.inValue("Pos Y");
+// var posZ=op.inValue("Pos Z");
 
 var inReset=op.inTriggerButton("Reset");
 
@@ -32,9 +32,6 @@ var body=null;
 
 inMass.onChange=setup;
 inRadius.onChange=setup;
-// posX.onChange=setup;
-// posY.onChange=setup;
-// posZ.onChange=setup;
 
 var lastWorld=null;
 
@@ -45,30 +42,6 @@ inReset.onTriggered=function()
     needSetup=true;
 };
 
-// function createTetra()
-// {
-//     var verts = [new CANNON.Vec3(0,0,0),
-//         new CANNON.Vec3(2,0,0),
-//         new CANNON.Vec3(0,2,0),
-//         new CANNON.Vec3(0,0,2)];
-//     var offset = -0.35;
-//     for(var i=0; i<verts.length; i++){
-//         var v = verts[i];
-//         v.x += offset;
-//         v.y += offset;
-//         v.z += offset;
-//     }
-
-//     return new CANNON.ConvexPolyhedron(verts,
-//         [
-//             [0,3,2], // -x
-//             [0,1,3], // -y
-//             [0,2,1], // -z
-//             [1,2,3], // +xyz
-//         ]);
-// }
-
-
 function setup()
 {
     var world=cgl.frameStore.world;
@@ -78,7 +51,7 @@ function setup()
 
     body = new CANNON.Body({
       mass: inMass.get(), // kg
-      position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
+    //   position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
       shape: new CANNON.Sphere(Math.max(0,inRadius.get()))
     });
 
@@ -87,20 +60,7 @@ function setup()
 
     body.addEventListener("collide",function(e){
         collided=true;
-        // collision.trigger();
-        // console.log("The sphere just collided with the ground!");
-        // console.log("Collided with body:",e.body);
-        // console.log("Contact between bodies:",e.contact);
     });
-
-    body.addEventListener("raycasthit",function(e){
-        console.log("rauyca!!");
-        // collision.trigger();
-        // console.log("The sphere just collided with the ground!");
-        // console.log("Collided with body:",e.body);
-        // console.log("Contact between bodies:",e.contact);
-    });
-
 
     lastWorld=world;
     needSetup=false;
@@ -109,6 +69,7 @@ function setup()
 
 var vec=vec3.create();
 var q=quat.create();
+const empty=vec3.create();
 
 var trMat=mat4.create();
 function render()
@@ -120,11 +81,26 @@ function render()
 
     outHit.set(body.raycastHit);
 
-    vec3.set(vec,
-        body.position.x,
-        body.position.y,
-        body.position.z
-        );
+    var staticPos=inMass.get()==0;
+
+
+    if(staticPos)
+    {
+        // static position
+        vec3.transformMat4(vec, empty, cgl.mMatrix);
+        body.position.x=vec[0];
+        body.position.y=vec[1];
+        body.position.z=vec[2];
+
+    }
+    else
+    {
+        vec3.set(vec,
+            body.position.x,
+            body.position.y,
+            body.position.z
+            );
+    }
 
     quat.set(q,
         body.quaternion.x,
@@ -135,8 +111,12 @@ function render()
 
     cgl.pushModelMatrix();
 
-    mat4.fromRotationTranslation(trMat,q,vec);
-    mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
+    if(!staticPos)
+    {
+        mat4.fromRotationTranslation(trMat,q,vec);
+        mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
+    }
+
 
     if(doRender.get())m.render(cgl,inRadius.get()*2);
 

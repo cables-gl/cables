@@ -72,13 +72,16 @@ function render()
     var world=cgl.frameStore.world;
     if(!world)return;
 
+    var hitBody=null;
+
+
     setRay();
 
     var r=ray.intersectWorld(world,{});
 
     if(r && ray.result)
     {
-        console.log(ray.result);
+        // console.log(ray.result);
         hasHit.set(ray.result.hasHit);
 
         if(ray.result.body)
@@ -90,6 +93,11 @@ function render()
             aabbX2.set(ray.result.body.aabb.upperBound.x);
             aabbX2.set(ray.result.body.aabb.upperBound.y);
             aabbX2.set(ray.result.body.aabb.upperBound.z);
+
+            // ray.result.body.dispatchEvent({type:"raycasthit"});
+            hitBody=ray.result.body;
+            hitBody.raycastHit=true;
+
         }
 
         // console.log(ray.result);
@@ -105,6 +113,13 @@ function render()
     }
     else hasHit.set(false);
     hitResult.set(ray.result);
+
+
+    for(var i=0;i<world.bodies.length;i++)
+        if(world.bodies[i]!=hitBody)world.bodies[i].raycastHit=false;
+
+
+
 
 
 }
