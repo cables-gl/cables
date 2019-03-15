@@ -39,7 +39,7 @@ function readAnim()
             animY.setValue( an.scalingkeys[k][0],an.scalingkeys[k][1][1] );
             animZ.setValue( an.scalingkeys[k][0],an.scalingkeys[k][1][2] );
         }
-        
+
     }
 }
 
@@ -60,7 +60,7 @@ render.onTriggered=function()
         vec[1]=animY.getValue(time);
         vec[2]=animZ.getValue(time);
 
-        mat4.scale(cgl.mvMatrix,cgl.mvMatrix,vec);
+        mat4.scale(cgl.mMatrix,cgl.mMatrix,vec);
     }
     else readAnim();
 

@@ -1,5 +1,3 @@
-op.name='MidiSendBool';
-
 var eventIn=op.addInPort(new CABLES.Port(this,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
 var value=op.addInPort(new CABLES.Port(this,"Value",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
 var velocity=op.addInPort(new CABLES.Port(this,"Velocity",CABLES.OP_PORT_TYPE_VALUE));

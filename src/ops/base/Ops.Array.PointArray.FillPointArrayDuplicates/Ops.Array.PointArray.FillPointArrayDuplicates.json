@@ -8,5 +8,29 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1548778392795
+    "created": 1548778392795,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Num Elements",
+                "subType": "integer"
+            },
+            {
+                "type": "1",
+                "name": "Calculate"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.PointArray.FillPointArrayDuplicates"
+    }
 }

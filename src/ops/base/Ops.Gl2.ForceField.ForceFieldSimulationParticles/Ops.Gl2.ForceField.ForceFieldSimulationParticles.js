@@ -54,7 +54,7 @@ function doReset()
     var sizeX=inSizeX.get();
     var sizeY=inSizeY.get();
     var sizeZ=inSizeZ.get();
-    
+
     var pX=posX.get();
     var pY=posY.get();
     var pZ=posZ.get();
@@ -71,12 +71,12 @@ function doReset()
         bufferB[i+2]=(Math.random()-0.5)*sizeZ+pZ;
         // bufferB[i+2]=0.0;
     }
-    
+
     // stopwatch.stop('randoms');
 
     if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
-    
+
     // stopwatch.stop('geom');
 
     vl=(verts.length/3)*2;
@@ -85,7 +85,7 @@ function doReset()
         geom.texCoords[i]=Math.random();
         geom.texCoords[i+1]=Math.random();
     }
-    
+
     // stopwatch.stop('tc');
 
     if(!mesh)
@@ -93,7 +93,7 @@ function doReset()
         mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
         mesh.addVertexNumbers=true;
-        
+
 
 
         op.log("NEW MESH");
@@ -105,7 +105,7 @@ function doReset()
     mesh.addVertexNumbers=true;
     mesh._verticesNumbers=null;
     mesh.setGeom(geom);
-    
+
     // stopwatch.stop('mesh');
 
     // mesh.updateVertices(geom);
@@ -139,7 +139,7 @@ function doReset()
         life[i+1]=time;
         life[i+2]=time;
     }
-    
+
     // stopwatch.stop('life');
 
     // console.log(op.patch.freeTimer.get(),life[0],bufferB[0]);
@@ -235,7 +235,7 @@ render.onTriggered=function()
         uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
         uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
         uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
-        
+
         uniSpawnPositions=new CGL.Uniform(shader,'3f[]',shaderModule.prefix+'spawnPositions',[]);
         uniNumSpawns=new CGL.Uniform(shader,'f',shaderModule.prefix+'numSpawns',0);
 
@@ -292,16 +292,16 @@ render.onTriggered=function()
     if(show.get())
     {
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[posX.get(),posY.get(),posZ.get()]);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix,[posX.get(),posY.get(),posZ.get()]);
         mark.draw(cgl);
         cgl.popModelMatrix();
     }
-    
+
     uniSpawnPositions.set(spawns.get() || []);
     var numSpawnPos=( (spawns.get()||[]).length)/3;
     // op.log('numSpawnPos',numSpawnPos);
     uniNumSpawns.set( numSpawnPos );
-    
+
 
     if(particleSpawnStart>numPoints.get())particleSpawnStart=0;
 

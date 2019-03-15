@@ -53,5 +53,9 @@
     },
     "authorName": "pandur",
     "id": "6a62d24e-d0a6-4110-a042-15e3cda59db4",
-    "created": 1540920488363
+    "created": 1540920488363,
+    "youtubeid": "",
+    "issues": "will be deprecated - use Ops.Gl.AspectRatio\n",
+    "collections": null,
+    "relatedops": null
 }

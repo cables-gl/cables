@@ -61,7 +61,7 @@ render.onTriggered=function()
 
     cgl.pushModelMatrix();
 
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix, qMat);
+    mat4.multiply(cgl.mMatrix,cgl.mMatrix, qMat);
 
     trigger.trigger();
     cgl.popModelMatrix();

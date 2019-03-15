@@ -1,5 +1,4 @@
 {
-    "updated": 1539272590131,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "49f66ac2-9d65-4fc6-9b2f-bb1476073587",
@@ -11,9 +10,8 @@
                 "name": "render"
             },
             {
-                "type": "0",
-                "name": "matrix",
-                "subType": "number"
+                "type": "3",
+                "name": "matrix"
             }
         ],
         "portsOut": [

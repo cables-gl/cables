@@ -1,6 +1,6 @@
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var inSize=op.inValue("Size",1);
 var inStrength=op.inValue("Strength",1);
@@ -23,7 +23,7 @@ var srcHeadVert=attachments.areascale_vert;
 var srcBodyVert=''
     .endl()+'pos=MOD_scaler(pos,mMatrix*pos,attrVertNormal);' //modelMatrix*
     .endl();
-    
+
 var moduleVert=null;
 
 function removeModule()
@@ -43,7 +43,7 @@ function updateToZero()
     }
     if(inToZero.get()) shader.removeDefine(moduleVert.prefix+"TO_ZERO");
         else shader.define(moduleVert.prefix+"TO_ZERO");
-        
+
     needsUpdateToZero=false;
 
 }
@@ -60,8 +60,8 @@ op.render.onTriggered=function()
          op.trigger.trigger();
          return;
     }
-    
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:x,
@@ -100,7 +100,7 @@ op.render.onTriggered=function()
         y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
     }
-    
+
 
     if(needsUpdateToZero)updateToZero();
 

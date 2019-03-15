@@ -1,5 +1,4 @@
 {
-    "updated": 1537353517546,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "b7482d75-913d-4564-92ae-81f8dbead3ce",
@@ -12,11 +11,13 @@
             },
             {
                 "type": "0",
-                "name": "Axis"
+                "name": "Axis",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "treshhold"
+                "name": "treshhold",
+                "subType": "number"
             }
         ],
         "portsOut": [

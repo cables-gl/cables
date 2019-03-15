@@ -1,9 +1,10 @@
 
 const
-    inval=op.inValueFloat("Value",-1),
+    inval=op.inValueFloat("Value",1),
     result=op.outValue("Result");
 
 inval.onChange=update;
+update();
 
 function update()
 {

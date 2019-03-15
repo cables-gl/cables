@@ -1,5 +1,4 @@
 
-op.name='MidiButtonArray';
 var eventIn=op.addInPort(new CABLES.Port(op,"Event Input",CABLES.OP_PORT_TYPE_OBJECT));
 
 var note=op.addInPort(new CABLES.Port(op,"Note Start"));
