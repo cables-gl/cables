@@ -293,7 +293,7 @@ CGL.Context = function(_patch) {
     this.renderStart = function(cgl, identTranslate, identTranslateView) {
         if (!identTranslate) identTranslate = ident;
         if (!identTranslateView) identTranslateView = identView;
-        // cgl.gl.enable(cgl.gl.DEPTH_TEST);
+
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc(cgl.gl.LEQUAL);
@@ -301,7 +301,6 @@ CGL.Context = function(_patch) {
         cgl.gl.clearColor(0, 0, 0, 0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
-        // cgl.setViewPort(0, 0, cgl.canvas.clientWidth*this.pixelDensity, cgl.canvas.clientHeight*this.pixelDensity);
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
@@ -309,24 +308,16 @@ CGL.Context = function(_patch) {
         mat4.identity(cgl.mMatrix);
         mat4.identity(cgl.vMatrix);
         mat4.translate(cgl.mMatrix, cgl.mMatrix, identTranslate);
-        // mat4.translate(cgl.mMatrix,cgl.mMatrix, identTranslate);
         mat4.translate(cgl.vMatrix, cgl.vMatrix, identTranslateView);
 
         cgl.pushPMatrix();
         cgl.pushModelMatrix();
         cgl.pushViewMatrix();
 
-        // cgl.pushBlend(true);
         cgl.pushBlendMode(CGL.BLEND_NORMAL,false);
 
-        // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
-        // cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
-        // cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
-
         for(var i=0;i<this._textureslots.length;i++)
-        {
             this._textureslots[i]=null;
-        }
 
         cgl.beginFrame();
     };

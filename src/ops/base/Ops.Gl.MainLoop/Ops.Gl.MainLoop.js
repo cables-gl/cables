@@ -17,7 +17,6 @@ hdpi.onChange=function()
     if(CABLES.UI) gui.setLayout();
 };
 
-
 var cgl=op.patch.cgl;
 var rframes=0;
 var rframeStart=0;

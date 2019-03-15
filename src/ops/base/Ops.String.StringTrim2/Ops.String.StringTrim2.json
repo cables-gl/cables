@@ -11,9 +11,8 @@
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Result",
-                "subType": "number"
+                "type": "5",
+                "name": "Result"
             }
         ],
         "name": "Ops.String.StringTrim2"

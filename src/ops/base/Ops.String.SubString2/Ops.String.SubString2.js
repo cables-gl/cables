@@ -16,4 +16,4 @@ function update()
     var end=inEnd.get();
     var str=inStr.get()+'';
     result.set( str.substring(start,end) );
-};
+}

@@ -6,7 +6,7 @@ const
     closed=op.inValueBool("Last == First"),
     values=op.outArray("values");
 
-op.setPortGroup("Value Range",[min,max])
+op.setPortGroup("Value Range",[min,max]);
 
 values.ignoreValueSerialize=true;
 
@@ -23,7 +23,7 @@ function init()
 {
     Math.randomSeed=seed.get();
 
-    arr.length=Math.floor(Math.abs(numValues.get()*3)) || 300;
+    arr.length=Math.floor(Math.abs(numValues.get()*3));
     for(var i=0;i<arr.length;i+=3)
     {
         arr[i+0]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
@@ -31,7 +31,7 @@ function init()
         arr[i+2]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
     }
 
-    if(closed.get())
+    if(closed.get() && arr.length>3)
     {
         arr[arr.length-3+0]=arr[0];
         arr[arr.length-3+1]=arr[1];
