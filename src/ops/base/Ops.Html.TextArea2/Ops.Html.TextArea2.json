@@ -1,0 +1,54 @@
+{
+    "id": "5a9075e6-0550-46df-99b9-7402b2fbd953",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1552645460286
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1552645469947,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "visible",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "focus"
+            },
+            {
+                "type": "1",
+                "name": "blur"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "text"
+            },
+            {
+                "type": "0",
+                "name": "cursorPos",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "focussed",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "escape pressed"
+            },
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "name": "Ops.Html.TextArea2"
+    }
+}

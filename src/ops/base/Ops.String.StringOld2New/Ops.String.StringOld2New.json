@@ -1,0 +1,28 @@
+{
+    "id": "77193bdc-9769-41da-95e1-51afcaad0274",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550741037882
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550741044364,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringOld2New"
+    }
+}
