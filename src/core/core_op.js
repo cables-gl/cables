@@ -1029,6 +1029,7 @@ CABLES.Op = function()
     {
         if (!CABLES.UI) return;
         this._needsParentOp=parentOpName;
+
     }
 
     CABLES.Op.prototype.toWorkPortsNeedToBeLinked = function ()
@@ -1042,6 +1043,7 @@ CABLES.Op = function()
     {
         if (!CABLES.UI) return;
         this._needsLinkedToWork.length=0;
+        this.checkLinkTimeWarnings();
     }
 
 
