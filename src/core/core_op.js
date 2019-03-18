@@ -1030,12 +1030,18 @@ CABLES.Op = function()
         if (!CABLES.UI) return;
         this._needsParentOp=parentOpName;
     }
+
     CABLES.Op.prototype.toWorkPortsNeedToBeLinked = function ()
     {
         if (!CABLES.UI) return;
         for (var i = 0; i < arguments.length; i++)
             if(this._needsLinkedToWork.indexOf(arguments[i])==-1)
                 this._needsLinkedToWork.push(arguments[i]);
+    }
+    CABLES.Op.prototype.toWorkPortsNeedToBeLinkedReset = function ()
+    {
+        if (!CABLES.UI) return;
+        this._needsLinkedToWork.length=0;
     }
 
 
