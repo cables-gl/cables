@@ -1034,8 +1034,10 @@ CABLES.Op = function()
     {
         if (!CABLES.UI) return;
         for (var i = 0; i < arguments.length; i++)
-            this._needsLinkedToWork.push(arguments[i]);
+            if(this._needsLinkedToWork.indexOf(arguments[i])==-1)
+                this._needsLinkedToWork.push(arguments[i]);
     }
+
 
 }
 
