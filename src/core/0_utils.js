@@ -27,11 +27,31 @@ CABLES.UTILS.float32Concat=function(first, second)
 }
 
 /**
+ * randomize order of an array
+ * @name shuffleArray
+ * @memberof CABLES
+ * @function
+ * @param array {Array} original
+ * @return {Array} shuffled array
+ * @static
+ */
+CABLES.shuffleArray=function(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+
+/**
  * generate a UUID
  * @name uuid
  * @memberof CABLES
  * @function
- * @return {Striug} generated UUID
+ * @return {String} generated UUID
  * @static
  */
 CABLES.generateUUID=CABLES.uuid=function()

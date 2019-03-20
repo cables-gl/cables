@@ -954,7 +954,7 @@ CABLES.Op = function()
                     {
                         if(!pi.links[li])continue;
                         if(pi.links[li].portOut.parent.objName.indexOf(name)>-1) return true;
-                        else if (hasParent(pi.links[li].portOut.parent,type,name)) return true;
+                            else if (hasParent(pi.links[li].portOut.parent,type,name)) return true;
                     }
                 }
             }
@@ -1007,7 +1007,7 @@ CABLES.Op = function()
                     working = false;
 
                     if (!notWorkingMsg) notWorkingMsg = CABLES.UI.TEXTS.working_connected_needs_connections_to;
-                    else notWorkingMsg += ', ';
+                        else notWorkingMsg += ', ';
                     notWorkingMsg += '' + p.name.toUpperCase() + '';
                 }
             }

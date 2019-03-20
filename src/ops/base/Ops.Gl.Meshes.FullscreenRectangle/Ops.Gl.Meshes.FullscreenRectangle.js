@@ -96,8 +96,7 @@ function doRender()
 
 function rebuild()
 {
-        const currentViewPort=cgl.getViewPort();
-    console.log(currentViewPort);
+    const currentViewPort=cgl.getViewPort();
 
     if(currentViewPort[2]==w && currentViewPort[3]==h && mesh)return;
 

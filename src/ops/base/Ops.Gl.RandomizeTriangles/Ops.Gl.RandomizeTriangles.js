@@ -5,19 +5,6 @@ const inSeed=op.inValue("Seed",0);
 inGeom.ignoreValueSerialize=true;
 outGeom.ignoreValueSerialize=true;
 
-function shuffleArray(array)
-{
-    Math.randomSeed=inSeed.get();
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.seededRandom() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-        
-    }
-    return array;
-}
-
 
 inGeom.onChange=function()
 {
@@ -34,7 +21,7 @@ inGeom.onChange=function()
     var i=0;
     order.length=geom.vertices.length/9;
     for(i=0;i<order.length;i++)order[i]=i;
-    order=shuffleArray(order);
+    order=CABLES.shuffleArray(order);
 
     var verts=[];
     verts.length=geom.vertices.length;
