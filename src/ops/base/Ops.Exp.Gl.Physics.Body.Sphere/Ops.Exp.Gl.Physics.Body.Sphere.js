@@ -1,6 +1,6 @@
 var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
-var inRadius=op.inValue("Radius");
+var inRadius=op.inValue("Radius",1);
 
 var doRender=op.inValueBool("Render",true);
 
@@ -16,6 +16,8 @@ var outRadius=op.outValue("Out Radius");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
+
+var outHit=op.outValueBool("Ray Hit",false);
 
 var outCollision=op.outTrigger("Collision");
 
@@ -91,6 +93,14 @@ function setup()
         // console.log("Contact between bodies:",e.contact);
     });
 
+    body.addEventListener("raycasthit",function(e){
+        console.log("rauyca!!");
+        // collision.trigger();
+        // console.log("The sphere just collided with the ground!");
+        // console.log("Collided with body:",e.body);
+        // console.log("Contact between bodies:",e.contact);
+    });
+
 
     lastWorld=world;
     needSetup=false;
@@ -108,6 +118,7 @@ function render()
 
     if(!body)return;
 
+    outHit.set(body.raycastHit);
 
     vec3.set(vec,
         body.position.x,

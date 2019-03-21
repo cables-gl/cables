@@ -148,7 +148,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
         if(this.parent.enabled && !this.crashed)
         {
-            if(v!=this.value || this.changeAlways || this.type==CABLES.OP_PORT_TYPE_TEXTURE || this.type==CABLES.OP_PORT_TYPE_ARRAY )
+            if(v!==this.value || this.changeAlways || this.type==CABLES.OP_PORT_TYPE_TEXTURE || this.type==CABLES.OP_PORT_TYPE_ARRAY )
             {
                 if(this._animated)
                 {
@@ -206,29 +206,24 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     CABLES.Port.prototype.forceChange=function()
     {
-
+        if(this.onValueChanged || this.onChange)
         {
             // very temporary!!!!!!!!!
-
             function args(func) {  
                 return (func + '')
-                  .replace(/[/][/].*$/mg,'') // strip single-line comments
-                  .replace(/\s+/g, '') // strip white space
-                  .replace(/[/][*][^/*]*[*][/]/g, '') // strip multi-line comments  
-                  .split('){', 1)[0].replace(/^[^(]*[(]/, '') // extract the parameters  
-                  .replace(/=[^,]+/g, '') // strip any ES6 defaults  
-                  .split(',').filter(Boolean); // split & filter [""]
+                    .replace(/[/][/].*$/mg,'') // strip single-line comments
+                    .replace(/\s+/g, '') // strip white space
+                    .replace(/[/][*][^/*]*[*][/]/g, '') // strip multi-line comments  
+                    .split('){', 1)[0].replace(/^[^(]*[(]/, '') // extract the parameters  
+                    .replace(/=[^,]+/g, '') // strip any ES6 defaults  
+                    .split(',').filter(Boolean); // split & filter [""]
             }  
-    
-            if(this.onValueChanged || this.onChange)
-            {
-                var params=args(this.onValueChanged||this.onChange)
-    
-                if(params.length>0) console.warn('TOM: port has onchange params!',this.parent.objName,this.name);
-            }
-    
+
+            var params=args(this.onValueChanged||this.onChange)
+
+            if(params.length>0) console.warn('TOM: port has onchange params!',this.parent.objName,this.name);
         }
-        
+    
         if(this.onChange) this.onChange(this,this.value);
             else if(this.onValueChanged) this.onValueChanged(this,this.value); // deprecated
     };

@@ -17,6 +17,14 @@ const
     hitNormalZ=op.outValue("Hit Normal Z"),
     hitResult=op.outObject("Result"),
 
+    aabbX=op.outValue("aabb x"),
+    aabbY=op.outValue("aabb y"),
+    aabbZ=op.outValue("aabb z"),
+
+    aabbX2=op.outValue("aabb x2"),
+    aabbY2=op.outValue("aabb y2"),
+    aabbZ2=op.outValue("aabb z2"),
+
     cgl=op.patch.cgl
     ;
 
@@ -64,6 +72,9 @@ function render()
     var world=cgl.frameStore.world;
     if(!world)return;
 
+    var hitBody=null;
+
+
     setRay();
 
     var r=ray.intersectWorld(world,{});
@@ -72,6 +83,24 @@ function render()
     {
         // console.log(ray.result);
         hasHit.set(ray.result.hasHit);
+
+        if(ray.result.body)
+        {
+            aabbX.set(ray.result.body.aabb.lowerBound.x);
+            aabbX.set(ray.result.body.aabb.lowerBound.y);
+            aabbX.set(ray.result.body.aabb.lowerBound.z);
+
+            aabbX2.set(ray.result.body.aabb.upperBound.x);
+            aabbX2.set(ray.result.body.aabb.upperBound.y);
+            aabbX2.set(ray.result.body.aabb.upperBound.z);
+
+            // ray.result.body.dispatchEvent({type:"raycasthit"});
+            hitBody=ray.result.body;
+            hitBody.raycastHit=true;
+
+        }
+
+        // console.log(ray.result);
 
         hitX.set(ray.result.hitPointWorld.x);
         hitY.set(ray.result.hitPointWorld.y);
@@ -84,6 +113,13 @@ function render()
     }
     else hasHit.set(false);
     hitResult.set(ray.result);
+
+
+    for(var i=0;i<world.bodies.length;i++)
+        if(world.bodies[i]!=hitBody)world.bodies[i].raycastHit=false;
+
+
+
 
 
 }

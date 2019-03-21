@@ -31,6 +31,26 @@
     "summary": "download a texture as png file",
     "youtubeid": "",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Texture",
+                "text": "texture in to capture"
+            },
+            {
+                "name": "Download",
+                "text": "Trigger to download the texture/image"
+            },
+            {
+                "name": "Filename",
+                "text": "The name of the downloaded file"
+            },
+            {
+                "name": "Finished",
+                "text": "When the texture is downloaded outputs `true`"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

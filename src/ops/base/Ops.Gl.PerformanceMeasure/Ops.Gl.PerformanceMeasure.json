@@ -1,0 +1,36 @@
+{
+    "id": "a2f90e82-a907-4984-a3a1-8e036cf2eee5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550742030262
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550742072171,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Execute"
+            },
+            {
+                "type": "5",
+                "name": "Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Childs"
+            },
+            {
+                "type": "0",
+                "name": "Time Used",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.PerformanceMeasure"
+    }
+}

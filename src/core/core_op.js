@@ -207,7 +207,7 @@ CABLES.Op = function()
     CABLES.Op.prototype.inValueString = function (name, v) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { "type": "string" })); p.value = ''; if (v !== undefined) { p.set(v); p.defaultValue = v; } return p; };
 
     // new string
-    CABLES.Op.prototype.inString = function (name, v) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" })); p.value = ''; if (v !== undefined) { p.set(v); p.defaultValue = v; } return p; };
+    CABLES.Op.prototype.inString = function (name, v) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" }));  v=v||''; p.value = v; p.set(v); p.defaultValue = v; return p; };
     
 
 
@@ -954,7 +954,7 @@ CABLES.Op = function()
                     {
                         if(!pi.links[li])continue;
                         if(pi.links[li].portOut.parent.objName.indexOf(name)>-1) return true;
-                        else if (hasParent(pi.links[li].portOut.parent,type,name)) return true;
+                            else if (hasParent(pi.links[li].portOut.parent,type,name)) return true;
                     }
                 }
             }
@@ -1007,7 +1007,7 @@ CABLES.Op = function()
                     working = false;
 
                     if (!notWorkingMsg) notWorkingMsg = CABLES.UI.TEXTS.working_connected_needs_connections_to;
-                    else notWorkingMsg += ', ';
+                        else notWorkingMsg += ', ';
                     notWorkingMsg += '' + p.name.toUpperCase() + '';
                 }
             }
@@ -1029,13 +1029,23 @@ CABLES.Op = function()
     {
         if (!CABLES.UI) return;
         this._needsParentOp=parentOpName;
+
     }
+
     CABLES.Op.prototype.toWorkPortsNeedToBeLinked = function ()
     {
         if (!CABLES.UI) return;
         for (var i = 0; i < arguments.length; i++)
-            this._needsLinkedToWork.push(arguments[i]);
+            if(this._needsLinkedToWork.indexOf(arguments[i])==-1)
+                this._needsLinkedToWork.push(arguments[i]);
     }
+    CABLES.Op.prototype.toWorkPortsNeedToBeLinkedReset = function ()
+    {
+        if (!CABLES.UI) return;
+        this._needsLinkedToWork.length=0;
+        this.checkLinkTimeWarnings();
+    }
+
 
 }
 

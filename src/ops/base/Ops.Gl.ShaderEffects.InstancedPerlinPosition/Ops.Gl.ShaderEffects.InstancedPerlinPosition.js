@@ -1,16 +1,15 @@
-
-var cgl=op.patch.cgl;
-
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 var inStrength=op.inValue("Strength",1);
-// var inSmooth=op.inValueBool("Smooth",true);
-
 
 var scrollx=op.inValue("Scroll X");
 var scrolly=op.inValue("Scroll Y");
 var scrollz=op.inValue("Scroll Z");
+
+
+var cgl=op.patch.cgl;
+
+
 
 var shader=null;
 
@@ -24,7 +23,7 @@ var srcBodyVert=''
     .endl()+'#ifdef INSTANCING'
     .endl()+'   pos=MOD_deform(instMat,pos);'
     .endl()+'#endif'
-    
+
     .endl();
 
 var moduleVert=null;
@@ -56,7 +55,7 @@ op.render.onTriggered=function()
          op.trigger.trigger();
          return;
     }
-    
+
     // if(CABLES.UI && CABLES.UI.renderHelper)
     // {
     //     cgl.pushModelMatrix();
@@ -66,7 +65,7 @@ op.render.onTriggered=function()
     // }
 
 
-    // if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+    // if(CABLES.UI && gui.patch().isCurrentOp(op))
     //     gui.setTransformGizmo(
     //         {
     //             posX:x,
@@ -99,11 +98,11 @@ op.render.onTriggered=function()
         // x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
         // y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
         // z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
-        
+
         updateWorldspace();
     }
-    
-    
+
+
     if(!shader)return;
 
     op.trigger.trigger();

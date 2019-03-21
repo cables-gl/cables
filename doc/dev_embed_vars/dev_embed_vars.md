@@ -56,6 +56,20 @@ if(myVar) {
 }
 ```
 
+### pre initializing variables for embeded patch
+
+you can overwrite the initial value of a variable in the patch config:
+
+```javascript
+    patch = new CABLES.Patch({
+        ... // usual stuff
+        variables:
+        {
+            "canColor":"#00ff00"
+        }
+
+    });
+```
 
 
 ### Test setting / getting variables without leaving cables

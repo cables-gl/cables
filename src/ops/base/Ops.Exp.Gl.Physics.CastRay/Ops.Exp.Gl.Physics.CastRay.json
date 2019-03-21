@@ -74,6 +74,36 @@
             {
                 "type": "2",
                 "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "aabb x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb x2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb y2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aabb z2",
+                "subType": "number"
             }
         ],
         "name": "Ops.Exp.Gl.Physics.CastRay"

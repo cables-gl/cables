@@ -38,5 +38,37 @@
     "updated": 1542701294712,
     "authorName": "pandur",
     "id": "44433419-dcf4-46e6-8f40-d331598029ac",
-    "created": 1542701267377
+    "created": 1542701267377,
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Red",
+                "text": "Enable or disable the red component"
+            },
+            {
+                "name": "Green",
+                "text": "Enable or disable the green component"
+            },
+            {
+                "name": "Blue",
+                "text": "Enable or disable the blue component"
+            },
+            {
+                "name": "Alpha",
+                "text": "Enable or disable the alpha component"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
+    }
 }

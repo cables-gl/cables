@@ -1,0 +1,52 @@
+{
+    "id": "da3de45b-c252-4785-8558-7fadb199ea61",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550497123626
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550497126471,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Element"
+            },
+            {
+                "type": "0",
+                "name": "active",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "image file",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Repeat",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Position",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "HTML Element"
+            }
+        ],
+        "name": "Ops.Html.BackgroundImage"
+    }
+}

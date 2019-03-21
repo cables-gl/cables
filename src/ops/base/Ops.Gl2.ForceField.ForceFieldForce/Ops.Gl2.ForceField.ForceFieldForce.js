@@ -43,13 +43,13 @@ exec.onTriggered=function()
         cgl.pushModelMatrix();
 
         // if(!mesh)mesh=new CGL.WirePoint(cgl);
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,[posX.get(),posY.get(),posZ.get()]);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix,[posX.get(),posY.get(),posZ.get()]);
         // mesh.render(cgl,range.get()*2);
         mark.draw(cgl);
         cgl.popModelMatrix();
     }
 
-    // vec3.transformMat4(pos, [posX.get(),posY.get(),posZ.get()], cgl.mvMatrix);
+    // vec3.transformMat4(pos, [posX.get(),posY.get(),posZ.get()], cgl.mMatrix);
     pos=[posX.get(),posY.get(),posZ.get()];
 
     updateForceObject();

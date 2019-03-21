@@ -1,0 +1,51 @@
+{
+    "id": "e72fbd80-f9c7-4572-8b6d-a485ef474b74",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550903088033
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550903110452,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "URL"
+            },
+            {
+                "type": "5",
+                "name": "Host"
+            },
+            {
+                "type": "5",
+                "name": "Hash"
+            },
+            {
+                "type": "5",
+                "name": "Pathname"
+            },
+            {
+                "type": "5",
+                "name": "Protocol"
+            },
+            {
+                "type": "5",
+                "name": "Port"
+            }
+        ],
+        "name": "Ops.Website.DocumentURL2"
+    },
+    "summary": "Information about the current URL",
+    "youtubeid": "",
+    "issues": "",
+    "collections": [
+        "datainfo"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

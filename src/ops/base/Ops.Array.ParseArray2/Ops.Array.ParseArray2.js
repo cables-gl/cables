@@ -1,6 +1,6 @@
 var text=op.inStringEditor("text",'1,2,3');
 var separator=op.inValueString("separator",",");
-var toNumber=op.inValueBool("Numbers",false);
+var toNumber=op.inValueBool("Numbers",true);
 var parsed=op.outTrigger("Parsed");
 var arr=op.outArray("array");
 var len=op.outValue("length");

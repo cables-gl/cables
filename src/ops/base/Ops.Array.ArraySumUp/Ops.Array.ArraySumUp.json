@@ -28,8 +28,13 @@
         "ports": [
             {
                 "name": "Array",
-                "text": "an array full of numbers"
+                "text": "Array in"
+            },
+            {
+                "name": "Sum",
+                "text": "The total number from all values being added together"
             }
         ]
-    }
+    },
+    "issues": ""
 }

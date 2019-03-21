@@ -1,0 +1,87 @@
+{
+    "id": "ce6e3213-1ce0-4c90-a7d5-e5dc1c23fa63",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550643918720
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550643925196,
+    "summary": "switch between filenames",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "File 0",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 1",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 2",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 3",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 4",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 5",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 6",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 7",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 8",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "File 9",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Value.FileSwitcher"
+    }
+}

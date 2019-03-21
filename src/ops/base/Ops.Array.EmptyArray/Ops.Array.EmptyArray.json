@@ -19,5 +19,21 @@
         ],
         "name": "Ops.Array.EmptyArray"
     },
-    "summary": "create an empty array"
+    "summary": "create an empty array",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Reset",
+                "text": "Reinitialise array"
+            },
+            {
+                "name": "Array",
+                "text": "Array out"
+            }
+        ]
+    }
 }

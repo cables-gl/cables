@@ -1,0 +1,35 @@
+{
+    "id": "e502ae39-c87e-4516-9e78-cb71333bcfff",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550675120371
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550675501300,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Filename"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Path"
+            }
+        ],
+        "name": "Ops.Cables.AssetPathURL"
+    },
+    "summary": "outputs the path to the assets",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

@@ -1,22 +1,17 @@
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var axis=op.inValueSelect("Axis",["X","Y"],"X");
-
 var inTreshhold=op.inValueSlider("treshhold",0.3);
-
 
 const cgl=op.patch.cgl;
 var shader=null;
 
 var srcHeadFrag=''
     .endl()+'UNI float MOD_treshhold;'
-
     .endl();
 
-
 var moduleFrag=null;
-
 
 axis.onChange=updateAxis;
 

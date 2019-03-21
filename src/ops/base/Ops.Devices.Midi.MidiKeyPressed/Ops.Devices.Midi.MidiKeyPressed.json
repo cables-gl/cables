@@ -1,5 +1,4 @@
 {
-    "updated": 1515015863751,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "329c458d-e8fe-4226-9d76-4b696f761fc8",
@@ -26,19 +25,23 @@
             },
             {
                 "type": "0",
-                "name": "Note"
+                "name": "Note",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Velocity"
+                "name": "Velocity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Channel"
+                "name": "Channel",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Device"
+                "name": "Device",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Midi.MidiKeyPressed"

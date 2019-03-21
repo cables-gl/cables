@@ -28,6 +28,10 @@
                 "text": "Executes the op"
             },
             {
+                "name": "Multiply",
+                "text": "Multiplier to running time"
+            },
+            {
                 "name": "result",
                 "text": "The time the patch is running (in seconds), e.g. 22.567"
             }
@@ -36,5 +40,9 @@
     "updated": 1542101789280,
     "authorName": "pandur",
     "id": "917df27b-7cc3-465f-986d-bcf5a7e125a7",
-    "created": 1542101380011
+    "created": 1542101380011,
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

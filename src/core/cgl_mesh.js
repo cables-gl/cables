@@ -3,6 +3,8 @@ var CGL=CGL || {};
 CGL.MESH=CGL.MESH || {};
 CGL.MESH.lastMesh=null;
 
+
+
 /**
  * @constructor
  * @memberof CGL
@@ -65,7 +67,8 @@ CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
                     "loc":-1,
                     "name":name,
                     "stride":stride,
-                    "offset":offset
+                    "offset":offset,
+                    "instanced":attrName==CGL.SHADERVAR_INSTANCE_MMATRIX
                 });
         }
     }
@@ -110,6 +113,8 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
         if(options.cb)cb=options.cb;
         if(options.instanced)instanced=options.instanced;
     }
+
+    if(name==CGL.SHADERVAR_INSTANCE_MMATRIX)instanced=true;
 
     if(!(array instanceof Float32Array))
     {
@@ -328,13 +333,17 @@ CGL.Mesh.prototype._bind=function(shader)
                 }
                 else if(attribute.itemSize==16)
                 {
-                    this._cgl.gl.vertexAttribPointer(attrLocs[i], 4, attribute.type,  false, 16*4,0);
+
+                    
+                    const stride=16*4;
+
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i], 4, attribute.type,  false, stride,0);
                     this._cgl.gl.enableVertexAttribArray(attrLocs[i]+1);
-                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+1, 4, attribute.type,  false, 16*4, 4*4*1);
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+1, 4, attribute.type,  false, stride, 4*4*1);
                     this._cgl.gl.enableVertexAttribArray(attrLocs[i]+2);
-                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+2, 4, attribute.type,  false, 16*4, 4*4*2);
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+2, 4, attribute.type,  false, stride, 4*4*2);
                     this._cgl.gl.enableVertexAttribArray(attrLocs[i]+3);
-                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+3, 4, attribute.type,  false, 16*4, 4*4*3);
+                    this._cgl.gl.vertexAttribPointer(attrLocs[i]+3, 4, attribute.type,  false, stride, 4*4*3);
 
                     this._cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
                     this._cgl.gl.vertexAttribDivisor(attrLocs[i]+1, 1);
@@ -345,8 +354,6 @@ CGL.Mesh.prototype._bind=function(shader)
             else
             {
                 if(!attribute.itemSize || attribute.itemSize==0) console.log("attrib itemsize error",this._geom.name,attribute);
-
-
                 this._cgl.gl.vertexAttribPointer(
                     attrLocs[i],
                     attribute.itemSize,
@@ -390,9 +397,8 @@ CGL.Mesh.prototype.unBind=function()
     
     for(var i=0;i<this._attributes.length;i++)
     {
-        if(this._attributes[i].instanced || this._attributes[i].name=='instMat')
+        if(this._attributes[i].instanced)
         {
-            this._attributes[i].instanced=true; // todo if name==instmat, set instanced=true..... sucks...
 
             // todo: easier way to fill mat4 attribs...
             if(this._attributes[i].itemSize<=4)

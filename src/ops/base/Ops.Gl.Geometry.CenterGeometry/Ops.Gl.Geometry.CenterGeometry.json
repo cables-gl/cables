@@ -31,5 +31,12 @@
         ],
         "name": "Ops.Gl.Geometry.CenterGeometry"
     },
-    "summary": "center an object to the average x,y,z position of its vertices"
+    "summary": "center an object to the average x,y,z position of its vertices",
+    "youtubeid": "",
+    "issues": "will be deprecated - use Ops.Gl.Geometry.AlignGeometry\n",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

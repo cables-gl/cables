@@ -1,0 +1,46 @@
+{
+    "id": "19e3c428-22ce-45a3-b903-fddfc46fc0a3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550740418598
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550740548820,
+    "summary": "",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Value.ValueSwitchBoolean"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "True"
+            },
+            {
+                "type": "5",
+                "name": "False"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringSwitchBoolean"
+    }
+}

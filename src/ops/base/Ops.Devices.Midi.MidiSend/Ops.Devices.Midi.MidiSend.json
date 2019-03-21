@@ -1,5 +1,4 @@
 {
-    "updated": 1516048713729,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "277123eb-f75b-4f51-984e-49d7d7031081",
@@ -12,15 +11,18 @@
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Velocity"
+                "name": "Velocity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "note"
+                "name": "note",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -28,7 +30,8 @@
             },
             {
                 "type": "0",
-                "name": "Controll Value"
+                "name": "Controll Value",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

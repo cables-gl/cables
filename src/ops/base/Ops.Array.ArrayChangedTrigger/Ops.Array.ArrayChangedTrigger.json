@@ -18,5 +18,21 @@
         ],
         "name": "Ops.Array.ArrayChangedTrigger"
     },
-    "summary": "triggers when array was changed"
+    "summary": "Triggers when any array values or the array length has changed",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array in to check for changes"
+            },
+            {
+                "name": "Changed Trigger",
+                "text": "Trigger out when array has changed"
+            }
+        ]
+    }
 }

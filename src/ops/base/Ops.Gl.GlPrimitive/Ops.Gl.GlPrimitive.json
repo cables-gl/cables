@@ -25,6 +25,23 @@
     },
     "summary": "force rendering of meshes using points,lines or triangles",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Trigger the op "
+            },
+            {
+                "name": "Primitive",
+                "text": "Pick the primitive render mode - see docs for available modes"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

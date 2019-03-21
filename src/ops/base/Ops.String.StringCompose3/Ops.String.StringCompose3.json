@@ -1,0 +1,59 @@
+{
+    "id": "6afea9f4-728d-4f3c-9e75-62ddc1448bf0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550741229551
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550741239052,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Format"
+            },
+            {
+                "type": "5",
+                "name": "String A"
+            },
+            {
+                "type": "5",
+                "name": "String B"
+            },
+            {
+                "type": "5",
+                "name": "String C"
+            },
+            {
+                "type": "5",
+                "name": "String D"
+            },
+            {
+                "type": "5",
+                "name": "String E"
+            },
+            {
+                "type": "5",
+                "name": "String F"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringCompose3"
+    },
+    "summary": "Combine multiple Values to a new String",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

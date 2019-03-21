@@ -55,7 +55,7 @@ endValue.set(0.0);
 bpm.set(0);
 init();
 
-startValue.onValueChange(init);
-endValue.onValueChange(init);
-bpm.onValueChange(init);
-easing.onValueChange(init);
+startValue.onChange=init;
+endValue.onChange=init;
+bpm.onChange=init;
+easing.onChange=init;

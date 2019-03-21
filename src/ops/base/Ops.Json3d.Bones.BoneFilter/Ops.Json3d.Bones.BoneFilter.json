@@ -1,5 +1,4 @@
 {
-    "updated": 1515687797438,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c7d25c25-accb-45da-ba6a-a1d634f89e6f",
@@ -12,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Joint"
+                "name": "Joint",
+                "subType": "string"
             }
         ],
         "portsOut": [

@@ -45,6 +45,39 @@
         "name": "Ops.Gl.ColorPick"
     },
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "x",
+                "text": "X position"
+            },
+            {
+                "name": "y",
+                "text": "Y position"
+            },
+            {
+                "name": "r",
+                "text": "Red value - range `0-1`"
+            },
+            {
+                "name": "g",
+                "text": "Green value - range `0-1`"
+            },
+            {
+                "name": "b",
+                "text": "Blue value - range `0-1`"
+            },
+            {
+                "name": "a",
+                "text": "Alpha value - range `0-1`"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

@@ -1,5 +1,4 @@
 {
-    "updated": 1519813819455,
     "authorName": "pandur",
     "id": "f207f121-5659-4ed3-b8da-e4d69deac893",
     "created": 1519813819456,
@@ -15,51 +14,63 @@
             },
             {
                 "type": "0",
-                "name": "num"
+                "name": "num",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Range Radius"
+                "name": "Range Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "attraction"
+                "name": "attraction",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Angle"
+                "name": "Angle",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Show"
+                "name": "Show",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Random Seed"
+                "name": "Random Seed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Z"
+                "name": "Pos Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Area X"
+                "name": "Area X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Area Y"
+                "name": "Area Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Area Z"
+                "name": "Area Z",
+                "subType": "number"
             }
         ],
         "portsOut": [

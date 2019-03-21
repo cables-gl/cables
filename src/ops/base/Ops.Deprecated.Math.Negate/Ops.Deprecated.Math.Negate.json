@@ -1,0 +1,37 @@
+{
+    "id": "dd3bfbf1-9855-4aba-8f50-0ced1cacef08",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550841222346
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550841269372,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Negate"
+    },
+    "summary": "positive number becomes negative and vice versa",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

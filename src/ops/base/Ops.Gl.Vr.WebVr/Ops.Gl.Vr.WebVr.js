@@ -23,7 +23,7 @@ inStartVr.onTriggered=function()
         console.error("could not start vr / no vr display found");
         return;
     }
-    
+
     vrDisplay.requestPresent([{ source: cgl.canvas }]).then(
         function()
         {
@@ -36,7 +36,7 @@ inStartVr.onTriggered=function()
             console.log(leftEye.renderHeight);
 
             frameData=new VRFrameData();
-            
+
             vrDisplay.requestAnimationFrame(mainloopVr);
         });
 };
@@ -44,10 +44,10 @@ inStartVr.onTriggered=function()
 function mainloopVr()
 {
     var vrSceneFrame = vrDisplay.requestAnimationFrame(mainloopVr);
-    
+
     vrDisplay.getFrameData(frameData);
-    
-    
+
+
     if(CABLES.now()-frameLast>1000)
     {
         // console.log('frameCount',frameCount);
@@ -55,14 +55,14 @@ function mainloopVr()
         frameCount=0;
         frameLast=CABLES.now();
     }
-    
-    
-    
+
+
+
     // console.log(frameData);
-    
+
 
     // cgl.renderStart(cgl,zero,zero);
-    
+
     CGL.MESH.lastShader=null;
     CGL.MESH.lastMesh=null;
 
@@ -80,7 +80,7 @@ function mainloopVr()
 
 
     // left eye
-    
+
     cgl.pushPMatrix();
     mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.leftProjectionMatrix);
 
@@ -98,15 +98,15 @@ function mainloopVr()
     // right eye
 
     // cgl.renderStart(cgl,zero,zero);
-    
+
     cgl.pushPMatrix();
     mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.rightProjectionMatrix);
 
     cgl.pushViewMatrix();
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,frameData.rightViewMatrix);
-    
+
     cgl.gl.viewport(cgl.canvasWidth * 0.5, 0, cgl.canvasWidth * 0.5, cgl.canvasHeight);
-    
+
     nextVr.trigger();
 
     cgl.popViewMatrix();
@@ -114,11 +114,11 @@ function mainloopVr()
     cgl.popBlend(true);
 
 
-    
+
     vrDisplay.submitFrame();
-    
+
     frameCount++;
-    
+
     // cgl.renderEnd(cgl);
 }
 
@@ -134,8 +134,8 @@ if(navigator.getVRDisplays)
             vrDisplay = displays[0];
             outDisplayName.set(vrDisplay.displayName);
             console.log('Display found',vrDisplay.displayName);
-            
-            
+
+
             // Starting the presentation when the button is clicked: It can only be called in response to a user gesture
             // btn.addEventListener('click', function()
             // {
@@ -143,27 +143,27 @@ if(navigator.getVRDisplays)
             // {
             //   vrDisplay.requestPresent([{ source: canvas }]).then(function() {
             //     console.log('Presenting to WebVR display');
-        
+
             //     // Set the canvas size to the size of the vrDisplay viewport
-        
+
             //     var leftEye = vrDisplay.getEyeParameters('left');
             //     var rightEye = vrDisplay.getEyeParameters('right');
-        
+
             //     canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
             //     canvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
-        
+
             //     // stop the normal presentation, and start the vr presentation
             //     window.cancelAnimationFrame(normalSceneFrame);
             //     drawVRScene();
-        
+
             //     btn.textContent = 'Exit VR display';
             //   });
             // } else {
             //   vrDisplay.exitPresent();
             //   console.log('Stopped presenting to WebVR display');
-        
+
             //   btn.textContent = 'Start VR display';
-        
+
             //   // Stop the VR presentation, and start the normal presentation
             //   vrDisplay.cancelAnimationFrame(vrSceneFrame);
             //   drawScene();
@@ -175,7 +175,7 @@ if(navigator.getVRDisplays)
             console.error("could not find vr display...");
         }
     });
-    
+
 }
 else
 {

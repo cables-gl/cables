@@ -18,8 +18,21 @@
         ],
         "name": "Ops.Array.Array3xTo2x"
     },
-    "summary": "remove every 3rd item of an array",
+    "summary": "remove every 3rd item of an array - changes array length",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Array3x",
+                "text": "The XYZ array in"
+            },
+            {
+                "name": "Array2x",
+                "text": "the XY array out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

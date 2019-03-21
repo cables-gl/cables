@@ -1,5 +1,3 @@
-op.name='MidiKeyPressed';
-
 // input ports
 var eventIn = op.inObject("Event Input");
 

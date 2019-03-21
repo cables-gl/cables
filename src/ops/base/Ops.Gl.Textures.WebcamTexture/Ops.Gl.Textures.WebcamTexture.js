@@ -62,9 +62,10 @@ function startWebcam()
     navigator.getUserMedia(constraints,
         function(stream)
         {
-            videoElement.autplay=true;
+            tex.videoElement=videoElement;
             // videoElement.src = window.URL.createObjectURL(stream);
             videoElement.srcObject = stream;
+            //tex.videoElement=stream;
             videoElement.onloadedmetadata = function(e)
             {
                 available.set(true);
@@ -74,6 +75,7 @@ function startWebcam()
 
                 videoElement.play();
                 updateTexture();
+
             };
         },
         function()

@@ -91,7 +91,7 @@ exec.onTriggered=function()
 
     cgl.pushModelMatrix();
 
-    mat4.translate(cgl.mvMatrix,cgl.mvMatrix, pos);
+    mat4.translate(cgl.mMatrix,cgl.mMatrix, pos);
 
     next.trigger();
 

@@ -12,6 +12,7 @@ CGL.profileMVPMatrixCount = 0;
 CGL.SHADERVAR_VERTEX_POSITION = 'vPosition';
 CGL.SHADERVAR_VERTEX_NUMBER = 'attrVertIndex';
 CGL.SHADERVAR_VERTEX_TEXCOORD = 'attrTexCoord';
+CGL.SHADERVAR_INSTANCE_MMATRIX = 'instMat';
 
 // default uniforms
 CGL.SHADERVAR_UNI_PROJMAT = "projMatrix"

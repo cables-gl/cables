@@ -62,7 +62,9 @@ play.onChange=function()
     if(play.get())
     {
         playing=true;
-        self.audio.play();
+        var prom = self.audio.play();
+        if (prom instanceof Promise)
+            prom.then(null,function(e){});
     }
     else
     {
@@ -98,8 +100,12 @@ function seek()
     {
         if(!self.audio)return;
 
-        if(self.patch.timer.isPlaying() && self.audio.paused) self.audio.play();
-            else if(!self.patch.timer.isPlaying() && !self.audio.paused) self.audio.pause();
+        var prom;
+        if(self.patch.timer.isPlaying() && self.audio.paused) prom = self.audio.play();
+        else if(!self.patch.timer.isPlaying() && !self.audio.paused) prom = self.audio.pause();
+
+        if (prom instanceof Promise)
+            prom.then(null, function (e) {});
 
         self.audio.currentTime=self.patch.timer.getTime();
     }
@@ -135,8 +141,11 @@ function playPause()
 {
     if(!self.audio)return;
 
-    if(self.patch.timer.isPlaying()) self.audio.play();
-        else self.audio.pause();
+    var prom;
+    if(self.patch.timer.isPlaying()) prom = self.audio.play();
+    else prom = self.audio.pause();
+    if (prom instanceof Promise)
+        prom.then(null, function (e) {});
 }
 
 function updateVolume()
@@ -176,7 +185,11 @@ this.file.onChange=function()
 
         var canplaythrough=function()
         {
-            if(autoPlay.get() || play.get()) self.audio.play();
+            if(autoPlay.get() || play.get()){
+              var prom = self.audio.play();
+              if (prom instanceof Promise)
+                prom.then(null,function(e){});
+            }
             outPlaying.set(true);
             patch.loading.finished(loadingId);
             self.audio.removeEventListener('canplaythrough',canplaythrough, false);

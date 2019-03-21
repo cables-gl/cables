@@ -28,5 +28,29 @@
         ],
         "name": "Ops.Array.Array3xRandomSelection"
     },
-    "summary": "get x random elements from an array"
+    "summary": "extract definable amount of random xyz points from an array",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array in to extract random values from "
+            },
+            {
+                "name": "Elements",
+                "text": "How many xyz elements to extract"
+            },
+            {
+                "name": "Seed",
+                "text": "Radnom number seed. 0 is always different on a reload. Set to a number to keep a fixed speed."
+            },
+            {
+                "name": "Result",
+                "text": "A new array with a length determined by the elements paramater."
+            }
+        ]
+    }
 }

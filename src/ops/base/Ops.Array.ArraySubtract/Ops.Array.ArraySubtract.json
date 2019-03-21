@@ -1,7 +1,20 @@
 {
     "summary": " Subtracts one number from all values in an array",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "Array in"
+            },
+            {
+                "name": "Value",
+                "text": "The number to subtract from all numbers in the array"
+            },
+            {
+                "name": "Array Out",
+                "text": "Array out"
+            }
+        ]
     },
     "updated": 1540902068739,
     "authorName": "andro",
@@ -26,5 +39,9 @@
             }
         ],
         "name": "Ops.Array.ArraySubtract"
-    }
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

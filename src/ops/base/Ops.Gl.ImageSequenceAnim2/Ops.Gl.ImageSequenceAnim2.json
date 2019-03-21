@@ -61,6 +61,51 @@
     },
     "summary": "play a image sprite animation",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Time",
+                "text": "Time used to animate the op, plug a timer into this to animate"
+            },
+            {
+                "name": "FPS",
+                "text": "FPS of the animation"
+            },
+            {
+                "name": "Num X",
+                "text": "Set this to the amount of images on the X axis"
+            },
+            {
+                "name": "Num Y",
+                "text": "Set this to the amount of images on the Y axis"
+            },
+            {
+                "name": "Repeat X",
+                "text": "Used to set the `X` size the repeat setting of the texture"
+            },
+            {
+                "name": "Repeat Y",
+                "text": "Used to set the `Y` size the repeat setting of the texture"
+            },
+            {
+                "name": "Offset X",
+                "text": "Used to offset the texture on the `X` axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Used to offset the texture on the `Y` axis"
+            },
+            {
+                "name": "Frame",
+                "text": "Current frame number determined by FPS parameter"
+            },
+            {
+                "name": "Progress",
+                "text": "Progress through the animation, range `0-1`"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

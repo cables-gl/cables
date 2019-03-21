@@ -70,6 +70,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Ray Hit",
+                "subType": "boolean"
+            },
+            {
                 "type": "1",
                 "name": "Collision"
             }
