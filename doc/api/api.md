@@ -18,8 +18,9 @@ to create an API key goto your settings, select the tab "apikey" and click "crea
 
   url query parameters:
 
-  `removeIndexHtml` - remove index.html from export
-  `jsonName` - filename of resulting json file 
+  - `removeIndexHtml` - remove index.html from export
+  - `jsonName` - filename of resulting json file 
+  - `combineJS` - combine .js and json files into one
 
 #### accessing the API via CURL
 
