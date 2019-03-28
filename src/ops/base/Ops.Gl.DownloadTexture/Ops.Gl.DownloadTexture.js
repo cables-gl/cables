@@ -59,14 +59,33 @@ start.onTriggered=function()
     dataURIToBlob(canvas.toDataURL(),
         function(blob)
         {
-            var anchor = document.createElement('a');
-            anchor.download=fileName.get()+'.png';
-            anchor.href=URL.createObjectURL(blob);
-            document.body.appendChild(anchor);
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            anchor.click();
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream)
+            {
+                var reader = new FileReader();
+                // var out = new Blob([byte], {type: "application/pdf"});
+                reader.onload = function(e){
+                  window.location.href = reader.result;
+                //   window.open(reader.result);
+                };
+                reader.readAsDataURL(blob);
+            }
+            else
+            {
+                var anchor = document.createElement('a');
+                anchor.download=fileName.get()+'.png';
+                // anchor.target='_blank';
+                anchor.href=URL.createObjectURL(blob);
+                document.body.appendChild(anchor);
+
+                anchor.click();
+
+            }
             outFinished.set(true);
         });
+
+
 };
 
 function dataURIToBlob(dataURI, callback)
@@ -75,5 +94,5 @@ function dataURIToBlob(dataURI, callback)
     len = binStr.length,
     arr = new Uint8Array(len);
     for (var i = 0; i < len; i++) arr[i] = binStr.charCodeAt(i);
-    callback(new Blob([arr]));
+    callback(new Blob([arr],{type: "image/png"}));
 }

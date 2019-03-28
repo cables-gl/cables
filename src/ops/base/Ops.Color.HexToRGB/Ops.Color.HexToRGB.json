@@ -4,25 +4,30 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Hex"
+                "name": "Hex",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Bytes"
+                "name": "Bytes",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "R"
+                "name": "R",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "G"
+                "name": "G",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "B"
+                "name": "B",
+                "subType": "number"
             }
         ],
         "name": "Ops.Color.HexToRGB"
@@ -53,5 +58,6 @@
                 "text": "The blue amount"
             }
         ]
-    }
+    },
+    "created": 1552994223602
 }

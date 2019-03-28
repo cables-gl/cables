@@ -7,12 +7,21 @@
             {
                 "type": "1",
                 "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Only if Audio Suspended",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "5",
+                "name": "Audiocontext State"
             },
             {
                 "type": "0",
@@ -25,6 +34,31 @@
     "summary": "shows a playbutton for forcing a simple user interaction",
     "youtubeid": "",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Only if Audio Suspended",
+                "text": "only show play button if audiocontext needs a user interaction (when audiocontext is suspended)"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "added: will resume audiocontext when triggered",
+            "author": "pandur",
+            "date": 1553781404855
+        },
+        {
+            "message": "added: option to not show up when audiocontext is already running",
+            "author": "pandur",
+            "date": 1553781427965
+        },
+        {
+            "message": "added: option to not show up when audiocontext is already running",
+            "author": "pandur",
+            "date": 1553781428839
+        }
+    ]
 }

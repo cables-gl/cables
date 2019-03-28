@@ -4,6 +4,10 @@ const
     amount=op.inValueSlider("Amount",1),
     scaleX=op.inValue("Scale X",1.5),
     scaleY=op.inValue("Scale Y",1.5),
+    offsetX=op.inValueSlider("offset X",0),
+    offsetY=op.inValueSlider("offset Y",0),
+    centerX=op.inValueSlider("center X",0.5),
+    centerY=op.inValueSlider("center Y",0.5),
     trigger=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;
@@ -12,10 +16,15 @@ const shader=new CGL.Shader(cgl);
 const srcFrag=(attachments.scale_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);
 
-const textureUniform=new CGL.Uniform(shader,'t','tex',0);
-const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-const scaleXUniform=new CGL.Uniform(shader,'f','uScaleX',scaleX);
-const scaleYUniform=new CGL.Uniform(shader,'f','uScaleY',scaleY);
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
+    scaleXUniform=new CGL.Uniform(shader,'f','uScaleX',scaleX),
+    scaleYUniform=new CGL.Uniform(shader,'f','uScaleY',scaleY),
+    centerXUniform=new CGL.Uniform(shader,'f','centerX',centerX),
+    centerYUniform=new CGL.Uniform(shader,'f','centerY',centerY),
+    offsetXUniform=new CGL.Uniform(shader,'f','offsetX',offsetX),
+    offsetYUniform=new CGL.Uniform(shader,'f','offsetY',offsetY);
 
 blendMode.onChange=function()
 {

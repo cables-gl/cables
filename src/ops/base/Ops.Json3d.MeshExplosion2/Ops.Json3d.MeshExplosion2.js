@@ -50,7 +50,7 @@ function doRender()
             mat4.rotateY(tempMat4,tempMat4,expansion.get()*0.006*objects[i].rotation[1]*inRotY.get());
             mat4.rotateZ(tempMat4,tempMat4,expansion.get()*0.006*objects[i].rotation[2]*inRotZ.get());
 
-            mat4.multiply(cgl.mMatrix,cgl.mMatrix,objects[i].transformation);
+            // mat4.multiply(cgl.mMatrix,cgl.mMatrix,objects[i].transformation);
             mat4.multiply(cgl.mMatrix,cgl.mMatrix,tempMat4);
 
             objects[i].mesh.render(cgl.getShader());

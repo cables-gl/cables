@@ -1,7 +1,7 @@
 const
     render=op.inTrigger('render'),
     trigger=op.outTrigger('trigger'),
-    axis=op.inValueFloat("axis"),
+    axis=op.inValueSelect("axis",["X","Y"],"X"),
     width=op.inValueFloat("width",0.5),
     offset=op.inValueFloat("offset"),
     flip=op.inValueBool("flip");

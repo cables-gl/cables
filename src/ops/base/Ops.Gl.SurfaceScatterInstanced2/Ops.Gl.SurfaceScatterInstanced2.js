@@ -2,7 +2,7 @@ const
     render=op.inTrigger("Render"),
     inGeomSurface=op.inObject("Geom Surface"),
     geom=op.inObject("Geometry"),
-    inDistribution=op.inValueSelect("Distribution",['Vertex','Triangle Center','Triangle Side','Random'],'Vertex'),
+    inDistribution=op.inValueSelect("Distribution",['Vertex','Triangle Center','Triangle Side'],'Vertex'),
     inVariety=op.inValueSelect("Selection",["Random","Sequential"],"Random"),
     inNum=op.inValueInt("Num",100),
     inSizeMin=op.inValueSlider("Size min",1.0),
@@ -71,15 +71,13 @@ function setup()
 
     Math.randomSeed=seed.get();
 
-    const DISTMODE_VERTEX=0;
-    const DISTMODE_TRIANGLE_CENTER=1;
-    const DISTMODE_TRIANGLE_SIDE=2;
-    const DISTMODE_TRIANGLE_RANDOM=3;
+    var DISTMODE_VERTEX=0;
+    var DISTMODE_TRIANGLE_CENTER=1;
+    var DISTMODE_TRIANGLE_SIDE=2;
 
     var distMode=0;
     if(inDistribution.get()=='Triangle Center')distMode=DISTMODE_TRIANGLE_CENTER;
-    else if(inDistribution.get()=='Triangle Side')distMode=DISTMODE_TRIANGLE_SIDE;
-    else if(inDistribution.get()=='Random')distMode=DISTMODE_TRIANGLE_RANDOM;
+    if(inDistribution.get()=='Triangle Side')distMode=2;
 
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
 
@@ -127,16 +125,7 @@ function setup()
                         ( geom.vertices[faces[index*3+whichA]*3+2]+geom.vertices[faces[index*3+whichB]*3+2] )/2,
                     ]);
             }
-            else if(distMode==DISTMODE_TRIANGLE_RANDOM)
-            {
 
-
-                        // (geom.vertices[faces[index*3]*3+0]+geom.vertices[faces[index*3+1]*3+0]+geom.vertices[faces[index*3+2]*3+0])/3,
-                        // (geom.vertices[faces[index*3]*3+1]+geom.vertices[faces[index*3+1]*3+1]+geom.vertices[faces[index*3+2]*3+1])/3,
-                        // (geom.vertices[faces[index*3]*3+2]+geom.vertices[faces[index*3+1]*3+2]+geom.vertices[faces[index*3+2]*3+2])/3,
-
-
-            }
             // rotate to normal direction
             vec3.set(norm,
                 geom.vertexNormals[geom.verticesIndices[index*3]*3+0],

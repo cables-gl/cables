@@ -1,60 +1,51 @@
-var exec=op.inTrigger("Exec");
-var inMass=op.inValue("Mass");
-var inRadius=op.inValue("Radius",1);
+const
+    exec=op.inTrigger("Exec"),
+    inMass=op.inValue("Mass"),
+    inRadius=op.inValue("Radius",1),
+    doRender=op.inValueBool("Render",true),
+    inReset=op.inTriggerButton("Reset"),
+    next=op.outTrigger("Next"),
+    outRadius=op.outValue("Out Radius"),
+    outX=op.outValue("X"),
+    outY=op.outValue("Y"),
+    outZ=op.outValue("Z"),
+    outHit=op.outValueBool("Ray Hit",false),
+    outCollision=op.outTrigger("Collision");
 
-var doRender=op.inValueBool("Render",true);
-
-// var posX=op.inValue("Pos X");
-// var posY=op.inValue("Pos Y");
-// var posZ=op.inValue("Pos Z");
-
-var inReset=op.inTriggerButton("Reset");
-
-
-var next=op.outTrigger("Next");
-var outRadius=op.outValue("Out Radius");
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
-
-var outHit=op.outValueBool("Ray Hit",false);
-
-var outCollision=op.outTrigger("Collision");
-
-var cgl=op.patch.cgl;
-
-var m=new CGL.WirePoint(cgl,1);
-
-exec.onTriggered=render;
-
-var needSetup=true;
-var body=null;
-
-inMass.onChange=setup;
-inRadius.onChange=setup;
+const cgl=op.patch.cgl;
+const wire=new CGL.WirePoint(cgl,1);
+const vec=vec3.create();
+const q=quat.create();
+const empty=vec3.create();
+const trMat=mat4.create();
 
 var lastWorld=null;
-
 var collided=false;
+var needSetup=true;
+var body=null;
+var shape=null;
+inMass.onChange=setup;
+inRadius.onChange=setup;
+exec.onTriggered=render;
 
 inReset.onTriggered=function()
 {
     needSetup=true;
 };
 
-function setup()
+function setup(modelScale)
 {
+    modelScale=modelScale||1;
     var world=cgl.frameStore.world;
     if(!world)return;
 
     if(body)world.removeBody(body);
-
+    shape=new CANNON.Sphere(Math.max(0,inRadius.get()*modelScale));
     body = new CANNON.Body({
-      mass: inMass.get(), // kg
+        mass: inMass.get(), // kg
     //   position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
-      shape: new CANNON.Sphere(Math.max(0,inRadius.get()))
+        shape: shape
     });
-
 
     world.addBody(body);
 
@@ -67,31 +58,38 @@ function setup()
     outRadius.set(inRadius.get());
 }
 
-var vec=vec3.create();
-var q=quat.create();
-const empty=vec3.create();
 
-var trMat=mat4.create();
+const scale=vec3.create();
+
+  function getScaling(mat) {
+
+    var m31 = mat[8];
+    var m32 = mat[9];
+    var m33 = mat[10];
+    return Math.hypot(m31, m32, m33);
+  }
+
+
 function render()
 {
     if(needSetup)setup();
     if(lastWorld!=cgl.frameStore.world)setup();
-
     if(!body)return;
 
     outHit.set(body.raycastHit);
 
     var staticPos=inMass.get()==0;
 
+    const modelScale=getScaling(cgl.mMatrix);
+    if(shape.radius!=inRadius.get()*modelScale) setup(modelScale);
+
 
     if(staticPos)
     {
-        // static position
         vec3.transformMat4(vec, empty, cgl.mMatrix);
         body.position.x=vec[0];
         body.position.y=vec[1];
         body.position.z=vec[2];
-
     }
     else
     {
@@ -117,8 +115,7 @@ function render()
         mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
     }
 
-
-    if(doRender.get())m.render(cgl,inRadius.get()*2);
+    if(doRender.get())wire.render(cgl,inRadius.get()*2);
 
     outX.set(body.position.x);
     outY.set(body.position.y);
