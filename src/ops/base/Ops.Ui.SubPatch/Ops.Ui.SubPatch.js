@@ -28,8 +28,6 @@ op.patchId.onChange=function()
     {
         // console.log("old subpatch has ops.,...");
     }
-
-
 };
 
 var oldPatchId=CABLES.generateUUID();
@@ -48,21 +46,11 @@ op.onLoadedValueSet=function()
         data={"ports":[],"portsOut":[]};
     }
     setupPorts();
-
-
 };
-
-
-
 
 function loadData()
 {
-
-
 }
-
-
-
 
 getSubPatchInputOp();
 getSubPatchOutputOp();

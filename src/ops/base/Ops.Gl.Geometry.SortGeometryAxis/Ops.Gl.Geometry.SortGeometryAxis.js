@@ -14,17 +14,7 @@ reverse.onChange=update;
 geometry.onChange=update;
 sorting.onChange=update;
 
-function shuffleArray(a)
-{
-    var arr=[];
-    for (var i=0;i<a.length;i++) {
-        j = Math.floor(Math.random() * i);
-        x = a[i - 1];
-        arr[i - 1] = arr[j];
-        arr[j] = x;
-    }
-    return arr;
-}
+
 
 function update()
 {
@@ -45,7 +35,7 @@ function update()
 
         if(sorting.get()==SORT_RANDOM)
         {
-            faces=shuffleArray(faces);    
+            faces=CABLES.shuffleArray(faces);    
         }
         else
         if(sorting.get()==SORT_Y)

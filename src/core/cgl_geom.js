@@ -566,12 +566,96 @@ CGL.Geometry.buildFromFaces=function(arr)
     return geom;
 };
 
+CGL.Geometry._half2num = function(n){
+    var sign = 1 - ((n & 0x8000) >> 14);
+    var exponent = (n & 0x7c00) >> 10;
+    var mantissa = (n & 0x03ff);
+
+    if(exponent === 0){
+        if(mantissa !== 0){
+            return sign * twoPm14 * (mantissa/1024);
+        }
+        else{
+            return sign * 0;
+        }
+    }
+    else if(exponent < 31){
+        return sign * Math.pow(2, exponent-15) * (1 + mantissa/1024);
+    }
+    else{
+        if(mantissa === 0){
+            return sign * Infinity;
+        }
+        else{
+            return NaN;
+        }
+    }
+};
+
+var twoPm14 = Math.pow(2, -14);
+// var smallest = twoPm14/1024;
+var largest = Math.pow(2, 30-15) * (1 + 1023/1024);
+
+CGL.Geometry.parseHalfFloatB64Array=function(base64)
+{
+    var raw = window.atob(base64);
+    console.log('raw length',raw.length);
+    var array = new Uint8Array(raw.length);
+    var newArr=[];
+    
+    for(var i = 0; i < raw.length; i++) {
+        array[i] = raw.charCodeAt(i);
+    }
+
+    // console.log('arr length',array.length);
+    // console.log('arr length',array);
+
+    // if(raw.length%2==0)
+    // {
+        console.log('ui8 length',array.buffer.length);
+        var arr16=new Uint16Array(array);
+    
+        // new Uint16Array(5).buffer
+        for(var i=0;i<arr16.length;i++)
+            newArr[i]=this._half2num(arr16[i]);
+    
+console.log('new length',newArr.length);
+            // console.log('arr length',newArr.length);
+
+console.log(newArr);
+    // }
+    // else
+    // {
+    //     console.log("bla");
+    // }
+
+    
+
+    return newArr;
+    // return array;
+    
+    // var buf = Buffer.from(b64string, 'base64');
+    // var arr=new Uint16Array(buf);
+    // var newArr=[];
+    // newArr.length=arr.length;
+    // for(var i=0;i<arr.length;i++)
+    //     newArr[i]=arr[i];
+    
+    // return newArr;
+    
+}
 
 CGL.Geometry.json2geom=function(jsonMesh)
 {
     var geom=new CGL.Geometry();
     geom.verticesIndices=[];
-    geom.vertices=JSON.parse(JSON.stringify(jsonMesh.vertices));
+
+    if(jsonMesh.vertices_hfb64)geom.vertices=this.parseHalfFloatB64Array(jsonMesh.vertices_hfb64);
+    // else geom.vertices=JSON.parse(JSON.stringify(jsonMesh.vertices));
+    else geom.vertices=jsonMesh.vertices;
+
+    // if(jsonMesh.normals_hfb64)geom.vertexNormals=this.parseHalfFloatB64Array(jsonMesh.normals_hfb64);
+        // else geom.vertexNormals=jsonMesh.normals||[];
     geom.vertexNormals=jsonMesh.normals||[];
     geom.vertexColors=jsonMesh.colors||[];
     geom.tangents=jsonMesh.tangents||[];

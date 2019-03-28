@@ -56,7 +56,6 @@ CGL.Texture=function(__cgl,options)
     }
 
     this.setSize(options.width, options.height);
-        // else this.setSize(CGL.DEFAULT_TEXTURE_SIZE,CGL.DEFAULT_TEXTURE_SIZE);
 };
 
 /**

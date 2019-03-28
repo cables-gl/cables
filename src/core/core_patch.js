@@ -66,7 +66,6 @@ CABLES.Patch = function(cfg) {
         onFirstFrameRendered: null,
 	    onPatchLoaded:null,
         fpsLimit: 0,
-        
     };
 
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
@@ -767,10 +766,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         reqs.checkOp(op);
 
         if (op) {
-            // op.id = obj.ops[iop].id;
             if (genIds) op.id = CABLES.uuid();
-
-            // console.log(obj.ops[iop].portsIn);
             op.portsInData=obj.ops[iop].portsIn;
             op._origData=obj.ops[iop];
 
@@ -778,17 +774,13 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                 var objPort = obj.ops[iop].portsIn[ipi];
                 var port = op.getPort(objPort.name);
 
-                // if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
                 if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) objPort.value = true === objPort.value;
                 if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
                 if (objPort.animated) port.setAnimated(objPort.animated);
                 if (objPort.anim) {
                     if (!port.anim) port.anim = new CABLES.Anim();
-
                     if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
-
                     for (var ani in objPort.anim.keys) {
-                        // var o={t:objPort.anim.keys[ani].t,value:objPort.anim.keys[ani].v};
                         port.anim.keys.push(new CABLES.ANIM.Key(objPort.anim.keys[ani]));
                     }
                 }
@@ -814,7 +806,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             this.ops[i]._origData=null;
         }
     }
-
 
     // create links...
     if(obj.ops)
@@ -857,8 +848,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             // this._variables = cfg.variables;
         }
     }
-
-
 
     setTimeout(function(){ this.loading.finished(loadingId); }.bind(this),100);
     if(this.config.onPatchLoaded)this.config.onPatchLoaded();
@@ -925,8 +914,6 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
         this._changeListeners[i](v);
     }
 };
-
-
 
 /**
  * function will be called when value of variable is changed
