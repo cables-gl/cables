@@ -36,7 +36,6 @@ render.onTriggered=function()
 
         if(CABLES.UI.renderHelper)
         {
-            console.log(1);
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
             CABLES.GL_MARKER.drawSphere(op,inSize.get());
