@@ -163,8 +163,13 @@ CGL.Context = function(_patch) {
 
     this.endFrame = function() {
 
-        if(CABLES.UI && CABLES.UI.renderHelper)
-            CABLES.GL_MARKER.drawMarkerLayer(this);
+        if(CABLES.UI)
+        {
+            CABLES.UI.renderHelper=CABLES.UI.userSettings.get('helperMode');
+            if(CABLES.UI.renderHelper)
+                CABLES.GL_MARKER.drawMarkerLayer(this);
+                
+        }
 
         self.setPreviousShader();
         if (this._vMatrixStack.length() > 0) console.warn('view matrix stack length !=0 at end of rendering...');
