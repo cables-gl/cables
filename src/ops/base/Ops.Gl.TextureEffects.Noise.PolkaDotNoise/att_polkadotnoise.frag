@@ -6,11 +6,9 @@
 UNI float amount;
 UNI float radius_low;
 UNI float radius_high;
-UNI float X;
-UNI float Y;
-UNI float Z;
+UNI float X,Y,Z;
 UNI float scale;
-    
+UNI float threshhold;
 
 
 {{BLENDCODE}}
@@ -67,10 +65,10 @@ float PolkaDot3D( 	vec3 P,
     vec3 Pi = floor(P);
     vec3 Pf = P - Pi;
 
-
-
     //	calculate the hash.
     vec4 hash = FAST32_hash_3D_Cell( Pi );
+
+    hash.w=step(hash.w,threshhold);
 
     //	user variables
     float RADIUS = max( 0.0, radius_low + hash.w * ( radius_high - radius_low ) );
@@ -81,7 +79,9 @@ float PolkaDot3D( 	vec3 P,
     Pf *= RADIUS;
     Pf -= ( RADIUS - 1.0 );
     Pf += hash.xyz * ( RADIUS - 2.0 );
-    //Pf *= Pf;		//	this gives us a cool box looking effect
+    #ifdef BOX
+        Pf *= Pf;		//	this gives us a cool box looking effect
+    #endif
     return Falloff_Xsq_C2( min( dot( Pf, Pf ), 1.0 ) ) * VALUE;
 }
 
@@ -98,18 +98,14 @@ void main()
     vec3 Pi = floor(pos);
     vec4 hash = FAST32_hash_3D_Cell( Pi );
     pos.z=Z+random(hash.zz);
-    
-    
-
-
 
     vec4 rnd=vec4(PolkaDot3D(pos,radius_low,radius_high));
     rnd.a=1.0;
 
     vec4 base=texture(tex,texCoord);
-    
+
     vec4 col=vec4( _blend(base.rgb,rnd.rgb) ,1.0);
     col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-    
+
 outColor= col;
 }

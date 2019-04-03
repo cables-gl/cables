@@ -72,12 +72,9 @@ op.onDelete = onDelete;
 
 op.init=function()
 {
-    console.log("onInit!");
-
     if(op.patch.config.sidebar)
     {
         op.patch.config.sidebar[labelPort.get()];
-        // console.log("FOUND SIDEBAR VARIABLE!!!");
         valuePort.set(op.patch.config.sidebar[labelPort.get()]);
     }
     else

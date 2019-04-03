@@ -23,10 +23,10 @@ void main()
     vec4 pos = vec4( vPosition, 1. );
     vec3 norm=attrVertNormal;
 
-    
+
 
     texCoord=vec2(attrTexCoord.x*repeatX,attrTexCoord.y*repeatY);
-    
+
     mat3 wmMatrix=mat3(modelMatrix);
 
     newNormalMatrix=mat3(

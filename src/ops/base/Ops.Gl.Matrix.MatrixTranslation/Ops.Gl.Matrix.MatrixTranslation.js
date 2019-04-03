@@ -1,6 +1,6 @@
 const render=op.inTrigger("render");
 const inArr=op.inArray('Matrix');
-const trigger=op.outTrigger("trigger")
+const trigger=op.outTrigger("trigger");
 
 const outX=op.outValue("X");
 const outY=op.outValue("Y");
@@ -11,10 +11,11 @@ const pos=vec3.create();
 const identVec=vec3.create();
 const iViewMatrix=mat4.create();
 
+
 render.onTriggered=function()
 {
     if(!inArr.get())return;
-    
+
     mat4.invert(iViewMatrix,inArr.get());
     vec3.transformMat4(pos, identVec,iViewMatrix );
 
