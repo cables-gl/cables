@@ -8,16 +8,35 @@ var q=quat.create();
 var qMat=mat4.create();
 var cgl=op.patch.cgl;
 
+
+var fps=30;
+
 function dataGetAnimation(data,name)
 {
     if(!data || !data.hasOwnProperty('animations')) return false;
 
     for(var iAnims in data.animations)
+    {
+        if(data.animations[iAnims].tickspersecond) fps=data.animations[iAnims].tickspersecond;
+
         for(var iChannels in data.animations[iAnims].channels)
-            if(data.animations[iAnims].channels[iChannels].name==name)
+            if(data.animations[iAnims].channels[iChannels].name==name && data.animations[iAnims].channels[iChannels].rotationkeys.length>1)
                 return data.animations[iAnims].channels[iChannels];
+
+    }
     return false;
 }
+
+// function dataGetAnimation(data,name)
+// {
+//     if(!data || !data.hasOwnProperty('animations')) return false;
+
+//     for(var iAnims in data.animations)
+//         for(var iChannels in data.animations[iAnims].channels)
+//             if(data.animations[iAnims].channels[iChannels].name==name)
+//                 return data.animations[iAnims].channels[iChannels];
+//     return false;
+// }
 
 var animX=null;
 var animY=null;
@@ -38,10 +57,10 @@ function readAnim()
 
         for(var k in an.rotationkeys)
         {
-            animX.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][1] );
-            animY.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][2] );
-            animZ.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][3] );
-            animW.setValue( an.rotationkeys[k][0],an.rotationkeys[k][1][0] );
+            animX.setValue( an.rotationkeys[k][0]/fps,an.rotationkeys[k][1][1] );
+            animY.setValue( an.rotationkeys[k][0]/fps,an.rotationkeys[k][1][2] );
+            animZ.setValue( an.rotationkeys[k][0]/fps,an.rotationkeys[k][1][3] );
+            animW.setValue( an.rotationkeys[k][0]/fps,an.rotationkeys[k][1][0] );
         }
     }
 }

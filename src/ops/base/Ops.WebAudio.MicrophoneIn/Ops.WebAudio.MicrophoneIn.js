@@ -1,7 +1,7 @@
 var microphone = null;
 var audioCtx=CABLES.WEBAUDIO.createAudioContext(op);
 
-const inInit=op.inTrigger("Start");
+const inInit=op.inTriggerButton("Start");
 const audioOut=op.outObject("audio out");
 const recording=op.outValueBool("Listening",false);
 
@@ -26,17 +26,17 @@ inInit.onTriggered=function()
         console.log("[microphoneIn] new micro");
 
         navigator.mediaDevices.getUserMedia({audio:true})
-        .then(function (stream)
-        {
-            microphone = audioCtx.createMediaStreamSource(stream);
-            audioOut.set( microphone );
-            console.log("streaming mic audio!",stream,microphone);
-            recording.set(true);
-        })
-        .catch(function(err) {
-            console.log("[microphoneIn] could not get usermedia promise",err);
-            recording.set(false);
-        });
+            .then(function (stream)
+            {
+                microphone = audioCtx.createMediaStreamSource(stream);
+                audioOut.set( microphone );
+                console.log("streaming mic audio!",stream,microphone);
+                recording.set(true);
+            })
+            .catch(function(err) {
+                console.log("[microphoneIn] could not get usermedia promise",err);
+                recording.set(false);
+            });
     }
     else
     {
@@ -48,7 +48,8 @@ inInit.onTriggered=function()
             navigator.getUserMedia(
                 {audio:true},
                 streamAudio,
-                function(e){console.log('[microphoneIn]No live audio input ' + e);recording.set(false);}
+                function(e){console.log('[microphoneIn]No live audio input ' + e);
+                recording.set(false);}
             );
         }
         else
