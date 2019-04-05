@@ -1,6 +1,6 @@
 const render=op.inTrigger("render");
 const trigger=op.outTrigger("trigger");
-
+const outNumKeys=op.outValue("Num Keys");
 var channel=this.addInPort(new CABLES.Port(this,"channel"));
 
 var q=quat.create();
@@ -23,7 +23,7 @@ function dataGetAnimation(data,name)
         if(data.animations[iAnims].tickspersecond) fps=data.animations[iAnims].tickspersecond;
 
         for(var iChannels in data.animations[iAnims].channels)
-            if(data.animations[iAnims].channels[iChannels].name==name && data.animations[iAnims].channels[iChannels].positionkeys.length>1)
+            if(data.animations[iAnims].channels[iChannels].name==name && data.animations[iAnims].channels[iChannels].positionkeys.length>0)
                 return data.animations[iAnims].channels[iChannels];
 
     }
@@ -34,7 +34,6 @@ function readAnim()
 {
     var an=dataGetAnimation(cgl.frameStore.currentScene.getValue(),channel.get());
 
-    console.log(an);
 
     if(an)
     {
@@ -44,10 +43,12 @@ function readAnim()
 
         for(var k in an.positionkeys)
         {
-            animX.setValue( an.positionkeys[k][0]/25,an.positionkeys[k][1][0] );
-            animY.setValue( an.positionkeys[k][0]/25,an.positionkeys[k][1][1] );
-            animZ.setValue( an.positionkeys[k][0]/25,an.positionkeys[k][1][2] );
+            animX.setValue( an.positionkeys[k][0]/fps,an.positionkeys[k][1][0] );
+            animY.setValue( an.positionkeys[k][0]/fps,an.positionkeys[k][1][1] );
+            animZ.setValue( an.positionkeys[k][0]/fps,an.positionkeys[k][1][2] );
         }
+
+        outNumKeys.set(an.positionkeys.length);
     }
 }
 
