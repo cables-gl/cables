@@ -1,0 +1,34 @@
+{
+    "id": "5f9ce320-1e8d-49cb-9927-337e0b3f4d45",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1554448366922
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1554448375543,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "number2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Compare.GreaterOrEquals"
+    }
+}
