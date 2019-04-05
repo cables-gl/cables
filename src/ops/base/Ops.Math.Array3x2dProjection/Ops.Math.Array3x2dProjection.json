@@ -1,5 +1,4 @@
 {
-    "updated": 1519813781370,
     "authorName": "pandur",
     "id": "8ac0bd90-ba6f-40f7-8429-21bff899cb14",
     "created": 1519813779726,
@@ -15,27 +14,33 @@
             },
             {
                 "type": "0",
-                "name": "fov"
+                "name": "fov",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "w"
+                "name": "w",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "h"
+                "name": "h",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos X"
+                "name": "Pos X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Pos Y"
+                "name": "Pos Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mul"
+                "name": "mul",
+                "subType": "number"
             }
         ],
         "portsOut": [

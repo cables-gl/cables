@@ -55,7 +55,7 @@ function quatFromEuler(quat,alpha,beta,gamma)
 	quat[2] = cX * cY * sZ + sX * sY * cZ;
 	quat[3] = cX * cY * cZ - sX * sY * sZ;
 
-	return quat;	  
+	return quat;
 }
 
 function onOrientationChange(event)

@@ -147,7 +147,7 @@ function connect(){
             password: mqttPassword.get(),
             useSSL: useSsl.get(),
             timeout: TIMEOUT
-        });    
+        });
     } else { // connect anonymous
         op.log("anonymous");
         client.connect({
@@ -155,6 +155,6 @@ function connect(){
         onFailure: onFailure,
         useSSL: useSsl.get(),
         timeout: TIMEOUT
-    });    
+    });
     }
 }

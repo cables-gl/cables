@@ -14,10 +14,11 @@
             },
             {
                 "type": "0",
-                "name": "Window Orientation"
+                "name": "Window Orientation",
+                "subType": "number"
             }
         ],
-        "name": "Ops.exp.Gl.DeviceOrientationCamera"
+        "name": "Ops.Exp.Gl.DeviceOrientationCamera"
     },
     "youtubeid": "",
     "collections": [
@@ -29,5 +30,8 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "authorName": "pandur",
+    "id": "01798309-87d1-44b4-a4c1-74b085829a5f",
+    "created": 1554290677056
 }

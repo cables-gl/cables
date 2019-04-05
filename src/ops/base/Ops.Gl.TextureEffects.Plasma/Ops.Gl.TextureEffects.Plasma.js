@@ -4,6 +4,8 @@ const amount=op.inValueSlider("Amount",1);
 const x=op.inValue("Width",20);
 const y=op.inValue("Height",20);
 const mul=op.inValue("Mul",1);
+const offsetX=op.inValue("offset X",0);
+const offsetY=op.inValue("offset Y",0);
 const time=op.inValue("Time",1);
 const greyscale=op.inValueBool("Greyscale",true);
 const trigger=op.outTrigger('trigger');
@@ -20,6 +22,9 @@ const uniX=new CGL.Uniform(shader,'f','w',x);
 const uniY=new CGL.Uniform(shader,'f','h',y);
 const uniTime=new CGL.Uniform(shader,'f','time',time);
 const uniMul=new CGL.Uniform(shader,'f','mul',mul);
+
+const unioffsetX=new CGL.Uniform(shader,'f','offsetX',offsetX);
+const unioffsetY=new CGL.Uniform(shader,'f','offsetY',offsetY);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 const amountUniform=new CGL.Uniform(shader,'f','amount',amount);

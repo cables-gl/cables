@@ -61,6 +61,7 @@ var updateMethod=function()
         shader.removeDefine(id+'DISPLACE_METH_MULXYZ');
         shader.removeDefine(id+'DISPLACE_METH_ADDZ');
         shader.removeDefine(id+'DISPLACE_METH_ADDY');
+        shader.removeDefine(id+'DISPLACE_METH_MULY');
         shader.removeDefine(id+'DISPLACE_METH_NORMAL');
 
         if(meth.get()=='mul xyz') shader.define(id+'DISPLACE_METH_MULXYZ');

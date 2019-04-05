@@ -45,7 +45,7 @@ function update()
 
         if(sorting.get()==SORT_RANDOM)
         {
-            faces=shuffleArray(faces);    
+            faces=shuffleArray(faces);
         }
         else
         if(sorting.get()==SORT_Y)
@@ -120,7 +120,7 @@ function update()
 
         if(reverse.get())
         {
-            faces=faces.reverse(); 
+            faces=faces.reverse();
         }
 
         faces=[].concat.apply([], faces);
@@ -163,6 +163,7 @@ function update()
         newGeom.verticesIndices=newFaces;
         newGeom.texCoords=newTexCoords;
 
+        outGeom.set(null);
         outGeom.set(newGeom);
     }
 }
