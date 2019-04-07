@@ -1,4 +1,8 @@
 
+
+
+
+
 float MOD_de=0.0;
 
 #ifdef MOD_AREA_SPHERE
@@ -7,6 +11,12 @@ float MOD_de=0.0;
 
 #ifdef MOD_AREA_AXIS_X
     MOD_de=abs(MOD_x-MOD_areaPos.x);
+#endif
+#ifdef MOD_AREA_AXIS_XY
+    MOD_de=abs(MOD_x-MOD_areaPos.x+MOD_areaPos.y);
+#endif
+#ifdef MOD_AREA_AXIS_XZ
+    MOD_de=abs(MOD_x-MOD_areaPos.x+MOD_areaPos.z);
 #endif
 #ifdef MOD_AREA_AXIS_Y
     MOD_de=abs(MOD_y-MOD_areaPos.y);
@@ -23,6 +33,10 @@ float MOD_de=0.0;
 #endif
 #ifdef MOD_AREA_AXIS_Z_INFINITE
     MOD_de=MOD_z-MOD_areaPos.z;
+#endif
+
+#ifdef MOD_AREA_REPEAT
+    MOD_de=mod(MOD_de,MOD_size+MOD_repeat);
 #endif
 
 MOD_de=MOD_de/MOD_size;
