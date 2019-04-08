@@ -466,14 +466,24 @@ CGL.Shader.prototype.bind = function()
     }
 };
 
-CGL.Shader.prototype.toggleDefine = function(name, value)
-{
-    if(value) this.define(name);
-        else this.removeDefine(name);
 
+/**
+ * easily enable/disable a define without a value
+ * @param {name} name
+ * @function
+ */
+CGL.Shader.prototype.toggleDefine = function(name, enabled)
+{
+    if(enabled) this.define(name);
+        else this.removeDefine(name);
 };
 
-
+/**
+ * add a define to a shader, e.g.  #define DO_THIS_THAT 1
+ * @param {name} name
+ * @param {value} value (can be empty)
+ * @function
+ */
 CGL.Shader.prototype.define = function(name, value)
 {
     if (!value) value = '';
@@ -506,7 +516,12 @@ CGL.Shader.prototype.hasDefine = function(name) {
         if (this._defines[i][0] == name) return true;
 };
 
-CGL.Shader.prototype.removeDefine = function(name, value) {
+/**
+ * remove a define from a shader
+ * @param {name} name
+ * @function
+ */
+CGL.Shader.prototype.removeDefine = function(name) {
     for (var i = 0; i < this._defines.length; i++) {
         if (this._defines[i][0] == name) {
             this._defines.splice(i, 1);
