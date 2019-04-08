@@ -53,8 +53,7 @@ function updateOutput()
 function updateWorldspace()
 {
     if(!shader)return;
-    if(inWorldSpace.get()) shader.define(moduleVert.prefix+"WORLDSPACE");
-        else shader.removeDefine(moduleVert.prefix+"WORLDSPACE");
+    shader.toggleDefine(moduleVert.prefix+"WORLDSPACE",inWorldSpace.get());
 }
 
 

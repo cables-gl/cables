@@ -462,12 +462,14 @@ CGL.Context = function(_patch) {
         {
             this.canvas.width=w;
             this.canvas.height=h;
-            this.onScreenShot = null;
             if(blob)
             {
                 var anchor = document.createElement('a');
 
                 anchor.download=filename;
+
+
+
                 anchor.href=URL.createObjectURL(blob);
                 document.body.appendChild(anchor);
     
@@ -480,7 +482,7 @@ CGL.Context = function(_patch) {
                 console.log("screenshot: no blob");
             }
 
-        }.bind(this),true);
+        }.bind(this),z);
     };
 };
 

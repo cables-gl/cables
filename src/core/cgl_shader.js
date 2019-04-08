@@ -466,6 +466,14 @@ CGL.Shader.prototype.bind = function()
     }
 };
 
+CGL.Shader.prototype.toggleDefine = function(name, value)
+{
+    if(value) this.define(name);
+        else this.removeDefine(name);
+
+};
+
+
 CGL.Shader.prototype.define = function(name, value)
 {
     if (!value) value = '';
