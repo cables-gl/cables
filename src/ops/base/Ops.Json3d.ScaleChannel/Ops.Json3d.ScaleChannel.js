@@ -1,5 +1,6 @@
 const render=op.inTrigger("render");
 const trigger=op.outTrigger("trigger");
+const outNumKeys=op.outValue("Num Keys");
 
 var channel=this.addInPort(new CABLES.Port(this,"channel"));
 
@@ -7,16 +8,34 @@ var q=quat.create();
 var qMat=mat4.create();
 var cgl=op.patch.cgl;
 
+var fps=30;
+
 function dataGetAnimation(data,name)
 {
     if(!data || !data.hasOwnProperty('animations')) return false;
 
     for(var iAnims in data.animations)
+    {
+        if(data.animations[iAnims].tickspersecond) fps=data.animations[iAnims].tickspersecond;
+
         for(var iChannels in data.animations[iAnims].channels)
-            if(data.animations[iAnims].channels[iChannels].name==name)
+            if(data.animations[iAnims].channels[iChannels].name==name && data.animations[iAnims].channels[iChannels].scalingkeys.length>0)
                 return data.animations[iAnims].channels[iChannels];
+
+    }
     return false;
 }
+
+// function dataGetAnimation(data,name)
+// {
+//     if(!data || !data.hasOwnProperty('animations')) return false;
+
+//     for(var iAnims in data.animations)
+//         for(var iChannels in data.animations[iAnims].channels)
+//             if(data.animations[iAnims].channels[iChannels].name==name)
+//                 return data.animations[iAnims].channels[iChannels];
+//     return false;
+// }
 
 var animX=null;
 var animY=null;
@@ -39,7 +58,7 @@ function readAnim()
             animY.setValue( an.scalingkeys[k][0],an.scalingkeys[k][1][1] );
             animZ.setValue( an.scalingkeys[k][0],an.scalingkeys[k][1][2] );
         }
-
+        outNumKeys.set(an.scalingkeys.length);
     }
 }
 

@@ -19,6 +19,11 @@
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Num Keys",
+                "subType": "number"
             }
         ],
         "name": "Ops.Json3d.ScaleChannel"

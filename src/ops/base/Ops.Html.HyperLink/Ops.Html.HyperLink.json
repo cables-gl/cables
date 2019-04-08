@@ -8,9 +8,13 @@
             },
             {
                 "type": "0",
-                "name": "URL"
+                "name": "URL",
+                "subType": "string"
             }
         ],
         "name": "Ops.Html.HyperLink"
-    }
+    },
+    "authorName": "pandur",
+    "id": "a721e6ff-6fe2-4780-a46c-b28fc54c1901",
+    "created": 1554453379359
 }

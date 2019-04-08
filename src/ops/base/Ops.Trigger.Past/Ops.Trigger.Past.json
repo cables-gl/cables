@@ -1,5 +1,4 @@
 {
-    "updated": 1540298235332,
     "authorName": "andro",
     "id": "ef0891db-6053-42ba-b7d5-29c7cf6d8208",
     "created": 1536324321936,
@@ -7,12 +6,12 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Threshold",
+                "name": "Input",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Input",
+                "name": "Threshold",
                 "subType": "number"
             }
         ],

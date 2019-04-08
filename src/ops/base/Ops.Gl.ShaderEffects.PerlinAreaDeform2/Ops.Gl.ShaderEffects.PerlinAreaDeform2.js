@@ -15,11 +15,12 @@ var x=op.inValue("x");
 var y=op.inValue("y");
 var z=op.inValue("z");
 
-
-
 var scrollx=op.inValue("Scroll X");
 var scrolly=op.inValue("Scroll Y");
 var scrollz=op.inValue("Scroll Z");
+
+
+
 
 var shader=null;
 
@@ -32,6 +33,7 @@ function removeModule()
     if(shader && moduleVert) shader.removeModule(moduleVert);
     shader=null;
 }
+
 
 output.onChange=updateOutput;
 op.render.onLinkChanged=removeModule;
@@ -56,6 +58,13 @@ function updateWorldspace()
     shader.toggleDefine(moduleVert.prefix+"WORLDSPACE",inWorldSpace.get());
 }
 
+function getScaling(mat)
+{
+    var m31 = mat[8];
+    var m32 = mat[9];
+    var m33 = mat[10];
+    return Math.hypot(m31, m32, m33);
+}
 
 op.render.onTriggered=function()
 {
@@ -64,6 +73,7 @@ op.render.onTriggered=function()
         op.trigger.trigger();
         return;
     }
+
 
     if(CABLES.UI)
     {
@@ -77,7 +87,6 @@ op.render.onTriggered=function()
             CABLES.GL_MARKER.drawSphere(op,inSize.get());
             cgl.popModelMatrix();
         }
-
 
         if(gui.patch().isCurrentOp(op))
             gui.setTransformGizmo(

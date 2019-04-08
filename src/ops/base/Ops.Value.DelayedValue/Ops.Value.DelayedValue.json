@@ -1,5 +1,4 @@
 {
-    "updated": 1519030489208,
     "authorName": "pandur",
     "id": "8e7741e0-0b1b-40f3-a62c-ac8a8828dffb",
     "created": 1519030450682,
@@ -11,25 +10,30 @@
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Delay"
+                "name": "Delay",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Clear on Change"
+                "name": "Clear on Change",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "easing"
+                "name": "easing",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Value.DelayedValue"

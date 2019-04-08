@@ -30,6 +30,8 @@ var srcBodyVert=''
 var srcHeadFrag=attachments.pixelnoise_frag
     .endl()+'UNI float MOD_scale;'
     .endl()+'UNI float MOD_amount;'
+    .endl()+'UNI float MOD_r,MOD_g,MOD_b;'
+
     .endl();
 
 var srcBodyFrag=''

@@ -11,15 +11,18 @@
             },
             {
                 "type": "0",
-                "name": "Threshold"
+                "name": "Threshold",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Attack"
+                "name": "Attack",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Release"
+                "name": "Release",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -29,5 +32,8 @@
             }
         ],
         "name": "Ops.WebAudio.Lib.Tonejs.Component.Gate"
-    }
+    },
+    "authorName": "pandur",
+    "id": "ea04b6b9-9e67-4fae-a41c-75d98348d2a4",
+    "created": 1554371952203
 }

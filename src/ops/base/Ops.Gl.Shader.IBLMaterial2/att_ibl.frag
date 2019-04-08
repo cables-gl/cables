@@ -113,7 +113,7 @@ void main()
     #endif
 
     #ifdef TEX_DIFFUSE
-        col.rgb *= texture(texDiffuse,texCoord).rgb;
+        col.rgb = texture(texDiffuse,texCoord).rgb;
     #endif
 
 
@@ -121,14 +121,7 @@ void main()
     L.xz*=matRotation;
     L=normalize(L);
     // col.rgb=mix(col.rgb,SAMPLETEX(mapReflection, L, amountRough*10.0).rgb,amountReflect);
-    col.rgb+=(SAMPLETEX(mapReflection, L, amountRough*10.0).rgb*amountReflect);
-
-    // #ifdef TEX_DIFFUSE
-        // metal reflection
-        // col.rgb+=(SAMPLETEX(mapReflection, L, amountRough*10.0).rgb*amountReflect) * texture(texDiffuse,texCoord).rgb * 5.0 * (0.95-texture(texDiffuse,texCoord).rgb);
-    // #endif
-    // col.rgb*
-    // col.rgb+=reflc;
+    col.rgb+=SAMPLETEX(mapReflection, L, amountRough*10.0).rgb*amountReflect;
 
 
     col.a=1.0;
