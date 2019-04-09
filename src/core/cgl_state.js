@@ -482,7 +482,7 @@ CGL.Context = function(_patch) {
                 console.log("screenshot: no blob");
             }
 
-        }.bind(this),z);
+        }.bind(this),true);
     };
 };
 
