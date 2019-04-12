@@ -28,7 +28,6 @@ const sizeX=op.inValueSlider("Size X",1);
 op.setPortGroup("Position",[x,y,z]);
 op.setPortGroup("Color",[inBlend,r,g,b]);
 
-
 const inWorldSpace=op.inValueBool("WorldSpace",true);
 
 var shader=null;
@@ -124,7 +123,7 @@ op.render.onTriggered=function()
                     posZ:z
                 });
 
-        if(CABLES.UI.renderHelper)
+        if(CABLES.UI.renderHelper ||gui.patch().isCurrentOp(op))
         {
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
             CABLES.GL_MARKER.drawSphere(op,inSize.get());

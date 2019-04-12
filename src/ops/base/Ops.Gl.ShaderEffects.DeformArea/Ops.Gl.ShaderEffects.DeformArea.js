@@ -34,7 +34,7 @@ render.onTriggered=function()
     {
         if(gui.patch().isCurrentOp(op)) gui.setTransformGizmo({posX:x,posY:y,posZ:z});
 
-        if(CABLES.UI.renderHelper)
+        if(CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))
         {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
