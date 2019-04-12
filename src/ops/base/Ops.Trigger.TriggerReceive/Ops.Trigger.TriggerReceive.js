@@ -1,9 +1,16 @@
-
 const next=op.outTrigger("Triggered");
 var varname=op.inValueSelect("Named Trigger");
 
 updateVarNamesDropdown();
 op.patch.addEventListener('namedTriggersChanged',updateVarNamesDropdown);
+
+
+var oldName=null;
+
+function doTrigger()
+{
+    next.trigger();
+};
 
 
 function updateVarNamesDropdown()
@@ -20,14 +27,19 @@ function updateVarNamesDropdown()
 
 varname.onChange=function()
 {
-    op.setTitle('>' + varname.get());
 
-    var cbs=op.patch.namedTriggers[varname.get()]||[];
+    if(oldName)
+    {
+        var oldCbs=op.patch.namedTriggers[oldName];
+        var a=oldCbs.indexOf(doTrigger);
+        if(a!=-1) oldCbs.splice(a,1);
+    }
+
+    op.setTitle('>' + varname.get());
+    op.patch.namedTriggers[varname.get()]=op.patch.namedTriggers[varname.get()]||[];
+    var cbs=op.patch.namedTriggers[varname.get()];
 
     cbs.push(doTrigger);
+    oldName=varname.get();
 };
 
-function doTrigger()
-{
-    next.trigger();
-}
