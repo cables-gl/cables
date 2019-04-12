@@ -55,11 +55,14 @@ void main()
 
     #ifdef CALC_SSNORMALS
         // eye_relative_pos=(modelMatrix * pos).xyz-camPos;
-        eye_relative_pos=(modelPos).xyz-camPos;
+        eye_relative_pos=(mMatrix*pos).xyz-camPos;
 
         // mPos=(modelview*vec4(0.0,1.0,0.0,1.0)).xyz;
-        mPos=(modelPos).xyz;
+        mPos=(mMatrix*pos).xyz;
     #endif
+
+
+
 
     viewDirection = normalize((mMatrix * pos).xyz - camPos);
 

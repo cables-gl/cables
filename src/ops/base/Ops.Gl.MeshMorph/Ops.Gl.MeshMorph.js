@@ -16,6 +16,42 @@ var oldGeom=0;
 var anim=new CABLES.Anim();
 anim.clear();
 
+var trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+
+var calcVertexNormals=op.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'} ));
+calcVertexNormals.set(true);
+
+var geoms=[];
+var mesh=null;
+window.meshsequencecounter=window.meshsequencecounter||1;
+window.meshsequencecounter++;
+var prfx=String.fromCharCode(97 + window.meshsequencecounter);
+var needsUpdateFrame=false;
+render.onTriggered=doRender;
+
+
+
+
+var srcHeadVert=''
+    .endl()+'IN vec3 '+prfx+'_attrMorphTargetA;'
+    .endl()+'IN vec3 '+prfx+'_attrMorphTargetB;'
+    .endl()+'UNI float {{mod}}_fade;'
+    .endl()+'UNI float {{mod}}_doMorph;'
+    .endl();
+
+var srcBodyVert=''
+    // .endl()+'   pos =vec4(vPosition,1.0);'
+    .endl()+'if({{mod}}_doMorph==1.0){'
+    .endl()+'  pos = vec4( '+prfx+'_attrMorphTargetA * {{mod}}_fade + '+prfx+'_attrMorphTargetB * (1.0 - {{mod}}_fade ), 1. );'
+    .endl()+'}'
+    .endl();
+
+var uniFade=null;
+var module=null;
+var shader=null;
+var uniDoMorph=null;
+
+
 
 for(var i=0;i<8;i++)
 {
@@ -23,6 +59,9 @@ for(var i=0;i<8;i++)
     inGeom.onChange=updateMeshes;
     inGeoms.push(inGeom);
 }
+
+
+
 
 function updateMeshes()
 {
@@ -53,7 +92,6 @@ function updateGeom()
     if (getGeom < 0) getGeom =0 ;
     else if(getGeom >= 7) getGeom = 7;
     var temp = 0;
-    //op.log("update geom");
 
     if(oldGeom === getGeom)return;
 
@@ -73,9 +111,6 @@ function updateGeom()
     temp = getGeom;
 
     var geom2=inGeoms[temp].get();
-    //var geom2=inGeoms[nextGeom.get()].get();
-
-    // op.log("from toooooooo ",oldGeom,nextGeom.get());
 
     if(mesh && geom1 && geom2 && geom1._vertices && geom2._vertices)
     {
@@ -84,39 +119,6 @@ function updateGeom()
     }
 
 }
-
-
-var trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-
-var calcVertexNormals=op.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'} ));
-calcVertexNormals.set(true);
-
-var geoms=[];
-var mesh=null;
-window.meshsequencecounter=window.meshsequencecounter||1;
-window.meshsequencecounter++;
-var prfx=String.fromCharCode(97 + window.meshsequencecounter);
-var needsUpdateFrame=false;
-render.onTriggered=doRender;
-
-var srcHeadVert=''
-    .endl()+'IN vec3 '+prfx+'_attrMorphTargetA;'
-    .endl()+'IN vec3 '+prfx+'_attrMorphTargetB;'
-    .endl()+'UNI float {{mod}}_fade;'
-    .endl()+'UNI float {{mod}}_doMorph;'
-    .endl();
-
-var srcBodyVert=''
-    // .endl()+'   pos =vec4(vPosition,1.0);'
-    .endl()+' if({{mod}}_doMorph==1.0){'
-    .endl()+'   pos = vec4( '+prfx+'_attrMorphTargetA * {{mod}}_fade + '+prfx+'_attrMorphTargetB * (1.0 - {{mod}}_fade ), 1. );'
-    .endl()+' }'
-    .endl();
-
-var uniFade=null;
-var module=null;
-var shader=null;
-var uniDoMorph=null;
 
 function removeModule()
 {

@@ -5,7 +5,6 @@ const
     inY=op.inValueFloat("Screen Y"),
     inZ=op.inValueFloat("Screen Z"),
 
-
     next=op.outTrigger("Next"),
 
     hasHit=op.outValue("Has Hit"),

@@ -14,7 +14,7 @@ var y=op.inValue("y");
 var z=op.inValue("z");
 
 var needsUpdateToZero=true;
-
+var mscaleUni=null;
 
 var shader=null;
 
@@ -50,7 +50,6 @@ function updateToZero()
 
 
 
-
 op.render.onLinkChanged=removeModule;
 
 op.render.onTriggered=function()
@@ -61,6 +60,7 @@ op.render.onTriggered=function()
          return;
     }
 
+
     if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
@@ -70,7 +70,7 @@ op.render.onTriggered=function()
             });
 
 
-    if(CABLES.UI && CABLES.UI.renderHelper)
+    if(CABLES.UI && (gui.patch().isCurrentOp(op) ||  CABLES.UI.renderHelper))
     {
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
@@ -91,6 +91,7 @@ op.render.onTriggered=function()
                 srcHeadVert:srcHeadVert,
                 srcBodyVert:srcBodyVert
             });
+
 
         inSize.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'size',inSize);
         inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);

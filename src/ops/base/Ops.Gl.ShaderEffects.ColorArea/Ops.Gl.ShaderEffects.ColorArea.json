@@ -32,37 +32,44 @@
             },
             {
                 "type": "0",
+                "name": "Blend ",
+                "group": "Color",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Blend ",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "x",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "y",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "z",
+                "group": "Position",
                 "subType": "number"
             },
             {

@@ -1,28 +1,29 @@
-var render=op.inTrigger("Render");
-var next=op.outTrigger("Next");
-var inGeomA=op.inObject("Geometry 1");
-var inGeomB=op.inObject("Geometry 2");
-var inFade=op.inValueSlider("Fade");
+const
+    render=op.inTrigger("Render"),
+    next=op.outTrigger("Next"),
+    inGeomA=op.inObject("Geometry 1"),
+    inGeomB=op.inObject("Geometry 2"),
+    inFade=op.inValueSlider("Fade"),
+    inNormals=op.inValueBool("Normals");
 
 var cgl=op.patch.cgl;
 var shader=null;
 var mesh=null;
 var module=null;
 var needsRebuild=true;
-var uniFade=null;
+var needsRebuildShader=true;
 
-inGeomA.onChange=rebuildLater;
-inGeomB.onChange=rebuildLater;
+op.onDelete=render.onLinkChanged=removeModule;
+inGeomA.onChange=inGeomB.onChange=rebuildLater;
+inNormals.onChange=rebuildShaderLater;
 
+var srcBodyVert=attachments.morph_geometries_vert;
 var srcHeadVert=''
-    .endl()+'IN vec3 MOD_morphTarget;'
+    .endl()+'IN vec3 MOD_targetPosition;'
+    .endl()+'IN vec3 MOD_targetNormal;'
     .endl()+'UNI float MOD_fade;'
     .endl();
 
-var srcBodyVert=attachments.morph_geometries_vert;
-
-render.onLinkChanged=removeModule;
-op.onDelete=removeModule;
 
 function removeModule()
 {
@@ -35,25 +36,7 @@ function removeModule()
 
 render.onTriggered=function()
 {
-    
-    if(cgl.getShader()!=shader)
-    {
-        if(shader) removeModule();
-        shader=cgl.getShader();
-        module=shader.addModule(
-            {
-                priority:-11,
-                title:op.objName,
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
-            });
-
-        console.log('morph module inited');
-        uniFade=new CGL.Uniform(shader,'f',module.prefix+'fade',inFade);
-        needsRebuild=true;
-    }
-
+    if(cgl.getShader()!=shader || needsRebuildShader) rebuildShader();
     if(needsRebuild)rebuild();
     if(!mesh)return;
 
@@ -61,13 +44,35 @@ render.onTriggered=function()
     next.trigger();
 };
 
-function doRender()
+function rebuildShader()
 {
-    next.trigger();    
+    if(shader) removeModule();
+    shader=cgl.getShader();
+    module=shader.addModule(
+        {
+            priority:-11,
+            title:op.objName,
+            name:'MODULE_VERTEX_POSITION',
+            srcHeadVert:srcHeadVert,
+            srcBodyVert:srcBodyVert
+        });
+
+    new CGL.Uniform(shader,'f',module.prefix+'fade',inFade);
+
+    shader.toggleDefine("MORPH_NORMALS",inNormals.get());
+
+    needsRebuild=true;
+    needsRebuildShader=false;
 }
 
 function rebuildLater()
 {
+    needsRebuild=true;
+}
+
+function rebuildShaderLater()
+{
+    needsRebuildShader=true;
     needsRebuild=true;
 }
 
@@ -79,13 +84,15 @@ function rebuild()
         if(mesh)mesh.dispose();
         mesh=new CGL.Mesh(cgl,geom);
         mesh.addVertexNumbers=true;
-        mesh.addAttribute(module.prefix+'morphTarget',inGeomB.get().vertices,3);
+        mesh.addAttribute(module.prefix+'targetPosition',inGeomB.get().vertices,3);
+
+        if(inNormals.get())
+            mesh.addAttribute(module.prefix+'targetNormal',inGeomB.get().vertexNormals,3);
 
         needsRebuild=false;
     }
     else
     {
-        // console.log('no rebuild');
         if(mesh)mesh.dispose();
         mesh=null;
         needsRebuild=true;

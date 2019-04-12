@@ -189,7 +189,7 @@ void main()
         );
 
         N=rr/ssm;
-        N.y*=-1.0;
+        N.zyx*=-1.0;
     #endif
 
 

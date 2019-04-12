@@ -20,10 +20,10 @@ var srcHeadVert=''
 
 var srcBodyVert=''
     .endl()+'#ifndef WORLDSPACE'
-    .endl()+'   MOD_pos=pos;'
+    .endl()+'   MOD_pos=vec4(vPosition,1.0);'
     .endl()+'#endif'
     .endl()+'#ifdef WORLDSPACE'
-    .endl()+'   MOD_pos=pos*mMatrix;'
+    .endl()+'   MOD_pos=vec4(vPosition,1.0)*mMatrix;'
     .endl()+'#endif'
     .endl();
 
@@ -31,7 +31,6 @@ var srcHeadFrag=attachments.pixelnoise_frag
     .endl()+'UNI float MOD_scale;'
     .endl()+'UNI float MOD_amount;'
     .endl()+'UNI float MOD_r,MOD_g,MOD_b;'
-
     .endl();
 
 var srcBodyFrag=''

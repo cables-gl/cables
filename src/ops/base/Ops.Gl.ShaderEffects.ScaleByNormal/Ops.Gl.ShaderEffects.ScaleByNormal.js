@@ -1,20 +1,16 @@
+const render=op.inTrigger("render");
+const inStrength=op.inValue("Strength",1);
+const next=op.outTrigger("trigger");
 
-var cgl=op.patch.cgl;
-
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-
-var inStrength=op.inValue("Strength",1);
-
+const cgl=op.patch.cgl;
 
 var shader=null;
 
-var srcHeadVert=attachments.scalebynormal_vert;
-
-var srcBodyVert=''
+const srcHeadVert=attachments.scalebynormal_vert;
+const srcBodyVert=''
     .endl()+'pos=MOD_scaler(pos,mat3(modelMatrix)*attrVertNormal);'
     .endl();
-    
+
 var moduleVert=null;
 
 function removeModule()
@@ -23,17 +19,16 @@ function removeModule()
     shader=null;
 }
 
+render.onLinkChanged=removeModule;
 
-op.render.onLinkChanged=removeModule;
-
-op.render.onTriggered=function()
+render.onTriggered=function()
 {
     if(!cgl.getShader())
     {
-        op.trigger.trigger();
+        next.trigger();
         return;
     }
-    
+
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
@@ -52,5 +47,5 @@ op.render.onTriggered=function()
 
     if(!shader)return;
 
-    op.trigger.trigger();
+    next.trigger();
 };

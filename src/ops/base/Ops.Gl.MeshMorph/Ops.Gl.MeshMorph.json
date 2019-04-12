@@ -17,6 +17,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "smooth",
+                "subType": "boolean"
+            },
+            {
                 "type": "2",
                 "name": "Geometry 0"
             },
@@ -47,11 +52,6 @@
             {
                 "type": "2",
                 "name": "Geometry 7"
-            },
-            {
-                "type": "0",
-                "name": "smooth",
-                "subType": "boolean"
             }
         ],
         "portsOut": [

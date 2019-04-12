@@ -3,6 +3,10 @@ var render=op.inTrigger("Render");
 var next=op.outTrigger("Next");
 var winOrient=op.outValue("Window Orientation");
 
+var rotX = op.inValueFloat("RotX",0);
+var rotY = op.inValueFloat("RotY",0);
+var rotZ = op.inValueFloat("RotZ",0);
+
 window.addEventListener("deviceorientation", onOrientationChange,true);
 
 var cgl=op.patch.cgl;
@@ -30,7 +34,8 @@ render.onTriggered=function()
 
     mat4.fromQuat(transMatrix,tempQuat);
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
-    mat4.translate(cgl.vMatrix,cgl.vMatrix,[1,0,0]);
+    //mat4.translate(cgl.vMatrix,cgl.vMatrix,[1,0,0]);//original code
+    //mat4.translate(cgl.vMatrix,cgl.vMatrix,[0,0,0]);
 
     next.trigger();
     cgl.popViewMatrix();
@@ -55,14 +60,14 @@ function quatFromEuler(quat,alpha,beta,gamma)
 	quat[2] = cX * cY * sZ + sX * sY * cZ;
 	quat[3] = cX * cY * cZ - sX * sY * sZ;
 
-	return quat;	  
+	return quat;
 }
 
 function onOrientationChange(event)
 {
-    var alpha = (event.alpha || 0);
-    var beta  = (event.beta || 0 );
-    var gamma = (event.gamma || 0);
+    var alpha = (event.alpha || 0) - rotX.get() ;
+    var beta  = (event.beta || 0 ) - rotY.get() ;
+    var gamma = (event.gamma || 0) - rotZ.get();
 
     winOrient.set( window.orientation||0 );
     quatFromEuler(viewDirQuat,alpha,beta,gamma);
