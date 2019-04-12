@@ -11,7 +11,6 @@ const inAmount=op.inValueSlider("Amount",0.5);
 const inFalloff=op.inValueSlider("Falloff",0);
 const inInvert=op.inValueBool("Invert");
 
-
 // rgba colors
 const r = op.inValueSlider("r", Math.random());
 const g = op.inValueSlider("g", Math.random());
@@ -26,7 +25,6 @@ const y=op.inValue("y");
 const z=op.inValue("z");
 
 const sizeX=op.inValueSlider("Size X",1);
-
 
 
 const inWorldSpace=op.inValueBool("WorldSpace",true);
@@ -124,7 +122,7 @@ op.render.onTriggered=function()
                     posZ:z
                 });
 
-        if(CABLES.UI.renderHelper)
+        if(CABLES.UI.renderHelper ||gui.patch().isCurrentOp(op))
         {
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
             CABLES.GL_MARKER.drawSphere(op,inSize.get());

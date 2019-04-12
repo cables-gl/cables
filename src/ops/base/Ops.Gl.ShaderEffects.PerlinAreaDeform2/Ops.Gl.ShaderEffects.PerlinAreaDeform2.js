@@ -80,7 +80,7 @@ op.render.onTriggered=function()
         cgl.pushModelMatrix();
         mat4.identity(cgl.mMatrix);
 
-        if(CABLES.UI.renderHelper)
+        if(CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))
         {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
