@@ -24,6 +24,9 @@ var CABLES = CABLES || {};
  * @class
  */
 CABLES.Patch = function(cfg) {
+
+    CABLES.EventTarget.apply(this);
+
     this.ops = [];
     this.settings = {};
     this.timer = new CABLES.Timer();
@@ -49,6 +52,7 @@ CABLES.Patch = function(cfg) {
     this._frameNum = 0;
     this.instancing = new CABLES.Instancing();
     this.onOneFrameRendered=null;
+    this.namedTriggers={};
 
     this._origData=null;
     this._frameNext = 0;
@@ -72,7 +76,6 @@ CABLES.Patch = function(cfg) {
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
-    
     this._variableListeners = [];
     this.vars = {};
     if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
@@ -869,6 +872,13 @@ CABLES.Patch.prototype.profile = function(enable) {
 // ----------------------
 
 
+// CABLES
+
+// namedTriggers
+
+
+
+// ----------------------
 
 
 /**
@@ -938,17 +948,19 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
 
 // ------------------
 
-// old?
-CABLES.Patch.prototype.addVariableListener = function(cb) {
-    this._variableListeners.push(cb);
-};
 
-// old?
-CABLES.Patch.prototype._callVariableListener = function(cb) {
-    for (var i = 0; i < this._variableListeners.length; i++) {
-        this._variableListeners[i]();
-    }
-};
+
+// // old?
+// CABLES.Patch.prototype.addVariableListener = function(cb) {
+//     this._variableListeners.push(cb);
+// };
+
+// // old?
+// CABLES.Patch.prototype._callVariableListener = function(cb) {
+//     for (var i = 0; i < this._variableListeners.length; i++) {
+//         this._variableListeners[i]();
+//     }
+// };
 
 
 /**
@@ -975,7 +987,8 @@ CABLES.Patch.prototype.setVarValue = function(name, val) {
         this._variables[name].setValue(val);
     } else {
         this._variables[name] = new CABLES.Patch.Variable(name, val);
-        this._callVariableListener();
+        // this._callVariableListener();
+        this.emitEvent("variablesChanged");
     }
     return this._variables[name];
 };
@@ -984,8 +997,6 @@ CABLES.Patch.prototype.getVarValue = function(name, val) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name].getValue();
 };
-
-
 
 /**
  * @name CABLES.Patch#getVar
@@ -1027,14 +1038,14 @@ CABLES.Patch.prototype.preRenderOps = function() {
     var stopwatch=null;
     if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('prerendering');
 
-    var count=0;
+    // var count=0;
     for(var i=0;i<this.ops.length;i++)
     {
         if(this.ops[i].preRender)
         {
             this.ops[i].preRender();
             console.log('prerender '+this.ops[i].objName);
-            count++;
+            // count++;
         }
     }
     

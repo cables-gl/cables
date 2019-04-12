@@ -5,7 +5,8 @@ op.varName.onChange=updateName;
 val.onChange=update;
 val.changeAlways=true;
 
-op.patch.addVariableListener(updateVarNamesDropdown);
+// op.patch.addVariableListener(updateVarNamesDropdown);
+op.patch.addEventListener("variablesChanged",updateVarNamesDropdown);
 
 updateVarNamesDropdown();
 

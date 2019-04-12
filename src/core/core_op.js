@@ -539,7 +539,6 @@ CABLES.Op = function()
 
         for(var ipo=0;ipo<this.portsOut.length;ipo++)
             if(this.portsOut[ipo].id==id)return this.portsOut[ipo];
-
     };
 
     CABLES.Op.prototype.getPort=function(name)
@@ -568,7 +567,6 @@ CABLES.Op = function()
         if(!this.patch.silent) Function.prototype.apply.apply(console.warn, [console, arguments]);
     };
 
-
     CABLES.Op.prototype.undoUnLinkTemporary=function()
     {
         if(this.shakeLink)this.shakeLink.remove();
@@ -585,7 +583,6 @@ CABLES.Op = function()
                     this.oldLinks[i].out.getName()
                     );
             }
-
             this.oldLinks.length=0;
         }
     };
@@ -594,7 +591,6 @@ CABLES.Op = function()
     {
         for(var ipo=0;ipo<this.portsOut.length;ipo++) this.portsOut[ipo].removeLinks();
         for(var ipi=0;ipi<this.portsIn.length;ipi++) this.portsIn[ipi].removeLinks();
-        
     };
 
     CABLES.Op.unLinkTempReLinkP1=null;
@@ -653,19 +649,16 @@ CABLES.Op = function()
                 CABLES.Op.unLinkTempReLinkP2.getName()
                 );
         }
-        
     };
 
     CABLES.Op.prototype.profile=function(enable)
     {
-        // for(var ipi in this.portsIn)
         for(var ipi=0;ipi<this.portsIn.length;ipi++)
             this.portsIn[ipi]._onTriggered=this.portsIn[ipi]._onTriggeredProfiling;
     };
 
     CABLES.Op.prototype.findParent=function(objName)
     {
-        // for(var ipi in this.portsIn)
         for(var ipi=0;ipi<this.portsIn.length;ipi++)
         {
             if(this.portsIn[ipi].isLinked())
@@ -782,12 +775,7 @@ CABLES.Op = function()
 //                 {
 //
 //                     var i=0;
-//
-//
 // // console.log('trigger',this._instances.length);
-//
-//
-//
 //
 //                 }.bind(this,ipi );
 //
@@ -873,8 +861,6 @@ CABLES.Op = function()
             else this._eventCallbacks[which].slice(idx);
         }
     }
-
-    
 
     CABLES.Op.prototype.fireEvent=function(which,params)
     {
