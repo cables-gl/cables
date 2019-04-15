@@ -100,15 +100,17 @@ function reload()
 
         // op.uiAttr({"info":nfo});
 
-        var
-            indices = geom.verticesIndices = [],
-            faces = jsonMesh.faces,
-            face, i
-        ;
-        for(i = 0; i < faces.length; i++) {
-            face=jsonMesh.faces[i];
-            Array.prototype.push.apply(indices, face);
-        }
+        // var
+            // indices = geom.verticesIndices || [],
+            // faces = jsonMesh.faces,
+            // face, i
+        // ;
+
+        // if(faces)
+        //     for(i = 0; i < faces.length; i++) {
+        //         face=jsonMesh.faces[i];
+        //         Array.prototype.push.apply(indices, face);
+        //     }
 
         var nfo='';
         nfo += (geom.verticesIndices.length/3)+' faces <br/>';
