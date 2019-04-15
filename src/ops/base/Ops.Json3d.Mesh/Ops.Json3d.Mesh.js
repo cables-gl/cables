@@ -70,11 +70,12 @@ function reload()
         }
         op.uiAttribs.warning='';
 
-        var geom=new CGL.Geometry();
-        geom.vertices=jsonMesh.vertices.slice();
-        geom.vertexNormals=jsonMesh.normals||[];
-        geom.tangents=jsonMesh.tangents||[];
-        geom.biTangents=jsonMesh.bitangents||[];
+        var geom=CGL.Geometry.json2geom(jsonMesh);
+        // var geom=new CGL.Geometry();
+        // geom.vertices=(jsonMesh.vertices||[]).slice();
+        // geom.vertexNormals=jsonMesh.normals||[];
+        // geom.tangents=jsonMesh.tangents||[];
+        // geom.biTangents=jsonMesh.bitangents||[];
 
         if(centerPivot.get()) geom.center();
 
