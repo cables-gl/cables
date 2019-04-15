@@ -9,10 +9,8 @@ var filename=op.inFile("file",'3d json');
 
 var meshIndex=op.inValueInt("Mesh Index",0);
 
-
 var draw=op.inValueBool("Draw",true);
 var centerPivot=op.inValueBool("Center Mesh",true);
-
 
 var inSize=op.inValue("Size",1);
 
@@ -166,8 +164,6 @@ function setMesh()
         {
             geom.vertices[i]/=bnd.maxAxis;
         }
-
-
     }
     else
     {
@@ -182,8 +178,6 @@ function setMesh()
 
         var i=0;
         geom=CGL.Geometry.json2geom(jsonGeom);
-
-
     }
 
     if(centerPivot.get())geom.center();
@@ -200,9 +194,6 @@ function setMesh()
     mesh=new CGL.Mesh(cgl,geom);
     needSetMesh=false;
     meshes[index]=mesh;
-
-    // console.log("set mesh done");
-    // console.log(geom);
 
     op.uiAttr({'warning':null});
 }

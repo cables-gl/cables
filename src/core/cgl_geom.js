@@ -572,27 +572,37 @@ CGL.Geometry.json2geom=function(jsonMesh)
     var geom=new CGL.Geometry();
     geom.verticesIndices=[];
 
-    geom.vertices=jsonMesh.vertices;
-
+    geom.vertices=jsonMesh.vertices||[];
     geom.vertexNormals=jsonMesh.normals||[];
     geom.vertexColors=jsonMesh.colors||[];
     geom.tangents=jsonMesh.tangents||[];
     geom.biTangents=jsonMesh.bitangents||[];
-        
-    // console.log(jsonMesh.texturecoords);
-
     if(jsonMesh.texturecoords) geom.setTexCoords( jsonMesh.texturecoords[0] );
-    
-    // console.log(geom.texCoords);
-    // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 
-    geom.verticesIndices.length=jsonMesh.faces.length*3;
-    for(var i=0;i<jsonMesh.faces.length;i++)
+    if(jsonMesh.vertices_b64) geom.vertices=new Float32Array(CABLES.b64decTypedArray(jsonMesh.vertices_b64));
+    if(jsonMesh.normals_b64) geom.vertexNormals=new Float32Array(CABLES.b64decTypedArray(jsonMesh.normals_b64));
+    if(jsonMesh.tangents_b64) geom.tangents=new Float32Array(CABLES.b64decTypedArray(jsonMesh.tangents_b64));
+    if(jsonMesh.bitangents_b64) geom.biTangents=new Float32Array(CABLES.b64decTypedArray(jsonMesh.bitangents_b64));
+    if(jsonMesh.texturecoords_b64) geom.setTexCoords( new Float32Array(CABLES.b64decTypedArray(jsonMesh.texturecoords_b64[0])));
+
+    // console.log(jsonMesh.vertices[2],geom.vertices[2]);
+    // console.log(jsonMesh.vertices.length,geom.vertices.length);
+    // console.log(geom);
+
+    if(jsonMesh.faces_b64)
     {
-        geom.verticesIndices[i*3]=jsonMesh.faces[i][0];
-        geom.verticesIndices[i*3+1]=jsonMesh.faces[i][1];
-        geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
+        geom.verticesIndices=new Uint32Array(CABLES.b64decTypedArray(jsonMesh.faces_b64));
     }
-    
+    else
+    {
+        geom.verticesIndices.length=jsonMesh.faces.length*3;
+        for(var i=0;i<jsonMesh.faces.length;i++)
+        {
+            geom.verticesIndices[i*3]=jsonMesh.faces[i][0];
+            geom.verticesIndices[i*3+1]=jsonMesh.faces[i][1];
+            geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
+        }
+    }
+
     return geom;
 };
