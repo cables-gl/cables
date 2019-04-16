@@ -10,26 +10,35 @@ inValue.onChange=update;
 function update()
 {
     var obj=inObject.get();
-    if(!obj)obj={};
-    
-    if(inKey.get().indexOf(",")>-1)
+    if(!obj)
     {
-        const keys=inKey.get().split(',');
-        // console.log(keys);
-        for(var i in keys)
-        {
-            if(keys[i] && keys[i].length>0)
-            {
-                obj[keys[i]]=inValue.get();
-            }
-        }
+        obj={};
     }
     else
     {
-        obj[inKey.get()]=inValue.get();
-    }
-    
-    outObject.set(null);
-    outObject.set(obj);
+        var changed=false;
 
+        if(inKey.get().indexOf(",")>-1)
+        {
+            const keys=inKey.get().split(',');
+
+            for(var i in keys)
+            {
+                if(keys[i] && keys[i].length>0)
+                {
+                    if(obj[keys[i]]!=inValue.get())changed=true;
+                    obj[keys[i]]=inValue.get();
+                }
+            }
+        }
+        else
+        {
+            if(obj[inKey.get()]!=inValue.get())changed=true;
+            obj[inKey.get()]=inValue.get();
+        }
+
+        if(changed) outObject.set(null);
+    }
+
+    outObject.set(obj);
 }

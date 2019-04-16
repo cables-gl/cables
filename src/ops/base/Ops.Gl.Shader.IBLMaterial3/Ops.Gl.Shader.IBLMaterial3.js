@@ -117,6 +117,8 @@ inFresnel.onChange=function()
     {
         shader.define("ENABLE_FRESNEL");
         inFresnelWidth.setUiAttribs({greyout:false});
+        inFresnelExponent.setUiAttribs({greyout:false});
+        inFresnelAmount.setUiAttribs({greyout:false});
         fresnelR.setUiAttribs({greyout:false});
         fresnelG.setUiAttribs({greyout:false});
         fresnelB.setUiAttribs({greyout:false});
@@ -125,6 +127,8 @@ inFresnel.onChange=function()
     {
         shader.removeDefine("ENABLE_FRESNEL");
         inFresnelWidth.setUiAttribs({greyout:true});
+        inFresnelExponent.setUiAttribs({greyout:true});
+        inFresnelAmount.setUiAttribs({greyout:true});
         fresnelR.setUiAttribs({greyout:true});
         fresnelG.setUiAttribs({greyout:true});
         fresnelB.setUiAttribs({greyout:true});

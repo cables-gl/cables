@@ -35,7 +35,7 @@ function update()
 
         if(sorting.get()==SORT_RANDOM)
         {
-            faces=CABLES.shuffleArray(faces);    
+            faces=CABLES.shuffleArray(faces);
         }
         else
         if(sorting.get()==SORT_Y)
@@ -107,51 +107,91 @@ function update()
         var newFaces=[];
         var newNormals=[];
         var newTexCoords=[];
+        var newTangents=[];
+        var newBiTangents=[];
 
         if(reverse.get())
         {
-            faces=faces.reverse(); 
+            faces=faces.reverse();
         }
 
         faces=[].concat.apply([], faces);
 
         for(var i=0;i<faces.length;i+=3)
         {
-            newFaces.push( newVerts.length/3 );
-            newVerts.push( geom.vertices[ faces[i+0]*3+0] );
-            newVerts.push( geom.vertices[ faces[i+0]*3+1] );
-            newVerts.push( geom.vertices[ faces[i+0]*3+2] );
-            newNormals.push( geom.vertexNormals[ faces[i+0]*3+0] );
-            newNormals.push( geom.vertexNormals[ faces[i+0]*3+1] );
-            newNormals.push( geom.vertexNormals[ faces[i+0]*3+2] );
-            newTexCoords.push( geom.texCoords[ faces[i+0]*2+0] );
-            newTexCoords.push( geom.texCoords[ faces[i+0]*2+1] );
+            newFaces.push(
+                newVerts.length/3 );
+            newVerts.push(
+                geom.vertices[faces[i+0]*3+0],
+                geom.vertices[faces[i+0]*3+1],
+                geom.vertices[faces[i+0]*3+2] );
+            newNormals.push(
+                geom.vertexNormals[faces[i+0]*3+0],
+                geom.vertexNormals[faces[i+0]*3+1],
+                geom.vertexNormals[faces[i+0]*3+2] );
+            newTexCoords.push(
+                geom.texCoords[faces[i+0]*2+0],
+                geom.texCoords[faces[i+0]*2+1] );
+            newTangents.push(
+                geom.tangents[faces[i+0]*3+0],
+                geom.tangents[faces[i+0]*3+1],
+                geom.tangents[faces[i+0]*3+2] );
+            newBiTangents.push(
+                geom.biTangents[faces[i+0]*3+0],
+                geom.biTangents[faces[i+0]*3+1],
+                geom.biTangents[faces[i+0]*3+2] );
 
-            newFaces.push( newVerts.length/3 );
-            newVerts.push( geom.vertices[ faces[i+1]*3+0] );
-            newVerts.push( geom.vertices[ faces[i+1]*3+1] );
-            newVerts.push( geom.vertices[ faces[i+1]*3+2] );
-            newNormals.push( geom.vertexNormals[ faces[i+1]*3+0] );
-            newNormals.push( geom.vertexNormals[ faces[i+1]*3+1] );
-            newNormals.push( geom.vertexNormals[ faces[i+1]*3+2] );
-            newTexCoords.push( geom.texCoords[ faces[i+1]*2+0] );
-            newTexCoords.push( geom.texCoords[ faces[i+1]*2+1] );
+            newFaces.push(
+                newVerts.length/3 );
+            newVerts.push(
+                geom.vertices[faces[i+1]*3+0],
+                geom.vertices[faces[i+1]*3+1],
+                geom.vertices[faces[i+1]*3+2] );
+            newNormals.push(
+                geom.vertexNormals[faces[i+1]*3+0],
+                geom.vertexNormals[faces[i+1]*3+1],
+                geom.vertexNormals[faces[i+1]*3+2] );
+            newTexCoords.push(
+                geom.texCoords[faces[i+1]*2+0],
+                geom.texCoords[faces[i+1]*2+1] );
+            newTangents.push(
+                geom.tangents[faces[i+1]*3+0],
+                geom.tangents[faces[i+1]*3+1],
+                geom.tangents[faces[i+1]*3+2] );
+            newBiTangents.push(
+                geom.biTangents[faces[i+1]*3+0],
+                geom.biTangents[faces[i+1]*3+1],
+                geom.biTangents[faces[i+1]*3+2] );
 
-            newFaces.push( newVerts.length/3 );
-            newVerts.push( geom.vertices[ faces[i+2]*3+0] );
-            newVerts.push( geom.vertices[ faces[i+2]*3+1] );
-            newVerts.push( geom.vertices[ faces[i+2]*3+2] );
-            newNormals.push( geom.vertexNormals[ faces[i+2]*3+0] );
-            newNormals.push( geom.vertexNormals[ faces[i+2]*3+1] );
-            newNormals.push( geom.vertexNormals[ faces[i+2]*3+2] );
-            newTexCoords.push( geom.texCoords[ faces[i+2]*2+0] );
-            newTexCoords.push( geom.texCoords[ faces[i+2]*2+1] );
+            newFaces.push(
+                newVerts.length/3 );
+            newVerts.push(
+                geom.vertices[faces[i+2]*3+0],
+                geom.vertices[faces[i+2]*3+1],
+                geom.vertices[faces[i+2]*3+2] );
+            newNormals.push(
+                geom.vertexNormals[faces[i+2]*3+0],
+                geom.vertexNormals[faces[i+2]*3+1],
+                geom.vertexNormals[faces[i+2]*3+2] );
+            newTexCoords.push(
+                geom.texCoords[faces[i+2]*2+0],
+                geom.texCoords[faces[i+2]*2+1] );
+            newTangents.push(
+                geom.tangents[faces[i+2]*3+0],
+                geom.tangents[faces[i+2]*3+1],
+                geom.tangents[faces[i+2]*3+2] );
+            newBiTangents.push(
+                geom.biTangents[faces[i+2]*3+0],
+                geom.biTangents[faces[i+2]*3+1],
+                geom.biTangents[faces[i+2]*3+2] );
         }
 
         newGeom.vertices=newVerts;
         newGeom.vertexNormals=newNormals;
         newGeom.verticesIndices=newFaces;
         newGeom.texCoords=newTexCoords;
+        newGeom.tangents=newTangents;
+        newGeom.biTangents=newBiTangents;
 
         outGeom.set(newGeom);
     }

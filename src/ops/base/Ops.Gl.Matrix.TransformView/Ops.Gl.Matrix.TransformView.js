@@ -28,11 +28,6 @@ var rotChanged=true;
 
 render.onTriggered=function()
 {
-
-
-
-
-
     var updateMatrix=false;
     if(translationChanged)
     {
@@ -53,15 +48,6 @@ render.onTriggered=function()
     cgl.pushViewMatrix();
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
 
-
-
-
-
-
-
-
-
-
     trigger.trigger();
     cgl.popViewMatrix();
 
@@ -72,8 +58,6 @@ render.onTriggered=function()
                 posY:posY,
                 posZ:posZ,
             });
-
-
 };
 
 op.transform3d=function()

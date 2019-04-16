@@ -27,6 +27,7 @@ UNI sampler2D maskReflection;
 #endif
 
 #ifdef TEX_AO
+    IN vec2 texCoordOrig;
     UNI sampler2D texAo;
     UNI float aoIntensity;
 #endif
@@ -193,25 +194,25 @@ void main()
     #endif
 
 
-{
-    // float rr=((MOD_meshPixelNoise(vertPos*5.0)-0.5)*1.0);
-    // N.z+=N.z*rr;
-    // // N.z+=N.z*rr;
+    {
+        // float rr=((MOD_meshPixelNoise(vertPos*5.0)-0.5)*1.0);
+        // N.z+=N.z*rr;
+        // // N.z+=N.z*rr;
 
-    // // N.x+=N.x* ((MOD_meshPixelNoise(vertPos*8.0)-1.0)*1.0);
-    // // N.y+=N.y* ((MOD_meshPixelNoise(vertPos*8.0)-1.0)*1.0);
-    // // N+=N* ((MOD_meshPixelNoise(vertPos*18.0)-0.5)*2.0);
+        // // N.x+=N.x* ((MOD_meshPixelNoise(vertPos*8.0)-1.0)*1.0);
+        // // N.y+=N.y* ((MOD_meshPixelNoise(vertPos*8.0)-1.0)*1.0);
+        // // N+=N* ((MOD_meshPixelNoise(vertPos*18.0)-0.5)*2.0);
 
-    // // rects
-    // N.z*=(MOD_meshPixelNoise(mod(vertPos*0.2,0.3))-0.5)*1.0;
-    // // N.z*=(MOD_meshPixelNoise(mod(N*0.2,0.3))-0.5)*1.0;
-    // // N.z+=N.z*(MOD_meshPixelNoise(mod(vertPos*0.2,0.3))-0.5)*1.5;
+        // // rects
+        // N.z*=(MOD_meshPixelNoise(mod(vertPos*0.2,0.3))-0.5)*1.0;
+        // // N.z*=(MOD_meshPixelNoise(mod(N*0.2,0.3))-0.5)*1.0;
+        // // N.z+=N.z*(MOD_meshPixelNoise(mod(vertPos*0.2,0.3))-0.5)*1.5;
 
-    // // vert
-    // N.z+=N.z*(MOD_meshPixelNoise(mod(vec3(vertPos.y*0.2),0.1))-0.5)*1.5;
-    // N.x+=N.x*(MOD_meshPixelNoise(mod(vec3(vertPos.z*0.2),0.3))-0.5)*1.5;
-    // N.+=N.*(MOD_meshPixelNoise(mod(vec3(vertPos.z*0.2),0.3))-0.5)*1.5;
-}
+        // // vert
+        // N.z+=N.z*(MOD_meshPixelNoise(mod(vec3(vertPos.y*0.2),0.1))-0.5)*1.5;
+        // N.x+=N.x*(MOD_meshPixelNoise(mod(vec3(vertPos.z*0.2),0.3))-0.5)*1.5;
+        // N.+=N.*(MOD_meshPixelNoise(mod(vec3(vertPos.z*0.2),0.3))-0.5)*1.5;
+    }
 
 
     N=normalize(N);
@@ -221,9 +222,7 @@ void main()
     RN.xz *= matRotation;
     col=SAMPLETEX(irradiance,RN,8.0);
 
-    #ifdef TEX_AO
-        col.rgb *= clamp(texture(texAo,texCoord).r+(1.0-aoIntensity),0.0,1.0);
-    #endif
+
 
     #ifdef TEX_DIFFUSE
         col.rgb *= texture(texDiffuse,texCoord).rgb;
@@ -254,8 +253,9 @@ void main()
         // col.rgb=viewDirection;
 
     #endif
-
-
+    #ifdef TEX_AO
+        col.rgb *= clamp(texture(texAo,texCoordOrig).r+(1.0-aoIntensity),0.0,1.0);
+    #endif
     // OPACITY
     col.a=1.0;
     #ifdef TEX_OPACITY
@@ -263,11 +263,6 @@ void main()
     #endif
 
     col.a*=opacity;
-    // col.rgb=N.rgb;
-    // col.rgb=vec3(opacity);
-
-
-
 
     {{MODULE_COLOR}}
 
@@ -277,6 +272,8 @@ void main()
     // #endif
 
     outColor=col;
+
+    // outColor.rgb=newNormalMatrix[2];
 
 }
 

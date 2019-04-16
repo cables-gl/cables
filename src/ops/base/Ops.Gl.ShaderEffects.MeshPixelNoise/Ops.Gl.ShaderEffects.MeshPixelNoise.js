@@ -5,6 +5,12 @@ const
     inAmount=op.inValueSlider("Amount",0.3),
     inWorldSpace=op.inValueBool("WorldSpace");
 
+const
+    r = op.inValueSlider("r",0),
+    g = op.inValueSlider("g",0),
+    b = op.inValueSlider("b",0);
+r.setUiAttribs({ colorPick: true });
+
 
 const cgl=op.patch.cgl;
 var shader=null;
@@ -27,14 +33,11 @@ var srcBodyVert=''
     .endl()+'#endif'
     .endl();
 
-var srcHeadFrag=attachments.pixelnoise_frag
-    .endl()+'UNI float MOD_scale;'
-    .endl()+'UNI float MOD_amount;'
-    .endl()+'UNI float MOD_r,MOD_g,MOD_b;'
-    .endl();
+var srcHeadFrag=attachments.pixelnoise_frag;
 
 var srcBodyFrag=''
-    .endl()+'col.rgb -= MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
+    // .endl()+'col.rgb -= MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
+    .endl()+'col.rgb -= vec3(1.-MOD_r,1.-MOD_g,1.-MOD_b)*MOD_meshPixelNoise(MOD_pos.xyz*MOD_scale)*MOD_amount/4.0;'
     .endl();
 
 function updateWorldspace()
@@ -83,6 +86,9 @@ render.onTriggered=function()
 
         inScale.scale=new CGL.Uniform(shader,'f',moduleFrag.prefix+'scale',inScale);
         inAmount.amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
+        new CGL.Uniform(shader,'f',moduleFrag.prefix+'r',r);
+        new CGL.Uniform(shader,'f',moduleFrag.prefix+'g',g);
+        new CGL.Uniform(shader,'f',moduleFrag.prefix+'b',b);
         updateWorldspace();
     }
 

@@ -61,21 +61,23 @@ op.render.onTriggered=function()
     }
 
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op))
-        gui.setTransformGizmo(
-            {
-                posX:x,
-                posY:y,
-                posZ:z
-            });
-
-
-    if(CABLES.UI && (gui.patch().isCurrentOp(op) ||  CABLES.UI.renderHelper))
+    if(CABLES.UI)
     {
-        cgl.pushModelMatrix();
-        mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
-        CABLES.GL_MARKER.drawSphere(op,inSize.get());
-        cgl.popModelMatrix();
+        if(gui.patch().isCurrentOp(op))
+            gui.setTransformGizmo(
+                {
+                    posX:x,
+                    posY:y,
+                    posZ:z
+                });
+
+        if(gui.patch().isCurrentOp(op) ||  CABLES.UI.renderHelper)
+        {
+            cgl.pushModelMatrix();
+            mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
+            CABLES.GL_MARKER.drawSphere(op,inSize.get());
+            cgl.popModelMatrix();
+        }
     }
 
 

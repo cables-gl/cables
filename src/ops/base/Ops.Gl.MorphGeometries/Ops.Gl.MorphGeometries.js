@@ -10,11 +10,13 @@ var cgl=op.patch.cgl;
 var shader=null;
 var mesh=null;
 var module=null;
+var fadeUni=null;
 var needsRebuild=true;
 var needsRebuildShader=true;
 
 op.onDelete=render.onLinkChanged=removeModule;
-inGeomA.onChange=inGeomB.onChange=rebuildLater;
+inGeomA.onChange=
+    inGeomB.onChange=rebuildLater;
 inNormals.onChange=rebuildShaderLater;
 
 var srcBodyVert=attachments.morph_geometries_vert;
@@ -57,7 +59,7 @@ function rebuildShader()
             srcBodyVert:srcBodyVert
         });
 
-    new CGL.Uniform(shader,'f',module.prefix+'fade',inFade);
+    fadeUni=new CGL.Uniform(shader,'f',module.prefix+'fade',inFade);
 
     shader.toggleDefine("MORPH_NORMALS",inNormals.get());
 

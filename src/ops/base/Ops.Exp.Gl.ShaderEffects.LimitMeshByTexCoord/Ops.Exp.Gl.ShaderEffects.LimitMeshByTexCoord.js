@@ -18,10 +18,8 @@ axis.onChange=updateAxis;
 function updateAxis()
 {
     if(!shader)return;
-    if(axis.get()=='X') shader.define(moduleFrag.prefix+"AXIS_X");
-        else shader.removeDefine(moduleFrag.prefix+"AXIS_X");
-    if(axis.get()=='Y') shader.define(moduleFrag.prefix+"AXIS_Y");
-        else shader.removeDefine(moduleFrag.prefix+"AXIS_Y");
+    shader.toggleDefine(moduleFrag.prefix+"AXIS_X",axis.get()=='X');
+    shader.toggleDefine(moduleFrag.prefix+"AXIS_Y",axis.get()=='Y');
 }
 
 

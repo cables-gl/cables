@@ -45,6 +45,8 @@ void main()
 {
     vec4 pos = vec4( vPosition, 1. );
     mat4 mMatrix=modelMatrix;
+    vec3 tangent=attrTangent,
+        bitangent=attrBiTangent;
 
     texCoord=attrTexCoord;
 

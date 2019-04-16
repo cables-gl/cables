@@ -1,11 +1,12 @@
+
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
 IN float attrVertIndex;
-
-#ifdef HAS_NORMAL_TEXTURE
    IN vec3 attrTangent;
    IN vec3 attrBiTangent;
+
+#ifdef HAS_NORMAL_TEXTURE
 
    OUT vec3 vBiTangent;
    OUT vec3 vTangent;
@@ -41,6 +42,8 @@ void main()
     norm=attrVertNormal;
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix;
+    vec3 tangent=attrTangent;
+    vec3 bitangent=attrBiTangent;
 
     #ifdef HAS_NORMAL_TEXTURE
         vTangent=attrTangent;
@@ -58,14 +61,26 @@ void main()
         mat4 normalMatrix=mvMatrix;//inverse(transpose(mvMatrix));
     #endif
 
+
+    mat3 wmMatrix=mat3(mMatrix);
+    // mat3 newNormalMatrix=mat3(
+    //     normalize( wmMatrix*tangent ),
+    //     normalize( wmMatrix*bitangent ),
+    //     normalize( wmMatrix*norm )
+    // );
+
     e = normalize( vec3( mvMatrix * pos ) );
     vec3 n = normalize( mat3(normalMatrix) * norm );
+
 
     // mat3 nMatrix = transpose(inverse(mat3(mMatrix)));
     // vec3 n = normalize( mat3(nMatrix) * norm );
     // norm=n;
 
     vec3 r = reflect( e, n );
+
+
+
 
     float m = 2. * sqrt(
         pow(r.x, 2.0)+
