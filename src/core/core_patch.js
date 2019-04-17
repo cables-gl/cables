@@ -62,7 +62,7 @@ CABLES.Patch = function(cfg) {
 
     this.config = cfg || {
         glCanvasResizeToWindow: false,
-        glCanvasId: 'glcanvas',
+        // glCanvasId: 'glcanvas',
         prefixAssetPath: '',
         silent: false,
         onError: null,
@@ -82,7 +82,7 @@ CABLES.Patch = function(cfg) {
 
     this.cgl = new CGL.Context(this);
     
-    this.cgl.setCanvas(this.config.glCanvasId);
+    this.cgl.setCanvas(this.config.glCanvasId||'glcanvas');
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize('window');
     if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize('parent');
     this.loading.setOnFinishedLoading(this.config.onFinishedLoading);

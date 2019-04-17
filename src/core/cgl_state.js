@@ -66,6 +66,8 @@ CGL.Context = function(_patch) {
         CGL.TextureEffectMesh = CGL.TextureEffectMesh || null;
         this.canvas = document.getElementById(id);
 
+
+
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
         if (!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer = false;
@@ -74,7 +76,6 @@ CGL.Context = function(_patch) {
         if (!this.patch.config.canvas.hasOwnProperty('powerPreference')) this.patch.config.canvas.powerPreference = "high-performance";
 
         // if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
-
         this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
         if (this.gl) {
             this.glVersion = 2;
