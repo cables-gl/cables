@@ -157,6 +157,11 @@
                 "name": "Offset Y",
                 "group": "Texture Transform",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Transform Opacity",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

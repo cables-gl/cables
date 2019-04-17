@@ -26,8 +26,11 @@ UNI sampler2D maskReflection;
     UNI sampler2D texDiffuse;
 #endif
 
-#ifdef TEX_AO
+#ifdef ORIG_TEXCOORD
     IN vec2 texCoordOrig;
+#endif
+
+#ifdef TEX_AO
     UNI sampler2D texAo;
     UNI float aoIntensity;
 #endif
@@ -259,7 +262,13 @@ void main()
     // OPACITY
     col.a=1.0;
     #ifdef TEX_OPACITY
-        col.a*=texture(texOpacity,texCoord).r;
+        #ifdef TRANSFORM_OPACITY
+            col.a*=texture(texOpacity,texCoord).r;
+        #endif
+        #ifndef TRANSFORM_OPACITY
+            col.a*=texture(texOpacity,texCoordOrig).r;
+        #endif
+
     #endif
 
     col.a*=opacity;

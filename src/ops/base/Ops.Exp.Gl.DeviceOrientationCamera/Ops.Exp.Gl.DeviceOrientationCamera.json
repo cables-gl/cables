@@ -5,21 +5,6 @@
             {
                 "type": "1",
                 "name": "Render"
-            },
-            {
-                "type": "0",
-                "name": "RotX",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "RotY",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "RotZ",
-                "subType": "number"
             }
         ],
         "portsOut": [

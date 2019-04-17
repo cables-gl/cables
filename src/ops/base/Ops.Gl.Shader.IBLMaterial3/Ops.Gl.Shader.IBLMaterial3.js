@@ -49,7 +49,8 @@ const
     inRepeatX=op.inValue("Repeat X",1),
     inRepeatY=op.inValue("Repeat Y",1),
     inOffsetX=op.inValue("Offset X",0),
-    inOffsetY=op.inValue("Offset Y",0);
+    inOffsetY=op.inValue("Offset Y",0),
+    inTransfOpacity=op.inValueBool("Transform Opacity",true);
 op.setPortGroup("Texture Transform",[inRepeatX,inRepeatY,inOffsetX,inOffsetY]);
 
 const trigger=op.outTrigger("trigger");
@@ -66,6 +67,7 @@ inNormalScreen.onChange=
     inNormal.onChange=
     inDiffuse.onChange=
     inAo.onChange=
+    inTransfOpacity.onChange=
     inReflectionCubemap.onChange=updateTexturesDefines;
 
 
@@ -190,32 +192,19 @@ function updateTexturesDefines()
         shader.removeDefine("TEX_FORMAT_EQUIRECT");
     }
 
-    if(inNormalScreen.get()) shader.define("CALC_SSNORMALS");
-        else shader.removeDefine("CALC_SSNORMALS");
+    shader.toggleDefine("CALC_SSNORMALS",inNormalScreen.get());
+    shader.toggleDefine("TEX_ROUGHNESS",inRough.get());
+    shader.toggleDefine("TEX_REFLECTION",inReflection.get());
+    shader.toggleDefine("TEX_NORMAL",inNormal.get());
+    shader.toggleDefine("TEX_NORMAL_FLIP",inNormalFlip.get());
+    shader.toggleDefine("TEX_DIFFUSE",inDiffuse.get());
+    shader.toggleDefine("TEX_AO",inAo.get());
+    shader.toggleDefine("TEX_OPACITY",inOpacityMap.get());
+    shader.toggleDefine("MAP_REFLECTION",inReflectionCubemap.get());
+    shader.toggleDefine("TRANSFORM_OPACITY",inTransfOpacity.get());
 
-    if(inRough.get()) shader.define("TEX_ROUGHNESS");
-        else shader.removeDefine("TEX_ROUGHNESS");
+    shader.toggleDefine("ORIG_TEXCOORD",!inTransfOpacity.get() || inAo.get() );
 
-    if(inReflection.get()) shader.define("TEX_REFLECTION");
-        else shader.removeDefine("TEX_REFLECTION");
-
-    if(inNormal.get()) shader.define("TEX_NORMAL");
-        else shader.removeDefine("TEX_NORMAL");
-
-    if(inNormalFlip.get()) shader.define("TEX_NORMAL_FLIP");
-        else shader.removeDefine("TEX_NORMAL_FLIP");
-
-    if(inDiffuse.get()) shader.define("TEX_DIFFUSE");
-        else shader.removeDefine("TEX_DIFFUSE");
-
-    if(inAo.get()) shader.define("TEX_AO");
-        else shader.removeDefine("TEX_AO");
-
-    if(inOpacityMap.get()) shader.define("TEX_OPACITY");
-        else shader.removeDefine("TEX_OPACITY");
-
-    if(inReflectionCubemap.get()) shader.define("MAP_REFLECTION");
-        else shader.removeDefine("MAP_REFLECTION");
 }
 
 function doRender()

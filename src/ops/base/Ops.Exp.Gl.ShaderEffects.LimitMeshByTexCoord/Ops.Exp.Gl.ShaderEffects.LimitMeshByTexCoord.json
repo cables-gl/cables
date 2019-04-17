@@ -18,6 +18,36 @@
                 "type": "0",
                 "name": "treshhold",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sine Animation",
+                "group": "Sine Animation",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "group": "Sine Animation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sine Source",
+                "group": "Sine Animation",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "group": "Sine Animation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Amplitude",
+                "group": "Sine Animation",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -31,5 +61,17 @@
     "summary": "discard pixel if texture coordinate is below threshold",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "added more axis options",
+            "author": "pandur",
+            "date": 1555423838907
+        },
+        {
+            "message": "added sine animation",
+            "author": "pandur",
+            "date": 1555495594918
+        }
+    ]
 }
