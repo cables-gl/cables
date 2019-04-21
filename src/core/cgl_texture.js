@@ -520,7 +520,7 @@ CGL.Texture.getTempGradientTexture=function(cgl)
 {
     if(CGL.tempTextureGradient) return CGL.tempTextureGradient;
     var temptex=new CGL.Texture(cgl);
-    const size=8;
+    const size=256;
     var data = new Uint8Array(size*size*4);//.fill(0);
 
     for(var y=0;y<size;y++)

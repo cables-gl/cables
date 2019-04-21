@@ -31,7 +31,11 @@ CGL.Geometry=function(name)
     });
 };
 
-
+/**
+ * @function
+ * @description clear all buffers/set them to length 0
+ * @name CGL.Geometry#clear
+ */
 CGL.Geometry.prototype.clear=function()
 {
     this.vertices=new Float32Array([]);
@@ -506,6 +510,7 @@ CGL.Geometry.prototype.mapTexCoords2d=function()
 
 // -----------------
 
+// TODO : move this into "old" circle op 
 CGL.Geometry.buildFromFaces=function(arr)
 {
     var vertices=[];
