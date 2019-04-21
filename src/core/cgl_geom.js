@@ -212,6 +212,18 @@ CGL.Geometry.prototype.copy=function()
     geom.vertexNormals.length=this.vertexNormals.length;
     for(i=0;i<this.vertexNormals.length;i++) geom.vertexNormals[i]=this.vertexNormals[i];
 
+    if(this.tangents)
+    {
+        geom.tangents.length=this.tangents.length;
+        for(i=0;i<this.tangents.length;i++) geom.tangents[i]=this.tangents[i];
+    }
+
+    if(this.biTangents)
+    {
+        geom.biTangents.length=this.biTangents.length;
+        for(i=0;i<this.biTangents.length;i++) geom.biTangents[i]=this.biTangents[i];
+    }
+
     geom.barycentrics.length=this.barycentrics.length;
     for(i=0;i<this.barycentrics.length;i++) geom.barycentrics[i]=this.barycentrics[i];
 
