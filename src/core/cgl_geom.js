@@ -214,12 +214,14 @@ CGL.Geometry.prototype.copy=function()
 
     if(this.tangents)
     {
+        geom.tangents=[];
         geom.tangents.length=this.tangents.length;
         for(i=0;i<this.tangents.length;i++) geom.tangents[i]=this.tangents[i];
     }
 
     if(this.biTangents)
     {
+        geom.biTangents=[];
         geom.biTangents.length=this.biTangents.length;
         for(i=0;i<this.biTangents.length;i++) geom.biTangents[i]=this.biTangents[i];
     }
