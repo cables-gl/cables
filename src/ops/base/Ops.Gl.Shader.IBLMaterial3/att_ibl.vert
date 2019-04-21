@@ -20,7 +20,9 @@ IN vec3 attrTangent,attrBiTangent;
 UNI float repeatX,repeatY;
 UNI float offsetX,offsetY;
 
-#ifdef TEX_AO
+
+
+#ifdef ORIG_TEXCOORD
     OUT vec2 texCoordOrig;
 #endif
 
