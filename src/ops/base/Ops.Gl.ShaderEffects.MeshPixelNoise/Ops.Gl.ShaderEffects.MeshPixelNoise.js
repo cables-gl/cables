@@ -80,7 +80,7 @@ render.onTriggered=function()
             {
                 title:op.objName,
                 name:'MODULE_COLOR',
-                srcHeadFrag:srcHeadFrag,
+                srcHeadFrag:attachments.pixelnoise_frag,
                 srcBodyFrag:srcBodyFrag
             },moduleVert);
 

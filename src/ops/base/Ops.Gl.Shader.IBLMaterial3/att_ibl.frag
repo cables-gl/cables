@@ -143,7 +143,12 @@ float MOD_meshPixelNoise(vec3 p){
 
 #endif
 
-
+#ifdef TEX_OPACITY_SRC_LUMI
+    float luminance(vec3 color)
+    {
+       return dot(vec3(0.2126,0.7152,0.0722), color);
+    }
+#endif
 
 
 
@@ -259,16 +264,33 @@ void main()
     #ifdef TEX_AO
         col.rgb *= clamp(texture(texAo,texCoordOrig).r+(1.0-aoIntensity),0.0,1.0);
     #endif
+
+
     // OPACITY
     col.a=1.0;
     #ifdef TEX_OPACITY
         #ifdef TRANSFORM_OPACITY
-            col.a*=texture(texOpacity,texCoord).r;
+            #ifdef TEX_OPACITY_SRC_R
+                col.a=texture(texOpacity,texCoord).r;
+            #endif
+            #ifdef TEX_OPACITY_SRC_A
+                col.a=texture(texOpacity,texCoord).a;
+            #endif
+            #ifdef TEX_OPACITY_SRC_LUMI
+                col.a=luminance(texture(texOpacity,texCoord).rgb);
+            #endif
         #endif
         #ifndef TRANSFORM_OPACITY
-            col.a*=texture(texOpacity,texCoordOrig).r;
+            #ifdef TEX_OPACITY_SRC_R
+                col.a=texture(texOpacity,texCoordOrig).r;
+            #endif
+            #ifdef TEX_OPACITY_SRC_A
+                col.a=texture(texOpacity,texCoordOrig).a;
+            #endif
+            #ifdef TEX_OPACITY_SRC_LUMI
+                col.a=luminance(texture(texOpacity,texCoordOrig).rgb);
+            #endif
         #endif
-
     #endif
 
     col.a*=opacity;

@@ -1,5 +1,5 @@
-op.varName=op.inValueSelect("Variable");
 var val=op.outValue("Value");
+op.varName=op.inValueSelect("Variable");
 
 var variable=null;
 // op.patch.addVariableListener(init);

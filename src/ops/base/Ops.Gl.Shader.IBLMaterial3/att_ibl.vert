@@ -42,7 +42,7 @@ void main()
 
     vertPos=vPosition;
 
-    #ifdef TEX_AO
+    #ifdef ORIG_TEXCOORD
         texCoordOrig=attrTexCoord;
     #endif
 

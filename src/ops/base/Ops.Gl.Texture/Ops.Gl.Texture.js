@@ -142,7 +142,7 @@ function onWrapChange()
 
 op.onFileChanged=function(fn)
 {
-    console.log(fn);
+    // console.log(fn);
     if(filename.get() && filename.get().indexOf(fn)>-1)
     {
         textureOut.set(null);

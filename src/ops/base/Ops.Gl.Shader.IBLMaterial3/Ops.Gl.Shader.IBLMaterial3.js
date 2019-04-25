@@ -32,6 +32,7 @@ op.setPortGroup("AO Map",[inAo,inAoIntensity]);
 
 const
     inOpacityMap=op.inTexture("Opacity Map"),
+    inOpacitySrc=op.inValueSelect("Opacity Source Channel",["Red Channel","Alpha Channel","Luminance"],"Red Channel"),
     inOpacity=op.inValueSlider("Opacity",1);
 
 const
@@ -68,6 +69,7 @@ inNormalScreen.onChange=
     inDiffuse.onChange=
     inAo.onChange=
     inTransfOpacity.onChange=
+    inOpacitySrc.onChange=
     inReflectionCubemap.onChange=updateTexturesDefines;
 
 
@@ -204,6 +206,10 @@ function updateTexturesDefines()
     shader.toggleDefine("TRANSFORM_OPACITY",inTransfOpacity.get());
 
     shader.toggleDefine("ORIG_TEXCOORD",!inTransfOpacity.get() || inAo.get() );
+
+    shader.toggleDefine("TEX_OPACITY_SRC_R",inOpacitySrc.get()=="Red Channel");
+    shader.toggleDefine("TEX_OPACITY_SRC_A",inOpacitySrc.get()=="Alpha Channel");
+    shader.toggleDefine("TEX_OPACITY_SRC_LUMI",inOpacitySrc.get()=="Luminance");
 
 }
 

@@ -112,7 +112,7 @@ function buildMesh () {
                 0
             );
             biTangents.push(
-                0
+                0,
                 -biTangents[i+1],
                 -biTangents[i+2]
             );
