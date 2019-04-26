@@ -1,5 +1,4 @@
 {
-    "updated": 1519218501013,
     "authorName": "pandur",
     "id": "c5f260da-c8e3-4890-a37e-937d49b9da7d",
     "created": 1519128795735,
@@ -7,25 +6,34 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Time"
+                "name": "Time",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Unit"
+                "name": "Unit",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             },
             {
                 "type": "3",
                 "name": "Anim Array"
+            },
+            {
+                "type": "0",
+                "name": "Anim Finished",
+                "subType": "number"
             }
         ],
         "name": "Ops.TimeLine.TimelineValue"

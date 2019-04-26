@@ -66,5 +66,12 @@
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "fixed - now works correctly with IBLMaterial3",
+            "author": "andro",
+            "date": 1556285398570
+        }
+    ]
 }

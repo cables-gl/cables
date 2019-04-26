@@ -50,7 +50,7 @@ function updateVisibility()
     }
     else
     {
-        console.log("fadeInOut: no html element???");
+        // console.log("fadeInOut: no html element???");
     }
 }
 
