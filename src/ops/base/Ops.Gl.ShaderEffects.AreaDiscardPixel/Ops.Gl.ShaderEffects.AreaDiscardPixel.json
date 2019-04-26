@@ -25,6 +25,16 @@
             },
             {
                 "type": "0",
+                "name": "Repeat",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Repeat Distance",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "x",
                 "subType": "number"
             },
@@ -55,5 +65,12 @@
     "summary": "do not draw pixels inside a 3d area",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "added repeat mode and diagonal axis",
+            "author": "pandur",
+            "date": 1554653768876
+        }
+    ]
 }

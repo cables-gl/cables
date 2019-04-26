@@ -1,0 +1,50 @@
+{
+    "id": "955c1a40-17ca-4944-8cf6-07e14212be2d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1551781112451
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1551781134371,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.AlignGeometry"
+    },
+    "summary": "align a geometry / change pivot/center point of geometry",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

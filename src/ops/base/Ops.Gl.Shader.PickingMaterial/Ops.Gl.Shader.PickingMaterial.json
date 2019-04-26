@@ -8,11 +8,13 @@
             },
             {
                 "type": "0",
-                "name": "billboard"
+                "name": "billboard",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "cursor"
+                "name": "cursor",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -22,7 +24,8 @@
             },
             {
                 "type": "0",
-                "name": "is picked"
+                "name": "is picked",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -31,7 +34,6 @@
         ],
         "name": "Ops.Gl.Shader.PickingMaterial"
     },
-    "updated": 1509640824599,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "2b58daad-4dde-4edb-af22-03ac55ab06ab",

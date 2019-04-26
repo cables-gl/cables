@@ -33,5 +33,29 @@
     "updated": 1542045449176,
     "authorName": "pandur",
     "id": "fba0e516-b50e-4372-9a0c-dc605669ffed",
-    "created": 1520347835082
+    "created": 1520347835082,
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger the op "
+            },
+            {
+                "name": "Seconds",
+                "text": "See difference in time as seconds or milliseconds "
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "result",
+                "text": "The difference in time as a number"
+            }
+        ]
+    }
 }

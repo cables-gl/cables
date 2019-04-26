@@ -1,0 +1,33 @@
+{
+    "id": "9989b1c0-1073-4d5f-bfa0-36dd98b66e27",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1551085749888
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1551085774736,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Set"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Out Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Trigger.SetNumberOnTrigger"
+    }
+}

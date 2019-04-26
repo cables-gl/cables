@@ -25,6 +25,23 @@
     },
     "summary": " Applies a max operation to all values in an array",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "Array in"
+            },
+            {
+                "name": "Value",
+                "text": "The value to test "
+            },
+            {
+                "name": "Array Out",
+                "text": "Array out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

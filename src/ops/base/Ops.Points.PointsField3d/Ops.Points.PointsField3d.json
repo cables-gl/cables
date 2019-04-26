@@ -1,0 +1,83 @@
+{
+    "authorName": "andro",
+    "id": "6030193b-089c-4565-a7b8-d837501ded52",
+    "created": 1552466843918,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "num x",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "num y",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "num z",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "mul",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "center",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            },
+            {
+                "type": "0",
+                "name": "Total points",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Points.PointsField3d"
+    },
+    "summary": "Generates a 3d point field with controllable amount of xyz points ",
+    "youtubeid": "tVphEMCXDb4",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "num x",
+                "text": "Amount of points generated on the X axis"
+            },
+            {
+                "name": "num y",
+                "text": "Amount of points generated on the Y axis"
+            },
+            {
+                "name": "num z",
+                "text": "Amount of points generated on the Z axis"
+            },
+            {
+                "name": "mul",
+                "text": "Default 1. Amount of space between each point"
+            },
+            {
+                "name": "center",
+                "text": "If true the origin is the center, otherwise its from the starting corner"
+            },
+            {
+                "name": "Array out",
+                "text": "The pointfield out. XYZ array"
+            },
+            {
+                "name": "Total points",
+                "text": "Total amount of xyz points"
+            }
+        ]
+    }
+}

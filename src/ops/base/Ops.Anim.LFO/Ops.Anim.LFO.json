@@ -37,6 +37,34 @@
     },
     "summary": "Low-frequency oscillation for animations",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Time",
+                "text": "Plug a timer into this to determine the speed of the oscillation"
+            },
+            {
+                "name": "Type",
+                "text": "Shape of LFO, available modes are : `sine`-`triangle`-`ramp up`-`ramp down`-`block (square)`"
+            },
+            {
+                "name": "Phase",
+                "text": "Phase point of the animation. Use this to offset from other LFO ops"
+            },
+            {
+                "name": "Amplitude",
+                "text": "Min and max value that animation outputs"
+            },
+            {
+                "name": "Result",
+                "text": "Animated value out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Math.MapRange",
+        "Ops.Anim.SineAnim"
+    ]
 }

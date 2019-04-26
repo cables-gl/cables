@@ -1,0 +1,37 @@
+{
+    "authorName": "andro",
+    "id": "6a8e5330-db3a-4ea2-bc07-a71110073f1f",
+    "created": 1552316769149,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayCeil"
+    },
+    "summary": "returns the smallest integer greater than or equal to a given number.",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "In",
+                "text": "Array in"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
+    }
+}

@@ -33,6 +33,31 @@
     },
     "summary": "iterate over an array of objects",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "array",
+                "text": "Array in containing objects"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "index",
+                "text": "Index out of current object"
+            },
+            {
+                "name": "value",
+                "text": "The object out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

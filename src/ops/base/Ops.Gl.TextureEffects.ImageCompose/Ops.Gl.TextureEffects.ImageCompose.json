@@ -37,16 +37,14 @@
             },
             {
                 "type": "0",
-                "name": "Background Alpha",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "HDR",
-                "subType": "boolean",
                 "name": "HDR",
                 "group": "Texture Settings",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Background Alpha",
+                "subType": "number"
             }
         ],
         "portsOut": [

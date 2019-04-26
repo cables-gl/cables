@@ -1,6 +1,12 @@
 {
     "summary": "Access to the microphone",
     "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Start"
+            }
+        ],
         "portsOut": [
             {
                 "type": "2",
@@ -9,7 +15,6 @@
         ],
         "name": "Ops.WebAudio.MicrophoneIn"
     },
-    "updated": 1540834180436,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a9f43b57-5bf7-4158-963f-d5cf30f83558",

@@ -1,0 +1,1 @@
+Create an array of variable length and fill all indexes with one value

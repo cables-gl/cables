@@ -7,7 +7,7 @@ op.y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
 op.enabled=op.addInPort(new CABLES.Port(op,"enabled",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
 op.enabled.set(true);
 
-op.trigger=op.outTrigger("trigger")
+op.trigger=op.outTrigger("trigger");
 var somethingPicked=op.outValue("Something Picked");
 
 var cursor=this.addInPort(new CABLES.Port(this,"cursor",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
@@ -42,7 +42,7 @@ function renderPickingPass()
 
 function mouseMove(e)
 {
-    
+
     if(e && e.hasOwnProperty('offsetX')>=0)
     {
         op.x.set(e.offsetX);
@@ -58,7 +58,7 @@ function updateListeners()
     cgl.canvas.removeEventListener('touchstart', ontouchstart);
     cgl.canvas.removeEventListener('touchend', ontouchend);
     cgl.canvas.removeEventListener('touchcancel', ontouchend);
-    
+
 
     if(useMouseCoords.get())
     {
@@ -68,7 +68,7 @@ function updateListeners()
         cgl.canvas.addEventListener('touchstart', ontouchstart);
         cgl.canvas.addEventListener('touchend', ontouchend);
         cgl.canvas.addEventListener('touchcancel', ontouchend);
-        
+
     }
 }
 
@@ -133,7 +133,7 @@ var doRender=function()
         if(CABLES.now()-lastReadPixel>=50)
         {
             // console.log(op.x.get());
-            
+
             var minimizeFB=2;
             cgl.resetViewPort();
 

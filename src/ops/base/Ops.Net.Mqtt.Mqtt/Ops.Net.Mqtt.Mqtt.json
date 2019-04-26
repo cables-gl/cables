@@ -92,5 +92,8 @@
                 "text": "If the MQTT-op connected successfully. Please note that a connection can time-out, but it will still show as connected."
             }
         ]
-    }
+    },
+    "authorName": "pandur",
+    "id": "d00d8266-483e-4545-b19f-80a02883ac2d",
+    "created": 1552586662506
 }

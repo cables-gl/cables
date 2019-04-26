@@ -7,6 +7,7 @@ number2.set(2);
 
 number1.onChange=update;
 number2.onChange=update;
+update();
 
 function update()
 {

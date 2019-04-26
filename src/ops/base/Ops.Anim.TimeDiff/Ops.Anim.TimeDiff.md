@@ -1,0 +1,1 @@
+Op gives the delta time. The difference in time between each trigger coming in.

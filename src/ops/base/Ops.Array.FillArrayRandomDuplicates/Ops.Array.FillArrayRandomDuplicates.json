@@ -32,5 +32,30 @@
             }
         ],
         "name": "Ops.Array.FillArrayRandomDuplicates"
+    },
+    "summary": "Fill an array with random duplicates",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array used to get random values from"
+            },
+            {
+                "name": "Num Elements",
+                "text": "The length of the new array"
+            },
+            {
+                "name": "Calculate",
+                "text": "Trigger to generate the new array"
+            },
+            {
+                "name": "Result",
+                "text": "The generated array with the new values."
+            }
+        ]
     }
 }

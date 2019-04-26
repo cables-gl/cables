@@ -1,5 +1,4 @@
 {
-    "updated": 1520869810665,
     "authorName": "pandur",
     "id": "332174c6-af8f-4c4a-9ea2-a0be249ecd72",
     "created": 1519807797759,
@@ -11,11 +10,13 @@
             },
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max Length"
+                "name": "Max Length",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -28,6 +29,29 @@
     },
     "summary": "stores values in an array / fifo array buffer",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "exec",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Value",
+                "text": "The value to write into the new indexes of the array"
+            },
+            {
+                "name": "Max Length",
+                "text": "The maximum length of the array"
+            },
+            {
+                "name": "Result",
+                "text": "The fifo array out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.ArrayBuffer3x"
+    ]
 }

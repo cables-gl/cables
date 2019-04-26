@@ -1,6 +1,6 @@
 var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
-var inRadius=op.inValue("Radius");
+var inRadius=op.inValue("Radius",1);
 
 var doRender=op.inValueBool("Render",true);
 

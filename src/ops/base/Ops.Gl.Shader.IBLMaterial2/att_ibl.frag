@@ -113,7 +113,7 @@ void main()
     #endif
 
     #ifdef TEX_DIFFUSE
-        col.rgb *= texture(texDiffuse,texCoord).rgb;
+        col.rgb = texture(texDiffuse,texCoord).rgb;
     #endif
 
 

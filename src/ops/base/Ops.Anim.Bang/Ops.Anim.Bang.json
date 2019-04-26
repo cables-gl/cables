@@ -28,5 +28,29 @@
         ],
         "name": "Ops.Anim.Bang"
     },
-    "summary": "trigger a simple bang animation"
+    "summary": "trigger a simple bang animation going from `1` to `0`",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Bang",
+                "text": "Trigger once to start animation from `1` to `0`"
+            },
+            {
+                "name": "Duration",
+                "text": "The amount of time it takes to get from `1` to `0`"
+            },
+            {
+                "name": "Value",
+                "text": "The animated number"
+            }
+        ]
+    }
 }

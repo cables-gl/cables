@@ -5,11 +5,8 @@ var inParticles=op.inValue("Num Particles",500);
 var inLength=op.inValue("Length",20);
 var inSpread=op.inValue("Spread",0.2);
 var inOffset=op.inValue("Offset");
-
 var inMaxDistance=op.inValue("Max Distance",0);
-
 var inRandomSpeed=op.inValueBool("RandomSpeed");
-
 var next=op.outTrigger("Next");
 
 
@@ -44,7 +41,7 @@ inPoints.onChange=function()
         updateUniformPoints=true;
 
 
-                
+
         // console.log(inPoints.get().length,"points");
         // resetLater();
     }
@@ -79,7 +76,7 @@ function rebuild()
     if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
 
-    if(!mesh) 
+    if(!mesh)
     {
         mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
@@ -95,7 +92,7 @@ function rebuild()
     mesh.setGeom(geom);
 
     var rndArray=new Float32Array(num);
-    
+
     var spread=inSpread.get();
     if(spread<0)spread=0;
 
@@ -103,7 +100,7 @@ function rebuild()
     {
         var v=getRandomVec(spread);
         while(vec3.len(v)>spread/2) v=getRandomVec(spread);
-        
+
         rndArray[i*3+0]=v[0];
         rndArray[i*3+1]=v[1];
         rndArray[i*3+2]=v[2];
@@ -129,8 +126,8 @@ function rebuild()
         rndOffset[i]=(Math.random())*inLength.get();
 
     mesh.setAttribute("rndOffset",rndOffset,1);
-    
-    
+
+
 }
 
 function removeModule()
@@ -146,7 +143,7 @@ inMaxDistance.onChange=updateCheckDistance;
 
 function updateCheckDistance()
 {
-    
+
     if(shader)
     {
         shaderModule.maxDistance.setValue(inMaxDistance.get());
@@ -213,7 +210,7 @@ exec.onTriggered=function()
         // shaderModule.uniNumPoints.setValue(pointArray.length/3);
         shaderModule.uniPoints.setValue(pointArray);
         updateUniformPoints=false;
-        
+
         // console.log("update uniforms");
     }
 
@@ -228,7 +225,7 @@ exec.onTriggered=function()
     if(!shader)return;
 
     if(mesh) mesh.render(shader);
-    
+
     next.trigger();
 
 };

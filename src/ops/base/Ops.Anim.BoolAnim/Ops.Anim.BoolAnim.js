@@ -10,7 +10,7 @@ const
     valueTrue=op.inValue("value true",1),
     next=op.outTrigger("trigger"),
     value=op.outValue("value"),
-    finished=op.outTrigger("finished"),
+    finished=op.outValueBool("finished"),
     finishedTrigger=op.outTrigger("Finished Trigger");
 
 

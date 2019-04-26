@@ -1,0 +1,1 @@
+Use this to get WEB GL information being used by the browser.
