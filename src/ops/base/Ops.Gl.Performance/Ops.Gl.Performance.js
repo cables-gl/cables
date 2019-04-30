@@ -145,17 +145,13 @@ function updateText()
     if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
     if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
     if(CGL.profileTextureDelete>0)warn+='Texture delete! ';
-
     if(CGL.profileNonTypedAttrib>0)warn+='Not-Typed Buffer Attrib! '+CGL.profileNonTypedAttribNames;
-
-    //     CGL.profileNonTypedAttrib=0;
-    // CGL.profileNonTypedAttribNames="";
-
-    // if(warn && warn.length>0)console.warn(warn);
 
     if(warn.length>0)
     {
+        console.warn("warn:",warn);
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
+
     }
 
     element.innerHTML=fps+" fps | "+Math.round(childsTime*100)/100+"ms "+warn;
@@ -197,16 +193,16 @@ function updateText()
             ' videos: '+CGL.profileVideosPlaying;
 
 
-        var vars= CABLES.patch.getVars();
+        // var vars= CABLES.patch.getVars();
 
-        element.innerHTML+='<br/><br/>vars:<br/>';
+        // element.innerHTML+='<br/><br/>vars:<br/>';
 
-        for(var ki in vars)
-        {
-            var v=parseFloat(vars[ki].getValue());
-            if(isNaN(v)) v="[...]"
-            element.innerHTML+=' - '+ki+': <b>'+v+'</b><br/>';
-        }
+        // for(var ki in vars)
+        // {
+        //     var v=parseFloat(vars[ki].getValue());
+        //     if(isNaN(v)) v="[...]"
+        //     element.innerHTML+=' - '+ki+': <b>'+v+'</b><br/>';
+        // }
     }
 
 

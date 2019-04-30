@@ -205,12 +205,11 @@ function updateTexturesDefines()
     shader.toggleDefine("MAP_REFLECTION",inReflectionCubemap.get());
     shader.toggleDefine("TRANSFORM_OPACITY",inTransfOpacity.get());
 
-    shader.toggleDefine("ORIG_TEXCOORD",!inTransfOpacity.get() || inAo.get() );
+    shader.toggleDefine("ORIG_TEXCOORD",!inTransfOpacity.get() || inAo.get());
 
     shader.toggleDefine("TEX_OPACITY_SRC_R",inOpacitySrc.get()=="Red Channel");
     shader.toggleDefine("TEX_OPACITY_SRC_A",inOpacitySrc.get()=="Alpha Channel");
     shader.toggleDefine("TEX_OPACITY_SRC_LUMI",inOpacitySrc.get()=="Luminance");
-
 }
 
 function doRender()

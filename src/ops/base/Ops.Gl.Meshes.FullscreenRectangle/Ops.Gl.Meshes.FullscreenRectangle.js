@@ -13,41 +13,46 @@ var x=0,y=0,z=0,w=0,h=0;
 centerInCanvas.onChange=rebuild;
 flipY.onChange=rebuild;
 
-var shader=null;
+const shader=new CGL.Shader(cgl,'fullscreenrectangle');
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
+shader.setSource(attachments.shader_vert,attachments.shader_frag);
+shader.fullscreenRectUniform=new CGL.Uniform(shader,'t','tex',0);
+
+var useShader=false;
+var updateShaderLater=true;
 render.onTriggered=doRender;
 
 op.toWorkPortsNeedToBeLinked(render);
 
 inTexture.onChange=function()
 {
-    var tex=inTexture.get();
-    // shader=null;
-    if(tex && !shader)
-    {
-        shader=new CGL.Shader(cgl,'fullscreenrectangle');
-        shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-
-        shader.setSource(attachments.shader_vert,attachments.shader_frag);
-        shader.fullscreenRectUniform=new CGL.Uniform(shader,'t','tex',0);
-    }
-
-    if(!tex)
-    {
-        shader=null;
-    }
+    updateShaderLater=true;
 };
+
+function updateShader()
+{
+    var tex=inTexture.get();
+    if(tex) useShader=true;
+        else useShader=false;
+}
 
 op.preRender=function()
 {
-    if(shader)shader.bind();
-    // rebuild();
-    if(mesh)mesh.render(shader);
-    doRender();
+    updateShader();
+    // if(useShader)
+    {
+        shader.bind();
+        if(mesh)mesh.render(shader);
+        doRender();
+    }
 };
 
 function doRender()
 {
     if( cgl.getViewPort()[2]!=w || cgl.getViewPort()[3]!=h ||!mesh ) rebuild();
+
+    if(updateShaderLater) updateShader();
 
     cgl.pushPMatrix();
     mat4.identity(cgl.pMatrix);
@@ -69,7 +74,7 @@ function doRender()
         cgl.setViewPort(x,y,w,h);
     }
 
-    if(shader)
+    if(useShader)
     {
         if(inTexture.get())
         {

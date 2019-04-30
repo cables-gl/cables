@@ -18,8 +18,8 @@ op.setPortGroup("Texture Settings",[twrap,tfilter,fpTexture]);
 
 
 
-texOut.set(null);
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
+texOut.set(CGL.Texture.getEmptyTexture(cgl));
 var effect=null;
 var tex=null;
 
@@ -58,7 +58,9 @@ function initEffect()
         });
 
     effect.setSourceTexture(tex);
-    texOut.set(null);
+    texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    // texOut.set(effect.getCurrentSourceTexture());
+
     // texOut.set(effect.getCurrentSourceTexture());
 
     reInitEffect=false;
@@ -94,7 +96,8 @@ function updateResolution()
         tex.setSize(w,h);
         outRatio.set(w/h);
         effect.setSourceTexture(tex);
-        texOut.set(null);
+        // texOut.set(null);
+        texOut.set(CGL.Texture.getEmptyTexture(cgl));
         texOut.set(tex);
     }
 

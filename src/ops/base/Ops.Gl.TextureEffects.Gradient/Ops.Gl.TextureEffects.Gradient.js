@@ -32,7 +32,7 @@ const randomize=op.inTriggerButton("Randomize");
 var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+var shader=new CGL.Shader(cgl,'gradient');
 var srcFrag=attachments.gradient_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag );
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);

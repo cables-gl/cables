@@ -14,7 +14,7 @@ mask.onChange=function()
 var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+var shader=new CGL.Shader(cgl,'zoomblur');
 
 var srcFrag=attachments.zoomblur_frag;
 
@@ -34,9 +34,9 @@ render.onTriggered=function()
     {
         cgl.setShader(shader);
         cgl.currentTextureEffect.bind();
-    
+
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        
+
 
         if(mask.get() && mask.get().tex)
         {
@@ -44,7 +44,7 @@ render.onTriggered=function()
             // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
         }
 
-    
+
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
     }
