@@ -9,6 +9,7 @@ const
 var cgl=op.patch.cgl;
 var shader=null;
 var mesh=null;
+var geom=null;
 var module=null;
 var fadeUni=null;
 var needsRebuild=true;
@@ -16,13 +17,15 @@ var needsRebuildShader=true;
 
 op.onDelete=render.onLinkChanged=removeModule;
 inGeomA.onChange=
-    inGeomB.onChange=rebuildLater;
-inNormals.onChange=rebuildShaderLater;
+    inGeomB.onChange=
+    inNormals.onChange=rebuildShaderLater;
 
 var srcBodyVert=attachments.morph_geometries_vert;
 var srcHeadVert=''
     .endl()+'IN vec3 MOD_targetPosition;'
     .endl()+'IN vec3 MOD_targetNormal;'
+    .endl()+'IN vec3 MOD_targetTangent;'
+    .endl()+'IN vec3 MOD_targetBiTangent;'
     .endl()+'UNI float MOD_fade;'
     .endl();
 
@@ -39,8 +42,8 @@ function removeModule()
 render.onTriggered=function()
 {
     if(cgl.getShader()!=shader || needsRebuildShader) rebuildShader();
-    if(needsRebuild)rebuild();
-    if(!mesh)return;
+    if(needsRebuild) rebuild();
+    if(!mesh) return;
 
     mesh.render(cgl.getShader());
     next.trigger();
@@ -82,14 +85,23 @@ function rebuild()
 {
     if(inGeomB.get() && inGeomA.get() && module)
     {
-        var geom=inGeomA.get();
+        if(geom)
+        {
+            geom.clear();
+            geom=null;
+        }
         if(mesh)mesh.dispose();
+        geom=inGeomA.get().copy();
         mesh=new CGL.Mesh(cgl,geom);
         mesh.addVertexNumbers=true;
         mesh.addAttribute(module.prefix+'targetPosition',inGeomB.get().vertices,3);
 
         if(inNormals.get())
+        {
             mesh.addAttribute(module.prefix+'targetNormal',inGeomB.get().vertexNormals,3);
+            mesh.addAttribute(module.prefix+'targetTangent',inGeomB.get().tangents,3);
+            mesh.addAttribute(module.prefix+'targetBiTangent',inGeomB.get().biTangents,3);
+        }
 
         needsRebuild=false;
     }

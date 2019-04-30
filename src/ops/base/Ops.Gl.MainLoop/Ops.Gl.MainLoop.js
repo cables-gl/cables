@@ -8,6 +8,8 @@ const fullscreen=op.inValueBool("Fullscreen Button",false);
 const active=op.inValueBool("Active",true);
 const hdpi=op.inValueBool("Hires Displays",false);
 
+op.onAnimFrame=render;
+
 hdpi.onChange=function()
 {
     if(hdpi.get()) op.patch.cgl.pixelDensity=window.devicePixelRatio;
@@ -16,6 +18,23 @@ hdpi.onChange=function()
     op.patch.cgl.updateSize();
     if(CABLES.UI) gui.setLayout();
 };
+
+active.onChange=function()
+{
+    op.patch.removeOnAnimFrame(op);
+
+    if(active.get())
+    {
+        // op.patch.pause();
+        // op.patch.removeOnAnimFrame(op);
+        op.onAnimFrame=render;
+    }
+
+
+    // else op.patch.resume();
+
+};
+
 
 var cgl=op.patch.cgl;
 var rframes=0;
@@ -103,7 +122,7 @@ op.onDelete=function()
     cgl.gl.clearColor(0,0,0,0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
-    op.patch.removeOnAnimFrame(op);
+
 };
 
 
@@ -114,7 +133,7 @@ op.patch.loading.setOnFinishedLoading(function(cb)
 
 
 
-op.onAnimFrame=function(time)
+function render(time)
 {
     if(!active.get())return;
     if(cgl.aborted || cgl.canvas.clientWidth===0 || cgl.canvas.clientHeight===0)return;

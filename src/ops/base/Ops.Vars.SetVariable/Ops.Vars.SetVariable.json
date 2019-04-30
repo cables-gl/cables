@@ -3,13 +3,13 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value",
-                "subType": "number"
+                "name": "Variable",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Variable",
-                "subType": "string"
+                "name": "Value",
+                "subType": "number"
             }
         ],
         "name": "Ops.Vars.SetVariable"

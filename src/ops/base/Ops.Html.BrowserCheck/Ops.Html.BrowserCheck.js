@@ -93,5 +93,5 @@ if(window.navigator.userAgent.toLowerCase().indexOf("android") != -1)
 
 isMobile.set(false);
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
-isMobile.set(true);
+    isMobile.set(true);
 

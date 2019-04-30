@@ -41,7 +41,7 @@ element.style.cursor="pointer";
 element.style.background="#222";
 element.style.color="white";
 element.style["font-family"]="monospace";
-element.style["font-size"]="11px";
+element.style["font-size"]="12px";
 element.style["z-index"]="9999";
 element.innerHTML="&nbsp;";
 
@@ -195,6 +195,18 @@ function updateText()
             ' mvp_uni_mat4: '+Math.ceil(CGL.profileMVPMatrixCount/fps)+
             ' mesh.setGeom: '+CGL.profileMeshSetGeom+
             ' videos: '+CGL.profileVideosPlaying;
+
+
+        var vars= CABLES.patch.getVars();
+
+        element.innerHTML+='<br/><br/>vars:<br/>';
+
+        for(var ki in vars)
+        {
+            var v=parseFloat(vars[ki].getValue());
+            if(isNaN(v)) v="[...]"
+            element.innerHTML+=' - '+ki+': <b>'+v+'</b><br/>';
+        }
     }
 
 

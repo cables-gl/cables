@@ -20,7 +20,7 @@ const srcFrag=''
     // .endl()+'precision highp float;'
     .endl()+'IN float num;'
     .endl()+'UNI float numVertices;'
-    
+
     .endl()+'void main()'
     .endl()+'{'
 
@@ -29,12 +29,12 @@ const srcFrag=''
 
     .endl()+'float c = num/numVertices/3.0;'
     .endl()+'c = mod(c,0.1)*10.0;'
-    
+
 
     .endl()+'   outColor= vec4(c,c,c,1.0);'
-    
+
     .endl()+'}';
-    
+
 var doRender=function()
 {
     cgl.setShader(shader);

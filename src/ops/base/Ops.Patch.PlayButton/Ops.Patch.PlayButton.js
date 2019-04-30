@@ -45,7 +45,11 @@ op.onDelete=removeElements;
 
 inExec.onTriggered=function()
 {
-    outState.set(window.audioContext.state);
+    if(window.audioContext)
+    {
+        outState.set(window.audioContext.state);
+    }
+
     if(inIfSuspended.get() && window.audioContext.state=='running') clicked();
     if(wasClicked) outNext.trigger();
 
@@ -54,7 +58,7 @@ inExec.onTriggered=function()
 function clicked()
 {
     removeElements();
-    if(window.audioContext.state=='suspended')window.audioContext.resume();
+    if(window.audioContext && window.audioContext.state=='suspended')window.audioContext.resume();
     wasClicked=true;
     outClicked.set(wasClicked);
 }

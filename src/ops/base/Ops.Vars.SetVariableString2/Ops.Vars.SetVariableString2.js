@@ -1,11 +1,10 @@
 op.varName=op.inValueSelect("Variable");
-var val=op.inValueFloat("Value",0);
+var val=op.inString("Value",'');
 
 op.varName.onChange=updateName;
 val.onChange=update;
 val.changeAlways=true;
 
-// op.patch.addVariableListener(updateVarNamesDropdown);
 op.patch.addEventListener("variablesChanged",updateVarNamesDropdown);
 
 updateVarNamesDropdown();
@@ -39,5 +38,6 @@ function updateName()
 
 function update()
 {
-    op.patch.setVarValue(op.varName.get(),val.get());
+    if(val.get())
+        op.patch.setVarValue(op.varName.get(),val.get());
 }

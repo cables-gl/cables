@@ -50,7 +50,7 @@ function updateVisibility()
     }
     else
     {
-        console.log("fadeInOut: no html element???");
+        // console.log("fadeInOut: no html element???");
     }
 }
 
@@ -58,7 +58,7 @@ function updateVisibility()
 function getCssContent()
 {
     var css=attachments.fadeInOut_css;
-    
+
     while(css.indexOf("$LENGTH")>-1)css=css.replace('$LENGTH',inDuration.get());
     while(css.indexOf("$FULLOPACITY")>-1)css=css.replace('$FULLOPACITY',inOpacity.get());
 

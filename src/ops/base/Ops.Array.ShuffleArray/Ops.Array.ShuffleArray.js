@@ -37,7 +37,7 @@ function update() {
         arr.length=a.length;
     }
 
-    var j, x, i;
+    var i;
 
     for (i=0;i<a.length;i++) {
         arr[i]=a[i];
@@ -53,5 +53,9 @@ exePort.onTriggered = function() {
     update();
     nextPort.trigger();
 };
+array.onLink = function ()
+{
+    update();
+    nextPort.trigger();
+}
 
-array.onChange = update;
