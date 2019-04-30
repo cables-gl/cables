@@ -354,9 +354,9 @@ CGL.Context = function(_patch) {
 
     this.fullScreen = function() {
         if (this.canvas.requestFullscreen) this.canvas.requestFullscreen();
-        else if (this.canvas.mozRequestFullScreen) this.canvas.mozRequestFullScreen();
-        else if (this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
-        else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
+            else if (this.canvas.mozRequestFullScreen) this.canvas.mozRequestFullScreen();
+            else if (this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
+            else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     };
 
     this.setSize=function(w,h)

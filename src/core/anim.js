@@ -612,8 +612,7 @@ CABLES.Anim.prototype.setValue=function(time,value,cb)
         }
     }
 
-    if(!found)
-        this.keys.push(new CABLES.ANIM.Key({time:time,value:value,e:this.defaultEasing,cb:cb}));
+    if(!found) this.keys.push(new CABLES.ANIM.Key({time:time,value:value,e:this.defaultEasing,cb:cb}));
 
     if(this.onChange)this.onChange();
     this._needsSort=true;
