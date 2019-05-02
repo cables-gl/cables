@@ -1,4 +1,4 @@
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 var render=op.inTrigger('render');
 var useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
@@ -26,6 +26,7 @@ height.set(512);
 useVPSize.set(true);
 tfilter.set('linear');
 var reInitFb=true;
+tex.set(CGL.Texture.getEmptyTexture(cgl));
 
 op.setPortGroup('Alignment',[useVPSize,width,height,tfilter]);
 

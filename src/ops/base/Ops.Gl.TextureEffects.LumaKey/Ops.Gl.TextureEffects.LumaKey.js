@@ -6,7 +6,7 @@ const
     threshold=op.inValueSlider("Threshold",0.5);
 
 const cgl=op.patch.cgl;
-const shader=new CGL.Shader(cgl);
+const shader=new CGL.Shader(cgl,'lumakey');
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.lumakey_frag);
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);

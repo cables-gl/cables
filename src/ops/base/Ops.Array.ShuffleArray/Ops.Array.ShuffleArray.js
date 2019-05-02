@@ -3,6 +3,7 @@ var arr=[];
 
 // inputs
 var exePort = op.inTriggerButton('Execute');
+
 var array=op.inArray("array");
 
 // outputs
@@ -15,17 +16,19 @@ arrayOut.ignoreValueSerialize=true;
 /*
  * Taken from https://www.frankmitchell.org/2015/01/fisher-yates/
  */
-function fisherYatesShuffle(array) {
-  var i = 0;
-  var j = 0;
-  var temp = null;
+function fisherYatesShuffle(array)
+{
+    var i = 0;
+    var j = 0;
+    var temp = null;
 
-  for (i = array.length - 1; i > 0; i -= 1) {
-    j = Math.floor(Math.random() * (i + 1));
-    temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
+    for (i = array.length - 1; i > 0; i -= 1)
+    {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
 
 function update() {

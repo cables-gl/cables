@@ -68,9 +68,15 @@ function setRay()
     var vy = origin[1] - to[1];
     var vz = origin[2] - to[2];
 
-    origin[0]=to[0]+vx*99999;
-    origin[1]=to[1]+vy*99999;
-    origin[2]=to[2]+vz*99999;
+var huge=9999;
+
+    origin[0]=to[0]+vx*huge;
+    origin[1]=to[1]+vy*huge;
+    origin[2]=to[2]+vz*huge;
+
+    to[0]-=vx*huge;
+    to[1]-=vy*huge;
+    to[2]-=vz*huge;
 
     ray=new CANNON.Ray(
         new CANNON.Vec3(to[0],to[1],to[2]),

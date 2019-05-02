@@ -15,7 +15,7 @@ const b = op.inValueSlider("b", 0);
 r.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
-const shader=new CGL.Shader(cgl);
+const shader=new CGL.Shader(cgl,'vignette');
 
 const srcFrag=(attachments.vignette_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
 shader.setSource(shader.getDefaultVertexShader(),srcFrag);

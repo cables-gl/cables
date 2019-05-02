@@ -9,12 +9,9 @@ var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
 var removeAlphaSrc=op.addInPort(new CABLES.Port(op,"removeAlphaSrc",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 
 var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-
-
 var trigger=op.outTrigger('trigger');
 
 op.toWorkPortsNeedToBeLinked(image);
-
 
 blendMode.set('normal');
 var cgl=op.patch.cgl;
@@ -117,14 +114,21 @@ CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 var oldHadImageAlpha=false;
 
+// op.preRender=function()
+// {
+//     doRender();
+// };
+
+
 function doRender()
 {
-    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+    // if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     if(imageAlpha.get() && !oldHadImageAlpha || !imageAlpha.get() && oldHadImageAlpha)
     {
         if(imageAlpha.get() && imageAlpha.get().tex)
         {
+            console.log("HAS TEX ALPHA!");
             shader.define('HAS_TEXTUREALPHA');
             oldHadImageAlpha=true;
         }

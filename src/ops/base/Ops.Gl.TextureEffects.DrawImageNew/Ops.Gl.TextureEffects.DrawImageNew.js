@@ -222,7 +222,6 @@ imageAlpha.onChange=function()
     }
 };
 
-
 function doRender()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
