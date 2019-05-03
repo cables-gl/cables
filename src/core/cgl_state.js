@@ -67,7 +67,6 @@ CGL.Context = function(_patch) {
         this.canvas = document.getElementById(id);
 
 
-
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
         if (!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer = false;
