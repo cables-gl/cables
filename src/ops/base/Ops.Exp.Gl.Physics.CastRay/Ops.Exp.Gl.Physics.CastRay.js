@@ -50,7 +50,7 @@ function setRay()
     var x = 2.0 * (inX.get() / cgl.canvas.clientWidth) -1;
     var y = - 2.0 * (inY.get() / cgl.canvas.clientHeight) +1;
 
-    var origin=vec3.fromValues(x,y,-0.01);
+    var origin=vec3.fromValues(x,y,0);
     mat4.mul(mat,cgl.pMatrix,cgl.vMatrix);
     mat4.invert(mat,mat);
 
@@ -68,7 +68,15 @@ function setRay()
     var vy = origin[1] - to[1];
     var vz = origin[2] - to[2];
 
-var huge=9999;
+    var v3=vec3.create();
+    vec3.set(v3,vx,vy,vz);
+    vec3.normalize(v3,v3);
+    vx=v3[0];
+    vy=v3[1];
+    vz=v3[2];
+    // console.log(vx,vy,vz);
+
+    const huge=9999;
 
     origin[0]=to[0]+vx*huge;
     origin[1]=to[1]+vy*huge;

@@ -1,0 +1,100 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "ff0bdad4-12ae-4444-b273-edfeab443a62",
+    "created": 1508235921200,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Start VR"
+            },
+            {
+                "type": "1",
+                "name": "Stop VR"
+            },
+            {
+                "type": "0",
+                "name": "Resize Canvas",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "use gamepads",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "VR Mainloop"
+            },
+            {
+                "type": "1",
+                "name": "NoVR Mainloop"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Supported",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Controller support",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Controllers amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "VR Display",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "FPS",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Eye",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Gamepad object Left"
+            },
+            {
+                "type": "2",
+                "name": "Gamepad object Right"
+            },
+            {
+                "type": "1",
+                "name": "single trigger out"
+            },
+            {
+                "type": "0",
+                "name": "Started VR",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.Vr.MainloopWebVr"
+    },
+    "summary": "experimental webvr rendering",
+    "docs": {
+        "ports": []
+    }
+}
