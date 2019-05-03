@@ -297,6 +297,7 @@ CGL.Uniform.prototype.updateValue4F=function()
     {
         this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         CGL.profileShaderGetUniform++;
+        CGL.profileShaderGetUniformName=this._name;
     }
     this._shader.getCgl().gl.uniform4f(this._loc, this._value[0],this._value[1],this._value[2],this._value[3]);
     CGL.profileUniformCount++;

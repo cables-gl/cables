@@ -866,7 +866,7 @@ CABLES.Op = function()
     {
         if(this._eventCallbacks[which])
             for(var i=0;i<this._eventCallbacks[which].length;i++)
-                if(this._eventCallbacks[which])this._eventCallbacks[which][i](params);
+                if(this._eventCallbacks[which][i])this._eventCallbacks[which][i](params);
 
         if(this.onUiAttrChange && which=="onUiAttribsChange") this.onUiAttrChange(params); // todo: use normal eventlistener
     }

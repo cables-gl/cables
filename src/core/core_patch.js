@@ -353,7 +353,8 @@ CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
 
         this.ops.push(op);
 
-        if (this.onAdd) this.onAdd(op);
+        // if (this.onAdd) this.onAdd(op);
+        this.emitEvent("onOpAdd",op);
         
         if(op.init)op.init();
     }
@@ -409,7 +410,14 @@ CABLES.Patch.prototype.deleteOp = function(opid, tryRelink) {
 
                 var opToDelete = this.ops[i];
                 opToDelete.removeLinks();
-                this.onDelete(opToDelete);
+
+                if(this.onDelete) // todo: remove
+                {
+                    console.log('deprecated this.onDelete',this.onDelete);
+                    this.onDelete(opToDelete);
+                }
+
+                this.emitEvent("onOpDelete",opToDelete);
                 this.ops.splice(i, 1);
 
                 if (opToDelete.onDelete) opToDelete.onDelete();
@@ -581,8 +589,8 @@ CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
     }
 };
 
-CABLES.Patch.prototype.onAdd = function(op) {};
-CABLES.Patch.prototype.onDelete = function(op) {};
+// CABLES.Patch.prototype.onAdd = function(op) {};
+CABLES.Patch.prototype.onDelete = null;//function(op) {};
 CABLES.Patch.prototype.onLink = function(p1, p2) {};
 CABLES.Patch.prototype.onUnLink = function(p1, p2) {};
 CABLES.Patch.prototype.serialize = function(asObj) {

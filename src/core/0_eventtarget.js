@@ -41,7 +41,7 @@ CABLES.EventTarget=function()
         {
             var idx=this._eventCallbacks[which].indexOf(cb);
             if(idx==-1) console.log("eventlistener "+which+" not found...");
-            else this._eventCallbacks[which].slice(idx);
+            else this._eventCallbacks[which].splice(idx);
         }
     }
 
@@ -49,7 +49,7 @@ CABLES.EventTarget=function()
     {
         if(this._eventCallbacks[which])
             for(var i=0;i<this._eventCallbacks[which].length;i++)
-                if(this._eventCallbacks[which])this._eventCallbacks[which][i](params);
+                if(this._eventCallbacks[which][i])this._eventCallbacks[which][i](params);
 
     }
 
