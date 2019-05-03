@@ -17,6 +17,44 @@ var CABLES = CABLES || {};
  */
 
 /**
+ * op added to patch event
+ * @event Patch#onOpAdd
+ * @type {object}
+ * @property {Op} op new op
+ */
+
+/**
+ * op deleted from patch
+ * @event Patch#onOpDelete
+ * @type {object}
+ * @property {Op} op that will be deleted
+ */
+
+/**
+ * link event - two ports will be linked
+ * @event Patch#onLink
+ * @type {object}
+ * @property {Port} port1
+ * @property {Port} port2
+ */
+
+/**
+ * unlink event - a link was deleted
+ * @event Patch#onUnLink
+ * @type {object}
+ */
+
+
+/**
+ * variables has been changed / a variable has been added to the patch
+ * @event Patch#variablesChanged
+ * @type {object}
+ * @property {Port} port1
+ * @property {Port} port2
+ */
+
+
+/**
  * @name Patch
  * @memberof CABLES
  * @param {patchConfig} config
@@ -444,9 +482,7 @@ CABLES.Patch.prototype.getFrameNum = function() {
 CABLES.Patch.prototype.renderFrame = function(e) {
     this.timer.update();
     this.freeTimer.update();
-
     var time = this.timer.getTime();
-
 
     for (var i = 0; i < this.animFrameCallbacks.length; ++i) {
         if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum);
@@ -584,22 +620,17 @@ CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
         var link = new CABLES.Link(this);
         link.link(port1, port2);
 
-        this.onLink(port1, port2,link);
+        this.emitEvent("onLink",port1, port2,link);
         return link;
     }
 };
 
-// CABLES.Patch.prototype.onAdd = function(op) {};
-CABLES.Patch.prototype.onDelete = null;//function(op) {};
-CABLES.Patch.prototype.onLink = function(p1, p2) {};
-CABLES.Patch.prototype.onUnLink = function(p1, p2) {};
 CABLES.Patch.prototype.serialize = function(asObj) {
     var obj = {};
 
     obj.ops = [];
     obj.settings = this.settings;
     for (var i in this.ops) {
-        // console.log(this.ops[i].objName);
         obj.ops.push(this.ops[i].getSerialized());
     }
 
@@ -876,16 +907,6 @@ CABLES.Patch.prototype.profile = function(enable) {
 
 
 
-
-// ----------------------
-
-
-// CABLES
-
-// namedTriggers
-
-
-
 // ----------------------
 
 
@@ -995,7 +1016,6 @@ CABLES.Patch.prototype.setVarValue = function(name, val) {
         this._variables[name].setValue(val);
     } else {
         this._variables[name] = new CABLES.Patch.Variable(name, val);
-        // this._callVariableListener();
         this.emitEvent("variablesChanged");
     }
     return this._variables[name];
@@ -1046,14 +1066,12 @@ CABLES.Patch.prototype.preRenderOps = function() {
     var stopwatch=null;
     if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('prerendering');
 
-    // var count=0;
     for(var i=0;i<this.ops.length;i++)
     {
         if(this.ops[i].preRender)
         {
             this.ops[i].preRender();
             console.log('prerender '+this.ops[i].objName);
-            // count++;
         }
     }
     

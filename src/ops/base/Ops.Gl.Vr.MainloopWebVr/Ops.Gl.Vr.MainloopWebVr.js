@@ -233,6 +233,7 @@ function mainloopVr()
     if(cgl.aborted || cgl.canvas.clientWidth===0 || cgl.canvas.clientHeight===0)return;
 
     mat4.identity(cgl.pMatrix);
+    mat4.identity(cgl.vMatrix);
 
     if(!cgl.canvas && cgl.canvasWidth==-1)
     {
@@ -260,6 +261,7 @@ function mainloopVr()
     {
         width.set(cgl.canvasWidth);
         height.set(cgl.canvasHeight);
+
     }
 
 
@@ -343,18 +345,22 @@ function renderEye(which)
     {
 
     }
-    else if(which==0) mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.leftProjectionMatrix);
-    else if(which==1) mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.rightProjectionMatrix);
+    // else if(which==0) mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.leftProjectionMatrix);
+    // else if(which==1) mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.rightProjectionMatrix);
+    else if(which==0) cgl.pMatrix=frameData.leftProjectionMatrix;
+    else if(which==1) cgl.pMatrix=frameData.rightProjectionMatrix;
 
 
     cgl.pushViewMatrix();
+
+    mat4.identity(cgl.vMatrix);
 
     if(!frameData)
     {
 
     }
-    else if(which==0) mat4.multiply(cgl.vMatrix,cgl.vMatrix,frameData.leftViewMatrix);
-    else if(which==1) mat4.multiply(cgl.vMatrix,cgl.vMatrix,frameData.rightViewMatrix);
+    else if(which==0) cgl.vMatrix=frameData.leftViewMatrix;
+    else if(which==1) cgl.vMatrix=frameData.rightViewMatrix;
 
     if(!started)
     {
@@ -362,6 +368,8 @@ function renderEye(which)
     }
     else if(which==1) cgl.setViewPort(cgl.canvasWidth * 0.5, 0, cgl.canvasWidth * 0.5, cgl.canvasHeight);
     else if(which==0) cgl.setViewPort(0, 0, cgl.canvasWidth * 0.5, cgl.canvasHeight);
+
+        // console.log(leftEye.renderWidth,leftEye.renderHeight);
 
 
     if(started)nextVr.trigger();

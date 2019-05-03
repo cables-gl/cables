@@ -5,6 +5,7 @@ const
     inY=op.inValueFloat("Screen Y"),
     inZ=op.inValueFloat("Screen Z"),
 
+
     next=op.outTrigger("Next"),
 
     hasHit=op.outValue("Has Hit"),
@@ -47,8 +48,10 @@ var mat=mat4.create();
 function setRay()
 {
     mat4.identity(mat);
-    var x = 2.0 * (inX.get() / cgl.canvas.clientWidth) -1;
-    var y = - 2.0 * (inY.get() / cgl.canvas.clientHeight) +1;
+    // var x = 2.0 * (inX.get() / cgl.canvas.clientWidth) -1;
+    // var y = - 2.0 * (inY.get() / cgl.canvas.clientHeight) +1;
+    var x=inX.get();
+    var y=inY.get();
 
     var origin=vec3.fromValues(x,y,0);
     mat4.mul(mat,cgl.pMatrix,cgl.vMatrix);
@@ -76,7 +79,7 @@ function setRay()
     vz=v3[2];
     // console.log(vx,vy,vz);
 
-    const huge=9999;
+    const huge=99999;
 
     origin[0]=to[0]+vx*huge;
     origin[1]=to[1]+vy*huge;

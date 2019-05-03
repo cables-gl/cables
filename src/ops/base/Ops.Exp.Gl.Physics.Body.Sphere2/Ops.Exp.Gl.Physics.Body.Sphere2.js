@@ -28,6 +28,8 @@ inMass.onChange=setup;
 inRadius.onChange=setup;
 exec.onTriggered=render;
 
+op.toWorkNeedsParent("Ops.Exp.Gl.Physics.World");
+
 inReset.onTriggered=function()
 {
     needSetup=true;
@@ -56,6 +58,7 @@ function setup(modelScale)
     lastWorld=world;
     needSetup=false;
     outRadius.set(inRadius.get());
+    console.log("setup");
 }
 
 
@@ -81,7 +84,20 @@ function render()
     var staticPos=inMass.get()==0;
 
     const modelScale=getScaling(cgl.mMatrix);
-    if(shape.radius!=inRadius.get()*modelScale) setup(modelScale);
+    // if(shape.radius!=inRadius.get()*modelScale) setup(modelScale);
+    var r=inRadius.get()*modelScale;
+    if(shape.radius!=r)
+    {
+        body.shapes.length=0;//removeShape(shape);
+
+        shape.radius=r;
+        body.addShape(shape);
+
+        // shape.updateBoundingSphereRadius();
+        // console.log(shape.radius);
+        body.updateBoundingRadius();
+        // body.computeAABB();
+    }
 
 
     if(staticPos)
@@ -116,6 +132,12 @@ function render()
     }
 
     if(doRender.get())wire.render(cgl,inRadius.get()*2);
+    if(CABLES.UI.renderHelper ||gui.patch().isCurrentOp(op))
+    {
+        // mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
+        CABLES.GL_MARKER.drawSphere(op,inRadius.get());
+    }
+
 
     outX.set(body.position.x);
     outY.set(body.position.y);

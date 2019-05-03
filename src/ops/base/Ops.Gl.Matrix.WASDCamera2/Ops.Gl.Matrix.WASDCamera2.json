@@ -1,5 +1,4 @@
 {
-    "updated": 1540980234710,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "af6c3fe2-58a9-4f81-be41-4c21aabffde9",
@@ -12,7 +11,7 @@
             },
             {
                 "type": "0",
-                "name": "allow flying",
+                "name": "Allow Flying",
                 "subType": "boolean"
             }
         ],
@@ -23,45 +22,45 @@
             },
             {
                 "type": "0",
-                "name": "islocked",
+                "name": "isLocked",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posx",
+                "name": "posX",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posy",
+                "name": "posY",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "posz",
+                "name": "posZ",
                 "subType": "number"
             },
             {
                 "type": "1",
-                "name": "mouse left"
+                "name": "Mouse Left"
             },
             {
                 "type": "1",
-                "name": "mouse right"
+                "name": "Mouse Right"
             },
             {
                 "type": "0",
-                "name": "dir x",
+                "name": "Dir X",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "dir y",
+                "name": "Dir Y",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "dir z",
+                "name": "Dir Z",
                 "subType": "number"
             }
         ],

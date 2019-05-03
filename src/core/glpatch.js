@@ -3,6 +3,21 @@
 var CABLES=CABLES||{};
 CABLES.GLGUI=CABLES.GLGUI||{};
 
+CABLES.GLGUI.LineDrawer=function(cgl,options)
+{
+    this._num=100000;
+    this._counter=0;
+
+    this._positions=new Float32Array(3*this._num);
+    this._colors=new Float32Array(4*this._num);
+}
+
+
+
+// ---------------------------------------------------------------
+
+
+
 CABLES.GLGUI.RectInstancer=function(cgl,options)
 {
     this._counter=0;
@@ -15,38 +30,31 @@ CABLES.GLGUI.RectInstancer=function(cgl,options)
 
     this._shader=new CGL.Shader(cgl,'rectinstancer');
     this._shader.setSource(''
-    .endl()+'IN vec3 vPosition;'
-    .endl()+'IN vec3 instPos;'
-    .endl()+'IN vec4 instCol;'
-    .endl()+'IN vec2 instSize;'
-    .endl()+'OUT vec4 col;'
-    .endl()+'UNI float zoom, resX,resY,scrollX,scrollY;'
+        .endl()+'IN vec3 vPosition;'
+        .endl()+'IN vec3 instPos;'
+        .endl()+'IN vec4 instCol;'
+        .endl()+'IN vec2 instSize;'
+        .endl()+'OUT vec4 col;'
+        .endl()+'UNI float zoom,resX,resY,scrollX,scrollY;'
 
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'    vec3 pos=vPosition;'
-    .endl()+'    pos.xy*=instSize;'
+        .endl()+'void main()'
+        .endl()+'{'
+        .endl()+'    vec3 pos=vPosition;'
+        .endl()+'    pos.xy*=instSize;'
 
-    // .endl()+'    pos.x/=resX;'
-    // .endl()+'    pos.y/=resY;'
-    .endl()+'    pos.x+=scrollX;'
-    .endl()+'    pos.y+=scrollY;'
+        .endl()+'    pos.x+=scrollX;'
+        .endl()+'    pos.y+=scrollY;'
 
-    .endl()+'    pos.x+=instPos.x;'
-    .endl()+'    pos.y+=instPos.y;'
+        .endl()+'    pos.x+=instPos.x;'
+        .endl()+'    pos.y+=instPos.y;'
 
-    // .endl()+'    pos.xy/=zoom;'
+        .endl()+'    pos.y=0.0-pos.y;'
 
+        .endl()+'    col=instCol;'
 
-    .endl()+'    pos.y=0.0-pos.y;'
-
-    .endl()+'    col=instCol;'
-
-    .endl()+'    gl_Position = vec4(pos*(1.0/zoom),1.0);'
-    .endl()+'}'
-        ,
-
-        'IN vec4 col;void main(){outColor=vec4(col.rgb,1.0);}');
+        .endl()+'    gl_Position = vec4(pos*(1.0/zoom),1.0);'
+        .endl()+'}'
+        , 'IN vec4 col;void main(){outColor=vec4(col.rgb,1.0);}');
 
     this._uniZoom=new CGL.Uniform(this._shader,'f','zoom',0),
     this._uniResX=new CGL.Uniform(this._shader,'f','resX',500),
@@ -54,7 +62,6 @@ CABLES.GLGUI.RectInstancer=function(cgl,options)
     this._uniscrollX=new CGL.Uniform(this._shader,'f','scrollX',0),
     this._uniscrollY=new CGL.Uniform(this._shader,'f','scrollY',0);
 
-    
     this._geom=new CGL.Geometry("rectinstancer");
     this._geom.vertices = new Float32Array([1,1,0, 0,1,0, 1,0,0, 0,0,0]);
     this._geom.verticesIndices = new Float32Array([ 2, 1, 0,  3, 1, 2 ]);
@@ -63,12 +70,11 @@ CABLES.GLGUI.RectInstancer=function(cgl,options)
     this._mesh.numInstances=this._num;
 
     var i=0;
-
     for(i=0;i<2*this._num;i++) this._sizes[i]=0;//Math.random()*61;
     for(i=0;i<3*this._num;i++) this._positions[i]=0;//Math.random()*60;
     for(i=0;i<4*this._num;i++) this._colors[i]=1;//Math.random();
-
 }
+
 CABLES.GLGUI.RectInstancer.prototype.dispose=function()
 {
 
@@ -97,8 +103,8 @@ CABLES.GLGUI.RectInstancer.prototype.rebuild=function()
 
 CABLES.GLGUI.RectInstancer.prototype.getIndex=function()
 {
-    this._counter++
-    console.log("inst counter",this._counter);
+    this._counter++;
+    // console.log("inst counter",this._counter);
     return this._counter;
 }
 
@@ -124,8 +130,6 @@ CABLES.GLGUI.RectInstancer.prototype.setColor=function(idx,r,g,b)
     this._colors[idx*4+3]=1;
     this._needsRebuild=true;
 }
-
-
 
 
 
@@ -168,8 +172,6 @@ CABLES.GLGUI.GlRect.prototype.setPosition=function(_x,_y)
         x+=this._parent.x;
         y+=this._parent.y;
     }
-
-    // console.log(x,y);
 
     this._rectInstancer.setPosition(this._attrIndex,x,y);
 
@@ -279,9 +281,6 @@ CABLES.GLGUI.GlOp.prototype.update=function()
 
 
 
-
-
-
 CABLES.GLGUI.GlPatch=function(patch)
 {
     this._patch=patch;
@@ -332,9 +331,8 @@ CABLES.GLGUI.GlPatch.prototype.dispose=function()
     {
         this._glOps[0].dispose();
         this._glOps.splice(0,1);
-        console.log("aaa",this._glOps.length);
     }
-    
+
     if(this._rectInstancer)this._rectInstancer.dispose();
 }
 
