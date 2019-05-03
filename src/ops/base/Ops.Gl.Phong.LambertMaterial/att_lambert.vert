@@ -45,15 +45,17 @@ void main()
 {
     vec4 pos = vec4( vPosition, 1. );
     mat4 mMatrix=modelMatrix;
+    vec3 tangent=attrTangent,
+        bitangent=attrBiTangent;
 
     texCoord=attrTexCoord;
 
     norm=attrVertNormal;
+    normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
 
     {{MODULE_VERTEX_POSITION}}
 
     // this needs only to be done when instancing....
-    normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
 
     mvMatrix=viewMatrix*mMatrix;
     modelPos=mMatrix*pos;

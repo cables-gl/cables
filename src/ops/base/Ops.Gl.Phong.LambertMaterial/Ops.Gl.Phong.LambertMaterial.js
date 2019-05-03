@@ -9,6 +9,7 @@ r.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,"LambertMaterial");
+shader.define('NUM_LIGHTS','1');
 
 const runiform=new CGL.Uniform(shader,'f','r',r);
 const guniform=new CGL.Uniform(shader,'f','g',g);
@@ -85,10 +86,8 @@ var updateLights=function()
 
                     lights[count].fallOff.setValue(cgl.frameStore.phong.lights[i].fallOff);
                     lights[count].radius.setValue(cgl.frameStore.phong.lights[i].radius);
-
                     lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
                     lights[count].ambient.setValue(cgl.frameStore.phong.lights[i].ambient);
-                    // lights[count].specular.setValue(cgl.frameStore.phong.lights[i].specular);
                     lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
                     lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
                     if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
@@ -110,7 +109,11 @@ function updateSpecular()
 
 execute.onTriggered=function()
 {
-    if(!shader)return;
+    if(!shader)
+    {
+        console.log("lambert has no shader...");
+        return;
+    }
 
     cgl.setShader(shader);
     updateLights();

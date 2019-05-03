@@ -72,7 +72,13 @@ op.onDelete = onDelete;
 
 op.init=function()
 {
-    valuePort.set(parseFloat(defaultValuePort.get()));
+    if(op.patch.config.sidebar)
+    {
+        op.patch.config.sidebar[labelPort.get()];
+        valuePort.set(op.patch.config.sidebar[labelPort.get()]);
+    }
+    else
+        valuePort.set(parseFloat(defaultValuePort.get()));
 };
 
 reset.onTriggered=function()

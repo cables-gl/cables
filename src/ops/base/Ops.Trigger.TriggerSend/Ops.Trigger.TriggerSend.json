@@ -1,0 +1,26 @@
+{
+    "id": "ce1eaf2b-943b-4dc0-ab5e-ee11b63c9ed0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1555063271731
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1555063274095,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Named Trigger",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerSend"
+    }
+}

@@ -1,6 +1,6 @@
-CABLES.WEBAUDIO.createAudioContext(op);
+var audioCtx=CABLES.WEBAUDIO.createAudioContext(op);
 
-const analyser = audioContext.createAnalyser();
+const analyser = audioCtx.createAnalyser();
 analyser.smoothingTimeConstant = 0.3;
 analyser.fftSize = 256;
 
@@ -28,11 +28,19 @@ refresh.onTriggered = function()
     analyser.minDecibels = -90;
     analyser.maxDecibels = 0;
 
+    if(fftBufferLength != analyser.frequencyBinCount)
+    {
+        console.log("change!");
+        fftBufferLength = analyser.frequencyBinCount;
+        fftDataArray = new Uint8Array(fftBufferLength);
+    }
+
     if(!fftDataArray)
     {
-        op.log("fftDataArray is null, returning.");
+        op.log("[audioanalyzer] fftDataArray is null, returning.");
         return;
     }
+
     var values = 0;
 
     for (var i = 0; i < fftDataArray.length; i++) values += fftDataArray[i];
@@ -43,7 +51,7 @@ refresh.onTriggered = function()
     try
     {
         if(getFreq) analyser.getByteFrequencyData(fftDataArray);
-            else analyser.getByteTimeDomainData(fftDataArray);    
+            else analyser.getByteTimeDomainData(fftDataArray);
     }
     catch(e) { op.log(e); }
 

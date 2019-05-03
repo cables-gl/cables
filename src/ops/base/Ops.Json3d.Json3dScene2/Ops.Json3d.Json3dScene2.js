@@ -274,7 +274,7 @@ var loadCameras=function(data,seq)
                         camOp.getPort('centerX').set(cam.target.transformation[12]);
                         camOp.getPort('centerY').set(cam.target.transformation[13]);
                         camOp.getPort('centerZ').set(cam.target.transformation[14]);
-    
+
                         op.log("target not animated",cam.target.transformation[3]);
                     }
                 }
@@ -314,14 +314,14 @@ function hasMeshChildNode(n)
         for(var i=0;i<n.children.length;i++)
         {
             if(n.children[i].meshes && n.children[i].meshes.length>0)return true;
-            
+
             var childMeshes=hasMeshChildNode(n.children[i]);
             if(childMeshes)return true;
         }
     }
-    
+
     console.log('has no childs',n);
-    
+
     return false;
 }
 
@@ -348,16 +348,6 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     prevOp=anTransOp;
                 }
 
-                if(an.scalingkeys && an.scalingkeys.length>0)
-                {
-                    var anScaleOp=op.patch.addOp('Ops.Json3d.ScaleChannel',{"subPatch":subPatchId});
-                    anScaleOp.uiAttribs.title=anScaleOp.name=ch.name+' scale anim';
-                    anScaleOp.getPort('channel').set( ch.name );
-                    op.patch.link(prevOp,'trigger',anScaleOp,'render');
-
-                    if(!prevOp)op.patch.link(parentOp,parentPort,anScaleOp,'render');
-                    prevOp=anScaleOp;
-                }
 
                 if(an.rotationkeys && an.rotationkeys.length>0)
                 {
@@ -369,19 +359,34 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     if(!prevOp)op.patch.link(parentOp,parentPort,anRotOp,'render');
                     prevOp=anRotOp;
                 }
+
+
+                if(an.scalingkeys && an.scalingkeys.length>0)
+                {
+                    var anScaleOp=op.patch.addOp('Ops.Json3d.ScaleChannel',{"subPatch":subPatchId});
+                    anScaleOp.uiAttribs.title=anScaleOp.name=ch.name+' scale anim';
+                    anScaleOp.getPort('channel').set( ch.name );
+                    op.patch.link(prevOp,'trigger',anScaleOp,'render');
+
+                    if(!prevOp)op.patch.link(parentOp,parentPort,anScaleOp,'render');
+                    prevOp=anScaleOp;
+                }
+
+
+
             }
         }
 
         var sameMesh=false;
-        
+
         if(detectClones.get())
         {
             sameMesh=true;
-            
+
             if(ch.hasOwnProperty('children'))
             {
                 // test if children are all same mesh...
-    
+
                 var cloneTransforms=[];
                 if(ch.children.length>1 && ch.children[0].meshes && ch.children[0].meshes.length>0)
                 {
@@ -393,11 +398,11 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                             {
                                 if(ch.children[i].meshes[0]==ch.children[0].meshes[0])
                                 {
-    
+
                                 } else { sameMesh=false; }
                             } else { sameMesh=false; }
                         }
-    
+
                         if(sameMesh)
                         {
                             if(!ch.children[i].transposed)
@@ -414,30 +419,30 @@ function addChild(data,x,y,parentOp,parentPort,ch)
 
         if(!prevOp )
         {
-            
+
             // console.log(ch.transformation);
             var eq=mat4.exactEquals(ch.transformation,[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);
-            
+
             if(!eq)
             {
                 var transOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":subPatchId});
-    
+
                 if(!ch.transposed)
                 {
                     ch.transposed=true;
                     mat4.transpose(ch.transformation,ch.transformation);
                 }
-    
+
                 transOp.getPort('matrix').set(ch.transformation);
                 prevOp=transOp;
-    
+
                 op.patch.link(parentOp,parentPort,prevOp,'render');
                 if(ch.name) transOp.uiAttribs.title=transOp.name=ch.name;
-                
+
             }
-            else 
+            else
                 prevOp=parentOp;
-            
+
         }
 
 
@@ -494,7 +499,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                         var matOp=op.patch.addOp('Ops.Json3d.Material',{"subPatch":subPatchId});
                         op.patch.link(prevOp,'trigger',matOp,'exe');
                         prevOp=matOp;
-    
+
                         for(var j in jsonMat.properties)
                             if(jsonMat.properties[j].key && jsonMat.properties[j].value && jsonMat.properties[j].key=='?mat.name')
                                 matOp.getPort('name').set( jsonMat.properties[j].value );
@@ -514,7 +519,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                         var l=op.patch.link(parentOp,'trigger 15',meshOp,'render');
                         console.log('prevOp link',parentOp);
                     }
-                    
+
                 }
             }
         }
@@ -552,7 +557,7 @@ function addChild(data,x,y,parentOp,parentPort,ch)
                     // console.log('   child...'+i+'/'+ch.children.length);
                     var xx=maxx;
                     if(ch.children.length>1)xx++;
-                    
+
                     if( hasMeshChildNode(ch.children[i]) )
                         addChild(data,xx,y,prevOp,'trigger',ch.children[i]);
                 }
@@ -600,19 +605,19 @@ function reload()
                     if(CABLES.UI)op.uiAttr({'error':'could not load file...'});
                     return;
                 }
-                
-                
+
+
                 scene.setValue(data);
                 doCreate.setUiAttribs({greyout:false});
                 op.patch.loading.finished(loadingId);
-                
+
                 outLoading.set(false);
                 if(CABLES.UI) gui.jobs().finish('loading3d'+loadingId);
                 doCreate.setUiAttribs({greyout:false});
             });
     }
 
-    
+
     outLoading.set(true);
     var loadingId=op.patch.loading.start('json3dScene',filename.get());
     if(CABLES.UI) gui.jobs().start({id:'loading3d'+loadingId,title:'loading 3d data'},doLoad);
@@ -635,7 +640,7 @@ function createNodes()
             op.patch.link(op,'trigger',subPatchOp,'create port');
 
             var inputs=op.patch.getOpsByObjName("Ops.Ui.PatchInput");
-            
+
             for(var i=0;i<inputs.length;i++)
             {
                 if(inputs[i].uiAttribs.subPatch==subPatchId)
@@ -645,7 +650,7 @@ function createNodes()
                 }
             }
         }
-        
+
 
         var rootMatrixOp=op.patch.addOp('Ops.Gl.Matrix.MatrixMul',{"subPatch":subPatchId,"translate":{x:op.uiAttribs.translate.x,y:op.uiAttribs.translate.y+75}});
         rootMatrixOp.uiAttribs.title='rootMatrix';
@@ -670,12 +675,12 @@ function createNodes()
             {
                 var ntrigger=i+2;
                 if(ntrigger>9)ntrigger=9;
-                
+
                 if( hasMeshChildNode( data.rootnode.children[i] ))
                     addChild( data,maxx-2,3,root,'trigger '+ntrigger,data.rootnode.children[i] );
             }
         }
-        
+
         if(CABLES.UI)
         {
             setTimeout(function()
@@ -685,7 +690,7 @@ function createNodes()
 
                 gui.patch().setSelectedOpById(subPatchOpStart.id);
                 CABLES.CMD.PATCH.tidyChildOps();
-                
+
                 gui.patch().updateSubPatches();
 
             },100);
@@ -697,7 +702,7 @@ function createNodes()
         if(CABLES.UI)
         {
             CABLES.UI.notifyError("remove child nodes first");
-            
+
         }
     }
 }

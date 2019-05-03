@@ -9,7 +9,7 @@ const
     trigger=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;
-const shader=new CGL.Shader(cgl);
+const shader=new CGL.Shader(cgl,'perlinnoise');
 const srcFrag=attachments.perlinnoise3d_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
 op.setPortGroup("Position",[x,y,z]);

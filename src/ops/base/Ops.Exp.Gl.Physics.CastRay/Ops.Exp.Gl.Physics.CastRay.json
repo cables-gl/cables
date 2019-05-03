@@ -104,8 +104,41 @@
                 "type": "0",
                 "name": "aabb z2",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "to x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "to y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "to z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "from x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "from y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "from z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Exp.Gl.Physics.CastRay"
-    }
+    },
+    "libs": [
+        "cannon.js"
+    ]
 }

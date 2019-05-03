@@ -40,7 +40,6 @@ CGL.Marker=function(cgl)
         .endl()+'   gl_Position = projMatrix * mvMatrix * pos;'
         .endl()+'}';
 
-
     shader.setSource(vert,frag);
 
     this._vScale=vec3.create();

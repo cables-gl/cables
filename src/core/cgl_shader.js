@@ -139,7 +139,7 @@ CGL.Shader.prototype._addLibs=function(src)
 
 CGL.Shader.prototype.compile = function() {
     CGL.profileShaderCompiles++;
-    CGL.profileShaderCompileName = name;
+    CGL.profileShaderCompileName = this._name;
 
     var extensionString = '';
     if (this._extensions)
@@ -193,7 +193,7 @@ CGL.Shader.prototype.compile = function() {
 
         vs = '#version 300 es'
             .endl() + '// '
-            .endl() + '// vertex shader '+name
+            .endl() + '// vertex shader '+this._name
             .endl() + '// '
             .endl() + 'precision ' + this.precision+' float;'
             .endl() + ''
@@ -206,7 +206,7 @@ CGL.Shader.prototype.compile = function() {
 
         fs = '#version 300 es'
             .endl() + '// '
-            .endl() + '// fragment shader '+name
+            .endl() + '// fragment shader '+this._name
             .endl() + '// '
             .endl() + 'precision ' + this.precision+' float;'
             .endl() + ''
@@ -221,7 +221,7 @@ CGL.Shader.prototype.compile = function() {
     } else {
         fs = ''
             .endl() + '// '
-            .endl() + '// fragment shader '+name
+            .endl() + '// fragment shader '+this._name
             .endl() + '// '
             .endl() + '#define WEBGL1'
             .endl() + '#define texture texture2D'
@@ -232,7 +232,7 @@ CGL.Shader.prototype.compile = function() {
 
         vs = ''
             .endl() + '// '
-            .endl() + '// vertex shader '+name
+            .endl() + '// vertex shader '+this._name
             .endl() + '// '
             .endl() + '#define WEBGL1'
             .endl() + '#define texture texture2D'
@@ -466,10 +466,30 @@ CGL.Shader.prototype.bind = function()
     }
 };
 
+
+/**
+ * easily enable/disable a define without a value
+ * @param {name} name
+ * @function
+ */
+CGL.Shader.prototype.toggleDefine = function(name, enabled)
+{
+    if(enabled) this.define(name);
+        else this.removeDefine(name);
+};
+
+/**
+ * add a define to a shader, e.g.  #define DO_THIS_THAT 1
+ * @param {name} name
+ * @param {value} value (can be empty)
+ * @function
+ */
 CGL.Shader.prototype.define = function(name, value)
 {
     if (!value) value = '';
-    for (var i = 0; i < this._defines.length; i++) {
+    for (var i = 0; i < this._defines.length; i++)
+    {
+        if (this._defines[i][0] == name && this._defines[i][1] == value) return;
         if (this._defines[i][0] == name) {
             this._defines[i][1] = value;
             this._needsRecompile = true;
@@ -498,7 +518,12 @@ CGL.Shader.prototype.hasDefine = function(name) {
         if (this._defines[i][0] == name) return true;
 };
 
-CGL.Shader.prototype.removeDefine = function(name, value) {
+/**
+ * remove a define from a shader
+ * @param {name} name
+ * @function
+ */
+CGL.Shader.prototype.removeDefine = function(name) {
     for (var i = 0; i < this._defines.length; i++) {
         if (this._defines[i][0] == name) {
             this._defines.splice(i, 1);

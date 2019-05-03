@@ -56,7 +56,6 @@ CGL.Texture=function(__cgl,options)
     }
 
     this.setSize(options.width, options.height);
-        // else this.setSize(CGL.DEFAULT_TEXTURE_SIZE,CGL.DEFAULT_TEXTURE_SIZE);
 };
 
 /**
@@ -521,13 +520,13 @@ CGL.Texture.getTempGradientTexture=function(cgl)
 {
     if(CGL.tempTextureGradient) return CGL.tempTextureGradient;
     var temptex=new CGL.Texture(cgl);
-    const size=8;
+    const size=256;
     var data = new Uint8Array(size*size*4);//.fill(0);
 
     for(var y=0;y<size;y++)
         for(var x=0;x<size;x++)
         {
-            data[ (x+y*size)*4+0]=data[ (x+y*size)*4+1]=data[ (x+y*size)*4+2]=255-y*32;
+            data[ (x+y*size)*4+0]=data[ (x+y*size)*4+1]=data[ (x+y*size)*4+2]=255-y;
             data[ (x+y*size)*4+3]=255;
         }
 

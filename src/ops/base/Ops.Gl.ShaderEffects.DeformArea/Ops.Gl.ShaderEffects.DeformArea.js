@@ -1,34 +1,25 @@
+const render=op.inTrigger("render");
+const next=op.outTrigger("trigger");
+const inSize=op.inValue("Size",1);
+const inStrength=op.inValue("Strength",0.5);
+const inSmooth=op.inValueBool("Smooth",true);
+const inWorldSpace=op.inValueBool("WorldSpace",false);
+const x=op.inValue("x");
+const y=op.inValue("y");
+const z=op.inValue("z");
 
 const cgl=op.patch.cgl;
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-
-var inSize=op.inValue("Size",1);
-var inStrength=op.inValue("Strength",0.5);
-var inSmooth=op.inValueBool("Smooth",true);
-var inWorldSpace=op.inValueBool("WorldSpace",false);
-
-
 inWorldSpace.onChange=updateWorldspace;
 
-{
-    // position
-
-    var x=op.inValue("x");
-    var y=op.inValue("y");
-    var z=op.inValue("z");
-}
-
-
 var shader=null;
-
 var srcHeadVert=attachments.deformarea_vert;
+render.onLinkChanged=removeModule;
 
 var srcBodyVert=''
     .endl()+'pos=MOD_deform(pos,mMatrix);'
     .endl();
-    
+
 var moduleVert=null;
 
 function removeModule()
@@ -37,24 +28,24 @@ function removeModule()
     shader=null;
 }
 
-
-op.render.onLinkChanged=removeModule;
-
-op.render.onTriggered=function()
+render.onTriggered=function()
 {
-    
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
-        gui.setTransformGizmo(
-            {
-                posX:x,
-                posY:y,
-                posZ:z
-            });
+    if(CABLES.UI)
+    {
+        if(gui.patch().isCurrentOp(op)) gui.setTransformGizmo({posX:x,posY:y,posZ:z});
 
+        if(CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))
+        {
+            cgl.pushModelMatrix();
+            mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
+            CABLES.GL_MARKER.drawSphere(op,inSize.get());
+            cgl.popModelMatrix();
+        }
+    }
 
     if(!cgl.getShader())
     {
-         op.trigger.trigger();
+         next.trigger();
          return;
     }
 
@@ -78,21 +69,12 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
-        updateWorldspace()
+        updateWorldspace();
     }
-    
-    
+
     if(!shader)return;
-
-    op.trigger.trigger();
+    next.trigger();
 };
-
-
-
-
-
-
-
 
 function updateWorldspace()
 {
@@ -100,8 +82,3 @@ function updateWorldspace()
     if(inWorldSpace.get()) shader.define(moduleVert.prefix+"WORLDSPACE");
         else shader.removeDefine(moduleVert.prefix+"WORLDSPACE");
 }
-
-
-
-
-

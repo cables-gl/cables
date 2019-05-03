@@ -1,6 +1,7 @@
 {{MODULES_HEAD}}
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
+IN vec3 attrVertNormal;
 
 OUT vec3 norm;
 #ifdef HAS_TEXTURES

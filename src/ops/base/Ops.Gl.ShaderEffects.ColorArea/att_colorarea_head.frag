@@ -3,7 +3,6 @@ UNI float MOD_size;
 UNI float MOD_amount;
 UNI float MOD_falloff;
 
-
 UNI float MOD_r;
 UNI float MOD_g;
 UNI float MOD_b;

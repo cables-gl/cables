@@ -1,5 +1,4 @@
 {
-    "updated": 1539275181916,
     "authorName": "_LJ_",
     "id": "9b39dd02-9558-4297-ba8a-8f21f690d128",
     "created": 1539269021984,
@@ -32,6 +31,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Geometry.RotationFromNormal"
+        "name": "Ops.Math.RotationFromNormal"
     }
 }

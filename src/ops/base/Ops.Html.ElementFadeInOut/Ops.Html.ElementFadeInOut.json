@@ -1,5 +1,4 @@
 {
-    "updated": 1536747687286,
     "authorName": "pandur",
     "id": "392e65eb-4ebe-4adb-8711-e4cfe059c6c9",
     "created": 1520435372077,
@@ -25,10 +24,24 @@
                 "subType": "number"
             }
         ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Is Showing",
+                "subType": "boolean"
+            }
+        ],
         "name": "Ops.Html.ElementFadeInOut"
     },
     "summary": "fade html elements in or out",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "fixed: bug when element faded in, when visible is set to false, when loading the page",
+            "author": "pandur",
+            "date": 1556524546620
+        }
+    ]
 }

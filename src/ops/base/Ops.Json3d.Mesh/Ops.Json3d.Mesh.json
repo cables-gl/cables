@@ -16,12 +16,12 @@
             },
             {
                 "type": "0",
-                "name": "center pivot",
+                "name": "draw",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "draw",
+                "name": "center pivot",
                 "subType": "boolean"
             }
         ],

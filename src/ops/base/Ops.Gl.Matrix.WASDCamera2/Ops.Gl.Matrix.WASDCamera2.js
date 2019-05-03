@@ -10,9 +10,9 @@ var movementSpeedFactor = 0.5;
 
 var fly=op.inValueBool("Allow Flying",true);
 
-var outPosX=op.addOutPort(new CABLES.Port(op,"posX",CABLES.OP_PORT_TYPE_VALUE));
-var outPosY=op.addOutPort(new CABLES.Port(op,"posY",CABLES.OP_PORT_TYPE_VALUE));
-var outPosZ=op.addOutPort(new CABLES.Port(op,"posZ",CABLES.OP_PORT_TYPE_VALUE));
+var outPosX=op.outValue("posX");
+var outPosY=op.outValue("posY");
+var outPosZ=op.outValue("posZ");
 
 var outMouseDown=op.outTrigger("Mouse Left");
 var outMouseDownRight=op.outTrigger("Mouse Right");
@@ -51,6 +51,8 @@ render.onTriggered=function()
     cgl.pushViewMatrix();
 
     vec3.set(vPos, -posX,-posY,-posZ);
+
+    mat4.identity(cgl.vMatrix);
 
     mat4.rotateX( cgl.vMatrix ,cgl.vMatrix,DEG2RAD*rotX);
     mat4.rotateY( cgl.vMatrix ,cgl.vMatrix,DEG2RAD*rotY);

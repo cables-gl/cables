@@ -8,7 +8,7 @@
             {
                 "type": "0",
                 "name": "axis",
-                "subType": "number"
+                "subType": "string"
             },
             {
                 "type": "0",

@@ -1,16 +1,18 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI float amount;
-UNI float uScaleX;
-UNI float uScaleY;
+UNI float uScaleX,uScaleY;
+UNI float offsetX,offsetY;
+UNI float centerX,centerY;
 
 {{BLENDCODE}}
 
 void main()
 {
-    vec2 scale = vec2(uScaleX,uScaleY);
     vec2 uv = texCoord;
-    uv = (uv - 0.5) / scale + 0.5;
+
+    uv.x = (uv.x - centerX) / uScaleX + centerX+offsetX;
+    uv.y = (uv.y - centerY) / uScaleY +centerY+offsetY;
 
     //blend section
     vec4 col = texture2D(tex,uv);

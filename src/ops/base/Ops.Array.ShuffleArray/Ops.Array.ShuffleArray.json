@@ -49,5 +49,17 @@
                 "text": "The shuffled array"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Works now when an array is connected and will only shuffle on a trigger.",
+            "author": "andro",
+            "date": 1556103650012
+        },
+        {
+            "message": "code cleanup - removed unused variables",
+            "author": "andro",
+            "date": 1556103723657
+        }
+    ]
 }

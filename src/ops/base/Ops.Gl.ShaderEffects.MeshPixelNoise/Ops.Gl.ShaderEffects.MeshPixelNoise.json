@@ -19,6 +19,21 @@
                 "type": "0",
                 "name": "WorldSpace",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
             }
         ],
         "portsOut": [

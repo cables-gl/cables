@@ -31,18 +31,14 @@ var mat=mat4.create();
 
 function doRender()
 {
-    // console.log(doRender);
-    // if(op.instanced(exe))return;
 
-    if(CABLES.UI && CABLES.UI.renderHelper)
+    if(CABLES.UI && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op)))
     {
         CABLES.GL_MARKER.drawCube(op,
             size.get()/2*scaleX.get(),
             size.get()/2*scaleY.get(),
             size.get()/2*scaleZ.get());
     }
-
-    // op.patch.instancing.pushLoop(randoms.length);
 
     if(scrollX.get()!=0)
     {

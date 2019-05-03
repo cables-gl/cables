@@ -3,7 +3,10 @@ const
     outVertices=op.outArray("Vertices"),
     outFaces=op.outArray("Faces"),
     outTextcoords=op.outArray("TexCoords"),
-    outNormals=op.outArray("Normals");
+    outNormals=op.outArray("Normals"),
+    outBiTangents=op.outArray("BiTangents"),
+    outTangents=op.outArray("Tangents");
+
 
 geometry.onChange=function()
 {
@@ -14,4 +17,6 @@ geometry.onChange=function()
     outFaces.set(geom.verticesIndices);
     outTextcoords.set(geom.texCoords);
     outNormals.set(geom.vertexNormals);
+    outTangents.set(geom.tangents);
+    outBiTangents.set(geom.biTangents);
 };

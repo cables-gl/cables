@@ -31,7 +31,11 @@ CGL.Geometry=function(name)
     });
 };
 
-
+/**
+ * @function
+ * @description clear all buffers/set them to length 0
+ * @name CGL.Geometry#clear
+ */
 CGL.Geometry.prototype.clear=function()
 {
     this.vertices=new Float32Array([]);
@@ -207,6 +211,20 @@ CGL.Geometry.prototype.copy=function()
 
     geom.vertexNormals.length=this.vertexNormals.length;
     for(i=0;i<this.vertexNormals.length;i++) geom.vertexNormals[i]=this.vertexNormals[i];
+
+    if(this.tangents)
+    {
+        geom.tangents=[];
+        geom.tangents.length=this.tangents.length;
+        for(i=0;i<this.tangents.length;i++) geom.tangents[i]=this.tangents[i];
+    }
+
+    if(this.biTangents)
+    {
+        geom.biTangents=[];
+        geom.biTangents.length=this.biTangents.length;
+        for(i=0;i<this.biTangents.length;i++) geom.biTangents[i]=this.biTangents[i];
+    }
 
     geom.barycentrics.length=this.barycentrics.length;
     for(i=0;i<this.barycentrics.length;i++) geom.barycentrics[i]=this.barycentrics[i];
@@ -506,6 +524,7 @@ CGL.Geometry.prototype.mapTexCoords2d=function()
 
 // -----------------
 
+// TODO : move this into "old" circle op 
 CGL.Geometry.buildFromFaces=function(arr)
 {
     var vertices=[];
@@ -571,26 +590,38 @@ CGL.Geometry.json2geom=function(jsonMesh)
 {
     var geom=new CGL.Geometry();
     geom.verticesIndices=[];
-    geom.vertices=JSON.parse(JSON.stringify(jsonMesh.vertices));
+
+    geom.vertices=jsonMesh.vertices||[];
     geom.vertexNormals=jsonMesh.normals||[];
     geom.vertexColors=jsonMesh.colors||[];
     geom.tangents=jsonMesh.tangents||[];
     geom.biTangents=jsonMesh.bitangents||[];
-        
-    // console.log(jsonMesh.texturecoords);
-
     if(jsonMesh.texturecoords) geom.setTexCoords( jsonMesh.texturecoords[0] );
-    
-    // console.log(geom.texCoords);
-    // geom.verticesIndices=[].concat.apply([], jsonMesh.faces);
 
-    geom.verticesIndices.length=jsonMesh.faces.length*3;
-    for(var i=0;i<jsonMesh.faces.length;i++)
+    if(jsonMesh.vertices_b64) geom.vertices=new Float32Array(CABLES.b64decTypedArray(jsonMesh.vertices_b64));
+    if(jsonMesh.normals_b64) geom.vertexNormals=new Float32Array(CABLES.b64decTypedArray(jsonMesh.normals_b64));
+    if(jsonMesh.tangents_b64) geom.tangents=new Float32Array(CABLES.b64decTypedArray(jsonMesh.tangents_b64));
+    if(jsonMesh.bitangents_b64) geom.biTangents=new Float32Array(CABLES.b64decTypedArray(jsonMesh.bitangents_b64));
+    if(jsonMesh.texturecoords_b64) geom.setTexCoords( new Float32Array(CABLES.b64decTypedArray(jsonMesh.texturecoords_b64[0])));
+
+    // console.log(jsonMesh.vertices[2],geom.vertices[2]);
+    // console.log(jsonMesh.vertices.length,geom.vertices.length);
+    // console.log(geom);
+
+    if(jsonMesh.faces_b64)
     {
-        geom.verticesIndices[i*3]=jsonMesh.faces[i][0];
-        geom.verticesIndices[i*3+1]=jsonMesh.faces[i][1];
-        geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
+        geom.verticesIndices=new Uint32Array(CABLES.b64decTypedArray(jsonMesh.faces_b64));
     }
-    
+    else
+    {
+        geom.verticesIndices.length=jsonMesh.faces.length*3;
+        for(var i=0;i<jsonMesh.faces.length;i++)
+        {
+            geom.verticesIndices[i*3]=jsonMesh.faces[i][0];
+            geom.verticesIndices[i*3+1]=jsonMesh.faces[i][1];
+            geom.verticesIndices[i*3+2]=jsonMesh.faces[i][2];
+        }
+    }
+
     return geom;
 };

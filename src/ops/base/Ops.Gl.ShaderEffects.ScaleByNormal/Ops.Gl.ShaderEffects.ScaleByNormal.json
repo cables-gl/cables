@@ -1,5 +1,4 @@
 {
-    "updated": 1512155731577,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "008c6b04-31b8-4fe0-a6d7-08ce9cd74490",
@@ -12,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Strength",
+                "subType": "number"
             }
         ],
         "portsOut": [

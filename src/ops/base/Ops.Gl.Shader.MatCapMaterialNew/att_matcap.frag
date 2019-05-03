@@ -39,7 +39,7 @@ IN vec3 e;
 
    UNI sampler2D texNormal;
    UNI mat4 normalMatrix;
-   
+
    vec2 vNormt;
 #endif
 
@@ -77,9 +77,9 @@ void main()
     	vec3 dFdxPos = dFdx( eye_relative_pos );
     	vec3 dFdyPos = dFdy( eye_relative_pos );
     	vec3 ssn = normalize( cross(dFdxPos,dFdyPos ));
-    	
+
         vec3 rr = reflect( e, ssn );
-        float ssm = 2. * sqrt( 
+        float ssm = 2. * sqrt(
             pow(rr.x, 2.0)+
             pow(rr.y, 2.0)+
             pow(rr.z + 1.0, 2.0)
@@ -87,10 +87,10 @@ void main()
 
 
         vn = (rr.xy / ssm + 0.5);
-        
+
         vn.t=clamp(vn.t, 0.0, 1.0);
         vn.s=clamp(vn.s, 0.0, 1.0);
-        
+
         // float dst = dot(abs(coord-center), vec2(1.0));
         // float aaf = fwidth(dst);
         // float alpha = smoothstep(radius - aaf, radius, dst);
@@ -99,12 +99,12 @@ void main()
 
    #ifdef HAS_NORMAL_TEXTURE
         vec3 tnorm=texture( texNormal, vec2(texCoord.x*repeatX,texCoord.y*repeatY) ).xyz * 2.0 - 1.0;
-        
+
         tnorm = normalize(tnorm*normalScale);
-        
+
         vec3 tangent;
         vec3 binormal;
-        
+
         #ifdef CALC_TANGENT
             vec3 c1 = cross(norm, vec3(0.0, 0.0, 1.0));
 //            vec3 c2 = cross(norm, vec3(0.0, 1.0, 0.0));
@@ -133,20 +133,20 @@ void main()
         vec3 n = normalize( mat3(normalMatrix) * (norm+tnorm*normalScale) );
 
         vec3 re = reflect( e, n );
-        float m = 2. * sqrt( 
+        float m = 2. * sqrt(
             pow(re.x, 2.0)+
             pow(re.y, 2.0)+
             pow(re.z + 1.0, 2.0)
         );
-        
+
         vn = (re.xy / m + 0.5);
-        
+
     #endif
 
     vn.t=clamp(vn.t, 0.0, 1.0);
     vn.s=clamp(vn.s, 0.0, 1.0);
-    
-    
+
+
     vec4 col = texture( tex, vn );
 
     #ifdef HAS_DIFFUSE_TEXTURE

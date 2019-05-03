@@ -3,54 +3,80 @@ const inVisible=op.inValueBool("Visible",true);
 const inDuration=op.inValue("Duration",0.5);
 const inOpacity=op.inValue("Opacity",1);
 
+
+const outShowing=op.outValueBool("Is Showing",false);
 var theTimeout=null;
 inDuration.onChange=update;
 inOpacity.onChange=update;
 
 inVisible.onChange=updateVisibility;
+inEle.onChange=updateVisibility;
+
 var styleEle=null;
 var eleId='css_'+CABLES.uuid();
 
 update();
 
-inEle.onChange=updateVisibility;
+var loaded=false;
+var oldvis=null;
 
+op.onLoaded=function()
+{
+    loaded=true;
+
+    updateVisibility();
+    outShowing.set(inVisible.get());
+
+};
 
 function updateVisibility()
 {
-    if(styleEle && inEle.get())
+    const ele=inEle.get();
+    if(!loaded)
+    {
+        return;
+    }
+
+    if(styleEle && ele)
     {
         if(inVisible.get())
         {
-            if(!inEle.get().classList.contains('CABLES_animFadeIn'))
+            outShowing.set(true);
+            if(!ele.classList.contains('CABLES_animFadeIn'))
             {
+
                 clearTimeout(theTimeout);
-                inEle.get().classList.remove("CABLES_animFadedOut");
-                inEle.get().classList.remove("CABLES_animFadeOut");
-                inEle.get().classList.add("CABLES_animFadeIn");
+                ele.classList.remove("CABLES_animFadedOut");
+                ele.classList.remove("CABLES_animFadeOut");
+                ele.classList.add("CABLES_animFadeIn");
                 theTimeout=setTimeout(function()
-                {
-                    inEle.get().classList.remove("CABLES_animFadeIn");
-                },inDuration.get()*1000);
+                    {
+                        ele.classList.remove("CABLES_animFadeIn");
+                        outShowing.set(true);
+                    },inDuration.get()*1000);
 
             }
         }
         else
         {
-            if(!inEle.get().classList.contains('CABLES_animFadeOut'))
+            outShowing.set(true);
+            if(!ele.classList.contains('CABLES_animFadeOut'))
             {
-                inEle.get().classList.remove("CABLES_animFadeIn");
-                inEle.get().classList.add("CABLES_animFadeOut");
+
+                clearTimeout(theTimeout);
+                ele.classList.remove("CABLES_animFadeIn");
+                ele.classList.add("CABLES_animFadeOut");
                 theTimeout=setTimeout(function()
-                {
-                    inEle.get().classList.add("CABLES_animFadedOut");
-                },inDuration.get()*1000);
+                    {
+                        ele.classList.add("CABLES_animFadedOut");
+                        outShowing.set(false);
+                    },inDuration.get()*1000);
             }
         }
     }
     else
     {
-        console.log("fadeInOut: no html element???");
+        // console.log("fadeInOut: no html element???");
     }
 }
 
@@ -58,7 +84,7 @@ function updateVisibility()
 function getCssContent()
 {
     var css=attachments.fadeInOut_css;
-    
+
     while(css.indexOf("$LENGTH")>-1)css=css.replace('$LENGTH',inDuration.get());
     while(css.indexOf("$FULLOPACITY")>-1)css=css.replace('$FULLOPACITY',inOpacity.get());
 

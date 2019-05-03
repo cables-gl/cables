@@ -17,6 +17,44 @@ var CABLES = CABLES || {};
  */
 
 /**
+ * op added to patch event
+ * @event Patch#onOpAdd
+ * @type {object}
+ * @property {Op} op new op
+ */
+
+/**
+ * op deleted from patch
+ * @event Patch#onOpDelete
+ * @type {object}
+ * @property {Op} op that will be deleted
+ */
+
+/**
+ * link event - two ports will be linked
+ * @event Patch#onLink
+ * @type {object}
+ * @property {Port} port1
+ * @property {Port} port2
+ */
+
+/**
+ * unlink event - a link was deleted
+ * @event Patch#onUnLink
+ * @type {object}
+ */
+
+
+/**
+ * variables has been changed / a variable has been added to the patch
+ * @event Patch#variablesChanged
+ * @type {object}
+ * @property {Port} port1
+ * @property {Port} port2
+ */
+
+
+/**
  * @name Patch
  * @memberof CABLES
  * @param {patchConfig} config
@@ -24,6 +62,9 @@ var CABLES = CABLES || {};
  * @class
  */
 CABLES.Patch = function(cfg) {
+
+    CABLES.EventTarget.apply(this);
+
     this.ops = [];
     this.settings = {};
     this.timer = new CABLES.Timer();
@@ -49,6 +90,7 @@ CABLES.Patch = function(cfg) {
     this._frameNum = 0;
     this.instancing = new CABLES.Instancing();
     this.onOneFrameRendered=null;
+    this.namedTriggers={};
 
     this._origData=null;
     this._frameNext = 0;
@@ -58,7 +100,7 @@ CABLES.Patch = function(cfg) {
 
     this.config = cfg || {
         glCanvasResizeToWindow: false,
-        glCanvasId: 'glcanvas',
+        // glCanvasId: 'glcanvas',
         prefixAssetPath: '',
         silent: false,
         onError: null,
@@ -66,21 +108,19 @@ CABLES.Patch = function(cfg) {
         onFirstFrameRendered: null,
 	    onPatchLoaded:null,
         fpsLimit: 0,
-        
     };
 
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
-    
     this._variableListeners = [];
     this.vars = {};
     if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
     this.cgl = new CGL.Context(this);
     
-    this.cgl.setCanvas(this.config.glCanvasId);
+    this.cgl.setCanvas(this.config.glCanvasId||'glcanvas');
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize('window');
     if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize('parent');
     this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
@@ -351,7 +391,8 @@ CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
 
         this.ops.push(op);
 
-        if (this.onAdd) this.onAdd(op);
+        // if (this.onAdd) this.onAdd(op);
+        this.emitEvent("onOpAdd",op);
         
         if(op.init)op.init();
     }
@@ -407,7 +448,14 @@ CABLES.Patch.prototype.deleteOp = function(opid, tryRelink) {
 
                 var opToDelete = this.ops[i];
                 opToDelete.removeLinks();
-                this.onDelete(opToDelete);
+
+                if(this.onDelete) // todo: remove
+                {
+                    console.log('deprecated this.onDelete',this.onDelete);
+                    this.onDelete(opToDelete);
+                }
+
+                this.emitEvent("onOpDelete",opToDelete);
                 this.ops.splice(i, 1);
 
                 if (opToDelete.onDelete) opToDelete.onDelete();
@@ -434,9 +482,7 @@ CABLES.Patch.prototype.getFrameNum = function() {
 CABLES.Patch.prototype.renderFrame = function(e) {
     this.timer.update();
     this.freeTimer.update();
-
     var time = this.timer.getTime();
-
 
     for (var i = 0; i < this.animFrameCallbacks.length; ++i) {
         if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum);
@@ -574,22 +620,17 @@ CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
         var link = new CABLES.Link(this);
         link.link(port1, port2);
 
-        this.onLink(port1, port2,link);
+        this.emitEvent("onLink",port1, port2,link);
         return link;
     }
 };
 
-CABLES.Patch.prototype.onAdd = function(op) {};
-CABLES.Patch.prototype.onDelete = function(op) {};
-CABLES.Patch.prototype.onLink = function(p1, p2) {};
-CABLES.Patch.prototype.onUnLink = function(p1, p2) {};
 CABLES.Patch.prototype.serialize = function(asObj) {
     var obj = {};
 
     obj.ops = [];
     obj.settings = this.settings;
     for (var i in this.ops) {
-        // console.log(this.ops[i].objName);
         obj.ops.push(this.ops[i].getSerialized());
     }
 
@@ -767,10 +808,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         reqs.checkOp(op);
 
         if (op) {
-            // op.id = obj.ops[iop].id;
             if (genIds) op.id = CABLES.uuid();
-
-            // console.log(obj.ops[iop].portsIn);
             op.portsInData=obj.ops[iop].portsIn;
             op._origData=obj.ops[iop];
 
@@ -778,17 +816,13 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                 var objPort = obj.ops[iop].portsIn[ipi];
                 var port = op.getPort(objPort.name);
 
-                // if(typeof objPort.value =='string' && !isNaN(objPort.value)) objPort.value=parseFloat(objPort.value);
                 if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) objPort.value = true === objPort.value;
                 if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
                 if (objPort.animated) port.setAnimated(objPort.animated);
                 if (objPort.anim) {
                     if (!port.anim) port.anim = new CABLES.Anim();
-
                     if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
-
                     for (var ani in objPort.anim.keys) {
-                        // var o={t:objPort.anim.keys[ani].t,value:objPort.anim.keys[ani].v};
                         port.anim.keys.push(new CABLES.ANIM.Key(objPort.anim.keys[ani]));
                     }
                 }
@@ -814,7 +848,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
             this.ops[i]._origData=null;
         }
     }
-
 
     // create links...
     if(obj.ops)
@@ -858,8 +891,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-
-
     setTimeout(function(){ this.loading.finished(loadingId); }.bind(this),100);
     if(this.config.onPatchLoaded)this.config.onPatchLoaded();
 
@@ -876,10 +907,7 @@ CABLES.Patch.prototype.profile = function(enable) {
 
 
 
-
 // ----------------------
-
-
 
 
 /**
@@ -926,8 +954,6 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
     }
 };
 
-
-
 /**
  * function will be called when value of variable is changed
  * @name CABLES.Patch.Variable#addListener
@@ -951,17 +977,19 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
 
 // ------------------
 
-// old?
-CABLES.Patch.prototype.addVariableListener = function(cb) {
-    this._variableListeners.push(cb);
-};
 
-// old?
-CABLES.Patch.prototype._callVariableListener = function(cb) {
-    for (var i = 0; i < this._variableListeners.length; i++) {
-        this._variableListeners[i]();
-    }
-};
+
+// // old?
+// CABLES.Patch.prototype.addVariableListener = function(cb) {
+//     this._variableListeners.push(cb);
+// };
+
+// // old?
+// CABLES.Patch.prototype._callVariableListener = function(cb) {
+//     for (var i = 0; i < this._variableListeners.length; i++) {
+//         this._variableListeners[i]();
+//     }
+// };
 
 
 /**
@@ -988,7 +1016,7 @@ CABLES.Patch.prototype.setVarValue = function(name, val) {
         this._variables[name].setValue(val);
     } else {
         this._variables[name] = new CABLES.Patch.Variable(name, val);
-        this._callVariableListener();
+        this.emitEvent("variablesChanged");
     }
     return this._variables[name];
 };
@@ -997,8 +1025,6 @@ CABLES.Patch.prototype.getVarValue = function(name, val) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name].getValue();
 };
-
-
 
 /**
  * @name CABLES.Patch#getVar
@@ -1040,14 +1066,12 @@ CABLES.Patch.prototype.preRenderOps = function() {
     var stopwatch=null;
     if(CABLES.StopWatch)stopwatch=new CABLES.StopWatch('prerendering');
 
-    var count=0;
     for(var i=0;i<this.ops.length;i++)
     {
         if(this.ops[i].preRender)
         {
             this.ops[i].preRender();
             console.log('prerender '+this.ops[i].objName);
-            count++;
         }
     }
     

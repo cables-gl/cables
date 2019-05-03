@@ -66,15 +66,18 @@ CGL.Context = function(_patch) {
         CGL.TextureEffectMesh = CGL.TextureEffectMesh || null;
         this.canvas = document.getElementById(id);
 
+
+
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
         if (!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer = false;
         if (!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha = false;
         if (!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha = false;
-        if (!this.patch.config.canvas.hasOwnProperty('powerPreference')) this.patch.config.canvas.powerPreference = "high-performance";
+
+
+        if( (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) && !this.patch.config.canvas.hasOwnProperty('powerPreference')) this.patch.config.canvas.powerPreference = "high-performance";
 
         // if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
-
         this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
         if (this.gl) {
             this.glVersion = 2;
@@ -163,7 +166,7 @@ CGL.Context = function(_patch) {
 
     this.endFrame = function() {
 
-        if(CABLES.UI && CABLES.UI.renderHelper)
+        if(CABLES.UI)
             CABLES.GL_MARKER.drawMarkerLayer(this);
 
         self.setPreviousShader();
@@ -353,9 +356,9 @@ CGL.Context = function(_patch) {
 
     this.fullScreen = function() {
         if (this.canvas.requestFullscreen) this.canvas.requestFullscreen();
-        else if (this.canvas.mozRequestFullScreen) this.canvas.mozRequestFullScreen();
-        else if (this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
-        else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
+            else if (this.canvas.mozRequestFullScreen) this.canvas.mozRequestFullScreen();
+            else if (this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
+            else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     };
 
     this.setSize=function(w,h)
@@ -457,12 +460,14 @@ CGL.Context = function(_patch) {
         {
             this.canvas.width=w;
             this.canvas.height=h;
-            this.onScreenShot = null;
             if(blob)
             {
                 var anchor = document.createElement('a');
 
                 anchor.download=filename;
+
+
+
                 anchor.href=URL.createObjectURL(blob);
                 document.body.appendChild(anchor);
     

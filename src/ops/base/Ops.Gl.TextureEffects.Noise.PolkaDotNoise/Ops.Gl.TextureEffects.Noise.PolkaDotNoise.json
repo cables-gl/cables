@@ -1,5 +1,4 @@
 {
-    "updated": 1524312169750,
     "authorName": "pandur",
     "id": "e35c9e38-f462-4a0b-aa98-96f7d22ea6b3",
     "created": 1524311122515,
@@ -12,11 +11,23 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Square Look",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Threshold",
                 "subType": "number"
             },
             {

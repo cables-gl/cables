@@ -6,10 +6,15 @@ const
     inDir=op.inValueSelect("Direction",["X","Y"],"X");
 
 
-var cgl=op.patch.cgl;
-inSize.onChange=inGrad.onChange=inSmoothstep.onChange=inDir.onChange=update;
+const cgl=op.patch.cgl;
+inSize.onChange=
+    inGrad.onChange=
+    inSmoothstep.onChange=
+    inDir.onChange=update;
 
 inGrad.set('{"keys" : [{"pos":0,"r":0,"g":0,"b":0},{"pos":0.25,"r":0,"g":0,"b":0},{"pos":0.75,"r":1,"g":1,"b":1},{"pos":1,"r":1,"g":1,"b":1}]}');
+
+op.onLoaded=update;
 
 function update()
 {

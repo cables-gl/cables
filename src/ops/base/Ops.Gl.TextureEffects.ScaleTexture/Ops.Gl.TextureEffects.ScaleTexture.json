@@ -27,6 +27,26 @@
                 "type": "0",
                 "name": "Scale Y",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "center X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "center Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -50,5 +70,12 @@
                 "text": "scale on the y axis"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "added offset and center parameters for better positioning",
+            "author": "pandur",
+            "date": 1553079125529
+        }
+    ]
 }

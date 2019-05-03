@@ -25,10 +25,8 @@ void main()
     mat4 modelview= viewMatrix * mMatrix;
     vec4 eyeCoords = modelview * pos;
 
-
     // mat3 normalMatrix = transpose(inverse(mat3(mMatrix)));
     // v_normal = normalize(normalMatrix * v_normal);
-
 
     gl_Position = projMatrix * eyeCoords;
     v_eyeCoords = eyeCoords.xyz;

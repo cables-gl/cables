@@ -4,8 +4,8 @@
 
 "use strict";
 
-const inThreshold = op.inValue("Threshold");
 const inValue = op.inValue("Input");
+const inThreshold = op.inValue("Threshold");
 
 const output = op.outTrigger("Output");
 

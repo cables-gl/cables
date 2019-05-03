@@ -5,6 +5,7 @@ var timeUnit=op.inValueSelect("Unit",['Seconds','Frames'],'Seconds');
 
 var outVal=op.outValue("Result");
 var outArr=op.outArray("Anim Array");
+const outEnded=op.outValue("Anim Finished");
 
 inTime.onChange=update;
 var hasError=false;
@@ -29,6 +30,7 @@ function update()
         var t=inTime.get();
         if(useFrames) t=(t/30.0);
         var v=animVal.anim.getValue(t);
+        outEnded.set(animVal.anim.hasEnded(t));
         outVal.set(v);
         if(hasError)
         {
@@ -56,10 +58,9 @@ function animChange()
         {
             arr[i*2+0]=animVal.anim.keys[i].time;
             arr[i*2+1]=animVal.anim.keys[i].value;
-            
         }
     }
-    
+
     outArr.set(null);
     outArr.set(arr);
 }

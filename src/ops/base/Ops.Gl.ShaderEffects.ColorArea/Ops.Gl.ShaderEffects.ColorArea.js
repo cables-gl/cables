@@ -12,22 +12,21 @@ const inFalloff=op.inValueSlider("Falloff",0);
 const inInvert=op.inValueBool("Invert");
 
 
-// rgba colors
+var inBlend=op.inValueSelect("Blend ",["Normal","Multiply"],"Normal");
+
 const r = op.inValueSlider("r", Math.random());
 const g = op.inValueSlider("g", Math.random());
 const b = op.inValueSlider("b", Math.random());
 r.setUiAttribs({ colorPick: true });
 
-var inBlend=op.inValueSelect("Blend ",["Normal","Multiply"],"Normal");
-
-// position
 const x=op.inValue("x");
 const y=op.inValue("y");
 const z=op.inValue("z");
 
 const sizeX=op.inValueSlider("Size X",1);
 
-
+op.setPortGroup("Position",[x,y,z]);
+op.setPortGroup("Color",[inBlend,r,g,b]);
 
 const inWorldSpace=op.inValueBool("WorldSpace",true);
 
@@ -124,7 +123,7 @@ op.render.onTriggered=function()
                     posZ:z
                 });
 
-        if(CABLES.UI.renderHelper)
+        if(CABLES.UI.renderHelper ||gui.patch().isCurrentOp(op))
         {
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
             CABLES.GL_MARKER.drawSphere(op,inSize.get());

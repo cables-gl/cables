@@ -1,12 +1,13 @@
 const
     inRender = op.inTrigger("render"),
+    inDraw = op.inValueBool("Draw",true),
     inSegments = op.inValue("segments", 40),
     inStacks = op.inValue("stacks", 1),
     inLength = op.inValue("length", 1),
     inOuterRadius = op.inValue("outer radius", 0.5),
     inInnerRadius = op.inValue("inner radius", 0),
     inUVMode = op.inValueSelect("UV mode", ["simple","atlas"],"simple"),
-    inDraw = op.inValueBool("Draw",true),
+    inCaps = op.inValueBool("Caps",true),
     outTrigger = op.outTrigger("next"),
     outGeometry = op.outObject("geometry"),
     geom = new CGL.Geometry("cylinder");
@@ -111,7 +112,7 @@ function buildMesh () {
                 0
             );
             biTangents.push(
-                0
+                0,
                 -biTangents[i+1],
                 -biTangents[i+2]
             );
@@ -132,80 +133,85 @@ function buildMesh () {
                 a+indices[i+4]
             );
         }
-        // create caps
-        a = positions.length;
-        o = a / 2;
-        d = segments * 3;
 
-        // cap positions
-        Array.prototype.push.apply(positions, positions.slice(0,d));
-        Array.prototype.push.apply(positions, positions.slice(o,o+d));
-        Array.prototype.push.apply(positions, positions.slice(o-d,o));
-        Array.prototype.push.apply(positions, positions.slice(a-d,a));
+        if(inCaps.get())
+        {
+            // create caps
+            a = positions.length;
+            o = a / 2;
+            d = segments * 3;
 
-        // cap normals
-        d = segments * 2;
-        for (i = 0; i < d; i++) normals.push(0,0,-1), tangents.push(-1,0,0), biTangents.push(0,-1,0);
-        for (i = 0; i < d; i++) normals.push(0,0,1), tangents.push(1,0,0), biTangents.push(0,1,0);
+            // cap positions
+            Array.prototype.push.apply(positions, positions.slice(0,d));
+            Array.prototype.push.apply(positions, positions.slice(o,o+d));
+            Array.prototype.push.apply(positions, positions.slice(o-d,o));
+            Array.prototype.push.apply(positions, positions.slice(a-d,a));
 
-        // cap uvs
-        if (uvMode == "atlas") {
-            d = (innerRadius/outerRadius)*.5;
-            for (i = o = 0; i < segments; i++, o += segmentRadians)
-                texcoords.push(
-                    Math.sin(o)*.25+.75,
-                    Math.cos(o)*.25+.25
-                );
-            for (i = o = 0; i < segments; i++, o += segmentRadians)
-                texcoords.push(
-                    (Math.sin(o)*d+.5)*.5+.5,
-                    (Math.cos(o)*d+.5)*.5
-                );
-            for (i = o = 0; i < segments; i++, o += segmentRadians)
-                texcoords.push(
-                    Math.sin(o)*.25+.75,
-                    Math.cos(o)*.25+.75
-                );
-            for (i = o = 0; i < segments; i++, o += segmentRadians)
-                texcoords.push(
-                    (Math.sin(o)*d+.5)*.5+.5,
-                    (Math.cos(o)*d+.5)*.5+.5
-                );
-        } else {
-            for (i = 0; i < d; i++) texcoords.push(0,0);
-            for (i = 0; i < d; i++) texcoords.push(1,1);
-        }
+            // cap normals
+            d = segments * 2;
+            for (i = 0; i < d; i++) normals.push(0,0,-1), tangents.push(-1,0,0), biTangents.push(0,-1,0);
+            for (i = 0; i < d; i++) normals.push(0,0,1), tangents.push(1,0,0), biTangents.push(0,1,0);
 
-        // cap indices
-        for (
-            i = 0, o = a / 3 + x;
-            i < segments - 1;
-            i++, o++
-        ) {
+            // cap uvs
+            if (uvMode == "atlas") {
+                d = (innerRadius/outerRadius)*.5;
+                for (i = o = 0; i < segments; i++, o += segmentRadians)
+                    texcoords.push(
+                        Math.sin(o)*.25+.75,
+                        Math.cos(o)*.25+.25
+                    );
+                for (i = o = 0; i < segments; i++, o += segmentRadians)
+                    texcoords.push(
+                        (Math.sin(o)*d+.5)*.5+.5,
+                        (Math.cos(o)*d+.5)*.5
+                    );
+                for (i = o = 0; i < segments; i++, o += segmentRadians)
+                    texcoords.push(
+                        Math.sin(o)*.25+.75,
+                        Math.cos(o)*.25+.75
+                    );
+                for (i = o = 0; i < segments; i++, o += segmentRadians)
+                    texcoords.push(
+                        (Math.sin(o)*d+.5)*.5+.5,
+                        (Math.cos(o)*d+.5)*.5+.5
+                    );
+            } else {
+                for (i = 0; i < d; i++) texcoords.push(0,0);
+                for (i = 0; i < d; i++) texcoords.push(1,1);
+            }
+
+            // cap indices
+            for (
+                i = 0, o = a / 3 + x;
+                i < segments - 1;
+                i++, o++
+            ) {
+                indices.push(
+                    o+1,o+segments, o,
+                    o+segments+1,o+segments,o+1
+                );
+            }
             indices.push(
-                o+1,o+segments, o,
-                o+segments+1,o+segments,o+1
+                o+segments,a/3 + x,a/3 + segments + x,
+                o+segments,o, a/3 + x
+            );
+            x += segments * 2;
+            for (
+                i = 0, o = a / 3 + x;
+                i < segments - 1;
+                i++, o++
+            ) {
+                indices.push(
+                    o,o+segments,o+1,
+                    o+1,o+segments,o+segments+1
+                );
+            }
+            indices.push(
+                a/3 + segments + x, a/3 + x, o+segments,
+                a/3 + x, o, o+segments
             );
         }
-        indices.push(
-            o+segments,a/3 + x,a/3 + segments + x,
-            o+segments,o, a/3 + x
-        );
-        x += segments * 2;
-        for (
-            i = 0, o = a / 3 + x;
-            i < segments - 1;
-            i++, o++
-        ) {
-            indices.push(
-                o,o+segments,o+1,
-                o+1,o+segments,o+segments+1
-            );
-        }
-        indices.push(
-            a/3 + segments + x, a/3 + x, o+segments,
-            a/3 + x, o, o+segments
-        );
+
     } else {
         a = positions.length;
         d = a / 3;
@@ -214,28 +220,33 @@ function buildMesh () {
         Array.prototype.push.apply(positions, positions.slice(0,segments*3));
         for (i = 0; i <= segments; i++) normals.push(0,0,-1), tangents.push(-1,0,0), biTangents.push(0,-1,0);
 
-        positions.push(0,0,length/2);
-        Array.prototype.push.apply(positions, positions.slice(a-segments*3,a));
-        for (i = 0; i <= segments; i++) normals.push(0,0,1), tangents.push(1,0,0), biTangents.push(0,1,0);
-        if (uvMode == "atlas") {
-            texcoords.push(.75,.25);
-            for (i = a = 0; i < segments; i++, a += segmentRadians)
-                texcoords.push(Math.sin(a)*.25+.75,Math.cos(a)*.25+.25);
-            texcoords.push(.75,.75);
-            for (i = a = 0; i < segments; i++, a += segmentRadians)
-                texcoords.push(Math.sin(a)*.25+.75,Math.cos(a)*.25+.75);
-        } else {
-            for (i = 0; i <= segments; i++) texcoords.push(0,0);
-            for (i = 0; i <= segments; i++) texcoords.push(1,1);
+
+        if(inCaps.get())
+        {
+            positions.push(0,0,length/2);
+            Array.prototype.push.apply(positions, positions.slice(a-segments*3,a));
+            for (i = 0; i <= segments; i++) normals.push(0,0,1), tangents.push(1,0,0), biTangents.push(0,1,0);
+            if (uvMode == "atlas") {
+                texcoords.push(.75,.25);
+                for (i = a = 0; i < segments; i++, a += segmentRadians)
+                    texcoords.push(Math.sin(a)*.25+.75,Math.cos(a)*.25+.25);
+                texcoords.push(.75,.75);
+                for (i = a = 0; i < segments; i++, a += segmentRadians)
+                    texcoords.push(Math.sin(a)*.25+.75,Math.cos(a)*.25+.75);
+            } else {
+                for (i = 0; i <= segments; i++) texcoords.push(0,0);
+                for (i = 0; i <= segments; i++) texcoords.push(1,1);
+            }
+            indices.push(d+1, d, d+segments);
+            for (i = 1; i < segments; i++)
+                indices.push(d, d+i, d+i+1);
+            d += segments+1;
+            indices.push(d, d+1, d+segments);
+            for (i = 1; i < segments; i++)
+                indices.push(d, d+i+1, d+i);
+            d += segments+1;
+
         }
-        indices.push(d+1, d, d+segments);
-        for (i = 1; i < segments; i++)
-            indices.push(d, d+i, d+i+1);
-        d += segments+1;
-        indices.push(d, d+1, d+segments);
-        for (i = 1; i < segments; i++)
-            indices.push(d, d+i+1, d+i);
-        d += segments+1;
     }
 
     // set geometry
@@ -267,6 +278,7 @@ inRender.onTriggered = function () {
 inSegments.onChange =
 inOuterRadius.onChange =
 inInnerRadius.onChange =
+inCaps.onChange =
 inLength.onChange =
 inStacks.onChange =
 inUVMode.onChange = function() {

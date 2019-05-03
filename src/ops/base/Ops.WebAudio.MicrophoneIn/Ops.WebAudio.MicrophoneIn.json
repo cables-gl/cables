@@ -11,6 +11,11 @@
             {
                 "type": "2",
                 "name": "audio out"
+            },
+            {
+                "type": "0",
+                "name": "Listening",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.WebAudio.MicrophoneIn"

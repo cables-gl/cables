@@ -1,7 +1,7 @@
 // inputs
 var inArrayPort = op.inArray("Input Array");
-var beginPort = op.inValue("Begin Index", 0);
-var sizePort = op.inValue("Chunk Size", 1);
+var beginPort = op.inValueInt("Begin Index", 0);
+var sizePort = op.inValueInt("Chunk Size", 1);
 var circularPort = op.inValueBool("Circular", false);
 
 // functions
@@ -10,14 +10,14 @@ function setOutarray() {
     var begin = beginPort.get();
     var size = sizePort.get();
     var circular = circularPort.get();
-    
+
     if(begin < 0) {
         begin = 0;
     }
     if(circular && begin >= inArr.length) {
         begin %= inArr.length;
     }
-    
+
     if(!inArr || size < 1) {
         outArrayPort.set([]);
         return;

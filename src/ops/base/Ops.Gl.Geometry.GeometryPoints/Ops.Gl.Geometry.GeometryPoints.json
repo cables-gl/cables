@@ -1,5 +1,4 @@
 {
-    "updated": 1543926386417,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "b215118b-de1f-4be9-8890-d07a2ecff010",
@@ -27,6 +26,14 @@
             {
                 "type": "3",
                 "name": "Normals"
+            },
+            {
+                "type": "3",
+                "name": "BiTangents"
+            },
+            {
+                "type": "3",
+                "name": "Tangents"
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryPoints"

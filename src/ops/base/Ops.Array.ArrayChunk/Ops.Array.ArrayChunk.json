@@ -1,5 +1,4 @@
 {
-    "updated": 1519665635779,
     "authorName": "tim",
     "id": "c7ee6c6e-ca88-4c24-b289-78bb922bf5f7",
     "created": 1519665635782,
@@ -11,15 +10,18 @@
             },
             {
                 "type": "0",
-                "name": "Begin Index"
+                "name": "Begin Index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Chunk Size"
+                "name": "Chunk Size",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Circular"
+                "name": "Circular",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

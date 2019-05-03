@@ -15,11 +15,12 @@ var x=op.inValue("x");
 var y=op.inValue("y");
 var z=op.inValue("z");
 
-
-
 var scrollx=op.inValue("Scroll X");
 var scrolly=op.inValue("Scroll Y");
 var scrollz=op.inValue("Scroll Z");
+
+
+
 
 var shader=null;
 
@@ -32,6 +33,7 @@ function removeModule()
     if(shader && moduleVert) shader.removeModule(moduleVert);
     shader=null;
 }
+
 
 output.onChange=updateOutput;
 op.render.onLinkChanged=removeModule;
@@ -53,10 +55,16 @@ function updateOutput()
 function updateWorldspace()
 {
     if(!shader)return;
-    if(inWorldSpace.get()) shader.define(moduleVert.prefix+"WORLDSPACE");
-        else shader.removeDefine(moduleVert.prefix+"WORLDSPACE");
+    shader.toggleDefine(moduleVert.prefix+"WORLDSPACE",inWorldSpace.get());
 }
 
+function getScaling(mat)
+{
+    var m31 = mat[8];
+    var m32 = mat[9];
+    var m33 = mat[10];
+    return Math.hypot(m31, m32, m33);
+}
 
 op.render.onTriggered=function()
 {
@@ -66,19 +74,19 @@ op.render.onTriggered=function()
         return;
     }
 
+
     if(CABLES.UI)
     {
         cgl.pushModelMatrix();
         mat4.identity(cgl.mMatrix);
 
-        if(CABLES.UI.renderHelper)
+        if(CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))
         {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
             CABLES.GL_MARKER.drawSphere(op,inSize.get());
             cgl.popModelMatrix();
         }
-
 
         if(gui.patch().isCurrentOp(op))
             gui.setTransformGizmo(

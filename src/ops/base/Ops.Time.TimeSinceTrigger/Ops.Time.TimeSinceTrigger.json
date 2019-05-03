@@ -13,6 +13,10 @@
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "1",
+                "name": "reset"
             }
         ],
         "portsOut": [

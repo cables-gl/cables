@@ -1,18 +1,14 @@
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
-op.index=op.inValueInt("mesh index");
-var centerPivot=op.addInPort(new CABLES.Port(op,"center pivot",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'} ));
+const render=op.inTrigger("render");
+op.index=op.inValueInt("mesh index",0);
+const draw=op.inValueBool("draw",true);
+const centerPivot=op.inValueBool("center pivot",false);
+
 const next=op.outTrigger("next");
+const geometryOut=op.outObject("geometry");
 
-var geometryOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT ));
-var draw=op.addInPort(new CABLES.Port(op,"draw",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-
-op.index.set(0);
 geometryOut.ignoreValueSerialize=true;
-centerPivot.set(false);
-draw.set(true);
 
 const cgl=op.patch.cgl;
-// var mesh=null;
 var meshesCache={};
 var currentIndex=0;
 
@@ -23,14 +19,13 @@ function doRender()
 {
     var idx=op.index.get();
     var mesh=meshesCache[idx];
-    // if(!mesh || currentIndex!=idx) reload();
     if(!mesh) reload();
 
     if(draw.get())
     {
         if(mesh) mesh.render(cgl.getShader());
-        next.trigger();
     }
+    next.trigger();
 }
 
 function reload()
@@ -70,11 +65,13 @@ function reload()
         }
         op.uiAttribs.warning='';
 
-        var geom=new CGL.Geometry();
-        geom.vertices=jsonMesh.vertices.slice();
-        geom.vertexNormals=jsonMesh.normals||[];
-        geom.tangents=jsonMesh.tangents||[];
-        geom.biTangents=jsonMesh.bitangents||[];
+        var geom=CGL.Geometry.json2geom(jsonMesh);
+        // var geom=new CGL.Geometry();
+        // geom.vertices=(jsonMesh.vertices||[]).slice();
+        // geom.vertexNormals=jsonMesh.normals||[];
+        // geom.tangents=jsonMesh.tangents||[];
+        // geom.biTangents=jsonMesh.bitangents||[];
+
 
         if(centerPivot.get()) geom.center();
 
@@ -99,23 +96,25 @@ function reload()
 
         // op.uiAttr({"info":nfo});
 
-        var
-            indices = geom.verticesIndices = [],
-            faces = jsonMesh.faces,
-            face, i
-        ;
-        for(i = 0; i < faces.length; i++) {
-            face=jsonMesh.faces[i];
-            Array.prototype.push.apply(indices, face);
-        }
+        // var
+            // indices = geom.verticesIndices || [],
+            // faces = jsonMesh.faces,
+            // face, i
+        // ;
+
+        // if(faces)
+        //     for(i = 0; i < faces.length; i++) {
+        //         face=jsonMesh.faces[i];
+        //         Array.prototype.push.apply(indices, face);
+        //     }
 
         var nfo='';
         nfo += (geom.verticesIndices.length/3)+' faces <br/>';
         nfo += (geom.vertices.length/3)+' vertices <br/>';
-        nfo += (geom.texCoords?geom.texCoords.length:'no')+' texturecoords <br/>';
-        nfo += geom.vertexNormals.length+' normals <br/>';
-        nfo += geom.tangents.length+' tangents <br/>';
-        nfo += geom.biTangents.length+' biTangents <br/>';
+        nfo += (geom.texCoords?geom.texCoords.length/2:'no')+' texturecoords <br/>';
+        nfo += geom.vertexNormals.length/3+' normals <br/>';
+        nfo += geom.tangents.length/3+' tangents <br/>';
+        nfo += geom.biTangents.length/3+' biTangents <br/>';
         op.uiAttr({"info":nfo});
 
         geometryOut.set(null);
