@@ -1,14 +1,18 @@
 const inArray=op.inArray("In"),
-    outArray=op.outArray("Array out"),
+    outArray=op.outArray("Result"),
     newArr=[];
 
 outArray.set(newArr);
 
-inArray.onChange = inArray.onChange=function()
+inArray.onChange=function()
 {
     var arr=inArray.get();
 
-    if(!arr)return;
+    if(!arr)
+    {
+        outArray.set(null);
+        return;
+    }
 
     if(newArr.length!=arr.length)newArr.length=arr.length;
 
