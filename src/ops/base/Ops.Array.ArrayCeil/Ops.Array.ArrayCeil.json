@@ -1,1 +1,27 @@
-{}
+{
+    "authorName": "pandur",
+    "id": "a21f03eb-e5a5-44e2-bc0d-a76359ed1cf1",
+    "created": 1557300925128,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayCeil"
+    },
+    "changelog": [
+        {
+            "message": "fixed array length is now correctly updated",
+            "author": "andro",
+            "date": 1557302487932
+        }
+    ]
+}

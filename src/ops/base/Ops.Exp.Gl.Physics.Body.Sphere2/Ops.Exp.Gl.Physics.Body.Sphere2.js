@@ -132,7 +132,7 @@ function render()
     }
 
     if(doRender.get())wire.render(cgl,inRadius.get()*2);
-    if(CABLES.UI.renderHelper ||gui.patch().isCurrentOp(op))
+    if(CABLES.UI && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op)))
     {
         // mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
         CABLES.GL_MARKER.drawSphere(op,inRadius.get());

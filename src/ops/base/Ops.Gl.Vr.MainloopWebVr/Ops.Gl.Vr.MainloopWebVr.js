@@ -1,6 +1,8 @@
 var inStartVr=op.inTriggerButton("Start VR");
 var inStopVr = op.inTriggerButton('Stop VR');
 
+var inResMul = op.inValueSlider('Scale Resolution',1);
+
 var inResizeCancas=op.inValueBool("Resize Canvas",false);
 
 var nextVr=op.outTrigger("VR Mainloop");
@@ -28,12 +30,11 @@ var outGamePadRight = op.outObject("Gamepad object Right");
 var singleTrigger = op.outTrigger("single trigger out");
 var useGamepads=op.inValueBool("use gamepads",false);
 
+var outPMatrix=op.outArray("Left PMatrix");
+
+
 const outStarted=op.outValueBool("Started VR",false);
 var buttonEle=null;
-
-
-
-
 
 const cgl=op.patch.cgl;
 var vrDisplay=null;
@@ -42,6 +43,11 @@ var frameCount=0;
 var frameLast=0;
 var frameData=null;
 var initialRun = true;
+
+var polyfill=null;
+if(window.WebVRPolyfill)polyfill = new WebVRPolyfill({BUFFER_SCALE: 0.5});
+
+
 op.onDelete=function()
 {
     stopVr();
@@ -141,8 +147,8 @@ function initButton()
 
     buttonEle.style.padding="10px";
     buttonEle.style.position="absolute";
-    buttonEle.style.right="15px";
-    buttonEle.style.bottom="15px";
+    buttonEle.style.right="25px";
+    buttonEle.style.top="25px";
     buttonEle.style.width="50px";
     buttonEle.style.height="50px";
     buttonEle.style.cursor="pointer";
@@ -182,7 +188,6 @@ function renderNoVr()
     mat4.identity(cgl.pMatrix);
     cgl.popModelMatrix();
     cgl.popViewMatrix();
-
 
     requestAnimationFrame(renderNoVr);
 }
@@ -261,7 +266,6 @@ function mainloopVr()
     {
         width.set(cgl.canvasWidth);
         height.set(cgl.canvasHeight);
-
     }
 
 
@@ -347,8 +351,13 @@ function renderEye(which)
     }
     // else if(which==0) mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.leftProjectionMatrix);
     // else if(which==1) mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.rightProjectionMatrix);
-    else if(which==0) cgl.pMatrix=frameData.leftProjectionMatrix;
-    else if(which==1) cgl.pMatrix=frameData.rightProjectionMatrix;
+    else if(which==0)
+    {
+        cgl.pMatrix=frameData.leftProjectionMatrix;
+        outPMatrix.set(frameData.leftProjectionMatrix);
+    }
+    else if(which==1)cgl.pMatrix=frameData.rightProjectionMatrix;
+
 
 
     cgl.pushViewMatrix();

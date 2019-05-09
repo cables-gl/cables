@@ -64,5 +64,12 @@
     ],
     "relatedops": [
         "Ops.Array.ArrayGetNumber"
+    ],
+    "changelog": [
+        {
+            "message": "optimized accepts floats as input for index and makes it an integer",
+            "author": "andro",
+            "date": 1557328099124
+        }
     ]
 }

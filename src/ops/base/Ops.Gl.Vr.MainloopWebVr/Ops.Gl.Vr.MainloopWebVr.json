@@ -15,6 +15,11 @@
             },
             {
                 "type": "0",
+                "name": "Scale Resolution",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Resize Canvas",
                 "subType": "boolean"
             },
@@ -86,6 +91,10 @@
                 "name": "single trigger out"
             },
             {
+                "type": "3",
+                "name": "Left PMatrix"
+            },
+            {
                 "type": "0",
                 "name": "Started VR",
                 "subType": "boolean"
@@ -96,5 +105,8 @@
     "summary": "experimental webvr rendering",
     "docs": {
         "ports": []
-    }
+    },
+    "libs": [
+        "webvr-polyfill.js"
+    ]
 }
