@@ -17,7 +17,7 @@
         ],
         "name": "Ops.Array.ArrayCeil"
     },
-    "summary": "returns the smallest integer greater than or equal to a given number.",
+    "summary": "returns the largest integer greater than or equal to a given number.",
     "youtubeid": "",
     "issues": "",
     "collections": null,

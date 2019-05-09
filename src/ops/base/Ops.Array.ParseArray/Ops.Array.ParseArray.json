@@ -65,5 +65,12 @@
                 "text": "The length of the parsed array"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "optimized by default \"isNumbers\" is set to true when op is created",
+            "author": "andro",
+            "date": 1556286001300
+        }
+    ]
 }
