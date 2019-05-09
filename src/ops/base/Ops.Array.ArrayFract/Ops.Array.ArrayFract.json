@@ -1,7 +1,7 @@
 {
     "authorName": "andro",
-    "id": "6a8e5330-db3a-4ea2-bc07-a71110073f1f",
-    "created": 1552316769149,
+    "id": "c23dcb59-a533-4c41-8d26-82ecbdd3c558",
+    "created": 1557391398992,
     "layout": {
         "portsIn": [
             {
@@ -15,9 +15,9 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.ArrayCeil"
+        "name": "Ops.Array.ArrayFract"
     },
-    "summary": "returns the smallest integer greater than or equal to a given number.",
+    "summary": "Returns the fractional remainder of all values in an array",
     "youtubeid": "",
     "issues": "",
     "collections": null,
