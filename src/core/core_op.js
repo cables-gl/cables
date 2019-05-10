@@ -3,10 +3,8 @@
  * @memberof CABLES
  * @class
  */
-
 var Ops = {};
 var CABLES=CABLES || {};
-
 
 /**
  * current CGL Context 
@@ -45,6 +43,10 @@ CABLES.Op = function()
     if(this.name)
     {
         this.name=this.name.split('.')[this.name.split('.').length-1]
+        const a=this.name.substring(this.name.length - 1, this.name.length);
+        const b=this.name.substring(this.name.length - 2, this.name.length-1);
+        if(CABLES.UTILS.isNumeric(a) && !CABLES.UTILS.isNumeric(b)) this.name=this.name.substring(0,this.name.length - 1);
+            else if(CABLES.UTILS.isNumeric(a) && CABLES.UTILS.isNumeric(b)) this.name=this.name.substring(0,this.name.length - 2);
     }
 
     this.id=arguments[2]||CABLES.uuid(); // instance id

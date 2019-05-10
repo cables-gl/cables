@@ -479,7 +479,6 @@ CABLES.Patch.prototype.getFrameNum = function() {
     return this._frameNum;
 };
 
-
 CABLES.Patch.prototype.renderFrame = function(e) {
     this.timer.update();
     this.freeTimer.update();
@@ -499,7 +498,6 @@ CABLES.Patch.prototype.renderFrame = function(e) {
 };
 
 CABLES.Patch.prototype.exec = function(e) {
-
     if(!this._renderOneFrame && ( this._paused || this.aborted )) return;
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
@@ -511,7 +509,8 @@ CABLES.Patch.prototype.exec = function(e) {
     var frameDelta = now - this._frameNext;
     
 
-    if (CABLES.UI) {
+    if (CABLES.UI)
+    {
         if (CABLES.UI.capturer) CABLES.UI.capturer.capture(this.cgl.canvas);
 
         if(!this._renderOneFrame)
@@ -572,7 +571,7 @@ CABLES.Patch.prototype.exec = function(e) {
             this._fpsStart=CABLES.now();
         }
     }
-    
+
     this._lastFrameTime = CABLES.now();
     this._fpsFrameCount++;
 
@@ -739,7 +738,6 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
                 }
             }
 
-
             this.deleteOp(oldOp.id);
         // }
     }
@@ -793,8 +791,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
     var reqs=new CABLES.Requirements(this);
-    
-
 
     // console.log('add ops ',obj.ops);
     // add ops...
