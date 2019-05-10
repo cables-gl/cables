@@ -1,0 +1,31 @@
+{
+    "id": "e4ddec93-4dee-422b-a402-6a0f6e469ce6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557471901737
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1557471929957,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Changed"
+            },
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerOnChangeArray"
+    }
+}
