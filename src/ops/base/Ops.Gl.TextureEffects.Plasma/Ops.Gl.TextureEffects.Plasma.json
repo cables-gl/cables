@@ -1,5 +1,4 @@
 {
-    "updated": 1541053471403,
     "authorName": "pandur",
     "id": "6c82c11d-1931-43b1-8e6c-5d20cb1a0d87",
     "created": 1519248446688,
@@ -12,11 +11,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -32,6 +33,16 @@
             {
                 "type": "0",
                 "name": "Mul",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "offset Y",
                 "subType": "number"
             },
             {

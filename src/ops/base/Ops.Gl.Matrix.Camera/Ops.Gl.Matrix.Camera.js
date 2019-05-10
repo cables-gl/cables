@@ -121,6 +121,7 @@ render.onTriggered=function() {
 	arr[7]=1;
 	arr[8]=0;
 
+    outArr.set(null);
 	outArr.set(arr);
 
 	vec3.set(vUp, 0, 1, 0);

@@ -8,6 +8,11 @@ var cgl=op.patch.cgl;
 var uniformInputs=[];
 var uniformTextures=[];
 
+
+op.toWorkPortsNeedToBeLinked(outShader);
+
+
+
 var shader=new CGL.Shader(cgl,"shaderMaterial");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
@@ -104,6 +109,8 @@ function updateShader()
     {
         var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
 
+
+
         if (
 			hasUniformInput(uniform.name) ||
 			uniform.name.indexOf('mod') == 0 ||
@@ -113,15 +120,35 @@ function updateShader()
 
         if(uniform.type==cgl.gl.FLOAT)
         {
-            var newInput=op.inValue(uniform.name,0);
-            newInput.onChange=function(p)
+            var newInput=null;
+            if(uniform.size>1)
             {
-                p.uniform.needsUpdate=true;
-                p.uniform.setValue(p.get());
-            };
+                newInput=op.inArray(uniform.name,[]);
+
+                newInput.uniform=new CGL.Uniform(shader,'f[]',uniform.name,new Float32Array(22));
+
+                newInput.onChange=function(p)
+                {
+                    p.uniform.needsUpdate=true;
+                    p.uniform.setValue(new Float32Array(p.get()));
+                };
+
+            }
+            else
+            {
+                newInput=op.inValue(uniform.name,0);
+                newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
+                newInput.onChange=function(p)
+                {
+                    p.uniform.needsUpdate=true;
+                    p.uniform.setValue(p.get());
+                };
+
+            }
+
 
             uniformInputs.push(newInput);
-            newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
+
         }
         else
         if(uniform.type==cgl.gl.FLOAT_MAT4)

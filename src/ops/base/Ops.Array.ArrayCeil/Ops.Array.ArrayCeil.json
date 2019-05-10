@@ -23,5 +23,22 @@
             "author": "andro",
             "date": 1557302487932
         }
-    ]
+    ],
+    "summary": "returns the smallest integer greater than or equal to a given number.",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "In",
+                "text": "Array in"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
+    }
 }

@@ -200,6 +200,7 @@ function update()
         newGeom.tangents=newTangents;
         newGeom.biTangents=newBiTangents;
 
+        outGeom.set(null);
         outGeom.set(newGeom);
     }
 }

@@ -1,0 +1,1 @@
+This op allows you to create simple animations with a definable animation time and easing mode. Try combining it with the ToggleBool op.

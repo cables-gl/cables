@@ -76,6 +76,10 @@
             "message": "fixed the interpolation method when working with strings, temp fix",
             "author": "andro",
             "date": 1549631884665
+        },{
+            "message": "optimized by default \"isNumbers\" is set to true when op is created",
+            "author": "andro",
+            "date": 1556286001300
         }
     ]
 }
