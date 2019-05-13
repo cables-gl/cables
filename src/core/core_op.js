@@ -923,6 +923,7 @@ CABLES.Op = function()
             {
                 this.portsIn.splice(ipi, 1);
                 this.fireEvent("onUiAttribsChange",{});
+                this.fireEvent("onPortsChanged",{});
                 return;
             }
         }
@@ -963,18 +964,18 @@ CABLES.Op = function()
             working = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'TextureEffects.ImageCompose');
             if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'ImageCompose';
         }
-        else
-        {
-            if(!this.uiAttribs.subPatch) // todo: real subpatch check at one point!
-            {
-                if(this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop')
-                {
-                    var iscon = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
-                    working = iscon;
-                    if (!iscon) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
-                }
-            }
-        }
+        // else
+        // {
+        //     if(!this.uiAttribs.subPatch) // todo: real subpatch check at one point!
+        //     {
+        //         if(this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop')
+        //         {
+        //             var iscon = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
+        //             working = iscon;
+        //             if (!iscon) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
+        //         }
+        //     }
+        // }
 
 
         if (this._needsParentOp && working)
