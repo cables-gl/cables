@@ -924,8 +924,8 @@ CABLES.Op = function()
             if(this.portsIn[ipi]==port)
             {
                 this.portsIn.splice(ipi, 1);
-                this.fireEvent("onPortsChanged",{});
                 this.fireEvent("onUiAttribsChange",{});
+                this.fireEvent("onPortsChanged",{});
                 return;
             }
         }
