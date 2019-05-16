@@ -1,0 +1,32 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Simple Schroeder Reverberator (Reverb)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Room Size"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.JcReverb"
+    },
+    "authorName": "pandur",
+    "id": "b18a2862-c486-4ec3-92e7-66cfc9516bbe",
+    "created": 1558041288224
+}

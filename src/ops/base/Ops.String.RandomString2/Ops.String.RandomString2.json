@@ -26,5 +26,13 @@
             }
         ],
         "name": "Ops.String.RandomString2"
+    },
+    "summary": "generate a random string of given characters",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

@@ -21,5 +21,13 @@
             }
         ],
         "name": "Ops.Json3d.Material"
+    },
+    "summary": "internal json3d op for setting a material",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

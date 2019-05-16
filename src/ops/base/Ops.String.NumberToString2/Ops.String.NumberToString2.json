@@ -18,5 +18,13 @@
             }
         ],
         "name": "Ops.String.NumberToString2"
+    },
+    "summary": "Convert a number to a string",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

@@ -32,5 +32,30 @@
             }
         ],
         "name": "Ops.Json.ObjectGetArray2"
+    },
+    "summary": "Returns an array from a JSON-object",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "data",
+                "text": "The Json-object you want to extract an array from"
+            },
+            {
+                "name": "key",
+                "text": "The key of the array"
+            },
+            {
+                "name": "result",
+                "text": "An Array"
+            },
+            {
+                "name": "Length",
+                "text": "The length of the array"
+            }
+        ]
     }
 }

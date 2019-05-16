@@ -98,8 +98,7 @@ function setup()
 
 }
 
-arrayIn.onValueChange(setup);
-duration.onValueChange(setup);
+arrayIn.onChange=duration.onChange=setup;
 
 var q=quat.create();
 var qMat=mat4.create();

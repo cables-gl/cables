@@ -27,5 +27,13 @@
             }
         ],
         "name": "Ops.String.StringContains2"
+    },
+    "summary": "check if string contains another string (find,search,indexOf)",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

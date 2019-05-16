@@ -1,0 +1,36 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Reverb based on Freeverb",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Room Size"
+            },
+            {
+                "type": "4",
+                "name": "Dampening"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Freeverb"
+    },
+    "authorName": "pandur",
+    "id": "dc183aca-c794-4369-bd4a-9b2ba1321de8",
+    "created": 1558041316870
+}

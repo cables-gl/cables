@@ -10,5 +10,13 @@
             }
         ],
         "name": "Ops.Gl.Textures.NoiseTexture"
+    },
+    "summary": "Simple noisetexture",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

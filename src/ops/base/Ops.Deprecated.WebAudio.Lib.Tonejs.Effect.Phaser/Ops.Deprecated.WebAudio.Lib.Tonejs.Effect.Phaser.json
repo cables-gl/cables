@@ -1,0 +1,44 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Phaser Effect",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Q"
+            },
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "0",
+                "name": "Base Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Phaser"
+    },
+    "authorName": "pandur",
+    "id": "36d0c9c9-d19a-40d1-85c6-09958643a87a",
+    "created": 1558041254437
+}

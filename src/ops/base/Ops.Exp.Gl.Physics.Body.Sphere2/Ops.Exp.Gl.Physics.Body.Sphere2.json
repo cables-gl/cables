@@ -71,5 +71,13 @@
             }
         ],
         "name": "Ops.Exp.Gl.Physics.Body.Sphere2"
+    },
+    "summary": "Physical Sphere Body",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

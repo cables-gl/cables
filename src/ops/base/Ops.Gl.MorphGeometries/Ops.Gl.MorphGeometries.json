@@ -35,5 +35,21 @@
             }
         ],
         "name": "Ops.Gl.MorphGeometries"
-    }
+    },
+    "summary": "morph between two geometries and render it",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "needs example",
+            "author": "pandur",
+            "id": "a7ba9852-c01c-47d1-bc85-72cdbaa9c647",
+            "date": 1558040011370
+        }
+    ]
 }
