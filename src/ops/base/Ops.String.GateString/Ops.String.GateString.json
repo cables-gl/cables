@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.String.StringGate"
+    },
+    "summary": "Output string if pass through is true",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

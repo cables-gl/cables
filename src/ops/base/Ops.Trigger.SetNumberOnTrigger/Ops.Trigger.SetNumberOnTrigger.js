@@ -1,12 +1,11 @@
-// inputs
-var valuePort = op.inValueFloat("Number");
-var setValuePort = op.inTriggerButton("Set");
+const
+    setValuePort = op.inTriggerButton("Set"),
+    valuePort = op.inValueFloat("Number"),
+    outValuePort = op.outValue("Out Value");
 
-// outputs
-var outValuePort = op.outValue("Out Value");
 outValuePort.changeAlways = true;
 
-// change listeners
-setValuePort.onTriggered = function() {
+setValuePort.onTriggered = function()
+{
     outValuePort.set(valuePort.get());
 };

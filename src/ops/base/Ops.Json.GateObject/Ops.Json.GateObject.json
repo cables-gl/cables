@@ -1,0 +1,40 @@
+{
+    "id": "95e04331-49d6-42da-81d8-5a75261ab22f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1556101705380
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1556101725907,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object In"
+            },
+            {
+                "type": "0",
+                "name": "Pass Through",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Object Out"
+            }
+        ],
+        "name": "Ops.Json.GateObject"
+    },
+    "summary": "Output object if pass through is true",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

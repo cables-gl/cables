@@ -11,8 +11,6 @@ void main()
 
    #ifndef INVERT
        if(gray < threshhold) col.r=col.g=col.b=col.a=0.0;
-       else col.r=col.g=col.b=col.a=1.0;
-
        #ifdef BLACKWHITE
            else col.r=col.g=col.b=col.a=1.0;
        #endif

@@ -90,6 +90,11 @@ const uniformNameBlacklist = [
     'inverseViewMatrix',
     'camPos'
 ];
+
+
+
+
+
 function updateShader()
 {
     if(!shader)return;
@@ -101,6 +106,7 @@ function updateShader()
 
     shader.compile();
 
+
     var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
 
     var i=0;
@@ -108,8 +114,6 @@ function updateShader()
     for (i=0; i < activeUniforms; i++)
     {
         var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
-
-
 
         if (
 			hasUniformInput(uniform.name) ||
@@ -145,7 +149,6 @@ function updateShader()
                 };
 
             }
-
 
             uniformInputs.push(newInput);
 

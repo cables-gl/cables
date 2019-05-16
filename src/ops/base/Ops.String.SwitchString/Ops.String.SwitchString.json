@@ -64,5 +64,13 @@
             }
         ],
         "name": "Ops.String.StringSwitch"
+    },
+    "summary": "Switch between multiple strings with an index",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

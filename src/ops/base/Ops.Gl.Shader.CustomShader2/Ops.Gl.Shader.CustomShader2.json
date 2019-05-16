@@ -1,0 +1,55 @@
+{
+    "id": "a165fc89-a35b-4d39-8930-7345b098bd9d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557747298207
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1557747300453,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "5",
+                "name": "Fragment Code",
+                "group": "Source Code"
+            },
+            {
+                "type": "5",
+                "name": "Vertex Code",
+                "group": "Source Code"
+            },
+            {
+                "type": "0",
+                "name": "Use As Material",
+                "group": "Options",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.CustomShader2"
+    },
+    "summary": "Write your own shader",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

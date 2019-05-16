@@ -53,5 +53,13 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Wobble"
+    },
+    "summary": "waving wobble motion effect",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

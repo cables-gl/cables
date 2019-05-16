@@ -47,7 +47,7 @@ function update()
 
     for(i=0;i<data.length;i++)
     {
-        pixels[i]=data[i];
+        pixels[i]=data[i]*255;
     }
     for(i=data.length;i<w*h*4;i++)
     {

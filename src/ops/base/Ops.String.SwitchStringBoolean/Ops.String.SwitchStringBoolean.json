@@ -9,13 +9,11 @@
     ],
     "authorName": "pandur",
     "created": 1550740548820,
-    "summary": "",
+    "summary": "Switch between two strings with a boolean",
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": [
-        "Ops.Value.ValueSwitchBoolean"
-    ],
+    "relatedops": null,
     "docs": {
         "ports": []
     },

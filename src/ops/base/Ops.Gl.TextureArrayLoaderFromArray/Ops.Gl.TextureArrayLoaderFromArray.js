@@ -124,31 +124,29 @@ function loadImage(_i,_url,nocache,cb)
 
 function realReload(nocache)
 {
-
     var files=filenames.get();
 
     if(!files||files.length==0)return;
 
-
     if(loadingId)cgl.patch.loading.finished(loadingId);
     loadingId=cgl.patch.loading.start('texturearray',CABLES.uuid());
 
+    // arr.length=files.length;
+
+
     for(var i=0;i<files.length;i++)
     {
+        arr[i]=CGL.Texture.getEmptyTexture(cgl);
         console.log('load',files[i]);
         var cb=null;
         if(i==files.length-1)cb=function()
             {
                 cgl.patch.loading.finished(loadingId);
-console.log('loaded all');
+                console.log('loaded all');
             };
         loadImage(i,files[i],nocache,cb);
-
     }
-
-
 }
-
 
 function onFilterChange()
 {
@@ -180,9 +178,6 @@ op.onFileChanged=function(fn)
 };
 
 
-
-
 tfilter.set('linear');
 wrap.set('repeat');
-
 

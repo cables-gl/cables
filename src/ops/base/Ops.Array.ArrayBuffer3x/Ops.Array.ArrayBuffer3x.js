@@ -23,6 +23,7 @@ function reset()
 {
     arr.length=Math.abs(Math.floor(maxLength.get()*3))||0;
     for(var i=0;i<arr.length;i++) arr[i]=0;
+
     wasReset=true;
     arrOut.set(null);
     arrOut.set(arr);
@@ -35,9 +36,9 @@ exec.onTriggered=function()
     {
         for (var i = 0, len = arr.length; i < len; i+=3)
         {
-            arr[i+0]=valX.get();    
-            arr[i+1]=valY.get();    
-            arr[i+2]=valZ.get();    
+            arr[i+0]=valX.get();
+            arr[i+1]=valY.get();
+            arr[i+2]=valZ.get();
         }
 
         wasReset=false;

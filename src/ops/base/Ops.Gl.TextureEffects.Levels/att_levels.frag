@@ -8,11 +8,11 @@ UNI float outMin;
 
 void main()
 {
-   vec4 base=texture(tex,texCoord);
+    vec3 base=texture(tex,texCoord).rgb;
+    vec3 inputRange = min(max(base - vec3(inMin), vec3(0.0)) / (vec3(inMax) - vec3(inMin)), vec3(outMax));
 
-   vec4 inputRange = min(max(base - vec4(inMin), vec4(0.0)) / (vec4(inMax) - vec4(inMin)), vec4(outMax));
-   inputRange = pow(inputRange, vec4(1.0 / (1.5 - midPoint)));
+    inputRange = pow(inputRange, vec3(1.0 / (1.5 - midPoint)));
 
-   outColor= mix(vec4(outMin), vec4(1.0), inputRange);
-
+    outColor.a=1.0;
+    outColor.rgb= mix(vec3(outMin), vec3(1.0), inputRange);
 }

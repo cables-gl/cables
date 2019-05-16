@@ -1,5 +1,5 @@
 {
-    "authorName": "pandur",
+    "authorName": "andro",
     "id": "a21f03eb-e5a5-44e2-bc0d-a76359ed1cf1",
     "created": 1557300925128,
     "layout": {
@@ -22,9 +22,14 @@
             "message": "fixed array length is now correctly updated",
             "author": "andro",
             "date": 1557302487932
+        },
+        {
+            "message": "",
+            "author": "pandur",
+            "date": 1558001795421
         }
     ],
-    "summary": "returns the smallest integer greater than or equal to a given number.",
+    "summary": "Round numbers up",
     "youtubeid": "",
     "issues": "",
     "collections": null,

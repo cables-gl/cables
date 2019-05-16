@@ -8,6 +8,7 @@ var distRand=op.inValueSlider("Distance Random",0);
 var distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"]);
 
 var outGeom=op.outObject("Geometry");
+const outArr=op.outArray("Points");
 
 var cgl=op.patch.cgl;
 var mesh=null;
@@ -97,6 +98,8 @@ function reset()
     geom.texCoords=texCoords;
     outGeom.set(null);
     outGeom.set(geom);
+    outArr.set(null);
+    outArr.set(verts);
 
     // if(mesh) mesh.addVertexNumbers=true;
     // if(mesh) mesh.setGeom(geom);

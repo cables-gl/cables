@@ -10,7 +10,8 @@ inStrTrue.onChange=update;
 
 function update()
 {
-
     if(inBool.get())result.set(inStrTrue.get());
-    else result.set(inStrFalse.get());
+        else result.set(inStrFalse.get());
 }
+
+update();

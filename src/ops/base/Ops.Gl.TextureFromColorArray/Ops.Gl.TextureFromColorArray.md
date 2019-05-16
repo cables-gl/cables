@@ -1,0 +1,1 @@
+array should consist of RGBA values between 0 and 1

@@ -36,11 +36,14 @@
             {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "3",
+                "name": "Points"
             }
         ],
         "name": "Ops.Gl.Meshes.RandomPointSphere"
     },
-    "updated": 1542751941125,
     "authorName": "pandur",
     "id": "d8ac214e-0eff-4b31-a8e4-6af4f3cdf839",
     "created": 1519122617858,

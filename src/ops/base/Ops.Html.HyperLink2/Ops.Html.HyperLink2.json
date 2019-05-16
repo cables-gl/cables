@@ -21,5 +21,13 @@
             }
         ],
         "name": "Ops.Html.HyperLink2"
+    },
+    "summary": "Open another website",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

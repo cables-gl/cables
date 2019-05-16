@@ -1,6 +1,5 @@
 const
     render=op.inTrigger("Render"),
-    textureOut=op.outTexture("texture"),
     str=op.inString("Text","cables"),
     scale=op.inValueFloat("Scale",1),
     inFont=op.inString("Font","Arial"),
@@ -9,6 +8,7 @@ const
     lineHeight=op.inValueFloat("Line Height",1),
     letterSpace=op.inValueFloat("Letter Spacing"),
     next=op.outTrigger("Next"),
+    textureOut=op.outTexture("texture"),
     loaded=op.outValue("Font Available",0);
 
 const cgl=op.patch.cgl;

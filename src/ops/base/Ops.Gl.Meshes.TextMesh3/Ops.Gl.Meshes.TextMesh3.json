@@ -72,12 +72,12 @@
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "texture"
-            },
-            {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "texture"
             },
             {
                 "type": "0",

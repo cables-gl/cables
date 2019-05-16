@@ -1,0 +1,36 @@
+{
+    "id": "7c06a818-9c07-493a-8c4f-04eb2c7796f5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557827875562
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1557827880199,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "data"
+            },
+            {
+                "type": "5",
+                "name": "key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "result"
+            },
+            {
+                "type": "0",
+                "name": "Length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetArray2"
+    }
+}

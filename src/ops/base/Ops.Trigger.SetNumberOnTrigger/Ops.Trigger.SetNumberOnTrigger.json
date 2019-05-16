@@ -12,13 +12,13 @@
     "layout": {
         "portsIn": [
             {
+                "type": "1",
+                "name": "Set"
+            },
+            {
                 "type": "0",
                 "name": "Number",
                 "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Set"
             }
         ],
         "portsOut": [

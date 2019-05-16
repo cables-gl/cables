@@ -19,9 +19,6 @@ var uniInMax=new CGL.Uniform(shader,'f','inMax',inMax);
 var uniOutMin=new CGL.Uniform(shader,'f','outMin',outMin);
 var uniOutMax=new CGL.Uniform(shader,'f','outMax',outMax);
 
-
-
-
 shader.setSource(shader.getDefaultVertexShader(),attachments.levels_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 

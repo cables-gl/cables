@@ -125,8 +125,8 @@
         ],
         "name": "Ops.Gl.TextureEffects.DrawImageNew"
     },
-    "summary": "",
-    "youtubeid": "Ww04Cw9wArM",
+    "summary": "Draws an image into a composition",
+    "youtubeid": "",
     "docs": {
         "ports": [
             {
@@ -141,5 +141,8 @@
             "author": "pandur",
             "date": 1549557373535
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

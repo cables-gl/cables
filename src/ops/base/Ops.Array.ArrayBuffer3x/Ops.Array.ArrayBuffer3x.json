@@ -1,5 +1,4 @@
 {
-    "updated": 1517240735446,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "156762c6-1c10-4e9b-9cca-8dbc329a82bd",
@@ -12,19 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "Max Num Elements"
+                "name": "Max Num Elements",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value X"
+                "name": "Value X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value Y"
+                "name": "Value Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value Z"
+                "name": "Value Z",
+                "subType": "number"
             },
             {
                 "type": "1",

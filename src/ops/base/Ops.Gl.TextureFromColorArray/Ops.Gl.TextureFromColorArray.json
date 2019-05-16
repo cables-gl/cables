@@ -40,5 +40,13 @@
             }
         ],
         "name": "Ops.Gl.TextureFromColorArray"
+    },
+    "summary": "create a texture from an array of number values",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

@@ -30,5 +30,13 @@
             }
         ],
         "name": "Ops.Math.Compare.GreaterOrEquals"
+    },
+    "summary": "result is true if number 2 is greater or equals number 1",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

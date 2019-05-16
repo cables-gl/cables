@@ -16,6 +16,8 @@ inArr.onChange=function()
 
     var arr=inArr.get();
 
+    if(arr.length==0)return;
+
     var data=[];
     var i=0;
     for(i=0;i<arr.length;i+=3)

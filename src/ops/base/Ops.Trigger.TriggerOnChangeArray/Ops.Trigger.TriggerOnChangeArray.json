@@ -27,5 +27,13 @@
             }
         ],
         "name": "Ops.Trigger.TriggerOnChangeArray"
+    },
+    "summary": "triggers when array has changed",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

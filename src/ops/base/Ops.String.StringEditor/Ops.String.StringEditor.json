@@ -1,0 +1,41 @@
+{
+    "id": "6468b7c1-f63e-4db4-b809-4b203d27ead3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557742503222
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1557742505295,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "value",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Syntax",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringEditor"
+    },
+    "summary": "string text editor",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}
