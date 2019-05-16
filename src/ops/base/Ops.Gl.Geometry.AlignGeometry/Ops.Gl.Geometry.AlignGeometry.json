@@ -39,12 +39,35 @@
         ],
         "name": "Ops.Gl.Geometry.AlignGeometry"
     },
-    "summary": "align a geometry / change pivot/center point of geometry",
+    "summary": "align a geometry / change its pivot/center point",
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Gl.RenderGeometry"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Geometry",
+                "text": "Geometry in"
+            },
+            {
+                "name": "X",
+                "text": "Pick mode for X axis"
+            },
+            {
+                "name": "Y",
+                "text": "Pick mode for Y axis"
+            },
+            {
+                "name": "Z",
+                "text": "Pick mode for Z axis"
+            },
+            {
+                "name": "Result",
+                "text": "Geometry out "
+            }
+        ]
     }
 }

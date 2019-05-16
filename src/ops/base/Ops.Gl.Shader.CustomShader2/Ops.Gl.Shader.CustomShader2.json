@@ -48,7 +48,9 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Gl.Shader.Shader2Texture"
+    ],
     "docs": {
         "ports": []
     }
