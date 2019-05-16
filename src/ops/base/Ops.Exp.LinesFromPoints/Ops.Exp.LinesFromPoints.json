@@ -26,5 +26,8 @@
                 "text": "An array of lines in the form `x1, x1, z1, x2, y2, z2, …`, can be connected e.g. to `SimpleSpline`-op."
             }
         ]
-    }
+    },
+    "authorName": "pandur",
+    "id": "d888f483-3d89-44e8-ac37-d642be5de5ae",
+    "created": 1558014351735
 }

@@ -4,7 +4,7 @@ const
     inWidth=op.inValueInt("width",32),
     inHeight=op.inValueInt("height",32),
     outNext=op.outTrigger("Next"),
-    outTex=op.outTexture();
+    outTex=op.outTexture("Texture out");
 
 inExe.onTriggered=update;
 

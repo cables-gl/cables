@@ -1,5 +1,3 @@
-op.name='AudioMediaElement';
-
 var fileName=op.inFile("file","audio");
 var inPlay=op.inValueBool("Play");
 var volume=op.inValueSlider("Volume");
@@ -91,7 +89,7 @@ fileName.onChange=function()
     };
 
     audio.addEventListener('canplaythrough',canplaythrough, false);
-    
+
     audio.addEventListener('ended',function()
     {
         outPlaying.set(false);
@@ -99,7 +97,7 @@ fileName.onChange=function()
         outEnded.trigger();
         if(doLoop.get()) play();
     }, false);
-    
+
 
 
 

@@ -9,11 +9,13 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Fully Visible"
+                "name": "Fully Visible",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Partly Visible"
+                "name": "Partly Visible",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.CanvasInBrowserViewport"
@@ -21,5 +23,8 @@
     "summary": "check if webgl canvas element is in the current browser viewport",
     "docs": {
         "ports": []
-    }
+    },
+    "authorName": "pandur",
+    "id": "2721f83b-246c-46fa-9ad9-d8c829adb94d",
+    "created": 1558014577123
 }

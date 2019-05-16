@@ -4,13 +4,15 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Duration"
+                "name": "Duration",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Events"
+                "name": "Events",
+                "subType": "number"
             }
         ],
         "name": "Ops.InteractionListener"
@@ -22,5 +24,8 @@
                 "text": "Duration in seconds"
             }
         ]
-    }
+    },
+    "authorName": "pandur",
+    "id": "1dcb1c53-1e7f-41a6-9917-e625ea803f6c",
+    "created": 1558014659247
 }

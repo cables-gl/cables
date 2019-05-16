@@ -1,1 +1,94 @@
-{}
+{
+    "authorName": "andro",
+    "id": "a9fc6f3e-c439-48a2-b96f-ce5c34063930",
+    "created": 1558014478462,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line thickness X",
+                "group": "LineThickness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line thickness Y",
+                "group": "LineThickness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cells X",
+                "group": "Cells",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cells Y",
+                "group": "Cells",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invert color",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Line red",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line green",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line Blue",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.GridTexture"
+    }
+}

@@ -35,7 +35,7 @@ function elementInViewport(el)
 function elementInViewportPartly(el)
 {
     var rect = el.getBoundingClientRect();
-    
+
     return (
         pointInViewport( rect.left,rect.top ) ||
         pointInViewport( rect.left,rect.bottom ) ||
@@ -48,7 +48,7 @@ function update()
 {
     var visible=elementInViewport(op.patch.cgl.canvas);
     var visiblePartly=elementInViewportPartly(op.patch.cgl.canvas);
-    
+
     outResultPartly.set(visiblePartly);
     outResult.set(visible);
 }

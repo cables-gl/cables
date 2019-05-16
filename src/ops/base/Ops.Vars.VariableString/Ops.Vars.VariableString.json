@@ -8,5 +8,21 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1556107994879
+    "created": 1556107994879,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.Vars.VariableString"
+    }
 }

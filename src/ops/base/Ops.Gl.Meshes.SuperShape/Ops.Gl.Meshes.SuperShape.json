@@ -7,63 +7,78 @@
             },
             {
                 "type": "0",
-                "name": "Normalize Size"
+                "name": "Normalize Size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Point Cloud"
+                "name": "Point Cloud",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Step"
+                "name": "Step",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a1"
+                "name": "a1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b1"
+                "name": "b1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "m1"
+                "name": "m1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "n11"
+                "name": "n11",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "n21"
+                "name": "n21",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "n31"
+                "name": "n31",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "a2"
+                "name": "a2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b2"
+                "name": "b2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "m2"
+                "name": "m2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "n12"
+                "name": "n12",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "n22"
+                "name": "n22",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "n32"
+                "name": "n32",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -73,7 +88,8 @@
             },
             {
                 "type": "0",
-                "name": "Num Vertices"
+                "name": "Num Vertices",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -85,5 +101,8 @@
     "summary": "Renders a super shape",
     "docs": {
         "ports": []
-    }
+    },
+    "authorName": "pandur",
+    "id": "ed8b5db0-b928-4f5d-87d7-4b2491ae7b00",
+    "created": 1558014330844
 }

@@ -36,7 +36,8 @@
                 "name": "Next"
             },
             {
-                "type": "2"
+                "type": "2",
+                "name": "Texture out"
             }
         ],
         "name": "Ops.Gl.TextureFromColorArray"
@@ -45,8 +46,35 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Gl.Shader.BasicMaterial"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger in "
+            },
+            {
+                "name": "array",
+                "text": "Array in to turn into a texture"
+            },
+            {
+                "name": "width",
+                "text": "Width of texture"
+            },
+            {
+                "name": "height",
+                "text": "Height of texture"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Texture out",
+                "text": "Texture out"
+            }
+        ]
     }
 }

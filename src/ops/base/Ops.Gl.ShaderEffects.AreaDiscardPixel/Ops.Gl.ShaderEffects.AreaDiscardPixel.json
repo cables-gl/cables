@@ -62,9 +62,54 @@
         ],
         "name": "Ops.Gl.ShaderEffects.AreaDiscardPixel"
     },
-    "summary": "do not draw pixels inside a 3d area",
+    "summary": "do not draw pixels inside a defined 3d area",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "TRigegr in"
+            },
+            {
+                "name": "Area",
+                "text": "Sphere, Axis X Y or Z, Axis XY or XZ, Axis X Y or Z infinite"
+            },
+            {
+                "name": "Size",
+                "text": "Size of area"
+            },
+            {
+                "name": "Invert",
+                "text": "Invert area "
+            },
+            {
+                "name": "Repeat",
+                "text": "Enable repeat mode"
+            },
+            {
+                "name": "Repeat Distance",
+                "text": "Distance between the discarded and non discarded areas"
+            },
+            {
+                "name": "x",
+                "text": "Moves are on the X axis"
+            },
+            {
+                "name": "y",
+                "text": "Moves are on the Y axis"
+            },
+            {
+                "name": "z",
+                "text": "Moves are on the Z axis"
+            },
+            {
+                "name": "WorldSpace",
+                "text": "Enable to move area around in world space"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     },
     "changelog": [
         {
@@ -72,5 +117,9 @@
             "author": "pandur",
             "date": 1554653768876
         }
-    ]
+    ],
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

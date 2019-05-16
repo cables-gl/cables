@@ -104,9 +104,111 @@
     },
     "summary": "experimental webvr rendering",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Start VR",
+                "text": "Start VR mainLoop"
+            },
+            {
+                "name": "Stop VR",
+                "text": "Stop VR mainLoop"
+            },
+            {
+                "name": "Scale Resolution",
+                "text": "Scales resolution when Resize canvas is enabled, handy for slower hardware"
+            },
+            {
+                "name": "Resize Canvas",
+                "text": "When true gets reported resolution from VR headset and sets canvas size to match"
+            },
+            {
+                "name": "use gamepads",
+                "text": "Enables gamepads / still has to be implemented"
+            },
+            {
+                "name": "VR Mainloop",
+                "text": "Trigger out twice, once for each eye per frame. Only works when Start VR is enabled"
+            },
+            {
+                "name": "NoVR Mainloop",
+                "text": "Trigger out when VR isn't isn't enabled"
+            },
+            {
+                "name": "width",
+                "text": "Resolution width, will change when resize canvas is on"
+            },
+            {
+                "name": "height",
+                "text": "Resolution height, will change when resize canvas is on"
+            },
+            {
+                "name": "Supported",
+                "text": "Will report true if a VR compatible headset/device is plugged in"
+            },
+            {
+                "name": "Controller support",
+                "text": "Will report true if a VR compatible gamepad/s are plugged in"
+            },
+            {
+                "name": "Controllers amount",
+                "text": "Amount of controllers connected"
+            },
+            {
+                "name": "VR Display",
+                "text": "the name of the connected headset"
+            },
+            {
+                "name": "FPS",
+                "text": "Frames per second"
+            },
+            {
+                "name": "Eye",
+                "text": "0 is the left eye, 1 is the right eye use with the ifTrueThen op to render twice"
+            },
+            {
+                "name": "Gamepad object Left",
+                "text": "Left Gamepad object out , will later work with the VR gamepad op"
+            },
+            {
+                "name": "Gamepad object Right",
+                "text": "Right Gamepad object out , will later work with the VR gamepad op"
+            },
+            {
+                "name": "single trigger out",
+                "text": "One trigger out regardless of mode"
+            },
+            {
+                "name": "Left PMatrix",
+                "text": "Left projection Matrix"
+            },
+            {
+                "name": "Started VR",
+                "text": "Outputs true when VR has started"
+            }
+        ]
     },
     "libs": [
         "webvr-polyfill.js"
+    ],
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Boolean.IfTrueThen",
+        "Ops.Devices.Mobile.ScreenOrientation"
+    ],
+    "todos": [
+        {
+            "message": "Enable gamepads for VR",
+            "author": "andro",
+            "id": "4b8a3868-6739-4256-be44-ca017929a8b8",
+            "date": 1558009528517
+        },
+        {
+            "message": "Add right projection matrix out ? not sure why left is there ?",
+            "author": "andro",
+            "id": "97351b1e-0f1b-4aa7-a3a4-7818d2126ea9",
+            "date": 1558009965640
+        }
     ]
 }

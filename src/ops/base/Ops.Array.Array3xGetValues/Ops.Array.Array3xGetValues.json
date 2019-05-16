@@ -33,7 +33,7 @@
         ],
         "name": "Ops.Array.Array3xGetValues"
     },
-    "summary": "get 3 values xyz from an array3x",
+    "summary": "get a single set of Xyz values from an XyzArray",
     "docs": {
         "ports": [
             {
@@ -59,9 +59,7 @@
         ]
     },
     "youtubeid": "",
-    "collections": [
-        "pointArrays"
-    ],
+    "collections": null,
     "relatedops": [
         "Ops.Array.ArrayGetNumber"
     ],
@@ -71,5 +69,6 @@
             "author": "andro",
             "date": 1557328099124
         }
-    ]
+    ],
+    "issues": ""
 }

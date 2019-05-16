@@ -7,7 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "amount"
+                "name": "amount",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -17,5 +18,8 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.LumaToAlpha"
-    }
+    },
+    "authorName": "pandur",
+    "id": "424c051b-4e29-49ce-b77e-f3aae9683b04",
+    "created": 1558014359262
 }

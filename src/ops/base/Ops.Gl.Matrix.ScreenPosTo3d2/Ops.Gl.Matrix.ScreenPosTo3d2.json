@@ -43,7 +43,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Matrix.ScreenPosTo3dNew2"
+        "name": "Ops.Gl.Matrix.ScreenPosTo3d2"
     },
     "summary": "convert screen coordinates to 3d coordinates",
     "youtubeid": "",
@@ -51,6 +51,31 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Exec",
+                "text": "Trigger in"
+            },
+            {
+                "name": "X",
+                "text": "Screen position X axis"
+            },
+            {
+                "name": "Y",
+                "text": "Screen position Y axis"
+            },
+            {
+                "name": "Result X",
+                "text": "X axis position in 3d space "
+            },
+            {
+                "name": "Result Y",
+                "text": "Y axis position in 3d space"
+            },
+            {
+                "name": "Result Z",
+                "text": "Z axis position in 3d space"
+            }
+        ]
     }
 }

@@ -12,7 +12,7 @@ inSend.onTriggered=function()
 {
     if(connection && inObject.get())
     {
-        
+
         connection.send(JSON.stringify(inObject.get()));
 
     }

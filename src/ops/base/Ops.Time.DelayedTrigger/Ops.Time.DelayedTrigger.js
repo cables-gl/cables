@@ -15,6 +15,6 @@ exe.onTriggered=function()
         {
             lastTimeout=null;
             next.trigger();
-        }, 
+        },
         delay.get()*1000);
 };
