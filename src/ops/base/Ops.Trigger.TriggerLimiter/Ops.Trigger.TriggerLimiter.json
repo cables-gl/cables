@@ -8,7 +8,8 @@
             },
             {
                 "type": "0",
-                "name": "Milliseconds"
+                "name": "Milliseconds",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -18,10 +19,11 @@
             },
             {
                 "type": "0",
-                "name": "Progress"
+                "name": "Progress",
+                "subType": "number"
             }
         ],
-        "name": "Ops.TriggerLimiter"
+        "name": "Ops.Trigger.TriggerLimiter"
     },
     "docs": {
         "ports": [
@@ -38,5 +40,8 @@
                 "text": "The limited input trigger"
             }
         ]
-    }
+    },
+    "authorName": "pandur",
+    "id": "47641d85-9f81-4287-8aa2-35753b0727e0",
+    "created": 1558016067665
 }
