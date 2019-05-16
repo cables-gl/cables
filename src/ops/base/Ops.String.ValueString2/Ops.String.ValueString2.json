@@ -16,5 +16,13 @@
             }
         ],
         "name": "Ops.String.ValueString2"
+    },
+    "summary": "String input/output ",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

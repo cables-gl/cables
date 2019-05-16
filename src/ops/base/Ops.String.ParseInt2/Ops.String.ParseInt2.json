@@ -18,5 +18,13 @@
             }
         ],
         "name": "Ops.String.ParseInt2"
+    },
+    "summary": "Parse a string to a integer number",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

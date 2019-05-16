@@ -17,5 +17,13 @@
             }
         ],
         "name": "Ops.String.Uppercase2"
+    },
+    "summary": "Convert all characters in a string to upperase",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

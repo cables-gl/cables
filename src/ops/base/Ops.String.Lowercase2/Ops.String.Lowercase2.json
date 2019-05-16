@@ -17,5 +17,13 @@
             }
         ],
         "name": "Ops.String.Lowercase2"
+    },
+    "summary": "convert all characters to small letters",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

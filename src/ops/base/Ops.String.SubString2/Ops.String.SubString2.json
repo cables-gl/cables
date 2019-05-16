@@ -26,5 +26,13 @@
             }
         ],
         "name": "Ops.String.SubString2"
+    },
+    "summary": "Subset of a string between one index and another",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

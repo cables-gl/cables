@@ -20,5 +20,26 @@
             }
         ],
         "name": "Ops.String.Split2"
+    },
+    "summary": "Splits a string with separator into an array of strings",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Input String",
+                "text": "The string you want to split"
+            },
+            {
+                "name": "Separator",
+                "text": "The separator char, e.g. `,`"
+            },
+            {
+                "name": "Result",
+                "text": "The single parts of the string"
+            }
+        ]
     }
 }

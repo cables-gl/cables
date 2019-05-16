@@ -18,5 +18,13 @@
             }
         ],
         "name": "Ops.String.StringLength2"
+    },
+    "summary": "number of characters in a string",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }
