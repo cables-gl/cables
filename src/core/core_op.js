@@ -116,7 +116,7 @@ CABLES.Op = function()
         p.parent=this;
         this.portsOut.push(p);
         if(this.onAddPort)this.onAddPort(p);
-        this.fireEvent("onPortsChanged",{});
+        // this.fireEvent("onPortsChanged",{});
         return p;
     };
 
@@ -156,7 +156,7 @@ CABLES.Op = function()
         p.parent=this;
         this.portsIn.push(p);
         if(this.onAddPort)this.onAddPort(p);
-        this.fireEvent("onPortsChanged",{});
+        // this.fireEvent("onPortsChanged",{});
         return p;
     };
 
@@ -924,8 +924,8 @@ CABLES.Op = function()
             if(this.portsIn[ipi]==port)
             {
                 this.portsIn.splice(ipi, 1);
-                this.fireEvent("onPortsChanged",{});
                 this.fireEvent("onUiAttribsChange",{});
+                this.fireEvent("onPortRemoved",{});
                 return;
             }
         }

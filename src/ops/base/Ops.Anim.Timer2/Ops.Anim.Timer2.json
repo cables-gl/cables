@@ -30,4 +30,5 @@
         "name": "Ops.Anim.Timer2"
     },
     "summary": "A timer that can be started, paused and reset by triggering"
+
 }
