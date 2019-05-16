@@ -38,5 +38,13 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "deprecate / new op with functionality: https://cables.gl/op/Ops.Gl.Geometry.AlignGeometry",
+            "author": "pandur",
+            "id": "4f5e1d46-3419-427c-ae78-d453a68a3d88",
+            "date": 1558041627896
+        }
+    ]
 }
