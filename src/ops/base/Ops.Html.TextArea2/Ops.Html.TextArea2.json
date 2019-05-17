@@ -50,5 +50,13 @@
             }
         ],
         "name": "Ops.Html.TextArea2"
+    },
+    "summary": "textarea html element",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

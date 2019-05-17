@@ -46,15 +46,12 @@
         ],
         "name": "Ops.Devices.Midi.MidiKeyPressed"
     },
-    "summary": "",
+    "summary": "read midi key press events",
     "youtubeid": "",
-    "collections": [
-        "hardware"
-    ],
-    "relatedops": [
-        ""
-    ],
+    "collections": null,
+    "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "issues": ""
 }
