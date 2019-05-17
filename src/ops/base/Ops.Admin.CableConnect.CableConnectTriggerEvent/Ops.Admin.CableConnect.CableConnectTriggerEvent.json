@@ -21,5 +21,13 @@
             }
         ],
         "name": "Ops.Cables.CableConnect.CableConnectTriggerEvent"
+    },
+    "summary": "internal test op",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

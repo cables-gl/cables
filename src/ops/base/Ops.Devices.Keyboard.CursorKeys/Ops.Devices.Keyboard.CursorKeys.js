@@ -79,10 +79,11 @@ function addDocumentListener() {
     document.addEventListener("keyup", onKeyUp, false);
 }
 
-canvasOnly.onValueChange(function(){
+canvasOnly.onChange=function()
+{
     removeListeners();
     addListener();
-});
+};
 
 canvasOnly.set(true);
 addCanvasListener();

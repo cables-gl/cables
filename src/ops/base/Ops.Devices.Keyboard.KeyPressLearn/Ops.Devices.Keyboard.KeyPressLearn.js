@@ -111,10 +111,10 @@ inEnable.onChange=function()
     }
 }
 
-canvasOnly.onValueChange(function(){
+canvasOnly.onChange=function(){
     removeListeners();
     addListener();
-});
+};
 
 canvasOnly.set(true);
 addCanvasListener();

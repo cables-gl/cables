@@ -30,5 +30,13 @@
             }
         ],
         "name": "Ops.Cables.CableConnect.CableConnection"
+    },
+    "summary": "internal test op",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

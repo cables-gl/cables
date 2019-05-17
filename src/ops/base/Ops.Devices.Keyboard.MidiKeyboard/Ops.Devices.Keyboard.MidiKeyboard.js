@@ -13,7 +13,7 @@ function midiMessageReceived (msgs) {
     var channel = msgs[i].data[0] & 0xf;
     var noteNumber = msgs[i].data[1];
     var velocity = msgs[i].data[2];
-    
+
     noteNumberPort.set(noteNumber);
     velocityPort.set(velocity);
     channelPort.set(channel);
@@ -158,10 +158,10 @@ function addDocumentListener() {
     document.addEventListener("keyup", onKeyUp, false);
 }
 
-canvasOnly.onValueChange(function(){
+canvasOnly.onChange=function(){
     removeListeners();
     addListener();
-});
+};
 
 canvasOnly.set(true);
 addCanvasListener();

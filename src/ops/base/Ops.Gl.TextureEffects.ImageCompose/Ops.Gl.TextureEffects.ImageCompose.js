@@ -72,6 +72,10 @@ function initEffect()
 fpTexture.onChange=function()
 {
     reInitEffect=true;
+
+    // var e1=cgl.gl.getExtension('EXT_color_buffer_float');
+    // var e2=cgl.gl.getExtension('EXT_float_blend');
+
 };
 
 function updateResolution()

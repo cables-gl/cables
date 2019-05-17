@@ -11,5 +11,13 @@
             }
         ],
         "name": "Ops.Cables.CableConnect.ReceivePatchChanges"
+    },
+    "summary": "internal test op",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }
