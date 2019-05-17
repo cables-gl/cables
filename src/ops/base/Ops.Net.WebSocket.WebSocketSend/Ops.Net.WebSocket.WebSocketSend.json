@@ -18,5 +18,13 @@
     },
     "authorName": "pandur",
     "id": "071149e8-5ac5-43dd-a052-e32dbd80cae2",
-    "created": 1558014390255
+    "created": 1558014390255,
+    "summary": "send an object to a websocket connection",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

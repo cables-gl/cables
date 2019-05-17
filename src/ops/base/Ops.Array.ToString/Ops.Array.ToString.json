@@ -39,5 +39,13 @@
                 "text": "The resulting string representation of the array"
             }
         ]
-    }
+    },
+    "todos": [
+        {
+            "message": "needs new version with new string type ports",
+            "author": "pandur",
+            "id": "209847d4-7335-4227-9d4f-0f9e6fce14f5",
+            "date": 1558103087900
+        }
+    ]
 }

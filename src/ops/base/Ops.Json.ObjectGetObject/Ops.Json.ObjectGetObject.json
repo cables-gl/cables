@@ -22,5 +22,13 @@
             }
         ],
         "name": "Ops.Json.ObjectGetObject"
+    },
+    "summary": "get an object from an object",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }
