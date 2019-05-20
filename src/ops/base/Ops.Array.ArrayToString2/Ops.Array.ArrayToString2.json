@@ -1,0 +1,52 @@
+{
+    "id": "89a39595-9ccf-4a7e-a893-14767b445cf4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1558370160672
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1558370163677,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "5",
+                "name": "Separator"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayToString2"
+    },
+    "summary": "Convert an array to a string, divided by a separator",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array to convert to a string"
+            },
+            {
+                "name": "Separator",
+                "text": "What character to use to separate the values, e.g. `,` (comma) – `[1, 2, 3]` —> `\"1,2,3\"`"
+            },
+            {
+                "name": "Result",
+                "text": "The resulting string representation of the array"
+            }
+        ]
+    }
+}

@@ -1,8 +1,5 @@
 // input
 var srcArrayPort = op.inArray("Source Array");
-// non shallow copy untested
-//var makeShallowCopyPort = op.addInPort( new CABLES.Port( op, "Make Shallow Copy", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
-//makeShallowCopyPort.set(true);
 var newLengthPort = op.inValue("New Length");
 
 // output
@@ -20,7 +17,7 @@ function setOutPort() {
     op.log("Array Changed: ", srcArray);
     if(srcArray) {
         op.log("makeShallowCopy: ", makeShallowCopy);
-        newLength = parseInt(newLengthPort.get());
+        var newLength = parseInt(newLengthPort.get());
         op.log("newLength: ", newLength);
         op.log("srcArray.length: ", srcArray.length);
         if(newLength <= srcArray.length) {
