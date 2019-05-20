@@ -8,7 +8,7 @@ UNI float x;
 UNI float y;
 UNI float time;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 void FAST32_hash_3D(    vec3 gridcell,
                         vec3 v1_mask,       //  user definable v1 and v2.  ( 0s and 1s )
@@ -170,8 +170,5 @@ void main()
 
     vec4 base=texture(tex,texCoord);
 
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-
-    outColor = col;
+    outColor=cgl_blend(base,col,amount);
 }

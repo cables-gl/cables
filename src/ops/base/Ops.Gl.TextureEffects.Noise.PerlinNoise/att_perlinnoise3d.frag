@@ -7,7 +7,7 @@ UNI sampler2D tex;
 
 UNI float amount;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 
 float Interpolation_C2( float x ) { return x * x * x * (x * (x * 6.0 - 15.0) + 10.0); }   //  6x^5-15x^4+10x^3	( Quintic Curve.  As used by Perlin in Improved Noise.  http://mrl.nyu.edu/~perlin/paper445.pdf )
@@ -161,8 +161,5 @@ void main()
 
     vec4 col=vec4(v,v,v,1.0);
 
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-
-    outColor= col;
+    outColor=cgl_blend(base,col,amount);
 }
