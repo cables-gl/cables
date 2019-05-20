@@ -40,9 +40,36 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Gl.RenderGeometry"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Geometry 1",
+                "text": "Geometry in 1"
+            },
+            {
+                "name": "Geometry 2",
+                "text": "Geometry in 1"
+            },
+            {
+                "name": "Fade",
+                "text": "Interpolation amount between the two geometries "
+            },
+            {
+                "name": "Normals",
+                "text": "Enable normals"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
     },
     "todos": [
         {
@@ -50,6 +77,12 @@
             "author": "pandur",
             "id": "a7ba9852-c01c-47d1-bc85-72cdbaa9c647",
             "date": 1558040011370
+        },
+        {
+            "message": "Needs example very low poly",
+            "author": "andro",
+            "id": "822bd9f0-c8ca-445c-9907-26f2dd9731b3",
+            "date": 1558367198294
         }
     ]
 }

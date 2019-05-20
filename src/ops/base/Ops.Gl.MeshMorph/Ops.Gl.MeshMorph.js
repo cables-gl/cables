@@ -22,7 +22,7 @@ var calcVertexNormals=op.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_
 calcVertexNormals.set(true);
 
 var geoms=[];
-var mesh=null;
+//var mesh=null;
 window.meshsequencecounter=window.meshsequencecounter||1;
 window.meshsequencecounter++;
 var prfx=String.fromCharCode(97 + window.meshsequencecounter);
@@ -91,7 +91,7 @@ function updateGeom()
     var getGeom = nextGeom.get();
     if (getGeom < 0) getGeom =0 ;
     else if(getGeom >= 7) getGeom = 7;
-    var temp = 0;
+    var temp = 0;//= 0
 
     if(oldGeom === getGeom)return;
 
