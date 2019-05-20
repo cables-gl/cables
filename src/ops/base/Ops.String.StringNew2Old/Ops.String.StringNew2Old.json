@@ -31,6 +31,23 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in - new format"
+            },
+            {
+                "name": "Result",
+                "text": "String out - old format"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "Make example",
+            "author": "andro",
+            "id": "46895679-889e-4acf-a992-f3ddb055edf7",
+            "date": 1558358563165
+        }
+    ]
 }

@@ -34,6 +34,19 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in"
+            },
+            {
+                "name": "Changed",
+                "text": "Trigger out - only when something in the String has changed"
+            },
+            {
+                "name": "Result",
+                "text": "String output"
+            }
+        ]
     }
 }

@@ -34,6 +34,19 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Changed",
+                "text": "Trigger out - happens only when something in the array has changed"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
     }
 }

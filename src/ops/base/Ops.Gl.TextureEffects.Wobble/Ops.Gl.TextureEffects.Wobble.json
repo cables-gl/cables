@@ -60,6 +60,39 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in "
+            },
+            {
+                "name": "time",
+                "text": "Used to animate the wobble"
+            },
+            {
+                "name": "SpeedX",
+                "text": "Speed factor on the X axis"
+            },
+            {
+                "name": "SpeedY",
+                "text": "Speed factor on the Y axis"
+            },
+            {
+                "name": "RepeatX",
+                "text": "Frequency on X axis - higher values create a more grid like wobble"
+            },
+            {
+                "name": "RepeatY",
+                "text": "Frequency on Y axis - higher values create a more grid like wobble"
+            },
+            {
+                "name": "Multiply",
+                "text": "Overall Strength of the effect. best to use very small numbers like 0.1"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

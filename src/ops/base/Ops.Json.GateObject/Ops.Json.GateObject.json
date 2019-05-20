@@ -29,12 +29,25 @@
         ],
         "name": "Ops.Json.GateObject"
     },
-    "summary": "Output object if pass through is true",
+    "summary": "Will only a Object to to be output if the the pass through parameter evaluates to true",
     "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Object In",
+                "text": "Object in "
+            },
+            {
+                "name": "Pass Through",
+                "text": "Opens or closes the gate"
+            },
+            {
+                "name": "Object Out",
+                "text": "Object output if pass through is true"
+            }
+        ]
     }
 }

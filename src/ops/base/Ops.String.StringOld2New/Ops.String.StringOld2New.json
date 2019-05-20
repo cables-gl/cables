@@ -31,6 +31,15 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in - old format"
+            },
+            {
+                "name": "Result",
+                "text": "String out - new format"
+            }
+        ]
     }
 }

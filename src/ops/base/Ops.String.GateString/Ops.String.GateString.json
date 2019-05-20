@@ -35,6 +35,19 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "String In",
+                "text": "String in"
+            },
+            {
+                "name": "Pass Through",
+                "text": "Opens or closes the gate"
+            },
+            {
+                "name": "String Out",
+                "text": "String output if pass through is true"
+            }
+        ]
     }
 }

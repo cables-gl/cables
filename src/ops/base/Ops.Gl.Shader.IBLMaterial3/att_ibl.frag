@@ -253,7 +253,7 @@ void main()
 
     #ifdef ENABLE_FRESNEL
         // float fresnel=5.9;
-        col.rgb+=fresnelAmount*vec3(fresnelR,fresnelG,fresnelB)*(calcFresnel(viewDirection,N)*fresnelWidth*5.5);
+        col.rgb+=amountRough*fresnelAmount*vec3(fresnelR,fresnelG,fresnelB)*(calcFresnel(viewDirection,N)*fresnelWidth*5.5);
 
         // col.rgb=N.rgb;
         // col.rgb=(mPos);

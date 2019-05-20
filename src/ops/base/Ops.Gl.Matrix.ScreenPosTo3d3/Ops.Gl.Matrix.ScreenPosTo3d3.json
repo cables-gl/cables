@@ -35,10 +35,39 @@
     },
     "summary": "convert screen coordinates to 3d coordinates",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Exec",
+                "text": "Trigger in "
+            },
+            {
+                "name": "X",
+                "text": "Mouse co-ordinates in pixels X axis"
+            },
+            {
+                "name": "Y",
+                "text": "Mouse co-ordinates in pixels Y axis"
+            },
+            {
+                "name": "Result X",
+                "text": "Normalized position on the X axis"
+            },
+            {
+                "name": "Result Y",
+                "text": "Normalized position on the Y axis"
+            }
+        ]
     },
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "todos": [
+        {
+            "message": "Add trigger out",
+            "author": "andro",
+            "id": "4fe81e4c-6c77-49e5-9d41-11af8d83272e",
+            "date": 1558357882570
+        }
+    ]
 }

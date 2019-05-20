@@ -87,12 +87,69 @@
         ],
         "name": "Ops.Gl.SurfaceScatterInstanced3"
     },
-    "summary": "Scatter object on the surface of a mesh",
+    "summary": "Scatter an object on the surface of a mesh with different distribution methods",
     "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "draw",
+                "text": "If enabled renders the instanced geometry"
+            },
+            {
+                "name": "Num",
+                "text": "Amount of randomly placed instances"
+            },
+            {
+                "name": "Geom Surface",
+                "text": "The geometry to be used for the surface scatter"
+            },
+            {
+                "name": "Geometry",
+                "text": "The geometry to be instanced across the surface"
+            },
+            {
+                "name": "Distribution",
+                "text": "Distribution modes - see docs for explanation"
+            },
+            {
+                "name": "Selection",
+                "text": "RANDOM or SEQUENTIAL. Sequential follows the draw order of the vertices"
+            },
+            {
+                "name": "Random Seed",
+                "text": "Random seed for RANDOM selection"
+            },
+            {
+                "name": "Size min",
+                "text": "Minimum size of instanced geometry "
+            },
+            {
+                "name": "Size max",
+                "text": "Maximum size of instanced geometry "
+            },
+            {
+                "name": "Limit",
+                "text": "Enable limit on amount of shapes"
+            },
+            {
+                "name": "Limit Num",
+                "text": "The maximum amount of geometry to be instanced"
+            },
+            {
+                "name": "Random Rotate",
+                "text": "Randomly rotate the instanced geometry along the surface"
+            },
+            {
+                "name": "Positions",
+                "text": "Array out of positional data from the instances"
+            }
+        ]
     }
 }
