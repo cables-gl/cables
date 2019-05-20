@@ -1,0 +1,27 @@
+{
+    "id": "e826fe40-69b5-4a63-adfa-db8267bd56d1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1558119089836
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1558119140117,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Buffer"
+            }
+        ],
+        "name": "Ops.User.pandur.ArrayToByteBuffer"
+    }
+}

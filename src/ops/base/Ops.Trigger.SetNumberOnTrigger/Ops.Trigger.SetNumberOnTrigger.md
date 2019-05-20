@@ -1,0 +1,1 @@
+A very handy op for outputting a number only when triggered
