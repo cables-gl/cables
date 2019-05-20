@@ -1,11 +1,11 @@
-
-var v=op.addInPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE));
+const v=op.inValueFloat("value");
 const result=op.outValue("result");
 
-var exec=function()
+v.onChange=exec;
+
+function exec()
 {
     op.setTitle(v.get());
     result.set(v.get());
-};
+}
 
-v.onChange=exec;

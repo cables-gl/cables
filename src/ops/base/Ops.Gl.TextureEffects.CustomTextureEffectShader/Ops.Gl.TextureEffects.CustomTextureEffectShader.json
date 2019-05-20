@@ -12,11 +12,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             }
         ],
@@ -26,11 +28,18 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffect.CustomTextureEffectShader"
+        "name": "Ops.Gl.TextureEffects.CustomTextureEffectShader"
     },
-    "updated": 1539764906373,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "474d4806-ef96-4898-84f7-1d062684dfd0",
-    "created": 1505309334253
+    "created": 1505309334253,
+    "summary": "Use custom shader as a texture effect",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

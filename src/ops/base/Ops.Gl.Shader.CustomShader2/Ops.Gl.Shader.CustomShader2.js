@@ -181,12 +181,15 @@ function updateShader()
     shader.bindTextures=bindTextures.bind(this);
     shader.setSource(vertexShader.get(),fragmentShader.get());
 
-    shader.compile();
+
 
     countTexture=0;
 
     parseUniforms(vertexShader.get() );
     parseUniforms(fragmentShader.get() );
+
+
+    shader.compile();
 
 //     var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
 

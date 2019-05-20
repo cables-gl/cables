@@ -71,6 +71,55 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Index",
+                "text": "Index number determines which string is passed through"
+            },
+            {
+                "name": "String 0",
+                "text": "String 0 in"
+            },
+            {
+                "name": "String 1",
+                "text": "String 1 in"
+            },
+            {
+                "name": "String 2",
+                "text": "String 2 in"
+            },
+            {
+                "name": "String 3",
+                "text": "String 3 in"
+            },
+            {
+                "name": "String 4",
+                "text": "String 4 in"
+            },
+            {
+                "name": "String 5",
+                "text": "String 5 in"
+            },
+            {
+                "name": "String 6",
+                "text": "String 6 in"
+            },
+            {
+                "name": "String 7",
+                "text": "String 7 in"
+            },
+            {
+                "name": "String 8",
+                "text": "String 8 in"
+            },
+            {
+                "name": "String 9",
+                "text": "String 9 in"
+            },
+            {
+                "name": "Result",
+                "text": "Selected string output"
+            }
+        ]
     }
 }
