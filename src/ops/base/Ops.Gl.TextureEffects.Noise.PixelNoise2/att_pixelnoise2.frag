@@ -20,7 +20,7 @@ float random(vec2 co)
     return r;
 }
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 void main()
 {
@@ -41,8 +41,6 @@ void main()
 
     vec4 base=texture(tex,texCoord);
 
-    vec4 col=vec4( _blend(base.rgb,rnd.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
+    outColor=cgl_blend(base,rnd,amount);
 
-    outColor= col;
 }

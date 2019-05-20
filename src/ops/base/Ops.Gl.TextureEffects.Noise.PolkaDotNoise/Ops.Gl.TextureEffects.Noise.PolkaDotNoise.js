@@ -4,16 +4,13 @@ var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 var amount=op.inValueSlider("Amount",1);
 const inBox=op.inValueBool("Square Look",false);
 const threshhold=op.inValueSlider("Threshold",0.25);
-
 var radius_low=op.inValueSlider("Radius Low",0);
 var radius_high=op.inValueSlider("Radius High",1);
 var scale=op.inValue("Scale",10);
-
 var X=op.inValue("X",0);
 var Y=op.inValue("Y",0);
 var Z=op.inValue("Z",0);
-
-var trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger("Next");
 
 
 var cgl=op.patch.cgl;
@@ -22,11 +19,7 @@ var shader=new CGL.Shader(cgl);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 var timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 
-var srcFrag=attachments.polkadotnoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
-
-
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.polkadotnoise_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 radius_low.uniform=new CGL.Uniform(shader,'f','radius_low',radius_low);
 radius_high.uniform=new CGL.Uniform(shader,'f','radius_high',radius_high);

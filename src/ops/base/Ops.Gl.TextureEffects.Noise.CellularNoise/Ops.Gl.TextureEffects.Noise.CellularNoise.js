@@ -1,28 +1,27 @@
-const render=op.inTrigger('render');
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
-const x=op.inValue("X",0);
-const y=op.inValue("Y",0);
-const z=op.inValue("Z",0);
-const scale=op.inValue("Scale",3);
-const trigger=op.outTrigger('trigger');
+const
+    render=op.inTrigger('render'),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    x=op.inValue("X",0),
+    y=op.inValue("Y",0),
+    z=op.inValue("Z",0),
+    scale=op.inValue("Scale",3),
+    trigger=op.outTrigger('trigger'),
+    tile=op.inValueBool("Tileable",false);
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
 
-const srcFrag=(attachments.cellularnoise3d_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.cellularnoise3d_frag);
 
-const textureUniform=new CGL.Uniform(shader,'t','tex',0);
-const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
+    uniZ=new CGL.Uniform(shader,'f','z',z),
+    uniX=new CGL.Uniform(shader,'f','x',x),
+    uniY=new CGL.Uniform(shader,'f','y',y),
+    uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
-const uniZ=new CGL.Uniform(shader,'f','z',z);
-const uniX=new CGL.Uniform(shader,'f','x',x);
-const uniY=new CGL.Uniform(shader,'f','y',y);
-const uniScale=new CGL.Uniform(shader,'f','scale',scale);
-
-const tile=op.inValueBool("Tileable",false);
 tile.onChange=updateTileable;
 function updateTileable()
 {
@@ -40,7 +39,6 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
