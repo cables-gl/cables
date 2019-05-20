@@ -24,5 +24,13 @@
             }
         ],
         "name": "Ops.Vars.VariableString"
+    },
+    "summary": "String variable getter",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

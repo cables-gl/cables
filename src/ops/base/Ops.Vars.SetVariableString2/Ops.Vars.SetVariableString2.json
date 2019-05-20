@@ -22,5 +22,13 @@
             }
         ],
         "name": "Ops.Vars.SetVariableString2"
+    },
+    "summary": "Set string variable",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }
