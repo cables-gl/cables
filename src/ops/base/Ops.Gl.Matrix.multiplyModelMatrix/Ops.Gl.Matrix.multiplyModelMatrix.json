@@ -1,5 +1,4 @@
 {
-    "updated": 1517219761027,
     "authorName": "pandur",
     "id": "ec2784ab-9174-4052-894b-744a18e0d348",
     "created": 1517219700410,
@@ -11,7 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "Identity"
+                "name": "Identity",
+                "subType": "boolean"
             },
             {
                 "type": "3",
@@ -24,7 +24,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Matrix.setModelMatrix"
+        "name": "Ops.Gl.Matrix.multiplyModelMatrix"
     },
     "summary": "multiply model matrix",
     "docs": {

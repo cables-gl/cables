@@ -88,6 +88,63 @@
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Scale",
+                "text": "Scale of the noise"
+            },
+            {
+                "name": "Size",
+                "text": "Size/area of influence "
+            },
+            {
+                "name": "Strength",
+                "text": "Amount of vertex displacement to apply"
+            },
+            {
+                "name": "Calc Normals",
+                "text": "Enable for correct normals"
+            },
+            {
+                "name": "Falloff",
+                "text": "Falloff factor from area size"
+            },
+            {
+                "name": "Output",
+                "text": "Output mode, MUL_XYZ, ADD XYZ or ADD_Z"
+            },
+            {
+                "name": "x",
+                "text": "X position of the noise effect in world space"
+            },
+            {
+                "name": "y",
+                "text": "Y position of the noise effect in world space"
+            },
+            {
+                "name": "z",
+                "text": "X position of the noise effect in world space"
+            },
+            {
+                "name": "Scroll X",
+                "text": "Scrolls the noise lookup on the X axis"
+            },
+            {
+                "name": "Scroll Y",
+                "text": "Scrolls the noise lookup on the Y axis"
+            },
+            {
+                "name": "Scroll Z",
+                "text": "Scrolls the noise lookup on the Z axis"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

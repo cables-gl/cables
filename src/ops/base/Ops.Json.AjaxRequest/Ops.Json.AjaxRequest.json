@@ -27,5 +27,13 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "54330e4d-cdfb-47bd-9c5a-b54751392123",
-    "created": 1510041274265
+    "created": 1510041274265,
+    "todos": [
+        {
+            "message": "needs new version with new string type ports",
+            "author": "pandur",
+            "id": "0e182438-e98d-48e2-8f19-a36ef785ed51",
+            "date": 1558104567923
+        }
+    ]
 }

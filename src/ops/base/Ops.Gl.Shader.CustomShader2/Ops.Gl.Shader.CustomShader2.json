@@ -44,7 +44,7 @@
         ],
         "name": "Ops.Gl.Shader.CustomShader2"
     },
-    "summary": "Write your own shader",
+    "summary": "Write your own custom shader",
     "youtubeid": "Zfhn8xSM0SE",
     "issues": "",
     "collections": null,
@@ -52,6 +52,31 @@
         "Ops.Gl.Shader.Shader2Texture"
     ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Fragment Code",
+                "text": "A string can be passed in as a fragment shader. It's better to use an attachment"
+            },
+            {
+                "name": "Vertex Code",
+                "text": "A string can be passed in as a vertex shader. It's better to use an attachment"
+            },
+            {
+                "name": "Use As Material",
+                "text": "Enable to use as a material"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Shader",
+                "text": "Shader/material out"
+            }
+        ]
     }
 }

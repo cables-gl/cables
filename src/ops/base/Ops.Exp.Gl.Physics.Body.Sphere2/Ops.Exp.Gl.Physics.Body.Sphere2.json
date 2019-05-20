@@ -76,8 +76,56 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Exp.Gl.Physics.World",
+        "Ops.Exp.Gl.Physics.CastRay"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Exec",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Mass",
+                "text": "How heavy an object is, only works with gravity enabled"
+            },
+            {
+                "name": "Radius",
+                "text": "Radius of the sphere"
+            },
+            {
+                "name": "Render",
+                "text": "Enable to render sphere to screen"
+            },
+            {
+                "name": "Reset",
+                "text": "Reset physics"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "X",
+                "text": "X position"
+            },
+            {
+                "name": "Y",
+                "text": "Y position"
+            },
+            {
+                "name": "Z",
+                "text": "Z position"
+            },
+            {
+                "name": "Ray Hit",
+                "text": "Outputs true if a ray hits "
+            },
+            {
+                "name": "Collision",
+                "text": "Trigger out when colliding with another physics object"
+            }
+        ]
     }
 }

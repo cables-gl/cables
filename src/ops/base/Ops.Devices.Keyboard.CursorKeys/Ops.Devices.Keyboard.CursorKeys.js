@@ -1,5 +1,3 @@
-// var canvasOnly=op.addInPort(new CABLES.Port(op,"canvas only",CABLES.OP_PORT_TYPE_VALUE, {"display": "bool"}));
-
 const
     canvasOnly=op.inValueBool("canvas only",true),
     keysCursor=op.inValueBool("Cursor Keys",true),

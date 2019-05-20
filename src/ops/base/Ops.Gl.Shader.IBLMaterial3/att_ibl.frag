@@ -240,11 +240,12 @@ void main()
     L.xz*=matRotation;
     L=normalize(L);
     // col.rgb=mix(col.rgb,SAMPLETEX(mapReflection, L, amountRough*10.0).rgb,amountReflect);
+    //I think the roughness looks better with col.rgb -= not += //andro
     col.rgb+=(SAMPLETEX(mapReflection, L, amountRough*10.0).rgb*amountReflect);
 
     // #ifdef TEX_DIFFUSE
         // metal reflection
-        // col.rgb+=(SAMPLETEX(mapReflection, L, amountRough*10.0).rgb*amountReflect) * texture(texDiffuse,texCoord).rgb * 5.0 * (0.95-texture(texDiffuse,texCoord).rgb);
+        // col.rg-+=(SAMPLETEX(mapReflection, L,amountRough*10.0).rgb*amountReflect) * texture(texDiffuse,texCoord).rgb * 5.0 * (0.95-texture(texDiffuse,texCoord).rgb);
     // #endif
     // col.rgb*
     // col.rgb+=reflc;

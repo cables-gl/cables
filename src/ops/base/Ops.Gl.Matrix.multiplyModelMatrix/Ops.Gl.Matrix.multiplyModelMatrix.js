@@ -4,16 +4,15 @@ var inIdentity=op.inValueBool("Identity",false);
 var next=op.outTrigger("trigger")
 
 var m=mat4.create();
-var matrix=op.addInPort(new CABLES.Port(op,"matrix",CABLES.OP_PORT_TYPE_ARRAY));
+var matrix=op.inArray("matrix");
 
 render.onTriggered=function()
 {
     cgl.pushModelMatrix();
 
-    if(inIdentity.get())    
-        mat4.identity(cgl.mvMatrix);
+    if(inIdentity.get()) mat4.identity(cgl.mMatrix);
 
-    mat4.multiply(cgl.mvMatrix,cgl.mvMatrix,matrix.get());
+    mat4.multiply(cgl.mMatrix,cgl.mMatrix,matrix.get());
 
     next.trigger();
     cgl.popModelMatrix();

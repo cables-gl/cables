@@ -13,7 +13,9 @@ inSend.onTriggered=function()
     if(connection && inObject.get())
     {
 
-        connection.send(JSON.stringify(inObject.get()));
+        // connection.send(JSON.stringify(inObject.get()));
+
+        connection.send(inObject.get());
 
     }
     else
