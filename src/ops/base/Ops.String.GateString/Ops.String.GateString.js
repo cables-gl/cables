@@ -10,4 +10,6 @@ function update()
 {
     if(passThroughPort.get())
         valueOutPort.set(valueInPort.get());
+        else
+        valueOutPort.set('');
 }

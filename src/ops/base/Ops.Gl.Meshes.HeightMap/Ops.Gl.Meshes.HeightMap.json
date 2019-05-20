@@ -1,5 +1,4 @@
 {
-    "updated": 1524478682700,
     "authorName": "pandur",
     "id": "81264799-d92b-4b71-a3f1-ad1da8331e62",
     "created": 1519026735626,
@@ -11,35 +10,43 @@
             },
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "extrude"
+                "name": "extrude",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "rows"
+                "name": "rows",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "columns"
+                "name": "columns",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "texCoords slice"
+                "name": "texCoords slice",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "flat"
+                "name": "flat",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

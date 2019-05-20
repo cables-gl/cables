@@ -8,9 +8,19 @@ exec();
 
 function exec()
 {
+    var s1=string1.get();
+    var s2=string2.get();
+    if(!s1 && !s2)
+    {
+        result.set('');
+        return;
+    }
+    if(!s1)s1='';
+    if(!s2)s2='';
+
     var nl='';
-    if(newLine.get())nl='\n';
-    result.set( String(string1.get())+nl+String(string2.get()));
+    if(s1 && s2 && newLine.get())nl='\n';
+    result.set( String(s1)+nl+String(s2));
 }
 
 

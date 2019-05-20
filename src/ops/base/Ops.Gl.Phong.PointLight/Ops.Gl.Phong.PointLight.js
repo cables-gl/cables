@@ -84,12 +84,12 @@ function updateColor()
     light.ambient[0]=ambientR.get();
     light.ambient[1]=ambientG.get();
     light.ambient[2]=ambientB.get();
-    
+
     light.specular=light.specular||[];
     light.specular[0]=specularR.get();
     light.specular[1]=specularG.get();
     light.specular[2]=specularB.get();
-    
+
     light.changed=true;
 }
 
@@ -118,20 +118,20 @@ exe.onTriggered=function()
         light.radius=radius.get();
         light.fallOff=fallOff.get();
         light.mul=intensity.get();
-    
+
         updatePos();
         updateColor();
         needsUpdate=false;
     }
-    
-    
-    
+
+
+
     cgl.frameStore.phong.lights=cgl.frameStore.phong.lights||[];
 
     vec3.set(transVec,x.get(),y.get(),z.get());
-    vec3.transformMat4(mpos, transVec, cgl.mvMatrix);
+    vec3.transformMat4(mpos, transVec, cgl.mMatrix);
     light=light||{};
-    
+
     light.pos=mpos;
     light.type=0;
 
@@ -139,7 +139,7 @@ exe.onTriggered=function()
     if(CABLES.UI && CABLES.UI.renderHelper)
     {
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix,transVec);
         CABLES.GL_MARKER.drawSphere(op,radius.get()*2);
         cgl.popModelMatrix();
     }
@@ -147,7 +147,7 @@ exe.onTriggered=function()
     if(attachment.isLinked())
     {
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix,transVec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix,transVec);
         attachment.trigger();
         cgl.popModelMatrix();
     }
@@ -155,8 +155,8 @@ exe.onTriggered=function()
     cgl.frameStore.phong.lights.push(light);
     trigger.trigger();
     cgl.frameStore.phong.lights.pop();
-    
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:x,

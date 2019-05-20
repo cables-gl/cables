@@ -8,45 +8,54 @@
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "Height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Thickness"
+                "name": "Thickness",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "pivot x"
+                "name": "pivot x",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "pivot y"
+                "name": "pivot y",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Draw Top"
+                "name": "Draw Top",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Draw Bottom"
+                "name": "Draw Bottom",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Draw Left"
+                "name": "Draw Left",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Draw Right"
+                "name": "Draw Right",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "Trigger"
+                "name": "trigger"
             },
             {
                 "type": "2",
@@ -55,7 +64,6 @@
         ],
         "name": "Ops.Gl.Meshes.RectangleFrame"
     },
-    "updated": 1512549540328,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "e3a24a1a-a74b-4c38-b492-63abca68f6d1",

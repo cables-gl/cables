@@ -1,0 +1,39 @@
+{
+    "id": "1b6b0679-4f26-4886-af31-ee696936ea8f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1558349539832
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1558349546239,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "SoundCloud URL"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Stream URL"
+            },
+            {
+                "type": "5",
+                "name": "Artwork URL"
+            },
+            {
+                "type": "5",
+                "name": "Title"
+            },
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Api.SoundCloud.SoundCloud2"
+    }
+}

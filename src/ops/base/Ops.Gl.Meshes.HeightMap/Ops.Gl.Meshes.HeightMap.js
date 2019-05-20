@@ -61,7 +61,7 @@ function rebuildGeom()
     var meshHeight=mHeight.get();
 
     var count=0;
-    
+
     var vertStepX=meshWidth/width;
     var vertStepY=meshHeight/height;
 
@@ -73,7 +73,7 @@ function rebuildGeom()
 
     var stepRow=meshWidth/numRows;
     var stepColumn=meshHeight/numColumns;
-    
+
     var cycleTex=0;
     var oldh=0;
 

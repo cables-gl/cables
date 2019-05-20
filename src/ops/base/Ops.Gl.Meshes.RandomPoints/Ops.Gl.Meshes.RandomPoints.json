@@ -45,5 +45,13 @@
     "created": 1516620100989,
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "do we still need this ? is pointcloud from array enough?",
+            "author": "pandur",
+            "id": "88c38fd8-47ca-4146-989d-49162c98799c",
+            "date": 1558349934348
+        }
+    ]
 }

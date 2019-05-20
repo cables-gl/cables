@@ -27,7 +27,7 @@
                 "name": "String Out"
             }
         ],
-        "name": "Ops.String.StringGate"
+        "name": "Ops.String.GateString"
     },
     "summary": "Output string if pass through is true",
     "youtubeid": "",
