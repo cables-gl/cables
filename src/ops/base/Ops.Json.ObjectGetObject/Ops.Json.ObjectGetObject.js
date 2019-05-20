@@ -1,7 +1,7 @@
-var data=op.addInPort(new CABLES.Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT ));
-// var key=op.addInPort(new CABLES.Port(op,"key",CABLES.OP_PORT_TYPE_VALUE,{type:'string'} ));
-var key = op.inValueString("key");
-var result=op.outObject("Result");
+const
+    data=op.inObject("data"),
+    key = op.inValueString("key"),
+    result=op.outObject("Result");
 
 result.ignoreValueSerialize=true;
 data.ignoreValueSerialize=true;

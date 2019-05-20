@@ -1,5 +1,4 @@
 {
-    "updated": 1516288315674,
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "2846e136-3c59-4c4a-81f6-d2c983418a28",
@@ -12,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "key"
+                "name": "key",
+                "subType": "string"
             }
         ],
         "portsOut": [

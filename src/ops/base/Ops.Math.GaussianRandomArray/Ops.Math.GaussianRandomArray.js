@@ -1,8 +1,8 @@
-var inNum=op.inValueInt("Num",100);
-var outArr=op.outArray("Array");
-var inDev=op.inValue("Deviation",1);
-var seed=op.addInPort(new CABLES.Port(op,"Random Seed"));
-
+const
+    inNum=op.inValueInt("Num",100),
+    outArr=op.outArray("Array"),
+    inDev=op.inValue("Deviation",1),
+    seed=op.inValueFloat("Random Seed");
 
 var arr=[];
 var stdDev=1;
