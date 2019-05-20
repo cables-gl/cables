@@ -1,9 +1,9 @@
-const exe=op.inTrigger("exe");
-var arr=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
-
-var trigger=op.outTrigger('trigger');
-var idx=op.addOutPort(new CABLES.Port(op,"index"));
-var val=op.addOutPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_OBJECT));
+const
+    exe=op.inTrigger("exe"),
+    arr=op.inArray("array"),
+    trigger=op.outTrigger('trigger'),
+    idx=op.outValue("index"),
+    val=op.outObject("value");
 
 exe.onTriggered=function()
 {

@@ -26,11 +26,18 @@
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "RotationMatrix",
-                "subType": "number"
+                "type": "3",
+                "name": "RotationMatrix"
             }
         ],
         "name": "Ops.Math.RotationFromNormal"
+    },
+    "summary": "Create rotation matrix from normal",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

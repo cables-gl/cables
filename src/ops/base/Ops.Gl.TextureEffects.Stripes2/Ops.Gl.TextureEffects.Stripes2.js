@@ -23,10 +23,9 @@ smoothed.onChange=function()
 
 const
     cgl=op.patch.cgl,
-    shader=new CGL.Shader(cgl,'textureeffect stripes'),
-    srcFrag=(attachments.stripes_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+    shader=new CGL.Shader(cgl,'textureeffect stripes');
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.stripes_frag);
 
 const
     textureUniform=new CGL.Uniform(shader,'t','tex',0),

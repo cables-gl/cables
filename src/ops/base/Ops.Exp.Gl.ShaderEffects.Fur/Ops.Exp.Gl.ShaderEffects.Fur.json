@@ -1,5 +1,4 @@
 {
-    "updated": 1517958948364,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d373059b-2668-42bf-80e9-0499ea0082d3",
@@ -50,5 +49,13 @@
             }
         ],
         "name": "Ops.Exp.Gl.ShaderEffects.Fur"
+    },
+    "summary": "experimental fur shader ",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

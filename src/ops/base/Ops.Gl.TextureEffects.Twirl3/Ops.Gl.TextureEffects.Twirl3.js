@@ -10,15 +10,15 @@ const render=op.inTrigger("Render"),
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
-const srcFrag=attachments.twirl_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.twirl_frag);
 
-const textureUniform=new CGL.Uniform(shader,'t','tex',0);
-const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-const uniTwistAmount=new CGL.Uniform(shader,'f','twistAmount',1);
-const uniRadius=new CGL.Uniform(shader,'f','radius',radius);
-const unicenterX=new CGL.Uniform(shader,'f','centerX',centerX);
-const unicenterY=new CGL.Uniform(shader,'f','centerY',centerY);
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
+    uniTwistAmount=new CGL.Uniform(shader,'f','twistAmount',1),
+    uniRadius=new CGL.Uniform(shader,'f','radius',radius),
+    unicenterX=new CGL.Uniform(shader,'f','centerX',centerX),
+    unicenterY=new CGL.Uniform(shader,'f','centerY',centerY);
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 

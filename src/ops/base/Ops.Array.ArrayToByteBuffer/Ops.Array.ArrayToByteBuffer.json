@@ -23,5 +23,13 @@
             }
         ],
         "name": "Ops.User.pandur.ArrayToByteBuffer"
+    },
+    "summary": "convert an array to a bye buffer (Uint8ClampedArray)",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

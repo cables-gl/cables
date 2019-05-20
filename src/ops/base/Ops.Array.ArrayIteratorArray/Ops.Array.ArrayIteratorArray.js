@@ -1,14 +1,14 @@
-const exe=op.inTrigger("exe");
-var arr=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
-
-var trigger=op.outTrigger('trigger');
-var idx=op.addOutPort(new CABLES.Port(op,"index"));
-var val=op.addOutPort(new CABLES.Port(op,"Result",CABLES.OP_PORT_TYPE_ARRAY));
+const
+    exe=op.inTrigger("exe"),
+    arr=op.inArray("array"),
+    trigger=op.outTrigger('trigger'),
+    idx=op.outValue("index"),
+    val=op.outArray("Result");
 
 exe.onTriggered=function()
 {
     if(!arr.val)return;
-    
+
         op.patch.instancing.pushLoop(arr.get().length);
 
     for(var i=0;i<arr.get().length;i++)

@@ -7,7 +7,7 @@ UNI float radius;
 UNI float centerX;
 UNI float centerY;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 void main()
 {
@@ -26,11 +26,6 @@ void main()
     tc += center;
 
     vec4 col = texture(tex, tc);
-
     vec4 base=texture(tex,texCoord);
-
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-
-    outColor= col;
+    outColor=cgl_blend(base,col,amount);
 }

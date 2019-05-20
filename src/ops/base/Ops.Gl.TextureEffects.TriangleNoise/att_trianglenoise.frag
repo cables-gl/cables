@@ -6,7 +6,7 @@ UNI float ratio;
 UNI float add;
 UNI float amount;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 float rand(vec2 co)
 {
@@ -46,8 +46,6 @@ void main()
     vec4 col=vec4(a,a,a,1.0);
     vec4 base=texture(tex,texCoord);
 
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
+    outColor=cgl_blend(base,col,amount);
 
-    outColor= col;
 }

@@ -17,9 +17,8 @@ var trigger=op.outTrigger('trigger');
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 
-const srcFrag=(attachments.worleynoise_frag||'').replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag );
+shader.setSource(shader.getDefaultVertexShader(),attachments.worleynoise_frag );
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 const uniZ=new CGL.Uniform(shader,'f','z',z);
@@ -58,7 +57,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
