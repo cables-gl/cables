@@ -32,7 +32,6 @@ function update()
         var index=nums[i];
         arr[i]=oldArr[index];
     }
-
     result.set(null);
     result.set(arr);
 }
