@@ -8,7 +8,6 @@ inSeed.onChange=inArray.onChange=inNum.onChange=update;
 
 function update()
 {
-
     if(Math.floor(inNum.get())<0 || !inArray.get())
     {
         result.set(null);
