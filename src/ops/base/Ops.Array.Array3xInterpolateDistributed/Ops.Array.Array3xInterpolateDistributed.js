@@ -19,6 +19,11 @@ function updateArr1()
 
 function updateArr2()
 {
+    if (!inArr1 || !inArr2)
+    {
+        arrOut.set(null);
+        return;
+    }
     if(!inArr2.get())return;
 
     indexArray.length=Math.ceil(inArr2.get().length/3);
