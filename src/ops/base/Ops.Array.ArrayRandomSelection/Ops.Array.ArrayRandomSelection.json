@@ -1,0 +1,30 @@
+{
+    "authorName": "andro",
+    "id": "3dc059c8-bcb3-4d63-b806-ce81215da3b5",
+    "created": 1558451659688,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Elements",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayRandomSelection"
+    }
+}
