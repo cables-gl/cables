@@ -1,10 +1,11 @@
-const exe=op.inTrigger("exe");
-const arrayIn=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
-const trigger=op.outTrigger("trigger")
-const idx=op.addOutPort(new CABLES.Port(op,"index"));
+const
+    exe=op.inTrigger("exe"),
+    arrayIn=op.inArray("array"),
+    trigger=op.outTrigger("trigger"),
+    idx=op.addOutPort(new CABLES.Port(op,"index"));
 
-var vec=vec3.create();
 const cgl=op.patch.cgl;
+var vec=vec3.create();
 exe.onTriggered=render;
 
 function render()

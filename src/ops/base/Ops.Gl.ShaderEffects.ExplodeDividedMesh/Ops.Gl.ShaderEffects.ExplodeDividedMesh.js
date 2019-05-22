@@ -1,8 +1,8 @@
 
 var cgl=op.patch.cgl;
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var inDistance=op.inValue("Distance",1);
 var inAbsolute=op.inValueBool("Absolute",false);
@@ -30,7 +30,7 @@ var srcHeadVert=attachments.explode_divided_mesh_vert;
 var srcBodyVert=''
     .endl()+'pos=MOD_deform(pos,attrVertNormal,attrVertIndex);'
     .endl();
-    
+
 var moduleVert=null;
 
 function removeModule()
@@ -56,7 +56,7 @@ op.render.onTriggered=function()
          return;
     }
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:posx,
@@ -93,7 +93,7 @@ op.render.onTriggered=function()
 
         inSize.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'size',inSize);
     }
-    
+
     if(absoluteChanged)
     {
         absoluteChanged=false;
@@ -101,7 +101,7 @@ op.render.onTriggered=function()
             else shader.removeDefine("ABSOLUTE");
 
     }
-    
+
     if(!shader)return;
 
     op.trigger.trigger();

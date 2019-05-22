@@ -1,6 +1,5 @@
 {
     "summary": "Switch between two shaders",
-    "updated": 1519816252796,
     "authorName": "pandur",
     "id": "34ae93a7-ceb4-4e02-8d6f-a38f5e6c732b",
     "created": 1519816251808,
@@ -12,7 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "boolean"
             },
             {
                 "type": "2",

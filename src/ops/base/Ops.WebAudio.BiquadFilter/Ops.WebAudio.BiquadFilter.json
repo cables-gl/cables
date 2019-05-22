@@ -10,23 +10,28 @@
             },
             {
                 "type": "0",
-                "name": "type"
+                "name": "type",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "frequency"
+                "name": "frequency",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "detune"
+                "name": "detune",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "q"
+                "name": "q",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "gain"
+                "name": "gain",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -69,5 +74,6 @@
                 "text": "Audio output which contains the the input signal with the filter applied, can be connected to the Ops.WebAudio.Output op e.g."
             }
         ]
-    }
+    },
+    "created": 1558533780684
 }

@@ -20,10 +20,10 @@ function getImpulse() {
     var url = op.patch.getFilePath(impulseUrl);
     if(typeof url === 'string' && url.length > 1) {
         ajaxRequest.open('GET', url, true);
-        ajaxRequest.responseType = 'arraybuffer';    
+        ajaxRequest.responseType = 'arraybuffer';
         ajaxRequest.onload = function() {
             var impulseData = ajaxRequest.response;
-        
+
             audioContext.decodeAudioData(impulseData, function(buffer) {
                 if(buffer.sampleRate != audioContext.sampleRate) {
                     op.log('[impulse response] Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate);
@@ -43,15 +43,15 @@ function getImpulse() {
                 op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
             }, function(e){
               op.log("[impulse response] Error decoding audio data" + e.err);
-              
+
             });
         };
-    
+
       ajaxRequest.send();
     }
 }
 
-impulseResponse.onValueChange( getImpulse );
+impulseResponse.onChange=getImpulse;
 
 function onLinkChange(){
     if(!audioIn.isLinked()){
@@ -68,7 +68,7 @@ function onLinkChange(){
 
 audioIn.onLinkChanged = onLinkChange;
 
-audioIn.onValueChange(function() {
+audioIn.onChange=function() {
     if (audioIn.get()) {
         op.log("[audio in] connected");
         try{
@@ -79,10 +79,10 @@ audioIn.onValueChange(function() {
         }
         audioOut.set(convolver);
     }
-});
+};
 
 normalize.set(NORMALIZE_DEF);
 
-normalize.onValueChange( function() {
+normalize.onChange= function() {
     convolver.normalize = normalize.get();
-});
+};

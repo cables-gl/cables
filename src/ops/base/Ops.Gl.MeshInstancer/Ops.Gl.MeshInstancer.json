@@ -92,13 +92,7 @@
             }
         ]
     },
-    "collections": [
-        "pointArrays",
-        "meshInstancing"
-    ],
+    "collections": null,
     "relatedops": null,
-    "issues": "",
-    "youtubeids": [
-        "7xlElfbMWgw"
-    ]
+    "issues": ""
 }

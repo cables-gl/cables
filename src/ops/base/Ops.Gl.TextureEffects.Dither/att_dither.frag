@@ -10,7 +10,7 @@ float lumi( vec4 col ) {
     return (0.2126*col.r + 0.7152*col.g + 0.0722*col.b);
 }
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 float adjustFrag( mat4 adjustments,float val, vec2 coord )
 {
@@ -51,7 +51,5 @@ void main()
     if (lum > threshold) color = vec4(1, 1, 1, 1);
         else color = vec4(0, 0, 0, 1);
 
-    vec4 col=vec4( _blend(base.rgb,color.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-  	outColor= col;
+    outColor=cgl_blend(base,color,amount);
 }

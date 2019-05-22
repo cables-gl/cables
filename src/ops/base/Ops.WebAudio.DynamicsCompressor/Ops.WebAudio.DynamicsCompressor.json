@@ -7,23 +7,28 @@
             },
             {
                 "type": "0",
-                "name": "threshold"
+                "name": "threshold",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "knee"
+                "name": "knee",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "ratio"
+                "name": "ratio",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "attack"
+                "name": "attack",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "release"
+                "name": "release",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -37,7 +42,8 @@
             },
             {
                 "type": "0",
-                "name": "reduction"
+                "name": "reduction",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.DynamicsCompressor"
@@ -85,5 +91,6 @@
                 "text": "How much the audio input is reduced"
             }
         ]
-    }
+    },
+    "created": 1558533960210
 }
