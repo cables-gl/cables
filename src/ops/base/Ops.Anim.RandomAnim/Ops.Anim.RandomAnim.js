@@ -6,13 +6,9 @@ var seed=op.inValue("random seed",0);
 
 var duration=op.inValue("duration",0.5);
 var pause=op.inValue("pause between",0);
-
-
 var next=op.outTrigger("Next");
-
 var result=op.outValue("result");
 var looped=op.outTrigger("Looped");
-
 var anim=new CABLES.Anim();
 anim.createPort(op,"easing",reinit);
 

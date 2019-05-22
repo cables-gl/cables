@@ -16,7 +16,14 @@ function reset()
     outArr.set(arr);
     var l=parseInt(inLength.get(),10); //why this ?
     //var l=Math.floor(inLength.get());
-    if(l<0)return;
+
+    //if(l<0)return;
+    if(l < 0)
+    {
+        //outArr.set(null);
+        // outArr.length = 0;//this stops array resetting..
+        return;
+    }
 
     arr.length=l;
 
