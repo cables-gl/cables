@@ -37,7 +37,7 @@ CABLES.UTILS.float32Concat=function(first, second)
  */
 CABLES.shuffleArray=function(array) {
     for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
+        var j = Math.floor(Math.seededRandom() * (i + 1));
         var temp = array[i];
         array[i] = array[j];
         array[j] = temp;
