@@ -19,7 +19,7 @@ UNI float aspect;
 IN vec2 texCoord;
 
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 // adapted from warp shader by inigo quilez/iq
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -87,8 +87,6 @@ void main()
     float v4= fbm6( (p + 4.0*q2 +anim*0.1)*repeat );
 
 
-    // vec4 col=vec4( vec3( fbm4(( texCoord + fbm6(texCoord*anim) ) )) ,1.0 );
-    // outColor = vec4(vec3(fbm6(texCoord)),1.0);
 
 
     vec4 base=texture(tex,texCoord);
@@ -121,23 +119,9 @@ void main()
         numLayers++;
     }
 
-
-    // finalColor=vec4( vec3(v3)*1.0,1.0);
-    // finalColor=vec4( vec3(v3+v2)/2.0,1.0);
-    // finalColor=vec4( vec3(v+v2+v4+v3)/4.0,1.0);
-
     finalColor=vec4( vec3(colVal/numLayers),1.0);
 
 
-    finalColor = vec4( _blend( base.rgb, finalColor.rgb ) ,1.0);
-    finalColor = vec4( mix( finalColor.rgb, base.rgb ,1.0-base.a*amount),1.0);
+    outColor = cgl_blend(base,finalColor,amount);;
 
-
-    outColor = finalColor;
-
-
-    // outColor=vec4( v2,v,v4,1.0);
-    // outColor=vec4( vec3(q.x+q.y),1.0);
-
-    // outColor=texture(tex,vec2(v,v2));
 }

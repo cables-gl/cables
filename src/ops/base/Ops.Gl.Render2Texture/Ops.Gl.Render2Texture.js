@@ -1,30 +1,20 @@
 const cgl=op.patch.cgl;
 
-var render=op.inTrigger('render');
-var useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-
-var width=op.inValueInt("texture width");
-var height=op.inValueInt("texture height");
-var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
-
-var msaa=op.inValueSelect("MSAA",["none","2x","4x","8x"],"none");
-var trigger=op.outTrigger('trigger');
-// var tex=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
-// var texDepth=op.addOutPort(new CABLES.Port(op,"textureDepth",CABLES.OP_PORT_TYPE_TEXTURE));
-
-var tex=op.outTexture("texture");
-var texDepth=op.outTexture("textureDepth");
-
-var fpTexture=op.inValueBool("HDR");
-var depth=op.inValueBool("Depth",true);
-var clear=op.inValueBool("Clear",true);
+const
+    render=op.inTrigger('render'),
+    useVPSize=op.inValueBool("use viewport size",true),
+    width=op.inValueInt("texture width",512),
+    height=op.inValueInt("texture height",512),
+    tfilter=op.inValueSelect("filter",['nearest','linear','mipmap'],'linear'),
+    msaa=op.inValueSelect("MSAA",["none","2x","4x","8x"],"none"),
+    trigger=op.outTrigger('trigger'),
+    tex=op.outTexture("texture"),
+    texDepth=op.outTexture("textureDepth"),
+    fpTexture=op.inValueBool("HDR"),
+    depth=op.inValueBool("Depth",true),
+    clear=op.inValueBool("Clear",true);
 
 var fb=null;
-
-width.set(512);
-height.set(512);
-useVPSize.set(true);
-tfilter.set('linear');
 var reInitFb=true;
 tex.set(CGL.Texture.getEmptyTexture(cgl));
 
@@ -49,30 +39,17 @@ function updateVpSize()
     }
 }
 
-fpTexture.onChange=function()
-{
-    reInitFb=true;
-};
 
-depth.onChange=function()
+function initFbLater()
 {
     reInitFb=true;
-};
+}
 
-clear.onChange=function()
-{
-    reInitFb=true;
-};
-
-var onFilterChange=function()
-{
-    reInitFb=true;
-};
-
-msaa.onChange=function()
-{
-    reInitFb=true;
-};
+fpTexture.onChange=
+    depth.onChange=
+    clear.onChange=
+    tfilter.onChange=
+    msaa.onChange=initFbLater;
 
 function doRender()
 {
@@ -143,5 +120,5 @@ function doRender()
 render.onTriggered=doRender;
 op.preRender=doRender;
 
-tfilter.onValueChange(onFilterChange);
+
 updateVpSize();

@@ -7,9 +7,7 @@ const
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
-var srcFrag=attachments.fbmnoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag );
+shader.setSource(shader.getDefaultVertexShader(),attachments.fbmnoise_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 var uniScale=new CGL.Uniform(shader,'f','scale',op.inValue("scale",2));

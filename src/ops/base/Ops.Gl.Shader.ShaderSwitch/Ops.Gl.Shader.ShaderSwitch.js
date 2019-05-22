@@ -1,10 +1,10 @@
-
-var render=op.inTrigger('render');
-var value=op.addInPort(new CABLES.Port(op,"value",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var shader=op.addInPort(new CABLES.Port(op,"shader true",CABLES.OP_PORT_TYPE_OBJECT));
-var shader2=op.addInPort(new CABLES.Port(op,"shader false",CABLES.OP_PORT_TYPE_OBJECT));
-var trigger=op.outTrigger('trigger');
-var shaderOut=op.addOutPort(new CABLES.Port(op,"shaderOut",CABLES.OP_PORT_TYPE_OBJECT));
+const
+    render=op.inTrigger('render'),
+    value=op.inValueBool("value"),
+    shader=op.inObject("shader true"),
+    shader2=op.inObject("shader false"),
+    trigger=op.outTrigger('trigger'),
+    shaderOut=op.outObject("shaderOut");
 
 var cgl=op.patch.cgl;
 
@@ -12,7 +12,10 @@ shaderOut.ignoreValueSerialize=true;
 shader.ignoreValueSerialize=true;
 shader2.ignoreValueSerialize=true;
 
-var doRender=function()
+render.onTriggered=doRender;
+doRender();
+
+function doRender()
 {
     if(value.get())
     {
@@ -35,12 +38,5 @@ var doRender=function()
             trigger.trigger();
             cgl.setPreviousShader();
         }
-        
     }
-    
-    
-    
-};
-
-render.onTriggered=doRender;
-doRender();
+}

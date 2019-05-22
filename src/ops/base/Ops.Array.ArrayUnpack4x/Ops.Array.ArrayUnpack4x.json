@@ -57,5 +57,8 @@
     },
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": [
+        "Ops.Array.ArrayPack3",
+        "Ops.Gl.TextureFromColorArray"
+    ]
 }

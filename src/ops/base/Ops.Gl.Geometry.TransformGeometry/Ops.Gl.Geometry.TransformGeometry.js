@@ -1,26 +1,26 @@
-var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
-var transX=op.inValue("Translate X");
-var transY=op.inValue("Translate Y");
-var transZ=op.inValue("Translate Z");
-var scaleX=op.inValueSlider("Scale X",1);
-var scaleY=op.inValueSlider("Scale Y",1);
-var scaleZ=op.inValueSlider("Scale Z",1);
-var rotX=op.inValue("Rotation X");
-var rotY=op.inValue("Rotation Y");
-var rotZ=op.inValue("Rotation Z");
-
-var outGeom=op.outObject("Result");
+const
+    geometry=op.inObject("Geometry"),
+    transX=op.inValue("Translate X"),
+    transY=op.inValue("Translate Y"),
+    transZ=op.inValue("Translate Z"),
+    scaleX=op.inValueSlider("Scale X",1),
+    scaleY=op.inValueSlider("Scale Y",1),
+    scaleZ=op.inValueSlider("Scale Z",1),
+    rotX=op.inValue("Rotation X"),
+    rotY=op.inValue("Rotation Y"),
+    rotZ=op.inValue("Rotation Z"),
+    outGeom=op.outObject("Result");
 
 transX.onChange=
-transY.onChange=
-transZ.onChange=
-scaleX.onChange=
-scaleY.onChange=
-scaleZ.onChange=
-rotX.onChange=
-rotY.onChange=
-rotZ.onChange=
-geometry.onChange=update;
+    transY.onChange=
+    transZ.onChange=
+    scaleX.onChange=
+    scaleY.onChange=
+    scaleZ.onChange=
+    rotX.onChange=
+    rotY.onChange=
+    rotZ.onChange=
+    geometry.onChange=update;
 
 
 function update()
@@ -49,7 +49,6 @@ function update()
 
         for(i=0;i<geom.vertices.length;i+=3)
         {
-
             vec3.set(rotVec,
                 geom.vertices[i+0],
                 geom.vertices[i+1],
@@ -62,10 +61,8 @@ function update()
             geom.vertices[i+0]=rotVec[0];
             geom.vertices[i+1]=rotVec[1];
             geom.vertices[i+2]=rotVec[2];
-
-
         }
-        
+
         outGeom.set(null);
         outGeom.set(geom);
     }
@@ -73,7 +70,4 @@ function update()
     {
         outGeom.set(null);
     }
-    
-    
-    
 }

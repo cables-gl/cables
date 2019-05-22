@@ -13,7 +13,7 @@ vec3 desaturate(vec3 color)
     return vec3(dot(vec3(0.2126,0.7152,0.0722), color));
 }
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 void main()
 {
@@ -43,28 +43,16 @@ void main()
 
 
 	vec3 edge = sqrt((horizEdge.rgb/count * horizEdge.rgb/count) + (vertEdge.rgb/count * vertEdge.rgb/count));
-// 	edge=vec3(atan(edge.x,edge.y));
 
-// 	if(edge.r>1.1)edge=vec3(1.0,1.0,1.0);
-// 	else edge=vec3(0.0,0.0,0.0);
+    edge=desaturate(edge);
 
-// edge*=5.0;
-
-
-edge=desaturate(edge);
-
-    if(mulColor>0.0)
-        edge*=texture( tex, texCoord ).rgb*mulColor*4.0;
+    if(mulColor>0.0) edge*=texture( tex, texCoord ).rgb*mulColor*4.0;
     edge=max(min(edge,1.0),0.0);
-    // outColor= vec4(edge,1.0);
 
     //blend section
     vec4 col=vec4(edge,1.0);
     vec4 base=texture(tex,texCoord);
 
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-    outColor= col;
-
+    outColor=cgl_blend(base,col,amount);
 }
 

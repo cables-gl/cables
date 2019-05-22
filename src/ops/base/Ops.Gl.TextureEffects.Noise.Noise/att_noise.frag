@@ -3,7 +3,7 @@ UNI sampler2D tex;
 UNI float amount;
 UNI float time;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 {{MODULES_HEAD}}
 
 {{CGL.RANDOM_TEX}}

@@ -1,26 +1,21 @@
-var render=op.inTrigger('render');
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
-
-var scale=op.inValue("Scale",4);
-var x=op.inValue("X",0);
-var y=op.inValue("Y",0);
-var z=op.inValue("Z",0);
-
+const
+    render=op.inTrigger('render'),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    scale=op.inValue("Scale",4),
+    x=op.inValue("X",0),
+    y=op.inValue("Y",0),
+    z=op.inValue("Z",0);
 
 var trigger=op.outTrigger('trigger');
 
 op.setPortGroup("Position",[x,y,z]);
 op.setPortGroup("Look",[scale]);
 
-
 var cgl=op.patch.cgl;
-
 var shader=new CGL.Shader(cgl);
 
-var srcFrag=attachments.valuenoise3d_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.valuenoise3d_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
 var uniZ=new CGL.Uniform(shader,'f','z',z);

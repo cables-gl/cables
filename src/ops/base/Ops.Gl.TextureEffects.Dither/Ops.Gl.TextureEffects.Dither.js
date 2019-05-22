@@ -8,10 +8,9 @@ const
 
 const
     cgl=op.patch.cgl,
-    shader=new CGL.Shader(cgl),
-    srcFrag=(attachments.dither_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
+    shader=new CGL.Shader(cgl);
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.dither_frag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0),
     amountUniform=new CGL.Uniform(shader,'f','amount',amount),

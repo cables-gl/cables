@@ -93,10 +93,7 @@
             }
         ]
     },
-    "collections": [
-        "pointArrays",
-        "meshInstancing"
-    ],
+    "collections": null,
     "relatedops": null,
-    "issues": "Currently the meshInstancer op cannot share materials with other ops. Make sure it has it's own material"
+    "issues": ""
 }
