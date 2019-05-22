@@ -1,11 +1,12 @@
-var inGeom=op.inObject("Geometry");
-var outGeom=op.outObject("Result");
-const inSeed=op.inValue("Seed",0);
+const
+    inGeom=op.inObject("Geometry"),
+    outGeom=op.outObject("Result"),
+    inSeed=op.inValue("Seed",0);
 
 inGeom.ignoreValueSerialize=true;
 outGeom.ignoreValueSerialize=true;
 
-
+inSeed.onChange=
 inGeom.onChange=function()
 {
     var geom=inGeom.get();
@@ -21,6 +22,7 @@ inGeom.onChange=function()
     var i=0;
     order.length=geom.vertices.length/9;
     for(i=0;i<order.length;i++)order[i]=i;
+    Math.randomSeed=inSeed.get();
     order=CABLES.shuffleArray(order);
 
     var verts=[];

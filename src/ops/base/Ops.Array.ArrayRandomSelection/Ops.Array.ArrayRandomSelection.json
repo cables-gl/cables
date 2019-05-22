@@ -26,5 +26,32 @@
             }
         ],
         "name": "Ops.Array.ArrayRandomSelection"
+    },
+    "summary": "",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.Array3xRandomSelection"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array in to extract random values from"
+            },
+            {
+                "name": "Elements",
+                "text": "Amount of elements to extract"
+            },
+            {
+                "name": "Seed",
+                "text": "Random number seed. 0 is always different on a reload. Set to a number to keep a fixed seed."
+            },
+            {
+                "name": "Result",
+                "text": "Array Out"
+            }
+        ]
     }
 }
