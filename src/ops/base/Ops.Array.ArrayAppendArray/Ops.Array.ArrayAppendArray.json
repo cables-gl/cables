@@ -1,5 +1,4 @@
 {
-    "updated": 1539275441551,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c2bbf5a7-0e98-416b-aadf-49d09242821c",
@@ -25,10 +24,38 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.ArrayMerge"
+        "name": "Ops.Array.ArrayAppendArray"
     },
-    "summary": "merge/concat two arrays",
+    "summary": "Append an array to an existing array ",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Join",
+                "text": "Append array to existing array"
+            },
+            {
+                "name": "Array",
+                "text": "ArrayIn"
+            },
+            {
+                "name": "Reset",
+                "text": "Reset the array"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "fixed array length zero now resets array correctly",
+            "author": "andro",
+            "date": 1558534982108
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

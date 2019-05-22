@@ -9,6 +9,7 @@ outArr.set(arr);
 
 inReset.onTriggered=function()
 {
+    //outArr.set(null);
     arr.length=0;
 };
 
@@ -21,6 +22,6 @@ exec.onTriggered=function()
         outArr.set(null);
         outArr.set(arr);
     }
-    
-    
+
+
 };
