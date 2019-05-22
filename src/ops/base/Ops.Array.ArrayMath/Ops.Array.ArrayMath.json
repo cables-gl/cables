@@ -1,0 +1,58 @@
+{
+    "authorName": "andro",
+    "id": "c7617717-3114-452f-9625-e4fefd841e88",
+    "created": 1558533231686,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "array 0"
+            },
+            {
+                "type": "0",
+                "name": "Number for math",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Math function",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array result"
+            }
+        ],
+        "name": "Ops.Array.ArrayMath"
+    },
+    "summary": "Pick from multiple mathematical modes which can all be applied to a single array",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.ArrayMathArray",
+        "Ops.Array.ArrayMultiply"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "array 0",
+                "text": "Array in"
+            },
+            {
+                "name": "Number for math",
+                "text": "The number used for the math operation on all values in the array"
+            },
+            {
+                "name": "Math function",
+                "text": "The different mathematical functions"
+            },
+            {
+                "name": "Array result",
+                "text": "Array out"
+            }
+        ]
+    }
+}

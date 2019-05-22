@@ -28,7 +28,7 @@
         "ports": [
             {
                 "name": "Array",
-                "text": "The array3x to sort"
+                "text": "The arrayXyz to sort"
             },
             {
                 "name": "What",
@@ -40,8 +40,8 @@
             }
         ]
     },
-    "youtubeid": "",
     "collections": null,
     "issues": "",
-    "relatedops": null
+    "relatedops": null,
+    "youtubeids": []
 }
