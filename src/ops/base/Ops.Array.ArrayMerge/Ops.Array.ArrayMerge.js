@@ -1,26 +1,33 @@
-var exec=op.inTriggerButton("Join");
 var inArr=op.inArray("Array");
-var inReset=op.inTriggerButton("Reset");
+var inArr2=op.inArray("Array 2");
 
 var outArr=op.outArray("Result");
 
 var arr=[];
-outArr.set(arr);
 
-inReset.onTriggered=function()
+inArr.onChange=inArr2.onChange=function()
 {
-    arr.length=0;
-};
-
-exec.onTriggered=function()
-{
-    var newArray=inArr.get();
-    if(Array.isArray(newArray))
+    if(!inArr2.get() && !inArr.get())
     {
-        arr=arr.concat(newArray);
         outArr.set(null);
-        outArr.set(arr);
+        return;
     }
-    
-    
+
+    if(!inArr2.get() && inArr.get())
+    {
+        outArr.set(inArr.get());
+        return;
+    }
+    if(inArr2.get() && !inArr.get())
+    {
+        outArr.set(inArr2.get());
+        return;
+    }
+
+    arr.length=0;
+    arr=arr.concat(inArr.get());
+    arr=arr.concat(inArr2.get());
+
+    outArr.set(arr);
+
 };

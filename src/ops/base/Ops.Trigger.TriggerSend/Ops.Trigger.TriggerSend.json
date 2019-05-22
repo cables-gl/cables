@@ -22,5 +22,24 @@
             }
         ],
         "name": "Ops.Trigger.TriggerSend"
+    },
+    "summary": "Allows triggers to be sent to a TriggerReceive op with the same variable name",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Trigger.TriggerReceive"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger",
+                "text": "Trigger in - gets sent to the matching TriggerReceive "
+            },
+            {
+                "name": "Named Trigger",
+                "text": "Variable name assigned to the op - must match the TriggerReceive "
+            }
+        ]
     }
 }
