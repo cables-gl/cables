@@ -16,5 +16,4 @@ exe.onTriggered=function()
         trigger.trigger();
         op.patch.instancing.increment();
     }
-
 };
