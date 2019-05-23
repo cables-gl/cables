@@ -343,7 +343,7 @@ CABLES.Op = function()
      * @function
      */
     CABLES.Op.prototype.outValueString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { "type": "string" })); if (v !== undefined) p.set(v); return p; };
-    CABLES.Op.prototype.outString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" })); if (v !== undefined) p.set(v); return p; };
+    CABLES.Op.prototype.outString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" })); if (v !== undefined) p.set(v); else p.set(''); return p; };
 
     /**
      * create output object port
