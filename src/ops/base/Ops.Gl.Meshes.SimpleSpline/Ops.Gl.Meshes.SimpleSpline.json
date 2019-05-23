@@ -33,11 +33,14 @@
     "authorName": "pandur",
     "id": "af3fd0e8-ef3d-4124-a6ee-3482e9a85b45",
     "created": 1513178510117,
-    "youtubeid": "",
     "collections": [
-        "pointArrays"
+        "pointArrays",
+        "Spline"
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": []
 }

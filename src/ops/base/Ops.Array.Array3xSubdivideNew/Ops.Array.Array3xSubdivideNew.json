@@ -54,10 +54,11 @@
             }
         ]
     },
-    "youtubeid": "",
     "collections": [
-        "pointArrays"
+        "pointArrays",
+        "Spline"
     ],
     "issues": "",
-    "relatedops": null
+    "relatedops": null,
+    "youtubeids": []
 }

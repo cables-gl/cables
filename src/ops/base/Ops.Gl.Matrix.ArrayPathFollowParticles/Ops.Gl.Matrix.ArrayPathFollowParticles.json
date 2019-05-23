@@ -49,5 +49,11 @@
     "summary": "render lots of particles following a path/spline/array3x",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "Spline"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }
