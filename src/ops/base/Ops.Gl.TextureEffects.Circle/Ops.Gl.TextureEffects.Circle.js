@@ -25,11 +25,10 @@ op.setPortGroup("Style",[warnOverflow,fallOff,inFadeOut]);
 
 
 var trigger=op.outTrigger('trigger');
-var srcFrag=attachments.circle_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'textureeffect stripes');
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.circle_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 

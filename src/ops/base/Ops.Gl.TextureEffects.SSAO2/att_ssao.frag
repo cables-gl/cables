@@ -45,8 +45,8 @@ UNI float zfar;
 
 UNI float radius;
 UNI float aoclamp;
-const bool noise = false; //use noise instead of pattern for sample dithering
-const float noiseamount = 0.0008; //dithering amount
+UNI bool noise ; //use noise instead of pattern for sample dithering//*****
+UNI float noiseamount; //dithering amount//********
 
 const float diffarea = 0.4; //self-shadowing reduction
 const float gdisplace = 0.4; //gauss bell center

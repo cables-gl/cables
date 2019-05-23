@@ -7,7 +7,9 @@ const
     samples=op.inValueInt("Samples",4),
     aoRadius=op.inValue("Ao Radius",3),
     aoClamp=op.inValueSlider("Ao Clamp",0.25),
-    lumInfluence=op.inValueSlider("Luminance Influence",0.7);
+    lumInfluence=op.inValueSlider("Luminance Influence",0.7),
+    noise = op.inValueBool("Enable noise",false),
+    noiseamount = op.inValueFloat("Noise amount", 0.0008);
 
 
 
@@ -26,6 +28,8 @@ lumInfluence.uniform=new CGL.Uniform(shader,'f','lumInfluence',lumInfluence);
 zNear.uniform=new CGL.Uniform(shader,'f','znear',zNear);
 zFar.uniform=new CGL.Uniform(shader,'f','zfar',zFar);
 
+noise.uniform = new CGL.Uniform(shader,'b','noise',noise);
+noiseamount.uniform=new CGL.Uniform(shader,'f','noiseamount',noiseamount);
 
 samples.onChange=function()
 {

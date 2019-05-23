@@ -23,7 +23,7 @@
     "authorName": "pandur",
     "id": "b0fbc366-09a8-4695-87b3-5946210bf722",
     "created": 1513100341975,
-    "summary": "Sorts an array with the  lowest values of the selected component.",
+    "summary": "Sorts an array with the lowest values of the selected component.",
     "docs": {
         "ports": [
             {
