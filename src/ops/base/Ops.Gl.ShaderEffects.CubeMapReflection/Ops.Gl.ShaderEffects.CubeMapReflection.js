@@ -1,10 +1,8 @@
-
-var render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var inCubemap=op.inObject("Cubemap");
-
-var inAmount=op.inValueSlider("Amount",0.3);
-
-var next=op.addOutPort(new CABLES.Port(this,"next",CABLES.OP_PORT_TYPE_FUNCTION));
+const
+    render=op.inTrigger("render"),
+    inCubemap=op.inObject("Cubemap"),
+    inAmount=op.inValueSlider("Amount",0.3),
+    next=op.outTrigger("next");
 
 var shader=null;
 var moduleFrag=null;

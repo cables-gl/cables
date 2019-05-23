@@ -1,19 +1,19 @@
 
 const exe=op.inTrigger("exe");
-var arrayIn=op.addInPort(new CABLES.Port(op,"array",CABLES.OP_PORT_TYPE_ARRAY));
-var time=op.addInPort(new CABLES.Port(op,"time",CABLES.OP_PORT_TYPE_VALUE));
+var arrayIn=op.inArray("array");
+var time=op.inValueFloat("time");
 
-var duration=op.addInPort(new CABLES.Port(op,"duration",CABLES.OP_PORT_TYPE_VALUE));
+var duration=op.inValueFloat("duration");
 duration.set(0.1);
 
-var offset=op.addInPort(new CABLES.Port(op,"offset",CABLES.OP_PORT_TYPE_VALUE));
+var offset=op.inValueFloat("offset");
 offset.set(0.0);
 
-var lookAhead=op.addInPort(new CABLES.Port(op,"look ahead",CABLES.OP_PORT_TYPE_VALUE));
+var lookAhead=op.inValueFloat("look ahead");
 lookAhead.set(3.0);
 
-var trigger=op.outTrigger("trigger")
-var triggerLookat=op.addOutPort(new CABLES.Port(op,"transform lookat",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger("trigger");
+var triggerLookat=op.outTrigger("transform lookat");
 var idx=op.addOutPort(new CABLES.Port(op,"index"));
 
 var vec=vec3.create();

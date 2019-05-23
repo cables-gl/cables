@@ -1,34 +1,41 @@
 const cgl=op.patch.cgl;
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
-var trigger=op.outTrigger('trigger');
-var shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
+const
+    render=op.inTrigger("render"),
+    pointSize=op.inValueFloat("PointSize",3),
+    randomSize=op.inValue("Random Size",3),
+    makeRound=op.inValueBool("Round",true),
+    doScale=op.inValueBool("Scale by Distance",false),
+    r = op.inValueSlider("r", Math.random()),
+    g = op.inValueSlider("g", Math.random()),
+    b = op.inValueSlider("b", Math.random()),
+    a = op.inValueSlider("a",1),
+    preMultipliedAlpha=op.inValueBool("preMultiplied alpha"),
+    texture=op.inTexture("texture"),
+    textureMask=op.inTexture("Texture Mask"),
+    colorizeTexture=op.inValueBool("colorizeTexture",false),
+    textureLookup=op.inValueBool("texture Lookup",false),
+    trigger=op.outTrigger('trigger'),
+    shaderOut=op.outObject("shader");
 
-var pointSize=op.addInPort(new CABLES.Port(op,"PointSize",CABLES.OP_PORT_TYPE_VALUE));
-var randomSize=op.inValue("Random Size",3);
+op.setPortGroup("Texture",[textureLookup,textureMask,texture,colorizeTexture]);
+op.setPortGroup("Color",[r,g,b,a,preMultipliedAlpha]);
+op.setPortGroup("Size",[pointSize,randomSize,makeRound,doScale]);
+r.setUiAttribs({ colorPick: true });
 
-var makeRound=op.addInPort(new CABLES.Port(op,"Round",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var doScale=op.addInPort(new CABLES.Port(op,"Scale by Distance",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var preMultipliedAlpha=op.addInPort(new CABLES.Port(op,"preMultiplied alpha",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-
-
-makeRound.set(true);
-doScale.set(false);
-pointSize.set(3);
-
-
-var shader=new CGL.Shader(cgl,'PointMaterial');
+const shader=new CGL.Shader(cgl,'PointMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-
 shader.define('MAKE_ROUND');
 
-var uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize);
-var uniRandomSize=new CGL.Uniform(shader,'f','randomSize',randomSize);
-
+const
+    uniPointSize=new CGL.Uniform(shader,'f','pointSize',pointSize),
+    uniRandomSize=new CGL.Uniform(shader,'f','randomSize',randomSize),
+    runiform=new CGL.Uniform(shader,'f','r',r),
+    guniform=new CGL.Uniform(shader,'f','g',g),
+    buniform=new CGL.Uniform(shader,'f','b',b),
+    auniform=new CGL.Uniform(shader,'f','a',a),
+    uniWidth=new CGL.Uniform(shader,'f','canvasWidth',cgl.canvasWidth),
+    uniHeight=new CGL.Uniform(shader,'f','canvasHeight',cgl.canvasHeight);
 
 shaderOut.set(shader);
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
@@ -36,25 +43,9 @@ shader.glPrimitive=cgl.gl.POINTS;
 shader.bindTextures=bindTextures;
 shaderOut.ignoreValueSerialize=true;
 
-r.set(Math.random());
-g.set(Math.random());
-b.set(Math.random());
-a.set(1.0);
-
-r.uniform=new CGL.Uniform(shader,'f','r',r);
-g.uniform=new CGL.Uniform(shader,'f','g',g);
-b.uniform=new CGL.Uniform(shader,'f','b',b);
-a.uniform=new CGL.Uniform(shader,'f','a',a);
-
-var uniWidth=new CGL.Uniform(shader,'f','canvasWidth',cgl.canvasWidth);
-var uniHeight=new CGL.Uniform(shader,'f','canvasHeight',cgl.canvasHeight);
-
 render.onTriggered=doRender;
 
-var texture=op.inTexture("texture");
 var textureUniform=null;
-
-var textureMask=op.inTexture("Texture Mask");
 var textureMaskUniform=null;
 
 op.preRender=function()
@@ -86,14 +77,22 @@ function doRender()
 
 doScale.onChange=function()
 {
-    if(doScale.get()) shader.define('SCALE_BY_DISTANCE');
-        else shader.removeDefine('SCALE_BY_DISTANCE');
+    shader.toggleDefine('SCALE_BY_DISTANCE',doScale.get());
 };
 
 makeRound.onChange=function()
 {
-    if(makeRound.get()) shader.define('MAKE_ROUND');
-        else shader.removeDefine('MAKE_ROUND');
+    shader.toggleDefine('MAKE_ROUND',makeRound.get());
+};
+
+colorizeTexture.onChange=function()
+{
+    shader.toggleDefine('COLORIZE_TEXTURE',colorizeTexture.get());
+};
+
+textureLookup.onChange=function()
+{
+    shader.toggleDefine('LOOKUP_TEXTURE',textureLookup.get());
 };
 
 texture.onChange=function()
@@ -128,21 +127,5 @@ textureMask.onChange=function()
         shader.removeDefine('HAS_TEXTURE_MASK');
         textureMaskUniform=null;
     }
-};
-
-var colorizeTexture=op.addInPort(new CABLES.Port(op,"colorizeTexture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-colorizeTexture.set(false);
-colorizeTexture.onChange=function()
-{
-    if(colorizeTexture.get()) shader.define('COLORIZE_TEXTURE');
-        else shader.removeDefine('COLORIZE_TEXTURE');
-};
-
-var textureLookup=op.addInPort(new CABLES.Port(op,"texture Lookup",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-textureLookup.set(false);
-textureLookup.onChange=function()
-{
-    if(textureLookup.get()) shader.define('LOOKUP_TEXTURE');
-        else shader.removeDefine('LOOKUP_TEXTURE');
 };
 

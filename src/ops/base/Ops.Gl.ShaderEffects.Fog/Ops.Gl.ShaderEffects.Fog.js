@@ -1,8 +1,8 @@
 const cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var inStart=op.inValue("Start",2);
 var inEnd=op.inValue("End",12);
@@ -10,19 +10,10 @@ var inEnd=op.inValue("End",12);
 var inAmount=op.inValueSlider("Amount",0.5);
 
 
-{
-    // rgba colors
-    
-    var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-    r.set(Math.random());
-    
-    var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
-    g.set(Math.random());
-    
-    var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.set(Math.random());
-
-}
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
+r.setUiAttribs({ colorPick: true });
 
 
 var shader=null;
@@ -40,7 +31,7 @@ var srcHeadFrag=''
     .endl()+'UNI float MOD_start;'
     .endl()+'UNI float MOD_end;'
     .endl()+'UNI float MOD_amount;'
-    
+
     .endl()+'UNI float MOD_r;'
     .endl()+'UNI float MOD_g;'
     .endl()+'UNI float MOD_b;'
@@ -107,8 +98,8 @@ op.render.onTriggered=function()
 
 
     }
-    
-    
+
+
     if(!shader)return;
     var texSlot=moduleVert.num+5;
 

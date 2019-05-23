@@ -1,11 +1,11 @@
 
 
 var render=op.inTrigger('render');
-var density=op.addInPort(new CABLES.Port(op,"density",CABLES.OP_PORT_TYPE_VALUE));
+var density=op.inValueFloat("density");
 var image=op.inTexture("depth texture");
 var trigger=op.outTrigger('trigger');
+var ignoreInf=op.inValueBool("ignore infinity");
 
-var ignoreInf=op.addInPort(new CABLES.Port(op,"ignore infinity",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 ignoreInf.set(false);
 ignoreInf.onChange=function()
 {
@@ -30,45 +30,24 @@ density.onChange=function()
 };
 density.set(5.0);
 
-{
+
     // fog color
 
-    var r=op.addInPort(new CABLES.Port(op,"fog r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-    r.onChange=function()
-    {
-        if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
-        else r.uniform.setValue(r.get());
-    };
+const r = op.inValueSlider("fog r", Math.random());
+const g = op.inValueSlider("fog g", Math.random());
+const b = op.inValueSlider("fog b", Math.random());
+r.setUiAttribs({ colorPick: true });
 
-    var g=op.addInPort(new CABLES.Port(op,"fog g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    g.onChange=function()
-    {
-        if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
-        else g.uniform.setValue(g.get());
-    };
-
-    var b=op.addInPort(new CABLES.Port(op,"fog b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    b.onChange=function()
-    {
-        if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
-        else b.uniform.setValue(b.get());
-    };
-
-    var a=op.addInPort(new CABLES.Port(op,"fog a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    a.onChange=function()
-    {
-        if(!a.uniform) a.uniform=new CGL.Uniform(shader,'f','a',a.get());
-        else a.uniform.setValue(a.get());
-    };
-
-    r.set(Math.random());
-    g.set(Math.random());
-    b.set(Math.random());
-    a.set(1.0);
-}
+const rUniform=new CGL.Uniform(shader,'f','r',r);
+const gUniform=new CGL.Uniform(shader,'f','g',g);
+const bUniform=new CGL.Uniform(shader,'f','b',b);
 
 
-var start=op.addInPort(new CABLES.Port(op,"start",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+const a=op.inValueSlider("fog a",1.0);
+const aUniform=new CGL.Uniform(shader,'f','a',a);
+
+
+var start=op.inValueSlider("start");
 start.onChange=function()
 {
     if(!start.uniform) start.uniform=new CGL.Uniform(shader,'f','start',start.get());
@@ -86,10 +65,7 @@ render.onTriggered=function()
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        
-
         cgl.setTexture(1, image.get().tex );
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 
         cgl.currentTextureEffect.finish();
         cgl.setPreviousShader();
