@@ -8,7 +8,7 @@ UNI vec3 colB;
 UNI vec3 colC;
 UNI sampler2D tex;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 void main()
 {
@@ -38,8 +38,5 @@ void main()
             else col = vec4(mix(colB, colC, smoothstep(0.0,1.0,min(1.0,(ax-pos)*1.0/(1.0-pos)))),1.0);
     #endif
 
-   col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-   col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-
-   outColor=col;
+    outColor=cgl_blend(base,col,amount);
 }

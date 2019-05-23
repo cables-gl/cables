@@ -1,5 +1,5 @@
 // constants
-const STEP_DEFAULT = 0.001;
+const STEP_DEFAULT = 0.00001;
 
 // inputs
 const parentPort = op.inObject('link');
