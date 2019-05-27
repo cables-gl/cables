@@ -1,44 +1,35 @@
-var render=op.inTrigger("Render");
-var trigger=op.outTrigger("Trigger");
+const
+    render=op.inTrigger("Render"),
+    trigger=op.outTrigger("Trigger"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    time=op.inValue("Time",0),
+    movement=op.inValueSlider("Movement",0),
+    num=op.inValue("Num",50),
+    seed=op.inValue("seed",0),
+    fill=op.inValueSelect("Fill",["None","Random","Gradient","Gray"],"Random"),
+    drawIsoLines=op.inValueBool("Draw Isolines",false),
+    drawDistance=op.inValueBool("Draw Distance",false),
+    centerSize=op.inValueSlider("Draw Center",0);
 
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
-
-var time=op.inValue("Time",0);
-var movement=op.inValueSlider("Movement",0);
-
-var num=op.inValue("Num",50);
-var seed=op.inValue("seed",0);
-
-var fill=op.inValueSelect("Fill",["None","Random","Gradient","Gray"],"Random");
-var drawIsoLines=op.inValueBool("Draw Isolines",false);
-var drawDistance=op.inValueBool("Draw Distance",false);
-var centerSize=op.inValueSlider("Draw Center",0);
-
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 
+shader.setSource(shader.getDefaultVertexShader(),attachments.voronoise_frag);
 
-var srcFrag=attachments.voronoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode);
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
+    uniPx=new CGL.Uniform(shader,'f','pX',1/1024),
+    uniPy=new CGL.Uniform(shader,'f','pY',1/1024),
+    uniFill=new CGL.Uniform(shader,'i','fill',1),
+    uniSeed=new CGL.Uniform(shader,'f','seed',seed),
+    uniTime=new CGL.Uniform(shader,'f','time',time),
+    uniMovement=new CGL.Uniform(shader,'f','movement',movement),
+    uniIsoLines=new CGL.Uniform(shader,'b','drawIsoLines',drawIsoLines),
+    uniDrawDistance=new CGL.Uniform(shader,'b','drawDistance',drawDistance),
+    uniCenterSize=new CGL.Uniform(shader,'f','centerSize',centerSize);
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-
-var uniPx=new CGL.Uniform(shader,'f','pX',1/1024);
-var uniPy=new CGL.Uniform(shader,'f','pY',1/1024);
-
-var uniFill=new CGL.Uniform(shader,'i','fill',1);
-var uniSeed=new CGL.Uniform(shader,'f','seed',seed);
-var uniTime=new CGL.Uniform(shader,'f','time',time);
-var uniMovement=new CGL.Uniform(shader,'f','movement',movement);
-var uniIsoLines=new CGL.Uniform(shader,'b','drawIsoLines',drawIsoLines);
-var uniDrawDistance=new CGL.Uniform(shader,'b','drawDistance',drawDistance);
-var uniCenterSize=new CGL.Uniform(shader,'f','centerSize',centerSize);
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag );
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 shader.define("NUM",20.01);
 
 num.onChange=function()
@@ -68,7 +59,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
