@@ -1,6 +1,6 @@
-var currentVal=op.outValue("Value");
-var oldVal=op.outValue("Last Value");
-var triggered=op.outTrigger("Triggered");
+const currentVal=op.outValue("Value"),
+    oldVal=op.outValue("Last Value"),
+    triggered=op.outTrigger("Triggered");
 
 var triggers=[];
 var inVals=[];
@@ -16,10 +16,10 @@ function onTrigger()
 var num=8;
 for(var i=0;i<num;i++)
 {
-    var newExe=op.addInPort(new CABLES.Port(op,"Trigger "+i,CABLES.OP_PORT_TYPE_FUNCTION));
+    var newExe=op.inTrigger("Trigger "+i);
     newExe.slot=i;
     newExe.onTriggered=onTrigger.bind(newExe);
-    var newVal=op.addInPort(new CABLES.Port(op,"Value "+i,CABLES.OP_PORT_TYPE_VALUE));
+    var newVal=op.inValueFloat("Value "+i);
     inVals.push( newVal );
 }
 

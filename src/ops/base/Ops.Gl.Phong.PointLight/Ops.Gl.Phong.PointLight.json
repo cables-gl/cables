@@ -68,17 +68,17 @@
             },
             {
                 "type": "0",
-                "name": "Specular R",
+                "name": "r",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Specular G",
+                "name": "g",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Specular B",
+                "name": "b",
                 "subType": "number"
             }
         ],
@@ -97,5 +97,12 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "1d2cf105-f66d-4a31-949e-b1887d582080",
-    "created": 1504698930842
+    "created": 1504698930842,
+    "changelog": [
+        {
+            "message": "code cleanup - ports , removed unused setters",
+            "author": "andro",
+            "date": 1559046783572
+        }
+    ]
 }

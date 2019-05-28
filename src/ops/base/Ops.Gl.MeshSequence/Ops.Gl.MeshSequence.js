@@ -1,13 +1,14 @@
 var self=this;
 var cgl=this.patch.cgl;
 
-var render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
-var filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-var frame=this.addInPort(new CABLES.Port(this,"frame",CABLES.OP_PORT_TYPE_VALUE ));
+var render=op.inTrigger("render");
+var filename=op.inFile("file");
+
+var frame=op.inValueFloat("frame");
 frame.set(0);
 const trigger=op.outTrigger("trigger");
 
-var calcVertexNormals=this.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'} ));
+var calcVertexNormals=this.inValueBool("smooth");
 calcVertexNormals.set(true);
 
 var doDraw=op.inValueBool("Render",true);
@@ -141,7 +142,7 @@ function reload()
     loadingId=op.patch.loading.start('json mesh sequence',filename.get());
 
     lastFrame=0;
-    
+
     CABLES.ajax(
         op.patch.getFilePath(filename.get()),
         function(err,_data,xhr)
@@ -156,7 +157,7 @@ function reload()
             else if(CABLES.UI)self.uiAttr({"error":null});
 
             var data=null;
-            
+
             try
             {
                 data=JSON.parse(_data);
@@ -173,13 +174,13 @@ function reload()
             for(var i=0;i<data.meshes.length;i++)
             {
                 var geom=new CGL.Geometry();
-                
+
                 geom.verticesIndices=[];
                 geom.verticesIndices=[].concat.apply([], data.meshes[0].faces);
                 geom.vertices=data.meshes[i].vertices;
-                
+
                 // console.log('seq verts:',geom.vertices.length);
-                
+
                 geom.texCoords=data.meshes[0].texturecoords;
 
                 // console.log('seq texcoords:',geom.texCoords.length);
@@ -194,9 +195,9 @@ function reload()
                     geom.unIndex();
                     geom.calculateNormals();
                 }
-                
+
                 geom.name=data.meshes[i].name;
-                
+
                 geom.verticesTyped=new Float32Array( geom.vertices );
 
                 geoms.push(geom);
@@ -219,24 +220,22 @@ function rebuildMesh()
     if(geoms.length>0)
     {
         geoms[0].calculateNormals();
-    
+
         mesh=new CGL.Mesh(cgl,geoms[0]);
         mesh.addVertexNumbers=true;
         mesh.setGeom(geoms[0]);
         mesh.addAttribute(prfx+'_attrMorphTargetA',geoms[0].vertices,3);
         mesh.addAttribute(prfx+'_attrMorphTargetB',geoms[0].vertices,3);
-        
+
     }
 }
 
-
 function reloadLater()
 {
-    needsReload=true;    
+    needsReload=true;
 }
 
-
-frame.onValueChange(updateFrameLater);
-filename.onValueChange(reload);
-render.onTriggered=doRender;
-calcVertexNormals.onValueChange(rebuildMesh);
+frame.onChange = updateFrameLater;
+filename.onChange = reload;
+render.onTriggered = doRender;
+calcVertexNormals.onChange = rebuildMesh;

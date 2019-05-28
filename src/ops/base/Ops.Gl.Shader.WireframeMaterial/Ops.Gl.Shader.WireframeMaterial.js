@@ -1,13 +1,11 @@
 var cgl=op.patch.cgl;
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var render=op.inTrigger("render");
 var trigger=op.outTrigger('trigger');
 
-var enableDepth=op.addInPort(new CABLES.Port(op,"enable depth testing",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-enableDepth.set(true);
+var enableDepth=op.inValueBool("enable depth testing",true);
 
-var fill=op.addInPort(new CABLES.Port(op,"fill",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-fill.set(true);
+var fill=op.inValueBool("fill",true);
 
 function setDefines()
 {
@@ -20,12 +18,10 @@ fill.onChange=function()
     setDefines();
 };
 
-var w=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-w.set(0.25);
+var w=op.inValueSlider("width",0.25);
 w.onChange=function(){ uniformWidth.setValue(w.get()); };
 
-var opacity=op.addInPort(new CABLES.Port(op,"opacity",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-opacity.set(1.0);
+var opacity=op.inValueSlider("opacity",1);
 opacity.onChange=function(){ uniformOpacity.setValue(opacity.get()); };
 
 if(cgl.glVersion==1 && !cgl.gl.getExtension('OES_standard_derivatives') )
@@ -36,9 +32,6 @@ else
 {
     op.uiAttr( { 'error': null } );
 }
-
-
-
 
 var doRender=function()
 {
@@ -71,51 +64,43 @@ setDefines();
 {
     // diffuse color
 
-    var r=op.addInPort(new CABLES.Port(op,"diffuse r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var r=op.inValueSlider("diffuse r",Math.random());
+    r.setUiAttribs({ colorPick: true });
     r.onChange=function()
     {
         if(!r.uniform) r.uniform=new CGL.Uniform(shader,'f','r',r.get());
         else r.uniform.setValue(r.get());
     };
 
-    var g=op.addInPort(new CABLES.Port(op,"diffuse g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var g=op.inValueSlider("diffuse g",Math.random());
     g.onChange=function()
     {
         if(!g.uniform) g.uniform=new CGL.Uniform(shader,'f','g',g.get());
         else g.uniform.setValue(g.get());
     };
 
-    var b=op.addInPort(new CABLES.Port(op,"diffuse b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var b=op.inValueSlider("diffuse b",Math.random());
     b.onChange=function()
     {
         if(!b.uniform) b.uniform=new CGL.Uniform(shader,'f','b',b.get());
         else b.uniform.setValue(b.get());
     };
 
-    r.set(Math.random());
-    g.set(Math.random());
-    b.set(Math.random());
 }
 
 {
     // diffuse color
 
-    var fr=op.addInPort(new CABLES.Port(op,"Fill R",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
+    var fr=op.inValueSlider("Fill R",Math.random());
+    fr.setUiAttribs({colorPick : true});
     fr.uniform=new CGL.Uniform(shader,'f','fr',fr);
 
-    var fg=op.addInPort(new CABLES.Port(op,"Fill G",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var fg=op.inValueSlider("Fill G",Math.random());
     fg.uniform=new CGL.Uniform(shader,'f','fg',fg);
 
-    var fb=op.addInPort(new CABLES.Port(op,"Fill B",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+    var fb=op.inValueSlider("Fill B",Math.random());
     fb.uniform=new CGL.Uniform(shader,'f','fb',fb);
-
-    fr.set(0);
-    fg.set(0);
-    fb.set(0);
 }
-
-
-
 
 render.onTriggered=doRender;
 

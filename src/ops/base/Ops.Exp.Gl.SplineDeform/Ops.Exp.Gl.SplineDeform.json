@@ -1,5 +1,4 @@
 {
-    "updated": 1539170089591,
     "authorName": "pandur",
     "id": "a9464e80-6958-4846-8cae-9cdae608a2ad",
     "created": 1515604228291,
@@ -11,11 +10,13 @@
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "offset"
+                "name": "offset",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -33,5 +34,12 @@
     "summary": "Deform a mesh along a spline",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup - ports",
+            "author": "andro",
+            "date": 1559038681553
+        }
+    ]
 }

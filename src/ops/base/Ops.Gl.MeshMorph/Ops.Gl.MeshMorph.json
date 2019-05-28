@@ -76,6 +76,11 @@
             "message": "Geometry parameter being below 0 or above 7 no longer throws an error",
             "author": "andro",
             "date": 1549461050219
+        },
+        {
+            "message": "code cleanup - ports and whitespace",
+            "author": "andro",
+            "date": 1559044991080
         }
     ]
 }

@@ -91,5 +91,12 @@
     "collections": [
         "drawText"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "fixed - ui redraws slowing down op",
+            "author": "andro",
+            "date": 1559037337970
+        }
+    ]
 }

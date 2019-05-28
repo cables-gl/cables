@@ -1,38 +1,29 @@
 var cgl=op.patch.cgl;
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
-var inStrength=op.inValue("Amount",1);
-
-var inStart=op.inValue("Start Index",0);
-var inWidth=op.inValue("Width",20);
-var inHasEnd=op.inValueBool("Ending",true);
-var inTransDist=op.inValue("Transition Distance",50);
-
-var inPosX=op.inValue("Pos X",0);
-var inPosY=op.inValue("Pos Y",0);
-var inPosZ=op.inValue("Pos Z",0);
-
-var inRotX=op.inValue("Rot X",0);
-var inRotY=op.inValue("Rot Y",0);
-var inRotZ=op.inValue("Rot Z",0);
-
-var inScaleX=op.inValue("Scale X",1);
-var inScaleY=op.inValue("Scale Y",1);
-var inScaleZ=op.inValue("Scale Z",1);
-
-
-
+const inStrength=op.inValue("Amount",1),
+    inStart=op.inValue("Start Index",0),
+    inWidth=op.inValue("Width",20),
+    inHasEnd=op.inValueBool("Ending",true),
+    inTransDist=op.inValue("Transition Distance",50),
+    inPosX=op.inValue("Pos X",0),
+    inPosY=op.inValue("Pos Y",0),
+    inPosZ=op.inValue("Pos Z",0),
+    inRotX=op.inValue("Rot X",0),
+    inRotY=op.inValue("Rot Y",0),
+    inRotZ=op.inValue("Rot Z",0),
+    inScaleX=op.inValue("Scale X",1),
+    inScaleY=op.inValue("Scale Y",1),
+    inScaleZ=op.inValue("Scale Z",1);
 
 var shader=null;
-
 
 // var srcHeadVert=attachments.perlin_instposition_vert||'';
 
 var srcBodyVert=attachments.transform_instanced_vert||'';
 var srcHeadVert=attachments.transform_instanced_head_vert||'';
-
 
 //     .endl()+'instanceIndexFrag=instanceIndex;'
 //     .endl();
@@ -42,7 +33,6 @@ var srcHeadVert=attachments.transform_instanced_head_vert||'';
 // .endl()+'OUT float instanceIndexFrag;'
 // .endl();
 
-
 var moduleVert=null;
 var moduleFrag=null;
 function removeModule()
@@ -50,7 +40,6 @@ function removeModule()
     if(shader && moduleVert) shader.removeModule(moduleVert);
     shader=null;
 }
-
 
 op.render.onLinkChanged=removeModule;
 
@@ -63,7 +52,6 @@ function updateEnding()
             else shader.removeDefine(moduleVert.prefix+"HAS_ENDING");
 }
 
-
 op.render.onTriggered=function()
 {
     if(!cgl.getShader())
@@ -71,7 +59,7 @@ op.render.onTriggered=function()
          op.trigger.trigger();
          return;
     }
-    
+
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
@@ -96,17 +84,15 @@ op.render.onTriggered=function()
         op.uniscaleX=new CGL.Uniform(shader,'f',moduleVert.prefix+'scaleX',inScaleX);
         op.uniscaleY=new CGL.Uniform(shader,'f',moduleVert.prefix+'scaleY',inScaleY);
         op.uniscaleZ=new CGL.Uniform(shader,'f',moduleVert.prefix+'scaleZ',inScaleZ);
-        
+
         op.uniStart=new CGL.Uniform(shader,'f',moduleVert.prefix+'start',inStart);
         op.uniEnd=new CGL.Uniform(shader,'f',moduleVert.prefix+'width',inWidth);
         op.uniTrans=new CGL.Uniform(shader,'f',moduleVert.prefix+'transDist',inTransDist);
-        
+
 
         inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
         updateEnding();
     }
-    
-
 
     if(!shader)return;
 

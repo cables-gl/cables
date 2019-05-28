@@ -1,10 +1,9 @@
-const render=op.inTrigger("render");
-const trigger=op.outTrigger("trigger");
-const shaderOut=op.addOutPort(new CABLES.Port(op,"shader",CABLES.OP_PORT_TYPE_OBJECT));
+const render=op.inTrigger("render"),
+    trigger=op.outTrigger("trigger"),
+    shaderOut=op.outObject("shader");
 
 shaderOut.ignoreValueSerialize=true;
 const cgl=op.patch.cgl;
-
 
 var shader=new CGL.Shader(cgl,'BasicMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
@@ -45,21 +44,18 @@ function doRender()
 
 {
     // rgba colors
-    var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range',colorPick:'true' }));
-    var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
-    var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range'}));
+    const r = op.inValueSlider("r", Math.random()),
+        g = op.inValueSlider("g", Math.random()),
+        b = op.inValueSlider("b", Math.random()),
+        a = op.inValueSlider("a",1.0);
+        r.setUiAttribs({ colorPick: true });
+
+
 
     a.uniform=new CGL.Uniform(shader,'f','a',a);
     b.uniform=new CGL.Uniform(shader,'f','b',b);
     r.uniform=new CGL.Uniform(shader,'f','r',r);
     g.uniform=new CGL.Uniform(shader,'f','g',g);
-
-
-    r.set(Math.random());
-    g.set(Math.random());
-    b.set(Math.random());
-    a.set(1.0);
 
     op.setPortGroup('Color',[r,g,b,a]);
 
@@ -90,9 +86,6 @@ function doRender()
             diffuseTextureUniform=null;
         }
     };
-
-
-
 }
 
 {
@@ -118,7 +111,7 @@ function doRender()
 
 }
 
-op.colorizeTexture=op.addInPort(new CABLES.Port(op,"colorizeTexture",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+op.colorizeTexture=op.inValueBool("colorizeTexture");
 op.colorizeTexture.set(false);
 op.colorizeTexture.onChange=function()
 {
@@ -126,9 +119,9 @@ op.colorizeTexture.onChange=function()
         else shader.removeDefine('COLORIZE_TEXTURE');
 };
 
-
-op.doBillboard=op.addInPort(new CABLES.Port(op,"billboard",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+op.doBillboard=op.inValueBool("billboard");
 op.doBillboard.set(false);
+
 op.doBillboard.onChange=function()
 {
     if(op.doBillboard.get()) shader.define('BILLBOARD');
@@ -144,7 +137,7 @@ texCoordAlpha.onChange=function()
 
 };
 
-var preMultipliedAlpha=op.addInPort(new CABLES.Port(op,"preMultiplied alpha",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var preMultipliedAlpha=op.inValueBool("preMultiplied alpha");
 
 function updateTexRepeat()
 {
@@ -162,14 +155,13 @@ function updateTexRepeat()
     diffuseOffsetYUniform.setValue(diffuseOffsetY.get());
 }
 
-
 {
     // texture coords
 
-    var diffuseRepeatX=op.addInPort(new CABLES.Port(op,"diffuseRepeatX",CABLES.OP_PORT_TYPE_VALUE));
-    var diffuseRepeatY=op.addInPort(new CABLES.Port(op,"diffuseRepeatY",CABLES.OP_PORT_TYPE_VALUE));
-    var diffuseOffsetX=op.addInPort(new CABLES.Port(op,"Tex Offset X",CABLES.OP_PORT_TYPE_VALUE));
-    var diffuseOffsetY=op.addInPort(new CABLES.Port(op,"Tex Offset Y",CABLES.OP_PORT_TYPE_VALUE));
+    var diffuseRepeatX=op.inValueFloat("diffuseRepeatX",1);
+    var diffuseRepeatY=op.inValueFloat("diffuseRepeatY",1);
+    var diffuseOffsetX=op.inValueFloat("Tex Offset X");
+    var diffuseOffsetY=op.inValueFloat("Tex Offset Y");
 
     op.setPortGroup('Transform Texture',[diffuseRepeatX,diffuseRepeatY,diffuseOffsetX,diffuseOffsetY]);
 
@@ -184,7 +176,6 @@ function updateTexRepeat()
     var diffuseOffsetYUniform=null;
 
     shader.define('TEXTURE_REPEAT');
-
 
     diffuseOffsetX.set(0);
     diffuseOffsetY.set(0);

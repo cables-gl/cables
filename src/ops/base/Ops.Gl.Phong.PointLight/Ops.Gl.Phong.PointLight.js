@@ -1,47 +1,30 @@
 
 
-const exe=op.inTrigger("exe");
-var trigger=op.outTrigger('trigger');
+const exe=op.inTrigger("exe"),
+    trigger=op.outTrigger('trigger'),
+    attachment=op.outTrigger("attachment"),
+    radius=op.inValue("Radius",100),
+    fallOff=op.inValueSlider("Fall Off",0.1),
+    intensity=op.inValue("Intensity",1),
+    x=op.inValueFloat("x"),
+    y=op.inValueFloat("y"),
+    z=op.inValueFloat("z");
 
-var attachment=op.addOutPort(new CABLES.Port(op,"attachment",CABLES.OP_PORT_TYPE_FUNCTION));
+const r = op.inValueSlider("r", Math.random()),
+    g = op.inValueSlider("g", Math.random()),
+    b = op.inValueSlider("b", Math.random());
+        r.setUiAttribs({ colorPick: true });
 
+const ambientR=op.inValue("Ambient R",0.1),
+    ambientG=op.inValue("Ambient G",0.1),
+    ambientB=op.inValue("Ambient B",0.1);
 
-var radius=op.inValue("Radius",100);
-var fallOff=op.inValueSlider("Fall Off",0.1);
-var intensity=op.inValue("Intensity",1);
-
-var x=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
-var y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
-var z=op.addInPort(new CABLES.Port(op,"z",CABLES.OP_PORT_TYPE_VALUE));
-
-var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-
-var ambientR=op.inValue("Ambient R",0.1);
-var ambientG=op.inValue("Ambient G",0.1);
-var ambientB=op.inValue("Ambient B",0.1);
-
-var specularR=op.addInPort(new CABLES.Port(op,"Specular R",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true' }));
-var specularG=op.addInPort(new CABLES.Port(op,"Specular G",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var specularB=op.addInPort(new CABLES.Port(op,"Specular B",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-
-
-ambientR.set(0);
-ambientG.set(0);
-ambientB.set(0);
-
-specularR.set(1);
-specularG.set(1);
-specularB.set(1);
-
-r.set(1);
-g.set(1);
-b.set(1);
-
+const specularR=op.inValueSlider("r", Math.random()),
+    specularG=op.inValueSlider("g", Math.random()),
+    specularB=op.inValueSlider("b", Math.random());
+        specularR.setUiAttribs({ colorPick: true });
 
 var cgl=op.patch.cgl;
-
 
 radius.onChange=updateAll;
 fallOff.onChange=updateAll;
@@ -60,9 +43,6 @@ specularR.onChange=updateAll;
 specularG.onChange=updateAll;
 specularB.onChange=updateAll;
 
-
-
-
 var id=CABLES.generateUUID();
 var light={};
 
@@ -71,7 +51,6 @@ var mpos=vec3.create();
 var needsUpdate=true;
 
 updateAll();
-
 
 function updateColor()
 {
@@ -91,11 +70,6 @@ function updateColor()
     light.specular[2]=specularB.get();
 
     light.changed=true;
-}
-
-
-function updatePos()
-{
 }
 
 function updateAll()
@@ -119,12 +93,9 @@ exe.onTriggered=function()
         light.fallOff=fallOff.get();
         light.mul=intensity.get();
 
-        updatePos();
         updateColor();
         needsUpdate=false;
     }
-
-
 
     cgl.frameStore.phong.lights=cgl.frameStore.phong.lights||[];
 

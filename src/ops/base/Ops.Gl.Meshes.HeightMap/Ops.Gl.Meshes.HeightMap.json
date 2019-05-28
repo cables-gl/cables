@@ -31,12 +31,12 @@
             {
                 "type": "0",
                 "name": "rows",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "columns",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -64,5 +64,12 @@
     "summary": "generate a rectangular mesh where the height is defined by the luminance of an image",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup - ports and onChange",
+            "author": "andro",
+            "date": 1559046127155
+        }
+    ]
 }

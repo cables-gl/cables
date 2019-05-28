@@ -1,7 +1,7 @@
 var cgl=op.patch.cgl;
 
 
-var render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION ));
+var render=op.inTrigger("render");
 
 var nextGeom=op.inValueInt("Geometry");
 var duration=op.inValue("Duration",1.0);
@@ -16,9 +16,9 @@ var oldGeom=0;
 var anim=new CABLES.Anim();
 anim.clear();
 
-var trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var trigger=op.outTrigger("trigger");
 
-var calcVertexNormals=op.addInPort(new CABLES.Port(this,"smooth",CABLES.OP_PORT_TYPE_VALUE,{'display':'bool'} ));
+var calcVertexNormals=op.inValueBool("smooth");
 calcVertexNormals.set(true);
 
 var geoms=[];
@@ -28,9 +28,6 @@ window.meshsequencecounter++;
 var prfx=String.fromCharCode(97 + window.meshsequencecounter);
 var needsUpdateFrame=false;
 render.onTriggered=doRender;
-
-
-
 
 var srcHeadVert=''
     .endl()+'IN vec3 '+prfx+'_attrMorphTargetA;'
@@ -51,17 +48,12 @@ var module=null;
 var shader=null;
 var uniDoMorph=null;
 
-
-
 for(var i=0;i<8;i++)
 {
     var inGeom=op.inObject("Geometry "+(i));
     inGeom.onChange=updateMeshes;
     inGeoms.push(inGeom);
 }
-
-
-
 
 function updateMeshes()
 {

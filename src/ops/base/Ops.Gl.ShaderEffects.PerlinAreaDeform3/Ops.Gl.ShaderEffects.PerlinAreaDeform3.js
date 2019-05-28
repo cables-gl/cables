@@ -1,18 +1,18 @@
 const
     render=op.inTrigger("render"),
     next=op.outTrigger("trigger"),
-    inScale=op.inValue("Scale",1),
-    inSize=op.inValue("Size",1),
-    inStrength=op.inValue("Strength",1),
+    inScale=op.inValueFloat("Scale",1),
+    inSize=op.inValueFloat("Size",1),
+    inStrength=op.inValueFloat("Strength",1),
     inCalcNormals=op.inValueBool("Calc Normals",true),
     inFalloff=op.inValueSlider("Falloff",0.5),
     output=op.inValueSelect("Output",['Mul Normal','Add XYZ','Add Z'],'Add XYZ'),
-    x=op.inValue("x"),
-    y=op.inValue("y"),
-    z=op.inValue("z"),
-    scrollx=op.inValue("Scroll X"),
-    scrolly=op.inValue("Scroll Y"),
-    scrollz=op.inValue("Scroll Z");
+    x=op.inValueFloat("x"),
+    y=op.inValueFloat("y"),
+    z=op.inValueFloat("z"),
+    scrollx=op.inValueFloat("Scroll X"),
+    scrolly=op.inValueFloat("Scroll Y"),
+    scrollz=op.inValueFloat("Scroll Z");
 
 const cgl=op.patch.cgl;
 inCalcNormals.onChange=updateCalcNormals;
@@ -121,14 +121,12 @@ render.onTriggered=function()
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
         inFalloff.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'fallOff',inFalloff);
 
-
         mscaleUni=new CGL.Uniform(shader,'f',moduleVert.prefix+'mScale',1);
 
         updateOutput();
         updateWorldspace();
         updateCalcNormals();
     }
-
 
     if(!shader)return;
 

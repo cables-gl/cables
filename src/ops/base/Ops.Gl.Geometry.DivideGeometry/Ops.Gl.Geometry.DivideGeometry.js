@@ -1,5 +1,5 @@
 
-var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geometry=op.inObject("Geometry");
 var outGeom=op.outObject("Result");
 
 geometry.onChange=update;
@@ -12,12 +12,12 @@ function update()
     {
         var geom=geometry.get();
         var newGeom=new CGL.Geometry();
-        
+
         var newVerts=[];
         var newFaces=[];
         var newNormals=[];
         var newTexCoords=[];
-        
+
         for(var i=0;i<geom.verticesIndices.length;i+=3)
         {
             newFaces.push( newVerts.length/3 );
@@ -50,7 +50,7 @@ function update()
             newTexCoords.push( geom.texCoords[ geom.verticesIndices[i+2]*2+0] );
             newTexCoords.push( geom.texCoords[ geom.verticesIndices[i+2]*2+1] );
         }
-        
+
         newGeom.vertices=newVerts;
         newGeom.vertexNormals=newNormals;
         newGeom.verticesIndices=newFaces;

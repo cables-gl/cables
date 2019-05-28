@@ -1,5 +1,4 @@
 {
-    "updated": 1522186900624,
     "authorName": "pandur",
     "id": "045f291b-6f36-4d8a-8f78-3448436cc83e",
     "created": 1522096052102,
@@ -86,7 +85,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.ShaderEffects.TransformInstanced"
+        "name": "Ops.Gl.ShaderEffects.TransformInstanced"
     },
     "summary": "transform instanced object",
     "docs": {
@@ -96,5 +95,12 @@
     "collections": [
         "meshInstancing"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "code cleanup - ports",
+            "author": "andro",
+            "date": 1559051825937
+        }
+    ]
 }

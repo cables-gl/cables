@@ -1,5 +1,5 @@
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var inSize=op.inValue("Size",1);
 var inOffset=op.inValue("offset");
@@ -60,7 +60,7 @@ op.render.onTriggered=function()
         ready=false;
         updateUniformPoints=true;
     }
-    
+
     if(shader && updateUniformPoints && pointArray && pointArray.length>=3)
     {
         if(shader.getDefine("SPLINE_POINTS")!=Math.floor(pointArray.length/3))
