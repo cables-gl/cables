@@ -1,21 +1,18 @@
-var render=op.inTrigger('render');
+const render=op.inTrigger('render'),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    inWidth=op.inValue("Width",0.25),
+    inHeight=op.inValue("Height",0.25),
+    inPosX=op.inValue("X",0.5),
+    inPosY=op.inValue("Y",0.5),
+    inRot=op.inValue("Rotate",0),
+    inRoundness=op.inValueSlider("roundness",0);
 
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
-
-var inWidth=op.inValue("Width",0.25);
-var inHeight=op.inValue("Height",0.25);
-var inPosX=op.inValue("X",0.5);
-var inPosY=op.inValue("Y",0.5);
-
-var inRot=op.inValue("Rotate",0);
-var inRoundness=op.inValueSlider("roundness",0);
-
-
-var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+const r = op.inValueSlider("r", Math.random()),
+    g = op.inValueSlider("g", Math.random()),
+    b = op.inValueSlider("b", Math.random()),
+    a = op.inValueSlider("a",1.0);
+r.setUiAttribs({ colorPick: true });
 
 var trigger=op.outTrigger('trigger');
 

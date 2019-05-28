@@ -13,7 +13,7 @@ UNI float amount;
 UNI float centerSize;
 UNI sampler2D tex;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 {{CGL.RANDOM_OLD}}
 
 //float rand(float n){return fract(sin(n) * 43758.5453123);}

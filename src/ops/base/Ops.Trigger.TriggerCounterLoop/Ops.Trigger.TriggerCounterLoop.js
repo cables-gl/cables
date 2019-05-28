@@ -1,5 +1,5 @@
-const exe=op.inFunctionButton("trigger in"),
-    reset=op.inFunctionButton("reset"),
+const exe=op.inTriggerButton("trigger in"),
+    reset=op.inTriggerButton("reset"),
     trigger=op.outTrigger("trigger out"),
     num=op.outValue("current count"),
 

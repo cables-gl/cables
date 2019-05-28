@@ -1,10 +1,33 @@
 {
     "summary": "Rotates a texture",
-    "youtubeid": "",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend to apply"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotate the texture"
+            },
+            {
+                "name": "Crop",
+                "text": "Enable or disable crop, image compose wrap mode affects how this looks"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     },
-    "updated": 1543743023322,
     "authorName": "andro",
     "id": "207bf2af-a3fc-458d-9efb-eb108a854072",
     "created": 1542819941105,
@@ -44,5 +67,9 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.RotateTexture"
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

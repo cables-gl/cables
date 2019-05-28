@@ -4,7 +4,7 @@ UNI float amount;
 UNI float multiplyAmount;
 UNI float gammaAmount;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 void main()
 {

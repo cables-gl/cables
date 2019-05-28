@@ -5,7 +5,7 @@ UNI float amountX;
 UNI float amountY;
 UNI float amount;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 vec3 getOffset(vec3 offset)
 {
@@ -80,8 +80,5 @@ void main()
     vec4 col=texture(tex,vec2(x,y) );
     vec4 base=texture(tex,texCoord);
 
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-
-    outColor= col;
+    outColor=cgl_blend(base,col,amount);
 }

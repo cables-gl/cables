@@ -6,7 +6,8 @@
 
 IN mat3 transform;
 UNI float rotate;
-{{BLENDCODE}}
+
+{{CGL.BLENDMODES}}
 
 #ifdef HAS_TEXTUREALPHA
    UNI sampler2D imageAlpha;
@@ -54,7 +55,7 @@ void main()
            #endif
 
            blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;
-           
+
            #ifdef INVERT_ALPHA
            blendRGBA.a=1.0-blendRGBA.a;
            #endif

@@ -56,6 +56,17 @@ function reSize()
     refresh();
 }
 
+maximize.onChange =  function ()
+{
+    if(maximize.get())
+    {
+        inFontSize.setUiAttribs({hidePort:true,greyout:true});
+    }
+    else
+    {
+        inFontSize.setUiAttribs({hidePort:false,greyout:false});
+    }
+}
 function refresh()
 {
     ctx.clearRect(0,0,fontImage.width,fontImage.height);
@@ -88,7 +99,7 @@ function refresh()
 
     if(maximize.get())
     {
-        inFontSize.setUiAttribs({hidePort:true,greyout:true});
+        // inFontSize.setUiAttribs({hidePort:true,greyout:true});
 
         fontSize=texWidth.get();
         var count=0;
@@ -112,7 +123,7 @@ function refresh()
     }
     else
     {
-        inFontSize.setUiAttribs({hidePort:false,greyout:false});
+        // inFontSize.setUiAttribs({hidePort:false,greyout:false});
     }
 
 

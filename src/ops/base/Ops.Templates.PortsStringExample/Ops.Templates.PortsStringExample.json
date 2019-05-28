@@ -1,5 +1,4 @@
 {
-    "updated": 1537196274137,
     "authorName": "andro",
     "id": "3d387694-022f-431f-b25e-636c6d666518",
     "created": 1537174067400,
@@ -18,7 +17,7 @@
                 "subType": "string"
             }
         ],
-        "name": "Ops.User.andro.StringPortExample"
+        "name": "Ops.Templates.PortsStringExample"
     },
     "summary": "Is a template for creating String ports",
     "docs": {

@@ -45,10 +45,17 @@
                 "name": "Array result"
             }
         ],
-        "name": "Ops.Array.ArrayMath"
+        "name": "Ops.Array.ArrayMathArray"
     },
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "optimized - removed function call occurring twice",
+            "author": "andro",
+            "date": 1558625292186
+        }
+    ]
 }

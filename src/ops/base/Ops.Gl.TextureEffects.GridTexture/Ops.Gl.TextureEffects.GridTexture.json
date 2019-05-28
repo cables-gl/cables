@@ -90,5 +90,74 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.GridTexture"
+    },
+    "summary": "Creates a grid texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend to apply"
+            },
+            {
+                "name": "Line thickness X",
+                "text": "Thickness of line on the X axis"
+            },
+            {
+                "name": "Line thickness Y",
+                "text": "Thickness of line on the Y axis"
+            },
+            {
+                "name": "Cells X",
+                "text": "Amount of cells on the X axis"
+            },
+            {
+                "name": "Cells Y",
+                "text": "Amount of cells on the Y axis"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotate the grid"
+            },
+            {
+                "name": "Offset X",
+                "text": "Offset on the X axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Offset on the Y axis"
+            },
+            {
+                "name": "Invert color",
+                "text": "Inverts color of grid"
+            },
+            {
+                "name": "Line red",
+                "text": "Red amount of color"
+            },
+            {
+                "name": "Line green",
+                "text": "Green amount of color"
+            },
+            {
+                "name": "Line Blue",
+                "text": "Blue amount of color"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

@@ -7,7 +7,7 @@ var amount=op.inValueSlider("Amount",1);
 var time=op.inValue("Time",0);
 var movement=op.inValueSlider("Movement",0);
 
-var num=op.inValue("Num",50);
+var num=op.inValueInt("Num",50);
 var seed=op.inValue("seed",0);
 
 var fill=op.inValueSelect("Fill",["None","Random","Gradient","Gray"],"Random");
@@ -19,10 +19,7 @@ var centerSize=op.inValueSlider("Draw Center",0);
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl);
 
-
-var srcFrag=attachments.voronoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode);
-
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.voronoise_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
@@ -37,7 +34,7 @@ var uniIsoLines=new CGL.Uniform(shader,'b','drawIsoLines',drawIsoLines);
 var uniDrawDistance=new CGL.Uniform(shader,'b','drawDistance',drawDistance);
 var uniCenterSize=new CGL.Uniform(shader,'f','centerSize',centerSize);
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag );
+shader.setSource(shader.getDefaultVertexShader(),attachments.voronoise_frag );
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 shader.define("NUM",20.01);
 
@@ -68,7 +65,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

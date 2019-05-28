@@ -1,5 +1,4 @@
 {
-    "updated": 1542819898264,
     "authorName": "andro",
     "id": "1ceabad7-1188-4a8f-b412-ff05adbb1576",
     "created": 1542817961575,
@@ -12,11 +11,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -94,8 +95,80 @@
         "name": "Ops.Gl.TextureEffects.Waveform"
     },
     "summary": "Generates 4 different waveform textures. Sine, sawtooth,Triangle, Square.",
-    "youtubeid": "",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend to apply"
+            },
+            {
+                "name": "Waveform",
+                "text": "`Sine`, `Squaretooth`,`Triangle`, `Square`"
+            },
+            {
+                "name": "Amplitude",
+                "text": "Amplitude/Height of the wave"
+            },
+            {
+                "name": "Frequency",
+                "text": "Amount of repetitions on the screen"
+            },
+            {
+                "name": "Line Width",
+                "text": "Width of the line"
+            },
+            {
+                "name": "Line Glow",
+                "text": "Applies a glow/fade to the edge of the line"
+            },
+            {
+                "name": "invert color",
+                "text": "Inverts color"
+            },
+            {
+                "name": "Solid fill",
+                "text": "Fills one half of the waveform, enable invert color to flip it over"
+            },
+            {
+                "name": "Offset X",
+                "text": "Offset on the X axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Offset on the Y axis"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotate the texture"
+            },
+            {
+                "name": "r",
+                "text": "Red color of the line"
+            },
+            {
+                "name": "g",
+                "text": "Green color of the line"
+            },
+            {
+                "name": "b",
+                "text": "Blue color of the line"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

@@ -2,12 +2,9 @@
 // but will not send another until the incoming inValue
 //drops below the threshold and go's above it again
 
-"use strict";
-
-const inValue = op.inValue("Input");
-const inThreshold = op.inValue("Threshold");
-
-const output = op.outTrigger("Output");
+const inValue = op.inValue("Input"),
+    inThreshold = op.inValue("Threshold"),
+    output = op.outTrigger("Output");
 
 var hasThresholdBeenExceeded = false;
 

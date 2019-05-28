@@ -15,13 +15,11 @@ op.setPortGroup("Axis Displacement Strength",[amountX,amountY]);
 op.setPortGroup("Modes",[inWrap,inInput]);
 op.toWorkPortsNeedToBeLinked(displaceTex);
 
-
-
 const
     cgl=op.patch.cgl,
     shader=new CGL.Shader(cgl);
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.pixeldisplace3_frag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode()));
+shader.setSource(shader.getDefaultVertexShader(),attachments.pixeldisplace3_frag);
 
 const
     textureUniform=new CGL.Uniform(shader,'t','tex',0),
@@ -30,17 +28,13 @@ const
     amountYUniform=new CGL.Uniform(shader,'f','amountY',amountY),
     amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
-
 inZero.onChange=updateZero;
 inWrap.onChange=updateWrap;
 inInput.onChange=updateInput;
 
-
 updateWrap();
 updateInput();
 updateZero();
-
-
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 

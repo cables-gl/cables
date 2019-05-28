@@ -6,7 +6,8 @@
 
 IN mat3 transform;
 UNI float rotate;
-{{BLENDCODE}}
+
+{{CGL.BLENDMODES}}
 
 #ifdef HAS_TEXTUREALPHA
    UNI sampler2D imageAlpha;

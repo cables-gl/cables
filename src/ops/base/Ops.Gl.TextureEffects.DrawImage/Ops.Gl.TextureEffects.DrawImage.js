@@ -1,14 +1,14 @@
 var render=op.inTrigger('render');
-var amount=op.addInPort(new CABLES.Port(op,"amount",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+var amount=op.inValueFloat("amount");
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
 
-var image=op.addInPort(new CABLES.Port(op,"image",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var image=op.inTexture("image");
 
-var imageAlpha=op.addInPort(new CABLES.Port(op,"imageAlpha",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true }));
+var imageAlpha=op.inTexture("imageAlpha");
 var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
-var removeAlphaSrc=op.addInPort(new CABLES.Port(op,"removeAlphaSrc",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var removeAlphaSrc=op.inValueBool("removeAlphaSrc");
 
-var invAlphaChannel=op.addInPort(new CABLES.Port(op,"invert alpha channel",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+var invAlphaChannel=op.inValueBool("invert alpha channel");
 var trigger=op.outTrigger('trigger');
 
 op.toWorkPortsNeedToBeLinked(image);
@@ -21,9 +21,7 @@ amount.set(1.0);
 
 render.onTriggered=doRender;
 
-var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
-
-shader.setSource(attachments.drawimage_vert,srcFrag);
+shader.setSource(attachments.drawimage_vert,attachments.drawimage_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
 var textureAlpha=new CGL.Uniform(shader,'t','imageAlpha',2);
@@ -54,8 +52,8 @@ alphaSrc.set("alpha channel");
     //
     // texture flip
     //
-    var flipX=op.addInPort(new CABLES.Port(op,"flip x",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-    var flipY=op.addInPort(new CABLES.Port(op,"flip y",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipX=op.inValueBool("flip x");
+    var flipY=op.inValueBool("flip y");
 
     flipX.onChange=function()
     {
@@ -74,10 +72,10 @@ alphaSrc.set("alpha channel");
     //
     // texture transform
     //
-    var scale=op.addInPort(new CABLES.Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-    var posX=op.addInPort(new CABLES.Port(op,"pos x",CABLES.OP_PORT_TYPE_VALUE, {}));
-    var posY=op.addInPort(new CABLES.Port(op,"pos y",CABLES.OP_PORT_TYPE_VALUE, {}));
-    var rotate=op.addInPort(new CABLES.Port(op,"rotate",CABLES.OP_PORT_TYPE_VALUE, {}));
+    var scale=op.inValueFloat("scale");
+    var posX=op.inValueFloat("pos x");
+    var posY=op.inValueFloat("pos y");
+    var rotate=op.inValueFloat("rotate");
 
     scale.set(1.0);
 

@@ -140,6 +140,11 @@
             "message": "added Aspect Ratio Fix Checkbox",
             "author": "pandur",
             "date": 1549557373535
+        },
+        {
+            "message": "code cleanup ports",
+            "author": "andro",
+            "date": 1558958277669
         }
     ],
     "issues": "",

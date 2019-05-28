@@ -371,6 +371,9 @@ function renderEye(which)
     else if(which==0) cgl.vMatrix=frameData.leftViewMatrix;
     else if(which==1) cgl.vMatrix=frameData.rightViewMatrix;
 
+// if(frameData)
+// console.log(frameData.leftViewMatrix);
+
     if(!started)
     {
 

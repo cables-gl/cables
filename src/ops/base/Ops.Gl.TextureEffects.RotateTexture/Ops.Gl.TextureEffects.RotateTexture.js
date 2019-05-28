@@ -1,15 +1,14 @@
-const render=op.inTrigger('render');
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
-const inRotate=op.inValueSlider("Rotate",0.125);
-const crop=op.inValueBool("Crop",true);
-const trigger=op.outTrigger('trigger');
+const render=op.inTrigger('render'),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    inRotate=op.inValueSlider("Rotate",0.125),
+    crop=op.inValueBool("Crop",true),
+    trigger=op.outTrigger('trigger');
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
-const srcFrag=(attachments.rotate_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.rotate_frag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 const amountUniform=new CGL.Uniform(shader,'f','amount',amount);

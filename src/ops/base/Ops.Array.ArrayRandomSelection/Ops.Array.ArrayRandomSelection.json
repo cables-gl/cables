@@ -27,8 +27,7 @@
         ],
         "name": "Ops.Array.ArrayRandomSelection"
     },
-    "summary": "",
-    "youtubeid": "",
+    "summary": "Extract a definable amount of values from an array",
     "issues": "",
     "collections": null,
     "relatedops": [
@@ -53,5 +52,6 @@
                 "text": "Array Out"
             }
         ]
-    }
+    },
+    "youtubeids": []
 }

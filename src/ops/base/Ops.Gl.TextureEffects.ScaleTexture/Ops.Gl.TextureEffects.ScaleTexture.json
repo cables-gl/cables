@@ -11,11 +11,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -58,9 +60,20 @@
         "name": "Ops.Gl.TextureEffects.ScaleTexture"
     },
     "summary": "Scales a texture",
-    "youtubeid": "",
     "docs": {
         "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend to apply"
+            },
             {
                 "name": "Scale X",
                 "text": "scale on the x axis"
@@ -68,6 +81,26 @@
             {
                 "name": "Scale Y",
                 "text": "scale on the y axis"
+            },
+            {
+                "name": "offset X",
+                "text": "Offset on the X axis"
+            },
+            {
+                "name": "offset Y",
+                "text": "Offset on the Y axis"
+            },
+            {
+                "name": "center X",
+                "text": "Changes the center point on the X axis"
+            },
+            {
+                "name": "center Y",
+                "text": "Changes the center point on the Y axis"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
             }
         ]
     },
@@ -77,5 +110,9 @@
             "author": "pandur",
             "date": 1553079125529
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

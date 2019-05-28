@@ -5,7 +5,7 @@ UNI float resX;
 UNI float resY;
 UNI float rotate;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 #define PI 3.14159265
 #define TAU (2.0*PI)
@@ -35,8 +35,6 @@ void main()
     vec4 col=texture(tex,uv);
     //original texture
     vec4 base=texture(tex,texCoord);
-    //blend stuff
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-    outColor= col;
+    // outColor= col;
+    outColor=cgl_blend(base,col,amount);
 }

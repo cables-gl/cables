@@ -1,6 +1,6 @@
 var arr=op.inArray("Array");
 var separator=op.inString("Separator");
-var result=op.outString("Result");
+var result=op.outString("Result",'');
 
 arr.ignoreValueSerialize=true;
 result.ignoreValueSerialize=true;
@@ -18,5 +18,6 @@ function parse()
         var r=arr.get().join(separator.get());
         result.set(r);
     }
+    else result.set('');
 }
 
