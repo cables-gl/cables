@@ -242,8 +242,8 @@ CGL.Shader.prototype.compile = function() {
             .endl();
         }
 
-    // if (fs.indexOf("precision") == -1) fs = 'precision ' + this.precision+' float;'.endl() + fs;
-    // if (vs.indexOf("precision") == -1) vs = 'precision ' + this.precision+' float;'.endl() + vs;
+    if (fs.indexOf("precision") == -1) fs = 'precision ' + this.precision+' float;'.endl() + fs;
+    if (vs.indexOf("precision") == -1) vs = 'precision ' + this.precision+' float;'.endl() + vs;
 
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
     {

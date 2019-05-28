@@ -993,7 +993,7 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
  * set variable value
  * @name CABLES.Patch.Variable#setVariable
  * @param {String} name of variable
- * @param {Number|String|Boolena} value
+ * @param {Number|String|Boolean} value
  * @function
  */
 CABLES.Patch.prototype.setVariable = function(name, val)

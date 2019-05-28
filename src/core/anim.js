@@ -1,70 +1,43 @@
 
 var CABLES=CABLES || {};
 CABLES.ANIM=CABLES.ANIM || {};
- CABLES.TL=CABLES.ANIM;
+CABLES.TL=CABLES.ANIM;
 
 
-/** @constant {number} */
 CABLES.ANIM.EASING_LINEAR=0;
-/** @constant {number} */
 CABLES.ANIM.EASING_ABSOLUTE=1;
-/** @constant {number} */
 CABLES.ANIM.EASING_SMOOTHSTEP=2;
-/** @constant {number} */
 CABLES.ANIM.EASING_SMOOTHERSTEP=3;
-/** @constant {number} */
 CABLES.ANIM.EASING_BEZIER=4;
 
-/** @constant {number} */
 CABLES.ANIM.EASING_CUBIC_IN=5;
-/** @constant {number} */
 CABLES.ANIM.EASING_CUBIC_OUT=6;
-/** @constant {number} */
 CABLES.ANIM.EASING_CUBIC_INOUT=7;
 
-/** @constant {number} */
 CABLES.ANIM.EASING_EXPO_IN=8;
-/** @constant {number} */
 CABLES.ANIM.EASING_EXPO_OUT=9;
-/** @constant {number} */
 CABLES.ANIM.EASING_EXPO_INOUT=10;
 
-/** @constant {number} */
 CABLES.ANIM.EASING_SIN_IN=11;
-/** @constant {number} */
 CABLES.ANIM.EASING_SIN_OUT=12;
-/** @constant {number} */
 CABLES.ANIM.EASING_SIN_INOUT=13;
 
-/** @constant {number} */
 CABLES.ANIM.EASING_BACK_IN=14;
-/** @constant {number} */
 CABLES.ANIM.EASING_BACK_OUT=15;
-/** @constant {number} */
 CABLES.ANIM.EASING_BACK_INOUT=16;
 
-/** @constant {number} */
 CABLES.ANIM.EASING_ELASTIC_IN=17;
-/** @constant {number} */
 CABLES.ANIM.EASING_ELASTIC_OUT=18;
 
-/** @constant {number} */
 CABLES.ANIM.EASING_BOUNCE_IN=19;
-/** @constant {number} */
 CABLES.ANIM.EASING_BOUNCE_OUT=21;
 
-/** @constant {number} */
 CABLES.ANIM.EASING_QUART_IN=22;
-/** @constant {number} */
 CABLES.ANIM.EASING_QUART_OUT=23;
-/** @constant {number} */
 CABLES.ANIM.EASING_QUART_INOUT=24;
 
-/** @constant {number} */
 CABLES.ANIM.EASING_QUINT_IN=25;
-/** @constant {number} */
 CABLES.ANIM.EASING_QUINT_OUT=26;
-/** @constant {number} */
 CABLES.ANIM.EASING_QUINT_INOUT=27;
 
 CABLES.ANIM.Key=function(obj)
