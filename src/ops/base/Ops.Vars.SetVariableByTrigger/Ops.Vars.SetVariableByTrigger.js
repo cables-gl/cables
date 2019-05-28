@@ -13,7 +13,8 @@ inExec.onTriggered=function()
 };
 
 
-op.patch.addVariableListener(updateVarNamesDropdown);
+op.patch.addEventListener("variablesChanged",updateVarNamesDropdown);
+
 
 updateVarNamesDropdown();
 
