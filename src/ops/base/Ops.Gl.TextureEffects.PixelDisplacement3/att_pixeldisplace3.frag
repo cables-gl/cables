@@ -18,7 +18,6 @@ vec3 getOffset(vec3 offset)
     #endif
 }
 
-
 float getOffset(float offset)
 {
     #ifdef ZERO_BLACK
@@ -29,7 +28,6 @@ float getOffset(float offset)
         return offset*2.0-1.0;
     #endif
 }
-
 
 void main()
 {
@@ -77,7 +75,7 @@ void main()
         y=abs((floor(my)-fract(my)));
     #endif
 
-    vec4 col=texture(tex,vec2(x,y) );
+    vec4 col=texture(tex,vec2(x,y));
     vec4 base=texture(tex,texCoord);
 
     outColor=cgl_blend(base,col,amount);

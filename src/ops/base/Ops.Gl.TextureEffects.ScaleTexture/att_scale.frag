@@ -12,12 +12,14 @@ void main()
     vec2 uv = texCoord;
 
     uv.x = (uv.x - centerX) / uScaleX + centerX+offsetX;
-    uv.y = (uv.y - centerY) / uScaleY +centerY+offsetY;
+    uv.y = (uv.y - centerY) / uScaleY + centerY+offsetY;
 
     //blend section
     vec4 col = texture(tex,uv);
     //original texture
     vec4 base = texture(tex,texCoord);
 
-    outColor= col;
+    //blend stuff
+
+    outColor=cgl_blend(base,col,amount);
 }

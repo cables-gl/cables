@@ -81,12 +81,7 @@ void main() {
     if(centerSize>0.0)
     color += 1.-step(centerSize/30.0, m_dist);
 
-
     vec4 base=texture(tex,texCoord);
-    vec4 finalColor = vec4(color,1.0);
-    finalColor = vec4( _blend( base.rgb, finalColor.rgb ) ,1.0);
-    finalColor = vec4( mix( finalColor.rgb, base.rgb ,1.0-base.a*amount),1.0);
 
-
-    outColor= finalColor;
+    outColor= cgl_blend(base,vec4(color,1.0),amount);
 }

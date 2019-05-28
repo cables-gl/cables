@@ -1075,3 +1075,14 @@ CABLES.Patch.prototype.preRenderOps = function() {
     if(stopwatch)stopwatch.stop('prerendering');
 };
 
+
+
+/**
+ * @name CABLES.Patch#dispose
+ * @description stop, dispose and cleanup patch
+ * @function
+ */
+CABLES.Patch.prototype.dispose = function() {
+    this.pause();
+    this.clear();
+};
