@@ -1,4 +1,4 @@
-const render=op.inTrigger("Render");
+const render=op.inTrigger("Render"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     numX=op.inValue("Num X",10),
