@@ -1,6 +1,3 @@
-//strict mode allows us to write cleaner code
-"use strict";
-
 //Create a input port of the type Boolean
 const inBoolean = op.inValueBool("Boolean in");
 

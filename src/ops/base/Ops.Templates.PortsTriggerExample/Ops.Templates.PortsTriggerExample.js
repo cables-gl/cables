@@ -1,5 +1,3 @@
-"use strict";
-
 //Create a input port of the type Trigger
 const inExecute  = op.inTrigger("Trigger In",{"display": "button"});
 //create a button in UI panel of the op which can be clicked
@@ -17,5 +15,5 @@ inButton.onTriggered = update;
 function update()
 {
     //send a trigger out of the output port
-    outTrigger.trigger();    
+    outTrigger.trigger();
 }

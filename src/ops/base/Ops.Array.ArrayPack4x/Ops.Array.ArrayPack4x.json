@@ -37,5 +37,13 @@
             }
         ],
         "name": "Ops.Array.ArrayPack4"
+    },
+    "summary": "Pack 4 arrays into one - Xyzw or rgba",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

@@ -12,7 +12,7 @@ var showingError = false;
 //create array to store multiplied result from both arrays
 var mathArray = [];
 var selectIndex = 0;
-mathSelect.onChange = onFilterChange;
+
 
 const MATH_FUNC_ADD = 0;
 const MATH_FUNC_SUB = 1;
@@ -21,6 +21,8 @@ const MATH_FUNC_DIV = 3;
 const MATH_FUNC_MOD = 4;
 const MATH_FUNC_MIN = 5;
 const MATH_FUNC_MAX = 6;
+
+mathSelect.onChange = onFilterChange;
 
 function onFilterChange()
 {
@@ -110,5 +112,5 @@ function update()
 
 inArray_0.onChange = update;
 inArray_1.onChange = update;
-mathSelect.onChange = onFilterChange;
+
 update();

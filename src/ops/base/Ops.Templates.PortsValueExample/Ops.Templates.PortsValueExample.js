@@ -1,6 +1,3 @@
-//strict mode allows us to write cleaner code
-"use strict";
-
 //Create a input port of the type value
 const inVal   = op.inValue("Value in");
 
@@ -14,6 +11,6 @@ inVal.onChange = update;
 function update()
 {
     //set the ouput port to the value of the input port
-    //parse the input for a float, if it isn't a float set to Nan 
+    //parse the input for a float, if it isn't a float set to Nan
     outResult.set(parseFloat( inVal.get()));
 }

@@ -3,10 +3,6 @@ vec3 coords = MOD_positionFromLight.xyz / MOD_positionFromLight.w;
 
 float shadow=1.0;
 
-
-
-
-
 if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
 {
 
@@ -22,12 +18,9 @@ if(coords.x>0.0 && coords.x<1.0 && coords.y>0.0 && coords.y<1.0)
     shadow=((shadow*(MOD_strength*MOD_amount)));
     shadow=1.0-shadow;
 
-    
     col.bg-=MOD_showMapArea;
     col.r+=MOD_showMapArea;
 }
-
-
 
 col.rgb*=shadow;
 

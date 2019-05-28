@@ -1,6 +1,3 @@
-//strict mode allows us to write cleaner code
-"use strict";
-
 //Create a input port of the type String
 const inString  = op.inValueString("String in");
 //Create a output port of the type String

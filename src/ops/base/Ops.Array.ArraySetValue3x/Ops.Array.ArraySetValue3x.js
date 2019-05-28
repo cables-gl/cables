@@ -1,16 +1,15 @@
 
-var exe=op.inTriggerButton("exe");
-
-var array=op.addInPort(new CABLES.Port(op, "array",CABLES.OP_PORT_TYPE_ARRAY));
-var index=op.addInPort(new CABLES.Port(op, "index",CABLES.OP_PORT_TYPE_VALUE,{type:'int'}));
-var value1=op.addInPort(new CABLES.Port(op, "Value 1",CABLES.OP_PORT_TYPE_VALUE));
-var value2=op.addInPort(new CABLES.Port(op, "Value 2",CABLES.OP_PORT_TYPE_VALUE));
-var value3=op.addInPort(new CABLES.Port(op, "Value 3",CABLES.OP_PORT_TYPE_VALUE));
-var values=op.addOutPort(new CABLES.Port(op, "values",CABLES.OP_PORT_TYPE_ARRAY));
+const exe=op.inTriggerButton("exe"),
+    array=op.inArray("array"),
+    index=op.inValueInt("index"),
+    value1=op.inValueFloat("Value 1"),
+    value2=op.inValueFloat("Value 2"),
+    value3=op.inValueFloat("Value 3"),
+    values=op.outArray("values");
 
 function updateIndex()
 {
-    if(exe.isLinked())return;    
+    if(exe.isLinked())return;
     update();
 }
 function update()

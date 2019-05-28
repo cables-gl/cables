@@ -18,6 +18,7 @@ void main()
     vec4 col = texture(tex,uv);
     //original texture
     vec4 base = texture(tex,texCoord);
+
     //blend stuff
 
     outColor=cgl_blend(base,col,amount);

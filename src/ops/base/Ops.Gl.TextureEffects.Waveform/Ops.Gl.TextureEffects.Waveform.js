@@ -25,8 +25,7 @@ r.setUiAttribs({colorPick:true});
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl);
 
-const srcFrag = (attachments.wave_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.wave_frag);
 
 const textureUniform = new CGL.Uniform(shader,'t','tex',0);
 const amountUniform = new CGL.Uniform(shader,'f','amount',amount);
@@ -56,10 +55,7 @@ function updateWaveForm()
     else waveSelectUniform.setValue(3);
 }
 
-blendMode.onChange = function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered = function()
 {

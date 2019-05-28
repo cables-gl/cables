@@ -29,8 +29,7 @@
         ],
         "name": "Ops.Json.GateObject"
     },
-    "summary": "Will only a Object to to be output if the the pass through parameter evaluates to true",
-    "youtubeid": "",
+    "summary": "Will only allow an Object to to be output if the the pass through parameter evaluates to true",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -49,5 +48,6 @@
                 "text": "Object output if pass through is true"
             }
         ]
-    }
+    },
+    "youtubeids": []
 }

@@ -11,11 +11,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -53,8 +55,48 @@
         "name": "Ops.Gl.TextureEffects.WaveformGradient"
     },
     "summary": "Generate different texture waveforms. Sine, sawtooth and triangle.",
-    "youtubeid": "",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend to apply"
+            },
+            {
+                "name": "Mode",
+                "text": "`Sine`, `Sawtooth` or `Triangle`"
+            },
+            {
+                "name": "Frequency",
+                "text": "Amount of repetitions"
+            },
+            {
+                "name": "Pow factor",
+                "text": "Alters the gradient effect"
+            },
+            {
+                "name": "Offset",
+                "text": "Offset on the X axis"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotate the texture"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

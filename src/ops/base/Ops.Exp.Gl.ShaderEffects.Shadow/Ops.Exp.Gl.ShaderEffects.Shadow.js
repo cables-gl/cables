@@ -1,8 +1,8 @@
 var cgl=op.patch.cgl;
 var id='mod'+Math.floor(Math.random()*10000);
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var inAmount=op.inValueSlider("Strength",1.0);
 
@@ -44,12 +44,12 @@ op.render.onTriggered=function()
              op.trigger.trigger();
              return;
         }
-    
+
         if(cgl.getShader()!=shader)
         {
             if(shader) removeModule();
             shader=cgl.getShader();
-    
+
             moduleVert=shader.addModule(
                 {
                     title:op.objName,
@@ -57,7 +57,7 @@ op.render.onTriggered=function()
                     srcHeadVert:srcHeadVert,
                     srcBodyVert:srcBodyVert
                 });
-    
+
             moduleFrag=shader.addModule(
                 {
                     title:op.objName,
@@ -65,7 +65,7 @@ op.render.onTriggered=function()
                     srcHeadFrag:srcHeadFrag,
                     srcBodyFrag:srcBodyFrag
                 },moduleVert);
-    
+
             // moduleFrag.scale=new CGL.Uniform(shader,'f',moduleFrag.prefix+'scale',inScale);
             moduleFrag.amount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
             moduleVert.lightMVP=new CGL.Uniform(shader,'m4',moduleVert.prefix+'lightMVP',mat4.create());
@@ -76,19 +76,19 @@ op.render.onTriggered=function()
             moduleFrag.bias=new CGL.Uniform(shader,'f',moduleFrag.prefix+'bias',0);
             moduleFrag.mapsize=new CGL.Uniform(shader,'f',moduleFrag.prefix+'mapsize',512);
         }
-    
-    
-        // console.log(moduleVert.prefix); 
-        // console.log(cgl.frameStore.lightMVP[2]); 
-        
-        
+
+
+        // console.log(moduleVert.prefix);
+        // console.log(cgl.frameStore.lightMVP[2]);
+
+
         moduleVert.lightMVP.setValue(cgl.frameStore.lightMVP);
-        
-    
-    
+
+
+
         if(!shader)return;
         var texSlot=moduleVert.num+5;
-        
+
         var shadow=cgl.frameStore.shadow;
         moduleFrag.mapsize.setValue(shadow.mapsize);
         moduleFrag.showMapArea.setValue(shadow.showMapArea?0.7:0);
@@ -107,5 +107,5 @@ op.render.onTriggered=function()
     }
 
     if(castShadows.get()) op.trigger.trigger();
-    
+
 };

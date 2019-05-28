@@ -1,6 +1,5 @@
 {
     "summary": "Change the value of an array at an index",
-    "updated": 1536681059629,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ed39fd33-1b8d-4d04-a44d-4a22e4477a0a",
@@ -17,11 +16,13 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "value"
+                "name": "value",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -31,5 +32,17 @@
             }
         ],
         "name": "Ops.Array.ArraySetValue"
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup on ports",
+            "author": "andro",
+            "date": 1558950296896
+        },
+        {
+            "message": "outputs null to array when no array comes in",
+            "author": "andro",
+            "date": 1558950318081
+        }
+    ]
 }

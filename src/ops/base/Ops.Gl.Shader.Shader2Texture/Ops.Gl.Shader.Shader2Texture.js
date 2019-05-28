@@ -1,15 +1,13 @@
-var exec=op.inTrigger("Render");
-var inShader=op.inObject("Shader");
-var tfilter=op.inValueSelect("filter",['nearest','linear']);
-// ,'mipmap'
+const exec=op.inTrigger("Render");
+const inShader=op.inObject("Shader");
+const tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat'],'clamp to edge');
-
-var inVPSize=op.inValueBool("Use Viewport Size",true);
-var inWidth=op.inValueInt("Width",512);
-var inHeight=op.inValueInt("Height",512);
-var inFloatingPoint=op.inValueBool("Floating Point",false);
-var next=op.outTrigger("Next");
-var outTex=op.outTexture("Texture");
+const inVPSize=op.inValueBool("Use Viewport Size",true);
+const inWidth=op.inValueInt("Width",512);
+const inHeight=op.inValueInt("Height",512);
+const inFloatingPoint=op.inValueBool("Floating Point",false);
+const next=op.outTrigger("Next");
+const outTex=op.outTexture("Texture");
 
 var prevViewPort=[0,0,0,0];
 var cgl=op.patch.cgl;
@@ -45,7 +43,7 @@ function initFb()
 
     var filter=CGL.Texture.FILTER_NEAREST;
     if(tfilter.get()=='linear') filter=CGL.Texture.FILTER_LINEAR;
-//        else if(tfilter.get()=='mipmap') filter=CGL.Texture.FILTER_MIPMAP;
+        else if(tfilter.get()=='mipmap') filter=CGL.Texture.FILTER_MIPMAP;
 
     var selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
     if(twrap.get()=='repeat') selectedWrap=CGL.Texture.WRAP_REPEAT;

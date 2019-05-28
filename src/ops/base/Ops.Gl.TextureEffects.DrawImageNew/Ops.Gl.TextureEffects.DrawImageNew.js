@@ -5,12 +5,9 @@ var amount=op.inValueSlider("amount",1);
 var image=op.inTexture("image");
 var removeAlphaSrc=op.inValueBool("removeAlphaSrc",false);
 
-
 var imageAlpha=op.inTexture("imageAlpha");
 var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
 var invAlphaChannel=op.inValueBool("invert alpha channel");
-
-
 
 const inAspect=op.inValueBool("Aspect Ratio",false);
 const inAspectAxis=op.inValueSelect("Stretch Axis",['X','Y'],"X");
@@ -23,7 +20,7 @@ var trigger=op.outTrigger('trigger');
 blendMode.set('normal');
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'drawimage');
-var srcFrag=attachments.drawimage_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
+
 
 imageAlpha.onLinkChanged=updateAlphaPorts;
 
@@ -51,8 +48,7 @@ function updateAlphaPorts()
 
 op.toWorkPortsNeedToBeLinked(image);
 
-
-shader.setSource(attachments.drawimage_vert,srcFrag);
+shader.setSource(attachments.drawimage_vert,attachments.drawimage_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 var textureImaghe=new CGL.Uniform(shader,'t','image',1);
 var textureAlpha=new CGL.Uniform(shader,'t','imageAlpha',2);
@@ -128,8 +124,8 @@ alphaSrc.set("alpha channel");
     //
     // texture flip
     //
-    var flipX=op.addInPort(new CABLES.Port(op,"flip x",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-    var flipY=op.addInPort(new CABLES.Port(op,"flip y",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+    var flipX=op.inValueBool("flip x");
+    var flipY=op.inValueBool("flip y");
 
     flipX.onChange=function()
     {
@@ -201,14 +197,9 @@ function updateTransformPorts()
     }
 }
 
-
-
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
-
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-
-
 
 imageAlpha.onChange=function()
 {

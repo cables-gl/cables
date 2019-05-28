@@ -7,12 +7,12 @@ UNI float addX;
 UNI float addY;
 UNI float addZ;
 
+{{CGL.BLENDMODES}}
+
 float random(vec2 co)
 {
    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * (437511.5453+addZ));
 }
-
-{{BLENDCODE}}
 
 void main()
 {

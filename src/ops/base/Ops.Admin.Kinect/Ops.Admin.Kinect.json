@@ -25,5 +25,13 @@
             }
         ],
         "name": "Ops.Devices.Kinect.Kinect"
+    },
+    "summary": "Allows a Kinect hardware unit to be used with Cables",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

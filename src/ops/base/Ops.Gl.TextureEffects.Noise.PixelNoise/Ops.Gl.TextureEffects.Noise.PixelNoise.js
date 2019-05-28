@@ -1,14 +1,14 @@
-const render=op.addInPort(new CABLES.Port(op,"Render",CABLES.OP_PORT_TYPE_FUNCTION));
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
-const numX=op.inValue("Num X",10);
-const numY=op.inValue("Num Y",10);
-const addX=op.inValue("X",0);
-const addY=op.inValue("Y",0);
-const addZ=op.inValue("Z",0);
-const inRGB=op.inValueBool("RGB",false);
+const render=op.inTrigger("Render");
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    numX=op.inValue("Num X",10),
+    numY=op.inValue("Num Y",10),
+    addX=op.inValue("X",0),
+    addY=op.inValue("Y",0),
+    addZ=op.inValue("Z",0),
+    inRGB=op.inValueBool("RGB",false);
 
-const trigger=op.addOutPort(new CABLES.Port(op,"Next",CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
@@ -17,8 +17,7 @@ const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 const timeUniform=new CGL.Uniform(shader,'f','time',1.0);
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-const srcFrag=attachments.pixelnoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.pixelnoise_frag);
 
 numX.uniform==new CGL.Uniform(shader,'f','numX',numX);
 numY.uniform==new CGL.Uniform(shader,'f','numY',numY);
