@@ -21,7 +21,7 @@ const
     cgl=op.patch.cgl,
     shader=new CGL.Shader(cgl);
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.pixeldisplace3_frag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode()));
+shader.setSource(shader.getDefaultVertexShader(),attachments.pixeldisplace3_frag);
 
 const
     textureUniform=new CGL.Uniform(shader,'t','tex',0),

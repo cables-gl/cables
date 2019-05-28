@@ -431,14 +431,14 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
                 cgl.patch.loading.finished(loadingId);
                 var error={'error':true};
                 if(finishedCallback)finishedCallback(error);
-                if (CABLES.UI) gui.jobs().finish('loadtexture' + loadingId);
+                if(CABLES.UI) gui.jobs().finish('loadtexture' + loadingId);
             };
 
     texture.image.onload=function(e)
     {
         texture.initTexture(texture.image);
         cgl.patch.loading.finished(loadingId);
-        if (CABLES.UI) gui.jobs().finish('loadtexture' + loadingId);
+        if(CABLES.UI) gui.jobs().finish('loadtexture' + loadingId);
 
         if(finishedCallback)finishedCallback();
     };
