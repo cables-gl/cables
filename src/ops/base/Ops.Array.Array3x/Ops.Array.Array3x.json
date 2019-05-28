@@ -1,0 +1,59 @@
+{
+    "id": "2766606a-3ea0-4204-8613-b8950a124435",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1559031697403
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1559031714224,
+    "todos": [
+        {
+            "message": "should be callex Array3 later",
+            "author": "pandur",
+            "id": "52bff88d-116b-4a5d-950c-533451b6a610",
+            "date": 1559031923240
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Num Triplets",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.Array.Array3x"
+    },
+    "summary": "create an array of num triplets set to default values xyz  ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

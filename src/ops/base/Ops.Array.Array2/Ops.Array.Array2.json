@@ -1,0 +1,56 @@
+{
+    "authorName": "andro",
+    "id": "ca9219d2-9f06-4516-9cf2-98e61f84d4bb",
+    "created": 1558594939402,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Mode select",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Default Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.Array.Array2"
+    },
+    "summary": "Fill array with one number or fill it with incrementing values ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Mode select",
+                "text": "Number or 0,1,2,3"
+            },
+            {
+                "name": "Array length",
+                "text": "The length of the array"
+            },
+            {
+                "name": "Default Value",
+                "text": "the value to place into the whole array if Number mode is selected"
+            },
+            {
+                "name": "Array",
+                "text": "Array out"
+            }
+        ]
+    }
+}

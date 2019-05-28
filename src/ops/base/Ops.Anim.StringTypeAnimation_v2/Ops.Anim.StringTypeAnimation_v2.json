@@ -1,0 +1,88 @@
+{
+    "id": "66723fea-7d5f-4509-98fc-8d892a8f8d89",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1559028412142
+        }
+    ],
+    "authorName": "andro",
+    "created": 1559028449670,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "text"
+            },
+            {
+                "type": "1",
+                "name": "Restart"
+            },
+            {
+                "type": "0",
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Speed Variation",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            },
+            {
+                "type": "1",
+                "name": "Changed"
+            },
+            {
+                "type": "1",
+                "name": "Finished"
+            }
+        ],
+        "name": "Ops.User.andro.StringTyper_v2"
+    },
+    "summary": "Animates a text/string, like it is being typed out by a person",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Textures.Text2"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "text",
+                "text": "The text/string which will typed out"
+            },
+            {
+                "name": "Restart",
+                "text": "When triggered causes the string to be typed out again"
+            },
+            {
+                "name": "Speed",
+                "text": "Determines the speed that the typing occurs at"
+            },
+            {
+                "name": "Speed Variation",
+                "text": "Creates variations in the typed speed"
+            },
+            {
+                "name": "Result",
+                "text": "The typed out string"
+            },
+            {
+                "name": "Changed",
+                "text": "Triggers out each time a letter is typed"
+            },
+            {
+                "name": "Finished",
+                "text": "Trigger out when animation is finished"
+            }
+        ]
+    }
+}
