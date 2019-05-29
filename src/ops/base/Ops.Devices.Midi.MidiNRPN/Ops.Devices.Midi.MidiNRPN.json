@@ -1,0 +1,49 @@
+{
+    "authorName": "simod",
+    "id": "2b13bc7b-c1bd-4319-9c85-86a81a6e2354",
+    "created": 1550071006329,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MIDI Event In"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Normalize",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.simod.MidiNRPN"
+    }
+}

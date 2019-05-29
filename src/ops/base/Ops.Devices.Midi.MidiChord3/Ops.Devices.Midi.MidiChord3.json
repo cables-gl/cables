@@ -1,0 +1,113 @@
+{
+    "authorName": "simod",
+    "id": "58388fbb-3161-417f-8c12-49d4c8ee7a19",
+    "created": 1551879412801,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MIDI Event In"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note 1",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note 2",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note 3",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Normalize Velocity",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            },
+            {
+                "type": "1",
+                "name": "reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            },
+            {
+                "type": "0",
+                "name": "Note Name 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Note Index 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gate 1",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Note Name 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Note Index 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gate 2",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Note Name 3",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Note Index 3",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity 3",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gate 3",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.simod.MidiChord3"
+    }
+}

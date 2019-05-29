@@ -1,0 +1,64 @@
+{
+    "authorName": "simod",
+    "id": "517ed1fc-6110-4611-9cc7-8dd459191c65",
+    "created": 1551785410213,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MIDI Event In"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Normalize Velocity",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            },
+            {
+                "type": "0",
+                "name": "Note Name",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Note Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gate",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Current Note",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.simod.MidiNote"
+    }
+}
