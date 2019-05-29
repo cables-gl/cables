@@ -1,0 +1,72 @@
+{
+    "id": "3f585ff5-afd6-45d5-b082-80c62f6cdf2b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1548429822936
+        }
+    ],
+    "authorName": "simod",
+    "created": 1548429888683,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Message Type",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Note Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "CC Number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "CC Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pitch Bend Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.simod.MidiMonitor"
+    }
+}

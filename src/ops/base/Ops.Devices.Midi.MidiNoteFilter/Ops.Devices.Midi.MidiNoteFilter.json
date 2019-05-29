@@ -1,0 +1,72 @@
+{
+    "authorName": "simod",
+    "id": "b248a588-81cc-47af-a65b-36509abd2888",
+    "created": 1553163854704,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Note Values"
+            },
+            {
+                "type": "2",
+                "name": "MIDI Event"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note Start",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note End",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Normalize Velocity",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            },
+            {
+                "type": "1",
+                "name": "reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event"
+            },
+            {
+                "type": "0",
+                "name": "Note Name",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Note Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gate",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.simod.MidiNoteFilter"
+    }
+}

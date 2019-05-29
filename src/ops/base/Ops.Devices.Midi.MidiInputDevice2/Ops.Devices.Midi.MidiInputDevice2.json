@@ -1,0 +1,49 @@
+{
+    "authorName": "simod",
+    "id": "484b3a00-41b7-4e3f-8a99-a1b32a764eff",
+    "created": 1549387018997,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Device",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Learn"
+            },
+            {
+                "type": "1",
+                "name": "PANIC BUTTON"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event"
+            },
+            {
+                "type": "2",
+                "name": "Note"
+            },
+            {
+                "type": "2",
+                "name": "CC"
+            },
+            {
+                "type": "2",
+                "name": "NRPN"
+            },
+            {
+                "type": "2",
+                "name": "SysEx"
+            },
+            {
+                "type": "2",
+                "name": "Clock"
+            }
+        ],
+        "name": "Ops.User.simod.MidiInputDevice2"
+    }
+}
