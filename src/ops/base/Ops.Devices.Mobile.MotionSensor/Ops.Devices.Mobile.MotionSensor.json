@@ -39,6 +39,21 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Acceleration X no gravity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Y no gravity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Z no gravity",
+                "subType": "number"
+            },
+            {
                 "type": "2",
                 "name": "Object"
             }
@@ -59,5 +74,12 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "added acceleration output without gravity",
+            "author": "pandur",
+            "date": 1559124082791
+        }
+    ]
 }

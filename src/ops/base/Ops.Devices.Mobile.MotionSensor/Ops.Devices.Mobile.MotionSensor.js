@@ -1,17 +1,18 @@
-var mulAxis=op.inValue("Mul Orientation",1);
+const
+    mulAxis=op.inValue("Mul Orientation",1),
+    axis1=op.outValue("Orientation Alpha"),
+    axis2=op.outValue("Orientation Beta"),
+    axis3=op.outValue("Orientation Gamme"),
+    accX=op.outValue("Acceleration X"),
+    accY=op.outValue("Acceleration Y"),
+    accZ=op.outValue("Acceleration Z"),
+    accNoGravX=op.outValue("Acceleration X no gravity"),
+    accNoGravY=op.outValue("Acceleration Y no gravity"),
+    accNoGravZ=op.outValue("Acceleration Z no gravity"),
+    outObj=op.outObject("Object");
 
-var axis1=op.outValue("Orientation Alpha");
-var axis2=op.outValue("Orientation Beta");
-var axis3=op.outValue("Orientation Gamme");
-
-var accX=op.outValue("Acceleration X");
-var accY=op.outValue("Acceleration Y");
-var accZ=op.outValue("Acceleration Z");
-
-var outObj=op.outObject("Object");
 var lastTime=0;
 var lastTimeAcc=0;
-
 var obj={};
 
 setTimeout(function(){
@@ -30,6 +31,10 @@ function registerEvents()
             accX.set( event.accelerationIncludingGravity.x || 0);
             accY.set( event.accelerationIncludingGravity.y || 0 );
             accZ.set( event.accelerationIncludingGravity.z || 0 );
+
+            accNoGravX.set( event.acceleration.x || 0);
+            accNoGravY.set( event.acceleration.y || 0 );
+            accNoGravZ.set( event.acceleration.z || 0 );
 
             obj.AccelerationX=accX.get();
             obj.AccelerationY=accY.get();
