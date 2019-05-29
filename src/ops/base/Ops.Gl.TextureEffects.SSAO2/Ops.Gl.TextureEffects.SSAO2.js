@@ -28,8 +28,13 @@ lumInfluence.uniform=new CGL.Uniform(shader,'f','lumInfluence',lumInfluence);
 zNear.uniform=new CGL.Uniform(shader,'f','znear',zNear);
 zFar.uniform=new CGL.Uniform(shader,'f','zfar',zFar);
 
-noise.uniform = new CGL.Uniform(shader,'b','noise',noise);
+
 noiseamount.uniform=new CGL.Uniform(shader,'f','noiseamount',noiseamount);
+
+noise.onChange=function()
+{
+    shader.toggleDefine('NOISE',noise.get());
+};
 
 samples.onChange=function()
 {
