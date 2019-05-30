@@ -52,6 +52,11 @@
             "message": "fixed array length zero now resets array correctly",
             "author": "andro",
             "date": 1558534982108
+        },
+        {
+            "message": "fixed - outputs null if array is empty or has been reset",
+            "author": "andro",
+            "date": 1559128676819
         }
     ],
     "issues": "",

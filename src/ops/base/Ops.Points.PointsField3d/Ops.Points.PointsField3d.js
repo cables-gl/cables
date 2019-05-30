@@ -13,7 +13,9 @@ numx.onChange=
 numy.onChange=
 numz.onChange=
 mul.onChange=
-center.onChange=function()
+center.onChange= update;
+//center.onChange= function ()
+function update()
 {
     newArr.length = 0;
 
@@ -56,3 +58,4 @@ center.onChange=function()
     outArray.set(null);
     outArray.set(newArr);
 };
+update();

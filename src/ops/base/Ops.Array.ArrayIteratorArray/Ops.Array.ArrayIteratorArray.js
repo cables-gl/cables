@@ -7,20 +7,25 @@ const
 
 exe.onTriggered=function()
 {
-    if(!arr.val)return;
 
-        op.patch.instancing.pushLoop(arr.get().length);
+    var theArr=arr.get();
 
-    for(var i=0;i<arr.get().length;i++)
+    if(!theArr)
+    {
+        val.set(null);
+    }
+
+    // op.patch.instancing.pushLoop(theArr.length);
+
+    for(var i=0;i<theArr.length;i++)
     {
         idx.set(i);
-        val.set(null);
-        val.set(arr.val[i]);
+        // val.set(null);
+        // console.log(theArr[i]);
+        val.set(theArr[i]);
         trigger.trigger();
-        op.patch.instancing.increment();
-
+        // op.patch.instancing.increment();
     }
-        op.patch.instancing.popLoop();
 
-
+    // op.patch.instancing.popLoop();
 };

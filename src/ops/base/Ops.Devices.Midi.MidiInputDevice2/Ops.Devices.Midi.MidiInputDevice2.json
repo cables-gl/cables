@@ -15,7 +15,7 @@
             },
             {
                 "type": "1",
-                "name": "PANIC BUTTON"
+                "name": "Reset"
             }
         ],
         "portsOut": [
@@ -44,6 +44,6 @@
                 "name": "Clock"
             }
         ],
-        "name": "Ops.User.simod.MidiInputDevice2"
+        "name": "Ops.Devices.Midi.MidiInputDevice2"
     }
 }

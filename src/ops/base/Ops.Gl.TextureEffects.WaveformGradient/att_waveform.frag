@@ -57,5 +57,5 @@ void main()
     vec4 col = vec4(v,v,v,1.0);
     vec4 base = texture(tex,texCoord);
 
-    outColor = col;
+    outColor = cgl_blend(base,col,amount);;
 }

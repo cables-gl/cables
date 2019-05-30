@@ -79,5 +79,12 @@
                 "text": "Total amount of xyz points"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "fixed - now correctly creates a ointField when the op is created",
+            "author": "andro",
+            "date": 1559136995246
+        }
+    ]
 }

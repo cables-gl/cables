@@ -46,5 +46,19 @@
                 "text": "The length of the array"
             }
         ]
-    }
+    },
+    "todos": [
+        {
+            "message": "needs new version with new string type port",
+            "author": "pandur",
+            "id": "0ee22058-08b8-4e84-bd34-ed780d13c601",
+            "date": 1559163605300
+        },
+        {
+            "message": "needs new version with new string type port",
+            "author": "pandur",
+            "id": "c5f87315-e1b4-4b7b-9794-d4cf28f23f85",
+            "date": 1559163606533
+        }
+    ]
 }

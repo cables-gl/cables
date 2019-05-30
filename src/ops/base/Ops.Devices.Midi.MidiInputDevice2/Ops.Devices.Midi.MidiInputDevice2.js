@@ -10,7 +10,7 @@ const deviceSelect = op.inValueSelect('Device', ['none']);
 
 var learning = false;
 const learn = op.inTriggerButton('Learn');
-const resetIn = op.inTriggerButton('PANIC BUTTON');
+const resetIn = op.inTriggerButton('Reset');
 
 /* OPS */
 const opPrefix = 'Ops.Devices.Midi.Midi';

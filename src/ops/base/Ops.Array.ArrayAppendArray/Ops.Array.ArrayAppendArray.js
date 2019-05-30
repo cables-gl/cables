@@ -9,7 +9,7 @@ outArr.set(arr);
 
 inReset.onTriggered=function()
 {
-    //outArr.set(null);
+    outArr.set(null);
     arr.length=0;
 };
 

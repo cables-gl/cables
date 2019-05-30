@@ -14,7 +14,10 @@
             "message": "should be callex Array3 later",
             "author": "pandur",
             "id": "52bff88d-116b-4a5d-950c-533451b6a610",
-            "date": 1559031923240
+            "date": 1559031923240,
+            "deleted": true,
+            "deletedBy": "pandur",
+            "deletedDate": 1559058987773
         }
     ],
     "layout": {

@@ -33,5 +33,13 @@
     "summary": "extract pathes from a svg json",
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "deprecate and make manual svg path tutorial",
+            "author": "pandur",
+            "id": "2e859ba0-1306-4012-b61c-4f8fe102987c",
+            "date": 1559164913743
+        }
+    ]
 }

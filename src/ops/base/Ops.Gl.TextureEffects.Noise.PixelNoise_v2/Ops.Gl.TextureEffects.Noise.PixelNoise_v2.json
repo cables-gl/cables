@@ -84,9 +84,20 @@
         "name": "Ops.Gl.TextureEffects.Noise.PixelNoise2"
     },
     "summary": "Pixelated noise",
-    "youtubeid": "",
     "docs": {
         "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend mode to apply"
+            },
             {
                 "name": "Loop",
                 "text": "If enabled the values loop and don't jump from 0-1"
@@ -122,7 +133,15 @@
             {
                 "name": "Z",
                 "text": "Use this to animate the noise"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
             }
         ]
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }
