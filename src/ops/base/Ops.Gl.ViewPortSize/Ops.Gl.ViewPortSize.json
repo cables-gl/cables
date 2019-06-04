@@ -1,0 +1,47 @@
+{
+    "id": "7cb99d8f-d7ef-478e-902b-54e054e387a0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1559655188347
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1559655378208,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.ViewPortSize"
+    }
+}

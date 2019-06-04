@@ -314,7 +314,6 @@ function setUpDiv()
     {
         div = document.createElement('div');
         div.oncontextmenu = function(e){
-
             console.log("context menu canceled!");
             e.preventDefault();
         }
