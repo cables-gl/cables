@@ -1,0 +1,76 @@
+{
+    "authorName": "simod",
+    "id": "5eea2f30-4e10-42a7-a761-63fb274cdb4f",
+    "created": 1559654386342,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MIDI Event In"
+            },
+            {
+                "type": "0",
+                "name": "Timing",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            },
+            {
+                "type": "1",
+                "name": "Clock Out"
+            },
+            {
+                "type": "1",
+                "name": "Clock Start"
+            },
+            {
+                "type": "1",
+                "name": "Clock Stop"
+            },
+            {
+                "type": "1",
+                "name": "Clock Continue"
+            },
+            {
+                "type": "0",
+                "name": "BPM",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Tick Duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sub Tick",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "1/1"
+            },
+            {
+                "type": "1",
+                "name": "1/2"
+            },
+            {
+                "type": "1",
+                "name": "1/4"
+            },
+            {
+                "type": "1",
+                "name": "1/8"
+            },
+            {
+                "type": "1",
+                "name": "1/16"
+            }
+        ],
+        "name": "Ops.User.simod.MidiClock"
+    }
+}
