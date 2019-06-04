@@ -15,7 +15,7 @@
             },
             {
                 "type": "1",
-                "name": "Reset"
+                "name": "Panic"
             }
         ],
         "portsOut": [
@@ -45,5 +45,13 @@
             }
         ],
         "name": "Ops.Devices.Midi.MidiInputDevice2"
+    },
+    "summary": "connect to MIDI device output port",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

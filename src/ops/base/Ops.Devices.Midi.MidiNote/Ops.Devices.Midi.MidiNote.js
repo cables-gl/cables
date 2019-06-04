@@ -11,12 +11,12 @@ function getMIDINote(dataByte1LSB) {
     : 'NO NOTE';
 }
 
-const noteValues = Array.from(Array(128).keys()).map(key => getMIDINote(key));
+const noteValues = Array.from(Array(128).keys(), key => getMIDINote(key));
 
 /* IN */
 const inEvent = op.inObject('MIDI Event In');
 const midiChannelDropdown = op.inValueSelect('MIDI Channel', MIDIChannels, 1);
-const noteDropdown = op.inValueSelect('Note', noteValues, 0);
+const noteDropdown = op.inValueSelect('Note', noteValues, 'none');
 const normalizeDropdown = op.inValueSelect(
   'Normalize Velocity',
   ['none', '0 to 1', '-1 to 1'],
@@ -26,11 +26,11 @@ const learn = op.inTriggerButton('learn');
 
 /* OUT */
 const eventOut = op.outObject('MIDI Event Out');
-const noteNameOut = op.outValue('Note Name');
-const noteIndexOut = op.outValue('Note Index');
+const triggerOut = op.outTrigger('Trigger Out');
+const currentNoteOut = op.outValue('Current Note');
 const velocityOut = op.outValue('Velocity');
 const gateOut = op.outValueBool('Gate');
-const currentNoteOut = op.outValue('Current Note');
+
 
 noteDropdown.set(0);
 midiChannelDropdown.set(1);
@@ -64,7 +64,6 @@ inEvent.onChange = () => {
   }
 
   if (event.channel === midiChannelDropdown.get() - 1) {
-    currentNoteOut.set(noteIndex);
     if (getMIDINote(noteIndex) === noteDropdown.get()) {
       if (statusByte >> 4 === NOTE_OFF || velocity === 0) {
         gateOut.set(false);
@@ -73,19 +72,50 @@ inEvent.onChange = () => {
 
       if (statusByte >> 4 === NOTE_ON) {
         gateOut.set(true);
-        noteNameOut.set(noteName);
-        noteIndexOut.set(noteIndex);
-
-        velocityOut.set(velocity);
-
-        if (normalizeDropdown.get() === '0 to 1') velocityOut.set(velocity / 127);
+        currentNoteOut.set(noteIndex);
+        if (normalizeDropdown.get() === '0 to 1') {
+            // (max'-min')/(max-min)*(value-min)+min'
+            velocityOut.set(1/126*(velocity-1));
+            triggerOut.trigger();
+        }
         else if (normalizeDropdown.get() === '-1 to 1') {
-          const normalizedValue = velocity / (127 / 2) - 1;
+            // (max'-min')/(max-min)*(value-min)+min'
+          const normalizedValue = 2 / 126 * (velocity - 1) - 1;
+          velocityOut.set(normalizedValue)
+          triggerOut.trigger();
 
-          velocityOut.set(normalizedValue);
-        } else if (normalizeDropdown.get() === 'none') velocityOut.set(velocity);
+        } else if (normalizeDropdown.get() === 'none') {
+            velocityOut.set(velocity);
+            triggerOut.trigger();
+        }
+      }
+    } else if (noteDropdown.get() === 0) { // no note selected
+          if (statusByte >> 4 === NOTE_OFF || velocity === 0) {
+            gateOut.set(false);
+            if (velocity === 0) velocityOut.set(0);
+          }
+
+          if (statusByte >> 4 === NOTE_ON) {
+            gateOut.set(true);
+            currentNoteOut.set(noteIndex);
+            if (normalizeDropdown.get() === '0 to 1') {
+                // (max'-min')/(max-min)*(value-min)+min'
+                velocityOut.set(1 / 126 * (velocity - 1));
+                triggerOut.trigger();
+            }
+            else if (normalizeDropdown.get() === '-1 to 1') {
+                // (max'-min')/(max-min)*(value-min)+min'
+              const normalizedValue = 2 / 126 * (velocity - 1) - 1;
+              velocityOut.set(normalizedValue);
+              triggerOut.trigger();
+
+            } else if (normalizeDropdown.get() === 'none') {
+                velocityOut.set(velocity);
+                triggerOut.trigger();
+            }
       }
     }
+
   }
 
   eventOut.set(event);

@@ -11,7 +11,7 @@ const clear = op.inTriggerButton('clear');
 const eventOut = op.outObject('Event');
 const ccIndexOut = op.outValue('CC Index Out');
 const ccValueOut = op.outValue('CC Value Out');
-
+const triggerOut = op.outTrigger("Trigger Out");
 ccIndexDropdown.set(0);
 midiChannelDropdown.set(1);
 normalizeDropdown.set(normalizeDropdown.get('none'));
@@ -51,10 +51,13 @@ inEvent.onChange = () => {
 
       if (normalizeDropdown.get() === '0 to 1') {
         ccValueOut.set(ccValue / 127);
+        triggerOut.trigger();
       } else if (normalizeDropdown.get() === '-1 to 1') {
         const normalizedValue = ccValue / (127 / 2) - 1;
+        triggerOut.trigger();
         ccValueOut.set(normalizedValue);
       } else if (normalizeDropdown.get() === 'none') {
+        triggerOut.trigger();
         ccValueOut.set(ccValue);
       } else {
         ccValue.set(0);

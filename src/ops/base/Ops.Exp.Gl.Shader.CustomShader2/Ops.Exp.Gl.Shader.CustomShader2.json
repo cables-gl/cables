@@ -42,7 +42,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Gl.Shader.CustomShader2"
+        "name": "Ops.Exp.Gl.Shader.CustomShader2"
     },
     "summary": "Write your own custom shader",
     "youtubeid": "Zfhn8xSM0SE",

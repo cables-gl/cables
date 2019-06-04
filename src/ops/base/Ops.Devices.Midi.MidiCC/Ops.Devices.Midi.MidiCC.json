@@ -46,8 +46,20 @@
                 "type": "0",
                 "name": "CC Value Out",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Out"
             }
         ],
-        "name": "Ops.User.simod.MidiCC"
+        "name": "Ops.Devices.Midi.MidiCC"
+    },
+    "summary": "read CC value from Midi controller",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
